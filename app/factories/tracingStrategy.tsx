@@ -58,9 +58,6 @@ export const testStrategyCopy: StrategyCopyContent = {
   personalPrivacySubheader: 'onboarding2Subheader',
   notificationDetailsHeader: 'onboarding3Header',
   notificationDetailsSubheader: 'onboarding3Subheader',
-  shareDiagnosisButton: 'onboarding4Button',
-  shareDiagnosisHeader: 'onboarding4Header',
-  shareDiagnosisSubheader: 'onboarding4Subheader',
   settingsLoggingActive: 'settingsLoggingActive)',
   settingsLoggingInactive: 'settingsLoggingInactive',
 };
@@ -70,6 +67,4 @@ export const testStrategyAssets: StrategyAssets = {
   personalPrivacyIcon: '',
   notificationDetailsBackground: Images.BlueGradientBackground,
   notificationDetailsIcon: '',
-  shareDiagnosisBackground: Images.BlueGradientBackground,
-  shareDiagnosisIcon: '',
 };

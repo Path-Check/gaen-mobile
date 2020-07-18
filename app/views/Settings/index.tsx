@@ -19,7 +19,6 @@ import { getLocalNames } from '../../locales/languages';
 import FeatureFlag from '../../components/FeatureFlag';
 import { Typography } from '../../components/Typography';
 import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { isGPS } from '../../COVIDSafePathsConfig';
 import { Screens, useStatusBarEffect } from '../../navigation';
 
 import { Icons } from '../../assets';

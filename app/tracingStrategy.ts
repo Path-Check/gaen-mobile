@@ -17,10 +17,8 @@ export interface TracingStrategy {
 export interface StrategyAssets {
   personalPrivacyBackground: ImageSourcePropType;
   notificationDetailsBackground: ImageSourcePropType;
-  shareDiagnosisBackground: ImageSourcePropType;
   personalPrivacyIcon: string;
   notificationDetailsIcon: string;
-  shareDiagnosisIcon: string;
 }
 
 export type StrategyCopyContentHook = (t: TFunction) => StrategyCopyContent;
@@ -39,9 +37,6 @@ export interface StrategyCopyContent {
   personalPrivacySubheader: string;
   notificationDetailsHeader: string;
   notificationDetailsSubheader: string;
-  shareDiagnosisButton: string;
-  shareDiagnosisHeader: string;
-  shareDiagnosisSubheader: string;
   settingsLoggingActive: string;
   settingsLoggingInactive: string;
 }

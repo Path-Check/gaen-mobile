@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { render, cleanup, fireEvent } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 
-import { TracingStrategyProvider } from '../../TracingStrategyContext';
-import btStrategy from '../../bt';
 import ShareDiagnosis from './ShareDiagnosis';
 import { Screens } from '../../navigation';
 import { isPlatformiOS } from '../../Util';
@@ -14,7 +12,7 @@ afterEach(cleanup);
 jest.mock('@react-navigation/native');
 jest.mock('../../Util');
 
-describe('Home', () => {
+describe('ShareDiagnosis', () => {
   describe('and platform is Android', () => {
     it('navigates next to Enable Exposure Notfications ', () => {
       const navigateMock = jest.fn();
@@ -24,11 +22,9 @@ describe('Home', () => {
       });
       (isPlatformiOS as jest.Mock).mockReturnValue(false);
 
-      const { getByLabelText } = render(<ShareDiagnosis />, {
-        wrapper: BTWrapper,
-      });
+      const { getByLabelText } = render(<ShareDiagnosis />);
 
-      const button = getByLabelText('Set up my phone');
+      const button = getByLabelText('Next');
       fireEvent.press(button);
 
       expect(navigateMock).toHaveBeenCalledWith(
@@ -45,11 +41,9 @@ describe('Home', () => {
         navigate: navigateMock,
       });
       (isPlatformiOS as jest.Mock).mockReturnValue(true);
-      const { getByLabelText } = render(<ShareDiagnosis />, {
-        wrapper: BTWrapper,
-      });
+      const { getByLabelText } = render(<ShareDiagnosis />);
 
-      const button = getByLabelText('Set up my phone');
+      const button = getByLabelText('Next');
       fireEvent.press(button);
 
       expect(navigateMock).toHaveBeenCalledWith(
@@ -58,11 +52,3 @@ describe('Home', () => {
     });
   });
 });
-
-const BTWrapper: FunctionComponent = ({ children }) => {
-  return (
-    <TracingStrategyProvider strategy={btStrategy}>
-      {children}
-    </TracingStrategyProvider>
-  );
-};

@@ -7,8 +7,6 @@ export const btAssets: StrategyAssets = {
   personalPrivacyIcon: Icons.RadioWave,
   notificationDetailsBackground: Images.MultipleCrossPathBackground,
   notificationDetailsIcon: Icons.BellYellow,
-  shareDiagnosisBackground: Images.EmptyPathBackground,
-  shareDiagnosisIcon: Icons.Heart,
 };
 
 export const useBTCopyContent: StrategyCopyContentHook = (t) => {
@@ -33,9 +31,6 @@ export const useBTCopyContent: StrategyCopyContentHook = (t) => {
     personalPrivacySubheader: t('label.launch_screen2_subheader_bluetooth'),
     notificationDetailsHeader: t('label.launch_screen3_header_bluetooth'),
     notificationDetailsSubheader: t('label.launch_screen3_subheader_bluetooth'),
-    shareDiagnosisButton: t('label.launch_set_up_phone_bluetooth'),
-    shareDiagnosisHeader: t('label.launch_screen4_header_bluetooth'),
-    shareDiagnosisSubheader: t('label.launch_screen4_subheader_bluetooth'),
     settingsLoggingActive: t('label.logging_active_bluetooth'),
     settingsLoggingInactive: t('label.logging_inactive_bluetooth'),
   };
