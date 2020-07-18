@@ -16,16 +16,14 @@ import AboutScreen from './views/About';
 import { LicensesScreen } from './views/Licenses';
 import AffectedUserStack from './bt/AffectedUserFlow';
 
-import NotificationPermissionsBT from './bt/NotificationPermissionsBT';
+import NotificationPermissions from './bt/NotificationPermissions';
 import ExposureHistoryScreen from './views/ExposureHistory';
 import Assessment from './views/assessment';
 import NextSteps from './views/ExposureHistory/NextSteps';
 import MoreInfo from './views/ExposureHistory/MoreInfo';
 import ENDebugMenu from './views/Settings/ENDebugMenu';
-import ImportFromUrl from './views/Settings/ImportFromUrl';
 import { ENLocalDiagnosisKeyScreen } from './views/Settings/ENLocalDiagnosisKeyScreen';
 import { ExposureListDebugScreen } from './views/Settings/ExposureListDebugScreen';
-import { FeatureFlagsScreen } from './views/FeatureFlagToggles';
 import { EnableExposureNotifications } from './views/onboarding/EnableExposureNotifications';
 import Welcome from './views/onboarding/Welcome';
 import PersonalPrivacy from './views/onboarding/PersonalPrivacy';
@@ -94,18 +92,13 @@ const MoreTabStack = () => {
       <Stack.Screen name={Screens.Settings} component={SettingsScreen} />
       <Stack.Screen name={Screens.About} component={AboutScreen} />
       <Stack.Screen name={Screens.Licenses} component={LicensesScreen} />
-      <Stack.Screen
-        name={Screens.FeatureFlags}
-        component={FeatureFlagsScreen}
-      />
-      <Stack.Screen name={Screens.ImportFromUrl} component={ImportFromUrl} />
       <Stack.Screen name={Screens.ENDebugMenu} component={ENDebugMenu} />
       <Stack.Screen
         name={Screens.LanguageSelection}
         component={LanguageSelection}
       />
       <Stack.Screen
-        name={Screens.ExportFlow}
+        name={Stacks.AffectedUserFlow}
         component={AffectedUserStack}
         options={{
           ...TransitionPresets.ModalSlideFromBottomIOS,
@@ -124,7 +117,7 @@ const MoreTabStack = () => {
   );
 };
 
-const screensWithNoTabBar = [Screens.ExportFlow];
+const screensWithNoTabBar = [Stacks.AffectedUserFlow];
 
 const determineTabBarVisibility = (route) => {
   const routeName = route.state?.routes[route.state.index].name;
@@ -153,7 +146,7 @@ const MainAppTabs = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName={Stacks.Main}
+      initialRouteName={Screens.Home}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: Colors.white,
@@ -165,7 +158,7 @@ const MainAppTabs = () => {
         },
       }}>
       <Tab.Screen
-        name={Stacks.Main}
+        name={Screens.Home}
         component={homeScreenComponent}
         options={{
           tabBarLabel: t('navigation.home'),
@@ -179,7 +172,7 @@ const MainAppTabs = () => {
         }}
       />
       <Tab.Screen
-        name={Stacks.ExposureHistory}
+        name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
           tabBarLabel: t('navigation.history'),
@@ -243,8 +236,8 @@ const OnboardingStack = () => (
     />
     <Stack.Screen name={Screens.ShareDiagnosis} component={ShareDiagnosis} />
     <Stack.Screen
-      name={Screens.NotificationPermissionsBT}
-      component={NotificationPermissionsBT}
+      name={Screens.NotificationPermissions}
+      component={NotificationPermissions}
     />
     <Stack.Screen
       name={Screens.EnableExposureNotifications}

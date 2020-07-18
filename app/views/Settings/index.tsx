@@ -16,10 +16,9 @@ import {
 } from 'react-navigation';
 
 import { getLocalNames } from '../../locales/languages';
-import FeatureFlag from '../../components/FeatureFlag';
 import { Typography } from '../../components/Typography';
 import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { Screens, useStatusBarEffect } from '../../navigation';
+import { Stacks, Screens, useStatusBarEffect } from '../../navigation';
 
 import { Icons } from '../../assets';
 import {
@@ -28,8 +27,6 @@ import {
   Spacing,
   Typography as TypographyStyles,
 } from '../../styles';
-import { FeatureFlagOption, RootState } from '../../store/types';
-import { useSelector } from 'react-redux';
 
 interface SettingsScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -60,7 +57,6 @@ const LanguageSelectionListItem = ({
 );
 
 const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
-  const { enableFlags } = useSelector((state: RootState) => state.featureFlags);
   const {
     t,
     i18n: { language: localeCode },
@@ -110,7 +106,7 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
         <View style={styles.sectionPrimary}>
           <Typography>{t('settings.share_test_result_description')}</Typography>
           <TouchableOpacity
-            onPress={navigateTo(Screens.ExportFlow)}
+            onPress={navigateTo(Stacks.AffectedUserFlow)}
             style={styles.button}>
             <Typography style={styles.buttonText}>
               {t('settings.share_test_result')}
@@ -138,26 +134,6 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
             style={styles.lastListItem}
           />
         </View>
-
-        <FeatureFlag flag={FeatureFlagOption.GOOGLE_IMPORT}>
-          <View style={styles.section}>
-            <SettingsListItem
-              label={'Download Locally'}
-              onPress={navigateTo(Screens.ExportLocally)}
-              style={styles.lastListItem}
-            />
-          </View>
-        </FeatureFlag>
-
-        {enableFlags && (
-          <View style={styles.section}>
-            <SettingsListItem
-              label='Feature Flags (Developer)'
-              onPress={navigateTo(Screens.FeatureFlags)}
-              style={styles.lastListItem}
-            />
-          </View>
-        )}
       </ScrollView>
     </NavigationBarWrapper>
   );

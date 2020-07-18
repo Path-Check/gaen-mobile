@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Linking,
@@ -7,33 +7,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
 import { useStrategyContent } from '../TracingStrategyContext';
 import packageJson from '../../package.json';
 import { NavigationBarWrapper, Typography } from '../components';
 
-import { useDispatch } from 'react-redux';
-import toggleAllowFeatureFlagsAction from '../store/actions/featureFlags/toggleAllowFeatureFlagsEnabledAction';
 import { Colors, Spacing, Typography as TypographyStyles } from '../styles';
 
-const CLICKS_TO_ENABLE_FEATURE_FLAGS = 10;
-
 export const AboutScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-
-  const [clickCount, setClickCount] = useState(0);
-  useEffect(() => {
-    if (clickCount === CLICKS_TO_ENABLE_FEATURE_FLAGS) {
-      Alert.alert('Feature Flags Enabled!');
-      dispatch(toggleAllowFeatureFlagsAction({ overrideValue: true }));
-    }
-  }, [clickCount, dispatch]);
-
-  const incrementClickCount = () => setClickCount(clickCount + 1);
-
   const { t } = useTranslation();
   const { StrategyCopy } = useStrategyContent();
 
@@ -48,13 +30,11 @@ export const AboutScreen = ({ navigation }) => {
       <ScrollView
         contentContainerStyle={styles.contentContainer}
         alwaysBounceVertical={false}>
-        <TouchableWithoutFeedback onPress={incrementClickCount}>
-          <View>
-            <Typography use='headline2' style={styles.heading}>
-              {StrategyCopy.aboutHeader}
-            </Typography>
-          </View>
-        </TouchableWithoutFeedback>
+        <View>
+          <Typography use='headline2' style={styles.heading}>
+            {StrategyCopy.aboutHeader}
+          </Typography>
+        </View>
         <Typography use='body2'>{t('label.about_para')}</Typography>
         <Typography
           style={styles.hyperlink}

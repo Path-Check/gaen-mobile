@@ -13,18 +13,6 @@ export type NavigationProp = NavigationScreenProp<
 >;
 
 export type Screen =
-  | 'ExportStart'
-  | 'ExportIntro'
-  | 'ExportSelectHA'
-  | 'ExportCodeInput'
-  | 'ExportLocationConsent'
-  | 'ExportPublishConsent'
-  | 'PublishConsent'
-  | 'ExportConfirmUpload'
-  | 'ExportDone'
-  | 'ExportComplete'
-  | 'ExposureHistory'
-  | 'ExportLocally'
   | 'NextSteps'
   | 'MoreInfo'
   | 'ENDebugMenu'
@@ -33,42 +21,24 @@ export type Screen =
   | 'Settings'
   | 'About'
   | 'Licenses'
-  | 'FeatureFlags'
-  | 'ImportFromUrl'
   | 'Welcome'
   | 'PersonalPrivacy'
   | 'NotificationDetails'
   | 'ShareDiagnosis'
-  | 'OnboardingLocationPermissions'
-  | 'OnboardingNotificationPermissions'
-  | 'NotificationPermissionsBT'
+  | 'NotificationPermissions'
   | 'EnableExposureNotifications'
-  | 'ExportFlow'
   | 'SelfAssessment'
-  | 'PartnersOverview'
-  | 'PartnersEdit'
-  | 'PartnersCustomUrl'
   | 'LanguageSelection'
   | 'AffectedUserStart'
   | 'AffectedUserCodeInput'
   | 'AffectedUserPublishConsent'
   | 'AffectedUserConfirmUpload'
   | 'AffectedUserExportDone'
-  | 'AffectedUserComplete';
+  | 'AffectedUserComplete'
+  | 'Home'
+  | 'ExposureHistory';
 
 export const Screens: { [key in Screen]: Screen } = {
-  ExportStart: 'ExportStart',
-  ExportIntro: 'ExportIntro',
-  ExportSelectHA: 'ExportSelectHA',
-  ExportCodeInput: 'ExportCodeInput',
-  ExportLocationConsent: 'ExportLocationConsent',
-  ExportPublishConsent: 'ExportPublishConsent',
-  PublishConsent: 'PublishConsent',
-  ExportConfirmUpload: 'ExportConfirmUpload',
-  ExportDone: 'ExportDone',
-  ExportComplete: 'ExportComplete',
-  ExposureHistory: 'ExposureHistory',
-  ExportLocally: 'ExportLocally',
   NextSteps: 'NextSteps',
   MoreInfo: 'MoreInfo',
   ENDebugMenu: 'ENDebugMenu',
@@ -77,21 +47,13 @@ export const Screens: { [key in Screen]: Screen } = {
   Settings: 'Settings',
   About: 'About',
   Licenses: 'Licenses',
-  FeatureFlags: 'FeatureFlags',
-  ImportFromUrl: 'ImportFromUrl',
   Welcome: 'Welcome',
   PersonalPrivacy: 'PersonalPrivacy',
   NotificationDetails: 'NotificationDetails',
   ShareDiagnosis: 'ShareDiagnosis',
-  OnboardingLocationPermissions: 'OnboardingLocationPermissions',
-  OnboardingNotificationPermissions: 'OnboardingNotificationPermissions',
-  NotificationPermissionsBT: 'NotificationPermissionsBT',
+  NotificationPermissions: 'NotificationPermissions',
   EnableExposureNotifications: 'EnableExposureNotifications',
-  ExportFlow: 'ExportFlow',
   SelfAssessment: 'SelfAssessment',
-  PartnersOverview: 'PartnersOverview',
-  PartnersEdit: 'PartnersEdit',
-  PartnersCustomUrl: 'PartnersCustomUrl',
   LanguageSelection: 'LanguageSelection',
   AffectedUserStart: 'AffectedUserStart',
   AffectedUserCodeInput: 'AffectedUserCodeInput',
@@ -99,25 +61,23 @@ export const Screens: { [key in Screen]: Screen } = {
   AffectedUserConfirmUpload: 'AffectedUserConfirmUpload',
   AffectedUserExportDone: 'AffectedUserExportDone',
   AffectedUserComplete: 'AffectedUserComplete',
+  Home: 'Home',
+  ExposureHistory: 'ExposureHistory',
 };
 
 export type Stack =
-  | 'Main'
   | 'Onboarding'
-  | 'ExposureHistory'
+  | 'ExposureHistoryFlow'
   | 'SelfAssessment'
-  | 'Export'
   | 'More'
-  | 'Partners';
+  | 'AffectedUserFlow';
 
 export const Stacks: { [key in Stack]: Stack } = {
-  Main: 'Main',
   Onboarding: 'Onboarding',
-  ExposureHistory: 'ExposureHistory',
+  ExposureHistoryFlow: 'ExposureHistoryFlow',
   SelfAssessment: 'SelfAssessment',
-  Export: 'Export',
   More: 'More',
-  Partners: 'Partners',
+  AffectedUserFlow: 'AffectedUserFlow',
 };
 
 type BarStyle = 'dark-content' | 'light-content';

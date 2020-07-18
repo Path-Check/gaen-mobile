@@ -47,7 +47,7 @@ describe('ShareDiagnosis', () => {
       fireEvent.press(button);
 
       expect(navigateMock).toHaveBeenCalledWith(
-        Screens.NotificationPermissionsBT,
+        Screens.NotificationPermissions,
       );
     });
   });

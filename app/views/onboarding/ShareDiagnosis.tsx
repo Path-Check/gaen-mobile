@@ -15,7 +15,7 @@ const ShareDiagnosis: FunctionComponent = () => {
   const handleOnPressNext = () => {
     navigation.navigate(
       isPlatformiOS()
-        ? Screens.NotificationPermissionsBT
+        ? Screens.NotificationPermissions
         : Screens.EnableExposureNotifications,
     );
   };
