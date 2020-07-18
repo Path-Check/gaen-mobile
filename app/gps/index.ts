@@ -1,6 +1,5 @@
 import { TracingStrategy } from '../tracingStrategy';
 import { PermissionsProvider } from './PermissionsContext';
-import Home from './Home';
 import ExportStack from './ExportStack';
 import { subscribeToExposureEvents, getCurrentExposures } from './exposureInfo';
 import { useGPSCopyContent, gpsAssets } from './content';
@@ -17,7 +16,7 @@ const gpsStrategy: TracingStrategy = {
   name: 'gps',
   exposureEventsStrategy: gpsExposureEventContext,
   permissionsProvider: PermissionsProvider,
-  homeScreenComponent: Home,
+  homeScreenComponent: () => {},
   affectedUserFlow: ExportStack,
   assets: gpsAssets,
   useCopy: useGPSCopyContent,
