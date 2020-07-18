@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { AppState } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import LocationServices from '../services/LocationService';
 import NotificationService from '../services/NotificationService';
 import { AllServicesOnScreen } from './main/AllServicesOn';
 import {
@@ -26,8 +25,7 @@ export const Main = () => {
   const [canTrack, setCanTrack] = useState(true);
 
   const updateStateInfo = useCallback(async () => {
-    const locationStatus = await LocationServices.checkStatusAndStartOrStop();
-    setCanTrack(locationStatus.canTrack);
+    setCanTrack(false);
     notification.check();
     NotificationService.configure(notification.status);
   }, [setCanTrack, notification]);

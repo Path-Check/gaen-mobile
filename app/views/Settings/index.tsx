@@ -20,7 +20,6 @@ import FeatureFlag from '../../components/FeatureFlag';
 import { Typography } from '../../components/Typography';
 import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
 import { isGPS } from '../../COVIDSafePathsConfig';
-import GoogleMapsImport from './GoogleMapsImport';
 import { Screens, useStatusBarEffect } from '../../navigation';
 
 import { Icons } from '../../assets';
@@ -131,16 +130,6 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
             onPress={navigateTo(Screens.LanguageSelection)}
           />
         </View>
-
-        {isGPS ? (
-          <FeatureFlag flag={FeatureFlagOption.GOOGLE_IMPORT}>
-            <View style={styles.section}>
-              <View style={styles.listItem}>
-                <GoogleMapsImport navigation={navigation} />
-              </View>
-            </View>
-          </FeatureFlag>
-        ) : null}
 
         <View style={styles.section}>
           <SettingsListItem
