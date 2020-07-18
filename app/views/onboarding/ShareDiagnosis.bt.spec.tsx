@@ -13,7 +13,6 @@ afterEach(cleanup);
 
 jest.mock('@react-navigation/native');
 jest.mock('../../Util');
-jest.mock('../../COVIDSafePathsConfig', () => ({ isGPS: false }));
 
 describe('Home', () => {
   describe('and platform is Android', () => {

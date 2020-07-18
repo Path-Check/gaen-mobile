@@ -108,20 +108,16 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
       title={t('navigation.more')}
       includeBackButton={false}>
       <ScrollView style={styles.container}>
-        {!isGPS && (
-          <View style={styles.sectionPrimary}>
-            <Typography>
-              {t('settings.share_test_result_description')}
+        <View style={styles.sectionPrimary}>
+          <Typography>{t('settings.share_test_result_description')}</Typography>
+          <TouchableOpacity
+            onPress={navigateTo(Screens.ExportFlow)}
+            style={styles.button}>
+            <Typography style={styles.buttonText}>
+              {t('settings.share_test_result')}
             </Typography>
-            <TouchableOpacity
-              onPress={navigateTo(Screens.ExportFlow)}
-              style={styles.button}>
-              <Typography style={styles.buttonText}>
-                {t('settings.share_test_result')}
-              </Typography>
-            </TouchableOpacity>
-          </View>
-        )}
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.section}>
           <LanguageSelectionListItem
@@ -143,16 +139,6 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
             style={styles.lastListItem}
           />
         </View>
-
-        {!isGPS ? (
-          <View style={styles.section}>
-            <SettingsListItem
-              label='EN Debug Menu'
-              onPress={navigateTo(Screens.ENDebugMenu)}
-              style={styles.lastListItem}
-            />
-          </View>
-        ) : null}
 
         <FeatureFlag flag={FeatureFlagOption.GOOGLE_IMPORT}>
           <View style={styles.section}>
