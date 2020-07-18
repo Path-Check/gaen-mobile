@@ -187,8 +187,6 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-background-timer (2.2.0):
-    - React
   - react-native-config (1.2.1):
     - React
   - react-native-document-picker (3.2.0):
@@ -304,7 +302,6 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -386,8 +383,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
-  react-native-background-timer:
-    :path: "../node_modules/react-native-background-timer"
   react-native-config:
     :path: "../node_modules/react-native-config"
   react-native-document-picker:
@@ -476,7 +471,6 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-background-timer: 1f7d560647b40e6a60b01c452ba29c54bf581fc4
   react-native-config: ae9ef3bdbf539f2d14ebaf4ebeba508f766e066a
   react-native-document-picker: e3516aff0dcf65ee0785d9bcf190eb10e2261154
   react-native-netinfo: cd479ab1b67cdd1cb1403a99ecdb24190a6dd7ef

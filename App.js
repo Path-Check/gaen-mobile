@@ -8,7 +8,6 @@ import 'array-flat-polyfill';
 
 import { Entry } from './app/Entry';
 import { TracingStrategyProvider } from './app/TracingStrategyContext';
-import VersionCheckService from './app/services/VersionCheckService';
 import { store, persistor } from './app/store';
 import btStrategy from './app/bt';
 import gpsStrategy from './app/gps';
@@ -41,7 +40,6 @@ export const UnconnectedApp = () => (
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
-    VersionCheckService.start();
   }, []);
 
   return (

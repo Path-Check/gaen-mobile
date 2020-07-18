@@ -7181,10 +7181,6 @@ react-native-background-fetch@^3.0.4:
     plist "^3.0.1"
     xcode "^2.0.0"
 
-react-native-background-timer@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-2.2.0.tgz#ff82d30899209b924983cc00e6ce174b8de5054a"
-
 react-native-config@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.2.1.tgz#f80454fc58ea89b549819ccb4bdab26518a9f0db"
