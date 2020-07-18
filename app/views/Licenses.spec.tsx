@@ -4,9 +4,6 @@ import { render } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
-import { TracingStrategyProvider } from '../TracingStrategyContext';
-import btStrategy from '../bt';
-
 import { LicensesScreen } from './Licenses';
 
 jest.mock('@react-navigation/native');
@@ -15,11 +12,7 @@ jest.mock('@react-navigation/native');
 
 describe('LicensesScreen', () => {
   it('displays PathCheck BT', () => {
-    const { getByTestId } = render(
-      <TracingStrategyProvider strategy={btStrategy}>
-        <LicensesScreen />
-      </TracingStrategyProvider>,
-    );
+    const { getByTestId } = render(<LicensesScreen />);
 
     expect(getByTestId('licenses-legal-header')).toHaveTextContent(
       'PathCheck BT',

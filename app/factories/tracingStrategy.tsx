@@ -51,7 +51,6 @@ export const testStrategyCopy: StrategyCopyContent = {
     'exposureNotificationsNotAvailableHeader',
   exposureNotificationsNotAvailableSubheader:
     'exposureNotificationsNotAvailableSubheader',
-  legalHeader: 'legalHeader',
   moreInfoHowContent: 'moreInfoHowContent',
   moreInfoWhyContent: 'moreInfoWhyContent',
   personalPrivacyHeader: 'onboarding2Header',

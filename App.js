@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { MenuProvider } from 'react-native-popup-menu';
 import SplashScreen from 'react-native-splash-screen';
-import { Provider } from 'react-redux';
 import env from 'react-native-config';
 import 'array-flat-polyfill';
 
 import { Entry } from './app/Entry';
 import { TracingStrategyProvider } from './app/TracingStrategyContext';
-import { store } from './app/store';
 import btStrategy from './app/bt';
 import {
   OnboardingProvider,
@@ -43,7 +41,7 @@ const App = () => {
   }, []);
 
   return (
-    <Provider store={store}>
+    <>
       {!isLoading ? (
         <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
           <MenuProvider>
@@ -53,7 +51,7 @@ const App = () => {
           </MenuProvider>
         </OnboardingProvider>
       ) : null}
-    </Provider>
+    </>
   );
 };
 

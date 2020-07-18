@@ -12,7 +12,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { NavigationBarWrapper } from '../components/NavigationBarWrapper';
 import { Typography } from '../components/Typography';
-import { useStrategyContent } from '../TracingStrategyContext';
 
 import { Images } from '../assets';
 import { Colors, Spacing } from '../styles';
@@ -22,9 +21,8 @@ const PRIVACY_POLICY_URL = 'https://pathcheck.org/privacy-policy/';
 export const LicensesScreen = (): JSX.Element => {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { StrategyCopy } = useStrategyContent();
 
-  const legalHeaderText = StrategyCopy.legalHeader;
+  const legalHeaderText = t('label.legal_page_header_bluetooth');
 
   const backToMain = () => {
     navigation.goBack();

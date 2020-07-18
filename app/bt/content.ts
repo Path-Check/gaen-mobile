@@ -24,7 +24,6 @@ export const useBTCopyContent: StrategyCopyContentHook = (t) => {
     exposureNotificationsNotAvailableSubheader: t(
       'home.bluetooth.unavailable_subheader',
     ),
-    legalHeader: t('label.legal_page_header_bluetooth'),
     moreInfoHowContent: t('exposure_history.bt.how_does_this_work_para'),
     moreInfoWhyContent: t('exposure_history.bt.why_did_i_get_an_en_para'),
     personalPrivacyHeader: t('label.launch_screen2_header_bluetooth'),

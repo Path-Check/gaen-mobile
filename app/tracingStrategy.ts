@@ -30,7 +30,6 @@ export interface StrategyCopyContent {
   exportPublishButtonSubtitle: string;
   exposureNotificationsNotAvailableHeader: string;
   exposureNotificationsNotAvailableSubheader: string;
-  legalHeader: string;
   moreInfoHowContent: string;
   moreInfoWhyContent: string;
   personalPrivacyHeader: string;

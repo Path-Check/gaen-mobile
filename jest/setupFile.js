@@ -39,34 +39,3 @@ jest.mock('react-native-popup-menu', () => ({
   MenuOption: 'MenuOption',
   MenuTrigger: 'MenuTrigger',
 }));
-
-jest.mock('redux', () => ({
-  createStore: () => {},
-  combineReducers: () => {},
-  applyMiddleware: () => {},
-}));
-
-jest.mock('redux-persist', () => ({
-  createMigrate: () => {},
-  persistReducer: () => {},
-  persistStore: () => {},
-}));
-
-jest.mock('redux-devtools-extension', () => ({
-  composeWithDevTools: () => {},
-}));
-
-jest.mock('@react-navigation/stack', () => {
-  return {
-    createStackNavigator: () => {
-      return {
-        Screen: jest.fn(),
-        Stack: jest.fn(),
-        Navigator: jest.fn(),
-      };
-    },
-    CardStyleInterpolators: {
-      forHorizontalIOS: jest.fn(),
-    },
-  };
-});
