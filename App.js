@@ -9,7 +9,6 @@ import { Entry } from './app/Entry';
 import { TracingStrategyProvider } from './app/TracingStrategyContext';
 import { store } from './app/store';
 import btStrategy from './app/bt';
-import gpsStrategy from './app/gps';
 import {
   OnboardingProvider,
   isOnboardingComplete,
@@ -17,9 +16,6 @@ import {
 
 const determineTracingStrategy = () => {
   switch (env.TRACING_STRATEGY) {
-    case 'gps': {
-      return gpsStrategy;
-    }
     case 'bt': {
       return btStrategy;
     }

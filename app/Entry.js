@@ -31,7 +31,6 @@ import Welcome from './views/onboarding/Welcome';
 import PersonalPrivacy from './views/onboarding/PersonalPrivacy';
 import NotificationDetails from './views/onboarding/NotificationDetails';
 import ShareDiagnosis from './views/onboarding/ShareDiagnosis';
-import NotificationsPermissions from './views/onboarding/NotificationsPermissions';
 import LocationsPermissions from './views/onboarding/LocationsPermissions';
 import LanguageSelection from './views/LanguageSelection';
 
@@ -244,10 +243,6 @@ const OnboardingStack = () => (
       component={NotificationDetails}
     />
     <Stack.Screen name={Screens.ShareDiagnosis} component={ShareDiagnosis} />
-    <Stack.Screen
-      name={Screens.OnboardingNotificationPermissions}
-      component={NotificationsPermissions}
-    />
     <Stack.Screen
       name={Screens.OnboardingLocationPermissions}
       component={LocationsPermissions}
