@@ -70,13 +70,13 @@ First, run the appropriate setup script for your system. This will install relev
 #### Linux/MacOS
 
 ```
-dev_setup.sh
+bin/dev_setup.sh
 ```
 
 #### Windows
 
 ```
-dev_setup.bat
+bin/dev_setup.bat
 ```
 
 #### Environment
