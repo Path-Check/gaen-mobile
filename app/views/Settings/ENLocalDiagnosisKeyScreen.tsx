@@ -23,7 +23,7 @@ type ENLocalDiagnosisKeyScreenProp = {
   navigation: NavigationProp;
 };
 
-export const ENLocalDiagnosisKeyScreen = ({
+const ENLocalDiagnosisKeyScreen = ({
   navigation,
 }: ENLocalDiagnosisKeyScreenProp): JSX.Element => {
   const initialKeys: ENDiagnosisKey[] = [];
@@ -107,3 +107,5 @@ const styles = StyleSheet.create({
     maxWidth: '90%',
   },
 });
+
+export default ENLocalDiagnosisKeyScreen;

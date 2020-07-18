@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import env from 'react-native-config';
 import 'array-flat-polyfill';
 
-import { Entry } from './app/Entry';
+import MainNavigator from './app/navigation/MainNavigator';
 import { TracingStrategyProvider } from './app/TracingStrategyContext';
 import btStrategy from './app/bt';
 import {
@@ -46,7 +46,7 @@ const App = () => {
         <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
           <MenuProvider>
             <TracingStrategyProvider strategy={strategy}>
-              <Entry />
+              <MainNavigator />
             </TracingStrategyProvider>
           </MenuProvider>
         </OnboardingProvider>

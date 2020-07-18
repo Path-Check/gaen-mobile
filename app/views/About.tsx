@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 import {
   Linking,
   Platform,
@@ -11,11 +12,13 @@ import {
 
 import { useStrategyContent } from '../TracingStrategyContext';
 import packageJson from '../../package.json';
-import { NavigationBarWrapper, Typography } from '../components';
+import { NavigationBarWrapper } from '../components/NavigationBarWrapper';
+import { Typography } from '../components/Typography';
 
 import { Colors, Spacing, Typography as TypographyStyles } from '../styles';
 
-export const AboutScreen = ({ navigation }) => {
+export const AboutScreen: FunctionComponent = () => {
+  const navigation = useNavigation();
   const { t } = useTranslation();
   const { StrategyCopy } = useStrategyContent();
 

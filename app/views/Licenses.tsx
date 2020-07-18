@@ -18,7 +18,7 @@ import { Colors, Spacing } from '../styles';
 
 const PRIVACY_POLICY_URL = 'https://pathcheck.org/privacy-policy/';
 
-export const LicensesScreen = (): JSX.Element => {
+const Licenses = (): JSX.Element => {
   const { t } = useTranslation();
   const navigation = useNavigation();
 
@@ -102,3 +102,5 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 });
+
+export default Licenses;

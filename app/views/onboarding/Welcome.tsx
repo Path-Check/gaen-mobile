@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 import {
   Dimensions,
   ImageBackground,
@@ -8,18 +10,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { Images } from '../../assets';
-import { Typography } from '../../components';
-import { EulaModal } from '../EulaModal';
+import { Typography } from '../../components/Typography';
+import { EulaModal } from './EulaModal';
+import { getLocalNames } from '../../locales/languages';
 
+import { Images } from '../../assets';
 import { Colors } from '../../styles';
 import { Screens } from '../../navigation';
-import { useTranslation } from 'react-i18next';
-import { getLocalNames } from '../../locales/languages';
 
 const width = Dimensions.get('window').width;
 
-const Welcome = ({ navigation }) => {
+const Welcome: FunctionComponent = () => {
+  const navigation = useNavigation();
   const {
     t,
     i18n: { language: localeCode },
@@ -61,7 +63,7 @@ const Welcome = ({ navigation }) => {
           <View style={styles.footerContainer}>
             <EulaModal
               continueFunction={() =>
-                navigation.replace(Screens.PersonalPrivacy)
+                navigation.navigate(Screens.PersonalPrivacy)
               }
               selectedLocale={localeCode}
             />

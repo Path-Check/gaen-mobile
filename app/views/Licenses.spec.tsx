@@ -4,7 +4,7 @@ import { render } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
-import { LicensesScreen } from './Licenses';
+import LicensesScreen from './Licenses';
 
 jest.mock('@react-navigation/native');
 (useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() });

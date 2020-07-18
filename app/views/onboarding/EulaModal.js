@@ -12,18 +12,18 @@ import { useTranslation } from 'react-i18next';
 import loadLocalResource from 'react-native-local-resource';
 import WebView from 'react-native-webview';
 
-import { Button, Checkbox, IconButton, Typography } from '../components';
-import en from '../locales/eula/en.html';
-import es_PR from '../locales/eula/es_PR.html';
-import ht from '../locales/eula/ht.html';
+import { Button, Checkbox, IconButton, Typography } from '../../components';
+import en from '../../locales/eula/en.html';
+import es_PR from '../../locales/eula/es_PR.html';
+import ht from '../../locales/eula/ht.html';
 
-import { Icons } from '../assets';
+import { Icons } from '../../assets';
 import {
   Spacing,
   Buttons,
   Colors,
   Typography as TypographyStyles,
-} from '../styles';
+} from '../../styles';
 
 const EULA_FILES = { en, es_PR, ht };
 

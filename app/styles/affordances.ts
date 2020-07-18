@@ -2,7 +2,7 @@ import { ViewStyle } from 'react-native';
 
 import * as Colors from './colors';
 
-export const iconBadge = {
+export const iconBadge: ViewStyle = {
   position: 'absolute',
   right: 22,
   top: 3,

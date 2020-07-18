@@ -126,11 +126,18 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
           <SettingsListItem
             label={t('screen_titles.about')}
             onPress={navigateTo(Screens.About)}
+            style={styles.divider}
           />
-          <Divider />
           <SettingsListItem
             label={t('screen_titles.legal')}
             onPress={() => navigation.navigate(Screens.Licenses)}
+            style={styles.lastListItem}
+          />
+        </View>
+        <View style={styles.section}>
+          <SettingsListItem
+            label='EN Debug Menu'
+            onPress={navigateTo(Screens.ENDebugMenu)}
             style={styles.lastListItem}
           />
         </View>
@@ -139,17 +146,13 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
   );
 };
 
-const Divider = () => <View style={styles.divider} />;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackground,
   },
   divider: {
-    marginHorizontal: Spacing.small,
-    flex: 1,
-    height: 1,
-    backgroundColor: Colors.tertiaryViolet,
+    borderColor: Colors.tertiaryViolet,
+    borderBottomWidth: 1,
   },
   section: {
     flex: 1,

@@ -25,7 +25,7 @@ type DebugExposure = {
   date: string;
 };
 
-export const ExposureListDebugScreen = ({
+const ExposureListDebugScreen = ({
   navigation,
 }: ENLocalExposureScreenProp): JSX.Element => {
   const initialExposures: DebugExposure[] = [];
@@ -113,3 +113,5 @@ const styles = StyleSheet.create({
     maxWidth: '90%',
   },
 });
+
+export default ExposureListDebugScreen;
