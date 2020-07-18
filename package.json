@@ -16,7 +16,7 @@
     "run-ios-gps": "yarn install:pod && react-native run-ios --scheme \"GPS_Development\" --configuration \"Debug-GPS\"",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
     "install:pod": "cd ios && bundle install --quiet && bundle exec pod install --silent",
-    "postinstall": "./scripts/install-submodules.sh node_modules/\\@mauron85/react-native-background-geolocation && patch-package && node ./scripts/replace.js && npx react-native-jetifier",
+    "postinstall": "patch-package && node ./scripts/replace.js && npx react-native-jetifier",
     "postversion": "react-native-version",
     "set-ha": "./setup_env.sh",
     "format:all": "prettier --write ./app/**/*.js",
@@ -53,10 +53,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/native": "^10.0.27",
-    "@mauron85/react-native-background-geolocation": "https://github.com/Path-Check/react-native-background-geolocation.git",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^2.3.2",
-    "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "0.1.5",
     "@react-native-community/netinfo": "^5.9.4",
     "@react-native-community/push-notification-ios": "^1.1.0",
@@ -71,7 +69,6 @@
     "array-flat-polyfill": "^1.0.1",
     "dayjs": "^1.8.24",
     "emotion-theming": "^10.0.27",
-    "geolib": "^3.2.1",
     "i18next": "^19.3.3",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.19",
@@ -182,30 +179,6 @@
       }
     },
     "configurations": {
-      "iphone11.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-GPS-iphonesimulator/GPS.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme GPS_Production -configuration Release-GPS -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 11"
-        }
-      },
-      "iphone8.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-GPS-iphonesimulator/GPS.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme GPS_Production -configuration Release-GPS -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 8"
-        }
-      },
-      "iphone-se.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-GPS-iphonesimulator/GPS.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme GPS_Production -configuration Release-GPS -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone SE (2nd generation)"
-        }
-      },
       "iphone11-bt.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",

@@ -55,32 +55,15 @@ def shared_pods
   use_native_modules!
 end
 
-def gps_pods
-  permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
-end
-
 def bt_pods
   ### These should be removed in a future commit
   permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
   pod 'Alamofire', '~> 4.9.1'
   pod 'ZIPFoundation'
 end
 
-target 'GPS' do
-  gps_pods
-  shared_pods
-end
-
 target 'BT' do
   bt_pods
-  shared_pods
-end
-
-target 'GPSTests' do
-  inherit! :search_paths
-  gps_pods
   shared_pods
 end
 

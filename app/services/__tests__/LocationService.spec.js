@@ -1,4 +1,4 @@
-import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+// import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 import AsyncStorage from '@react-native-community/async-storage';
 import { NativeModules } from 'react-native';
 
@@ -14,9 +14,9 @@ import LocationServices, {
 jest.mock('@mauron85/react-native-background-geolocation');
 
 function mockBackgroundGeolocationCheckStatus(data) {
-  BackgroundGeolocation.checkStatus.mockImplementation((callback) => {
-    callback(data);
-  });
+  // BackgroundGeolocation.checkStatus.mockImplementation((callback) => {
+  // callback(data);
+  // });
 }
 
 // This is not great, but its clearer than mockOnce().mockOnce().mockOnce()

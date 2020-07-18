@@ -12,6 +12,7 @@
 // https://gist.github.com/troach-sf/f257bb7b80e6dddd4f3bade81b7b1410
 
 import Foundation
+import Realm
 import RealmSwift
 
 class SafePathsSecureStorage: NSObject {
@@ -96,8 +97,12 @@ class SafePathsSecureStorage: NSObject {
     preconditionFailure("Subclasses must override \(#function)")
   }
   
-  func getRealmInstance() -> Realm? {
-    return try? getRealmConfig().flatMap(Realm.init)
+  func getRealmInstance() -> Realm? {    
+    guard let config = getRealmConfig() else {
+      return nil
+    }
+
+    return try! Realm(configuration: config)
   }
 
 }
