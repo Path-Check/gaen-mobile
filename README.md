@@ -97,7 +97,7 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 #### Android (Windows, Linux, macOS)
 
 ```
-yarn run-android-bt
+yarn run-android
 ```
 
 Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
@@ -113,7 +113,7 @@ yarn install:pod ## only needs to be ran once
 Then, run the application:
 
 ```
-yarn run-ios-bt
+yarn run-ios
 ```
 
 Device storage can be cleared by clicking "Hardware" on the system toolbar, and then "Erase all content and settings".
