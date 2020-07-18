@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuProvider } from 'react-native-popup-menu';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import env from 'react-native-config';
 import 'array-flat-polyfill';
 
 import { Entry } from './app/Entry';
 import { TracingStrategyProvider } from './app/TracingStrategyContext';
-import { store, persistor } from './app/store';
+import { store } from './app/store';
 import btStrategy from './app/bt';
 import gpsStrategy from './app/gps';
+import {
+  OnboardingProvider,
+  isOnboardingComplete,
+} from './app/OnboardingContext';
 
 const determineTracingStrategy = () => {
   switch (env.TRACING_STRATEGY) {
@@ -28,25 +31,32 @@ const determineTracingStrategy = () => {
 
 const strategy = determineTracingStrategy();
 
-// For snapshot testing. In tests, we provide a mock store wrapper if needed.
-export const UnconnectedApp = () => (
-  <MenuProvider>
-    <TracingStrategyProvider strategy={strategy}>
-      <Entry />
-    </TracingStrategyProvider>
-  </MenuProvider>
-);
-
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [onboardingIsComplete, setOnboardingIsComplete] = useState(false);
+
   useEffect(() => {
-    SplashScreen.hide();
+    isOnboardingComplete()
+      .then((isComplete) => {
+        setOnboardingIsComplete(isComplete);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        SplashScreen.hide();
+      });
   }, []);
 
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <UnconnectedApp />
-      </PersistGate>
+      {!isLoading ? (
+        <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
+          <MenuProvider>
+            <TracingStrategyProvider strategy={strategy}>
+              <Entry />
+            </TracingStrategyProvider>
+          </MenuProvider>
+        </OnboardingProvider>
+      ) : null}
     </Provider>
   );
 };

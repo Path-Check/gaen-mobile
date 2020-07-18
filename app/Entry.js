@@ -9,7 +9,6 @@ import {
   TransitionPresets,
   createStackNavigator,
 } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
 
 import SettingsScreen from './views/Settings';
 import AboutScreen from './views/About';
@@ -43,7 +42,7 @@ import LanguageSelection from './views/LanguageSelection';
 import { Screens, Stacks } from './navigation';
 
 import ExposureHistoryContext from './ExposureHistoryContext';
-import isOnboardingCompleteSelector from './store/selectors/isOnboardingCompleteSelector';
+import { useOnboardingContext } from './OnboardingContext';
 import { isGPS } from './COVIDSafePathsConfig';
 import { useTracingStrategyContext } from './TracingStrategyContext';
 
@@ -344,12 +343,11 @@ const PartnersStack = () => (
 );
 
 export const Entry = () => {
-  const onboardingComplete = useSelector(isOnboardingCompleteSelector);
-
+  const { isComplete } = useOnboardingContext();
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-        {onboardingComplete ? (
+        {isComplete ? (
           <Stack.Screen name={'App'} component={MainAppTabs} />
         ) : (
           <Stack.Screen name={Stacks.Onboarding} component={OnboardingStack} />
