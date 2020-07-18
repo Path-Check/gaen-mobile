@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { NotificationsOffScreen } from '../';
+import { NotificationsOffScreen } from './NotificationsOff';
 
 jest.mock('@react-navigation/native');
 useFocusEffect.mockReturnValue(jest.fn());

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 
-import { NoAuthoritiesScreen } from '../';
+import { NoAuthoritiesScreen } from './NoAuthorities';
 
 jest.mock('@react-navigation/native', () => {
   return {

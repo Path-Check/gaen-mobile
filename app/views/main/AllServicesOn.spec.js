@@ -1,7 +1,7 @@
 import { cleanup, render } from '@testing-library/react-native';
 import React from 'react';
 
-import { AllServicesOnScreen } from '../AllServicesOn';
+import { AllServicesOnScreen } from './AllServicesOn';
 
 afterEach(cleanup);
 

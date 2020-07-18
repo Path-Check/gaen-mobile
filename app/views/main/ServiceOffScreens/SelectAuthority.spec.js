@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { SelectAuthorityScreen } from '../';
+import { SelectAuthorityScreen } from './SelectAuthority';
 
 jest.mock('@react-navigation/native');
 useNavigation.mockReturnValue({ navigate: jest.fn() });

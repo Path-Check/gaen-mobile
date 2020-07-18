@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 
-import * as languages from '../languages';
-import { initDevLanguages } from '../languages';
+import * as languages from './languages';
+import { initDevLanguages } from './languages';
 
 const BACKUP_SETTINGS_MANAGER = NativeModules.SettingsManager;
 

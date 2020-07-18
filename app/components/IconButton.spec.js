@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { IconButton } from '../IconButton';
+import { IconButton } from './IconButton';
 
 const svg = `<g />`;
 

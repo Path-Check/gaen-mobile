@@ -1,4 +1,4 @@
-import { isVersionGreater } from '../Util';
+import { isVersionGreater } from './Util';
 
 describe('Util class', () => {
   let versions;

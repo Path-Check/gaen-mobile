@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { TracingOffScreen } from '../';
+import { TracingOffScreen } from './TracingOff';
 
 jest.mock('@react-navigation/native');
 useFocusEffect.mockReturnValue(jest.fn());
