@@ -43,9 +43,11 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 [COVID PathCheck Website](https://covidsafepaths.org/)
 
-Original White Paper: [Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic](https://drive.google.com/file/d/1nwOR4drE3YdkCkyy_HBd6giQPPhLEkRc/view?usp=sharing)
+[Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic](https://drive.google.com/file/d/1nwOR4drE3YdkCkyy_HBd6giQPPhLEkRc/view?usp=sharing) - The orginal white paper.
 
-[COVID PathCheck Slack](covidsafepaths.slack.com) - This is where the community lives. 
+[COVID PathCheck Slack](covidsafepaths.slack.com) - Where the community lives. 
+
+[Path-Check/covid-safe-paths](https://github.com/Path-Check/covid-safe-paths) - PathCheck's GPS based contact tracing solution.
 
 
 # Development Overview
@@ -57,9 +59,6 @@ _PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-star
 ## Contributing
 
 Read the [contribution guidelines](CONTRIBUTING.md).
-
-If you're looking for a first ticket - please check out the backlog for a bug or first story [JIRA project.](https://pathcheck.atlassian.net/secure/RapidBoard.jspa?rapidView=9&projectKey=SAF&view=planning.nodetail&selectedIssue=SAF-264&issueLimit=100)
-
 
 ## Developer Setup
 
