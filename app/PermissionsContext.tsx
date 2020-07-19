@@ -1,6 +1,10 @@
-import React, { createContext, useState, useEffect } from "react"
-
-import * as BTNativeModule from "./bt/nativeModule"
+import React, {
+  FunctionComponent,
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react"
 
 import {
   checkNotifications,
@@ -44,13 +48,22 @@ const initialState = {
 
 const PermissionsContext = createContext<PermissionContextState>(initialState)
 
-interface ExposureNotificationProviderProps {
-  children: JSX.Element
+export interface PermissionStrategy {
+  statusSubscription: (
+    cb: (status: ENPermissionStatus) => void,
+  ) => { remove: () => void }
+  check: (cb: (status: ENPermissionStatus) => void) => void
+  request: (cb: (response: string) => void) => void
 }
 
-const PermissionsProvider = ({
+interface PermissionsProviderProps {
+  permissionStrategy: PermissionStrategy
+}
+
+const PermissionsProvider: FunctionComponent<PermissionsProviderProps> = ({
   children,
-}: ExposureNotificationProviderProps): JSX.Element => {
+  permissionStrategy,
+}) => {
   const [
     exposureNotificationsPermission,
     setExposureNotificationsPermission,
@@ -60,8 +73,15 @@ const PermissionsProvider = ({
     PermissionStatus.UNKNOWN,
   )
 
+  const checkENPermission = useCallback(() => {
+    const handleNativeResponse = (status: ENPermissionStatus) => {
+      setExposureNotificationsPermission(status)
+    }
+    permissionStrategy.check(handleNativeResponse)
+  }, [])
+
   useEffect(() => {
-    const subscription = BTNativeModule.subscribeToEnabledStatusEvents(
+    const subscription = permissionStrategy.statusSubscription(
       (status: ENPermissionStatus) => {
         setExposureNotificationsPermission(status)
       },
@@ -80,14 +100,7 @@ const PermissionsProvider = ({
     return () => {
       subscription?.remove()
     }
-  }, [])
-
-  const checkENPermission = () => {
-    const handleNativeResponse = (status: ENPermissionStatus) => {
-      setExposureNotificationsPermission(status)
-    }
-    BTNativeModule.getCurrentENPermissionsStatus(handleNativeResponse)
-  }
+  }, [permissionStrategy, checkENPermission])
 
   const checkNotificationPermission = async () => {
     const { status } = await checkNotifications()
@@ -95,8 +108,12 @@ const PermissionsProvider = ({
   }
 
   const requestENPermission = () => {
-    const handleNativeResponse = () => {}
-    BTNativeModule.requestAuthorization(handleNativeResponse)
+    const handleNativeResponse = (response: string) => {
+      if (response === "success") {
+        setExposureNotificationsPermission(["AUTHORIZED", "ENABLED"])
+      }
+    }
+    permissionStrategy.request(handleNativeResponse)
   }
 
   const requestNotificationPermission = async () => {

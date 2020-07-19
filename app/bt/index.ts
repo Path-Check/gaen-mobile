@@ -1,8 +1,8 @@
 import { TracingStrategy } from "../tracingStrategy"
-import * as BTNativeModule from "./nativeModule"
-import { useBTCopyContent, btAssets } from "./content"
 import { toExposureHistory } from "./exposureNotifications"
+import { PermissionStrategy } from "../PermissionsContext"
 import { ExposureEventsStrategy } from "../ExposureHistoryContext"
+import * as BTNativeModule from "./nativeModule"
 
 const btExposureEventContext: ExposureEventsStrategy = {
   exposureInfoSubscription: BTNativeModule.subscribeToExposureEvents,
@@ -10,11 +10,16 @@ const btExposureEventContext: ExposureEventsStrategy = {
   getCurrentExposures: BTNativeModule.getCurrentExposures,
 }
 
+const btPermissionStrategy: PermissionStrategy = {
+  statusSubscription: BTNativeModule.subscribeToEnabledStatusEvents,
+  check: BTNativeModule.getCurrentENPermissionsStatus,
+  request: BTNativeModule.requestAuthorization,
+}
+
 const btStrategy: TracingStrategy = {
   name: "bt",
   exposureEventsStrategy: btExposureEventContext,
-  assets: btAssets,
-  useCopy: useBTCopyContent,
+  permissionStrategy: btPermissionStrategy,
 }
 
 export { BTNativeModule }

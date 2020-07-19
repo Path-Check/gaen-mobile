@@ -1,38 +1,8 @@
-import { ImageSourcePropType } from "react-native"
-
-import { TFunction } from "i18next"
-
 import { ExposureEventsStrategy } from "./ExposureHistoryContext"
+import { PermissionStrategy } from "./PermissionsContext"
 
 export interface TracingStrategy {
   name: string
   exposureEventsStrategy: ExposureEventsStrategy
-  assets: StrategyAssets
-  useCopy: StrategyCopyContentHook
-}
-
-export interface StrategyAssets {
-  personalPrivacyBackground: ImageSourcePropType
-  notificationDetailsBackground: ImageSourcePropType
-  personalPrivacyIcon: string
-  notificationDetailsIcon: string
-}
-
-export type StrategyCopyContentHook = (t: TFunction) => StrategyCopyContent
-
-export interface StrategyCopyContent {
-  aboutHeader: string
-  detailedHistoryWhatThisMeansPara: string
-  exportCompleteBody: string
-  exportPublishButtonSubtitle: string
-  exposureNotificationsNotAvailableHeader: string
-  exposureNotificationsNotAvailableSubheader: string
-  moreInfoHowContent: string
-  moreInfoWhyContent: string
-  personalPrivacyHeader: string
-  personalPrivacySubheader: string
-  notificationDetailsHeader: string
-  notificationDetailsSubheader: string
-  settingsLoggingActive: string
-  settingsLoggingInactive: string
+  permissionStrategy: PermissionStrategy
 }

@@ -1,20 +1,12 @@
 import React, { createContext, useContext, FunctionComponent } from "react"
-import { useTranslation } from "react-i18next"
 import { PermissionsProvider } from "./PermissionsContext"
 
-import {
-  TracingStrategy,
-  StrategyCopyContent,
-  StrategyCopyContentHook,
-  StrategyAssets,
-} from "./tracingStrategy"
+import { TracingStrategy } from "./tracingStrategy"
 
 import { ExposureHistoryProvider } from "./ExposureHistoryContext"
 
 interface TracingStrategyContextState {
   name: string
-  assets: StrategyAssets
-  useCopy: StrategyCopyContentHook
 }
 
 const TracingStrategyContext = createContext<
@@ -33,11 +25,9 @@ export const TracingStrategyProvider: FunctionComponent<TracingStrategyProps> = 
     <TracingStrategyContext.Provider
       value={{
         name: strategy.name,
-        assets: strategy.assets,
-        useCopy: strategy.useCopy,
       }}
     >
-      <PermissionsProvider>
+      <PermissionsProvider permissionStrategy={strategy.permissionStrategy}>
         <ExposureHistoryProvider
           exposureEventsStrategy={strategy.exposureEventsStrategy}
         >
@@ -54,15 +44,4 @@ export const useTracingStrategyContext = (): TracingStrategyContextState => {
     throw new Error("TracingStrategyContext must be used with a provider")
   }
   return context
-}
-
-export const useStrategyContent = (): {
-  StrategyCopy: StrategyCopyContent
-  StrategyAssets: StrategyAssets
-} => {
-  const { t } = useTranslation()
-  const { useCopy, assets } = useTracingStrategyContext()
-  const StrategyCopy = useCopy(t)
-  const StrategyAssets = assets
-  return { StrategyCopy, StrategyAssets }
 }

@@ -3,21 +3,21 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
-import { useStrategyContent } from "../TracingStrategyContext"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
+
 import { Screens } from "../navigation"
+import { Icons, Images } from "../assets"
 
 const PersonalPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
   useStatusBarEffect("dark-content")
   const { t } = useTranslation()
-  const { StrategyAssets, StrategyCopy } = useStrategyContent()
 
   const explanationScreenContent = {
-    backgroundImage: StrategyAssets.personalPrivacyBackground,
-    icon: StrategyAssets.personalPrivacyIcon,
-    header: StrategyCopy.personalPrivacyHeader,
-    body: StrategyCopy.personalPrivacySubheader,
+    backgroundImage: Images.SingleCrossPathBackground,
+    icon: Icons.RadioWave,
+    header: t("label.launch_screen2_header_bluetooth"),
+    body: t("label.launch_screen2_subheader_bluetooth"),
     primaryButtonLabel: t("label.launch_next"),
   }
 

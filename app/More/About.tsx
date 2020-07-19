@@ -10,7 +10,6 @@ import {
   View,
 } from "react-native"
 
-import { useStrategyContent } from "../TracingStrategyContext"
 import packageJson from "../../package.json"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Typography } from "../components/Typography"
@@ -20,7 +19,6 @@ import { Colors, Spacing, Typography as TypographyStyles } from "../styles"
 export const AboutScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { StrategyCopy } = useStrategyContent()
 
   const backToMain = () => {
     navigation.goBack()
@@ -37,7 +35,7 @@ export const AboutScreen: FunctionComponent = () => {
       >
         <View>
           <Typography use="headline2" style={styles.heading}>
-            {StrategyCopy.aboutHeader}
+            {t("label.about_header_bluetooth")}
           </Typography>
         </View>
         <Typography use="body2">{t("label.about_para")}</Typography>

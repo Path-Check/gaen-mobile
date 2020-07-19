@@ -2,20 +2,20 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useStrategyContent } from "../TracingStrategyContext"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
+
 import { Screens } from "../navigation"
+import { Icons, Images } from "../assets"
 
 const NotificationDetails = (): JSX.Element => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { StrategyCopy, StrategyAssets } = useStrategyContent()
 
   const explanationScreenContent = {
-    backgroundImage: StrategyAssets.notificationDetailsBackground,
-    icon: StrategyAssets.notificationDetailsIcon,
-    header: StrategyCopy.notificationDetailsHeader,
-    body: StrategyCopy.notificationDetailsSubheader,
+    backgroundImage: Images.MultipleCrossPathBackground,
+    icon: Icons.BellYellow,
+    header: t("label.launch_screen3_header_bluetooth"),
+    body: t("label.launch_screen3_subheader_bluetooth"),
     primaryButtonLabel: t("label.launch_next"),
   }
 

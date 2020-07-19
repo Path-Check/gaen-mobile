@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { useStrategyContent } from "../TracingStrategyContext"
 import { Typography } from "../components/Typography"
 
 import { Screens } from "../navigation"
@@ -21,14 +20,13 @@ export const ExportComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { StrategyCopy } = useStrategyContent()
 
   const handleOnPressDone = () => {
     navigation.navigate(Screens.Settings)
   }
 
   const title = t("export.complete_title")
-  const body = StrategyCopy.exportCompleteBody
+  const body = t("export.complete_body_bluetooth")
 
   return (
     <View style={styles.backgroundImage}>

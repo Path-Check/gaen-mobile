@@ -34,9 +34,11 @@ export const subscribeToEnabledStatusEvents = (
   )
   return ExposureEvents.addListener(
     "onEnabledStatusUpdated",
-    (data: string[]) => {
-      const status = toStatus(data)
-      cb(status)
+    (data: string[] | null) => {
+      if (data) {
+        const status = toStatus(data)
+        cb(status)
+      }
     },
   )
 }
