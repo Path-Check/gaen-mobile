@@ -2,12 +2,12 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Linking, StyleSheet } from "react-native"
 
-import { Icons } from "../../../assets"
-import { Button } from "../components/Button"
+import { Button } from "../Button"
 import { Info } from "../Info"
-import { InfoText } from "../components/InfoText"
+import { InfoText } from "../InfoText"
 
-import { Colors } from "../../../styles"
+import { Icons } from "../../assets"
+import { Colors } from "../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Emergency = () => {

@@ -2,12 +2,12 @@ import React from "react"
 import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { InfoText } from "./components/InfoText"
-import { Button } from "./components/Button"
+import { InfoText } from "./InfoText"
+import { Button } from "./Button"
 import { Info } from "./Info"
-import { Typography } from "../../components/Typography"
-import { Colors } from "../../styles"
-import { Icons } from "../../assets"
+import { Typography } from "../components/Typography"
+import { Colors } from "../styles"
+import { Icons } from "../assets"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Agreement = ({ navigation }) => {

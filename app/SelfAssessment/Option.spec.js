@@ -1,12 +1,12 @@
 import { fireEvent, render } from "@testing-library/react-native"
 import React from "react"
 
-import { Option } from "../Option"
+import { Option } from "./Option"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
   SCREEN_TYPE_RADIO,
-} from "../constants"
+} from "./constants"
 
 test("SCREEN_TYPE_CHECKBOX", () => {
   const { asJSON } = render(
@@ -56,7 +56,7 @@ describe("SCREEN_TYPE_DATE", () => {
     expect(getByTestId("label").children).toEqual(["Label"])
   })
   test("on iOS, selecting the date picker immediatley invokes the onSelect handler with the current date", () => {
-    jest.doMock("../../../Util", () => ({
+    jest.doMock("../Util", () => ({
       isPlatformIOS: () => true,
     }))
     let onSelect = jest.fn()

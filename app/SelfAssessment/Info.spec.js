@@ -2,7 +2,7 @@ import { render } from "@testing-library/react-native"
 import React from "react"
 import { View } from "react-native"
 
-import { Info } from "../Info"
+import { Info } from "./Info"
 
 test("base", () => {
   const { asJSON, queryByTestId } = render(

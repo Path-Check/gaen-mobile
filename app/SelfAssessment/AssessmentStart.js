@@ -1,11 +1,12 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { InfoText } from "./components/InfoText"
-import { Button } from "./components/Button"
+
+import { InfoText } from "./InfoText"
+import { Button } from "./Button"
 import { Info } from "./Info"
 
-import { Colors } from "../../styles"
-import { Icons, Images } from "../../assets"
+import { Colors } from "../styles"
+import { Icons, Images } from "../assets"
 
 /** @type {React.FunctionComponent<{}>} */
 export const AssessmentStart = ({ navigation }) => {

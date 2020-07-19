@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { Typography } from "../../components/Typography"
-import { Button } from "./components/Button"
+import { Typography } from "../components/Typography"
+import { Button } from "./Button"
 import { AnswersContext } from "./Context"
 import { Option } from "./Option"
 import {
@@ -13,7 +13,7 @@ import {
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-import { Colors, Spacing, Typography as TypographyStyles } from "../../styles"
+import { Colors, Spacing, Typography as TypographyStyles } from "../styles"
 
 /**
  * @typedef { import(".").SurveyQuestion } SurveyQuestion

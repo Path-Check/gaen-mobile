@@ -1,6 +1,7 @@
 import React from "react"
 import { StyleSheet } from "react-native"
-import { Typography } from "../../../components/Typography"
+
+import { Typography } from "../components/Typography"
 
 export const InfoText = ({
   titleStyle,

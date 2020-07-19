@@ -4,8 +4,7 @@ import { StyleSheet, TouchableOpacity } from "react-native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { SvgXml } from "react-native-svg"
 
-import { Icons } from "../../assets"
-import { useSurvey } from "../../helpers/CustomHooks"
+import survey_en from "./survey.en.json"
 import {
   AnswersContext,
   AssessmentNavigationContext,
@@ -29,9 +28,10 @@ import { Distancing } from "./endScreens/Distancing"
 import { Emergency } from "./endScreens/Emergency"
 import { Isolate } from "./endScreens/Isolate"
 import { Share } from "./endScreens/Share"
-import { useStatusBarEffect } from "../../navigation"
 
-import { Colors, Spacing } from "../../styles"
+import { useStatusBarEffect } from "../navigation"
+import { Icons } from "../assets"
+import { Colors, Spacing } from "../styles"
 
 /**
  * @typedef {"Checkbox" | "Date" | Radio" | "EndCaregiver" | "EndDistancing" | "EndEmergency" | "EndIsolate" } SurveyScreen
@@ -72,7 +72,7 @@ const Assessment = ({ navigation }) => {
 
   /** @type {React.MutableRefObject<SurveyAnswers>} */
   const answers = useRef({})
-  const survey = useSurvey()
+  const survey = survey_en
 
   const QuestionScreen = useMemo(
     // TODO: This question handling is a mess and should be refactored

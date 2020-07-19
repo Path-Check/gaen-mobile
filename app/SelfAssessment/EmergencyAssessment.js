@@ -1,29 +1,24 @@
 import React from "react"
-import { StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 import { Trans, useTranslation } from "react-i18next"
 
-import { View } from "react-native"
-import { Button } from "./components/Button"
-import { Typography } from "../../components/Typography"
-
-/**
- * @typedef { import(".").SurveyQuestion } SurveyQuestion
- * @typedef { import(".").SurveyOption } SurveyOption
- */
 import {
   QUESTION_KEY_AGREE,
   SCREEN_TYPE_RADIO,
   SCREEN_TYPE_EMERGENCY,
 } from "./constants"
-import { useSurvey } from "../../helpers/CustomHooks"
+import survey_en from "./survey.en.json"
 import { Info } from "./Info"
-import { Colors } from "../../styles"
-import { InfoText } from "./components/InfoText"
+import { InfoText } from "./InfoText"
+import { Button } from "./Button"
+import { Typography } from "../components/Typography"
+
+import { Colors } from "../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const EmergencyAssessment = ({ navigation }) => {
   const { t } = useTranslation()
-  const survey = useSurvey()
+  const survey = survey_en
 
   console.log(survey)
 

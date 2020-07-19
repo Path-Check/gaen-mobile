@@ -1,13 +1,13 @@
 import React, { useContext } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Icons, Images } from "../../../assets"
 import { AssessmentNavigationContext } from "../Context"
 import { Info } from "../Info"
-import { InfoText } from "../components/InfoText"
-import { Button } from "../components/Button"
+import { InfoText } from "../InfoText"
+import { Button } from "../Button"
 
-import { Colors } from "../../../styles"
+import { Icons, Images } from "../../assets"
+import { Colors } from "../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Caregiver = ({ navigation }) => {

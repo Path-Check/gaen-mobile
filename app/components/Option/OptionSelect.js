@@ -8,7 +8,7 @@ import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
   SCREEN_TYPE_RADIO,
-} from "../../views/assessment/constants"
+} from "../../SelfAssessment/constants"
 
 import {
   Colors,

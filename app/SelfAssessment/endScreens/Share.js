@@ -2,12 +2,12 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import env from "react-native-config"
 
-import { Icons } from "../../../assets"
 import { Info } from "../Info"
-import { InfoText } from "../components/InfoText"
-import { Button } from "../components/Button"
+import { InfoText } from "../InfoText"
+import { Button } from "../Button"
 
-import { Colors } from "../../../styles"
+import { Icons } from "../../assets"
+import { Colors } from "../../styles"
 
 const { GAEN_AUTHORITY_NAME: authority } = env
 
