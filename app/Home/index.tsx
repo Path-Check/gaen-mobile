@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { StyleSheet, ImageBackground, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import PermissionsContext from "../bt/PermissionsContext"
+import PermissionsContext from "../PermissionsContext"
 import { useStatusBarEffect } from "../navigation"
 import Home from "./Home"
 

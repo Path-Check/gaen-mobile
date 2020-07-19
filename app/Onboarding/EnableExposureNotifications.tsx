@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import PermissionsContext from "../bt/PermissionsContext"
+import PermissionsContext from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
@@ -10,7 +10,7 @@ import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
 import { Icons, Images } from "../assets"
 import { Colors } from "../styles"
 
-export const EnableExposureNotifications = (): JSX.Element => {
+const EnableExposureNotifications = (): JSX.Element => {
   const { t } = useTranslation()
   const { exposureNotifications } = useContext(PermissionsContext)
   const { setOnboardingIsComplete } = useOnboardingContext()
@@ -68,3 +68,5 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
 })
+
+export default EnableExposureNotifications

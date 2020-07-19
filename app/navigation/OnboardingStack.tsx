@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
-import NotificationPermissions from "../bt/NotificationPermissions"
-import { EnableExposureNotifications } from "../Onboarding/EnableExposureNotifications"
+import NotificationPermissions from "../Onboarding/NotificationPermissions"
+import EnableExposureNotifications from "../Onboarding/EnableExposureNotifications"
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
 import NotificationDetails from "../Onboarding/NotificationDetails"

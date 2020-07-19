@@ -10,12 +10,11 @@ import MoreStack, {
   MoreStackRoute,
 } from "./MoreStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-
-import { Screens, Stacks } from "./index"
+import HomeScreen from "../Home"
 
 import ExposureHistoryContext from "../ExposureHistoryContext"
-import { useTracingStrategyContext } from "../TracingStrategyContext"
 
+import { Screens, Stacks } from "./index"
 import * as Icons from "../assets/svgs/TabBarNav"
 import { Layout, Affordances, Colors } from "../styles"
 
@@ -24,7 +23,6 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useContext(ExposureHistoryContext)
-  const { homeScreenComponent } = useTracingStrategyContext()
 
   const applyBadge = (icon: JSX.Element) => {
     return (
@@ -111,7 +109,7 @@ const MainTabNavigator: FunctionComponent = () => {
     >
       <Tab.Screen
         name={Screens.Home}
-        component={homeScreenComponent}
+        component={HomeScreen}
         options={{
           tabBarLabel: t("navigation.home"),
           tabBarIcon: HomeIcon,

@@ -1,13 +1,13 @@
 import React, { createContext, useState, useEffect } from "react"
 
-import * as BTNativeModule from "./nativeModule"
+import * as BTNativeModule from "./bt/nativeModule"
 
 import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
 import { Platform } from "react-native"
-import { PermissionStatus, statusToEnum } from "../permissionStatus"
+import { PermissionStatus, statusToEnum } from "./permissionStatus"
 
 type ENEnablement = `DISABLED` | `ENABLED`
 type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`

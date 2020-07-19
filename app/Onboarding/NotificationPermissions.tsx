@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet } from "react-native"
 
-import PermissionsContext from "./PermissionsContext"
+import PermissionsContext from "../PermissionsContext"
 import { Screens } from "../navigation"
 import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"

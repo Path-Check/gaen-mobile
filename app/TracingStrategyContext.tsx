@@ -1,5 +1,6 @@
 import React, { createContext, useContext, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
+import { PermissionsProvider } from "./PermissionsContext"
 
 import {
   TracingStrategy,
@@ -12,8 +13,6 @@ import { ExposureHistoryProvider } from "./ExposureHistoryContext"
 
 interface TracingStrategyContextState {
   name: string
-  homeScreenComponent: ({ testID }: { testID: string }) => JSX.Element
-  affectedUserFlow: () => JSX.Element
   assets: StrategyAssets
   useCopy: StrategyCopyContentHook
 }
@@ -30,25 +29,21 @@ export const TracingStrategyProvider: FunctionComponent<TracingStrategyProps> = 
   children,
   strategy,
 }) => {
-  const StrategyPermissionsProvider = strategy.permissionsProvider
-
   return (
     <TracingStrategyContext.Provider
       value={{
         name: strategy.name,
-        homeScreenComponent: strategy.homeScreenComponent,
-        affectedUserFlow: strategy.affectedUserFlow,
         assets: strategy.assets,
         useCopy: strategy.useCopy,
       }}
     >
-      <StrategyPermissionsProvider>
+      <PermissionsProvider>
         <ExposureHistoryProvider
           exposureEventsStrategy={strategy.exposureEventsStrategy}
         >
           {children}
         </ExposureHistoryProvider>
-      </StrategyPermissionsProvider>
+      </PermissionsProvider>
     </TracingStrategyContext.Provider>
   )
 }

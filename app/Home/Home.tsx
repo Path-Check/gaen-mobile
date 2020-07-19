@@ -8,7 +8,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { ENPermissionStatus } from "../bt/PermissionsContext"
+import { ENPermissionStatus } from "../PermissionsContext"
 import { Typography } from "../components/Typography"
 import { isPlatformiOS } from "../Util"
 

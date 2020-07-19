@@ -1,5 +1,3 @@
-import React from "react"
-import { View } from "react-native"
 import { Factory } from "fishery"
 
 import {
@@ -19,28 +17,9 @@ export default Factory.define<TracingStrategy>(() => ({
     toExposureHistory: () => [],
     getCurrentExposures: () => {},
   },
-  permissionsProvider: PermissionsProvider,
-  homeScreenComponent: HomeScreen,
-  affectedUserFlow: AffectedUserFlow,
   assets: testStrategyAssets,
   useCopy: () => testStrategyCopy,
 }))
-
-const PermissionsProvider = ({
-  children,
-}: {
-  children: JSX.Element
-}): JSX.Element => {
-  return <View testID={"permissions-provider"}>{children}</View>
-}
-
-const HomeScreen = () => {
-  return <View testID={"home-screen"} />
-}
-
-const AffectedUserFlow = () => {
-  return <View testID={"affected-user-flow"} />
-}
 
 export const testStrategyCopy: StrategyCopyContent = {
   aboutHeader: "aboutHeader",

@@ -3,7 +3,7 @@ import { Alert, Platform } from "react-native"
 import { render, cleanup, wait, fireEvent } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 
-import { ENPermissionStatus } from "../bt/PermissionsContext"
+import { ENPermissionStatus } from "../PermissionsContext"
 import Home from "./Home"
 
 afterEach(cleanup)

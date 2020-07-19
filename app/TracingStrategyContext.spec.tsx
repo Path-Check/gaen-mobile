@@ -25,10 +25,8 @@ jest.mock("react-i18next", () => ({
 
 const renderTracingStrategyProvider = (strategy: TracingStrategy) => {
   const TestTracingStrategyConsumer = () => {
-    const { name, homeScreenComponent } = useTracingStrategyContext()
+    const { name } = useTracingStrategyContext()
     const { StrategyAssets, StrategyCopy } = useStrategyContent()
-
-    const HomeScreen = homeScreenComponent
 
     return (
       <View>
@@ -39,7 +37,6 @@ const renderTracingStrategyProvider = (strategy: TracingStrategy) => {
           style={styles.background}
         />
         <Text testID={"tracing-strategy-copy"}>{StrategyCopy.aboutHeader}</Text>
-        <HomeScreen testID={"home-screen"} />
       </View>
     )
   }
@@ -53,29 +50,6 @@ const renderTracingStrategyProvider = (strategy: TracingStrategy) => {
 
 describe("TracingStrategyProvider", () => {
   describe("when given a tracing strategy ", () => {
-    it("mounts the permssions provider", () => {
-      const PermissionsProvider = ({
-        children,
-      }: {
-        children: JSX.Element
-      }): JSX.Element => {
-        return <View testID={"permissions-provider"}>{children}</View>
-      }
-
-      const strategy = factories.tracingStrategy.build({
-        name: "test-strategy",
-        permissionsProvider: PermissionsProvider,
-      })
-
-      const { getByTestId } = renderTracingStrategyProvider(strategy)
-
-      const name = getByTestId("tracing-strategy-name")
-      const permissionsProvider = getByTestId("permissions-provider")
-
-      expect(name).toHaveTextContent("test-strategy")
-      expect(permissionsProvider).toBeTruthy()
-    })
-
     it("subscribes to exposure info events", async () => {
       const removeSubscriptionMock = jest.fn()
       const strategy = factories.tracingStrategy.build({
@@ -118,24 +92,6 @@ describe("TracingStrategyProvider", () => {
         testUri: "../../../app/assets/images/blueGradientBackground.png",
       })
       expect(copy).toHaveTextContent(expectedCopy)
-    })
-
-    describe("when the user is on the HomeScreen", () => {
-      it("Shows the correct component", async () => {
-        const HomeScreen = () => {
-          return <View testID={"home-screen"} />
-        }
-
-        const strategy = factories.tracingStrategy.build({
-          homeScreenComponent: HomeScreen,
-        })
-
-        const { getByTestId } = renderTracingStrategyProvider(strategy)
-
-        const homeScreen = getByTestId("home-screen")
-
-        expect(homeScreen).toBeTruthy()
-      })
     })
   })
 })
