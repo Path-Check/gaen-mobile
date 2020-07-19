@@ -4,4 +4,4 @@ export default `<?xml version="1.0" encoding="UTF-8"?>
 <path d="M16.3218 16.7531L18.8537 14.2124L10.4426 6.49951L1.99988 14.2124L4.53173 16.7531L8.63675 12.958V27.1601H12.2172V12.958L16.3218 16.7531Z" stroke="white"/>
 <path d="M21.2014 0H0V3.59338H21.2014V0Z" fill="#4754C5"/>
 <path d="M21.2014 0H0V3.59338H21.2014V0Z" stroke="white"/>
-</svg>`;
+</svg>`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react"
 import {
   View,
   ViewStyle,
@@ -8,92 +8,92 @@ import {
   BackHandler,
   ScrollView,
   ActivityIndicator,
-} from 'react-native';
+} from "react-native"
 
-import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { Typography } from '../../components/Typography';
-import { BTNativeModule } from '../../bt';
-import { NavigationProp, Screens } from '../../navigation';
+import { NavigationBarWrapper } from "../../components/NavigationBarWrapper"
+import { Typography } from "../../components/Typography"
+import { BTNativeModule } from "../../bt"
+import { NavigationProp, Screens } from "../../navigation"
 
-import { Colors, Spacing } from '../../styles';
+import { Colors, Spacing } from "../../styles"
 
 type ENDebugMenuProps = {
-  navigation: NavigationProp;
-};
+  navigation: NavigationProp
+}
 
-const DEBUG_VERIFICATION_CODE = '123456';
+const DEBUG_VERIFICATION_CODE = "123456"
 
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     const handleBackPress = () => {
-      navigation.goBack();
-      return true;
-    };
+      navigation.goBack()
+      return true
+    }
 
-    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    BackHandler.addEventListener("hardwareBackPress", handleBackPress)
 
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
-    };
-  }, [navigation]);
+      BackHandler.removeEventListener("hardwareBackPress", handleBackPress)
+    }
+  }, [navigation])
 
   const backToSettings = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
 
   const showErrorAlert = (errorString: string) => {
-    Alert.alert('Error', errorString, [{ text: 'OK' }], {
+    Alert.alert("Error", errorString, [{ text: "OK" }], {
       cancelable: false,
-    });
-  };
+    })
+  }
 
   const showSuccessAlert = (messageString: string) => {
     Alert.alert(
-      'Success',
+      "Success",
       messageString,
       [
         {
-          text: 'OK',
+          text: "OK",
         },
       ],
       { cancelable: false },
-    );
-  };
+    )
+  }
 
   const handleOnPressSimulationButton = (
     callSimulatedEvent: () => Promise<string>,
   ) => {
     return async () => {
       try {
-        setLoading(true);
-        const result = await callSimulatedEvent();
-        setLoading(false);
-        showSuccessAlert(result);
+        setLoading(true)
+        const result = await callSimulatedEvent()
+        setLoading(false)
+        showSuccessAlert(result)
       } catch (e) {
-        setLoading(false);
-        showErrorAlert(e.message);
+        setLoading(false)
+        showErrorAlert(e.message)
       }
-    };
-  };
+    }
+  }
 
   const showDebugVerificationCode = () => {
     Alert.alert(
-      'Debug Verification Code:',
+      "Debug Verification Code:",
       DEBUG_VERIFICATION_CODE,
       [
         {
-          text: 'OK',
+          text: "OK",
         },
       ],
       { cancelable: false },
-    );
-  };
+    )
+  }
 
   interface DebugMenuListItemProps {
-    label: string;
-    onPress: () => void;
-    style?: ViewStyle;
+    label: string
+    onPress: () => void
+    style?: ViewStyle
   }
 
   const DebugMenuListItem = ({
@@ -103,22 +103,22 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[styles.listItem, style]} onPress={onPress}>
-        <Typography use={'body1'}>{label}</Typography>
+        <Typography use={"body1"}>{label}</Typography>
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   return (
-    <NavigationBarWrapper title={'EN Debug Menu'} onBackPress={backToSettings}>
+    <NavigationBarWrapper title={"EN Debug Menu"} onBackPress={backToSettings}>
       {loading ? (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator size={'large'} />
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <ActivityIndicator size={"large"} />
         </View>
       ) : (
         <ScrollView>
           <View style={styles.section}>
             <DebugMenuListItem
-              label='Reset Exposures'
+              label="Reset Exposures"
               style={styles.lastListItem}
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.resetExposures,
@@ -127,41 +127,41 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
           </View>
           <View style={styles.section}>
             <DebugMenuListItem
-              label='Detect Exposures Now'
+              label="Detect Exposures Now"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.detectExposuresNow,
               )}
             />
             <DebugMenuListItem
-              label='Show Last Processed File Path'
+              label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.showLastProcessedFilePath,
               )}
             />
             <DebugMenuListItem
-              label='Simulate Exposure Detection Error'
+              label="Simulate Exposure Detection Error"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.simulateExposureDetectionError,
               )}
             />
             <DebugMenuListItem
-              label='Simulate Exposure'
+              label="Simulate Exposure"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.simulateExposure,
               )}
             />
             <DebugMenuListItem
-              label='Show Exposures'
+              label="Show Exposures"
               onPress={() => {
-                navigation.navigate(Screens.ExposureListDebugScreen);
+                navigation.navigate(Screens.ExposureListDebugScreen)
               }}
             />
             <DebugMenuListItem
-              label='Show Debug Verification Code'
+              label="Show Debug Verification Code"
               onPress={showDebugVerificationCode}
             />
             <DebugMenuListItem
-              label='Toggle Exposure Notifications'
+              label="Toggle Exposure Notifications"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.toggleExposureNotifications,
               )}
@@ -169,13 +169,13 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
           </View>
           <View style={styles.section}>
             <DebugMenuListItem
-              label='Show Local Diagnosis Keys'
+              label="Show Local Diagnosis Keys"
               onPress={() => {
-                navigation.navigate(Screens.ENLocalDiagnosisKey);
+                navigation.navigate(Screens.ENLocalDiagnosisKey)
               }}
             />
             <DebugMenuListItem
-              label='Get and Post Diagnosis Keys'
+              label="Get and Post Diagnosis Keys"
               style={styles.lastListItem}
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.submitExposureKeys,
@@ -185,8 +185,8 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
         </ScrollView>
       )}
     </NavigationBarWrapper>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   section: {
@@ -207,6 +207,6 @@ const styles = StyleSheet.create({
   lastListItem: {
     borderBottomWidth: 0,
   },
-});
+})
 
-export default ENDebugMenu;
+export default ENDebugMenu

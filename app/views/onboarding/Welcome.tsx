@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import React, { FunctionComponent } from "react"
+import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 import {
   Dimensions,
   ImageBackground,
@@ -8,48 +8,52 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-} from 'react-native';
+} from "react-native"
 
-import { Typography } from '../../components/Typography';
-import { EulaModal } from './EulaModal';
-import { getLocalNames } from '../../locales/languages';
+import { Typography } from "../../components/Typography"
+import { EulaModal } from "./EulaModal"
+import { getLocalNames } from "../../locales/languages"
 
-import { Images } from '../../assets';
-import { Colors } from '../../styles';
-import { Screens } from '../../navigation';
+import { Images } from "../../assets"
+import { Colors } from "../../styles"
+import { Screens } from "../../navigation"
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width
 
 const Welcome: FunctionComponent = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
-  } = useTranslation();
-  const languageName = getLocalNames()[localeCode];
+  } = useTranslation()
+  const languageName = getLocalNames()[localeCode]
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}>
+      style={styles.backgroundImage}
+    >
       <ImageBackground
         source={Images.ConcentricCircles}
-        style={styles.backgroundImage}>
+        style={styles.backgroundImage}
+      >
         <StatusBar
-          barStyle='light-content'
-          backgroundColor='transparent'
+          barStyle="light-content"
+          backgroundColor="transparent"
           translucent
         />
         <View style={styles.mainContainer}>
           <View
             style={{
               paddingTop: 60,
-              position: 'absolute',
-              alignSelf: 'center',
+              position: "absolute",
+              alignSelf: "center",
               zIndex: 10,
-            }}>
+            }}
+          >
             <TouchableOpacity
               onPress={() => navigation.navigate(Screens.LanguageSelection)}
-              style={styles.languageSelector}>
+              style={styles.languageSelector}
+            >
               <Typography style={styles.languageSelectorText}>
                 {languageName}
               </Typography>
@@ -57,7 +61,7 @@ const Welcome: FunctionComponent = () => {
           </View>
           <View style={styles.contentContainer}>
             <Typography style={styles.mainText}>
-              {t('label.launch_screen1_header')}
+              {t("label.launch_screen1_header")}
             </Typography>
           </View>
           <View style={styles.footerContainer}>
@@ -71,14 +75,14 @@ const Welcome: FunctionComponent = () => {
         </View>
       </ImageBackground>
     </ImageBackground>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
     flex: 1,
   },
   mainContainer: {
@@ -87,13 +91,13 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: width * 0.75,
     flex: 1,
-    justifyContent: 'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignSelf: "center",
   },
   mainText: {
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
+    textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "center",
     lineHeight: 35,
     color: Colors.white,
     fontSize: 26,
@@ -110,15 +114,15 @@ const styles = StyleSheet.create({
     color: Colors.white,
     paddingVertical: 4,
     paddingHorizontal: 20,
-    textAlign: 'center',
-    textTransform: 'uppercase',
+    textAlign: "center",
+    textTransform: "uppercase",
   },
   footerContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     padding: 24,
-    width: '100%',
+    width: "100%",
   },
-});
+})
 
-export default Welcome;
+export default Welcome

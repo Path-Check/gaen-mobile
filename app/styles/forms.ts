@@ -1,9 +1,9 @@
-import { ViewStyle, TextStyle } from 'react-native';
+import { ViewStyle, TextStyle } from "react-native"
 
-import * as Colors from './colors';
-import * as Spacing from './spacing';
-import * as Outlines from './outlines';
-import * as Typography from './typography';
+import * as Colors from "./colors"
+import * as Spacing from "./spacing"
+import * as Outlines from "./outlines"
+import * as Typography from "./typography"
 
 // Global Form Styles
 export const textInputFormField: TextStyle = {
@@ -13,7 +13,7 @@ export const textInputFormField: TextStyle = {
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.formInputBorder,
   borderWidth: 2,
-  justifyContent: 'center',
+  justifyContent: "center",
   fontSize: Typography.medium,
   // Just using padding breaks vertical padding on multiline text inputs
   // See issue here: https://github.com/facebook/react-native/issues/21720
@@ -21,45 +21,45 @@ export const textInputFormField: TextStyle = {
   paddingRight: Spacing.medium,
   paddingBottom: Spacing.medium,
   paddingLeft: Spacing.medium,
-};
+}
 
 export const required: TextStyle = {
   fontSize: 12,
   color: Colors.primaryText,
   marginTop: 6,
-};
+}
 
 export const checkbox: ViewStyle = {
-  flexDirection: 'row',
-  alignItems: 'center',
-};
+  flexDirection: "row",
+  alignItems: "center",
+}
 
 export const checkboxIcon: ViewStyle = {
   width: 25,
   height: 25,
   marginRight: Spacing.medium,
-};
+}
 
 export const checkboxText: TextStyle = {
   ...Typography.mediumFont,
   color: Colors.invertedText,
-};
+}
 
 export const textInput: TextStyle = {
   ...Typography.primaryTextInput,
   ...Outlines.textInput,
   padding: Spacing.small,
-  textAlign: 'center',
+  textAlign: "center",
   borderWidth: 2,
-};
+}
 
 export const inputIndicator: ViewStyle = {
-  alignItems: 'center',
+  alignItems: "center",
   borderColor: Colors.radioBorder,
   borderWidth: 2,
   height: Spacing.large,
-  justifyContent: 'center',
+  justifyContent: "center",
   marginTop: Spacing.tiny,
   marginRight: Spacing.large,
   width: Spacing.large,
-};
+}

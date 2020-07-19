@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react"
 import {
   ImageBackground,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
+} from "react-native"
+import { SvgXml } from "react-native-svg"
 
 /**
  * @typedef { import("react").ReactNode } ReactNode
@@ -32,10 +32,12 @@ export const Info = ({
   return (
     <SafeAreaView
       backgroundColor={backgroundColor}
-      style={assessmentStyles.container}>
+      style={assessmentStyles.container}
+    >
       <ImageBackground
         source={backgroundImage}
-        style={assessmentStyles.backgroundImage}>
+        style={assessmentStyles.backgroundImage}
+      >
         <ScrollView style={assessmentStyles.scrollView}>
           <View style={[assessmentStyles.scrollViewContent, scrollStyle]}>
             {icon && <SvgXml xml={icon} />}
@@ -45,8 +47,8 @@ export const Info = ({
         <View style={assessmentStyles.footer}>{footer}</View>
       </ImageBackground>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 export const assessmentStyles = StyleSheet.create({
   container: {
@@ -55,8 +57,8 @@ export const assessmentStyles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
+    resizeMode: "cover",
+    justifyContent: "center",
     borderTopWidth: 0,
   },
   scrollView: {
@@ -69,4 +71,4 @@ export const assessmentStyles = StyleSheet.create({
   footer: {
     padding: 20,
   },
-});
+})

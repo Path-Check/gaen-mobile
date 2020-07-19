@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react"
 import {
   KeyboardAvoidingView as RNKeyboardAvoidingView,
   StyleSheet,
-} from 'react-native';
+} from "react-native"
 
-import { isPlatformiOS } from '../../Util';
+import { isPlatformiOS } from "../../Util"
 
 export const KeyboardAvoidingView = ({ behavior, children }) => {
   return (
@@ -12,14 +12,15 @@ export const KeyboardAvoidingView = ({ behavior, children }) => {
       accessible={false}
       style={styles.keyboardView}
       autoScrollToFocusedInput
-      behavior={isPlatformiOS() ? behavior : null}>
+      behavior={isPlatformiOS() ? behavior : null}
+    >
       {children}
     </RNKeyboardAvoidingView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   keyboardView: {
     flex: 1,
   },
-});
+})

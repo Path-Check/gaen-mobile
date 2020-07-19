@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent } from "react"
 
-import { eulaModal } from './EulaModal';
+import { eulaModal } from "./EulaModal"
 
 interface EulaModalProps {
-  continueFunction: () => void;
-  selectedLocale: string;
+  continueFunction: () => void
+  selectedLocale: string
 }
 
-export const EulaModal: FunctionComponent<EulaModalProps> = eulaModal;
+export const EulaModal: FunctionComponent<EulaModalProps> = eulaModal

@@ -1,20 +1,20 @@
-import React, { FunctionComponent } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { FunctionComponent } from "react"
+import { createStackNavigator } from "@react-navigation/stack"
 
-import NotificationPermissions from '../bt/NotificationPermissions';
-import { EnableExposureNotifications } from '../views/onboarding/EnableExposureNotifications';
-import Welcome from '../views/onboarding/Welcome';
-import PersonalPrivacy from '../views/onboarding/PersonalPrivacy';
-import NotificationDetails from '../views/onboarding/NotificationDetails';
-import ShareDiagnosis from '../views/onboarding/ShareDiagnosis';
+import NotificationPermissions from "../bt/NotificationPermissions"
+import { EnableExposureNotifications } from "../views/onboarding/EnableExposureNotifications"
+import Welcome from "../views/onboarding/Welcome"
+import PersonalPrivacy from "../views/onboarding/PersonalPrivacy"
+import NotificationDetails from "../views/onboarding/NotificationDetails"
+import ShareDiagnosis from "../views/onboarding/ShareDiagnosis"
 
-import { Screens } from './index';
+import { Screens } from "./index"
 
 const SCREEN_OPTIONS = {
   headerShown: false,
-};
+}
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const OnboardingStack: FunctionComponent = () => (
   <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
@@ -34,6 +34,6 @@ const OnboardingStack: FunctionComponent = () => (
       component={EnableExposureNotifications}
     />
   </Stack.Navigator>
-);
+)
 
-export default OnboardingStack;
+export default OnboardingStack

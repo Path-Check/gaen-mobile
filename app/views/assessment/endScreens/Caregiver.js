@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from "react"
+import { useTranslation } from "react-i18next"
 
-import { Icons, Images } from '../../../assets';
-import { AssessmentNavigationContext } from '../Context';
-import { Info } from '../Info';
-import { InfoText } from '../components/InfoText';
-import { Button } from '../components/Button';
+import { Icons, Images } from "../../../assets"
+import { AssessmentNavigationContext } from "../Context"
+import { Info } from "../Info"
+import { InfoText } from "../components/InfoText"
+import { Button } from "../components/Button"
 
-import { Colors } from '../../../styles';
+import { Colors } from "../../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Caregiver = ({ navigation }) => {
-  const { t } = useTranslation();
-  const { completeRoute } = useContext(AssessmentNavigationContext);
+  const { t } = useTranslation()
+  const { completeRoute } = useContext(AssessmentNavigationContext)
 
-  const handleButtonPress = () => navigation.push(completeRoute);
+  const handleButtonPress = () => navigation.push(completeRoute)
 
   return (
     <Info
@@ -24,14 +24,15 @@ export const Caregiver = ({ navigation }) => {
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t('assessment.caregiver_cta')}
+          title={t("assessment.caregiver_cta")}
         />
-      }>
+      }
+    >
       <InfoText
-        useTitleStyle='headline2'
-        title={t('assessment.caregiver_title')}
-        description={t('assessment.caregiver_description')}
+        useTitleStyle="headline2"
+        title={t("assessment.caregiver_title")}
+        description={t("assessment.caregiver_description")}
       />
     </Info>
-  );
-};
+  )
+}

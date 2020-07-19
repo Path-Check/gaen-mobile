@@ -1,20 +1,20 @@
-import React from 'react';
-import { View } from 'react-native';
-import { Factory } from 'fishery';
+import React from "react"
+import { View } from "react-native"
+import { Factory } from "fishery"
 
 import {
   TracingStrategy,
   StrategyCopyContent,
   StrategyAssets,
-} from '../tracingStrategy';
+} from "../tracingStrategy"
 
-import { Images } from '../../app/assets/images';
+import { Images } from "../../app/assets/images"
 
 export default Factory.define<TracingStrategy>(() => ({
-  name: 'test-tracing-strategy',
+  name: "test-tracing-strategy",
   exposureEventsStrategy: {
     exposureInfoSubscription: () => {
-      return { remove: () => {} };
+      return { remove: () => {} }
     },
     toExposureHistory: () => [],
     getCurrentExposures: () => {},
@@ -24,46 +24,46 @@ export default Factory.define<TracingStrategy>(() => ({
   affectedUserFlow: AffectedUserFlow,
   assets: testStrategyAssets,
   useCopy: () => testStrategyCopy,
-}));
+}))
 
 const PermissionsProvider = ({
   children,
 }: {
-  children: JSX.Element;
+  children: JSX.Element
 }): JSX.Element => {
-  return <View testID={'permissions-provider'}>{children}</View>;
-};
+  return <View testID={"permissions-provider"}>{children}</View>
+}
 
 const HomeScreen = () => {
-  return <View testID={'home-screen'} />;
-};
+  return <View testID={"home-screen"} />
+}
 
 const AffectedUserFlow = () => {
-  return <View testID={'affected-user-flow'} />;
-};
+  return <View testID={"affected-user-flow"} />
+}
 
 export const testStrategyCopy: StrategyCopyContent = {
-  aboutHeader: 'aboutHeader',
-  detailedHistoryWhatThisMeansPara: 'detailedHistoryWhatThisMeansPara',
-  exportCompleteBody: 'exportCompleteBody',
-  exportPublishButtonSubtitle: 'exportPublishButtonSubtitle',
+  aboutHeader: "aboutHeader",
+  detailedHistoryWhatThisMeansPara: "detailedHistoryWhatThisMeansPara",
+  exportCompleteBody: "exportCompleteBody",
+  exportPublishButtonSubtitle: "exportPublishButtonSubtitle",
   exposureNotificationsNotAvailableHeader:
-    'exposureNotificationsNotAvailableHeader',
+    "exposureNotificationsNotAvailableHeader",
   exposureNotificationsNotAvailableSubheader:
-    'exposureNotificationsNotAvailableSubheader',
-  moreInfoHowContent: 'moreInfoHowContent',
-  moreInfoWhyContent: 'moreInfoWhyContent',
-  personalPrivacyHeader: 'onboarding2Header',
-  personalPrivacySubheader: 'onboarding2Subheader',
-  notificationDetailsHeader: 'onboarding3Header',
-  notificationDetailsSubheader: 'onboarding3Subheader',
-  settingsLoggingActive: 'settingsLoggingActive)',
-  settingsLoggingInactive: 'settingsLoggingInactive',
-};
+    "exposureNotificationsNotAvailableSubheader",
+  moreInfoHowContent: "moreInfoHowContent",
+  moreInfoWhyContent: "moreInfoWhyContent",
+  personalPrivacyHeader: "onboarding2Header",
+  personalPrivacySubheader: "onboarding2Subheader",
+  notificationDetailsHeader: "onboarding3Header",
+  notificationDetailsSubheader: "onboarding3Subheader",
+  settingsLoggingActive: "settingsLoggingActive)",
+  settingsLoggingInactive: "settingsLoggingInactive",
+}
 
 export const testStrategyAssets: StrategyAssets = {
   personalPrivacyBackground: Images.BlueGradientBackground,
-  personalPrivacyIcon: '',
+  personalPrivacyIcon: "",
   notificationDetailsBackground: Images.BlueGradientBackground,
-  notificationDetailsIcon: '',
-};
+  notificationDetailsIcon: "",
+}

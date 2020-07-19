@@ -1,3 +1,3 @@
-import * as TimeHelpers from './timeHelpers';
+import * as TimeHelpers from "./timeHelpers"
 
-export { TimeHelpers };
+export { TimeHelpers }

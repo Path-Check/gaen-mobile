@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 import {
   ImageBackground,
   StyleSheet,
@@ -7,12 +7,12 @@ import {
   ScrollView,
   ImageSourcePropType,
   ViewStyle,
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
+} from "react-native"
+import { SvgXml } from "react-native-svg"
 
-import { Button } from '../../components/Button';
-import { useStatusBarEffect } from '../../navigation';
-import { Typography } from '../../components/Typography';
+import { Button } from "../../components/Button"
+import { useStatusBarEffect } from "../../navigation"
+import { Typography } from "../../components/Typography"
 
 import {
   Buttons,
@@ -20,7 +20,7 @@ import {
   Spacing,
   Iconography,
   Typography as TypographyStyles,
-} from '../../styles';
+} from "../../styles"
 
 export enum IconStyle {
   Blue,
@@ -28,34 +28,34 @@ export enum IconStyle {
 }
 
 type ExplanationScreenContent = {
-  icon: string;
-  header: string;
-  body: string;
-  primaryButtonLabel: string;
-  backgroundImage: ImageSourcePropType;
-  secondaryButtonLabel?: string;
-};
+  icon: string
+  header: string
+  body: string
+  primaryButtonLabel: string
+  backgroundImage: ImageSourcePropType
+  secondaryButtonLabel?: string
+}
 
 type ExplanationScreenStyles = {
-  headerStyle?: TextStyle;
-  bodyStyle?: TextStyle;
-  primaryButtonContainerStyle?: ViewStyle;
-  primaryButtonTextStyle?: TextStyle;
-  secondaryButtonContainerStyle?: ViewStyle;
-  secondaryButtonTextStyle?: TextStyle;
-  backgroundStyle?: ViewStyle;
-  iconStyle: IconStyle;
-};
+  headerStyle?: TextStyle
+  bodyStyle?: TextStyle
+  primaryButtonContainerStyle?: ViewStyle
+  primaryButtonTextStyle?: TextStyle
+  secondaryButtonContainerStyle?: ViewStyle
+  secondaryButtonTextStyle?: TextStyle
+  backgroundStyle?: ViewStyle
+  iconStyle: IconStyle
+}
 
 type ExplanationScreenActions = {
-  primaryButtonOnPress: () => void;
-  secondaryButtonOnPress?: () => void;
-};
+  primaryButtonOnPress: () => void
+  secondaryButtonOnPress?: () => void
+}
 
 interface ExplanationScreenProps {
-  explanationScreenContent: ExplanationScreenContent;
-  explanationScreenStyles: ExplanationScreenStyles;
-  explanationScreenActions: ExplanationScreenActions;
+  explanationScreenContent: ExplanationScreenContent
+  explanationScreenStyles: ExplanationScreenStyles
+  explanationScreenActions: ExplanationScreenActions
 }
 
 const ExplanationScreen = ({
@@ -63,46 +63,46 @@ const ExplanationScreen = ({
   explanationScreenStyles,
   explanationScreenActions,
 }: ExplanationScreenProps): JSX.Element => {
-  useStatusBarEffect('dark-content');
+  useStatusBarEffect("dark-content")
 
   const determineIconStyle = (iconStyle: IconStyle): ViewStyle => {
     switch (iconStyle) {
       case IconStyle.Blue:
-        return styles.blueIcon;
+        return styles.blueIcon
       case IconStyle.Gold:
-        return styles.goldIcon;
+        return styles.goldIcon
     }
-  };
+  }
 
   const primaryButtonTextStyles = {
     ...styles.primaryButtonText,
     ...explanationScreenStyles.primaryButtonTextStyle,
-  };
+  }
 
   const secondaryButtonTextStyles = {
     ...styles.secondaryButtonText,
     ...explanationScreenStyles.secondaryButtonTextStyle,
-  };
+  }
 
   const headerStyles = {
     ...styles.headerText,
     ...explanationScreenStyles.headerStyle,
-  };
+  }
 
   const contentStyles = {
     ...styles.contentText,
     ...explanationScreenStyles.bodyStyle,
-  };
+  }
 
   const primaryButtonStyles = {
     ...styles.primaryButton,
     ...explanationScreenStyles.primaryButtonContainerStyle,
-  };
+  }
 
   const secondaryButtonStyles = {
     ...styles.secondaryButton,
     ...explanationScreenStyles.secondaryButtonContainerStyle,
-  };
+  }
 
   return (
     <View style={styles.outerContainer}>
@@ -114,7 +114,8 @@ const ExplanationScreen = ({
         <ScrollView
           alwaysBounceVertical={false}
           style={styles.innerContainer}
-          contentContainerStyle={{ paddingBottom: Spacing.large }}>
+          contentContainerStyle={{ paddingBottom: Spacing.large }}
+        >
           <View style={determineIconStyle(explanationScreenStyles.iconStyle)}>
             <SvgXml xml={explanationScreenContent.icon} />
           </View>
@@ -142,8 +143,8 @@ const ExplanationScreen = ({
           )}
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   outerContainer: {
@@ -154,10 +155,10 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.large,
   },
   background: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    position: "absolute",
   },
   blueIcon: {
     ...Iconography.largeBlueIcon,
@@ -190,6 +191,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     ...TypographyStyles.buttonTextLight,
   },
-});
+})
 
-export default ExplanationScreen;
+export default ExplanationScreen

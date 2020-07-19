@@ -1,20 +1,20 @@
-import { CardStyleInterpolators } from '@react-navigation/stack';
-import React, { useMemo, useRef } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SvgXml } from 'react-native-svg';
+import { CardStyleInterpolators } from "@react-navigation/stack"
+import React, { useMemo, useRef } from "react"
+import { StyleSheet, TouchableOpacity } from "react-native"
+import { createStackNavigator } from "@react-navigation/stack"
+import { SvgXml } from "react-native-svg"
 
-import { Icons } from '../../assets';
-import { useSurvey } from '../../helpers/CustomHooks';
+import { Icons } from "../../assets"
+import { useSurvey } from "../../helpers/CustomHooks"
 import {
   AnswersContext,
   AssessmentNavigationContext,
   SurveyContext,
-} from './Context';
-import { AssessmentQuestion } from './AssessmentQuestion';
-import { AssessmentStart } from './AssessmentStart';
-import { Agreement } from './Agreement';
-import { EmergencyAssessment } from './EmergencyAssessment';
+} from "./Context"
+import { AssessmentQuestion } from "./AssessmentQuestion"
+import { AssessmentStart } from "./AssessmentStart"
+import { Agreement } from "./Agreement"
+import { EmergencyAssessment } from "./EmergencyAssessment"
 import {
   END_ROUTES,
   SCREEN_TYPE_CAREGIVER,
@@ -22,16 +22,16 @@ import {
   SCREEN_TYPE_EMERGENCY,
   SCREEN_TYPE_END,
   SCREEN_TYPE_ISOLATE,
-} from './constants';
-import { Caregiver } from './endScreens/Caregiver';
-import { AssessmentComplete } from './endScreens/AssessmentComplete';
-import { Distancing } from './endScreens/Distancing';
-import { Emergency } from './endScreens/Emergency';
-import { Isolate } from './endScreens/Isolate';
-import { Share } from './endScreens/Share';
-import { useStatusBarEffect } from '../../navigation';
+} from "./constants"
+import { Caregiver } from "./endScreens/Caregiver"
+import { AssessmentComplete } from "./endScreens/AssessmentComplete"
+import { Distancing } from "./endScreens/Distancing"
+import { Emergency } from "./endScreens/Emergency"
+import { Isolate } from "./endScreens/Isolate"
+import { Share } from "./endScreens/Share"
+import { useStatusBarEffect } from "../../navigation"
 
-import { Colors, Spacing } from '../../styles';
+import { Colors, Spacing } from "../../styles"
 
 /**
  * @typedef {"Checkbox" | "Date" | Radio" | "EndCaregiver" | "EndDistancing" | "EndEmergency" | "EndIsolate" } SurveyScreen
@@ -65,14 +65,14 @@ import { Colors, Spacing } from '../../styles';
 
 /** @type {{ [key: string]: Survey }} */
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const Assessment = ({ navigation }) => {
-  useStatusBarEffect('dark-content');
+  useStatusBarEffect("dark-content")
 
   /** @type {React.MutableRefObject<SurveyAnswers>} */
-  const answers = useRef({});
-  const survey = useSurvey();
+  const answers = useRef({})
+  const survey = useSurvey()
 
   const QuestionScreen = useMemo(
     // TODO: This question handling is a mess and should be refactored
@@ -83,56 +83,58 @@ const Assessment = ({ navigation }) => {
       <AssessmentQuestion
         {...route.params}
         onNext={() => {
-          onNextQuestion({ answers, navigation, route, survey });
+          onNextQuestion({ answers, navigation, route, survey })
         }}
         onChange={(value) => {
-          let { question } = route.params;
-          answers.current[question.question_key] = value;
+          let { question } = route.params
+          answers.current[question.question_key] = value
         }}
       />
     ),
     [answers, survey],
-  );
+  )
 
   const meta = useMemo(
     () => ({
-      completeRoute: 'EndShare',
+      completeRoute: "EndShare",
       dismiss: () => {
-        navigation.navigate('AssessmentStart');
+        navigation.navigate("AssessmentStart")
       },
     }),
     [navigation],
-  );
+  )
   const screenOptions = (backgroundColor = Colors.surveyPrimaryBackground) => ({
     headerHideShadow: true,
-    headerTitle: '',
+    headerTitle: "",
     headerStyle: {
       backgroundColor: backgroundColor,
       shadowColor: Colors.transparent,
       shadowOffset: { height: 0, width: 0 }, // this removes the header border
     },
     headerLeft: AssessmentBackButton,
-  });
+  })
 
   const AssessmentBackButton = () => {
     return (
       <TouchableOpacity
         onPress={() => navigation.pop()}
-        style={styles.assessmentIconContainer}>
+        style={styles.assessmentIconContainer}
+      >
         <SvgXml xml={Icons.BackArrow} style={styles.assessmentIcon} />
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   const AssessmentCloseButton = () => {
     return (
       <TouchableOpacity
         onPress={() => navigation.popToTop()}
-        style={styles.assessmentIconContainer}>
+        style={styles.assessmentIconContainer}
+      >
         <SvgXml xml={Icons.Close} style={styles.assessmentIcon} />
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   return (
     <AssessmentNavigationContext.Provider value={meta}>
@@ -141,16 +143,17 @@ const Assessment = ({ navigation }) => {
         when mutated, but that's ok — just trying to avoid prop drilling.*/}
         <AnswersContext.Provider value={answers.current}>
           <Stack.Navigator
-            initialRouteName='AssessmentStart'
+            initialRouteName="AssessmentStart"
             screenOptions={{
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               cardStyle: {
                 backgroundColor: Colors.transparent,
               },
-            }}>
+            }}
+          >
             <Stack.Screen
               component={AssessmentStart}
-              name='AssessmentStart'
+              name="AssessmentStart"
               options={{
                 ...screenOptions(),
                 headerLeft: () => null,
@@ -158,24 +161,24 @@ const Assessment = ({ navigation }) => {
             />
             <Stack.Screen
               component={Agreement}
-              name='Agreement'
+              name="Agreement"
               options={{
                 ...screenOptions(Colors.invertedPrimaryBackground),
               }}
             />
             <Stack.Screen
               component={EmergencyAssessment}
-              name='EmergencyAssessment'
+              name="EmergencyAssessment"
               options={screenOptions()}
             />
             <Stack.Screen
               component={QuestionScreen}
-              name='AssessmentQuestion'
+              name="AssessmentQuestion"
               options={screenOptions()}
             />
             <Stack.Screen
               component={AssessmentComplete}
-              name='AssessmentComplete'
+              name="AssessmentComplete"
               options={{
                 ...screenOptions(),
                 headerLeft: () => null,
@@ -183,7 +186,7 @@ const Assessment = ({ navigation }) => {
             />
             <Stack.Screen
               component={Share}
-              name='EndShare'
+              name="EndShare"
               options={{
                 ...screenOptions(Colors.invertedPrimaryBackground),
                 headerRight: AssessmentCloseButton,
@@ -213,19 +216,19 @@ const Assessment = ({ navigation }) => {
         </AnswersContext.Provider>
       </SurveyContext.Provider>
     </AssessmentNavigationContext.Provider>
-  );
-};
+  )
+}
 
-export default Assessment;
+export default Assessment
 
 /**
  * @param survey {Survey}
  * @param key {string}
  */
 function getQuestion(survey, key) {
-  const question = survey.questions.find((q) => q.question_key === key);
-  const option = survey.options.find((o) => o.key === question.option_key);
-  return { question, option };
+  const question = survey.questions.find((q) => q.question_key === key)
+  const option = survey.options.find((o) => o.key === question.option_key)
+  return { question, option }
 }
 
 /**
@@ -238,36 +241,36 @@ function getQuestion(survey, key) {
  */
 function onNextQuestion({ answers, navigation, route, survey }) {
   /** @type {{ question: SurveyQuestion }} */
-  const { question } = route.params;
-  const response = answers.current[question.question_key];
+  const { question } = route.params
+  const response = answers.current[question.question_key]
 
-  const nextKey = selectNextQuestion(survey, question, response);
+  const nextKey = selectNextQuestion(survey, question, response)
 
-  let nextQuestion = getQuestion(survey, nextKey);
+  let nextQuestion = getQuestion(survey, nextKey)
   if (nextQuestion.question.question_type === SCREEN_TYPE_END) {
     if (END_ROUTES.includes(nextQuestion.question.screen_type))
-      return navigation.push(nextQuestion.question.screen_type);
-    navigation.push('AssessmentComplete');
-    return;
+      return navigation.push(nextQuestion.question.screen_type)
+    navigation.push("AssessmentComplete")
+    return
   }
 
   navigation.push(`AssessmentQuestion`, {
     ...nextQuestion,
-  });
+  })
 }
 
 function selectNextQuestion(survey, question, answer) {
   let index = survey.questions.findIndex(
     (q) => q.question_key === question.question_key,
-  );
+  )
   if (question.conditions) {
     for (const condition of question.conditions) {
       if (answer.some((r) => r.value === condition.response)) {
-        return condition.jump_to_key;
+        return condition.jump_to_key
       }
     }
   }
-  return survey.questions[index + 1].question_key;
+  return survey.questions[index + 1].question_key
 }
 
 const styles = StyleSheet.create({
@@ -277,4 +280,4 @@ const styles = StyleSheet.create({
   assessmentIcon: {
     color: Colors.quaternaryViolet,
   },
-});
+})

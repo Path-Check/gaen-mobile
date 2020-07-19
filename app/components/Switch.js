@@ -1,13 +1,13 @@
-import React from 'react';
-import { Switch as RNSwitch } from 'react-native';
+import React from "react"
+import { Switch as RNSwitch } from "react-native"
 
-import { Colors } from '../styles';
+import { Colors } from "../styles"
 
 export const Switch = ({
   onValueChange,
   value = false,
   trackColor = { false: Colors.darkGray, true: Colors.success },
-  testID = 'switch',
+  testID = "switch",
   thumbColor = Colors.white,
   style,
 }) => {
@@ -20,5 +20,5 @@ export const Switch = ({
       testID={testID}
       style={style}
     />
-  );
-};
+  )
+}

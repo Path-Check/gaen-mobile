@@ -1,62 +1,62 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react"
 import {
   TransitionPresets,
   createStackNavigator,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack"
 
-import SettingsScreen from '../views/Settings';
-import AboutScreen from '../views/About';
-import LicensesScreen from '../views/Licenses';
-import AffectedUserStack from '../bt/AffectedUserFlow';
-import ENDebugMenu from '../views/Settings/ENDebugMenu';
-import ENLocalDiagnosisKeyScreen from '../views/Settings/ENLocalDiagnosisKeyScreen';
-import ExposureListDebugScreen from '../views/Settings/ExposureListDebugScreen';
-import LanguageSelection from '../views/LanguageSelection';
+import SettingsScreen from "../views/Settings"
+import AboutScreen from "../views/About"
+import LicensesScreen from "../views/Licenses"
+import AffectedUserStack from "../bt/AffectedUserFlow"
+import ENDebugMenu from "../views/Settings/ENDebugMenu"
+import ENLocalDiagnosisKeyScreen from "../views/Settings/ENLocalDiagnosisKeyScreen"
+import ExposureListDebugScreen from "../views/Settings/ExposureListDebugScreen"
+import LanguageSelection from "../views/LanguageSelection"
 
-import { Screens, Stacks } from './index';
+import { Screens, Stacks } from "./index"
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const SCREEN_OPTIONS = {
   headerShown: false,
-};
+}
 
 type MoreStackRouteName =
-  | 'Settings'
-  | 'About'
-  | 'Licenses'
-  | 'ENDebugMenu'
-  | 'LanguageSelection'
-  | 'AffectedUserFlow'
-  | 'ExposureListDebugScreen'
-  | 'ENLocalDiagnosisKey';
+  | "Settings"
+  | "About"
+  | "Licenses"
+  | "ENDebugMenu"
+  | "LanguageSelection"
+  | "AffectedUserFlow"
+  | "ExposureListDebugScreen"
+  | "ENLocalDiagnosisKey"
 
 interface MoreStackRouteState {
-  index: number;
-  key: string;
-  routeNames: MoreStackRouteName[];
-  routes: MoreStackRoute[];
-  stale: boolean;
-  type: 'stack';
+  index: number
+  key: string
+  routeNames: MoreStackRouteName[]
+  routes: MoreStackRoute[]
+  stale: boolean
+  type: "stack"
 }
 
 export interface MoreStackRoute {
-  key: string;
-  name: 'More';
-  params: undefined;
-  state?: MoreStackRouteState;
+  key: string
+  name: "More"
+  params: undefined
+  state?: MoreStackRouteState
 }
 
 export const determineTabBarVisibility = (route: MoreStackRoute): boolean => {
   if (route.state) {
-    const routeState = route.state;
-    const currentRoute = routeState.routes[routeState.index];
-    const routeName = currentRoute.name;
-    return routeName != Stacks.AffectedUserFlow;
+    const routeState = route.state
+    const currentRoute = routeState.routes[routeState.index]
+    const routeName = currentRoute.name
+    return routeName != Stacks.AffectedUserFlow
   } else {
-    return true;
+    return true
   }
-};
+}
 
 const MoreStack: FunctionComponent = () => {
   return (
@@ -86,7 +86,7 @@ const MoreStack: FunctionComponent = () => {
         component={ENLocalDiagnosisKeyScreen}
       />
     </Stack.Navigator>
-  );
-};
+  )
+}
 
-export default MoreStack;
+export default MoreStack

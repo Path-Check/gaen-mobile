@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
   Alert,
@@ -7,64 +7,66 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native"
+import { SvgXml } from "react-native-svg"
+import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
-import { Button } from '../../../components/Button';
-import { Typography } from '../../../components/Typography';
-import * as BTNativeModule from '../../nativeModule';
+import { Button } from "../../../components/Button"
+import { Typography } from "../../../components/Typography"
+import * as BTNativeModule from "../../nativeModule"
 
-import { Screens } from '../../../navigation';
-import { Icons, Images } from '../../../assets';
+import { Screens } from "../../../navigation"
+import { Icons, Images } from "../../../assets"
 import {
   Colors,
   Spacing,
   Buttons,
   Iconography,
   Typography as TypographyStyles,
-} from '../../../styles';
+} from "../../../styles"
 
 interface PublishConsentFormProps {
-  hmacKey: string;
-  certificate: string;
+  hmacKey: string
+  certificate: string
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   hmacKey,
   certificate,
 }) => {
-  const navigation = useNavigation();
-  const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation()
+  const { t } = useTranslation()
+  const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      await BTNativeModule.submitDiagnosisKeys(certificate, hmacKey);
-      setIsLoading(false);
-      navigation.navigate(Screens.AffectedUserComplete);
+      await BTNativeModule.submitDiagnosisKeys(certificate, hmacKey)
+      setIsLoading(false)
+      navigation.navigate(Screens.AffectedUserComplete)
     } catch (e) {
-      setIsLoading(false);
-      Alert.alert(t('common.something_went_wrong'), e.message);
+      setIsLoading(false)
+      Alert.alert(t("common.something_went_wrong"), e.message)
     }
-  };
+  }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings);
-  };
+    navigation.navigate(Screens.Settings)
+  }
 
-  const title = t('export.publish_consent_title_bluetooth');
-  const body = t('export.publish_consent_body_bluetooth');
+  const title = t("export.publish_consent_title_bluetooth")
+  const body = t("export.publish_consent_body_bluetooth")
 
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}>
+      style={styles.backgroundImage}
+    >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={styles.contentContainer}>
+          contentContainerStyle={styles.contentContainer}
+        >
           <View style={styles.icon}>
             <SvgXml
               xml={Icons.Bell}
@@ -81,24 +83,25 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           <View>
             <Button
               loading={isLoading}
-              label={t('export.consent_button_title')}
+              label={t("export.consent_button_title")}
               onPress={handleOnPressConfirm}
               style={styles.button}
               textStyle={styles.buttonText}
             />
             <TouchableOpacity
               onPress={handleOnPressCancel}
-              style={styles.secondaryButton}>
+              style={styles.secondaryButton}
+            >
               <Typography style={styles.secondaryButtonText}>
-                {t('export.consent_button_cancel')}
+                {t("export.consent_button_cancel")}
               </Typography>
             </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>
     </ImageBackground>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -107,9 +110,9 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   content: {
     paddingBottom: Spacing.xxHuge,
@@ -139,6 +142,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     ...TypographyStyles.buttonTextSecondaryInverted,
   },
-});
+})
 
-export default PublishConsentForm;
+export default PublishConsentForm

@@ -1,22 +1,23 @@
-import React, { useContext } from 'react';
-import { StyleSheet, ImageBackground, View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
+import React, { useContext } from "react"
+import { StyleSheet, ImageBackground, View } from "react-native"
+import { SvgXml } from "react-native-svg"
 
-import PermissionsContext from '../PermissionsContext';
-import { useStatusBarEffect } from '../../navigation';
-import Home from './Home';
+import PermissionsContext from "../PermissionsContext"
+import { useStatusBarEffect } from "../../navigation"
+import Home from "./Home"
 
-import { Icons, Images } from '../../assets';
-import { Spacing, Layout } from '../../styles';
+import { Icons, Images } from "../../assets"
+import { Spacing, Layout } from "../../styles"
 
 const HomeScreen = (): JSX.Element => {
-  useStatusBarEffect('light-content');
-  const { exposureNotifications } = useContext(PermissionsContext);
+  useStatusBarEffect("light-content")
+  const { exposureNotifications } = useContext(PermissionsContext)
 
   return (
     <ImageBackground
       style={styles.backgroundImage}
-      source={Images.BlueGradientBackground}>
+      source={Images.BlueGradientBackground}
+    >
       <View style={styles.iconContainer}>
         <SvgXml
           xml={Icons.StateNoContact}
@@ -31,17 +32,17 @@ const HomeScreen = (): JSX.Element => {
         />
       </View>
     </ImageBackground>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
   iconContainer: {
-    position: 'absolute',
+    position: "absolute",
     left: -(Layout.screenWidth / 2),
     bottom: -(Layout.screenHeight / 3),
   },
@@ -49,6 +50,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: Spacing.medium,
   },
-});
+})
 
-export default HomeScreen;
+export default HomeScreen

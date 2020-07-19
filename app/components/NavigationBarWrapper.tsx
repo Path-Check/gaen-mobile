@@ -1,30 +1,30 @@
-import React from 'react';
-import { SafeAreaView, TouchableOpacity, View, StyleSheet } from 'react-native';
-import { SvgXml } from 'react-native-svg';
+import React from "react"
+import { SafeAreaView, TouchableOpacity, View, StyleSheet } from "react-native"
+import { SvgXml } from "react-native-svg"
 
-import { useStatusBarEffect } from '../navigation';
-import { Typography } from './Typography';
+import { useStatusBarEffect } from "../navigation"
+import { Typography } from "./Typography"
 
-import { Icons } from '../assets';
-import { Spacing, Colors, Typography as TypographyStyles } from '../styles';
-import { isPlatformAndroid } from '../Util';
+import { Icons } from "../assets"
+import { Spacing, Colors, Typography as TypographyStyles } from "../styles"
+import { isPlatformAndroid } from "../Util"
 
 interface NavigationBarWrapperProps {
-  children: React.ReactNode;
-  title: string;
-  onBackPress?: () => void;
-  includeBackButton?: boolean;
+  children: React.ReactNode
+  title: string
+  onBackPress?: () => void
+  includeBackButton?: boolean
 }
 
 export interface ThemeProps {
-  navBar: string;
-  background: string;
-  navBarBorder: string;
-  onNavBar: string;
+  navBar: string
+  background: string
+  navBarBorder: string
+  onNavBar: string
 }
 
 export interface Theme {
-  theme: ThemeProps;
+  theme: ThemeProps
 }
 
 export const NavigationBarWrapper = ({
@@ -33,13 +33,13 @@ export const NavigationBarWrapper = ({
   onBackPress,
   includeBackButton = true,
 }: NavigationBarWrapperProps): JSX.Element => {
-  useStatusBarEffect('light-content');
+  useStatusBarEffect("light-content")
 
   const handleOnPressBack = () => {
     if (onBackPress) {
-      onBackPress();
+      onBackPress()
     }
-  };
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,8 +62,8 @@ export const NavigationBarWrapper = ({
       </View>
       <View style={styles.contentContainer}>{children}</View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -72,9 +72,9 @@ const styles = StyleSheet.create({
     paddingTop: isPlatformAndroid() ? Spacing.xSmall : 0,
   },
   headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     backgroundColor: Colors.navBar,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.small,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   middleContent: {
     flex: 3,
-    alignItems: 'center',
+    alignItems: "center",
   },
   rightContent: {
     flex: 1,
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
     flex: 1,
   },
-});
+})

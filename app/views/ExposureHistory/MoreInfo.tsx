@@ -1,33 +1,34 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
+import React from "react"
+import { View, ScrollView, StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
-import { Typography } from '../../components/Typography';
-import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { useStatusBarEffect } from '../../navigation';
-import { useStrategyContent } from '../../TracingStrategyContext';
+import { Typography } from "../../components/Typography"
+import { NavigationBarWrapper } from "../../components/NavigationBarWrapper"
+import { useStatusBarEffect } from "../../navigation"
+import { useStrategyContent } from "../../TracingStrategyContext"
 
-import { Spacing, Typography as TypographyStyles } from '../../styles';
+import { Spacing, Typography as TypographyStyles } from "../../styles"
 
 const MoreInfo = (): JSX.Element => {
-  const { t } = useTranslation();
-  const navigation = useNavigation();
-  useStatusBarEffect('light-content');
-  const { StrategyCopy } = useStrategyContent();
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+  useStatusBarEffect("light-content")
+  const { StrategyCopy } = useStrategyContent()
 
   const handleOnBackPress = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
 
   return (
     <NavigationBarWrapper
-      title={t('screen_titles.more_info')}
-      onBackPress={handleOnBackPress}>
+      title={t("screen_titles.more_info")}
+      onBackPress={handleOnBackPress}
+    >
       <ScrollView style={styles.container}>
         <View style={styles.contentContainer}>
           <Typography style={styles.headerText}>
-            {t('exposure_history.why_did_i_get_an_en')}
+            {t("exposure_history.why_did_i_get_an_en")}
           </Typography>
           <Typography style={styles.contentText}>
             {StrategyCopy.moreInfoWhyContent}
@@ -35,7 +36,7 @@ const MoreInfo = (): JSX.Element => {
         </View>
         <View style={styles.contentContainer}>
           <Typography style={styles.headerText}>
-            {t('exposure_history.how_does_this_work')}
+            {t("exposure_history.how_does_this_work")}
           </Typography>
           <Typography style={styles.contentText}>
             {StrategyCopy.moreInfoHowContent}
@@ -43,8 +44,8 @@ const MoreInfo = (): JSX.Element => {
         </View>
       </ScrollView>
     </NavigationBarWrapper>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +61,6 @@ const styles = StyleSheet.create({
     ...TypographyStyles.mainContent,
     paddingTop: Spacing.small,
   },
-});
+})
 
-export default MoreInfo;
+export default MoreInfo

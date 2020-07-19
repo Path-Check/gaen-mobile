@@ -1,49 +1,47 @@
-import React from 'react';
-import { TouchableOpacity, View, StyleSheet, Linking } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
-import { SvgXml } from 'react-native-svg';
-import env from 'react-native-config';
+import React from "react"
+import { TouchableOpacity, View, StyleSheet, Linking } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
+import env from "react-native-config"
 
-import { Typography } from '../../components/Typography';
-import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { Screens, useStatusBarEffect } from '../../navigation';
+import { Typography } from "../../components/Typography"
+import { NavigationBarWrapper } from "../../components/NavigationBarWrapper"
+import { Screens, useStatusBarEffect } from "../../navigation"
 
-import { Buttons, Spacing, Typography as TypographyStyles } from '../../styles';
-import { Icons } from '../../assets';
+import { Buttons, Spacing, Typography as TypographyStyles } from "../../styles"
+import { Icons } from "../../assets"
 
-import { Colors } from '../../styles';
+import { Colors } from "../../styles"
 
-const { GAEN_AUTHORITY_NAME: healthAuthorityName, AUTHORITY_ADVICE_URL } = env;
+const { GAEN_AUTHORITY_NAME: healthAuthorityName, AUTHORITY_ADVICE_URL } = env
 
 const NextSteps = (): JSX.Element => {
-  const navigation = useNavigation();
-  const { t } = useTranslation();
-  useStatusBarEffect('light-content');
+  const navigation = useNavigation()
+  const { t } = useTranslation()
+  useStatusBarEffect("light-content")
 
   const handleOnBackPress = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
 
-  const footerText = t('exposure_history.next_steps.ha_self_assessment', {
+  const footerText = t("exposure_history.next_steps.ha_self_assessment", {
     healthAuthorityName,
-  });
-  const contentTextOne = t(
-    'exposure_history.next_steps.possible_crossed_paths',
-  );
+  })
+  const contentTextOne = t("exposure_history.next_steps.possible_crossed_paths")
   const contentTextTwo = t(
-    'exposure_history.next_steps.possible_infection_precaution',
-  );
-  const buttonText = t('exposure_history.next_steps.button_text');
+    "exposure_history.next_steps.possible_infection_precaution",
+  )
+  const buttonText = t("exposure_history.next_steps.button_text")
 
   const handleOnPressTakeAssessment = () => {
     AUTHORITY_ADVICE_URL
       ? Linking.openURL(AUTHORITY_ADVICE_URL)
-      : navigation.navigate(Screens.SelfAssessment);
-  };
+      : navigation.navigate(Screens.SelfAssessment)
+  }
 
   return (
-    <NavigationBarWrapper title={'Next Steps'} onBackPress={handleOnBackPress}>
+    <NavigationBarWrapper title={"Next Steps"} onBackPress={handleOnBackPress}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Typography style={styles.contentText}>{contentTextOne}</Typography>
@@ -53,15 +51,16 @@ const NextSteps = (): JSX.Element => {
           <Typography style={styles.footerText}>{footerText}</Typography>
           <TouchableOpacity
             style={styles.button}
-            onPress={handleOnPressTakeAssessment}>
+            onPress={handleOnPressTakeAssessment}
+          >
             <Typography style={styles.buttonText}>{buttonText}</Typography>
             <SvgXml xml={Icons.Export} color={Colors.white} />
           </TouchableOpacity>
         </View>
       </View>
     </NavigationBarWrapper>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -81,16 +80,16 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   button: {
     ...Buttons.largeBlue,
     padding: Spacing.xxLarge,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   buttonText: {
     ...TypographyStyles.buttonTextLight,
   },
-});
+})
 
-export default NextSteps;
+export default NextSteps

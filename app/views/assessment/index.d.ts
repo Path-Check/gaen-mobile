@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
-import assessment from './index';
+import { FunctionComponent } from "react"
+import assessment from "./index"
 
-const Assessment: FunctionComponent = assessment;
+const Assessment: FunctionComponent = assessment
 
-export default Assessment;
+export default Assessment

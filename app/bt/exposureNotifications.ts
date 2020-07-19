@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs"
 
 import {
   Possible,
@@ -6,51 +6,51 @@ import {
   ExposureHistory,
   calendarDays,
   ExposureCalendarOptions,
-} from '../exposureHistory';
+} from "../exposureHistory"
 
-type UUID = string;
-type Posix = number;
+type UUID = string
+type Posix = number
 
 export interface RawExposure {
-  id: UUID;
-  date: Posix;
-  duration: number;
-  totalRiskScore: number;
-  transmissionRiskLevel: number;
+  id: UUID
+  date: Posix
+  duration: number
+  totalRiskScore: number
+  transmissionRiskLevel: number
 }
 
 export const toExposureHistory: (
   exposureInfo: ExposureInfo,
   calendarOptions: ExposureCalendarOptions,
 ) => ExposureHistory = (exposureInfo, calendarOptions) => {
-  const { startDate, totalDays } = calendarOptions;
-  const calendar = calendarDays(startDate, totalDays);
+  const { startDate, totalDays } = calendarOptions
+  const calendar = calendarDays(startDate, totalDays)
   return calendar.map((date: Posix) => {
     if (exposureInfo[date]) {
-      return exposureInfo[date];
+      return exposureInfo[date]
     } else {
       return {
-        kind: 'NoKnown',
+        kind: "NoKnown",
         date,
-      };
+      }
     }
-  });
-};
+  })
+}
 
 export const toExposureInfo = (rawExposures: RawExposure[]): ExposureInfo => {
-  return rawExposures.map(toPossible).reduce(groupByDate, {});
-};
+  return rawExposures.map(toPossible).reduce(groupByDate, {})
+}
 
 const toPossible = (r: RawExposure): Possible => {
-  const beginningOfDay = (date: Posix) => dayjs(date).startOf('day');
+  const beginningOfDay = (date: Posix) => dayjs(date).startOf("day")
   return {
-    kind: 'Possible',
+    kind: "Possible",
     date: beginningOfDay(r.date).valueOf(),
     duration: r.duration,
     transmissionRiskLevel: r.transmissionRiskLevel,
     totalRiskScore: r.totalRiskScore,
-  };
-};
+  }
+}
 
 const combinePossibles = (a: Possible, b: Possible): Possible => {
   return {
@@ -61,18 +61,18 @@ const combinePossibles = (a: Possible, b: Possible): Possible => {
       a.transmissionRiskLevel,
       b.transmissionRiskLevel,
     ),
-  };
-};
+  }
+}
 
 const groupByDate = (
   groupedExposures: Record<Posix, Possible>,
   exposure: Possible,
 ): Record<Posix, Possible> => {
-  const date = exposure.date;
+  const date = exposure.date
   if (groupedExposures[date]) {
-    groupedExposures[date] = combinePossibles(groupedExposures[date], exposure);
+    groupedExposures[date] = combinePossibles(groupedExposures[date], exposure)
   } else {
-    groupedExposures[date] = exposure;
+    groupedExposures[date] = exposure
   }
-  return groupedExposures;
-};
+  return groupedExposures
+}

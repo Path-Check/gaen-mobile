@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React from "react"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 
-import { Typography } from '../../../components/Typography';
+import { Typography } from "../../../components/Typography"
 
-import { Colors } from '../../../styles';
+import { Colors } from "../../../styles"
 
 /**
  * @typedef { import("react").ReactNode } ReactNode
@@ -26,37 +26,40 @@ export const Button = ({
   disabled = false,
 }) => {
   const dynamicBackgroundColor = () => {
-    if (backgroundColor) return backgroundColor;
-    else if (disabled) return Colors.secondaryBackground;
-    else return Colors.secondaryBlue;
-  };
+    if (backgroundColor) return backgroundColor
+    else if (disabled) return Colors.secondaryBackground
+    else return Colors.secondaryBlue
+  }
 
   const dynamicTextColor = () => {
-    if (textColor) return textColor;
-    else if (disabled) return Colors.disabledButtonText;
-    else return Colors.white;
-  };
+    if (textColor) return textColor
+    else if (disabled) return Colors.disabledButtonText
+    else return Colors.white
+  }
 
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      testID='assessment-button'>
+      testID="assessment-button"
+    >
       <View
         style={[
           styles.cta,
           buttonStyle,
           { backgroundColor: dynamicBackgroundColor() },
-        ]}>
+        ]}
+      >
         <Typography
-          use='body1'
-          style={[styles.ctaText, textStyle, { color: dynamicTextColor() }]}>
+          use="body1"
+          style={[styles.ctaText, textStyle, { color: dynamicTextColor() }]}
+        >
           {title}
         </Typography>
       </View>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   cta: {
@@ -66,6 +69,6 @@ const styles = StyleSheet.create({
   },
   ctaText: {
     color: Colors.faintGray,
-    textAlign: 'center',
+    textAlign: "center",
   },
-});
+})

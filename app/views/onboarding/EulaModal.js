@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react"
 import {
   TouchableOpacity,
   Linking,
@@ -7,77 +7,77 @@ import {
   View,
   SafeAreaView,
   StatusBar,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
-import loadLocalResource from 'react-native-local-resource';
-import WebView from 'react-native-webview';
+} from "react-native"
+import { useTranslation } from "react-i18next"
+import loadLocalResource from "react-native-local-resource"
+import WebView from "react-native-webview"
 
-import { Button, Checkbox, IconButton, Typography } from '../../components';
-import en from '../../locales/eula/en.html';
-import es_PR from '../../locales/eula/es_PR.html';
-import ht from '../../locales/eula/ht.html';
+import { Button, Checkbox, IconButton, Typography } from "../../components"
+import en from "../../locales/eula/en.html"
+import es_PR from "../../locales/eula/es_PR.html"
+import ht from "../../locales/eula/ht.html"
 
-import { Icons } from '../../assets';
+import { Icons } from "../../assets"
 import {
   Spacing,
   Buttons,
   Colors,
   Typography as TypographyStyles,
-} from '../../styles';
+} from "../../styles"
 
-const EULA_FILES = { en, es_PR, ht };
+const EULA_FILES = { en, es_PR, ht }
 
-const DEFAULT_EULA_URL = 'about:blank';
+const DEFAULT_EULA_URL = "about:blank"
 
 export const EulaModal = ({ selectedLocale, continueFunction }) => {
-  const [modalVisible, setModalVisibility] = useState(false);
-  const [boxChecked, toggleCheckbox] = useState(false);
-  const [html, setHtml] = useState(undefined);
-  const { t } = useTranslation();
+  const [modalVisible, setModalVisibility] = useState(false)
+  const [boxChecked, toggleCheckbox] = useState(false)
+  const [html, setHtml] = useState(undefined)
+  const { t } = useTranslation()
 
   // Pull the EULA in the correct language, with en as fallback
-  const eulaPath = EULA_FILES[selectedLocale] || en;
+  const eulaPath = EULA_FILES[selectedLocale] || en
 
   // Any links inside the EULA should launch a separate browser otherwise you can get stuck inside the app
   const shouldStartLoadWithRequestHandler = (webViewState) => {
-    let shouldLoadRequest = true;
+    let shouldLoadRequest = true
     if (webViewState.url !== DEFAULT_EULA_URL) {
       // If the webpage to load isn't the EULA, load it in a separate browser
-      Linking.openURL(webViewState.url);
+      Linking.openURL(webViewState.url)
       // Don't load the page if its being handled in a separate browser
-      shouldLoadRequest = false;
+      shouldLoadRequest = false
     }
-    return shouldLoadRequest;
-  };
+    return shouldLoadRequest
+  }
 
   // Load the EULA from disk
   useEffect(() => {
     const loadEula = async () => {
-      setHtml(await loadLocalResource(eulaPath));
-    };
-    loadEula();
-  }, [selectedLocale, setHtml, eulaPath]);
+      setHtml(await loadLocalResource(eulaPath))
+    }
+    loadEula()
+  }, [selectedLocale, setHtml, eulaPath])
 
-  const canContinue = boxChecked;
+  const canContinue = boxChecked
 
-  const handleOnPressGetStarted = () => setModalVisibility(true);
+  const handleOnPressGetStarted = () => setModalVisibility(true)
   return (
     <>
       <TouchableOpacity style={styles.button} onPress={handleOnPressGetStarted}>
         <Typography style={styles.buttonText}>
-          {t('label.launch_get_started')}
+          {t("label.launch_get_started")}
         </Typography>
       </TouchableOpacity>
-      <Modal animationType='slide' transparent visible={modalVisible}>
+      <Modal animationType="slide" transparent visible={modalVisible}>
         <View style={styles.container}>
-          <StatusBar barStyle={'dark-content'} />
+          <StatusBar barStyle={"dark-content"} />
           <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 7, paddingHorizontal: 5 }}>
               <IconButton
                 icon={Icons.Close}
                 size={20}
                 style={styles.closeIcon}
-                accessibilityLabel='Close'
+                accessibilityLabel="Close"
                 onPress={() => setModalVisibility(false)}
               />
               {html && (
@@ -95,20 +95,20 @@ export const EulaModal = ({ selectedLocale, continueFunction }) => {
             <View style={styles.ctaBox}>
               <View style={styles.checkboxContainer}>
                 <Checkbox
-                  label={t('onboarding.eula_checkbox')}
+                  label={t("onboarding.eula_checkbox")}
                   onPress={() => toggleCheckbox(!boxChecked)}
                   checked={boxChecked}
                 />
                 <Typography style={styles.smallDescriptionText}>
-                  {t('onboarding.eula_message')}
+                  {t("onboarding.eula_message")}
                 </Typography>
               </View>
               <Button
-                label={t('onboarding.eula_continue')}
+                label={t("onboarding.eula_continue")}
                 disabled={!canContinue}
                 onPress={() => {
-                  setModalVisibility(false);
-                  continueFunction();
+                  setModalVisibility(false)
+                  continueFunction()
                 }}
               />
             </View>
@@ -116,15 +116,15 @@ export const EulaModal = ({ selectedLocale, continueFunction }) => {
         </View>
       </Modal>
     </>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   // Container covers the entire screen
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     color: Colors.primaryText,
     backgroundColor: Colors.white,
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     padding: Spacing.xSmall,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   smallDescriptionText: {
     ...TypographyStyles.label,
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
   buttonText: {
     ...TypographyStyles.buttonTextDark,
   },
-});
+})

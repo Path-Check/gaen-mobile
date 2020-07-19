@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 import {
   ViewStyle,
   View,
@@ -6,36 +6,36 @@ import {
   ScrollView,
   TouchableHighlight,
   TouchableOpacity,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { SvgXml } from 'react-native-svg';
+} from "react-native"
+import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 import {
   NavigationParams,
   NavigationScreenProp,
   NavigationState,
-} from 'react-navigation';
+} from "react-navigation"
 
-import { getLocalNames } from '../../locales/languages';
-import { Typography } from '../../components/Typography';
-import { NavigationBarWrapper } from '../../components/NavigationBarWrapper';
-import { Stacks, Screens, useStatusBarEffect } from '../../navigation';
+import { getLocalNames } from "../../locales/languages"
+import { Typography } from "../../components/Typography"
+import { NavigationBarWrapper } from "../../components/NavigationBarWrapper"
+import { Stacks, Screens, useStatusBarEffect } from "../../navigation"
 
-import { Icons } from '../../assets';
+import { Icons } from "../../assets"
 import {
   Buttons,
   Colors,
   Spacing,
   Typography as TypographyStyles,
-} from '../../styles';
+} from "../../styles"
 
 interface SettingsScreenProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
 }
 
 interface LanguageSelectionListItemProps {
-  icon: string;
-  label: string;
-  onPress: () => void;
+  icon: string
+  label: string
+  onPress: () => void
 }
 const LanguageSelectionListItem = ({
   icon,
@@ -45,34 +45,35 @@ const LanguageSelectionListItem = ({
   <TouchableHighlight
     underlayColor={Colors.underlayPrimaryBackground}
     style={styles.listItem}
-    onPress={onPress}>
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    onPress={onPress}
+  >
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
       <SvgXml
         xml={icon}
         style={[styles.icon, { marginRight: Spacing.small }]}
       />
-      <Typography use={'body1'}>{label}</Typography>
+      <Typography use={"body1"}>{label}</Typography>
     </View>
   </TouchableHighlight>
-);
+)
 
 const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
   const {
     t,
     i18n: { language: localeCode },
-  } = useTranslation();
-  const languageName = getLocalNames()[localeCode];
-  useStatusBarEffect('light-content');
+  } = useTranslation()
+  const languageName = getLocalNames()[localeCode]
+  useStatusBarEffect("light-content")
 
   const navigateTo = (screen: string) => {
-    return () => navigation.navigate(screen);
-  };
+    return () => navigation.navigate(screen)
+  }
 
   interface SettingsListItemProps {
-    label: string;
-    onPress: () => void;
-    description?: string;
-    style?: ViewStyle;
+    label: string
+    onPress: () => void
+    description?: string
+    style?: ViewStyle
   }
 
   const SettingsListItem = ({
@@ -85,7 +86,8 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
       <TouchableHighlight
         underlayColor={Colors.underlayPrimaryBackground}
         style={[styles.listItem, style]}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <View>
           <Typography style={styles.listItemText}>{label}</Typography>
           {description ? (
@@ -95,28 +97,30 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
           ) : null}
         </View>
       </TouchableHighlight>
-    );
-  };
+    )
+  }
 
   return (
     <NavigationBarWrapper
-      title={t('navigation.more')}
-      includeBackButton={false}>
+      title={t("navigation.more")}
+      includeBackButton={false}
+    >
       <ScrollView style={styles.container}>
         <View style={styles.sectionPrimary}>
-          <Typography>{t('settings.share_test_result_description')}</Typography>
+          <Typography>{t("settings.share_test_result_description")}</Typography>
           <TouchableOpacity
             onPress={navigateTo(Stacks.AffectedUserFlow)}
-            style={styles.button}>
+            style={styles.button}
+          >
             <Typography style={styles.buttonText}>
-              {t('settings.share_test_result')}
+              {t("settings.share_test_result")}
             </Typography>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <LanguageSelectionListItem
-            label={languageName || t('label.unknown')}
+            label={languageName || t("label.unknown")}
             icon={Icons.LanguagesIcon}
             onPress={navigateTo(Screens.LanguageSelection)}
           />
@@ -124,27 +128,27 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
 
         <View style={styles.section}>
           <SettingsListItem
-            label={t('screen_titles.about')}
+            label={t("screen_titles.about")}
             onPress={navigateTo(Screens.About)}
             style={styles.divider}
           />
           <SettingsListItem
-            label={t('screen_titles.legal')}
+            label={t("screen_titles.legal")}
             onPress={() => navigation.navigate(Screens.Licenses)}
             style={styles.lastListItem}
           />
         </View>
         <View style={styles.section}>
           <SettingsListItem
-            label='EN Debug Menu'
+            label="EN Debug Menu"
             onPress={navigateTo(Screens.ENDebugMenu)}
             style={styles.lastListItem}
           />
         </View>
       </ScrollView>
     </NavigationBarWrapper>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -191,6 +195,6 @@ const styles = StyleSheet.create({
   descriptionText: {
     ...TypographyStyles.description,
   },
-});
+})
 
-export default SettingsScreen;
+export default SettingsScreen

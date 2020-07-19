@@ -18,4 +18,4 @@ export default `<svg width="850" height="850" viewBox="0 0 850 850" fill="none" 
       <circle id="Oval" stroke="#FFFFFF" stroke-width="3" cx="425" cy="425" r="12"></circle>
   </g>
   </g>
-</svg>`;
+</svg>`

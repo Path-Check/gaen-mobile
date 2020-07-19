@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 import {
   ActivityIndicator,
   Alert,
@@ -11,16 +11,16 @@ import {
   TextInput,
   View,
   Keyboard,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+} from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
-import { Typography } from '../../components/Typography';
-import { useAffectedUserContext } from './AffectedUserContext';
-import * as API from './verificationAPI';
-import * as NativeModule from '../nativeModule';
-import { calculateHmac } from './hmac';
+import { Typography } from "../../components/Typography"
+import { useAffectedUserContext } from "./AffectedUserContext"
+import * as API from "./verificationAPI"
+import * as NativeModule from "../nativeModule"
+import { calculateHmac } from "./hmac"
 
-import { Screens } from '../../navigation';
+import { Screens } from "../../navigation"
 import {
   Spacing,
   Buttons,
@@ -29,137 +29,139 @@ import {
   Colors,
   Outlines,
   Typography as TypographyStyles,
-} from '../../styles';
+} from "../../styles"
 
-const defaultErrorMessage = ' ';
+const defaultErrorMessage = " "
 
 const CodeInputScreen = (): JSX.Element => {
-  const { t } = useTranslation();
-  const navigation = useNavigation();
+  const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const {
     code,
     setCode,
     setExposureSubmissionCredentials,
-  } = useAffectedUserContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(defaultErrorMessage);
+  } = useAffectedUserContext()
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
-  const isIOS = Platform.OS === 'ios';
-  const codeLength = 8;
+  const isIOS = Platform.OS === "ios"
+  const codeLength = 8
 
   const handleOnChangeText = (code: string) => {
-    setErrorMessage('');
-    setCode(code);
-  };
+    setErrorMessage("")
+    setCode(code)
+  }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings);
-  };
+    navigation.navigate(Screens.Settings)
+  }
 
   const handleOnPressSubmit = async () => {
-    setIsLoading(true);
-    setErrorMessage(defaultErrorMessage);
+    setIsLoading(true)
+    setErrorMessage(defaultErrorMessage)
     try {
-      const response = await API.postCode(code);
+      const response = await API.postCode(code)
 
-      if (response.kind === 'success') {
-        const token = response.body.token;
-        const exposureKeys = await NativeModule.getExposureKeys();
-        const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys);
+      if (response.kind === "success") {
+        const token = response.body.token
+        const exposureKeys = await NativeModule.getExposureKeys()
+        const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
 
-        const certResponse = await API.postTokenAndHmac(token, hmacDigest);
+        const certResponse = await API.postTokenAndHmac(token, hmacDigest)
 
-        if (certResponse.kind === 'success') {
-          const certificate = certResponse.body.certificate;
-          setExposureSubmissionCredentials(certificate, hmacKey);
-          Keyboard.dismiss();
-          navigation.navigate(Screens.AffectedUserPublishConsent);
+        if (certResponse.kind === "success") {
+          const certificate = certResponse.body.certificate
+          setExposureSubmissionCredentials(certificate, hmacKey)
+          Keyboard.dismiss()
+          navigation.navigate(Screens.AffectedUserPublishConsent)
         } else {
-          setErrorMessage(showCertificateError(certResponse.error));
+          setErrorMessage(showCertificateError(certResponse.error))
         }
       } else {
-        setErrorMessage(showError(response.error));
+        setErrorMessage(showError(response.error))
       }
-      setIsLoading(false);
+      setIsLoading(false)
     } catch (e) {
-      Alert.alert(t('common.something_went_wrong'), e.message);
-      setIsLoading(false);
+      Alert.alert(t("common.something_went_wrong"), e.message)
+      setIsLoading(false)
     }
-  };
+  }
 
   const showError = (error: API.CodeVerificationError): string => {
     switch (error) {
-      case 'InvalidCode': {
-        return t('export.error.invalid_code');
+      case "InvalidCode": {
+        return t("export.error.invalid_code")
       }
-      case 'VerificationCodeUsed': {
-        return t('export.error.verification_code_used');
+      case "VerificationCodeUsed": {
+        return t("export.error.verification_code_used")
       }
-      case 'InvalidVerificationUrl': {
-        return 'Invalid Verification Url';
+      case "InvalidVerificationUrl": {
+        return "Invalid Verification Url"
       }
       default: {
-        return t('export.error.unknown_code_verification_error');
+        return t("export.error.unknown_code_verification_error")
       }
     }
-  };
+  }
 
   const showCertificateError = (error: API.TokenVerificationError): string => {
     switch (error) {
-      case 'TokenMetaDataMismatch': {
-        return 'token meta data mismatch';
+      case "TokenMetaDataMismatch": {
+        return "token meta data mismatch"
       }
       default: {
-        return t('export.error.unknown_code_verification_error');
+        return t("export.error.unknown_code_verification_error")
       }
     }
-  };
+  }
 
-  const isDisabled = code.length !== codeLength;
+  const isDisabled = code.length !== codeLength
 
-  const buttonStyle = isDisabled ? styles.disabledButton : styles.button;
+  const buttonStyle = isDisabled ? styles.disabledButton : styles.button
   const buttonTextStyle = isDisabled
     ? styles.disabledButtonText
-    : styles.buttonText;
+    : styles.buttonText
 
   return (
     <View style={styles.backgroundImage}>
       <SafeAreaView
         style={{ flex: 1 }}
-        testID={'affected-user-code-input-screen'}>
+        testID={"affected-user-code-input-screen"}
+      >
         <KeyboardAvoidingView
           keyboardVerticalOffset={Spacing.tiny}
-          behavior={isIOS ? 'padding' : undefined}>
+          behavior={isIOS ? "padding" : undefined}
+        >
           <View style={styles.container}>
             <View>
               <View style={styles.headerContainer}>
                 <Typography style={styles.header}>
-                  {t('export.code_input_title_bluetooth')}
+                  {t("export.code_input_title_bluetooth")}
                 </Typography>
 
                 <Typography style={styles.subheader}>
-                  {t('export.code_input_body_bluetooth')}
+                  {t("export.code_input_body_bluetooth")}
                 </Typography>
               </View>
 
               <View>
                 <TextInput
-                  testID={'code-input'}
+                  testID={"code-input"}
                   value={code}
-                  placeholder={'00000000'}
+                  placeholder={"00000000"}
                   placeholderTextColor={Colors.placeholderTextColor}
                   maxLength={codeLength}
                   style={styles.codeInput}
-                  keyboardType={'number-pad'}
-                  returnKeyType={'done'}
+                  keyboardType={"number-pad"}
+                  returnKeyType={"done"}
                   onChangeText={handleOnChangeText}
                   blurOnSubmit={false}
                   onSubmitEditing={Keyboard.dismiss}
                 />
               </View>
 
-              <Typography style={styles.errorSubtitle} use='body2'>
+              <Typography style={styles.errorSubtitle} use="body2">
                 {errorMessage}
               </Typography>
             </View>
@@ -169,20 +171,22 @@ const CodeInputScreen = (): JSX.Element => {
               <TouchableOpacity
                 onPress={handleOnPressSubmit}
                 accessible
-                accessibilityLabel={t('common.submit')}
-                accessibilityRole='button'
+                accessibilityLabel={t("common.submit")}
+                accessibilityRole="button"
                 disabled={isDisabled}
-                style={buttonStyle}>
+                style={buttonStyle}
+              >
                 <Typography style={buttonTextStyle}>
-                  {t('common.submit')}
+                  {t("common.submit")}
                 </Typography>
               </TouchableOpacity>
 
               <TouchableOpacity
                 onPress={handleOnPressCancel}
-                style={styles.secondaryButton}>
+                style={styles.secondaryButton}
+              >
                 <Typography style={styles.secondaryButtonText}>
-                  {t('export.code_input_button_cancel')}
+                  {t("export.code_input_button_cancel")}
                 </Typography>
               </TouchableOpacity>
             </View>
@@ -190,34 +194,34 @@ const CodeInputScreen = (): JSX.Element => {
         </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
-  );
-};
+  )
+}
 
 const LoadingIndicator = () => {
   return (
     <View style={styles.activityIndicatorContainer}>
       <ActivityIndicator
-        size={'large'}
+        size={"large"}
         color={Colors.darkGray}
         style={styles.activityIndicator}
-        testID={'loading-indicator'}
+        testID={"loading-indicator"}
       />
     </View>
-  );
-};
+  )
+}
 
-const indicatorWidth = 120;
+const indicatorWidth = 120
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
     backgroundColor: Colors.faintGray,
   },
   container: {
-    height: '100%',
-    justifyContent: 'space-between',
+    height: "100%",
+    justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Layout.oneTenthHeight,
     backgroundColor: Colors.primaryBackgroundFaintShade,
@@ -242,7 +246,7 @@ const styles = StyleSheet.create({
     ...Forms.textInput,
   },
   activityIndicatorContainer: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: Layout.level1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
@@ -273,6 +277,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     ...TypographyStyles.buttonTextSecondary,
   },
-});
+})
 
-export default CodeInputScreen;
+export default CodeInputScreen

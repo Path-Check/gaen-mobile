@@ -1,6 +1,6 @@
-export { Button } from './Button';
-export { Checkbox } from './Checkbox';
-export { IconButton } from './IconButton';
-export { NavigationBarWrapper } from './NavigationBarWrapper';
-export { Switch } from './Switch';
-export { Typography } from './Typography';
+export { Button } from "./Button"
+export { Checkbox } from "./Checkbox"
+export { IconButton } from "./IconButton"
+export { NavigationBarWrapper } from "./NavigationBarWrapper"
+export { Switch } from "./Switch"
+export { Typography } from "./Typography"

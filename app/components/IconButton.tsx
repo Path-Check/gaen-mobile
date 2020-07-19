@@ -1,14 +1,14 @@
-import styled from '@emotion/native';
-import React from 'react';
-import { SvgXml } from 'react-native-svg';
-import { Colors } from '../styles';
+import styled from "@emotion/native"
+import React from "react"
+import { SvgXml } from "react-native-svg"
+import { Colors } from "../styles"
 
 interface IconButtonProps {
-  icon: string;
-  accessibilityLabel?: string;
-  size?: number;
-  onPress?: () => void;
-  color?: string;
+  icon: string
+  accessibilityLabel?: string
+  size?: number
+  onPress?: () => void
+  color?: string
 }
 
 export const IconButton = ({
@@ -27,10 +27,10 @@ export const IconButton = ({
         height={size || 24}
       />
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled.TouchableOpacity`
   align-items: center;
   align-content: center;
-`;
+`

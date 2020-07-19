@@ -1,36 +1,36 @@
-import React, { createContext, useContext, FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { createContext, useContext, FunctionComponent } from "react"
+import { useTranslation } from "react-i18next"
 
 import {
   TracingStrategy,
   StrategyCopyContent,
   StrategyCopyContentHook,
   StrategyAssets,
-} from './tracingStrategy';
+} from "./tracingStrategy"
 
-import { ExposureHistoryProvider } from './ExposureHistoryContext';
+import { ExposureHistoryProvider } from "./ExposureHistoryContext"
 
 interface TracingStrategyContextState {
-  name: string;
-  homeScreenComponent: ({ testID }: { testID: string }) => JSX.Element;
-  affectedUserFlow: () => JSX.Element;
-  assets: StrategyAssets;
-  useCopy: StrategyCopyContentHook;
+  name: string
+  homeScreenComponent: ({ testID }: { testID: string }) => JSX.Element
+  affectedUserFlow: () => JSX.Element
+  assets: StrategyAssets
+  useCopy: StrategyCopyContentHook
 }
 
 const TracingStrategyContext = createContext<
   TracingStrategyContextState | undefined
->(undefined);
+>(undefined)
 
 interface TracingStrategyProps {
-  strategy: TracingStrategy;
+  strategy: TracingStrategy
 }
 
 export const TracingStrategyProvider: FunctionComponent<TracingStrategyProps> = ({
   children,
   strategy,
 }) => {
-  const StrategyPermissionsProvider = strategy.permissionsProvider;
+  const StrategyPermissionsProvider = strategy.permissionsProvider
 
   return (
     <TracingStrategyContext.Provider
@@ -40,32 +40,34 @@ export const TracingStrategyProvider: FunctionComponent<TracingStrategyProps> = 
         affectedUserFlow: strategy.affectedUserFlow,
         assets: strategy.assets,
         useCopy: strategy.useCopy,
-      }}>
+      }}
+    >
       <StrategyPermissionsProvider>
         <ExposureHistoryProvider
-          exposureEventsStrategy={strategy.exposureEventsStrategy}>
+          exposureEventsStrategy={strategy.exposureEventsStrategy}
+        >
           {children}
         </ExposureHistoryProvider>
       </StrategyPermissionsProvider>
     </TracingStrategyContext.Provider>
-  );
-};
+  )
+}
 
 export const useTracingStrategyContext = (): TracingStrategyContextState => {
-  const context = useContext(TracingStrategyContext);
+  const context = useContext(TracingStrategyContext)
   if (context === undefined) {
-    throw new Error('TracingStrategyContext must be used with a provider');
+    throw new Error("TracingStrategyContext must be used with a provider")
   }
-  return context;
-};
+  return context
+}
 
 export const useStrategyContent = (): {
-  StrategyCopy: StrategyCopyContent;
-  StrategyAssets: StrategyAssets;
+  StrategyCopy: StrategyCopyContent
+  StrategyAssets: StrategyAssets
 } => {
-  const { t } = useTranslation();
-  const { useCopy, assets } = useTracingStrategyContext();
-  const StrategyCopy = useCopy(t);
-  const StrategyAssets = assets;
-  return { StrategyCopy, StrategyAssets };
-};
+  const { t } = useTranslation()
+  const { useCopy, assets } = useTracingStrategyContext()
+  const StrategyCopy = useCopy(t)
+  const StrategyAssets = assets
+  return { StrategyCopy, StrategyAssets }
+}

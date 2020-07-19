@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from "react"
+import { useTranslation } from "react-i18next"
 
-import { Icons, Images } from '../../../assets';
-import { AssessmentNavigationContext } from '../Context';
-import { Info } from '../Info';
-import { InfoText } from '../components/InfoText';
-import { Button } from '../components/Button';
+import { Icons, Images } from "../../../assets"
+import { AssessmentNavigationContext } from "../Context"
+import { Info } from "../Info"
+import { InfoText } from "../components/InfoText"
+import { Button } from "../components/Button"
 
-import { Colors } from '../../../styles';
+import { Colors } from "../../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Isolate = ({ navigation }) => {
-  let { t } = useTranslation();
-  let { completeRoute } = useContext(AssessmentNavigationContext);
+  let { t } = useTranslation()
+  let { completeRoute } = useContext(AssessmentNavigationContext)
 
-  const handleButtonPress = () => navigation.push(completeRoute);
+  const handleButtonPress = () => navigation.push(completeRoute)
 
   return (
     <Info
@@ -24,14 +24,15 @@ export const Isolate = ({ navigation }) => {
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t('assessment.isolate_cta')}
+          title={t("assessment.isolate_cta")}
         />
-      }>
+      }
+    >
       <InfoText
-        useTitleStyle='headline2'
-        title={t('assessment.isolate_title')}
-        description={t('assessment.isolate_description')}
+        useTitleStyle="headline2"
+        title={t("assessment.isolate_title")}
+        description={t("assessment.isolate_description")}
       />
     </Info>
-  );
-};
+  )
+}

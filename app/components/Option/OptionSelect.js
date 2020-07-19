@@ -1,21 +1,21 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
+import React from "react"
+import { StyleSheet, View } from "react-native"
+import { SvgXml } from "react-native-svg"
 
-import { Typography } from '../../components/Typography';
+import { Typography } from "../../components/Typography"
 
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
   SCREEN_TYPE_RADIO,
-} from '../../views/assessment/constants';
+} from "../../views/assessment/constants"
 
 import {
   Colors,
   Forms,
   Spacing,
   Typography as TypographyStyles,
-} from '../../styles';
+} from "../../styles"
 
 export function OptionSelect({
   wrapperStyle,
@@ -28,7 +28,7 @@ export function OptionSelect({
   const indicatorStyle =
     inputType === SCREEN_TYPE_CHECKBOX
       ? styles.indicatorCheck
-      : styles.indicatorRadio;
+      : styles.indicatorRadio
 
   return (
     <View style={wrapperStyle}>
@@ -41,11 +41,11 @@ export function OptionSelect({
             (inputType === SCREEN_TYPE_RADIO || inputType === SCREEN_TYPE_DATE)}
         </View>
       )}
-      <Typography style={styles.title} testID='label'>
+      <Typography style={styles.title} testID="label">
         {title}
       </Typography>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
     ...TypographyStyles.inputLabel,
   },
-});
+})

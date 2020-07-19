@@ -1,3 +1,3 @@
 export interface HealthAuthority {
-  name: string;
+  name: string
 }

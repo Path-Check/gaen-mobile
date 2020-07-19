@@ -1,37 +1,37 @@
-import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from "react"
+import { StyleSheet } from "react-native"
+import { useTranslation } from "react-i18next"
 
-import PermissionsContext from '../../bt/PermissionsContext';
-import { useOnboardingContext } from '../../OnboardingContext';
-import { useStatusBarEffect } from '../../navigation';
+import PermissionsContext from "../../bt/PermissionsContext"
+import { useOnboardingContext } from "../../OnboardingContext"
+import { useStatusBarEffect } from "../../navigation"
 import ExplanationScreen, {
   IconStyle,
-} from '../../views/common/ExplanationScreen';
+} from "../../views/common/ExplanationScreen"
 
-import { Icons, Images } from '../../assets';
-import { Colors } from '../../styles';
+import { Icons, Images } from "../../assets"
+import { Colors } from "../../styles"
 
 export const EnableExposureNotifications = (): JSX.Element => {
-  const { t } = useTranslation();
-  const { exposureNotifications } = useContext(PermissionsContext);
-  const { setOnboardingIsComplete } = useOnboardingContext();
+  const { t } = useTranslation()
+  const { exposureNotifications } = useContext(PermissionsContext)
+  const { setOnboardingIsComplete } = useOnboardingContext()
 
-  useStatusBarEffect('dark-content');
+  useStatusBarEffect("dark-content")
 
-  const headerText = t('label.launch_exposure_notif_header');
-  const bodyText = t('label.launch_exposure_notif_subheader');
-  const buttonLabel = t('label.launch_enable_exposure_notif');
-  const disableButtonLabel = t('label.launch_disable_exposure_notif');
+  const headerText = t("label.launch_exposure_notif_header")
+  const bodyText = t("label.launch_exposure_notif_subheader")
+  const buttonLabel = t("label.launch_enable_exposure_notif")
+  const disableButtonLabel = t("label.launch_disable_exposure_notif")
 
   const handleOnPressEnable = () => {
-    exposureNotifications.request();
-    setOnboardingIsComplete();
-  };
+    exposureNotifications.request()
+    setOnboardingIsComplete()
+  }
 
   const handleOnPressDontEnable = () => {
-    setOnboardingIsComplete();
-  };
+    setOnboardingIsComplete()
+  }
 
   const explanationScreenContent = {
     backgroundImage: Images.BlueGradientBackground,
@@ -40,18 +40,18 @@ export const EnableExposureNotifications = (): JSX.Element => {
     body: bodyText,
     primaryButtonLabel: buttonLabel,
     secondaryButtonLabel: disableButtonLabel,
-  };
+  }
 
   const explanationScreenStyles = {
     headerStyle: styles.header,
     bodyStyle: styles.body,
     iconStyle: IconStyle.Blue,
-  };
+  }
 
   const explanationScreenActions = {
     primaryButtonOnPress: handleOnPressEnable,
     secondaryButtonOnPress: handleOnPressDontEnable,
-  };
+  }
 
   return (
     <ExplanationScreen
@@ -59,8 +59,8 @@ export const EnableExposureNotifications = (): JSX.Element => {
       explanationScreenStyles={explanationScreenStyles}
       explanationScreenActions={explanationScreenActions}
     />
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   header: {
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   body: {
     color: Colors.white,
   },
-});
+})

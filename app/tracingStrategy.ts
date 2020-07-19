@@ -1,41 +1,41 @@
-import { ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType } from "react-native"
 
-import { TFunction } from 'i18next';
+import { TFunction } from "i18next"
 
-import { ExposureEventsStrategy } from './ExposureHistoryContext';
+import { ExposureEventsStrategy } from "./ExposureHistoryContext"
 
 export interface TracingStrategy {
-  name: string;
-  exposureEventsStrategy: ExposureEventsStrategy;
-  permissionsProvider: ({ children }: { children: JSX.Element }) => JSX.Element;
-  homeScreenComponent: ({ testID }: { testID: string }) => JSX.Element;
-  affectedUserFlow: () => JSX.Element;
-  assets: StrategyAssets;
-  useCopy: StrategyCopyContentHook;
+  name: string
+  exposureEventsStrategy: ExposureEventsStrategy
+  permissionsProvider: ({ children }: { children: JSX.Element }) => JSX.Element
+  homeScreenComponent: ({ testID }: { testID: string }) => JSX.Element
+  affectedUserFlow: () => JSX.Element
+  assets: StrategyAssets
+  useCopy: StrategyCopyContentHook
 }
 
 export interface StrategyAssets {
-  personalPrivacyBackground: ImageSourcePropType;
-  notificationDetailsBackground: ImageSourcePropType;
-  personalPrivacyIcon: string;
-  notificationDetailsIcon: string;
+  personalPrivacyBackground: ImageSourcePropType
+  notificationDetailsBackground: ImageSourcePropType
+  personalPrivacyIcon: string
+  notificationDetailsIcon: string
 }
 
-export type StrategyCopyContentHook = (t: TFunction) => StrategyCopyContent;
+export type StrategyCopyContentHook = (t: TFunction) => StrategyCopyContent
 
 export interface StrategyCopyContent {
-  aboutHeader: string;
-  detailedHistoryWhatThisMeansPara: string;
-  exportCompleteBody: string;
-  exportPublishButtonSubtitle: string;
-  exposureNotificationsNotAvailableHeader: string;
-  exposureNotificationsNotAvailableSubheader: string;
-  moreInfoHowContent: string;
-  moreInfoWhyContent: string;
-  personalPrivacyHeader: string;
-  personalPrivacySubheader: string;
-  notificationDetailsHeader: string;
-  notificationDetailsSubheader: string;
-  settingsLoggingActive: string;
-  settingsLoggingInactive: string;
+  aboutHeader: string
+  detailedHistoryWhatThisMeansPara: string
+  exportCompleteBody: string
+  exportPublishButtonSubtitle: string
+  exposureNotificationsNotAvailableHeader: string
+  exposureNotificationsNotAvailableSubheader: string
+  moreInfoHowContent: string
+  moreInfoWhyContent: string
+  personalPrivacyHeader: string
+  personalPrivacySubheader: string
+  notificationDetailsHeader: string
+  notificationDetailsSubheader: string
+  settingsLoggingActive: string
+  settingsLoggingInactive: string
 }

@@ -1,20 +1,20 @@
-import { render } from '@testing-library/react-native';
-import React from 'react';
+import { render } from "@testing-library/react-native"
+import React from "react"
 
-import { IconButton } from './IconButton';
+import { IconButton } from "./IconButton"
 
-const svg = `<g />`;
+const svg = `<g />`
 
-it('renders the icon in a touchable opacity', () => {
+it("renders the icon in a touchable opacity", () => {
   const { asJSON } = render(
-    <IconButton icon={svg} accessibilityLabel='Label' />,
-  );
+    <IconButton icon={svg} accessibilityLabel="Label" />,
+  )
 
-  expect(asJSON()).toMatchSnapshot();
-});
+  expect(asJSON()).toMatchSnapshot()
+})
 
-it('allows size override', () => {
-  const { asJSON } = render(<IconButton icon={svg} size={48} />);
+it("allows size override", () => {
+  const { asJSON } = render(<IconButton icon={svg} size={48} />)
 
-  expect(asJSON()).toMatchSnapshot();
-});
+  expect(asJSON()).toMatchSnapshot()
+})

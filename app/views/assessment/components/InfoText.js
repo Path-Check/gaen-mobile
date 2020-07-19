@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Typography } from '../../../components/Typography';
+import React from "react"
+import { StyleSheet } from "react-native"
+import { Typography } from "../../../components/Typography"
 
 export const InfoText = ({
   titleStyle,
@@ -14,20 +14,22 @@ export const InfoText = ({
     <>
       <Typography
         use={useTitleStyle}
-        style={[styles.headingSpacing, titleStyle]}>
+        style={[styles.headingSpacing, titleStyle]}
+      >
         {title}
       </Typography>
       {description && (
         <Typography
           use={useDescriptionStyle}
           style={[styles.description, descriptionStyle]}
-          testID='description'>
+          testID="description"
+        >
           {description}
         </Typography>
       )}
     </>
-  );
-};
+  )
+}
 
 export const styles = StyleSheet.create({
   headingSpacing: {
@@ -36,4 +38,4 @@ export const styles = StyleSheet.create({
   description: {
     marginBottom: 20,
   },
-});
+})

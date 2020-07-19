@@ -1,43 +1,45 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SvgXml } from 'react-native-svg';
+import React from "react"
+import { TouchableOpacity, StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import { SvgXml } from "react-native-svg"
 
-import { AffectedUserProvider } from './AffectedUserContext';
-import Start from './Start';
-import CodeInput from './CodeInput';
-import Complete from './Complete';
-import PublishConsent from './PublishConsent/PublishConsentScreen';
+import { AffectedUserProvider } from "./AffectedUserContext"
+import Start from "./Start"
+import CodeInput from "./CodeInput"
+import Complete from "./Complete"
+import PublishConsent from "./PublishConsent/PublishConsentScreen"
 
-import { Icons } from '../../assets';
-import { Colors, Spacing } from '../../styles';
-import { Screens } from '../../navigation';
+import { Icons } from "../../assets"
+import { Colors, Spacing } from "../../styles"
+import { Screens } from "../../navigation"
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const ExportStack = (): JSX.Element => {
   const BackButton = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     return (
       <TouchableOpacity
         onPress={() => navigation.goBack()}
-        style={styles.iconContainer}>
+        style={styles.iconContainer}
+      >
         <SvgXml xml={Icons.BackArrow} color={Colors.quaternaryViolet} />
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   const CloseButton = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(Screens.Settings)}
-        style={styles.iconContainer}>
+        style={styles.iconContainer}
+      >
         <SvgXml xml={Icons.Close} color={Colors.quaternaryViolet} />
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   return (
     <AffectedUserProvider>
@@ -46,13 +48,14 @@ const ExportStack = (): JSX.Element => {
           headerShown: false,
           gestureEnabled: false,
         }}
-        initialRouteName={Screens.AffectedUserStart}>
+        initialRouteName={Screens.AffectedUserStart}
+      >
         <Stack.Screen
           name={Screens.AffectedUserStart}
           component={Start}
           options={{
             headerTransparent: true,
-            headerTitle: '',
+            headerTitle: "",
           }}
         />
         <Stack.Screen
@@ -61,11 +64,11 @@ const ExportStack = (): JSX.Element => {
           options={{
             headerTransparent: true,
             headerLeft: function backButton() {
-              return <BackButton />;
+              return <BackButton />
             },
-            headerTitle: '',
+            headerTitle: "",
             headerRight: function closeButton() {
-              return <CloseButton />;
+              return <CloseButton />
             },
           }}
         />
@@ -75,11 +78,11 @@ const ExportStack = (): JSX.Element => {
           options={{
             headerTransparent: true,
             headerLeft: () => {
-              return null;
+              return null
             },
-            headerTitle: '',
+            headerTitle: "",
             headerRight: function closeButton() {
-              return <CloseButton />;
+              return <CloseButton />
             },
           }}
         />
@@ -90,13 +93,13 @@ const ExportStack = (): JSX.Element => {
         />
       </Stack.Navigator>
     </AffectedUserProvider>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   iconContainer: {
     padding: Spacing.medium,
   },
-});
+})
 
-export default ExportStack;
+export default ExportStack

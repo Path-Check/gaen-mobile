@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, ViewStyle, TextStyle, StyleSheet } from 'react-native';
-import dayjs from 'dayjs';
+import React from "react"
+import { View, Text, ViewStyle, TextStyle, StyleSheet } from "react-native"
+import dayjs from "dayjs"
 
-import { DateTimeUtils } from '../../helpers';
-import { ExposureDatum } from '../../exposureHistory';
+import { DateTimeUtils } from "../../helpers"
+import { ExposureDatum } from "../../exposureHistory"
 import {
   Affordances,
   Outlines,
@@ -11,20 +11,20 @@ import {
   Typography,
   Iconography,
   Spacing,
-} from '../../styles';
+} from "../../styles"
 
 interface ExposureDatumIndicatorProps {
-  exposureDatum: ExposureDatum;
-  isSelected: boolean;
+  exposureDatum: ExposureDatum
+  isSelected: boolean
 }
 
-type IndicatorStyle = [ViewStyle, TextStyle];
+type IndicatorStyle = [ViewStyle, TextStyle]
 
 const ExposureDatumIndicator = ({
   exposureDatum,
   isSelected,
 }: ExposureDatumIndicatorProps): JSX.Element => {
-  const isToday = DateTimeUtils.isToday(exposureDatum.date);
+  const isToday = DateTimeUtils.isToday(exposureDatum.date)
 
   const applyBadge = (indicator: JSX.Element) => {
     return (
@@ -32,37 +32,37 @@ const ExposureDatumIndicator = ({
         {indicator}
         <View style={styles.selectedBadge} />
       </>
-    );
-  };
+    )
+  }
 
   const applyRiskStyle = ([
     circleStyle,
     textStyle,
   ]: IndicatorStyle): IndicatorStyle => {
     switch (exposureDatum.kind) {
-      case 'NoData': {
+      case "NoData": {
         return [
           { ...circleStyle },
           { ...textStyle, color: Colors.secondaryViolet },
-        ];
+        ]
       }
-      case 'NoKnown': {
+      case "NoKnown": {
         return [
           { ...circleStyle },
           { ...textStyle, color: Colors.primaryViolet },
-        ];
+        ]
       }
-      case 'Possible': {
+      case "Possible": {
         return [
           {
             ...circleStyle,
             ...Iconography.possibleExposure,
           },
           { ...textStyle, color: Colors.white },
-        ];
+        ]
       }
     }
-  };
+  }
 
   const applyIsTodayStyle = ([
     circleStyle,
@@ -77,11 +77,11 @@ const ExposureDatumIndicator = ({
           ...textStyle,
           fontWeight: Typography.heaviestWeight,
         },
-      ];
+      ]
     } else {
-      return [circleStyle, textStyle];
+      return [circleStyle, textStyle]
     }
-  };
+  }
 
   const applyIsSelectedStyle = ([
     circleStyle,
@@ -94,35 +94,35 @@ const ExposureDatumIndicator = ({
           borderColor: Colors.darkGray,
         },
         { ...textStyle },
-      ];
+      ]
     } else {
-      return [circleStyle, textStyle];
+      return [circleStyle, textStyle]
     }
-  };
+  }
 
-  const baseStyles: IndicatorStyle = [styles.circleBase, styles.textBase];
+  const baseStyles: IndicatorStyle = [styles.circleBase, styles.textBase]
 
   const [circleStyle, textStyle] = [baseStyles]
     .map(applyIsTodayStyle)
     .map(applyRiskStyle)
-    .flatMap(applyIsSelectedStyle);
+    .flatMap(applyIsSelectedStyle)
 
-  const dayNumber = dayjs(exposureDatum.date).format('D');
+  const dayNumber = dayjs(exposureDatum.date).format("D")
 
-  const indicator = <Text style={textStyle}>{dayNumber}</Text>;
+  const indicator = <Text style={textStyle}>{dayNumber}</Text>
 
   return (
     <View style={circleStyle}>
       {isToday ? applyBadge(indicator) : indicator}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   circleBase: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     width: Spacing.xHuge,
     height: Spacing.xHuge,
     borderRadius: Outlines.maxBorderRadius,
@@ -138,6 +138,6 @@ const styles = StyleSheet.create({
   selectedBadge: {
     ...Affordances.bottomDotBadge(Colors.primaryText),
   },
-});
+})
 
-export default ExposureDatumIndicator;
+export default ExposureDatumIndicator

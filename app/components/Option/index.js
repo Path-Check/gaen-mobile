@@ -1,14 +1,14 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React from "react"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 
-import Icon from '../../assets/svgs/check';
-import { OptionSelect } from './OptionSelect';
+import Icon from "../../assets/svgs/check"
+import { OptionSelect } from "./OptionSelect"
 
-import { Colors, Spacing } from '../../styles';
+import { Colors, Spacing } from "../../styles"
 
 export function Option({ isValidType, isSelected, inputType, title, onPress }) {
   return (
-    <TouchableOpacity onPress={onPress} testID='option'>
+    <TouchableOpacity onPress={onPress} testID="option">
       <View style={[styles.container, isSelected && styles.containerSelected]}>
         <OptionSelect
           wrapperStyle={styles.primary}
@@ -20,7 +20,7 @@ export function Option({ isValidType, isSelected, inputType, title, onPress }) {
         />
       </View>
     </TouchableOpacity>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.secondaryBlue,
   },
   primary: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
-});
+})

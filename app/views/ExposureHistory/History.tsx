@@ -1,61 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   ScrollView,
   SafeAreaView,
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
-import dayjs from 'dayjs';
+} from "react-native"
+import { SvgXml } from "react-native-svg"
+import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
+import dayjs from "dayjs"
 
-import { ExposureDatum, ExposureHistory } from '../../exposureHistory';
-import { Typography } from '../../components/Typography';
-import ExposureDatumDetail from './ExposureDatumDetail';
-import { DateTimeUtils } from '../../helpers';
-import Calendar from './Calendar';
-import { Screens } from '../../navigation';
+import { ExposureDatum, ExposureHistory } from "../../exposureHistory"
+import { Typography } from "../../components/Typography"
+import ExposureDatumDetail from "./ExposureDatumDetail"
+import { DateTimeUtils } from "../../helpers"
+import Calendar from "./Calendar"
+import { Screens } from "../../navigation"
 
-import { Icons } from '../../assets';
+import { Icons } from "../../assets"
 import {
   Buttons,
   Spacing,
   Typography as TypographyStyles,
   Colors,
-} from '../../styles';
-import DateInfoHeader from './DateInfoHeader';
+} from "../../styles"
+import DateInfoHeader from "./DateInfoHeader"
 
 interface HistoryProps {
-  exposureHistory: ExposureHistory;
+  exposureHistory: ExposureHistory
 }
 
 const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
-  const { t } = useTranslation();
-  const navigation = useNavigation();
-  const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(
-    null,
-  );
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+  const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(null)
 
   const isTodayOrBefore = (date: number) => {
-    return !dayjs(date).isAfter(dayjs(), 'day');
-  };
+    return !dayjs(date).isAfter(dayjs(), "day")
+  }
 
   const handleOnSelectDate = (datum: ExposureDatum) => {
     if (isTodayOrBefore(datum.date)) {
-      setSelectedDatum(datum);
+      setSelectedDatum(datum)
     }
-  };
+  }
 
   const handleOnPressMoreInfo = () => {
-    navigation.navigate(Screens.MoreInfo);
-  };
+    navigation.navigate(Screens.MoreInfo)
+  }
 
-  const titleText = t('screen_titles.exposure_history');
+  const titleText = t("screen_titles.exposure_history")
 
   const showExposureDetail =
-    selectedDatum && !DateTimeUtils.isInFuture(selectedDatum.date);
+    selectedDatum && !DateTimeUtils.isInFuture(selectedDatum.date)
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -65,7 +63,8 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
             <Typography style={styles.headerText}>{titleText}</Typography>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
-              style={styles.moreInfoButton}>
+              style={styles.moreInfoButton}
+            >
               <SvgXml
                 xml={Icons.QuestionMark}
                 style={styles.moreInfoButtonIcon}
@@ -90,8 +89,8 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -99,8 +98,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
   },
   headerRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     marginTop: Spacing.xSmall,
   },
   headerText: {
@@ -124,6 +123,6 @@ const styles = StyleSheet.create({
     marginTop: Spacing.small,
     marginBottom: Spacing.huge,
   },
-});
+})
 
-export default History;
+export default History

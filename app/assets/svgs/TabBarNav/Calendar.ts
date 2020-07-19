@@ -13,7 +13,7 @@ export const CalendarActive = `<svg width="24" height="22" viewBox="0 0 24 22" f
 <path d="M15.7161 8.69727H18.8674V11.8486H15.7161V8.69727Z" fill="#1F2C9B"/>
 <path d="M15.7161 14.212H18.8674V17.3633H15.7161V14.212Z" fill="#1F2C9B"/>
 </svg>
-`;
+`
 
 export const CalendarInactive = `<svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4.86875 9.09727H7.72008V11.9486H4.86875V9.09727ZM4.86875 14.612H7.72008V17.4633H4.86875V14.612ZM10.3836 9.09727H13.2349V11.9486H10.3836V9.09727ZM10.3836 14.612H13.2349V17.4633H10.3836V14.612ZM15.8983 9.09727H18.7497V11.9486H15.8983V9.09727ZM15.8983 14.612H18.7497V17.4633H15.8983V14.612Z" fill="#A5AFFB" stroke="#1F2C9B" stroke-width="0.3"/>
@@ -24,4 +24,4 @@ export const CalendarInactive = `<svg width="24" height="22" viewBox="0 0 24 22"
 <path d="M7.78015 0.65V3.34048H4.56992V0.65H7.78015Z" fill="#A5AFFB" stroke="#1F2C9B" stroke-width="0.3"/>
 <path d="M18.7489 0.65V3.42145H15.5387V0.65H18.7489Z" fill="#A5AFFB" stroke="#1F2C9B" stroke-width="0.3"/>
 </svg>
-`;
+`

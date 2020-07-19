@@ -1,24 +1,24 @@
-import React from 'react';
+import React from "react"
 import {
   ActivityIndicator,
   StyleSheet,
   ViewStyle,
   TextStyle,
   TouchableOpacity,
-} from 'react-native';
+} from "react-native"
 
-import { Typography } from './Typography';
+import { Typography } from "./Typography"
 
-import { Buttons, Typography as TypographyStyles } from '../styles';
+import { Buttons, Typography as TypographyStyles } from "../styles"
 
 interface ButtonProps {
-  label: string;
-  onPress: () => void;
-  loading?: boolean;
-  disabled?: boolean;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
-  invert?: boolean;
+  label: string
+  onPress: () => void
+  loading?: boolean
+  disabled?: boolean
+  style?: ViewStyle
+  textStyle?: TextStyle
+  invert?: boolean
 }
 
 export const Button = ({
@@ -30,28 +30,29 @@ export const Button = ({
   textStyle,
   invert,
 }: ButtonProps): JSX.Element => {
-  const styles = invert ? darkStyle : lightStyle;
+  const styles = invert ? darkStyle : lightStyle
   const buttonTextStyle =
     disabled || loading
       ? { ...styles.textDisabled, ...textStyle }
-      : { ...styles.textEnabled, ...textStyle };
+      : { ...styles.textEnabled, ...textStyle }
 
   return (
     <TouchableOpacity
       onPress={onPress}
       accessible
       accessibilityLabel={label}
-      accessibilityRole='button'
+      accessibilityRole="button"
       disabled={disabled || loading}
-      style={[styles.button, style]}>
+      style={[styles.button, style]}
+    >
       {loading ? (
-        <ActivityIndicator size={'large'} />
+        <ActivityIndicator size={"large"} />
       ) : (
         <Typography style={buttonTextStyle}>{label}</Typography>
       )}
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 /* eslint-disable react-native/no-unused-styles */
 const lightStyle = StyleSheet.create({
@@ -65,7 +66,7 @@ const lightStyle = StyleSheet.create({
     ...TypographyStyles.buttonTextDark,
     opacity: 0.5,
   },
-});
+})
 
 const darkStyle = StyleSheet.create({
   button: {
@@ -78,4 +79,4 @@ const darkStyle = StyleSheet.create({
     ...TypographyStyles.buttonTextLight,
     opacity: 0.5,
   },
-});
+})

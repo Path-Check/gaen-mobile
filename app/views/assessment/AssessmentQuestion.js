@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useContext, useEffect, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { Typography } from '../../components/Typography';
-import { Button } from './components/Button';
-import { AnswersContext } from './Context';
-import { Option } from './Option';
+import { Typography } from "../../components/Typography"
+import { Button } from "./components/Button"
+import { AnswersContext } from "./Context"
+import { Option } from "./Option"
 import {
   QUESTION_TYPE_MULTI,
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
   SCREEN_TYPE_RADIO,
-} from './constants';
+} from "./constants"
 
-import { Colors, Spacing, Typography as TypographyStyles } from '../../styles';
+import { Colors, Spacing, Typography as TypographyStyles } from "../../styles"
 
 /**
  * @typedef { import(".").SurveyQuestion } SurveyQuestion
@@ -28,38 +28,38 @@ import { Colors, Spacing, Typography as TypographyStyles } from '../../styles';
  *   question: SurveyQuestion
  * }>} */
 export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
-  const { t } = useTranslation();
-  const answers = useContext(AnswersContext);
+  const { t } = useTranslation()
+  const answers = useContext(AnswersContext)
   const [selectedValues, setSelectedValues] = useState(
     answers[question.id] || [],
-  );
+  )
 
   // Allow line breaks in the description
   const description = useMemo(() => {
-    if (!question.question_description) return null;
-    const elements = [];
-    for (const line of question.question_description.split('\n')) {
-      let l = line.trim();
-      if (!l) continue;
+    if (!question.question_description) return null
+    const elements = []
+    for (const line of question.question_description.split("\n")) {
+      let l = line.trim()
+      if (!l) continue
       elements.push(
-        <Typography testID='description' key={l} style={styles.description}>
+        <Typography testID="description" key={l} style={styles.description}>
           {l}
         </Typography>,
-      );
+      )
     }
-    return <View style={styles.descriptionWrapper}>{elements}</View>;
-  }, [question.question_description]);
+    return <View style={styles.descriptionWrapper}>{elements}</View>
+  }, [question.question_description])
 
   const displayAsOption = [
     SCREEN_TYPE_CHECKBOX,
     SCREEN_TYPE_RADIO,
     SCREEN_TYPE_DATE,
-  ].includes(question.screen_type);
+  ].includes(question.screen_type)
 
   const assessmentInputInstruction =
     question.question_type === QUESTION_TYPE_MULTI
-      ? 'Select all that apply'
-      : 'Select one';
+      ? "Select all that apply"
+      : "Select one"
 
   const options =
     displayAsOption &&
@@ -73,7 +73,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         isSelected={selectedValues.some((v) => v.index === index)}
         type={question.screen_type}
       />
-    ));
+    ))
 
   /** @type {(value: string, index: number) => void} */
   const onSelectHandler = (value, index) => {
@@ -81,46 +81,46 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       return setSelectedValues((values) => {
         // TODO: Better way to filter single value questions?
         const singleValueQuestions = [
-          'Choose not to answer',
-          'None of the above',
-          'None',
-        ];
+          "Choose not to answer",
+          "None of the above",
+          "None",
+        ]
         // this looks for an existing value inside the selected values array
         // which indicates user unselected the value
-        const unselectedValue = values.some((v) => v.index === index);
-        const currentValue = option.values[index];
+        const unselectedValue = values.some((v) => v.index === index)
+        const currentValue = option.values[index]
         // this handles deselect for values in multi question type
         // that should act as a single value type questions
         // basically when any other selection is made this question gets unselected
         const unselectSingleValueQuestion = values.filter((v) => {
-          return !singleValueQuestions.includes(option.values[v.index].label);
-        });
+          return !singleValueQuestions.includes(option.values[v.index].label)
+        })
 
         if (singleValueQuestions.includes(currentValue.label)) {
           // this logic handles single value questions in multi question type environment
           return unselectedValue
             ? unselectSingleValueQuestion
-            : [{ index, value }];
+            : [{ index, value }]
         } else {
           // this logic handles the multi value questions selection
           return unselectedValue
             ? unselectSingleValueQuestion.filter((v) => v.index !== index)
-            : [...unselectSingleValueQuestion, { index, value }];
+            : [...unselectSingleValueQuestion, { index, value }]
         }
-      });
+      })
     }
-    return setSelectedValues([{ index, value }]);
-  };
+    return setSelectedValues([{ index, value }])
+  }
 
   useEffect(() => {
-    onChange(selectedValues);
-  }, [selectedValues, onChange]);
+    onChange(selectedValues)
+  }, [selectedValues, onChange])
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <Typography use='headline2'>{question.question_text}</Typography>
+          <Typography use="headline2">{question.question_text}</Typography>
         </View>
         <View style={styles.scrollViewContent}>
           {description}
@@ -134,12 +134,12 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         <Button
           disabled={!selectedValues.length}
           onPress={onNext}
-          title={t('assessment.next')}
+          title={t("assessment.next")}
         />
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -173,4 +173,4 @@ const styles = StyleSheet.create({
   footer: {
     padding: Spacing.medium,
   },
-});
+})

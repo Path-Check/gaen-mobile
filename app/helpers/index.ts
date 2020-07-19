@@ -1,3 +1,3 @@
-import * as DateTimeUtils from './dateTimeUtils';
+import * as DateTimeUtils from "./dateTimeUtils"
 
-export { DateTimeUtils };
+export { DateTimeUtils }

@@ -1,32 +1,32 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from "react"
 
-import * as BTNativeModule from './nativeModule';
+import * as BTNativeModule from "./nativeModule"
 
 import {
   checkNotifications,
   requestNotifications,
-} from 'react-native-permissions';
-import { Platform } from 'react-native';
-import { PermissionStatus, statusToEnum } from '../permissionStatus';
+} from "react-native-permissions"
+import { Platform } from "react-native"
+import { PermissionStatus, statusToEnum } from "../permissionStatus"
 
-type ENEnablement = `DISABLED` | `ENABLED`;
-type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`;
+type ENEnablement = `DISABLED` | `ENABLED`
+type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
 
-export type ENPermissionStatus = [ENAuthorization, ENEnablement];
+export type ENPermissionStatus = [ENAuthorization, ENEnablement]
 
-const initialENStatus: ENPermissionStatus = ['UNAUTHORIZED', 'DISABLED'];
+const initialENStatus: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
 
 interface PermissionContextState {
   notification: {
-    status: PermissionStatus;
-    check: () => void;
-    request: () => void;
-  };
+    status: PermissionStatus
+    check: () => void
+    request: () => void
+  }
   exposureNotifications: {
-    status: ENPermissionStatus;
-    check: () => void;
-    request: () => void;
-  };
+    status: ENPermissionStatus
+    check: () => void
+    request: () => void
+  }
 }
 
 const initialState = {
@@ -40,12 +40,12 @@ const initialState = {
     check: () => {},
     request: () => {},
   },
-};
+}
 
-const PermissionsContext = createContext<PermissionContextState>(initialState);
+const PermissionsContext = createContext<PermissionContextState>(initialState)
 
 interface ExposureNotificationProviderProps {
-  children: JSX.Element;
+  children: JSX.Element
 }
 
 const PermissionsProvider = ({
@@ -54,56 +54,56 @@ const PermissionsProvider = ({
   const [
     exposureNotificationsPermission,
     setExposureNotificationsPermission,
-  ] = useState<ENPermissionStatus>(initialENStatus);
+  ] = useState<ENPermissionStatus>(initialENStatus)
 
   const [notificationPermission, setNotificationPermission] = useState(
     PermissionStatus.UNKNOWN,
-  );
+  )
 
   useEffect(() => {
     const subscription = BTNativeModule.subscribeToEnabledStatusEvents(
       (status: ENPermissionStatus) => {
-        setExposureNotificationsPermission(status);
+        setExposureNotificationsPermission(status)
       },
-    );
+    )
 
     const checkAllPermissions = async () => {
-      const isiOS = Platform.OS === 'ios';
+      const isiOS = Platform.OS === "ios"
       await Promise.all([
         isiOS ? checkNotificationPermission() : null,
         checkENPermission(),
-      ]);
-    };
+      ])
+    }
 
-    checkAllPermissions();
+    checkAllPermissions()
 
     return () => {
-      subscription?.remove();
-    };
-  }, []);
+      subscription?.remove()
+    }
+  }, [])
 
   const checkENPermission = () => {
     const handleNativeResponse = (status: ENPermissionStatus) => {
-      setExposureNotificationsPermission(status);
-    };
-    BTNativeModule.getCurrentENPermissionsStatus(handleNativeResponse);
-  };
+      setExposureNotificationsPermission(status)
+    }
+    BTNativeModule.getCurrentENPermissionsStatus(handleNativeResponse)
+  }
 
   const checkNotificationPermission = async () => {
-    const { status } = await checkNotifications();
-    setNotificationPermission(statusToEnum(status));
-  };
+    const { status } = await checkNotifications()
+    setNotificationPermission(statusToEnum(status))
+  }
 
   const requestENPermission = () => {
-    const handleNativeResponse = () => {};
-    BTNativeModule.requestAuthorization(handleNativeResponse);
-  };
+    const handleNativeResponse = () => {}
+    BTNativeModule.requestAuthorization(handleNativeResponse)
+  }
 
   const requestNotificationPermission = async () => {
-    const { status } = await requestNotifications(['alert', 'sound']);
-    setNotificationPermission(statusToEnum(status));
-    return status;
-  };
+    const { status } = await requestNotifications(["alert", "sound"])
+    setNotificationPermission(statusToEnum(status))
+    return status
+  }
 
   return (
     <PermissionsContext.Provider
@@ -118,11 +118,12 @@ const PermissionsProvider = ({
           check: checkENPermission,
           request: requestENPermission,
         },
-      }}>
+      }}
+    >
       {children}
     </PermissionsContext.Provider>
-  );
-};
+  )
+}
 
-export { PermissionsProvider };
-export default PermissionsContext;
+export { PermissionsProvider }
+export default PermissionsContext

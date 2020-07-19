@@ -2,13 +2,13 @@ import {
   NativeEventEmitter,
   NativeModules,
   EventSubscription,
-} from 'react-native';
+} from "react-native"
 
-import { ENPermissionStatus } from './PermissionsContext';
-import { ExposureInfo, Posix } from '../exposureHistory';
-import { ENDiagnosisKey } from '../views/Settings/ENLocalDiagnosisKeyScreen';
-import { RawExposure, toExposureInfo } from './exposureNotifications';
-import { ExposureKey } from './AffectedUserFlow/exposureKey';
+import { ENPermissionStatus } from "./PermissionsContext"
+import { ExposureInfo, Posix } from "../exposureHistory"
+import { ENDiagnosisKey } from "../views/Settings/ENLocalDiagnosisKeyScreen"
+import { RawExposure, toExposureInfo } from "./exposureNotifications"
+import { ExposureKey } from "./AffectedUserFlow/exposureKey"
 
 // Event Subscriptions
 export const subscribeToExposureEvents = (
@@ -16,154 +16,154 @@ export const subscribeToExposureEvents = (
 ): EventSubscription => {
   const ExposureEvents = new NativeEventEmitter(
     NativeModules.ExposureEventEmitter,
-  );
+  )
   return ExposureEvents.addListener(
-    'onExposureRecordUpdated',
+    "onExposureRecordUpdated",
     (rawExposure: string) => {
-      const rawExposures: RawExposure[] = JSON.parse(rawExposure);
-      cb(toExposureInfo(rawExposures));
+      const rawExposures: RawExposure[] = JSON.parse(rawExposure)
+      cb(toExposureInfo(rawExposures))
     },
-  );
-};
+  )
+}
 
 export const subscribeToEnabledStatusEvents = (
   cb: (status: ENPermissionStatus) => void,
 ): EventSubscription => {
   const ExposureEvents = new NativeEventEmitter(
     NativeModules.ExposureEventEmitter,
-  );
+  )
   return ExposureEvents.addListener(
-    'onEnabledStatusUpdated',
+    "onEnabledStatusUpdated",
     (data: string[]) => {
-      const status = toStatus(data);
-      cb(status);
+      const status = toStatus(data)
+      cb(status)
     },
-  );
-};
+  )
+}
 
 const toStatus = (data: string[]): ENPermissionStatus => {
-  const networkAuthorization = data[0];
-  const networkEnablement = data[1];
-  const result: ENPermissionStatus = ['UNAUTHORIZED', 'DISABLED'];
-  if (networkAuthorization === 'AUTHORIZED') {
-    result[0] = 'AUTHORIZED';
+  const networkAuthorization = data[0]
+  const networkEnablement = data[1]
+  const result: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
+  if (networkAuthorization === "AUTHORIZED") {
+    result[0] = "AUTHORIZED"
   }
-  if (networkEnablement === 'ENABLED') {
-    result[1] = 'ENABLED';
+  if (networkEnablement === "ENABLED") {
+    result[1] = "ENABLED"
   }
-  return result;
-};
+  return result
+}
 
 // Permissions Module
-const permissionsModule = NativeModules.ENPermissionsModule;
+const permissionsModule = NativeModules.ENPermissionsModule
 
 export const requestAuthorization = async (
   cb: (data: string) => void,
 ): Promise<void> => {
-  permissionsModule.requestExposureNotificationAuthorization(cb);
-};
+  permissionsModule.requestExposureNotificationAuthorization(cb)
+}
 
 export const getCurrentENPermissionsStatus = async (
   cb: (status: ENPermissionStatus) => void,
 ): Promise<void> => {
   permissionsModule.getCurrentENPermissionsStatus((data: string[]) => {
-    const status = toStatus(data);
-    cb(status);
-  });
-};
+    const status = toStatus(data)
+    cb(status)
+  })
+}
 
 // Exposure History Module
-const exposureHistoryModule = NativeModules.ExposureHistoryModule;
+const exposureHistoryModule = NativeModules.ExposureHistoryModule
 export const getCurrentExposures = async (
   cb: (exposureInfo: ExposureInfo) => void,
 ): Promise<void> => {
   exposureHistoryModule.getCurrentExposures((rawExposure: string) => {
-    const rawExposures: RawExposure[] = JSON.parse(rawExposure);
-    cb(toExposureInfo(rawExposures));
-  });
-};
+    const rawExposures: RawExposure[] = JSON.parse(rawExposure)
+    cb(toExposureInfo(rawExposures))
+  })
+}
 
 export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> => {
   try {
-    return await exposureHistoryModule.fetchLastDetectionDate();
+    return await exposureHistoryModule.fetchLastDetectionDate()
   } catch {
-    return null;
+    return null
   }
-};
+}
 
 // Exposure Key Module
-const exposureKeyModule = NativeModules.ExposureKeyModule;
+const exposureKeyModule = NativeModules.ExposureKeyModule
 
 interface RawExposureKey {
-  key: null | string;
-  rollingPeriod: number;
-  rollingStartNumber: number;
-  transmissionRisk: number;
+  key: null | string
+  rollingPeriod: number
+  rollingStartNumber: number
+  transmissionRisk: number
 }
 
 export const getExposureKeys = async (): Promise<ExposureKey[]> => {
-  const keys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys();
-  return keys.map(toExposureKey);
-};
+  const keys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
+  return keys.map(toExposureKey)
+}
 
 const toExposureKey = (rawExposureKey: RawExposureKey): ExposureKey => {
   return {
-    key: rawExposureKey.key || '',
+    key: rawExposureKey.key || "",
     rollingPeriod: rawExposureKey.rollingPeriod,
     rollingStartNumber: rawExposureKey.rollingStartNumber,
     transmissionRisk: rawExposureKey.transmissionRisk,
-  };
-};
+  }
+}
 
 export const submitDiagnosisKeys = async (
   certificate: string,
   hmacKey: string,
 ): Promise<string> => {
-  return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey);
-};
+  return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
+}
 
 // Debug Module
-const debugModule = NativeModules.DebugMenuModule;
+const debugModule = NativeModules.DebugMenuModule
 
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
-  return debugModule.fetchDiagnosisKeys();
-};
+  return debugModule.fetchDiagnosisKeys()
+}
 
-export type ENModuleErrorMessage = string | null;
-export type ENModuleSuccessMessage = string | null;
+export type ENModuleErrorMessage = string | null
+export type ENModuleSuccessMessage = string | null
 
 export const detectExposuresNow = async (): Promise<string> => {
-  return debugModule.detectExposuresNow();
-};
+  return debugModule.detectExposuresNow()
+}
 
-export const simulateExposure = async (): Promise<'success'> => {
-  return debugModule.simulateExposure();
-};
+export const simulateExposure = async (): Promise<"success"> => {
+  return debugModule.simulateExposure()
+}
 
 export const fetchExposures = async (): Promise<RawExposure[]> => {
-  return debugModule.fetchExposures();
-};
+  return debugModule.fetchExposures()
+}
 
 export const showLastProcessedFilePath = async (): Promise<string> => {
-  return debugModule.showLastProcessedFilePath();
-};
+  return debugModule.showLastProcessedFilePath()
+}
 
-export const resetExposure = async (): Promise<'success'> => {
-  return debugModule.resetExposure();
-};
+export const resetExposure = async (): Promise<"success"> => {
+  return debugModule.resetExposure()
+}
 
-export const toggleExposureNotifications = async (): Promise<'success'> => {
-  return debugModule.toggleExposureNotifications();
-};
+export const toggleExposureNotifications = async (): Promise<"success"> => {
+  return debugModule.toggleExposureNotifications()
+}
 
-export const submitExposureKeys = async (): Promise<'success'> => {
-  return debugModule.submitExposureKeys();
-};
+export const submitExposureKeys = async (): Promise<"success"> => {
+  return debugModule.submitExposureKeys()
+}
 
-export const simulateExposureDetectionError = async (): Promise<'success'> => {
-  return debugModule.simulateExposureDetectionError();
-};
+export const simulateExposureDetectionError = async (): Promise<"success"> => {
+  return debugModule.simulateExposureDetectionError()
+}
 
-export const resetExposures = async (): Promise<'success'> => {
-  return debugModule.resetExposures();
-};
+export const resetExposures = async (): Promise<"success"> => {
+  return debugModule.resetExposures()
+}

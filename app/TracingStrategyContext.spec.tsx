@@ -1,100 +1,100 @@
-import React from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
-import { render, cleanup } from '@testing-library/react-native';
-import '@testing-library/jest-native/extend-expect';
+import React from "react"
+import { View, Text, ImageBackground, StyleSheet } from "react-native"
+import { render, cleanup } from "@testing-library/react-native"
+import "@testing-library/jest-native/extend-expect"
 
 import {
   useTracingStrategyContext,
   TracingStrategyProvider,
   useStrategyContent,
-} from './TracingStrategyContext';
+} from "./TracingStrategyContext"
 import {
   testStrategyAssets,
   testStrategyCopy,
-} from './factories/tracingStrategy';
-import { factories } from './factories';
-import { Images } from '../app/assets/images/';
+} from "./factories/tracingStrategy"
+import { factories } from "./factories"
+import { Images } from "../app/assets/images/"
 
-import { TracingStrategy } from './tracingStrategy';
+import { TracingStrategy } from "./tracingStrategy"
 
-afterEach(cleanup);
+afterEach(cleanup)
 
-jest.mock('react-i18next', () => ({
+jest.mock("react-i18next", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
-}));
+}))
 
 const renderTracingStrategyProvider = (strategy: TracingStrategy) => {
   const TestTracingStrategyConsumer = () => {
-    const { name, homeScreenComponent } = useTracingStrategyContext();
-    const { StrategyAssets, StrategyCopy } = useStrategyContent();
+    const { name, homeScreenComponent } = useTracingStrategyContext()
+    const { StrategyAssets, StrategyCopy } = useStrategyContent()
 
-    const HomeScreen = homeScreenComponent;
+    const HomeScreen = homeScreenComponent
 
     return (
       <View>
-        <Text testID={'tracing-strategy-name'}>{name}</Text>
+        <Text testID={"tracing-strategy-name"}>{name}</Text>
         <ImageBackground
           source={StrategyAssets.personalPrivacyBackground}
-          testID={'tracing-strategy-assets'}
+          testID={"tracing-strategy-assets"}
           style={styles.background}
         />
-        <Text testID={'tracing-strategy-copy'}>{StrategyCopy.aboutHeader}</Text>
-        <HomeScreen testID={'home-screen'} />
+        <Text testID={"tracing-strategy-copy"}>{StrategyCopy.aboutHeader}</Text>
+        <HomeScreen testID={"home-screen"} />
       </View>
-    );
-  };
+    )
+  }
 
   return render(
     <TracingStrategyProvider strategy={strategy}>
       <TestTracingStrategyConsumer />
     </TracingStrategyProvider>,
-  );
-};
+  )
+}
 
-describe('TracingStrategyProvider', () => {
-  describe('when given a tracing strategy ', () => {
-    it('mounts the permssions provider', () => {
+describe("TracingStrategyProvider", () => {
+  describe("when given a tracing strategy ", () => {
+    it("mounts the permssions provider", () => {
       const PermissionsProvider = ({
         children,
       }: {
-        children: JSX.Element;
+        children: JSX.Element
       }): JSX.Element => {
-        return <View testID={'permissions-provider'}>{children}</View>;
-      };
+        return <View testID={"permissions-provider"}>{children}</View>
+      }
 
       const strategy = factories.tracingStrategy.build({
-        name: 'test-strategy',
+        name: "test-strategy",
         permissionsProvider: PermissionsProvider,
-      });
+      })
 
-      const { getByTestId } = renderTracingStrategyProvider(strategy);
+      const { getByTestId } = renderTracingStrategyProvider(strategy)
 
-      const name = getByTestId('tracing-strategy-name');
-      const permissionsProvider = getByTestId('permissions-provider');
+      const name = getByTestId("tracing-strategy-name")
+      const permissionsProvider = getByTestId("permissions-provider")
 
-      expect(name).toHaveTextContent('test-strategy');
-      expect(permissionsProvider).toBeTruthy();
-    });
+      expect(name).toHaveTextContent("test-strategy")
+      expect(permissionsProvider).toBeTruthy()
+    })
 
-    it('subscribes to exposure info events', async () => {
-      const removeSubscriptionMock = jest.fn();
+    it("subscribes to exposure info events", async () => {
+      const removeSubscriptionMock = jest.fn()
       const strategy = factories.tracingStrategy.build({
         exposureEventsStrategy: {
           exposureInfoSubscription: () => {
-            return { remove: removeSubscriptionMock };
+            return { remove: removeSubscriptionMock }
           },
         },
-      });
+      })
 
-      const { unmount } = renderTracingStrategyProvider(strategy);
+      const { unmount } = renderTracingStrategyProvider(strategy)
 
-      unmount();
-      expect(removeSubscriptionMock).toHaveBeenCalled();
-    });
+      unmount()
+      expect(removeSubscriptionMock).toHaveBeenCalled()
+    })
 
-    it('provides the correct strategy content', () => {
-      const expectedAsset = Images.BlueGradientBackground;
-      const expectedCopy = 'Test About Header';
+    it("provides the correct strategy content", () => {
+      const expectedAsset = Images.BlueGradientBackground
+      const expectedCopy = "Test About Header"
 
       const strategy = factories.tracingStrategy.build({
         assets: {
@@ -105,46 +105,46 @@ describe('TracingStrategyProvider', () => {
           return {
             ...testStrategyCopy,
             aboutHeader: expectedCopy,
-          };
+          }
         },
-      });
+      })
 
-      const { getByTestId } = renderTracingStrategyProvider(strategy);
+      const { getByTestId } = renderTracingStrategyProvider(strategy)
 
-      const assets = getByTestId('tracing-strategy-assets');
-      const copy = getByTestId('tracing-strategy-copy');
+      const assets = getByTestId("tracing-strategy-assets")
+      const copy = getByTestId("tracing-strategy-copy")
 
-      expect(assets).toHaveProp('source', {
-        testUri: '../../../app/assets/images/blueGradientBackground.png',
-      });
-      expect(copy).toHaveTextContent(expectedCopy);
-    });
+      expect(assets).toHaveProp("source", {
+        testUri: "../../../app/assets/images/blueGradientBackground.png",
+      })
+      expect(copy).toHaveTextContent(expectedCopy)
+    })
 
-    describe('when the user is on the HomeScreen', () => {
-      it('Shows the correct component', async () => {
+    describe("when the user is on the HomeScreen", () => {
+      it("Shows the correct component", async () => {
         const HomeScreen = () => {
-          return <View testID={'home-screen'} />;
-        };
+          return <View testID={"home-screen"} />
+        }
 
         const strategy = factories.tracingStrategy.build({
           homeScreenComponent: HomeScreen,
-        });
+        })
 
-        const { getByTestId } = renderTracingStrategyProvider(strategy);
+        const { getByTestId } = renderTracingStrategyProvider(strategy)
 
-        const homeScreen = getByTestId('home-screen');
+        const homeScreen = getByTestId("home-screen")
 
-        expect(homeScreen).toBeTruthy();
-      });
-    });
-  });
-});
+        expect(homeScreen).toBeTruthy()
+      })
+    })
+  })
+})
 
 const styles = StyleSheet.create({
   background: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    position: "absolute",
   },
-});
+})
