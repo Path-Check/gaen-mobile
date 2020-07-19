@@ -13,18 +13,12 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { Button } from "../../components/Button"
-import { Typography } from "../../components/Typography"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
 import * as BTNativeModule from "../../bt/nativeModule"
 
 import { Screens } from "../../navigation"
 import { Icons, Images } from "../../assets"
-import {
-  Colors,
-  Spacing,
-  Buttons,
-  Iconography,
-  Typography as TypographyStyles,
-} from "../../styles"
+import { Colors, Spacing, Buttons, Iconography, Typography } from "../../styles"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -76,8 +70,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           </View>
 
           <View style={styles.content}>
-            <Typography style={styles.header}>{title}</Typography>
-            <Typography style={styles.contentText}>{body}</Typography>
+            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
+            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
           </View>
 
           <View>
@@ -92,9 +86,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
               onPress={handleOnPressCancel}
               style={styles.secondaryButton}
             >
-              <Typography style={styles.secondaryButtonText}>
+              <RTLEnabledText style={styles.secondaryButtonText}>
                 {t("export.consent_button_cancel")}
-              </Typography>
+              </RTLEnabledText>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -118,7 +112,7 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xxHuge,
   },
   header: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
     color: Colors.white,
     paddingBottom: Spacing.medium,
   },
@@ -127,20 +121,20 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   contentText: {
-    ...TypographyStyles.secondaryContent,
+    ...Typography.secondaryContent,
     color: Colors.white,
   },
   button: {
     ...Buttons.primaryInverted,
   },
   buttonText: {
-    ...TypographyStyles.buttonTextPrimaryInverted,
+    ...Typography.buttonTextPrimaryInverted,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...TypographyStyles.buttonTextSecondaryInverted,
+    ...Typography.buttonTextSecondaryInverted,
   },
 })
 

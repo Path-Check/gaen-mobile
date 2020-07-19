@@ -4,16 +4,11 @@ import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
 
 import { ExposureHistory, ExposureDatum } from "../exposureHistory"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureDatumIndicator from "./ExposureDatumIndicator"
 import LegendModal from "./LegendModal"
 
-import {
-  Buttons,
-  Colors,
-  Spacing,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 interface CalendarProps {
   exposureHistory: ExposureHistory
@@ -92,14 +87,14 @@ const Calendar = ({
   return (
     <View testID={"exposure-history-calendar"} style={styles.container}>
       <View style={styles.header}>
-        <Typography style={styles.monthText}>{title}</Typography>
+        <RTLEnabledText style={styles.monthText}>{title}</RTLEnabledText>
         <TouchableOpacity
           onPress={handleOnPressLegend}
           style={styles.legendButton}
         >
-          <Typography style={styles.legendText}>
+          <RTLEnabledText style={styles.legendText}>
             {t("exposure_history.legend_button")}
-          </Typography>
+          </RTLEnabledText>
         </TouchableOpacity>
       </View>
       <View style={styles.calendarContainer}>
@@ -126,16 +121,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   monthText: {
-    ...TypographyStyles.label,
-    ...TypographyStyles.bold,
+    ...Typography.label,
+    ...Typography.bold,
     color: Colors.secondaryHeaderText,
   },
   legendButton: {
     ...Buttons.tinyTeritiaryRounded,
   },
   legendText: {
-    ...TypographyStyles.label,
-    ...TypographyStyles.bold,
+    ...Typography.label,
+    ...Typography.bold,
     color: Colors.secondaryHeaderText,
   },
   calendarContainer: {
@@ -155,7 +150,7 @@ const styles = StyleSheet.create({
     width: Spacing.xHuge,
   },
   labelTextStyle: {
-    ...TypographyStyles.label,
+    ...Typography.label,
   },
 })
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Button } from "./Button"
 import { AnswersContext } from "./Context"
 import { Option } from "./Option"
@@ -13,7 +13,7 @@ import {
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-import { Colors, Spacing, Typography as TypographyStyles } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
 /**
  * @typedef { import(".").SurveyQuestion } SurveyQuestion
@@ -42,9 +42,9 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       let l = line.trim()
       if (!l) continue
       elements.push(
-        <Typography testID="description" key={l} style={styles.description}>
+        <RTLEnabledText testID="description" key={l} style={styles.description}>
           {l}
-        </Typography>,
+        </RTLEnabledText>,
       )
     }
     return <View style={styles.descriptionWrapper}>{elements}</View>
@@ -120,13 +120,15 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <Typography use="headline2">{question.question_text}</Typography>
+          <RTLEnabledText use="headline2">
+            {question.question_text}
+          </RTLEnabledText>
         </View>
         <View style={styles.scrollViewContent}>
           {description}
-          <Typography style={styles.instruction}>
+          <RTLEnabledText style={styles.instruction}>
             {assessmentInputInstruction}
-          </Typography>
+          </RTLEnabledText>
           <View style={styles.optionsWrapper}>{options}</View>
         </View>
       </ScrollView>
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
   },
   description: {
-    fontFamily: TypographyStyles.baseFontFamily,
+    fontFamily: Typography.baseFontFamily,
   },
   descriptionWrapper: {
     marginTop: Spacing.small,
@@ -166,8 +168,8 @@ const styles = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   instruction: {
-    ...TypographyStyles.assessmentInstruction,
-    fontFamily: TypographyStyles.baseFontFamily,
+    ...Typography.assessmentInstruction,
+    fontFamily: Typography.baseFontFamily,
     marginTop: Spacing.xLarge,
   },
   footer: {

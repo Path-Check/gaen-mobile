@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Images } from "../assets"
 import { Colors, Spacing } from "../styles"
@@ -45,28 +45,30 @@ const Licenses = (): JSX.Element => {
         alwaysBounceVertical={false}
       >
         <View>
-          <Typography use="headline2" testID={"licenses-legal-header"}>
+          <RTLEnabledText use="headline2" testID={"licenses-legal-header"}>
             {legalHeaderText}
-          </Typography>
+          </RTLEnabledText>
           <View
             style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
           >
-            <Typography use="body2">{t("label.legal_page_address")}</Typography>
+            <RTLEnabledText use="body2">
+              {t("label.legal_page_address")}
+            </RTLEnabledText>
             <View style={{ height: 20 }} />
-            <Typography
+            <RTLEnabledText
               use="body2"
               onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
               style={styles.hyperlink}
             >
               {infoAddress}
-            </Typography>
-            <Typography
+            </RTLEnabledText>
+            <RTLEnabledText
               use="body2"
               onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
               style={styles.hyperlink}
             >
               {pathCheckAddress}
-            </Typography>
+            </RTLEnabledText>
           </View>
         </View>
       </ScrollView>
@@ -74,9 +76,9 @@ const Licenses = (): JSX.Element => {
         style={styles.termsInfoRow}
         onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
       >
-        <Typography style={{ color: Colors.white }} use="body1">
+        <RTLEnabledText style={{ color: Colors.white }} use="body1">
           {t("label.privacy_policy")}
-        </Typography>
+        </RTLEnabledText>
         <View style={styles.arrowContainer}>
           <Image source={Images.ForeArrow} />
         </View>

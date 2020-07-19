@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { InfoText } from "./InfoText"
 import { Button } from "./Button"
 import { Info } from "./Info"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Colors } from "../styles"
 import { Icons } from "../assets"
 
@@ -45,9 +45,9 @@ const AgreementFooter = ({ description, onPress, buttonTitle }) => (
       onPress={onPress}
       title={buttonTitle}
     />
-    <Typography style={styles.typographyStyle} use="body4">
+    <RTLEnabledText style={styles.typographyStyle} use="body4">
       {description}
-    </Typography>
+    </RTLEnabledText>
   </>
 )
 

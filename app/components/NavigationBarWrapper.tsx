@@ -3,10 +3,10 @@ import { SafeAreaView, TouchableOpacity, View, StyleSheet } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import { useStatusBarEffect } from "../navigation"
-import { Typography } from "./Typography"
+import { RTLEnabledText } from "./RTLEnabledText"
 
 import { Icons } from "../assets"
-import { Spacing, Colors, Typography as TypographyStyles } from "../styles"
+import { Spacing, Colors, Typography } from "../styles"
 import { isPlatformAndroid } from "../Util"
 
 interface NavigationBarWrapperProps {
@@ -56,7 +56,7 @@ export const NavigationBarWrapper = ({
           ) : null}
         </View>
         <View style={styles.middleContent}>
-          <Typography style={styles.headerText}>{title}</Typography>
+          <RTLEnabledText style={styles.headerText}>{title}</RTLEnabledText>
         </View>
         <View style={styles.rightContent} />
       </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-    ...TypographyStyles.navHeader,
+    ...Typography.navHeader,
   },
   contentContainer: {
     backgroundColor: Colors.primaryBackground,

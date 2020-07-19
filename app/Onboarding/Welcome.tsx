@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { EulaModal } from "./EulaModal"
 import { getLocalNames } from "../locales/languages"
 
@@ -54,15 +54,15 @@ const Welcome: FunctionComponent = () => {
               onPress={() => navigation.navigate(Screens.LanguageSelection)}
               style={styles.languageSelector}
             >
-              <Typography style={styles.languageSelectorText}>
+              <RTLEnabledText style={styles.languageSelectorText}>
                 {languageName}
-              </Typography>
+              </RTLEnabledText>
             </TouchableOpacity>
           </View>
           <View style={styles.contentContainer}>
-            <Typography style={styles.mainText}>
+            <RTLEnabledText style={styles.mainText}>
               {t("label.launch_screen1_header")}
-            </Typography>
+            </RTLEnabledText>
           </View>
           <View style={styles.footerContainer}>
             <EulaModal

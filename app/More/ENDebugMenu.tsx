@@ -11,7 +11,7 @@ import {
 } from "react-native"
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { BTNativeModule } from "../bt"
 import { NavigationProp, Screens } from "../navigation"
 
@@ -103,7 +103,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[styles.listItem, style]} onPress={onPress}>
-        <Typography use={"body1"}>{label}</Typography>
+        <RTLEnabledText use={"body1"}>{label}</RTLEnabledText>
       </TouchableOpacity>
     )
   }

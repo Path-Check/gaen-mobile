@@ -5,10 +5,10 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime)
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureHistoryContext from "../ExposureHistoryContext"
 
-import { Typography as TypographyStyles } from "../styles"
+import { Typography } from "../styles"
 
 const DateInfoHeader: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -28,19 +28,19 @@ const DateInfoHeader: FunctionComponent = () => {
   }
 
   return (
-    <Typography style={styles.subHeaderText}>
+    <RTLEnabledText style={styles.subHeaderText}>
       <>
         {lastDaysText}
         {updatedAtText}
       </>
-    </Typography>
+    </RTLEnabledText>
   )
 }
 
 const styles = StyleSheet.create({
   subHeaderText: {
-    ...TypographyStyles.header4,
-    ...TypographyStyles.bold,
+    ...Typography.header4,
+    ...Typography.bold,
   },
 })
 

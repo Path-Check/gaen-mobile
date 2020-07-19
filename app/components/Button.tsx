@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from "react-native"
 
-import { Typography } from "./Typography"
+import { RTLEnabledText } from "./RTLEnabledText"
 
-import { Buttons, Typography as TypographyStyles } from "../styles"
+import { Buttons, Typography } from "../styles"
 
 interface ButtonProps {
   label: string
@@ -48,7 +48,7 @@ export const Button = ({
       {loading ? (
         <ActivityIndicator size={"large"} />
       ) : (
-        <Typography style={buttonTextStyle}>{label}</Typography>
+        <RTLEnabledText style={buttonTextStyle}>{label}</RTLEnabledText>
       )}
     </TouchableOpacity>
   )
@@ -60,10 +60,10 @@ const lightStyle = StyleSheet.create({
     ...Buttons.largeWhite,
   },
   textEnabled: {
-    ...TypographyStyles.buttonTextDark,
+    ...Typography.buttonTextDark,
   },
   textDisabled: {
-    ...TypographyStyles.buttonTextDark,
+    ...Typography.buttonTextDark,
     opacity: 0.5,
   },
 })
@@ -73,10 +73,10 @@ const darkStyle = StyleSheet.create({
     ...Buttons.largeBlue,
   },
   textEnabled: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
   textDisabled: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
     opacity: 0.5,
   },
 })

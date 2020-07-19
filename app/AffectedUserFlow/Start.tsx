@@ -10,19 +10,14 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
 
 import { Screens } from "../navigation"
 
 import { Images, Icons } from "../assets"
-import {
-  Iconography,
-  Spacing,
-  Colors,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Iconography, Spacing, Colors, Typography } from "../styles"
 
 export const ExportIntro = (): JSX.Element => {
   const { t } = useTranslation()
@@ -56,8 +51,8 @@ export const ExportIntro = (): JSX.Element => {
               />
             </View>
 
-            <Typography style={styles.header}>{title}</Typography>
-            <Typography style={styles.contentText}>{body}</Typography>
+            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
+            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
           </View>
 
           <Button label={t("common.start")} onPress={handleOnPressNext} />
@@ -82,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xxHuge,
   },
   header: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
     color: Colors.white,
   },
   iconContainerCircle: {
@@ -90,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   contentText: {
-    ...TypographyStyles.secondaryContent,
+    ...Typography.secondaryContent,
     color: Colors.white,
     paddingTop: Spacing.medium,
   },

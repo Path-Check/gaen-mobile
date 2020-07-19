@@ -12,18 +12,13 @@ import { useTranslation } from "react-i18next"
 import loadLocalResource from "react-native-local-resource"
 import WebView from "react-native-webview"
 
-import { Button, Checkbox, IconButton, Typography } from "../components"
+import { Button, Checkbox, IconButton, RTLEnabledText } from "../components"
 import en from "../locales/eula/en.html"
 import es_PR from "../locales/eula/es_PR.html"
 import ht from "../locales/eula/ht.html"
 
 import { Icons } from "../assets"
-import {
-  Spacing,
-  Buttons,
-  Colors,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Spacing, Buttons, Colors, Typography } from "../styles"
 
 const EULA_FILES = { en, es_PR, ht }
 
@@ -64,9 +59,9 @@ export const EulaModal = ({ selectedLocale, continueFunction }) => {
   return (
     <>
       <TouchableOpacity style={styles.button} onPress={handleOnPressGetStarted}>
-        <Typography style={styles.buttonText}>
+        <RTLEnabledText style={styles.buttonText}>
           {t("label.launch_get_started")}
-        </Typography>
+        </RTLEnabledText>
       </TouchableOpacity>
       <Modal animationType="slide" transparent visible={modalVisible}>
         <View style={styles.container}>
@@ -99,9 +94,9 @@ export const EulaModal = ({ selectedLocale, continueFunction }) => {
                   onPress={() => toggleCheckbox(!boxChecked)}
                   checked={boxChecked}
                 />
-                <Typography style={styles.smallDescriptionText}>
+                <RTLEnabledText style={styles.smallDescriptionText}>
                   {t("onboarding.eula_message")}
-                </Typography>
+                </RTLEnabledText>
               </View>
               <Button
                 label={t("onboarding.eula_continue")}
@@ -140,13 +135,13 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   smallDescriptionText: {
-    ...TypographyStyles.label,
+    ...Typography.label,
     color: Colors.invertedText,
   },
   button: {
     ...Buttons.largeWhite,
   },
   buttonText: {
-    ...TypographyStyles.buttonTextDark,
+    ...Typography.buttonTextDark,
   },
 })

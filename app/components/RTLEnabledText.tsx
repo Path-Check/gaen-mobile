@@ -3,7 +3,7 @@ import { Text, TextStyle } from "react-native"
 
 import { useLanguageDirection } from "../locales/languages"
 
-import { Typography as TypographyStyles } from "../styles"
+import { Typography } from "../styles"
 
 type TypographicUse =
   | "headline1"
@@ -18,7 +18,7 @@ type TypographicUse =
   | "body3"
   | "body4"
 
-interface TypographyProps {
+interface RTLEnabledTextProps {
   use?: TypographicUse
   style?: TextStyle
   testID?: string
@@ -26,49 +26,49 @@ interface TypographyProps {
   onPress?: () => void
 }
 
-export const Typography = ({
+export const RTLEnabledText = ({
   use = "body1",
   style,
   testID,
   children,
   onPress,
-}: TypographyProps): JSX.Element => {
+}: RTLEnabledTextProps): JSX.Element => {
   const writingDirection = useLanguageDirection()
 
   const useToStyle = () => {
     switch (use) {
       case "headline1": {
-        return TypographyStyles.header1
+        return Typography.header1
       }
       case "headline2": {
-        return TypographyStyles.header2
+        return Typography.header2
       }
       case "headline3": {
-        return TypographyStyles.header3
+        return Typography.header3
       }
       case "headline4": {
-        return TypographyStyles.header4
+        return Typography.header4
       }
       case "headline5": {
-        return TypographyStyles.header5
+        return Typography.header5
       }
       case "headline6": {
-        return TypographyStyles.header6
+        return Typography.header6
       }
       case "headline7": {
-        return TypographyStyles.header7
+        return Typography.header7
       }
       case "body1": {
-        return TypographyStyles.mainContent
+        return Typography.mainContent
       }
       case "body2": {
-        return TypographyStyles.secondaryContent
+        return Typography.secondaryContent
       }
       case "body3": {
-        return TypographyStyles.tertiaryContent
+        return Typography.tertiaryContent
       }
       case "body4": {
-        return TypographyStyles.quaternaryContent
+        return Typography.quaternaryContent
       }
     }
   }

@@ -4,17 +4,11 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Screens } from "../navigation"
 
-import {
-  Layout,
-  Spacing,
-  Colors,
-  Buttons,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Layout, Spacing, Colors, Buttons, Typography } from "../styles"
 
 export const ExportComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
@@ -33,14 +27,14 @@ export const ExportComplete: FunctionComponent = () => {
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View>
-            <Typography style={styles.header}>{title}</Typography>
-            <Typography style={styles.contentText}>{body}</Typography>
+            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
+            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleOnPressDone}>
-            <Typography style={styles.buttonText}>
+            <RTLEnabledText style={styles.buttonText}>
               {t("common.done")}
-            </Typography>
+            </RTLEnabledText>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -63,17 +57,17 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   header: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
     paddingBottom: Spacing.small,
   },
   contentText: {
-    ...TypographyStyles.secondaryContent,
+    ...Typography.secondaryContent,
   },
   button: {
     ...Buttons.largeBlue,
   },
   buttonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
 })
 

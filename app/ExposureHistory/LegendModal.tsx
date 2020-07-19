@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import {
   Affordances,
@@ -18,7 +18,7 @@ import {
   Colors,
   Iconography,
   Spacing,
-  Typography as TypographyStyles,
+  Typography,
 } from "../styles"
 
 export type ModalState = "Open" | "Closed"
@@ -80,9 +80,9 @@ const LegendModal = ({
                   <View style={legendItem.badgeStyle} />
                 </View>
 
-                <Typography style={styles.legendText}>
+                <RTLEnabledText style={styles.legendText}>
                   {legendItem.itemText}
-                </Typography>
+                </RTLEnabledText>
               </View>
             )
           })}
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   legendText: {
-    ...TypographyStyles.label,
-    ...TypographyStyles.bold,
+    ...Typography.label,
+    ...Typography.bold,
   },
   exposureIcon: {
     ...Iconography.smallIcon,

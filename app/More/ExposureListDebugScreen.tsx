@@ -10,7 +10,7 @@ import {
 } from "react-native"
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
 import dayjs from "dayjs"
@@ -88,9 +88,9 @@ const ExposureListDebugScreen = ({
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
           <View style={styles.flatlistRowView}>
-            <Typography style={styles.item} use={"body3"}>
+            <RTLEnabledText style={styles.item} use={"body3"}>
               <Text>Date: {item.item.date}</Text>
-            </Typography>
+            </RTLEnabledText>
           </View>
         )}
       />

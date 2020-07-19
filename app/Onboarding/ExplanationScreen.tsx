@@ -12,15 +12,9 @@ import { SvgXml } from "react-native-svg"
 
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import {
-  Buttons,
-  Colors,
-  Spacing,
-  Iconography,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Buttons, Colors, Spacing, Iconography, Typography } from "../styles"
 
 export enum IconStyle {
   Blue,
@@ -119,12 +113,12 @@ const ExplanationScreen = ({
           <View style={determineIconStyle(explanationScreenStyles.iconStyle)}>
             <SvgXml xml={explanationScreenContent.icon} />
           </View>
-          <Typography style={headerStyles}>
+          <RTLEnabledText style={headerStyles}>
             {explanationScreenContent.header}
-          </Typography>
-          <Typography style={contentStyles}>
+          </RTLEnabledText>
+          <RTLEnabledText style={contentStyles}>
             {explanationScreenContent.body}
-          </Typography>
+          </RTLEnabledText>
         </ScrollView>
         <Button
           label={explanationScreenContent.primaryButtonLabel}
@@ -173,10 +167,10 @@ const styles = StyleSheet.create({
     padding: Spacing.large,
   },
   headerText: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
   },
   contentText: {
-    ...TypographyStyles.mainContentViolet,
+    ...Typography.mainContentViolet,
     marginTop: Spacing.xLarge,
   },
   primaryButton: {
@@ -186,10 +180,10 @@ const styles = StyleSheet.create({
     ...Buttons.largeTransparent,
   },
   primaryButtonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
   secondaryButtonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
 })
 

@@ -9,7 +9,7 @@ import {
 } from "react-native"
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
 import { BTNativeModule } from "../bt"
@@ -83,9 +83,9 @@ const ENLocalDiagnosisKeyScreen = ({
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
           <View style={styles.flatlistRowView}>
-            <Typography style={styles.item} use={"body3"}>
+            <RTLEnabledText style={styles.item} use={"body3"}>
               <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-            </Typography>
+            </RTLEnabledText>
           </View>
         )}
       />

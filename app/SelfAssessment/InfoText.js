@@ -1,7 +1,7 @@
 import React from "react"
 import { StyleSheet } from "react-native"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 export const InfoText = ({
   titleStyle,
@@ -13,20 +13,20 @@ export const InfoText = ({
 }) => {
   return (
     <>
-      <Typography
+      <RTLEnabledText
         use={useTitleStyle}
         style={[styles.headingSpacing, titleStyle]}
       >
         {title}
-      </Typography>
+      </RTLEnabledText>
       {description && (
-        <Typography
+        <RTLEnabledText
           use={useDescriptionStyle}
           style={[styles.description, descriptionStyle]}
           testID="description"
         >
           {description}
-        </Typography>
+        </RTLEnabledText>
       )}
     </>
   )

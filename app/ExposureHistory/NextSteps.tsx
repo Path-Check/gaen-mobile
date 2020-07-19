@@ -5,11 +5,11 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Screens, useStatusBarEffect } from "../navigation"
 
-import { Buttons, Spacing, Typography as TypographyStyles } from "../styles"
+import { Buttons, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 import { Colors } from "../styles"
@@ -44,16 +44,24 @@ const NextSteps = (): JSX.Element => {
     <NavigationBarWrapper title={"Next Steps"} onBackPress={handleOnBackPress}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Typography style={styles.contentText}>{contentTextOne}</Typography>
-          <Typography style={styles.contentText}>{contentTextTwo}</Typography>
+          <RTLEnabledText style={styles.contentText}>
+            {contentTextOne}
+          </RTLEnabledText>
+          <RTLEnabledText style={styles.contentText}>
+            {contentTextTwo}
+          </RTLEnabledText>
         </View>
         <View style={styles.buttonContainer}>
-          <Typography style={styles.footerText}>{footerText}</Typography>
+          <RTLEnabledText style={styles.footerText}>
+            {footerText}
+          </RTLEnabledText>
           <TouchableOpacity
             style={styles.button}
             onPress={handleOnPressTakeAssessment}
           >
-            <Typography style={styles.buttonText}>{buttonText}</Typography>
+            <RTLEnabledText style={styles.buttonText}>
+              {buttonText}
+            </RTLEnabledText>
             <SvgXml xml={Icons.Export} color={Colors.white} />
           </TouchableOpacity>
         </View>
@@ -71,11 +79,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   footerText: {
-    ...TypographyStyles.footer,
+    ...Typography.footer,
     marginBottom: Spacing.medium,
   },
   contentText: {
-    ...TypographyStyles.mainContent,
+    ...Typography.mainContent,
     paddingTop: Spacing.small,
   },
   buttonContainer: {
@@ -88,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
 })
 

@@ -2,7 +2,7 @@ import React from "react"
 import { StyleSheet, Image, TouchableOpacity } from "react-native"
 
 import { Images } from "../assets"
-import { Typography } from "./Typography"
+import { RTLEnabledText } from "./RTLEnabledText"
 
 import { Forms } from "../styles"
 
@@ -19,7 +19,7 @@ export const Checkbox = ({ label, onPress, checked }) => {
         source={checked ? Images.BoxCheckedIcon : Images.BoxUncheckedIcon}
         style={styles.checkboxIcon}
       />
-      <Typography style={styles.checkboxText}>{label}</Typography>
+      <RTLEnabledText style={styles.checkboxText}>{label}</RTLEnabledText>
     </TouchableOpacity>
   )
 }

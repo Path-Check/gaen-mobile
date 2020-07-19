@@ -1,7 +1,7 @@
 import React from "react"
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Colors } from "../styles"
 
@@ -50,12 +50,12 @@ export const Button = ({
           { backgroundColor: dynamicBackgroundColor() },
         ]}
       >
-        <Typography
+        <RTLEnabledText
           use="body1"
           style={[styles.ctaText, textStyle, { color: dynamicTextColor() }]}
         >
           {title}
-        </Typography>
+        </RTLEnabledText>
       </View>
     </TouchableOpacity>
   )

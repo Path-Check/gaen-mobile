@@ -12,19 +12,14 @@ import { useNavigation } from "@react-navigation/native"
 import dayjs from "dayjs"
 
 import { ExposureDatum, ExposureHistory } from "../exposureHistory"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureDatumDetail from "./ExposureDatumDetail"
 import { DateTimeUtils } from "../helpers"
 import Calendar from "./Calendar"
 import { Screens } from "../navigation"
 
 import { Icons } from "../assets"
-import {
-  Buttons,
-  Spacing,
-  Typography as TypographyStyles,
-  Colors,
-} from "../styles"
+import { Buttons, Spacing, Typography, Colors } from "../styles"
 import DateInfoHeader from "./DateInfoHeader"
 
 interface HistoryProps {
@@ -60,7 +55,9 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
       <ScrollView style={styles.container} alwaysBounceVertical={false}>
         <View>
           <View style={styles.headerRow}>
-            <Typography style={styles.headerText}>{titleText}</Typography>
+            <RTLEnabledText style={styles.headerText}>
+              {titleText}
+            </RTLEnabledText>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={styles.moreInfoButton}
@@ -103,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.xSmall,
   },
   headerText: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {

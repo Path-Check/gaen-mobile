@@ -11,7 +11,7 @@ import survey_en from "./survey.en.json"
 import { Info } from "./Info"
 import { InfoText } from "./InfoText"
 import { Button } from "./Button"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Colors } from "../styles"
 
@@ -99,8 +99,8 @@ const ChoiceButtons = ({
 
 const TranslationButtonText = ({ translator, text }) => (
   <Trans t={translator} i18nKey={text}>
-    <Typography />
-    <Typography style={{ fontWeight: "bold" }} />
+    <RTLEnabledText />
+    <RTLEnabledText style={{ fontWeight: "bold" }} />
   </Trans>
 )
 

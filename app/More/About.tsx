@@ -12,9 +12,9 @@ import {
 
 import packageJson from "../../package.json"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import { Colors, Spacing, Typography as TypographyStyles } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
 export const AboutScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -34,37 +34,37 @@ export const AboutScreen: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View>
-          <Typography use="headline2" style={styles.heading}>
+          <RTLEnabledText use="headline2" style={styles.heading}>
             {t("label.about_header_bluetooth")}
-          </Typography>
+          </RTLEnabledText>
         </View>
-        <Typography use="body2">{t("label.about_para")}</Typography>
-        <Typography
+        <RTLEnabledText use="body2">{t("label.about_para")}</RTLEnabledText>
+        <RTLEnabledText
           style={styles.hyperlink}
           onPress={() => {
             Linking.openURL("https://pathcheck.org/")
           }}
         >
           <Text>{"pathcheck.org"}</Text>
-        </Typography>
+        </RTLEnabledText>
 
         <View style={styles.rowContainer}>
           <View style={styles.row}>
-            <Typography style={styles.aboutSectionParaLabel}>
+            <RTLEnabledText style={styles.aboutSectionParaLabel}>
               {t("about.version")}
-            </Typography>
+            </RTLEnabledText>
 
-            <Typography style={styles.aboutSectionParaContent}>
+            <RTLEnabledText style={styles.aboutSectionParaContent}>
               {packageJson.version}
-            </Typography>
+            </RTLEnabledText>
           </View>
           <View style={styles.row}>
-            <Typography style={styles.aboutSectionParaLabel}>
+            <RTLEnabledText style={styles.aboutSectionParaLabel}>
               {t("about.operating_system_abbr")}
-            </Typography>
-            <Typography style={styles.aboutSectionParaContent}>
+            </RTLEnabledText>
+            <RTLEnabledText style={styles.aboutSectionParaContent}>
               {Platform.OS + " v" + Platform.Version}
-            </Typography>
+            </RTLEnabledText>
           </View>
         </View>
       </ScrollView>
@@ -86,12 +86,12 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   aboutSectionParaLabel: {
-    ...TypographyStyles.header5,
+    ...Typography.header5,
     width: Spacing.xxxHuge * 2,
     marginTop: Spacing.small,
   },
   aboutSectionParaContent: {
-    ...TypographyStyles.mainContent,
+    ...Typography.mainContent,
     marginTop: Spacing.small,
   },
   rowContainer: {

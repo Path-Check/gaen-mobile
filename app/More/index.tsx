@@ -16,17 +16,12 @@ import {
 } from "react-navigation"
 
 import { getLocalNames } from "../locales/languages"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Stacks, Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
-import {
-  Buttons,
-  Colors,
-  Spacing,
-  Typography as TypographyStyles,
-} from "../styles"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 interface SettingsScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
@@ -52,7 +47,7 @@ const LanguageSelectionListItem = ({
         xml={icon}
         style={[styles.icon, { marginRight: Spacing.small }]}
       />
-      <Typography use={"body1"}>{label}</Typography>
+      <RTLEnabledText use={"body1"}>{label}</RTLEnabledText>
     </View>
   </TouchableHighlight>
 )
@@ -89,11 +84,11 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
         onPress={onPress}
       >
         <View>
-          <Typography style={styles.listItemText}>{label}</Typography>
+          <RTLEnabledText style={styles.listItemText}>{label}</RTLEnabledText>
           {description ? (
-            <Typography style={styles.descriptionText}>
+            <RTLEnabledText style={styles.descriptionText}>
               {description}
-            </Typography>
+            </RTLEnabledText>
           ) : null}
         </View>
       </TouchableHighlight>
@@ -107,14 +102,16 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
     >
       <ScrollView style={styles.container}>
         <View style={styles.sectionPrimary}>
-          <Typography>{t("settings.share_test_result_description")}</Typography>
+          <RTLEnabledText>
+            {t("settings.share_test_result_description")}
+          </RTLEnabledText>
           <TouchableOpacity
             onPress={navigateTo(Stacks.AffectedUserFlow)}
             style={styles.button}
           >
-            <Typography style={styles.buttonText}>
+            <RTLEnabledText style={styles.buttonText}>
               {t("settings.share_test_result")}
-            </Typography>
+            </RTLEnabledText>
           </TouchableOpacity>
         </View>
 
@@ -175,7 +172,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   buttonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
   icon: {
     maxWidth: Spacing.icon,
@@ -187,13 +184,13 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.medium,
   },
   listItemText: {
-    ...TypographyStyles.tappableListItem,
+    ...Typography.tappableListItem,
   },
   lastListItem: {
     borderBottomWidth: 0,
   },
   descriptionText: {
-    ...TypographyStyles.description,
+    ...Typography.description,
   },
 })
 

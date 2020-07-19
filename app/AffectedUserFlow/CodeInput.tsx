@@ -14,7 +14,7 @@ import {
 } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useAffectedUserContext } from "./AffectedUserContext"
 import * as API from "./verificationAPI"
 import * as NativeModule from "../bt/nativeModule"
@@ -28,7 +28,7 @@ import {
   Forms,
   Colors,
   Outlines,
-  Typography as TypographyStyles,
+  Typography,
 } from "../styles"
 
 const defaultErrorMessage = " "
@@ -136,13 +136,13 @@ const CodeInputScreen = (): JSX.Element => {
           <View style={styles.container}>
             <View>
               <View style={styles.headerContainer}>
-                <Typography style={styles.header}>
+                <RTLEnabledText style={styles.header}>
                   {t("export.code_input_title_bluetooth")}
-                </Typography>
+                </RTLEnabledText>
 
-                <Typography style={styles.subheader}>
+                <RTLEnabledText style={styles.subheader}>
                   {t("export.code_input_body_bluetooth")}
-                </Typography>
+                </RTLEnabledText>
               </View>
 
               <View>
@@ -161,9 +161,9 @@ const CodeInputScreen = (): JSX.Element => {
                 />
               </View>
 
-              <Typography style={styles.errorSubtitle} use="body2">
+              <RTLEnabledText style={styles.errorSubtitle} use="body2">
                 {errorMessage}
-              </Typography>
+              </RTLEnabledText>
             </View>
             {isLoading ? <LoadingIndicator /> : null}
 
@@ -176,18 +176,18 @@ const CodeInputScreen = (): JSX.Element => {
                 disabled={isDisabled}
                 style={buttonStyle}
               >
-                <Typography style={buttonTextStyle}>
+                <RTLEnabledText style={buttonTextStyle}>
                   {t("common.submit")}
-                </Typography>
+                </RTLEnabledText>
               </TouchableOpacity>
 
               <TouchableOpacity
                 onPress={handleOnPressCancel}
                 style={styles.secondaryButton}
               >
-                <Typography style={styles.secondaryButtonText}>
+                <RTLEnabledText style={styles.secondaryButtonText}>
                   {t("export.code_input_button_cancel")}
-                </Typography>
+                </RTLEnabledText>
               </TouchableOpacity>
             </View>
           </View>
@@ -230,15 +230,15 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xxxHuge,
   },
   header: {
-    ...TypographyStyles.header2,
+    ...Typography.header2,
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...TypographyStyles.header4,
+    ...Typography.header4,
     color: Colors.secondaryText,
   },
   errorSubtitle: {
-    ...TypographyStyles.header4,
+    ...Typography.header4,
     color: Colors.errorText,
     paddingTop: Spacing.xxSmall,
   },
@@ -263,19 +263,19 @@ const styles = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...TypographyStyles.buttonTextPrimary,
+    ...Typography.buttonTextPrimary,
   },
   disabledButton: {
     ...Buttons.primaryDisabled,
   },
   disabledButtonText: {
-    ...TypographyStyles.buttonTextPrimaryDisabled,
+    ...Typography.buttonTextPrimaryDisabled,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...TypographyStyles.buttonTextSecondary,
+    ...Typography.buttonTextSecondary,
   },
 })
 

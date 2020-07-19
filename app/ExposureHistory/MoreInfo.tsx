@@ -3,11 +3,11 @@ import { View, ScrollView, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { useStatusBarEffect } from "../navigation"
 
-import { Spacing, Typography as TypographyStyles } from "../styles"
+import { Spacing, Typography } from "../styles"
 
 const MoreInfo = (): JSX.Element => {
   const { t } = useTranslation()
@@ -25,20 +25,20 @@ const MoreInfo = (): JSX.Element => {
     >
       <ScrollView style={styles.container}>
         <View style={styles.contentContainer}>
-          <Typography style={styles.headerText}>
+          <RTLEnabledText style={styles.headerText}>
             {t("exposure_history.why_did_i_get_an_en")}
-          </Typography>
-          <Typography style={styles.contentText}>
+          </RTLEnabledText>
+          <RTLEnabledText style={styles.contentText}>
             {t("exposure_history.bt.why_did_i_get_an_en_para")}
-          </Typography>
+          </RTLEnabledText>
         </View>
         <View style={styles.contentContainer}>
-          <Typography style={styles.headerText}>
+          <RTLEnabledText style={styles.headerText}>
             {t("exposure_history.how_does_this_work")}
-          </Typography>
-          <Typography style={styles.contentText}>
+          </RTLEnabledText>
+          <RTLEnabledText style={styles.contentText}>
             {t("exposure_history.bt.how_does_this_work_para")}
-          </Typography>
+          </RTLEnabledText>
         </View>
       </ScrollView>
     </NavigationBarWrapper>
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     padding: Spacing.medium,
   },
   headerText: {
-    ...TypographyStyles.header3,
+    ...Typography.header3,
   },
   contentContainer: {
     paddingBottom: Spacing.xLarge,
   },
   contentText: {
-    ...TypographyStyles.mainContent,
+    ...Typography.mainContent,
     paddingTop: Spacing.small,
   },
 })

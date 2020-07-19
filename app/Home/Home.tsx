@@ -9,16 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { ENPermissionStatus } from "../PermissionsContext"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { isPlatformiOS } from "../Util"
 
-import {
-  Layout,
-  Spacing,
-  Colors,
-  Typography as TypographyStyles,
-  Buttons,
-} from "../styles"
+import { Layout, Spacing, Colors, Typography, Buttons } from "../styles"
 
 interface HomeProps {
   enPermissionStatus: ENPermissionStatus
@@ -68,12 +62,12 @@ const Home = ({
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Typography style={styles.headerText} testID={"home-header"}>
+        <RTLEnabledText style={styles.headerText} testID={"home-header"}>
           {headerText}
-        </Typography>
-        <Typography style={styles.subheaderText} testID={"home-subheader"}>
+        </RTLEnabledText>
+        <RTLEnabledText style={styles.subheaderText} testID={"home-subheader"}>
           {subheaderText}
-        </Typography>
+        </RTLEnabledText>
       </View>
       {!isEnabledAndAuthorized ? (
         <TouchableOpacity
@@ -81,7 +75,9 @@ const Home = ({
           onPress={handleRequestPermission}
           style={styles.button}
         >
-          <Typography style={styles.buttonText}>{buttonText}</Typography>
+          <RTLEnabledText style={styles.buttonText}>
+            {buttonText}
+          </RTLEnabledText>
         </TouchableOpacity>
       ) : null}
     </View>
@@ -99,14 +95,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   headerText: {
-    ...TypographyStyles.largerFont,
-    ...TypographyStyles.bold,
-    lineHeight: TypographyStyles.mediumLineHeight,
+    ...Typography.largerFont,
+    ...Typography.bold,
+    lineHeight: Typography.mediumLineHeight,
     color: Colors.white,
     textAlign: "center",
   },
   subheaderText: {
-    ...TypographyStyles.header4,
+    ...Typography.header4,
     textAlign: "center",
     color: Colors.white,
     marginTop: Spacing.medium,
@@ -116,7 +112,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttonText: {
-    ...TypographyStyles.buttonTextDark,
+    ...Typography.buttonTextDark,
   },
 })
 

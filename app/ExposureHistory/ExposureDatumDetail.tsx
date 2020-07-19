@@ -5,17 +5,11 @@ import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
 
 import { ExposureDatum, Possible, NoKnown, NoData } from "../exposureHistory"
-import { Typography } from "../components/Typography"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 import { TimeHelpers } from "../utils"
 import { Screens } from "../navigation"
 
-import {
-  Typography as TypographyStyles,
-  Outlines,
-  Colors,
-  Buttons,
-  Spacing,
-} from "../styles"
+import { Typography, Outlines, Colors, Buttons, Spacing } from "../styles"
 
 interface ExposureDatumDetailsProps {
   exposureDatum: ExposureDatum
@@ -63,19 +57,21 @@ const PossibleExposureDetail = ({
   return (
     <>
       <View style={styles.container}>
-        <Typography style={styles.date}>{exposureDate}</Typography>
-        <Typography style={styles.info}>{exposureTime}</Typography>
+        <RTLEnabledText style={styles.date}>{exposureDate}</RTLEnabledText>
+        <RTLEnabledText style={styles.info}>{exposureTime}</RTLEnabledText>
         <View style={styles.contentContainer}>
-          <Typography style={styles.content}>{explanationContent}</Typography>
+          <RTLEnabledText style={styles.content}>
+            {explanationContent}
+          </RTLEnabledText>
         </View>
         <TouchableOpacity
           testID={"exposure-history-next-steps-button"}
           style={styles.nextStepsButton}
           onPress={handleOnPressNextSteps}
         >
-          <Typography style={styles.nextStepsButtonText}>
+          <RTLEnabledText style={styles.nextStepsButtonText}>
             {nextStepsButtonText}
-          </Typography>
+          </RTLEnabledText>
         </TouchableOpacity>
       </View>
     </>
@@ -94,9 +90,11 @@ const NoKnownExposureDetail = ({
   const explanationContent = t("exposure_datum.no_known.explanation")
   return (
     <View style={styles.container}>
-      <Typography style={styles.date}>{exposureDate}</Typography>
+      <RTLEnabledText style={styles.date}>{exposureDate}</RTLEnabledText>
       <View style={styles.contentContainer}>
-        <Typography style={styles.content}>{explanationContent}</Typography>
+        <RTLEnabledText style={styles.content}>
+          {explanationContent}
+        </RTLEnabledText>
       </View>
     </View>
   )
@@ -114,9 +112,11 @@ const NoDataExposureDetail = ({
   const explanationContent = t("exposure_datum.no_data.explanation")
   return (
     <View style={styles.container}>
-      <Typography style={styles.date}>{exposureDate}</Typography>
+      <RTLEnabledText style={styles.date}>{exposureDate}</RTLEnabledText>
       <View style={styles.contentContainer}>
-        <Typography style={styles.content}>{explanationContent}</Typography>
+        <RTLEnabledText style={styles.content}>
+          {explanationContent}
+        </RTLEnabledText>
       </View>
     </View>
   )
@@ -131,23 +131,23 @@ const styles = StyleSheet.create({
     borderColor: Colors.lighterGray,
   },
   date: {
-    ...TypographyStyles.header6,
+    ...Typography.header6,
   },
   info: {
-    lineHeight: TypographyStyles.largeLineHeight,
+    lineHeight: Typography.largeLineHeight,
   },
   contentContainer: {
     paddingTop: Spacing.xxSmall,
   },
   content: {
-    ...TypographyStyles.secondaryContent,
+    ...Typography.secondaryContent,
   },
   nextStepsButton: {
     ...Buttons.largeBlue,
     marginTop: Spacing.xLarge,
   },
   nextStepsButtonText: {
-    ...TypographyStyles.buttonTextLight,
+    ...Typography.buttonTextLight,
   },
 })
 

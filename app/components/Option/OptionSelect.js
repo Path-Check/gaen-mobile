@@ -2,7 +2,7 @@ import React from "react"
 import { StyleSheet, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import { Typography } from "../../components/Typography"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
 
 import {
   SCREEN_TYPE_CHECKBOX,
@@ -10,12 +10,7 @@ import {
   SCREEN_TYPE_RADIO,
 } from "../../SelfAssessment/constants"
 
-import {
-  Colors,
-  Forms,
-  Spacing,
-  Typography as TypographyStyles,
-} from "../../styles"
+import { Colors, Forms, Spacing, Typography } from "../../styles"
 
 export function OptionSelect({
   wrapperStyle,
@@ -41,9 +36,9 @@ export function OptionSelect({
             (inputType === SCREEN_TYPE_RADIO || inputType === SCREEN_TYPE_DATE)}
         </View>
       )}
-      <Typography style={styles.title} testID="label">
+      <RTLEnabledText style={styles.title} testID="label">
         {title}
-      </Typography>
+      </RTLEnabledText>
     </View>
   )
 }
@@ -65,6 +60,6 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     flexWrap: "wrap",
-    ...TypographyStyles.inputLabel,
+    ...Typography.inputLabel,
   },
 })
