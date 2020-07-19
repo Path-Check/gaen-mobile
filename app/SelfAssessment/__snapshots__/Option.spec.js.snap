@@ -60,12 +60,6 @@ exports[`SCREEN_TYPE_CHECKBOX 1`] = `
           style={
             Array [
               Object {
-                "color": "#2e2e2e",
-                "fontFamily": "IBMPlexSans",
-                "fontSize": 17,
-                "lineHeight": 24,
-              },
-              Object {
                 "writingDirection": "ltr",
               },
               Object {
@@ -148,12 +142,6 @@ exports[`SCREEN_TYPE_RADIO 1`] = `
         <Text
           style={
             Array [
-              Object {
-                "color": "#2e2e2e",
-                "fontFamily": "IBMPlexSans",
-                "fontSize": 17,
-                "lineHeight": 24,
-              },
               Object {
                 "writingDirection": "ltr",
               },

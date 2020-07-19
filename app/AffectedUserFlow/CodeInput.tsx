@@ -161,7 +161,7 @@ const CodeInputScreen = (): JSX.Element => {
                 />
               </View>
 
-              <RTLEnabledText style={styles.errorSubtitle} use="body2">
+              <RTLEnabledText style={styles.errorSubtitle}>
                 {errorMessage}
               </RTLEnabledText>
             </View>

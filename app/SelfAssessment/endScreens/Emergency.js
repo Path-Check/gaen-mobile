@@ -29,11 +29,8 @@ export const Emergency = () => {
       }
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.emergency_title")}
         description={t("assessment.emergency_description")}
-        titleStyle={styles.title}
-        descriptionStyle={styles.description}
       />
     </Info>
   )
@@ -52,14 +49,6 @@ const EmergencyButton = ({ title, onPress }) => (
 const styles = StyleSheet.create({
   containerItemsAlignment: {
     alignItems: "center",
-  },
-  title: {
-    textAlign: "center",
-  },
-  description: {
-    textAlign: "center",
-    fontSize: 18,
-    lineHeight: 24,
   },
   button: {
     borderWidth: 2,

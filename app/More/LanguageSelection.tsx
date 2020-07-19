@@ -5,8 +5,9 @@ import { useNavigation } from "@react-navigation/native"
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
-import { Colors, Spacing } from "../styles"
 import { RTLEnabledText } from "../components/RTLEnabledText"
+
+import { Colors, Spacing, Typography } from "../styles"
 
 const Separator = () => (
   <View
@@ -49,8 +50,10 @@ const LanguageSelection = (): JSX.Element => {
             onPress={() => onSelectLanguage(value)}
           >
             <RTLEnabledText
-              style={{ fontWeight: language === value ? "700" : "500" }}
-              use="body1"
+              style={{
+                ...Typography.mainContent,
+                fontWeight: language === value ? "700" : "500",
+              }}
             >
               {label}
             </RTLEnabledText>

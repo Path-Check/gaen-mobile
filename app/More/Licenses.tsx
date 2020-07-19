@@ -14,7 +14,7 @@ import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Images } from "../assets"
-import { Colors, Spacing } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
 const PRIVACY_POLICY_URL = "https://pathcheck.org/privacy-policy/"
 
@@ -45,25 +45,26 @@ const Licenses = (): JSX.Element => {
         alwaysBounceVertical={false}
       >
         <View>
-          <RTLEnabledText use="headline2" testID={"licenses-legal-header"}>
+          <RTLEnabledText
+            style={styles.headerContent}
+            testID={"licenses-legal-header"}
+          >
             {legalHeaderText}
           </RTLEnabledText>
           <View
             style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
           >
-            <RTLEnabledText use="body2">
+            <RTLEnabledText style={styles.contentText}>
               {t("label.legal_page_address")}
             </RTLEnabledText>
             <View style={{ height: 20 }} />
             <RTLEnabledText
-              use="body2"
               onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
               style={styles.hyperlink}
             >
               {infoAddress}
             </RTLEnabledText>
             <RTLEnabledText
-              use="body2"
               onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
               style={styles.hyperlink}
             >
@@ -76,7 +77,9 @@ const Licenses = (): JSX.Element => {
         style={styles.termsInfoRow}
         onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
       >
-        <RTLEnabledText style={{ color: Colors.white }} use="body1">
+        <RTLEnabledText
+          style={{ ...Typography.mainContent, color: Colors.white }}
+        >
           {t("label.privacy_policy")}
         </RTLEnabledText>
         <View style={styles.arrowContainer}>
@@ -93,7 +96,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 24,
   },
+  headerContent: {
+    ...Typography.header2,
+  },
   hyperlink: {
+    ...Typography.secondaryContent,
     color: Colors.linkText,
     textDecorationLine: "underline",
   },
@@ -108,6 +115,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingRight: 20,
     paddingLeft: 20,
+  },
+  contentText: {
+    ...Typography.secondaryContent,
   },
 })
 

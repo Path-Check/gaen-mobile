@@ -120,7 +120,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <RTLEnabledText use="headline2">
+          <RTLEnabledText style={styles.headerContent}>
             {question.question_text}
           </RTLEnabledText>
         </View>
@@ -151,6 +151,9 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: Spacing.medium,
     marginTop: Spacing.small,
+  },
+  headerContent: {
+    ...Typography.header2,
   },
   scrollView: {
     flex: 1,

@@ -29,7 +29,6 @@ export const Caregiver = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.caregiver_title")}
         description={t("assessment.caregiver_description")}
       />

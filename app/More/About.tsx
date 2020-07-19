@@ -34,11 +34,13 @@ export const AboutScreen: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View>
-          <RTLEnabledText use="headline2" style={styles.heading}>
+          <RTLEnabledText style={styles.headerContent}>
             {t("label.about_header_bluetooth")}
           </RTLEnabledText>
         </View>
-        <RTLEnabledText use="body2">{t("label.about_para")}</RTLEnabledText>
+        <RTLEnabledText style={styles.aboutContent}>
+          {t("label.about_para")}
+        </RTLEnabledText>
         <RTLEnabledText
           style={styles.hyperlink}
           onPress={() => {
@@ -78,12 +80,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.huge,
   },
-  heading: {
+  headerContent: {
+    ...Typography.header2,
     marginBottom: Spacing.small,
   },
   hyperlink: {
     color: Colors.linkText,
     textDecorationLine: "underline",
+  },
+  aboutContent: {
+    ...Typography.secondaryContent,
   },
   aboutSectionParaLabel: {
     ...Typography.header5,

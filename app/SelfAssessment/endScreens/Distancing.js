@@ -29,7 +29,6 @@ export const Distancing = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.distancing_title")}
         description={t("assessment.distancing_description")}
       />

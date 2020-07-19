@@ -16,6 +16,8 @@ import { NavigationProp } from "../navigation"
 import dayjs from "dayjs"
 import { RawExposure } from "../bt/exposureNotifications"
 
+import { Typography } from "../styles"
+
 type ENLocalExposureScreenProp = {
   navigation: NavigationProp
 }
@@ -88,7 +90,7 @@ const ExposureListDebugScreen = ({
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
           <View style={styles.flatlistRowView}>
-            <RTLEnabledText style={styles.item} use={"body3"}>
+            <RTLEnabledText style={styles.itemText}>
               <Text>Date: {item.item.date}</Text>
             </RTLEnabledText>
           </View>
@@ -108,7 +110,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#999999",
   },
-  item: {
+  itemText: {
+    ...Typography.tertiaryContent,
     padding: 10,
     maxWidth: "90%",
   },

@@ -29,7 +29,6 @@ export const Isolate = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.isolate_title")}
         description={t("assessment.isolate_description")}
       />

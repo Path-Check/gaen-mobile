@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import { Colors } from "../styles"
+import { Colors, Typography } from "../styles"
 
 /**
  * @typedef { import("react").ReactNode } ReactNode
@@ -51,7 +51,6 @@ export const Button = ({
         ]}
       >
         <RTLEnabledText
-          use="body1"
           style={[styles.ctaText, textStyle, { color: dynamicTextColor() }]}
         >
           {title}
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
   ctaText: {
+    ...Typography.mainContent,
     color: Colors.faintGray,
     textAlign: "center",
   },

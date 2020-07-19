@@ -87,21 +87,16 @@ exports[`base 1`] = `
             style={
               Array [
                 Object {
+                  "writingDirection": "ltr",
+                },
+                Object {
                   "color": "#1f2c9b",
                   "fontFamily": "IBMPlexSans-Bold",
                   "fontSize": 28,
                   "fontWeight": "500",
                   "lineHeight": 32,
+                  "marginVertical": 30,
                 },
-                Object {
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "marginVertical": 30,
-                  },
-                  undefined,
-                ],
               ]
             }
           >
@@ -111,20 +106,15 @@ exports[`base 1`] = `
             style={
               Array [
                 Object {
+                  "writingDirection": "ltr",
+                },
+                Object {
                   "color": "#2e2e2e",
                   "fontFamily": "IBMPlexSans",
                   "fontSize": 17,
                   "lineHeight": 24,
+                  "marginBottom": 20,
                 },
-                Object {
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "marginBottom": 20,
-                  },
-                  undefined,
-                ],
               ]
             }
             testID="description"
@@ -164,17 +154,14 @@ exports[`base 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#2e2e2e",
-                    "fontFamily": "IBMPlexSans",
-                    "fontSize": 17,
-                    "lineHeight": 24,
-                  },
-                  Object {
                     "writingDirection": "ltr",
                   },
                   Array [
                     Object {
                       "color": "#f8f8f8",
+                      "fontFamily": "IBMPlexSans",
+                      "fontSize": 17,
+                      "lineHeight": 24,
                       "textAlign": "center",
                     },
                     undefined,

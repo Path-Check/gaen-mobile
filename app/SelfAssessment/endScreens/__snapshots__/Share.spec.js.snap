@@ -78,20 +78,16 @@ exports[`base 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#ffffff",
-                  "fontFamily": "IBMPlexSans",
-                  "fontSize": 22,
-                  "lineHeight": 32,
-                },
-                Object {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
-                    "marginVertical": 30,
-                  },
-                  undefined,
-                ],
+                Object {
+                  "color": "#1f2c9b",
+                  "fontFamily": "IBMPlexSans-Bold",
+                  "fontSize": 28,
+                  "fontWeight": "500",
+                  "lineHeight": 32,
+                  "marginVertical": 30,
+                },
               ]
             }
           >
@@ -101,20 +97,15 @@ exports[`base 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#ffffff",
-                  "fontFamily": "IBMPlexSans",
-                  "fontSize": 15,
-                  "lineHeight": 20,
-                },
-                Object {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
-                    "marginBottom": 20,
-                  },
-                  undefined,
-                ],
+                Object {
+                  "color": "#2e2e2e",
+                  "fontFamily": "IBMPlexSans",
+                  "fontSize": 17,
+                  "lineHeight": 24,
+                  "marginBottom": 20,
+                },
               ]
             }
             testID="description"
@@ -158,17 +149,14 @@ The Boston Public Health Commission will retain your anonymous data for a specif
               style={
                 Array [
                   Object {
-                    "color": "#2e2e2e",
-                    "fontFamily": "IBMPlexSans",
-                    "fontSize": 17,
-                    "lineHeight": 24,
-                  },
-                  Object {
                     "writingDirection": "ltr",
                   },
                   Array [
                     Object {
                       "color": "#f8f8f8",
+                      "fontFamily": "IBMPlexSans",
+                      "fontSize": 17,
+                      "lineHeight": 24,
                       "textAlign": "center",
                     },
                     undefined,

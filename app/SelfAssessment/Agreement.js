@@ -6,7 +6,8 @@ import { InfoText } from "./InfoText"
 import { Button } from "./Button"
 import { Info } from "./Info"
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { Colors } from "../styles"
+
+import { Colors, Typography } from "../styles"
 import { Icons } from "../assets"
 
 /** @type {React.FunctionComponent<{}>} */
@@ -28,8 +29,6 @@ export const Agreement = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline3"
-        useDescriptionStyle="body4"
         title={t("assessment.agreement_title")}
         description={t("assessment.agreement_description")}
       />
@@ -45,7 +44,7 @@ const AgreementFooter = ({ description, onPress, buttonTitle }) => (
       onPress={onPress}
       title={buttonTitle}
     />
-    <RTLEnabledText style={styles.typographyStyle} use="body4">
+    <RTLEnabledText style={styles.typographyStyle}>
       {description}
     </RTLEnabledText>
   </>
@@ -54,5 +53,6 @@ const AgreementFooter = ({ description, onPress, buttonTitle }) => (
 const styles = StyleSheet.create({
   typographyStyle: {
     paddingTop: 10,
+    ...Typography.quaternaryContent,
   },
 })

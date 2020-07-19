@@ -22,8 +22,6 @@ export const Share = ({ navigation }) => {
     <Info
       icon={Icons.AnonymizedDataInverted}
       backgroundColor={Colors.invertedSecondaryBackground}
-      titleStyle="headline3"
-      descriptionStyle="body4"
       footer={
         <Button
           onPress={handleButtonPress}
@@ -34,8 +32,6 @@ export const Share = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline7"
-        useDescriptionStyle="body4"
         title={t("assessment.share_title")}
         description={t("assessment.share_description", { authority })}
       />

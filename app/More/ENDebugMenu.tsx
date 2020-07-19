@@ -15,7 +15,7 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import { BTNativeModule } from "../bt"
 import { NavigationProp, Screens } from "../navigation"
 
-import { Colors, Spacing } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
 type ENDebugMenuProps = {
   navigation: NavigationProp
@@ -103,7 +103,9 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[styles.listItem, style]} onPress={onPress}>
-        <RTLEnabledText use={"body1"}>{label}</RTLEnabledText>
+        <RTLEnabledText style={{ ...Typography.mainContent }}>
+          {label}
+        </RTLEnabledText>
       </TouchableOpacity>
     )
   }

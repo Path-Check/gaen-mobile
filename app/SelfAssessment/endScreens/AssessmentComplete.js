@@ -22,7 +22,6 @@ export const AssessmentComplete = () => {
       footer={<Button onPress={dismiss} title={t("assessment.complete_cta")} />}
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.complete_title")}
         description={t("assessment.complete_description")}
       />

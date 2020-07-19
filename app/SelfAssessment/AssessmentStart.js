@@ -24,7 +24,6 @@ export const AssessmentStart = ({ navigation }) => {
       }
     >
       <InfoText
-        useTitleStyle="headline2"
         title={t("assessment.start_title")}
         description={t("assessment.start_description")}
       />

@@ -47,7 +47,9 @@ const LanguageSelectionListItem = ({
         xml={icon}
         style={[styles.icon, { marginRight: Spacing.small }]}
       />
-      <RTLEnabledText use={"body1"}>{label}</RTLEnabledText>
+      <RTLEnabledText style={{ ...Typography.mainContent }}>
+        {label}
+      </RTLEnabledText>
     </View>
   </TouchableHighlight>
 )

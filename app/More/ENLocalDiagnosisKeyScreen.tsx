@@ -14,6 +14,8 @@ import { NavigationProp } from "../navigation"
 
 import { BTNativeModule } from "../bt"
 
+import { Typography } from "../styles"
+
 export type ENDiagnosisKey = {
   id: string
   rollingStartNumber: number
@@ -83,7 +85,7 @@ const ENLocalDiagnosisKeyScreen = ({
         keyExtractor={(item) => item.id}
         renderItem={(item) => (
           <View style={styles.flatlistRowView}>
-            <RTLEnabledText style={styles.item} use={"body3"}>
+            <RTLEnabledText style={styles.itemText}>
               <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
             </RTLEnabledText>
           </View>
@@ -103,7 +105,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#999999",
   },
-  item: {
+  itemText: {
+    ...Typography.tertiaryContent,
     padding: 10,
     maxWidth: "90%",
   },

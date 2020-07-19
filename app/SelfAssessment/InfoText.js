@@ -3,28 +3,14 @@ import { StyleSheet } from "react-native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
-export const InfoText = ({
-  titleStyle,
-  descriptionStyle,
-  useTitleStyle,
-  useDescriptionStyle,
-  title,
-  description,
-}) => {
+import { Typography } from "../styles"
+
+export const InfoText = ({ title, description }) => {
   return (
     <>
-      <RTLEnabledText
-        use={useTitleStyle}
-        style={[styles.headingSpacing, titleStyle]}
-      >
-        {title}
-      </RTLEnabledText>
+      <RTLEnabledText style={styles.titleContent}>{title}</RTLEnabledText>
       {description && (
-        <RTLEnabledText
-          use={useDescriptionStyle}
-          style={[styles.description, descriptionStyle]}
-          testID="description"
-        >
+        <RTLEnabledText style={styles.descriptionContent} testID="description">
           {description}
         </RTLEnabledText>
       )}
@@ -33,10 +19,12 @@ export const InfoText = ({
 }
 
 export const styles = StyleSheet.create({
-  headingSpacing: {
+  titleContent: {
+    ...Typography.header2,
     marginVertical: 30,
   },
-  description: {
+  descriptionContent: {
+    ...Typography.mainContent,
     marginBottom: 20,
   },
 })

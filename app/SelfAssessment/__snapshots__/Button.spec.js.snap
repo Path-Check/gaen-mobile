@@ -34,17 +34,14 @@ exports[`base 1`] = `
         style={
           Array [
             Object {
-              "color": "#2e2e2e",
-              "fontFamily": "IBMPlexSans",
-              "fontSize": 17,
-              "lineHeight": 24,
-            },
-            Object {
               "writingDirection": "ltr",
             },
             Array [
               Object {
                 "color": "#f8f8f8",
+                "fontFamily": "IBMPlexSans",
+                "fontSize": 17,
+                "lineHeight": 24,
                 "textAlign": "center",
               },
               undefined,
@@ -96,17 +93,14 @@ exports[`color 1`] = `
         style={
           Array [
             Object {
-              "color": "#2e2e2e",
-              "fontFamily": "IBMPlexSans",
-              "fontSize": 17,
-              "lineHeight": 24,
-            },
-            Object {
               "writingDirection": "ltr",
             },
             Array [
               Object {
                 "color": "#f8f8f8",
+                "fontFamily": "IBMPlexSans",
+                "fontSize": 17,
+                "lineHeight": 24,
                 "textAlign": "center",
               },
               undefined,
@@ -158,17 +152,14 @@ exports[`disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#2e2e2e",
-              "fontFamily": "IBMPlexSans",
-              "fontSize": 17,
-              "lineHeight": 24,
-            },
-            Object {
               "writingDirection": "ltr",
             },
             Array [
               Object {
                 "color": "#f8f8f8",
+                "fontFamily": "IBMPlexSans",
+                "fontSize": 17,
+                "lineHeight": 24,
                 "textAlign": "center",
               },
               undefined,
