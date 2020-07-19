@@ -4,14 +4,14 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack"
 
-import SettingsScreen from "../views/Settings"
-import AboutScreen from "../views/About"
-import LicensesScreen from "../views/Licenses"
-import AffectedUserStack from "../bt/AffectedUserFlow"
-import ENDebugMenu from "../views/Settings/ENDebugMenu"
-import ENLocalDiagnosisKeyScreen from "../views/Settings/ENLocalDiagnosisKeyScreen"
-import ExposureListDebugScreen from "../views/Settings/ExposureListDebugScreen"
-import LanguageSelection from "../views/LanguageSelection"
+import SettingsScreen from "../More/index"
+import AboutScreen from "../More/About"
+import LicensesScreen from "../More/Licenses"
+import AffectedUserStack from "../AffectedUserFlow"
+import ENDebugMenu from "../More/ENDebugMenu"
+import ENLocalDiagnosisKeyScreen from "../More/ENLocalDiagnosisKeyScreen"
+import ExposureListDebugScreen from "../More/ExposureListDebugScreen"
+import LanguageSelection from "../More/LanguageSelection"
 
 import { Screens, Stacks } from "./index"
 

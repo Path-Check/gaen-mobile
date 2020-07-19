@@ -4,7 +4,7 @@ import {
   StackCardInterpolationProps,
 } from "@react-navigation/stack"
 
-import Assessment from "../views/assessment/index"
+import Assessment from "../SelfAssessment/index"
 
 import { Screens } from "./index"
 

@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native"
 import PermissionsContext from "./PermissionsContext"
 import { Screens } from "../navigation"
 import { useStatusBarEffect } from "../navigation"
-import ExplanationScreen, { IconStyle } from "../views/common/ExplanationScreen"
+import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"
 
 import { Icons, Images } from "../assets"
 import { Colors } from "../styles"

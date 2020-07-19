@@ -3,9 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 
 import ExposureHistoryContext from "../ExposureHistoryContext"
-import ExposureHistoryScreen from "../views/ExposureHistory"
-import NextSteps from "../views/ExposureHistory/NextSteps"
-import MoreInfo from "../views/ExposureHistory/MoreInfo"
+import ExposureHistoryScreen from "../ExposureHistory/index"
+import NextSteps from "../ExposureHistory/NextSteps"
+import MoreInfo from "../ExposureHistory/MoreInfo"
 
 import { Screens } from "./index"
 

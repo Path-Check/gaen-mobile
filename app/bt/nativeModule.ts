@@ -6,9 +6,9 @@ import {
 
 import { ENPermissionStatus } from "./PermissionsContext"
 import { ExposureInfo, Posix } from "../exposureHistory"
-import { ENDiagnosisKey } from "../views/Settings/ENLocalDiagnosisKeyScreen"
+import { ENDiagnosisKey } from "../More/ENLocalDiagnosisKeyScreen"
 import { RawExposure, toExposureInfo } from "./exposureNotifications"
-import { ExposureKey } from "./AffectedUserFlow/exposureKey"
+import { ExposureKey } from "../AffectedUserFlow/exposureKey"
 
 // Event Subscriptions
 export const subscribeToExposureEvents = (

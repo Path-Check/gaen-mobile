@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
 import NotificationPermissions from "../bt/NotificationPermissions"
-import { EnableExposureNotifications } from "../views/onboarding/EnableExposureNotifications"
-import Welcome from "../views/onboarding/Welcome"
-import PersonalPrivacy from "../views/onboarding/PersonalPrivacy"
-import NotificationDetails from "../views/onboarding/NotificationDetails"
-import ShareDiagnosis from "../views/onboarding/ShareDiagnosis"
+import { EnableExposureNotifications } from "../Onboarding/EnableExposureNotifications"
+import Welcome from "../Onboarding/Welcome"
+import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
+import NotificationDetails from "../Onboarding/NotificationDetails"
+import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
 
 import { Screens } from "./index"
 
