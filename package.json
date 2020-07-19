@@ -6,7 +6,7 @@
     "clean": "rm -rf node_modules && yarn",
     "start": "yarn && react-native start",
     "tsc": "tsc --noEmit",
-    "prettier": "prettier \"app/**/*.+(js|jsx|ts|tsx|json)\"",
+    "prettier": "prettier \"(e2e|app)/**/*.+(js|jsx|ts|tsx|json)\"",
     "format": "yarn prettier --write",
     "lint": "eslint ./",
     "validate": "yarn prettier --list-different && yarn tsc && yarn lint",
@@ -168,7 +168,7 @@
       }
     },
     "configurations": {
-      "iphone11-bt.sim": {
+      "iphone11.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
@@ -176,7 +176,7 @@
           "type": "iPhone 11"
         }
       },
-      "iphone8-bt.sim": {
+      "iphone8.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
@@ -184,7 +184,7 @@
           "type": "iPhone 8"
         }
       },
-      "iphone-se-bt.sim": {
+      "iphone-se.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",

@@ -1,20 +1,20 @@
 /* eslint-disable */
-const screenshotText = 'Onboarding - Page 1';
+const screenshotText = "Onboarding - Page 1"
 
 class Welcome {
   async tapButton(languageStrings) {
-    await element(by.label(languageStrings.label.launch_get_started)).tap();
+    await element(by.label(languageStrings.label.launch_get_started)).tap()
   }
 
   async takeScreenshot() {
-    await device.takeScreenshot(screenshotText);
+    await device.takeScreenshot(screenshotText)
   }
 
   async isOnScreen(languageStrings) {
     await expect(
       element(by.label(languageStrings.label.launch_screen1_header)),
-    ).toBeVisible();
+    ).toBeVisible()
   }
 }
 
-export default new Welcome();
+export default new Welcome()

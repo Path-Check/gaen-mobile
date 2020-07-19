@@ -1,23 +1,21 @@
 /* eslint-disable */
-const screenshotText = 'Onboarding - Page 4';
+const screenshotText = "Share Diagnosis"
 
 class ShareDiagnosis {
-  async tapButton(languageStrings) {
-    await element(
-      by.label(languageStrings.label.launch_set_up_phone_location),
-    ).tap();
+  async tapButton() {
+    await element(by.label("Next")).atIndex(0).tap()
   }
 
   async takeScreenshot() {
-    await device.takeScreenshot(screenshotText);
+    await device.takeScreenshot(screenshotText)
   }
 
   async isOnScreen(languageStrings) {
     // eslint-disable-next-line jest/no-standalone-expect
     await expect(
-      element(by.text(languageStrings.label.launch_screen4_header_location)),
-    ).toBeVisible();
+      element(by.text(languageStrings.label.launch_screen4_header_bluetooth)),
+    ).toBeVisible()
   }
 }
 
-export default new ShareDiagnosis();
+export default new ShareDiagnosis()

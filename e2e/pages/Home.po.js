@@ -1,16 +1,15 @@
 /* eslint-disable */
-const screenshotText = 'Home';
+const screenshotText = "Home"
 
 class Home {
   async takeScreenshot() {
-    await device.takeScreenshot(screenshotText);
+    await device.takeScreenshot(screenshotText)
   }
 
-  async noNotifications(languageStrings) {
-    await expect(
-      element(by.label(languageStrings.home.shared.notifications_off_header)),
-    ).toBeVisible();
+  async isOnScreen() {
+    // eslint-disable-next-line jest/no-standalone-expect
+    await expect(element(by.id("home-header"))).toBeVisible()
   }
 }
 
-export default new Home();
+export default new Home()
