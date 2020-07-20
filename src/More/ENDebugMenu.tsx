@@ -12,7 +12,7 @@ import {
 
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { BTNativeModule } from "../bt"
+import { BTNativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
 
 import { Colors, Spacing, Typography } from "../styles"

@@ -2,7 +2,7 @@ import React from "react"
 import { fireEvent, wait, cleanup, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { toExposureHistory } from "../bt/exposureNotifications"
+import { toExposureHistory } from "../gaen/exposureNotifications"
 import { DateTimeUtils } from "../helpers"
 import { factories } from "../factories"
 

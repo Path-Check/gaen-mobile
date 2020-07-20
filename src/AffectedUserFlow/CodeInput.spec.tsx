@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import CodeInputScreen from "./CodeInput"
 import { AffectedUserProvider } from "./AffectedUserContext"
 import * as API from "./verificationAPI"
-import * as NativeModule from "../bt/nativeModule"
+import * as NativeModule from "../gaen/nativeModule"
 import * as Hmac from "./hmac"
 import { Screens } from "../navigation"
 

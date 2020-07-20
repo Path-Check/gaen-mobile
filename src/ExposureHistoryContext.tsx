@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs"
 
 import { posixToDayjs } from "./helpers/dateTimeUtils"
-import { fetchLastExposureDetectionDate } from "./bt/nativeModule"
+import { fetchLastExposureDetectionDate } from "./gaen/nativeModule"
 
 import React, {
   createContext,

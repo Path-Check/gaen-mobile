@@ -1,7 +1,7 @@
 import { Factory } from "fishery"
 
 import { daysAgo, beginningOfDay } from "../helpers/dateTimeUtils"
-import { RawExposure } from "../bt/exposureNotifications"
+import { RawExposure } from "../gaen/exposureNotifications"
 
 export default Factory.define<RawExposure>(() => {
   const defaultDate = beginningOfDay(daysAgo(2))

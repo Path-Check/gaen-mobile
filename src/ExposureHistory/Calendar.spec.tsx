@@ -2,7 +2,7 @@ import React from "react"
 import { cleanup, render } from "@testing-library/react-native"
 
 import { ExposureInfo } from "../exposureHistory"
-import { toExposureHistory } from "../bt/exposureNotifications"
+import { toExposureHistory } from "../gaen/exposureNotifications"
 import { factories } from "../factories"
 
 import Calendar from "./Calendar"

@@ -4,7 +4,7 @@ import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
 import PublishConsentForm from "./PublishConsentForm"
-import * as NativeModule from "../../bt/nativeModule"
+import * as NativeModule from "../../gaen/nativeModule"
 import { Screens } from "../../navigation"
 
 afterEach(cleanup)
