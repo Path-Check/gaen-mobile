@@ -24,6 +24,7 @@ extension String {
   static let downloadBaseUrl = "DOWNLOAD_BASE_URL"
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
+  static let regionCodes = "REGION_CODES"
 
   // Notifications
   static let bluetoothNotificationTitle = "Bluetooth Off"
@@ -52,6 +53,10 @@ extension String {
 
   var localized: String {
     NSLocalizedString(self, comment: .default)
+  }
+
+  var regionCodes: [RegionCode] {
+    self.split(separator: "|").map { String($0) }
   }
 
 }

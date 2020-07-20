@@ -312,7 +312,9 @@ final class ExposureManager: NSObject {
         // Filter keys > 350 hrs old
         let currentKeys = allKeys.current()
 
-        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, [.US], certificate, HMACKey),
+        let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
+
+        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey),
                                  requestType: .postKeys) { result in
                                   switch result {
                                   case .success:
