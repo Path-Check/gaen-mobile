@@ -14,6 +14,7 @@ const NotificationDetails = (): JSX.Element => {
   const explanationScreenContent = {
     backgroundImage: Images.MultipleCrossPathBackground,
     icon: Icons.BellYellow,
+    iconLabel: t("label.bell_icon"),
     header: t("label.launch_screen3_header_bluetooth"),
     body: t("label.launch_screen3_subheader_bluetooth"),
     primaryButtonLabel: t("label.launch_next"),

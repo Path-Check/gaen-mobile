@@ -17,6 +17,7 @@ const EnableExposureNotifications = (): JSX.Element => {
 
   useStatusBarEffect("dark-content")
 
+  const iconAccessibilityLabel = t("label.exposure_icon")
   const headerText = t("label.launch_exposure_notif_header")
   const bodyText = t("label.launch_exposure_notif_subheader")
   const buttonLabel = t("label.launch_enable_exposure_notif")
@@ -34,6 +35,7 @@ const EnableExposureNotifications = (): JSX.Element => {
   const explanationScreenContent = {
     backgroundImage: Images.BlueGradientBackground,
     icon: Icons.ExposureIcon,
+    iconLabel: iconAccessibilityLabel,
     header: headerText,
     body: bodyText,
     primaryButtonLabel: buttonLabel,

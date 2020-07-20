@@ -64,6 +64,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           <View style={styles.icon}>
             <SvgXml
               xml={Icons.Bell}
+              accessible
+              accessibilityLabel={t("label.bell_icon")}
               width={Iconography.small}
               height={Iconography.small}
             />
