@@ -4,8 +4,7 @@ on:
   pull_request:
     branches:
       - develop
-      - release-candidate
-      - master
+      - main
 
 jobs:
   validate:

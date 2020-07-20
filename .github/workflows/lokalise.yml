@@ -4,12 +4,12 @@ on:
   push:
     branches: [develop]
     paths:
-      - app/locales/en.json
-      - app/locales/eula/en.html
+      - src/locales/en.json
+      - src/locales/eula/en.html
       - ios/en.lproj/*.strings
       - android/app/src/main/res/values/strings.xml
       - .github/workflows/*.yml
-      - app/locales/*.sh
+      - src/locales/*.sh
 
 jobs:
   lokalise-upload:

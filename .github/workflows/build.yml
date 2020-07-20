@@ -1,14 +1,10 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - develop
-      - master
   pull_request:
     branches:
       - develop
-      - master
+      - main
 
 jobs:
   build_staging_android:
