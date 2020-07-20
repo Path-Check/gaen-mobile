@@ -9,7 +9,7 @@ ACCESS_TOKEN = ARGV[0]
 
 def fetch_env
   source = ".env.bt"
-  google_service_source = "GoogleService-Info.plist"
+  google_service_source = "ios/GoogleService-Info.plist"
 
   env_url =
   "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/github/.env.bt"
