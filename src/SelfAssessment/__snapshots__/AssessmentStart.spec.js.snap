@@ -33,7 +33,7 @@ exports[`base 1`] = `
       <Image
         source={
           Object {
-            "testUri": "../../../app/assets/images/emptyPathBackground.png",
+            "testUri": "../../../src/assets/images/emptyPathBackground.png",
           }
         }
         style={

@@ -33,7 +33,7 @@ exports[`base 1`] = `
       <Image
         source={
           Object {
-            "testUri": "../../../app/assets/images/isolatePathBackground.png",
+            "testUri": "../../../src/assets/images/isolatePathBackground.png",
           }
         }
         style={
@@ -100,7 +100,7 @@ exports[`base 1`] = `
               ]
             }
           >
-            Distancing & PPE
+            Notify Caregiver
           </Text>
           <Text
             style={
@@ -119,7 +119,9 @@ exports[`base 1`] = `
             }
             testID="description"
           >
-            Please follow your local, state, or national guidelines for social distancing and Personal Protection Equipment (PPE) like masks and/or gloves. No additional action is needed at this time.
+            Notify a healthcare provider in your long-term care facility. Living in a long-term care facility or nursing home may put you at risk for severe illness.
+
+Tell a caregiver at the facility that you are sick and need to see a medical provider as soon as possible.
           </Text>
         </View>
       </ScrollView>

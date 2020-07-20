@@ -33,7 +33,7 @@ exports[`base 1`] = `
       <Image
         source={
           Object {
-            "testUri": "../../../app/assets/images/isolatePathBackground.png",
+            "testUri": "../../../src/assets/images/isolatePathBackground.png",
           }
         }
         style={
@@ -100,7 +100,7 @@ exports[`base 1`] = `
               ]
             }
           >
-            Isolate Yourself
+            Distancing & PPE
           </Text>
           <Text
             style={
@@ -119,7 +119,7 @@ exports[`base 1`] = `
             }
             testID="description"
           >
-            You have some symptoms that may be related to COVID-19. Call your healthcare provider if your symptoms get worse. Start home isolation.
+            Please follow your local, state, or national guidelines for social distancing and Personal Protection Equipment (PPE) like masks and/or gloves. No additional action is needed at this time.
           </Text>
         </View>
       </ScrollView>

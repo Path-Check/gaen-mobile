@@ -4,13 +4,13 @@ import SplashScreen from "react-native-splash-screen"
 import env from "react-native-config"
 import "array-flat-polyfill"
 
-import MainNavigator from "./app/navigation/MainNavigator"
-import { TracingStrategyProvider } from "./app/TracingStrategyContext"
-import btStrategy from "./app/bt"
+import MainNavigator from "./src/navigation/MainNavigator"
+import { TracingStrategyProvider } from "./src/TracingStrategyContext"
+import btStrategy from "./src/bt"
 import {
   OnboardingProvider,
   isOnboardingComplete,
-} from "./app/OnboardingContext"
+} from "./src/OnboardingContext"
 
 const determineTracingStrategy = () => {
   switch (env.TRACING_STRATEGY) {
