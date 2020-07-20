@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from "react"
+import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
@@ -12,7 +12,7 @@ import MoreStack, {
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeScreen from "../Home"
 
-import ExposureHistoryContext from "../ExposureHistoryContext"
+import { useExposureContext } from "../ExposureContext"
 
 import { Screens, Stacks } from "./index"
 import * as Icons from "../assets/svgs/TabBarNav"
@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator()
 
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { userHasNewExposure } = useContext(ExposureHistoryContext)
+  const { userHasNewExposure } = useExposureContext()
 
   const applyBadge = (icon: JSX.Element) => {
     return (

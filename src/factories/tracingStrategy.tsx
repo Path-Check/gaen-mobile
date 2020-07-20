@@ -8,8 +8,10 @@ export default Factory.define<TracingStrategy>(() => ({
     exposureInfoSubscription: () => {
       return { remove: () => {} }
     },
-    toExposureHistory: () => [],
     getCurrentExposures: () => {},
+    getLastDetectionDate: () => {
+      return new Promise(() => null)
+    },
   },
   permissionStrategy: {
     statusSubscription: () => {

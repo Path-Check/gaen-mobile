@@ -5,10 +5,11 @@ import {
 } from "react-native"
 
 import { ENPermissionStatus } from "../PermissionsContext"
-import { ExposureInfo, Posix } from "../exposureHistory"
+import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../More/ENLocalDiagnosisKeyScreen"
-import { RawExposure, toExposureInfo } from "./exposureNotifications"
 import { ExposureKey } from "../AffectedUserFlow/exposureKey"
+
+import { toExposureInfo, RawExposure } from "./dataConverters"
 
 // Event Subscriptions
 export const subscribeToExposureEvents = (

@@ -1,8 +1,8 @@
 import React from "react"
 import { cleanup, render } from "@testing-library/react-native"
 
-import { ExposureInfo } from "../exposureHistory"
-import { toExposureHistory } from "../gaen/exposureNotifications"
+import { ExposureInfo } from "../exposure"
+import { toExposureHistory } from "./exposureHistory"
 import { factories } from "../factories"
 
 import Calendar from "./Calendar"
@@ -32,8 +32,6 @@ const buildExposureHistory = () => {
   const exposureInfo: ExposureInfo = {
     [datum.date]: datum,
   }
-  return toExposureHistory(exposureInfo, {
-    startDate: Date.now(),
-    totalDays: 21,
-  })
+  const totalDays = 21
+  return toExposureHistory(exposureInfo, totalDays)
 }
