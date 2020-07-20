@@ -7,6 +7,8 @@ import React, {
   useContext,
 } from "react"
 
+import { StorageUtils } from "./utils"
+
 import { ExposureEventsStrategy } from "./tracingStrategy"
 import { ExposureInfo } from "./exposure"
 
@@ -61,6 +63,16 @@ const ExposureProvider: FunctionComponent<ExposureProps> = ({
     })
   }, [])
 
+  const getHasNewExposure = useCallback(async () => {
+    const hasNewExposure = await StorageUtils.getUserHasNewExposure()
+    setUserHasNewExposure(hasNewExposure)
+  }, [])
+
+  const setHasNewExposure = useCallback(async (exposureStatus: boolean) => {
+    await StorageUtils.setUserHasNewExposure(exposureStatus)
+    setUserHasNewExposure(exposureStatus)
+  }, [])
+
   const getCurrentExposures = useCallback(() => {
     const cb = (exposureInfo: ExposureInfo) => {
       setExposureInfo(exposureInfo)
@@ -72,14 +84,21 @@ const ExposureProvider: FunctionComponent<ExposureProps> = ({
     const subscription = exposureInfoSubscription(
       (exposureInfo: ExposureInfo) => {
         setExposureInfo(exposureInfo)
+        setHasNewExposure(true)
         getLastExposureDetectionDate()
       },
     )
 
+    getHasNewExposure()
     getLastExposureDetectionDate()
 
     return subscription.remove
-  }, [exposureInfoSubscription, getLastExposureDetectionDate])
+  }, [
+    exposureInfoSubscription,
+    getLastExposureDetectionDate,
+    getHasNewExposure,
+    setHasNewExposure,
+  ])
 
   useEffect(() => {
     getCurrentExposures()

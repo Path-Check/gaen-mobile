@@ -35,3 +35,28 @@ export async function getIsOnboardingComplete(): Promise<boolean> {
 export async function setIsOnboardingComplete(): Promise<void> {
   return setStoreData(ONBOARDING_COMPLETE, ONBOARDING_COMPLETE)
 }
+
+const NEW_EXPOSURES = "NEW_EXPOSURES"
+export async function getUserHasNewExposure(): Promise<boolean> {
+  try {
+    const data = await AsyncStorage.getItem(NEW_EXPOSURES)
+    if (data === null) {
+      return false
+    }
+
+    return JSON.parse(data)
+  } catch (e) {
+    console.error(e.message)
+    return false
+  }
+}
+
+export async function setUserHasNewExposure(
+  exposureStatus: boolean,
+): Promise<void> {
+  try {
+    setStoreData(NEW_EXPOSURES, JSON.stringify(exposureStatus))
+  } catch (e) {
+    console.error(e.message)
+  }
+}
