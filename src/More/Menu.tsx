@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
   ViewStyle,
   View,
@@ -17,13 +17,12 @@ import {
 
 import { getLocalNames } from "../locales/languages"
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Stacks, Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
-interface SettingsScreenProps {
+interface MenuScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
 }
 
@@ -58,17 +57,13 @@ const LanguageSelectionListItem = ({
   </TouchableHighlight>
 )
 
-const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
+const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   useStatusBarEffect("light-content")
-
-  const navigateTo = (screen: string) => {
-    return () => navigation.navigate(screen)
-  }
 
   interface SettingsListItemProps {
     label: string
@@ -102,55 +97,50 @@ const SettingsScreen = ({ navigation }: SettingsScreenProps): JSX.Element => {
   }
 
   return (
-    <NavigationBarWrapper
-      title={t("navigation.more")}
-      includeBackButton={false}
-    >
-      <ScrollView style={styles.container}>
-        <View style={styles.sectionPrimary}>
-          <RTLEnabledText>
-            {t("settings.share_test_result_description")}
+    <ScrollView style={styles.container}>
+      <View style={styles.sectionPrimary}>
+        <RTLEnabledText>
+          {t("settings.share_test_result_description")}
+        </RTLEnabledText>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+          style={styles.button}
+        >
+          <RTLEnabledText style={styles.buttonText}>
+            {t("settings.share_test_result")}
           </RTLEnabledText>
-          <TouchableOpacity
-            onPress={navigateTo(Stacks.AffectedUserFlow)}
-            style={styles.button}
-          >
-            <RTLEnabledText style={styles.buttonText}>
-              {t("settings.share_test_result")}
-            </RTLEnabledText>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.section}>
-          <LanguageSelectionListItem
-            label={languageName || t("label.unknown")}
-            icon={Icons.LanguagesIcon}
-            iconLabel={t("label.language_icon")}
-            onPress={navigateTo(Screens.LanguageSelection)}
-          />
-        </View>
+      <View style={styles.section}>
+        <LanguageSelectionListItem
+          label={languageName || t("label.unknown")}
+          icon={Icons.LanguagesIcon}
+          iconLabel={t("label.language_icon")}
+          onPress={() => navigation.navigate(Screens.LanguageSelection)}
+        />
+      </View>
 
-        <View style={styles.section}>
-          <SettingsListItem
-            label={t("screen_titles.about")}
-            onPress={navigateTo(Screens.About)}
-            style={styles.divider}
-          />
-          <SettingsListItem
-            label={t("screen_titles.legal")}
-            onPress={() => navigation.navigate(Screens.Licenses)}
-            style={styles.lastListItem}
-          />
-        </View>
-        <View style={styles.section}>
-          <SettingsListItem
-            label="EN Debug Menu"
-            onPress={navigateTo(Screens.ENDebugMenu)}
-            style={styles.lastListItem}
-          />
-        </View>
-      </ScrollView>
-    </NavigationBarWrapper>
+      <View style={styles.section}>
+        <SettingsListItem
+          label={t("screen_titles.about")}
+          onPress={() => navigation.navigate(Screens.About)}
+          style={styles.divider}
+        />
+        <SettingsListItem
+          label={t("screen_titles.legal")}
+          onPress={() => navigation.navigate(Screens.Licenses)}
+          style={styles.lastListItem}
+        />
+      </View>
+      <View style={styles.section}>
+        <SettingsListItem
+          label="EN Debug Menu"
+          onPress={() => navigation.navigate(Screens.ENDebugMenu)}
+          style={styles.lastListItem}
+        />
+      </View>
+    </ScrollView>
   )
 }
 
@@ -201,4 +191,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SettingsScreen
+export default MenuScreen

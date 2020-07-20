@@ -3,7 +3,6 @@ import { FlatList, View, StyleSheet, TouchableHighlight } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
@@ -32,36 +31,30 @@ const LanguageSelection = (): JSX.Element => {
   }
 
   return (
-    <NavigationBarWrapper
-      title={"Choose Language"}
-      includeBackButton
-      onBackPress={navigation.goBack}
-    >
-      <FlatList
-        keyExtractor={(_, i) => `${i}`}
-        data={localeList}
-        renderItem={({ item: { value, label } }) => (
-          <TouchableHighlight
-            underlayColor={Colors.underlayPrimaryBackground}
+    <FlatList
+      keyExtractor={(_, i) => `${i}`}
+      data={localeList}
+      renderItem={({ item: { value, label } }) => (
+        <TouchableHighlight
+          underlayColor={Colors.underlayPrimaryBackground}
+          style={{
+            paddingVertical: Spacing.medium,
+            paddingHorizontal: Spacing.large,
+          }}
+          onPress={() => onSelectLanguage(value)}
+        >
+          <RTLEnabledText
             style={{
-              paddingVertical: Spacing.medium,
-              paddingHorizontal: Spacing.large,
+              ...Typography.mainContent,
+              fontWeight: language === value ? "700" : "500",
             }}
-            onPress={() => onSelectLanguage(value)}
           >
-            <RTLEnabledText
-              style={{
-                ...Typography.mainContent,
-                fontWeight: language === value ? "700" : "500",
-              }}
-            >
-              {label}
-            </RTLEnabledText>
-          </TouchableHighlight>
-        )}
-        ItemSeparatorComponent={() => <Separator />}
-      />
-    </NavigationBarWrapper>
+            {label}
+          </RTLEnabledText>
+        </TouchableHighlight>
+      )}
+      ItemSeparatorComponent={() => <Separator />}
+    />
   )
 }
 

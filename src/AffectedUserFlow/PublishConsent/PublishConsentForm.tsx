@@ -16,7 +16,7 @@ import { Button } from "../../components/Button"
 import { RTLEnabledText } from "../../components/RTLEnabledText"
 import * as BTNativeModule from "../../gaen/nativeModule"
 
-import { Screens } from "../../navigation"
+import { Screens, Stacks } from "../../navigation"
 import { Icons, Images } from "../../assets"
 import { Colors, Spacing, Buttons, Iconography, Typography } from "../../styles"
 
@@ -45,7 +45,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings)
+    navigation.navigate(Stacks.More)
   }
 
   const title = t("export.publish_consent_title_bluetooth")

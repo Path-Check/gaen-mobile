@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useStatusBarEffect } from "../navigation"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import { Screens } from "../navigation"
+import { Stacks } from "../navigation"
 
 import { Layout, Spacing, Colors, Buttons, Typography } from "../styles"
 
@@ -16,7 +16,7 @@ export const ExportComplete: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressDone = () => {
-    navigation.navigate(Screens.Settings)
+    navigation.navigate(Stacks.More)
   }
 
   const title = t("export.complete_title")
