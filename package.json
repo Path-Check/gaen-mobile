@@ -60,7 +60,6 @@
     "@react-navigation/native": "5.5.1",
     "@react-navigation/stack": "5.1.1",
     "@types/js-yaml": "^3.12.4",
-    "@types/semver": "^7.2.0",
     "array-flat-polyfill": "^1.0.1",
     "dayjs": "^1.8.24",
     "emotion-theming": "^10.0.27",
@@ -77,7 +76,6 @@
     "react-native-app-intro-slider": "^3.0.0",
     "react-native-background-fetch": "^3.0.4",
     "react-native-config": "^1.2.1",
-    "react-native-document-picker": "github:rparet/react-native-document-picker",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
@@ -98,7 +96,6 @@
     "react-native-zip-archive": "^5.0.1",
     "reanimated-bottom-sheet": "^1.0.0-alpha.19",
     "rn-fetch-blob": "^0.12.0",
-    "semver": "^7.3.2",
     "typesafe-actions": "^5.1.0",
     "valid-url": "^1.0.9",
     "victory-native": "^34.1.0"
