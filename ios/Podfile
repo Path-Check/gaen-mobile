@@ -60,6 +60,7 @@ def bt_pods
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Alamofire', '~> 4.9.1'
   pod 'ZIPFoundation'
+  pod 'Firebase/Crashlytics'
 end
 
 target 'BT' do

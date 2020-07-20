@@ -101,6 +101,9 @@ safepaths.realm
 .env
 .env.bt*
 
+# Crashlytics
+ios/GoogleService-Info.plist
+
 # private resources
 pathcheck-mobile-resources
 
