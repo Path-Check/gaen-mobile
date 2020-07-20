@@ -1,3 +1,6 @@
 enum Region: String {
-  case US
+  case US,
+  GR,
+  MN,
+  PR
 }
