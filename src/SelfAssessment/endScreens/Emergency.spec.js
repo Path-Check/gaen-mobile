@@ -6,30 +6,37 @@ import i18n from "../../locales/languages"
 import { AssessmentNavigationContext } from "../Context"
 import { Emergency } from "./Emergency"
 
-test("base", () => {
-  const { asJSON } = render(<Emergency />, { wrapper: Wrapper })
-  expect(asJSON()).toMatchSnapshot()
-})
-
-test("cta", () => {
-  let openURL = jest.fn()
-  jest.doMock("react-native/Libraries/Linking/Linking", () => ({
-    openURL: openURL,
-  }))
-  const { getByTestId } = render(<Emergency />, {
-    wrapper: Wrapper,
+describe("Emergency", () => {
+  it("displays the emergency screen title and description", () => {
+    const { getByText } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider value={{}}>
+          <Emergency />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    expect(getByText("Call Emergency Services")).toBeDefined()
+    expect(
+      getByText(
+        "Based on your reported symptoms, you should seek care immediately.",
+      ),
+    ).toBeDefined()
   })
-  const cta = getByTestId("assessment-button")
-  fireEvent.press(cta)
-  expect(openURL).toHaveBeenCalledWith("tel://911")
-})
 
-function Wrapper({ children }) {
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AssessmentNavigationContext.Provider value={{}}>
-        {children}
-      </AssessmentNavigationContext.Provider>
-    </I18nextProvider>
-  )
-}
+  it("calls the emergency services when taped on the CTA", () => {
+    let openURL = jest.fn()
+    jest.doMock("react-native/Libraries/Linking/Linking", () => ({
+      openURL: openURL,
+    }))
+    const { getByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider value={{}}>
+          <Emergency />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    const cta = getByTestId("assessment-button")
+    fireEvent.press(cta)
+    expect(openURL).toHaveBeenCalledWith("tel://911")
+  })
+})

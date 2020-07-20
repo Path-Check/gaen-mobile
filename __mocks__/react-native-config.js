@@ -1,4 +1,4 @@
 export default {
-  FLAG_FOO_BAR: 'true',
-  TRACING_STRATEGY: 'bt',
-};
+  TRACING_STRATEGY: "bt",
+  GAEN_AUTHORITY_NAME: "GAEN_AUTHORITY_NAME",
+}

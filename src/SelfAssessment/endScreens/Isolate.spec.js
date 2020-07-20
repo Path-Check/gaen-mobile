@@ -6,29 +6,38 @@ import i18n from "../../locales/languages"
 import { AssessmentNavigationContext } from "../Context"
 import { Isolate } from "./Isolate"
 
-test("base", () => {
-  const { asJSON } = render(<Isolate />, { wrapper: Wrapper })
-  expect(asJSON()).toMatchSnapshot()
-})
-
-test("cta", () => {
-  const push = jest.fn()
-  const { getByTestId } = render(<Isolate navigation={{ push }} />, {
-    wrapper: Wrapper,
+describe("Isolate", () => {
+  it("displays the isolate screen title and description", () => {
+    const { getByText } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider
+          value={{ completeRoute: "MyRoute" }}
+        >
+          <Isolate />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    expect(getByText("Isolate Yourself")).toBeDefined()
+    expect(
+      getByText(
+        "You have some symptoms that may be related to COVID-19. Call your healthcare provider if your symptoms get worse. Start home isolation.",
+      ),
+    ).toBeDefined()
   })
-  const cta = getByTestId("assessment-button")
-  fireEvent.press(cta)
-  expect(push).toHaveBeenCalledWith("MyRoute")
-})
 
-function Wrapper({ children }) {
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AssessmentNavigationContext.Provider
-        value={{ completeRoute: "MyRoute" }}
-      >
-        {children}
-      </AssessmentNavigationContext.Provider>
-    </I18nextProvider>
-  )
-}
+  it("navigates to the next screen route when tapped on the cta", () => {
+    const push = jest.fn()
+    const { getByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider
+          value={{ completeRoute: "MyRoute" }}
+        >
+          <Isolate navigation={{ push }} />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    const cta = getByTestId("assessment-button")
+    fireEvent.press(cta)
+    expect(push).toHaveBeenCalledWith("MyRoute")
+  })
+})

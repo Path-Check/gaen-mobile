@@ -7,29 +7,45 @@ import { AssessmentNavigationContext } from "../Context"
 
 import { Caregiver } from "./Caregiver"
 
-test("base", () => {
-  const { asJSON } = render(<Caregiver />, { wrapper: Wrapper })
-  expect(asJSON()).toMatchSnapshot()
-})
-
-test("cta", () => {
-  const push = jest.fn()
-  const { getByTestId } = render(<Caregiver navigation={{ push }} />, {
-    wrapper: Wrapper,
+describe("Caregiver", () => {
+  it("displays the right title and description", () => {
+    const { getByText } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider
+          value={{ completeRoute: "MyRoute" }}
+        >
+          <Caregiver />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    expect(getByText("Notify Caregiver")).toBeDefined()
+    expect(
+      getByText(
+        "Notify a healthcare provider in your long-term care facility. Living in a long-term care facility or nursing home may put you at risk for severe illness.",
+        { exact: false },
+      ),
+    ).toBeDefined()
+    expect(
+      getByText(
+        "Tell a caregiver at the facility that you are sick and need to see a medical provider as soon as possible.",
+        { exact: false },
+      ),
+    ).toBeDefined()
   })
-  const cta = getByTestId("assessment-button")
-  fireEvent.press(cta)
-  expect(push).toHaveBeenCalledWith("MyRoute")
-})
 
-function Wrapper({ children }) {
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AssessmentNavigationContext.Provider
-        value={{ completeRoute: "MyRoute" }}
-      >
-        {children}
-      </AssessmentNavigationContext.Provider>
-    </I18nextProvider>
-  )
-}
+  it("navigates to the next screen when clicks on the cta", () => {
+    const push = jest.fn()
+    const { getByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider
+          value={{ completeRoute: "MyRoute" }}
+        >
+          <Caregiver navigation={{ push }} />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    const cta = getByTestId("assessment-button")
+    fireEvent.press(cta)
+    expect(push).toHaveBeenCalledWith("MyRoute")
+  })
+})

@@ -6,36 +6,41 @@ import i18n from "../../locales/languages"
 import { AssessmentNavigationContext } from "../Context"
 import { AssessmentComplete } from "./AssessmentComplete"
 
-let meta
-
-beforeEach(() => {
-  meta = {
-    completeRoute: "MyRoute",
-  }
-})
-
-test("base", () => {
-  const { asJSON } = render(<AssessmentComplete />, { wrapper: Wrapper })
-  expect(asJSON()).toMatchSnapshot()
-})
-
-test("cta", () => {
-  const dismiss = jest.fn()
-  meta.dismiss = dismiss
-  const { getByTestId } = render(<AssessmentComplete />, {
-    wrapper: Wrapper,
+describe("AssessmentComplete", () => {
+  it("renders the right title and description", () => {
+    const meta = {
+      completeRoute: "MyRoute",
+    }
+    const { getByText } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider value={meta}>
+          <AssessmentComplete />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    expect(getByText("Thanks for keeping your community safe!")).toBeDefined()
+    expect(
+      getByText(
+        "By sharing your health status and location history anonymously with your community, you are being proactive about fighting the spread of COVID-19.",
+      ),
+    ).toBeDefined()
   })
-  const cta = getByTestId("assessment-button")
-  fireEvent.press(cta)
-  expect(dismiss).toHaveBeenCalled()
-})
 
-function Wrapper({ children }) {
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AssessmentNavigationContext.Provider value={meta}>
-        {children}
-      </AssessmentNavigationContext.Provider>
-    </I18nextProvider>
-  )
-}
+  it("calls the dismiss action when the cta is clicked", () => {
+    const meta = {
+      completeRoute: "MyRoute",
+    }
+    const dismiss = jest.fn()
+    meta.dismiss = dismiss
+    const { getByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AssessmentNavigationContext.Provider value={meta}>
+          <AssessmentComplete />
+        </AssessmentNavigationContext.Provider>
+      </I18nextProvider>,
+    )
+    const cta = getByTestId("assessment-button")
+    fireEvent.press(cta)
+    expect(dismiss).toHaveBeenCalled()
+  })
+})
