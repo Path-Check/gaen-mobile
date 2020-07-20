@@ -1,4 +1,4 @@
-import { isToday, posixToDayjs } from "./dateTimeUtils"
+import { isToday, posixToDayjs } from "./dateTime"
 
 describe("isToday", () => {
   describe("when provided a posix that is today", () => {

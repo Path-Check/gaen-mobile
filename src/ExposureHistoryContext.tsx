@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs"
 
-import { posixToDayjs } from "./helpers/dateTimeUtils"
-import { fetchLastExposureDetectionDate } from "./bt/nativeModule"
+import { DateTimeUtils } from "./utils"
+import { fetchLastExposureDetectionDate } from "./gaen/nativeModule"
 
 import React, {
   createContext,
@@ -83,7 +83,9 @@ const ExposureHistoryProvider: FunctionComponent<ExposureHistoryProps> = ({
   const getLastExposureDetectionDate = useCallback(() => {
     fetchLastExposureDetectionDate().then((exposureDetectionDate) => {
       exposureDetectionDate &&
-        setLastExposureDetectionDate(posixToDayjs(exposureDetectionDate))
+        setLastExposureDetectionDate(
+          DateTimeUtils.posixToDayjs(exposureDetectionDate),
+        )
     })
   }, [])
 

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { Screens } from "../navigation"
-import { isPlatformiOS } from "../Util"
+import { isPlatformiOS } from "../utils"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
 
 import { Icons, Images } from "../assets"

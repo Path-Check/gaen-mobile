@@ -7,7 +7,7 @@ import { RTLEnabledText } from "./RTLEnabledText"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
-import { isPlatformAndroid } from "../Util"
+import { isPlatformAndroid } from "../utils/index"
 
 interface NavigationBarWrapperProps {
   children: React.ReactNode

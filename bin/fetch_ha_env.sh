@@ -40,11 +40,25 @@ def fetch_env
   puts "...fetching .env for #{HA_LABEL}"
 
   source = ".env.bt"
+  source_release = ".env.bt.release"
+
   env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
 
+  env_release_url =
+  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.release"
+
   open(source, 'w') do |f|
     Open3.popen2e("curl", "-s", env_url) do |_, stdout_and_err, wait_thr|
+      stdout_and_err.each do |line|
+        f << line 
+      end
+      wait_thr.value
+    end
+  end
+
+  open(source_release, 'w') do |f|
+    Open3.popen2e("curl", "-s", env_release_url) do |_, stdout_and_err, wait_thr|
       stdout_and_err.each do |line|
         f << line 
       end

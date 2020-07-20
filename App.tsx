@@ -6,7 +6,7 @@ import "array-flat-polyfill"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { TracingStrategyProvider } from "./src/TracingStrategyContext"
-import btStrategy from "./src/bt"
+import gaenStrategy from "./src/gaen"
 import {
   OnboardingProvider,
   isOnboardingComplete,
@@ -15,7 +15,7 @@ import {
 const determineTracingStrategy = () => {
   switch (env.TRACING_STRATEGY) {
     case "bt": {
-      return btStrategy
+      return gaenStrategy
     }
     default: {
       throw new Error("Unsupported Tracing Strategy")

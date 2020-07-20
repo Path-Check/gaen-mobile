@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { Button } from "../../components/Button"
 import { RTLEnabledText } from "../../components/RTLEnabledText"
-import * as BTNativeModule from "../../bt/nativeModule"
+import * as BTNativeModule from "../../gaen/nativeModule"
 
 import { Screens } from "../../navigation"
 import { Icons, Images } from "../../assets"

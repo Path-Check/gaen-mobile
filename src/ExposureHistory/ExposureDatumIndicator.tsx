@@ -2,7 +2,7 @@ import React from "react"
 import { View, Text, ViewStyle, TextStyle, StyleSheet } from "react-native"
 import dayjs from "dayjs"
 
-import { DateTimeUtils } from "../helpers"
+import { DateTimeUtils } from "../utils"
 import { ExposureDatum } from "../exposureHistory"
 import {
   Affordances,

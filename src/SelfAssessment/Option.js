@@ -2,7 +2,7 @@ import DateTimePicker from "@react-native-community/datetimepicker"
 import React, { Fragment, useEffect, useMemo, useState } from "react"
 
 import { Option as SharedOption } from "../components/Option"
-import { isPlatformAndroid, isPlatformiOS } from "../Util"
+import { isPlatformAndroid, isPlatformiOS } from "../utils/index"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,

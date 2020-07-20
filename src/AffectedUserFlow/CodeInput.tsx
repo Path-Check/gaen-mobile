@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useAffectedUserContext } from "./AffectedUserContext"
 import * as API from "./verificationAPI"
-import * as NativeModule from "../bt/nativeModule"
+import * as NativeModule from "../gaen/nativeModule"
 import { calculateHmac } from "./hmac"
 
 import { Screens } from "../navigation"

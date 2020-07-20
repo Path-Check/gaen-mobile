@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 
 import { ENPermissionStatus } from "../PermissionsContext"
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { isPlatformiOS } from "../Util"
+import { isPlatformiOS } from "../utils/index"
 
 import { Layout, Spacing, Colors, Typography, Buttons } from "../styles"
 
