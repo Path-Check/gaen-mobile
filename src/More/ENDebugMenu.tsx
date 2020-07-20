@@ -21,8 +21,6 @@ type ENDebugMenuProps = {
   navigation: NavigationProp
 }
 
-const DEBUG_VERIFICATION_CODE = "123456"
-
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -76,20 +74,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       }
     }
   }
-
-  const showDebugVerificationCode = () => {
-    Alert.alert(
-      "Debug Verification Code:",
-      DEBUG_VERIFICATION_CODE,
-      [
-        {
-          text: "OK",
-        },
-      ],
-      { cancelable: false },
-    )
-  }
-
   interface DebugMenuListItemProps {
     label: string
     onPress: () => void
@@ -119,55 +103,55 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       ) : (
         <ScrollView>
           <View style={styles.section}>
-            <DebugMenuListItem
+            {/* <DebugMenuListItem
               label="Reset Exposures"
               style={styles.lastListItem}
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.resetExposures,
               )}
-            />
+            /> */}
           </View>
           <View style={styles.section}>
-            <DebugMenuListItem
+            {/* <DebugMenuListItem
               label="Detect Exposures Now"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.detectExposuresNow,
               )}
-            />
+            /> */}
             <DebugMenuListItem
               label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.showLastProcessedFilePath,
               )}
             />
-            <DebugMenuListItem
+            {/* <DebugMenuListItem
               label="Simulate Exposure Detection Error"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.simulateExposureDetectionError,
               )}
-            />
-            <DebugMenuListItem
+            /> */}
+            {/* <DebugMenuListItem
               label="Simulate Exposure"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.simulateExposure,
               )}
-            />
+            /> */}
             <DebugMenuListItem
               label="Show Exposures"
               onPress={() => {
                 navigation.navigate(Screens.ExposureListDebugScreen)
               }}
             />
-            <DebugMenuListItem
+            {/* <DebugMenuListItem
               label="Show Debug Verification Code"
               onPress={showDebugVerificationCode}
-            />
-            <DebugMenuListItem
+            /> */}
+            {/* <DebugMenuListItem
               label="Toggle Exposure Notifications"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.toggleExposureNotifications,
               )}
-            />
+            /> */}
           </View>
           <View style={styles.section}>
             <DebugMenuListItem
@@ -176,13 +160,13 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 navigation.navigate(Screens.ENLocalDiagnosisKey)
               }}
             />
-            <DebugMenuListItem
+            {/* <DebugMenuListItem
               label="Get and Post Diagnosis Keys"
               style={styles.lastListItem}
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.submitExposureKeys,
               )}
-            />
+            /> */}
           </View>
         </ScrollView>
       )}
