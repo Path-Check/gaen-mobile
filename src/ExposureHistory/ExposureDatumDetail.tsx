@@ -6,7 +6,7 @@ import dayjs from "dayjs"
 
 import { ExposureDatum, Possible, NoKnown, NoData } from "../exposureHistory"
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { TimeHelpers } from "../utils"
+import { DateTimeUtils } from "../utils"
 import { Screens } from "../navigation"
 
 import { Typography, Outlines, Colors, Buttons, Spacing } from "../styles"
@@ -38,7 +38,7 @@ interface PossibleExposureDetailProps {
 const PossibleExposureDetail = ({
   datum: { date, duration },
 }: PossibleExposureDetailProps) => {
-  const exposureDurationText = TimeHelpers.durationToString(duration)
+  const exposureDurationText = DateTimeUtils.durationToString(duration)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const exposureDate = dayjs(date).format("dddd, MMM DD")

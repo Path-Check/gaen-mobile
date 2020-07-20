@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-import { DateTimeUtils } from "./helpers"
+import { DateTimeUtils } from "./utils"
 import { calendarDays } from "./exposureHistory"
 
 describe("calendarDays", () => {

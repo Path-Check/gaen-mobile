@@ -1,6 +1,6 @@
 import { Factory } from "fishery"
 
-import { daysAgo, beginningOfDay } from "../helpers/dateTimeUtils"
+import { daysAgo, beginningOfDay } from "../utils/dateTimeUtils"
 import { RawExposure } from "../gaen/exposureNotifications"
 
 export default Factory.define<RawExposure>(() => {

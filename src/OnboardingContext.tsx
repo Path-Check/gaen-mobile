@@ -5,7 +5,7 @@ import React, {
   FunctionComponent,
 } from "react"
 
-import { SetStoreData, GetStoreData } from "./helpers/General"
+import { SetStoreData, GetStoreData } from "./utils/General"
 
 const ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
 

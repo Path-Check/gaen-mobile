@@ -1,6 +1,6 @@
 import { Factory } from "fishery"
 
-import { daysAgo, beginningOfDay } from "../helpers/dateTimeUtils"
+import { daysAgo, beginningOfDay } from "../utils/dateTimeUtils"
 
 import { ExposureDatum } from "../exposureHistory"
 

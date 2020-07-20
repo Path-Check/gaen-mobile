@@ -1,6 +1,6 @@
 import { Dayjs } from "dayjs"
 
-import { posixToDayjs } from "./helpers/dateTimeUtils"
+import { posixToDayjs } from "./utils/dateTimeUtils"
 import { fetchLastExposureDetectionDate } from "./gaen/nativeModule"
 
 import React, {

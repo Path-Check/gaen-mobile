@@ -5,7 +5,7 @@ import i18next from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
 import { NativeModules, Platform } from "react-native"
 
-import { GetStoreData, SetStoreData } from "../helpers/General"
+import { GetStoreData, SetStoreData } from "../utils/General"
 import ar from "./ar.json"
 import da from "./da.json"
 import en from "./en.json"

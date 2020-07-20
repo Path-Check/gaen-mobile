@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from "react-native"
 
-import { isPlatformiOS } from "../../Util"
+import { isPlatformiOS } from "../../utils/index"
 
 export const KeyboardAvoidingView = ({ behavior, children }) => {
   return (
