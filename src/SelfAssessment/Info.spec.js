@@ -4,30 +4,18 @@ import { View } from "react-native"
 
 import { Info } from "./Info"
 
-test("base", () => {
-  const { asJSON, queryByTestId } = render(
-    <Info image={{ uri: "image.png" }} title="End" />,
-  )
-  expect(asJSON()).toMatchSnapshot()
-  expect(queryByTestId("cta")).toBe(null)
-})
+describe("Info", () => {
+  it("renders it's children component", () => {
+    const { getByTestId } = render(
+      <Info>
+        <View testID="children" />
+      </Info>,
+    )
+    expect(getByTestId("children")).toBeTruthy()
+  })
 
-test("children", () => {
-  const { getByTestId } = render(
-    <Info image={{ uri: "image.png" }} title="End">
-      <View testID="children" />
-    </Info>,
-  )
-  expect(getByTestId("children")).toBeTruthy()
-})
-
-test("footer", () => {
-  const { getByTestId } = render(
-    <Info
-      footer={<View testID="footer" />}
-      image={{ uri: "image.png" }}
-      title="End"
-    />,
-  )
-  expect(getByTestId("footer")).toBeTruthy()
+  it("renders the footer component", () => {
+    const { getByTestId } = render(<Info footer={<View testID="footer" />} />)
+    expect(getByTestId("footer")).toBeTruthy()
+  })
 })
