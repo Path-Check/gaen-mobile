@@ -16,7 +16,7 @@ export const ExportComplete: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressDone = () => {
-    navigation.navigate(Screens.Settings)
+    navigation.navigate(Screens.More)
   }
 
   const title = t("export.complete_title")
@@ -72,3 +72,4 @@ const styles = StyleSheet.create({
 })
 
 export default ExportComplete
+

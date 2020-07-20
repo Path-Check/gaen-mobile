@@ -8,9 +8,7 @@ import {
   View,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Images } from "../assets"
@@ -20,13 +18,8 @@ const PRIVACY_POLICY_URL = "https://pathcheck.org/privacy-policy/"
 
 const Licenses = (): JSX.Element => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
 
   const legalHeaderText = t("label.legal_page_header_bluetooth")
-
-  const backToMain = () => {
-    navigation.goBack()
-  }
 
   const infoAddress = "info@pathcheck.org"
   const pathCheckAddress = "pathcheck.org"
@@ -36,10 +29,7 @@ const Licenses = (): JSX.Element => {
   }
 
   return (
-    <NavigationBarWrapper
-      title={t("screen_titles.legal")}
-      onBackPress={backToMain}
-    >
+    <>
       <ScrollView
         contentContainerStyle={styles.contentContainer}
         alwaysBounceVertical={false}
@@ -86,7 +76,7 @@ const Licenses = (): JSX.Element => {
           <Image source={Images.ForeArrow} />
         </View>
       </TouchableOpacity>
-    </NavigationBarWrapper>
+    </>
   )
 }
 
@@ -122,3 +112,4 @@ const styles = StyleSheet.create({
 })
 
 export default Licenses
+

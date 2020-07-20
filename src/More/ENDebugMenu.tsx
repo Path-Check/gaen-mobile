@@ -10,7 +10,6 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { BTNativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
@@ -37,10 +36,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackPress)
     }
   }, [navigation])
-
-  const backToSettings = () => {
-    navigation.goBack()
-  }
 
   const showErrorAlert = (errorString: string) => {
     Alert.alert("Error", errorString, [{ text: "OK" }], {
@@ -110,83 +105,77 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
     )
   }
 
-  return (
-    <NavigationBarWrapper title={"EN Debug Menu"} onBackPress={backToSettings}>
-      {loading ? (
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <ActivityIndicator size={"large"} />
-        </View>
-      ) : (
-        <ScrollView>
-          <View style={styles.section}>
-            <DebugMenuListItem
-              label="Reset Exposures"
-              style={styles.lastListItem}
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.resetExposures,
-              )}
-            />
-          </View>
-          <View style={styles.section}>
-            <DebugMenuListItem
-              label="Detect Exposures Now"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.detectExposuresNow,
-              )}
-            />
-            <DebugMenuListItem
-              label="Show Last Processed File Path"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.showLastProcessedFilePath,
-              )}
-            />
-            <DebugMenuListItem
-              label="Simulate Exposure Detection Error"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.simulateExposureDetectionError,
-              )}
-            />
-            <DebugMenuListItem
-              label="Simulate Exposure"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.simulateExposure,
-              )}
-            />
-            <DebugMenuListItem
-              label="Show Exposures"
-              onPress={() => {
-                navigation.navigate(Screens.ExposureListDebugScreen)
-              }}
-            />
-            <DebugMenuListItem
-              label="Show Debug Verification Code"
-              onPress={showDebugVerificationCode}
-            />
-            <DebugMenuListItem
-              label="Toggle Exposure Notifications"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.toggleExposureNotifications,
-              )}
-            />
-          </View>
-          <View style={styles.section}>
-            <DebugMenuListItem
-              label="Show Local Diagnosis Keys"
-              onPress={() => {
-                navigation.navigate(Screens.ENLocalDiagnosisKey)
-              }}
-            />
-            <DebugMenuListItem
-              label="Get and Post Diagnosis Keys"
-              style={styles.lastListItem}
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.submitExposureKeys,
-              )}
-            />
-          </View>
-        </ScrollView>
-      )}
-    </NavigationBarWrapper>
+  return loading ? (
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <ActivityIndicator size={"large"} />
+    </View>
+  ) : (
+    <ScrollView>
+      <View style={styles.section}>
+        <DebugMenuListItem
+          label="Reset Exposures"
+          style={styles.lastListItem}
+          onPress={handleOnPressSimulationButton(BTNativeModule.resetExposures)}
+        />
+      </View>
+      <View style={styles.section}>
+        <DebugMenuListItem
+          label="Detect Exposures Now"
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.detectExposuresNow,
+          )}
+        />
+        <DebugMenuListItem
+          label="Show Last Processed File Path"
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.showLastProcessedFilePath,
+          )}
+        />
+        <DebugMenuListItem
+          label="Simulate Exposure Detection Error"
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.simulateExposureDetectionError,
+          )}
+        />
+        <DebugMenuListItem
+          label="Simulate Exposure"
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.simulateExposure,
+          )}
+        />
+        <DebugMenuListItem
+          label="Show Exposures"
+          onPress={() => {
+            navigation.navigate(Screens.ExposureListDebugScreen)
+          }}
+        />
+        <DebugMenuListItem
+          label="Show Debug Verification Code"
+          onPress={showDebugVerificationCode}
+        />
+        <DebugMenuListItem
+          label="Toggle Exposure Notifications"
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.toggleExposureNotifications,
+          )}
+        />
+      </View>
+      <View style={styles.section}>
+        <DebugMenuListItem
+          label="Show Local Diagnosis Keys"
+          onPress={() => {
+            navigation.navigate(Screens.ENLocalDiagnosisKey)
+          }}
+        />
+        <DebugMenuListItem
+          label="Get and Post Diagnosis Keys"
+          style={styles.lastListItem}
+          onPress={handleOnPressSimulationButton(
+            BTNativeModule.submitExposureKeys,
+          )}
+        />
+      </View>
+    </ScrollView>
   )
 }
 
@@ -212,3 +201,4 @@ const styles = StyleSheet.create({
 })
 
 export default ENDebugMenu
+

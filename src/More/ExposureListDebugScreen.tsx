@@ -9,7 +9,6 @@ import {
   NativeModules,
 } from "react-native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
@@ -79,24 +78,18 @@ const ExposureListDebugScreen = ({
     })
   }
 
-  const backToDebugMenu = () => {
-    navigation.goBack()
-  }
-
   return (
-    <NavigationBarWrapper title={"Exposures"} onBackPress={backToDebugMenu}>
-      <FlatList
-        data={exposures}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <View style={styles.flatlistRowView}>
-            <RTLEnabledText style={styles.itemText}>
-              <Text>Date: {item.item.date}</Text>
-            </RTLEnabledText>
-          </View>
-        )}
-      />
-    </NavigationBarWrapper>
+    <FlatList
+      data={exposures}
+      keyExtractor={(item) => item.id}
+      renderItem={(item) => (
+        <View style={styles.flatlistRowView}>
+          <RTLEnabledText style={styles.itemText}>
+            <Text>Date: {item.item.date}</Text>
+          </RTLEnabledText>
+        </View>
+      )}
+    />
   )
 }
 
@@ -118,3 +111,4 @@ const styles = StyleSheet.create({
 })
 
 export default ExposureListDebugScreen
+

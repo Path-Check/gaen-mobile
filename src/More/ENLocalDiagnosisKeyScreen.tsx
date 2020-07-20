@@ -8,7 +8,6 @@ import {
   Text,
 } from "react-native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
@@ -71,27 +70,18 @@ const ENLocalDiagnosisKeyScreen = ({
     })
   }
 
-  const backToDebugMenu = () => {
-    navigation.goBack()
-  }
-
   return (
-    <NavigationBarWrapper
-      title={"Local Diagnosis Keys"}
-      onBackPress={backToDebugMenu}
-    >
-      <FlatList
-        data={diagnosisKeys}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <View style={styles.flatlistRowView}>
-            <RTLEnabledText style={styles.itemText}>
-              <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-            </RTLEnabledText>
-          </View>
-        )}
-      />
-    </NavigationBarWrapper>
+    <FlatList
+      data={diagnosisKeys}
+      keyExtractor={(item) => item.id}
+      renderItem={(item) => (
+        <View style={styles.flatlistRowView}>
+          <RTLEnabledText style={styles.itemText}>
+            <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
+          </RTLEnabledText>
+        </View>
+      )}
+    />
   )
 }
 
@@ -113,3 +103,4 @@ const styles = StyleSheet.create({
 })
 
 export default ENLocalDiagnosisKeyScreen
+

@@ -54,7 +54,7 @@ const CodeInputScreen = (): JSX.Element => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings)
+    navigation.navigate(Screens.More)
   }
 
   const handleOnPressSubmit = async () => {
@@ -280,3 +280,4 @@ const styles = StyleSheet.create({
 })
 
 export default CodeInputScreen
+
