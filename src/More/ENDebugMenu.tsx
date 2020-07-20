@@ -103,71 +103,67 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       ) : (
         <ScrollView>
           <View style={styles.section}>
-            {/* <DebugMenuListItem
-              label="Reset Exposures"
-              style={styles.lastListItem}
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.resetExposures,
-              )}
-            /> */}
-          </View>
-          <View style={styles.section}>
-            {/* <DebugMenuListItem
-              label="Detect Exposures Now"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.detectExposuresNow,
-              )}
-            /> */}
             <DebugMenuListItem
               label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
                 BTNativeModule.showLastProcessedFilePath,
               )}
             />
-            {/* <DebugMenuListItem
-              label="Simulate Exposure Detection Error"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.simulateExposureDetectionError,
-              )}
-            /> */}
-            {/* <DebugMenuListItem
-              label="Simulate Exposure"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.simulateExposure,
-              )}
-            /> */}
             <DebugMenuListItem
               label="Show Exposures"
               onPress={() => {
                 navigation.navigate(Screens.ExposureListDebugScreen)
               }}
             />
-            {/* <DebugMenuListItem
-              label="Show Debug Verification Code"
-              onPress={showDebugVerificationCode}
-            /> */}
-            {/* <DebugMenuListItem
-              label="Toggle Exposure Notifications"
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.toggleExposureNotifications,
-              )}
-            /> */}
-          </View>
-          <View style={styles.section}>
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
               onPress={() => {
                 navigation.navigate(Screens.ENLocalDiagnosisKey)
               }}
             />
-            {/* <DebugMenuListItem
-              label="Get and Post Diagnosis Keys"
-              style={styles.lastListItem}
-              onPress={handleOnPressSimulationButton(
-                BTNativeModule.submitExposureKeys,
-              )}
-            /> */}
           </View>
+          {__DEV__ ? (
+            <View style={styles.section}>
+              <DebugMenuListItem
+                label="Simulate Exposure"
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.simulateExposure,
+                )}
+              />
+              <DebugMenuListItem
+                label="Toggle Exposure Notifications"
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.toggleExposureNotifications,
+                )}
+              />
+              <DebugMenuListItem
+                label="Get and Post Diagnosis Keys"
+                style={styles.lastListItem}
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.submitExposureKeys,
+                )}
+              />
+              <DebugMenuListItem
+                label="Detect Exposures Now"
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.detectExposuresNow,
+                )}
+              />
+              <DebugMenuListItem
+                label="Reset Exposures"
+                style={styles.lastListItem}
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.resetExposures,
+                )}
+              />
+              <DebugMenuListItem
+                label="Simulate Exposure Detection Error"
+                onPress={handleOnPressSimulationButton(
+                  BTNativeModule.simulateExposureDetectionError,
+                )}
+              />
+            </View>
+          ) : null}
         </ScrollView>
       )}
     </NavigationBarWrapper>
