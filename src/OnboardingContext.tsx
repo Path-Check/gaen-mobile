@@ -10,7 +10,7 @@ import { StorageUtils } from "./utils"
 const ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
 
 export const isOnboardingComplete = async (): Promise<boolean> => {
-  return Boolean(StorageUtils.getStoreData(ONBOARDING_COMPLETE))
+  return Boolean(await StorageUtils.getStoreData(ONBOARDING_COMPLETE))
 }
 
 interface OnboardingContextState {

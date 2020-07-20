@@ -23,6 +23,7 @@ const ShareDiagnosis: FunctionComponent = () => {
   const explanationScreenContent = {
     backgroundImage: Images.EmptyPathBackground,
     icon: Icons.Heart,
+    iconLabel: t("label.heart_icon"),
     header: t("label.launch_screen4_header_bluetooth"),
     body: t("label.launch_screen4_subheader_bluetooth"),
     primaryButtonLabel: t("label.launch_set_up_phone_bluetooth"),
