@@ -1,10 +1,10 @@
 import { Factory } from "fishery"
 
-import { daysAgo, beginningOfDay } from "../utils/dateTimeUtils"
+import { DateTimeUtils } from "../utils"
 import { RawExposure } from "../gaen/exposureNotifications"
 
 export default Factory.define<RawExposure>(() => {
-  const defaultDate = beginningOfDay(daysAgo(2))
+  const defaultDate = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(2))
   return {
     id: "raw-exposure",
     date: defaultDate,

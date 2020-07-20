@@ -5,7 +5,8 @@ import i18next from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
 import { NativeModules, Platform } from "react-native"
 
-import { GetStoreData, SetStoreData } from "../utils/General"
+import { StorageUtils } from "../utils"
+
 import ar from "./ar.json"
 import da from "./da.json"
 import en from "./en.json"
@@ -43,7 +44,7 @@ type Locale = string
 
 /** Fetch the user language override, if any */
 export async function getUserLocaleOverride(): Promise<Locale> {
-  return await GetStoreData(LANG_OVERRIDE)
+  return (await StorageUtils.getStoreData(LANG_OVERRIDE)) as Locale
 }
 
 export function getLanguageFromLocale(locale: Locale): Locale {
@@ -74,7 +75,7 @@ export function useLanguageDirection(): TextDirection {
 
 export async function setUserLocaleOverride(locale: Locale): Promise<void> {
   await setLocale(locale)
-  await SetStoreData(LANG_OVERRIDE, locale)
+  await StorageUtils.setStoreData(LANG_OVERRIDE, locale)
 }
 
 /* eslint-disable no-underscore-dangle */
