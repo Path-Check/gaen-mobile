@@ -1,14 +1,14 @@
 module.exports = {
-  contextSeparator: '_',
+  contextSeparator: "_",
   // Key separator used in your translation keys
 
   createOldCatalogs: false,
   // Save the \_old files
 
-  defaultNamespace: 'default',
+  defaultNamespace: "default",
   // Default namespace used in your i18next config
 
-  defaultValue: '',
+  defaultValue: "",
   // Default value to give to empty keys
 
   indentation: 2,
@@ -17,40 +17,40 @@ module.exports = {
   keepRemoved: false,
   // Keep keys from the catalog that are no longer in code
 
-  keySeparator: '.',
+  keySeparator: ".",
   // Key separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
   // see below for more details
   lexers: {
-    htm: ['HTMLLexer'],
-    html: ['HTMLLexer'],
+    htm: ["HTMLLexer"],
+    html: ["HTMLLexer"],
 
-    mjs: ['JavascriptLexer'],
-    js: ['JsxLexer'], // if you're writing jsx inside .js files, change this to JsxLexer
-    jsx: ['JsxLexer'],
-    ts: ['JavascriptLexer'],
-    tsx: ['JsxLexer'],
+    mjs: ["JavascriptLexer"],
+    js: ["JsxLexer"], // if you're writing jsx inside .js files, change this to JsxLexer
+    jsx: ["JsxLexer"],
+    ts: ["JavascriptLexer"],
+    tsx: ["JsxLexer"],
 
-    default: ['JavascriptLexer'],
+    default: ["JavascriptLexer"],
   },
 
-  lineEnding: 'auto',
+  lineEnding: "auto",
   // Control the line ending. See options at https://github.com/ryanve/eol
 
   // Only en needs to be extracted and uploaded to lokalise. Lokalise will add/trim keys in other languages
-  locales: ['en'],
+  locales: ["en"],
 
-  namespaceSeparator: ':',
+  namespaceSeparator: ":",
   // Namespace separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
-  output: 'app/locales/$LOCALE.json',
+  output: "src/locales/$LOCALE.json",
   // Supports $LOCALE and $NAMESPACE injection
   // Supports JSON (.json) and YAML (.yml) file formats
   // Where to write the locale files relative to process.cwd()
 
-  input: ['app/**/*.js'],
+  input: ["src/**/*.js"],
   // An array of globs that describe where to look for source files
   // relative to the location of the configuration file
 
@@ -67,4 +67,4 @@ module.exports = {
 
   verbose: false,
   // Display info about the parsing including some stats
-};
+}
