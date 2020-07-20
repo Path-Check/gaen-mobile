@@ -13,28 +13,21 @@ import ENLocalDiagnosisKeyScreen from "../More/ENLocalDiagnosisKeyScreen"
 import ExposureListDebugScreen from "../More/ExposureListDebugScreen"
 import LanguageSelection from "../More/LanguageSelection"
 
-import { Screens, Stacks } from "./index"
+import { MoreStackScreens, MoreStackScreen } from "./index"
 
-const Stack = createStackNavigator()
+type MoreStackScreenParams = {
+  [key in MoreStackScreen]: undefined
+}
+const Stack = createStackNavigator<MoreStackScreenParams>()
 
 const SCREEN_OPTIONS = {
   headerShown: false,
 }
 
-type MoreStackRouteName =
-  | "Settings"
-  | "About"
-  | "Licenses"
-  | "ENDebugMenu"
-  | "LanguageSelection"
-  | "AffectedUserFlow"
-  | "ExposureListDebugScreen"
-  | "ENLocalDiagnosisKey"
-
 interface MoreStackRouteState {
   index: number
   key: string
-  routeNames: MoreStackRouteName[]
+  routeNames: MoreStackScreen[]
   routes: MoreStackRoute[]
   stale: boolean
   type: "stack"
@@ -42,7 +35,7 @@ interface MoreStackRouteState {
 
 export interface MoreStackRoute {
   key: string
-  name: "More"
+  name: MoreStackScreen
   params: undefined
   state?: MoreStackRouteState
 }
@@ -52,7 +45,7 @@ export const determineTabBarVisibility = (route: MoreStackRoute): boolean => {
     const routeState = route.state
     const currentRoute = routeState.routes[routeState.index]
     const routeName = currentRoute.name
-    return routeName != Stacks.AffectedUserFlow
+    return routeName != MoreStackScreens.AffectedUserFlow
   } else {
     return true
   }
@@ -61,16 +54,25 @@ export const determineTabBarVisibility = (route: MoreStackRoute): boolean => {
 const MoreStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-      <Stack.Screen name={Screens.Settings} component={SettingsScreen} />
-      <Stack.Screen name={Screens.About} component={AboutScreen} />
-      <Stack.Screen name={Screens.Licenses} component={LicensesScreen} />
-      <Stack.Screen name={Screens.ENDebugMenu} component={ENDebugMenu} />
       <Stack.Screen
-        name={Screens.LanguageSelection}
+        name={MoreStackScreens.Settings}
+        component={SettingsScreen}
+      />
+      <Stack.Screen name={MoreStackScreens.About} component={AboutScreen} />
+      <Stack.Screen
+        name={MoreStackScreens.Licenses}
+        component={LicensesScreen}
+      />
+      <Stack.Screen
+        name={MoreStackScreens.ENDebugMenu}
+        component={ENDebugMenu}
+      />
+      <Stack.Screen
+        name={MoreStackScreens.LanguageSelection}
         component={LanguageSelection}
       />
       <Stack.Screen
-        name={Stacks.AffectedUserFlow}
+        name={MoreStackScreens.AffectedUserFlow}
         component={AffectedUserStack}
         options={{
           ...TransitionPresets.ModalSlideFromBottomIOS,
@@ -78,11 +80,11 @@ const MoreStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={Screens.ExposureListDebugScreen}
+        name={MoreStackScreens.ExposureListDebugScreen}
         component={ExposureListDebugScreen}
       />
       <Stack.Screen
-        name={Screens.ENLocalDiagnosisKey}
+        name={MoreStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKeyScreen}
       />
     </Stack.Navigator>

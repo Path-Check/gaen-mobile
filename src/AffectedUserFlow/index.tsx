@@ -12,9 +12,16 @@ import PublishConsent from "./PublishConsent/PublishConsentScreen"
 
 import { Icons } from "../assets"
 import { Colors, Spacing } from "../styles"
-import { Screens } from "../navigation"
+import {
+  Screens,
+  AffectedUserFlowScreen,
+  AffectedUserFlowScreens,
+} from "../navigation"
 
-const Stack = createStackNavigator()
+type AffectedUserFlowStackParams = {
+  [key in AffectedUserFlowScreen]: undefined
+}
+const Stack = createStackNavigator<AffectedUserFlowStackParams>()
 
 const ExportStack = (): JSX.Element => {
   const BackButton = () => {
@@ -48,10 +55,10 @@ const ExportStack = (): JSX.Element => {
           headerShown: false,
           gestureEnabled: false,
         }}
-        initialRouteName={Screens.AffectedUserStart}
+        initialRouteName={AffectedUserFlowScreens.AffectedUserStart}
       >
         <Stack.Screen
-          name={Screens.AffectedUserStart}
+          name={AffectedUserFlowScreens.AffectedUserStart}
           component={Start}
           options={{
             headerTransparent: true,
@@ -59,7 +66,7 @@ const ExportStack = (): JSX.Element => {
           }}
         />
         <Stack.Screen
-          name={Screens.AffectedUserCodeInput}
+          name={AffectedUserFlowScreens.AffectedUserCodeInput}
           component={CodeInput}
           options={{
             headerTransparent: true,
@@ -73,7 +80,7 @@ const ExportStack = (): JSX.Element => {
           }}
         />
         <Stack.Screen
-          name={Screens.AffectedUserPublishConsent}
+          name={AffectedUserFlowScreens.AffectedUserPublishConsent}
           component={PublishConsent}
           options={{
             headerTransparent: true,
@@ -87,7 +94,7 @@ const ExportStack = (): JSX.Element => {
           }}
         />
         <Stack.Screen
-          name={Screens.AffectedUserComplete}
+          name={AffectedUserFlowScreens.AffectedUserComplete}
           component={Complete}
           options={{ headerShown: false }}
         />

@@ -6,9 +6,12 @@ import {
 
 import Assessment from "../SelfAssessment/index"
 
-import { Screens } from "./index"
+import { SelfAssessmentScreen, SelfAssessmentScreens } from "./index"
 
-const Stack = createStackNavigator()
+type SelfAssessmentStackParams = {
+  [key in SelfAssessmentScreen]: undefined
+}
+const Stack = createStackNavigator<SelfAssessmentStackParams>()
 
 const fade = ({ current }: StackCardInterpolationProps) => ({
   cardStyle: { opacity: current.progress },
@@ -27,7 +30,10 @@ const SelfAssessmentStack: FunctionComponent = () => (
       gestureEnabled: false,
     }}
   >
-    <Stack.Screen name={Screens.SelfAssessment} component={Assessment} />
+    <Stack.Screen
+      name={SelfAssessmentScreens.SelfAssessment}
+      component={Assessment}
+    />
   </Stack.Navigator>
 )
 

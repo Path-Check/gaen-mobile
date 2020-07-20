@@ -7,9 +7,15 @@ import ExposureHistoryScreen from "../ExposureHistory/index"
 import NextSteps from "../ExposureHistory/NextSteps"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 
-import { Screens } from "./index"
+import {
+  ExposureHistoryScreens,
+  ExposureHistoryScreen as Screen,
+} from "./index"
 
-const Stack = createStackNavigator()
+type ExposureHistoryStackParams = {
+  [key in Screen]: undefined
+}
+const Stack = createStackNavigator<ExposureHistoryStackParams>()
 
 const SCREEN_OPTIONS = {
   headerShown: false,
@@ -34,11 +40,17 @@ const ExposureHistoryStack: FunctionComponent = () => {
       }}
     >
       <Stack.Screen
-        name={Screens.ExposureHistory}
+        name={ExposureHistoryScreens.ExposureHistory}
         component={ExposureHistoryScreen}
       />
-      <Stack.Screen name={Screens.NextSteps} component={NextSteps} />
-      <Stack.Screen name={Screens.MoreInfo} component={MoreInfo} />
+      <Stack.Screen
+        name={ExposureHistoryScreens.NextSteps}
+        component={NextSteps}
+      />
+      <Stack.Screen
+        name={ExposureHistoryScreens.MoreInfo}
+        component={MoreInfo}
+      />
     </Stack.Navigator>
   )
 }
