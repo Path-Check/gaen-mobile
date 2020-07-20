@@ -1,37 +1,37 @@
 import AsyncStorage from "@react-native-community/async-storage"
 
-export async function getStoreData(
-  key: string,
-  isString = true,
-): Promise<Record<string, string> | string | null> {
+async function getStoreData(key: string): Promise<string | null> {
   try {
-    const data = await AsyncStorage.getItem(key)
-
-    if (isString) {
-      return data
-    }
-
-    if (data) {
-      return JSON.parse(data)
-    }
-    return null
+    return await AsyncStorage.getItem(key)
   } catch (error) {
     console.log(error.message)
     return null
   }
 }
 
-export async function setStoreData(
-  key: string,
-  item: Record<string, string> | string,
-): Promise<void> {
+async function setStoreData(key: string, item: string): Promise<void> {
   try {
-    if (typeof item !== "string") {
-      item = JSON.stringify(item)
-    }
-
     return await AsyncStorage.setItem(key, item)
   } catch (error) {
     console.log(error.message)
   }
+}
+
+const LANG_OVERRIDE = "LANG_OVERRIDE"
+export async function getUserLocaleOverride(): Promise<string | null> {
+  return await getStoreData(LANG_OVERRIDE)
+}
+
+export async function setUserLocaleOverride(locale: string): Promise<void> {
+  return await setStoreData(LANG_OVERRIDE, locale)
+}
+
+const ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
+export async function getIsOnboardingComplete(): Promise<boolean> {
+  const onBoardingComplete = await getStoreData(ONBOARDING_COMPLETE)
+  return onBoardingComplete === ONBOARDING_COMPLETE
+}
+
+export async function setIsOnboardingComplete(): Promise<void> {
+  return setStoreData(ONBOARDING_COMPLETE, ONBOARDING_COMPLETE)
 }
