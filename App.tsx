@@ -14,7 +14,7 @@ import {
 
 const determineTracingStrategy = () => {
   switch (env.TRACING_STRATEGY) {
-    case "gaen": {
+    case "bt": {
       return gaenStrategy
     }
     default: {

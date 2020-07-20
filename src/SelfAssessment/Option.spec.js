@@ -56,7 +56,7 @@ describe("SCREEN_TYPE_DATE", () => {
     expect(getByTestId("label").children).toEqual(["Label"])
   })
   test("on iOS, selecting the date picker immediatley invokes the onSelect handler with the current date", () => {
-    jest.doMock("../Util", () => ({
+    jest.doMock("../utils/index", () => ({
       isPlatformIOS: () => true,
     }))
     let onSelect = jest.fn()

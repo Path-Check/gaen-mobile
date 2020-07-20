@@ -14,7 +14,7 @@ import dayjs from "dayjs"
 import { ExposureDatum, ExposureHistory } from "../exposureHistory"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureDatumDetail from "./ExposureDatumDetail"
-import { DateTimeUtils } from "../helpers"
+import { DateTimeUtils } from "../utils"
 import Calendar from "./Calendar"
 import { Screens } from "../navigation"
 

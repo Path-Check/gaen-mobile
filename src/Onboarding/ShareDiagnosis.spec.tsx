@@ -5,12 +5,12 @@ import "@testing-library/jest-native/extend-expect"
 
 import ShareDiagnosis from "./ShareDiagnosis"
 import { Screens } from "../navigation"
-import { isPlatformiOS } from "../Util"
+import { isPlatformiOS } from "../utils/index"
 
 afterEach(cleanup)
 
 jest.mock("@react-navigation/native")
-jest.mock("../Util")
+jest.mock("../utils/index")
 
 describe("ShareDiagnosis", () => {
   describe("and platform is Android", () => {
