@@ -39,33 +39,36 @@ def fetch_env
 
   puts "...fetching .env for #{HA_LABEL}"
 
-  source = ".env.bt"
-  source_release = ".env.bt.release"
+  dev_env_source = ".env.bt"
+  release_env_source = ".env.bt.release"
+  google_service_source = "GoogleService-Info.plist"
 
-  env_url =
+  dev_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
 
-  env_release_url =
+  release_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.release"
 
-  open(source, 'w') do |f|
-    Open3.popen2e("curl", "-s", env_url) do |_, stdout_and_err, wait_thr|
-      stdout_and_err.each do |line|
-        f << line 
-      end
-      wait_thr.value
-    end
-  end
+  google_service_url =
+  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/firebase/#{HA_LABEL}/GoogleService-Info.plist"
 
-  open(source_release, 'w') do |f|
-    Open3.popen2e("curl", "-s", env_release_url) do |_, stdout_and_err, wait_thr|
+  fetch_and_write_file(dev_env_source, dev_env_url)
+  fetch_and_write_file(release_env_source, release_env_url)
+  fetch_and_write_file(google_service_source, google_service_url)
+
+  puts "finished fetching .env for #{HA_LABEL}"
+end
+
+def fetch_and_write_file(filename, remote_url)
+  open(filename, 'w') do |f|
+    Open3.popen2e("curl", "-s", remote_url) do |_, stdout_and_err, wait_thr|
       stdout_and_err.each do |line|
         f << line 
       end
       wait_thr.value
     end
   end
-  puts "\nfinished fetching .env for #{HA_LABEL}"
+  print "."
 end
 
 def valid_token(token) 
