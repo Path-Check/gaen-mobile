@@ -3,13 +3,15 @@ import React from "react"
 
 import { Switch } from "./Switch"
 
-it("renders as off by default", () => {
-  const { asJSON } = render(<Switch />)
-  expect(asJSON()).toMatchSnapshot()
-})
+describe("Switch", () => {
+  it("initializes the switch with false as the default value", () => {
+    const { getByTestId } = render(<Switch />)
+    expect(getByTestId("switch").getProp("value")).toEqual(false)
+  })
 
-it("renders on", () => {
-  const value = true
-  const { asJSON } = render(<Switch value={value} />)
-  expect(asJSON()).toMatchSnapshot()
+  it("initializes the switch with the provided value override", () => {
+    const value = true
+    const { getByTestId } = render(<Switch value={value} />)
+    expect(getByTestId("switch").getProp("value")).toEqual(value)
+  })
 })
