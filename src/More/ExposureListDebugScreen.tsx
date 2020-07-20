@@ -14,7 +14,7 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
 import dayjs from "dayjs"
-import { RawExposure } from "../gaen/exposureNotifications"
+import { RawExposure } from "../gaen/dataConverters"
 
 import { Typography } from "../styles"
 

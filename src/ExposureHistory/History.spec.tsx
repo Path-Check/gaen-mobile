@@ -2,7 +2,7 @@ import React from "react"
 import { fireEvent, wait, cleanup, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { toExposureHistory } from "../gaen/exposureNotifications"
+import { toExposureHistory } from "./exposureHistory"
 import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 
@@ -19,7 +19,7 @@ describe("History", () => {
     const exposureHistory = buildBlankExposureHistory()
 
     const { getByTestId } = render(
-      <History exposureHistory={exposureHistory} />,
+      <History exposureHistory={exposureHistory} lastDetectionDate={null} />,
     )
 
     expect(getByTestId("exposure-history-calendar")).not.toBeNull()
@@ -38,13 +38,13 @@ describe("History", () => {
         const exposureInfo = {
           [datum.date]: datum,
         }
-        const exposureHistory = toExposureHistory(exposureInfo, {
-          startDate: Date.now(),
-          totalDays: CALENDAR_LENGTH,
-        })
+        const exposureHistory = toExposureHistory(exposureInfo, CALENDAR_LENGTH)
 
         const { queryByTestId, getByTestId } = render(
-          <History exposureHistory={exposureHistory} />,
+          <History
+            exposureHistory={exposureHistory}
+            lastDetectionDate={null}
+          />,
         )
 
         const twoDaysAgoIndicator = getByTestId(`calendar-day-${twoDaysAgo}`)
@@ -68,8 +68,5 @@ const buildBlankExposureHistory = () => {
   const exposureInfo = {
     [datum.date]: datum,
   }
-  return toExposureHistory(exposureInfo, {
-    startDate: Date.now(),
-    totalDays: CALENDAR_LENGTH,
-  })
+  return toExposureHistory(exposureInfo, CALENDAR_LENGTH)
 }

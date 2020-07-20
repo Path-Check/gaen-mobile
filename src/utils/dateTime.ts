@@ -45,3 +45,8 @@ export const posixToDayjs = (posixDate: Posix): Dayjs | null => {
   const dayJsDate = dayjs(posixDate)
   return dayJsDate.isValid() ? dayJsDate : null
 }
+
+export const timeAgoInWords = (posix: Posix): string => {
+  const day = posixToDayjs(posix)
+  return day ? day.fromNow() : ""
+}

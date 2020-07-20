@@ -12,7 +12,7 @@ import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationProp } from "../navigation"
 
-import { BTNativeModule } from "../gaen"
+import { NativeModule } from "../gaen"
 
 import { Typography } from "../styles"
 
@@ -32,7 +32,7 @@ const ENLocalDiagnosisKeyScreen = ({
 
   const fetchDiagnosisKeys = async () => {
     try {
-      const keys = await BTNativeModule.fetchDiagnosisKeys()
+      const keys = await NativeModule.fetchDiagnosisKeys()
       setDiagnosisKeys(keys)
     } catch (e) {
       setErrorMessage(e.message)

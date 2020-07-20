@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
 
-import { ExposureDatum, Possible, NoKnown, NoData } from "../exposureHistory"
+import { ExposureDatum, Possible, NoKnown, NoData } from "../exposure"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { DateTimeUtils } from "../utils"
 import { Screens } from "../navigation"

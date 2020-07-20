@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useContext, useEffect } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 
-import ExposureHistoryContext from "../ExposureHistoryContext"
+import { useExposureContext } from "../ExposureContext"
 import ExposureHistoryScreen from "../ExposureHistory/index"
 import NextSteps from "../ExposureHistory/NextSteps"
 import MoreInfo from "../ExposureHistory/MoreInfo"
@@ -17,7 +17,7 @@ const SCREEN_OPTIONS = {
 
 const ExposureHistoryStack: FunctionComponent = () => {
   const navigation = useNavigation()
-  const { observeExposures } = useContext(ExposureHistoryContext)
+  const { observeExposures } = useExposureContext()
 
   useEffect(() => {
     const unsubscribeTabPress = navigation.addListener("focus", () => {

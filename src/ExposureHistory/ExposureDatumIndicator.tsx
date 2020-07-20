@@ -3,7 +3,7 @@ import { View, Text, ViewStyle, TextStyle, StyleSheet } from "react-native"
 import dayjs from "dayjs"
 
 import { DateTimeUtils } from "../utils"
-import { ExposureDatum } from "../exposureHistory"
+import { ExposureDatum } from "../exposure"
 import {
   Affordances,
   Outlines,
