@@ -16,6 +16,7 @@ const PersonalPrivacy: FunctionComponent = () => {
   const explanationScreenContent = {
     backgroundImage: Images.SingleCrossPathBackground,
     icon: Icons.RadioWave,
+    iconLabel: t("label.bluetooth_icon"),
     header: t("label.launch_screen2_header_bluetooth"),
     body: t("label.launch_screen2_subheader_bluetooth"),
     primaryButtonLabel: t("label.launch_next"),

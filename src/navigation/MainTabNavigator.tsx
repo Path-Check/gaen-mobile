@@ -48,6 +48,8 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={focused ? Icons.HomeActive : Icons.HomeInactive}
+        accessible
+        accessibilityLabel={t("label.home_icon")}
         width={size}
         height={size}
       />
@@ -61,6 +63,8 @@ const MainTabNavigator: FunctionComponent = () => {
     const tabIcon = (
       <SvgXml
         xml={focused ? Icons.CalendarActive : Icons.CalendarInactive}
+        accessible
+        accessibilityLabel={t("label.calendar_icon")}
         width={size}
         height={size}
       />
@@ -77,6 +81,8 @@ const MainTabNavigator: FunctionComponent = () => {
         xml={
           focused ? Icons.SelfAssessmentActive : Icons.SelfAssessmentInactive
         }
+        accessible
+        accessibilityLabel={t("label.assessment_icon")}
         width={size}
         height={size}
       />
@@ -87,6 +93,8 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={focused ? Icons.MoreActive : Icons.MoreInactive}
+        accessible
+        accessibilityLabel={t("label.more_icon")}
         width={size}
         height={size}
       />

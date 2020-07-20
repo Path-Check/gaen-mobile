@@ -64,6 +64,8 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
             >
               <SvgXml
                 xml={Icons.QuestionMark}
+                accessible
+                accessibilityLabel={t("label.question_icon")}
                 style={styles.moreInfoButtonIcon}
               />
             </TouchableOpacity>
