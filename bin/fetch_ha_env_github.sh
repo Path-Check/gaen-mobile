@@ -9,11 +9,21 @@ ACCESS_TOKEN = ARGV[0]
 
 def fetch_env
   source = ".env.bt"
+  google_service_source = "GoogleService-Info.plist"
+
   env_url =
   "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/github/.env.bt"
 
-  open(source, 'w') do |f|
-    Open3.popen2e("curl", "-s", env_url) do |_, stdout_and_err, wait_thr|
+  google_service_url =
+  "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/firebase/github/GoogleService-Info.plist"
+
+  fetch_and_write_file(source, env_url)
+  fetch_and_write_file(google_service_source, google_service_url)
+end
+
+def fetch_and_write_file(filename, remote_url)
+  open(filename, 'w') do |f|
+    Open3.popen2e("curl", "-s", remote_url) do |_, stdout_and_err, wait_thr|
       stdout_and_err.each do |line|
         f << line 
       end

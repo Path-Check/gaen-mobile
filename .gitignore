@@ -105,7 +105,8 @@ safepaths.realm
 ios/GoogleService-Info.plist
 
 # private resources
-pathcheck-mobile-resources
+GoogleService-Info.plist
+
 
 # swift packages
 ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
