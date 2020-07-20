@@ -55,8 +55,8 @@ extension String {
     NSLocalizedString(self, comment: .default)
   }
 
-  var regionCodes: [Region] {
-    self.split(separator: "|").map { Region(rawValue: String($0))! }
+  var regionCodes: [RegionCode] {
+    self.split(separator: "|").map { String($0) }
   }
 
 }
