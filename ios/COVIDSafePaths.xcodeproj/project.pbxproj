@@ -14,7 +14,6 @@
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
-		B54CBF26249A72E700218477 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF25249A72E700218477 /* Region.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
@@ -208,7 +207,6 @@
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadPackage+Helpers.swift"; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
-		B54CBF25249A72E700218477 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -591,7 +589,6 @@
 				B5FC37DC248A78D2006474EB /* ExposureKey.swift */,
 				B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */,
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
-				B54CBF25249A72E700218477 /* Region.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
@@ -980,7 +977,6 @@
 			files = (
 				B5FBB0D524916D8900433980 /* UserState.swift in Sources */,
 				B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */,
-				B54CBF26249A72E700218477 /* Region.swift in Sources */,
 				C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */,
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
