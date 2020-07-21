@@ -44,8 +44,16 @@
   // Schedule background task
   [[ExposureManager shared] scheduleBackgroundTaskIfNeeded];
 
+  // Broadcase EN Status
+  [[ExposureManager shared] broadcastCurrentEnabledStatus];
+
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   return YES;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+  [[ExposureManager shared] broadcastCurrentEnabledStatus];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
