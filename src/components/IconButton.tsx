@@ -26,6 +26,7 @@ export const IconButton = ({
       {...otherProps}
     >
       <SvgXml
+        testID="icon-button-svg"
         color={color || Colors.icon}
         xml={icon}
         width={size || 24}
