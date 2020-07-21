@@ -182,6 +182,11 @@ This project is using [eslint](https://eslint.org/docs/user-guide/getting-starte
 We have linting checks on CI, please make sure to include the checks locally in
 your IDE.
 
+#### Ruby
+
+We use ruby for bin scripts, cocoapods, and fastlane.
+We recommended [asdf](https://asdf-vm.com/#/) as version manager for ruby.
+
 ## Testing
 
 Tests are ran automatically through Github actions - PRs are not able to be merged if there are tests that are failing.
