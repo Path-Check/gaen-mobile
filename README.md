@@ -137,6 +137,8 @@ Generating a release build is an optional step in the development process.
 
 - [Android instructions](https://reactnative.dev/docs/signed-apk-android)
 
+**Note:** Members of the `Path-Check` org should update the environment variables of the release build corresponding with the health authority, for this we need to execute the script `bin/set_ha.sh ${HA_LABEL}` where HA_LABEL is the corresponding health authority label. This will setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
+
 ### Debugging
 
 [react-native-debugger](https://github.com/jhen0409/react-native-debugger) is recommended. This tool will provide visibility of the JSX hierarchy, breakpoint usage, monitoring of network calls, and other common debugging tasks.
