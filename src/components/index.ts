@@ -1,5 +1,3 @@
 export { Button } from "./Button"
-export { Checkbox } from "./Checkbox"
-export { IconButton } from "./IconButton"
 export { NavigationBarWrapper } from "./NavigationBarWrapper"
 export { RTLEnabledText } from "./RTLEnabledText"

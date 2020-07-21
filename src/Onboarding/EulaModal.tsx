@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 import {
   TouchableOpacity,
   Linking,
@@ -7,34 +7,107 @@ import {
   View,
   SafeAreaView,
   StatusBar,
+  Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import loadLocalResource from "react-native-local-resource"
-import WebView from "react-native-webview"
+import WebView, { WebViewNavigation } from "react-native-webview"
+import { SvgXml } from "react-native-svg"
 
-import { Button, Checkbox, IconButton, RTLEnabledText } from "../components"
+import { Button, RTLEnabledText } from "../components"
 import en from "../locales/eula/en.html"
 import es_PR from "../locales/eula/es_PR.html"
 import ht from "../locales/eula/ht.html"
 
-import { Icons } from "../assets"
-import { Spacing, Buttons, Colors, Typography } from "../styles"
+import { Icons, Images } from "../assets"
+import { Spacing, Buttons, Colors, Typography, Forms } from "../styles"
 
-const EULA_FILES = { en, es_PR, ht }
+type CloseModalIconProps = {
+  closeModal: () => void
+  label: string
+}
+
+const CloseModalIcon: FunctionComponent<CloseModalIconProps> = ({
+  closeModal,
+  label,
+}) => {
+  const size = 20
+  return (
+    <TouchableOpacity
+      accessibilityLabel={label}
+      accessible
+      style={styles.closeIcon}
+      onPress={closeModal}
+    >
+      <SvgXml
+        color={Colors.icon}
+        xml={Icons.Close}
+        width={size}
+        height={size}
+      />
+    </TouchableOpacity>
+  )
+}
+
+interface CheckboxProps {
+  label: string
+  onPress: () => void
+  checked?: boolean
+}
+
+const Checkbox: FunctionComponent<CheckboxProps> = ({
+  label,
+  onPress,
+  checked,
+}) => {
+  return (
+    <TouchableOpacity
+      style={styles.checkbox}
+      onPress={onPress}
+      accessible
+      accessibilityRole="checkbox"
+      accessibilityLabel={label}
+    >
+      <Image
+        source={checked ? Images.BoxCheckedIcon : Images.BoxUncheckedIcon}
+        style={styles.checkboxIcon}
+      />
+      <RTLEnabledText style={styles.checkboxText}>{label}</RTLEnabledText>
+    </TouchableOpacity>
+  )
+}
 
 const DEFAULT_EULA_URL = "about:blank"
 
-export const EulaModal = ({ selectedLocale, continueFunction }) => {
+type AvailableLocale = "en" | "es_PR" | "ht"
+
+const EULA_FILES: Record<AvailableLocale, string> = {
+  ["en"]: en,
+  ["es_PR"]: es_PR,
+  ["ht"]: ht,
+}
+
+type EulaModalProps = {
+  selectedLocale: string
+  continueFunction: () => void
+}
+
+const EulaModal: FunctionComponent<EulaModalProps> = ({
+  selectedLocale,
+  continueFunction,
+}) => {
   const [modalVisible, setModalVisibility] = useState(false)
   const [boxChecked, toggleCheckbox] = useState(false)
-  const [html, setHtml] = useState(undefined)
+  const [html, setHtml] = useState<string | undefined>(undefined)
   const { t } = useTranslation()
 
   // Pull the EULA in the correct language, with en as fallback
-  const eulaPath = EULA_FILES[selectedLocale] || en
+  const eulaPath = EULA_FILES[selectedLocale as AvailableLocale] || en
 
   // Any links inside the EULA should launch a separate browser otherwise you can get stuck inside the app
-  const shouldStartLoadWithRequestHandler = (webViewState) => {
+  const shouldStartLoadWithRequestHandler = (
+    webViewState: WebViewNavigation,
+  ) => {
     let shouldLoadRequest = true
     if (webViewState.url !== DEFAULT_EULA_URL) {
       // If the webpage to load isn't the EULA, load it in a separate browser
@@ -68,13 +141,9 @@ export const EulaModal = ({ selectedLocale, continueFunction }) => {
           <StatusBar barStyle={"dark-content"} />
           <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 7, paddingHorizontal: 5 }}>
-              <IconButton
-                icon={Icons.Close}
-                size={20}
-                style={styles.closeIcon}
-                accessible
-                accessibilityLabel={t("label.close_icon")}
-                onPress={() => setModalVisibility(false)}
+              <CloseModalIcon
+                label={t("label.close_icon")}
+                closeModal={() => setModalVisibility(false)}
               />
               {html && (
                 <WebView
@@ -134,6 +203,8 @@ const styles = StyleSheet.create({
   closeIcon: {
     padding: Spacing.xSmall,
     alignSelf: "flex-end",
+    alignItems: "center",
+    alignContent: "center",
   },
   smallDescriptionText: {
     ...Typography.label,
@@ -145,4 +216,15 @@ const styles = StyleSheet.create({
   buttonText: {
     ...Typography.buttonTextDark,
   },
+  checkbox: {
+    ...Forms.checkbox,
+  },
+  checkboxIcon: {
+    ...Forms.checkboxIcon,
+  },
+  checkboxText: {
+    ...Forms.checkboxText,
+  },
 })
+
+export default EulaModal

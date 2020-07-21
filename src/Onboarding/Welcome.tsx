@@ -11,7 +11,7 @@ import {
 } from "react-native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { EulaModal } from "./EulaModal"
+import EulaModal from "./EulaModal"
 import { getLocalNames } from "../locales/languages"
 
 import { Images } from "../assets"
