@@ -29,12 +29,4 @@ jest.mock(
   "@react-native-community/push-notification-ios",
   () => "push-notification-ios",
 )
-jest.mock("react-native-share", () => "Share")
 jest.mock("rn-fetch-blob", () => "Blob")
-jest.mock("react-native-popup-menu", () => ({
-  Menu: "Menu",
-  MenuProvider: "MenuProvider",
-  MenuOptions: "MenuOptions",
-  MenuOption: "MenuOption",
-  MenuTrigger: "MenuTrigger",
-}))

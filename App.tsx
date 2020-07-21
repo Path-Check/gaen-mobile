@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { MenuProvider } from "react-native-popup-menu"
 import SplashScreen from "react-native-splash-screen"
 import env from "react-native-config"
 import "array-flat-polyfill"
@@ -44,11 +43,9 @@ const App: FunctionComponent = () => {
     <>
       {!isLoading ? (
         <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
-          <MenuProvider>
-            <TracingStrategyProvider strategy={strategy}>
-              <MainNavigator />
-            </TracingStrategyProvider>
-          </MenuProvider>
+          <TracingStrategyProvider strategy={strategy}>
+            <MainNavigator />
+          </TracingStrategyProvider>
         </OnboardingProvider>
       ) : null}
     </>
