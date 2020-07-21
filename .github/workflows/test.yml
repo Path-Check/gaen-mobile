@@ -78,4 +78,3 @@ jobs:
             -scheme BT_Development \
             -destination 'platform=iOS Simulator,name=iPhone 8' \
         working-directory: ./ios
-

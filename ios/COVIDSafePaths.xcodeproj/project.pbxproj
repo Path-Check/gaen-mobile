@@ -14,6 +14,7 @@
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
+		B534A47A24C67845008A2CDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D968F924C60E74008DE452 /* GoogleService-Info.plist */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
@@ -833,6 +834,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B534A47A24C67845008A2CDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
