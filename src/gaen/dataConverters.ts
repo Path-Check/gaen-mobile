@@ -1,12 +1,6 @@
 import dayjs from "dayjs"
 
-import {
-  Possible,
-  ExposureInfo,
-  ExposureHistory,
-  calendarDays,
-  ExposureCalendarOptions,
-} from "../exposureHistory"
+import { ExposureInfo, Possible } from "../exposure"
 
 type UUID = string
 type Posix = number
@@ -17,24 +11,6 @@ export interface RawExposure {
   duration: number
   totalRiskScore: number
   transmissionRiskLevel: number
-}
-
-export const toExposureHistory: (
-  exposureInfo: ExposureInfo,
-  calendarOptions: ExposureCalendarOptions,
-) => ExposureHistory = (exposureInfo, calendarOptions) => {
-  const { startDate, totalDays } = calendarOptions
-  const calendar = calendarDays(startDate, totalDays)
-  return calendar.map((date: Posix) => {
-    if (exposureInfo[date]) {
-      return exposureInfo[date]
-    } else {
-      return {
-        kind: "NoKnown",
-        date,
-      }
-    }
-  })
 }
 
 export const toExposureInfo = (rawExposures: RawExposure[]): ExposureInfo => {

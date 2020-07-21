@@ -12,101 +12,115 @@ import {
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-test("base", () => {
-  const { asJSON } = render(
-    <AssessmentQuestion
-      onChange={jest.fn()}
-      onNext={jest.fn()}
-      option={option}
-      question={question}
-    />,
-    { wrapper: Wrapper },
-  )
-  expect(asJSON()).toMatchSnapshot()
+describe("AssessmentQuestion", () => {
+  it("supports line breaks in the description", () => {
+    const firstDescription = "firstDescription"
+    const secondDescription = "secondDescription"
+
+    const { queryAllByTestId, getByText } = render(
+      <I18nextProvider i18n={i18n}>
+        <AnswersContext.Provider value={{}}>
+          <AssessmentQuestion
+            onChange={jest.fn()}
+            onNext={jest.fn()}
+            option={{ values: [] }}
+            question={{
+              question_description: `${firstDescription}\n${secondDescription}`,
+            }}
+          />
+        </AnswersContext.Provider>
+      </I18nextProvider>,
+    )
+
+    expect(queryAllByTestId("description")).toHaveLength(2)
+    expect(getByText(firstDescription)).toBeDefined()
+    expect(getByText(secondDescription)).toBeDefined()
+  })
+
+  it("on a type text question it calls the on change function with the answer values", () => {
+    const question = {
+      option_key: "option_1",
+      question_key: "1",
+      question_text: "What is the answer?",
+      question_type: QUESTION_TYPE_TEXT,
+      required: false,
+      screen_type: SCREEN_TYPE_RADIO,
+    }
+    const option = {
+      key: "option_1",
+      values: [
+        {
+          label: "A",
+          value: "0",
+        },
+        {
+          label: "B",
+          value: "1",
+        },
+      ],
+    }
+    const onChangeSpy = jest.fn()
+
+    const { queryAllByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AnswersContext.Provider value={{}}>
+          <AssessmentQuestion
+            onChange={onChangeSpy}
+            onNext={jest.fn()}
+            question={question}
+            option={option}
+          />
+        </AnswersContext.Provider>
+      </I18nextProvider>,
+    )
+
+    fireEvent.press(queryAllByTestId("option")[0])
+    expect(onChangeSpy).toHaveBeenCalledWith([{ index: 0, value: "0" }])
+    fireEvent.press(queryAllByTestId("option")[1])
+    expect(onChangeSpy).toHaveBeenCalledWith([{ index: 1, value: "1" }])
+  })
+
+  it("sends the right option values on multi select questions", () => {
+    const onChangeSpy = jest.fn()
+
+    const option = {
+      key: "option_1",
+      values: [
+        {
+          label: "A",
+          value: "0",
+        },
+        {
+          label: "B",
+          value: "1",
+        },
+      ],
+    }
+
+    const { queryAllByTestId } = render(
+      <I18nextProvider i18n={i18n}>
+        <AnswersContext.Provider value={{}}>
+          <AssessmentQuestion
+            onChange={onChangeSpy}
+            onNext={jest.fn()}
+            option={option}
+            question={{
+              question_type: QUESTION_TYPE_MULTI,
+              screen_type: SCREEN_TYPE_CHECKBOX,
+            }}
+          />
+        </AnswersContext.Provider>
+      </I18nextProvider>,
+    )
+
+    fireEvent.press(queryAllByTestId("option")[0])
+    expect(onChangeSpy).toHaveBeenCalledWith([{ index: 0, value: "0" }])
+    fireEvent.press(queryAllByTestId("option")[1])
+    expect(onChangeSpy).toHaveBeenCalledWith([
+      { index: 0, value: "0" },
+      { index: 1, value: "1" },
+    ])
+    fireEvent.press(queryAllByTestId("option")[0])
+    expect(onChangeSpy).toHaveBeenCalledWith([{ index: 1, value: "1" }])
+  })
 })
-
-test("supports line breaks in the description", () => {
-  const { queryAllByTestId } = render(
-    <AssessmentQuestion
-      onChange={jest.fn()}
-      onNext={jest.fn()}
-      option={option}
-      question={{ ...question, question_description: "Hello\nWorld" }}
-    />,
-    { wrapper: Wrapper },
-  )
-  expect(queryAllByTestId("description")).toHaveLength(2)
-})
-
-test("QUESTION_TYPE_TEXT", () => {
-  let onChange = jest.fn()
-  const { queryAllByTestId } = render(
-    <AssessmentQuestion
-      onChange={onChange}
-      onNext={jest.fn()}
-      option={option}
-      question={question}
-    />,
-    { wrapper: Wrapper },
-  )
-  fireEvent.press(queryAllByTestId("option")[0])
-  expect(onChange).toHaveBeenCalledWith([{ index: 0, value: "0" }])
-  fireEvent.press(queryAllByTestId("option")[1])
-  expect(onChange).toHaveBeenCalledWith([{ index: 1, value: "1" }])
-})
-
-test("QUESTION_TYPE_MULTI", () => {
-  let onChange = jest.fn()
-  const { queryAllByTestId } = render(
-    <AssessmentQuestion
-      onChange={onChange}
-      onNext={jest.fn()}
-      option={option}
-      question={{
-        question_type: QUESTION_TYPE_MULTI,
-        screen_type: SCREEN_TYPE_CHECKBOX,
-      }}
-    />,
-    { wrapper: Wrapper },
-  )
-  fireEvent.press(queryAllByTestId("option")[0])
-  expect(onChange).toHaveBeenCalledWith([{ index: 0, value: "0" }])
-  fireEvent.press(queryAllByTestId("option")[1])
-  expect(onChange).toHaveBeenCalledWith([
-    { index: 0, value: "0" },
-    { index: 1, value: "1" },
-  ])
-  fireEvent.press(queryAllByTestId("option")[0])
-  expect(onChange).toHaveBeenCalledWith([{ index: 1, value: "1" }])
-})
-
-function Wrapper({ children }) {
-  return (
-    <I18nextProvider i18n={i18n}>
-      <AnswersContext.Provider value={{}}>{children}</AnswersContext.Provider>
-    </I18nextProvider>
-  )
-}
-
-const question = {
-  option_key: "option_1",
-  question_key: "1",
-  question_text: "What is the answer?",
-  question_type: QUESTION_TYPE_TEXT,
-  required: false,
-  screen_type: SCREEN_TYPE_RADIO,
-}
-
-const option = {
-  key: "option_1",
-  values: [
-    {
-      label: "A",
-      value: "0",
-    },
-    {
-      label: "B",
-      value: "1",
-    },
-  ],
-}

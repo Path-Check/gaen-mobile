@@ -108,11 +108,7 @@ const PermissionsProvider: FunctionComponent<PermissionsProviderProps> = ({
   }
 
   const requestENPermission = () => {
-    const handleNativeResponse = (response: string) => {
-      if (response === "success") {
-        setExposureNotificationsPermission(["AUTHORIZED", "ENABLED"])
-      }
-    }
+    const handleNativeResponse = () => {}
     permissionStrategy.request(handleNativeResponse)
   }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FunctionComponent, useState } from "react"
 import {
   StyleSheet,
   TouchableOpacity,
@@ -11,22 +11,29 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import dayjs from "dayjs"
 
-import { ExposureDatum, ExposureHistory } from "../exposureHistory"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureDatumDetail from "./ExposureDatumDetail"
 import { DateTimeUtils } from "../utils"
 import Calendar from "./Calendar"
-import { Screens } from "../navigation"
+import { ExposureHistory } from "./exposureHistory"
+import { ExposureDatum } from "../exposure"
+import DateInfoHeader from "./DateInfoHeader"
 
 import { Icons } from "../assets"
+import { Screens } from "../navigation"
 import { Buttons, Spacing, Typography, Colors } from "../styles"
-import DateInfoHeader from "./DateInfoHeader"
+
+type Posix = number
 
 interface HistoryProps {
   exposureHistory: ExposureHistory
+  lastDetectionDate: Posix | null
 }
 
-const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
+const History: FunctionComponent<HistoryProps> = ({
+  exposureHistory,
+  lastDetectionDate,
+}) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(null)
@@ -71,7 +78,7 @@ const History = ({ exposureHistory }: HistoryProps): JSX.Element => {
             </TouchableOpacity>
           </View>
           <View style={styles.headerRow}>
-            <DateInfoHeader />
+            <DateInfoHeader lastDetectionDate={lastDetectionDate} />
           </View>
         </View>
         <View style={styles.calendarContainer}>

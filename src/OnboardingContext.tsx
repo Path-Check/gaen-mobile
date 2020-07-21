@@ -7,10 +7,8 @@ import React, {
 
 import { StorageUtils } from "./utils"
 
-const ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
-
 export const isOnboardingComplete = async (): Promise<boolean> => {
-  return Boolean(await StorageUtils.getStoreData(ONBOARDING_COMPLETE))
+  return await StorageUtils.getIsOnboardingComplete()
 }
 
 interface OnboardingContextState {
@@ -33,7 +31,7 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   const [isComplete, setIsComplete] = useState<boolean>(onboardingIsComplete)
 
   const setOnboardingIsComplete = () => {
-    StorageUtils.setStoreData(ONBOARDING_COMPLETE, "true")
+    StorageUtils.setIsOnboardingComplete()
     setIsComplete(true)
   }
 

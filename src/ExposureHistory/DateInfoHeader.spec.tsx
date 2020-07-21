@@ -4,18 +4,13 @@ import dayjs from "dayjs"
 import "@testing-library/jest-native/extend-expect"
 
 import DateInfoHeader from "./DateInfoHeader"
-import ExposureHistoryContext, { initialState } from "../ExposureHistoryContext"
 
 describe("DateInfoHeader", () => {
   it("displays the time since the last exposure detection", async () => {
-    const lastExposureDetectionDate = dayjs().subtract(8, "hour")
+    const lastDetectionDate = dayjs().subtract(8, "hour").valueOf()
 
     const { getByText } = render(
-      <ExposureHistoryContext.Provider
-        value={{ ...initialState, lastExposureDetectionDate }}
-      >
-        <DateInfoHeader />
-      </ExposureHistoryContext.Provider>,
+      <DateInfoHeader lastDetectionDate={lastDetectionDate} />,
     )
 
     await wait(() => {
@@ -27,12 +22,9 @@ describe("DateInfoHeader", () => {
 
   describe("when there is not an exposure detection date", () => {
     it("does not displays the date info", async () => {
+      const lastDetectionDate = null
       const { queryByText } = render(
-        <ExposureHistoryContext.Provider
-          value={{ ...initialState, lastExposureDetectionDate: null }}
-        >
-          <DateInfoHeader />
-        </ExposureHistoryContext.Provider>,
+        <DateInfoHeader lastDetectionDate={lastDetectionDate} />,
       )
 
       await wait(() => {

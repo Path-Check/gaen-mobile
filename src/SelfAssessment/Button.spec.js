@@ -1,19 +1,29 @@
-import { render } from "@testing-library/react-native"
+import { render, fireEvent } from "@testing-library/react-native"
 import React from "react"
 
 import { Button } from "./Button"
 
-test("base", () => {
-  const { asJSON } = render(<Button title="Next" />)
-  expect(asJSON()).toMatchSnapshot()
-})
+describe("Button", () => {
+  it("displays a button with a title and responds to tap events", () => {
+    const buttonTitle = "button title"
+    const onPressSpy = jest.fn()
 
-test("disabled", () => {
-  const { asJSON } = render(<Button disabled title="Next" />)
-  expect(asJSON()).toMatchSnapshot()
-})
+    const { getByText } = render(
+      <Button title={buttonTitle} onPress={onPressSpy} />,
+    )
+    fireEvent.press(getByText(buttonTitle))
 
-test("color", () => {
-  const { asJSON } = render(<Button color="red" title="Next" />)
-  expect(asJSON()).toMatchSnapshot()
+    expect(onPressSpy).toHaveBeenCalled()
+  })
+
+  it("does not respond to press events on a disabled button", () => {
+    const onPressSpy = jest.fn()
+
+    const { getByTestId } = render(
+      <Button disabled title="title" onPress={onPressSpy} />,
+    )
+    fireEvent.press(getByTestId("assessment-button"))
+
+    expect(onPressSpy).not.toHaveBeenCalled()
+  })
 })

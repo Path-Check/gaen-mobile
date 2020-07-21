@@ -30,8 +30,6 @@ import tl from "./tl.json"
 import vi from "./vi.json"
 import zh_Hant from "./zh_Hant.json"
 
-const LANG_OVERRIDE = "LANG_OVERRIDE"
-
 // Refer this for checking the codes and creating new folders https://developer.chrome.com/webstore/i18n
 
 // Adding/updating a language:
@@ -41,11 +39,6 @@ const LANG_OVERRIDE = "LANG_OVERRIDE"
 //
 
 type Locale = string
-
-/** Fetch the user language override, if any */
-export async function getUserLocaleOverride(): Promise<Locale> {
-  return (await StorageUtils.getStoreData(LANG_OVERRIDE)) as Locale
-}
 
 export function getLanguageFromLocale(locale: Locale): Locale {
   const [languageCode] = toIETFLanguageTag(locale).split("-")
@@ -75,7 +68,7 @@ export function useLanguageDirection(): TextDirection {
 
 export async function setUserLocaleOverride(locale: Locale): Promise<void> {
   await setLocale(locale)
-  await StorageUtils.setStoreData(LANG_OVERRIDE, locale)
+  await StorageUtils.setUserLocaleOverride(locale)
 }
 
 /* eslint-disable no-underscore-dangle */
@@ -196,8 +189,11 @@ export function supportedDeviceLanguageOrEnglish(): Locale {
 // detect and set device locale, must go after i18next.init()
 setLocale(supportedDeviceLanguageOrEnglish())
 
+const getUserLocale = async (): Promise<string | null> => {
+  return await StorageUtils.getUserLocaleOverride()
+}
 // detect user override
-getUserLocaleOverride().then((locale) => {
+getUserLocale().then((locale) => {
   if (locale) {
     setLocale(locale)
   }

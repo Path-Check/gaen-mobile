@@ -1,26 +1,24 @@
-import { TracingStrategy } from "../tracingStrategy"
-import { toExposureHistory } from "./exposureNotifications"
+import { TracingStrategy, ExposureEventsStrategy } from "../tracingStrategy"
 import { PermissionStrategy } from "../PermissionsContext"
-import { ExposureEventsStrategy } from "../ExposureHistoryContext"
-import * as BTNativeModule from "./nativeModule"
+import * as NativeModule from "./nativeModule"
 
-const btExposureEventContext: ExposureEventsStrategy = {
-  exposureInfoSubscription: BTNativeModule.subscribeToExposureEvents,
-  toExposureHistory: toExposureHistory,
-  getCurrentExposures: BTNativeModule.getCurrentExposures,
+const exposureEventsStrategy: ExposureEventsStrategy = {
+  exposureInfoSubscription: NativeModule.subscribeToExposureEvents,
+  getCurrentExposures: NativeModule.getCurrentExposures,
+  getLastDetectionDate: NativeModule.fetchLastExposureDetectionDate,
 }
 
-const btPermissionStrategy: PermissionStrategy = {
-  statusSubscription: BTNativeModule.subscribeToEnabledStatusEvents,
-  check: BTNativeModule.getCurrentENPermissionsStatus,
-  request: BTNativeModule.requestAuthorization,
+const permissionStrategy: PermissionStrategy = {
+  statusSubscription: NativeModule.subscribeToEnabledStatusEvents,
+  check: NativeModule.getCurrentENPermissionsStatus,
+  request: NativeModule.requestAuthorization,
 }
 
 const btStrategy: TracingStrategy = {
   name: "bt",
-  exposureEventsStrategy: btExposureEventContext,
-  permissionStrategy: btPermissionStrategy,
+  exposureEventsStrategy,
+  permissionStrategy,
 }
 
-export { BTNativeModule }
+export { NativeModule }
 export default btStrategy

@@ -3,7 +3,7 @@ import { PermissionsProvider } from "./PermissionsContext"
 
 import { TracingStrategy } from "./tracingStrategy"
 
-import { ExposureHistoryProvider } from "./ExposureHistoryContext"
+import { ExposureProvider } from "./ExposureContext"
 
 interface TracingStrategyContextState {
   name: string
@@ -28,11 +28,11 @@ export const TracingStrategyProvider: FunctionComponent<TracingStrategyProps> = 
       }}
     >
       <PermissionsProvider permissionStrategy={strategy.permissionStrategy}>
-        <ExposureHistoryProvider
+        <ExposureProvider
           exposureEventsStrategy={strategy.exposureEventsStrategy}
         >
           {children}
-        </ExposureHistoryProvider>
+        </ExposureProvider>
       </PermissionsProvider>
     </TracingStrategyContext.Provider>
   )

@@ -8,86 +8,114 @@ import {
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-test("SCREEN_TYPE_CHECKBOX", () => {
-  const { asJSON } = render(
-    <Option
-      index={0}
-      onSelect={jest.fn()}
-      option={{
-        description: "Description",
-        label: "Label",
-        value: "Value",
-      }}
-      type={SCREEN_TYPE_CHECKBOX}
-    />,
-  )
-  expect(asJSON()).toMatchSnapshot()
-})
+describe("Option", () => {
+  it("renders a checkbox option when the type is checkbox", () => {
+    const onSelectSpy = jest.fn()
+    const label = "label"
+    const value = "value"
 
-test("SCREEN_TYPE_RADIO", () => {
-  const { asJSON } = render(
-    <Option
-      index={0}
-      onSelect={jest.fn()}
-      option={{
-        description: "Description",
-        label: "Label",
-        value: "Value",
-      }}
-      type={SCREEN_TYPE_RADIO}
-    />,
-  )
-  expect(asJSON()).toMatchSnapshot()
-})
+    const { getByTestId, getByText } = render(
+      <Option
+        index={0}
+        onSelect={onSelectSpy}
+        option={{
+          label,
+          value,
+        }}
+        type={SCREEN_TYPE_CHECKBOX}
+      />,
+    )
 
-describe("SCREEN_TYPE_DATE", () => {
-  test("displays the label if not selected", () => {
-    const { getByTestId } = render(
-      <Option
-        index={0}
-        onSelect={jest.fn()}
-        option={{
-          label: "Label",
-          value: "Value",
-        }}
-        type={SCREEN_TYPE_DATE}
-      />,
-    )
-    expect(getByTestId("label").children).toEqual(["Label"])
-  })
-  test("on iOS, selecting the date picker immediatley invokes the onSelect handler with the current date", () => {
-    jest.doMock("../utils/index", () => ({
-      isPlatformIOS: () => true,
-    }))
-    let onSelect = jest.fn()
-    const { getByTestId } = render(
-      <Option
-        index={0}
-        onSelect={onSelect}
-        option={{
-          label: "Label",
-          value: "Value",
-        }}
-        type={SCREEN_TYPE_DATE}
-      />,
-    )
+    expect(getByText(label)).toBeDefined()
     fireEvent.press(getByTestId("option"))
-    expect(onSelect).toHaveBeenCalledWith(new Date().toDateString())
-    expect(getByTestId("label").children[0]).toMatch(/\d\d?\/\d\d?\/\d\d\d\d/)
+    expect(onSelectSpy).toHaveBeenCalledWith(value)
   })
-  test("shows the date picker", () => {
-    const { getByTestId } = render(
+
+  it("renders a radio input option when the type is radio", () => {
+    const onSelectSpy = jest.fn()
+    const label = "label"
+    const value = "value"
+
+    const { getByText, getByTestId } = render(
       <Option
         index={0}
-        onSelect={jest.fn()}
+        onSelect={onSelectSpy}
         option={{
-          label: "Label",
-          value: "Value",
+          label,
+          value,
         }}
-        type={SCREEN_TYPE_DATE}
+        type={SCREEN_TYPE_RADIO}
       />,
     )
+
+    expect(getByText(label)).toBeDefined()
     fireEvent.press(getByTestId("option"))
-    expect(getByTestId("datepicker")).toBeTruthy()
+    expect(onSelectSpy).toHaveBeenCalledWith(value)
+  })
+
+  describe("on a date picker type option", () => {
+    it("displays the label on it's initial state with no date selected", () => {
+      const label = "label"
+
+      const { getByText } = render(
+        <Option
+          index={0}
+          onSelect={jest.fn()}
+          option={{
+            label,
+            value: "Value",
+          }}
+          type={SCREEN_TYPE_DATE}
+        />,
+      )
+      expect(getByText("label")).toBeDefined()
+    })
+
+    it("displays a date picker when the user taps on the option", () => {
+      const { getByTestId, queryByTestId } = render(
+        <Option
+          index={0}
+          onSelect={jest.fn()}
+          option={{
+            label: "Label",
+            value: "Value",
+          }}
+          type={SCREEN_TYPE_DATE}
+        />,
+      )
+
+      expect(queryByTestId("datepicker")).toBeNull()
+      fireEvent.press(getByTestId("option"))
+      expect(getByTestId("datepicker")).toBeTruthy()
+    })
+
+    describe("on iOS", () => {
+      it("initializes the value with the current date after a tap", () => {
+        jest.doMock("../utils/index", () => ({
+          isPlatformIOS: () => true,
+        }))
+        const onSelectSpy = jest.fn()
+        const todaysDate = new Date()
+        const dateLabel = `${
+          todaysDate.getMonth() + 1
+        }/${todaysDate.getDate()}/${todaysDate.getFullYear()}`
+
+        const { getByTestId, getByText } = render(
+          <Option
+            index={0}
+            onSelect={onSelectSpy}
+            option={{
+              label: "Label",
+              value: "Value",
+            }}
+            type={SCREEN_TYPE_DATE}
+          />,
+        )
+
+        fireEvent.press(getByTestId("option"))
+        expect(onSelectSpy).toHaveBeenCalledWith(new Date().toDateString())
+        expect(getByText(dateLabel)).toBeDefined()
+      })
+    })
   })
 })

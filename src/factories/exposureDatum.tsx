@@ -2,7 +2,7 @@ import { Factory } from "fishery"
 
 import { DateTimeUtils } from "../utils"
 
-import { ExposureDatum } from "../exposureHistory"
+import { ExposureDatum } from "../exposure"
 
 export default Factory.define<ExposureDatum>(() => {
   const defaultDate = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(2))
