@@ -9,17 +9,10 @@ dayjs.extend(localizedFormat)
 
 export type Posix = number
 
-type DurationRoundedToFiveMinuteIncrement = number
+type DurationMinutes = number
 
-export const durationToString = (
-  duration: DurationRoundedToFiveMinuteIncrement,
-): string => {
-  /// Native layer returns length of exposure in
-  /// 5 minute increments with a 30 minute maximum.
-  /// 1 is the smallest possible number of 5 minute increments,
-  /// so if we receive 1 from the native layer, we display "one minute"
-  const durationMinutes = Math.max(duration, 1)
-  return dayjs.duration({ minutes: durationMinutes }).humanize(false)
+export const durationToString = (duration: DurationMinutes): string => {
+  return dayjs.duration({ minutes: duration }).humanize(false)
 }
 
 export const isToday = (date: Posix): boolean => {
