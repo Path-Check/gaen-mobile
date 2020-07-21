@@ -62,7 +62,7 @@ Read the [contribution guidelines](CONTRIBUTING.md).
 
 ## Developer Setup
 
-First, run the appropriate setup script for your system. This will install relevant packages, walk through Android Studio configuration, etc.
+First, run `yarn install` in the root of the project. Then run the appropriate setup script for your system. This will install relevant packages, walk through Android Studio configuration, etc.
 
 **Note:** You will still need to [configure an Android Virtual Device (AVD)](https://developer.android.com/studio/run/managing-avds#createavd) after running the script.
 
@@ -87,7 +87,7 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 .env.bt # variables used in building binaries
 ```
 
-**Note:** Members of the `Path-Check` org can complete this step by running `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
+**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
 
 ## Running
 
@@ -95,9 +95,20 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 
 #### Android (Windows, Linux, macOS)
 
+First, in the "android" directory run:
+```
+bundle
+```
+If you get a Ruby version error, follow the instructions [here](https://stackoverflow.com/questions/37914702/how-to-fix-your-ruby-version-is-2-3-0-but-your-gemfile-specified-2-2-5-while/37914750) to fix it.
+
+Then, run the application:
 ```
 yarn run-android
 ```
+If you get a 500 local server error, run:
+```
+yarn start --reset-cache
+``` 
 
 Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
 
