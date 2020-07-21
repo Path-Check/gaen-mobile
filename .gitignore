@@ -101,5 +101,8 @@ safepaths.realm
 .env
 .env.bt*
 
+# Crashlytics
+ios/GoogleService-Info.plist
+
 # swift packages
 ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
