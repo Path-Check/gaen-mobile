@@ -41,7 +41,7 @@ def fetch_env
 
   dev_env_source = ".env.bt"
   release_env_source = ".env.bt.release"
-  google_service_source = "GoogleService-Info.plist"
+  google_service_source = "ios/GoogleService-Info.plist"
 
   dev_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
@@ -76,3 +76,4 @@ def valid_token(token)
 end
 
 fetch_env
+puts exec('git update-index --assume-unchanged ios/GoogleService-Info.plist')

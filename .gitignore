@@ -101,9 +101,5 @@ safepaths.realm
 .env
 .env.bt*
 
-# private resources
-GoogleService-Info.plist
-
-
 # swift packages
 ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved

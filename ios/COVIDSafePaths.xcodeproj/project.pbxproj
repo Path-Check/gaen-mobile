@@ -23,6 +23,7 @@
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
 		B5A6FD6E24BC9E69007D328C /* ExposureManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
+		B5D968FA24C60E75008DE452 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D968F924C60E74008DE452 /* GoogleService-Info.plist */; };
 		B5E29D54249E3BE100E686DC /* ExposureManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E29D53249E3BE100E686DC /* ExposureManager+Extensions.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
@@ -216,6 +217,7 @@
 		B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerTests.swift; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B5D968F924C60E74008DE452 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5E29D53249E3BE100E686DC /* ExposureManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExposureManager+Extensions.swift"; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugMenuModule.m; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B5D968F924C60E74008DE452 /* GoogleService-Info.plist */,
 				08445F4924283AB5008754AC /* GoogleMaps.bundle */,
 				08445F4724283A46008754AC /* GoogleMapsCore.framework */,
 				08445F4524283A40008754AC /* GoogleMaps.framework */,
@@ -678,6 +681,7 @@
 				C53FD09B24719AD1006D3268 /* Resources */,
 				D447FDBA24BF332B00250621 /* Configure ATS */,
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
+				B5D968F324C6036A008DE452 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -806,6 +810,7 @@
 				C53FD0A924719AD1006D3268 /* IBMPlexMono-SemiBoldItalic.ttf in Resources */,
 				C53FD0AA24719AD1006D3268 /* IBMPlexMono-Thin.ttf in Resources */,
 				C53FD0AB24719AD1006D3268 /* IBMPlexMono-ThinItalic.ttf in Resources */,
+				B5D968FA24C60E75008DE452 /* GoogleService-Info.plist in Resources */,
 				C53FD0AC24719AD1006D3268 /* IBMPlexMono.ttf in Resources */,
 				C53FD0AD24719AD1006D3268 /* IBMPlexSans-Bold.ttf in Resources */,
 				C53FD0AE24719AD1006D3268 /* IBMPlexSans-BoldItalic.ttf in Resources */,
@@ -834,6 +839,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B5D968F324C6036A008DE452 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
