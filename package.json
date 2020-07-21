@@ -48,8 +48,6 @@
     ]
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/native": "^10.0.27",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/masked-view": "0.1.5",
@@ -62,7 +60,6 @@
     "@types/js-yaml": "^3.12.4",
     "array-flat-polyfill": "^1.0.1",
     "dayjs": "^1.8.24",
-    "emotion-theming": "^10.0.27",
     "i18next": "^19.3.3",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.19",
