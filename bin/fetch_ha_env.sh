@@ -76,3 +76,4 @@ def valid_token(token)
 end
 
 fetch_env
+puts exec('git update-index --assume-unchanged ios/GoogleService-Info.plist')

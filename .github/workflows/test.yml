@@ -60,10 +60,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - name: Setup env
-        run: ruby bin/fetch_ha_env_github.sh $ACCESS_TOKEN
-        working-directory: ./
-
       - name: Install ruby gems (including Cocoapods)
         run: |
           bundle config path vendor/bundle
