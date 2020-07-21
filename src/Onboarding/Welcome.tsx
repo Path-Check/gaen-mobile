@@ -66,7 +66,7 @@ const Welcome: FunctionComponent = () => {
           </View>
           <View style={styles.footerContainer}>
             <EulaModal
-              continueFunction={() =>
+              onPressModalContinue={() =>
                 navigation.navigate(Screens.PersonalPrivacy)
               }
               selectedLocale={localeCode}
