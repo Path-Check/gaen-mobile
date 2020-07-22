@@ -4,6 +4,7 @@ import env from "react-native-config"
 import "array-flat-polyfill"
 
 import MainNavigator from "./src/navigation/MainNavigator"
+import { ErrorBoundary } from "./src/ErrorBoundaries/ErrorBoundaries"
 import { TracingStrategyProvider } from "./src/TracingStrategyContext"
 import gaenStrategy from "./src/gaen"
 import {
@@ -42,11 +43,13 @@ const App: FunctionComponent = () => {
   return (
     <>
       {!isLoading ? (
-        <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
-          <TracingStrategyProvider strategy={strategy}>
-            <MainNavigator />
-          </TracingStrategyProvider>
-        </OnboardingProvider>
+        <ErrorBoundary>
+          <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
+            <TracingStrategyProvider strategy={strategy}>
+              <MainNavigator />
+            </TracingStrategyProvider>
+          </OnboardingProvider>
+        </ErrorBoundary>
       ) : null}
     </>
   )

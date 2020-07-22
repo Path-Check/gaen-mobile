@@ -377,5 +377,10 @@
     "more": "More",
     "exposure_history": "Exposure History",
     "more_info": "More Info"
+  },
+  "errors": {
+    "title": "Whoops!",
+    "description": "An error has ocurred. Please reload the app.",
+    "reload": "Reload"
   }
 }
