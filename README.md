@@ -52,8 +52,6 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 # Development Overview
 
-![Android and iOS build on MacOS](https://github.com/Path-Check/covid-safe-paths/workflows/Android%20and%20iOS%20build%20on%20MacOS/badge.svg)
-
 _PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started) v0.61.5
 
 ## Contributing
@@ -131,11 +129,6 @@ Device storage can be cleared by clicking "Hardware" on the system toolbar, and 
 Privacy settings can be reset by going to Settings > General > Reset > Reset
 Location & Privacy
 
-### Release Builds
-
-Generating a release build is an optional step in the development process.
-
-- [Android instructions](https://reactnative.dev/docs/signed-apk-android)
 
 ### Debugging
 
