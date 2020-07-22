@@ -18,7 +18,7 @@ import { Button, RTLEnabledText } from "../components"
 
 import { Icons, Images } from "../assets"
 import { Spacing, Buttons, Colors, Typography, Forms } from "../styles"
-import { EULA_URL } from '../constants/eula';
+import { EULA_URL } from "../constants/eula"
 
 type CloseModalIconProps = {
   closeModal: () => void
@@ -78,20 +78,20 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
 const Spinner = () => {
   return (
     <ActivityIndicator
-      size={'large'}
+      size={"large"}
       color={Colors.darkGray}
       style={styles.activityIndicator}
-      testID={'loading-indicator'}
+      testID={"loading-indicator"}
     />
-  );
-};
+  )
+}
 
 const eulaPicker = (selectedLocale: string): string => {
   if (selectedLocale) {
-    return `${EULA_URL}/${selectedLocale}`;
+    return `${EULA_URL}/${selectedLocale}`
   }
-  return `${EULA_URL}/en`;
-};
+  return `${EULA_URL}/en`
+}
 
 type EulaModalProps = {
   selectedLocale: string
@@ -146,9 +146,7 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
                 source={{ uri: eulaPath }}
                 startInLoadingState
                 renderLoading={Spinner}
-                onShouldStartLoadWithRequest={
-                  shouldStartLoadWithRequestHandler
-                }
+                onShouldStartLoadWithRequest={shouldStartLoadWithRequestHandler}
               />
             </View>
           </SafeAreaView>
@@ -222,7 +220,7 @@ const styles = StyleSheet.create({
     ...Forms.checkboxText,
   },
   activityIndicator: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
