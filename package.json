@@ -15,9 +15,6 @@
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
     "install:pod": "cd ios && bundle install --quiet && bundle exec pod install --silent",
     "postinstall": "npx react-native-jetifier",
-    "postversion": "react-native-version",
-    "format:all": "prettier --write ./src/**/*.js",
-    "format:eula": "prettier --write ./src/locales/eula/en.html",
     "detox-setup": "detox clean-framework-cache && detox build-framework-cache",
     "build:e2e:android": "detox build -c android.emu.release",
     "test:e2e:android": "detox test -c android.emu.release",
@@ -30,12 +27,7 @@
     "i18n:pull": "./src/locales/pull.sh",
     "i18n:push": "./src/locales/push.sh",
     "test": "jest --config=./jest/config.js",
-    "test:watch": "jest --config=./jest/config.js --watch",
-    "update-snapshots": "jest --config=./jest/config.js --updateSnapshot",
-    "test:dev_setup": "bats __tests__/dev_setup.test.bats",
-    "version:bump:major": "version --premajor",
-    "version:bump:minor": "version --preminor",
-    "version:bump:patch": "version --prepatch"
+    "test:watch": "jest --config=./jest/config.js --watch"
   },
   "husky": {
     "hooks": {
@@ -121,7 +113,6 @@
     "prettier": "^2.0.5",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "^16.13.1",
-    "reactotron-react-native": "^5.0.0",
     "typescript": "^3.9.3"
   },
   "detox": {

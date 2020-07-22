@@ -52,8 +52,6 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 # Development Overview
 
-![Android and iOS build on MacOS](https://github.com/Path-Check/covid-safe-paths/workflows/Android%20and%20iOS%20build%20on%20MacOS/badge.svg)
-
 _PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started) v0.61.5
 
 ## Contributing
@@ -131,11 +129,6 @@ Device storage can be cleared by clicking "Hardware" on the system toolbar, and 
 Privacy settings can be reset by going to Settings > General > Reset > Reset
 Location & Privacy
 
-### Release Builds
-
-Generating a release build is an optional step in the development process.
-
-- [Android instructions](https://reactnative.dev/docs/signed-apk-android)
 
 **Note:** Members of the `Path-Check` org should update the environment variables of the release build corresponding with the health authority, for this we need to execute the script `bin/set_ha.sh ${HA_LABEL}` where HA_LABEL is the corresponding health authority label. This will setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
