@@ -35,20 +35,10 @@ lokalise2 file download \
   --placeholder-format=ios \
   --unzip-to=ios \
   --export-sort=a_z \
-  --config .lokalise.yml --token=$LOKALISE_TOKEN
+  --config .lokalise.yml \
+  --token=$LOKALISE_READ_TOKEN
 
-echo "Downloading Android GPS strings.xml"
-lokalise2 file download \
-  --add-newline-eof \
-  --export-empty-as skip \
-  --format xml \
-  --include-description \
-  --original-filenames \
-  --unzip-to=android/app/src/gps/res \
-  --export-sort=a_z \
-  --config .lokalise.yml --token=$LOKALISE_TOKEN
-
-echo "Downloading Android BT strings.xml"
+echo "Downloading Android strings.xml"
 lokalise2 file download \
   --add-newline-eof \
   --export-empty-as skip \
@@ -57,7 +47,8 @@ lokalise2 file download \
   --original-filenames \
   --unzip-to=android/app/src/bt/res \
   --export-sort=a_z \
-  --config .lokalise.yml --token=$LOKALISE_TOKEN
+  --config .lokalise.yml \
+  --token=$LOKALISE_READ_TOKEN
 
 echo "Downloading i18next *.json files"
 lokalise2 file download \
@@ -74,4 +65,5 @@ lokalise2 file download \
   --unzip-to=app \
   --indentation=2sp \
   --json-unescaped-slashes \
-  --config .lokalise.yml --token=$LOKALISE_TOKEN
+  --config .lokalise.yml \
+  --token=$LOKALISE_READ_TOKEN

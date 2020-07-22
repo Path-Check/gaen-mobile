@@ -20,7 +20,7 @@ import * as API from "./verificationAPI"
 import * as NativeModule from "../gaen/nativeModule"
 import { calculateHmac } from "./hmac"
 
-import { Screens } from "../navigation"
+import { Screens, Stacks } from "../navigation"
 import {
   Spacing,
   Buttons,
@@ -54,7 +54,7 @@ const CodeInputScreen = (): JSX.Element => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Settings)
+    navigation.navigate(Stacks.More)
   }
 
   const handleOnPressSubmit = async () => {

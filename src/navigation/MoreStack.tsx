@@ -1,63 +1,42 @@
 import React, { FunctionComponent } from "react"
 import {
-  TransitionPresets,
   createStackNavigator,
+  StackNavigationOptions,
 } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
-import SettingsScreen from "../More/index"
-import AboutScreen from "../More/About"
-import LicensesScreen from "../More/Licenses"
-import AffectedUserStack from "../AffectedUserFlow"
-import ENDebugMenu from "../More/ENDebugMenu"
-import ENLocalDiagnosisKeyScreen from "../More/ENLocalDiagnosisKeyScreen"
-import ExposureListDebugScreen from "../More/ExposureListDebugScreen"
+import MenuScreen from "./../More/Menu"
+import AboutScreen from "./../More/About"
+import LicensesScreen from "./../More/Licenses"
+import ENDebugMenu from "./../More/ENDebugMenu"
+import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
+import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
 import LanguageSelection from "../More/LanguageSelection"
 
-import { MoreStackScreens, MoreStackScreen } from "./index"
+import { MoreStackScreens } from "./index"
 
-type MoreStackScreenParams = {
-  [key in MoreStackScreen]: undefined
-}
-const Stack = createStackNavigator<MoreStackScreenParams>()
+import { Colors } from "../styles"
 
-const SCREEN_OPTIONS = {
-  headerShown: false,
-}
+const Stack = createStackNavigator()
 
-interface MoreStackRouteState {
-  index: number
-  key: string
-  routeNames: MoreStackScreen[]
-  routes: MoreStackRoute[]
-  stale: boolean
-  type: "stack"
-}
-
-export interface MoreStackRoute {
-  key: string
-  name: MoreStackScreen
-  params: undefined
-  state?: MoreStackRouteState
-}
-
-export const determineTabBarVisibility = (route: MoreStackRoute): boolean => {
-  if (route.state) {
-    const routeState = route.state
-    const currentRoute = routeState.routes[routeState.index]
-    const routeName = currentRoute.name
-    return routeName != MoreStackScreens.AffectedUserFlow
-  } else {
-    return true
-  }
+const SCREEN_OPTIONS: StackNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Colors.primaryViolet,
+  },
+  headerTitleStyle: {
+    color: Colors.white,
+    textTransform: "uppercase",
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.white,
 }
 
 const MoreStack: FunctionComponent = () => {
+  const { t } = useTranslation()
+
   return (
     <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-      <Stack.Screen
-        name={MoreStackScreens.Settings}
-        component={SettingsScreen}
-      />
+      <Stack.Screen name={MoreStackScreens.Menu} component={MenuScreen} />
       <Stack.Screen name={MoreStackScreens.About} component={AboutScreen} />
       <Stack.Screen
         name={MoreStackScreens.Licenses}
@@ -66,18 +45,12 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.ENDebugMenu}
         component={ENDebugMenu}
+        options={{ headerTitle: t("screen_titles.debug") }}
       />
       <Stack.Screen
         name={MoreStackScreens.LanguageSelection}
         component={LanguageSelection}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.AffectedUserFlow}
-        component={AffectedUserStack}
-        options={{
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-          gestureEnabled: false,
-        }}
+        options={{ headerTitle: t("screen_titles.select_language") }}
       />
       <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}

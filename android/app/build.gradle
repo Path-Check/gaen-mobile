@@ -6,11 +6,9 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     btdebug: ".env.bt",
-    btstaging: ".env.bt.staging",
     btrelease: ".env.bt.release",
 
     gpsdebug: ".env.gps",
-    gpsstaging: ".env.gps.staging",
     gpsrelease: ".env.gps.release",
 ]
 
@@ -211,10 +209,6 @@ android {
 
     flavorDimensions "version"
     productFlavors {
-        gps {
-            applicationId 'org.pathcheck.covidsafepaths'
-            dimension "version"
-        }
         bt {
             applicationId 'org.pathcheck.covidsafepathsBt'
             dimension "version"
@@ -235,7 +229,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.annotation:annotation:1.1.0"
-    gpsImplementation project(':@mauron85_react-native-background-geolocation-common')
     implementation 'com.bottlerocketstudios:vault:1.4.2'
     implementation 'com.google.android.gms:play-services-gcm:15.0.1'
     implementation 'com.google.android.gms:play-services-location:15.0.1'

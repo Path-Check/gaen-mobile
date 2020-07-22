@@ -52,8 +52,6 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 # Development Overview
 
-![Android and iOS build on MacOS](https://github.com/Path-Check/covid-safe-paths/workflows/Android%20and%20iOS%20build%20on%20MacOS/badge.svg)
-
 _PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started) v0.61.5
 
 ## Contributing
@@ -62,7 +60,7 @@ Read the [contribution guidelines](CONTRIBUTING.md).
 
 ## Developer Setup
 
-First, run the appropriate setup script for your system. This will install relevant packages, walk through Android Studio configuration, etc.
+First, run `yarn install` in the root of the project. Then run the appropriate setup script for your system. This will install relevant packages, walk through Android Studio configuration, etc.
 
 **Note:** You will still need to [configure an Android Virtual Device (AVD)](https://developer.android.com/studio/run/managing-avds#createavd) after running the script.
 
@@ -87,7 +85,7 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 .env.bt # variables used in building binaries
 ```
 
-**Note:** Members of the `Path-Check` org can complete this step by running `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
+**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
 
 ## Running
 
@@ -95,9 +93,20 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 
 #### Android (Windows, Linux, macOS)
 
+First, in the "android" directory run:
+```
+bundle
+```
+If you get a Ruby version error, follow the instructions [here](https://stackoverflow.com/questions/37914702/how-to-fix-your-ruby-version-is-2-3-0-but-your-gemfile-specified-2-2-5-while/37914750) to fix it.
+
+Then, run the application:
 ```
 yarn run-android
 ```
+If you get a 500 local server error, run:
+```
+yarn start --reset-cache
+``` 
 
 Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
 
@@ -120,11 +129,8 @@ Device storage can be cleared by clicking "Hardware" on the system toolbar, and 
 Privacy settings can be reset by going to Settings > General > Reset > Reset
 Location & Privacy
 
-### Release Builds
 
-Generating a release build is an optional step in the development process.
-
-- [Android instructions](https://reactnative.dev/docs/signed-apk-android)
+**Note:** Members of the `Path-Check` org should update the environment variables of the release build corresponding with the health authority, for this we need to execute the script `bin/set_ha.sh ${HA_LABEL}` where HA_LABEL is the corresponding health authority label. This will setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
 ### Debugging
 
@@ -170,6 +176,11 @@ This project is using [eslint](https://eslint.org/docs/user-guide/getting-starte
 
 We have linting checks on CI, please make sure to include the checks locally in
 your IDE.
+
+#### Ruby
+
+We use ruby for bin scripts, cocoapods, and fastlane.
+We recommended [asdf](https://asdf-vm.com/#/) as version manager for ruby.
 
 ## Testing
 

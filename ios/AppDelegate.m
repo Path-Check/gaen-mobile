@@ -16,6 +16,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
+@import Firebase;
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,6 +36,9 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
+  // Crashlytics
+  [FIRApp configure];
+
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
 
@@ -44,8 +48,16 @@
   // Schedule background task
   [[ExposureManager shared] scheduleBackgroundTaskIfNeeded];
 
+  // Broadcase EN Status
+  [[ExposureManager shared] broadcastCurrentEnabledStatus];
+
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   return YES;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+  [[ExposureManager shared] broadcastCurrentEnabledStatus];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
