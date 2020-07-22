@@ -33,6 +33,8 @@ jobs:
     runs-on: macOS-latest
     needs: unit-test
     timeout-minutes: 25
+    ignore-paths:
+      - 'android/**'
     steps:
       - uses: actions/checkout@master
 
