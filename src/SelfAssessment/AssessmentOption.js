@@ -1,7 +1,7 @@
 import DateTimePicker from "@react-native-community/datetimepicker"
 import React, { Fragment, useEffect, useMemo, useState } from "react"
 
-import { Option as SharedOption } from "../components/Option"
+import Option from "./Option"
 import { isPlatformAndroid, isPlatformiOS } from "../utils/index"
 import {
   SCREEN_TYPE_CHECKBOX,
@@ -22,7 +22,7 @@ import {
  *   selected: boolean;
  *   type: Extract<SurveyScreen, 'Checkbox' | 'Date' | 'Radio'>
  * }>} */
-export const Option = ({
+export const AssessmentOption = ({
   answer,
   index,
   onSelect,
@@ -75,7 +75,7 @@ export const Option = ({
 
   return (
     <Fragment>
-      <SharedOption
+      <Option
         onPress={handleOnPress}
         testID="option"
         isValidType={isValidType}

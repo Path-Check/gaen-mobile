@@ -5,7 +5,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Button } from "./Button"
 import { AnswersContext } from "./Context"
-import { Option } from "./Option"
+import { AssessmentOption } from "./AssessmentOption"
 import {
   QUESTION_TYPE_MULTI,
   SCREEN_TYPE_CHECKBOX,
@@ -64,7 +64,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   const options =
     displayAsOption &&
     option.values.map((option, index) => (
-      <Option
+      <AssessmentOption
         answer={selectedValues.find((v) => v.index === index)}
         index={index}
         key={option.value}
