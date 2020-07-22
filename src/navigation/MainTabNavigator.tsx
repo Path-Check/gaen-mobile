@@ -13,6 +13,7 @@ import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeScreen from "../Home"
 
 import { useExposureContext } from "../ExposureContext"
+import { displaySelfAssessment } from "../utils"
 
 import { Screens, Stacks } from "./index"
 import * as Icons from "../assets/svgs/TabBarNav"
@@ -131,14 +132,16 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: CalendarIcon,
         }}
       />
-      <Tab.Screen
-        name={Stacks.SelfAssessment}
-        component={SelfAssessmentStack}
-        options={{
-          tabBarLabel: t("navigation.self_assessment"),
-          tabBarIcon: SelfAssessmentIcon,
-        }}
-      />
+      {displaySelfAssessment() && (
+        <Tab.Screen
+          name={Stacks.SelfAssessment}
+          component={SelfAssessmentStack}
+          options={{
+            tabBarLabel: t("navigation.self_assessment"),
+            tabBarIcon: SelfAssessmentIcon,
+          }}
+        />
+      )}
       <Tab.Screen
         name={Stacks.More}
         component={MoreStack}

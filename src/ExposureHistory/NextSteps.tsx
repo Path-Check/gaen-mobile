@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
+import { displayNextSteps } from "../utils"
+
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Screens, useStatusBarEffect } from "../navigation"
@@ -51,20 +53,22 @@ const NextSteps = (): JSX.Element => {
             {contentTextTwo}
           </RTLEnabledText>
         </View>
-        <View style={styles.buttonContainer}>
-          <RTLEnabledText style={styles.footerText}>
-            {footerText}
-          </RTLEnabledText>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleOnPressTakeAssessment}
-          >
-            <RTLEnabledText style={styles.buttonText}>
-              {buttonText}
+        {displayNextSteps() && (
+          <View style={styles.buttonContainer}>
+            <RTLEnabledText style={styles.footerText}>
+              {footerText}
             </RTLEnabledText>
-            <SvgXml xml={Icons.Export} color={Colors.white} />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOnPressTakeAssessment}
+            >
+              <RTLEnabledText style={styles.buttonText}>
+                {buttonText}
+              </RTLEnabledText>
+              <SvgXml xml={Icons.Export} color={Colors.white} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </NavigationBarWrapper>
   )

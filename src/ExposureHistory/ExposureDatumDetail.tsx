@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
 
+import { displayNextSteps } from "../utils"
+
 import { ExposureDatum, Possible, NoKnown, NoData } from "../exposure"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { DateTimeUtils } from "../utils"
@@ -64,15 +66,12 @@ const PossibleExposureDetail = ({
             {explanationContent}
           </RTLEnabledText>
         </View>
-        <TouchableOpacity
-          testID={"exposure-history-next-steps-button"}
-          style={styles.nextStepsButton}
-          onPress={handleOnPressNextSteps}
-        >
-          <RTLEnabledText style={styles.nextStepsButtonText}>
-            {nextStepsButtonText}
-          </RTLEnabledText>
-        </TouchableOpacity>
+        {displayNextSteps() && (
+          <NextStepsButton
+            onPress={handleOnPressNextSteps}
+            buttonText={nextStepsButtonText}
+          />
+        )}
       </View>
     </>
   )
@@ -102,6 +101,25 @@ const NoKnownExposureDetail = ({
 
 interface NoDataExposureDetailProps {
   datum: NoData
+}
+
+interface NextStepsButtonProps {
+  buttonText: string
+  onPress: () => void
+}
+
+const NextStepsButton = ({ onPress, buttonText }: NextStepsButtonProps) => {
+  return (
+    <TouchableOpacity
+      testID={"exposure-history-next-steps-button"}
+      style={styles.nextStepsButton}
+      onPress={onPress}
+    >
+      <RTLEnabledText style={styles.nextStepsButtonText}>
+        {buttonText}
+      </RTLEnabledText>
+    </TouchableOpacity>
+  )
 }
 
 const NoDataExposureDetail = ({
