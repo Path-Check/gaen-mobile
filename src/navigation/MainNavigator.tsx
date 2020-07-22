@@ -21,15 +21,14 @@ const SCREEN_OPTIONS = {
 }
 
 const MainNavigator: FunctionComponent = () => {
-  const { isComplete } = useOnboardingContext()
-  const isOnboardingComplete = isComplete
+  const { onboardingIsComplete } = useOnboardingContext()
   const displayNextSteps =
     env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-        {isOnboardingComplete ? (
+        {onboardingIsComplete ? (
           <>
             <Stack.Screen name={"App"} component={MainTabNavigator} />
             <Stack.Screen

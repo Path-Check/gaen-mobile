@@ -7,39 +7,43 @@ import React, {
 
 import { StorageUtils } from "./utils"
 
-export const isOnboardingComplete = async (): Promise<boolean> => {
+export const onboardingHasBeenCompleted = async (): Promise<boolean> => {
   return await StorageUtils.getIsOnboardingComplete()
 }
 
-interface OnboardingContextState {
-  isComplete: boolean
-  setOnboardingIsComplete: () => void
+interface OnboardingProviderProps {
+  userHasCompletedOboarding: boolean
+}
+
+export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
+  children,
+  userHasCompletedOboarding,
+}) => {
+  const [onboardingIsComplete, setOnboardingIsComplete] = useState<boolean>(
+    userHasCompletedOboarding,
+  )
+
+  const setOnboardingToComplete = () => {
+    StorageUtils.setIsOnboardingComplete()
+    setOnboardingIsComplete(true)
+  }
+
+  return (
+    <OnboardingContext.Provider
+      value={{ onboardingIsComplete, setOnboardingToComplete }}
+    >
+      {children}
+    </OnboardingContext.Provider>
+  )
 }
 
 const OnboardingContext = createContext<OnboardingContextState | undefined>(
   undefined,
 )
 
-interface OnboardingProviderProps {
+interface OnboardingContextState {
   onboardingIsComplete: boolean
-}
-
-export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
-  children,
-  onboardingIsComplete,
-}) => {
-  const [isComplete, setIsComplete] = useState<boolean>(onboardingIsComplete)
-
-  const setOnboardingIsComplete = () => {
-    StorageUtils.setIsOnboardingComplete()
-    setIsComplete(true)
-  }
-
-  return (
-    <OnboardingContext.Provider value={{ isComplete, setOnboardingIsComplete }}>
-      {children}
-    </OnboardingContext.Provider>
-  )
+  setOnboardingToComplete: () => void
 }
 
 export const useOnboardingContext = (): OnboardingContextState => {
