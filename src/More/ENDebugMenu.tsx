@@ -10,7 +10,6 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
@@ -35,10 +34,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackPress)
     }
   }, [navigation])
-
-  const backToSettings = () => {
-    navigation.goBack()
-  }
 
   const showErrorAlert = (errorString: string) => {
     Alert.alert("Error", errorString, [{ text: "OK" }], {
@@ -95,7 +90,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }
 
   return (
-    <NavigationBarWrapper title={"EN Debug Menu"} onBackPress={backToSettings}>
+    <>
       {loading ? (
         <View style={{ flex: 1, justifyContent: "center" }}>
           <ActivityIndicator size={"large"} />
@@ -166,7 +161,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
           ) : null}
         </ScrollView>
       )}
-    </NavigationBarWrapper>
+    </>
   )
 }
 
