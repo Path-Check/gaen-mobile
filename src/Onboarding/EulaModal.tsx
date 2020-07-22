@@ -1,8 +1,9 @@
-import React, { useEffect, useState, FunctionComponent } from "react"
+import React, { useState, FunctionComponent } from "react"
 import {
   TouchableOpacity,
   Linking,
   Modal,
+  ActivityIndicator,
   StyleSheet,
   View,
   SafeAreaView,
@@ -10,17 +11,14 @@ import {
   Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import loadLocalResource from "react-native-local-resource"
 import WebView, { WebViewNavigation } from "react-native-webview"
 import { SvgXml } from "react-native-svg"
 
 import { Button, RTLEnabledText } from "../components"
-import en from "../locales/eula/en.html"
-import es_PR from "../locales/eula/es_PR.html"
-import ht from "../locales/eula/ht.html"
 
 import { Icons, Images } from "../assets"
 import { Spacing, Buttons, Colors, Typography, Forms } from "../styles"
+import { EULA_URL } from '../constants/eula';
 
 type CloseModalIconProps = {
   closeModal: () => void
@@ -77,15 +75,23 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
   )
 }
 
-const DEFAULT_EULA_URL = "about:blank"
+const Spinner = () => {
+  return (
+    <ActivityIndicator
+      size={'large'}
+      color={Colors.darkGray}
+      style={styles.activityIndicator}
+      testID={'loading-indicator'}
+    />
+  );
+};
 
-type AvailableLocale = "en" | "es_PR" | "ht"
-
-const EULA_FILES: Record<AvailableLocale, string> = {
-  ["en"]: en,
-  ["es_PR"]: es_PR,
-  ["ht"]: ht,
-}
+const eulaPicker = (selectedLocale: string): string => {
+  if (selectedLocale) {
+    return `${EULA_URL}/${selectedLocale}`;
+  }
+  return `${EULA_URL}/en`;
+};
 
 type EulaModalProps = {
   selectedLocale: string
@@ -98,18 +104,16 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
 }) => {
   const [modalVisible, setModalVisibility] = useState(false)
   const [boxChecked, toggleCheckbox] = useState(false)
-  const [html, setHtml] = useState<string | undefined>(undefined)
   const { t } = useTranslation()
 
-  // Pull the EULA in the correct language, with en as fallback
-  const eulaPath = EULA_FILES[selectedLocale as AvailableLocale] || en
+  const eulaPath = eulaPicker(selectedLocale)
 
   // Any links inside the EULA should launch a separate browser otherwise you can get stuck inside the app
   const shouldStartLoadWithRequestHandler = (
     webViewState: WebViewNavigation,
   ) => {
     let shouldLoadRequest = true
-    if (webViewState.url !== DEFAULT_EULA_URL) {
+    if (webViewState.url !== eulaPath) {
       // If the webpage to load isn't the EULA, load it in a separate browser
       Linking.openURL(webViewState.url)
       // Don't load the page if its being handled in a separate browser
@@ -117,14 +121,6 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
     }
     return shouldLoadRequest
   }
-
-  // Load the EULA from disk
-  useEffect(() => {
-    const loadEula = async () => {
-      setHtml(await loadLocalResource(eulaPath))
-    }
-    loadEula()
-  }, [selectedLocale, setHtml, eulaPath])
 
   const canContinue = boxChecked
 
@@ -145,15 +141,15 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
                 label={t("label.close_icon")}
                 closeModal={() => setModalVisibility(false)}
               />
-              {html && (
-                <WebView
-                  style={{ flex: 1 }}
-                  source={{ html }}
-                  onShouldStartLoadWithRequest={
-                    shouldStartLoadWithRequestHandler
-                  }
-                />
-              )}
+              <WebView
+                style={{ flex: 1 }}
+                source={{ uri: eulaPath }}
+                startInLoadingState
+                renderLoading={Spinner}
+                onShouldStartLoadWithRequest={
+                  shouldStartLoadWithRequestHandler
+                }
+              />
             </View>
           </SafeAreaView>
           <SafeAreaView style={{ backgroundColor: Colors.secondaryBlue }}>
@@ -224,6 +220,13 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     ...Forms.checkboxText,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
   },
 })
 
