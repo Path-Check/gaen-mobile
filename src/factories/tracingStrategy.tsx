@@ -12,6 +12,8 @@ export default Factory.define<TracingStrategy>(() => ({
     getLastDetectionDate: () => {
       return new Promise(() => null)
     },
+    getExposureKeys: () => new Promise(() => []),
+    submitDiagnosisKeys: () => new Promise(() => ""),
   },
   permissionStrategy: {
     statusSubscription: () => {

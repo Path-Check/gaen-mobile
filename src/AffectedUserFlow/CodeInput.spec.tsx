@@ -9,10 +9,22 @@ import * as API from "./verificationAPI"
 import * as NativeModule from "../gaen/nativeModule"
 import * as Hmac from "./hmac"
 import { Screens } from "../navigation"
+import { ExposureProvider } from "../ExposureContext"
 
 afterEach(cleanup)
 
 jest.mock("@react-navigation/native")
+jest.mock("../gaen", () => {
+  return {
+    exposureEventsStrategy: {
+      getExposureKeys: () => Promise.resolve([]),
+      submitDiagnosisKeys: () => Promise.resolve(""),
+      exposureInfoSubscription: () => ({ remove: () => {} }),
+      getLastDetectionDate: () => Promise.resolve({}),
+      getCurrentExposures: () => {},
+    },
+  }
+})
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 describe("CodeInputScreen", () => {
   it("initializes with an empty code form", () => {
@@ -63,9 +75,11 @@ describe("CodeInputScreen", () => {
       const code = "12345678"
 
       const { getByTestId, getByLabelText } = render(
-        <AffectedUserProvider>
-          <CodeInputScreen />
-        </AffectedUserProvider>,
+        <ExposureProvider>
+          <AffectedUserProvider>
+            <CodeInputScreen />
+          </AffectedUserProvider>
+        </ExposureProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), code)
       fireEvent.press(getByLabelText("Submit"))

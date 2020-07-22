@@ -7,10 +7,13 @@ import React, {
   useContext,
 } from "react"
 
-import { ExposureEventsStrategy } from "./tracingStrategy"
 import { ExposureInfo } from "./exposure"
+import gaenStrategy from "./gaen"
+import { ExposureKey } from "./exposureKey"
 
 type Posix = number
+const { exposureEventsStrategy } = gaenStrategy
+const { getExposureKeys, submitDiagnosisKeys } = exposureEventsStrategy
 
 interface ExposureState {
   exposureInfo: ExposureInfo
@@ -19,7 +22,9 @@ interface ExposureState {
   observeExposures: () => void
   resetExposures: () => void
   getCurrentExposures: () => void
+  getExposureKeys: () => Promise<ExposureKey[]>
   lastExposureDetectionDate: Posix | null
+  submitDiagnosisKeys: (certificate: string, hmac: string) => Promise<string>
 }
 
 const initialState = {
@@ -29,19 +34,14 @@ const initialState = {
   observeExposures: (): void => {},
   resetExposures: (): void => {},
   getCurrentExposures: (): void => {},
+  getExposureKeys,
+  submitDiagnosisKeys,
   lastExposureDetectionDate: null,
 }
 
 const ExposureContext = createContext<ExposureState>(initialState)
 
-interface ExposureProps {
-  exposureEventsStrategy: ExposureEventsStrategy
-}
-
-const ExposureProvider: FunctionComponent<ExposureProps> = ({
-  children,
-  exposureEventsStrategy,
-}) => {
+const ExposureProvider: FunctionComponent = ({ children }) => {
   const {
     exposureInfoSubscription,
     getLastDetectionDate,
@@ -59,14 +59,14 @@ const ExposureProvider: FunctionComponent<ExposureProps> = ({
     getLastDetectionDate().then((detectionDate) => {
       setLastExposureDetectionDate(detectionDate)
     })
-  }, [])
+  }, [getLastDetectionDate])
 
   const getCurrentExposures = useCallback(() => {
     const cb = (exposureInfo: ExposureInfo) => {
       setExposureInfo(exposureInfo)
     }
     exposureEventsStrategy.getCurrentExposures(cb)
-  }, [exposureEventsStrategy])
+  }, [])
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
@@ -103,6 +103,8 @@ const ExposureProvider: FunctionComponent<ExposureProps> = ({
         observeExposures,
         resetExposures,
         getCurrentExposures,
+        getExposureKeys,
+        submitDiagnosisKeys,
         lastExposureDetectionDate,
       }}
     >
