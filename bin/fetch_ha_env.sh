@@ -28,13 +28,13 @@ def fetch_env
   if !valid_token(token) then
     puts "No valid github token set"
     puts "Set a valid token in your .env file"
-    exit
+    exit 1
   end
 
   if !HA_LABEL then
     puts "No HA label provided"
     puts "provide a label as a parameter e.g. $ bin/fetch_ha_env.sh pc"
-    exit
+    exit 1
   end
 
   puts "...fetching .env for #{HA_LABEL}"
@@ -63,7 +63,7 @@ def fetch_and_write_file(filename, remote_url)
   open(filename, 'w') do |f|
     Open3.popen2e("curl", "-s", remote_url) do |_, stdout_and_err, wait_thr|
       stdout_and_err.each do |line|
-        f << line 
+        f << line
       end
       wait_thr.value
     end
@@ -71,7 +71,7 @@ def fetch_and_write_file(filename, remote_url)
   print "."
 end
 
-def valid_token(token) 
+def valid_token(token)
   token.length == 40
 end
 
