@@ -6,11 +6,9 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     btdebug: ".env.bt",
-    btstaging: ".env.bt.staging",
     btrelease: ".env.bt.release",
 
     gpsdebug: ".env.gps",
-    gpsstaging: ".env.gps.staging",
     gpsrelease: ".env.gps.release",
 ]
 
