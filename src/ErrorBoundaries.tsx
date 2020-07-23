@@ -22,10 +22,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render(): JSX.Element {
     return this.state.hasError ? (
-      <ErrorScreen
-        error={this.state.error}
-        resetError={this.resetError}
-      />
+      <ErrorScreen error={this.state.error} resetError={this.resetError} />
     ) : (
       this.props.children
     )

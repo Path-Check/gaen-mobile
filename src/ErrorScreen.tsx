@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react"
+import React, { FunctionComponent } from "react"
 import { SafeAreaView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { Button } from "./components/Button"
@@ -6,9 +6,9 @@ import { RTLEnabledText } from "./components/RTLEnabledText"
 
 import { Colors, Spacing, Typography } from "./styles"
 
-interface ErrorScreenProps { 
-  error: Error | string; 
-  resetError: () => void 
+interface ErrorScreenProps {
+  error: Error | string
+  resetError: () => void
 }
 
 export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
