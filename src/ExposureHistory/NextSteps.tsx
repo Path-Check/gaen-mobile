@@ -6,7 +6,6 @@ import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { Screens, useStatusBarEffect } from "../navigation"
 
 import { Buttons, Spacing, Typography } from "../styles"
@@ -16,22 +15,32 @@ import { Colors } from "../styles"
 
 const { GAEN_AUTHORITY_NAME: healthAuthorityName, AUTHORITY_ADVICE_URL } = env
 
+const CloseButton = () => {
+  const navigation = useNavigation()
+
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={styles.backIconContainer}
+    >
+      <SvgXml xml={Icons.Close} fill={Colors.quaternaryViolet} />
+    </TouchableOpacity>
+  )
+}
+
 const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  useStatusBarEffect("light-content")
+  useStatusBarEffect("dark-content")
 
-  const handleOnBackPress = () => {
-    navigation.goBack()
-  }
-
-  const footerText = t("exposure_history.next_steps.ha_self_assessment", {
-    healthAuthorityName,
-  })
+  const headerText = t("exposure_history.next_steps.maybe_exposed")
   const contentTextOne = t("exposure_history.next_steps.possible_crossed_paths")
   const contentTextTwo = t(
     "exposure_history.next_steps.possible_infection_precaution",
   )
+  const footerText = t("exposure_history.next_steps.ha_self_assessment", {
+    healthAuthorityName,
+  })
   const buttonText = t("exposure_history.next_steps.button_text")
 
   const handleOnPressTakeAssessment = () => {
@@ -41,9 +50,13 @@ const NextSteps = (): JSX.Element => {
   }
 
   return (
-    <NavigationBarWrapper title={"Next Steps"} onBackPress={handleOnBackPress}>
+    <>
+      <CloseButton />
       <View style={styles.container}>
         <View style={styles.headerContainer}>
+          <RTLEnabledText style={styles.headerText}>
+            {headerText}
+          </RTLEnabledText>
           <RTLEnabledText style={styles.contentText}>
             {contentTextOne}
           </RTLEnabledText>
@@ -66,7 +79,7 @@ const NextSteps = (): JSX.Element => {
           </TouchableOpacity>
         </View>
       </View>
-    </NavigationBarWrapper>
+    </>
   )
 }
 
@@ -81,6 +94,9 @@ const styles = StyleSheet.create({
   footerText: {
     ...Typography.footer,
     marginBottom: Spacing.medium,
+  },
+  headerText: {
+    ...Typography.header3,
   },
   contentText: {
     ...Typography.mainContent,
@@ -97,6 +113,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...Typography.buttonTextLight,
+  },
+  backIconContainer: {
+    marginTop: Spacing.medium,
+    padding: Spacing.medium,
+    alignItems: "flex-end",
   },
 })
 

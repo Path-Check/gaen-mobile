@@ -1,21 +1,21 @@
 import { fireEvent, render } from "@testing-library/react-native"
 import React from "react"
 
-import { Option } from "./Option"
+import { AssessmentOption } from "./AssessmentOption"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-describe("Option", () => {
+describe("AssessmentOption", () => {
   it("renders a checkbox option when the type is checkbox", () => {
     const onSelectSpy = jest.fn()
     const label = "label"
     const value = "value"
 
     const { getByTestId, getByText } = render(
-      <Option
+      <AssessmentOption
         index={0}
         onSelect={onSelectSpy}
         option={{
@@ -37,7 +37,7 @@ describe("Option", () => {
     const value = "value"
 
     const { getByText, getByTestId } = render(
-      <Option
+      <AssessmentOption
         index={0}
         onSelect={onSelectSpy}
         option={{
@@ -58,7 +58,7 @@ describe("Option", () => {
       const label = "label"
 
       const { getByText } = render(
-        <Option
+        <AssessmentOption
           index={0}
           onSelect={jest.fn()}
           option={{
@@ -73,7 +73,7 @@ describe("Option", () => {
 
     it("displays a date picker when the user taps on the option", () => {
       const { getByTestId, queryByTestId } = render(
-        <Option
+        <AssessmentOption
           index={0}
           onSelect={jest.fn()}
           option={{
@@ -101,7 +101,7 @@ describe("Option", () => {
         }/${todaysDate.getDate()}/${todaysDate.getFullYear()}`
 
         const { getByTestId, getByText } = render(
-          <Option
+          <AssessmentOption
             index={0}
             onSelect={onSelectSpy}
             option={{

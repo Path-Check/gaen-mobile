@@ -21,4 +21,4 @@ jobs:
       - name: upload english files
         run: yarn i18n:push
         env:
-          LOKALISE_TOKEN: ${{ secrets.LOKALISE_TOKEN }}
+          LOKALISE_READ_WRITE_TOKEN: ${{ secrets.LOKALISE_READ_WRITE_TOKEN }}
