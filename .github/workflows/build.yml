@@ -65,6 +65,9 @@ jobs:
       - name: Setup env
         run: ruby bin/fetch_ha_env_github.sh $ACCESS_TOKEN
 
+      - name: Install NDK
+          run: echo "y" | sudo /usr/local/lib/android/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+
       - name: Build android Staging artifact
         uses: maierj/fastlane-action@v1.4.0
         with:
