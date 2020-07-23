@@ -23,6 +23,10 @@
     "emergency_cta": "Call 911",
     "emergency_description": " Based on your reported symptoms, you should seek care immediately.",
     "emergency_title": "Call Emergency Services",
+    "experiencing_any_symptoms": "experiencing any of these symptoms",
+    "experiencing_symptoms": "experiencing at least one of these symptoms",
+    "i_am": "I am",
+    "i_am_not": "I am not",
     "isolate_cta": "Next",
     "isolate_description": "You have some symptoms that may be related to COVID-19. Call your healthcare provider if your symptoms get worse. Start home isolation.",
     "isolate_title": "Isolate Yourself",
@@ -89,9 +93,9 @@
       "today": "Today"
     },
     "next_steps": {
-      "maybe_exposed": "You may have been exposed to COVID-19",
       "button_text": "See Recommendations",
       "ha_self_assessment": "Follow the advice from {{healthAuthorityName}} about what to do next.",
+      "maybe_exposed": "You may have been exposed to COVID-19",
       "possible_crossed_paths": "Based on your location history, it is possible that you may have crossed paths with somebody who has been diagnosed with COVID-19.",
       "possible_infection_precaution": "This does not mean that you are infected, but you should take precautions anyway. People who don't exhibit symptoms can sometimes still be contagious."
     },
@@ -160,11 +164,10 @@
   },
   "screen_titles": {
     "about": "About",
-    "exposure_history": "Exposure History",
     "debug": "Debug",
-    "select_language": "Select Language",
+    "exposure_history": "Exposure History",
     "legal": "Legal",
-    "more_info": "More Info"
+    "select_language": "Select Language"
   },
   "settings": {
     "share_test_result": "Report Positive Test Result",
