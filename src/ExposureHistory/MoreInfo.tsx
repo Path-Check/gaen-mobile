@@ -1,30 +1,40 @@
-import React from "react"
-import { View, ScrollView, StyleSheet } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import React, { FunctionComponent } from "react"
+import { TouchableOpacity, View, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
+import { useNavigation } from "@react-navigation/native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { NavigationBarWrapper } from "../components/NavigationBarWrapper"
 import { useStatusBarEffect } from "../navigation"
+import { Icons } from "../assets"
 
-import { Spacing, Typography } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
-const MoreInfo = (): JSX.Element => {
-  const { t } = useTranslation()
+const CloseButton = () => {
   const navigation = useNavigation()
-  useStatusBarEffect("light-content")
-
-  const handleOnBackPress = () => {
-    navigation.goBack()
-  }
 
   return (
-    <NavigationBarWrapper
-      title={t("screen_titles.more_info")}
-      onBackPress={handleOnBackPress}
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={styles.backIconContainer}
     >
-      <ScrollView style={styles.container}>
-        <View style={styles.contentContainer}>
+      <SvgXml xml={Icons.Close} fill={Colors.quaternaryViolet} />
+    </TouchableOpacity>
+  )
+}
+
+const MoreInfo: FunctionComponent = () => {
+  const { t } = useTranslation()
+  useStatusBarEffect("dark-content")
+
+  return (
+    <>
+      <CloseButton />
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <View style={styles.section}>
           <RTLEnabledText style={styles.headerText}>
             {t("exposure_history.why_did_i_get_an_en")}
           </RTLEnabledText>
@@ -32,7 +42,7 @@ const MoreInfo = (): JSX.Element => {
             {t("exposure_history.bt.why_did_i_get_an_en_para")}
           </RTLEnabledText>
         </View>
-        <View style={styles.contentContainer}>
+        <View style={styles.section}>
           <RTLEnabledText style={styles.headerText}>
             {t("exposure_history.how_does_this_work")}
           </RTLEnabledText>
@@ -41,7 +51,7 @@ const MoreInfo = (): JSX.Element => {
           </RTLEnabledText>
         </View>
       </ScrollView>
-    </NavigationBarWrapper>
+    </>
   )
 }
 
@@ -49,15 +59,23 @@ const styles = StyleSheet.create({
   container: {
     padding: Spacing.medium,
   },
+  contentContainer: {
+    paddingBottom: Spacing.xLarge,
+  },
   headerText: {
     ...Typography.header3,
   },
-  contentContainer: {
+  section: {
     paddingBottom: Spacing.xLarge,
   },
   contentText: {
     ...Typography.mainContent,
     paddingTop: Spacing.small,
+  },
+  backIconContainer: {
+    marginTop: Spacing.medium,
+    padding: Spacing.medium,
+    alignItems: "flex-end",
   },
 })
 

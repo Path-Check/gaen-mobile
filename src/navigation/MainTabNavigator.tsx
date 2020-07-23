@@ -5,12 +5,9 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
-import MoreStack, {
-  determineTabBarVisibility,
-  MoreStackRoute,
-} from "./MoreStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeScreen from "../Home"
+import MoreStack from "./MoreStack"
 
 import { useExposureContext } from "../ExposureContext"
 import { displaySelfAssessment } from "../utils"
@@ -145,11 +142,10 @@ const MainTabNavigator: FunctionComponent = () => {
       <Tab.Screen
         name={Stacks.More}
         component={MoreStack}
-        options={({ route }) => ({
-          tabBarVisible: determineTabBarVisibility(route as MoreStackRoute),
+        options={{
           tabBarLabel: t("navigation.more"),
           tabBarIcon: MoreIcon,
-        })}
+        }}
       />
     </Tab.Navigator>
   )

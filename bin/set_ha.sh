@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Fetch the HA data and sets the display names on the ios and android builds
+# Fetch the HA data and configures the ios and android builds according to the provided HA.
 #
 # Usage
 #
@@ -22,4 +22,4 @@ HA_LABEL = ARGV[0]
 
 fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL}")
 
-fetching_env_succeeded && system("./bin/set_display_names.sh")
+fetching_env_succeeded && system("./bin/configure_builds.sh")
