@@ -5,8 +5,6 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
-import { displayNextSteps } from "../utils"
-
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Screens, useStatusBarEffect } from "../navigation"
 
@@ -15,7 +13,11 @@ import { Icons } from "../assets"
 
 import { Colors } from "../styles"
 
-const { GAEN_AUTHORITY_NAME: healthAuthorityName, AUTHORITY_ADVICE_URL } = env
+const {
+  GAEN_AUTHORITY_NAME: healthAuthorityName,
+  AUTHORITY_ADVICE_URL,
+  DISPLAY_SELF_ASSESSMENT,
+} = env
 
 const CloseButton = () => {
   const navigation = useNavigation()
@@ -34,6 +36,8 @@ const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   useStatusBarEffect("dark-content")
+  const displayNextSteps =
+    DISPLAY_SELF_ASSESSMENT === "true" || AUTHORITY_ADVICE_URL
 
   const headerText = t("exposure_history.next_steps.maybe_exposed")
   const contentTextOne = t("exposure_history.next_steps.possible_crossed_paths")
@@ -66,7 +70,7 @@ const NextSteps = (): JSX.Element => {
             {contentTextTwo}
           </RTLEnabledText>
         </View>
-        {displayNextSteps() && (
+        {displayNextSteps && (
           <View style={styles.buttonContainer}>
             <RTLEnabledText style={styles.footerText}>
               {footerText}

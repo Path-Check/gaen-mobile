@@ -3,8 +3,7 @@ import { TouchableOpacity, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
-
-import { displayNextSteps } from "../utils"
+import env from "react-native-config"
 
 import { ExposureDatum, Possible, NoKnown, NoData } from "../exposure"
 import { RTLEnabledText } from "../components/RTLEnabledText"
@@ -43,6 +42,8 @@ const PossibleExposureDetail = ({
   const exposureDurationText = DateTimeUtils.durationToString(duration)
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const displayNextSteps =
+    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL
   const exposureDate = dayjs(date).format("dddd, MMM DD")
   const exposureTime = t("exposure_datum.possible.duration", {
     duration: exposureDurationText,
@@ -66,7 +67,7 @@ const PossibleExposureDetail = ({
             {explanationContent}
           </RTLEnabledText>
         </View>
-        {displayNextSteps() && (
+        {displayNextSteps && (
           <NextStepsButton
             onPress={handleOnPressNextSteps}
             buttonText={nextStepsButtonText}

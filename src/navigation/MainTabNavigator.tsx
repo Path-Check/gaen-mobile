@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
@@ -10,7 +11,6 @@ import HomeScreen from "../Home"
 import MoreStack from "./MoreStack"
 
 import { useExposureContext } from "../ExposureContext"
-import { displaySelfAssessment } from "../utils"
 
 import { Screens, Stacks } from "./index"
 import * as Icons from "../assets/svgs/TabBarNav"
@@ -21,6 +21,7 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useExposureContext()
+  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const applyBadge = (icon: JSX.Element) => {
     return (
@@ -129,7 +130,7 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: CalendarIcon,
         }}
       />
-      {displaySelfAssessment() && (
+      {displaySelfAssessment && (
         <Tab.Screen
           name={Stacks.SelfAssessment}
           component={SelfAssessmentStack}
