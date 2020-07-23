@@ -6,16 +6,11 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     btdebug: ".env.bt",
+    btstaging: ".env.bt",
     btrelease: ".env.bt.release",
-
-    gpsdebug: ".env.gps",
-    gpsrelease: ".env.gps.release",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-
-import com.android.build.OutputFile
-
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -91,11 +86,8 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.js",
-    bundleInGpsDebug: false,
     bundleInBtDebug: false,
-    bundleInGpsStaging: true,
     bundleInBtStaging: true,
-    devDisabledInGpsStaging: true,
     devDisabledInBtStaging: true,
     enableHermes: false,  // clean and rebuild if changing
 ]
