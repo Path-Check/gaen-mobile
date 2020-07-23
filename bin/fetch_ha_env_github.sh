@@ -23,7 +23,10 @@ end
 
 def fetch_and_write_file(filename, remote_url)
   open(filename, 'w') do |f|
-    Open3.popen2e("curl", "-s", remote_url) do |_, stdout_and_err, wait_thr|
+    Open3.popen2e("curl", "-f", remote_url) do |_, stdout_and_err, wait_thr|
+      if wait_thr.value.exitstatus != 0
+        abort("Fetch failed")
+      end 
       stdout_and_err.each do |line|
         f << line 
       end
