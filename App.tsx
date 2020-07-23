@@ -8,7 +8,7 @@ import { TracingStrategyProvider } from "./src/TracingStrategyContext"
 import gaenStrategy from "./src/gaen"
 import {
   OnboardingProvider,
-  isOnboardingComplete,
+  onboardingHasBeenCompleted,
 } from "./src/OnboardingContext"
 
 const determineTracingStrategy = () => {
@@ -29,9 +29,9 @@ const App: FunctionComponent = () => {
   const [onboardingIsComplete, setOnboardingIsComplete] = useState(false)
 
   useEffect(() => {
-    isOnboardingComplete()
-      .then((isComplete) => {
-        setOnboardingIsComplete(isComplete)
+    onboardingHasBeenCompleted()
+      .then((onboardingHasBeenCompleted) => {
+        setOnboardingIsComplete(onboardingHasBeenCompleted)
       })
       .finally(() => {
         setIsLoading(false)
@@ -42,7 +42,7 @@ const App: FunctionComponent = () => {
   return (
     <>
       {!isLoading ? (
-        <OnboardingProvider onboardingIsComplete={onboardingIsComplete}>
+        <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
           <TracingStrategyProvider strategy={strategy}>
             <MainNavigator />
           </TracingStrategyProvider>
@@ -53,3 +53,4 @@ const App: FunctionComponent = () => {
 }
 
 export default App
+

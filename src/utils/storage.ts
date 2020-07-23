@@ -28,8 +28,8 @@ export async function setUserLocaleOverride(locale: string): Promise<void> {
 
 const ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
 export async function getIsOnboardingComplete(): Promise<boolean> {
-  const onBoardingComplete = await getStoreData(ONBOARDING_COMPLETE)
-  return onBoardingComplete === ONBOARDING_COMPLETE
+  const onboardingComplete = await getStoreData(ONBOARDING_COMPLETE)
+  return onboardingComplete === ONBOARDING_COMPLETE
 }
 
 export async function setIsOnboardingComplete(): Promise<void> {
