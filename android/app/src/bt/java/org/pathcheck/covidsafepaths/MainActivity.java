@@ -87,6 +87,7 @@ public class MainActivity extends ReactActivity {
             enabled -> {
               handleExposureStateChanged(enabled);
             });
+
   }
 
   public void showPermission(ApiException apiException) {
