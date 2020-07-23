@@ -1,29 +1,28 @@
-import React from "react"
+import React, { FunctionComponent, ReactNode } from "react"
 import {
   ImageBackground,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
+  ViewStyle,
+  ImageSourcePropType,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-/**
- * @typedef { import("react").ReactNode } ReactNode
- */
+const NO_IMAGE_BACKGROUND = 0
 
-/** @type {React.FunctionComponent<{
- *   ctaAction?: () => void;
- *   ctaColor?: string;
- *   ctaTitle?: string;
- *   description?: ReactNode;
- *   footer?: ReactNode;
- *   image: string;
- *   title: string;
- * }>} */
-export const Info = ({
+type AssessmentLayoutProps = {
+  backgroundColor: string
+  backgroundImage?: ImageSourcePropType
+  scrollStyle?: ViewStyle
+  footer: ReactNode
+  icon: string
+}
+
+const AssessmentLayout: FunctionComponent<AssessmentLayoutProps> = ({
   backgroundColor,
-  backgroundImage,
+  backgroundImage = NO_IMAGE_BACKGROUND,
   children,
   scrollStyle,
   footer,
@@ -31,8 +30,10 @@ export const Info = ({
 }) => {
   return (
     <SafeAreaView
-      backgroundColor={backgroundColor}
-      style={assessmentStyles.container}
+      style={{
+        ...assessmentStyles.container,
+        backgroundColor: backgroundColor,
+      }}
     >
       <ImageBackground
         source={backgroundImage}
@@ -72,3 +73,5 @@ export const assessmentStyles = StyleSheet.create({
     padding: 20,
   },
 })
+
+export { AssessmentLayout }
