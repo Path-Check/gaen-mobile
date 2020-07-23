@@ -93,7 +93,6 @@ public class MainActivity extends ReactActivity {
 
   /**
    * Called when opt-in resolution is completed by user.
-   *
    * <p>Modeled after {@code Activity#onActivityResult} as that's how the API sends callback to
    * apps.
    */
