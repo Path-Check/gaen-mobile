@@ -30,6 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.pathcheck.covidsafepaths.BuildConfig;
 import org.pathcheck.covidsafepaths.R;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class Uris {
         this.prefs = new ExposureNotificationSharedPreferences(context);
         // These two string resources must be set by gradle.properties.
         baseDownloadUri = Uri.parse(context.getString(R.string.key_server_download_base_uri));
-        baseDownloadUriTest = Uri.parse(context.getString(R.string.key_server_download_base_uri));
+        baseDownloadUriTest = Uri.parse(BuildConfig.DOWNLOAD_BASE_URL);
         uploadUri = Uri.parse(context.getString(R.string.key_server_upload_uri));
     }
 
