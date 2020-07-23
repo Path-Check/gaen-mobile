@@ -63,7 +63,7 @@ jobs:
         working-directory: ./android
 
       - name: Setup env
-        run: ruby bin/fetch_ha_env_github.sh 9560441ab20fccb089a00586ad712ab7cd5ece71
+        run: ruby bin/fetch_ha_env_github.sh ${{ secrets.ACCESS_TOKEN }}
 
       - name: Build android Staging artifact
         uses: maierj/fastlane-action@v1.4.0
