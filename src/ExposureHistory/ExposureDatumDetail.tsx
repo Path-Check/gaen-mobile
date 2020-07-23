@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { TouchableOpacity, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -109,7 +109,10 @@ interface NextStepsButtonProps {
   onPress: () => void
 }
 
-const NextStepsButton = ({ onPress, buttonText }: NextStepsButtonProps) => {
+const NextStepsButton: FunctionComponent<NextStepsButtonProps> = ({
+  onPress,
+  buttonText,
+}) => {
   return (
     <TouchableOpacity
       testID={"exposure-history-next-steps-button"}
