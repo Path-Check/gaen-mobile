@@ -42,8 +42,9 @@ const PossibleExposureDetail = ({
   const exposureDurationText = DateTimeUtils.durationToString(duration)
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const displayNextSteps =
-    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL
+  const displayNextSteps = Boolean(
+    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL,
+  )
   const exposureDate = dayjs(date).format("dddd, MMM DD")
   const exposureTime = t("exposure_datum.possible.duration", {
     duration: exposureDurationText,

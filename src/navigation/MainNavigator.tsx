@@ -22,8 +22,9 @@ const SCREEN_OPTIONS = {
 
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
-  const displayNextSteps =
-    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL
+  const displayNextSteps = Boolean(
+    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL,
+  )
 
   return (
     <NavigationContainer>
