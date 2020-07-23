@@ -92,7 +92,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   return (
     <>
       {loading ? (
-        <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={styles.loadingIndicator}>
           <ActivityIndicator size={"large"} />
         </View>
       ) : (
@@ -183,6 +183,10 @@ const styles = StyleSheet.create({
   },
   lastListItem: {
     borderBottomWidth: 0,
+  },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: "center",
   },
 })
 
