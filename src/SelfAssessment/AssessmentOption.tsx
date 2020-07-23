@@ -1,5 +1,11 @@
 import DateTimePicker from "@react-native-community/datetimepicker"
-import React, { Fragment, useEffect, useMemo, useState } from "react"
+import React, {
+  Fragment,
+  useEffect,
+  useMemo,
+  useState,
+  FunctionComponent,
+} from "react"
 
 import Option from "./Option"
 import { isPlatformAndroid, isPlatformiOS } from "../utils/index"
@@ -9,32 +15,39 @@ import {
   SCREEN_TYPE_RADIO,
 } from "./constants"
 
-/**
- * @typedef { import(".").SurveyAnswers } SurveyAnswers
- * @typedef { import(".").SurveyOption["values"][0] } SurveyOptionValue
- */
+type SelfAssessmentAnswer = {
+  index: number
+  value: string
+}
 
-/** @type {React.FunctionComponent<{
- *   answer?: SurveyAnswers[0][0];
- *   index: number;
- *   onSelect: (value: string) => void;
- *   option: SurveyOptionValue;
- *   selected: boolean;
- *   type: Extract<SurveyScreen, 'Checkbox' | 'Date' | 'Radio'>
- * }>} */
-export const AssessmentOption = ({
+type SelfAssessmentOption = {
+  description?: string
+  label: string
+  value: string
+}
+
+interface AssessmentOptionProps {
+  answer: SelfAssessmentAnswer
+  index: number
+  onSelect: (value: string) => void
+  option: SelfAssessmentOption
+  isSelected: boolean
+  optionType: string
+}
+
+const AssessmentOption: FunctionComponent<AssessmentOptionProps> = ({
   answer,
   index,
   onSelect,
   option,
   isSelected,
-  type,
+  optionType,
 }) => {
   // The API doesn't have a defined way to know a specific option is a date,
   // we just assume the first option is the date picker when type is SCREEN_TYPE_DATE
-  const isDateOption = type === SCREEN_TYPE_DATE && index === 0
+  const isDateOption = optionType === SCREEN_TYPE_DATE && index === 0
   const typeArray = [SCREEN_TYPE_CHECKBOX, SCREEN_TYPE_RADIO, SCREEN_TYPE_DATE]
-  const isValidType = typeArray.includes(type)
+  const isValidType = typeArray.includes(optionType)
   const [showDatePicker, setShowDatePicker] = useState(false)
 
   const [date, setDate] = useState(() =>
@@ -56,7 +69,7 @@ export const AssessmentOption = ({
 
   const handleOnPress = () => {
     if (isDateOption) {
-      let date = new Date()
+      const date = new Date()
       setDate(date)
       setShowDatePicker(true)
       if (isPlatformiOS()) onSelect(date.toDateString())
@@ -65,7 +78,7 @@ export const AssessmentOption = ({
     onSelect(option.value)
   }
 
-  const handleDateTimePickerSelect = (e, date) => {
+  const handleDateTimePickerSelect = (_event: Event, date?: Date) => {
     if (date) {
       if (isPlatformAndroid()) setShowDatePicker(false)
       onSelect(date.toDateString())
@@ -80,9 +93,8 @@ export const AssessmentOption = ({
         testID="option"
         isValidType={isValidType}
         isSelected={isSelected}
-        inputType={type}
+        inputType={optionType}
         title={label}
-        description={option.description}
       />
       {showDatePicker && (
         <DateTimePicker
@@ -92,9 +104,11 @@ export const AssessmentOption = ({
           onChange={handleDateTimePickerSelect}
           timeZoneOffsetInMinutes={0}
           testID="datepicker"
-          value={date}
+          value={date || new Date()}
         />
       )}
     </Fragment>
   )
 }
+
+export { AssessmentOption }
