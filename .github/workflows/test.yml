@@ -52,6 +52,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
+      - name: Set up Ruby 2.7
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
       - name: Cache ruby gems
         uses: actions/cache@v1
         with:
