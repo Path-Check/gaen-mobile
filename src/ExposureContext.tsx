@@ -15,7 +15,7 @@ type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
 const { getExposureKeys, submitDiagnosisKeys } = exposureEventsStrategy
 
-interface ExposureState {
+export interface ExposureState {
   exposureInfo: ExposureInfo
   hasBeenExposed: boolean
   userHasNewExposure: boolean
@@ -39,7 +39,7 @@ const initialState = {
   lastExposureDetectionDate: null,
 }
 
-const ExposureContext = createContext<ExposureState>(initialState)
+export const ExposureContext = createContext<ExposureState>(initialState)
 
 const ExposureProvider: FunctionComponent = ({ children }) => {
   const {

@@ -5,24 +5,12 @@ import { useNavigation } from "@react-navigation/native"
 
 import PublishConsentForm from "./PublishConsentForm"
 import { Screens } from "../../navigation"
-import { ExposureProvider } from "../../ExposureContext"
+import { ExposureContext } from "../../ExposureContext"
+import { factories } from "../../factories"
 
 afterEach(cleanup)
 
-let mockSubmitDiagnosis: jest.Mock | undefined
 jest.mock("@react-navigation/native")
-jest.mock("../../gaen", () => {
-  mockSubmitDiagnosis = jest.fn().mockResolvedValue("")
-  return {
-    exposureEventsStrategy: {
-      getExposureKeys: () => Promise.resolve([]),
-      submitDiagnosisKeys: mockSubmitDiagnosis,
-      exposureInfoSubscription: () => ({ remove: () => {} }),
-      getLastDetectionDate: () => Promise.resolve({}),
-      getCurrentExposures: () => {},
-    },
-  }
-})
 
 describe("PublishConsentScreen", () => {
   describe("when the provider has a valid hmac and certificate", () => {
@@ -33,17 +21,24 @@ describe("PublishConsentScreen", () => {
 
         const hmacKey = "hmacKey"
         const certificate = "certificate"
+        const submitDiagnosisKeysSpy = jest.fn().mockResolvedValue("")
+        const exposureContext = factories.exposureContext.build({
+          submitDiagnosisKeys: submitDiagnosisKeysSpy,
+        })
 
         const { getByLabelText } = render(
-          <ExposureProvider>
+          <ExposureContext.Provider value={exposureContext}>
             <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
-          </ExposureProvider>,
+          </ExposureContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("I understand and consent"))
 
         await wait(() => {
-          expect(mockSubmitDiagnosis).toHaveBeenCalledWith(certificate, hmacKey)
+          expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
+            certificate,
+            hmacKey,
+          )
           expect(navigateSpy).toHaveBeenCalledWith(Screens.AffectedUserComplete)
         })
       })
