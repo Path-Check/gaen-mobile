@@ -22,7 +22,9 @@ describe("AssessmentOption", () => {
           label,
           value,
         }}
-        type={SCREEN_TYPE_CHECKBOX}
+        optionType={SCREEN_TYPE_CHECKBOX}
+        isSelected={false}
+        answer={{ index: 1, value }}
       />,
     )
 
@@ -44,7 +46,9 @@ describe("AssessmentOption", () => {
           label,
           value,
         }}
-        type={SCREEN_TYPE_RADIO}
+        isSelected={false}
+        answer={{ index: 1, value }}
+        optionType={SCREEN_TYPE_RADIO}
       />,
     )
 
@@ -65,7 +69,9 @@ describe("AssessmentOption", () => {
             label,
             value: "Value",
           }}
-          type={SCREEN_TYPE_DATE}
+          optionType={SCREEN_TYPE_DATE}
+          isSelected={false}
+          answer={{ index: 1, value: "value" }}
         />,
       )
       expect(getByText("label")).toBeDefined()
@@ -80,7 +86,9 @@ describe("AssessmentOption", () => {
             label: "Label",
             value: "Value",
           }}
-          type={SCREEN_TYPE_DATE}
+          optionType={SCREEN_TYPE_DATE}
+          isSelected={false}
+          answer={{ index: 1, value: "value" }}
         />,
       )
 
@@ -108,7 +116,9 @@ describe("AssessmentOption", () => {
               label: "Label",
               value: "Value",
             }}
-            type={SCREEN_TYPE_DATE}
+            optionType={SCREEN_TYPE_DATE}
+            isSelected={false}
+            answer={{ index: 1, value: "value" }}
           />,
         )
 

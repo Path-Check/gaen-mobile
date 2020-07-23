@@ -18,6 +18,7 @@ interface OptionProps {
   inputType: string
   title: string
   onPress: () => void
+  testID?: string
 }
 
 const Option: FunctionComponent<OptionProps> = ({
@@ -26,9 +27,10 @@ const Option: FunctionComponent<OptionProps> = ({
   inputType,
   title,
   onPress,
+  testID,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} testID="option">
+    <TouchableOpacity onPress={onPress} testID={testID || "option"}>
       <View style={[styles.container, isSelected && styles.containerSelected]}>
         <OptionSelect
           wrapperStyle={styles.primary}
