@@ -13,7 +13,11 @@ import { Icons } from "../assets"
 
 import { Colors } from "../styles"
 
-const { GAEN_AUTHORITY_NAME: healthAuthorityName, AUTHORITY_ADVICE_URL } = env
+const {
+  GAEN_AUTHORITY_NAME: healthAuthorityName,
+  AUTHORITY_ADVICE_URL,
+  DISPLAY_SELF_ASSESSMENT,
+} = env
 
 const CloseButton = () => {
   const navigation = useNavigation()
@@ -32,6 +36,8 @@ const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   useStatusBarEffect("dark-content")
+  const displayNextSteps =
+    DISPLAY_SELF_ASSESSMENT === "true" || AUTHORITY_ADVICE_URL
 
   const headerText = t("exposure_history.next_steps.maybe_exposed")
   const contentTextOne = t("exposure_history.next_steps.possible_crossed_paths")
@@ -64,20 +70,22 @@ const NextSteps = (): JSX.Element => {
             {contentTextTwo}
           </RTLEnabledText>
         </View>
-        <View style={styles.buttonContainer}>
-          <RTLEnabledText style={styles.footerText}>
-            {footerText}
-          </RTLEnabledText>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleOnPressTakeAssessment}
-          >
-            <RTLEnabledText style={styles.buttonText}>
-              {buttonText}
+        {displayNextSteps && (
+          <View style={styles.buttonContainer}>
+            <RTLEnabledText style={styles.footerText}>
+              {footerText}
             </RTLEnabledText>
-            <SvgXml xml={Icons.Export} color={Colors.white} />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOnPressTakeAssessment}
+            >
+              <RTLEnabledText style={styles.buttonText}>
+                {buttonText}
+              </RTLEnabledText>
+              <SvgXml xml={Icons.Export} color={Colors.white} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </>
   )

@@ -4,6 +4,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
+import env from "react-native-config"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
@@ -21,6 +22,8 @@ const SCREEN_OPTIONS = {
 
 const MainNavigator: FunctionComponent = () => {
   const { isComplete } = useOnboardingContext()
+  const displayNextSteps =
+    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
@@ -39,11 +42,13 @@ const MainNavigator: FunctionComponent = () => {
           component={MoreInfo}
           options={{ ...TransitionPresets.ModalTransition }}
         />
-        <Stack.Screen
-          name={Screens.NextSteps}
-          component={NextSteps}
-          options={{ ...TransitionPresets.ModalTransition }}
-        />
+        {displayNextSteps && (
+          <Stack.Screen
+            name={Screens.NextSteps}
+            component={NextSteps}
+            options={{ ...TransitionPresets.ModalTransition }}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   )
