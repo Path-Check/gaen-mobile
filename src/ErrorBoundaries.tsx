@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ErrorFallbackComponent } from "./ErrorFallbackComponent"
+import { ErrorScreen } from "./ErrorScreen"
 
 type Props = {
   children: JSX.Element
@@ -22,7 +22,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render(): JSX.Element {
     return this.state.hasError ? (
-      <ErrorFallbackComponent
+      <ErrorScreen
         error={this.state.error}
         resetError={this.resetError}
       />

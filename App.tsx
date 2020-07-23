@@ -4,7 +4,7 @@ import env from "react-native-config"
 import "array-flat-polyfill"
 
 import MainNavigator from "./src/navigation/MainNavigator"
-import { ErrorBoundary } from "./src/ErrorBoundaries/ErrorBoundaries"
+import { ErrorBoundary } from "./src/ErrorBoundaries"
 import { TracingStrategyProvider } from "./src/TracingStrategyContext"
 import gaenStrategy from "./src/gaen"
 import {

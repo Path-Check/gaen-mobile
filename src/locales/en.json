@@ -379,7 +379,7 @@
     "more_info": "More Info"
   },
   "errors": {
-    "title": "Whoops!",
+    "title": "Unknown Error",
     "description": "An error has ocurred. Please reload the app.",
     "reload": "Reload"
   }
