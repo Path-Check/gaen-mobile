@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
+import { TouchableOpacity, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -9,9 +9,9 @@ import {
 } from "./constants"
 import { Info } from "./Info"
 import { InfoText } from "./InfoText"
-import { Button } from "../components/Button"
+import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import { Colors } from "../styles"
+import { Typography, Buttons, Colors } from "../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const EmergencyAssessment = ({ navigation }) => {
@@ -47,25 +47,47 @@ export const EmergencyAssessment = ({ navigation }) => {
   )
 }
 
+
 const ChoiceButtons = ({ agreePress, disagreePress }) => {
   const { t } = useTranslation()
 
+const experiencingSymptomsText = t("assessment.i_am") + " " + t("assessment.experiencing_some_symptoms")
+const notExperiencingSymptomsText = t("assessment.i_am_not") + " " + t("assessment.experiencing_any_symptoms")
+
   return (
     <View>
-      <Button
+      <TouchableOpacity
         onPress={agreePress}
-        label={t("assessment.experiencing_symptoms")}
+        accessible
+        accessibilityLabel={experiencingSymptomsText}
+        accessibilityRole="button"
         style={styles.button}
-        textStyle={styles.buttonText}
-      />
-      <View style={styles.disagreeButtonContainer}>
-        <Button
-          onPress={disagreePress}
-          label={t("assessment.not_experiencing_any_symptoms")}
-          style={styles.button}
-          textStyle={styles.buttonText}
-        />
-      </View>
+      >
+        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+          {t("assessment.i_am")}
+          <RTLEnabledText
+            style={{ ...styles.buttonText, ...styles.regularText }}
+          >
+            {t("assessment.experiencing_some_symptoms")}
+          </RTLEnabledText>
+        </RTLEnabledText>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={disagreePress}
+        accessible
+        accessibilityLabel={notExperiencingSymptomsText}
+        accessibilityRole="button"
+        style={{ ...styles.button, ...styles.disagreeButton }}
+      >
+        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+          {t("assessment.i_am_not")}
+          <RTLEnabledText
+            style={{ ...styles.buttonText, ...styles.regularText }}
+          >
+            {t("assessment.experiencing_any_symptoms")}
+          </RTLEnabledText>
+        </RTLEnabledText>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -125,12 +147,16 @@ const agreeOption = {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    ...Buttons.largeBlue,
   },
   buttonText: {
-    color: Colors.white,
+    ...Typography.buttonTextLight,
+    textAlign: "center",
   },
-  disagreeButtonContainer: {
-    paddingTop: 10,
+  boldText: {
+    ...Typography.extraBold,
+  },
+  disagreeButton: {
+    marginTop: 10,
   },
 })
