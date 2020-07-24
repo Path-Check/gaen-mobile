@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useExposureContext()
-  const displaySelfAssessment = true
+  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const applyBadge = (icon: JSX.Element) => {
     return (

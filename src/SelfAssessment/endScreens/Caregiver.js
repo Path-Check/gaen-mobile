@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { useTranslation } from "react-i18next"
-import {StyleSheet} from "react-native"
+import { StyleSheet } from "react-native"
 
 import { AssessmentNavigationContext } from "../Context"
 import { Info } from "../Info"

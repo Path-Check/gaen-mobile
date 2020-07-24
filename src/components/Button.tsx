@@ -19,7 +19,7 @@ interface ButtonProps {
   style?: ViewStyle
   textStyle?: TextStyle
   invert?: boolean
-  testID: string
+  testID?: string
 }
 
 export const Button = ({
@@ -89,4 +89,3 @@ const darkStyle = StyleSheet.create({
     opacity: 0.5,
   },
 })
-
