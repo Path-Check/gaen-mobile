@@ -7,5 +7,6 @@
   getAndPostDiagnosisKeys,
   resetExposures,
   toggleENAuthorization,
-  showLastProcessedFilePath
+  showLastProcessedFilePath,
+  fetchDebugLog
 }
