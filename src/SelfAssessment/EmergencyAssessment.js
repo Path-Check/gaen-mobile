@@ -1,5 +1,5 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
+import { TouchableOpacity, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -9,10 +9,9 @@ import {
 } from "./constants"
 import { Info } from "./Info"
 import { InfoText } from "./InfoText"
-import { Button } from "./Button"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
-import { Colors } from "../styles"
+import { Typography, Buttons, Colors } from "../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const EmergencyAssessment = ({ navigation }) => {
@@ -51,43 +50,45 @@ export const EmergencyAssessment = ({ navigation }) => {
 const ChoiceButtons = ({ agreePress, disagreePress }) => {
   const { t } = useTranslation()
 
-  const iAmLabel = `${t("assessment.i_am")} `
-  const iAmNotLabel = `${t("assessment.i_am_not")} `
+  const experiencingSymptomsText =
+    t("assessment.i_am") + " " + t("assessment.experiencing_some_symptoms")
+  const notExperiencingSymptomsText =
+    t("assessment.i_am_not") + " " + t("assessment.experiencing_any_symptoms")
 
   return (
     <View>
-      <Button
-        textStyle={styles.choiceTextStyle}
-        buttonStyle={styles.choiceButtonsStyle}
+      <TouchableOpacity
         onPress={agreePress}
-        title={
-          <RTLEnabledText style={styles.boldText}>
-            {iAmLabel}
-            <RTLEnabledText style={styles.regularText}>
-              {t("assessment.experiencing_symptoms")}
-            </RTLEnabledText>
+        accessible
+        accessibilityLabel={experiencingSymptomsText}
+        accessibilityRole="button"
+        style={styles.button}
+      >
+        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+          {t("assessment.i_am")}
+          <RTLEnabledText
+            style={{ ...styles.buttonText, ...styles.regularText }}
+          >
+            {t("assessment.experiencing_some_symptoms")}
           </RTLEnabledText>
-        }
-        backgroundColor={Colors.white}
-        textColor={Colors.black}
-      />
-      <View style={styles.disagreeButtonContainerStyle}>
-        <Button
-          textStyle={styles.choiceTextStyle}
-          buttonStyle={styles.choiceButtonsStyle}
-          onPress={disagreePress}
-          title={
-            <RTLEnabledText style={styles.boldText}>
-              {iAmNotLabel}
-              <RTLEnabledText style={styles.regularText}>
-                {t("assessment.experiencing_any_symptoms")}
-              </RTLEnabledText>
-            </RTLEnabledText>
-          }
-          backgroundColor={Colors.white}
-          textColor={Colors.black}
-        />
-      </View>
+        </RTLEnabledText>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={disagreePress}
+        accessible
+        accessibilityLabel={notExperiencingSymptomsText}
+        accessibilityRole="button"
+        style={{ ...styles.button, ...styles.disagreeButton }}
+      >
+        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+          {t("assessment.i_am_not")}
+          <RTLEnabledText
+            style={{ ...styles.buttonText, ...styles.regularText }}
+          >
+            {t("assessment.experiencing_any_symptoms")}
+          </RTLEnabledText>
+        </RTLEnabledText>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -146,21 +147,17 @@ const agreeOption = {
 }
 
 const styles = StyleSheet.create({
-  choiceTextStyle: {
-    textAlign: "left",
-    paddingHorizontal: 30,
+  button: {
+    ...Buttons.largeBlue,
   },
-  choiceButtonsStyle: {
-    borderWidth: 1,
-    borderColor: Colors.steelGray,
-  },
-  disagreeButtonContainerStyle: {
-    paddingTop: 10,
+  buttonText: {
+    ...Typography.buttonTextLight,
+    textAlign: "center",
   },
   boldText: {
-    fontWeight: "bold",
+    ...Typography.extraBold,
   },
-  regularText: {
-    fontWeight: "normal",
+  disagreeButton: {
+    marginTop: 10,
   },
 })

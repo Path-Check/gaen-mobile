@@ -19,6 +19,7 @@ interface ButtonProps {
   style?: ViewStyle
   textStyle?: TextStyle
   invert?: boolean
+  testID?: string
 }
 
 export const Button = ({
@@ -29,12 +30,13 @@ export const Button = ({
   style,
   textStyle,
   invert,
+  testID,
 }: ButtonProps): JSX.Element => {
   const styles = invert ? darkStyle : lightStyle
   const buttonTextStyle =
     disabled || loading
-      ? { ...styles.textDisabled, ...textStyle }
-      : { ...styles.textEnabled, ...textStyle }
+      ? { ...styles.text, ...styles.textDisabled, ...textStyle }
+      : { ...styles.text, ...styles.textEnabled, ...textStyle }
 
   return (
     <TouchableOpacity
@@ -44,6 +46,7 @@ export const Button = ({
       accessibilityRole="button"
       disabled={disabled || loading}
       style={[styles.button, style]}
+      testID={testID}
     >
       {loading ? (
         <ActivityIndicator size={"large"} />
@@ -59,6 +62,9 @@ const lightStyle = StyleSheet.create({
   button: {
     ...Buttons.largeWhite,
   },
+  text: {
+    textAlign: "center",
+  },
   textEnabled: {
     ...Typography.buttonTextDark,
   },
@@ -71,6 +77,9 @@ const lightStyle = StyleSheet.create({
 const darkStyle = StyleSheet.create({
   button: {
     ...Buttons.largeBlue,
+  },
+  text: {
+    textAlign: "center",
   },
   textEnabled: {
     ...Typography.buttonTextLight,

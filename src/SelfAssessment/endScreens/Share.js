@@ -1,10 +1,11 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import env from "react-native-config"
+import { StyleSheet } from "react-native"
 
 import { Info } from "../Info"
 import { InfoText } from "../InfoText"
-import { Button } from "../Button"
+import { Button } from "../../components/Button"
 
 import { Icons } from "../../assets"
 import { Colors } from "../../styles"
@@ -25,9 +26,10 @@ export const Share = ({ navigation }) => {
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t("assessment.share_cta")}
-          backgroundColor={Colors.white}
-          textColor={Colors.black}
+          label={t("assessment.share_cta")}
+          style={styles.button}
+          textStyle={styles.buttonText}
+          testID="assessment-button"
         />
       }
     >
@@ -38,3 +40,12 @@ export const Share = ({ navigation }) => {
     </Info>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.secondaryViolet,
+  },
+  buttonText: {
+    color: Colors.white,
+  },
+})
