@@ -1,10 +1,18 @@
 package covidsafepaths.bt.exposurenotifications;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.IntentSender;
 
+import androidx.annotation.Nullable;
+
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureInformation;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
+import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.ExposureSummary;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.android.gms.tasks.Task;
@@ -13,6 +21,11 @@ import java.io.File;
 import java.util.List;
 
 import covidsafepaths.bt.exposurenotifications.nearby.ExposureConfigurations;
+import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
+import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
+import covidsafepaths.bt.exposurenotifications.utils.Util;
+
+import static covidsafepaths.bt.exposurenotifications.utils.CallbackMessages.EN_STATUS_EVENT;
 
 /**
  * Wrapper around {@link com.google.android.gms.nearby.Nearby} APIs.
@@ -36,12 +49,51 @@ public class ExposureNotificationClientWrapper {
         config = new ExposureConfigurations(context);
     }
 
-    public Task<Void> start() {
-        return exposureNotificationClient.start();
+    public Task<Void> start(ReactContext context) {
+        return exposureNotificationClient.start()
+                .addOnSuccessListener(unused -> {
+                    onExposureNotificationStateChanged(context, true);
+                })
+                .addOnFailureListener(exception -> {
+                    onExposureNotificationStateChanged(context, false);
+                    if (!(exception instanceof ApiException)) {
+                        return;
+                    }
+
+                    ApiException apiException = (ApiException) exception;
+                    if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+                        Activity activity = context.getCurrentActivity();
+                        if (activity != null) {
+                            showPermissionDialog(activity, apiException);
+                        }
+                    }
+                })
+                .addOnCanceledListener(() -> {
+                    onExposureNotificationStateChanged(context, false);
+                });
     }
 
-    public Task<Void> stop() {
-        return exposureNotificationClient.stop();
+    public void showPermissionDialog(Activity activity, ApiException apiException) {
+        try {
+            apiException
+                    .getStatus()
+                    .startResolutionForResult(activity, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
+        } catch (IntentSender.SendIntentException e) {
+
+        }
+    }
+
+    public Task<Void> stop(ReactContext context) {
+        return exposureNotificationClient.stop()
+                .addOnSuccessListener(unused -> {
+                    onExposureNotificationStateChanged(context, false);
+                })
+                .addOnFailureListener(exception -> {
+                    onExposureNotificationStateChanged(context, true);
+                })
+                .addOnCanceledListener(() -> {
+                    onExposureNotificationStateChanged(context, true);
+                });
     }
 
     public Task<Boolean> isEnabled() {
@@ -75,4 +127,17 @@ public class ExposureNotificationClientWrapper {
         return exposureNotificationClient.getExposureInformation(token);
     }
 
+    public void onExposureNotificationStateChanged(@Nullable ReactContext context, boolean enabled) {
+        if (enabled) {
+            ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(context);
+        } else {
+            ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(context);
+        }
+
+        if (context != null) {
+            context
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(EN_STATUS_EVENT, Util.getEnStatusWritableArray(enabled));
+        }
+    }
 }

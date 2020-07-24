@@ -1,5 +1,6 @@
 package covidsafepaths.bt.exposurenotifications;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import androidx.work.WorkManager;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
@@ -26,7 +28,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import org.pathcheck.covidsafepaths.MainActivity;
 
 import javax.annotation.Nonnull;
 
@@ -43,8 +44,6 @@ import static covidsafepaths.bt.exposurenotifications.nearby.StateUpdatedWorker.
 
 @ReactModule(name = MODULE_NAME)
 public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
-    private static ReactApplicationContext reactContext;
-
     public static final String MODULE_NAME = "ENPermissionsModule";
     public static final String TAG = "ENModule";
     private static final String EXPOSURE_ALERT_EVENT = "ExposureAlertEvent";
@@ -55,7 +54,6 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
     public ExposureNotificationsModule(ReactApplicationContext context) {
         super(context);
-        reactContext = context;
         exposureNotificationClient = Nearby.getExposureNotificationClient(context);
         shareDiagnosisManager = new ShareDiagnosisManager(context);
         // TODO keep or discard config wrapper class? where will attenuation thresholds be set?
@@ -74,37 +72,36 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void requestExposureNotificationAuthorization(final Callback callback) {
-        ExposureNotificationClientWrapper.get(getReactApplicationContext())
-                .start()
-                .addOnSuccessListener(
-                        unused -> {
-                            callback.invoke(CallbackMessages.GENERIC_SUCCESS);
-                        })
-                .addOnFailureListener(
-                        exception -> {
-                            if (!(exception instanceof ApiException)) {
-                                callback.invoke(CallbackMessages.ERROR_UNKNOWN);
-                                return;
-                            }
-                            ApiException apiException = (ApiException) exception;
-                            if (apiException.getStatusCode()
-                                    == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-                                callback.invoke(CallbackMessages.GENERIC_SUCCESS);
-                                MainActivity mainActivity = (MainActivity) reactContext.getCurrentActivity();
-                                mainActivity.showPermission(apiException);
-
-                            } else {
-                                callback.invoke(apiException.getStatus().toString());
-                            }
-                        })
+        ReactContext reactContext = getReactApplicationContext();
+        ExposureNotificationClientWrapper exposureNotificationClient = ExposureNotificationClientWrapper.get(reactContext);
+        exposureNotificationClient.start(reactContext)
+                .addOnSuccessListener(unused -> {
+                    callback.invoke(CallbackMessages.GENERIC_SUCCESS);
+                })
+                .addOnFailureListener(exception -> {
+                    if (!(exception instanceof ApiException)) {
+                        callback.invoke(CallbackMessages.ERROR_UNKNOWN);
+                        return;
+                    }
+                    ApiException apiException = (ApiException) exception;
+                    if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+                        callback.invoke(CallbackMessages.GENERIC_SUCCESS);
+                        Activity activity = getCurrentActivity();
+                        if (activity != null) {
+                            exposureNotificationClient.showPermissionDialog(activity, apiException);
+                        }
+                    } else {
+                        callback.invoke(apiException.getStatus().toString());
+                    }
+                })
                 .addOnCanceledListener(() -> {
-                        callback.invoke(CallbackMessages.CANCELLED);
+                    callback.invoke(CallbackMessages.CANCELLED);
                 });
     }
 
     @ReactMethod
     public void getCurrentENPermissionsStatus(final Callback callback) {
-        ExposureNotificationClientWrapper.get(reactContext.getCurrentActivity())
+        ExposureNotificationClientWrapper.get(getReactApplicationContext())
                 .isEnabled().addOnSuccessListener(
                 enabled -> {
                     callback.invoke(Util.getEnStatusWritableArray(enabled));
@@ -147,7 +144,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
      * Schedule daily provision of keys from server to GAEN
      */
     private void scheduleDailyProvideDiagnosisKeys() {
-        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(reactContext);
+        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(getReactApplicationContext());
     }
 
     /**
@@ -170,7 +167,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
      * Cancel daily provision of keys from server to GAEN
      */
     private void cancelDailyProvideDiagnosisKeys() {
-        ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(reactContext);
+        ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(getReactApplicationContext());
     }
 
     /**
@@ -209,7 +206,8 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
     // TODO what should this be called and what data should it contain?
     private void alertExposed() {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+        getReactApplicationContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(EXPOSURE_ALERT_EVENT, null);
     }
 

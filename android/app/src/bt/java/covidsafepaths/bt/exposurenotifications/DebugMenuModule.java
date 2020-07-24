@@ -1,10 +1,12 @@
 package covidsafepaths.bt.exposurenotifications;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
@@ -28,15 +30,12 @@ import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
 
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
-    private static ReactApplicationContext reactContext;
-
     static final String MODULE_NAME = "DebugMenuModule";
 
     private final ShareDiagnosisManager shareDiagnosisManager;
 
     public DebugMenuModule(ReactApplicationContext context) {
         super(context);
-        reactContext = context;
         shareDiagnosisManager = new ShareDiagnosisManager(context);
     }
 
@@ -48,8 +47,10 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void submitExposureKeys() {
-        MainActivity mainActivity = (MainActivity) reactContext.getCurrentActivity();
-        mainActivity.share();
+        Activity activity = getCurrentActivity();
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).share();
+        }
     }
 
     /**
@@ -93,11 +94,11 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void detectExposuresNow(Callback callback) {
-        ExposureNotificationClientWrapper.get(reactContext.getCurrentActivity())
+        ExposureNotificationClientWrapper.get(getReactApplicationContext())
                 .isEnabled().addOnSuccessListener(
                 enabled -> {
                     if (enabled) {
-                        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(reactContext);
+                        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(getReactApplicationContext());
                         callback.invoke(null, CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
                     } else {
                         callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED, null);
@@ -116,15 +117,16 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void toggleExposureNotifications(Promise promise) {
-        ExposureNotificationClientWrapper exposureNotificationsClient = ExposureNotificationClientWrapper.get(reactContext.getCurrentActivity());
+        ReactContext reactContext = getReactApplicationContext();
+        ExposureNotificationClientWrapper exposureNotificationsClient = ExposureNotificationClientWrapper.get(reactContext);
         exposureNotificationsClient.isEnabled()
                 .addOnSuccessListener(enabled -> {
                     if (enabled) {
-                        exposureNotificationsClient.stop()
+                        exposureNotificationsClient.stop(reactContext)
                                 .addOnSuccessListener(promise::resolve)
                                 .addOnFailureListener(promise::reject);
                     } else {
-                        exposureNotificationsClient.start()
+                        exposureNotificationsClient.start(reactContext)
                                 .addOnSuccessListener(promise::resolve)
                                 .addOnFailureListener(promise::reject);
                     }
