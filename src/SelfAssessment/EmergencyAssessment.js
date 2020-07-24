@@ -47,12 +47,13 @@ export const EmergencyAssessment = ({ navigation }) => {
   )
 }
 
-
 const ChoiceButtons = ({ agreePress, disagreePress }) => {
   const { t } = useTranslation()
 
-const experiencingSymptomsText = t("assessment.i_am") + " " + t("assessment.experiencing_some_symptoms")
-const notExperiencingSymptomsText = t("assessment.i_am_not") + " " + t("assessment.experiencing_any_symptoms")
+  const experiencingSymptomsText =
+    t("assessment.i_am") + " " + t("assessment.experiencing_some_symptoms")
+  const notExperiencingSymptomsText =
+    t("assessment.i_am_not") + " " + t("assessment.experiencing_any_symptoms")
 
   return (
     <View>
