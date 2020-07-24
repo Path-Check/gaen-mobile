@@ -1,40 +1,30 @@
 package covidsafepaths.bt.exposurenotifications;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
-import com.google.common.collect.ImmutableList;
-import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.pathcheck.covidsafepaths.MainActivity;
-import org.pathcheck.covidsafepaths.R;
-import org.threeten.bp.Duration;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nonnull;
 
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
-import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.debug.DebugExposureNotificationUtils;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
-import covidsafepaths.bt.exposurenotifications.network.DiagnosisKey;
-import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
 import covidsafepaths.bt.exposurenotifications.notify.ShareDiagnosisManager;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
-import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
@@ -106,7 +96,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
         ExposureNotificationClientWrapper.get(reactContext.getCurrentActivity())
                 .isEnabled().addOnSuccessListener(
                 enabled -> {
-                    if(enabled) {
+                    if (enabled) {
                         ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(reactContext);
                         callback.invoke(null, CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
                     } else {
@@ -122,5 +112,23 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                                 callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR + apiException.getStatus().toString(), null);
                             }
                         });
+    }
+
+    @ReactMethod
+    public void toggleExposureNotifications(Promise promise) {
+        ExposureNotificationClientWrapper exposureNotificationsClient = ExposureNotificationClientWrapper.get(reactContext.getCurrentActivity());
+        exposureNotificationsClient.isEnabled()
+                .addOnSuccessListener(enabled -> {
+                    if (enabled) {
+                        exposureNotificationsClient.stop()
+                                .addOnSuccessListener(promise::resolve)
+                                .addOnFailureListener(promise::reject);
+                    } else {
+                        exposureNotificationsClient.start()
+                                .addOnSuccessListener(promise::resolve)
+                                .addOnFailureListener(promise::reject);
+                    }
+                })
+                .addOnFailureListener(promise::reject);
     }
 }
