@@ -1,19 +1,22 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
-import { InfoText } from "./InfoText"
+import InfoText from "./InfoText"
 import { Button } from "../components/Button"
 import { AssessmentLayout } from "./AssessmentLayout"
 
 import { Colors } from "../styles"
 import { Icons, Images } from "../assets"
 
-/** @type {React.FunctionComponent<{}>} */
-export const AssessmentStart = ({ navigation }) => {
-  let { t } = useTranslation()
+const AssessmentStart: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
 
-  const handleButtonPress = () => navigation.push("Agreement")
+  const handleButtonPress = () => {
+    navigation.navigate("Agreement")
+  }
 
   return (
     <AssessmentLayout
@@ -45,3 +48,5 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
 })
+
+export default AssessmentStart

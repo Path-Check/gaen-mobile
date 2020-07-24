@@ -1,11 +1,16 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Typography } from "../styles"
 
-export const InfoText = ({ title, description }) => {
+interface InfoTextProps {
+  title: string
+  description: string
+}
+
+const InfoText: FunctionComponent<InfoTextProps> = ({ title, description }) => {
   return (
     <>
       <RTLEnabledText style={styles.titleContent}>{title}</RTLEnabledText>
@@ -28,3 +33,5 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
 })
+
+export default InfoText
