@@ -7,7 +7,7 @@ import {
 import { ENPermissionStatus } from "../PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../More/ENLocalDiagnosisKeyScreen"
-import { ExposureKey } from "../AffectedUserFlow/exposureKey"
+import { ExposureKey } from "../exposureKey"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 

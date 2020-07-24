@@ -1,10 +1,10 @@
 import { PermissionStrategy } from "./PermissionsContext"
 import { ExposureInfo } from "./exposure"
+import { ExposureKey } from "./exposureKey"
 
 type Posix = number
 
 export interface TracingStrategy {
-  name: string
   exposureEventsStrategy: ExposureEventsStrategy
   permissionStrategy: PermissionStrategy
 }
@@ -17,4 +17,6 @@ export interface ExposureEventsStrategy {
   exposureInfoSubscription: ExposureInfoSubscription
   getCurrentExposures: (cb: (exposureInfo: ExposureInfo) => void) => void
   getLastDetectionDate: () => Promise<Posix | null>
+  getExposureKeys: () => Promise<ExposureKey[]>
+  submitDiagnosisKeys: (certificate: string, hmacKey: string) => Promise<string>
 }

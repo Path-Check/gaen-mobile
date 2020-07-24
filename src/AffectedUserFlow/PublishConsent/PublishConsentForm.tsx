@@ -14,11 +14,11 @@ import { useNavigation } from "@react-navigation/native"
 
 import { Button } from "../../components/Button"
 import { RTLEnabledText } from "../../components/RTLEnabledText"
-import * as BTNativeModule from "../../gaen/nativeModule"
 
 import { Screens, Stacks } from "../../navigation"
 import { Icons, Images } from "../../assets"
 import { Colors, Spacing, Buttons, Iconography, Typography } from "../../styles"
+import { useExposureContext } from "../../ExposureContext"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -29,13 +29,14 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   hmacKey,
   certificate,
 }) => {
+  const strategy = useExposureContext()
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
     try {
-      await BTNativeModule.submitDiagnosisKeys(certificate, hmacKey)
+      await strategy.submitDiagnosisKeys(certificate, hmacKey)
       setIsLoading(false)
       navigation.navigate(Screens.AffectedUserComplete)
     } catch (e) {

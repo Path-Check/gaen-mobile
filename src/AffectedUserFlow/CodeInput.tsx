@@ -17,7 +17,6 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useAffectedUserContext } from "./AffectedUserContext"
 import * as API from "./verificationAPI"
-import * as NativeModule from "../gaen/nativeModule"
 import { calculateHmac } from "./hmac"
 
 import { Screens, Stacks } from "../navigation"
@@ -30,6 +29,7 @@ import {
   Outlines,
   Typography,
 } from "../styles"
+import { useExposureContext } from "../ExposureContext"
 
 const defaultErrorMessage = " "
 
@@ -44,6 +44,7 @@ const CodeInputScreen = (): JSX.Element => {
   } = useAffectedUserContext()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
+  const strategy = useExposureContext()
 
   const isIOS = Platform.OS === "ios"
   const codeLength = 8
@@ -65,7 +66,7 @@ const CodeInputScreen = (): JSX.Element => {
 
       if (response.kind === "success") {
         const token = response.body.token
-        const exposureKeys = await NativeModule.getExposureKeys()
+        const exposureKeys = await strategy.getExposureKeys()
         const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
 
         const certResponse = await API.postTokenAndHmac(token, hmacDigest)

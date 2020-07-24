@@ -1,28 +1,14 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import SplashScreen from "react-native-splash-screen"
-import env from "react-native-config"
 import "array-flat-polyfill"
 
 import MainNavigator from "./src/navigation/MainNavigator"
-import { TracingStrategyProvider } from "./src/TracingStrategyContext"
-import gaenStrategy from "./src/gaen"
+import { ExposureProvider } from "./src/ExposureContext"
 import {
   OnboardingProvider,
   onboardingHasBeenCompleted,
 } from "./src/OnboardingContext"
-
-const determineTracingStrategy = () => {
-  switch (env.TRACING_STRATEGY) {
-    case "bt": {
-      return gaenStrategy
-    }
-    default: {
-      throw new Error("Unsupported Tracing Strategy")
-    }
-  }
-}
-
-const strategy = determineTracingStrategy()
+import { PermissionsProvider } from "./src/PermissionsContext"
 
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -43,9 +29,11 @@ const App: FunctionComponent = () => {
     <>
       {!isLoading ? (
         <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
-          <TracingStrategyProvider strategy={strategy}>
-            <MainNavigator />
-          </TracingStrategyProvider>
+          <PermissionsProvider>
+            <ExposureProvider>
+              <MainNavigator />
+            </ExposureProvider>
+          </PermissionsProvider>
         </OnboardingProvider>
       ) : null}
     </>

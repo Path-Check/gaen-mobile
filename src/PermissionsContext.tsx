@@ -15,10 +15,12 @@ import { PermissionStatus, statusToEnum } from "./permissionStatus"
 
 type ENEnablement = `DISABLED` | `ENABLED`
 type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
+import gaenStrategy from "./gaen"
 
 export type ENPermissionStatus = [ENAuthorization, ENEnablement]
 
 const initialENStatus: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
+const { permissionStrategy } = gaenStrategy
 
 interface PermissionContextState {
   notification: {
@@ -56,14 +58,7 @@ export interface PermissionStrategy {
   request: (cb: (response: string) => void) => void
 }
 
-interface PermissionsProviderProps {
-  permissionStrategy: PermissionStrategy
-}
-
-const PermissionsProvider: FunctionComponent<PermissionsProviderProps> = ({
-  children,
-  permissionStrategy,
-}) => {
+const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [
     exposureNotificationsPermission,
     setExposureNotificationsPermission,
@@ -100,7 +95,7 @@ const PermissionsProvider: FunctionComponent<PermissionsProviderProps> = ({
     return () => {
       subscription?.remove()
     }
-  }, [permissionStrategy, checkENPermission])
+  }, [checkENPermission])
 
   const checkNotificationPermission = async () => {
     const { status } = await checkNotifications()
