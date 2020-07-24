@@ -29,6 +29,7 @@ export const Share = ({ navigation }) => {
           label={t("assessment.share_cta")}
           style={styles.button}
           textStyle={styles.buttonText}
+          testID="assessment-button"
         />
       }
     >

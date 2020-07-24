@@ -12,8 +12,8 @@ import { Colors } from "../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Isolate = ({ navigation }) => {
-  let { t } = useTranslation()
-  let { completeRoute } = useContext(AssessmentNavigationContext)
+  const { t } = useTranslation()
+  const { completeRoute } = useContext(AssessmentNavigationContext)
 
   const handleButtonPress = () => navigation.push(completeRoute)
 
@@ -28,6 +28,7 @@ export const Isolate = ({ navigation }) => {
           label={t("assessment.isolate_cta")}
           style={styles.button}
           textStyle={styles.buttonText}
+          testID="assessment-button"
         />
       }
     >

@@ -26,6 +26,7 @@ export const AssessmentComplete = () => {
           label={t("assessment.complete_cta")}
           style={styles.button}
           textStyle={styles.buttonText}
+          testID="assessment-button"
         />
       }
     >

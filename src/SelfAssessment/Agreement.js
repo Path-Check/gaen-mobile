@@ -38,10 +38,7 @@ export const Agreement = ({ navigation }) => {
 
 const AgreementFooter = ({ description, onPress, buttonTitle }) => (
   <>
-    <Button
-      onPress={onPress}
-      label={buttonTitle}
-    />
+    <Button onPress={onPress} label={buttonTitle} />
     <RTLEnabledText style={styles.typographyStyle}>
       {description}
     </RTLEnabledText>

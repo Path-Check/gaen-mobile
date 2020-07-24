@@ -1,5 +1,5 @@
 import React from "react"
-import {StyleSheet} from "react-native"
+import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { InfoText } from "./InfoText"
@@ -21,7 +21,12 @@ export const AssessmentStart = ({ navigation }) => {
       backgroundImage={Images.EmptyPathBackground}
       icon={Icons.SelfAssessment}
       footer={
-        <Button onPress={handleButtonPress} label={t("assessment.start_cta")} style={styles.button} textStyle={styles.text}/>
+        <Button
+          onPress={handleButtonPress}
+          label={t("assessment.start_cta")}
+          style={styles.button}
+          textStyle={styles.text}
+        />
       }
     >
       <InfoText
@@ -38,5 +43,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.white,
-  }
+  },
 })

@@ -14,7 +14,7 @@ export const Emergency = () => {
   let { t } = useTranslation()
 
   // TODO: This would need to be localized per country
-  const handleOnPress= () => Linking.openURL("tel://911")
+  const handleOnPress = () => Linking.openURL("tel://911")
 
   return (
     <Info
@@ -27,6 +27,7 @@ export const Emergency = () => {
           label={t("assessment.emergency_cta")}
           style={styles.button}
           textStyle={styles.buttonText}
+          testID="assessment-button"
         />
       }
     >
@@ -37,7 +38,6 @@ export const Emergency = () => {
     </Info>
   )
 }
-
 
 const styles = StyleSheet.create({
   containerItemsAlignment: {
