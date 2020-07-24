@@ -9,8 +9,7 @@ import {
 } from "./constants"
 import { Info } from "./Info"
 import { InfoText } from "./InfoText"
-import { Button } from "./Button"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { Button } from "../components/Button"
 
 import { Colors } from "../styles"
 
@@ -51,41 +50,20 @@ export const EmergencyAssessment = ({ navigation }) => {
 const ChoiceButtons = ({ agreePress, disagreePress }) => {
   const { t } = useTranslation()
 
-  const iAmLabel = `${t("assessment.i_am")} `
-  const iAmNotLabel = `${t("assessment.i_am_not")} `
-
   return (
     <View>
       <Button
-        textStyle={styles.choiceTextStyle}
-        buttonStyle={styles.choiceButtonsStyle}
         onPress={agreePress}
-        title={
-          <RTLEnabledText style={styles.boldText}>
-            {iAmLabel}
-            <RTLEnabledText style={styles.regularText}>
-              {t("assessment.experiencing_symptoms")}
-            </RTLEnabledText>
-          </RTLEnabledText>
-        }
-        backgroundColor={Colors.white}
-        textColor={Colors.black}
+        label={t("assessment.experiencing_symptoms")}
+        style={styles.button}
+        textStyle={styles.buttonText}
       />
-      <View style={styles.disagreeButtonContainerStyle}>
+      <View style={styles.disagreeButtonContainer}>
         <Button
-          textStyle={styles.choiceTextStyle}
-          buttonStyle={styles.choiceButtonsStyle}
           onPress={disagreePress}
-          title={
-            <RTLEnabledText style={styles.boldText}>
-              {iAmNotLabel}
-              <RTLEnabledText style={styles.regularText}>
-                {t("assessment.experiencing_any_symptoms")}
-              </RTLEnabledText>
-            </RTLEnabledText>
-          }
-          backgroundColor={Colors.white}
-          textColor={Colors.black}
+          label={t("assessment.not_experiencing_any_symptoms")}
+          style={styles.button}
+          textStyle={styles.buttonText}
         />
       </View>
     </View>
@@ -146,21 +124,13 @@ const agreeOption = {
 }
 
 const styles = StyleSheet.create({
-  choiceTextStyle: {
-    textAlign: "left",
-    paddingHorizontal: 30,
+  button: {
+    backgroundColor: Colors.secondaryViolet,
   },
-  choiceButtonsStyle: {
-    borderWidth: 1,
-    borderColor: Colors.steelGray,
+  buttonText: {
+    color: Colors.white,
   },
-  disagreeButtonContainerStyle: {
+  disagreeButtonContainer: {
     paddingTop: 10,
-  },
-  boldText: {
-    fontWeight: "bold",
-  },
-  regularText: {
-    fontWeight: "normal",
   },
 })

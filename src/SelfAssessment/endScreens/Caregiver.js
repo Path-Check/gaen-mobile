@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { AssessmentNavigationContext } from "../Context"
 import { Info } from "../Info"
 import { InfoText } from "../InfoText"
-import { Button } from "../Button"
+import { Button } from "../../components/Button"
 
 import { Icons, Images } from "../../assets"
 import { Colors } from "../../styles"
@@ -24,7 +24,7 @@ export const Caregiver = ({ navigation }) => {
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t("assessment.caregiver_cta")}
+          label={t("assessment.caregiver_cta")}
         />
       }
     >

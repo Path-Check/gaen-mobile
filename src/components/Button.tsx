@@ -33,8 +33,8 @@ export const Button = ({
   const styles = invert ? darkStyle : lightStyle
   const buttonTextStyle =
     disabled || loading
-      ? { ...styles.textDisabled, ...textStyle }
-      : { ...styles.textEnabled, ...textStyle }
+      ? { ...styles.text, ...styles.textDisabled, ...textStyle }
+      : { ...styles.text, ...styles.textEnabled, ...textStyle }
 
   return (
     <TouchableOpacity
@@ -59,6 +59,9 @@ const lightStyle = StyleSheet.create({
   button: {
     ...Buttons.largeWhite,
   },
+  text: {
+    textAlign: "center",
+  },
   textEnabled: {
     ...Typography.buttonTextDark,
   },
@@ -72,6 +75,9 @@ const darkStyle = StyleSheet.create({
   button: {
     ...Buttons.largeBlue,
   },
+  text: {
+    textAlign: "center",
+  },
   textEnabled: {
     ...Typography.buttonTextLight,
   },
@@ -80,3 +86,4 @@ const darkStyle = StyleSheet.create({
     opacity: 0.5,
   },
 })
+
