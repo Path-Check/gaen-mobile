@@ -25,7 +25,7 @@ export const AssessmentStart = ({ navigation }) => {
           onPress={handleButtonPress}
           label={t("assessment.start_cta")}
           style={styles.button}
-          textStyle={styles.text}
+          textStyle={styles.buttonText}
         />
       }
     >
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondaryViolet,
   },
-  text: {
+  buttonText: {
     color: Colors.white,
   },
 })
