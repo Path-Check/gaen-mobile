@@ -98,7 +98,6 @@ public class DiagnosisKeyUploader {
             return Futures.immediateFuture(null);
         }
         Log.d(TAG, "Uploading " + diagnosisKeys.size() + " keys...");
-        // TODO replace with real
         return doUpload(diagnosisKeys);
         //return fakeUpload();
     }
