@@ -22,6 +22,9 @@ Help us stop COVID-19.
 COVID PathCheck is a mobile app for digital contract tracing (DCT) sponsored by Path Check a nonprofit and developed by a growing global community of engineers, designers, and contributors. PathCheck is based on research originally conducted at the MIT Media Lab. 
 
 The PathCheck Google Apple Exposure Notification (GAEN) solution is a full open source system for deploying the GAEN API. PathCheck GAEN includes a customizable mobile app and a production-ready exposure notification server based on the Google open source project.
+App permissions            |  Report Diagnosis         | Complete Questionaire
+:-------------------------:|:-------------------------:|:-------------------------:
+![GAEN App settings](assets/GAEN_Permissions.gif "GAEN App settings") | ![GAEN Report Case](assets/GAEN_Report_Case.gif "GAEN Report Case") | ![GAEN Questionaire](assets/GAEN_Questionaire.gif "GAEN Questionaire")
 
 ## Privacy Preserving 
 
