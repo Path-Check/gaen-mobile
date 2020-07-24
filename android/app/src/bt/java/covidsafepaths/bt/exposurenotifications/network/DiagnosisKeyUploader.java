@@ -99,8 +99,8 @@ public class DiagnosisKeyUploader {
         }
         Log.d(TAG, "Uploading " + diagnosisKeys.size() + " keys...");
         // TODO replace with real
-        //return doUpload(diagnosisKeys);
-        return fakeUpload();
+        return doUpload(diagnosisKeys);
+        //return fakeUpload();
     }
 
     /**
