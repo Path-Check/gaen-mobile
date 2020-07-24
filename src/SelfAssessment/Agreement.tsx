@@ -1,6 +1,7 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import InfoText from "./InfoText"
 import { Button } from "../components/Button"
@@ -10,11 +11,13 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Colors, Typography } from "../styles"
 import { Icons } from "../assets"
 
-/** @type {React.FunctionComponent<{}>} */
-export const Agreement = ({ navigation }) => {
-  let { t } = useTranslation()
+const Agreement: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
 
-  const handleAgreementPress = () => navigation.push("EmergencyAssessment")
+  const handleOnPressAgreement = () => {
+    navigation.navigate("EmergencyAssessment")
+  }
 
   return (
     <AssessmentLayout
@@ -24,7 +27,7 @@ export const Agreement = ({ navigation }) => {
         <AgreementFooter
           description={t("assessment.agreement_footer")}
           buttonTitle={t("assessment.agreement_cta")}
-          onPress={handleAgreementPress}
+          onPress={handleOnPressAgreement}
         />
       }
     >
@@ -36,7 +39,17 @@ export const Agreement = ({ navigation }) => {
   )
 }
 
-const AgreementFooter = ({ description, onPress, buttonTitle }) => (
+interface AgreementFooterProps {
+  description: string
+  onPress: () => void
+  buttonTitle: string
+}
+
+const AgreementFooter: FunctionComponent<AgreementFooterProps> = ({
+  description,
+  onPress,
+  buttonTitle,
+}) => (
   <>
     <Button onPress={onPress} label={buttonTitle} />
     <RTLEnabledText style={styles.typographyStyle}>
@@ -51,3 +64,5 @@ const styles = StyleSheet.create({
     ...Typography.quaternaryContent,
   },
 })
+
+export default Agreement
