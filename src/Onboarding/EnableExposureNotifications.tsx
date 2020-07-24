@@ -13,7 +13,7 @@ import { Colors } from "../styles"
 const EnableExposureNotifications = (): JSX.Element => {
   const { t } = useTranslation()
   const { exposureNotifications } = useContext(PermissionsContext)
-  const { setOnboardingIsComplete } = useOnboardingContext()
+  const { setOnboardingToComplete } = useOnboardingContext()
 
   useStatusBarEffect("dark-content")
 
@@ -25,11 +25,11 @@ const EnableExposureNotifications = (): JSX.Element => {
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
-    setOnboardingIsComplete()
+    setOnboardingToComplete()
   }
 
   const handleOnPressDontEnable = () => {
-    setOnboardingIsComplete()
+    setOnboardingToComplete()
   }
 
   const explanationScreenContent = {

@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  ActivityIndicator,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import loadLocalResource from "react-native-local-resource"
@@ -89,16 +90,17 @@ const EULA_FILES: Record<AvailableLocale, string> = {
 
 type EulaModalProps = {
   selectedLocale: string
-  continueFunction: () => void
+  onPressModalContinue: () => void
 }
 
 const EulaModal: FunctionComponent<EulaModalProps> = ({
   selectedLocale,
-  continueFunction,
+  onPressModalContinue,
 }) => {
   const [modalVisible, setModalVisibility] = useState(false)
   const [boxChecked, toggleCheckbox] = useState(false)
   const [html, setHtml] = useState<string | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState(true)
   const { t } = useTranslation()
 
   // Pull the EULA in the correct language, with en as fallback
@@ -128,6 +130,16 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
 
   const canContinue = boxChecked
 
+  const handleOnPressContinue = () => {
+    setModalVisibility(false)
+    onPressModalContinue()
+  }
+
+  const handleOnCloseModal = () => {
+    setModalVisibility(false)
+    setIsLoading(true)
+  }
+
   const handleOnPressGetStarted = () => setModalVisibility(true)
   return (
     <>
@@ -143,16 +155,20 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
             <View style={{ flex: 7, paddingHorizontal: 5 }}>
               <CloseModalIcon
                 label={t("label.close_icon")}
-                closeModal={() => setModalVisibility(false)}
+                closeModal={handleOnCloseModal}
               />
               {html && (
-                <WebView
-                  style={{ flex: 1 }}
-                  source={{ html }}
-                  onShouldStartLoadWithRequest={
-                    shouldStartLoadWithRequestHandler
-                  }
-                />
+                <>
+                  <WebView
+                    style={{ flex: 1 }}
+                    onLoad={() => setIsLoading(false)}
+                    source={{ html }}
+                    onShouldStartLoadWithRequest={
+                      shouldStartLoadWithRequestHandler
+                    }
+                  />
+                  {isLoading ? <LoadingIndicator /> : null}
+                </>
               )}
             </View>
           </SafeAreaView>
@@ -171,16 +187,21 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
               <Button
                 label={t("onboarding.eula_continue")}
                 disabled={!canContinue}
-                onPress={() => {
-                  setModalVisibility(false)
-                  continueFunction()
-                }}
+                onPress={handleOnPressContinue}
               />
             </View>
           </SafeAreaView>
         </View>
       </Modal>
     </>
+  )
+}
+
+const LoadingIndicator = () => {
+  return (
+    <View style={styles.loadingIndicator}>
+      <ActivityIndicator size={"large"} color={Colors.darkGray} />
+    </View>
   )
 }
 
@@ -224,6 +245,10 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     ...Forms.checkboxText,
+  },
+  loadingIndicator: {
+    justifyContent: "center",
+    height: "100%",
   },
 })
 

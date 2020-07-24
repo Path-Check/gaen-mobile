@@ -31,23 +31,26 @@ jest.mock("../locales/eula/ht.html", () => {
 
 describe("EulaModal", () => {
   it("won't continue until a user accepts the eula", () => {
-    const continueFunctionSpy = jest.fn()
+    const onPressModalContinueSpy = jest.fn()
 
     const { getByLabelText } = render(
-      <EulaModal continueFunction={continueFunctionSpy} selectedLocale="en" />,
+      <EulaModal
+        onPressModalContinue={onPressModalContinueSpy}
+        selectedLocale="en"
+      />,
     )
     const continueButton = getByLabelText("Continue")
     fireEvent.press(continueButton)
 
-    expect(continueFunctionSpy).not.toHaveBeenCalled()
+    expect(onPressModalContinueSpy).not.toHaveBeenCalled()
     fireEvent.press(getByLabelText("I accept the licensing agreement"))
     fireEvent.press(continueButton)
-    expect(continueFunctionSpy).toHaveBeenCalled()
+    expect(onPressModalContinueSpy).toHaveBeenCalled()
   })
 
   it("adds an accessible close button", () => {
     const { getByLabelText } = render(
-      <EulaModal continueFunction={jest.fn()} selectedLocale="en" />,
+      <EulaModal onPressModalContinue={jest.fn()} selectedLocale="en" />,
     )
 
     expect(getByLabelText("Close icon")).toBeDefined()

@@ -71,7 +71,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         onSelect={(value) => onSelectHandler(value, index)}
         option={option}
         isSelected={selectedValues.some((v) => v.index === index)}
-        type={question.screen_type}
+        optionType={question.screen_type}
       />
     ))
 
