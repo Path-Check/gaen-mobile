@@ -87,6 +87,8 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 
 **Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
 
+Members of the `Path-Check` org can also run `bin/set_ha.sh` in the same way to set the bundle id and application id for a given health authority.
+
 ## Running
 
 **Note:** In some cases, these procedures can lead to the error `Failed to load bundle - Could not connect to development server`. In these cases, kill all other react-native processes and try it again.
