@@ -215,6 +215,12 @@ export const primaryTextInput: TextStyle = {
   color: Colors.primaryText,
 }
 
+export const secondaryTextInput: TextStyle = {
+  fontSize: medium,
+  lineHeight: large,
+  color: Colors.primaryText,
+}
+
 // Navigation
 export const navHeader: TextStyle = {
   ...largeFont,

@@ -44,7 +44,8 @@
     "settings": "Open Settings",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
-    "submit": "Submit"
+    "submit": "Submit",
+    "success": "Success"
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
@@ -122,6 +123,8 @@
     "calendar_icon": "Calendar icon",
     "check_icon": "Checkmark icon",
     "close_icon": "Close icon",
+    "description_optional": "Description (Optional)",
+    "email_optional": "Email (Optional)",
     "exposure_icon": "Circle icon with eight dots surrounding it",
     "heart_icon": "Heart icon with cross inside",
     "home_icon": "Home icon",
@@ -148,6 +151,11 @@
     "question_icon": "Question mark icon",
     "unknown": "unknown"
   },
+  "more": {
+    "debug": {
+      "submit_your_debug_log": "Submit your debug log"
+    }
+  },
   "navigation": {
     "history": "History",
     "home": "Home",
@@ -165,6 +173,7 @@
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
+    "debug_form": "Debug Form",
     "exposure_history": "Exposure History",
     "legal": "Legal",
     "select_language": "Select Language"

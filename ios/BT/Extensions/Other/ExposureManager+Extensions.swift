@@ -58,6 +58,14 @@ extension ExposureManager {
     case .showLastProcessedFilePath:
       let path = BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile
       resolve(path)
+    case .fetchDebugLog:
+      let sessionInfo = ["Bundle ID: \(String(describing: Bundle.main.bundleIdentifier))",
+        "build: \(String(describing: Bundle.main.infoDictionary?["CFBundleVersion"]))",
+        "version: \(String(describing: Bundle.main.infoDictionary?["CFBundleVersion"]))",
+        "dateLastPerformedFileCapacityReset: \(String(describing: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset))",
+      "remainingDailyFileProcessingCapacity: \(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity)", "urlOfMostRecentlyDetectedKeyFile: \(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile)",
+        "exposures: \(BTSecureStorage.shared.userState.exposures.map { $0.asDictionary })"]
+      resolve(sessionInfo.joined(separator: ","))
     }
   }
   
