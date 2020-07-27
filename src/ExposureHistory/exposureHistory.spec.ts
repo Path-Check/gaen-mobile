@@ -8,7 +8,7 @@ describe("toExposureHistory", () => {
   describe("when given a 21 day calendar", () => {
     describe("when given an ExposureInfo with no exposures", () => {
       it("it returns a 21 day history of NoKnown Exposures", () => {
-        const exposureInfo: ExposureInfo = {}
+        const exposureInfo: ExposureInfo = []
         const totalDays = 21
 
         const result = toExposureHistory(exposureInfo, totalDays)
@@ -42,10 +42,7 @@ describe("toExposureHistory", () => {
           transmissionRiskLevel: 7,
         }
 
-        const exposureInfo: ExposureInfo = {
-          [tuesday]: tuesdayExposure,
-          [friday]: fridayExposure,
-        }
+        const exposureInfo: ExposureInfo = [tuesdayExposure, fridayExposure]
 
         const totalDays = 21
 

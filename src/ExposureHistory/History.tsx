@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   StyleSheet,
   TouchableOpacity,
@@ -63,7 +63,7 @@ const History: FunctionComponent<HistoryProps> = ({ lastDetectionDate }) => {
             <Text>{subtitleText}</Text>
           </View>
         </View>
-        <View style={styles.calendarContainer}>
+        <View style={styles.listContainer}>
           <ExposureList />
         </View>
       </ScrollView>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     minHeight: Spacing.small,
     minWidth: Spacing.small,
   },
-  calendarContainer: {
+  listContainer: {
     marginTop: Spacing.xxLarge,
   },
 })

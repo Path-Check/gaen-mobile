@@ -9,7 +9,6 @@ import React, {
 
 import gaenStrategy from "./gaen"
 import { ExposureKey } from "./exposureKey"
-import { RawExposure } from "./gaen/dataConverters"
 import { ExposureInfo } from "./exposure"
 
 type Posix = number

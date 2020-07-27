@@ -10,7 +10,7 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Screens, useStatusBarEffect } from "../navigation"
 import { DateTimeUtils } from "../utils"
 
-import { Buttons, Spacing, Typography, Outlines } from "../styles"
+import { Spacing, Typography, Outlines } from "../styles"
 import { Icons } from "../assets"
 
 import { Colors, Iconography } from "../styles"

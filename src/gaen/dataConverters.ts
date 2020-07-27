@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-import { ExposureInfo, Possible, ExposureDatum } from "../exposure"
+import { Possible, ExposureDatum } from "../exposure"
 
 type UUID = string
 type Posix = number
