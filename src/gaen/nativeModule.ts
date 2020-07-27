@@ -128,6 +128,10 @@ export const submitDiagnosisKeys = async (
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
+export const fetchDebugLog = async (): Promise<string> => {
+  return debugModule.fetchDebugLog()
+}
+
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()
 }

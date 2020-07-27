@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { InfoText } from "./InfoText"
-import { Button } from "./Button"
-import { Info } from "./Info"
+import { Button } from "../components/Button"
+import { AssessmentLayout } from "./AssessmentLayout"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Colors, Typography } from "../styles"
@@ -17,7 +17,7 @@ export const Agreement = ({ navigation }) => {
   const handleAgreementPress = () => navigation.push("EmergencyAssessment")
 
   return (
-    <Info
+    <AssessmentLayout
       backgroundColor={Colors.invertedPrimaryBackground}
       icon={Icons.SelfAssessment}
       footer={
@@ -32,18 +32,13 @@ export const Agreement = ({ navigation }) => {
         title={t("assessment.agreement_title")}
         description={t("assessment.agreement_description")}
       />
-    </Info>
+    </AssessmentLayout>
   )
 }
 
 const AgreementFooter = ({ description, onPress, buttonTitle }) => (
   <>
-    <Button
-      backgroundColor={Colors.white}
-      textColor={Colors.black}
-      onPress={onPress}
-      title={buttonTitle}
-    />
+    <Button onPress={onPress} label={buttonTitle} />
     <RTLEnabledText style={styles.typographyStyle}>
       {description}
     </RTLEnabledText>
