@@ -19,7 +19,6 @@ describe("toExposureInfo", () => {
     it("returns an ExposureInfo with a PossibleExposure at the correct date", () => {
       const today = Date.now()
       const twoDaysAgo = dayjs(today).subtract(2, "day").valueOf()
-      const beginningOfTwoDaysAgo = DateTimeUtils.beginningOfDay(twoDaysAgo)
       const duration = 30 * 60 * 1000
       const rawExposures: RawExposure[] = [
         {
