@@ -23,7 +23,7 @@
 # Table of contents
 
   * [Project Overview](#project-overview) 
-    * [Privacy Preserving](##privacy-preserving) 
+    * [Privacy Preserving](#privacy-preserving) 
     * [Custom Builds](##custom-builds)
     * [GAEN Instances](##gaen-instances)
     * [Broad Non-Developer Community](##broad-non-developer-community)
