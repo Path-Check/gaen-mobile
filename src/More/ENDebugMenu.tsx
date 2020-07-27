@@ -144,13 +144,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 )}
               />
               <DebugMenuListItem
-                label="Get and Post Diagnosis Keys"
-                style={styles.lastListItem}
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.submitExposureKeys,
-                )}
-              />
-              <DebugMenuListItem
                 label="Detect Exposures Now"
                 onPress={handleOnPressSimulationButton(
                   NativeModule.detectExposuresNow,

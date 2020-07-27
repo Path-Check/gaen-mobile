@@ -167,10 +167,6 @@ export const toggleExposureNotifications = async (): Promise<"success"> => {
   return debugModule.toggleExposureNotifications()
 }
 
-export const submitExposureKeys = async (): Promise<"success"> => {
-  return debugModule.submitExposureKeys()
-}
-
 export const simulateExposureDetectionError = async (): Promise<"success"> => {
   return debugModule.simulateExposureDetectionError()
 }
