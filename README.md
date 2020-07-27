@@ -107,6 +107,8 @@ If you get a 500 local server error, run:
 ```
 yarn start --reset-cache
 ``` 
+**Note:**
+To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 
 Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
 

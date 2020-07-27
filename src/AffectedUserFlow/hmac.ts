@@ -1,6 +1,6 @@
 import RNSimpleCrypto from "react-native-simple-crypto"
 
-import { ExposureKey } from "./exposureKey"
+import { ExposureKey } from "../exposureKey"
 
 export const generateKey = async (): Promise<ArrayBuffer> => {
   return await RNSimpleCrypto.utils.randomBytes(32)

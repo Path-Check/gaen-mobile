@@ -6,9 +6,10 @@ import { useNavigation } from "@react-navigation/native"
 import CodeInputScreen from "./CodeInput"
 import { AffectedUserProvider } from "./AffectedUserContext"
 import * as API from "./verificationAPI"
-import * as NativeModule from "../gaen/nativeModule"
 import * as Hmac from "./hmac"
 import { Screens } from "../navigation"
+import { ExposureContext } from "../ExposureContext"
+import { factories } from "../factories"
 
 afterEach(cleanup)
 
@@ -43,7 +44,6 @@ describe("CodeInputScreen", () => {
       const apiSpy = jest
         .spyOn(API, "postCode")
         .mockResolvedValue(successTokenResponse)
-      jest.spyOn(NativeModule, "getExposureKeys").mockResolvedValue([])
       const hmacDigest = "hmacDigest"
       const hmacKey = "hmacKey"
       jest
@@ -61,11 +61,14 @@ describe("CodeInputScreen", () => {
         .mockResolvedValueOnce(certificateReponse)
 
       const code = "12345678"
+      const exposureContext = factories.exposureContext.build()
 
       const { getByTestId, getByLabelText } = render(
-        <AffectedUserProvider>
-          <CodeInputScreen />
-        </AffectedUserProvider>,
+        <ExposureContext.Provider value={exposureContext}>
+          <AffectedUserProvider>
+            <CodeInputScreen />
+          </AffectedUserProvider>
+        </ExposureContext.Provider>,
       )
       fireEvent.changeText(getByTestId("code-input"), code)
       fireEvent.press(getByLabelText("Submit"))

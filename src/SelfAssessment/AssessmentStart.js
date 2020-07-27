@@ -1,8 +1,9 @@
 import React from "react"
+import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { InfoText } from "./InfoText"
-import { Button } from "./Button"
+import { Button } from "../components/Button"
 import { Info } from "./Info"
 
 import { Colors } from "../styles"
@@ -20,7 +21,12 @@ export const AssessmentStart = ({ navigation }) => {
       backgroundImage={Images.EmptyPathBackground}
       icon={Icons.SelfAssessment}
       footer={
-        <Button onPress={handleButtonPress} title={t("assessment.start_cta")} />
+        <Button
+          onPress={handleButtonPress}
+          label={t("assessment.start_cta")}
+          style={styles.button}
+          textStyle={styles.buttonText}
+        />
       }
     >
       <InfoText
@@ -30,3 +36,12 @@ export const AssessmentStart = ({ navigation }) => {
     </Info>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.secondaryViolet,
+  },
+  buttonText: {
+    color: Colors.white,
+  },
+})
