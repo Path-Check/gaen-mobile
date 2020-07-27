@@ -1,4 +1,0 @@
-/* Body text of notification when app is closed on iOS */
-"ios.app_closed_alert_text" = "PathCheck is securely storing your GPS coordinates once every five minutes on this device.";
-/* Title of notification when app is closed on iOS */
-"ios.app_closed_alert_title" = "PathCheck was closed";

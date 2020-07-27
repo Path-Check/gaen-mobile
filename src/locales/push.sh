@@ -4,7 +4,8 @@ set -e
 # Usage:
 #   - Create a READ/WRITE token at https://app.lokalise.com/profile
 #   - Run the command from the root of the project with:
-#     LOKALISE_TOKEN=<token> yarn i18n:push
+#     LOKALISE_READ_WRITE_TOKEN=<token> yarn i18n:push
+
 
 function found_exe() {
   hash "$1" 2>/dev/null
@@ -28,7 +29,7 @@ fi
 
 echo "Uploading English base files"
 lokalise2 file upload \
-  --file=app/locales/en.json,ios/en.lproj/InfoPlist.strings,ios/en.lproj/Localizable.strings,android/app/src/gps/res/values/strings.xml,android/app/src/bt/res/values/strings.xml \
+  --file=src/locales/en.json,ios/en.lproj/InfoPlist.strings,ios/en.lproj/Localizable.strings,android/app/src/bt/res/values/strings.xml \
   --lang-iso=en \
   --cleanup-mode \
   --replace-modified \
