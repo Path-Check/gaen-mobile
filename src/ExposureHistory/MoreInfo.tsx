@@ -39,7 +39,7 @@ const MoreInfo: FunctionComponent = () => {
             {t("exposure_history.why_did_i_get_an_en")}
           </RTLEnabledText>
           <RTLEnabledText style={styles.contentText}>
-            {t("exposure_history.bt.why_did_i_get_an_en_para")}
+            {t("exposure_history.why_did_i_get_an_en_para")}
           </RTLEnabledText>
         </View>
         <View style={styles.section}>
@@ -47,7 +47,7 @@ const MoreInfo: FunctionComponent = () => {
             {t("exposure_history.how_does_this_work")}
           </RTLEnabledText>
           <RTLEnabledText style={styles.contentText}>
-            {t("exposure_history.bt.how_does_this_work_para")}
+            {t("exposure_history.how_does_this_work_para")}
           </RTLEnabledText>
         </View>
       </ScrollView>

@@ -49,7 +49,7 @@ const PossibleExposureDetail = ({
   const exposureTime = t("exposure_datum.possible.duration", {
     duration: exposureDurationText,
   })
-  const explanationContent = t("exposure_datum.possible.explanation.bt", {
+  const explanationContent = t("exposure_datum.possible.explanation", {
     duration: exposureDurationText,
   })
   const nextStepsButtonText = t("exposure_datum.possible.what_next")
