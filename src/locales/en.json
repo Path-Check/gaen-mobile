@@ -51,6 +51,8 @@
     "code_input_body_bluetooth": "Enter your verification code",
     "code_input_button_cancel": "Cancel",
     "code_input_title_bluetooth": "Verify your diagnosis",
+    "enable_exposure_notifications_title": "Enable exposure notifications to continue",
+    "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "complete_body_bluetooth": "By choosing to share your status and anonymously notify others, you’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_button_cancel": "Cancel",

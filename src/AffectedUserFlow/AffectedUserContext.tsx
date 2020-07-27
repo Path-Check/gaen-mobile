@@ -4,8 +4,6 @@ type Token = string
 type Key = string
 
 interface AffectedUserContextState {
-  code: string
-  setCode: (code: string) => void
   certificate: Token | null
   hmacKey: Key | null
   setExposureSubmissionCredentials: (certificate: Token, hmacKey: Key) => void
@@ -20,7 +18,6 @@ export const AffectedUserProvider = ({
 }: {
   children: JSX.Element
 }): JSX.Element => {
-  const [code, setCode] = useState("")
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
 
@@ -35,8 +32,6 @@ export const AffectedUserProvider = ({
   return (
     <AffectedUserContext.Provider
       value={{
-        code,
-        setCode,
         hmacKey,
         certificate,
         setExposureSubmissionCredentials,

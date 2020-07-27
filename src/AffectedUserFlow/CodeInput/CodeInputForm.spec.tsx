@@ -3,27 +3,27 @@ import { cleanup, render, fireEvent, wait } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
-import CodeInputScreen from "./CodeInput"
-import { AffectedUserProvider } from "./AffectedUserContext"
-import * as API from "./verificationAPI"
-import * as Hmac from "./hmac"
-import { Screens } from "../navigation"
-import { ExposureContext } from "../ExposureContext"
-import { factories } from "../factories"
+import CodeInputForm from "./CodeInputForm"
+import { AffectedUserProvider } from "../AffectedUserContext"
+import * as API from "../verificationAPI"
+import * as Hmac from "../hmac"
+import { Screens } from "../../navigation"
+import { ExposureContext } from "../../ExposureContext"
+import { factories } from "../../factories"
 
 afterEach(cleanup)
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
-describe("CodeInputScreen", () => {
+describe("CodeInputForm", () => {
   it("initializes with an empty code form", () => {
     const { getByTestId } = render(
       <AffectedUserProvider>
-        <CodeInputScreen />
+        <CodeInputForm />
       </AffectedUserProvider>,
     )
 
-    expect(getByTestId("affected-user-code-input-screen")).not.toBeNull()
+    expect(getByTestId("affected-user-code-input-form")).not.toBeNull()
     expect(getByTestId("code-input")).toHaveTextContent("")
   })
 
@@ -66,7 +66,7 @@ describe("CodeInputScreen", () => {
       const { getByTestId, getByLabelText } = render(
         <ExposureContext.Provider value={exposureContext}>
           <AffectedUserProvider>
-            <CodeInputScreen />
+            <CodeInputForm />
           </AffectedUserProvider>
         </ExposureContext.Provider>,
       )
@@ -94,7 +94,7 @@ describe("CodeInputScreen", () => {
 
       const { getByTestId, getByLabelText, getByText } = render(
         <AffectedUserProvider>
-          <CodeInputScreen />
+          <CodeInputForm />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
@@ -115,7 +115,7 @@ describe("CodeInputScreen", () => {
 
       const { getByTestId, getByLabelText, getByText } = render(
         <AffectedUserProvider>
-          <CodeInputScreen />
+          <CodeInputForm />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
@@ -138,7 +138,7 @@ describe("CodeInputScreen", () => {
 
       const { getByTestId, getByLabelText, getByText } = render(
         <AffectedUserProvider>
-          <CodeInputScreen />
+          <CodeInputForm />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
