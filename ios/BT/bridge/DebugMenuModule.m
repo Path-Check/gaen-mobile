@@ -18,7 +18,7 @@ RCT_REMAP_METHOD(fetchDiagnosisKeys,
 
 RCT_EXPORT_METHOD(forceAppCrash)
 {
-  NSAssert(NO, @"Forced Crash (Debug)");
+  @throw [NSException exceptionWithName:NSGenericException reason:@"Forced Crash (Debug)" userInfo:nil];
 }
 
 RCT_REMAP_METHOD(fetchDebugLog,
@@ -71,14 +71,6 @@ RCT_REMAP_METHOD(resetExposures,
 {
   [[ExposureManager shared] handleDebugAction:DebugActionResetExposures resolve:resolve reject:reject];
 }
-
-RCT_REMAP_METHOD(submitExposureKeys,
-                 submitExposureKeysResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [[ExposureManager shared] handleDebugAction:DebugActionGetAndPostDiagnosisKeys resolve:resolve reject:reject];
-}
-
 
 RCT_REMAP_METHOD(showLastProcessedFilePath,
                  showLastProcessedFilePathResolver:(RCTPromiseResolveBlock)resolve
