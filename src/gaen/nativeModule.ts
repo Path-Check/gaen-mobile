@@ -132,6 +132,10 @@ export const fetchDebugLog = async (): Promise<string> => {
   return debugModule.fetchDebugLog()
 }
 
+export const forceAppCrash = async (): Promise<void> => {
+  return debugModule.forceAppCrash()
+}
+
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()
 }
