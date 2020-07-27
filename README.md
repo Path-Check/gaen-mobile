@@ -9,7 +9,7 @@
       src="./assets/Safe_Paths_Logo.png"
     />
   </a>
-  
+
   <b>**https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/**</b>
 </div>
 
@@ -19,23 +19,23 @@
 
 Help us stop COVID-19.
 
-COVID PathCheck is a mobile app for digital contract tracing (DCT) sponsored by Path Check a nonprofit and developed by a growing global community of engineers, designers, and contributors. PathCheck is based on research originally conducted at the MIT Media Lab. 
+COVID PathCheck is a mobile app for digital contract tracing (DCT) sponsored by Path Check a nonprofit and developed by a growing global community of engineers, designers, and contributors. PathCheck is based on research originally conducted at the MIT Media Lab.
 
 The PathCheck Google Apple Exposure Notification (GAEN) solution is a full open source system for deploying the GAEN API. PathCheck GAEN includes a customizable mobile app and a production-ready exposure notification server based on the Google open source project.
 
-## Privacy Preserving 
+## Privacy Preserving
 
 What’s truly special about PathCheck is our strong commitment to preserving the privacy of individual users. We're building an application that can help contain outbreaks of COVID-19 without forcing users to sacrifice their personal privacy.
 
-### Custom Builds 
+### Custom Builds
 
 We welcome public health authorities and other organizations implementing digital contact tracing strategies to create custom builds for their specific needs, incorporate PathCheck features into their applications, or create downstream projects that stay linked to the PathCheck project. If intending to fork the repository and develop off of it, be aware that this comes "at your own risk" for continued maintenance.
 
 ### GAEN Instances
 
-The rules for GAEN require that each public health authority release their own application. The goal with the PathCheck Project is to support this deployment strategy. 
+The rules for GAEN require that each public health authority release their own application. The goal with the PathCheck Project is to support this deployment strategy.
 
-## Broad Non-Developer Community 
+## Broad Non-Developer Community
 
 One of the important aspects of the PathCheck open source project is that it's supported by a large community of volunteers in addition to the open source developer community. Spanning as diverse domains as product management, user research, cryptography, security, compliance, design, and videography more than 1,400 Path Check volunteers are working together to support the project and help drive adoption around the world.
 
@@ -45,7 +45,7 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 [Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic](https://drive.google.com/file/d/1nwOR4drE3YdkCkyy_HBd6giQPPhLEkRc/view?usp=sharing) - The orginal white paper.
 
-[COVID PathCheck Slack](covidsafepaths.slack.com) - Where the community lives. 
+[COVID PathCheck Slack](covidsafepaths.slack.com) - Where the community lives.
 
 [Path-Check/covid-safe-paths](https://github.com/Path-Check/covid-safe-paths) - PathCheck's GPS based contact tracing solution.
 
@@ -106,7 +106,9 @@ yarn run-android
 If you get a 500 local server error, run:
 ```
 yarn start --reset-cache
-``` 
+```
+If you are asked to install a new NDK, do it and then run the application again
+```
 **Note:**
 To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 

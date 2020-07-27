@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "845835389592",
+    "firebase_url": "https://pathcheck-gaen-dev.firebaseio.com",
+    "project_id": "pathcheck-gaen-dev",
+    "storage_bucket": "pathcheck-gaen-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845835389592:android:8a3901ad2eaa8ed04edeed",
+        "android_client_info": {
+          "package_name": "org.pathcheck.covidsafepaths"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845835389592-hefnsjftbcqlml49ikqk61c7cacg3816.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVhlk_iGNcBzXGdWdeK1fIr-RZqkRgsso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845835389592-hefnsjftbcqlml49ikqk61c7cacg3816.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
