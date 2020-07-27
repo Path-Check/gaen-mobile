@@ -7,9 +7,10 @@ import React, {
   useContext,
 } from "react"
 
-import { ExposureInfo } from "./exposure"
 import gaenStrategy from "./gaen"
 import { ExposureKey } from "./exposureKey"
+import { RawExposure } from "./gaen/dataConverters"
+import { ExposureInfo } from "./exposure"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
@@ -28,7 +29,7 @@ export interface ExposureState {
 }
 
 const initialState = {
-  exposureInfo: {},
+  exposureInfo: [],
   hasBeenExposed: false,
   userHasNewExposure: true,
   observeExposures: (): void => {},
@@ -47,7 +48,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     getLastDetectionDate,
   } = exposureEventsStrategy
 
-  const [exposureInfo, setExposureInfo] = useState<ExposureInfo>({})
+  const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
   const [userHasNewExposure, setUserHasNewExposure] = useState<boolean>(false)
 
   const [

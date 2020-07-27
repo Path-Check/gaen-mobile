@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-import { ExposureInfo, Possible } from "../exposure"
+import { ExposureInfo, Possible, ExposureDatum } from "../exposure"
 
 type UUID = string
 type Posix = number
@@ -13,8 +13,11 @@ export interface RawExposure {
   transmissionRiskLevel: number
 }
 
-export const toExposureInfo = (rawExposures: RawExposure[]): ExposureInfo => {
-  return rawExposures.map(toPossible).reduce(groupByDate, {})
+export const toExposureInfo = (
+  rawExposures: RawExposure[],
+): ExposureDatum[] => {
+  const groupedExposures = rawExposures.map(toPossible).reduce(groupByDate, {})
+  return Object.values(groupedExposures).sort((a, b) => a.date - b.date)
 }
 
 const toPossible = (r: RawExposure): Possible => {

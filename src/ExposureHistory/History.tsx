@@ -15,8 +15,8 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureDatumDetail from "./ExposureDatumDetail"
 import { DateTimeUtils } from "../utils"
 import Calendar from "./Calendar"
-import { ExposureHistory } from "./exposureHistory"
 import { ExposureDatum } from "../exposure"
+import ExposureList from "./ExposureList"
 import DateInfoHeader from "./DateInfoHeader"
 
 import { Icons } from "../assets"
@@ -26,14 +26,10 @@ import { Buttons, Spacing, Typography, Colors } from "../styles"
 type Posix = number
 
 interface HistoryProps {
-  exposureHistory: ExposureHistory
   lastDetectionDate: Posix | null
 }
 
-const History: FunctionComponent<HistoryProps> = ({
-  exposureHistory,
-  lastDetectionDate,
-}) => {
+const History: FunctionComponent<HistoryProps> = ({ lastDetectionDate }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(null)
@@ -82,8 +78,9 @@ const History: FunctionComponent<HistoryProps> = ({
           </View>
         </View>
         <View style={styles.calendarContainer}>
+          <ExposureList />
           <Calendar
-            exposureHistory={exposureHistory}
+            exposureHistory={[]}
             onSelectDate={handleOnSelectDate}
             selectedDatum={selectedDatum}
           />
