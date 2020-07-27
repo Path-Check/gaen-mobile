@@ -13,8 +13,7 @@ import { Colors } from "../../styles"
 export const Emergency = () => {
   let { t } = useTranslation()
 
-  // TODO: This would need to be localized per country
-  const handleOnPress = () => Linking.openURL("tel://911")
+  const handleOnPress = () => Linking.openURL("tel:911")
 
   return (
     <AssessmentLayout
