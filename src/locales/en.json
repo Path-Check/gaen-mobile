@@ -74,31 +74,32 @@
     },
     "possible": {
       "duration": "Possible Exposure Time: {{duration}}",
-      "explanation": {
-        "bt": "For {{duration}}, your phone was within 10 feet of someone who later received a confirmed positive COVID-19 diagnosis."
-      },
+      "explanation": "For {{duration}}, your phone was within 10 feet of someone who later received a confirmed positive COVID-19 diagnosis.",
       "what_next": "What should I do next?"
     }
   },
   "exposure_history": {
-    "bt": {
-      "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth to swap and save random number strings (called random IDs) from any phones it encounters that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy. Date and duration of the encounter are recorded along with an estimate of how close the two phones may have been. When a person reports a positive diagnosis, their phone’s recent random IDs are flagged to anonymously notify others. No locations or personal info is shared.",
-      "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you crossed paths with later receives a confirmed, positive diagnosis or test for COVID-19 and chooses to notify others"
-    },
+    "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth to swap and save random number strings (called random IDs) from any phones it encounters that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy. Date and duration of the encounter are recorded along with an estimate of how close the two phones may have been. When a person reports a positive diagnosis, their phone’s recent random IDs are flagged to anonymously notify others. No locations or personal info is shared.",
+    "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you crossed paths with later receives a confirmed, positive diagnosis or test for COVID-19 and chooses to notify others",
     "how_does_this_work": "How does this work?",
-    "last_days": "Last 21 days",
+    "no_exposure_reports": "No Exposure Reports",
+    "no_exposure_reports_over_past": "You haven't received any exposure report over the past 14-days",
+    "last_days": "Last 14 days",
+    "keep_track_of_exposures": "Keep track of possible exposures detected by your PathCheck app",
     "legend_button": "LEGEND",
     "legend": {
       "exposure_possible": "Possible exposure",
       "no_exposure_detected": "No exposure detected",
       "today": "Today"
     },
-    "next_steps": {
+    "possible_exposure": "Possible COVID-19 exposure",
+    "exposure_detail": {
       "button_text": "See Recommendations",
-      "ha_self_assessment": "Follow the advice from {{healthAuthorityName}} about what to do next.",
-      "maybe_exposed": "You may have been exposed to COVID-19",
-      "possible_crossed_paths": "Based on your location history, it is possible that you may have crossed paths with somebody who has been diagnosed with COVID-19.",
-      "possible_infection_precaution": "This does not mean that you are infected, but you should take precautions anyway. People who don't exhibit symptoms can sometimes still be contagious."
+      "ha_guidance_header": "What should I do?",
+      "ha_guidance_more": "Read More",
+      "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
+      "header": "You may have crossed paths with the COVID-19 virus.",
+      "content": "Someone you were nearby has since tested positive for COVID-19."
     },
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?"

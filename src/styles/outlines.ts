@@ -55,6 +55,12 @@ export const downShadow: ViewStyle = {
   },
 }
 
+export const glowShadow: ViewStyle = {
+  shadowColor: Colors.black,
+  shadowOpacity: 0.2,
+  shadowRadius: 20,
+}
+
 const baseHRule: ViewStyle = {
   borderColor: Colors.tertiaryBackground,
 }

@@ -1,61 +1,49 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   ScrollView,
   SafeAreaView,
+  Text,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import dayjs from "dayjs"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
-import ExposureDatumDetail from "./ExposureDatumDetail"
-import { DateTimeUtils } from "../utils"
-import Calendar from "./Calendar"
-import { ExposureHistory } from "./exposureHistory"
-import { ExposureDatum } from "../exposure"
+import { ExposureDatum } from "../../exposure"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
+
 import DateInfoHeader from "./DateInfoHeader"
+import ExposureList from "./ExposureList"
+import NoExposures from "./NoExposures"
 
-import { Icons } from "../assets"
-import { Screens } from "../navigation"
-import { Buttons, Spacing, Typography, Colors } from "../styles"
+import { Icons } from "../../assets"
+import { Screens } from "../../navigation"
+import { Buttons, Spacing, Typography, Colors } from "../../styles"
 
 type Posix = number
 
 interface HistoryProps {
-  exposureHistory: ExposureHistory
   lastDetectionDate: Posix | null
+  exposures: ExposureDatum[]
 }
 
 const History: FunctionComponent<HistoryProps> = ({
-  exposureHistory,
   lastDetectionDate,
+  exposures,
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const [selectedDatum, setSelectedDatum] = useState<ExposureDatum | null>(null)
-
-  const isTodayOrBefore = (date: number) => {
-    return !dayjs(date).isAfter(dayjs(), "day")
-  }
-
-  const handleOnSelectDate = (datum: ExposureDatum) => {
-    if (isTodayOrBefore(datum.date)) {
-      setSelectedDatum(datum)
-    }
-  }
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
   }
 
   const titleText = t("screen_titles.exposure_history")
+  const subtitleText = t("exposure_history.keep_track_of_exposures")
 
-  const showExposureDetail =
-    selectedDatum && !DateTimeUtils.isInFuture(selectedDatum.date)
+  const showExposureHistory = exposures.length > 0
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -80,18 +68,16 @@ const History: FunctionComponent<HistoryProps> = ({
           <View style={styles.headerRow}>
             <DateInfoHeader lastDetectionDate={lastDetectionDate} />
           </View>
+          <View>
+            <Text>{subtitleText}</Text>
+          </View>
         </View>
-        <View style={styles.calendarContainer}>
-          <Calendar
-            exposureHistory={exposureHistory}
-            onSelectDate={handleOnSelectDate}
-            selectedDatum={selectedDatum}
-          />
-        </View>
-        <View style={styles.detailsContainer}>
-          {selectedDatum && showExposureDetail ? (
-            <ExposureDatumDetail exposureDatum={selectedDatum} />
-          ) : null}
+        <View style={styles.listContainer}>
+          {showExposureHistory ? (
+            <ExposureList exposures={exposures} />
+          ) : (
+            <NoExposures />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -121,13 +107,8 @@ const styles = StyleSheet.create({
     minHeight: Spacing.small,
     minWidth: Spacing.small,
   },
-  calendarContainer: {
+  listContainer: {
     marginTop: Spacing.xxLarge,
-  },
-  detailsContainer: {
-    flex: 1,
-    marginTop: Spacing.small,
-    marginBottom: Spacing.huge,
   },
 })
 
