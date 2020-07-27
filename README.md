@@ -1,5 +1,6 @@
-<div>
-  <div style="float:left; width:100">
+<table>
+  <tr>
+  <td>
     <a href="https://pathcheck.org/">
     <img
       width="80"
@@ -8,17 +9,17 @@
       src="./assets/Safe_Paths_Logo.png"
     />
   </a>
-  </div>
+  </td>
+  <td>
 <div style="float:left" align="center" >
   <h1>The PathCheck GAEN Solution</h1>
 
-
-  
   <b>**https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/**</b>
-</div>
-</div>
-<div style="clear:both">
-</div>
+  
+  </div>
+  </td>
+  </tr>
+</table>
 <hr />
 
 # Table of contents
