@@ -14,7 +14,7 @@ export const Emergency = () => {
   let { t } = useTranslation()
 
   // TODO: This would need to be localized per country
-  const handleEmergencyCall = () => Linking.openURL("tel://911")
+  const handleEmergencyCall = () => Linking.openURL("tel:911")
 
   return (
     <Info
