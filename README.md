@@ -1,5 +1,5 @@
 <div>
-  <div style="float:left">
+  <div style="float:left; width:100">
     <a href="https://pathcheck.org/">
     <img
       width="80"
@@ -9,7 +9,7 @@
     />
   </a>
   </div>
-<div align="center">
+<div style="float:left" align="center" >
   <h1>The PathCheck GAEN Solution</h1>
 
 
@@ -17,38 +17,39 @@
   <b>**https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/**</b>
 </div>
 </div>
-
+<div style="clear:both">
+</div>
 <hr />
 
 # Table of contents
 
   * [Project Overview](#project-overview) 
     * [Privacy Preserving](#privacy-preserving) 
-    * [Custom Builds](##custom-builds)
-    * [GAEN Instances](##gaen-instances)
-    * [Broad Non-Developer Community](##broad-non-developer-community)
-    * [Learn More](##learn-more)
+    * [Custom Builds](#custom-builds)
+    * [GAEN Instances](#gaen-instances)
+    * [Broad Non-Developer Community](#broad-non-developer-community)
+    * [Learn More](#learn-more)
   * [Development Overview](#development-overview) 
-      * [Contributing](##contributing)
-      * [Developer Setup](##developer-setup)
-        * [Linux/MacOS](##linux/MacOS)
-        * [Windows](##windows)
-        * [Environment](##environment)
-      * [Running](##running)
-        * [Android (Windows, Linux, macOS)](##Android-\(Windows,-Linux,-macOS\))
-        * [iOS (macOS only)](##iOS-\(macOS-only\))
-      * [Debugging](##debugging)
-      * [Tooling](##tooling)
-        * [Typescript](###typescript)
-        * [Prettier](###prettier)
-        * [Husky](###husky)
-        * [ESLint](###eslint)
-        * [Ruby](###ruby)
-      * [Testing](###testing)
-        * [Static Testing](###static-testing)
-        * [Unit Test](###unit-test)
-        * [e2e Test](###e2e-test)
-        * [Manual Device Testing](###manual-device-testing)
+      * [Contributing](#contributing)
+      * [Developer Setup](#developer-setup)
+        * [Linux/MacOS](#linux/MacOS)
+        * [Windows](#windows)
+        * [Environment](#environment)
+      * [Running](#running)
+        * [Android (Windows, Linux, macOS)](#Android-\(Windows,-Linux,-macOS\))
+        * [iOS (macOS only)](#iOS-\(macOS-only\))
+      * [Debugging](#debugging)
+      * [Tooling](#tooling)
+        * [Typescript](#typescript)
+        * [Prettier](#prettier)
+        * [Husky](#husky)
+        * [ESLint](#eslint)
+        * [Ruby](#ruby)
+      * [Testing](#testing)
+        * [Static Testing](#static-testing)
+        * [Unit Test](#unit-test)
+        * [e2e Test](#e2e-test)
+        * [Manual Device Testing](#manual-device-testing)
     * [License](#license) 
 
 
