@@ -21,10 +21,17 @@
 
   * [Project Overview](#project-overview) 
     * [Privacy Preserving](#privacy-preserving) 
+<<<<<<< HEAD
     * [Custom Builds](#custom-builds)
     * [GAEN Instances](#gaen-instances)
     * [Broad Non-Developer Community](#broad-non-developer-community)
     * [Learn More](#learn-more)
+=======
+    * [Custom Builds](##custom-builds)
+    * [GAEN Instances](##gaen-instances)
+    * [Broad Non-Developer Community](##broad-non-developer-community)
+    * [Learn More](##learn-more)
+>>>>>>> Fix to links in TOC
   * [Development Overview](#development-overview) 
       * [Contributing](#contributing)
       * [Developer Setup](#developer-setup)
