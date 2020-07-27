@@ -41,12 +41,14 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.pathcheck.covidsafepaths.BuildConfig;
 import org.threeten.bp.Duration;
 
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
+import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 /**
  * A class to encapsulate uploading Diagnosis Keys to one or more key sharing servers.
@@ -161,6 +163,7 @@ public class DiagnosisKeyUploader {
 
     private ListenableFuture<KeySubmission> addPayload(KeySubmission submission) throws JSONException {
 
+        // TODO DL Change JSON body.
         JSONArray keysJson = new JSONArray();
         try {
             for (DiagnosisKey k : submission.diagnosisKeys) {
@@ -177,9 +180,28 @@ public class DiagnosisKeyUploader {
             throw new RuntimeException(e);
         }
 
+        // TODO DL Update
         submission.payload =
                 new JSONObject()
-                        .put("diagnosisKeys", keysJson);
+                        .put("temporaryExposureKeys", keysJson);
+
+        submission.payload =
+                new JSONObject()
+                        .put("hmackey", "placeholder");
+
+        submission.payload =
+                new JSONObject()
+                        .put("padding", randomBase64Data(Util.getRandomNumber()));
+
+        JSONArray regionJson = new JSONArray();
+        regionJson.put(BuildConfig.REGION_CODES);
+        submission.payload =
+                new JSONObject()
+                        .put("regions", BuildConfig.APPLICATION_ID);
+
+        submission.payload =
+                new JSONObject()
+                        .put("appPackageName", BuildConfig.APPLICATION_ID);
 
         return FluentFuture.from(Futures.immediateFuture(submission));
     }

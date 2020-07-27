@@ -141,7 +141,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.pathcheck.covidsafepaths"
+        applicationId "org.pathcheck.covidsafepathsBt.mn"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
@@ -203,7 +203,7 @@ android {
     flavorDimensions "version"
     productFlavors {
         bt {
-            applicationId 'org.pathcheck.covidsafepathsBt'
+            applicationId "org.pathcheck.covidsafepathsBt.mn"
             dimension "version"
         }
     }
