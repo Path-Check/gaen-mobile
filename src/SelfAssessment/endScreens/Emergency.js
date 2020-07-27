@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Linking, StyleSheet } from "react-native"
 
 import { Button } from "../../components/Button"
-import { Info } from "../Info"
+import { AssessmentLayout } from "../AssessmentLayout"
 import { InfoText } from "../InfoText"
 
 import { Icons } from "../../assets"
@@ -17,7 +17,7 @@ export const Emergency = () => {
   const handleOnPress = () => Linking.openURL("tel://911")
 
   return (
-    <Info
+    <AssessmentLayout
       backgroundColor={Colors.primaryBackgroundFaintShade}
       icon={Icons.SelfAssessment} // TODO: Placeholder, replace when we get icon
       scrollStyle={styles.containerItemsAlignment}
@@ -35,7 +35,7 @@ export const Emergency = () => {
         title={t("assessment.emergency_title")}
         description={t("assessment.emergency_description")}
       />
-    </Info>
+    </AssessmentLayout>
   )
 }
 
