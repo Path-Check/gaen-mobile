@@ -1,5 +1,4 @@
-import React, { useState } from "react"
-import { useNavigation } from "@react-navigation/native"
+import React, { useState, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ActivityIndicator,
@@ -15,11 +14,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { useAffectedUserContext } from "./AffectedUserContext"
-import * as API from "./verificationAPI"
-import { calculateHmac } from "./hmac"
+import { NativeModule } from "../gaen"
+import * as API from "./debugAPI"
 
-import { Screens, Stacks } from "../navigation"
 import {
   Spacing,
   Buttons,
@@ -29,56 +26,38 @@ import {
   Outlines,
   Typography,
 } from "../styles"
-import { useExposureContext } from "../ExposureContext"
 
 const defaultErrorMessage = " "
 
-const CodeInputScreen = (): JSX.Element => {
+const CodeInputScreen: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
 
-  const {
-    code,
-    setCode,
-    setExposureSubmissionCredentials,
-  } = useAffectedUserContext()
+  const [email, setEmail] = useState("")
+  const [description, setDescription] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
-  const strategy = useExposureContext()
 
   const isIOS = Platform.OS === "ios"
-  const codeLength = 8
 
-  const handleOnChangeText = (code: string) => {
+  const handleOnChangeEmail = (email: string) => {
     setErrorMessage("")
-    setCode(code)
+    setEmail(email)
   }
 
-  const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+  const handleOnChangeDescription = (description: string) => {
+    setErrorMessage("")
+    setDescription(description)
   }
 
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     try {
-      const response = await API.postCode(code)
+      const payload = await NativeModule.fetchDebugLog()
+      const response = await API.postDebugLog({ email, description, payload })
 
       if (response.kind === "success") {
-        const token = response.body.token
-        const exposureKeys = await strategy.getExposureKeys()
-        const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
-
-        const certResponse = await API.postTokenAndHmac(token, hmacDigest)
-
-        if (certResponse.kind === "success") {
-          const certificate = certResponse.body.certificate
-          setExposureSubmissionCredentials(certificate, hmacKey)
-          Keyboard.dismiss()
-          navigation.navigate(Screens.AffectedUserPublishConsent)
-        } else {
-          setErrorMessage(showCertificateError(certResponse.error))
-        }
+        Alert.alert(t("common.success"))
       } else {
         setErrorMessage(showError(response.error))
       }
@@ -89,47 +68,17 @@ const CodeInputScreen = (): JSX.Element => {
     }
   }
 
-  const showError = (error: API.CodeVerificationError): string => {
+  const showError = (error: API.SubmitLogsError): string => {
     switch (error) {
-      case "InvalidCode": {
-        return t("export.error.invalid_code")
-      }
-      case "VerificationCodeUsed": {
-        return t("export.error.verification_code_used")
-      }
-      case "InvalidVerificationUrl": {
-        return "Invalid Verification Url"
-      }
       default: {
-        return t("export.error.unknown_code_verification_error")
+        return t("common.something_went_wrong")
       }
     }
   }
-
-  const showCertificateError = (error: API.TokenVerificationError): string => {
-    switch (error) {
-      case "TokenMetaDataMismatch": {
-        return "token meta data mismatch"
-      }
-      default: {
-        return t("export.error.unknown_code_verification_error")
-      }
-    }
-  }
-
-  const isDisabled = code.length !== codeLength
-
-  const buttonStyle = isDisabled ? styles.disabledButton : styles.button
-  const buttonTextStyle = isDisabled
-    ? styles.disabledButtonText
-    : styles.buttonText
 
   return (
     <View style={styles.backgroundImage}>
-      <SafeAreaView
-        style={{ flex: 1 }}
-        testID={"affected-user-code-input-screen"}
-      >
+      <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           keyboardVerticalOffset={Spacing.tiny}
           behavior={isIOS ? "padding" : undefined}
@@ -138,27 +87,41 @@ const CodeInputScreen = (): JSX.Element => {
             <View>
               <View style={styles.headerContainer}>
                 <RTLEnabledText style={styles.header}>
-                  {t("export.code_input_title_bluetooth")}
-                </RTLEnabledText>
-
-                <RTLEnabledText style={styles.subheader}>
-                  {t("export.code_input_body_bluetooth")}
+                  {t("more.debug.submit_your_debug_log")}
                 </RTLEnabledText>
               </View>
 
-              <View>
+              <View style={styles.inputContainer}>
+                <RTLEnabledText style={styles.inputLabel}>
+                  {t("label.email_optional")}
+                </RTLEnabledText>
                 <TextInput
-                  testID={"code-input"}
-                  value={code}
-                  placeholder={"00000000"}
+                  value={email}
+                  placeholder={"email@example.com"}
                   placeholderTextColor={Colors.placeholderTextColor}
-                  maxLength={codeLength}
-                  style={styles.codeInput}
-                  keyboardType={"number-pad"}
+                  style={styles.textInput}
+                  keyboardType={"email-address"}
                   returnKeyType={"done"}
-                  onChangeText={handleOnChangeText}
+                  onChangeText={handleOnChangeEmail}
                   blurOnSubmit={false}
                   onSubmitEditing={Keyboard.dismiss}
+                  autoCapitalize={"none"}
+                />
+              </View>
+
+              <View style={styles.inputContainer}>
+                <RTLEnabledText style={styles.inputLabel}>
+                  {t("label.description_optional")}
+                </RTLEnabledText>
+                <TextInput
+                  value={description}
+                  style={styles.descriptionInput}
+                  keyboardType={"default"}
+                  returnKeyType={"done"}
+                  onChangeText={handleOnChangeDescription}
+                  blurOnSubmit={false}
+                  onSubmitEditing={Keyboard.dismiss}
+                  multiline
                 />
               </View>
 
@@ -174,20 +137,10 @@ const CodeInputScreen = (): JSX.Element => {
                 accessible
                 accessibilityLabel={t("common.submit")}
                 accessibilityRole="button"
-                disabled={isDisabled}
-                style={buttonStyle}
+                style={styles.button}
               >
-                <RTLEnabledText style={buttonTextStyle}>
+                <RTLEnabledText style={styles.buttonText}>
                   {t("common.submit")}
-                </RTLEnabledText>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={handleOnPressCancel}
-                style={styles.secondaryButton}
-              >
-                <RTLEnabledText style={styles.secondaryButtonText}>
-                  {t("export.code_input_button_cancel")}
                 </RTLEnabledText>
               </TouchableOpacity>
             </View>
@@ -224,11 +177,11 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
-    paddingTop: Layout.oneTenthHeight,
+    paddingTop: Spacing.large,
     backgroundColor: Colors.primaryBackgroundFaintShade,
   },
   headerContainer: {
-    marginBottom: Spacing.xxxHuge,
+    marginBottom: Spacing.small,
   },
   header: {
     ...Typography.header2,
@@ -243,8 +196,23 @@ const styles = StyleSheet.create({
     color: Colors.errorText,
     paddingTop: Spacing.xxSmall,
   },
-  codeInput: {
-    ...Forms.textInput,
+  inputContainer: {
+    marginTop: Spacing.large,
+  },
+  inputLabel: {
+    ...Typography.description,
+    paddingBottom: Spacing.xxSmall,
+  },
+  textInput: {
+    ...Typography.secondaryTextInput,
+    ...Outlines.textInput,
+    padding: Spacing.xSmall,
+    borderColor: Colors.formInputBorder,
+  },
+  descriptionInput: {
+    ...Forms.textInputFormField,
+    ...Typography.secondaryTextInput,
+    minHeight: 4 * Typography.largeLineHeight,
   },
   activityIndicatorContainer: {
     position: "absolute",
@@ -265,18 +233,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...Typography.buttonTextPrimary,
-  },
-  disabledButton: {
-    ...Buttons.primaryDisabled,
-  },
-  disabledButtonText: {
-    ...Typography.buttonTextPrimaryDisabled,
-  },
-  secondaryButton: {
-    ...Buttons.secondary,
-  },
-  secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
   },
 })
 

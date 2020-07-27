@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { InfoText } from "./InfoText"
-import { Button } from "./Button"
+import { Button } from "../components/Button"
 import { Info } from "./Info"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
@@ -38,12 +38,7 @@ export const Agreement = ({ navigation }) => {
 
 const AgreementFooter = ({ description, onPress, buttonTitle }) => (
   <>
-    <Button
-      backgroundColor={Colors.white}
-      textColor={Colors.black}
-      onPress={onPress}
-      title={buttonTitle}
-    />
+    <Button onPress={onPress} label={buttonTitle} />
     <RTLEnabledText style={styles.typographyStyle}>
       {description}
     </RTLEnabledText>

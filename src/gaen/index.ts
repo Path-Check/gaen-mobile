@@ -6,6 +6,8 @@ const exposureEventsStrategy: ExposureEventsStrategy = {
   exposureInfoSubscription: NativeModule.subscribeToExposureEvents,
   getCurrentExposures: NativeModule.getCurrentExposures,
   getLastDetectionDate: NativeModule.fetchLastExposureDetectionDate,
+  getExposureKeys: NativeModule.getExposureKeys,
+  submitDiagnosisKeys: NativeModule.submitDiagnosisKeys,
 }
 
 const permissionStrategy: PermissionStrategy = {
@@ -15,7 +17,6 @@ const permissionStrategy: PermissionStrategy = {
 }
 
 const btStrategy: TracingStrategy = {
-  name: "bt",
   exposureEventsStrategy,
   permissionStrategy,
 }

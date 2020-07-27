@@ -7,7 +7,7 @@ import {
 import { ENPermissionStatus } from "../PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../More/ENLocalDiagnosisKeyScreen"
-import { ExposureKey } from "../AffectedUserFlow/exposureKey"
+import { ExposureKey } from "../exposureKey"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
@@ -127,6 +127,10 @@ export const submitDiagnosisKeys = async (
 
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
+
+export const fetchDebugLog = async (): Promise<string> => {
+  return debugModule.fetchDebugLog()
+}
 
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()
