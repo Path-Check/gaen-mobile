@@ -1,6 +1,6 @@
 import { PermissionStrategy } from "./PermissionsContext"
-import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
+import { ExposureKey } from "./exposureKey"
 
 type Posix = number
 

@@ -21,11 +21,11 @@ const {
   DISPLAY_SELF_ASSESSMENT,
 } = env
 
-interface Props {
+interface ExposureDetailProps {
   route: RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
 }
 
-const ExposureDetail: FunctionComponent<Props> = ({ route }) => {
+const ExposureDetail: FunctionComponent<ExposureDetailProps> = ({ route }) => {
   useStatusBarEffect("light-content")
   const navigation = useNavigation()
   const { t } = useTranslation()

@@ -5,7 +5,7 @@ import ExposureListItem from "./ExposureListItem"
 
 const ExposureList: FunctionComponent = () => {
   const { exposureInfo } = useExposureContext()
-  console.log({ exposureInfo })
+
   return (
     <View>
       {exposureInfo.map((exposure) => {

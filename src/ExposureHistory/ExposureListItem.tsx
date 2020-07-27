@@ -4,20 +4,22 @@ import { TouchableHighlight, StyleSheet, View } from "react-native"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { ExposureDatum } from "../exposure"
 import { DateTimeUtils } from "../utils"
-import { Colors, Spacing, Typography } from "../styles"
+import { Colors, Spacing, Typography, Outlines } from "../styles"
 import { useTranslation } from "react-i18next"
 import { Screens } from "../navigation"
 
-interface Props {
+interface ExposureListItemProps {
   exposureDatum: ExposureDatum
 }
 
-const ExposureListItem: FunctionComponent<Props> = ({ exposureDatum }) => {
+const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
+  exposureDatum,
+}) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
   return (
-    <View style={styles.section}>
+    <View style={styles.container}>
       <TouchableHighlight
         underlayColor={Colors.underlayPrimaryBackground}
         style={styles.listItem}
@@ -38,9 +40,13 @@ const ExposureListItem: FunctionComponent<Props> = ({ exposureDatum }) => {
   )
 }
 
-export default ExposureListItem
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    marginBottom: Spacing.medium,
+    borderRadius: Outlines.largeBorderRadius,
+  },
   listItem: {
     flex: 1,
     paddingHorizontal: Spacing.small,
@@ -49,10 +55,6 @@ const styles = StyleSheet.create({
   listItemText: {
     ...Typography.tappableListItem,
   },
-  section: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    marginBottom: Spacing.medium,
-    borderRadius: 14,
-  },
 })
+
+export default ExposureListItem
