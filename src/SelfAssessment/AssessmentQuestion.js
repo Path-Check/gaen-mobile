@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
-import { Button } from "./Button"
+import { Button } from "../components/Button"
 import { AnswersContext } from "./Context"
 import { AssessmentOption } from "./AssessmentOption"
 import {
@@ -136,7 +136,9 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         <Button
           disabled={!selectedValues.length}
           onPress={onNext}
-          title={t("assessment.next")}
+          label={t("assessment.next")}
+          style={styles.button}
+          textStyle={styles.buttonText}
         />
       </View>
     </SafeAreaView>
@@ -174,6 +176,12 @@ const styles = StyleSheet.create({
     ...Typography.assessmentInstruction,
     fontFamily: Typography.baseFontFamily,
     marginTop: Spacing.xLarge,
+  },
+  button: {
+    backgroundColor: Colors.secondaryViolet,
+  },
+  buttonText: {
+    color: Colors.white,
   },
   footer: {
     padding: Spacing.medium,

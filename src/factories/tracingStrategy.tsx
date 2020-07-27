@@ -3,7 +3,6 @@ import { Factory } from "fishery"
 import { TracingStrategy } from "../tracingStrategy"
 
 export default Factory.define<TracingStrategy>(() => ({
-  name: "test-tracing-strategy",
   exposureEventsStrategy: {
     exposureInfoSubscription: () => {
       return { remove: () => {} }
@@ -12,6 +11,8 @@ export default Factory.define<TracingStrategy>(() => ({
     getLastDetectionDate: () => {
       return new Promise(() => null)
     },
+    getExposureKeys: () => new Promise(() => []),
+    submitDiagnosisKeys: () => new Promise(() => ""),
   },
   permissionStrategy: {
     statusSubscription: () => {

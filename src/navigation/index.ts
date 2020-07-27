@@ -48,6 +48,7 @@ export type MoreStackScreen =
   | "About"
   | "Licenses"
   | "ENDebugMenu"
+  | "ENSubmitDebugForm"
   | "LanguageSelection"
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
@@ -61,6 +62,7 @@ export const MoreStackScreens: {
   Licenses: "Licenses",
   LanguageSelection: "LanguageSelection",
   ENDebugMenu: "ENDebugMenu",
+  ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",

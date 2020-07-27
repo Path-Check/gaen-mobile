@@ -4,8 +4,9 @@ import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
 import PublishConsentForm from "./PublishConsentForm"
-import * as NativeModule from "../../gaen/nativeModule"
 import { Screens } from "../../navigation"
+import { ExposureContext } from "../../ExposureContext"
+import { factories } from "../../factories"
 
 afterEach(cleanup)
 
@@ -20,19 +21,24 @@ describe("PublishConsentScreen", () => {
 
         const hmacKey = "hmacKey"
         const certificate = "certificate"
-
-        const nativeModuleSpy = jest
-          .spyOn(NativeModule, "submitDiagnosisKeys")
-          .mockResolvedValueOnce("success")
+        const submitDiagnosisKeysSpy = jest.fn().mockResolvedValue("")
+        const exposureContext = factories.exposureContext.build({
+          submitDiagnosisKeys: submitDiagnosisKeysSpy,
+        })
 
         const { getByLabelText } = render(
-          <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />,
+          <ExposureContext.Provider value={exposureContext}>
+            <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
+          </ExposureContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("I understand and consent"))
 
         await wait(() => {
-          expect(nativeModuleSpy).toHaveBeenCalledWith(certificate, hmacKey)
+          expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
+            certificate,
+            hmacKey,
+          )
           expect(navigateSpy).toHaveBeenCalledWith(Screens.AffectedUserComplete)
         })
       })

@@ -16,6 +16,18 @@ RCT_REMAP_METHOD(fetchDiagnosisKeys,
   [[ExposureManager shared] handleDebugAction:DebugActionFetchDiagnosisKeys resolve:resolve reject:reject];
 }
 
+RCT_EXPORT_METHOD(forceAppCrash)
+{
+  NSAssert(NO, @"Forced Crash (Debug)");
+}
+
+RCT_REMAP_METHOD(fetchDebugLog,
+                 fetchDebugLogWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] handleDebugAction:DebugActionFetchDebugLog resolve:resolve reject:reject];
+}
+
 RCT_REMAP_METHOD(detectExposuresNow,
                  detectExposuresNowWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
