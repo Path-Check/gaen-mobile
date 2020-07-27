@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from "react"
+import { useNavigation } from "@react-navigation/native"
 import { TouchableHighlight, StyleSheet, View } from "react-native"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { ExposureDatum } from "../exposure"
 import { DateTimeUtils } from "../utils"
 import { Colors, Spacing, Typography } from "../styles"
 import { useTranslation } from "react-i18next"
+import { Screens } from "../navigation"
 
 interface Props {
   exposureDatum: ExposureDatum
@@ -13,11 +15,13 @@ interface Props {
 // TODO: translation
 const ExposureListItem: FunctionComponent<Props> = ({ exposureDatum }) => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
   return (
     <View style={styles.section}>
       <TouchableHighlight
         underlayColor={Colors.underlayPrimaryBackground}
         style={styles.listItem}
+        onPress={() => navigation.navigate(Screens.Exposure)}
       >
         <>
           <RTLEnabledText style={styles.listItemText}>

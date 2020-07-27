@@ -33,13 +33,13 @@ export const OnboardingScreens: {
   LanguageSelection: "LanguageSelection",
 }
 
-export type ExposureHistoryScreen = "ExposureHistory" | "NextSteps" | "MoreInfo"
+export type ExposureHistoryScreen = "ExposureHistory" | "Exposure" | "MoreInfo"
 
 export const ExposureHistoryScreens: {
   [key in ExposureHistoryScreen]: ExposureHistoryScreen
 } = {
   ExposureHistory: "ExposureHistory",
-  NextSteps: "NextSteps",
+  Exposure: "Exposure",
   MoreInfo: "MoreInfo",
 }
 

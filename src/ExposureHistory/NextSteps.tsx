@@ -19,19 +19,6 @@ const {
   DISPLAY_SELF_ASSESSMENT,
 } = env
 
-const CloseButton = () => {
-  const navigation = useNavigation()
-
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={styles.backIconContainer}
-    >
-      <SvgXml xml={Icons.Close} fill={Colors.quaternaryViolet} />
-    </TouchableOpacity>
-  )
-}
-
 const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
@@ -57,7 +44,6 @@ const NextSteps = (): JSX.Element => {
 
   return (
     <>
-      <CloseButton />
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <RTLEnabledText style={styles.headerText}>
@@ -125,7 +111,7 @@ const styles = StyleSheet.create({
   backIconContainer: {
     marginTop: Spacing.medium,
     padding: Spacing.medium,
-    alignItems: "flex-end",
+    alignItems: "flex-start",
   },
 })
 
