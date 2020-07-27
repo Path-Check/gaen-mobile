@@ -11,7 +11,7 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(result).toEqual({})
+      expect(result).toEqual([])
     })
   })
 
@@ -40,8 +40,8 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(Object.keys(result).length).toEqual(1)
-      expect(result[beginningOfTwoDaysAgo]).toEqual(expected)
+      expect(result.length).toEqual(1)
+      expect(result).toEqual([expected])
     })
   })
 
@@ -85,7 +85,7 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(result[beginningOfDay]).toEqual(expected)
+      expect(result).toEqual([expected])
     })
   })
 })
