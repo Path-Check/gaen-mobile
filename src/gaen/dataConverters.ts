@@ -17,7 +17,7 @@ export const toExposureInfo = (
   rawExposures: RawExposure[],
 ): ExposureDatum[] => {
   const groupedExposures = rawExposures.map(toPossible).reduce(groupByDate, {})
-  return Object.values(groupedExposures).sort((a, b) => a.date - b.date)
+  return Object.values(groupedExposures).sort((a, b) => b.date - a.date)
 }
 
 const toPossible = (r: RawExposure): Possible => {

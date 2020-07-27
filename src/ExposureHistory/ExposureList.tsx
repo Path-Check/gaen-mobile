@@ -1,20 +1,15 @@
 import React, { FunctionComponent } from "react"
-import { View, Text } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { View } from "react-native"
 import { useExposureContext } from "../ExposureContext"
+import ExposureListItem from "./ExposureListItem"
 
 const ExposureList: FunctionComponent = () => {
   const { exposureInfo } = useExposureContext()
   console.log({ exposureInfo })
   return (
     <View>
-      {Object.keys(exposureInfo).map((e) => {
-        const exposure = exposureInfo[e]
-        return (
-          <TouchableOpacity key={exposure.date}>
-            <Text>{exposure.kind}</Text>
-          </TouchableOpacity>
-        )
+      {exposureInfo.map((exposure) => {
+        return <ExposureListItem key={exposure.date} exposureDatum={exposure} />
       })}
     </View>
   )
