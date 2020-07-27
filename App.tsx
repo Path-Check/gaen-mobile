@@ -3,6 +3,7 @@ import SplashScreen from "react-native-splash-screen"
 import "array-flat-polyfill"
 
 import MainNavigator from "./src/navigation/MainNavigator"
+import { ErrorBoundary } from "./src/ErrorBoundaries"
 import { ExposureProvider } from "./src/ExposureContext"
 import {
   OnboardingProvider,
@@ -28,13 +29,15 @@ const App: FunctionComponent = () => {
   return (
     <>
       {!isLoading ? (
-        <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
-          <PermissionsProvider>
-            <ExposureProvider>
-              <MainNavigator />
-            </ExposureProvider>
-          </PermissionsProvider>
-        </OnboardingProvider>
+        <ErrorBoundary>
+          <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
+            <PermissionsProvider>
+              <ExposureProvider>
+                <MainNavigator />
+              </ExposureProvider>
+            </PermissionsProvider>
+          </OnboardingProvider>
+        </ErrorBoundary>
       ) : null}
     </>
   )

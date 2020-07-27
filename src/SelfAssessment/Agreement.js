@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 
 import { InfoText } from "./InfoText"
 import { Button } from "../components/Button"
-import { Info } from "./Info"
+import { AssessmentLayout } from "./AssessmentLayout"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Colors, Typography } from "../styles"
@@ -17,7 +17,7 @@ export const Agreement = ({ navigation }) => {
   const handleAgreementPress = () => navigation.push("EmergencyAssessment")
 
   return (
-    <Info
+    <AssessmentLayout
       backgroundColor={Colors.invertedPrimaryBackground}
       icon={Icons.SelfAssessment}
       footer={
@@ -32,7 +32,7 @@ export const Agreement = ({ navigation }) => {
         title={t("assessment.agreement_title")}
         description={t("assessment.agreement_description")}
       />
-    </Info>
+    </AssessmentLayout>
   )
 }
 

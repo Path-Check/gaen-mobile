@@ -181,5 +181,10 @@
   "settings": {
     "share_test_result": "Report Positive Test Result",
     "share_test_result_description": "Anonymously notify others you may have recently encountered if you test positive for COVID-19"
+  },
+  "errors": {
+    "title": "Unknown Error",
+    "description": "An error has ocurred. Please reload the app.",
+    "reload": "Reload"
   }
 }
