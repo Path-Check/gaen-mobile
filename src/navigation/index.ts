@@ -7,6 +7,8 @@ import {
 } from "react-navigation"
 import { useFocusEffect } from "@react-navigation/native"
 
+import { ExposureDatum } from "../exposure"
+
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
@@ -33,14 +35,23 @@ export const OnboardingScreens: {
   LanguageSelection: "LanguageSelection",
 }
 
-export type ExposureHistoryScreen = "ExposureHistory" | "Exposure" | "MoreInfo"
+export type ExposureHistoryScreen =
+  | "ExposureHistory"
+  | "ExposureDetail"
+  | "MoreInfo"
 
 export const ExposureHistoryScreens: {
   [key in ExposureHistoryScreen]: ExposureHistoryScreen
 } = {
   ExposureHistory: "ExposureHistory",
-  Exposure: "Exposure",
+  ExposureDetail: "ExposureDetail",
   MoreInfo: "MoreInfo",
+}
+
+export type ExposureHistoryStackParamList = {
+  ExposureDetail: {
+    exposureDatum: ExposureDatum
+  }
 }
 
 export type MoreStackScreen =

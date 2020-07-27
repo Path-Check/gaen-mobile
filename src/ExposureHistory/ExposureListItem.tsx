@@ -12,16 +12,18 @@ interface Props {
   exposureDatum: ExposureDatum
 }
 
-// TODO: translation
 const ExposureListItem: FunctionComponent<Props> = ({ exposureDatum }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+
   return (
     <View style={styles.section}>
       <TouchableHighlight
         underlayColor={Colors.underlayPrimaryBackground}
         style={styles.listItem}
-        onPress={() => navigation.navigate(Screens.Exposure)}
+        onPress={() =>
+          navigation.navigate(Screens.ExposureDetail, { exposureDatum })
+        }
       >
         <>
           <RTLEnabledText style={styles.listItemText}>

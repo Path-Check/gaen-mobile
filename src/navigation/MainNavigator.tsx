@@ -13,7 +13,7 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { Screens, Stacks } from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
-import NextSteps from "../ExposureHistory/NextSteps"
+import ExposureDetail from "../ExposureHistory/ExposureDetail"
 
 const Stack = createStackNavigator()
 
@@ -27,6 +27,8 @@ const MainNavigator: FunctionComponent = () => {
   // const displayNextSteps = Boolean(
   //   env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL,
   // )
+
+  // TODO Refactor SCREEN_OPTIONS
 
   return (
     <NavigationContainer>
@@ -55,9 +57,10 @@ const MainNavigator: FunctionComponent = () => {
               }}
             />
             <Stack.Screen
-              name={Screens.Exposure}
-              component={NextSteps}
+              name={Screens.ExposureDetail}
+              component={ExposureDetail}
               options={{
+                title: "Exposure",
                 headerStyle: {
                   backgroundColor: Colors.primaryViolet,
                 },
@@ -71,7 +74,11 @@ const MainNavigator: FunctionComponent = () => {
             />
           </>
         ) : (
-          <Stack.Screen name={Stacks.Onboarding} component={OnboardingStack} />
+          <Stack.Screen
+            name={Stacks.Onboarding}
+            component={OnboardingStack}
+            options={{ ...SCREEN_OPTIONS }}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>

@@ -55,7 +55,7 @@ const PossibleExposureDetail = ({
   const nextStepsButtonText = t("exposure_datum.possible.what_next")
 
   const handleOnPressNextSteps = () => {
-    navigation.navigate(Screens.NextSteps)
+    navigation.navigate(Screens.ExposureDetail)
   }
 
   return (

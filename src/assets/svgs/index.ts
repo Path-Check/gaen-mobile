@@ -1,5 +1,6 @@
 import AnonymizedData from "./anonymizedData"
 import AnonymizedDataInverted from "./anonymizedDataInverted"
+import Arrow from "./arrow"
 import BackArrow from "./backArrow"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
@@ -25,6 +26,7 @@ import Upload from "./upload"
 export const Icons = {
   AnonymizedData,
   AnonymizedDataInverted,
+  Arrow,
   BackArrow,
   Bell,
   BellYellow,
