@@ -10,10 +10,8 @@ import { RTLEnabledText } from "../components/RTLEnabledText"
 import { Screens, useStatusBarEffect } from "../navigation"
 import { DateTimeUtils } from "../utils"
 
-import { Spacing, Typography, Outlines } from "../styles"
+import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
-
-import { Colors, Iconography } from "../styles"
 
 const {
   GAEN_AUTHORITY_NAME: healthAuthorityName,
