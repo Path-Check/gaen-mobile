@@ -102,7 +102,6 @@ public class DiagnosisKeyUploader {
         }
         Log.d(TAG, "Uploading " + diagnosisKeys.size() + " keys...");
         return doUpload(diagnosisKeys);
-        //return fakeUpload();
     }
 
     /**
@@ -184,7 +183,6 @@ public class DiagnosisKeyUploader {
         JSONArray regionJson = new JSONArray();
         regionJson.put(BuildConfig.REGION_CODES);
 
-        // TODO DL Update
         submission.payload =
                 new JSONObject()
                         .put("temporaryExposureKeys", keysJson)

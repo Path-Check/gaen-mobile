@@ -46,7 +46,6 @@ public class ExposureKeyModule  extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void fetchExposureKeys(final Promise promise) {
-        // TODO Resolve promise with exposure keys array
         Activity activity = getCurrentActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).getExposureKeys(promise);

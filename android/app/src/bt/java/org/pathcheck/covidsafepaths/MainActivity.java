@@ -185,10 +185,7 @@ public class MainActivity extends ReactActivity {
               @Override
               public void onFailure(Throwable exception) {
                 if (!(exception instanceof ApiException)) {
-//                            Log.e(TAG, "Unknown error", exception);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));
-//                            postInflight(false);
+
                   return;
                 }
                 ApiException apiException = (ApiException) exception;
@@ -196,10 +193,7 @@ public class MainActivity extends ReactActivity {
                         == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
                   showPermissionShareKeys(apiException);
                 } else {
-//                            Log.w(TAG, "No RESOLUTION_REQUIRED in result", apiException);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));;
-//                            postInflight(false);
+
                 }
               }
             },
@@ -226,10 +220,7 @@ public class MainActivity extends ReactActivity {
               @Override
               public void onFailure(Throwable exception) {
                 if (!(exception instanceof ApiException)) {
-//                            Log.e(TAG, "Unknown error", exception);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));
-//                            postInflight(false);
+
                   return;
                 }
                 ApiException apiException = (ApiException) exception;
@@ -237,10 +228,7 @@ public class MainActivity extends ReactActivity {
                         == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
                   showPermissionUploadKeys(apiException);
                 } else {
-//                            Log.w(TAG, "No RESOLUTION_REQUIRED in result", apiException);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));;
-//                            postInflight(false);
+
                 }
               }
             },
