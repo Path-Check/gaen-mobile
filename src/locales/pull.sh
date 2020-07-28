@@ -4,7 +4,10 @@ set -e
 # Usage:
 #   - Create a READ ONLY a token at https://app.lokalise.com/profile
 #   - Run the command from the root of the project with:
-#     LOKALISE_TOKEN=<token> yarn i18n:pull
+#     LOKALISE_READ_TOKEN=<token> yarn i18n:pull
+#   - To specify which languages do pull add the LANGUAGES with comma separated
+#     locale strings:
+#     LANGUAGES=en,es_PR,el yarn i18n:pull
 
 function found_exe() {
   hash "$1" 2>/dev/null
@@ -25,6 +28,12 @@ if ! found_exe lokalise2; then
   fi
 fi
 
+if [ -z "$LANGUAGES" ]; then
+  LANGUAGES_FILTER=""
+else
+  LANGUAGES_FILTER="--filter-langs $LANGUAGES"
+fi
+
 echo "Downloading iOS *.strings"
 lokalise2 file download \
   --add-newline-eof \
@@ -36,7 +45,8 @@ lokalise2 file download \
   --unzip-to=ios \
   --export-sort=a_z \
   --config .lokalise.yml \
-  --token=$LOKALISE_READ_TOKEN
+  --token=$LOKALISE_READ_TOKEN \
+  $LANGUAGES_FILTER
 
 echo "Downloading Android strings.xml"
 lokalise2 file download \
@@ -48,7 +58,8 @@ lokalise2 file download \
   --unzip-to=android/app/src/bt/res \
   --export-sort=a_z \
   --config .lokalise.yml \
-  --token=$LOKALISE_READ_TOKEN
+  --token=$LOKALISE_READ_TOKEN \
+  $LANGUAGES_FILTER
 
 echo "Downloading i18next *.json files"
 lokalise2 file download \
@@ -62,8 +73,9 @@ lokalise2 file download \
   --replace-breaks=false \
   --bundle-structure "locales/%LANG_ISO%.json" \
   --original-filenames=false \
-  --unzip-to=app \
+  --unzip-to=src \
   --indentation=2sp \
   --json-unescaped-slashes \
   --config .lokalise.yml \
-  --token=$LOKALISE_READ_TOKEN
+  --token=$LOKALISE_READ_TOKEN \
+  $LANGUAGES_FILTER
