@@ -180,27 +180,16 @@ public class DiagnosisKeyUploader {
             throw new RuntimeException(e);
         }
 
+        JSONArray regionJson = new JSONArray();
+        regionJson.put(BuildConfig.REGION_CODES);
+
         // TODO DL Update
         submission.payload =
                 new JSONObject()
-                        .put("temporaryExposureKeys", keysJson);
-
-        submission.payload =
-                new JSONObject()
-                        .put("hmackey", "placeholder");
-
-        submission.payload =
-                new JSONObject()
-                        .put("padding", randomBase64Data(Util.getRandomNumber()));
-
-        JSONArray regionJson = new JSONArray();
-        regionJson.put(BuildConfig.REGION_CODES);
-        submission.payload =
-                new JSONObject()
-                        .put("regions", BuildConfig.APPLICATION_ID);
-
-        submission.payload =
-                new JSONObject()
+                        .put("temporaryExposureKeys", keysJson)
+                        .put("hmackey", "placeholder")
+                        .put("padding", randomBase64Data(Util.getRandomNumber()))
+                        .put("regions", regionJson)
                         .put("appPackageName", BuildConfig.APPLICATION_ID);
 
         return FluentFuture.from(Futures.immediateFuture(submission));
