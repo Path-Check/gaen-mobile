@@ -213,8 +213,8 @@ public class MainActivity extends ReactActivity {
             new FutureCallback<Boolean>() {
               @Override
               public void onSuccess(Boolean shared) {
-//                        sharedLiveEvent.postValue(shared);
-//                        postInflight(false);
+
+
               }
 
               @Override
