@@ -81,13 +81,13 @@ export const mediumFont: TextStyle = {
 
 export const largeFont: TextStyle = {
   ...base,
-  lineHeight: largestLineHeight,
+  lineHeight: largeLineHeight,
   fontSize: large,
 }
 
 export const largerFont: TextStyle = {
   ...base,
-  lineHeight: mediumLineHeight,
+  lineHeight: largeLineHeight,
   fontSize: larger,
 }
 
@@ -189,7 +189,7 @@ export const quaternaryContent: TextStyle = {
 export const description: TextStyle = {
   ...smallFont,
   color: Colors.primaryText,
-  lineHeight: smallerLineHeight,
+  lineHeight: smallLineHeight,
 }
 
 export const disclaimer: TextStyle = {
