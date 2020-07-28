@@ -12,16 +12,20 @@ import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import GoogleMapsLogo from "./google-maps-logo"
 import Heart from "./heart"
+import House from "./house"
 import Isolate from "./isolate"
 import LanguagesIcon from "./languagesIcon"
 import LocationPin from "./locationPin"
+import Mask from "./mask"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import RadioWave from "./radioWave"
 import SelfAssessment from "./selfAssessment"
+import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
 import Upload from "./upload"
+import WashHands from "./WashHands"
 
 export const Icons = {
   AnonymizedData,
@@ -38,14 +42,18 @@ export const Icons = {
   ExposureIcon,
   GoogleMapsLogo,
   Heart,
+  House,
   Isolate,
   LanguagesIcon,
   LocationPin,
+  Mask,
   Publish,
   QuestionMark,
   RadioWave,
   SelfAssessment,
+  SixFeet,
   StateNoContact,
   StateUnknown,
   Upload,
+  WashHands,
 }
