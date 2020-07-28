@@ -37,10 +37,10 @@ public final class NotificationHelper {
         NotificationCompat.Builder builder =
                 new Builder(context, EXPOSURE_NOTIFICATION_CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_notification)
-                        .setContentTitle(context.getString(R.string.notification_title))
-                        .setContentText(context.getString(R.string.notification_message))
+                        .setContentTitle(context.getString(R.string.exposure_notification_title))
+                        .setContentText(context.getString(R.string.exposure_notification_message))
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(context.getString(R.string.notification_message)))
+                                .bigText(context.getString(R.string.exposure_notification_message)))
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setContentIntent(pendingIntent)
                         .setOnlyAlertOnce(true)
@@ -59,9 +59,9 @@ public final class NotificationHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
                     new NotificationChannel(EXPOSURE_NOTIFICATION_CHANNEL_ID,
-                            context.getString(R.string.notification_channel_name),
+                            context.getString(R.string.exposure_notification_channel_name),
                             NotificationManager.IMPORTANCE_HIGH);
-            channel.setDescription(context.getString(R.string.notification_channel_description));
+            channel.setDescription(context.getString(R.string.exposure_notification_channel_description));
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
         }
