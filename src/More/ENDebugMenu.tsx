@@ -117,6 +117,12 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               }}
             />
             <DebugMenuListItem
+              label="Force App Crash"
+              onPress={() => {
+                NativeModule.forceAppCrash()
+              }}
+            />
+            <DebugMenuListItem
               label="Submit Debug Log"
               onPress={() => {
                 navigation.navigate(Screens.ENSubmitDebugForm)
@@ -135,13 +141,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 label="Toggle Exposure Notifications"
                 onPress={handleOnPressSimulationButton(
                   NativeModule.toggleExposureNotifications,
-                )}
-              />
-              <DebugMenuListItem
-                label="Get and Post Diagnosis Keys"
-                style={styles.lastListItem}
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.submitExposureKeys,
                 )}
               />
               <DebugMenuListItem

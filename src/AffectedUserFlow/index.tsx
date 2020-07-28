@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 
 import { AffectedUserProvider } from "./AffectedUserContext"
 import Start from "./Start"
-import CodeInput from "./CodeInput"
+import CodeInput from "./CodeInput/CodeInputScreen"
 import Complete from "./Complete"
 import PublishConsent from "./PublishConsent/PublishConsentScreen"
 

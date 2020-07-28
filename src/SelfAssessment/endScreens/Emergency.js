@@ -4,7 +4,7 @@ import { Linking, StyleSheet } from "react-native"
 
 import { Button } from "../../components/Button"
 import { AssessmentLayout } from "../AssessmentLayout"
-import { InfoText } from "../InfoText"
+import InfoText from "../InfoText"
 
 import { Icons } from "../../assets"
 import { Colors } from "../../styles"
@@ -13,8 +13,7 @@ import { Colors } from "../../styles"
 export const Emergency = () => {
   let { t } = useTranslation()
 
-  // TODO: This would need to be localized per country
-  const handleOnPress = () => Linking.openURL("tel://911")
+  const handleOnPress = () => Linking.openURL("tel:911")
 
   return (
     <AssessmentLayout

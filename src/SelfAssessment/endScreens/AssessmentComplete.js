@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { Icons, Images } from "../../assets"
 import { AssessmentNavigationContext } from "../Context"
 import { AssessmentLayout } from "../AssessmentLayout"
-import { InfoText } from "../InfoText"
+import InfoText from "../InfoText"
 import { Button } from "../../components/Button"
 
 import { Colors } from "../../styles"

@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React from "react"
 import { StyleSheet, ImageBackground, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
-import PermissionsContext from "../PermissionsContext"
+import { usePermissionsContext } from "../PermissionsContext"
 import { useStatusBarEffect } from "../navigation"
 import Home from "./Home"
 
@@ -12,7 +12,7 @@ import { Spacing, Layout } from "../styles"
 
 const HomeScreen = (): JSX.Element => {
   useStatusBarEffect("light-content")
-  const { exposureNotifications } = useContext(PermissionsContext)
+  const { exposureNotifications } = usePermissionsContext()
   const { t } = useTranslation()
 
   return (

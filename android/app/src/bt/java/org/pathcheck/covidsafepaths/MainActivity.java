@@ -11,8 +11,6 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableArray;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
@@ -32,13 +30,9 @@ import java.util.concurrent.TimeUnit;
 import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
-import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import covidsafepaths.bt.exposurenotifications.network.DiagnosisKey;
 import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
 import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
-import covidsafepaths.bt.exposurenotifications.utils.Util;
-
-import static covidsafepaths.bt.exposurenotifications.utils.CallbackMessages.EN_STATUS_EVENT;
 
 public class MainActivity extends ReactActivity {
 
@@ -82,23 +76,11 @@ public class MainActivity extends ReactActivity {
    * this app.
    */
   private void checkIfExposureNotificationsEnabled() {
-    ExposureNotificationClientWrapper.get(this)
-            .isEnabled().addOnSuccessListener(
-            enabled -> {
-              handleExposureStateChanged(enabled);
+    ExposureNotificationClientWrapper exposureNotificationClient = ExposureNotificationClientWrapper.get(this);
+    exposureNotificationClient.isEnabled()
+            .addOnSuccessListener(enabled -> {
+              exposureNotificationClient.onExposureNotificationStateChanged(getReactContext(), enabled);
             });
-
-  }
-
-  public void showPermission(ApiException apiException) {
-    try {
-      apiException
-              .getStatus()
-              .startResolutionForResult(
-                      this, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
-    }catch (IntentSender.SendIntentException e) {
-
-    }
   }
 
   public void showPermissionShareKeys(ApiException apiException) {
@@ -125,25 +107,13 @@ public class MainActivity extends ReactActivity {
    * apps.
    */
   public void onResolutionComplete(int requestCode, int resultCode) {
-
     if (requestCode == RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION) {
+      ReactContext context = getReactContext();
+      ExposureNotificationClientWrapper exposureNotificationClient = ExposureNotificationClientWrapper.get(context);
       if(resultCode == Activity.RESULT_OK) {
-        final ReactContext reactContext = getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
-        ExposureNotificationClientWrapper.get(reactContext)
-                .start()
-                .addOnSuccessListener(
-                        unused -> {
-                          handleExposureStateChanged(true);
-                        })
-                .addOnFailureListener(
-                        exception -> {
-                          handleExposureStateChanged(false);
-                        })
-                .addOnCanceledListener(() -> {
-                  handleExposureStateChanged(false);
-                });
+        exposureNotificationClient.start(context);
       } else {
-        handleExposureStateChanged(false);
+        exposureNotificationClient.onExposureNotificationStateChanged(context, false);
       }
     } else if(requestCode == RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY){
       if (resultCode == RESULT_OK) {
@@ -151,25 +121,6 @@ public class MainActivity extends ReactActivity {
       } else {
         // Don't share.
       }
-    }
-  }
-
-
-  private void handleExposureStateChanged(boolean enabled) {
-    final ReactContext reactContext = getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
-    WritableArray params = Util.getEnStatusWritableArray(enabled);
-
-    if(enabled) {
-      ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(this);
-    } else {
-     ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(this);
-    }
-
-    if(reactContext != null) {
-      reactContext
-              .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-              .emit(EN_STATUS_EVENT, params);
-
     }
   }
 
@@ -264,5 +215,10 @@ public class MainActivity extends ReactActivity {
                       .build());
     }
     return builder.build();
+  }
+
+  @Nullable
+  private ReactContext getReactContext() {
+    return getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
   }
 }

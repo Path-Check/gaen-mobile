@@ -4,7 +4,7 @@ import env from "react-native-config"
 import { StyleSheet } from "react-native"
 
 import { AssessmentLayout } from "../AssessmentLayout"
-import { InfoText } from "../InfoText"
+import InfoText from "../InfoText"
 import { Button } from "../../components/Button"
 
 import { Icons } from "../../assets"
