@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  Text,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -40,10 +39,9 @@ const History: FunctionComponent<HistoryProps> = ({
     navigation.navigate(Screens.MoreInfo)
   }
 
-  const titleText = t("screen_titles.exposure_history")
-  const subtitleText = t("exposure_history.keep_track_of_exposures")
-
   const showExposureHistory = exposures.length > 0
+
+  const titleText = t("screen_titles.exposure_history")
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -65,11 +63,8 @@ const History: FunctionComponent<HistoryProps> = ({
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.headerRow}>
+          <View style={styles.subheaderRow}>
             <DateInfoHeader lastDetectionDate={lastDetectionDate} />
-          </View>
-          <View>
-            <Text>{subtitleText}</Text>
           </View>
         </View>
         <View style={styles.listContainer}>
@@ -92,20 +87,25 @@ const styles = StyleSheet.create({
   headerRow: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
     marginTop: Spacing.xSmall,
   },
   headerText: {
     ...Typography.header2,
+    color: Colors.black,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
     ...Buttons.tinyTeritiaryRounded,
-    minHeight: Spacing.xHuge,
-    minWidth: Spacing.xHuge,
+    height: Spacing.xxLarge,
+    width: Spacing.xxLarge,
   },
   moreInfoButtonIcon: {
-    minHeight: Spacing.small,
-    minWidth: Spacing.small,
+    minHeight: Spacing.xSmall,
+    minWidth: Spacing.xSmall,
+  },
+  subheaderRow: {
+    marginTop: Spacing.xxxSmall,
   },
   listContainer: {
     marginTop: Spacing.xxLarge,

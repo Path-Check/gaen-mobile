@@ -15,12 +15,11 @@ export const faintGray = "#f8f8f8"
 export const lightestGray = "#ededed"
 export const lighterGray = "#d3d3d3"
 export const lightGray = "#999999"
-export const gray = "#333333"
 export const mediumGray = "#606060"
+export const gray = "#333333"
 export const darkGray = "#4e4e4e"
 export const darkestGray = "#2e2e2e"
 export const steelGray = "#9BA0AA"
-export const grayBlue = "#F8F8FF"
 
 // Reds
 export const red = "#eb0000"
@@ -76,7 +75,7 @@ export const tertiaryBackground = lighterGray
 
 export const invertedPrimaryBackground = primaryBlue
 export const invertedSecondaryBackground = secondaryBlue
-export const surveyPrimaryBackground = grayBlue
+export const surveyPrimaryBackground = faintViolet
 
 export const bottomSheetBackground = white
 

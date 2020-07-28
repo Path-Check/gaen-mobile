@@ -4,6 +4,7 @@ import * as Colors from "./colors"
 import * as Spacing from "./spacing"
 import * as Typography from "./typography"
 
+export const xSmall = 18
 export const small = 30
 export const large = 70
 export const extraLarge = 100
