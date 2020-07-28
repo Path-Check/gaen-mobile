@@ -7,7 +7,7 @@ import { SvgXml } from "react-native-svg"
 import { ExposureHistoryStackParamList } from "../navigation"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useStatusBarEffect } from "../navigation"
-import { DateTimeUtils } from "../utils"
+import { Possible, ExposureDatum, exposureWindowBucket } from "../exposure"
 
 import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -24,6 +24,23 @@ const ExposureDetail: FunctionComponent = () => {
   const headerText = t("exposure_history.exposure_detail.header")
   const contentText = t("exposure_history.exposure_detail.content")
 
+  const exposureWindowBucketInWords = (
+    exposureDatum: ExposureDatum,
+  ): string => {
+    const bucket = exposureWindowBucket(exposureDatum as Possible)
+    switch (bucket) {
+      case "TodayToThreeDaysAgo": {
+        return t("exposure_history.exposure_window.today_to_three_days_ago")
+      }
+      case "FourToSixDaysAgo": {
+        return t("exposure_history.exposure_window.four_to_six_days_ago")
+      }
+      case "SevenToFourteenDaysAgo": {
+        return t("exposure_history.exposure_window.seven_to_fourteen_days_ago")
+      }
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -35,7 +52,7 @@ const ExposureDetail: FunctionComponent = () => {
           />
         </View>
         <RTLEnabledText>
-          {DateTimeUtils.timeAgoInWords(exposureDatum.date)}
+          {exposureWindowBucketInWords(exposureDatum)}
         </RTLEnabledText>
         <RTLEnabledText style={styles.headerText}>{headerText}</RTLEnabledText>
         <RTLEnabledText style={styles.contentText}>

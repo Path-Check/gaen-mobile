@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { RTLEnabledText } from "../../components/RTLEnabledText"
-import { ExposureDatum } from "../../exposure"
-import { DateTimeUtils } from "../../utils"
+import { Possible, ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"
 import { Screens } from "../../navigation"
@@ -28,6 +27,23 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   const { t } = useTranslation()
   const navigation = useNavigation()
 
+  const exposureWindowBucketInWords = (
+    exposureDatum: ExposureDatum,
+  ): string => {
+    const bucket = exposureWindowBucket(exposureDatum as Possible)
+    switch (bucket) {
+      case "TodayToThreeDaysAgo": {
+        return t("exposure_history.exposure_window.today_to_three_days_ago")
+      }
+      case "FourToSixDaysAgo": {
+        return t("exposure_history.exposure_window.four_to_six_days_ago")
+      }
+      case "SevenToFourteenDaysAgo": {
+        return t("exposure_history.exposure_window.seven_to_fourteen_days_ago")
+      }
+    }
+  }
+
   return (
     <TouchableHighlight
       underlayColor={Colors.underlayPrimaryBackground}
@@ -42,7 +58,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
             {t("exposure_history.possible_exposure")}
           </RTLEnabledText>
           <RTLEnabledText style={styles.secondaryText}>
-            {DateTimeUtils.timeAgoInWords(exposureDatum.date)}
+            {exposureWindowBucketInWords(exposureDatum)}
           </RTLEnabledText>
         </View>
         <SvgXml
