@@ -45,7 +45,11 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={styles.container} alwaysBounceVertical={false}>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        style={styles.container}
+        alwaysBounceVertical={false}
+      >
         <View>
           <View style={styles.headerRow}>
             <RTLEnabledText style={styles.headerText}>
@@ -80,6 +84,9 @@ const History: FunctionComponent<HistoryProps> = ({
 }
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    paddingBottom: Spacing.xxHuge,
+  },
   container: {
     padding: Spacing.medium,
     backgroundColor: Colors.primaryBackground,
