@@ -278,10 +278,6 @@ allprojects {
                     // TODO verify no downstream issues with version bump
                     details.useVersion '17+'
                 }
-                if (requested.group == 'com.google.firebase') {
-                    // TODO verify no downstream issues with version bump
-                    //details.useVersion '17+'
-                }
             }
         }
         jcenter()
