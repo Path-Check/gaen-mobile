@@ -5,10 +5,10 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime)
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
-import { DateTimeUtils } from "../utils"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { DateTimeUtils } from "../../utils"
 
-import { Typography } from "../styles"
+import { Typography } from "../../styles"
 
 type Posix = number
 

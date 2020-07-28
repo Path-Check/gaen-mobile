@@ -2,7 +2,7 @@ import { Factory } from "fishery"
 import { ExposureState } from "../ExposureContext"
 
 export default Factory.define<ExposureState>(() => ({
-  exposureInfo: {},
+  exposureInfo: [],
   hasBeenExposed: false,
   userHasNewExposure: true,
   observeExposures: (): void => {},

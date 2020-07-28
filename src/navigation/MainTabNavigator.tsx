@@ -55,13 +55,13 @@ const MainTabNavigator: FunctionComponent = () => {
     )
   }
 
-  const CalendarIcon: FunctionComponent<TabBarIconProps> = ({
+  const ExposureHistoryIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
     size,
   }) => {
     const tabIcon = (
       <SvgXml
-        xml={focused ? Icons.CalendarActive : Icons.CalendarInactive}
+        xml={focused ? Icons.HistoryActive : Icons.HistoryInactive}
         accessible
         accessibilityLabel={t("label.calendar_icon")}
         width={size}
@@ -127,7 +127,7 @@ const MainTabNavigator: FunctionComponent = () => {
         component={ExposureHistoryStack}
         options={{
           tabBarLabel: t("navigation.history"),
-          tabBarIcon: CalendarIcon,
+          tabBarIcon: ExposureHistoryIcon,
         }}
       />
       {displaySelfAssessment && (

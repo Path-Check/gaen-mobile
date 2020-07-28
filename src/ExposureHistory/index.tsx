@@ -3,23 +3,26 @@ import { SafeAreaView } from "react-native"
 
 import { useExposureContext } from "../ExposureContext"
 import { useStatusBarEffect } from "../navigation"
-import { toExposureHistory } from "./exposureHistory"
-import History from "./History"
+import History from "./History/History"
 
-const CALENDAR_DAY_COUNT = 21
+import { ExposureInfo, ExposureDatum } from "../exposure"
+
+const toExposureList = (exposureInfo: ExposureInfo): ExposureDatum[] => {
+  return exposureInfo
+}
 
 const ExposureHistoryScreen = (): JSX.Element => {
-  const { exposureInfo, lastExposureDetectionDate } = useExposureContext()
+  const { lastExposureDetectionDate, exposureInfo } = useExposureContext()
 
   useStatusBarEffect("dark-content")
 
-  const exposureHistory = toExposureHistory(exposureInfo, CALENDAR_DAY_COUNT)
+  const exposures = toExposureList(exposureInfo)
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <History
-        exposureHistory={exposureHistory}
         lastDetectionDate={lastExposureDetectionDate}
+        exposures={exposures}
       />
     </SafeAreaView>
   )

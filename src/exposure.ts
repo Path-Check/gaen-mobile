@@ -20,4 +20,4 @@ export interface NoData {
 
 export type ExposureDatum = Possible | NoKnown | NoData
 
-export type ExposureInfo = Record<Posix, ExposureDatum>
+export type ExposureInfo = ExposureDatum[]
