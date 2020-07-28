@@ -1,24 +1,37 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
-import { RouteProp, useRoute } from "@react-navigation/native"
+import env from "react-native-config"
+import { View, StyleSheet, TouchableOpacity, Linking } from "react-native"
+import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { ExposureHistoryStackParamList } from "../navigation"
+import { ExposureHistoryStackParamList, Screens } from "../navigation"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useStatusBarEffect } from "../navigation"
 import { Possible, ExposureDatum, exposureWindowBucket } from "../exposure"
 
-import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
+import {
+  Colors,
+  Iconography,
+  Outlines,
+  Spacing,
+  Typography,
+  Buttons,
+} from "../styles"
 import { Icons } from "../assets"
 
 const ExposureDetail: FunctionComponent = () => {
+  const navigation = useNavigation()
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
   useStatusBarEffect("light-content")
   const { t } = useTranslation()
 
+  const {
+    GAEN_AUTHORITY_NAME: healthAuthorityName,
+    AUTHORITY_ADVICE_URL: healthAuthorityLink,
+  } = env
   const { exposureDatum } = route.params
 
   const headerText = t("exposure_history.exposure_detail.header")
@@ -41,24 +54,91 @@ const ExposureDetail: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressNextStep = () => {
+    healthAuthorityLink
+      ? Linking.openURL(healthAuthorityLink)
+      : navigation.navigate(Screens.SelfAssessment)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <View style={styles.iconContainerCircle}>
-          <SvgXml
-            xml={Icons.ExposureIcon}
-            width={Iconography.extraLarge}
-            height={Iconography.extraLarge}
-          />
+        <View style={styles.exposureWindowContainer}>
+          <View style={styles.iconContainerCircle}>
+            <SvgXml
+              xml={Icons.ExposureIcon}
+              fill={Colors.primaryViolet}
+              width={Iconography.small}
+              height={Iconography.small}
+            />
+          </View>
+          <RTLEnabledText style={styles.exposureWindow}>
+            {exposureWindowBucketInWords(exposureDatum)}
+          </RTLEnabledText>
         </View>
-        <RTLEnabledText>
-          {exposureWindowBucketInWords(exposureDatum)}
-        </RTLEnabledText>
         <RTLEnabledText style={styles.headerText}>{headerText}</RTLEnabledText>
         <RTLEnabledText style={styles.contentText}>
           {contentText}
         </RTLEnabledText>
       </View>
+      <View style={styles.bottomContainer}>
+        <RTLEnabledText style={styles.bottomHeaderText}>
+          {t("exposure_history.exposure_detail.ha_guidance_header")}
+        </RTLEnabledText>
+        <RTLEnabledText style={styles.bottomSubheaderText}>
+          {t("exposure_history.exposure_detail.ha_guidance_subheader", {
+            healthAuthorityName,
+          })}
+        </RTLEnabledText>
+        <View style={styles.recommendations}>
+          <RecommendationBubble
+            icon={Icons.IsolateBubbles}
+            text={t("exposure_history.exposure_detail.isolate")}
+          />
+          <RecommendationBubble
+            icon={Icons.Mask}
+            text={t("exposure_history.exposure_detail.wear_a_mask")}
+          />
+          <RecommendationBubble
+            icon={Icons.SixFeet}
+            text={t("exposure_history.exposure_detail.6ft_apart")}
+          />
+          <RecommendationBubble
+            icon={Icons.WashHands}
+            text={t("exposure_history.exposure_detail.wash_your_hands")}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={handleOnPressNextStep}
+          style={styles.nextStepsButton}
+        >
+          <RTLEnabledText style={styles.nextStepsButtonText}>
+            {t("exposure_history.exposure_detail.next_steps")}
+          </RTLEnabledText>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
+type RecommendationBubbleProps = {
+  text: string
+  icon: string
+}
+const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
+  text,
+  icon,
+}) => {
+  return (
+    <View style={styles.recommendation}>
+      <View style={styles.recommendationBubbleCircle}>
+        <SvgXml
+          xml={icon}
+          width={Iconography.small}
+          height={Iconography.small}
+        />
+      </View>
+      <RTLEnabledText style={styles.recommendationText}>{text}</RTLEnabledText>
     </View>
   )
 }
@@ -66,23 +146,81 @@ const ExposureDetail: FunctionComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.primaryBackground,
   },
   headerContainer: {
-    flex: 1,
-    padding: Spacing.medium,
     backgroundColor: Colors.white,
+    paddingHorizontal: Spacing.medium,
+    paddingVertical: Spacing.large,
+  },
+  exposureWindow: {
+    ...Typography.base,
+    color: Colors.darkGray,
+    textTransform: "uppercase",
+    letterSpacing: Typography.mediumLetterSpacing,
   },
   headerText: {
-    ...Typography.header3,
+    ...Typography.header6,
   },
   contentText: {
-    ...Typography.mainContent,
-    paddingTop: Spacing.small,
+    ...Typography.tertiaryContent,
+    marginTop: Spacing.xxSmall,
+    color: Colors.darkGray,
+  },
+  exposureWindowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: Spacing.small,
   },
   iconContainerCircle: {
-    ...Iconography.extraLargeIcon,
+    ...Iconography.xSmallIcon,
     ...Outlines.glowShadow,
     alignSelf: "center",
+    marginRight: Spacing.xSmall,
+  },
+  bottomContainer: {
+    backgroundColor: Colors.white,
+    flex: 1,
+    padding: Spacing.medium,
+    marginTop: Spacing.xxSmall,
+  },
+  bottomHeaderText: {
+    ...Typography.header6,
+    fontSize: Typography.large,
+    paddingBottom: Spacing.small,
+  },
+  bottomSubheaderText: {
+    ...Typography.tertiaryContent,
+    color: Colors.darkGray,
+    marginBottom: Spacing.medium,
+  },
+  recommendations: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: Spacing.xxxLarge,
+  },
+  recommendation: {
+    display: "flex",
+    alignItems: "center",
+  },
+  recommendationBubbleCircle: {
+    ...Iconography.smallIcon,
+    borderRadius: 50,
+    backgroundColor: Colors.primaryBackground,
+    padding: Spacing.xLarge,
+    marginBottom: Spacing.xSmall,
+  },
+  recommendationText: {
+    ...Typography.tinyFont,
+    color: Colors.primaryText,
+  },
+  nextStepsButton: {
+    ...Buttons.largeBlue,
+    ...Buttons.largeBlue,
+  },
+  nextStepsButtonText: {
+    ...Typography.buttonTextLight,
   },
 })
 

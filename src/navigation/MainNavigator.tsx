@@ -35,12 +35,6 @@ const RIGHT_SLIDING_MODAL_OPTIONS = {
 
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
-  // TODO move into next steps
-  // const displayNextSteps = Boolean(
-  //   env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL,
-  // )
-
-  // TODO Refactor SCREEN_OPTIONS
 
   return (
     <NavigationContainer>

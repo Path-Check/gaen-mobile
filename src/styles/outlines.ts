@@ -56,8 +56,8 @@ export const downShadow: ViewStyle = {
 }
 
 export const glowShadow: ViewStyle = {
-  shadowColor: Colors.black,
-  shadowOpacity: 0.2,
+  shadowColor: Colors.darkestGray,
+  shadowOpacity: 0.1,
   shadowRadius: 20,
 }
 
