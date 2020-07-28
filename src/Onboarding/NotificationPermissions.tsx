@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet } from "react-native"
 
-import PermissionsContext from "../PermissionsContext"
+import { usePermissionsContext } from "../PermissionsContext"
 import { Screens } from "../navigation"
 import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"
@@ -14,7 +14,7 @@ import { Colors } from "../styles"
 const NotificationsPermissions = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { notification } = useContext(PermissionsContext)
+  const { notification } = usePermissionsContext()
 
   useStatusBarEffect("dark-content")
 
