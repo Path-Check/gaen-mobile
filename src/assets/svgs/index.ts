@@ -14,6 +14,7 @@ import GoogleMapsLogo from "./google-maps-logo"
 import Heart from "./heart"
 import House from "./house"
 import Isolate from "./isolate"
+import IsolateBubbles from "./isolateBubbles"
 import LanguagesIcon from "./languagesIcon"
 import LocationPin from "./locationPin"
 import Mask from "./mask"
@@ -44,6 +45,7 @@ export const Icons = {
   Heart,
   House,
   Isolate,
+  IsolateBubbles,
   LanguagesIcon,
   LocationPin,
   Mask,
