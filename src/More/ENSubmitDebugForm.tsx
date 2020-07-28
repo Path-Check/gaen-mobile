@@ -77,29 +77,29 @@ const CodeInputScreen: FunctionComponent = () => {
   }
 
   return (
-    <View style={styles.backgroundImage}>
+    <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           keyboardVerticalOffset={Spacing.tiny}
           behavior={isIOS ? "padding" : undefined}
         >
-          <View style={styles.container}>
+          <View style={style.container}>
             <View>
-              <View style={styles.headerContainer}>
-                <RTLEnabledText style={styles.header}>
+              <View style={style.headerContainer}>
+                <RTLEnabledText style={style.header}>
                   {t("more.debug.submit_your_debug_log")}
                 </RTLEnabledText>
               </View>
 
-              <View style={styles.inputContainer}>
-                <RTLEnabledText style={styles.inputLabel}>
+              <View style={style.inputContainer}>
+                <RTLEnabledText style={style.inputLabel}>
                   {t("label.email_optional")}
                 </RTLEnabledText>
                 <TextInput
                   value={email}
                   placeholder={"email@example.com"}
                   placeholderTextColor={Colors.placeholderTextColor}
-                  style={styles.textInput}
+                  style={style.textInput}
                   keyboardType={"email-address"}
                   returnKeyType={"done"}
                   onChangeText={handleOnChangeEmail}
@@ -109,13 +109,13 @@ const CodeInputScreen: FunctionComponent = () => {
                 />
               </View>
 
-              <View style={styles.inputContainer}>
-                <RTLEnabledText style={styles.inputLabel}>
+              <View style={style.inputContainer}>
+                <RTLEnabledText style={style.inputLabel}>
                   {t("label.description_optional")}
                 </RTLEnabledText>
                 <TextInput
                   value={description}
-                  style={styles.descriptionInput}
+                  style={style.descriptionInput}
                   keyboardType={"default"}
                   returnKeyType={"done"}
                   onChangeText={handleOnChangeDescription}
@@ -125,7 +125,7 @@ const CodeInputScreen: FunctionComponent = () => {
                 />
               </View>
 
-              <RTLEnabledText style={styles.errorSubtitle}>
+              <RTLEnabledText style={style.errorSubtitle}>
                 {errorMessage}
               </RTLEnabledText>
             </View>
@@ -137,9 +137,9 @@ const CodeInputScreen: FunctionComponent = () => {
                 accessible
                 accessibilityLabel={t("common.submit")}
                 accessibilityRole="button"
-                style={styles.button}
+                style={style.button}
               >
-                <RTLEnabledText style={styles.buttonText}>
+                <RTLEnabledText style={style.buttonText}>
                   {t("common.submit")}
                 </RTLEnabledText>
               </TouchableOpacity>
@@ -153,11 +153,11 @@ const CodeInputScreen: FunctionComponent = () => {
 
 const LoadingIndicator = () => {
   return (
-    <View style={styles.activityIndicatorContainer}>
+    <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
         color={Colors.darkGray}
-        style={styles.activityIndicator}
+        style={style.activityIndicator}
         testID={"loading-indicator"}
       />
     </View>
@@ -166,7 +166,7 @@ const LoadingIndicator = () => {
 
 const indicatorWidth = 120
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     width: "100%",
     height: "100%",

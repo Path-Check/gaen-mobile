@@ -83,8 +83,8 @@ const ExposureListDebugScreen = ({
       data={exposures}
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
-        <View style={styles.flatlistRowView}>
-          <RTLEnabledText style={styles.itemText}>
+        <View style={style.flatlistRowView}>
+          <RTLEnabledText style={style.itemText}>
             <Text>Date: {item.item.date}</Text>
           </RTLEnabledText>
         </View>
@@ -93,7 +93,7 @@ const ExposureListDebugScreen = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   flatlistRowView: {
     flexDirection: "row",

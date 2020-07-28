@@ -24,8 +24,8 @@ export const AssessmentComplete = () => {
         <Button
           onPress={dismiss}
           label={t("assessment.complete_cta")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
           testID="assessment-button"
         />
       }
@@ -38,7 +38,7 @@ export const AssessmentComplete = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondaryViolet,
   },

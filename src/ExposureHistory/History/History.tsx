@@ -46,32 +46,32 @@ const History: FunctionComponent<HistoryProps> = ({
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
-        contentContainerStyle={styles.contentContainer}
-        style={styles.container}
+        contentContainerStyle={style.contentContainer}
+        style={style.container}
         alwaysBounceVertical={false}
       >
         <View>
-          <View style={styles.headerRow}>
-            <RTLEnabledText style={styles.headerText}>
+          <View style={style.headerRow}>
+            <RTLEnabledText style={style.headerText}>
               {titleText}
             </RTLEnabledText>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
-              style={styles.moreInfoButton}
+              style={style.moreInfoButton}
             >
               <SvgXml
                 xml={Icons.QuestionMark}
                 accessible
                 accessibilityLabel={t("label.question_icon")}
-                style={styles.moreInfoButtonIcon}
+                style={style.moreInfoButtonIcon}
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.subheaderRow}>
+          <View style={style.subheaderRow}>
             <DateInfoHeader lastDetectionDate={lastDetectionDate} />
           </View>
         </View>
-        <View style={styles.listContainer}>
+        <View style={style.listContainer}>
           {showExposureHistory ? (
             <ExposureList exposures={exposures} />
           ) : (
@@ -83,7 +83,7 @@ const History: FunctionComponent<HistoryProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
     paddingBottom: Spacing.xxHuge,
   },

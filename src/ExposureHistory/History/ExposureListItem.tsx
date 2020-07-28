@@ -47,17 +47,17 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   return (
     <TouchableHighlight
       underlayColor={Colors.underlayPrimaryBackground}
-      style={styles.container}
+      style={style.container}
       onPress={() =>
         navigation.navigate(Screens.ExposureDetail, { exposureDatum })
       }
     >
-      <View style={styles.innerContainer}>
+      <View style={style.innerContainer}>
         <View>
-          <RTLEnabledText style={styles.primaryText}>
+          <RTLEnabledText style={style.primaryText}>
             {t("exposure_history.possible_exposure")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.secondaryText}>
+          <RTLEnabledText style={style.secondaryText}>
             {exposureWindowBucketInWords(exposureDatum)}
           </RTLEnabledText>
         </View>
@@ -74,7 +74,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,

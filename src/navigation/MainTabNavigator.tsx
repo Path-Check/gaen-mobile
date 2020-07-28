@@ -27,12 +27,12 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <>
         {icon}
-        <View style={styles.iconBadge} />
+        <View style={style.iconBadge} />
       </>
     )
   }
 
-  const styles = StyleSheet.create({
+  const style = StyleSheet.create({
     iconBadge: {
       ...Affordances.iconBadge,
     },

@@ -26,8 +26,8 @@ export const Isolate = ({ navigation }) => {
         <Button
           onPress={handleButtonPress}
           label={t("assessment.isolate_cta")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
           testID="assessment-button"
         />
       }
@@ -40,7 +40,7 @@ export const Isolate = ({ navigation }) => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondaryViolet,
   },

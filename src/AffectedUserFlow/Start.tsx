@@ -35,15 +35,15 @@ export const ExportIntro = (): JSX.Element => {
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}
+      style={style.backgroundImage}
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          style={styles.container}
+          contentContainerStyle={style.contentContainer}
+          style={style.container}
         >
-          <View style={styles.headerContainer}>
-            <View style={styles.iconContainerCircle}>
+          <View style={style.headerContainer}>
+            <View style={style.iconContainerCircle}>
               <SvgXml
                 xml={Icons.Heart}
                 width={Iconography.small}
@@ -51,8 +51,8 @@ export const ExportIntro = (): JSX.Element => {
               />
             </View>
 
-            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
+            <RTLEnabledText style={style.header}>{title}</RTLEnabledText>
+            <RTLEnabledText style={style.contentText}>{body}</RTLEnabledText>
           </View>
 
           <Button label={t("common.start")} onPress={handleOnPressNext} />
@@ -62,7 +62,7 @@ export const ExportIntro = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },

@@ -19,18 +19,18 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
   const parseError = error.toString()
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.textContainer}>
-          <RTLEnabledText style={styles.title}>
+    <SafeAreaView style={style.container}>
+      <View style={style.content}>
+        <View style={style.textContainer}>
+          <RTLEnabledText style={style.title}>
             {t("errors.title")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.subtitle}>
+          <RTLEnabledText style={style.subtitle}>
             {t("errors.description")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.error}>{parseError}</RTLEnabledText>
+          <RTLEnabledText style={style.error}>{parseError}</RTLEnabledText>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={style.buttonContainer}>
           <Button label={t("errors.reload")} onPress={resetError} />
         </View>
       </View>
@@ -38,7 +38,7 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.red,
     flex: 1,

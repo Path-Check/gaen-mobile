@@ -52,13 +52,11 @@ const AgreementFooter: FunctionComponent<AgreementFooterProps> = ({
 }) => (
   <>
     <Button onPress={onPress} label={buttonTitle} />
-    <RTLEnabledText style={styles.typographyStyle}>
-      {description}
-    </RTLEnabledText>
+    <RTLEnabledText style={style.typographyStyle}>{description}</RTLEnabledText>
   </>
 )
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   typographyStyle: {
     paddingTop: 10,
     ...Typography.quaternaryContent,
