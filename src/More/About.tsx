@@ -8,14 +8,20 @@ import {
   Text,
   View,
 } from "react-native"
+import {
+  getApplicationName,
+  getBuildNumber,
+  getVersion,
+} from "react-native-device-info"
 
-import packageJson from "../../package.json"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 
 import { Colors, Spacing, Typography } from "../styles"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
+
+  const versionInfo = `${getVersion()} (${getBuildNumber()})`
 
   return (
     <ScrollView
@@ -24,7 +30,7 @@ export const AboutScreen: FunctionComponent = () => {
     >
       <View>
         <RTLEnabledText style={styles.headerContent}>
-          {t("label.about_header_bluetooth")}
+          {getApplicationName()}
         </RTLEnabledText>
       </View>
       <RTLEnabledText style={styles.aboutContent}>
@@ -36,7 +42,7 @@ export const AboutScreen: FunctionComponent = () => {
           Linking.openURL("https://pathcheck.org/")
         }}
       >
-        <Text>{"pathcheck.org"}</Text>
+        <Text>pathcheck.org</Text>
       </RTLEnabledText>
 
       <View style={styles.rowContainer}>
@@ -46,7 +52,7 @@ export const AboutScreen: FunctionComponent = () => {
           </RTLEnabledText>
 
           <RTLEnabledText style={styles.aboutSectionParaContent}>
-            {packageJson.version}
+            {versionInfo}
           </RTLEnabledText>
         </View>
         <View style={styles.row}>
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.huge,
+    flex: 1,
   },
   headerContent: {
     ...Typography.header2,
