@@ -14,6 +14,13 @@ const baseIcon: ViewStyle = {
   justifyContent: "center",
 }
 
+export const xSmallIcon: ViewStyle = {
+  ...baseIcon,
+  height: xSmall,
+  width: xSmall,
+  borderRadius: 100,
+}
+
 export const smallIcon: ViewStyle = {
   ...baseIcon,
   height: small,
