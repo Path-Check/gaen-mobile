@@ -4,7 +4,7 @@ import { Linking, StyleSheet } from "react-native"
 
 import { Button } from "../../components/Button"
 import { AssessmentLayout } from "../AssessmentLayout"
-import { InfoText } from "../InfoText"
+import InfoText from "../InfoText"
 
 import { Icons } from "../../assets"
 import { Colors } from "../../styles"

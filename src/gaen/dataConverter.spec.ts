@@ -11,7 +11,7 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(result).toEqual({})
+      expect(result).toEqual([])
     })
   })
 
@@ -19,7 +19,6 @@ describe("toExposureInfo", () => {
     it("returns an ExposureInfo with a PossibleExposure at the correct date", () => {
       const today = Date.now()
       const twoDaysAgo = dayjs(today).subtract(2, "day").valueOf()
-      const beginningOfTwoDaysAgo = DateTimeUtils.beginningOfDay(twoDaysAgo)
       const duration = 30 * 60 * 1000
       const rawExposures: RawExposure[] = [
         {
@@ -40,8 +39,8 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(Object.keys(result).length).toEqual(1)
-      expect(result[beginningOfTwoDaysAgo]).toEqual(expected)
+      expect(result.length).toEqual(1)
+      expect(result).toEqual([expected])
     })
   })
 
@@ -85,7 +84,7 @@ describe("toExposureInfo", () => {
 
       const result = toExposureInfo(rawExposures)
 
-      expect(result[beginningOfDay]).toEqual(expected)
+      expect(result).toEqual([expected])
     })
   })
 })

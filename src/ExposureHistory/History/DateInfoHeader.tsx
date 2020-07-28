@@ -5,10 +5,10 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime)
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
-import { DateTimeUtils } from "../utils"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { DateTimeUtils } from "../../utils"
 
-import { Typography } from "../styles"
+import { Colors, Typography } from "../../styles"
 
 type Posix = number
 
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
   subHeaderText: {
     ...Typography.header4,
     ...Typography.bold,
+    textTransform: "uppercase",
+    color: Colors.darkestGray,
+    letterSpacing: Typography.mediumLetterSpacing,
   },
 })
 

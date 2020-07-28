@@ -22,6 +22,9 @@ export const largeLineHeight = 28
 export const largestLineHeight = 32
 export const hugeLineHeight = 50
 
+// Letter Spacing
+export const mediumLetterSpacing = 0.5
+
 // Font Weights
 export const lighterWeight = "200"
 export const lightWeight = "300"
@@ -78,13 +81,13 @@ export const mediumFont: TextStyle = {
 
 export const largeFont: TextStyle = {
   ...base,
-  lineHeight: largestLineHeight,
+  lineHeight: largeLineHeight,
   fontSize: large,
 }
 
 export const largerFont: TextStyle = {
   ...base,
-  lineHeight: largestLineHeight,
+  lineHeight: largeLineHeight,
   fontSize: larger,
 }
 
@@ -186,7 +189,7 @@ export const quaternaryContent: TextStyle = {
 export const description: TextStyle = {
   ...smallFont,
   color: Colors.primaryText,
-  lineHeight: smallerLineHeight,
+  lineHeight: smallLineHeight,
 }
 
 export const disclaimer: TextStyle = {

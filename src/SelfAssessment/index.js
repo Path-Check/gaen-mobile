@@ -11,8 +11,8 @@ import {
   SurveyContext,
 } from "./Context"
 import { AssessmentQuestion } from "./AssessmentQuestion"
-import { AssessmentStart } from "./AssessmentStart"
-import { Agreement } from "./Agreement"
+import AssessmentStart from "./AssessmentStart"
+import Agreement from "./Agreement"
 import { EmergencyAssessment } from "./EmergencyAssessment"
 import {
   END_ROUTES,

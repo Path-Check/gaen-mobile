@@ -3,7 +3,7 @@ import { ViewStyle } from "react-native"
 import * as Colors from "./colors"
 
 export const baseBorderRadius = 8
-export const largeBorderRadius = 16
+export const largeBorderRadius = 20
 export const maxBorderRadius = 500
 
 export const hairline = 1
@@ -53,6 +53,12 @@ export const downShadow: ViewStyle = {
     width: 0,
     height: 3,
   },
+}
+
+export const glowShadow: ViewStyle = {
+  shadowColor: Colors.black,
+  shadowOpacity: 0.2,
+  shadowRadius: 20,
 }
 
 const baseHRule: ViewStyle = {

@@ -4,25 +4,37 @@ import * as Colors from "./colors"
 import * as Spacing from "./spacing"
 import * as Typography from "./typography"
 
+export const xSmall = 18
 export const small = 30
 export const large = 70
+export const extraLarge = 100
 
-export const smallIcon: ViewStyle = {
-  height: 30,
-  width: 30,
-  borderRadius: 100,
+const baseIcon: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
+}
+
+export const smallIcon: ViewStyle = {
+  ...baseIcon,
+  height: small,
+  width: small,
+  borderRadius: 100,
   marginVertical: Spacing.small,
 }
 
 export const largeIcon: ViewStyle = {
-  height: 70,
-  width: 70,
-  borderRadius: 70,
-  backgroundColor: Colors.onboardingIconBlue,
-  alignItems: "center",
-  justifyContent: "center",
+  ...baseIcon,
+  height: large,
+  width: large,
+  borderRadius: large,
+  marginVertical: Spacing.large,
+}
+
+export const extraLargeIcon: ViewStyle = {
+  ...baseIcon,
+  height: extraLarge,
+  width: extraLarge,
+  borderRadius: extraLarge,
   marginVertical: Spacing.large,
 }
 

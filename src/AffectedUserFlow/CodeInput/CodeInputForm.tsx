@@ -1,6 +1,4 @@
-import React, { useState } from "react"
-import { useNavigation } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
+import React, { FunctionComponent, useState } from "react"
 import {
   ActivityIndicator,
   Alert,
@@ -12,14 +10,16 @@ import {
   View,
   Keyboard,
 } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
-import { useAffectedUserContext } from "./AffectedUserContext"
-import * as API from "./verificationAPI"
-import { calculateHmac } from "./hmac"
+import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { useAffectedUserContext } from "../AffectedUserContext"
+import * as API from "../verificationAPI"
+import { calculateHmac } from "../hmac"
+import { useExposureContext } from "../../ExposureContext"
 
-import { Screens, Stacks } from "../navigation"
+import { Screens, Stacks } from "../../navigation"
 import {
   Spacing,
   Buttons,
@@ -28,23 +28,19 @@ import {
   Colors,
   Outlines,
   Typography,
-} from "../styles"
-import { useExposureContext } from "../ExposureContext"
+} from "../../styles"
 
 const defaultErrorMessage = " "
 
-const CodeInputScreen = (): JSX.Element => {
+const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const strategy = useExposureContext()
+  const { setExposureSubmissionCredentials } = useAffectedUserContext()
 
-  const {
-    code,
-    setCode,
-    setExposureSubmissionCredentials,
-  } = useAffectedUserContext()
+  const [code, setCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
-  const strategy = useExposureContext()
 
   const isIOS = Platform.OS === "ios"
   const codeLength = 8
@@ -118,86 +114,76 @@ const CodeInputScreen = (): JSX.Element => {
   }
 
   const isDisabled = code.length !== codeLength
-
   const buttonStyle = isDisabled ? styles.disabledButton : styles.button
   const buttonTextStyle = isDisabled
     ? styles.disabledButtonText
     : styles.buttonText
 
   return (
-    <View style={styles.backgroundImage}>
-      <SafeAreaView
-        style={{ flex: 1 }}
-        testID={"affected-user-code-input-screen"}
-      >
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={Spacing.tiny}
-          behavior={isIOS ? "padding" : undefined}
-        >
-          <View style={styles.container}>
-            <View>
-              <View style={styles.headerContainer}>
-                <RTLEnabledText style={styles.header}>
-                  {t("export.code_input_title_bluetooth")}
-                </RTLEnabledText>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={Spacing.tiny}
+      behavior={isIOS ? "padding" : undefined}
+    >
+      <View style={styles.container} testID={"affected-user-code-input-form"}>
+        <View>
+          <View style={styles.headerContainer}>
+            <RTLEnabledText style={styles.header}>
+              {t("export.code_input_title_bluetooth")}
+            </RTLEnabledText>
 
-                <RTLEnabledText style={styles.subheader}>
-                  {t("export.code_input_body_bluetooth")}
-                </RTLEnabledText>
-              </View>
-
-              <View>
-                <TextInput
-                  testID={"code-input"}
-                  value={code}
-                  placeholder={"00000000"}
-                  placeholderTextColor={Colors.placeholderTextColor}
-                  maxLength={codeLength}
-                  style={styles.codeInput}
-                  keyboardType={"number-pad"}
-                  returnKeyType={"done"}
-                  onChangeText={handleOnChangeText}
-                  blurOnSubmit={false}
-                  onSubmitEditing={Keyboard.dismiss}
-                />
-              </View>
-
-              <RTLEnabledText style={styles.errorSubtitle}>
-                {errorMessage}
-              </RTLEnabledText>
-            </View>
-            {isLoading ? <LoadingIndicator /> : null}
-
-            <View>
-              <TouchableOpacity
-                onPress={handleOnPressSubmit}
-                accessible
-                accessibilityLabel={t("common.submit")}
-                accessibilityRole="button"
-                disabled={isDisabled}
-                style={buttonStyle}
-              >
-                <RTLEnabledText style={buttonTextStyle}>
-                  {t("common.submit")}
-                </RTLEnabledText>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={handleOnPressCancel}
-                style={styles.secondaryButton}
-              >
-                <RTLEnabledText style={styles.secondaryButtonText}>
-                  {t("export.code_input_button_cancel")}
-                </RTLEnabledText>
-              </TouchableOpacity>
-            </View>
+            <RTLEnabledText style={styles.subheader}>
+              {t("export.code_input_body_bluetooth")}
+            </RTLEnabledText>
           </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </View>
+
+          <View>
+            <TextInput
+              testID={"code-input"}
+              value={code}
+              placeholder={"00000000"}
+              placeholderTextColor={Colors.placeholderTextColor}
+              maxLength={codeLength}
+              style={styles.codeInput}
+              keyboardType={"number-pad"}
+              returnKeyType={"done"}
+              onChangeText={handleOnChangeText}
+              blurOnSubmit={false}
+            />
+          </View>
+
+          <RTLEnabledText style={styles.errorSubtitle}>
+            {errorMessage}
+          </RTLEnabledText>
+        </View>
+        {isLoading ? <LoadingIndicator /> : null}
+
+        <View>
+          <TouchableOpacity
+            onPress={handleOnPressSubmit}
+            accessible
+            accessibilityLabel={t("common.submit")}
+            accessibilityRole="button"
+            disabled={isDisabled}
+            style={buttonStyle}
+          >
+            <RTLEnabledText style={buttonTextStyle}>
+              {t("common.submit")}
+            </RTLEnabledText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleOnPressCancel}
+            style={styles.secondaryButton}
+          >
+            <RTLEnabledText style={styles.secondaryButtonText}>
+              {t("export.code_input_button_cancel")}
+            </RTLEnabledText>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   )
 }
-
 const LoadingIndicator = () => {
   return (
     <View style={styles.activityIndicatorContainer}>
@@ -214,18 +200,13 @@ const LoadingIndicator = () => {
 const indicatorWidth = 120
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    backgroundColor: Colors.faintGray,
-  },
   container: {
     height: "100%",
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Layout.oneTenthHeight,
     backgroundColor: Colors.primaryBackgroundFaintShade,
+    paddingBottom: Spacing.small,
   },
   headerContainer: {
     marginBottom: Spacing.xxxHuge,
@@ -280,4 +261,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CodeInputScreen
+export default CodeInputForm

@@ -1,3 +1,5 @@
+import { DateTimeUtils } from "./utils"
+
 export type Posix = number
 
 export interface Possible {
@@ -20,4 +22,25 @@ export interface NoData {
 
 export type ExposureDatum = Possible | NoKnown | NoData
 
-export type ExposureInfo = Record<Posix, ExposureDatum>
+export type ExposureInfo = ExposureDatum[]
+
+export type ExposureWindowBucket =
+  | "TodayToThreeDaysAgo"
+  | "FourToSixDaysAgo"
+  | "SevenToFourteenDaysAgo"
+
+export const exposureWindowBucket = (
+  exposureDatum: Possible,
+): ExposureWindowBucket => {
+  const date = exposureDatum.date
+  const threeDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(3))
+  const sevenDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(7))
+
+  if (date >= threeDaysAgo) {
+    return "TodayToThreeDaysAgo"
+  } else if (date > sevenDaysAgo) {
+    return "FourToSixDaysAgo"
+  } else {
+    return "SevenToFourteenDaysAgo"
+  }
+}

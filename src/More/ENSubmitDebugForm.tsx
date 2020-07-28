@@ -187,10 +187,6 @@ const styles = StyleSheet.create({
     ...Typography.header2,
     marginBottom: Spacing.xxSmall,
   },
-  subheader: {
-    ...Typography.header4,
-    color: Colors.secondaryText,
-  },
   errorSubtitle: {
     ...Typography.header4,
     color: Colors.errorText,

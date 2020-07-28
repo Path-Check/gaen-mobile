@@ -132,6 +132,10 @@ export const fetchDebugLog = async (): Promise<string> => {
   return debugModule.fetchDebugLog()
 }
 
+export const forceAppCrash = async (): Promise<void> => {
+  return debugModule.forceAppCrash()
+}
+
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()
 }
@@ -161,10 +165,6 @@ export const resetExposure = async (): Promise<"success"> => {
 
 export const toggleExposureNotifications = async (): Promise<"success"> => {
   return debugModule.toggleExposureNotifications()
-}
-
-export const submitExposureKeys = async (): Promise<"success"> => {
-  return debugModule.submitExposureKeys()
 }
 
 export const simulateExposureDetectionError = async (): Promise<"success"> => {
