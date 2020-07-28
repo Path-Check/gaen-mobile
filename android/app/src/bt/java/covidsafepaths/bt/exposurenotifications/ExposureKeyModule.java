@@ -19,6 +19,8 @@ import static covidsafepaths.bt.exposurenotifications.ExposureNotificationsModul
 public class ExposureKeyModule  extends ReactContextBaseJavaModule {
     public static final String MODULE_NAME = "ExposureKeyModule";
     private final ExposureNotificationClient exposureNotificationClient;
+    public static String certificate;
+    public static String hmacKey;
 
     public ExposureKeyModule(ReactApplicationContext context) {
         super(context);
@@ -33,6 +35,9 @@ public class ExposureKeyModule  extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void postDiagnosisKeys(String certificate, String hmacKey) {
+        this.certificate = certificate;
+        this.hmacKey = hmacKey;
+
         Activity activity = getCurrentActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).share();

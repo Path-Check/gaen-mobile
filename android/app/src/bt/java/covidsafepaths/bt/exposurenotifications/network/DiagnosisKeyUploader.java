@@ -47,6 +47,7 @@ import org.threeten.bp.Duration;
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
+import covidsafepaths.bt.exposurenotifications.ExposureKeyModule;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.utils.Util;
 
@@ -187,7 +188,7 @@ public class DiagnosisKeyUploader {
         submission.payload =
                 new JSONObject()
                         .put("temporaryExposureKeys", keysJson)
-                        .put("hmackey", "placeholder")
+                        .put("hmackey", ExposureKeyModule.hmacKey)
                         .put("padding", randomBase64Data(Util.getRandomNumber()))
                         .put("regions", regionJson)
                         .put("appPackageName", BuildConfig.APPLICATION_ID);
