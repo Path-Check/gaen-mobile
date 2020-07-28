@@ -98,7 +98,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                 .isEnabled().addOnSuccessListener(
                 enabled -> {
                     if (enabled) {
-                        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(getReactApplicationContext());
+                        ProvideDiagnosisKeysWorker.schedule(getReactApplicationContext());
                         callback.invoke(null, CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
                     } else {
                         callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED, null);

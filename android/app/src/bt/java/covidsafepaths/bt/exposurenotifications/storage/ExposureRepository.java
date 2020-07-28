@@ -17,8 +17,7 @@
 
 package covidsafepaths.bt.exposurenotifications.storage;
 
-import android.content.Context;
-
+import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -29,16 +28,6 @@ import java.util.List;
  */
 public class ExposureRepository {
 
-//  private final LiveData<List<ExposureEntity>> getAllLiveData;
-
-  public ExposureRepository(Context context) {
-    // TODO
-  }
-
-//  public LiveData<List<ExposureEntity>> getAllLiveData() {
-//    return getAllLiveData;
-//  }
-
   public ListenableFuture<Void> upsertAsync(List<ExposureEntity> entities) {
     // TODO
     return Futures.immediateVoidFuture();
@@ -47,5 +36,16 @@ public class ExposureRepository {
   public ListenableFuture<Void> deleteAllAsync() {
     // TODO
     return Futures.immediateVoidFuture();
+  }
+
+    /**
+     * Adds missing exposures based on the current windows state.
+     *
+     * @param exposureWindows the {@link ExposureWindow}s
+     * @return if any exposure was added
+     */
+  public boolean refreshWithExposureWindows(List<ExposureWindow> exposureWindows) {
+    // TODO Return true only if the row didn't exist
+    return true;
   }
 }

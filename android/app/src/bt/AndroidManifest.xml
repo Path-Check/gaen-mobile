@@ -28,7 +28,7 @@
         </activity>
 
         <receiver
-            android:name="covidsafepaths.bt.exposurenotifications.ExposureNotificationBroadcastReceiver"
+            android:name="covidsafepaths.bt.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver"
             android:permission="com.google.android.gms.nearby.exposurenotification.EXPOSURE_CALLBACK"
             android:exported="true">
             <intent-filter>
