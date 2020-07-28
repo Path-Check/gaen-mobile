@@ -15,63 +15,73 @@ const {
 const NoExposures: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
-    <>
-      <View style={style.container}>
-        <RTLEnabledText style={style.headerText}>
+    <View>
+      <View style={styles.noExposureCard}>
+        <RTLEnabledText style={styles.headerText}>
           {t("exposure_history.no_exposure_reports")}
         </RTLEnabledText>
-        <RTLEnabledText style={style.subheaderText}>
+        <RTLEnabledText style={styles.subheaderText}>
           {t("exposure_history.no_exposure_reports_over_past")}
         </RTLEnabledText>
       </View>
-      <View style={style.card}>
-        <RTLEnabledText style={style.cardHeaderText}>
-          {t("exposure_history.protect_yourself_and_others")}
-        </RTLEnabledText>
-        {Boolean(healthAuthorityLink) && (
-          <>
-            <RTLEnabledText style={style.cardSubheaderText}>
-              {t("exposure_history.review_guidance_from_ha", {
-                healthAuthorityName,
-              })}
+      <HealthGuidelines />
+    </View>
+  )
+}
+
+const HealthGuidelines: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const handleOnPressHALink = () => {
+    Linking.openURL(healthAuthorityLink)
+  }
+
+  return (
+    <View style={styles.card}>
+      <RTLEnabledText style={styles.cardHeaderText}>
+        {t("exposure_history.protect_yourself_and_others")}
+      </RTLEnabledText>
+      {Boolean(healthAuthorityLink) && (
+        <>
+          <RTLEnabledText style={styles.cardSubheaderText}>
+            {t("exposure_history.review_guidance_from_ha", {
+              healthAuthorityName,
+            })}
+          </RTLEnabledText>
+          <TouchableOpacity
+            onPress={handleOnPressHALink}
+            style={styles.learnMoreCtaContainer}
+          >
+            <RTLEnabledText style={styles.learnMoreCta}>
+              {t("exposure_history.learn_more")}
             </RTLEnabledText>
-            <TouchableOpacity
-              onPress={() => Linking.openURL(healthAuthorityLink)}
-            >
-              <RTLEnabledText style={style.learnMoreCta}>
-                <>
-                  {t("exposure_history.learn_more")}
-                  <SvgXml
-                    xml={Icons.Arrow}
-                    fill={Colors.primaryViolet}
-                    style={style.ctaArrow}
-                  />
-                </>
-              </RTLEnabledText>
-            </TouchableOpacity>
-            <RTLEnabledText style={style.listHeading}>
-              {t("exposure_history.health_guidelines.title")}
-            </RTLEnabledText>
-          </>
-        )}
-        <HealthGuidelineItem
-          icon={Icons.WashHands}
-          text={t("exposure_history.health_guidelines.wash_your_hands")}
-        />
-        <HealthGuidelineItem
-          icon={Icons.House}
-          text={t("exposure_history.health_guidelines.stay_home")}
-        />
-        <HealthGuidelineItem
-          icon={Icons.Mask}
-          text={t("exposure_history.health_guidelines.wear_a_mask")}
-        />
-        <HealthGuidelineItem
-          icon={Icons.SixFeet}
-          text={t("exposure_history.health_guidelines.six_feet_apart")}
-        />
-      </View>
-    </>
+            <SvgXml
+              xml={Icons.Arrow}
+              fill={Colors.primaryViolet}
+              style={styles.ctaArrow}
+            />
+          </TouchableOpacity>
+          <RTLEnabledText style={styles.listHeading}>
+            {t("exposure_history.health_guidelines.title")}
+          </RTLEnabledText>
+        </>
+      )}
+      <HealthGuidelineItem
+        icon={Icons.WashHands}
+        text={t("exposure_history.health_guidelines.wash_your_hands")}
+      />
+      <HealthGuidelineItem
+        icon={Icons.House}
+        text={t("exposure_history.health_guidelines.stay_home")}
+      />
+      <HealthGuidelineItem
+        icon={Icons.Mask}
+        text={t("exposure_history.health_guidelines.wear_a_mask")}
+      />
+      <HealthGuidelineItem
+        icon={Icons.SixFeet}
+        text={t("exposure_history.health_guidelines.six_feet_apart")}
+      />
+    </View>
   )
 }
 
@@ -84,20 +94,17 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
   icon,
 }) => {
   return (
-    <View style={style.listItem}>
-      <SvgXml
-        xml={icon}
-        fill={Colors.primaryViolet}
-        style={style.listItemIcon}
-      />
-      <RTLEnabledText>{text}</RTLEnabledText>
+    <View style={styles.listItem}>
+      <View style={styles.listItemIconContainer}>
+        <SvgXml xml={icon} fill={Colors.primaryViolet} />
+      </View>
+      <RTLEnabledText style={styles.listItemText}>{text}</RTLEnabledText>
     </View>
   )
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
+const styles = StyleSheet.create({
+  noExposureCard: {
     backgroundColor: Colors.primaryViolet,
     ...Outlines.roundedBorder,
     borderColor: Colors.primaryViolet,
@@ -106,7 +113,7 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.mainContent,
     ...Typography.bold,
-    paddingBottom: Spacing.xSmall,
+    paddingBottom: Spacing.xxxSmall,
     color: Colors.white,
   },
   subheaderText: {
@@ -128,9 +135,13 @@ const style = StyleSheet.create({
     ...Typography.description,
     paddingBottom: Spacing.xSmall,
   },
+  learnMoreCtaContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: Spacing.large,
+  },
   learnMoreCta: {
     color: Colors.primaryViolet,
-    paddingBottom: Spacing.large,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
@@ -146,8 +157,11 @@ const style = StyleSheet.create({
     flexDirection: "row",
     paddingBottom: Spacing.small,
   },
-  listItemIcon: {
-    marginRight: Spacing.xSmall,
+  listItemIconContainer: {
+    width: Spacing.huge,
+  },
+  listItemText: {
+    color: Colors.darkGray,
   },
 })
 
