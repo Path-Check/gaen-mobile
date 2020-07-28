@@ -31,12 +31,12 @@ const Licenses = (): JSX.Element => {
   return (
     <>
       <ScrollView
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
         <View>
           <RTLEnabledText
-            style={styles.headerContent}
+            style={style.headerContent}
             testID={"licenses-legal-header"}
           >
             {legalHeaderText}
@@ -44,19 +44,19 @@ const Licenses = (): JSX.Element => {
           <View
             style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
           >
-            <RTLEnabledText style={styles.contentText}>
+            <RTLEnabledText style={style.contentText}>
               {t("label.legal_page_address")}
             </RTLEnabledText>
             <View style={{ height: 20 }} />
             <RTLEnabledText
               onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
-              style={styles.hyperlink}
+              style={style.hyperlink}
             >
               {infoAddress}
             </RTLEnabledText>
             <RTLEnabledText
               onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
-              style={styles.hyperlink}
+              style={style.hyperlink}
             >
               {pathCheckAddress}
             </RTLEnabledText>
@@ -64,7 +64,7 @@ const Licenses = (): JSX.Element => {
         </View>
       </ScrollView>
       <TouchableOpacity
-        style={styles.termsInfoRow}
+        style={style.termsInfoRow}
         onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
       >
         <RTLEnabledText
@@ -72,7 +72,7 @@ const Licenses = (): JSX.Element => {
         >
           {t("label.privacy_policy")}
         </RTLEnabledText>
-        <View style={styles.arrowContainer}>
+        <View style={style.arrowContainer}>
           <Image source={Images.ForeArrow} />
         </View>
       </TouchableOpacity>
@@ -80,7 +80,7 @@ const Licenses = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
     backgroundColor: Colors.primaryBackgroundFaintShade,
     paddingHorizontal: 24,

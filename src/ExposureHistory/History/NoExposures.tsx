@@ -16,11 +16,11 @@ const NoExposures: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
     <View>
-      <View style={styles.noExposureCard}>
-        <RTLEnabledText style={styles.headerText}>
+      <View style={style.noExposureCard}>
+        <RTLEnabledText style={style.headerText}>
           {t("exposure_history.no_exposure_reports")}
         </RTLEnabledText>
-        <RTLEnabledText style={styles.subheaderText}>
+        <RTLEnabledText style={style.subheaderText}>
           {t("exposure_history.no_exposure_reports_over_past")}
         </RTLEnabledText>
       </View>
@@ -36,31 +36,31 @@ const HealthGuidelines: FunctionComponent = () => {
   }
 
   return (
-    <View style={styles.card}>
-      <RTLEnabledText style={styles.cardHeaderText}>
+    <View style={style.card}>
+      <RTLEnabledText style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
       </RTLEnabledText>
       {Boolean(healthAuthorityLink) && (
         <>
-          <RTLEnabledText style={styles.cardSubheaderText}>
+          <RTLEnabledText style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {
               healthAuthorityName,
             })}
           </RTLEnabledText>
           <TouchableOpacity
             onPress={handleOnPressHALink}
-            style={styles.learnMoreCtaContainer}
+            style={style.learnMoreCtaContainer}
           >
-            <RTLEnabledText style={styles.learnMoreCta}>
+            <RTLEnabledText style={style.learnMoreCta}>
               {t("exposure_history.learn_more")}
             </RTLEnabledText>
             <SvgXml
               xml={Icons.Arrow}
               fill={Colors.primaryViolet}
-              style={styles.ctaArrow}
+              style={style.ctaArrow}
             />
           </TouchableOpacity>
-          <RTLEnabledText style={styles.listHeading}>
+          <RTLEnabledText style={style.listHeading}>
             {t("exposure_history.health_guidelines.title")}
           </RTLEnabledText>
         </>
@@ -94,16 +94,16 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
   icon,
 }) => {
   return (
-    <View style={styles.listItem}>
-      <View style={styles.listItemIconContainer}>
+    <View style={style.listItem}>
+      <View style={style.listItemIconContainer}>
         <SvgXml xml={icon} fill={Colors.primaryViolet} />
       </View>
-      <RTLEnabledText style={styles.listItemText}>{text}</RTLEnabledText>
+      <RTLEnabledText style={style.listItemText}>{text}</RTLEnabledText>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   noExposureCard: {
     backgroundColor: Colors.primaryViolet,
     ...Outlines.roundedBorder,

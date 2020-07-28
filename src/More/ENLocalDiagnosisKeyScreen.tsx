@@ -75,8 +75,8 @@ const ENLocalDiagnosisKeyScreen = ({
       data={diagnosisKeys}
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
-        <View style={styles.flatlistRowView}>
-          <RTLEnabledText style={styles.itemText}>
+        <View style={style.flatlistRowView}>
+          <RTLEnabledText style={style.itemText}>
             <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
           </RTLEnabledText>
         </View>
@@ -85,7 +85,7 @@ const ENLocalDiagnosisKeyScreen = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   flatlistRowView: {
     flexDirection: "row",

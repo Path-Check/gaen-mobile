@@ -40,7 +40,7 @@ const LanguageSelectionListItem = ({
 }: LanguageSelectionListItemProps) => (
   <TouchableHighlight
     underlayColor={Colors.underlayPrimaryBackground}
-    style={styles.listItem}
+    style={style.listItem}
     onPress={onPress}
   >
     <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -48,7 +48,7 @@ const LanguageSelectionListItem = ({
         xml={icon}
         accessible
         accessibilityLabel={iconLabel}
-        style={[styles.icon, { marginRight: Spacing.small }]}
+        style={[style.icon, { marginRight: Spacing.small }]}
       />
       <RTLEnabledText style={{ ...Typography.mainContent }}>
         {label}
@@ -69,25 +69,25 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
     label: string
     onPress: () => void
     description?: string
-    style?: ViewStyle
+    itemStyle?: ViewStyle
   }
 
   const SettingsListItem = ({
     label,
     onPress,
     description,
-    style,
+    itemStyle,
   }: SettingsListItemProps) => {
     return (
       <TouchableHighlight
         underlayColor={Colors.underlayPrimaryBackground}
-        style={[styles.listItem, style]}
+        style={[style.listItem, itemStyle]}
         onPress={onPress}
       >
         <View>
-          <RTLEnabledText style={styles.listItemText}>{label}</RTLEnabledText>
+          <RTLEnabledText style={style.listItemText}>{label}</RTLEnabledText>
           {description ? (
-            <RTLEnabledText style={styles.descriptionText}>
+            <RTLEnabledText style={style.descriptionText}>
               {description}
             </RTLEnabledText>
           ) : null}
@@ -97,22 +97,22 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.sectionPrimary}>
+    <ScrollView style={style.container}>
+      <View style={style.sectionPrimary}>
         <RTLEnabledText>
           {t("settings.share_test_result_description")}
         </RTLEnabledText>
         <TouchableOpacity
           onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-          style={styles.button}
+          style={style.button}
         >
-          <RTLEnabledText style={styles.buttonText}>
+          <RTLEnabledText style={style.buttonText}>
             {t("settings.share_test_result")}
           </RTLEnabledText>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.section}>
+      <View style={style.section}>
         <LanguageSelectionListItem
           label={languageName || t("label.unknown")}
           icon={Icons.LanguagesIcon}
@@ -121,30 +121,30 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
         />
       </View>
 
-      <View style={styles.section}>
+      <View style={style.section}>
         <SettingsListItem
           label={t("screen_titles.about")}
           onPress={() => navigation.navigate(Screens.About)}
-          style={styles.divider}
+          itemStyle={style.divider}
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
           onPress={() => navigation.navigate(Screens.Licenses)}
-          style={styles.lastListItem}
+          itemStyle={style.lastListItem}
         />
       </View>
-      <View style={styles.section}>
+      <View style={style.section}>
         <SettingsListItem
           label="EN Debug Menu"
           onPress={() => navigation.navigate(Screens.ENDebugMenu)}
-          style={styles.lastListItem}
+          itemStyle={style.lastListItem}
         />
       </View>
     </ScrollView>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackground,
   },

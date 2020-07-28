@@ -42,12 +42,12 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       let l = line.trim()
       if (!l) continue
       elements.push(
-        <RTLEnabledText testID="description" key={l} style={styles.description}>
+        <RTLEnabledText testID="description" key={l} style={style.description}>
           {l}
         </RTLEnabledText>,
       )
     }
-    return <View style={styles.descriptionWrapper}>{elements}</View>
+    return <View style={style.descriptionWrapper}>{elements}</View>
   }, [question.question_description])
 
   const displayAsOption = [
@@ -117,35 +117,35 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   }, [selectedValues, onChange])
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.header}>
-          <RTLEnabledText style={styles.headerContent}>
+    <SafeAreaView style={style.container}>
+      <ScrollView style={style.scrollView}>
+        <View style={style.header}>
+          <RTLEnabledText style={style.headerContent}>
             {question.question_text}
           </RTLEnabledText>
         </View>
-        <View style={styles.scrollViewContent}>
+        <View style={style.scrollViewContent}>
           {description}
-          <RTLEnabledText style={styles.instruction}>
+          <RTLEnabledText style={style.instruction}>
             {assessmentInputInstruction}
           </RTLEnabledText>
-          <View style={styles.optionsWrapper}>{options}</View>
+          <View style={style.optionsWrapper}>{options}</View>
         </View>
       </ScrollView>
-      <View style={styles.footer}>
+      <View style={style.footer}>
         <Button
           disabled={!selectedValues.length}
           onPress={onNext}
           label={t("assessment.next")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
         />
       </View>
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,

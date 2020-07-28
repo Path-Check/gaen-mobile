@@ -60,12 +60,12 @@ const Home = ({
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <RTLEnabledText style={styles.headerText} testID={"home-header"}>
+    <View style={style.container}>
+      <View style={style.contentContainer}>
+        <RTLEnabledText style={style.headerText} testID={"home-header"}>
           {headerText}
         </RTLEnabledText>
-        <RTLEnabledText style={styles.subheaderText} testID={"home-subheader"}>
+        <RTLEnabledText style={style.subheaderText} testID={"home-subheader"}>
           {subheaderText}
         </RTLEnabledText>
       </View>
@@ -73,18 +73,16 @@ const Home = ({
         <TouchableOpacity
           testID={"home-request-permissions-button"}
           onPress={handleRequestPermission}
-          style={styles.button}
+          style={style.button}
         >
-          <RTLEnabledText style={styles.buttonText}>
-            {buttonText}
-          </RTLEnabledText>
+          <RTLEnabledText style={style.buttonText}>{buttonText}</RTLEnabledText>
         </TouchableOpacity>
       ) : null}
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",

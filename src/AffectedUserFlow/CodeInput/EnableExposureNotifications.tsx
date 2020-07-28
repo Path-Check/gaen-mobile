@@ -22,15 +22,15 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
   return (
     <View
-      style={styles.container}
+      style={style.container}
       testID={"affected-user-enable-exposure-notifications-screen"}
     >
-      <View style={styles.headerContainer}>
-        <RTLEnabledText style={styles.header}>
+      <View style={style.headerContainer}>
+        <RTLEnabledText style={style.header}>
           {t("export.enable_exposure_notifications_title")}
         </RTLEnabledText>
 
-        <RTLEnabledText style={styles.subheader}>
+        <RTLEnabledText style={style.subheader}>
           {t("export.enable_exposure_notifications_body")}
         </RTLEnabledText>
       </View>
@@ -40,18 +40,18 @@ const EnableExposureNotifications: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("common.settings")}
           accessibilityRole="button"
-          style={styles.button}
+          style={style.button}
         >
-          <RTLEnabledText style={styles.buttonText}>
+          <RTLEnabledText style={style.buttonText}>
             {t("common.settings")}
           </RTLEnabledText>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={handleOnPressCancel}
-          style={styles.secondaryButton}
+          style={style.secondaryButton}
         >
-          <RTLEnabledText style={styles.secondaryButtonText}>
+          <RTLEnabledText style={style.secondaryButtonText}>
             {t("export.code_input_button_cancel")}
           </RTLEnabledText>
         </TouchableOpacity>
@@ -60,7 +60,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackgroundFaintShade,
     height: "100%",

@@ -72,16 +72,16 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   interface DebugMenuListItemProps {
     label: string
     onPress: () => void
-    style?: ViewStyle
+    itemStyle?: ViewStyle
   }
 
   const DebugMenuListItem = ({
     label,
     onPress,
-    style,
+    itemStyle,
   }: DebugMenuListItemProps) => {
     return (
-      <TouchableOpacity style={[styles.listItem, style]} onPress={onPress}>
+      <TouchableOpacity style={[style.listItem, itemStyle]} onPress={onPress}>
         <RTLEnabledText style={{ ...Typography.mainContent }}>
           {label}
         </RTLEnabledText>
@@ -92,12 +92,12 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   return (
     <>
       {loading ? (
-        <View style={styles.loadingIndicator}>
+        <View style={style.loadingIndicator}>
           <ActivityIndicator size={"large"} />
         </View>
       ) : (
         <ScrollView>
-          <View style={styles.section}>
+          <View style={style.section}>
             <DebugMenuListItem
               label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
@@ -130,7 +130,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
             />
           </View>
           {__DEV__ ? (
-            <View style={styles.section}>
+            <View style={style.section}>
               <DebugMenuListItem
                 label="Simulate Exposure"
                 onPress={handleOnPressSimulationButton(
@@ -151,7 +151,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               />
               <DebugMenuListItem
                 label="Reset Exposures"
-                style={styles.lastListItem}
+                itemStyle={style.lastListItem}
                 onPress={handleOnPressSimulationButton(
                   NativeModule.resetExposures,
                 )}
@@ -170,7 +170,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   section: {
     flex: 1,
     backgroundColor: Colors.white,

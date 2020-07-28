@@ -17,10 +17,10 @@ const HomeScreen = (): JSX.Element => {
 
   return (
     <ImageBackground
-      style={styles.backgroundImage}
+      style={style.backgroundImage}
       source={Images.BlueGradientBackground}
     >
-      <View style={styles.iconContainer}>
+      <View style={style.iconContainer}>
         <SvgXml
           xml={Icons.StateNoContact}
           accessible
@@ -29,7 +29,7 @@ const HomeScreen = (): JSX.Element => {
           height={2 * Layout.screenHeight}
         />
       </View>
-      <View style={styles.homeContainer}>
+      <View style={style.homeContainer}>
         <Home
           enPermissionStatus={exposureNotifications.status}
           requestPermission={exposureNotifications.request}
@@ -39,7 +39,7 @@ const HomeScreen = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     height: "100%",

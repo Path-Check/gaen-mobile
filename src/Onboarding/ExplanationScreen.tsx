@@ -63,52 +63,52 @@ const ExplanationScreen = ({
   const determineIconStyle = (iconStyle: IconStyle): ViewStyle => {
     switch (iconStyle) {
       case IconStyle.Blue:
-        return styles.blueIcon
+        return style.blueIcon
       case IconStyle.Gold:
-        return styles.goldIcon
+        return style.goldIcon
     }
   }
 
   const primaryButtonTextStyles = {
-    ...styles.primaryButtonText,
+    ...style.primaryButtonText,
     ...explanationScreenStyles.primaryButtonTextStyle,
   }
 
   const secondaryButtonTextStyles = {
-    ...styles.secondaryButtonText,
+    ...style.secondaryButtonText,
     ...explanationScreenStyles.secondaryButtonTextStyle,
   }
 
   const headerStyles = {
-    ...styles.headerText,
+    ...style.headerText,
     ...explanationScreenStyles.headerStyle,
   }
 
   const contentStyles = {
-    ...styles.contentText,
+    ...style.contentText,
     ...explanationScreenStyles.bodyStyle,
   }
 
   const primaryButtonStyles = {
-    ...styles.primaryButton,
+    ...style.primaryButton,
     ...explanationScreenStyles.primaryButtonContainerStyle,
   }
 
   const secondaryButtonStyles = {
-    ...styles.secondaryButton,
+    ...style.secondaryButton,
     ...explanationScreenStyles.secondaryButtonContainerStyle,
   }
 
   return (
-    <View style={styles.outerContainer}>
+    <View style={style.outerContainer}>
       <ImageBackground
         source={explanationScreenContent.backgroundImage}
-        style={[styles.background, explanationScreenStyles.backgroundStyle]}
+        style={[style.background, explanationScreenStyles.backgroundStyle]}
       />
-      <View style={styles.content}>
+      <View style={style.content}>
         <ScrollView
           alwaysBounceVertical={false}
-          style={styles.innerContainer}
+          style={style.innerContainer}
           contentContainerStyle={{ paddingBottom: Spacing.large }}
         >
           <View style={determineIconStyle(explanationScreenStyles.iconStyle)}>
@@ -128,7 +128,7 @@ const ExplanationScreen = ({
         <Button
           label={explanationScreenContent.primaryButtonLabel}
           onPress={explanationScreenActions.primaryButtonOnPress}
-          style={primaryButtonStyles}
+          buttonStyle={primaryButtonStyles}
           textStyle={primaryButtonTextStyles}
         />
         {explanationScreenActions.secondaryButtonOnPress &&
@@ -136,7 +136,7 @@ const ExplanationScreen = ({
             <Button
               label={explanationScreenContent.secondaryButtonLabel}
               onPress={explanationScreenActions.secondaryButtonOnPress}
-              style={secondaryButtonStyles}
+              buttonStyle={secondaryButtonStyles}
               textStyle={secondaryButtonTextStyles}
             />
           )}
@@ -145,7 +145,7 @@ const ExplanationScreen = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   outerContainer: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,

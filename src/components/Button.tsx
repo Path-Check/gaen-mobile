@@ -16,7 +16,7 @@ interface ButtonProps {
   onPress: () => void
   loading?: boolean
   disabled?: boolean
-  style?: ViewStyle
+  buttonStyle?: ViewStyle
   textStyle?: TextStyle
   invert?: boolean
   testID?: string
@@ -27,16 +27,16 @@ export const Button = ({
   onPress,
   disabled,
   loading,
-  style,
+  buttonStyle,
   textStyle,
   invert,
   testID,
 }: ButtonProps): JSX.Element => {
-  const styles = invert ? darkStyle : lightStyle
+  const style = invert ? darkStyle : lightStyle
   const buttonTextStyle =
     disabled || loading
-      ? { ...styles.text, ...styles.textDisabled, ...textStyle }
-      : { ...styles.text, ...styles.textEnabled, ...textStyle }
+      ? { ...style.text, ...style.textDisabled, ...textStyle }
+      : { ...style.text, ...style.textEnabled, ...textStyle }
 
   return (
     <TouchableOpacity
@@ -45,7 +45,7 @@ export const Button = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={[styles.button, style]}
+      style={[style.button, buttonStyle]}
       testID={testID}
     >
       {loading ? (

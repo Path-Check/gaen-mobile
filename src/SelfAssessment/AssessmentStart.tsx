@@ -27,8 +27,8 @@ const AssessmentStart: FunctionComponent = () => {
         <Button
           onPress={handleButtonPress}
           label={t("assessment.start_cta")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
         />
       }
     >
@@ -40,7 +40,7 @@ const AssessmentStart: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondaryViolet,
   },

@@ -33,7 +33,7 @@ const DateInfoHeader: FunctionComponent<DateInfoHeaderProps> = ({
     : ""
 
   return (
-    <RTLEnabledText style={styles.subHeaderText}>
+    <RTLEnabledText style={style.subHeaderText}>
       <>
         {lastDaysText}
         {updatedAtText}
@@ -42,7 +42,7 @@ const DateInfoHeader: FunctionComponent<DateInfoHeaderProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.header4,
     ...Typography.bold,
