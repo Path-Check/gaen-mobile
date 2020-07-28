@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { TouchableOpacity, View, StyleSheet, Linking } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import NetInfo from "@react-native-community/netinfo"
 import env from "react-native-config"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
@@ -34,8 +35,19 @@ const CloseButton = () => {
 
 const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
+  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(null) 
   const { t } = useTranslation()
   useStatusBarEffect("dark-content")
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setConnectivity(state.isInternetReachable)
+    });
+    return () => {
+      unsubscribe()
+    }  
+  }, [])
+
   const displayNextSteps =
     DISPLAY_SELF_ASSESSMENT === "true" || AUTHORITY_ADVICE_URL
 
@@ -48,6 +60,7 @@ const NextSteps = (): JSX.Element => {
     healthAuthorityName,
   })
   const buttonText = t("exposure_history.next_steps.button_text")
+  const noConnectivityMessage = t("exposure_history.next_steps.no_connectivity_message")
 
   const handleOnPressTakeAssessment = () => {
     AUTHORITY_ADVICE_URL
@@ -72,6 +85,9 @@ const NextSteps = (): JSX.Element => {
         </View>
         {displayNextSteps && (
           <View style={styles.buttonContainer}>
+            {!connectivity && <RTLEnabledText style={styles.connectivityWarningText}>
+              {noConnectivityMessage}
+            </RTLEnabledText>}
             <RTLEnabledText style={styles.footerText}>
               {footerText}
             </RTLEnabledText>
@@ -98,6 +114,10 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
+  },
+  connectivityWarningText: {
+    color: Colors.red,
+    marginBottom: Spacing.xxSmall,
   },
   footerText: {
     ...Typography.footer,

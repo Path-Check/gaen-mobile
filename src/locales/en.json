@@ -98,7 +98,8 @@
       "ha_self_assessment": "Follow the advice from {{healthAuthorityName}} about what to do next.",
       "maybe_exposed": "You may have been exposed to COVID-19",
       "possible_crossed_paths": "Based on your location history, it is possible that you may have crossed paths with somebody who has been diagnosed with COVID-19.",
-      "possible_infection_precaution": "This does not mean that you are infected, but you should take precautions anyway. People who don't exhibit symptoms can sometimes still be contagious."
+      "possible_infection_precaution": "This does not mean that you are infected, but you should take precautions anyway. People who don't exhibit symptoms can sometimes still be contagious.",
+      "no_connectivity_message": "There is no internet connection!"
     },
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?"
