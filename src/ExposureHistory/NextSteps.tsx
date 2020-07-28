@@ -35,17 +35,19 @@ const CloseButton = () => {
 
 const NextSteps = (): JSX.Element => {
   const navigation = useNavigation()
-  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(null) 
+  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(
+    null,
+  )
   const { t } = useTranslation()
   useStatusBarEffect("dark-content")
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setConnectivity(state.isInternetReachable)
-    });
+    })
     return () => {
       unsubscribe()
-    }  
+    }
   }, [])
 
   const displayNextSteps =
@@ -60,7 +62,9 @@ const NextSteps = (): JSX.Element => {
     healthAuthorityName,
   })
   const buttonText = t("exposure_history.next_steps.button_text")
-  const noConnectivityMessage = t("exposure_history.next_steps.no_connectivity_message")
+  const noConnectivityMessage = t(
+    "exposure_history.next_steps.no_connectivity_message",
+  )
 
   const handleOnPressTakeAssessment = () => {
     AUTHORITY_ADVICE_URL
@@ -85,9 +89,11 @@ const NextSteps = (): JSX.Element => {
         </View>
         {displayNextSteps && (
           <View style={styles.buttonContainer}>
-            {!connectivity && <RTLEnabledText style={styles.connectivityWarningText}>
-              {noConnectivityMessage}
-            </RTLEnabledText>}
+            {!connectivity && (
+              <RTLEnabledText style={styles.connectivityWarningText}>
+                {noConnectivityMessage}
+              </RTLEnabledText>
+            )}
             <RTLEnabledText style={styles.footerText}>
               {footerText}
             </RTLEnabledText>
