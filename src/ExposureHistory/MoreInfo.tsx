@@ -1,35 +1,18 @@
 import React, { FunctionComponent } from "react"
-import { TouchableOpacity, View, ScrollView, StyleSheet } from "react-native"
+import { View, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
-import { useNavigation } from "@react-navigation/native"
 
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import { useStatusBarEffect } from "../navigation"
-import { Icons } from "../assets"
 
-import { Colors, Spacing, Typography } from "../styles"
-
-const CloseButton = () => {
-  const navigation = useNavigation()
-
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={styles.backIconContainer}
-    >
-      <SvgXml xml={Icons.Close} fill={Colors.quaternaryViolet} />
-    </TouchableOpacity>
-  )
-}
+import { Spacing, Typography, Colors } from "../styles"
 
 const MoreInfo: FunctionComponent = () => {
   const { t } = useTranslation()
-  useStatusBarEffect("dark-content")
+  useStatusBarEffect("light-content")
 
   return (
     <>
-      <CloseButton />
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
@@ -57,13 +40,15 @@ const MoreInfo: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.primaryBackground,
     padding: Spacing.medium,
   },
   contentContainer: {
     paddingBottom: Spacing.xLarge,
   },
   headerText: {
-    ...Typography.header3,
+    ...Typography.header6,
+    fontSize: Typography.large,
   },
   section: {
     paddingBottom: Spacing.xLarge,

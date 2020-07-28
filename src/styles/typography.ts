@@ -22,6 +22,9 @@ export const largeLineHeight = 28
 export const largestLineHeight = 32
 export const hugeLineHeight = 50
 
+// Letter Spacing
+export const mediumLetterSpacing = 0.5
+
 // Font Weights
 export const lighterWeight = "200"
 export const lightWeight = "300"
@@ -84,7 +87,7 @@ export const largeFont: TextStyle = {
 
 export const largerFont: TextStyle = {
   ...base,
-  lineHeight: largestLineHeight,
+  lineHeight: mediumLineHeight,
   fontSize: larger,
 }
 

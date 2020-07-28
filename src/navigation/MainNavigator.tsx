@@ -6,7 +6,6 @@ import {
 import { NavigationContainer } from "@react-navigation/native"
 // import env from "react-native-config"
 
-import { Colors } from "../styles"
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
 import { useOnboardingContext } from "../OnboardingContext"
@@ -15,10 +14,23 @@ import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 
+import { Colors } from "../styles"
+
 const Stack = createStackNavigator()
 
 const SCREEN_OPTIONS = {
   headerShown: false,
+}
+
+const RIGHT_SLIDING_MODAL_OPTIONS = {
+  headerStyle: {
+    backgroundColor: Colors.primaryViolet,
+  },
+  headerTitleStyle: {
+    color: Colors.white,
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.white,
 }
 
 const MainNavigator: FunctionComponent = () => {
@@ -52,24 +64,16 @@ const MainNavigator: FunctionComponent = () => {
               name={Screens.MoreInfo}
               component={MoreInfo}
               options={{
-                ...TransitionPresets.ModalTransition,
-                ...SCREEN_OPTIONS,
+                title: "MORE INFO",
+                ...RIGHT_SLIDING_MODAL_OPTIONS,
               }}
             />
             <Stack.Screen
               name={Screens.ExposureDetail}
               component={ExposureDetail}
               options={{
-                title: "Exposure",
-                headerStyle: {
-                  backgroundColor: Colors.primaryViolet,
-                },
-                headerTitleStyle: {
-                  color: Colors.white,
-                  textTransform: "uppercase",
-                },
-                headerBackTitleVisible: false,
-                headerTintColor: Colors.white,
+                title: "EXPOSURE",
+                ...RIGHT_SLIDING_MODAL_OPTIONS,
               }}
             />
           </>
