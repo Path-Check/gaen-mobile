@@ -1,14 +1,17 @@
 import React, { FunctionComponent } from "react"
 import { View } from "react-native"
-import { useExposureContext } from "../ExposureContext"
+
+import { ExposureDatum } from "../exposure"
 import ExposureListItem from "./ExposureListItem"
 
-const ExposureList: FunctionComponent = () => {
-  const { exposureInfo } = useExposureContext()
+interface ExposureListProps {
+  exposures: ExposureDatum[]
+}
 
+const ExposureList: FunctionComponent<ExposureListProps> = ({ exposures }) => {
   return (
-    <View>
-      {exposureInfo.map((exposure) => {
+    <View testID={"exposure-list"}>
+      {exposures.map((exposure) => {
         return <ExposureListItem key={exposure.date} exposureDatum={exposure} />
       })}
     </View>

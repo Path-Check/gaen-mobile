@@ -11,9 +11,11 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
+import { ExposureDatum } from "../exposure"
 import { RTLEnabledText } from "../components/RTLEnabledText"
 import ExposureList from "./ExposureList"
 import DateInfoHeader from "./DateInfoHeader"
+import NoExposures from "./NoExposures"
 
 import { Icons } from "../assets"
 import { Screens } from "../navigation"
@@ -23,9 +25,13 @@ type Posix = number
 
 interface HistoryProps {
   lastDetectionDate: Posix | null
+  exposures: ExposureDatum[]
 }
 
-const History: FunctionComponent<HistoryProps> = ({ lastDetectionDate }) => {
+const History: FunctionComponent<HistoryProps> = ({
+  lastDetectionDate,
+  exposures,
+}) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -35,6 +41,8 @@ const History: FunctionComponent<HistoryProps> = ({ lastDetectionDate }) => {
 
   const titleText = t("screen_titles.exposure_history")
   const subtitleText = t("exposure_history.keep_track_of_exposures")
+
+  const showExposureHistory = exposures.length > 0
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -64,7 +72,11 @@ const History: FunctionComponent<HistoryProps> = ({ lastDetectionDate }) => {
           </View>
         </View>
         <View style={styles.listContainer}>
-          <ExposureList />
+          {showExposureHistory ? (
+            <ExposureList exposures={exposures} />
+          ) : (
+            <NoExposures />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
