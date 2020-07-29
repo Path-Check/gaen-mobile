@@ -8,6 +8,8 @@ import com.google.android.gms.nearby.exposurenotification.ExposureNotificationCl
 
 /**
  * Receiver registered for notifications of a potential exposure.
+ * This receiver is called by the API after we pass them the keys: client.provideDiagnosisKeys()
+ * Documentation: https://developers.google.com/android/exposure-notifications/exposure-notifications-api#broadcast-receivers
  */
 public class ExposureNotificationBroadcastReceiver extends BroadcastReceiver {
 

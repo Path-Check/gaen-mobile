@@ -42,7 +42,9 @@ import covidsafepaths.bt.exposurenotifications.network.KeyFileBatch;
  */
 public class DiagnosisKeyFileSubmitter {
     private static final String TAG = "KeyFileSubmitter";
-    private static final Duration API_TIMEOUT = Duration.ofSeconds(10);
+    // Use a very very long timeout, in case of a stress-test that supplies a very large number of
+    // diagnosis key files.
+    private static final Duration PROVIDE_KEYS_TIMEOUT = Duration.ofMinutes(30);
     private static final BaseEncoding BASE16 = BaseEncoding.base16().lowerCase();
     private static final BaseEncoding BASE64 = BaseEncoding.base64();
 
@@ -68,13 +70,10 @@ public class DiagnosisKeyFileSubmitter {
             return Futures.immediateFuture(null);
         }
         Log.d(TAG, "Providing  " + batches.size() + " diagnosis key batches to google play services.");
-        List<ListenableFuture<?>> batchCompletions = new ArrayList<>();
 
-        for (KeyFileBatch b : batches) {
-            batchCompletions.add(submitBatch(b, token));
-        }
+        ListenableFuture<?> allDone = submitBatches(batches, token);
 
-        ListenableFuture<?> allDone = Futures.allAsList(batchCompletions);
+        // Add a listener to delete all the files.
         allDone.addListener(
                 () -> {
                     for (KeyFileBatch b : batches) {
@@ -88,11 +87,24 @@ public class DiagnosisKeyFileSubmitter {
         return allDone;
     }
 
-    private ListenableFuture<?> submitBatch(KeyFileBatch batch, String token) {
+    private ListenableFuture<?> submitBatches(List<KeyFileBatch> batches, String token) {
+        Log.d(TAG, "Combining ["
+                        + batches.size()
+                        + "] key file batches into a single submission to provideDiagnosisKeys().");
+        List<File> files = new ArrayList<>();
+        for (KeyFileBatch b : batches) {
+            files.addAll(b.files());
+            logBatch(b);
+        }
+
         return TaskToFutureAdapter.getFutureWithTimeout(
-                client.provideDiagnosisKeys(batch.files(), token),
-                API_TIMEOUT.toMillis(),
+                client.provideDiagnosisKeys(files, token),
+                PROVIDE_KEYS_TIMEOUT.toMillis(),
                 TimeUnit.MILLISECONDS,
                 AppExecutors.getScheduledExecutor());
+    }
+
+    private void logBatch(KeyFileBatch batch) {
+        Log.d(TAG, "Batch [" + batch.batchNum() + "] has [" + batch.files().size() + "] files.");
     }
 }
