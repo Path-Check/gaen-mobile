@@ -49,6 +49,9 @@ public class MainActivity extends ReactActivity {
   private static final int DEFAULT_TRANSMISSION_RISK = 1;
   private Promise getExposureKeysPromise;
 
+  public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
+          "org.pathcheck.covidsafepaths.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this, R.style.SplashTheme);
