@@ -20,7 +20,13 @@ const CodeInputScreen: FunctionComponent = () => {
   return (
     <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
-        {isEnabled ? <CodeInputForm /> : <EnableExposureNotifications />}
+        {isEnabled ? (
+          <CodeInputForm />
+        ) : (
+          <EnableExposureNotifications
+            requestPermission={exposureNotifications.request}
+          />
+        )}
       </SafeAreaView>
     </View>
   )

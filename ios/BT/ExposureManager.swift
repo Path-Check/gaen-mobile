@@ -24,7 +24,7 @@ final class ExposureManager: NSObject {
   let manager = ENManager()
   
   var enabledState: EnabledState {
-    return manager.exposureNotificationEnabled ? .enabled : .disabled
+    return manager.exposureNotificationStatus == .active ? .enabled : .disabled
   }
   
   var authorizationState: AuthorizationState {

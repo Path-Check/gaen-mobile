@@ -62,6 +62,7 @@
     "consent_button_title": "I understand and consent",
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
+    "enable_permissions": "Enable Permissions",
     "error": {
       "invalid_code": "Try a different code",
       "unknown_code_verification_error": "Try a different code",
