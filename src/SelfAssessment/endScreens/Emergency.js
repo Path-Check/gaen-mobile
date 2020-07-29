@@ -19,13 +19,13 @@ export const Emergency = () => {
     <AssessmentLayout
       backgroundColor={Colors.primaryBackgroundFaintShade}
       icon={Icons.SelfAssessment} // TODO: Placeholder, replace when we get icon
-      scrollStyle={styles.containerItemsAlignment}
+      scrollStyle={style.containerItemsAlignment}
       footer={
         <Button
           onPress={handleOnPress}
           label={t("assessment.emergency_cta")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
           testID="assessment-button"
         />
       }
@@ -38,7 +38,7 @@ export const Emergency = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   containerItemsAlignment: {
     alignItems: "center",
   },

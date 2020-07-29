@@ -13,9 +13,9 @@ interface InfoTextProps {
 const InfoText: FunctionComponent<InfoTextProps> = ({ title, description }) => {
   return (
     <>
-      <RTLEnabledText style={styles.titleContent}>{title}</RTLEnabledText>
+      <RTLEnabledText style={style.titleContent}>{title}</RTLEnabledText>
       {description && (
-        <RTLEnabledText style={styles.descriptionContent} testID="description">
+        <RTLEnabledText style={style.descriptionContent} testID="description">
           {description}
         </RTLEnabledText>
       )}
@@ -23,7 +23,7 @@ const InfoText: FunctionComponent<InfoTextProps> = ({ title, description }) => {
   )
 }
 
-export const styles = StyleSheet.create({
+export const style = StyleSheet.create({
   titleContent: {
     ...Typography.header2,
     marginVertical: 30,

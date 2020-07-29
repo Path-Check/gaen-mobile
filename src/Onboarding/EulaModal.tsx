@@ -37,7 +37,7 @@ const CloseModalIcon: FunctionComponent<CloseModalIconProps> = ({
     <TouchableOpacity
       accessibilityLabel={label}
       accessible
-      style={styles.closeIcon}
+      style={style.closeIcon}
       onPress={closeModal}
     >
       <SvgXml
@@ -63,7 +63,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={styles.checkbox}
+      style={style.checkbox}
       onPress={onPress}
       accessible
       accessibilityRole="checkbox"
@@ -71,9 +71,9 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
     >
       <Image
         source={checked ? Images.BoxCheckedIcon : Images.BoxUncheckedIcon}
-        style={styles.checkboxIcon}
+        style={style.checkboxIcon}
       />
-      <RTLEnabledText style={styles.checkboxText}>{label}</RTLEnabledText>
+      <RTLEnabledText style={style.checkboxText}>{label}</RTLEnabledText>
     </TouchableOpacity>
   )
 }
@@ -143,13 +143,13 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
   const handleOnPressGetStarted = () => setModalVisibility(true)
   return (
     <>
-      <TouchableOpacity style={styles.button} onPress={handleOnPressGetStarted}>
-        <RTLEnabledText style={styles.buttonText}>
+      <TouchableOpacity style={style.button} onPress={handleOnPressGetStarted}>
+        <RTLEnabledText style={style.buttonText}>
           {t("label.launch_get_started")}
         </RTLEnabledText>
       </TouchableOpacity>
       <Modal animationType="slide" transparent visible={modalVisible}>
-        <View style={styles.container}>
+        <View style={style.container}>
           <StatusBar barStyle={"dark-content"} />
           <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 7, paddingHorizontal: 5 }}>
@@ -173,14 +173,14 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
             </View>
           </SafeAreaView>
           <SafeAreaView style={{ backgroundColor: Colors.secondaryBlue }}>
-            <View style={styles.ctaBox}>
-              <View style={styles.checkboxContainer}>
+            <View style={style.ctaBox}>
+              <View style={style.checkboxContainer}>
                 <Checkbox
                   label={t("onboarding.eula_checkbox")}
                   onPress={() => toggleCheckbox(!boxChecked)}
                   checked={boxChecked}
                 />
-                <RTLEnabledText style={styles.smallDescriptionText}>
+                <RTLEnabledText style={style.smallDescriptionText}>
                   {t("onboarding.eula_message")}
                 </RTLEnabledText>
               </View>
@@ -199,13 +199,13 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
 
 const LoadingIndicator = () => {
   return (
-    <View style={styles.loadingIndicator}>
+    <View style={style.loadingIndicator}>
       <ActivityIndicator size={"large"} color={Colors.darkGray} />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   // Container covers the entire screen
   container: {
     flex: 1,

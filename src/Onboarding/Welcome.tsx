@@ -30,18 +30,18 @@ const Welcome: FunctionComponent = () => {
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}
+      style={style.backgroundImage}
     >
       <ImageBackground
         source={Images.ConcentricCircles}
-        style={styles.backgroundImage}
+        style={style.backgroundImage}
       >
         <StatusBar
           barStyle="light-content"
           backgroundColor="transparent"
           translucent
         />
-        <View style={styles.mainContainer}>
+        <View style={style.mainContainer}>
           <View
             style={{
               paddingTop: 60,
@@ -52,19 +52,19 @@ const Welcome: FunctionComponent = () => {
           >
             <TouchableOpacity
               onPress={() => navigation.navigate(Screens.LanguageSelection)}
-              style={styles.languageSelector}
+              style={style.languageSelector}
             >
-              <RTLEnabledText style={styles.languageSelectorText}>
+              <RTLEnabledText style={style.languageSelectorText}>
                 {languageName}
               </RTLEnabledText>
             </TouchableOpacity>
           </View>
-          <View style={styles.contentContainer}>
-            <RTLEnabledText style={styles.mainText}>
+          <View style={style.contentContainer}>
+            <RTLEnabledText style={style.mainText}>
               {t("label.launch_screen1_header")}
             </RTLEnabledText>
           </View>
-          <View style={styles.footerContainer}>
+          <View style={style.footerContainer}>
             <EulaModal
               onPressModalContinue={() =>
                 navigation.navigate(Screens.PersonalPrivacy)
@@ -78,7 +78,7 @@ const Welcome: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     width: "100%",
     height: "100%",

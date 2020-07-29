@@ -61,10 +61,10 @@ const ExposureDetail: FunctionComponent = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.exposureWindowContainer}>
-          <View style={styles.iconContainerCircle}>
+    <View style={style.container}>
+      <View style={style.headerContainer}>
+        <View style={style.exposureWindowContainer}>
+          <View style={style.iconContainerCircle}>
             <SvgXml
               xml={Icons.ExposureIcon}
               fill={Colors.primaryViolet}
@@ -72,25 +72,23 @@ const ExposureDetail: FunctionComponent = () => {
               height={Iconography.small}
             />
           </View>
-          <RTLEnabledText style={styles.exposureWindow}>
+          <RTLEnabledText style={style.exposureWindow}>
             {exposureWindowBucketInWords(exposureDatum)}
           </RTLEnabledText>
         </View>
-        <RTLEnabledText style={styles.headerText}>{headerText}</RTLEnabledText>
-        <RTLEnabledText style={styles.contentText}>
-          {contentText}
-        </RTLEnabledText>
+        <RTLEnabledText style={style.headerText}>{headerText}</RTLEnabledText>
+        <RTLEnabledText style={style.contentText}>{contentText}</RTLEnabledText>
       </View>
-      <View style={styles.bottomContainer}>
-        <RTLEnabledText style={styles.bottomHeaderText}>
+      <View style={style.bottomContainer}>
+        <RTLEnabledText style={style.bottomHeaderText}>
           {t("exposure_history.exposure_detail.ha_guidance_header")}
         </RTLEnabledText>
-        <RTLEnabledText style={styles.bottomSubheaderText}>
+        <RTLEnabledText style={style.bottomSubheaderText}>
           {t("exposure_history.exposure_detail.ha_guidance_subheader", {
             healthAuthorityName,
           })}
         </RTLEnabledText>
-        <View style={styles.recommendations}>
+        <View style={style.recommendations}>
           <RecommendationBubble
             icon={Icons.IsolateBubbles}
             text={t("exposure_history.exposure_detail.isolate")}
@@ -110,9 +108,9 @@ const ExposureDetail: FunctionComponent = () => {
         </View>
         <TouchableOpacity
           onPress={handleOnPressNextStep}
-          style={styles.nextStepsButton}
+          style={style.nextStepsButton}
         >
-          <RTLEnabledText style={styles.nextStepsButtonText}>
+          <RTLEnabledText style={style.nextStepsButtonText}>
             {t("exposure_history.exposure_detail.next_steps")}
           </RTLEnabledText>
         </TouchableOpacity>
@@ -130,20 +128,20 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
   icon,
 }) => {
   return (
-    <View style={styles.recommendation}>
-      <View style={styles.recommendationBubbleCircle}>
+    <View style={style.recommendation}>
+      <View style={style.recommendationBubbleCircle}>
         <SvgXml
           xml={icon}
           width={Iconography.small}
           height={Iconography.small}
         />
       </View>
-      <RTLEnabledText style={styles.recommendationText}>{text}</RTLEnabledText>
+      <RTLEnabledText style={style.recommendationText}>{text}</RTLEnabledText>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,

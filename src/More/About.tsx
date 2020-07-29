@@ -25,19 +25,19 @@ export const AboutScreen: FunctionComponent = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={styles.contentContainer}
+      contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
       <View>
-        <RTLEnabledText style={styles.headerContent}>
+        <RTLEnabledText style={style.headerContent}>
           {getApplicationName()}
         </RTLEnabledText>
       </View>
-      <RTLEnabledText style={styles.aboutContent}>
+      <RTLEnabledText style={style.aboutContent}>
         {t("label.about_para")}
       </RTLEnabledText>
       <RTLEnabledText
-        style={styles.hyperlink}
+        style={style.hyperlink}
         onPress={() => {
           Linking.openURL("https://pathcheck.org/")
         }}
@@ -45,21 +45,21 @@ export const AboutScreen: FunctionComponent = () => {
         <Text>pathcheck.org</Text>
       </RTLEnabledText>
 
-      <View style={styles.rowContainer}>
-        <View style={styles.row}>
-          <RTLEnabledText style={styles.aboutSectionParaLabel}>
+      <View style={style.rowContainer}>
+        <View style={style.row}>
+          <RTLEnabledText style={style.aboutSectionParaLabel}>
             {t("about.version")}
           </RTLEnabledText>
 
-          <RTLEnabledText style={styles.aboutSectionParaContent}>
+          <RTLEnabledText style={style.aboutSectionParaContent}>
             {versionInfo}
           </RTLEnabledText>
         </View>
-        <View style={styles.row}>
-          <RTLEnabledText style={styles.aboutSectionParaLabel}>
+        <View style={style.row}>
+          <RTLEnabledText style={style.aboutSectionParaLabel}>
             {t("about.operating_system_abbr")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.aboutSectionParaContent}>
+          <RTLEnabledText style={style.aboutSectionParaContent}>
             {Platform.OS + " v" + Platform.Version}
           </RTLEnabledText>
         </View>
@@ -68,7 +68,7 @@ export const AboutScreen: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
     backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.medium,

@@ -14,22 +14,22 @@ const MoreInfo: FunctionComponent = () => {
   return (
     <>
       <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
       >
-        <View style={styles.section}>
-          <RTLEnabledText style={styles.headerText}>
+        <View style={style.section}>
+          <RTLEnabledText style={style.headerText}>
             {t("exposure_history.why_did_i_get_an_en")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.contentText}>
+          <RTLEnabledText style={style.contentText}>
             {t("exposure_history.why_did_i_get_an_en_para")}
           </RTLEnabledText>
         </View>
-        <View style={styles.section}>
-          <RTLEnabledText style={styles.headerText}>
+        <View style={style.section}>
+          <RTLEnabledText style={style.headerText}>
             {t("exposure_history.how_does_this_work")}
           </RTLEnabledText>
-          <RTLEnabledText style={styles.contentText}>
+          <RTLEnabledText style={style.contentText}>
             {t("exposure_history.how_does_this_work_para")}
           </RTLEnabledText>
         </View>
@@ -38,7 +38,7 @@ const MoreInfo: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackground,
     padding: Spacing.medium,

@@ -62,13 +62,11 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessible
         accessibilityLabel={experiencingSymptomsText}
         accessibilityRole="button"
-        style={styles.button}
+        style={style.button}
       >
-        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+        <RTLEnabledText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am")}
-          <RTLEnabledText
-            style={{ ...styles.buttonText, ...styles.regularText }}
-          >
+          <RTLEnabledText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_some_symptoms")}
           </RTLEnabledText>
         </RTLEnabledText>
@@ -78,13 +76,11 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessible
         accessibilityLabel={notExperiencingSymptomsText}
         accessibilityRole="button"
-        style={{ ...styles.button, ...styles.disagreeButton }}
+        style={{ ...style.button, ...style.disagreeButton }}
       >
-        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+        <RTLEnabledText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am_not")}
-          <RTLEnabledText
-            style={{ ...styles.buttonText, ...styles.regularText }}
-          >
+          <RTLEnabledText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_any_symptoms")}
           </RTLEnabledText>
         </RTLEnabledText>
@@ -146,7 +142,7 @@ const agreeOption = {
   ],
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     ...Buttons.largeBlue,
   },

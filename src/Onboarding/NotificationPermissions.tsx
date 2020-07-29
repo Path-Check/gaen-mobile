@@ -46,8 +46,8 @@ const NotificationsPermissions = (): JSX.Element => {
   }
 
   const explanationScreenStyles = {
-    headerStyle: styles.header,
-    bodyStyle: styles.body,
+    headerStyle: style.header,
+    bodyStyle: style.body,
     iconStyle: IconStyle.Blue,
   }
 
@@ -65,7 +65,7 @@ const NotificationsPermissions = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   header: {
     color: Colors.white,
   },

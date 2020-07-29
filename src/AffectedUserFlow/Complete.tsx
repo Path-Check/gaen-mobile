@@ -23,16 +23,16 @@ export const ExportComplete: FunctionComponent = () => {
   const body = t("export.complete_body_bluetooth")
 
   return (
-    <View style={styles.backgroundImage}>
+    <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
+        <View style={style.container}>
           <View>
-            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
+            <RTLEnabledText style={style.header}>{title}</RTLEnabledText>
+            <RTLEnabledText style={style.contentText}>{body}</RTLEnabledText>
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleOnPressDone}>
-            <RTLEnabledText style={styles.buttonText}>
+          <TouchableOpacity style={style.button} onPress={handleOnPressDone}>
+            <RTLEnabledText style={style.buttonText}>
               {t("common.done")}
             </RTLEnabledText>
           </TouchableOpacity>
@@ -42,7 +42,7 @@ export const ExportComplete: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",

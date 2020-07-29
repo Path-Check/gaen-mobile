@@ -18,7 +18,7 @@ const CodeInputScreen: FunctionComponent = () => {
   const isEnabled = hasExposureNotificationsEnabled()
 
   return (
-    <View style={styles.backgroundImage}>
+    <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
         {isEnabled ? <CodeInputForm /> : <EnableExposureNotifications />}
       </SafeAreaView>
@@ -26,7 +26,7 @@ const CodeInputScreen: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     width: "100%",
     height: "100%",
