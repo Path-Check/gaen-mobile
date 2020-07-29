@@ -64,7 +64,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
         <SvgXml
           xml={Icons.ChevronRight}
           accessible
-          accessibilityLabel={t("label.check_icon")}
+          accessibilityLabel={t("label.check")}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
           fill={Colors.primaryBlue}

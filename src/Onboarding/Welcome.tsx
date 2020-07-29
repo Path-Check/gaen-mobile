@@ -2,31 +2,29 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import {
-  Dimensions,
   ImageBackground,
-  StatusBar,
   StyleSheet,
   View,
   TouchableOpacity,
 } from "react-native"
 
 import { GlobalText } from "../components/GlobalText"
-import EulaModal from "./EulaModal"
 import { getLocalNames } from "../locales/languages"
+import { Button } from "../components"
 
 import { Images } from "../assets"
-import { Colors } from "../styles"
-import { Screens } from "../navigation"
-
-const width = Dimensions.get("window").width
+import { Spacing, Colors, Typography, Outlines } from "../styles"
+import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 const Welcome: FunctionComponent = () => {
+  useStatusBarEffect("light-content")
   const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
+
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
@@ -36,20 +34,8 @@ const Welcome: FunctionComponent = () => {
         source={Images.ConcentricCircles}
         style={style.backgroundImage}
       >
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
-        />
-        <View style={style.mainContainer}>
-          <View
-            style={{
-              paddingTop: 60,
-              position: "absolute",
-              alignSelf: "center",
-              zIndex: 10,
-            }}
-          >
+        <View style={style.container}>
+          <View style={style.headerContainer}>
             <TouchableOpacity
               onPress={() => navigation.navigate(Screens.LanguageSelection)}
               style={style.languageSelector}
@@ -59,17 +45,15 @@ const Welcome: FunctionComponent = () => {
               </GlobalText>
             </TouchableOpacity>
           </View>
-          <View style={style.contentContainer}>
+          <View>
             <GlobalText style={style.mainText}>
               {t("label.launch_screen1_header")}
             </GlobalText>
           </View>
           <View style={style.footerContainer}>
-            <EulaModal
-              onPressModalContinue={() =>
-                navigation.navigate(Screens.PersonalPrivacy)
-              }
-              selectedLocale={localeCode}
+            <Button
+              label={t("label.launch_get_started")}
+              onPress={() => navigation.navigate(OnboardingScreens.EulaModal)}
             />
           </View>
         </View>
@@ -80,48 +64,45 @@ const Welcome: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   backgroundImage: {
+    flex: 1,
     width: "100%",
     height: "100%",
     resizeMode: "cover",
-    flex: 1,
   },
-  mainContainer: {
+  container: {
     flex: 1,
-  },
-  contentContainer: {
-    width: width * 0.75,
-    flex: 1,
-    justifyContent: "center",
-    alignSelf: "center",
+    paddingVertical: Spacing.xxxHuge,
+    paddingHorizontal: Spacing.large,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   mainText: {
+    ...Typography.header2,
     textAlign: "center",
     justifyContent: "center",
     alignSelf: "center",
-    lineHeight: 35,
     color: Colors.white,
-    fontSize: 26,
   },
   languageSelector: {
-    borderWidth: 1,
+    ...Outlines.ovalBorder,
     borderColor: Colors.white,
-    paddingVertical: 4,
-    paddingHorizontal: 11,
-    borderRadius: 100,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
   },
   languageSelectorText: {
-    fontSize: 16,
+    ...Typography.mainContent,
+    letterSpacing: Typography.mediumLetterSpacing,
     color: Colors.white,
-    paddingVertical: 4,
-    paddingHorizontal: 20,
     textAlign: "center",
     textTransform: "uppercase",
   },
+  headerContainer: {
+    height: 150,
+  },
   footerContainer: {
-    position: "absolute",
-    bottom: 0,
-    padding: 24,
     width: "100%",
+    height: 150,
+    justifyContent: "flex-end",
   },
 })
 

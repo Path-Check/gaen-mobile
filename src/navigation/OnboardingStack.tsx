@@ -1,13 +1,16 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import {
+  TransitionPresets,
+  createStackNavigator,
+} from "@react-navigation/stack"
 
 import NotificationPermissions from "../Onboarding/NotificationPermissions"
 import EnableExposureNotifications from "../Onboarding/EnableExposureNotifications"
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
+import EulaModal from "../Onboarding/EulaModal"
 import NotificationDetails from "../Onboarding/NotificationDetails"
 import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
-
 import { OnboardingScreen, OnboardingScreens } from "./index"
 import LanguageSelection from "../More/LanguageSelection"
 
@@ -24,6 +27,11 @@ const Stack = createStackNavigator<OnboardingStackParams>()
 const OnboardingStack: FunctionComponent = () => (
   <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
     <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
+    <Stack.Screen
+      name={OnboardingScreens.EulaModal}
+      component={EulaModal}
+      options={{ ...TransitionPresets.ModalTransition }}
+    />
     <Stack.Screen
       name={OnboardingScreens.PersonalPrivacy}
       component={PersonalPrivacy}

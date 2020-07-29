@@ -16,6 +16,7 @@ export type NavigationProp = NavigationScreenProp<
 
 export type OnboardingScreen =
   | "Welcome"
+  | "EulaModal"
   | "PersonalPrivacy"
   | "NotificationDetails"
   | "ShareDiagnosis"
@@ -27,6 +28,7 @@ export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
 } = {
   Welcome: "Welcome",
+  EulaModal: "EulaModal",
   PersonalPrivacy: "PersonalPrivacy",
   NotificationDetails: "NotificationDetails",
   ShareDiagnosis: "ShareDiagnosis",

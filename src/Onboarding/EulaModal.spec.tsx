@@ -1,6 +1,9 @@
 import React from "react"
-import { render, fireEvent } from "@testing-library/react-native"
+import { I18nextProvider } from "react-i18next"
+import { render } from "@testing-library/react-native"
+import { useNavigation } from "@react-navigation/native"
 
+import i18n from "../locales/languages"
 import EulaModal from "./EulaModal"
 
 jest.mock("react-native-local-resource", () => {
@@ -28,31 +31,17 @@ jest.mock("../locales/eula/es_PR.html", () => {
 jest.mock("../locales/eula/ht.html", () => {
   return "ht"
 })
+jest.mock("@react-navigation/native")
+;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("EulaModal", () => {
-  it("won't continue until a user accepts the eula", () => {
-    const onPressModalContinueSpy = jest.fn()
-
-    const { getByLabelText } = render(
-      <EulaModal
-        onPressModalContinue={onPressModalContinueSpy}
-        selectedLocale="en"
-      />,
-    )
-    const continueButton = getByLabelText("Continue")
-    fireEvent.press(continueButton)
-
-    expect(onPressModalContinueSpy).not.toHaveBeenCalled()
-    fireEvent.press(getByLabelText("I accept the licensing agreement"))
-    fireEvent.press(continueButton)
-    expect(onPressModalContinueSpy).toHaveBeenCalled()
-  })
-
   it("adds an accessible close button", () => {
     const { getByLabelText } = render(
-      <EulaModal onPressModalContinue={jest.fn()} selectedLocale="en" />,
+      <I18nextProvider i18n={i18n}>
+        <EulaModal />
+      </I18nextProvider>,
     )
 
-    expect(getByLabelText("Close icon")).toBeDefined()
+    expect(getByLabelText("Close")).toBeDefined()
   })
 })
