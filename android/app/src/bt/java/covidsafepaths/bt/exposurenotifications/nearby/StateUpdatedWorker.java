@@ -37,7 +37,7 @@ import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.NotificationHelper;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
-import covidsafepaths.bt.exposurenotifications.storage.ExposureRepository;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 
 /**
  * Performs work for {@value com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient#ACTION_EXPOSURE_STATE_UPDATED}
@@ -49,17 +49,18 @@ public class StateUpdatedWorker extends ListenableWorker {
     private static final Duration GET_WINDOWS_TIMEOUT = Duration.ofSeconds(120);
 
     private final Context context;
-    private final ExposureRepository exposureRepository;
 
     public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         this.context = context;
-        this.exposureRepository = new ExposureRepository();
     }
 
     @NonNull
     @Override
     public ListenableFuture<Result> startWork() {
+        Log.d(TAG, "Starting worker to get exposure windows, " +
+                "compare them with the exposures stored in the local database " +
+                "and show a notification if there is a new one");
         return FluentFuture.from(
                 TaskToFutureAdapter.getFutureWithTimeout(
                         ExposureNotificationClientWrapper.get(context).getExposureWindows(),
@@ -67,11 +68,14 @@ public class StateUpdatedWorker extends ListenableWorker {
                         TimeUnit.MILLISECONDS,
                         AppExecutors.getScheduledExecutor()))
                 .transform(
-                        (exposureWindows) -> exposureRepository.refreshWithExposureWindows(exposureWindows),
+                        (exposureWindows) -> RealmSecureStorageBte.INSTANCE.refreshWithExposureWindows(exposureWindows),
                         AppExecutors.getBackgroundExecutor())
                 .transform((exposuresAdded) -> {
                     if (exposuresAdded) {
+                        Log.d(TAG, "New exposures found, showing a notification");
                         NotificationHelper.showPossibleExposureNotification(context);
+                    } else {
+                        Log.d(TAG, "No new exposures found");
                     }
                     return Result.success();
                 }, AppExecutors.getLightweightExecutor())

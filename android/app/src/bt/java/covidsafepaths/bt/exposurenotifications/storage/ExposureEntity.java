@@ -19,6 +19,8 @@ package covidsafepaths.bt.exposurenotifications.storage;
 
 import java.util.Objects;
 
+import io.realm.RealmObject;
+
 /**
  * An exposure element for display in the exposures UI.
  *
@@ -26,7 +28,7 @@ import java.util.Objects;
  * ensure compliance with all applicable laws and requirements with respect to encryption, storage,
  * and retention polices for end user data.
  */
-public class ExposureEntity {
+public class ExposureEntity extends RealmObject {
 
     long id;
 

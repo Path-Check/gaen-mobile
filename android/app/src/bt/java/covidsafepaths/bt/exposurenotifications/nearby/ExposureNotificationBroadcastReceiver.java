@@ -23,7 +23,8 @@ public class ExposureNotificationBroadcastReceiver extends BroadcastReceiver {
 
 //        ReactContext reactContext = ((MainApplication) context.getApplicationContext()).getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
 
-        if (ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED.equals(action)) {
+        if (ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED.equals(action)
+                || ExposureNotificationClient.ACTION_EXPOSURE_NOT_FOUND.equals(action)) {
             WorkManager workManager = WorkManager.getInstance(context);
             OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
                     .build();
