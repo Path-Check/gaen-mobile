@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react"
 import { SafeAreaView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
-import { Button } from "./components/Button"
+
 import { RTLEnabledText } from "./components/RTLEnabledText"
+import { Button } from "./components/Button"
 
 import { Colors, Spacing, Typography } from "./styles"
 
@@ -40,14 +41,14 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.red,
     flex: 1,
+    backgroundColor: Colors.primaryViolet,
   },
   content: {
-    marginHorizontal: Spacing.small,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
+    marginHorizontal: Spacing.small,
   },
   textContainer: {
     paddingTop: Spacing.large,
@@ -56,16 +57,17 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   title: {
+    ...Typography.header2,
     color: Colors.white,
-    fontSize: Typography.huge,
-    paddingBottom: Spacing.small,
+    marginBottom: Spacing.small,
   },
   subtitle: {
+    ...Typography.mainContent,
     color: Colors.white,
-    fontSize: Typography.largest,
+    marginBottom: Spacing.xxSmall,
   },
   error: {
+    ...Typography.tertiaryContent,
     color: Colors.white,
-    paddingVertical: Spacing.small,
   },
 })
