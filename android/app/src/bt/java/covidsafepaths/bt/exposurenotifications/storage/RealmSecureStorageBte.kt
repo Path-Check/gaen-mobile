@@ -19,7 +19,7 @@ import java.security.SecureRandom
 object RealmSecureStorageBte {
 
     private const val TAG = "RealmSecureStorage"
-    private const val SCHEMA_VERSION: Long = 1
+    private const val SCHEMA_VERSION: Long = 2
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
@@ -38,6 +38,7 @@ object RealmSecureStorageBte {
                 .encryptionKey(encryptionKey)
                 .addModule(SafePathsBteRealmModule())
                 .schemaVersion(SCHEMA_VERSION)
+                .migration(Migration())
 
         builder.name("safepathsbte.realm")
 
