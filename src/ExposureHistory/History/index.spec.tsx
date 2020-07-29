@@ -6,21 +6,21 @@ import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 
-import History from "./History"
+import History from "."
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("History", () => {
   describe("when there are no exposures", () => {
-    it("shows a no exposures reports message", () => {
+    it("shows a no exposure reports message", () => {
       const exposures: ExposureDatum[] = []
 
-      const { getByText } = render(
+      const { queryByText } = render(
         <History exposures={exposures} lastDetectionDate={null} />,
       )
 
-      expect(getByText("No Exposure Reports")).not.toBeNull()
+      expect(queryByText("No Exposure Reports")).not.toBeNull()
     })
   })
 
