@@ -54,8 +54,9 @@ lokalise2 file download \
   --export-empty-as skip \
   --format xml \
   --include-description \
-  --original-filenames \
-  --unzip-to=android/app/src/bt/res \
+  --original-filenames=false \
+  --bundle-structure "strings-%LANG_ISO%.xml" \
+  --unzip-to=android/app/src/bt/res/values/ \
   --export-sort=a_z \
   --config .lokalise.yml \
   --token=$LOKALISE_READ_TOKEN \
