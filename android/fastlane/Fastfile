@@ -109,7 +109,7 @@ platform :android do
       track: 'beta',
       release_status: 'draft',
       skip_upload_apk: true,
-      package_name: 'org.pathcheck.covidsafepaths',
+      package_name: 'org.pathcheck.covidsafepaths.bt',
       aab: "app/build/outputs/bundle/btRelease/app.aab"
     )
 
