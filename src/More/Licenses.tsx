@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Images } from "../assets"
 import { Colors, Spacing, Typography } from "../styles"
@@ -35,31 +35,31 @@ const Licenses = (): JSX.Element => {
         alwaysBounceVertical={false}
       >
         <View>
-          <RTLEnabledText
+          <GlobalText
             style={style.headerContent}
             testID={"licenses-legal-header"}
           >
             {legalHeaderText}
-          </RTLEnabledText>
+          </GlobalText>
           <View
             style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
           >
-            <RTLEnabledText style={style.contentText}>
+            <GlobalText style={style.contentText}>
               {t("label.legal_page_address")}
-            </RTLEnabledText>
+            </GlobalText>
             <View style={{ height: 20 }} />
-            <RTLEnabledText
+            <GlobalText
               onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
               style={style.hyperlink}
             >
               {infoAddress}
-            </RTLEnabledText>
-            <RTLEnabledText
+            </GlobalText>
+            <GlobalText
               onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
               style={style.hyperlink}
             >
               {pathCheckAddress}
-            </RTLEnabledText>
+            </GlobalText>
           </View>
         </View>
       </ScrollView>
@@ -67,11 +67,9 @@ const Licenses = (): JSX.Element => {
         style={style.termsInfoRow}
         onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
       >
-        <RTLEnabledText
-          style={{ ...Typography.mainContent, color: Colors.white }}
-        >
+        <GlobalText style={{ ...Typography.mainContent, color: Colors.white }}>
           {t("label.privacy_policy")}
-        </RTLEnabledText>
+        </GlobalText>
         <View style={style.arrowContainer}>
           <Image source={Images.ForeArrow} />
         </View>

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
@@ -52,9 +52,7 @@ const History: FunctionComponent<HistoryProps> = ({
       >
         <View>
           <View style={style.headerRow}>
-            <RTLEnabledText style={style.headerText}>
-              {titleText}
-            </RTLEnabledText>
+            <GlobalText style={style.headerText}>{titleText}</GlobalText>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}
