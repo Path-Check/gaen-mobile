@@ -51,7 +51,7 @@ const jacksonsPurple = "#1f2c9b"
 const moonRaker = "#e5e7fa"
 const indigo = "#4754C5"
 const melrose = "#a5affb"
-const faintViolet = "#f8f8ff"
+const faintViolet = "#f3f3fc"
 
 export const primaryViolet = jacksonsPurple
 export const secondaryViolet = indigo
