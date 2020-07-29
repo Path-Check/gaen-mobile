@@ -37,6 +37,7 @@ public final class NotificationHelper {
         NotificationCompat.Builder builder =
                 new Builder(context, EXPOSURE_NOTIFICATION_CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_notification)
+                        .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
                         .setContentTitle(context.getString(R.string.exposure_notification_title))
                         .setContentText(context.getString(R.string.exposure_notification_message))
                         .setStyle(new NotificationCompat.BigTextStyle()
