@@ -48,10 +48,10 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void submitExposureKeys() {
+    public void submitExposureKeys(Promise promise) {
         Activity activity = getCurrentActivity();
         if (activity instanceof MainActivity) {
-            ((MainActivity) activity).share();
+            ((MainActivity) activity).share(promise);
         }
     }
 

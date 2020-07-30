@@ -34,13 +34,13 @@ public class ExposureKeyModule  extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void postDiagnosisKeys(String certificate, String hmacKey) {
+    public void postDiagnosisKeys(String certificate, String hmacKey, Promise promise) {
         this.certificate = certificate;
         this.hmacKey = hmacKey;
 
         Activity activity = getCurrentActivity();
         if (activity instanceof MainActivity) {
-            ((MainActivity) activity).share();
+            ((MainActivity) activity).share(promise);
         }
     }
 
