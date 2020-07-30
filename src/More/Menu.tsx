@@ -16,7 +16,7 @@ import {
 } from "react-navigation"
 
 import { getLocalNames } from "../locales/languages"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { Stacks, Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
@@ -50,9 +50,7 @@ const LanguageSelectionListItem = ({
         accessibilityLabel={iconLabel}
         style={[style.icon, { marginRight: Spacing.small }]}
       />
-      <RTLEnabledText style={{ ...Typography.mainContent }}>
-        {label}
-      </RTLEnabledText>
+      <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
     </View>
   </TouchableHighlight>
 )
@@ -85,11 +83,9 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
         onPress={onPress}
       >
         <View>
-          <RTLEnabledText style={style.listItemText}>{label}</RTLEnabledText>
+          <GlobalText style={style.listItemText}>{label}</GlobalText>
           {description ? (
-            <RTLEnabledText style={style.descriptionText}>
-              {description}
-            </RTLEnabledText>
+            <GlobalText style={style.descriptionText}>{description}</GlobalText>
           ) : null}
         </View>
       </TouchableHighlight>
@@ -99,16 +95,14 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
   return (
     <ScrollView style={style.container}>
       <View style={style.sectionPrimary}>
-        <RTLEnabledText>
-          {t("settings.share_test_result_description")}
-        </RTLEnabledText>
+        <GlobalText>{t("settings.share_test_result_description")}</GlobalText>
         <TouchableOpacity
           onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
           style={style.button}
         >
-          <RTLEnabledText style={style.buttonText}>
+          <GlobalText style={style.buttonText}>
             {t("settings.share_test_result")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
       </View>
 

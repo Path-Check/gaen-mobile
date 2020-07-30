@@ -1,2 +1,2 @@
 export { Button } from "./Button"
-export { RTLEnabledText } from "./RTLEnabledText"
+export { GlobalText } from "./GlobalText"

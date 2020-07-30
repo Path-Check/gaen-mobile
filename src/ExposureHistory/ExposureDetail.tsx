@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { useStatusBarEffect } from "../navigation"
 import { Possible, ExposureDatum, exposureWindowBucket } from "../exposure"
 
@@ -72,22 +72,22 @@ const ExposureDetail: FunctionComponent = () => {
               height={Iconography.small}
             />
           </View>
-          <RTLEnabledText style={style.exposureWindow}>
+          <GlobalText style={style.exposureWindow}>
             {exposureWindowBucketInWords(exposureDatum)}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
-        <RTLEnabledText style={style.headerText}>{headerText}</RTLEnabledText>
-        <RTLEnabledText style={style.contentText}>{contentText}</RTLEnabledText>
+        <GlobalText style={style.headerText}>{headerText}</GlobalText>
+        <GlobalText style={style.contentText}>{contentText}</GlobalText>
       </View>
       <View style={style.bottomContainer}>
-        <RTLEnabledText style={style.bottomHeaderText}>
+        <GlobalText style={style.bottomHeaderText}>
           {t("exposure_history.exposure_detail.ha_guidance_header")}
-        </RTLEnabledText>
-        <RTLEnabledText style={style.bottomSubheaderText}>
+        </GlobalText>
+        <GlobalText style={style.bottomSubheaderText}>
           {t("exposure_history.exposure_detail.ha_guidance_subheader", {
             healthAuthorityName,
           })}
-        </RTLEnabledText>
+        </GlobalText>
         <View style={style.recommendations}>
           <RecommendationBubble
             icon={Icons.IsolateBubbles}
@@ -110,9 +110,9 @@ const ExposureDetail: FunctionComponent = () => {
           onPress={handleOnPressNextStep}
           style={style.nextStepsButton}
         >
-          <RTLEnabledText style={style.nextStepsButtonText}>
+          <GlobalText style={style.nextStepsButtonText}>
             {t("exposure_history.exposure_detail.next_steps")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
       </View>
     </View>
@@ -136,7 +136,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
           height={Iconography.small}
         />
       </View>
-      <RTLEnabledText style={style.recommendationText}>{text}</RTLEnabledText>
+      <GlobalText style={style.recommendationText}>{text}</GlobalText>
     </View>
   )
 }

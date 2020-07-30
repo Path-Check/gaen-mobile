@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 
-import { RTLEnabledText } from "./RTLEnabledText"
+import { GlobalText } from "./GlobalText"
 
 import { Buttons, Typography } from "../styles"
 
@@ -51,7 +51,7 @@ export const Button = ({
       {loading ? (
         <ActivityIndicator size={"large"} />
       ) : (
-        <RTLEnabledText style={buttonTextStyle}>{label}</RTLEnabledText>
+        <GlobalText style={buttonTextStyle}>{label}</GlobalText>
       )}
     </TouchableOpacity>
   )

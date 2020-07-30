@@ -3,19 +3,19 @@ import { Text, TextStyle } from "react-native"
 
 import { useLanguageDirection } from "../locales/languages"
 
-interface RTLEnabledTextProps {
+interface GlobalTextProps {
   style?: TextStyle
   testID?: string
   onPress?: () => void
   children: JSX.Element | string
 }
 
-export const RTLEnabledText = ({
+export const GlobalText = ({
   style,
   testID,
   children,
   onPress,
-}: RTLEnabledTextProps): JSX.Element => {
+}: GlobalTextProps): JSX.Element => {
   const writingDirection = useLanguageDirection()
 
   return (
