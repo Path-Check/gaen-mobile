@@ -47,23 +47,23 @@ export const extraLargeIcon: ViewStyle = {
 
 export const largeBlueIcon: ViewStyle = {
   ...largeIcon,
-  backgroundColor: Colors.onboardingIconBlue,
+  backgroundColor: Colors.tertiaryViolet,
 }
 
 export const largeGoldIcon: ViewStyle = {
   ...largeIcon,
-  backgroundColor: Colors.onboardingIconYellow,
+  backgroundColor: Colors.secondaryYellow,
 }
 
 // Exposure History
 export const possibleExposure: ViewStyle = {
-  backgroundColor: Colors.possibleExposure,
-  borderColor: Colors.possibleExposure,
+  backgroundColor: Colors.primaryBlue,
+  borderColor: Colors.primaryBlue,
 }
 
 export const expectedExposure: ViewStyle = {
-  backgroundColor: Colors.expectedExposure,
-  borderColor: Colors.expectedExposure,
+  backgroundColor: Colors.primaryYellow,
+  borderColor: Colors.primaryYellow,
 }
 
 export const possibleExposureText: TextStyle = {

@@ -175,7 +175,8 @@ const style = StyleSheet.create({
     ...Typography.header2,
   },
   contentText: {
-    ...Typography.mainContentViolet,
+    ...Typography.mainContent,
+    color: Colors.secondaryViolet,
     marginTop: Spacing.xLarge,
   },
   primaryButton: {

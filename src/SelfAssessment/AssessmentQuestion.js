@@ -173,8 +173,9 @@ const style = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   instruction: {
-    ...Typography.assessmentInstruction,
-    fontFamily: Typography.baseFontFamily,
+    ...Typography.mediumFont,
+    lineHeight: Typography.smallerLineHeight,
+    color: Colors.secondaryHeaderText,
     marginTop: Spacing.xLarge,
   },
   button: {

@@ -100,9 +100,12 @@ const style = StyleSheet.create({
     borderColor: Colors.secondaryBlue,
   },
   title: {
+    ...Typography.largeFont,
+    ...Typography.bold,
+    color: Colors.primaryText,
+    lineHeight: Typography.mediumLineHeight,
     flex: 1,
     flexWrap: "wrap",
-    ...Typography.inputLabel,
   },
   container: {
     backgroundColor: Colors.white,

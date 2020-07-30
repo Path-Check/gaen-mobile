@@ -42,8 +42,8 @@ const primaryBlue: ViewStyle = {
 }
 
 const secondaryBlue: ViewStyle = {
-  backgroundColor: Colors.cornflowerBlue,
-  borderColor: Colors.cornflowerBlue,
+  backgroundColor: Colors.secondaryBlue,
+  borderColor: Colors.secondaryBlue,
 }
 
 const white: ViewStyle = {

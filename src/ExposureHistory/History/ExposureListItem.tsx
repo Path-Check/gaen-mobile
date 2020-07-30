@@ -67,7 +67,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           accessibilityLabel={t("label.check_icon")}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
-          fill={Colors.royalBlue}
+          fill={Colors.primaryBlue}
         />
       </View>
     </TouchableHighlight>
