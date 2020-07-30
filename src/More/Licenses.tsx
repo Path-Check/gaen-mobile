@@ -1,6 +1,5 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
-  Image,
   Linking,
   ScrollView,
   StyleSheet,
@@ -8,25 +7,22 @@ import {
   View,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
+import { getApplicationName } from "react-native-device-info"
 
 import { GlobalText } from "../components/GlobalText"
 
-import { Images } from "../assets"
 import { Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
-const PRIVACY_POLICY_URL = "https://pathcheck.org/privacy-policy/"
-
-const Licenses = (): JSX.Element => {
+const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
 
-  const legalHeaderText = t("label.legal_page_header_bluetooth")
-
-  const infoAddress = "info@pathcheck.org"
-  const pathCheckAddress = "pathcheck.org"
-
-  const handleOnPressOpenUrl = (url: string) => {
-    return () => Linking.openURL(url)
-  }
+  const infoEmailAddress = "info@pathcheck.org"
+  const infoEmailLink = "mailto:info@pathcheck.org"
+  const pathCheckWebAddress = "pathcheck.org"
+  const pathCheckUrl = "https://pathcheck.org/"
+  const privacyPolicyUrl = "https://pathcheck.org/privacy-policy/"
 
   return (
     <>
@@ -39,40 +35,33 @@ const Licenses = (): JSX.Element => {
             style={style.headerContent}
             testID={"licenses-legal-header"}
           >
-            {legalHeaderText}
+            {getApplicationName()}
           </GlobalText>
-          <View
-            style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
+          <GlobalText style={style.contentText}>
+            {t("label.legal_page_address")}
+          </GlobalText>
+          <GlobalText
+            onPress={() => Linking.openURL(infoEmailLink)}
+            style={style.hyperlink}
           >
-            <GlobalText style={style.contentText}>
-              {t("label.legal_page_address")}
-            </GlobalText>
-            <View style={{ height: 20 }} />
-            <GlobalText
-              onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
-              style={style.hyperlink}
-            >
-              {infoAddress}
-            </GlobalText>
-            <GlobalText
-              onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
-              style={style.hyperlink}
-            >
-              {pathCheckAddress}
-            </GlobalText>
-          </View>
+            {infoEmailAddress}
+          </GlobalText>
+          <GlobalText
+            onPress={() => Linking.openURL(pathCheckUrl)}
+            style={style.hyperlink}
+          >
+            {pathCheckWebAddress}
+          </GlobalText>
         </View>
       </ScrollView>
       <TouchableOpacity
-        style={style.termsInfoRow}
-        onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
+        style={style.privacyPolicy}
+        onPress={() => Linking.openURL(privacyPolicyUrl)}
       >
-        <GlobalText style={{ ...Typography.mainContent, color: Colors.white }}>
+        <GlobalText style={style.privacyPolicyText}>
           {t("label.privacy_policy")}
         </GlobalText>
-        <View style={style.arrowContainer}>
-          <Image source={Images.ForeArrow} />
-        </View>
+        <SvgXml xml={Icons.ChevronRight} fill={Colors.white} />
       </TouchableOpacity>
     </>
   )
@@ -80,32 +69,35 @@ const Licenses = (): JSX.Element => {
 
 const style = StyleSheet.create({
   contentContainer: {
+    flex: 1,
     backgroundColor: Colors.primaryBackgroundFaintShade,
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingTop: Spacing.large,
+    paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header3,
+    marginBottom: Spacing.small,
+  },
+  contentText: {
+    ...Typography.secondaryContent,
+    marginBottom: Spacing.small,
   },
   hyperlink: {
     ...Typography.secondaryContent,
     color: Colors.linkText,
     textDecorationLine: "underline",
   },
-  termsInfoRow: {
+  privacyPolicy: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: Colors.primaryBlue,
-    paddingVertical: 25,
-    paddingHorizontal: 15,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.small,
   },
-  arrowContainer: {
-    alignSelf: "center",
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  contentText: {
-    ...Typography.secondaryContent,
+  privacyPolicyText: {
+    ...Typography.mainContent,
+    color: Colors.white,
   },
 })
 
