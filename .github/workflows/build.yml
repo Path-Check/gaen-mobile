@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build_staging_android:
+  build_debug_android:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
