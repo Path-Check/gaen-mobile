@@ -81,7 +81,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xSmall,
-    borderRadius: Outlines.largeBorderRadius,
+    borderRadius: Outlines.borderRadiusLarge,
   },
   innerContainer: {
     flexDirection: "row",

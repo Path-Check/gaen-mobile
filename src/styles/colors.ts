@@ -81,8 +81,9 @@ export const primaryBorder = primaryViolet
 export const secondaryBorder = lighterGray
 export const radioBorder = lightGray
 
-// Nav
-export const navBar = primaryViolet
+// Headers
+export const headerBackground = primaryViolet
+export const headerText = white
 
 // Icons
 export const icon = mediumGray

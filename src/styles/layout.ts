@@ -12,7 +12,7 @@ export const halfHeight = 0.5 * screenHeight
 
 export const tappableHeight = 0.1 * screenHeight
 
-export const navBar = tappableHeight + Spacing.xSmall
+export const headerHeight = tappableHeight + Spacing.xSmall
 
 // zIndex
 export const zLevel1 = 1
