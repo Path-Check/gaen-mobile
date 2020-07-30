@@ -68,12 +68,12 @@ jobs:
       - name: Build android Staging artifact
         uses: maierj/fastlane-action@v1.4.0
         with:
-          lane: 'staging_bt'
+          lane: 'debug_bt'
           subdirectory: 'android'
           bundle-install-path: 'vendor/bundle'
 
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-bt-staging
-          path: android/app/build/outputs/apk/bt/staging/app-bt-staging.apk
+          name: app-bt-debug
+          path: android/app/build/outputs/apk/bt/staging/app-bt-debug.apk
