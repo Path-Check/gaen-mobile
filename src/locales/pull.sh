@@ -54,7 +54,8 @@ lokalise2 file download \
   --export-empty-as skip \
   --format xml \
   --include-description \
-  --original-filenames \
+  --original-filenames=false \
+  --bundle-structure "values-%LANG_ISO%/strings.xml" \
   --unzip-to=android/app/src/bt/res \
   --export-sort=a_z \
   --config .lokalise.yml \
