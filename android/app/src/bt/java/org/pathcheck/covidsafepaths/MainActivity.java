@@ -103,7 +103,7 @@ public class MainActivity extends ReactActivity {
               .startResolutionForResult(
                       this, RequestCodes.REQUEST_CODE_UPLOAD_KEYS);
     }catch (IntentSender.SendIntentException e) {
-
+      postDiagnosisKeysPromise.reject(e);
     }
   }
 
@@ -114,7 +114,7 @@ public class MainActivity extends ReactActivity {
               .startResolutionForResult(
                       this, RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY);
     }catch (IntentSender.SendIntentException e) {
-
+      getExposureKeysPromise.reject(e);
     }
   }
 
@@ -144,12 +144,14 @@ public class MainActivity extends ReactActivity {
         getExposureKeys(getExposureKeysPromise);
       } else {
         // Don't share.
+        getExposureKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
     } else if(requestCode == RequestCodes.REQUEST_CODE_UPLOAD_KEYS){
       if (resultCode == RESULT_OK) {
         share(postDiagnosisKeysPromise);
       } else {
         // Don't share.
+        postDiagnosisKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
     }
   }
