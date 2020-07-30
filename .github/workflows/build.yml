@@ -65,7 +65,7 @@ jobs:
       - name: Setup env
         run: ./bin/set_ha_env_github.sh
 
-      - name: Build android Staging artifact
+      - name: Build android Debug artifact
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: 'debug_bt'
@@ -76,4 +76,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: app-bt-debug
-          path: android/app/build/outputs/apk/bt/staging/app-bt-debug.apk
+          path: android/app/build/outputs/apk/bt/debug/app-bt-debug.apk
