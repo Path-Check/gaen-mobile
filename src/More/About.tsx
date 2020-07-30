@@ -14,7 +14,7 @@ import {
   getVersion,
 } from "react-native-device-info"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -22,6 +22,9 @@ export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
 
   const versionInfo = `${getVersion()} (${getBuildNumber()})`
+  const osInfo = `${Platform.OS} v${Platform.Version}`
+  const pathCheckWebAddress = "pathcheck.org"
+  const pathCheckUrl = "https://pathcheck.org/"
 
   return (
     <ScrollView
@@ -29,39 +32,37 @@ export const AboutScreen: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <View>
-        <RTLEnabledText style={style.headerContent}>
+        <GlobalText style={style.headerContent}>
           {getApplicationName()}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
-      <RTLEnabledText style={style.aboutContent}>
+      <GlobalText style={style.aboutContent}>
         {t("label.about_para")}
-      </RTLEnabledText>
-      <RTLEnabledText
+      </GlobalText>
+      <GlobalText
         style={style.hyperlink}
         onPress={() => {
-          Linking.openURL("https://pathcheck.org/")
+          Linking.openURL(pathCheckUrl)
         }}
       >
-        <Text>pathcheck.org</Text>
-      </RTLEnabledText>
-
-      <View style={style.rowContainer}>
-        <View style={style.row}>
-          <RTLEnabledText style={style.aboutSectionParaLabel}>
+        <Text>{pathCheckWebAddress}</Text>
+      </GlobalText>
+      <View style={style.infoRowContainer}>
+        <View style={style.infoRow}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.version")}
-          </RTLEnabledText>
-
-          <RTLEnabledText style={style.aboutSectionParaContent}>
+          </GlobalText>
+          <GlobalText style={style.aboutSectionParaContent}>
             {versionInfo}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
-        <View style={style.row}>
-          <RTLEnabledText style={style.aboutSectionParaLabel}>
+        <View style={style.infoRow}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.operating_system_abbr")}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.aboutSectionParaContent}>
-            {Platform.OS + " v" + Platform.Version}
-          </RTLEnabledText>
+          </GlobalText>
+          <GlobalText style={style.aboutSectionParaContent}>
+            {osInfo}
+          </GlobalText>
         </View>
       </View>
     </ScrollView>
@@ -70,16 +71,17 @@ export const AboutScreen: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   contentContainer: {
-    backgroundColor: Colors.primaryBackground,
-    paddingHorizontal: Spacing.medium,
-    paddingTop: Spacing.huge,
     flex: 1,
+    backgroundColor: Colors.primaryBackgroundFaintShade,
+    paddingTop: Spacing.large,
+    paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header3,
     marginBottom: Spacing.small,
   },
   hyperlink: {
+    ...Typography.secondaryContent,
     color: Colors.linkText,
     textDecorationLine: "underline",
   },
@@ -88,17 +90,17 @@ const style = StyleSheet.create({
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
-    width: Spacing.xxxHuge * 2,
+    width: 100,
     marginTop: Spacing.small,
   },
   aboutSectionParaContent: {
     ...Typography.mainContent,
     marginTop: Spacing.small,
   },
-  rowContainer: {
+  infoRowContainer: {
     marginTop: Spacing.medium,
   },
-  row: {
+  infoRow: {
     flexDirection: "row",
   },
 })

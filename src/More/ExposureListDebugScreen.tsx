@@ -9,7 +9,7 @@ import {
   NativeModules,
 } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NavigationProp } from "../navigation"
 
 import dayjs from "dayjs"
@@ -84,9 +84,9 @@ const ExposureListDebugScreen = ({
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
         <View style={style.flatlistRowView}>
-          <RTLEnabledText style={style.itemText}>
+          <GlobalText style={style.itemText}>
             <Text>Date: {item.item.date}</Text>
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       )}
     />

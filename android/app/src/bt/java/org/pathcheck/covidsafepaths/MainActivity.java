@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -25,7 +24,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 import org.devio.rn.splashscreen.SplashScreen;
-import org.json.JSONObject;
 import org.threeten.bp.Duration;
 
 import java.util.ArrayList;
@@ -48,6 +46,7 @@ public class MainActivity extends ReactActivity {
   private static final int DEFAULT_PERIOD = DiagnosisKey.DEFAULT_PERIOD;
   private static final int DEFAULT_TRANSMISSION_RISK = 1;
   private Promise getExposureKeysPromise;
+  private Promise postDiagnosisKeysPromise;
 
   public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
           "org.pathcheck.covidsafepaths.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
@@ -104,7 +103,7 @@ public class MainActivity extends ReactActivity {
               .startResolutionForResult(
                       this, RequestCodes.REQUEST_CODE_UPLOAD_KEYS);
     }catch (IntentSender.SendIntentException e) {
-
+      postDiagnosisKeysPromise.reject(e);
     }
   }
 
@@ -115,7 +114,7 @@ public class MainActivity extends ReactActivity {
               .startResolutionForResult(
                       this, RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY);
     }catch (IntentSender.SendIntentException e) {
-
+      getExposureKeysPromise.reject(e);
     }
   }
 
@@ -145,12 +144,14 @@ public class MainActivity extends ReactActivity {
         getExposureKeys(getExposureKeysPromise);
       } else {
         // Don't share.
+        getExposureKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
     } else if(requestCode == RequestCodes.REQUEST_CODE_UPLOAD_KEYS){
       if (resultCode == RESULT_OK) {
-        share();
+        share(postDiagnosisKeysPromise);
       } else {
         // Don't share.
+        postDiagnosisKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
     }
   }
@@ -188,7 +189,7 @@ public class MainActivity extends ReactActivity {
               @Override
               public void onFailure(Throwable exception) {
                 if (!(exception instanceof ApiException)) {
-
+                  getExposureKeysPromise.reject(exception);
                   return;
                 }
                 ApiException apiException = (ApiException) exception;
@@ -196,7 +197,7 @@ public class MainActivity extends ReactActivity {
                         == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
                   showPermissionShareKeys(apiException);
                 } else {
-
+                  getExposureKeysPromise.reject(exception);
                 }
               }
             },
@@ -204,7 +205,8 @@ public class MainActivity extends ReactActivity {
 
   }
 
-  public void share() {
+  public void share(Promise promise) {
+    postDiagnosisKeysPromise = promise;
     FluentFuture<Boolean> getKeysAndSubmitToService =
             FluentFuture.from(getRecentKeys())
                     .transform(
@@ -216,22 +218,22 @@ public class MainActivity extends ReactActivity {
             new FutureCallback<Boolean>() {
               @Override
               public void onSuccess(Boolean shared) {
-
-
+                postDiagnosisKeysPromise.resolve(null);
               }
 
               @Override
               public void onFailure(Throwable exception) {
                 if (!(exception instanceof ApiException)) {
-
+                  postDiagnosisKeysPromise.reject(exception);
                   return;
                 }
+
                 ApiException apiException = (ApiException) exception;
                 if (apiException.getStatusCode()
                         == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
                   showPermissionUploadKeys(apiException);
                 } else {
-
+                  postDiagnosisKeysPromise.reject(exception);
                 }
               }
             },
