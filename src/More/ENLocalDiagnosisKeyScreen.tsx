@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NavigationProp } from "../navigation"
 
 import { NativeModule } from "../gaen"
@@ -76,9 +76,9 @@ const ENLocalDiagnosisKeyScreen = ({
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
         <View style={style.flatlistRowView}>
-          <RTLEnabledText style={style.itemText}>
+          <GlobalText style={style.itemText}>
             <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       )}
     />

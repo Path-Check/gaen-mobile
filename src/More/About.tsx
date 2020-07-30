@@ -14,7 +14,7 @@ import {
   getVersion,
 } from "react-native-device-info"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -29,39 +29,39 @@ export const AboutScreen: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <View>
-        <RTLEnabledText style={style.headerContent}>
+        <GlobalText style={style.headerContent}>
           {getApplicationName()}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
-      <RTLEnabledText style={style.aboutContent}>
+      <GlobalText style={style.aboutContent}>
         {t("label.about_para")}
-      </RTLEnabledText>
-      <RTLEnabledText
+      </GlobalText>
+      <GlobalText
         style={style.hyperlink}
         onPress={() => {
           Linking.openURL("https://pathcheck.org/")
         }}
       >
         <Text>pathcheck.org</Text>
-      </RTLEnabledText>
+      </GlobalText>
 
       <View style={style.rowContainer}>
         <View style={style.row}>
-          <RTLEnabledText style={style.aboutSectionParaLabel}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.version")}
-          </RTLEnabledText>
+          </GlobalText>
 
-          <RTLEnabledText style={style.aboutSectionParaContent}>
+          <GlobalText style={style.aboutSectionParaContent}>
             {versionInfo}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
         <View style={style.row}>
-          <RTLEnabledText style={style.aboutSectionParaLabel}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.operating_system_abbr")}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.aboutSectionParaContent}>
+          </GlobalText>
+          <GlobalText style={style.aboutSectionParaContent}>
             {Platform.OS + " v" + Platform.Version}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       </View>
     </ScrollView>

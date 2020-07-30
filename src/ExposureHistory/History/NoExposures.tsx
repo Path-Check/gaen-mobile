@@ -4,7 +4,7 @@ import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 import { Colors, Typography, Spacing, Outlines } from "../../styles"
 import { Icons } from "../../assets"
 
@@ -17,12 +17,12 @@ const NoExposures: FunctionComponent = () => {
   return (
     <View>
       <View style={style.noExposureCard}>
-        <RTLEnabledText style={style.headerText}>
+        <GlobalText style={style.headerText}>
           {t("exposure_history.no_exposure_reports")}
-        </RTLEnabledText>
-        <RTLEnabledText style={style.subheaderText}>
+        </GlobalText>
+        <GlobalText style={style.subheaderText}>
           {t("exposure_history.no_exposure_reports_over_past")}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
       <HealthGuidelines />
     </View>
@@ -37,32 +37,32 @@ const HealthGuidelines: FunctionComponent = () => {
 
   return (
     <View style={style.card}>
-      <RTLEnabledText style={style.cardHeaderText}>
+      <GlobalText style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
-      </RTLEnabledText>
+      </GlobalText>
       {Boolean(healthAuthorityLink) && (
         <>
-          <RTLEnabledText style={style.cardSubheaderText}>
+          <GlobalText style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {
               healthAuthorityName,
             })}
-          </RTLEnabledText>
+          </GlobalText>
           <TouchableOpacity
             onPress={handleOnPressHALink}
             style={style.learnMoreCtaContainer}
           >
-            <RTLEnabledText style={style.learnMoreCta}>
+            <GlobalText style={style.learnMoreCta}>
               {t("exposure_history.learn_more")}
-            </RTLEnabledText>
+            </GlobalText>
             <SvgXml
               xml={Icons.Arrow}
               fill={Colors.primaryViolet}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
-          <RTLEnabledText style={style.listHeading}>
+          <GlobalText style={style.listHeading}>
             {t("exposure_history.health_guidelines.title")}
-          </RTLEnabledText>
+          </GlobalText>
         </>
       )}
       <HealthGuidelineItem
@@ -98,7 +98,7 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
       <View style={style.listItemIconContainer}>
         <SvgXml xml={icon} fill={Colors.primaryViolet} />
       </View>
-      <RTLEnabledText style={style.listItemText}>{text}</RTLEnabledText>
+      <GlobalText style={style.listItemText}>{text}</GlobalText>
     </View>
   )
 }

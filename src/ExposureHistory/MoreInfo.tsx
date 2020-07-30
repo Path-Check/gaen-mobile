@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { useStatusBarEffect } from "../navigation"
 
 import { Spacing, Typography, Colors } from "../styles"
@@ -18,20 +18,20 @@ const MoreInfo: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <View style={style.section}>
-          <RTLEnabledText style={style.headerText}>
+          <GlobalText style={style.headerText}>
             {t("exposure_history.why_did_i_get_an_en")}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.contentText}>
+          </GlobalText>
+          <GlobalText style={style.contentText}>
             {t("exposure_history.why_did_i_get_an_en_para")}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
         <View style={style.section}>
-          <RTLEnabledText style={style.headerText}>
+          <GlobalText style={style.headerText}>
             {t("exposure_history.how_does_this_work")}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.contentText}>
+          </GlobalText>
+          <GlobalText style={style.contentText}>
             {t("exposure_history.how_does_this_work_para")}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       </ScrollView>
     </>
