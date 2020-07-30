@@ -28,6 +28,7 @@ import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.debug.DebugExposureNotificationUtils;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import covidsafepaths.bt.exposurenotifications.notify.ShareDiagnosisManager;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
 
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
@@ -127,5 +128,10 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                     }
                 })
                 .addOnFailureListener(promise::reject);
+    }
+
+    @ReactMethod
+    public void showLastProcessedFilePath(Promise promise) {
+        promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
     }
 }

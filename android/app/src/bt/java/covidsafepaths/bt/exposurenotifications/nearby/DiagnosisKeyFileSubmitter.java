@@ -18,6 +18,7 @@
 package covidsafepaths.bt.exposurenotifications.nearby;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.common.io.BaseEncoding;
@@ -35,6 +36,7 @@ import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.network.KeyFileBatch;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 
 /**
  * A thin class to take responsibility for submitting downloaded Diagnosis Key files to the Google
@@ -95,6 +97,18 @@ public class DiagnosisKeyFileSubmitter {
         for (KeyFileBatch b : batches) {
             files.addAll(b.files());
             logBatch(b);
+        }
+
+        // Keep track of the latest file we processed
+        if (!batches.isEmpty()) {
+            KeyFileBatch lastBatch = batches.get(batches.size() - 1);
+            List<Uri> lastBatchUris = lastBatch.uris();
+            if (!lastBatchUris.isEmpty()) {
+                Uri lastUri = lastBatchUris.get(lastBatchUris.size() - 1);
+                if (lastUri.getEncodedPath() != null) {
+                    RealmSecureStorageBte.INSTANCE.upsertLastProcessedKeyZipFileName(lastUri.getEncodedPath());
+                }
+            }
         }
 
         return TaskToFutureAdapter.getFutureWithTimeout(
