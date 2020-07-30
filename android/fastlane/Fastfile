@@ -68,9 +68,9 @@ platform :android do
   end
 
   desc "Build a Staging AAB"
-  lane :staging_bt do
+  lane :debug_bt do
     gradle(
-      task: "clean assembleBtStaging",
+      task: "clean assembleBtDebug",
       print_command: false,
     )
   end 
