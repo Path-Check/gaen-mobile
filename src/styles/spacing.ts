@@ -12,5 +12,3 @@ export const huge = 40
 export const xHuge = 44
 export const xxHuge = 48
 export const xxxHuge = 52
-
-export const icon = large

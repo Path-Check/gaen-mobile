@@ -20,7 +20,7 @@ import { GlobalText } from "../components/GlobalText"
 import { Stacks, Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
-import { Buttons, Colors, Spacing, Typography } from "../styles"
+import { Iconography, Buttons, Colors, Spacing, Typography } from "../styles"
 
 interface MenuScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
@@ -166,8 +166,8 @@ const style = StyleSheet.create({
     ...Typography.buttonTextLight,
   },
   icon: {
-    maxWidth: Spacing.icon,
-    maxHeight: Spacing.icon,
+    maxWidth: Iconography.small,
+    maxHeight: Iconography.small,
   },
   listItem: {
     flex: 1,
