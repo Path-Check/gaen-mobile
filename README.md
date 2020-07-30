@@ -154,6 +154,7 @@ yarn start --reset-cache
 - To provide dianogisis keys to the API the applicationId should be whitelisted, you can skip that verification step by checking `Settings > Google > COVID-19 Exposure Notifications >  Debug mode > Bypass app signature check`
 - Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
 
+
 ### iOS (macOS only)
 
 First, install the pod files:
