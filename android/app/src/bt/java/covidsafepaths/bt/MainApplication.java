@@ -2,7 +2,6 @@ package covidsafepaths.bt;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -10,20 +9,17 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.stetho.Stetho;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
+
+import org.pathcheck.covidsafepaths.BuildConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.pathcheck.covidsafepaths.BuildConfig;
-
 import covidsafepaths.bt.bridge.ExposureNotificationsPackage;
-import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
 import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import io.realm.Realm;
 
@@ -63,6 +59,7 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         super.onCreate();
         MainApplication.context = getApplicationContext();
+        AndroidThreeTen.init(this);
         SoLoader.init(this, /* native exopackage */ false);
         Realm.init(this);
         initializeStetho(this);

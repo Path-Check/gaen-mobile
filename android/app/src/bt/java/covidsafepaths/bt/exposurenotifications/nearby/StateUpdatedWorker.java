@@ -21,119 +21,75 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.work.Data;
 import androidx.work.ListenableWorker;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import androidx.work.WorkerParameters;
 
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.common.util.concurrent.FluentFuture;
-import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.threeten.bp.Duration;
+
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
+import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
+import covidsafepaths.bt.exposurenotifications.common.NotificationHelper;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
-import covidsafepaths.bt.exposurenotifications.storage.TokenEntity;
-import covidsafepaths.bt.exposurenotifications.storage.TokenRepository;
-
-import static covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker.DEFAULT_API_TIMEOUT;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 
 /**
  * Performs work for {@value com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient#ACTION_EXPOSURE_STATE_UPDATED}
  * broadcast from exposure notification API.
  */
 public class StateUpdatedWorker extends ListenableWorker {
-
     private static final String TAG = "StateUpdatedWorker";
-    // Added to tag the result of the work so that we can handle it at the JS layer.
-    public static final String IS_EXPOSED_KEY = "IsExposed";
 
-//  private static final String EXPOSURE_NOTIFICATION_CHANNEL_ID =
-//      "ApolloExposureNotificationCallback.EXPOSURE_NOTIFICATION_CHANNEL_ID";
-//  public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
-//      "com.google.android.apps.exposurenotification.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
+    private static final Duration GET_WINDOWS_TIMEOUT = Duration.ofSeconds(120);
 
     private final Context context;
-    private final TokenRepository tokenRepository;
 
-    public StateUpdatedWorker(
-            @NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         this.context = context;
-        this.tokenRepository = new TokenRepository(context);
     }
 
     @NonNull
     @Override
     public ListenableFuture<Result> startWork() {
-        final String token = getInputData().getString(ExposureNotificationClient.EXTRA_TOKEN);
-        if (token == null) {
-            return Futures.immediateFuture(Result.failure());
-        } else {
-            AtomicBoolean isExposed = new AtomicBoolean(false);
-            return FluentFuture.from(TaskToFutureAdapter.getFutureWithTimeout(
-                    Nearby.getExposureNotificationClient(context).getExposureSummary(token),
-                    DEFAULT_API_TIMEOUT.toMillis(),
-                    TimeUnit.MILLISECONDS,
-                    AppExecutors.getScheduledExecutor()))
-                    .transformAsync((exposureSummary) -> {
-                        Log.d(TAG, "EN summary received: " + exposureSummary);
-                        if (exposureSummary.getMatchedKeyCount() > 0) {
-                            isExposed.set(true);
-                            // Update the TokenEntity by upserting with the same token.
-                            return tokenRepository.upsertAsync(TokenEntity.create(token, true));
-                        } else {
-                            // No matches so we show no notification and just delete the token.
-                            return tokenRepository.deleteByTokensAsync(token);
-                        }
-                    }, AppExecutors.getBackgroundExecutor())
-                    .transform((v) -> {
-                        // Added output data to surface the result of the check for matches.
-                        Data out = new Data.Builder().putBoolean(IS_EXPOSED_KEY, isExposed.get()).build();
-                        return Result.success(out);
-                    }, AppExecutors.getLightweightExecutor())
-                    .catching(Exception.class, x -> Result.failure(), AppExecutors.getLightweightExecutor());
-        }
+        Log.d(TAG, "Starting worker to get exposure windows, " +
+                "compare them with the exposures stored in the local database " +
+                "and show a notification if there is a new one");
+        return FluentFuture.from(
+                TaskToFutureAdapter.getFutureWithTimeout(
+                        ExposureNotificationClientWrapper.get(context).getExposureWindows(),
+                        GET_WINDOWS_TIMEOUT.toMillis(),
+                        TimeUnit.MILLISECONDS,
+                        AppExecutors.getScheduledExecutor()))
+                .transform(
+                        (exposureWindows) -> RealmSecureStorageBte.INSTANCE.refreshWithExposureWindows(exposureWindows),
+                        AppExecutors.getBackgroundExecutor())
+                .transform((exposuresAdded) -> {
+                    if (exposuresAdded) {
+                        Log.d(TAG, "New exposures found, showing a notification");
+                        NotificationHelper.showPossibleExposureNotification(context);
+                    } else {
+                        Log.d(TAG, "No new exposures found");
+                    }
+                    return Result.success();
+                }, AppExecutors.getLightweightExecutor())
+                .catching(
+                        Exception.class,
+                        x -> {
+                            Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
+                            return Result.failure();
+                        },
+                        AppExecutors.getLightweightExecutor());
     }
 
-    // TODO do we want to use native push notifications if app is in background?
-//  private void createNotificationChannel() {
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//      NotificationChannel channel =
-//          new NotificationChannel(EXPOSURE_NOTIFICATION_CHANNEL_ID,
-//              context.getString(R.string.notification_channel_name),
-//              NotificationManager.IMPORTANCE_HIGH);
-//      channel.setDescription(context.getString(R.string.notification_channel_description));
-//      NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-//      Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
-//    }
-//  }
-//
-//  public void showNotification() {
-//    createNotificationChannel();
-//    Intent intent = new Intent(getApplicationContext(), ExposureNotificationActivity.class);
-//    intent.setAction(ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION);
-//    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-//    NotificationCompat.Builder builder =
-//        new Builder(context, EXPOSURE_NOTIFICATION_CHANNEL_ID)
-//            .setSmallIcon(R.drawable.ic_notification)
-//            .setColor(getApplicationContext().getResources().getColor(R.color.notification_color))
-//            .setContentTitle(context.getString(R.string.notification_title))
-//            .setContentText(context.getString(R.string.notification_message))
-//            .setStyle(new NotificationCompat.BigTextStyle()
-//                .bigText(context.getString(R.string.notification_message)))
-//            .setPriority(NotificationCompat.PRIORITY_MAX)
-//            .setContentIntent(pendingIntent)
-//            .setOnlyAlertOnce(true)
-//            .setAutoCancel(true)
-//            // Do not reveal this notification on a secure lockscreen.
-//            .setVisibility(NotificationCompat.VISIBILITY_SECRET);
-//    NotificationManagerCompat notificationManager = NotificationManagerCompat
-//        .from(context);
-//    notificationManager.notify(0, builder.build());
-//  }
+    static void runOnce(Context context) {
+        WorkManager.getInstance(context).enqueue(
+                new OneTimeWorkRequest.Builder(StateUpdatedWorker.class).build());
+    }
 }

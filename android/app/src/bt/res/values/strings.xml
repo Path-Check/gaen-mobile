@@ -6,4 +6,9 @@
   <string name="app_name_short" translatable="false">PathCheck BT</string>
   <!-- Channel label for notifications shown in App > Notifications > Path Check BT -->
   <string name="notification_channel_description">PathCheck BT notifications</string>
+
+  <string name="exposure_notification_title">Possible COVID-19 exposure</string>
+  <string name="exposure_notification_message">Someone you were near has tested positive for COVID-19. Tap for more info.</string>
+  <string name="exposure_notification_channel_name">Exposure Notification</string>
+  <string name="exposure_notification_channel_description">Exposure notification alerts.</string>
 </resources>

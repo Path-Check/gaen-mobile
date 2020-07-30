@@ -102,7 +102,8 @@ class DiagnosisKeyDownloader {
         downloadStatusReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
     ListenableFuture<ImmutableList<KeyFileBatch>> batchesDownloaded =
-        // Start with the relevant country codes for the user.
+        // Get the network locations of all the files we need to download for those
+        // countries/regions, as batches of URIs.
         FluentFuture.from(uris.getDownloadFileUris())
             // Now initiate file downloads for each URI in each of those batches.
             .transformAsync(
