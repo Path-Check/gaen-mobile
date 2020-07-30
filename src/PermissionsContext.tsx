@@ -6,12 +6,12 @@ import React, {
   useContext,
   useCallback,
 } from "react"
-
+import { Platform, AppState } from "react-native"
 import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
-import { Platform } from "react-native"
+
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
 
 export type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
@@ -77,6 +77,11 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    const handleAppStateChange = () => {
+      checkENPermission()
+    }
+
+    AppState.addEventListener("change", handleAppStateChange)
     const subscription = permissionStrategy.statusSubscription(
       (status: ENPermissionStatus) => {
         setExposureNotificationsPermission(status)
@@ -95,6 +100,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 
     return () => {
       subscription?.remove()
+      AppState.removeEventListener("change", handleAppStateChange)
     }
   }, [checkENPermission])
 

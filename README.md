@@ -106,6 +106,7 @@ yarn run-android
 If you get a 500 local server error, run:
 ```
 yarn start --reset-cache
+<<<<<<< HEAD
 ```
 If you are asked to install a new NDK, do it and then run the application again
 ```
@@ -113,6 +114,13 @@ If you are asked to install a new NDK, do it and then run the application again
 To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 
 Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
+=======
+``` 
+**Testing:**
+- To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
+- To provide dianogisis keys to the API the applicationId should be whitelisted, you can skip that verification step by checking `Settings > Google > COVID-19 Exposure Notifications >  Debug mode > Bypass app signature check`
+- Device storage can be cleared by long-pressing on the app icon in the simulator, clicking "App info", then "Storage", and lastly, "Clear Storage".
+>>>>>>> upstream/develop
 
 #### iOS (macOS only)
 
