@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Buttons, Colors, Spacing, Iconography, Typography } from "../styles"
 
@@ -118,12 +118,12 @@ const ExplanationScreen = ({
               accessibilityLabel={explanationScreenContent.iconLabel}
             />
           </View>
-          <RTLEnabledText style={headerStyles}>
+          <GlobalText style={headerStyles}>
             {explanationScreenContent.header}
-          </RTLEnabledText>
-          <RTLEnabledText style={contentStyles}>
+          </GlobalText>
+          <GlobalText style={contentStyles}>
             {explanationScreenContent.body}
-          </RTLEnabledText>
+          </GlobalText>
         </ScrollView>
         <Button
           label={explanationScreenContent.primaryButtonLabel}

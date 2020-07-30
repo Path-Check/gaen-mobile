@@ -5,7 +5,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime)
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 import { DateTimeUtils } from "../../utils"
 
 import { Colors, Typography } from "../../styles"
@@ -33,12 +33,12 @@ const DateInfoHeader: FunctionComponent<DateInfoHeaderProps> = ({
     : ""
 
   return (
-    <RTLEnabledText style={style.subHeaderText}>
+    <GlobalText style={style.subHeaderText}>
       <>
         {lastDaysText}
         {updatedAtText}
       </>
-    </RTLEnabledText>
+    </GlobalText>
   )
 }
 

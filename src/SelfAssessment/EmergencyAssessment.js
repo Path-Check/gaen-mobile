@@ -9,7 +9,7 @@ import {
 } from "./constants"
 import { AssessmentLayout } from "./AssessmentLayout"
 import InfoText from "./InfoText"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Typography, Buttons, Colors } from "../styles"
 
@@ -64,12 +64,12 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessibilityRole="button"
         style={style.button}
       >
-        <RTLEnabledText style={{ ...style.buttonText, ...style.boldText }}>
+        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am")}
-          <RTLEnabledText style={{ ...style.buttonText, ...style.regularText }}>
+          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_some_symptoms")}
-          </RTLEnabledText>
-        </RTLEnabledText>
+          </GlobalText>
+        </GlobalText>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={disagreePress}
@@ -78,12 +78,12 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessibilityRole="button"
         style={{ ...style.button, ...style.disagreeButton }}
       >
-        <RTLEnabledText style={{ ...style.buttonText, ...style.boldText }}>
+        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am_not")}
-          <RTLEnabledText style={{ ...style.buttonText, ...style.regularText }}>
+          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_any_symptoms")}
-          </RTLEnabledText>
-        </RTLEnabledText>
+          </GlobalText>
+        </GlobalText>
       </TouchableOpacity>
     </View>
   )

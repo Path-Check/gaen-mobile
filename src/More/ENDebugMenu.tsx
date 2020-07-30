@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
 
@@ -82,9 +82,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[style.listItem, itemStyle]} onPress={onPress}>
-        <RTLEnabledText style={{ ...Typography.mainContent }}>
-          {label}
-        </RTLEnabledText>
+        <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
       </TouchableOpacity>
     )
   }

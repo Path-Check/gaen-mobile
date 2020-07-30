@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { getApplicationName } from "react-native-device-info"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -31,36 +31,36 @@ const Licenses: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View>
-          <RTLEnabledText
+          <GlobalText
             style={style.headerContent}
             testID={"licenses-legal-header"}
           >
             {getApplicationName()}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.contentText}>
+          </GlobalText>
+          <GlobalText style={style.contentText}>
             {t("label.legal_page_address")}
-          </RTLEnabledText>
-          <RTLEnabledText
+          </GlobalText>
+          <GlobalText
             onPress={() => Linking.openURL(infoEmailLink)}
             style={style.hyperlink}
           >
             {infoEmailAddress}
-          </RTLEnabledText>
-          <RTLEnabledText
+          </GlobalText>
+          <GlobalText
             onPress={() => Linking.openURL(pathCheckUrl)}
             style={style.hyperlink}
           >
             {pathCheckWebAddress}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       </ScrollView>
       <TouchableOpacity
         style={style.privacyPolicy}
         onPress={() => Linking.openURL(privacyPolicyUrl)}
       >
-        <RTLEnabledText style={style.privacyPolicyText}>
+        <GlobalText style={style.privacyPolicyText}>
           {t("label.privacy_policy")}
-        </RTLEnabledText>
+        </GlobalText>
         <SvgXml xml={Icons.ChevronRight} fill={Colors.white} />
       </TouchableOpacity>
     </>
