@@ -103,3 +103,6 @@ safepaths.realm
 
 # swift packages
 ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
+# test coverage
+test-coverage
