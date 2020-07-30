@@ -3,8 +3,8 @@ import { ViewStyle } from "react-native"
 import * as Colors from "./colors"
 
 export const baseBorderRadius = 8
-export const largeBorderRadius = 20
-export const maxBorderRadius = 500
+export const borderRadiusLarge = 20
+export const borderRadiusMax = 500
 
 export const hairline = 1
 export const thin = 2

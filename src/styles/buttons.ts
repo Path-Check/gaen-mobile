@@ -31,7 +31,7 @@ const large: ViewStyle = {
 
 // Border
 const rounded: ViewStyle = {
-  borderRadius: Outlines.maxBorderRadius,
+  borderRadius: Outlines.borderRadiusMax,
 }
 
 // Color

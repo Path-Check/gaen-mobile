@@ -16,20 +16,19 @@ import LanguageSelection from "../More/LanguageSelection"
 
 import { MoreStackScreens } from "./index"
 
-import { Colors } from "../styles"
+import { Colors, Headers } from "../styles"
 
 const Stack = createStackNavigator()
 
 const SCREEN_OPTIONS: StackNavigationOptions = {
   headerStyle: {
-    backgroundColor: Colors.primaryViolet,
+    ...Headers.headerStyle,
   },
   headerTitleStyle: {
-    color: Colors.white,
-    textTransform: "uppercase",
+    ...Headers.headerTitleStyle,
   },
   headerBackTitleVisible: false,
-  headerTintColor: Colors.white,
+  headerTintColor: Colors.headerText,
 }
 
 const MoreStack: FunctionComponent = () => {

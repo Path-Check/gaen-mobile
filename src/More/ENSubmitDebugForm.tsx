@@ -10,8 +10,8 @@ import {
   TextInput,
   View,
   Keyboard,
+  SafeAreaView,
 } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
