@@ -67,6 +67,7 @@ buck-out/
 # Ruby gems
 ios/vendor/bundle/*
 android/vendor/bundle/*
+vendor/bundle/*
 
 # Screenshots
 e2e/artifacts/*
