@@ -86,8 +86,8 @@ const EulaModal: FunctionComponent = () => {
   }, [eulaPath])
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
-      <View style={style.container}>
+    <View style={style.container}>
+      <SafeAreaView style={style.mainContainer}>
         <TouchableOpacity
           accessibilityLabel={t("label.close")}
           accessible
@@ -104,7 +104,6 @@ const EulaModal: FunctionComponent = () => {
         {html && (
           <>
             <WebView
-              style={{ flex: 1 }}
               onLoad={() => setIsLoading(false)}
               source={{ html }}
               onShouldStartLoadWithRequest={shouldStartLoadWithRequestHandler}
@@ -112,40 +111,44 @@ const EulaModal: FunctionComponent = () => {
             {isLoading ? <LoadingIndicator /> : null}
           </>
         )}
-        <View style={style.footerContainer}>
-          <TouchableOpacity
-            style={style.checkboxContainer}
-            onPress={() => toggleCheckbox(!boxChecked)}
-            accessible
-            accessibilityRole="checkbox"
-            accessibilityLabel={t("label.checkbox")}
-            testID="accept-terms-of-use-checkbox"
-          >
-            <Image source={checkboxImage} style={style.checkboxIcon} />
-            <GlobalText style={style.checkboxText}>
-              {t("onboarding.eula_agree_terms_of_use")}
-            </GlobalText>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(OnboardingScreens.PersonalPrivacy)
-            }
-            style={style.button}
-            disabled={!boxChecked}
-          >
-            <GlobalText style={style.buttonText}>
-              {t("common.continue")}
-            </GlobalText>
-          </TouchableOpacity>
-        </View>
+      </SafeAreaView>
+
+      <View style={style.footerContainer}>
+        <TouchableOpacity
+          style={style.checkboxContainer}
+          onPress={() => toggleCheckbox(!boxChecked)}
+          accessible
+          accessibilityRole="checkbox"
+          accessibilityLabel={t("label.checkbox")}
+          testID="accept-terms-of-use-checkbox"
+        >
+          <Image source={checkboxImage} style={style.checkboxIcon} />
+          <GlobalText style={style.checkboxText}>
+            {t("onboarding.eula_agree_terms_of_use")}
+          </GlobalText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
+          style={style.button}
+          disabled={!boxChecked}
+        >
+          <GlobalText style={style.buttonText}>
+            {t("common.continue")}
+          </GlobalText>
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: Colors.white,
     height: "100%",
+  },
+  mainContainer: {
+    flex: 1,
   },
   closeIcon: {
     position: "absolute",
@@ -157,7 +160,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: Spacing.medium,
-    top: Spacing.xSmall,
+    top: Spacing.xHuge,
   },
   loadingIndicator: {
     justifyContent: "center",
