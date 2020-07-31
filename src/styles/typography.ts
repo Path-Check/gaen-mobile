@@ -228,7 +228,7 @@ export const buttonPrimaryDisabledText: TextStyle = {
 
 export const buttonPrimaryInvertedDisabledText: TextStyle = {
   ...baseButtonText,
-  color: Colors.mediumGray,
+  color: Colors.lighterGray,
 }
 
 export const buttonSecondaryText: TextStyle = {

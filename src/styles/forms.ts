@@ -54,4 +54,3 @@ export const inputIndicator: ViewStyle = {
   marginRight: Spacing.large,
   width: Spacing.large,
 }
-

@@ -190,12 +190,14 @@ const style = StyleSheet.create({
   },
   disabledButton: {
     ...Buttons.primaryInvertedDisabled,
+    backgroundColor: Colors.lighterGray,
   },
   buttonText: {
     ...Typography.buttonPrimaryInvertedText,
   },
   disabledButtonText: {
     ...Typography.buttonPrimaryInvertedDisabledText,
+    color: Colors.mediumGray,
   },
 })
 
