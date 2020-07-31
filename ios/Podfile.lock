@@ -12,6 +12,8 @@ PODS:
     - React-Core (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/turbomodule/core (= 0.61.5)
+  - Firebase/Analytics (6.27.1):
+    - Firebase/Core
   - Firebase/Core (6.27.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.6.2)
@@ -363,6 +365,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
+  - Firebase/Analytics
   - Firebase/Crashlytics
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -606,6 +609,6 @@ SPEC CHECKSUMS:
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: fbf1dd9aee562d89a1e8e2dba6cd05cf38077e8f
+PODFILE CHECKSUM: af4eb7df6cad713639d893c7d279f81b98a2cb6f
 
 COCOAPODS: 1.9.3
