@@ -84,6 +84,7 @@
       "wash_your_hands": "Wash your hands",
       "wear_a_mask": "Wear a mask"
     },
+    "no_connectivity_message": "You are not connected to the internet!",
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
       "seven_to_fourteen_days_ago": "7 to 14 days ago",
