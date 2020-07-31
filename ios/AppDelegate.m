@@ -54,6 +54,8 @@
   [[ExposureManager shared] broadcastCurrentEnabledStatus];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+  //Crashlytics test
+  //assert(NO);
   return YES;
 }
 
