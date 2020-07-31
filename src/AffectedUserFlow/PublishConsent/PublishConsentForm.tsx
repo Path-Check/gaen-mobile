@@ -56,6 +56,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     <ImageBackground
       source={Images.BlueGradientBackground}
       style={style.backgroundImage}
+      testID="publish-consent-form"
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
@@ -88,6 +89,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <TouchableOpacity
               onPress={handleOnPressCancel}
               style={style.secondaryButton}
+              accessibilityLabel={t("export.consent_button_cancel")}
             >
               <GlobalText style={style.secondaryButtonText}>
                 {t("export.consent_button_cancel")}
