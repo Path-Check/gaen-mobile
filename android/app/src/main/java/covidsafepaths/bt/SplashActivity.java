@@ -1,8 +1,10 @@
-package org.pathcheck.covidsafepaths;
+package covidsafepaths.bt;
 
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.pathcheck.covidsafepaths.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

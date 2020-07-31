@@ -5,8 +5,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
-    btdebug: ".env.bt",
-    btrelease: ".env.bt.release",
+    debug: ".env.bt",
+    release: ".env.bt.release",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -85,7 +85,7 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 
 project.ext.react = [
     entryFile: "index.js",
-    bundleInBtDebug: false,
+    bundleInDebug: false,
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -138,7 +138,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.pathcheck.covidsafepaths"
+        applicationId "org.pathcheck.covidsafepaths.bt"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
@@ -151,7 +151,7 @@ android {
         versionName "1.0.8"
 
         //Fix problem in bt where .env.bt is not recognized
-        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths"
+        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths.bt"
     }
     splits {
         abi {
@@ -193,19 +193,10 @@ android {
         }
     }
 
-    flavorDimensions "version"
-    productFlavors {
-        bt {
-            applicationId 'org.pathcheck.covidsafepathsBt'
-            dimension "version"
-        }
-    }
-
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
-
 }
 
 dependencies {
@@ -224,21 +215,21 @@ dependencies {
     // Annotation processing
     kapt 'com.google.auto.value:auto-value:1.7.3'
     // Libraries
-    btImplementation 'androidx.work:work-runtime:2.4.0'
-    btImplementation 'androidx.concurrent:concurrent-futures:1.0.0'
-    btImplementation 'com.google.android.gms:play-services-base:17.3.0'
-    btImplementation 'com.google.android.gms:play-services-basement:17.3.0'
-    btImplementation 'com.google.android.gms:play-services-tasks:17.1.0'
-    btImplementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
-    btImplementation 'com.google.guava:guava:29.0-android'
-    btImplementation 'com.google.auto.value:auto-value-annotations:1.7.3'
-    btImplementation 'com.android.volley:volley:1.1.1'
-    btImplementation 'commons-io:commons-io:2.6'
+    implementation 'androidx.work:work-runtime:2.4.0'
+    implementation 'androidx.concurrent:concurrent-futures:1.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.3.0'
+    implementation 'com.google.android.gms:play-services-basement:17.3.0'
+    implementation 'com.google.android.gms:play-services-tasks:17.1.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation 'com.google.guava:guava:29.0-android'
+    implementation 'com.google.auto.value:auto-value-annotations:1.7.3'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'commons-io:commons-io:2.6'
     // Google EN library not available via Maven
-    btImplementation project(path: ':play-services-nearby-18.0.3-eap')
+    implementation project(path: ':play-services-nearby-18.0.3-eap')
     // Stetho for debugging Realm
-    btImplementation 'com.facebook.stetho:stetho:1.5.0'
-    btImplementation 'com.uphyca:stetho_realm:2.3.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.uphyca:stetho_realm:2.3.0'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/"
