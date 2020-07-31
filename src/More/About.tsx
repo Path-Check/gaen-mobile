@@ -8,71 +8,80 @@ import {
   Text,
   View,
 } from "react-native"
+import {
+  getApplicationName,
+  getBuildNumber,
+  getVersion,
+} from "react-native-device-info"
 
-import packageJson from "../../package.json"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
 
+  const versionInfo = `${getVersion()} (${getBuildNumber()})`
+  const osInfo = `${Platform.OS} v${Platform.Version}`
+  const pathCheckWebAddress = "pathcheck.org"
+  const pathCheckUrl = "https://pathcheck.org/"
+
   return (
     <ScrollView
-      contentContainerStyle={styles.contentContainer}
+      contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
       <View>
-        <RTLEnabledText style={styles.headerContent}>
-          {t("label.about_header_bluetooth")}
-        </RTLEnabledText>
+        <GlobalText style={style.headerContent}>
+          {getApplicationName()}
+        </GlobalText>
       </View>
-      <RTLEnabledText style={styles.aboutContent}>
+      <GlobalText style={style.aboutContent}>
         {t("label.about_para")}
-      </RTLEnabledText>
-      <RTLEnabledText
-        style={styles.hyperlink}
+      </GlobalText>
+      <GlobalText
+        style={style.hyperlink}
         onPress={() => {
-          Linking.openURL("https://pathcheck.org/")
+          Linking.openURL(pathCheckUrl)
         }}
       >
-        <Text>{"pathcheck.org"}</Text>
-      </RTLEnabledText>
-
-      <View style={styles.rowContainer}>
-        <View style={styles.row}>
-          <RTLEnabledText style={styles.aboutSectionParaLabel}>
+        <Text>{pathCheckWebAddress}</Text>
+      </GlobalText>
+      <View style={style.infoRowContainer}>
+        <View style={style.infoRow}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.version")}
-          </RTLEnabledText>
-
-          <RTLEnabledText style={styles.aboutSectionParaContent}>
-            {packageJson.version}
-          </RTLEnabledText>
+          </GlobalText>
+          <GlobalText style={style.aboutSectionParaContent}>
+            {versionInfo}
+          </GlobalText>
         </View>
-        <View style={styles.row}>
-          <RTLEnabledText style={styles.aboutSectionParaLabel}>
+        <View style={style.infoRow}>
+          <GlobalText style={style.aboutSectionParaLabel}>
             {t("about.operating_system_abbr")}
-          </RTLEnabledText>
-          <RTLEnabledText style={styles.aboutSectionParaContent}>
-            {Platform.OS + " v" + Platform.Version}
-          </RTLEnabledText>
+          </GlobalText>
+          <GlobalText style={style.aboutSectionParaContent}>
+            {osInfo}
+          </GlobalText>
         </View>
       </View>
     </ScrollView>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
-    backgroundColor: Colors.primaryBackground,
-    paddingHorizontal: Spacing.medium,
-    paddingTop: Spacing.huge,
+    flex: 1,
+    backgroundColor: Colors.primaryBackgroundFaintShade,
+    paddingTop: Spacing.large,
+    paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header3,
     marginBottom: Spacing.small,
   },
   hyperlink: {
+    ...Typography.secondaryContent,
     color: Colors.linkText,
     textDecorationLine: "underline",
   },
@@ -81,17 +90,17 @@ const styles = StyleSheet.create({
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
-    width: Spacing.xxxHuge * 2,
+    width: 100,
     marginTop: Spacing.small,
   },
   aboutSectionParaContent: {
     ...Typography.mainContent,
     marginTop: Spacing.small,
   },
-  rowContainer: {
+  infoRowContainer: {
     marginTop: Spacing.medium,
   },
-  row: {
+  infoRow: {
     flexDirection: "row",
   },
 })

@@ -1,7 +1,7 @@
 import "./all-dayjs-locales"
 
 import dayjs from "dayjs"
-import i18next from "i18next"
+import i18next, { Resource } from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
 import { NativeModules, Platform } from "react-native"
 
@@ -31,28 +31,24 @@ import tl from "./tl.json"
 import vi from "./vi.json"
 import zh_Hant from "./zh_Hant.json"
 
-// Refer this for checking the codes and creating new folders https://developer.chrome.com/webstore/i18n
+// Refer this for checking the codes and creating new folders
+// https://developer.chrome.com/webstore/i18n
 
 // Adding/updating a language:
 // 1. Add the language in Lokalise
-// 2. run: yarn i18n:pull with your lokalise token, see app/locales/pull.sh instructions
+// 2. run: yarn i18n:pull with your lokalise token,
+//    see app/locales/pull.sh instructions
 // 3. import xy from `./xy.json` and add the language to the language block
-//
 
 type Locale = string
 
-export function getLanguageFromLocale(locale: Locale): Locale {
-  const [languageCode] = toIETFLanguageTag(locale).split("-")
-  return languageCode
-}
-
-/**
- * Convert ISO language `en_US` to IETF `en-us` for dayjs
- *
- * @param {string} locale
- */
 function toIETFLanguageTag(locale: Locale): Locale {
   return locale.replace("_", "-").toLowerCase()
+}
+
+function getLanguageFromLocale(locale: Locale): Locale {
+  const [languageCode] = toIETFLanguageTag(locale).split("-")
+  return languageCode
 }
 
 async function setLocale(locale: Locale) {
@@ -73,17 +69,12 @@ export async function setUserLocaleOverride(locale: Locale): Promise<void> {
 }
 
 /* eslint-disable no-underscore-dangle */
-const PROD_RESOURCES = {
-  en: { label: en._display_name, translation: en },
-  es_PR: { label: es_PR._display_name, translation: es_PR },
-  el: { label: el._display_name, translation: el },
-}
-
-/** Languages only available in feature flag. */
-const DEV_RESOURCES = {
+const AVAILABLE_TRANSLATIONS: Resource = {
   ar: { label: ar._display_name, translation: ar },
   da: { label: da._display_name, translation: da },
+  el: { label: el._display_name, translation: el },
   es: { label: es._display_name, translation: es },
+  es_PR: { label: es_PR._display_name, translation: es_PR },
   es_419: { label: es_419._display_name, translation: es_419 },
   ht: { label: ht._display_name, translation: ht },
   fil: { label: fil._display_name, translation: fil },
@@ -101,35 +92,6 @@ const DEV_RESOURCES = {
   tl: { label: tl._display_name, translation: tl },
   vi: { label: vi._display_name, translation: vi },
   zh_Hant: { label: zh_Hant._display_name, translation: zh_Hant },
-}
-
-const config = {
-  interpolation: {
-    // React already does escaping
-    escapeValue: false,
-  },
-  lng: "en", // 'en' | 'es',
-  fallbackLng: "en", // If language detector fails
-  returnEmptyString: false,
-  resources: {
-    ...PROD_RESOURCES,
-  },
-}
-
-export const initProdLanguages = (): void => {
-  i18next.use(initReactI18next).init(config)
-}
-
-initProdLanguages()
-
-export const initDevLanguages = (): void => {
-  i18next.use(initReactI18next).init({
-    ...config,
-    resources: {
-      ...PROD_RESOURCES,
-      ...DEV_RESOURCES,
-    },
-  })
 }
 
 /** The known locale list */
@@ -165,7 +127,7 @@ export const getLocalNames = (): Record<Locale, string> => {
 }
 
 /** Get the device locale e.g. en_US */
-export function getDeviceLocale(): Locale {
+function getDeviceLocale(): Locale {
   return Platform.OS === "ios"
     ? NativeModules.SettingsManager.settings.AppleLocale || // iOS < 13
         NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
@@ -188,18 +150,43 @@ export function supportedDeviceLanguageOrEnglish(): Locale {
   return found || "en"
 }
 
-// detect and set device locale, must go after i18next.init()
-setLocale(supportedDeviceLanguageOrEnglish())
-
-const getUserLocale = async (): Promise<string | null> => {
-  return await StorageUtils.getUserLocaleOverride()
+const FALLBACK_TRANSLATION_RESOURCES = {
+  en: { label: en._display_name, translation: en },
 }
-// detect user override
-getUserLocale().then((locale) => {
-  if (locale) {
-    setLocale(locale)
+
+const languageResources = (withLocales: Locale[]): Resource => {
+  const requestedTranslationResources = Object.keys(AVAILABLE_TRANSLATIONS)
+    .filter((key) => withLocales.includes(key))
+    .reduce((obj: Resource, key: Locale) => {
+      obj[key] = AVAILABLE_TRANSLATIONS[key]
+      return obj
+    }, {})
+
+  return { ...requestedTranslationResources, ...FALLBACK_TRANSLATION_RESOURCES }
+}
+
+export const initializei18next = (withLocales: Locale[]): void => {
+  const config = {
+    interpolation: {
+      // React already does escaping
+      escapeValue: false,
+    },
+    lng: "en", // this is for initialization purposes only
+    fallbackLng: "en",
+    returnEmptyString: false,
+    resources: {
+      ...languageResources(withLocales),
+    },
   }
-})
+
+  i18next.use(initReactI18next).init(config)
+}
+
+export const loadUserLocale = async (): Promise<void> => {
+  StorageUtils.getUserLocaleOverride().then((locale) => {
+    setLocale(locale || supportedDeviceLanguageOrEnglish())
+  })
+}
 
 export default i18next
 

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react"
 import { SafeAreaView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
+
+import { GlobalText } from "./components/GlobalText"
 import { Button } from "./components/Button"
-import { RTLEnabledText } from "./components/RTLEnabledText"
 
 import { Colors, Spacing, Typography } from "./styles"
 
@@ -19,18 +20,16 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
   const parseError = error.toString()
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.textContainer}>
-          <RTLEnabledText style={styles.title}>
-            {t("errors.title")}
-          </RTLEnabledText>
-          <RTLEnabledText style={styles.subtitle}>
+    <SafeAreaView style={style.container}>
+      <View style={style.content}>
+        <View style={style.textContainer}>
+          <GlobalText style={style.title}>{t("errors.title")}</GlobalText>
+          <GlobalText style={style.subtitle}>
             {t("errors.description")}
-          </RTLEnabledText>
-          <RTLEnabledText style={styles.error}>{parseError}</RTLEnabledText>
+          </GlobalText>
+          <GlobalText style={style.error}>{parseError}</GlobalText>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={style.buttonContainer}>
           <Button label={t("errors.reload")} onPress={resetError} />
         </View>
       </View>
@@ -38,16 +37,16 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.red,
     flex: 1,
+    backgroundColor: Colors.primaryViolet,
   },
   content: {
-    marginHorizontal: Spacing.small,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
+    marginHorizontal: Spacing.small,
   },
   textContainer: {
     paddingTop: Spacing.large,
@@ -56,16 +55,17 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   title: {
+    ...Typography.header2,
     color: Colors.white,
-    fontSize: Typography.huge,
-    paddingBottom: Spacing.small,
+    marginBottom: Spacing.small,
   },
   subtitle: {
+    ...Typography.mainContent,
     color: Colors.white,
-    fontSize: Typography.largest,
+    marginBottom: Spacing.xxSmall,
   },
   error: {
+    ...Typography.tertiaryContent,
     color: Colors.white,
-    paddingVertical: Spacing.small,
   },
 })

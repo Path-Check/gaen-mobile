@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Typography } from "../styles"
 
@@ -13,17 +13,17 @@ interface InfoTextProps {
 const InfoText: FunctionComponent<InfoTextProps> = ({ title, description }) => {
   return (
     <>
-      <RTLEnabledText style={styles.titleContent}>{title}</RTLEnabledText>
+      <GlobalText style={style.titleContent}>{title}</GlobalText>
       {description && (
-        <RTLEnabledText style={styles.descriptionContent} testID="description">
+        <GlobalText style={style.descriptionContent} testID="description">
           {description}
-        </RTLEnabledText>
+        </GlobalText>
       )}
     </>
   )
 }
 
-export const styles = StyleSheet.create({
+export const style = StyleSheet.create({
   titleContent: {
     ...Typography.header2,
     marginVertical: 30,

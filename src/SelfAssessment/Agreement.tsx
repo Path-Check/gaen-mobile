@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import InfoText from "./InfoText"
 import { Button } from "../components/Button"
 import { AssessmentLayout } from "./AssessmentLayout"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -52,13 +52,11 @@ const AgreementFooter: FunctionComponent<AgreementFooterProps> = ({
 }) => (
   <>
     <Button onPress={onPress} label={buttonTitle} />
-    <RTLEnabledText style={styles.typographyStyle}>
-      {description}
-    </RTLEnabledText>
+    <GlobalText style={style.typographyStyle}>{description}</GlobalText>
   </>
 )
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   typographyStyle: {
     paddingTop: 10,
     ...Typography.quaternaryContent,

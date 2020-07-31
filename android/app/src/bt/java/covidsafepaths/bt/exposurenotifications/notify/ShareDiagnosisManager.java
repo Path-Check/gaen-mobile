@@ -32,6 +32,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import org.threeten.bp.Duration;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -43,8 +44,6 @@ import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
 import covidsafepaths.bt.exposurenotifications.storage.PositiveDiagnosis;
 import covidsafepaths.bt.exposurenotifications.storage.PositiveDiagnosisRepository;
 
-import static covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker.DEFAULT_API_TIMEOUT;
-
 /**
  * Modified from google sample [ShareDiagnosisViewModel].
  */
@@ -53,6 +52,7 @@ public class ShareDiagnosisManager {
     private static final String TAG = "ShareDiagnosisManager";
 
     public static final long NO_EXISTING_ID = -1;
+    private static final Duration GET_RECENT_KEYS_TIMEOUT = Duration.ofSeconds(10);
 
     private final PositiveDiagnosisRepository repository;
     private final Context context;
@@ -148,7 +148,7 @@ public class ShareDiagnosisManager {
     private ListenableFuture<List<TemporaryExposureKey>> getRecentKeys() {
         return TaskToFutureAdapter.getFutureWithTimeout(
                 Nearby.getExposureNotificationClient(context).getTemporaryExposureKeyHistory(),
-                DEFAULT_API_TIMEOUT.toMillis(),
+                GET_RECENT_KEYS_TIMEOUT.toMillis(),
                 TimeUnit.MILLISECONDS,
                 AppExecutors.getScheduledExecutor());
     }

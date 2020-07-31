@@ -13,7 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -114,26 +114,26 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const isDisabled = code.length !== codeLength
-  const buttonStyle = isDisabled ? styles.disabledButton : styles.button
+  const buttonStyle = isDisabled ? style.disabledButton : style.button
   const buttonTextStyle = isDisabled
-    ? styles.disabledButtonText
-    : styles.buttonText
+    ? style.disabledButtonText
+    : style.buttonText
 
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={Spacing.tiny}
       behavior={isIOS ? "padding" : undefined}
     >
-      <View style={styles.container} testID={"affected-user-code-input-form"}>
+      <View style={style.container} testID={"affected-user-code-input-form"}>
         <View>
-          <View style={styles.headerContainer}>
-            <RTLEnabledText style={styles.header}>
+          <View style={style.headerContainer}>
+            <GlobalText style={style.header}>
               {t("export.code_input_title_bluetooth")}
-            </RTLEnabledText>
+            </GlobalText>
 
-            <RTLEnabledText style={styles.subheader}>
+            <GlobalText style={style.subheader}>
               {t("export.code_input_body_bluetooth")}
-            </RTLEnabledText>
+            </GlobalText>
           </View>
 
           <View>
@@ -143,7 +143,7 @@ const CodeInputForm: FunctionComponent = () => {
               placeholder={"00000000"}
               placeholderTextColor={Colors.placeholderTextColor}
               maxLength={codeLength}
-              style={styles.codeInput}
+              style={style.codeInput}
               keyboardType={"number-pad"}
               returnKeyType={"done"}
               onChangeText={handleOnChangeText}
@@ -151,9 +151,7 @@ const CodeInputForm: FunctionComponent = () => {
             />
           </View>
 
-          <RTLEnabledText style={styles.errorSubtitle}>
-            {errorMessage}
-          </RTLEnabledText>
+          <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
         </View>
         {isLoading ? <LoadingIndicator /> : null}
 
@@ -166,18 +164,18 @@ const CodeInputForm: FunctionComponent = () => {
             disabled={isDisabled}
             style={buttonStyle}
           >
-            <RTLEnabledText style={buttonTextStyle}>
+            <GlobalText style={buttonTextStyle}>
               {t("common.submit")}
-            </RTLEnabledText>
+            </GlobalText>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={handleOnPressCancel}
-            style={styles.secondaryButton}
+            style={style.secondaryButton}
           >
-            <RTLEnabledText style={styles.secondaryButtonText}>
+            <GlobalText style={style.secondaryButtonText}>
               {t("export.code_input_button_cancel")}
-            </RTLEnabledText>
+            </GlobalText>
           </TouchableOpacity>
         </View>
       </View>
@@ -186,11 +184,11 @@ const CodeInputForm: FunctionComponent = () => {
 }
 const LoadingIndicator = () => {
   return (
-    <View style={styles.activityIndicatorContainer}>
+    <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
         color={Colors.darkGray}
-        style={styles.activityIndicator}
+        style={style.activityIndicator}
         testID={"loading-indicator"}
       />
     </View>
@@ -199,7 +197,7 @@ const LoadingIndicator = () => {
 
 const indicatorWidth = 120
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "space-between",
@@ -229,7 +227,7 @@ const styles = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.level1,
+    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),

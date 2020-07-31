@@ -10,10 +10,10 @@ import {
   TextInput,
   View,
   Keyboard,
+  SafeAreaView,
 } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
 import * as API from "./debugAPI"
 
@@ -77,29 +77,29 @@ const CodeInputScreen: FunctionComponent = () => {
   }
 
   return (
-    <View style={styles.backgroundImage}>
+    <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
           keyboardVerticalOffset={Spacing.tiny}
           behavior={isIOS ? "padding" : undefined}
         >
-          <View style={styles.container}>
+          <View style={style.container}>
             <View>
-              <View style={styles.headerContainer}>
-                <RTLEnabledText style={styles.header}>
+              <View style={style.headerContainer}>
+                <GlobalText style={style.header}>
                   {t("more.debug.submit_your_debug_log")}
-                </RTLEnabledText>
+                </GlobalText>
               </View>
 
-              <View style={styles.inputContainer}>
-                <RTLEnabledText style={styles.inputLabel}>
+              <View style={style.inputContainer}>
+                <GlobalText style={style.inputLabel}>
                   {t("label.email_optional")}
-                </RTLEnabledText>
+                </GlobalText>
                 <TextInput
                   value={email}
                   placeholder={"email@example.com"}
                   placeholderTextColor={Colors.placeholderTextColor}
-                  style={styles.textInput}
+                  style={style.textInput}
                   keyboardType={"email-address"}
                   returnKeyType={"done"}
                   onChangeText={handleOnChangeEmail}
@@ -109,13 +109,13 @@ const CodeInputScreen: FunctionComponent = () => {
                 />
               </View>
 
-              <View style={styles.inputContainer}>
-                <RTLEnabledText style={styles.inputLabel}>
+              <View style={style.inputContainer}>
+                <GlobalText style={style.inputLabel}>
                   {t("label.description_optional")}
-                </RTLEnabledText>
+                </GlobalText>
                 <TextInput
                   value={description}
-                  style={styles.descriptionInput}
+                  style={style.descriptionInput}
                   keyboardType={"default"}
                   returnKeyType={"done"}
                   onChangeText={handleOnChangeDescription}
@@ -125,9 +125,9 @@ const CodeInputScreen: FunctionComponent = () => {
                 />
               </View>
 
-              <RTLEnabledText style={styles.errorSubtitle}>
+              <GlobalText style={style.errorSubtitle}>
                 {errorMessage}
-              </RTLEnabledText>
+              </GlobalText>
             </View>
             {isLoading ? <LoadingIndicator /> : null}
 
@@ -137,11 +137,11 @@ const CodeInputScreen: FunctionComponent = () => {
                 accessible
                 accessibilityLabel={t("common.submit")}
                 accessibilityRole="button"
-                style={styles.button}
+                style={style.button}
               >
-                <RTLEnabledText style={styles.buttonText}>
+                <GlobalText style={style.buttonText}>
                   {t("common.submit")}
-                </RTLEnabledText>
+                </GlobalText>
               </TouchableOpacity>
             </View>
           </View>
@@ -153,11 +153,11 @@ const CodeInputScreen: FunctionComponent = () => {
 
 const LoadingIndicator = () => {
   return (
-    <View style={styles.activityIndicatorContainer}>
+    <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
         color={Colors.darkGray}
-        style={styles.activityIndicator}
+        style={style.activityIndicator}
         testID={"loading-indicator"}
       />
     </View>
@@ -166,7 +166,7 @@ const LoadingIndicator = () => {
 
 const indicatorWidth = 120
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     width: "100%",
     height: "100%",
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     ...Typography.secondaryTextInput,
-    ...Outlines.textInput,
+    ...Outlines.textInputBorder,
     padding: Spacing.xSmall,
     borderColor: Colors.formInputBorder,
   },
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.level1,
+    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),

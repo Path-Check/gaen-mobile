@@ -9,7 +9,7 @@ import {
 } from "./constants"
 import { AssessmentLayout } from "./AssessmentLayout"
 import InfoText from "./InfoText"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Typography, Buttons, Colors } from "../styles"
 
@@ -30,7 +30,7 @@ export const EmergencyAssessment = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.surveyPrimaryBackground}
+      backgroundColor={Colors.primaryBackground}
       footer={
         <ChoiceButtons
           agreePress={handleAgreePress}
@@ -62,32 +62,28 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessible
         accessibilityLabel={experiencingSymptomsText}
         accessibilityRole="button"
-        style={styles.button}
+        style={style.button}
       >
-        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am")}
-          <RTLEnabledText
-            style={{ ...styles.buttonText, ...styles.regularText }}
-          >
+          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_some_symptoms")}
-          </RTLEnabledText>
-        </RTLEnabledText>
+          </GlobalText>
+        </GlobalText>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={disagreePress}
         accessible
         accessibilityLabel={notExperiencingSymptomsText}
         accessibilityRole="button"
-        style={{ ...styles.button, ...styles.disagreeButton }}
+        style={{ ...style.button, ...style.disagreeButton }}
       >
-        <RTLEnabledText style={{ ...styles.buttonText, ...styles.boldText }}>
+        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
           {t("assessment.i_am_not")}
-          <RTLEnabledText
-            style={{ ...styles.buttonText, ...styles.regularText }}
-          >
+          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
             {t("assessment.experiencing_any_symptoms")}
-          </RTLEnabledText>
-        </RTLEnabledText>
+          </GlobalText>
+        </GlobalText>
       </TouchableOpacity>
     </View>
   )
@@ -146,7 +142,7 @@ const agreeOption = {
   ],
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     ...Buttons.largeBlue,
   },

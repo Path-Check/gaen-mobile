@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { AnswersContext } from "./Context"
 import { AssessmentOption } from "./AssessmentOption"
@@ -42,12 +42,12 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       let l = line.trim()
       if (!l) continue
       elements.push(
-        <RTLEnabledText testID="description" key={l} style={styles.description}>
+        <GlobalText testID="description" key={l} style={style.description}>
           {l}
-        </RTLEnabledText>,
+        </GlobalText>,
       )
     }
-    return <View style={styles.descriptionWrapper}>{elements}</View>
+    return <View style={style.descriptionWrapper}>{elements}</View>
   }, [question.question_description])
 
   const displayAsOption = [
@@ -117,35 +117,35 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   }, [selectedValues, onChange])
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.header}>
-          <RTLEnabledText style={styles.headerContent}>
+    <SafeAreaView style={style.container}>
+      <ScrollView style={style.scrollView}>
+        <View style={style.header}>
+          <GlobalText style={style.headerContent}>
             {question.question_text}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
-        <View style={styles.scrollViewContent}>
+        <View style={style.scrollViewContent}>
           {description}
-          <RTLEnabledText style={styles.instruction}>
+          <GlobalText style={style.instruction}>
             {assessmentInputInstruction}
-          </RTLEnabledText>
-          <View style={styles.optionsWrapper}>{options}</View>
+          </GlobalText>
+          <View style={style.optionsWrapper}>{options}</View>
         </View>
       </ScrollView>
-      <View style={styles.footer}>
+      <View style={style.footer}>
         <Button
           disabled={!selectedValues.length}
           onPress={onNext}
           label={t("assessment.next")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
         />
       </View>
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,
@@ -173,8 +173,9 @@ const styles = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   instruction: {
-    ...Typography.assessmentInstruction,
-    fontFamily: Typography.baseFontFamily,
+    ...Typography.mediumFont,
+    lineHeight: Typography.smallerLineHeight,
+    color: Colors.secondaryHeaderText,
     marginTop: Spacing.xLarge,
   },
   button: {

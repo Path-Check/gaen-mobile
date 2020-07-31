@@ -5,7 +5,6 @@ import { StyleSheet } from "react-native"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { Screens } from "../navigation"
-import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"
 
 import { Icons, Images } from "../assets"
@@ -15,8 +14,6 @@ const NotificationsPermissions = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-
-  useStatusBarEffect("dark-content")
 
   const requestPermission = async () => {
     await notification.request()
@@ -46,9 +43,10 @@ const NotificationsPermissions = (): JSX.Element => {
   }
 
   const explanationScreenStyles = {
-    headerStyle: styles.header,
-    bodyStyle: styles.body,
+    headerStyle: style.header,
+    bodyStyle: style.body,
     iconStyle: IconStyle.Blue,
+    statusBarStyle: "light-content" as const,
   }
 
   const explanationScreenActions = {
@@ -65,7 +63,7 @@ const NotificationsPermissions = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   header: {
     color: Colors.white,
   },

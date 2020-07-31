@@ -20,9 +20,6 @@ package covidsafepaths.bt.exposurenotifications.nearby;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.exposurenotification.ExposureConfiguration;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -34,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.network.KeyFileBatch;
@@ -44,14 +42,16 @@ import covidsafepaths.bt.exposurenotifications.network.KeyFileBatch;
  */
 public class DiagnosisKeyFileSubmitter {
     private static final String TAG = "KeyFileSubmitter";
-    private static final Duration API_TIMEOUT = Duration.ofSeconds(10);
+    // Use a very very long timeout, in case of a stress-test that supplies a very large number of
+    // diagnosis key files.
+    private static final Duration PROVIDE_KEYS_TIMEOUT = Duration.ofMinutes(30);
     private static final BaseEncoding BASE16 = BaseEncoding.base16().lowerCase();
     private static final BaseEncoding BASE64 = BaseEncoding.base64();
 
-    private final ExposureNotificationClient client;
+    private final ExposureNotificationClientWrapper client;
 
     public DiagnosisKeyFileSubmitter(Context context) {
-        client = Nearby.getExposureNotificationClient(context);
+        client = ExposureNotificationClientWrapper.get(context);
     }
 
     /**
@@ -64,19 +64,16 @@ public class DiagnosisKeyFileSubmitter {
      *
      * <p>Returns early if given an empty list of batches.
      */
-    public ListenableFuture<?> submitFiles(List<KeyFileBatch> batches, ExposureConfiguration config, String token) {
+    public ListenableFuture<?> submitFiles(List<KeyFileBatch> batches, String token) {
         if (batches.isEmpty()) {
             Log.d(TAG, "No files to provide to google play services.");
             return Futures.immediateFuture(null);
         }
         Log.d(TAG, "Providing  " + batches.size() + " diagnosis key batches to google play services.");
-        List<ListenableFuture<?>> batchCompletions = new ArrayList<>();
 
-        for (KeyFileBatch b : batches) {
-            batchCompletions.add(submitBatch(b, config, token));
-        }
+        ListenableFuture<?> allDone = submitBatches(batches, token);
 
-        ListenableFuture<?> allDone = Futures.allAsList(batchCompletions);
+        // Add a listener to delete all the files.
         allDone.addListener(
                 () -> {
                     for (KeyFileBatch b : batches) {
@@ -90,11 +87,24 @@ public class DiagnosisKeyFileSubmitter {
         return allDone;
     }
 
-    private ListenableFuture<?> submitBatch(KeyFileBatch batch, ExposureConfiguration config, String token) {
+    private ListenableFuture<?> submitBatches(List<KeyFileBatch> batches, String token) {
+        Log.d(TAG, "Combining ["
+                        + batches.size()
+                        + "] key file batches into a single submission to provideDiagnosisKeys().");
+        List<File> files = new ArrayList<>();
+        for (KeyFileBatch b : batches) {
+            files.addAll(b.files());
+            logBatch(b);
+        }
+
         return TaskToFutureAdapter.getFutureWithTimeout(
-                client.provideDiagnosisKeys(batch.files(), config, token),
-                API_TIMEOUT.toMillis(),
+                client.provideDiagnosisKeys(files, token),
+                PROVIDE_KEYS_TIMEOUT.toMillis(),
                 TimeUnit.MILLISECONDS,
                 AppExecutors.getScheduledExecutor());
+    }
+
+    private void logBatch(KeyFileBatch batch) {
+        Log.d(TAG, "Batch [" + batch.batchNum() + "] has [" + batch.files().size() + "] files.");
     }
 }

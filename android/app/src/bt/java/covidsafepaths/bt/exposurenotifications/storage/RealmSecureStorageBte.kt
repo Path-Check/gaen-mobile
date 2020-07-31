@@ -5,6 +5,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.concurrent.futures.CallbackToFutureAdapter
 import com.bottlerocketstudios.vault.SharedPreferenceVault
 import com.bottlerocketstudios.vault.SharedPreferenceVaultFactory
+import com.google.android.gms.nearby.exposurenotification.ExposureWindow
 import com.google.common.util.concurrent.ListenableFuture
 import covidsafepaths.bt.MainApplication
 import io.realm.Realm
@@ -18,7 +19,7 @@ import java.security.SecureRandom
 object RealmSecureStorageBte {
 
     private const val TAG = "RealmSecureStorage"
-    private const val SCHEMA_VERSION: Long = 1
+    private const val SCHEMA_VERSION: Long = 2
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
@@ -37,6 +38,7 @@ object RealmSecureStorageBte {
                 .encryptionKey(encryptionKey)
                 .addModule(SafePathsBteRealmModule())
                 .schemaVersion(SCHEMA_VERSION)
+                .migration(Migration())
 
         builder.name("safepathsbte.realm")
 
@@ -116,6 +118,33 @@ object RealmSecureStorageBte {
         return getRealmInstance().use {
             it.where(KeyValues::class.java).equalTo("id", ONLY_KEY).findFirst()?.lastDownloadedKeyZipFileName
         }
+    }
+
+    fun refreshWithExposureWindows(exposureWindows: List<ExposureWindow>): Boolean {
+        var somethingAdded = false
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                // Keep track of the exposures already handled and remove them when we find matching windows.
+                val exposureEntities: MutableList<ExposureEntity> = db.where(ExposureEntity::class.java).findAll()
+                for (exposureWindow in exposureWindows) {
+                    var found = false
+                    for (i in exposureEntities.indices) {
+                        if (exposureEntities[i].dateMillisSinceEpoch == exposureWindow.dateMillisSinceEpoch) {
+                            exposureEntities.removeAt(i)
+                            found = true
+                            break
+                        }
+                    }
+                    if (!found) {
+                        // No existing ExposureEntity with the given date, must add an entity for this window.
+                        somethingAdded = true
+                        db.insert(ExposureEntity
+                          .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis()))
+                    }
+                }
+            }
+        }
+        return somethingAdded
     }
 
     @VisibleForTesting

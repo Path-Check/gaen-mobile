@@ -20,15 +20,15 @@ const AssessmentStart: FunctionComponent = () => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.surveyPrimaryBackground}
+      backgroundColor={Colors.primaryBackground}
       backgroundImage={Images.EmptyPathBackground}
       icon={Icons.SelfAssessment}
       footer={
         <Button
           onPress={handleButtonPress}
           label={t("assessment.start_cta")}
-          style={styles.button}
-          textStyle={styles.buttonText}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
         />
       }
     >
@@ -40,7 +40,7 @@ const AssessmentStart: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   button: {
     backgroundColor: Colors.secondaryViolet,
   },

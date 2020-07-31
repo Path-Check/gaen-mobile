@@ -6,7 +6,6 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     btdebug: ".env.bt",
-    btstaging: ".env.bt",
     btrelease: ".env.bt.release",
 ]
 
@@ -87,8 +86,6 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 project.ext.react = [
     entryFile: "index.js",
     bundleInBtDebug: false,
-    bundleInBtStaging: true,
-    devDisabledInBtStaging: true,
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -188,10 +185,6 @@ android {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['debug']
         }
-        staging {
-            signingConfig signingConfigs.debug
-            matchingFallbacks = ['debug']
-        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -225,6 +218,7 @@ dependencies {
     implementation 'com.bottlerocketstudios:vault:1.4.2'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     // Imports to support Exposure Notifications implementation based on Google sample
     // Annotation processing

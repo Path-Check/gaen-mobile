@@ -18,6 +18,10 @@
 package covidsafepaths.bt.exposurenotifications.storage;
 
 import java.util.Objects;
+import java.util.UUID;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * An exposure element for display in the exposures UI.
@@ -26,9 +30,9 @@ import java.util.Objects;
  * ensure compliance with all applicable laws and requirements with respect to encryption, storage,
  * and retention polices for end user data.
  */
-public class ExposureEntity {
+public class ExposureEntity extends RealmObject {
 
-    long id;
+    private @PrimaryKey long id = UUID.randomUUID().getMostSignificantBits();
 
     /**
      * The dateMillisSinceEpoch provided by the ExposureInformation in the Exposure Notifications
@@ -43,6 +47,9 @@ public class ExposureEntity {
      * received.
      */
     private long receivedTimestampMs;
+
+    public ExposureEntity() {
+    }
 
     ExposureEntity(long dateMillisSinceEpoch, long receivedTimestampMs) {
         this.receivedTimestampMs = receivedTimestampMs;

@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { ENPermissionStatus } from "../PermissionsContext"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { isPlatformiOS } from "../utils/index"
 
 import { Layout, Spacing, Colors, Typography, Buttons } from "../styles"
@@ -60,31 +60,29 @@ const Home = ({
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <RTLEnabledText style={styles.headerText} testID={"home-header"}>
+    <View style={style.container}>
+      <View style={style.contentContainer}>
+        <GlobalText style={style.headerText} testID={"home-header"}>
           {headerText}
-        </RTLEnabledText>
-        <RTLEnabledText style={styles.subheaderText} testID={"home-subheader"}>
+        </GlobalText>
+        <GlobalText style={style.subheaderText} testID={"home-subheader"}>
           {subheaderText}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
       {!isEnabledAndAuthorized ? (
         <TouchableOpacity
           testID={"home-request-permissions-button"}
           onPress={handleRequestPermission}
-          style={styles.button}
+          style={style.button}
         >
-          <RTLEnabledText style={styles.buttonText}>
-            {buttonText}
-          </RTLEnabledText>
+          <GlobalText style={style.buttonText}>{buttonText}</GlobalText>
         </TouchableOpacity>
       ) : null}
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-end",

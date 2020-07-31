@@ -3,6 +3,9 @@ package covidsafepaths.bt.exposurenotifications;
 import android.app.Activity;
 import android.util.Log;
 
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -10,7 +13,6 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -46,10 +48,10 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void submitExposureKeys() {
+    public void submitExposureKeys(Promise promise) {
         Activity activity = getCurrentActivity();
         if (activity instanceof MainActivity) {
-            ((MainActivity) activity).share();
+            ((MainActivity) activity).share(promise);
         }
     }
 
@@ -93,26 +95,19 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void detectExposuresNow(Callback callback) {
+    public void detectExposuresNow(Promise promise) {
         ExposureNotificationClientWrapper.get(getReactApplicationContext())
                 .isEnabled().addOnSuccessListener(
                 enabled -> {
                     if (enabled) {
-                        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(getReactApplicationContext());
-                        callback.invoke(null, CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
+                        WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
+                        workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
+                        promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
                     } else {
-                        callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED, null);
+                        promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
                     }
                 })
-                .addOnFailureListener(
-                        exception -> {
-                            if (!(exception instanceof ApiException)) {
-                                callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_UNKNOWN, null);
-                            } else {
-                                ApiException apiException = (ApiException) exception;
-                                callback.invoke(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR + apiException.getStatus().toString(), null);
-                            }
-                        });
+                .addOnFailureListener(promise::reject);
     }
 
     @ReactMethod

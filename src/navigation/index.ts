@@ -7,6 +7,8 @@ import {
 } from "react-navigation"
 import { useFocusEffect } from "@react-navigation/native"
 
+import { ExposureDatum } from "../exposure"
+
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
@@ -33,14 +35,23 @@ export const OnboardingScreens: {
   LanguageSelection: "LanguageSelection",
 }
 
-export type ExposureHistoryScreen = "ExposureHistory" | "NextSteps" | "MoreInfo"
+export type ExposureHistoryScreen =
+  | "ExposureHistory"
+  | "ExposureDetail"
+  | "MoreInfo"
 
 export const ExposureHistoryScreens: {
   [key in ExposureHistoryScreen]: ExposureHistoryScreen
 } = {
   ExposureHistory: "ExposureHistory",
-  NextSteps: "NextSteps",
+  ExposureDetail: "ExposureDetail",
   MoreInfo: "MoreInfo",
+}
+
+export type ExposureHistoryStackParamList = {
+  ExposureDetail: {
+    exposureDatum: ExposureDatum
+  }
 }
 
 export type MoreStackScreen =
@@ -126,13 +137,13 @@ export const Stacks: { [key in Stack]: Stack } = {
   AffectedUserStack: "AffectedUserStack",
 }
 
-type BarStyle = "dark-content" | "light-content"
+export type StatusBarStyle = "dark-content" | "light-content"
 
-export const useStatusBarEffect = (barStyle: BarStyle): void => {
+export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   useFocusEffect(
     useCallback(() => {
-      StatusBar.setBarStyle(barStyle)
+      StatusBar.setBarStyle(statusBarStyle)
       Platform.OS === "android" && StatusBar.setTranslucent(true)
-    }, [barStyle]),
+    }, [statusBarStyle]),
   )
 }

@@ -103,7 +103,7 @@ const Assessment = ({ navigation }) => {
     }),
     [navigation],
   )
-  const screenOptions = (backgroundColor = Colors.surveyPrimaryBackground) => ({
+  const screenOptions = (backgroundColor = Colors.primaryBackground) => ({
     headerHideShadow: true,
     headerTitle: "",
     headerStyle: {
@@ -118,9 +118,9 @@ const Assessment = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() => navigation.pop()}
-        style={styles.assessmentIconContainer}
+        style={style.assessmentIconContainer}
       >
-        <SvgXml xml={Icons.BackArrow} style={styles.assessmentIcon} />
+        <SvgXml xml={Icons.BackArrow} style={style.assessmentIcon} />
       </TouchableOpacity>
     )
   }
@@ -129,9 +129,9 @@ const Assessment = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() => navigation.popToTop()}
-        style={styles.assessmentIconContainer}
+        style={style.assessmentIconContainer}
       >
-        <SvgXml xml={Icons.Close} style={styles.assessmentIcon} />
+        <SvgXml xml={Icons.Close} style={style.assessmentIcon} />
       </TouchableOpacity>
     )
   }
@@ -273,7 +273,7 @@ function selectNextQuestion(survey, question, answer) {
   return survey.questions[index + 1].question_key
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   assessmentIconContainer: {
     padding: Spacing.medium,
   },

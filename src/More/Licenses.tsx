@@ -1,6 +1,5 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
-  Image,
   Linking,
   ScrollView,
   StyleSheet,
@@ -8,106 +7,97 @@ import {
   View,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
+import { getApplicationName } from "react-native-device-info"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
-import { Images } from "../assets"
 import { Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
-const PRIVACY_POLICY_URL = "https://pathcheck.org/privacy-policy/"
-
-const Licenses = (): JSX.Element => {
+const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
 
-  const legalHeaderText = t("label.legal_page_header_bluetooth")
-
-  const infoAddress = "info@pathcheck.org"
-  const pathCheckAddress = "pathcheck.org"
-
-  const handleOnPressOpenUrl = (url: string) => {
-    return () => Linking.openURL(url)
-  }
+  const infoEmailAddress = "info@pathcheck.org"
+  const infoEmailLink = "mailto:info@pathcheck.org"
+  const pathCheckWebAddress = "pathcheck.org"
+  const pathCheckUrl = "https://pathcheck.org/"
+  const privacyPolicyUrl = "https://pathcheck.org/privacy-policy/"
 
   return (
     <>
       <ScrollView
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
         <View>
-          <RTLEnabledText
-            style={styles.headerContent}
+          <GlobalText
+            style={style.headerContent}
             testID={"licenses-legal-header"}
           >
-            {legalHeaderText}
-          </RTLEnabledText>
-          <View
-            style={{ paddingTop: Spacing.xSmall, paddingLeft: Spacing.medium }}
+            {getApplicationName()}
+          </GlobalText>
+          <GlobalText style={style.contentText}>
+            {t("label.legal_page_address")}
+          </GlobalText>
+          <GlobalText
+            onPress={() => Linking.openURL(infoEmailLink)}
+            style={style.hyperlink}
           >
-            <RTLEnabledText style={styles.contentText}>
-              {t("label.legal_page_address")}
-            </RTLEnabledText>
-            <View style={{ height: 20 }} />
-            <RTLEnabledText
-              onPress={handleOnPressOpenUrl("mailto:info@pathcheck.org")}
-              style={styles.hyperlink}
-            >
-              {infoAddress}
-            </RTLEnabledText>
-            <RTLEnabledText
-              onPress={handleOnPressOpenUrl("https://pathcheck.org/")}
-              style={styles.hyperlink}
-            >
-              {pathCheckAddress}
-            </RTLEnabledText>
-          </View>
+            {infoEmailAddress}
+          </GlobalText>
+          <GlobalText
+            onPress={() => Linking.openURL(pathCheckUrl)}
+            style={style.hyperlink}
+          >
+            {pathCheckWebAddress}
+          </GlobalText>
         </View>
       </ScrollView>
       <TouchableOpacity
-        style={styles.termsInfoRow}
-        onPress={handleOnPressOpenUrl(PRIVACY_POLICY_URL)}
+        style={style.privacyPolicy}
+        onPress={() => Linking.openURL(privacyPolicyUrl)}
       >
-        <RTLEnabledText
-          style={{ ...Typography.mainContent, color: Colors.white }}
-        >
+        <GlobalText style={style.privacyPolicyText}>
           {t("label.privacy_policy")}
-        </RTLEnabledText>
-        <View style={styles.arrowContainer}>
-          <Image source={Images.ForeArrow} />
-        </View>
+        </GlobalText>
+        <SvgXml xml={Icons.ChevronRight} fill={Colors.white} />
       </TouchableOpacity>
     </>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
+    flex: 1,
     backgroundColor: Colors.primaryBackgroundFaintShade,
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingTop: Spacing.large,
+    paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header3,
+    marginBottom: Spacing.small,
+  },
+  contentText: {
+    ...Typography.secondaryContent,
+    marginBottom: Spacing.small,
   },
   hyperlink: {
     ...Typography.secondaryContent,
     color: Colors.linkText,
     textDecorationLine: "underline",
   },
-  termsInfoRow: {
+  privacyPolicy: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: Colors.primaryBlue,
-    paddingVertical: 25,
-    paddingHorizontal: 15,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.small,
   },
-  arrowContainer: {
-    alignSelf: "center",
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  contentText: {
-    ...Typography.secondaryContent,
+  privacyPolicyText: {
+    ...Typography.mainContent,
+    color: Colors.white,
   },
 })
 

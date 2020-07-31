@@ -3,7 +3,7 @@ import { TouchableOpacity, Linking, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 
 import { Stacks } from "../../navigation"
 import { Buttons, Colors, Typography, Spacing, Layout } from "../../styles"
@@ -22,17 +22,17 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
   return (
     <View
-      style={styles.container}
+      style={style.container}
       testID={"affected-user-enable-exposure-notifications-screen"}
     >
-      <View style={styles.headerContainer}>
-        <RTLEnabledText style={styles.header}>
+      <View style={style.headerContainer}>
+        <GlobalText style={style.header}>
           {t("export.enable_exposure_notifications_title")}
-        </RTLEnabledText>
+        </GlobalText>
 
-        <RTLEnabledText style={styles.subheader}>
+        <GlobalText style={style.subheader}>
           {t("export.enable_exposure_notifications_body")}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
       <View>
         <TouchableOpacity
@@ -40,27 +40,27 @@ const EnableExposureNotifications: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("common.settings")}
           accessibilityRole="button"
-          style={styles.button}
+          style={style.button}
         >
-          <RTLEnabledText style={styles.buttonText}>
+          <GlobalText style={style.buttonText}>
             {t("common.settings")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={handleOnPressCancel}
-          style={styles.secondaryButton}
+          style={style.secondaryButton}
         >
-          <RTLEnabledText style={styles.secondaryButtonText}>
+          <GlobalText style={style.secondaryButtonText}>
             {t("export.code_input_button_cancel")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
       </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackgroundFaintShade,
     height: "100%",

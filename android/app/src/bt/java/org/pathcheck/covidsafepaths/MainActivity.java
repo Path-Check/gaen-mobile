@@ -10,11 +10,13 @@ import androidx.annotation.Nullable;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -24,19 +26,30 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import org.devio.rn.splashscreen.SplashScreen;
 import org.threeten.bp.Duration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import covidsafepaths.bt.exposurenotifications.ExposureKey;
 import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.network.DiagnosisKey;
 import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
 import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
+import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 public class MainActivity extends ReactActivity {
 
   private static final Duration GET_TEKS_TIMEOUT = Duration.ofSeconds(10);
+  private static final BaseEncoding BASE64 = BaseEncoding.base64();
+  private static final int DEFAULT_PERIOD = DiagnosisKey.DEFAULT_PERIOD;
+  private static final int DEFAULT_TRANSMISSION_RISK = 1;
+  private Promise getExposureKeysPromise;
+  private Promise postDiagnosisKeysPromise;
+
+  public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
+          "org.pathcheck.covidsafepaths.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,17 @@ public class MainActivity extends ReactActivity {
             });
   }
 
+  public void showPermissionUploadKeys(ApiException apiException) {
+    try {
+      apiException
+              .getStatus()
+              .startResolutionForResult(
+                      this, RequestCodes.REQUEST_CODE_UPLOAD_KEYS);
+    }catch (IntentSender.SendIntentException e) {
+      postDiagnosisKeysPromise.reject(e);
+    }
+  }
+
   public void showPermissionShareKeys(ApiException apiException) {
     try {
       apiException
@@ -90,7 +114,7 @@ public class MainActivity extends ReactActivity {
               .startResolutionForResult(
                       this, RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY);
     }catch (IntentSender.SendIntentException e) {
-
+      getExposureKeysPromise.reject(e);
     }
   }
 
@@ -117,14 +141,72 @@ public class MainActivity extends ReactActivity {
       }
     } else if(requestCode == RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY){
       if (resultCode == RESULT_OK) {
-        // Share
+        getExposureKeys(getExposureKeysPromise);
       } else {
         // Don't share.
+        getExposureKeysPromise.reject("CANCEL", "Operation cancelled by the user");
+      }
+    } else if(requestCode == RequestCodes.REQUEST_CODE_UPLOAD_KEYS){
+      if (resultCode == RESULT_OK) {
+        share(postDiagnosisKeysPromise);
+      } else {
+        // Don't share.
+        postDiagnosisKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
     }
   }
 
-  public void share() {
+  public void getExposureKeys(final Promise promise) {
+    getExposureKeysPromise = promise;
+    FluentFuture<ImmutableList<DiagnosisKey>> getKeys =
+            FluentFuture.from(getRecentKeys())
+                    .transform(
+                            this::toDiagnosisKeysWithTransmissionRisk, AppExecutors.getLightweightExecutor());
+
+    Futures.addCallback(
+            getKeys,
+            new FutureCallback<ImmutableList<DiagnosisKey>>() {
+              @Override
+              public void onSuccess(ImmutableList<DiagnosisKey> shared) {
+                final List<ExposureKey> exposureKeys = new ArrayList<>();
+
+                for (DiagnosisKey k : shared) {
+
+                  final String key = BASE64.encode(k.getKeyBytes());
+                  final int rollingPeriod = DEFAULT_PERIOD;
+                  final int rollingStartNumber = k.getIntervalNumber();
+                  final int transmissionRisk = DEFAULT_TRANSMISSION_RISK;
+
+                  exposureKeys.add(new ExposureKey(key,
+                                 rollingPeriod,
+                                  rollingStartNumber,
+                                  transmissionRisk));
+                }
+
+                getExposureKeysPromise.resolve(Util.getKeysAsWritableArray(exposureKeys));
+              }
+
+              @Override
+              public void onFailure(Throwable exception) {
+                if (!(exception instanceof ApiException)) {
+                  getExposureKeysPromise.reject(exception);
+                  return;
+                }
+                ApiException apiException = (ApiException) exception;
+                if (apiException.getStatusCode()
+                        == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+                  showPermissionShareKeys(apiException);
+                } else {
+                  getExposureKeysPromise.reject(exception);
+                }
+              }
+            },
+            AppExecutors.getLightweightExecutor());
+
+  }
+
+  public void share(Promise promise) {
+    postDiagnosisKeysPromise = promise;
     FluentFuture<Boolean> getKeysAndSubmitToService =
             FluentFuture.from(getRecentKeys())
                     .transform(
@@ -136,28 +218,22 @@ public class MainActivity extends ReactActivity {
             new FutureCallback<Boolean>() {
               @Override
               public void onSuccess(Boolean shared) {
-//                        sharedLiveEvent.postValue(shared);
-//                        postInflight(false);
+                postDiagnosisKeysPromise.resolve(null);
               }
 
               @Override
               public void onFailure(Throwable exception) {
                 if (!(exception instanceof ApiException)) {
-//                            Log.e(TAG, "Unknown error", exception);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));
-//                            postInflight(false);
+                  postDiagnosisKeysPromise.reject(exception);
                   return;
                 }
+
                 ApiException apiException = (ApiException) exception;
                 if (apiException.getStatusCode()
                         == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-                  showPermissionShareKeys(apiException);
+                  showPermissionUploadKeys(apiException);
                 } else {
-//                            Log.w(TAG, "No RESOLUTION_REQUIRED in result", apiException);
-//                            snackbarLiveEvent.postValue(
-//                                    getApplication().getString(R.string.generic_error_message));;
-//                            postInflight(false);
+                  postDiagnosisKeysPromise.reject(exception);
                 }
               }
             },
