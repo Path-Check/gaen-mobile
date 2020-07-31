@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { ENPermissionStatus } from "../PermissionsContext"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { isPlatformiOS } from "../utils/index"
 
 import { Layout, Spacing, Colors, Typography, Buttons } from "../styles"
@@ -62,12 +62,12 @@ const Home = ({
   return (
     <View style={style.container}>
       <View style={style.contentContainer}>
-        <RTLEnabledText style={style.headerText} testID={"home-header"}>
+        <GlobalText style={style.headerText} testID={"home-header"}>
           {headerText}
-        </RTLEnabledText>
-        <RTLEnabledText style={style.subheaderText} testID={"home-subheader"}>
+        </GlobalText>
+        <GlobalText style={style.subheaderText} testID={"home-subheader"}>
           {subheaderText}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
       {!isEnabledAndAuthorized ? (
         <TouchableOpacity
@@ -75,7 +75,7 @@ const Home = ({
           onPress={handleRequestPermission}
           style={style.button}
         >
-          <RTLEnabledText style={style.buttonText}>{buttonText}</RTLEnabledText>
+          <GlobalText style={style.buttonText}>{buttonText}</GlobalText>
         </TouchableOpacity>
       ) : null}
     </View>

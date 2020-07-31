@@ -10,10 +10,10 @@ import {
   TextInput,
   View,
   Keyboard,
+  SafeAreaView,
 } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
 import * as API from "./debugAPI"
 
@@ -86,15 +86,15 @@ const CodeInputScreen: FunctionComponent = () => {
           <View style={style.container}>
             <View>
               <View style={style.headerContainer}>
-                <RTLEnabledText style={style.header}>
+                <GlobalText style={style.header}>
                   {t("more.debug.submit_your_debug_log")}
-                </RTLEnabledText>
+                </GlobalText>
               </View>
 
               <View style={style.inputContainer}>
-                <RTLEnabledText style={style.inputLabel}>
+                <GlobalText style={style.inputLabel}>
                   {t("label.email_optional")}
-                </RTLEnabledText>
+                </GlobalText>
                 <TextInput
                   value={email}
                   placeholder={"email@example.com"}
@@ -110,9 +110,9 @@ const CodeInputScreen: FunctionComponent = () => {
               </View>
 
               <View style={style.inputContainer}>
-                <RTLEnabledText style={style.inputLabel}>
+                <GlobalText style={style.inputLabel}>
                   {t("label.description_optional")}
-                </RTLEnabledText>
+                </GlobalText>
                 <TextInput
                   value={description}
                   style={style.descriptionInput}
@@ -125,9 +125,9 @@ const CodeInputScreen: FunctionComponent = () => {
                 />
               </View>
 
-              <RTLEnabledText style={style.errorSubtitle}>
+              <GlobalText style={style.errorSubtitle}>
                 {errorMessage}
-              </RTLEnabledText>
+              </GlobalText>
             </View>
             {isLoading ? <LoadingIndicator /> : null}
 
@@ -139,9 +139,9 @@ const CodeInputScreen: FunctionComponent = () => {
                 accessibilityRole="button"
                 style={style.button}
               >
-                <RTLEnabledText style={style.buttonText}>
+                <GlobalText style={style.buttonText}>
                   {t("common.submit")}
-                </RTLEnabledText>
+                </GlobalText>
               </TouchableOpacity>
             </View>
           </View>
@@ -201,7 +201,7 @@ const style = StyleSheet.create({
   },
   textInput: {
     ...Typography.secondaryTextInput,
-    ...Outlines.textInput,
+    ...Outlines.textInputBorder,
     padding: Spacing.xSmall,
     borderColor: Colors.formInputBorder,
   },
@@ -212,7 +212,7 @@ const style = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.level1,
+    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),

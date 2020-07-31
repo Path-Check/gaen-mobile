@@ -15,7 +15,7 @@ import loadLocalResource from "react-native-local-resource"
 import WebView, { WebViewNavigation } from "react-native-webview"
 import { SvgXml } from "react-native-svg"
 
-import { Button, RTLEnabledText } from "../components"
+import { Button, GlobalText } from "../components"
 import en from "../locales/eula/en.html"
 import es_PR from "../locales/eula/es_PR.html"
 import ht from "../locales/eula/ht.html"
@@ -73,7 +73,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         source={checked ? Images.BoxCheckedIcon : Images.BoxUncheckedIcon}
         style={style.checkboxIcon}
       />
-      <RTLEnabledText style={style.checkboxText}>{label}</RTLEnabledText>
+      <GlobalText style={style.checkboxText}>{label}</GlobalText>
     </TouchableOpacity>
   )
 }
@@ -144,9 +144,9 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
   return (
     <>
       <TouchableOpacity style={style.button} onPress={handleOnPressGetStarted}>
-        <RTLEnabledText style={style.buttonText}>
+        <GlobalText style={style.buttonText}>
           {t("label.launch_get_started")}
-        </RTLEnabledText>
+        </GlobalText>
       </TouchableOpacity>
       <Modal animationType="slide" transparent visible={modalVisible}>
         <View style={style.container}>
@@ -180,9 +180,9 @@ const EulaModal: FunctionComponent<EulaModalProps> = ({
                   onPress={() => toggleCheckbox(!boxChecked)}
                   checked={boxChecked}
                 />
-                <RTLEnabledText style={style.smallDescriptionText}>
+                <GlobalText style={style.smallDescriptionText}>
                   {t("onboarding.eula_message")}
-                </RTLEnabledText>
+                </GlobalText>
               </View>
               <Button
                 label={t("onboarding.eula_continue")}

@@ -31,7 +31,6 @@ import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.pathcheck.covidsafepaths.BuildConfig;
-import org.pathcheck.covidsafepaths.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +70,6 @@ public class Uris {
      * Gets batches of URIs from which to download key files for the given country codes.
      */
     ListenableFuture<ImmutableList<KeyFileBatch>> getDownloadFileUris() {
-
         return FluentFuture.from(getKeyFileBatches())
                 .transform(
                         batches -> {

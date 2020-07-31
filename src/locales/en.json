@@ -74,15 +74,15 @@
   },
   "exposure_history": {
     "exposure_detail": {
+      "6ft_apart": "6ft apart",
       "content": "Someone you were nearby has since tested positive for COVID-19.",
       "ha_guidance_header": "What should I do?",
       "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
       "header": "You may have crossed paths with the COVID-19 virus.",
       "isolate": "Isolate",
-      "wear_a_mask": "Wear a mask",
-      "6ft_apart": "6ft apart",
+      "next_steps": "Next Steps",
       "wash_your_hands": "Wash your hands",
-      "next_steps": "Next Steps"
+      "wear_a_mask": "Wear a mask"
     },
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
@@ -101,7 +101,7 @@
     "last_days": "Last 14 days",
     "learn_more": "Learn More",
     "no_exposure_reports": "No Exposure Reports",
-    "no_exposure_reports_over_past": "You haven't received any exposure report over the past 14-days",
+    "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
     "possible_exposure": "Possible COVID-19 exposure",
     "protect_yourself_and_others": "Protect yourself and others in your community",
     "review_guidance_from_ha": "Review guidance from {{healthAuthorityName}}",
@@ -121,7 +121,7 @@
     }
   },
   "label": {
-    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit",
+    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",
     "assessment_icon": "Clipboard icon with checkmark inside",
     "bell_icon": "Bell icon",
     "bluetooth_icon": "Searching bluetooth device icon",
@@ -150,7 +150,6 @@
     "launch_screen4_subheader_bluetooth": "This helps others in your community contain the spread of the virus.",
     "launch_set_up_phone_bluetooth": "Next",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
-    "legal_page_header_bluetooth": "PathCheck BT",
     "more_icon": "Icon of three horizontal dots",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",

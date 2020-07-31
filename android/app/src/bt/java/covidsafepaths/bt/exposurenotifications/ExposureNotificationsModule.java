@@ -1,15 +1,7 @@
 package covidsafepaths.bt.exposurenotifications;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-
-import androidx.work.Data;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkInfo;
-import androidx.work.WorkManager;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
@@ -18,7 +10,6 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
@@ -34,19 +25,16 @@ import javax.annotation.Nonnull;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.nearby.ExposureConfigurations;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
-import covidsafepaths.bt.exposurenotifications.nearby.StateUpdatedWorker;
 import covidsafepaths.bt.exposurenotifications.notify.ShareDiagnosisManager;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
 import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 import static covidsafepaths.bt.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
-import static covidsafepaths.bt.exposurenotifications.nearby.StateUpdatedWorker.IS_EXPOSED_KEY;
 
 @ReactModule(name = MODULE_NAME)
 public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     public static final String MODULE_NAME = "ENPermissionsModule";
     public static final String TAG = "ENModule";
-    private static final String EXPOSURE_ALERT_EVENT = "ExposureAlertEvent";
 
     private final ExposureNotificationClient exposureNotificationClient;
     private final ShareDiagnosisManager shareDiagnosisManager;
@@ -144,7 +132,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
      * Schedule daily provision of keys from server to GAEN
      */
     private void scheduleDailyProvideDiagnosisKeys() {
-        ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(getReactApplicationContext());
+        ProvideDiagnosisKeysWorker.schedule(getReactApplicationContext());
     }
 
     /**
@@ -167,7 +155,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
      * Cancel daily provision of keys from server to GAEN
      */
     private void cancelDailyProvideDiagnosisKeys() {
-        ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(getReactApplicationContext());
+        ProvideDiagnosisKeysWorker.cancel(getReactApplicationContext());
     }
 
     /**
@@ -203,48 +191,4 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
         };
         Futures.addCallback(shareDiagnosisFuture, shareDiagnosisCallback, AppExecutors.getLightweightExecutor());
     }
-
-    // TODO what should this be called and what data should it contain?
-    private void alertExposed() {
-        getReactApplicationContext()
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(EXPOSURE_ALERT_EVENT, null);
-    }
-
-    /**
-     * Receiver registered for notifications of a potential exposure.
-     */
-    public class ExposureNotificationBroadcastReceiver extends BroadcastReceiver {
-
-        private static final String TAG = "ENBroadcastReceiver";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED.equals(action)) {
-                String token = intent.getStringExtra(ExposureNotificationClient.EXTRA_TOKEN);
-                WorkManager workManager = WorkManager.getInstance(context);
-                OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
-                        .setInputData(
-                                new Data.Builder().putString(ExposureNotificationClient.EXTRA_TOKEN, token)
-                                        .build())
-                        .build();
-                workManager.enqueue(workRequest);
-                // Retrieve the boolean that represents whether there was an exposure or not.
-                ListenableFuture<WorkInfo> workInfo = workManager.getWorkInfoById(workRequest.getId());
-                workInfo.addListener(() -> {
-                    try {
-                        boolean isExposed = workInfo.get().getOutputData().getBoolean(IS_EXPOSED_KEY, false);
-                        if (isExposed) {
-                            alertExposed();
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error getting workInfo from StateUpdatedWorker", e);
-                    }
-                }, AppExecutors.getLightweightExecutor());
-            }
-        }
-    }
-
 }

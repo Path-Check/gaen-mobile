@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -43,14 +43,14 @@ const LanguageSelection = (): JSX.Element => {
           }}
           onPress={() => onSelectLanguage(value)}
         >
-          <RTLEnabledText
+          <GlobalText
             style={{
               ...Typography.mainContent,
               fontWeight: language === value ? "700" : "500",
             }}
           >
             {label}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableHighlight>
       )}
       ItemSeparatorComponent={() => <Separator />}

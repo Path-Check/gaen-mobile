@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
@@ -14,13 +15,14 @@ import { useExposureContext } from "../ExposureContext"
 
 import { Screens, Stacks } from "./index"
 import * as Icons from "../assets/svgs/TabBarNav"
-import { Layout, Affordances, Colors } from "../styles"
+import { Affordances, Colors } from "../styles"
 
 const Tab = createBottomTabNavigator()
 
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useExposureContext()
+  const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const applyBadge = (icon: JSX.Element) => {
@@ -106,11 +108,11 @@ const MainTabNavigator: FunctionComponent = () => {
       tabBarOptions={{
         showLabel: false,
         activeTintColor: Colors.white,
-        inactiveTintColor: Colors.primaryViolet,
+        inactiveTintColor: Colors.tertiaryViolet,
         style: {
-          backgroundColor: Colors.navBar,
-          borderTopColor: Colors.navBar,
-          height: Layout.navBar,
+          backgroundColor: Colors.headerBackground,
+          borderTopColor: Colors.headerBackground,
+          height: insets.bottom + 60,
         },
       }}
     >

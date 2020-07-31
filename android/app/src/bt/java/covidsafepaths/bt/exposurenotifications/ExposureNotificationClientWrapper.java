@@ -10,10 +10,10 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.exposurenotification.ExposureInformation;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.ExposureSummary;
+import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.android.gms.tasks.Task;
 
@@ -109,8 +109,7 @@ public class ExposureNotificationClientWrapper {
      * {@link ExposureConfigurations}.
      */
     public Task<Void> provideDiagnosisKeys(List<File> files, String token) {
-        return exposureNotificationClient
-                .provideDiagnosisKeys(files, config.get(), token);
+        return exposureNotificationClient.provideDiagnosisKeys(files, config.get(), token);
     }
 
     /**
@@ -120,18 +119,15 @@ public class ExposureNotificationClientWrapper {
         return exposureNotificationClient.getExposureSummary(token);
     }
 
-    /**
-     * Gets the {@link List} of {@link ExposureInformation} using the stable token.
-     */
-    public Task<List<ExposureInformation>> getExposureInformation(String token) {
-        return exposureNotificationClient.getExposureInformation(token);
+    public Task<List<ExposureWindow>> getExposureWindows() {
+        return exposureNotificationClient.getExposureWindows(ExposureNotificationClient.TOKEN_A);
     }
 
     public void onExposureNotificationStateChanged(@Nullable ReactContext context, boolean enabled) {
         if (enabled) {
-            ProvideDiagnosisKeysWorker.scheduleDailyProvideDiagnosisKeys(context);
+            ProvideDiagnosisKeysWorker.schedule(context);
         } else {
-            ProvideDiagnosisKeysWorker.cancelDailyProvideDiagnosisKeys(context);
+            ProvideDiagnosisKeysWorker.cancel(context);
         }
 
         if (context != null) {

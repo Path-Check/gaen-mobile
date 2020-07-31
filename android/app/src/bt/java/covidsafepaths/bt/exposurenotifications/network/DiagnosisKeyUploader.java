@@ -189,7 +189,7 @@ public class DiagnosisKeyUploader {
                         .put("hmackey", ExposureKeyModule.hmacKey)
                         .put("padding", randomBase64Data(Util.getRandomNumber()))
                         .put("regions", regionJson)
-                        .put("appPackageName", BuildConfig.APPLICATION_ID);
+                        .put("appPackageName", BuildConfig.ANDROID_APPLICATION_ID);
 
         return FluentFuture.from(Futures.immediateFuture(submission));
     }

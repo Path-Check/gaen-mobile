@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 import { Possible, ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"
@@ -54,12 +54,12 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
     >
       <View style={style.innerContainer}>
         <View>
-          <RTLEnabledText style={style.primaryText}>
+          <GlobalText style={style.primaryText}>
             {t("exposure_history.possible_exposure")}
-          </RTLEnabledText>
-          <RTLEnabledText style={style.secondaryText}>
+          </GlobalText>
+          <GlobalText style={style.secondaryText}>
             {exposureWindowBucketInWords(exposureDatum)}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
         <SvgXml
           xml={Icons.ChevronRight}
@@ -67,7 +67,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           accessibilityLabel={t("label.check_icon")}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
-          fill={Colors.royalBlue}
+          fill={Colors.primaryBlue}
         />
       </View>
     </TouchableHighlight>
@@ -81,7 +81,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xSmall,
-    borderRadius: Outlines.largeBorderRadius,
+    borderRadius: Outlines.borderRadiusLarge,
   },
   innerContainer: {
     flexDirection: "row",

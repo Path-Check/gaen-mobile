@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Stacks } from "../navigation"
 
@@ -27,14 +27,12 @@ export const ExportComplete: FunctionComponent = () => {
       <SafeAreaView style={{ flex: 1 }}>
         <View style={style.container}>
           <View>
-            <RTLEnabledText style={style.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={style.contentText}>{body}</RTLEnabledText>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
           <TouchableOpacity style={style.button} onPress={handleOnPressDone}>
-            <RTLEnabledText style={style.buttonText}>
-              {t("common.done")}
-            </RTLEnabledText>
+            <GlobalText style={style.buttonText}>{t("common.done")}</GlobalText>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
