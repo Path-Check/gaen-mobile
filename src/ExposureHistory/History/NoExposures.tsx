@@ -52,9 +52,7 @@ const HealthGuidelines: FunctionComponent = () => {
         setConnectivity(state.isInternetReachable)
       }
     })
-    return () => {
-      unsubscribe()
-    }
+    return unsubscribe
   }, [])
 
   return (
