@@ -85,9 +85,7 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 .env.bt # variables used in building binaries
 ```
 
-**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
-
-Members of the `Path-Check` org can also run `bin/set_ha.sh` in the same way to set the bundle id and application id for a given health authority.
+**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/set_ha.sh ${HA_LABEL}` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`). This will also setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
 ## Running
 
@@ -132,9 +130,6 @@ Device storage can be cleared by clicking "Hardware" on the system toolbar, and 
 
 Privacy settings can be reset by going to Settings > General > Reset > Reset
 Location & Privacy
-
-
-**Note:** Members of the `Path-Check` org should update the environment variables of the release build corresponding with the health authority, for this we need to execute the script `bin/set_ha.sh ${HA_LABEL}` where HA_LABEL is the corresponding health authority label. This will setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
 ### Debugging
 
