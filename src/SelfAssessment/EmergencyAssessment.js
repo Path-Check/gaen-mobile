@@ -30,7 +30,7 @@ export const EmergencyAssessment = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.surveyPrimaryBackground}
+      backgroundColor={Colors.primaryBackground}
       footer={
         <ChoiceButtons
           agreePress={handleAgreePress}

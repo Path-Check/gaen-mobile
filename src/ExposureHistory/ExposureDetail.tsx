@@ -1,6 +1,12 @@
 import React, { FunctionComponent } from "react"
 import env from "react-native-config"
-import { View, StyleSheet, TouchableOpacity, Linking } from "react-native"
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
@@ -10,14 +16,7 @@ import { GlobalText } from "../components/GlobalText"
 import { useStatusBarEffect } from "../navigation"
 import { Possible, ExposureDatum, exposureWindowBucket } from "../exposure"
 
-import {
-  Colors,
-  Iconography,
-  Outlines,
-  Spacing,
-  Typography,
-  Buttons,
-} from "../styles"
+import { Colors, Iconography, Spacing, Typography, Buttons } from "../styles"
 import { Icons } from "../assets"
 
 const ExposureDetail: FunctionComponent = () => {
@@ -61,17 +60,15 @@ const ExposureDetail: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container}>
       <View style={style.headerContainer}>
         <View style={style.exposureWindowContainer}>
-          <View style={style.iconContainerCircle}>
-            <SvgXml
-              xml={Icons.ExposureIcon}
-              fill={Colors.primaryViolet}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-          </View>
+          <SvgXml
+            xml={Icons.ExposureIcon}
+            fill={Colors.primaryViolet}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
           <GlobalText style={style.exposureWindow}>
             {exposureWindowBucketInWords(exposureDatum)}
           </GlobalText>
@@ -115,7 +112,7 @@ const ExposureDetail: FunctionComponent = () => {
           </GlobalText>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -149,43 +146,40 @@ const style = StyleSheet.create({
   headerContainer: {
     backgroundColor: Colors.white,
     paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.large,
+    paddingVertical: Spacing.xLarge,
   },
   exposureWindow: {
     ...Typography.base,
     color: Colors.darkGray,
     textTransform: "uppercase",
     letterSpacing: Typography.mediumLetterSpacing,
+    marginLeft: Spacing.xSmall,
   },
   headerText: {
     ...Typography.header6,
+    marginBottom: Spacing.xxSmall,
   },
   contentText: {
     ...Typography.tertiaryContent,
-    marginTop: Spacing.xxSmall,
     color: Colors.darkGray,
   },
   exposureWindowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: Spacing.small,
-  },
-  iconContainerCircle: {
-    ...Iconography.xSmallIcon,
-    ...Outlines.glowShadow,
-    alignSelf: "center",
-    marginRight: Spacing.xSmall,
+    marginBottom: Spacing.xSmall,
   },
   bottomContainer: {
     backgroundColor: Colors.white,
     flex: 1,
-    padding: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.xLarge,
     marginTop: Spacing.xxSmall,
   },
   bottomHeaderText: {
     ...Typography.header6,
     fontSize: Typography.large,
-    paddingBottom: Spacing.small,
+    marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
     ...Typography.tertiaryContent,
@@ -214,7 +208,6 @@ const style = StyleSheet.create({
     color: Colors.primaryText,
   },
   nextStepsButton: {
-    ...Buttons.largeBlue,
     ...Buttons.largeBlue,
   },
   nextStepsButtonText: {

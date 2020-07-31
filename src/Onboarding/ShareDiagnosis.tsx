@@ -33,6 +33,7 @@ const ShareDiagnosis: FunctionComponent = () => {
 
   const explanationScreenStyles = {
     iconStyle: iconStyle,
+    statusBarStyle: "dark-content" as const,
   }
 
   const explanationScreenActions = {

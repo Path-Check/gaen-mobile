@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
 
 import { Icons, Images } from "../assets"
@@ -14,8 +13,6 @@ const EnableExposureNotifications = (): JSX.Element => {
   const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
   const { setOnboardingToComplete } = useOnboardingContext()
-
-  useStatusBarEffect("dark-content")
 
   const iconAccessibilityLabel = t("label.exposure_icon")
   const headerText = t("label.launch_exposure_notif_header")
@@ -46,6 +43,7 @@ const EnableExposureNotifications = (): JSX.Element => {
     headerStyle: style.header,
     bodyStyle: style.body,
     iconStyle: IconStyle.Blue,
+    statusBarStyle: "light-content" as const,
   }
 
   const explanationScreenActions = {

@@ -2,7 +2,7 @@ import { TextStyle } from "react-native"
 
 import * as Colors from "./colors"
 
-// Font Sizes
+// Font Size
 export const tiny = 11
 export const smallest = 12
 export const smaller = 13
@@ -13,7 +13,7 @@ export const larger = 22
 export const largest = 28
 export const huge = 52
 
-// Line Heights
+// Line Height
 export const smallestLineHeight = 14
 export const smallerLineHeight = 16
 export const smallLineHeight = 20
@@ -32,15 +32,18 @@ export const baseWeight = "400"
 export const heavyWeight = "500"
 export const heaviestWeight = "700"
 
-// Font Families
+// Font Family
 export const baseFontFamily = "IBMPlexSans"
 export const mediumFontFamily = "IBMPlexSans-Medium"
 export const boldFontFamily = "IBMPlexSans-Bold"
 export const monospaceFontFamily = "IBMPlexMono"
 
-export const extraBold: TextStyle = {
-  fontFamily: boldFontFamily,
-  fontWeight: heaviestWeight,
+export const base: TextStyle = {
+  fontFamily: baseFontFamily,
+}
+
+export const mediumBold: TextStyle = {
+  fontFamily: mediumFontFamily,
 }
 
 export const bold: TextStyle = {
@@ -48,59 +51,62 @@ export const bold: TextStyle = {
   fontWeight: heavyWeight,
 }
 
-export const mediumBold: TextStyle = {
-  fontFamily: mediumFontFamily,
+export const extraBold: TextStyle = {
+  fontFamily: boldFontFamily,
+  fontWeight: heaviestWeight,
 }
 
 export const monospace: TextStyle = {
   fontFamily: monospaceFontFamily,
 }
 
-export const base: TextStyle = {
-  fontFamily: baseFontFamily,
-}
-
 // Standard Font Types
 export const tinyFont: TextStyle = {
   ...base,
-  lineHeight: smallestLineHeight,
   fontSize: tiny,
+  lineHeight: smallestLineHeight,
+}
+
+export const smallerFont: TextStyle = {
+  ...base,
+  fontSize: smaller,
+  lineHeight: smallerLineHeight,
 }
 
 export const smallFont: TextStyle = {
   ...base,
-  lineHeight: smallLineHeight,
   fontSize: small,
+  lineHeight: smallLineHeight,
 }
 
 export const mediumFont: TextStyle = {
   ...base,
-  lineHeight: mediumLineHeight,
   fontSize: medium,
+  lineHeight: mediumLineHeight,
 }
 
 export const largeFont: TextStyle = {
   ...base,
-  lineHeight: largeLineHeight,
   fontSize: large,
+  lineHeight: largeLineHeight,
 }
 
 export const largerFont: TextStyle = {
   ...base,
-  lineHeight: largeLineHeight,
   fontSize: larger,
+  lineHeight: largeLineHeight,
 }
 
 export const largestFont: TextStyle = {
   ...base,
-  lineHeight: largestLineHeight,
   fontSize: largest,
+  lineHeight: largestLineHeight,
 }
 
 export const hugeFont: TextStyle = {
   ...base,
-  lineHeight: hugeLineHeight,
   fontSize: huge,
+  lineHeight: hugeLineHeight,
 }
 
 // Headers
@@ -139,63 +145,31 @@ export const header6: TextStyle = {
   color: Colors.black,
 }
 
-export const header7: TextStyle = {
-  ...largerFont,
-  color: Colors.invertedText,
-}
-
-export const title: TextStyle = {
-  ...largeFont,
-  fontWeight: heaviestWeight,
-  color: Colors.primaryText,
-}
-
-export const footer: TextStyle = {
-  ...mediumFont,
-  ...bold,
-  color: Colors.black,
-}
-
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
   color: Colors.primaryText,
 }
 
-export const mainContentViolet: TextStyle = {
-  ...mediumFont,
-  color: Colors.secondaryViolet,
-}
-
 export const secondaryContent: TextStyle = {
   ...mediumFont,
   ...base,
   color: Colors.secondaryText,
-  lineHeight: mediumLineHeight,
 }
 
 export const tertiaryContent: TextStyle = {
   ...smallFont,
   color: Colors.tertiaryText,
-  lineHeight: smallLineHeight,
 }
 
 export const quaternaryContent: TextStyle = {
   ...smallFont,
   color: Colors.invertedText,
-  lineHeight: smallLineHeight,
 }
 
 export const description: TextStyle = {
   ...smallFont,
   color: Colors.primaryText,
-  lineHeight: smallLineHeight,
-}
-
-export const disclaimer: TextStyle = {
-  ...smallFont,
-  ...monospace,
-  color: Colors.secondaryText,
 }
 
 export const label: TextStyle = {
@@ -204,32 +178,21 @@ export const label: TextStyle = {
 }
 
 export const error: TextStyle = {
-  color: Colors.defaultRed,
-  fontSize: smaller,
-  fontWeight: heavyWeight,
+  ...smallFont,
+  ...bold,
+  color: Colors.primaryRed,
 }
 
 // Forms
 export const primaryTextInput: TextStyle = {
+  ...largerFont,
   ...extraBold,
-  fontSize: larger,
-  lineHeight: largest,
-  textAlign: "center",
   color: Colors.primaryText,
 }
 
 export const secondaryTextInput: TextStyle = {
-  fontSize: medium,
-  lineHeight: large,
+  ...mediumFont,
   color: Colors.primaryText,
-}
-
-// Navigation
-export const navHeader: TextStyle = {
-  ...largeFont,
-  ...bold,
-  color: Colors.white,
-  textTransform: "uppercase",
 }
 
 // Tappables
@@ -240,8 +203,8 @@ export const tappableListItem: TextStyle = {
 
 // Buttons
 export const buttonText: TextStyle = {
-  fontSize: large,
-  fontWeight: heavyWeight,
+  ...largeFont,
+  ...bold,
 }
 
 export const buttonTextDark: TextStyle = {
@@ -277,23 +240,4 @@ export const buttonTextSecondary: TextStyle = {
 export const buttonTextSecondaryInverted: TextStyle = {
   ...buttonText,
   color: Colors.white,
-}
-
-export const buttonTextTinyDark: TextStyle = {
-  ...buttonTextDark,
-  ...tinyFont,
-}
-
-// Assessment
-export const assessmentInstruction: TextStyle = {
-  ...mediumFont,
-  color: Colors.secondaryHeaderText,
-  lineHeight: smallerLineHeight,
-}
-
-export const inputLabel: TextStyle = {
-  ...bold,
-  color: Colors.primaryText,
-  fontSize: large,
-  lineHeight: mediumLineHeight,
 }

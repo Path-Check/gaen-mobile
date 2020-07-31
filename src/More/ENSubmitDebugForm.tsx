@@ -10,8 +10,8 @@ import {
   TextInput,
   View,
   Keyboard,
+  SafeAreaView,
 } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
@@ -201,7 +201,7 @@ const style = StyleSheet.create({
   },
   textInput: {
     ...Typography.secondaryTextInput,
-    ...Outlines.textInput,
+    ...Outlines.textInputBorder,
     padding: Spacing.xSmall,
     borderColor: Colors.formInputBorder,
   },
@@ -212,7 +212,7 @@ const style = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.level1,
+    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),

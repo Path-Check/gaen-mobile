@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
 
 import { Screens } from "../navigation"
@@ -10,7 +9,6 @@ import { Icons, Images } from "../assets"
 
 const PersonalPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
-  useStatusBarEffect("dark-content")
   const { t } = useTranslation()
 
   const explanationScreenContent = {
@@ -24,6 +22,7 @@ const PersonalPrivacy: FunctionComponent = () => {
 
   const explanationScreenStyles = {
     iconStyle: IconStyle.Blue,
+    statusBarStyle: "dark-content" as const,
   }
 
   const explanationScreenActions = {

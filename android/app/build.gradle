@@ -8,7 +8,6 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     btdebug: ".env.bt",
-    btstaging: ".env.bt",
     btrelease: ".env.bt.release",
 ]
 
@@ -89,8 +88,6 @@ apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.grad
 project.ext.react = [
     entryFile: "index.js",
     bundleInBtDebug: false,
-    bundleInBtStaging: true,
-    devDisabledInBtStaging: true,
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -187,10 +184,6 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.debug
-            matchingFallbacks = ['debug']
-        }
-        staging {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['debug']
         }
