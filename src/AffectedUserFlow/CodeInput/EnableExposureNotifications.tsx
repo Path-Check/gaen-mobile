@@ -84,13 +84,13 @@ const style = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextPrimary,
+    ...Typography.buttonPrimaryText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 

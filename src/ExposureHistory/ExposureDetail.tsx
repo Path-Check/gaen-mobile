@@ -208,10 +208,10 @@ const style = StyleSheet.create({
     color: Colors.primaryText,
   },
   nextStepsButton: {
-    ...Buttons.largeBlue,
+    ...Buttons.primary,
   },
   nextStepsButtonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
 })
 

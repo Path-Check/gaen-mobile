@@ -17,7 +17,7 @@ import { useStatusBarEffect } from "../navigation"
 import { Screens } from "../navigation"
 
 import { Images, Icons } from "../assets"
-import { Iconography, Spacing, Colors, Typography } from "../styles"
+import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
 
 export const ExportIntro = (): JSX.Element => {
   const { t } = useTranslation()
@@ -82,7 +82,9 @@ const style = StyleSheet.create({
   },
   iconContainerCircle: {
     ...Iconography.largeIcon,
+    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.white,
+    marginBottom: Spacing.large,
   },
   contentText: {
     ...Typography.secondaryContent,

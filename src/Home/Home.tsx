@@ -106,11 +106,11 @@ const style = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   button: {
-    ...Buttons.largeWhite,
+    ...Buttons.primaryInverted,
     width: "100%",
   },
   buttonText: {
-    ...Typography.buttonTextDark,
+    ...Typography.buttonPrimaryInvertedText,
   },
 })
 

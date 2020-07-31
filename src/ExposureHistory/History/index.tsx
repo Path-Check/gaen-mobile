@@ -101,7 +101,7 @@ const style = StyleSheet.create({
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
-    ...Buttons.tinyTeritiaryRounded,
+    ...Buttons.tinyRounded,
     height: Spacing.xxLarge,
     width: Spacing.xxLarge,
   },

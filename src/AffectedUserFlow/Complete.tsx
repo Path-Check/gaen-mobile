@@ -62,10 +62,10 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   button: {
-    ...Buttons.largeBlue,
+    ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
 })
 
