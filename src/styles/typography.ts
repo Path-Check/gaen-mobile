@@ -202,42 +202,41 @@ export const tappableListItem: TextStyle = {
 }
 
 // Buttons
-export const buttonText: TextStyle = {
+const baseButtonText: TextStyle = {
   ...largeFont,
   ...bold,
 }
 
-export const buttonTextDark: TextStyle = {
-  ...buttonText,
+const buttonTextSmall: TextStyle = {
+  ...mediumFont,
+}
+
+export const buttonPrimaryText: TextStyle = {
+  ...baseButtonText,
+  color: Colors.white,
+}
+
+export const buttonPrimaryInvertedText: TextStyle = {
+  ...baseButtonText,
   color: Colors.primaryViolet,
 }
 
-export const buttonTextLight: TextStyle = {
-  ...buttonText,
+export const buttonPrimaryDisabledText: TextStyle = {
+  ...baseButtonText,
   color: Colors.white,
 }
 
-export const buttonTextPrimary: TextStyle = {
-  ...buttonText,
-  color: Colors.white,
+export const buttonPrimaryInvertedDisabledText: TextStyle = {
+  ...baseButtonText,
+  color: Colors.lighterGray,
 }
 
-export const buttonTextPrimaryDisabled: TextStyle = {
-  ...buttonText,
-  color: Colors.white,
-}
-
-export const buttonTextPrimaryInverted: TextStyle = {
-  ...buttonText,
-  color: Colors.primaryViolet,
-}
-
-export const buttonTextSecondary: TextStyle = {
-  ...buttonText,
+export const buttonSecondaryText: TextStyle = {
+  ...buttonTextSmall,
   color: Colors.darkGray,
 }
 
-export const buttonTextSecondaryInverted: TextStyle = {
-  ...buttonText,
-  color: Colors.white,
+export const buttonSecondaryInvertedText: TextStyle = {
+  ...buttonTextSmall,
+  color: Colors.lighterGray,
 }

@@ -232,10 +232,10 @@ const style = StyleSheet.create({
     color: Colors.invertedText,
   },
   button: {
-    ...Buttons.largeWhite,
+    ...Buttons.primaryInverted,
   },
   buttonText: {
-    ...Typography.buttonTextDark,
+    ...Typography.buttonPrimaryInvertedText,
   },
   checkbox: {
     ...Forms.checkbox,

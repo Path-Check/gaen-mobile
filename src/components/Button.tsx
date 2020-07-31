@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
   ActivityIndicator,
   StyleSheet,
@@ -22,7 +22,7 @@ interface ButtonProps {
   testID?: string
 }
 
-export const Button = ({
+export const Button: FunctionComponent<ButtonProps> = ({
   label,
   onPress,
   disabled,
@@ -31,8 +31,12 @@ export const Button = ({
   textStyle,
   invert,
   testID,
-}: ButtonProps): JSX.Element => {
-  const style = invert ? darkStyle : lightStyle
+}) => {
+  const buttonColorStyle = invert ? Buttons.primaryInverted : Buttons.primary
+  const buttonStyles =
+    disabled || loading
+      ? { ...buttonColorStyle, ...style.buttonDisabled, ...buttonStyle }
+      : { ...buttonColorStyle, ...style.buttonEnabled, ...buttonStyle }
   const buttonTextStyle =
     disabled || loading
       ? { ...style.text, ...style.textDisabled, ...textStyle }
@@ -45,7 +49,7 @@ export const Button = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={[style.button, buttonStyle]}
+      style={buttonStyles}
       testID={testID}
     >
       {loading ? (
@@ -57,35 +61,20 @@ export const Button = ({
   )
 }
 
-/* eslint-disable react-native/no-unused-styles */
-const lightStyle = StyleSheet.create({
-  button: {
-    ...Buttons.largeWhite,
+const style = StyleSheet.create({
+  buttonDisabled: {
+    ...Buttons.primaryInvertedDisabled,
+  },
+  buttonEnabled: {
+    ...Buttons.primaryInverted,
   },
   text: {
     textAlign: "center",
   },
   textEnabled: {
-    ...Typography.buttonTextDark,
+    ...Typography.buttonPrimaryInvertedText,
   },
   textDisabled: {
-    ...Typography.buttonTextDark,
-    opacity: 0.5,
-  },
-})
-
-const darkStyle = StyleSheet.create({
-  button: {
-    ...Buttons.largeBlue,
-  },
-  text: {
-    textAlign: "center",
-  },
-  textEnabled: {
-    ...Typography.buttonTextLight,
-  },
-  textDisabled: {
-    ...Typography.buttonTextLight,
-    opacity: 0.5,
+    ...Typography.buttonPrimaryInvertedDisabledText,
   },
 })

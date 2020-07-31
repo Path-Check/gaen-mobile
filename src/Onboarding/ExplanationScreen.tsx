@@ -193,16 +193,16 @@ const style = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   primaryButton: {
-    ...Buttons.largeSecondaryBlue,
+    ...Buttons.primary,
   },
   secondaryButton: {
-    ...Buttons.mediumTransparent,
+    ...Buttons.secondary,
   },
   primaryButtonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

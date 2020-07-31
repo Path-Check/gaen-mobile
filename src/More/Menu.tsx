@@ -159,11 +159,11 @@ const style = StyleSheet.create({
     margin: Spacing.medium,
   },
   button: {
-    ...Buttons.largeSecondaryBlue,
+    ...Buttons.primary,
     marginTop: Spacing.medium,
   },
   buttonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
   icon: {
     maxWidth: Iconography.small,

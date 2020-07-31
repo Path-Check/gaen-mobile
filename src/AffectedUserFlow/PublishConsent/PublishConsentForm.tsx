@@ -131,13 +131,13 @@ const style = StyleSheet.create({
     ...Buttons.primaryInverted,
   },
   buttonText: {
-    ...Typography.buttonTextPrimaryInverted,
+    ...Typography.buttonPrimaryInvertedText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondaryInverted,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

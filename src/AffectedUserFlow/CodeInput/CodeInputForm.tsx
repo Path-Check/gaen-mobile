@@ -243,19 +243,19 @@ const style = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextPrimary,
+    ...Typography.buttonPrimaryText,
   },
   disabledButton: {
     ...Buttons.primaryDisabled,
   },
   disabledButtonText: {
-    ...Typography.buttonTextPrimaryDisabled,
+    ...Typography.buttonPrimaryDisabledText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 
