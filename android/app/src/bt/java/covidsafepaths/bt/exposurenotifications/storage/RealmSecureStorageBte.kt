@@ -10,6 +10,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import covidsafepaths.bt.MainApplication
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmResults
 import java.security.SecureRandom
 
 
@@ -125,7 +126,8 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 // Keep track of the exposures already handled and remove them when we find matching windows.
-                val exposureEntities: MutableList<ExposureEntity> = db.where(ExposureEntity::class.java).findAll()
+                val results: RealmResults<ExposureEntity> = db.where(ExposureEntity::class.java).findAll()
+                val exposureEntities: MutableList<ExposureEntity> = db.copyFromRealm(results)
                 for (exposureWindow in exposureWindows) {
                     var found = false
                     for (i in exposureEntities.indices) {
