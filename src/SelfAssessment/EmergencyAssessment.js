@@ -144,10 +144,10 @@ const agreeOption = {
 
 const style = StyleSheet.create({
   button: {
-    ...Buttons.largeBlue,
+    ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
     textAlign: "center",
   },
   boldText: {

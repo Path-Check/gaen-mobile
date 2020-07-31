@@ -228,7 +228,7 @@ const style = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextPrimary,
+    ...Typography.buttonPrimaryText,
   },
 })
 
