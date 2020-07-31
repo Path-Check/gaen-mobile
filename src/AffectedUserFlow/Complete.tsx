@@ -21,6 +21,7 @@ export const ExportComplete: FunctionComponent = () => {
 
   const title = t("export.complete_title")
   const body = t("export.complete_body_bluetooth")
+  const doneCaption = t("common.done")
 
   return (
     <View style={style.backgroundImage}>
@@ -31,8 +32,12 @@ export const ExportComplete: FunctionComponent = () => {
             <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
-          <TouchableOpacity style={style.button} onPress={handleOnPressDone}>
-            <GlobalText style={style.buttonText}>{t("common.done")}</GlobalText>
+          <TouchableOpacity
+            style={style.button}
+            onPress={handleOnPressDone}
+            accessibilityLabel={doneCaption}
+          >
+            <GlobalText style={style.buttonText}>{doneCaption}</GlobalText>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -172,6 +172,7 @@ const CodeInputForm: FunctionComponent = () => {
           <TouchableOpacity
             onPress={handleOnPressCancel}
             style={style.secondaryButton}
+            accessibilityLabel={t("export.code_input_button_cancel")}
           >
             <GlobalText style={style.secondaryButtonText}>
               {t("export.code_input_button_cancel")}
