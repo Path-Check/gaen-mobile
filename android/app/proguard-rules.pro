@@ -40,3 +40,6 @@
 
 # Joda
 -dontwarn org.joda.convert.**
+
+# [react-native-background-fetch]
+-keep class com.transistorsoft.rnbackgroundfetch.HeadlessTask { *; }
