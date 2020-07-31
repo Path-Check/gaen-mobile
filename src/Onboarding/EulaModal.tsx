@@ -86,33 +86,30 @@ const EulaModal: FunctionComponent = () => {
   }, [eulaPath])
 
   return (
-    <View style={style.container}>
-      <SafeAreaView style={style.mainContainer}>
-        <TouchableOpacity
-          accessibilityLabel={t("label.close")}
-          accessible
-          style={style.closeIcon}
-          onPress={navigation.goBack}
-        >
-          <SvgXml
-            color={Colors.icon}
-            xml={Icons.Close}
-            width={Iconography.xSmall}
-            height={Iconography.xSmall}
+    <SafeAreaView style={style.container}>
+      <TouchableOpacity
+        accessibilityLabel={t("label.close")}
+        accessible
+        style={style.closeIcon}
+        onPress={navigation.goBack}
+      >
+        <SvgXml
+          color={Colors.icon}
+          xml={Icons.Close}
+          width={Iconography.xSmall}
+          height={Iconography.xSmall}
+        />
+      </TouchableOpacity>
+      {html && (
+        <>
+          <WebView
+            onLoad={() => setIsLoading(false)}
+            source={{ html }}
+            onShouldStartLoadWithRequest={shouldStartLoadWithRequestHandler}
           />
-        </TouchableOpacity>
-        {html && (
-          <>
-            <WebView
-              onLoad={() => setIsLoading(false)}
-              source={{ html }}
-              onShouldStartLoadWithRequest={shouldStartLoadWithRequestHandler}
-            />
-            {isLoading ? <LoadingIndicator /> : null}
-          </>
-        )}
-      </SafeAreaView>
-
+          {isLoading ? <LoadingIndicator /> : null}
+        </>
+      )}
       <View style={style.footerContainer}>
         <TouchableOpacity
           style={style.checkboxContainer}
@@ -139,7 +136,7 @@ const EulaModal: FunctionComponent = () => {
           </GlobalText>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -148,9 +145,6 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     height: "100%",
-  },
-  mainContainer: {
-    flex: 1,
   },
   closeIcon: {
     position: "absolute",

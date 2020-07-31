@@ -32,17 +32,13 @@ jest.mock("../locales/eula/ht.html", () => {
 jest.mock("@react-navigation/native")
 
 describe("Welcome", () => {
-  it("won't continue until a user accepts the Terms of Use", () => {
+  it("continues when the user presses the get started button", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const { getByLabelText, getByTestId } = render(<Welcome />)
+    const { getByLabelText } = render(<Welcome />)
     const continueButton = getByLabelText("Get Started")
     fireEvent.press(continueButton)
-
-    expect(navigationSpy).not.toHaveBeenCalled()
-    fireEvent.press(getByTestId("accept-terms-of-use-checkbox"))
-    fireEvent.press(continueButton)
-    expect(navigationSpy).toHaveBeenCalledWith("PersonalPrivacy")
+    expect(navigationSpy).toHaveBeenCalledWith("EulaModal")
   })
 })
