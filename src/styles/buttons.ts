@@ -47,8 +47,8 @@ const white: ViewStyle = {
 }
 
 const disabled: ViewStyle = {
-  backgroundColor: Colors.mediumGray,
-  borderColor: Colors.mediumGray,
+  backgroundColor: Colors.lighterGray,
+  borderColor: Colors.lighterGray,
 }
 
 const tertiaryBlue: ViewStyle = {

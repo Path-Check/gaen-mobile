@@ -129,10 +129,12 @@ const EulaModal: FunctionComponent = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
-          style={style.button}
+          style={boxChecked ? style.button : style.disabledButton}
           disabled={!boxChecked}
         >
-          <GlobalText style={style.buttonText}>
+          <GlobalText
+            style={boxChecked ? style.buttonText : style.disabledButtonText}
+          >
             {t("common.continue")}
           </GlobalText>
         </TouchableOpacity>
@@ -186,8 +188,14 @@ const style = StyleSheet.create({
   button: {
     ...Buttons.primaryInverted,
   },
+  disabledButton: {
+    ...Buttons.primaryInvertedDisabled,
+  },
   buttonText: {
     ...Typography.buttonPrimaryInvertedText,
+  },
+  disabledButtonText: {
+    ...Typography.buttonPrimaryInvertedDisabledText,
   },
 })
 
