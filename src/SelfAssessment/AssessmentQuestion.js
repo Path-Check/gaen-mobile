@@ -64,7 +64,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   const options =
     displayAsOption &&
     option.values.reduce((result, option, index) => {
-      if (option.label !== 'None') {
+      if (option.label !== "None") {
         result.push(
           <AssessmentOption
             answer={selectedValues.find((v) => v.index === index)}
@@ -74,7 +74,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
             option={option}
             isSelected={selectedValues.some((v) => v.index === index)}
             optionType={question.screen_type}
-          />
+          />,
         )
       }
       return result
@@ -85,10 +85,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     if (question.question_type === QUESTION_TYPE_MULTI) {
       return setSelectedValues((values) => {
         // TODO: Better way to filter single value questions?
-        const singleValueQuestions = [
-          "Choose not to answer",
-          "None",
-        ]
+        const singleValueQuestions = ["Choose not to answer", "None"]
         // this looks for an existing value inside the selected values array
         // which indicates user unselected the value
         const unselectedValue = values.some((v) => v.index === index)
@@ -110,7 +107,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
           return unselectedValue
             ? unselectSingleValueQuestion.filter((v) => v.index !== index)
             : [...unselectSingleValueQuestion, { index, value }]
-          }
+        }
       })
     }
     return setSelectedValues([{ index, value }])
@@ -123,7 +120,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   const handleOnNextPress = () => {
     // if nothing is selected on multi question select none value from the survey json
     if (!selectedValues.length) {
-      const index = option.values.findIndex(value => value.label === 'None')
+      const index = option.values.findIndex((value) => value.label === "None")
       const value = option.values[index].value
       setSelectedValues([{ index, value }])
     }
