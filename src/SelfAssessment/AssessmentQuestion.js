@@ -63,17 +63,22 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
 
   const options =
     displayAsOption &&
-    option.values.map((option, index) => (
-      <AssessmentOption
-        answer={selectedValues.find((v) => v.index === index)}
-        index={index}
-        key={option.value}
-        onSelect={(value) => onSelectHandler(value, index)}
-        option={option}
-        isSelected={selectedValues.some((v) => v.index === index)}
-        optionType={question.screen_type}
-      />
-    ))
+    option.values.reduce((result, option, index) => {
+      if (option.label !== 'None') {
+        result.push(
+          <AssessmentOption
+            answer={selectedValues.find((v) => v.index === index)}
+            index={index}
+            key={option.value}
+            onSelect={(value) => onSelectHandler(value, index)}
+            option={option}
+            isSelected={selectedValues.some((v) => v.index === index)}
+            optionType={question.screen_type}
+          />
+        )
+      }
+      return result
+    }, [])
 
   /** @type {(value: string, index: number) => void} */
   const onSelectHandler = (value, index) => {
@@ -82,7 +87,6 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         // TODO: Better way to filter single value questions?
         const singleValueQuestions = [
           "Choose not to answer",
-          "None of the above",
           "None",
         ]
         // this looks for an existing value inside the selected values array
@@ -106,7 +110,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
           return unselectedValue
             ? unselectSingleValueQuestion.filter((v) => v.index !== index)
             : [...unselectSingleValueQuestion, { index, value }]
-        }
+          }
       })
     }
     return setSelectedValues([{ index, value }])
@@ -115,6 +119,16 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   useEffect(() => {
     onChange(selectedValues)
   }, [selectedValues, onChange])
+
+  const handleOnNextPress = () => {
+    // if nothing is selected on multi question select none value from the survey json
+    if (!selectedValues.length) {
+      const index = option.values.findIndex(value => value.label === 'None')
+      const value = option.values[index].value
+      setSelectedValues([{ index, value }])
+    }
+    onNext()
+  }
 
   return (
     <SafeAreaView style={style.container}>
@@ -134,8 +148,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       </ScrollView>
       <View style={style.footer}>
         <Button
-          disabled={!selectedValues.length}
-          onPress={onNext}
+          onPress={handleOnNextPress}
           label={t("assessment.next")}
           buttonStyle={style.button}
           textStyle={style.buttonText}
