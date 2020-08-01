@@ -106,3 +106,5 @@ ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 # Firebase
 android/app/google-services.json
+# test coverage
+test-coverage

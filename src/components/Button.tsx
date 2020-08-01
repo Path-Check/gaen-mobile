@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
   ActivityIndicator,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 
-import { RTLEnabledText } from "./RTLEnabledText"
+import { GlobalText } from "./GlobalText"
 
 import { Buttons, Typography } from "../styles"
 
@@ -16,25 +16,31 @@ interface ButtonProps {
   onPress: () => void
   loading?: boolean
   disabled?: boolean
-  style?: ViewStyle
+  buttonStyle?: ViewStyle
   textStyle?: TextStyle
   invert?: boolean
+  testID?: string
 }
 
-export const Button = ({
+export const Button: FunctionComponent<ButtonProps> = ({
   label,
   onPress,
   disabled,
   loading,
-  style,
+  buttonStyle,
   textStyle,
   invert,
-}: ButtonProps): JSX.Element => {
-  const styles = invert ? darkStyle : lightStyle
+  testID,
+}) => {
+  const buttonColorStyle = invert ? Buttons.primaryInverted : Buttons.primary
+  const buttonStyles =
+    disabled || loading
+      ? { ...buttonColorStyle, ...style.buttonDisabled, ...buttonStyle }
+      : { ...buttonColorStyle, ...style.buttonEnabled, ...buttonStyle }
   const buttonTextStyle =
     disabled || loading
-      ? { ...styles.textDisabled, ...textStyle }
-      : { ...styles.textEnabled, ...textStyle }
+      ? { ...style.text, ...style.textDisabled, ...textStyle }
+      : { ...style.text, ...style.textEnabled, ...textStyle }
 
   return (
     <TouchableOpacity
@@ -43,40 +49,32 @@ export const Button = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={[styles.button, style]}
+      style={buttonStyles}
+      testID={testID}
     >
       {loading ? (
         <ActivityIndicator size={"large"} />
       ) : (
-        <RTLEnabledText style={buttonTextStyle}>{label}</RTLEnabledText>
+        <GlobalText style={buttonTextStyle}>{label}</GlobalText>
       )}
     </TouchableOpacity>
   )
 }
 
-/* eslint-disable react-native/no-unused-styles */
-const lightStyle = StyleSheet.create({
-  button: {
-    ...Buttons.largeWhite,
+const style = StyleSheet.create({
+  buttonDisabled: {
+    ...Buttons.primaryInvertedDisabled,
+  },
+  buttonEnabled: {
+    ...Buttons.primaryInverted,
+  },
+  text: {
+    textAlign: "center",
   },
   textEnabled: {
-    ...Typography.buttonTextDark,
+    ...Typography.buttonPrimaryInvertedText,
   },
   textDisabled: {
-    ...Typography.buttonTextDark,
-    opacity: 0.5,
-  },
-})
-
-const darkStyle = StyleSheet.create({
-  button: {
-    ...Buttons.largeBlue,
-  },
-  textEnabled: {
-    ...Typography.buttonTextLight,
-  },
-  textDisabled: {
-    ...Typography.buttonTextLight,
-    opacity: 0.5,
+    ...Typography.buttonPrimaryInvertedDisabledText,
   },
 })

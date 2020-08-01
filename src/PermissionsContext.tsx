@@ -3,18 +3,19 @@ import React, {
   createContext,
   useState,
   useEffect,
+  useContext,
   useCallback,
 } from "react"
-
+import { Platform, AppState } from "react-native"
 import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
-import { Platform } from "react-native"
+
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
 
-type ENEnablement = `DISABLED` | `ENABLED`
-type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
+export type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
+export type ENEnablement = `DISABLED` | `ENABLED`
 import gaenStrategy from "./gaen"
 
 export type ENPermissionStatus = [ENAuthorization, ENEnablement]
@@ -22,7 +23,7 @@ export type ENPermissionStatus = [ENAuthorization, ENEnablement]
 const initialENStatus: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
 const { permissionStrategy } = gaenStrategy
 
-interface PermissionContextState {
+interface PermissionsContextState {
   notification: {
     status: PermissionStatus
     check: () => void
@@ -48,7 +49,7 @@ const initialState = {
   },
 }
 
-const PermissionsContext = createContext<PermissionContextState>(initialState)
+const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 export interface PermissionStrategy {
   statusSubscription: (
@@ -76,6 +77,11 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    const handleAppStateChange = () => {
+      checkENPermission()
+    }
+
+    AppState.addEventListener("change", handleAppStateChange)
     const subscription = permissionStrategy.statusSubscription(
       (status: ENPermissionStatus) => {
         setExposureNotificationsPermission(status)
@@ -94,6 +100,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 
     return () => {
       subscription?.remove()
+      AppState.removeEventListener("change", handleAppStateChange)
     }
   }, [checkENPermission])
 
@@ -133,5 +140,12 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   )
 }
 
-export { PermissionsProvider }
-export default PermissionsContext
+const usePermissionsContext = (): PermissionsContextState => {
+  const context = useContext(PermissionsContext)
+  if (context === undefined) {
+    throw new Error("PermissionsContext must be used with a provider")
+  }
+  return context
+}
+
+export { PermissionsContext, PermissionsProvider, usePermissionsContext }

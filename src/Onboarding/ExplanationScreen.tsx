@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
   ImageBackground,
   StyleSheet,
@@ -11,10 +11,17 @@ import {
 import { SvgXml } from "react-native-svg"
 
 import { Button } from "../components/Button"
-import { useStatusBarEffect } from "../navigation"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { useStatusBarEffect, StatusBarStyle } from "../navigation"
+import { GlobalText } from "../components/GlobalText"
 
-import { Buttons, Colors, Spacing, Iconography, Typography } from "../styles"
+import {
+  Outlines,
+  Buttons,
+  Colors,
+  Spacing,
+  Iconography,
+  Typography,
+} from "../styles"
 
 export enum IconStyle {
   Blue,
@@ -40,6 +47,7 @@ type ExplanationScreenStyles = {
   secondaryButtonTextStyle?: TextStyle
   backgroundStyle?: ViewStyle
   iconStyle: IconStyle
+  statusBarStyle: StatusBarStyle
 }
 
 type ExplanationScreenActions = {
@@ -53,142 +61,148 @@ interface ExplanationScreenProps {
   explanationScreenActions: ExplanationScreenActions
 }
 
-const ExplanationScreen = ({
+const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
   explanationScreenContent,
   explanationScreenStyles,
   explanationScreenActions,
-}: ExplanationScreenProps): JSX.Element => {
-  useStatusBarEffect("dark-content")
+}: ExplanationScreenProps) => {
+  useStatusBarEffect(explanationScreenStyles.statusBarStyle)
 
   const determineIconStyle = (iconStyle: IconStyle): ViewStyle => {
     switch (iconStyle) {
       case IconStyle.Blue:
-        return styles.blueIcon
+        return { ...style.icon, ...style.blueIcon }
       case IconStyle.Gold:
-        return styles.goldIcon
+        return { ...style.icon, ...style.goldIcon }
     }
   }
 
   const primaryButtonTextStyles = {
-    ...styles.primaryButtonText,
+    ...style.primaryButtonText,
     ...explanationScreenStyles.primaryButtonTextStyle,
   }
 
   const secondaryButtonTextStyles = {
-    ...styles.secondaryButtonText,
+    ...style.secondaryButtonText,
     ...explanationScreenStyles.secondaryButtonTextStyle,
   }
 
   const headerStyles = {
-    ...styles.headerText,
+    ...style.headerText,
     ...explanationScreenStyles.headerStyle,
   }
 
   const contentStyles = {
-    ...styles.contentText,
+    ...style.contentText,
     ...explanationScreenStyles.bodyStyle,
   }
 
   const primaryButtonStyles = {
-    ...styles.primaryButton,
+    ...style.primaryButton,
     ...explanationScreenStyles.primaryButtonContainerStyle,
   }
 
   const secondaryButtonStyles = {
-    ...styles.secondaryButton,
+    ...style.secondaryButton,
     ...explanationScreenStyles.secondaryButtonContainerStyle,
   }
 
   return (
-    <View style={styles.outerContainer}>
+    <View>
       <ImageBackground
         source={explanationScreenContent.backgroundImage}
-        style={[styles.background, explanationScreenStyles.backgroundStyle]}
+        style={[style.background, explanationScreenStyles.backgroundStyle]}
       />
-      <View style={styles.content}>
+      <View style={style.content}>
         <ScrollView
           alwaysBounceVertical={false}
-          style={styles.innerContainer}
-          contentContainerStyle={{ paddingBottom: Spacing.large }}
+          contentContainerStyle={style.innerContentContainer}
         >
-          <View style={determineIconStyle(explanationScreenStyles.iconStyle)}>
-            <SvgXml
-              xml={explanationScreenContent.icon}
-              accessible
-              accessibilityLabel={explanationScreenContent.iconLabel}
-            />
+          <View>
+            <View style={determineIconStyle(explanationScreenStyles.iconStyle)}>
+              <SvgXml
+                xml={explanationScreenContent.icon}
+                accessible
+                accessibilityLabel={explanationScreenContent.iconLabel}
+                width={Iconography.medium}
+              />
+            </View>
+            <GlobalText style={headerStyles}>
+              {explanationScreenContent.header}
+            </GlobalText>
+            <GlobalText style={contentStyles}>
+              {explanationScreenContent.body}
+            </GlobalText>
           </View>
-          <RTLEnabledText style={headerStyles}>
-            {explanationScreenContent.header}
-          </RTLEnabledText>
-          <RTLEnabledText style={contentStyles}>
-            {explanationScreenContent.body}
-          </RTLEnabledText>
-        </ScrollView>
-        <Button
-          label={explanationScreenContent.primaryButtonLabel}
-          onPress={explanationScreenActions.primaryButtonOnPress}
-          style={primaryButtonStyles}
-          textStyle={primaryButtonTextStyles}
-        />
-        {explanationScreenActions.secondaryButtonOnPress &&
-          explanationScreenContent.secondaryButtonLabel && (
+          <View>
             <Button
-              label={explanationScreenContent.secondaryButtonLabel}
-              onPress={explanationScreenActions.secondaryButtonOnPress}
-              style={secondaryButtonStyles}
-              textStyle={secondaryButtonTextStyles}
+              label={explanationScreenContent.primaryButtonLabel}
+              onPress={explanationScreenActions.primaryButtonOnPress}
+              buttonStyle={primaryButtonStyles}
+              textStyle={primaryButtonTextStyles}
             />
-          )}
+            {explanationScreenActions.secondaryButtonOnPress &&
+              explanationScreenContent.secondaryButtonLabel && (
+                <Button
+                  label={explanationScreenContent.secondaryButtonLabel}
+                  onPress={explanationScreenActions.secondaryButtonOnPress}
+                  buttonStyle={secondaryButtonStyles}
+                  textStyle={secondaryButtonTextStyles}
+                />
+              )}
+          </View>
+        </ScrollView>
       </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-    backgroundColor: Colors.primaryBackground,
-  },
-  innerContainer: {
-    paddingVertical: Spacing.large,
-  },
+const style = StyleSheet.create({
   background: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
     position: "absolute",
   },
+  innerContentContainer: {
+    height: "100%",
+    justifyContent: "space-between",
+    paddingBottom: Spacing.large,
+  },
+  icon: {
+    ...Iconography.largeIcon,
+    borderRadius: Outlines.borderRadiusMax,
+    marginTop: Spacing.xxHuge,
+    marginBottom: Spacing.large,
+  },
   blueIcon: {
-    ...Iconography.largeBlueIcon,
-    marginBottom: Spacing.xHuge,
+    backgroundColor: Colors.tertiaryViolet,
   },
   goldIcon: {
-    ...Iconography.largeGoldIcon,
-    marginBottom: Spacing.xHuge,
+    backgroundColor: Colors.secondaryYellow,
   },
   content: {
-    flex: 1,
-    padding: Spacing.large,
+    paddingHorizontal: Spacing.large,
   },
   headerText: {
     ...Typography.header2,
   },
   contentText: {
-    ...Typography.mainContentViolet,
-    marginTop: Spacing.xLarge,
+    ...Typography.mainContent,
+    color: Colors.secondaryViolet,
+    marginTop: Spacing.medium,
   },
   primaryButton: {
-    ...Buttons.largeSecondaryBlue,
+    ...Buttons.primary,
   },
   secondaryButton: {
-    ...Buttons.largeTransparent,
+    ...Buttons.secondary,
   },
   primaryButtonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

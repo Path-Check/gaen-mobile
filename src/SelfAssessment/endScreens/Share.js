@@ -1,10 +1,11 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import env from "react-native-config"
+import { StyleSheet } from "react-native"
 
-import { Info } from "../Info"
-import { InfoText } from "../InfoText"
-import { Button } from "../Button"
+import { AssessmentLayout } from "../AssessmentLayout"
+import InfoText from "../InfoText"
+import { Button } from "../../components/Button"
 
 import { Icons } from "../../assets"
 import { Colors } from "../../styles"
@@ -19,15 +20,16 @@ export const Share = ({ navigation }) => {
   const handleButtonPress = () => navigation.push("AssessmentComplete")
 
   return (
-    <Info
+    <AssessmentLayout
       icon={Icons.AnonymizedDataInverted}
       backgroundColor={Colors.invertedSecondaryBackground}
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t("assessment.share_cta")}
-          backgroundColor={Colors.white}
-          textColor={Colors.black}
+          label={t("assessment.share_cta")}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
+          testID="assessment-button"
         />
       }
     >
@@ -35,6 +37,15 @@ export const Share = ({ navigation }) => {
         title={t("assessment.share_title")}
         description={t("assessment.share_description", { authority })}
       />
-    </Info>
+    </AssessmentLayout>
   )
 }
+
+const style = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.secondaryViolet,
+  },
+  buttonText: {
+    color: Colors.white,
+  },
+})

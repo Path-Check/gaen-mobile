@@ -10,25 +10,25 @@ import AboutScreen from "./../More/About"
 import LicensesScreen from "./../More/Licenses"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
+import ENSubmitDebugForm from "./../More/ENSubmitDebugForm"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
 import LanguageSelection from "../More/LanguageSelection"
 
 import { MoreStackScreens } from "./index"
 
-import { Colors } from "../styles"
+import { Colors, Headers } from "../styles"
 
 const Stack = createStackNavigator()
 
 const SCREEN_OPTIONS: StackNavigationOptions = {
   headerStyle: {
-    backgroundColor: Colors.primaryViolet,
+    ...Headers.headerStyle,
   },
   headerTitleStyle: {
-    color: Colors.white,
-    textTransform: "uppercase",
+    ...Headers.headerTitleStyle,
   },
   headerBackTitleVisible: false,
-  headerTintColor: Colors.white,
+  headerTintColor: Colors.headerText,
 }
 
 const MoreStack: FunctionComponent = () => {
@@ -59,6 +59,11 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKeyScreen}
+      />
+      <Stack.Screen
+        name={MoreStackScreens.ENSubmitDebugForm}
+        component={ENSubmitDebugForm}
+        options={{ headerTitle: t("screen_titles.debug_form") }}
       />
     </Stack.Navigator>
   )

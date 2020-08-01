@@ -41,12 +41,15 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.pathcheck.covidsafepaths.BuildConfig;
 import org.threeten.bp.Duration;
 
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
+import covidsafepaths.bt.exposurenotifications.ExposureKeyModule;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
+import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 /**
  * A class to encapsulate uploading Diagnosis Keys to one or more key sharing servers.
@@ -98,9 +101,7 @@ public class DiagnosisKeyUploader {
             return Futures.immediateFuture(null);
         }
         Log.d(TAG, "Uploading " + diagnosisKeys.size() + " keys...");
-        // TODO replace with real
-        //return doUpload(diagnosisKeys);
-        return fakeUpload();
+        return doUpload(diagnosisKeys);
     }
 
     /**
@@ -162,6 +163,7 @@ public class DiagnosisKeyUploader {
 
     private ListenableFuture<KeySubmission> addPayload(KeySubmission submission) throws JSONException {
 
+        // TODO DL Change JSON body.
         JSONArray keysJson = new JSONArray();
         try {
             for (DiagnosisKey k : submission.diagnosisKeys) {
@@ -178,9 +180,16 @@ public class DiagnosisKeyUploader {
             throw new RuntimeException(e);
         }
 
+        JSONArray regionJson = new JSONArray();
+        regionJson.put(BuildConfig.REGION_CODES);
+
         submission.payload =
                 new JSONObject()
-                        .put("diagnosisKeys", keysJson);
+                        .put("temporaryExposureKeys", keysJson)
+                        .put("hmackey", ExposureKeyModule.hmacKey)
+                        .put("padding", randomBase64Data(Util.getRandomNumber()))
+                        .put("regions", regionJson)
+                        .put("appPackageName", BuildConfig.ANDROID_APPLICATION_ID);
 
         return FluentFuture.from(Futures.immediateFuture(submission));
     }

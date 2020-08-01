@@ -24,6 +24,7 @@ const NotificationDetails = (): JSX.Element => {
 
   const explanationScreenStyles = {
     iconStyle: iconStyle,
+    statusBarStyle: "dark-content" as const,
   }
 
   const explanationScreenActions = {

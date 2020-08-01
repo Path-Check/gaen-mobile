@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import Icon from "../assets/svgs/check"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
@@ -31,9 +31,9 @@ const Option: FunctionComponent<OptionProps> = ({
 }) => {
   return (
     <TouchableOpacity onPress={onPress} testID={testID || "option"}>
-      <View style={[styles.container, isSelected && styles.containerSelected]}>
+      <View style={[style.container, isSelected && style.containerSelected]}>
         <OptionSelect
-          wrapperStyle={styles.primary}
+          wrapperStyle={style.primary}
           isValidType={isValidType}
           isSelected={isSelected}
           title={title}
@@ -64,13 +64,13 @@ const OptionSelect: FunctionComponent<OptionSelectProps> = ({
 }) => {
   const indicatorStyle =
     inputType === SCREEN_TYPE_CHECKBOX
-      ? styles.indicatorCheck
-      : styles.indicatorRadio
+      ? style.indicatorCheck
+      : style.indicatorRadio
 
   return (
     <View style={wrapperStyle}>
       {isValidType && (
-        <View style={[indicatorStyle, isSelected && styles.indicatorSelected]}>
+        <View style={[indicatorStyle, isSelected && style.indicatorSelected]}>
           {isSelected && inputType === SCREEN_TYPE_CHECKBOX && (
             <SvgXml width={Spacing.medium} xml={icon} />
           )}
@@ -78,14 +78,14 @@ const OptionSelect: FunctionComponent<OptionSelectProps> = ({
             (inputType === SCREEN_TYPE_RADIO || inputType === SCREEN_TYPE_DATE)}
         </View>
       )}
-      <RTLEnabledText style={styles.title} testID="label">
+      <GlobalText style={style.title} testID="label">
         {title}
-      </RTLEnabledText>
+      </GlobalText>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   indicatorRadio: {
     ...Forms.inputIndicator,
     borderRadius: Spacing.medium * 2,
@@ -100,9 +100,12 @@ const styles = StyleSheet.create({
     borderColor: Colors.secondaryBlue,
   },
   title: {
+    ...Typography.largeFont,
+    ...Typography.bold,
+    color: Colors.primaryText,
+    lineHeight: Typography.mediumLineHeight,
     flex: 1,
     flexWrap: "wrap",
-    ...Typography.inputLabel,
   },
   container: {
     backgroundColor: Colors.white,

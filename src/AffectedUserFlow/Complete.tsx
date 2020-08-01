@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 
 import { Stacks } from "../navigation"
 
@@ -21,20 +21,23 @@ export const ExportComplete: FunctionComponent = () => {
 
   const title = t("export.complete_title")
   const body = t("export.complete_body_bluetooth")
+  const doneCaption = t("common.done")
 
   return (
-    <View style={styles.backgroundImage}>
+    <View style={style.backgroundImage}>
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
+        <View style={style.container}>
           <View>
-            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleOnPressDone}>
-            <RTLEnabledText style={styles.buttonText}>
-              {t("common.done")}
-            </RTLEnabledText>
+          <TouchableOpacity
+            style={style.button}
+            onPress={handleOnPressDone}
+            accessibilityLabel={doneCaption}
+          >
+            <GlobalText style={style.buttonText}>{doneCaption}</GlobalText>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -42,7 +45,7 @@ export const ExportComplete: FunctionComponent = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
@@ -64,10 +67,10 @@ const styles = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   button: {
-    ...Buttons.largeBlue,
+    ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryText,
   },
 })
 

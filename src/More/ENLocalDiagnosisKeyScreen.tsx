@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { NavigationProp } from "../navigation"
 
 import { NativeModule } from "../gaen"
@@ -75,17 +75,17 @@ const ENLocalDiagnosisKeyScreen = ({
       data={diagnosisKeys}
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
-        <View style={styles.flatlistRowView}>
-          <RTLEnabledText style={styles.itemText}>
+        <View style={style.flatlistRowView}>
+          <GlobalText style={style.itemText}>
             <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-          </RTLEnabledText>
+          </GlobalText>
         </View>
       )}
     />
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   flatlistRowView: {
     flexDirection: "row",

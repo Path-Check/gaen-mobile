@@ -1,6 +1,8 @@
 import mockAsyncStorage from "@react-native-community/async-storage/jest/async-storage-mock"
 import { NativeModules } from "react-native"
 
+import { initializei18next } from "../src/locales/languages"
+
 // Device locale mocks
 NativeModules.SettingsManager = NativeModules.SettingsManager || {
   settings: { AppleLocale: "en_US" },
@@ -30,3 +32,5 @@ jest.mock(
   () => "push-notification-ios",
 )
 jest.mock("rn-fetch-blob", () => "Blob")
+
+initializei18next(["en"])

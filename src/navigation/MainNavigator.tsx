@@ -4,7 +4,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
-import env from "react-native-config"
+// import env from "react-native-config"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
@@ -12,7 +12,9 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { Screens, Stacks } from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
-import NextSteps from "../ExposureHistory/NextSteps"
+import ExposureDetail from "../ExposureHistory/ExposureDetail"
+
+import { Colors } from "../styles"
 
 const Stack = createStackNavigator()
 
@@ -20,38 +22,61 @@ const SCREEN_OPTIONS = {
   headerShown: false,
 }
 
+const RIGHT_SLIDING_MODAL_OPTIONS = {
+  headerStyle: {
+    backgroundColor: Colors.primaryViolet,
+  },
+  headerTitleStyle: {
+    color: Colors.white,
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.white,
+}
+
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
-  const displayNextSteps = Boolean(
-    env.DISPLAY_SELF_ASSESSMENT === "true" || env.AUTHORITY_ADVICE_URL,
-  )
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
+      <Stack.Navigator>
         {onboardingIsComplete ? (
           <>
-            <Stack.Screen name={"App"} component={MainTabNavigator} />
+            <Stack.Screen
+              name={"App"}
+              component={MainTabNavigator}
+              options={{ ...SCREEN_OPTIONS }}
+            />
             <Stack.Screen
               name={Stacks.AffectedUserStack}
               component={AffectedUserStack}
-              options={{ ...TransitionPresets.ModalTransition }}
+              options={{
+                ...TransitionPresets.ModalTransition,
+                ...SCREEN_OPTIONS,
+              }}
             />
             <Stack.Screen
               name={Screens.MoreInfo}
               component={MoreInfo}
-              options={{ ...TransitionPresets.ModalTransition }}
+              options={{
+                title: "MORE INFO",
+                ...RIGHT_SLIDING_MODAL_OPTIONS,
+              }}
             />
-            {displayNextSteps && (
-              <Stack.Screen
-                name={Screens.NextSteps}
-                component={NextSteps}
-                options={{ ...TransitionPresets.ModalTransition }}
-              />
-            )}
+            <Stack.Screen
+              name={Screens.ExposureDetail}
+              component={ExposureDetail}
+              options={{
+                title: "EXPOSURE",
+                ...RIGHT_SLIDING_MODAL_OPTIONS,
+              }}
+            />
           </>
         ) : (
-          <Stack.Screen name={Stacks.Onboarding} component={OnboardingStack} />
+          <Stack.Screen
+            name={Stacks.Onboarding}
+            component={OnboardingStack}
+            options={{ ...SCREEN_OPTIONS }}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>

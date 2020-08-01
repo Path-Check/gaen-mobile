@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { Button } from "../../components/Button"
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 
 import { Screens, Stacks } from "../../navigation"
 import { Icons, Images } from "../../assets"
@@ -55,14 +55,15 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}
+      style={style.backgroundImage}
+      testID="publish-consent-form"
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={styles.contentContainer}
+          contentContainerStyle={style.contentContainer}
         >
-          <View style={styles.icon}>
+          <View style={style.icon}>
             <SvgXml
               xml={Icons.Bell}
               accessible
@@ -72,9 +73,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             />
           </View>
 
-          <View style={styles.content}>
-            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
+          <View style={style.content}>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
           <View>
@@ -82,16 +83,17 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
               loading={isLoading}
               label={t("export.consent_button_title")}
               onPress={handleOnPressConfirm}
-              style={styles.button}
-              textStyle={styles.buttonText}
+              buttonStyle={style.button}
+              textStyle={style.buttonText}
             />
             <TouchableOpacity
               onPress={handleOnPressCancel}
-              style={styles.secondaryButton}
+              style={style.secondaryButton}
+              accessibilityLabel={t("export.consent_button_cancel")}
             >
-              <RTLEnabledText style={styles.secondaryButtonText}>
+              <GlobalText style={style.secondaryButtonText}>
                 {t("export.consent_button_cancel")}
-              </RTLEnabledText>
+              </GlobalText>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -100,7 +102,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.huge,
@@ -131,13 +133,13 @@ const styles = StyleSheet.create({
     ...Buttons.primaryInverted,
   },
   buttonText: {
-    ...Typography.buttonTextPrimaryInverted,
+    ...Typography.buttonPrimaryInvertedText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondaryInverted,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

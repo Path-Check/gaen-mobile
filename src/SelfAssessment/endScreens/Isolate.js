@@ -1,30 +1,34 @@
 import React, { useContext } from "react"
 import { useTranslation } from "react-i18next"
+import { StyleSheet } from "react-native"
 
 import { AssessmentNavigationContext } from "../Context"
-import { Info } from "../Info"
-import { InfoText } from "../InfoText"
-import { Button } from "../Button"
+import { AssessmentLayout } from "../AssessmentLayout"
+import InfoText from "../InfoText"
+import { Button } from "../../components/Button"
 
 import { Icons, Images } from "../../assets"
 import { Colors } from "../../styles"
 
 /** @type {React.FunctionComponent<{}>} */
 export const Isolate = ({ navigation }) => {
-  let { t } = useTranslation()
-  let { completeRoute } = useContext(AssessmentNavigationContext)
+  const { t } = useTranslation()
+  const { completeRoute } = useContext(AssessmentNavigationContext)
 
   const handleButtonPress = () => navigation.push(completeRoute)
 
   return (
-    <Info
+    <AssessmentLayout
       backgroundColor={Colors.primaryBackgroundFaintShade}
       backgroundImage={Images.IsolatePathBackground}
       icon={Icons.Isolate}
       footer={
         <Button
           onPress={handleButtonPress}
-          title={t("assessment.isolate_cta")}
+          label={t("assessment.isolate_cta")}
+          buttonStyle={style.button}
+          textStyle={style.buttonText}
+          testID="assessment-button"
         />
       }
     >
@@ -32,6 +36,15 @@ export const Isolate = ({ navigation }) => {
         title={t("assessment.isolate_title")}
         description={t("assessment.isolate_description")}
       />
-    </Info>
+    </AssessmentLayout>
   )
 }
+
+const style = StyleSheet.create({
+  button: {
+    backgroundColor: Colors.secondaryViolet,
+  },
+  buttonText: {
+    color: Colors.white,
+  },
+})

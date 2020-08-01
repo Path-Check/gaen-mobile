@@ -10,14 +10,14 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
 
 import { Screens } from "../navigation"
 
 import { Images, Icons } from "../assets"
-import { Iconography, Spacing, Colors, Typography } from "../styles"
+import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
 
 export const ExportIntro = (): JSX.Element => {
   const { t } = useTranslation()
@@ -35,15 +35,15 @@ export const ExportIntro = (): JSX.Element => {
   return (
     <ImageBackground
       source={Images.BlueGradientBackground}
-      style={styles.backgroundImage}
+      style={style.backgroundImage}
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          style={styles.container}
+          contentContainerStyle={style.contentContainer}
+          style={style.container}
         >
-          <View style={styles.headerContainer}>
-            <View style={styles.iconContainerCircle}>
+          <View style={style.headerContainer}>
+            <View style={style.iconContainerCircle}>
               <SvgXml
                 xml={Icons.Heart}
                 width={Iconography.small}
@@ -51,8 +51,8 @@ export const ExportIntro = (): JSX.Element => {
               />
             </View>
 
-            <RTLEnabledText style={styles.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={styles.contentText}>{body}</RTLEnabledText>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
           <Button label={t("common.start")} onPress={handleOnPressNext} />
@@ -62,7 +62,7 @@ export const ExportIntro = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
@@ -82,7 +82,9 @@ const styles = StyleSheet.create({
   },
   iconContainerCircle: {
     ...Iconography.largeIcon,
+    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.white,
+    marginBottom: Spacing.large,
   },
   contentText: {
     ...Typography.secondaryContent,

@@ -1,11 +1,10 @@
-import React, { useContext } from "react"
+import React from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet } from "react-native"
 
-import PermissionsContext from "../PermissionsContext"
+import { usePermissionsContext } from "../PermissionsContext"
 import { Screens } from "../navigation"
-import { useStatusBarEffect } from "../navigation"
 import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"
 
 import { Icons, Images } from "../assets"
@@ -14,9 +13,7 @@ import { Colors } from "../styles"
 const NotificationsPermissions = (): JSX.Element => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { notification } = useContext(PermissionsContext)
-
-  useStatusBarEffect("dark-content")
+  const { notification } = usePermissionsContext()
 
   const requestPermission = async () => {
     await notification.request()
@@ -46,9 +43,10 @@ const NotificationsPermissions = (): JSX.Element => {
   }
 
   const explanationScreenStyles = {
-    headerStyle: styles.header,
-    bodyStyle: styles.body,
+    headerStyle: style.header,
+    bodyStyle: style.body,
     iconStyle: IconStyle.Blue,
+    statusBarStyle: "light-content" as const,
   }
 
   const explanationScreenActions = {
@@ -65,7 +63,7 @@ const NotificationsPermissions = (): JSX.Element => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   header: {
     color: Colors.white,
   },

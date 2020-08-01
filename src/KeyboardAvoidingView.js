@@ -10,7 +10,7 @@ export const KeyboardAvoidingView = ({ behavior, children }) => {
   return (
     <RNKeyboardAvoidingView
       accessible={false}
-      style={styles.keyboardView}
+      style={style.keyboardView}
       autoScrollToFocusedInput
       behavior={isPlatformiOS() ? behavior : null}
     >
@@ -19,7 +19,7 @@ export const KeyboardAvoidingView = ({ behavior, children }) => {
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   keyboardView: {
     flex: 1,
   },

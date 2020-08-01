@@ -42,8 +42,6 @@
 		<key>NSExceptionDomains</key>
 		<dict/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>To simulate sharing diagnosis keys between a central server by scanning QR codes.</string>
 	<key>NSMainNibFile</key>
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
