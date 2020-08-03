@@ -74,6 +74,9 @@ jobs:
       - run: pod install --repo-update
         working-directory: ./ios
 
+      - name: Setup env
+        run: ./bin/set_ha_env_github.sh
+
       # TODO(https://pathcheck.atlassian.net/browse/SAF-250): remove the skip on COVIDSafePathsTests/testRendersWelcomeScreen once it's passing
       - run: |
           xcodebuild test -workspace COVIDSafePaths.xcworkspace \
