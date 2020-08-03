@@ -20,6 +20,8 @@ final class ExposureManager: NSObject {
   @objc static let shared = ExposureManager()
   
   private static let backgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
+
+  private var exposureConfiguration = ExposureConfiguration.placeholder
   
   let manager = ENManager()
   
@@ -65,6 +67,9 @@ final class ExposureManager: NSObject {
       name: .AuthorizationStatusDidChange,
       object: nil
     )
+
+    // Fetch exposure configuration
+    fetchExposureConfiguration()
   }
   
   deinit {
@@ -405,6 +410,17 @@ extension ExposureManager {
 // MARK: - Private
 
 private extension ExposureManager {
+
+  func fetchExposureConfiguration() {
+    APIClient.shared.request(ExposureConfigurationRequest.get, requestType: .exposureConfiguration) { result in
+      switch result {
+      case .success(let exposureConfiguration):
+        self.exposureConfiguration = exposureConfiguration
+      case .failure(let error):
+        print("Error fetching exposure configuration: \(error)")
+      }
+    }
+  }
   
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
