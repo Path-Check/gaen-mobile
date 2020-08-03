@@ -1,6 +1,6 @@
 import React from "react"
 import { I18nextProvider } from "react-i18next"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render, fireEvent, wait } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import i18n from "../locales/languages"
@@ -45,7 +45,7 @@ describe("EulaModal", () => {
     expect(getByLabelText("Close")).toBeDefined()
   })
 
-  it("won't continue until a user accepts the terms of use", () => {
+  it("won't continue until a user accepts the terms of use", async () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
@@ -62,6 +62,8 @@ describe("EulaModal", () => {
     fireEvent.press(getByTestId("accept-terms-of-use-checkbox"))
 
     fireEvent.press(continueButton)
-    expect(navigationSpy).toHaveBeenCalledWith("PersonalPrivacy")
+    await wait(() => {
+      expect(navigationSpy).toHaveBeenCalledWith("PersonalPrivacy")
+    })
   })
 })
