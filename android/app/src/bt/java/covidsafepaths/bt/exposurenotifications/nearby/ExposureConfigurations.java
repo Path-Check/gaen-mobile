@@ -39,7 +39,6 @@ public class ExposureConfigurations {
         return new ExposureConfiguration.ExposureConfigurationBuilder()
                 .setMinimumRiskScore(15)
                 .setDurationAtAttenuationThresholds(
-                        // TODO: Make these settable in debug UI
                         prefs.getAttenuationThreshold1(53), prefs.getAttenuationThreshold2(60))
                 .setAttenuationScores(1, 2, 3, 4, 5, 6, 7, 8)
                 .setDaysSinceLastExposureScores(1, 2, 3, 4, 5, 6, 7, 8)
