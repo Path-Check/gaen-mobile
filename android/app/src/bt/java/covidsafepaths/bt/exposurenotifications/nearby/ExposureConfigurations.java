@@ -29,17 +29,21 @@ import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationShare
  */
 public class ExposureConfigurations {
 
-  private final ExposureNotificationSharedPreferences prefs;
+    private final ExposureNotificationSharedPreferences prefs;
 
-  public ExposureConfigurations(Context context) {
-    prefs = new ExposureNotificationSharedPreferences(context);
-  }
+    public ExposureConfigurations(Context context) {
+        prefs = new ExposureNotificationSharedPreferences(context);
+    }
 
-  public ExposureConfiguration get() {
-    return new ExposureConfiguration.ExposureConfigurationBuilder()
-        .setDurationAtAttenuationThresholds(
-            // TODO: Make these settable in debug UI
-            prefs.getAttenuationThreshold1(50), prefs.getAttenuationThreshold2(60))
-        .build();
-  }
+    public ExposureConfiguration get() {
+        return new ExposureConfiguration.ExposureConfigurationBuilder()
+                .setMinimumRiskScore(15)
+                .setDurationAtAttenuationThresholds(
+                        prefs.getAttenuationThreshold1(53), prefs.getAttenuationThreshold2(60))
+                .setAttenuationScores(1, 2, 3, 4, 5, 6, 7, 8)
+                .setDaysSinceLastExposureScores(1, 2, 3, 4, 5, 6, 7, 8)
+                .setDurationScores(1, 2, 3, 4, 5, 6, 7, 8)
+                .setTransmissionRiskScores(1, 2, 3, 4, 5, 6, 7, 8)
+                .build();
+    }
 }
