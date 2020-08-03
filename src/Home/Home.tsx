@@ -7,6 +7,7 @@ import {
   Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import env from "react-native-config"
 
 import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
@@ -30,8 +31,10 @@ const Home = ({
 
   const isEnabledAndAuthorized = isEnabled && isAuthorized
 
+  const appName = env.IN_APP_NAME || "PathCheck"
+
   const headerText = isEnabledAndAuthorized
-    ? t("home.bluetooth.all_services_on_header")
+    ? appName
     : t("home.bluetooth.tracing_off_header")
   const subheaderText = isEnabledAndAuthorized
     ? t("home.bluetooth.all_services_on_subheader")
