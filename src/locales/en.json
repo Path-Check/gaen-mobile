@@ -143,7 +143,7 @@
     "launch_exposure_notif_subheader": "To be notified about updates to your exposure history, your phone needs permission to exchange anonymous Bluetooth random ID with other devices.\n\nExposure Notifications only work with other devices with the setting enabled.\n\nYou can turn off this notifications at any time.",
     "launch_get_started": "Get Started",
     "launch_next": "Next",
-    "launch_screen1_header": "Welcome to PathCheck",
+    "launch_screen1_header": "Welcome to ",
     "launch_screen2_header_bluetooth": "Your phone remembers other devices it meets but won't identify you to other people.",
     "launch_screen2_subheader_bluetooth": "Nearby phones use Bluetooth to share and save random number strings to recall devices nearby.\n\nIf a person reports a positive diagnosis, their phone's recent random IDs are flagged to anonymously notify others. No locations or personal info is shared.",
     "launch_screen3_header_bluetooth": "Receive notifications when someone you encountered later chooses to report a positive diagnosis.",

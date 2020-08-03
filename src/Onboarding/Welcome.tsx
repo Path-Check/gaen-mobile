@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native"
+import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 import { getLocalNames } from "../locales/languages"
@@ -24,6 +25,7 @@ const Welcome: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
+  const appName = env.IN_APP_NAME || "PathCheck"
 
   return (
     <ImageBackground
@@ -49,6 +51,7 @@ const Welcome: FunctionComponent = () => {
             <GlobalText style={style.mainText}>
               {t("label.launch_screen1_header")}
             </GlobalText>
+            <GlobalText style={style.mainText}>{appName}</GlobalText>
           </View>
           <View style={style.footerContainer}>
             <Button
