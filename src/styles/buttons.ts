@@ -38,22 +38,18 @@ const maxCornerRoundness: ViewStyle = {
 
 const secondaryBlue: ViewStyle = {
   backgroundColor: Colors.secondaryBlue,
-  borderColor: Colors.secondaryBlue,
 }
 
 const white: ViewStyle = {
   backgroundColor: Colors.white,
-  borderColor: Colors.white,
 }
 
 const disabled: ViewStyle = {
   backgroundColor: Colors.mediumGray,
-  borderColor: Colors.mediumGray,
 }
 
 const tertiaryBlue: ViewStyle = {
   backgroundColor: Colors.tertiaryViolet,
-  borderColor: Colors.tertiaryViolet,
 }
 
 const transparent: ViewStyle = {

@@ -24,7 +24,7 @@ const HomeScreen = (): JSX.Element => {
         <SvgXml
           xml={Icons.StateNoContact}
           accessible
-          accessibilityLabel={t("label.check_icon")}
+          accessibilityLabel={t("label.check")}
           width={2 * Layout.screenWidth}
           height={2 * Layout.screenHeight}
         />

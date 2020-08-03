@@ -40,6 +40,7 @@
     "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
+    "continue": "Continue",
     "done": "Done",
     "settings": "Open Settings",
     "something_went_wrong": "Something went wrong",
@@ -126,8 +127,9 @@
     "bell_icon": "Bell icon",
     "bluetooth_icon": "Searching bluetooth device icon",
     "calendar_icon": "Calendar icon",
-    "check_icon": "Checkmark icon",
-    "close_icon": "Close icon",
+    "check": "Checkmark",
+    "checkbox": "Checkbox",
+    "close": "Close",
     "description_optional": "Description (Optional)",
     "email_optional": "Email (Optional)",
     "exposure_icon": "Circle icon with eight dots surrounding it",
@@ -167,9 +169,7 @@
     "self_assessment": "Health"
   },
   "onboarding": {
-    "eula_checkbox": "I accept the licensing agreement",
-    "eula_continue": "Continue",
-    "eula_message": "*You must accept in order to use PathCheck",
+    "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "maybe_later": "Maybe Later",
     "notification_header": "Would you like to receive notifications when you may have crossed paths with the virus?",
     "notification_subheader": "PathCheck partners with local Health Departments to track the virus. If you are located in a jurisdiction served by one of our Health Department partners, you can receive exposure notifications from your Health Department."

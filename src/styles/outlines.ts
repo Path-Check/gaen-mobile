@@ -12,8 +12,13 @@ export const thick = 3
 export const extraThick = 4
 
 export const roundedBorder: ViewStyle = {
-  borderWidth: 1,
+  borderWidth: hairline,
   borderRadius: baseBorderRadius,
+}
+
+export const ovalBorder: ViewStyle = {
+  borderWidth: hairline,
+  borderRadius: borderRadiusMax,
 }
 
 export const glowShadow: ViewStyle = {

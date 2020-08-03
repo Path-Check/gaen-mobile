@@ -2,200 +2,37 @@ import React, { useEffect, useState, FunctionComponent } from "react"
 import {
   TouchableOpacity,
   Linking,
-  Modal,
   StyleSheet,
   View,
   SafeAreaView,
-  StatusBar,
-  Image,
   ActivityIndicator,
+  Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import loadLocalResource from "react-native-local-resource"
 import WebView, { WebViewNavigation } from "react-native-webview"
 import { SvgXml } from "react-native-svg"
+import { useNavigation } from "@react-navigation/native"
 
-import { Button, GlobalText } from "../components"
-import en from "../locales/eula/en.html"
-import es_PR from "../locales/eula/es_PR.html"
-import ht from "../locales/eula/ht.html"
+import { Images } from "../assets"
+import { GlobalText } from "../components/GlobalText"
+import enEulaHtml from "../locales/eula/en.html"
+import esPREulaHtml from "../locales/eula/es_PR.html"
+import htEulaHtml from "../locales/eula/ht.html"
+import { OnboardingScreens } from "../navigation"
 
-import { Icons, Images } from "../assets"
-import { Spacing, Buttons, Colors, Typography, Forms } from "../styles"
-
-type CloseModalIconProps = {
-  closeModal: () => void
-  label: string
-}
-
-const CloseModalIcon: FunctionComponent<CloseModalIconProps> = ({
-  closeModal,
-  label,
-}) => {
-  const size = 20
-  return (
-    <TouchableOpacity
-      accessibilityLabel={label}
-      accessible
-      style={style.closeIcon}
-      onPress={closeModal}
-    >
-      <SvgXml
-        color={Colors.icon}
-        xml={Icons.Close}
-        width={size}
-        height={size}
-      />
-    </TouchableOpacity>
-  )
-}
-
-interface CheckboxProps {
-  label: string
-  onPress: () => void
-  checked?: boolean
-}
-
-const Checkbox: FunctionComponent<CheckboxProps> = ({
-  label,
-  onPress,
-  checked,
-}) => {
-  return (
-    <TouchableOpacity
-      style={style.checkbox}
-      onPress={onPress}
-      accessible
-      accessibilityRole="checkbox"
-      accessibilityLabel={label}
-    >
-      <Image
-        source={checked ? Images.BoxCheckedIcon : Images.BoxUncheckedIcon}
-        style={style.checkboxIcon}
-      />
-      <GlobalText style={style.checkboxText}>{label}</GlobalText>
-    </TouchableOpacity>
-  )
-}
-
-const DEFAULT_EULA_URL = "about:blank"
-
-type AvailableLocale = "en" | "es_PR" | "ht"
-
-const EULA_FILES: Record<AvailableLocale, string> = {
-  ["en"]: en,
-  ["es_PR"]: es_PR,
-  ["ht"]: ht,
-}
-
-type EulaModalProps = {
-  selectedLocale: string
-  onPressModalContinue: () => void
-}
-
-const EulaModal: FunctionComponent<EulaModalProps> = ({
-  selectedLocale,
-  onPressModalContinue,
-}) => {
-  const [modalVisible, setModalVisibility] = useState(false)
-  const [boxChecked, toggleCheckbox] = useState(false)
-  const [html, setHtml] = useState<string | undefined>(undefined)
-  const [isLoading, setIsLoading] = useState(true)
-  const { t } = useTranslation()
-
-  // Pull the EULA in the correct language, with en as fallback
-  const eulaPath = EULA_FILES[selectedLocale as AvailableLocale] || en
-
-  // Any links inside the EULA should launch a separate browser otherwise you can get stuck inside the app
-  const shouldStartLoadWithRequestHandler = (
-    webViewState: WebViewNavigation,
-  ) => {
-    let shouldLoadRequest = true
-    if (webViewState.url !== DEFAULT_EULA_URL) {
-      // If the webpage to load isn't the EULA, load it in a separate browser
-      Linking.openURL(webViewState.url)
-      // Don't load the page if its being handled in a separate browser
-      shouldLoadRequest = false
-    }
-    return shouldLoadRequest
-  }
-
-  // Load the EULA from disk
-  useEffect(() => {
-    const loadEula = async () => {
-      setHtml(await loadLocalResource(eulaPath))
-    }
-    loadEula()
-  }, [selectedLocale, setHtml, eulaPath])
-
-  const canContinue = boxChecked
-
-  const handleOnPressContinue = () => {
-    setModalVisibility(false)
-    onPressModalContinue()
-  }
-
-  const handleOnCloseModal = () => {
-    setModalVisibility(false)
-    setIsLoading(true)
-  }
-
-  const handleOnPressGetStarted = () => setModalVisibility(true)
-  return (
-    <>
-      <TouchableOpacity style={style.button} onPress={handleOnPressGetStarted}>
-        <GlobalText style={style.buttonText}>
-          {t("label.launch_get_started")}
-        </GlobalText>
-      </TouchableOpacity>
-      <Modal animationType="slide" transparent visible={modalVisible}>
-        <View style={style.container}>
-          <StatusBar barStyle={"dark-content"} />
-          <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 7, paddingHorizontal: 5 }}>
-              <CloseModalIcon
-                label={t("label.close_icon")}
-                closeModal={handleOnCloseModal}
-              />
-              {html && (
-                <>
-                  <WebView
-                    style={{ flex: 1 }}
-                    onLoad={() => setIsLoading(false)}
-                    source={{ html }}
-                    onShouldStartLoadWithRequest={
-                      shouldStartLoadWithRequestHandler
-                    }
-                  />
-                  {isLoading ? <LoadingIndicator /> : null}
-                </>
-              )}
-            </View>
-          </SafeAreaView>
-          <SafeAreaView style={{ backgroundColor: Colors.secondaryBlue }}>
-            <View style={style.ctaBox}>
-              <View style={style.checkboxContainer}>
-                <Checkbox
-                  label={t("onboarding.eula_checkbox")}
-                  onPress={() => toggleCheckbox(!boxChecked)}
-                  checked={boxChecked}
-                />
-                <GlobalText style={style.smallDescriptionText}>
-                  {t("onboarding.eula_message")}
-                </GlobalText>
-              </View>
-              <Button
-                label={t("onboarding.eula_continue")}
-                disabled={!canContinue}
-                onPress={handleOnPressContinue}
-              />
-            </View>
-          </SafeAreaView>
-        </View>
-      </Modal>
-    </>
-  )
-}
+import { Icons } from "../assets"
+import {
+  Buttons,
+  Typography,
+  Forms,
+  Layout,
+  Colors,
+  Iconography,
+  Spacing,
+  Outlines,
+} from "../styles"
+import { useStatusBarEffect } from "../navigation"
 
 const LoadingIndicator = () => {
   return (
@@ -205,50 +42,156 @@ const LoadingIndicator = () => {
   )
 }
 
+const DEFAULT_EULA_URL = "about:blank"
+type AvailableLocale = "en" | "es_PR" | "ht"
+
+const EulaModal: FunctionComponent = () => {
+  useStatusBarEffect("dark-content")
+  const [html, setHtml] = useState<string | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState(true)
+  const [boxChecked, toggleCheckbox] = useState(false)
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
+  const navigation = useNavigation()
+
+  const EULA_FILES: Record<AvailableLocale, string> = {
+    ["en"]: enEulaHtml,
+    ["es_PR"]: esPREulaHtml,
+    ["ht"]: htEulaHtml,
+  }
+  const eulaPath = EULA_FILES[localeCode as AvailableLocale] || enEulaHtml
+
+  const checkboxImage = boxChecked
+    ? Images.BoxCheckedIcon
+    : Images.BoxUncheckedIcon
+
+  const shouldStartLoadWithRequestHandler = (
+    webViewState: WebViewNavigation,
+  ) => {
+    let shouldLoadRequest = true
+    if (webViewState.url !== DEFAULT_EULA_URL) {
+      Linking.openURL(webViewState.url)
+      shouldLoadRequest = false
+    }
+    return shouldLoadRequest
+  }
+
+  useEffect(() => {
+    const loadEula = async () => {
+      setHtml(await loadLocalResource(eulaPath))
+    }
+    loadEula()
+  }, [eulaPath])
+
+  return (
+    <SafeAreaView style={style.container}>
+      <TouchableOpacity
+        accessibilityLabel={t("label.close")}
+        accessible
+        style={style.closeIcon}
+        onPress={navigation.goBack}
+      >
+        <SvgXml
+          color={Colors.icon}
+          xml={Icons.Close}
+          width={Iconography.xSmall}
+          height={Iconography.xSmall}
+        />
+      </TouchableOpacity>
+      {html && (
+        <>
+          <WebView
+            onLoad={() => setIsLoading(false)}
+            source={{ html }}
+            onShouldStartLoadWithRequest={shouldStartLoadWithRequestHandler}
+          />
+          {isLoading ? <LoadingIndicator /> : null}
+        </>
+      )}
+      <View style={style.footerContainer}>
+        <TouchableOpacity
+          style={style.checkboxContainer}
+          onPress={() => toggleCheckbox(!boxChecked)}
+          accessible
+          accessibilityRole="checkbox"
+          accessibilityLabel={t("label.checkbox")}
+          testID="accept-terms-of-use-checkbox"
+        >
+          <Image source={checkboxImage} style={style.checkboxIcon} />
+          <GlobalText style={style.checkboxText}>
+            {t("onboarding.eula_agree_terms_of_use")}
+          </GlobalText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
+          style={boxChecked ? style.button : style.disabledButton}
+          disabled={!boxChecked}
+        >
+          <GlobalText
+            style={boxChecked ? style.buttonText : style.disabledButtonText}
+          >
+            {t("common.continue")}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  )
+}
+
 const style = StyleSheet.create({
-  // Container covers the entire screen
   container: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-    color: Colors.primaryText,
     backgroundColor: Colors.white,
-  },
-  ctaBox: {
-    padding: Spacing.medium,
-    backgroundColor: Colors.secondaryBlue,
-  },
-  checkboxContainer: {
-    paddingBottom: Spacing.medium,
+    height: "100%",
   },
   closeIcon: {
-    padding: Spacing.xSmall,
-    alignSelf: "flex-end",
+    position: "absolute",
+    zIndex: Layout.zLevel1,
+    borderRadius: Outlines.borderRadiusMax,
+    backgroundColor: Colors.secondaryBackground,
+    width: Iconography.medium,
+    height: Iconography.medium,
     alignItems: "center",
-    alignContent: "center",
+    justifyContent: "center",
+    right: Spacing.medium,
+    top: Spacing.xHuge,
   },
-  smallDescriptionText: {
-    ...Typography.label,
-    color: Colors.invertedText,
+  loadingIndicator: {
+    justifyContent: "center",
+    height: "100%",
   },
-  button: {
-    ...Buttons.primaryInverted,
+  footerContainer: {
+    backgroundColor: Colors.primaryViolet,
+    padding: Spacing.medium,
   },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
-  },
-  checkbox: {
-    ...Forms.checkbox,
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: Spacing.medium,
   },
   checkboxIcon: {
     ...Forms.checkboxIcon,
   },
   checkboxText: {
     ...Forms.checkboxText,
+    flex: 1,
+    paddingLeft: Spacing.medium,
   },
-  loadingIndicator: {
-    justifyContent: "center",
-    height: "100%",
+  button: {
+    ...Buttons.primaryInverted,
+  },
+  disabledButton: {
+    ...Buttons.primaryInvertedDisabled,
+    backgroundColor: Colors.lighterGray,
+  },
+  buttonText: {
+    ...Typography.buttonPrimaryInvertedText,
+  },
+  disabledButtonText: {
+    ...Typography.buttonPrimaryInvertedDisabledText,
+    color: Colors.mediumGray,
   },
 })
 
