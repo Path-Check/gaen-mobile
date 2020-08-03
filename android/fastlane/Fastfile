@@ -80,19 +80,6 @@ platform :android do
     )
   end
 
-  desc "Submit AAB to AppCenter"
-  lane :android_alpha_aab do |options|
-    # Push to AppCenter
-    # more details: https://github.com/Microsoft/fastlane-plugin-appcenter/
-    appcenter_upload(
-      api_token: options[:apiToken],
-      owner_name: "PathCheck",
-      app_name: options[:appName],
-      destination_type: 'store',
-      file: "app/build/outputs/bundle/release/app-release.aab"
-    )
-  end
-
   desc "Upload to google play store beta track"
   lane :play_store_bt do
 
@@ -105,7 +92,7 @@ platform :android do
       release_status: 'draft',
       skip_upload_apk: true,
       package_name: 'org.pathcheck.covidsafepaths.bt',
-      aab: "app/build/outputs/bundle/release/app.aab"
+      aab: "app/build/outputs/bundle/release/app-release.aab"
     )
 
   end
