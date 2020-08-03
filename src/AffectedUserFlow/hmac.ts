@@ -6,10 +6,6 @@ export const generateKey = async (): Promise<ArrayBuffer> => {
   return await RNSimpleCrypto.utils.randomBytes(32)
 }
 
-export const arrayBufferToString = (arrayBuffer: ArrayBuffer): string => {
-  return RNSimpleCrypto.utils.convertArrayBufferToUtf8(arrayBuffer)
-}
-
 export const calculateHmac = async (
   exposureKeys: ExposureKey[],
 ): Promise<[string, string]> => {
