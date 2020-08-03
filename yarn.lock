@@ -6844,10 +6844,6 @@ react-native-webview@^8.1.2:
     invariant "2.2.4"
     rnpm-plugin-windows "^0.5.1-0"
 
-react-native-zip-archive@^5.0.1:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-zip-archive/-/react-native-zip-archive-5.0.2.tgz#cfa2aa8c97dd4ccb2dd8c99812ec7d9e20bf7549"
-
 react-native@0.61.5:
   version "0.61.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.61.5.tgz#6e21acb56cbd75a3baeb1f70201a66f42600bba8"
