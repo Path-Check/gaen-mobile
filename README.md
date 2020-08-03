@@ -275,5 +275,16 @@ Before pushing up code, it is recommended to manually test your code on the foll
 - Pixel 3 XL (larger screen)
 - iPhone 11 (screen w/ notch)
 
+## Distribution
+
+### Android
+
+Android APKs are automatically distributed (via AppCenter) on each commit to develop
+Once a new HA is created we need to add some secrets:
+- Encoded keystore file (`openssl base64 -A -in key.jks`)
+- Keystore password
+- Key password
+- AppCenter token
+
 # License
   [MIT License](LICENSE)

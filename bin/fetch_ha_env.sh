@@ -21,9 +21,10 @@ require 'dotenv'
 Dotenv.load
 
 HA_LABEL = ARGV[0]
+ACCESS_TOKEN = ARGV[1] # Optional parameter used by CI
 
 def fetch_env
-  token = ENV.fetch("ACCESS_TOKEN")
+  token = ACCESS_TOKEN.nil? ? ENV.fetch("ACCESS_TOKEN") : ACCESS_TOKEN
 
   if !valid_token(token) then
     puts "No valid github token set"

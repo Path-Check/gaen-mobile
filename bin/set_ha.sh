@@ -19,7 +19,8 @@
 require 'open3'
 
 HA_LABEL = ARGV[0]
+ACCESS_TOKEN = ARGV[1] # Optional parameter used by CI
 
-fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL}")
+fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL} #{ACCESS_TOKEN}")
 
 fetching_env_succeeded && system("./bin/configure_builds.sh")
