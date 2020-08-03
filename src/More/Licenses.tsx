@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { getApplicationName } from "react-native-device-info"
+import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 
@@ -22,7 +23,8 @@ const Licenses: FunctionComponent = () => {
   const infoEmailLink = "mailto:info@pathcheck.org"
   const pathCheckWebAddress = "pathcheck.org"
   const pathCheckUrl = "https://pathcheck.org/"
-  const privacyPolicyUrl = "https://pathcheck.org/privacy-policy/"
+  const privacyPolicyUrl =
+    env.PRIVACY_POLICY_URL || "https://pathcheck.org/privacy-policy/"
 
   return (
     <>
