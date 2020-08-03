@@ -40,8 +40,8 @@ lokalise2 file download \
   --export-empty-as=skip \
   --format strings \
   --include-description \
-  --original-filenames \
-  --placeholder-format=ios \
+  --original-filenames=false \
+  --bundle-structure "%LANG_ISO%.lproj/InfoPlist.strings" \
   --unzip-to=ios \
   --export-sort=a_z \
   --config .lokalise.yml \
