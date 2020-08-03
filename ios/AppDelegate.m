@@ -48,7 +48,6 @@
   // Schedule background task
   [[ExposureManager shared] scheduleBackgroundTaskIfNeeded];
 
-  // Broadcast EN Status and fetch exposure configuration
   [[ExposureManager shared] setup];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
@@ -57,7 +56,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  // Broadcast EN Status and fetch exposure configuration
   [[ExposureManager shared] setup];
 }
 

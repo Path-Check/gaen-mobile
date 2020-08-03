@@ -351,7 +351,8 @@ final class ExposureManager: NSObject {
       }
     }
   }
-  
+
+  /// Broadcast EN Status and fetch exposure configuration
   @objc func setup() {
     fetchExposureConfiguration()
     broadcastCurrentEnabledStatus()
