@@ -43,7 +43,6 @@ import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
  * Encapsulates logic for resolving URIs for uploading and downloading Diagnosis Keys.
  */
 public class Uris {
-    private static final int MAX_KEY_BATCHES_PER_DAY = 20;
     private static final String TAG = "Uris";
     private static final Splitter WHITESPACE_SPLITTER =
             Splitter.onPattern("\\s+").trimResults().omitEmptyStrings();
@@ -92,16 +91,15 @@ public class Uris {
                             // Parse out each line of the index file and split them into batches as indicated by
                             // the leading timestamp in the filename, e.g. "1589490000" for
                             // "exposureKeyExport-US/1589490000-00002.zip"
-                            final String zipFileName =  RealmSecureStorageBte.INSTANCE.getLastDownloadedKeyZipFileName();
-                            final int startIndex = getStartIndex(indexEntries, zipFileName);
+                            final String lastZipFileName =  RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName();
+                            final int startIndex = getStartIndex(indexEntries, lastZipFileName);
+                            Log.d(TAG, "Last processed file name: " + lastZipFileName);
+                            Log.d(TAG, startIndex + " indexes were already processed. " +
+                                    (indexEntries.size() - startIndex) + " new files to process");
+
                             for (int i = startIndex; i < indexEntries.size(); i++) {
                                 final String indexEntry = indexEntries.get(i);
                                 uriList.add(baseDownloadUri.buildUpon().appendEncodedPath(indexEntry).build());
-
-                                if(uriList.size() == MAX_KEY_BATCHES_PER_DAY) {
-                                    RealmSecureStorageBte.INSTANCE.insertOrUpdateLastDownloadedKeyZipFileName(indexEntry);
-                                    break;
-                                }
                             }
 
                             ImmutableList.Builder<KeyFileBatch> builder = ImmutableList.builder();
@@ -115,12 +113,7 @@ public class Uris {
 
     private int getStartIndex(List<String> allEntries, String lastIndexEntry) {
         int indexOfLastEntryInList = allEntries.indexOf(lastIndexEntry);
-
-        if(indexOfLastEntryInList == -1) {
-            return 0;
-        } else {
-            return indexOfLastEntryInList + 1;
-        }
+        return indexOfLastEntryInList == -1 ? 0 : indexOfLastEntryInList + 1;
     }
 
     // Downloads index file content as string (currently assuming .txt)

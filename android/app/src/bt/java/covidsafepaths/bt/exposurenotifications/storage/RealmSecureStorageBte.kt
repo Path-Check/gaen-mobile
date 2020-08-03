@@ -109,13 +109,13 @@ object RealmSecureStorageBte {
         }
     }
 
-    fun insertOrUpdateLastDownloadedKeyZipFileName(name: String) {
+    fun upsertLastProcessedKeyZipFileName(name: String) {
         getRealmInstance().use {
             it.executeTransaction { it.insertOrUpdate(KeyValues(ONLY_KEY, name)) }
         }
     }
 
-    fun getLastDownloadedKeyZipFileName(): String? {
+    fun getLastProcessedKeyZipFileName(): String? {
         return getRealmInstance().use {
             it.where(KeyValues::class.java).equalTo("id", ONLY_KEY).findFirst()?.lastDownloadedKeyZipFileName
         }

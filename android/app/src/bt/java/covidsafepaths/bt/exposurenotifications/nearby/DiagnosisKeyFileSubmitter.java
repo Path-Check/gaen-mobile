@@ -18,12 +18,15 @@
 package covidsafepaths.bt.exposurenotifications.nearby;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.common.io.BaseEncoding;
+import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.pathcheck.covidsafepaths.BuildConfig;
 import org.threeten.bp.Duration;
 
 import java.io.File;
@@ -35,6 +38,7 @@ import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.network.KeyFileBatch;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 
 /**
  * A thin class to take responsibility for submitting downloaded Diagnosis Key files to the Google
@@ -89,19 +93,34 @@ public class DiagnosisKeyFileSubmitter {
 
     private ListenableFuture<?> submitBatches(List<KeyFileBatch> batches, String token) {
         Log.d(TAG, "Combining ["
-                        + batches.size()
-                        + "] key file batches into a single submission to provideDiagnosisKeys().");
+                + batches.size()
+                + "] key file batches into a single submission to provideDiagnosisKeys().");
         List<File> files = new ArrayList<>();
         for (KeyFileBatch b : batches) {
             files.addAll(b.files());
             logBatch(b);
         }
 
-        return TaskToFutureAdapter.getFutureWithTimeout(
-                client.provideDiagnosisKeys(files, token),
-                PROVIDE_KEYS_TIMEOUT.toMillis(),
-                TimeUnit.MILLISECONDS,
-                AppExecutors.getScheduledExecutor());
+        return FluentFuture.from(
+                TaskToFutureAdapter.getFutureWithTimeout(
+                        client.provideDiagnosisKeys(files, token),
+                        PROVIDE_KEYS_TIMEOUT.toMillis(),
+                        TimeUnit.MILLISECONDS,
+                        AppExecutors.getScheduledExecutor()))
+                .transform(done -> {
+                    // Keep track of the latest file we processed
+                    if (!batches.isEmpty()) {
+                        KeyFileBatch lastBatch = batches.get(batches.size() - 1);
+                        List<Uri> lastBatchUris = lastBatch.uris();
+                        if (!lastBatchUris.isEmpty()) {
+                            Uri lastUri = lastBatchUris.get(lastBatchUris.size() - 1);
+                            String serverFilePath = lastUri.toString().replace(BuildConfig.DOWNLOAD_BASE_URL + "/", "");
+                            RealmSecureStorageBte.INSTANCE.upsertLastProcessedKeyZipFileName(serverFilePath);
+                            Log.d(TAG, serverFilePath + " saved as the last processed file name");
+                        }
+                    }
+                    return done;
+                }, AppExecutors.getBackgroundExecutor());
     }
 
     private void logBatch(KeyFileBatch batch) {
