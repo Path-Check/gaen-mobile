@@ -1,0 +1,19 @@
+{
+  "_display_name": "繁體中文",
+  "assessment": {
+    "caregiver_cta": "下一個",
+    "distancing_cta": "下一個",
+    "isolate_cta": "下一個",
+    "next": "下一個"
+  },
+  "label": {
+    "launch_enable_notif": "開啟通知",
+    "launch_get_started": "開始",
+    "launch_next": "下一個",
+    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+  },
+  "screen_titles": {
+    "about": "關於",
+    "legal": "法遵"
+  }
+}

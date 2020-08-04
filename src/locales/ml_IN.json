@@ -1,0 +1,30 @@
+{
+  "_display_name": "ഇംഗ്ലീഷ്",
+  "about": {
+    "operating_system_abbr": "OS:",
+    "version": "പതിപ്പ്:"
+  },
+  "assessment": {
+    "caregiver_cta": "അടുത്തത്",
+    "complete_cta": "ചെയ്‌തു",
+    "distancing_cta": "അടുത്തത്",
+    "isolate_cta": "അടുത്തത്",
+    "next": "അടുത്തത്"
+  },
+  "common": {
+    "continue": "തുടരുക",
+    "done": "ചെയ്‌തു"
+  },
+  "label": {
+    "launch_enable_notif": "അറിയിപ്പുകൾ പ്രവർത്തനക്ഷമമാക്കുക",
+    "launch_get_started": "ആരംഭിക്കുക",
+    "launch_next": "അടുത്തത്",
+    "launch_set_up_phone_bluetooth": "ചെയ്‌തു",
+    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
+    "privacy_policy": "സ്വകാര്യതാ നയം"
+  },
+  "screen_titles": {
+    "about": "വിവരങ്ങൾ",
+    "legal": "നിയമപരമായ വിവരങ്ങൾ"
+  }
+}
