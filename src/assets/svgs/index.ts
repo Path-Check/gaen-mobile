@@ -4,6 +4,8 @@ import Arrow from "./arrow"
 import BackArrow from "./backArrow"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
+import CheckboxChecked from "./checkboxChecked"
+import CheckboxUnchecked from "./checkboxUnchecked"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
@@ -35,6 +37,8 @@ export const Icons = {
   BackArrow,
   Bell,
   BellYellow,
+  CheckboxChecked,
+  CheckboxUnchecked,
   Checkmark,
   CheckmarkCircle,
   ChevronRight,

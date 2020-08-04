@@ -33,7 +33,6 @@ export const checkboxIcon: ImageStyle = {
 
 export const checkboxText: TextStyle = {
   ...Typography.mediumFont,
-  color: Colors.invertedText,
 }
 
 export const textInput: TextStyle = {
