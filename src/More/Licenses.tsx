@@ -8,11 +8,11 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import { getApplicationName } from "react-native-device-info"
 import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 
+import { getApplicationName } from "../gaen/nativeModule"
 import { Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 

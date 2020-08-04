@@ -1,15 +1,15 @@
 import React from "react"
 import { Linking } from "react-native"
 import { render, fireEvent } from "@testing-library/react-native"
-import {
-  getApplicationName,
-  getVersion,
-  getBuildNumber,
-} from "react-native-device-info"
 
 import AboutScreen from "./About"
+import {
+  getApplicationName,
+  getBuildNumber,
+  getVersion,
+} from "../gaen/nativeModule"
 
-jest.mock("react-native-device-info", () => {
+jest.mock("nativeModule", () => {
   return {
     getApplicationName: jest.fn(),
     getBuildNumber: jest.fn(),

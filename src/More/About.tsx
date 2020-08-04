@@ -8,13 +8,14 @@ import {
   Text,
   View,
 } from "react-native"
-import {
-  getApplicationName,
-  getBuildNumber,
-  getVersion,
-} from "react-native-device-info"
 
 import { GlobalText } from "../components/GlobalText"
+
+import {
+  getVersion,
+  getBuildNumber,
+  getApplicationName,
+} from "../gaen/nativeModule"
 
 import { Colors, Spacing, Typography } from "../styles"
 

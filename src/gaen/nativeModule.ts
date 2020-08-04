@@ -125,6 +125,21 @@ export const submitDiagnosisKeys = async (
   return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
 }
 
+// Device Info Module
+const deviceInfoModule = NativeModules.DeviceInfoModule
+
+export const getApplicationName = async (): Promise<string> => {
+  return deviceInfoModule.getApplicationName()
+}
+
+export const getBuildNumber = async (): Promise<string> => {
+  return deviceInfoModule.getBuildNumber()
+}
+
+export const getVersion = async (): Promise<string> => {
+  return deviceInfoModule.getVersion()
+}
+
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
