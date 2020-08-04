@@ -19,7 +19,7 @@ export const Isolate = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackgroundFaintShade}
+      backgroundColor={Colors.primaryBackground}
       backgroundImage={Images.IsolatePathBackground}
       icon={Icons.Isolate}
       footer={

@@ -12,7 +12,6 @@ const base: ViewStyle = {
 }
 
 // Size
-
 const tiny: ViewStyle = {
   paddingTop: Spacing.xxxSmall,
   paddingBottom: Spacing.xxxSmall + 1,
@@ -29,13 +28,11 @@ const large: ViewStyle = {
 }
 
 // Borders
-
 const maxCornerRoundness: ViewStyle = {
   borderRadius: Outlines.borderRadiusMax,
 }
 
 // Color
-
 const secondaryBlue: ViewStyle = {
   backgroundColor: Colors.secondaryBlue,
 }
