@@ -13,9 +13,8 @@ import com.google.android.gms.nearby.exposurenotification.ExposureNotificationCl
 import org.pathcheck.covidsafepaths.MainActivity;
 
 import javax.annotation.Nonnull;
-import static covidsafepaths.bt.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
 
-@ReactModule(name = MODULE_NAME)
+@ReactModule(name = ExposureKeyModule.MODULE_NAME)
 public class ExposureKeyModule  extends ReactContextBaseJavaModule {
     public static final String MODULE_NAME = "ExposureKeyModule";
     private final ExposureNotificationClient exposureNotificationClient;
