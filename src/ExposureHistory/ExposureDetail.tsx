@@ -65,6 +65,8 @@ const ExposureDetail: FunctionComponent = () => {
         <View style={style.exposureWindowContainer}>
           <SvgXml
             xml={Icons.ExposureIcon}
+            accessible
+            accessibilityLabel={t("exposure_history.possible_exposure")}
             fill={Colors.primaryViolet}
             width={Iconography.xSmall}
             height={Iconography.xSmall}
