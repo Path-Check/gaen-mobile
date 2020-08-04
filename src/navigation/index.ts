@@ -77,6 +77,7 @@ export type MoreStackScreen =
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
+  | "FeedbackForm"
 
 export const MoreStackScreens: {
   [key in MoreStackScreen]: MoreStackScreen
@@ -90,6 +91,7 @@ export const MoreStackScreens: {
   AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
+  FeedbackForm: "FeedbackForm",
 }
 
 export type SelfAssessmentScreen = "SelfAssessment"

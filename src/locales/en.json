@@ -208,11 +208,19 @@
     "debug": "Debug",
     "debug_form": "Debug Form",
     "exposure_history": "Exposure History",
+    "feedback": "Feedback",
     "legal": "Legal",
     "select_language": "Select Language"
   },
   "settings": {
     "share_test_result": "Report Positive Test Result",
     "share_test_result_description": "Anonymously notify others you may have recently encountered if you test positive for COVID-19"
+  },
+  "submit_feedback": {
+    "body": "Body (required)",
+    "name": "Full Name",
+    "subject": "Subject (required)",
+    "title": "We want your feedback",
+    "success": "We received your feedback. Thank you!"
   }
 }

@@ -14,11 +14,15 @@ import ENSubmitDebugForm from "./../More/ENSubmitDebugForm"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
 import LanguageSelection from "../More/LanguageSelection"
 
-import { MoreStackScreens } from "./index"
+import { MoreStackScreens, MoreStackScreen } from "./index"
 
 import { Colors, Headers } from "../styles"
+import FeedbackForm from "../More/FeedbackForm"
 
-const Stack = createStackNavigator()
+type MoreStackParams = {
+  [key in MoreStackScreen]: undefined
+}
+const Stack = createStackNavigator<MoreStackParams>()
 
 const SCREEN_OPTIONS: StackNavigationOptions = {
   headerStyle: {
@@ -41,6 +45,7 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.Licenses}
         component={LicensesScreen}
+        options={{ headerTitle: t("screen_titles.legal") }}
       />
       <Stack.Screen
         name={MoreStackScreens.ENDebugMenu}
@@ -64,6 +69,11 @@ const MoreStack: FunctionComponent = () => {
         name={MoreStackScreens.ENSubmitDebugForm}
         component={ENSubmitDebugForm}
         options={{ headerTitle: t("screen_titles.debug_form") }}
+      />
+      <Stack.Screen
+        name={MoreStackScreens.FeedbackForm}
+        component={FeedbackForm}
+        options={{ headerTitle: t("screen_titles.feedback") }}
       />
     </Stack.Navigator>
   )
