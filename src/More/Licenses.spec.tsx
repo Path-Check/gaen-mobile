@@ -3,11 +3,11 @@ import "react-native"
 import { render } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
-import { getApplicationName } from "react-native-device-info"
 
 import LicensesScreen from "./Licenses"
+import { getApplicationName } from "../gaen/nativeModule"
 
-jest.mock("react-native-device-info", () => {
+jest.mock("nativeModule", () => {
   return {
     getApplicationName: jest.fn(),
   }
