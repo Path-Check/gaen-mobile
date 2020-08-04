@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { AnswersContext } from "./Context"
 import { AssessmentOption } from "./AssessmentOption"
@@ -42,9 +42,9 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
       let l = line.trim()
       if (!l) continue
       elements.push(
-        <RTLEnabledText testID="description" key={l} style={style.description}>
+        <GlobalText testID="description" key={l} style={style.description}>
           {l}
-        </RTLEnabledText>,
+        </GlobalText>,
       )
     }
     return <View style={style.descriptionWrapper}>{elements}</View>
@@ -120,15 +120,15 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     <SafeAreaView style={style.container}>
       <ScrollView style={style.scrollView}>
         <View style={style.header}>
-          <RTLEnabledText style={style.headerContent}>
+          <GlobalText style={style.headerContent}>
             {question.question_text}
-          </RTLEnabledText>
+          </GlobalText>
         </View>
         <View style={style.scrollViewContent}>
           {description}
-          <RTLEnabledText style={style.instruction}>
+          <GlobalText style={style.instruction}>
             {assessmentInputInstruction}
-          </RTLEnabledText>
+          </GlobalText>
           <View style={style.optionsWrapper}>{options}</View>
         </View>
       </ScrollView>
@@ -173,8 +173,9 @@ const style = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   instruction: {
-    ...Typography.assessmentInstruction,
-    fontFamily: Typography.baseFontFamily,
+    ...Typography.mediumFont,
+    lineHeight: Typography.smallerLineHeight,
+    color: Colors.secondaryHeaderText,
     marginTop: Spacing.xLarge,
   },
   button: {

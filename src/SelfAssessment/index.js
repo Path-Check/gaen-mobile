@@ -103,7 +103,7 @@ const Assessment = ({ navigation }) => {
     }),
     [navigation],
   )
-  const screenOptions = (backgroundColor = Colors.surveyPrimaryBackground) => ({
+  const screenOptions = (backgroundColor = Colors.primaryBackground) => ({
     headerHideShadow: true,
     headerTitle: "",
     headerStyle: {

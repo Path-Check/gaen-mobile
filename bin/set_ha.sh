@@ -4,7 +4,7 @@
 #
 # Usage
 #
-#   bin/fetch_env <health-authority-label>
+#   bin/set_ha <health-authority-label>
 #
 # Example
 #

@@ -10,14 +10,14 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
 
 import { Screens } from "../navigation"
 
 import { Images, Icons } from "../assets"
-import { Iconography, Spacing, Colors, Typography } from "../styles"
+import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
 
 export const ExportIntro = (): JSX.Element => {
   const { t } = useTranslation()
@@ -51,8 +51,8 @@ export const ExportIntro = (): JSX.Element => {
               />
             </View>
 
-            <RTLEnabledText style={style.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={style.contentText}>{body}</RTLEnabledText>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
           <Button label={t("common.start")} onPress={handleOnPressNext} />
@@ -82,7 +82,9 @@ const style = StyleSheet.create({
   },
   iconContainerCircle: {
     ...Iconography.largeIcon,
+    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.white,
+    marginBottom: Spacing.large,
   },
   contentText: {
     ...Typography.secondaryContent,

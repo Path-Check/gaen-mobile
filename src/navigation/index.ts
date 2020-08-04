@@ -16,6 +16,7 @@ export type NavigationProp = NavigationScreenProp<
 
 export type OnboardingScreen =
   | "Welcome"
+  | "EulaModal"
   | "PersonalPrivacy"
   | "NotificationDetails"
   | "ShareDiagnosis"
@@ -27,6 +28,7 @@ export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
 } = {
   Welcome: "Welcome",
+  EulaModal: "EulaModal",
   PersonalPrivacy: "PersonalPrivacy",
   NotificationDetails: "NotificationDetails",
   ShareDiagnosis: "ShareDiagnosis",
@@ -137,13 +139,13 @@ export const Stacks: { [key in Stack]: Stack } = {
   AffectedUserStack: "AffectedUserStack",
 }
 
-type BarStyle = "dark-content" | "light-content"
+export type StatusBarStyle = "dark-content" | "light-content"
 
-export const useStatusBarEffect = (barStyle: BarStyle): void => {
+export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   useFocusEffect(
     useCallback(() => {
-      StatusBar.setBarStyle(barStyle)
+      StatusBar.setBarStyle(statusBarStyle)
       Platform.OS === "android" && StatusBar.setTranslucent(true)
-    }, [barStyle]),
+    }, [statusBarStyle]),
   )
 }

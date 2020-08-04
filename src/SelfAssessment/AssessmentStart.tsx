@@ -20,7 +20,7 @@ const AssessmentStart: FunctionComponent = () => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.surveyPrimaryBackground}
+      backgroundColor={Colors.primaryBackground}
       backgroundImage={Images.EmptyPathBackground}
       icon={Icons.SelfAssessment}
       footer={

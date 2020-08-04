@@ -12,16 +12,15 @@ const base: ViewStyle = {
 }
 
 // Size
-export const baseHeight = 50
 
 const tiny: ViewStyle = {
-  paddingVertical: Spacing.xxxSmall,
-  paddingHorizontal: Spacing.xSmall,
+  paddingTop: Spacing.xxxSmall,
+  paddingBottom: Spacing.xxxSmall + 1,
 }
 
 const medium: ViewStyle = {
-  paddingVertical: Spacing.small,
-  paddingHorizontal: Spacing.medium,
+  paddingTop: Spacing.small,
+  paddingBottom: Spacing.small + 1,
 }
 
 const large: ViewStyle = {
@@ -29,111 +28,38 @@ const large: ViewStyle = {
   paddingBottom: Spacing.large + 1,
 }
 
-// Border
-const rounded: ViewStyle = {
-  borderRadius: Outlines.maxBorderRadius,
+// Borders
+
+const maxCornerRoundness: ViewStyle = {
+  borderRadius: Outlines.borderRadiusMax,
 }
 
 // Color
 
-const primaryBlue: ViewStyle = {
-  backgroundColor: Colors.primaryBlue,
-  borderColor: Colors.primaryBlue,
-}
-
 const secondaryBlue: ViewStyle = {
-  backgroundColor: Colors.cornflowerBlue,
-  borderColor: Colors.cornflowerBlue,
+  backgroundColor: Colors.secondaryBlue,
 }
 
 const white: ViewStyle = {
   backgroundColor: Colors.white,
-  borderColor: Colors.white,
 }
 
 const disabled: ViewStyle = {
   backgroundColor: Colors.mediumGray,
-  borderColor: Colors.mediumGray,
 }
 
-const tertiary: ViewStyle = {
+const tertiaryBlue: ViewStyle = {
   backgroundColor: Colors.tertiaryViolet,
-  borderColor: Colors.tertiaryViolet,
 }
 
 const transparent: ViewStyle = {
   backgroundColor: "transparent",
 }
 
-// Outline
-const outlined: ViewStyle = {
-  borderWidth: 1,
-  backgroundColor: Colors.transparent,
-}
-
-// Combinations
-export const largeBlue: ViewStyle = {
-  ...base,
-  ...large,
-  ...primaryBlue,
-}
-
-export const largeBlueOutline: ViewStyle = {
-  ...largeBlue,
-  ...outlined,
-}
-
-export const largeSecondaryBlue: ViewStyle = {
-  ...base,
-  ...large,
-  ...secondaryBlue,
-}
-
-export const mediumBlue: ViewStyle = {
-  ...base,
-  ...medium,
-  ...primaryBlue,
-}
-
-export const largeWhite: ViewStyle = {
-  ...base,
-  ...large,
-  ...white,
-}
-
-export const largeWhiteOutline: ViewStyle = {
-  ...largeWhite,
-  ...outlined,
-}
-
-export const largeSecondary: ViewStyle = {
-  ...base,
-  ...large,
-}
-
-export const tinyTeritiaryRounded: ViewStyle = {
-  ...base,
-  ...tiny,
-  ...rounded,
-  ...tertiary,
-}
-
-export const mediumTransparent: ViewStyle = {
-  ...base,
-  ...medium,
-  ...transparent,
-}
-
-export const largeTransparent: ViewStyle = {
-  ...base,
-  ...large,
-  ...transparent,
-}
-
 export const primary: ViewStyle = {
   ...base,
   ...large,
-  ...primaryBlue,
+  ...secondaryBlue,
 }
 
 export const primaryDisabled: ViewStyle = {
@@ -148,8 +74,21 @@ export const primaryInverted: ViewStyle = {
   ...white,
 }
 
-export const secondary: ViewStyle = {
+export const primaryInvertedDisabled: ViewStyle = {
   ...base,
   ...large,
+  ...disabled,
+}
+
+export const secondary: ViewStyle = {
+  ...base,
+  ...medium,
   ...transparent,
+}
+
+export const tinyRounded: ViewStyle = {
+  ...base,
+  ...tiny,
+  ...maxCornerRoundness,
+  ...tertiaryBlue,
 }

@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { Button } from "../../components/Button"
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 
 import { Screens, Stacks } from "../../navigation"
 import { Icons, Images } from "../../assets"
@@ -56,6 +56,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     <ImageBackground
       source={Images.BlueGradientBackground}
       style={style.backgroundImage}
+      testID="publish-consent-form"
     >
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
@@ -73,8 +74,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           </View>
 
           <View style={style.content}>
-            <RTLEnabledText style={style.header}>{title}</RTLEnabledText>
-            <RTLEnabledText style={style.contentText}>{body}</RTLEnabledText>
+            <GlobalText style={style.header}>{title}</GlobalText>
+            <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
 
           <View>
@@ -88,10 +89,11 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <TouchableOpacity
               onPress={handleOnPressCancel}
               style={style.secondaryButton}
+              accessibilityLabel={t("export.consent_button_cancel")}
             >
-              <RTLEnabledText style={style.secondaryButtonText}>
+              <GlobalText style={style.secondaryButtonText}>
                 {t("export.consent_button_cancel")}
-              </RTLEnabledText>
+              </GlobalText>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -131,13 +133,13 @@ const style = StyleSheet.create({
     ...Buttons.primaryInverted,
   },
   buttonText: {
-    ...Typography.buttonTextPrimaryInverted,
+    ...Typography.buttonPrimaryInvertedText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondaryInverted,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

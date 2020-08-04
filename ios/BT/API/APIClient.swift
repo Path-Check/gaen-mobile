@@ -2,23 +2,29 @@ import Alamofire
 
 enum RequestType {
   case postKeys,
-  downloadKeys
+  downloadKeys,
+  exposureConfiguration
 }
 
 final class APIClient {
   
   let postKeysUrl: URL
   let downloadBaseUrl: URL
+  let exposureConfigurationUrl: URL
   static let shared = APIClient(
     postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
-    downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!
+    downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
+    exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!
   )
   
   private let sessionManager: SessionManager
-  
-  init(postKeysUrl: URL, downloadBaseUrl: URL) {
+
+  init(postKeysUrl: URL,
+       downloadBaseUrl: URL,
+       exposureConfigurationUrl: URL) {
     self.postKeysUrl = postKeysUrl
     self.downloadBaseUrl = downloadBaseUrl
+    self.exposureConfigurationUrl = exposureConfigurationUrl
     
     let configuration = URLSessionConfiguration.default
     
@@ -127,6 +133,8 @@ private extension APIClient {
       baseUrl = postKeysUrl
     case .downloadKeys:
       baseUrl = downloadBaseUrl
+    case .exposureConfiguration:
+      baseUrl = exposureConfigurationUrl
     }
     let r = sessionManager.request(
       baseUrl.appendingPathComponent(request.path, isDirectory: false),

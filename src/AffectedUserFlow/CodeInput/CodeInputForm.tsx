@@ -13,7 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -127,13 +127,13 @@ const CodeInputForm: FunctionComponent = () => {
       <View style={style.container} testID={"affected-user-code-input-form"}>
         <View>
           <View style={style.headerContainer}>
-            <RTLEnabledText style={style.header}>
+            <GlobalText style={style.header}>
               {t("export.code_input_title_bluetooth")}
-            </RTLEnabledText>
+            </GlobalText>
 
-            <RTLEnabledText style={style.subheader}>
+            <GlobalText style={style.subheader}>
               {t("export.code_input_body_bluetooth")}
-            </RTLEnabledText>
+            </GlobalText>
           </View>
 
           <View>
@@ -151,9 +151,7 @@ const CodeInputForm: FunctionComponent = () => {
             />
           </View>
 
-          <RTLEnabledText style={style.errorSubtitle}>
-            {errorMessage}
-          </RTLEnabledText>
+          <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
         </View>
         {isLoading ? <LoadingIndicator /> : null}
 
@@ -166,18 +164,19 @@ const CodeInputForm: FunctionComponent = () => {
             disabled={isDisabled}
             style={buttonStyle}
           >
-            <RTLEnabledText style={buttonTextStyle}>
+            <GlobalText style={buttonTextStyle}>
               {t("common.submit")}
-            </RTLEnabledText>
+            </GlobalText>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={handleOnPressCancel}
             style={style.secondaryButton}
+            accessibilityLabel={t("export.code_input_button_cancel")}
           >
-            <RTLEnabledText style={style.secondaryButtonText}>
+            <GlobalText style={style.secondaryButtonText}>
               {t("export.code_input_button_cancel")}
-            </RTLEnabledText>
+            </GlobalText>
           </TouchableOpacity>
         </View>
       </View>
@@ -229,7 +228,7 @@ const style = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.level1,
+    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),
@@ -245,19 +244,19 @@ const style = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextPrimary,
+    ...Typography.buttonPrimaryText,
   },
   disabledButton: {
     ...Buttons.primaryDisabled,
   },
   disabledButtonText: {
-    ...Typography.buttonTextPrimaryDisabled,
+    ...Typography.buttonPrimaryDisabledText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 

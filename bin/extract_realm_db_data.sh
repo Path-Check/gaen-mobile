@@ -5,8 +5,8 @@
 # Re-deploy your android app and export the realm data.
 # View it in Realm Studio (available for download)
 # ADB_PATH="~/Library/Android/sdk/platform-tools"
-PACKAGE_NAME="org.pathcheck.covidsafepaths"
-DB_NAME="safepaths.realm"
+PACKAGE_NAME="org.pathcheck.covidsafepaths.bt"
+DB_NAME="safepathsbte.realm"
 DESTINATION_PATH="./${DB_NAME}"
 NOT_PRESENT="List of devices attached"
 ADB_FOUND=`adb devices | tail -2 | head -1 | cut -f 1 | sed 's/ *$//g'`

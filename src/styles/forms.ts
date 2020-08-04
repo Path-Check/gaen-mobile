@@ -5,18 +5,15 @@ import * as Spacing from "./spacing"
 import * as Outlines from "./outlines"
 import * as Typography from "./typography"
 
-// Global Form Styles
 export const textInputFormField: TextStyle = {
   flex: 1,
   color: Colors.primaryText,
-  backgroundColor: Colors.formInputBackground,
+  backgroundColor: Colors.primaryBackground,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.formInputBorder,
-  borderWidth: 2,
+  borderWidth: Outlines.thin,
   justifyContent: "center",
   fontSize: Typography.medium,
-  // Just using padding breaks vertical padding on multiline text inputs
-  // See issue here: https://github.com/facebook/react-native/issues/21720
   paddingTop: Spacing.medium,
   paddingRight: Spacing.medium,
   paddingBottom: Spacing.medium,
@@ -24,20 +21,14 @@ export const textInputFormField: TextStyle = {
 }
 
 export const required: TextStyle = {
-  fontSize: 12,
+  fontSize: Typography.smallest,
   color: Colors.primaryText,
-  marginTop: 6,
-}
-
-export const checkbox: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
+  marginTop: Spacing.xxSmall,
 }
 
 export const checkboxIcon: ImageStyle = {
-  width: 25,
-  height: 25,
-  marginRight: Spacing.medium,
+  width: 30,
+  height: 30,
 }
 
 export const checkboxText: TextStyle = {
@@ -47,16 +38,16 @@ export const checkboxText: TextStyle = {
 
 export const textInput: TextStyle = {
   ...Typography.primaryTextInput,
-  ...Outlines.textInput,
+  ...Outlines.textInputBorder,
   padding: Spacing.small,
   textAlign: "center",
-  borderWidth: 2,
+  borderWidth: Outlines.thin,
 }
 
 export const inputIndicator: ViewStyle = {
   alignItems: "center",
   borderColor: Colors.radioBorder,
-  borderWidth: 2,
+  borderWidth: Outlines.thin,
   height: Spacing.large,
   justifyContent: "center",
   marginTop: Spacing.tiny,

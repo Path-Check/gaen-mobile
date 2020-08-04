@@ -27,7 +27,7 @@ require 'open3'
 # Constants
 ENV_FILE = ARGV[0] || ".env.bt.release"
 PLIST_PATH = "./ios/BT/Info.plist"
-ANDROID_STRINGS_PATH="./android/app/src/bt/res/values/strings.xml"
+ANDROID_STRINGS_PATH="./android/app/src/main/res/values/strings.xml"
 SEPARATOR = "##################################################################"
 
 def failure_message(message:)

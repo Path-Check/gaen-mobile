@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import Icon from "../assets/svgs/check"
-import { RTLEnabledText } from "../components/RTLEnabledText"
+import { GlobalText } from "../components/GlobalText"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,
@@ -78,9 +78,9 @@ const OptionSelect: FunctionComponent<OptionSelectProps> = ({
             (inputType === SCREEN_TYPE_RADIO || inputType === SCREEN_TYPE_DATE)}
         </View>
       )}
-      <RTLEnabledText style={style.title} testID="label">
+      <GlobalText style={style.title} testID="label">
         {title}
-      </RTLEnabledText>
+      </GlobalText>
     </View>
   )
 }
@@ -100,9 +100,12 @@ const style = StyleSheet.create({
     borderColor: Colors.secondaryBlue,
   },
   title: {
+    ...Typography.largeFont,
+    ...Typography.bold,
+    color: Colors.primaryText,
+    lineHeight: Typography.mediumLineHeight,
     flex: 1,
     flexWrap: "wrap",
-    ...Typography.inputLabel,
   },
   container: {
     backgroundColor: Colors.white,

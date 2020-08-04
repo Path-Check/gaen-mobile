@@ -3,7 +3,7 @@ import { TouchableOpacity, Linking, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { RTLEnabledText } from "../../components/RTLEnabledText"
+import { GlobalText } from "../../components/GlobalText"
 
 import { Stacks } from "../../navigation"
 import { Buttons, Colors, Typography, Spacing, Layout } from "../../styles"
@@ -26,13 +26,13 @@ const EnableExposureNotifications: FunctionComponent = () => {
       testID={"affected-user-enable-exposure-notifications-screen"}
     >
       <View style={style.headerContainer}>
-        <RTLEnabledText style={style.header}>
+        <GlobalText style={style.header}>
           {t("export.enable_exposure_notifications_title")}
-        </RTLEnabledText>
+        </GlobalText>
 
-        <RTLEnabledText style={style.subheader}>
+        <GlobalText style={style.subheader}>
           {t("export.enable_exposure_notifications_body")}
-        </RTLEnabledText>
+        </GlobalText>
       </View>
       <View>
         <TouchableOpacity
@@ -42,18 +42,19 @@ const EnableExposureNotifications: FunctionComponent = () => {
           accessibilityRole="button"
           style={style.button}
         >
-          <RTLEnabledText style={style.buttonText}>
+          <GlobalText style={style.buttonText}>
             {t("common.settings")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={handleOnPressCancel}
           style={style.secondaryButton}
+          accessibilityLabel={t("export.code_input_button_cancel")}
         >
-          <RTLEnabledText style={style.secondaryButtonText}>
+          <GlobalText style={style.secondaryButtonText}>
             {t("export.code_input_button_cancel")}
-          </RTLEnabledText>
+          </GlobalText>
         </TouchableOpacity>
       </View>
     </View>
@@ -84,13 +85,13 @@ const style = StyleSheet.create({
     ...Buttons.primary,
   },
   buttonText: {
-    ...Typography.buttonTextPrimary,
+    ...Typography.buttonPrimaryText,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 

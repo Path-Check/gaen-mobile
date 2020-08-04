@@ -40,6 +40,7 @@
     "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
+    "continue": "Continue",
     "done": "Done",
     "settings": "Open Settings",
     "something_went_wrong": "Something went wrong",
@@ -74,15 +75,15 @@
   },
   "exposure_history": {
     "exposure_detail": {
+      "6ft_apart": "6ft apart",
       "content": "Someone you were nearby has since tested positive for COVID-19.",
       "ha_guidance_header": "What should I do?",
       "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
       "header": "You may have crossed paths with the COVID-19 virus.",
       "isolate": "Isolate",
-      "wear_a_mask": "Wear a mask",
-      "6ft_apart": "6ft apart",
+      "next_steps": "Next Steps",
       "wash_your_hands": "Wash your hands",
-      "next_steps": "Next Steps"
+      "wear_a_mask": "Wear a mask"
     },
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
@@ -101,7 +102,7 @@
     "last_days": "Last 14 days",
     "learn_more": "Learn More",
     "no_exposure_reports": "No Exposure Reports",
-    "no_exposure_reports_over_past": "You haven't received any exposure report over the past 14-days",
+    "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
     "possible_exposure": "Possible COVID-19 exposure",
     "protect_yourself_and_others": "Protect yourself and others in your community",
     "review_guidance_from_ha": "Review guidance from {{healthAuthorityName}}",
@@ -121,13 +122,14 @@
     }
   },
   "label": {
-    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit",
+    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",
     "assessment_icon": "Clipboard icon with checkmark inside",
     "bell_icon": "Bell icon",
     "bluetooth_icon": "Searching bluetooth device icon",
     "calendar_icon": "Calendar icon",
-    "check_icon": "Checkmark icon",
-    "close_icon": "Close icon",
+    "check": "Checkmark",
+    "checkbox": "Checkbox",
+    "close": "Close",
     "description_optional": "Description (Optional)",
     "email_optional": "Email (Optional)",
     "exposure_icon": "Circle icon with eight dots surrounding it",
@@ -141,7 +143,7 @@
     "launch_exposure_notif_subheader": "To be notified about updates to your exposure history, your phone needs permission to exchange anonymous Bluetooth random ID with other devices.\n\nExposure Notifications only work with other devices with the setting enabled.\n\nYou can turn off this notifications at any time.",
     "launch_get_started": "Get Started",
     "launch_next": "Next",
-    "launch_screen1_header": "Welcome to PathCheck",
+    "launch_screen1_header": "Welcome to ",
     "launch_screen2_header_bluetooth": "Your phone remembers other devices it meets but won't identify you to other people.",
     "launch_screen2_subheader_bluetooth": "Nearby phones use Bluetooth to share and save random number strings to recall devices nearby.\n\nIf a person reports a positive diagnosis, their phone's recent random IDs are flagged to anonymously notify others. No locations or personal info is shared.",
     "launch_screen3_header_bluetooth": "Receive notifications when someone you encountered later chooses to report a positive diagnosis.",
@@ -150,7 +152,6 @@
     "launch_screen4_subheader_bluetooth": "This helps others in your community contain the spread of the virus.",
     "launch_set_up_phone_bluetooth": "Next",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
-    "legal_page_header_bluetooth": "PathCheck BT",
     "more_icon": "Icon of three horizontal dots",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
@@ -168,9 +169,7 @@
     "self_assessment": "Health"
   },
   "onboarding": {
-    "eula_checkbox": "I accept the licensing agreement",
-    "eula_continue": "Continue",
-    "eula_message": "*You must accept in order to use PathCheck",
+    "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "maybe_later": "Maybe Later",
     "notification_header": "Would you like to receive notifications when you may have crossed paths with the virus?",
     "notification_subheader": "PathCheck partners with local Health Departments to track the virus. If you are located in a jurisdiction served by one of our Health Department partners, you can receive exposure notifications from your Health Department."
