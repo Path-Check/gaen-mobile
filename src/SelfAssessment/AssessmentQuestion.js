@@ -174,7 +174,7 @@ const style = StyleSheet.create({
   },
   instruction: {
     ...Typography.mediumFont,
-    lineHeight: Typography.smallerLineHeight,
+    lineHeight: Typography.xSmallLineHeight,
     color: Colors.secondaryHeaderText,
     marginTop: Spacing.xLarge,
   },

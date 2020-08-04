@@ -96,7 +96,7 @@ const style = StyleSheet.create({
     width: "100%",
   },
   headerText: {
-    ...Typography.largerFont,
+    ...Typography.xLargeFont,
     ...Typography.bold,
     lineHeight: Typography.mediumLineHeight,
     color: Colors.white,
