@@ -1,5 +1,11 @@
 import React from "react"
-import { FlatList, View, StyleSheet, TouchableHighlight, SafeAreaView } from "react-native"
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  SafeAreaView,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { useStatusBarEffect } from "../navigation"
