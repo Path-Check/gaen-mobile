@@ -1,8 +1,9 @@
 name: Distribute
 
+# Saved as a reference. We are currently using Bitrise to build APKs
 on:
   push:
-    branches: [develop]
+    branches: [distribute-github] # This branch doesn't exist
 
 jobs:
   distribute_android:
@@ -35,10 +36,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Set up Ruby 2.7
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby 2.6
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: 2.6.5
 
       - name: Install bundler for ruby package management
         run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" ./Gemfile.lock | tail -n 1)"
@@ -63,8 +64,12 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
         working-directory: ./android
+
+      - name: Set up NDK
+      # This is not the usual sdkmanager path, but it's what Github Actions uses https://github.com/actions/virtual-environments/issues/60
+        run: sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.0.6113669"
         
-      ## Set up MN
+      # Set up MN
       - name: Setup MN env
         run: ./bin/set_ha.sh mn ${{ secrets.ACCESS_TOKEN }}
 
@@ -77,6 +82,7 @@ jobs:
           lane: 'release_increment_version_code'
           subdirectory: 'android'
           bundle-install-path: 'vendor/bundle'
+          options: '{ "versionCode" : "$GITHUB_RUN_NUMBER" }'
 
       - name: Build android release APK
         uses: maierj/fastlane-action@v1.4.0

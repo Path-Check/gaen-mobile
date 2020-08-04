@@ -30,19 +30,17 @@ platform :android do
   end
 
   desc "Increment version code"
-  lane :release_increment_version_code do
-    build_number =  ENV["GITHUB_RUN_NUMBER"]
-
+  lane :release_increment_version_code do |options|
     increment_version_code(
       gradle_file_path: "app/build.gradle",
-      version_code: build_number
+      version_code: options[:versionCode]
     )
   end
 
   desc "Build a Release APK"
   lane :release_apk do |options|
     gradle(
-      task: "clean assembleRelease",
+      task: "assembleRelease",
       print_command: false,
       properties: {
         "android.injected.signing.store.password" => options[:keyStorePassword],
