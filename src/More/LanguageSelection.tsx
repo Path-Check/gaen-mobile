@@ -1,5 +1,5 @@
 import React from "react"
-import { FlatList, View, StyleSheet, TouchableHighlight } from "react-native"
+import { FlatList, View, StyleSheet, TouchableHighlight, SafeAreaView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { useStatusBarEffect } from "../navigation"
@@ -8,7 +8,6 @@ import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 const Separator = () => (
   <View
