@@ -27,8 +27,8 @@ export const Share = ({ navigation }) => {
         <Button
           onPress={handleButtonPress}
           label={t("assessment.share_cta")}
-          buttonStyle={style.button}
-          textStyle={style.buttonText}
+          customButtonStyle={style.button}
+          customTextStyle={style.buttonText}
           testID="assessment-button"
         />
       }

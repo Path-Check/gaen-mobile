@@ -27,8 +27,8 @@ const AssessmentStart: FunctionComponent = () => {
         <Button
           onPress={handleButtonPress}
           label={t("assessment.start_cta")}
-          buttonStyle={style.button}
-          textStyle={style.buttonText}
+          customButtonStyle={style.button}
+          customTextStyle={style.buttonText}
         />
       }
     >

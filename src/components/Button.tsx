@@ -16,8 +16,8 @@ interface ButtonProps {
   onPress: () => void
   loading?: boolean
   disabled?: boolean
-  buttonStyle?: ViewStyle
-  textStyle?: TextStyle
+  customButtonStyle?: ViewStyle
+  customTextStyle?: TextStyle
   invert?: boolean
   testID?: string
 }
@@ -27,20 +27,37 @@ export const Button: FunctionComponent<ButtonProps> = ({
   onPress,
   disabled,
   loading,
-  buttonStyle,
-  textStyle,
+  customButtonStyle,
+  customTextStyle,
   invert,
   testID,
 }) => {
-  const buttonColorStyle = invert ? Buttons.primaryInverted : Buttons.primary
-  const buttonStyles =
-    disabled || loading
-      ? { ...buttonColorStyle, ...style.buttonDisabled, ...buttonStyle }
-      : { ...buttonColorStyle, ...style.buttonEnabled, ...buttonStyle }
-  const buttonTextStyle =
-    disabled || loading
-      ? { ...style.text, ...style.textDisabled, ...textStyle }
-      : { ...style.text, ...style.textEnabled, ...textStyle }
+  const determineButtonStyle = (): ViewStyle => {
+    if (invert && (disabled || loading)) {
+      return style.buttonInvertedDisabled
+    } else if (invert && !(disabled || loading)) {
+      return style.buttonInverted
+    } else if (!invert && (disabled || loading)) {
+      return style.buttonDisabled
+    } else {
+      return style.button
+    }
+  }
+
+  const determineTextStyle = (): TextStyle => {
+    if (invert && (disabled || loading)) {
+      return style.textInvertedDisabled
+    } else if (invert && !(disabled || loading)) {
+      return style.textInverted
+    } else if (!invert && (disabled || loading)) {
+      return style.textDisabled
+    } else {
+      return style.text
+    }
+  }
+
+  const buttonStyle = { ...determineButtonStyle(), ...customButtonStyle }
+  const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
   return (
     <TouchableOpacity
@@ -49,32 +66,45 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={buttonStyles}
+      style={buttonStyle}
       testID={testID}
     >
       {loading ? (
         <ActivityIndicator size={"large"} />
       ) : (
-        <GlobalText style={buttonTextStyle}>{label}</GlobalText>
+        <GlobalText style={textStyle}>{label}</GlobalText>
       )}
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
-  buttonDisabled: {
-    ...Buttons.primaryInvertedDisabled,
+  button: {
+    ...Buttons.primary,
   },
-  buttonEnabled: {
+  buttonInverted: {
     ...Buttons.primaryInverted,
+  },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+  },
+  buttonInvertedDisabled: {
+    ...Buttons.primaryInvertedDisabled,
   },
   text: {
     textAlign: "center",
+    ...Typography.buttonPrimaryText,
   },
-  textEnabled: {
+  textInverted: {
+    textAlign: "center",
     ...Typography.buttonPrimaryInvertedText,
   },
   textDisabled: {
+    textAlign: "center",
+    ...Typography.buttonPrimaryDisabledText,
+  },
+  textInvertedDisabled: {
+    textAlign: "center",
     ...Typography.buttonPrimaryInvertedDisabledText,
   },
 })

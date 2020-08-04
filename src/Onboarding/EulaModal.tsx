@@ -16,15 +16,14 @@ import { useNavigation } from "@react-navigation/native"
 
 import { Images } from "../assets"
 import { GlobalText } from "../components/GlobalText"
+import { OnboardingScreens } from "../navigation"
+import { Button } from "../components/Button"
 import enEulaHtml from "../locales/eula/en.html"
 import esPREulaHtml from "../locales/eula/es_PR.html"
 import htEulaHtml from "../locales/eula/ht.html"
-import { OnboardingScreens } from "../navigation"
 
 import { Icons } from "../assets"
 import {
-  Buttons,
-  Typography,
   Forms,
   Layout,
   Colors,
@@ -124,17 +123,12 @@ const EulaModal: FunctionComponent = () => {
             {t("onboarding.eula_agree_terms_of_use")}
           </GlobalText>
         </TouchableOpacity>
-        <TouchableOpacity
+        <Button
+          invert
           onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
-          style={boxChecked ? style.button : style.disabledButton}
           disabled={!boxChecked}
-        >
-          <GlobalText
-            style={boxChecked ? style.buttonText : style.disabledButtonText}
-          >
-            {t("common.continue")}
-          </GlobalText>
-        </TouchableOpacity>
+          label={t("common.continue")}
+        />
       </View>
     </SafeAreaView>
   )
@@ -178,20 +172,6 @@ const style = StyleSheet.create({
     ...Forms.checkboxText,
     flex: 1,
     paddingLeft: Spacing.medium,
-  },
-  button: {
-    ...Buttons.primaryInverted,
-  },
-  disabledButton: {
-    ...Buttons.primaryInvertedDisabled,
-    backgroundColor: Colors.lighterGray,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
-  },
-  disabledButtonText: {
-    ...Typography.buttonPrimaryInvertedDisabledText,
-    color: Colors.mediumGray,
   },
 })
 

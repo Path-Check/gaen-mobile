@@ -26,8 +26,8 @@ export const Caregiver = ({ navigation }) => {
         <Button
           onPress={handleButtonPress}
           label={t("assessment.caregiver_cta")}
-          buttonStyle={style.button}
-          textStyle={style.buttonText}
+          customButtonStyle={style.button}
+          customTextStyle={style.buttonText}
           testID="assessment-button"
         />
       }
