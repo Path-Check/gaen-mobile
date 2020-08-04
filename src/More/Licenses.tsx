@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   Linking,
   ScrollView,
@@ -18,6 +18,16 @@ import { Icons } from "../assets"
 
 const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
+  const [applicationName, setApplicationName] = useState("")
+
+  const fetchApplicationName = async () => {
+    const name = await getApplicationName()
+    setApplicationName(name)
+  }
+
+  useEffect(() => {
+    fetchApplicationName()
+  }, [])
 
   const infoEmailAddress = "info@pathcheck.org"
   const infoEmailLink = "mailto:info@pathcheck.org"
@@ -37,7 +47,7 @@ const Licenses: FunctionComponent = () => {
             style={style.headerContent}
             testID={"licenses-legal-header"}
           >
-            {getApplicationName()}
+            {applicationName}
           </GlobalText>
           <GlobalText style={style.contentText}>
             {t("label.legal_page_address")}

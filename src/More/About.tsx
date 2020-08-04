@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Linking,
@@ -22,10 +22,23 @@ import { Colors, Spacing, Typography } from "../styles"
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
 
-  const versionInfo = `${getVersion()} (${getBuildNumber()})`
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const pathCheckWebAddress = "pathcheck.org"
   const pathCheckUrl = "https://pathcheck.org/"
+  const [applicationName, setApplicationName] = useState("")
+  const [versionInfo, setVersionInfo] = useState("")
+
+  const fetchDeviceInfo = async () => {
+    const name = await getApplicationName()
+    const version = await getVersion()
+    const buildNumber = await getBuildNumber()
+    setApplicationName(name)
+    setVersionInfo(`${version} (${buildNumber})`)
+  }
+
+  useEffect(() => {
+    fetchDeviceInfo()
+  }, [])
 
   return (
     <ScrollView
@@ -33,9 +46,7 @@ export const AboutScreen: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <View>
-        <GlobalText style={style.headerContent}>
-          {getApplicationName()}
-        </GlobalText>
+        <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
         {t("label.about_para")}
