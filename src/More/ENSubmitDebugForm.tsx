@@ -178,7 +178,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.large,
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
   },
   headerContainer: {
     marginBottom: Spacing.small,

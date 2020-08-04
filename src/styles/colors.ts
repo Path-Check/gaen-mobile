@@ -52,7 +52,7 @@ const jacksonsPurple = "#1f2c9b"
 const moonRaker = "#e5e7fa"
 const indigo = "#4754C5"
 const melrose = "#a5affb"
-const faintViolet = "#f3f3fc"
+const faintViolet = "#f0edf4"
 
 export const primaryViolet = jacksonsPurple
 export const secondaryViolet = indigo
@@ -66,7 +66,6 @@ export const transparentDark = "rgba(0,0,0,0.7)"
 
 // Backgrounds
 export const primaryBackground = faintViolet
-export const primaryBackgroundFaintShade = faintGray
 export const secondaryBackground = moonRaker
 export const tertiaryBackground = lighterGray
 

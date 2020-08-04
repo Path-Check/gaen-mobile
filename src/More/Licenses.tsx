@@ -72,7 +72,7 @@ const Licenses: FunctionComponent = () => {
 const style = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
     paddingTop: Spacing.large,
     paddingHorizontal: Spacing.small,
   },

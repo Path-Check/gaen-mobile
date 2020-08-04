@@ -204,7 +204,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Layout.oneTenthHeight,
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
     paddingBottom: Spacing.small,
   },
   headerContainer: {
