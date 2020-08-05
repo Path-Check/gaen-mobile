@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import {
   TransitionPresets,
   createStackNavigator,
+  StackNavigationOptions,
 } from "@react-navigation/stack"
 
 import NotificationPermissions from "../Onboarding/NotificationPermissions"
@@ -11,12 +12,9 @@ import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
 import EulaModal from "../Onboarding/EulaModal"
 import NotificationDetails from "../Onboarding/NotificationDetails"
 import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
-import { OnboardingScreen, OnboardingScreens } from "./index"
 import LanguageSelection from "../More/LanguageSelection"
 
-const SCREEN_OPTIONS = {
-  headerShown: false,
-}
+import { OnboardingScreen, OnboardingScreens } from "./index"
 
 type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
@@ -24,39 +22,46 @@ type OnboardingStackParams = {
 
 const Stack = createStackNavigator<OnboardingStackParams>()
 
-const OnboardingStack: FunctionComponent = () => (
-  <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-    <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
-    <Stack.Screen
-      name={OnboardingScreens.EulaModal}
-      component={EulaModal}
-      options={{ ...TransitionPresets.ModalTransition }}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.PersonalPrivacy}
-      component={PersonalPrivacy}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.NotificationDetails}
-      component={NotificationDetails}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.ShareDiagnosis}
-      component={ShareDiagnosis}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.NotificationPermissions}
-      component={NotificationPermissions}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.EnableExposureNotifications}
-      component={EnableExposureNotifications}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.LanguageSelection}
-      component={LanguageSelection}
-    />
-  </Stack.Navigator>
-)
+const OnboardingStack: FunctionComponent = () => {
+  const onboardingScreenOptions: StackNavigationOptions = {
+    headerShown: false,
+  }
+
+  return (
+    <Stack.Navigator screenOptions={onboardingScreenOptions}>
+      <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
+      <Stack.Screen
+        name={OnboardingScreens.EulaModal}
+        component={EulaModal}
+        options={{ ...TransitionPresets.ModalTransition }}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.PersonalPrivacy}
+        component={PersonalPrivacy}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.NotificationDetails}
+        component={NotificationDetails}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.ShareDiagnosis}
+        component={ShareDiagnosis}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.NotificationPermissions}
+        component={NotificationPermissions}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.EnableExposureNotifications}
+        component={EnableExposureNotifications}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.LanguageSelection}
+        component={LanguageSelection}
+      />
+    </Stack.Navigator>
+  )
+}
 
 export default OnboardingStack
+

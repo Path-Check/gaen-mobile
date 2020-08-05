@@ -6,12 +6,16 @@ import {
   ScrollView,
   ImageSourcePropType,
   ViewStyle,
+  TouchableOpacity,
 } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
+import { Screens } from "../navigation"
 
-import { Outlines, Colors, Spacing, Typography } from "../styles"
+import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
 type ExplanationScreenContent = {
   screenNumber: number
@@ -35,6 +39,9 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
   explanationScreenContent,
   explanationScreenActions,
 }: ExplanationScreenProps) => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
   const determineCircleStyle = (circlePosition: number): ViewStyle => {
     if (circlePosition == explanationScreenContent.screenNumber) {
       return style.circleActive
@@ -44,36 +51,44 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
   }
 
   return (
-    <ScrollView
-      alwaysBounceVertical={false}
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-    >
-      <View>
-        <Image
-          source={explanationScreenContent.image}
-          accessibilityLabel={explanationScreenContent.imageLabel}
-          accessible
-          style={style.image}
-          resizeMode={"contain"}
-        />
-        <View style={style.circles}>
-          <View style={determineCircleStyle(1)} />
-          <View style={determineCircleStyle(2)} />
-          <View style={determineCircleStyle(3)} />
-          <View style={determineCircleStyle(4)} />
-          <View style={determineCircleStyle(5)} />
+    <View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(Screens.Home)}
+        style={style.skipButtonContainer}
+      >
+        <GlobalText style={style.skipButtonText}>{t("common.skip")}</GlobalText>
+      </TouchableOpacity>
+      <ScrollView
+        alwaysBounceVertical={false}
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+      >
+        <View>
+          <Image
+            source={explanationScreenContent.image}
+            accessibilityLabel={explanationScreenContent.imageLabel}
+            accessible
+            style={style.image}
+            resizeMode={"contain"}
+          />
+          <View style={style.circles}>
+            <View style={determineCircleStyle(1)} />
+            <View style={determineCircleStyle(2)} />
+            <View style={determineCircleStyle(3)} />
+            <View style={determineCircleStyle(4)} />
+            <View style={determineCircleStyle(5)} />
+          </View>
+          <GlobalText style={style.headerText}>
+            {explanationScreenContent.header}
+          </GlobalText>
         </View>
-        <GlobalText style={style.headerText}>
-          {explanationScreenContent.header}
-        </GlobalText>
-      </View>
-      <Button
-        hasRightArrow
-        label={explanationScreenContent.primaryButtonLabel}
-        onPress={explanationScreenActions.primaryButtonOnPress}
-      />
-    </ScrollView>
+        <Button
+          hasRightArrow
+          label={explanationScreenContent.primaryButtonLabel}
+          onPress={explanationScreenActions.primaryButtonOnPress}
+        />
+      </ScrollView>
+    </View>
   )
 }
 
@@ -112,6 +127,17 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header2,
     marginBottom: Spacing.xxxLarge,
+  },
+  skipButtonContainer: {
+    position: "absolute",
+    top: Spacing.medium,
+    right: Spacing.small,
+    padding: Spacing.small,
+    zIndex: Layout.zLevel1,
+  },
+  skipButtonText: {
+    ...Typography.base,
+    color: Colors.mediumGray,
   },
 })
 
