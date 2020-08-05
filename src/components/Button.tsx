@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 import { GlobalText } from "./GlobalText"
 import { Icons } from "../assets"
 
-import { Iconography, Spacing, Colors, Buttons, Typography } from "../styles"
+import { Spacing, Colors, Buttons, Typography } from "../styles"
 
 interface ButtonProps {
   label: string
@@ -89,7 +89,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
                 xml={Icons.Arrow}
                 fill={Colors.white}
                 style={style.rightArrow}
-                width={Iconography.medium}
               />
             )}
           </>

@@ -107,6 +107,7 @@ const style = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
+    marginTop: Spacing.small,
     marginBottom: Spacing.medium,
   },
   circleActive: {
@@ -134,10 +135,9 @@ const style = StyleSheet.create({
   },
   skipButtonContainer: {
     position: "absolute",
-    top: Spacing.medium,
+    top: Spacing.small,
     right: Spacing.small,
     padding: Spacing.small,
-    zIndex: Layout.zLevel1,
   },
   skipButtonText: {
     ...Typography.base,

@@ -94,7 +94,7 @@ export const largeFont: TextStyle = {
 export const xLargeFont: TextStyle = {
   ...base,
   fontSize: xLarge,
-  lineHeight: largeLineHeight,
+  lineHeight: xLargeLineHeight,
 }
 
 export const xxLargeFont: TextStyle = {
@@ -117,7 +117,7 @@ export const header1: TextStyle = {
 }
 
 export const header2: TextStyle = {
-  ...xxLargeFont,
+  ...xLargeFont,
   ...bold,
   color: Colors.primaryHeaderText,
 }

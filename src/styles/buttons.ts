@@ -10,7 +10,7 @@ const base: ViewStyle = {
   alignItems: "center",
   alignSelf: "flex-start",
   borderRadius: Outlines.borderRadiusMax,
-  paddingHorizontal: Spacing.small,
+  paddingHorizontal: Spacing.huge,
   minWidth: 200,
 }
 
