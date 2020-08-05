@@ -63,7 +63,7 @@ describe("EulaModal", () => {
 
     fireEvent.press(continueButton)
     await wait(() => {
-      expect(navigationSpy).toHaveBeenCalledWith("PersonalPrivacy")
+      expect(navigationSpy).toHaveBeenCalledWith("Introduction")
     })
   })
 })
