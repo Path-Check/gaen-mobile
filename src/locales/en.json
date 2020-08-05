@@ -203,24 +203,23 @@
     "step_2_of_3": "Step 2 of 3",
     "step_3_of_3": "Step 3 of 3"
   },
+  "report_issue": {
+    "body": "Feedback (required)",
+    "email": "Email (required)",
+    "name": "Full Name",
+    "success": "We received your request. Thank you!"
+  },
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
     "debug_form": "Debug Form",
     "exposure_history": "Exposure History",
-    "feedback": "Feedback",
     "legal": "Legal",
+    "report_issue": "Report an Issue",
     "select_language": "Select Language"
   },
   "settings": {
     "share_test_result": "Report Positive Test Result",
     "share_test_result_description": "Anonymously notify others you may have recently encountered if you test positive for COVID-19"
-  },
-  "submit_feedback": {
-    "body": "Body (required)",
-    "name": "Full Name",
-    "subject": "Subject (required)",
-    "title": "We want your feedback",
-    "success": "We received your feedback. Thank you!"
   }
 }

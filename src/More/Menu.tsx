@@ -124,8 +124,8 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
           itemStyle={style.divider}
         />
         <SettingsListItem
-          label={t("screen_titles.feedback")}
-          onPress={() => navigation.navigate(Screens.FeedbackForm)}
+          label={t("screen_titles.report_issue")}
+          onPress={() => navigation.navigate(Screens.ReportIssueForm)}
           itemStyle={style.lastListItem}
         />
       </View>

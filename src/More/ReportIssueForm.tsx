@@ -15,33 +15,36 @@ import { useNavigation } from "@react-navigation/native"
 
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
-import { submitFeedback, FeedbackError } from "./zendeskAPI"
+import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
 
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = " "
+const EMAIL_REGEX = RegExp(/\S+@\S+\.\S+/)
 
-const FeedbackForm: FunctionComponent = () => {
+const ReportIssueForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
   const [name, setName] = useState("")
-  const [subject, setSubject] = useState("")
+  const [email, setEmail] = useState("")
   const [body, setBody] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(true)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
   const validate = () => {
-    const hasSubject = subject.trim().length > 0
+    const hasValidEmail = email.trim().length > 0 && EMAIL_REGEX.test(email)
     const hasBody = body.trim().length > 0
 
-    if (hasSubject && hasBody) {
+    if (hasValidEmail && hasBody) {
       setIsDisabled(false)
-    } else setIsDisabled(true)
+    } else {
+      setIsDisabled(true)
+    }
   }
 
-  useEffect(validate, [subject, body])
+  useEffect(validate, [email, body])
 
   const isIOS = Platform.OS === "ios"
 
@@ -50,9 +53,9 @@ const FeedbackForm: FunctionComponent = () => {
     setName(name)
   }
 
-  const handleOnChangeSubject = (subject: string) => {
+  const handleOnChangeEmail = (email: string) => {
     setErrorMessage("")
-    setSubject(subject)
+    setEmail(email)
   }
 
   const handleOnChangeBody = (newBody: string) => {
@@ -62,7 +65,7 @@ const FeedbackForm: FunctionComponent = () => {
 
   const clearInputs = () => {
     setBody("")
-    setSubject("")
+    setEmail("")
     setName("")
   }
 
@@ -70,9 +73,9 @@ const FeedbackForm: FunctionComponent = () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     try {
-      const response = await submitFeedback({
+      const response = await reportAnIssue({
         name,
-        subject,
+        email,
         body,
         environment: {
           os: Platform.OS,
@@ -82,13 +85,13 @@ const FeedbackForm: FunctionComponent = () => {
       })
 
       if (response.kind === "success") {
-        Alert.alert(t("common.success"), t("submit_feedback.success"), [
+        clearInputs()
+        Alert.alert(t("common.success"), t("report_issue.success"), [
           { onPress: navigation.goBack },
         ])
       } else {
         setErrorMessage(showError(response.error))
       }
-      clearInputs()
       setIsLoading(false)
     } catch (e) {
       Alert.alert(t("common.something_went_wrong"), e.message)
@@ -96,7 +99,7 @@ const FeedbackForm: FunctionComponent = () => {
     }
   }
 
-  const showError = (error: FeedbackError): string => {
+  const showError = (error: ReportIssueError): string => {
     switch (error) {
       default: {
         return t("common.something_went_wrong")
@@ -113,18 +116,32 @@ const FeedbackForm: FunctionComponent = () => {
         >
           <View style={style.container}>
             <View>
-              <View style={style.headerContainer}>
-                <GlobalText style={style.header}>
-                  {t("submit_feedback.title")}
+              <GlobalText style={style.errorSubtitle}>
+                {errorMessage}
+              </GlobalText>
+              <View style={style.inputContainer}>
+                <GlobalText style={style.inputLabel}>
+                  {t("report_issue.email")}
                 </GlobalText>
+                <TextInput
+                  accessibilityLabel={t("report_issue.email")}
+                  value={email}
+                  style={style.textInput}
+                  keyboardType="email-address"
+                  returnKeyType="done"
+                  onChangeText={handleOnChangeEmail}
+                  blurOnSubmit={false}
+                  onSubmitEditing={Keyboard.dismiss}
+                  autoCapitalize="none"
+                />
               </View>
 
               <View style={style.inputContainer}>
                 <GlobalText style={style.inputLabel}>
-                  {t("submit_feedback.name")}
+                  {t("report_issue.name")}
                 </GlobalText>
                 <TextInput
-                  accessibilityLabel={t("submit_feedback.name")}
+                  accessibilityLabel={t("report_issue.name")}
                   value={name}
                   style={style.textInput}
                   keyboardType="default"
@@ -138,27 +155,10 @@ const FeedbackForm: FunctionComponent = () => {
 
               <View style={style.inputContainer}>
                 <GlobalText style={style.inputLabel}>
-                  {t("submit_feedback.subject")}
+                  {t("report_issue.body")}
                 </GlobalText>
                 <TextInput
-                  accessibilityLabel={t("submit_feedback.subject")}
-                  value={subject}
-                  style={style.textInput}
-                  keyboardType="default"
-                  returnKeyType="done"
-                  onChangeText={handleOnChangeSubject}
-                  blurOnSubmit={false}
-                  onSubmitEditing={Keyboard.dismiss}
-                  autoCapitalize="sentences"
-                />
-              </View>
-
-              <View style={style.inputContainer}>
-                <GlobalText style={style.inputLabel}>
-                  {t("submit_feedback.body")}
-                </GlobalText>
-                <TextInput
-                  accessibilityLabel={t("submit_feedback.body")}
+                  accessibilityLabel={t("report_issue.body")}
                   value={body}
                   style={style.descriptionInput}
                   keyboardType={"default"}
@@ -169,10 +169,6 @@ const FeedbackForm: FunctionComponent = () => {
                   multiline
                 />
               </View>
-
-              <GlobalText style={style.errorSubtitle}>
-                {errorMessage}
-              </GlobalText>
             </View>
             {isLoading ? <LoadingIndicator /> : null}
 
@@ -181,7 +177,6 @@ const FeedbackForm: FunctionComponent = () => {
               label={t("common.submit")}
               disabled={isDisabled}
               loading={isLoading}
-              invert
             />
           </View>
         </KeyboardAvoidingView>
@@ -211,6 +206,7 @@ const style = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
     backgroundColor: Colors.faintGray,
+    paddingBottom: Spacing.medium,
   },
   container: {
     height: "100%",
@@ -218,13 +214,6 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.large,
     backgroundColor: Colors.faintGray,
-  },
-  headerContainer: {
-    marginBottom: Spacing.small,
-  },
-  header: {
-    ...Typography.header2,
-    marginBottom: Spacing.xxSmall,
   },
   errorSubtitle: {
     ...Typography.header4,
@@ -247,7 +236,7 @@ const style = StyleSheet.create({
   descriptionInput: {
     ...Forms.textInputFormField,
     ...Typography.secondaryTextInput,
-    minHeight: 4 * Typography.largeLineHeight,
+    minHeight: 5 * Typography.largeLineHeight,
   },
   activityIndicatorContainer: {
     position: "absolute",
@@ -265,4 +254,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default FeedbackForm
+export default ReportIssueForm

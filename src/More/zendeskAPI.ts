@@ -4,14 +4,14 @@ const defaultHeaders = {
   "content-type": "application/json",
 }
 
-type EnvironmentProps = {
+interface EnvironmentProps {
   os: string
   osVersion: string
   appVersion: string
 }
 
-type FeedbackProps = {
-  subject: string
+interface ReportIssueProps {
+  email: string
   name: string
   body: string
   environment: EnvironmentProps
@@ -26,32 +26,38 @@ interface NetworkFailure<U> {
   error: U
 }
 
-export type FeedbackError = "Unknown" | "ZendeskError"
+export type ReportIssueError = "Unknown" | "ZendeskError"
 
-export type NetworkResponse<U = "Unknown"> = NetworkSuccess | NetworkFailure<U>
+export type NetworkResponse<Error = "Unknown"> =
+  | NetworkSuccess
+  | NetworkFailure<Error>
 
 const OS_FIELD_KEY = "360033622032"
 const OS_VERSION_FIELD_KEY = "360033618552"
 const APP_VERSION_FIELD_KEY = "360033141172"
+const APP_NAME_FIELD_KEY = "360034051891"
+const ISSUE_SUBJECT = `Issue from GAEN mobile application ${env.DISPLAY_NAME}`
+const ANONYMOUS = "Anonymous"
 
 const environmentFields = ({ os, osVersion, appVersion }: EnvironmentProps) => {
   return {
     [OS_FIELD_KEY]: os,
     [OS_VERSION_FIELD_KEY]: osVersion,
     [APP_VERSION_FIELD_KEY]: appVersion,
+    [APP_NAME_FIELD_KEY]: env.DISPLAY_NAME,
   }
 }
 
-export const submitFeedback = async ({
-  subject,
+export const reportAnIssue = async ({
+  email,
   name,
   body,
   environment,
-}: FeedbackProps): Promise<NetworkResponse<FeedbackError>> => {
+}: ReportIssueProps): Promise<NetworkResponse<ReportIssueError>> => {
   const requestBody = {
     request: {
-      subject,
-      requester: { name },
+      subject: ISSUE_SUBJECT,
+      requester: { name: name.length > 0 ? name : ANONYMOUS, email },
       comment: { body },
       custom_fields: [environmentFields(environment)],
     },

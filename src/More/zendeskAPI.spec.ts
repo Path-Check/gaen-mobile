@@ -1,11 +1,11 @@
-import { submitFeedback } from "./zendeskAPI"
+import { reportAnIssue } from "./zendeskAPI"
 
-describe("submitFeedback", () => {
-  it("sends a request to the zendesk api to create a new request", async () => {
+describe("reportAnIssue", () => {
+  it("creates a new request using the zendesk api", async () => {
     const fetchSpy = jest.fn()
     ;(fetch as jest.Mock) = fetchSpy
     fetchSpy.mockRejectedValueOnce("error")
-    const subject = "subject"
+    const email = "email"
     const name = "name"
     const body = "body"
     const environment = {
@@ -14,7 +14,7 @@ describe("submitFeedback", () => {
       appVersion: "appVersion",
     }
 
-    await submitFeedback({ subject, name, body, environment })
+    await reportAnIssue({ email, name, body, environment })
 
     // The constants are taken from "__mocks__/react-native-config.js"
     expect(fetchSpy).toHaveBeenCalledWith("ZENDESK_URL", {
@@ -24,14 +24,16 @@ describe("submitFeedback", () => {
       },
       body: JSON.stringify({
         request: {
-          subject,
-          requester: { name },
+          // The constants are taken from "__mocks__/react-native-config.js"
+          subject: "Issue from GAEN mobile application DISPLAY_NAME",
+          requester: { name, email },
           comment: { body },
           custom_fields: [
             {
               "360033622032": environment.os,
               "360033618552": environment.osVersion,
               "360033141172": environment.appVersion,
+              "360034051891": "DISPLAY_NAME",
             },
           ],
         },
@@ -45,8 +47,8 @@ describe("submitFeedback", () => {
       ;(fetch as jest.Mock) = fetchSpy
       fetchSpy.mockResolvedValueOnce({ ok: true })
 
-      const result = await submitFeedback({
-        subject: "subject",
+      const result = await reportAnIssue({
+        email: "email",
         name: "name",
         body: "body",
         environment: {
@@ -66,8 +68,8 @@ describe("submitFeedback", () => {
       ;(fetch as jest.Mock) = fetchSpy
       fetchSpy.mockResolvedValueOnce({ ok: false })
 
-      const result = await submitFeedback({
-        subject: "subject",
+      const result = await reportAnIssue({
+        email: "email",
         name: "name",
         body: "body",
         environment: {
@@ -85,8 +87,8 @@ describe("submitFeedback", () => {
       ;(fetch as jest.Mock) = fetchSpy
       fetchSpy.mockRejectedValueOnce("error")
 
-      const result = await submitFeedback({
-        subject: "subject",
+      const result = await reportAnIssue({
+        email: "email",
         name: "name",
         body: "body",
         environment: {
