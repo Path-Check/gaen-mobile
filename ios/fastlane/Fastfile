@@ -43,6 +43,19 @@ platform :ios do
     PROJECT = "COVIDSafePaths.xcodeproj"
     JS_PACKAGE = load_json(json_path: "../package.json")
 
+
+  lane :deploy_to_appcenter do
+      appcenter_upload(
+        api_token: options[:apiToken],
+        owner_name: "PathCheck",
+        app_name: options[:appName],
+        notify_testers: false,
+        destinations: "Collaborators",
+        release_notes: changeLogs,
+        file: options[:ipa_path]
+      )
+    end
+
     lane :sync_local_certs do
       match(
         type: 'appstore',
