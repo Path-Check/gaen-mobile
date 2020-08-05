@@ -77,7 +77,7 @@ platform :android do
       api_token: options[:apiToken],
       owner_name: "PathCheck",
       app_name: options[:appName],
-      notify_testers: true,
+      notify_testers: false,
       destinations: "Collaborators",
       release_notes: changeLogs,
       file: "app/build/outputs/apk/release/app-" + options[:apkSuffix] + "-release.apk"
