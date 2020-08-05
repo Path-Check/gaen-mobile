@@ -18,7 +18,7 @@ export const lightGray = "#999999"
 export const mediumGray = "#606060"
 export const gray = "#333333"
 export const darkGray = "#4e4e4e"
-export const darkestGray = "#2e2e2e"
+export const darkestGray = "#232323"
 export const steelGray = "#9BA0AA"
 
 // Reds

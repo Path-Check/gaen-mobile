@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
+import { OnboardingScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
@@ -17,8 +18,9 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
+
   const { exposureNotifications } = usePermissionsContext()
-  const { setOnboardingToComplete } = useOnboardingContext()
 
   const headerText = t("onboarding.proximity_tracing_header")
   const subheader1Text = t("onboarding.proximity_tracing_subheader1")
@@ -29,11 +31,11 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
-    setOnboardingToComplete()
+    navigation.navigate(OnboardingScreens.NotificationPermissions)
   }
 
   const handleOnPressDontEnable = () => {
-    setOnboardingToComplete()
+    navigation.navigate(OnboardingScreens.NotificationPermissions)
   }
 
   return (
@@ -83,7 +85,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheader: {
-    ...Typography.header3,
+    ...Typography.header4,
     marginBottom: Spacing.xSmall,
   },
   body: {

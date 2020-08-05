@@ -21,7 +21,7 @@ const ValueProposition: FunctionComponent = () => {
 
   const explanationScreenActions = {
     primaryButtonOnPress: () =>
-      navigation.navigate(Screens.NotificationPermissions),
+      navigation.navigate(Screens.EnableExposureNotifications),
   }
 
   return (

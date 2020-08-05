@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react"
+import { TouchableOpacity, StyleSheet, View } from "react-native"
 import {
   TransitionPresets,
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack"
-import { StyleSheet, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
@@ -33,6 +34,8 @@ const Stack = createStackNavigator<OnboardingStackParams>()
 
 const OnboardingStack: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
+
   const onboardingScreenOptions: StackNavigationOptions = {
     headerShown: false,
   }
@@ -56,11 +59,17 @@ const OnboardingStack: FunctionComponent = () => {
         <GlobalText style={style.headerRightText}>
           {determineStepText()}
         </GlobalText>
-        <SvgXml
-          xml={Icons.Close}
-          fill={Colors.darkestGray}
-          style={style.closeIcon}
-        />
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(OnboardingScreens.ValueProposition)
+          }
+        >
+          <SvgXml
+            xml={Icons.Close}
+            fill={Colors.darkestGray}
+            style={style.closeIcon}
+          />
+        </TouchableOpacity>
       </View>
     )
   }
@@ -70,6 +79,7 @@ const OnboardingStack: FunctionComponent = () => {
     headerLeft: () => null,
     headerTitleAlign: "left",
     headerTitle: "App Setup",
+    headerTitleStyle: style.headerTitle,
   }
 
   return (
@@ -101,19 +111,19 @@ const OnboardingStack: FunctionComponent = () => {
         component={ValueProposition}
       />
       <Stack.Screen
-        name={OnboardingScreens.NotificationPermissions}
-        component={NotificationPermissions}
-        options={{
-          ...appSetupOptions,
-          headerRight: () => HeaderRight(1),
-        }}
-      />
-      <Stack.Screen
         name={OnboardingScreens.EnableExposureNotifications}
         component={EnableExposureNotifications}
         options={{
           ...appSetupOptions,
           headerRight: () => HeaderRight(2),
+        }}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.NotificationPermissions}
+        component={NotificationPermissions}
+        options={{
+          ...appSetupOptions,
+          headerRight: () => HeaderRight(3),
         }}
       />
       <Stack.Screen
@@ -125,6 +135,9 @@ const OnboardingStack: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
+  headerTitle: {
+    ...Typography.base,
+  },
   headerRight: {
     flexDirection: "row",
     alignItems: "center",
