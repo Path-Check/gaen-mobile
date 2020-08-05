@@ -14,7 +14,7 @@ const ValueProposition: FunctionComponent = () => {
   const explanationScreenContent = {
     screenNumber: 5,
     image: Images.PersonAndHealthExpert,
-    imageLabel: "Placeholder",
+    imageLabel: t("onboarding_screen5_image_label"),
     header: t("label.onboarding_screen5_header"),
     primaryButtonLabel: t("label.onboarding_screen_5_button"),
   }

@@ -54,8 +54,11 @@ export const ExportIntro = (): JSX.Element => {
             <GlobalText style={style.header}>{title}</GlobalText>
             <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
-
-          <Button label={t("common.start")} onPress={handleOnPressNext} />
+          <Button
+            invert
+            label={t("common.start")}
+            onPress={handleOnPressNext}
+          />
         </ScrollView>
       </SafeAreaView>
     </ImageBackground>

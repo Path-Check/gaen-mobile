@@ -14,7 +14,7 @@ const Introduction: FunctionComponent = () => {
   const explanationScreenContent = {
     screenNumber: 1,
     image: Images.PeopleHighFiving,
-    imageLabel: "Placeholder",
+    imageLabel: t("onboarding_screen1_image_label"),
     header: t("label.onboarding_screen1_header"),
     primaryButtonLabel: t("label.onboarding_screen1_button"),
   }

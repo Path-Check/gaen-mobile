@@ -14,7 +14,7 @@ const PhoneRemembersDevices: FunctionComponent = () => {
   const explanationScreenContent = {
     screenNumber: 2,
     image: Images.PeopleOnPhones,
-    imageLabel: "Placeholder",
+    imageLabel: t("onboarding_screen2_image_label"),
     header: t("label.onboarding_screen2_header"),
     primaryButtonLabel: t("label.onboarding_screen2_button"),
   }

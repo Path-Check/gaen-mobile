@@ -14,7 +14,7 @@ const GetNotified: FunctionComponent = () => {
   const explanationScreenContent = {
     screenNumber: 4,
     image: Images.PersonGettingNotification,
-    imageLabel: "Placeholder",
+    imageLabel: t("onboarding_screen4_image_label"),
     header: t("label.onboarding_screen4_header"),
     primaryButtonLabel: t("label.onboarding_screen4_button"),
   }

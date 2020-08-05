@@ -69,6 +69,7 @@ const Home = ({
       </View>
       {!isEnabledAndAuthorized ? (
         <Button
+          invert
           testID={"home-request-permissions-button"}
           onPress={handleRequestPermission}
           label={buttonText}

@@ -37,15 +37,20 @@ export const Button: FunctionComponent<ButtonProps> = ({
   testID,
   hasRightArrow,
 }) => {
-  const determineGradient = (): [string, string] => {
+  const determineGradient = (): string[] => {
+    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
+    const disabledGradient = [Colors.darkestGray, Colors.mediumGray]
+    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
+    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
+
     if (invert && (disabled || loading)) {
-      return [Colors.mediumGray, Colors.lighterGray]
+      return invertedDisabledGradient
     } else if (invert && !(disabled || loading)) {
-      return [Colors.primaryBlue, Colors.white]
+      return invertedGradient
     } else if (!invert && (disabled || loading)) {
-      return [Colors.darkestGray, Colors.mediumGray]
+      return disabledGradient
     } else {
-      return [Colors.primaryBlue, Colors.secondaryViolet]
+      return baseGradient
     }
   }
 
