@@ -28,16 +28,20 @@ export const AboutScreen: FunctionComponent = () => {
   const [applicationName, setApplicationName] = useState("")
   const [versionInfo, setVersionInfo] = useState("")
 
-  const fetchDeviceInfo = async () => {
+  const fetchApplicationName = async () => {
     const name = await getApplicationName()
+    setApplicationName(name)
+  }
+
+  const fetchVersion = async () => {
     const version = await getVersion()
     const buildNumber = await getBuildNumber()
-    setApplicationName(name)
     setVersionInfo(`${version} (${buildNumber})`)
   }
 
   useEffect(() => {
-    fetchDeviceInfo()
+    fetchApplicationName()
+    fetchVersion()
   }, [])
 
   return (

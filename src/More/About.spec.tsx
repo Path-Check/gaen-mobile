@@ -1,44 +1,46 @@
 import React from "react"
 import { Linking } from "react-native"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render, fireEvent, wait } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
-import {
-  getApplicationName,
-  getBuildNumber,
-  getVersion,
-} from "../gaen/nativeModule"
-
-jest.mock("nativeModule", () => {
-  return {
-    getApplicationName: jest.fn(),
-    getBuildNumber: jest.fn(),
-    getVersion: jest.fn(),
-  }
-})
+import * as NativeModule from "../gaen/nativeModule"
 
 describe("About", () => {
-  it("shows the name of the application", () => {
+  it("shows the name of the application", async () => {
     const applicationName = "application name"
 
-    ;(getApplicationName as jest.Mock).mockReturnValueOnce(applicationName)
+    const applicationNameSpy = jest
+      .spyOn(NativeModule, "getApplicationName")
+      .mockReturnValue(Promise.resolve(applicationName))
 
     const { getByText } = render(<AboutScreen />)
 
-    expect(getByText(applicationName)).toBeDefined()
+    await wait(() => {
+      expect(applicationNameSpy).toHaveBeenCalled()
+      expect(getByText(applicationName)).toBeDefined()
+    })
   })
 
-  it("shows the build and version number of the application", () => {
-    const buildNumber = 8
-    const versionNumber = 0.18
+  it("shows the build and version number of the application", async () => {
+    const buildNumber = "8"
+    const versionNumber = "0.18"
+    const fullString = `${versionNumber} (${buildNumber})`
 
-    ;(getBuildNumber as jest.Mock).mockReturnValueOnce(buildNumber)
-    ;(getVersion as jest.Mock).mockReturnValueOnce(versionNumber)
+    const buildNumberSpy = jest
+      .spyOn(NativeModule, "getBuildNumber")
+      .mockReturnValue(Promise.resolve(buildNumber))
+    const versionSpy = jest
+      .spyOn(NativeModule, "getVersion")
+      .mockReturnValue(Promise.resolve(versionNumber))
 
     const { getByText } = render(<AboutScreen />)
 
-    expect(getByText("Version:")).toBeDefined()
-    expect(getByText(`${versionNumber} (${buildNumber})`)).toBeDefined()
+    await wait(() => {
+      expect(buildNumberSpy).toHaveBeenCalled()
+      expect(versionSpy).toHaveBeenCalled()
+      expect(getByText("Version:")).toBeDefined()
+      expect(getByText(fullString)).toBeDefined()
+    })
   })
 
   it("navigates to the pathcheck organization when tapped on the url", () => {

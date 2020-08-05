@@ -1,30 +1,29 @@
 import React from "react"
 import "react-native"
-import { render } from "@testing-library/react-native"
+import { render, wait } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
 import LicensesScreen from "./Licenses"
-import { getApplicationName } from "../gaen/nativeModule"
-
-jest.mock("nativeModule", () => {
-  return {
-    getApplicationName: jest.fn(),
-  }
-})
+import * as NativeModule from "../gaen/nativeModule"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 ;(useFocusEffect as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("LicensesScreen", () => {
-  it("shows the name of the application", () => {
+  it("shows the name of the application", async () => {
     const applicationName = "application name"
 
-    ;(getApplicationName as jest.Mock).mockReturnValueOnce(applicationName)
+    const applicationNameSpy = jest
+      .spyOn(NativeModule, "getApplicationName")
+      .mockReturnValue(Promise.resolve(applicationName))
 
     const { getByText } = render(<LicensesScreen />)
 
-    expect(getByText(applicationName)).toBeDefined()
+    await wait(() => {
+      expect(applicationNameSpy).toHaveBeenCalled()
+      expect(getByText(applicationName)).toBeDefined()
+    })
   })
 })
