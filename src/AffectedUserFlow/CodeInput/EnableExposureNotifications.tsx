@@ -63,7 +63,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,

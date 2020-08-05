@@ -69,9 +69,7 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.0.3",
     "react-native-webview": "^8.1.2",
-    "react-native-zip-archive": "^5.0.1",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.19",
-    "rn-fetch-blob": "^0.12.0"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.19"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

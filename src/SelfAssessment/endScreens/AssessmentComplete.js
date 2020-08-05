@@ -17,7 +17,7 @@ export const AssessmentComplete = () => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackgroundFaintShade}
+      backgroundColor={Colors.primaryBackground}
       backgroundImage={Images.EmptyPathBackground}
       icon={Icons.SelfAssessment}
       footer={

@@ -278,8 +278,6 @@ PODS:
   - Realm/Headers (5.3.2)
   - RealmSwift (5.3.2):
     - Realm (= 5.3.2)
-  - rn-fetch-blob (0.12.0):
-    - React-Core
   - RNBackgroundFetch (3.0.4):
     - React
   - RNCAsyncStorage (1.10.0):
@@ -302,14 +300,6 @@ PODS:
     - React
   - RNSVG (12.1.0):
     - React
-  - RNZipArchive (5.0.2):
-    - React
-    - RNZipArchive/Core (= 5.0.2)
-    - SSZipArchive (= 2.2.2)
-  - RNZipArchive/Core (5.0.2):
-    - React
-    - SSZipArchive (= 2.2.2)
-  - SSZipArchive (2.2.2)
   - Yoga (1.14.0)
   - ZIPFoundation (0.9.11)
 
@@ -353,7 +343,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - Realm
   - RealmSwift
-  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
@@ -365,7 +354,6 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - RNZipArchive (from `../node_modules/react-native-zip-archive`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
   - ZIPFoundation
 
@@ -384,7 +372,6 @@ SPEC REPOS:
     - PromisesObjC
     - Realm
     - RealmSwift
-    - SSZipArchive
     - ZIPFoundation
 
 EXTERNAL SOURCES:
@@ -452,8 +439,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  rn-fetch-blob:
-    :path: "../node_modules/rn-fetch-blob"
   RNBackgroundFetch:
     :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
@@ -476,8 +461,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  RNZipArchive:
-    :path: "../node_modules/react-native-zip-archive"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -527,7 +510,6 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   Realm: c6794276ca8884808ba168a22f9d71362b170b85
   RealmSwift: 42ec6cec3170aeeda407f797f07268a7d055ebc7
-  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNBackgroundFetch: 388cf1595934d22fed275b8db9b48a28bb4eb7b6
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
@@ -539,8 +521,6 @@ SPEC CHECKSUMS:
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  RNZipArchive: ab51bc004a31657f34010254a9182014c6a81217
-  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 

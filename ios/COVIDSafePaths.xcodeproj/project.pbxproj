@@ -1197,7 +1197,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Public/SSZipArchive/SSZipArchive.modulemap\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1226,7 +1226,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Public/SSZipArchive/SSZipArchive.modulemap\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\"";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -17,7 +17,7 @@ export const Emergency = () => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackgroundFaintShade}
+      backgroundColor={Colors.primaryBackground}
       icon={Icons.SelfAssessment} // TODO: Placeholder, replace when we get icon
       scrollStyle={style.containerItemsAlignment}
       footer={
