@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { SafeAreaView, View, StyleSheet, TouchableOpacity } from "react-native"
+import {
+  ScrollView,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../PermissionsContext"
@@ -7,9 +13,9 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
-import { Spacing, Typography, Buttons } from "../styles"
+import { Spacing, Typography, Buttons, Colors } from "../styles"
 
-const EnableExposureNotifications = (): JSX.Element => {
+const EnableExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
   const { setOnboardingToComplete } = useOnboardingContext()
@@ -20,8 +26,6 @@ const EnableExposureNotifications = (): JSX.Element => {
   const subheader3Text = t("onboarding.proximity_tracing_subheader3")
   const body1Text = t("onboarding.proximity_tracing_body1")
   const body2Text = t("onboarding.proximity_tracing_body2")
-  const buttonLabel = t("onboarding.enable_proximity_tracing")
-  const disableButtonLabel = t("onboarding.dont_enable_proximity_tracing")
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
@@ -34,7 +38,11 @@ const EnableExposureNotifications = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View style={style.container}>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
         <View style={style.content}>
           <GlobalText style={style.header}>{headerText}</GlobalText>
           <GlobalText style={style.subheader}>{subheader1Text}</GlobalText>
@@ -55,13 +63,17 @@ const EnableExposureNotifications = (): JSX.Element => {
             {t("common.no_thanks")}
           </GlobalText>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
 const style = StyleSheet.create({
   container: {
-    padding: Spacing.medium,
+    backgroundColor: Colors.white,
+  },
+  contentContainer: {
+    paddingVertical: Spacing.xxLarge,
+    paddingHorizontal: Spacing.medium,
   },
   content: {
     marginBottom: Spacing.medium,
@@ -71,7 +83,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.header3,
     marginBottom: Spacing.xSmall,
   },
   body: {

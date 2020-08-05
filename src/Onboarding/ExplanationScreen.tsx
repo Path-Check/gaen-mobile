@@ -132,7 +132,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header3,
     marginBottom: Spacing.xxxLarge,
   },
   skipButtonContainer: {

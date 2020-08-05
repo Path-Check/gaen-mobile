@@ -92,13 +92,13 @@ export const disabledButton = darkGray
 export const disabledButtonText = quaternaryViolet
 
 // Text
-export const primaryText = darkestGray
+export const primaryText = black
 export const secondaryText = darkGray
 export const tertiaryText = secondaryBlue
 export const invertedText = white
 
 export const primaryHeaderText = black
-export const secondaryHeaderText = secondaryViolet
+export const secondaryHeaderText = darkestGray
 
 export const linkText = primaryViolet
 export const invertedLinkText = amberYellow

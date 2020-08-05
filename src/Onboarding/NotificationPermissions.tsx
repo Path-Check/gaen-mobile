@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { SafeAreaView, View, StyleSheet, TouchableOpacity } from "react-native"
+import {
+  ScrollView,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -8,7 +14,7 @@ import { Screens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
-import { Spacing, Typography, Buttons } from "../styles"
+import { Colors, Spacing, Typography, Buttons } from "../styles"
 
 const NotificationsPermissions: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -34,7 +40,11 @@ const NotificationsPermissions: FunctionComponent = () => {
 
   return (
     <SafeAreaView>
-      <View style={style.container}>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
         <View style={style.content}>
           <GlobalText style={style.header}>
             {t("onboarding.notification_header")}
@@ -67,14 +77,18 @@ const NotificationsPermissions: FunctionComponent = () => {
             {t("common.maybe_later")}
           </GlobalText>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    padding: Spacing.medium,
+    backgroundColor: Colors.white,
+  },
+  contentContainer: {
+    paddingVertical: Spacing.xxLarge,
+    paddingHorizontal: Spacing.medium,
   },
   content: {
     marginBottom: Spacing.medium,

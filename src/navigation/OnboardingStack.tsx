@@ -4,6 +4,12 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack"
+import { StyleSheet, View } from "react-native"
+import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
+
+import { OnboardingScreen, OnboardingScreens } from "./index"
+import { GlobalText } from "../components"
 
 import NotificationPermissions from "../Onboarding/NotificationPermissions"
 import EnableExposureNotifications from "../Onboarding/EnableExposureNotifications"
@@ -16,7 +22,8 @@ import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
 import GetNotified from "../Onboarding/GetNotified"
 import ValueProposition from "../Onboarding/ValueProposition"
 
-import { OnboardingScreen, OnboardingScreens } from "./index"
+import { Icons } from "../assets"
+import { Spacing, Colors, Typography } from "../styles"
 
 type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
@@ -25,8 +32,44 @@ type OnboardingStackParams = {
 const Stack = createStackNavigator<OnboardingStackParams>()
 
 const OnboardingStack: FunctionComponent = () => {
+  const { t } = useTranslation()
   const onboardingScreenOptions: StackNavigationOptions = {
     headerShown: false,
+  }
+
+  const HeaderRight = (stepNumber: number) => {
+    const determineStepText = () => {
+      switch (stepNumber) {
+        case 1:
+          return t("onboarding.step_1_of_3")
+        case 2:
+          return t("onboarding.step_2_of_3")
+        case 3:
+          return t("onboarding.step_3_of_3")
+        default:
+          return t("onboarding.step_1_of_3")
+      }
+    }
+
+    return (
+      <View style={style.headerRight}>
+        <GlobalText style={style.headerRightText}>
+          {determineStepText()}
+        </GlobalText>
+        <SvgXml
+          xml={Icons.Close}
+          fill={Colors.darkestGray}
+          style={style.closeIcon}
+        />
+      </View>
+    )
+  }
+
+  const appSetupOptions: StackNavigationOptions = {
+    headerShown: true,
+    headerLeft: () => null,
+    headerTitleAlign: "left",
+    headerTitle: "App Setup",
   }
 
   return (
@@ -60,10 +103,18 @@ const OnboardingStack: FunctionComponent = () => {
       <Stack.Screen
         name={OnboardingScreens.NotificationPermissions}
         component={NotificationPermissions}
+        options={{
+          ...appSetupOptions,
+          headerRight: () => HeaderRight(1),
+        }}
       />
       <Stack.Screen
         name={OnboardingScreens.EnableExposureNotifications}
         component={EnableExposureNotifications}
+        options={{
+          ...appSetupOptions,
+          headerRight: () => HeaderRight(2),
+        }}
       />
       <Stack.Screen
         name={OnboardingScreens.LanguageSelection}
@@ -72,6 +123,20 @@ const OnboardingStack: FunctionComponent = () => {
     </Stack.Navigator>
   )
 }
+
+const style = StyleSheet.create({
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerRightText: {
+    ...Typography.base,
+    color: Colors.mediumGray,
+  },
+  closeIcon: {
+    paddingHorizontal: Spacing.large,
+  },
+})
 
 export default OnboardingStack
 

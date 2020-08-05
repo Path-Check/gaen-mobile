@@ -153,7 +153,7 @@
     "onboarding_screen2_button": "Is my privacy protected?",
     "onboarding_screen3_header": "No personally identifiable information ever leaves your phone",
     "onboarding_screen3_button": "What if I'm exposed?",
-    "onboarding_screen4_header": "The app will notify you if you may have been exposve to the coronavirus",
+    "onboarding_screen4_header": "The app will notify you if you may have been exposed to the coronavirus",
     "onboarding_screen4_button": "What if I get sick?",
     "onboarding_screen5_header": "With the app, you can help break the chain of infection and get help direct from health experts",
     "onboarding_screen_5_button": "Get started",
@@ -188,7 +188,10 @@
     "proximity_tracing_subheader2": "Is my data secure?",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_subheader3": "This app does not protect you from COVID-19 infection.",
-    "proximity_tracing_button": "Activate Proximity Tracking"
+    "proximity_tracing_button": "Activate Proximity Tracing",
+    "step_1_of_3": "Step 1 of 3",
+    "step_2_of_3": "Step 2 of 3",
+    "step_3_of_3": "Step 3 of 3"
   },
   "screen_titles": {
     "about": "About",

@@ -82,7 +82,7 @@ export const smallFont: TextStyle = {
 export const mediumFont: TextStyle = {
   ...base,
   fontSize: medium,
-  lineHeight: mediumLineHeight,
+  lineHeight: largeLineHeight,
 }
 
 export const largeFont: TextStyle = {
@@ -117,21 +117,21 @@ export const header1: TextStyle = {
 }
 
 export const header2: TextStyle = {
-  ...xLargeFont,
+  ...xxLargeFont,
   ...bold,
   color: Colors.primaryHeaderText,
 }
 
 export const header3: TextStyle = {
-  ...largeFont,
+  ...xLargeFont,
   ...bold,
-  color: Colors.primaryHeaderText,
+  color: Colors.secondaryHeaderText,
 }
 
 export const header4: TextStyle = {
   ...mediumFont,
-  ...bold,
-  color: Colors.primaryHeaderText,
+  ...mediumBold,
+  color: Colors.secondaryHeaderText,
 }
 
 export const header5: TextStyle = {
@@ -149,6 +149,7 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
+  fontWeight: lightWeight,
   color: Colors.primaryText,
 }
 
