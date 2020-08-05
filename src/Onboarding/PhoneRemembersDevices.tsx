@@ -7,21 +7,21 @@ import ExplanationScreen from "./ExplanationScreen"
 import { OnboardingScreens } from "../navigation"
 import { Images } from "../assets"
 
-const PersonalPrivacy: FunctionComponent = () => {
+const PhoneRemembersDevices: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
   const explanationScreenContent = {
-    screenNumber: 3,
-    image: Images.PersonWithLockedPhone,
+    screenNumber: 2,
+    image: Images.PeopleOnPhones,
     imageLabel: "Placeholder",
-    header: t("label.onboarding_screen3_header"),
-    primaryButtonLabel: t("label.onboarding_screen3_button"),
+    header: t("label.onboarding_screen2_header"),
+    primaryButtonLabel: t("label.onboarding_screen2_button"),
   }
 
   const explanationScreenActions = {
     primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.GetNotified),
+      navigation.navigate(OnboardingScreens.PersonalPrivacy),
   }
 
   return (
@@ -32,5 +32,5 @@ const PersonalPrivacy: FunctionComponent = () => {
   )
 }
 
-export default PersonalPrivacy
+export default PhoneRemembersDevices
 

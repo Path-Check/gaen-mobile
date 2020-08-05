@@ -16,8 +16,12 @@ export type NavigationProp = NavigationScreenProp<
 
 export type OnboardingScreen =
   | "Welcome"
-  | "EulaModal"
+  | "Introduction"
+  | "PhoneRemembersDevices"
   | "PersonalPrivacy"
+  | "GetNotified"
+  | "ValueProposition"
+  | "EulaModal"
   | "NotificationDetails"
   | "ShareDiagnosis"
   | "NotificationPermissions"
@@ -28,8 +32,12 @@ export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
 } = {
   Welcome: "Welcome",
-  EulaModal: "EulaModal",
+  Introduction: "Introduction",
+  PhoneRemembersDevices: "PhoneRemembersDevices",
   PersonalPrivacy: "PersonalPrivacy",
+  GetNotified: "GetNotified",
+  ValueProposition: "ValueProposition",
+  EulaModal: "EulaModal",
   NotificationDetails: "NotificationDetails",
   ShareDiagnosis: "ShareDiagnosis",
   NotificationPermissions: "NotificationPermissions",
@@ -149,3 +157,4 @@ export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
     }, [statusBarStyle]),
   )
 }
+

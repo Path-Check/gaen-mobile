@@ -23,7 +23,6 @@ type ExplanationScreenContent = {
   image: ImageSourcePropType
   imageLabel: string
   header: string
-  body: string
   primaryButtonLabel: string
 }
 

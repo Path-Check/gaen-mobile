@@ -125,7 +125,7 @@ const EulaModal: FunctionComponent = () => {
         </TouchableOpacity>
         <Button
           invert
-          onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
+          onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
           disabled={!boxChecked}
           label={t("common.continue")}
         />
@@ -176,3 +176,4 @@ const style = StyleSheet.create({
 })
 
 export default EulaModal
+

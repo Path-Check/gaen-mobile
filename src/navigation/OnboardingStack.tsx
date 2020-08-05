@@ -13,6 +13,10 @@ import EulaModal from "../Onboarding/EulaModal"
 import NotificationDetails from "../Onboarding/NotificationDetails"
 import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
 import LanguageSelection from "../More/LanguageSelection"
+import Introduction from "../Onboarding/Introduction"
+import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
+import GetNotified from "../Onboarding/GetNotified"
+import ValueProposition from "../Onboarding/ValueProposition"
 
 import { OnboardingScreen, OnboardingScreens } from "./index"
 
@@ -36,8 +40,24 @@ const OnboardingStack: FunctionComponent = () => {
         options={{ ...TransitionPresets.ModalTransition }}
       />
       <Stack.Screen
+        name={OnboardingScreens.Introduction}
+        component={Introduction}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.PhoneRemembersDevices}
+        component={PhoneRemembersDevices}
+      />
+      <Stack.Screen
         name={OnboardingScreens.PersonalPrivacy}
         component={PersonalPrivacy}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.GetNotified}
+        component={GetNotified}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.ValueProposition}
+        component={ValueProposition}
       />
       <Stack.Screen
         name={OnboardingScreens.NotificationDetails}
