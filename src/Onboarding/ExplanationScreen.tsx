@@ -7,6 +7,7 @@ import {
   ImageSourcePropType,
   ViewStyle,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -51,44 +52,48 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
   }
 
   return (
-    <View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(Screens.Home)}
-        style={style.skipButtonContainer}
-      >
-        <GlobalText style={style.skipButtonText}>{t("common.skip")}</GlobalText>
-      </TouchableOpacity>
-      <ScrollView
-        alwaysBounceVertical={false}
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-      >
-        <View>
-          <Image
-            source={explanationScreenContent.image}
-            accessibilityLabel={explanationScreenContent.imageLabel}
-            accessible
-            style={style.image}
-            resizeMode={"contain"}
-          />
-          <View style={style.circles}>
-            <View style={determineCircleStyle(1)} />
-            <View style={determineCircleStyle(2)} />
-            <View style={determineCircleStyle(3)} />
-            <View style={determineCircleStyle(4)} />
-            <View style={determineCircleStyle(5)} />
-          </View>
-          <GlobalText style={style.headerText}>
-            {explanationScreenContent.header}
+    <SafeAreaView>
+      <View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.Home)}
+          style={style.skipButtonContainer}
+        >
+          <GlobalText style={style.skipButtonText}>
+            {t("common.skip")}
           </GlobalText>
-        </View>
-        <Button
-          hasRightArrow
-          label={explanationScreenContent.primaryButtonLabel}
-          onPress={explanationScreenActions.primaryButtonOnPress}
-        />
-      </ScrollView>
-    </View>
+        </TouchableOpacity>
+        <ScrollView
+          alwaysBounceVertical={false}
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
+        >
+          <View>
+            <Image
+              source={explanationScreenContent.image}
+              accessibilityLabel={explanationScreenContent.imageLabel}
+              accessible
+              style={style.image}
+              resizeMode={"contain"}
+            />
+            <View style={style.circles}>
+              <View style={determineCircleStyle(1)} />
+              <View style={determineCircleStyle(2)} />
+              <View style={determineCircleStyle(3)} />
+              <View style={determineCircleStyle(4)} />
+              <View style={determineCircleStyle(5)} />
+            </View>
+            <GlobalText style={style.headerText}>
+              {explanationScreenContent.header}
+            </GlobalText>
+          </View>
+          <Button
+            hasRightArrow
+            label={explanationScreenContent.primaryButtonLabel}
+            onPress={explanationScreenActions.primaryButtonOnPress}
+          />
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   )
 }
 
