@@ -97,7 +97,7 @@ export const secondaryText = darkGray
 export const tertiaryText = secondaryBlue
 export const invertedText = white
 
-export const primaryHeaderText = primaryViolet
+export const primaryHeaderText = black
 export const secondaryHeaderText = secondaryViolet
 
 export const linkText = primaryViolet
@@ -110,3 +110,4 @@ export const placeholderTextColor = lightGray
 
 export const success = primaryGreen
 export const warning = primaryYellow
+

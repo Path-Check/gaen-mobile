@@ -8,7 +8,10 @@ const base: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
+  alignSelf: "flex-start",
   borderRadius: Outlines.borderRadiusMax,
+  paddingHorizontal: Spacing.small,
+  minWidth: 200,
 }
 
 // Size
@@ -58,3 +61,4 @@ export const tinyRounded: ViewStyle = {
   ...maxCornerRoundness,
   ...tertiaryBlue,
 }
+

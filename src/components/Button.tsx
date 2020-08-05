@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
 } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "./GlobalText"
+import { Icons } from "../assets"
 
-import { Colors, Buttons, Typography } from "../styles"
+import { Iconography, Spacing, Colors, Buttons, Typography } from "../styles"
 
 interface ButtonProps {
   label: string
@@ -21,6 +23,7 @@ interface ButtonProps {
   customTextStyle?: TextStyle
   invert?: boolean
   testID?: string
+  hasRightArrow?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -32,16 +35,17 @@ export const Button: FunctionComponent<ButtonProps> = ({
   customTextStyle,
   invert,
   testID,
+  hasRightArrow,
 }) => {
   const determineGradient = (): [string, string] => {
     if (invert && (disabled || loading)) {
       return [Colors.mediumGray, Colors.lighterGray]
     } else if (invert && !(disabled || loading)) {
-      return [Colors.quaternaryViolet, Colors.white]
+      return [Colors.primaryBlue, Colors.white]
     } else if (!invert && (disabled || loading)) {
-      return [Colors.primaryViolet, Colors.secondaryViolet]
+      return [Colors.darkestGray, Colors.mediumGray]
     } else {
-      return [Colors.primaryViolet, Colors.secondaryViolet]
+      return [Colors.primaryBlue, Colors.secondaryViolet]
     }
   }
 
@@ -70,15 +74,25 @@ export const Button: FunctionComponent<ButtonProps> = ({
       testID={testID}
     >
       <LinearGradient
-        start={{ x: 0.15, y: 0.75 }}
-        end={{ x: 0.95, y: 0.15 }}
+        start={{ x: 0, y: 0.85 }}
+        end={{ x: 0.15, y: 0 }}
         colors={determineGradient()}
         style={buttonStyle}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
         ) : (
-          <GlobalText style={textStyle}>{label}</GlobalText>
+          <>
+            <GlobalText style={textStyle}>{label}</GlobalText>
+            {hasRightArrow && (
+              <SvgXml
+                xml={Icons.Arrow}
+                fill={Colors.white}
+                style={style.rightArrow}
+                width={Iconography.medium}
+              />
+            )}
+          </>
         )}
       </LinearGradient>
     </TouchableOpacity>
@@ -105,4 +119,8 @@ const style = StyleSheet.create({
     textAlign: "center",
     ...Typography.buttonPrimaryInvertedDisabledText,
   },
+  rightArrow: {
+    marginLeft: Spacing.medium,
+  },
 })
+

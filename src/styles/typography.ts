@@ -20,7 +20,7 @@ export const smallLineHeight = 20
 export const mediumLineHeight = 24
 export const largeLineHeight = 28
 export const xLargeLineHeight = 32
-export const xxLargeLineHeight = 50
+export const xxLargeLineHeight = 36
 
 // Letter Spacing
 export const mediumLetterSpacing = 0.5
@@ -100,7 +100,7 @@ export const xLargeFont: TextStyle = {
 export const xxLargeFont: TextStyle = {
   ...base,
   fontSize: xxLarge,
-  lineHeight: xLargeLineHeight,
+  lineHeight: xxLargeLineHeight,
 }
 
 export const hugeFont: TextStyle = {
@@ -240,3 +240,4 @@ export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
   color: Colors.lighterGray,
 }
+

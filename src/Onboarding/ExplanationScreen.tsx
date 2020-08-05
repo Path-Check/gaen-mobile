@@ -100,10 +100,6 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
 
   return (
     <View>
-      <ImageBackground
-        source={explanationScreenContent.backgroundImage}
-        style={[style.background, explanationScreenStyles.backgroundStyle]}
-      />
       <View style={style.content}>
         <ScrollView
           alwaysBounceVertical={false}
@@ -121,12 +117,10 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
             <GlobalText style={headerStyles}>
               {explanationScreenContent.header}
             </GlobalText>
-            <GlobalText style={contentStyles}>
-              {explanationScreenContent.body}
-            </GlobalText>
           </View>
           <View>
             <Button
+              hasRightArrow
               label={explanationScreenContent.primaryButtonLabel}
               onPress={explanationScreenActions.primaryButtonOnPress}
               customButtonStyle={
@@ -153,15 +147,8 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
 }
 
 const style = StyleSheet.create({
-  background: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    position: "absolute",
-  },
   innerContentContainer: {
     height: "100%",
-    justifyContent: "space-between",
     paddingBottom: Spacing.large,
   },
   icon: {
@@ -181,6 +168,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header2,
+    marginBottom: Spacing.xxLarge,
   },
   contentText: {
     ...Typography.mainContent,
@@ -196,3 +184,4 @@ const style = StyleSheet.create({
 })
 
 export default ExplanationScreen
+
