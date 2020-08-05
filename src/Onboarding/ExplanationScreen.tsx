@@ -77,16 +77,6 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
     }
   }
 
-  const primaryButtonTextStyles = {
-    ...style.primaryButtonText,
-    ...explanationScreenStyles.primaryButtonTextStyle,
-  }
-
-  const secondaryButtonTextStyles = {
-    ...style.secondaryButtonText,
-    ...explanationScreenStyles.secondaryButtonTextStyle,
-  }
-
   const headerStyles = {
     ...style.headerText,
     ...explanationScreenStyles.headerStyle,
@@ -97,14 +87,14 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
     ...explanationScreenStyles.bodyStyle,
   }
 
-  const primaryButtonStyles = {
-    ...style.primaryButton,
-    ...explanationScreenStyles.primaryButtonContainerStyle,
-  }
-
   const secondaryButtonStyles = {
     ...style.secondaryButton,
     ...explanationScreenStyles.secondaryButtonContainerStyle,
+  }
+
+  const secondaryButtonTextStyles = {
+    ...style.secondaryButtonText,
+    ...explanationScreenStyles.secondaryButtonTextStyle,
   }
 
   return (
@@ -138,16 +128,18 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
             <Button
               label={explanationScreenContent.primaryButtonLabel}
               onPress={explanationScreenActions.primaryButtonOnPress}
-              buttonStyle={primaryButtonStyles}
-              textStyle={primaryButtonTextStyles}
+              customButtonStyle={
+                explanationScreenStyles.primaryButtonContainerStyle
+              }
+              customTextStyle={explanationScreenStyles.primaryButtonTextStyle}
             />
             {explanationScreenActions.secondaryButtonOnPress &&
               explanationScreenContent.secondaryButtonLabel && (
                 <Button
                   label={explanationScreenContent.secondaryButtonLabel}
                   onPress={explanationScreenActions.secondaryButtonOnPress}
-                  buttonStyle={secondaryButtonStyles}
-                  textStyle={secondaryButtonTextStyles}
+                  customButtonStyle={secondaryButtonStyles}
+                  customTextStyle={secondaryButtonTextStyles}
                 />
               )}
           </View>
@@ -192,14 +184,8 @@ const style = StyleSheet.create({
     color: Colors.secondaryViolet,
     marginTop: Spacing.medium,
   },
-  primaryButton: {
-    ...Buttons.primary,
-  },
   secondaryButton: {
     ...Buttons.secondary,
-  },
-  primaryButtonText: {
-    ...Typography.buttonPrimaryText,
   },
   secondaryButtonText: {
     ...Typography.buttonSecondaryInvertedText,

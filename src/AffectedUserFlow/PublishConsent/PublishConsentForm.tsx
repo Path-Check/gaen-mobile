@@ -88,8 +88,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
               loading={isLoading}
               label={t("export.consent_button_title")}
               onPress={handleOnPressConfirm}
-              buttonStyle={style.button}
-              textStyle={style.buttonText}
+              customButtonStyle={style.button}
+              customTextStyle={style.buttonText}
             />
             <TouchableOpacity
               onPress={handleOnPressCancel}

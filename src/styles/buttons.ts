@@ -45,6 +45,10 @@ const disabled: ViewStyle = {
   backgroundColor: Colors.mediumGray,
 }
 
+const invertedDisabled: ViewStyle = {
+  backgroundColor: Colors.lightGray,
+}
+
 const tertiaryBlue: ViewStyle = {
   backgroundColor: Colors.tertiaryViolet,
 }
@@ -74,7 +78,7 @@ export const primaryInverted: ViewStyle = {
 export const primaryInvertedDisabled: ViewStyle = {
   ...base,
   ...large,
-  ...disabled,
+  ...invertedDisabled,
 }
 
 export const secondary: ViewStyle = {
