@@ -49,13 +49,13 @@ export const secondaryYellow = champagneYellow
 
 // Violets
 const jacksonsPurple = "#1f2c9b"
-const moonRaker = "#e5e7fa"
-const indigo = "#4754C5"
+const vibrantViolet = "#6e50e4"
 const melrose = "#a5affb"
+const moonRaker = "#e5e7fa"
 const faintViolet = "#f0edf4"
 
 export const primaryViolet = jacksonsPurple
-export const secondaryViolet = indigo
+export const secondaryViolet = vibrantViolet
 export const tertiaryViolet = moonRaker
 export const quaternaryViolet = melrose
 

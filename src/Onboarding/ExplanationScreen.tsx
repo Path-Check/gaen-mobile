@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
   ImageBackground,
+  TouchableOpacity,
   StyleSheet,
   TextStyle,
   View,
@@ -135,12 +136,14 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
             />
             {explanationScreenActions.secondaryButtonOnPress &&
               explanationScreenContent.secondaryButtonLabel && (
-                <Button
-                  label={explanationScreenContent.secondaryButtonLabel}
+                <TouchableOpacity
                   onPress={explanationScreenActions.secondaryButtonOnPress}
-                  customButtonStyle={secondaryButtonStyles}
-                  customTextStyle={secondaryButtonTextStyles}
-                />
+                  style={secondaryButtonStyles}
+                >
+                  <GlobalText style={secondaryButtonTextStyles}>
+                    {explanationScreenContent.secondaryButtonLabel}
+                  </GlobalText>
+                </TouchableOpacity>
               )}
           </View>
         </ScrollView>

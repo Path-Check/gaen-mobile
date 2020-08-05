@@ -85,11 +85,10 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
           <View>
             <Button
+              invert
               loading={isLoading}
               label={t("export.consent_button_title")}
               onPress={handleOnPressConfirm}
-              customButtonStyle={style.button}
-              customTextStyle={style.buttonText}
             />
             <TouchableOpacity
               onPress={handleOnPressCancel}
@@ -135,12 +134,6 @@ const style = StyleSheet.create({
   contentText: {
     ...Typography.secondaryContent,
     color: Colors.white,
-  },
-  button: {
-    ...Buttons.primaryInverted,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
   },
   secondaryButton: {
     ...Buttons.secondary,
