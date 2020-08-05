@@ -278,7 +278,7 @@ PODS:
   - Realm/Headers (5.3.2)
   - RealmSwift (5.3.2):
     - Realm (= 5.3.2)
-  - RNBackgroundFetch (3.0.4):
+  - RNBackgroundFetch (3.1.0):
     - React
   - RNCAsyncStorage (1.10.0):
     - React
@@ -346,11 +346,6 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
-<<<<<<< HEAD
-  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-=======
-  - RNFS (from `../node_modules/react-native-fs`)
->>>>>>> Remove RNDeviceInfo dependency.
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -451,13 +446,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
-<<<<<<< HEAD
-  RNDeviceInfo:
-    :path: "../node_modules/react-native-device-info"
-=======
-  RNFS:
-    :path: "../node_modules/react-native-fs"
->>>>>>> Remove RNDeviceInfo dependency.
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
@@ -515,8 +503,8 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
-  RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
+  Realm: c6794276ca8884808ba168a22f9d71362b170b85
+  RealmSwift: 42ec6cec3170aeeda407f797f07268a7d055ebc7
   RNBackgroundFetch: 8dbb63141792f1473e863a0797ffbd5d987af2fc
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f

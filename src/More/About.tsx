@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Linking,
@@ -11,13 +11,8 @@ import {
 
 import { GlobalText } from "../components/GlobalText"
 
-import {
-  getVersion,
-  getBuildNumber,
-  getApplicationName,
-} from "../gaen/nativeModule"
-
 import { Colors, Spacing, Typography } from "../styles"
+import { useApplicationInfo } from "./useApplicationInfo"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -25,20 +20,7 @@ export const AboutScreen: FunctionComponent = () => {
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const pathCheckWebAddress = "pathcheck.org"
   const pathCheckUrl = "https://pathcheck.org/"
-  const [applicationName, setApplicationName] = useState("")
-  const [versionInfo, setVersionInfo] = useState("")
-
-  const fetchDeviceInfo = async () => {
-    const name = await getApplicationName()
-    const version = await getVersion()
-    const buildNumber = await getBuildNumber()
-    setApplicationName(name)
-    setVersionInfo(`${version} (${buildNumber})`)
-  }
-
-  useEffect(() => {
-    fetchDeviceInfo()
-  }, [])
+  const { applicationName, versionInfo } = useApplicationInfo()
 
   return (
     <ScrollView

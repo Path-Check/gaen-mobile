@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   Linking,
   ScrollView,
@@ -9,25 +9,16 @@ import {
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
+import { useApplicationName } from "./useApplicationInfo"
 
 import { GlobalText } from "../components/GlobalText"
 
-import { getApplicationName } from "../gaen/nativeModule"
 import { Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
-  const [applicationName, setApplicationName] = useState("")
-
-  const fetchApplicationName = async () => {
-    const name = await getApplicationName()
-    setApplicationName(name)
-  }
-
-  useEffect(() => {
-    fetchApplicationName()
-  }, [])
+  const { applicationName } = useApplicationName()
 
   const infoEmailAddress = "info@pathcheck.org"
   const infoEmailLink = "mailto:info@pathcheck.org"
