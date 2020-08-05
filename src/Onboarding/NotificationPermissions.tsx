@@ -80,6 +80,7 @@ const NotificationsPermissions: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    height: "100%",
   },
   contentContainer: {
     paddingVertical: Spacing.xxLarge,

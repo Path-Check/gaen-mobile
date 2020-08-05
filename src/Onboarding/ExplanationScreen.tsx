@@ -55,7 +55,7 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
       <View>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate(OnboardingScreens.NotificationPermissions)
+            navigation.navigate(OnboardingScreens.ActivateProximityTracing)
           }
           style={style.skipButtonContainer}
         >
