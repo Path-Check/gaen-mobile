@@ -38,7 +38,10 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
-  const { setExposureSubmissionCredentials } = useAffectedUserContext()
+  const {
+    setExposureSubmissionCredentials,
+    setExposureKeys,
+  } = useAffectedUserContext()
 
   const [code, setCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -86,15 +89,15 @@ const CodeInputForm: FunctionComponent = () => {
           Logger.addMetadata("publishKeys", {
             certificate,
           })
+          setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
           navigation.navigate(Screens.AffectedUserPublishConsent)
         } else {
           const errorMessage = showCertificateError(certResponse.error)
-          Logger.error("Failed to generate a certificate", {
-            errorMessage,
-            hmacDigest,
-          })
+          Logger.error(
+            `FailedCertificateGenerationWithValidCode${errorMessage}`,
+          )
           setErrorMessage(errorMessage)
         }
       } else {
