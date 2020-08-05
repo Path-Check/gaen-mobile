@@ -10,8 +10,6 @@ import EnableExposureNotifications from "../Onboarding/EnableExposureNotificatio
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
 import EulaModal from "../Onboarding/EulaModal"
-import NotificationDetails from "../Onboarding/NotificationDetails"
-import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
 import LanguageSelection from "../More/LanguageSelection"
 import Introduction from "../Onboarding/Introduction"
 import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
@@ -58,14 +56,6 @@ const OnboardingStack: FunctionComponent = () => {
       <Stack.Screen
         name={OnboardingScreens.ValueProposition}
         component={ValueProposition}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.NotificationDetails}
-        component={NotificationDetails}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.ShareDiagnosis}
-        component={ShareDiagnosis}
       />
       <Stack.Screen
         name={OnboardingScreens.NotificationPermissions}

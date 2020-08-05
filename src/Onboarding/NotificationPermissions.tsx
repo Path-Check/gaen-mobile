@@ -1,16 +1,16 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
+import { SafeAreaView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { StyleSheet } from "react-native"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { Screens } from "../navigation"
-import ExplanationScreen, { IconStyle } from "../Onboarding/ExplanationScreen"
+import { GlobalText } from "../components"
+import { Button } from "../components"
 
-import { Icons, Images } from "../assets"
-import { Colors } from "../styles"
+import { Spacing, Typography, Buttons } from "../styles"
 
-const NotificationsPermissions = (): JSX.Element => {
+const NotificationsPermissions: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
@@ -32,44 +32,72 @@ const NotificationsPermissions = (): JSX.Element => {
     continueOnboarding()
   }
 
-  const explanationScreenContent = {
-    backgroundImage: Images.BlueGradientBackground,
-    icon: Icons.Bell,
-    iconLabel: t("label.bell_icon"),
-    header: t("onboarding.notification_header"),
-    body: t("onboarding.notification_subheader"),
-    primaryButtonLabel: t("label.launch_enable_notif"),
-    secondaryButtonLabel: t("onboarding.maybe_later"),
-  }
-
-  const explanationScreenStyles = {
-    headerStyle: style.header,
-    bodyStyle: style.body,
-    iconStyle: IconStyle.Blue,
-    statusBarStyle: "light-content" as const,
-  }
-
-  const explanationScreenActions = {
-    primaryButtonOnPress: handleOnPressEnable,
-    secondaryButtonOnPress: handleOnPressMaybeLater,
-  }
-
   return (
-    <ExplanationScreen
-      explanationScreenContent={explanationScreenContent}
-      explanationScreenStyles={explanationScreenStyles}
-      explanationScreenActions={explanationScreenActions}
-    />
+    <SafeAreaView>
+      <View style={style.container}>
+        <View style={style.content}>
+          <GlobalText style={style.header}>
+            {t("onboarding.notification_header")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.notification_subheader1")}
+          </GlobalText>
+          <GlobalText style={style.body}>
+            {t("onboarding.notification_body1")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.notification_subheader2")}
+          </GlobalText>
+          <GlobalText style={style.body}>
+            {t("onboarding.notification_body2")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.notification_subheader3")}
+          </GlobalText>
+        </View>
+        <Button
+          onPress={handleOnPressEnable}
+          label={t("label.launch_enable_notif")}
+        />
+        <TouchableOpacity
+          onPress={handleOnPressMaybeLater}
+          style={style.secondaryButton}
+        >
+          <GlobalText style={style.secondaryButtonText}>
+            {t("common.maybe_later")}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   )
 }
 
 const style = StyleSheet.create({
+  container: {
+    padding: Spacing.medium,
+  },
+  content: {
+    marginBottom: Spacing.medium,
+  },
   header: {
-    color: Colors.white,
+    ...Typography.header2,
+    marginBottom: Spacing.small,
+  },
+  subheader: {
+    ...Typography.header4,
+    marginBottom: Spacing.xSmall,
   },
   body: {
-    color: Colors.white,
+    ...Typography.mainContent,
+    marginBottom: Spacing.medium,
+  },
+  secondaryButton: {
+    ...Buttons.secondary,
+  },
+  secondaryButtonText: {
+    ...Typography.buttonSecondaryText,
   },
 })
 
 export default NotificationsPermissions
+

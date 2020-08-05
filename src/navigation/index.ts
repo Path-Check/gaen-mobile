@@ -22,8 +22,6 @@ export type OnboardingScreen =
   | "GetNotified"
   | "ValueProposition"
   | "EulaModal"
-  | "NotificationDetails"
-  | "ShareDiagnosis"
   | "NotificationPermissions"
   | "EnableExposureNotifications"
   | "LanguageSelection"
@@ -38,8 +36,6 @@ export const OnboardingScreens: {
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
   EulaModal: "EulaModal",
-  NotificationDetails: "NotificationDetails",
-  ShareDiagnosis: "ShareDiagnosis",
   NotificationPermissions: "NotificationPermissions",
   EnableExposureNotifications: "EnableExposureNotifications",
   LanguageSelection: "LanguageSelection",

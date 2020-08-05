@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
-import { Screens } from "../navigation"
+import { OnboardingScreens } from "../navigation"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
@@ -54,7 +54,9 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
     <SafeAreaView>
       <View>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Screens.Home)}
+          onPress={() =>
+            navigation.navigate(OnboardingScreens.NotificationPermissions)
+          }
           style={style.skipButtonContainer}
         >
           <GlobalText style={style.skipButtonText}>
@@ -138,6 +140,7 @@ const style = StyleSheet.create({
     top: Spacing.small,
     right: Spacing.small,
     padding: Spacing.small,
+    zIndex: Layout.zLevel1,
   },
   skipButtonText: {
     ...Typography.base,

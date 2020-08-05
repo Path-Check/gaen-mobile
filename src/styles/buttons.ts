@@ -9,9 +9,6 @@ const base: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
   alignSelf: "flex-start",
-  borderRadius: Outlines.borderRadiusMax,
-  paddingHorizontal: Spacing.huge,
-  minWidth: 200,
 }
 
 // Size
@@ -47,12 +44,16 @@ const transparent: ViewStyle = {
 export const primary: ViewStyle = {
   ...base,
   ...large,
+  borderRadius: Outlines.borderRadiusMax,
+  paddingHorizontal: Spacing.huge,
+  minWidth: 200,
 }
 
 export const secondary: ViewStyle = {
   ...base,
   ...medium,
   ...transparent,
+  paddingHorizontal: Spacing.huge,
 }
 
 export const tinyRounded: ViewStyle = {
