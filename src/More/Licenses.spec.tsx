@@ -1,6 +1,6 @@
 import React from "react"
 import "react-native"
-import { render, wait, act } from "@testing-library/react-native"
+import { render, wait } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
@@ -13,8 +13,6 @@ jest.mock("@react-navigation/native")
 
 describe("LicensesScreen", () => {
   it("shows the name of the application", async () => {
-    jest.useFakeTimers()
-
     const applicationName = "application name"
 
     const applicationNameSpy = jest
@@ -22,10 +20,6 @@ describe("LicensesScreen", () => {
       .mockReturnValue(Promise.resolve(applicationName))
 
     const { getByText } = render(<LicensesScreen />)
-
-    act(() => {
-      jest.advanceTimersByTime(1000)
-    })
 
     await wait(() => {
       expect(applicationNameSpy).toHaveBeenCalled()
