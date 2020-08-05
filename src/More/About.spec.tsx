@@ -1,12 +1,14 @@
 import React from "react"
 import { Linking } from "react-native"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, wait, act } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
 import * as NativeModule from "../gaen/nativeModule"
 
 describe("About", () => {
   it("shows the name of the application", async () => {
+    jest.useFakeTimers()
+
     const applicationName = "application name"
 
     const applicationNameSpy = jest
@@ -15,6 +17,10 @@ describe("About", () => {
 
     const { getByText } = render(<AboutScreen />)
 
+    act(() => {
+      jest.advanceTimersByTime(1000)
+    })
+
     await wait(() => {
       expect(applicationNameSpy).toHaveBeenCalled()
       expect(getByText(applicationName)).toBeDefined()
@@ -22,6 +28,7 @@ describe("About", () => {
   })
 
   it("shows the build and version number of the application", async () => {
+    jest.useFakeTimers()
     const buildNumber = "8"
     const versionNumber = "0.18"
     const fullString = `${versionNumber} (${buildNumber})`
@@ -34,6 +41,10 @@ describe("About", () => {
       .mockReturnValue(Promise.resolve(versionNumber))
 
     const { getByText } = render(<AboutScreen />)
+
+    act(() => {
+      jest.advanceTimersByTime(1000)
+    })
 
     await wait(() => {
       expect(buildNumberSpy).toHaveBeenCalled()
