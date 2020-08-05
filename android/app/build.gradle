@@ -190,6 +190,10 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
             matchingFallbacks = ['release']
+
+            // Differentiate each HA by its APK name
+            def outputSuffix = project.hasProperty('outputSuffix') ? '-' + project.outputSuffix : ''
+            setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
         }
     }
 
