@@ -5,7 +5,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
-  TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
@@ -17,10 +16,11 @@ import {
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
 import { Stacks, Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
-import { Iconography, Buttons, Colors, Spacing, Typography } from "../styles"
+import { Iconography, Colors, Spacing, Typography } from "../styles"
 
 interface MenuScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
@@ -95,17 +95,14 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
   return (
     <ScrollView style={style.container}>
       <View style={style.sectionPrimary}>
-        <GlobalText>{t("settings.share_test_result_description")}</GlobalText>
-        <TouchableOpacity
+        <GlobalText style={style.reportResultText}>
+          {t("settings.share_test_result_description")}
+        </GlobalText>
+        <Button
           onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-          style={style.button}
-        >
-          <GlobalText style={style.buttonText}>
-            {t("settings.share_test_result")}
-          </GlobalText>
-        </TouchableOpacity>
+          label={t("settings.share_test_result")}
+        />
       </View>
-
       <View style={style.section}>
         <LanguageSelectionListItem
           label={languageName || t("label.unknown")}
@@ -158,12 +155,8 @@ const style = StyleSheet.create({
     flex: 1,
     margin: Spacing.medium,
   },
-  button: {
-    ...Buttons.primary,
-    marginTop: Spacing.medium,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryText,
+  reportResultText: {
+    marginBottom: Spacing.medium,
   },
   icon: {
     maxWidth: Iconography.small,

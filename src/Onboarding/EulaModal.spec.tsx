@@ -49,13 +49,13 @@ describe("EulaModal", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const { getByText, getByTestId } = render(
+    const { getByLabelText, getByTestId } = render(
       <I18nextProvider i18n={i18n}>
         <EulaModal />
       </I18nextProvider>,
     )
 
-    const continueButton = getByText("Continue")
+    const continueButton = getByLabelText("Continue")
     fireEvent.press(continueButton)
 
     expect(navigationSpy).not.toHaveBeenCalled()

@@ -6,10 +6,11 @@ import {
   TextStyle,
   TouchableOpacity,
 } from "react-native"
+import LinearGradient from "react-native-linear-gradient"
 
 import { GlobalText } from "./GlobalText"
 
-import { Buttons, Typography } from "../styles"
+import { Colors, Buttons, Typography } from "../styles"
 
 interface ButtonProps {
   label: string
@@ -32,15 +33,15 @@ export const Button: FunctionComponent<ButtonProps> = ({
   invert,
   testID,
 }) => {
-  const determineButtonStyle = (): ViewStyle => {
+  const determineGradient = (): [string, string] => {
     if (invert && (disabled || loading)) {
-      return style.buttonInvertedDisabled
+      return [Colors.mediumGray, Colors.lighterGray]
     } else if (invert && !(disabled || loading)) {
-      return style.buttonInverted
+      return [Colors.quaternaryViolet, Colors.white]
     } else if (!invert && (disabled || loading)) {
-      return style.buttonDisabled
+      return [Colors.primaryViolet, Colors.secondaryViolet]
     } else {
-      return style.button
+      return [Colors.primaryViolet, Colors.secondaryViolet]
     }
   }
 
@@ -56,7 +57,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
     }
   }
 
-  const buttonStyle = { ...determineButtonStyle(), ...customButtonStyle }
+  const buttonStyle = { ...style.button, ...customButtonStyle }
   const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
   return (
@@ -66,14 +67,20 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={buttonStyle}
       testID={testID}
     >
-      {loading ? (
-        <ActivityIndicator size={"large"} />
-      ) : (
-        <GlobalText style={textStyle}>{label}</GlobalText>
-      )}
+      <LinearGradient
+        start={{ x: 0.15, y: 0.75 }}
+        end={{ x: 0.95, y: 0.15 }}
+        colors={determineGradient()}
+        style={buttonStyle}
+      >
+        {loading ? (
+          <ActivityIndicator size={"large"} />
+        ) : (
+          <GlobalText style={textStyle}>{label}</GlobalText>
+        )}
+      </LinearGradient>
     </TouchableOpacity>
   )
 }
@@ -81,15 +88,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   button: {
     ...Buttons.primary,
-  },
-  buttonInverted: {
-    ...Buttons.primaryInverted,
-  },
-  buttonDisabled: {
-    ...Buttons.primaryDisabled,
-  },
-  buttonInvertedDisabled: {
-    ...Buttons.primaryInvertedDisabled,
   },
   text: {
     textAlign: "center",
