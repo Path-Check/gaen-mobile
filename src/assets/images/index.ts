@@ -8,6 +8,7 @@ const Export = require("./export.png")
 const ForeArrow = require("./foreArrow.png")
 const IsolatePathBackground = require("./isolatePathBackground.png")
 const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
+const PeopleHighFiving = require("./peopleHighFiving.png")
 const SingleCrossPathBackground = require("./singleCrossPathBackground.png")
 
 export const Images = {
@@ -21,5 +22,7 @@ export const Images = {
   ForeArrow,
   IsolatePathBackground,
   MultipleCrossPathBackground,
+  PeopleHighFiving,
   SingleCrossPathBackground,
 }
+
