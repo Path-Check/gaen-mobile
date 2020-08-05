@@ -26,7 +26,7 @@ interface NetworkFailure<U> {
   error: U
 }
 
-export type ReportIssueError = "Unknown" | "ZendeskError"
+export type ReportIssueError = "Unknown" | "ZendeskError" | "InvalidEmailError"
 
 export type NetworkResponse<Error = "Unknown"> =
   | NetworkSuccess
@@ -36,7 +36,7 @@ const OS_FIELD_KEY = "360033622032"
 const OS_VERSION_FIELD_KEY = "360033618552"
 const APP_VERSION_FIELD_KEY = "360033141172"
 const APP_NAME_FIELD_KEY = "360034051891"
-const ISSUE_SUBJECT = `Issue from GAEN mobile application ${env.DISPLAY_NAME}`
+const ISSUE_SUBJECT = `Issue from GAEN in ${env.DISPLAY_NAME}`
 const ANONYMOUS = "Anonymous"
 
 const environmentFields = ({ os, osVersion, appVersion }: EnvironmentProps) => {
@@ -46,6 +46,46 @@ const environmentFields = ({ os, osVersion, appVersion }: EnvironmentProps) => {
     [APP_VERSION_FIELD_KEY]: appVersion,
     [APP_NAME_FIELD_KEY]: env.DISPLAY_NAME,
   }
+}
+
+const EMAIL_ERROR = "Email:"
+
+interface ErrorDescription {
+  description: string
+}
+
+interface ErrorDetails {
+  requester: ErrorDescription[]
+}
+
+// Errors are of the form:
+// {
+//   "error": "RecordInvalid",
+//   "description": "Record validation errors",
+//   "details": {
+//     "requester": [
+//       {
+//         "description": "Requester: Email:  not_really_an_email.com is not properly formatted"
+//      }
+//    ]
+//  }
+//}
+const determineErrorNature = (
+  errorDescription?: Record<string, unknown>,
+): ReportIssueError => {
+  if (errorDescription?.details) {
+    const errorDetails = errorDescription.details as ErrorDetails
+    const requesterErrors = errorDetails.requester
+      .map((error) => {
+        return error.description
+      })
+      .join(",")
+    if (requesterErrors.indexOf(EMAIL_ERROR) !== -1) {
+      return "InvalidEmailError"
+    }
+  }
+
+  return "ZendeskError"
 }
 
 export const reportAnIssue = async ({
@@ -73,7 +113,8 @@ export const reportAnIssue = async ({
     if (response.ok) {
       return { kind: "success" }
     } else {
-      return { kind: "failure", error: "ZendeskError" }
+      const responseJson = await response.json()
+      return { kind: "failure", error: determineErrorNature(responseJson) }
     }
   } catch (e) {
     return { kind: "failure", error: "Unknown" }

@@ -206,6 +206,9 @@
   "report_issue": {
     "body": "Feedback (required)",
     "email": "Email (required)",
+    "errors": {
+      "invalid_email": "The email seems to be invalid, please check again"
+    },
     "name": "Full Name",
     "success": "We received your request. Thank you!"
   },

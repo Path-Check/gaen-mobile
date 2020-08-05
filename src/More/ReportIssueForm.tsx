@@ -20,7 +20,6 @@ import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = " "
-const EMAIL_REGEX = RegExp(/\S+@\S+\.\S+/)
 
 const ReportIssueForm: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -34,10 +33,10 @@ const ReportIssueForm: FunctionComponent = () => {
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
   const validate = () => {
-    const hasValidEmail = email.trim().length > 0 && EMAIL_REGEX.test(email)
+    const hasEmail = email.trim().length > 0
     const hasBody = body.trim().length > 0
 
-    if (hasValidEmail && hasBody) {
+    if (hasEmail && hasBody) {
       setIsDisabled(false)
     } else {
       setIsDisabled(true)
@@ -101,6 +100,9 @@ const ReportIssueForm: FunctionComponent = () => {
 
   const showError = (error: ReportIssueError): string => {
     switch (error) {
+      case "InvalidEmailError": {
+        return t("report_issue.errors.invalid_email")
+      }
       default: {
         return t("common.something_went_wrong")
       }

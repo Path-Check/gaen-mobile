@@ -25,7 +25,7 @@ describe("reportAnIssue", () => {
       body: JSON.stringify({
         request: {
           // The constants are taken from "__mocks__/react-native-config.js"
-          subject: "Issue from GAEN mobile application DISPLAY_NAME",
+          subject: "Issue from GAEN in DISPLAY_NAME",
           requester: { name, email },
           comment: { body },
           custom_fields: [
@@ -64,9 +64,21 @@ describe("reportAnIssue", () => {
 
   describe("on a failed request", () => {
     it("returns a NetworkFailure on zendesk for a non 200 result", async () => {
+      const response = {
+        ok: false,
+        json: jest.fn().mockResolvedValueOnce({
+          details: {
+            requester: [
+              {
+                description: "Missing Fields",
+              },
+            ],
+          },
+        }),
+      }
       const fetchSpy = jest.fn()
       ;(fetch as jest.Mock) = fetchSpy
-      fetchSpy.mockResolvedValueOnce({ ok: false })
+      fetchSpy.mockResolvedValueOnce(response)
 
       const result = await reportAnIssue({
         email: "email",
@@ -80,6 +92,37 @@ describe("reportAnIssue", () => {
       })
 
       expect(result).toEqual({ kind: "failure", error: "ZendeskError" })
+    })
+
+    it("returns an InvalidEmailError when the response includes the email key ", async () => {
+      const response = {
+        ok: false,
+        json: jest.fn().mockResolvedValueOnce({
+          details: {
+            requester: [
+              {
+                description: "Email: Invalid",
+              },
+            ],
+          },
+        }),
+      }
+      const fetchSpy = jest.fn()
+      ;(fetch as jest.Mock) = fetchSpy
+      fetchSpy.mockResolvedValueOnce(response)
+
+      const result = await reportAnIssue({
+        email: "email",
+        name: "name",
+        body: "body",
+        environment: {
+          os: "os",
+          osVersion: "osVersion",
+          appVersion: "appVersion",
+        },
+      })
+
+      expect(result).toEqual({ kind: "failure", error: "InvalidEmailError" })
     })
 
     it("returns an unknown NetworkFailure for a failed request", async () => {
