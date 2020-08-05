@@ -33,4 +33,3 @@ const GetNotified: FunctionComponent = () => {
 }
 
 export default GetNotified
-

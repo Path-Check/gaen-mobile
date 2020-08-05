@@ -13,7 +13,7 @@ import { OnboardingScreen, OnboardingScreens } from "./index"
 import { GlobalText } from "../components"
 
 import NotificationPermissions from "../Onboarding/NotificationPermissions"
-import EnableExposureNotifications from "../Onboarding/EnableExposureNotifications"
+import ActivateProximityTracing from "../Onboarding/ActivateProximityTracing"
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
 import EulaModal from "../Onboarding/EulaModal"
@@ -111,8 +111,8 @@ const OnboardingStack: FunctionComponent = () => {
         component={ValueProposition}
       />
       <Stack.Screen
-        name={OnboardingScreens.EnableExposureNotifications}
-        component={EnableExposureNotifications}
+        name={OnboardingScreens.ActivateProximityTracing}
+        component={ActivateProximityTracing}
         options={{
           ...appSetupOptions,
           headerRight: () => HeaderRight(2),
@@ -152,4 +152,3 @@ const style = StyleSheet.create({
 })
 
 export default OnboardingStack
-

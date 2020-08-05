@@ -39,7 +39,7 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {false ? (
+        {onboardingIsComplete ? (
           <>
             <Stack.Screen
               name={"App"}
@@ -84,4 +84,3 @@ const MainNavigator: FunctionComponent = () => {
 }
 
 export default MainNavigator
-

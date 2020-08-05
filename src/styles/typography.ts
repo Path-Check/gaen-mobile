@@ -242,4 +242,3 @@ export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
   color: Colors.lighterGray,
 }
-

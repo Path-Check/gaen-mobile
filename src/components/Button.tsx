@@ -122,4 +122,3 @@ const style = StyleSheet.create({
     marginLeft: Spacing.medium,
   },
 })
-

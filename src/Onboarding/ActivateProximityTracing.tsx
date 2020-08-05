@@ -16,7 +16,7 @@ import { Button } from "../components"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
-const EnableExposureNotifications: FunctionComponent = () => {
+const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -100,5 +100,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default EnableExposureNotifications
-
+export default ActivateProximityTracing

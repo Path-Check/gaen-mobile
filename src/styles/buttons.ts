@@ -62,4 +62,3 @@ export const tinyRounded: ViewStyle = {
   ...maxCornerRoundness,
   ...tertiaryBlue,
 }
-

@@ -52,7 +52,6 @@ const jacksonsPurple = "#1f2c9b"
 const vibrantViolet = "#6e50e4"
 const melrose = "#a5affb"
 const moonRaker = "#e5e7fa"
-const faintViolet = "#f0edf4"
 
 export const primaryViolet = jacksonsPurple
 export const secondaryViolet = vibrantViolet
@@ -65,7 +64,7 @@ export const transparentDarkGray = applyOpacity(lighterGray, 0.8)
 export const transparentDark = "rgba(0,0,0,0.7)"
 
 // Backgrounds
-export const primaryBackground = faintViolet
+export const primaryBackground = white
 export const secondaryBackground = moonRaker
 export const tertiaryBackground = lighterGray
 
@@ -110,4 +109,3 @@ export const placeholderTextColor = lightGray
 
 export const success = primaryGreen
 export const warning = primaryYellow
-

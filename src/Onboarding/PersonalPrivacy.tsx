@@ -33,4 +33,3 @@ const PersonalPrivacy: FunctionComponent = () => {
 }
 
 export default PersonalPrivacy
-

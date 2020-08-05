@@ -33,4 +33,3 @@ const PhoneRemembersDevices: FunctionComponent = () => {
 }
 
 export default PhoneRemembersDevices
-

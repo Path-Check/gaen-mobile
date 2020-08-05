@@ -23,7 +23,7 @@ export type OnboardingScreen =
   | "ValueProposition"
   | "EulaModal"
   | "NotificationPermissions"
-  | "EnableExposureNotifications"
+  | "ActivateProximityTracing"
   | "LanguageSelection"
 
 export const OnboardingScreens: {
@@ -37,7 +37,7 @@ export const OnboardingScreens: {
   ValueProposition: "ValueProposition",
   EulaModal: "EulaModal",
   NotificationPermissions: "NotificationPermissions",
-  EnableExposureNotifications: "EnableExposureNotifications",
+  ActivateProximityTracing: "ActivateProximityTracing",
   LanguageSelection: "LanguageSelection",
 }
 
@@ -153,4 +153,3 @@ export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
     }, [statusBarStyle]),
   )
 }
-

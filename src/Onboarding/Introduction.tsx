@@ -33,4 +33,3 @@ const Introduction: FunctionComponent = () => {
 }
 
 export default Introduction
-
