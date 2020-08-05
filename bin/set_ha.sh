@@ -17,9 +17,16 @@
 #    https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 require 'open3'
+require 'dotenv'
+Dotenv.load
 
 HA_LABEL = ARGV[0]
+ACCESS_TOKEN = ARGV[1] || ENV.fetch("ACCESS_TOKEN")
 
-fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL}")
+if (ACCESS_TOKEN) then
+  fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL} #{ACCESS_TOKEN}")
+else
+   raise "Empty github access token"
+end
 
 fetching_env_succeeded && system("./bin/configure_builds.sh")

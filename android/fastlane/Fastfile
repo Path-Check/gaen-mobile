@@ -21,8 +21,6 @@ platform :android do
     gradle(task: "test")
   end
 
-  JS_PACKAGE = load_json(json_path: "../package.json")
-
   desc "Build a Debug AAB"
   lane :debug_bt do
     gradle(
@@ -31,27 +29,53 @@ platform :android do
     )
   end
 
-  desc "Build a Release AAB"
-  lane :release_bt do
-
-    build_number =  ENV["GITHUB_RUN_NUMBER"]
-
+  desc "Increment version code"
+  lane :release_increment_version_code do |options|
     increment_version_code(
       gradle_file_path: "app/build.gradle",
-      version_code: build_number
+      version_code: options[:versionCode]
     )
+  end
 
+  desc "Build a Release APK"
+  lane :release_apk do |options|
+    gradle(
+      task: "assembleRelease",
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.password" => options[:keyStorePassword],
+        "android.injected.signing.key.alias" => options[:keyAlias],
+        "android.injected.signing.key.password" =>  options[:keyPassword]
+      }
+    )
+  end
+
+  desc "Build a Release AAB"
+  lane :release_aab do |options|
     gradle(
       task: "bundle",
       build_type: "release",
       print_command: false,
       properties: {
-        "android.injected.signing.store.password" => ENV["KEY_STORE_PASSWORD"],
-        "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
-        "android.injected.signing.key.password" =>  ENV["KEY_PASSWORD"]
+        "android.injected.signing.store.password" => options[:keyStorePassword],
+        "android.injected.signing.key.alias" => options[:keyAlias],
+        "android.injected.signing.key.password" =>  options[:keyPassword]
       }
     )
+  end
 
+  desc "Submit APK to AppCenter"
+  lane :android_alpha_apk do |options|
+    # Push to AppCenter
+    # more details: https://github.com/Microsoft/fastlane-plugin-appcenter/
+    appcenter_upload(
+      api_token: options[:apiToken],
+      owner_name: "PathCheck",
+      app_name: options[:appName],
+      notify_testers: true,
+      destinations: "Collaborators",
+      file: "app/build/outputs/apk/release/app-release.apk"
+    )
   end
 
   desc "Upload to google play store beta track"
@@ -66,7 +90,7 @@ platform :android do
       release_status: 'draft',
       skip_upload_apk: true,
       package_name: 'org.pathcheck.covidsafepaths.bt',
-      aab: "app/build/outputs/bundle/release/app.aab"
+      aab: "app/build/outputs/bundle/release/app-release.aab"
     )
 
   end
