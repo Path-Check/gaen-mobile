@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import ExplanationScreen from "./ExplanationScreen"
+import OnboardingScreen from "./OnboardingScreen"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { ActivationScreens, Stacks } from "../navigation"
@@ -12,7 +12,7 @@ const ValueProposition: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const explanationScreenContent = {
+  const onboardingScreenContent = {
     screenNumber: 5,
     totalNumberOfScreens: NUMBER_OF_ONBOARDING_SCREENS,
     image: Images.PersonAndHealthExpert,
@@ -21,7 +21,7 @@ const ValueProposition: FunctionComponent = () => {
     primaryButtonLabel: t("label.onboarding_screen_5_button"),
   }
 
-  const explanationScreenActions = {
+  const onboardingScreenActions = {
     primaryButtonOnPress: () =>
       navigation.navigate(Stacks.Activation, {
         screen: ActivationScreens.ActivateProximityTracing,
@@ -29,9 +29,9 @@ const ValueProposition: FunctionComponent = () => {
   }
 
   return (
-    <ExplanationScreen
-      explanationScreenContent={explanationScreenContent}
-      explanationScreenActions={explanationScreenActions}
+    <OnboardingScreen
+      onboardingScreenContent={onboardingScreenContent}
+      onboardingScreenActions={onboardingScreenActions}
     />
   )
 }

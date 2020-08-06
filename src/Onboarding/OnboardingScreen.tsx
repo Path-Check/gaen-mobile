@@ -18,7 +18,7 @@ import { Stacks, ActivationScreens } from "../navigation"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
-type ExplanationScreenContent = {
+type OnboardingScreenContent = {
   screenNumber: number
   totalNumberOfScreens: number
   image: ImageSourcePropType
@@ -27,19 +27,19 @@ type ExplanationScreenContent = {
   primaryButtonLabel: string
 }
 
-type ExplanationScreenActions = {
+type OnboardingScreenActions = {
   primaryButtonOnPress: () => void
 }
 
-interface ExplanationScreenProps {
-  explanationScreenContent: ExplanationScreenContent
-  explanationScreenActions: ExplanationScreenActions
+interface OnboardingScreenProps {
+  onboardingScreenContent: OnboardingScreenContent
+  onboardingScreenActions: OnboardingScreenActions
 }
 
-const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
-  explanationScreenContent,
-  explanationScreenActions,
-}: ExplanationScreenProps) => {
+const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
+  onboardingScreenContent,
+  onboardingScreenActions,
+}: OnboardingScreenProps) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -65,26 +65,26 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
         >
           <View>
             <Image
-              source={explanationScreenContent.image}
-              accessibilityLabel={explanationScreenContent.imageLabel}
+              source={onboardingScreenContent.image}
+              accessibilityLabel={onboardingScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
             <PositionDots
-              screenNumber={explanationScreenContent.screenNumber}
+              screenNumber={onboardingScreenContent.screenNumber}
               totalNumberOfScreens={
-                explanationScreenContent.totalNumberOfScreens
+                onboardingScreenContent.totalNumberOfScreens
               }
             />
             <GlobalText style={style.headerText}>
-              {explanationScreenContent.header}
+              {onboardingScreenContent.header}
             </GlobalText>
           </View>
           <Button
             hasRightArrow
-            label={explanationScreenContent.primaryButtonLabel}
-            onPress={explanationScreenActions.primaryButtonOnPress}
+            label={onboardingScreenContent.primaryButtonLabel}
+            onPress={onboardingScreenActions.primaryButtonOnPress}
           />
         </ScrollView>
       </View>
@@ -169,4 +169,4 @@ const style = StyleSheet.create({
     color: Colors.mediumGray,
   },
 })
-export default ExplanationScreen
+export default OnboardingScreen

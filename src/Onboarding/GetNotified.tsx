@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import ExplanationScreen from "./ExplanationScreen"
+import OnboardingScreen from "./OnboardingScreen"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { OnboardingScreens } from "../navigation"
@@ -12,7 +12,7 @@ const GetNotified: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const explanationScreenContent = {
+  const onboardingScreenContent = {
     screenNumber: 4,
     totalNumberOfScreens: NUMBER_OF_ONBOARDING_SCREENS,
     image: Images.PersonGettingNotification,
@@ -21,15 +21,15 @@ const GetNotified: FunctionComponent = () => {
     primaryButtonLabel: t("label.onboarding_screen4_button"),
   }
 
-  const explanationScreenActions = {
+  const onboardingScreenActions = {
     primaryButtonOnPress: () =>
       navigation.navigate(OnboardingScreens.ValueProposition),
   }
 
   return (
-    <ExplanationScreen
-      explanationScreenContent={explanationScreenContent}
-      explanationScreenActions={explanationScreenActions}
+    <OnboardingScreen
+      onboardingScreenContent={onboardingScreenContent}
+      onboardingScreenActions={onboardingScreenActions}
     />
   )
 }

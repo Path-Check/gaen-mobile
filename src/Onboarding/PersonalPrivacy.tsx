@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import ExplanationScreen from "./ExplanationScreen"
+import OnboardingScreen from "./OnboardingScreen"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { OnboardingScreens } from "../navigation"
@@ -12,7 +12,7 @@ const PersonalPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const explanationScreenContent = {
+  const onboardingScreenContent = {
     screenNumber: 3,
     totalNumberOfScreens: NUMBER_OF_ONBOARDING_SCREENS,
     image: Images.PersonWithLockedPhone,
@@ -21,15 +21,15 @@ const PersonalPrivacy: FunctionComponent = () => {
     primaryButtonLabel: t("label.onboarding_screen3_button"),
   }
 
-  const explanationScreenActions = {
+  const onboardingScreenActions = {
     primaryButtonOnPress: () =>
       navigation.navigate(OnboardingScreens.GetNotified),
   }
 
   return (
-    <ExplanationScreen
-      explanationScreenContent={explanationScreenContent}
-      explanationScreenActions={explanationScreenActions}
+    <OnboardingScreen
+      onboardingScreenContent={onboardingScreenContent}
+      onboardingScreenActions={onboardingScreenActions}
     />
   )
 }
