@@ -27,14 +27,14 @@ const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const HeaderRight = (stepNumber: number) => {
+  type ActivationStep = "ActivateProximityTracing" | "NotificationPermissions"
+
+  const HeaderRight = (step: ActivationStep) => {
     const determineStepText = () => {
-      switch (stepNumber) {
-        case 1:
-          return t("onboarding.step_1_of_3")
-        case 2:
+      switch (step) {
+        case "ActivateProximityTracing":
           return t("onboarding.step_2_of_3")
-        case 3:
+        case "NotificationPermissions":
           return t("onboarding.step_3_of_3")
         default:
           return t("onboarding.step_1_of_3")
@@ -67,27 +67,20 @@ const ActivationStack: FunctionComponent = () => {
     headerTitleStyle: style.headerTitle,
   }
 
-  enum ActivationStep {
-    ActivateProximityTracing = 2,
-    NotificationPermissions = 3,
-  }
-
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name={ActivationScreens.ActivateProximityTracing}
         component={ActivateProximityTracing}
         options={{
-          headerRight: () =>
-            HeaderRight(ActivationStep.ActivateProximityTracing),
+          headerRight: () => HeaderRight("ActivateProximityTracing"),
         }}
       />
       <Stack.Screen
         name={ActivationScreens.NotificationPermissions}
         component={NotificationPermissions}
         options={{
-          headerRight: () =>
-            HeaderRight(ActivationStep.NotificationPermissions),
+          headerRight: () => HeaderRight("NotificationPermissions"),
         }}
       />
     </Stack.Navigator>
