@@ -16,6 +16,7 @@
   "common": {
     "continue": "Continuar",
     "done": "Hecho",
+    "next": "Siguiente",
     "start": "Inicio"
   },
   "home": {
@@ -43,6 +44,9 @@
   "navigation": {
     "home": "Inicio",
     "more": "Más"
+  },
+  "onboarding": {
+    "enable_proximity_tracing": "Habilitar"
   },
   "screen_titles": {
     "about": "Acerca de",

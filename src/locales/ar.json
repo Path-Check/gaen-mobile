@@ -13,7 +13,8 @@
   },
   "common": {
     "continue": "استمر",
-    "done": "تم"
+    "done": "تم",
+    "next": "تم"
   },
   "label": {
     "launch_enable_notif": "فعل الإشعارات",
