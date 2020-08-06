@@ -203,12 +203,22 @@
     "step_2_of_3": "Step 2 of 3",
     "step_3_of_3": "Step 3 of 3"
   },
+  "report_issue": {
+    "body": "Feedback (required)",
+    "email": "Email (required)",
+    "errors": {
+      "invalid_email": "The email seems to be invalid, please check again"
+    },
+    "name": "Full Name",
+    "success": "We received your request. Thank you!"
+  },
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
     "debug_form": "Debug Form",
     "exposure_history": "Exposure History",
     "legal": "Legal",
+    "report_issue": "Report an Issue",
     "select_language": "Select Language"
   },
   "settings": {

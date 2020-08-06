@@ -121,6 +121,11 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
         <SettingsListItem
           label={t("screen_titles.legal")}
           onPress={() => navigation.navigate(Screens.Licenses)}
+          itemStyle={style.divider}
+        />
+        <SettingsListItem
+          label={t("screen_titles.report_issue")}
+          onPress={() => navigation.navigate(Screens.ReportIssueForm)}
           itemStyle={style.lastListItem}
         />
       </View>
