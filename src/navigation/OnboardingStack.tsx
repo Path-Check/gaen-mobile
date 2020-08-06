@@ -82,6 +82,11 @@ const OnboardingStack: FunctionComponent = () => {
     headerTitleStyle: style.headerTitle,
   }
 
+  enum ActivationStep {
+    ActivateProximityTracing = 2,
+    NotificationPermissions = 3,
+  }
+
   return (
     <Stack.Navigator screenOptions={onboardingScreenOptions}>
       <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
@@ -115,7 +120,8 @@ const OnboardingStack: FunctionComponent = () => {
         component={ActivateProximityTracing}
         options={{
           ...appSetupOptions,
-          headerRight: () => HeaderRight(2),
+          headerRight: () =>
+            HeaderRight(ActivationStep.ActivateProximityTracing),
         }}
       />
       <Stack.Screen
@@ -123,7 +129,8 @@ const OnboardingStack: FunctionComponent = () => {
         component={NotificationPermissions}
         options={{
           ...appSetupOptions,
-          headerRight: () => HeaderRight(3),
+          headerRight: () =>
+            HeaderRight(ActivationStep.NotificationPermissions),
         }}
       />
       <Stack.Screen

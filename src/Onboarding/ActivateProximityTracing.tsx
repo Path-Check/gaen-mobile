@@ -22,13 +22,6 @@ const ActivateProximityTracing: FunctionComponent = () => {
 
   const { exposureNotifications } = usePermissionsContext()
 
-  const headerText = t("onboarding.proximity_tracing_header")
-  const subheader1Text = t("onboarding.proximity_tracing_subheader1")
-  const subheader2Text = t("onboarding.proximity_tracing_subheader2")
-  const subheader3Text = t("onboarding.proximity_tracing_subheader3")
-  const body1Text = t("onboarding.proximity_tracing_body1")
-  const body2Text = t("onboarding.proximity_tracing_body2")
-
   const handleOnPressEnable = () => {
     exposureNotifications.request()
     navigation.navigate(OnboardingScreens.NotificationPermissions)
@@ -46,12 +39,24 @@ const ActivateProximityTracing: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <GlobalText style={style.header}>{headerText}</GlobalText>
-          <GlobalText style={style.subheader}>{subheader1Text}</GlobalText>
-          <GlobalText style={style.body}>{body1Text}</GlobalText>
-          <GlobalText style={style.subheader}>{subheader2Text}</GlobalText>
-          <GlobalText style={style.body}>{body2Text}</GlobalText>
-          <GlobalText style={style.subheader}>{subheader3Text}</GlobalText>
+          <GlobalText style={style.header}>
+            {t("onboarding.proximity_tracing_header")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader1")}
+          </GlobalText>
+          <GlobalText style={style.body}>
+            {t("onboarding.proximity_tracing_body1")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader2")}
+          </GlobalText>
+          <GlobalText style={style.body}>
+            {t("onboarding.proximity_tracing_body2")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader3")}
+          </GlobalText>
         </View>
         <Button
           onPress={handleOnPressEnable}
