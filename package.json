@@ -18,7 +18,7 @@
     "detox-setup": "detox clean-framework-cache && detox build-framework-cache",
     "build:e2e:android": "detox build -c android.emu.release",
     "test:e2e:android": "detox test -c android.emu.release",
-    "build:e2e:ios": "detox build -c iphone11.sim",
+    "build:e2e:ios": "detox build -c iOSdefault",
     "test:e2e:iphone11": "detox test -c iphone11.sim --loglevel=warn",
     "test:e2e:iphone-se": "detox test -c iphone-se.sim --loglevel=warn",
     "test:e2e:iphone8": "detox test -c iphone8.sim --loglevel=warn",
@@ -125,9 +125,12 @@
       }
     },
     "configurations": {
+      "iOSdefault": {
+        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
+        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Development -configuration Debug-BT -sdk iphonesimulator -derivedDataPath ios/build"
+      },
       "iphone11.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11"
@@ -135,7 +138,6 @@
       },
       "iphone8.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 8"
@@ -143,7 +145,6 @@
       },
       "iphone-se.sim": {
         "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)"
