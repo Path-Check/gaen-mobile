@@ -11,8 +11,8 @@ import { useTranslation } from "react-i18next"
 import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
 
-import ActivateProximityTracing from "../Onboarding/ActivateProximityTracing"
-import NotificationPermissions from "../Onboarding/NotificationPermissions"
+import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
+import NotificationPermissions from "../Activation/NotificationPermissions"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
