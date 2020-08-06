@@ -137,7 +137,7 @@ const EulaModal: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
   },
   closeIcon: {

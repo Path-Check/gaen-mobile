@@ -145,7 +145,7 @@ const style = StyleSheet.create({
   },
   section: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     marginBottom: Spacing.medium,
     borderTopWidth: 1,
     borderBottomWidth: 1,

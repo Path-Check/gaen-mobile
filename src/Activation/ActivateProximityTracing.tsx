@@ -76,7 +76,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
 }
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
   },
   contentContainer: {

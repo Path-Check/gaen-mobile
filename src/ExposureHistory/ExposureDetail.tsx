@@ -137,7 +137,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
   },
   headerContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xLarge,
   },
@@ -162,7 +162,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   bottomContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     flex: 1,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.medium,
