@@ -3,11 +3,13 @@ const screenshotText = "EULA Accept Page"
 
 class SignEula {
   async tapButton(languageStrings) {
-    await element(by.label(languageStrings.onboarding.eula_continue)).tap()
+    await element(by.label(languageStrings.common.continue)).tap()
   }
 
   async sign(languageStrings) {
-    await element(by.text(languageStrings.onboarding.eula_checkbox)).tap()
+    await element(
+      by.text(languageStrings.onboarding.eula_agree_terms_of_use),
+    ).tap()
   }
 
   async takeScreenshot() {
