@@ -6,12 +6,19 @@ import { useNavigation } from "@react-navigation/native"
 import FeedbackForm from "./ReportIssueForm"
 import * as API from "./zendeskAPI"
 
+const mockedVersionInfo = "versionInfo"
+jest.mock("./useApplicationInfo", () => {
+  return {
+    useVersionInfo: () => {
+      return {
+        versionInfo: mockedVersionInfo,
+      }
+    },
+  }
+})
 jest.mock("@react-navigation/native")
-describe("ReportIssueForm", () => {
-  afterEach(() => {
-    jest.resetAllMocks()
-  })
 
+describe("ReportIssueForm", () => {
   describe("validations", () => {
     it("only allows submit when valid email and body are present", async () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
@@ -68,7 +75,7 @@ describe("ReportIssueForm", () => {
           environment: {
             os,
             osVersion,
-            appVersion: "0.0.1",
+            appVersion: mockedVersionInfo,
           },
         })
         expect(alertSpy).toHaveBeenCalledWith(

@@ -13,6 +13,7 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
+import { useVersionInfo } from "./useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
@@ -24,6 +25,7 @@ const defaultErrorMessage = " "
 const ReportIssueForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { versionInfo } = useVersionInfo()
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -79,7 +81,7 @@ const ReportIssueForm: FunctionComponent = () => {
         environment: {
           os: Platform.OS,
           osVersion: `${Platform.Version}`,
-          appVersion: "0.0.1",
+          appVersion: versionInfo,
         },
       })
 
