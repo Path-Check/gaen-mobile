@@ -8,7 +8,7 @@ import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-import HomeScreen from "../Home"
+import HomeScreen from "../Home/Home"
 import MoreStack from "./MoreStack"
 
 import { useExposureContext } from "../ExposureContext"

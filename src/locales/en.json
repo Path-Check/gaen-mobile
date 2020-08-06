@@ -42,10 +42,13 @@
   "common": {
     "close": "Close",
     "continue": "Continue",
+    "disabled": "Disabled",
     "done": "Done",
+    "enabled": "Enabled",
     "maybe_later": "Maybe later",
     "next": "Next",
     "no_thanks": "No thanks",
+    "okay": "Okay",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -117,12 +120,20 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_subheader": "Exposure notifications are on",
-      "tracing_off_button": "Allow Exposure Notifications",
-      "tracing_off_header": "Exposure Notifications Disabled",
-      "tracing_off_subheader": "Enable Exposure Notifications to receive information about possible exposures",
-      "unauthorized_error_message": "You must authorize COVID-19 Exposure Logging in the Settings app to continue.",
-      "unauthorized_error_title": "Please Update Settings"
+      "all_services_on_subheader": "COVIDaware will remain active after the app has been closed",
+      "bluetooth_disabled_error_message": "Enable Bluetooth in the Settings app",
+      "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
+      "bluetooth_header": "Bluetooth",
+      "fix": "Fix",
+      "proximity_tracing_header": "Proximity Tracing",
+      "report_positive_result": "Report positive test result",
+      "share": "Share the app and help contain the outbreak",
+      "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
+      "tracing_off_header": "Inactive",
+      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+      "tracing_on_header": "Active",
+      "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
+      "unauthorized_error_title": "Authorize in Settings"
     }
   },
   "label": {
@@ -156,6 +167,11 @@
     "more": "More",
     "self_assessment": "Health"
   },
+  "onboarding_screen1_image_label": "",
+  "onboarding_screen2_image_label": "",
+  "onboarding_screen3_image_label": "",
+  "onboarding_screen4_image_label": "",
+  "onboarding_screen5_image_label": "",
   "onboarding": {
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
@@ -208,9 +224,5 @@
     "legal": "Legal",
     "report_issue": "Report an Issue",
     "select_language": "Select Language"
-  },
-  "settings": {
-    "share_test_result": "Report Positive Test Result",
-    "share_test_result_description": "Anonymously notify others you may have recently encountered if you test positive for COVID-19"
   }
 }

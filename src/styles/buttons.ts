@@ -3,6 +3,7 @@ import { ViewStyle } from "react-native"
 import * as Colors from "./colors"
 import * as Outlines from "./outlines"
 import * as Spacing from "./spacing"
+import * as Layout from "./layout"
 
 const base: ViewStyle = {
   flexDirection: "row",
@@ -45,8 +46,9 @@ export const primary: ViewStyle = {
   ...base,
   ...large,
   borderRadius: Outlines.borderRadiusMax,
-  paddingHorizontal: Spacing.huge,
+  paddingHorizontal: Spacing.xHuge,
   minWidth: 225,
+  maxWidth: Layout.screenWidth * 0.9,
 }
 
 export const secondary: ViewStyle = {

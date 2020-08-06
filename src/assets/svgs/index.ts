@@ -6,6 +6,7 @@ import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
+import CheckInCircle from "./checkInCircle"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
@@ -24,11 +25,13 @@ import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import RadioWave from "./radioWave"
 import SelfAssessment from "./selfAssessment"
+import Share from "./share"
 import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
 import Upload from "./upload"
 import WashHands from "./WashHands"
+import XInCircle from "./xInCircle"
 
 export const Icons = {
   AnonymizedData,
@@ -39,6 +42,7 @@ export const Icons = {
   BellYellow,
   CheckboxChecked,
   CheckboxUnchecked,
+  CheckInCircle,
   Checkmark,
   CheckmarkCircle,
   ChevronRight,
@@ -57,9 +61,11 @@ export const Icons = {
   QuestionMark,
   RadioWave,
   SelfAssessment,
+  Share,
   SixFeet,
   StateNoContact,
   StateUnknown,
   Upload,
   WashHands,
+  XInCircle,
 }
