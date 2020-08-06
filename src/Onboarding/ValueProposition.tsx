@@ -13,6 +13,7 @@ const ValueProposition: FunctionComponent = () => {
 
   const explanationScreenContent = {
     screenNumber: 5,
+    totalNumberOfScreens: 5,
     image: Images.PersonAndHealthExpert,
     imageLabel: t("onboarding_screen5_image_label"),
     header: t("label.onboarding_screen5_header"),

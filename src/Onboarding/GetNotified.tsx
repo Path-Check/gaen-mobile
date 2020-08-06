@@ -13,6 +13,7 @@ const GetNotified: FunctionComponent = () => {
 
   const explanationScreenContent = {
     screenNumber: 4,
+    totalNumberOfScreens: 5,
     image: Images.PersonGettingNotification,
     imageLabel: t("onboarding_screen4_image_label"),
     header: t("label.onboarding_screen4_header"),

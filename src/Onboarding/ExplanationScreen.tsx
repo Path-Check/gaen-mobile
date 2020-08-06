@@ -20,6 +20,7 @@ import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
 type ExplanationScreenContent = {
   screenNumber: number
+  totalNumberOfScreens: number
   image: ImageSourcePropType
   imageLabel: string
   header: string
@@ -41,14 +42,6 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
 }: ExplanationScreenProps) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-
-  const determineCircleStyle = (circlePosition: number): ViewStyle => {
-    if (circlePosition == explanationScreenContent.screenNumber) {
-      return style.circleActive
-    } else {
-      return style.circleInactive
-    }
-  }
 
   return (
     <SafeAreaView>
@@ -76,13 +69,12 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
               style={style.image}
               resizeMode={"contain"}
             />
-            <View style={style.circles}>
-              <View style={determineCircleStyle(1)} />
-              <View style={determineCircleStyle(2)} />
-              <View style={determineCircleStyle(3)} />
-              <View style={determineCircleStyle(4)} />
-              <View style={determineCircleStyle(5)} />
-            </View>
+            <PositionDots
+              screenNumber={explanationScreenContent.screenNumber}
+              totalNumberOfScreens={
+                explanationScreenContent.totalNumberOfScreens
+              }
+            />
             <GlobalText style={style.headerText}>
               {explanationScreenContent.header}
             </GlobalText>
@@ -95,6 +87,34 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
         </ScrollView>
       </View>
     </SafeAreaView>
+  )
+}
+
+interface PositionDotsProps {
+  screenNumber: number
+  totalNumberOfScreens: number
+}
+
+const PositionDots: FunctionComponent<PositionDotsProps> = ({
+  screenNumber,
+  totalNumberOfScreens,
+}) => {
+  const determineCircleStyle = (circlePosition: number): ViewStyle => {
+    if (circlePosition === screenNumber) {
+      return style.circleActive
+    } else {
+      return style.circleInactive
+    }
+  }
+
+  const screens = Array.from(Array(totalNumberOfScreens), (i) => i + 1)
+
+  return (
+    <View style={style.circles}>
+      {screens.map((_, idx) => {
+        return <View style={determineCircleStyle(idx + 1)} key={idx} />
+      })}
+    </View>
   )
 }
 
@@ -147,5 +167,4 @@ const style = StyleSheet.create({
     color: Colors.mediumGray,
   },
 })
-
 export default ExplanationScreen

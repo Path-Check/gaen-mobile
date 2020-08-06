@@ -13,6 +13,7 @@ const PersonalPrivacy: FunctionComponent = () => {
 
   const explanationScreenContent = {
     screenNumber: 3,
+    totalNumberOfScreens: 5,
     image: Images.PersonWithLockedPhone,
     imageLabel: t("onboarding_screen3_image_label"),
     header: t("label.onboarding_screen3_header"),

@@ -13,6 +13,7 @@ const Introduction: FunctionComponent = () => {
 
   const explanationScreenContent = {
     screenNumber: 1,
+    totalNumberOfScreens: 5,
     image: Images.PeopleHighFiving,
     imageLabel: t("onboarding_screen1_image_label"),
     header: t("label.onboarding_screen1_header"),

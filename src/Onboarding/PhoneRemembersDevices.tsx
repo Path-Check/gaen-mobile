@@ -13,6 +13,7 @@ const PhoneRemembersDevices: FunctionComponent = () => {
 
   const explanationScreenContent = {
     screenNumber: 2,
+    totalNumberOfScreens: 5,
     image: Images.PeopleOnPhones,
     imageLabel: t("onboarding_screen2_image_label"),
     header: t("label.onboarding_screen2_header"),
