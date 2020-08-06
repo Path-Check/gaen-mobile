@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import OnboardingScreen from "./OnboardingScreen"
-import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { ActivationScreens, Stacks } from "../navigation"
 import { Images } from "../assets"
@@ -14,7 +13,6 @@ const ValueProposition: FunctionComponent = () => {
 
   const onboardingScreenContent = {
     screenNumber: 5,
-    totalNumberOfScreens: NUMBER_OF_ONBOARDING_SCREENS,
     image: Images.PersonAndHealthExpert,
     imageLabel: t("onboarding_screen5_image_label"),
     header: t("label.onboarding_screen5_header"),

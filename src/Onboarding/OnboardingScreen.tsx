@@ -15,12 +15,12 @@ import { useTranslation } from "react-i18next"
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
 import { Stacks, ActivationScreens } from "../navigation"
+import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
 type OnboardingScreenContent = {
   screenNumber: number
-  totalNumberOfScreens: number
   image: ImageSourcePropType
   imageLabel: string
   header: string
@@ -71,12 +71,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots
-              screenNumber={onboardingScreenContent.screenNumber}
-              totalNumberOfScreens={
-                onboardingScreenContent.totalNumberOfScreens
-              }
-            />
+            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
             <GlobalText style={style.headerText}>
               {onboardingScreenContent.header}
             </GlobalText>
@@ -94,12 +89,10 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
 
 interface PositionDotsProps {
   screenNumber: number
-  totalNumberOfScreens: number
 }
 
 const PositionDots: FunctionComponent<PositionDotsProps> = ({
   screenNumber,
-  totalNumberOfScreens,
 }) => {
   const determineCircleStyle = (circlePosition: number): ViewStyle => {
     if (circlePosition === screenNumber) {
@@ -109,7 +102,7 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
     }
   }
 
-  const screens = Array.from(Array(totalNumberOfScreens), (i) => i + 1)
+  const screens = Array.from(Array(NUMBER_OF_ONBOARDING_SCREENS), (i) => i + 1)
 
   return (
     <View style={style.circles}>
