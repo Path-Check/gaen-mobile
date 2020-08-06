@@ -1,4 +1,4 @@
-name: Test
+name: e2e Tests
 
 on:
   pull_request:
@@ -7,32 +7,9 @@ on:
       - main
 
 jobs:
-  unit-test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - run: node --version
-
-      - name: Cache node_modules/
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-yarn-cache-
-
-      - run: yarn --frozen-lockfile
-
-      - run: yarn test
-        env:
-          CI: true
-
-  unit-test-ios:
-    runs-on: macOS-latest
-    needs: unit-test
-    timeout-minutes: 25
+  e2e-ios-build:
+    runs-on: macos-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@master
 
@@ -47,6 +24,9 @@ jobs:
           key: ${{ runner.OS }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.OS }}-yarn-cache-
+      - name: Rebuild detox
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: yarn detox-setup
 
       - name: Install Node Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -78,15 +58,51 @@ jobs:
           key: ${{ runner.OS }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.OS }}-pods-
-      - run: pod install --repo-update
+      - run: bundle exec pod install --repo-update
         working-directory: ./ios
 
       - name: Setup env
         run: ./bin/set_ha_env_github.sh
 
-      # TODO(https://pathcheck.atlassian.net/browse/SAF-250): remove the skip on COVIDSafePathsTests/testRendersWelcomeScreen once it's passing
-      - run: |
-          xcodebuild test -workspace COVIDSafePaths.xcworkspace \
-            -scheme BT_Development \
-            -destination 'platform=iOS Simulator,name=iPhone 8' \
-        working-directory: ./ios
+      - run: yarn build:e2e:ios
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: e2e-ios-bin
+          path: ios/build/Build/Products/Release-BT-iphonesimulator/BT.app
+
+  e2e-iphone-11:
+    runs-on: macos-latest
+    needs: e2e-ios-build
+    timeout-minutes: 15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.5.app
+    steps:
+      - uses: actions/checkout@master
+      - name: Cache node_modules/
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-yarn-cache-
+
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - run: brew tap wix/brew
+
+      - run: brew install applesimutils
+
+      - run: xcrun simctl create "iPhone 11" com.apple.CoreSimulator.SimDeviceType.iPhone-11 com.apple.CoreSimulator.SimRuntime.iOS-13-5
+
+      - run: xcrun simctl list
+
+      - uses: actions/download-artifact@master
+        with:
+          name: e2e-ios-bin
+          path: ios/build/Build/Products/Release-BT-iphonesimulator/BT.app
+
+      - run: yarn test:e2e:iphone11
