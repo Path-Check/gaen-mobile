@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
 } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "./GlobalText"
+import { Icons } from "../assets"
 
-import { Colors, Buttons, Typography } from "../styles"
+import { Spacing, Colors, Buttons, Typography } from "../styles"
+import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
@@ -21,6 +24,7 @@ interface ButtonProps {
   customTextStyle?: TextStyle
   invert?: boolean
   testID?: string
+  hasRightArrow?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -32,16 +36,24 @@ export const Button: FunctionComponent<ButtonProps> = ({
   customTextStyle,
   invert,
   testID,
+  hasRightArrow,
 }) => {
-  const determineGradient = (): [string, string] => {
+  const { t } = useTranslation()
+
+  const determineGradient = (): string[] => {
+    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
+    const disabledGradient = [Colors.darkestGray, Colors.mediumGray]
+    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
+    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
+
     if (invert && (disabled || loading)) {
-      return [Colors.mediumGray, Colors.lighterGray]
+      return invertedDisabledGradient
     } else if (invert && !(disabled || loading)) {
-      return [Colors.quaternaryViolet, Colors.white]
+      return invertedGradient
     } else if (!invert && (disabled || loading)) {
-      return [Colors.primaryViolet, Colors.secondaryViolet]
+      return disabledGradient
     } else {
-      return [Colors.primaryViolet, Colors.secondaryViolet]
+      return baseGradient
     }
   }
 
@@ -70,15 +82,26 @@ export const Button: FunctionComponent<ButtonProps> = ({
       testID={testID}
     >
       <LinearGradient
-        start={{ x: 0.15, y: 0.75 }}
-        end={{ x: 0.95, y: 0.15 }}
+        start={{ x: 0, y: 0.85 }}
+        end={{ x: 0.15, y: 0 }}
         colors={determineGradient()}
         style={buttonStyle}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
         ) : (
-          <GlobalText style={textStyle}>{label}</GlobalText>
+          <>
+            <GlobalText style={textStyle}>{label}</GlobalText>
+            {hasRightArrow && (
+              <SvgXml
+                xml={Icons.Arrow}
+                fill={Colors.white}
+                style={style.rightArrow}
+                accessible
+                accessibilityLabel={t("common.next")}
+              />
+            )}
+          </>
         )}
       </LinearGradient>
     </TouchableOpacity>
@@ -104,5 +127,8 @@ const style = StyleSheet.create({
   textInvertedDisabled: {
     textAlign: "center",
     ...Typography.buttonPrimaryInvertedDisabledText,
+  },
+  rightArrow: {
+    marginLeft: Spacing.medium,
   },
 })

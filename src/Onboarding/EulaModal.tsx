@@ -92,12 +92,7 @@ const EulaModal: FunctionComponent = () => {
         style={style.closeIcon}
         onPress={navigation.goBack}
       >
-        <SvgXml
-          color={Colors.icon}
-          xml={Icons.Close}
-          width={Iconography.xSmall}
-          height={Iconography.xSmall}
-        />
+        <SvgXml fill={Colors.icon} xml={Icons.Close} />
       </TouchableOpacity>
       {html && (
         <>
@@ -125,7 +120,7 @@ const EulaModal: FunctionComponent = () => {
         </TouchableOpacity>
         <Button
           invert
-          onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
+          onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
           disabled={!boxChecked}
           label={t("common.continue")}
         />
@@ -137,7 +132,7 @@ const EulaModal: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
   },
   closeIcon: {

@@ -172,7 +172,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
 const style = StyleSheet.create({
   section: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.small,
     marginBottom: Spacing.medium,
     borderTopWidth: Outlines.hairline,

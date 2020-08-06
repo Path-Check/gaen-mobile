@@ -128,7 +128,7 @@ const style = StyleSheet.create({
   iconContainerCircle: {
     ...Iconography.largeIcon,
     borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     marginBottom: Spacing.large,
   },
   contentText: {

@@ -4,24 +4,26 @@ import { useNavigation } from "@react-navigation/native"
 
 import OnboardingScreen from "./OnboardingScreen"
 
-import { OnboardingScreens } from "../navigation"
+import { ActivationScreens, Stacks } from "../navigation"
 import { Images } from "../assets"
 
-const PersonalPrivacy: FunctionComponent = () => {
+const ValueProposition: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
   const onboardingScreenContent = {
-    screenNumber: 3,
-    image: Images.PersonWithLockedPhone,
-    imageLabel: t("onboarding_screen3_image_label"),
-    header: t("label.onboarding_screen3_header"),
-    primaryButtonLabel: t("label.onboarding_screen3_button"),
+    screenNumber: 5,
+    image: Images.PersonAndHealthExpert,
+    imageLabel: t("onboarding_screen5_image_label"),
+    header: t("label.onboarding_screen5_header"),
+    primaryButtonLabel: t("label.onboarding_screen_5_button"),
   }
 
   const onboardingScreenActions = {
     primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.GetNotified),
+      navigation.navigate(Stacks.Activation, {
+        screen: ActivationScreens.ActivateProximityTracing,
+      }),
   }
 
   return (
@@ -32,4 +34,4 @@ const PersonalPrivacy: FunctionComponent = () => {
   )
 }
 
-export default PersonalPrivacy
+export default ValueProposition

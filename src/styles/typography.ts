@@ -17,10 +17,10 @@ export const huge = 52
 export const xxSmallLineHeight = 14
 export const xSmallLineHeight = 16
 export const smallLineHeight = 20
-export const mediumLineHeight = 24
-export const largeLineHeight = 28
-export const xLargeLineHeight = 32
-export const xxLargeLineHeight = 50
+export const mediumLineHeight = 26
+export const largeLineHeight = 30
+export const xLargeLineHeight = 34
+export const xxLargeLineHeight = 38
 
 // Letter Spacing
 export const mediumLetterSpacing = 0.5
@@ -82,7 +82,7 @@ export const smallFont: TextStyle = {
 export const mediumFont: TextStyle = {
   ...base,
   fontSize: medium,
-  lineHeight: mediumLineHeight,
+  lineHeight: largeLineHeight,
 }
 
 export const largeFont: TextStyle = {
@@ -94,13 +94,13 @@ export const largeFont: TextStyle = {
 export const xLargeFont: TextStyle = {
   ...base,
   fontSize: xLarge,
-  lineHeight: largeLineHeight,
+  lineHeight: xLargeLineHeight,
 }
 
 export const xxLargeFont: TextStyle = {
   ...base,
   fontSize: xxLarge,
-  lineHeight: xLargeLineHeight,
+  lineHeight: xxLargeLineHeight,
 }
 
 export const hugeFont: TextStyle = {
@@ -125,11 +125,12 @@ export const header2: TextStyle = {
 export const header3: TextStyle = {
   ...xLargeFont,
   ...bold,
-  color: Colors.primaryHeaderText,
+  color: Colors.secondaryHeaderText,
 }
 
 export const header4: TextStyle = {
-  ...smallFont,
+  ...mediumFont,
+  ...mediumBold,
   color: Colors.secondaryHeaderText,
 }
 
@@ -148,6 +149,7 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
+  fontWeight: lightWeight,
   color: Colors.primaryText,
 }
 
