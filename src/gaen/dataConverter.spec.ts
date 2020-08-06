@@ -25,16 +25,12 @@ describe("toExposureInfo", () => {
           id: "ABCD-EFGH",
           date: twoDaysAgo,
           duration,
-          totalRiskScore: 2,
-          transmissionRiskLevel: 3,
         },
       ]
       const expected: Possible = {
         kind: "Possible",
         date: DateTimeUtils.beginningOfDay(twoDaysAgo),
         duration: duration,
-        totalRiskScore: 2,
-        transmissionRiskLevel: 3,
       }
 
       const result = toExposureInfo(rawExposures)
@@ -56,30 +52,22 @@ describe("toExposureInfo", () => {
           id: "raw-exposure-1",
           date: beginningOfDay + 1000,
           duration: duration1,
-          totalRiskScore: 1,
-          transmissionRiskLevel: 3,
         },
         {
           id: "raw-exposure-2",
           date: beginningOfDay + 18000,
           duration: duration2,
-          totalRiskScore: 7,
-          transmissionRiskLevel: 2,
         },
         {
           id: "raw-exposure-3",
           date: beginningOfDay + 36000,
           duration: duration3,
-          totalRiskScore: 4,
-          transmissionRiskLevel: 5,
         },
       ]
       const expected: Possible = {
         kind: "Possible",
         date: DateTimeUtils.beginningOfDay(today),
         duration: duration1 + duration2 + duration3,
-        totalRiskScore: 7,
-        transmissionRiskLevel: 5,
       }
 
       const result = toExposureInfo(rawExposures)

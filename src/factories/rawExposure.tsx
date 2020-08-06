@@ -10,6 +10,5 @@ export default Factory.define<RawExposure>(() => {
     date: defaultDate,
     duration: 300000,
     totalRiskScore: 4,
-    transmissionRiskLevel: 7,
   }
 })
