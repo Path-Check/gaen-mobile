@@ -15,14 +15,16 @@ export type NavigationProp = NavigationScreenProp<
 >
 
 export type ActivationScreen =
-  | "NotificationPermissions"
+  | "AcceptEula"
   | "ActivateProximityTracing"
+  | "NotificationPermissions"
 
 export const ActivationScreens: {
   [key in ActivationScreen]: ActivationScreen
 } = {
-  NotificationPermissions: "NotificationPermissions",
+  AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
+  NotificationPermissions: "NotificationPermissions",
 }
 
 export type OnboardingScreen =
@@ -32,7 +34,6 @@ export type OnboardingScreen =
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "EulaModal"
   | "LanguageSelection"
 
 export const OnboardingScreens: {
@@ -44,7 +45,6 @@ export const OnboardingScreens: {
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  EulaModal: "EulaModal",
   LanguageSelection: "LanguageSelection",
 }
 

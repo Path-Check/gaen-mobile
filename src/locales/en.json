@@ -132,6 +132,8 @@
     "calendar_icon": "Calendar icon",
     "check": "Checkmark",
     "checkbox": "Checkbox",
+    "checked_checkbox": "Checked checkbox",
+    "unchecked_checkbox": "Unchecked checkbox",
     "close": "Close",
     "description_optional": "Description (Optional)",
     "email_optional": "Email (Optional)",

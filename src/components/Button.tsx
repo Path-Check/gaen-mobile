@@ -82,8 +82,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
       testID={testID}
     >
       <LinearGradient
-        start={{ x: 0, y: 0.85 }}
-        end={{ x: 0.15, y: 0 }}
+        start={{ x: 0.2, y: 0.85 }}
+        end={{ x: 0.4, y: 0 }}
         colors={determineGradient()}
         style={buttonStyle}
       >

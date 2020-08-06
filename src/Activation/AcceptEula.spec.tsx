@@ -4,7 +4,7 @@ import { render, fireEvent, wait } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import i18n from "../locales/languages"
-import EulaModal from "./EulaModal"
+import AcceptEula from "./AcceptEula"
 
 jest.mock("react-native-local-resource", () => {
   return {
@@ -35,23 +35,13 @@ jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("EulaModal", () => {
-  it("adds an accessible close button", () => {
-    const { getByLabelText } = render(
-      <I18nextProvider i18n={i18n}>
-        <EulaModal />
-      </I18nextProvider>,
-    )
-
-    expect(getByLabelText("Close")).toBeDefined()
-  })
-
   it("won't continue until a user accepts the terms of use", async () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
     const { getByLabelText, getByTestId } = render(
       <I18nextProvider i18n={i18n}>
-        <EulaModal />
+        <AcceptEula />
       </I18nextProvider>,
     )
 
@@ -59,11 +49,14 @@ describe("EulaModal", () => {
     fireEvent.press(continueButton)
 
     expect(navigationSpy).not.toHaveBeenCalled()
-    fireEvent.press(getByTestId("accept-terms-of-use-checkbox"))
+    expect(getByLabelText("Unchecked checkbox")).toBeDefined()
 
+    fireEvent.press(getByTestId("accept-terms-of-use-checkbox"))
     fireEvent.press(continueButton)
+
     await wait(() => {
-      expect(navigationSpy).toHaveBeenCalledWith("Introduction")
+      expect(getByLabelText("Checked checkbox")).toBeDefined()
+      expect(navigationSpy).toHaveBeenCalledWith("ActivateProximityTracing")
     })
   })
 })

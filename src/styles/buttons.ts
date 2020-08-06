@@ -46,7 +46,7 @@ export const primary: ViewStyle = {
   ...large,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.huge,
-  minWidth: 200,
+  minWidth: 225,
 }
 
 export const secondary: ViewStyle = {

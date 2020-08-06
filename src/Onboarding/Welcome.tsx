@@ -53,7 +53,7 @@ const Welcome: FunctionComponent = () => {
           <Button
             invert
             label={t("label.launch_get_started")}
-            onPress={() => navigation.navigate(OnboardingScreens.EulaModal)}
+            onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
           />
         </View>
       </View>

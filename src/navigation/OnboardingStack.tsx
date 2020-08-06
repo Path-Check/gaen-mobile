@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
 import {
-  TransitionPresets,
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack"
@@ -9,7 +8,6 @@ import { OnboardingScreen, OnboardingScreens } from "./index"
 
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
-import EulaModal from "../Onboarding/EulaModal"
 import LanguageSelection from "../More/LanguageSelection"
 import Introduction from "../Onboarding/Introduction"
 import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
@@ -32,11 +30,6 @@ const OnboardingStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={onboardingScreenOptions}>
       <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
-      <Stack.Screen
-        name={OnboardingScreens.EulaModal}
-        component={EulaModal}
-        options={{ ...TransitionPresets.ModalTransition }}
-      />
       <Stack.Screen
         name={OnboardingScreens.Introduction}
         component={Introduction}

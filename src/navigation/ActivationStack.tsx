@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
 
+import AcceptEula from "../Activation/AcceptEula"
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 
@@ -27,11 +28,16 @@ const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  type ActivationStep = "ActivateProximityTracing" | "NotificationPermissions"
+  type ActivationStep =
+    | "ActivateProximityTracing"
+    | "NotificationPermissions"
+    | "AcceptEula"
 
   const HeaderRight = (step: ActivationStep) => {
     const determineStepText = () => {
       switch (step) {
+        case "AcceptEula":
+          return t("onboarding.step_1_of_3")
         case "ActivateProximityTracing":
           return t("onboarding.step_2_of_3")
         case "NotificationPermissions":
@@ -71,6 +77,13 @@ const ActivationStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name={ActivationScreens.AcceptEula}
+        component={AcceptEula}
+        options={{
+          headerRight: () => HeaderRight("AcceptEula"),
+        }}
+      />
       <Stack.Screen
         name={ActivationScreens.ActivateProximityTracing}
         component={ActivateProximityTracing}

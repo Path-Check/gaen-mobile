@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
-import { Stacks, ActivationScreens } from "../navigation"
+import { Stacks, ActivationScreens, useStatusBarEffect } from "../navigation"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
@@ -43,13 +43,15 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   const { t } = useTranslation()
   const navigation = useNavigation()
 
+  useStatusBarEffect("dark-content")
+
   return (
     <SafeAreaView>
       <View>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(Stacks.Activation, {
-              screen: ActivationScreens.ActivateProximityTracing,
+              screen: ActivationScreens.AcceptEula,
             })
           }
           style={style.skipButtonContainer}

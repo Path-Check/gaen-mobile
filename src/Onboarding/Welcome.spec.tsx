@@ -39,6 +39,6 @@ describe("Welcome", () => {
     const { getByLabelText } = render(<Welcome />)
     const continueButton = getByLabelText("Get Started")
     fireEvent.press(continueButton)
-    expect(navigationSpy).toHaveBeenCalledWith("EulaModal")
+    expect(navigationSpy).toHaveBeenCalledWith("Introduction")
   })
 })
