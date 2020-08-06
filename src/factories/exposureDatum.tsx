@@ -11,6 +11,5 @@ export default Factory.define<ExposureDatum>(() => {
     date: defaultDate,
     duration: 300000,
     totalRiskScore: 4,
-    transmissionRiskLevel: 7,
   }
 })
