@@ -41,9 +41,11 @@
   },
   "common": {
     "continue": "Continue",
+    "close": "Close",
     "done": "Done",
     "maybe_later": "Maybe later",
     "no_thanks": "No thanks",
+    "next": "Next",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -178,6 +180,7 @@
     "self_assessment": "Health"
   },
   "onboarding": {
+    "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",

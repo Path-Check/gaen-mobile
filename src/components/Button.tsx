@@ -13,6 +13,7 @@ import { GlobalText } from "./GlobalText"
 import { Icons } from "../assets"
 
 import { Spacing, Colors, Buttons, Typography } from "../styles"
+import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
@@ -37,6 +38,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
   testID,
   hasRightArrow,
 }) => {
+  const { t } = useTranslation()
+
   const determineGradient = (): string[] => {
     const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
     const disabledGradient = [Colors.darkestGray, Colors.mediumGray]
@@ -94,6 +97,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
                 xml={Icons.Arrow}
                 fill={Colors.white}
                 style={style.rightArrow}
+                accessible
+                accessibilityLabel={t("common.next")}
               />
             )}
           </>

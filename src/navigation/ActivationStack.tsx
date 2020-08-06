@@ -53,6 +53,8 @@ const ActivationStack: FunctionComponent = () => {
             xml={Icons.Close}
             fill={Colors.darkestGray}
             style={style.closeIcon}
+            accessible
+            accessibilityLabel={t("common.close")}
           />
         </TouchableOpacity>
       </View>
@@ -63,7 +65,7 @@ const ActivationStack: FunctionComponent = () => {
     headerShown: true,
     headerLeft: () => null,
     headerTitleAlign: "left",
-    headerTitle: "App Setup",
+    headerTitle: t("onboarding.activation_header_title"),
     headerTitleStyle: style.headerTitle,
   }
 

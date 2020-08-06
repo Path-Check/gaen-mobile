@@ -92,7 +92,12 @@ const EulaModal: FunctionComponent = () => {
         style={style.closeIcon}
         onPress={navigation.goBack}
       >
-        <SvgXml fill={Colors.icon} xml={Icons.Close} />
+        <SvgXml
+          fill={Colors.icon}
+          xml={Icons.Close}
+          accessible
+          accessibilityLabel={t("common.close")}
+        />
       </TouchableOpacity>
       {html && (
         <>
