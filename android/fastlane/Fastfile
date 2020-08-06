@@ -40,12 +40,14 @@ platform :android do
   desc "Build a Release APK"
   lane :release_apk do |options|
     gradle(
-      task: "assembleRelease",
+      task: "assemble",
+      build_type: "release",
       print_command: false,
       properties: {
         "android.injected.signing.store.password" => options[:keyStorePassword],
         "android.injected.signing.key.alias" => options[:keyAlias],
-        "android.injected.signing.key.password" =>  options[:keyPassword]
+        "android.injected.signing.key.password" =>  options[:keyPassword],
+        "outputSuffix" => options[:outputSuffix]
       }
     )
   end
@@ -59,7 +61,8 @@ platform :android do
       properties: {
         "android.injected.signing.store.password" => options[:keyStorePassword],
         "android.injected.signing.key.alias" => options[:keyAlias],
-        "android.injected.signing.key.password" =>  options[:keyPassword]
+        "android.injected.signing.key.password" =>  options[:keyPassword],
+        "outputSuffix" => options[:outputSuffix]
       }
     )
   end
@@ -68,19 +71,21 @@ platform :android do
   lane :android_alpha_apk do |options|
     # Push to AppCenter
     # more details: https://github.com/Microsoft/fastlane-plugin-appcenter/
+    changeLogs = format_last_commit
+
     appcenter_upload(
       api_token: options[:apiToken],
       owner_name: "PathCheck",
       app_name: options[:appName],
-      notify_testers: true,
+      notify_testers: false,
       destinations: "Collaborators",
-      file: "app/build/outputs/apk/release/app-release.apk"
+      release_notes: changeLogs,
+      file: "app/build/outputs/apk/release/app-" + options[:apkSuffix] + "-release.apk"
     )
   end
 
   desc "Upload to google play store beta track"
   lane :play_store_bt do
-
     validate_play_store_json_key(
       json_key: "app/json_key.json",
     )
@@ -92,7 +97,13 @@ platform :android do
       package_name: 'org.pathcheck.covidsafepaths.bt',
       aab: "app/build/outputs/bundle/release/app-release.aab"
     )
-
   end
 
+  desc "Format last commit"
+  private_lane :format_last_commit do
+    commit = last_git_commit
+    "\nFrom: " + commit[:author] + "\n" +
+    "Changes: " + commit[:message] +
+    "Commit: " + commit[:commit_hash]
+  end
 end
