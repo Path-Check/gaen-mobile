@@ -14,6 +14,17 @@ export type NavigationProp = NavigationScreenProp<
   NavigationParams
 >
 
+export type ActivationScreen =
+  | "NotificationPermissions"
+  | "ActivateProximityTracing"
+
+export const ActivationScreens: {
+  [key in ActivationScreen]: ActivationScreen
+} = {
+  NotificationPermissions: "NotificationPermissions",
+  ActivateProximityTracing: "ActivateProximityTracing",
+}
+
 export type OnboardingScreen =
   | "Welcome"
   | "Introduction"
@@ -22,8 +33,6 @@ export type OnboardingScreen =
   | "GetNotified"
   | "ValueProposition"
   | "EulaModal"
-  | "NotificationPermissions"
-  | "ActivateProximityTracing"
   | "LanguageSelection"
 
 export const OnboardingScreens: {
@@ -36,8 +45,6 @@ export const OnboardingScreens: {
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
   EulaModal: "EulaModal",
-  NotificationPermissions: "NotificationPermissions",
-  ActivateProximityTracing: "ActivateProximityTracing",
   LanguageSelection: "LanguageSelection",
 }
 
@@ -129,6 +136,7 @@ export const Screens: { [key in Screen]: Screen } = {
 }
 
 export type Stack =
+  | "Activation"
   | "Onboarding"
   | "ExposureHistoryFlow"
   | "SelfAssessment"
@@ -136,6 +144,7 @@ export type Stack =
   | "AffectedUserStack"
 
 export const Stacks: { [key in Stack]: Stack } = {
+  Activation: "Activation",
   Onboarding: "Onboarding",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   SelfAssessment: "SelfAssessment",

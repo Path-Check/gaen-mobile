@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { OnboardingScreens } from "../navigation"
+import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
@@ -24,11 +24,11 @@ const ActivateProximityTracing: FunctionComponent = () => {
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
-    navigation.navigate(OnboardingScreens.NotificationPermissions)
+    navigation.navigate(ActivationScreens.NotificationPermissions)
   }
 
   const handleOnPressDontEnable = () => {
-    navigation.navigate(OnboardingScreens.NotificationPermissions)
+    navigation.navigate(ActivationScreens.NotificationPermissions)
   }
 
   return (

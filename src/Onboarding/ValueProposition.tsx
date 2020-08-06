@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import ExplanationScreen from "./ExplanationScreen"
 
-import { OnboardingScreens } from "../navigation"
+import { ActivationScreens, Stacks } from "../navigation"
 import { Images } from "../assets"
 
 const ValueProposition: FunctionComponent = () => {
@@ -22,7 +22,9 @@ const ValueProposition: FunctionComponent = () => {
 
   const explanationScreenActions = {
     primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.ActivateProximityTracing),
+      navigation.navigate(Stacks.Activation, {
+        screen: ActivationScreens.ActivateProximityTracing,
+      }),
   }
 
   return (

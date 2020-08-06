@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
-import { OnboardingScreens } from "../navigation"
+import { Stacks, ActivationScreens } from "../navigation"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
@@ -48,7 +48,9 @@ const ExplanationScreen: FunctionComponent<ExplanationScreenProps> = ({
       <View>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate(OnboardingScreens.ActivateProximityTracing)
+            navigation.navigate(Stacks.Activation, {
+              screen: ActivationScreens.ActivateProximityTracing,
+            })
           }
           style={style.skipButtonContainer}
         >
