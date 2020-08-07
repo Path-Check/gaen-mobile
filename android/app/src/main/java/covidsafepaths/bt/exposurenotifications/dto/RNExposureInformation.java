@@ -1,12 +1,14 @@
 package covidsafepaths.bt.exposurenotifications.dto;
 
-public class ExposureInformation {
+import java.util.UUID;
+
+public class RNExposureInformation {
     private String id;
     private long date;
     private long duration; // Minutes
 
-    public ExposureInformation(String id, long date, long duration) {
-        this.id = id;
+    public RNExposureInformation(long date, long duration) {
+        this.id = UUID.randomUUID().toString();
         this.date = date;
         this.duration = duration;
     }

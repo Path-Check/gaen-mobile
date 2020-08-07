@@ -1,45 +1,42 @@
 package covidsafepaths.bt.exposurenotifications;
 
-import android.app.Activity;
-import android.util.Log;
-
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
-import org.pathcheck.covidsafepaths.MainActivity;
+import org.pathcheck.covidsafepaths.BuildConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
-import covidsafepaths.bt.exposurenotifications.debug.DebugExposureNotificationUtils;
+import covidsafepaths.bt.exposurenotifications.dto.RNDiagnosisKey;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
-import covidsafepaths.bt.exposurenotifications.notify.ShareDiagnosisManager;
+import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
+import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
+import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
     static final String MODULE_NAME = "DebugMenuModule";
 
-    private final ShareDiagnosisManager shareDiagnosisManager;
+    private ExposureNotificationSharedPreferences prefs;
 
     public DebugMenuModule(ReactApplicationContext context) {
         super(context);
-        shareDiagnosisManager = new ShareDiagnosisManager(context);
+        prefs = new ExposureNotificationSharedPreferences(context);
     }
 
     @Override
@@ -49,50 +46,65 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void submitExposureKeys(Promise promise) {
-        Activity activity = getCurrentActivity();
-        if (activity instanceof MainActivity) {
-            ((MainActivity) activity).share(promise);
-        }
+    public void fetchDebugLog(Promise promise) {
+        promise.resolve("AppId: " + BuildConfig.ANDROID_APPLICATION_ID +
+                "\nVersion: " + BuildConfig.VERSION_NAME +
+                "\nVersionName: " + BuildConfig.VERSION_CODE +
+                "\nLastProcessedFileName: " + RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName() +
+                "\nLastDetectionProcessDate: " + prefs.getLastDetectionProcessDate());
     }
 
-    /**
-     * Debug method to get a fake set of diagnosis keys and post them to the server.
-     * Does NOT currently interact with GAEN API
-     * Second value is success message, first value is error message
-     */
     @ReactMethod
-    public void submitExposureKeysDebug() {
-        List<TemporaryExposureKey> debugTEKS = DebugExposureNotificationUtils.INSTANCE.getFakeRecentKeys();
-        ListenableFuture<Boolean> shareKeysFuture = shareDiagnosisManager.submitKeysToService(debugTEKS);
-        FutureCallback<Boolean> shareKeysCallback = new FutureCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean result) {
-                if (result) {
-                    String successMessage = "Shared debug keys with server";
-                    //callback.invoke(null, successMessage);
-                    Log.d(MODULE_NAME, successMessage);
-                } else {
-                    this.onFailure(new Throwable("Error sharing debug keys with server"));
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                //callback.invoke(t.getMessage(), null);
-                Log.e(MODULE_NAME, "Error sharing debug keys with server", t);
-            }
-        };
-        Futures.addCallback(shareKeysFuture, shareKeysCallback, AppExecutors.getLightweightExecutor());
+    public void forceAppCrash(Promise promise) throws Exception {
+        throw new Exception("Force crash");
     }
 
-    /**
-     * For now, tie this to saving a positive diagnosis to the local db for testing
-     */
     @ReactMethod
-    public void simulatePositiveDiagnosis(Callback callback) {
-        // TODO get callback to share with JS layer
-        shareDiagnosisManager.saveNewDiagnosis(true);
+    public void fetchDiagnosisKeys(Promise promise) {
+        ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+        client.getTemporaryExposureKeyHistory()
+                .addOnSuccessListener(keys -> {
+                    List<RNDiagnosisKey> diagnosisKeys = new ArrayList<>();
+                    for (TemporaryExposureKey key : keys) {
+                        RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(
+                                key.getRollingStartIntervalNumber()
+                        );
+                        diagnosisKeys.add(diagnosisKey);
+                    }
+
+                    promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
+                })
+                .addOnFailureListener(exception -> {
+                    if (!(exception instanceof ApiException)) {
+                        promise.reject(exception);
+                        return;
+                    }
+
+                    ApiException apiException = (ApiException) exception;
+                    if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+                        // TODO Refactor MainActivity/ExposureNotificationClientWrapper to call this method after permission is accepted
+                        client.showPermissionDialog(getReactApplicationContext(), apiException, RequestCodes.REQUEST_GET_DIAGNOSIS_KEYS);
+                        promise.reject(new Exception("Needs user permission, try again"));
+                    } else {
+                        promise.reject(exception);
+                    }
+                });
+    }
+
+    @ReactMethod
+    public void simulateExposure(Promise promise) {
+        promise.reject(new Exception("Not implemented"));
+    }
+
+    @ReactMethod
+    public void simulateExposureDetectionError(Promise promise) {
+        promise.reject(new Exception("Not implemented"));
+    }
+
+    @ReactMethod
+    public void resetExposures(Promise promise) {
+        RealmSecureStorageBte.INSTANCE.resetExposures();
+        promise.resolve(null);
     }
 
     @ReactMethod
