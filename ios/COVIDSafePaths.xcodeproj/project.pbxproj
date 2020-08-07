@@ -1175,7 +1175,7 @@
 			baseConfigurationReference = FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "BT/BT-Production.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BT/BT-Development.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

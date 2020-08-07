@@ -44,7 +44,7 @@ platform :ios do
     JS_PACKAGE = load_json(json_path: "../package.json")
 
 
-  lane :deploy_to_appcenter do
+  lane :deploy_to_appcenter do |options|
       appcenter_upload(
         api_token: options[:apiToken],
         owner_name: "PathCheck",
