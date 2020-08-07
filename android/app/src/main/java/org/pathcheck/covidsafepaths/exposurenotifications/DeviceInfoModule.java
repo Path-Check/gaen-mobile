@@ -1,7 +1,9 @@
 package covidsafepaths.bt.exposurenotifications;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.location.LocationManager;
 
 import androidx.annotation.NonNull;
 
@@ -63,5 +65,15 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void isBluetoothEnabled(final Promise promise) {
         promise.resolve(BluetoothAdapter.getDefaultAdapter().isEnabled());
+    }
+
+    @ReactMethod
+    public void isLocationEnabled(final Promise promise) {
+        final LocationManager manager = (LocationManager) getReactApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        if (manager != null) {
+            promise.resolve(manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+        } else {
+            promise.reject(new Exception("Location manager not found"));
+        }
     }
 }
