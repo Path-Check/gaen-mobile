@@ -1,5 +1,6 @@
 package covidsafepaths.bt.exposurenotifications;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.pm.PackageInfo;
 
 import androidx.annotation.NonNull;
@@ -57,5 +58,10 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
         return getReactApplicationContext()
                 .getPackageManager()
                 .getPackageInfo(getReactApplicationContext().getPackageName(), 0);
+    }
+
+    @ReactMethod
+    public void isBluetoothEnabled(final Promise promise) {
+        promise.resolve(BluetoothAdapter.getDefaultAdapter().isEnabled());
     }
 }

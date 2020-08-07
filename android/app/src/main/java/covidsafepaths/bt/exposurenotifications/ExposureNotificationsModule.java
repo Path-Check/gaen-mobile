@@ -1,7 +1,6 @@
 package covidsafepaths.bt.exposurenotifications;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
 import android.util.Log;
 
 import com.facebook.react.bridge.Callback;
@@ -104,11 +103,6 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
                                 callback.invoke(apiException.getStatus().toString());
                             }
                         });
-    }
-
-    @ReactMethod
-    public void isBluetoothEnabled(final Promise promise) {
-        promise.resolve(BluetoothAdapter.getDefaultAdapter().isEnabled());
     }
 
     /**
