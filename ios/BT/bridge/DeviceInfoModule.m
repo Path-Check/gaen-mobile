@@ -33,4 +33,15 @@ RCT_REMAP_METHOD(getVersion,
   resolve(version);
 }
 
+RCT_REMAP_METHOD(isBluetoothEnabled,
+                 isBluetoothEnabledWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  if ([[ExposureManager shared] isBluetoothEnabled]) {
+    resolve(@"true");
+  } else {
+    resolve(@"false");
+  }
+}
+
 @end

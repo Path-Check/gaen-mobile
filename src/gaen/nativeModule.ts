@@ -140,6 +140,10 @@ export const getVersion = async (): Promise<string> => {
   return deviceInfoModule.getVersion()
 }
 
+export const isBluetoothEnabled = async (): Promise<boolean> => {
+  return deviceInfoModule.isBluetoothEnabled()
+}
+
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
