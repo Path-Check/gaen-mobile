@@ -6,6 +6,9 @@
     "isolate_cta": "Tiếp theo",
     "next": "Tiếp theo"
   },
+  "common": {
+    "next": "Tiếp theo"
+  },
   "home": {
     "bluetooth": {
       "all_services_on_header": "PathCheck"

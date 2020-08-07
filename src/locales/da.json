@@ -15,7 +15,8 @@
   },
   "common": {
     "continue": "Fortsæt",
-    "done": "Udført"
+    "done": "Udført",
+    "next": "Udført"
   },
   "home": {
     "bluetooth": {

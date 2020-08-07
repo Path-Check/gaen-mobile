@@ -13,7 +13,8 @@
   },
   "common": {
     "continue": "Ga verder",
-    "done": "Klaar"
+    "done": "Klaar",
+    "next": "Klaar"
   },
   "home": {
     "bluetooth": {

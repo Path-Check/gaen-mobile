@@ -6,6 +6,9 @@
     "isolate_cta": "Suivant",
     "next": "Suivant"
   },
+  "common": {
+    "next": "Suivant"
+  },
   "home": {
     "bluetooth": {
       "all_services_on_header": "PathCheck"

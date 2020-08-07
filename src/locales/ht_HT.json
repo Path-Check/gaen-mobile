@@ -34,6 +34,7 @@
   "common": {
     "continue": "Kontinye",
     "done": "Fini",
+    "next": "Fini",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse"
   },
@@ -92,6 +93,8 @@
     "self_assessment": "Sante"
   },
   "onboarding": {
+    "dont_enable_proximity_tracing": "Pa aktive",
+    "enable_proximity_tracing": "Aktive",
     "maybe_later": "Petèt pita",
     "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
     "notification_subheader": "Patnè Chase Kowona (\"PathCheck\") yo ak depatman sante lokal yo swiv tras viris la. Si ou lokalize nan yon jiridiksyon ke youn nan patnè Depatman Sante nou yo ladanl, ou ka resevwa notifikasyon ekspoze apati Depatman Sante ou."
