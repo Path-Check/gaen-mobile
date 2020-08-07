@@ -38,6 +38,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.threeten.bp.Duration;
+import org.threeten.bp.Instant;
 
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +47,7 @@ import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
 import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
 import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
+import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 
 /**
  * Performs work to provide diagnosis keys to the exposure notifications API.
@@ -65,12 +67,15 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
     private final DiagnosisKeyFileSubmitter submitter;
     private final SecureRandom secureRandom;
 
+    private final ExposureNotificationSharedPreferences prefs;
+
     public ProvideDiagnosisKeysWorker(@NonNull Context context,
                                       @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         diagnosisKeys = new DiagnosisKeys(context);
         submitter = new DiagnosisKeyFileSubmitter(context);
         secureRandom = new SecureRandom();
+        prefs = new ExposureNotificationSharedPreferences(context);
     }
 
     @NonNull
@@ -97,7 +102,11 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
                 // Submit downloaded files to EN client
                 .transformAsync((batches) -> submitter.submitFiles(batches, ExposureNotificationClient.TOKEN_A),
                         AppExecutors.getBackgroundExecutor())
-                .transform(done -> Result.success(), AppExecutors.getLightweightExecutor())
+                .transform(done -> {
+                    // Keep track of the last date when the process did run
+                    prefs.setLastDetectionProcessDate(Instant.now().toEpochMilli());
+                    return Result.success();
+                }, AppExecutors.getLightweightExecutor())
                 .catching(NotEnabledException.class, x -> {
                     // Not enabled. Return as success.
                     return Result.success();
