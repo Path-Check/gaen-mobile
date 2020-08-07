@@ -14,26 +14,37 @@ export type NavigationProp = NavigationScreenProp<
   NavigationParams
 >
 
+export type ActivationScreen =
+  | "AcceptEula"
+  | "ActivateProximityTracing"
+  | "NotificationPermissions"
+
+export const ActivationScreens: {
+  [key in ActivationScreen]: ActivationScreen
+} = {
+  AcceptEula: "AcceptEula",
+  ActivateProximityTracing: "ActivateProximityTracing",
+  NotificationPermissions: "NotificationPermissions",
+}
+
 export type OnboardingScreen =
   | "Welcome"
-  | "EulaModal"
+  | "Introduction"
+  | "PhoneRemembersDevices"
   | "PersonalPrivacy"
-  | "NotificationDetails"
-  | "ShareDiagnosis"
-  | "NotificationPermissions"
-  | "EnableExposureNotifications"
+  | "GetNotified"
+  | "ValueProposition"
   | "LanguageSelection"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
 } = {
   Welcome: "Welcome",
-  EulaModal: "EulaModal",
+  Introduction: "Introduction",
+  PhoneRemembersDevices: "PhoneRemembersDevices",
   PersonalPrivacy: "PersonalPrivacy",
-  NotificationDetails: "NotificationDetails",
-  ShareDiagnosis: "ShareDiagnosis",
-  NotificationPermissions: "NotificationPermissions",
-  EnableExposureNotifications: "EnableExposureNotifications",
+  GetNotified: "GetNotified",
+  ValueProposition: "ValueProposition",
   LanguageSelection: "LanguageSelection",
 }
 
@@ -66,6 +77,7 @@ export type MoreStackScreen =
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
+  | "ReportIssueForm"
 
 export const MoreStackScreens: {
   [key in MoreStackScreen]: MoreStackScreen
@@ -79,6 +91,7 @@ export const MoreStackScreens: {
   AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
+  ReportIssueForm: "ReportIssueForm",
 }
 
 export type SelfAssessmentScreen = "SelfAssessment"
@@ -125,6 +138,7 @@ export const Screens: { [key in Screen]: Screen } = {
 }
 
 export type Stack =
+  | "Activation"
   | "Onboarding"
   | "ExposureHistoryFlow"
   | "SelfAssessment"
@@ -132,6 +146,7 @@ export type Stack =
   | "AffectedUserStack"
 
 export const Stacks: { [key in Stack]: Stack } = {
+  Activation: "Activation",
   Onboarding: "Onboarding",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   SelfAssessment: "SelfAssessment",

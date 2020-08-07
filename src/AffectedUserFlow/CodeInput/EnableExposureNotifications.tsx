@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { GlobalText } from "../../components/GlobalText"
+import { Button } from "../../components/Button"
 
 import { Stacks } from "../../navigation"
 import { Buttons, Colors, Typography, Spacing, Layout } from "../../styles"
@@ -29,24 +30,15 @@ const EnableExposureNotifications: FunctionComponent = () => {
         <GlobalText style={style.header}>
           {t("export.enable_exposure_notifications_title")}
         </GlobalText>
-
         <GlobalText style={style.subheader}>
           {t("export.enable_exposure_notifications_body")}
         </GlobalText>
       </View>
       <View>
-        <TouchableOpacity
+        <Button
           onPress={handleOnPressOpenSettings}
-          accessible
-          accessibilityLabel={t("common.settings")}
-          accessibilityRole="button"
-          style={style.button}
-        >
-          <GlobalText style={style.buttonText}>
-            {t("common.settings")}
-          </GlobalText>
-        </TouchableOpacity>
-
+          label={t("common.settings")}
+        />
         <TouchableOpacity
           onPress={handleOnPressCancel}
           style={style.secondaryButton}
@@ -80,12 +72,6 @@ const style = StyleSheet.create({
   subheader: {
     ...Typography.header4,
     color: Colors.secondaryText,
-  },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryText,
   },
   secondaryButton: {
     ...Buttons.secondary,

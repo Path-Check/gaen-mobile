@@ -2,39 +2,32 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import ExplanationScreen, { IconStyle } from "./ExplanationScreen"
+import OnboardingScreen from "./OnboardingScreen"
 
-import { Screens } from "../navigation"
-import { Icons, Images } from "../assets"
+import { OnboardingScreens } from "../navigation"
+import { Images } from "../assets"
 
 const PersonalPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const explanationScreenContent = {
-    backgroundImage: Images.SingleCrossPathBackground,
-    icon: Icons.RadioWave,
-    iconLabel: t("label.bluetooth_icon"),
-    header: t("label.launch_screen2_header_bluetooth"),
-    body: t("label.launch_screen2_subheader_bluetooth"),
-    primaryButtonLabel: t("label.launch_next"),
+  const onboardingScreenContent = {
+    screenNumber: 3,
+    image: Images.PersonWithLockedPhone,
+    imageLabel: t("onboarding_screen3_image_label"),
+    header: t("label.onboarding_screen3_header"),
+    primaryButtonLabel: t("label.onboarding_screen3_button"),
   }
 
-  const explanationScreenStyles = {
-    iconStyle: IconStyle.Blue,
-    statusBarStyle: "dark-content" as const,
-  }
-
-  const explanationScreenActions = {
+  const onboardingScreenActions = {
     primaryButtonOnPress: () =>
-      navigation.navigate(Screens.NotificationDetails),
+      navigation.navigate(OnboardingScreens.GetNotified),
   }
 
   return (
-    <ExplanationScreen
-      explanationScreenContent={explanationScreenContent}
-      explanationScreenStyles={explanationScreenStyles}
-      explanationScreenActions={explanationScreenActions}
+    <OnboardingScreen
+      onboardingScreenContent={onboardingScreenContent}
+      onboardingScreenActions={onboardingScreenActions}
     />
   )
 }

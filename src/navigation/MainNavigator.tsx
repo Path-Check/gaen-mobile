@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
+import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
 import { Screens, Stacks } from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
@@ -72,11 +73,18 @@ const MainNavigator: FunctionComponent = () => {
             />
           </>
         ) : (
-          <Stack.Screen
-            name={Stacks.Onboarding}
-            component={OnboardingStack}
-            options={{ ...SCREEN_OPTIONS }}
-          />
+          <>
+            <Stack.Screen
+              name={Stacks.Onboarding}
+              component={OnboardingStack}
+              options={{ ...SCREEN_OPTIONS }}
+            />
+            <Stack.Screen
+              name={Stacks.Activation}
+              component={ActivationStack}
+              options={{ ...SCREEN_OPTIONS }}
+            />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

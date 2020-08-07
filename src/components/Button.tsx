@@ -6,20 +6,25 @@ import {
   TextStyle,
   TouchableOpacity,
 } from "react-native"
+import LinearGradient from "react-native-linear-gradient"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "./GlobalText"
+import { Icons } from "../assets"
 
-import { Buttons, Typography } from "../styles"
+import { Spacing, Colors, Buttons, Typography } from "../styles"
+import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
   onPress: () => void
   loading?: boolean
   disabled?: boolean
-  buttonStyle?: ViewStyle
-  textStyle?: TextStyle
+  customButtonStyle?: ViewStyle
+  customTextStyle?: TextStyle
   invert?: boolean
   testID?: string
+  hasRightArrow?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -27,20 +32,45 @@ export const Button: FunctionComponent<ButtonProps> = ({
   onPress,
   disabled,
   loading,
-  buttonStyle,
-  textStyle,
+  customButtonStyle,
+  customTextStyle,
   invert,
   testID,
+  hasRightArrow,
 }) => {
-  const buttonColorStyle = invert ? Buttons.primaryInverted : Buttons.primary
-  const buttonStyles =
-    disabled || loading
-      ? { ...buttonColorStyle, ...style.buttonDisabled, ...buttonStyle }
-      : { ...buttonColorStyle, ...style.buttonEnabled, ...buttonStyle }
-  const buttonTextStyle =
-    disabled || loading
-      ? { ...style.text, ...style.textDisabled, ...textStyle }
-      : { ...style.text, ...style.textEnabled, ...textStyle }
+  const { t } = useTranslation()
+
+  const determineGradient = (): string[] => {
+    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
+    const disabledGradient = [Colors.darkestGray, Colors.mediumGray]
+    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
+    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
+
+    if (invert && (disabled || loading)) {
+      return invertedDisabledGradient
+    } else if (invert && !(disabled || loading)) {
+      return invertedGradient
+    } else if (!invert && (disabled || loading)) {
+      return disabledGradient
+    } else {
+      return baseGradient
+    }
+  }
+
+  const determineTextStyle = (): TextStyle => {
+    if (invert && (disabled || loading)) {
+      return style.textInvertedDisabled
+    } else if (invert && !(disabled || loading)) {
+      return style.textInverted
+    } else if (!invert && (disabled || loading)) {
+      return style.textDisabled
+    } else {
+      return style.text
+    }
+  }
+
+  const buttonStyle = { ...style.button, ...customButtonStyle }
+  const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
   return (
     <TouchableOpacity
@@ -49,32 +79,56 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={buttonStyles}
       testID={testID}
     >
-      {loading ? (
-        <ActivityIndicator size={"large"} />
-      ) : (
-        <GlobalText style={buttonTextStyle}>{label}</GlobalText>
-      )}
+      <LinearGradient
+        start={{ x: 0.2, y: 0.85 }}
+        end={{ x: 0.4, y: 0 }}
+        colors={determineGradient()}
+        style={buttonStyle}
+      >
+        {loading ? (
+          <ActivityIndicator size={"large"} />
+        ) : (
+          <>
+            <GlobalText style={textStyle}>{label}</GlobalText>
+            {hasRightArrow && (
+              <SvgXml
+                xml={Icons.Arrow}
+                fill={Colors.white}
+                style={style.rightArrow}
+                accessible
+                accessibilityLabel={t("common.next")}
+              />
+            )}
+          </>
+        )}
+      </LinearGradient>
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
-  buttonDisabled: {
-    ...Buttons.primaryInvertedDisabled,
-  },
-  buttonEnabled: {
-    ...Buttons.primaryInverted,
+  button: {
+    ...Buttons.primary,
   },
   text: {
     textAlign: "center",
+    ...Typography.buttonPrimaryText,
   },
-  textEnabled: {
+  textInverted: {
+    textAlign: "center",
     ...Typography.buttonPrimaryInvertedText,
   },
   textDisabled: {
+    textAlign: "center",
+    ...Typography.buttonPrimaryDisabledText,
+  },
+  textInvertedDisabled: {
+    textAlign: "center",
     ...Typography.buttonPrimaryInvertedDisabledText,
+  },
+  rightArrow: {
+    marginLeft: Spacing.medium,
   },
 })

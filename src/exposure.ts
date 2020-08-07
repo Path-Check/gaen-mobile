@@ -6,8 +6,6 @@ export interface Possible {
   kind: "Possible"
   date: Posix
   duration: number
-  totalRiskScore: number
-  transmissionRiskLevel: number
 }
 
 export interface NoKnown {

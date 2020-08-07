@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../../components/GlobalText"
+import { Button } from "../../components/Button"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -114,10 +115,6 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const isDisabled = code.length !== codeLength
-  const buttonStyle = isDisabled ? style.disabledButton : style.button
-  const buttonTextStyle = isDisabled
-    ? style.disabledButtonText
-    : style.buttonText
 
   return (
     <KeyboardAvoidingView
@@ -156,19 +153,11 @@ const CodeInputForm: FunctionComponent = () => {
         {isLoading ? <LoadingIndicator /> : null}
 
         <View>
-          <TouchableOpacity
+          <Button
             onPress={handleOnPressSubmit}
-            accessible
-            accessibilityLabel={t("common.submit")}
-            accessibilityRole="button"
+            label={t("common.submit")}
             disabled={isDisabled}
-            style={buttonStyle}
-          >
-            <GlobalText style={buttonTextStyle}>
-              {t("common.submit")}
-            </GlobalText>
-          </TouchableOpacity>
-
+          />
           <TouchableOpacity
             onPress={handleOnPressCancel}
             style={style.secondaryButton}
@@ -239,18 +228,6 @@ const style = StyleSheet.create({
     height: indicatorWidth,
     backgroundColor: Colors.transparentDarkGray,
     borderRadius: Outlines.baseBorderRadius,
-  },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryText,
-  },
-  disabledButton: {
-    ...Buttons.primaryDisabled,
-  },
-  disabledButtonText: {
-    ...Typography.buttonPrimaryDisabledText,
   },
   secondaryButton: {
     ...Buttons.secondary,

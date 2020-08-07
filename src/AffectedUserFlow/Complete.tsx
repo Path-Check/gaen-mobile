@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from "react"
-import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native"
+import { StyleSheet, View, SafeAreaView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
 
 import { Stacks } from "../navigation"
 
-import { Layout, Spacing, Colors, Buttons, Typography } from "../styles"
+import { Layout, Spacing, Colors, Typography } from "../styles"
 
 export const ExportComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
@@ -31,14 +32,7 @@ export const ExportComplete: FunctionComponent = () => {
             <GlobalText style={style.header}>{title}</GlobalText>
             <GlobalText style={style.contentText}>{body}</GlobalText>
           </View>
-
-          <TouchableOpacity
-            style={style.button}
-            onPress={handleOnPressDone}
-            accessibilityLabel={doneCaption}
-          >
-            <GlobalText style={style.buttonText}>{doneCaption}</GlobalText>
-          </TouchableOpacity>
+          <Button onPress={handleOnPressDone} label={doneCaption} />
         </View>
       </SafeAreaView>
     </View>
@@ -65,12 +59,6 @@ const style = StyleSheet.create({
   },
   contentText: {
     ...Typography.secondaryContent,
-  },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryText,
   },
 })
 

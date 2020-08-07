@@ -30,7 +30,8 @@
   },
   "common": {
     "continue": "Continuar",
-    "done": "Hecho"
+    "done": "Hecho",
+    "next": "Siguiente"
   },
   "export": {
     "code_input_body_bluetooth": "Escriba el código de verificación proporcionado por {{name}} con el resultado de su prueba para verificar su diagnóstico.",
@@ -72,6 +73,7 @@
     "more": "Más"
   },
   "onboarding": {
+    "enable_proximity_tracing": "Habilitar",
     "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?",
     "notification_subheader": "Para recibir las notificaciones de exposición, es necesario estar en una zona cubierta por un socio del Departamento de Salud local.\n\nSi aún no hay un Departamento de Salud asociado local o regional en su área, notifíquelo cuando se agreguen nuevos Departamentos de Salud cerca de usted."
   },

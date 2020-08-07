@@ -8,7 +8,7 @@ const base: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  borderRadius: Outlines.baseBorderRadius,
+  alignSelf: "flex-start",
 }
 
 // Size
@@ -33,18 +33,6 @@ const maxCornerRoundness: ViewStyle = {
 }
 
 // Color
-const secondaryBlue: ViewStyle = {
-  backgroundColor: Colors.secondaryBlue,
-}
-
-const white: ViewStyle = {
-  backgroundColor: Colors.white,
-}
-
-const disabled: ViewStyle = {
-  backgroundColor: Colors.mediumGray,
-}
-
 const tertiaryBlue: ViewStyle = {
   backgroundColor: Colors.tertiaryViolet,
 }
@@ -56,31 +44,16 @@ const transparent: ViewStyle = {
 export const primary: ViewStyle = {
   ...base,
   ...large,
-  ...secondaryBlue,
-}
-
-export const primaryDisabled: ViewStyle = {
-  ...base,
-  ...large,
-  ...disabled,
-}
-
-export const primaryInverted: ViewStyle = {
-  ...base,
-  ...large,
-  ...white,
-}
-
-export const primaryInvertedDisabled: ViewStyle = {
-  ...base,
-  ...large,
-  ...disabled,
+  borderRadius: Outlines.borderRadiusMax,
+  paddingHorizontal: Spacing.huge,
+  minWidth: 225,
 }
 
 export const secondary: ViewStyle = {
   ...base,
   ...medium,
   ...transparent,
+  paddingHorizontal: Spacing.huge,
 }
 
 export const tinyRounded: ViewStyle = {

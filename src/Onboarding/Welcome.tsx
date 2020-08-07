@@ -32,35 +32,31 @@ const Welcome: FunctionComponent = () => {
       source={Images.BlueGradientBackground}
       style={style.backgroundImage}
     >
-      <ImageBackground
-        source={Images.ConcentricCircles}
-        style={style.backgroundImage}
-      >
-        <View style={style.container}>
-          <View style={style.headerContainer}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(Screens.LanguageSelection)}
-              style={style.languageSelector}
-            >
-              <GlobalText style={style.languageSelectorText}>
-                {languageName}
-              </GlobalText>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <GlobalText style={style.mainText}>
-              {t("label.launch_screen1_header")}
+      <View style={style.container}>
+        <View style={style.headerContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(Screens.LanguageSelection)}
+            style={style.languageSelector}
+          >
+            <GlobalText style={style.languageSelectorText}>
+              {languageName}
             </GlobalText>
-            <GlobalText style={style.mainText}>{appName}</GlobalText>
-          </View>
-          <View style={style.footerContainer}>
-            <Button
-              label={t("label.launch_get_started")}
-              onPress={() => navigation.navigate(OnboardingScreens.EulaModal)}
-            />
-          </View>
+          </TouchableOpacity>
         </View>
-      </ImageBackground>
+        <View>
+          <GlobalText style={style.mainText}>
+            {t("label.launch_screen1_header")}
+          </GlobalText>
+          <GlobalText style={style.mainText}>{appName}</GlobalText>
+        </View>
+        <View style={style.footerContainer}>
+          <Button
+            invert
+            label={t("label.launch_get_started")}
+            onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
+          />
+        </View>
+      </View>
     </ImageBackground>
   )
 }
@@ -76,14 +72,11 @@ const style = StyleSheet.create({
     flex: 1,
     paddingVertical: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
   },
   mainText: {
     ...Typography.header2,
-    textAlign: "center",
-    justifyContent: "center",
-    alignSelf: "center",
     color: Colors.white,
   },
   languageSelector: {
@@ -93,7 +86,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   languageSelectorText: {
-    ...Typography.mainContent,
+    ...Typography.base,
     letterSpacing: Typography.mediumLetterSpacing,
     color: Colors.white,
     textAlign: "center",

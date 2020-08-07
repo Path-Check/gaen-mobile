@@ -1,19 +1,14 @@
 import React from "react"
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Alert,
-  Linking,
-} from "react-native"
+import { StyleSheet, View, Alert, Linking } from "react-native"
 import { useTranslation } from "react-i18next"
 import env from "react-native-config"
 
 import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
 import { isPlatformiOS } from "../utils/index"
 
-import { Layout, Spacing, Colors, Typography, Buttons } from "../styles"
+import { Layout, Spacing, Colors, Typography } from "../styles"
 
 interface HomeProps {
   enPermissionStatus: ENPermissionStatus
@@ -73,13 +68,12 @@ const Home = ({
         </GlobalText>
       </View>
       {!isEnabledAndAuthorized ? (
-        <TouchableOpacity
+        <Button
+          invert
           testID={"home-request-permissions-button"}
           onPress={handleRequestPermission}
-          style={style.button}
-        >
-          <GlobalText style={style.buttonText}>{buttonText}</GlobalText>
-        </TouchableOpacity>
+          label={buttonText}
+        />
       ) : null}
     </View>
   )
@@ -107,13 +101,6 @@ const style = StyleSheet.create({
     textAlign: "center",
     color: Colors.white,
     marginTop: Spacing.medium,
-  },
-  button: {
-    ...Buttons.primaryInverted,
-    width: "100%",
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
   },
 })
 

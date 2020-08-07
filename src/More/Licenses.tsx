@@ -8,8 +8,8 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import { getApplicationName } from "react-native-device-info"
 import env from "react-native-config"
+import { useApplicationName } from "./useApplicationInfo"
 
 import { GlobalText } from "../components/GlobalText"
 
@@ -18,6 +18,7 @@ import { Icons } from "../assets"
 
 const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
+  const { applicationName } = useApplicationName()
 
   const infoEmailAddress = "info@pathcheck.org"
   const infoEmailLink = "mailto:info@pathcheck.org"
@@ -37,7 +38,7 @@ const Licenses: FunctionComponent = () => {
             style={style.headerContent}
             testID={"licenses-legal-header"}
           >
-            {getApplicationName()}
+            {applicationName}
           </GlobalText>
           <GlobalText style={style.contentText}>
             {t("label.legal_page_address")}

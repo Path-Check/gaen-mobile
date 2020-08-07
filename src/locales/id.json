@@ -6,6 +6,9 @@
     "isolate_cta": "Selanjutnya",
     "next": "Selanjutnya"
   },
+  "common": {
+    "next": "Selanjutnya"
+  },
   "label": {
     "launch_enable_notif": "Aktifkan Notifikasi",
     "launch_get_started": "Mulai",

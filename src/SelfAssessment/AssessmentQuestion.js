@@ -137,8 +137,8 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
           disabled={!selectedValues.length}
           onPress={onNext}
           label={t("assessment.next")}
-          buttonStyle={style.button}
-          textStyle={style.buttonText}
+          customButtonStyle={style.button}
+          customTextStyle={style.buttonText}
         />
       </View>
     </SafeAreaView>

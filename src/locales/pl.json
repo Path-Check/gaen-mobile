@@ -25,6 +25,7 @@
   "common": {
     "continue": "Dalej",
     "done": "Gotowe",
+    "next": "Dalej",
     "something_went_wrong": "Coś poszło nie tak",
     "start": "Start"
   },
@@ -75,6 +76,10 @@
     "history": "Historia",
     "more": "Więcej",
     "self_assessment": "Zdrowie"
+  },
+  "onboarding": {
+    "dont_enable_proximity_tracing": "Nie włączaj",
+    "enable_proximity_tracing": "Włącz"
   },
   "screen_titles": {
     "about": "O nas",
