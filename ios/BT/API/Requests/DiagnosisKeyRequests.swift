@@ -53,16 +53,24 @@ enum DiagnosisKeyListRequest: APIRequest {
                let regions,
                let certificate,
                let hmacKey):
-               let keys = diagnosisKeys.map { try? $0.toJson() as? JSONObject }
+      let keys = diagnosisKeys.map { try? $0.toJson() as? JSONObject }
       return [
         "temporaryExposureKeys": keys,
         "regions": regions.map { $0 },
         "appPackageName": Bundle.main.bundleIdentifier!,
         "verificationPayload": certificate,
         "hmackey": hmacKey,
-        "padding": Data.randomPadding(size: 1000)
+        "padding": Data.randomPadding(size: .paddingSize())
       ]
     }
+  }
+}
+
+private extension Int {
+  /// Per https://google.github.io/exposure-notifications-server/server_functional_requirements.html
+  /// we add random data to obscure the size of the request (recommended size is ~1-2kb)
+  static func paddingSize() -> Int {
+    Int.random(in: 1000...2000)
   }
 }
 
