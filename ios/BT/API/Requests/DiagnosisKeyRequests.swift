@@ -60,8 +60,18 @@ enum DiagnosisKeyListRequest: APIRequest {
         "appPackageName": Bundle.main.bundleIdentifier!,
         "verificationPayload": certificate,
         "hmackey": hmacKey,
-        "padding": String(decoding: Data(), as: UTF8.self)
+        "padding": Data.randomPadding(size: 1000)
       ]
     }
   }
+}
+
+private extension Data {
+
+  static func randomPadding(size: Int) -> String {
+    let bytes = [UInt32](repeating: 0, count: size).map { _ in arc4random() }
+    let data = Data(bytes: bytes, count: size)
+    return data.base64EncodedString()
+  }
+
 }
