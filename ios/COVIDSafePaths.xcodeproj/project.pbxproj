@@ -859,7 +859,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release-BT\" ]; then\n\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\nfi\n";
+			shellScript = "if [ \"${E2E_BUILD}\" = \"true\" ]; then\n  UPLOAD_SYMBOLS = \"false\"\nelse\n  UPLOAD_SYMBOLS = \"true\"\nfi\n\nif [ \"${CONFIGURATION}\" = \"Release-BT\" & \"${UPLOAD_SYMBOLS}\" = \"true\" ]; then\n\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\nfi\n";
 		};
 		B5D968F324C6036A008DE452 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;

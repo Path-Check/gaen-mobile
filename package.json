@@ -126,25 +126,25 @@
     },
     "configurations": {
       "iOSdefault": {
-        "binaryPath": "ios/build/Build/Products/Debug-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Development -configuration Debug-BT -sdk iphonesimulator -derivedDataPath ios/build"
+        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
+        "build": "xcodebuild E2E_BUILD=true -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build"
       },
       "iphone11.sim": {
-        "binaryPath": "ios/build/Build/Products/Debug-BT-iphonesimulator/BT.app",
+        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11"
         }
       },
       "iphone8.sim": {
-        "binaryPath": "ios/build/Build/Products/Debug-BT-iphonesimulator/BT.app",
+        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 8"
         }
       },
       "iphone-se.sim": {
-        "binaryPath": "ios/build/Build/Products/Debug-BT-iphonesimulator/BT.app",
+        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone SE (2nd generation)"
