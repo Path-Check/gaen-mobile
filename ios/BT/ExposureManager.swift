@@ -36,6 +36,10 @@ final class ExposureManager: NSObject {
   @objc var currentExposures: String {
     return Array(BTSecureStorage.shared.userState.exposures).jsonStringRepresentation()
   }
+
+  @objc var isBluetoothEnabled: Bool {
+    manager.exposureNotificationStatus != .bluetoothOff
+  }
   
   private var isDetectingExposures = false
   
