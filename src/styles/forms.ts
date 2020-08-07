@@ -21,7 +21,7 @@ export const textInputFormField: TextStyle = {
 }
 
 export const required: TextStyle = {
-  fontSize: Typography.smallest,
+  fontSize: Typography.xxSmall,
   color: Colors.primaryText,
   marginTop: Spacing.xxSmall,
 }
@@ -33,7 +33,6 @@ export const checkboxIcon: ImageStyle = {
 
 export const checkboxText: TextStyle = {
   ...Typography.mediumFont,
-  color: Colors.invertedText,
 }
 
 export const textInput: TextStyle = {

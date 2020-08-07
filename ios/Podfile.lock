@@ -12,36 +12,30 @@ PODS:
     - React-Core (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/turbomodule/core (= 0.61.5)
-  - Firebase/CoreOnly (6.25.0):
-    - FirebaseCore (= 6.7.1)
-  - Firebase/Crashlytics (6.25.0):
+  - Firebase/CoreOnly (6.28.1):
+    - FirebaseCore (= 6.9.1)
+  - Firebase/Crashlytics (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 4.1.0)
-  - FirebaseAnalyticsInterop (1.5.0)
-  - FirebaseCore (6.7.1):
+    - FirebaseCrashlytics (~> 4.3.0)
+  - FirebaseCore (6.9.1):
     - FirebaseCoreDiagnostics (~> 1.3)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.3.0):
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 3.1)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.5.0):
+    - GoogleDataTransport (~> 7.0)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseCrashlytics (4.1.0):
-    - FirebaseAnalyticsInterop (~> 1.2)
-    - FirebaseCore (~> 6.6)
+  - FirebaseCrashlytics (4.3.0):
+    - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.1)
-    - GoogleDataTransport (~> 6.1)
-    - GoogleDataTransportCCTSupport (~> 3.1)
+    - GoogleDataTransport (~> 7.0)
     - nanopb (~> 1.30905.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (1.2.0):
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
+  - FirebaseInstallations (1.5.0):
+    - FirebaseCore (~> 6.8)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
     - PromisesObjC (~> 1.2)
   - Folly (2018.10.22.00):
     - boost-for-react-native
@@ -53,15 +47,13 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - GoogleDataTransport (6.1.1)
-  - GoogleDataTransportCCTSupport (3.1.0):
-    - GoogleDataTransport (~> 6.1)
+  - GoogleDataTransport (7.0.0):
     - nanopb (~> 1.30905.0)
-  - GoogleUtilities/Environment (6.6.0):
+  - GoogleUtilities/Environment (6.7.1):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/Logger (6.7.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.7.1):
     - GoogleUtilities/Logger
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -70,7 +62,7 @@ PODS:
   - nanopb/encode (1.30905.0)
   - Permission-Notifications (2.1.4):
     - RNPermissions
-  - PromisesObjC (1.2.8)
+  - PromisesObjC (1.2.9)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
     - FBLazyVector (= 0.61.5)
@@ -281,14 +273,12 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - Realm (5.0.0):
-    - Realm/Headers (= 5.0.0)
-  - Realm/Headers (5.0.0)
-  - RealmSwift (5.0.0):
-    - Realm (= 5.0.0)
-  - rn-fetch-blob (0.12.0):
-    - React-Core
-  - RNBackgroundFetch (3.0.4):
+  - Realm (5.3.2):
+    - Realm/Headers (= 5.3.2)
+  - Realm/Headers (5.3.2)
+  - RealmSwift (5.3.2):
+    - Realm (= 5.3.2)
+  - RNBackgroundFetch (3.1.0):
     - React
   - RNCAsyncStorage (1.10.0):
     - React
@@ -297,10 +287,6 @@ PODS:
   - RNCPushNotificationIOS (1.4.0):
     - React
   - RNDateTimePicker (2.3.2):
-    - React
-  - RNDeviceInfo (5.6.3):
-    - React
-  - RNFS (2.16.6):
     - React
   - RNGestureHandler (1.6.1):
     - React
@@ -312,14 +298,6 @@ PODS:
     - React
   - RNSVG (12.1.0):
     - React
-  - RNZipArchive (5.0.2):
-    - React
-    - RNZipArchive/Core (= 5.0.2)
-    - SSZipArchive (= 2.2.2)
-  - RNZipArchive/Core (5.0.2):
-    - React
-    - SSZipArchive (= 2.2.2)
-  - SSZipArchive (2.2.2)
   - Yoga (1.14.0)
   - ZIPFoundation (0.9.11)
 
@@ -363,20 +341,16 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - Realm
   - RealmSwift
-  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
-  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - RNZipArchive (from `../node_modules/react-native-zip-archive`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
   - ZIPFoundation
 
@@ -385,20 +359,16 @@ SPEC REPOS:
     - Alamofire
     - boost-for-react-native
     - Firebase
-    - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseCrashlytics
     - FirebaseInstallations
     - GoogleDataTransport
-    - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - nanopb
     - PromisesObjC
     - Realm
     - RealmSwift
-    - SSZipArchive
     - ZIPFoundation
 
 EXTERNAL SOURCES:
@@ -466,8 +436,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  rn-fetch-blob:
-    :path: "../node_modules/rn-fetch-blob"
   RNBackgroundFetch:
     :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
@@ -478,10 +446,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
-  RNDeviceInfo:
-    :path: "../node_modules/react-native-device-info"
-  RNFS:
-    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
@@ -492,8 +456,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  RNZipArchive:
-    :path: "../node_modules/react-native-zip-archive"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -504,21 +466,18 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
-  Firebase: 5719b4f965f76643241a1bb8244483ff6117db39
-  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
-  FirebaseCore: 6023faeada5afa95a349fccafb40900e32e9ac42
-  FirebaseCoreDiagnostics: 4a773a47bd83bbd5a9b1ccf1ce7caa8b2d535e67
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseCrashlytics: fff345f16a07f0b23cb342d8de5a42cec6de3492
-  FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
+  Firebase: ed042590caa0029392257529a8003c25ee82bc18
+  FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
+  FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
+  FirebaseCrashlytics: f6ae039fdaf07980425f2ae9f49131fc94009c58
+  FirebaseInstallations: 3c520c951305cbf9ca54eb891ff9e6d1fd384881
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  GoogleDataTransport: ad884314b81cdb808fb1d23787b367ff8da4e28a
-  GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GoogleDataTransport: 8a40cb194ad242b6f6dfe72c14fe40fc67c4dcd7
+  GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
-  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -544,23 +503,18 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
-  RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
-  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNBackgroundFetch: 388cf1595934d22fed275b8db9b48a28bb4eb7b6
+  Realm: c6794276ca8884808ba168a22f9d71362b170b85
+  RealmSwift: 42ec6cec3170aeeda407f797f07268a7d055ebc7
+  RNBackgroundFetch: 8dbb63141792f1473e863a0797ffbd5d987af2fc
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: dc1c0c6aa18a128df123598149f42e848d26a4ac
   RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
-  RNDeviceInfo: 5be12a5bfbb8da3528c43ee4373abd9c30d04616
-  RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNPermissions: 3635b407c15f2fe591bd2101c8f20aa0912caba8
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  RNZipArchive: ab51bc004a31657f34010254a9182014c6a81217
-  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 

@@ -17,7 +17,14 @@ import { GlobalText } from "../../components/GlobalText"
 
 import { Screens, Stacks } from "../../navigation"
 import { Icons, Images } from "../../assets"
-import { Colors, Spacing, Buttons, Iconography, Typography } from "../../styles"
+import {
+  Outlines,
+  Colors,
+  Spacing,
+  Buttons,
+  Iconography,
+  Typography,
+} from "../../styles"
 import { useExposureContext } from "../../ExposureContext"
 
 interface PublishConsentFormProps {
@@ -63,11 +70,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           style={{ flex: 1 }}
           contentContainerStyle={style.contentContainer}
         >
-          <View style={style.icon}>
+          <View style={style.iconContainerCircle}>
             <SvgXml
               xml={Icons.Bell}
-              accessible
-              accessibilityLabel={t("label.bell_icon")}
               width={Iconography.small}
               height={Iconography.small}
             />
@@ -80,11 +85,10 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
           <View>
             <Button
+              invert
               loading={isLoading}
               label={t("export.consent_button_title")}
               onPress={handleOnPressConfirm}
-              buttonStyle={style.button}
-              textStyle={style.buttonText}
             />
             <TouchableOpacity
               onPress={handleOnPressCancel}
@@ -104,7 +108,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
 const style = StyleSheet.create({
   contentContainer: {
-    paddingHorizontal: Spacing.large,
+    padding: Spacing.large,
     paddingBottom: Spacing.huge,
   },
   backgroundImage: {
@@ -121,19 +125,15 @@ const style = StyleSheet.create({
     color: Colors.white,
     paddingBottom: Spacing.medium,
   },
-  icon: {
+  iconContainerCircle: {
     ...Iconography.largeIcon,
-    backgroundColor: Colors.white,
+    borderRadius: Outlines.borderRadiusMax,
+    backgroundColor: Colors.primaryBackground,
+    marginBottom: Spacing.large,
   },
   contentText: {
     ...Typography.secondaryContent,
     color: Colors.white,
-  },
-  button: {
-    ...Buttons.primaryInverted,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
   },
   secondaryButton: {
     ...Buttons.secondary,

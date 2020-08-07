@@ -130,7 +130,7 @@ def enableHermes = project.ext.react.get("enableHermes", false)
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    ndkVersion "21.3.6528147"
+    ndkVersion "21.0.6113669"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -190,6 +190,10 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
             matchingFallbacks = ['release']
+
+            // Differentiate each HA by its APK name
+            def outputSuffix = project.hasProperty('outputSuffix') ? '-' + project.outputSuffix : ''
+            setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
         }
     }
 

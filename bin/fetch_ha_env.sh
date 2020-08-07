@@ -4,11 +4,11 @@
 #
 # Usage
 #
-#   bin/fetch_env <health-authority-label>
+#   bin/fetch_env <health-authority-label> <github-token>
 #
 # Example
 #
-#   bin/fetch_env pc
+#   bin/fetch_env pc <token>
 #
 # Requirements
 #
@@ -17,14 +17,12 @@
 #    https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 require "open3"
-require 'dotenv'
-Dotenv.load
 
 HA_LABEL = ARGV[0]
+ACCESS_TOKEN = ARGV[1]
 
 def fetch_env
-  token = ENV.fetch("ACCESS_TOKEN")
-
+  token = ACCESS_TOKEN
   if !valid_token(token) then
     puts "No valid github token set"
     puts "Set a valid token in your .env file"

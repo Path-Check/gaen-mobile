@@ -108,7 +108,7 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
   },
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     borderColor: Colors.secondaryBorder,
     borderRadius: Spacing.xxSmall,
     borderWidth: 2,

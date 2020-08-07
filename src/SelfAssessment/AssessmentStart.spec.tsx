@@ -33,13 +33,13 @@ describe("AssessmentStart", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const { getByText } = render(
+    const { getByLabelText } = render(
       <I18nextProvider i18n={i18n}>
         <AssessmentStart />
       </I18nextProvider>,
     )
 
-    fireEvent.press(getByText("Start"))
+    fireEvent.press(getByLabelText("Start"))
 
     expect(navigationSpy).toHaveBeenCalledWith("Agreement")
   })

@@ -8,13 +8,14 @@ import { NavigationContainer } from "@react-navigation/native"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
+import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
 import { Screens, Stacks } from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 
-import { Colors } from "../styles"
+import { Headers, Colors } from "../styles"
 
 const Stack = createStackNavigator()
 
@@ -22,15 +23,15 @@ const SCREEN_OPTIONS = {
   headerShown: false,
 }
 
-const RIGHT_SLIDING_MODAL_OPTIONS = {
+const HEADER_SCREEN_OPTIONS = {
   headerStyle: {
-    backgroundColor: Colors.primaryViolet,
+    ...Headers.headerStyle,
   },
   headerTitleStyle: {
-    color: Colors.white,
+    ...Headers.headerTitleStyle,
   },
   headerBackTitleVisible: false,
-  headerTintColor: Colors.white,
+  headerTintColor: Colors.headerText,
 }
 
 const MainNavigator: FunctionComponent = () => {
@@ -59,7 +60,7 @@ const MainNavigator: FunctionComponent = () => {
               component={MoreInfo}
               options={{
                 title: "MORE INFO",
-                ...RIGHT_SLIDING_MODAL_OPTIONS,
+                ...HEADER_SCREEN_OPTIONS,
               }}
             />
             <Stack.Screen
@@ -67,16 +68,23 @@ const MainNavigator: FunctionComponent = () => {
               component={ExposureDetail}
               options={{
                 title: "EXPOSURE",
-                ...RIGHT_SLIDING_MODAL_OPTIONS,
+                ...HEADER_SCREEN_OPTIONS,
               }}
             />
           </>
         ) : (
-          <Stack.Screen
-            name={Stacks.Onboarding}
-            component={OnboardingStack}
-            options={{ ...SCREEN_OPTIONS }}
-          />
+          <>
+            <Stack.Screen
+              name={Stacks.Onboarding}
+              component={OnboardingStack}
+              options={{ ...SCREEN_OPTIONS }}
+            />
+            <Stack.Screen
+              name={Stacks.Activation}
+              component={ActivationStack}
+              options={{ ...SCREEN_OPTIONS }}
+            />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

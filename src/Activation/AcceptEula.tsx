@@ -6,32 +6,22 @@ import {
   View,
   SafeAreaView,
   ActivityIndicator,
-  Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import loadLocalResource from "react-native-local-resource"
 import WebView, { WebViewNavigation } from "react-native-webview"
-import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
-import { Images } from "../assets"
+import { Icons } from "../assets"
 import { GlobalText } from "../components/GlobalText"
+import { ActivationScreens } from "../navigation"
+import { Button } from "../components/Button"
 import enEulaHtml from "../locales/eula/en.html"
 import esPREulaHtml from "../locales/eula/es_PR.html"
 import htEulaHtml from "../locales/eula/ht.html"
-import { OnboardingScreens } from "../navigation"
 
-import { Icons } from "../assets"
-import {
-  Buttons,
-  Typography,
-  Forms,
-  Layout,
-  Colors,
-  Iconography,
-  Spacing,
-  Outlines,
-} from "../styles"
+import { Forms, Iconography, Colors, Spacing, Outlines } from "../styles"
 import { useStatusBarEffect } from "../navigation"
 
 const LoadingIndicator = () => {
@@ -45,7 +35,7 @@ const LoadingIndicator = () => {
 const DEFAULT_EULA_URL = "about:blank"
 type AvailableLocale = "en" | "es_PR" | "ht"
 
-const EulaModal: FunctionComponent = () => {
+const AcceptEula: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
   const [html, setHtml] = useState<string | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(true)
@@ -63,10 +53,6 @@ const EulaModal: FunctionComponent = () => {
   }
   const eulaPath = EULA_FILES[localeCode as AvailableLocale] || enEulaHtml
 
-  const checkboxImage = boxChecked
-    ? Images.BoxCheckedIcon
-    : Images.BoxUncheckedIcon
-
   const shouldStartLoadWithRequestHandler = (
     webViewState: WebViewNavigation,
   ) => {
@@ -77,7 +63,6 @@ const EulaModal: FunctionComponent = () => {
     }
     return shouldLoadRequest
   }
-
   useEffect(() => {
     const loadEula = async () => {
       setHtml(await loadLocalResource(eulaPath))
@@ -85,21 +70,16 @@ const EulaModal: FunctionComponent = () => {
     loadEula()
   }, [eulaPath])
 
+  const checkboxIcon = boxChecked
+    ? Icons.CheckboxChecked
+    : Icons.CheckboxUnchecked
+
+  const checkboxLabel = boxChecked
+    ? t("label.checked_checkbox")
+    : t("label.unchecked_checkbox")
+
   return (
     <SafeAreaView style={style.container}>
-      <TouchableOpacity
-        accessibilityLabel={t("label.close")}
-        accessible
-        style={style.closeIcon}
-        onPress={navigation.goBack}
-      >
-        <SvgXml
-          color={Colors.icon}
-          xml={Icons.Close}
-          width={Iconography.xSmall}
-          height={Iconography.xSmall}
-        />
-      </TouchableOpacity>
       {html && (
         <>
           <WebView
@@ -116,25 +96,27 @@ const EulaModal: FunctionComponent = () => {
           onPress={() => toggleCheckbox(!boxChecked)}
           accessible
           accessibilityRole="checkbox"
-          accessibilityLabel={t("label.checkbox")}
+          accessibilityLabel={checkboxLabel}
           testID="accept-terms-of-use-checkbox"
         >
-          <Image source={checkboxImage} style={style.checkboxIcon} />
+          <SvgXml
+            xml={checkboxIcon}
+            fill={Colors.primaryBlue}
+            width={Iconography.small}
+            height={Iconography.small}
+          />
           <GlobalText style={style.checkboxText}>
             {t("onboarding.eula_agree_terms_of_use")}
           </GlobalText>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(OnboardingScreens.PersonalPrivacy)}
-          style={boxChecked ? style.button : style.disabledButton}
+        <Button
+          onPress={() =>
+            navigation.navigate(ActivationScreens.ActivateProximityTracing)
+          }
           disabled={!boxChecked}
-        >
-          <GlobalText
-            style={boxChecked ? style.buttonText : style.disabledButtonText}
-          >
-            {t("common.continue")}
-          </GlobalText>
-        </TouchableOpacity>
+          label={t("common.continue")}
+          customButtonStyle={style.button}
+        />
       </View>
     </SafeAreaView>
   )
@@ -143,56 +125,39 @@ const EulaModal: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
-  },
-  closeIcon: {
-    position: "absolute",
-    zIndex: Layout.zLevel1,
-    borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.secondaryBackground,
-    width: Iconography.medium,
-    height: Iconography.medium,
-    alignItems: "center",
-    justifyContent: "center",
-    right: Spacing.medium,
-    top: Spacing.xHuge,
   },
   loadingIndicator: {
     justifyContent: "center",
     height: "100%",
   },
   footerContainer: {
-    backgroundColor: Colors.primaryViolet,
-    padding: Spacing.medium,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: Colors.primaryBackground,
+    paddingTop: Spacing.large,
+    paddingBottom: Spacing.huge,
+    paddingHorizontal: Spacing.xxLarge,
+    borderTopColor: Colors.lightGray,
+    borderTopWidth: Outlines.hairline,
   },
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: Spacing.medium,
-  },
-  checkboxIcon: {
-    ...Forms.checkboxIcon,
+    alignSelf: "center",
+    marginBottom: Spacing.xxLarge,
   },
   checkboxText: {
     ...Forms.checkboxText,
+    color: Colors.primaryText,
     flex: 1,
     paddingLeft: Spacing.medium,
   },
   button: {
-    ...Buttons.primaryInverted,
-  },
-  disabledButton: {
-    ...Buttons.primaryInvertedDisabled,
-    backgroundColor: Colors.lighterGray,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryInvertedText,
-  },
-  disabledButtonText: {
-    ...Typography.buttonPrimaryInvertedDisabledText,
-    color: Colors.mediumGray,
+    alignSelf: "center",
   },
 })
 
-export default EulaModal
+export default AcceptEula

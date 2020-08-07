@@ -66,8 +66,8 @@ describe("ExposureDetail", () => {
   describe("when the health authority provides a link", () => {
     it("directs the user to the health authority link", () => {
       const openURLSpy = jest.spyOn(Linking, "openURL")
-      const { getByText } = render(<ExposureDetail />)
-      const nextStepsButton = getByText("Next Steps")
+      const { getByLabelText } = render(<ExposureDetail />)
+      const nextStepsButton = getByLabelText("Next Steps")
       const authorityAdviceUrl = "https://www.health.state.mn.us/"
       fireEvent.press(nextStepsButton)
 

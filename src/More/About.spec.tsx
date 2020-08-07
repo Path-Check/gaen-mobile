@@ -1,48 +1,44 @@
 import React from "react"
 import { Linking } from "react-native"
 import { render, fireEvent } from "@testing-library/react-native"
-import {
-  getApplicationName,
-  getVersion,
-  getBuildNumber,
-} from "react-native-device-info"
 
 import AboutScreen from "./About"
+import { useApplicationInfo } from "./useApplicationInfo"
 
-jest.mock("react-native-device-info", () => {
-  return {
-    getApplicationName: jest.fn(),
-    getBuildNumber: jest.fn(),
-    getVersion: jest.fn(),
-  }
-})
-
+jest.mock("./useApplicationInfo")
 describe("About", () => {
   it("shows the name of the application", () => {
     const applicationName = "application name"
-
-    ;(getApplicationName as jest.Mock).mockReturnValueOnce(applicationName)
-
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName,
+      versionInfo: "versionInfo",
+    })
     const { getByText } = render(<AboutScreen />)
 
     expect(getByText(applicationName)).toBeDefined()
   })
 
   it("shows the build and version number of the application", () => {
-    const buildNumber = 8
-    const versionNumber = 0.18
-
-    ;(getBuildNumber as jest.Mock).mockReturnValueOnce(buildNumber)
-    ;(getVersion as jest.Mock).mockReturnValueOnce(versionNumber)
+    const buildNumber = "8"
+    const versionNumber = "0.18"
+    const versionInfo = `${versionNumber} (${buildNumber})`
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName: "name",
+      versionInfo,
+    })
 
     const { getByText } = render(<AboutScreen />)
 
     expect(getByText("Version:")).toBeDefined()
-    expect(getByText(`${versionNumber} (${buildNumber})`)).toBeDefined()
+    expect(getByText(versionInfo)).toBeDefined()
   })
 
   it("navigates to the pathcheck organization when tapped on the url", () => {
     const openURLSpy = jest.spyOn(Linking, "openURL")
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName: "name",
+      versionInfo: "versionInfo",
+    })
 
     const { getByText } = render(<AboutScreen />)
 
@@ -56,6 +52,10 @@ describe("About", () => {
     const mockOsVersion = "osVersion"
     jest.mock("react-native/Libraries/Utilities/Platform", () => {
       return { OS: mockOsName, Version: mockOsVersion }
+    })
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName: "name",
+      versionInfo: "versionInfo",
     })
 
     const { getByText } = render(<AboutScreen />)
