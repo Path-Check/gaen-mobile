@@ -6,6 +6,9 @@
     "isolate_cta": "次へ進む",
     "next": "次へ進む"
   },
+  "common": {
+    "next": "次へ進む"
+  },
   "label": {
     "launch_enable_notif": "お知らせを有効にする",
     "launch_get_started": "開始する",

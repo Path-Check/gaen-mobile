@@ -34,6 +34,7 @@
   "common": {
     "continue": "Ituloy",
     "done": "Tapos",
+    "next": "Sa susunod",
     "something_went_wrong": "May maling nangyari",
     "start": "Simula"
   },
@@ -92,6 +93,8 @@
     "self_assessment": "Kalusugan"
   },
   "onboarding": {
+    "dont_enable_proximity_tracing": "Huwag Paganahin",
+    "enable_proximity_tracing": "Paganahin",
     "maybe_later": "Baka Mamaya",
     "notification_header": "Nais mo bang makatanggap ng mga abiso o mga notifications kung mayroon kang napuntahan o nakasalamuha na tao, gamit o lugar na posibleng may virus?",
     "notification_subheader": "Ang PathCheck ay sumusosyo sa mga lokal na Departamentong Pangkalusugan upang masubaybayan ang virus.  Kung ikaw at nasa hurisdiction na pinaglilingkuran ng isa sa aming mga kasamang Departamentong Pangkalusugan, \nikaw ay makatanggap ng Abiso sa Pagkalantad sa posibleng pagkahawa o Exposure Notifications, ang iyong cellphone o device ay dapat nasa lugar na nasasakupan ng partner o kasosyong ng PathCheck."

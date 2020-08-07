@@ -34,6 +34,7 @@
   "common": {
     "continue": "Continua",
     "done": "Fatto",
+    "next": "Fatto",
     "something_went_wrong": "Si è verificato un errore",
     "start": "Inizio"
   },
@@ -90,6 +91,8 @@
     "self_assessment": "Salute"
   },
   "onboarding": {
+    "dont_enable_proximity_tracing": "Non Attivare",
+    "enable_proximity_tracing": "Attiva",
     "maybe_later": "Forse più tardi",
     "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",
     "notification_subheader": "Per ricevere le notifiche di esposizione, è necessario trovarsi in un'area controllata da una Istituzione Sanitaria locale.\n\nSe non ci sono ancora Istituzioni Sanitarie locali o regionali nella tua zona, riceverai una notifica quando vengono aggiunte nuove Istituzioni Sanitarie vicino a te."

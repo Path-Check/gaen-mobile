@@ -13,7 +13,8 @@
   },
   "common": {
     "continue": "Pokračovať",
-    "done": "Hotovo"
+    "done": "Hotovo",
+    "next": "Hotovo"
   },
   "exposure_history": {
     "how_does_this_work_para": "Keď je zapnutá funkcia oznámení týkajúcich vystavenia sa riziku, tvoj telefón používa Bluetooth na výmenu a ukladanie reťazcov náhodných čísel (nazývaných náhodné ID) zo všetkých telefónov, s ktorými sa stretne a ktoré majú tiež povolenú túto funkciu. Náhodné ID ťa osobne neidentifikuje s ostatnými používateľmi a kvôli ochrane tvojho súkromia sa mnohokrát mení. Dátum a trvanie stretnutia sa zaznamenávajú spolu s odhadom toho, ako blízko boli oba telefóny. Keď osoba nahlási pozitívnu diagnózu, posledné náhodné identifikačné čísla telefónu sú označené, aby anonymne informovali ostatných. Nezdieľajú sa žiadne miesta ani osobné informácie.",
@@ -30,6 +31,10 @@
     "launch_next": "Ďalej",
     "launch_set_up_phone_bluetooth": "Hotovo",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+  },
+  "onboarding": {
+    "dont_enable_proximity_tracing": "Nepovoliť",
+    "enable_proximity_tracing": "Povoliť"
   },
   "screen_titles": {
     "about": "O",
