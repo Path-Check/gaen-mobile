@@ -27,6 +27,7 @@ PODS:
     - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
   - FirebaseCrashlytics (4.3.0):
+
     - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.1)
     - GoogleDataTransport (~> 7.0)
@@ -47,12 +48,15 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+
   - GoogleDataTransport (7.0.0):
     - nanopb (~> 1.30905.0)
+
   - GoogleUtilities/Environment (6.7.1):
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (6.7.1):
     - GoogleUtilities/Environment
+
   - GoogleUtilities/UserDefaults (6.7.1):
     - GoogleUtilities/Logger
   - nanopb (1.30905.0):
@@ -288,23 +292,8 @@ PODS:
     - React
   - RNDateTimePicker (2.3.2):
     - React
-  - RNGestureHandler (1.6.1):
-    - React
-  - RNPermissions (2.1.4):
-    - React
-  - RNReanimated (1.8.0):
-    - React
-  - RNScreens (2.8.0):
-    - React
-  - RNSVG (12.1.0):
-    - React
-  - Yoga (1.14.0)
-  - ZIPFoundation (0.9.11)
 
-DEPENDENCIES:
-  - Alamofire (~> 4.9.1)
-  - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Firebase/Crashlytics
@@ -346,6 +335,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -359,10 +349,11 @@ SPEC REPOS:
     - Alamofire
     - boost-for-react-native
     - Firebase
-    - FirebaseCore
+   - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
     - FirebaseInstallations
+    - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
     - nanopb
@@ -446,6 +437,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
@@ -466,6 +458,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
+
   Firebase: ed042590caa0029392257529a8003c25ee82bc18
   FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
@@ -510,6 +503,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: dc1c0c6aa18a128df123598149f42e848d26a4ac
   RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
+
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNPermissions: 3635b407c15f2fe591bd2101c8f20aa0912caba8
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff

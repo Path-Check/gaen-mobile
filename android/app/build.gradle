@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 project.ext.envConfigFiles = [
     debug: ".env.bt",
@@ -194,7 +196,7 @@ android {
             // Differentiate each HA by its APK name
             def outputSuffix = project.hasProperty('outputSuffix') ? '-' + project.outputSuffix : ''
             setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
-        }
+       }
     }
 
     lintOptions {
@@ -249,6 +251,8 @@ dependencies {
     androidTestImplementation('com.wix:detox:+') // detox: e2e testing
     implementation "androidx.core:core-ktx:1.3.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
 }
 
 allprojects {
@@ -258,10 +262,6 @@ allprojects {
             resolutionStrategy.eachDependency { DependencyResolveDetails details ->
                 def requested = details.requested
                 if (requested.group == 'com.google.android.gms') {
-                    // TODO verify no downstream issues with version bump
-                    details.useVersion '17+'
-                }
-                if (requested.group == 'com.google.firebase') {
                     // TODO verify no downstream issues with version bump
                     details.useVersion '17+'
                 }

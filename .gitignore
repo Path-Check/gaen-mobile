@@ -105,5 +105,8 @@ safepaths.realm
 # swift packages
 ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
+# Firebase
+android/app/google-services.json.real
+android/app/google-services.json.mock
 # test coverage
 test-coverage

@@ -35,6 +35,7 @@ platform :android do
       gradle_file_path: "app/build.gradle",
       version_code: options[:versionCode]
     )
+
   end
 
   desc "Build a Release APK"
@@ -51,6 +52,7 @@ platform :android do
       }
     )
   end
+
 
   desc "Build a Release AAB"
   lane :release_aab do |options|
@@ -96,6 +98,7 @@ platform :android do
       skip_upload_apk: true,
       package_name: 'org.pathcheck.covidsafepaths.bt',
       aab: "app/build/outputs/bundle/release/app-release.aab"
+
     )
   end
 
