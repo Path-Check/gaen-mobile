@@ -19,7 +19,6 @@ describe("ExposureDetail", () => {
       const today = DateTimeUtils.beginningOfDay(Date.now())
 
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: today,
       })
       ;(useRoute as jest.Mock).mockReturnValue({
@@ -35,7 +34,6 @@ describe("ExposureDetail", () => {
     it("formats the timeframe correctly ", () => {
       const fourDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(4))
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: fourDaysAgo,
       })
 
@@ -52,7 +50,6 @@ describe("ExposureDetail", () => {
         DateTimeUtils.daysAgo(7),
       )
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: sevenDaysAgo,
       })
 
