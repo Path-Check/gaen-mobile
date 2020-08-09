@@ -18,11 +18,7 @@ describe("Share", () => {
       </I18nextProvider>,
     )
     expect(getByText("Publish anonymized data")).toBeDefined()
-    expect(
-      getByText(
-        /Your anonymous data helps the/,
-      ),
-    ).toBeDefined()
+    expect(getByText(/Your anonymous data helps the/)).toBeDefined()
     expect(
       getByText(
         /Your data contains your survey responses and zip code, but no additional or personally-identifying information./,
