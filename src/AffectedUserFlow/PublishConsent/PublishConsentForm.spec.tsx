@@ -1,5 +1,5 @@
 import React from "react"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
@@ -36,20 +36,17 @@ describe("PublishConsentScreen", () => {
     expect(getByText("Notify your community")).toBeDefined()
     expect(
       getByText(
-        "Sharing your positive diagnosis is optional and can only be done with your consent.",
-        { exact: false },
+        /Sharing your positive diagnosis is optional and can only be done with your consent./,
       ),
     ).toBeDefined()
     expect(
       getByText(
-        "If you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
-        { exact: false },
+        /If you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus./,
       ),
     ).toBeDefined()
     expect(
       getByText(
-        "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
-        { exact: false },
+        /The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed./,
       ),
     ).toBeDefined()
   })
@@ -74,7 +71,7 @@ describe("PublishConsentScreen", () => {
 
       fireEvent.press(getByLabelText("I understand and consent"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
           certificate,
           hmacKey,
@@ -102,7 +99,7 @@ describe("PublishConsentScreen", () => {
 
       fireEvent.press(getByLabelText("I understand and consent"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
           certificate,
           hmacKey,

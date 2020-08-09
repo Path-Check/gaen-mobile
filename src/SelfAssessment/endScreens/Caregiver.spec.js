@@ -21,14 +21,12 @@ describe("Caregiver", () => {
     expect(getByText("Notify Caregiver")).toBeDefined()
     expect(
       getByText(
-        "Notify a healthcare provider in your long-term care facility. Living in a long-term care facility or nursing home may put you at risk for severe illness.",
-        { exact: false },
+        /Notify a healthcare provider in your long-term care facility. Living in a long-term care facility or nursing home may put you at risk for severe illness./,
       ),
     ).toBeDefined()
     expect(
       getByText(
-        "Tell a caregiver at the facility that you are sick and need to see a medical provider as soon as possible.",
-        { exact: false },
+        /Tell a caregiver at the facility that you are sick and need to see a medical provider as soon as possible./,
       ),
     ).toBeDefined()
   })
