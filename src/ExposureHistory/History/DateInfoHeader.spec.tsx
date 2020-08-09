@@ -1,5 +1,5 @@
 import React from "react"
-import { render, wait } from "@testing-library/react-native"
+import { render, waitFor } from "@testing-library/react-native"
 import dayjs from "dayjs"
 import "@testing-library/jest-native/extend-expect"
 
@@ -13,7 +13,7 @@ describe("DateInfoHeader", () => {
       <DateInfoHeader lastDetectionDate={lastDetectionDate} />,
     )
 
-    await wait(() => {
+    await waitFor(() => {
       expect(
         getByText(" • Updated 8 hours ago", { exact: false }),
       ).toBeDefined()
@@ -27,9 +27,10 @@ describe("DateInfoHeader", () => {
         <DateInfoHeader lastDetectionDate={lastDetectionDate} />,
       )
 
-      await wait(() => {
+      await waitFor(() => {
         expect(queryByText("Updated")).toBeNull()
       })
     })
   })
 })
+

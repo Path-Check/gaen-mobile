@@ -1,5 +1,5 @@
 import React from "react"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
@@ -74,7 +74,7 @@ describe("PublishConsentScreen", () => {
 
       fireEvent.press(getByLabelText("I understand and consent"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
           certificate,
           hmacKey,
@@ -102,7 +102,7 @@ describe("PublishConsentScreen", () => {
 
       fireEvent.press(getByLabelText("I understand and consent"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
           certificate,
           hmacKey,
@@ -112,3 +112,4 @@ describe("PublishConsentScreen", () => {
     })
   })
 })
+

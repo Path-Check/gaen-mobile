@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { Text } from "react-native"
-import { wait, render } from "@testing-library/react-native"
+import { waitFor, render } from "@testing-library/react-native"
 
 import {
   getVersion,
@@ -22,7 +22,7 @@ describe("useApplicationName", () => {
 
     const { getByText } = render(<Container />)
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText(applicationName)).toBeDefined()
     })
   })
@@ -42,8 +42,9 @@ describe("useVersionInfo", () => {
 
     const { getByText } = render(<Container />)
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText(resultingVersionInfo)).toBeDefined()
     })
   })
 })
+

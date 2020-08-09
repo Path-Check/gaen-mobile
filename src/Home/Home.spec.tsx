@@ -1,6 +1,11 @@
 import React from "react"
 import { Alert, Platform } from "react-native"
-import { render, cleanup, wait, fireEvent } from "@testing-library/react-native"
+import {
+  render,
+  cleanup,
+  waitFor,
+  fireEvent,
+} from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 
 import { ENPermissionStatus } from "../PermissionsContext"
@@ -50,7 +55,7 @@ describe("Home", () => {
         const button = getByTestId("home-request-permissions-button")
 
         fireEvent.press(button)
-        await wait(() => {
+        await waitFor(() => {
           if (Platform.OS === "ios") {
             expect(alert).toHaveBeenCalled()
           } else {
@@ -93,9 +98,10 @@ describe("Home", () => {
       const button = getByTestId("home-request-permissions-button")
 
       fireEvent.press(button)
-      await wait(() => {
+      await waitFor(() => {
         expect(requestPermission).toHaveBeenCalled()
       })
     })
   })
 })
+
