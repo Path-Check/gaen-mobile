@@ -13,6 +13,7 @@ import java.util.List;
 
 import covidsafepaths.bt.exposurenotifications.DebugMenuModule;
 import covidsafepaths.bt.exposurenotifications.DeviceInfoModule;
+import covidsafepaths.bt.exposurenotifications.ExposureHistoryModule;
 import covidsafepaths.bt.exposurenotifications.ExposureKeyModule;
 import covidsafepaths.bt.exposurenotifications.ExposureNotificationsModule;
 
@@ -25,6 +26,7 @@ public class ExposureNotificationsPackage implements ReactPackage {
         modules.add(new DebugMenuModule(reactContext));
         modules.add(new ExposureKeyModule(reactContext));
         modules.add(new DeviceInfoModule(reactContext));
+        modules.add(new ExposureHistoryModule(reactContext));
 
         return modules;
     }
