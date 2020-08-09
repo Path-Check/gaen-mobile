@@ -18,7 +18,7 @@ describe("Emergency", () => {
     expect(getByText("Call Emergency Services")).toBeDefined()
     expect(
       getByText(
-        "Based on your reported symptoms, you should seek care immediately.",
+        /Based on your reported symptoms, you should seek care immediately./,
       ),
     ).toBeDefined()
   })

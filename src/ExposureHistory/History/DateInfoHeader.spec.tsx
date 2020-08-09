@@ -14,9 +14,7 @@ describe("DateInfoHeader", () => {
     )
 
     await waitFor(() => {
-      expect(
-        getByText(" • Updated 8 hours ago", { exact: false }),
-      ).toBeDefined()
+      expect(getByText(/ • Updated 8 hours ago/)).toBeDefined()
     })
   })
 
