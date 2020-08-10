@@ -35,6 +35,7 @@ export type OnboardingScreen =
   | "GetNotified"
   | "ValueProposition"
   | "LanguageSelection"
+  | "ProtectPrivacy"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
@@ -46,6 +47,7 @@ export const OnboardingScreens: {
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
   LanguageSelection: "LanguageSelection",
+  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =

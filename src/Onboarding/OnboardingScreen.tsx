@@ -14,7 +14,12 @@ import { useTranslation } from "react-i18next"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
-import { Stacks, ActivationScreens, useStatusBarEffect } from "../navigation"
+import {
+  OnboardingScreens,
+  Stacks,
+  ActivationScreens,
+  useStatusBarEffect,
+} from "../navigation"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
@@ -88,7 +93,11 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             />
           </ScrollView>
           <View style={style.bottomButtonContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(OnboardingScreens.ProtectPrivacy)
+              }
+            >
               <GlobalText style={style.bottomButtonText}>
                 {t("onboarding.protect_privacy")}
               </GlobalText>

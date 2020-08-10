@@ -2,17 +2,18 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   StackNavigationOptions,
+  TransitionPresets,
 } from "@react-navigation/stack"
 
 import { OnboardingScreen, OnboardingScreens } from "./index"
 
 import Welcome from "../Onboarding/Welcome"
 import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
-import LanguageSelection from "../More/LanguageSelection"
 import Introduction from "../Onboarding/Introduction"
 import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
 import GetNotified from "../Onboarding/GetNotified"
 import ValueProposition from "../Onboarding/ValueProposition"
+import LanguageSelection from "../More/LanguageSelection"
 
 type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
