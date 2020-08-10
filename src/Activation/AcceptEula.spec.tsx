@@ -1,6 +1,6 @@
 import React from "react"
 import { I18nextProvider } from "react-i18next"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import i18n from "../locales/languages"
@@ -54,7 +54,7 @@ describe("EulaModal", () => {
     fireEvent.press(getByTestId("accept-terms-of-use-checkbox"))
     fireEvent.press(continueButton)
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByLabelText("Checked checkbox")).toBeDefined()
       expect(navigationSpy).toHaveBeenCalledWith("ActivateProximityTracing")
     })

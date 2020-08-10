@@ -1,10 +1,8 @@
-const jestPreset = require("@testing-library/react-native/jest-preset")
-
 module.exports = {
-  preset: "@testing-library/react-native",
+  preset: "react-native",
+  setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
   setupFiles: [
     "./jest/setupFile.js",
-    ...jestPreset.setupFiles,
     "./node_modules/react-native-gesture-handler/jestSetup.js",
   ],
   collectCoverage: true,
