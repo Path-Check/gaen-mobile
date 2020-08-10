@@ -4,6 +4,4 @@
   <string name="exposure_notification_channel_name">Ειδοποίηση έκθεσης</string>
   <string name="exposure_notification_message">Κάποιος που βρέθηκε κοντά σας έχει διαγνωστεί θετικά με COVID-19. Πατήστε για περισσότερες πληροφορίες.</string>
   <string name="exposure_notification_title">Πιθανή έκθεση στον COVID-19</string>
-  <!-- Channel label for notifications shown in App > Notifications > Path Check BT -->
-  <string name="notification_channel_description">Ειδοποιήσεις PathCheck BT</string>
 </resources>

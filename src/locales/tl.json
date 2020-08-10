@@ -58,7 +58,6 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "PathCheck",
       "all_services_on_subheader": "Naka-on o gumagana ang Exposure Notifications",
       "tracing_off_button": "Payagan ang Exposure Notifications",
       "tracing_off_header": "Huwag paganahin ang Exposure Notifications",
@@ -67,21 +66,9 @@
   },
   "label": {
     "about_para": "Ang app ng PathCheck ay ginawang magagamit ng PathCheck Foundation, ay isang samahang walang-kitang na nakatuon sa pagbibigay ng libreng software upang makatulong na mapigilan ang pagkalat ng COVID-19 at protektahan ang privacy ng mga indibidwal.\n\nPara sa karagdagang impormasyon, bisitahin ang",
-    "launch_disable_exposure_notif": "Huwag Paganahin",
-    "launch_enable_exposure_notif": "Paganahin",
     "launch_enable_notif": "Paganahin ang mga Abiso o Notifications",
-    "launch_exposure_notif_header": "Payagan ang Exposure Notifications",
-    "launch_exposure_notif_subheader": "Upang maabisuhan tungkol sa mga pagbabago sa iyong kasaysayan ng pagkalantad sa posibleng pagkahawa o exposure history, kailangan ng iyong cellphone o device ang permiso na makipagpalitan ng anonimong o walang tiyak na pagkakakilanlan na Bluetooth code, sa iba pang mga cellphone o device.\n\nGagana lang ang Exposure Notifications kung ang ibang cellphone o device ay naka-enabled o pinagana.\n\nMaari mong i-off o patayin ang mga abisong ito sa kahit na anumang oras.",
     "launch_get_started": "Simulan",
-    "launch_next": "Susunod",
     "launch_screen1_header": "Maligayang Pagdating sa PathCheck",
-    "launch_screen2_header_bluetooth": "Ang iyong cellphone ay nakaaalala ng ibang mga cellphone o device na nakasalamuha, ngunit hindi ikaw direktang ipakikilala sa ibang tao.",
-    "launch_screen2_subheader_bluetooth": "Kalapit ang mge cellphone na gumagamit ng Bluetooth upang ibahagi at i-save ang random na mga numero upang magunita ang mga devices na malapit.\n\nKung mayroon magbabalita ng positibong diagnosis, ang mga random IDs na nakulekta sa kaniyang cellphone kamakailan lamang ay i-fa-flag upang anonimong makapagbigayalam sa iba. Walang lokasyon o impormasyong personal ang ibabahagi.",
-    "launch_screen3_header_bluetooth": "Tumanggap ng mga abiso o notifications kapag ang taong iyong nakasalamuha ay pumiling magulat na sila ay pumositibo sa virus pagkalipas ng panahon.",
-    "launch_screen3_subheader_bluetooth": "Alamin ang mga detalye tungkol sa mga pagtatagpo, tulad ng mga petsa, tagal, at lakas ng Bluetooth signal.",
-    "launch_screen4_header_bluetooth": "Kung ikaw ay sinuri at pumositibo sa virus na nagdudulot ng COVID-19, maari mong piliing ibahagi ang iyong diagnosis o detalye ng iyong pagsusuri nang hindi nagpapakilala.",
-    "launch_screen4_subheader_bluetooth": "Ito ay makakatulong sa mga mamamayan sa iyong kuminidad na pigilan ang pagkalat ng virus.",
-    "launch_set_up_phone_bluetooth": "Sa susunod",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Patakaran sa Pagkapribado",
     "unknown": "Hindi Alam"
@@ -93,11 +80,7 @@
     "self_assessment": "Kalusugan"
   },
   "onboarding": {
-    "dont_enable_proximity_tracing": "Huwag Paganahin",
-    "enable_proximity_tracing": "Paganahin",
-    "maybe_later": "Baka Mamaya",
-    "notification_header": "Nais mo bang makatanggap ng mga abiso o mga notifications kung mayroon kang napuntahan o nakasalamuha na tao, gamit o lugar na posibleng may virus?",
-    "notification_subheader": "Ang PathCheck ay sumusosyo sa mga lokal na Departamentong Pangkalusugan upang masubaybayan ang virus.  Kung ikaw at nasa hurisdiction na pinaglilingkuran ng isa sa aming mga kasamang Departamentong Pangkalusugan, \nikaw ay makatanggap ng Abiso sa Pagkalantad sa posibleng pagkahawa o Exposure Notifications, ang iyong cellphone o device ay dapat nasa lugar na nasasakupan ng partner o kasosyong ng PathCheck."
+    "notification_header": "Nais mo bang makatanggap ng mga abiso o mga notifications kung mayroon kang napuntahan o nakasalamuha na tao, gamit o lugar na posibleng may virus?"
   },
   "screen_titles": {
     "about": "Tungkol",
