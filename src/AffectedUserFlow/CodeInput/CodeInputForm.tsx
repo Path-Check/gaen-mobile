@@ -135,15 +135,16 @@ const CodeInputForm: FunctionComponent = () => {
 
           <View>
             <TextInput
-              testID={"code-input"}
+              testID="code-input"
               value={code}
-              placeholder={"00000000"}
+              placeholder="00000000"
               placeholderTextColor={Colors.placeholderTextColor}
               maxLength={codeLength}
               style={style.codeInput}
-              keyboardType={"number-pad"}
-              returnKeyType={"done"}
+              keyboardType="number-pad"
+              returnKeyType="done"
               onChangeText={handleOnChangeText}
+              onSubmitEditing={Keyboard.dismiss}
               blurOnSubmit={false}
             />
           </View>
