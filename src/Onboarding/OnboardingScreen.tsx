@@ -11,6 +11,7 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
@@ -22,7 +23,15 @@ import {
 } from "../navigation"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
-import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
+import {
+  Layout,
+  Outlines,
+  Colors,
+  Spacing,
+  Typography,
+  Iconography,
+} from "../styles"
 
 type OnboardingScreenContent = {
   screenNumber: number
@@ -92,17 +101,22 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
               onPress={onboardingScreenActions.primaryButtonOnPress}
             />
           </ScrollView>
-          <View style={style.bottomButtonContainer}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(OnboardingScreens.ProtectPrivacy)
-              }
-            >
-              <GlobalText style={style.bottomButtonText}>
-                {t("onboarding.protect_privacy")}
-              </GlobalText>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={style.bottomButtonContainer}
+            onPress={() =>
+              navigation.navigate(OnboardingScreens.ProtectPrivacy)
+            }
+          >
+            <SvgXml
+              xml={Icons.ChevronUp}
+              fill={Colors.primaryBlue}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
+            />
+            <GlobalText style={style.bottomButtonText}>
+              {t("onboarding.protect_privacy")}
+            </GlobalText>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -193,6 +207,7 @@ const style = StyleSheet.create({
   bottomButtonText: {
     ...Typography.header5,
     color: Colors.primaryBlue,
+    marginTop: Spacing.xxSmall,
   },
 })
 export default OnboardingScreen

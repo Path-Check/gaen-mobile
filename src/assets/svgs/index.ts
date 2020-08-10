@@ -10,6 +10,7 @@ import CheckInCircle from "./checkInCircle"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
+import ChevronUp from "./chevronUp"
 import Close from "./close"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
@@ -46,6 +47,7 @@ export const Icons = {
   Checkmark,
   CheckmarkCircle,
   ChevronRight,
+  ChevronUp,
   Close,
   Export,
   ExposureIcon,
