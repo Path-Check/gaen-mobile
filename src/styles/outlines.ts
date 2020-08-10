@@ -21,14 +21,19 @@ export const ovalBorder: ViewStyle = {
   borderRadius: borderRadiusMax,
 }
 
-export const glowShadow: ViewStyle = {
-  shadowColor: Colors.darkestGray,
-  shadowOpacity: 0.1,
-  shadowRadius: 20,
-}
-
 export const textInputBorder: ViewStyle = {
   borderWidth: 2,
   borderRadius: 10,
-  borderColor: Colors.primaryViolet,
+  borderColor: Colors.secondaryViolet,
+}
+
+export const baseShadow: ViewStyle = {
+  shadowColor: Colors.primaryViolet,
+  shadowOffset: {
+    width: 0,
+    height: 10,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 13.16,
+  elevation: 20,
 }

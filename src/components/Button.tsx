@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 import { GlobalText } from "./GlobalText"
 import { Icons } from "../assets"
 
-import { Spacing, Colors, Buttons, Typography } from "../styles"
+import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
 import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
@@ -69,6 +69,14 @@ export const Button: FunctionComponent<ButtonProps> = ({
     }
   }
 
+  const determineButtonContainerStyle = (): ViewStyle => {
+    if (disabled || loading) {
+      return {}
+    } else {
+      return style.buttonContainerEnabled
+    }
+  }
+
   const buttonStyle = { ...style.button, ...customButtonStyle }
   const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
@@ -80,6 +88,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityRole="button"
       disabled={disabled || loading}
       testID={testID}
+      style={determineButtonContainerStyle()}
     >
       <LinearGradient
         start={{ x: 0.2, y: 0.85 }}
@@ -109,6 +118,9 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }
 
 const style = StyleSheet.create({
+  buttonContainerEnabled: {
+    ...Outlines.baseShadow,
+  },
   button: {
     ...Buttons.primary,
   },
