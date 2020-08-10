@@ -60,30 +60,41 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             {t("common.skip")}
           </GlobalText>
         </TouchableOpacity>
-        <ScrollView
-          alwaysBounceVertical={false}
-          style={style.container}
-          contentContainerStyle={style.contentContainer}
-        >
-          <View>
-            <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
-              accessible
-              style={style.image}
-              resizeMode={"contain"}
+        <View style={style.outerContainer}>
+          <ScrollView
+            alwaysBounceVertical={false}
+            style={style.container}
+            contentContainerStyle={style.contentContainer}
+          >
+            <View>
+              <Image
+                source={onboardingScreenContent.image}
+                accessibilityLabel={onboardingScreenContent.imageLabel}
+                accessible
+                style={style.image}
+                resizeMode={"contain"}
+              />
+              <PositionDots
+                screenNumber={onboardingScreenContent.screenNumber}
+              />
+              <GlobalText style={style.headerText}>
+                {onboardingScreenContent.header}
+              </GlobalText>
+            </View>
+            <Button
+              hasRightArrow
+              label={onboardingScreenContent.primaryButtonLabel}
+              onPress={onboardingScreenActions.primaryButtonOnPress}
             />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
-            <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
-            </GlobalText>
+          </ScrollView>
+          <View style={style.bottomButtonContainer}>
+            <TouchableOpacity>
+              <GlobalText style={style.bottomButtonText}>
+                {t("onboarding.protect_privacy")}
+              </GlobalText>
+            </TouchableOpacity>
           </View>
-          <Button
-            hasRightArrow
-            label={onboardingScreenContent.primaryButtonLabel}
-            onPress={onboardingScreenActions.primaryButtonOnPress}
-          />
-        </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -116,13 +127,17 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
 }
 
 const style = StyleSheet.create({
+  outerContainer: {
+    justifyContent: "space-between",
+    height: "100%",
+  },
   container: {
     paddingHorizontal: Spacing.large,
   },
   contentContainer: {
-    height: "100%",
     paddingBottom: Spacing.large,
   },
+
   image: {
     width: "100%",
     height: 300,
@@ -162,6 +177,13 @@ const style = StyleSheet.create({
   skipButtonText: {
     ...Typography.base,
     color: Colors.mediumGray,
+  },
+  bottomButtonContainer: {
+    alignItems: "center",
+  },
+  bottomButtonText: {
+    ...Typography.header5,
+    color: Colors.primaryBlue,
   },
 })
 export default OnboardingScreen
