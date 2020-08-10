@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   StackNavigationOptions,
-  TransitionPresets,
 } from "@react-navigation/stack"
 
 import { OnboardingScreen, OnboardingScreens } from "./index"
