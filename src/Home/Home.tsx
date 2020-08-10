@@ -52,7 +52,7 @@ const HomeScreen: FunctionComponent = () => {
   const [btStatus, setBTStatus] = useState(false)
   const fetchBTStatus = async () => {
     const status = await isBluetoothEnabled()
-    setBTStatus(status)
+    setBTStatus(status === "true")
   }
 
   useEffect(() => {
