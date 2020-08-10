@@ -149,6 +149,10 @@ If you get a 500 local server error, run:
 ```
 yarn start --reset-cache
 ``` 
+If you get a `require: cannot load such file -- dotenv (LoadError)` error, run:
+```
+gem install dotenv
+```
 **Testing:**
 - To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 - To provide dianogisis keys to the API the applicationId should be whitelisted, you can skip that verification step by checking `Settings > Google > COVID-19 Exposure Notifications >  Debug mode > Bypass app signature check`
