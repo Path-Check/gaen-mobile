@@ -35,12 +35,19 @@ describe("calculateHmac", () => {
       RNSimpleCrypto.utils,
       "convertArrayBufferToBase64",
     )
+    const base64TekKey = "base64TekKey"
+    convertArrayBufferToBase64Spy.mockReturnValueOnce(base64TekKey)
     const base64Signature = "base64Signature"
     convertArrayBufferToBase64Spy.mockReturnValueOnce(base64Signature)
     const base64Key = "base64Key"
     convertArrayBufferToBase64Spy.mockReturnValueOnce(base64Key)
 
-    return [convertArrayBufferToBase64Spy, base64Signature, base64Key]
+    return [
+      convertArrayBufferToBase64Spy,
+      base64Signature,
+      base64Key,
+      base64TekKey,
+    ]
   }
 
   it("serializes and encrypts the exposure keys into a payload", async () => {
@@ -54,6 +61,7 @@ describe("calculateHmac", () => {
       convertArrayBufferToBase64Spy,
       base64Signature,
       base64Key,
+      base64TekKey,
     ] = mockConvertArrayBufferToBase64()
     const key = "key"
     const rollingPeriod = 1
@@ -65,7 +73,7 @@ describe("calculateHmac", () => {
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${key}.${rollingPeriod}.${rollingStartNumber}.${transmissionRisk}`
+    const serializedKey = `${base64TekKey}.${rollingPeriod}.${rollingStartNumber}.${transmissionRisk}`
 
     const hmacKey = await calculateHmac([exposureKey])
 
