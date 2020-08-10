@@ -20,17 +20,14 @@ describe("ExposureList", () => {
       )
 
       const datum1 = factories.exposureDatum.build({
-        kind: "Possible",
         date: twoDaysAgo,
       })
 
       const datum2 = factories.exposureDatum.build({
-        kind: "Possible",
         date: fiveDaysAgo,
       })
 
       const datum3 = factories.exposureDatum.build({
-        kind: "Possible",
         date: sevenDaysAgo,
       })
 

@@ -20,21 +20,10 @@
     "how_does_this_work_para": "Keď je zapnutá funkcia oznámení týkajúcich vystavenia sa riziku, tvoj telefón používa Bluetooth na výmenu a ukladanie reťazcov náhodných čísel (nazývaných náhodné ID) zo všetkých telefónov, s ktorými sa stretne a ktoré majú tiež povolenú túto funkciu. Náhodné ID ťa osobne neidentifikuje s ostatnými používateľmi a kvôli ochrane tvojho súkromia sa mnohokrát mení. Dátum a trvanie stretnutia sa zaznamenávajú spolu s odhadom toho, ako blízko boli oba telefóny. Keď osoba nahlási pozitívnu diagnózu, posledné náhodné identifikačné čísla telefónu sú označené, aby anonymne informovali ostatných. Nezdieľajú sa žiadne miesta ani osobné informácie.",
     "why_did_i_get_an_en_para": "Dostaneš notifikáciu o vystavení sa riziku keď niekomu, s kým si sa stretol/a resp. sa ti skrížili cesty, bude diagnostikovaný COVID-19 a budeš mať možnosť informovať ostatných."
   },
-  "home": {
-    "bluetooth": {
-      "all_services_on_header": "PathCheck"
-    }
-  },
   "label": {
     "launch_enable_notif": "Umožniť upozornenia",
     "launch_get_started": "Začať",
-    "launch_next": "Ďalej",
-    "launch_set_up_phone_bluetooth": "Hotovo",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
-  },
-  "onboarding": {
-    "dont_enable_proximity_tracing": "Nepovoliť",
-    "enable_proximity_tracing": "Povoliť"
   },
   "screen_titles": {
     "about": "O",

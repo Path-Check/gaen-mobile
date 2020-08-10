@@ -57,7 +57,6 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "PathCheck",
       "all_services_on_subheader": "Le notifiche di esposizione sono attive",
       "tracing_off_button": "Consenti notifiche",
       "tracing_off_header": "Notifiche disabilitate",
@@ -65,21 +64,9 @@
     }
   },
   "label": {
-    "launch_disable_exposure_notif": "Non Attivare",
-    "launch_enable_exposure_notif": "Attiva",
     "launch_enable_notif": "Attiva le Notifiche",
-    "launch_exposure_notif_header": "Attiva le notifiche di esposizione",
-    "launch_exposure_notif_subheader": "Per ricevere notifiche sugli aggiornamenti della cronologia delle esposizioni, il telefono deve disporre dell'autorizzazione per scambiare un codice identificativo casuale e anonimo Bluetooth con altri dispositivi. \n\nLe notifiche di esposizione funzionano solo con altri dispositivi con l'impostazione abilitata. \n\nPuoi disattivare queste notifiche in qualsiasi momento.",
     "launch_get_started": "Cominciamo",
-    "launch_next": "Prossimo",
     "launch_screen1_header": "Benvenuti in PathCheck",
-    "launch_screen2_header_bluetooth": "Il telefono ricorda gli altri dispositivi che incontra, ma non ti identificherà con altre persone.",
-    "launch_screen2_subheader_bluetooth": "La data e la durata dell'incontro sono registrate insieme a una stima della vicinanza fra i due telefoni.",
-    "launch_screen3_header_bluetooth": "Tutti i dati sono crittografati e memorizzati privatamente sul tuo telefono.",
-    "launch_screen3_subheader_bluetooth": "Il tuo telefono non condividerà alcuna informazione personale con altri utenti di PathCheck a meno che tu non scelga di segnalare in forma anonima una diagnosi positiva.",
-    "launch_screen4_header_bluetooth": "Ricevi una notifica se al proprietario di un telefono che hai incontrato viene diagnosticato il COVID-19 e sceglie di condividere in modo anonimo il suo stato di salute.",
-    "launch_screen4_subheader_bluetooth": "In questo caso, informatevi presso la vostra Istituzione Sanitaria locale su cosa fare.",
-    "launch_set_up_phone_bluetooth": "Fatto",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Informativa sulla privacy",
     "unknown": "sconosciuto"
@@ -91,11 +78,7 @@
     "self_assessment": "Salute"
   },
   "onboarding": {
-    "dont_enable_proximity_tracing": "Non Attivare",
-    "enable_proximity_tracing": "Attiva",
-    "maybe_later": "Forse più tardi",
-    "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",
-    "notification_subheader": "Per ricevere le notifiche di esposizione, è necessario trovarsi in un'area controllata da una Istituzione Sanitaria locale.\n\nSe non ci sono ancora Istituzioni Sanitarie locali o regionali nella tua zona, riceverai una notifica quando vengono aggiunte nuove Istituzioni Sanitarie vicino a te."
+    "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?"
   },
   "screen_titles": {
     "about": "Informazioni",
