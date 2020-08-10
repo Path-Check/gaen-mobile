@@ -114,7 +114,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
               height={Iconography.xSmall}
             />
             <GlobalText style={style.bottomButtonText}>
-              {t("onboarding.protect_privacy")}
+              {t("onboarding.protect_privacy_button")}
             </GlobalText>
           </TouchableOpacity>
         </View>

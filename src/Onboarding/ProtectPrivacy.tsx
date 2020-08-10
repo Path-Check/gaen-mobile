@@ -21,12 +21,11 @@ const ProtectPrivacy: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-    >
-      <View style={style.topScroll} />
+    <View style={style.container}>
       <View style={style.headerContainer}>
+        <GlobalText style={style.headerText}>
+          {t("onboarding.protect_privacy.header")}
+        </GlobalText>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -38,11 +37,8 @@ const ProtectPrivacy: FunctionComponent = () => {
             height={Iconography.small}
           />
         </TouchableOpacity>
-        <GlobalText style={style.headerText}>
-          {t("onboarding.protect_privacy.header")}
-        </GlobalText>
       </View>
-      <View style={style.mainContentContainer}>
+      <ScrollView contentContainerStyle={style.mainContentContainer}>
         <Section
           image={Images.PersonOnPhoneWithCode}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
@@ -68,8 +64,8 @@ const ProtectPrivacy: FunctionComponent = () => {
           subheaderText={t("onboarding.protect_privacy.subheader_5")}
           bodyText={t("onboarding.protect_privacy.body_5")}
         />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   )
 }
 
@@ -101,42 +97,49 @@ const style = StyleSheet.create({
     height: "100%",
     backgroundColor: Colors.primaryBackground,
   },
-  contentContainer: {
-    paddingBottom: Spacing.xxxHuge,
-  },
   headerContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
     backgroundColor: Colors.faintGray,
-  },
-  closeIconContainer: {
-    alignSelf: "flex-end",
-    padding: Spacing.medium,
+    position: "absolute",
+    zIndex: Layout.zLevel1,
   },
   headerText: {
-    ...Typography.header2,
+    flex: 10,
+    ...Typography.header3,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
     color: Colors.primaryViolet,
   },
-  mainContentContainer: {},
+  closeIconContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+    padding: Spacing.medium,
+  },
+  mainContentContainer: {
+    paddingTop: 130,
+    paddingBottom: Spacing.xxxHuge,
+  },
   image: {
     width: "100%",
     height: 300,
-    marginTop: Spacing.small,
-    marginBottom: Spacing.medium,
+    marginBottom: Spacing.xLarge,
     resizeMode: "contain",
   },
   textContainer: {
     paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.huge,
   },
-  subheaderText: {},
-  bodyText: {},
-  topScroll: {
-    position: "absolute",
-    top: -Layout.screenHeight,
-    left: 0,
-    right: 0,
-    height: Layout.screenHeight,
-    backgroundColor: Colors.faintGray,
+  subheaderText: {
+    ...Typography.mainContent,
+    ...Typography.mediumBold,
+    color: Colors.black,
+    marginBottom: Spacing.medium,
+  },
+  bodyText: {
+    ...Typography.mainContent,
+    marginBottom: Spacing.medium,
   },
 })
 
