@@ -151,7 +151,7 @@ android {
         versionName "1.0.8"
 
         //Fix problem in bt where .env.bt is not recognized
-        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths.bt"
+        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths"
     }
     splits {
         abi {

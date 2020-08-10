@@ -35,7 +35,7 @@ platform :ios do
   desc "Format last commit"
   private_lane :format_last_commit do
     commit = last_git_commit
-    "Commit: " + commit[:commit_hash]
+    "Commit: " + commit[:commit_hash] +
     "\nChanges: " + commit[:message]
   end
 end
