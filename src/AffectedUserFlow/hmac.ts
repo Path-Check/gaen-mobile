@@ -34,15 +34,18 @@ export const calculateHmac = async (
 }
 
 const serializeKeys = (exposureKeys: ExposureKey[]) => {
+  const serializer = allRisksAreZero(exposureKeys)
+    ? serializeExposureKeyWithoutRisk
+    : serializeFullExposureKey
   return exposureKeys
-    .map(serializeExposureKey)
+    .map(serializer)
     .sort((left: string, right: string) => {
       return left.localeCompare(right, "en", { sensitivity: "base" })
     })
     .join(",")
 }
 
-const serializeExposureKey = ({
+const serializeFullExposureKey = ({
   key,
   rollingPeriod,
   rollingStartNumber,
@@ -54,4 +57,20 @@ const serializeExposureKey = ({
     rollingStartNumber,
     transmissionRisk,
   ].join(".")
+}
+
+const serializeExposureKeyWithoutRisk = ({
+  key,
+  rollingPeriod,
+  rollingStartNumber,
+}: ExposureKey): string => {
+  return [utf8ToBase64String(key), rollingPeriod, rollingStartNumber].join(".")
+}
+
+const allRisksAreZero = (exposureKeys: ExposureKey[]): boolean => {
+  return (
+    exposureKeys.filter(({ transmissionRisk }) => {
+      return transmissionRisk > 0
+    }).length === 0
+  )
 }

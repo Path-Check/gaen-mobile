@@ -82,5 +82,27 @@ describe("calculateHmac", () => {
     expect(convertArrayBufferToBase64Spy).toHaveBeenCalledWith(signatureBuffer)
     expect(convertArrayBufferToBase64Spy).toHaveBeenCalledWith(randomBytes)
     expect(hmacKey).toEqual([base64Signature, base64Key])
+    jest.resetAllMocks()
+  })
+
+  it("does not include the risk if all keys have risk of 0", async () => {
+    const [convertUtf8ToArrayBufferSpy, ,] = mockConvertUtf8ToArray()
+    mockHmac256()
+    const [, , , base64TekKey] = mockConvertArrayBufferToBase64()
+    const key = "key"
+    const rollingPeriod = 1
+    const rollingStartNumber = 1
+    const transmissionRisk = 0
+    const exposureKey = {
+      key,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const serializedKey = `${base64TekKey}.${rollingPeriod}.${rollingStartNumber}`
+    await calculateHmac([exposureKey])
+
+    expect(convertUtf8ToArrayBufferSpy).toHaveBeenCalledWith(serializedKey)
+    jest.resetAllMocks()
   })
 })
