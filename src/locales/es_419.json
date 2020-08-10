@@ -21,22 +21,13 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "PathCheck",
       "tracing_off_button": "Permitir notificaciones",
       "tracing_off_header": "Notificaciones desactivadas"
     }
   },
   "label": {
-    "launch_enable_exposure_notif": "Habilitar",
     "launch_enable_notif": "Permitir notificaciones",
-    "launch_next": "Siguiente",
     "launch_screen1_header": "Bienvenido a PathCheck",
-    "launch_screen2_subheader_bluetooth": "La fecha y la duración del encuentro se registran junto con una estimación de cuán cerca pudieron haber estado los dos teléfonos.",
-    "launch_screen3_header_bluetooth": "Todos los datos están encriptados y almacenados de forma privada en su teléfono.",
-    "launch_screen3_subheader_bluetooth": "Su teléfono no compartirá información personal con otros usuarios de PathCheck a menos que usted elija informar anónimamente un diagnóstico positivo.",
-    "launch_screen4_header_bluetooth": "Reciba notificaciones si se ha encontrado con el propietario de un teléfono que fue diagnosticado con COVID-19 y eligio compartir anónimamente su estado de salud.",
-    "launch_screen4_subheader_bluetooth": "En este caso, busque información de su Autoridad Local de Salud sobre qué hacer a continuación.",
-    "launch_set_up_phone_bluetooth": "Siguiente",
     "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
     "privacy_policy": "Política de privacidad",
     "unknown": "desconocido"
@@ -44,9 +35,6 @@
   "navigation": {
     "home": "Inicio",
     "more": "Más"
-  },
-  "onboarding": {
-    "enable_proximity_tracing": "Habilitar"
   },
   "screen_titles": {
     "about": "Acerca de",

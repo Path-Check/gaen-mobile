@@ -14,9 +14,9 @@ const Introduction: FunctionComponent = () => {
   const onboardingScreenContent = {
     screenNumber: 1,
     image: Images.PeopleHighFiving,
-    imageLabel: t("onboarding_screen1_image_label"),
-    header: t("label.onboarding_screen1_header"),
-    primaryButtonLabel: t("label.onboarding_screen1_button"),
+    imageLabel: t("onboarding.screen1_image_label"),
+    header: t("onboarding.screen1_header"),
+    primaryButtonLabel: t("onboarding.screen1_button"),
   }
 
   const onboardingScreenActions = {

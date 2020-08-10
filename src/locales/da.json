@@ -18,21 +18,9 @@
     "done": "Udført",
     "next": "Udført"
   },
-  "home": {
-    "bluetooth": {
-      "all_services_on_header": "PathCheck"
-    }
-  },
   "label": {
     "launch_enable_notif": "Aktivér notifikationer",
     "launch_get_started": "Lad os komme i gang",
-    "launch_next": "Næste",
-    "launch_screen2_subheader_bluetooth": "Dato for mødet og mødets varighed registreres sammen med et skøn over, hvor tæt de to telefoner kan have været.",
-    "launch_screen3_header_bluetooth": "Alle data er krypteret og gemt privat på din telefon.",
-    "launch_screen3_subheader_bluetooth": "Din telefon vil ikke dele nogen personlige oplysninger med andre brugere af PathCheck, medmindre du selv vælger at rapportere anonymt, at du er smittet.",
-    "launch_screen4_header_bluetooth": "Bliv underrettet, hvis en ejer af en telefon, du har været i nærheden af, diagnosticeres med COVID-19 og vælger at dele deres sundhedsstatus anonymt.",
-    "launch_screen4_subheader_bluetooth": "I så fald, kontakt din lokale sundhedsmyndighed for at få at vide, hvad du så skal gøre.",
-    "launch_set_up_phone_bluetooth": "Udført",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Privatlivspolitik"
   },

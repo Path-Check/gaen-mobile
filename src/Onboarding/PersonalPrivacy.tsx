@@ -14,9 +14,9 @@ const PersonalPrivacy: FunctionComponent = () => {
   const onboardingScreenContent = {
     screenNumber: 3,
     image: Images.PersonWithLockedPhone,
-    imageLabel: t("onboarding_screen3_image_label"),
-    header: t("label.onboarding_screen3_header"),
-    primaryButtonLabel: t("label.onboarding_screen3_button"),
+    imageLabel: t("onboarding.screen3_image_label"),
+    header: t("onboarding.screen3_header"),
+    primaryButtonLabel: t("onboarding.screen3_button"),
   }
 
   const onboardingScreenActions = {
