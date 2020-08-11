@@ -14,9 +14,8 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import covidsafepaths.bt.exposurenotifications.dto.ExposureInformation;
+import covidsafepaths.bt.exposurenotifications.dto.RNExposureInformation;
 import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
@@ -42,15 +41,14 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
         ExposureNotificationClientWrapper exposureNotificationsClient = ExposureNotificationClientWrapper.get(getReactApplicationContext());
         exposureNotificationsClient.getExposureWindows()
                 .addOnSuccessListener(exposureWindows -> {
-                    List<ExposureInformation> exposures = new ArrayList<>();
+                    List<RNExposureInformation> exposures = new ArrayList<>();
                     for (ExposureWindow window : exposureWindows) {
                         long durationMinutes = 0;
                         for (ScanInstance scan : window.getScanInstances()) {
                             // We don't need a float type here, getSecondsSinceLastScan() is coarsened to 60-second increments
                             durationMinutes += scan.getSecondsSinceLastScan() / 60;
                         }
-                        ExposureInformation exposure = new ExposureInformation(
-                                UUID.randomUUID().toString(),
+                        RNExposureInformation exposure = new RNExposureInformation(
                                 window.getDateMillisSinceEpoch(),
                                 durationMinutes
                         );

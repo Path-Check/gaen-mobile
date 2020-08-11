@@ -149,6 +149,15 @@ object RealmSecureStorageBte {
         return somethingAdded
     }
 
+    fun resetExposures() {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.delete(ExposureEntity::class.java)
+                db.delete(KeyValues::class.java)
+            }
+        }
+    }
+
     @VisibleForTesting
     fun getRealmInstance(): Realm {
         return Realm.getInstance(realmConfig)
