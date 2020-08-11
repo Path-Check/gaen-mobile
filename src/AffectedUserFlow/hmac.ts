@@ -2,11 +2,6 @@ import RNSimpleCrypto from "react-native-simple-crypto"
 
 import { ExposureKey } from "../exposureKey"
 
-const utf8ToBase64String = (input: string): string => {
-  const utf8AsArrayBuffer = RNSimpleCrypto.utils.convertUtf8ToArrayBuffer(input)
-  return RNSimpleCrypto.utils.convertArrayBufferToBase64(utf8AsArrayBuffer)
-}
-
 export const generateKey = async (): Promise<ArrayBuffer> => {
   return await RNSimpleCrypto.utils.randomBytes(32)
 }
@@ -34,43 +29,14 @@ export const calculateHmac = async (
 }
 
 const serializeKeys = (exposureKeys: ExposureKey[]) => {
-  const serializer = allRisksAreZero(exposureKeys)
-    ? serializeExposureKeyWithoutRisk
-    : serializeFullExposureKey
-  return exposureKeys
-    .map(serializer)
-    .sort((left: string, right: string) => {
-      return left.localeCompare(right, "en", { sensitivity: "base" })
-    })
-    .join(",")
+  return exposureKeys.map(serializeExposureKey).sort().join(",")
 }
 
-const serializeFullExposureKey = ({
+const serializeExposureKey = ({
   key,
-  rollingPeriod,
   rollingStartNumber,
+  rollingPeriod,
   transmissionRisk,
 }: ExposureKey): string => {
-  return [
-    utf8ToBase64String(key),
-    rollingPeriod,
-    rollingStartNumber,
-    transmissionRisk,
-  ].join(".")
-}
-
-const serializeExposureKeyWithoutRisk = ({
-  key,
-  rollingPeriod,
-  rollingStartNumber,
-}: ExposureKey): string => {
-  return [utf8ToBase64String(key), rollingPeriod, rollingStartNumber].join(".")
-}
-
-const allRisksAreZero = (exposureKeys: ExposureKey[]): boolean => {
-  return (
-    exposureKeys.filter(({ transmissionRisk }) => {
-      return transmissionRisk > 0
-    }).length === 0
-  )
+  return [key, rollingStartNumber, rollingPeriod, transmissionRisk].join(".")
 }
