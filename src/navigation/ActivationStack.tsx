@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { TouchableOpacity, StyleSheet, View } from "react-native"
+import { Platform, TouchableOpacity, StyleSheet, View } from "react-native"
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -35,15 +35,17 @@ const ActivationStack: FunctionComponent = () => {
 
   const HeaderRight = (step: ActivationStep) => {
     const determineStepText = () => {
+      const totalSteps = Platform.OS === "ios" ? 3 : 2
+
       switch (step) {
         case "AcceptEula":
-          return t("onboarding.step_1_of_3")
+          return t("onboarding.step", { currentStep: 1, totalSteps })
         case "ActivateProximityTracing":
-          return t("onboarding.step_2_of_3")
+          return t("onboarding.step", { currentStep: 2, totalSteps })
         case "NotificationPermissions":
-          return t("onboarding.step_3_of_3")
+          return t("onboarding.step", { currentStep: 3, totalSteps })
         default:
-          return t("onboarding.step_1_of_3")
+          return t("onboarding.step", { currentStep: 1, totalSteps })
       }
     }
 
