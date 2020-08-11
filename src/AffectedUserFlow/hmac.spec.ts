@@ -64,16 +64,16 @@ describe("calculateHmac", () => {
       base64TekKey,
     ] = mockConvertArrayBufferToBase64()
     const key = "key"
-    const rollingPeriod = 1
     const rollingStartNumber = 1
-    const transmissionRisk = 1
+    const rollingPeriod = 2
+    const transmissionRisk = 3
     const exposureKey = {
       key,
       rollingPeriod,
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${base64TekKey}.${rollingPeriod}.${rollingStartNumber}.${transmissionRisk}`
+    const serializedKey = `${base64TekKey}.${rollingStartNumber}.${rollingPeriod}.${transmissionRisk}`
 
     const hmacKey = await calculateHmac([exposureKey])
 
@@ -90,8 +90,8 @@ describe("calculateHmac", () => {
     mockHmac256()
     const [, , , base64TekKey] = mockConvertArrayBufferToBase64()
     const key = "key"
-    const rollingPeriod = 1
     const rollingStartNumber = 1
+    const rollingPeriod = 2
     const transmissionRisk = 0
     const exposureKey = {
       key,
@@ -99,7 +99,7 @@ describe("calculateHmac", () => {
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${base64TekKey}.${rollingPeriod}.${rollingStartNumber}`
+    const serializedKey = `${base64TekKey}.${rollingStartNumber}.${rollingPeriod}`
     await calculateHmac([exposureKey])
 
     expect(convertUtf8ToArrayBufferSpy).toHaveBeenCalledWith(serializedKey)

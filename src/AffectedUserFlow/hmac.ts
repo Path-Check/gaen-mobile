@@ -45,26 +45,19 @@ const serializeKeys = (exposureKeys: ExposureKey[]) => {
     .join(",")
 }
 
-const serializeFullExposureKey = ({
-  key,
-  rollingPeriod,
-  rollingStartNumber,
-  transmissionRisk,
-}: ExposureKey): string => {
+const serializeFullExposureKey = (exposureKey: ExposureKey): string => {
   return [
-    utf8ToBase64String(key),
-    rollingPeriod,
-    rollingStartNumber,
-    transmissionRisk,
+    serializeExposureKeyWithoutRisk(exposureKey),
+    exposureKey.transmissionRisk,
   ].join(".")
 }
 
 const serializeExposureKeyWithoutRisk = ({
   key,
-  rollingPeriod,
   rollingStartNumber,
+  rollingPeriod,
 }: ExposureKey): string => {
-  return [utf8ToBase64String(key), rollingPeriod, rollingStartNumber].join(".")
+  return [utf8ToBase64String(key), rollingStartNumber, rollingPeriod].join(".")
 }
 
 const allRisksAreZero = (exposureKeys: ExposureKey[]): boolean => {
