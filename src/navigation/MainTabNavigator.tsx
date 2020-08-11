@@ -10,6 +10,7 @@ import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeScreen from "../Home/Home"
 import MoreStack from "./MoreStack"
+import ReportIssueStack from "./ReportIssueStack"
 
 import { useExposureContext } from "../ExposureContext"
 
@@ -72,7 +73,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <TabIcon
         icon={TabBarIcons.House}
-        label={t("label.home_icon")}
+        label={t("navigation.home")}
         focused={focused}
         size={size}
       />
@@ -86,12 +87,26 @@ const MainTabNavigator: FunctionComponent = () => {
     const tabIcon = (
       <TabIcon
         icon={TabBarIcons.Exposure}
-        label={t("label.exposure_icon")}
+        label={t("navigation.exposure_history")}
         focused={focused}
         size={size}
       />
     )
     return userHasNewExposure ? applyBadge(tabIcon) : tabIcon
+  }
+
+  const QuestionMarkIcon: FunctionComponent<TabBarIconProps> = ({
+    focused,
+    size,
+  }) => {
+    return (
+      <TabIcon
+        icon={TabBarIcons.QuestionMark}
+        label={t("navigation.report_issue")}
+        focused={focused}
+        size={size}
+      />
+    )
   }
 
   const SelfAssessmentIcon: FunctionComponent<TabBarIconProps> = ({
@@ -101,7 +116,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <TabIcon
         icon={TabBarIcons.CheckInBox}
-        label={t("label.assessment_icon")}
+        label={t("navigation.self_assessment")}
         focused={focused}
         size={size}
       />
@@ -112,7 +127,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <TabIcon
         icon={TabBarIcons.HorizontalDots}
-        label={t("label.more_icon")}
+        label={t("navigation.more")}
         focused={focused}
         size={size}
       />
@@ -145,6 +160,14 @@ const MainTabNavigator: FunctionComponent = () => {
         options={{
           tabBarLabel: t("navigation.history"),
           tabBarIcon: ExposureHistoryIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Stacks.ReportIssue}
+        component={ReportIssueStack}
+        options={{
+          tabBarLabel: t("navigation.report_issue"),
+          tabBarIcon: QuestionMarkIcon,
         }}
       />
       {displaySelfAssessment && (

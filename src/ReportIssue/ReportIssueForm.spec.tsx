@@ -1,13 +1,12 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 
-import FeedbackForm from "./ReportIssueForm"
-import * as API from "./zendeskAPI"
+import ReportIssueForm from "./ReportIssueForm"
+import * as API from "../More/zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"
-jest.mock("./useApplicationInfo", () => {
+jest.mock("../More/useApplicationInfo", () => {
   return {
     useVersionInfo: () => {
       return {
@@ -22,7 +21,7 @@ describe("ReportIssueForm", () => {
   describe("validations", () => {
     it("only allows submit when valid email and body are present", async () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
-      const { getByLabelText } = render(<FeedbackForm />)
+      const { getByLabelText } = render(<ReportIssueForm />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -42,8 +41,6 @@ describe("ReportIssueForm", () => {
 
   describe("on a sucessful request", () => {
     it("submits the form data and shows a success message", async () => {
-      const goBackSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ goBack: goBackSpy })
       const os = Platform.OS
       const osVersion = `${Platform.Version}`
       Platform.OS = os
@@ -54,7 +51,7 @@ describe("ReportIssueForm", () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockResolvedValueOnce({ kind: "success" })
       const alertSpy = jest.spyOn(Alert, "alert")
-      const { getByLabelText, getByTestId } = render(<FeedbackForm />)
+      const { getByLabelText, getByTestId } = render(<ReportIssueForm />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -81,7 +78,6 @@ describe("ReportIssueForm", () => {
         expect(alertSpy).toHaveBeenCalledWith(
           "Success",
           "We received your request. Thank you!",
-          [{ onPress: goBackSpy }],
         )
       })
     })
@@ -91,7 +87,7 @@ describe("ReportIssueForm", () => {
     it("displays an error message", async () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockResolvedValueOnce({ kind: "failure", error: "Unknown" })
-      const { getByLabelText, getByText } = render(<FeedbackForm />)
+      const { getByLabelText, getByText } = render(<ReportIssueForm />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -115,7 +111,7 @@ describe("ReportIssueForm", () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockRejectedValueOnce(new Error(errorMessage))
       const alertSpy = jest.spyOn(Alert, "alert")
-      const { getByLabelText } = render(<FeedbackForm />)
+      const { getByLabelText } = render(<ReportIssueForm />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")

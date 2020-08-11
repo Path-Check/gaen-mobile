@@ -1,3 +1,4 @@
+import AlertCircle from "./alertCircle"
 import AnonymizedData from "./anonymizedData"
 import AnonymizedDataInverted from "./anonymizedDataInverted"
 import Arrow from "./arrow"
@@ -35,6 +36,7 @@ import WashHands from "./WashHands"
 import XInCircle from "./xInCircle"
 
 export const Icons = {
+  AlertCircle,
   AnonymizedData,
   AnonymizedDataInverted,
   Arrow,

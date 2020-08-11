@@ -16,7 +16,6 @@ import LanguageSelection from "../More/LanguageSelection"
 import { MoreStackScreens, MoreStackScreen } from "./index"
 
 import { Colors, Headers } from "../styles"
-import ReportIssueForm from "../More/ReportIssueForm"
 
 type MoreStackParams = {
   [key in MoreStackScreen]: undefined
@@ -63,11 +62,6 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKeyScreen}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.ReportIssueForm}
-        component={ReportIssueForm}
-        options={{ headerTitle: t("screen_titles.report_issue") }}
       />
     </Stack.Navigator>
   )

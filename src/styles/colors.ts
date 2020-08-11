@@ -11,7 +11,7 @@ export const black = "#000000"
 export const white = "#ffffff"
 
 // Grays
-export const faintGray = "#f8f8f8"
+export const faintGray = "#f8f8ff"
 export const lightestGray = "#ededed"
 export const lighterGray = "#d3d3d3"
 export const lightGray = "#999999"
@@ -31,11 +31,13 @@ export const secondaryRed = emergencyRed
 export const tertiaryRed = calmRed
 
 // Blues
+const persianBlue = "#2434B6"
 const royalBlue = "#4051db"
 const cornflowerBlue = "#5061e6"
 
 export const primaryBlue = royalBlue
 export const secondaryBlue = cornflowerBlue
+export const tertiaryBlue = persianBlue
 
 // Greens
 const shamrockGreen = "#41dca4"
@@ -106,7 +108,7 @@ export const invertedLinkText = amberYellow
 export const errorText = primaryRed
 
 // Forms
-export const formInputBorder = tertiaryBackground
+export const formInputBorder = lightestGray
 export const placeholderTextColor = lightGray
 
 export const success = primaryGreen
