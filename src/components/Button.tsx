@@ -42,7 +42,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   const determineGradient = (): string[] => {
     const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
-    const disabledGradient = [Colors.darkestGray, Colors.mediumGray]
+    const disabledGradient = [Colors.tertiaryViolet, Colors.tertiaryViolet]
     const invertedGradient = [Colors.quaternaryViolet, Colors.white]
     const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
 
