@@ -11,7 +11,6 @@ import {
   Keyboard,
   SafeAreaView,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 
 import { useVersionInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
@@ -24,7 +23,6 @@ const defaultErrorMessage = " "
 
 const ReportIssueForm: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { versionInfo } = useVersionInfo()
 
   const [name, setName] = useState("")
