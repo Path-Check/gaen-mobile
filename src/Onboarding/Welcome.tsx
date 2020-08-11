@@ -31,7 +31,12 @@ const Welcome: FunctionComponent = () => {
         <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>
       </TouchableOpacity>
       <View>
-        <Image source={Images.MinnesotaMap} style={style.image} />
+        <Image
+          source={Images.MinnesotaMap}
+          style={style.image}
+          accessible
+          accessibilityLabel={t("onboarding.welcome_image_label")}
+        />
         <GlobalText style={style.mainText}>
           {t("label.launch_screen1_header")}
         </GlobalText>

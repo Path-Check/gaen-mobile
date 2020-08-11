@@ -215,7 +215,8 @@
     "screen4_image_label": "A person getting a notification on their phone",
     "screen5_header": "With the app, you can help break the chain of infection and get help direct from health experts",
     "screen5_image_label": "A person talking to a health expert virtually",
-    "step": "Step {{currentStep}} of {{totalSteps}}"
+    "step": "Step {{currentStep}} of {{totalSteps}}",
+    "welcome_image_label":"An illustration of people with masks on, connected like nodes in a network."
   },
   "report_issue": {
     "body": "Feedback (required)",
