@@ -98,11 +98,11 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
   },
   headerContainer: {
+    position: "absolute",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: Colors.faintGray,
-    position: "absolute",
     zIndex: Layout.zLevel1,
   },
   headerText: {

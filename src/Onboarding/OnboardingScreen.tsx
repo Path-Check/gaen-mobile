@@ -107,15 +107,15 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
               navigation.navigate(OnboardingScreens.ProtectPrivacy)
             }
           >
-            <SvgXml
-              xml={Icons.ChevronUp}
-              fill={Colors.primaryBlue}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
             <GlobalText style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}
             </GlobalText>
+            <SvgXml
+              xml={Icons.ChevronUp}
+              fill={Colors.primaryBlue}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -163,7 +163,7 @@ const style = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: 300,
+    height: 250,
     marginTop: Spacing.small,
     marginBottom: Spacing.medium,
   },
@@ -192,7 +192,7 @@ const style = StyleSheet.create({
   },
   skipButtonContainer: {
     position: "absolute",
-    top: Spacing.small,
+    top: Spacing.xxSmall,
     right: Spacing.small,
     padding: Spacing.small,
     zIndex: Layout.zLevel1,
@@ -202,12 +202,18 @@ const style = StyleSheet.create({
     color: Colors.mediumGray,
   },
   bottomButtonContainer: {
+    backgroundColor: Colors.lightestGray,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: Spacing.small,
+    borderTopColor: Colors.lighterGray,
+    borderTopWidth: Outlines.hairline,
   },
   bottomButtonText: {
     ...Typography.header5,
     color: Colors.primaryBlue,
-    marginTop: Spacing.xxSmall,
+    marginRight: Spacing.xSmall,
   },
 })
 export default OnboardingScreen
