@@ -25,9 +25,6 @@ const MainTabNavigator: FunctionComponent = () => {
   const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
-  const activeTabIconColor = Colors.primaryViolet
-  const inactiveTabIconColor = Colors.quaternaryViolet
-
   const applyBadge = (icon: JSX.Element) => {
     return (
       <>
@@ -35,6 +32,10 @@ const MainTabNavigator: FunctionComponent = () => {
         <View style={style.iconBadge} />
       </>
     )
+  }
+
+  const determineIconFill = (focused: boolean) => {
+    return focused ? Colors.primaryViolet : Colors.quaternaryViolet
   }
 
   const style = StyleSheet.create({
@@ -52,7 +53,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={TabBarIcons.Home}
-        fill={focused ? activeTabIconColor : inactiveTabIconColor}
+        fill={determineIconFill(focused)}
         accessible
         accessibilityLabel={t("label.home_icon")}
         width={size}
@@ -68,7 +69,7 @@ const MainTabNavigator: FunctionComponent = () => {
     const tabIcon = (
       <SvgXml
         xml={TabBarIcons.Exposure}
-        fill={focused ? activeTabIconColor : inactiveTabIconColor}
+        fill={determineIconFill(focused)}
         accessible
         accessibilityLabel={t("label.calendar_icon")}
         width={size}
@@ -85,7 +86,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={TabBarIcons.CheckInBox}
-        fill={focused ? activeTabIconColor : inactiveTabIconColor}
+        fill={determineIconFill(focused)}
         accessible
         accessibilityLabel={t("label.assessment_icon")}
         width={size}
@@ -98,7 +99,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={TabBarIcons.HorizontalDots}
-        fill={focused ? activeTabIconColor : inactiveTabIconColor}
+        fill={determineIconFill(focused)}
         accessible
         accessibilityLabel={t("label.more_icon")}
         width={size}
