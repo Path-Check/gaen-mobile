@@ -11,6 +11,7 @@ const HomeActive = require("./homeActive.png")
 const HomeInactive = require("./homeInactive.png")
 const HugEmoji = require("./hugEmoji.png")
 const IsolatePathBackground = require("./isolatePathBackground.png")
+const MinnesotaMap = require("./minnesotaMap.png")
 const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
 const PeopleHighFiving = require("./peopleHighFiving.png")
 const PeopleOnPhones = require("./peopleOnPhones.png")
@@ -37,6 +38,7 @@ export const Images = {
   HomeInactive,
   HugEmoji,
   IsolatePathBackground,
+  MinnesotaMap,
   MultipleCrossPathBackground,
   PeopleHighFiving,
   PeopleOnPhones,

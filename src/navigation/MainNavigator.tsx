@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
+  StackNavigationOptions,
 } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
-// import env from "react-native-config"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
@@ -15,6 +15,7 @@ import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
+import LanguageSelection from "../More/LanguageSelection"
 
 import { Headers, Colors } from "../styles"
 
@@ -24,7 +25,7 @@ const SCREEN_OPTIONS = {
   headerShown: false,
 }
 
-const HEADER_SCREEN_OPTIONS = {
+const headerScreenOptions: StackNavigationOptions = {
   headerStyle: {
     ...Headers.headerStyle,
   },
@@ -34,6 +35,12 @@ const HEADER_SCREEN_OPTIONS = {
   headerBackTitleVisible: false,
   headerTintColor: Colors.headerText,
 }
+const cardScreenOptions: StackNavigationOptions = {
+  ...TransitionPresets.ModalPresentationIOS,
+  headerShown: false,
+  cardOverlayEnabled: true,
+  cardShadowEnabled: true,
+}
 
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
@@ -41,7 +48,7 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {onboardingIsComplete ? (
+        {false ? (
           <>
             <Stack.Screen
               name={"App"}
@@ -61,7 +68,7 @@ const MainNavigator: FunctionComponent = () => {
               component={MoreInfo}
               options={{
                 title: "MORE INFO",
-                ...HEADER_SCREEN_OPTIONS,
+                ...headerScreenOptions,
               }}
             />
             <Stack.Screen
@@ -69,7 +76,7 @@ const MainNavigator: FunctionComponent = () => {
               component={ExposureDetail}
               options={{
                 title: "EXPOSURE",
-                ...HEADER_SCREEN_OPTIONS,
+                ...headerScreenOptions,
               }}
             />
           </>
@@ -88,12 +95,12 @@ const MainNavigator: FunctionComponent = () => {
             <Stack.Screen
               name={OnboardingScreens.ProtectPrivacy}
               component={ProtectPrivacy}
-              options={{
-                ...TransitionPresets.ModalPresentationIOS,
-                headerShown: false,
-                cardOverlayEnabled: true,
-                cardShadowEnabled: true,
-              }}
+              options={cardScreenOptions}
+            />
+            <Stack.Screen
+              name={OnboardingScreens.LanguageSelection}
+              component={LanguageSelection}
+              options={cardScreenOptions}
             />
           </>
         )}

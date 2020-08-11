@@ -170,6 +170,7 @@
     "self_assessment": "Self Assessment"
   },
   "onboarding": {
+    "select_language":"Select Language",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
