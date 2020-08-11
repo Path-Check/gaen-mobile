@@ -13,8 +13,8 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "./Home"
 import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
-import { isBluetoothEnabled } from "../gaen/nativeModule"
 import { isPlatformiOS } from "../utils/index"
+import { useBluetoothStatus } from "./useBluetoothStatus"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
@@ -34,12 +34,13 @@ jest.mock("../More/useApplicationInfo", () => {
     },
   }
 })
+jest.mock("./useBluetoothStatus.ts")
 
 describe("Home", () => {
   describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
-      const isBluetoothOn = "true"
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+      const isBluetoothOn = true
+      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
       const permissionProviderValue = createPermissionProviderValue(
@@ -81,8 +82,8 @@ describe("Home", () => {
 
   describe("When the enPermissionStatus is not enabled and not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", async () => {
-      const isBluetoothOn = "true"
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+      const isBluetoothOn = true
+      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = [
         "UNAUTHORIZED",
@@ -117,9 +118,9 @@ describe("Home", () => {
   })
 
   describe("When Bluetooth is off", () => {
-    it("renders an inactive message and a disabled message for bluetooth", () => {
-      const isBluetoothOn = "false"
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+    it("renders an inactive message and a disabled message for bluetooth", async () => {
+      const isBluetoothOn = false
+      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
       const permissionProviderValue = createPermissionProviderValue(
@@ -137,6 +138,7 @@ describe("Home", () => {
       const bluetoothStatusContainer = getByTestId(
         "home-bluetooth-status-container",
       )
+
       const bluetoothDisabledText = within(bluetoothStatusContainer).getByText(
         "Disabled",
       )
@@ -152,8 +154,8 @@ describe("Home", () => {
   describe("When Bluetooth is disabled", () => {
     it("it prompts the user to enable Bluetooth", async () => {
       expect.assertions(1)
-      const isBluetoothOn = "false"
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+      const isBluetoothOn = false
+      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
       const permissionProviderValue = createPermissionProviderValue(
