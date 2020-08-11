@@ -6,7 +6,6 @@ import {
 import { useTranslation } from "react-i18next"
 
 import ReportIssueForm from "./../ReportIssue/ReportIssueForm"
-
 import { ReportIssueScreen, ReportIssueScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
