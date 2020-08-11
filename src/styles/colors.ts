@@ -11,7 +11,7 @@ export const black = "#000000"
 export const white = "#ffffff"
 
 // Grays
-export const faintGray = "#f8f8f8"
+export const faintGray = "#f8f8ff"
 export const lightestGray = "#ededed"
 export const lighterGray = "#d3d3d3"
 export const lightGray = "#999999"
@@ -106,7 +106,7 @@ export const invertedLinkText = amberYellow
 export const errorText = primaryRed
 
 // Forms
-export const formInputBorder = tertiaryBackground
+export const formInputBorder = lightestGray
 export const placeholderTextColor = lightGray
 
 export const success = primaryGreen

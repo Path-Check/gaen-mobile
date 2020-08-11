@@ -162,10 +162,11 @@
     }
   },
   "navigation": {
-    "history": "History",
+    "exposure_history": "Exposure History",
     "home": "Home",
+    "report_issue": "Report Issue",
     "more": "More",
-    "self_assessment": "Health"
+    "self_assessment": "Self Assessment"
   },
   "onboarding": {
     "activation_header_title": "App Setup",

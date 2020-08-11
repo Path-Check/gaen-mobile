@@ -13,10 +13,10 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { useVersionInfo } from "./useApplicationInfo"
+import { useVersionInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
-import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
+import { reportAnIssue, ReportIssueError } from "../More/zendeskAPI"
 
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
@@ -87,9 +87,7 @@ const ReportIssueForm: FunctionComponent = () => {
 
       if (response.kind === "success") {
         clearInputs()
-        Alert.alert(t("common.success"), t("report_issue.success"), [
-          { onPress: navigation.goBack },
-        ])
+        Alert.alert(t("common.success"), t("report_issue.success"))
       } else {
         setErrorMessage(showError(response.error))
       }
@@ -112,80 +110,76 @@ const ReportIssueForm: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.backgroundImage}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={Spacing.tiny}
-          behavior={isIOS ? "padding" : undefined}
-        >
-          <View style={style.container}>
-            <View>
-              <GlobalText style={style.errorSubtitle}>
-                {errorMessage}
+    <SafeAreaView>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={Spacing.tiny}
+        behavior={isIOS ? "padding" : undefined}
+      >
+        <View style={style.container}>
+          <View>
+            <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
+
+            <View style={style.inputContainer}>
+              <GlobalText style={style.inputLabel}>
+                {t("report_issue.name")}
               </GlobalText>
-              <View style={style.inputContainer}>
-                <GlobalText style={style.inputLabel}>
-                  {t("report_issue.email")}
-                </GlobalText>
-                <TextInput
-                  accessibilityLabel={t("report_issue.email")}
-                  value={email}
-                  style={style.textInput}
-                  keyboardType="email-address"
-                  returnKeyType="done"
-                  onChangeText={handleOnChangeEmail}
-                  blurOnSubmit={false}
-                  onSubmitEditing={Keyboard.dismiss}
-                  autoCapitalize="none"
-                />
-              </View>
-
-              <View style={style.inputContainer}>
-                <GlobalText style={style.inputLabel}>
-                  {t("report_issue.name")}
-                </GlobalText>
-                <TextInput
-                  accessibilityLabel={t("report_issue.name")}
-                  value={name}
-                  style={style.textInput}
-                  keyboardType="default"
-                  returnKeyType="done"
-                  onChangeText={handleOnChangeName}
-                  blurOnSubmit={false}
-                  onSubmitEditing={Keyboard.dismiss}
-                  autoCapitalize={"none"}
-                />
-              </View>
-
-              <View style={style.inputContainer}>
-                <GlobalText style={style.inputLabel}>
-                  {t("report_issue.body")}
-                </GlobalText>
-                <TextInput
-                  accessibilityLabel={t("report_issue.body")}
-                  value={body}
-                  style={style.descriptionInput}
-                  keyboardType={"default"}
-                  returnKeyType={"done"}
-                  onChangeText={handleOnChangeBody}
-                  blurOnSubmit={false}
-                  onSubmitEditing={Keyboard.dismiss}
-                  multiline
-                />
-              </View>
+              <TextInput
+                accessibilityLabel={t("report_issue.name")}
+                value={name}
+                style={style.textInput}
+                keyboardType="default"
+                returnKeyType="done"
+                onChangeText={handleOnChangeName}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                autoCapitalize={"none"}
+              />
             </View>
-            {isLoading ? <LoadingIndicator /> : null}
 
-            <Button
-              onPress={handleOnPressSubmit}
-              label={t("common.submit")}
-              disabled={isDisabled}
-              loading={isLoading}
-            />
+            <View style={style.inputContainer}>
+              <GlobalText style={style.inputLabel}>
+                {t("report_issue.email")}
+              </GlobalText>
+              <TextInput
+                accessibilityLabel={t("report_issue.email")}
+                value={email}
+                style={style.textInput}
+                keyboardType="email-address"
+                returnKeyType="done"
+                onChangeText={handleOnChangeEmail}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                autoCapitalize="none"
+              />
+            </View>
+
+            <View style={style.inputContainer}>
+              <GlobalText style={style.inputLabel}>
+                {t("report_issue.body")}
+              </GlobalText>
+              <TextInput
+                accessibilityLabel={t("report_issue.body")}
+                value={body}
+                style={style.descriptionInput}
+                keyboardType={"default"}
+                returnKeyType={"done"}
+                onChangeText={handleOnChangeBody}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                multiline
+              />
+            </View>
           </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </View>
+          {isLoading ? <LoadingIndicator /> : null}
+          <Button
+            onPress={handleOnPressSubmit}
+            label={t("common.submit")}
+            disabled={isDisabled}
+            loading={isLoading}
+          />
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   )
 }
 
@@ -205,18 +199,9 @@ const LoadingIndicator = () => {
 const indicatorWidth = 120
 
 const style = StyleSheet.create({
-  backgroundImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-    backgroundColor: Colors.faintGray,
-    paddingBottom: Spacing.medium,
-  },
   container: {
     height: "100%",
-    justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
-    paddingTop: Spacing.large,
     backgroundColor: Colors.faintGray,
   },
   errorSubtitle: {
@@ -225,17 +210,15 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxSmall,
   },
   inputContainer: {
-    marginTop: Spacing.large,
+    marginBottom: Spacing.large,
   },
   inputLabel: {
-    ...Typography.description,
+    ...Typography.label,
     paddingBottom: Spacing.xxSmall,
   },
   textInput: {
+    ...Forms.textInputFormField,
     ...Typography.secondaryTextInput,
-    ...Outlines.textInputBorder,
-    padding: Spacing.xSmall,
-    borderColor: Colors.formInputBorder,
   },
   descriptionInput: {
     ...Forms.textInputFormField,

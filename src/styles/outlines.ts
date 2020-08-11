@@ -22,9 +22,9 @@ export const ovalBorder: ViewStyle = {
 }
 
 export const textInputBorder: ViewStyle = {
-  borderWidth: 2,
+  borderWidth: 1,
   borderRadius: 10,
-  borderColor: Colors.secondaryViolet,
+  borderColor: Colors.formInputBorder,
 }
 
 export const baseShadow: ViewStyle = {

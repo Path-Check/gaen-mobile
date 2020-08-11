@@ -4,7 +4,7 @@ import { Platform, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import FeedbackForm from "./ReportIssueForm"
-import * as API from "./zendeskAPI"
+import * as API from "../More/zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"
 jest.mock("./useApplicationInfo", () => {

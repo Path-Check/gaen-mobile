@@ -6,17 +6,16 @@ import * as Outlines from "./outlines"
 import * as Typography from "./typography"
 
 export const textInputFormField: TextStyle = {
-  flex: 1,
   color: Colors.primaryText,
   backgroundColor: Colors.primaryBackground,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.formInputBorder,
-  borderWidth: Outlines.thin,
+  borderWidth: Outlines.hairline,
   justifyContent: "center",
   fontSize: Typography.medium,
-  paddingTop: Spacing.medium,
+  paddingTop: Spacing.small,
   paddingRight: Spacing.medium,
-  paddingBottom: Spacing.medium,
+  paddingBottom: Spacing.small,
   paddingLeft: Spacing.medium,
 }
 

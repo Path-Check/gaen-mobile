@@ -8,6 +8,7 @@ export const headerStyle: ViewStyle = {
 }
 
 export const headerTitleStyle: TextStyle = {
+  ...Typography.base,
   color: Colors.headerText,
   letterSpacing: Typography.mediumLetterSpacing,
   textTransform: "uppercase",
