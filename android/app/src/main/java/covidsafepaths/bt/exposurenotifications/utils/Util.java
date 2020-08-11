@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -51,7 +52,7 @@ public class Util {
     public static int getRandomNumber() {
         final int min = 20;
         final int max = 200;
-        return new Random().nextInt((max - min) + 1) + min;
+        return new SecureRandom().nextInt((max - min) + 1) + min;
     }
 
 
