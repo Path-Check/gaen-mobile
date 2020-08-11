@@ -14,7 +14,7 @@ import MoreStack from "./MoreStack"
 import { useExposureContext } from "../ExposureContext"
 
 import { Screens, Stacks } from "./index"
-import * as Icons from "../assets/svgs/TabBarNav"
+import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Affordances, Colors } from "../styles"
 
 const Tab = createBottomTabNavigator()
@@ -24,6 +24,9 @@ const MainTabNavigator: FunctionComponent = () => {
   const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+
+  const activeTabIconColor = Colors.primaryBlue
+  const inactiveTabIconColor = Colors.quaternaryViolet
 
   const applyBadge = (icon: JSX.Element) => {
     return (
@@ -48,7 +51,8 @@ const MainTabNavigator: FunctionComponent = () => {
   const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
       <SvgXml
-        xml={focused ? Icons.HomeActive : Icons.HomeInactive}
+        xml={TabBarIcons.Home}
+        fill={focused ? activeTabIconColor : inactiveTabIconColor}
         accessible
         accessibilityLabel={t("label.home_icon")}
         width={size}
@@ -63,7 +67,8 @@ const MainTabNavigator: FunctionComponent = () => {
   }) => {
     const tabIcon = (
       <SvgXml
-        xml={focused ? Icons.HistoryActive : Icons.HistoryInactive}
+        xml={TabBarIcons.Exposure}
+        fill={focused ? activeTabIconColor : inactiveTabIconColor}
         accessible
         accessibilityLabel={t("label.calendar_icon")}
         width={size}
@@ -79,9 +84,8 @@ const MainTabNavigator: FunctionComponent = () => {
   }) => {
     return (
       <SvgXml
-        xml={
-          focused ? Icons.SelfAssessmentActive : Icons.SelfAssessmentInactive
-        }
+        xml={TabBarIcons.Home}
+        fill={focused ? activeTabIconColor : inactiveTabIconColor}
         accessible
         accessibilityLabel={t("label.assessment_icon")}
         width={size}
@@ -93,7 +97,8 @@ const MainTabNavigator: FunctionComponent = () => {
   const MoreIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
       <SvgXml
-        xml={focused ? Icons.MoreActive : Icons.MoreInactive}
+        xml={TabBarIcons.HorizontalDots}
+        fill={focused ? activeTabIconColor : inactiveTabIconColor}
         accessible
         accessibilityLabel={t("label.more_icon")}
         width={size}
@@ -107,11 +112,9 @@ const MainTabNavigator: FunctionComponent = () => {
       initialRouteName={Screens.Home}
       tabBarOptions={{
         showLabel: false,
-        activeTintColor: Colors.white,
-        inactiveTintColor: Colors.tertiaryViolet,
         style: {
-          backgroundColor: Colors.headerBackground,
-          borderTopColor: Colors.headerBackground,
+          backgroundColor: Colors.white,
+          borderTopColor: Colors.lighterGray,
           height: insets.bottom + 60,
         },
       }}
