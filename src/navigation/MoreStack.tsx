@@ -10,7 +10,6 @@ import AboutScreen from "./../More/About"
 import LicensesScreen from "./../More/Licenses"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
-import ENSubmitDebugForm from "./../More/ENSubmitDebugForm"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
 import LanguageSelection from "../More/LanguageSelection"
 
@@ -64,11 +63,6 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKeyScreen}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.ENSubmitDebugForm}
-        component={ENSubmitDebugForm}
-        options={{ headerTitle: t("screen_titles.debug_form") }}
       />
       <Stack.Screen
         name={MoreStackScreens.ReportIssueForm}
