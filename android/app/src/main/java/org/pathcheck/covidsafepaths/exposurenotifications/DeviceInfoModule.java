@@ -64,7 +64,7 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void isBluetoothEnabled(final Promise promise) {
-        promise.resolve(BluetoothAdapter.getDefaultAdapter().isEnabled());
+        promise.resolve(BluetoothAdapter.getDefaultAdapter() != null && BluetoothAdapter.getDefaultAdapter().isEnabled());
     }
 
     @ReactMethod
