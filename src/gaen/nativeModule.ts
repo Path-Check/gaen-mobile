@@ -147,10 +147,6 @@ export const isBluetoothEnabled = async (): Promise<string> => {
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
-export const fetchDebugLog = async (): Promise<string> => {
-  return debugModule.fetchDebugLog()
-}
-
 export const forceAppCrash = async (): Promise<void> => {
   return debugModule.forceAppCrash()
 }

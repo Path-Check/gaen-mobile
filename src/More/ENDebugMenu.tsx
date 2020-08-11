@@ -121,12 +121,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 NativeModule.forceAppCrash()
               }}
             />
-            <DebugMenuListItem
-              label="Submit Debug Log"
-              onPress={() => {
-                navigation.navigate(Screens.ENSubmitDebugForm)
-              }}
-            />
           </View>
           {__DEV__ ? (
             <View style={style.section}>
