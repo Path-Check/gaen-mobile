@@ -16,12 +16,12 @@ describe("Complete", () => {
     ).toBeDefined()
   })
 
-  it("navigates to the more screen when user press on done", () => {
+  it("navigates to the home screen when user press on done", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(<Complete />)
 
     fireEvent.press(getByLabelText("Done"))
-    expect(navigateSpy).toHaveBeenCalledWith("More")
+    expect(navigateSpy).toHaveBeenCalledWith("Home")
   })
 })

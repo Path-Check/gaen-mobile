@@ -28,7 +28,7 @@ describe("PublishConsentScreen", () => {
   })
 
   describe("when the context is missing hmacKey and certificate", () => {
-    it("displays warning and prompts user to go back to more screen", () => {
+    it("displays warning and prompts user to go back to home screen", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const { getByText } = render(
@@ -46,7 +46,7 @@ describe("PublishConsentScreen", () => {
       expect(getByText("Invalid State")).toBeDefined()
       fireEvent.press(getByText("Go Back"))
 
-      expect(navigateSpy).toHaveBeenCalledWith("More")
+      expect(navigateSpy).toHaveBeenCalledWith("Home")
     })
   })
 })
