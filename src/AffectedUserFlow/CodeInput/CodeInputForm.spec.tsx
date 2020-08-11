@@ -25,7 +25,7 @@ describe("CodeInputForm", () => {
     expect(getByTestId("code-input")).toHaveTextContent("")
   })
 
-  it("navigates to the more screen when user cancels the process", () => {
+  it("navigates to the home screen when user cancels the process", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(
@@ -35,7 +35,7 @@ describe("CodeInputForm", () => {
     )
 
     fireEvent.press(getByLabelText("Cancel"))
-    expect(navigateSpy).toHaveBeenCalledWith("More")
+    expect(navigateSpy).toHaveBeenCalledWith("Home")
   })
 
   describe("on a successful code verification", () => {

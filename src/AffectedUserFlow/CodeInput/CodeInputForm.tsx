@@ -20,7 +20,7 @@ import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
 
-import { Screens, Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import {
   Spacing,
   Buttons,
@@ -52,7 +52,7 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const handleOnPressSubmit = async () => {

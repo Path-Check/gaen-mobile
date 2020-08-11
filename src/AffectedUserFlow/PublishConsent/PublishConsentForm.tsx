@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native"
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
 
-import { Screens, Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import { Icons, Images } from "../../assets"
 import {
   Outlines,
@@ -53,7 +53,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const title = t("export.publish_consent_title_bluetooth")

@@ -12,7 +12,7 @@ import { Alert } from "react-native"
 jest.mock("@react-navigation/native")
 
 describe("PublishConsentScreen", () => {
-  it("navigates to the main settings screen when user cancels", () => {
+  it("navigates to the home screen when user cancels", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(
@@ -23,7 +23,7 @@ describe("PublishConsentScreen", () => {
 
     fireEvent.press(getByLabelText("Cancel"))
 
-    expect(navigateSpy).toHaveBeenCalledWith("More")
+    expect(navigateSpy).toHaveBeenCalledWith("Home")
   })
 
   it("displays the consent title and body", () => {
