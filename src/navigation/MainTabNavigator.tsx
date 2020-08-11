@@ -34,15 +34,15 @@ const MainTabNavigator: FunctionComponent = () => {
     )
   }
 
-  const determineIconFill = (focused: boolean) => {
-    return focused ? Colors.primaryViolet : Colors.quaternaryViolet
-  }
-
   const style = StyleSheet.create({
     iconBadge: {
       ...Affordances.iconBadge,
     },
   })
+
+  const determineIconFill = (focused: boolean) => {
+    return focused ? Colors.primaryViolet : Colors.quaternaryViolet
+  }
 
   interface TabBarIconProps {
     focused: boolean
