@@ -2,22 +2,14 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import {
-  NavigationParams,
-  NavigationScreenProp,
-  NavigationState,
-} from "react-navigation"
+import { useNavigation } from "@react-navigation/native"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
-import { Screens, useStatusBarEffect } from "../navigation"
+import { MoreStackScreens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
-
-interface MenuScreenProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>
-}
 
 interface LanguageSelectionListItemProps {
   icon: string
@@ -44,7 +36,8 @@ const LanguageSelectionListItem = ({
   </TouchableOpacity>
 )
 
-const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
+const MenuScreen: FunctionComponent = () => {
+  const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
@@ -82,28 +75,26 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
           label={languageName || t("label.unknown")}
           icon={Icons.LanguagesIcon}
           iconLabel={t("label.language_icon")}
-          onPress={() => navigation.navigate(Screens.LanguageSelection)}
+          onPress={() =>
+            navigation.navigate(MoreStackScreens.LanguageSelection)
+          }
         />
       </View>
 
       <View style={style.section}>
         <SettingsListItem
           label={t("screen_titles.about")}
-          onPress={() => navigation.navigate(Screens.About)}
+          onPress={() => navigation.navigate(MoreStackScreens.About)}
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(Screens.Licenses)}
-        />
-        <SettingsListItem
-          label={t("screen_titles.report_issue")}
-          onPress={() => navigation.navigate(Screens.ReportIssueForm)}
+          onPress={() => navigation.navigate(MoreStackScreens.Licenses)}
         />
       </View>
       <View style={style.section}>
         <SettingsListItem
           label="EN Debug Menu"
-          onPress={() => navigation.navigate(Screens.ENDebugMenu)}
+          onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
         />
       </View>
     </ScrollView>

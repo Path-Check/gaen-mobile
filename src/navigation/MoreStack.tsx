@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   StackNavigationOptions,
+  TransitionPresets,
 } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
@@ -53,7 +54,12 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.LanguageSelection}
         component={LanguageSelection}
-        options={{ headerTitle: t("screen_titles.select_language") }}
+        options={{
+          ...TransitionPresets.ModalPresentationIOS,
+          headerShown: false,
+          cardOverlayEnabled: true,
+          cardShadowEnabled: true,
+        }}
       />
       <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}
