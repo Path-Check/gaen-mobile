@@ -25,7 +25,7 @@ const MainTabNavigator: FunctionComponent = () => {
   const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
-  const activeTabIconColor = Colors.primaryBlue
+  const activeTabIconColor = Colors.primaryViolet
   const inactiveTabIconColor = Colors.quaternaryViolet
 
   const applyBadge = (icon: JSX.Element) => {
@@ -84,7 +84,7 @@ const MainTabNavigator: FunctionComponent = () => {
   }) => {
     return (
       <SvgXml
-        xml={TabBarIcons.Home}
+        xml={TabBarIcons.CheckInBox}
         fill={focused ? activeTabIconColor : inactiveTabIconColor}
         accessible
         accessibilityLabel={t("label.assessment_icon")}
