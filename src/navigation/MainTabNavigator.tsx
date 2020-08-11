@@ -52,7 +52,7 @@ const MainTabNavigator: FunctionComponent = () => {
   const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
       <SvgXml
-        xml={TabBarIcons.Home}
+        xml={TabBarIcons.House}
         fill={determineIconFill(focused)}
         accessible
         accessibilityLabel={t("label.home_icon")}
