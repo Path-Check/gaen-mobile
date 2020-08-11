@@ -35,19 +35,12 @@ describe("calculateHmac", () => {
       RNSimpleCrypto.utils,
       "convertArrayBufferToBase64",
     )
-    const base64TekKey = "base64TekKey"
-    convertArrayBufferToBase64Spy.mockReturnValueOnce(base64TekKey)
     const base64Signature = "base64Signature"
     convertArrayBufferToBase64Spy.mockReturnValueOnce(base64Signature)
     const base64Key = "base64Key"
     convertArrayBufferToBase64Spy.mockReturnValueOnce(base64Key)
 
-    return [
-      convertArrayBufferToBase64Spy,
-      base64Signature,
-      base64Key,
-      base64TekKey,
-    ]
+    return [convertArrayBufferToBase64Spy, base64Signature, base64Key]
   }
 
   it("serializes and encrypts the exposure keys into a payload", async () => {
@@ -61,7 +54,6 @@ describe("calculateHmac", () => {
       convertArrayBufferToBase64Spy,
       base64Signature,
       base64Key,
-      base64TekKey,
     ] = mockConvertArrayBufferToBase64()
     const key = "key"
     const rollingStartNumber = 1
@@ -73,7 +65,7 @@ describe("calculateHmac", () => {
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${base64TekKey}.${rollingStartNumber}.${rollingPeriod}.${transmissionRisk}`
+    const serializedKey = `${key}.${rollingStartNumber}.${rollingPeriod}.${transmissionRisk}`
 
     const hmacKey = await calculateHmac([exposureKey])
 
@@ -85,22 +77,47 @@ describe("calculateHmac", () => {
     jest.resetAllMocks()
   })
 
-  it("does not include the risk if all keys have risk of 0", async () => {
+  it("sorts the keys lexicographically", async () => {
     const [convertUtf8ToArrayBufferSpy, ,] = mockConvertUtf8ToArray()
     mockHmac256()
-    const [, , , base64TekKey] = mockConvertArrayBufferToBase64()
-    const key = "key"
+    const firstKey = "1key"
+    const secondKey = "=Key"
+    const thirdKey = "Key"
+    const fourthKey = "key"
     const rollingStartNumber = 1
     const rollingPeriod = 2
     const transmissionRisk = 0
-    const exposureKey = {
-      key,
+    const firstExposureKey = {
+      key: firstKey,
       rollingPeriod,
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${base64TekKey}.${rollingStartNumber}.${rollingPeriod}`
-    await calculateHmac([exposureKey])
+    const secondExposureKey = {
+      key: secondKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const thirdExposureKey = {
+      key: thirdKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const fourthExposureKey = {
+      key: fourthKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const serializedKey = `${firstKey}.1.2.0,${secondKey}.1.2.0,${thirdKey}.1.2.0,${fourthKey}.1.2.0`
+    await calculateHmac([
+      thirdExposureKey,
+      fourthExposureKey,
+      firstExposureKey,
+      secondExposureKey,
+    ])
 
     expect(convertUtf8ToArrayBufferSpy).toHaveBeenCalledWith(serializedKey)
     jest.resetAllMocks()
