@@ -47,7 +47,6 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "PathCheck",
       "all_services_on_subheader": "Powiadomienia o narażeniu są włączone",
       "tracing_off_button": "Zezwolenie na powiadomienia o narażeniu",
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
@@ -55,19 +54,9 @@
     }
   },
   "label": {
-    "launch_disable_exposure_notif": "Nie włączaj",
-    "launch_enable_exposure_notif": "Włącz",
     "launch_enable_notif": "Włącz powiadomienia",
     "launch_get_started": "Zaczynamy",
-    "launch_next": "Dalej",
     "launch_screen1_header": "Witamy w PathCheck",
-    "launch_screen2_header_bluetooth": "Twój telefon zapamiętuje inne napotkane urządzenia, ale nie identyfikuje Cię w stosunku do innych osób.",
-    "launch_screen2_subheader_bluetooth": "Data i czas trwania spotkania są rejestrowane wraz z oszacowaniem, jak blisko mogły znajdować się dwa telefony.",
-    "launch_screen3_header_bluetooth": "Wszystkie dane są szyfrowane i prywatnie przechowywane w Twoim telefonie.",
-    "launch_screen3_subheader_bluetooth": "Uzyskaj szczegóły dotyczące spotkania, takie jak data, czas trwania i siła sygnału Bluetooth.",
-    "launch_screen4_header_bluetooth": "Jeśli wynik testu na obecność wirusa wywołującego COVID-19 jest pozytywny, możesz anonimowo udostępnić diagnozę.",
-    "launch_screen4_subheader_bluetooth": "To pomaga innym w Twojej społeczności powstrzymać rozprzestrzenianie się wirusa.",
-    "launch_set_up_phone_bluetooth": "Dalej",
     "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
     "privacy_policy": "Polityka prywatności",
     "unknown": "nieznany"
@@ -76,10 +65,6 @@
     "history": "Historia",
     "more": "Więcej",
     "self_assessment": "Zdrowie"
-  },
-  "onboarding": {
-    "dont_enable_proximity_tracing": "Nie włączaj",
-    "enable_proximity_tracing": "Włącz"
   },
   "screen_titles": {
     "about": "O nas",

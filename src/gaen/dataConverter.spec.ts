@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 
 import { DateTimeUtils } from "../utils"
-import { Possible } from "../exposure"
+import { ExposureDatum } from "../exposure"
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
 describe("toExposureInfo", () => {
@@ -27,8 +27,7 @@ describe("toExposureInfo", () => {
           duration,
         },
       ]
-      const expected: Possible = {
-        kind: "Possible",
+      const expected: ExposureDatum = {
         date: DateTimeUtils.beginningOfDay(twoDaysAgo),
         duration: duration,
       }
@@ -64,8 +63,7 @@ describe("toExposureInfo", () => {
           duration: duration3,
         },
       ]
-      const expected: Possible = {
-        kind: "Possible",
+      const expected: ExposureDatum = {
         date: DateTimeUtils.beginningOfDay(today),
         duration: duration1 + duration2 + duration3,
       }

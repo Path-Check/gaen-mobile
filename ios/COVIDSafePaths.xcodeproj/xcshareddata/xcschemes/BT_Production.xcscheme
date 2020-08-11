@@ -99,6 +99,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release-BT"
+      customArchiveName = "BT"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

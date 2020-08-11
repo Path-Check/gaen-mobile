@@ -6,7 +6,6 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   Platform,
-  TouchableOpacity,
   TextInput,
   View,
   Keyboard,
@@ -17,15 +16,8 @@ import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
 import * as API from "./debugAPI"
 
-import {
-  Spacing,
-  Buttons,
-  Layout,
-  Forms,
-  Colors,
-  Outlines,
-  Typography,
-} from "../styles"
+import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
+import { Button } from "../components"
 
 const defaultErrorMessage = " "
 
@@ -131,19 +123,11 @@ const CodeInputScreen: FunctionComponent = () => {
             </View>
             {isLoading ? <LoadingIndicator /> : null}
 
-            <View>
-              <TouchableOpacity
-                onPress={handleOnPressSubmit}
-                accessible
-                accessibilityLabel={t("common.submit")}
-                accessibilityRole="button"
-                style={style.button}
-              >
-                <GlobalText style={style.buttonText}>
-                  {t("common.submit")}
-                </GlobalText>
-              </TouchableOpacity>
-            </View>
+            <Button
+              onPress={handleOnPressSubmit}
+              label={t("common.submit")}
+              loading={isLoading}
+            />
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -172,13 +156,14 @@ const style = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
     backgroundColor: Colors.faintGray,
+    paddingBottom: Spacing.medium,
   },
   container: {
     height: "100%",
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.large,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.faintGray,
   },
   headerContainer: {
     marginBottom: Spacing.small,
@@ -223,12 +208,6 @@ const style = StyleSheet.create({
     height: indicatorWidth,
     backgroundColor: Colors.transparentDarkGray,
     borderRadius: Outlines.baseBorderRadius,
-  },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonPrimaryText,
   },
 })
 

@@ -1,101 +1,269 @@
 import React from "react"
-import { Alert, Platform } from "react-native"
-import { render, cleanup, wait, fireEvent } from "@testing-library/react-native"
+import { Alert } from "react-native"
+import {
+  render,
+  waitFor,
+  fireEvent,
+  within,
+} from "@testing-library/react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
-import { ENPermissionStatus } from "../PermissionsContext"
 import Home from "./Home"
+import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
+import { PermissionStatus } from "../permissionStatus"
+import { isBluetoothEnabled } from "../gaen/nativeModule"
+import { isPlatformiOS } from "../utils/index"
 
-afterEach(cleanup)
+jest.mock("@react-navigation/native")
+;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
+
+jest.mock("react-native-safe-area-context")
+;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
+
+jest.mock("../gaen/nativeModule")
+jest.mock("../utils/index")
 
 describe("Home", () => {
-  describe("When the enPermissionStatus is enabled and authorized", () => {
-    it("renders a notifications are enabled message", () => {
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
-      const requestPermission = jest.fn()
+  describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
+    it("renders an active message", async () => {
+      const isBluetoothOn = "true"
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
 
-      const { getByTestId, queryByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
+      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
       )
 
       const header = getByTestId("home-header")
       const subheader = getByTestId("home-subheader")
-      const button = queryByTestId("home-request-permissions-button")
+      const bluetoothStatusContainer = getByTestId(
+        "home-bluetooth-status-container",
+      )
+      const proximityTracingStatusContainer = getByTestId(
+        "home-proximity-tracing-status-container",
+      )
 
-      expect(header).toHaveTextContent("PathCheck")
-      expect(subheader).toHaveTextContent("Exposure notifications are on")
-      expect(button).toBeNull()
+      await waitFor(() => {
+        const bluetoothEnabledText = within(bluetoothStatusContainer).getByText(
+          "Enabled",
+        )
+        const proximityTracingEnabledText = within(
+          proximityTracingStatusContainer,
+        ).getByText("Enabled")
+
+        expect(header).toHaveTextContent("Active")
+        expect(subheader).toHaveTextContent(
+          "COVIDaware will remain active after the app has been closed",
+        )
+        expect(bluetoothEnabledText).toBeDefined()
+        expect(proximityTracingEnabledText).toBeDefined()
+      })
     })
   })
 
-  describe("When the enPermissionStatus is not enabled", () => {
-    describe("when the enPermissionStatus is not authorized", () => {
-      it("displays an alert dialog if exposure notifications are not authorized", async () => {
+  describe("When the enPermissionStatus is not enabled and not authorized", () => {
+    it("renders an inactive message and a disabled message for proximity tracing", async () => {
+      const isBluetoothOn = "true"
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+
+      const enPermissionStatus: ENPermissionStatus = [
+        "UNAUTHORIZED",
+        "DISABLED",
+      ]
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const header = getByTestId("home-header")
+      const subheader = getByTestId("home-subheader")
+      const proximityTracingStatusContainer = getByTestId(
+        "home-proximity-tracing-status-container",
+      )
+      const proximityTracingDisabledText = within(
+        proximityTracingStatusContainer,
+      ).getByText("Disabled")
+
+      await waitFor(() => {
+        expect(header).toHaveTextContent("Inactive")
+        expect(subheader).toHaveTextContent(
+          "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+        )
+        expect(proximityTracingDisabledText).toBeDefined()
+      })
+    })
+  })
+
+  describe("When Bluetooth is off", () => {
+    it("renders an inactive message and a disabled message for bluetooth", async () => {
+      const isBluetoothOn = "false"
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+
+      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const header = getByTestId("home-header")
+      const subheader = getByTestId("home-subheader")
+      const bluetoothStatusContainer = getByTestId(
+        "home-bluetooth-status-container",
+      )
+      const bluetoothDisabledText = within(bluetoothStatusContainer).getByText(
+        "Disabled",
+      )
+
+      await waitFor(() => {
+        expect(header).toHaveTextContent("Inactive")
+        expect(subheader).toHaveTextContent(
+          "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+        )
+        expect(bluetoothDisabledText).toBeDefined()
+      })
+    })
+  })
+
+  describe("When Bluetooth is disabled", () => {
+    it("it prompts the user to enable Bluetooth", async () => {
+      expect.assertions(1)
+      const isBluetoothOn = "false"
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
+
+      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const fixBluetoothButton = getByTestId("home-bluetooth-status-container")
+      const alert = jest.spyOn(Alert, "alert")
+
+      await waitFor(async () => {
+        fireEvent.press(fixBluetoothButton)
+        await waitFor(() => {
+          expect(alert).toHaveBeenCalledWith(
+            "Enable Bluetooth in Settings",
+            "Enable Bluetooth in the Settings app",
+            [{ text: "Okay" }],
+          )
+        })
+      })
+    })
+  })
+
+  describe("When proximity tracing is disabled", () => {
+    describe("when enPermissionStatus is authorized but not enabled", () => {
+      it("requests exposure notification to be enabled", async () => {
+        expect.assertions(1)
+
         const enPermissionStatus: ENPermissionStatus = [
-          "UNAUTHORIZED",
+          "AUTHORIZED",
           "DISABLED",
         ]
         const requestPermission = jest.fn()
-        const alert = jest.spyOn(Alert, "alert")
+        const permissionProviderValue = createPermissionProviderValue(
+          enPermissionStatus,
+          requestPermission,
+        )
 
         const { getByTestId } = render(
-          <Home
-            enPermissionStatus={enPermissionStatus}
-            requestPermission={requestPermission}
-          />,
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <Home />
+          </PermissionsContext.Provider>,
         )
-        const button = getByTestId("home-request-permissions-button")
 
-        fireEvent.press(button)
-        await wait(() => {
-          if (Platform.OS === "ios") {
-            expect(alert).toHaveBeenCalled()
-          } else {
-            expect(alert).not.toHaveBeenCalled()
-          }
+        const fixProximityTracingButton = getByTestId(
+          "home-proximity-tracing-status-container",
+        )
+
+        await waitFor(async () => {
+          fireEvent.press(fixProximityTracingButton)
+          await waitFor(() => {
+            expect(requestPermission).toHaveBeenCalled()
+          })
         })
       })
     })
 
-    it("it renders a notification are not enabled message", () => {
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "DISABLED"]
-      const requestPermission = jest.fn()
+    describe("when enPermissionStatus is unauthorized", () => {
+      describe("when the platform is iOS", () => {
+        it("shows an unauthorized alert", async () => {
+          expect.assertions(1)
+          ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
-      const { getByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
-      )
+          const enPermissionStatus: ENPermissionStatus = [
+            "UNAUTHORIZED",
+            "DISABLED",
+          ]
+          const permissionProviderValue = createPermissionProviderValue(
+            enPermissionStatus,
+          )
 
-      const header = getByTestId("home-header")
-      const subheader = getByTestId("home-subheader")
+          const { getByTestId } = render(
+            <PermissionsContext.Provider value={permissionProviderValue}>
+              <Home />
+            </PermissionsContext.Provider>,
+          )
 
-      expect(header).toHaveTextContent("Exposure Notifications Disabled")
-      expect(subheader).toHaveTextContent(
-        "Enable Exposure Notifications to receive information about possible exposures",
-      )
-    })
+          const fixProximityTracingButton = getByTestId(
+            "home-proximity-tracing-status-container",
+          )
+          const alert = jest.spyOn(Alert, "alert")
 
-    it("it renders an Enable Notifications button which requests permissions", async () => {
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "DISABLED"]
-      const requestPermission = jest.fn()
-
-      const { getByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
-      )
-      const button = getByTestId("home-request-permissions-button")
-
-      fireEvent.press(button)
-      await wait(() => {
-        expect(requestPermission).toHaveBeenCalled()
+          await waitFor(async () => {
+            fireEvent.press(fixProximityTracingButton)
+            await waitFor(() => {
+              expect(alert).toHaveBeenCalledWith(
+                "Authorize in Settings",
+                "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
+                [expect.objectContaining({ text: "Open Settings" })],
+              )
+            })
+          })
+        })
       })
     })
   })
 })
+
+const createPermissionProviderValue = (
+  enPermissionStatus: ENPermissionStatus,
+  requestPermission: () => void = () => {},
+) => {
+  return {
+    notification: {
+      status: PermissionStatus.UNKNOWN,
+      check: () => {},
+      request: () => {},
+    },
+    exposureNotifications: {
+      status: enPermissionStatus,
+      check: () => {},
+      request: requestPermission,
+    },
+  }
+}

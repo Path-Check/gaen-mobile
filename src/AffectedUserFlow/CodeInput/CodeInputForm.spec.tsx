@@ -1,5 +1,5 @@
 import React from "react"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
 
@@ -25,7 +25,7 @@ describe("CodeInputForm", () => {
     expect(getByTestId("code-input")).toHaveTextContent("")
   })
 
-  it("navigates to the more screen when user cancels the process", () => {
+  it("navigates to the home screen when user cancels the process", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(
@@ -35,7 +35,7 @@ describe("CodeInputForm", () => {
     )
 
     fireEvent.press(getByLabelText("Cancel"))
-    expect(navigateSpy).toHaveBeenCalledWith("More")
+    expect(navigateSpy).toHaveBeenCalledWith("Home")
   })
 
   describe("on a successful code verification", () => {
@@ -84,7 +84,7 @@ describe("CodeInputForm", () => {
       fireEvent.changeText(getByTestId("code-input"), code)
       fireEvent.press(getByLabelText("Submit"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(apiSpy).toHaveBeenCalledWith(code)
         expect(postTokenSpy).toHaveBeenCalledWith(verificationToken, hmacDigest)
         expect(navigateSpy).toHaveBeenCalledWith(
@@ -129,7 +129,7 @@ describe("CodeInputForm", () => {
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Submit"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(navigateSpy).not.toHaveBeenCalled()
         expect(getByText("token meta data mismatch")).toBeDefined()
       })
@@ -153,7 +153,7 @@ describe("CodeInputForm", () => {
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Submit"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(getByText("Try a different code")).toBeDefined()
       })
     })
@@ -174,7 +174,7 @@ describe("CodeInputForm", () => {
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Submit"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(
           getByText("Verification code has already been used"),
         ).toBeDefined()
@@ -197,7 +197,7 @@ describe("CodeInputForm", () => {
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Submit"))
 
-      await wait(() => {
+      await waitFor(() => {
         expect(getByText("Try a different code")).toBeDefined()
       })
     })

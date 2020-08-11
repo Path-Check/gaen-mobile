@@ -24,7 +24,8 @@ platform :android do
   desc "Build a Debug AAB"
   lane :debug_bt do
     gradle(
-      task: "clean assembleDebug",
+      task: "assemble",
+      build_type: "debug",
       print_command: false,
     )
   end
@@ -82,7 +83,7 @@ platform :android do
       notify_testers: false,
       destinations: "Collaborators",
       release_notes: changeLogs,
-      file: "app/build/outputs/apk/release/app-" + options[:apkSuffix] + "-release.apk"
+      file: options[:apkPath]
     )
   end
 

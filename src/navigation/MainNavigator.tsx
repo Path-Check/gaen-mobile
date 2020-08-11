@@ -10,10 +10,11 @@ import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
 import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import { Screens, Stacks } from "./index"
+import { OnboardingScreens, Screens, Stacks } from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
+import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
 
 import { Headers, Colors } from "../styles"
 
@@ -83,6 +84,16 @@ const MainNavigator: FunctionComponent = () => {
               name={Stacks.Activation}
               component={ActivationStack}
               options={{ ...SCREEN_OPTIONS }}
+            />
+            <Stack.Screen
+              name={OnboardingScreens.ProtectPrivacy}
+              component={ProtectPrivacy}
+              options={{
+                ...TransitionPresets.ModalPresentationIOS,
+                headerShown: false,
+                cardOverlayEnabled: true,
+                cardShadowEnabled: true,
+              }}
             />
           </>
         )}

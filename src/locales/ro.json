@@ -9,15 +9,9 @@
   "common": {
     "next": "Înainte"
   },
-  "home": {
-    "bluetooth": {
-      "all_services_on_header": "PathCheck"
-    }
-  },
   "label": {
     "launch_enable_notif": "Permite Notificari",
     "launch_get_started": "Începe",
-    "launch_next": "Înainte",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
   },
   "screen_titles": {

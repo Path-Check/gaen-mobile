@@ -24,9 +24,11 @@ export const steelGray = "#9BA0AA"
 // Reds
 const red = "#eb0000"
 const emergencyRed = "#D00000"
+const calmRed = "#ff9e9e"
 
 export const primaryRed = red
 export const secondaryRed = emergencyRed
+export const tertiaryRed = calmRed
 
 // Blues
 const royalBlue = "#4051db"

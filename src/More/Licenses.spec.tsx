@@ -1,6 +1,6 @@
 import React from "react"
 import "react-native"
-import { render, wait } from "@testing-library/react-native"
+import { render, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 import { useApplicationName } from "./useApplicationInfo"
@@ -22,7 +22,7 @@ describe("LicensesScreen", () => {
 
     const { getByText } = render(<LicensesScreen />)
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText(applicationName)).toBeDefined()
     })
   })

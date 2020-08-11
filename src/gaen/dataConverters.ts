@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-import { Possible, ExposureDatum } from "../exposure"
+import { ExposureDatum } from "../exposure"
 
 type UUID = string
 type Posix = number
@@ -14,33 +14,37 @@ export interface RawExposure {
 export const toExposureInfo = (
   rawExposures: RawExposure[],
 ): ExposureDatum[] => {
-  const groupedExposures = rawExposures.map(toPossible).reduce(groupByDate, {})
+  const groupedExposures = rawExposures
+    .map(toExposureDatum)
+    .reduce(groupByDate, {})
   return Object.values(groupedExposures).sort((a, b) => b.date - a.date)
 }
 
-const toPossible = (r: RawExposure): Possible => {
+const toExposureDatum = (r: RawExposure): ExposureDatum => {
   const beginningOfDay = (date: Posix) => dayjs(date).startOf("day")
   return {
-    kind: "Possible",
     date: beginningOfDay(r.date).valueOf(),
     duration: r.duration,
   }
 }
 
-const combinePossibles = (a: Possible, b: Possible): Possible => {
+const combineDatum = (
+  firstDatum: ExposureDatum,
+  secondDatum: ExposureDatum,
+): ExposureDatum => {
   return {
-    ...a,
-    duration: a.duration + b.duration,
+    ...firstDatum,
+    duration: firstDatum.duration + secondDatum.duration,
   }
 }
 
 const groupByDate = (
-  groupedExposures: Record<Posix, Possible>,
-  exposure: Possible,
-): Record<Posix, Possible> => {
+  groupedExposures: Record<Posix, ExposureDatum>,
+  exposure: ExposureDatum,
+): Record<Posix, ExposureDatum> => {
   const date = exposure.date
   if (groupedExposures[date]) {
-    groupedExposures[date] = combinePossibles(groupedExposures[date], exposure)
+    groupedExposures[date] = combineDatum(groupedExposures[date], exposure)
   } else {
     groupedExposures[date] = exposure
   }

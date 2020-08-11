@@ -1,5 +1,5 @@
 import React from "react"
-import { render, fireEvent, wait } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
@@ -36,7 +36,7 @@ describe("ReportIssueForm", () => {
 
       fireEvent.press(submitButton)
 
-      await wait(() => expect(submitSpy).toHaveBeenCalled())
+      await waitFor(() => expect(submitSpy).toHaveBeenCalled())
     })
   })
 
@@ -67,7 +67,7 @@ describe("ReportIssueForm", () => {
       fireEvent.press(submitButton)
 
       expect(getByTestId("loading-indicator")).toBeDefined()
-      await wait(() => {
+      await waitFor(() => {
         expect(submitSpy).toHaveBeenCalledWith({
           email,
           name,
@@ -103,7 +103,7 @@ describe("ReportIssueForm", () => {
 
       fireEvent.press(submitButton)
 
-      await wait(() => {
+      await waitFor(() => {
         expect(getByText("Something went wrong")).toBeDefined()
       })
     })
@@ -127,7 +127,7 @@ describe("ReportIssueForm", () => {
 
       fireEvent.press(submitButton)
 
-      await wait(() => {
+      await waitFor(() => {
         expect(alertSpy).toHaveBeenCalledWith(
           "Something went wrong",
           errorMessage,

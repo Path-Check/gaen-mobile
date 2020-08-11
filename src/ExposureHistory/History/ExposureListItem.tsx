@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../../components/GlobalText"
-import { Possible, ExposureDatum, exposureWindowBucket } from "../../exposure"
+import { ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"
 import { Screens } from "../../navigation"
@@ -30,7 +30,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   const exposureWindowBucketInWords = (
     exposureDatum: ExposureDatum,
   ): string => {
-    const bucket = exposureWindowBucket(exposureDatum as Possible)
+    const bucket = exposureWindowBucket(exposureDatum)
     switch (bucket) {
       case "TodayToThreeDaysAgo": {
         return t("exposure_history.exposure_window.today_to_three_days_ago")

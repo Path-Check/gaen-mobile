@@ -16,8 +16,7 @@ import {
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
-import { Stacks, Screens, useStatusBarEffect } from "../navigation"
+import { Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography } from "../styles"
@@ -94,15 +93,6 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
 
   return (
     <ScrollView style={style.container}>
-      <View style={style.sectionPrimary}>
-        <GlobalText style={style.reportResultText}>
-          {t("settings.share_test_result_description")}
-        </GlobalText>
-        <Button
-          onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-          label={t("settings.share_test_result")}
-        />
-      </View>
       <View style={style.section}>
         <LanguageSelectionListItem
           label={languageName || t("label.unknown")}
@@ -155,13 +145,6 @@ const style = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: Colors.tertiaryViolet,
-  },
-  sectionPrimary: {
-    flex: 1,
-    margin: Spacing.medium,
-  },
-  reportResultText: {
-    marginBottom: Spacing.medium,
   },
   icon: {
     maxWidth: Iconography.small,
