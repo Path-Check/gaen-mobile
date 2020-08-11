@@ -13,8 +13,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 
-import org.pathcheck.covidsafepaths.BuildConfig;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,6 @@ import javax.annotation.Nonnull;
 
 import covidsafepaths.bt.exposurenotifications.dto.RNDiagnosisKey;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
-import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
 import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
@@ -32,26 +29,14 @@ import covidsafepaths.bt.exposurenotifications.utils.Util;
 public class DebugMenuModule extends ReactContextBaseJavaModule {
     static final String MODULE_NAME = "DebugMenuModule";
 
-    private ExposureNotificationSharedPreferences prefs;
-
     public DebugMenuModule(ReactApplicationContext context) {
         super(context);
-        prefs = new ExposureNotificationSharedPreferences(context);
     }
 
     @Override
     public @Nonnull
     String getName() {
         return MODULE_NAME;
-    }
-
-    @ReactMethod
-    public void fetchDebugLog(Promise promise) {
-        promise.resolve("AppId: " + BuildConfig.ANDROID_APPLICATION_ID +
-                "\nVersion: " + BuildConfig.VERSION_NAME +
-                "\nVersionName: " + BuildConfig.VERSION_CODE +
-                "\nLastProcessedFileName: " + RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName() +
-                "\nLastDetectionProcessDate: " + prefs.getLastDetectionProcessDate());
     }
 
     @ReactMethod
