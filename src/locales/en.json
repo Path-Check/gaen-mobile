@@ -40,6 +40,7 @@
     "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
+    "alert": "Alert",
     "close": "Close",
     "continue": "Continue",
     "disabled": "Disabled",
@@ -221,7 +222,7 @@
     "body": "Feedback (required)",
     "email": "Email (required)",
     "errors": {
-      "invalid_email": "The email seems to be invalid, please check again"
+      "invalid_email": "Please enter a valid email"
     },
     "name": "Full Name",
     "success": "We received your request. Thank you!"

@@ -1,7 +1,6 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 
 import ReportIssueForm from "./ReportIssueForm"
 import * as API from "../More/zendeskAPI"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
+  ScrollView,
   ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
@@ -11,19 +12,23 @@ import {
   Keyboard,
   SafeAreaView,
 } from "react-native"
+import { SvgXml } from "react-native-svg"
 
 import { useVersionInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { reportAnIssue, ReportIssueError } from "../More/zendeskAPI"
+import { Icons } from "../assets"
+import { useStatusBarEffect } from "../navigation"
 
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
-const defaultErrorMessage = " "
+const defaultErrorMessage = ""
 
 const ReportIssueForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const { versionInfo } = useVersionInfo()
+  useStatusBarEffect("light-content")
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -107,16 +112,30 @@ const ReportIssueForm: FunctionComponent = () => {
     }
   }
 
+  const hasError = errorMessage !== ""
+
   return (
     <SafeAreaView>
       <KeyboardAvoidingView
         keyboardVerticalOffset={Spacing.tiny}
         behavior={isIOS ? "padding" : undefined}
       >
-        <View style={style.container}>
-          <View>
-            <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
-
+        <ScrollView
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
+        >
+          {hasError && (
+            <View style={style.errorContainer}>
+              <SvgXml
+                xml={Icons.AlertCircle}
+                fill={Colors.primaryRed}
+                accessible
+                accessibilityLabel={t("common.alert")}
+              />
+              <GlobalText style={style.errorText}>{errorMessage}</GlobalText>
+            </View>
+          )}
+          <View style={style.textInputsContainer}>
             <View style={style.inputContainer}>
               <GlobalText style={style.inputLabel}>
                 {t("report_issue.name")}
@@ -168,15 +187,15 @@ const ReportIssueForm: FunctionComponent = () => {
               />
             </View>
           </View>
-          {isLoading ? <LoadingIndicator /> : null}
           <Button
             onPress={handleOnPressSubmit}
             label={t("common.submit")}
             disabled={isDisabled}
             loading={isLoading}
           />
-        </View>
+        </ScrollView>
       </KeyboardAvoidingView>
+      {isLoading ? <LoadingIndicator /> : null}
     </SafeAreaView>
   )
 }
@@ -194,18 +213,32 @@ const LoadingIndicator = () => {
   )
 }
 
-const indicatorWidth = 120
-
 const style = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.faintGray,
   },
-  errorSubtitle: {
-    ...Typography.header4,
-    color: Colors.errorText,
-    paddingTop: Spacing.xxSmall,
+  contentContainer: {
+    paddingBottom: Spacing.xxLarge,
+  },
+  errorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.lightestGray,
+    marginTop: Spacing.small,
+    padding: Spacing.small,
+    borderRadius: Outlines.baseBorderRadius,
+    borderColor: Colors.lighterGray,
+    borderWidth: Outlines.hairline,
+  },
+  errorText: {
+    ...Typography.mainContent,
+    color: Colors.primaryRed,
+    marginLeft: Spacing.small,
+  },
+  textInputsContainer: {
+    marginTop: Spacing.medium,
   },
   inputContainer: {
     marginBottom: Spacing.large,
@@ -226,14 +259,18 @@ const style = StyleSheet.create({
   activityIndicatorContainer: {
     position: "absolute",
     zIndex: Layout.zLevel1,
-    left: Layout.halfWidth,
-    top: Layout.halfHeight,
-    marginLeft: -(indicatorWidth / 2),
-    marginTop: -(indicatorWidth / 2),
+    alignItems: "center",
+    justifyContent: "center",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: "100%",
+    height: "100%",
   },
   activityIndicator: {
-    width: indicatorWidth,
-    height: indicatorWidth,
+    width: 100,
+    height: 100,
     backgroundColor: Colors.transparentDarkGray,
     borderRadius: Outlines.baseBorderRadius,
   },

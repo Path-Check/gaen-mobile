@@ -31,11 +31,13 @@ export const secondaryRed = emergencyRed
 export const tertiaryRed = calmRed
 
 // Blues
+const persianBlue = "#2434B6"
 const royalBlue = "#4051db"
 const cornflowerBlue = "#5061e6"
 
 export const primaryBlue = royalBlue
 export const secondaryBlue = cornflowerBlue
+export const tertiaryBlue = persianBlue
 
 // Greens
 const shamrockGreen = "#41dca4"
