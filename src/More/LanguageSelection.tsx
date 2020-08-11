@@ -27,17 +27,17 @@ const LanguageSelection: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const localeList = getLocaleList()
 
-  const onSelectLanguage = (locale: string) => {
-    setUserLocaleOverride(locale)
-    navigation.goBack()
-  }
-
   type ListItem = {
     label: string
     value: string
   }
 
   const renderItem = ({ item }: { item: ListItem }) => {
+    const handleOnSelectLanguage = () => {
+      setUserLocaleOverride(item.value)
+      navigation.goBack()
+    }
+
     const languageIsSelected = language === item.value
     const languageButtonTextStyle = languageIsSelected
       ? { ...Typography.bold, color: Colors.primaryText }
@@ -50,7 +50,7 @@ const LanguageSelection: FunctionComponent = () => {
     return (
       <TouchableOpacity
         style={style.languageButton}
-        onPress={() => onSelectLanguage(item.value)}
+        onPress={handleOnSelectLanguage}
       >
         <GlobalText style={languageButtonTextStyles}>{item.label}</GlobalText>
       </TouchableOpacity>
