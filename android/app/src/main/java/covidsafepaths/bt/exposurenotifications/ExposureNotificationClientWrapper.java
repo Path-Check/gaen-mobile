@@ -62,10 +62,7 @@ public class ExposureNotificationClientWrapper {
 
                     ApiException apiException = (ApiException) exception;
                     if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-                        Activity activity = context.getCurrentActivity();
-                        if (activity != null) {
-                            showPermissionDialog(activity, apiException);
-                        }
+                        showPermissionDialog(context, apiException, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
                     }
                 })
                 .addOnCanceledListener(() -> {
@@ -73,11 +70,14 @@ public class ExposureNotificationClientWrapper {
                 });
     }
 
-    public void showPermissionDialog(Activity activity, ApiException apiException) {
+    public void showPermissionDialog(ReactContext reactContext, ApiException apiException, int requestCode) {
         try {
-            apiException
-                    .getStatus()
-                    .startResolutionForResult(activity, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
+            Activity activity = reactContext.getCurrentActivity();
+            if (activity != null) {
+                apiException
+                        .getStatus()
+                        .startResolutionForResult(activity, requestCode);
+            }
         } catch (IntentSender.SendIntentException e) {
 
         }
