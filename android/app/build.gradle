@@ -171,9 +171,9 @@ android {
         release {
             storeFile file('keystore.jks')
             if (file("./keystore.jks").exists()) {
-                keyAlias project.hasProperty('android.injected.signing.key.alias') ? project.property("android.injected.signing.key.alias") : ''
+                keyAlias project.hasProperty("android.injected.signing.key.alias") ? project.property("android.injected.signing.key.alias") : ''
                 keyPassword project.hasProperty("android.injected.signing.key.password") ? project.property("android.injected.signing.key.password") : ''
-                storePassword project.hasProperty("android.injected.signing.store.password") ? project.hasProperty("android.injected.signing.store.password") : ''
+                storePassword project.hasProperty("android.injected.signing.store.password") ? project.property("android.injected.signing.store.password") : ''
                 storeFile file("./keystore.jks")
             } else {
                 project.logger.lifecycle('Could not find release key')
