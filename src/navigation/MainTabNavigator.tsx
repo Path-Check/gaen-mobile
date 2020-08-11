@@ -40,8 +40,27 @@ const MainTabNavigator: FunctionComponent = () => {
     },
   })
 
-  const determineIconFill = (focused: boolean) => {
-    return focused ? Colors.primaryViolet : Colors.quaternaryViolet
+  interface TabIconProps extends TabBarIconProps {
+    icon: string
+    label: string
+  }
+
+  const TabIcon: FunctionComponent<TabIconProps> = ({
+    focused,
+    size,
+    icon,
+    label,
+  }) => {
+    return (
+      <SvgXml
+        xml={icon}
+        fill={focused ? Colors.primaryViolet : Colors.quaternaryViolet}
+        accessible
+        accessibilityLabel={label}
+        width={size}
+        height={size}
+      />
+    )
   }
 
   interface TabBarIconProps {
@@ -51,13 +70,11 @@ const MainTabNavigator: FunctionComponent = () => {
 
   const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
-      <SvgXml
-        xml={TabBarIcons.House}
-        fill={determineIconFill(focused)}
-        accessible
-        accessibilityLabel={t("label.home_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.House}
+        label={t("label.home_icon")}
+        focused={focused}
+        size={size}
       />
     )
   }
@@ -67,13 +84,11 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     const tabIcon = (
-      <SvgXml
-        xml={TabBarIcons.Exposure}
-        fill={determineIconFill(focused)}
-        accessible
-        accessibilityLabel={t("label.calendar_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.Exposure}
+        label={t("label.exposure_icon")}
+        focused={focused}
+        size={size}
       />
     )
     return userHasNewExposure ? applyBadge(tabIcon) : tabIcon
@@ -84,26 +99,22 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     return (
-      <SvgXml
-        xml={TabBarIcons.CheckInBox}
-        fill={determineIconFill(focused)}
-        accessible
-        accessibilityLabel={t("label.assessment_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.CheckInBox}
+        label={t("label.assessment_icon")}
+        focused={focused}
+        size={size}
       />
     )
   }
 
   const MoreIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
-      <SvgXml
-        xml={TabBarIcons.HorizontalDots}
-        fill={determineIconFill(focused)}
-        accessible
-        accessibilityLabel={t("label.more_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.HorizontalDots}
+        label={t("label.more_icon")}
+        focused={focused}
+        size={size}
       />
     )
   }
