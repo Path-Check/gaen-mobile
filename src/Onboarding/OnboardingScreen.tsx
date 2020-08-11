@@ -16,6 +16,7 @@ import { SvgXml } from "react-native-svg"
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
 import {
+  Screens,
   OnboardingScreens,
   Stacks,
   ActivationScreens,
@@ -66,7 +67,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   return (
     <SafeAreaView>
       <TouchableOpacity
-        onPress={() => navigation.navigate(OnboardingScreens.LanguageSelection)}
+        onPress={() => navigation.navigate(Screens.LanguageSelection)}
         style={style.languageButtonContainer}
       >
         <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>

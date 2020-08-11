@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
-import { MoreStackScreens, useStatusBarEffect } from "../navigation"
+import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
@@ -75,9 +75,7 @@ const MenuScreen: FunctionComponent = () => {
           label={languageName || t("label.unknown")}
           icon={Icons.LanguagesIcon}
           iconLabel={t("label.language_icon")}
-          onPress={() =>
-            navigation.navigate(MoreStackScreens.LanguageSelection)
-          }
+          onPress={() => navigation.navigate(Screens.LanguageSelection)}
         />
       </View>
 

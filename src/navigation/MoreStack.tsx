@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   StackNavigationOptions,
-  TransitionPresets,
 } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
@@ -12,7 +11,6 @@ import LicensesScreen from "./../More/Licenses"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
-import LanguageSelection from "../More/LanguageSelection"
 
 import { MoreStackScreens, MoreStackScreen } from "./index"
 
@@ -50,16 +48,6 @@ const MoreStack: FunctionComponent = () => {
         name={MoreStackScreens.ENDebugMenu}
         component={ENDebugMenu}
         options={{ headerTitle: t("screen_titles.debug") }}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.LanguageSelection}
-        component={LanguageSelection}
-        options={{
-          ...TransitionPresets.ModalPresentationIOS,
-          headerShown: false,
-          cardOverlayEnabled: true,
-          cardShadowEnabled: true,
-        }}
       />
       <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}

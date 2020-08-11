@@ -21,7 +21,7 @@ import { Headers, Colors } from "../styles"
 
 const Stack = createStackNavigator()
 
-const SCREEN_OPTIONS = {
+const defaultScreenOptions = {
   headerShown: false,
 }
 
@@ -48,62 +48,64 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {onboardingIsComplete ? (
-          <>
-            <Stack.Screen
-              name={"App"}
-              component={MainTabNavigator}
-              options={{ ...SCREEN_OPTIONS }}
-            />
-            <Stack.Screen
-              name={Stacks.AffectedUserStack}
-              component={AffectedUserStack}
-              options={{
-                ...TransitionPresets.ModalTransition,
-                ...SCREEN_OPTIONS,
-              }}
-            />
-            <Stack.Screen
-              name={Screens.MoreInfo}
-              component={MoreInfo}
-              options={{
-                title: "MORE INFO",
-                ...headerScreenOptions,
-              }}
-            />
-            <Stack.Screen
-              name={Screens.ExposureDetail}
-              component={ExposureDetail}
-              options={{
-                title: "EXPOSURE",
-                ...headerScreenOptions,
-              }}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name={Stacks.Onboarding}
-              component={OnboardingStack}
-              options={{ ...SCREEN_OPTIONS }}
-            />
-            <Stack.Screen
-              name={Stacks.Activation}
-              component={ActivationStack}
-              options={{ ...SCREEN_OPTIONS }}
-            />
-            <Stack.Screen
-              name={OnboardingScreens.ProtectPrivacy}
-              component={ProtectPrivacy}
-              options={cardScreenOptions}
-            />
-            <Stack.Screen
-              name={OnboardingScreens.LanguageSelection}
-              component={LanguageSelection}
-              options={cardScreenOptions}
-            />
-          </>
-        )}
+        <>
+          {onboardingIsComplete ? (
+            <>
+              <Stack.Screen
+                name={"App"}
+                component={MainTabNavigator}
+                options={defaultScreenOptions}
+              />
+              <Stack.Screen
+                name={Stacks.AffectedUserStack}
+                component={AffectedUserStack}
+                options={{
+                  ...TransitionPresets.ModalTransition,
+                  ...defaultScreenOptions,
+                }}
+              />
+              <Stack.Screen
+                name={Screens.MoreInfo}
+                component={MoreInfo}
+                options={{
+                  title: "MORE INFO",
+                  ...headerScreenOptions,
+                }}
+              />
+              <Stack.Screen
+                name={Screens.ExposureDetail}
+                component={ExposureDetail}
+                options={{
+                  title: "EXPOSURE",
+                  ...headerScreenOptions,
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name={Stacks.Onboarding}
+                component={OnboardingStack}
+                options={defaultScreenOptions}
+              />
+              <Stack.Screen
+                name={Stacks.Activation}
+                component={ActivationStack}
+                options={defaultScreenOptions}
+              />
+              <Stack.Screen
+                name={OnboardingScreens.ProtectPrivacy}
+                component={ProtectPrivacy}
+                options={cardScreenOptions}
+              />
+            </>
+          )}
+          <Stack.Screen
+            name={Screens.LanguageSelection}
+            component={LanguageSelection}
+            options={cardScreenOptions}
+          />
+        </>
       </Stack.Navigator>
     </NavigationContainer>
   )
