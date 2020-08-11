@@ -10,7 +10,7 @@ import { Button } from "../components"
 
 import { Images } from "../assets"
 import { Spacing, Colors, Typography, Outlines } from "../styles"
-import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
+import { OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 const Welcome: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -25,12 +25,10 @@ const Welcome: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <TouchableOpacity
-        onPress={() => navigation.navigate(Screens.LanguageSelection)}
-        style={style.languageSelector}
+        onPress={() => navigation.navigate(OnboardingScreens.LanguageSelection)}
+        style={style.languageButtonContainer}
       >
-        <GlobalText style={style.languageSelectorText}>
-          {languageName}
-        </GlobalText>
+        <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>
       </TouchableOpacity>
       <View>
         <Image source={Images.MinnesotaMap} style={style.image} />
@@ -56,13 +54,13 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  languageSelector: {
+  languageButtonContainer: {
     ...Outlines.ovalBorder,
     borderColor: Colors.primaryViolet,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.large,
   },
-  languageSelectorText: {
+  languageButtonText: {
     ...Typography.base,
     letterSpacing: Typography.mediumLetterSpacing,
     color: Colors.primaryViolet,

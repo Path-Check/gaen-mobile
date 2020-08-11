@@ -42,20 +42,22 @@ const LanguageSelection: FunctionComponent = () => {
     const languageButtonTextStyle = languageIsSelected
       ? { ...Typography.bold, color: Colors.primaryText }
       : null
+    const languageButtonTextStyles = {
+      ...style.languageButtonText,
+      ...languageButtonTextStyle,
+    }
 
     return (
       <TouchableOpacity
         style={style.languageButton}
         onPress={() => onSelectLanguage(item.value)}
       >
-        <GlobalText style={[style.languageButtonText, languageButtonTextStyle]}>
-          {item.label}
-        </GlobalText>
+        <GlobalText style={languageButtonTextStyles}>{item.label}</GlobalText>
       </TouchableOpacity>
     )
   }
 
-  const headerHeight = 80
+  const headerHeight = 70
   const headerContainerStyle = { height: headerHeight }
   const languageButtonContainerStyle = { marginTop: headerHeight }
 
@@ -123,7 +125,7 @@ const style = StyleSheet.create({
   },
   closeIconContainer: {
     flex: 1,
-    padding: Spacing.medium,
+    padding: Spacing.small,
   },
   languageButton: {
     paddingVertical: Spacing.medium,
