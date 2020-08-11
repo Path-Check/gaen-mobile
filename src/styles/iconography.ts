@@ -1,5 +1,6 @@
 import { ViewStyle } from "react-native"
 
+export const xxSmall = 14
 export const xSmall = 18
 export const small = 30
 export const medium = 60

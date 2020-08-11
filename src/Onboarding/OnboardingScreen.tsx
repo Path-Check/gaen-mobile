@@ -11,13 +11,27 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
-import { Stacks, ActivationScreens, useStatusBarEffect } from "../navigation"
+import {
+  OnboardingScreens,
+  Stacks,
+  ActivationScreens,
+  useStatusBarEffect,
+} from "../navigation"
 import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
-import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
+import {
+  Layout,
+  Outlines,
+  Colors,
+  Spacing,
+  Typography,
+  Iconography,
+} from "../styles"
 
 type OnboardingScreenContent = {
   screenNumber: number
@@ -60,30 +74,50 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             {t("common.skip")}
           </GlobalText>
         </TouchableOpacity>
-        <ScrollView
-          alwaysBounceVertical={false}
-          style={style.container}
-          contentContainerStyle={style.contentContainer}
-        >
-          <View>
-            <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
-              accessible
-              style={style.image}
-              resizeMode={"contain"}
+        <View style={style.outerContainer}>
+          <ScrollView
+            alwaysBounceVertical={false}
+            style={style.container}
+            contentContainerStyle={style.contentContainer}
+          >
+            <View>
+              <Image
+                source={onboardingScreenContent.image}
+                accessibilityLabel={onboardingScreenContent.imageLabel}
+                accessible
+                style={style.image}
+                resizeMode={"contain"}
+              />
+              <PositionDots
+                screenNumber={onboardingScreenContent.screenNumber}
+              />
+              <GlobalText style={style.headerText}>
+                {onboardingScreenContent.header}
+              </GlobalText>
+            </View>
+            <Button
+              hasRightArrow
+              label={onboardingScreenContent.primaryButtonLabel}
+              onPress={onboardingScreenActions.primaryButtonOnPress}
             />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
-            <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
+          </ScrollView>
+          <TouchableOpacity
+            style={style.bottomButtonContainer}
+            onPress={() =>
+              navigation.navigate(OnboardingScreens.ProtectPrivacy)
+            }
+          >
+            <GlobalText style={style.bottomButtonText}>
+              {t("onboarding.protect_privacy_button")}
             </GlobalText>
-          </View>
-          <Button
-            hasRightArrow
-            label={onboardingScreenContent.primaryButtonLabel}
-            onPress={onboardingScreenActions.primaryButtonOnPress}
-          />
-        </ScrollView>
+            <SvgXml
+              xml={Icons.ChevronUp}
+              fill={Colors.primaryBlue}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -116,16 +150,20 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
 }
 
 const style = StyleSheet.create({
+  outerContainer: {
+    justifyContent: "space-between",
+    height: "100%",
+  },
   container: {
     paddingHorizontal: Spacing.large,
   },
   contentContainer: {
-    height: "100%",
     paddingBottom: Spacing.large,
   },
+
   image: {
     width: "100%",
-    height: 300,
+    height: 250,
     marginTop: Spacing.small,
     marginBottom: Spacing.medium,
   },
@@ -154,7 +192,7 @@ const style = StyleSheet.create({
   },
   skipButtonContainer: {
     position: "absolute",
-    top: Spacing.small,
+    top: Spacing.xxSmall,
     right: Spacing.small,
     padding: Spacing.small,
     zIndex: Layout.zLevel1,
@@ -162,6 +200,20 @@ const style = StyleSheet.create({
   skipButtonText: {
     ...Typography.base,
     color: Colors.mediumGray,
+  },
+  bottomButtonContainer: {
+    backgroundColor: Colors.lightestGray,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: Spacing.small,
+    borderTopColor: Colors.lighterGray,
+    borderTopWidth: Outlines.hairline,
+  },
+  bottomButtonText: {
+    ...Typography.header5,
+    color: Colors.primaryBlue,
+    marginRight: Spacing.xSmall,
   },
 })
 export default OnboardingScreen

@@ -32,12 +32,12 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
-    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
+    "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
     "close": "Close",
@@ -167,11 +167,6 @@
     "more": "More",
     "self_assessment": "Health"
   },
-  "onboarding_screen1_image_label": "",
-  "onboarding_screen2_image_label": "",
-  "onboarding_screen3_image_label": "",
-  "onboarding_screen4_image_label": "",
-  "onboarding_screen5_image_label": "",
   "onboarding": {
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
@@ -181,6 +176,20 @@
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
+    "protect_privacy": {
+      "body_1": "These codes do not contain any personal information and change every 10-20 mintues to protect your identity.",
+      "body_2": "Phones swap codes with other devices using Bluetooth Low Energy. This allows the app to keep track of your daily encounters anonymously, even when you don’t have it open on your device.",
+      "body_3": "After testing positive for COVID-19, users can share a passcode with COVIDaware MN to verify their diagnosis. If they do so, their phone's recent random codes are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
+      "body_4": "Your COVIDaware MN app then compares the flagged codes to its own set of codes from your recent daily enocunters. This is how COVIDaware MN can identify if there's a chance you've been exposed to the virus.",
+      "body_5": "If there’s a match, the app will notify you and provide further guidance from your health department on how to keep yourself and the people around you safe.\nThis is how COVIDaware MN can help you stay informed about your health and keep your community safe, all without knowing who you are or where you've been.",
+      "header": "Here's how we protect your privacy",
+      "subheader_1": "When a user turns on Exposure Notifications, their phone is tagged with a frequently-changing, random code",
+      "subheader_2": "Phones with proximity tracing enabled swap codes with other devices they enounter",
+      "subheader_3": "Users who test positive can choose to  anonymously share their health status",
+      "subheader_4": "Each phone periodically pings the server for the list of flagged codes shared by positive users and looks for matches",
+      "subheader_5": "Users are informed if their app finds a positive match with a flagged code"
+    },
+    "protect_privacy_button": "How we protect your privacy",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_button": "Activate Proximity Tracing",
@@ -192,7 +201,7 @@
     "screen1_button": "How does it work?",
     "screen1_header": "Together, we can contain the spread of COVID-19",
     "screen1_image_label": "Two people high fiving each other",
-    "screen2_button": "Is my privacy protected?",
+    "screen2_button": "How about privacy?",
     "screen2_header": "Your phone remembers other devices it meets, but won't identify you to anyone",
     "screen2_image_label": "Two people on their phones",
     "screen3_button": "What if I'm exposed?",

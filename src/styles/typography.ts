@@ -19,8 +19,8 @@ export const xSmallLineHeight = 16
 export const smallLineHeight = 20
 export const mediumLineHeight = 24
 export const largeLineHeight = 28
-export const xLargeLineHeight = 34
-export const xxLargeLineHeight = 38
+export const xLargeLineHeight = 32
+export const xxLargeLineHeight = 36
 
 // Letter Spacing
 export const mediumLetterSpacing = 0.5
