@@ -3,10 +3,12 @@ import tracingStrategy from "./tracingStrategy"
 import exposureDatum from "./exposureDatum"
 import rawExposure from "./rawExposure"
 import exposureContext from "./exposureContext"
+import exposureKey from "./exposureKey"
 
 export const factories = register({
-  tracingStrategy,
-  exposureDatum,
-  rawExposure,
   exposureContext,
+  exposureDatum,
+  exposureKey,
+  rawExposure,
+  tracingStrategy,
 })

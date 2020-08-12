@@ -64,6 +64,12 @@ const CodeInputForm: FunctionComponent = () => {
       if (response.kind === "success") {
         const token = response.body.token
         const exposureKeys = await strategy.getExposureKeys()
+
+        if (exposureKeys.length === 0) {
+          navigation.navigate(Screens.AffectedUserComplete)
+          return
+        }
+
         const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
 
         const certResponse = await API.postTokenAndHmac(token, hmacDigest)

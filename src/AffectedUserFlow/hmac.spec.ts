@@ -1,6 +1,7 @@
 import RNSimpleCrypto from "react-native-simple-crypto"
 
 import { calculateHmac } from "./hmac"
+import { factories } from "../factories"
 
 describe("calculateHmac", () => {
   const mockRandomBytesGeneration = () => {
@@ -59,12 +60,12 @@ describe("calculateHmac", () => {
     const rollingStartNumber = 1
     const rollingPeriod = 2
     const transmissionRisk = 3
-    const exposureKey = {
+    const exposureKey = factories.exposureKey.build({
       key,
       rollingPeriod,
       rollingStartNumber,
       transmissionRisk,
-    }
+    })
     const serializedKey = `${key}.${rollingStartNumber}.${rollingPeriod}.${transmissionRisk}`
 
     const hmacKey = await calculateHmac([exposureKey])
@@ -84,32 +85,26 @@ describe("calculateHmac", () => {
     const secondKey = "=Key"
     const thirdKey = "Key"
     const fourthKey = "key"
-    const rollingStartNumber = 1
-    const rollingPeriod = 2
-    const transmissionRisk = 0
+    const baseKey = factories.exposureKey.build({
+      rollingStartNumber: 1,
+      rollingPeriod: 2,
+      transmissionRisk: 0,
+    })
     const firstExposureKey = {
+      ...baseKey,
       key: firstKey,
-      rollingPeriod,
-      rollingStartNumber,
-      transmissionRisk,
     }
     const secondExposureKey = {
+      ...baseKey,
       key: secondKey,
-      rollingPeriod,
-      rollingStartNumber,
-      transmissionRisk,
     }
     const thirdExposureKey = {
+      ...baseKey,
       key: thirdKey,
-      rollingPeriod,
-      rollingStartNumber,
-      transmissionRisk,
     }
     const fourthExposureKey = {
+      ...baseKey,
       key: fourthKey,
-      rollingPeriod,
-      rollingStartNumber,
-      transmissionRisk,
     }
     const serializedKey = `${firstKey}.1.2.0,${secondKey}.1.2.0,${thirdKey}.1.2.0,${fourthKey}.1.2.0`
     await calculateHmac([

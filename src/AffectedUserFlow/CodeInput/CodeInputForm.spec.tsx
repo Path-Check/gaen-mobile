@@ -39,57 +39,105 @@ describe("CodeInputForm", () => {
   })
 
   describe("on a successful code verification", () => {
-    it("navigates to the affected user publish consent", async () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-      const verificationToken = "verificationToken"
-      const successTokenResponse = {
-        kind: "success" as const,
-        body: {
-          token: verificationToken,
-          error: "",
-          testDate: "testDate",
-          testType: "confirmed" as const,
-        },
-      }
-      const apiSpy = jest
-        .spyOn(API, "postCode")
-        .mockResolvedValue(successTokenResponse)
-      const hmacDigest = "hmacDigest"
-      const hmacKey = "hmacKey"
-      jest
-        .spyOn(Hmac, "calculateHmac")
-        .mockResolvedValueOnce([hmacDigest, hmacKey])
-      const certificateReponse = {
-        kind: "success" as const,
-        body: {
-          certificate: "",
-          error: "",
-        },
-      }
-      const postTokenSpy = jest
-        .spyOn(API, "postTokenAndHmac")
-        .mockResolvedValueOnce(certificateReponse)
+    describe("when the device contains exposure keys", () => {
+      it("navigates to the affected user publish consent", async () => {
+        const navigateSpy = jest.fn()
+        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+        const verificationToken = "verificationToken"
+        const successTokenResponse = {
+          kind: "success" as const,
+          body: {
+            token: verificationToken,
+            error: "",
+            testDate: "testDate",
+            testType: "confirmed" as const,
+          },
+        }
+        const apiSpy = jest
+          .spyOn(API, "postCode")
+          .mockResolvedValue(successTokenResponse)
+        const hmacDigest = "hmacDigest"
+        const hmacKey = "hmacKey"
+        jest
+          .spyOn(Hmac, "calculateHmac")
+          .mockResolvedValueOnce([hmacDigest, hmacKey])
+        const certificateReponse = {
+          kind: "success" as const,
+          body: {
+            certificate: "",
+            error: "",
+          },
+        }
+        const postTokenSpy = jest
+          .spyOn(API, "postTokenAndHmac")
+          .mockResolvedValueOnce(certificateReponse)
 
-      const code = "12345678"
-      const exposureContext = factories.exposureContext.build()
+        const code = "12345678"
+        const exposureContext = factories.exposureContext.build({
+          getExposureKeys: jest
+            .fn()
+            .mockResolvedValueOnce([factories.exposureKey.build()]),
+        })
 
-      const { getByTestId, getByLabelText } = render(
-        <ExposureContext.Provider value={exposureContext}>
-          <AffectedUserProvider>
-            <CodeInputForm />
-          </AffectedUserProvider>
-        </ExposureContext.Provider>,
-      )
-      fireEvent.changeText(getByTestId("code-input"), code)
-      fireEvent.press(getByLabelText("Submit"))
-
-      await waitFor(() => {
-        expect(apiSpy).toHaveBeenCalledWith(code)
-        expect(postTokenSpy).toHaveBeenCalledWith(verificationToken, hmacDigest)
-        expect(navigateSpy).toHaveBeenCalledWith(
-          Screens.AffectedUserPublishConsent,
+        const { getByTestId, getByLabelText } = render(
+          <ExposureContext.Provider value={exposureContext}>
+            <AffectedUserProvider>
+              <CodeInputForm />
+            </AffectedUserProvider>
+          </ExposureContext.Provider>,
         )
+        fireEvent.changeText(getByTestId("code-input"), code)
+        fireEvent.press(getByLabelText("Submit"))
+
+        await waitFor(() => {
+          expect(apiSpy).toHaveBeenCalledWith(code)
+          expect(postTokenSpy).toHaveBeenCalledWith(
+            verificationToken,
+            hmacDigest,
+          )
+          expect(navigateSpy).toHaveBeenCalledWith(
+            Screens.AffectedUserPublishConsent,
+          )
+        })
+      })
+    })
+
+    describe("when the device does not contains exposure keys", () => {
+      it("navigates directly to the complete screen", async () => {
+        const navigateSpy = jest.fn()
+        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+        const verificationToken = "verificationToken"
+        const successTokenResponse = {
+          kind: "success" as const,
+          body: {
+            token: verificationToken,
+            error: "",
+            testDate: "testDate",
+            testType: "confirmed" as const,
+          },
+        }
+        const apiSpy = jest
+          .spyOn(API, "postCode")
+          .mockResolvedValue(successTokenResponse)
+        const code = "12345678"
+        const exposureContext = factories.exposureContext.build({
+          getExposureKeys: jest.fn().mockResolvedValueOnce([]),
+        })
+
+        const { getByTestId, getByLabelText } = render(
+          <ExposureContext.Provider value={exposureContext}>
+            <AffectedUserProvider>
+              <CodeInputForm />
+            </AffectedUserProvider>
+          </ExposureContext.Provider>,
+        )
+        fireEvent.changeText(getByTestId("code-input"), code)
+        fireEvent.press(getByLabelText("Submit"))
+
+        await waitFor(() => {
+          expect(apiSpy).toHaveBeenCalledWith(code)
+          expect(navigateSpy).toHaveBeenCalledWith("AffectedUserComplete")
+        })
       })
     })
   })
@@ -120,7 +168,13 @@ describe("CodeInputForm", () => {
         .mockResolvedValueOnce(failureCertificateResponse)
 
       const { getByTestId, getByLabelText, getByText } = render(
-        <ExposureContext.Provider value={factories.exposureContext.build()}>
+        <ExposureContext.Provider
+          value={factories.exposureContext.build({
+            getExposureKeys: jest
+              .fn()
+              .mockResolvedValueOnce([factories.exposureKey.build()]),
+          })}
+        >
           <AffectedUserProvider>
             <CodeInputForm />
           </AffectedUserProvider>
