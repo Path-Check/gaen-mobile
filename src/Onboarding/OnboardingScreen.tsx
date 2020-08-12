@@ -23,7 +23,6 @@ import {
   useStatusBarEffect,
 } from "../navigation"
 import { getLocalNames } from "../locales/languages"
-import { NUMBER_OF_ONBOARDING_SCREENS } from "../navigation/OnboardingStack"
 
 import { Icons } from "../assets"
 import {
@@ -131,6 +130,8 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
 interface PositionDotsProps {
   screenNumber: number
 }
+
+const NUMBER_OF_ONBOARDING_SCREENS = 5
 
 const PositionDots: FunctionComponent<PositionDotsProps> = ({
   screenNumber,

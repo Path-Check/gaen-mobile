@@ -17,8 +17,6 @@ type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
 }
 
-export const NUMBER_OF_ONBOARDING_SCREENS = 5
-
 const Stack = createStackNavigator<OnboardingStackParams>()
 
 const onboardingScreenOptions: StackNavigationOptions = {
