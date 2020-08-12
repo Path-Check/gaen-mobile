@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  ViewStyle,
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableHighlight,
-} from "react-native"
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import {
@@ -19,7 +13,7 @@ import { GlobalText } from "../components/GlobalText"
 import { Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
-import { Iconography, Colors, Spacing, Typography } from "../styles"
+import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
 interface MenuScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
@@ -37,11 +31,7 @@ const LanguageSelectionListItem = ({
   label,
   onPress,
 }: LanguageSelectionListItemProps) => (
-  <TouchableHighlight
-    underlayColor={Colors.underlayPrimaryBackground}
-    style={style.listItem}
-    onPress={onPress}
-  >
+  <TouchableOpacity style={style.listItem} onPress={onPress}>
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <SvgXml
         xml={icon}
@@ -51,7 +41,7 @@ const LanguageSelectionListItem = ({
       />
       <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
     </View>
-  </TouchableHighlight>
+  </TouchableOpacity>
 )
 
 const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
@@ -66,28 +56,22 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
     label: string
     onPress: () => void
     description?: string
-    itemStyle?: ViewStyle
   }
 
   const SettingsListItem = ({
     label,
     onPress,
     description,
-    itemStyle,
   }: SettingsListItemProps) => {
     return (
-      <TouchableHighlight
-        underlayColor={Colors.underlayPrimaryBackground}
-        style={[style.listItem, itemStyle]}
-        onPress={onPress}
-      >
+      <TouchableOpacity style={style.listItem} onPress={onPress}>
         <View>
           <GlobalText style={style.listItemText}>{label}</GlobalText>
           {description ? (
             <GlobalText style={style.descriptionText}>{description}</GlobalText>
           ) : null}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
@@ -106,19 +90,20 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
         <SettingsListItem
           label={t("screen_titles.about")}
           onPress={() => navigation.navigate(Screens.About)}
-          itemStyle={style.divider}
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
           onPress={() => navigation.navigate(Screens.Licenses)}
-          itemStyle={style.lastListItem}
+        />
+        <SettingsListItem
+          label={t("screen_titles.report_issue")}
+          onPress={() => navigation.navigate(Screens.ReportIssueForm)}
         />
       </View>
       <View style={style.section}>
         <SettingsListItem
           label="EN Debug Menu"
           onPress={() => navigation.navigate(Screens.ENDebugMenu)}
-          itemStyle={style.lastListItem}
         />
       </View>
     </ScrollView>
@@ -129,17 +114,10 @@ const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackground,
   },
-  divider: {
-    borderColor: Colors.tertiaryViolet,
-    borderBottomWidth: 1,
-  },
   section: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,
     marginBottom: Spacing.medium,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: Colors.tertiaryViolet,
   },
   icon: {
     maxWidth: Iconography.small,
@@ -149,12 +127,11 @@ const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.medium,
+    borderBottomColor: Colors.tertiaryViolet,
+    borderBottomWidth: Outlines.hairline,
   },
   listItemText: {
     ...Typography.tappableListItem,
-  },
-  lastListItem: {
-    borderBottomWidth: 0,
   },
   descriptionText: {
     ...Typography.description,

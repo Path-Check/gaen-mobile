@@ -55,7 +55,7 @@ export const secondaryYellow = champagneYellow
 const jacksonsPurple = "#1f2c9b"
 const vibrantViolet = "#6e50e4"
 const melrose = "#a5affb"
-const moonRaker = "#e5e7fa"
+const moonRaker = "#d3d7f8"
 
 export const primaryViolet = jacksonsPurple
 export const secondaryViolet = vibrantViolet

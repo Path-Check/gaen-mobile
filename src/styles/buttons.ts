@@ -47,7 +47,7 @@ export const primary: ViewStyle = {
   ...large,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
-  minWidth: 225,
+  minWidth: 180,
   maxWidth: Layout.screenWidth * 0.9,
 }
 
