@@ -17,7 +17,7 @@ import { SvgXml } from "react-native-svg"
 import { useVersionInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
-import { reportAnIssue, ReportIssueError } from "../More/zendeskAPI"
+import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
 import { Icons } from "../assets"
 import { useStatusBarEffect } from "../navigation"
 
