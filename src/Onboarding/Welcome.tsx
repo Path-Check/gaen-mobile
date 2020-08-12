@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  Image,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from "react-native"
+import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
@@ -26,17 +20,7 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const appName = env.IN_APP_NAME || "PathCheck"
-  const region = env.REGION_CODES
   useStatusBarEffect("dark-content")
-
-  const determineImageSource = (): ImageSourcePropType => {
-    switch (region) {
-      case "MN":
-        return Images.MinnesotaMap
-      default:
-        return Images.PeopleOnNetworkNodes
-    }
-  }
 
   return (
     <View style={style.container}>
@@ -48,7 +32,7 @@ const Welcome: FunctionComponent = () => {
       </TouchableOpacity>
       <View>
         <Image
-          source={determineImageSource()}
+          source={Images.PeopleOnNetworkNodes}
           style={style.image}
           accessible
           accessibilityLabel={t("onboarding.welcome_image_label")}
