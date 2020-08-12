@@ -313,11 +313,15 @@ final class ExposureManager: NSObject {
         let currentKeys = allKeys.current()
         
         let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
+
+        let revisionToken = BTSecureStorage.shared.userState.revisionToken
         
-        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey),
+        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey, revisionToken),
                                  requestType: .postKeys) { result in
                                   switch result {
-                                  case .success:
+                                  case .success(let response):
+                                    // Save revisionToken to use on subsequent key submission requests
+                                    BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
                                     resolve("Submitted: \(currentKeys.count) keys.")
                                   case .failure(let error):
                                     reject(String.networkFailure, "Failed to post exposure keys \(error.localizedDescription)", error)
