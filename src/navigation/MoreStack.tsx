@@ -11,7 +11,6 @@ import LicensesScreen from "./../More/Licenses"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
-import LanguageSelection from "../More/LanguageSelection"
 
 import { MoreStackScreens, MoreStackScreen } from "./index"
 
@@ -49,11 +48,6 @@ const MoreStack: FunctionComponent = () => {
         name={MoreStackScreens.ENDebugMenu}
         component={ENDebugMenu}
         options={{ headerTitle: t("screen_titles.debug") }}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.LanguageSelection}
-        component={LanguageSelection}
-        options={{ headerTitle: t("screen_titles.select_language") }}
       />
       <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}

@@ -170,6 +170,7 @@
     "self_assessment": "Self Assessment"
   },
   "onboarding": {
+    "select_language": "Select Language",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
@@ -214,7 +215,8 @@
     "screen4_image_label": "A person getting a notification on their phone",
     "screen5_header": "With the app, you can help break the chain of infection and get help direct from health experts",
     "screen5_image_label": "A person talking to a health expert virtually",
-    "step": "Step {{currentStep}} of {{totalSteps}}"
+    "step": "Step {{currentStep}} of {{totalSteps}}",
+    "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
   "report_issue": {
     "body": "Feedback (required)",

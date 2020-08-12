@@ -34,7 +34,6 @@ export type OnboardingScreen =
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "LanguageSelection"
   | "ProtectPrivacy"
 
 export const OnboardingScreens: {
@@ -46,7 +45,6 @@ export const OnboardingScreens: {
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
 }
 
@@ -83,7 +81,6 @@ export type MoreStackScreen =
   | "Licenses"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
-  | "LanguageSelection"
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
@@ -94,7 +91,6 @@ export const MoreStackScreens: {
   Menu: "Menu",
   About: "About",
   Licenses: "Licenses",
-  LanguageSelection: "LanguageSelection",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
@@ -137,6 +133,7 @@ export type Screen =
   | AffectedUserFlowScreen
   | "Home"
   | "ReportIssueForm"
+  | "LanguageSelection"
 
 export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
@@ -147,6 +144,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...AffectedUserFlowScreens,
   Home: "Home",
   ReportIssueForm: "ReportIssueForm",
+  LanguageSelection: "LanguageSelection",
 }
 
 export type Stack =

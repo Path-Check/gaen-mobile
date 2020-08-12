@@ -12,7 +12,6 @@ import Introduction from "../Onboarding/Introduction"
 import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
 import GetNotified from "../Onboarding/GetNotified"
 import ValueProposition from "../Onboarding/ValueProposition"
-import LanguageSelection from "../More/LanguageSelection"
 
 type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
@@ -22,11 +21,11 @@ export const NUMBER_OF_ONBOARDING_SCREENS = 5
 
 const Stack = createStackNavigator<OnboardingStackParams>()
 
-const OnboardingStack: FunctionComponent = () => {
-  const onboardingScreenOptions: StackNavigationOptions = {
-    headerShown: false,
-  }
+const onboardingScreenOptions: StackNavigationOptions = {
+  headerShown: false,
+}
 
+const OnboardingStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={onboardingScreenOptions}>
       <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
@@ -49,10 +48,6 @@ const OnboardingStack: FunctionComponent = () => {
       <Stack.Screen
         name={OnboardingScreens.ValueProposition}
         component={ValueProposition}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.LanguageSelection}
-        component={LanguageSelection}
       />
     </Stack.Navigator>
   )
