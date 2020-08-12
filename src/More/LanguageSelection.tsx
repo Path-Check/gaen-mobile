@@ -57,13 +57,9 @@ const LanguageSelection: FunctionComponent = () => {
     )
   }
 
-  const headerHeight = 70
-  const headerContainerStyle = { height: headerHeight }
-  const languageButtonContainerStyle = { marginTop: headerHeight }
-
   return (
     <View style={style.container}>
-      <View style={[style.headerContainer, headerContainerStyle]}>
+      <View style={style.headerContainer}>
         <GlobalText style={style.headerText}>
           {t("onboarding.select_language")}
         </GlobalText>
@@ -79,19 +75,20 @@ const LanguageSelection: FunctionComponent = () => {
           />
         </TouchableOpacity>
       </View>
-      <View style={languageButtonContainerStyle}>
-        <FlatList
-          keyExtractor={(_, i) => `${i}`}
-          data={localeList}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <Separator />}
-        />
-      </View>
+      <FlatList
+        keyExtractor={(_, i) => `${i}`}
+        data={localeList}
+        renderItem={renderItem}
+        ItemSeparatorComponent={itemSeparatorComponent}
+        ListFooterComponent={itemSeparatorComponent}
+        alwaysBounceVertical={false}
+        style={style.languageButtonsContainer}
+      />
     </View>
   )
 }
 
-const Separator = () => {
+const itemSeparatorComponent = () => {
   return (
     <View
       style={{
@@ -103,6 +100,8 @@ const Separator = () => {
   )
 }
 
+const headerHeight = 70
+
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -110,6 +109,7 @@ const style = StyleSheet.create({
   },
   headerContainer: {
     position: "absolute",
+    height: headerHeight,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -126,6 +126,9 @@ const style = StyleSheet.create({
   closeIconContainer: {
     flex: 1,
     padding: Spacing.small,
+  },
+  languageButtonsContainer: {
+    marginTop: headerHeight,
   },
   languageButton: {
     paddingVertical: Spacing.medium,
