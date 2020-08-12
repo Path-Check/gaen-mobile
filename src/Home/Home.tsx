@@ -10,11 +10,13 @@ import {
   Image,
   View,
   Share,
+  Platform,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
+import env from "react-native-config"
 
 import {
   usePermissionsContext,
@@ -88,9 +90,13 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
-  const appDownloadLink = "https://pathcheck.org"
-
   const handleOnPressShare = async () => {
+    const isIOS = Platform.OS === "ios"
+
+    const appDownloadLink = isIOS
+      ? env.IOS_APP_STORE_URL
+      : env.ANDROID_PLAY_STORE_URL
+
     try {
       await Share.share({
         message: t("home.bluetooth.share_message", {
