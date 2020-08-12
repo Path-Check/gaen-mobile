@@ -36,6 +36,7 @@ public class ExposureNotificationSharedPreferences {
     private static final String ATTENUATION_THRESHOLD_1_KEY = "ExposureNotificationSharedPreferences.ATTENUATION_THRESHOLD_1_KEY";
     private static final String ATTENUATION_THRESHOLD_2_KEY = "ExposureNotificationSharedPreferences.ATTENUATION_THRESHOLD_2_KEY";
     private static final String LAST_DETECTION_PROCESS_DATE = "ExposureNotificationSharedPreferences.LAST_DETECTION_PROCESS_DATE";
+    private static final String REVISION_TOKEN = "ExposureNotificationSharedPreferences.REVISION_TOKEN";
 
     private final SharedPreferences sharedPreferences;
 
@@ -84,5 +85,13 @@ public class ExposureNotificationSharedPreferences {
 
     public void setLastDetectionProcessDate(Long date) {
         sharedPreferences.edit().putLong(LAST_DETECTION_PROCESS_DATE, date).commit();
+    }
+
+    public String getRevisionToken(String defaultToken) {
+        return sharedPreferences.getString(REVISION_TOKEN, defaultToken);
+    }
+
+    public void setRevisionToken(String token) {
+        sharedPreferences.edit().putString(REVISION_TOKEN, token).commit();
     }
 }

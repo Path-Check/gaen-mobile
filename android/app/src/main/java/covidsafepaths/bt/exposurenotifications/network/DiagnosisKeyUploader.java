@@ -31,7 +31,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
@@ -49,6 +49,7 @@ import java.security.SecureRandom;
 
 import covidsafepaths.bt.exposurenotifications.ExposureKeyModule;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
+import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 /**
@@ -73,10 +74,12 @@ public class DiagnosisKeyUploader {
 
     private final Context context;
     private final Uris uris;
+    private ExposureNotificationSharedPreferences prefs;
 
     public DiagnosisKeyUploader(Context context) {
         this.context = context;
         uris = new Uris(context);
+        prefs = new ExposureNotificationSharedPreferences(context);
     }
 
     /**
@@ -189,7 +192,8 @@ public class DiagnosisKeyUploader {
                         .put("hmackey", ExposureKeyModule.hmacKey)
                         .put("padding", randomBase64Data(Util.getRandomNumber()))
                         .put("regions", regionJson)
-                        .put("appPackageName", BuildConfig.ANDROID_APPLICATION_ID);
+                        .put("appPackageName", BuildConfig.ANDROID_APPLICATION_ID)
+                        .put("revisionToken", prefs.getRevisionToken(null));
 
         return FluentFuture.from(Futures.immediateFuture(submission));
     }
@@ -205,10 +209,18 @@ public class DiagnosisKeyUploader {
     private ListenableFuture<Void> submitToServer(KeySubmission submission) {
         return CallbackToFutureAdapter.getFuture(
                 completer -> {
-                    Listener<String> responseListener =
+                    Listener<JSONObject> responseListener =
                             response -> {
-                                Log.i(TAG, "Diagnosis Key upload succeeded.");
-                                completer.set(null);
+                                try {
+                                    // Save revisionToken to use on subsequent key updates
+                                    String revisionToken = response.getString("revisionToken");
+                                    prefs.setRevisionToken(revisionToken);
+                                } catch (JSONException e) {
+                                    Log.e(TAG, e.toString());
+                                } finally {
+                                    Log.i(TAG, "Diagnosis Key upload succeeded.");
+                                    completer.set(null);
+                                }
                             };
 
                     ErrorListener errorListener =
@@ -217,8 +229,12 @@ public class DiagnosisKeyUploader {
                                 completer.setCancelled();
                             };
 
-                    SubmitKeysRequest request =
-                            new SubmitKeysRequest(uris.uploadUri, submission.payload, responseListener, errorListener);
+                    SubmitKeysRequest request = new SubmitKeysRequest(
+                            uris.uploadUri,
+                            submission.payload,
+                            responseListener,
+                            errorListener
+                    );
                     RequestQueueSingleton.get(context).add(request);
                     return request;
                 });
@@ -238,26 +254,28 @@ public class DiagnosisKeyUploader {
     /**
      * Simple construction of a Diagnosis Keys submission.
      */
-    private static class SubmitKeysRequest extends JsonRequest<String> {
+    private static class SubmitKeysRequest extends JsonObjectRequest {
 
         SubmitKeysRequest(
                 Uri endpoint,
                 JSONObject jsonRequest,
-                Listener<String> listener,
+                Listener<JSONObject> listener,
                 ErrorListener errorListener) {
-            super(Method.POST, endpoint.toString(), jsonRequest.toString(), listener, errorListener);
+            super(Method.POST, endpoint.toString(), jsonRequest, listener, errorListener);
             setRetryPolicy(new DefaultRetryPolicy((int) TIMEOUT.toMillis(), MAX_RETRIES, RETRY_BACKOFF));
         }
 
         @Override
-        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+        protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
             try {
-                String responseString =
-                        new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                String responseString = new String(
+                        response.data,
+                        HttpHeaderParser.parseCharset(response.headers, JsonObjectRequest.PROTOCOL_CHARSET)
+                );
                 return response.statusCode < 400
-                        ? Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response))
+                        ? Response.success(new JSONObject(responseString), HttpHeaderParser.parseCacheHeaders(response))
                         : Response.error(new VolleyError(response));
-            } catch (UnsupportedEncodingException e) {
+            } catch (UnsupportedEncodingException | JSONException e) {
                 return Response.error(new ParseError(e));
             }
         }
