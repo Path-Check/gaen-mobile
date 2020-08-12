@@ -4,6 +4,9 @@ extension String {
 
   static let `default` = ""
 
+  // API
+  static let revisionToken = "revisionToken"
+
   // EN
   static let notAuthorized = "notAuthorized"
   static let authorized = "authorized"
