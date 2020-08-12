@@ -15,6 +15,7 @@ const MinnesotaMap = require("./minnesotaMap.png")
 const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
 const PeopleHighFiving = require("./peopleHighFiving.png")
 const PeopleOnPhones = require("./peopleOnPhones.png")
+const PeopleOnNetworkNodes = require("./peopleOnNetworkNodes.png")
 const PersonOnPhoneWithCode = require("./personOnPhoneWithCode.png")
 const PersonWithCodesInBackground = require("./personWithCodesInBackground.png")
 const PersonWithPhoneAndCode = require("./personWithPhoneAndCode.png")
@@ -42,6 +43,7 @@ export const Images = {
   MultipleCrossPathBackground,
   PeopleHighFiving,
   PeopleOnPhones,
+  PeopleOnNetworkNodes,
   PersonOnPhoneWithCode,
   PersonWithCodesInBackground,
   PersonWithPhoneAndCode,

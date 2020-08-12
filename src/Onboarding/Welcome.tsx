@@ -32,7 +32,7 @@ const Welcome: FunctionComponent = () => {
       </TouchableOpacity>
       <View>
         <Image
-          source={Images.MinnesotaMap}
+          source={Images.PeopleOnNetworkNodes}
           style={style.image}
           accessible
           accessibilityLabel={t("onboarding.welcome_image_label")}
