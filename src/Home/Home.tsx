@@ -131,7 +131,7 @@ const HomeScreen: FunctionComponent = () => {
     : t("home.bluetooth.tracing_off_header")
 
   const subheaderText = appIsActive
-    ? t("home.bluetooth.all_services_on_subheader")
+    ? t("home.bluetooth.all_services_on_subheader", { applicationName })
     : t("home.bluetooth.tracing_off_subheader")
 
   return (

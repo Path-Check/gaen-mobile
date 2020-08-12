@@ -27,9 +27,5 @@
   "screen_titles": {
     "about": "Sobre",
     "legal": "Legal"
-  },
-  "settings": {
-    "share_test_result": "Relatar um resultado positivo no teste",
-    "share_test_result_description": "Compartilhe as informações de exportação do Covid-19 com a sua autoridade sanitária com um código fornecido"
   }
 }

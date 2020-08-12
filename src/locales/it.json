@@ -58,7 +58,6 @@
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Le notifiche di esposizione sono attive",
-      "tracing_off_button": "Consenti notifiche",
       "tracing_off_header": "Notifiche disabilitate",
       "tracing_off_subheader": "Non riceverai notifiche su possibili esposizioni"
     }
@@ -72,7 +71,7 @@
     "unknown": "sconosciuto"
   },
   "navigation": {
-    "history": "Storico",
+    "exposure_history": "Cronologia delle esposizioni",
     "home": "Home",
     "more": "Altro",
     "self_assessment": "Salute"
@@ -84,9 +83,5 @@
     "about": "Informazioni",
     "exposure_history": "Cronologia delle esposizioni",
     "legal": "Legale"
-  },
-  "settings": {
-    "share_test_result": "Segnala un risultato positivo del test",
-    "share_test_result_description": "Condividi le informazioni di esposizione al Covid-19 con la tua istituzioni sanitaria con un codice fornito"
   }
 }
