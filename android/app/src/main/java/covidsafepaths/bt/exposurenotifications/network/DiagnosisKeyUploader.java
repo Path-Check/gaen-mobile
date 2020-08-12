@@ -49,7 +49,7 @@ import java.security.SecureRandom;
 
 import covidsafepaths.bt.exposurenotifications.ExposureKeyModule;
 import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
-import covidsafepaths.bt.exposurenotifications.storage.ExposureNotificationSharedPreferences;
+import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 /**
@@ -74,12 +74,10 @@ public class DiagnosisKeyUploader {
 
     private final Context context;
     private final Uris uris;
-    private ExposureNotificationSharedPreferences prefs;
 
     public DiagnosisKeyUploader(Context context) {
         this.context = context;
         uris = new Uris(context);
-        prefs = new ExposureNotificationSharedPreferences(context);
     }
 
     /**
@@ -186,6 +184,8 @@ public class DiagnosisKeyUploader {
         JSONArray regionJson = new JSONArray();
         regionJson.put(BuildConfig.REGION_CODES);
 
+        String realmToken = RealmSecureStorageBte.INSTANCE.getRevisionToken();
+
         submission.payload =
                 new JSONObject()
                         .put("temporaryExposureKeys", keysJson)
@@ -193,7 +193,7 @@ public class DiagnosisKeyUploader {
                         .put("padding", randomBase64Data(Util.getRandomNumber()))
                         .put("regions", regionJson)
                         .put("appPackageName", BuildConfig.ANDROID_APPLICATION_ID)
-                        .put("revisionToken", prefs.getRevisionToken(null));
+                        .put("revisionToken", realmToken != null ? realmToken : "");
 
         return FluentFuture.from(Futures.immediateFuture(submission));
     }
@@ -214,7 +214,7 @@ public class DiagnosisKeyUploader {
                                 try {
                                     // Save revisionToken to use on subsequent key updates
                                     String revisionToken = response.getString("revisionToken");
-                                    prefs.setRevisionToken(revisionToken);
+                                    RealmSecureStorageBte.INSTANCE.upsertRevisionToken(revisionToken);
                                 } catch (JSONException e) {
                                     Log.e(TAG, e.toString());
                                 } finally {

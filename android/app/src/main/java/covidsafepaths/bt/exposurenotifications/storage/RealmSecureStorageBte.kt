@@ -8,6 +8,8 @@ import com.bottlerocketstudios.vault.SharedPreferenceVaultFactory
 import com.google.android.gms.nearby.exposurenotification.ExposureWindow
 import com.google.common.util.concurrent.ListenableFuture
 import covidsafepaths.bt.MainApplication
+import covidsafepaths.bt.exposurenotifications.storage.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
+import covidsafepaths.bt.exposurenotifications.storage.KeyValues.Companion.REVISION_TOKEN_KEY
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
@@ -20,14 +22,14 @@ import java.security.SecureRandom
 object RealmSecureStorageBte {
 
     private const val TAG = "RealmSecureStorage"
-    private const val SCHEMA_VERSION: Long = 2
+    private const val SCHEMA_VERSION: Long = 3
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
     private const val MANUALLY_KEYED_KEY_ALIAS = "safepathsbte"
     private const val MANUALLY_KEYED_KEY_INDEX = 2
     private const val MANUALLY_KEYED_PRESHARED_SECRET =
-            "" // This will not be used as we do not support < 18
+        "" // This will not be used as we do not support < 18
     private const val KEY_REALM_ENCRYPTION_KEY = "KEY_REALM_ENCRYPTION_KEY"
 
     private val realmConfig: RealmConfiguration
@@ -36,10 +38,10 @@ object RealmSecureStorageBte {
         val encryptionKey = getEncryptionKey()
 
         val builder = RealmConfiguration.Builder()
-                .encryptionKey(encryptionKey)
-                .addModule(SafePathsBteRealmModule())
-                .schemaVersion(SCHEMA_VERSION)
-                .migration(Migration())
+            .encryptionKey(encryptionKey)
+            .addModule(SafePathsBteRealmModule())
+            .schemaVersion(SCHEMA_VERSION)
+            .migration(Migration())
 
         builder.name("safepathsbte.realm")
 
@@ -111,13 +113,29 @@ object RealmSecureStorageBte {
 
     fun upsertLastProcessedKeyZipFileName(name: String) {
         getRealmInstance().use {
-            it.executeTransaction { it.insertOrUpdate(KeyValues(ONLY_KEY, name)) }
+            it.executeTransaction { db ->
+                db.insertOrUpdate(KeyValues(LAST_PROCESSED_FILE_NAME_KEY, name))
+            }
         }
     }
 
     fun getLastProcessedKeyZipFileName(): String? {
         return getRealmInstance().use {
-            it.where(KeyValues::class.java).equalTo("id", ONLY_KEY).findFirst()?.lastDownloadedKeyZipFileName
+            it.where(KeyValues::class.java).equalTo("id", LAST_PROCESSED_FILE_NAME_KEY).findFirst()?.value
+        }
+    }
+
+    fun upsertRevisionToken(revisionToken: String) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.insertOrUpdate(KeyValues(REVISION_TOKEN_KEY, revisionToken))
+            }
+        }
+    }
+
+    fun getRevisionToken(): String? {
+        return getRealmInstance().use {
+            it.where(KeyValues::class.java).equalTo("id", REVISION_TOKEN_KEY).findFirst()?.value
         }
     }
 
@@ -141,7 +159,7 @@ object RealmSecureStorageBte {
                         // No existing ExposureEntity with the given date, must add an entity for this window.
                         somethingAdded = true
                         db.insert(ExposureEntity
-                          .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis()))
+                            .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis()))
                     }
                 }
             }
@@ -153,7 +171,7 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.delete(ExposureEntity::class.java)
-                db.delete(KeyValues::class.java)
+                db.where(KeyValues::class.java).equalTo("id", LAST_PROCESSED_FILE_NAME_KEY).findFirst()?.deleteFromRealm()
             }
         }
     }
