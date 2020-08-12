@@ -49,7 +49,7 @@ const MainNavigator: FunctionComponent = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <>
-          {onboardingIsComplete ? (
+          {false ? (
             <>
               <Stack.Screen
                 name={"App"}
