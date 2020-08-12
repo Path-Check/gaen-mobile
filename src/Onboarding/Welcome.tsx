@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
@@ -58,6 +64,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: Colors.primaryBackground,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,

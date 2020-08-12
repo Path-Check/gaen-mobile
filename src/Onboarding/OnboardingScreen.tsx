@@ -100,13 +100,11 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
               {onboardingScreenContent.header}
             </GlobalText>
           </View>
-          <View>
-            <Button
-              label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenActions.primaryButtonOnPress}
-              hasRightArrow
-            />
-          </View>
+          <Button
+            label={onboardingScreenContent.primaryButtonLabel}
+            onPress={onboardingScreenActions.primaryButtonOnPress}
+            hasRightArrow
+          />
         </ScrollView>
         <TouchableOpacity
           style={style.bottomButtonContainer}
