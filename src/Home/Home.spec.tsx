@@ -24,6 +24,16 @@ jest.mock("react-native-safe-area-context")
 
 jest.mock("../gaen/nativeModule")
 jest.mock("../utils/index")
+jest.mock("../More/useApplicationInfo", () => {
+  return {
+    useApplicationInfo: () => {
+      return {
+        applicationName: "applicationName",
+        versionInfo: "versionInfo",
+      }
+    },
+  }
+})
 
 describe("Home", () => {
   describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
@@ -96,7 +106,6 @@ describe("Home", () => {
       const proximityTracingDisabledText = within(
         proximityTracingStatusContainer,
       ).getByText("Disabled")
-
       await waitFor(() => {
         expect(header).toHaveTextContent("Inactive")
         expect(subheader).toHaveTextContent(
@@ -108,7 +117,7 @@ describe("Home", () => {
   })
 
   describe("When Bluetooth is off", () => {
-    it("renders an inactive message and a disabled message for bluetooth", async () => {
+    it("renders an inactive message and a disabled message for bluetooth", () => {
       const isBluetoothOn = "false"
       ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
 
@@ -132,13 +141,11 @@ describe("Home", () => {
         "Disabled",
       )
 
-      await waitFor(() => {
-        expect(header).toHaveTextContent("Inactive")
-        expect(subheader).toHaveTextContent(
-          "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
-        )
-        expect(bluetoothDisabledText).toBeDefined()
-      })
+      expect(header).toHaveTextContent("Inactive")
+      expect(subheader).toHaveTextContent(
+        "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+      )
+      expect(bluetoothDisabledText).toBeDefined()
     })
   })
 
@@ -162,15 +169,13 @@ describe("Home", () => {
       const fixBluetoothButton = getByTestId("home-bluetooth-status-container")
       const alert = jest.spyOn(Alert, "alert")
 
-      await waitFor(async () => {
-        fireEvent.press(fixBluetoothButton)
-        await waitFor(() => {
-          expect(alert).toHaveBeenCalledWith(
-            "Enable Bluetooth in Settings",
-            "Enable Bluetooth in the Settings app",
-            [{ text: "Okay" }],
-          )
-        })
+      fireEvent.press(fixBluetoothButton)
+      await waitFor(() => {
+        expect(alert).toHaveBeenCalledWith(
+          "Enable Bluetooth in Settings",
+          "Enable Bluetooth in the Settings app",
+          [{ text: "Okay" }],
+        )
       })
     })
   })
@@ -200,11 +205,9 @@ describe("Home", () => {
           "home-proximity-tracing-status-container",
         )
 
-        await waitFor(async () => {
-          fireEvent.press(fixProximityTracingButton)
-          await waitFor(() => {
-            expect(requestPermission).toHaveBeenCalled()
-          })
+        fireEvent.press(fixProximityTracingButton)
+        await waitFor(() => {
+          expect(requestPermission).toHaveBeenCalled()
         })
       })
     })
@@ -234,15 +237,13 @@ describe("Home", () => {
           )
           const alert = jest.spyOn(Alert, "alert")
 
-          await waitFor(async () => {
-            fireEvent.press(fixProximityTracingButton)
-            await waitFor(() => {
-              expect(alert).toHaveBeenCalledWith(
-                "Authorize in Settings",
-                "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
-                [expect.objectContaining({ text: "Open Settings" })],
-              )
-            })
+          fireEvent.press(fixProximityTracingButton)
+          await waitFor(() => {
+            expect(alert).toHaveBeenCalledWith(
+              "Authorize in Settings",
+              "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
+              [expect.objectContaining({ text: "Open Settings" })],
+            )
           })
         })
       })
