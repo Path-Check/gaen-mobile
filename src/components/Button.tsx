@@ -120,6 +120,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainerEnabled: {
     ...Outlines.baseShadow,
+    borderRadius: Outlines.borderRadiusMax,
   },
   button: {
     ...Buttons.primary,
