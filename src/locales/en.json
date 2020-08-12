@@ -121,7 +121,7 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_subheader": "COVIDaware will remain active after the app has been closed",
+      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Enable Bluetooth in the Settings app",
       "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
       "bluetooth_header": "Bluetooth",
@@ -139,38 +139,26 @@
   },
   "label": {
     "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",
-    "assessment_icon": "Clipboard icon with checkmark inside",
-    "exposure_icon": "Exposure icon",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
-    "description_optional": "Description (Optional)",
-    "email_optional": "Email (Optional)",
-    "home_icon": "Home icon",
     "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
-    "more_icon": "Icon of three horizontal dots",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox",
     "unknown": "unknown"
   },
-  "more": {
-    "debug": {
-      "submit_your_debug_log": "Submit your debug log"
-    }
-  },
   "navigation": {
     "exposure_history": "Exposure History",
     "home": "Home",
-    "report_issue": "Report Issue",
     "more": "More",
+    "report_issue": "Report Issue",
     "self_assessment": "Self Assessment"
   },
   "onboarding": {
-    "select_language": "Select Language",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
@@ -179,20 +167,20 @@
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
+    "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
-      "body_1": "These codes do not contain any personal information and change every 10-20 mintues to protect your identity.",
+      "body_1": "These codes do not contain any personal information and change every 10-20 minutes to protect your identity.",
       "body_2": "Phones swap codes with other devices using Bluetooth Low Energy. This allows the app to keep track of your daily encounters anonymously, even when you don’t have it open on your device.",
-      "body_3": "After testing positive for COVID-19, users can share a passcode with COVIDaware MN to verify their diagnosis. If they do so, their phone's recent random codes are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
-      "body_4": "Your COVIDaware MN app then compares the flagged codes to its own set of codes from your recent daily enocunters. This is how COVIDaware MN can identify if there's a chance you've been exposed to the virus.",
-      "body_5": "If there’s a match, the app will notify you and provide further guidance from your health department on how to keep yourself and the people around you safe.\nThis is how COVIDaware MN can help you stay informed about your health and keep your community safe, all without knowing who you are or where you've been.",
+      "body_3": "After testing positive for COVID-19, users can share a passcode with {{applicationName}} to verify their diagnosis. If they do so, their phone's recent random codes are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
+      "body_4": "Your {{applicationName}} app then compares the flagged codes to its own set of codes from your recent daily enocunters. This is how {{applicationName}} can identify if there's a chance you've been exposed to the virus.",
+      "body_5": "If there’s a match, the app will notify you and provide further guidance from your health department on how to keep yourself and the people around you safe.\nThis is how {{applicationName}} can help you stay informed about your health and keep your community safe, all without knowing who you are or where you've been.",
       "header": "Here's how we protect your privacy",
       "subheader_1": "When a user turns on Exposure Notifications, their phone is tagged with a frequently-changing, random code",
-      "subheader_2": "Phones with proximity tracing enabled swap codes with other devices they enounter",
+      "subheader_2": "Phones with proximity tracing enabled swap codes with other devices they encounter",
       "subheader_3": "Users who test positive can choose to  anonymously share their health status",
       "subheader_4": "Each phone periodically pings the server for the list of flagged codes shared by positive users and looks for matches",
       "subheader_5": "Users are informed if their app finds a positive match with a flagged code"
     },
-    "protect_privacy_button": "How we protect your privacy",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_button": "Activate Proximity Tracing",
@@ -215,6 +203,7 @@
     "screen4_image_label": "A person getting a notification on their phone",
     "screen5_header": "With the app, you can help break the chain of infection and get help direct from health experts",
     "screen5_image_label": "A person talking to a health expert virtually",
+    "select_language": "Select Language",
     "step": "Step {{currentStep}} of {{totalSteps}}",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
@@ -230,10 +219,8 @@
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
-    "debug_form": "Debug Form",
     "exposure_history": "Exposure History",
     "legal": "Legal",
-    "report_issue": "Report an Issue",
-    "select_language": "Select Language"
+    "report_issue": "Report an Issue"
   }
 }

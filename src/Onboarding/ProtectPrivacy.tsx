@@ -10,6 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 
@@ -19,6 +20,7 @@ import { Icons, Images } from "../assets"
 const ProtectPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const applicationName = env.IN_APP_NAME
 
   return (
     <View style={style.container}>
@@ -52,17 +54,23 @@ const ProtectPrivacy: FunctionComponent = () => {
         <Section
           image={Images.PersonWithPhoneAndCode}
           subheaderText={t("onboarding.protect_privacy.subheader_3")}
-          bodyText={t("onboarding.protect_privacy.body_3")}
+          bodyText={t("onboarding.protect_privacy.body_3", {
+            applicationName,
+          })}
         />
         <Section
           image={Images.CodesAndPhone}
           subheaderText={t("onboarding.protect_privacy.subheader_4")}
-          bodyText={t("onboarding.protect_privacy.body_4")}
+          bodyText={t("onboarding.protect_privacy.body_4", {
+            applicationName,
+          })}
         />
         <Section
           image={Images.PersonWithCodesInBackground}
           subheaderText={t("onboarding.protect_privacy.subheader_5")}
-          bodyText={t("onboarding.protect_privacy.body_5")}
+          bodyText={t("onboarding.protect_privacy.body_5", {
+            applicationName,
+          })}
         />
       </ScrollView>
     </View>

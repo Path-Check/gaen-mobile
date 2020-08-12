@@ -59,7 +59,6 @@
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
-      "tracing_off_button": "Pèmèt Notifikasyon Ekspozisyon yo",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo"
     }
@@ -74,7 +73,7 @@
     "unknown": "Pa gen kontak"
   },
   "navigation": {
-    "history": "Lis",
+    "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
     "more": "Plis",
     "self_assessment": "Sante"
@@ -86,9 +85,5 @@
     "about": "Apropo",
     "exposure_history": "Lis ekspozisyon",
     "legal": "Legal"
-  },
-  "settings": {
-    "share_test_result": "Rapòte yon rezilta tès pozitif",
-    "share_test_result_description": "Pataje enfòmasyon ekspozisyon Covid-19 ak otorite sante w a ak yon kòd."
   }
 }

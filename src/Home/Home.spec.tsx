@@ -24,11 +24,12 @@ jest.mock("react-native-safe-area-context")
 
 jest.mock("../gaen/nativeModule")
 jest.mock("../utils/index")
+const mockedApplicationName = "applicationName"
 jest.mock("../More/useApplicationInfo", () => {
   return {
     useApplicationInfo: () => {
       return {
-        applicationName: "applicationName",
+        applicationName: mockedApplicationName,
         versionInfo: "versionInfo",
       }
     },
@@ -71,7 +72,7 @@ describe("Home", () => {
 
         expect(header).toHaveTextContent("Active")
         expect(subheader).toHaveTextContent(
-          "COVIDaware will remain active after the app has been closed",
+          `${mockedApplicationName} will remain active after the app has been closed`,
         )
         expect(bluetoothEnabledText).toBeDefined()
         expect(proximityTracingEnabledText).toBeDefined()

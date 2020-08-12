@@ -158,7 +158,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
-          tabBarLabel: t("navigation.history"),
+          tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
         }}
       />

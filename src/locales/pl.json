@@ -48,7 +48,6 @@
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Powiadomienia o narażeniu są włączone",
-      "tracing_off_button": "Zezwolenie na powiadomienia o narażeniu",
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
       "tracing_off_subheader": "Włącz powiadomienia o narażeniu, aby otrzymywać informacje o możliwych ekspozycjach"
     }
@@ -62,7 +61,7 @@
     "unknown": "nieznany"
   },
   "navigation": {
-    "history": "Historia",
+    "exposure_history": "Historia Ekspozycji",
     "more": "Więcej",
     "self_assessment": "Zdrowie"
   },
@@ -70,9 +69,5 @@
     "about": "O nas",
     "exposure_history": "Historia Ekspozycji",
     "legal": "Informacje prawne"
-  },
-  "settings": {
-    "share_test_result": "Zgłoś pozytywny wynik testu",
-    "share_test_result_description": "Podziel się informacjami o narażeniu na Covid-19 z Twoim organem odpowiedzialnym za ochronę zdrowia, podając dostarczony kod"
   }
 }

@@ -54,7 +54,6 @@
     "privacy_policy": "Política de privacidad"
   },
   "navigation": {
-    "history": "Historial",
     "home": "Inicio",
     "more": "Más"
   },
@@ -64,8 +63,5 @@
   "screen_titles": {
     "about": "Acerca de",
     "legal": "Aviso legal"
-  },
-  "settings": {
-    "share_test_result": "Informar un resultado positivo de la prueba"
   }
 }

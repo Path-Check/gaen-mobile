@@ -59,7 +59,6 @@
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Naka-on o gumagana ang Exposure Notifications",
-      "tracing_off_button": "Payagan ang Exposure Notifications",
       "tracing_off_header": "Huwag paganahin ang Exposure Notifications",
       "tracing_off_subheader": "Paganahin ang Exposure Notifications o Pagklantad sa Posibleng Pagkahawa upang makatanggap ng impormasyon tungkol sa posibleng pagkahawa or pagkasalamuha sa mayroong virus"
     }
@@ -74,7 +73,7 @@
     "unknown": "Hindi Alam"
   },
   "navigation": {
-    "history": "History o Kasaysayan",
+    "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "home": "Home o Umpisa",
     "more": "Higit pa",
     "self_assessment": "Kalusugan"
@@ -86,9 +85,5 @@
     "about": "Tungkol",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "legal": "Ligal"
-  },
-  "settings": {
-    "share_test_result": "Ipagbigay-alam ang postibong resulta ng pagsusuri",
-    "share_test_result_description": "Ipabahagi ang impormasyon tungkol sa posibleng pagkahawa o pagkasalamuha sa tao, gamit o lugar na mayroong may COVID-19 sa iyong Awtoridad sa Pangangalagang Pangkalusugan, sa gamit ang nakalaang code"
   }
 }
