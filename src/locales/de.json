@@ -1,0 +1,215 @@
+{
+    "_display_name": "Deutsch",
+    "about": {
+        "operating_system_abbr": "OS:",
+        "version": "Version:"
+    },
+    "assessment": {
+
+        "agree_question_description": "Unterbrechen Sie bitte Ihre Tätigkeit und rufen Sie den Notfalldienst an, wenn bei Ihnen Folgendes auftritt:\n• Schwere, andauernde Brustschmerzen oder Druck \n• Extreme Atembeschwerden \n• Schwere, andauernde Benommenheit \n• Schwere Orientierungslosigkeit oder mangelnde Reaktionsfähigkeit",
+        "agree_question_text": " Ist das ein Notfall?",
+        "agreement_cta": "Ich verstehe und stimme zu",
+        "agreement_description": " Das Screening hilft Ihnen, Entscheidungen über die Inanspruchnahme angemessener medizinischer Versorgung zu treffen. Es ist nicht für die Diagnose oder Behandlung von Krankheiten oder anderen Leiden bestimmt.",
+        "agreement_footer": " Indem Sie fortfahren, erklären Sie sich damit einverstanden, dass Ihre Umfrageergebnisse nicht zur Diagnose oder Behandlung bestimmt sind.",
+        "agreement_title": " Dies ist nicht für die Diagnose",
+        "caregiver_cta": "Nächste",
+        "caregiver_description": " Benachrichtigen Sie einen Gesundheitsdienstleister in Ihrer Langzeitpflegeeinrichtung. Wenn Sie in einer Langzeitpflegeeinrichtung oder einem Pflegeheim leben, besteht die Gefahr, dass Sie schwer erkranken. Informieren Sie eine Pflegeperson in der Einrichtung, dass Sie krank sind und so schnell wie möglich einen medizinischen Leistungserbringer aufsuchen müssen.",
+        "caregiver_title": "Benachrichtigen Sie Caregiver",
+        "complete_cta": "Erledigt",
+        "complete_description": " Indem Sie Ihrer Gemeinde anonym Ihren Gesundheitszustand und die Geschichte Ihres Aufenthaltsortes mitteilen, gehen Sie proaktiv gegen die Verbreitung von COVID-19 vor.",
+        "complete_title": " Danke, dass Sie für die Sicherheit Ihrer Gemeinde sorgen!",
+        "distancing_cta": "Nächste",
+        "distancing_description": " Bitte beachten Sie Ihre lokalen, staatlichen oder nationalen Richtlinien für soziale Distanzierung und Persönliche Schutzausrüstung (PSA) wie Masken und/oder Handschuhe. Zu diesem Zeitpunkt sind keine zusätzlichen Maßnahmen erforderlich.",
+        "distancing_title": "Distanzierung & PPE",
+        "emergency_cta": "Rufen Sie bitte den Notarzt an",
+        "emergency_description": " Aufgrund der von Ihnen berichteten Symptome sollten Sie sich sofort in Behandlung begeben.",
+        "emergency_title": "Rufen Sie bitte Notdienste",
+        "experiencing_any_symptoms": " folgende Symptome",
+        "experiencing_some_symptoms": "folgende Symptome",
+        "i_am": "Ich bin ",
+        "i_am_not": "Ich bin nicht ",
+        "isolate_cta_en": "Nächste",
+        "isolate_description": " Sie haben einige Symptome, die mit COVID-19 in Zusammenhang stehen könnten. Rufen Sie Ihren medizinischen Betreuer an, wenn sich Ihre Symptome verschlimmern. Beginnen Sie mit der Isolation zu Hause.",
+        "isolate_title": "Isolieren Sie sich",
+        "next": "Nächste",
+        "share_cta": "Ich vestehe und stimme zu",
+        "share_description": " Ihre anonymen Daten helfen der {{{Behörde}}, die Verbreitung von COVID-19 zu analysieren, zu verfolgen und einzudämmen. Ihre Daten werden so aggregiert, dass sie von anderen OHIOH Aurora-Benutzern stammen, die sich zur gemeinsamen Nutzung entscheiden.\n\n Ihre Daten enthalten Ihre Umfrageantworten und die Postleitzahl, aber keine zusätzlichen oder persönlich identifizierenden Informationen.\n\n Die {{Behörde}} wird Ihre anonymen Daten für einen bestimmten Zeitraum aufbewahren.",
+        "share_title": "Anonymisierte Daten veröffentlichen",
+        "start_cta": "Start",
+        "start_description": " Ihre Informationen sind privat, anonymisiert und verschlüsselt. Keine Daten verlassen Ihr Gerät ohne Ihre Zustimmung.",
+        "start_title": " Beantworten Sie bitte die Fragen zu Ihren Symptomen und Ihrer Krankengeschichte, um zu erfahren, was Sie als Nächstes in Bezug auf COVID-19 tun können",
+        "share_cta_skip": "Nein danke, ich möchte keine Daten austauschen"
+    },
+    "common": {
+        "done": "Erledigt",
+        "settings­­": "Einstellungen öffnen",
+        "something_went_wrong": "Etwas ist schief gelaufen",
+        "start": "Start",
+        "submit": "Anmeldung einreichen",
+        "success": "Erfolg"
+
+    },
+    "export": {
+        "code_input_body_bluetooth": "Geben Sie Ihren Verifizierungscode ein",
+        "code_input_button_cancel": "Abbrechen",
+        "code_input_title_bluetooth": "Überprüfen Sie Ihre Diagnose",
+        "complete_body_bluetooth": "Indem Sie sich dafür entscheiden, Ihren Status mitzuteilen und andere anonym zu benachrichtigen, tragen Sie dazu bei, die Ausbreitung des Virus einzudämmen und andere in Ihrer Gemeinschaft zu schützen.",
+        "complete_title": " Danke, dass Sie für die Sicherheit Ihrer Gemeinde sorgen!",
+        "consent_button_cancel": "Abbrechen",
+        "consent_button_title": "Ich verstehe und stimme zu",
+
+        "error": {
+            "invalid_code": "Versuchen Sie einen anderen Code",
+            "unknown_code_verification_error": "Versuchen Sie einen anderen Code",
+            "verification_code_used": "Verifizierungscode wurde bereits verwendet"
+
+        },
+        "publish_consent_body_bluetooth": "Die Mitteilung Ihrer positiven Diagnose ist freiwillig und kann nur mit Ihrer Einwilligung erfolgen.\n Wenn Sie sich dafür entscheiden, helfen Sie anderen in Ihrer Gemeinde, informierte Entscheidungen über ihre Gesundheit zu treffen, tragen dazu bei, die Ausbreitung des Virus einzudämmen.\n Die einzigen Informationen, die Sie mitteilen, sind die zufällig ausgewählten Nummern, die Ihr Telefon über Bluetooth mit anderen Telefonen ausgetauscht hat, die sich in den letzten 14 Tagen in der Nähe befanden, zusammen mit einer gewichteten Risikoeinstufung, die auf dem Zeitpunkt der Entwicklung Ihrer Symptome basiernd ",
+        "publish_consent_title_bluetooth": "Benachrichtigen Sie Ihre Gemeinde oder Behörde",
+        "start_body_bluetooth": "Entscheiden Sie sich dafür, andere, denen Sie möglicherweise begegnet sind, anonym zu benachrichtigen und Ihrer Gemeinschaft zu helfen, die Verbreitung des Virus einzudämmen.        ",
+        "start_title_bluetooth": "Helfen Sie mit, die Ausbreitung des Virus einzudämmen und andere in Ihrer Gemeinde zu schützen, wenn bei Ihnen COVID-19 diagnostiziert wird oder Sie positiv auf COVID-19 getestet werden."
+    },
+    "exposure_datum": {
+
+        "no_data": {
+            "explanation": " Dies geschieht, wenn der Standortzugang für Ihre OHIOH Aurora App - Anwendung deaktiviert ist oder das ausgewählte Datum mehr als 14 Tage zurückliegt.Für diesen Tag sind keine Expositionsbenachrichtigungen verfügbar."
+        },
+        "no_known": {
+            "explanation": "Ihrer Verlauf wird aktualisiert, falls sich dies in Zukunft ändern sollte."
+        },
+        "possible": {
+            "duration": "Mögliche Zeit für das Infektionsrisiko:{{duration}}",
+
+            "explanation": {
+                "bt": "Für {{duration}}, Ihr Telefon befand sich drei Meter von jemandem entfernt, der später eine bestätigte positive COVID-19-Diagnose erhielt."
+            },
+
+            "what_next": "Was soll ich als nächstes tun ? "
+        }
+    },
+    "exposure_history": {
+        "bt": {
+            "how_does_this_work_para": "Wenn die Risikobenachrichtigungen eingeschaltet sind, verwendet Ihr Telefon Bluetooth, um zufällige Zahlenfolgen (so genannte Zufalls-IDs) von allen Telefonen, auf die es trifft und bei denen ebenfalls Risikobenachrichtigungen aktiviert sind, auszutauschen und zu speichern. Zufalls-IDs identifizieren Sie gegenüber anderen Benutzern nicht persönlich und ändern sich mehrmals täglich, um Ihre Privatsphäre zu schützen. Datum und Dauer der Begegnung werden aufgezeichnet, zusammen mit einer Schätzung, wie nahe sich die beiden Telefone möglicherweise gekommen sind. Wenn eine Person eine positive Diagnose meldet, werden die letzten Zufalls-IDs ihres Telefons markiert, um andere anonym zu benachrichtigen. Es werden weder Standorte noch persönliche Daten weitergegeben.",
+
+            "why_did_i_get_an_en_para": "Sie erhalten eine Warnmeldung, wenn jemand, dem Sie später begegnet sind, eine bestätigte, positive Diagnose oder einen Test auf COVID - 19 erhält und sich entscheidet, andere zu benachrichtigen ",
+
+        },
+        "how_does_this_work": " Wie funktioniert das ? ",
+        "last_days": "Letzte 21 Tage",
+        "legend_button": "LEGENDE",
+        "legend": {
+            "exposure_possible": "Mögliche Gefährdung",
+            "no_exposure_detected": "Keine Gefährdung festgestellt",
+            "today": "Heute"
+        },
+        "next_steps": {
+            "button_text": "Siehe Empfehlungen",
+            "ha_self_assessment": "Befolgen Sie den Rat von {{healthAuthorityName}}, was als nächstes zu tun.",
+            "maybe_exposed": "Sie könnten COVID - 19 ausgesetzt gewesen sein ",
+            "possible_crossed_paths": "Basierend auf Ihrer Ortsgeschichte ist es möglich, dass sich Ihre Wege mit jemandem gekreuzt haben, bei dem COVID-19 diagnostiziert wurde",
+            "possible_infection_precaution": "Das bedeutet nicht, dass Sie infiziert sind, aber Sie sollten trotzdem Vorsichtsmaßnahmen ergreifen. Menschen, die keine Symptome zeigen, können manchmal trotzdem ansteckend sein."
+
+        },
+
+        "updated": "Aktualisiert",
+        "why_did_i_get_an": "Warum habe ich eine Warnmeldung erhalten?"
+
+    },
+    "home": {
+        "bluetooth": {
+
+            "all_services_on_header": "OHIOH Aurora",
+            "all_services_on_subheader": "Warnmeldungen sind aktiviert ",
+            "tracing_off_button": "Warn-Benachrichtigungen erlauben",
+            "tracing_off_header": "Warn-Benachrichtigungen sind deaktiviert",
+            "tracing_off_subheader ": " Ermöglichen Sie Ankündigungen,  um Informationen über mögliches Risiko zu erhalten ",
+            "unauthorized_error_message": "Sie müssen die COVID-19-Belastungsprotokollierung in der Anwendung Einstellungen autorisieren, um fortzufahren.",
+            "unauthorized_error_title": "Bitte Einstellungen aktualisieren"
+
+        },
+        "exposureBox": {
+            "headerBox": "Alert-System",
+            "mainBox": "Meldungen sind aktiviert",
+        },
+        "statisticBox": {
+            "completeNumberUser": "Wieviele Studenten  sind regestriert:",
+            "infectedWeek": "Wieviele Studenten nutzen die App aktiv:",
+            "usersToday": "Tägliche Nutzerzahl:"
+        },
+        "newsBox": {
+            "headerBox": "Aktuell:",
+            "mainBox": "die App ist da."
+        }
+    },
+    "label": {
+        "about_header_bluetooth_en": "OHIOH Aurora",
+        "about_header_bluetooth": "OHIOH Aurora",
+        "about_para": "Die OHIOH Aurora-App wird von der PathCheck Foundation und der Fachhochschule Kiel: Arbeitsgruppe OHIOH zur Verfügung gestellt, gemeinnütziger Organisationen, die sich der Bereitstellung freier Software verschrieben hat, um die Verbreitung von COVID-19 zu stoppen und die Privatsphäre des Einzelnen zu schützen. \n\n Für weitere Informationen besuchen Sie",
+        "assessment_icon": "Zwischenablage-Symbol mit Häkchen innen",
+        "bell_icon": "Glocken-Symbol",
+        "bluetooth_icon": "Suche nach Bluetooth-Gerätesymbol",
+        "calendar_icon": "Kalender-Symbol",
+        "check_icon": "Häkchen-Symbol",
+        "close_icon": "Schließen-Symbol",
+        "description_optional": "Beschreibung (Optional)",
+        "email_optional": "Email (Optional)",
+        "exposure_icon": "Kreissymbol mit acht Punkten, die es umgeben",
+        "heart_icon": "Herzsymbol mit Kreuz im Inneren",
+        "home_icon": "Startsymbol",
+        "language_icon": "Umrissenes Symbol eines Globus",
+        "launch_disable_exposure_notif": "Nicht aktivieren",
+        "launch_enable_exposure_notif": "Aktivieren",
+        "launch_enable_notif": "Benachrichtigungen aktivieren",
+        "launch_exposure_notif_header": "Warnmeldungen aktivieren",
+        "launch_exposure_notif_subheader": "Um über Aktualisierungen Ihrer Risiko-Geschichte benachrichtigt zu werden, benötigt Ihr Smartphone die Erlaubnis, anonyme Bluetooth-Zufalls-IDs mit anderen Geräten auszutauschen.\n\n Warnmeldungen funktionieren nur mit anderen Geräten, bei denen die Einstellung aktiviert ist.\n\n Sie können diese Benachrichtigungen jederzeit abschalten.",
+        "launch_get_started": "Startet",
+        "launch_next": "Nächste",
+        "launch_screen1_header": "Willkommen in deiner OHIOH Aurora-APP",
+        "launch_screen2_header_bluetooth": "Ihr Smartphone erinnert sich an andere Geräte, auf die es trifft, identifiziert dich aber nicht gegenüber anderen Personen.",
+        "launch_screen2_subheader_bluetooth": "In der Nähe befindliche Handys verwenden Bluetooth, um zufällige Zahlenfolgen auszutauschen und zu speichern, damit Geräte in der Nähe zurückgerufen werden können.\n\n Wenn eine Person eine positive Diagnose meldet, werden die letzten zufälligen IDs ihres Telefons markiert, um andere anonym zu benachrichtigen. Es werden weder Standorte noch persönliche Daten weitergegeben.",
+        "launch_screen3_header_bluetooth": "Benachrichtigungen erhalten, wenn sich jemand, dem Sie später begegnet sind, entscheidet, eine positive Diagnose zu melden.",
+        "launch_screen3_subheader_bluetooth": "Erfahren Sie Details über die Begegnung, wie Datum, Dauer und Bluetooth-Signalstärke.",
+        "launch_screen4_header_bluetooth": "Wenn Sie positiv auf das Virus testen, das COVID-19 verursacht, können Sie sich dafür entscheiden, Ihre Diagnose anonym weiterzugeben.",
+        "launch_screen4_subheader_bluetooth": "Dies hilft anderen in deiner Fachhochschule Kiel, die Ausbreitung des Virus einzudämmen.",
+        "launch_set_up_phone_bluetooth": "Nächste",
+        "legal_page_address": "Fachhochschule Kiel: Arbeitsgruppe OHIOH \nSokratesplatzt 1\n24149 Kiel, Germany",
+        "legal_page_header_bluetooth": "OHIOH Aurora",
+        "more_icon": "Symbol mit drei horizontalen Punkten",
+        "privacy_policy": "Datenschutzerklärung",
+        "question_icon": "Fragezeichen-Symbol",
+        "unknown": "unbekannt"
+
+    },
+    "more": {
+        "debug": {
+            "submit_your_debug_log": "Senden Sie Ihr Debug-Protokoll ein"
+        }
+    },
+    "navigation": {
+        "history": "Geschichte",
+        "home": "Startseite",
+        "more": "Mehr",
+        "self_assessment": "Gesundheit"
+    },
+    "onboarding": {
+        "eula_checkbox": "Ich akzeptiere die Lizenzvereinbarung",
+        "eula_continue": "Weiter",
+        "eula_message": "*Sie müssen akzeptieren, um OHIOH Aurora verwenden zu können",
+        "maybe_later": "Vielleicht später",
+        "notification_header": "Möchten Sie Benachrichtigungen erhalten, wenn sich Ihre Wege mit dem Virus gekreuzt haben könnten?",
+        "notification_subheader": "OHIOH Aurora arbeitet mit lokalen Gesundheitsbehörden zusammen, um das Virus aufzuspüren. Wenn Sie sich in einem Zuständigkeitsbereich befinden, der von einem unserer Partner aus dem Gesundheitsministerium betreut wird, können Sie von Ihrem Gesundheitsministerium Warnmeldungen erhalten."
+    },
+    "screen_titles": {
+        "about": "Über",
+        "debug": "Entwickler-Modus",
+        "debug_form": "Debug Form",
+        "exposure_history": "Verlauf: (Warnmeldungen)",
+        "legal": "Legal",
+        "select_language": "Sprache auswählen"
+    },
+    "settings": {
+        "share_test_result": "Positives Testergebnis melden",
+        "share_test_result_description": "Benachrichtigen Sie andere Personen, denen Sie kürzlich begegnet sind, anonym, wenn Sie positiv auf COVID-19 getestet haben."
+
+    }
+}
