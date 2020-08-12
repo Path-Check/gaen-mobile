@@ -2,12 +2,7 @@
   <tr>
   <td>
     <a href="https://pathcheck.org/">
-    <img
-      width="80"
-      height="67"
-      alt="pathcheck logo"
-      src="./assets/Safe_Paths_Logo.png"
-    />
+
   </a>
   </td>
   <td>
