@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   Alert,
@@ -21,7 +21,6 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useStatusBarEffect, Stacks } from "../navigation"
-import { isBluetoothEnabled } from "../gaen/nativeModule"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
@@ -36,6 +35,7 @@ import {
   Outlines,
   Iconography,
 } from "../styles"
+import { useBluetoothStatus } from "./useBluetoothStatus"
 
 const HomeScreen: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -48,16 +48,7 @@ const HomeScreen: FunctionComponent = () => {
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
-
-  const [btStatus, setBTStatus] = useState(false)
-  const fetchBTStatus = async () => {
-    const status = await isBluetoothEnabled()
-    setBTStatus(status === "true")
-  }
-
-  useEffect(() => {
-    fetchBTStatus()
-  }, [])
+  const btStatus = useBluetoothStatus()
 
   const isEnabled = enablement === "ENABLED"
   const isAuthorized = authorization === "AUTHORIZED"
