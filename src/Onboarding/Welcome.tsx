@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-} from "react-native"
+import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"

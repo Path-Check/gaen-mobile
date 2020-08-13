@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import {
   Image,
   StyleSheet,
+  Platform,
   View,
   ScrollView,
   ImageSourcePropType,
@@ -64,64 +65,78 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   useStatusBarEffect("dark-content")
 
   return (
-    <SafeAreaView>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(Screens.LanguageSelection)}
-        style={style.languageButtonContainer}
-      >
-        <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate(Stacks.Activation, {
-            screen: ActivationScreens.AcceptEula,
-          })
-        }
-        style={style.skipButtonContainer}
-      >
-        <GlobalText style={style.skipButtonText}>{t("common.skip")}</GlobalText>
-      </TouchableOpacity>
-      <View style={style.outerContainer}>
-        <ScrollView
-          alwaysBounceVertical={false}
-          style={style.container}
-          contentContainerStyle={style.contentContainer}
-        >
-          <View>
-            <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
-              accessible
-              style={style.image}
-              resizeMode={"contain"}
-            />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
-            <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
-            </GlobalText>
-          </View>
-          <Button
-            label={onboardingScreenContent.primaryButtonLabel}
-            onPress={onboardingScreenActions.primaryButtonOnPress}
-            hasRightArrow
-          />
-        </ScrollView>
+    <>
+      <SafeAreaView
+        style={{
+          backgroundColor: Colors.primaryBackground,
+        }}
+      />
+      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.faintGray }}>
         <TouchableOpacity
-          style={style.bottomButtonContainer}
-          onPress={() => navigation.navigate(OnboardingScreens.ProtectPrivacy)}
+          onPress={() => navigation.navigate(Screens.LanguageSelection)}
+          style={style.languageButtonContainer}
         >
-          <GlobalText style={style.bottomButtonText}>
-            {t("onboarding.protect_privacy_button")}
+          <GlobalText style={style.languageButtonText}>
+            {languageName}
           </GlobalText>
-          <SvgXml
-            xml={Icons.ChevronUp}
-            fill={Colors.primaryBlue}
-            width={Iconography.xxSmall}
-            height={Iconography.xxSmall}
-          />
         </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(Stacks.Activation, {
+              screen: ActivationScreens.AcceptEula,
+            })
+          }
+          style={style.skipButtonContainer}
+        >
+          <GlobalText style={style.skipButtonText}>
+            {t("common.skip")}
+          </GlobalText>
+        </TouchableOpacity>
+        <View style={style.outerContainer}>
+          <ScrollView
+            alwaysBounceVertical={false}
+            contentContainerStyle={style.contentContainer}
+          >
+            <View>
+              <Image
+                source={onboardingScreenContent.image}
+                accessibilityLabel={onboardingScreenContent.imageLabel}
+                accessible
+                style={style.image}
+                resizeMode={"contain"}
+              />
+              <PositionDots
+                screenNumber={onboardingScreenContent.screenNumber}
+              />
+              <GlobalText style={style.headerText}>
+                {onboardingScreenContent.header}
+              </GlobalText>
+            </View>
+            <Button
+              label={onboardingScreenContent.primaryButtonLabel}
+              onPress={onboardingScreenActions.primaryButtonOnPress}
+              hasRightArrow
+            />
+          </ScrollView>
+          <TouchableOpacity
+            style={style.bottomButtonContainer}
+            onPress={() =>
+              navigation.navigate(OnboardingScreens.ProtectPrivacy)
+            }
+          >
+            <GlobalText style={style.bottomButtonText}>
+              {t("onboarding.protect_privacy_button")}
+            </GlobalText>
+            <SvgXml
+              xml={Icons.ChevronUp}
+              fill={Colors.primaryBlue}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
+            />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </>
   )
 }
 
@@ -153,18 +168,49 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
+const isIOS = Platform.OS === "ios"
+const skipButtonSpacingTop = isIOS ? Spacing.xSmall : Spacing.xxLarge
+const languageButtonSpacingTop = isIOS ? Spacing.small : Spacing.huge
+
 const style = StyleSheet.create({
+  languageButtonContainer: {
+    ...Outlines.ovalBorder,
+    position: "absolute",
+    top: languageButtonSpacingTop,
+    left: Spacing.small,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
+    borderColor: Colors.primaryViolet,
+    zIndex: Layout.zLevel1,
+  },
+  languageButtonText: {
+    ...Typography.base,
+    letterSpacing: Typography.mediumLetterSpacing,
+    color: Colors.primaryViolet,
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+  skipButtonContainer: {
+    position: "absolute",
+    top: skipButtonSpacingTop,
+    right: Spacing.small,
+    padding: Spacing.small,
+    zIndex: Layout.zLevel1,
+  },
+  skipButtonText: {
+    ...Typography.base,
+    color: Colors.mediumGray,
+  },
   outerContainer: {
     justifyContent: "space-between",
     height: "100%",
-  },
-  container: {
-    paddingHorizontal: Spacing.large,
+    backgroundColor: Colors.primaryBackground,
   },
   contentContainer: {
     height: "100%",
     justifyContent: "space-between",
     paddingBottom: Spacing.huge,
+    paddingHorizontal: Spacing.large,
   },
   image: {
     width: "100%",
@@ -195,36 +241,8 @@ const style = StyleSheet.create({
     ...Typography.header3,
     marginBottom: Spacing.xLarge,
   },
-  skipButtonContainer: {
-    position: "absolute",
-    top: Spacing.huge,
-    right: Spacing.small,
-    padding: Spacing.small,
-    zIndex: Layout.zLevel1,
-  },
-  skipButtonText: {
-    ...Typography.base,
-    color: Colors.mediumGray,
-  },
-  languageButtonContainer: {
-    ...Outlines.ovalBorder,
-    position: "absolute",
-    top: Spacing.xxHuge,
-    left: Spacing.small,
-    paddingVertical: Spacing.xxSmall,
-    paddingHorizontal: Spacing.large,
-    borderColor: Colors.primaryViolet,
-    zIndex: Layout.zLevel1,
-  },
-  languageButtonText: {
-    ...Typography.base,
-    letterSpacing: Typography.mediumLetterSpacing,
-    color: Colors.primaryViolet,
-    textAlign: "center",
-    textTransform: "uppercase",
-  },
   bottomButtonContainer: {
-    backgroundColor: Colors.lightestGray,
+    backgroundColor: Colors.faintGray,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
