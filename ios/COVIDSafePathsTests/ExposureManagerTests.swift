@@ -1,12 +1,366 @@
 import Foundation
-import  ExposureNotification
+import ExposureNotification
 import RealmSwift
 import XCTest
 
 @testable import BT
 
+class BTSecureStorageMock: BTSecureStorage {
+
+  var userStateHandler: (() -> UserState)?
+
+  init() {
+    super.init(inMemory: true)
+  }
+
+  override var userState: UserState {
+    return userStateHandler?() ?? UserState()
+  }
+}
+
+class APIClientMock<U: APIRequest>: APIClient {
+
+  var requestHander: (_ request: U, RequestType) -> Result<U.ResponseType>
+
+  init(requestHander: @escaping (_ request: U, _ requestType: RequestType) -> Result<U.ResponseType>) {
+    self.requestHander = requestHander
+  }
+
+  static var documentsDirectory: URL? {
+    return nil
+  }
+
+  func request<T>(_ request: T, requestType: RequestType, completion: @escaping GenericCompletion) where T : APIRequest, T.ResponseType == Void {
+
+  }
+
+  func downloadRequest<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<DownloadedPackage>) -> Void) where T : APIRequest {
+
+  }
+
+  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
+
+  }
+
+  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
+    completion(requestHander(request as! U, requestType) as! Result<T.ResponseType>)
+  }
+
+  func requestList<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T : APIRequest, T.ResponseType : Collection, T.ResponseType.Element : Decodable {
+
+  }
+
+  func requestString<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType == String {
+
+  }
+
+  func cancelAllRequests() {
+
+  }
+}
+
+class NotificationCenterMock: NotificationCenter {
+
+  var addObserverHandler: ((_ observer: Any,
+                            _ aSelector: Selector,
+                            _ aName: NSNotification.Name?,
+                            _ anObject: Any?) -> Void)?
+  var postHandler: ((_ notification: Notification) -> Void)?
+
+  override func addObserver(_ observer: Any,
+                            selector aSelector: Selector,
+                            name aName: NSNotification.Name?,
+                            object anObject: Any?) {
+    addObserverHandler?(observer, aSelector, aName, anObject)
+  }
+
+  override func post(_ notification: Notification) {
+    postHandler?(notification)
+  }
+}
+
+class ENManagerMock: ExposureNotificationManager {
+
+  var activateHandler: ((_ completionHandler: @escaping ENErrorHandler) -> Void)?
+  var invalidateHandler: (() -> Void)?
+  var setExposureNotificationEnabledHandler: ((_ enabled: Bool, _ completionHandler: @escaping ENErrorHandler) -> Void)?
+  var exposureNotificationEnabledHandler: (() -> Bool)?
+  var exposureNotificationStatusHandler: (() -> ENStatus)?
+  var authorizationStatusHandler: (() -> ENAuthorizationStatus)?
+
+  var dispatchQueue: DispatchQueue = DispatchQueue.main
+
+  var invalidationHandler: (() -> Void)?
+
+  func authorizationStatus() -> ENAuthorizationStatus {
+    return authorizationStatusHandler?() ?? .unknown
+  }
+
+  var exposureNotificationEnabled: Bool {
+    return exposureNotificationEnabledHandler?() ?? false
+  }
+
+  func detectExposures(configuration: ENExposureConfiguration, diagnosisKeyURLs: [URL], completionHandler: @escaping ENDetectExposuresHandler) -> Progress {
+    return Progress()
+  }
+
+  func getExposureInfo(summary: ENExposureDetectionSummary, userExplanation: String, completionHandler: @escaping ENGetExposureInfoHandler) -> Progress {
+    return Progress()
+  }
+
+  func getDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler) {
+
+  }
+
+  func getTestDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler) {
+
+  }
+
+  var exposureNotificationStatus: ENStatus {
+    return exposureNotificationStatusHandler?() ?? .unknown
+  }
+
+  func activate(completionHandler: @escaping ENErrorHandler) {
+    activateHandler?(completionHandler)
+  }
+
+  func invalidate() {
+    invalidateHandler?()
+  }
+
+  func setExposureNotificationEnabled(_ enabled: Bool, completionHandler: @escaping ENErrorHandler) {
+    setExposureNotificationEnabledHandler?(enabled, completionHandler)
+  }
+}
+
 class ExposureManagerTests: XCTestCase {
-  
+
+  func testCreatesSharedInstance() {
+    ExposureManager.createSharedInstance()
+    XCTAssertNotNil(ExposureManager.shared)
+  }
+
+  func testLifecycle() {
+    let mockENManager = ENManagerMock()
+    let activateExpectation = self.expectation(description: "Activate gets called")
+    let invalidateExpectation = self.expectation(description: "Invalidate gets called")
+
+    let registerNotificationExpectation = self.expectation(description: "Registers for authorization changes")
+
+    let setExposureNotificationEnabledTrueExpectation = self.expectation(description: "When activated, if authorized and disabled, request to enable exposure notifications")
+
+    let notificationCenterMock = NotificationCenterMock()
+    notificationCenterMock.addObserverHandler = { (_, _, name, _) in
+      if name == Notification.Name.AuthorizationStatusDidChange {
+        registerNotificationExpectation.fulfill()
+      }
+    }
+
+    mockENManager.activateHandler = { completionHandler in
+      mockENManager.authorizationStatusHandler = {
+        return .authorized
+      }
+      mockENManager.exposureNotificationStatusHandler = {
+        return .disabled
+      }
+      completionHandler(nil)
+      activateExpectation.fulfill()
+    }
+
+    mockENManager.invalidateHandler = {
+      invalidateExpectation.fulfill()
+    }
+
+    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
+      if enabled {
+        setExposureNotificationEnabledTrueExpectation.fulfill()
+      }
+      completionHandler(nil)
+    }
+
+    _ = ExposureManager(exposureNotificationManager: mockENManager,
+                    notificationCenter: notificationCenterMock)
+    wait(for: [activateExpectation,
+               invalidateExpectation,
+               registerNotificationExpectation,
+               setExposureNotificationEnabledTrueExpectation], timeout: 1)
+  }
+
+  func testAwake() {
+    let exposureConfigurationRequestExpectation = self.expectation(description: "A request to get the exposure configuration is made")
+    let apiClientMock = APIClientMock<ExposureConfigurationRequest> { (request, requestType) -> Result<ExposureConfiguration> in
+      exposureConfigurationRequestExpectation.fulfill()
+      return Result.success(ExposureConfiguration.placeholder)
+    }
+    let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
+    let notificationCenterMock = NotificationCenterMock()
+    notificationCenterMock.postHandler = { notification in
+      if notification.name == .AuthorizationStatusDidChange {
+        broadcastAuthorizationStateExpectation.fulfill()
+      }
+    }
+    let exposureManager = ExposureManager(apiClient: apiClientMock,
+                                          notificationCenter: notificationCenterMock)
+    exposureManager.awake()
+    wait(for: [exposureConfigurationRequestExpectation,
+               broadcastAuthorizationStateExpectation], timeout: 0)
+  }
+
+  func testEnabledtatus() {
+
+    let mockENManager = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
+
+    mockENManager.exposureNotificationEnabledHandler = {
+      return true
+    }
+    XCTAssertEqual(exposureManager.enabledState, ExposureManager.EnabledState.enabled)
+    mockENManager.exposureNotificationEnabledHandler = {
+      return false
+    }
+    XCTAssertEqual(exposureManager.enabledState, ExposureManager.EnabledState.disabled)
+  }
+
+  func testAuthorizationStatus() {
+
+    let mockENManager = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
+
+    mockENManager.authorizationStatusHandler = {
+      return .authorized
+    }
+    XCTAssertEqual(exposureManager.authorizationState,
+                   ExposureManager.AuthorizationState.authorized)
+    mockENManager.authorizationStatusHandler = {
+      return .notAuthorized
+    }
+    XCTAssertEqual(exposureManager.authorizationState,
+                   ExposureManager.AuthorizationState.unauthorized)
+    mockENManager.authorizationStatusHandler = {
+      return .restricted
+    }
+    XCTAssertEqual(exposureManager.authorizationState,
+                   ExposureManager.AuthorizationState.unauthorized)
+    mockENManager.authorizationStatusHandler = {
+      return .unknown
+    }
+    XCTAssertEqual(exposureManager.authorizationState,
+                   ExposureManager.AuthorizationState.unauthorized)
+  }
+
+  func testBluetoothStatus() {
+
+    let mockENManager = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
+
+    mockENManager.exposureNotificationStatusHandler = {
+      return .bluetoothOff
+    }
+    XCTAssertFalse(exposureManager.isBluetoothEnabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .active
+    }
+    XCTAssertTrue(exposureManager.isBluetoothEnabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .disabled
+    }
+    XCTAssertTrue(exposureManager.isBluetoothEnabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .paused
+    }
+    XCTAssertTrue(exposureManager.isBluetoothEnabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .restricted
+    }
+    XCTAssertTrue(exposureManager.isBluetoothEnabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .unknown
+    }
+    XCTAssertTrue(exposureManager.isBluetoothEnabled)
+  }
+
+  func testCurrentExposures() {
+    let btSecureStorageMock = BTSecureStorageMock()
+    btSecureStorageMock.userStateHandler = {
+      let userState = UserState()
+      userState.exposures.append(Exposure(id: "1",
+                                          date: 0,
+                                          duration: 10,
+                                          totalRiskScore: ENRiskScore(ENRiskScoreMin),
+                                          transmissionRiskLevel: ENRiskScore(ENRiskScoreMin)))
+      return userState
+    }
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    let currentExposures = exposureManager.currentExposures
+    XCTAssertNoThrow(try JSONDecoder().decode(Array<Exposure>.self, from: currentExposures.data(using: .utf8) ?? Data()))
+  }
+
+  func testEnableNotificationsSuccess() {
+    let setEnabled = true
+    let setExposureNotificationEnabledExpectation = self.expectation(description: "Request the change of state to the underlying manager")
+    let mockENManager = ENManagerMock()
+    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
+      if enabled == setEnabled {
+        setExposureNotificationEnabledExpectation.fulfill()
+      }
+      completionHandler(nil)
+    }
+    let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
+    let notificationCenterMock = NotificationCenterMock()
+    notificationCenterMock.postHandler = { notification in
+      if notification.name == .AuthorizationStatusDidChange {
+        broadcastAuthorizationStateExpectation.fulfill()
+      }
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          notificationCenter: notificationCenterMock)
+    exposureManager.requestExposureNotificationAuthorization(enabled: setEnabled) { (error) in
+      XCTAssertNil(error, "There should be no error")
+    }
+    wait(for: [setExposureNotificationEnabledExpectation,
+               broadcastAuthorizationStateExpectation], timeout: 0)
+  }
+
+  func testEnableNotificationsError() {
+    let setExposureNotificationEnabledExpectation = self.expectation(description: "Request the change of state to the underlying manager")
+    let mockENManager = ENManagerMock()
+    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
+      setExposureNotificationEnabledExpectation.fulfill()
+      completionHandler(ENError(ENError.Code.unknown))
+    }
+    let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
+    broadcastAuthorizationStateExpectation.isInverted = true
+    let notificationCenterMock = NotificationCenterMock()
+    notificationCenterMock.postHandler = { notification in
+      if notification.name == .AuthorizationStatusDidChange {
+        broadcastAuthorizationStateExpectation.fulfill()
+      }
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          notificationCenter: notificationCenterMock)
+    exposureManager.requestExposureNotificationAuthorization(enabled: false) { (error) in
+      XCTAssertNotNil(error, "There should be an error")
+    }
+    wait(for: [setExposureNotificationEnabledExpectation,
+               broadcastAuthorizationStateExpectation], timeout: 0)
+  }
+
+  func testGetCurrentENPermissionsStatus() {
+    let mockENManager = ENManagerMock()
+    mockENManager.authorizationStatusHandler = {
+      return .authorized
+    }
+    mockENManager.exposureNotificationEnabledHandler = {
+      return true
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
+    exposureManager.getCurrentENPermissionsStatus { (authorized, enabled) in
+      XCTAssertEqual(authorized, ExposureManager.AuthorizationState.authorized.rawValue)
+      XCTAssertEqual(enabled, ExposureManager.EnabledState.enabled.rawValue)
+    }
+  }
+
+
   let indexTxt = """
 mn/1593432000-1593446400-00001.zip
 mn/1593432000-1593446400-00002.zip
@@ -159,7 +513,7 @@ mn/1593460800-1593475200-00022.zip
     BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
 
 
-    ExposureManager.shared.finish(.success([]),
+    ExposureManager.shared?.finish(.success([]),
                                   processedFileCount: 4,
                                   lastProcessedUrlPath: "mn/1593460800-1593475200-00022.zip",
                                   progress: Progress()) { _ in }
@@ -170,7 +524,7 @@ mn/1593460800-1593475200-00022.zip
 
     // ----------------
 
-    ExposureManager.shared.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress()) { _ in }
+    ExposureManager.shared?.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress()) { _ in }
 
     // remainingDailyFileProcessingCapacity decreases, urlOfMostRecentlyDetectedKeyFile is stored
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
@@ -179,7 +533,7 @@ mn/1593460800-1593475200-00022.zip
     // ----------------
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored if empty string
-    ExposureManager.shared.finish(.success([]),
+    ExposureManager.shared?.finish(.success([]),
                                   processedFileCount: 0,
                                   lastProcessedUrlPath: .default,
                                   progress: Progress()) { _ in }
@@ -193,7 +547,7 @@ mn/1593460800-1593475200-00022.zip
     // Setup
     BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
     BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
-    ExposureManager.shared.finish(.failure(GenericError.unknown),
+    ExposureManager.shared?.finish(.failure(GenericError.unknown),
                                   processedFileCount: 4,
                                   lastProcessedUrlPath: "invalid",
                                   progress: Progress()) { _ in }
@@ -210,7 +564,7 @@ mn/1593460800-1593475200-00022.zip
     progress.cancel()
     BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
     BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
-    ExposureManager.shared.finish(.failure(GenericError.unknown), processedFileCount: 4,
+    ExposureManager.shared?.finish(.failure(GenericError.unknown), processedFileCount: 4,
                                   lastProcessedUrlPath: "invalid",
                                   progress: progress) { _ in }
 
@@ -231,7 +585,7 @@ mn/1593460800-1593475200-00022.zip
                             duration: TimeInterval(Int.random(in: 1...10) * 60 * 5 * 1000),
                             totalRiskScore: .random(in: 1...8),
                             transmissionRiskLevel: .random(in: 0...7))
-    ExposureManager.shared.finish(.success([exposure]),
+    ExposureManager.shared?.finish(.success([exposure]),
                                   processedFileCount: 4,
                                   lastProcessedUrlPath: .default,
                                   progress: Progress()) { _ in }

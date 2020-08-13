@@ -41,14 +41,9 @@
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
-
-  // Register background task
+  
+  [ExposureManager createSharedInstance];
   [[ExposureManager shared] registerBackgroundTask];
-
-  // Schedule background task
-  [[ExposureManager shared] scheduleBackgroundTaskIfNeeded];
-
-  [[ExposureManager shared] setup];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   return YES;
@@ -56,7 +51,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  [[ExposureManager shared] setup];
+  [[ExposureManager shared] awake];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

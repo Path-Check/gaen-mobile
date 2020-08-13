@@ -2,7 +2,7 @@ import ExposureNotification
 import Foundation
 import RealmSwift
 
-final class BTSecureStorage: SafePathsSecureStorage {
+class BTSecureStorage: SafePathsSecureStorage {
 
   static let shared = BTSecureStorage(inMemory: false)
 

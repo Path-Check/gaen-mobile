@@ -13,8 +13,8 @@ extension Array where Element == DownloadedPackage {
       for idx in (0..<count) {
         let keyPackage = self[idx]
         let filename = UUID().uuidString
-        uncompressedFileUrls.append(try keyPackage.writeKeysEntry(toDirectory: APIClient.documentsDirectory!, filename: filename))
-        uncompressedFileUrls.append(try keyPackage.writeSignatureEntry(toDirectory: APIClient.documentsDirectory!, filename: filename))
+        uncompressedFileUrls.append(try keyPackage.writeKeysEntry(toDirectory: BTAPIClient.documentsDirectory!, filename: filename))
+        uncompressedFileUrls.append(try keyPackage.writeSignatureEntry(toDirectory: BTAPIClient.documentsDirectory!, filename: filename))
         if idx == count - 1 {
           completion(uncompressedFileUrls)
         }
