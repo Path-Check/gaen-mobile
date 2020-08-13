@@ -8,25 +8,19 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.facebook.stetho.Stetho;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import org.pathcheck.covidsafepaths.BuildConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import covidsafepaths.bt.bridge.ExposureNotificationsPackage;
-import covidsafepaths.bt.exposurenotifications.storage.RealmSecureStorageBte;
 import io.realm.Realm;
 
 public class MainApplication extends Application implements ReactApplication {
 
     private static Context context;
-    private ExposureNotificationClient exposureNotificationClient;
 
     private final ReactNativeHost mReactNativeHost =
             new ReactNativeHost(this) {
@@ -62,7 +56,6 @@ public class MainApplication extends Application implements ReactApplication {
         AndroidThreeTen.init(this);
         SoLoader.init(this, /* native exopackage */ false);
         Realm.init(this);
-        initializeStetho(this);
         initializeFlipper(this); // Remove this line if you don't want Flipper enabled
     }
 
@@ -89,20 +82,6 @@ public class MainApplication extends Application implements ReactApplication {
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private void initializeStetho(Context context) {
-        if (BuildConfig.DEBUG) {
-            RealmInspectorModulesProvider modulesProvider = RealmInspectorModulesProvider.builder(context)
-                    .withEncryptionKey("safepathsbte.realm", RealmSecureStorageBte.INSTANCE.getEncryptionKey())
-                    .databaseNamePattern(Pattern.compile(".+\\.realm"))
-                    .build();
-            Stetho.initialize(
-                    Stetho.newInitializerBuilder(this)
-                            .enableDumpapp(Stetho.defaultDumperPluginsProvider(context))
-                            .enableWebKitInspector(modulesProvider)
-                            .build());
         }
     }
 
