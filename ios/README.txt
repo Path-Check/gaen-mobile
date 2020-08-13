@@ -1,3 +1,29 @@
+1: RVM install with following commands to install a specific ruby version 
+
+
+
+RVM wird über folgenden Shell-Befehl installiert:
+
+curl -sSL https://get.rvm.io | bash -s stable
+
+Um Ruby in Version 2.4.0 zu installieren, wird folgender RVM-Befehl benutzt:
+
+rvm install 2.4.0 --autolibs=read-only
+
+Um Ruby 2.4.0 als Standard zu setzen, wird folgender RVM-Befehl benutzt:
+
+rvm alias create default ruby-2.4.0
+
+Nun muss noch Bundler für Ruby 2.4.0 mittels gem installiert werden (Gems werden unter RVM automatisch lokal unter "~/.rvm/gems/" installiert):
+
+gem install bundler
+
+Ruby-Version für Passenger ändern
+Damit Passenger die richtige Ruby-Version nutzt, muss diese dann noch in der .htaccess-Datei der Anwendung eingetragen werden ("u12345" muss durch den Webserver-Benutzer ersetzt werden):
+
+PassengerRuby /homepages/u12345/.rvm/wrappers/ruby-2.4.0/ruby
+
+
 Stay tuned offensive:
 
 wipe-dependencies.js
