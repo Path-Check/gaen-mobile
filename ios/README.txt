@@ -1,6 +1,8 @@
 1: RVM install with following commands to install a specific ruby version 
 
+https://rvm.io/rubies/default
 
+before installation before install yarn -> dev_ and pod set ruby 2.6.5 as default
 
 RVM wird über folgenden Shell-Befehl installiert:
 
