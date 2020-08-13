@@ -1,3 +1,10 @@
+Stay tuned offensive:
+
+wipe-dependencies.js
+
+https://medium.com/@jh3y/how-to-update-all-npm-packages-in-your-project-at-once-17a8981860ea
+
+
 Ruby update from 2.6.1 newest Version 
 
 to update the gem file for ruby upgrade use this link : https://stackify.com/install-ruby-on-your-mac-everything-you-need-to-get-going/
