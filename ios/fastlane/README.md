@@ -16,36 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios sync_local_certs
+### ios deploy_to_appcenter
 ```
-fastlane ios sync_local_certs
+fastlane ios deploy_to_appcenter
 ```
 
-### ios staging
-```
-fastlane ios staging
-```
-Push a new GPS Staging build for automation
-### ios staging_bt
-```
-fastlane ios staging_bt
-```
-Push a new BT Staging build for automation
-### ios release
-```
-fastlane ios release
-```
-Push a new GPS Release build to TestFlight
-### ios release_bt
-```
-fastlane ios release_bt
-```
-Push a new BT Release build to TestFlight
-### ios deploy
-```
-fastlane ios deploy
-```
-Push a new beta build to TestFlight
 
 ----
 

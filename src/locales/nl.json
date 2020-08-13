@@ -13,18 +13,12 @@
   },
   "common": {
     "continue": "Ga verder",
-    "done": "Klaar"
-  },
-  "home": {
-    "bluetooth": {
-      "all_services_on_header": "PathCheck"
-    }
+    "done": "Klaar",
+    "next": "Klaar"
   },
   "label": {
     "launch_enable_notif": "Meldingen inschakelen",
     "launch_get_started": "Aan de slag",
-    "launch_next": "Volgende",
-    "launch_set_up_phone_bluetooth": "Klaar",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
   },
   "screen_titles": {

@@ -20,7 +20,7 @@ import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
 
-import { Screens, Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import {
   Spacing,
   Buttons,
@@ -52,7 +52,7 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const handleOnPressSubmit = async () => {
@@ -135,15 +135,16 @@ const CodeInputForm: FunctionComponent = () => {
 
           <View>
             <TextInput
-              testID={"code-input"}
+              testID="code-input"
               value={code}
-              placeholder={"00000000"}
+              placeholder="00000000"
               placeholderTextColor={Colors.placeholderTextColor}
               maxLength={codeLength}
               style={style.codeInput}
-              keyboardType={"number-pad"}
-              returnKeyType={"done"}
+              keyboardType="number-pad"
+              returnKeyType="done"
               onChangeText={handleOnChangeText}
+              onSubmitEditing={Keyboard.dismiss}
               blurOnSubmit={false}
             />
           </View>

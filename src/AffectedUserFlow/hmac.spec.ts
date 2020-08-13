@@ -56,16 +56,16 @@ describe("calculateHmac", () => {
       base64Key,
     ] = mockConvertArrayBufferToBase64()
     const key = "key"
-    const rollingPeriod = 1
     const rollingStartNumber = 1
-    const transmissionRisk = 1
+    const rollingPeriod = 2
+    const transmissionRisk = 3
     const exposureKey = {
       key,
       rollingPeriod,
       rollingStartNumber,
       transmissionRisk,
     }
-    const serializedKey = `${key}.${rollingPeriod}.${rollingStartNumber}.${transmissionRisk}`
+    const serializedKey = `${key}.${rollingStartNumber}.${rollingPeriod}.${transmissionRisk}`
 
     const hmacKey = await calculateHmac([exposureKey])
 
@@ -74,5 +74,52 @@ describe("calculateHmac", () => {
     expect(convertArrayBufferToBase64Spy).toHaveBeenCalledWith(signatureBuffer)
     expect(convertArrayBufferToBase64Spy).toHaveBeenCalledWith(randomBytes)
     expect(hmacKey).toEqual([base64Signature, base64Key])
+    jest.resetAllMocks()
+  })
+
+  it("sorts the keys lexicographically", async () => {
+    const [convertUtf8ToArrayBufferSpy, ,] = mockConvertUtf8ToArray()
+    mockHmac256()
+    const firstKey = "1key"
+    const secondKey = "=Key"
+    const thirdKey = "Key"
+    const fourthKey = "key"
+    const rollingStartNumber = 1
+    const rollingPeriod = 2
+    const transmissionRisk = 0
+    const firstExposureKey = {
+      key: firstKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const secondExposureKey = {
+      key: secondKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const thirdExposureKey = {
+      key: thirdKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const fourthExposureKey = {
+      key: fourthKey,
+      rollingPeriod,
+      rollingStartNumber,
+      transmissionRisk,
+    }
+    const serializedKey = `${firstKey}.1.2.0,${secondKey}.1.2.0,${thirdKey}.1.2.0,${fourthKey}.1.2.0`
+    await calculateHmac([
+      thirdExposureKey,
+      fourthExposureKey,
+      firstExposureKey,
+      secondExposureKey,
+    ])
+
+    expect(convertUtf8ToArrayBufferSpy).toHaveBeenCalledWith(serializedKey)
+    jest.resetAllMocks()
   })
 })

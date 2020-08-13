@@ -100,8 +100,8 @@
       buildConfiguration = "Debug-BT">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Staging-BT"
-      customArchiveName = "BT_Staging"
+      buildConfiguration = "Release-BT"
+      customArchiveName = "BT"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

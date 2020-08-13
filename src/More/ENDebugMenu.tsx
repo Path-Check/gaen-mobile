@@ -98,16 +98,16 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
         <ScrollView>
           <View style={style.section}>
             <DebugMenuListItem
+              label="Simulate Exposure"
+              onPress={handleOnPressSimulationButton(
+                NativeModule.simulateExposure,
+              )}
+            />
+            <DebugMenuListItem
               label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
                 NativeModule.showLastProcessedFilePath,
               )}
-            />
-            <DebugMenuListItem
-              label="Show Exposures"
-              onPress={() => {
-                navigation.navigate(Screens.ExposureListDebugScreen)
-              }}
             />
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
@@ -121,20 +121,14 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 NativeModule.forceAppCrash()
               }}
             />
-            <DebugMenuListItem
-              label="Submit Debug Log"
-              onPress={() => {
-                navigation.navigate(Screens.ENSubmitDebugForm)
-              }}
-            />
           </View>
           {__DEV__ ? (
             <View style={style.section}>
               <DebugMenuListItem
-                label="Simulate Exposure"
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.simulateExposure,
-                )}
+                label="Show Exposures"
+                onPress={() => {
+                  navigation.navigate(Screens.ExposureListDebugScreen)
+                }}
               />
               <DebugMenuListItem
                 label="Toggle Exposure Notifications"

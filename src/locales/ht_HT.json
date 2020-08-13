@@ -34,6 +34,7 @@
   "common": {
     "continue": "Kontinye",
     "done": "Fini",
+    "next": "Fini",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse"
   },
@@ -57,52 +58,32 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "Chase Kowona (\"PathCheck\")",
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
-      "tracing_off_button": "Pèmèt Notifikasyon Ekspozisyon yo",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo"
     }
   },
   "label": {
     "about_para": "Aplikasyon Chase Kowona (\"PathCheck\") disponib pa Fondasyon Chase Kowona (\"PathCheck\"), yon òganizasyon san bi likratif ki angaje nan bay lojisyèl gratis pou ede kanpe pwopagasyon COVID-19 ak pwoteje vi prive moun. \n\n Pou plis enfòmasyon, vizite",
-    "launch_disable_exposure_notif": "Pa aktive",
-    "launch_enable_exposure_notif": "Aktive",
     "launch_enable_notif": "Aktive notifikasyon",
-    "launch_exposure_notif_header": "Aktive Notifikasyon Ekspozisyon yo",
-    "launch_exposure_notif_subheader": "Pou yo avize w sou dènye nouvèl sou lis ekspozisyon ou, telefòn ou bezwen pèmisyon pou fè echanj ID anonim Bluetooth o aza ak lòt aparèy. \n\n Notifcations Ekspozisyon fonksyone sèlman ak lòt aparèy fonksyon sa aktive\n\n Ou ka fèmen notifikasyon sa a nenpòt ki lè.",
     "launch_get_started": "Kòmanse",
-    "launch_next": "Kontinye",
     "launch_screen1_header": "Byenveni nan Chase Kowona (\"PathCheck\")",
-    "launch_screen2_header_bluetooth": "Telefòn ou sonje lòt aparèy li rankontre men li pap idantifye ou ak lòt moun.",
-    "launch_screen2_subheader_bluetooth": "Dat ak tan rankont lan dire, yo anrejistre ansanm selon yon estimasyon si telephone yo te tou prè youn lot.",
-    "launch_screen3_header_bluetooth": "Tout done yo kode e yo estoke an prive sou telefòn ou.",
-    "launch_screen3_subheader_bluetooth": "Aprann plis detay sou rankont lan, tankou dat, dire, ak fòs siyal Bluetooth.",
-    "launch_screen4_header_bluetooth": "Resevwa notifikasyon si yon pwopriyetè telefon ou te rankontre te dyagnostike ak COVID-19 e te chwazi pataje estati sante yo de fason anonim.",
-    "launch_screen4_subheader_bluetooth": "Nan pati sa a, wap jwenn enfòmasyon nan men Otorite Swen Sante lokal ou a sou sa yo dwe fè aprè.",
-    "launch_set_up_phone_bluetooth": "Fini",
     "legal_page_address": "Fondasyon Chase Kowona (\"PathCheck\") \n 58 Day Street \n Box 441621 \n Somerville, MA 02144",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "unknown": "Pa gen kontak"
   },
   "navigation": {
-    "history": "Lis",
+    "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
     "more": "Plis",
     "self_assessment": "Sante"
   },
   "onboarding": {
-    "maybe_later": "Petèt pita",
-    "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
-    "notification_subheader": "Patnè Chase Kowona (\"PathCheck\") yo ak depatman sante lokal yo swiv tras viris la. Si ou lokalize nan yon jiridiksyon ke youn nan patnè Depatman Sante nou yo ladanl, ou ka resevwa notifikasyon ekspoze apati Depatman Sante ou."
+    "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?"
   },
   "screen_titles": {
     "about": "Apropo",
     "exposure_history": "Lis ekspozisyon",
     "legal": "Legal"
-  },
-  "settings": {
-    "share_test_result": "Rapòte yon rezilta tès pozitif",
-    "share_test_result_description": "Pataje enfòmasyon ekspozisyon Covid-19 ak otorite sante w a ak yon kòd."
   }
 }

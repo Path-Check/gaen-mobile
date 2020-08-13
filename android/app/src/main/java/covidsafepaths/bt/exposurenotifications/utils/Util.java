@@ -4,23 +4,20 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.facebook.react.bridge.ReadableNativeArray;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import covidsafepaths.bt.exposurenotifications.ExposureKey;
 
 public class Util {
     /**
@@ -51,26 +48,20 @@ public class Util {
     public static int getRandomNumber() {
         final int min = 20;
         final int max = 200;
-        return new Random().nextInt((max - min) + 1) + min;
+        return new SecureRandom().nextInt((max - min) + 1) + min;
     }
 
-
-    public static String toJsonString(ExposureKey key) {
-        Gson gson = new Gson();
-        return gson.toJson(key);
-    }
-
-    public static WritableArray getKeysAsWritableArray(List<ExposureKey> keys){
+    public static WritableArray convertListToWritableArray(List<?> list){
         WritableArray array = new WritableNativeArray();
-        for (ExposureKey key : keys) {
-            WritableMap productMap = null;
+        for (Object value : list) {
+            WritableMap map = null;
             try {
-                productMap = convertJsonToMap(new
-                        JSONObject(toJsonString(key)));
+                Gson gson = new Gson();
+                map = convertJsonToMap(new JSONObject(gson.toJson(value)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            array.pushMap(productMap);
+            array.pushMap(map);
         }
         return array;
     }

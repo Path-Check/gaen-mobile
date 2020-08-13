@@ -6,10 +6,12 @@
     "isolate_cta": "Selanjutnya",
     "next": "Selanjutnya"
   },
+  "common": {
+    "next": "Selanjutnya"
+  },
   "label": {
     "launch_enable_notif": "Aktifkan Notifikasi",
     "launch_get_started": "Mulai",
-    "launch_next": "Selanjutnya",
     "launch_screen1_header": "Selamat datang di PathCheck",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
   },

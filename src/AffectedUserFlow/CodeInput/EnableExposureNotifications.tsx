@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import { GlobalText } from "../../components/GlobalText"
 import { Button } from "../../components/Button"
 
-import { Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import { Buttons, Colors, Typography, Spacing, Layout } from "../../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
@@ -18,7 +18,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   return (

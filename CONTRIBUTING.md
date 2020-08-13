@@ -4,24 +4,24 @@
 
 **NOTE**
 
-As of 3-May-2020 the COVID Safe Paths repo has moved to a new location (https://github.com/Path-Check/covid-safe-paths). If you've already set the `upstream` in your repo, GitHub's redirects will make it so things still work; However for consistency we highly recommend you change your `upstream` to point to the new repo location e.g.
+The COVID Safe Paths repo has moved to a new location (https://github.com/Path-Check/gaen-mobile). If you've already set the `upstream` in your repo, GitHub's redirects will make it so things still work; However for consistency we highly recommend you change your `upstream` to point to the new repo location e.g.
 
 ```
-git remote add upstream git@github.com:Path-Check/covid-safe-paths.git
+git remote add upstream git@github.com:Path-Check/gaen-mobile.git
 ```
 
 ---
 
 We welcome participation in an open project. We want to make it as easy as possible for people to work together, so please follow these guidelines to prepare and submit a pull request.
 
-- Filtering by [good first issues](https://github.com/Path-Check/covid-safe-paths/labels/good%20first%20issue) is the recommended way to begin contributing to the project
+- Filtering by [good first issues](https://github.com/Path-Check/gaen-mobile/labels/good%20first%20issue) is the recommended way to begin contributing to the project
 - Localization/Language updates are handled in [Lokalise](https://lokalise.com/). More info on how to contribute [here](https://github.com/Path-Check/covid-safe-paths/wiki/Localization-Contributing-Guidelines)
 
 ## Create A New Issue
 
 - You need a Github account. You can [create one](https://github.com/signup/free) for free.
 
-- Submit an [Issue](https://github.com/Path-Check/covid-safe-paths/issues) against the repo to describe the idea or problem if there is not one yet.
+- Submit an [Issue](https://github.com/Path-Check/gaen-mobile/issues) against the repo to describe the idea or problem if there is not one yet.
 
 - Describe a bug by including steps to reproduce, and the earliest version you know is affected.
 
@@ -29,7 +29,7 @@ We welcome participation in an open project. We want to make it as easy as possi
 
 - Fork the repository on GitHub:
 
-- Visit https://github.com/Path-Check/covid-safe-paths
+- Visit https://github.com/Path-Check/gaen-mobile
 - Click on the "Fork" button in the upper-left corner.
 
 - Clone the forked repository to your local machine:
@@ -38,13 +38,13 @@ We welcome participation in an open project. We want to make it as easy as possi
 
 cd ~ # get to your home directory or where ever you want to go
 
-git clone git@github.com:YOURACCOUNT/covid-safe-paths.git
+git clone git@github.com:YOURACCOUNT/gaen-mobile.git
 
 # change into the newly created directory
 cd covid-safe-paths
 
 # set upstream against COVID Safe Paths repository
-git remote add upstream git@github.com:Path-Check/covid-safe-paths.git
+git remote add upstream git@github.com:Path-Check/gaen-mobile.git
 
 ```
 
@@ -86,7 +86,7 @@ git checkout -b "release/new-icon" develop # new branch created!
 
 ```bash
 # if you've already done this it will fail, that's fine:
-git remote add upstream git@github.com:Path-Check/covid-safe-paths.git
+git remote add upstream git@github.com:Path-Check/gaen-mobile.git
 
 # ensure you are on your feature/fix branch
 git checkout feature/my-feature
@@ -108,7 +108,7 @@ git push -u origin
 
 ### Start a PR to submit your changes back to the original project:
 
-- Visit https://github.com/your-git-userid/covid-safe-paths/branches
+- Visit https://github.com/your-git-userid/gaen-mobile/branches
 
 - You should see the new branch that you recently created and pushed on this page. Example - feature/your-branch-name (similar to the image shown below).
 
@@ -120,9 +120,9 @@ git push -u origin
 
 - Verify following -
 
-  - Base repository - Path-Check/covid-safe-paths
+  - Base repository - Path-Check/gaen-mobile
   - Base branch - develop
-  - Head repository - your-git-id/covid-safe-paths
+  - Head repository - your-git-id/gaen-mobile
   - Compare branch - feature/your-branch-name
 
 - Provide a meaningful title and description to your PR, as shown in the above image.

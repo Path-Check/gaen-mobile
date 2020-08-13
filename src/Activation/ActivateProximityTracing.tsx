@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
 import {
+  Platform,
   ScrollView,
   SafeAreaView,
   View,
@@ -10,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
+import { useOnboardingContext } from "../OnboardingContext"
 import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
@@ -20,15 +22,24 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
+  const { setOnboardingToComplete } = useOnboardingContext()
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
-    navigation.navigate(ActivationScreens.NotificationPermissions)
+    navigateToNextScreen()
   }
 
   const handleOnPressDontEnable = () => {
-    navigation.navigate(ActivationScreens.NotificationPermissions)
+    navigateToNextScreen()
+  }
+
+  const navigateToNextScreen = () => {
+    if (Platform.OS === "ios") {
+      navigation.navigate(ActivationScreens.NotificationPermissions)
+    } else {
+      setOnboardingToComplete()
+    }
   }
 
   return (

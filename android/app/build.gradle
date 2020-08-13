@@ -151,7 +151,7 @@ android {
         versionName "1.0.8"
 
         //Fix problem in bt where .env.bt is not recognized
-        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths.bt"
+        resValue "string", "build_config_package", "org.pathcheck.covidsafepaths"
     }
     splits {
         abi {
@@ -171,9 +171,9 @@ android {
         release {
             storeFile file('keystore.jks')
             if (file("./keystore.jks").exists()) {
-                keyAlias project.property("android.injected.signing.key.alias")
-                keyPassword project.property("android.injected.signing.key.password")
-                storePassword project.property("android.injected.signing.store.password")
+                keyAlias project.hasProperty("android.injected.signing.key.alias") ? project.property("android.injected.signing.key.alias") : ''
+                keyPassword project.hasProperty("android.injected.signing.key.password") ? project.property("android.injected.signing.key.password") : ''
+                storePassword project.hasProperty("android.injected.signing.store.password") ? project.property("android.injected.signing.store.password") : ''
                 storeFile file("./keystore.jks")
             } else {
                 project.logger.lifecycle('Could not find release key')

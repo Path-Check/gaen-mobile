@@ -25,6 +25,7 @@
   "common": {
     "continue": "Dalej",
     "done": "Gotowe",
+    "next": "Dalej",
     "something_went_wrong": "Coś poszło nie tak",
     "start": "Start"
   },
@@ -46,33 +47,21 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_header": "PathCheck",
       "all_services_on_subheader": "Powiadomienia o narażeniu są włączone",
-      "tracing_off_button": "Zezwolenie na powiadomienia o narażeniu",
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
       "tracing_off_subheader": "Włącz powiadomienia o narażeniu, aby otrzymywać informacje o możliwych ekspozycjach"
     }
   },
   "label": {
-    "launch_disable_exposure_notif": "Nie włączaj",
-    "launch_enable_exposure_notif": "Włącz",
     "launch_enable_notif": "Włącz powiadomienia",
     "launch_get_started": "Zaczynamy",
-    "launch_next": "Dalej",
     "launch_screen1_header": "Witamy w PathCheck",
-    "launch_screen2_header_bluetooth": "Twój telefon zapamiętuje inne napotkane urządzenia, ale nie identyfikuje Cię w stosunku do innych osób.",
-    "launch_screen2_subheader_bluetooth": "Data i czas trwania spotkania są rejestrowane wraz z oszacowaniem, jak blisko mogły znajdować się dwa telefony.",
-    "launch_screen3_header_bluetooth": "Wszystkie dane są szyfrowane i prywatnie przechowywane w Twoim telefonie.",
-    "launch_screen3_subheader_bluetooth": "Uzyskaj szczegóły dotyczące spotkania, takie jak data, czas trwania i siła sygnału Bluetooth.",
-    "launch_screen4_header_bluetooth": "Jeśli wynik testu na obecność wirusa wywołującego COVID-19 jest pozytywny, możesz anonimowo udostępnić diagnozę.",
-    "launch_screen4_subheader_bluetooth": "To pomaga innym w Twojej społeczności powstrzymać rozprzestrzenianie się wirusa.",
-    "launch_set_up_phone_bluetooth": "Dalej",
     "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
     "privacy_policy": "Polityka prywatności",
     "unknown": "nieznany"
   },
   "navigation": {
-    "history": "Historia",
+    "exposure_history": "Historia Ekspozycji",
     "more": "Więcej",
     "self_assessment": "Zdrowie"
   },
@@ -80,9 +69,5 @@
     "about": "O nas",
     "exposure_history": "Historia Ekspozycji",
     "legal": "Informacje prawne"
-  },
-  "settings": {
-    "share_test_result": "Zgłoś pozytywny wynik testu",
-    "share_test_result_description": "Podziel się informacjami o narażeniu na Covid-19 z Twoim organem odpowiedzialnym za ochronę zdrowia, podając dostarczony kod"
   }
 }

@@ -13,14 +13,13 @@
   },
   "common": {
     "continue": "استمر",
-    "done": "تم"
+    "done": "تم",
+    "next": "تم"
   },
   "label": {
     "launch_enable_notif": "فعل الإشعارات",
     "launch_get_started": "ابدأ",
-    "launch_next": "التالى",
-    "launch_screen1_header": "طريق العودة إلى الوضع الطبيعي يبدأ من هنا",
-    "launch_set_up_phone_bluetooth": "تم"
+    "launch_screen1_header": "طريق العودة إلى الوضع الطبيعي يبدأ من هنا"
   },
   "screen_titles": {
     "about": "نبذة عنا",

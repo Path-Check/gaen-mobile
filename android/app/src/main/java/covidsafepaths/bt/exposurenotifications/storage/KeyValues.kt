@@ -3,13 +3,16 @@ package covidsafepaths.bt.exposurenotifications.storage
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-const val ONLY_KEY = "KEY_VALUES"
-
 /**
  * A catch all class for storing key value pairs.
  */
 open class KeyValues(
-        @PrimaryKey
-        var id: String = ONLY_KEY,
-        var lastDownloadedKeyZipFileName: String? = null
-) : RealmObject()
+    @PrimaryKey
+    var id: String = "",
+    var value: String? = null
+) : RealmObject() {
+    companion object {
+        const val LAST_PROCESSED_FILE_NAME_KEY = "LAST_PROCESSED_FILE_NAME"
+        const val REVISION_TOKEN_KEY = "REVISION_TOKEN"
+    }
+}

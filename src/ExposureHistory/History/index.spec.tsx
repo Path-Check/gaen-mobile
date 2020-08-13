@@ -28,7 +28,6 @@ describe("History", () => {
     it("shows a list of the exposures", async () => {
       const twoDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(2))
       const datum1 = factories.exposureDatum.build({
-        kind: "Possible",
         date: twoDaysAgo,
       })
 

@@ -7,7 +7,7 @@ import { useStatusBarEffect } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 
-import { Stacks } from "../navigation"
+import { Screens } from "../navigation"
 
 import { Layout, Spacing, Colors, Typography } from "../styles"
 
@@ -17,7 +17,7 @@ export const ExportComplete: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressDone = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const title = t("export.complete_title")

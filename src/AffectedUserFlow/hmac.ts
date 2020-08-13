@@ -29,14 +29,14 @@ export const calculateHmac = async (
 }
 
 const serializeKeys = (exposureKeys: ExposureKey[]) => {
-  return exposureKeys.map(serializeExposureKey).join(",")
+  return exposureKeys.map(serializeExposureKey).sort().join(",")
 }
 
 const serializeExposureKey = ({
   key,
-  rollingPeriod,
   rollingStartNumber,
+  rollingPeriod,
   transmissionRisk,
 }: ExposureKey): string => {
-  return [key, rollingPeriod, rollingStartNumber, transmissionRisk].join(".")
+  return [key, rollingStartNumber, rollingPeriod, transmissionRisk].join(".")
 }

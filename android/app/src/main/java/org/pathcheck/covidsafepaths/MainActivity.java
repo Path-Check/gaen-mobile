@@ -183,7 +183,7 @@ public class MainActivity extends ReactActivity {
                                   transmissionRisk));
                 }
 
-                getExposureKeysPromise.resolve(Util.getKeysAsWritableArray(exposureKeys));
+                getExposureKeysPromise.resolve(Util.convertListToWritableArray(exposureKeys));
               }
 
               @Override

@@ -6,15 +6,12 @@
     "isolate_cta": "Suivant",
     "next": "Suivant"
   },
-  "home": {
-    "bluetooth": {
-      "all_services_on_header": "PathCheck"
-    }
+  "common": {
+    "next": "Suivant"
   },
   "label": {
     "launch_enable_notif": "Activer les notifications",
     "launch_get_started": "Commencer",
-    "launch_next": "Suivant",
     "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
   },
   "screen_titles": {

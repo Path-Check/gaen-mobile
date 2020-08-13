@@ -2,23 +2,10 @@ import { DateTimeUtils } from "./utils"
 
 export type Posix = number
 
-export interface Possible {
-  kind: "Possible"
+export interface ExposureDatum {
   date: Posix
   duration: number
 }
-
-export interface NoKnown {
-  kind: "NoKnown"
-  date: Posix
-}
-
-export interface NoData {
-  kind: "NoData"
-  date: Posix
-}
-
-export type ExposureDatum = Possible | NoKnown | NoData
 
 export type ExposureInfo = ExposureDatum[]
 
@@ -28,7 +15,7 @@ export type ExposureWindowBucket =
   | "SevenToFourteenDaysAgo"
 
 export const exposureWindowBucket = (
-  exposureDatum: Possible,
+  exposureDatum: ExposureDatum,
 ): ExposureWindowBucket => {
   const date = exposureDatum.date
   const threeDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(3))

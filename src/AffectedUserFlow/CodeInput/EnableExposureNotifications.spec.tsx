@@ -17,13 +17,13 @@ describe("EnableExposureNotifications", () => {
     expect(getByText("Enable exposure notifications to continue")).toBeDefined()
   })
 
-  it("navigates to the more screen if users cancels", () => {
+  it("navigates to the home screen if users cancels", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(<EnableExposureNotifications />)
 
     fireEvent.press(getByLabelText("Cancel"))
-    expect(navigateSpy).toHaveBeenCalledWith("More")
+    expect(navigateSpy).toHaveBeenCalledWith("Home")
   })
 
   it("takes user to system settings if decide to activate notifications", () => {

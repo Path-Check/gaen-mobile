@@ -34,7 +34,7 @@ export type OnboardingScreen =
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "LanguageSelection"
+  | "ProtectPrivacy"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
@@ -45,7 +45,7 @@ export const OnboardingScreens: {
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  LanguageSelection: "LanguageSelection",
+  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =
@@ -67,17 +67,23 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
+export type ReportIssueScreen = "ReportIssueForm"
+
+export const ReportIssueScreens: {
+  [key in ReportIssueScreen]: ReportIssueScreen
+} = {
+  ReportIssueForm: "ReportIssueForm",
+}
+
 export type MoreStackScreen =
   | "Menu"
   | "About"
   | "Licenses"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
-  | "LanguageSelection"
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
-  | "ReportIssueForm"
 
 export const MoreStackScreens: {
   [key in MoreStackScreen]: MoreStackScreen
@@ -85,13 +91,11 @@ export const MoreStackScreens: {
   Menu: "Menu",
   About: "About",
   Licenses: "Licenses",
-  LanguageSelection: "LanguageSelection",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
-  ReportIssueForm: "ReportIssueForm",
 }
 
 export type SelfAssessmentScreen = "SelfAssessment"
@@ -123,18 +127,24 @@ export const AffectedUserFlowScreens: {
 export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
+  | ReportIssueScreen
   | MoreStackScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
   | "Home"
+  | "ReportIssueForm"
+  | "LanguageSelection"
 
 export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
+  ...ReportIssueScreens,
   ...MoreStackScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
   Home: "Home",
+  ReportIssueForm: "ReportIssueForm",
+  LanguageSelection: "LanguageSelection",
 }
 
 export type Stack =
@@ -144,6 +154,7 @@ export type Stack =
   | "SelfAssessment"
   | "More"
   | "AffectedUserStack"
+  | "ReportIssue"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -152,6 +163,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   SelfAssessment: "SelfAssessment",
   More: "More",
   AffectedUserStack: "AffectedUserStack",
+  ReportIssue: "ReportIssue",
 }
 
 export type StatusBarStyle = "dark-content" | "light-content"

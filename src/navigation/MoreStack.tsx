@@ -10,14 +10,11 @@ import AboutScreen from "./../More/About"
 import LicensesScreen from "./../More/Licenses"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
-import ENSubmitDebugForm from "./../More/ENSubmitDebugForm"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
-import LanguageSelection from "../More/LanguageSelection"
 
 import { MoreStackScreens, MoreStackScreen } from "./index"
 
 import { Colors, Headers } from "../styles"
-import ReportIssueForm from "../More/ReportIssueForm"
 
 type MoreStackParams = {
   [key in MoreStackScreen]: undefined
@@ -53,27 +50,12 @@ const MoreStack: FunctionComponent = () => {
         options={{ headerTitle: t("screen_titles.debug") }}
       />
       <Stack.Screen
-        name={MoreStackScreens.LanguageSelection}
-        component={LanguageSelection}
-        options={{ headerTitle: t("screen_titles.select_language") }}
-      />
-      <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}
         component={ExposureListDebugScreen}
       />
       <Stack.Screen
         name={MoreStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKeyScreen}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.ENSubmitDebugForm}
-        component={ENSubmitDebugForm}
-        options={{ headerTitle: t("screen_titles.debug_form") }}
-      />
-      <Stack.Screen
-        name={MoreStackScreens.ReportIssueForm}
-        component={ReportIssueForm}
-        options={{ headerTitle: t("screen_titles.report_issue") }}
       />
     </Stack.Navigator>
   )

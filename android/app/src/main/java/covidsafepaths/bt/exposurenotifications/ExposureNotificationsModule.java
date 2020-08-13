@@ -1,6 +1,5 @@
 package covidsafepaths.bt.exposurenotifications;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.bridge.Callback;
@@ -27,6 +26,7 @@ import covidsafepaths.bt.exposurenotifications.nearby.ExposureConfigurations;
 import covidsafepaths.bt.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import covidsafepaths.bt.exposurenotifications.notify.ShareDiagnosisManager;
 import covidsafepaths.bt.exposurenotifications.utils.CallbackMessages;
+import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
 import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 import static covidsafepaths.bt.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
@@ -61,8 +61,8 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void requestExposureNotificationAuthorization(final Callback callback) {
         ReactContext reactContext = getReactApplicationContext();
-        ExposureNotificationClientWrapper exposureNotificationClient = ExposureNotificationClientWrapper.get(reactContext);
-        exposureNotificationClient.start(reactContext)
+        ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(reactContext);
+        client.start(reactContext)
                 .addOnSuccessListener(unused -> {
                     callback.invoke(CallbackMessages.GENERIC_SUCCESS);
                 })
@@ -74,10 +74,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
                     ApiException apiException = (ApiException) exception;
                     if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
                         callback.invoke(CallbackMessages.GENERIC_SUCCESS);
-                        Activity activity = getCurrentActivity();
-                        if (activity != null) {
-                            exposureNotificationClient.showPermissionDialog(activity, apiException);
-                        }
+                        client.showPermissionDialog(getReactApplicationContext(), apiException, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
                     } else {
                         callback.invoke(apiException.getStatus().toString());
                     }
