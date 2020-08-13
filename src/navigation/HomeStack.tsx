@@ -7,6 +7,7 @@ import {
 import { HomeScreens, HomeScreen } from "./index"
 import Home from "../Home/Home"
 import BluetoothInfo from "../Home/BluetoothInfo"
+import ProximityTracingInfo from "../Home/ProximityTracingInfo"
 
 type HomeStackParams = {
   [key in HomeScreen]: undefined
@@ -31,6 +32,11 @@ const ExposureHistoryStack: FunctionComponent = () => {
       <Stack.Screen
         name={HomeScreens.BluetoothInfo}
         component={BluetoothInfo}
+        options={cardScreenOptions}
+      />
+      <Stack.Screen
+        name={HomeScreens.ProximityTracingInfo}
+        component={ProximityTracingInfo}
         options={cardScreenOptions}
       />
     </Stack.Navigator>

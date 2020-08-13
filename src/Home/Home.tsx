@@ -107,7 +107,7 @@ const HomeScreen: FunctionComponent = () => {
   }
 
   const isProximityTracingOn = isEnabledAndAuthorized
-  const isBluetoothOn = true
+  const isBluetoothOn = btStatus
   const appIsActive = isProximityTracingOn && isBluetoothOn
 
   const bottomContainerStyle = {
@@ -169,7 +169,9 @@ const HomeScreen: FunctionComponent = () => {
             <ActivationStatusSection
               headerText={t("home.bluetooth.proximity_tracing_header")}
               isActive={isProximityTracingOn}
-              infoAction={() => navigation.navigate(HomeScreens.Home)}
+              infoAction={() =>
+                navigation.navigate(HomeScreens.ProximityTracingInfo)
+              }
               fixAction={handleOnPressProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
