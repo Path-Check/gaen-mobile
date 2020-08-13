@@ -166,10 +166,18 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
-const isIOS = Platform.OS === "ios"
-const skipButtonSpacingTop = isIOS ? Spacing.xSmall : Spacing.xxLarge
-const languageButtonSpacingTop = isIOS ? Spacing.small : Spacing.huge
-const imageMarginTop = isIOS ? 70 : 100
+const skipButtonSpacingTop = Platform.select({
+  ios: Spacing.xSmall,
+  android: Spacing.xxLarge,
+})
+const languageButtonSpacingTop = Platform.select({
+  ios: Spacing.small,
+  android: Spacing.huge,
+})
+const imageMarginTop = Platform.select({
+  ios: 70,
+  android: 100,
+})
 
 const style = StyleSheet.create({
   topSafeArea: {
