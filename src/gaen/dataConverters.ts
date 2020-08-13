@@ -23,6 +23,7 @@ export const toExposureInfo = (
 const toExposureDatum = (r: RawExposure): ExposureDatum => {
   const beginningOfDay = (date: Posix) => dayjs(date).startOf("day")
   return {
+    id: r.id,
     date: beginningOfDay(r.date).valueOf(),
     duration: r.duration,
   }
