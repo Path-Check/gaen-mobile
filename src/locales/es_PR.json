@@ -54,9 +54,39 @@
     "start_title_bluetooth": "Ayude a contener la propagación del virus y a proteger a los demás en su comunidad si se le diagnostica o da positivo en la prueba de COVID-19."
   },
   "exposure_history": {
+    "exposure_detail": {
+      "6ft_apart": "6 pies de distancia",
+      "content": "Has estado cerca de una persona que reportó un positivo por COVID-19",
+      "ha_guidance_header": "¿Qué debo hacer?",
+      "ha_guidance_subheader": "Seguir las recomendaciones del {{healthAuthorityName}}",
+      "header": "Es posible que haya sido expuesto al virus COVID-19",
+      "isolate": "Aislarse",
+      "next_steps": "Próximos pasos",
+      "wash_your_hands": "Lávese las manos",
+      "wear_a_mask": "Usar máscara"
+    },
+    "exposure_window": {
+      "four_to_six_days_ago": "Entre 4 y 6 días atrás",
+      "seven_to_fourteen_days_ago": "Entre 7 y 14 días atrás",
+      "today_to_three_days_ago": "En los últimos 3 días"
+    },
+    "health_guidelines": {
+      "six_feet_apart": "Manténgase a seis pies de distancia",
+      "stay_home": "Quédese en casa si se siente enfermo",
+      "title": "Cómo protegerse",
+      "wash_your_hands": "Lávese las manos",
+      "wear_a_mask": "Usar máscara"
+    },
     "how_does_this_work": "¿Como funciona esto?",
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, tu teléfono usará Bluetooth para swappear y guardar cadenas de carácteres aleatorias (llamados IDs aleatorios/random IDs) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorias no te identificarán a tí personalmente con respecto a los otros usuarios y variarån muchas veces al día para proteger tu privacidad. La fecha y la duración del encuento serán grabadas así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
     "last_days": "Los últimos 21 días",
+    "learn_more": "Más Información",
+    "no_exposure_reports": "Ninguna exposición reportada",
+    "no_exposure_reports_over_past": "No ha recibido ningún reporte de exposición al virus en los últimos 14 días",
+    "possible_exposure": "Posible exposición al COVID-19",
+    "protect_yourself_and_others": "Protéjase a sí mismo y a los integrantes de su comunidad",
+    "review_guidance_from_ha": "Seguir las recomendaciones del {{healthAuthorityName}}",
+    "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí una notificación de exposición?",
     "why_did_i_get_an_en_para": "Recibirás una notificación de exposición cuando te hayas cruzado con una persona que más taerde haya recibido un diagnóstico confirmado o haya dado positivo en un test por COVID-19 siempre y cuando elija notificar al resto."
   },
@@ -109,7 +139,9 @@
     "screen1_button": "¿Cómo funciona?",
     "screen5_header": "Usando la aplicación ayudas a romper la cadena de infección y puedes obtener ayuda de profesionales de la salud",
     "screen5_image_label": "Una persona conversando virtualmente con un profesional de la salud",
-    "step": "Paso {{currentStep}} de {{totalSteps}}"
+    "select_language": "Seleccionar idioma",
+    "step": "Paso {{currentStep}} de {{totalSteps}}",
+    "welcome_image_label": "Una ilustración de personas usando máscaras, conectadas como nodos en una red."
   },
   "report_issue": {
     "body": "Comentarios (requerido)",
