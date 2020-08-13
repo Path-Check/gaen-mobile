@@ -43,7 +43,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: Colors.primaryBackground }}>
+    <SafeAreaView style={style.safeArea}>
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -86,6 +86,9 @@ const ActivateProximityTracing: FunctionComponent = () => {
   )
 }
 const style = StyleSheet.create({
+  safeArea: {
+    backgroundColor: Colors.primaryBackground,
+  },
   container: {
     backgroundColor: Colors.primaryBackground,
     height: "100%",

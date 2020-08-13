@@ -146,7 +146,7 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={style.safeArea}>
         <ScrollView style={bottomContainerStyle}>
           <TouchableOpacity
             style={style.shareContainer}
@@ -247,6 +247,9 @@ const isIOS = Platform.OS === "ios"
 const backgroundImagePaddingTop = isIOS ? 500 : 570
 
 const style = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },

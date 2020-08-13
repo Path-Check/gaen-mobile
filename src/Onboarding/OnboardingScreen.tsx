@@ -66,12 +66,8 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
 
   return (
     <>
-      <SafeAreaView
-        style={{
-          backgroundColor: Colors.primaryBackground,
-        }}
-      />
-      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.faintGray }}>
+      <SafeAreaView style={style.topSafeArea} />
+      <SafeAreaView style={style.bottomSafeArea}>
         <TouchableOpacity
           onPress={() => navigation.navigate(Screens.LanguageSelection)}
           style={style.languageButtonContainer}
@@ -176,6 +172,13 @@ const languageButtonSpacingTop = isIOS ? Spacing.small : Spacing.huge
 const imageMarginTop = isIOS ? 70 : 100
 
 const style = StyleSheet.create({
+  topSafeArea: {
+    backgroundColor: Colors.primaryBackground,
+  },
+  bottomSafeArea: {
+    flex: 1,
+    backgroundColor: Colors.faintGray,
+  },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
     position: "absolute",
