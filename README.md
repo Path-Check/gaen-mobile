@@ -1,15 +1,11 @@
 <table>
   <tr>
-  <td>
-    <a href="https://pathcheck.org/">
-
-  </a>
-  </td>
+  
   <td>
 <div style="float:left" align="center" >
-  <h1>The PathCheck GAEN Solution</h1>
+  <h1>The PathCheck OHIOH Solution</h1>
 
-  <b>**https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/**</b>
+  <b>**https://ohioh.de/**</b>
   
   </div>
   </td>
