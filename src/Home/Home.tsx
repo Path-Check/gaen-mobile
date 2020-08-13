@@ -243,8 +243,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   )
 }
 
-const isIOS = Platform.OS === "ios"
-const backgroundImagePaddingTop = isIOS ? 500 : 570
+const backgroundImagePaddingTop = Platform.select({ ios: 500, android: 570 })
 
 const style = StyleSheet.create({
   safeArea: {
