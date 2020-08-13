@@ -34,7 +34,7 @@ const NotificationsPermissions: FunctionComponent = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={style.safeArea}>
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -78,12 +78,15 @@ const NotificationsPermissions: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
+  safeArea: {
+    backgroundColor: Colors.primaryBackground,
+  },
   container: {
     backgroundColor: Colors.primaryBackground,
     height: "100%",
   },
   contentContainer: {
-    paddingVertical: Spacing.xxLarge,
+    paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.medium,
   },
   content: {
@@ -91,7 +94,7 @@ const style = StyleSheet.create({
   },
   header: {
     ...Typography.header2,
-    marginBottom: Spacing.small,
+    marginBottom: Spacing.large,
   },
   subheader: {
     ...Typography.header4,
@@ -99,7 +102,7 @@ const style = StyleSheet.create({
   },
   body: {
     ...Typography.mainContent,
-    marginBottom: Spacing.medium,
+    marginBottom: Spacing.xxLarge,
   },
   secondaryButton: {
     ...Buttons.secondary,

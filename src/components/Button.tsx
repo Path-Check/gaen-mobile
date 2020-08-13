@@ -68,17 +68,25 @@ export const Button: FunctionComponent<ButtonProps> = ({
       return style.text
     }
   }
+  const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
-  const determineButtonContainerStyle = (): ViewStyle => {
+  const determineShadowEnabled = (): ViewStyle => {
     if (disabled || loading) {
       return {}
     } else {
-      return style.buttonContainerEnabled
+      return style.buttonContainerShadow
     }
   }
+  const buttonContainerStyle = {
+    ...style.buttonContainer,
+    ...determineShadowEnabled(),
+  }
 
-  const buttonStyle = { ...style.button, ...customButtonStyle }
-  const textStyle = { ...determineTextStyle(), ...customTextStyle }
+  const buttonStyle = {
+    ...style.button,
+    ...determineShadowEnabled(),
+    ...customButtonStyle,
+  }
 
   return (
     <TouchableOpacity
@@ -88,7 +96,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityRole="button"
       disabled={disabled || loading}
       testID={testID}
-      style={determineButtonContainerStyle()}
+      style={buttonContainerStyle}
     >
       <LinearGradient
         start={{ x: 0.2, y: 0.85 }}
@@ -118,7 +126,10 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }
 
 const style = StyleSheet.create({
-  buttonContainerEnabled: {
+  buttonContainer: {
+    alignSelf: "center",
+  },
+  buttonContainerShadow: {
     ...Outlines.baseShadow,
   },
   button: {

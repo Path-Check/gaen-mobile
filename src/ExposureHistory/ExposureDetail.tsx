@@ -100,10 +100,13 @@ const ExposureDetail: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        <Button
-          onPress={handleOnPressNextStep}
-          label={t("exposure_history.exposure_detail.next_steps")}
-        />
+        <View style={style.buttonContainer}>
+          <Button
+            onPress={handleOnPressNextStep}
+            label={t("exposure_history.exposure_detail.next_steps")}
+            hasRightArrow
+          />
+        </View>
       </View>
     </ScrollView>
   )
@@ -199,6 +202,9 @@ const style = StyleSheet.create({
   recommendationText: {
     ...Typography.tinyFont,
     color: Colors.primaryText,
+  },
+  buttonContainer: {
+    alignSelf: "flex-start",
   },
 })
 

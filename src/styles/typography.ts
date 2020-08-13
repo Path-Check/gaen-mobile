@@ -14,6 +14,7 @@ export const xxLarge = 28
 export const huge = 52
 
 // Line Height
+export const xxxSmallLineHeight = 12
 export const xxSmallLineHeight = 14
 export const xSmallLineHeight = 16
 export const smallLineHeight = 20
@@ -23,48 +24,56 @@ export const xLargeLineHeight = 32
 export const xxLargeLineHeight = 36
 
 // Letter Spacing
+export const baseLetterSpacing = 0.25
 export const mediumLetterSpacing = 0.5
 
 // Font Weights
-export const xLightWeight = "200"
-export const lightWeight = "300"
 export const baseWeight = "400"
-export const heavyWeight = "500"
-export const xHeavyWeight = "700"
+export const mediumWeight = "500"
+export const semiBoldWeight = "600"
+export const boldWeight = "700"
 
 // Font Family
 export const baseFontFamily = "IBMPlexSans"
 export const mediumFontFamily = "IBMPlexSans-Medium"
+export const semiBoldFontFamily = "IBMPlexSans-SemiBold"
 export const boldFontFamily = "IBMPlexSans-Bold"
 export const monospaceFontFamily = "IBMPlexMono"
 
 export const base: TextStyle = {
   fontFamily: baseFontFamily,
+  fontWeight: baseWeight,
+  letterSpacing: baseLetterSpacing,
 }
 
 export const mediumBold: TextStyle = {
   fontFamily: mediumFontFamily,
+  fontWeight: mediumWeight,
+  letterSpacing: baseLetterSpacing,
+}
+
+export const semiBold: TextStyle = {
+  fontFamily: semiBoldFontFamily,
+  fontWeight: semiBoldWeight,
+  letterSpacing: baseLetterSpacing,
 }
 
 export const bold: TextStyle = {
   fontFamily: boldFontFamily,
-  fontWeight: heavyWeight,
-}
-
-export const extraBold: TextStyle = {
-  fontFamily: boldFontFamily,
-  fontWeight: xHeavyWeight,
+  fontWeight: boldWeight,
+  letterSpacing: baseLetterSpacing,
 }
 
 export const monospace: TextStyle = {
   fontFamily: monospaceFontFamily,
+  letterSpacing: baseLetterSpacing,
 }
 
 // Standard Font Types
 export const tinyFont: TextStyle = {
   ...base,
   fontSize: xxxSmall,
-  lineHeight: xxSmallLineHeight,
+  lineHeight: xxxSmallLineHeight,
 }
 
 export const xSmallFont: TextStyle = {
@@ -187,7 +196,7 @@ export const error: TextStyle = {
 // Forms
 export const primaryTextInput: TextStyle = {
   ...xLargeFont,
-  ...extraBold,
+  ...bold,
   color: Colors.primaryText,
 }
 

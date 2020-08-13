@@ -9,6 +9,8 @@ import { useFocusEffect } from "@react-navigation/native"
 
 import { ExposureDatum } from "../exposure"
 
+import { Colors } from "../styles"
+
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
@@ -169,10 +171,18 @@ export const Stacks: { [key in Stack]: Stack } = {
 export type StatusBarStyle = "dark-content" | "light-content"
 
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
+  const backgroundColor =
+    statusBarStyle === "dark-content"
+      ? Colors.primaryBackground
+      : Colors.primaryViolet
+
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-      Platform.OS === "android" && StatusBar.setTranslucent(true)
-    }, [statusBarStyle]),
+      if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor(backgroundColor)
+        StatusBar.setTranslucent(true)
+      }
+    }, [statusBarStyle, backgroundColor]),
   )
 }

@@ -3,6 +3,7 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  Platform,
   Linking,
   StyleSheet,
   SafeAreaView,
@@ -136,7 +137,7 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={style.safeArea}>
         <ScrollView style={bottomContainerStyle}>
           <TouchableOpacity
             style={style.shareContainer}
@@ -233,13 +234,18 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   )
 }
 
+const backgroundImagePaddingTop = Platform.select({ ios: 500, android: 570 })
+
 const style = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
   backgroundImage: {
     flex: 1,
-    paddingTop: 500,
+    paddingTop: backgroundImagePaddingTop,
     width: "100%",
   },
   textContainer: {
@@ -337,7 +343,6 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   button: {
-    alignSelf: "center",
     marginBottom: Spacing.large,
   },
 })

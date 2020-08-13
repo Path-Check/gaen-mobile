@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { StyleSheet, View, SafeAreaView } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
@@ -9,7 +9,7 @@ import { Button } from "../components/Button"
 
 import { Screens } from "../navigation"
 
-import { Layout, Spacing, Colors, Typography } from "../styles"
+import { Layout, Spacing, Typography } from "../styles"
 
 export const ExportComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
@@ -25,16 +25,14 @@ export const ExportComplete: FunctionComponent = () => {
   const doneCaption = t("common.done")
 
   return (
-    <View style={style.backgroundImage}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={style.container}>
-          <View>
-            <GlobalText style={style.header}>{title}</GlobalText>
-            <GlobalText style={style.contentText}>{body}</GlobalText>
-          </View>
-          <Button onPress={handleOnPressDone} label={doneCaption} />
-        </View>
-      </SafeAreaView>
+    <View style={style.container}>
+      <View>
+        <GlobalText style={style.header}>{title}</GlobalText>
+        <GlobalText style={style.contentText}>{body}</GlobalText>
+      </View>
+      <View style={style.buttonContainer}>
+        <Button onPress={handleOnPressDone} label={doneCaption} />
+      </View>
     </View>
   )
 }
@@ -45,13 +43,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: Layout.oneTenthHeight,
     paddingHorizontal: Spacing.large,
-    paddingBottom: Spacing.large,
-  },
-  backgroundImage: {
-    flex: 1,
-    backgroundColor: Colors.primaryBackground,
-    width: "100%",
-    height: "100%",
+    paddingBottom: Spacing.xxHuge,
   },
   header: {
     ...Typography.header2,
@@ -59,6 +51,9 @@ const style = StyleSheet.create({
   },
   contentText: {
     ...Typography.secondaryContent,
+  },
+  buttonContainer: {
+    alignSelf: "flex-start",
   },
 })
 
