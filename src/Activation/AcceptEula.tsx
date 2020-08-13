@@ -115,7 +115,6 @@ const AcceptEula: FunctionComponent = () => {
           }
           disabled={!boxChecked}
           label={t("common.continue")}
-          customButtonStyle={style.button}
         />
       </View>
     </SafeAreaView>
@@ -154,9 +153,6 @@ const style = StyleSheet.create({
     color: Colors.primaryText,
     flex: 1,
     paddingLeft: Spacing.medium,
-  },
-  button: {
-    alignSelf: "center",
   },
 })
 
