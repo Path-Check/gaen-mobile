@@ -21,6 +21,7 @@
 
         <activity
             android:name="covidsafepaths.bt.SplashActivity"
+            android:exported="true"
             android:theme="@style/SplashTheme"><!-- launcher name -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,12 +32,10 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-            android:exported="true"
+            android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
         <receiver
             android:name="covidsafepaths.bt.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver"
