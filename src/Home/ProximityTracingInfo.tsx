@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Image,
-  StyleSheet,
-} from "react-native"
+import { ScrollView, TouchableOpacity, View, StyleSheet } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -13,7 +7,7 @@ import { useNavigation } from "@react-navigation/native"
 import { GlobalText } from "../components/GlobalText"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
-import { Icons, Images } from "../assets"
+import { Icons } from "../assets"
 
 const BluetoothInfo: FunctionComponent = () => {
   const navigation = useNavigation()
