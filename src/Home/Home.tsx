@@ -20,7 +20,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { useStatusBarEffect, Stacks, Screens } from "../navigation"
+import { useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
@@ -162,14 +162,14 @@ const HomeScreen: FunctionComponent = () => {
             <ActivationStatusSection
               headerText={t("home.bluetooth.bluetooth_header")}
               isActive={isBluetoothOn}
-              infoAction={() => navigation.navigate(Screens.Home)}
+              infoAction={() => navigation.navigate(HomeScreens.BluetoothInfo)}
               fixAction={handleOnPressBluetooth}
               testID={"home-bluetooth-status-container"}
             />
             <ActivationStatusSection
               headerText={t("home.bluetooth.proximity_tracing_header")}
               isActive={isProximityTracingOn}
-              infoAction={() => navigation.navigate(Screens.Home)}
+              infoAction={() => navigation.navigate(HomeScreens.Home)}
               fixAction={handleOnPressProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />

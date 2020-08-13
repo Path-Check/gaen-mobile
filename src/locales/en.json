@@ -120,6 +120,13 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you crossed paths with later receives a confirmed, positive diagnosis or test for COVID-19 and chooses to notify others"
   },
   "home": {
+    "bluetooth_info_header": "Bluetooth",
+    "bluetooth_info_body": "Your phone detects other phones you encounter using Bluetooth Low Energy. This allows the app to keep track of your daily encounters anonymously, even when you don’t have the app open on your device.",
+    "proximity_tracing_info_header": "Proximity Tracing",
+    "proximity_tracing_subheader_1": "How does Proximity Tracing work?",
+    "proximity_tracing_subheader_2": "Is my data secure?",
+    "proximity_tracing_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
+    "proximity_tracing_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Enable Bluetooth in the Settings app",
