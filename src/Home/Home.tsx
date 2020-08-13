@@ -3,6 +3,7 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  Platform,
   Linking,
   StyleSheet,
   SafeAreaView,
@@ -242,13 +243,16 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   )
 }
 
+const isIOS = Platform.OS === "ios"
+const backgroundImagePaddingTop = isIOS ? 500 : 560
+
 const style = StyleSheet.create({
   container: {
     flex: 1,
   },
   backgroundImage: {
     flex: 1,
-    paddingTop: 500,
+    paddingTop: backgroundImagePaddingTop,
     width: "100%",
   },
   textContainer: {
@@ -346,7 +350,6 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   button: {
-    alignSelf: "center",
     marginBottom: Spacing.large,
   },
 })

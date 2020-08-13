@@ -74,9 +74,14 @@ export const Button: FunctionComponent<ButtonProps> = ({
     if (disabled || loading) {
       return {}
     } else {
-      return style.buttonShadow
+      return style.buttonContainerShadow
     }
   }
+  const buttonContainerStyle = {
+    ...style.buttonContainer,
+    ...determineShadowEnabled(),
+  }
+
   const buttonStyle = {
     ...style.button,
     ...determineShadowEnabled(),
@@ -91,7 +96,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       accessibilityRole="button"
       disabled={disabled || loading}
       testID={testID}
-      style={determineShadowEnabled()}
+      style={buttonContainerStyle}
     >
       <LinearGradient
         start={{ x: 0.2, y: 0.85 }}
@@ -121,7 +126,10 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }
 
 const style = StyleSheet.create({
-  buttonShadow: {
+  buttonContainer: {
+    alignSelf: "center",
+  },
+  buttonContainerShadow: {
     ...Outlines.baseShadow,
   },
   button: {
