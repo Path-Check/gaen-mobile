@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  SafeAreaView,
-} from "react-native"
+import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
