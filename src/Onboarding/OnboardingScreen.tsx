@@ -213,11 +213,10 @@ const style = StyleSheet.create({
     height: "100%",
     justifyContent: "space-between",
     paddingBottom: Spacing.huge,
-    paddingHorizontal: Spacing.large,
   },
   image: {
-    width: "100%",
-    height: 210,
+    width: "97%",
+    height: 240,
     marginTop: imageMarginTop,
     marginBottom: Spacing.medium,
   },
@@ -230,9 +229,10 @@ const style = StyleSheet.create({
   circles: {
     flexDirection: "row",
     alignItems: "center",
-    width: 100,
+    width: 150,
     justifyContent: "space-between",
     marginBottom: Spacing.medium,
+    paddingHorizontal: Spacing.large,
   },
   circleInactive: {
     backgroundColor: Colors.lighterGray,
@@ -243,9 +243,11 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header3,
     marginBottom: Spacing.xLarge,
+    paddingHorizontal: Spacing.large,
   },
   nextButtonContainer: {
     alignSelf: "flex-start",
+    paddingHorizontal: Spacing.large,
   },
   bottomButtonContainer: {
     backgroundColor: Colors.faintGray,
