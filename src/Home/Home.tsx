@@ -244,7 +244,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 }
 
 const isIOS = Platform.OS === "ios"
-const backgroundImagePaddingTop = isIOS ? 500 : 560
+const backgroundImagePaddingTop = isIOS ? 500 : 570
 
 const style = StyleSheet.create({
   container: {

@@ -112,11 +112,13 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
                 {onboardingScreenContent.header}
               </GlobalText>
             </View>
-            <Button
-              label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenActions.primaryButtonOnPress}
-              hasRightArrow
-            />
+            <View style={style.nextButtonContainer}>
+              <Button
+                label={onboardingScreenContent.primaryButtonLabel}
+                onPress={onboardingScreenActions.primaryButtonOnPress}
+                hasRightArrow
+              />
+            </View>
           </ScrollView>
           <TouchableOpacity
             style={style.bottomButtonContainer}
@@ -171,6 +173,7 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
 const isIOS = Platform.OS === "ios"
 const skipButtonSpacingTop = isIOS ? Spacing.xSmall : Spacing.xxLarge
 const languageButtonSpacingTop = isIOS ? Spacing.small : Spacing.huge
+const imageMarginTop = isIOS ? 70 : 100
 
 const style = StyleSheet.create({
   languageButtonContainer: {
@@ -215,7 +218,7 @@ const style = StyleSheet.create({
   image: {
     width: "100%",
     height: 210,
-    marginTop: 70,
+    marginTop: imageMarginTop,
     marginBottom: Spacing.medium,
   },
   circleActive: {
@@ -240,6 +243,9 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header3,
     marginBottom: Spacing.xLarge,
+  },
+  nextButtonContainer: {
+    alignSelf: "flex-start",
   },
   bottomButtonContainer: {
     backgroundColor: Colors.faintGray,

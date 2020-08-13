@@ -44,45 +44,44 @@ const History: FunctionComponent<HistoryProps> = ({
   const titleText = t("screen_titles.exposure_history")
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView
-        contentContainerStyle={style.contentContainer}
-        style={style.container}
-        alwaysBounceVertical={false}
-      >
-        <View>
-          <View style={style.headerRow}>
-            <GlobalText style={style.headerText}>{titleText}</GlobalText>
-            <TouchableOpacity
-              onPress={handleOnPressMoreInfo}
-              style={style.moreInfoButton}
-            >
-              <SvgXml
-                xml={Icons.QuestionMark}
-                accessible
-                accessibilityLabel={t("label.question_icon")}
-                style={style.moreInfoButtonIcon}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={style.subheaderRow}>
-            <DateInfoHeader lastDetectionDate={lastDetectionDate} />
-          </View>
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      style={style.container}
+      alwaysBounceVertical={false}
+    >
+      <View>
+        <View style={style.headerRow}>
+          <GlobalText style={style.headerText}>{titleText}</GlobalText>
+          <TouchableOpacity
+            onPress={handleOnPressMoreInfo}
+            style={style.moreInfoButton}
+          >
+            <SvgXml
+              xml={Icons.QuestionMark}
+              accessible
+              accessibilityLabel={t("label.question_icon")}
+              style={style.moreInfoButtonIcon}
+            />
+          </TouchableOpacity>
         </View>
-        <View style={style.listContainer}>
-          {showExposureHistory ? (
-            <ExposureList exposures={exposures} />
-          ) : (
-            <NoExposures />
-          )}
+        <View style={style.subheaderRow}>
+          <DateInfoHeader lastDetectionDate={lastDetectionDate} />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+      <View style={style.listContainer}>
+        {showExposureHistory ? (
+          <ExposureList exposures={exposures} />
+        ) : (
+          <NoExposures />
+        )}
+      </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
   contentContainer: {
+    paddingTop: Spacing.medium,
     paddingBottom: Spacing.xxHuge,
   },
   container: {
