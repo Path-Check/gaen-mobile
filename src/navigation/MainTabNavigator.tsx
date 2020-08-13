@@ -8,7 +8,7 @@ import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-import HomeScreen from "../Home/Home"
+import HomeStack from "./HomeStack"
 import MoreStack from "./MoreStack"
 import ReportIssueStack from "./ReportIssueStack"
 
@@ -148,7 +148,7 @@ const MainTabNavigator: FunctionComponent = () => {
     >
       <Tab.Screen
         name={Screens.Home}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarLabel: t("navigation.home"),
           tabBarIcon: HomeIcon,
