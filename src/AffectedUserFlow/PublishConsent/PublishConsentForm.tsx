@@ -61,6 +61,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
+      testID="publish-consent-form"
     >
       <View style={style.iconContainerCircle}>
         <SvgXml
