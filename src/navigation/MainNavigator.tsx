@@ -62,6 +62,7 @@ const MainNavigator: FunctionComponent = () => {
                 options={{
                   ...TransitionPresets.ModalTransition,
                   ...defaultScreenOptions,
+                  gestureEnabled: false,
                 }}
               />
               <Stack.Screen

@@ -64,8 +64,10 @@ const EnableExposureNotifications: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
-    paddingTop: Layout.oneTenthHeight,
+    paddingTop: Layout.oneEighthHeight,
+    paddingBottom: 70,
     backgroundColor: Colors.primaryBackground,
   },
   cancelButtonContainer: {
@@ -83,8 +85,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   header: {
-    ...Typography.header2,
-    marginBottom: Spacing.xxSmall,
+    ...Typography.header1,
+    marginBottom: Spacing.small,
   },
   subheader: {
     ...Typography.secondaryContent,
