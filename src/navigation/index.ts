@@ -29,6 +29,16 @@ export const ActivationScreens: {
   NotificationPermissions: "NotificationPermissions",
 }
 
+export type HomeScreen = "Home" | "BluetoothInfo" | "ProximityTracingInfo"
+
+export const HomeScreens: {
+  [key in HomeScreen]: HomeScreen
+} = {
+  Home: "Home",
+  BluetoothInfo: "BluetoothInfo",
+  ProximityTracingInfo: "ProximityTracingInfo",
+}
+
 export type OnboardingScreen =
   | "Welcome"
   | "Introduction"
@@ -133,7 +143,7 @@ export type Screen =
   | MoreStackScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
-  | "Home"
+  | HomeScreen
   | "ReportIssueForm"
   | "LanguageSelection"
 
@@ -144,7 +154,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...MoreStackScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
-  Home: "Home",
+  ...HomeScreens,
   ReportIssueForm: "ReportIssueForm",
   LanguageSelection: "LanguageSelection",
 }
