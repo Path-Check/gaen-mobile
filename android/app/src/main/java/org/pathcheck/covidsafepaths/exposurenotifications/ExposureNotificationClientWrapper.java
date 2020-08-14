@@ -16,13 +16,12 @@ import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.android.gms.tasks.Task;
 
-import java.io.File;
-import java.util.List;
-
-import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+
+import java.io.File;
+import java.util.List;
 
 import static org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages.EN_STATUS_EVENT;
 
