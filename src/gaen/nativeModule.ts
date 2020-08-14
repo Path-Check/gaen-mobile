@@ -141,7 +141,7 @@ export const getVersion = async (): Promise<string> => {
 }
 
 export const isBluetoothEnabled = async (): Promise<boolean> => {
-  const bluetoothStatus = deviceInfoModule.isBluetoothEnabled()
+  const bluetoothStatus = await deviceInfoModule.isBluetoothEnabled()
   return bluetoothStatus === true || bluetoothStatus === "true"
 }
 

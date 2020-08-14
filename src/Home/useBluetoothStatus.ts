@@ -10,6 +10,7 @@ export const useBluetoothStatus = (): boolean => {
       setBTStatus(status)
     }
 
+    fetchBTEnabled()
     AppState.addEventListener(determineOSListener(), () => fetchBTEnabled())
     return AppState.removeEventListener(determineOSListener(), () =>
       fetchBTEnabled(),
