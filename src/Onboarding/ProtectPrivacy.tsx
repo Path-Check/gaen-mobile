@@ -147,7 +147,7 @@ const style = StyleSheet.create({
     padding: Spacing.medium,
   },
   mainContentContainer: {
-    paddingBottom: Spacing.xxxHuge,
+    paddingBottom: Spacing.large,
   },
   image: {
     width: "100%",

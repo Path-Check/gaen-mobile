@@ -41,7 +41,6 @@
   },
   "common": {
     "alert": "Alert",
-    "cancel": "Cancel",
     "close": "Close",
     "continue": "Continue",
     "disabled": "Disabled",
@@ -63,15 +62,22 @@
     "reload": "Reload",
     "title": "Unknown Error"
   },
+  "exoprt": {
+    "start_image_label": ""
+  },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
-    "code_input_button_cancel": "Cancel",
     "code_input_button_back": "Back",
+    "code_input_button_cancel": "Cancel",
     "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "By choosing to share your status and anonymously notify others, you’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
-    "consent_button_cancel": "Cancel",
+    "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
+    "consent_body_1": "If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
+    "consent_body_2": "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days,  along with a weighted risk score based on when your symptoms developed.",
     "consent_button_title": "I understand and consent",
+    "consent_subheader_1": "Why should I share?",
+    "consent_subheader_2": "How does it work?",
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
@@ -81,8 +87,7 @@
     },
     "publish_consent_body_bluetooth": "Sharing your positive diagnosis is optional and can only be done with your consent.\n\nIf you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.\n\nThe only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
     "publish_consent_title_bluetooth": "Notify your community",
-    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
-    "start_image_label": "A person talking to a health expert virtually"
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
     "exposure_detail": {

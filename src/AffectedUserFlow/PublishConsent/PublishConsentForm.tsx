@@ -117,7 +117,21 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           >
             <View style={style.content}>
               <GlobalText style={style.header}>{title}</GlobalText>
-              <GlobalText style={style.contentText}>{body}</GlobalText>
+              <GlobalText style={style.bodyText}>
+                {t("export.consent_body_0")}
+              </GlobalText>
+              <GlobalText style={style.subheaderText}>
+                {t("export.consent_subheader_1")}
+              </GlobalText>
+              <GlobalText style={style.bodyText}>
+                {t("export.consent_body_1")}
+              </GlobalText>
+              <GlobalText style={style.subheaderText}>
+                {t("export.consent_subheader_2")}
+              </GlobalText>
+              <GlobalText style={style.bodyText}>
+                {t("export.consent_body_2")}
+              </GlobalText>
             </View>
 
             <Button
@@ -182,14 +196,21 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.huge,
   },
   content: {
-    paddingBottom: Spacing.xxHuge,
+    marginBottom: Spacing.small,
   },
   header: {
     ...Typography.header2,
     paddingBottom: Spacing.medium,
   },
-  contentText: {
+  subheaderText: {
     ...Typography.mainContent,
+    ...Typography.mediumBold,
+    color: Colors.black,
+    marginBottom: Spacing.xxSmall,
+  },
+  bodyText: {
+    ...Typography.mainContent,
+    marginBottom: Spacing.xxLarge,
   },
   button: {
     alignSelf: "flex-start",
