@@ -68,14 +68,14 @@ public class DiagnosisKeyFileSubmitter {
      *
      * <p>Returns early if given an empty list of batches.
      */
-    public ListenableFuture<?> submitFiles(List<KeyFileBatch> batches, String token) {
+    public ListenableFuture<?> submitFiles(List<KeyFileBatch> batches) {
         if (batches.isEmpty()) {
             Log.d(TAG, "No files to provide to google play services.");
             return Futures.immediateFuture(null);
         }
         Log.d(TAG, "Providing  " + batches.size() + " diagnosis key batches to google play services.");
 
-        ListenableFuture<?> allDone = submitBatches(batches, token);
+        ListenableFuture<?> allDone = submitBatches(batches);
 
         // Add a listener to delete all the files.
         allDone.addListener(
@@ -91,7 +91,7 @@ public class DiagnosisKeyFileSubmitter {
         return allDone;
     }
 
-    private ListenableFuture<?> submitBatches(List<KeyFileBatch> batches, String token) {
+    private ListenableFuture<?> submitBatches(List<KeyFileBatch> batches) {
         Log.d(TAG, "Combining ["
                 + batches.size()
                 + "] key file batches into a single submission to provideDiagnosisKeys().");
@@ -103,7 +103,7 @@ public class DiagnosisKeyFileSubmitter {
 
         return FluentFuture.from(
                 TaskToFutureAdapter.getFutureWithTimeout(
-                        client.provideDiagnosisKeys(files, token),
+                        client.provideDiagnosisKeys(files),
                         PROVIDE_KEYS_TIMEOUT.toMillis(),
                         TimeUnit.MILLISECONDS,
                         AppExecutors.getScheduledExecutor()))

@@ -204,10 +204,10 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: "libs", include: ['*.jar', '*.aar'])
     // loading html files
     implementation project(':react-native-local-resource')
     implementation project(':react-native-reanimated')
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.annotation:annotation:1.1.0"
     implementation 'com.bottlerocketstudios:vault:1.4.2'
@@ -227,8 +227,6 @@ dependencies {
     implementation 'com.google.auto.value:auto-value-annotations:1.7.3'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'commons-io:commons-io:2.6'
-    // Google EN library not available via Maven
-    implementation project(path: ':play-services-nearby-18.0.3-eap')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/"

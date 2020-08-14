@@ -18,16 +18,14 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-
-import javax.annotation.Nonnull;
-
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
-import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.notify.ShareDiagnosisManager;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+
+import javax.annotation.Nonnull;
 
 import static org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
 
@@ -38,14 +36,11 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
     private final ExposureNotificationClient exposureNotificationClient;
     private final ShareDiagnosisManager shareDiagnosisManager;
-    private final ExposureConfigurations config;
 
     public ExposureNotificationsModule(ReactApplicationContext context) {
         super(context);
         exposureNotificationClient = Nearby.getExposureNotificationClient(context);
         shareDiagnosisManager = new ShareDiagnosisManager(context);
-        // TODO keep or discard config wrapper class? where will attenuation thresholds be set?
-        config = new ExposureConfigurations(context);
     }
 
     @Override
