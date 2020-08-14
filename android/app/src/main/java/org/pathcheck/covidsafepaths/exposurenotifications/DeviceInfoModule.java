@@ -76,4 +76,10 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
             promise.reject(new Exception("Location manager not found"));
         }
     }
+
+    @ReactMethod
+    public void deviceSupportsLocationlessScanning(final Promise promise) {
+        ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+        promise.resolve(client.deviceSupportsLocationlessScanning());
+    }
 }
