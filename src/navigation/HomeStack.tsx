@@ -4,15 +4,12 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import { HomeScreens, HomeScreen } from "./index"
+import { HomeScreens } from "./index"
 import Home from "../Home/Home"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ProximityTracingInfo from "../Home/ProximityTracingInfo"
 
-type HomeStackParams = {
-  [key in HomeScreen]: undefined
-}
-const Stack = createStackNavigator<HomeStackParams>()
+const Stack = createStackNavigator()
 
 const screenOptions = {
   headerShown: false,
