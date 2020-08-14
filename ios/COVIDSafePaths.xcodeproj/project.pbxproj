@@ -683,14 +683,13 @@
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
 				B5D968F324C6036A008DE452 /* Crashlytics */,
 				B53575E124D0C2DE00E7310D /* Upload Symbols */,
+				B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BT;
-			packageProductDependencies = (
-			);
 			productName = COVIDSafePaths;
 			productReference = C53FD0C124719AD1006D3268 /* BT.app */;
 			productType = "com.apple.product-type.application";
@@ -703,6 +702,7 @@
 				C5AA24D524768FFF00BA0A99 /* Sources */,
 				C5AA24D924768FFF00BA0A99 /* Frameworks */,
 				C5AA24DB24768FFF00BA0A99 /* Resources */,
+				377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -721,7 +721,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = org.pathcheck;
-				LastUpgradeCheck = 940;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Path Check Inc";
 				TargetAttributes = {
 					C5AA24D124768FFF00BA0A99 = {
@@ -750,8 +750,6 @@
 				"pt-BR",
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
-			packageReferences = (
-			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -838,6 +836,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B53575E124D0C2DE00E7310D /* Upload Symbols */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -875,6 +890,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1076,6 +1108,7 @@
 			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1131,6 +1164,7 @@
 			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1169,6 +1203,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
