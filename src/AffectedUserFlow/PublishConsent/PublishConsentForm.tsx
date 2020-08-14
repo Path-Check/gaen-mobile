@@ -2,11 +2,9 @@ import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
   Alert,
-  ImageBackground,
   TouchableOpacity,
   StyleSheet,
   View,
-  SafeAreaView,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -16,7 +14,7 @@ import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
 
 import { Screens } from "../../navigation"
-import { Icons, Images } from "../../assets"
+import { Icons } from "../../assets"
 import {
   Outlines,
   Colors,
@@ -60,62 +58,53 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const body = t("export.publish_consent_body_bluetooth")
 
   return (
-    <ImageBackground
-      source={Images.BlueGradientBackground}
-      style={style.backgroundImage}
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
       testID="publish-consent-form"
     >
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={style.contentContainer}
+      <View style={style.iconContainerCircle}>
+        <SvgXml
+          xml={Icons.Bell}
+          width={Iconography.small}
+          height={Iconography.small}
+        />
+      </View>
+
+      <View style={style.content}>
+        <GlobalText style={style.header}>{title}</GlobalText>
+        <GlobalText style={style.contentText}>{body}</GlobalText>
+      </View>
+
+      <View style={style.buttonsContainer}>
+        <Button
+          invert
+          loading={isLoading}
+          label={t("export.consent_button_title")}
+          onPress={handleOnPressConfirm}
+        />
+        <TouchableOpacity
+          onPress={handleOnPressCancel}
+          style={style.secondaryButton}
+          accessibilityLabel={t("export.consent_button_cancel")}
         >
-          <View style={style.iconContainerCircle}>
-            <SvgXml
-              xml={Icons.Bell}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-          </View>
-
-          <View style={style.content}>
-            <GlobalText style={style.header}>{title}</GlobalText>
-            <GlobalText style={style.contentText}>{body}</GlobalText>
-          </View>
-
-          <View>
-            <Button
-              invert
-              loading={isLoading}
-              label={t("export.consent_button_title")}
-              onPress={handleOnPressConfirm}
-            />
-            <TouchableOpacity
-              onPress={handleOnPressCancel}
-              style={style.secondaryButton}
-              accessibilityLabel={t("export.consent_button_cancel")}
-            >
-              <GlobalText style={style.secondaryButtonText}>
-                {t("export.consent_button_cancel")}
-              </GlobalText>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </ImageBackground>
+          <GlobalText style={style.secondaryButtonText}>
+            {t("export.consent_button_cancel")}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
-  contentContainer: {
-    padding: Spacing.large,
-    paddingBottom: Spacing.huge,
+  container: {
+    backgroundColor: Colors.primaryBlue,
   },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
+  contentContainer: {
+    paddingHorizontal: Spacing.large,
+    paddingTop: Spacing.xxxHuge,
+    paddingBottom: Spacing.huge,
   },
   content: {
     paddingBottom: Spacing.xxHuge,
@@ -134,6 +123,9 @@ const style = StyleSheet.create({
   contentText: {
     ...Typography.secondaryContent,
     color: Colors.white,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,

@@ -17,6 +17,7 @@ export const textInputFormField: TextStyle = {
   paddingRight: Spacing.medium,
   paddingBottom: Spacing.small,
   paddingLeft: Spacing.medium,
+  textAlignVertical: "top",
 }
 
 export const required: TextStyle = {

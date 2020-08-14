@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  Platform,
   Linking,
   StyleSheet,
   SafeAreaView,
@@ -21,7 +22,6 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useStatusBarEffect, Stacks } from "../navigation"
-import { isBluetoothEnabled } from "../gaen/nativeModule"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
@@ -36,6 +36,7 @@ import {
   Outlines,
   Iconography,
 } from "../styles"
+import { useBluetoothStatus } from "./useBluetoothStatus"
 
 const HomeScreen: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -48,16 +49,7 @@ const HomeScreen: FunctionComponent = () => {
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
-
-  const [btStatus, setBTStatus] = useState(false)
-  const fetchBTStatus = async () => {
-    const status = await isBluetoothEnabled()
-    setBTStatus(status === "true")
-  }
-
-  useEffect(() => {
-    fetchBTStatus()
-  }, [])
+  const btStatus = useBluetoothStatus()
 
   const isEnabled = enablement === "ENABLED"
   const isAuthorized = authorization === "AUTHORIZED"
@@ -145,7 +137,7 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={style.safeArea}>
         <ScrollView style={bottomContainerStyle}>
           <TouchableOpacity
             style={style.shareContainer}
@@ -242,13 +234,18 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   )
 }
 
+const backgroundImagePaddingTop = Platform.select({ ios: 500, android: 570 })
+
 const style = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
   backgroundImage: {
     flex: 1,
-    paddingTop: 500,
+    paddingTop: backgroundImagePaddingTop,
     width: "100%",
   },
   textContainer: {
@@ -346,7 +343,6 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   button: {
-    alignSelf: "center",
     marginBottom: Spacing.large,
   },
 })

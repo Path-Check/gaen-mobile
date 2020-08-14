@@ -1,11 +1,5 @@
 import React from "react"
-import {
-  StyleSheet,
-  ImageBackground,
-  SafeAreaView,
-  View,
-  ScrollView,
-} from "react-native"
+import { StyleSheet, View, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -16,14 +10,14 @@ import { useStatusBarEffect } from "../navigation"
 
 import { Screens } from "../navigation"
 
-import { Images, Icons } from "../assets"
+import { Icons } from "../assets"
 import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
 
 export const ExportIntro = (): JSX.Element => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  useStatusBarEffect("dark-content")
+  useStatusBarEffect("light-content")
 
   const handleOnPressNext = () => {
     navigation.navigate(Screens.AffectedUserCodeInput)
@@ -33,48 +27,33 @@ export const ExportIntro = (): JSX.Element => {
   const body = t("export.start_title_bluetooth")
 
   return (
-    <ImageBackground
-      source={Images.BlueGradientBackground}
-      style={style.backgroundImage}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={style.contentContainer}
-          style={style.container}
-        >
-          <View style={style.headerContainer}>
-            <View style={style.iconContainerCircle}>
-              <SvgXml
-                xml={Icons.Heart}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-            </View>
-
-            <GlobalText style={style.header}>{title}</GlobalText>
-            <GlobalText style={style.contentText}>{body}</GlobalText>
-          </View>
-          <Button
-            invert
-            label={t("common.start")}
-            onPress={handleOnPressNext}
+    <ScrollView contentContainerStyle={style.contentContainer}>
+      <View style={style.headerContainer}>
+        <View style={style.iconContainerCircle}>
+          <SvgXml
+            xml={Icons.Heart}
+            width={Iconography.small}
+            height={Iconography.small}
           />
-        </ScrollView>
-      </SafeAreaView>
-    </ImageBackground>
+        </View>
+
+        <GlobalText style={style.header}>{title}</GlobalText>
+        <GlobalText style={style.contentText}>{body}</GlobalText>
+      </View>
+      <View style={style.buttonContainer}>
+        <Button invert label={t("common.start")} onPress={handleOnPressNext} />
+      </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-  },
-  container: {
-    padding: Spacing.large,
-  },
   contentContainer: {
+    height: "100%",
     justifyContent: "space-between",
-    paddingBottom: Spacing.xxHuge,
+    paddingHorizontal: Spacing.large,
+    paddingVertical: Spacing.xxxHuge,
+    backgroundColor: Colors.primaryBlue,
   },
   headerContainer: {
     marginBottom: Spacing.xxHuge,
@@ -93,6 +72,9 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
     color: Colors.white,
     paddingTop: Spacing.medium,
+  },
+  buttonContainer: {
+    alignSelf: "flex-start",
   },
 })
 

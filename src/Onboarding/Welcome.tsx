@@ -58,6 +58,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: Colors.primaryBackground,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
