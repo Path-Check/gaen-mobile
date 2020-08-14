@@ -31,7 +31,6 @@ import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 import androidx.work.WorkerParameters;
 
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.Futures;
@@ -100,7 +99,7 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
                     }
                 }, AppExecutors.getBackgroundExecutor())
                 // Submit downloaded files to EN client
-                .transformAsync((batches) -> submitter.submitFiles(batches, ExposureNotificationClient.TOKEN_A),
+                .transformAsync((batches) -> submitter.submitFiles(batches),
                         AppExecutors.getBackgroundExecutor())
                 .transform(done -> {
                     // Keep track of the last date when the process did run
