@@ -1,4 +1,4 @@
-package covidsafepaths.bt.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
