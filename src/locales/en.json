@@ -41,6 +41,7 @@
   },
   "common": {
     "alert": "Alert",
+    "cancel": "Cancel",
     "close": "Close",
     "continue": "Continue",
     "disabled": "Disabled",
@@ -79,8 +80,7 @@
     },
     "publish_consent_body_bluetooth": "Sharing your positive diagnosis is optional and can only be done with your consent.\n\nIf you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.\n\nThe only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
     "publish_consent_title_bluetooth": "Notify your community",
-    "start_body_bluetooth": "Choose to anonymously notify others you may have encountered and help your community contain the spread of the virus.",
-    "start_title_bluetooth": "Help contain the spread of the virus and protect others in your community if you're diagnosed or test positive for COVID-19."
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
     "exposure_detail": {
