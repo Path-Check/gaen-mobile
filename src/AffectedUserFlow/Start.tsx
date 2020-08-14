@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { TouchableNativeFeedback, StyleSheet, View, Image } from "react-native"
+import { TouchableOpacity, StyleSheet, View, Image } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -29,7 +29,7 @@ export const ExportIntro: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.cancelButtonContainer}>
-        <TouchableNativeFeedback
+        <TouchableOpacity
           onPress={handleOnPressCancel}
           accessible
           accessibilityLabel={t("export.code_input_button_cancel")}
@@ -42,7 +42,7 @@ export const ExportIntro: FunctionComponent = () => {
               height={Iconography.xSmall}
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
       <Image
         source={Images.PersonAndHealthExpert}

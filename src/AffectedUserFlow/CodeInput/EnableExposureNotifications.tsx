@@ -1,10 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  TouchableNativeFeedback,
-  Linking,
-  View,
-  StyleSheet,
-} from "react-native"
+import { TouchableOpacity, Linking, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -34,7 +29,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
       testID={"affected-user-enable-exposure-notifications-screen"}
     >
       <View style={style.cancelButtonContainer}>
-        <TouchableNativeFeedback
+        <TouchableOpacity
           onPress={handleOnPressCancel}
           accessible
           accessibilityLabel={t("export.code_input_button_cancel")}
@@ -47,7 +42,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
               height={Iconography.xSmall}
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
       <View style={style.headerContainer}>
         <GlobalText style={style.header}>

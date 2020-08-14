@@ -3,7 +3,6 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
-  TouchableNativeFeedback,
   TouchableOpacity,
   StyleSheet,
   View,
@@ -47,14 +46,14 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
-    try {
-      await strategy.submitDiagnosisKeys(certificate, hmacKey)
-      setIsLoading(false)
-      navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
-    } catch (e) {
-      setIsLoading(false)
-      Alert.alert(t("common.something_went_wrong"), e.message)
-    }
+    /* try { */
+    /* await strategy.submitDiagnosisKeys(certificate, hmacKey) */
+    setIsLoading(false)
+    navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+    /* } catch (e) { */
+    /* setIsLoading(false) */
+    /* Alert.alert(t("common.something_went_wrong"), e.message) */
+    /* } */
   }
   useStatusBarEffect("dark-content")
 
@@ -79,7 +78,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       <SafeAreaView style={style.bottomSafeArea}>
         <View style={style.outerContainer}>
           <View style={style.navButtonContainer}>
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={handleOnPressBack}
               accessible
               accessibilityLabel={t("export.code_input_button_back")}
@@ -92,9 +91,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
                   height={Iconography.xSmall}
                 />
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
 
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={handleOnPressCancel}
               accessible
               accessibilityLabel={t("export.code_input_button_cancel")}
@@ -107,7 +106,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
                   height={Iconography.xSmall}
                 />
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           </View>
 
           <ScrollView

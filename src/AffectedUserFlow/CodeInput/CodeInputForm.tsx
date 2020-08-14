@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  TouchableNativeFeedback,
+  TouchableOpacity,
   TextInput,
   View,
   Keyboard,
@@ -132,7 +132,7 @@ const CodeInputForm: FunctionComponent = () => {
   return (
     <View style={style.container} testID={"affected-user-code-input-form"}>
       <View style={style.backButtonContainer}>
-        <TouchableNativeFeedback
+        <TouchableOpacity
           onPress={handleOnPressBack}
           accessible
           accessibilityLabel={t("export.code_input_button_back")}
@@ -145,11 +145,11 @@ const CodeInputForm: FunctionComponent = () => {
               height={Iconography.xSmall}
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
 
       <View style={style.cancelButtonContainer}>
-        <TouchableNativeFeedback
+        <TouchableOpacity
           onPress={handleOnPressCancel}
           accessible
           accessibilityLabel={t("export.code_input_button_cancel")}
@@ -162,7 +162,7 @@ const CodeInputForm: FunctionComponent = () => {
               height={Iconography.xSmall}
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
 
       <View style={style.headerContainer}>
@@ -200,7 +200,7 @@ const CodeInputForm: FunctionComponent = () => {
         onPress={handleOnPressSubmit}
         label={t("common.next")}
         disabled={isDisabled}
-        customButtonStyle={{ alignSelf: "flex-start" }}
+        customButtonStyle={style.button}
         hasRightArrow
       />
     </View>
@@ -269,6 +269,9 @@ const style = StyleSheet.create({
     textAlignVertical: "center",
     lineHeight: Typography.largeLineHeight,
     letterSpacing: 8,
+  },
+  button: {
+    alignSelf: "flex-start",
   },
   activityIndicatorContainer: {
     position: "absolute",

@@ -83,11 +83,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
     ...customButtonStyle,
   }
 
-  const buttonStyle = {
-    ...style.button,
-    ...determineShadowEnabled(),
-  }
-
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -102,7 +97,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
         start={{ x: 0.2, y: 0.85 }}
         end={{ x: 0.4, y: 0 }}
         colors={determineGradient()}
-        style={buttonStyle}
+        style={style.button}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
@@ -128,6 +123,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
+    borderRadius: Outlines.borderRadiusMax,
   },
   buttonContainerShadow: {
     ...Outlines.baseShadow,
