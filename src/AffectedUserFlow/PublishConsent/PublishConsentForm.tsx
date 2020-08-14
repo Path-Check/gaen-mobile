@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
+  SafeAreaView,
   Alert,
   TouchableNativeFeedback,
   TouchableOpacity,
@@ -73,75 +74,87 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const body = t("export.publish_consent_body_bluetooth")
 
   return (
-    <View style={style.outerContainer}>
-      <View style={style.navButtonContainer}>
-        <TouchableNativeFeedback
-          onPress={handleOnPressBack}
-          accessible
-          accessibilityLabel={t("export.code_input_button_back")}
-        >
-          <View style={style.backButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.ArrowLeft}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
-          </View>
-        </TouchableNativeFeedback>
+    <>
+      <SafeAreaView style={style.topSafeArea} />
+      <SafeAreaView style={style.bottomSafeArea}>
+        <View style={style.outerContainer}>
+          <View style={style.navButtonContainer}>
+            <TouchableNativeFeedback
+              onPress={handleOnPressBack}
+              accessible
+              accessibilityLabel={t("export.code_input_button_back")}
+            >
+              <View style={style.backButtonInnerContainer}>
+                <SvgXml
+                  xml={Icons.ArrowLeft}
+                  fill={Colors.black}
+                  width={Iconography.xSmall}
+                  height={Iconography.xSmall}
+                />
+              </View>
+            </TouchableNativeFeedback>
 
-        <TouchableNativeFeedback
-          onPress={handleOnPressCancel}
-          accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
+            <TouchableNativeFeedback
+              onPress={handleOnPressCancel}
+              accessible
+              accessibilityLabel={t("export.code_input_button_cancel")}
+            >
+              <View style={style.cancelButtonInnerContainer}>
+                <SvgXml
+                  xml={Icons.X}
+                  fill={Colors.black}
+                  width={Iconography.xSmall}
+                  height={Iconography.xSmall}
+                />
+              </View>
+            </TouchableNativeFeedback>
           </View>
-        </TouchableNativeFeedback>
-      </View>
 
-      <ScrollView
-        contentContainerStyle={style.contentContainer}
-        testID="publish-consent-form"
-        alwaysBounceVertical={false}
-      >
-        <View style={style.content}>
-          <GlobalText style={style.header}>{title}</GlobalText>
-          <GlobalText style={style.contentText}>{body}</GlobalText>
+          <ScrollView
+            contentContainerStyle={style.contentContainer}
+            testID="publish-consent-form"
+            alwaysBounceVertical={false}
+          >
+            <View style={style.content}>
+              <GlobalText style={style.header}>{title}</GlobalText>
+              <GlobalText style={style.contentText}>{body}</GlobalText>
+            </View>
+
+            <Button
+              loading={isLoading}
+              label={t("export.consent_button_title")}
+              onPress={handleOnPressConfirm}
+              customButtonStyle={style.button}
+            />
+          </ScrollView>
+          <TouchableOpacity
+            style={style.bottomButtonContainer}
+            onPress={handleOnPressProtectPrivacy}
+          >
+            <GlobalText style={style.bottomButtonText}>
+              {t("onboarding.protect_privacy_button")}
+            </GlobalText>
+            <SvgXml
+              xml={Icons.ChevronUp}
+              fill={Colors.primaryBlue}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
+            />
+          </TouchableOpacity>
         </View>
-
-        <Button
-          loading={isLoading}
-          label={t("export.consent_button_title")}
-          onPress={handleOnPressConfirm}
-          customButtonStyle={style.button}
-        />
-      </ScrollView>
-      <TouchableOpacity
-        style={style.bottomButtonContainer}
-        onPress={handleOnPressProtectPrivacy}
-      >
-        <GlobalText style={style.bottomButtonText}>
-          {t("onboarding.protect_privacy_button")}
-        </GlobalText>
-        <SvgXml
-          xml={Icons.ChevronUp}
-          fill={Colors.primaryBlue}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
-        />
-      </TouchableOpacity>
-    </View>
+      </SafeAreaView>
+    </>
   )
 }
 
 const style = StyleSheet.create({
+  topSafeArea: {
+    backgroundColor: Colors.primaryBackground,
+  },
+  bottomSafeArea: {
+    flex: 1,
+    backgroundColor: Colors.faintGray,
+  },
   outerContainer: {
     flex: 1,
     backgroundColor: Colors.primaryBackground,
@@ -150,7 +163,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "absolute",
-    paddingTop: 30,
+    paddingTop: 25,
     width: "100%",
     borderBottomWidth: Outlines.hairline,
     borderBottomColor: Colors.lightestGray,
@@ -165,7 +178,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: Spacing.large,
-    paddingTop: 120,
+    paddingTop: 105,
     paddingBottom: Spacing.huge,
   },
   content: {
