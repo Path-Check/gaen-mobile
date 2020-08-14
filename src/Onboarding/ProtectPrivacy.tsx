@@ -13,18 +13,39 @@ import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
+import { useStatusBarEffect } from "../navigation"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
-const ProtectPrivacy: FunctionComponent = () => {
+interface ProtectPrivacyProps {
+  modalStyle?: boolean
+}
+
+const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
+  modalStyle,
+}) => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   const applicationName = env.IN_APP_NAME
+  useStatusBarEffect("dark-content")
+
+  const headerContainerPaddingTop = modalStyle ? { paddingTop: 40 } : null
+  const headerContainerStyle = {
+    ...style.headerContainer,
+    ...headerContainerPaddingTop,
+  }
+  const mainContentContainerPaddingTop = modalStyle
+    ? { paddingTop: 170 }
+    : { paddingTop: 130 }
+  const mainContentContainerStyle = {
+    ...style.mainContentContainer,
+    ...mainContentContainerPaddingTop,
+  }
 
   return (
     <View style={style.container}>
-      <View style={style.headerContainer}>
+      <View style={headerContainerStyle}>
         <GlobalText style={style.headerText}>
           {t("onboarding.protect_privacy.header")}
         </GlobalText>
@@ -40,7 +61,7 @@ const ProtectPrivacy: FunctionComponent = () => {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={style.mainContentContainer}>
+      <ScrollView contentContainerStyle={mainContentContainerStyle}>
         <Section
           image={Images.PersonOnPhoneWithCode}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
@@ -126,7 +147,6 @@ const style = StyleSheet.create({
     padding: Spacing.medium,
   },
   mainContentContainer: {
-    paddingTop: 130,
     paddingBottom: Spacing.xxxHuge,
   },
   image: {

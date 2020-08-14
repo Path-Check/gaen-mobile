@@ -42,6 +42,14 @@ const cardScreenOptions: StackNavigationOptions = {
   cardShadowEnabled: true,
 }
 
+const ProtectPrivacyModal = () => {
+  return <ProtectPrivacy modalStyle />
+}
+
+const ProtectPrivacyCard = () => {
+  return <ProtectPrivacy />
+}
+
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
 
@@ -81,6 +89,14 @@ const MainNavigator: FunctionComponent = () => {
                   ...headerScreenOptions,
                 }}
               />
+              <Stack.Screen
+                name={OnboardingScreens.ProtectPrivacy}
+                component={ProtectPrivacyModal}
+                options={{
+                  ...TransitionPresets.ModalTransition,
+                  ...defaultScreenOptions,
+                }}
+              />
             </>
           ) : (
             <>
@@ -96,7 +112,7 @@ const MainNavigator: FunctionComponent = () => {
               />
               <Stack.Screen
                 name={OnboardingScreens.ProtectPrivacy}
-                component={ProtectPrivacy}
+                component={ProtectPrivacyCard}
                 options={cardScreenOptions}
               />
             </>

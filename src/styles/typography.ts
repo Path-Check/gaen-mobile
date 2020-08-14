@@ -215,7 +215,7 @@ export const tappableListItem: TextStyle = {
 // Buttons
 const baseButtonText: TextStyle = {
   ...largeFont,
-  ...bold,
+  ...semiBold,
 }
 
 const buttonTextSmall: TextStyle = {
