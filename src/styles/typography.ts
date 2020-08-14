@@ -190,7 +190,7 @@ export const label: TextStyle = {
 
 export const error: TextStyle = {
   ...smallFont,
-  ...bold,
+  ...mediumBold,
   color: Colors.primaryRed,
 }
 

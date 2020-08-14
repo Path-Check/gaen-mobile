@@ -66,6 +66,7 @@
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
     "code_input_button_cancel": "Cancel",
+    "code_input_button_back": "Back",
     "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "By choosing to share your status and anonymously notify others, you’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",

@@ -80,12 +80,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const buttonContainerStyle = {
     ...style.buttonContainer,
     ...determineShadowEnabled(),
+    ...customButtonStyle,
   }
 
   const buttonStyle = {
     ...style.button,
     ...determineShadowEnabled(),
-    ...customButtonStyle,
   }
 
   return (
@@ -112,7 +112,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={Colors.white}
+                fill={disabled ? Colors.black : Colors.white}
                 style={style.rightArrow}
                 accessible
                 accessibilityLabel={t("common.next")}

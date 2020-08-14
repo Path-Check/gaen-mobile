@@ -2,15 +2,15 @@ import React, { FunctionComponent } from "react"
 import { TouchableNativeFeedback, StyleSheet, View, Image } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-
 import { Screens } from "../navigation"
 
-import { Spacing, Colors, Typography, Outlines, Layout } from "../styles"
-import { Images } from "../assets"
+import { Spacing, Colors, Iconography, Typography, Layout } from "../styles"
+import { Images, Icons } from "../assets"
 
 export const ExportIntro: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -28,18 +28,22 @@ export const ExportIntro: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      <TouchableNativeFeedback
-        onPress={handleOnPressCancel}
-        style={style.cancelButtonContainer}
-        accessible
-        accessibilityLabel={t("export.code_input_button_cancel")}
-      >
-        <View style={style.cancelButtonContainer}>
-          <GlobalText style={style.cancelButtonText}>
-            {t("common.cancel")}
-          </GlobalText>
-        </View>
-      </TouchableNativeFeedback>
+      <View style={style.cancelButtonContainer}>
+        <TouchableNativeFeedback
+          onPress={handleOnPressCancel}
+          accessible
+          accessibilityLabel={t("export.code_input_button_cancel")}
+        >
+          <View style={style.cancelButtonInnerContainer}>
+            <SvgXml
+              xml={Icons.X}
+              fill={Colors.black}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
+            />
+          </View>
+        </TouchableNativeFeedback>
+      </View>
       <Image
         source={Images.PersonAndHealthExpert}
         style={style.image}
@@ -69,14 +73,12 @@ const style = StyleSheet.create({
   },
   cancelButtonContainer: {
     position: "absolute",
-    top: Spacing.xxLarge,
+    top: Layout.oneTwentiethHeight,
     right: Spacing.xxSmall,
     zIndex: Layout.zLevel1,
-    padding: Spacing.medium,
-    borderRadius: Outlines.borderRadiusMax,
   },
-  cancelButtonText: {
-    ...Typography.secondaryContent,
+  cancelButtonInnerContainer: {
+    padding: Spacing.medium,
   },
   image: {
     width: "100%",
