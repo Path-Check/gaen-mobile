@@ -128,7 +128,7 @@ export const header1: TextStyle = {
 
 export const header2: TextStyle = {
   ...xxLargeFont,
-  ...bold,
+  ...mediumBold,
   color: Colors.primaryHeaderText,
 }
 

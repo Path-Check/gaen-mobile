@@ -1,5 +1,5 @@
-import React from "react"
-import { StyleSheet, View, Image } from "react-native"
+import React, { FunctionComponent } from "react"
+import { TouchableNativeFeedback, StyleSheet, View, Image } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -9,10 +9,10 @@ import { useStatusBarEffect } from "../navigation"
 
 import { Screens } from "../navigation"
 
-import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
+import { Spacing, Colors, Typography, Outlines, Layout } from "../styles"
 import { Images } from "../assets"
 
-export const ExportIntro = (): JSX.Element => {
+export const ExportIntro: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -22,14 +22,30 @@ export const ExportIntro = (): JSX.Element => {
     navigation.navigate(Screens.AffectedUserCodeInput)
   }
 
+  const handleOnPressCancel = () => {
+    navigation.navigate(Screens.Home)
+  }
+
   return (
     <View style={style.container}>
-      <View style={style.cancelButtonContainer}>
-        <GlobalText style={style.cancelButtonText}>
-          {t("common.cancel")}
-        </GlobalText>
-      </View>
-      <Image source={Images.PersonAndHealthExpert} style={style.image} />
+      <TouchableNativeFeedback
+        onPress={handleOnPressCancel}
+        style={style.cancelButtonContainer}
+        accessible
+        accessibilityLabel={t("export.code_input_button_cancel")}
+      >
+        <View style={style.cancelButtonContainer}>
+          <GlobalText style={style.cancelButtonText}>
+            {t("common.cancel")}
+          </GlobalText>
+        </View>
+      </TouchableNativeFeedback>
+      <Image
+        source={Images.PersonAndHealthExpert}
+        style={style.image}
+        accessible
+        accessibilityLabel={t("exoprt.start_image_label")}
+      />
       <GlobalText style={style.header}>
         {t("export.start_header_bluetooth")}
       </GlobalText>
@@ -53,8 +69,11 @@ const style = StyleSheet.create({
   },
   cancelButtonContainer: {
     position: "absolute",
-    top: Spacing.xxxHuge,
-    right: Spacing.medium,
+    top: Spacing.xxLarge,
+    right: Spacing.xxSmall,
+    zIndex: Layout.zLevel1,
+    padding: Spacing.medium,
+    borderRadius: Outlines.borderRadiusMax,
   },
   cancelButtonText: {
     ...Typography.secondaryContent,
