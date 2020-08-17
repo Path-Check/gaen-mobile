@@ -50,35 +50,10 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     return <View style={style.descriptionWrapper}>{elements}</View>
   }, [question.question_description])
 
-  const displayAsOption = [
-    SCREEN_TYPE_CHECKBOX,
-    SCREEN_TYPE_RADIO,
-    SCREEN_TYPE_DATE,
-  ].includes(question.screen_type)
-
   const assessmentInputInstruction =
     question.question_type === QUESTION_TYPE_MULTI
       ? "Select all that apply"
       : "Select one"
-
-  const options =
-    displayAsOption &&
-    option.values.reduce((result, option, index) => {
-      if (option.label !== "None") {
-        result.push(
-          <AssessmentOption
-            answer={selectedValues.find((v) => v.index === index)}
-            index={index}
-            key={option.value}
-            onSelect={(value) => onSelectHandler(value, index)}
-            option={option}
-            isSelected={selectedValues.some((v) => v.index === index)}
-            optionType={question.screen_type}
-          />,
-        )
-      }
-      return result
-    }, [])
 
   /** @type {(value: string, index: number) => void} */
   const onSelectHandler = (value, index) => {
@@ -118,7 +93,6 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   }, [selectedValues, onChange])
 
   const handleOnNextPress = () => {
-    // if nothing is selected on multi question select none value from the survey json
     if (!selectedValues.length) {
       const index = option.values.findIndex((value) => value.label === "None")
       const value = option.values[index].value
@@ -140,19 +114,57 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
           <GlobalText style={style.instruction}>
             {assessmentInputInstruction}
           </GlobalText>
-          <View style={style.optionsWrapper}>{options}</View>
+          <View style={style.optionsWrapper}>
+            <AssessmentOptions option={option}
+              question={question}
+              selectedValues={selectedValues}
+              onSelect={onSelectHandler}
+            />
+          </View>
         </View>
       </ScrollView>
       <View style={style.footer}>
         <Button
           onPress={handleOnNextPress}
           label={t("assessment.next")}
+          disabled={!(question.question_type === QUESTION_TYPE_MULTI || selectedValues.length)}
           customButtonStyle={style.button}
           customTextStyle={style.buttonText}
         />
       </View>
     </SafeAreaView>
   )
+}
+
+const AssessmentOptions = ({option, question, selectedValues, onSelect}) => {
+  const displayAsOption = [
+    SCREEN_TYPE_CHECKBOX,
+    SCREEN_TYPE_RADIO,
+    SCREEN_TYPE_DATE,
+  ].includes(question.screen_type)
+
+  const mapAssessmentOptions = option.values.reduce((result, option, index) => {
+    if (option.label !== "None") {
+      result.push(
+        <AssessmentOption
+          answer={selectedValues.find((v) => v.index === index)}
+          index={index}
+          key={option.value}
+          onSelect={(value) => onSelect(value, index)}
+          option={option}
+          isSelected={selectedValues.some((v) => v.index === index)}
+          optionType={question.screen_type}
+        />,
+      )
+    }
+    return result
+  }, [])    
+
+  return ( 
+    displayAsOption && 
+    mapAssessmentOptions
+  )
+
 }
 
 const style = StyleSheet.create({
