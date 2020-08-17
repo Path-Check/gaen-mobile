@@ -124,9 +124,7 @@ const CodeInputForm: FunctionComponent = () => {
 
   const isDisabled = code.length !== codeLength
 
-  const codeInputBorderStyle = isFocused
-    ? { borderColor: Colors.secondaryViolet }
-    : null
+  const codeInputBorderStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputBorderStyle }
 
   return (
@@ -206,6 +204,7 @@ const CodeInputForm: FunctionComponent = () => {
     </View>
   )
 }
+
 const LoadingIndicator = () => {
   return (
     <View style={style.activityIndicatorContainer}>
@@ -269,6 +268,9 @@ const style = StyleSheet.create({
     textAlignVertical: "center",
     lineHeight: Typography.largeLineHeight,
     letterSpacing: 8,
+  },
+  codeInputFocused: {
+    borderColor: Colors.secondaryViolet,
   },
   button: {
     alignSelf: "flex-start",
