@@ -24,20 +24,19 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 import org.devio.rn.splashscreen.SplashScreen;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureKey;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
+import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKey;
+import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKeys;
+import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
+import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import covidsafepaths.bt.exposurenotifications.ExposureKey;
-import covidsafepaths.bt.exposurenotifications.ExposureNotificationClientWrapper;
-import covidsafepaths.bt.exposurenotifications.common.AppExecutors;
-import covidsafepaths.bt.exposurenotifications.common.TaskToFutureAdapter;
-import covidsafepaths.bt.exposurenotifications.network.DiagnosisKey;
-import covidsafepaths.bt.exposurenotifications.network.DiagnosisKeys;
-import covidsafepaths.bt.exposurenotifications.utils.RequestCodes;
-import covidsafepaths.bt.exposurenotifications.utils.Util;
 
 public class MainActivity extends ReactActivity {
 

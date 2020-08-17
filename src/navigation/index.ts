@@ -9,6 +9,8 @@ import { useFocusEffect } from "@react-navigation/native"
 
 import { ExposureDatum } from "../exposure"
 
+import { Colors } from "../styles"
+
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
@@ -25,6 +27,16 @@ export const ActivationScreens: {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
   NotificationPermissions: "NotificationPermissions",
+}
+
+export type HomeScreen = "Home" | "BluetoothInfo" | "ProximityTracingInfo"
+
+export const HomeScreens: {
+  [key in HomeScreen]: HomeScreen
+} = {
+  Home: "Home",
+  BluetoothInfo: "BluetoothInfo",
+  ProximityTracingInfo: "ProximityTracingInfo",
 }
 
 export type OnboardingScreen =
@@ -131,7 +143,7 @@ export type Screen =
   | MoreStackScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
-  | "Home"
+  | HomeScreen
   | "ReportIssueForm"
   | "LanguageSelection"
 
@@ -142,7 +154,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...MoreStackScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
-  Home: "Home",
+  ...HomeScreens,
   ReportIssueForm: "ReportIssueForm",
   LanguageSelection: "LanguageSelection",
 }
@@ -169,10 +181,18 @@ export const Stacks: { [key in Stack]: Stack } = {
 export type StatusBarStyle = "dark-content" | "light-content"
 
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
+  const backgroundColor =
+    statusBarStyle === "dark-content"
+      ? Colors.primaryBackground
+      : Colors.primaryViolet
+
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-      Platform.OS === "android" && StatusBar.setTranslucent(true)
-    }, [statusBarStyle]),
+      if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor(backgroundColor)
+        StatusBar.setTranslucent(true)
+      }
+    }, [statusBarStyle, backgroundColor]),
   )
 }

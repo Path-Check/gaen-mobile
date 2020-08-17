@@ -153,7 +153,7 @@ const CodeInputForm: FunctionComponent = () => {
         </View>
         {isLoading ? <LoadingIndicator /> : null}
 
-        <View>
+        <View style={style.buttonsContainer}>
           <Button
             onPress={handleOnPressSubmit}
             label={t("common.submit")}
@@ -218,17 +218,21 @@ const style = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),
     marginTop: -(indicatorWidth / 2),
+    zIndex: Layout.zLevel2,
   },
   activityIndicator: {
     width: indicatorWidth,
     height: indicatorWidth,
     backgroundColor: Colors.transparentDarkGray,
     borderRadius: Outlines.baseBorderRadius,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
+    marginBottom: Spacing.medium,
   },
   secondaryButton: {
     ...Buttons.secondary,

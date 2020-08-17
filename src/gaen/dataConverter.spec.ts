@@ -30,6 +30,7 @@ describe("toExposureInfo", () => {
       const expected: ExposureDatum = {
         date: DateTimeUtils.beginningOfDay(twoDaysAgo),
         duration: duration,
+        id: "ABCD-EFGH",
       }
 
       const result = toExposureInfo(rawExposures)
@@ -66,6 +67,7 @@ describe("toExposureInfo", () => {
       const expected: ExposureDatum = {
         date: DateTimeUtils.beginningOfDay(today),
         duration: duration1 + duration2 + duration3,
+        id: "raw-exposure-1",
       }
 
       const result = toExposureInfo(rawExposures)

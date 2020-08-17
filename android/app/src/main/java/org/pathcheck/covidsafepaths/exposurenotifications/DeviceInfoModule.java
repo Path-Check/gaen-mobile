@@ -1,4 +1,4 @@
-package covidsafepaths.bt.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -75,5 +75,11 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
         } else {
             promise.reject(new Exception("Location manager not found"));
         }
+    }
+
+    @ReactMethod
+    public void deviceSupportsLocationlessScanning(final Promise promise) {
+        ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+        promise.resolve(client.deviceSupportsLocationlessScanning());
     }
 }

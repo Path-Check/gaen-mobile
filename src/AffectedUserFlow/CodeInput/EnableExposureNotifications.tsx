@@ -34,7 +34,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
           {t("export.enable_exposure_notifications_body")}
         </GlobalText>
       </View>
-      <View>
+      <View style={style.buttonsContainer}>
         <Button
           onPress={handleOnPressOpenSettings}
           label={t("common.settings")}
@@ -72,6 +72,9 @@ const style = StyleSheet.create({
   subheader: {
     ...Typography.header4,
     color: Colors.secondaryText,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,
