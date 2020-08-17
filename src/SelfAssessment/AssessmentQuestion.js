@@ -115,7 +115,8 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
             {assessmentInputInstruction}
           </GlobalText>
           <View style={style.optionsWrapper}>
-            <AssessmentOptions option={option}
+            <AssessmentOptions
+              option={option}
               question={question}
               selectedValues={selectedValues}
               onSelect={onSelectHandler}
@@ -127,7 +128,12 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
         <Button
           onPress={handleOnNextPress}
           label={t("assessment.next")}
-          disabled={!(question.question_type === QUESTION_TYPE_MULTI || selectedValues.length)}
+          disabled={
+            !(
+              question.question_type === QUESTION_TYPE_MULTI ||
+              selectedValues.length
+            )
+          }
           customButtonStyle={style.button}
           customTextStyle={style.buttonText}
         />
@@ -136,7 +142,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   )
 }
 
-const AssessmentOptions = ({option, question, selectedValues, onSelect}) => {
+const AssessmentOptions = ({ option, question, selectedValues, onSelect }) => {
   const displayAsOption = [
     SCREEN_TYPE_CHECKBOX,
     SCREEN_TYPE_RADIO,
@@ -158,13 +164,9 @@ const AssessmentOptions = ({option, question, selectedValues, onSelect}) => {
       )
     }
     return result
-  }, [])    
+  }, [])
 
-  return ( 
-    displayAsOption && 
-    mapAssessmentOptions
-  )
-
+  return displayAsOption && mapAssessmentOptions
 }
 
 const style = StyleSheet.create({
