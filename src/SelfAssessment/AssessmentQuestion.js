@@ -175,7 +175,7 @@ const style = StyleSheet.create({
   instruction: {
     ...Typography.mediumFont,
     lineHeight: Typography.xSmallLineHeight,
-    color: Colors.secondaryHeaderText,
+    color: Colors.neutral140,
     marginTop: Spacing.xLarge,
   },
   button: {

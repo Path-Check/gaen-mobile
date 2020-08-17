@@ -123,31 +123,31 @@ export const xxxLargeFont: TextStyle = {
 export const header1: TextStyle = {
   ...xxxLargeFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header2: TextStyle = {
   ...xxLargeFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header3: TextStyle = {
   ...xLargeFont,
   ...bold,
-  color: Colors.secondaryHeaderText,
+  color: Colors.neutral140,
 }
 
 export const header4: TextStyle = {
   ...largeFont,
   ...mediumBold,
-  color: Colors.secondaryHeaderText,
+  color: Colors.neutral140,
 }
 
 export const header5: TextStyle = {
   ...mediumFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header6: TextStyle = {
@@ -159,23 +159,18 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
-  color: Colors.secondaryText,
+  color: Colors.neutral140,
 }
 
 export const secondaryContent: TextStyle = {
   ...mediumFont,
   ...base,
-  color: Colors.secondaryText,
+  color: Colors.neutral140,
 }
 
 export const tertiaryContent: TextStyle = {
   ...smallFont,
-  color: Colors.tertiaryText,
-}
-
-export const quaternaryContent: TextStyle = {
-  ...smallFont,
-  color: Colors.invertedText,
+  color: Colors.primary100,
 }
 
 export const description: TextStyle = {

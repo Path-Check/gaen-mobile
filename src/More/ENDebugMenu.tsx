@@ -171,13 +171,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
     borderTopWidth: Outlines.hairline,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.secondary175,
+    borderColor: Colors.secondary75,
   },
   listItem: {
     flex: 1,
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.secondary175,
+    borderColor: Colors.secondary75,
   },
   listItemText: {
     ...Typography.mainContent,

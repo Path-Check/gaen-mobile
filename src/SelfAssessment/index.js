@@ -163,7 +163,7 @@ const Assessment = ({ navigation }) => {
               component={Agreement}
               name="Agreement"
               options={{
-                ...screenOptions(Colors.invertedPrimaryBackground),
+                ...screenOptions(Colors.primary125),
               }}
             />
             <Stack.Screen
@@ -188,7 +188,7 @@ const Assessment = ({ navigation }) => {
               component={Share}
               name="EndShare"
               options={{
-                ...screenOptions(Colors.invertedPrimaryBackground),
+                ...screenOptions(Colors.primary125),
                 headerRight: AssessmentCloseButton,
               }}
             />
@@ -278,6 +278,6 @@ const style = StyleSheet.create({
     padding: Spacing.medium,
   },
   assessmentIcon: {
-    color: Colors.secondary200,
+    color: Colors.secondary100,
   },
 })

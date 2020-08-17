@@ -116,7 +116,7 @@ const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.medium,
-    borderBottomColor: Colors.secondary175,
+    borderBottomColor: Colors.secondary75,
     borderBottomWidth: Outlines.hairline,
   },
   listItemText: {

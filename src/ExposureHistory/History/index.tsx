@@ -100,7 +100,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header1,
-    color: Colors.black,
+    color: Colors.primaryText,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {

@@ -109,7 +109,7 @@ const style = StyleSheet.create({
   },
   container: {
     backgroundColor: Colors.primaryLightBackground,
-    borderColor: Colors.secondaryBorder,
+    borderColor: Colors.neutral30,
     borderRadius: Spacing.xxSmall,
     borderWidth: 2,
     marginBottom: Spacing.small,
@@ -117,7 +117,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.medium,
   },
   containerSelected: {
-    backgroundColor: Colors.secondary175,
+    backgroundColor: Colors.secondary75,
     borderColor: Colors.primary100,
   },
   primary: {

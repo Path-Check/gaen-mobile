@@ -35,7 +35,7 @@ const maxCornerRoundness: ViewStyle = {
 
 // Color
 const tertiaryBlue: ViewStyle = {
-  backgroundColor: Colors.secondary175,
+  backgroundColor: Colors.secondary75,
 }
 
 const transparent: ViewStyle = {

@@ -21,12 +21,6 @@ export const ovalBorder: ViewStyle = {
   borderRadius: borderRadiusMax,
 }
 
-export const textInputBorder: ViewStyle = {
-  borderWidth: 1,
-  borderRadius: 10,
-  borderColor: Colors.formInputBorder,
-}
-
 export const baseShadow: ViewStyle = {
   shadowColor: Colors.primary125,
   shadowOffset: {

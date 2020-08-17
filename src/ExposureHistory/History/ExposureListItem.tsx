@@ -46,7 +46,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
   return (
     <TouchableHighlight
-      underlayColor={Colors.underlayPrimaryBackground}
+      underlayColor={Colors.secondary75}
       style={style.container}
       onPress={() =>
         navigation.navigate(Screens.ExposureDetail, { exposureDatum })

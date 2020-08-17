@@ -301,7 +301,7 @@ const style = StyleSheet.create({
   shareImageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secondary175,
+    backgroundColor: Colors.secondary50,
     borderRadius: Outlines.borderRadiusMax,
     width: Iconography.medium,
     height: Iconography.medium,

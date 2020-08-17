@@ -252,7 +252,7 @@ const style = StyleSheet.create({
   },
   subheader: {
     ...Typography.header4,
-    color: Colors.secondaryText,
+    color: Colors.neutral140,
   },
   errorSubtitle: {
     ...Typography.error,

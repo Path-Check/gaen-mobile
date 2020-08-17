@@ -22,7 +22,7 @@ export const Share = ({ navigation }) => {
   return (
     <AssessmentLayout
       icon={Icons.AnonymizedDataInverted}
-      backgroundColor={Colors.invertedSecondaryBackground}
+      backgroundColor={Colors.primary125}
       footer={
         <Button
           onPress={handleButtonPress}

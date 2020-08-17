@@ -94,7 +94,7 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.mainContent,
     ...Typography.mediumBold,
-    color: Colors.black,
+    color: Colors.primaryText,
     marginBottom: Spacing.medium,
   },
   bodyText: {
