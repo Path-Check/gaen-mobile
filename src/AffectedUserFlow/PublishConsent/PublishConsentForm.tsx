@@ -147,7 +147,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             </GlobalText>
             <SvgXml
               xml={Icons.ChevronUp}
-              fill={Colors.primaryBlue}
+              fill={Colors.primary150}
               width={Iconography.xxSmall}
               height={Iconography.xxSmall}
             />
