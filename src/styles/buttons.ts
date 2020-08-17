@@ -48,7 +48,7 @@ export const primary: ViewStyle = {
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
-  maxWidth: Layout.screenWidth * 0.9,
+  maxWidth: Layout.screenWidth * 0.95,
 }
 
 export const secondary: ViewStyle = {

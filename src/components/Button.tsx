@@ -83,6 +83,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
     ...customButtonStyle,
   }
 
+  const buttonStyle = {
+    ...style.button,
+    ...customButtonStyle,
+  }
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -97,7 +102,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
         start={{ x: 0.2, y: 0.85 }}
         end={{ x: 0.4, y: 0 }}
         colors={determineGradient()}
-        style={style.button}
+        style={buttonStyle}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
