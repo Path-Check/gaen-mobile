@@ -64,7 +64,7 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessibilityRole="button"
         style={style.button}
       >
-        <GlobalText style={[ style.buttonText, style.boldText ]}>
+        <GlobalText style={[style.buttonText, style.boldText]}>
           {t("assessment.i_am")}
           <GlobalText style={[style.buttonText, style.regularText]}>
             {t("assessment.experiencing_some_symptoms")}
@@ -76,11 +76,11 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessible
         accessibilityLabel={notExperiencingSymptomsText}
         accessibilityRole="button"
-        style={[ style.button, style.disagreeButton ]}
+        style={[style.button, style.disagreeButton]}
       >
-        <GlobalText style={[ style.buttonText, style.boldText ]}>
+        <GlobalText style={[style.buttonText, style.boldText]}>
           {t("assessment.i_am_not")}
-          <GlobalText style={[ style.buttonText, style.regularText ]}>
+          <GlobalText style={[style.buttonText, style.regularText]}>
             {t("assessment.experiencing_any_symptoms")}
           </GlobalText>
         </GlobalText>
@@ -146,7 +146,7 @@ const style = StyleSheet.create({
   button: {
     ...Buttons.primary,
     borderWidth: 1,
-    borderColor: Colors.steelGray
+    borderColor: Colors.steelGray,
   },
   buttonText: {
     ...Typography.buttonPrimaryText,
@@ -155,10 +155,10 @@ const style = StyleSheet.create({
   },
   boldText: {
     ...Typography.bold,
-    color: Colors.steelGray
+    color: Colors.steelGray,
   },
   regularText: {
-    ...Typography.base
+    ...Typography.base,
   },
   disagreeButton: {
     marginTop: 10,
