@@ -46,14 +46,14 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
-    /* try { */
-    /* await strategy.submitDiagnosisKeys(certificate, hmacKey) */
-    setIsLoading(false)
-    navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
-    /* } catch (e) { */
-    /* setIsLoading(false) */
-    /* Alert.alert(t("common.something_went_wrong"), e.message) */
-    /* } */
+    try {
+      await strategy.submitDiagnosisKeys(certificate, hmacKey)
+      setIsLoading(false)
+      navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+    } catch (e) {
+      setIsLoading(false)
+      Alert.alert(t("common.something_went_wrong"), e.message)
+    }
   }
   useStatusBarEffect("dark-content")
 
@@ -68,9 +68,6 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(OnboardingScreens.ProtectPrivacy)
   }
-
-  const title = t("export.publish_consent_title_bluetooth")
-  const body = t("export.publish_consent_body_bluetooth")
 
   return (
     <>
@@ -115,7 +112,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             alwaysBounceVertical={false}
           >
             <View style={style.content}>
-              <GlobalText style={style.header}>{title}</GlobalText>
+              <GlobalText style={style.header}>
+                {t("export.publish_consent_title_bluetooth")}
+              </GlobalText>
               <GlobalText style={style.bodyText}>
                 {t("export.consent_body_0")}
               </GlobalText>
