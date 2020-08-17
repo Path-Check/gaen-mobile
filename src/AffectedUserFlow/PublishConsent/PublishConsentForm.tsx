@@ -17,7 +17,6 @@ import { GlobalText } from "../../components/GlobalText"
 import {
   AffectedUserFlowScreens,
   Screens,
-  OnboardingScreens,
   useStatusBarEffect,
 } from "../../navigation"
 import { Icons } from "../../assets"
@@ -66,7 +65,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(OnboardingScreens.ProtectPrivacy)
+    navigation.navigate(AffectedUserFlowScreens.ProtectPrivacy)
   }
 
   return (
