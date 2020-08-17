@@ -124,8 +124,8 @@ const CodeInputForm: FunctionComponent = () => {
 
   const isDisabled = code.length !== codeLength
 
-  const codeInputBorderStyle = isFocused && { ...style.codeInputFocused }
-  const codeInputStyle = { ...style.codeInput, ...codeInputBorderStyle }
+  const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
+  const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
   return (
     <View style={style.container} testID={"affected-user-code-input-form"}>

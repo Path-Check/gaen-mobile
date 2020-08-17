@@ -30,17 +30,20 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
   const applicationName = env.IN_APP_NAME
   useStatusBarEffect("dark-content")
 
-  const headerContainerPaddingTop = modalStyle ? { paddingTop: 40 } : null
+  const headerContainerConditionalStyle = modalStyle && {
+    ...style.headerContainerModal,
+  }
   const headerContainerStyle = {
     ...style.headerContainer,
-    ...headerContainerPaddingTop,
+    ...headerContainerConditionalStyle,
   }
-  const mainContentContainerPaddingTop = modalStyle
-    ? { paddingTop: 170 }
-    : { paddingTop: 130 }
+
+  const mainContentContainerConditionalStyle = modalStyle
+    ? { ...style.mainContentContainerModal }
+    : { ...style.mainContentContainerCard }
   const mainContentContainerStyle = {
     ...style.mainContentContainer,
-    ...mainContentContainerPaddingTop,
+    ...mainContentContainerConditionalStyle,
   }
 
   return (
@@ -134,6 +137,9 @@ const style = StyleSheet.create({
     backgroundColor: Colors.faintGray,
     zIndex: Layout.zLevel1,
   },
+  headerContainerModal: {
+    paddingTop: 40,
+  },
   headerText: {
     flex: 10,
     ...Typography.header3,
@@ -148,6 +154,12 @@ const style = StyleSheet.create({
   },
   mainContentContainer: {
     paddingBottom: Spacing.large,
+  },
+  mainContentContainerModal: {
+    paddingTop: 170,
+  },
+  mainContentContainerCard: {
+    paddingTop: 130,
   },
   image: {
     width: "100%",
