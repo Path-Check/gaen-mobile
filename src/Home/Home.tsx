@@ -21,7 +21,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { useStatusBarEffect, Stacks } from "../navigation"
+import { useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
@@ -163,12 +163,16 @@ const HomeScreen: FunctionComponent = () => {
             <ActivationStatusSection
               headerText={t("home.bluetooth.bluetooth_header")}
               isActive={isBluetoothOn}
+              infoAction={() => navigation.navigate(HomeScreens.BluetoothInfo)}
               fixAction={handleOnPressBluetooth}
               testID={"home-bluetooth-status-container"}
             />
             <ActivationStatusSection
               headerText={t("home.bluetooth.proximity_tracing_header")}
               isActive={isProximityTracingOn}
+              infoAction={() =>
+                navigation.navigate(HomeScreens.ProximityTracingInfo)
+              }
               fixAction={handleOnPressProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
@@ -188,6 +192,7 @@ const HomeScreen: FunctionComponent = () => {
 interface ActivationStatusProps {
   headerText: string
   isActive: boolean
+  infoAction: () => void
   fixAction: () => void
   testID: string
 }
@@ -195,6 +200,7 @@ interface ActivationStatusProps {
 const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   headerText,
   isActive,
+  infoAction,
   fixAction,
   testID,
 }) => {
@@ -206,8 +212,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 
   return (
     <TouchableOpacity
-      disabled={isActive}
-      onPress={fixAction}
+      onPress={isActive ? infoAction : fixAction}
       style={style.activationStatusContainer}
       testID={testID}
     >
@@ -223,13 +228,17 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
           <GlobalText style={style.bottomBodyText}>{bodyText}</GlobalText>
         </View>
       </View>
-      {!isActive && (
-        <View style={style.fixContainer}>
-          <GlobalText style={style.fixText}>
-            {t("home.bluetooth.fix")}
-          </GlobalText>
-        </View>
-      )}
+      <View style={style.activationStatusRightContainer}>
+        {isActive ? (
+          <SvgXml xml={Icons.HomeInfo} />
+        ) : (
+          <View style={style.fixContainer}>
+            <GlobalText style={style.fixText}>
+              {t("home.bluetooth.fix")}
+            </GlobalText>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   )
 }
@@ -323,7 +332,12 @@ const style = StyleSheet.create({
   activationStatusTextContainer: {
     marginLeft: Spacing.medium,
   },
+  activationStatusRightContainer: {
+    width: 60,
+    alignItems: "center",
+  },
   fixContainer: {
+    alignItems: "center",
     backgroundColor: Colors.tertiaryRed,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,

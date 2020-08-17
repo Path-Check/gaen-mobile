@@ -17,7 +17,6 @@ import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "./useBluetoothStatus"
 
 jest.mock("@react-navigation/native")
-;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 jest.mock("react-native-safe-area-context")
 ;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
@@ -183,6 +182,35 @@ describe("Home", () => {
     })
   })
 
+  describe("When Bluetooth is enabled", () => {
+    it("allows the user to get more information", async () => {
+      expect.assertions(1)
+      const isBluetoothOn = true
+      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
+
+      const navigationSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
+
+      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const bluetoothInfoButton = getByTestId("home-bluetooth-status-container")
+
+      fireEvent.press(bluetoothInfoButton)
+      await waitFor(() => {
+        expect(navigationSpy).toHaveBeenCalledWith("BluetoothInfo")
+      })
+    })
+  })
+
   describe("When proximity tracing is disabled", () => {
     describe("when enPermissionStatus is authorized but not enabled", () => {
       it("requests exposure notification to be enabled", async () => {
@@ -211,6 +239,37 @@ describe("Home", () => {
         fireEvent.press(fixProximityTracingButton)
         await waitFor(() => {
           expect(requestPermission).toHaveBeenCalled()
+        })
+      })
+    })
+
+    describe("When proximity tracing is enabled", () => {
+      it("allows the user to get more information", async () => {
+        expect.assertions(1)
+
+        const navigationSpy = jest.fn()
+        ;(useNavigation as jest.Mock).mockReturnValue({
+          navigate: navigationSpy,
+        })
+
+        const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+        const permissionProviderValue = createPermissionProviderValue(
+          enPermissionStatus,
+        )
+
+        const { getByTestId } = render(
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <Home />
+          </PermissionsContext.Provider>,
+        )
+
+        const proximityTracingInfoButton = getByTestId(
+          "home-proximity-tracing-status-container",
+        )
+
+        fireEvent.press(proximityTracingInfoButton)
+        await waitFor(() => {
+          expect(navigationSpy).toHaveBeenCalledWith("ProximityTracingInfo")
         })
       })
     })

@@ -17,6 +17,7 @@ import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import GoogleMapsLogo from "./google-maps-logo"
 import Heart from "./heart"
+import HomeInfo from "./homeInfo"
 import House from "./house"
 import Isolate from "./isolate"
 import IsolateBubbles from "./isolateBubbles"
@@ -55,6 +56,7 @@ export const Icons = {
   ExposureIcon,
   GoogleMapsLogo,
   Heart,
+  HomeInfo,
   House,
   Isolate,
   IsolateBubbles,

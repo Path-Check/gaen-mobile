@@ -12,18 +12,16 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
-import com.google.android.gms.nearby.exposurenotification.ExposureSummary;
 import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.android.gms.tasks.Task;
 
-import java.io.File;
-import java.util.List;
-
-import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+
+import java.io.File;
+import java.util.List;
 
 import static org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages.EN_STATUS_EVENT;
 
@@ -35,7 +33,6 @@ public class ExposureNotificationClientWrapper {
     private static ExposureNotificationClientWrapper INSTANCE;
 
     private final ExposureNotificationClient exposureNotificationClient;
-    private final ExposureConfigurations config;
 
     public static ExposureNotificationClientWrapper get(Context context) {
         if (INSTANCE == null) {
@@ -46,7 +43,6 @@ public class ExposureNotificationClientWrapper {
 
     ExposureNotificationClientWrapper(Context context) {
         exposureNotificationClient = Nearby.getExposureNotificationClient(context);
-        config = new ExposureConfigurations(context);
     }
 
     public Task<Void> start(ReactContext context) {
@@ -104,23 +100,16 @@ public class ExposureNotificationClientWrapper {
         return exposureNotificationClient.getTemporaryExposureKeyHistory();
     }
 
-    /**
-     * Provides diagnosis key files with a stable token and {@link ExposureConfiguration} given by
-     * {@link ExposureConfigurations}.
-     */
-    public Task<Void> provideDiagnosisKeys(List<File> files, String token) {
-        return exposureNotificationClient.provideDiagnosisKeys(files, config.get(), token);
-    }
-
-    /**
-     * Gets the {@link ExposureSummary} using the stable token.
-     */
-    public Task<ExposureSummary> getExposureSummary(String token) {
-        return exposureNotificationClient.getExposureSummary(token);
+    public Task<Void> provideDiagnosisKeys(List<File> files) {
+        return exposureNotificationClient.provideDiagnosisKeys(files);
     }
 
     public Task<List<ExposureWindow>> getExposureWindows() {
-        return exposureNotificationClient.getExposureWindows(ExposureNotificationClient.TOKEN_A);
+        return exposureNotificationClient.getExposureWindows();
+    }
+
+    public boolean deviceSupportsLocationlessScanning(){
+        return exposureNotificationClient.deviceSupportsLocationlessScanning();
     }
 
     public void onExposureNotificationStateChanged(@Nullable ReactContext context, boolean enabled) {
