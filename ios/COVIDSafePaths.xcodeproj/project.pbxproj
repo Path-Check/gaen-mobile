@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7372C03D7AA19943931FCE4 /* libPods-BT.a */; };
-		68EFB21324856EC6003D84F3 /* Scrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 68EFB21224856EC6003D84F3 /* Scrypt */; };
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
+		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
+		B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
@@ -155,7 +156,6 @@
 		20E5EE8E6065465F9558DCDB /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		210E5F50B07048118538B796 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Italic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
 		271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePathsSecureStorage.swift; sourceTree = "<group>"; };
-		271881C22461BF19001DE067 /* RealmSecureStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSecureStorageTest.swift; sourceTree = "<group>"; };
 		2E9077612439A903005C98DE /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		3053DF05D78949A09366B85D /* IBMPlexMono-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLight.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ExtraLight.ttf"; sourceTree = "<group>"; };
 		323E903F3DAB2E4C925FECBD /* Pods-BTTests.debug-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug-bt.xcconfig"; sourceTree = "<group>"; };
@@ -175,7 +175,6 @@
 		5D98D5DA5B77459FACDD673D /* IBMPlexSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Light.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Light.ttf"; sourceTree = "<group>"; };
 		668BDA050EF549C6B0759425 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release-bt.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release-bt.xcconfig"; sourceTree = "<group>"; };
-		68D8971B24809FB50091A254 /* Array+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ExtensionTests.swift"; sourceTree = "<group>"; };
 		6BA94CE8425944B8990A49B3 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../app/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		6C8CF282C4264C88A4ED8ABF /* IBMPlexMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Medium.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Medium.ttf"; sourceTree = "<group>"; };
 		71F26FBF5BDA423184286546 /* IBMPlexMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -206,6 +205,8 @@
 		B3D0B8224679467D85423742 /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../app/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadPackage+Helpers.swift"; sourceTree = "<group>"; };
+		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
+		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
@@ -306,7 +307,6 @@
 				C53FD09724719AD1006D3268 /* CoreGraphics.framework in Frameworks */,
 				C53FD09824719AD1006D3268 /* CoreData.framework in Frameworks */,
 				C53FD09924719AD1006D3268 /* Accelerate.framework in Frameworks */,
-				68EFB21324856EC6003D84F3 /* Scrypt in Frameworks */,
 				49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,9 +327,7 @@
 			children = (
 				00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
-				271881C22461BF19001DE067 /* RealmSecureStorageTest.swift */,
 				B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */,
-				68D8971B24809FB50091A254 /* Array+ExtensionTests.swift */,
 			);
 			path = COVIDSafePathsTests;
 			sourceTree = "<group>";
@@ -587,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				B5FC37DC248A78D2006474EB /* ExposureKey.swift */,
+				B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */,
 				B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */,
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
@@ -643,6 +642,7 @@
 				C550A66524B7906F002CA7F2 /* ExposureKeyModule.m */,
 				B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */,
 				B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */,
+				B5081E4924D9B8E300121884 /* DeviceInfoModule.m */,
 				B5582D43249943DE001458A9 /* ExposureEventEmitter.m */,
 			);
 			path = bridge;
@@ -683,15 +683,13 @@
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
 				B5D968F324C6036A008DE452 /* Crashlytics */,
 				B53575E124D0C2DE00E7310D /* Upload Symbols */,
+				B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BT;
-			packageProductDependencies = (
-				68EFB21224856EC6003D84F3 /* Scrypt */,
-			);
 			productName = COVIDSafePaths;
 			productReference = C53FD0C124719AD1006D3268 /* BT.app */;
 			productType = "com.apple.product-type.application";
@@ -704,6 +702,7 @@
 				C5AA24D524768FFF00BA0A99 /* Sources */,
 				C5AA24D924768FFF00BA0A99 /* Frameworks */,
 				C5AA24DB24768FFF00BA0A99 /* Resources */,
+				377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -722,7 +721,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = org.pathcheck;
-				LastUpgradeCheck = 940;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Path Check Inc";
 				TargetAttributes = {
 					C5AA24D124768FFF00BA0A99 = {
@@ -751,9 +750,6 @@
 				"pt-BR",
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
-			packageReferences = (
-				68D8970424809AA40091A254 /* XCRemoteSwiftPackageReference "swift-scrypt" */,
-			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -840,6 +836,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B53575E124D0C2DE00E7310D /* Upload Symbols */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -877,6 +890,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -986,6 +1016,7 @@
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
 				B5FC37CC2489B251006474EB /* Result.swift in Sources */,
+				B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */,
 				C58463E42486C51100BCB842 /* ExposureManager.swift in Sources */,
 				B5FC37C62489B1B3006474EB /* APIRequest.swift in Sources */,
 				B5FBB0D124916A7200433980 /* Persisted.swift in Sources */,
@@ -1015,6 +1046,7 @@
 				B5FC37DF248A78FC006474EB /* ExposureConfiguration.swift in Sources */,
 				B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */,
 				B5FC37CA2489B1C1006474EB /* JSON.swift in Sources */,
+				B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */,
 				B5FC37D02489B3DE006474EB /* StructuredError.swift in Sources */,
 				B5C9723024B8A909007F4C0B /* Constants.swift in Sources */,
 			);
@@ -1076,6 +1108,7 @@
 			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1131,6 +1164,7 @@
 			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1169,6 +1203,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1179,13 +1214,13 @@
 			baseConfigurationReference = FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "BT/BT-Production.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BT/BT-Development.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 79Z8HUPGC3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1193,7 +1228,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Public/SSZipArchive/SSZipArchive.modulemap\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1209,12 +1244,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Production.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 79Z8HUPGC3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1222,7 +1257,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Public/SSZipArchive/SSZipArchive.modulemap\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\"";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1322,25 +1357,6 @@
 			defaultConfigurationName = "Release-BT";
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		68D8970424809AA40091A254 /* XCRemoteSwiftPackageReference "swift-scrypt" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MichaelNeas/swift-scrypt.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		68EFB21224856EC6003D84F3 /* Scrypt */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 68D8970424809AA40091A254 /* XCRemoteSwiftPackageReference "swift-scrypt" */;
-			productName = Scrypt;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

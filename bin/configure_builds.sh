@@ -27,7 +27,7 @@ require 'open3'
 # Constants
 ENV_FILE = ARGV[0] || ".env.bt.release"
 PLIST_PATH = "./ios/BT/Info.plist"
-ANDROID_STRINGS_PATH="./android/app/src/bt/res/values/strings.xml"
+ANDROID_STRINGS_PATH="./android/app/src/main/res/values/strings.xml"
 SEPARATOR = "##################################################################"
 
 def failure_message(message:)
@@ -178,12 +178,74 @@ def update_bundle_identifiers
   end
 end
 
+################################# iOS Specific Configuration ##########################################
+
+def get_current_ios_en_api_version
+  output = read_value_from_plist(
+    file_path: PLIST_PATH,
+    key: 'ENAPIVersion'
+  )
+  return output if output
+  exit 1
+end
+
+def update_ios_en_api_version(new_en_api_version)
+  puts "Updating ios en api version from #{get_current_ios_en_api_version} to #{new_en_api_version}"
+  return if update_value_on_plist(
+    file_path: PLIST_PATH,
+    key: 'ENAPIVersion',
+    value: new_en_api_version
+  )
+  exit 1
+end
+
+def get_current_ios_en_region
+  output = read_value_from_plist(
+    file_path: PLIST_PATH,
+    key: 'ENDeveloperRegion'
+  )
+  return output if output
+  exit 1
+end
+
+def update_ios_en_region(new_en_region)
+  puts "Updating ios en region from #{get_current_ios_en_region} to #{new_en_region}"
+  return if update_value_on_plist(
+    file_path: PLIST_PATH,
+    key: 'ENDeveloperRegion',
+    value: new_en_region
+  )
+  exit 1
+end
+
+IOS_EN_REGION_KEY = "EN_DEVELOPER_REGION"
+IOS_EN_API_VERSION_KEY = "EN_API_VERSION"
+
+def update_ios_configuration
+  environment = Dotenv.parse(File.open(ENV_FILE))
+  ios_en_region = environment.fetch(IOS_EN_REGION_KEY, false)
+  ios_en_version = environment.fetch(IOS_EN_API_VERSION_KEY, 1)
+
+  update_ios_en_api_version(ios_en_version)
+  if ios_en_region
+    update_ios_en_region(ios_en_region)
+  else
+    failure_message "EN region is required"
+    exit 1
+  end
+end
+
+
 if File.exist?(ENV_FILE)
   update_application_display_name
   puts "✅ Display Names Updated"
   update_bundle_identifiers
   puts "✅ Bundle Identifiers Updated"
+  update_ios_configuration
+  puts "✅ iOS Configuration Updated"
 else
   failure_message "#{ENV_FILE} not found on the root folder, environment file is needed"
   exit 1
 end
+
+

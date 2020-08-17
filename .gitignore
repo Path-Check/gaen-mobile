@@ -41,6 +41,7 @@ package-lock.json
 buck-out/
 \.buckd/
 *.keystore
+*.jks
 !debug.keystore
 
 # i18next-parser

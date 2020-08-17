@@ -6,40 +6,33 @@ import * as Outlines from "./outlines"
 import * as Typography from "./typography"
 
 export const textInputFormField: TextStyle = {
-  flex: 1,
   color: Colors.primaryText,
   backgroundColor: Colors.primaryBackground,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.formInputBorder,
-  borderWidth: Outlines.thin,
+  borderWidth: Outlines.hairline,
   justifyContent: "center",
   fontSize: Typography.medium,
-  paddingTop: Spacing.medium,
+  paddingTop: Spacing.small,
   paddingRight: Spacing.medium,
-  paddingBottom: Spacing.medium,
+  paddingBottom: Spacing.small,
   paddingLeft: Spacing.medium,
+  textAlignVertical: "top",
 }
 
 export const required: TextStyle = {
-  fontSize: Typography.smallest,
+  fontSize: Typography.xxSmall,
   color: Colors.primaryText,
   marginTop: Spacing.xxSmall,
 }
 
-export const checkbox: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-}
-
 export const checkboxIcon: ImageStyle = {
-  width: 25,
-  height: 25,
-  marginRight: Spacing.medium,
+  width: 30,
+  height: 30,
 }
 
 export const checkboxText: TextStyle = {
   ...Typography.mediumFont,
-  color: Colors.invertedText,
 }
 
 export const textInput: TextStyle = {

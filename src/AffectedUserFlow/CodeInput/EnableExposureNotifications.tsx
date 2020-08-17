@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { GlobalText } from "../../components/GlobalText"
+import { Button } from "../../components/Button"
 
-import { Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import { Buttons, Colors, Typography, Spacing, Layout } from "../../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
@@ -17,7 +18,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   return (
@@ -29,27 +30,19 @@ const EnableExposureNotifications: FunctionComponent = () => {
         <GlobalText style={style.header}>
           {t("export.enable_exposure_notifications_title")}
         </GlobalText>
-
         <GlobalText style={style.subheader}>
           {t("export.enable_exposure_notifications_body")}
         </GlobalText>
       </View>
-      <View>
-        <TouchableOpacity
+      <View style={style.buttonsContainer}>
+        <Button
           onPress={handleOnPressOpenSettings}
-          accessible
-          accessibilityLabel={t("common.settings")}
-          accessibilityRole="button"
-          style={style.button}
-        >
-          <GlobalText style={style.buttonText}>
-            {t("common.settings")}
-          </GlobalText>
-        </TouchableOpacity>
-
+          label={t("common.settings")}
+        />
         <TouchableOpacity
           onPress={handleOnPressCancel}
           style={style.secondaryButton}
+          accessibilityLabel={t("export.code_input_button_cancel")}
         >
           <GlobalText style={style.secondaryButtonText}>
             {t("export.code_input_button_cancel")}
@@ -62,7 +55,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
     height: "100%",
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
@@ -80,17 +73,14 @@ const style = StyleSheet.create({
     ...Typography.header4,
     color: Colors.secondaryText,
   },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonTextPrimary,
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 

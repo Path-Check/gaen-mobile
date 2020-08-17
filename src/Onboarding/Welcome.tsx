@@ -1,24 +1,16 @@
 import React, { FunctionComponent } from "react"
+import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import {
-  Dimensions,
-  ImageBackground,
-  StatusBar,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-} from "react-native"
+import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
-import EulaModal from "./EulaModal"
 import { getLocalNames } from "../locales/languages"
+import { Button } from "../components"
 
 import { Images } from "../assets"
-import { Colors } from "../styles"
-import { Screens } from "../navigation"
-
-const width = Dimensions.get("window").width
+import { Spacing, Colors, Typography, Outlines } from "../styles"
+import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 const Welcome: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -27,101 +19,69 @@ const Welcome: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
+  const appName = env.IN_APP_NAME || "PathCheck"
+  useStatusBarEffect("dark-content")
+
   return (
-    <ImageBackground
-      source={Images.BlueGradientBackground}
-      style={style.backgroundImage}
-    >
-      <ImageBackground
-        source={Images.ConcentricCircles}
-        style={style.backgroundImage}
+    <View style={style.container}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(Screens.LanguageSelection)}
+        style={style.languageButtonContainer}
       >
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
+        <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>
+      </TouchableOpacity>
+      <View>
+        <Image
+          source={Images.PeopleOnNetworkNodes}
+          style={style.image}
+          accessible
+          accessibilityLabel={t("onboarding.welcome_image_label")}
         />
-        <View style={style.mainContainer}>
-          <View
-            style={{
-              paddingTop: 60,
-              position: "absolute",
-              alignSelf: "center",
-              zIndex: 10,
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => navigation.navigate(Screens.LanguageSelection)}
-              style={style.languageSelector}
-            >
-              <GlobalText style={style.languageSelectorText}>
-                {languageName}
-              </GlobalText>
-            </TouchableOpacity>
-          </View>
-          <View style={style.contentContainer}>
-            <GlobalText style={style.mainText}>
-              {t("label.launch_screen1_header")}
-            </GlobalText>
-          </View>
-          <View style={style.footerContainer}>
-            <EulaModal
-              onPressModalContinue={() =>
-                navigation.navigate(Screens.PersonalPrivacy)
-              }
-              selectedLocale={localeCode}
-            />
-          </View>
-        </View>
-      </ImageBackground>
-    </ImageBackground>
+        <GlobalText style={style.mainText}>
+          {t("label.launch_screen1_header")}
+        </GlobalText>
+        <GlobalText style={style.mainText}>{appName}</GlobalText>
+      </View>
+      <Button
+        label={t("label.launch_get_started")}
+        onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
+        hasRightArrow
+      />
+    </View>
   )
 }
 
 const style = StyleSheet.create({
-  backgroundImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
+  container: {
     flex: 1,
+    paddingVertical: Spacing.xxxHuge,
+    paddingHorizontal: Spacing.large,
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: Colors.primaryBackground,
   },
-  mainContainer: {
-    flex: 1,
+  languageButtonContainer: {
+    ...Outlines.ovalBorder,
+    borderColor: Colors.primaryViolet,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
   },
-  contentContainer: {
-    width: width * 0.75,
-    flex: 1,
-    justifyContent: "center",
-    alignSelf: "center",
-  },
-  mainText: {
-    textAlign: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    lineHeight: 35,
-    color: Colors.white,
-    fontSize: 26,
-  },
-  languageSelector: {
-    borderWidth: 1,
-    borderColor: Colors.white,
-    paddingVertical: 4,
-    paddingHorizontal: 11,
-    borderRadius: 100,
-  },
-  languageSelectorText: {
-    fontSize: 16,
-    color: Colors.white,
-    paddingVertical: 4,
-    paddingHorizontal: 20,
+  languageButtonText: {
+    ...Typography.base,
+    letterSpacing: Typography.mediumLetterSpacing,
+    color: Colors.primaryViolet,
     textAlign: "center",
     textTransform: "uppercase",
   },
-  footerContainer: {
-    position: "absolute",
-    bottom: 0,
-    padding: 24,
-    width: "100%",
+  image: {
+    resizeMode: "contain",
+    height: 280,
+    marginBottom: Spacing.huge,
+  },
+  mainText: {
+    ...Typography.header2,
+    color: Colors.primaryText,
+    textAlign: "center",
   },
 })
 

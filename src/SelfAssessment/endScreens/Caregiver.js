@@ -19,15 +19,15 @@ export const Caregiver = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackgroundFaintShade}
+      backgroundColor={Colors.primaryBackground}
       backgroundImage={Images.IsolatePathBackground}
       icon={Icons.Isolate}
       footer={
         <Button
           onPress={handleButtonPress}
           label={t("assessment.caregiver_cta")}
-          buttonStyle={style.button}
-          textStyle={style.buttonText}
+          customButtonStyle={style.button}
+          customTextStyle={style.buttonText}
           testID="assessment-button"
         />
       }

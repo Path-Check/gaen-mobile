@@ -1,22 +1,17 @@
 import React, { FunctionComponent } from "react"
 import env from "react-native-config"
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-} from "react-native"
+import { View, ScrollView, StyleSheet, Linking } from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-import { Possible, ExposureDatum, exposureWindowBucket } from "../exposure"
+import { ExposureDatum, exposureWindowBucket } from "../exposure"
 
-import { Colors, Iconography, Spacing, Typography, Buttons } from "../styles"
+import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 const ExposureDetail: FunctionComponent = () => {
@@ -39,7 +34,7 @@ const ExposureDetail: FunctionComponent = () => {
   const exposureWindowBucketInWords = (
     exposureDatum: ExposureDatum,
   ): string => {
-    const bucket = exposureWindowBucket(exposureDatum as Possible)
+    const bucket = exposureWindowBucket(exposureDatum)
     switch (bucket) {
       case "TodayToThreeDaysAgo": {
         return t("exposure_history.exposure_window.today_to_three_days_ago")
@@ -65,6 +60,8 @@ const ExposureDetail: FunctionComponent = () => {
         <View style={style.exposureWindowContainer}>
           <SvgXml
             xml={Icons.ExposureIcon}
+            accessible
+            accessibilityLabel={t("exposure_history.possible_exposure")}
             fill={Colors.primaryViolet}
             width={Iconography.xSmall}
             height={Iconography.xSmall}
@@ -103,14 +100,13 @@ const ExposureDetail: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        <TouchableOpacity
-          onPress={handleOnPressNextStep}
-          style={style.nextStepsButton}
-        >
-          <GlobalText style={style.nextStepsButtonText}>
-            {t("exposure_history.exposure_detail.next_steps")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.buttonContainer}>
+          <Button
+            onPress={handleOnPressNextStep}
+            label={t("exposure_history.exposure_detail.next_steps")}
+            hasRightArrow
+          />
+        </View>
       </View>
     </ScrollView>
   )
@@ -144,7 +140,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryBackground,
   },
   headerContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xLarge,
   },
@@ -169,7 +165,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   bottomContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     flex: 1,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.medium,
@@ -207,11 +203,8 @@ const style = StyleSheet.create({
     ...Typography.tinyFont,
     color: Colors.primaryText,
   },
-  nextStepsButton: {
-    ...Buttons.largeBlue,
-  },
-  nextStepsButtonText: {
-    ...Typography.buttonTextLight,
+  buttonContainer: {
+    alignSelf: "flex-start",
   },
 })
 

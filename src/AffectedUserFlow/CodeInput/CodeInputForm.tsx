@@ -14,12 +14,13 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../../components/GlobalText"
+import { Button } from "../../components/Button"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
 
-import { Screens, Stacks } from "../../navigation"
+import { Screens } from "../../navigation"
 import {
   Spacing,
   Buttons,
@@ -51,7 +52,7 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const handleOnPressSubmit = async () => {
@@ -114,10 +115,6 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const isDisabled = code.length !== codeLength
-  const buttonStyle = isDisabled ? style.disabledButton : style.button
-  const buttonTextStyle = isDisabled
-    ? style.disabledButtonText
-    : style.buttonText
 
   return (
     <KeyboardAvoidingView
@@ -138,15 +135,16 @@ const CodeInputForm: FunctionComponent = () => {
 
           <View>
             <TextInput
-              testID={"code-input"}
+              testID="code-input"
               value={code}
-              placeholder={"00000000"}
+              placeholder="00000000"
               placeholderTextColor={Colors.placeholderTextColor}
               maxLength={codeLength}
               style={style.codeInput}
-              keyboardType={"number-pad"}
-              returnKeyType={"done"}
+              keyboardType="number-pad"
+              returnKeyType="done"
               onChangeText={handleOnChangeText}
+              onSubmitEditing={Keyboard.dismiss}
               blurOnSubmit={false}
             />
           </View>
@@ -155,23 +153,16 @@ const CodeInputForm: FunctionComponent = () => {
         </View>
         {isLoading ? <LoadingIndicator /> : null}
 
-        <View>
-          <TouchableOpacity
+        <View style={style.buttonsContainer}>
+          <Button
             onPress={handleOnPressSubmit}
-            accessible
-            accessibilityLabel={t("common.submit")}
-            accessibilityRole="button"
+            label={t("common.submit")}
             disabled={isDisabled}
-            style={buttonStyle}
-          >
-            <GlobalText style={buttonTextStyle}>
-              {t("common.submit")}
-            </GlobalText>
-          </TouchableOpacity>
-
+          />
           <TouchableOpacity
             onPress={handleOnPressCancel}
             style={style.secondaryButton}
+            accessibilityLabel={t("export.code_input_button_cancel")}
           >
             <GlobalText style={style.secondaryButtonText}>
               {t("export.code_input_button_cancel")}
@@ -203,7 +194,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.medium,
     paddingTop: Layout.oneTenthHeight,
-    backgroundColor: Colors.primaryBackgroundFaintShade,
+    backgroundColor: Colors.primaryBackground,
     paddingBottom: Spacing.small,
   },
   headerContainer: {
@@ -227,11 +218,11 @@ const style = StyleSheet.create({
   },
   activityIndicatorContainer: {
     position: "absolute",
-    zIndex: Layout.zLevel1,
     left: Layout.halfWidth,
     top: Layout.halfHeight,
     marginLeft: -(indicatorWidth / 2),
     marginTop: -(indicatorWidth / 2),
+    zIndex: Layout.zLevel2,
   },
   activityIndicator: {
     width: indicatorWidth,
@@ -239,23 +230,15 @@ const style = StyleSheet.create({
     backgroundColor: Colors.transparentDarkGray,
     borderRadius: Outlines.baseBorderRadius,
   },
-  button: {
-    ...Buttons.primary,
-  },
-  buttonText: {
-    ...Typography.buttonTextPrimary,
-  },
-  disabledButton: {
-    ...Buttons.primaryDisabled,
-  },
-  disabledButtonText: {
-    ...Typography.buttonTextPrimaryDisabled,
+  buttonsContainer: {
+    alignSelf: "flex-start",
+    marginBottom: Spacing.medium,
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondary,
+    ...Typography.buttonSecondaryText,
   },
 })
 

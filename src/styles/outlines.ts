@@ -12,18 +12,28 @@ export const thick = 3
 export const extraThick = 4
 
 export const roundedBorder: ViewStyle = {
-  borderWidth: 1,
+  borderWidth: hairline,
   borderRadius: baseBorderRadius,
 }
 
-export const glowShadow: ViewStyle = {
-  shadowColor: Colors.darkestGray,
-  shadowOpacity: 0.1,
-  shadowRadius: 20,
+export const ovalBorder: ViewStyle = {
+  borderWidth: hairline,
+  borderRadius: borderRadiusMax,
 }
 
 export const textInputBorder: ViewStyle = {
-  borderWidth: 2,
+  borderWidth: 1,
   borderRadius: 10,
-  borderColor: Colors.primaryViolet,
+  borderColor: Colors.formInputBorder,
+}
+
+export const baseShadow: ViewStyle = {
+  shadowColor: Colors.primaryViolet,
+  shadowOffset: {
+    width: 0,
+    height: 10,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 13.16,
+  elevation: 20,
 }

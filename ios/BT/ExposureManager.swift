@@ -21,6 +21,8 @@ final class ExposureManager: NSObject {
   
   private static let backgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
   
+  private var exposureConfiguration = ExposureConfiguration.placeholder
+  
   let manager = ENManager()
   
   var enabledState: EnabledState {
@@ -33,6 +35,10 @@ final class ExposureManager: NSObject {
   
   @objc var currentExposures: String {
     return Array(BTSecureStorage.shared.userState.exposures).jsonStringRepresentation()
+  }
+
+  @objc var isBluetoothEnabled: Bool {
+    manager.exposureNotificationStatus != .bluetoothOff
   }
   
   private var isDetectingExposures = false
@@ -65,6 +71,7 @@ final class ExposureManager: NSObject {
       name: .AuthorizationStatusDidChange,
       object: nil
     )
+    
   }
   
   deinit {
@@ -306,11 +313,15 @@ final class ExposureManager: NSObject {
         let currentKeys = allKeys.current()
         
         let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
+
+        let revisionToken = BTSecureStorage.shared.userState.revisionToken
         
-        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey),
+        APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey, revisionToken),
                                  requestType: .postKeys) { result in
                                   switch result {
-                                  case .success:
+                                  case .success(let response):
+                                    // Save revisionToken to use on subsequent key submission requests
+                                    BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
                                     resolve("Submitted: \(currentKeys.count) keys.")
                                   case .failure(let error):
                                     reject(String.networkFailure, "Failed to post exposure keys \(error.localizedDescription)", error)
@@ -348,12 +359,11 @@ final class ExposureManager: NSObject {
       }
     }
   }
-  
-  @objc func broadcastCurrentEnabledStatus() {
-    NotificationCenter.default.post(Notification(
-      name: .AuthorizationStatusDidChange,
-      object: [self.authorizationState.rawValue, self.enabledState.rawValue]
-    ))
+
+  /// Broadcast EN Status and fetch exposure configuration
+  @objc func setup() {
+    fetchExposureConfiguration()
+    broadcastCurrentEnabledStatus()
   }
   
 }
@@ -405,6 +415,24 @@ extension ExposureManager {
 // MARK: - Private
 
 private extension ExposureManager {
+  
+  func fetchExposureConfiguration() {
+    APIClient.shared.request(ExposureConfigurationRequest.get, requestType: .exposureConfiguration) { result in
+      switch result {
+      case .success(let exposureConfiguration):
+        self.exposureConfiguration = exposureConfiguration
+      case .failure(let error):
+        print("Error fetching exposure configuration: \(error)")
+      }
+    }
+  }
+  
+  func broadcastCurrentEnabledStatus() {
+    NotificationCenter.default.post(Notification(
+      name: .AuthorizationStatusDidChange,
+      object: [self.authorizationState.rawValue, self.enabledState.rawValue]
+    ))
+  }
   
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier

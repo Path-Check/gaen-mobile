@@ -2,11 +2,9 @@ import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
   Alert,
-  ImageBackground,
   TouchableOpacity,
   StyleSheet,
   View,
-  SafeAreaView,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -15,9 +13,16 @@ import { useNavigation } from "@react-navigation/native"
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
 
-import { Screens, Stacks } from "../../navigation"
-import { Icons, Images } from "../../assets"
-import { Colors, Spacing, Buttons, Iconography, Typography } from "../../styles"
+import { Screens } from "../../navigation"
+import { Icons } from "../../assets"
+import {
+  Outlines,
+  Colors,
+  Spacing,
+  Buttons,
+  Iconography,
+  Typography,
+} from "../../styles"
 import { useExposureContext } from "../../ExposureContext"
 
 interface PublishConsentFormProps {
@@ -46,70 +51,60 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.More)
+    navigation.navigate(Screens.Home)
   }
 
   const title = t("export.publish_consent_title_bluetooth")
   const body = t("export.publish_consent_body_bluetooth")
 
   return (
-    <ImageBackground
-      source={Images.BlueGradientBackground}
-      style={style.backgroundImage}
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      testID="publish-consent-form"
     >
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={style.contentContainer}
+      <View style={style.iconContainerCircle}>
+        <SvgXml
+          xml={Icons.Bell}
+          width={Iconography.small}
+          height={Iconography.small}
+        />
+      </View>
+
+      <View style={style.content}>
+        <GlobalText style={style.header}>{title}</GlobalText>
+        <GlobalText style={style.contentText}>{body}</GlobalText>
+      </View>
+
+      <View style={style.buttonsContainer}>
+        <Button
+          invert
+          loading={isLoading}
+          label={t("export.consent_button_title")}
+          onPress={handleOnPressConfirm}
+        />
+        <TouchableOpacity
+          onPress={handleOnPressCancel}
+          style={style.secondaryButton}
+          accessibilityLabel={t("export.consent_button_cancel")}
         >
-          <View style={style.icon}>
-            <SvgXml
-              xml={Icons.Bell}
-              accessible
-              accessibilityLabel={t("label.bell_icon")}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-          </View>
-
-          <View style={style.content}>
-            <GlobalText style={style.header}>{title}</GlobalText>
-            <GlobalText style={style.contentText}>{body}</GlobalText>
-          </View>
-
-          <View>
-            <Button
-              loading={isLoading}
-              label={t("export.consent_button_title")}
-              onPress={handleOnPressConfirm}
-              buttonStyle={style.button}
-              textStyle={style.buttonText}
-            />
-            <TouchableOpacity
-              onPress={handleOnPressCancel}
-              style={style.secondaryButton}
-            >
-              <GlobalText style={style.secondaryButtonText}>
-                {t("export.consent_button_cancel")}
-              </GlobalText>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </ImageBackground>
+          <GlobalText style={style.secondaryButtonText}>
+            {t("export.consent_button_cancel")}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primaryBlue,
+  },
   contentContainer: {
     paddingHorizontal: Spacing.large,
+    paddingTop: Spacing.xxxHuge,
     paddingBottom: Spacing.huge,
-  },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
   },
   content: {
     paddingBottom: Spacing.xxHuge,
@@ -119,25 +114,24 @@ const style = StyleSheet.create({
     color: Colors.white,
     paddingBottom: Spacing.medium,
   },
-  icon: {
+  iconContainerCircle: {
     ...Iconography.largeIcon,
-    backgroundColor: Colors.white,
+    borderRadius: Outlines.borderRadiusMax,
+    backgroundColor: Colors.primaryBackground,
+    marginBottom: Spacing.large,
   },
   contentText: {
     ...Typography.secondaryContent,
     color: Colors.white,
   },
-  button: {
-    ...Buttons.primaryInverted,
-  },
-  buttonText: {
-    ...Typography.buttonTextPrimaryInverted,
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonTextSecondaryInverted,
+    ...Typography.buttonSecondaryInvertedText,
   },
 })
 

@@ -1,30 +1,15 @@
 import React, { FunctionComponent } from "react"
-import {
-  ViewStyle,
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native"
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import {
-  NavigationParams,
-  NavigationScreenProp,
-  NavigationState,
-} from "react-navigation"
+import { useNavigation } from "@react-navigation/native"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
-import { Stacks, Screens, useStatusBarEffect } from "../navigation"
+import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
-import { Iconography, Buttons, Colors, Spacing, Typography } from "../styles"
-
-interface MenuScreenProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>
-}
+import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
 interface LanguageSelectionListItemProps {
   icon: string
@@ -38,11 +23,7 @@ const LanguageSelectionListItem = ({
   label,
   onPress,
 }: LanguageSelectionListItemProps) => (
-  <TouchableHighlight
-    underlayColor={Colors.underlayPrimaryBackground}
-    style={style.listItem}
-    onPress={onPress}
-  >
+  <TouchableOpacity style={style.listItem} onPress={onPress}>
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <SvgXml
         xml={icon}
@@ -52,10 +33,11 @@ const LanguageSelectionListItem = ({
       />
       <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
     </View>
-  </TouchableHighlight>
+  </TouchableOpacity>
 )
 
-const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
+const MenuScreen: FunctionComponent = () => {
+  const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
@@ -67,45 +49,27 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
     label: string
     onPress: () => void
     description?: string
-    itemStyle?: ViewStyle
   }
 
   const SettingsListItem = ({
     label,
     onPress,
     description,
-    itemStyle,
   }: SettingsListItemProps) => {
     return (
-      <TouchableHighlight
-        underlayColor={Colors.underlayPrimaryBackground}
-        style={[style.listItem, itemStyle]}
-        onPress={onPress}
-      >
+      <TouchableOpacity style={style.listItem} onPress={onPress}>
         <View>
           <GlobalText style={style.listItemText}>{label}</GlobalText>
           {description ? (
             <GlobalText style={style.descriptionText}>{description}</GlobalText>
           ) : null}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
   return (
     <ScrollView style={style.container}>
-      <View style={style.sectionPrimary}>
-        <GlobalText>{t("settings.share_test_result_description")}</GlobalText>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-          style={style.button}
-        >
-          <GlobalText style={style.buttonText}>
-            {t("settings.share_test_result")}
-          </GlobalText>
-        </TouchableOpacity>
-      </View>
-
       <View style={style.section}>
         <LanguageSelectionListItem
           label={languageName || t("label.unknown")}
@@ -118,20 +82,17 @@ const MenuScreen: FunctionComponent<MenuScreenProps> = ({ navigation }) => {
       <View style={style.section}>
         <SettingsListItem
           label={t("screen_titles.about")}
-          onPress={() => navigation.navigate(Screens.About)}
-          itemStyle={style.divider}
+          onPress={() => navigation.navigate(MoreStackScreens.About)}
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(Screens.Licenses)}
-          itemStyle={style.lastListItem}
+          onPress={() => navigation.navigate(MoreStackScreens.Licenses)}
         />
       </View>
       <View style={style.section}>
         <SettingsListItem
           label="EN Debug Menu"
-          onPress={() => navigation.navigate(Screens.ENDebugMenu)}
-          itemStyle={style.lastListItem}
+          onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
         />
       </View>
     </ScrollView>
@@ -142,28 +103,10 @@ const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryBackground,
   },
-  divider: {
-    borderColor: Colors.tertiaryViolet,
-    borderBottomWidth: 1,
-  },
   section: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     marginBottom: Spacing.medium,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: Colors.tertiaryViolet,
-  },
-  sectionPrimary: {
-    flex: 1,
-    margin: Spacing.medium,
-  },
-  button: {
-    ...Buttons.largeSecondaryBlue,
-    marginTop: Spacing.medium,
-  },
-  buttonText: {
-    ...Typography.buttonTextLight,
   },
   icon: {
     maxWidth: Iconography.small,
@@ -173,12 +116,11 @@ const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.medium,
+    borderBottomColor: Colors.tertiaryViolet,
+    borderBottomWidth: Outlines.hairline,
   },
   listItemText: {
     ...Typography.tappableListItem,
-  },
-  lastListItem: {
-    borderBottomWidth: 0,
   },
   descriptionText: {
     ...Typography.description,

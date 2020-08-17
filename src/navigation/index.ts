@@ -9,30 +9,55 @@ import { useFocusEffect } from "@react-navigation/native"
 
 import { ExposureDatum } from "../exposure"
 
+import { Colors } from "../styles"
+
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
 >
 
+export type ActivationScreen =
+  | "AcceptEula"
+  | "ActivateProximityTracing"
+  | "NotificationPermissions"
+
+export const ActivationScreens: {
+  [key in ActivationScreen]: ActivationScreen
+} = {
+  AcceptEula: "AcceptEula",
+  ActivateProximityTracing: "ActivateProximityTracing",
+  NotificationPermissions: "NotificationPermissions",
+}
+
+export type HomeScreen = "Home" | "BluetoothInfo" | "ProximityTracingInfo"
+
+export const HomeScreens: {
+  [key in HomeScreen]: HomeScreen
+} = {
+  Home: "Home",
+  BluetoothInfo: "BluetoothInfo",
+  ProximityTracingInfo: "ProximityTracingInfo",
+}
+
 export type OnboardingScreen =
   | "Welcome"
+  | "Introduction"
+  | "PhoneRemembersDevices"
   | "PersonalPrivacy"
-  | "NotificationDetails"
-  | "ShareDiagnosis"
-  | "NotificationPermissions"
-  | "EnableExposureNotifications"
-  | "LanguageSelection"
+  | "GetNotified"
+  | "ValueProposition"
+  | "ProtectPrivacy"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
 } = {
   Welcome: "Welcome",
+  Introduction: "Introduction",
+  PhoneRemembersDevices: "PhoneRemembersDevices",
   PersonalPrivacy: "PersonalPrivacy",
-  NotificationDetails: "NotificationDetails",
-  ShareDiagnosis: "ShareDiagnosis",
-  NotificationPermissions: "NotificationPermissions",
-  EnableExposureNotifications: "EnableExposureNotifications",
-  LanguageSelection: "LanguageSelection",
+  GetNotified: "GetNotified",
+  ValueProposition: "ValueProposition",
+  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =
@@ -54,13 +79,20 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
+export type ReportIssueScreen = "ReportIssueForm"
+
+export const ReportIssueScreens: {
+  [key in ReportIssueScreen]: ReportIssueScreen
+} = {
+  ReportIssueForm: "ReportIssueForm",
+}
+
 export type MoreStackScreen =
   | "Menu"
   | "About"
   | "Licenses"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
-  | "LanguageSelection"
   | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
@@ -71,7 +103,6 @@ export const MoreStackScreens: {
   Menu: "Menu",
   About: "About",
   Licenses: "Licenses",
-  LanguageSelection: "LanguageSelection",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
@@ -108,42 +139,60 @@ export const AffectedUserFlowScreens: {
 export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
+  | ReportIssueScreen
   | MoreStackScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
-  | "Home"
+  | HomeScreen
+  | "ReportIssueForm"
+  | "LanguageSelection"
 
 export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
+  ...ReportIssueScreens,
   ...MoreStackScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
-  Home: "Home",
+  ...HomeScreens,
+  ReportIssueForm: "ReportIssueForm",
+  LanguageSelection: "LanguageSelection",
 }
 
 export type Stack =
+  | "Activation"
   | "Onboarding"
   | "ExposureHistoryFlow"
   | "SelfAssessment"
   | "More"
   | "AffectedUserStack"
+  | "ReportIssue"
 
 export const Stacks: { [key in Stack]: Stack } = {
+  Activation: "Activation",
   Onboarding: "Onboarding",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   SelfAssessment: "SelfAssessment",
   More: "More",
   AffectedUserStack: "AffectedUserStack",
+  ReportIssue: "ReportIssue",
 }
 
 export type StatusBarStyle = "dark-content" | "light-content"
 
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
+  const backgroundColor =
+    statusBarStyle === "dark-content"
+      ? Colors.primaryBackground
+      : Colors.primaryViolet
+
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-      Platform.OS === "android" && StatusBar.setTranslucent(true)
-    }, [statusBarStyle]),
+      if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor(backgroundColor)
+        StatusBar.setTranslucent(true)
+      }
+    }, [statusBarStyle, backgroundColor]),
   )
 }

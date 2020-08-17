@@ -3,25 +3,24 @@ import { ViewStyle } from "react-native"
 import * as Colors from "./colors"
 import * as Outlines from "./outlines"
 import * as Spacing from "./spacing"
+import * as Layout from "./layout"
 
 const base: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  borderRadius: Outlines.baseBorderRadius,
+  alignSelf: "flex-start",
 }
 
 // Size
-export const baseHeight = 50
-
 const tiny: ViewStyle = {
-  paddingVertical: Spacing.xxxSmall,
-  paddingHorizontal: Spacing.xSmall,
+  paddingTop: Spacing.xxxSmall,
+  paddingBottom: Spacing.xxxSmall + 1,
 }
 
 const medium: ViewStyle = {
-  paddingVertical: Spacing.small,
-  paddingHorizontal: Spacing.medium,
+  paddingTop: Spacing.small,
+  paddingBottom: Spacing.small + 1,
 }
 
 const large: ViewStyle = {
@@ -29,127 +28,39 @@ const large: ViewStyle = {
   paddingBottom: Spacing.large + 1,
 }
 
-// Border
-const rounded: ViewStyle = {
+// Borders
+const maxCornerRoundness: ViewStyle = {
   borderRadius: Outlines.borderRadiusMax,
 }
 
 // Color
-
-const primaryBlue: ViewStyle = {
-  backgroundColor: Colors.primaryBlue,
-  borderColor: Colors.primaryBlue,
-}
-
-const secondaryBlue: ViewStyle = {
-  backgroundColor: Colors.secondaryBlue,
-  borderColor: Colors.secondaryBlue,
-}
-
-const white: ViewStyle = {
-  backgroundColor: Colors.white,
-  borderColor: Colors.white,
-}
-
-const disabled: ViewStyle = {
-  backgroundColor: Colors.mediumGray,
-  borderColor: Colors.mediumGray,
-}
-
-const tertiary: ViewStyle = {
+const tertiaryBlue: ViewStyle = {
   backgroundColor: Colors.tertiaryViolet,
-  borderColor: Colors.tertiaryViolet,
 }
 
 const transparent: ViewStyle = {
   backgroundColor: "transparent",
 }
 
-// Outline
-const outlined: ViewStyle = {
-  borderWidth: 1,
-  backgroundColor: Colors.transparent,
-}
-
-// Combinations
-export const largeBlue: ViewStyle = {
-  ...base,
-  ...large,
-  ...primaryBlue,
-}
-
-export const largeBlueOutline: ViewStyle = {
-  ...largeBlue,
-  ...outlined,
-}
-
-export const largeSecondaryBlue: ViewStyle = {
-  ...base,
-  ...large,
-  ...secondaryBlue,
-}
-
-export const mediumBlue: ViewStyle = {
-  ...base,
-  ...medium,
-  ...primaryBlue,
-}
-
-export const largeWhite: ViewStyle = {
-  ...base,
-  ...large,
-  ...white,
-}
-
-export const largeWhiteOutline: ViewStyle = {
-  ...largeWhite,
-  ...outlined,
-}
-
-export const largeSecondary: ViewStyle = {
-  ...base,
-  ...large,
-}
-
-export const tinyTeritiaryRounded: ViewStyle = {
-  ...base,
-  ...tiny,
-  ...rounded,
-  ...tertiary,
-}
-
-export const mediumTransparent: ViewStyle = {
-  ...base,
-  ...medium,
-  ...transparent,
-}
-
-export const largeTransparent: ViewStyle = {
-  ...base,
-  ...large,
-  ...transparent,
-}
-
 export const primary: ViewStyle = {
   ...base,
   ...large,
-  ...primaryBlue,
-}
-
-export const primaryDisabled: ViewStyle = {
-  ...base,
-  ...large,
-  ...disabled,
-}
-
-export const primaryInverted: ViewStyle = {
-  ...base,
-  ...large,
-  ...white,
+  borderRadius: Outlines.borderRadiusMax,
+  paddingHorizontal: Spacing.xHuge,
+  minWidth: 180,
+  maxWidth: Layout.screenWidth * 0.9,
 }
 
 export const secondary: ViewStyle = {
   ...base,
-  ...large,
+  ...medium,
   ...transparent,
+  paddingHorizontal: Spacing.huge,
+}
+
+export const tinyRounded: ViewStyle = {
+  ...base,
+  ...tiny,
+  ...maxCornerRoundness,
+  ...tertiaryBlue,
 }

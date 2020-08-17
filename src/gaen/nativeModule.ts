@@ -125,12 +125,28 @@ export const submitDiagnosisKeys = async (
   return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
 }
 
+// Device Info Module
+const deviceInfoModule = NativeModules.DeviceInfoModule
+
+export const getApplicationName = async (): Promise<string> => {
+  return deviceInfoModule.getApplicationName()
+}
+
+export const getBuildNumber = async (): Promise<string> => {
+  return deviceInfoModule.getBuildNumber()
+}
+
+export const getVersion = async (): Promise<string> => {
+  return deviceInfoModule.getVersion()
+}
+
+export const isBluetoothEnabled = async (): Promise<boolean> => {
+  const bluetoothStatus = await deviceInfoModule.isBluetoothEnabled()
+  return bluetoothStatus === true || bluetoothStatus === "true"
+}
+
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
-
-export const fetchDebugLog = async (): Promise<string> => {
-  return debugModule.fetchDebugLog()
-}
 
 export const forceAppCrash = async (): Promise<void> => {
   return debugModule.forceAppCrash()

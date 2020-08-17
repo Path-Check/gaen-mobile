@@ -127,7 +127,7 @@ Populate the following 2 `.env` files with the relevant urls for your GAEN serve
 .env.bt # variables used in building binaries
 ```
 
-**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run `bin/fetch_ha_env.sh` and passing in the 2-letter ha abbreviation as the first argument (i.e. `bin/fetch_ha_env.sh pc`)
+**Note:** Members of the `Path-Check` org can complete this step by making a `.env` file based on the `example.env` file in the project and inputting their GitHub access token. Then run ` bin/set_ha.sh ${HA_LABEL}` and passing in the 2-letter ha abbreviation as the first argument (i.e. ` bin/set_ha.sh pc`). This will also setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
 ## Running
 
@@ -149,6 +149,10 @@ If you get a 500 local server error, run:
 ```
 yarn start --reset-cache
 ``` 
+If you get a `require: cannot load such file -- dotenv (LoadError)` error, run:
+```
+gem install dotenv
+```
 **Testing:**
 - To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 - To provide dianogisis keys to the API the applicationId should be whitelisted, you can skip that verification step by checking `Settings > Google > COVID-19 Exposure Notifications >  Debug mode > Bypass app signature check`
@@ -274,6 +278,17 @@ Before pushing up code, it is recommended to manually test your code on the foll
 - iPhone 8 (smaller screen)
 - Pixel 3 XL (larger screen)
 - iPhone 11 (screen w/ notch)
+
+## Distribution
+
+### Android
+
+Android APKs are automatically distributed (via AppCenter) on each commit to develop
+Once a new HA is created we need to add some secrets:
+- Encoded keystore file (`openssl base64 -A -in key.jks`)
+- Keystore password
+- Key password
+- AppCenter token
 
 # License
   [MIT License](LICENSE)
