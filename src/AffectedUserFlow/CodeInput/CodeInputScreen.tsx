@@ -18,7 +18,7 @@ const CodeInputScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      {true ? <CodeInputForm /> : <EnableExposureNotifications />}
+      {isEnabled ? <CodeInputForm /> : <EnableExposureNotifications />}
     </View>
   )
 }

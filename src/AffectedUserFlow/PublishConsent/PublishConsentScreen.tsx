@@ -11,21 +11,21 @@ const PublishConsentScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const { certificate, hmacKey } = useAffectedUserContext()
 
-  /* if (hmacKey && certificate) { */
-  return <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
-  /* } else { */
-  /*   return ( */
-  /*     <View> */
-  /*       <Text>Invalid State</Text> */
-  /*       <Button */
-  /*         onPress={() => { */
-  /*           navigation.navigate(Screens.Home) */
-  /*         }} */
-  /*         title={"Go Back"} */
-  /*       /> */
-  /*     </View> */
-  /*   ) */
-  /* } */
+  if (hmacKey && certificate) {
+    return <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
+  } else {
+    return (
+      <View>
+        <Text>Invalid State</Text>
+        <Button
+          onPress={() => {
+            navigation.navigate(Screens.Home)
+          }}
+          title={"Go Back"}
+        />
+      </View>
+    )
+  }
 }
 
 export default PublishConsentScreen

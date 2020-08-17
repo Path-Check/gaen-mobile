@@ -67,18 +67,18 @@ const CodeInputForm: FunctionComponent = () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     try {
-      /* const response = await API.postCode(code) */
+      const response = await API.postCode(code)
 
-      if (true) {
-        /* const token = response.body.token */
-        /* const exposureKeys = await strategy.getExposureKeys() */
-        /* const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys) */
+      if (response.kind === "success") {
+        const token = response.body.token
+        const exposureKeys = await strategy.getExposureKeys()
+        const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
 
-        /* const certResponse = await API.postTokenAndHmac(token, hmacDigest) */
+        const certResponse = await API.postTokenAndHmac(token, hmacDigest)
 
-        if (true) {
-          /* const certificate = certResponse.body.certificate */
-          /* setExposureSubmissionCredentials(certificate, hmacKey) */
+        if (certResponse.kind === "success") {
+          const certificate = certResponse.body.certificate
+          setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
           navigation.navigate(Screens.AffectedUserPublishConsent)
         } else {
