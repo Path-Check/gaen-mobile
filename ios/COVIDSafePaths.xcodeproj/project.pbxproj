@@ -12,9 +12,12 @@
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
+		B5181E3C24E72648006207A3 /* ExposureDetectionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5181E3B24E72648006207A3 /* ExposureDetectionSummary.swift */; };
 		B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
+		B54AB1FA24EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AB1F924EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift */; };
+		B54AB1FD24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
@@ -206,8 +209,11 @@
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadPackage+Helpers.swift"; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
+		B5181E3B24E72648006207A3 /* ExposureDetectionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureDetectionSummary.swift; sourceTree = "<group>"; };
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
+		B54AB1F924EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureDetectionSummaryRequests.swift; sourceTree = "<group>"; };
+		B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureDetectionSummaryResponse.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -574,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */,
+				B54AB1F924EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift */,
 				B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */,
 				B54CBF31249A738500218477 /* IndexFileRequests.swift */,
 				B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */,
@@ -586,9 +593,11 @@
 			children = (
 				B5FC37DC248A78D2006474EB /* ExposureKey.swift */,
 				B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */,
+				B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */,
 				B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */,
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
+				B5181E3B24E72648006207A3 /* ExposureDetectionSummary.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
 			path = Model;
@@ -1032,9 +1041,12 @@
 				B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
+				B54AB1FD24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
 				B5FC37F6248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift in Sources */,
+				B54AB1FA24EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift in Sources */,
+				B5181E3C24E72648006207A3 /* ExposureDetectionSummary.swift in Sources */,
 				B5E29D54249E3BE100E686DC /* ExposureManager+Extensions.swift in Sources */,
 				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,
 				B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */,
@@ -1215,12 +1227,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Development.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 79Z8HUPGC3;
 				INFOPLIST_FILE = BT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1231,7 +1243,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "BT Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1244,12 +1256,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Production.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 79Z8HUPGC3;
 				INFOPLIST_FILE = BT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1260,7 +1272,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\"";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "BT Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

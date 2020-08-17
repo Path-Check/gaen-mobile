@@ -34,7 +34,7 @@ final class ExposureManager: NSObject {
   }
   
   @objc var currentExposures: String {
-    return Array(BTSecureStorage.shared.userState.exposures).jsonStringRepresentation()
+    return Array(BTSecureStorage.shared.exposures).jsonStringRepresentation()
   }
 
   @objc var isBluetoothEnabled: Bool {
@@ -185,6 +185,12 @@ final class ExposureManager: NSObject {
                             completionHandler: completionHandler)
                 return
               }
+
+              if false,
+                let summary = summary {
+                let exposureDetectionSummary = ExposureDetectionSummary(summary)O
+              }
+
               let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
               ExposureManager.shared.manager.getExposureInfo(summary: summary!, userExplanation: userExplanation) { exposures, error in
                 if let error = error {

@@ -54,14 +54,11 @@ extension ExposureManager {
           }
         }
       }
-      resolve("Exposures: \(BTSecureStorage.shared.userState.exposures)")
+      resolve("Exposures: \(BTSecureStorage.shared.exposures)")
     case .fetchExposures:
       resolve(currentExposures)
     case .getAndPostDiagnosisKeys:
       getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default, resolve: resolve, reject: reject)
-    case .resetExposures:
-      BTSecureStorage.shared.exposures = List<Exposure>()
-      resolve("Exposures: \(BTSecureStorage.shared.exposures.count)")
     case .toggleENAuthorization:
       let enabled = manager.exposureNotificationEnabled ? false : true
       requestExposureNotificationAuthorization(enabled: enabled) { result in

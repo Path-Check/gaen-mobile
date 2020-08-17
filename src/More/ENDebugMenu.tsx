@@ -143,13 +143,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 )}
               />
               <DebugMenuListItem
-                label="Reset Exposures"
-                itemStyle={style.lastListItem}
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.resetExposures,
-                )}
-              />
-              <DebugMenuListItem
                 label="Simulate Exposure Detection Error"
                 onPress={handleOnPressSimulationButton(
                   NativeModule.simulateExposureDetectionError,

@@ -27,11 +27,23 @@ final class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 5,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 6,
+                                   migrationBlock: { migration, oldVersion in
+                                    if oldVersion < 6 {
+                                      self.storeExposures(Array(self.userState.exposures))
+                                    }
+        }, objectTypes: [UserState.self,
+                         Exposure.self,
+                         ExposureDetectionSummary.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 5,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 6,
+                                   migrationBlock: { migration, oldVersion in
+                                    if oldVersion < 6 {
+                                      self.storeExposures(Array(self.userState.exposures))
+                                    }
+        }, objectTypes: [UserState.self,
+                         Exposure.self,
+                         ExposureDetectionSummary.self])
       }
     } else {
       return nil
@@ -49,11 +61,11 @@ final class BTSecureStorage: SafePathsSecureStorage {
   }
 
   func setUserValue<Value: Codable>(value: Value, keyPath: String, notificationName: Notification.Name) {
-      let realm = try! Realm(configuration: realmConfig)
-      try! realm.write {
-        realm.create(UserState.self, value: [keyPath: value], update: .modified)
-        let jsonString = value.jsonStringRepresentation()
-        NotificationCenter.default.post(name: notificationName, object: jsonString)
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.create(UserState.self, value: [keyPath: value], update: .modified)
+      let jsonString = value.jsonStringRepresentation()
+      NotificationCenter.default.post(name: notificationName, object: jsonString)
     }
   }
 
@@ -69,13 +81,24 @@ final class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
-  func storeExposures(_ exposures: [Exposure]) {
+  func storeExposures(_ newExposures: [Exposure]) {
+    let realm = try! Realm(configuration: realmConfig)
+    newExposures.forEach { exposure in
+      try! realm.write {
+        realm.add(exposure)
+      }
+    }
+    let jsonString = exposures.jsonStringRepresentation()
+    NotificationCenter.default.post(name: .ExposuresDidChange, object: jsonString)
+  }
+
+  func storeExposureDetectionSummarie(_ summary: ExposureDetectionSummary) {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
-      userState.exposures.append(objectsIn: exposures)
-      let jsonString = userState.exposures.jsonStringRepresentation()
-      NotificationCenter.default.post(name: .ExposuresDidChange, object: jsonString)
+      realm.add(summary)
     }
+    let jsonString = exposures.jsonStringRepresentation()
+    NotificationCenter.default.post(name: .ExposuresDidChange, object: jsonString)
   }
 
   @Persisted(keyPath: .remainingDailyFileProcessingCapacity, notificationName: .remainingDailyFileProcessingCapacityDidChange, defaultValue: Constants.dailyFileProcessingCapacity)
@@ -84,8 +107,21 @@ final class BTSecureStorage: SafePathsSecureStorage {
   @Persisted(keyPath: .urlOfMostRecentlyDetectedKeyFile, notificationName: .UrlOfMostRecentlyDetectedKeyFileDidChange, defaultValue: .default)
   var urlOfMostRecentlyDetectedKeyFile: String
 
-  @Persisted(keyPath: .keyPathExposures, notificationName: .ExposuresDidChange, defaultValue: List<Exposure>())
-  var exposures: List<Exposure>
+  var exposures: [Exposure] {
+    guard let realmConfig = getRealmConfig() else {
+      return []
+    }
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(Exposure.self))
+  }
+
+  var exposureDetectionSummaries: [ExposureDetectionSummary] {
+    guard let realmConfig = getRealmConfig() else {
+      return []
+    }
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(ExposureDetectionSummary.self))
+  }
 
   @Persisted(keyPath: .keyPathdateLastPerformedFileCapacityReset,
              notificationName: .dateLastPerformedFileCapacityResetDidChange, defaultValue: nil)
