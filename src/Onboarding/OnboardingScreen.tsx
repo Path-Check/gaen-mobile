@@ -175,8 +175,8 @@ const languageButtonSpacingTop = Platform.select({
   android: Spacing.huge,
 })
 const imageMarginTop = Platform.select({
-  ios: 70,
-  android: 100,
+  ios: 60,
+  android: 90,
 })
 
 const style = StyleSheet.create({
@@ -227,7 +227,7 @@ const style = StyleSheet.create({
   },
   image: {
     width: "97%",
-    height: 240,
+    height: 220,
     marginTop: imageMarginTop,
     marginBottom: Spacing.medium,
   },
@@ -252,7 +252,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   headerText: {
-    ...Typography.header3,
+    ...Typography.header2,
     marginBottom: Spacing.xLarge,
     paddingHorizontal: Spacing.large,
   },

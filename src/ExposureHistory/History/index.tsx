@@ -99,7 +99,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.black,
     marginRight: Spacing.medium,
   },
