@@ -210,7 +210,7 @@ const LoadingIndicator = () => {
     <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
-        color={Colors.darkGray}
+        color={Colors.neutral100}
         style={style.activityIndicator}
         testID={"loading-indicator"}
       />
@@ -225,7 +225,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
     paddingTop: 110,
     paddingBottom: Spacing.small,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   backButtonContainer: {
     position: "absolute",
@@ -270,7 +270,7 @@ const style = StyleSheet.create({
     letterSpacing: 8,
   },
   codeInputFocused: {
-    borderColor: Colors.secondaryViolet,
+    borderColor: Colors.primary125,
   },
   button: {
     alignSelf: "flex-start",
@@ -286,7 +286,7 @@ const style = StyleSheet.create({
   activityIndicator: {
     width: indicatorWidth,
     height: indicatorWidth,
-    backgroundColor: Colors.transparentDarkGray,
+    backgroundColor: Colors.transparentNeutral30,
     borderRadius: Outlines.baseBorderRadius,
   },
 })

@@ -59,7 +59,7 @@ const ActivationStack: FunctionComponent = () => {
         >
           <SvgXml
             xml={Icons.Close}
-            fill={Colors.darkestGray}
+            fill={Colors.neutral140}
             style={style.closeIcon}
             accessible
             accessibilityLabel={t("common.close")}
@@ -114,7 +114,7 @@ const style = StyleSheet.create({
   },
   headerRightText: {
     ...Typography.base,
-    color: Colors.mediumGray,
+    color: Colors.neutral100,
   },
   closeIcon: {
     paddingHorizontal: Spacing.large,

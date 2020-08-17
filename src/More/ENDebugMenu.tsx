@@ -166,18 +166,18 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
 const style = StyleSheet.create({
   section: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.small,
     marginBottom: Spacing.medium,
     borderTopWidth: Outlines.hairline,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.tertiaryViolet,
+    borderColor: Colors.secondary175,
   },
   listItem: {
     flex: 1,
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.tertiaryViolet,
+    borderColor: Colors.secondary175,
   },
   listItemText: {
     ...Typography.mainContent,

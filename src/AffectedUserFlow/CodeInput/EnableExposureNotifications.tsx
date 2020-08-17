@@ -69,7 +69,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     paddingTop: Layout.oneEighthHeight,
     paddingBottom: 70,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   cancelButtonContainer: {
     position: "absolute",

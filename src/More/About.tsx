@@ -66,7 +66,7 @@ export const AboutScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
     paddingHorizontal: Spacing.small,
   },

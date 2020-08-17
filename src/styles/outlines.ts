@@ -28,7 +28,7 @@ export const textInputBorder: ViewStyle = {
 }
 
 export const baseShadow: ViewStyle = {
-  shadowColor: Colors.primaryViolet,
+  shadowColor: Colors.primary125,
   shadowOffset: {
     width: 0,
     height: 10,

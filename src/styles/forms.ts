@@ -7,7 +7,7 @@ import * as Typography from "./typography"
 
 export const textInputFormField: TextStyle = {
   color: Colors.primaryText,
-  backgroundColor: Colors.primaryBackground,
+  backgroundColor: Colors.primaryLightBackground,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.formInputBorder,
   borderWidth: Outlines.hairline,

@@ -19,7 +19,7 @@ export const Distancing = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackground}
+      backgroundColor={Colors.primaryLightBackground}
       backgroundImage={Images.IsolatePathBackground}
       icon={Icons.Isolate}
       footer={
@@ -42,7 +42,7 @@ export const Distancing = ({ navigation }) => {
 
 const style = StyleSheet.create({
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

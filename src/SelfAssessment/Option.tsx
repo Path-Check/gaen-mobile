@@ -96,8 +96,8 @@ const style = StyleSheet.create({
     borderRadius: Spacing.tiny,
   },
   indicatorSelected: {
-    backgroundColor: Colors.secondaryBlue,
-    borderColor: Colors.secondaryBlue,
+    backgroundColor: Colors.primary100,
+    borderColor: Colors.primary100,
   },
   title: {
     ...Typography.largeFont,
@@ -108,7 +108,7 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
   },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     borderColor: Colors.secondaryBorder,
     borderRadius: Spacing.xxSmall,
     borderWidth: 2,
@@ -117,8 +117,8 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.medium,
   },
   containerSelected: {
-    backgroundColor: Colors.secondaryBackground,
-    borderColor: Colors.secondaryBlue,
+    backgroundColor: Colors.secondary175,
+    borderColor: Colors.primary100,
   },
   primary: {
     alignItems: "flex-start",

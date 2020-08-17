@@ -67,7 +67,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           accessibilityLabel={t("label.check")}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
-          fill={Colors.primaryBlue}
+          fill={Colors.primary100}
         />
       </View>
     </TouchableHighlight>
@@ -77,7 +77,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xSmall,
@@ -93,7 +93,7 @@ const style = StyleSheet.create({
   },
   secondaryText: {
     ...Typography.base,
-    color: Colors.darkGray,
+    color: Colors.neutral100,
     textTransform: "uppercase",
     marginTop: Spacing.xxSmall,
     letterSpacing: Typography.mediumLetterSpacing,

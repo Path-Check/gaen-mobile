@@ -73,7 +73,7 @@ const Licenses: FunctionComponent = () => {
 const style = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
     paddingHorizontal: Spacing.small,
   },
@@ -94,7 +94,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: Colors.primaryBlue,
+    backgroundColor: Colors.primary100,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.small,
   },

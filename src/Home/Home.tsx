@@ -215,7 +215,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 
   const bodyText = isActive ? t("common.enabled") : t("common.disabled")
   const icon = isActive ? Icons.CheckInCircle : Icons.XInCircle
-  const iconFill = isActive ? Colors.primaryGreen : Colors.tertiaryRed
+  const iconFill = isActive ? Colors.success100 : Colors.danger75
 
   return (
     <TouchableOpacity
@@ -287,21 +287,21 @@ const style = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   shareContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: Spacing.small,
     paddingLeft: Spacing.small,
-    backgroundColor: Colors.faintGray,
-    borderBottomColor: Colors.lightestGray,
+    backgroundColor: Colors.secondary10,
+    borderBottomColor: Colors.neutral10,
     borderBottomWidth: Outlines.hairline,
   },
   shareImageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.tertiaryViolet,
+    backgroundColor: Colors.secondary175,
     borderRadius: Outlines.borderRadiusMax,
     width: Iconography.medium,
     height: Iconography.medium,
@@ -330,7 +330,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.large,
     marginHorizontal: Spacing.small,
     borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.lightestGray,
+    borderBottomColor: Colors.neutral10,
   },
   activationStatusLeftContainer: {
     flexDirection: "row",
@@ -345,7 +345,7 @@ const style = StyleSheet.create({
   },
   fixContainer: {
     alignItems: "center",
-    backgroundColor: Colors.tertiaryRed,
+    backgroundColor: Colors.danger75,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,

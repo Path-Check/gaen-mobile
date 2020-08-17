@@ -10,106 +10,78 @@ const applyOpacity = (hexColor: string, opacity: number): string => {
 export const black = "#000000"
 export const white = "#ffffff"
 
-// Grays
-export const faintGray = "#f8f8ff"
-export const lightestGray = "#ededed"
-export const lighterGray = "#d3d3d3"
-export const lightGray = "#999999"
-export const mediumGray = "#606060"
-export const gray = "#333333"
-export const darkGray = "#4e4e4e"
-export const darkestGray = "#232323"
-export const steelGray = "#9BA0AA"
+// Neutrals
+export const neutral10 = "#e9eaf0"
+export const neutral25 = "#d8d8de"
+export const neutral30 = "#d6d6da"
+export const neutral75 = "#9ba0aa"
+export const neutral100 = "#3c475b"
+export const neutral110 = "#374357"
+export const neutral125 = "#252f42"
+export const neutral140 = "#1c2537"
 
-// Reds
-const red = "#eb0000"
-const emergencyRed = "#D00000"
-const calmRed = "#ff9e9e"
+// Primary
+export const primary100 = "#4051db"
+export const primary110 = "#4754c5"
+export const primary125 = "#2434b6"
+export const primary150 = "#192591"
 
-export const primaryRed = red
-export const secondaryRed = emergencyRed
-export const tertiaryRed = calmRed
+// Secondary
+export const secondary10 = "#f8f8ff"
+export const secondary50 = "#e5e7fa"
+export const secondary175 = "#d3d7f8"
+export const secondary200 = "#a5affb"
 
-// Blues
-const persianBlue = "#2434B6"
-const royalBlue = "#4051db"
-const cornflowerBlue = "#5061e6"
-
-export const primaryBlue = royalBlue
-export const secondaryBlue = cornflowerBlue
-export const tertiaryBlue = persianBlue
-
-// Greens
-const shamrockGreen = "#41dca4"
-
-export const primaryGreen = shamrockGreen
-
-// Yellows
-const amberYellow = "#ffcc00"
-const champagneYellow = "#f9edcc"
-
-export const primaryYellow = amberYellow
-export const secondaryYellow = champagneYellow
-
-// Violets
-const jacksonsPurple = "#1f2c9b"
-const vibrantViolet = "#6e50e4"
-const melrose = "#a5affb"
-const moonRaker = "#d3d7f8"
-
-export const primaryViolet = jacksonsPurple
-export const secondaryViolet = vibrantViolet
-export const tertiaryViolet = moonRaker
-export const quaternaryViolet = melrose
+// Accents
+export const danger75 = "#ff7d7d"
+export const danger100 = "#ff5656"
+export const success100 = "#41dca4"
+export const warning25 = "#f9edcc"
+export const warning50 = "#f8f8ff"
+export const warning100 = "#e5e7fa"
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"
-export const transparentDarkGray = applyOpacity(lighterGray, 0.8)
-export const transparentDark = "rgba(0,0,0,0.7)"
+export const transparentNeutral30 = applyOpacity(neutral30, 0.8)
 
 // Backgrounds
-export const primaryBackground = white
-export const secondaryBackground = moonRaker
-export const tertiaryBackground = lighterGray
+export const primaryLightBackground = white
 
-export const invertedPrimaryBackground = primaryBlue
-export const invertedSecondaryBackground = secondaryBlue
+export const invertedPrimaryBackground = primary125
+export const invertedSecondaryBackground = primary100
 
 // Underlays
-export const underlayPrimaryBackground = moonRaker
+export const underlayPrimaryBackground = secondary175
 
 // Borders
-export const primaryBorder = primaryViolet
-export const secondaryBorder = lighterGray
-export const radioBorder = lightGray
+export const primaryBorder = primary125
+export const secondaryBorder = neutral30
+export const radioBorder = neutral75
 
 // Headers
-export const headerBackground = primaryViolet
+export const headerBackground = primary125
 export const headerText = white
 
 // Icons
-export const icon = mediumGray
+export const icon = neutral100
 
 // Buttons
-export const disabledButton = darkGray
-export const disabledButtonText = quaternaryViolet
+export const disabledButton = neutral100
+export const disabledButtonText = secondary175
 
 // Text
 export const primaryText = black
-export const secondaryText = darkGray
-export const tertiaryText = secondaryBlue
+export const secondaryText = neutral100
+export const tertiaryText = primary100
 export const invertedText = white
 
 export const primaryHeaderText = black
-export const secondaryHeaderText = darkestGray
+export const secondaryHeaderText = neutral140
 
-export const linkText = primaryViolet
-export const invertedLinkText = amberYellow
-export const errorText = primaryRed
+export const linkText = primary125
+export const invertedLinkText = warning100
+export const errorText = danger100
 
 // Forms
-export const formInputBorder = lightestGray
-export const placeholderTextColor = lightGray
-
-export const success = primaryGreen
-export const warning = primaryYellow
+export const formInputBorder = neutral10
+export const placeholderTextColor = neutral75

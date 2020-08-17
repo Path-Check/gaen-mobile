@@ -43,7 +43,7 @@ export const Share = ({ navigation }) => {
 
 const style = StyleSheet.create({
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

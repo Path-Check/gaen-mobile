@@ -103,7 +103,7 @@ const Assessment = ({ navigation }) => {
     }),
     [navigation],
   )
-  const screenOptions = (backgroundColor = Colors.primaryBackground) => ({
+  const screenOptions = (backgroundColor = Colors.primaryLightBackground) => ({
     headerHideShadow: true,
     headerTitle: "",
     headerStyle: {
@@ -278,6 +278,6 @@ const style = StyleSheet.create({
     padding: Spacing.medium,
   },
   assessmentIcon: {
-    color: Colors.quaternaryViolet,
+    color: Colors.secondary200,
   },
 })

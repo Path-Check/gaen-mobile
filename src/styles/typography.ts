@@ -191,7 +191,7 @@ export const label: TextStyle = {
 export const error: TextStyle = {
   ...smallFont,
   ...mediumBold,
-  color: Colors.primaryRed,
+  color: Colors.danger100,
 }
 
 // Forms
@@ -209,7 +209,7 @@ export const secondaryTextInput: TextStyle = {
 // Tappables
 export const tappableListItem: TextStyle = {
   ...mediumFont,
-  color: Colors.primaryViolet,
+  color: Colors.primary125,
 }
 
 // Buttons
@@ -229,25 +229,25 @@ export const buttonPrimaryText: TextStyle = {
 
 export const buttonPrimaryInvertedText: TextStyle = {
   ...baseButtonText,
-  color: Colors.primaryViolet,
+  color: Colors.primary125,
 }
 
 export const buttonPrimaryDisabledText: TextStyle = {
   ...baseButtonText,
-  color: Colors.darkestGray,
+  color: Colors.neutral140,
 }
 
 export const buttonPrimaryInvertedDisabledText: TextStyle = {
   ...baseButtonText,
-  color: Colors.darkestGray,
+  color: Colors.neutral140,
 }
 
 export const buttonSecondaryText: TextStyle = {
   ...buttonTextSmall,
-  color: Colors.darkGray,
+  color: Colors.neutral100,
 }
 
 export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
-  color: Colors.lighterGray,
+  color: Colors.neutral30,
 }
