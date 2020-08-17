@@ -11,7 +11,6 @@ import {
   Image,
   View,
   Share,
-  Platform,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
