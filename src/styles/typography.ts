@@ -11,7 +11,7 @@ export const medium = 17
 export const large = 19
 export const xLarge = 22
 export const xxLarge = 28
-export const huge = 52
+export const xxxLarge = 34
 
 // Line Height
 export const xxxSmallLineHeight = 12
@@ -22,6 +22,7 @@ export const mediumLineHeight = 24
 export const largeLineHeight = 28
 export const xLargeLineHeight = 32
 export const xxLargeLineHeight = 36
+export const xxxLargeLineHeight = 42
 
 // Letter Spacing
 export const baseLetterSpacing = 0.25
@@ -112,22 +113,22 @@ export const xxLargeFont: TextStyle = {
   lineHeight: xxLargeLineHeight,
 }
 
-export const hugeFont: TextStyle = {
+export const xxxLargeFont: TextStyle = {
   ...base,
-  fontSize: huge,
-  lineHeight: xxLargeLineHeight,
+  fontSize: xxxLarge,
+  lineHeight: xxxLargeLineHeight,
 }
 
 // Headers
 export const header1: TextStyle = {
-  ...hugeFont,
-  ...bold,
+  ...xxxLargeFont,
+  ...mediumBold,
   color: Colors.primaryHeaderText,
 }
 
 export const header2: TextStyle = {
   ...xxLargeFont,
-  ...bold,
+  ...mediumBold,
   color: Colors.primaryHeaderText,
 }
 
@@ -189,7 +190,7 @@ export const label: TextStyle = {
 
 export const error: TextStyle = {
   ...smallFont,
-  ...bold,
+  ...mediumBold,
   color: Colors.primaryRed,
 }
 
@@ -214,7 +215,7 @@ export const tappableListItem: TextStyle = {
 // Buttons
 const baseButtonText: TextStyle = {
   ...largeFont,
-  ...bold,
+  ...semiBold,
 }
 
 const buttonTextSmall: TextStyle = {

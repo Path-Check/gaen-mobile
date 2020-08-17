@@ -7,7 +7,9 @@ export const screenHeight = Dimensions.get("window").height
 
 export const halfWidth = 0.5 * screenWidth
 
+export const oneTwentiethHeight = 0.05 * screenHeight
 export const oneTenthHeight = 0.1 * screenHeight
+export const oneEighthHeight = 0.125 * screenHeight
 export const halfHeight = 0.5 * screenHeight
 
 export const tappableHeight = 0.1 * screenHeight

@@ -80,11 +80,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const buttonContainerStyle = {
     ...style.buttonContainer,
     ...determineShadowEnabled(),
-  }
-
-  const buttonStyle = {
-    ...style.button,
-    ...determineShadowEnabled(),
     ...customButtonStyle,
   }
 
@@ -102,7 +97,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
         start={{ x: 0.2, y: 0.85 }}
         end={{ x: 0.4, y: 0 }}
         colors={determineGradient()}
-        style={buttonStyle}
+        style={style.button}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
@@ -112,7 +107,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={Colors.white}
+                fill={disabled ? Colors.black : Colors.white}
                 style={style.rightArrow}
                 accessible
                 accessibilityLabel={t("common.next")}
@@ -128,6 +123,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
+    borderRadius: Outlines.borderRadiusMax,
   },
   buttonContainerShadow: {
     ...Outlines.baseShadow,
