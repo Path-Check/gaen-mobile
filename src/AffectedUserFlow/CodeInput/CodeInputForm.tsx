@@ -178,7 +178,7 @@ const CodeInputForm: FunctionComponent = () => {
           testID="code-input"
           value={code}
           placeholder="00000000"
-          placeholderTextColor={Colors.placeholderTextColor}
+          placeholderTextColor={Colors.placeholderText}
           maxLength={codeLength}
           style={codeInputStyle}
           keyboardType="number-pad"
