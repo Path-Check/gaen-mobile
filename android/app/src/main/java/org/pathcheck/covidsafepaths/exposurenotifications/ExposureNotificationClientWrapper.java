@@ -108,6 +108,10 @@ public class ExposureNotificationClientWrapper {
         return exposureNotificationClient.getExposureWindows();
     }
 
+    public boolean deviceSupportsLocationlessScanning(){
+        return exposureNotificationClient.deviceSupportsLocationlessScanning();
+    }
+
     public void onExposureNotificationStateChanged(@Nullable ReactContext context, boolean enabled) {
         if (enabled) {
             ProvideDiagnosisKeysWorker.schedule(context);

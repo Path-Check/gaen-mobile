@@ -20,7 +20,6 @@ const AffectedUserStack = (): JSX.Element => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          gestureEnabled: false,
         }}
         initialRouteName={AffectedUserFlowScreens.AffectedUserStart}
       >

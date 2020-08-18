@@ -11,7 +11,7 @@ describe("Complete", () => {
     expect(getByText("Thanks for keeping your community safe!")).toBeDefined()
     expect(
       getByText(
-        "By choosing to share your status and anonymously notify others, you’re helping contain the spread of the virus and protect others in your community.",
+        "You’re helping contain the spread of the virus and protect others in your community.",
       ),
     ).toBeDefined()
   })

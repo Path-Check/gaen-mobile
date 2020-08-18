@@ -10,7 +10,12 @@ import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
 import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import { OnboardingScreens, Screens, Stacks } from "./index"
+import {
+  OnboardingScreens,
+  AffectedUserFlowScreens,
+  Screens,
+  Stacks,
+} from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
@@ -42,6 +47,14 @@ const cardScreenOptions: StackNavigationOptions = {
   cardShadowEnabled: true,
 }
 
+const ProtectPrivacyModal = () => {
+  return <ProtectPrivacy modalStyle />
+}
+
+const ProtectPrivacyCard = () => {
+  return <ProtectPrivacy />
+}
+
 const MainNavigator: FunctionComponent = () => {
   const { onboardingIsComplete } = useOnboardingContext()
 
@@ -59,6 +72,15 @@ const MainNavigator: FunctionComponent = () => {
               <Stack.Screen
                 name={Stacks.AffectedUserStack}
                 component={AffectedUserStack}
+                options={{
+                  ...TransitionPresets.ModalTransition,
+                  ...defaultScreenOptions,
+                  gestureEnabled: false,
+                }}
+              />
+              <Stack.Screen
+                name={AffectedUserFlowScreens.ProtectPrivacy}
+                component={ProtectPrivacyModal}
                 options={{
                   ...TransitionPresets.ModalTransition,
                   ...defaultScreenOptions,
@@ -89,14 +111,14 @@ const MainNavigator: FunctionComponent = () => {
                 options={defaultScreenOptions}
               />
               <Stack.Screen
+                name={OnboardingScreens.ProtectPrivacy}
+                component={ProtectPrivacyCard}
+                options={cardScreenOptions}
+              />
+              <Stack.Screen
                 name={Stacks.Activation}
                 component={ActivationStack}
                 options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={OnboardingScreens.ProtectPrivacy}
-                component={ProtectPrivacy}
-                options={cardScreenOptions}
               />
             </>
           )}

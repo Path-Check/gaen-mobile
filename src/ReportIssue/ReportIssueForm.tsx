@@ -128,7 +128,7 @@ const ReportIssueForm: FunctionComponent = () => {
             <View style={style.errorContainer}>
               <SvgXml
                 xml={Icons.AlertCircle}
-                fill={Colors.primaryRed}
+                fill={Colors.danger100}
                 accessible
                 accessibilityLabel={t("common.alert")}
               />
@@ -205,7 +205,7 @@ const LoadingIndicator = () => {
     <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
-        color={Colors.darkGray}
+        color={Colors.neutral100}
         style={style.activityIndicator}
         testID={"loading-indicator"}
       />
@@ -217,7 +217,7 @@ const style = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: Spacing.medium,
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
   },
   contentContainer: {
     paddingBottom: Spacing.xxLarge,
@@ -225,16 +225,16 @@ const style = StyleSheet.create({
   errorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.lightestGray,
+    backgroundColor: Colors.neutral10,
     marginTop: Spacing.small,
     padding: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,
-    borderColor: Colors.lighterGray,
+    borderColor: Colors.neutral30,
     borderWidth: Outlines.hairline,
   },
   errorText: {
     ...Typography.mainContent,
-    color: Colors.primaryRed,
+    color: Colors.danger100,
     marginLeft: Spacing.small,
   },
   textInputsContainer: {
@@ -271,7 +271,7 @@ const style = StyleSheet.create({
   activityIndicator: {
     width: 100,
     height: 100,
-    backgroundColor: Colors.transparentDarkGray,
+    backgroundColor: Colors.transparentNeutral30,
     borderRadius: Outlines.baseBorderRadius,
   },
 })

@@ -41,10 +41,10 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const { t } = useTranslation()
 
   const determineGradient = (): string[] => {
-    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
-    const disabledGradient = [Colors.tertiaryViolet, Colors.tertiaryViolet]
-    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
-    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
+    const baseGradient = [Colors.primary100, Colors.primary100]
+    const disabledGradient = [Colors.secondary75, Colors.secondary75]
+    const invertedGradient = [Colors.secondary100, Colors.white]
+    const invertedDisabledGradient = [Colors.neutral100, Colors.neutral30]
 
     if (invert && (disabled || loading)) {
       return invertedDisabledGradient
@@ -80,11 +80,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const buttonContainerStyle = {
     ...style.buttonContainer,
     ...determineShadowEnabled(),
+    ...customButtonStyle,
   }
 
   const buttonStyle = {
     ...style.button,
-    ...determineShadowEnabled(),
     ...customButtonStyle,
   }
 
@@ -112,7 +112,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={Colors.white}
+                fill={disabled ? Colors.black : Colors.white}
                 style={style.rightArrow}
                 accessible
                 accessibilityLabel={t("common.next")}
@@ -128,6 +128,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
+    borderRadius: Outlines.borderRadiusMax,
   },
   buttonContainerShadow: {
     ...Outlines.baseShadow,

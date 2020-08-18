@@ -125,6 +125,7 @@ export type AffectedUserFlowScreen =
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
+  | "ProtectPrivacy"
 
 export const AffectedUserFlowScreens: {
   [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
@@ -135,6 +136,7 @@ export const AffectedUserFlowScreens: {
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
+  ProtectPrivacy: "ProtectPrivacy",
 }
 export type Screen =
   | OnboardingScreen
@@ -183,8 +185,8 @@ export type StatusBarStyle = "dark-content" | "light-content"
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   const backgroundColor =
     statusBarStyle === "dark-content"
-      ? Colors.primaryBackground
-      : Colors.primaryViolet
+      ? Colors.primaryLightBackground
+      : Colors.primary125
 
   useFocusEffect(
     useCallback(() => {

@@ -1,5 +1,5 @@
-import React from "react"
-import { StyleSheet, View, ScrollView } from "react-native"
+import React, { FunctionComponent } from "react"
+import { TouchableOpacity, StyleSheet, View, Image } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -7,71 +7,88 @@ import { SvgXml } from "react-native-svg"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-
 import { Screens } from "../navigation"
 
-import { Icons } from "../assets"
-import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
+import { Spacing, Colors, Iconography, Typography, Layout } from "../styles"
+import { Images, Icons } from "../assets"
 
-export const ExportIntro = (): JSX.Element => {
+export const ExportIntro: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  useStatusBarEffect("light-content")
+  useStatusBarEffect("dark-content")
 
   const handleOnPressNext = () => {
     navigation.navigate(Screens.AffectedUserCodeInput)
   }
 
-  const title = t("export.start_body_bluetooth")
-  const body = t("export.start_title_bluetooth")
+  const handleOnPressCancel = () => {
+    navigation.navigate(Screens.Home)
+  }
 
   return (
-    <ScrollView contentContainerStyle={style.contentContainer}>
-      <View style={style.headerContainer}>
-        <View style={style.iconContainerCircle}>
-          <SvgXml
-            xml={Icons.Heart}
-            width={Iconography.small}
-            height={Iconography.small}
-          />
-        </View>
-
-        <GlobalText style={style.header}>{title}</GlobalText>
-        <GlobalText style={style.contentText}>{body}</GlobalText>
+    <View style={style.container}>
+      <View style={style.cancelButtonContainer}>
+        <TouchableOpacity
+          onPress={handleOnPressCancel}
+          accessible
+          accessibilityLabel={t("export.code_input_button_cancel")}
+        >
+          <View style={style.cancelButtonInnerContainer}>
+            <SvgXml
+              xml={Icons.X}
+              fill={Colors.black}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
+      <Image
+        source={Images.PersonAndHealthExpert}
+        style={style.image}
+        accessible
+        accessibilityLabel={t("exoprt.start_image_label")}
+      />
+      <GlobalText style={style.header}>
+        {t("export.start_header_bluetooth")}
+      </GlobalText>
       <View style={style.buttonContainer}>
-        <Button invert label={t("common.start")} onPress={handleOnPressNext} />
+        <Button
+          label={t("common.start")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+        />
       </View>
-    </ScrollView>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
-  contentContainer: {
-    height: "100%",
-    justifyContent: "space-between",
+  container: {
+    flex: 1,
     paddingHorizontal: Spacing.large,
-    paddingVertical: Spacing.xxxHuge,
-    backgroundColor: Colors.primaryBlue,
+    paddingTop: Spacing.huge,
+    backgroundColor: Colors.primary100,
   },
-  headerContainer: {
-    marginBottom: Spacing.xxHuge,
+  cancelButtonContainer: {
+    position: "absolute",
+    top: Layout.oneTwentiethHeight,
+    right: Spacing.xxSmall,
+    zIndex: Layout.zLevel1,
+  },
+  cancelButtonInnerContainer: {
+    padding: Spacing.medium,
+  },
+  image: {
+    width: "100%",
+    height: 300,
+    marginBottom: Spacing.small,
+    resizeMode: "contain",
   },
   header: {
-    ...Typography.header2,
-    color: Colors.white,
-  },
-  iconContainerCircle: {
-    ...Iconography.largeIcon,
-    borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.primaryBackground,
-    marginBottom: Spacing.large,
-  },
-  contentText: {
-    ...Typography.secondaryContent,
-    color: Colors.white,
-    paddingTop: Spacing.medium,
+    ...Typography.header1,
+    marginBottom: Spacing.xLarge,
   },
   buttonContainer: {
     alignSelf: "flex-start",

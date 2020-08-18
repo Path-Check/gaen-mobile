@@ -1,6 +1,7 @@
 const BlueGradientBackground = require("./blueGradientBackground.png")
 const BoxCheckedIcon = require("./boxCheckedIcon.png")
 const BoxUncheckedIcon = require("./boxUncheckedIcon.png")
+const CheckInCircle = require("./checkInCircle.png")
 const CodesAndPhone = require("./codesAndPhone.png")
 const ConcentricCircles = require("./concentricCircles.png")
 const Doctors = require("./doctors.png")
@@ -29,6 +30,7 @@ export const Images = {
   BlueGradientBackground,
   BoxCheckedIcon,
   BoxUncheckedIcon,
+  CheckInCircle,
   CodesAndPhone,
   ConcentricCircles,
   Doctors,

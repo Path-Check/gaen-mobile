@@ -62,14 +62,22 @@
     "reload": "Reload",
     "title": "Unknown Error"
   },
+  "exoprt": {
+    "start_image_label": ""
+  },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
+    "code_input_button_back": "Back",
     "code_input_button_cancel": "Cancel",
     "code_input_title_bluetooth": "Verify your diagnosis",
-    "complete_body_bluetooth": "By choosing to share your status and anonymously notify others, you’re helping contain the spread of the virus and protect others in your community.",
+    "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
-    "consent_button_cancel": "Cancel",
-    "consent_button_title": "I understand and consent",
+    "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
+    "consent_body_1": "If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
+    "consent_body_2": "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
+    "consent_button_title": "I Understand and Consent",
+    "consent_subheader_1": "Why should I share?",
+    "consent_subheader_2": "How does it work?",
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
@@ -77,10 +85,8 @@
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
-    "publish_consent_body_bluetooth": "Sharing your positive diagnosis is optional and can only be done with your consent.\n\nIf you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.\n\nThe only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
-    "publish_consent_title_bluetooth": "Notify your community",
-    "start_body_bluetooth": "Choose to anonymously notify others you may have encountered and help your community contain the spread of the virus.",
-    "start_title_bluetooth": "Help contain the spread of the virus and protect others in your community if you're diagnosed or test positive for COVID-19."
+    "publish_consent_title_bluetooth": "Notify others in your community",
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
     "exposure_detail": {
@@ -120,13 +126,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you crossed paths with later receives a confirmed, positive diagnosis or test for COVID-19 and chooses to notify others"
   },
   "home": {
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth_info_body": "Your phone detects other phones you encounter using Bluetooth Low Energy. This allows the app to keep track of your daily encounters anonymously, even when you don’t have the app open on your device.",
-    "proximity_tracing_info_header": "Proximity Tracing",
-    "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
-    "proximity_tracing_info_subheader_2": "Is my data secure?",
-    "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
-    "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
+    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Enable Bluetooth in the Settings app",
@@ -142,7 +143,12 @@
       "tracing_on_header": "Active",
       "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
       "unauthorized_error_title": "Authorize in Settings"
-    }
+    },
+    "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
+    "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
+    "proximity_tracing_info_header": "Proximity Tracing",
+    "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
+    "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
     "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",

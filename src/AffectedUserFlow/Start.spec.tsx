@@ -10,12 +10,7 @@ describe("Start", () => {
     const { getByText } = render(<Start />)
     expect(
       getByText(
-        "Help contain the spread of the virus and protect others in your community if you're diagnosed or test positive for COVID-19.",
-      ),
-    ).toBeDefined()
-    expect(
-      getByText(
-        "Choose to anonymously notify others you may have encountered and help your community contain the spread of the virus.",
+        "Help contain the spread of the virus and protect others in your community",
       ),
     ).toBeDefined()
   })

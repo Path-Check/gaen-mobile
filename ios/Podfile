@@ -21,7 +21,6 @@ def pods
   pod 'RealmSwift', :modular_headers => true
   pod 'Alamofire', '~> 4.9.1'
   pod 'ZIPFoundation'
-  pod 'Firebase/Crashlytics'
 end
 
 target 'BT' do
