@@ -16,7 +16,6 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
-@import Firebase;
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,9 +34,6 @@
 
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-
-  // Crashlytics
-  [FIRApp configure];
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
