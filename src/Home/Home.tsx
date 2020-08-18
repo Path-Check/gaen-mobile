@@ -117,6 +117,10 @@ const HomeScreen: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(Screens.LanguageSelection)
+  }
+
   const isProximityTracingOn = isEnabledAndAuthorized
   const isBluetoothOn = btStatus
   const appIsActive = isProximityTracingOn && isBluetoothOn
@@ -158,7 +162,7 @@ const HomeScreen: FunctionComponent = () => {
       <ImageBackground style={backgroundImageStyle} source={backgroundImage} />
       <View style={style.languageButtonOuterContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Screens.LanguageSelection)}
+          onPress={handleOnPressSelectLanguage}
           style={style.languageButtonContainer}
         >
           <GlobalText style={style.languageButtonText}>
