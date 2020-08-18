@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 
 import MenuScreen from "./../More/Menu"
 import AboutScreen from "./../More/About"
-import LicensesScreen from "./../More/Licenses"
+import LegalScreen from "./../More/Legal"
 import ENDebugMenu from "./../More/ENDebugMenu"
 import ENLocalDiagnosisKeyScreen from "./../More/ENLocalDiagnosisKeyScreen"
 import ExposureListDebugScreen from "./../More/ExposureListDebugScreen"
@@ -40,8 +40,8 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen name={MoreStackScreens.Menu} component={MenuScreen} />
       <Stack.Screen name={MoreStackScreens.About} component={AboutScreen} />
       <Stack.Screen
-        name={MoreStackScreens.Licenses}
-        component={LicensesScreen}
+        name={MoreStackScreens.Legal}
+        component={LegalScreen}
         options={{ headerTitle: t("screen_titles.legal") }}
       />
       <Stack.Screen
