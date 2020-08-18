@@ -40,8 +40,8 @@ lokalise2 file download \
   --export-empty-as=skip \
   --format strings \
   --include-description \
-  --original-filenames \
-  --placeholder-format=ios \
+  --original-filenames=false \
+  --bundle-structure "%LANG_ISO%.lproj/InfoPlist.strings" \
   --unzip-to=ios \
   --export-sort=a_z \
   --config .lokalise.yml \
@@ -56,7 +56,7 @@ lokalise2 file download \
   --include-description \
   --original-filenames=false \
   --bundle-structure "values-%LANG_ISO%/strings.xml" \
-  --unzip-to=android/app/src/bt/res \
+  --unzip-to=android/app/src/main/res \
   --export-sort=a_z \
   --config .lokalise.yml \
   --token=$LOKALISE_READ_TOKEN \

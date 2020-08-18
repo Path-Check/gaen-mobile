@@ -4,6 +4,9 @@ extension String {
 
   static let `default` = ""
 
+  // API
+  static let revisionToken = "revisionToken"
+
   // EN
   static let notAuthorized = "notAuthorized"
   static let authorized = "authorized"
@@ -22,6 +25,7 @@ extension String {
   // .env
   static let postKeysUrl = "POST_DIAGNOSIS_KEYS_URL"
   static let downloadBaseUrl = "DOWNLOAD_BASE_URL"
+  static let exposureConfigurationUrl = "EXPOSURE_CONFIGURATION_URL"
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
@@ -32,6 +36,7 @@ extension String {
   static let bluetoothNotificationIdentifier = "bluetooth-off"
   static let exposureDetectionErrorNotificationTitle = "Error Detecting Exposures"
   static let exposureDetectionErrorNotificationBody = "An error occurred while attempting to detect exposures."
+  static let newExposureNotificationTitle = "Possible COVID-19 Exposure"
   static let newExposureNotificationBody = "Someone you were near recently has been diagnosed with COVID-19. Tap for more details."
   static let exposureDetectionErrorNotificationIdentifier = "expososure-notification-error"
 

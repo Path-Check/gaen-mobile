@@ -9,6 +9,8 @@ struct ExposureConfiguration: Codable {
   let daysSinceLastExposureLevelValues: [ENRiskLevelValue]
   let durationLevelValues: [ENRiskLevelValue]
   let transmissionRiskLevelValues: [ENRiskLevelValue]
+  let attenuationBucketWeights: [Float]
+  let triggerThresholdWeightedDuration: Int
 
 }
 
@@ -20,7 +22,9 @@ extension ExposureConfiguration {
                           attenuationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
                           daysSinceLastExposureLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
                           durationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
-                          transmissionRiskLevelValues: [1, 2, 3, 4, 5, 6, 7, 8])
+                          transmissionRiskLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
+                          attenuationBucketWeights: [1, 0.5, 0],
+                          triggerThresholdWeightedDuration: 15)
   }()
 
   var asENExposureConfiguration: ENExposureConfiguration {

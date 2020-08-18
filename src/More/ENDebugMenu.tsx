@@ -14,7 +14,7 @@ import { GlobalText } from "../components/GlobalText"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
 
-import { Colors, Spacing, Typography } from "../styles"
+import { Colors, Spacing, Typography, Outlines } from "../styles"
 
 type ENDebugMenuProps = {
   navigation: NavigationProp
@@ -22,6 +22,7 @@ type ENDebugMenuProps = {
 
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const handleBackPress = () => {
       navigation.goBack()
@@ -82,7 +83,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[style.listItem, itemStyle]} onPress={onPress}>
-        <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
+        <GlobalText style={style.listItemText}>{label}</GlobalText>
       </TouchableOpacity>
     )
   }
@@ -97,16 +98,16 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
         <ScrollView>
           <View style={style.section}>
             <DebugMenuListItem
+              label="Simulate Exposure"
+              onPress={handleOnPressSimulationButton(
+                NativeModule.simulateExposure,
+              )}
+            />
+            <DebugMenuListItem
               label="Show Last Processed File Path"
               onPress={handleOnPressSimulationButton(
                 NativeModule.showLastProcessedFilePath,
               )}
-            />
-            <DebugMenuListItem
-              label="Show Exposures"
-              onPress={() => {
-                navigation.navigate(Screens.ExposureListDebugScreen)
-              }}
             />
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
@@ -120,20 +121,14 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 NativeModule.forceAppCrash()
               }}
             />
-            <DebugMenuListItem
-              label="Submit Debug Log"
-              onPress={() => {
-                navigation.navigate(Screens.ENSubmitDebugForm)
-              }}
-            />
           </View>
           {__DEV__ ? (
             <View style={style.section}>
               <DebugMenuListItem
-                label="Simulate Exposure"
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.simulateExposure,
-                )}
+                label="Show Exposures"
+                onPress={() => {
+                  navigation.navigate(Screens.ExposureListDebugScreen)
+                }}
               />
               <DebugMenuListItem
                 label="Toggle Exposure Notifications"
@@ -171,18 +166,21 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
 const style = StyleSheet.create({
   section: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryBackground,
     paddingHorizontal: Spacing.small,
     marginBottom: Spacing.medium,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderTopWidth: Outlines.hairline,
+    borderBottomWidth: Outlines.hairline,
     borderColor: Colors.tertiaryViolet,
   },
   listItem: {
     flex: 1,
     paddingVertical: Spacing.medium,
-    borderBottomWidth: 1,
+    borderBottomWidth: Outlines.hairline,
     borderColor: Colors.tertiaryViolet,
+  },
+  listItemText: {
+    ...Typography.mainContent,
   },
   lastListItem: {
     borderBottomWidth: 0,

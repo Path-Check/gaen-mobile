@@ -147,7 +147,7 @@ const style = StyleSheet.create({
     color: Colors.white,
   },
   card: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.faintGray,
     ...Outlines.roundedBorder,
     borderColor: Colors.white,
     padding: Spacing.large,

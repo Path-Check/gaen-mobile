@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react"
 import {
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View,
   ScrollView,
-  SafeAreaView,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -44,7 +44,9 @@ const History: FunctionComponent<HistoryProps> = ({
   const titleText = t("screen_titles.exposure_history")
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: Colors.primaryBackground }}
+    >
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -83,6 +85,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
 const style = StyleSheet.create({
   contentContainer: {
+    paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xxHuge,
   },
   container: {
@@ -96,12 +99,12 @@ const style = StyleSheet.create({
     marginTop: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.black,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
-    ...Buttons.tinyTeritiaryRounded,
+    ...Buttons.tinyRounded,
     height: Spacing.xxLarge,
     width: Spacing.xxLarge,
   },

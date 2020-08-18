@@ -42,6 +42,18 @@ extension ExposureManager {
                               totalRiskScore: .random(in: 1...8),
                               transmissionRiskLevel: .random(in: 0...7))
       BTSecureStorage.shared.storeExposures([exposure])
+      let content = UNMutableNotificationContent()
+      content.title = String.newExposureNotificationTitle.localized
+      content.body = String.newExposureNotificationBody.localized
+      content.sound = .default
+      let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: nil)
+      UNUserNotificationCenter.current().add(request) { error in
+        DispatchQueue.main.async {
+          if let error = error {
+            print("Error showing error user notification: \(error)")
+          }
+        }
+      }
       resolve("Exposures: \(BTSecureStorage.shared.userState.exposures)")
     case .fetchExposures:
       resolve(currentExposures)
@@ -58,14 +70,6 @@ extension ExposureManager {
     case .showLastProcessedFilePath:
       let path = BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile
       resolve(path)
-    case .fetchDebugLog:
-      let sessionInfo = ["Bundle ID: \(String(describing: Bundle.main.bundleIdentifier))",
-        "build: \(String(describing: Bundle.main.infoDictionary?["CFBundleVersion"]))",
-        "version: \(String(describing: Bundle.main.infoDictionary?["CFBundleVersion"]))",
-        "dateLastPerformedFileCapacityReset: \(String(describing: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset))",
-      "remainingDailyFileProcessingCapacity: \(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity)", "urlOfMostRecentlyDetectedKeyFile: \(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile)",
-        "exposures: \(BTSecureStorage.shared.userState.exposures.map { $0.asDictionary })"]
-      resolve(sessionInfo.joined(separator: ","))
     }
   }
   

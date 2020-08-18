@@ -11,29 +11,33 @@ export const black = "#000000"
 export const white = "#ffffff"
 
 // Grays
-export const faintGray = "#f8f8f8"
+export const faintGray = "#f8f8ff"
 export const lightestGray = "#ededed"
 export const lighterGray = "#d3d3d3"
 export const lightGray = "#999999"
 export const mediumGray = "#606060"
 export const gray = "#333333"
 export const darkGray = "#4e4e4e"
-export const darkestGray = "#2e2e2e"
+export const darkestGray = "#232323"
 export const steelGray = "#9BA0AA"
 
 // Reds
 const red = "#eb0000"
 const emergencyRed = "#D00000"
+const calmRed = "#ff9e9e"
 
 export const primaryRed = red
 export const secondaryRed = emergencyRed
+export const tertiaryRed = calmRed
 
 // Blues
+const persianBlue = "#2434B6"
 const royalBlue = "#4051db"
 const cornflowerBlue = "#5061e6"
 
 export const primaryBlue = royalBlue
 export const secondaryBlue = cornflowerBlue
+export const tertiaryBlue = persianBlue
 
 // Greens
 const shamrockGreen = "#41dca4"
@@ -49,13 +53,12 @@ export const secondaryYellow = champagneYellow
 
 // Violets
 const jacksonsPurple = "#1f2c9b"
-const moonRaker = "#e5e7fa"
-const indigo = "#4754C5"
+const vibrantViolet = "#6e50e4"
 const melrose = "#a5affb"
-const faintViolet = "#f3f3fc"
+const moonRaker = "#d3d7f8"
 
 export const primaryViolet = jacksonsPurple
-export const secondaryViolet = indigo
+export const secondaryViolet = vibrantViolet
 export const tertiaryViolet = moonRaker
 export const quaternaryViolet = melrose
 
@@ -65,8 +68,7 @@ export const transparentDarkGray = applyOpacity(lighterGray, 0.8)
 export const transparentDark = "rgba(0,0,0,0.7)"
 
 // Backgrounds
-export const primaryBackground = faintViolet
-export const primaryBackgroundFaintShade = faintGray
+export const primaryBackground = white
 export const secondaryBackground = moonRaker
 export const tertiaryBackground = lighterGray
 
@@ -93,20 +95,20 @@ export const disabledButton = darkGray
 export const disabledButtonText = quaternaryViolet
 
 // Text
-export const primaryText = darkestGray
+export const primaryText = black
 export const secondaryText = darkGray
 export const tertiaryText = secondaryBlue
 export const invertedText = white
 
-export const primaryHeaderText = primaryViolet
-export const secondaryHeaderText = secondaryViolet
+export const primaryHeaderText = black
+export const secondaryHeaderText = darkestGray
 
 export const linkText = primaryViolet
 export const invertedLinkText = amberYellow
 export const errorText = primaryRed
 
 // Forms
-export const formInputBorder = tertiaryBackground
+export const formInputBorder = lightestGray
 export const placeholderTextColor = lightGray
 
 export const success = primaryGreen

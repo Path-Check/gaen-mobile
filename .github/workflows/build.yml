@@ -37,10 +37,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Set up Ruby 2.7
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby 2.6
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: 2.6.5
 
       - name: Install bundler for ruby package management
         run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" ./Gemfile.lock | tail -n 1)"
@@ -62,6 +62,10 @@ jobs:
           bundle install --jobs 4 --retry 3
         working-directory: ./android
 
+      - name: Set up NDK
+        # This is not the usual sdkmanager path, but it's what Github Actions uses https://github.com/actions/virtual-environments/issues/60
+        run: sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.0.6113669"
+        
       - name: Setup env
         run: ./bin/set_ha_env_github.sh
 
@@ -72,8 +76,8 @@ jobs:
           subdirectory: 'android'
           bundle-install-path: 'vendor/bundle'
 
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v1
         with:
           name: app-bt-debug
-          path: android/app/build/outputs/apk/bt/debug/app-bt-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk

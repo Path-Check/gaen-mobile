@@ -8,13 +8,14 @@ import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-import HomeScreen from "../Home"
+import HomeStack from "./HomeStack"
 import MoreStack from "./MoreStack"
+import ReportIssueStack from "./ReportIssueStack"
 
 import { useExposureContext } from "../ExposureContext"
 
 import { Screens, Stacks } from "./index"
-import * as Icons from "../assets/svgs/TabBarNav"
+import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Affordances, Colors } from "../styles"
 
 const Tab = createBottomTabNavigator()
@@ -40,6 +41,29 @@ const MainTabNavigator: FunctionComponent = () => {
     },
   })
 
+  interface TabIconProps extends TabBarIconProps {
+    icon: string
+    label: string
+  }
+
+  const TabIcon: FunctionComponent<TabIconProps> = ({
+    focused,
+    size,
+    icon,
+    label,
+  }) => {
+    return (
+      <SvgXml
+        xml={icon}
+        fill={focused ? Colors.primaryViolet : Colors.quaternaryViolet}
+        accessible
+        accessibilityLabel={label}
+        width={size}
+        height={size}
+      />
+    )
+  }
+
   interface TabBarIconProps {
     focused: boolean
     size: number
@@ -47,12 +71,11 @@ const MainTabNavigator: FunctionComponent = () => {
 
   const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
-      <SvgXml
-        xml={focused ? Icons.HomeActive : Icons.HomeInactive}
-        accessible
-        accessibilityLabel={t("label.home_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.House}
+        label={t("navigation.home")}
+        focused={focused}
+        size={size}
       />
     )
   }
@@ -62,15 +85,28 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     const tabIcon = (
-      <SvgXml
-        xml={focused ? Icons.HistoryActive : Icons.HistoryInactive}
-        accessible
-        accessibilityLabel={t("label.calendar_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.Exposure}
+        label={t("navigation.exposure_history")}
+        focused={focused}
+        size={size}
       />
     )
     return userHasNewExposure ? applyBadge(tabIcon) : tabIcon
+  }
+
+  const QuestionMarkIcon: FunctionComponent<TabBarIconProps> = ({
+    focused,
+    size,
+  }) => {
+    return (
+      <TabIcon
+        icon={TabBarIcons.QuestionMark}
+        label={t("navigation.report_issue")}
+        focused={focused}
+        size={size}
+      />
+    )
   }
 
   const SelfAssessmentIcon: FunctionComponent<TabBarIconProps> = ({
@@ -78,26 +114,22 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     return (
-      <SvgXml
-        xml={
-          focused ? Icons.SelfAssessmentActive : Icons.SelfAssessmentInactive
-        }
-        accessible
-        accessibilityLabel={t("label.assessment_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.CheckInBox}
+        label={t("navigation.self_assessment")}
+        focused={focused}
+        size={size}
       />
     )
   }
 
   const MoreIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
     return (
-      <SvgXml
-        xml={focused ? Icons.MoreActive : Icons.MoreInactive}
-        accessible
-        accessibilityLabel={t("label.more_icon")}
-        width={size}
-        height={size}
+      <TabIcon
+        icon={TabBarIcons.HorizontalDots}
+        label={t("navigation.more")}
+        focused={focused}
+        size={size}
       />
     )
   }
@@ -107,18 +139,16 @@ const MainTabNavigator: FunctionComponent = () => {
       initialRouteName={Screens.Home}
       tabBarOptions={{
         showLabel: false,
-        activeTintColor: Colors.white,
-        inactiveTintColor: Colors.tertiaryViolet,
         style: {
-          backgroundColor: Colors.headerBackground,
-          borderTopColor: Colors.headerBackground,
+          backgroundColor: Colors.white,
+          borderTopColor: Colors.lighterGray,
           height: insets.bottom + 60,
         },
       }}
     >
       <Tab.Screen
         name={Screens.Home}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarLabel: t("navigation.home"),
           tabBarIcon: HomeIcon,
@@ -128,8 +158,16 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
-          tabBarLabel: t("navigation.history"),
+          tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Stacks.ReportIssue}
+        component={ReportIssueStack}
+        options={{
+          tabBarLabel: t("navigation.report_issue"),
+          tabBarIcon: QuestionMarkIcon,
         }}
       />
       {displaySelfAssessment && (

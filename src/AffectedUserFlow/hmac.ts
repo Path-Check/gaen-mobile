@@ -6,10 +6,6 @@ export const generateKey = async (): Promise<ArrayBuffer> => {
   return await RNSimpleCrypto.utils.randomBytes(32)
 }
 
-export const arrayBufferToString = (arrayBuffer: ArrayBuffer): string => {
-  return RNSimpleCrypto.utils.convertArrayBufferToUtf8(arrayBuffer)
-}
-
 export const calculateHmac = async (
   exposureKeys: ExposureKey[],
 ): Promise<[string, string]> => {
@@ -33,14 +29,14 @@ export const calculateHmac = async (
 }
 
 const serializeKeys = (exposureKeys: ExposureKey[]) => {
-  return exposureKeys.map(serializeExposureKey).join(",")
+  return exposureKeys.map(serializeExposureKey).sort().join(",")
 }
 
 const serializeExposureKey = ({
   key,
-  rollingPeriod,
   rollingStartNumber,
+  rollingPeriod,
   transmissionRisk,
 }: ExposureKey): string => {
-  return [key, rollingPeriod, rollingStartNumber, transmissionRisk].join(".")
+  return [key, rollingStartNumber, rollingPeriod, transmissionRisk].join(".")
 }

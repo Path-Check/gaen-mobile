@@ -19,7 +19,6 @@ describe("ExposureDetail", () => {
       const today = DateTimeUtils.beginningOfDay(Date.now())
 
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: today,
       })
       ;(useRoute as jest.Mock).mockReturnValue({
@@ -35,7 +34,6 @@ describe("ExposureDetail", () => {
     it("formats the timeframe correctly ", () => {
       const fourDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(4))
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: fourDaysAgo,
       })
 
@@ -52,7 +50,6 @@ describe("ExposureDetail", () => {
         DateTimeUtils.daysAgo(7),
       )
       const exposureDatum = factories.exposureDatum.build({
-        kind: "Possible",
         date: sevenDaysAgo,
       })
 
@@ -66,8 +63,8 @@ describe("ExposureDetail", () => {
   describe("when the health authority provides a link", () => {
     it("directs the user to the health authority link", () => {
       const openURLSpy = jest.spyOn(Linking, "openURL")
-      const { getByText } = render(<ExposureDetail />)
-      const nextStepsButton = getByText("Next Steps")
+      const { getByLabelText } = render(<ExposureDetail />)
+      const nextStepsButton = getByLabelText("Next Steps")
       const authorityAdviceUrl = "https://www.health.state.mn.us/"
       fireEvent.press(nextStepsButton)
 

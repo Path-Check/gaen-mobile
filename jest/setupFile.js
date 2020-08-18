@@ -33,6 +33,5 @@ jest.mock(
   "@react-native-community/push-notification-ios",
   () => "push-notification-ios",
 )
-jest.mock("rn-fetch-blob", () => "Blob")
 
 initializei18next(["en"])

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
   ActivityIndicator,
   StyleSheet,
@@ -6,37 +6,87 @@ import {
   TextStyle,
   TouchableOpacity,
 } from "react-native"
+import LinearGradient from "react-native-linear-gradient"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "./GlobalText"
+import { Icons } from "../assets"
 
-import { Buttons, Typography } from "../styles"
+import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
+import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
   onPress: () => void
   loading?: boolean
   disabled?: boolean
-  buttonStyle?: ViewStyle
-  textStyle?: TextStyle
+  customButtonStyle?: ViewStyle
+  customTextStyle?: TextStyle
   invert?: boolean
   testID?: string
+  hasRightArrow?: boolean
 }
 
-export const Button = ({
+export const Button: FunctionComponent<ButtonProps> = ({
   label,
   onPress,
   disabled,
   loading,
-  buttonStyle,
-  textStyle,
+  customButtonStyle,
+  customTextStyle,
   invert,
   testID,
-}: ButtonProps): JSX.Element => {
-  const style = invert ? darkStyle : lightStyle
-  const buttonTextStyle =
-    disabled || loading
-      ? { ...style.text, ...style.textDisabled, ...textStyle }
-      : { ...style.text, ...style.textEnabled, ...textStyle }
+  hasRightArrow,
+}) => {
+  const { t } = useTranslation()
+
+  const determineGradient = (): string[] => {
+    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
+    const disabledGradient = [Colors.tertiaryViolet, Colors.tertiaryViolet]
+    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
+    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
+
+    if (invert && (disabled || loading)) {
+      return invertedDisabledGradient
+    } else if (invert && !(disabled || loading)) {
+      return invertedGradient
+    } else if (!invert && (disabled || loading)) {
+      return disabledGradient
+    } else {
+      return baseGradient
+    }
+  }
+
+  const determineTextStyle = (): TextStyle => {
+    if (invert && (disabled || loading)) {
+      return style.textInvertedDisabled
+    } else if (invert && !(disabled || loading)) {
+      return style.textInverted
+    } else if (!invert && (disabled || loading)) {
+      return style.textDisabled
+    } else {
+      return style.text
+    }
+  }
+  const textStyle = { ...determineTextStyle(), ...customTextStyle }
+
+  const determineShadowEnabled = (): ViewStyle => {
+    if (disabled || loading) {
+      return {}
+    } else {
+      return style.buttonContainerShadow
+    }
+  }
+  const buttonContainerStyle = {
+    ...style.buttonContainer,
+    ...determineShadowEnabled(),
+    ...customButtonStyle,
+  }
+
+  const buttonStyle = {
+    ...style.button,
+    ...customButtonStyle,
+  }
 
   return (
     <TouchableOpacity
@@ -45,47 +95,64 @@ export const Button = ({
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
-      style={[style.button, buttonStyle]}
       testID={testID}
+      style={buttonContainerStyle}
     >
-      {loading ? (
-        <ActivityIndicator size={"large"} />
-      ) : (
-        <GlobalText style={buttonTextStyle}>{label}</GlobalText>
-      )}
+      <LinearGradient
+        start={{ x: 0.2, y: 0.85 }}
+        end={{ x: 0.4, y: 0 }}
+        colors={determineGradient()}
+        style={buttonStyle}
+      >
+        {loading ? (
+          <ActivityIndicator size={"large"} />
+        ) : (
+          <>
+            <GlobalText style={textStyle}>{label}</GlobalText>
+            {hasRightArrow && (
+              <SvgXml
+                xml={Icons.Arrow}
+                fill={disabled ? Colors.black : Colors.white}
+                style={style.rightArrow}
+                accessible
+                accessibilityLabel={t("common.next")}
+              />
+            )}
+          </>
+        )}
+      </LinearGradient>
     </TouchableOpacity>
   )
 }
 
-/* eslint-disable react-native/no-unused-styles */
-const lightStyle = StyleSheet.create({
+const style = StyleSheet.create({
+  buttonContainer: {
+    alignSelf: "center",
+    borderRadius: Outlines.borderRadiusMax,
+  },
+  buttonContainerShadow: {
+    ...Outlines.baseShadow,
+  },
   button: {
-    ...Buttons.largeWhite,
+    ...Buttons.primary,
   },
   text: {
     textAlign: "center",
+    ...Typography.buttonPrimaryText,
   },
-  textEnabled: {
-    ...Typography.buttonTextDark,
-  },
-  textDisabled: {
-    ...Typography.buttonTextDark,
-    opacity: 0.5,
-  },
-})
-
-const darkStyle = StyleSheet.create({
-  button: {
-    ...Buttons.largeBlue,
-  },
-  text: {
+  textInverted: {
     textAlign: "center",
-  },
-  textEnabled: {
-    ...Typography.buttonTextLight,
+    ...Typography.buttonPrimaryInvertedText,
   },
   textDisabled: {
-    ...Typography.buttonTextLight,
-    opacity: 0.5,
+    textAlign: "center",
+    ...Typography.buttonPrimaryDisabledText,
+  },
+  textInvertedDisabled: {
+    textAlign: "center",
+    ...Typography.buttonPrimaryInvertedDisabledText,
+  },
+  rightArrow: {
+    marginLeft: Spacing.medium,
   },
 })

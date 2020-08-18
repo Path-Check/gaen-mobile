@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, Text, Button } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect, Stacks } from "../../navigation"
+import { useStatusBarEffect, Screens } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import PublishConsentForm from "./PublishConsentForm"
 
@@ -19,7 +19,7 @@ const PublishConsentScreen: FunctionComponent = () => {
         <Text>Invalid State</Text>
         <Button
           onPress={() => {
-            navigation.navigate(Stacks.More)
+            navigation.navigate(Screens.Home)
           }}
           title={"Go Back"}
         />

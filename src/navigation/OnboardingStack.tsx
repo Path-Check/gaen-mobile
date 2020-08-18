@@ -1,19 +1,17 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
-
-import NotificationPermissions from "../Onboarding/NotificationPermissions"
-import EnableExposureNotifications from "../Onboarding/EnableExposureNotifications"
-import Welcome from "../Onboarding/Welcome"
-import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
-import NotificationDetails from "../Onboarding/NotificationDetails"
-import ShareDiagnosis from "../Onboarding/ShareDiagnosis"
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from "@react-navigation/stack"
 
 import { OnboardingScreen, OnboardingScreens } from "./index"
-import LanguageSelection from "../More/LanguageSelection"
 
-const SCREEN_OPTIONS = {
-  headerShown: false,
-}
+import Welcome from "../Onboarding/Welcome"
+import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
+import Introduction from "../Onboarding/Introduction"
+import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
+import GetNotified from "../Onboarding/GetNotified"
+import ValueProposition from "../Onboarding/ValueProposition"
 
 type OnboardingStackParams = {
   [key in OnboardingScreen]: undefined
@@ -21,34 +19,36 @@ type OnboardingStackParams = {
 
 const Stack = createStackNavigator<OnboardingStackParams>()
 
-const OnboardingStack: FunctionComponent = () => (
-  <Stack.Navigator screenOptions={SCREEN_OPTIONS}>
-    <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
-    <Stack.Screen
-      name={OnboardingScreens.PersonalPrivacy}
-      component={PersonalPrivacy}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.NotificationDetails}
-      component={NotificationDetails}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.ShareDiagnosis}
-      component={ShareDiagnosis}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.NotificationPermissions}
-      component={NotificationPermissions}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.EnableExposureNotifications}
-      component={EnableExposureNotifications}
-    />
-    <Stack.Screen
-      name={OnboardingScreens.LanguageSelection}
-      component={LanguageSelection}
-    />
-  </Stack.Navigator>
-)
+const onboardingScreenOptions: StackNavigationOptions = {
+  headerShown: false,
+}
+
+const OnboardingStack: FunctionComponent = () => {
+  return (
+    <Stack.Navigator screenOptions={onboardingScreenOptions}>
+      <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
+      <Stack.Screen
+        name={OnboardingScreens.Introduction}
+        component={Introduction}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.PhoneRemembersDevices}
+        component={PhoneRemembersDevices}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.PersonalPrivacy}
+        component={PersonalPrivacy}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.GetNotified}
+        component={GetNotified}
+      />
+      <Stack.Screen
+        name={OnboardingScreens.ValueProposition}
+        component={ValueProposition}
+      />
+    </Stack.Navigator>
+  )
+}
 
 export default OnboardingStack

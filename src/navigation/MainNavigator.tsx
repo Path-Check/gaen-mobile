@@ -2,35 +2,57 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
+  StackNavigationOptions,
 } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
-// import env from "react-native-config"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
+import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import { Screens, Stacks } from "./index"
+import {
+  OnboardingScreens,
+  AffectedUserFlowScreens,
+  Screens,
+  Stacks,
+} from "./index"
 import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
+import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
+import LanguageSelection from "../More/LanguageSelection"
 
-import { Colors } from "../styles"
+import { Headers, Colors } from "../styles"
 
 const Stack = createStackNavigator()
 
-const SCREEN_OPTIONS = {
+const defaultScreenOptions = {
   headerShown: false,
 }
 
-const RIGHT_SLIDING_MODAL_OPTIONS = {
+const headerScreenOptions: StackNavigationOptions = {
   headerStyle: {
-    backgroundColor: Colors.primaryViolet,
+    ...Headers.headerStyle,
   },
   headerTitleStyle: {
-    color: Colors.white,
+    ...Headers.headerTitleStyle,
   },
   headerBackTitleVisible: false,
-  headerTintColor: Colors.white,
+  headerTintColor: Colors.headerText,
+}
+const cardScreenOptions: StackNavigationOptions = {
+  ...TransitionPresets.ModalPresentationIOS,
+  headerShown: false,
+  cardOverlayEnabled: true,
+  cardShadowEnabled: true,
+}
+
+const ProtectPrivacyModal = () => {
+  return <ProtectPrivacy modalStyle />
+}
+
+const ProtectPrivacyCard = () => {
+  return <ProtectPrivacy />
 }
 
 const MainNavigator: FunctionComponent = () => {
@@ -39,45 +61,73 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {onboardingIsComplete ? (
-          <>
-            <Stack.Screen
-              name={"App"}
-              component={MainTabNavigator}
-              options={{ ...SCREEN_OPTIONS }}
-            />
-            <Stack.Screen
-              name={Stacks.AffectedUserStack}
-              component={AffectedUserStack}
-              options={{
-                ...TransitionPresets.ModalTransition,
-                ...SCREEN_OPTIONS,
-              }}
-            />
-            <Stack.Screen
-              name={Screens.MoreInfo}
-              component={MoreInfo}
-              options={{
-                title: "MORE INFO",
-                ...RIGHT_SLIDING_MODAL_OPTIONS,
-              }}
-            />
-            <Stack.Screen
-              name={Screens.ExposureDetail}
-              component={ExposureDetail}
-              options={{
-                title: "EXPOSURE",
-                ...RIGHT_SLIDING_MODAL_OPTIONS,
-              }}
-            />
-          </>
-        ) : (
+        <>
+          {onboardingIsComplete ? (
+            <>
+              <Stack.Screen
+                name={"App"}
+                component={MainTabNavigator}
+                options={defaultScreenOptions}
+              />
+              <Stack.Screen
+                name={Stacks.AffectedUserStack}
+                component={AffectedUserStack}
+                options={{
+                  ...TransitionPresets.ModalTransition,
+                  ...defaultScreenOptions,
+                  gestureEnabled: false,
+                }}
+              />
+              <Stack.Screen
+                name={AffectedUserFlowScreens.ProtectPrivacy}
+                component={ProtectPrivacyModal}
+                options={{
+                  ...TransitionPresets.ModalTransition,
+                  ...defaultScreenOptions,
+                }}
+              />
+              <Stack.Screen
+                name={Screens.MoreInfo}
+                component={MoreInfo}
+                options={{
+                  title: "MORE INFO",
+                  ...headerScreenOptions,
+                }}
+              />
+              <Stack.Screen
+                name={Screens.ExposureDetail}
+                component={ExposureDetail}
+                options={{
+                  title: "EXPOSURE",
+                  ...headerScreenOptions,
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name={Stacks.Onboarding}
+                component={OnboardingStack}
+                options={defaultScreenOptions}
+              />
+              <Stack.Screen
+                name={OnboardingScreens.ProtectPrivacy}
+                component={ProtectPrivacyCard}
+                options={cardScreenOptions}
+              />
+              <Stack.Screen
+                name={Stacks.Activation}
+                component={ActivationStack}
+                options={defaultScreenOptions}
+              />
+            </>
+          )}
           <Stack.Screen
-            name={Stacks.Onboarding}
-            component={OnboardingStack}
-            options={{ ...SCREEN_OPTIONS }}
+            name={Screens.LanguageSelection}
+            component={LanguageSelection}
+            options={cardScreenOptions}
           />
-        )}
+        </>
       </Stack.Navigator>
     </NavigationContainer>
   )
