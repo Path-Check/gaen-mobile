@@ -47,7 +47,7 @@ const style = StyleSheet.create({
     ...Typography.header4,
     ...Typography.bold,
     textTransform: "uppercase",
-    color: Colors.darkestGray,
+    color: Colors.neutral140,
     letterSpacing: Typography.mediumLetterSpacing,
   },
 })

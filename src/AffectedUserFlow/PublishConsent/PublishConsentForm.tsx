@@ -147,7 +147,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             </GlobalText>
             <SvgXml
               xml={Icons.ChevronUp}
-              fill={Colors.primaryBlue}
+              fill={Colors.primary150}
               width={Iconography.xxSmall}
               height={Iconography.xxSmall}
             />
@@ -160,15 +160,15 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
 const style = StyleSheet.create({
   topSafeArea: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   bottomSafeArea: {
     flex: 1,
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
   },
   outerContainer: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   navButtonContainer: {
     flexDirection: "row",
@@ -177,8 +177,8 @@ const style = StyleSheet.create({
     paddingTop: 25,
     width: "100%",
     borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.lightestGray,
-    backgroundColor: Colors.primaryBackground,
+    borderBottomColor: Colors.neutral10,
+    backgroundColor: Colors.primaryLightBackground,
     zIndex: Layout.zLevel1,
   },
   backButtonInnerContainer: {
@@ -213,17 +213,17 @@ const style = StyleSheet.create({
     alignSelf: "flex-start",
   },
   bottomButtonContainer: {
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: Spacing.small,
-    borderTopColor: Colors.lighterGray,
+    borderTopColor: Colors.neutral25,
     borderTopWidth: Outlines.hairline,
   },
   bottomButtonText: {
     ...Typography.header5,
-    color: Colors.primaryBlue,
+    color: Colors.primary100,
     marginRight: Spacing.xSmall,
   },
 })

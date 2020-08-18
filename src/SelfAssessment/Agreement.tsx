@@ -21,7 +21,7 @@ const Agreement: FunctionComponent = () => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.invertedPrimaryBackground}
+      backgroundColor={Colors.primary125}
       icon={Icons.SelfAssessment}
       footer={
         <AgreementFooter
@@ -59,7 +59,8 @@ const AgreementFooter: FunctionComponent<AgreementFooterProps> = ({
 const style = StyleSheet.create({
   typographyStyle: {
     paddingTop: 10,
-    ...Typography.quaternaryContent,
+    ...Typography.tertiaryContent,
+    color: Colors.white,
   },
 })
 

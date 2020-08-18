@@ -89,10 +89,10 @@ const ActivateProximityTracing: FunctionComponent = () => {
 }
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   contentContainer: {
