@@ -22,7 +22,7 @@ export const Share = ({ navigation }) => {
   return (
     <AssessmentLayout
       icon={Icons.AnonymizedDataInverted}
-      backgroundColor={Colors.invertedSecondaryBackground}
+      backgroundColor={Colors.primary125}
       footer={
         <Button
           onPress={handleButtonPress}
@@ -43,7 +43,7 @@ export const Share = ({ navigation }) => {
 
 const style = StyleSheet.create({
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

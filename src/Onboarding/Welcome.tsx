@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react"
 import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 import { getLocalNames } from "../locales/languages"
 import { Button } from "../components"
+import { useApplicationName } from "../More/useApplicationInfo"
 
 import { Images } from "../assets"
 import { Spacing, Colors, Typography, Outlines } from "../styles"
@@ -19,7 +19,7 @@ const Welcome: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  const appName = env.IN_APP_NAME || "PathCheck"
+  const { applicationName } = useApplicationName()
   useStatusBarEffect("dark-content")
 
   return (
@@ -40,7 +40,7 @@ const Welcome: FunctionComponent = () => {
         <GlobalText style={style.mainText}>
           {t("label.launch_screen1_header")}
         </GlobalText>
-        <GlobalText style={style.mainText}>{appName}</GlobalText>
+        <GlobalText style={style.mainText}>{applicationName}</GlobalText>
       </View>
       <Button
         label={t("label.launch_get_started")}
@@ -58,18 +58,18 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
-    borderColor: Colors.primaryViolet,
+    borderColor: Colors.primary125,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.large,
   },
   languageButtonText: {
     ...Typography.base,
     letterSpacing: Typography.mediumLetterSpacing,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
     textAlign: "center",
     textTransform: "uppercase",
   },

@@ -86,7 +86,7 @@ const MenuScreen: FunctionComponent = () => {
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(MoreStackScreens.Licenses)}
+          onPress={() => navigation.navigate(MoreStackScreens.Legal)}
         />
       </View>
       <View style={style.section}>
@@ -101,11 +101,11 @@ const MenuScreen: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   section: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.medium,
   },
   icon: {
@@ -116,7 +116,7 @@ const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.medium,
-    borderBottomColor: Colors.tertiaryViolet,
+    borderBottomColor: Colors.secondary75,
     borderBottomWidth: Outlines.hairline,
   },
   listItemText: {

@@ -148,7 +148,7 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   header: {
     paddingHorizontal: Spacing.medium,
@@ -175,11 +175,11 @@ const style = StyleSheet.create({
   instruction: {
     ...Typography.mediumFont,
     lineHeight: Typography.xSmallLineHeight,
-    color: Colors.secondaryHeaderText,
+    color: Colors.neutral140,
     marginTop: Spacing.xLarge,
   },
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

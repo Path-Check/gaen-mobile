@@ -16,6 +16,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
+import env from "react-native-config"
 
 import {
   usePermissionsContext,
@@ -80,9 +81,13 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
-  const appDownloadLink = "https://pathcheck.org"
-
   const handleOnPressShare = async () => {
+    const isIOS = Platform.OS === "ios"
+
+    const appDownloadLink = isIOS
+      ? env.IOS_APP_STORE_URL
+      : env.ANDROID_PLAY_STORE_URL
+
     try {
       await Share.share({
         message: t("home.bluetooth.share_message", {
@@ -177,12 +182,14 @@ const HomeScreen: FunctionComponent = () => {
               testID={"home-proximity-tracing-status-container"}
             />
           </View>
-          <Button
-            onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-            label={t("home.bluetooth.report_positive_result")}
-            customButtonStyle={style.button}
-            hasRightArrow
-          />
+          <View style={style.buttonContainer}>
+            <Button
+              onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+              label={t("home.bluetooth.report_positive_result")}
+              customButtonStyle={style.button}
+              hasRightArrow
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -208,7 +215,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 
   const bodyText = isActive ? t("common.enabled") : t("common.disabled")
   const icon = isActive ? Icons.CheckInCircle : Icons.XInCircle
-  const iconFill = isActive ? Colors.primaryGreen : Colors.tertiaryRed
+  const iconFill = isActive ? Colors.success100 : Colors.danger75
 
   return (
     <TouchableOpacity
@@ -265,7 +272,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -280,21 +287,21 @@ const style = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   shareContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: Spacing.small,
     paddingLeft: Spacing.small,
-    backgroundColor: Colors.faintGray,
-    borderBottomColor: Colors.lightestGray,
+    backgroundColor: Colors.secondary10,
+    borderBottomColor: Colors.neutral10,
     borderBottomWidth: Outlines.hairline,
   },
   shareImageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.tertiaryViolet,
+    backgroundColor: Colors.secondary50,
     borderRadius: Outlines.borderRadiusMax,
     width: Iconography.medium,
     height: Iconography.medium,
@@ -323,7 +330,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.large,
     marginHorizontal: Spacing.small,
     borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.lightestGray,
+    borderBottomColor: Colors.neutral10,
   },
   activationStatusLeftContainer: {
     flexDirection: "row",
@@ -338,7 +345,7 @@ const style = StyleSheet.create({
   },
   fixContainer: {
     alignItems: "center",
-    backgroundColor: Colors.tertiaryRed,
+    backgroundColor: Colors.danger75,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,
@@ -356,8 +363,13 @@ const style = StyleSheet.create({
   bottomBodyText: {
     ...Typography.secondaryContent,
   },
-  button: {
+  buttonContainer: {
     marginBottom: Spacing.large,
+    paddingHorizontal: Spacing.small,
+  },
+  button: {
+    alignSelf: "center",
+    width: "100%",
   },
 })
 

@@ -33,7 +33,7 @@ describe("PublishConsentScreen", () => {
       </ExposureContext.Provider>,
     )
 
-    expect(getByText("Notify your community")).toBeDefined()
+    expect(getByText("Notify others in your community")).toBeDefined()
     expect(
       getByText(
         /Sharing your positive diagnosis is optional and can only be done with your consent./,
@@ -41,7 +41,7 @@ describe("PublishConsentScreen", () => {
     ).toBeDefined()
     expect(
       getByText(
-        /If you choose to do so, you're helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus./,
+        /If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus./,
       ),
     ).toBeDefined()
     expect(
@@ -69,7 +69,7 @@ describe("PublishConsentScreen", () => {
         </ExposureContext.Provider>,
       )
 
-      fireEvent.press(getByLabelText("I understand and consent"))
+      fireEvent.press(getByLabelText("I Understand and Consent"))
 
       await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
@@ -97,7 +97,7 @@ describe("PublishConsentScreen", () => {
         </ExposureContext.Provider>,
       )
 
-      fireEvent.press(getByLabelText("I understand and consent"))
+      fireEvent.press(getByLabelText("I Understand and Consent"))
 
       await waitFor(() => {
         expect(submitDiagnosisKeysSpy).toHaveBeenCalledWith(
