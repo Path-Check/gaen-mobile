@@ -20,15 +20,16 @@ const Licenses: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
 
-  const infoEmailAddress = "info@pathcheck.org"
-  const infoEmailLink = "mailto:info@pathcheck.org"
-  const pathCheckWebAddress = "pathcheck.org"
-  const pathCheckUrl = "https://pathcheck.org/"
   const privacyPolicyUrl =
     env.PRIVACY_POLICY_URL || "https://pathcheck.org/privacy-policy/"
   const healthAuthorityName =
     env.GAEN_AUTHORITY_NAME || "PathCheck Organization"
-
+  const haAddressLine1 = env.GAEN_AUTHORITY_ADDRESS_LINE_1 || "58 Day Street"
+  const haAddressLine2 = env.GAEN_AUTHORITY_ADDRESS_LINE_2 || "Box 441621"
+  const haAddressLine3 =
+    env.GAEN_AUTHORITY_ADDRESS_LINE_3 || "Somerville, MA 02144"
+  const haAddressLine4 = env.GAEN_AUTHORITY_ADDRESS_LINE_4 || "USA"
+  const healthAuthorityURL = env.GAEN_AUTHORITY_URL || "https://pathcheck.org"
 
   return (
     <>
@@ -43,20 +44,24 @@ const Licenses: FunctionComponent = () => {
           >
             {applicationName}
           </GlobalText>
-          <GlobalText style={style.contentText}>
-            {healthAuthorityName}
-          </GlobalText>
+          <View style={style.contentTextContainer}>
+            <GlobalText style={style.contentText}>
+              {healthAuthorityName}
+            </GlobalText>
+            <GlobalText style={style.contentText}>{haAddressLine1}</GlobalText>
+            {haAddressLine2 !== "N/A" && (
+              <GlobalText style={style.contentText}>
+                {haAddressLine2}
+              </GlobalText>
+            )}
+            <GlobalText style={style.contentText}>{haAddressLine3}</GlobalText>
+            <GlobalText style={style.contentText}>{haAddressLine4}</GlobalText>
+          </View>
           <GlobalText
-            onPress={() => Linking.openURL(infoEmailLink)}
+            onPress={() => Linking.openURL(healthAuthorityURL)}
             style={style.hyperlink}
           >
-            {infoEmailAddress}
-          </GlobalText>
-          <GlobalText
-            onPress={() => Linking.openURL(pathCheckUrl)}
-            style={style.hyperlink}
-          >
-            {pathCheckWebAddress}
+            {healthAuthorityURL}
           </GlobalText>
         </View>
       </ScrollView>
@@ -85,10 +90,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
     color: Colors.primary150,
   },
+  contentTextContainer: {
+    marginBottom: Spacing.small,
+  },
   contentText: {
     ...Typography.secondaryContent,
     ...Typography.mediumBold,
-    marginBottom: Spacing.small,
     color: Colors.primary110,
   },
   hyperlink: {

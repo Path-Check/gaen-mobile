@@ -1,13 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import {
-  Linking,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native"
+import { Linking, Platform, ScrollView, StyleSheet, View } from "react-native"
 import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
@@ -19,11 +12,11 @@ export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
 
   const osInfo = `${Platform.OS} v${Platform.Version}`
-  const pathCheckWebAddress = "pathcheck.org"
-  const pathCheckUrl = "https://pathcheck.org/"
   const { applicationName, versionInfo } = useApplicationInfo()
   const healthAuthorityName =
     env.GAEN_AUTHORITY_NAME || "PathCheck Organization"
+  const healthAuthorityCOVIDURL =
+    env.GAEN_AUTHORITY_COVID_URL || "https://pathcheck.org"
 
   return (
     <ScrollView
@@ -34,15 +27,15 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
-        {t("label.about_para", {applicationName, healthAuthorityName})}
+        {t("label.about_para", { applicationName, healthAuthorityName })}
       </GlobalText>
       <GlobalText
         style={style.hyperlink}
         onPress={() => {
-          Linking.openURL(pathCheckUrl)
+          Linking.openURL(healthAuthorityCOVIDURL)
         }}
       >
-        <Text>{pathCheckWebAddress}</Text>
+        {healthAuthorityCOVIDURL}
       </GlobalText>
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
