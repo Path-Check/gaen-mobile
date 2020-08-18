@@ -125,25 +125,33 @@ const HomeScreen: FunctionComponent = () => {
   const isBluetoothOn = btStatus
   const appIsActive = isProximityTracingOn && isBluetoothOn
 
+  const iosMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 10
+  const androidMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 30
   const bottomContainerStyle = {
     ...style.bottomContainer,
     maxHeight: Platform.select({
-      ios: insets.bottom + Layout.screenHeight * 0.475,
-      android: insets.bottom + Layout.screenHeight * 0.475 - 50,
+      ios: iosMaxHeight,
+      android: androidMaxHeight,
     }),
   }
+
+  const iosTopSpacing = Layout.screenHeight * 0.225 - insets.top + 55
+  const androidTopSpacing = Layout.screenHeight * 0.225 - insets.top + 80
   const textContainerStyle = {
     ...style.textContainer,
     top: Platform.select({
-      ios: Layout.screenHeight * 0.225 - insets.top + 55,
-      android: Layout.screenHeight * 0.225 - insets.top + 80,
+      ios: iosTopSpacing,
+      android: androidTopSpacing,
     }),
   }
+
+  const iosPaddingTop = Layout.screenHeight * 0.5 - insets.top + 300
+  const androidPaddingTop = 680
   const backgroundImageStyle = {
     ...style.backgroundImage,
     paddingTop: Platform.select({
-      ios: Layout.screenHeight * 0.5 - insets.top + 300,
-      android: 680,
+      ios: iosPaddingTop,
+      android: androidPaddingTop,
     }),
   }
 
