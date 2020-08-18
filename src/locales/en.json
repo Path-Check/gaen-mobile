@@ -231,6 +231,7 @@
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
+    "exposures": "Exposures",
     "exposure_history": "Exposure History",
     "legal": "Legal",
     "report_issue": "Report an Issue"
