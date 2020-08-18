@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from "react-native"
+import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 
@@ -21,6 +22,8 @@ export const AboutScreen: FunctionComponent = () => {
   const pathCheckWebAddress = "pathcheck.org"
   const pathCheckUrl = "https://pathcheck.org/"
   const { applicationName, versionInfo } = useApplicationInfo()
+  const healthAuthorityName =
+    env.GAEN_AUTHORITY_NAME || "PathCheck Organization"
 
   return (
     <ScrollView
@@ -31,7 +34,7 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
-        {t("label.about_para", {applicationName})}
+        {t("label.about_para", {applicationName, healthAuthorityName})}
       </GlobalText>
       <GlobalText
         style={style.hyperlink}

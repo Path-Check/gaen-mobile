@@ -26,6 +26,9 @@ const Licenses: FunctionComponent = () => {
   const pathCheckUrl = "https://pathcheck.org/"
   const privacyPolicyUrl =
     env.PRIVACY_POLICY_URL || "https://pathcheck.org/privacy-policy/"
+  const healthAuthorityName =
+    env.GAEN_AUTHORITY_NAME || "PathCheck Organization"
+
 
   return (
     <>
@@ -41,7 +44,7 @@ const Licenses: FunctionComponent = () => {
             {applicationName}
           </GlobalText>
           <GlobalText style={style.contentText}>
-            {t("label.legal_page_address")}
+            {healthAuthorityName}
           </GlobalText>
           <GlobalText
             onPress={() => Linking.openURL(infoEmailLink)}
