@@ -60,18 +60,20 @@ const NotificationsPermissions: FunctionComponent = () => {
             {t("onboarding.notification_subheader3")}
           </GlobalText>
         </View>
-        <Button
-          onPress={handleOnPressEnable}
-          label={t("label.launch_enable_notif")}
-        />
-        <TouchableOpacity
-          onPress={handleOnPressMaybeLater}
-          style={style.secondaryButton}
-        >
-          <GlobalText style={style.secondaryButtonText}>
-            {t("common.maybe_later")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.buttonsContainer}>
+          <Button
+            onPress={handleOnPressEnable}
+            label={t("label.launch_enable_notif")}
+          />
+          <TouchableOpacity
+            onPress={handleOnPressMaybeLater}
+            style={style.secondaryButton}
+          >
+            <GlobalText style={style.secondaryButtonText}>
+              {t("common.maybe_later")}
+            </GlobalText>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )
@@ -103,6 +105,9 @@ const style = StyleSheet.create({
   body: {
     ...Typography.mainContent,
     marginBottom: Spacing.xxLarge,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,

@@ -182,12 +182,14 @@ const HomeScreen: FunctionComponent = () => {
               testID={"home-proximity-tracing-status-container"}
             />
           </View>
-          <Button
-            onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-            label={t("home.bluetooth.report_positive_result")}
-            customButtonStyle={style.button}
-            hasRightArrow
-          />
+          <View style={style.buttonContainer}>
+            <Button
+              onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+              label={t("home.bluetooth.report_positive_result")}
+              customButtonStyle={style.button}
+              hasRightArrow
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -270,7 +272,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -361,8 +363,13 @@ const style = StyleSheet.create({
   bottomBodyText: {
     ...Typography.secondaryContent,
   },
-  button: {
+  buttonContainer: {
     marginBottom: Spacing.large,
+    paddingHorizontal: Spacing.small,
+  },
+  button: {
+    alignSelf: "center",
+    width: "100%",
   },
 })
 

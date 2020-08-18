@@ -3,26 +3,26 @@ import { TextStyle } from "react-native"
 import * as Colors from "./colors"
 
 // Font Size
-export const xxxSmall = 11
-export const xxSmall = 12
-export const xSmall = 13
-export const small = 15
-export const medium = 17
-export const large = 19
-export const xLarge = 22
-export const xxLarge = 28
-export const xxxLarge = 34
+export const xxxSmall = 10
+export const xxSmall = 11
+export const xSmall = 12
+export const small = 13
+export const medium = 15
+export const large = 17
+export const xLarge = 19
+export const xxLarge = 24
+export const xxxLarge = 28
 
 // Line Height
-export const xxxSmallLineHeight = 12
-export const xxSmallLineHeight = 14
-export const xSmallLineHeight = 16
-export const smallLineHeight = 20
-export const mediumLineHeight = 24
-export const largeLineHeight = 28
-export const xLargeLineHeight = 32
-export const xxLargeLineHeight = 36
-export const xxxLargeLineHeight = 42
+export const xxxSmallLineHeight = 10
+export const xxSmallLineHeight = 12
+export const xSmallLineHeight = 14
+export const smallLineHeight = 18
+export const mediumLineHeight = 22
+export const largeLineHeight = 24
+export const xLargeLineHeight = 28
+export const xxLargeLineHeight = 32
+export const xxxLargeLineHeight = 36
 
 // Letter Spacing
 export const baseLetterSpacing = 0.25
