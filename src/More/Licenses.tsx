@@ -81,12 +81,15 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header3,
+    ...Typography.header2,
     marginBottom: Spacing.small,
+    color: Colors.primary150,
   },
   contentText: {
     ...Typography.secondaryContent,
+    ...Typography.mediumBold,
     marginBottom: Spacing.small,
+    color: Colors.primary110,
   },
   hyperlink: {
     ...Typography.secondaryContent,

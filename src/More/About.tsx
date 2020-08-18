@@ -74,8 +74,9 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header3,
+    ...Typography.header2,
     marginBottom: Spacing.small,
+    color: Colors.primary150,
   },
   hyperlink: {
     ...Typography.secondaryContent,
@@ -87,6 +88,8 @@ const style = StyleSheet.create({
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
+    ...Typography.semiBold,
+    color: Colors.primary150,
     width: 100,
     marginTop: Spacing.small,
   },
