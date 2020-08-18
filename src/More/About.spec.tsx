@@ -42,9 +42,11 @@ describe("About", () => {
 
     const { getByText } = render(<AboutScreen />)
 
-    fireEvent.press(getByText("pathcheck.org"))
+    // The constants are taken from "__mocks__/react-native-config.js"
+    fireEvent.press(getByText("GAEN_AUTHORITY_COVID_URL"))
 
-    expect(openURLSpy).toHaveBeenCalledWith("https://pathcheck.org/")
+    // The constants are taken from "__mocks__/react-native-config.js"
+    expect(openURLSpy).toHaveBeenCalledWith("GAEN_AUTHORITY_COVID_URL")
   })
 
   it("shows the OS name and version", () => {
