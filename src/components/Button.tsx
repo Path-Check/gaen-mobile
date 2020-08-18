@@ -41,7 +41,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const { t } = useTranslation()
 
   const determineGradient = (): string[] => {
-    const baseGradient = [Colors.primary100, Colors.primary100]
+    const baseGradient = [Colors.primary125, Colors.primary100]
     const disabledGradient = [Colors.secondary75, Colors.secondary75]
     const invertedGradient = [Colors.secondary100, Colors.white]
     const invertedDisabledGradient = [Colors.neutral100, Colors.neutral30]
