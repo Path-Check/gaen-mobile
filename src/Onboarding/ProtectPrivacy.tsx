@@ -10,9 +10,9 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
+import { useApplicationName } from "../More/useApplicationInfo"
 import { useStatusBarEffect } from "../navigation"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
@@ -27,7 +27,7 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
 }) => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const applicationName = env.IN_APP_NAME
+  const { applicationName } = useApplicationName()
   useStatusBarEffect("dark-content")
 
   const headerContainerConditionalStyle = modalStyle && {
