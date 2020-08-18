@@ -129,20 +129,20 @@ const HomeScreen: FunctionComponent = () => {
     ...style.bottomContainer,
     maxHeight: Platform.select({
       ios: insets.bottom + Layout.screenHeight * 0.475,
-      android: insets.bottom + Layout.screenHeight * 0.475 + 30,
+      android: insets.bottom + Layout.screenHeight * 0.475 - 50,
     }),
   }
   const textContainerStyle = {
     ...style.textContainer,
     top: Platform.select({
-      ios: Layout.screenHeight * 0.225 - insets.top + 70,
+      ios: Layout.screenHeight * 0.225 - insets.top + 55,
       android: Layout.screenHeight * 0.225 - insets.top + 80,
     }),
   }
   const backgroundImageStyle = {
     ...style.backgroundImage,
     paddingTop: Platform.select({
-      ios: 630,
+      ios: Layout.screenHeight * 0.5 - insets.top + 300,
       android: 680,
     }),
   }
@@ -178,8 +178,8 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <SafeAreaView style={style.safeArea}>
-        <ScrollView style={bottomContainerStyle}>
+      <SafeAreaView style={bottomContainerStyle}>
+        <ScrollView contentContainerStyle={style.bottomContentContainer}>
           <TouchableOpacity
             style={style.shareContainer}
             onPress={handleOnPressShare}
@@ -287,14 +287,10 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 }
 
 const style = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
   container: {
     flex: 1,
   },
   backgroundImage: {
-    flex: 1,
     width: "100%",
   },
   languageButtonOuterContainer: {
@@ -340,6 +336,9 @@ const style = StyleSheet.create({
     bottom: 0,
     width: "100%",
     backgroundColor: Colors.primaryLightBackground,
+  },
+  bottomContentContainer: {
+    paddingBottom: Spacing.large,
   },
   shareContainer: {
     flexDirection: "row",
@@ -416,7 +415,6 @@ const style = StyleSheet.create({
     ...Typography.secondaryContent,
   },
   buttonContainer: {
-    marginBottom: Spacing.large,
     paddingHorizontal: Spacing.small,
   },
   button: {
