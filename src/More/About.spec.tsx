@@ -1,6 +1,5 @@
 import React from "react"
-import { Linking } from "react-native"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
 import { useApplicationInfo } from "./useApplicationInfo"
@@ -31,22 +30,6 @@ describe("About", () => {
 
     expect(getByText("Version:")).toBeDefined()
     expect(getByText(versionInfo)).toBeDefined()
-  })
-
-  it("navigates to the pathcheck organization when tapped on the url", () => {
-    const openURLSpy = jest.spyOn(Linking, "openURL")
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName: "name",
-      versionInfo: "versionInfo",
-    })
-
-    const { getByText } = render(<AboutScreen />)
-
-    // The constants are taken from "__mocks__/react-native-config.js"
-    fireEvent.press(getByText("GAEN_AUTHORITY_COVID_URL"))
-
-    // The constants are taken from "__mocks__/react-native-config.js"
-    expect(openURLSpy).toHaveBeenCalledWith("GAEN_AUTHORITY_COVID_URL")
   })
 
   it("shows the OS name and version", () => {

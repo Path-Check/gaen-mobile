@@ -1,6 +1,7 @@
 {
   "_display_name": "English",
   "about": {
+    "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}",
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },

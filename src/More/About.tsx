@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import { Linking, Platform, ScrollView, StyleSheet, View } from "react-native"
+import { Platform, ScrollView, StyleSheet, View } from "react-native"
 import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
@@ -10,13 +10,9 @@ import { useApplicationInfo } from "./useApplicationInfo"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
-
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
-  const healthAuthorityName =
-    env.GAEN_AUTHORITY_NAME || "PathCheck Organization"
-  const healthAuthorityCOVIDURL =
-    env.GAEN_AUTHORITY_COVID_URL || "https://pathcheck.org"
+  const { GAEN_AUTHORITY_NAME: healthAuthorityName } = env
 
   return (
     <ScrollView
@@ -27,15 +23,7 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
-        {t("label.about_para", { applicationName, healthAuthorityName })}
-      </GlobalText>
-      <GlobalText
-        style={style.hyperlink}
-        onPress={() => {
-          Linking.openURL(healthAuthorityCOVIDURL)
-        }}
-      >
-        {healthAuthorityCOVIDURL}
+        {t("about.description", { applicationName, healthAuthorityName })}
       </GlobalText>
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
@@ -70,11 +58,6 @@ const style = StyleSheet.create({
     ...Typography.header2,
     marginBottom: Spacing.small,
     color: Colors.primary150,
-  },
-  hyperlink: {
-    ...Typography.secondaryContent,
-    color: Colors.linkText,
-    textDecorationLine: "underline",
   },
   aboutContent: {
     ...Typography.secondaryContent,
