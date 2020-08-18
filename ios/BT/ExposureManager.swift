@@ -48,6 +48,10 @@ final class ExposureManager: NSObject {
   
   /// Local urls of the bin/sig files from each archive
   private var localUncompressedURLs = [URL]()
+
+  private var dev: String? {
+    ReactNativeConfig.env(for: .dev)
+  }
   
   override init() {
     super.init()
@@ -297,7 +301,7 @@ final class ExposureManager: NSObject {
                                      HMACKey: String,
                                      resolve: @escaping RCTPromiseResolveBlock,
                                      reject: @escaping RCTPromiseRejectBlock) {
-    manager.getDiagnosisKeys { temporaryExposureKeys, error in
+    manager.getDiagnosisKeys { [weak self] temporaryExposureKeys, error in
       if let error = error {
         reject(String.noExposureKeysFound, "Failed to get exposure keys", error)
       } else {
@@ -314,14 +318,18 @@ final class ExposureManager: NSObject {
         
         let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
 
-        let revisionToken = BTSecureStorage.shared.userState.revisionToken
+        let revisionToken = self?.dev != nil ? BTSecureStorage.shared.userState.revisionTokenDev : BTSecureStorage.shared.userState.revisionToken
         
         APIClient.shared.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey, revisionToken),
-                                 requestType: .postKeys) { result in
+                                 requestType: .postKeys) { [weak self] result in
                                   switch result {
                                   case .success(let response):
                                     // Save revisionToken to use on subsequent key submission requests
-                                    BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
+                                    if self?.dev != nil {
+                                      BTSecureStorage.shared.revisionTokenDev = response.revisionToken ?? .default
+                                    } else {
+                                      BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
+                                    }
                                     resolve("Submitted: \(currentKeys.count) keys.")
                                   case .failure(let error):
                                     reject(String.networkFailure, "Failed to post exposure keys \(error.localizedDescription)", error)
