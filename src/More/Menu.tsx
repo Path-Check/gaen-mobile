@@ -86,7 +86,7 @@ const MenuScreen: FunctionComponent = () => {
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(MoreStackScreens.Licenses)}
+          onPress={() => navigation.navigate(MoreStackScreens.Legal)}
         />
       </View>
       <View style={style.section}>

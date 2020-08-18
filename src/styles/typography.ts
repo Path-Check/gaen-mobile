@@ -207,6 +207,12 @@ export const tappableListItem: TextStyle = {
   color: Colors.primary125,
 }
 
+export const link: TextStyle = {
+  ...mainContent,
+  color: Colors.linkText,
+  textDecorationLine: "underline",
+}
+
 // Buttons
 const baseButtonText: TextStyle = {
   ...largeFont,

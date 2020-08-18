@@ -5,7 +5,7 @@ import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 import { useApplicationName } from "./useApplicationInfo"
 
-import LicensesScreen from "./Licenses"
+import LegalScreen from "./Legal"
 
 jest.mock("@react-navigation/native")
 jest.mock("./useApplicationInfo")
@@ -20,7 +20,7 @@ describe("LicensesScreen", () => {
       applicationName,
     })
 
-    const { getByText } = render(<LicensesScreen />)
+    const { getByText } = render(<LegalScreen />)
 
     await waitFor(() => {
       expect(getByText(applicationName)).toBeDefined()
