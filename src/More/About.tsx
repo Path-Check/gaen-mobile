@@ -31,7 +31,7 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
-        {t("label.about_para")}
+        {t("label.about_para", {applicationName})}
       </GlobalText>
       <GlobalText
         style={style.hyperlink}

@@ -151,7 +151,7 @@
     "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
-    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",
+    "about_para": "The {{applicationName}} app is made available by the Minnesota Department of Health. \n\nFor more information, visit:",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "language_icon": "Outlined icon of a globe",
