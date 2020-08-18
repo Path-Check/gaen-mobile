@@ -22,11 +22,12 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
+import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { isPlatformiOS } from "../utils/index"
+import { getLocalNames } from "../locales/languages"
 
 import { Icons, Images } from "../assets"
 import {
@@ -40,7 +41,11 @@ import {
 import { useBluetoothStatus } from "./useBluetoothStatus"
 
 const HomeScreen: FunctionComponent = () => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
+  const languageName = getLocalNames()[localeCode]
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
   const [
@@ -118,7 +123,24 @@ const HomeScreen: FunctionComponent = () => {
 
   const bottomContainerStyle = {
     ...style.bottomContainer,
-    maxHeight: insets.bottom + Layout.screenHeight * 0.475,
+    maxHeight: Platform.select({
+      ios: insets.bottom + Layout.screenHeight * 0.475,
+      android: insets.bottom + Layout.screenHeight * 0.475 + 30,
+    }),
+  }
+  const textContainerStyle = {
+    ...style.textContainer,
+    top: Platform.select({
+      ios: Layout.screenHeight * 0.225 - insets.top + 70,
+      android: Layout.screenHeight * 0.225 - insets.top + 80,
+    }),
+  }
+  const backgroundImageStyle = {
+    ...style.backgroundImage,
+    paddingTop: Platform.select({
+      ios: 630,
+      android: 680,
+    }),
   }
 
   const backgroundImage = appIsActive ? Images.HomeActive : Images.HomeInactive
@@ -133,8 +155,18 @@ const HomeScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      <ImageBackground style={style.backgroundImage} source={backgroundImage} />
-      <View style={style.textContainer}>
+      <ImageBackground style={backgroundImageStyle} source={backgroundImage} />
+      <View style={style.languageButtonOuterContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(Screens.LanguageSelection)}
+          style={style.languageButtonContainer}
+        >
+          <GlobalText style={style.languageButtonText}>
+            {languageName}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+      <View style={textContainerStyle}>
         <GlobalText style={style.headerText} testID={"home-header"}>
           {headerText}
         </GlobalText>
@@ -250,8 +282,6 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   )
 }
 
-const backgroundImagePaddingTop = Platform.select({ ios: 500, android: 570 })
-
 const style = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -261,14 +291,31 @@ const style = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    paddingTop: backgroundImagePaddingTop,
     width: "100%",
+  },
+  languageButtonOuterContainer: {
+    position: "absolute",
+    top: Layout.oneTwentiethHeight,
+    width: "100%",
+  },
+  languageButtonContainer: {
+    ...Outlines.ovalBorder,
+    alignSelf: "center",
+    borderColor: Colors.primary125,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
+  },
+  languageButtonText: {
+    ...Typography.base,
+    letterSpacing: Typography.mediumLetterSpacing,
+    color: Colors.primary125,
+    textAlign: "center",
+    textTransform: "uppercase",
   },
   textContainer: {
     alignSelf: "center",
     marginHorizontal: Spacing.medium,
     position: "absolute",
-    top: "27.5%",
     alignItems: "center",
   },
   headerText: {
