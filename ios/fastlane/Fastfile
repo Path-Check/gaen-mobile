@@ -26,7 +26,7 @@ platform :ios do
         owner_name: "PathCheck",
         app_name: options[:appName],
         notify_testers: false,
-        destinations: "Collaborators",
+        destinations: options[:destinations],        
         release_notes: changeLogs,
         file: options[:ipa_path]
       )
