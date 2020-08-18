@@ -10,7 +10,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>COVIDaware MN</string>
+	<string>PathCheck BT</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,7 +30,7 @@
 	<key>ENAPIVersion</key>
 	<string>1</string>
 	<key>ENDeveloperRegion</key>
-	<string>US-MN</string>
+	<string>PC</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
