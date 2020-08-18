@@ -152,14 +152,12 @@
     "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
-    "about_para": "The {{applicationName}} app is made available by the {{healthAuthorityName}}. \n\nFor more information, visit:",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
-    "legal_page_address": "{{healthAuthorityName}}\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox",
