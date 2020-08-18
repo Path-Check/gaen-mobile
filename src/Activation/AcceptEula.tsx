@@ -70,6 +70,10 @@ const AcceptEula: FunctionComponent = () => {
     loadEula()
   }, [eulaPath])
 
+  const handleOnPressNext = () => {
+    navigation.navigate(ActivationScreens.ActivateProximityTracing)
+  }
+
   const checkboxIcon = boxChecked
     ? Icons.CheckboxChecked
     : Icons.CheckboxUnchecked
@@ -110,9 +114,7 @@ const AcceptEula: FunctionComponent = () => {
           </GlobalText>
         </TouchableOpacity>
         <Button
-          onPress={() =>
-            navigation.navigate(ActivationScreens.ActivateProximityTracing)
-          }
+          onPress={handleOnPressNext}
           disabled={!boxChecked}
           label={t("common.continue")}
         />
