@@ -22,6 +22,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - KeychainAccess (4.2.0)
   - Permission-Notifications (2.1.4):
     - RNPermissions
   - RCTRequired (0.63.2)
@@ -296,6 +297,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - KeychainAccess
   - Permission-Notifications (from `../node_modules/react-native-permissions/ios/Notifications.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -343,6 +345,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - boost-for-react-native
+    - KeychainAccess
     - Realm
     - RealmSwift
     - ZIPFoundation
@@ -439,11 +442,12 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3ef4a7f62e7db01092f9d517d2ebc0d0677c4a37
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
   Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
   RCTRequired: f13f25e7b12f925f1f6a6a8c69d929a03c0129fe
   RCTTypeSafety: 44982c5c8e43ff4141eb519a8ddc88059acd1f3a
@@ -485,6 +489,6 @@ SPEC CHECKSUMS:
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: e3be6726cc76b5fd46f64f9b1b88a37efee915a4
+PODFILE CHECKSUM: b4befbd0d301df7ef78c13986fb64ac31b61102f
 
 COCOAPODS: 1.9.3
