@@ -10,6 +10,7 @@ import {
   OnboardingProvider,
   onboardingHasBeenCompleted,
 } from "./src/OnboardingContext"
+import { TestModeProvider } from "./src/TestModeContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 
@@ -36,13 +37,17 @@ const App: FunctionComponent = () => {
     <>
       {!isLoading ? (
         <ErrorBoundary>
-          <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
-            <PermissionsProvider>
-              <ExposureProvider>
-                <MainNavigator />
-              </ExposureProvider>
-            </PermissionsProvider>
-          </OnboardingProvider>
+          <TestModeProvider>
+            <OnboardingProvider
+              userHasCompletedOboarding={onboardingIsComplete}
+            >
+              <PermissionsProvider>
+                <ExposureProvider>
+                  <MainNavigator />
+                </ExposureProvider>
+              </PermissionsProvider>
+            </OnboardingProvider>
+          </TestModeProvider>
         </ErrorBoundary>
       ) : null}
     </>
