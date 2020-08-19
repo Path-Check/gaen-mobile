@@ -98,6 +98,8 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
     )
   }
 
+  const testModeText = "Test Mode"
+
   return (
     <>
       {loading ? (
@@ -131,14 +133,8 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 NativeModule.forceAppCrash()
               }}
             />
-            <DebugMenuListItem
-              label="Restart Onboarding"
-              onPress={handleOnPressRestartOnboarding}
-            />
-            <TouchableOpacity style={style.listItem}>
-              <GlobalText style={style.listItemText}>
-                {"Toggle Test Mode"}
-              </GlobalText>
+            <TouchableOpacity style={style.listItemWithSwitch}>
+              <GlobalText style={style.listItemText}>{testModeText}</GlobalText>
               <Switch
                 trackColor={{
                   false: Colors.neutral110,
@@ -146,8 +142,14 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
                 }}
                 onValueChange={toggleTestModeEnabled}
                 value={testModeEnabled}
+                style={style.switch}
               />
             </TouchableOpacity>
+            <DebugMenuListItem
+              label="Restart Onboarding"
+              onPress={handleOnPressRestartOnboarding}
+              itemStyle={style.lastListItem}
+            />
           </View>
           {__DEV__ ? (
             <View style={style.section}>
@@ -203,6 +205,16 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
     borderColor: Colors.secondary75,
+  },
+  listItemWithSwitch: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingVertical: Spacing.medium,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.secondary75,
+  },
+  switch: {
+    marginRight: Spacing.xSmall,
   },
   listItemText: {
     ...Typography.mainContent,
