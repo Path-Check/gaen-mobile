@@ -18,10 +18,8 @@ const PublishConsentScreen: FunctionComponent = () => {
   } = useAffectedUserContext()
 
   useEffect(() => {
-    {
-      testModeEnabled &&
-        setExposureSubmissionCredentials("fakeCertificate", "fakeHmac")
-    }
+    testModeEnabled &&
+      setExposureSubmissionCredentials("fakeCertificate", "fakeHmac")
   })
 
   if (hmacKey && certificate) {
