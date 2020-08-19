@@ -71,13 +71,10 @@ export const getCurrentENPermissionsStatus = async (): Promise<ENPermissionStatu
 
 // Exposure History Module
 const exposureHistoryModule = NativeModules.ExposureHistoryModule
-export const getCurrentExposures = async (
-  cb: (exposureInfo: ExposureInfo) => void,
-): Promise<void> => {
-  exposureHistoryModule.getCurrentExposures((rawExposure: string) => {
-    const rawExposures: RawExposure[] = JSON.parse(rawExposure)
-    cb(toExposureInfo(rawExposures))
-  })
+export const getCurrentExposures = async (): Promise<ExposureInfo> => {
+  const rawExposure: string = await exposureHistoryModule.getCurrentExposures()
+  const rawExposures: RawExposure[] = JSON.parse(rawExposure)
+  return toExposureInfo(rawExposures)
 }
 
 export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> => {
