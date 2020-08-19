@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react"
 import { StyleSheet, View, Text, Button as RNButton } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { isTester } from "../../utils"
+import { useTestModeContext } from "../../TestModeContext"
 
 import { useStatusBarEffect, Screens } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
@@ -10,6 +10,7 @@ import PublishConsentForm from "./PublishConsentForm"
 const PublishConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
   const navigation = useNavigation()
+  const { testModeEnabled } = useTestModeContext()
   const {
     certificate,
     hmacKey,
@@ -18,7 +19,7 @@ const PublishConsentScreen: FunctionComponent = () => {
 
   useEffect(() => {
     {
-      isTester &&
+      testModeEnabled &&
         setExposureSubmissionCredentials("fakeCertificate", "fakeHmac")
     }
   })

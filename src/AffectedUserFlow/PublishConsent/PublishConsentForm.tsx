@@ -11,7 +11,7 @@ import {
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { isTester } from "../../utils"
+import { useTestModeContext } from "../../TestModeContext"
 
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
@@ -44,6 +44,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const strategy = useExposureContext()
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const { testModeEnabled } = useTestModeContext()
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
@@ -143,7 +144,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
               onPress={handleOnPressConfirm}
               customButtonStyle={style.button}
             />
-            {isTester && (
+            {testModeEnabled && (
               <RNButton
                 title={t("common.go_to_next_screen")}
                 onPress={handleOnPressNextScreen}

@@ -3,6 +3,7 @@ import {
   View,
   ViewStyle,
   TouchableOpacity,
+  Switch,
   StyleSheet,
   Alert,
   BackHandler,
@@ -14,6 +15,7 @@ import { GlobalText } from "../components/GlobalText"
 import { useOnboardingContext } from "../OnboardingContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
+import { useTestModeContext } from "../TestModeContext"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
 
@@ -24,6 +26,7 @@ type ENDebugMenuProps = {
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
+  const { testModeEnabled, toggleTestModeEnabled } = useTestModeContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -132,6 +135,19 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
             />
+            <TouchableOpacity style={style.listItem}>
+              <GlobalText style={style.listItemText}>
+                {"Toggle Test Mode"}
+              </GlobalText>
+              <Switch
+                trackColor={{
+                  false: Colors.neutral110,
+                  true: Colors.success100,
+                }}
+                onValueChange={toggleTestModeEnabled}
+                value={testModeEnabled}
+              />
+            </TouchableOpacity>
           </View>
           {__DEV__ ? (
             <View style={style.section}>
@@ -176,7 +192,6 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
 
 const style = StyleSheet.create({
   section: {
-    flex: 1,
     backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.small,
     marginBottom: Spacing.medium,
@@ -185,7 +200,6 @@ const style = StyleSheet.create({
     borderColor: Colors.secondary75,
   },
   listItem: {
-    flex: 1,
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
     borderColor: Colors.secondary75,

@@ -12,7 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import { isTester } from "../../utils"
+import { useTestModeContext } from "../../TestModeContext"
 
 import { GlobalText } from "../../components/GlobalText"
 import { Button } from "../../components/Button"
@@ -40,6 +40,7 @@ const CodeInputForm: FunctionComponent = () => {
   const navigation = useNavigation()
   const strategy = useExposureContext()
   const { setExposureSubmissionCredentials } = useAffectedUserContext()
+  const { testModeEnabled } = useTestModeContext()
 
   const [code, setCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -209,7 +210,7 @@ const CodeInputForm: FunctionComponent = () => {
         customButtonStyle={style.button}
         hasRightArrow
       />
-      {isTester && (
+      {testModeEnabled && (
         <RNButton
           title={t("common.go_to_next_screen")}
           onPress={handleOnPressNextScreen}

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { usePermissionsContext, ENEnablement } from "../../PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
 import EnableExposureNotifications from "./EnableExposureNotifications"
-import { isTester } from "../../utils"
+import { useTestModeContext } from "../../TestModeContext"
 
 import { Colors } from "../../styles"
 
@@ -16,6 +16,7 @@ const CodeInputScreen: FunctionComponent = () => {
   ] = useState(false)
   const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
+  const { testModeEnabled } = useTestModeContext()
 
   const handleOnPressNextScreen = () => {
     setTesterHasRequestedNextScreen(true)
@@ -34,7 +35,7 @@ const CodeInputScreen: FunctionComponent = () => {
       ) : (
         <EnableExposureNotifications />
       )}
-      {isTester && testerHasRequestedNextScreen === false && (
+      {testModeEnabled && testerHasRequestedNextScreen === false && (
         <RNButton
           title={t("common.go_to_next_screen")}
           onPress={handleOnPressNextScreen}
