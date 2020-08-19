@@ -9,13 +9,14 @@ import { isTester } from "../../utils"
 import { Colors } from "../../styles"
 
 const CodeInputScreen: FunctionComponent = () => {
-  const [testerRequestsNextScreen, setTesterRequestsNextScreen] = useState(
-    false,
-  )
+  const [
+    testerHasRequestedNextScreen,
+    setTesterHasRequestedNextScreen,
+  ] = useState(false)
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressNextScreen = () => {
-    setTesterRequestsNextScreen(true)
+    setTesterHasRequestedNextScreen(true)
   }
 
   const hasExposureNotificationsEnabled = (): boolean => {
@@ -26,12 +27,12 @@ const CodeInputScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      {isEnabled || testerRequestsNextScreen ? (
+      {isEnabled || testerHasRequestedNextScreen ? (
         <CodeInputForm />
       ) : (
         <EnableExposureNotifications />
       )}
-      {isTester && testerRequestsNextScreen === false && (
+      {isTester && testerHasRequestedNextScreen === false && (
         <RNButton
           title="Go to next screen"
           onPress={handleOnPressNextScreen}
