@@ -2,7 +2,6 @@ package org.pathcheck.covidsafepaths.exposurenotifications;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -12,11 +11,11 @@ import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
 import com.google.android.gms.nearby.exposurenotification.ScanInstance;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
 public class ExposureHistoryModule extends ReactContextBaseJavaModule {
@@ -37,7 +36,7 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getCurrentExposures(final Callback callback) {
+    public void getCurrentExposures(final Promise promise) {
         ExposureNotificationClientWrapper exposureNotificationsClient = ExposureNotificationClientWrapper.get(getReactApplicationContext());
         exposureNotificationsClient.getExposureWindows()
                 .addOnSuccessListener(exposureWindows -> {
@@ -56,8 +55,9 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
                     }
 
                     String json = new Gson().toJson(exposures);
-                    callback.invoke(json);
-                });
+                    promise.resolve(json);
+                })
+                .addOnFailureListener(promise::reject);
     }
 
     @ReactMethod
