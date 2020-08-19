@@ -11,10 +11,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "./Home"
-import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
+import { PermissionsContext, ENActivationStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "./useBluetoothStatus"
+import { request } from "react-native-permissions"
 
 jest.mock("@react-navigation/native")
 
@@ -42,9 +43,12 @@ describe("Home", () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const enActivationStatus: ENActivationStatus = {
+        authorization: true,
+        enablement: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        enActivationStatus,
       )
 
       const { getByTestId } = render(
@@ -85,12 +89,12 @@ describe("Home", () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = [
-        "UNAUTHORIZED",
-        "DISABLED",
-      ]
+      const enActivationStatus: ENActivationStatus = {
+        authorization: false,
+        enablement: false,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        enActivationStatus,
       )
 
       const { getByTestId } = render(
@@ -122,9 +126,12 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const enActivationStatus: ENActivationStatus = {
+        authorization: true,
+        enablement: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        enActivationStatus,
       )
 
       const { getByTestId } = render(
@@ -157,9 +164,12 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const enActivationStatus: ENActivationStatus = {
+        authorization: true,
+        enablement: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        enActivationStatus,
       )
 
       const { getByTestId } = render(
@@ -191,9 +201,12 @@ describe("Home", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const enActivationStatus: ENActivationStatus = {
+        authorization: true,
+        enablement: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        enActivationStatus,
       )
 
       const { getByTestId } = render(
@@ -216,13 +229,13 @@ describe("Home", () => {
       it("requests exposure notification to be enabled", async () => {
         expect.assertions(1)
 
-        const enPermissionStatus: ENPermissionStatus = [
-          "AUTHORIZED",
-          "DISABLED",
-        ]
         const requestPermission = jest.fn()
+        const enActivationStatus: ENActivationStatus = {
+          authorization: true,
+          enablement: false,
+        }
         const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
+          enActivationStatus,
           requestPermission,
         )
 
@@ -252,9 +265,12 @@ describe("Home", () => {
           navigate: navigationSpy,
         })
 
-        const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+        const enActivationStatus: ENActivationStatus = {
+          authorization: true,
+          enablement: true,
+        }
         const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
+          enActivationStatus,
         )
 
         const { getByTestId } = render(
@@ -280,12 +296,12 @@ describe("Home", () => {
           expect.assertions(1)
           ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
-          const enPermissionStatus: ENPermissionStatus = [
-            "UNAUTHORIZED",
-            "DISABLED",
-          ]
+          const enActivationStatus: ENActivationStatus = {
+            authorization: false,
+            enablement: false,
+          }
           const permissionProviderValue = createPermissionProviderValue(
-            enPermissionStatus,
+            enActivationStatus,
           )
 
           const { getByTestId } = render(
@@ -314,7 +330,7 @@ describe("Home", () => {
 })
 
 const createPermissionProviderValue = (
-  enPermissionStatus: ENPermissionStatus,
+  enActivationStatus: ENActivationStatus,
   requestPermission: () => void = () => {},
 ) => {
   return {
@@ -324,7 +340,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: enPermissionStatus,
+      status: enActivationStatus,
       check: () => {},
       request: requestPermission,
     },

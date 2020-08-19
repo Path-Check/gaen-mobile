@@ -17,10 +17,18 @@ import gaenStrategy from "./gaen"
 
 export type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 export type ENEnablementStatus = `DISABLED` | `ENABLED`
-type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
-export type ENActivationStatus = { authorization: boolean; enablement: boolean }
+export type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
+const initialENPermissionStatus: ENPermissionStatus = [
+  "UNAUTHORIZED",
+  "DISABLED",
+]
 
-const initialENStatus: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
+export type ENActivationStatus = { authorization: boolean; enablement: boolean }
+const initialENActivationStatus: ENActivationStatus = {
+  authorization: false,
+  enablement: false,
+}
+
 const { permissionStrategy } = gaenStrategy
 
 interface PermissionsContextState {
@@ -43,7 +51,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: { authorization: false, enablement: false },
+    status: initialENActivationStatus,
     check: () => {},
     request: () => {},
   },
@@ -63,7 +71,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [
     exposureNotificationsPermission,
     setExposureNotificationsPermission,
-  ] = useState<ENPermissionStatus>(initialENStatus)
+  ] = useState<ENPermissionStatus>(initialENPermissionStatus)
 
   const [notificationPermission, setNotificationPermission] = useState(
     PermissionStatus.UNKNOWN,
@@ -120,15 +128,20 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  console.log(exposureNotificationsPermission)
+  const toActivationStatus = (
+    enAuthorizationStatus: ENAuthorizationStatus,
+    enEnablementStatus: ENEnablementStatus,
+  ): ENActivationStatus => {
+    const isENAuthorized = enAuthorizationStatus === "AUTHORIZED"
+    const isENEnabled = enEnablementStatus === "ENABLED"
 
-  const isENAuthorized = exposureNotificationsPermission[0] === "AUTHORIZED"
-  const isENEnabled = exposureNotificationsPermission[1] === "ENABLED"
-
-  const enActivationStatus = {
-    authorization: isENAuthorized,
-    enablement: isENEnabled,
+    return { authorization: isENAuthorized, enablement: isENEnabled }
   }
+
+  const enActivationStatus: ENActivationStatus = toActivationStatus(
+    exposureNotificationsPermission[0],
+    exposureNotificationsPermission[1],
+  )
 
   return (
     <PermissionsContext.Provider
