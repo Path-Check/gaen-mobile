@@ -4,7 +4,7 @@ import {
   EventSubscription,
 } from "react-native"
 
-import { ENPermissionStatus } from "../PermissionsContext"
+import { ENActivationStatus } from "../PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../More/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
@@ -28,7 +28,7 @@ export const subscribeToExposureEvents = (
 }
 
 export const subscribeToEnabledStatusEvents = (
-  cb: (status: ENPermissionStatus) => void,
+  cb: (status: ENActivationStatus) => void,
 ): EventSubscription => {
   const ExposureEvents = new NativeEventEmitter(
     NativeModules.ExposureEventEmitter,
@@ -44,15 +44,15 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-const toStatus = (data: string[]): ENPermissionStatus => {
+const toStatus = (data: string[]): ENActivationStatus => {
   const networkAuthorization = data[0]
   const networkEnablement = data[1]
-  const result: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
+  const result: ENActivationStatus = { authorization: false, enablement: false }
   if (networkAuthorization === "AUTHORIZED") {
-    result[0] = "AUTHORIZED"
+    result.authorization = true
   }
   if (networkEnablement === "ENABLED") {
-    result[1] = "ENABLED"
+    result.enablement = true
   }
   return result
 }
@@ -67,7 +67,7 @@ export const requestAuthorization = async (
 }
 
 export const getCurrentENPermissionsStatus = async (
-  cb: (status: ENPermissionStatus) => void,
+  cb: (status: ENActivationStatus) => void,
 ): Promise<void> => {
   permissionsModule.getCurrentENPermissionsStatus((data: string[]) => {
     const status = toStatus(data)

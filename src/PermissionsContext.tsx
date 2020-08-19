@@ -13,12 +13,12 @@ import {
 } from "react-native-permissions"
 
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
-
-export type ENAuthorization = `UNAUTHORIZED` | `AUTHORIZED`
-export type ENEnablement = `DISABLED` | `ENABLED`
 import gaenStrategy from "./gaen"
 
-export type ENPermissionStatus = [ENAuthorization, ENEnablement]
+export type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
+export type ENEnablementStatus = `DISABLED` | `ENABLED`
+type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
+export type ENActivationStatus = { authorization: boolean; enablement: boolean }
 
 const initialENStatus: ENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
 const { permissionStrategy } = gaenStrategy
@@ -30,7 +30,7 @@ interface PermissionsContextState {
     request: () => void
   }
   exposureNotifications: {
-    status: ENPermissionStatus
+    status: ENActivationStatus
     check: () => void
     request: () => void
   }
@@ -43,7 +43,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENStatus,
+    status: { authorization: false, enablement: false },
     check: () => {},
     request: () => {},
   },
@@ -120,6 +120,16 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
+  console.log(exposureNotificationsPermission)
+
+  const isENAuthorized = exposureNotificationsPermission[0] === "AUTHORIZED"
+  const isENEnabled = exposureNotificationsPermission[1] === "ENABLED"
+
+  const enActivationStatus = {
+    authorization: isENAuthorized,
+    enablement: isENEnabled,
+  }
+
   return (
     <PermissionsContext.Provider
       value={{
@@ -129,7 +139,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: exposureNotificationsPermission,
+          status: enActivationStatus,
           check: checkENPermission,
           request: requestENPermission,
         },

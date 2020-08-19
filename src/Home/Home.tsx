@@ -18,10 +18,7 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
-import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../PermissionsContext"
+import { usePermissionsContext } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
@@ -48,17 +45,13 @@ const HomeScreen: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
-  const [
-    authorization,
-    enablement,
-  ]: ENPermissionStatus = exposureNotifications.status
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
   const btStatus = useBluetoothStatus()
 
-  const isEnabled = enablement === "ENABLED"
-  const isAuthorized = authorization === "AUTHORIZED"
+  const isAuthorized = exposureNotifications.status.authorization
+  const isEnabled = exposureNotifications.status.enablement
   const isEnabledAndAuthorized = isEnabled && isAuthorized
 
   const showUnauthorizedAlert = () => {
