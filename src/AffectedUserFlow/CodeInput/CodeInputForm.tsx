@@ -211,7 +211,7 @@ const CodeInputForm: FunctionComponent = () => {
       />
       {isTester && (
         <RNButton
-          title="Go to next screen"
+          title={t("common.go_to_next_screen")}
           onPress={handleOnPressNextScreen}
           color={Colors.danger100}
         />

@@ -1,5 +1,6 @@
 import React, { useState, FunctionComponent } from "react"
 import { View, StyleSheet, Button as RNButton } from "react-native"
+import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext, ENEnablement } from "../../PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
@@ -13,6 +14,7 @@ const CodeInputScreen: FunctionComponent = () => {
     testerHasRequestedNextScreen,
     setTesterHasRequestedNextScreen,
   ] = useState(false)
+  const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressNextScreen = () => {
@@ -34,7 +36,7 @@ const CodeInputScreen: FunctionComponent = () => {
       )}
       {isTester && testerHasRequestedNextScreen === false && (
         <RNButton
-          title="Go to next screen"
+          title={t("common.go_to_next_screen")}
           onPress={handleOnPressNextScreen}
           color={Colors.danger100}
         />
