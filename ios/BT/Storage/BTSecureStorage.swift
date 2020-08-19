@@ -99,10 +99,6 @@ final class BTSecureStorage: SafePathsSecureStorage {
              notificationName: .revisionTokenDidChange, defaultValue: "")
   var revisionToken: String
 
-  @Persisted(keyPath: .revisionTokenDev,
-             notificationName: .revisionTokenDidChange, defaultValue: "")
-  var revisionTokenDev: String
-
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
     .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
