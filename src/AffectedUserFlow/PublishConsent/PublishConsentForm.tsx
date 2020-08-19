@@ -5,11 +5,13 @@ import {
   Alert,
   TouchableOpacity,
   StyleSheet,
+  Button as RNButton,
   View,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { isTester } from "../../utils"
 
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
@@ -66,6 +68,10 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(AffectedUserFlowScreens.ProtectPrivacy)
+  }
+
+  const handleOnPressNextScreen = () => {
+    navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
   }
 
   return (
@@ -137,6 +143,13 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
               onPress={handleOnPressConfirm}
               customButtonStyle={style.button}
             />
+            {isTester && (
+              <RNButton
+                title="Go to next screen"
+                onPress={handleOnPressNextScreen}
+                color={Colors.danger100}
+              />
+            )}
           </ScrollView>
           <TouchableOpacity
             style={style.bottomButtonContainer}

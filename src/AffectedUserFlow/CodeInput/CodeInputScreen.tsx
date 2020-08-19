@@ -1,14 +1,22 @@
-import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
+import React, { useState, FunctionComponent } from "react"
+import { View, StyleSheet, Button as RNButton } from "react-native"
 
 import { usePermissionsContext, ENEnablement } from "../../PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
 import EnableExposureNotifications from "./EnableExposureNotifications"
+import { isTester } from "../../utils"
 
 import { Colors } from "../../styles"
 
 const CodeInputScreen: FunctionComponent = () => {
+  const [testerRequestsNextScreen, setTesterRequestsNextScreen] = useState(
+    false,
+  )
   const { exposureNotifications } = usePermissionsContext()
+
+  const handleOnPressNextScreen = () => {
+    setTesterRequestsNextScreen(true)
+  }
 
   const hasExposureNotificationsEnabled = (): boolean => {
     const enabledState: ENEnablement = "ENABLED"
@@ -18,7 +26,18 @@ const CodeInputScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      {isEnabled ? <CodeInputForm /> : <EnableExposureNotifications />}
+      {isEnabled || testerRequestsNextScreen ? (
+        <CodeInputForm />
+      ) : (
+        <EnableExposureNotifications />
+      )}
+      {isTester && testerRequestsNextScreen === false && (
+        <RNButton
+          title="Go to next screen"
+          onPress={handleOnPressNextScreen}
+          color={Colors.danger100}
+        />
+      )}
     </View>
   )
 }

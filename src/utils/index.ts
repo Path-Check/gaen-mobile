@@ -1,4 +1,5 @@
 import { Platform } from "react-native"
+import env from "react-native-config"
 
 import * as DateTimeUtils from "./dateTime"
 import * as StorageUtils from "./storage"
@@ -11,4 +12,14 @@ const isPlatformAndroid = (): boolean => {
   return Platform.OS === "android"
 }
 
-export { DateTimeUtils, StorageUtils, isPlatformiOS, isPlatformAndroid }
+const isTester = (): boolean => {
+  return env.DEV === "TRUE"
+}
+
+export {
+  DateTimeUtils,
+  StorageUtils,
+  isPlatformiOS,
+  isPlatformAndroid,
+  isTester,
+}

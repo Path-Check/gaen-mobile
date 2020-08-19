@@ -1,23 +1,35 @@
-import React, { FunctionComponent } from "react"
-import { View, Text, Button } from "react-native"
+import React, { FunctionComponent, useEffect } from "react"
+import { StyleSheet, View, Text, Button as RNButton } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { isTester } from "../../utils"
 
 import { useStatusBarEffect, Screens } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import PublishConsentForm from "./PublishConsentForm"
 
 const PublishConsentScreen: FunctionComponent = () => {
-  useStatusBarEffect("light-content")
+  useStatusBarEffect("dark-content")
   const navigation = useNavigation()
-  const { certificate, hmacKey } = useAffectedUserContext()
+  const {
+    certificate,
+    hmacKey,
+    setExposureSubmissionCredentials,
+  } = useAffectedUserContext()
+
+  useEffect(() => {
+    {
+      isTester &&
+        setExposureSubmissionCredentials("fakeCertificate", "fakeHmac")
+    }
+  })
 
   if (hmacKey && certificate) {
     return <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
   } else {
     return (
-      <View>
+      <View style={style.container}>
         <Text>Invalid State</Text>
-        <Button
+        <RNButton
           onPress={() => {
             navigation.navigate(Screens.Home)
           }}
@@ -27,5 +39,13 @@ const PublishConsentScreen: FunctionComponent = () => {
     )
   }
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+})
 
 export default PublishConsentScreen

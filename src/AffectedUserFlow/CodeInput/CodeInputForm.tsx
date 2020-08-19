@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
   TextInput,
   View,
+  Button as RNButton,
   Keyboard,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import { isTester } from "../../utils"
 
 import { GlobalText } from "../../components/GlobalText"
 import { Button } from "../../components/Button"
@@ -18,7 +20,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { Screens } from "../../navigation"
+import { Screens, AffectedUserFlowScreens } from "../../navigation"
 
 import { Icons } from "../../assets"
 import {
@@ -63,6 +65,10 @@ const CodeInputForm: FunctionComponent = () => {
     navigation.navigate(Screens.Home)
   }
 
+  const handleOnPressNextScreen = () => {
+    navigation.navigate(AffectedUserFlowScreens.AffectedUserPublishConsent)
+  }
+
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
@@ -80,7 +86,9 @@ const CodeInputForm: FunctionComponent = () => {
           const certificate = certResponse.body.certificate
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(Screens.AffectedUserPublishConsent)
+          navigation.navigate(
+            AffectedUserFlowScreens.AffectedUserPublishConsent,
+          )
         } else {
           setErrorMessage(showCertificateError(certResponse.error))
         }
@@ -201,6 +209,13 @@ const CodeInputForm: FunctionComponent = () => {
         customButtonStyle={style.button}
         hasRightArrow
       />
+      {isTester && (
+        <RNButton
+          title="Go to next screen"
+          onPress={handleOnPressNextScreen}
+          color={Colors.danger100}
+        />
+      )}
     </View>
   )
 }
