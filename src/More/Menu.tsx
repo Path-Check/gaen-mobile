@@ -27,15 +27,19 @@ const MenuScreen: FunctionComponent = () => {
   return (
     <ScrollView style={style.container}>
       <View style={[style.section, style.firstSection]}>
-        <TouchableOpacity onPress={handleOnPressSelectLanguage}>
+        <TouchableOpacity
+          onPress={handleOnPressSelectLanguage}
+          accessible
+          accessibilityLabel={t("more.select_language")}
+        >
           <View style={[style.listItem, style.languageButton]}>
             <SvgXml
               xml={Icons.LanguagesIcon}
-              accessible
-              accessibilityLabel={t("label.language_icon")}
               width={Iconography.small}
               height={Iconography.small}
               style={style.icon}
+              accessible
+              accessibilityLabel={t("label.language_icon")}
             />
             <GlobalText style={{ ...Typography.mainContent }}>
               {languageName || t("label.unknown")}
