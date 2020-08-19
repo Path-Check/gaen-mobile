@@ -15,8 +15,8 @@ import {
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
 import gaenStrategy from "./gaen"
 
-export type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
-export type ENEnablementStatus = `DISABLED` | `ENABLED`
+type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
+type ENEnablementStatus = `DISABLED` | `ENABLED`
 export type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
 const initialENPermissionStatus: ENPermissionStatus = [
   "UNAUTHORIZED",
@@ -39,8 +39,6 @@ export type ENAuthorizationEnablementStatus = {
 const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
   initialENPermissionStatus,
 )
-
-const { permissionStrategy } = gaenStrategy
 
 interface PermissionsContextState {
   notification: {
@@ -87,6 +85,8 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [notificationPermission, setNotificationPermission] = useState(
     PermissionStatus.UNKNOWN,
   )
+
+  const { permissionStrategy } = gaenStrategy
 
   const checkENPermission = useCallback(() => {
     const handleNativeResponse = (status: ENPermissionStatus) => {
