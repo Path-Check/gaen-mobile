@@ -46,7 +46,7 @@ export const gradientNeutral75 = ["#3c475b", "#9ba0aa"]
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"
-export const transparentNeutral30 = applyOpacity(neutral30, 0.8)
+export const transparentNeutral30 = applyOpacity(neutral30, 0.4)
 
 // Backgrounds
 export const primaryLightBackground = white
