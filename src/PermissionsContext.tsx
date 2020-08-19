@@ -23,11 +23,19 @@ const initialENPermissionStatus: ENPermissionStatus = [
   "DISABLED",
 ]
 
-export type ENActivationStatus = { authorization: boolean; enablement: boolean }
-const initialENActivationStatus: ENActivationStatus = {
-  authorization: false,
-  enablement: false,
+const toActivationStatus = (
+  enPermissionStatus: ENPermissionStatus,
+): ENActivationStatus => {
+  const isENAuthorized = enPermissionStatus[0] === "AUTHORIZED"
+  const isENEnabled = enPermissionStatus[1] === "ENABLED"
+
+  return { authorization: isENAuthorized, enablement: isENEnabled }
 }
+
+export type ENActivationStatus = { authorization: boolean; enablement: boolean }
+const initialENActivationStatus: ENActivationStatus = toActivationStatus(
+  initialENPermissionStatus,
+)
 
 const { permissionStrategy } = gaenStrategy
 
@@ -69,8 +77,8 @@ export interface PermissionStrategy {
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [
-    exposureNotificationsPermission,
-    setExposureNotificationsPermission,
+    exposureNotificationsPermissionStatus,
+    setExposureNotificationsPermissionStatus,
   ] = useState<ENPermissionStatus>(initialENPermissionStatus)
 
   const [notificationPermission, setNotificationPermission] = useState(
@@ -79,7 +87,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 
   const checkENPermission = useCallback(() => {
     const handleNativeResponse = (status: ENPermissionStatus) => {
-      setExposureNotificationsPermission(status)
+      setExposureNotificationsPermissionStatus(status)
     }
     permissionStrategy.check(handleNativeResponse)
   }, [])
@@ -92,7 +100,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     AppState.addEventListener("change", handleAppStateChange)
     const subscription = permissionStrategy.statusSubscription(
       (status: ENPermissionStatus) => {
-        setExposureNotificationsPermission(status)
+        setExposureNotificationsPermissionStatus(status)
       },
     )
 
@@ -128,19 +136,8 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const toActivationStatus = (
-    enAuthorizationStatus: ENAuthorizationStatus,
-    enEnablementStatus: ENEnablementStatus,
-  ): ENActivationStatus => {
-    const isENAuthorized = enAuthorizationStatus === "AUTHORIZED"
-    const isENEnabled = enEnablementStatus === "ENABLED"
-
-    return { authorization: isENAuthorized, enablement: isENEnabled }
-  }
-
   const enActivationStatus: ENActivationStatus = toActivationStatus(
-    exposureNotificationsPermission[0],
-    exposureNotificationsPermission[1],
+    exposureNotificationsPermissionStatus,
   )
 
   return (
