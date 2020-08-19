@@ -9,7 +9,7 @@ import { Button } from "../components/Button"
 import { Screens } from "../navigation"
 
 import { Images } from "../assets"
-import { Layout, Spacing, Typography } from "../styles"
+import { Colors, Layout, Spacing, Typography } from "../styles"
 
 export const ExportComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content")
@@ -37,6 +37,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Layout.oneTwentiethHeight,
     paddingBottom: Spacing.xxHuge,
     paddingHorizontal: Spacing.large,

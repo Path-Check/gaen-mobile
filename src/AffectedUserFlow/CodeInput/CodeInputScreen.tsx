@@ -1,14 +1,26 @@
-import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
+import React, { useState, FunctionComponent } from "react"
+import { View, StyleSheet, Button as RNButton } from "react-native"
+import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext, ENEnablement } from "../../PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
 import EnableExposureNotifications from "./EnableExposureNotifications"
+import { useTestModeContext } from "../../TestModeContext"
 
 import { Colors } from "../../styles"
 
 const CodeInputScreen: FunctionComponent = () => {
+  const [
+    testerHasRequestedNextScreen,
+    setTesterHasRequestedNextScreen,
+  ] = useState(false)
+  const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
+  const { testModeEnabled } = useTestModeContext()
+
+  const handleOnPressNextScreen = () => {
+    setTesterHasRequestedNextScreen(true)
+  }
 
   const hasExposureNotificationsEnabled = (): boolean => {
     const enabledState: ENEnablement = "ENABLED"
@@ -18,7 +30,18 @@ const CodeInputScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      {isEnabled ? <CodeInputForm /> : <EnableExposureNotifications />}
+      {isEnabled || testerHasRequestedNextScreen ? (
+        <CodeInputForm />
+      ) : (
+        <EnableExposureNotifications />
+      )}
+      {testModeEnabled && !testerHasRequestedNextScreen && (
+        <RNButton
+          title={t("common.go_to_next_screen")}
+          onPress={handleOnPressNextScreen}
+          color={Colors.danger100}
+        />
+      )}
     </View>
   )
 }
