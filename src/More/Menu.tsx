@@ -32,7 +32,7 @@ const MenuScreen: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("more.select_language")}
         >
-          <View style={[style.listItem, style.languageButton]}>
+          <View style={[style.listItem, style.languageButtonContainer]}>
             <SvgXml
               xml={Icons.LanguagesIcon}
               width={Iconography.small}
@@ -41,8 +41,8 @@ const MenuScreen: FunctionComponent = () => {
               accessible
               accessibilityLabel={t("label.language_icon")}
             />
-            <GlobalText style={{ ...Typography.mainContent }}>
-              {languageName || t("label.unknown")}
+            <GlobalText style={style.languageButtonText}>
+              {languageName}
             </GlobalText>
           </View>
         </TouchableOpacity>
@@ -107,9 +107,12 @@ const style = StyleSheet.create({
   firstSection: {
     borderTopWidth: 0,
   },
-  languageButton: {
+  languageButtonContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  languageButtonText: {
+    ...Typography.mainContent,
   },
   icon: {
     marginRight: Spacing.small,
