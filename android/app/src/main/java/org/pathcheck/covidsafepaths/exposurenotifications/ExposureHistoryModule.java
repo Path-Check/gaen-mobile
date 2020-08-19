@@ -56,8 +56,7 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
 
                     String json = new Gson().toJson(exposures);
                     promise.resolve(json);
-                })
-                .addOnFailureListener(promise::reject);
+                });
     }
 
     @ReactMethod
