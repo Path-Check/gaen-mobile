@@ -61,7 +61,7 @@ const toStatus = (data: string[]): ENPermissionStatus => {
 const permissionsModule = NativeModules.ENPermissionsModule
 
 export const requestAuthorization = async (): Promise<string> => {
-  return permissionsModule.requestExposureNotificationAuthorization
+  return permissionsModule.requestExposureNotificationAuthorization()
 }
 
 export const getCurrentENPermissionsStatus = async (): Promise<ENPermissionStatus> => {
