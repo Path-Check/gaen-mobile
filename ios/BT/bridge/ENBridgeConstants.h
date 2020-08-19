@@ -1,4 +1,4 @@
 #import <Foundation/Foundation.h>
 
-static const NSString *GENERIC_SUCCESS = @"success" ;
+static NSString *const GENERIC_SUCCESS = @"success";
 

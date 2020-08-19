@@ -25,7 +25,6 @@ extension Array where Element == DownloadedPackage {
     }
 
   }
-
 }
 
 extension Array where Element == ENTemporaryExposureKey {

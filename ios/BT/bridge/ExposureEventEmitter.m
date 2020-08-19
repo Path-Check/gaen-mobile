@@ -51,9 +51,8 @@ RCT_EXPORT_MODULE();
 # pragma mark Private
 
 - (void)handleNotification:(NSNotification *)notification {
-
-  [self sendEventWithName:notification.name body: notification.object];
-
+  [self sendEventWithName:notification.name
+                     body:notification.object];
 }
 
 @end

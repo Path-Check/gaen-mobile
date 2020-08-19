@@ -60,19 +60,13 @@ const toStatus = (data: string[]): ENPermissionStatus => {
 // Permissions Module
 const permissionsModule = NativeModules.ENPermissionsModule
 
-export const requestAuthorization = async (
-  cb: (data: string) => void,
-): Promise<void> => {
-  permissionsModule.requestExposureNotificationAuthorization(cb)
+export const requestAuthorization = async (): Promise<string> => {
+  return permissionsModule.requestExposureNotificationAuthorization
 }
 
-export const getCurrentENPermissionsStatus = async (
-  cb: (status: ENPermissionStatus) => void,
-): Promise<void> => {
-  permissionsModule.getCurrentENPermissionsStatus((data: string[]) => {
-    const status = toStatus(data)
-    cb(status)
-  })
+export const getCurrentENPermissionsStatus = async (): Promise<ENPermissionStatus> => {
+  const response = await permissionsModule.getCurrentENPermissionsStatus();
+  return toStatus(response);
 }
 
 // Exposure History Module

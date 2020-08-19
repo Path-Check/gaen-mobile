@@ -4,6 +4,32 @@ import RealmSwift
 import UserNotifications
 import BackgroundTasks
 
+enum ExposureManagerErrorCode: String {
+  case cannotEnableNotifications = "cannot_enable_notifications"
+  case networkFailure = "network_request_error"
+  case noExposureKeysFound = "no_exposure_keys_found"
+  case detectionNeverPerformed = "no_last_detection_date"
+}
+
+
+@objc(ExposureManagerError)
+final class ExposureManagerError: NSObject, LocalizedError {
+
+  @objc let errorCode: String
+  @objc let localizedMessage: String
+  @objc let underlyingError: Error
+
+  init(errorCode: ExposureManagerErrorCode, localizedMessage: String, underlyingError: Error = GenericError.unknown) {
+    self.errorCode = errorCode.rawValue
+    self.localizedMessage = localizedMessage
+    self.underlyingError = underlyingError
+  }
+
+  var errorDescription: String? {
+    return localizedMessage
+  }
+}
+
 @objc(ExposureManager)
 /**
  This class wrapps [ENManager](https://developer.apple.com/documentation/exposurenotification/enmanager) and acts like a controller and entry point of the different flows
@@ -106,15 +132,19 @@ final class ExposureManager: NSObject {
   }
 
   ///Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status, if not, it returns and error
-  @objc func requestExposureNotificationAuthorization(enabled: Bool, callback: @escaping (Error?) -> Void) {
+  @objc func requestExposureNotificationAuthorization(enabled: Bool,
+                                                      callback: @escaping (ExposureManagerError?) -> Void) {
     // Ensure exposure notifications are enabled if the app is authorized. The app
     // could get into a state where it is authorized, but exposure
     // notifications are not enabled,  if the user initially denied Exposure Notifications
     // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
     // in Settings.
     manager.setExposureNotificationEnabled(enabled) { error in
-      if let error = error {
-        callback(error)
+      if let underlyingError = error {
+        let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
+                             localizedMessage: String.cannotEnableNotifications.localized,
+                             underlyingError: underlyingError)
+        callback(emError)
       } else {
         self.broadcastCurrentEnabledStatus()
         callback(nil)
@@ -334,17 +364,22 @@ final class ExposureManager: NSObject {
   
   @objc func getAndPostDiagnosisKeys(certificate: String,
                                      HMACKey: String,
-                                     resolve: @escaping RCTPromiseResolveBlock,
-                                     reject: @escaping RCTPromiseRejectBlock) {
+                                     callback: @escaping (String?, ExposureManagerError?) -> Void) {
     manager.getDiagnosisKeys { temporaryExposureKeys, error in
-      if let error = error {
-        reject(String.noExposureKeysFound, "Failed to get exposure keys", error)
+      if let underlyingError = error {
+        let emError = ExposureManagerError(errorCode: .noExposureKeysFound,
+                                           localizedMessage: String.noLocalKeysFound.localized,
+                                           underlyingError: underlyingError)
+        callback(nil, emError)
       } else {
         
         let allKeys = (temporaryExposureKeys ?? [])
         
         guard !allKeys.isEmpty else {
-          reject(String.noExposureKeysFound, String.noLocalKeysFound.localized, GenericError.unknown)
+          let emError = ExposureManagerError(errorCode: .noExposureKeysFound,
+                                             localizedMessage: String.noLocalKeysFound.localized,
+                                             underlyingError: GenericError.unknown)
+          callback(nil, emError)
           return
         }
         
@@ -355,16 +390,23 @@ final class ExposureManager: NSObject {
 
         let revisionToken = BTSecureStorage.shared.userState.revisionToken
         
-        self.apiClient.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey }, regionCodes, certificate, HMACKey, revisionToken),
-                                 requestType: .postKeys) { result in
+        self.apiClient.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey },
+                                                            regionCodes,
+                                                            certificate,
+                                                            HMACKey,
+                                                            revisionToken),
+                               requestType: .postKeys) { result in
                                   switch result {
                                   case .success(let response):
                                     // Save revisionToken to use on subsequent key submission requests
                                     BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
-                                    resolve("Submitted: \(currentKeys.count) keys.")
+                                    callback("Submitted: \(currentKeys.count) keys.", nil)
                                   case .failure(let error):
-                                    reject(String.networkFailure, "Failed to post exposure keys \(error.localizedDescription)", error)
-                                  }
+                                    let emError = ExposureManagerError(errorCode: .networkFailure,
+                                                                       localizedMessage: error.localizedDescription,
+                                                                       underlyingError: error)
+                                    callback(nil, emError)
+                                }
         }
       }
     }
@@ -388,13 +430,19 @@ final class ExposureManager: NSObject {
     }
     #endif
   }
-  
-  @objc func fetchExposureKeys(resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+
+  typealias ExposureKeysDictionaryArray = [[String: Any]]
+  /// Requests the temporary exposure keys used by this device to share with a server. Returns an array of the exposures keys as dictionary or and error if the underlying
+  /// API fails
+  @objc func fetchExposureKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
     manager.getDiagnosisKeys { (keys, error) in
-      if let error = error {
-        reject(String.noExposureKeysFound, "There was an error fetching the exposure keys \(error)", error);
+      if let underlyingError = error {
+        let emError = ExposureManagerError(errorCode: .noExposureKeysFound,
+                                           localizedMessage: String.noLocalKeysFound.localized,
+                                           underlyingError: underlyingError)
+        callback(nil, emError)
       } else {
-        resolve((keys ?? []).map { $0.asDictionary })
+        callback((keys ?? []).map { $0.asDictionary }, nil)
       }
     }
   }
@@ -432,15 +480,14 @@ extension ExposureManager {
     }
   }
   
-  @objc func fetchLastDetectionDate(
-    resolve: @escaping RCTPromiseResolveBlock,
-    reject: @escaping RCTPromiseRejectBlock
-  ) {
-    guard let lastResetDate = BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset else {
-      reject(.detectionNeverPerformed, "No lastResetDate available", GenericError.unknown);
-      return
+  @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
+   guard let lastResetDate = BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset else {
+    let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
+                                       localizedMessage: String.noLastResetDateAvailable.localized)
+    return callback(nil, emError)
     }
-    resolve(lastResetDate.posixRepresentation)
+    let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
+    return callback(posixRepresentation, nil)
   }
 }
 
@@ -572,7 +619,8 @@ extension ExposureManager: ExposureManagerDebuggable {
     case .fetchExposures:
       resolve(currentExposures)
     case .getAndPostDiagnosisKeys:
-      getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default, resolve: resolve, reject: reject)
+      break
+//      getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default, resolve: resolve, reject: reject)
     case .resetExposures:
       btSecureStorage.exposures = List<Exposure>()
       resolve("Exposures: \(btSecureStorage.exposures.count)")

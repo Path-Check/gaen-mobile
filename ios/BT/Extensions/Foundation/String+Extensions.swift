@@ -43,14 +43,10 @@ extension String {
   // JS Layer
   static let genericSuccess = "success"
   
-  // ErrorCodes
-  static let networkFailure = "network_request_error"
-  static let noExposureKeysFound = "no_exposure_keys_found"
-  static let detectionNeverPerformed = "no_last_detection_date"
-
   // Error Messages
+  static let cannotEnableNotifications = "Error enabling notifications"
   static let noLocalKeysFound = "No exposure keys on device, please try again in 60 minutes"
-
+  static let noLastResetDateAvailable = "No lastResetDate available"
   // Computed Properties
   var gaenFilePaths: [String] {
     split(separator: "\n").map { String($0) }

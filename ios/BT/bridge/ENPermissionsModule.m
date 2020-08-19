@@ -10,19 +10,25 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(requestExposureNotificationAuthorization: (RCTResponseSenderBlock)callback) {
-  [[ExposureManager shared] requestExposureNotificationAuthorizationWithEnabled:YES callback:^(NSError * _Nullable error) {
+RCT_REMAP_METHOD(requestExposureNotificationAuthorization,
+                 requestExposureNotificationAuthorizationWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject) {
+  [[ExposureManager shared] requestExposureNotificationAuthorizationWithEnabled:YES
+                                                                       callback:^(ExposureManagerError * _Nullable error) {
     if (error) {
-      callback(@[error]);
+      reject(error.errorCode, error.localizedMessage, error.underlyingError);
     } else {
-      callback(@[GENERIC_SUCCESS]);
+      resolve(@[GENERIC_SUCCESS]);
     }
   }];
 }
 
-RCT_EXPORT_METHOD(getCurrentENPermissionsStatus: (RCTResponseSenderBlock)callback) {
-  [[ExposureManager shared] getCurrentENPermissionsStatusWithCallback:^(NSString * _Nonnull authorizationState, NSString * _Nonnull enabledState) {
-    callback(@[authorizationState, enabledState]);
+RCT_REMAP_METHOD(getCurrentENPermissionsStatus,
+                 getCurrentENPermissionsStatusWithResolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+  [[ExposureManager shared] getCurrentENPermissionsStatusWithCallback:^(NSString * _Nonnull authorizationState,
+                                                                        NSString * _Nonnull enabledState) {
+    resolve(@[authorizationState, enabledState]);
   }];
 }
 
