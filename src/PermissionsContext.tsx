@@ -23,17 +23,20 @@ const initialENPermissionStatus: ENPermissionStatus = [
   "DISABLED",
 ]
 
-const toActivationStatus = (
+const toAuthorizationEnablementStatus = (
   enPermissionStatus: ENPermissionStatus,
-): ENActivationStatus => {
+): ENAuthorizationEnablementStatus => {
   const isENAuthorized = enPermissionStatus[0] === "AUTHORIZED"
   const isENEnabled = enPermissionStatus[1] === "ENABLED"
 
   return { authorization: isENAuthorized, enablement: isENEnabled }
 }
 
-export type ENActivationStatus = { authorization: boolean; enablement: boolean }
-const initialENActivationStatus: ENActivationStatus = toActivationStatus(
+export type ENAuthorizationEnablementStatus = {
+  authorization: boolean
+  enablement: boolean
+}
+const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
   initialENPermissionStatus,
 )
 
@@ -46,7 +49,7 @@ interface PermissionsContextState {
     request: () => void
   }
   exposureNotifications: {
-    status: ENActivationStatus
+    status: ENAuthorizationEnablementStatus
     check: () => void
     request: () => void
   }
@@ -59,7 +62,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENActivationStatus,
+    status: initialENAuthorizationEnablementStatus,
     check: () => {},
     request: () => {},
   },
@@ -136,7 +139,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const enActivationStatus: ENActivationStatus = toActivationStatus(
+  const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
     exposureNotificationsPermissionStatus,
   )
 
@@ -149,7 +152,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: enActivationStatus,
+          status: isENAuthorizedAndEnabled,
           check: checkENPermission,
           request: requestENPermission,
         },

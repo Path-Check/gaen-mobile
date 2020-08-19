@@ -6,7 +6,7 @@ import CodeInputScreen from "./CodeInputScreen"
 import { AffectedUserProvider } from "../AffectedUserContext"
 import {
   PermissionsContext,
-  ENActivationStatus,
+  ENAuthorizationEnablementStatus,
 } from "../../PermissionsContext"
 import { PermissionStatus } from "../../permissionStatus"
 
@@ -15,12 +15,12 @@ jest.mock("@react-navigation/native")
 describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
-      const enPermissionStatus: ENActivationStatus = {
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
         authorization: true,
         enablement: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId, queryByTestId } = render(
@@ -40,12 +40,12 @@ describe("CodeInputScreen", () => {
 
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
-      const enPermissionStatus: ENActivationStatus = {
+      const isEnAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
         authorization: true,
         enablement: false,
       }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isEnAuthorizedAndEnabled,
       )
 
       const { getByTestId, queryByTestId } = render(
@@ -65,7 +65,7 @@ describe("CodeInputScreen", () => {
 })
 
 const createPermissionProviderValue = (
-  enActivationStatus: ENActivationStatus,
+  isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus,
 ) => {
   return {
     notification: {
@@ -74,7 +74,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: enActivationStatus,
+      status: isENAuthorizedAndEnabled,
       check: () => {},
       request: () => {},
     },
