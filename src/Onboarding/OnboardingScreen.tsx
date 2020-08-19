@@ -172,9 +172,15 @@ const skipButtonSpacingTop = Platform.select({
   ios: Spacing.xSmall,
   android: Spacing.xxLarge,
 })
+
 const languageButtonSpacingTop = Platform.select({
   ios: Spacing.small,
   android: Spacing.huge,
+})
+
+const headerFlex = Platform.select({
+  ios: 0.1,
+  android: 0.15,
 })
 
 const style = StyleSheet.create({
@@ -186,9 +192,10 @@ const style = StyleSheet.create({
     backgroundColor: Colors.secondary10,
   },
   header: {
-    flex: 0.1,
+    flex: headerFlex,
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: Colors.primaryLightBackground,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
