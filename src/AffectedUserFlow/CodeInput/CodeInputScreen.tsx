@@ -35,7 +35,7 @@ const CodeInputScreen: FunctionComponent = () => {
       ) : (
         <EnableExposureNotifications />
       )}
-      {testModeEnabled && testerHasRequestedNextScreen === false && (
+      {testModeEnabled && !testerHasRequestedNextScreen && (
         <RNButton
           title={t("common.go_to_next_screen")}
           onPress={handleOnPressNextScreen}

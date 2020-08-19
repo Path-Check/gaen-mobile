@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import PublishConsentForm from "./PublishConsentForm"
 import { Screens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
+import { TestModeProvider } from "../../TestModeContext"
 import { factories } from "../../factories"
 import { Alert } from "react-native"
 
@@ -16,9 +17,11 @@ describe("PublishConsentScreen", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(
-      <ExposureContext.Provider value={factories.exposureContext.build()}>
-        <PublishConsentForm hmacKey="hmacKey" certificate="certificate" />
-      </ExposureContext.Provider>,
+      <TestModeProvider>
+        <ExposureContext.Provider value={factories.exposureContext.build()}>
+          <PublishConsentForm hmacKey="hmacKey" certificate="certificate" />
+        </ExposureContext.Provider>
+      </TestModeProvider>,
     )
 
     fireEvent.press(getByLabelText("Cancel"))
@@ -28,9 +31,11 @@ describe("PublishConsentScreen", () => {
 
   it("displays the consent title and body", () => {
     const { getByText } = render(
-      <ExposureContext.Provider value={factories.exposureContext.build()}>
-        <PublishConsentForm hmacKey="hmacKey" certificate="certificate" />
-      </ExposureContext.Provider>,
+      <TestModeProvider>
+        <ExposureContext.Provider value={factories.exposureContext.build()}>
+          <PublishConsentForm hmacKey="hmacKey" certificate="certificate" />
+        </ExposureContext.Provider>
+      </TestModeProvider>,
     )
 
     expect(getByText("Notify others in your community")).toBeDefined()
@@ -64,9 +69,11 @@ describe("PublishConsentScreen", () => {
       })
 
       const { getByLabelText } = render(
-        <ExposureContext.Provider value={exposureContext}>
-          <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
-        </ExposureContext.Provider>,
+        <TestModeProvider>
+          <ExposureContext.Provider value={exposureContext}>
+            <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
+          </ExposureContext.Provider>
+        </TestModeProvider>,
       )
 
       fireEvent.press(getByLabelText("I Understand and Consent"))
@@ -92,9 +99,11 @@ describe("PublishConsentScreen", () => {
       const alertSpy = jest.spyOn(Alert, "alert")
 
       const { getByLabelText } = render(
-        <ExposureContext.Provider value={exposureContext}>
-          <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
-        </ExposureContext.Provider>,
+        <TestModeProvider>
+          <ExposureContext.Provider value={exposureContext}>
+            <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
+          </ExposureContext.Provider>
+        </TestModeProvider>,
       )
 
       fireEvent.press(getByLabelText("I Understand and Consent"))

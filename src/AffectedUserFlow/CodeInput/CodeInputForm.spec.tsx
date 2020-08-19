@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import CodeInputForm from "./CodeInputForm"
 import { AffectedUserProvider } from "../AffectedUserContext"
+import { TestModeProvider } from "../../TestModeContext"
 import * as API from "../verificationAPI"
 import * as Hmac from "../hmac"
 import { Screens } from "../../navigation"
@@ -16,9 +17,11 @@ jest.mock("@react-navigation/native")
 describe("CodeInputForm", () => {
   it("initializes with an empty code form", () => {
     const { getByTestId } = render(
-      <AffectedUserProvider>
-        <CodeInputForm />
-      </AffectedUserProvider>,
+      <TestModeProvider>
+        <AffectedUserProvider>
+          <CodeInputForm />
+        </AffectedUserProvider>
+      </TestModeProvider>,
     )
 
     expect(getByTestId("affected-user-code-input-form")).not.toBeNull()
@@ -29,9 +32,11 @@ describe("CodeInputForm", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByLabelText } = render(
-      <AffectedUserProvider>
-        <CodeInputForm />
-      </AffectedUserProvider>,
+      <TestModeProvider>
+        <AffectedUserProvider>
+          <CodeInputForm />
+        </AffectedUserProvider>
+      </TestModeProvider>,
     )
 
     fireEvent.press(getByLabelText("Cancel"))
@@ -75,11 +80,13 @@ describe("CodeInputForm", () => {
       const exposureContext = factories.exposureContext.build()
 
       const { getByTestId, getByLabelText } = render(
-        <ExposureContext.Provider value={exposureContext}>
-          <AffectedUserProvider>
-            <CodeInputForm />
-          </AffectedUserProvider>
-        </ExposureContext.Provider>,
+        <TestModeProvider>
+          <ExposureContext.Provider value={exposureContext}>
+            <AffectedUserProvider>
+              <CodeInputForm />
+            </AffectedUserProvider>
+          </ExposureContext.Provider>
+        </TestModeProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), code)
       fireEvent.press(getByLabelText("Next"))
@@ -120,11 +127,13 @@ describe("CodeInputForm", () => {
         .mockResolvedValueOnce(failureCertificateResponse)
 
       const { getByTestId, getByLabelText, getByText } = render(
-        <ExposureContext.Provider value={factories.exposureContext.build()}>
-          <AffectedUserProvider>
-            <CodeInputForm />
-          </AffectedUserProvider>
-        </ExposureContext.Provider>,
+        <TestModeProvider>
+          <ExposureContext.Provider value={factories.exposureContext.build()}>
+            <AffectedUserProvider>
+              <CodeInputForm />
+            </AffectedUserProvider>
+          </ExposureContext.Provider>
+        </TestModeProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
@@ -146,9 +155,11 @@ describe("CodeInputForm", () => {
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
 
       const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
-        </AffectedUserProvider>,
+        <TestModeProvider>
+          <AffectedUserProvider>
+            <CodeInputForm />
+          </AffectedUserProvider>
+        </TestModeProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
@@ -167,9 +178,11 @@ describe("CodeInputForm", () => {
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
 
       const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
-        </AffectedUserProvider>,
+        <TestModeProvider>
+          <AffectedUserProvider>
+            <CodeInputForm />
+          </AffectedUserProvider>
+        </TestModeProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
@@ -190,9 +203,11 @@ describe("CodeInputForm", () => {
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
 
       const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
-        </AffectedUserProvider>,
+        <TestModeProvider>
+          <AffectedUserProvider>
+            <CodeInputForm />
+          </AffectedUserProvider>
+        </TestModeProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))

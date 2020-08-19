@@ -3,6 +3,7 @@ import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { AffectedUserContext } from "../AffectedUserContext"
+import { TestModeProvider } from "../../TestModeContext"
 import PublishConsentScreen from "./PublishConsentScreen"
 
 jest.mock("@react-navigation/native")
@@ -11,15 +12,17 @@ describe("PublishConsentScreen", () => {
   describe("when the context contains hmacKey and certificate", () => {
     it("renders the PublishConsentForm", () => {
       const { queryByText, getByTestId } = render(
-        <AffectedUserContext.Provider
-          value={{
-            hmacKey: "hmacKey",
-            certificate: "certificate",
-            setExposureSubmissionCredentials: jest.fn(),
-          }}
-        >
-          <PublishConsentScreen />
-        </AffectedUserContext.Provider>,
+        <TestModeProvider>
+          <AffectedUserContext.Provider
+            value={{
+              hmacKey: "hmacKey",
+              certificate: "certificate",
+              setExposureSubmissionCredentials: jest.fn(),
+            }}
+          >
+            <PublishConsentScreen />
+          </AffectedUserContext.Provider>
+        </TestModeProvider>,
       )
 
       expect(queryByText("Invalid State")).toBeNull()
@@ -32,15 +35,17 @@ describe("PublishConsentScreen", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const { getByText } = render(
-        <AffectedUserContext.Provider
-          value={{
-            hmacKey: null,
-            certificate: null,
-            setExposureSubmissionCredentials: jest.fn(),
-          }}
-        >
-          <PublishConsentScreen />
-        </AffectedUserContext.Provider>,
+        <TestModeProvider>
+          <AffectedUserContext.Provider
+            value={{
+              hmacKey: null,
+              certificate: null,
+              setExposureSubmissionCredentials: jest.fn(),
+            }}
+          >
+            <PublishConsentScreen />
+          </AffectedUserContext.Provider>
+        </TestModeProvider>,
       )
 
       expect(getByText("Invalid State")).toBeDefined()

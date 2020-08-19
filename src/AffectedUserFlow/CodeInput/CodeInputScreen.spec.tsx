@@ -4,6 +4,7 @@ import "@testing-library/jest-native/extend-expect"
 
 import CodeInputScreen from "./CodeInputScreen"
 import { AffectedUserProvider } from "../AffectedUserContext"
+import { TestModeProvider } from "../../TestModeContext"
 import {
   PermissionsContext,
   ENPermissionStatus,
@@ -21,11 +22,13 @@ describe("CodeInputScreen", () => {
       )
 
       const { getByTestId, queryByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
-            <CodeInputScreen />
-          </AffectedUserProvider>
-        </PermissionsContext.Provider>,
+        <TestModeProvider>
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <AffectedUserProvider>
+              <CodeInputScreen />
+            </AffectedUserProvider>
+          </PermissionsContext.Provider>
+        </TestModeProvider>,
       )
 
       expect(getByTestId("affected-user-code-input-form")).not.toBeNull()
@@ -43,11 +46,13 @@ describe("CodeInputScreen", () => {
       )
 
       const { getByTestId, queryByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
-            <CodeInputScreen />
-          </AffectedUserProvider>
-        </PermissionsContext.Provider>,
+        <TestModeProvider>
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <AffectedUserProvider>
+              <CodeInputScreen />
+            </AffectedUserProvider>
+          </PermissionsContext.Provider>
+        </TestModeProvider>,
       )
 
       expect(queryByTestId("affected-user-code-input-form")).toBeNull()
