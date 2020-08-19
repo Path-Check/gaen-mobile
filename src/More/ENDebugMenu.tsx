@@ -207,8 +207,9 @@ const style = StyleSheet.create({
     borderColor: Colors.secondary75,
   },
   listItemWithSwitch: {
-    justifyContent: "space-between",
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
     borderColor: Colors.secondary75,
