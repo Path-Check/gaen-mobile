@@ -2,16 +2,14 @@ package org.pathcheck.covidsafepaths;
 
 import android.app.Application;
 import android.content.Context;
+import com.bugsnag.android.Bugsnag;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.bugsnag.android.Bugsnag;
-
-import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
-
+import io.realm.Realm;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
@@ -55,7 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     Realm.init(this);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
-	Bugsnag.start(this);
+    Bugsnag.start(this);
   }
 
   /**

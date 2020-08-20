@@ -49,14 +49,14 @@ public class ExposureKeyModule extends ReactContextBaseJavaModule {
     }
   }
 
-    @ReactMethod
-    public void storeRevisionToken(String revisionToken, final Promise promise) {
-        RealmSecureStorageBte.INSTANCE.upsertRevisionToken(revisionToken);
-        promise.resolve(null);
-    }
+  @ReactMethod
+  public void storeRevisionToken(String revisionToken, final Promise promise) {
+    RealmSecureStorageBte.INSTANCE.upsertRevisionToken(revisionToken);
+    promise.resolve(null);
+  }
 
-    @ReactMethod
-    public void getRevisionToken(final Promise promise) {
-        promise.resolve(RealmSecureStorageBte.INSTANCE.getRevisionToken());
-    }
+  @ReactMethod
+  public void getRevisionToken(final Promise promise) {
+    promise.resolve(RealmSecureStorageBte.INSTANCE.getRevisionToken());
+  }
 }
