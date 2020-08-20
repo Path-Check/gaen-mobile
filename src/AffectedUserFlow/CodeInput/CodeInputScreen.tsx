@@ -10,7 +10,7 @@ import { Colors } from "../../styles"
 const CodeInputScreen: FunctionComponent = () => {
   const { exposureNotifications } = usePermissionsContext()
 
-  const isEnabled = exposureNotifications.status.enablement
+  const isEnabled = exposureNotifications.status.enabled
 
   return (
     <View style={style.container}>

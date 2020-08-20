@@ -16,8 +16,8 @@ describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: true,
+        authorized: true,
+        enabled: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -41,8 +41,8 @@ describe("CodeInputScreen", () => {
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
       const isEnAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: false,
+        authorized: true,
+        enabled: false,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isEnAuthorizedAndEnabled,

@@ -50,8 +50,8 @@ const HomeScreen: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const btStatus = useBluetoothStatus()
 
-  const isAuthorized = exposureNotifications.status.authorization
-  const isEnabled = exposureNotifications.status.enablement
+  const isAuthorized = exposureNotifications.status.authorized
+  const isEnabled = exposureNotifications.status.enabled
   const isEnabledAndAuthorized = isEnabled && isAuthorized
 
   const showUnauthorizedAlert = () => {

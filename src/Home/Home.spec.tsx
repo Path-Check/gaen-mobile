@@ -40,14 +40,14 @@ jest.mock("../More/useApplicationInfo", () => {
 jest.mock("./useBluetoothStatus.ts")
 
 describe("Home", () => {
-  describe("When the exposure notification permissions are enabled and authorized and Bluetooth is on", () => {
+  describe("When the exposure notification permissions are enabled and the app is authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: true,
+        authorized: true,
+        enabled: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -86,14 +86,14 @@ describe("Home", () => {
     })
   })
 
-  describe("When the exposure notification permissions are not enabled and not authorized", () => {
+  describe("When the exposure notification permissions are not enabled and the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", async () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: false,
-        enablement: false,
+        authorized: false,
+        enabled: false,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -129,8 +129,8 @@ describe("Home", () => {
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: true,
+        authorized: true,
+        enabled: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -167,8 +167,8 @@ describe("Home", () => {
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: true,
+        authorized: true,
+        enabled: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -204,8 +204,8 @@ describe("Home", () => {
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
       const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorization: true,
-        enablement: true,
+        authorized: true,
+        enabled: true,
       }
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -233,8 +233,8 @@ describe("Home", () => {
 
         const requestPermission = jest.fn()
         const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-          authorization: true,
-          enablement: false,
+          authorized: true,
+          enabled: false,
         }
         const permissionProviderValue = createPermissionProviderValue(
           isENAuthorizedAndEnabled,
@@ -268,8 +268,8 @@ describe("Home", () => {
         })
 
         const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-          authorization: true,
-          enablement: true,
+          authorized: true,
+          enabled: true,
         }
         const permissionProviderValue = createPermissionProviderValue(
           isENAuthorizedAndEnabled,
@@ -299,8 +299,8 @@ describe("Home", () => {
           ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
           const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-            authorization: false,
-            enablement: false,
+            authorized: false,
+            enabled: false,
           }
           const permissionProviderValue = createPermissionProviderValue(
             isENAuthorizedAndEnabled,

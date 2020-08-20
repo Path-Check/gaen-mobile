@@ -29,12 +29,15 @@ const toAuthorizationEnablementStatus = (
   const isENAuthorized = enPermissionStatus[0] === "AUTHORIZED"
   const isENEnabled = enPermissionStatus[1] === "ENABLED"
 
-  return { authorization: isENAuthorized, enablement: isENEnabled }
+  return {
+    authorized: isENAuthorized,
+    enabled: isENEnabled,
+  }
 }
 
 export type ENAuthorizationEnablementStatus = {
-  authorization: boolean
-  enablement: boolean
+  authorized: boolean
+  enabled: boolean
 }
 const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
   initialENPermissionStatus,
