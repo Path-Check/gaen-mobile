@@ -18,11 +18,9 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import androidx.annotation.Nullable;
-
 import com.google.android.gms.common.internal.Objects;
 import com.google.auto.value.AutoValue;
 import com.google.common.io.BaseEncoding;
-
 import java.util.Arrays;
 
 /**
@@ -52,8 +50,11 @@ public abstract class DiagnosisKey {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setKey(ByteArrayValue key);
+
     public abstract Builder setIntervalNumber(int intervalNumber);
+
     public abstract Builder setRollingPeriod(int rollingPeriod);
+
     public abstract DiagnosisKey build();
 
     public Builder setKeyBytes(byte[] keyBytes) {

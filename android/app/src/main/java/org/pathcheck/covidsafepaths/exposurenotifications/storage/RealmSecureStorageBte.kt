@@ -10,10 +10,10 @@ import com.google.common.util.concurrent.ListenableFuture
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
-import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.REVISION_TOKEN_KEY
+import java.security.SecureRandom
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
