@@ -1,13 +1,10 @@
 import React from "react"
-import { render, cleanup } from "@testing-library/react-native"
+import { render, cleanup, fireEvent } from "@testing-library/react-native"
 import NoExposures from "./NoExposures"
+import { Linking } from "react-native"
+import { ConfigurationContext } from "../../ConfigurationContext"
+import { factories } from "../../factories"
 
-jest.mock("react-native-config", () => {
-  return {
-    GAEN_AUTHORITY_NAME: "Minnesota",
-    AUTHORITY_ADVICE_URL: "minnesota.com",
-  }
-})
 afterEach(cleanup)
 describe("NoExposures", () => {
   it("reports when a user has no exposures", () => {
@@ -30,12 +27,26 @@ describe("NoExposures", () => {
   describe("when the HA has provided a link", () => {
     it("prompts the user to see HA guidance", () => {
       expect.assertions(2)
-      jest.resetAllMocks()
+      const healthAuthorityAdviceUrl = "https://www.health.state.mn.us/"
+      const healthAuthorityName = "healthAuthorityName"
+      const openURLSpy = jest.spyOn(Linking, "openURL")
 
-      const { queryByText } = render(<NoExposures />)
+      const { queryByText, getByText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityAdviceUrl,
+            healthAuthorityName,
+          })}
+        >
+          <NoExposures />
+        </ConfigurationContext.Provider>,
+      )
 
-      expect(queryByText("Review guidance from Minnesota")).not.toBeNull()
-      expect(queryByText("Learn More")).not.toBeNull()
+      expect(
+        queryByText(`Review guidance from ${healthAuthorityName}`),
+      ).not.toBeNull()
+      fireEvent.press(getByText("Learn More"))
+      expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityAdviceUrl)
     })
   })
 })

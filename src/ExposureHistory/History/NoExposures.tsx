@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import env from "react-native-config"
 import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -7,11 +6,8 @@ import { useTranslation } from "react-i18next"
 import { GlobalText } from "../../components/GlobalText"
 import { Colors, Typography, Spacing, Outlines } from "../../styles"
 import { Icons } from "../../assets"
+import { useConfigurationContext } from "../../ConfigurationContext"
 
-const {
-  GAEN_AUTHORITY_NAME: healthAuthorityName,
-  AUTHORITY_ADVICE_URL: healthAuthorityLink,
-} = env
 const NoExposures: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
@@ -31,9 +27,13 @@ const NoExposures: FunctionComponent = () => {
 
 const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
+  const {
+    healthAuthorityName,
+    healthAuthorityAdviceUrl,
+  } = useConfigurationContext()
 
   const handleOnPressHALink = () => {
-    Linking.openURL(healthAuthorityLink)
+    Linking.openURL(healthAuthorityAdviceUrl)
   }
 
   return (
@@ -41,7 +41,7 @@ const HealthGuidelines: FunctionComponent = () => {
       <GlobalText style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
       </GlobalText>
-      {Boolean(healthAuthorityLink) && (
+      {Boolean(healthAuthorityAdviceUrl) && (
         <>
           <GlobalText style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {

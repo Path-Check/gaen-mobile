@@ -1,5 +1,5 @@
 import React from "react"
-import { Alert } from "react-native"
+import { Alert, Share } from "react-native"
 import {
   render,
   waitFor,
@@ -18,6 +18,8 @@ import {
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "./useBluetoothStatus"
+import { factories } from "../factories"
+import { ConfigurationContext } from "../ConfigurationContext"
 
 jest.mock("@react-navigation/native")
 
@@ -40,6 +42,32 @@ jest.mock("../More/useApplicationInfo", () => {
 jest.mock("./useBluetoothStatus.ts")
 
 describe("Home", () => {
+  it("allows users to share the application", () => {
+    const configuration = factories.configurationContext.build()
+    const permissionProviderValue = createPermissionProviderValue({
+      authorized: true,
+      enabled: true,
+    })
+
+    const shareSpy = jest.spyOn(Share, "share")
+
+    const { getByLabelText } = render(
+      <ConfigurationContext.Provider value={configuration}>
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>
+      </ConfigurationContext.Provider>,
+    )
+
+    fireEvent.press(
+      getByLabelText("Share the app and help protect yourself and others."),
+    )
+
+    expect(shareSpy).toHaveBeenCalledWith({
+      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadLink}`,
+    })
+  })
+
   describe("When the exposure notification permissions are enabled and the app is authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
       const isBluetoothOn = true

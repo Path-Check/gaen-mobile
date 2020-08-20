@@ -16,7 +16,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
-import env from "react-native-config"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
@@ -36,6 +35,7 @@ import {
   Iconography,
 } from "../styles"
 import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const HomeScreen: FunctionComponent = () => {
   const {
@@ -49,6 +49,7 @@ const HomeScreen: FunctionComponent = () => {
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
   const btStatus = useBluetoothStatus()
+  const configuration = useConfigurationContext()
 
   const isAuthorized = exposureNotifications.status.authorized
   const isEnabled = exposureNotifications.status.enabled
@@ -101,17 +102,11 @@ const HomeScreen: FunctionComponent = () => {
   }
 
   const handleOnPressShare = async () => {
-    const isIOS = Platform.OS === "ios"
-
-    const appDownloadLink = isIOS
-      ? env.IOS_APP_STORE_URL
-      : env.ANDROID_PLAY_STORE_URL
-
     try {
       await Share.share({
         message: t("home.bluetooth.share_message", {
           applicationName,
-          appDownloadLink,
+          appDownloadLink: configuration.appDownloadLink,
         }),
       })
     } catch (error) {
@@ -205,6 +200,7 @@ const HomeScreen: FunctionComponent = () => {
           <TouchableOpacity
             style={style.shareContainer}
             onPress={handleOnPressShare}
+            accessibilityLabel={t("home.bluetooth.share")}
           >
             <View style={style.shareImageContainer}>
               <Image source={Images.HugEmoji} style={style.shareImage} />

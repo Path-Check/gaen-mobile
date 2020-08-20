@@ -1,20 +1,17 @@
 import { fireEvent, render } from "@testing-library/react-native"
 import React from "react"
 import { I18nextProvider } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import i18n from "../../locales/languages"
-import { AssessmentNavigationContext } from "../Context"
 import { Share } from "./Share"
 
+jest.mock("@react-navigation/native")
 describe("Share", () => {
   it("displays the share screen title and description", () => {
     const { getByText } = render(
       <I18nextProvider i18n={i18n}>
-        <AssessmentNavigationContext.Provider
-          value={{ completeRoute: "MyRoute" }}
-        >
-          <Share />
-        </AssessmentNavigationContext.Provider>
+        <Share />
       </I18nextProvider>,
     )
     expect(getByText("Publish anonymized data")).toBeDefined()
@@ -32,18 +29,15 @@ describe("Share", () => {
   })
 
   it("navigates to the assessment complete screen when tap on the cta", () => {
-    const push = jest.fn()
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
     const { getByTestId } = render(
       <I18nextProvider i18n={i18n}>
-        <AssessmentNavigationContext.Provider
-          value={{ completeRoute: "MyRoute" }}
-        >
-          <Share navigation={{ push }} />
-        </AssessmentNavigationContext.Provider>
+        <Share />
       </I18nextProvider>,
     )
     const cta = getByTestId("assessment-button")
     fireEvent.press(cta)
-    expect(push).toHaveBeenCalledWith("AssessmentComplete")
+    expect(navigateSpy).toHaveBeenCalledWith("AssessmentComplete")
   })
 })

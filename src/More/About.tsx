@@ -1,18 +1,18 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { Platform, ScrollView, StyleSheet, View } from "react-native"
-import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 import { useApplicationInfo } from "./useApplicationInfo"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
-  const { GAEN_AUTHORITY_NAME: healthAuthorityName } = env
+  const { healthAuthorityName } = useConfigurationContext()
 
   return (
     <ScrollView

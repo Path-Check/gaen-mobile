@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import env from "react-native-config"
 import { View, ScrollView, StyleSheet, Linking } from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -14,6 +13,7 @@ import { ExposureDatum, exposureWindowBucket } from "../exposure"
 
 import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const ExposureDetail: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -22,15 +22,14 @@ const ExposureDetail: FunctionComponent = () => {
   >()
   useStatusBarEffect("light-content")
   const { t } = useTranslation()
+  const {
+    healthAuthorityName,
+    healthAuthorityAdviceUrl,
+  } = useConfigurationContext()
 
   const [connectivity, setConnectivity] = useState<boolean | null | undefined>(
     true,
   )
-
-  const {
-    GAEN_AUTHORITY_NAME: healthAuthorityName,
-    AUTHORITY_ADVICE_URL: healthAuthorityLink,
-  } = env
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
@@ -63,8 +62,8 @@ const ExposureDetail: FunctionComponent = () => {
   }
 
   const handleOnPressNextStep = () => {
-    healthAuthorityLink
-      ? Linking.openURL(healthAuthorityLink)
+    healthAuthorityAdviceUrl
+      ? Linking.openURL(healthAuthorityAdviceUrl)
       : navigation.navigate(Screens.SelfAssessment)
   }
 

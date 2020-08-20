@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
-import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
@@ -13,6 +12,7 @@ import MoreStack from "./MoreStack"
 import ReportIssueStack from "./ReportIssueStack"
 
 import { useExposureContext } from "../ExposureContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
@@ -24,8 +24,10 @@ const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
-  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
-  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
+  const {
+    displaySelfAssessment,
+    displayReportAnIssue,
+  } = useConfigurationContext()
 
   const applyBadge = (icon: JSX.Element) => {
     return (

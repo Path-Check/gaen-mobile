@@ -3,6 +3,8 @@ import { render } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
 import { useApplicationInfo } from "./useApplicationInfo"
+import { ConfigurationContext } from "../ConfigurationContext"
+import { factories } from "../factories"
 
 jest.mock("./useApplicationInfo")
 describe("About", () => {
@@ -46,5 +48,29 @@ describe("About", () => {
     const { getByText } = render(<AboutScreen />)
 
     expect(getByText(`${mockOsName} v${mockOsVersion}`)).toBeDefined()
+  })
+
+  it("shows the screen description with the app name and the authority", () => {
+    const healthAuthorityName = "authority name"
+    const applicationName = "applicationName"
+
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName,
+      versionInfo: "versionInfo",
+    })
+
+    const { getByText } = render(
+      <ConfigurationContext.Provider
+        value={factories.configurationContext.build({ healthAuthorityName })}
+      >
+        <AboutScreen />
+      </ConfigurationContext.Provider>,
+    )
+
+    expect(
+      getByText(
+        `The ${applicationName} app is made available by ${healthAuthorityName}`,
+      ),
+    ).toBeDefined()
   })
 })
