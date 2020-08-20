@@ -21,9 +21,9 @@ export const textInputFormField: TextStyle = {
 }
 
 export const required: TextStyle = {
-  fontSize: Typography.xxSmall,
+  fontSize: Typography.xSmall,
   color: Colors.primaryText,
-  marginTop: Spacing.xxSmall,
+  marginTop: Spacing.xSmall,
 }
 
 export const checkboxIcon: ImageStyle = {
