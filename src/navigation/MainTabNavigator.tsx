@@ -25,7 +25,7 @@ const MainTabNavigator: FunctionComponent = () => {
   const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
-  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true" || true
+  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
 
   const applyBadge = (icon: JSX.Element) => {
     return (
