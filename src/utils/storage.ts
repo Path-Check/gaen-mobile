@@ -17,6 +17,14 @@ async function setStoreData(key: string, item: string): Promise<void> {
   }
 }
 
+async function removeStoreData(key: string): Promise<void> {
+  try {
+    return await AsyncStorage.removeItem(key)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 const LANG_OVERRIDE = "LANG_OVERRIDE"
 export async function getUserLocaleOverride(): Promise<string | null> {
   return await getStoreData(LANG_OVERRIDE)
@@ -34,4 +42,8 @@ export async function getIsOnboardingComplete(): Promise<boolean> {
 
 export async function setIsOnboardingComplete(): Promise<void> {
   return setStoreData(ONBOARDING_COMPLETE, ONBOARDING_COMPLETE)
+}
+
+export async function removeIsOnboardingComplete(): Promise<void> {
+  return removeStoreData(ONBOARDING_COMPLETE)
 }

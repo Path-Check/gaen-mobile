@@ -18,7 +18,7 @@ import { Colors, Spacing, Typography, Buttons } from "../styles"
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { setOnboardingToComplete } = useOnboardingContext()
+  const { completeOnboarding } = useOnboardingContext()
 
   const requestPermission = async () => {
     await notification.request()
@@ -26,11 +26,11 @@ const NotificationsPermissions: FunctionComponent = () => {
 
   const handleOnPressEnable = async () => {
     await requestPermission()
-    setOnboardingToComplete()
+    completeOnboarding()
   }
 
   const handleOnPressMaybeLater = () => {
-    setOnboardingToComplete()
+    completeOnboarding()
   }
 
   return (
@@ -81,10 +81,10 @@ const NotificationsPermissions: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   contentContainer: {

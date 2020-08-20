@@ -22,7 +22,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const { setOnboardingToComplete } = useOnboardingContext()
+  const { completeOnboarding } = useOnboardingContext()
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressEnable = () => {
@@ -38,7 +38,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
     if (Platform.OS === "ios") {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
-      setOnboardingToComplete()
+      completeOnboarding()
     }
   }
 
@@ -89,10 +89,10 @@ const ActivateProximityTracing: FunctionComponent = () => {
 }
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   contentContainer: {

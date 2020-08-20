@@ -11,31 +11,6 @@ import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
-interface LanguageSelectionListItemProps {
-  icon: string
-  iconLabel: string
-  label: string
-  onPress: () => void
-}
-const LanguageSelectionListItem = ({
-  icon,
-  iconLabel,
-  label,
-  onPress,
-}: LanguageSelectionListItemProps) => (
-  <TouchableOpacity style={style.listItem} onPress={onPress}>
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <SvgXml
-        xml={icon}
-        accessible
-        accessibilityLabel={iconLabel}
-        style={[style.icon, { marginRight: Spacing.small }]}
-      />
-      <GlobalText style={{ ...Typography.mainContent }}>{label}</GlobalText>
-    </View>
-  </TouchableOpacity>
-)
-
 const MenuScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const {
@@ -45,40 +20,33 @@ const MenuScreen: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   useStatusBarEffect("light-content")
 
-  interface SettingsListItemProps {
-    label: string
-    onPress: () => void
-    description?: string
-  }
-
-  const SettingsListItem = ({
-    label,
-    onPress,
-    description,
-  }: SettingsListItemProps) => {
-    return (
-      <TouchableOpacity style={style.listItem} onPress={onPress}>
-        <View>
-          <GlobalText style={style.listItemText}>{label}</GlobalText>
-          {description ? (
-            <GlobalText style={style.descriptionText}>{description}</GlobalText>
-          ) : null}
-        </View>
-      </TouchableOpacity>
-    )
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(Screens.LanguageSelection)
   }
 
   return (
     <ScrollView style={style.container}>
-      <View style={style.section}>
-        <LanguageSelectionListItem
-          label={languageName || t("label.unknown")}
-          icon={Icons.LanguagesIcon}
-          iconLabel={t("label.language_icon")}
-          onPress={() => navigation.navigate(Screens.LanguageSelection)}
-        />
+      <View style={[style.section, style.firstSection]}>
+        <TouchableOpacity
+          onPress={handleOnPressSelectLanguage}
+          accessible
+          accessibilityLabel={t("more.select_language")}
+        >
+          <View style={[style.listItem, style.languageButtonContainer]}>
+            <SvgXml
+              xml={Icons.LanguagesIcon}
+              width={Iconography.small}
+              height={Iconography.small}
+              style={style.icon}
+              accessible
+              accessibilityLabel={t("label.language_icon")}
+            />
+            <GlobalText style={style.languageButtonText}>
+              {languageName}
+            </GlobalText>
+          </View>
+        </TouchableOpacity>
       </View>
-
       <View style={style.section}>
         <SettingsListItem
           label={t("screen_titles.about")}
@@ -86,44 +54,81 @@ const MenuScreen: FunctionComponent = () => {
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(MoreStackScreens.Licenses)}
+          onPress={() => navigation.navigate(MoreStackScreens.Legal)}
+          lastItem
         />
       </View>
       <View style={style.section}>
         <SettingsListItem
           label="EN Debug Menu"
           onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+          lastItem
         />
       </View>
     </ScrollView>
   )
 }
 
+interface SettingsListItemProps {
+  label: string
+  onPress: () => void
+  lastItem?: boolean
+}
+
+const SettingsListItem = ({
+  label,
+  onPress,
+  lastItem,
+}: SettingsListItemProps) => {
+  return (
+    <View>
+      <TouchableOpacity onPress={onPress}>
+        <View style={style.listItem}>
+          <GlobalText style={style.listItemText}>{label}</GlobalText>
+        </View>
+      </TouchableOpacity>
+      {!lastItem && <View style={style.divider} />}
+    </View>
+  )
+}
+
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.secondary10,
   },
   section: {
-    flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.medium,
+    borderBottomColor: Colors.secondary50,
+    borderBottomWidth: Outlines.hairline,
+    borderTopColor: Colors.secondary50,
+    borderTopWidth: Outlines.hairline,
+  },
+  firstSection: {
+    borderTopWidth: 0,
+  },
+  languageButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  languageButtonText: {
+    ...Typography.mainContent,
   },
   icon: {
-    maxWidth: Iconography.small,
-    maxHeight: Iconography.small,
+    marginRight: Spacing.small,
   },
   listItem: {
-    flex: 1,
-    paddingHorizontal: Spacing.small,
+    paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.medium,
-    borderBottomColor: Colors.tertiaryViolet,
-    borderBottomWidth: Outlines.hairline,
+    borderBottomWidth: 0,
   },
   listItemText: {
     ...Typography.tappableListItem,
   },
-  descriptionText: {
-    ...Typography.description,
+  divider: {
+    height: Outlines.hairline,
+    backgroundColor: Colors.secondary50,
+    marginHorizontal: Spacing.medium,
   },
 })
 

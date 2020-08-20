@@ -62,7 +62,7 @@ const ExposureDetail: FunctionComponent = () => {
             xml={Icons.ExposureIcon}
             accessible
             accessibilityLabel={t("exposure_history.possible_exposure")}
-            fill={Colors.primaryViolet}
+            fill={Colors.primary125}
             width={Iconography.xSmall}
             height={Iconography.xSmall}
           />
@@ -137,16 +137,16 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xLarge,
   },
   exposureWindow: {
     ...Typography.base,
-    color: Colors.darkGray,
+    color: Colors.neutral100,
     textTransform: "uppercase",
     letterSpacing: Typography.mediumLetterSpacing,
     marginLeft: Spacing.xSmall,
@@ -157,7 +157,7 @@ const style = StyleSheet.create({
   },
   contentText: {
     ...Typography.tertiaryContent,
-    color: Colors.darkGray,
+    color: Colors.neutral100,
   },
   exposureWindowContainer: {
     flexDirection: "row",
@@ -165,7 +165,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   bottomContainer: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     flex: 1,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.medium,
@@ -179,7 +179,7 @@ const style = StyleSheet.create({
   },
   bottomSubheaderText: {
     ...Typography.tertiaryContent,
-    color: Colors.darkGray,
+    color: Colors.neutral100,
     marginBottom: Spacing.medium,
   },
   recommendations: {
@@ -195,7 +195,7 @@ const style = StyleSheet.create({
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
     borderRadius: 50,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     padding: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
   },

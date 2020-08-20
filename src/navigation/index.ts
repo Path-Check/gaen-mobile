@@ -90,7 +90,7 @@ export const ReportIssueScreens: {
 export type MoreStackScreen =
   | "Menu"
   | "About"
-  | "Licenses"
+  | "Legal"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "AffectedUserFlow"
@@ -102,7 +102,7 @@ export const MoreStackScreens: {
 } = {
   Menu: "Menu",
   About: "About",
-  Licenses: "Licenses",
+  Legal: "Legal",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
@@ -185,8 +185,8 @@ export type StatusBarStyle = "dark-content" | "light-content"
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   const backgroundColor =
     statusBarStyle === "dark-content"
-      ? Colors.primaryBackground
-      : Colors.primaryViolet
+      ? Colors.primaryLightBackground
+      : Colors.primary125
 
   useFocusEffect(
     useCallback(() => {

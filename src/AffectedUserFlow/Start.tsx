@@ -69,7 +69,7 @@ const style = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.large,
     paddingTop: Spacing.huge,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   cancelButtonContainer: {
     position: "absolute",

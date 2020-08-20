@@ -10,9 +10,9 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
+import { useApplicationName } from "../More/useApplicationInfo"
 import { useStatusBarEffect } from "../navigation"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
@@ -27,7 +27,7 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
 }) => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const applicationName = env.IN_APP_NAME
+  const { applicationName } = useApplicationName()
   useStatusBarEffect("dark-content")
 
   const headerContainerConditionalStyle = modalStyle && {
@@ -58,7 +58,7 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
         >
           <SvgXml
             xml={Icons.XInCircle}
-            fill={Colors.lighterGray}
+            fill={Colors.neutral30}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -127,14 +127,14 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
     position: "absolute",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
   },
   headerContainerModal: {
@@ -145,7 +145,7 @@ const style = StyleSheet.create({
     ...Typography.header3,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
   },
   closeIconContainer: {
     flex: 1,
@@ -174,7 +174,7 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.mainContent,
     ...Typography.mediumBold,
-    color: Colors.black,
+    color: Colors.primaryText,
     marginBottom: Spacing.medium,
   },
   bodyText: {

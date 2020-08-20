@@ -45,7 +45,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: Colors.primaryBackground }}
+      style={{ flex: 1, backgroundColor: Colors.primaryLightBackground }}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
@@ -90,7 +90,7 @@ const style = StyleSheet.create({
   },
   container: {
     padding: Spacing.medium,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerRow: {
     flexDirection: "row",
@@ -100,7 +100,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header1,
-    color: Colors.black,
+    color: Colors.primaryText,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {

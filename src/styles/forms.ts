@@ -7,9 +7,9 @@ import * as Typography from "./typography"
 
 export const textInputFormField: TextStyle = {
   color: Colors.primaryText,
-  backgroundColor: Colors.primaryBackground,
+  backgroundColor: Colors.primaryLightBackground,
   borderRadius: Outlines.baseBorderRadius,
-  borderColor: Colors.formInputBorder,
+  borderColor: Colors.neutral10,
   borderWidth: Outlines.hairline,
   justifyContent: "center",
   fontSize: Typography.medium,
@@ -37,15 +37,16 @@ export const checkboxText: TextStyle = {
 
 export const textInput: TextStyle = {
   ...Typography.primaryTextInput,
-  ...Outlines.textInputBorder,
+  borderRadius: Outlines.baseBorderRadius,
+  borderColor: Colors.neutral10,
+  borderWidth: Outlines.hairline,
   padding: Spacing.small,
   textAlign: "center",
-  borderWidth: Outlines.thin,
 }
 
 export const inputIndicator: ViewStyle = {
   alignItems: "center",
-  borderColor: Colors.radioBorder,
+  borderColor: Colors.neutral75,
   borderWidth: Outlines.thin,
   height: Spacing.large,
   justifyContent: "center",

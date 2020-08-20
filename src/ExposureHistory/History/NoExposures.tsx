@@ -77,7 +77,7 @@ const HealthGuidelines: FunctionComponent = () => {
             </GlobalText>
             <SvgXml
               xml={Icons.Arrow}
-              fill={connectivity ? Colors.primaryViolet : Colors.lightGray}
+              fill={connectivity ? Colors.primary125 : Colors.neutral25}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
@@ -122,7 +122,7 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
   return (
     <View style={style.listItem}>
       <View style={style.listItemIconContainer}>
-        <SvgXml xml={icon} fill={Colors.primaryViolet} />
+        <SvgXml xml={icon} fill={Colors.primary125} />
       </View>
       <GlobalText style={style.listItemText}>{text}</GlobalText>
     </View>
@@ -131,9 +131,9 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
 
 const style = StyleSheet.create({
   noExposureCard: {
-    backgroundColor: Colors.primaryViolet,
+    backgroundColor: Colors.primary125,
     ...Outlines.roundedBorder,
-    borderColor: Colors.primaryViolet,
+    borderColor: Colors.primary125,
     padding: Spacing.large,
   },
   headerText: {
@@ -147,7 +147,7 @@ const style = StyleSheet.create({
     color: Colors.white,
   },
   card: {
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     ...Outlines.roundedBorder,
     borderColor: Colors.white,
     padding: Spacing.large,
@@ -167,10 +167,10 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   learnMoreCta: {
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
   },
   disableLearnMoreCta: {
-    color: Colors.lightGray,
+    color: Colors.neutral25,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
@@ -190,10 +190,10 @@ const style = StyleSheet.create({
     width: Spacing.huge,
   },
   listItemText: {
-    color: Colors.darkGray,
+    color: Colors.neutral100,
   },
   connectivityWarningText: {
-    color: Colors.primaryRed,
+    color: Colors.danger100,
     marginBottom: Spacing.large,
   },
 })

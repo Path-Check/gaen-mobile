@@ -1,6 +1,5 @@
 import React from "react"
-import { Linking } from "react-native"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
 import { useApplicationInfo } from "./useApplicationInfo"
@@ -31,20 +30,6 @@ describe("About", () => {
 
     expect(getByText("Version:")).toBeDefined()
     expect(getByText(versionInfo)).toBeDefined()
-  })
-
-  it("navigates to the pathcheck organization when tapped on the url", () => {
-    const openURLSpy = jest.spyOn(Linking, "openURL")
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName: "name",
-      versionInfo: "versionInfo",
-    })
-
-    const { getByText } = render(<AboutScreen />)
-
-    fireEvent.press(getByText("pathcheck.org"))
-
-    expect(openURLSpy).toHaveBeenCalledWith("https://pathcheck.org/")
   })
 
   it("shows the OS name and version", () => {

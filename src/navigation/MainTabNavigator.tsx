@@ -25,6 +25,7 @@ const MainTabNavigator: FunctionComponent = () => {
   const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
 
   const applyBadge = (icon: JSX.Element) => {
     return (
@@ -55,7 +56,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={icon}
-        fill={focused ? Colors.primaryViolet : Colors.quaternaryViolet}
+        fill={focused ? Colors.primary125 : Colors.secondary100}
         accessible
         accessibilityLabel={label}
         width={size}
@@ -141,7 +142,7 @@ const MainTabNavigator: FunctionComponent = () => {
         showLabel: false,
         style: {
           backgroundColor: Colors.white,
-          borderTopColor: Colors.lighterGray,
+          borderTopColor: Colors.neutral30,
           height: insets.bottom + 60,
         },
       }}
@@ -162,14 +163,16 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      <Tab.Screen
-        name={Stacks.ReportIssue}
-        component={ReportIssueStack}
-        options={{
-          tabBarLabel: t("navigation.report_issue"),
-          tabBarIcon: QuestionMarkIcon,
-        }}
-      />
+      {displayReportAnIssue && (
+        <Tab.Screen
+          name={Stacks.ReportIssue}
+          component={ReportIssueStack}
+          options={{
+            tabBarLabel: t("navigation.report_issue"),
+            tabBarIcon: QuestionMarkIcon,
+          }}
+        />
+      )}
       {displaySelfAssessment && (
         <Tab.Screen
           name={Stacks.SelfAssessment}

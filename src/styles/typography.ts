@@ -27,6 +27,7 @@ export const xxxLargeLineHeight = 36
 // Letter Spacing
 export const baseLetterSpacing = 0.25
 export const mediumLetterSpacing = 0.5
+export const largeLetterSpacing = 3
 
 // Font Weights
 export const baseWeight = "400"
@@ -123,31 +124,31 @@ export const xxxLargeFont: TextStyle = {
 export const header1: TextStyle = {
   ...xxxLargeFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header2: TextStyle = {
   ...xxLargeFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header3: TextStyle = {
   ...xLargeFont,
   ...bold,
-  color: Colors.secondaryHeaderText,
+  color: Colors.neutral140,
 }
 
 export const header4: TextStyle = {
   ...largeFont,
   ...mediumBold,
-  color: Colors.secondaryHeaderText,
+  color: Colors.neutral140,
 }
 
 export const header5: TextStyle = {
   ...mediumFont,
   ...mediumBold,
-  color: Colors.primaryHeaderText,
+  color: Colors.primaryText,
 }
 
 export const header6: TextStyle = {
@@ -159,23 +160,18 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
-  color: Colors.secondaryText,
+  color: Colors.neutral140,
 }
 
 export const secondaryContent: TextStyle = {
   ...mediumFont,
   ...base,
-  color: Colors.secondaryText,
+  color: Colors.neutral140,
 }
 
 export const tertiaryContent: TextStyle = {
   ...smallFont,
-  color: Colors.tertiaryText,
-}
-
-export const quaternaryContent: TextStyle = {
-  ...smallFont,
-  color: Colors.invertedText,
+  color: Colors.primary100,
 }
 
 export const description: TextStyle = {
@@ -191,7 +187,7 @@ export const label: TextStyle = {
 export const error: TextStyle = {
   ...smallFont,
   ...mediumBold,
-  color: Colors.primaryRed,
+  color: Colors.danger100,
 }
 
 // Forms
@@ -209,7 +205,13 @@ export const secondaryTextInput: TextStyle = {
 // Tappables
 export const tappableListItem: TextStyle = {
   ...mediumFont,
-  color: Colors.primaryViolet,
+  color: Colors.primary125,
+}
+
+export const link: TextStyle = {
+  ...mainContent,
+  color: Colors.linkText,
+  textDecorationLine: "underline",
 }
 
 // Buttons
@@ -229,25 +231,25 @@ export const buttonPrimaryText: TextStyle = {
 
 export const buttonPrimaryInvertedText: TextStyle = {
   ...baseButtonText,
-  color: Colors.primaryViolet,
+  color: Colors.primary125,
 }
 
 export const buttonPrimaryDisabledText: TextStyle = {
   ...baseButtonText,
-  color: Colors.darkestGray,
+  color: Colors.neutral140,
 }
 
 export const buttonPrimaryInvertedDisabledText: TextStyle = {
   ...baseButtonText,
-  color: Colors.darkestGray,
+  color: Colors.neutral140,
 }
 
 export const buttonSecondaryText: TextStyle = {
   ...buttonTextSmall,
-  color: Colors.darkGray,
+  color: Colors.neutral100,
 }
 
 export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
-  color: Colors.lighterGray,
+  color: Colors.neutral30,
 }
