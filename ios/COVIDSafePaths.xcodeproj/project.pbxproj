@@ -13,6 +13,7 @@
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
+		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
 		B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
@@ -207,6 +208,7 @@
 		B3D0B8224679467D85423742 /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../app/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadPackage+Helpers.swift"; sourceTree = "<group>"; };
+		B508170524EC7647000C5449 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */,
+				B508170524EC7647000C5449 /* KeychainService.swift */,
 				B5FBB0D024916A7200433980 /* Persisted.swift */,
 			);
 			path = Storage;
@@ -673,7 +676,6 @@
 				C53FD09B24719AD1006D3268 /* Resources */,
 				D447FDBA24BF332B00250621 /* Configure ATS */,
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
-				B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -692,7 +694,6 @@
 				C5AA24D524768FFF00BA0A99 /* Sources */,
 				C5AA24D924768FFF00BA0A99 /* Frameworks */,
 				C5AA24DB24768FFF00BA0A99 /* Resources */,
-				377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -711,7 +712,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = org.pathcheck;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = "Path Check Inc";
 				TargetAttributes = {
 					C5AA24D124768FFF00BA0A99 = {
@@ -825,40 +826,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -975,6 +942,7 @@
 				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
+				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
 				B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */,
 				B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */,
 				B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */,
@@ -1060,7 +1028,6 @@
 			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1116,7 +1083,6 @@
 			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1155,7 +1121,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

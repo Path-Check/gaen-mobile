@@ -293,7 +293,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
     </TouchableOpacity>
   )
 }
-
+const activationStatusRightWidth = 60
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -352,7 +352,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: Spacing.small,
-    paddingLeft: Spacing.small,
+    paddingHorizontal: Spacing.small,
     backgroundColor: Colors.secondary10,
     borderBottomColor: Colors.neutral10,
     borderBottomWidth: Outlines.hairline,
@@ -377,7 +377,9 @@ const style = StyleSheet.create({
     ...Typography.header4,
   },
   shareIconContainer: {
-    paddingHorizontal: Spacing.medium,
+    width: activationStatusRightWidth,
+    alignItems: "center",
+    justifyContent: "center",
   },
   activationStatusSectionContainer: {
     marginBottom: Spacing.medium,
@@ -399,7 +401,7 @@ const style = StyleSheet.create({
     marginLeft: Spacing.medium,
   },
   activationStatusRightContainer: {
-    width: 60,
+    width: activationStatusRightWidth,
     alignItems: "center",
   },
   fixContainer: {

@@ -388,7 +388,7 @@ final class ExposureManager: NSObject {
         
         let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
 
-        let revisionToken = BTSecureStorage.shared.userState.revisionToken
+        let revisionToken = KeychainService.shared.revisionToken
         
         self.apiClient.request(DiagnosisKeyListRequest.post(currentKeys.compactMap { $0.asCodableKey },
                                                             regionCodes,
@@ -399,7 +399,7 @@ final class ExposureManager: NSObject {
                                   switch result {
                                   case .success(let response):
                                     // Save revisionToken to use on subsequent key submission requests
-                                    BTSecureStorage.shared.revisionToken = response.revisionToken ?? .default
+                                    KeychainService.shared.setRevisionToken(response.revisionToken ?? .default)
                                     callback("Submitted: \(currentKeys.count) keys.", nil)
                                   case .failure(let error):
                                     let emError = ExposureManagerError(errorCode: .networkFailure,
