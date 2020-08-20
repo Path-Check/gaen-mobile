@@ -11,6 +11,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
+import { ExposureKey } from "../../exposureKey"
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
 
@@ -28,35 +29,65 @@ import {
   Typography,
   Layout,
 } from "../../styles"
-import { useExposureContext } from "../../ExposureContext"
 import Logger from "../../logger"
+import * as ExposureAPI from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
   hmacKey: string
   certificate: string
+  exposureKeys: ExposureKey[]
+  revisionToken: string
+  storeRevisionToken: (revisionToken: string) => Promise<void>
+  appPackageName: string
+  regionCodes: string[]
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   hmacKey,
   certificate,
+  exposureKeys,
+  revisionToken,
+  storeRevisionToken,
+  appPackageName,
+  regionCodes,
 }) => {
-  const strategy = useExposureContext()
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
+
     try {
-      await strategy.submitDiagnosisKeys(certificate, hmacKey)
+      const response = await ExposureAPI.postDiagnosisKeys(
+        exposureKeys,
+        regionCodes,
+        certificate,
+        hmacKey,
+        appPackageName,
+        revisionToken,
+      )
       setIsLoading(false)
-      navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+      if (response.kind === "success") {
+        storeRevisionToken(response.body.revisionToken)
+        navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+      } else {
+        const errorMessage = response.message
+        Logger.addMetadata("publishKeys", {
+          errorMessage,
+          revisionToken,
+        })
+        Logger.error(`IncompleteKeySumbission.${errorMessage}`)
+        if (response.error === "Unknown") {
+          Alert.alert(t("common.something_went_wrong"), errorMessage)
+        }
+      }
     } catch (e) {
       setIsLoading(false)
       const errorMessage = e.message
       Logger.addMetadata("publishKeys", {
         errorMessage,
       })
-      Logger.error("Incomplete Key Submission")
+      Logger.error(`IncompleteKeySumbission.Exception.${errorMessage}`)
       Alert.alert(t("common.something_went_wrong"), e.message)
     }
   }

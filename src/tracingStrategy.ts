@@ -18,5 +18,6 @@ export interface ExposureEventsStrategy {
   getCurrentExposures: (cb: (exposureInfo: ExposureInfo) => void) => void
   getLastDetectionDate: () => Promise<Posix | null>
   getExposureKeys: () => Promise<ExposureKey[]>
-  submitDiagnosisKeys: (certificate: string, hmacKey: string) => Promise<string>
+  getRevisionToken: () => Promise<string>
+  storeRevisionToken: (revisionToken: string) => Promise<void>
 }

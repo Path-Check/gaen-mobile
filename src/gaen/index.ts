@@ -7,7 +7,8 @@ const exposureEventsStrategy: ExposureEventsStrategy = {
   getCurrentExposures: NativeModule.getCurrentExposures,
   getLastDetectionDate: NativeModule.fetchLastExposureDetectionDate,
   getExposureKeys: NativeModule.getExposureKeys,
-  submitDiagnosisKeys: NativeModule.submitDiagnosisKeys,
+  storeRevisionToken: NativeModule.storeRevisionToken,
+  getRevisionToken: NativeModule.getRevisionToken,
 }
 
 const permissionStrategy: PermissionStrategy = {
