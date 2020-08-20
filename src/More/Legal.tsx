@@ -52,13 +52,11 @@ const style = StyleSheet.create({
     color: Colors.primary150,
   },
   contentText: {
-    ...Typography.secondaryContent,
-    ...Typography.mediumBold,
+    ...Typography.body1,
     marginBottom: Spacing.medium,
-    color: Colors.primary110,
   },
   privacyPolicyText: {
-    ...Typography.link,
+    ...Typography.anchorLink,
   },
 })
 

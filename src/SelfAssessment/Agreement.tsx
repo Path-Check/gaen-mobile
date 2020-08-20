@@ -59,7 +59,7 @@ const AgreementFooter: FunctionComponent<AgreementFooterProps> = ({
 const style = StyleSheet.create({
   typographyStyle: {
     paddingTop: 10,
-    ...Typography.description,
+    ...Typography.body1,
     color: Colors.white,
   },
 })

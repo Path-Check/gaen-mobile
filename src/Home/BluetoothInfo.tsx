@@ -71,7 +71,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     flex: 10,
-    ...Typography.header3,
+    ...Typography.header2,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
     color: Colors.primary125,
@@ -95,7 +95,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
   },
 })
 export default BluetoothInfo

@@ -55,17 +55,17 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   title: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.white,
     marginBottom: Spacing.small,
   },
   subtitle: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     color: Colors.white,
     marginBottom: Spacing.xxSmall,
   },
   error: {
-    ...Typography.description,
+    ...Typography.body1,
     color: Colors.white,
   },
 })

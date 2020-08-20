@@ -3,21 +3,21 @@ import { TextStyle } from "react-native"
 import * as Colors from "./colors"
 
 // Font Size
-export const xSmall = 12
-export const small = 13
-export const medium = 15
-export const large = 17
-export const xLarge = 19
-export const xxLarge = 24
-export const xxxLarge = 28
+export const xSmall = 13
+export const small = 14
+export const medium = 16
+export const large = 18
+export const xLarge = 20
+export const xxLarge = 26
+export const xxxLarge = 30
 
 // Line Height
-export const xSmallLineHeight = 14
-export const smallLineHeight = 18
-export const mediumLineHeight = 22
-export const largeLineHeight = 24
-export const xLargeLineHeight = 28
-export const xxLargeLineHeight = 32
+export const xSmallLineHeight = 20
+export const smallLineHeight = 24
+export const mediumLineHeight = 28
+export const largeLineHeight = 30
+export const xLargeLineHeight = 32
+export const xxLargeLineHeight = 34
 export const xxxLargeLineHeight = 36
 
 // Letter Spacing
@@ -38,7 +38,7 @@ export const semiBoldFontFamily = "IBMPlexSans-SemiBold"
 export const boldFontFamily = "IBMPlexSans-Bold"
 export const monospaceFontFamily = "IBMPlexMono"
 
-export const base: TextStyle = {
+const base: TextStyle = {
   fontFamily: baseFontFamily,
   fontWeight: baseWeight,
   letterSpacing: baseLetterSpacing,
@@ -113,7 +113,7 @@ export const xxxLargeFont: TextStyle = {
 // Headers
 export const header1: TextStyle = {
   ...xxxLargeFont,
-  ...mediumBold,
+  ...semiBold,
   color: Colors.primaryText,
 }
 
@@ -125,116 +125,92 @@ export const header2: TextStyle = {
 
 export const header3: TextStyle = {
   ...xLargeFont,
-  ...bold,
-  color: Colors.neutral140,
+  ...mediumBold,
+  color: Colors.primaryText,
 }
 
 export const header4: TextStyle = {
   ...largeFont,
   ...mediumBold,
-  color: Colors.neutral140,
+  color: Colors.primaryText,
 }
 
 export const header5: TextStyle = {
   ...mediumFont,
-  ...mediumBold,
-  color: Colors.primaryText,
+  ...semiBold,
+  color: Colors.neutral100,
 }
 
 export const header6: TextStyle = {
-  ...xLargeFont,
-  ...bold,
-  color: Colors.black,
-}
-
-// Content
-export const mainContent: TextStyle = {
-  ...mediumFont,
-  color: Colors.neutral140,
-}
-
-export const secondaryContent: TextStyle = {
-  ...mediumFont,
-  ...base,
-  color: Colors.neutral140,
-}
-
-export const description: TextStyle = {
-  ...mediumFont,
+  ...smallFont,
+  ...mediumBold,
+  letterSpacing: mediumLetterSpacing,
   color: Colors.primaryText,
 }
 
-export const label: TextStyle = {
+// Content
+export const body1: TextStyle = {
+  ...mediumFont,
+  color: Colors.neutral100,
+}
+
+export const body2: TextStyle = {
   ...smallFont,
+  color: Colors.neutral100,
+}
+
+export const body3: TextStyle = {
+  ...xSmallFont,
+  color: Colors.neutral100,
+}
+
+// Forms
+
+export const formInputLabel: TextStyle = {
+  ...smallFont,
+  color: Colors.primaryText,
+}
+
+export const formInputText: TextStyle = {
+  ...mediumFont,
   color: Colors.primaryText,
 }
 
 export const error: TextStyle = {
-  ...smallFont,
-  ...mediumBold,
+  ...mediumFont,
+  ...semiBold,
   color: Colors.danger100,
 }
 
-// Forms
-export const primaryTextInput: TextStyle = {
-  ...xLargeFont,
-  ...bold,
-  color: Colors.primaryText,
-}
-
-export const secondaryTextInput: TextStyle = {
-  ...mediumFont,
-  color: Colors.primaryText,
-}
-
 // Tappables
-export const tappableListItem: TextStyle = {
-  ...mediumFont,
-  color: Colors.primary125,
-}
-
-export const link: TextStyle = {
-  ...mainContent,
-  color: Colors.linkText,
-  textDecorationLine: "underline",
-}
-
-// Buttons
 const baseButtonText: TextStyle = {
   ...largeFont,
   ...semiBold,
 }
 
-const buttonTextSmall: TextStyle = {
-  ...mediumFont,
-}
-
-export const buttonPrimaryText: TextStyle = {
+export const buttonPrimary: TextStyle = {
   ...baseButtonText,
   color: Colors.white,
 }
 
-export const buttonPrimaryInvertedText: TextStyle = {
-  ...baseButtonText,
-  color: Colors.primary125,
-}
-
-export const buttonPrimaryDisabledText: TextStyle = {
+export const buttonPrimaryDisabled: TextStyle = {
   ...baseButtonText,
   color: Colors.neutral140,
 }
 
-export const buttonPrimaryInvertedDisabledText: TextStyle = {
-  ...baseButtonText,
-  color: Colors.neutral140,
+export const buttonSecondary: TextStyle = {
+  ...body1,
+  ...semiBold,
+  color: Colors.primary100,
 }
 
-export const buttonSecondaryText: TextStyle = {
-  ...buttonTextSmall,
-  color: Colors.neutral100,
+export const tappableListItem: TextStyle = {
+  ...body1,
 }
 
-export const buttonSecondaryInvertedText: TextStyle = {
-  ...buttonTextSmall,
-  color: Colors.neutral30,
+export const anchorLink: TextStyle = {
+  ...body1,
+  ...mediumBold,
+  color: Colors.anchorLinkText,
+  textDecorationLine: "underline",
 }
