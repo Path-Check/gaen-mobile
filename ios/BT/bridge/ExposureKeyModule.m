@@ -26,5 +26,22 @@ RCT_REMAP_METHOD(postDiagnosisKeys,
   [[ExposureManager shared] getAndPostDiagnosisKeysWithCertificate:certificate HMACKey:HMACKey resolve:resolve reject:reject];
 }
 
+RCT_REMAP_METHOD(storeRevisionToken,
+                 revisionToken: (NSString *)revisionToken
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[KeychainService shared] setRevisionToken:revisionToken];
+  resolve(nil);
+}
+
+RCT_REMAP_METHOD(getRevisionToken,
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  NSString *revisionToken = [[KeychainService shared] revisionToken];
+  resolve(revisionToken);
+}
+
 
 @end
