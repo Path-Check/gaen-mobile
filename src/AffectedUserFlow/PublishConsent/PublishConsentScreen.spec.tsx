@@ -1,3 +1,4 @@
+jest.mock("../../logger.ts")
 import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"

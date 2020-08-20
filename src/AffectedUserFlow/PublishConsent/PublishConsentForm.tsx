@@ -29,6 +29,7 @@ import {
   Layout,
 } from "../../styles"
 import { useExposureContext } from "../../ExposureContext"
+import Logger from "../../logger"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -51,6 +52,11 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
     } catch (e) {
       setIsLoading(false)
+      const errorMessage = e.message
+      Logger.addMetadata("publishKeys", {
+        errorMessage,
+      })
+      Logger.error("Incomplete Key Submission")
       Alert.alert(t("common.something_went_wrong"), e.message)
     }
   }
