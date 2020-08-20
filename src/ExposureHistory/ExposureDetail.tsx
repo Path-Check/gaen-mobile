@@ -156,7 +156,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   contentText: {
-    ...Typography.tertiaryContent,
+    ...Typography.description,
     color: Colors.neutral100,
   },
   exposureWindowContainer: {
@@ -178,7 +178,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.tertiaryContent,
+    ...Typography.description,
     color: Colors.neutral100,
     marginBottom: Spacing.medium,
   },
@@ -200,7 +200,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   recommendationText: {
-    ...Typography.tinyFont,
+    ...Typography.smallFont,
     color: Colors.primaryText,
   },
   buttonContainer: {

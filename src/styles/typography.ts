@@ -3,8 +3,6 @@ import { TextStyle } from "react-native"
 import * as Colors from "./colors"
 
 // Font Size
-export const xxxSmall = 10
-export const xxSmall = 11
 export const xSmall = 12
 export const small = 13
 export const medium = 15
@@ -14,8 +12,6 @@ export const xxLarge = 24
 export const xxxLarge = 28
 
 // Line Height
-export const xxxSmallLineHeight = 10
-export const xxSmallLineHeight = 12
 export const xSmallLineHeight = 14
 export const smallLineHeight = 18
 export const mediumLineHeight = 22
@@ -72,12 +68,6 @@ export const monospace: TextStyle = {
 }
 
 // Standard Font Types
-export const tinyFont: TextStyle = {
-  ...base,
-  fontSize: xxxSmall,
-  lineHeight: xxxSmallLineHeight,
-}
-
 export const xSmallFont: TextStyle = {
   ...base,
   fontSize: xSmall,
@@ -169,13 +159,8 @@ export const secondaryContent: TextStyle = {
   color: Colors.neutral140,
 }
 
-export const tertiaryContent: TextStyle = {
-  ...smallFont,
-  color: Colors.primary100,
-}
-
 export const description: TextStyle = {
-  ...smallFont,
+  ...mediumFont,
   color: Colors.primaryText,
 }
 
