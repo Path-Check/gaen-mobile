@@ -68,26 +68,28 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
     <>
       <SafeAreaView style={style.topSafeArea} />
       <SafeAreaView style={style.bottomSafeArea}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Screens.LanguageSelection)}
-          style={style.languageButtonContainer}
-        >
-          <GlobalText style={style.languageButtonText}>
-            {languageName}
-          </GlobalText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(Stacks.Activation, {
-              screen: ActivationScreens.AcceptEula,
-            })
-          }
-          style={style.skipButtonContainer}
-        >
-          <GlobalText style={style.skipButtonText}>
-            {t("common.skip")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.header}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(Screens.LanguageSelection)}
+            style={style.languageButtonContainer}
+          >
+            <GlobalText style={style.languageButtonText}>
+              {languageName}
+            </GlobalText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(Stacks.Activation, {
+                screen: ActivationScreens.AcceptEula,
+              })
+            }
+            style={style.skipButtonContainer}
+          >
+            <GlobalText style={style.skipButtonText}>
+              {t("common.skip")}
+            </GlobalText>
+          </TouchableOpacity>
+        </View>
         <View style={style.outerContainer}>
           <ScrollView
             alwaysBounceVertical={false}
@@ -170,13 +172,15 @@ const skipButtonSpacingTop = Platform.select({
   ios: Spacing.xSmall,
   android: Spacing.xxLarge,
 })
+
 const languageButtonSpacingTop = Platform.select({
   ios: Spacing.small,
   android: Spacing.huge,
 })
-const imageMarginTop = Platform.select({
-  ios: 60,
-  android: 90,
+
+const headerFlex = Platform.select({
+  ios: 0.1,
+  android: 0.15,
 })
 
 const style = StyleSheet.create({
@@ -186,6 +190,12 @@ const style = StyleSheet.create({
   bottomSafeArea: {
     flex: 1,
     backgroundColor: Colors.secondary10,
+  },
+  header: {
+    flex: headerFlex,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: Colors.primaryLightBackground,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
@@ -217,18 +227,17 @@ const style = StyleSheet.create({
   },
   outerContainer: {
     justifyContent: "space-between",
-    height: "100%",
+    flex: 1,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    height: "100%",
+    flexGrow: 1,
     justifyContent: "space-between",
     paddingBottom: Spacing.huge,
   },
   image: {
     width: "97%",
     height: 220,
-    marginTop: imageMarginTop,
     marginBottom: Spacing.medium,
   },
   circleActive: {
