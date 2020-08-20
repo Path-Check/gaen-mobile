@@ -16,6 +16,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
+#import <Bugsnag/Bugsnag.h>
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,6 +48,7 @@
   [[ExposureManager shared] setup];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+  [Bugsnag start];
   return YES;
 }
 

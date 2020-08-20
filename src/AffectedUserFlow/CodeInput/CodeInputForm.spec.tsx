@@ -11,6 +11,7 @@ import { Screens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
 import { factories } from "../../factories"
 
+jest.mock("../../logger.ts")
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 describe("CodeInputForm", () => {

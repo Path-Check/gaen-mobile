@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import SplashScreen from "react-native-splash-screen"
 import "array-flat-polyfill"
 import env from "react-native-config"
+import Bugsnag from "@bugsnag/react-native"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
@@ -12,6 +13,8 @@ import {
 } from "./src/OnboardingContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
+
+Bugsnag.start()
 
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)

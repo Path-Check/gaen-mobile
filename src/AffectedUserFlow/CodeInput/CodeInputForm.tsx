@@ -30,6 +30,7 @@ import {
   Typography,
   Iconography,
 } from "../../styles"
+import Logger from "../../logger"
 
 const defaultErrorMessage = " "
 
@@ -74,15 +75,27 @@ const CodeInputForm: FunctionComponent = () => {
         const exposureKeys = await strategy.getExposureKeys()
         const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
 
+        Logger.addMetadata("publishKeys", {
+          hmacDigest,
+        })
+
         const certResponse = await API.postTokenAndHmac(token, hmacDigest)
 
         if (certResponse.kind === "success") {
           const certificate = certResponse.body.certificate
+          Logger.addMetadata("publishKeys", {
+            certificate,
+          })
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
           navigation.navigate(Screens.AffectedUserPublishConsent)
         } else {
-          setErrorMessage(showCertificateError(certResponse.error))
+          const errorMessage = showCertificateError(certResponse.error)
+          Logger.error("Failed to generate a certificate", {
+            errorMessage,
+            hmacDigest,
+          })
+          setErrorMessage(errorMessage)
         }
       } else {
         setErrorMessage(showError(response.error))

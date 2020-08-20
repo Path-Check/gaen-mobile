@@ -10,6 +10,7 @@ import { factories } from "../../factories"
 import { Alert } from "react-native"
 
 jest.mock("@react-navigation/native")
+jest.mock("../../logger.ts")
 
 describe("PublishConsentScreen", () => {
   it("navigates to the home screen when user cancels", () => {
