@@ -70,7 +70,7 @@ jobs:
         run: ./bin/set_ha_env_github.sh
 
       - name: Run linter
-        run: ./android/gradlew app:lintDebug
+        run: ./android/gradlew app:lintDebug app:ktlintCheck
 
       - name: Build android Debug artifact
         uses: maierj/fastlane-action@v1.4.0
