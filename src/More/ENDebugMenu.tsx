@@ -11,6 +11,7 @@ import {
 } from "react-native"
 
 import { GlobalText } from "../components/GlobalText"
+import { useOnboardingContext } from "../OnboardingContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
 
@@ -22,6 +23,7 @@ type ENDebugMenuProps = {
 
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
   const [loading, setLoading] = useState(false)
+  const { resetOnboarding } = useOnboardingContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -70,6 +72,11 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
       }
     }
   }
+
+  const handleOnPressRestartOnboarding = () => {
+    resetOnboarding()
+  }
+
   interface DebugMenuListItemProps {
     label: string
     onPress: () => void
@@ -120,6 +127,10 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               onPress={() => {
                 NativeModule.forceAppCrash()
               }}
+            />
+            <DebugMenuListItem
+              label="Restart Onboarding"
+              onPress={handleOnPressRestartOnboarding}
             />
           </View>
           {__DEV__ ? (

@@ -27,6 +27,7 @@ export const xxxLargeLineHeight = 36
 // Letter Spacing
 export const baseLetterSpacing = 0.25
 export const mediumLetterSpacing = 0.5
+export const largeLetterSpacing = 3
 
 // Font Weights
 export const baseWeight = "400"
@@ -205,6 +206,12 @@ export const secondaryTextInput: TextStyle = {
 export const tappableListItem: TextStyle = {
   ...mediumFont,
   color: Colors.primary125,
+}
+
+export const link: TextStyle = {
+  ...mainContent,
+  color: Colors.linkText,
+  textDecorationLine: "underline",
 }
 
 // Buttons

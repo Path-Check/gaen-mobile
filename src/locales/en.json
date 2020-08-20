@@ -1,6 +1,7 @@
 {
   "_display_name": "English",
   "about": {
+    "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}",
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
@@ -151,14 +152,12 @@
     "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
-    "about_para": "The PathCheck app is made available by the PathCheck Foundation, a non-profit organization that is committed to providing free software to help stop the spread of COVID-19 and protect the privacy of individuals. \n\nFor more information, visit:",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox",
@@ -232,8 +231,12 @@
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
+    "exposures": "Exposures",
     "exposure_history": "Exposure History",
     "legal": "Legal",
     "report_issue": "Report an Issue"
+  },
+  "more": {
+    "select_language": "Select language"
   }
 }
