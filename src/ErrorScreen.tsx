@@ -65,7 +65,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   error: {
-    ...Typography.tertiaryContent,
+    ...Typography.description,
     color: Colors.white,
   },
 })
