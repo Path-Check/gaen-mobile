@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { AppState } from "react-native"
 
-import { isBluetoothEnabled } from "../gaen/nativeModule"
+import { isBluetoothEnabled } from "./gaen/nativeModule"
 import determineOSListener from "./determineOSListener"
 
 export const useBluetoothStatus = (): boolean => {

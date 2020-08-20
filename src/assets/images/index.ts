@@ -5,6 +5,7 @@ const CheckInCircle = require("./checkInCircle.png")
 const CodesAndPhone = require("./codesAndPhone.png")
 const ConcentricCircles = require("./concentricCircles.png")
 const Doctors = require("./doctors.png")
+const ExclamationInCircle = require("./exclamationInCircle.png")
 const EmptyPathBackground = require("./emptyPathBackground.png")
 const Export = require("./export.png")
 const ForeArrow = require("./foreArrow.png")
@@ -35,6 +36,7 @@ export const Images = {
   CodesAndPhone,
   ConcentricCircles,
   Doctors,
+  ExclamationInCircle,
   EmptyPathBackground,
   Export,
   ForeArrow,

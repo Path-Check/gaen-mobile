@@ -163,8 +163,10 @@
     "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
+    "activate_proximity_tracing": "Activate Proximity Tracing",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
+    "go_to_home_view": "Go to Home view",
     "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
@@ -184,6 +186,10 @@
     "self_assessment": "Self Assessment"
   },
   "onboarding": {
+    "app_setup_complete_header": "App Setup Complete!",
+    "app_setup_incomplete_header": "App Setup Incomplete",
+    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
+    "app_setup_incomplete_body": "{{applicationName}} is not active yet.\nProximity Tracing only works with other devices when enabled. You can turn off these notifications at any time.",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "notification_body1": "You’ll receive notifications when you may have been in close proximity with someone who has reported testing positive for COVID-19.",

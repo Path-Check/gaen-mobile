@@ -12,7 +12,7 @@ import {
 } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
-import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "./useHasLocationRequirements"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
