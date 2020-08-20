@@ -1,8 +1,9 @@
 import KeychainAccess
 
-final class KeychainService {
+@objc(KeychainService)
+final class KeychainService: NSObject {
 
-  static let shared = KeychainService()
+  @objc static let shared = KeychainService()
 
   private lazy var keychain = Keychain(service: "\(Bundle.main.bundleIdentifier!).keychainService")
 
@@ -10,7 +11,7 @@ final class KeychainService {
     ReactNativeConfig.env(for: .dev) != nil
   }
 
-  func setRevisionToken(_ token: String) {
+  @objc func setRevisionToken(_ token: String) {
     if isDev {
       keychain[String.revisionTokenDev] = token
     } else {
@@ -18,7 +19,7 @@ final class KeychainService {
     }
   }
 
-  var revisionToken: String {
+  @objc var revisionToken: String {
     return (isDev ? keychain[String.revisionTokenDev] : keychain[String.revisionToken]) ?? .default
   }
 
