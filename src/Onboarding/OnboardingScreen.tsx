@@ -167,7 +167,13 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
-const headerHeight = Platform.select({ ios: 65, android: 90, default: 65 })
+const iosHeaderHeight = 65
+const androidHeaderHeight = 90
+const headerHeight = Platform.select({
+  ios: iosHeaderHeight,
+  android: androidHeaderHeight,
+  default: iosHeaderHeight,
+})
 
 const style = StyleSheet.create({
   topSafeArea: {
