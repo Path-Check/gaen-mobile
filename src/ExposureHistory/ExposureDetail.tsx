@@ -28,9 +28,6 @@ const ExposureDetail: FunctionComponent = () => {
   } = env
   const { exposureDatum } = route.params
 
-  const headerText = t("exposure_history.exposure_detail.header")
-  const contentText = t("exposure_history.exposure_detail.content")
-
   const exposureWindowBucketInWords = (
     exposureDatum: ExposureDatum,
   ): string => {
@@ -66,12 +63,16 @@ const ExposureDetail: FunctionComponent = () => {
             width={Iconography.xSmall}
             height={Iconography.xSmall}
           />
-          <GlobalText style={style.exposureWindow}>
+          <GlobalText style={style.exposureWindowText}>
             {exposureWindowBucketInWords(exposureDatum)}
           </GlobalText>
         </View>
-        <GlobalText style={style.headerText}>{headerText}</GlobalText>
-        <GlobalText style={style.contentText}>{contentText}</GlobalText>
+        <GlobalText style={style.headerText}>
+          {t("exposure_history.exposure_detail.header")}
+        </GlobalText>
+        <GlobalText style={style.contentText}>
+          {t("exposure_history.exposure_detail.content")}
+        </GlobalText>
       </View>
       <View style={style.bottomContainer}>
         <GlobalText style={style.bottomHeaderText}>
@@ -137,32 +138,30 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.secondary10,
   },
   headerContainer: {
     backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.xLarge,
-  },
-  exposureWindow: {
-    ...Typography.base,
-    color: Colors.neutral100,
-    textTransform: "uppercase",
-    letterSpacing: Typography.mediumLetterSpacing,
-    marginLeft: Spacing.xSmall,
-  },
-  headerText: {
-    ...Typography.header6,
-    marginBottom: Spacing.xxSmall,
-  },
-  contentText: {
-    ...Typography.description,
-    color: Colors.neutral100,
+    paddingVertical: Spacing.large,
   },
   exposureWindowContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: Spacing.xSmall,
+  },
+  exposureWindowText: {
+    ...Typography.header6,
+    textTransform: "uppercase",
+    color: Colors.neutral110,
+    marginLeft: Spacing.xSmall,
+  },
+  headerText: {
+    ...Typography.header3,
+    marginBottom: Spacing.xxSmall,
+  },
+  contentText: {
+    ...Typography.body2,
   },
   bottomContainer: {
     backgroundColor: Colors.primaryLightBackground,
@@ -173,12 +172,11 @@ const style = StyleSheet.create({
     marginTop: Spacing.xxSmall,
   },
   bottomHeaderText: {
-    ...Typography.header6,
-    fontSize: Typography.large,
+    ...Typography.header5,
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.description,
+    ...Typography.body2,
     color: Colors.neutral100,
     marginBottom: Spacing.medium,
   },
@@ -200,8 +198,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   recommendationText: {
-    ...Typography.smallFont,
-    color: Colors.primaryText,
+    ...Typography.body3,
   },
   buttonContainer: {
     alignSelf: "flex-start",

@@ -72,8 +72,8 @@ const style = StyleSheet.create({
     height: headerHeight,
   },
   headerText: {
+    ...Typography.header2,
     flex: 10,
-    ...Typography.header3,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
     color: Colors.primary125,
@@ -92,13 +92,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheaderText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     ...Typography.mediumBold,
     color: Colors.primaryText,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
 })

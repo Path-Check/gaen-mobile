@@ -112,7 +112,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   languageButtonText: {
-    ...Typography.mainContent,
+    ...Typography.tappableListItem,
   },
   icon: {
     marginRight: Spacing.small,

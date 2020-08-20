@@ -95,15 +95,15 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header1,
     marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.header5,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
   buttonsContainer: {
@@ -113,7 +113,7 @@ const style = StyleSheet.create({
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondaryText,
+    ...Typography.buttonSecondary,
   },
 })
 

@@ -24,8 +24,8 @@ const LanguageSelection: FunctionComponent = () => {
     t,
   } = useTranslation()
   const navigation = useNavigation()
-  useStatusBarEffect("light-content")
   const localeList = getLocaleList()
+  useStatusBarEffect("light-content")
 
   type ListItem = {
     label: string
@@ -39,9 +39,9 @@ const LanguageSelection: FunctionComponent = () => {
     }
 
     const languageIsSelected = language === item.value
-    const languageButtonTextStyle = languageIsSelected
-      ? { ...Typography.bold, color: Colors.primaryText }
-      : null
+    const languageButtonTextStyle = languageIsSelected && {
+      ...style.languageButtonTextSelected,
+    }
     const languageButtonTextStyles = {
       ...style.languageButtonText,
       ...languageButtonTextStyle,
@@ -119,7 +119,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     flex: 10,
-    ...Typography.header3,
+    ...Typography.header2,
     paddingHorizontal: Spacing.large,
     color: Colors.primary125,
   },
@@ -135,7 +135,10 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   languageButtonText: {
-    ...Typography.mainContent,
+    ...Typography.tappableListItem,
+  },
+  languageButtonTextSelected: {
+    ...Typography.semiBold,
   },
 })
 

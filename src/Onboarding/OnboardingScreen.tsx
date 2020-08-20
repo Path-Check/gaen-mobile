@@ -83,7 +83,6 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
                 screen: ActivationScreens.AcceptEula,
               })
             }
-            style={style.skipButtonContainer}
           >
             <GlobalText style={style.skipButtonText}>
               {t("common.skip")}
@@ -168,20 +167,7 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
-const skipButtonSpacingTop = Platform.select({
-  ios: Spacing.xSmall,
-  android: Spacing.xxLarge,
-})
-
-const languageButtonSpacingTop = Platform.select({
-  ios: Spacing.small,
-  android: Spacing.huge,
-})
-
-const headerFlex = Platform.select({
-  ios: 0.1,
-  android: 0.15,
-})
+const headerHeight = Platform.select({ ios: 65, android: 90, default: 65 })
 
 const style = StyleSheet.create({
   topSafeArea: {
@@ -192,38 +178,37 @@ const style = StyleSheet.create({
     backgroundColor: Colors.secondary10,
   },
   header: {
-    flex: headerFlex,
+    position: "absolute",
+    top: 0,
+    height: headerHeight,
+    width: "100%",
+    zIndex: Layout.zLevel1,
     flexDirection: "row",
+    alignItems: "flex-end",
     justifyContent: "space-between",
+    paddingHorizontal: Spacing.xSmall,
     backgroundColor: Colors.primaryLightBackground,
+    borderBottomColor: Colors.neutral10,
+    borderBottomWidth: Outlines.hairline,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
-    position: "absolute",
-    top: languageButtonSpacingTop,
-    left: Spacing.small,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.large,
     borderColor: Colors.primary125,
-    zIndex: Layout.zLevel1,
+    marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.base,
+    ...Typography.body2,
     letterSpacing: Typography.mediumLetterSpacing,
     color: Colors.primary125,
     textAlign: "center",
     textTransform: "uppercase",
   },
-  skipButtonContainer: {
-    position: "absolute",
-    top: skipButtonSpacingTop,
-    right: Spacing.small,
-    padding: Spacing.small,
-    zIndex: Layout.zLevel1,
-  },
   skipButtonText: {
-    ...Typography.base,
+    ...Typography.body2,
     color: Colors.neutral100,
+    padding: Spacing.medium,
   },
   outerContainer: {
     justifyContent: "space-between",
@@ -233,7 +218,8 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     justifyContent: "space-between",
-    paddingBottom: Spacing.huge,
+    paddingTop: headerHeight + Spacing.medium,
+    paddingBottom: Spacing.xxLarge,
   },
   image: {
     width: "97%",
@@ -261,7 +247,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     marginBottom: Spacing.xLarge,
     paddingHorizontal: Spacing.large,
   },

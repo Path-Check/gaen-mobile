@@ -247,12 +247,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header1,
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...Typography.header4,
-    color: Colors.neutral140,
+    ...Typography.body1,
   },
   errorSubtitle: {
     ...Typography.error,

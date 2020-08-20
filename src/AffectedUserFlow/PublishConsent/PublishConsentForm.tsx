@@ -196,17 +196,17 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header1,
     paddingBottom: Spacing.medium,
   },
   subheaderText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     ...Typography.mediumBold,
     color: Colors.black,
     marginBottom: Spacing.xxSmall,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
   button: {

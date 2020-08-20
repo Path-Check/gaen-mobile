@@ -36,7 +36,7 @@ export const checkboxText: TextStyle = {
 }
 
 export const textInput: TextStyle = {
-  ...Typography.primaryTextInput,
+  ...Typography.formInputText,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.neutral10,
   borderWidth: Outlines.hairline,

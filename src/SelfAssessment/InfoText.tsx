@@ -25,11 +25,11 @@ const InfoText: FunctionComponent<InfoTextProps> = ({ title, description }) => {
 
 export const style = StyleSheet.create({
   titleContent: {
-    ...Typography.header2,
+    ...Typography.header1,
     marginVertical: 30,
   },
   descriptionContent: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: 20,
   },
 })
