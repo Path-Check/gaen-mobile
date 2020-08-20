@@ -186,33 +186,32 @@ final class ExposureManager: NSObject {
                 return
               }
 
-              if false,
-                let summary = summary {
-                let exposureDetectionSummary = ExposureDetectionSummary(summary)O
-              }
+              if false {
+                if let summary = summary {
+                  let exposureDetectionSummary = ExposureDetectionSummary(summary)
+                  BTSecureStorage.shared.pruneOldExposureDetectionSummaries()
+                  let unusedExposureSummaries = BTSecureStorage.shared.allExposureDetectionSummaries()
 
-              let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-              ExposureManager.shared.manager.getExposureInfo(summary: summary!, userExplanation: userExplanation) { exposures, error in
-                if let error = error {
-                  self.finish(.failure(error),
-                              processedFileCount: processedFileCount,
-                              lastProcessedUrlPath: lastProcessedUrlPath,
-                              progress: progress,
-                              completionHandler: completionHandler)
-                  return
+                  APIClient.shared.request(ExposureDetectionSummaryListRequest.put(exposureDetectionSummary, unusedExposureSummaries), requestType: .scoring) { result in
+                    switch result {
+                    case .success:
+                      BTSecureStorage.shared.storeExposureDetectionSummary(exposureDetectionSummary)
+                      self.processExposureDetectionSummary(summary,
+                                   processedFileCount: processedFileCount,
+                                   lastProcessedUrlPath: lastProcessedUrlPath,
+                                   progress: progress,
+                                   completionHandler: completionHandler)
+                    case .failure:
+                      break
+                    }
+                  }
                 }
-                let newExposures = (exposures ?? []).map { exposure in
-                  Exposure(id: UUID().uuidString,
-                           date: exposure.date.posixRepresentation,
-                           duration: exposure.duration,
-                           totalRiskScore: exposure.totalRiskScore,
-                           transmissionRiskLevel: exposure.transmissionRiskLevel)
-                }
-                self.finish(.success(newExposures),
-                            processedFileCount: processedFileCount,
-                            lastProcessedUrlPath: lastProcessedUrlPath,
-                            progress: progress,
-                            completionHandler: completionHandler)
+              } else {
+                self.processExposureDetectionSummary(summary!,
+                             processedFileCount: processedFileCount,
+                             lastProcessedUrlPath: lastProcessedUrlPath,
+                             progress: progress,
+                             completionHandler: completionHandler)
               }
             }
           }
@@ -467,6 +466,36 @@ private extension ExposureManager {
     localUncompressedURLs.cleanup()
     localUncompressedURLs = []
     downloadedPackages = []
+  }
+
+  func processExposureDetectionSummary(_ summary: ENExposureDetectionSummary?,
+               processedFileCount: Int,
+               lastProcessedUrlPath: String,
+               progress: Progress,
+               completionHandler: @escaping ((ExposureResult) -> Void)) {
+    let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
+    ExposureManager.shared.manager.getExposureInfo(summary: summary!, userExplanation: userExplanation) { exposures, error in
+      if let error = error {
+        self.finish(.failure(error),
+                    processedFileCount: processedFileCount,
+                    lastProcessedUrlPath: lastProcessedUrlPath,
+                    progress: progress,
+                    completionHandler: completionHandler)
+        return
+      }
+      let newExposures = (exposures ?? []).map { exposure in
+        Exposure(id: UUID().uuidString,
+                 date: exposure.date.posixRepresentation,
+                 duration: exposure.duration,
+                 totalRiskScore: exposure.totalRiskScore,
+                 transmissionRiskLevel: exposure.transmissionRiskLevel)
+      }
+      self.finish(.success(newExposures),
+                  processedFileCount: processedFileCount,
+                  lastProcessedUrlPath: lastProcessedUrlPath,
+                  progress: progress,
+                  completionHandler: completionHandler)
+    }
   }
   
 }

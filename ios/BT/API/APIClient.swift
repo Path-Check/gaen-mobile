@@ -3,7 +3,8 @@ import Alamofire
 enum RequestType {
   case postKeys,
   downloadKeys,
-  exposureConfiguration
+  exposureConfiguration,
+  scoring
 }
 
 final class APIClient {

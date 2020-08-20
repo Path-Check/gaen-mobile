@@ -92,7 +92,7 @@ final class BTSecureStorage: SafePathsSecureStorage {
     NotificationCenter.default.post(name: .ExposuresDidChange, object: jsonString)
   }
 
-  func storeExposureDetectionSummarie(_ summary: ExposureDetectionSummary) {
+  func storeExposureDetectionSummary(_ summary: ExposureDetectionSummary) {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
       realm.add(summary)
@@ -138,5 +138,29 @@ final class BTSecureStorage: SafePathsSecureStorage {
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
     .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
+
+}
+
+extension BTSecureStorage {
+
+  func pruneOldExposureDetectionSummaries() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let cutoff = Date().posixRepresentation - 1209600 // 2 weeks ago
+      let oldSummaries = realm.objects(ExposureDetectionSummary.self).filter("dateReceived > \(cutoff)")
+      realm.delete(oldSummaries)
+    }
+  }
+
+  func sequenceInDayNumber(for posixDate: Int) -> Int {
+    let realm = try! Realm(configuration: realmConfig)
+    let storedSummariesForDate = realm.objects(ExposureDetectionSummary.self).filter("startOfDateReceived == \(posixDate)")
+    return storedSummariesForDate.count
+  }
+
+  func allExposureDetectionSummaries() -> [ExposureDetectionSummary] {
+    let realm = try! Realm(configuration: realmConfig)
+    return realm.objects(ExposureDetectionSummary.self).map { $0 }
+  }
 
 }
