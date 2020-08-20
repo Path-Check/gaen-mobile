@@ -52,6 +52,7 @@ const MoreStack: FunctionComponent = () => {
       <Stack.Screen
         name={MoreStackScreens.ExposureListDebugScreen}
         component={ExposureListDebugScreen}
+        options={{ headerTitle: t("screen_titles.exposures") }}
       />
       <Stack.Screen
         name={MoreStackScreens.ENLocalDiagnosisKey}

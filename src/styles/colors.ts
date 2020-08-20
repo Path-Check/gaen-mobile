@@ -35,12 +35,18 @@ export const danger75 = "#ff7d7d"
 export const danger100 = "#ff5656"
 export const success100 = "#41dca4"
 export const warning25 = "#f9edcc"
-export const warning50 = "#f8f8ff"
-export const warning100 = "#e5e7fa"
+export const warning50 = "#ffdc6f"
+export const warning100 = "#ffc000"
+
+// Gradients
+export const gradientPrimary10 = ["#ececff", "#ffffff"]
+export const gradientPrimary100 = ["#3a4cd7", "#6979f8"]
+export const gradientPrimary110 = ["#4051db", "#6e50e4"]
+export const gradientNeutral75 = ["#3c475b", "#9ba0aa"]
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"
-export const transparentNeutral30 = applyOpacity(neutral30, 0.8)
+export const transparentNeutral30 = applyOpacity(neutral30, 0.4)
 
 // Backgrounds
 export const primaryLightBackground = white
