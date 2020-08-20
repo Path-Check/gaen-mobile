@@ -64,9 +64,11 @@ export const requestAuthorization = async (): Promise<string> => {
   return permissionsModule.requestExposureNotificationAuthorization()
 }
 
-export const getCurrentENPermissionsStatus = async (): Promise<ENPermissionStatus> => {
-  const response = await permissionsModule.getCurrentENPermissionsStatus();
-  return toStatus(response);
+export const getCurrentENPermissionsStatus = async (): Promise<
+  ENPermissionStatus
+> => {
+  const response = await permissionsModule.getCurrentENPermissionsStatus()
+  return toStatus(response)
 }
 
 // Exposure History Module

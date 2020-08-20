@@ -17,7 +17,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
 
   useEffect(() => {
     getCurrentExposures()
-  }, [])
+  }, [getCurrentExposures])
 
   return (
     <>
