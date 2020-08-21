@@ -5,7 +5,7 @@ final class KeychainService: NSObject {
 
   @objc static let shared = KeychainService()
 
-  private lazy var keychain = Keychain(service: "\(Bundle.main.bundleIdentifier!).keychainService")
+  private lazy var keychain = Keychain(service: ReactNativeConfig.env(for: .postKeysUrl))
 
   private var isDev: Bool {
     ReactNativeConfig.env(for: .dev) != nil
