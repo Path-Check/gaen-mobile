@@ -255,7 +255,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 checkstyle {
-//    config = rootProject.resources.text.fromFile('buildConfig/checkstyle/checkstyle.xml')
     toolVersion '8.35'
 }
 
