@@ -96,12 +96,18 @@ const CodeInputForm: FunctionComponent = () => {
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(
-            `FailedCertificateGenerationWithValidCode${errorMessage}`,
+            `FailedCertificateGenerationWithValidCode${errorMessage}, ${certResponse.message}`,
           )
           setErrorMessage(errorMessage)
         }
       } else {
-        setErrorMessage(showError(response.error))
+        const errorMessage = showError(response.error)
+        if (response.message) {
+          Logger.error(
+            `FailedCodeValidation${errorMessage}, ${response.message}`,
+          )
+        }
+        setErrorMessage(errorMessage)
       }
       setIsLoading(false)
     } catch (e) {
