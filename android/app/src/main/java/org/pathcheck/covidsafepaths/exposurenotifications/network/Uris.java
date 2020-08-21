@@ -17,7 +17,6 @@
 
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
-import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
@@ -31,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pathcheck.covidsafepaths.BuildConfig;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
 /**
@@ -47,17 +45,10 @@ public class Uris {
   // TODO handle batching or remove per server implementation
   private static final String DEFAULT_REGION_CODE = "regionCode";
   // TODO handle regions or remove  per server implementation
-  private final Context context;
-  private final ExposureNotificationSharedPreferences prefs;
-  public final Uri baseDownloadUri;
-  public final Uri uploadUri;
+  private final Uri baseDownloadUri;
 
-  public Uris(Context context) {
-    this.context = context;
-    this.prefs = new ExposureNotificationSharedPreferences(context);
-    // These two string resources must be set by gradle.properties.
+  public Uris() {
     baseDownloadUri = Uri.parse(BuildConfig.DOWNLOAD_BASE_URL);
-    uploadUri = Uri.parse(BuildConfig.POST_DIAGNOSIS_KEYS_URL);
   }
 
   // TODO Get list of download URIs per server spec
@@ -132,7 +123,7 @@ public class Uris {
           StringRequest request =
               new StringRequest(indexUri.toString(), responseListener, errorListener);
           request.setShouldCache(false);
-          RequestQueueSingleton.get(context).add(request);
+          RequestQueueSingleton.get().add(request);
           return request;
         });
   }

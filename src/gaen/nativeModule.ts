@@ -111,13 +111,6 @@ const toExposureKey = (rawExposureKey: RawExposureKey): ExposureKey => {
   }
 }
 
-export const submitDiagnosisKeys = async (
-  certificate: string,
-  hmacKey: string,
-): Promise<string> => {
-  return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
-}
-
 export const storeRevisionToken = async (
   revisionToken: string,
 ): Promise<void> => {

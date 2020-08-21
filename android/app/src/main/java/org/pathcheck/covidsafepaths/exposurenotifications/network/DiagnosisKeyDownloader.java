@@ -48,6 +48,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.threeten.bp.Duration;
 
@@ -75,7 +76,7 @@ class DiagnosisKeyDownloader {
   DiagnosisKeyDownloader(Context context) {
     this.context = context;
     downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-    uris = new Uris(context);
+    uris = new Uris();
   }
 
   /**
@@ -299,7 +300,7 @@ class DiagnosisKeyDownloader {
         }
 
         @Override
-        public void onFailure(Throwable t) {
+        public void onFailure(@NotNull Throwable t) {
           Log.e(TAG, "Key file download failed.");
         }
       };

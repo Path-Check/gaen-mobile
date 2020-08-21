@@ -1,4 +1,4 @@
-package org.pathcheck.covidsafepaths.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -11,7 +11,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 import javax.annotation.Nonnull;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 
+@SuppressWarnings("unused")
 @ReactModule(name = DeviceInfoModule.MODULE_NAME)
 public class DeviceInfoModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "DeviceInfoModule";

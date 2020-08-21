@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.devio.rn.splashscreen.SplashScreen;
-import org.pathcheck.covidsafepaths.exposurenotifications.ExposureKey;
+import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
+import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKey;
-import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKeys;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Duration;
@@ -41,7 +41,6 @@ public class MainActivity extends ReactActivity {
   private static final int DEFAULT_PERIOD = DiagnosisKey.DEFAULT_PERIOD;
   private static final int DEFAULT_TRANSMISSION_RISK = 1;
   private Promise getExposureKeysPromise;
-  private Promise postDiagnosisKeysPromise;
 
   public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
       "org.pathcheck.covidsafepaths.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
@@ -87,20 +86,9 @@ public class MainActivity extends ReactActivity {
     ExposureNotificationClientWrapper exposureNotificationClient =
         ExposureNotificationClientWrapper.get(this);
     exposureNotificationClient.isEnabled()
-        .addOnSuccessListener(enabled -> {
-          exposureNotificationClient.onExposureNotificationStateChanged(getReactContext(), enabled);
-        });
-  }
-
-  public void showPermissionUploadKeys(ApiException apiException) {
-    try {
-      apiException
-          .getStatus()
-          .startResolutionForResult(
-              this, RequestCodes.REQUEST_CODE_UPLOAD_KEYS);
-    } catch (IntentSender.SendIntentException e) {
-      postDiagnosisKeysPromise.reject(e);
-    }
+        .addOnSuccessListener(enabled ->
+            exposureNotificationClient.onExposureNotificationStateChanged(getReactContext(), enabled)
+        );
   }
 
   public void showPermissionShareKeys(ApiException apiException) {
@@ -143,13 +131,6 @@ public class MainActivity extends ReactActivity {
         // Don't share.
         getExposureKeysPromise.reject("CANCEL", "Operation cancelled by the user");
       }
-    } else if (requestCode == RequestCodes.REQUEST_CODE_UPLOAD_KEYS) {
-      if (resultCode == RESULT_OK) {
-        share(postDiagnosisKeysPromise);
-      } else {
-        // Don't share.
-        postDiagnosisKeysPromise.reject("CANCEL", "Operation cancelled by the user");
-      }
     }
   }
 
@@ -165,26 +146,25 @@ public class MainActivity extends ReactActivity {
         new FutureCallback<ImmutableList<DiagnosisKey>>() {
           @Override
           public void onSuccess(ImmutableList<DiagnosisKey> shared) {
-            final List<ExposureKey> exposureKeys = new ArrayList<>();
+            final List<RNExposureKey> exposureKeys = new ArrayList<>();
 
             for (DiagnosisKey k : shared) {
-
               final String key = BASE64.encode(k.getKeyBytes());
-              final int rollingPeriod = DEFAULT_PERIOD;
               final int rollingStartNumber = k.getIntervalNumber();
-              final int transmissionRisk = DEFAULT_TRANSMISSION_RISK;
 
-              exposureKeys.add(new ExposureKey(key,
-                  rollingPeriod,
+              exposureKeys.add(new RNExposureKey(
+                  key,
+                  DEFAULT_PERIOD,
                   rollingStartNumber,
-                  transmissionRisk));
+                  DEFAULT_TRANSMISSION_RISK
+              ));
             }
 
             getExposureKeysPromise.resolve(Util.convertListToWritableArray(exposureKeys));
           }
 
           @Override
-          public void onFailure(Throwable exception) {
+          public void onFailure(@NotNull Throwable exception) {
             if (!(exception instanceof ApiException)) {
               getExposureKeysPromise.reject(exception);
               return;
@@ -195,42 +175,6 @@ public class MainActivity extends ReactActivity {
               showPermissionShareKeys(apiException);
             } else {
               getExposureKeysPromise.reject(exception);
-            }
-          }
-        },
-        AppExecutors.getLightweightExecutor());
-
-  }
-
-  public void share(Promise promise) {
-    postDiagnosisKeysPromise = promise;
-    FluentFuture<Boolean> getKeysAndSubmitToService =
-        FluentFuture.from(getRecentKeys())
-            .transform(
-                this::toDiagnosisKeysWithTransmissionRisk, AppExecutors.getLightweightExecutor())
-            .transformAsync(this::submitKeysToService, AppExecutors.getBackgroundExecutor());
-
-    Futures.addCallback(
-        getKeysAndSubmitToService,
-        new FutureCallback<Boolean>() {
-          @Override
-          public void onSuccess(Boolean shared) {
-            postDiagnosisKeysPromise.resolve(null);
-          }
-
-          @Override
-          public void onFailure(Throwable exception) {
-            if (!(exception instanceof ApiException)) {
-              postDiagnosisKeysPromise.reject(exception);
-              return;
-            }
-
-            ApiException apiException = (ApiException) exception;
-            if (apiException.getStatusCode()
-                == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-              showPermissionUploadKeys(apiException);
-            } else {
-              postDiagnosisKeysPromise.reject(exception);
             }
           }
         },
@@ -246,29 +190,6 @@ public class MainActivity extends ReactActivity {
         GET_TEKS_TIMEOUT.toMillis(),
         TimeUnit.MILLISECONDS,
         AppExecutors.getScheduledExecutor());
-  }
-
-  /**
-   * Submits the given Temporary Exposure Keys to the key sharing service, designating them as
-   * Diagnosis Keys.
-   *
-   * @return a {@link ListenableFuture} of type {@link Boolean} of successfully submitted state
-   */
-  private ListenableFuture<Boolean> submitKeysToService(ImmutableList<DiagnosisKey> diagnosisKeys) {
-    return FluentFuture.from(new DiagnosisKeys(this).upload(diagnosisKeys))
-        .transform(
-            v -> {
-              // Successfully submitted
-              return true;
-            },
-            AppExecutors.getLightweightExecutor())
-        .catching(
-            ApiException.class,
-            (e) -> {
-              // Not successfully submitted,
-              return false;
-            },
-            AppExecutors.getLightweightExecutor());
   }
 
   /**

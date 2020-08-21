@@ -22,6 +22,7 @@ import com.google.android.gms.common.internal.Objects;
 import com.google.auto.value.AutoValue;
 import com.google.common.io.BaseEncoding;
 import java.util.Arrays;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A carrier of diagnosis key into and out of the network operations.
@@ -63,6 +64,7 @@ public abstract class DiagnosisKey {
     }
   }
 
+  @NotNull
   public String toString() {
     return Objects.toStringHelper(this)
         .add("key:hex", "[" + BASE16.encode(getKeyBytes()) + "]")
@@ -100,6 +102,7 @@ public abstract class DiagnosisKey {
       return Arrays.hashCode(bytes);
     }
 
+    @NotNull
     @Override
     public String toString() {
       return Arrays.toString(bytes);

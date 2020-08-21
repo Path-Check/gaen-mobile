@@ -1,6 +1,6 @@
-package org.pathcheck.covidsafepaths.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
-import static org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
+import static org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureNotificationsModule.MODULE_NAME;
 
 import android.util.Log;
 import com.facebook.react.bridge.Promise;
@@ -13,30 +13,24 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import javax.annotation.Nonnull;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
-import org.pathcheck.covidsafepaths.exposurenotifications.notify.ShareDiagnosisManager;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 
+@SuppressWarnings("unused")
 @ReactModule(name = MODULE_NAME)
 public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ENPermissionsModule";
   public static final String TAG = "ENModule";
 
   private final ExposureNotificationClient exposureNotificationClient;
-  private final ShareDiagnosisManager shareDiagnosisManager;
 
   public ExposureNotificationsModule(ReactApplicationContext context) {
     super(context);
     exposureNotificationClient = Nearby.getExposureNotificationClient(context);
-    shareDiagnosisManager = new ShareDiagnosisManager(context);
   }
 
   @Override
@@ -46,7 +40,6 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   }
 
   /**
-   * TODO confirm behavior across platforms.
    * Method with the same name as iOS, just calls client "start" method which enables EN.
    */
   @ReactMethod
@@ -54,9 +47,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     ReactContext reactContext = getReactApplicationContext();
     ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(reactContext);
     client.start(reactContext)
-        .addOnSuccessListener(unused -> {
-          promise.resolve(CallbackMessages.GENERIC_SUCCESS);
-        })
+        .addOnSuccessListener(unused -> promise.resolve(CallbackMessages.GENERIC_SUCCESS))
         .addOnFailureListener(exception -> {
           if (!(exception instanceof ApiException)) {
             promise.reject(new Exception(CallbackMessages.ERROR_UNKNOWN));
@@ -72,9 +63,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
             promise.reject(apiException);
           }
         })
-        .addOnCanceledListener(() -> {
-          promise.reject(new Exception(CallbackMessages.CANCELLED));
-        });
+        .addOnCanceledListener(() -> promise.reject(new Exception(CallbackMessages.CANCELLED)));
   }
 
   @ReactMethod
@@ -151,30 +140,5 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     exposureNotificationClient
         .isEnabled()
         .addOnSuccessListener(promise::resolve);
-  }
-
-  /**
-   * Once user consents, upload diagnosis keys to app server.
-   * // TODO if there is a flow to save a new diagnosis before the user consents to share,
-   * // use "updateDiagnosisShared" on success
-   */
-  @ReactMethod
-  public void sharePositiveDiagnosis(final Promise promise) {
-    ListenableFuture<Boolean> shareDiagnosisFuture = shareDiagnosisManager.share();
-    FutureCallback<Boolean> shareDiagnosisCallback = new FutureCallback<Boolean>() {
-      @Override
-      public void onSuccess(@NullableDecl Boolean result) {
-        shareDiagnosisManager.saveNewDiagnosis(true);
-        promise.resolve(result);
-      }
-
-      @Override
-      public void onFailure(Throwable t) {
-        shareDiagnosisManager.saveNewDiagnosis(false);
-        promise.reject(t);
-      }
-    };
-    Futures.addCallback(shareDiagnosisFuture, shareDiagnosisCallback,
-        AppExecutors.getLightweightExecutor());
   }
 }

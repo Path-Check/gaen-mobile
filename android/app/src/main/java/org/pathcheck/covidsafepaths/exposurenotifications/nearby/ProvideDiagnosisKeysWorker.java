@@ -29,11 +29,9 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 import androidx.work.WorkerParameters;
-import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
@@ -54,12 +52,9 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
   public static final Duration JOB_INTERVAL = Duration.ofHours(24);
   public static final Duration JOB_FLEX_INTERVAL = Duration.ofHours(6);
   public static final String WORKER_NAME = "ProvideDiagnosisKeysWorker";
-  private static final BaseEncoding BASE64_LOWER = BaseEncoding.base64();
-  private static final int RANDOM_TOKEN_BYTE_LENGTH = 32;
 
   private final DiagnosisKeys diagnosisKeys;
   private final DiagnosisKeyFileSubmitter submitter;
-  private final SecureRandom secureRandom;
 
   private final ExposureNotificationSharedPreferences prefs;
 
@@ -68,7 +63,6 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
     super(context, workerParams);
     diagnosisKeys = new DiagnosisKeys(context);
     submitter = new DiagnosisKeyFileSubmitter(context);
-    secureRandom = new SecureRandom();
     prefs = new ExposureNotificationSharedPreferences(context);
   }
 
@@ -94,8 +88,7 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
           }
         }, AppExecutors.getBackgroundExecutor())
         // Submit downloaded files to EN client
-        .transformAsync((batches) -> submitter.submitFiles(batches),
-            AppExecutors.getBackgroundExecutor())
+        .transformAsync(submitter::submitFiles, AppExecutors.getBackgroundExecutor())
         .transform(done -> {
           // Keep track of the last date when the process did run
           prefs.setLastDetectionProcessDate(Instant.now().toEpochMilli());

@@ -1,4 +1,4 @@
-package org.pathcheck.covidsafepaths.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import androidx.annotation.NonNull;
 import com.facebook.react.bridge.Promise;
@@ -11,9 +11,11 @@ import com.google.android.gms.nearby.exposurenotification.ScanInstance;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 
+@SuppressWarnings("unused")
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
 public class ExposureHistoryModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ExposureHistoryModule";

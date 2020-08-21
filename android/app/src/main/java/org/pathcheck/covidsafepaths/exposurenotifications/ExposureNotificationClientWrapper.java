@@ -44,9 +44,7 @@ public class ExposureNotificationClientWrapper {
 
   public Task<Void> start(ReactContext context) {
     return exposureNotificationClient.start()
-        .addOnSuccessListener(unused -> {
-          onExposureNotificationStateChanged(context, true);
-        })
+        .addOnSuccessListener(unused -> onExposureNotificationStateChanged(context, true))
         .addOnFailureListener(exception -> {
           onExposureNotificationStateChanged(context, false);
           if (!(exception instanceof ApiException)) {
@@ -59,9 +57,7 @@ public class ExposureNotificationClientWrapper {
                 RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
           }
         })
-        .addOnCanceledListener(() -> {
-          onExposureNotificationStateChanged(context, false);
-        });
+        .addOnCanceledListener(() -> onExposureNotificationStateChanged(context, false));
   }
 
   public void showPermissionDialog(ReactContext reactContext, ApiException apiException,
@@ -80,15 +76,9 @@ public class ExposureNotificationClientWrapper {
 
   public Task<Void> stop(ReactContext context) {
     return exposureNotificationClient.stop()
-        .addOnSuccessListener(unused -> {
-          onExposureNotificationStateChanged(context, false);
-        })
-        .addOnFailureListener(exception -> {
-          onExposureNotificationStateChanged(context, true);
-        })
-        .addOnCanceledListener(() -> {
-          onExposureNotificationStateChanged(context, true);
-        });
+        .addOnSuccessListener(unused -> onExposureNotificationStateChanged(context, false))
+        .addOnFailureListener(exception -> onExposureNotificationStateChanged(context, true))
+        .addOnCanceledListener(() -> onExposureNotificationStateChanged(context, true));
   }
 
   public Task<Boolean> isEnabled() {

@@ -9,14 +9,17 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.google.gson.Gson;
-import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Util {
+public final class Util {
+
+  private Util() {
+  }
+
   /**
    * Create an array in React Native friendly format.
    * Helpful when sending an array in a {@link Callback}.
@@ -43,12 +46,6 @@ public class Util {
     // For this reason, whether this app is enabled or disabled,
     // we can safely say that it is authorized.
     return Util.toWritableArray(CallbackMessages.EN_AUTHORIZATION_AUTHORIZED, enablement);
-  }
-
-  public static int getRandomNumber() {
-    final int min = 20;
-    final int max = 200;
-    return new SecureRandom().nextInt((max - min) + 1) + min;
   }
 
   public static WritableArray convertListToWritableArray(List<?> list) {
