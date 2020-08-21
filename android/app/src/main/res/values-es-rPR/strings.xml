@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <string name="exposure_notification_message">Has estado cerca de alguien que tuvo un positivo por COVID-19. Pulse para obtener más información.</string>
+    <string name="exposure_notification_message">Has estado cerca de alguien que tuvo un positivo por COVID-19. Pulse para obtener más información.</string>
 </resources>
