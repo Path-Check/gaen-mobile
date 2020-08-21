@@ -1,6 +1,7 @@
 import RNSimpleCrypto from "react-native-simple-crypto"
 
 import { ExposureKey } from "../exposureKey"
+import Logger from "../logger"
 
 export const generateKey = async (): Promise<ArrayBuffer> => {
   return await RNSimpleCrypto.utils.randomBytes(32)
@@ -21,6 +22,10 @@ export const calculateHmac = async (
     messageArrayBuffer,
     hmacKey,
   )
+
+  Logger.addMetadata("publishKeys", {
+    serializedKeys: exposureKeyMessage,
+  })
 
   return [
     RNSimpleCrypto.utils.convertArrayBufferToBase64(signatureArrayBuffer),

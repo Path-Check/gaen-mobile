@@ -9,6 +9,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
+import com.bugsnag.android.Bugsnag;
 
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
 
@@ -56,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
         SoLoader.init(this, /* native exopackage */ false);
         Realm.init(this);
         initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+        Bugsnag.start(this);
     }
 
     /**

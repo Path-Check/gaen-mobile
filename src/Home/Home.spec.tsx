@@ -11,7 +11,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "./Home"
-import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
+import {
+  PermissionsContext,
+  ENAuthorizationEnablementStatus,
+} from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "./useBluetoothStatus"
@@ -37,14 +40,17 @@ jest.mock("../More/useApplicationInfo", () => {
 jest.mock("./useBluetoothStatus.ts")
 
 describe("Home", () => {
-  describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
+  describe("When the exposure notification permissions are enabled and the app is authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId } = render(
@@ -80,17 +86,17 @@ describe("Home", () => {
     })
   })
 
-  describe("When the enPermissionStatus is not enabled and not authorized", () => {
+  describe("When the exposure notification permissions are not enabled and the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", async () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = [
-        "UNAUTHORIZED",
-        "DISABLED",
-      ]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: false,
+        enabled: false,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId } = render(
@@ -122,9 +128,12 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId } = render(
@@ -157,9 +166,12 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId } = render(
@@ -191,9 +203,12 @@ describe("Home", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId } = render(
@@ -212,17 +227,17 @@ describe("Home", () => {
   })
 
   describe("When proximity tracing is disabled", () => {
-    describe("when enPermissionStatus is authorized but not enabled", () => {
+    describe("when exposure notification permissions are authorized but not enabled", () => {
       it("requests exposure notification to be enabled", async () => {
         expect.assertions(1)
 
-        const enPermissionStatus: ENPermissionStatus = [
-          "AUTHORIZED",
-          "DISABLED",
-        ]
         const requestPermission = jest.fn()
+        const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+          authorized: true,
+          enabled: false,
+        }
         const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
+          isENAuthorizedAndEnabled,
           requestPermission,
         )
 
@@ -252,9 +267,12 @@ describe("Home", () => {
           navigate: navigationSpy,
         })
 
-        const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+        const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+          authorized: true,
+          enabled: true,
+        }
         const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
+          isENAuthorizedAndEnabled,
         )
 
         const { getByTestId } = render(
@@ -274,18 +292,18 @@ describe("Home", () => {
       })
     })
 
-    describe("when enPermissionStatus is unauthorized", () => {
+    describe("when exposure notification permissions are unauthorized", () => {
       describe("when the platform is iOS", () => {
         it("shows an unauthorized alert", async () => {
           expect.assertions(1)
           ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
-          const enPermissionStatus: ENPermissionStatus = [
-            "UNAUTHORIZED",
-            "DISABLED",
-          ]
+          const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+            authorized: false,
+            enabled: false,
+          }
           const permissionProviderValue = createPermissionProviderValue(
-            enPermissionStatus,
+            isENAuthorizedAndEnabled,
           )
 
           const { getByTestId } = render(
@@ -314,7 +332,7 @@ describe("Home", () => {
 })
 
 const createPermissionProviderValue = (
-  enPermissionStatus: ENPermissionStatus,
+  isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus,
   requestPermission: () => void = () => {},
 ) => {
   return {
@@ -324,7 +342,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: enPermissionStatus,
+      status: isENAuthorizedAndEnabled,
       check: () => {},
       request: requestPermission,
     },

@@ -6,7 +6,7 @@ import CodeInputScreen from "./CodeInputScreen"
 import { AffectedUserProvider } from "../AffectedUserContext"
 import {
   PermissionsContext,
-  ENPermissionStatus,
+  ENAuthorizationEnablementStatus,
 } from "../../PermissionsContext"
 import { PermissionStatus } from "../../permissionStatus"
 
@@ -15,9 +15,12 @@ jest.mock("@react-navigation/native")
 describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
+      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: true,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isENAuthorizedAndEnabled,
       )
 
       const { getByTestId, queryByTestId } = render(
@@ -37,9 +40,12 @@ describe("CodeInputScreen", () => {
 
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
-      const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "DISABLED"]
+      const isEnAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
+        authorized: true,
+        enabled: false,
+      }
       const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
+        isEnAuthorizedAndEnabled,
       )
 
       const { getByTestId, queryByTestId } = render(
@@ -59,7 +65,7 @@ describe("CodeInputScreen", () => {
 })
 
 const createPermissionProviderValue = (
-  enPermissionStatus: ENPermissionStatus,
+  isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus,
 ) => {
   return {
     notification: {
@@ -68,7 +74,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: enPermissionStatus,
+      status: isENAuthorizedAndEnabled,
       check: () => {},
       request: () => {},
     },

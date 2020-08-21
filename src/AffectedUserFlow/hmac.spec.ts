@@ -2,6 +2,8 @@ import RNSimpleCrypto from "react-native-simple-crypto"
 
 import { calculateHmac } from "./hmac"
 
+jest.mock("../logger.ts")
+
 describe("calculateHmac", () => {
   const mockRandomBytesGeneration = () => {
     const randomBytes = new ArrayBuffer(1)

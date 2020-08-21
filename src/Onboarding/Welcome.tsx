@@ -54,7 +54,7 @@ const Welcome: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: Spacing.xxxHuge,
+    paddingVertical: Spacing.xxHuge,
     paddingHorizontal: Spacing.large,
     alignItems: "center",
     justifyContent: "space-between",
@@ -67,8 +67,8 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   languageButtonText: {
-    ...Typography.base,
-    letterSpacing: Typography.mediumLetterSpacing,
+    ...Typography.body2,
+    letterSpacing: Typography.largeLetterSpacing,
     color: Colors.primary125,
     textAlign: "center",
     textTransform: "uppercase",
@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   mainText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.primaryText,
     textAlign: "center",
   },

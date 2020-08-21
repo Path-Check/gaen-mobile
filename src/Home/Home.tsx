@@ -18,10 +18,7 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
-import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../PermissionsContext"
+import { usePermissionsContext } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
@@ -48,17 +45,13 @@ const HomeScreen: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
-  const [
-    authorization,
-    enablement,
-  ]: ENPermissionStatus = exposureNotifications.status
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
   const btStatus = useBluetoothStatus()
 
-  const isEnabled = enablement === "ENABLED"
-  const isAuthorized = authorization === "AUTHORIZED"
+  const isAuthorized = exposureNotifications.status.authorized
+  const isEnabled = exposureNotifications.status.enabled
   const isEnabledAndAuthorized = isEnabled && isAuthorized
 
   const showUnauthorizedAlert = () => {
@@ -314,8 +307,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   languageButtonText: {
-    ...Typography.base,
-    fontSize: Typography.xSmall,
+    ...Typography.body3,
     letterSpacing: Typography.largeLetterSpacing,
     color: Colors.primary150,
     textAlign: "center",
@@ -334,7 +326,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.body1,
+    fontSize: Typography.large,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -412,9 +405,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.baseBorderRadius,
   },
   fixText: {
-    ...Typography.base,
-    ...Typography.bold,
-    fontSize: Typography.medium,
+    ...Typography.body1,
     color: Colors.white,
   },
   bottomHeaderText: {
@@ -422,7 +413,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxxSmall,
   },
   bottomBodyText: {
-    ...Typography.secondaryContent,
+    ...Typography.header6,
+    color: Colors.neutral100,
   },
   buttonContainer: {
     paddingHorizontal: Spacing.small,

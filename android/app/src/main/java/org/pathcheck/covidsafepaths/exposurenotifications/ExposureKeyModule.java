@@ -11,6 +11,7 @@ import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
 
 import org.pathcheck.covidsafepaths.MainActivity;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
 import javax.annotation.Nonnull;
 
@@ -49,5 +50,16 @@ public class ExposureKeyModule  extends ReactContextBaseJavaModule {
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).getExposureKeys(promise);
         }
+    }
+
+    @ReactMethod
+    public void storeRevisionToken(String revisionToken, final Promise promise) {
+        RealmSecureStorageBte.INSTANCE.upsertRevisionToken(revisionToken);
+        promise.resolve(null);
+    }
+
+    @ReactMethod
+    public void getRevisionToken(final Promise promise) {
+        promise.resolve(RealmSecureStorageBte.INSTANCE.getRevisionToken());
     }
 }
