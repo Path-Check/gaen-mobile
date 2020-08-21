@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import env from "react-native-config"
 import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
-import NetInfo from "@react-native-community/netinfo"
 
 import { GlobalText } from "../../components/GlobalText"
 import { Colors, Typography, Spacing, Outlines } from "../../styles"
@@ -32,28 +31,10 @@ const NoExposures: FunctionComponent = () => {
 
 const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
-  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(
-    true,
-  )
-
-  const learnMoreCtaStyle = connectivity
-    ? style.learnMoreCta
-    : style.disableLearnMoreCta
 
   const handleOnPressHALink = () => {
     Linking.openURL(healthAuthorityLink)
   }
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      // netInfo state comes as null while unresolved so to avoid flicker we only set component state
-      // if the netInfo state is resolved to boolean
-      if (state.isInternetReachable !== null) {
-        setConnectivity(state.isInternetReachable)
-      }
-    })
-    return unsubscribe
-  }, [])
 
   return (
     <View style={style.card}>
@@ -70,22 +51,16 @@ const HealthGuidelines: FunctionComponent = () => {
           <TouchableOpacity
             onPress={handleOnPressHALink}
             style={style.learnMoreCtaContainer}
-            disabled={!connectivity}
           >
-            <GlobalText style={learnMoreCtaStyle}>
+            <GlobalText style={style.learnMoreCta}>
               {t("exposure_history.learn_more")}
             </GlobalText>
             <SvgXml
               xml={Icons.Arrow}
-              fill={connectivity ? Colors.primary125 : Colors.neutral25}
+              fill={Colors.primary125}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
-          {!connectivity && (
-            <GlobalText style={style.connectivityWarningText}>
-              {t("exposure_history.no_connectivity_message")}
-            </GlobalText>
-          )}
           <GlobalText style={style.listHeading}>
             {t("exposure_history.health_guidelines.title")}
           </GlobalText>
@@ -169,9 +144,6 @@ const style = StyleSheet.create({
   learnMoreCta: {
     color: Colors.primary125,
   },
-  disableLearnMoreCta: {
-    color: Colors.neutral25,
-  },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
   },
@@ -191,10 +163,6 @@ const style = StyleSheet.create({
   },
   listItemText: {
     color: Colors.neutral100,
-  },
-  connectivityWarningText: {
-    color: Colors.danger100,
-    marginBottom: Spacing.large,
   },
 })
 
