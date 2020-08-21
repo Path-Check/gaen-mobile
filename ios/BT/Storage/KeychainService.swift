@@ -1,8 +1,14 @@
 import KeychainAccess
 
-final class KeychainService {
+protocol KeychainService {
 
-  static let shared = KeychainService()
+  func setRevisionToken(_ token: String)
+  var revisionToken: String { get }
+
+}
+final class DefaultKeychainService: KeychainService {
+
+  static let `default` = DefaultKeychainService()
 
   private lazy var keychain = Keychain(service: "\(Bundle.main.bundleIdentifier!).keychainService")
 

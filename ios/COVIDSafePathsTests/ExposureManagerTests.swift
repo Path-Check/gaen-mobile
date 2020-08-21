@@ -1,20 +1,38 @@
 import Foundation
+import UserNotifications
+import BackgroundTasks
 import ExposureNotification
 import RealmSwift
 import XCTest
 
 @testable import BT
 
+// MARK: == Mocks ==
+
+class KeychainServiceMock: KeychainService {
+
+  var setRevisionTokenHandler: ((String) -> Void)?
+
+  func setRevisionToken(_ token: String) {
+    setRevisionTokenHandler?(token)
+  }
+
+  var revisionToken: String {
+    return "revisionToken"
+  }
+  
+}
+
 class BTSecureStorageMock: BTSecureStorage {
 
   var userStateHandler: (() -> UserState)?
 
-  init() {
-    super.init(inMemory: true)
+  init(notificationCenter: NotificationCenter) {
+    super.init(inMemory: true, notificationCenter: notificationCenter)
   }
 
   override var userState: UserState {
-    return userStateHandler?() ?? UserState()
+    return userStateHandler?() ?? super.userState
   }
 }
 
@@ -87,7 +105,8 @@ class ENManagerMock: ExposureNotificationManager {
   var exposureNotificationEnabledHandler: (() -> Bool)?
   var exposureNotificationStatusHandler: (() -> ENStatus)?
   var authorizationStatusHandler: (() -> ENAuthorizationStatus)?
-
+  var getDiagnosisKeysHandler: ((ENGetDiagnosisKeysHandler) -> ())?
+  var detectExposuresHandler: ((_ configuration: ENExposureConfiguration, _ diagnosisKeyURLs: [URL], _ completionHandler: @escaping ENDetectExposuresHandler) -> Progress)?
   var dispatchQueue: DispatchQueue = DispatchQueue.main
 
   var invalidationHandler: (() -> Void)?
@@ -101,7 +120,7 @@ class ENManagerMock: ExposureNotificationManager {
   }
 
   func detectExposures(configuration: ENExposureConfiguration, diagnosisKeyURLs: [URL], completionHandler: @escaping ENDetectExposuresHandler) -> Progress {
-    return Progress()
+    return detectExposuresHandler?(configuration, diagnosisKeyURLs, completionHandler) ?? Progress()
   }
 
   func getExposureInfo(summary: ENExposureDetectionSummary, userExplanation: String, completionHandler: @escaping ENGetExposureInfoHandler) -> Progress {
@@ -109,7 +128,7 @@ class ENManagerMock: ExposureNotificationManager {
   }
 
   func getDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler) {
-
+    getDiagnosisKeysHandler?(completionHandler)
   }
 
   func getTestDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler) {
@@ -132,6 +151,29 @@ class ENManagerMock: ExposureNotificationManager {
     setExposureNotificationEnabledHandler?(enabled, completionHandler)
   }
 }
+
+class BGTaskSchedulerMock: BGTaskScheduler {
+
+  override func register(forTaskWithIdentifier identifier: String, using queue: DispatchQueue?, launchHandler: @escaping (BGTask) -> Void) -> Bool {
+    return false
+  }
+}
+
+class UNUserNotificationCenterMock: UserNotificationCenter {
+
+  var addHandler: ((_ request: UNNotificationRequest, _ completionHandler: ((Error?) -> Void)?) -> Void)?
+  var removeDeliveredNotificationsHandler: ((_ identifiers: [String]) -> Void)?
+
+  func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
+    addHandler?(request, completionHandler)
+  }
+
+  func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
+    removeDeliveredNotificationsHandler?(identifiers)
+  }
+}
+
+// MARK: == UNIT TESTS ==
 
 class ExposureManagerTests: XCTestCase {
 
@@ -280,7 +322,7 @@ class ExposureManagerTests: XCTestCase {
   }
 
   func testCurrentExposures() {
-    let btSecureStorageMock = BTSecureStorageMock()
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
@@ -360,7 +402,344 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
+  func testBluetoothNotificationOn() {
+    let addNotificatiionRequestExpectation = self.expectation(description: "A notification request is added with the proper title and body")
+    let removeNotificationsExpectation = self.expectation(description: "when is not authorized and bluetooth is not off we just remove all delivered notifications")
 
+    let unUserNotificationCenterMock = UNUserNotificationCenterMock()
+    unUserNotificationCenterMock.addHandler = { request, completionHandler in
+      addNotificatiionRequestExpectation.fulfill()
+      let content = request.content
+      XCTAssertEqual(request.identifier, String.bluetoothNotificationIdentifier)
+      XCTAssertEqual(content.title, String.bluetoothNotificationTitle.localized)
+      XCTAssertEqual(content.body, String.bluetoothNotificationBody.localized)
+      //we execute the callback with an error just to get more test coverage :)
+      completionHandler?(GenericError.unknown)
+    }
+
+    let mockENManager = ENManagerMock()
+    mockENManager.authorizationStatusHandler = {
+      return .authorized
+    }
+    mockENManager.exposureNotificationStatusHandler = {
+      return .bluetoothOff
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          userNotificationCenter: unUserNotificationCenterMock)
+    addNotificatiionRequestExpectation.isInverted = false
+    removeNotificationsExpectation.isInverted = true
+    exposureManager.notifyUserBlueToothOffIfNeeded()
+    wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
+  }
+
+  func testBluetoothNotificationOff() {
+    let addNotificatiionRequestExpectation = self.expectation(description: "A notification request is added with the proper title and body")
+    let removeNotificationsExpectation = self.expectation(description: "when is not authorized and bluetooth is not off we just remove all delivered notifications")
+
+    let unUserNotificationCenterMock = UNUserNotificationCenterMock()
+    unUserNotificationCenterMock.removeDeliveredNotificationsHandler = { identifiers in
+      removeNotificationsExpectation.fulfill()
+      XCTAssertEqual(identifiers[0], String.bluetoothNotificationIdentifier)
+    }
+
+    let mockENManager = ENManagerMock()
+    mockENManager.exposureNotificationStatusHandler = {
+      return .active
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          userNotificationCenter: unUserNotificationCenterMock)
+    addNotificatiionRequestExpectation.isInverted = true
+    removeNotificationsExpectation.isInverted = false
+    exposureManager.notifyUserBlueToothOffIfNeeded()
+    wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
+  }
+
+  func testFetchExposureKeys() {
+    let mockENManager = ENManagerMock()
+    let expectation = self.expectation(description: "a call is made to get the diagnosis keys")
+    mockENManager.getDiagnosisKeysHandler = { callback in
+      expectation.fulfill()
+      callback([ENTemporaryExposureKey()], nil)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
+    exposureManager.fetchExposureKeys { (keys, error) in
+      XCTAssertNil(error)
+      XCTAssertEqual(keys?.count, 1)
+    }
+    wait(for: [expectation], timeout: 0)
+    mockENManager.getDiagnosisKeysHandler = { callback in
+      callback(nil, GenericError.unknown)
+    }
+    exposureManager.fetchExposureKeys { (keys, error) in
+      XCTAssertEqual(error?.errorCode, ExposureManagerErrorCode.noExposureKeysFound.rawValue)
+      XCTAssertNotNil(error?.underlyingError)
+    }
+  }
+
+  func testPostDiagnosisKeys() {
+    let mockENManager = ENManagerMock()
+    let expectation = self.expectation(description: "a call is made to get the diagnosis keys")
+    let keychainSetRevisionTokenExpectation = self.expectation(description: "store the new revision token")
+    mockENManager.getDiagnosisKeysHandler = { callback in
+      expectation.fulfill()
+      callback([ENTemporaryExposureKey()], nil)
+    }
+    let apiClientMock = APIClientMock<DiagnosisKeyListRequest> { (request, requestType) -> Result<KeySubmissionResponse> in
+      XCTAssertEqual(requestType, RequestType.postKeys)
+      let keySubmissionSuccess = KeySubmissionResponse(revisionToken: "revision_token")
+      return Result.success(keySubmissionSuccess)
+    }
+    let keychainServiceMock = KeychainServiceMock()
+    keychainServiceMock.setRevisionTokenHandler = { newToken in
+      keychainSetRevisionTokenExpectation.fulfill()
+      XCTAssertEqual(newToken, "revision_token")
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          apiClient: apiClientMock,
+                                          keychainService: keychainServiceMock)
+    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
+                                            HMACKey: "HMACKey") { (success, error) in
+                                              XCTAssertEqual(error?.errorCode,
+                                                             ExposureManagerErrorCode.noExposureKeysFound.rawValue,
+                                                             "it returns an error since no key matches the criteria")
+    }
+    wait(for: [expectation], timeout: 0)
+    mockENManager.getDiagnosisKeysHandler = { callback in
+      callback(nil, GenericError.unknown)
+    }
+    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
+                                            HMACKey: "HMACKey") { (success, error) in
+                                              XCTAssertEqual(error?.errorCode,
+                                                             ExposureManagerErrorCode.noExposureKeysFound.rawValue,
+                                                             "it returns an error since the underlying manager returns an error")
+    }
+    mockENManager.getDiagnosisKeysHandler = { callback in
+      let exposureKey = ENTemporaryExposureKey()
+      var keys = [exposureKey]
+      let currentExposureKey = ENTemporaryExposureKey()
+      currentExposureKey.rollingStartNumber = keys.minRollingStartNumber() + 10
+      keys.append(currentExposureKey)
+      callback(keys, nil)
+    }
+    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
+                                            HMACKey: "HMACKey") { (success, error) in
+                                              XCTAssertNil(error)
+    }
+    wait(for: [keychainSetRevisionTokenExpectation], timeout: 0)
+
+    let failApiClientMock = APIClientMock<DiagnosisKeyListRequest> { (request, requestType) -> Result<KeySubmissionResponse> in
+      return Result.failure(GenericError.notFound)
+    }
+    let anotherExposureManager = ExposureManager(exposureNotificationManager: mockENManager,
+                                          apiClient: failApiClientMock)
+    anotherExposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
+                                            HMACKey: "HMACKey") { (success, error) in
+                                              XCTAssertEqual(error?.errorCode,
+                                                             ExposureManagerErrorCode.networkFailure.rawValue,
+                                                             "it returns an error since the underlying api call returns an error")
+    }
+  }
+
+  func testDebugFetchDiagnosisKeys() {
+    let debugAction = DebugAction.fetchDiagnosisKeys
+    let enManagerMock = ENManagerMock()
+    enManagerMock.getDiagnosisKeysHandler = { callback in
+      callback([ENTemporaryExposureKey()], nil)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpetactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpetactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+    
+    let failExpectationResolve = self.expectation(description: "resolve is not called")
+    failExpectationResolve.isInverted = true
+    let failExpectationReject = self.expectation(description: "reject is called")
+    enManagerMock.getDiagnosisKeysHandler = { callback in
+      callback(nil, ExposureManagerError(errorCode: ExposureManagerErrorCode.noExposureKeysFound,
+                                         localizedMessage: "Message"))
+    }
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      failExpectationResolve.fulfill()
+    }) { (_, _, _) in
+      failExpectationReject.fulfill()
+    }
+    wait(for: [failExpectationResolve, failExpectationReject], timeout: 0)
+  }
+
+  func testDebugDetectExposuresNow() {
+    let debugAction = DebugAction.detectExposuresNow
+    let enManagerMock = ENManagerMock()
+    enManagerMock.detectExposuresHandler = { configuration, diagnosisKeyURLs, completionHanlder in
+      return Progress()
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpectactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpectactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
+
+    let failExpectationResolve = self.expectation(description: "resolve is not called")
+    failExpectationResolve.isInverted = true
+    let failExpectationReject = self.expectation(description: "reject is called")
+    enManagerMock.getDiagnosisKeysHandler = { callback in
+      callback(nil, ExposureManagerError(errorCode: ExposureManagerErrorCode.noExposureKeysFound,
+                                         localizedMessage: "Message"))
+    }
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      failExpectationResolve.fulfill()
+    }) { (_, _, _) in
+      failExpectationReject.fulfill()
+    }
+    wait(for: [failExpectationResolve, failExpectationReject], timeout: 0)
+  }
+
+  func testDebugSimulateExposureDetectionError() {
+    let debugAction = DebugAction.simulateExposureDetectionError
+    let enManagerMock = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpectactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpectactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
+  }
+
+  func testDebugSimulateExposure() {
+    let debugAction = DebugAction.simulateExposure
+    let enManagerMock = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpectactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpectactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
+  }
+
+    func testDebugFetchExposures() {
+      let debugAction = DebugAction.fetchExposures
+      let enManagerMock = ENManagerMock()
+      let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+      let successExpetactionResolve = self.expectation(description: "resolve is called")
+      let successExpectationReject = self.expectation(description: "reject is not called")
+      successExpectationReject.isInverted = true
+      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+        successExpetactionResolve.fulfill()
+      }) { (_, _, _) in
+        successExpectationReject.fulfill()
+      }
+      wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+    }
+
+    func testDebugGetAndPostDiagnosisKeys() {
+      let apiClientMock = APIClientMock<DiagnosisKeyListRequest> { (request, requestType) -> Result<KeySubmissionResponse> in
+        XCTAssertEqual(requestType, RequestType.postKeys)
+        let keySubmissionSuccess = KeySubmissionResponse(revisionToken: "revision_token")
+        return Result.success(keySubmissionSuccess)
+      }
+      let debugAction = DebugAction.getAndPostDiagnosisKeys
+      let enManagerMock = ENManagerMock()
+      enManagerMock.getDiagnosisKeysHandler = { callback in
+        let exposureKey = ENTemporaryExposureKey()
+        var keys = [exposureKey]
+        let currentExposureKey = ENTemporaryExposureKey()
+        currentExposureKey.rollingStartNumber = keys.minRollingStartNumber() + 10
+        keys.append(currentExposureKey)
+        callback(keys, nil)
+      }
+      let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock, apiClient: apiClientMock)
+      let successExpetactionResolve = self.expectation(description: "resolve is called")
+      let successExpectationReject = self.expectation(description: "reject is not called")
+      successExpectationReject.isInverted = true
+      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+        successExpetactionResolve.fulfill()
+      }) { (_, _, _) in
+        successExpectationReject.fulfill()
+      }
+      wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+
+      let failExpectationResolve = self.expectation(description: "resolve is not called")
+      failExpectationResolve.isInverted = true
+      let failExpectationReject = self.expectation(description: "reject is called")
+      enManagerMock.getDiagnosisKeysHandler = { callback in
+        callback(nil, ExposureManagerError(errorCode: ExposureManagerErrorCode.noExposureKeysFound,
+                                           localizedMessage: "Message"))
+      }
+      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+        failExpectationResolve.fulfill()
+      }) { (_, _, _) in
+        failExpectationReject.fulfill()
+      }
+      wait(for: [failExpectationResolve, failExpectationReject], timeout: 0)
+  }
+
+  func testDebugResetExposures() {
+    let debugAction = DebugAction.resetExposures
+    let enManagerMock = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpetactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpetactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+  }
+
+  func testDebugToggleENAuthorization() {
+    let debugAction = DebugAction.toggleENAuthorization
+    let enManagerMock = ENManagerMock()
+    enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
+      completionHandler(nil)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpetactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpetactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+  }
+
+  func testDebugShowLastProcessedFilePath() {
+    let debugAction = DebugAction.showLastProcessedFilePath
+    let enManagerMock = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpetactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpetactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
+    }
+    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+  }
+
+// MARK: == INTEGRATION TESTS ==
   let indexTxt = """
 mn/1593432000-1593446400-00001.zip
 mn/1593432000-1593446400-00002.zip
@@ -433,170 +812,226 @@ mn/1593460800-1593475200-00022.zip
 """
   
   func testProcessesCorrectFilePathsDuringFirstRun() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = ""
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
-    let paths = ExposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let userState = UserState()
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = ""
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
 
     XCTAssertEqual(paths.first!, "mn/1593432000-1593446400-00001.zip")
     XCTAssertEqual(paths.last!, "mn/1593432000-1593446400-00015.zip")
   }
   
   func testUrlPathsToProcessSecondPass() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593432000-1593446400-00015.zip"
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
-    let paths = ExposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let userState = UserState()
+    userState.urlOfMostRecentlyDetectedKeyFile = "mn/1593432000-1593446400-00015.zip"
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = "mn/1593432000-1593446400-00015.zip"
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
 
     XCTAssertEqual(paths.first!, "mn/1593432000-1593446400-00016.zip")
     XCTAssertEqual(paths.last!, "mn/1593446400-1593460800-00007.zip")
   }
   
   func testUrlPathsToProcessAfterReadingAllButOneFile() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00021.zip"
-    let paths = ExposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let userState = UserState()
+    userState.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00021.zip"
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00021.zip"
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
 
     XCTAssertEqual(paths.count, 1)
   }
   
   func testUrlPathsToProcessAfterReadingAllFiles() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
-    let paths = ExposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let userState = UserState()
+    userState.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
 
     XCTAssertEqual(paths.count, 0)
   }
   
   func testUpdateRemainingFileCapacityFirstPass() {
+    let notificationCenter = NotificationCenter()
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: notificationCenter)
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock, notificationCenter: notificationCenter)
 
     // Setup
-    ExposureManager.updateRemainingFileCapacity()
-    let hoursSinceLastReset = Date.hourDifference(from: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset!, to: Date())
-
-    XCTAssertEqual(hoursSinceLastReset, 0)
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+//    let userState = UserState()
+//    btSecureStorageMock.userStateHandler = {
+//      return userState
+//    }
+//    exposureManager.updateRemainingFileCapacity()
+//    let hoursSinceLastReset = Date.hourDifference(from: btSecureStorageMock.userState.dateLastPerformedFileCapacityReset!, to: Date())
+//
+//    XCTAssertEqual(hoursSinceLastReset, 0)
+//    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
   }
   
   func testUpdateRemainingFileCapacityUnder24Hours() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.dateLastPerformedFileCapacityReset = Date()
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = 2
-    ExposureManager.updateRemainingFileCapacity()
-    let hoursSinceLastReset = Date.hourDifference(from: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset!, to: Date())
+    let userState = UserState()
+    userState.dateLastPerformedFileCapacityReset = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.dateLastPerformedFileCapacityReset = Date()
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = 2
+    exposureManager.updateRemainingFileCapacity()
+    let hoursSinceLastReset = Date.hourDifference(from: btSecureStorageMock.userState.dateLastPerformedFileCapacityReset!,
+                                                  to: Date())
 
     XCTAssertEqual(hoursSinceLastReset, 0)
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 2)
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, 2)
   }
   
   func testUpdateRemainingFileCapacityAfter24Hours() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
     let twoDaysAgo = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
-    BTSecureStorage.shared.dateLastPerformedFileCapacityReset = twoDaysAgo
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = 2
-    ExposureManager.updateRemainingFileCapacity()
-    let hoursSinceLastReset = Date.hourDifference(from: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset!, to: Date())
+    let userState = UserState()
+    userState.dateLastPerformedFileCapacityReset = Date()
+
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.dateLastPerformedFileCapacityReset = twoDaysAgo
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = 2
+    exposureManager.updateRemainingFileCapacity()
+    let hoursSinceLastReset = Date.hourDifference(from: btSecureStorageMock.userState.dateLastPerformedFileCapacityReset!,
+                                                  to: Date())
 
     XCTAssertEqual(hoursSinceLastReset, 0)
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
   }
   
   func testSuccessfulDetection() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
 
 
-    ExposureManager.shared?.finish(.success([]),
-                                  processedFileCount: 4,
-                                  lastProcessedUrlPath: "mn/1593460800-1593475200-00022.zip",
-                                  progress: Progress()) { _ in }
+    exposureManager.finish(.success([]),
+                           processedFileCount: 4,
+                           lastProcessedUrlPath: "mn/1593460800-1593475200-00022.zip",
+                           progress: Progress()) { _ in }
 
     // remainingDailyFileProcessingCapacity decreases, urlOfMostRecentlyDetectedKeyFile is stored
-    XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 11)
+    XCTAssertEqual(btSecureStorageMock.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, 11)
 
     // ----------------
 
-    ExposureManager.shared?.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress()) { _ in }
+    exposureManager.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress()) { _ in }
 
     // remainingDailyFileProcessingCapacity decreases, urlOfMostRecentlyDetectedKeyFile is stored
-    XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 3)
+    XCTAssertEqual(btSecureStorageMock.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, 3)
 
     // ----------------
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored if empty string
-    ExposureManager.shared?.finish(.success([]),
-                                  processedFileCount: 0,
-                                  lastProcessedUrlPath: .default,
-                                  progress: Progress()) { _ in }
+    exposureManager.finish(.success([]),
+                           processedFileCount: 0,
+                           lastProcessedUrlPath: .default,
+                           progress: Progress()) { _ in }
 
-    XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 3)
+    XCTAssertEqual(btSecureStorageMock.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, 3)
   }
   
   func testFailedDetection() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
-    ExposureManager.shared?.finish(.failure(GenericError.unknown),
-                                  processedFileCount: 4,
-                                  lastProcessedUrlPath: "invalid",
-                                  progress: Progress()) { _ in }
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
+    exposureManager.finish(.failure(GenericError.unknown),
+                           processedFileCount: 4,
+                           lastProcessedUrlPath: "invalid",
+                           progress: Progress()) { _ in }
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored
-    XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+    XCTAssertEqual(btSecureStorageMock.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
   }
   
   func testCancelledDetection() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
     let progress = Progress()
     progress.cancel()
-    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
-    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
-    ExposureManager.shared?.finish(.failure(GenericError.unknown), processedFileCount: 4,
-                                  lastProcessedUrlPath: "invalid",
-                                  progress: progress) { _ in }
+    btSecureStorageMock.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
+    btSecureStorageMock.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
+    exposureManager.finish(.failure(GenericError.unknown),
+                           processedFileCount: 4,
+                           lastProcessedUrlPath: "invalid",
+                           progress: progress) { _ in }
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored
-    XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+    XCTAssertEqual(btSecureStorageMock.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
   }
 
   func testExposureStorage() {
-
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     // Setup
-    BTSecureStorage.shared.resetUserState() { _ in }
+    let userState = UserState()
+    btSecureStorageMock.userStateHandler = {
+      return userState
+    }
+    btSecureStorageMock.resetUserState() { _ in }
 
-    XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 0)
+    XCTAssertEqual(btSecureStorageMock.userState.exposures.count, 0)
 
     let exposure = Exposure(id: UUID().uuidString,
                             date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000,
                             duration: TimeInterval(Int.random(in: 1...10) * 60 * 5 * 1000),
                             totalRiskScore: .random(in: 1...8),
                             transmissionRiskLevel: .random(in: 0...7))
-    ExposureManager.shared?.finish(.success([exposure]),
-                                  processedFileCount: 4,
-                                  lastProcessedUrlPath: .default,
-                                  progress: Progress()) { _ in }
-    XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 1)
+    exposureManager.finish(.success([exposure]),
+                           processedFileCount: 4,
+                           lastProcessedUrlPath: .default,
+                           progress: Progress()) { _ in }
+    XCTAssertEqual(btSecureStorageMock.userState.exposures.count, 1)
   }
 
   func testInitialFileCapacity() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
 
     // Setup
-    BTSecureStorage.shared.resetUserState() { _ in }
-    XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+    btSecureStorageMock.resetUserState() { _ in }
+    XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity,
+                   Constants.dailyFileProcessingCapacity)
   }
 
   func testFilterOldKeysForSubmission() {

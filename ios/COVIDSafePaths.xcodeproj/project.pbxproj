@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7372C03D7AA19943931FCE4 /* libPods-BT.a */; };
+		A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */; };
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
@@ -188,6 +189,7 @@
 		997AE6137471448A99893BC8 /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		9B4A262ECA724F9CAB9A2C70 /* IBMPlexMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-BoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		A57577D96B89452694B53982 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043A24E565F900C3157A /* ENBridgeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ENBridgeConstants.h; sourceTree = "<group>"; };
 		A5B812656CA17568F2153FC2 /* Pods-BT.release-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release-gps.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release-gps.xcconfig"; sourceTree = "<group>"; };
@@ -510,6 +512,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A58AB54124EF45B300F393B4 /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */,
+			);
+			path = UserNotifications;
+			sourceTree = "<group>";
+		};
 		B507AA0524A2531000E039D5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +611,7 @@
 		B5FC37F2248A9934006474EB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A58AB54124EF45B300F393B4 /* UserNotifications */,
 				B5E29D4D249E3A8700E686DC /* Exposure Notifications */,
 				B5E29D4A249E3A7D00E686DC /* Foundation */,
 			);
@@ -951,6 +962,7 @@
 				A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */,
 				B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */,
 				B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */,
+				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
