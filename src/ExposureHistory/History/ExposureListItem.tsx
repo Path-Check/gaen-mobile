@@ -46,7 +46,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
   return (
     <TouchableHighlight
-      underlayColor={Colors.secondary75}
+      underlayColor={Colors.secondary50}
       style={style.container}
       onPress={() =>
         navigation.navigate(Screens.ExposureDetail, { exposureDatum })
@@ -77,7 +77,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xSmall,
@@ -89,11 +89,10 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   primaryText: {
-    ...Typography.bold,
+    ...Typography.header6,
   },
   secondaryText: {
-    ...Typography.base,
-    color: Colors.neutral100,
+    ...Typography.body3,
     textTransform: "uppercase",
     marginTop: Spacing.xxSmall,
     letterSpacing: Typography.mediumLetterSpacing,

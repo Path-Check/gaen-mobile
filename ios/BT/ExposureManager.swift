@@ -73,7 +73,7 @@ final class ExposureManager: NSObject {
        backgroundTaskScheduler: BGTaskScheduler = BGTaskScheduler.shared,
        notificationCenter: NotificationCenter = NotificationCenter.default,
        userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current(),
-       keychainService: KeychainService = DefaultKeychainService.default) {
+       keychainService: KeychainService = DefaultKeychainService.shared) {
     self.manager = exposureNotificationManager
     self.apiClient = apiClient
     self.btSecureStorage = btSecureStorage

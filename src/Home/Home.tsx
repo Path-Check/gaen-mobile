@@ -307,8 +307,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   languageButtonText: {
-    ...Typography.base,
-    fontSize: Typography.xSmall,
+    ...Typography.body3,
     letterSpacing: Typography.largeLetterSpacing,
     color: Colors.primary150,
     textAlign: "center",
@@ -327,7 +326,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.body1,
+    fontSize: Typography.large,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -405,9 +405,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.baseBorderRadius,
   },
   fixText: {
-    ...Typography.base,
-    ...Typography.bold,
-    fontSize: Typography.medium,
+    ...Typography.body1,
     color: Colors.white,
   },
   bottomHeaderText: {
@@ -415,7 +413,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxxSmall,
   },
   bottomBodyText: {
-    ...Typography.secondaryContent,
+    ...Typography.header6,
+    color: Colors.neutral100,
   },
   buttonContainer: {
     paddingHorizontal: Spacing.small,

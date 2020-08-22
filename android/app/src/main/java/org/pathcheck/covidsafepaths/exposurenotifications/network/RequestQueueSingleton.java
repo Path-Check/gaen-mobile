@@ -18,9 +18,7 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BaseHttpStack;
 import com.android.volley.toolbox.BasicNetwork;
@@ -28,7 +26,9 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.NoCache;
 import com.android.volley.toolbox.Volley;
 
-/** Holder for a singleton {@link Volley} {@link com.android.volley.RequestQueue}. */
+/**
+ * Holder for a singleton {@link Volley} {@link com.android.volley.RequestQueue}.
+ */
 public class RequestQueueSingleton {
 
   private static RequestQueue queue;

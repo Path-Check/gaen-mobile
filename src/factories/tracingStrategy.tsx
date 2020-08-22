@@ -12,7 +12,8 @@ export default Factory.define<TracingStrategy>(() => ({
       return new Promise(() => null)
     },
     getExposureKeys: () => new Promise(() => []),
-    submitDiagnosisKeys: () => new Promise(() => ""),
+    storeRevisionToken: (_revisionToken: string) => Promise.resolve(),
+    getRevisionToken: () => Promise.resolve(""),
   },
   permissionStrategy: {
     statusSubscription: () => {

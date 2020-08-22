@@ -118,6 +118,16 @@ export const submitDiagnosisKeys = async (
   return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
 }
 
+export const storeRevisionToken = async (
+  revisionToken: string,
+): Promise<void> => {
+  return exposureKeyModule.storeRevisionToken(revisionToken)
+}
+
+export const getRevisionToken = async (): Promise<string> => {
+  return exposureKeyModule.getRevisionToken()
+}
+
 // Device Info Module
 const deviceInfoModule = NativeModules.DeviceInfoModule
 

@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
@@ -35,11 +34,6 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
-
-import org.apache.commons.io.FileUtils;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import org.threeten.bp.Duration;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,13 +46,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.io.FileUtils;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.threeten.bp.Duration;
 
 /**
  * A class to download all the files in a given batch of Diagnosis Key files.
  *
- * Modified from Google sample implementation.
+ * <p>Modified from Google sample implementation.
  */
 class DiagnosisKeyDownloader {
   private static final String TAG = "KeyDownloader";
@@ -129,7 +125,7 @@ class DiagnosisKeyDownloader {
   }
 
   private ListenableFuture<List<BatchFile>> initiateDownloads(
-          List<KeyFileBatch> batches, String dir) {
+      List<KeyFileBatch> batches, String dir) {
     List<ListenableFuture<BatchFile>> batchFiles = new ArrayList<>();
     for (KeyFileBatch b : batches) {
       batchFiles.addAll(handleBatch(b, dir));
@@ -197,7 +193,9 @@ class DiagnosisKeyDownloader {
     return BASE32.encode(bytes);
   }
 
-  /** A {@link BroadcastReceiver} to receive the results of each file download. */
+  /**
+   * A {@link BroadcastReceiver} to receive the results of each file download.
+   */
   private final BroadcastReceiver downloadStatusReceiver =
       new BroadcastReceiver() {
         @Override
@@ -252,7 +250,9 @@ class DiagnosisKeyDownloader {
         }
       };
 
-  /** A {@link File} that knows which {@link KeyFileBatch} it belongs to. */
+  /**
+   * A {@link File} that knows which {@link KeyFileBatch} it belongs to.
+   */
   private static class BatchFile {
     private final KeyFileBatch batch;
     private final File file;
@@ -263,7 +263,9 @@ class DiagnosisKeyDownloader {
     }
   }
 
-  /** A simple value class for holding all the details of a single downloaded file. */
+  /**
+   * A simple value class for holding all the details of a single downloaded file.
+   */
   private static class Download {
     private final KeyFileBatch batch;
     private final long downloadId;

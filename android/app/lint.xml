@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Translations are manually pulled from Lokalise, lower severity to warning -->
+    <issue id="MissingTranslation" severity="warning" />
+
+    <issue id="UnusedResources">
+        <ignore path="build.gradle"/>
+    </issue>
+</lint>

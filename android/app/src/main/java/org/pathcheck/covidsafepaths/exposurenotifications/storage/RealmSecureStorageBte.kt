@@ -7,14 +7,13 @@ import com.bottlerocketstudios.vault.SharedPreferenceVault
 import com.bottlerocketstudios.vault.SharedPreferenceVaultFactory
 import com.google.android.gms.nearby.exposurenotification.ExposureWindow
 import com.google.common.util.concurrent.ListenableFuture
-import org.pathcheck.covidsafepaths.MainApplication
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.REVISION_TOKEN_KEY
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
 import java.security.SecureRandom
-
+import org.pathcheck.covidsafepaths.MainApplication
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.REVISION_TOKEN_KEY
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
@@ -54,7 +53,8 @@ object RealmSecureStorageBte {
                 it.executeTransactionAsync(
                     { realm -> realm.insert(positiveDiagnosis) },
                     { completer.set(null) },
-                    { e -> completer.setException(e) })
+                    { e -> completer.setException(e) }
+                )
             }
         }
     }
@@ -69,7 +69,8 @@ object RealmSecureStorageBte {
                         diagnosis?.shared = shared
                     },
                     { completer.set(null) },
-                    { e -> completer.setException(e) })
+                    { e -> completer.setException(e) }
+                )
             }
         }
     }
@@ -84,7 +85,8 @@ object RealmSecureStorageBte {
                         diagnosis?.deleteFromRealm()
                     },
                     { completer.set(null) },
-                    { e -> completer.setException(e) })
+                    { e -> completer.setException(e) }
+                )
             }
         }
     }
@@ -158,8 +160,10 @@ object RealmSecureStorageBte {
                     if (!found) {
                         // No existing ExposureEntity with the given date, must add an entity for this window.
                         somethingAdded = true
-                        db.insert(ExposureEntity
-                            .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis()))
+                        db.insert(
+                            ExposureEntity
+                                .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis())
+                        )
                     }
                 }
             }
@@ -171,7 +175,10 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.delete(ExposureEntity::class.java)
-                db.where(KeyValues::class.java).equalTo("id", LAST_PROCESSED_FILE_NAME_KEY).findFirst()?.deleteFromRealm()
+                db.where(KeyValues::class.java)
+                    .equalTo("id", LAST_PROCESSED_FILE_NAME_KEY)
+                    .findFirst()
+                    ?.deleteFromRealm()
             }
         }
     }

@@ -60,17 +60,16 @@ const style = StyleSheet.create({
     color: Colors.primary150,
   },
   aboutContent: {
-    ...Typography.secondaryContent,
+    ...Typography.body1,
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
-    ...Typography.semiBold,
     color: Colors.primary150,
     width: 100,
     marginTop: Spacing.small,
   },
   aboutSectionParaContent: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginTop: Spacing.small,
   },
   infoRowContainer: {

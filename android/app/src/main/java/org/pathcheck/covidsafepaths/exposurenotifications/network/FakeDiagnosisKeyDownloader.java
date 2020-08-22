@@ -18,19 +18,16 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import android.content.Context;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import org.apache.commons.io.FileUtils;
-import org.pathcheck.covidsafepaths.R;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
+import org.apache.commons.io.FileUtils;
+import org.pathcheck.covidsafepaths.R;
 
 /**
  * A faked version of to {@link DiagnosisKeyDownloader} that provides a baked-in sample file to the

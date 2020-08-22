@@ -155,7 +155,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header1,
   },
   scrollView: {
     flex: 1,

@@ -47,3 +47,36 @@ export async function setIsOnboardingComplete(): Promise<void> {
 export async function removeIsOnboardingComplete(): Promise<void> {
   return removeStoreData(ONBOARDING_COMPLETE)
 }
+
+const ANALYTICS_CONSENT = "ANALYTICS_CONSENT"
+const USER_CONSENTED = "USER_CONSENTED"
+const USER_NOT_CONSENTED = "USER_NOT_CONSENTED"
+
+export async function getAnalyticsConsent(): Promise<boolean> {
+  const userConsented = await getStoreData(ANALYTICS_CONSENT)
+  return consentToBoolean(userConsented)
+}
+
+export async function setAnalyticsConsent(consent: boolean): Promise<void> {
+  return setStoreData(ANALYTICS_CONSENT, booleanToConsent(consent))
+}
+
+const consentToBoolean = (consent: string | null): boolean => {
+  switch (consent) {
+    case "USER_CONSENTED":
+      return true
+    case null:
+      return false
+    default:
+      return false
+  }
+}
+
+const booleanToConsent = (bool: boolean): string => {
+  switch (bool) {
+    case true:
+      return USER_CONSENTED
+    case false:
+      return USER_NOT_CONSENTED
+  }
+}

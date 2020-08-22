@@ -17,11 +17,10 @@
 
 package org.pathcheck.covidsafepaths.exposurenotifications.storage;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * An exposure element for display in the exposures UI.
@@ -32,82 +31,82 @@ import io.realm.annotations.PrimaryKey;
  */
 public class ExposureEntity extends RealmObject {
 
-    private @PrimaryKey long id = UUID.randomUUID().getMostSignificantBits();
+  private @PrimaryKey long id = UUID.randomUUID().getMostSignificantBits();
 
-    /**
-     * The dateMillisSinceEpoch provided by the ExposureInformation in the Exposure Notifications
-     * API.
-     *
-     * <p>Represents a date of an exposure in millis since epoch rounded to the day.
-     */
-    private long dateMillisSinceEpoch;
+  /**
+   * The dateMillisSinceEpoch provided by the ExposureInformation in the Exposure Notifications
+   * API.
+   *
+   * <p>Represents a date of an exposure in millis since epoch rounded to the day.
+   */
+  private long dateMillisSinceEpoch;
 
-    /**
-     * The timestamp in millis since epoch for when the exposure notification status update was
-     * received.
-     */
-    private long receivedTimestampMs;
+  /**
+   * The timestamp in millis since epoch for when the exposure notification status update was
+   * received.
+   */
+  private long receivedTimestampMs;
 
-    public ExposureEntity() {
+  public ExposureEntity() {
+  }
+
+  ExposureEntity(long dateMillisSinceEpoch, long receivedTimestampMs) {
+    this.receivedTimestampMs = receivedTimestampMs;
+    this.dateMillisSinceEpoch = dateMillisSinceEpoch;
+  }
+
+  /**
+   * Creates an ExposureEntity.
+   *
+   * @param dateMillisSinceEpoch the date of an exposure in millis since epoch rounded to the day of
+   *                             the detected exposure
+   * @param receivedTimestampMs  the timestamp in milliseconds since epoch for when the exposure was
+   *                             received by the app
+   */
+  public static ExposureEntity create(long dateMillisSinceEpoch, long receivedTimestampMs) {
+    return new ExposureEntity(dateMillisSinceEpoch, receivedTimestampMs);
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  void setId(long id) {
+    this.id = id;
+  }
+
+  public long getReceivedTimestampMs() {
+    return receivedTimestampMs;
+  }
+
+  void setReceivedTimestampMs(long ms) {
+    this.receivedTimestampMs = ms;
+  }
+
+  public long getDateMillisSinceEpoch() {
+    return dateMillisSinceEpoch;
+  }
+
+  public void setDateMillisSinceEpoch(long dateMillisSinceEpoch) {
+    this.dateMillisSinceEpoch = dateMillisSinceEpoch;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    ExposureEntity(long dateMillisSinceEpoch, long receivedTimestampMs) {
-        this.receivedTimestampMs = receivedTimestampMs;
-        this.dateMillisSinceEpoch = dateMillisSinceEpoch;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    ExposureEntity that = (ExposureEntity) o;
+    return id == that.id
+        && dateMillisSinceEpoch == that.dateMillisSinceEpoch
+        && receivedTimestampMs == that.receivedTimestampMs;
+  }
 
-    /**
-     * Creates an ExposureEntity.
-     *
-     * @param dateMillisSinceEpoch the date of an exposure in millis since epoch rounded to the day of
-     *                             the detected exposure
-     * @param receivedTimestampMs  the timestamp in milliseconds since epoch for when the exposure was
-     *                             received by the app
-     */
-    public static ExposureEntity create(long dateMillisSinceEpoch, long receivedTimestampMs) {
-        return new ExposureEntity(dateMillisSinceEpoch, receivedTimestampMs);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    void setId(long id) {
-        this.id = id;
-    }
-
-    public long getReceivedTimestampMs() {
-        return receivedTimestampMs;
-    }
-
-    void setReceivedTimestampMs(long ms) {
-        this.receivedTimestampMs = ms;
-    }
-
-    public long getDateMillisSinceEpoch() {
-        return dateMillisSinceEpoch;
-    }
-
-    public void setDateMillisSinceEpoch(long dateMillisSinceEpoch) {
-        this.dateMillisSinceEpoch = dateMillisSinceEpoch;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ExposureEntity that = (ExposureEntity) o;
-        return id == that.id &&
-                dateMillisSinceEpoch == that.dateMillisSinceEpoch &&
-                receivedTimestampMs == that.receivedTimestampMs;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dateMillisSinceEpoch, receivedTimestampMs);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, dateMillisSinceEpoch, receivedTimestampMs);
+  }
 }

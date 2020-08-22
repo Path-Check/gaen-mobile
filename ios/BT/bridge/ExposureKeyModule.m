@@ -46,5 +46,22 @@ RCT_REMAP_METHOD(postDiagnosisKeys,
   }];
 }
 
+RCT_REMAP_METHOD(storeRevisionToken,
+                 revisionToken: (NSString *)revisionToken
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[DefaultKeychainService shared] setRevisionToken:revisionToken];
+  resolve(nil);
+}
+
+RCT_REMAP_METHOD(getRevisionToken,
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  NSString *revisionToken = [[DefaultKeychainService shared] revisionToken];
+  resolve(revisionToken);
+}
+
 
 @end
