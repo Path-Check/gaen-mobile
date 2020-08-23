@@ -314,7 +314,7 @@ final class ExposureManager: NSObject {
     isDetectingExposures = true
 
     // Reset file capacity to 15 if > 24 hours have elapsed since last reset
-    updateRemainingFileCapacity()
+    self.updateRemainingFileCapacity()
 
     // Abort if daily file capacity is exceeded
     guard btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {

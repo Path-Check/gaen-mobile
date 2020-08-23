@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7372C03D7AA19943931FCE4 /* libPods-BT.a */; };
+		A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */; };
 		A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */; };
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
@@ -26,7 +27,7 @@
 		B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B596C0712488127D00943B79 /* ENPermissionsModule.m */; };
 		B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */; };
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
-		B5A6FD6E24BC9E69007D328C /* ExposureManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */; };
+		B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
@@ -188,6 +189,7 @@
 		93396F628DA498595B93956B /* Pods-BTTests.debug-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug-gps.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug-gps.xcconfig"; sourceTree = "<group>"; };
 		997AE6137471448A99893BC8 /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		9B4A262ECA724F9CAB9A2C70 /* IBMPlexMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-BoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-BoldItalic.ttf"; sourceTree = "<group>"; };
+		A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		A57577D96B89452694B53982 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
@@ -221,7 +223,7 @@
 		B596C0712488127D00943B79 /* ENPermissionsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ENPermissionsModule.m; sourceTree = "<group>"; };
 		B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExposureHistoryModule.m; sourceTree = "<group>"; };
 		B59F4C3624BE0658007B09D5 /* List+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extensions.swift"; sourceTree = "<group>"; };
-		B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerTests.swift; sourceTree = "<group>"; };
+		B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerUnitTests.swift; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -331,7 +333,8 @@
 			children = (
 				00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
-				B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */,
+				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
+				A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */,
 			);
 			path = COVIDSafePathsTests;
 			sourceTree = "<group>";
@@ -988,8 +991,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A6FD6E24BC9E69007D328C /* ExposureManagerTests.swift in Sources */,
+				B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */,
 				C5AA24D824768FFF00BA0A99 /* COVIDSafePathsTests.m in Sources */,
+				A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
