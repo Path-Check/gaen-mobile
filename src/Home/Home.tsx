@@ -308,7 +308,7 @@ const style = StyleSheet.create({
   },
   languageButtonText: {
     ...Typography.body3,
-    letterSpacing: Typography.largeLetterSpacing,
+    letterSpacing: Typography.xLargeLetterSpacing,
     color: Colors.primary150,
     textAlign: "center",
     textTransform: "uppercase",

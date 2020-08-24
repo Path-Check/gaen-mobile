@@ -23,7 +23,8 @@ export const xxxLargeLineHeight = 36
 // Letter Spacing
 export const baseLetterSpacing = 0.25
 export const mediumLetterSpacing = 0.5
-export const largeLetterSpacing = 3
+export const largeLetterSpacing = 1
+export const xLargeLetterSpacing = 3
 
 // Font Weights
 export const baseWeight = "400"
