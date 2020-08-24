@@ -96,7 +96,7 @@ const style = StyleSheet.create({
     borderColor: "#999999",
   },
   itemText: {
-    ...Typography.tertiaryContent,
+    ...Typography.body1,
     padding: 10,
     maxWidth: "90%",
   },

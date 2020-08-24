@@ -172,14 +172,14 @@ const AssessmentOptions = ({ option, question, selectedValues, onSelect }) => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   header: {
     paddingHorizontal: Spacing.medium,
     marginTop: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header1,
   },
   scrollView: {
     flex: 1,
@@ -199,11 +199,11 @@ const style = StyleSheet.create({
   instruction: {
     ...Typography.mediumFont,
     lineHeight: Typography.xSmallLineHeight,
-    color: Colors.secondaryHeaderText,
+    color: Colors.neutral140,
     marginTop: Spacing.xLarge,
   },
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

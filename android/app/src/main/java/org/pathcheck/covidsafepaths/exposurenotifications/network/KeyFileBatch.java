@@ -18,11 +18,9 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import android.net.Uri;
-
 import com.google.auto.value.AutoValue;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.List;

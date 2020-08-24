@@ -11,6 +11,7 @@
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */; };
+		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
 		B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */; };
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
@@ -24,7 +25,6 @@
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
 		B5A6FD6E24BC9E69007D328C /* ExposureManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
-		B5D968FA24C60E75008DE452 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D968F924C60E74008DE452 /* GoogleService-Info.plist */; };
 		B5E29D54249E3BE100E686DC /* ExposureManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E29D53249E3BE100E686DC /* ExposureManager+Extensions.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
@@ -205,6 +205,7 @@
 		B3D0B8224679467D85423742 /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../app/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B507AA0624A2533200E039D5 /* DownloadPackage+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadPackage+Helpers.swift"; sourceTree = "<group>"; };
+		B508170524EC7647000C5449 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
@@ -218,7 +219,6 @@
 		B5A6FD6A24BC9E54007D328C /* ExposureManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerTests.swift; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B5D968F924C60E74008DE452 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5E29D53249E3BE100E686DC /* ExposureManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExposureManager+Extensions.swift"; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugMenuModule.m; sourceTree = "<group>"; };
@@ -481,7 +481,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				B5D968F924C60E74008DE452 /* GoogleService-Info.plist */,
 				08445F4924283AB5008754AC /* GoogleMaps.bundle */,
 				08445F4724283A46008754AC /* GoogleMapsCore.framework */,
 				08445F4524283A40008754AC /* GoogleMaps.framework */,
@@ -598,6 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */,
+				B508170524EC7647000C5449 /* KeychainService.swift */,
 				B5FBB0D024916A7200433980 /* Persisted.swift */,
 			);
 			path = Storage;
@@ -681,9 +681,6 @@
 				C53FD09B24719AD1006D3268 /* Resources */,
 				D447FDBA24BF332B00250621 /* Configure ATS */,
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
-				B5D968F324C6036A008DE452 /* Crashlytics */,
-				B53575E124D0C2DE00E7310D /* Upload Symbols */,
-				B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -702,7 +699,6 @@
 				C5AA24D524768FFF00BA0A99 /* Sources */,
 				C5AA24D924768FFF00BA0A99 /* Frameworks */,
 				C5AA24DB24768FFF00BA0A99 /* Resources */,
-				377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -721,7 +717,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = org.pathcheck;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = "Path Check Inc";
 				TargetAttributes = {
 					C5AA24D124768FFF00BA0A99 = {
@@ -807,7 +803,6 @@
 				C53FD0A924719AD1006D3268 /* IBMPlexMono-SemiBoldItalic.ttf in Resources */,
 				C53FD0AA24719AD1006D3268 /* IBMPlexMono-Thin.ttf in Resources */,
 				C53FD0AB24719AD1006D3268 /* IBMPlexMono-ThinItalic.ttf in Resources */,
-				B5D968FA24C60E75008DE452 /* GoogleService-Info.plist in Resources */,
 				C53FD0AC24719AD1006D3268 /* IBMPlexMono.ttf in Resources */,
 				C53FD0AD24719AD1006D3268 /* IBMPlexSans-Bold.ttf in Resources */,
 				C53FD0AE24719AD1006D3268 /* IBMPlexSans-BoldItalic.ttf in Resources */,
@@ -836,78 +831,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		377FCB06A696EE2398B9980E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BTTests/Pods-BTTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B53575E124D0C2DE00E7310D /* Upload Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Upload Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release-BT\" ]; then\n\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\nfi\n";
-		};
-		B5D968F324C6036A008DE452 /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = Crashlytics;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		B7AD1FB38D996F9D01B8E040 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1023,6 +946,7 @@
 				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
+				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
 				B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */,
 				B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */,
 				B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */,
@@ -1108,7 +1032,6 @@
 			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1164,7 +1087,6 @@
 			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1203,7 +1125,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1213,6 +1134,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Development.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1242,6 +1164,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Production.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution";

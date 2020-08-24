@@ -11,6 +11,7 @@ import { Screens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
 import { factories } from "../../factories"
 
+jest.mock("../../logger.ts")
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 describe("CodeInputForm", () => {
@@ -82,7 +83,7 @@ describe("CodeInputForm", () => {
         </ExposureContext.Provider>,
       )
       fireEvent.changeText(getByTestId("code-input"), code)
-      fireEvent.press(getByLabelText("Submit"))
+      fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
         expect(apiSpy).toHaveBeenCalledWith(code)
@@ -127,7 +128,7 @@ describe("CodeInputForm", () => {
         </ExposureContext.Provider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
-      fireEvent.press(getByLabelText("Submit"))
+      fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
         expect(navigateSpy).not.toHaveBeenCalled()
@@ -151,7 +152,7 @@ describe("CodeInputForm", () => {
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
-      fireEvent.press(getByLabelText("Submit"))
+      fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
         expect(getByText("Try a different code")).toBeDefined()
@@ -172,7 +173,7 @@ describe("CodeInputForm", () => {
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
-      fireEvent.press(getByLabelText("Submit"))
+      fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
         expect(
@@ -195,7 +196,7 @@ describe("CodeInputForm", () => {
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
-      fireEvent.press(getByLabelText("Submit"))
+      fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
         expect(getByText("Try a different code")).toBeDefined()

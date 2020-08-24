@@ -6,6 +6,7 @@ extension String {
 
   // API
   static let revisionToken = "revisionToken"
+  static let revisionTokenDev = "revisionTokenDev"
 
   // EN
   static let notAuthorized = "notAuthorized"
@@ -29,6 +30,7 @@ extension String {
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
+  static let dev = "DEV"
 
   // Notifications
   static let bluetoothNotificationTitle = "Bluetooth Off"

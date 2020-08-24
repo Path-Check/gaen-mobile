@@ -51,10 +51,10 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxxSmall,
     paddingBottom: Spacing.xxxSmall,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.lightGray,
+    borderColor: Colors.neutral75,
   },
   itemText: {
-    ...Typography.tertiaryContent,
+    ...Typography.body1,
     padding: Spacing.xSmall,
     maxWidth: "90%",
   },

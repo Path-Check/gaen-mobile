@@ -10,6 +10,11 @@ project.ext.envConfigFiles = [
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply plugin: "checkstyle"
+
+apply from: "../../node_modules/@bugsnag/react-native/bugsnag-react-native.gradle"
+
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -196,11 +201,10 @@ android {
             setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
         }
     }
+}
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
+ktlint {
+    android.set(true)
 }
 
 dependencies {
@@ -208,6 +212,7 @@ dependencies {
     // loading html files
     implementation project(':react-native-local-resource')
     implementation project(':react-native-reanimated')
+    //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.annotation:annotation:1.1.0"
     implementation 'com.bottlerocketstudios:vault:1.4.2'
@@ -218,10 +223,10 @@ dependencies {
     kapt 'com.google.auto.value:auto-value:1.7.3'
     // Libraries
     implementation 'androidx.work:work-runtime:2.4.0'
-    implementation 'androidx.concurrent:concurrent-futures:1.0.0'
-    implementation 'com.google.android.gms:play-services-base:17.3.0'
-    implementation 'com.google.android.gms:play-services-basement:17.3.0'
-    implementation 'com.google.android.gms:play-services-tasks:17.1.0'
+    implementation 'androidx.concurrent:concurrent-futures:1.1.0'
+    implementation 'com.google.android.gms:play-services-base:17.4.0'
+    implementation 'com.google.android.gms:play-services-basement:17.4.0'
+    implementation 'com.google.android.gms:play-services-tasks:17.2.0'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
     implementation 'com.google.guava:guava:29.0-android'
     implementation 'com.google.auto.value:auto-value-annotations:1.7.3'
@@ -236,6 +241,7 @@ dependencies {
         implementation jscFlavor
     }
 
+    //noinspection GradleDynamicVersion
     androidTestImplementation('com.wix:detox:+') // detox: e2e testing
     implementation "androidx.core:core-ktx:1.3.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -246,6 +252,19 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
+
+checkstyle {
+    toolVersion '8.35'
+}
+
+task checkstyle(type: Checkstyle) {
+    configFile rootProject.file("app/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

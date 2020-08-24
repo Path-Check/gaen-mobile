@@ -19,77 +19,74 @@ package org.pathcheck.covidsafepaths.exposurenotifications.nearby;
 
 import android.content.Context;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkerParameters;
-
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import org.threeten.bp.Duration;
-
 import java.util.concurrent.TimeUnit;
-
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+import org.threeten.bp.Duration;
 
 /**
- * Performs work for {@value com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient#ACTION_EXPOSURE_STATE_UPDATED}
+ * Performs work for
+ * {@value com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient#ACTION_EXPOSURE_STATE_UPDATED}
  * broadcast from exposure notification API.
  */
 public class StateUpdatedWorker extends ListenableWorker {
-    private static final String TAG = "StateUpdatedWorker";
+  private static final String TAG = "StateUpdatedWorker";
 
-    private static final Duration GET_WINDOWS_TIMEOUT = Duration.ofSeconds(120);
+  private static final Duration GET_WINDOWS_TIMEOUT = Duration.ofSeconds(120);
 
-    private final Context context;
+  private final Context context;
 
-    public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-        super(context, workerParams);
-        this.context = context;
-    }
+  public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    super(context, workerParams);
+    this.context = context;
+  }
 
-    @NonNull
-    @Override
-    public ListenableFuture<Result> startWork() {
-        Log.d(TAG, "Starting worker to get exposure windows, " +
-                "compare them with the exposures stored in the local database " +
-                "and show a notification if there is a new one");
-        return FluentFuture.from(
-                TaskToFutureAdapter.getFutureWithTimeout(
-                        ExposureNotificationClientWrapper.get(context).getExposureWindows(),
-                        GET_WINDOWS_TIMEOUT.toMillis(),
-                        TimeUnit.MILLISECONDS,
-                        AppExecutors.getScheduledExecutor()))
-                .transform(
-                        (exposureWindows) -> RealmSecureStorageBte.INSTANCE.refreshWithExposureWindows(exposureWindows),
-                        AppExecutors.getBackgroundExecutor())
-                .transform((exposuresAdded) -> {
-                    if (exposuresAdded) {
-                        Log.d(TAG, "New exposures found, showing a notification");
-                        NotificationHelper.showPossibleExposureNotification(context);
-                    } else {
-                        Log.d(TAG, "No new exposures found");
-                    }
-                    return Result.success();
-                }, AppExecutors.getLightweightExecutor())
-                .catching(
-                        Exception.class,
-                        x -> {
-                            Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
-                            return Result.failure();
-                        },
-                        AppExecutors.getLightweightExecutor());
-    }
+  @NonNull
+  @Override
+  public ListenableFuture<Result> startWork() {
+    Log.d(TAG, "Starting worker to get exposure windows, "
+        + "compare them with the exposures stored in the local database "
+        + "and show a notification if there is a new one");
+    return FluentFuture.from(
+        TaskToFutureAdapter.getFutureWithTimeout(
+            ExposureNotificationClientWrapper.get(context).getExposureWindows(),
+            GET_WINDOWS_TIMEOUT.toMillis(),
+            TimeUnit.MILLISECONDS,
+            AppExecutors.getScheduledExecutor()))
+        .transform(
+            RealmSecureStorageBte.INSTANCE::refreshWithExposureWindows,
+            AppExecutors.getBackgroundExecutor()
+        )
+        .transform((exposuresAdded) -> {
+          if (exposuresAdded) {
+            Log.d(TAG, "New exposures found, showing a notification");
+            NotificationHelper.showPossibleExposureNotification(context);
+          } else {
+            Log.d(TAG, "No new exposures found");
+          }
+          return Result.success();
+        }, AppExecutors.getLightweightExecutor())
+        .catching(
+            Exception.class,
+            x -> {
+              Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
+              return Result.failure();
+            },
+            AppExecutors.getLightweightExecutor());
+  }
 
-    static void runOnce(Context context) {
-        WorkManager.getInstance(context).enqueue(
-                new OneTimeWorkRequest.Builder(StateUpdatedWorker.class).build());
-    }
+  static void runOnce(Context context) {
+    WorkManager.getInstance(context).enqueue(
+        new OneTimeWorkRequest.Builder(StateUpdatedWorker.class).build());
+  }
 }

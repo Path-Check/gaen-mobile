@@ -27,7 +27,7 @@ import { useStatusBarEffect } from "../navigation"
 const LoadingIndicator = () => {
   return (
     <View style={style.loadingIndicator}>
-      <ActivityIndicator size={"large"} color={Colors.darkGray} />
+      <ActivityIndicator size={"large"} color={Colors.neutral100} />
     </View>
   )
 }
@@ -70,6 +70,10 @@ const AcceptEula: FunctionComponent = () => {
     loadEula()
   }, [eulaPath])
 
+  const handleOnPressNext = () => {
+    navigation.navigate(ActivationScreens.ActivateProximityTracing)
+  }
+
   const checkboxIcon = boxChecked
     ? Icons.CheckboxChecked
     : Icons.CheckboxUnchecked
@@ -101,7 +105,7 @@ const AcceptEula: FunctionComponent = () => {
         >
           <SvgXml
             xml={checkboxIcon}
-            fill={Colors.primaryBlue}
+            fill={Colors.primary100}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -110,9 +114,7 @@ const AcceptEula: FunctionComponent = () => {
           </GlobalText>
         </TouchableOpacity>
         <Button
-          onPress={() =>
-            navigation.navigate(ActivationScreens.ActivateProximityTracing)
-          }
+          onPress={handleOnPressNext}
           disabled={!boxChecked}
           label={t("common.continue")}
         />
@@ -124,7 +126,7 @@ const AcceptEula: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   loadingIndicator: {
@@ -135,11 +137,11 @@ const style = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
     paddingBottom: Spacing.huge,
     paddingHorizontal: Spacing.xxLarge,
-    borderTopColor: Colors.lightGray,
+    borderTopColor: Colors.neutral75,
     borderTopWidth: Outlines.hairline,
   },
   checkboxContainer: {

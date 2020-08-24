@@ -19,12 +19,9 @@ package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.security.SecureRandom;
-
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences.NetworkMode;
 
@@ -86,17 +83,17 @@ public class DiagnosisKeys {
   }
 
   public ImmutableList<DiagnosisKey> generateFakeKeys() {
-      ImmutableList.Builder<DiagnosisKey> builder = ImmutableList.builder();
-      // Build up 14 random diagnosis keys.
-      for (int i = 0; i < 14; i++) {
-        byte[] bytes = new byte[KEY_SIZE_BYTES];
-        RAND.nextBytes(bytes);
-        builder.add(
-                DiagnosisKey.newBuilder()
-                        .setKeyBytes(bytes)
-                        .setIntervalNumber(FAKE_INTERVAL_NUM)
-                        .build());
-      }
-      return builder.build();
+    ImmutableList.Builder<DiagnosisKey> builder = ImmutableList.builder();
+    // Build up 14 random diagnosis keys.
+    for (int i = 0; i < 14; i++) {
+      byte[] bytes = new byte[KEY_SIZE_BYTES];
+      RAND.nextBytes(bytes);
+      builder.add(
+          DiagnosisKey.newBuilder()
+              .setKeyBytes(bytes)
+              .setIntervalNumber(FAKE_INTERVAL_NUM)
+              .build());
+    }
+    return builder.build();
   }
 }

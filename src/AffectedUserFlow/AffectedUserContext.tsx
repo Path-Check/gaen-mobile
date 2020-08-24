@@ -1,11 +1,15 @@
 import React, { createContext, useState, useContext } from "react"
 
+import { ExposureKey } from "../exposureKey"
+
 type Token = string
 type Key = string
 
 interface AffectedUserContextState {
   certificate: Token | null
   hmacKey: Key | null
+  exposureKeys: ExposureKey[]
+  setExposureKeys: (keys: ExposureKey[]) => void
   setExposureSubmissionCredentials: (certificate: Token, hmacKey: Key) => void
 }
 
@@ -18,6 +22,7 @@ export const AffectedUserProvider = ({
 }: {
   children: JSX.Element
 }): JSX.Element => {
+  const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
 
@@ -34,6 +39,8 @@ export const AffectedUserProvider = ({
       value={{
         hmacKey,
         certificate,
+        exposureKeys,
+        setExposureKeys,
         setExposureSubmissionCredentials,
       }}
     >

@@ -44,53 +44,60 @@ const History: FunctionComponent<HistoryProps> = ({
   const titleText = t("screen_titles.exposure_history")
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: Colors.primaryBackground }}
-    >
-      <ScrollView
-        contentContainerStyle={style.contentContainer}
-        style={style.container}
-        alwaysBounceVertical={false}
-      >
-        <View>
-          <View style={style.headerRow}>
-            <GlobalText style={style.headerText}>{titleText}</GlobalText>
-            <TouchableOpacity
-              onPress={handleOnPressMoreInfo}
-              style={style.moreInfoButton}
-            >
-              <SvgXml
-                xml={Icons.QuestionMark}
-                accessible
-                accessibilityLabel={t("label.question_icon")}
-                style={style.moreInfoButtonIcon}
-              />
-            </TouchableOpacity>
+    <>
+      <SafeAreaView style={style.safeAreaTop} />
+      <SafeAreaView style={style.safeAreaBottom}>
+        <ScrollView
+          contentContainerStyle={style.contentContainer}
+          style={style.container}
+          alwaysBounceVertical={false}
+        >
+          <View>
+            <View style={style.headerRow}>
+              <GlobalText style={style.headerText}>{titleText}</GlobalText>
+              <TouchableOpacity
+                onPress={handleOnPressMoreInfo}
+                style={style.moreInfoButton}
+              >
+                <SvgXml
+                  xml={Icons.QuestionMark}
+                  accessible
+                  accessibilityLabel={t("label.question_icon")}
+                  style={style.moreInfoButtonIcon}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={style.subheaderRow}>
+              <DateInfoHeader lastDetectionDate={lastDetectionDate} />
+            </View>
           </View>
-          <View style={style.subheaderRow}>
-            <DateInfoHeader lastDetectionDate={lastDetectionDate} />
+          <View style={style.listContainer}>
+            {showExposureHistory ? (
+              <ExposureList exposures={exposures} />
+            ) : (
+              <NoExposures />
+            )}
           </View>
-        </View>
-        <View style={style.listContainer}>
-          {showExposureHistory ? (
-            <ExposureList exposures={exposures} />
-          ) : (
-            <NoExposures />
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   )
 }
 
 const style = StyleSheet.create({
+  safeAreaTop: {
+    backgroundColor: Colors.secondary10,
+  },
+  safeAreaBottom: {
+    flex: 1,
+  },
   contentContainer: {
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xxHuge,
   },
   container: {
     padding: Spacing.medium,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.secondary10,
   },
   headerRow: {
     flexDirection: "row",
@@ -99,8 +106,8 @@ const style = StyleSheet.create({
     marginTop: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header2,
-    color: Colors.black,
+    ...Typography.header1,
+    color: Colors.primaryText,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {

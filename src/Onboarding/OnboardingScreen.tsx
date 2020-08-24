@@ -68,26 +68,27 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
     <>
       <SafeAreaView style={style.topSafeArea} />
       <SafeAreaView style={style.bottomSafeArea}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Screens.LanguageSelection)}
-          style={style.languageButtonContainer}
-        >
-          <GlobalText style={style.languageButtonText}>
-            {languageName}
-          </GlobalText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(Stacks.Activation, {
-              screen: ActivationScreens.AcceptEula,
-            })
-          }
-          style={style.skipButtonContainer}
-        >
-          <GlobalText style={style.skipButtonText}>
-            {t("common.skip")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.header}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(Screens.LanguageSelection)}
+            style={style.languageButtonContainer}
+          >
+            <GlobalText style={style.languageButtonText}>
+              {languageName}
+            </GlobalText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(Stacks.Activation, {
+                screen: ActivationScreens.AcceptEula,
+              })
+            }
+          >
+            <GlobalText style={style.skipButtonText}>
+              {t("common.skip")}
+            </GlobalText>
+          </TouchableOpacity>
+        </View>
         <View style={style.outerContainer}>
           <ScrollView
             alwaysBounceVertical={false}
@@ -127,7 +128,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             </GlobalText>
             <SvgXml
               xml={Icons.ChevronUp}
-              fill={Colors.primaryBlue}
+              fill={Colors.primary100}
               width={Iconography.xxSmall}
               height={Iconography.xxSmall}
             />
@@ -166,73 +167,73 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
-const skipButtonSpacingTop = Platform.select({
-  ios: Spacing.xSmall,
-  android: Spacing.xxLarge,
-})
-const languageButtonSpacingTop = Platform.select({
-  ios: Spacing.small,
-  android: Spacing.huge,
-})
-const imageMarginTop = Platform.select({
-  ios: 70,
-  android: 100,
+const iosHeaderHeight = 65
+const androidHeaderHeight = 90
+const headerHeight = Platform.select({
+  ios: iosHeaderHeight,
+  android: androidHeaderHeight,
+  default: iosHeaderHeight,
 })
 
 const style = StyleSheet.create({
   topSafeArea: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   bottomSafeArea: {
     flex: 1,
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
+  },
+  header: {
+    position: "absolute",
+    top: 0,
+    height: headerHeight,
+    width: "100%",
+    zIndex: Layout.zLevel1,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    paddingHorizontal: Spacing.xSmall,
+    backgroundColor: Colors.primaryLightBackground,
+    borderBottomColor: Colors.neutral10,
+    borderBottomWidth: Outlines.hairline,
   },
   languageButtonContainer: {
     ...Outlines.ovalBorder,
-    position: "absolute",
-    top: languageButtonSpacingTop,
-    left: Spacing.small,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.large,
-    borderColor: Colors.primaryViolet,
-    zIndex: Layout.zLevel1,
+    borderColor: Colors.primary125,
+    marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.base,
+    ...Typography.body2,
     letterSpacing: Typography.mediumLetterSpacing,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
     textAlign: "center",
     textTransform: "uppercase",
   },
-  skipButtonContainer: {
-    position: "absolute",
-    top: skipButtonSpacingTop,
-    right: Spacing.small,
-    padding: Spacing.small,
-    zIndex: Layout.zLevel1,
-  },
   skipButtonText: {
-    ...Typography.base,
-    color: Colors.mediumGray,
+    ...Typography.body2,
+    color: Colors.neutral100,
+    padding: Spacing.medium,
   },
   outerContainer: {
     justifyContent: "space-between",
-    height: "100%",
-    backgroundColor: Colors.primaryBackground,
+    flex: 1,
+    backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    height: "100%",
+    flexGrow: 1,
     justifyContent: "space-between",
-    paddingBottom: Spacing.huge,
+    paddingTop: headerHeight + Spacing.medium,
+    paddingBottom: Spacing.xxLarge,
   },
   image: {
     width: "97%",
-    height: 240,
-    marginTop: imageMarginTop,
+    height: 220,
     marginBottom: Spacing.medium,
   },
   circleActive: {
-    backgroundColor: Colors.primaryBlue,
+    backgroundColor: Colors.primary100,
     width: 10,
     height: 10,
     borderRadius: Outlines.borderRadiusMax,
@@ -246,13 +247,13 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   circleInactive: {
-    backgroundColor: Colors.lighterGray,
+    backgroundColor: Colors.neutral30,
     width: 5,
     height: 5,
     borderRadius: Outlines.borderRadiusMax,
   },
   headerText: {
-    ...Typography.header3,
+    ...Typography.header1,
     marginBottom: Spacing.xLarge,
     paddingHorizontal: Spacing.large,
   },
@@ -261,17 +262,17 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   bottomButtonContainer: {
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: Spacing.small,
-    borderTopColor: Colors.lighterGray,
+    borderTopColor: Colors.neutral30,
     borderTopWidth: Outlines.hairline,
   },
   bottomButtonText: {
     ...Typography.header5,
-    color: Colors.primaryBlue,
+    color: Colors.primary100,
     marginRight: Spacing.xSmall,
   },
 })

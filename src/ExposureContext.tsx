@@ -13,30 +13,42 @@ import { ExposureInfo } from "./exposure"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
-const { getExposureKeys, submitDiagnosisKeys } = exposureEventsStrategy
+const {
+  getExposureKeys,
+  storeRevisionToken,
+  getRevisionToken,
+} = exposureEventsStrategy
 
 export interface ExposureState {
   exposureInfo: ExposureInfo
-  hasBeenExposed: boolean
-  userHasNewExposure: boolean
-  observeExposures: () => void
-  resetExposures: () => void
   getCurrentExposures: () => void
   getExposureKeys: () => Promise<ExposureKey[]>
+  getRevisionToken: () => Promise<string>
+  hasBeenExposed: boolean
   lastExposureDetectionDate: Posix | null
-  submitDiagnosisKeys: (certificate: string, hmac: string) => Promise<string>
+  observeExposures: () => void
+  resetExposures: () => void
+  storeRevisionToken: (revisionToken: string) => Promise<void>
+  userHasNewExposure: boolean
 }
 
 const initialState = {
   exposureInfo: [],
+  getCurrentExposures: (): void => {},
+  getExposureKeys: () => {
+    return Promise.resolve([])
+  },
+  getRevisionToken: () => {
+    return Promise.resolve("")
+  },
   hasBeenExposed: false,
-  userHasNewExposure: true,
+  lastExposureDetectionDate: null,
   observeExposures: (): void => {},
   resetExposures: (): void => {},
-  getCurrentExposures: (): void => {},
-  getExposureKeys,
-  submitDiagnosisKeys,
-  lastExposureDetectionDate: null,
+  storeRevisionToken: () => {
+    return Promise.resolve()
+  },
+  userHasNewExposure: true,
 }
 
 export const ExposureContext = createContext<ExposureState>(initialState)
@@ -98,14 +110,15 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     <ExposureContext.Provider
       value={{
         exposureInfo,
-        hasBeenExposed,
-        userHasNewExposure,
-        observeExposures,
-        resetExposures,
         getCurrentExposures,
         getExposureKeys,
-        submitDiagnosisKeys,
+        getRevisionToken,
+        hasBeenExposed,
         lastExposureDetectionDate,
+        observeExposures,
+        resetExposures,
+        storeRevisionToken,
+        userHasNewExposure,
       }}
     >
       {children}

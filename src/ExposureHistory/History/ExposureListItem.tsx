@@ -46,7 +46,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
   return (
     <TouchableHighlight
-      underlayColor={Colors.underlayPrimaryBackground}
+      underlayColor={Colors.secondary50}
       style={style.container}
       onPress={() =>
         navigation.navigate(Screens.ExposureDetail, { exposureDatum })
@@ -67,7 +67,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           accessibilityLabel={t("label.check")}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
-          fill={Colors.primaryBlue}
+          fill={Colors.primary100}
         />
       </View>
     </TouchableHighlight>
@@ -77,7 +77,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.xSmall,
@@ -89,11 +89,10 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   primaryText: {
-    ...Typography.bold,
+    ...Typography.header6,
   },
   secondaryText: {
-    ...Typography.base,
-    color: Colors.darkGray,
+    ...Typography.body3,
     textTransform: "uppercase",
     marginTop: Spacing.xxSmall,
     letterSpacing: Typography.mediumLetterSpacing,

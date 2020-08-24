@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 
-import { usePermissionsContext, ENEnablement } from "../../PermissionsContext"
+import { usePermissionsContext } from "../../PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
 import EnableExposureNotifications from "./EnableExposureNotifications"
 
@@ -10,11 +10,7 @@ import { Colors } from "../../styles"
 const CodeInputScreen: FunctionComponent = () => {
   const { exposureNotifications } = usePermissionsContext()
 
-  const hasExposureNotificationsEnabled = (): boolean => {
-    const enabledState: ENEnablement = "ENABLED"
-    return exposureNotifications.status[1] === enabledState
-  }
-  const isEnabled = hasExposureNotificationsEnabled()
+  const isEnabled = exposureNotifications.status.enabled
 
   return (
     <View style={style.container}>
@@ -26,7 +22,7 @@ const CodeInputScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
 })
 

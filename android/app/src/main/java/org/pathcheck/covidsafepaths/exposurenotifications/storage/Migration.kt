@@ -7,7 +7,7 @@ import io.realm.RealmMigration
 
 internal class Migration : RealmMigration {
     override fun migrate(realm: DynamicRealm, oldVersion: Long, newVersion: Long) {
-        Log.d("Migration", "Running migration from version $oldVersion to $newVersion");
+        Log.d("Migration", "Running migration from version $oldVersion to $newVersion")
         val schema = realm.schema
         var version = oldVersion
 

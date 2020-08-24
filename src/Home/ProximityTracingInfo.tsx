@@ -25,7 +25,7 @@ const BluetoothInfo: FunctionComponent = () => {
         >
           <SvgXml
             xml={Icons.XInCircle}
-            fill={Colors.lighterGray}
+            fill={Colors.neutral30}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -60,23 +60,23 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
     position: "absolute",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
     height: headerHeight,
   },
   headerText: {
+    ...Typography.header2,
     flex: 10,
-    ...Typography.header3,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
   },
   closeIconContainer: {
     flex: 1,
@@ -92,13 +92,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheaderText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     ...Typography.mediumBold,
-    color: Colors.black,
+    color: Colors.primaryText,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
 })

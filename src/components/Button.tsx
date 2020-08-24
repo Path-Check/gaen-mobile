@@ -22,7 +22,6 @@ interface ButtonProps {
   disabled?: boolean
   customButtonStyle?: ViewStyle
   customTextStyle?: TextStyle
-  invert?: boolean
   testID?: string
   hasRightArrow?: boolean
 }
@@ -34,35 +33,21 @@ export const Button: FunctionComponent<ButtonProps> = ({
   loading,
   customButtonStyle,
   customTextStyle,
-  invert,
   testID,
   hasRightArrow,
 }) => {
   const { t } = useTranslation()
 
   const determineGradient = (): string[] => {
-    const baseGradient = [Colors.primaryBlue, Colors.secondaryViolet]
-    const disabledGradient = [Colors.tertiaryViolet, Colors.tertiaryViolet]
-    const invertedGradient = [Colors.quaternaryViolet, Colors.white]
-    const invertedDisabledGradient = [Colors.mediumGray, Colors.lighterGray]
-
-    if (invert && (disabled || loading)) {
-      return invertedDisabledGradient
-    } else if (invert && !(disabled || loading)) {
-      return invertedGradient
-    } else if (!invert && (disabled || loading)) {
-      return disabledGradient
+    if (disabled || loading) {
+      return [Colors.secondary75, Colors.secondary75]
     } else {
-      return baseGradient
+      return Colors.gradientPrimary110
     }
   }
 
   const determineTextStyle = (): TextStyle => {
-    if (invert && (disabled || loading)) {
-      return style.textInvertedDisabled
-    } else if (invert && !(disabled || loading)) {
-      return style.textInverted
-    } else if (!invert && (disabled || loading)) {
+    if (disabled || loading) {
       return style.textDisabled
     } else {
       return style.text
@@ -80,11 +65,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const buttonContainerStyle = {
     ...style.buttonContainer,
     ...determineShadowEnabled(),
+    ...customButtonStyle,
   }
 
   const buttonStyle = {
     ...style.button,
-    ...determineShadowEnabled(),
     ...customButtonStyle,
   }
 
@@ -112,7 +97,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={Colors.white}
+                fill={disabled ? Colors.black : Colors.white}
                 style={style.rightArrow}
                 accessible
                 accessibilityLabel={t("common.next")}
@@ -128,6 +113,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
+    borderRadius: Outlines.borderRadiusMax,
   },
   buttonContainerShadow: {
     ...Outlines.baseShadow,
@@ -137,19 +123,11 @@ const style = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    ...Typography.buttonPrimaryText,
-  },
-  textInverted: {
-    textAlign: "center",
-    ...Typography.buttonPrimaryInvertedText,
+    ...Typography.buttonPrimary,
   },
   textDisabled: {
     textAlign: "center",
-    ...Typography.buttonPrimaryDisabledText,
-  },
-  textInvertedDisabled: {
-    textAlign: "center",
-    ...Typography.buttonPrimaryInvertedDisabledText,
+    ...Typography.buttonPrimaryDisabled,
   },
   rightArrow: {
     marginLeft: Spacing.medium,

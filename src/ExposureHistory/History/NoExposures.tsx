@@ -56,7 +56,7 @@ const HealthGuidelines: FunctionComponent = () => {
             </GlobalText>
             <SvgXml
               xml={Icons.Arrow}
-              fill={Colors.primaryViolet}
+              fill={Colors.primary125}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
@@ -96,7 +96,7 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
   return (
     <View style={style.listItem}>
       <View style={style.listItemIconContainer}>
-        <SvgXml xml={icon} fill={Colors.primaryViolet} />
+        <SvgXml xml={icon} fill={Colors.primary125} />
       </View>
       <GlobalText style={style.listItemText}>{text}</GlobalText>
     </View>
@@ -105,35 +105,34 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
 
 const style = StyleSheet.create({
   noExposureCard: {
-    backgroundColor: Colors.primaryViolet,
+    backgroundColor: Colors.primary125,
     ...Outlines.roundedBorder,
-    borderColor: Colors.primaryViolet,
+    borderColor: Colors.primary125,
     padding: Spacing.large,
   },
   headerText: {
-    ...Typography.mainContent,
-    ...Typography.bold,
+    ...Typography.header5,
     paddingBottom: Spacing.xxxSmall,
     color: Colors.white,
   },
   subheaderText: {
-    ...Typography.description,
-    color: Colors.white,
+    ...Typography.body1,
+    color: Colors.secondary10,
   },
   card: {
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.primaryLightBackground,
     ...Outlines.roundedBorder,
     borderColor: Colors.white,
     padding: Spacing.large,
     marginTop: Spacing.large,
   },
   cardHeaderText: {
-    ...Typography.header6,
+    ...Typography.header3,
     paddingBottom: Spacing.xSmall,
   },
   cardSubheaderText: {
-    ...Typography.description,
-    paddingBottom: Spacing.xSmall,
+    ...Typography.body2,
+    paddingBottom: Spacing.large,
   },
   learnMoreCtaContainer: {
     flexDirection: "row",
@@ -141,15 +140,15 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   learnMoreCta: {
-    color: Colors.primaryViolet,
+    ...Typography.buttonSecondary,
+    color: Colors.primary125,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
   },
   listHeading: {
-    ...Typography.mainContent,
-    ...Typography.bold,
-    paddingBottom: Spacing.large,
+    ...Typography.header5,
+    paddingBottom: Spacing.medium,
   },
   listItem: {
     display: "flex",
@@ -161,7 +160,7 @@ const style = StyleSheet.create({
     width: Spacing.huge,
   },
   listItemText: {
-    color: Colors.darkGray,
+    ...Typography.body2,
   },
 })
 
