@@ -19,7 +19,10 @@ struct DownloadedPackageImpl: DownloadedPackage {
       return nil
     }
     do {
-      self = try archive.extractKeyPackage() as! DownloadedPackageImpl
+      guard let package = try archive.extractKeyPackage() as? DownloadedPackageImpl else {
+        return nil
+      }
+      self = package
     } catch {
       return nil
     }
