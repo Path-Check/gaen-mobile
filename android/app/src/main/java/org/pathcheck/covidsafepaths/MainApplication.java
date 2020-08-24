@@ -3,6 +3,7 @@ package org.pathcheck.covidsafepaths;
 import android.app.Application;
 import android.content.Context;
 import com.bugsnag.android.Bugsnag;
+import com.bugsnag.android.Configuration;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -11,7 +12,9 @@ import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import io.realm.Realm;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -53,7 +56,18 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     Realm.init(this);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
-    Bugsnag.start(this);
+    initializeBugsnag();
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  private void initializeBugsnag() {
+    Configuration config = Configuration.load(this);
+    // Disable bugsnag for release builds
+    config.setReleaseStage("release".equals(BuildConfig.BUILD_TYPE) ? "production" : "development");
+    Set<String> enabledStages = new HashSet<>();
+    enabledStages.add("development");
+    config.setEnabledReleaseStages(enabledStages);
+    Bugsnag.start(this, config);
   }
 
   /**
