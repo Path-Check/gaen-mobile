@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
+import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
@@ -19,6 +20,7 @@ const MenuScreen: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   useStatusBarEffect("light-content")
+  const showDebugMenu = env.DEV === "true"
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
@@ -58,13 +60,15 @@ const MenuScreen: FunctionComponent = () => {
           lastItem
         />
       </View>
-      <View style={style.section}>
-        <SettingsListItem
-          label="EN Debug Menu"
-          onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
-          lastItem
-        />
-      </View>
+      {showDebugMenu ? (
+        <View style={style.section}>
+          <SettingsListItem
+            label="EN Debug Menu"
+            onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+            lastItem
+          />
+        </View>
+      ) : null}
     </ScrollView>
   )
 }

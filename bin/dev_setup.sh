@@ -104,6 +104,7 @@ fi
 printf "$spacer"
 if [ ! -f .env.bt ]; then
   cp example.env.bt .env.bt
+  cp example.env.bt .env.bt.staging
   cp example.env.bt .env.bt.release
 fi
 

@@ -6,6 +6,7 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     debug: ".env.bt",
+    staging: ".env.bt.staging",
     release: ".env.bt.release",
 ]
 
@@ -91,6 +92,8 @@ apply from: "../../node_modules/@bugsnag/react-native/bugsnag-react-native.gradl
 project.ext.react = [
     entryFile: "index.js",
     bundleInDebug: false,
+    bundleInStaging: true,
+    devDisabledInStaging: true,
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -200,6 +203,10 @@ android {
             def outputSuffix = project.hasProperty('outputSuffix') ? '-' + project.outputSuffix : ''
             setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
         }
+        staging {
+            // Same gradle configuration as release, it will use a different env file
+            initWith release
+        }
     }
 }
 
@@ -236,6 +243,7 @@ dependencies {
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/"
         debugImplementation files(hermesPath + "hermes-debug.aar")
+        stagingImplementation files(hermesPath + "hermes-release.aar")
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
         implementation jscFlavor
