@@ -2,6 +2,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTBridgeModule.h>
 #import "BT-Swift.h"
+#import "ENBridgeConstants.h"
 
 @interface ExposureKeyModule: NSObject <RCTBridgeModule>
 @end
@@ -14,7 +15,16 @@ RCT_REMAP_METHOD(fetchExposureKeys,
                  fetchExposureKeysWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[ExposureManager shared] fetchExposureKeysWithResolve:resolve reject:reject];
+  [[ExposureManager shared] fetchExposureKeysWithCallback:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable keys,
+                                                            ExposureManagerError * _Nullable error) {
+    if (error) {
+      reject(error.errorCode,
+             error.localizedMessage,
+             error.underlyingError);
+    } else {
+      resolve(keys);
+    }
+  }];
 }
 
 RCT_REMAP_METHOD(postDiagnosisKeys,
@@ -23,7 +33,17 @@ RCT_REMAP_METHOD(postDiagnosisKeys,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[ExposureManager shared] getAndPostDiagnosisKeysWithCertificate:certificate HMACKey:HMACKey resolve:resolve reject:reject];
+  [[ExposureManager shared] getAndPostDiagnosisKeysWithCertificate:certificate
+                                                           HMACKey:HMACKey
+                                                          callback:^(NSString * _Nullable successMessage, ExposureManagerError * _Nullable error) {
+    if (error) {
+      reject(error.errorCode,
+             error.localizedMessage,
+             error.underlyingError);
+    } else {
+      resolve(successMessage);
+    }
+  }];
 }
 
 RCT_REMAP_METHOD(storeRevisionToken,
@@ -31,7 +51,7 @@ RCT_REMAP_METHOD(storeRevisionToken,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[KeychainService shared] setRevisionToken:revisionToken];
+  [[DefaultKeychainService shared] setRevisionToken:revisionToken];
   resolve(nil);
 }
 
@@ -39,7 +59,7 @@ RCT_REMAP_METHOD(getRevisionToken,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  NSString *revisionToken = [[KeychainService shared] revisionToken];
+  NSString *revisionToken = [[DefaultKeychainService shared] revisionToken];
   resolve(revisionToken);
 }
 

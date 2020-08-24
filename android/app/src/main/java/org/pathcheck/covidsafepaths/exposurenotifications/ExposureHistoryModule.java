@@ -1,7 +1,6 @@
 package org.pathcheck.covidsafepaths.exposurenotifications;
 
 import androidx.annotation.NonNull;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -34,7 +33,7 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getCurrentExposures(final Callback callback) {
+  public void getCurrentExposures(final Promise promise) {
     ExposureNotificationClientWrapper exposureNotificationsClient =
         ExposureNotificationClientWrapper.get(getReactApplicationContext());
     exposureNotificationsClient.getExposureWindows()
@@ -54,7 +53,7 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
           }
 
           String json = new Gson().toJson(exposures);
-          callback.invoke(json);
+          promise.resolve(json);
         });
   }
 

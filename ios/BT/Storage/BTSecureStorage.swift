@@ -2,7 +2,7 @@ import ExposureNotification
 import Foundation
 import RealmSwift
 
-final class BTSecureStorage: SafePathsSecureStorage {
+class BTSecureStorage: SafePathsSecureStorage {
 
   static let shared = BTSecureStorage(inMemory: false)
 
@@ -17,7 +17,10 @@ final class BTSecureStorage: SafePathsSecureStorage {
     return realmConfig
   }()
 
-  override init(inMemory: Bool = false) {
+  private let notificationCenter: NotificationCenter
+
+  init(inMemory: Bool = false, notificationCenter: NotificationCenter = NotificationCenter.default) {
+    self.notificationCenter = notificationCenter
     super.init(inMemory: inMemory)
     if !userStateExists {
       resetUserState({ _ in })
@@ -53,7 +56,7 @@ final class BTSecureStorage: SafePathsSecureStorage {
       try! realm.write {
         realm.create(UserState.self, value: [keyPath: value], update: .modified)
         let jsonString = value.jsonStringRepresentation()
-        NotificationCenter.default.post(name: notificationName, object: jsonString)
+        notificationCenter.post(name: notificationName, object: jsonString)
     }
   }
 
@@ -74,7 +77,7 @@ final class BTSecureStorage: SafePathsSecureStorage {
     try! realm.write {
       userState.exposures.append(objectsIn: exposures)
       let jsonString = userState.exposures.jsonStringRepresentation()
-      NotificationCenter.default.post(name: .ExposuresDidChange, object: jsonString)
+      notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
     }
   }
 

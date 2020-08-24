@@ -1,9 +1,15 @@
 import KeychainAccess
 
-@objc(KeychainService)
-final class KeychainService: NSObject {
+protocol KeychainService {
 
-  @objc static let shared = KeychainService()
+  func setRevisionToken(_ token: String)
+  var revisionToken: String { get }
+}
+
+@objc(DefaultKeychainService)
+final class DefaultKeychainService: NSObject, KeychainService {
+
+  @objc static let shared = DefaultKeychainService()
 
   private lazy var keychain = Keychain(service: ReactNativeConfig.env(for: .postKeysUrl))
 

@@ -6,12 +6,35 @@ enum RequestType {
   exposureConfiguration
 }
 
-final class APIClient {
+protocol APIClient {
+  static var documentsDirectory: URL? { get }
+  func request<T: APIRequest>(_ request: T,
+                              requestType: RequestType,
+                              completion: @escaping GenericCompletion) where T.ResponseType == Void
+  func downloadRequest<T: APIRequest>(_ request: T,
+                                      requestType: RequestType,
+                                      completion: @escaping (Result<DownloadedPackage>) -> Void)
+  func request<T: APIRequest>(_ request: T,
+                              requestType: RequestType,
+                              completion: @escaping (Result<JSONObject>) -> Void) where T.ResponseType == JSONObject
+  func request<T: APIRequest>(_ request: T,
+                              requestType: RequestType,
+                              completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: Decodable
+  func requestList<T: APIRequest>(_ request: T,
+                                  requestType: RequestType,
+                                  completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable
+  func requestString<T: APIRequest>(_ request: T,
+                                    requestType: RequestType,
+                                    completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType == String
+  func cancelAllRequests()
+}
+
+class BTAPIClient: APIClient {
   
   let postKeysUrl: URL
   let downloadBaseUrl: URL
   let exposureConfigurationUrl: URL
-  static let shared = APIClient(
+  static let shared = BTAPIClient(
     postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
     downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
     exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!
@@ -55,7 +78,7 @@ final class APIClient {
         completion(.failure(GenericError.unknown))
         return
       }
-        if let downloadedPackage = DownloadedPackage(compressedData: data) {
+        if let downloadedPackage = DownloadedPackageImpl(compressedData: data) {
           completion(.success(downloadedPackage))
         } else {
           completion(.failure(GenericError.unknown))
@@ -113,7 +136,7 @@ final class APIClient {
 
 // MARK: - Private
 
-private extension APIClient {
+private extension BTAPIClient {
   
   enum Key {
     static let error = "error"

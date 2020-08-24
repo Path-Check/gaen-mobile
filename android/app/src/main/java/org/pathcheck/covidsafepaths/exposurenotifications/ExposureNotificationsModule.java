@@ -3,7 +3,6 @@ package org.pathcheck.covidsafepaths.exposurenotifications;
 import static org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationsModule.MODULE_NAME;
 
 import android.util.Log;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -51,44 +50,44 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
    * Method with the same name as iOS, just calls client "start" method which enables EN.
    */
   @ReactMethod
-  public void requestExposureNotificationAuthorization(final Callback callback) {
+  public void requestExposureNotificationAuthorization(final Promise promise) {
     ReactContext reactContext = getReactApplicationContext();
     ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(reactContext);
     client.start(reactContext)
         .addOnSuccessListener(unused -> {
-          callback.invoke(CallbackMessages.GENERIC_SUCCESS);
+          promise.resolve(CallbackMessages.GENERIC_SUCCESS);
         })
         .addOnFailureListener(exception -> {
           if (!(exception instanceof ApiException)) {
-            callback.invoke(CallbackMessages.ERROR_UNKNOWN);
+            promise.reject(new Exception(CallbackMessages.ERROR_UNKNOWN));
             return;
           }
           ApiException apiException = (ApiException) exception;
           if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-            callback.invoke(CallbackMessages.GENERIC_SUCCESS);
+            // TODO Call resolve after the dialog is closed
+            promise.resolve(CallbackMessages.GENERIC_SUCCESS);
             client.showPermissionDialog(getReactApplicationContext(), apiException,
                 RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
           } else {
-            callback.invoke(apiException.getStatus().toString());
+            promise.reject(apiException);
           }
         })
         .addOnCanceledListener(() -> {
-          callback.invoke(CallbackMessages.CANCELLED);
+          promise.reject(new Exception(CallbackMessages.CANCELLED));
         });
   }
 
   @ReactMethod
-  public void getCurrentENPermissionsStatus(final Callback callback) {
+  public void getCurrentENPermissionsStatus(final Promise promise) {
     ExposureNotificationClientWrapper.get(getReactApplicationContext())
         .isEnabled()
-        .addOnSuccessListener(enabled -> callback.invoke(Util.getEnStatusWritableArray(enabled)))
+        .addOnSuccessListener(enabled -> promise.resolve(Util.getEnStatusWritableArray(enabled)))
         .addOnFailureListener(
             exception -> {
               if (!(exception instanceof ApiException)) {
-                callback.invoke(CallbackMessages.ERROR_UNKNOWN);
+                promise.reject(new Exception(CallbackMessages.ERROR_UNKNOWN));
               } else {
-                ApiException apiException = (ApiException) exception;
-                callback.invoke(apiException.getStatus().toString());
+                promise.reject(exception);
               }
             });
   }

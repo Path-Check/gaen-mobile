@@ -1,9 +1,22 @@
-import ExposureNotification
+//
+//  ExposureManager+Debug.swift
+//  BT
+//
+//  Created by Emiliano Galitiello on 24/08/2020.
+//  Copyright © 2020 Path Check Inc. All rights reserved.
+//
+
 import Foundation
 import RealmSwift
 
-extension ExposureManager {
-  
+protocol ExposureManagerDebuggable {
+  func handleDebugAction(_ action: DebugAction,
+                               resolve: @escaping RCTPromiseResolveBlock,
+                               reject: @escaping RCTPromiseRejectBlock)
+}
+
+extension ExposureManager: ExposureManagerDebuggable {
+
   @objc func handleDebugAction(_ action: DebugAction,
                                resolve: @escaping RCTPromiseResolveBlock,
                                reject: @escaping RCTPromiseRejectBlock) {
@@ -17,12 +30,15 @@ extension ExposureManager {
         }
       }
     case .detectExposuresNow:
-      guard BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity > 0 else {
-        let hoursRemaining = 24 - Date.hourDifference(from: BTSecureStorage.shared.userState.dateLastPerformedFileCapacityReset ?? Date(), to: Date())
-        reject("Time window Error.", "You have reached the exposure file submission limit. Please wait \(hoursRemaining) hours before detecting exposures again.", GenericError.unknown)
+      guard btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
+        let hoursRemaining = 24 - Date.hourDifference(from: btSecureStorage.userState.dateLastPerformedFileCapacityReset ?? Date(),
+                                                      to: Date())
+        reject("Time window Error.",
+               "You have reached the exposure file submission limit. Please wait \(hoursRemaining) hours before detecting exposures again.",
+          GenericError.unknown)
         return
       }
-      
+
       detectExposures { result in
         switch result {
         case .success(let numberOfFilesProcessed):
@@ -32,8 +48,8 @@ extension ExposureManager {
         }
       }
     case .simulateExposureDetectionError:
-      BTSecureStorage.shared.exposureDetectionErrorLocalizedDescription = "Unable to connect to server."
-      ExposureManager.shared.postExposureDetectionErrorNotification("Simulated Error")
+      btSecureStorage.exposureDetectionErrorLocalizedDescription = "Unable to connect to server."
+      postExposureDetectionErrorNotification("Simulated Error")
       resolve(String.genericSuccess)
     case .simulateExposure:
       let exposure = Exposure(id: UUID().uuidString,
@@ -41,36 +57,41 @@ extension ExposureManager {
                               duration: TimeInterval(1),
                               totalRiskScore: .random(in: 1...8),
                               transmissionRiskLevel: .random(in: 0...7))
-      BTSecureStorage.shared.storeExposures([exposure])
+      btSecureStorage.storeExposures([exposure])
       let content = UNMutableNotificationContent()
       content.title = String.newExposureNotificationTitle.localized
       content.body = String.newExposureNotificationBody.localized
       content.sound = .default
       let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: nil)
-      UNUserNotificationCenter.current().add(request) { error in
+      userNotificationCenter.add(request) { error in
         DispatchQueue.main.async {
           if let error = error {
             print("Error showing error user notification: \(error)")
           }
         }
       }
-      resolve("Exposures: \(BTSecureStorage.shared.userState.exposures)")
+      resolve("Exposures: \(btSecureStorage.userState.exposures)")
     case .fetchExposures:
       resolve(currentExposures)
     case .getAndPostDiagnosisKeys:
-      getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default, resolve: resolve, reject: reject)
+      getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default) { (success, error) in
+        if let error = error {
+          reject(error.errorCode, error.localizedMessage, error.underlyingError)
+        } else {
+          resolve(success)
+        }
+      }
     case .resetExposures:
-      BTSecureStorage.shared.exposures = List<Exposure>()
-      resolve("Exposures: \(BTSecureStorage.shared.exposures.count)")
+      btSecureStorage.exposures = List<Exposure>()
+      resolve("Exposures: \(btSecureStorage.exposures.count)")
     case .toggleENAuthorization:
       let enabled = manager.exposureNotificationEnabled ? false : true
       requestExposureNotificationAuthorization(enabled: enabled) { result in
         resolve("EN Enabled: \(self.manager.exposureNotificationEnabled)")
       }
     case .showLastProcessedFilePath:
-      let path = BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile
+      let path = btSecureStorage.userState.urlOfMostRecentlyDetectedKeyFile
       resolve(path)
     }
   }
-  
 }

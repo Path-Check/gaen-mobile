@@ -2,7 +2,12 @@ import Foundation
 import ZIPFoundation
 import CryptoKit
 
-struct DownloadedPackage {
+protocol DownloadedPackage {
+  func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL
+  func writeKeysEntry(toDirectory directory: URL, filename: String) throws -> URL
+}
+
+struct DownloadedPackageImpl: DownloadedPackage {
 
   init(keysBin: Data, signature: Data) {
     bin = keysBin
@@ -14,7 +19,10 @@ struct DownloadedPackage {
       return nil
     }
     do {
-      self = try archive.extractKeyPackage()
+      guard let package = try archive.extractKeyPackage() as? DownloadedPackageImpl else {
+        return nil
+      }
+      self = package
     } catch {
       return nil
     }
@@ -48,7 +56,7 @@ private extension Archive {
     guard let sigEntry = self["export.sig"] else {
       throw KeyPackageError.sigNotFound
     }
-    return DownloadedPackage(
+    return DownloadedPackageImpl(
       keysBin: try extractData(from: binEntry),
       signature: try extractData(from: sigEntry)
     )
