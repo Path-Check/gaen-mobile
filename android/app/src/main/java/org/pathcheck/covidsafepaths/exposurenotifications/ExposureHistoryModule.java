@@ -14,9 +14,6 @@ import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
 public class ExposureHistoryModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ExposureHistoryModule";
