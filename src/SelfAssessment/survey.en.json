@@ -245,11 +245,11 @@
           "value": "5"
         },
         {
-          "label": "None",
+          "label": "Choose not to answer",
           "value": "6"
         },
         {
-          "label": "Choose not to answer",
+          "label": "None",
           "value": "7"
         }
       ]
@@ -354,7 +354,7 @@
           "value": "6"
         },
         {
-          "label": "None of the above",
+          "label": "None",
           "value": "7"
         }
       ]
