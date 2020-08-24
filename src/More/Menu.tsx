@@ -58,13 +58,15 @@ const MenuScreen: FunctionComponent = () => {
           lastItem
         />
       </View>
-      <View style={style.section}>
-        <SettingsListItem
-          label="EN Debug Menu"
-          onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
-          lastItem
-        />
-      </View>
+      {__DEV__ ? (
+        <View style={style.section}>
+          <SettingsListItem
+            label="EN Debug Menu"
+            onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+            lastItem
+          />
+        </View>
+      ) : null}
     </ScrollView>
   )
 }
