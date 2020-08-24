@@ -1,6 +1,6 @@
 import Foundation
 
-extension DownloadedPackage {
+extension DownloadedPackageImpl {
 
   func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL {
     let url = directory.appendingPathComponent(filename).appendingPathExtension("sig")

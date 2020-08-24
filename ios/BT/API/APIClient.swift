@@ -78,7 +78,7 @@ class BTAPIClient: APIClient {
         completion(.failure(GenericError.unknown))
         return
       }
-        if let downloadedPackage = DownloadedPackage(compressedData: data) {
+        if let downloadedPackage = DownloadedPackageImpl(compressedData: data) {
           completion(.success(downloadedPackage))
         } else {
           completion(.failure(GenericError.unknown))

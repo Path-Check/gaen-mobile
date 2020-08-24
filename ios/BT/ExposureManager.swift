@@ -62,7 +62,7 @@ final class ExposureManager: NSObject {
   fileprivate let manager: ExposureNotificationManager
   private let apiClient: APIClient
   private let btSecureStorage: BTSecureStorage
-  private let bgTaskScheduler: BGTaskScheduler
+  private let bgTaskScheduler: BackgroundTaskScheduler
   private let notificationCenter: NotificationCenter
   private let userNotificationCenter: UserNotificationCenter
   private let keychainService: KeychainService
@@ -70,7 +70,7 @@ final class ExposureManager: NSObject {
   init(exposureNotificationManager: ExposureNotificationManager = ENManager(),
        apiClient: APIClient = BTAPIClient.shared,
        btSecureStorage: BTSecureStorage = BTSecureStorage.shared,
-       backgroundTaskScheduler: BGTaskScheduler = BGTaskScheduler.shared,
+       backgroundTaskScheduler: BackgroundTaskScheduler = BGTaskScheduler.shared,
        notificationCenter: NotificationCenter = NotificationCenter.default,
        userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current(),
        keychainService: KeychainService = DefaultKeychainService.shared) {
@@ -245,7 +245,7 @@ final class ExposureManager: NSObject {
     All launch handlers must be registered before application finishes launching
    */
   @objc func registerBackgroundTask() {
-    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
+    _ = bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
                              using: .main) { [weak self] task in
       guard let strongSelf = self else { return }
       // Notify the user if bluetooth is off

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7372C03D7AA19943931FCE4 /* libPods-BT.a */; };
 		A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */; };
+		A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */; };
 		A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */; };
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
@@ -190,6 +191,7 @@
 		997AE6137471448A99893BC8 /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		9B4A262ECA724F9CAB9A2C70 /* IBMPlexMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-BoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BGTaskScheduler+Extensions.swift"; sourceTree = "<group>"; };
 		A57577D96B89452694B53982 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				A58AB54124EF45B300F393B4 /* UserNotifications */,
 				B5E29D4D249E3A8700E686DC /* Exposure Notifications */,
 				B5E29D4A249E3A7D00E686DC /* Foundation */,
+				A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
+				A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */,
 				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
 				B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */,
 				B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */,
