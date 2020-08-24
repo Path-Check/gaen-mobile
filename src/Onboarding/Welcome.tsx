@@ -5,13 +5,14 @@ import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
 
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
+import { GradientBackground } from "../components"
 import { getLocalNames } from "../locales/languages"
-import { Button } from "../components"
 import { useApplicationName } from "../More/useApplicationInfo"
+import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 import { Images } from "../assets"
-import { Spacing, Colors, Typography, Outlines } from "../styles"
-import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
+import { Layout, Spacing, Colors, Typography, Outlines } from "../styles"
 
 const Welcome: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -28,52 +29,55 @@ const Welcome: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.container}>
-      <TouchableOpacity
-        onPress={handleOnPressSelectLanguage}
-        style={style.languageButtonContainer}
-      >
-        <LinearGradient
-          colors={Colors.gradientPrimary10}
-          useAngle
-          angle={0}
-          angleCenter={{ x: 0.5, y: 0.5 }}
+    <>
+      <GradientBackground />
+      <View style={style.container}>
+        <TouchableOpacity
+          onPress={handleOnPressSelectLanguage}
           style={style.languageButtonContainer}
         >
-          <GlobalText style={style.languageButtonText}>
-            {languageName}
+          <LinearGradient
+            colors={Colors.gradientPrimary10}
+            useAngle
+            angle={0}
+            angleCenter={{ x: 0.5, y: 0.5 }}
+            style={style.languageButtonContainer}
+          >
+            <GlobalText style={style.languageButtonText}>
+              {languageName}
+            </GlobalText>
+          </LinearGradient>
+        </TouchableOpacity>
+        <View>
+          <Image
+            source={Images.PeopleOnNetworkNodes}
+            style={style.image}
+            accessible
+            accessibilityLabel={t("onboarding.welcome_image_label")}
+          />
+          <GlobalText style={style.mainText}>
+            {t("label.launch_screen1_header")}
           </GlobalText>
-        </LinearGradient>
-      </TouchableOpacity>
-      <View>
-        <Image
-          source={Images.PeopleOnNetworkNodes}
-          style={style.image}
-          accessible
-          accessibilityLabel={t("onboarding.welcome_image_label")}
+          <GlobalText style={style.mainText}>{applicationName}</GlobalText>
+        </View>
+        <Button
+          label={t("label.launch_get_started")}
+          onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
+          hasRightArrow
         />
-        <GlobalText style={style.mainText}>
-          {t("label.launch_screen1_header")}
-        </GlobalText>
-        <GlobalText style={style.mainText}>{applicationName}</GlobalText>
       </View>
-      <Button
-        label={t("label.launch_get_started")}
-        onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
-        hasRightArrow
-      />
-    </View>
+    </>
   )
 }
 
 const style = StyleSheet.create({
   container: {
+    ...Layout.positionOverBackground,
     flex: 1,
     paddingVertical: Spacing.xxHuge,
     paddingHorizontal: Spacing.large,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: Colors.primaryLightBackground,
   },
   languageButtonContainer: {
     borderRadius: Outlines.borderRadiusMax,
