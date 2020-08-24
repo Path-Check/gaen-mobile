@@ -62,8 +62,8 @@ public class MainApplication extends Application implements ReactApplication {
   @SuppressWarnings("ConstantConditions")
   private void initializeBugsnag() {
     Configuration config = Configuration.load(this);
-    // Only enable bugsnag for debug builds
-    config.setReleaseStage("debug".equals(BuildConfig.BUILD_TYPE) ? "development" : "production");
+    // Disable bugsnag for release builds
+    config.setReleaseStage("release".equals(BuildConfig.BUILD_TYPE) ? "production" : "development");
     Set<String> enabledStages = new HashSet<>();
     enabledStages.add("development");
     config.setEnabledReleaseStages(enabledStages);
