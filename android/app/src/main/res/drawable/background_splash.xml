@@ -12,12 +12,4 @@
     <item
         android:drawable="@drawable/ic_splash_logo"
         android:gravity="center"/>
-
-    <!-- Text -->
-    <item
-        android:width="180dp"
-        android:height="19dp"
-        android:drawable="@drawable/ic_splash_text"
-        android:gravity="center"
-        android:top="450dp"/>
 </layer-list>
