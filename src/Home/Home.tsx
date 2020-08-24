@@ -60,6 +60,10 @@ const HomeScreen: FunctionComponent = () => {
       t("home.bluetooth.unauthorized_error_message"),
       [
         {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
           text: t("common.settings"),
           onPress: () => Linking.openSettings(),
         },
@@ -276,8 +280,8 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
         {isActive ? (
           <SvgXml xml={Icons.HomeInfo} />
         ) : (
-          <View style={style.fixContainer}>
-            <GlobalText style={style.fixText}>
+          <View style={style.fixButtonContainer}>
+            <GlobalText style={style.fixButtonText}>
               {t("home.bluetooth.fix")}
             </GlobalText>
           </View>
@@ -286,7 +290,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
     </TouchableOpacity>
   )
 }
-const activationStatusRightWidth = 60
+const activationStatusRightWidth = 70
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -397,16 +401,17 @@ const style = StyleSheet.create({
     width: activationStatusRightWidth,
     alignItems: "center",
   },
-  fixContainer: {
+  fixButtonContainer: {
     alignItems: "center",
-    backgroundColor: Colors.danger75,
+    backgroundColor: Colors.secondary50,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,
   },
-  fixText: {
-    ...Typography.body1,
-    color: Colors.white,
+  fixButtonText: {
+    ...Typography.header4,
+    color: Colors.primary100,
+    textTransform: "uppercase",
   },
   bottomHeaderText: {
     ...Typography.header4,

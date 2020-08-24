@@ -25,6 +25,7 @@ const BluetoothInfo: FunctionComponent = () => {
         <GlobalText style={style.headerText}>
           {t("home.bluetooth_info_header")}
         </GlobalText>
+        <Image source={Images.PersonOnComputer} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -46,13 +47,13 @@ const BluetoothInfo: FunctionComponent = () => {
             {t("home.bluetooth_info_body")}
           </GlobalText>
         </View>
-        <Image source={Images.PhonesSharingCodes} style={style.image} />
+        <Image source={Images.PhonesSharingCodes} style={style.bodyImage} />
       </ScrollView>
     </View>
   )
 }
 
-const headerHeight = 70
+const headerHeight = 180
 
 const style = StyleSheet.create({
   container: {
@@ -63,29 +64,36 @@ const style = StyleSheet.create({
   headerContainer: {
     position: "absolute",
     width: "100%",
+    height: headerHeight,
     flexDirection: "row",
+    alignItems: "flex-end",
     justifyContent: "space-between",
     backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
-    height: headerHeight,
   },
   headerText: {
     flex: 10,
     ...Typography.header2,
-    paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xLarge,
     color: Colors.primary125,
   },
+  headerImage: {
+    width: 130,
+    height: 100,
+    resizeMode: "cover",
+  },
   closeIconContainer: {
-    flex: 1,
-    alignItems: "flex-end",
+    position: "absolute",
+    right: 0,
+    top: 0,
     padding: Spacing.medium,
   },
   mainContentContainer: {
     paddingTop: headerHeight + Spacing.large,
     paddingBottom: Spacing.huge,
   },
-  image: {
+  bodyImage: {
     width: "100%",
     height: 290,
     resizeMode: "contain",
