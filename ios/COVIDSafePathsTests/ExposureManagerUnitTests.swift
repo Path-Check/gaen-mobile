@@ -645,7 +645,7 @@ class ExposureManagerTests: XCTestCase {
     }
     wait(for: [failureExpectactionResolve, failureExpectationReject], timeout: 0)
 
-    var apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
+    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
       return Result<String>.failure(GenericError.unknown) as AnyObject
     }
