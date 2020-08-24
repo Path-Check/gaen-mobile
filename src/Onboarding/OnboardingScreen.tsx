@@ -13,6 +13,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import LinearGradient from "react-native-linear-gradient"
 
 import { Button } from "../components/Button"
 import { GlobalText } from "../components/GlobalText"
@@ -64,18 +65,31 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   const languageName = getLocalNames()[localeCode]
   useStatusBarEffect("dark-content")
 
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(Screens.LanguageSelection)
+  }
+
+  const handleOnPressProtectPrivacy = () => {
+    navigation.navigate(OnboardingScreens.ProtectPrivacy)
+  }
+
   return (
     <>
       <SafeAreaView style={style.topSafeArea} />
       <SafeAreaView style={style.bottomSafeArea}>
         <View style={style.header}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(Screens.LanguageSelection)}
-            style={style.languageButtonContainer}
-          >
-            <GlobalText style={style.languageButtonText}>
-              {languageName}
-            </GlobalText>
+          <TouchableOpacity onPress={handleOnPressSelectLanguage}>
+            <LinearGradient
+              colors={Colors.gradientPrimary10}
+              useAngle
+              angle={0}
+              angleCenter={{ x: 0.5, y: 0.5 }}
+              style={style.languageButtonContainer}
+            >
+              <GlobalText style={style.languageButtonText}>
+                {languageName}
+              </GlobalText>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
@@ -119,9 +133,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
           </ScrollView>
           <TouchableOpacity
             style={style.bottomButtonContainer}
-            onPress={() =>
-              navigation.navigate(OnboardingScreens.ProtectPrivacy)
-            }
+            onPress={handleOnPressProtectPrivacy}
           >
             <GlobalText style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}
@@ -198,15 +210,14 @@ const style = StyleSheet.create({
     borderBottomWidth: Outlines.hairline,
   },
   languageButtonContainer: {
-    ...Outlines.ovalBorder,
+    borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
-    paddingHorizontal: Spacing.large,
-    borderColor: Colors.primary125,
+    paddingHorizontal: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.body2,
-    letterSpacing: Typography.mediumLetterSpacing,
+    ...Typography.body3,
+    letterSpacing: Typography.largeLetterSpacing,
     color: Colors.primary125,
     textAlign: "center",
     textTransform: "uppercase",
@@ -267,8 +278,6 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: Spacing.small,
-    borderTopColor: Colors.neutral30,
-    borderTopWidth: Outlines.hairline,
   },
   bottomButtonText: {
     ...Typography.header5,

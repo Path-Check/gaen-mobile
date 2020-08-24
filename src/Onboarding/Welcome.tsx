@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import LinearGradient from "react-native-linear-gradient"
 
 import { GlobalText } from "../components/GlobalText"
 import { getLocalNames } from "../locales/languages"
@@ -22,13 +23,27 @@ const Welcome: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   useStatusBarEffect("dark-content")
 
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(Screens.LanguageSelection)
+  }
+
   return (
     <View style={style.container}>
       <TouchableOpacity
-        onPress={() => navigation.navigate(Screens.LanguageSelection)}
+        onPress={handleOnPressSelectLanguage}
         style={style.languageButtonContainer}
       >
-        <GlobalText style={style.languageButtonText}>{languageName}</GlobalText>
+        <LinearGradient
+          colors={Colors.gradientPrimary10}
+          useAngle
+          angle={0}
+          angleCenter={{ x: 0.5, y: 0.5 }}
+          style={style.languageButtonContainer}
+        >
+          <GlobalText style={style.languageButtonText}>
+            {languageName}
+          </GlobalText>
+        </LinearGradient>
       </TouchableOpacity>
       <View>
         <Image
@@ -61,13 +76,13 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   languageButtonContainer: {
-    ...Outlines.ovalBorder,
-    borderColor: Colors.primary125,
+    borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.xLarge,
+    marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.body2,
+    ...Typography.body3,
     letterSpacing: Typography.largeLetterSpacing,
     color: Colors.primary125,
     textAlign: "center",
