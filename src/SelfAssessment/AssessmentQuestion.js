@@ -59,7 +59,6 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   const onSelectHandler = (value, index) => {
     if (question.question_type === QUESTION_TYPE_MULTI) {
       return setSelectedValues((values) => {
-        // TODO: Better way to filter single value questions?
         const singleValueQuestions = ["Choose not to answer", "None"]
         // this looks for an existing value inside the selected values array
         // which indicates user unselected the value
