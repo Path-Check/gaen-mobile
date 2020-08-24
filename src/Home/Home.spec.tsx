@@ -322,7 +322,10 @@ describe("Home", () => {
             expect(alert).toHaveBeenCalledWith(
               "Authorize in Settings",
               "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
-              [expect.objectContaining({ text: "Open Settings" })],
+              [
+                expect.objectContaining({ text: "Back" }),
+                expect.objectContaining({ text: "Open Settings" }),
+              ],
             )
           })
         })
