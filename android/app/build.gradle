@@ -6,6 +6,7 @@ apply plugin: 'realm-android'
 
 project.ext.envConfigFiles = [
     debug: ".env.bt",
+    staging: ".env.bt.staging",
     release: ".env.bt.release",
 ]
 
