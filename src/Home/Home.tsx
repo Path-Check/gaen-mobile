@@ -71,6 +71,23 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
+  const showActivateProximityTracingAlert = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: exposureNotifications.request,
+        },
+      ],
+    )
+  }
+
   const showBluetoothDisabledAlert = () => {
     Alert.alert(
       t("home.bluetooth.bluetooth_disabled_error_title"),
@@ -108,7 +125,7 @@ const HomeScreen: FunctionComponent = () => {
 
   const handleOnPressProximityTracing = () => {
     if (isAuthorized) {
-      exposureNotifications.request()
+      showActivateProximityTracingAlert()
     } else if (isPlatformiOS()) {
       showUnauthorizedAlert()
     }
