@@ -17,13 +17,14 @@ const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
 const PeopleHighFiving = require("./peopleHighFiving.png")
 const PeopleOnPhones = require("./peopleOnPhones.png")
 const PeopleOnNetworkNodes = require("./peopleOnNetworkNodes.png")
+const PersonAndHealthExpert = require("./personAndHealthExpert.png")
+const PersonGettingNotification = require("./personGettingNotification.png")
+const PersonOnComputer = require("./personOnComputer.png")
 const PersonOnPhoneWithCode = require("./personOnPhoneWithCode.png")
 const PersonWithCodesInBackground = require("./personWithCodesInBackground.png")
 const PersonWithPhoneAndCode = require("./personWithPhoneAndCode.png")
-const PersonAndHealthExpert = require("./personAndHealthExpert.png")
-const PersonGettingNotification = require("./personGettingNotification.png")
-const PhonesSharingCodes = require("./phonesSharingCodes.png")
 const PersonWithLockedPhone = require("./personWithLockedPhone.png")
+const PhonesSharingCodes = require("./phonesSharingCodes.png")
 const SingleCrossPathBackground = require("./singleCrossPathBackground.png")
 
 export const Images = {
@@ -46,11 +47,12 @@ export const Images = {
   PeopleHighFiving,
   PeopleOnPhones,
   PeopleOnNetworkNodes,
+  PersonAndHealthExpert,
+  PersonGettingNotification,
+  PersonOnComputer,
   PersonOnPhoneWithCode,
   PersonWithCodesInBackground,
   PersonWithPhoneAndCode,
-  PersonAndHealthExpert,
-  PersonGettingNotification,
   PhonesSharingCodes,
   PersonWithLockedPhone,
   SingleCrossPathBackground,
