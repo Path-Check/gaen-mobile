@@ -14,7 +14,9 @@ import {
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 
-Bugsnag.start()
+if (env.DEV === "true") {
+  Bugsnag.start()
+}
 
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)
