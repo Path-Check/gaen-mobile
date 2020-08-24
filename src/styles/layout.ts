@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native"
+import { Dimensions, ViewStyle } from "react-native"
 
 import * as Spacing from "./spacing"
 
@@ -20,3 +20,11 @@ export const headerHeight = tappableHeight + Spacing.xSmall
 export const zLevel1 = 1
 export const zLevel2 = 2
 export const zLevel3 = 3
+
+export const positionOverBackground: ViewStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+}
