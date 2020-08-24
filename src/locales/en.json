@@ -42,6 +42,7 @@
   },
   "common": {
     "alert": "Alert",
+    "back": "Back",
     "close": "Close",
     "continue": "Continue",
     "disabled": "Disabled",
