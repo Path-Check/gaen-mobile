@@ -4,6 +4,7 @@ import android.util.Log
 import io.realm.DynamicRealm
 import io.realm.FieldAttribute
 import io.realm.RealmMigration
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues
 
 internal class Migration : RealmMigration {
     override fun migrate(realm: DynamicRealm, oldVersion: Long, newVersion: Long) {
@@ -25,6 +26,11 @@ internal class Migration : RealmMigration {
                 ?.removePrimaryKey()
                 ?.transform { obj -> obj.setString("id", KeyValues.LAST_PROCESSED_FILE_NAME_KEY) }
                 ?.addPrimaryKey("id")
+            version++
+        }
+
+        if (version === 3L) {
+            schema.remove("PositiveDiagnosis")
         }
     }
 }

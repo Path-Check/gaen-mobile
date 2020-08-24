@@ -1,6 +1,10 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.utils;
 
-public class CallbackMessages {
+public final class CallbackMessages {
+
+  private CallbackMessages() {
+  }
+
   public static final String GENERIC_SUCCESS = "success";
   public static final String GENERIC_ERROR = "error";
   public static final String ERROR_UNKNOWN = "error unknown";

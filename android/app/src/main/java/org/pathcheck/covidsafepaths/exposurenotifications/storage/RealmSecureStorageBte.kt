@@ -2,33 +2,31 @@ package org.pathcheck.covidsafepaths.exposurenotifications.storage
 
 import android.util.Base64
 import androidx.annotation.VisibleForTesting
-import androidx.concurrent.futures.CallbackToFutureAdapter
 import com.bottlerocketstudios.vault.SharedPreferenceVault
 import com.bottlerocketstudios.vault.SharedPreferenceVaultFactory
 import com.google.android.gms.nearby.exposurenotification.ExposureWindow
-import com.google.common.util.concurrent.ListenableFuture
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
 import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.KeyValues.Companion.REVISION_TOKEN_KEY
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.REVISION_TOKEN_KEY
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
  */
 object RealmSecureStorageBte {
 
-    private const val TAG = "RealmSecureStorage"
-    private const val SCHEMA_VERSION: Long = 3
+    private const val SCHEMA_VERSION: Long = 4
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
     private const val MANUALLY_KEYED_KEY_ALIAS = "safepathsbte"
     private const val MANUALLY_KEYED_KEY_INDEX = 2
-    private const val MANUALLY_KEYED_PRESHARED_SECRET =
-        "" // This will not be used as we do not support < 18
+    private const val MANUALLY_KEYED_PRESHARED_SECRET = "" // This will not be used as we do not support < 18
     private const val KEY_REALM_ENCRYPTION_KEY = "KEY_REALM_ENCRYPTION_KEY"
 
     private val realmConfig: RealmConfiguration
@@ -47,51 +45,7 @@ object RealmSecureStorageBte {
         realmConfig = builder.build()
     }
 
-    fun insertDiagnosisAsync(positiveDiagnosis: PositiveDiagnosis): ListenableFuture<Void> {
-        getRealmInstance().use {
-            return CallbackToFutureAdapter.getFuture { completer: CallbackToFutureAdapter.Completer<Void> ->
-                it.executeTransactionAsync(
-                    { realm -> realm.insert(positiveDiagnosis) },
-                    { completer.set(null) },
-                    { e -> completer.setException(e) }
-                )
-            }
-        }
-    }
-
-    fun markDiagnosisSharedAsync(id: Long, shared: Boolean): ListenableFuture<Void> {
-        getRealmInstance().use {
-            return CallbackToFutureAdapter.getFuture { completer: CallbackToFutureAdapter.Completer<Void> ->
-                it.executeTransactionAsync(
-                    { realm ->
-                        val diagnosis =
-                            realm.where(PositiveDiagnosis::class.java).equalTo("id", id).findFirst()
-                        diagnosis?.shared = shared
-                    },
-                    { completer.set(null) },
-                    { e -> completer.setException(e) }
-                )
-            }
-        }
-    }
-
-    fun deleteDiagnosisAsync(id: Long): ListenableFuture<Void> {
-        getRealmInstance().use {
-            return CallbackToFutureAdapter.getFuture { completer: CallbackToFutureAdapter.Completer<Void> ->
-                it.executeTransactionAsync(
-                    { realm ->
-                        val diagnosis =
-                            realm.where(PositiveDiagnosis::class.java).equalTo("id", id).findFirst()
-                        diagnosis?.deleteFromRealm()
-                    },
-                    { completer.set(null) },
-                    { e -> completer.setException(e) }
-                )
-            }
-        }
-    }
-
-    fun getEncryptionKey(): ByteArray {
+    private fun getEncryptionKey(): ByteArray {
         val vault: SharedPreferenceVault =
             SharedPreferenceVaultFactory.getAppKeyedCompatAes256Vault(
                 MainApplication.getContext(), MANUALLY_KEYED_PREF_FILE_NAME,
@@ -161,8 +115,7 @@ object RealmSecureStorageBte {
                         // No existing ExposureEntity with the given date, must add an entity for this window.
                         somethingAdded = true
                         db.insert(
-                            ExposureEntity
-                                .create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis())
+                            ExposureEntity.create(exposureWindow.dateMillisSinceEpoch, System.currentTimeMillis())
                         )
                     }
                 }

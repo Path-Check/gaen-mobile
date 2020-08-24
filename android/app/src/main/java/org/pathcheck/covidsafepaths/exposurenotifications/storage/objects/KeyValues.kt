@@ -1,4 +1,4 @@
-package org.pathcheck.covidsafepaths.exposurenotifications.storage
+package org.pathcheck.covidsafepaths.exposurenotifications.storage.objects
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

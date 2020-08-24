@@ -8,11 +8,11 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.pathcheck.covidsafepaths.exposurenotifications.DebugMenuModule;
-import org.pathcheck.covidsafepaths.exposurenotifications.DeviceInfoModule;
-import org.pathcheck.covidsafepaths.exposurenotifications.ExposureHistoryModule;
-import org.pathcheck.covidsafepaths.exposurenotifications.ExposureKeyModule;
-import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationsModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DebugMenuModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DeviceInfoModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureHistoryModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureKeyModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureNotificationsModule;
 
 public class ExposureNotificationsPackage implements ReactPackage {
   @NonNull

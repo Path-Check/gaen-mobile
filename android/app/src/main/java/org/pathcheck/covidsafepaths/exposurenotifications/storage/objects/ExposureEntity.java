@@ -15,7 +15,7 @@
  *
  */
 
-package org.pathcheck.covidsafepaths.exposurenotifications.storage;
+package org.pathcheck.covidsafepaths.exposurenotifications.storage.objects;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -71,24 +71,12 @@ public class ExposureEntity extends RealmObject {
     return id;
   }
 
-  void setId(long id) {
-    this.id = id;
-  }
-
   public long getReceivedTimestampMs() {
     return receivedTimestampMs;
   }
 
-  void setReceivedTimestampMs(long ms) {
-    this.receivedTimestampMs = ms;
-  }
-
   public long getDateMillisSinceEpoch() {
     return dateMillisSinceEpoch;
-  }
-
-  public void setDateMillisSinceEpoch(long dateMillisSinceEpoch) {
-    this.dateMillisSinceEpoch = dateMillisSinceEpoch;
   }
 
   @Override

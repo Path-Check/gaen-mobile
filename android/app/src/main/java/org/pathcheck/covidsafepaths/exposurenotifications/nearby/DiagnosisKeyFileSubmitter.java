@@ -20,7 +20,6 @@ package org.pathcheck.covidsafepaths.exposurenotifications.nearby;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
-import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -45,8 +44,6 @@ public class DiagnosisKeyFileSubmitter {
   // Use a very very long timeout, in case of a stress-test that supplies a very large number of
   // diagnosis key files.
   private static final Duration PROVIDE_KEYS_TIMEOUT = Duration.ofMinutes(30);
-  private static final BaseEncoding BASE16 = BaseEncoding.base16().lowerCase();
-  private static final BaseEncoding BASE64 = BaseEncoding.base64();
 
   private final ExposureNotificationClientWrapper client;
 

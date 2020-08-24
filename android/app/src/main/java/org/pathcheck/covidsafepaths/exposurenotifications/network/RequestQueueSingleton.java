@@ -17,10 +17,7 @@
 
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
-import android.content.Context;
-import androidx.annotation.VisibleForTesting;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.BaseHttpStack;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.NoCache;
@@ -33,7 +30,10 @@ public class RequestQueueSingleton {
 
   private static RequestQueue queue;
 
-  public static RequestQueue get(Context context) {
+  private RequestQueueSingleton() {
+  }
+
+  public static RequestQueue get() {
     if (queue == null) {
       // In this reference design, we never want to return cached data; it complicates end to end
       // testing.
@@ -41,10 +41,5 @@ public class RequestQueueSingleton {
       queue.start();
     }
     return queue;
-  }
-
-  @VisibleForTesting
-  static void setHttpStackForTests(Context context, BaseHttpStack stackForTests) {
-    queue = Volley.newRequestQueue(context.getApplicationContext(), stackForTests);
   }
 }

@@ -30,8 +30,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class TaskToFutureAdapter {
 
-  private static final String TAG = "TaskToFutureAdapter";
-
   public static <T> ListenableFuture<T> getFutureWithTimeout(
       Task<T> task, long timeout, TimeUnit timeUnit, ScheduledExecutorService executor) {
     return FluentFuture.<T>from(

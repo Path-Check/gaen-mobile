@@ -1,4 +1,4 @@
-package org.pathcheck.covidsafepaths.exposurenotifications;
+package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -14,6 +14,7 @@ import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
+import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
@@ -21,6 +22,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 
+@SuppressWarnings("unused")
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
   static final String MODULE_NAME = "DebugMenuModule";
@@ -48,9 +50,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
         .addOnSuccessListener(keys -> {
           List<RNDiagnosisKey> diagnosisKeys = new ArrayList<>();
           for (TemporaryExposureKey key : keys) {
-            RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(
-                key.getRollingStartIntervalNumber()
-            );
+            RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
             diagnosisKeys.add(diagnosisKey);
           }
 
@@ -65,8 +65,11 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
           ApiException apiException = (ApiException) exception;
           if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
             // TODO Call this method after permission is accepted and remove promise.reject
-            client.showPermissionDialog(getReactApplicationContext(), apiException,
-                RequestCodes.REQUEST_GET_DIAGNOSIS_KEYS);
+            client.showPermissionDialog(
+                getReactApplicationContext(),
+                apiException,
+                RequestCodes.REQUEST_GET_DIAGNOSIS_KEYS
+            );
             promise.reject(new Exception("Needs user permission, try again"));
           } else {
             promise.reject(exception);
@@ -97,12 +100,10 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
         .addOnSuccessListener(enabled -> {
           if (enabled) {
             WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
-            workManager
-                .enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
+            workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
             promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
           } else {
-            promise.reject(
-                new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
+            promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
           }
         })
         .addOnFailureListener(promise::reject);
