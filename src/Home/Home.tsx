@@ -130,6 +130,8 @@ const HomeScreen: FunctionComponent = () => {
     navigation.navigate(Screens.LanguageSelection)
   }
 
+  const showShareLink = Boolean(configuration.appDownloadLink)
+
   const isProximityTracingOn = isEnabledAndAuthorized
   const isBluetoothOn = btStatus
   const appIsActive = isProximityTracingOn && isBluetoothOn
@@ -197,27 +199,29 @@ const HomeScreen: FunctionComponent = () => {
       </View>
       <SafeAreaView style={bottomContainerStyle}>
         <ScrollView contentContainerStyle={style.bottomContentContainer}>
-          <TouchableOpacity
-            style={style.shareContainer}
-            onPress={handleOnPressShare}
-            accessibilityLabel={t("home.bluetooth.share")}
-          >
-            <View style={style.shareImageContainer}>
-              <Image source={Images.HugEmoji} style={style.shareImage} />
-            </View>
-            <View style={style.shareTextContainer}>
-              <GlobalText style={style.shareText}>
-                {t("home.bluetooth.share")}
-              </GlobalText>
-            </View>
-            <View style={style.shareIconContainer}>
-              <SvgXml
-                xml={Icons.Share}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-            </View>
-          </TouchableOpacity>
+          {showShareLink ? (
+            <TouchableOpacity
+              style={style.shareContainer}
+              onPress={handleOnPressShare}
+              accessibilityLabel={t("home.bluetooth.share")}
+            >
+              <View style={style.shareImageContainer}>
+                <Image source={Images.HugEmoji} style={style.shareImage} />
+              </View>
+              <View style={style.shareTextContainer}>
+                <GlobalText style={style.shareText}>
+                  {t("home.bluetooth.share")}
+                </GlobalText>
+              </View>
+              <View style={style.shareIconContainer}>
+                <SvgXml
+                  xml={Icons.Share}
+                  width={Iconography.small}
+                  height={Iconography.small}
+                />
+              </View>
+            </TouchableOpacity>
+          ) : null}
           <View style={style.activationStatusSectionContainer}>
             <ActivationStatusSection
               headerText={t("home.bluetooth.bluetooth_header")}
