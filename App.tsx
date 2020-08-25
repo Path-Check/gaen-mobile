@@ -11,6 +11,7 @@ import {
   OnboardingProvider,
   onboardingHasBeenCompleted,
 } from "./src/OnboardingContext"
+import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 
@@ -39,13 +40,17 @@ const App: FunctionComponent = () => {
     <>
       {!isLoading ? (
         <ErrorBoundary>
-          <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
-            <PermissionsProvider>
-              <ExposureProvider>
-                <MainNavigator />
-              </ExposureProvider>
-            </PermissionsProvider>
-          </OnboardingProvider>
+          <ConfigurationProvider>
+            <OnboardingProvider
+              userHasCompletedOboarding={onboardingIsComplete}
+            >
+              <PermissionsProvider>
+                <ExposureProvider>
+                  <MainNavigator />
+                </ExposureProvider>
+              </PermissionsProvider>
+            </OnboardingProvider>
+          </ConfigurationProvider>
         </ErrorBoundary>
       ) : null}
     </>

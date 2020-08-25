@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
-import { View, Text, Button, Platform } from "react-native"
+import { View, Text, Button } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import env from "react-native-config"
 
 import { useStatusBarEffect, Screens } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import PublishConsentForm from "./PublishConsentForm"
 import { useExposureContext } from "../../ExposureContext"
+import { useConfigurationContext } from "../../ConfigurationContext"
 
 const PublishConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("light-content")
@@ -14,10 +14,7 @@ const PublishConsentScreen: FunctionComponent = () => {
   const { storeRevisionToken, getRevisionToken } = useExposureContext()
   const navigation = useNavigation()
   const { certificate, hmacKey, exposureKeys } = useAffectedUserContext()
-  const appPackageName = Platform.select({
-    ios: env.IOS_BUNDLE_ID,
-    android: env.ANDROID_APPLICATION_ID,
-  }) as string
+  const { appPackageName, regionCodes } = useConfigurationContext()
 
   useEffect(() => {
     getRevisionToken().then((token) => {
@@ -34,7 +31,7 @@ const PublishConsentScreen: FunctionComponent = () => {
         storeRevisionToken={storeRevisionToken}
         revisionToken={revisionToken}
         appPackageName={appPackageName}
-        regionCodes={env.REGION_CODES.split(",")}
+        regionCodes={regionCodes}
       />
     )
   } else {

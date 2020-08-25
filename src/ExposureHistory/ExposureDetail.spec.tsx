@@ -5,12 +5,7 @@ import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 import ExposureDetail from "./ExposureDetail"
 import { useRoute } from "@react-navigation/native"
-
-jest.mock("react-native-config", () => {
-  return {
-    AUTHORITY_ADVICE_URL: "https://www.health.state.mn.us/",
-  }
-})
+import { ConfigurationContext } from "../ConfigurationContext"
 
 jest.mock("@react-navigation/native")
 describe("ExposureDetail", () => {
@@ -62,13 +57,21 @@ describe("ExposureDetail", () => {
 
   describe("when the health authority provides a link", () => {
     it("directs the user to the health authority link", () => {
+      const healthAuthorityAdviceUrl = "https://www.health.state.mn.us/"
       const openURLSpy = jest.spyOn(Linking, "openURL")
-      const { getByLabelText } = render(<ExposureDetail />)
+      const { getByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityAdviceUrl,
+          })}
+        >
+          <ExposureDetail />
+        </ConfigurationContext.Provider>,
+      )
       const nextStepsButton = getByLabelText("Next Steps")
-      const authorityAdviceUrl = "https://www.health.state.mn.us/"
       fireEvent.press(nextStepsButton)
 
-      expect(openURLSpy).toHaveBeenCalledWith(authorityAdviceUrl)
+      expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityAdviceUrl)
     })
   })
 })
