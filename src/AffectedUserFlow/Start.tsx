@@ -86,8 +86,8 @@ const style = StyleSheet.create({
   },
   cancelButtonContainer: {
     position: "absolute",
-    top: Layout.oneTwentiethHeight,
-    right: Spacing.xxSmall,
+    top: Spacing.xxxSmall,
+    right: Spacing.xxxSmall,
     zIndex: Layout.zLevel1,
   },
   cancelButtonInnerContainer: {
