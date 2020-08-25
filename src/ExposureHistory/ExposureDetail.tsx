@@ -23,7 +23,7 @@ const ExposureDetail: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const { t } = useTranslation()
 
-  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(
+  const [isConnected, setIsConnected] = useState<boolean | null | undefined>(
     true,
   )
 
@@ -37,7 +37,7 @@ const ExposureDetail: FunctionComponent = () => {
       // netInfo state comes as null while unresolved so to avoid flicker we only set component state
       // if the netInfo state is resolved to boolean
       if (state.isInternetReachable !== null) {
-        setConnectivity(state.isInternetReachable)
+        setIsConnected(state.isInternetReachable)
       }
     })
     return unsubscribe
@@ -122,11 +122,11 @@ const ExposureDetail: FunctionComponent = () => {
           <Button
             onPress={handleOnPressNextStep}
             label={t("exposure_history.exposure_detail.next_steps")}
-            disabled={!connectivity}
+            disabled={!isConnected}
             hasRightArrow
           />
         </View>
-        {!connectivity && (
+        {!isConnected && (
           <GlobalText style={style.connectivityWarningText}>
             {t("exposure_history.no_connectivity_message")}
           </GlobalText>
@@ -227,7 +227,7 @@ const style = StyleSheet.create({
     alignSelf: "flex-start",
   },
   connectivityWarningText: {
-    color: Colors.danger100,
+    ...Typography.error,
     marginTop: Spacing.small,
   },
 })
