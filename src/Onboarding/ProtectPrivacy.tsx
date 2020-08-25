@@ -73,7 +73,7 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
         <Section
           image={Images.PhonesSharingCodes}
           subheaderText={t("onboarding.protect_privacy.subheader_2")}
-          bodyText={t("onboarding.protect_privacy.body_2")}
+          bodyText={t("onboarding.protect_privacy.body_2", { applicationName })}
         />
         <Section
           image={Images.PersonWithPhoneAndCode}
@@ -91,7 +91,9 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
         />
         <Section
           image={Images.PersonWithCodesInBackground}
-          subheaderText={t("onboarding.protect_privacy.subheader_5")}
+          subheaderText={t("onboarding.protect_privacy.subheader_5", {
+            applicationName,
+          })}
           bodyText={t("onboarding.protect_privacy.body_5", {
             applicationName,
           })}

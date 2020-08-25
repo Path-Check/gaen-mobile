@@ -228,17 +228,15 @@ describe("Home", () => {
 
   describe("When proximity tracing is disabled", () => {
     describe("when exposure notification permissions are authorized but not enabled", () => {
-      it("requests exposure notification to be enabled", async () => {
+      it("shows an enable proximity tracing alert", async () => {
         expect.assertions(1)
 
-        const requestPermission = jest.fn()
         const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
           authorized: true,
           enabled: false,
         }
         const permissionProviderValue = createPermissionProviderValue(
           isENAuthorizedAndEnabled,
-          requestPermission,
         )
 
         const { getByTestId } = render(
@@ -251,9 +249,20 @@ describe("Home", () => {
           "home-proximity-tracing-status-container",
         )
 
+        const alert = jest.spyOn(Alert, "alert")
+
         fireEvent.press(fixProximityTracingButton)
         await waitFor(() => {
-          expect(requestPermission).toHaveBeenCalled()
+          expect(
+            alert,
+          ).toHaveBeenCalledWith(
+            `Enable Proximity Tracing from "${mockedApplicationName}"?`,
+            `Your mobile device can securely collect and share random IDs with nearby devices. ${mockedApplicationName} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with ${mockedApplicationName}.`,
+            [
+              expect.objectContaining({ text: "Cancel" }),
+              expect.objectContaining({ text: "Enable" }),
+            ],
+          )
         })
       })
     })

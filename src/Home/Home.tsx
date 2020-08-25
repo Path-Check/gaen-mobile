@@ -71,6 +71,23 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
+  const showEnableProximityTracingAlert = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: exposureNotifications.request,
+        },
+      ],
+    )
+  }
+
   const showBluetoothDisabledAlert = () => {
     Alert.alert(
       t("home.bluetooth.bluetooth_disabled_error_title"),
@@ -102,15 +119,15 @@ const HomeScreen: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressBluetooth = () => {
+  const handleOnPressFixBluetooth = () => {
     showBluetoothDisabledAlert()
   }
 
-  const handleOnPressProximityTracing = () => {
-    if (isAuthorized) {
-      exposureNotifications.request()
-    } else if (isPlatformiOS()) {
+  const handleOnPressFixProximityTracing = () => {
+    if (!isAuthorized && isPlatformiOS()) {
       showUnauthorizedAlert()
+    } else {
+      showEnableProximityTracingAlert()
     }
   }
 
@@ -210,7 +227,7 @@ const HomeScreen: FunctionComponent = () => {
               headerText={t("home.bluetooth.bluetooth_header")}
               isActive={isBluetoothOn}
               infoAction={() => navigation.navigate(HomeScreens.BluetoothInfo)}
-              fixAction={handleOnPressBluetooth}
+              fixAction={handleOnPressFixBluetooth}
               testID={"home-bluetooth-status-container"}
             />
             <ActivationStatusSection
@@ -219,7 +236,7 @@ const HomeScreen: FunctionComponent = () => {
               infoAction={() =>
                 navigation.navigate(HomeScreens.ProximityTracingInfo)
               }
-              fixAction={handleOnPressProximityTracing}
+              fixAction={handleOnPressFixProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
           </View>
