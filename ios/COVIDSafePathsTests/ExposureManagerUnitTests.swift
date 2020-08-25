@@ -529,70 +529,6 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
-  func testPostDiagnosisKeys() {
-    let mockENManager = ENManagerMock()
-    let expectation = self.expectation(description: "a call is made to get the diagnosis keys")
-    let keychainSetRevisionTokenExpectation = self.expectation(description: "store the new revision token")
-    mockENManager.getDiagnosisKeysHandler = { callback in
-      expectation.fulfill()
-      callback([ENTemporaryExposureKey()], nil)
-    }
-    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.postKeys)
-      let keySubmissionSuccess = KeySubmissionResponse(revisionToken: "revision_token")
-      return Result.success(keySubmissionSuccess) as AnyObject
-    }
-    let keychainServiceMock = KeychainServiceMock()
-    keychainServiceMock.setRevisionTokenHandler = { newToken in
-      keychainSetRevisionTokenExpectation.fulfill()
-      XCTAssertEqual(newToken, "revision_token")
-    }
-    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
-                                          apiClient: apiClientMock,
-                                          keychainService: keychainServiceMock)
-    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
-                                            HMACKey: "HMACKey") { (success, error) in
-                                              XCTAssertEqual(error?.errorCode,
-                                                             ExposureManagerErrorCode.noExposureKeysFound.rawValue,
-                                                             "it returns an error since no key matches the criteria")
-    }
-    wait(for: [expectation], timeout: 0)
-    mockENManager.getDiagnosisKeysHandler = { callback in
-      callback(nil, GenericError.unknown)
-    }
-    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
-                                            HMACKey: "HMACKey") { (success, error) in
-                                              XCTAssertEqual(error?.errorCode,
-                                                             ExposureManagerErrorCode.noExposureKeysFound.rawValue,
-                                                             "it returns an error since the underlying manager returns an error")
-    }
-    mockENManager.getDiagnosisKeysHandler = { callback in
-      let exposureKey = ENTemporaryExposureKey()
-      var keys = [exposureKey]
-      let currentExposureKey = ENTemporaryExposureKey()
-      currentExposureKey.rollingStartNumber = keys.minRollingStartNumber() + 10
-      keys.append(currentExposureKey)
-      callback(keys, nil)
-    }
-    exposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
-                                            HMACKey: "HMACKey") { (success, error) in
-                                              XCTAssertNil(error)
-    }
-    wait(for: [keychainSetRevisionTokenExpectation], timeout: 0)
-
-    let failApiClientMock = APIClientMock { (request, requestType) -> (Any) in
-      return Result<KeySubmissionResponse>.failure(GenericError.notFound)
-    }
-    let anotherExposureManager = ExposureManager(exposureNotificationManager: mockENManager,
-                                          apiClient: failApiClientMock)
-    anotherExposureManager.getAndPostDiagnosisKeys(certificate: "certificate",
-                                            HMACKey: "HMACKey") { (success, error) in
-                                              XCTAssertEqual(error?.errorCode,
-                                                             ExposureManagerErrorCode.networkFailure.rawValue,
-                                                             "it returns an error since the underlying api call returns an error")
-    }
-  }
-
   func testDebugFetchDiagnosisKeys() {
     let debugAction = DebugAction.fetchDiagnosisKeys
     let enManagerMock = ENManagerMock()
@@ -691,61 +627,19 @@ class ExposureManagerTests: XCTestCase {
     wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
   }
 
-    func testDebugFetchExposures() {
-      let debugAction = DebugAction.fetchExposures
-      let enManagerMock = ENManagerMock()
-      let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
-      let successExpetactionResolve = self.expectation(description: "resolve is called")
-      let successExpectationReject = self.expectation(description: "reject is not called")
-      successExpectationReject.isInverted = true
-      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-        successExpetactionResolve.fulfill()
-      }) { (_, _, _) in
-        successExpectationReject.fulfill()
-      }
-      wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
+  func testDebugFetchExposures() {
+    let debugAction = DebugAction.fetchExposures
+    let enManagerMock = ENManagerMock()
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock)
+    let successExpetactionResolve = self.expectation(description: "resolve is called")
+    let successExpectationReject = self.expectation(description: "reject is not called")
+    successExpectationReject.isInverted = true
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+      successExpetactionResolve.fulfill()
+    }) { (_, _, _) in
+      successExpectationReject.fulfill()
     }
-
-    func testDebugGetAndPostDiagnosisKeys() {
-      let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-        XCTAssertEqual(requestType, RequestType.postKeys)
-        let keySubmissionSuccess = KeySubmissionResponse(revisionToken: "revision_token")
-        return Result.success(keySubmissionSuccess) as AnyObject
-      }
-      let debugAction = DebugAction.getAndPostDiagnosisKeys
-      let enManagerMock = ENManagerMock()
-      enManagerMock.getDiagnosisKeysHandler = { callback in
-        let exposureKey = ENTemporaryExposureKey()
-        var keys = [exposureKey]
-        let currentExposureKey = ENTemporaryExposureKey()
-        currentExposureKey.rollingStartNumber = keys.minRollingStartNumber() + 10
-        keys.append(currentExposureKey)
-        callback(keys, nil)
-      }
-      let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock, apiClient: apiClientMock)
-      let successExpetactionResolve = self.expectation(description: "resolve is called")
-      let successExpectationReject = self.expectation(description: "reject is not called")
-      successExpectationReject.isInverted = true
-      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-        successExpetactionResolve.fulfill()
-      }) { (_, _, _) in
-        successExpectationReject.fulfill()
-      }
-      wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
-
-      let failExpectationResolve = self.expectation(description: "resolve is not called")
-      failExpectationResolve.isInverted = true
-      let failExpectationReject = self.expectation(description: "reject is called")
-      enManagerMock.getDiagnosisKeysHandler = { callback in
-        callback(nil, ExposureManagerError(errorCode: ExposureManagerErrorCode.noExposureKeysFound,
-                                           localizedMessage: "Message"))
-      }
-      exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-        failExpectationResolve.fulfill()
-      }) { (_, _, _) in
-        failExpectationReject.fulfill()
-      }
-      wait(for: [failExpectationResolve, failExpectationReject], timeout: 0)
+    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
   }
 
   func testDebugResetExposures() {

@@ -73,14 +73,6 @@ extension ExposureManager: ExposureManagerDebuggable {
       resolve("Exposures: \(btSecureStorage.userState.exposures)")
     case .fetchExposures:
       resolve(currentExposures)
-    case .getAndPostDiagnosisKeys:
-      getAndPostDiagnosisKeys(certificate: .default, HMACKey: .default) { (success, error) in
-        if let error = error {
-          reject(error.errorCode, error.localizedMessage, error.underlyingError)
-        } else {
-          resolve(success)
-        }
-      }
     case .resetExposures:
       btSecureStorage.exposures = List<Exposure>()
       resolve("Exposures: \(btSecureStorage.exposures.count)")
