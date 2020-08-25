@@ -33,12 +33,12 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
-    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
+    "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
     "alert": "Alert",
@@ -65,6 +65,9 @@
     "description": "An error has ocurred. Please reload the app.",
     "reload": "Reload",
     "title": "Unknown Error"
+  },
+  "exoprt": {
+    "start_image_label": ""
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
@@ -133,10 +136,13 @@
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
-      "bluetooth_disabled_error_message": "Enable Bluetooth in the Settings app",
+      "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
       "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
       "bluetooth_header": "Bluetooth",
       "fix": "Fix",
+      "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
+      "location_disabled_error_title": "Authorize in Settings",
+      "location_header": "Location",
       "proximity_tracing_header": "Proximity Tracing",
       "report_positive_result": "Report positive test result",
       "share": "Share the app and help protect yourself and others.",
@@ -147,6 +153,9 @@
       "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
       "unauthorized_error_title": "Authorize in Settings"
     },
+    "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
+    "location_info_header": "Location",
+    "location_info_subheader_1": "Why do I need my location turned on?",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",

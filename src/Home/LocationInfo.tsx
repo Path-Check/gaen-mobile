@@ -15,7 +15,7 @@ import { GlobalText } from "../components/GlobalText"
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
-const ProximityTracingInfo: FunctionComponent = () => {
+const LocationInfo: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
@@ -23,7 +23,7 @@ const ProximityTracingInfo: FunctionComponent = () => {
     <View style={style.container}>
       <View style={style.headerContainer}>
         <GlobalText style={style.headerText}>
-          {t("home.proximity_tracing_info_header")}
+          {t("home.location_info_header")}
         </GlobalText>
         <Image source={Images.PersonOnComputer} style={style.headerImage} />
         <TouchableOpacity
@@ -44,16 +44,10 @@ const ProximityTracingInfo: FunctionComponent = () => {
       >
         <View style={style.textContainer}>
           <GlobalText style={style.subheaderText}>
-            {t("home.proximity_tracing_info_subheader_1")}
+            {t("home.location_info_subheader_1")}
           </GlobalText>
           <GlobalText style={style.bodyText}>
-            {t("home.proximity_tracing_info_body_1")}
-          </GlobalText>
-          <GlobalText style={style.subheaderText}>
-            {t("home.proximity_tracing_info_subheader_2")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
-            {t("home.proximity_tracing_info_body_2")}
+            {t("home.location_info_body_1")}
           </GlobalText>
         </View>
       </ScrollView>
@@ -117,4 +111,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ProximityTracingInfo
+export default LocationInfo
