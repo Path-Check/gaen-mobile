@@ -31,6 +31,7 @@ const NoExposures: FunctionComponent = () => {
 
 const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
+
   const handleOnPressHALink = () => {
     Linking.openURL(healthAuthorityLink)
   }

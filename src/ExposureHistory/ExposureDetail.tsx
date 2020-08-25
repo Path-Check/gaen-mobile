@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import env from "react-native-config"
 import { View, ScrollView, StyleSheet, Linking } from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import NetInfo from "@react-native-community/netinfo"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
@@ -22,10 +23,26 @@ const ExposureDetail: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const { t } = useTranslation()
 
+  const [connectivity, setConnectivity] = useState<boolean | null | undefined>(
+    true,
+  )
+
   const {
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     AUTHORITY_ADVICE_URL: healthAuthorityLink,
   } = env
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      // netInfo state comes as null while unresolved so to avoid flicker we only set component state
+      // if the netInfo state is resolved to boolean
+      if (state.isInternetReachable !== null) {
+        setConnectivity(state.isInternetReachable)
+      }
+    })
+    return unsubscribe
+  }, [])
+
   const { exposureDatum } = route.params
 
   const exposureWindowBucketInWords = (
@@ -105,9 +122,15 @@ const ExposureDetail: FunctionComponent = () => {
           <Button
             onPress={handleOnPressNextStep}
             label={t("exposure_history.exposure_detail.next_steps")}
+            disabled={!connectivity}
             hasRightArrow
           />
         </View>
+        {!connectivity && (
+          <GlobalText style={style.connectivityWarningText}>
+            {t("exposure_history.no_connectivity_message")}
+          </GlobalText>
+        )}
       </View>
     </ScrollView>
   )
@@ -202,6 +225,10 @@ const style = StyleSheet.create({
   },
   buttonContainer: {
     alignSelf: "flex-start",
+  },
+  connectivityWarningText: {
+    color: Colors.danger100,
+    marginTop: Spacing.small,
   },
 })
 
