@@ -12,7 +12,7 @@ import { PermissionStatus } from "../permissionStatus"
 describe("NotificationPermissions", () => {
   describe("when a user enables notifications,", () => {
     it("requests permissions", () => {
-      const onboardingProviderValue = createOnboardingProviderValue()
+      const onboardingProviderValue = createOnboardingProviderValue(jest.fn())
 
       const notificationRequestSpy = jest.fn()
       const permissionsProviderValue = createPermissionProviderValue(
@@ -31,8 +31,77 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).toHaveBeenCalled()
     })
-    it("marks onboarding complete", () => {
-      expect(true).toBeTruthy()
+    it("marks onboarding complete", async () => {
+      const completeOnboardingSpy = jest.fn()
+      const onboardingProviderValue = createOnboardingProviderValue(
+        completeOnboardingSpy,
+      )
+
+      const notificationRequestSpy = jest.fn()
+      const permissionsProviderValue = createPermissionProviderValue(
+        notificationRequestSpy,
+      )
+
+      const { getByLabelText } = render(
+        <OnboardingContext.Provider value={onboardingProviderValue}>
+          <PermissionsContext.Provider value={permissionsProviderValue}>
+            <NotificationPermissions />
+          </PermissionsContext.Provider>
+        </OnboardingContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Enable Notifications"))
+
+      await waitFor(() => {
+        expect(completeOnboardingSpy).toHaveBeenCalled()
+      })
+    })
+  })
+  describe("when a user does not enable notifications", () => {
+    it("does not request permissions", () => {
+      const onboardingProviderValue = createOnboardingProviderValue(jest.fn())
+
+      const notificationRequestSpy = jest.fn()
+      const permissionsProviderValue = createPermissionProviderValue(
+        notificationRequestSpy,
+      )
+
+      const { getByText } = render(
+        <OnboardingContext.Provider value={onboardingProviderValue}>
+          <PermissionsContext.Provider value={permissionsProviderValue}>
+            <NotificationPermissions />
+          </PermissionsContext.Provider>
+        </OnboardingContext.Provider>,
+      )
+
+      fireEvent.press(getByText("Maybe later"))
+
+      expect(notificationRequestSpy).not.toHaveBeenCalled()
+    })
+    it("marks onboarding complete", async () => {
+      const completeOnboardingSpy = jest.fn()
+      const onboardingProviderValue = createOnboardingProviderValue(
+        completeOnboardingSpy,
+      )
+
+      const notificationRequestSpy = jest.fn()
+      const permissionsProviderValue = createPermissionProviderValue(
+        notificationRequestSpy,
+      )
+
+      const { getByText } = render(
+        <OnboardingContext.Provider value={onboardingProviderValue}>
+          <PermissionsContext.Provider value={permissionsProviderValue}>
+            <NotificationPermissions />
+          </PermissionsContext.Provider>
+        </OnboardingContext.Provider>,
+      )
+
+      fireEvent.press(getByText("Maybe later"))
+
+      await waitFor(() => {
+        expect(completeOnboardingSpy).toHaveBeenCalled()
+      })
     })
   })
 })
@@ -54,10 +123,12 @@ const createPermissionProviderValue = (
   }
 }
 
-const createOnboardingProviderValue = (): OnboardingContextState => {
+const createOnboardingProviderValue = (
+  completeOnboarding: () => void = () => {},
+): OnboardingContextState => {
   return {
     onboardingIsComplete: false,
-    completeOnboarding: () => {},
+    completeOnboarding,
     resetOnboarding: () => {},
   }
 }
