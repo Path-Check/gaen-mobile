@@ -29,18 +29,17 @@
     "start_title": "Responda preguntas sobre sus síntomas e historial médico para saber qué hacer a continuación sobre COVID-19"
   },
   "common": {
+    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Hecho",
+    "enable": "Habilitar",
     "next": "Siguiente"
   },
   "export": {
     "code_input_body_bluetooth": "Escriba el código de verificación proporcionado por {{name}} con el resultado de su prueba para verificar su diagnóstico.",
     "code_input_title_bluetooth": "Verifique su diagnóstico",
     "complete_body_bluetooth": "Al elegir compartir su estatus y notificar anónimamente a otros, está ayudando a contener la propagación del virus y a proteger a otros en su comunidad.",
-    "publish_consent_body_bluetooth": "Compartir su diagnóstico positivo es opcional y sólo puede hacerse con su consentimiento.\n\nSi decides hacerlo, estarás ayudando a otras personas de tu comunidad a tomar decisiones informadas sobre su salud y a desempeñar tu papel para contener la propagación del virus.\n\nLa única información que se compartirá será el conjunto aleatorio de números que tu teléfono intercambió por Bluetooth con otros teléfonos que estuvieron cerca durante los últimos 14 días, junto con una puntuación de riesgo ponderada basada en el momento en que se desarrollaron los síntomas.",
-    "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
-    "start_body_bluetooth": "Elija notificar anónimamente a otras personas que pueda haber encontrado y ayude a su comunidad a contener la propagación del virus.",
-    "start_title_bluetooth": "Ayude a contener la propagación del virus y a proteger a los demás en su comunidad si se le diagnostica o da positivo en la prueba de COVID-19."
+    "publish_consent_title_bluetooth": "Notifique a otros en su comunidad"
   },
   "exposure_history": {
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, tu teléfono usará Bluetooth para intercambiar y guardar cadenas de carácteres aleatorias (llamados IDs aleatorios/random IDs) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorias no te identificarán a tí personalmente con respecto a los otros usuarios y variarån muchas veces al día para proteger tu privacidad. La fecha y la duración del encuento serán grabadas así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
@@ -50,7 +49,6 @@
     "launch_enable_notif": "Permitir notificaciones",
     "launch_get_started": "Iniciar",
     "launch_screen1_header": "Bienvenido a PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
     "privacy_policy": "Política de privacidad"
   },
   "navigation": {

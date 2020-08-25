@@ -14,6 +14,7 @@
     "next": "Næste"
   },
   "common": {
+    "cancel": "Annullér",
     "continue": "Fortsæt",
     "done": "Udført",
     "next": "Udført"
@@ -21,7 +22,6 @@
   "label": {
     "launch_enable_notif": "Aktivér notifikationer",
     "launch_get_started": "Lad os komme i gang",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
     "privacy_policy": "Privatlivspolitik"
   },
   "screen_titles": {

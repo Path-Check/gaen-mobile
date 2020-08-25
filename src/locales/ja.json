@@ -7,12 +7,12 @@
     "next": "次へ進む"
   },
   "common": {
+    "cancel": "キャンセル",
     "next": "次へ進む"
   },
   "label": {
     "launch_enable_notif": "お知らせを有効にする",
-    "launch_get_started": "開始する",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_get_started": "開始する"
   },
   "screen_titles": {
     "about": "セーフパスについて",
