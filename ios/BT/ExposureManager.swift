@@ -244,7 +244,7 @@ final class ExposureManager: NSObject {
     All launch handlers must be registered before application finishes launching
    */
   @objc func registerBackgroundTask() {
-    _ = bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
                              using: .main) { [weak self] task in
       guard let strongSelf = self else { return }
       // Notify the user if bluetooth is off
@@ -369,7 +369,7 @@ final class ExposureManager: NSObject {
 
             // TODO: Fetch configuration from API
             let enConfiguration = ExposureConfiguration.placeholder.asENExposureConfiguration
-            _ = self.manager.detectExposures(configuration: enConfiguration,
+            self.manager.detectExposures(configuration: enConfiguration,
                                              diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
               if let error = error {
                 self.finish(.failure(error),
@@ -380,7 +380,7 @@ final class ExposureManager: NSObject {
                 return
               }
               let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-              _ = self.manager.getExposureInfo(summary: summary!,
+              self.manager.getExposureInfo(summary: summary!,
                                                userExplanation: userExplanation) { exposures, error in
                 if let error = error {
                   self.finish(.failure(error),
