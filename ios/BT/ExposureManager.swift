@@ -65,22 +65,19 @@ final class ExposureManager: NSObject {
   public let bgTaskScheduler: BackgroundTaskScheduler
   public let notificationCenter: NotificationCenter
   public let userNotificationCenter: UserNotificationCenter
-  public let keychainService: KeychainService
 
   init(exposureNotificationManager: ExposureNotificationManager = ENManager(),
        apiClient: APIClient = BTAPIClient.shared,
        btSecureStorage: BTSecureStorage = BTSecureStorage.shared,
        backgroundTaskScheduler: BackgroundTaskScheduler = BGTaskScheduler.shared,
        notificationCenter: NotificationCenter = NotificationCenter.default,
-       userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current(),
-       keychainService: KeychainService = DefaultKeychainService.shared) {
+       userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current()) {
     self.manager = exposureNotificationManager
     self.apiClient = apiClient
     self.btSecureStorage = btSecureStorage
     self.bgTaskScheduler = backgroundTaskScheduler
     self.notificationCenter = notificationCenter
     self.userNotificationCenter = userNotificationCenter
-    self.keychainService = keychainService
     super.init()
     self.manager.activate { [weak self] error in
       if error == nil {
@@ -196,47 +193,6 @@ final class ExposureManager: NSObject {
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
       (keys ?? []).map { $0.asDictionary }
     }, callback: callback)
-  }
-
-  @objc func getAndPostDiagnosisKeys(certificate: String,
-                                     HMACKey: String,
-                                     callback: @escaping (String?, ExposureManagerError?) -> Void) {
-    getDiagnosisKeys(transform: { (temporaryExposureKeys) -> [ENTemporaryExposureKey] in
-      let allKeys = (temporaryExposureKeys ?? [])
-      // Filter keys > 350 hrs old
-      return allKeys.current()
-    }) { [weak self] (currentKeys, error) in
-      guard let strongSelf = self else { return }
-      if let error = error {
-        return callback(nil, error)
-      }
-      guard let keysToSubmit = currentKeys, !keysToSubmit.isEmpty else {
-        let emError = ExposureManagerError(errorCode: .noExposureKeysFound,
-                                           localizedMessage: String.noLocalKeysFound.localized,
-                                           underlyingError: GenericError.unknown)
-        return callback(nil, emError)
-      }
-      let regionCodes = ReactNativeConfig.env(for: .regionCodes)!.regionCodes
-      let revisionToken = strongSelf.keychainService.revisionToken
-      strongSelf.apiClient.request(DiagnosisKeyListRequest.post(keysToSubmit.compactMap { $0.asCodableKey },
-                                                          regionCodes,
-                                                          certificate,
-                                                          HMACKey,
-                                                          revisionToken),
-                             requestType: .postKeys) { result in
-                                switch result {
-                                case .success(let response):
-                                  // Save revisionToken to use on subsequent key submission requests
-                                  strongSelf.keychainService.setRevisionToken(response.revisionToken ?? .default)
-                                  callback("Submitted: \(keysToSubmit.count) keys.", nil)
-                                case .failure(let error):
-                                  let emError = ExposureManagerError(errorCode: .networkFailure,
-                                                                     localizedMessage: error.localizedDescription,
-                                                                     underlyingError: error)
-                                  callback(nil, emError)
-                              }
-      }
-    }
   }
 
   /**

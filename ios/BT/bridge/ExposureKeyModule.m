@@ -27,25 +27,6 @@ RCT_REMAP_METHOD(fetchExposureKeys,
   }];
 }
 
-RCT_REMAP_METHOD(postDiagnosisKeys,
-                 certificate: (NSString *)certificate
-                 hmacKey: (NSString *)HMACKey
-                 resolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [[ExposureManager shared] getAndPostDiagnosisKeysWithCertificate:certificate
-                                                           HMACKey:HMACKey
-                                                          callback:^(NSString * _Nullable successMessage, ExposureManagerError * _Nullable error) {
-    if (error) {
-      reject(error.errorCode,
-             error.localizedMessage,
-             error.underlyingError);
-    } else {
-      resolve(successMessage);
-    }
-  }];
-}
-
 RCT_REMAP_METHOD(storeRevisionToken,
                  revisionToken: (NSString *)revisionToken
                  resolver:(RCTPromiseResolveBlock)resolve
