@@ -369,7 +369,7 @@ final class ExposureManager: NSObject {
 
             // TODO: Fetch configuration from API
             let enConfiguration = ExposureConfiguration.placeholder.asENExposureConfiguration
-            _ = self.manager.detectExposures(configuration: enConfiguration,
+            self.manager.detectExposures(configuration: enConfiguration,
                                              diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
               if let error = error {
                 self.finish(.failure(error),
@@ -380,7 +380,7 @@ final class ExposureManager: NSObject {
                 return
               }
               let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-              _ = self.manager.getExposureInfo(summary: summary!,
+              self.manager.getExposureInfo(summary: summary!,
                                                userExplanation: userExplanation) { exposures, error in
                 if let error = error {
                   self.finish(.failure(error),
