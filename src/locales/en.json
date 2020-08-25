@@ -33,12 +33,12 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
+    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
-    "share_cta_skip": "No thanks, I don't want to share data"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
   },
   "common": {
     "alert": "Alert",
@@ -65,9 +65,6 @@
     "description": "An error has ocurred. Please reload the app.",
     "reload": "Reload",
     "title": "Unknown Error"
-  },
-  "exoprt": {
-    "start_image_label": ""
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
@@ -104,7 +101,6 @@
       "wash_your_hands": "Wash your hands",
       "wear_a_mask": "Wear a mask"
     },
-    "no_connectivity_message": "You are not connected to the internet!",
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
       "seven_to_fourteen_days_ago": "7 to 14 days ago",
@@ -121,6 +117,7 @@
     "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth to swap and save random number strings (called random IDs) from any phones it is in close proximity to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "learn_more": "Learn More",
+    "no_connectivity_message": "You are not connected to the internet!",
     "no_exposure_reports": "No Exposure Reports",
     "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
     "possible_exposure": "Possible COVID-19 exposure",
@@ -164,8 +161,10 @@
     "launch_screen1_header": "Welcome to ",
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
-    "unchecked_checkbox": "Unchecked checkbox",
-    "unknown": "unknown"
+    "unchecked_checkbox": "Unchecked checkbox"
+  },
+  "more": {
+    "select_language": "Select language"
   },
   "navigation": {
     "exposure_history": "Exposure History",
@@ -197,6 +196,8 @@
       "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
+    "proximity_tracing_alert_body": "Your mobile device can securely collect and share random IDs with nearby devices. {{applicationName}} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with {{applicationName}}.",
+    "proximity_tracing_alert_header": "Enable Proximity Tracing from \"{{applicationName}}\"?",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_button": "Activate Proximity Tracing",
@@ -204,8 +205,6 @@
     "proximity_tracing_subheader1": "How does it work?",
     "proximity_tracing_subheader2": "Is my data secure?",
     "proximity_tracing_subheader3": "This app does not protect you from COVID-19 infection.",
-    "proximity_tracing_alert_header": "Enable Proximity Tracing from \"{{applicationName}}\"?",
-    "proximity_tracing_alert_body": "Your mobile device can securely collect and share random IDs with nearby devices. {{applicationName}} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with {{applicationName}}.",
     "screen_5_button": "Get started",
     "screen1_button": "How does it work?",
     "screen1_header": "Together, we can slow the spread of COVID-19.",
@@ -237,12 +236,9 @@
   "screen_titles": {
     "about": "About",
     "debug": "Debug",
-    "exposures": "Exposures",
     "exposure_history": "Exposure History",
+    "exposures": "Exposures",
     "legal": "Legal",
     "report_issue": "Report an Issue"
-  },
-  "more": {
-    "select_language": "Select language"
   }
 }

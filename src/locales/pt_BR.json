@@ -12,6 +12,7 @@
     "next": "Próximo"
   },
   "common": {
+    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Feito",
     "next": "Feito"
@@ -20,9 +21,7 @@
     "launch_enable_notif": "Permitir Notificações",
     "launch_get_started": "Começar",
     "launch_screen1_header": "Bem-vindo ao PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
-    "privacy_policy": "Política de Privacidade",
-    "unknown": "desconhecido"
+    "privacy_policy": "Política de Privacidade"
   },
   "screen_titles": {
     "about": "Sobre",

@@ -32,8 +32,10 @@
     "start_title": "Sagutin ang mga tanong tungkol sa iyong mga sintomas at medical history upang malaman ang susunod na hakbang na gagawin hinggil sa COVID-19"
   },
   "common": {
+    "cancel": "Kanselahin",
     "continue": "Ituloy",
     "done": "Tapos",
+    "enable": "Paganahin",
     "next": "Sa susunod",
     "something_went_wrong": "May maling nangyari",
     "start": "Simula"
@@ -44,10 +46,7 @@
     "complete_body_bluetooth": "Ang pagpiling pribadong ipamahagi ang iyong istado at ipagbigay-alam sa iba ay makakatulong sa pagpigil ng paglaganap ng virus at protektahan ang mga mamamayan sa iyong kumunidad.",
     "complete_title": "Salamat sa iyong pagpapanatili na ligtas ang iyong komunidad!",
     "consent_button_title": "Naiintindihan ko at sumasangayon ako",
-    "publish_consent_body_bluetooth": "Ang pagbigay-alam ng iyong positibong pagsusuri ay opsyonal at pwede lamang magawa kasama ng iyong pahintulot.\n\nKung pipiliin mong gawin ito, tumutulong ka sa mga mamamayan sa iyong kumunidad na gumawa ng may kaalamang desisyon tungkol sa kanilang kalusugan at ikaw ay tatayo bilang parte sa pagpigil ng pagkalat ng virus.\n\nAng tanging impormasyon na ibabahagi ay mga random na numbero sa iyong cellphone na nagpalitan sa pamamagitan ng Bluetooth sa ibang kalapitang cellphone sa loob ng 14 na araw, kasama ng weighted risk score na base sa oras kung kailan simula kang nakaranas ng mga sintomas.",
-    "publish_consent_title_bluetooth": "Ipagbigay alam sa iyong kumunidad",
-    "start_body_bluetooth": "Piliing manatiling anonimo o hindi magpakilala habang pinagbibigay alam na maaring nahawa o nakasalamuha ang mayroon virus at tulungan ay iyong kumunidad na pigilan ang paglaganap ng virus.",
-    "start_title_bluetooth": "Tulungang pigilan ang paglaganap ng virus at protektakan ang mamamayan sa iyong kumunidad kung ikaw ay nasuri na o pumositibo sa COVID-19."
+    "publish_consent_title_bluetooth": "Ipagbigay alam sa iyong kumunidad"
   },
   "exposure_history": {
     "how_does_this_work": "Paano ito gumagana?",
@@ -64,13 +63,10 @@
     }
   },
   "label": {
-    "about_para": "Ang app ng PathCheck ay ginawang magagamit ng PathCheck Foundation, ay isang samahang walang-kitang na nakatuon sa pagbibigay ng libreng software upang makatulong na mapigilan ang pagkalat ng COVID-19 at protektahan ang privacy ng mga indibidwal.\n\nPara sa karagdagang impormasyon, bisitahin ang",
     "launch_enable_notif": "Paganahin ang mga Abiso o Notifications",
     "launch_get_started": "Simulan",
     "launch_screen1_header": "Maligayang Pagdating sa PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
-    "privacy_policy": "Patakaran sa Pagkapribado",
-    "unknown": "Hindi Alam"
+    "privacy_policy": "Patakaran sa Pagkapribado"
   },
   "navigation": {
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",

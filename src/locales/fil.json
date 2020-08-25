@@ -7,13 +7,13 @@
     "next": "Susunod"
   },
   "common": {
+    "cancel": "Magkansela",
     "continue": "Ituloy",
     "next": "Susunod"
   },
   "label": {
     "launch_enable_notif": "Paganahin ang notipikasyon",
-    "launch_get_started": "Magsimula",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_get_started": "Magsimula"
   },
   "screen_titles": {
     "about": "Tungkol",
