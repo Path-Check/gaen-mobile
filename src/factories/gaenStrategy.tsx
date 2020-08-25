@@ -1,8 +1,8 @@
 import { Factory } from "fishery"
 
-import { TracingStrategy } from "../tracingStrategy"
+import { GaenStrategy } from "../gaen"
 
-export default Factory.define<TracingStrategy>(() => ({
+export default Factory.define<GaenStrategy>(() => ({
   exposureEventsStrategy: {
     exposureInfoSubscription: () => {
       return { remove: () => {} }

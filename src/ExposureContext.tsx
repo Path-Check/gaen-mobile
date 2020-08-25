@@ -129,7 +129,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
 const useExposureContext = (): ExposureState => {
   const context = useContext(ExposureContext)
   if (context === undefined) {
-    throw new Error("TracingStrategyContext must be used with a provider")
+    throw new Error("ExposureContext must be used with a provider")
   }
   return context
 }

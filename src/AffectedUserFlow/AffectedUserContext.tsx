@@ -52,7 +52,7 @@ export const AffectedUserProvider = ({
 export const useAffectedUserContext = (): AffectedUserContextState => {
   const context = useContext(AffectedUserContext)
   if (context === undefined) {
-    throw new Error("TracingStrategyContext must be used with a provider")
+    throw new Error("AffectedUserContext must be used with a provider")
   }
   return context
 }
