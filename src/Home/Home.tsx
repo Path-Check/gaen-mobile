@@ -16,7 +16,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
-import env from "react-native-config"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
@@ -36,6 +35,7 @@ import {
   Iconography,
 } from "../styles"
 import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const HomeScreen: FunctionComponent = () => {
   const {
@@ -49,6 +49,7 @@ const HomeScreen: FunctionComponent = () => {
   const insets = useSafeAreaInsets()
   useStatusBarEffect("light-content")
   const btStatus = useBluetoothStatus()
+  const configuration = useConfigurationContext()
 
   const isAuthorized = exposureNotifications.status.authorized
   const isEnabled = exposureNotifications.status.enabled
@@ -60,8 +61,29 @@ const HomeScreen: FunctionComponent = () => {
       t("home.bluetooth.unauthorized_error_message"),
       [
         {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
           text: t("common.settings"),
           onPress: () => Linking.openSettings(),
+        },
+      ],
+    )
+  }
+
+  const showEnableProximityTracingAlert = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: exposureNotifications.request,
         },
       ],
     )
@@ -80,17 +102,11 @@ const HomeScreen: FunctionComponent = () => {
   }
 
   const handleOnPressShare = async () => {
-    const isIOS = Platform.OS === "ios"
-
-    const appDownloadLink = isIOS
-      ? env.IOS_APP_STORE_URL
-      : env.ANDROID_PLAY_STORE_URL
-
     try {
       await Share.share({
         message: t("home.bluetooth.share_message", {
           applicationName,
-          appDownloadLink,
+          appDownloadLink: configuration.appDownloadLink,
         }),
       })
     } catch (error) {
@@ -98,15 +114,15 @@ const HomeScreen: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressBluetooth = () => {
+  const handleOnPressFixBluetooth = () => {
     showBluetoothDisabledAlert()
   }
 
-  const handleOnPressProximityTracing = () => {
-    if (isAuthorized) {
-      exposureNotifications.request()
-    } else if (isPlatformiOS()) {
+  const handleOnPressFixProximityTracing = () => {
+    if (!isAuthorized && isPlatformiOS()) {
       showUnauthorizedAlert()
+    } else {
+      showEnableProximityTracingAlert()
     }
   }
 
@@ -184,6 +200,7 @@ const HomeScreen: FunctionComponent = () => {
           <TouchableOpacity
             style={style.shareContainer}
             onPress={handleOnPressShare}
+            accessibilityLabel={t("home.bluetooth.share")}
           >
             <View style={style.shareImageContainer}>
               <Image source={Images.HugEmoji} style={style.shareImage} />
@@ -206,7 +223,7 @@ const HomeScreen: FunctionComponent = () => {
               headerText={t("home.bluetooth.bluetooth_header")}
               isActive={isBluetoothOn}
               infoAction={() => navigation.navigate(HomeScreens.BluetoothInfo)}
-              fixAction={handleOnPressBluetooth}
+              fixAction={handleOnPressFixBluetooth}
               testID={"home-bluetooth-status-container"}
             />
             <ActivationStatusSection
@@ -215,7 +232,7 @@ const HomeScreen: FunctionComponent = () => {
               infoAction={() =>
                 navigation.navigate(HomeScreens.ProximityTracingInfo)
               }
-              fixAction={handleOnPressProximityTracing}
+              fixAction={handleOnPressFixProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
           </View>
@@ -276,8 +293,8 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
         {isActive ? (
           <SvgXml xml={Icons.HomeInfo} />
         ) : (
-          <View style={style.fixContainer}>
-            <GlobalText style={style.fixText}>
+          <View style={style.fixButtonContainer}>
+            <GlobalText style={style.fixButtonText}>
               {t("home.bluetooth.fix")}
             </GlobalText>
           </View>
@@ -286,7 +303,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
     </TouchableOpacity>
   )
 }
-const activationStatusRightWidth = 60
+const activationStatusRightWidth = 70
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -307,9 +324,8 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
   languageButtonText: {
-    ...Typography.base,
-    fontSize: Typography.xSmall,
-    letterSpacing: Typography.largeLetterSpacing,
+    ...Typography.body3,
+    letterSpacing: Typography.xLargeLetterSpacing,
     color: Colors.primary150,
     textAlign: "center",
     textTransform: "uppercase",
@@ -327,7 +343,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.body1,
+    fontSize: Typography.large,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -397,25 +414,25 @@ const style = StyleSheet.create({
     width: activationStatusRightWidth,
     alignItems: "center",
   },
-  fixContainer: {
+  fixButtonContainer: {
     alignItems: "center",
-    backgroundColor: Colors.danger75,
+    backgroundColor: Colors.secondary50,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,
   },
-  fixText: {
-    ...Typography.base,
-    ...Typography.bold,
-    fontSize: Typography.medium,
-    color: Colors.white,
+  fixButtonText: {
+    ...Typography.header4,
+    color: Colors.primary100,
+    textTransform: "uppercase",
   },
   bottomHeaderText: {
     ...Typography.header4,
     marginBottom: Spacing.xxxSmall,
   },
   bottomBodyText: {
-    ...Typography.secondaryContent,
+    ...Typography.header6,
+    color: Colors.neutral100,
   },
   buttonContainer: {
     paddingHorizontal: Spacing.small,

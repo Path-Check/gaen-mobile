@@ -7,13 +7,13 @@
     "next": "Selanjutnya"
   },
   "common": {
+    "cancel": "Batal",
     "next": "Selanjutnya"
   },
   "label": {
     "launch_enable_notif": "Aktifkan Notifikasi",
     "launch_get_started": "Mulai",
-    "launch_screen1_header": "Selamat datang di PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_screen1_header": "Selamat datang di PathCheck"
   },
   "screen_titles": {
     "about": "Tentang",

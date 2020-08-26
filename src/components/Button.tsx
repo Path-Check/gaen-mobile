@@ -22,7 +22,6 @@ interface ButtonProps {
   disabled?: boolean
   customButtonStyle?: ViewStyle
   customTextStyle?: TextStyle
-  invert?: boolean
   testID?: string
   hasRightArrow?: boolean
 }
@@ -34,18 +33,13 @@ export const Button: FunctionComponent<ButtonProps> = ({
   loading,
   customButtonStyle,
   customTextStyle,
-  invert,
   testID,
   hasRightArrow,
 }) => {
   const { t } = useTranslation()
 
   const determineGradient = (): string[] => {
-    if (invert && (disabled || loading)) {
-      return Colors.gradientNeutral75
-    } else if (invert && !(disabled || loading)) {
-      return Colors.gradientPrimary10
-    } else if (!invert && (disabled || loading)) {
+    if (disabled || loading) {
       return [Colors.secondary75, Colors.secondary75]
     } else {
       return Colors.gradientPrimary110
@@ -53,11 +47,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   }
 
   const determineTextStyle = (): TextStyle => {
-    if (invert && (disabled || loading)) {
-      return style.textInvertedDisabled
-    } else if (invert && !(disabled || loading)) {
-      return style.textInverted
-    } else if (!invert && (disabled || loading)) {
+    if (disabled || loading) {
       return style.textDisabled
     } else {
       return style.text
@@ -94,10 +84,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
       style={buttonContainerStyle}
     >
       <LinearGradient
-        start={{ x: 0.2, y: 0.85 }}
-        end={{ x: 0.4, y: 0 }}
         colors={determineGradient()}
         style={buttonStyle}
+        useAngle
+        angle={213.69}
+        angleCenter={{ x: 0.5, y: 0.5 }}
       >
         {loading ? (
           <ActivityIndicator size={"large"} />
@@ -133,19 +124,11 @@ const style = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    ...Typography.buttonPrimaryText,
-  },
-  textInverted: {
-    textAlign: "center",
-    ...Typography.buttonPrimaryInvertedText,
+    ...Typography.buttonPrimary,
   },
   textDisabled: {
     textAlign: "center",
-    ...Typography.buttonPrimaryDisabledText,
-  },
-  textInvertedDisabled: {
-    textAlign: "center",
-    ...Typography.buttonPrimaryInvertedDisabledText,
+    ...Typography.buttonPrimaryDisabled,
   },
   rightArrow: {
     marginLeft: Spacing.medium,

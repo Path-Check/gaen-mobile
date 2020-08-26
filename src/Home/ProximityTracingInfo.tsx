@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, TouchableOpacity, View, StyleSheet } from "react-native"
+import {
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+} from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -7,9 +13,9 @@ import { useNavigation } from "@react-navigation/native"
 import { GlobalText } from "../components/GlobalText"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
-import { Icons } from "../assets"
+import { Icons, Images } from "../assets"
 
-const BluetoothInfo: FunctionComponent = () => {
+const ProximityTracingInfo: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
@@ -19,6 +25,7 @@ const BluetoothInfo: FunctionComponent = () => {
         <GlobalText style={style.headerText}>
           {t("home.proximity_tracing_info_header")}
         </GlobalText>
+        <Image source={Images.PersonOnComputer} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -54,7 +61,7 @@ const BluetoothInfo: FunctionComponent = () => {
   )
 }
 
-const headerHeight = 70
+const headerHeight = 180
 
 const style = StyleSheet.create({
   container: {
@@ -65,22 +72,29 @@ const style = StyleSheet.create({
   headerContainer: {
     position: "absolute",
     width: "100%",
+    height: headerHeight,
     flexDirection: "row",
+    alignItems: "flex-end",
     justifyContent: "space-between",
     backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
-    height: headerHeight,
   },
   headerText: {
     flex: 10,
-    ...Typography.header3,
-    paddingVertical: Spacing.medium,
+    ...Typography.header2,
     paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xLarge,
     color: Colors.primary125,
   },
+  headerImage: {
+    width: 130,
+    height: 100,
+    resizeMode: "cover",
+  },
   closeIconContainer: {
-    flex: 1,
-    alignItems: "flex-end",
+    position: "absolute",
+    right: 0,
+    top: 0,
     padding: Spacing.medium,
   },
   mainContentContainer: {
@@ -92,14 +106,15 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheaderText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     ...Typography.mediumBold,
     color: Colors.primaryText,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
 })
-export default BluetoothInfo
+
+export default ProximityTracingInfo

@@ -18,12 +18,11 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import androidx.annotation.Nullable;
-
 import com.google.android.gms.common.internal.Objects;
 import com.google.auto.value.AutoValue;
 import com.google.common.io.BaseEncoding;
-
 import java.util.Arrays;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A carrier of diagnosis key into and out of the network operations.
@@ -52,8 +51,11 @@ public abstract class DiagnosisKey {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setKey(ByteArrayValue key);
+
     public abstract Builder setIntervalNumber(int intervalNumber);
+
     public abstract Builder setRollingPeriod(int rollingPeriod);
+
     public abstract DiagnosisKey build();
 
     public Builder setKeyBytes(byte[] keyBytes) {
@@ -62,6 +64,7 @@ public abstract class DiagnosisKey {
     }
   }
 
+  @NotNull
   public String toString() {
     return Objects.toStringHelper(this)
         .add("key:hex", "[" + BASE16.encode(getKeyBytes()) + "]")
@@ -99,6 +102,7 @@ public abstract class DiagnosisKey {
       return Arrays.hashCode(bytes);
     }
 
+    @NotNull
     @Override
     public String toString() {
       return Arrays.toString(bytes);

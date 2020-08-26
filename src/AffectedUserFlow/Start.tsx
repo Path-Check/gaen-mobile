@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { TouchableOpacity, StyleSheet, View, Image } from "react-native"
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -27,7 +33,11 @@ export const ExportIntro: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.container}>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
       <View style={style.cancelButtonContainer}>
         <TouchableOpacity
           onPress={handleOnPressCancel}
@@ -60,7 +70,7 @@ export const ExportIntro: FunctionComponent = () => {
           hasRightArrow
         />
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -71,10 +81,13 @@ const style = StyleSheet.create({
     paddingTop: Spacing.huge,
     backgroundColor: Colors.primaryLightBackground,
   },
+  contentContainer: {
+    paddingBottom: 80,
+  },
   cancelButtonContainer: {
     position: "absolute",
-    top: Layout.oneTwentiethHeight,
-    right: Spacing.xxSmall,
+    top: Spacing.xxxSmall,
+    right: Spacing.xxxSmall,
     zIndex: Layout.zLevel1,
   },
   cancelButtonInnerContainer: {

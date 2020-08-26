@@ -20,12 +20,10 @@ package org.pathcheck.covidsafepaths.exposurenotifications.common;
 import android.os.Process;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
-
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.ListeningScheduledExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
@@ -86,19 +84,19 @@ public final class AppExecutors {
   }
 
   private static ListeningExecutorService createFixed(
-          String name, int count, int priority, StrictMode.ThreadPolicy policy) {
+      String name, int count, int priority, StrictMode.ThreadPolicy policy) {
     return MoreExecutors.listeningDecorator(
         Executors.newFixedThreadPool(count, createThreadFactory(name, priority, policy)));
   }
 
   private static ListeningScheduledExecutorService createScheduled(
-          String name, int minCount, int priority, StrictMode.ThreadPolicy policy) {
+      String name, int minCount, int priority, StrictMode.ThreadPolicy policy) {
     return MoreExecutors.listeningDecorator(
         Executors.newScheduledThreadPool(minCount, createThreadFactory(name, priority, policy)));
   }
 
   private static ThreadFactory createThreadFactory(
-          String name, int priority, StrictMode.ThreadPolicy policy) {
+      String name, int priority, StrictMode.ThreadPolicy policy) {
     return new ThreadFactoryBuilder()
         .setDaemon(true)
         .setNameFormat(name + " #%d")

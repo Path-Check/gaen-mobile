@@ -18,14 +18,13 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.network;
 
 import android.net.Uri;
-
 import com.google.auto.value.AutoValue;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A carrier for {@link Uri}s and {@link File}s associated with a given region (server) and batch.
@@ -91,6 +90,7 @@ public abstract class KeyFileBatch {
     return new AutoValue_KeyFileBatch(region(), batchNum(), ImmutableList.copyOf(files), uris());
   }
 
+  @NotNull
   public String toString() {
     return MoreObjects.toStringHelper(KeyFileBatch.class)
         .add("region", region())

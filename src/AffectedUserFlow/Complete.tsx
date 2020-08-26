@@ -48,12 +48,12 @@ const style = StyleSheet.create({
     resizeMode: "cover",
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header1,
     textAlign: "center",
     marginBottom: Spacing.medium,
   },
   contentText: {
-    ...Typography.secondaryContent,
+    ...Typography.body2,
     textAlign: "center",
     marginBottom: Spacing.xxxLarge,
   },

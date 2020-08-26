@@ -17,7 +17,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
 
   useEffect(() => {
     getCurrentExposures()
-  }, [])
+  }, [getCurrentExposures])
 
   return (
     <>
@@ -54,7 +54,7 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral75,
   },
   itemText: {
-    ...Typography.tertiaryContent,
+    ...Typography.body1,
     padding: Spacing.xSmall,
     maxWidth: "90%",
   },

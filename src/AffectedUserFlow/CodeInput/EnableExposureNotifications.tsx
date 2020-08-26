@@ -87,7 +87,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheader: {
-    ...Typography.secondaryContent,
+    ...Typography.body2,
   },
   buttonContainer: {
     alignSelf: "flex-start",

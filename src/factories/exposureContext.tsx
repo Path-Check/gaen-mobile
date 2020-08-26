@@ -9,6 +9,7 @@ export default Factory.define<ExposureState>(() => ({
   resetExposures: (): void => {},
   getCurrentExposures: (): void => {},
   getExposureKeys: () => Promise.resolve([]),
-  submitDiagnosisKeys: () => Promise.resolve(""),
   lastExposureDetectionDate: null,
+  storeRevisionToken: (_revisionToken: string) => Promise.resolve(),
+  getRevisionToken: () => Promise.resolve(""),
 }))

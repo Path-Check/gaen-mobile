@@ -38,15 +38,20 @@ def fetch_env
   puts "...fetching .env for #{HA_LABEL}"
 
   dev_env_source = ".env.bt"
+  staging_env_source = ".env.bt.staging"
   release_env_source = ".env.bt.release"
 
   dev_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
 
+  staging_env_url =
+  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.staging"
+
   release_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.release"
 
   fetch_and_write_file(dev_env_source, dev_env_url)
+  fetch_and_write_file(staging_env_source, staging_env_url)
   fetch_and_write_file(release_env_source, release_env_url)
 
   puts "finished fetching .env for #{HA_LABEL}"

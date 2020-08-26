@@ -10,15 +10,23 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(getCurrentExposures: (RCTResponseSenderBlock)callback) {
-  callback(@[[[ExposureManager shared] currentExposures]]);
+RCT_REMAP_METHOD(getCurrentExposures,
+                 getCurrentExposuresWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject) {
+  resolve([[ExposureManager shared] currentExposures]);
 }
 
 RCT_REMAP_METHOD(fetchLastDetectionDate,
                  fetchLastDetectionDateWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[ExposureManager shared] fetchLastDetectionDateWithResolve:resolve reject:reject];
+  [[ExposureManager shared] fetchLastDetectionDateWithCallback:^(NSNumber * _Nullable posixRepresentation, ExposureManagerError * _Nullable error) {
+    if (error) {
+      reject(error.errorCode, error.localizedMessage, error.underlyingError);
+    } else {
+      resolve(posixRepresentation);
+    }
+  }];
 }
 
 @end

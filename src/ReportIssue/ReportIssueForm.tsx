@@ -233,8 +233,7 @@ const style = StyleSheet.create({
     borderWidth: Outlines.hairline,
   },
   errorText: {
-    ...Typography.mainContent,
-    color: Colors.danger100,
+    ...Typography.error,
     marginLeft: Spacing.small,
   },
   textInputsContainer: {
@@ -244,16 +243,16 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   inputLabel: {
-    ...Typography.label,
+    ...Typography.formInputLabel,
     paddingBottom: Spacing.xxSmall,
   },
   textInput: {
     ...Forms.textInputFormField,
-    ...Typography.secondaryTextInput,
+    ...Typography.formInputText,
   },
   descriptionInput: {
     ...Forms.textInputFormField,
-    ...Typography.secondaryTextInput,
+    ...Typography.formInputText,
     minHeight: 5 * Typography.largeLineHeight,
   },
   activityIndicatorContainer: {

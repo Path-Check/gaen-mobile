@@ -103,14 +103,15 @@ const ActivationStack: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   headerTitle: {
-    ...Typography.base,
+    ...Typography.header4,
+    color: Colors.neutral100,
   },
   headerRight: {
     flexDirection: "row",
     alignItems: "center",
   },
   headerRightText: {
-    ...Typography.base,
+    ...Typography.body1,
     color: Colors.neutral100,
   },
   closeIcon: {

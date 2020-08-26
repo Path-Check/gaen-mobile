@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
   Platform,
+  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -12,6 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
+import { useApplicationName } from "../More/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
@@ -21,7 +23,7 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-
+  const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
   const { exposureNotifications } = usePermissionsContext()
 
@@ -40,6 +42,23 @@ const ActivateProximityTracing: FunctionComponent = () => {
     } else {
       completeOnboarding()
     }
+  }
+
+  const handleOnPressActivateProximityTracing = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: handleOnPressEnable,
+        },
+      ],
+    )
   }
 
   return (
@@ -71,7 +90,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
         </View>
         <View style={style.buttonsContainer}>
           <Button
-            onPress={handleOnPressEnable}
+            onPress={handleOnPressActivateProximityTracing}
             label={t("onboarding.proximity_tracing_button")}
           />
           <TouchableOpacity
@@ -103,15 +122,15 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header1,
     marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.header5,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.xxLarge,
   },
   buttonsContainer: {
@@ -121,7 +140,7 @@ const style = StyleSheet.create({
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondaryText,
+    ...Typography.buttonSecondary,
   },
 })
 

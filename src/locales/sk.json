@@ -12,8 +12,10 @@
     "next": "Ďalej"
   },
   "common": {
+    "cancel": "Ukončiť",
     "continue": "Pokračovať",
     "done": "Hotovo",
+    "enable": "Povoliť",
     "next": "Hotovo"
   },
   "exposure_history": {
@@ -22,8 +24,7 @@
   },
   "label": {
     "launch_enable_notif": "Umožniť upozornenia",
-    "launch_get_started": "Začať",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_get_started": "Začať"
   },
   "navigation": {
     "exposure_history": "História vystavenia sa riziku"

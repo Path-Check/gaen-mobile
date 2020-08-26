@@ -1,5 +1,5 @@
 import React from "react"
-import { Alert } from "react-native"
+import { Alert, Share } from "react-native"
 import {
   render,
   waitFor,
@@ -18,6 +18,8 @@ import {
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "./useBluetoothStatus"
+import { factories } from "../factories"
+import { ConfigurationContext } from "../ConfigurationContext"
 
 jest.mock("@react-navigation/native")
 
@@ -40,6 +42,32 @@ jest.mock("../More/useApplicationInfo", () => {
 jest.mock("./useBluetoothStatus.ts")
 
 describe("Home", () => {
+  it("allows users to share the application", () => {
+    const configuration = factories.configurationContext.build()
+    const permissionProviderValue = createPermissionProviderValue({
+      authorized: true,
+      enabled: true,
+    })
+
+    const shareSpy = jest.spyOn(Share, "share")
+
+    const { getByLabelText } = render(
+      <ConfigurationContext.Provider value={configuration}>
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>
+      </ConfigurationContext.Provider>,
+    )
+
+    fireEvent.press(
+      getByLabelText("Share the app and help protect yourself and others."),
+    )
+
+    expect(shareSpy).toHaveBeenCalledWith({
+      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadLink}`,
+    })
+  })
+
   describe("When the exposure notification permissions are enabled and the app is authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
       const isBluetoothOn = true
@@ -228,17 +256,15 @@ describe("Home", () => {
 
   describe("When proximity tracing is disabled", () => {
     describe("when exposure notification permissions are authorized but not enabled", () => {
-      it("requests exposure notification to be enabled", async () => {
+      it("shows an enable proximity tracing alert", async () => {
         expect.assertions(1)
 
-        const requestPermission = jest.fn()
         const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
           authorized: true,
           enabled: false,
         }
         const permissionProviderValue = createPermissionProviderValue(
           isENAuthorizedAndEnabled,
-          requestPermission,
         )
 
         const { getByTestId } = render(
@@ -251,9 +277,20 @@ describe("Home", () => {
           "home-proximity-tracing-status-container",
         )
 
+        const alert = jest.spyOn(Alert, "alert")
+
         fireEvent.press(fixProximityTracingButton)
         await waitFor(() => {
-          expect(requestPermission).toHaveBeenCalled()
+          expect(
+            alert,
+          ).toHaveBeenCalledWith(
+            `Enable Proximity Tracing from "${mockedApplicationName}"?`,
+            `Your mobile device can securely collect and share random IDs with nearby devices. ${mockedApplicationName} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with ${mockedApplicationName}.`,
+            [
+              expect.objectContaining({ text: "Cancel" }),
+              expect.objectContaining({ text: "Enable" }),
+            ],
+          )
         })
       })
     })
@@ -322,7 +359,10 @@ describe("Home", () => {
             expect(alert).toHaveBeenCalledWith(
               "Authorize in Settings",
               "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
-              [expect.objectContaining({ text: "Open Settings" })],
+              [
+                expect.objectContaining({ text: "Back" }),
+                expect.objectContaining({ text: "Open Settings" }),
+              ],
             )
           })
         })

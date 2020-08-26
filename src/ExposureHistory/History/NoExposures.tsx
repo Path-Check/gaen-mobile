@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import env from "react-native-config"
 import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
@@ -7,11 +6,8 @@ import { useTranslation } from "react-i18next"
 import { GlobalText } from "../../components/GlobalText"
 import { Colors, Typography, Spacing, Outlines } from "../../styles"
 import { Icons } from "../../assets"
+import { useConfigurationContext } from "../../ConfigurationContext"
 
-const {
-  GAEN_AUTHORITY_NAME: healthAuthorityName,
-  AUTHORITY_ADVICE_URL: healthAuthorityLink,
-} = env
 const NoExposures: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
@@ -31,8 +27,13 @@ const NoExposures: FunctionComponent = () => {
 
 const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
+  const {
+    healthAuthorityName,
+    healthAuthorityAdviceUrl,
+  } = useConfigurationContext()
+
   const handleOnPressHALink = () => {
-    Linking.openURL(healthAuthorityLink)
+    Linking.openURL(healthAuthorityAdviceUrl)
   }
 
   return (
@@ -40,7 +41,7 @@ const HealthGuidelines: FunctionComponent = () => {
       <GlobalText style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
       </GlobalText>
-      {Boolean(healthAuthorityLink) && (
+      {Boolean(healthAuthorityAdviceUrl) && (
         <>
           <GlobalText style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {
@@ -111,29 +112,28 @@ const style = StyleSheet.create({
     padding: Spacing.large,
   },
   headerText: {
-    ...Typography.mainContent,
-    ...Typography.bold,
+    ...Typography.header5,
     paddingBottom: Spacing.xxxSmall,
     color: Colors.white,
   },
   subheaderText: {
-    ...Typography.description,
-    color: Colors.white,
+    ...Typography.body1,
+    color: Colors.secondary10,
   },
   card: {
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
     ...Outlines.roundedBorder,
     borderColor: Colors.white,
     padding: Spacing.large,
     marginTop: Spacing.large,
   },
   cardHeaderText: {
-    ...Typography.header6,
+    ...Typography.header3,
     paddingBottom: Spacing.xSmall,
   },
   cardSubheaderText: {
-    ...Typography.description,
-    paddingBottom: Spacing.xSmall,
+    ...Typography.body2,
+    paddingBottom: Spacing.large,
   },
   learnMoreCtaContainer: {
     flexDirection: "row",
@@ -141,15 +141,15 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   learnMoreCta: {
+    ...Typography.buttonSecondary,
     color: Colors.primary125,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
   },
   listHeading: {
-    ...Typography.mainContent,
-    ...Typography.bold,
-    paddingBottom: Spacing.large,
+    ...Typography.header5,
+    paddingBottom: Spacing.medium,
   },
   listItem: {
     display: "flex",
@@ -161,7 +161,7 @@ const style = StyleSheet.create({
     width: Spacing.huge,
   },
   listItemText: {
-    color: Colors.neutral100,
+    ...Typography.body2,
   },
 })
 

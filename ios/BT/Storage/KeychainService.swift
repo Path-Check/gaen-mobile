@@ -1,16 +1,23 @@
 import KeychainAccess
 
-final class KeychainService {
+protocol KeychainService {
 
-  static let shared = KeychainService()
+  func setRevisionToken(_ token: String)
+  var revisionToken: String { get }
+}
 
-  private lazy var keychain = Keychain(service: "\(Bundle.main.bundleIdentifier!).keychainService")
+@objc(DefaultKeychainService)
+final class DefaultKeychainService: NSObject, KeychainService {
+
+  @objc static let shared = DefaultKeychainService()
+
+  private lazy var keychain = Keychain(service: ReactNativeConfig.env(for: .postKeysUrl))
 
   private var isDev: Bool {
     ReactNativeConfig.env(for: .dev) != nil
   }
 
-  func setRevisionToken(_ token: String) {
+  @objc func setRevisionToken(_ token: String) {
     if isDev {
       keychain[String.revisionTokenDev] = token
     } else {
@@ -18,7 +25,7 @@ final class KeychainService {
     }
   }
 
-  var revisionToken: String {
+  @objc var revisionToken: String {
     return (isDev ? keychain[String.revisionTokenDev] : keychain[String.revisionToken]) ?? .default
   }
 

@@ -7,12 +7,12 @@
     "next": "Înainte"
   },
   "common": {
+    "cancel": "Anulează",
     "next": "Înainte"
   },
   "label": {
     "launch_enable_notif": "Permite Notificari",
-    "launch_get_started": "Începe",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_get_started": "Începe"
   },
   "screen_titles": {
     "about": "Despre",

@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import SplashScreen from "react-native-splash-screen"
 import "array-flat-polyfill"
 import env from "react-native-config"
+import Bugsnag from "@bugsnag/react-native"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
@@ -10,8 +11,11 @@ import {
   OnboardingProvider,
   onboardingHasBeenCompleted,
 } from "./src/OnboardingContext"
+import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
+
+Bugsnag.start()
 
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -36,13 +40,17 @@ const App: FunctionComponent = () => {
     <>
       {!isLoading ? (
         <ErrorBoundary>
-          <OnboardingProvider userHasCompletedOboarding={onboardingIsComplete}>
-            <PermissionsProvider>
-              <ExposureProvider>
-                <MainNavigator />
-              </ExposureProvider>
-            </PermissionsProvider>
-          </OnboardingProvider>
+          <ConfigurationProvider>
+            <OnboardingProvider
+              userHasCompletedOboarding={onboardingIsComplete}
+            >
+              <PermissionsProvider>
+                <ExposureProvider>
+                  <MainNavigator />
+                </ExposureProvider>
+              </PermissionsProvider>
+            </OnboardingProvider>
+          </ConfigurationProvider>
         </ErrorBoundary>
       ) : null}
     </>

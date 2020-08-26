@@ -153,6 +153,10 @@ If you get a `require: cannot load such file -- dotenv (LoadError)` error, run:
 ```
 gem install dotenv
 ```
+Linting checks are running automatically on CI, to run those checks locally before pushing your code do:
+```
+yarn lint:android
+```
 **Testing:**
 - To use the EN APIs on Android the Google account on your Android device must be approved. Reach out to the PatchCheck contacts at Google to get added to the list.
 - To provide dianogisis keys to the API the applicationId should be whitelisted, you can skip that verification step by checking `Settings > Google > COVID-19 Exposure Notifications >  Debug mode > Bypass app signature check`
@@ -224,6 +228,23 @@ This project is using [eslint](https://eslint.org/docs/user-guide/getting-starte
 
 We have linting checks on CI, please make sure to include the checks locally in
 your IDE.
+
+### Checkstyle
+
+This project is using [checkstyle](https://checkstyle.sourceforge.io/) to run linting checks for Java files (Android).
+
+We are using [Google's checkstyle](https://github.com/checkstyle/checkstyle/blob/checkstyle-8.35/src/main/resources/google_checks.xml) with some minor differences.
+
+To apply the code style to Android Studio you can follow these steps:
+1. Install CheckStyle-IDEA plugin (http://plugins.jetbrains.com/plugin/1065?pr=idea), it can be found via plug-in repository (Settings|Plugins|Browse repositories).
+2. Go to Settings|Editor|Code Style, choose a code style you want to import CheckStyle configuration to.
+3. Click Manage...|Import.., choose "CheckStyle Configuration" and select a corresponding CheckStyle configuration file ( `/android/app/checkstyle.xml`). Click OK.
+
+### Ktlint
+
+This project is using [ktlint](https://github.com/jlleitschuh/ktlint-gradle) to run linting checks for Kotlin files (Android).
+
+You can run `./gradlew ktlintformat` to automatically format all your Kotlin files.
 
 ### Ruby
 

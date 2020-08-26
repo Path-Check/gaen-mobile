@@ -28,7 +28,8 @@
     "i18n:push": "./src/locales/push.sh",
     "test": "jest --config=./jest/config.js",
     "test:watch": "jest --config=./jest/config.js --watch",
-    "assemble-android-debug": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug"
+    "assemble-android-debug": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && ./android/gradlew -p android assembleDebug",
+    "lint:android": "./android/gradlew -p android app:lintDebug app:ktlintCheck app:checkstyle"
   },
   "husky": {
     "hooks": {
@@ -41,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@bugsnag/react-native": "^7.3.2",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/masked-view": "^0.1.10",

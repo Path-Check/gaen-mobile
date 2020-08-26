@@ -16,6 +16,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
+#import <Bugsnag/Bugsnag.h>
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -37,22 +38,18 @@
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
-
-  // Register background task
+  
+  [ExposureManager createSharedInstance];
   [[ExposureManager shared] registerBackgroundTask];
 
-  // Schedule background task
-  [[ExposureManager shared] scheduleBackgroundTaskIfNeeded];
-
-  [[ExposureManager shared] setup];
-
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+  [Bugsnag start];
   return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  [[ExposureManager shared] setup];
+  [[ExposureManager shared] awake];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

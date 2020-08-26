@@ -18,11 +18,9 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.common;
 
 import androidx.concurrent.futures.CallbackToFutureAdapter;
-
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -32,10 +30,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class TaskToFutureAdapter {
 
-  private static final String TAG = "TaskToFutureAdapter";
-
   public static <T> ListenableFuture<T> getFutureWithTimeout(
-          Task<T> task, long timeout, TimeUnit timeUnit, ScheduledExecutorService executor) {
+      Task<T> task, long timeout, TimeUnit timeUnit, ScheduledExecutorService executor) {
     return FluentFuture.<T>from(
         CallbackToFutureAdapter.getFuture(
             completer -> {

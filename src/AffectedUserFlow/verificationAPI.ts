@@ -19,6 +19,7 @@ interface NetworkSuccess<T> {
 interface NetworkFailure<U> {
   kind: "failure"
   error: U
+  message?: string
 }
 
 export type NetworkResponse<T, U = "Unknown"> =
@@ -72,7 +73,7 @@ export const postCode = async (
         case "verification code used":
           return { kind: "failure", error: "VerificationCodeUsed" }
         default:
-          return { kind: "failure", error: "Unknown" }
+          return { kind: "failure", error: "Unknown", message: json.error }
       }
     }
   } catch (e) {
@@ -120,7 +121,7 @@ export const postTokenAndHmac = async (
           return { kind: "failure", error: "TokenMetaDataMismatch" }
         }
         default: {
-          return { kind: "failure", error: "Unknown" }
+          return { kind: "failure", error: "Unknown", message: json.error }
         }
       }
     }

@@ -2,7 +2,7 @@ import ExposureNotification
 import Foundation
 import RealmSwift
 
-final class BTSecureStorage: SafePathsSecureStorage {
+class BTSecureStorage: SafePathsSecureStorage {
 
   static let shared = BTSecureStorage(inMemory: false)
 
@@ -17,7 +17,10 @@ final class BTSecureStorage: SafePathsSecureStorage {
     return realmConfig
   }()
 
-  override init(inMemory: Bool = false) {
+  private let notificationCenter: NotificationCenter
+
+  init(inMemory: Bool = false, notificationCenter: NotificationCenter = NotificationCenter.default) {
+    self.notificationCenter = notificationCenter
     super.init(inMemory: inMemory)
     if !userStateExists {
       resetUserState({ _ in })

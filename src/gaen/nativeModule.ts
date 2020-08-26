@@ -60,30 +60,24 @@ const toStatus = (data: string[]): ENPermissionStatus => {
 // Permissions Module
 const permissionsModule = NativeModules.ENPermissionsModule
 
-export const requestAuthorization = async (
-  cb: (data: string) => void,
-): Promise<void> => {
-  permissionsModule.requestExposureNotificationAuthorization(cb)
+export const requestAuthorization = async (): Promise<string> => {
+  return permissionsModule.requestExposureNotificationAuthorization()
 }
 
 export const getCurrentENPermissionsStatus = async (
   cb: (status: ENPermissionStatus) => void,
 ): Promise<void> => {
-  permissionsModule.getCurrentENPermissionsStatus((data: string[]) => {
-    const status = toStatus(data)
-    cb(status)
-  })
+  const response = await permissionsModule.getCurrentENPermissionsStatus()
+  cb(toStatus(response))
+  return Promise.resolve()
 }
 
 // Exposure History Module
 const exposureHistoryModule = NativeModules.ExposureHistoryModule
-export const getCurrentExposures = async (
-  cb: (exposureInfo: ExposureInfo) => void,
-): Promise<void> => {
-  exposureHistoryModule.getCurrentExposures((rawExposure: string) => {
-    const rawExposures: RawExposure[] = JSON.parse(rawExposure)
-    cb(toExposureInfo(rawExposures))
-  })
+export const getCurrentExposures = async (): Promise<ExposureInfo> => {
+  const rawExposure: string = await exposureHistoryModule.getCurrentExposures()
+  const rawExposures: RawExposure[] = JSON.parse(rawExposure)
+  return toExposureInfo(rawExposures)
 }
 
 export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> => {
@@ -118,11 +112,14 @@ const toExposureKey = (rawExposureKey: RawExposureKey): ExposureKey => {
   }
 }
 
-export const submitDiagnosisKeys = async (
-  certificate: string,
-  hmacKey: string,
-): Promise<string> => {
-  return exposureKeyModule.postDiagnosisKeys(certificate, hmacKey)
+export const storeRevisionToken = async (
+  revisionToken: string,
+): Promise<void> => {
+  return exposureKeyModule.storeRevisionToken(revisionToken)
+}
+
+export const getRevisionToken = async (): Promise<string> => {
+  return exposureKeyModule.getRevisionToken()
 }
 
 // Device Info Module
