@@ -146,12 +146,15 @@ class BTSecureStorage: SafePathsSecureStorage {
 
 extension BTSecureStorage {
 
-  func pruneOldExposureDetectionSummaries() {
+  func pruneExposureDetectionSummaries(_ summaries: [ExposureDetectionSummary] = []) {
     let realm = try! Realm(configuration: realmConfig)
+    let ids = summaries.map { "\($0.startOfDateReceived):\($0.sequenceNumberInDay)" }
     try! realm.write {
       let cutoff = Date().posixRepresentation - 1209600 // 2 weeks ago
       let oldSummaries = realm.objects(ExposureDetectionSummary.self).filter("dateReceived > \(cutoff)")
+      let specifiedSummaries = realm.objects(ExposureDetectionSummary.self).filter("id IN %@ \(ids)")
       realm.delete(oldSummaries)
+      realm.delete(specifiedSummaries)
     }
   }
 

@@ -530,8 +530,8 @@ private extension ExposureManager {
       // Serialize exposure detection summary
       let exposureDetectionSummary = ExposureDetectionSummary(summary)
 
-      // Prune old exposure detection summaries from realm
-      BTSecureStorage.shared.pruneOldExposureDetectionSummaries()
+      // Prune exposure detection summaries >14 days from realm
+      BTSecureStorage.shared.pruneExposureDetectionSummaries()
 
       // Fetch exposure summaries <14 days
       let unusedExposureSummaries = BTSecureStorage.shared.allExposureDetectionSummaries()
@@ -564,6 +564,9 @@ private extension ExposureManager {
       Exposure(id: UUID().uuidString,
                date: summary.startOfDateReceived)
     }
+
+    // Remove "used" exposure summaries from realm
+    BTSecureStorage.shared.pruneExposureDetectionSummaries(summaries)
 
     // Store new exposures in realm
     btSecureStorage.storeExposures(newExposures)
