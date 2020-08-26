@@ -1,5 +1,12 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, View, StyleSheet, Image } from "react-native"
+import {
+  TouchableOpacity,
+  Linking,
+  ScrollView,
+  View,
+  StyleSheet,
+  Image,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../PermissionsContext"
@@ -10,7 +17,7 @@ import { Button } from "../components"
 import { useBluetoothStatus } from "../useBluetoothStatus"
 
 import { Images } from "../assets"
-import { Colors, Spacing, Typography } from "../styles"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -30,9 +37,12 @@ const NotificationsPermissions: FunctionComponent = () => {
     completeOnboarding()
   }
 
-  const handleOnPressActivateProximityTracing = async () => {
-    exposureNotifications.request()
-    completeOnboarding()
+  const handleOnPressOpenSettings = async () => {
+    await new Promise((resolve) => {
+      completeOnboarding()
+      resolve()
+    })
+    Linking.openSettings()
   }
 
   const image = isAppSetupComplete
@@ -52,21 +62,23 @@ const NotificationsPermissions: FunctionComponent = () => {
           <Button
             label={t("label.go_to_home_view")}
             onPress={handleOnPressGoToHome}
-            customButtonStyle={style.homeButton}
+            customButtonStyle={style.primaryButton}
           />
         ) : (
           <>
             <Button
-              label={t("label.activate_proximity_tracing")}
-              onPress={handleOnPressActivateProximityTracing}
-              customButtonStyle={style.activateButton}
+              label={t("common.settings")}
+              onPress={handleOnPressOpenSettings}
+              customButtonStyle={style.primaryButton}
             />
-            <Button
-              label={t("label.go_to_home_view")}
+            <TouchableOpacity
               onPress={handleOnPressGoToHome}
-              customButtonStyle={style.homeButton}
-              outlined
-            />
+              style={style.secondaryButton}
+            >
+              <GlobalText style={style.secondaryButtonText}>
+                {t("label.go_to_home_view")}
+              </GlobalText>
+            </TouchableOpacity>
           </>
         )}
       </>
@@ -117,12 +129,16 @@ const style = StyleSheet.create({
     ...Typography.body1,
     textAlign: "center",
   },
-  activateButton: {
+  primaryButton: {
     width: "100%",
     marginBottom: Spacing.xxSmall,
   },
-  homeButton: {
-    width: "100%",
+  secondaryButton: {
+    ...Buttons.secondary,
+    alignSelf: "center",
+  },
+  secondaryButtonText: {
+    ...Typography.buttonSecondary,
   },
 })
 

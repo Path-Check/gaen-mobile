@@ -36,7 +36,7 @@ jest.mock("../More/useApplicationInfo", () => {
   }
 })
 
-jest.mock("./useBluetoothStatus.ts")
+jest.mock("../useBluetoothStatus.ts")
 jest.mock("./useHasLocationRequirements.ts")
 
 describe("Home", () => {
