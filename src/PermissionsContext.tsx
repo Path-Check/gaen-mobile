@@ -43,7 +43,7 @@ const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = 
   initialENPermissionStatus,
 )
 
-interface PermissionsContextState {
+export interface PermissionsContextState {
   notification: {
     status: PermissionStatus
     check: () => void

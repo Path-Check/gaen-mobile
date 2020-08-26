@@ -11,26 +11,26 @@ export const onboardingHasBeenCompleted = async (): Promise<boolean> => {
   return await StorageUtils.getIsOnboardingComplete()
 }
 
-const OnboardingContext = createContext<OnboardingContextState | undefined>(
-  undefined,
-)
+export const OnboardingContext = createContext<
+  OnboardingContextState | undefined
+>(undefined)
 
-interface OnboardingContextState {
+export interface OnboardingContextState {
   onboardingIsComplete: boolean
   completeOnboarding: () => void
   resetOnboarding: () => void
 }
 
 interface OnboardingProviderProps {
-  userHasCompletedOboarding: boolean
+  userHasCompletedOnboarding: boolean
 }
 
 export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   children,
-  userHasCompletedOboarding,
+  userHasCompletedOnboarding,
 }) => {
   const [onboardingIsComplete, setOnboardingIsComplete] = useState<boolean>(
-    userHasCompletedOboarding,
+    userHasCompletedOnboarding,
   )
 
   const completeOnboarding = () => {
