@@ -17,7 +17,8 @@
 #    https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 require "open3"
-require 'dotenv'
+require "dotenv"
+require_relative "./helpers"
 Dotenv.load
 
 HA_LABEL = ARGV[0]
@@ -27,46 +28,10 @@ WORKING_DIRECTORY="temporary_assets"
 
 ########################## HELPERS START ######################################
 
-def download_file(file_name, remote_url)
-  _output, error, status = Open3.capture3(
-    "curl", remote_url, "-L", "-o", file_name
-  )
-  status.success?
-end
-
-def delete_folder(path)
-  _output, error, status = Open3.capture3("rm", "-rf", path)
-  return true if status.success?
-  puts error
-  return false
-end
-
-def delete_file(path)
-  _output, error, status = Open3.capture3("rm", path)
-  return true if status.success?
-  puts error
-  return false
-end
-
-def copy_folder(source_path, destination_path)
-  _output, error, status = Open3.capture3(
-    "cp", "-r", source_path, destination_path
-  )
-  return true if status.success?
-  puts error
-  return false
-end
-
-def copy_file(source_path, destination_path)
-  _output, error, status = Open3.capture3("cp", source_path, destination_path)
-  return true if status.success?
-  puts error
-  return false
-end
-
 def clear_temporary_assets
   if Dir.exists?(WORKING_DIRECTORY)
     return if delete_folder(WORKING_DIRECTORY)
+
     puts "Could not clear the working directory"
     exit 1
   end
@@ -77,13 +42,14 @@ end
 ########################## FILE MANIPULATION AND RESCUE START #################
 
 def unzip_to_working_directory
-  zip_name = "app-icons.zip"
+  zip_name = "app-assets.zip"
   icons_zip_url =
   "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/assets/#{HA_LABEL}/#{zip_name}"
   file_destination = "#{WORKING_DIRECTORY}/#{zip_name}"
   clear_temporary_assets
   Dir.mkdir(WORKING_DIRECTORY)
   return false unless download_file(file_destination, icons_zip_url)
+
   _output, error, status = Open3.capture3(
     "unzip", file_destination, "-d", WORKING_DIRECTORY
   )
@@ -104,8 +70,9 @@ end
 def copy_ios_icons
   ios_iconset_path = "#{IOS_ASSETS_ROOT_PATH}/AppIcon.appiconset"
   return false unless delete_folder(ios_iconset_path)
+
   new_ios_iconset_path =
-  "#{WORKING_DIRECTORY}/Assets.xcassets/AppIcon.appiconset"
+    "#{WORKING_DIRECTORY}/Assets.xcassets/AppIcon.appiconset"
   copy_folder(new_ios_iconset_path, ios_iconset_path)
 end
 
@@ -161,24 +128,24 @@ def copy_android_icons
   end
 end
 
+def copy_ios_logo
+  ios_logo_path = "#{IOS_ASSETS_ROOT_PATH}/logoImage.imageset"
+  return false unless delete_folder(ios_logo_path)
+
+  new_ios_logo_path =
+    "#{WORKING_DIRECTORY}/logoImage.imageset"
+  copy_folder(new_ios_logo_path, ios_logo_path)
+end
+
 def copy_assets_to_destinations
-  copy_ios_icons && copy_android_icons
+  copy_ios_icons && copy_android_icons && copy_ios_logo
 end
 
 ########################## FILE MANIPULATION AND RESCUE END #################
 
 def download_assets
-  if !valid_token(ACCESS_TOKEN)
-    puts "No valid github token set"
-    puts "Set a valid token in your .env file"
-    exit 1
-  end
-
-  if !HA_LABEL
-    puts "No HA label provided"
-    puts "provide a label as a parameter e.g. $ bin/download_assets.sh pc"
-    exit 1
-  end
+  validate_token!(ACCESS_TOKEN)
+  validate_ha_label!(HA_LABEL, "download_assets")
 
   puts "...fetching assets for #{HA_LABEL}"
 
@@ -192,10 +159,6 @@ def download_assets
 rescue => error
   abort
   puts "Something went wrong #{error.message}"
-end
-
-def valid_token(token)
-  token.length == 40
 end
 
 download_assets
