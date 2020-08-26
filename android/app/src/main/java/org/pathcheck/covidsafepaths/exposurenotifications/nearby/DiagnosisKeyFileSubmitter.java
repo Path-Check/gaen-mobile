@@ -26,11 +26,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.pathcheck.covidsafepaths.BuildConfig;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
-import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
 import org.pathcheck.covidsafepaths.exposurenotifications.network.KeyFileBatch;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.threeten.bp.Duration;
@@ -94,12 +92,7 @@ public class DiagnosisKeyFileSubmitter {
       logBatch(b);
     }
 
-    return FluentFuture.from(
-        TaskToFutureAdapter.getFutureWithTimeout(
-            client.provideDiagnosisKeys(files),
-            PROVIDE_KEYS_TIMEOUT.toMillis(),
-            TimeUnit.MILLISECONDS,
-            AppExecutors.getScheduledExecutor()))
+    return FluentFuture.from(client.provideDiagnosisKeys(files))
         .transform(done -> {
           // Keep track of the latest file we processed
           if (!batches.isEmpty()) {

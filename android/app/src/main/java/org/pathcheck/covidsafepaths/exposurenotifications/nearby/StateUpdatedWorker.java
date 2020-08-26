@@ -26,13 +26,10 @@ import androidx.work.WorkManager;
 import androidx.work.WorkerParameters;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
-import java.util.concurrent.TimeUnit;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
-import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
-import org.threeten.bp.Duration;
 
 /**
  * Performs work for
@@ -41,8 +38,6 @@ import org.threeten.bp.Duration;
  */
 public class StateUpdatedWorker extends ListenableWorker {
   private static final String TAG = "StateUpdatedWorker";
-
-  private static final Duration GET_WINDOWS_TIMEOUT = Duration.ofSeconds(120);
 
   private final Context context;
 
@@ -57,16 +52,8 @@ public class StateUpdatedWorker extends ListenableWorker {
     Log.d(TAG, "Starting worker to get exposure windows, "
         + "compare them with the exposures stored in the local database "
         + "and show a notification if there is a new one");
-    return FluentFuture.from(
-        TaskToFutureAdapter.getFutureWithTimeout(
-            ExposureNotificationClientWrapper.get(context).getExposureWindows(),
-            GET_WINDOWS_TIMEOUT.toMillis(),
-            TimeUnit.MILLISECONDS,
-            AppExecutors.getScheduledExecutor()))
-        .transform(
-            RealmSecureStorageBte.INSTANCE::refreshWithExposureWindows,
-            AppExecutors.getBackgroundExecutor()
-        )
+    return FluentFuture.from(ExposureNotificationClientWrapper.get(context).getDailySummaries())
+        .transform(RealmSecureStorageBte.INSTANCE::refreshWithDailySummaries, AppExecutors.getBackgroundExecutor())
         .transform((exposuresAdded) -> {
           if (exposuresAdded) {
             Log.d(TAG, "New exposures found, showing a notification");
@@ -76,13 +63,12 @@ public class StateUpdatedWorker extends ListenableWorker {
           }
           return Result.success();
         }, AppExecutors.getLightweightExecutor())
-        .catching(
-            Exception.class,
-            x -> {
+        .catching(Exception.class, x -> {
               Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
               return Result.failure();
             },
-            AppExecutors.getLightweightExecutor());
+            AppExecutors.getLightweightExecutor()
+        );
   }
 
   static void runOnce(Context context) {
