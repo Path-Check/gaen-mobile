@@ -43,7 +43,7 @@ const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = 
   initialENPermissionStatus,
 )
 
-interface PermissionsContextState {
+export interface PermissionsContextState {
   notification: {
     status: PermissionStatus
     check: () => void
@@ -96,7 +96,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
       setExposureNotificationsPermissionStatus(status)
     }
     permissionStrategy.check(handleNativeResponse)
-  }, [])
+  }, [permissionStrategy])
 
   useEffect(() => {
     const handleAppStateChange = () => {
@@ -124,7 +124,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
       subscription?.remove()
       AppState.removeEventListener("change", handleAppStateChange)
     }
-  }, [checkENPermission])
+  }, [checkENPermission, permissionStrategy])
 
   const checkNotificationPermission = async () => {
     const { status } = await checkNotifications()

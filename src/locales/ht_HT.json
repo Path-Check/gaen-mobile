@@ -32,8 +32,10 @@
     "start_title": "Reponn kesyon sou sentom ou yo ak istwa medikal pou aprann Kisa pou fe aprè sou COVID-19"
   },
   "common": {
+    "cancel": "Anile",
     "continue": "Kontinye",
     "done": "Fini",
+    "enable": "Aktive",
     "next": "Fini",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse"
@@ -44,10 +46,10 @@
     "complete_body_bluetooth": "Lè w chwazi pou pataje estati ou ak notifye lòt moun anoniman, ou ap ede evite pwopagasyon viris la ak pwoteje lòt moun nan kominote ou.",
     "complete_title": "Mèsi pou kenbe kominote ou an sekirite!",
     "consent_button_title": "Mwen konprann epi mwen konsanti",
-    "publish_consent_body_bluetooth": "Pataje dyagnostik pozitif ou se si ou vle epi yo ka selman fe ak konsantman ou.\n\nSi ou chwazi pou ou fe sa, ou ap ede lot moun nan kominote ou la pou enfome desizyon sou sante yo e fè pati ou pou evite gaye viris la.\n\nSèlman enfòmasyon ki pataje yo pral o aza nan nimewo telefòn ou echanje sou Bluetooth ak lòt telefòn ki te ki tou pre pandan 14 jou ki sot pase yo, ansanm ak yon nòt pondere risk ki baze sou lè sentòm ou te devlope.",
+    "consent_subheader_1": "Poukisa mwen ta dwe pataje?",
+    "consent_subheader_2": "kijan sa mache?",
     "publish_consent_title_bluetooth": "Notifye lòt moun nan kominote ou",
-    "start_body_bluetooth": "Chwazi notifye anonimman lòt moun yo ou ka te rankontre epi ede kominote w pa gaye viris la.",
-    "start_title_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w la si w dyagnostike oswa teste pozitif pou COVID-19."
+    "start_header_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w "
   },
   "exposure_history": {
     "how_does_this_work": "Kouman travay sa a fèt?",
@@ -64,13 +66,13 @@
     }
   },
   "label": {
-    "about_para": "Aplikasyon Chase Kowona (\"PathCheck\") disponib pa Fondasyon Chase Kowona (\"PathCheck\"), yon òganizasyon san bi likratif ki angaje nan bay lojisyèl gratis pou ede kanpe pwopagasyon COVID-19 ak pwoteje vi prive moun. \n\n Pou plis enfòmasyon, vizite",
     "launch_enable_notif": "Aktive notifikasyon",
     "launch_get_started": "Kòmanse",
     "launch_screen1_header": "Byenveni nan Chase Kowona (\"PathCheck\")",
-    "legal_page_address": "Fondasyon Chase Kowona (\"PathCheck\") \n 58 Day Street \n Box 441621 \n Somerville, MA 02144",
-    "privacy_policy": "Règleman sou enfòmasyon prive",
-    "unknown": "Pa gen kontak"
+    "privacy_policy": "Règleman sou enfòmasyon prive"
+  },
+  "more": {
+    "select_language": "Chwazi lang"
   },
   "navigation": {
     "exposure_history": "Lis ekspozisyon",
@@ -84,6 +86,7 @@
   "screen_titles": {
     "about": "Apropo",
     "exposure_history": "Lis ekspozisyon",
+    "exposures": "Ekspozisyon yo",
     "legal": "Legal"
   }
 }

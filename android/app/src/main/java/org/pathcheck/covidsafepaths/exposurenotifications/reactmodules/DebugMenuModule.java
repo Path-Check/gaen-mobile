@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
@@ -79,7 +80,8 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void simulateExposure(Promise promise) {
-    promise.reject(new Exception("Not implemented"));
+    NotificationHelper.showPossibleExposureNotification(getReactApplicationContext());
+    promise.resolve(null);
   }
 
   @ReactMethod

@@ -42,7 +42,7 @@ const App: FunctionComponent = () => {
         <ErrorBoundary>
           <ConfigurationProvider>
             <OnboardingProvider
-              userHasCompletedOboarding={onboardingIsComplete}
+              userHasCompletedOnboarding={onboardingIsComplete}
             >
               <PermissionsProvider>
                 <ExposureProvider>
