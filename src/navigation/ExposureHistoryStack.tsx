@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 
@@ -22,12 +22,20 @@ const SCREEN_OPTIONS = {
 const ExposureHistoryStack: FunctionComponent = () => {
   const navigation = useNavigation()
   const { observeExposures } = useExposureContext()
+  const [, setIsFocused] = useState(false)
 
   useEffect(() => {
     const unsubscribeTabPress = navigation.addListener("focus", () => {
+      setIsFocused(true)
       observeExposures()
     })
-    return unsubscribeTabPress
+    const unsubscribeTabBlur = navigation.addListener("blur", () => {
+      setIsFocused(false)
+    })
+    return () => {
+      unsubscribeTabPress()
+      unsubscribeTabBlur()
+    }
   }, [navigation, observeExposures])
 
   return (
