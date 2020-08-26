@@ -34,10 +34,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   } = env
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
-  const appDownloadLink = Platform.select({
-    ios: env.IOS_APP_STORE_URL,
-    android: env.ANDROID_PLAY_STORE_URL,
-  }) as string
+  const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
     android: env.ANDROID_APPLICATION_ID,
