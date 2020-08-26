@@ -49,10 +49,16 @@ const CodeInputForm: FunctionComponent = () => {
   const [isFocused, setIsFocused] = useState(false)
 
   const codeLength = 8
+  const codeIsInvalidLength = code.length !== codeLength
+  const codeContainsNonDigitChars = (code: string) => !code.match(/^\d+$/)
 
-  const handleOnChangeText = (code: string) => {
+  const handleOnChangeText = (newCode: string) => {
     setErrorMessage("")
-    setCode(code)
+    if (newCode && codeContainsNonDigitChars(newCode)) {
+      setErrorMessage(t("export.error.invalid_format"))
+    } else {
+      setCode(newCode)
+    }
   }
 
   const handleOnToggleFocus = () => {
@@ -144,7 +150,7 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled = code.length !== codeLength
+  const isDisabled = codeIsInvalidLength || codeContainsNonDigitChars(code)
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
