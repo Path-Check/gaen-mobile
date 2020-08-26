@@ -10,13 +10,15 @@ class ExposureDetectionSummary: Object, Codable {
   @objc dynamic var startOfDateReceived: Int = 0
   @objc dynamic var timezoneOffset: Int = 0
   @objc dynamic var matchedKeyCount: UInt64 = 0
-  dynamic var attenuationDurations: List<IntObject> = List<IntObject>()
+  dynamic var attenuationDuration: AttenuationDuration = AttenuationDuration()
   @objc dynamic var maximumRiskScore: UInt8 = 0
   @objc dynamic var riskScoreSumFullRange: Double = 0.0
 
   init(_ enExposureDetectionSummary: ENExposureDetectionSummary) {
     timezoneOffset = TimeZone.current.secondsFromGMT()
-    attenuationDurations.append(objectsIn: enExposureDetectionSummary.attenuationDurations.map { IntObject(value: Int(truncating: $0)) })
+    attenuationDuration.low = Int(truncating: enExposureDetectionSummary.attenuationDurations[0])
+    attenuationDuration.medium = Int(truncating: enExposureDetectionSummary.attenuationDurations[1])
+    attenuationDuration.high = Int(truncating: enExposureDetectionSummary.attenuationDurations[2])
     daysSinceLastExposure = enExposureDetectionSummary.daysSinceLastExposure
     matchedKeyCount = enExposureDetectionSummary.matchedKeyCount
     maximumRiskScore = enExposureDetectionSummary.maximumRiskScore

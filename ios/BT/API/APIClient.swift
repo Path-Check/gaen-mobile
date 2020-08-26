@@ -35,20 +35,24 @@ class BTAPIClient: APIClient {
   let postKeysUrl: URL
   let downloadBaseUrl: URL
   let exposureConfigurationUrl: URL
+  let scoringServerUrl: URL
   static let shared = BTAPIClient(
     postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
     downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
-    exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!
+    exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!,
+    scoringServerUrl: URL(string: ReactNativeConfig.env(for: .scoringServerUrl))!
   )
   
   private let sessionManager: SessionManager
 
   init(postKeysUrl: URL,
        downloadBaseUrl: URL,
-       exposureConfigurationUrl: URL) {
+       exposureConfigurationUrl: URL,
+       scoringServerUrl: URL) {
     self.postKeysUrl = postKeysUrl
     self.downloadBaseUrl = downloadBaseUrl
     self.exposureConfigurationUrl = exposureConfigurationUrl
+    self.scoringServerUrl = scoringServerUrl
     
     let configuration = URLSessionConfiguration.default
     
@@ -159,6 +163,8 @@ private extension BTAPIClient {
       baseUrl = downloadBaseUrl
     case .exposureConfiguration:
       baseUrl = exposureConfigurationUrl
+    case .scoring:
+      baseUrl = scoringServerUrl
     }
     let r = sessionManager.request(
       baseUrl.appendingPathComponent(request.path, isDirectory: false),

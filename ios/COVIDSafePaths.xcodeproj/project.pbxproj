@@ -24,7 +24,6 @@
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
 		B54AB1FA24EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AB1F924EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift */; };
-		B54AB1FD24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
@@ -33,6 +32,9 @@
 		B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */; };
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
 		B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */; };
+		B5BF1D0924F6EC7800A23CB8 /* ScoringServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF1D0824F6EC7800A23CB8 /* ScoringServerResponse.swift */; };
+		B5BF1D0B24F6ECFE00A23CB8 /* ExposureNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF1D0A24F6ECFE00A23CB8 /* ExposureNotification.swift */; };
+		B5BF1D0D24F6EFBF00A23CB8 /* AttenuationDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF1D0C24F6EFBF00A23CB8 /* AttenuationDuration.swift */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
@@ -225,7 +227,6 @@
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
 		B54AB1F924EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureDetectionSummaryRequests.swift; sourceTree = "<group>"; };
-		B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureDetectionSummaryResponse.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -234,6 +235,9 @@
 		B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExposureHistoryModule.m; sourceTree = "<group>"; };
 		B59F4C3624BE0658007B09D5 /* List+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extensions.swift"; sourceTree = "<group>"; };
 		B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerUnitTests.swift; sourceTree = "<group>"; };
+		B5BF1D0824F6EC7800A23CB8 /* ScoringServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringServerResponse.swift; sourceTree = "<group>"; };
+		B5BF1D0A24F6ECFE00A23CB8 /* ExposureNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureNotification.swift; sourceTree = "<group>"; };
+		B5BF1D0C24F6EFBF00A23CB8 /* AttenuationDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttenuationDuration.swift; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -604,11 +608,13 @@
 			children = (
 				B5FC37DC248A78D2006474EB /* ExposureKey.swift */,
 				B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */,
-				B54AB1FC24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift */,
 				B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */,
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
 				B5181E3B24E72648006207A3 /* ExposureDetectionSummary.swift */,
+				B5BF1D0C24F6EFBF00A23CB8 /* AttenuationDuration.swift */,
+				B5BF1D0824F6EC7800A23CB8 /* ScoringServerResponse.swift */,
+				B5BF1D0A24F6ECFE00A23CB8 /* ExposureNotification.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
 			path = Model;
@@ -958,11 +964,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FBB0D524916D8900433980 /* UserState.swift in Sources */,
+				B5BF1D0924F6EC7800A23CB8 /* ScoringServerResponse.swift in Sources */,
 				B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */,
 				C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */,
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
 				B5FC37CC2489B251006474EB /* Result.swift in Sources */,
+				B5BF1D0B24F6ECFE00A23CB8 /* ExposureNotification.swift in Sources */,
 				A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */,
 				A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */,
 				B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */,
@@ -985,13 +993,11 @@
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
-				B54AB1FD24EAD03700CEDC17 /* ExposureDetectionSummaryResponse.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
 				B5FC37F6248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift in Sources */,
 				B54AB1FA24EAC9E200CEDC17 /* ExposureDetectionSummaryRequests.swift in Sources */,
 				B5181E3C24E72648006207A3 /* ExposureDetectionSummary.swift in Sources */,
-				B5E29D54249E3BE100E686DC /* ExposureManager+Extensions.swift in Sources */,
 				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,
 				B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */,
 				B507AA0724A2533200E039D5 /* DownloadPackage+Helpers.swift in Sources */,
@@ -1001,6 +1007,7 @@
 				B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */,
 				B5FC37DF248A78FC006474EB /* ExposureConfiguration.swift in Sources */,
 				B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */,
+				B5BF1D0D24F6EFBF00A23CB8 /* AttenuationDuration.swift in Sources */,
 				B5FC37CA2489B1C1006474EB /* JSON.swift in Sources */,
 				B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */,
 				B5FC37D02489B3DE006474EB /* StructuredError.swift in Sources */,

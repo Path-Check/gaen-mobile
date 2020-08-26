@@ -3,27 +3,27 @@ import ExposureNotification
 
 enum ExposureDetectionSummaryListRequest: APIRequest {
 
-  typealias ResponseType = ExposureDetectionSummaryResponse
+  typealias ResponseType = ScoringServerResponse
 
-  case put(ExposureDetectionSummary, [ExposureDetectionSummary])
+  case post(ExposureDetectionSummary, [ExposureDetectionSummary])
 
   var method: HTTPMethod {
     switch self {
-    case .put:
-      return .put
+    case .post:
+      return .post
     }
   }
 
   var path: String {
     switch self {
-    case .put:
+    case .post:
       return ""
     }
   }
 
   var parameters: Parameters? {
     switch self {
-    case .put(let newExposureDetectionSummary,
+    case .post(let newExposureDetectionSummary,
               let storedExposureDetectionSummaries):
       return [
         "new_exposure_summary": [

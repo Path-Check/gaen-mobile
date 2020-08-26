@@ -27,6 +27,7 @@ extension String {
   static let postKeysUrl = "POST_DIAGNOSIS_KEYS_URL"
   static let downloadBaseUrl = "DOWNLOAD_BASE_URL"
   static let exposureConfigurationUrl = "EXPOSURE_CONFIGURATION_URL"
+  static let scoringServerUrl = "SCORING_SERVER_URL"
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
@@ -41,6 +42,7 @@ extension String {
   static let newExposureNotificationTitle = "Possible COVID-19 Exposure"
   static let newExposureNotificationBody = "Someone you were near recently has been diagnosed with COVID-19. Tap for more details."
   static let exposureDetectionErrorNotificationIdentifier = "expososure-notification-error"
+  static let newExposureNotificationIdentifier = "new-expososure-notification"
 
   // JS Layer
   static let genericSuccess = "success"

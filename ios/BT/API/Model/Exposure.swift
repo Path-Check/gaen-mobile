@@ -11,15 +11,9 @@ class Exposure: Object, Codable {
   @objc dynamic var transmissionRiskLevel: Int = 0
 
   init(id: String,
-       date: Int,
-       duration: TimeInterval,
-       totalRiskScore: ENRiskScore,
-       transmissionRiskLevel: ENRiskScore) {
+       date: Int) {
     self.id = id
     self.date = date
-    self.duration = duration
-    self.totalRiskScore = Int(totalRiskScore)
-    self.transmissionRiskLevel = Int(transmissionRiskLevel)
     super.init()
   }
 

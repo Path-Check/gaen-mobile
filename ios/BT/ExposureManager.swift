@@ -57,7 +57,7 @@ final class ExposureManager: NSObject {
    to be initialezed before it can be used, we call [activate](https://developer.apple.com/documentation/exposurenotification/enmanager/3583720-activate)
    when initializing this wrapper. Also, when the ENManager instance is no longer required, it should be invalidated,
    that is done in the deinit.
-  */
+   */
 
   public let manager: ExposureNotificationManager
   public let apiClient: APIClient
@@ -124,10 +124,6 @@ final class ExposureManager: NSObject {
   var authorizationState: AuthorizationState {
     return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
   }
-  
-  @objc var currentExposures: String {
-    return Array(BTSecureStorage.shared.exposures).jsonStringRepresentation()
-  }
 
   /// Wrapps ENManager state and determines if bluetooth is on or off
   /// (bluetoothOff)[https://developer.apple.com/documentation/exposurenotification/enstatus/bluetoothoff]
@@ -151,8 +147,8 @@ final class ExposureManager: NSObject {
     manager.setExposureNotificationEnabled(enabled) { error in
       if let underlyingError = error {
         let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
-                             localizedMessage: String.cannotEnableNotifications.localized,
-                             underlyingError: underlyingError)
+                                           localizedMessage: String.cannotEnableNotifications.localized,
+                                           underlyingError: underlyingError)
         callback(emError)
       } else {
         self.broadcastCurrentEnabledStatus()
@@ -201,33 +197,33 @@ final class ExposureManager: NSObject {
 
   /**
    Registers the background task of detecting exposures
-    All launch handlers must be registered before application finishes launching
+   All launch handlers must be registered before application finishes launching
    */
   @objc func registerBackgroundTask() {
     bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
                              using: .main) { [weak self] task in
-      guard let strongSelf = self else { return }
-      // Notify the user if bluetooth is off
-      strongSelf.notifyUserBlueToothOffIfNeeded()
+                              guard let strongSelf = self else { return }
+                              // Notify the user if bluetooth is off
+                              strongSelf.notifyUserBlueToothOffIfNeeded()
 
-      // Perform the exposure detection
-      let progress = strongSelf.detectExposures { result in
-        switch result {
-        case .success:
-          task.setTaskCompleted(success: true)
-        case .failure:
-          task.setTaskCompleted(success: false)
-        }
-      }
+                              // Perform the exposure detection
+                              let progress = strongSelf.detectExposures { result in
+                                switch result {
+                                case .success:
+                                  task.setTaskCompleted(success: true)
+                                case .failure:
+                                  task.setTaskCompleted(success: false)
+                                }
+                              }
 
-      // Handle running out of time
-      task.expirationHandler = {
-        progress.cancel()
-        BTSecureStorage.shared.exposureDetectionErrorLocalizedDescription = NSLocalizedString("BACKGROUND_TIMEOUT", comment: "Error")
-      }
+                              // Handle running out of time
+                              task.expirationHandler = {
+                                progress.cancel()
+                                BTSecureStorage.shared.exposureDetectionErrorLocalizedDescription = NSLocalizedString("BACKGROUND_TIMEOUT", comment: "Error")
+                              }
 
-      // Schedule the next background task
-      self?.scheduleBackgroundTaskIfNeeded()
+                              // Schedule the next background task
+                              self?.scheduleBackgroundTaskIfNeeded()
     }
   }
 
@@ -330,33 +326,21 @@ final class ExposureManager: NSObject {
             // TODO: Fetch configuration from API
             let enConfiguration = ExposureConfiguration.placeholder.asENExposureConfiguration
             self.manager.detectExposures(configuration: enConfiguration,
-                                             diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
-              if let error = error {
-                self.finish(.failure(error),
-                            processedFileCount: processedFileCount,
-                            lastProcessedUrlPath: lastProcessedUrlPath,
-                            progress: progress,
-                            completionHandler: completionHandler)
-                return
-              }
-                if let summary = summary {
-                  let exposureDetectionSummary = ExposureDetectionSummary(summary)
-                  BTSecureStorage.shared.pruneOldExposureDetectionSummaries()
-                  let unusedExposureSummaries = BTSecureStorage.shared.allExposureDetectionSummaries()
+                                         diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
+                                          if let error = error {
+                                            self.finish(.failure(error),
+                                                        processedFileCount: processedFileCount,
+                                                        lastProcessedUrlPath: lastProcessedUrlPath,
+                                                        progress: progress,
+                                                        completionHandler: completionHandler)
+                                            return
+                                          }
 
-                  APIClient.shared.request(ExposureDetectionSummaryListRequest.put(exposureDetectionSummary, unusedExposureSummaries), requestType: .scoring) { result in
-                    switch result {
-                    case .success:
-                      BTSecureStorage.shared.storeExposureDetectionSummary(exposureDetectionSummary)
-                      self.processExposureDetectionSummary(summary,
-                                   processedFileCount: processedFileCount,
-                                   lastProcessedUrlPath: lastProcessedUrlPath,
-                                   progress: progress,
-                                   completionHandler: completionHandler)
-                    case .failure:
-                      break
-                    }
-                  }
+                                          self.processExposureDetectionSummary(summary, completion: { summaries in
+                                            self.processScoringServerResponse(summaries, processedFileCount: processedFileCount, lastProcessedUrlPath: lastProcessedUrlPath, progress: progress, completionHandler: completionHandler)
+
+                                          })
+
             }
           }
         } catch(let error) {
@@ -421,6 +405,22 @@ final class ExposureManager: NSObject {
     }
     #endif
   }
+
+  func postNewExposureNotification() {
+    let identifier = String.newExposureNotificationIdentifier
+
+    let content = UNMutableNotificationContent()
+    content.title = String.newExposureNotificationTitle.localized
+    content.sound = .default
+    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+    userNotificationCenter.add(request) { error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print("Error showing new exposure notification: \(error)")
+        }
+      }
+    }
+  }
 }
 
 // MARK: - FileProcessing
@@ -456,10 +456,10 @@ extension ExposureManager {
   }
   
   @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
-    let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
-                                       localizedMessage: String.noLastResetDateAvailable.localized)
-    return callback(nil, emError)
+    guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
+      let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
+                                         localizedMessage: String.noLastResetDateAvailable.localized)
+      return callback(nil, emError)
     }
     let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
     return callback(posixRepresentation, nil)
@@ -487,12 +487,12 @@ private extension ExposureManager {
   func fetchExposureConfiguration() {
     apiClient.request(ExposureConfigurationRequest.get,
                       requestType: .exposureConfiguration) { [weak self] result in
-      switch result {
-      case .success(let exposureConfiguration):
-        self?.exposureConfiguration = exposureConfiguration
-      case .failure(let error):
-        print("Error fetching exposure configuration: \(error)")
-      }
+                        switch result {
+                        case .success(let exposureConfiguration):
+                          self?.exposureConfiguration = exposureConfiguration
+                        case .failure(let error):
+                          print("Error fetching exposure configuration: \(error)")
+                        }
     }
   }
   
@@ -524,34 +524,57 @@ private extension ExposureManager {
     downloadedPackages = []
   }
 
-  func processExposureDetectionSummary(_ summary: ENExposureDetectionSummary?,
-               processedFileCount: Int,
-               lastProcessedUrlPath: String,
-               progress: Progress,
-               completionHandler: @escaping ((ExposureResult) -> Void)) {
-    let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-    ExposureManager.shared.manager.getExposureInfo(summary: summary!, userExplanation: userExplanation) { exposures, error in
-      if let error = error {
-        self.finish(.failure(error),
-                    processedFileCount: processedFileCount,
-                    lastProcessedUrlPath: lastProcessedUrlPath,
-                    progress: progress,
-                    completionHandler: completionHandler)
-        return
+  func processExposureDetectionSummary(_ summary: ENExposureDetectionSummary?, completion: @escaping (([ExposureDetectionSummary]) -> Void)) {
+    if let summary = summary {
+
+      // Serialize exposure detection summary
+      let exposureDetectionSummary = ExposureDetectionSummary(summary)
+
+      // Prune old exposure detection summaries from realm
+      BTSecureStorage.shared.pruneOldExposureDetectionSummaries()
+
+      // Fetch exposure summaries <14 days
+      let unusedExposureSummaries = BTSecureStorage.shared.allExposureDetectionSummaries()
+
+      // Store new exposure summary in realm
+      BTSecureStorage.shared.storeExposureDetectionSummary(exposureDetectionSummary)
+
+      // Call scoring server
+      apiClient.request(ExposureDetectionSummaryListRequest.post(exposureDetectionSummary,
+                                                                 unusedExposureSummaries),
+                        requestType: .scoring) { result in
+                          switch result {
+                          case .success(let scoringServerResponse):
+                            let summaries = scoringServerResponse.notifications.map { $0.exposureSummaries }.flatMap { $0 }
+                            completion(summaries)
+                          case .failure:
+                            completion([])
+                          }
       }
-      let newExposures = (exposures ?? []).map { exposure in
-        Exposure(id: UUID().uuidString,
-                 date: exposure.date.posixRepresentation,
-                 duration: exposure.duration,
-                 totalRiskScore: exposure.totalRiskScore,
-                 transmissionRiskLevel: exposure.transmissionRiskLevel)
-      }
-      self.finish(.success(newExposures),
-                  processedFileCount: processedFileCount,
-                  lastProcessedUrlPath: lastProcessedUrlPath,
-                  progress: progress,
-                  completionHandler: completionHandler)
     }
   }
-  
+
+  func processScoringServerResponse(_ summaries: [ExposureDetectionSummary],
+                                    processedFileCount: Int,
+                                    lastProcessedUrlPath: String,
+                                    progress: Progress,
+                                    completionHandler: @escaping ((ExposureResult) -> Void)) {
+
+    let newExposures = (summaries).map { summary in
+      Exposure(id: UUID().uuidString,
+               date: summary.startOfDateReceived)
+    }
+
+    // Store new exposures in realm
+    btSecureStorage.storeExposures(newExposures)
+
+    // Post notification to user
+    postNewExposureNotification()
+
+    self.finish(.success(newExposures),
+                processedFileCount: processedFileCount,
+                lastProcessedUrlPath: lastProcessedUrlPath,
+                progress: progress,
+                completionHandler: completionHandler)
+  }
 }

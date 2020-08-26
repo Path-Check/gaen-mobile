@@ -53,10 +53,7 @@ extension ExposureManager: ExposureManagerDebuggable {
       resolve(String.genericSuccess)
     case .simulateExposure:
       let exposure = Exposure(id: UUID().uuidString,
-                              date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000,
-                              duration: TimeInterval(1),
-                              totalRiskScore: .random(in: 1...8),
-                              transmissionRiskLevel: .random(in: 0...7))
+                              date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000)
       btSecureStorage.storeExposures([exposure])
       let content = UNMutableNotificationContent()
       content.title = String.newExposureNotificationTitle.localized
@@ -74,7 +71,6 @@ extension ExposureManager: ExposureManagerDebuggable {
     case .fetchExposures:
       resolve(currentExposures)
     case .resetExposures:
-      btSecureStorage.exposures = List<Exposure>()
       resolve("Exposures: \(btSecureStorage.exposures.count)")
     case .toggleENAuthorization:
       let enabled = manager.exposureNotificationEnabled ? false : true
