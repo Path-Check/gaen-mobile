@@ -193,6 +193,10 @@ android {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['debug']
         }
+        staging {
+            // Same gradle configuration as debug, it will use a different env file
+            initWith debug
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -202,10 +206,6 @@ android {
             // Differentiate each HA by its APK name
             def outputSuffix = project.hasProperty('outputSuffix') ? '-' + project.outputSuffix : ''
             setProperty("archivesBaseName", project.archivesBaseName.concat(outputSuffix))
-        }
-        staging {
-            // Same gradle configuration as release, it will use a different env file
-            initWith release
         }
     }
 }

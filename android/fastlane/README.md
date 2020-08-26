@@ -16,21 +16,21 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android test
-```
-fastlane android test
-```
-Runs Android (Native) unit tests
-### android debug_bt
-```
-fastlane android debug_bt
-```
-Build a Debug AAB
 ### android release_increment_version_code
 ```
 fastlane android release_increment_version_code
 ```
 Increment version code
+### android debug_bt
+```
+fastlane android debug_bt
+```
+Build a Debug AAB
+### android staging_apk
+```
+fastlane android staging_apk
+```
+Build a Staging APK
 ### android release_apk
 ```
 fastlane android release_apk
@@ -46,11 +46,6 @@ Build a Release AAB
 fastlane android android_alpha_apk
 ```
 Submit APK to AppCenter
-### android play_store_bt
-```
-fastlane android play_store_bt
-```
-Upload to google play store beta track
 
 ----
 
