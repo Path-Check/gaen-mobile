@@ -32,15 +32,13 @@ describe("NotificationPermissions", () => {
       expect(notificationRequestSpy).toHaveBeenCalled()
     })
     it("marks onboarding complete", async () => {
+      expect.assertions(1)
       const completeOnboardingSpy = jest.fn()
       const onboardingProviderValue = createOnboardingProviderValue(
         completeOnboardingSpy,
       )
 
-      const notificationRequestSpy = jest.fn()
-      const permissionsProviderValue = createPermissionProviderValue(
-        notificationRequestSpy,
-      )
+      const permissionsProviderValue = createPermissionProviderValue(jest.fn())
 
       const { getByLabelText } = render(
         <OnboardingContext.Provider value={onboardingProviderValue}>
@@ -78,16 +76,13 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).not.toHaveBeenCalled()
     })
-    it("marks onboarding complete", async () => {
+    it("marks onboarding complete", () => {
       const completeOnboardingSpy = jest.fn()
       const onboardingProviderValue = createOnboardingProviderValue(
         completeOnboardingSpy,
       )
 
-      const notificationRequestSpy = jest.fn()
-      const permissionsProviderValue = createPermissionProviderValue(
-        notificationRequestSpy,
-      )
+      const permissionsProviderValue = createPermissionProviderValue(jest.fn())
 
       const { getByText } = render(
         <OnboardingContext.Provider value={onboardingProviderValue}>
@@ -99,9 +94,7 @@ describe("NotificationPermissions", () => {
 
       fireEvent.press(getByText("Maybe later"))
 
-      await waitFor(() => {
-        expect(completeOnboardingSpy).toHaveBeenCalled()
-      })
+      expect(completeOnboardingSpy).toHaveBeenCalled()
     })
   })
 })
