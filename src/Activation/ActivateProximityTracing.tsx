@@ -23,7 +23,6 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressEnable = () => {
