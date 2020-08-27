@@ -20,20 +20,19 @@ import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
-const NotificationsPermissions: FunctionComponent = () => {
+const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
   const { isLocationOffAndNeeded } = useHasLocationRequirements()
   const isBluetoothOn = useBluetoothStatus()
 
-  const { exposureNotifications } = usePermissionsContext()
-  const { status } = exposureNotifications
-  const { authorized, enabled } = status
-
+  const {
+    exposureNotifications: {
+      status: { authorized, enabled },
+    },
+  } = usePermissionsContext()
   const isProximityTracingOn = authorized && enabled
-  const isAppSetupComplete =
-    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()
@@ -44,66 +43,79 @@ const NotificationsPermissions: FunctionComponent = () => {
     completeOnboarding()
   }
 
-  const image = isAppSetupComplete
-    ? Images.CheckInCircle
-    : Images.ExclamationInCircle
-  const headerText = isAppSetupComplete
-    ? t("onboarding.app_setup_complete_header")
-    : t("onboarding.app_setup_incomplete_header")
-  const determineBodyText = () => {
-    if (isAppSetupComplete) {
-      return t("onboarding.app_setup_complete_body", { applicationName })
-    } else if (isLocationOffAndNeeded) {
-      return t("onboarding.app_setup_incomplete_location_body", {
-        applicationName,
-      })
-    } else {
-      return t("onboarding.app_setup_incomplete_body", { applicationName })
-    }
-  }
-
-  const Buttons: FunctionComponent = () => {
+  const AppSetupIncompleteButtons: FunctionComponent = () => {
     return (
-      <>
-        {isAppSetupComplete ? (
-          <Button
-            label={t("label.go_to_home_view")}
-            onPress={handleOnPressGoToHome}
-            customButtonStyle={style.primaryButton}
-          />
-        ) : (
-          <>
-            <Button
-              label={t("common.settings")}
-              onPress={handleOnPressOpenSettings}
-              customButtonStyle={style.primaryButton}
-            />
-            <TouchableOpacity
-              onPress={handleOnPressGoToHome}
-              style={style.secondaryButton}
-            >
-              <GlobalText style={style.secondaryButtonText}>
-                {t("label.go_to_home_view")}
-              </GlobalText>
-            </TouchableOpacity>
-          </>
-        )}
-      </>
+      <View>
+        <Button
+          label={t("common.settings")}
+          onPress={handleOnPressOpenSettings}
+          customButtonStyle={style.primaryButton}
+        />
+        <TouchableOpacity
+          onPress={handleOnPressGoToHome}
+          style={style.secondaryButton}
+        >
+          <GlobalText style={style.secondaryButtonText}>
+            {t("label.go_to_home_view")}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
     )
   }
+
+  const AppSetupCompleteButton: FunctionComponent = () => {
+    return (
+      <Button
+        label={t("label.go_to_home_view")}
+        onPress={handleOnPressGoToHome}
+        customButtonStyle={style.primaryButton}
+      />
+    )
+  }
+
+  const appSetupCompleteContent = {
+    headerImage: Images.CheckInCircle,
+    headerText: t("onboarding.app_setup_complete_header"),
+    bodyText: t("onboarding.app_setup_complete_body", { applicationName }),
+    buttons: AppSetupCompleteButton,
+  }
+
+  const appSetupIncompleteContent = {
+    headerImage: Images.ExclamationInCircle,
+    headerText: t("onboarding.app_setup_incomplete_header"),
+    bodyText: isLocationOffAndNeeded
+      ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
+      : t("onboarding.app_setup_incomplete_body", { applicationName }),
+    buttons: AppSetupIncompleteButtons,
+  }
+
+  const isAppSetupComplete =
+    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+
+  const screenContent = isAppSetupComplete
+    ? appSetupCompleteContent
+    : appSetupIncompleteContent
+  const Buttons = screenContent.buttons
 
   return (
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
     >
-      <Image source={image} style={style.image} />
-      <View style={style.textContainer}>
-        <GlobalText style={style.headerText}>{headerText}</GlobalText>
-        <GlobalText style={style.bodyText}>{determineBodyText()}</GlobalText>
+      <View style={style.innerContainer}>
+        <View style={style.topContainer}>
+          <Image source={screenContent.headerImage} style={style.headerImage} />
+          <View style={style.textContainer}>
+            <GlobalText style={style.headerText}>
+              {screenContent.headerText}
+            </GlobalText>
+            <GlobalText style={style.bodyText}>
+              {screenContent.bodyText}
+            </GlobalText>
+          </View>
+        </View>
+        <Buttons />
       </View>
-      <Buttons />
     </ScrollView>
   )
 }
@@ -115,10 +127,21 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    alignItems: "center",
-    paddingVertical: Spacing.large,
+    flexGrow: 1,
+    justifyContent: "center",
+    paddingTop: Spacing.small,
+    paddingBottom: Spacing.xLarge,
   },
-  image: {
+  innerContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  topContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerImage: {
     resizeMode: "cover",
     width: 230,
     height: 150,
@@ -149,4 +172,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default NotificationsPermissions
+export default ActivationSummary
