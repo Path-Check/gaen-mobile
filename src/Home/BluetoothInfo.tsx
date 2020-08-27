@@ -76,7 +76,7 @@ const style = StyleSheet.create({
     ...Typography.header2,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xLarge,
-    color: Colors.primary125,
+    color: Colors.primary150,
   },
   headerImage: {
     width: 130,

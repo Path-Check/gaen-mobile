@@ -8,6 +8,7 @@ import { HomeScreens } from "./index"
 import Home from "../Home/Home"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ProximityTracingInfo from "../Home/ProximityTracingInfo"
+import LocationInfo from "../Home/LocationInfo"
 
 const Stack = createStackNavigator()
 
@@ -34,6 +35,11 @@ const ExposureHistoryStack: FunctionComponent = () => {
       <Stack.Screen
         name={HomeScreens.ProximityTracingInfo}
         component={ProximityTracingInfo}
+        options={cardScreenOptions}
+      />
+      <Stack.Screen
+        name={HomeScreens.LocationInfo}
+        component={LocationInfo}
         options={cardScreenOptions}
       />
     </Stack.Navigator>
