@@ -29,7 +29,11 @@ export const ActivationScreens: {
   NotificationPermissions: "NotificationPermissions",
 }
 
-export type HomeScreen = "Home" | "BluetoothInfo" | "ProximityTracingInfo"
+export type HomeScreen =
+  | "Home"
+  | "BluetoothInfo"
+  | "ProximityTracingInfo"
+  | "LocationInfo"
 
 export const HomeScreens: {
   [key in HomeScreen]: HomeScreen
@@ -37,6 +41,7 @@ export const HomeScreens: {
   Home: "Home",
   BluetoothInfo: "BluetoothInfo",
   ProximityTracingInfo: "ProximityTracingInfo",
+  LocationInfo: "LocationInfo",
 }
 
 export type OnboardingScreen =

@@ -16,9 +16,12 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs Android (Native) unit tests"
-  lane :test do
-    gradle(task: "test")
+  desc "Increment version code"
+  lane :release_increment_version_code do |options|
+    increment_version_code(
+      gradle_file_path: "app/build.gradle",
+      version_code: options[:versionCode]
+    )
   end
 
   desc "Build a Debug AAB"
@@ -26,15 +29,16 @@ platform :android do
     gradle(
       task: "assemble",
       build_type: "debug",
-      print_command: false,
+      print_command: false
     )
   end
 
-  desc "Increment version code"
-  lane :release_increment_version_code do |options|
-    increment_version_code(
-      gradle_file_path: "app/build.gradle",
-      version_code: options[:versionCode]
+  desc "Build a Staging APK"
+  lane :staging_apk do |options|
+    gradle(
+      task: "assemble",
+      build_type: "staging",
+      print_command: false
     )
   end
 
@@ -82,21 +86,6 @@ platform :android do
       destinations: options[:destinations],
       release_notes: changeLogs,
       file: options[:apkPath]
-    )
-  end
-
-  desc "Upload to google play store beta track"
-  lane :play_store_bt do
-    validate_play_store_json_key(
-      json_key: "app/json_key.json",
-    )
-
-    upload_to_play_store(
-      track: 'beta',
-      release_status: 'draft',
-      skip_upload_apk: true,
-      package_name: 'org.pathcheck.covidsafepaths.bt',
-      aab: "app/build/outputs/bundle/release/app-release.aab"
     )
   end
 

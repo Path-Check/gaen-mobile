@@ -202,5 +202,17 @@ describe("CodeInputForm", () => {
         expect(getByText("Try a different code")).toBeDefined()
       })
     })
+
+    it("informs of a formatting error", async () => {
+      const { getByTestId, getByLabelText, getByText } = render(
+        <AffectedUserProvider>
+          <CodeInputForm />
+        </AffectedUserProvider>,
+      )
+      fireEvent.changeText(getByTestId("code-input"), "1234-678")
+
+      expect(getByLabelText("Next")).toBeDisabled()
+      expect(getByText("Invalid format")).toBeDefined()
+    })
   })
 })

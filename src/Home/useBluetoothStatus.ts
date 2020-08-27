@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react"
-import { Platform, AppState } from "react-native"
+import { AppState } from "react-native"
+
 import { isBluetoothEnabled } from "../gaen/nativeModule"
+import determineOSListener from "./determineOSListener"
 
 export const useBluetoothStatus = (): boolean => {
   const [btStatus, setBTStatus] = useState(false)
+
   useEffect(() => {
-    const fetchBTEnabled = async () => {
+    const determineBTStatus = async () => {
       const status = await fetchBTStatus()
       setBTStatus(status)
     }
 
-    fetchBTEnabled()
-    AppState.addEventListener(determineOSListener(), () => fetchBTEnabled())
+    determineBTStatus()
+
+    AppState.addEventListener(determineOSListener(), () => determineBTStatus())
+
     return AppState.removeEventListener(determineOSListener(), () =>
-      fetchBTEnabled(),
+      determineBTStatus(),
     )
   }, [])
 
@@ -22,13 +27,4 @@ export const useBluetoothStatus = (): boolean => {
 
 const fetchBTStatus = async (): Promise<boolean> => {
   return isBluetoothEnabled()
-}
-
-type ListenerMethod = "focus" | "change"
-const determineOSListener = (): ListenerMethod => {
-  return Platform.select({
-    ios: "change",
-    android: "focus",
-    default: "change",
-  })
 }

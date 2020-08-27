@@ -24,6 +24,9 @@ import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { isPlatformiOS } from "../utils/index"
 import { getLocalNames } from "../locales/languages"
+import { useConfigurationContext } from "../ConfigurationContext"
+import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useHasLocationRequirements } from "./useHasLocationRequirements"
 
 import { Icons, Images } from "../assets"
 import {
@@ -34,8 +37,6 @@ import {
   Outlines,
   Iconography,
 } from "../styles"
-import { useBluetoothStatus } from "./useBluetoothStatus"
-import { useConfigurationContext } from "../ConfigurationContext"
 
 const HomeScreen: FunctionComponent = () => {
   const {
@@ -43,17 +44,18 @@ const HomeScreen: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
+  const configuration = useConfigurationContext()
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
+  const isBluetoothOn = useBluetoothStatus()
+  const {
+    isLocationOn,
+    isLocationNeeded: showLocationStatus,
+    isLocationOffAndNeeded,
+  } = useHasLocationRequirements()
   useStatusBarEffect("light-content")
-  const btStatus = useBluetoothStatus()
-  const configuration = useConfigurationContext()
-
-  const isAuthorized = exposureNotifications.status.authorized
-  const isEnabled = exposureNotifications.status.enabled
-  const isEnabledAndAuthorized = isEnabled && isAuthorized
 
   const showUnauthorizedAlert = () => {
     Alert.alert(
@@ -89,7 +91,24 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
-  const showBluetoothDisabledAlert = () => {
+  const showFixLocationAlert = () => {
+    Alert.alert(
+      t("home.bluetooth.location_disabled_error_title"),
+      t("home.bluetooth.location_disabled_error_message"),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => Linking.openSettings(),
+        },
+      ],
+    )
+  }
+
+  const showFixBluetoothAlert = () => {
     Alert.alert(
       t("home.bluetooth.bluetooth_disabled_error_title"),
       t("home.bluetooth.bluetooth_disabled_error_message"),
@@ -115,7 +134,7 @@ const HomeScreen: FunctionComponent = () => {
   }
 
   const handleOnPressFixBluetooth = () => {
-    showBluetoothDisabledAlert()
+    showFixBluetoothAlert()
   }
 
   const handleOnPressFixProximityTracing = () => {
@@ -126,13 +145,21 @@ const HomeScreen: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressFixLocation = () => {
+    showFixLocationAlert()
+  }
+
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
   }
 
-  const isProximityTracingOn = isEnabledAndAuthorized
-  const isBluetoothOn = btStatus
-  const appIsActive = isProximityTracingOn && isBluetoothOn
+  const showShareLink = Boolean(configuration.appDownloadLink)
+
+  const isAuthorized = exposureNotifications.status.authorized
+  const isEnabled = exposureNotifications.status.enabled
+  const isProximityTracingOn = isEnabled && isAuthorized
+  const appIsActive =
+    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
 
   const iosMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 10
   const androidMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 30
@@ -197,27 +224,29 @@ const HomeScreen: FunctionComponent = () => {
       </View>
       <SafeAreaView style={bottomContainerStyle}>
         <ScrollView contentContainerStyle={style.bottomContentContainer}>
-          <TouchableOpacity
-            style={style.shareContainer}
-            onPress={handleOnPressShare}
-            accessibilityLabel={t("home.bluetooth.share")}
-          >
-            <View style={style.shareImageContainer}>
-              <Image source={Images.HugEmoji} style={style.shareImage} />
-            </View>
-            <View style={style.shareTextContainer}>
-              <GlobalText style={style.shareText}>
-                {t("home.bluetooth.share")}
-              </GlobalText>
-            </View>
-            <View style={style.shareIconContainer}>
-              <SvgXml
-                xml={Icons.Share}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-            </View>
-          </TouchableOpacity>
+          {showShareLink ? (
+            <TouchableOpacity
+              style={style.shareContainer}
+              onPress={handleOnPressShare}
+              accessibilityLabel={t("home.bluetooth.share")}
+            >
+              <View style={style.shareImageContainer}>
+                <Image source={Images.HugEmoji} style={style.shareImage} />
+              </View>
+              <View style={style.shareTextContainer}>
+                <GlobalText style={style.shareText}>
+                  {t("home.bluetooth.share")}
+                </GlobalText>
+              </View>
+              <View style={style.shareIconContainer}>
+                <SvgXml
+                  xml={Icons.Share}
+                  width={Iconography.small}
+                  height={Iconography.small}
+                />
+              </View>
+            </TouchableOpacity>
+          ) : null}
           <View style={style.activationStatusSectionContainer}>
             <ActivationStatusSection
               headerText={t("home.bluetooth.bluetooth_header")}
@@ -235,6 +264,15 @@ const HomeScreen: FunctionComponent = () => {
               fixAction={handleOnPressFixProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
+            {showLocationStatus && (
+              <ActivationStatusSection
+                headerText={t("home.bluetooth.location_header")}
+                isActive={isLocationOn}
+                infoAction={() => navigation.navigate(HomeScreens.LocationInfo)}
+                fixAction={handleOnPressFixLocation}
+                testID={"home-location-status-container"}
+              />
+            )}
           </View>
           <View style={style.buttonContainer}>
             <Button

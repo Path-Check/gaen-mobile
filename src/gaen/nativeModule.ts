@@ -142,6 +142,16 @@ export const isBluetoothEnabled = async (): Promise<boolean> => {
   return bluetoothStatus === true || bluetoothStatus === "true"
 }
 
+export const doesDeviceSupportLocationlessScanning = async (): Promise<
+  boolean
+> => {
+  return deviceInfoModule.deviceSupportsLocationlessScanning()
+}
+
+export const isLocationEnabled = async (): Promise<boolean> => {
+  return deviceInfoModule.isLocationEnabled()
+}
+
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
