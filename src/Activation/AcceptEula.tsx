@@ -13,9 +13,8 @@ import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { GradientBackground } from "../components"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText, Button } from "../components"
 import { ActivationScreens } from "../navigation"
-import { Button } from "../components/Button"
 
 import {
   Forms,

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { useStatusBarEffect } from "../navigation"
 
 import { Spacing, Typography, Colors } from "../styles"

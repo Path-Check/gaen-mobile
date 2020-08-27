@@ -4,11 +4,9 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
 
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
-import { GradientBackground } from "../components"
+import { GlobalText, Button, GradientBackground } from "../components"
 import { getLocalNames } from "../locales/languages"
-import { useApplicationName } from "../More/useApplicationInfo"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 import { Images } from "../assets"

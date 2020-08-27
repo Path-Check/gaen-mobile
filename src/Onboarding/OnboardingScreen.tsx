@@ -15,8 +15,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import LinearGradient from "react-native-linear-gradient"
 
-import { Button } from "../components/Button"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText, Button } from "../components"
 import {
   Screens,
   OnboardingScreens,

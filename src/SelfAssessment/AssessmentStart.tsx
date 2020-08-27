@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import InfoText from "./InfoText"
-import { Button } from "../components/Button"
+import { Button } from "../components"
 import { AssessmentLayout } from "./AssessmentLayout"
 
 import { Colors } from "../styles"

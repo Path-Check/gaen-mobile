@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Linking, StyleSheet } from "react-native"
 
-import { Button } from "../../components/Button"
+import { Button } from "../../components"
 import { AssessmentLayout } from "../AssessmentLayout"
 import InfoText from "../InfoText"
 
