@@ -1,4 +1,4 @@
-import {useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import NetInfo from "@react-native-community/netinfo"
 
 export const useConnectionStatus = (): boolean | null | undefined => {
