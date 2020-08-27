@@ -21,12 +21,11 @@ const NotificationsPermissions: FunctionComponent = () => {
   const { notification } = usePermissionsContext()
   const navigation = useNavigation()
 
-  const requestPermission = async () => {
-    await notification.request()
-  }
-
   const handleOnPressEnable = async () => {
-    await requestPermission()
+    await new Promise((resolve) => {
+      notification.request()
+      resolve()
+    })
     navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
