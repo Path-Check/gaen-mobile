@@ -6,7 +6,6 @@ extension String {
 
   // API
   static let revisionToken = "revisionToken"
-  static let revisionTokenDev = "revisionTokenDev"
 
   // EN
   static let notAuthorized = "notAuthorized"
