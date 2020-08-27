@@ -30,23 +30,31 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 10,
+        return Realm.Configuration(inMemoryIdentifier: identifier,
+                                   encryptionKey: key as Data,
+                                   schemaVersion: 10,
                                    migrationBlock: { migration, oldVersion in
                                     if oldVersion < 10 {
                                       self.storeExposures(Array(self.userState.exposures))
                                     }
-        }, objectTypes: [UserState.self,
-                         Exposure.self,
-                         ExposureDetectionSummary.self])
+        }, objectTypes: [
+          AttenuationDuration.self,
+          UserState.self,
+          Exposure.self,
+          ExposureDetectionSummary.self
+        ])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 10,
+        return Realm.Configuration(encryptionKey: key as Data,
+                                   schemaVersion: 10,
                                    migrationBlock: { migration, oldVersion in
                                     if oldVersion < 10 {
                                       self.storeExposures(Array(self.userState.exposures))
                                     }
-        }, objectTypes: [UserState.self,
-                         Exposure.self,
-                         ExposureDetectionSummary.self])
+        }, objectTypes: [
+          AttenuationDuration.self,
+          UserState.self,
+          Exposure.self,
+          ExposureDetectionSummary.self])
       }
     } else {
       return nil
