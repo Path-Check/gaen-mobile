@@ -112,13 +112,13 @@ public class ExposureNotificationClientWrapper {
           // Ignore the error, use the default config
           return null;
         }, AppExecutors.getLightweightExecutor())
-        .transformAsync((aVoid) -> setDiagnosisKeysDataMapping(), AppExecutors.getBackgroundExecutor())
+        .transformAsync((done) -> setDiagnosisKeysDataMapping(), AppExecutors.getBackgroundExecutor())
         .catching(Exception.class, exception -> {
           Log.d(TAG, "setDiagnosisKeysDataMapping failed: " + exception);
           // Ignore the error, this method throws an error if it's called multiple times
           return null;
         }, AppExecutors.getLightweightExecutor())
-        .transformAsync((aVoid) -> provideDiagnosisKeysFuture(files), AppExecutors.getBackgroundExecutor());
+        .transformAsync((done) -> provideDiagnosisKeysFuture(files), AppExecutors.getBackgroundExecutor());
   }
 
   private ListenableFuture<Void> provideDiagnosisKeysFuture(List<File> files) {

@@ -63,7 +63,9 @@ public class StateUpdatedWorker extends ListenableWorker {
           }
           return Result.success();
         }, AppExecutors.getLightweightExecutor())
-        .catching(Exception.class, x -> {
+        .catching(
+            Exception.class,
+            x -> {
               Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
               return Result.failure();
             },

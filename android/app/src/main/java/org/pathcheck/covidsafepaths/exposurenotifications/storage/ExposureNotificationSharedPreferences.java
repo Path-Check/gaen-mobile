@@ -96,8 +96,7 @@ public class ExposureNotificationSharedPreferences {
     String json = sharedPreferences.getString(ATTENUATION_DURATION_THRESHOLDS, null);
     return json == null
         ? defaultValue
-        : new Gson().fromJson(json, new TypeToken<List<Integer>>() {
-    }.getType());
+        : new Gson().fromJson(json, new TypeToken<List<Integer>>() {}.getType());
   }
 
   public void setAttenuationBucketWeights(List<Double> weights) {
@@ -108,8 +107,7 @@ public class ExposureNotificationSharedPreferences {
     String json = sharedPreferences.getString(ATTENUATION_BUCKET_WEIGHTS, null);
     return json == null
         ? defaultValue
-        : new Gson().fromJson(json, new TypeToken<List<Double>>() {
-    }.getType());
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
   }
 
   public void setReportTypeWeights(List<Double> weights) {
@@ -120,8 +118,7 @@ public class ExposureNotificationSharedPreferences {
     String json = sharedPreferences.getString(REPORT_TYPE_WEIGHTS, null);
     return json == null
         ? defaultValue
-        : new Gson().fromJson(json, new TypeToken<List<Double>>() {
-    }.getType());
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
   }
 
   public void setInfectiousnessWeights(List<Double> weights) {
@@ -132,8 +129,7 @@ public class ExposureNotificationSharedPreferences {
     String json = sharedPreferences.getString(INFECTIOUSNESS_WEIGHTS, null);
     return json == null
         ? defaultValue
-        : new Gson().fromJson(json, new TypeToken<List<Double>>() {
-    }.getType());
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
   }
 
   public void setInfectiousnessWhenDaysSinceOnsetMissing(Integer infectiousness) {
@@ -152,8 +148,7 @@ public class ExposureNotificationSharedPreferences {
     String json = sharedPreferences.getString(DAYS_SINCE_ONSET_TO_INFECTIOUSNESS, null);
     return json == null
         ? defaultValue
-        : new Gson().fromJson(json, new TypeToken<Map<Integer, Integer>>() {
-    }.getType());
+        : new Gson().fromJson(json, new TypeToken<Map<Integer, Integer>>() {}.getType());
   }
 
   public void setReportTypeWhenMissing(Integer reportType) {

@@ -43,7 +43,7 @@ class ExposureConfigurations(context: Context) {
             -2 to 1, -1 to 1, 0 to 1, 1 to 1, 2 to 1, 3 to 1, 4 to 1, 5 to 1, 6 to 1,
             7 to 1, 8 to 1, 9 to 1, 10 to 1, 11 to 1, 12 to 1, 13 to 1, 14 to 1
         )
-        private const val DEFAULT_REPORT_TYPE_WHEN_MISSING = 1;
+        private const val DEFAULT_REPORT_TYPE_WHEN_MISSING = 1
     }
 
     private val prefs = ExposureNotificationSharedPreferences(context)
@@ -55,7 +55,8 @@ class ExposureConfigurations(context: Context) {
                     Log.d(TAG, "Parsing configuration response")
                     val dailySummariesObject = json.getJSONObject("DailySummariesConfig")
 
-                    val attenuationDurationThresholds = dailySummariesObject.getJSONArray("attenuationDurationThresholds")
+                    val attenuationDurationThresholds =
+                        dailySummariesObject.getJSONArray("attenuationDurationThresholds")
                     val attenuationDurationThresholdsList = mutableListOf<Int>()
                     for (i in 0 until attenuationDurationThresholds.length()) {
                         attenuationDurationThresholdsList.add(attenuationDurationThresholds.getInt(i))
@@ -83,7 +84,8 @@ class ExposureConfigurations(context: Context) {
                     }
                     prefs.setInfectiousnessWeights(infectiousnessWeightsList)
 
-                    val daysSinceOnsetToInfectiousness = dailySummariesObject.getJSONArray("daysSinceOnsetToInfectiousness")
+                    val daysSinceOnsetToInfectiousness =
+                        dailySummariesObject.getJSONArray("daysSinceOnsetToInfectiousness")
                     val daysSinceOnsetToInfectiousnessMap = hashMapOf<Int, Int>()
                     for (i in 0 until daysSinceOnsetToInfectiousness.length()) {
                         val mapEntry = daysSinceOnsetToInfectiousness.getJSONArray(i)
@@ -91,7 +93,9 @@ class ExposureConfigurations(context: Context) {
                     }
                     prefs.setDaysSinceOnsetToInfectiousness(daysSinceOnsetToInfectiousnessMap)
 
-                    prefs.setInfectiousnessWhenDaysSinceOnsetMissing(dailySummariesObject.getInt("infectiousnessWhenDaysSinceOnsetMissing"))
+                    prefs.setInfectiousnessWhenDaysSinceOnsetMissing(
+                        dailySummariesObject.getInt("infectiousnessWhenDaysSinceOnsetMissing")
+                    )
                     prefs.setReportTypeWhenMissing(dailySummariesObject.getInt("reportTypeWhenMissing"))
 
                     prefs.setTriggerThresholdWeightedDuration(json.getInt("triggerThresholdWeightedDuration"))
@@ -136,9 +140,15 @@ class ExposureConfigurations(context: Context) {
 
     fun getDiagnosisKeysDataMapping(): DiagnosisKeysDataMapping {
         return DiagnosisKeysDataMapping.DiagnosisKeysDataMappingBuilder()
-            .setInfectiousnessWhenDaysSinceOnsetMissing(prefs.getInfectiousnessWhenDaysSinceOnsetMissing(DEFAULT_INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING))
-            .setDaysSinceOnsetToInfectiousness(prefs.getDaysSinceOnsetToInfectiousness(DEFAULT_DAYS_SINCE_ONSET_TO_INFECTIOUSNESS))
-            .setReportTypeWhenMissing(prefs.getReportTypeWhenMissing(DEFAULT_REPORT_TYPE_WHEN_MISSING))
+            .setInfectiousnessWhenDaysSinceOnsetMissing(
+                prefs.getInfectiousnessWhenDaysSinceOnsetMissing(DEFAULT_INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING)
+            )
+            .setDaysSinceOnsetToInfectiousness(
+                prefs.getDaysSinceOnsetToInfectiousness(DEFAULT_DAYS_SINCE_ONSET_TO_INFECTIOUSNESS)
+            )
+            .setReportTypeWhenMissing(
+                prefs.getReportTypeWhenMissing(DEFAULT_REPORT_TYPE_WHEN_MISSING)
+            )
             .build()
     }
 

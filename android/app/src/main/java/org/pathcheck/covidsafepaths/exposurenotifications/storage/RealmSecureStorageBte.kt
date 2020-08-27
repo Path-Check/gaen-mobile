@@ -5,7 +5,6 @@ import androidx.annotation.VisibleForTesting
 import com.bottlerocketstudios.vault.SharedPreferenceVault
 import com.bottlerocketstudios.vault.SharedPreferenceVaultFactory
 import com.google.android.gms.nearby.exposurenotification.DailySummary
-import com.google.android.gms.nearby.exposurenotification.ExposureWindow
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
@@ -16,7 +15,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyVal
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.REVISION_TOKEN_KEY
 import org.threeten.bp.Duration
-import java.util.concurrent.TimeUnit
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
