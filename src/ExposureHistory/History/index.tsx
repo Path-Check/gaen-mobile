@@ -37,20 +37,20 @@ const History: FunctionComponent<HistoryProps> = ({
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false)
-  const prevExposuresRef = useRef<ExposureDatum[]>()
+  const previousExposuresRef = useRef<ExposureDatum[]>()
 
   useEffect(() => {
-    prevExposuresRef.current = exposures
+    previousExposuresRef.current = exposures
   })
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
   }
 
-  const handleRefresh = () => {
-    const prevExposures = prevExposuresRef.current
+  const handleOnRefresh = () => {
+    const previousExposures = previousExposuresRef.current
 
-    if (!isEqual(prevExposures, exposures)) {
+    if (!isEqual(previousExposures, exposures)) {
       setRefreshing(true)
     }
     setRefreshing(false)
@@ -67,9 +67,11 @@ const History: FunctionComponent<HistoryProps> = ({
         <ScrollView
           contentContainerStyle={style.contentContainer}
           style={style.container}
-          alwaysBounceVertical={false}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleOnRefresh}
+            />
           }
         >
           <View>
