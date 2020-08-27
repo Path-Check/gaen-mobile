@@ -27,7 +27,7 @@ const Welcome: FunctionComponent = () => {
   }
 
   return (
-    <GradientBackground>
+    <GradientBackground gradient={Colors.gradientPrimary10} angleCenterY={0.25}>
       <View style={style.container}>
         <TouchableOpacity
           onPress={handleOnPressSelectLanguage}

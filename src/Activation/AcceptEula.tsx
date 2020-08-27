@@ -23,7 +23,6 @@ import {
   Spacing,
   Outlines,
   Typography,
-  Layout,
 } from "../styles"
 import { useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -56,8 +55,7 @@ const AcceptEula: FunctionComponent = () => {
     : t("label.unchecked_checkbox")
 
   return (
-    <>
-      <GradientBackground />
+    <GradientBackground gradient={Colors.gradientPrimary10}>
       <SafeAreaView style={style.container}>
         <GlobalText style={style.headerText}>
           {t("onboarding.terms_header_title")}
@@ -93,7 +91,7 @@ const AcceptEula: FunctionComponent = () => {
           />
         </View>
       </SafeAreaView>
-    </>
+    </GradientBackground>
   )
 }
 
@@ -122,7 +120,6 @@ const EulaLink: FunctionComponent<EulaLinkProps> = ({ docName, onPress }) => {
 }
 const style = StyleSheet.create({
   container: {
-    ...Layout.positionOverBackground,
     flex: 1,
     margin: Spacing.xxLarge,
   },

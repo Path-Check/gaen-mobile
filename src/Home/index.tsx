@@ -2,32 +2,31 @@ import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   TouchableOpacity,
-  Platform,
   StyleSheet,
-  SafeAreaView,
-  ImageBackground,
+  StatusBar,
   View,
 } from "react-native"
-import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { GlobalText, Button } from "../components"
+import { GlobalText, Button, GradientBackground } from "../components"
 import { getLocalNames } from "../locales/languages"
 import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "./useHasLocationRequirements"
-
-import { Images } from "../assets"
-import { Spacing, Colors, Typography, Layout, Outlines } from "../styles"
-import { ShareLink } from "./ShareLink"
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
 import { LocationActivationStatus } from "./LocationActivationStatus"
+import { ShareLink } from "./ShareLink"
 
-const HomeScreen: FunctionComponent = () => {
+import { Icons } from "../assets"
+import { Spacing, Colors, Typography, Outlines, Iconography } from "../styles"
+
+const Home: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const {
     t,
@@ -37,6 +36,9 @@ const HomeScreen: FunctionComponent = () => {
 
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
+
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const isBluetoothOn = useBluetoothStatus()
   const { isLocationOffAndNeeded } = useHasLocationRequirements()
@@ -52,10 +54,11 @@ const HomeScreen: FunctionComponent = () => {
     navigation.navigate(Screens.LanguageSelection)
   }
 
-  const insets = useSafeAreaInsets()
-  const style = createStyles(insets)
-
-  const backgroundImage = appIsActive ? Images.HomeActive : Images.HomeInactive
+  const topIcon = appIsActive ? Icons.CheckInCircle : Icons.XInCircle
+  const topIconFill = appIsActive ? Colors.success100 : Colors.danger75
+  const topIconAccessibilityLabel = appIsActive
+    ? t("status_icon_active_label")
+    : t("status_icon_inactive_label")
   const headerText = appIsActive
     ? t("home.bluetooth.tracing_on_header")
     : t("home.bluetooth.tracing_off_header")
@@ -64,34 +67,51 @@ const HomeScreen: FunctionComponent = () => {
     : t("home.bluetooth.tracing_off_subheader")
 
   return (
-    <View style={style.container}>
-      <ImageBackground style={style.backgroundImage} source={backgroundImage} />
-      <View style={style.languageButtonOuterContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressSelectLanguage}
-          style={style.languageButtonContainer}
+    <>
+      <View style={style.statusBarContainer}>
+        <StatusBar />
+      </View>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+      >
+        <View style={style.topScrollViewBackground} />
+        <GradientBackground
+          gradient={Colors.gradientPrimary100}
+          angleCenterY={1}
         >
-          <GlobalText style={style.languageButtonText}>
-            {languageName}
-          </GlobalText>
-        </TouchableOpacity>
-      </View>
-      <View style={style.textContainer}>
-        <GlobalText style={style.headerText} testID={"home-header"}>
-          {headerText}
-        </GlobalText>
-        <GlobalText style={style.subheaderText} testID={"home-subheader"}>
-          {subheaderText}
-        </GlobalText>
-      </View>
-      <SafeAreaView style={style.bottomContainer}>
-        <ScrollView contentContainerStyle={style.bottomContentContainer}>
-          <ShareLink />
-          <View style={style.activationStatusSectionContainer}>
-            <BluetoothActivationStatus />
-            <ProximityTracingActivationStatus />
-            <LocationActivationStatus />
+          <View style={style.topContainer}>
+            <TouchableOpacity
+              onPress={handleOnPressSelectLanguage}
+              style={style.languageButtonContainer}
+            >
+              <GlobalText style={style.languageButtonText}>
+                {languageName}
+              </GlobalText>
+            </TouchableOpacity>
+            <View style={style.topIcon}>
+              <SvgXml
+                xml={topIcon}
+                width={Iconography.large}
+                height={Iconography.large}
+                fill={topIconFill}
+                accessible
+                accessibilityLabel={topIconAccessibilityLabel}
+              />
+            </View>
+            <GlobalText style={style.headerText} testID={"home-header"}>
+              {headerText}
+            </GlobalText>
+            <GlobalText style={style.subheaderText} testID={"home-subheader"}>
+              {subheaderText}
+            </GlobalText>
           </View>
+        </GradientBackground>
+        <View style={style.bottomContainer}>
+          <ShareLink />
+          <BluetoothActivationStatus />
+          <ProximityTracingActivationStatus />
+          <LocationActivationStatus />
           <View style={style.buttonContainer}>
             <Button
               onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
@@ -100,36 +120,39 @@ const HomeScreen: FunctionComponent = () => {
               hasRightArrow
             />
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        </View>
+      </ScrollView>
+    </>
   )
 }
 
-const createStyles = (insets: EdgeInsets) => {
-  const iosMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 10
-  const androidMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 30
-  const iosTopSpacing = Layout.screenHeight * 0.225 - insets.top + 55
-  const androidTopSpacing = Layout.screenHeight * 0.225 - insets.top + 80
-  const iosPaddingTop = Layout.screenHeight * 0.5 - insets.top + 300
-  const androidPaddingTop = 680
-
-  /*eslint-disable react-native/no-unused-styles */
+const createStyle = (insets: EdgeInsets) => {
+  /* es-lint-disable-no-unused-styles */
   return StyleSheet.create({
-    container: {
-      flex: 1,
+    statusBarContainer: {
+      height: insets.top,
+      backgroundColor: Colors.gradientPrimary100Lighter,
     },
-    backgroundImage: {
-      width: "100%",
-      paddingTop: Platform.select({
-        ios: iosPaddingTop,
-        android: androidPaddingTop,
-      }),
-    },
-    languageButtonOuterContainer: {
+    topScrollViewBackground: {
       position: "absolute",
-      top: Layout.oneTwentiethHeight,
+      top: "-100%",
+      left: 0,
+      right: 0,
+      backgroundColor: Colors.gradientPrimary100Lighter,
+      height: "100%",
+    },
+    container: {
+      backgroundColor: Colors.primaryLightBackground,
+    },
+    contentContainer: {
+      paddingBottom: Spacing.large,
+      backgroundColor: Colors.primaryLightBackground,
+    },
+    topContainer: {
       width: "100%",
+      alignItems: "center",
+      paddingTop: Spacing.xxSmall,
+      paddingBottom: Spacing.xLarge,
     },
     languageButtonContainer: {
       alignSelf: "center",
@@ -137,6 +160,7 @@ const createStyles = (insets: EdgeInsets) => {
       paddingHorizontal: Spacing.large,
       backgroundColor: Colors.transparentNeutral30,
       borderRadius: Outlines.borderRadiusMax,
+      marginBottom: Spacing.large,
     },
     languageButtonText: {
       ...Typography.body3,
@@ -145,18 +169,15 @@ const createStyles = (insets: EdgeInsets) => {
       textAlign: "center",
       textTransform: "uppercase",
     },
-    textContainer: {
-      alignSelf: "center",
-      marginHorizontal: Spacing.medium,
-      position: "absolute",
-      alignItems: "center",
-      top: Platform.select({
-        ios: iosTopSpacing,
-        android: androidTopSpacing,
-      }),
+    topIcon: {
+      backgroundColor: Colors.white,
+      borderRadius: Outlines.borderRadiusMax,
+      padding: 10,
+      marginBottom: Spacing.large,
     },
     headerText: {
       ...Typography.header1,
+      ...Typography.mediumBold,
       color: Colors.white,
       textAlign: "center",
       marginBottom: Spacing.xxSmall,
@@ -164,27 +185,16 @@ const createStyles = (insets: EdgeInsets) => {
     subheaderText: {
       ...Typography.body1,
       fontSize: Typography.large,
+      paddingHorizontal: Spacing.medium,
       color: Colors.white,
       textAlign: "center",
       marginBottom: Spacing.xxSmall,
     },
     bottomContainer: {
-      position: "absolute",
-      bottom: 0,
-      width: "100%",
       backgroundColor: Colors.primaryLightBackground,
-      maxHeight: Platform.select({
-        ios: iosMaxHeight,
-        android: androidMaxHeight,
-      }),
-    },
-    bottomContentContainer: {
-      paddingBottom: Spacing.large,
-    },
-    activationStatusSectionContainer: {
-      marginBottom: Spacing.medium,
     },
     buttonContainer: {
+      paddingTop: Spacing.medium,
       paddingHorizontal: Spacing.small,
     },
     button: {
@@ -194,4 +204,4 @@ const createStyles = (insets: EdgeInsets) => {
   })
 }
 
-export default HomeScreen
+export default Home

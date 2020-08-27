@@ -48,10 +48,6 @@ export enum ENStatus {
   AUTHORIZED_ENABLED,
 }
 
-const initialENAuthorizationEnablementStatus: ENStatus = toENStatus(
-  initialENPermissionStatus,
-)
-
 export interface PermissionsContextState {
   notification: {
     status: PermissionStatus
@@ -72,7 +68,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENAuthorizationEnablementStatus,
+    status: ENStatus.UNAUTHORIZED_DISABLED,
     check: () => {},
     request: () => {},
   },
