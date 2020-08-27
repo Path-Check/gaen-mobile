@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import { View, ScrollView, StyleSheet, Linking } from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import NetInfo from "@react-native-community/netinfo"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
 import { ExposureDatum, exposureWindowBucket } from "../exposure"
+import { useConnectionStatus } from "../hooks/useConnectionStatus"
 
 import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -27,20 +27,7 @@ const ExposureDetail: FunctionComponent = () => {
     healthAuthorityAdviceUrl,
   } = useConfigurationContext()
 
-  const [isConnected, setIsConnected] = useState<boolean | null | undefined>(
-    true,
-  )
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      // netInfo state comes as null while unresolved so to avoid flicker we only set component state
-      // if the netInfo state is resolved to boolean
-      if (state.isInternetReachable !== null) {
-        setIsConnected(state.isInternetReachable)
-      }
-    })
-    return unsubscribe
-  }, [])
+  const isConnected = useConnectionStatus()
 
   const { exposureDatum } = route.params
 
