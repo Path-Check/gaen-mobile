@@ -1,14 +1,16 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState, useEffect, useRef } from "react"
 import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View,
   ScrollView,
+  RefreshControl,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
 import { GlobalText } from "../../components/GlobalText"
@@ -34,9 +36,24 @@ const History: FunctionComponent<HistoryProps> = ({
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const [refreshing, setRefreshing] = useState(false)
+  const previousExposuresRef = useRef<ExposureDatum[]>()
+
+  useEffect(() => {
+    previousExposuresRef.current = exposures
+  })
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
+  }
+
+  const handleOnRefresh = () => {
+    const previousExposures = previousExposuresRef.current
+
+    if (!isEqual(previousExposures, exposures)) {
+      setRefreshing(true)
+    }
+    setRefreshing(false)
   }
 
   const showExposureHistory = exposures.length > 0
@@ -50,7 +67,12 @@ const History: FunctionComponent<HistoryProps> = ({
         <ScrollView
           contentContainerStyle={style.contentContainer}
           style={style.container}
-          alwaysBounceVertical={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleOnRefresh}
+            />
+          }
         >
           <View>
             <View style={style.headerRow}>
