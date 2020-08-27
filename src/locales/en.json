@@ -85,8 +85,8 @@
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
-      "invalid_format": "Invalid format",
       "invalid_code": "Try a different code",
+      "invalid_format": "Invalid format",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },

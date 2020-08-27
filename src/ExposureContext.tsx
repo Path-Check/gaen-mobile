@@ -90,7 +90,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     return () => {
       AppState.removeEventListener("change", handleAppStateChange)
     }
-  }, [getCurrentExposures])
+  }, [])
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
