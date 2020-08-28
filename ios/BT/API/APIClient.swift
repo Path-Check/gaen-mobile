@@ -36,7 +36,7 @@ class BTAPIClient: APIClient {
   let exposureConfigurationUrl: URL
   static let shared = BTAPIClient(
     postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
-    downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
+    downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadUrl))!,
     exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!
   )
   

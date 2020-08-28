@@ -14,7 +14,7 @@ enum IndexFileRequest: APIRequest {
   }
 
   var path: String {
-    (ReactNativeConfig.env(for: .downloadPath)) + "/index.txt"
+    "index.txt"
   }
 
 }
