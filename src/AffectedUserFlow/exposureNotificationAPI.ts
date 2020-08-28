@@ -26,11 +26,13 @@ export enum PostKeysError {
 }
 
 export type PostKeysFailure = {
+  kind: "failure"
   nature: PostKeysError
   message: string
 }
 
 export type PostKeysSuccess = {
+  kind: "success"
   revisionToken: Token
 }
 
@@ -39,6 +41,7 @@ export enum PostKeysNoOpReason {
 }
 
 export type PostKeysNoOp = {
+  kind: "no-op"
   reason: PostKeysNoOpReason
   newKeysInserted: number
   message: string
@@ -77,22 +80,31 @@ export const postDiagnosisKeys = async (
 
     const json: PostKeysResponseBody = await response.json()
     if (response.ok) {
-      return { revisionToken: json.revisionToken }
+      return { kind: "success", revisionToken: json.revisionToken }
     } else {
       switch (json.error) {
         case EXISTING_KEYS_SENT_RESPONSE: {
           return {
+            kind: "no-op",
             reason: PostKeysNoOpReason.NoTokenForExistingKeys,
             newKeysInserted: json.insertedExposures || 0,
             message: json.error,
           }
         }
         default: {
-          return { nature: PostKeysError.Unknown, message: json.error }
+          return {
+            kind: "failure",
+            nature: PostKeysError.Unknown,
+            message: json.error,
+          }
         }
       }
     }
   } catch (e) {
-    return { nature: PostKeysError.RequestFailed, message: e.message }
+    return {
+      kind: "failure",
+      nature: PostKeysError.RequestFailed,
+      message: e.message,
+    }
   }
 }

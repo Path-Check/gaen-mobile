@@ -91,6 +91,7 @@ describe("PublishConsentScreen", () => {
       const storeRevisionTokenSpy = jest.fn()
       const newRevisionToken = "newRevisionToken"
       const successfulPostResponse = {
+        kind: "success" as const,
         revisionToken: newRevisionToken,
       }
       const postDiagnosisKeysSpy = jest.spyOn(ExposureAPI, "postDiagnosisKeys")
@@ -131,6 +132,7 @@ describe("PublishConsentScreen", () => {
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const newKeysInserted = 1
       const noOpPostResponse = {
+        kind: "no-op" as const,
         reason: ExposureAPI.PostKeysNoOpReason.NoTokenForExistingKeys,
         newKeysInserted,
         message: "no_token_for_existing_keys",
@@ -173,6 +175,7 @@ describe("PublishConsentScreen", () => {
           "postDiagnosisKeys",
         )
         postDiagnosisKeysSpy.mockResolvedValueOnce({
+          kind: "failure",
           nature: ExposureAPI.PostKeysError.Unknown,
           message: errorMessage,
         })
@@ -214,6 +217,7 @@ describe("PublishConsentScreen", () => {
           "postDiagnosisKeys",
         )
         postDiagnosisKeysSpy.mockResolvedValueOnce({
+          kind: "failure",
           nature: ExposureAPI.PostKeysError.RequestFailed,
           message: errorMessage,
         })

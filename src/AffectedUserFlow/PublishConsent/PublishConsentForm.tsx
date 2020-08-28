@@ -33,7 +33,6 @@ import {
   postDiagnosisKeys,
   PostKeysError,
   PostKeysNoOp,
-  PostKeysSuccess,
   PostKeysFailure,
 } from "../exposureNotificationAPI"
 
@@ -121,13 +120,13 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       revisionToken,
     )
     setIsLoading(false)
-    if ((response as PostKeysSuccess).revisionToken) {
-      storeRevisionToken((response as PostKeysSuccess).revisionToken)
+    if (response.kind === "success") {
+      storeRevisionToken(response.revisionToken)
       navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
-    } else if ((response as PostKeysNoOp).reason) {
-      handleNoOpResponse(response as PostKeysNoOp)
+    } else if (response.kind === "no-op") {
+      handleNoOpResponse(response)
     } else {
-      handleFailureResponse(response as PostKeysFailure)
+      handleFailureResponse(response)
     }
   }
   useStatusBarEffect("dark-content")

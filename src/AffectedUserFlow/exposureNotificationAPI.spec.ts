@@ -48,13 +48,11 @@ describe("postDiagnosisKeys", () => {
 
   describe("on a successful request", () => {
     it("returns a success response with the revisionToken", async () => {
-      const jsonResponse = {
-        revisionToken: "revisionToken",
-      }
+      const revisionToken = "revisionToken"
 
       ;(fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValueOnce(jsonResponse),
+        json: jest.fn().mockResolvedValueOnce({ revisionToken }),
       })
 
       const result = await postDiagnosisKeys(
@@ -66,7 +64,10 @@ describe("postDiagnosisKeys", () => {
         "revisionToken",
       )
 
-      expect(result).toEqual(jsonResponse)
+      expect(result).toEqual({
+        kind: "success",
+        revisionToken,
+      })
     })
   })
 
@@ -94,6 +95,7 @@ describe("postDiagnosisKeys", () => {
       )
 
       expect(result).toEqual({
+        kind: "no-op",
         reason: PostKeysNoOpReason.NoTokenForExistingKeys,
         newKeysInserted,
         message,
@@ -119,6 +121,7 @@ describe("postDiagnosisKeys", () => {
         )
 
         expect(result).toEqual({
+          kind: "failure",
           nature: PostKeysError.RequestFailed,
           message: errorMessage,
         })
@@ -143,6 +146,7 @@ describe("postDiagnosisKeys", () => {
         )
 
         expect(result).toEqual({
+          kind: "failure",
           nature: PostKeysError.Unknown,
           message: error,
         })
