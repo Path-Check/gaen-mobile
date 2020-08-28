@@ -4,11 +4,11 @@ import * as Colors from "./colors"
 import * as Typography from "./typography"
 
 export const headerStyle: ViewStyle = {
-  backgroundColor: Colors.tertiaryBlue,
+  backgroundColor: Colors.primary125,
 }
 
 export const headerTitleStyle: TextStyle = {
-  ...Typography.base,
+  ...Typography.mediumBold,
   color: Colors.headerText,
   letterSpacing: Typography.mediumLetterSpacing,
   textTransform: "uppercase",

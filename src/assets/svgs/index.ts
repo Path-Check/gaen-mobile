@@ -2,6 +2,7 @@ import AlertCircle from "./alertCircle"
 import AnonymizedData from "./anonymizedData"
 import AnonymizedDataInverted from "./anonymizedDataInverted"
 import Arrow from "./arrow"
+import ArrowLeft from "./arrowLeft"
 import BackArrow from "./backArrow"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
@@ -17,6 +18,7 @@ import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import GoogleMapsLogo from "./google-maps-logo"
 import Heart from "./heart"
+import HomeInfo from "./homeInfo"
 import House from "./house"
 import Isolate from "./isolate"
 import IsolateBubbles from "./isolateBubbles"
@@ -33,6 +35,7 @@ import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
 import Upload from "./upload"
 import WashHands from "./WashHands"
+import X from "./x"
 import XInCircle from "./xInCircle"
 
 export const Icons = {
@@ -40,6 +43,7 @@ export const Icons = {
   AnonymizedData,
   AnonymizedDataInverted,
   Arrow,
+  ArrowLeft,
   BackArrow,
   Bell,
   BellYellow,
@@ -55,6 +59,7 @@ export const Icons = {
   ExposureIcon,
   GoogleMapsLogo,
   Heart,
+  HomeInfo,
   House,
   Isolate,
   IsolateBubbles,
@@ -72,4 +77,5 @@ export const Icons = {
   Upload,
   WashHands,
   XInCircle,
+  X,
 }

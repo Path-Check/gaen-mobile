@@ -28,7 +28,8 @@
     "i18n:push": "./src/locales/push.sh",
     "test": "jest --config=./jest/config.js",
     "test:watch": "jest --config=./jest/config.js --watch",
-    "assemble-android-debug": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug"
+    "assemble-android-debug": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && ./android/gradlew -p android assembleDebug",
+    "lint:android": "./android/gradlew -p android app:lintDebug app:ktlintCheck app:checkstyle"
   },
   "husky": {
     "hooks": {
@@ -41,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@bugsnag/react-native": "^7.3.2",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/masked-view": "^0.1.10",
@@ -52,11 +54,11 @@
     "array-flat-polyfill": "^1.0.1",
     "dayjs": "^1.8.24",
     "i18next": "^19.3.3",
+    "lodash.isequal": "^4.5.0",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-i18next": "^11.4.0",
     "react-native": "0.62.2",
-    "react-native-background-fetch": "^3.1.0",
     "react-native-config": "^1.2.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
@@ -79,6 +81,7 @@
     "@testing-library/jest-native": "^3.3.0",
     "@testing-library/react-native": "^7.0.1",
     "@types/jest": "^26.0.9",
+    "@types/lodash.isequal": "^4.5.5",
     "@types/react": "^16.9.35",
     "@types/react-native": "^0.62.12",
     "@types/react-navigation": "^3.4.0",

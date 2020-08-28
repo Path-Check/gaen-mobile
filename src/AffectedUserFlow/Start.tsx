@@ -1,9 +1,9 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import {
+  TouchableOpacity,
   StyleSheet,
-  ImageBackground,
-  SafeAreaView,
   View,
+  Image,
   ScrollView,
 } from "react-native"
 import { useTranslation } from "react-i18next"
@@ -13,13 +13,12 @@ import { SvgXml } from "react-native-svg"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useStatusBarEffect } from "../navigation"
-
 import { Screens } from "../navigation"
 
+import { Spacing, Colors, Iconography, Typography, Layout } from "../styles"
 import { Images, Icons } from "../assets"
-import { Outlines, Iconography, Spacing, Colors, Typography } from "../styles"
 
-export const ExportIntro = (): JSX.Element => {
+export const ExportIntro: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -29,70 +28,83 @@ export const ExportIntro = (): JSX.Element => {
     navigation.navigate(Screens.AffectedUserCodeInput)
   }
 
-  const title = t("export.start_body_bluetooth")
-  const body = t("export.start_title_bluetooth")
+  const handleOnPressCancel = () => {
+    navigation.navigate(Screens.Home)
+  }
 
   return (
-    <ImageBackground
-      source={Images.BlueGradientBackground}
-      style={style.backgroundImage}
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
     >
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={style.contentContainer}
-          style={style.container}
+      <View style={style.cancelButtonContainer}>
+        <TouchableOpacity
+          onPress={handleOnPressCancel}
+          accessible
+          accessibilityLabel={t("export.code_input_button_cancel")}
         >
-          <View style={style.headerContainer}>
-            <View style={style.iconContainerCircle}>
-              <SvgXml
-                xml={Icons.Heart}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-            </View>
-
-            <GlobalText style={style.header}>{title}</GlobalText>
-            <GlobalText style={style.contentText}>{body}</GlobalText>
+          <View style={style.cancelButtonInnerContainer}>
+            <SvgXml
+              xml={Icons.X}
+              fill={Colors.black}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
+            />
           </View>
-          <Button
-            invert
-            label={t("common.start")}
-            onPress={handleOnPressNext}
-          />
-        </ScrollView>
-      </SafeAreaView>
-    </ImageBackground>
+        </TouchableOpacity>
+      </View>
+      <Image
+        source={Images.PersonAndHealthExpert}
+        style={style.image}
+        accessible
+        accessibilityLabel={t("exoprt.start_image_label")}
+      />
+      <GlobalText style={style.header}>
+        {t("export.start_header_bluetooth")}
+      </GlobalText>
+      <View style={style.buttonContainer}>
+        <Button
+          label={t("common.start")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+        />
+      </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-  },
   container: {
-    padding: Spacing.large,
+    flex: 1,
+    paddingHorizontal: Spacing.large,
+    paddingTop: Spacing.huge,
+    backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    justifyContent: "space-between",
-    paddingBottom: Spacing.xxHuge,
+    paddingBottom: 80,
   },
-  headerContainer: {
-    marginBottom: Spacing.xxHuge,
+  cancelButtonContainer: {
+    position: "absolute",
+    top: Spacing.xxxSmall,
+    right: Spacing.xxxSmall,
+    zIndex: Layout.zLevel1,
+  },
+  cancelButtonInnerContainer: {
+    padding: Spacing.medium,
+  },
+  image: {
+    width: "100%",
+    height: 300,
+    marginBottom: Spacing.small,
+    resizeMode: "contain",
   },
   header: {
-    ...Typography.header2,
-    color: Colors.white,
+    ...Typography.header1,
+    marginBottom: Spacing.xLarge,
   },
-  iconContainerCircle: {
-    ...Iconography.largeIcon,
-    borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.primaryBackground,
-    marginBottom: Spacing.large,
-  },
-  contentText: {
-    ...Typography.secondaryContent,
-    color: Colors.white,
-    paddingTop: Spacing.medium,
+  buttonContainer: {
+    alignSelf: "flex-start",
   },
 })
 

@@ -29,4 +29,4 @@ else
    raise "Empty github access token"
 end
 
-fetching_env_succeeded && system("./bin/configure_builds.sh")
+fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}")

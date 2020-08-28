@@ -4,7 +4,6 @@
   simulateExposureDetectionError,
   simulateExposure,
   fetchExposures,
-  getAndPostDiagnosisKeys,
   resetExposures,
   toggleENAuthorization,
   showLastProcessedFilePath

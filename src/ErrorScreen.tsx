@@ -40,7 +40,7 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryViolet,
+    backgroundColor: Colors.primary125,
   },
   content: {
     flex: 1,
@@ -55,17 +55,17 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   title: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.white,
     marginBottom: Spacing.small,
   },
   subtitle: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     color: Colors.white,
     marginBottom: Spacing.xxSmall,
   },
   error: {
-    ...Typography.tertiaryContent,
+    ...Typography.body1,
     color: Colors.white,
   },
 })

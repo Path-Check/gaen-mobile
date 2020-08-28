@@ -17,42 +17,34 @@
 #    https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 require "open3"
+require_relative "./helpers"
 
 HA_LABEL = ARGV[0]
 ACCESS_TOKEN = ARGV[1]
 
 def fetch_env
   token = ACCESS_TOKEN
-  if !valid_token(token) then
-    puts "No valid github token set"
-    puts "Set a valid token in your .env file"
-    exit 1
-  end
-
-  if !HA_LABEL then
-    puts "No HA label provided"
-    puts "provide a label as a parameter e.g. $ bin/fetch_ha_env.sh pc"
-    exit 1
-  end
+  validate_token!(token)
+  validate_ha_label!(HA_LABEL, "fetch_ha_env")
 
   puts "...fetching .env for #{HA_LABEL}"
 
   dev_env_source = ".env.bt"
+  staging_env_source = ".env.bt.staging"
   release_env_source = ".env.bt.release"
-  google_service_source = "ios/GoogleService-Info.plist"
 
   dev_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
 
+  staging_env_url =
+  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.staging"
+
   release_env_url =
   "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.release"
 
-  google_service_url =
-  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/firebase/#{HA_LABEL}/GoogleService-Info.plist"
-
   fetch_and_write_file(dev_env_source, dev_env_url)
+  fetch_and_write_file(staging_env_source, staging_env_url)
   fetch_and_write_file(release_env_source, release_env_url)
-  fetch_and_write_file(google_service_source, google_service_url)
 
   puts "finished fetching .env for #{HA_LABEL}"
 end
@@ -72,9 +64,4 @@ def fetch_and_write_file(filename, remote_url)
   print "."
 end
 
-def valid_token(token)
-  token.length == 40
-end
-
 fetch_env
-puts exec('git update-index --assume-unchanged ios/GoogleService-Info.plist')

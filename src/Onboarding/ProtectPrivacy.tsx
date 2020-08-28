@@ -10,21 +10,45 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import env from "react-native-config"
 
 import { GlobalText } from "../components/GlobalText"
+import { useApplicationName } from "../More/useApplicationInfo"
+import { useStatusBarEffect } from "../navigation"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
-const ProtectPrivacy: FunctionComponent = () => {
+interface ProtectPrivacyProps {
+  modalStyle?: boolean
+}
+
+const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
+  modalStyle,
+}) => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const applicationName = env.IN_APP_NAME
+  const { applicationName } = useApplicationName()
+  useStatusBarEffect("dark-content")
+
+  const headerContainerConditionalStyle = modalStyle && {
+    ...style.headerContainerModal,
+  }
+  const headerContainerStyle = {
+    ...style.headerContainer,
+    ...headerContainerConditionalStyle,
+  }
+
+  const mainContentContainerConditionalStyle = modalStyle
+    ? { ...style.mainContentContainerModal }
+    : { ...style.mainContentContainerCard }
+  const mainContentContainerStyle = {
+    ...style.mainContentContainer,
+    ...mainContentContainerConditionalStyle,
+  }
 
   return (
     <View style={style.container}>
-      <View style={style.headerContainer}>
+      <View style={headerContainerStyle}>
         <GlobalText style={style.headerText}>
           {t("onboarding.protect_privacy.header")}
         </GlobalText>
@@ -34,13 +58,13 @@ const ProtectPrivacy: FunctionComponent = () => {
         >
           <SvgXml
             xml={Icons.XInCircle}
-            fill={Colors.lighterGray}
+            fill={Colors.neutral30}
             width={Iconography.small}
             height={Iconography.small}
           />
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={style.mainContentContainer}>
+      <ScrollView contentContainerStyle={mainContentContainerStyle}>
         <Section
           image={Images.PersonOnPhoneWithCode}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
@@ -49,7 +73,7 @@ const ProtectPrivacy: FunctionComponent = () => {
         <Section
           image={Images.PhonesSharingCodes}
           subheaderText={t("onboarding.protect_privacy.subheader_2")}
-          bodyText={t("onboarding.protect_privacy.body_2")}
+          bodyText={t("onboarding.protect_privacy.body_2", { applicationName })}
         />
         <Section
           image={Images.PersonWithPhoneAndCode}
@@ -67,7 +91,9 @@ const ProtectPrivacy: FunctionComponent = () => {
         />
         <Section
           image={Images.PersonWithCodesInBackground}
-          subheaderText={t("onboarding.protect_privacy.subheader_5")}
+          subheaderText={t("onboarding.protect_privacy.subheader_5", {
+            applicationName,
+          })}
           bodyText={t("onboarding.protect_privacy.body_5", {
             applicationName,
           })}
@@ -103,22 +129,25 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
     position: "absolute",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
+  },
+  headerContainerModal: {
+    paddingTop: 40,
   },
   headerText: {
     flex: 10,
-    ...Typography.header3,
+    ...Typography.header1,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
   },
   closeIconContainer: {
     flex: 1,
@@ -126,8 +155,13 @@ const style = StyleSheet.create({
     padding: Spacing.medium,
   },
   mainContentContainer: {
+    paddingBottom: Spacing.large,
+  },
+  mainContentContainerModal: {
+    paddingTop: 170,
+  },
+  mainContentContainerCard: {
     paddingTop: 130,
-    paddingBottom: Spacing.xxxHuge,
   },
   image: {
     width: "100%",
@@ -140,13 +174,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   subheaderText: {
-    ...Typography.mainContent,
-    ...Typography.mediumBold,
-    color: Colors.black,
+    ...Typography.header5,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginBottom: Spacing.medium,
   },
 })

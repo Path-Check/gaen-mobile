@@ -94,8 +94,9 @@ describe("postCode", () => {
     })
 
     it("returns Unknown error for other errors", async () => {
+      const errorMessage = "unknown"
       const jsonResponse = {
-        error: "unknown",
+        error: errorMessage,
       }
       ;(fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
@@ -107,6 +108,7 @@ describe("postCode", () => {
       expect(result).toEqual({
         kind: "failure",
         error: "Unknown",
+        message: errorMessage,
       })
     })
   })
@@ -186,8 +188,9 @@ describe("postTokenAndHmac", () => {
     })
 
     it("returns Unknown error for other errors", async () => {
+      const errorMessage = "unknown"
       const jsonResponse = {
-        error: "unknown",
+        error: errorMessage,
       }
       ;(fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
@@ -199,6 +202,7 @@ describe("postTokenAndHmac", () => {
       expect(result).toEqual({
         kind: "failure",
         error: "Unknown",
+        message: errorMessage,
       })
     })
   })

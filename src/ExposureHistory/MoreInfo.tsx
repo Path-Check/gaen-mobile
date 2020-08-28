@@ -40,21 +40,20 @@ const MoreInfo: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     padding: Spacing.medium,
   },
   contentContainer: {
     paddingBottom: Spacing.xLarge,
   },
   headerText: {
-    ...Typography.header6,
-    fontSize: Typography.large,
+    ...Typography.header5,
   },
   section: {
     paddingBottom: Spacing.xLarge,
   },
   contentText: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     paddingTop: Spacing.small,
   },
   backIconContainer: {

@@ -4,15 +4,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
-import env from "react-native-config"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-import HomeScreen from "../Home/Home"
+import HomeStack from "./HomeStack"
 import MoreStack from "./MoreStack"
 import ReportIssueStack from "./ReportIssueStack"
 
 import { useExposureContext } from "../ExposureContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
@@ -24,7 +24,10 @@ const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
-  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+  const {
+    displaySelfAssessment,
+    displayReportAnIssue,
+  } = useConfigurationContext()
 
   const applyBadge = (icon: JSX.Element) => {
     return (
@@ -55,7 +58,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={icon}
-        fill={focused ? Colors.primaryViolet : Colors.quaternaryViolet}
+        fill={focused ? Colors.primary125 : Colors.secondary100}
         accessible
         accessibilityLabel={label}
         width={size}
@@ -141,14 +144,14 @@ const MainTabNavigator: FunctionComponent = () => {
         showLabel: false,
         style: {
           backgroundColor: Colors.white,
-          borderTopColor: Colors.lighterGray,
+          borderTopColor: Colors.neutral30,
           height: insets.bottom + 60,
         },
       }}
     >
       <Tab.Screen
         name={Screens.Home}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarLabel: t("navigation.home"),
           tabBarIcon: HomeIcon,
@@ -162,14 +165,16 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      <Tab.Screen
-        name={Stacks.ReportIssue}
-        component={ReportIssueStack}
-        options={{
-          tabBarLabel: t("navigation.report_issue"),
-          tabBarIcon: QuestionMarkIcon,
-        }}
-      />
+      {displayReportAnIssue && (
+        <Tab.Screen
+          name={Stacks.ReportIssue}
+          component={ReportIssueStack}
+          options={{
+            tabBarLabel: t("navigation.report_issue"),
+            tabBarIcon: QuestionMarkIcon,
+          }}
+        />
+      )}
       {displaySelfAssessment && (
         <Tab.Screen
           name={Stacks.SelfAssessment}

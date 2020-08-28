@@ -1,95 +1,45 @@
-import React, { useEffect, useState } from "react"
-import {
-  Alert,
-  BackHandler,
-  FlatList,
-  StyleSheet,
-  View,
-  Text,
-  NativeModules,
-} from "react-native"
+import React, { useEffect, FunctionComponent } from "react"
+import { FlatList, StyleSheet, View, Text } from "react-native"
 
 import { GlobalText } from "../components/GlobalText"
-import { NavigationProp } from "../navigation"
 
 import dayjs from "dayjs"
-import { RawExposure } from "../gaen/dataConverters"
 
-import { Typography } from "../styles"
+import { Typography, Spacing, Outlines, Colors } from "../styles"
+import { useExposureContext } from "../ExposureContext"
 
-type ENLocalExposureScreenProp = {
-  navigation: NavigationProp
-}
-
-type DebugExposure = {
-  id: string
-  date: string
-}
-
-const ExposureListDebugScreen = ({
-  navigation,
-}: ENLocalExposureScreenProp): JSX.Element => {
-  const initialExposures: DebugExposure[] = []
-
-  const fetchExposures = async () => {
-    try {
-      NativeModules.ExposureHistoryModule.getCurrentExposures(
-        (debugExposure: string) => {
-          const rawExposures: RawExposure[] = JSON.parse(debugExposure)
-          const debugExposures: DebugExposure[] = rawExposures.map((e) => {
-            return { id: e.id, date: dayjs(e.date).toString() }
-          })
-          setExposures(debugExposures)
-        },
-      )
-      setExposures(exposures)
-    } catch (e) {
-      setErrorMessage(e.message)
-    }
-  }
-
-  const [exposures, setExposures] = useState<DebugExposure[]>(initialExposures)
-
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (errorMessage) {
-      showErrorAlert(errorMessage)
-    }
-    const handleBackPress = () => {
-      navigation.goBack()
-      return true
-    }
-
-    BackHandler.addEventListener("hardwareBackPress", handleBackPress)
-
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackPress)
-    }
-  }, [navigation, exposures, errorMessage])
-
-  useEffect(() => {
-    fetchExposures()
+const ExposureListDebugScreen: FunctionComponent = () => {
+  const { exposureInfo, getCurrentExposures } = useExposureContext()
+  const exposures = exposureInfo.map((e) => {
+    return { id: e.id, date: dayjs(e.date).toString() }
   })
+  const showExposures = exposures.length > 0
 
-  const showErrorAlert = (errorMessage: string) => {
-    Alert.alert("Error", errorMessage, [{ text: "OK" }], {
-      cancelable: false,
-    })
-  }
+  useEffect(() => {
+    getCurrentExposures()
+  }, [getCurrentExposures])
 
   return (
-    <FlatList
-      data={exposures}
-      keyExtractor={(item) => item.id}
-      renderItem={(item) => (
-        <View style={style.flatlistRowView}>
-          <GlobalText style={style.itemText}>
-            <Text>Date: {item.item.date}</Text>
-          </GlobalText>
-        </View>
+    <>
+      {showExposures ? (
+        <FlatList
+          data={exposures}
+          keyExtractor={(item) => item.id}
+          renderItem={(item) => (
+            <View
+              testID={"exposure-list-debug-item"}
+              style={style.flatlistRowView}
+            >
+              <GlobalText style={style.itemText}>
+                <Text>Date: {item.item.date}</Text>
+              </GlobalText>
+            </View>
+          )}
+        />
+      ) : (
+        <Text style={style.noExposureText}>No exposure data to display</Text>
       )}
-    />
+    </>
   )
 }
 
@@ -98,15 +48,19 @@ const style = StyleSheet.create({
   flatlistRowView: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingTop: 7,
-    paddingBottom: 5,
-    borderBottomWidth: 1,
-    borderColor: "#999999",
+    paddingTop: Spacing.xxxSmall,
+    paddingBottom: Spacing.xxxSmall,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral75,
   },
   itemText: {
-    ...Typography.tertiaryContent,
-    padding: 10,
+    ...Typography.body1,
+    padding: Spacing.xSmall,
     maxWidth: "90%",
+  },
+  noExposureText: {
+    ...Typography.header5,
+    padding: Spacing.medium,
   },
 })
 

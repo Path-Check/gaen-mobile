@@ -12,45 +12,40 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android test
+### android release_increment_version_code
 ```
-fastlane android test
+fastlane android release_increment_version_code
 ```
-Runs Android (Native) unit tests
-### android staging
+Increment version code
+### android debug_bt
 ```
-fastlane android staging
+fastlane android debug_bt
 ```
-Build a Staging APK and AAB
-### android release
+Build a Debug AAB
+### android staging_apk
 ```
-fastlane android release
+fastlane android staging_apk
 ```
-Build a Release APK and AAB
-### android play_store
+Build a Staging APK
+### android release_apk
 ```
-fastlane android play_store
+fastlane android release_apk
 ```
-Upload to google play store beta track
-### android staging_bt
+Build a Release APK
+### android release_aab
 ```
-fastlane android staging_bt
+fastlane android release_aab
 ```
-Build a Staging APK and AAB
-### android release_bt
+Build a Release AAB
+### android android_alpha_apk
 ```
-fastlane android release_bt
+fastlane android android_alpha_apk
 ```
-Build a Release APK and AAB
-### android play_store_bt
-```
-fastlane android play_store_bt
-```
-Upload to google play store beta track
+Submit APK to AppCenter
 
 ----
 

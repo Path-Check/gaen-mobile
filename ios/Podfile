@@ -59,8 +59,8 @@ def bt_pods
   ### These should be removed in a future commit
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Alamofire', '~> 4.9.1'
-  pod 'ZIPFoundation'
-  pod 'Firebase/Crashlytics'
+  pod 'KeychainAccess', '~> 4.2.0'
+  pod 'ZIPFoundation', '~> 0.9.11'
 end
 
 target 'BT' do

@@ -1,9 +1,10 @@
 import React from "react"
-import { Linking } from "react-native"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
 import { useApplicationInfo } from "./useApplicationInfo"
+import { ConfigurationContext } from "../ConfigurationContext"
+import { factories } from "../factories"
 
 jest.mock("./useApplicationInfo")
 describe("About", () => {
@@ -33,20 +34,6 @@ describe("About", () => {
     expect(getByText(versionInfo)).toBeDefined()
   })
 
-  it("navigates to the pathcheck organization when tapped on the url", () => {
-    const openURLSpy = jest.spyOn(Linking, "openURL")
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName: "name",
-      versionInfo: "versionInfo",
-    })
-
-    const { getByText } = render(<AboutScreen />)
-
-    fireEvent.press(getByText("pathcheck.org"))
-
-    expect(openURLSpy).toHaveBeenCalledWith("https://pathcheck.org/")
-  })
-
   it("shows the OS name and version", () => {
     const mockOsName = "osName"
     const mockOsVersion = "osVersion"
@@ -61,5 +48,29 @@ describe("About", () => {
     const { getByText } = render(<AboutScreen />)
 
     expect(getByText(`${mockOsName} v${mockOsVersion}`)).toBeDefined()
+  })
+
+  it("shows the screen description with the app name and the authority", () => {
+    const healthAuthorityName = "authority name"
+    const applicationName = "applicationName"
+
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName,
+      versionInfo: "versionInfo",
+    })
+
+    const { getByText } = render(
+      <ConfigurationContext.Provider
+        value={factories.configurationContext.build({ healthAuthorityName })}
+      >
+        <AboutScreen />
+      </ConfigurationContext.Provider>,
+    )
+
+    expect(
+      getByText(
+        `The ${applicationName} app is made available by ${healthAuthorityName}`,
+      ),
+    ).toBeDefined()
   })
 })

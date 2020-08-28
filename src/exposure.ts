@@ -1,8 +1,10 @@
 import { DateTimeUtils } from "./utils"
 
 export type Posix = number
+type UUID = string
 
 export interface ExposureDatum {
+  id: UUID
   date: Posix
   duration: number
 }

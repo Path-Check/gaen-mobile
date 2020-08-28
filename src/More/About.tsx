@@ -1,26 +1,18 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import {
-  Linking,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native"
+import { Platform, ScrollView, StyleSheet, View } from "react-native"
 
 import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Spacing, Typography } from "../styles"
 import { useApplicationInfo } from "./useApplicationInfo"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 export const AboutScreen: FunctionComponent = () => {
   const { t } = useTranslation()
-
   const osInfo = `${Platform.OS} v${Platform.Version}`
-  const pathCheckWebAddress = "pathcheck.org"
-  const pathCheckUrl = "https://pathcheck.org/"
   const { applicationName, versionInfo } = useApplicationInfo()
+  const { healthAuthorityName } = useConfigurationContext()
 
   return (
     <ScrollView
@@ -31,15 +23,7 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>
-        {t("label.about_para")}
-      </GlobalText>
-      <GlobalText
-        style={style.hyperlink}
-        onPress={() => {
-          Linking.openURL(pathCheckUrl)
-        }}
-      >
-        <Text>{pathCheckWebAddress}</Text>
+        {t("about.description", { applicationName, healthAuthorityName })}
       </GlobalText>
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
@@ -66,29 +50,26 @@ export const AboutScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header3,
+    ...Typography.header2,
     marginBottom: Spacing.small,
-  },
-  hyperlink: {
-    ...Typography.secondaryContent,
-    color: Colors.linkText,
-    textDecorationLine: "underline",
+    color: Colors.primary150,
   },
   aboutContent: {
-    ...Typography.secondaryContent,
+    ...Typography.body1,
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
+    color: Colors.primary150,
     width: 100,
     marginTop: Spacing.small,
   },
   aboutSectionParaContent: {
-    ...Typography.mainContent,
+    ...Typography.body1,
     marginTop: Spacing.small,
   },
   infoRowContainer: {

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
   Platform,
+  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -11,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
+import { useApplicationName } from "../More/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"
@@ -21,8 +22,7 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-
-  const { setOnboardingToComplete } = useOnboardingContext()
+  const { applicationName } = useApplicationName()
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressEnable = () => {
@@ -38,12 +38,29 @@ const ActivateProximityTracing: FunctionComponent = () => {
     if (Platform.OS === "ios") {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
-      setOnboardingToComplete()
+      navigation.navigate(ActivationScreens.ActivationSummary)
     }
   }
 
+  const handleOnPressActivateProximityTracing = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: handleOnPressEnable,
+        },
+      ],
+    )
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={style.safeArea}>
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -69,51 +86,59 @@ const ActivateProximityTracing: FunctionComponent = () => {
             {t("onboarding.proximity_tracing_subheader3")}
           </GlobalText>
         </View>
-        <Button
-          onPress={handleOnPressEnable}
-          label={t("onboarding.proximity_tracing_button")}
-        />
-        <TouchableOpacity
-          onPress={handleOnPressDontEnable}
-          style={style.secondaryButton}
-        >
-          <GlobalText style={style.secondaryButtonText}>
-            {t("common.no_thanks")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.buttonsContainer}>
+          <Button
+            onPress={handleOnPressActivateProximityTracing}
+            label={t("onboarding.proximity_tracing_button")}
+          />
+          <TouchableOpacity
+            onPress={handleOnPressDontEnable}
+            style={style.secondaryButton}
+          >
+            <GlobalText style={style.secondaryButtonText}>
+              {t("common.no_thanks")}
+            </GlobalText>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )
 }
 const style = StyleSheet.create({
+  safeArea: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   contentContainer: {
-    paddingVertical: Spacing.xxLarge,
+    paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.medium,
   },
   content: {
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header2,
-    marginBottom: Spacing.small,
+    ...Typography.header1,
+    marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.header5,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.mainContent,
-    marginBottom: Spacing.medium,
+    ...Typography.body1,
+    marginBottom: Spacing.xxLarge,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondaryText,
+    ...Typography.buttonSecondary,
   },
 })
 

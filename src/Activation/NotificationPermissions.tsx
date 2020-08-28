@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
+import { ActivationScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
@@ -18,23 +19,22 @@ import { Colors, Spacing, Typography, Buttons } from "../styles"
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { setOnboardingToComplete } = useOnboardingContext()
-
-  const requestPermission = async () => {
-    await notification.request()
-  }
+  const navigation = useNavigation()
 
   const handleOnPressEnable = async () => {
-    await requestPermission()
-    setOnboardingToComplete()
+    await new Promise((resolve) => {
+      notification.request()
+      resolve()
+    })
+    navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
   const handleOnPressMaybeLater = () => {
-    setOnboardingToComplete()
+    navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={style.safeArea}>
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -60,52 +60,60 @@ const NotificationsPermissions: FunctionComponent = () => {
             {t("onboarding.notification_subheader3")}
           </GlobalText>
         </View>
-        <Button
-          onPress={handleOnPressEnable}
-          label={t("label.launch_enable_notif")}
-        />
-        <TouchableOpacity
-          onPress={handleOnPressMaybeLater}
-          style={style.secondaryButton}
-        >
-          <GlobalText style={style.secondaryButtonText}>
-            {t("common.maybe_later")}
-          </GlobalText>
-        </TouchableOpacity>
+        <View style={style.buttonsContainer}>
+          <Button
+            onPress={handleOnPressEnable}
+            label={t("label.launch_enable_notif")}
+          />
+          <TouchableOpacity
+            onPress={handleOnPressMaybeLater}
+            style={style.secondaryButton}
+          >
+            <GlobalText style={style.secondaryButtonText}>
+              {t("common.maybe_later")}
+            </GlobalText>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )
 }
 
 const style = StyleSheet.create({
+  safeArea: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
   container: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     height: "100%",
   },
   contentContainer: {
-    paddingVertical: Spacing.xxLarge,
+    paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.medium,
   },
   content: {
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header2,
-    marginBottom: Spacing.small,
+    ...Typography.header1,
+    marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.header5,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.mainContent,
-    marginBottom: Spacing.medium,
+    ...Typography.body1,
+    marginBottom: Spacing.xxLarge,
+  },
+  buttonsContainer: {
+    alignSelf: "flex-start",
   },
   secondaryButton: {
     ...Buttons.secondary,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondaryText,
+    ...Typography.buttonSecondary,
   },
 })
 

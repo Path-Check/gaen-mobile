@@ -24,8 +24,8 @@ const LanguageSelection: FunctionComponent = () => {
     t,
   } = useTranslation()
   const navigation = useNavigation()
-  useStatusBarEffect("light-content")
   const localeList = getLocaleList()
+  useStatusBarEffect("light-content")
 
   type ListItem = {
     label: string
@@ -39,9 +39,9 @@ const LanguageSelection: FunctionComponent = () => {
     }
 
     const languageIsSelected = language === item.value
-    const languageButtonTextStyle = languageIsSelected
-      ? { ...Typography.bold, color: Colors.primaryText }
-      : null
+    const languageButtonTextStyle = languageIsSelected && {
+      ...style.languageButtonTextSelected,
+    }
     const languageButtonTextStyles = {
       ...style.languageButtonText,
       ...languageButtonTextStyle,
@@ -69,7 +69,7 @@ const LanguageSelection: FunctionComponent = () => {
         >
           <SvgXml
             xml={Icons.XInCircle}
-            fill={Colors.lighterGray}
+            fill={Colors.neutral30}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -92,7 +92,7 @@ const itemSeparatorComponent = () => {
   return (
     <View
       style={{
-        backgroundColor: Colors.lighterGray,
+        backgroundColor: Colors.neutral30,
         height: Outlines.hairline,
         width: "100%",
       }}
@@ -105,7 +105,7 @@ const headerHeight = 70
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
     position: "absolute",
@@ -114,14 +114,14 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    backgroundColor: Colors.faintGray,
+    backgroundColor: Colors.secondary10,
     zIndex: Layout.zLevel1,
   },
   headerText: {
     flex: 10,
-    ...Typography.header3,
+    ...Typography.header2,
     paddingHorizontal: Spacing.large,
-    color: Colors.primaryViolet,
+    color: Colors.primary125,
   },
   closeIconContainer: {
     flex: 1,
@@ -135,7 +135,10 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   languageButtonText: {
-    ...Typography.mainContent,
+    ...Typography.tappableListItem,
+  },
+  languageButtonTextSelected: {
+    ...Typography.semiBold,
   },
 })
 

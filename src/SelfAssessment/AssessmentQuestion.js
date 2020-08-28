@@ -50,41 +50,16 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     return <View style={style.descriptionWrapper}>{elements}</View>
   }, [question.question_description])
 
-  const displayAsOption = [
-    SCREEN_TYPE_CHECKBOX,
-    SCREEN_TYPE_RADIO,
-    SCREEN_TYPE_DATE,
-  ].includes(question.screen_type)
-
   const assessmentInputInstruction =
     question.question_type === QUESTION_TYPE_MULTI
       ? "Select all that apply"
       : "Select one"
 
-  const options =
-    displayAsOption &&
-    option.values.map((option, index) => (
-      <AssessmentOption
-        answer={selectedValues.find((v) => v.index === index)}
-        index={index}
-        key={option.value}
-        onSelect={(value) => onSelectHandler(value, index)}
-        option={option}
-        isSelected={selectedValues.some((v) => v.index === index)}
-        optionType={question.screen_type}
-      />
-    ))
-
   /** @type {(value: string, index: number) => void} */
   const onSelectHandler = (value, index) => {
     if (question.question_type === QUESTION_TYPE_MULTI) {
       return setSelectedValues((values) => {
-        // TODO: Better way to filter single value questions?
-        const singleValueQuestions = [
-          "Choose not to answer",
-          "None of the above",
-          "None",
-        ]
+        const singleValueQuestions = ["Choose not to answer", "None"]
         // this looks for an existing value inside the selected values array
         // which indicates user unselected the value
         const unselectedValue = values.some((v) => v.index === index)
@@ -116,6 +91,15 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
     onChange(selectedValues)
   }, [selectedValues, onChange])
 
+  const handleOnNextPress = () => {
+    if (!selectedValues.length) {
+      const index = option.values.findIndex((value) => value.label === "None")
+      const value = option.values[index].value
+      setSelectedValues([{ index, value }])
+    }
+    onNext()
+  }
+
   return (
     <SafeAreaView style={style.container}>
       <ScrollView style={style.scrollView}>
@@ -129,14 +113,26 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
           <GlobalText style={style.instruction}>
             {assessmentInputInstruction}
           </GlobalText>
-          <View style={style.optionsWrapper}>{options}</View>
+          <View style={style.optionsWrapper}>
+            <AssessmentOptions
+              option={option}
+              question={question}
+              selectedValues={selectedValues}
+              onSelect={onSelectHandler}
+            />
+          </View>
         </View>
       </ScrollView>
       <View style={style.footer}>
         <Button
-          disabled={!selectedValues.length}
-          onPress={onNext}
+          onPress={handleOnNextPress}
           label={t("assessment.next")}
+          disabled={
+            !(
+              question.question_type === QUESTION_TYPE_MULTI ||
+              selectedValues.length
+            )
+          }
           customButtonStyle={style.button}
           customTextStyle={style.buttonText}
         />
@@ -145,17 +141,44 @@ export const AssessmentQuestion = ({ onNext, onChange, option, question }) => {
   )
 }
 
+const AssessmentOptions = ({ option, question, selectedValues, onSelect }) => {
+  const displayAsOption = [
+    SCREEN_TYPE_CHECKBOX,
+    SCREEN_TYPE_RADIO,
+    SCREEN_TYPE_DATE,
+  ].includes(question.screen_type)
+
+  const mapAssessmentOptions = option.values.reduce((result, option, index) => {
+    if (option.label !== "None") {
+      result.push(
+        <AssessmentOption
+          answer={selectedValues.find((v) => v.index === index)}
+          index={index}
+          key={option.value}
+          onSelect={(value) => onSelect(value, index)}
+          option={option}
+          isSelected={selectedValues.some((v) => v.index === index)}
+          optionType={question.screen_type}
+        />,
+      )
+    }
+    return result
+  }, [])
+
+  return displayAsOption && mapAssessmentOptions
+}
+
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
   },
   header: {
     paddingHorizontal: Spacing.medium,
     marginTop: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header1,
   },
   scrollView: {
     flex: 1,
@@ -175,11 +198,11 @@ const style = StyleSheet.create({
   instruction: {
     ...Typography.mediumFont,
     lineHeight: Typography.xSmallLineHeight,
-    color: Colors.secondaryHeaderText,
+    color: Colors.neutral140,
     marginTop: Spacing.xLarge,
   },
   button: {
-    backgroundColor: Colors.secondaryViolet,
+    backgroundColor: Colors.primary100,
   },
   buttonText: {
     color: Colors.white,

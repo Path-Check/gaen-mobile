@@ -32,8 +32,10 @@
     "start_title": "Rispondi alle domande sui sintomi e sull'anamnesi per sapere cosa in caso di COVID-19"
   },
   "common": {
+    "cancel": "Annulla",
     "continue": "Continua",
     "done": "Fatto",
+    "enable": "Attiva",
     "next": "Fatto",
     "something_went_wrong": "Si è verificato un errore",
     "start": "Inizio"
@@ -44,10 +46,7 @@
     "complete_body_bluetooth": "Scegliendo di condividere il tuo stato e avvisare anonimamente gli altri, stai aiutando a contenere la diffusione del virus e proteggere gli altri nella tua comunità.",
     "complete_title": "Grazie per aver tenuto al sicuro la tua comunità!",
     "consent_button_title": "Capisco e acconsento",
-    "publish_consent_body_bluetooth": "La condivisione della diagnosi positiva è facoltativa e può essere effettuata solo con il tuo consenso. \n\nSe scegli di farlo, stai aiutando gli altri nella tua comunità a prendere decisioni informate sulla loro salute e facendo la tua parte per contenere la diffusione del virus. \n\nLe uniche informazioni condivise saranno delle liste di numeri casuali scambiati dal telefono tramite Bluetooth con altri telefoni vicini negli ultimi 14 giorni, insieme a un punteggio di rischio ponderato basato sullo sviluppo dei sintomi.",
-    "publish_consent_title_bluetooth": "Avvisare gli altri nella tua comunità",
-    "start_body_bluetooth": "Scegli di avvisare anonimamente gli altri che potresti aver incontrato e di aiutare la tua comunità a contenere la diffusione del virus.",
-    "start_title_bluetooth": "Aiuta a contenere la diffusione del virus e proteggi gli altri nella tua comunità se ti viene diagnosticato o se risulti positivo al test per il COVID-19."
+    "publish_consent_title_bluetooth": "Avvisare gli altri nella tua comunità"
   },
   "exposure_history": {
     "how_does_this_work": "Come funziona?",
@@ -66,9 +65,7 @@
     "launch_enable_notif": "Attiva le Notifiche",
     "launch_get_started": "Cominciamo",
     "launch_screen1_header": "Benvenuti in PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144",
-    "privacy_policy": "Informativa sulla privacy",
-    "unknown": "sconosciuto"
+    "privacy_policy": "Informativa sulla privacy"
   },
   "navigation": {
     "exposure_history": "Cronologia delle esposizioni",

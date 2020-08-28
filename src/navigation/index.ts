@@ -18,6 +18,7 @@ export type ActivationScreen =
   | "AcceptEula"
   | "ActivateProximityTracing"
   | "NotificationPermissions"
+  | "ActivationSummary"
 
 export const ActivationScreens: {
   [key in ActivationScreen]: ActivationScreen
@@ -25,6 +26,22 @@ export const ActivationScreens: {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
   NotificationPermissions: "NotificationPermissions",
+  ActivationSummary: "ActivationSummary",
+}
+
+export type HomeScreen =
+  | "Home"
+  | "BluetoothInfo"
+  | "ProximityTracingInfo"
+  | "LocationInfo"
+
+export const HomeScreens: {
+  [key in HomeScreen]: HomeScreen
+} = {
+  Home: "Home",
+  BluetoothInfo: "BluetoothInfo",
+  ProximityTracingInfo: "ProximityTracingInfo",
+  LocationInfo: "LocationInfo",
 }
 
 export type OnboardingScreen =
@@ -78,7 +95,7 @@ export const ReportIssueScreens: {
 export type MoreStackScreen =
   | "Menu"
   | "About"
-  | "Licenses"
+  | "Legal"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "AffectedUserFlow"
@@ -90,7 +107,7 @@ export const MoreStackScreens: {
 } = {
   Menu: "Menu",
   About: "About",
-  Licenses: "Licenses",
+  Legal: "Legal",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
@@ -113,6 +130,7 @@ export type AffectedUserFlowScreen =
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
+  | "ProtectPrivacy"
 
 export const AffectedUserFlowScreens: {
   [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
@@ -123,6 +141,7 @@ export const AffectedUserFlowScreens: {
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
+  ProtectPrivacy: "ProtectPrivacy",
 }
 export type Screen =
   | OnboardingScreen
@@ -131,7 +150,7 @@ export type Screen =
   | MoreStackScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
-  | "Home"
+  | HomeScreen
   | "ReportIssueForm"
   | "LanguageSelection"
 
@@ -142,7 +161,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...MoreStackScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
-  Home: "Home",
+  ...HomeScreens,
   ReportIssueForm: "ReportIssueForm",
   LanguageSelection: "LanguageSelection",
 }
@@ -172,7 +191,10 @@ export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-      Platform.OS === "android" && StatusBar.setTranslucent(true)
+      if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor("transparent")
+        StatusBar.setTranslucent(true)
+      }
     }, [statusBarStyle]),
   )
 }

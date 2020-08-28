@@ -12,14 +12,14 @@
     "next": "Volgende"
   },
   "common": {
+    "cancel": "Annuleer",
     "continue": "Ga verder",
     "done": "Klaar",
     "next": "Klaar"
   },
   "label": {
     "launch_enable_notif": "Meldingen inschakelen",
-    "launch_get_started": "Aan de slag",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street\nBox 441621\nSomerville, MA 02144"
+    "launch_get_started": "Aan de slag"
   },
   "screen_titles": {
     "about": "Informatie",

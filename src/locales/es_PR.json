@@ -1,12 +1,17 @@
 {
   "_display_name": "Español (PR)",
   "about": {
+    "description": "La aplicación {{applicationName}} está disponible gracias a {{healthAuthorityName}}",
     "operating_system_abbr": "OS:",
     "version": "Versión:"
   },
   "assessment": {
-    "agree_question_description": "La evaluación le ayuda a tomar decisiones sobre la búsqueda de atención médica apropiada. No está destinada al diagnóstico o tratamiento de enfermedades u otras condiciones.",
-    "agree_question_text": "El propósito de este cernimiento de COVID-19",
+    "agree_question_description": "Deténgase y llame a los servicios de emergencia si experimenta: \n • dolor o presión en el pecho intensos y constantes \n • dificultad extrema para respirar \n • mareo severo y constante \n • desorientación grave o falta de respuesta",
+    "agree_question_text": "¿Es esto una emergencia?",
+    "agreement_cta": "Entiendo y doy mi consentimiento",
+    "agreement_description": "La evaluación le ayuda a tomar decisiones sobre la búsqueda de atención médica adecuada. No tiene como propósito el diagnóstico o tratamiento de enfermedades u otras condiciones.",
+    "agreement_footer": "Al continuar, usted acepta que los resultados de la evaluación no tienen el propósito de diagnosticar u ofrecer tratamiento.",
+    "agreement_title": "No es para diagnosticar",
     "caregiver_cta": "Siguiente",
     "caregiver_description": "Notifique a un proveedor de atención médica en su centro de cuidados a largo plazo. Vivir en un centro de cuidados a largo plazo o en un hogar de ancianos puede ponerlo en riesgo de padecer una enfermedad grave.\n\n<1>Dígale a un cuidador</1> del centro que está enfermo y que necesita ver a un proveedor médico lo antes posible.",
     "caregiver_title": "Notifica al cuidador",
@@ -19,6 +24,10 @@
     "emergency_cta": "Llama a los servicios de emergencia",
     "emergency_description": "Puede que tenga una  <1>emergencia médica</1>. Se necesita atención médica inmediata.\n\nDígale al operador de emergencias si ha estado en contacto con alguien con COVID-19 o si ha estado recientemente en una zona donde se está propagando COVID-19.",
     "emergency_title": "Servicios de Emergencia",
+    "experiencing_any_symptoms": "Sintiendo cualquiera de estos síntomas",
+    "experiencing_some_symptoms": "Sintiendo algunos de estos síntomas",
+    "i_am": "Sí",
+    "i_am_not": "No",
     "isolate_cta": "Siguiente",
     "isolate_description": "Usted <1>tiene algunos síntomas</1> que pueden estar relacionados con COVID-19. Llame a su proveedor de atención médica si sus síntomas empeoran. Comience el aislamiento en el hogar.",
     "isolate_title": "Aislarse",
@@ -33,72 +42,162 @@
   },
   "common": {
     "alert": "Advertencia",
+    "back": "Regresar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
     "continue": "Continuar",
+    "disabled": "Desactivado",
     "done": "Hecho",
+    "enable": "Habilitar",
+    "enabled": "Activado",
+    "maybe_later": "Quizá después",
     "next": "Siguiente",
+    "no_thanks": "No, gracias",
+    "okay": "Sí",
+    "settings": "Abrir Configuración",
+    "skip": "Saltar",
     "something_went_wrong": "Algo salió mal",
     "start": "Empezar",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "success": "Logro"
+  },
+  "errors": {
+    "description": "Se ha producido un error. Por favor, vuelva a cargar la aplicación.",
+    "reload": "Recargar",
+    "title": "Error desconocido"
   },
   "export": {
     "code_input_body_bluetooth": "Escriba el código de verificación proporcionado por {{name}} con el resultado de su prueba para verificar su diagnóstico.",
+    "code_input_button_back": "Regresar",
     "code_input_button_cancel": "Cancelar",
     "code_input_title_bluetooth": "Verifique su diagnóstico",
     "complete_body_bluetooth": "Al elegir compartir su estatus y notificar anónimamente a otros, está ayudando a contener la propagación del virus y a proteger a otros en su comunidad.",
     "complete_title": "¡Gracias por mantener segura a su comunidad!",
-    "consent_button_cancel": "Cancelar",
+    "consent_body_0": "Compartir su diagnóstico positivo es opcional y sólo puede hacerse con su consentimiento.",
+    "consent_body_1": "Si elige hacerlo, está ayudando a otros en su comunidad a tomar decisiones informadas sobre su salud y está desempeñando su papel para contener la propagación del virus.",
+    "consent_body_2": "La única información compartida es un conjunto de números aleatorios que su teléfono intercambiará con otros cercanos durante los pasados 14 días.  Se comparte a través de Bluetooth.",
     "consent_button_title": "Entiendo y doy mi consentimiento",
-    "publish_consent_body_bluetooth": "Compartir su diagnóstico positivo es opcional y sólo puede hacerse con su consentimiento.\n\nSi decides hacerlo, estarás ayudando a otras personas de tu comunidad a tomar decisiones informadas sobre su salud y a desempeñar tu papel para contener la propagación del virus.\n\nLa única información que se compartirá será el conjunto aleatorio de números que tu teléfono intercambió por Bluetooth con otros teléfonos que estuvieron cerca durante los últimos 14 días, junto con una puntuación de riesgo ponderada basada en el momento en que se desarrollaron los síntomas.",
+    "consent_subheader_1": "¿Por qué debo compartir información?",
+    "consent_subheader_2": "¿Cómo funciona?",
+    "enable_exposure_notifications_body": "Debe activar las notificaciones de exposición para informar sobre un resultado positivo.",
+    "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
+    "error": {
+      "invalid_code": "Intentar con otro código",
+      "unknown_code_verification_error": "Intentar con otro código",
+      "verification_code_used": "El código de verificación ya fue utilizado"
+    },
     "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
-    "start_body_bluetooth": "Elija notificar anónimamente a otras personas que pueda haber encontrado y ayude a su comunidad a contener la propagación del virus.",
-    "start_title_bluetooth": "Ayude a contener la propagación del virus y a proteger a los demás en su comunidad si se le diagnostica o da positivo en la prueba de COVID-19."
+    "start_header_bluetooth": "Al elegir compartir su estatus y notificar anónimamente a otros, está ayudando a contener la propagación del virus y a proteger a otros en su comunidad."
   },
   "exposure_history": {
+    "exposure_detail": {
+      "6ft_apart": "6 pies de distancia",
+      "content": "Has estado cerca de una persona que reportó un positivo por COVID-19",
+      "ha_guidance_header": "¿Qué debo hacer?",
+      "ha_guidance_subheader": "Seguir las recomendaciones del {{healthAuthorityName}}",
+      "header": "Es posible que haya sido expuesto al virus COVID-19",
+      "isolate": "Aislarse",
+      "next_steps": "Próximos pasos",
+      "wash_your_hands": "Lávese las manos",
+      "wear_a_mask": "Usar máscara"
+    },
+    "exposure_window": {
+      "four_to_six_days_ago": "Entre 4 y 6 días atrás",
+      "seven_to_fourteen_days_ago": "Entre 7 y 14 días atrás",
+      "today_to_three_days_ago": "En los últimos 3 días"
+    },
+    "health_guidelines": {
+      "six_feet_apart": "Manténgase a seis pies de distancia",
+      "stay_home": "Quédese en casa si se siente enfermo",
+      "title": "Cómo protegerse",
+      "wash_your_hands": "Lávese las manos",
+      "wear_a_mask": "Usar máscara"
+    },
     "how_does_this_work": "¿Como funciona esto?",
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, tu teléfono usará Bluetooth para swappear y guardar cadenas de carácteres aleatorias (llamados IDs aleatorios/random IDs) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorias no te identificarán a tí personalmente con respecto a los otros usuarios y variarån muchas veces al día para proteger tu privacidad. La fecha y la duración del encuento serán grabadas así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
     "last_days": "Los últimos 21 días",
+    "learn_more": "Más Información",
+    "no_connectivity_message": "No está conectado a Internet.",
+    "no_exposure_reports": "Ninguna exposición reportada",
+    "no_exposure_reports_over_past": "No ha recibido ningún reporte de exposición al virus en los últimos 14 días",
+    "possible_exposure": "Posible exposición al COVID-19",
+    "protect_yourself_and_others": "Protéjase a sí mismo y a los integrantes de su comunidad",
+    "review_guidance_from_ha": "Seguir las recomendaciones del {{healthAuthorityName}}",
+    "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí una notificación de exposición?",
     "why_did_i_get_an_en_para": "Recibirás una notificación de exposición cuando te hayas cruzado con una persona que más taerde haya recibido un diagnóstico confirmado o haya dado positivo en un test por COVID-19 siempre y cuando elija notificar al resto."
   },
   "home": {
+    "bluetooth_info_body": "Su teléfono detecta otros teléfonos cercanos que utilizando Bluetooth Low Energy. Esto permite que la aplicación lleve un registro de tus contactos diarios de forma anónima, incluso cuando no tienes la aplicación activada en tu dispositivo móvil.",
+    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "Notificación de exposición está activa",
+      "bluetooth_disabled_error_message": "Active el Bluetooth visitando la configuración de la aplicación",
+      "bluetooth_disabled_error_title": "Active el Bluetooth visitando la Configuración",
       "bluetooth_header": "Bluetooth",
+      "fix": "Arreglar",
+      "proximity_tracing_header": "Rastreo de Proximidad",
+      "report_positive_result": "Informar resultado positivo de la prueba",
+      "share": "Comparta la aplicación y ayude a contener el brote",
+      "share_message": "¡Echa un vistazo al app {{applicationName}}, puedes ayudar a detener el COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Notificaciones Desactivadas",
-      "tracing_off_subheader": "No recibirá notificaciones sobre posibles exposiciones."
-    }
+      "tracing_off_subheader": "No recibirá notificaciones sobre posibles exposiciones.",
+      "tracing_on_header": "Activado",
+      "unauthorized_error_message": "Para activar el rastreo de proximidad, autorice el registro de la exposición de COVID-19 en la aplicación de configuración",
+      "unauthorized_error_title": "Autorizar en la configuración del sistema"
+    },
+    "proximity_tracing_info_body_1": "Si los teléfonos con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
+    "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
+    "proximity_tracing_info_header": "Rastreo de proximidad",
+    "proximity_tracing_info_subheader_1": "¿Cómo funciona el seguimiento de proximidad?",
+    "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?"
   },
   "label": {
+    "check": "✔",
     "checked_checkbox": "Casilla marcada",
+    "language_icon": "🌎",
     "launch_enable_notif": "Permitir notificaciones",
     "launch_get_started": "Empezar",
-    "launch_screen1_header": "Bienvenido a PathCheck",
-    "legal_page_address": "PathCheck Foundation \n58 Day Street \nBox 441621 \nSomerville, MA 02144",
+    "launch_screen1_header": "Bienvenido a ",
     "privacy_policy": "Política de privacidad",
-    "unchecked_checkbox": "Casilla no marcada",
-    "unknown": "desconocido"
+    "question_icon": "¿?",
+    "unchecked_checkbox": "Casilla no marcada"
+  },
+  "more": {
+    "select_language": "Seleccionar idioma"
   },
   "navigation": {
     "exposure_history": "Historial de exposición",
     "home": "Inicio",
     "more": "Más",
     "report_issue": "Reportar problema",
-    "self_assessment": "Salud"
+    "self_assessment": "Autoevaluación"
   },
   "onboarding": {
+    "activation_header_title": "Configuración de la Aplicación",
+    "eula_agree_terms_of_use": "Reconozco haber leído y aceptado las condiciones de uso",
+    "notification_body1": "Recibirá notificaciones cuando usted tenido contacto con alguien que haya informado un resultado positivo a COVID-19.",
     "notification_body2": "La aplicación funciona haciendo uso del Bluetooth de baja energía y códigos aleatorios generados de manera segura, sin saber quién eres o dónde has estado. Esto puede ser desactivado en cualquier momento.",
-    "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?",
+    "notification_header": "Recibir notificación si pudiera haber sido expuesto al virus.",
+    "notification_subheader1": "¿Cuando recibiré la notificación?",
     "notification_subheader2": "¿Cómo funciona?",
     "notification_subheader3": "Esta aplicación no te protege de la infección por COVID-19.",
     "protect_privacy_button": "Cómo protegemos su privacidad",
     "protect_privacy": {
+      "body_1": "Estos códigos no contienen información personal y cambian cada 10 - 20 minutos para proteger su identidad.",
+      "body_2": "Los teléfonos intercambian códigos con otros dispositivos utilizando Bluetooth Low Energy. Esto permite que la aplicación mantenga un récord de sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación activada en su dispositivo.",
+      "body_3": "Después de dar positivo por COVID-19, los usuarios pueden compartir una contraseña con {{applicationName}} para verificar su diagnóstico. Si lo hacen, los códigos aleatorios recientes de su teléfono se marcan y se cargan de forma segura en el servidor. Este proceso de verificación ayuda a prevenir que se informen falsos positivos.",
+      "body_4": "Luego, tu aplicación {{applicationName}} compara los códigos marcados con su propio conjunto de códigos de tus encuentros diarios más recientes. Así es como {{applicationName}} puede identificar si existe la posibilidad de que haya estado expuesto al virus.",
+      "body_5": "Si hay una coincidencia, la aplicación le notificará y el Departamento de Salud le ofrecerá información sobre como proceder para que usted y los que le rodean puedan mantenerse saludables y seguros.  \nAsí es como {{applicationName}} puede ayudarle a estar informado sobre su salud a la vez que se procura la seguridad de su comunidad, todo esto se puede lograr sin revelar su identidad ni dónde ha estado.",
       "header": "Así protegemos su privacidad",
       "subheader_1": "Cuando un usuario activa sus Notificaciones de Exposición, el teléfono es etiquetado con un código aleatorio que es regenerado frecuentemente",
-      "subheader_2": "Los teléfonos intercambian códigos con otros dispositivos que encuentran siempre que tengan el rastreo de proximidad habilitado",
+      "subheader_2": "Los teléfonos intercambian códigos con otros dispositivos cercanos siempre que tengan el rastreo de proximidad habilitado",
       "subheader_3": "Los usuarios que dan positivo en la prueba pueden decidir compartir de manera anónima su estado de salud",
       "subheader_4": "Cada teléfono solicita periódicamente la lista de códigos marcados como positivo del servidor y busca coincidencias",
       "subheader_5": "Informamos a los usuarios si la aplicación encuentra algún código de otro dispositivo que haya sido marcado como positivo"
     },
+    "proximity_tracing_alert_body": "Su dispositivo móvil puede recopilar y compartir identificadores aleatorios con dispositivos cercanos de manera segura. {{applicationName}} hace uso de estos para notificarle si ha estado expuesto al COVID-19. La fecha, duración e intensidad de la señal correspondientes a una exposición se compartirán con {{applicationName}}.",
+    "proximity_tracing_alert_header": "¿Habilitar el seguimiento de proximidad desde \" {{applicationName}} \"?",
     "proximity_tracing_body1": "Si teléfonos que están encendidos con la aplicación instalada, Bluetooth activado y cercanos uno del otro por un período de tiempo, su dispositivo registra un encuentro.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_button": "Activar seguimiento de proximidad",
@@ -106,23 +205,39 @@
     "proximity_tracing_subheader1": "¿Cómo funciona el seguimiento de proximidad?",
     "proximity_tracing_subheader2": "¿Están seguros mis datos?",
     "proximity_tracing_subheader3": "Esta aplicación no te protege de la infección por COVID-19.",
+    "screen_5_button": "Comenzar",
     "screen1_button": "¿Cómo funciona?",
+    "screen1_header": "Juntos, podemos refrenar la propagación de COVID-19",
+    "screen1_image_label": "Dos personas chocando cinco",
+    "screen2_button": "¿Y mi privacidad?",
+    "screen2_header": "Su teléfono recuerda otros dispositivos que encuentra, pero no le identificará ante nadie",
+    "screen2_image_label": "Dos personas usando sus teléfonos",
+    "screen3_button": "¿Qué pasa si estoy expuesto?",
+    "screen3_header": "Ninguna información de identificación personal sale de su teléfono",
+    "screen3_image_label": "Una persona mirando un teléfono bloqueado.",
+    "screen4_button": "¿Qué pasa si me enfermo?",
+    "screen4_header": "La app le notificará si pudiera haber sido expuesto al coronavirus",
+    "screen4_image_label": "Una persona que recibe una notificación en su teléfono",
     "screen5_header": "Usando la aplicación ayudas a romper la cadena de infección y puedes obtener ayuda de profesionales de la salud",
     "screen5_image_label": "Una persona conversando virtualmente con un profesional de la salud",
-    "step": "Paso {{currentStep}} de {{totalSteps}}"
+    "select_language": "Seleccionar idioma",
+    "step": "Paso {{currentStep}} de {{totalSteps}}",
+    "welcome_image_label": "Una ilustración de personas usando máscaras, conectadas como nodos en una red."
   },
   "report_issue": {
     "body": "Comentarios (requerido)",
     "email": "Email (requerido)",
     "errors": {
-      "invalid_email": "El correo electrónico parece ser inválido, por favor, compruébelo de nuevo."
+      "invalid_email": "Por favor, ingrese una dirección de correo electrónico válida."
     },
     "name": "Nombre completo",
     "success": "Recibimos tu reporte. ¡Gracias!"
   },
   "screen_titles": {
     "about": "Acerca de",
+    "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
+    "exposures": "Exposiciones",
     "legal": "Legal",
     "report_issue": "Reportar un problema"
   }

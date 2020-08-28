@@ -1,4 +1,5 @@
 import mockAsyncStorage from "@react-native-community/async-storage/jest/async-storage-mock"
+import mockRNCNetInfo from "@react-native-community/netinfo/jest/netinfo-mock.js"
 import { NativeModules } from "react-native"
 
 import { initializei18next } from "../src/locales/languages"
@@ -27,6 +28,7 @@ jest.mock("react-native-linear-gradient")
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper")
 
 jest.mock("@react-native-community/async-storage", () => mockAsyncStorage)
+jest.mock("@react-native-community/netinfo", () => mockRNCNetInfo)
 jest.mock(
   "@react-native-community/push-notification-ios",
   () => "push-notification-ios",

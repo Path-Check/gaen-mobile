@@ -23,8 +23,10 @@
     "start_title": "Odpowiedz na pytania dotyczące objawów i historii medycznej, aby dowiedzieć się, co dalej robić z COVID-19"
   },
   "common": {
+    "cancel": "Anuluj",
     "continue": "Dalej",
     "done": "Gotowe",
+    "enable": "Włącz",
     "next": "Dalej",
     "something_went_wrong": "Coś poszło nie tak",
     "start": "Start"
@@ -34,10 +36,7 @@
     "complete_body_bluetooth": "Wybierając opcję dzielenia się swoim statusem i anonimowego powiadamiania innych, pomagasz powstrzymać rozprzestrzenianie się wirusa i chronić innych w swojej społeczności.",
     "complete_title": "Dziękujemy za zapewnienie bezpieczeństwa Twojej społeczności!",
     "consent_button_title": "Rozumiem i wyrażam zgodę",
-    "publish_consent_body_bluetooth": "Udostępnianie pozytywnej diagnozy jest opcjonalne i możne odbywać się tylko za Twoją zgodą. \n\nJeśli zdecydujesz się to zrobić, pomagasz innym członkom społeczności w podejmowaniu świadomych decyzji dotyczących ich zdrowia i odgrywasz swoją rolę w powstrzymywaniu rozprzestrzeniania się wirusa. \n\nJedyne udostępniane informacje to losowy zestaw liczb wymienianych przez telefon przez Bluetooth z innymi telefonami, które były w pobliżu w ciągu ostatnich 14 dni, wraz z ważoną oceną ryzyka na podstawie czasu wystąpienia objawów.",
-    "publish_consent_title_bluetooth": "Powiadom innych w swojej społeczności",
-    "start_body_bluetooth": "Wybierz anonimowe powiadomienie innych osób, z którymi mogłeś się spotkać i pomóż swojej społeczności powstrzymać rozprzestrzenianie się wirusa.",
-    "start_title_bluetooth": "Pomóż powstrzymać rozprzestrzenianie się wirusa i chroń innych w Twojej społeczności, jeśli zdiagnozowano u Ciebie pozytywny wynik testu na COVID-19."
+    "publish_consent_title_bluetooth": "Powiadom innych w swojej społeczności"
   },
   "exposure_history": {
     "how_does_this_work": "Jak to działa?",
@@ -56,9 +55,7 @@
     "launch_enable_notif": "Włącz powiadomienia",
     "launch_get_started": "Zaczynamy",
     "launch_screen1_header": "Witamy w PathCheck",
-    "legal_page_address": "PathCheck Foundation\n58 Day Street \nBox 441621 \nSomerville, MA 02144",
-    "privacy_policy": "Polityka prywatności",
-    "unknown": "nieznany"
+    "privacy_policy": "Polityka prywatności"
   },
   "navigation": {
     "exposure_history": "Historia Ekspozycji",

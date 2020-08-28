@@ -25,10 +25,11 @@ extension String {
   // .env
   static let postKeysUrl = "POST_DIAGNOSIS_KEYS_URL"
   static let downloadBaseUrl = "DOWNLOAD_BASE_URL"
-  static let exposureConfigurationUrl = "EXPOSURE_CONFIGURATION_URL"
+  static let exposureConfigurationUrl = "EXPOSURE_CONFIGURATION_BASE_URL"
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
+  static let dev = "DEV"
 
   // Notifications
   static let bluetoothNotificationTitle = "Bluetooth Off"
@@ -43,14 +44,10 @@ extension String {
   // JS Layer
   static let genericSuccess = "success"
   
-  // ErrorCodes
-  static let networkFailure = "network_request_error"
-  static let noExposureKeysFound = "no_exposure_keys_found"
-  static let detectionNeverPerformed = "no_last_detection_date"
-
   // Error Messages
+  static let cannotEnableNotifications = "Error enabling notifications"
   static let noLocalKeysFound = "No exposure keys on device, please try again in 60 minutes"
-
+  static let noLastResetDateAvailable = "No lastResetDate available"
   // Computed Properties
   var gaenFilePaths: [String] {
     split(separator: "\n").map { String($0) }

@@ -30,7 +30,7 @@ export const EmergencyAssessment = ({ navigation }) => {
 
   return (
     <AssessmentLayout
-      backgroundColor={Colors.primaryBackground}
+      backgroundColor={Colors.primaryLightBackground}
       footer={
         <ChoiceButtons
           agreePress={handleAgreePress}
@@ -64,9 +64,9 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessibilityRole="button"
         style={style.button}
       >
-        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
+        <GlobalText style={[style.buttonText, style.boldText]}>
           {t("assessment.i_am")}
-          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
+          <GlobalText style={[style.buttonText, style.regularText]}>
             {t("assessment.experiencing_some_symptoms")}
           </GlobalText>
         </GlobalText>
@@ -76,11 +76,11 @@ const ChoiceButtons = ({ agreePress, disagreePress }) => {
         accessible
         accessibilityLabel={notExperiencingSymptomsText}
         accessibilityRole="button"
-        style={{ ...style.button, ...style.disagreeButton }}
+        style={[style.button, style.disagreeButton]}
       >
-        <GlobalText style={{ ...style.buttonText, ...style.boldText }}>
+        <GlobalText style={[style.buttonText, style.boldText]}>
           {t("assessment.i_am_not")}
-          <GlobalText style={{ ...style.buttonText, ...style.regularText }}>
+          <GlobalText style={[style.buttonText, style.regularText]}>
             {t("assessment.experiencing_any_symptoms")}
           </GlobalText>
         </GlobalText>
@@ -145,13 +145,20 @@ const agreeOption = {
 const style = StyleSheet.create({
   button: {
     ...Buttons.primary,
+    borderWidth: 1,
+    borderColor: Colors.steelGray,
   },
   buttonText: {
     ...Typography.buttonPrimaryText,
     textAlign: "center",
+    color: Colors.steelGray,
   },
   boldText: {
-    ...Typography.extraBold,
+    ...Typography.bold,
+    color: Colors.steelGray,
+  },
+  regularText: {
+    ...Typography.base,
   },
   disagreeButton: {
     marginTop: 10,

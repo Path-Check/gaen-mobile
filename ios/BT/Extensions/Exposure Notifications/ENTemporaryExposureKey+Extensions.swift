@@ -22,5 +22,4 @@ extension ENTemporaryExposureKey {
   static func rollingStartNumber(_ date: Date) -> UInt32 {
     UInt32(Int(date.timeIntervalSince1970 / (24 * 60 * 60)) * Constants.intervalsPerRollingPeriod)
   }
-
 }

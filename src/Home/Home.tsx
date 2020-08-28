@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  Platform,
   Linking,
   StyleSheet,
   SafeAreaView,
@@ -16,16 +17,16 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 
-import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../PermissionsContext"
-import { useStatusBarEffect, Stacks } from "../navigation"
-import { isBluetoothEnabled } from "../gaen/nativeModule"
+import { usePermissionsContext } from "../PermissionsContext"
+import { Screens, useStatusBarEffect, Stacks, HomeScreens } from "../navigation"
 import { useApplicationInfo } from "../More/useApplicationInfo"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { isPlatformiOS } from "../utils/index"
+import { getLocalNames } from "../locales/languages"
+import { useConfigurationContext } from "../ConfigurationContext"
+import { useBluetoothStatus } from "../useBluetoothStatus"
+import { useHasLocationRequirements } from "./useHasLocationRequirements"
 
 import { Icons, Images } from "../assets"
 import {
@@ -38,36 +39,33 @@ import {
 } from "../styles"
 
 const HomeScreen: FunctionComponent = () => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
+  const languageName = getLocalNames()[localeCode]
+  const configuration = useConfigurationContext()
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
-  const [
-    authorization,
-    enablement,
-  ]: ENPermissionStatus = exposureNotifications.status
   const { applicationName } = useApplicationInfo()
   const insets = useSafeAreaInsets()
+  const isBluetoothOn = useBluetoothStatus()
+  const {
+    isLocationOn,
+    isLocationNeeded: showLocationStatus,
+    isLocationOffAndNeeded,
+  } = useHasLocationRequirements()
   useStatusBarEffect("light-content")
-
-  const [btStatus, setBTStatus] = useState(false)
-  const fetchBTStatus = async () => {
-    const status = await isBluetoothEnabled()
-    setBTStatus(status === "true")
-  }
-
-  useEffect(() => {
-    fetchBTStatus()
-  }, [])
-
-  const isEnabled = enablement === "ENABLED"
-  const isAuthorized = authorization === "AUTHORIZED"
-  const isEnabledAndAuthorized = isEnabled && isAuthorized
 
   const showUnauthorizedAlert = () => {
     Alert.alert(
       t("home.bluetooth.unauthorized_error_title"),
       t("home.bluetooth.unauthorized_error_message"),
       [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
         {
           text: t("common.settings"),
           onPress: () => Linking.openSettings(),
@@ -76,7 +74,41 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
-  const showBluetoothDisabledAlert = () => {
+  const showEnableProximityTracingAlert = () => {
+    Alert.alert(
+      t("onboarding.proximity_tracing_alert_header", { applicationName }),
+      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.enable"),
+          onPress: exposureNotifications.request,
+        },
+      ],
+    )
+  }
+
+  const showFixLocationAlert = () => {
+    Alert.alert(
+      t("home.bluetooth.location_disabled_error_title"),
+      t("home.bluetooth.location_disabled_error_message"),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => Linking.openSettings(),
+        },
+      ],
+    )
+  }
+
+  const showFixBluetoothAlert = () => {
     Alert.alert(
       t("home.bluetooth.bluetooth_disabled_error_title"),
       t("home.bluetooth.bluetooth_disabled_error_message"),
@@ -88,14 +120,12 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
-  const appDownloadLink = "https://pathcheck.org"
-
   const handleOnPressShare = async () => {
     try {
       await Share.share({
         message: t("home.bluetooth.share_message", {
           applicationName,
-          appDownloadLink,
+          appDownloadLink: configuration.appDownloadLink,
         }),
       })
     } catch (error) {
@@ -103,25 +133,62 @@ const HomeScreen: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressBluetooth = () => {
-    showBluetoothDisabledAlert()
+  const handleOnPressFixBluetooth = () => {
+    showFixBluetoothAlert()
   }
 
-  const handleOnPressProximityTracing = () => {
-    if (isAuthorized) {
-      exposureNotifications.request()
-    } else if (isPlatformiOS()) {
+  const handleOnPressFixProximityTracing = () => {
+    if (!isAuthorized && isPlatformiOS()) {
       showUnauthorizedAlert()
+    } else {
+      showEnableProximityTracingAlert()
     }
   }
 
-  const isProximityTracingOn = isEnabledAndAuthorized
-  const isBluetoothOn = btStatus
-  const appIsActive = isProximityTracingOn && isBluetoothOn
+  const handleOnPressFixLocation = () => {
+    showFixLocationAlert()
+  }
 
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(Screens.LanguageSelection)
+  }
+
+  const showShareLink = Boolean(configuration.appDownloadLink)
+
+  const isAuthorized = exposureNotifications.status.authorized
+  const isEnabled = exposureNotifications.status.enabled
+  const isProximityTracingOn = isEnabled && isAuthorized
+  const appIsActive =
+    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+
+  const iosMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 10
+  const androidMaxHeight = insets.bottom + Layout.screenHeight * 0.475 - 30
   const bottomContainerStyle = {
     ...style.bottomContainer,
-    maxHeight: insets.bottom + Layout.screenHeight * 0.475,
+    maxHeight: Platform.select({
+      ios: iosMaxHeight,
+      android: androidMaxHeight,
+    }),
+  }
+
+  const iosTopSpacing = Layout.screenHeight * 0.225 - insets.top + 55
+  const androidTopSpacing = Layout.screenHeight * 0.225 - insets.top + 80
+  const textContainerStyle = {
+    ...style.textContainer,
+    top: Platform.select({
+      ios: iosTopSpacing,
+      android: androidTopSpacing,
+    }),
+  }
+
+  const iosPaddingTop = Layout.screenHeight * 0.5 - insets.top + 300
+  const androidPaddingTop = 680
+  const backgroundImageStyle = {
+    ...style.backgroundImage,
+    paddingTop: Platform.select({
+      ios: iosPaddingTop,
+      android: androidPaddingTop,
+    }),
   }
 
   const backgroundImage = appIsActive ? Images.HomeActive : Images.HomeInactive
@@ -136,8 +203,18 @@ const HomeScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      <ImageBackground style={style.backgroundImage} source={backgroundImage} />
-      <View style={style.textContainer}>
+      <ImageBackground style={backgroundImageStyle} source={backgroundImage} />
+      <View style={style.languageButtonOuterContainer}>
+        <TouchableOpacity
+          onPress={handleOnPressSelectLanguage}
+          style={style.languageButtonContainer}
+        >
+          <GlobalText style={style.languageButtonText}>
+            {languageName}
+          </GlobalText>
+        </TouchableOpacity>
+      </View>
+      <View style={textContainerStyle}>
         <GlobalText style={style.headerText} testID={"home-header"}>
           {headerText}
         </GlobalText>
@@ -145,48 +222,66 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView style={bottomContainerStyle}>
-          <TouchableOpacity
-            style={style.shareContainer}
-            onPress={handleOnPressShare}
-          >
-            <View style={style.shareImageContainer}>
-              <Image source={Images.HugEmoji} style={style.shareImage} />
-            </View>
-            <View style={style.shareTextContainer}>
-              <GlobalText style={style.shareText}>
-                {t("home.bluetooth.share")}
-              </GlobalText>
-            </View>
-            <View style={style.shareIconContainer}>
-              <SvgXml
-                xml={Icons.Share}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-            </View>
-          </TouchableOpacity>
+      <SafeAreaView style={bottomContainerStyle}>
+        <ScrollView contentContainerStyle={style.bottomContentContainer}>
+          {showShareLink ? (
+            <TouchableOpacity
+              style={style.shareContainer}
+              onPress={handleOnPressShare}
+              accessibilityLabel={t("home.bluetooth.share")}
+            >
+              <View style={style.shareImageContainer}>
+                <Image source={Images.HugEmoji} style={style.shareImage} />
+              </View>
+              <View style={style.shareTextContainer}>
+                <GlobalText style={style.shareText}>
+                  {t("home.bluetooth.share")}
+                </GlobalText>
+              </View>
+              <View style={style.shareIconContainer}>
+                <SvgXml
+                  xml={Icons.Share}
+                  width={Iconography.small}
+                  height={Iconography.small}
+                />
+              </View>
+            </TouchableOpacity>
+          ) : null}
           <View style={style.activationStatusSectionContainer}>
             <ActivationStatusSection
               headerText={t("home.bluetooth.bluetooth_header")}
               isActive={isBluetoothOn}
-              fixAction={handleOnPressBluetooth}
+              infoAction={() => navigation.navigate(HomeScreens.BluetoothInfo)}
+              fixAction={handleOnPressFixBluetooth}
               testID={"home-bluetooth-status-container"}
             />
             <ActivationStatusSection
               headerText={t("home.bluetooth.proximity_tracing_header")}
               isActive={isProximityTracingOn}
-              fixAction={handleOnPressProximityTracing}
+              infoAction={() =>
+                navigation.navigate(HomeScreens.ProximityTracingInfo)
+              }
+              fixAction={handleOnPressFixProximityTracing}
               testID={"home-proximity-tracing-status-container"}
             />
+            {showLocationStatus && (
+              <ActivationStatusSection
+                headerText={t("home.bluetooth.location_header")}
+                isActive={isLocationOn}
+                infoAction={() => navigation.navigate(HomeScreens.LocationInfo)}
+                fixAction={handleOnPressFixLocation}
+                testID={"home-location-status-container"}
+              />
+            )}
           </View>
-          <Button
-            onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
-            label={t("home.bluetooth.report_positive_result")}
-            customButtonStyle={style.button}
-            hasRightArrow
-          />
+          <View style={style.buttonContainer}>
+            <Button
+              onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+              label={t("home.bluetooth.report_positive_result")}
+              customButtonStyle={style.button}
+              hasRightArrow
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -196,6 +291,7 @@ const HomeScreen: FunctionComponent = () => {
 interface ActivationStatusProps {
   headerText: string
   isActive: boolean
+  infoAction: () => void
   fixAction: () => void
   testID: string
 }
@@ -203,6 +299,7 @@ interface ActivationStatusProps {
 const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   headerText,
   isActive,
+  infoAction,
   fixAction,
   testID,
 }) => {
@@ -210,12 +307,11 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 
   const bodyText = isActive ? t("common.enabled") : t("common.disabled")
   const icon = isActive ? Icons.CheckInCircle : Icons.XInCircle
-  const iconFill = isActive ? Colors.primaryGreen : Colors.tertiaryRed
+  const iconFill = isActive ? Colors.success100 : Colors.danger75
 
   return (
     <TouchableOpacity
-      disabled={isActive}
-      onPress={fixAction}
+      onPress={isActive ? infoAction : fixAction}
       style={style.activationStatusContainer}
       testID={testID}
     >
@@ -231,41 +327,62 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
           <GlobalText style={style.bottomBodyText}>{bodyText}</GlobalText>
         </View>
       </View>
-      {!isActive && (
-        <View style={style.fixContainer}>
-          <GlobalText style={style.fixText}>
-            {t("home.bluetooth.fix")}
-          </GlobalText>
-        </View>
-      )}
+      <View style={style.activationStatusRightContainer}>
+        {isActive ? (
+          <SvgXml xml={Icons.HomeInfo} />
+        ) : (
+          <View style={style.fixButtonContainer}>
+            <GlobalText style={style.fixButtonText}>
+              {t("home.bluetooth.fix")}
+            </GlobalText>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   )
 }
-
+const activationStatusRightWidth = 70
 const style = StyleSheet.create({
   container: {
     flex: 1,
   },
   backgroundImage: {
-    flex: 1,
-    paddingTop: 500,
     width: "100%",
+  },
+  languageButtonOuterContainer: {
+    position: "absolute",
+    top: Layout.oneTwentiethHeight,
+    width: "100%",
+  },
+  languageButtonContainer: {
+    alignSelf: "center",
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
+    backgroundColor: Colors.transparentNeutral30,
+    borderRadius: Outlines.borderRadiusMax,
+  },
+  languageButtonText: {
+    ...Typography.body3,
+    letterSpacing: Typography.xLargeLetterSpacing,
+    color: Colors.primary150,
+    textAlign: "center",
+    textTransform: "uppercase",
   },
   textContainer: {
     alignSelf: "center",
     marginHorizontal: Spacing.medium,
     position: "absolute",
-    top: "27.5%",
     alignItems: "center",
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.body1,
+    fontSize: Typography.large,
     color: Colors.white,
     textAlign: "center",
     marginBottom: Spacing.xxSmall,
@@ -274,21 +391,24 @@ const style = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  bottomContentContainer: {
+    paddingBottom: Spacing.large,
   },
   shareContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: Spacing.small,
-    paddingLeft: Spacing.small,
-    backgroundColor: Colors.faintGray,
-    borderBottomColor: Colors.lightestGray,
+    paddingHorizontal: Spacing.small,
+    backgroundColor: Colors.secondary10,
+    borderBottomColor: Colors.neutral10,
     borderBottomWidth: Outlines.hairline,
   },
   shareImageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.tertiaryViolet,
+    backgroundColor: Colors.secondary50,
     borderRadius: Outlines.borderRadiusMax,
     width: Iconography.medium,
     height: Iconography.medium,
@@ -305,7 +425,9 @@ const style = StyleSheet.create({
     ...Typography.header4,
   },
   shareIconContainer: {
-    paddingHorizontal: Spacing.medium,
+    width: activationStatusRightWidth,
+    alignItems: "center",
+    justifyContent: "center",
   },
   activationStatusSectionContainer: {
     marginBottom: Spacing.medium,
@@ -317,7 +439,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.large,
     marginHorizontal: Spacing.small,
     borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.lightestGray,
+    borderBottomColor: Colors.neutral10,
   },
   activationStatusLeftContainer: {
     flexDirection: "row",
@@ -326,28 +448,36 @@ const style = StyleSheet.create({
   activationStatusTextContainer: {
     marginLeft: Spacing.medium,
   },
-  fixContainer: {
-    backgroundColor: Colors.tertiaryRed,
+  activationStatusRightContainer: {
+    width: activationStatusRightWidth,
+    alignItems: "center",
+  },
+  fixButtonContainer: {
+    alignItems: "center",
+    backgroundColor: Colors.secondary50,
     paddingVertical: Spacing.xxxSmall,
     paddingHorizontal: Spacing.small,
     borderRadius: Outlines.baseBorderRadius,
   },
-  fixText: {
-    ...Typography.base,
-    ...Typography.bold,
-    fontSize: Typography.medium,
-    color: Colors.white,
+  fixButtonText: {
+    ...Typography.header4,
+    color: Colors.primary100,
+    textTransform: "uppercase",
   },
   bottomHeaderText: {
     ...Typography.header4,
     marginBottom: Spacing.xxxSmall,
   },
   bottomBodyText: {
-    ...Typography.secondaryContent,
+    ...Typography.header6,
+    color: Colors.neutral100,
+  },
+  buttonContainer: {
+    paddingHorizontal: Spacing.small,
   },
   button: {
     alignSelf: "center",
-    marginBottom: Spacing.large,
+    width: "100%",
   },
 })
 

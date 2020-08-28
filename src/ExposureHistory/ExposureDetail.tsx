@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react"
-import env from "react-native-config"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import { View, ScrollView, StyleSheet, Linking } from "react-native"
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import NetInfo from "@react-native-community/netinfo"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
 import { GlobalText } from "../components/GlobalText"
@@ -13,6 +13,7 @@ import { ExposureDatum, exposureWindowBucket } from "../exposure"
 
 import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const ExposureDetail: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -21,15 +22,27 @@ const ExposureDetail: FunctionComponent = () => {
   >()
   useStatusBarEffect("light-content")
   const { t } = useTranslation()
-
   const {
-    GAEN_AUTHORITY_NAME: healthAuthorityName,
-    AUTHORITY_ADVICE_URL: healthAuthorityLink,
-  } = env
-  const { exposureDatum } = route.params
+    healthAuthorityName,
+    healthAuthorityAdviceUrl,
+  } = useConfigurationContext()
 
-  const headerText = t("exposure_history.exposure_detail.header")
-  const contentText = t("exposure_history.exposure_detail.content")
+  const [isConnected, setIsConnected] = useState<boolean | null | undefined>(
+    true,
+  )
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      // netInfo state comes as null while unresolved so to avoid flicker we only set component state
+      // if the netInfo state is resolved to boolean
+      if (state.isInternetReachable !== null) {
+        setIsConnected(state.isInternetReachable)
+      }
+    })
+    return unsubscribe
+  }, [])
+
+  const { exposureDatum } = route.params
 
   const exposureWindowBucketInWords = (
     exposureDatum: ExposureDatum,
@@ -49,8 +62,8 @@ const ExposureDetail: FunctionComponent = () => {
   }
 
   const handleOnPressNextStep = () => {
-    healthAuthorityLink
-      ? Linking.openURL(healthAuthorityLink)
+    healthAuthorityAdviceUrl
+      ? Linking.openURL(healthAuthorityAdviceUrl)
       : navigation.navigate(Screens.SelfAssessment)
   }
 
@@ -62,16 +75,20 @@ const ExposureDetail: FunctionComponent = () => {
             xml={Icons.ExposureIcon}
             accessible
             accessibilityLabel={t("exposure_history.possible_exposure")}
-            fill={Colors.primaryViolet}
+            fill={Colors.primary125}
             width={Iconography.xSmall}
             height={Iconography.xSmall}
           />
-          <GlobalText style={style.exposureWindow}>
+          <GlobalText style={style.exposureWindowText}>
             {exposureWindowBucketInWords(exposureDatum)}
           </GlobalText>
         </View>
-        <GlobalText style={style.headerText}>{headerText}</GlobalText>
-        <GlobalText style={style.contentText}>{contentText}</GlobalText>
+        <GlobalText style={style.headerText}>
+          {t("exposure_history.exposure_detail.header")}
+        </GlobalText>
+        <GlobalText style={style.contentText}>
+          {t("exposure_history.exposure_detail.content")}
+        </GlobalText>
       </View>
       <View style={style.bottomContainer}>
         <GlobalText style={style.bottomHeaderText}>
@@ -100,10 +117,19 @@ const ExposureDetail: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        <Button
-          onPress={handleOnPressNextStep}
-          label={t("exposure_history.exposure_detail.next_steps")}
-        />
+        <View style={style.buttonContainer}>
+          <Button
+            onPress={handleOnPressNextStep}
+            label={t("exposure_history.exposure_detail.next_steps")}
+            disabled={!isConnected}
+            hasRightArrow
+          />
+        </View>
+        {!isConnected && (
+          <GlobalText style={style.connectivityWarningText}>
+            {t("exposure_history.no_connectivity_message")}
+          </GlobalText>
+        )}
       </View>
     </ScrollView>
   )
@@ -134,35 +160,33 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.secondary10,
   },
   headerContainer: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.xLarge,
-  },
-  exposureWindow: {
-    ...Typography.base,
-    color: Colors.darkGray,
-    textTransform: "uppercase",
-    letterSpacing: Typography.mediumLetterSpacing,
-    marginLeft: Spacing.xSmall,
-  },
-  headerText: {
-    ...Typography.header6,
-    marginBottom: Spacing.xxSmall,
-  },
-  contentText: {
-    ...Typography.tertiaryContent,
-    color: Colors.darkGray,
+    paddingVertical: Spacing.large,
   },
   exposureWindowContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: Spacing.xSmall,
   },
+  exposureWindowText: {
+    ...Typography.header6,
+    textTransform: "uppercase",
+    color: Colors.neutral110,
+    marginLeft: Spacing.xSmall,
+  },
+  headerText: {
+    ...Typography.header3,
+    marginBottom: Spacing.xxSmall,
+  },
+  contentText: {
+    ...Typography.body2,
+  },
   bottomContainer: {
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     flex: 1,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.medium,
@@ -170,13 +194,12 @@ const style = StyleSheet.create({
     marginTop: Spacing.xxSmall,
   },
   bottomHeaderText: {
-    ...Typography.header6,
-    fontSize: Typography.large,
+    ...Typography.header5,
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.tertiaryContent,
-    color: Colors.darkGray,
+    ...Typography.body2,
+    color: Colors.neutral100,
     marginBottom: Spacing.medium,
   },
   recommendations: {
@@ -192,13 +215,19 @@ const style = StyleSheet.create({
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
     borderRadius: 50,
-    backgroundColor: Colors.primaryBackground,
+    backgroundColor: Colors.primaryLightBackground,
     padding: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
   },
   recommendationText: {
-    ...Typography.tinyFont,
-    color: Colors.primaryText,
+    ...Typography.body3,
+  },
+  buttonContainer: {
+    alignSelf: "flex-start",
+  },
+  connectivityWarningText: {
+    ...Typography.error,
+    marginTop: Spacing.small,
   },
 })
 
