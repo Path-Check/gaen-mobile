@@ -29,7 +29,13 @@ import {
   Layout,
 } from "../../styles"
 import Logger from "../../logger"
-import * as ExposureAPI from "../exposureNotificationAPI"
+import {
+  postDiagnosisKeys,
+  PostKeysError,
+  PostKeysNoOp,
+  PostKeysSuccess,
+  PostKeysFailure,
+} from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -53,9 +59,60 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
+    const newKeysInserted = noOpResponse.newKeysInserted
+    Logger.addMetadata("publishKeys", {
+      noOpReason: noOpResponse.reason,
+      errorMessage: noOpResponse.message,
+      newKeysInserted,
+      revisionToken,
+    })
+    Logger.error(
+      `IncompleteKeySumbission.${noOpResponse.reason}.${noOpResponse.message}`,
+    )
+    Alert.alert(
+      t("export.publish_keys.no_op.title"),
+      t("export.publish_keys.no_op.no_token_for_existing_keys", {
+        newKeysInserted,
+      }),
+      [
+        {
+          onPress: () =>
+            navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete),
+        },
+      ],
+    )
+  }
+
+  const errorMessageTitle = (errorNature: PostKeysError) => {
+    switch (errorNature) {
+      case PostKeysError.Unknown: {
+        return t("export.publish_keys.errors.unknown")
+      }
+      case PostKeysError.RequestFailed: {
+        return t("common.something_went_wrong")
+      }
+    }
+  }
+
+  const handleFailureResponse = ({ nature, message }: PostKeysFailure) => {
+    Logger.addMetadata("publishKeys", {
+      errorMessage: message,
+      revisionToken,
+    })
+    Logger.error(`IncompleteKeySumbission.${nature}.${message}`)
+    Alert.alert(
+      errorMessageTitle(nature),
+      t("export.publish_keys.errors.description", {
+        message,
+      }),
+    )
+  }
+
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
-    const response = await ExposureAPI.postDiagnosisKeys(
+    const response = await postDiagnosisKeys(
       exposureKeys,
       regionCodes,
       certificate,
@@ -64,19 +121,13 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       revisionToken,
     )
     setIsLoading(false)
-    if (response.kind === "success") {
-      storeRevisionToken(response.body.revisionToken)
+    if ((response as PostKeysSuccess).revisionToken) {
+      storeRevisionToken((response as PostKeysSuccess).revisionToken)
       navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+    } else if ((response as PostKeysNoOp).reason) {
+      handleNoOpResponse(response as PostKeysNoOp)
     } else {
-      const errorMessage = response.message
-      Logger.addMetadata("publishKeys", {
-        errorMessage,
-        revisionToken,
-      })
-      Logger.error(`IncompleteKeySumbission.${response.error}.${errorMessage}`)
-      if (response.error === "Unknown") {
-        Alert.alert(t("common.something_went_wrong"), errorMessage)
-      }
+      handleFailureResponse(response as PostKeysFailure)
     }
   }
   useStatusBarEffect("dark-content")

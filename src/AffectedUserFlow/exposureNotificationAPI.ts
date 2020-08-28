@@ -9,25 +9,42 @@ const defaultHeaders = {
   accept: "application/json",
 }
 
+const EXISTING_KEYS_SENT_RESPONSE = "no revision token, but sent existing keys"
+
 type Token = string
 
-interface NetworkSuccess<T> {
-  kind: "success"
-  body: T
-}
-interface NetworkFailure<U> {
-  kind: "failure"
-  error: U
-  message?: string
-}
-
-export type NetworkResponse<T, U> = NetworkSuccess<T> | NetworkFailure<U>
-
-type PostKeysSuccess = {
+interface PostKeysResponseBody {
+  error: string
+  insertedExposures: number
+  padding: string
   revisionToken: Token
 }
 
-export type PostKeysError = "Unknown" | "Internal"
+export enum PostKeysError {
+  Unknown = "Unknown",
+  RequestFailed = "RequestFailed",
+}
+
+export type PostKeysFailure = {
+  nature: PostKeysError
+  message: string
+}
+
+export type PostKeysSuccess = {
+  revisionToken: Token
+}
+
+export enum PostKeysNoOpReason {
+  NoTokenForExistingKeys = "NoTokenForExistingKeys",
+}
+
+export type PostKeysNoOp = {
+  reason: PostKeysNoOpReason
+  newKeysInserted: number
+  message: string
+}
+
+type PostKeysResponse = PostKeysSuccess | PostKeysNoOp
 
 type RegionCode = string
 
@@ -40,7 +57,7 @@ export const postDiagnosisKeys = async (
   hmacKey: string,
   appPackageName: string,
   revisionToken: string,
-): Promise<NetworkResponse<PostKeysSuccess, PostKeysError>> => {
+): Promise<PostKeysResponse | PostKeysFailure> => {
   const data = {
     temporaryExposureKeys: exposureKeys,
     regions: regionCodes,
@@ -58,17 +75,24 @@ export const postDiagnosisKeys = async (
       body: JSON.stringify(data),
     })
 
-    const json = await response.json()
+    const json: PostKeysResponseBody = await response.json()
     if (response.ok) {
-      return { kind: "success", body: json }
+      return { revisionToken: json.revisionToken }
     } else {
       switch (json.error) {
+        case EXISTING_KEYS_SENT_RESPONSE: {
+          return {
+            reason: PostKeysNoOpReason.NoTokenForExistingKeys,
+            newKeysInserted: json.insertedExposures || 0,
+            message: json.error,
+          }
+        }
         default: {
-          return { kind: "failure", error: "Unknown", message: json.error }
+          return { nature: PostKeysError.Unknown, message: json.error }
         }
       }
     }
   } catch (e) {
-    return { kind: "failure", error: "Internal", message: e.message }
+    return { nature: PostKeysError.RequestFailed, message: e.message }
   }
 }
