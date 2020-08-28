@@ -136,6 +136,7 @@
       "bluetooth_disabled_error_title": "Active el Bluetooth visitando la Configuración",
       "bluetooth_header": "Bluetooth",
       "fix": "Arreglar",
+      "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "proximity_tracing_header": "Rastreo de Proximidad",
       "report_positive_result": "Informar resultado positivo de la prueba",
       "share": "Comparta la aplicación y ayude a contener el brote",
@@ -153,6 +154,7 @@
     "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?"
   },
   "label": {
+    "activate_proximity_tracing": "Activar seguimiento de proximidad",
     "check": "✔",
     "checked_checkbox": "Casilla marcada",
     "language_icon": "🌎",
