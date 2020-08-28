@@ -115,7 +115,8 @@ public class ExposureNotificationClientWrapper {
         .transformAsync((done) -> setDiagnosisKeysDataMapping(), AppExecutors.getBackgroundExecutor())
         .catching(Exception.class, exception -> {
           Log.d(TAG, "setDiagnosisKeysDataMapping failed: " + exception);
-          // Ignore the error, this method throws an error if it's called multiple times
+          // Ignore the error, if called twice within 7 days,
+          // the second call has no effect and raises an exception with status code FAILED_RATE_LIMITED.
           return null;
         }, AppExecutors.getLightweightExecutor())
         .transformAsync((done) -> provideDiagnosisKeysFuture(files), AppExecutors.getBackgroundExecutor());
@@ -132,6 +133,9 @@ public class ExposureNotificationClientWrapper {
   }
 
   private ListenableFuture<Void> setDiagnosisKeysDataMapping() {
+    // https://developers.google.com/android/exposure-notifications/exposure-notifications-api#methods
+    // In v1.6, these settings are applied at matching time, when calling provideDiagnosisKeys().
+    // It won't modify ExposureWindow objects for keys provided in past calls.
     Log.d(TAG, "setDiagnosisKeysDataMapping called with config " + config.getDiagnosisKeysDataMapping());
     return TaskToFutureAdapter.getFutureWithTimeout(
         exposureNotificationClient.setDiagnosisKeysDataMapping(config.getDiagnosisKeysDataMapping()),

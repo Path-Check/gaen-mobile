@@ -100,7 +100,8 @@ object RealmSecureStorageBte {
         var somethingAdded = false
         getRealmInstance().use {
             it.executeTransaction { db ->
-                // Keep track of the exposures already handled and remove them when we find matching windows.
+                // Keep track of the exposures already handled to avoid showing the same notification multiple times.
+                // The list passes as a parameter should have only those summaries that exceeded the threshold.
                 val results: RealmResults<ExposureEntity> = db.where(ExposureEntity::class.java).findAll()
                 val exposureEntities: MutableList<ExposureEntity> = db.copyFromRealm(results)
                 for (dailySummary in dailySummaries) {
@@ -114,7 +115,7 @@ object RealmSecureStorageBte {
                         }
                     }
                     if (!found) {
-                        // No existing ExposureEntity with the given date, must add an entity for this window.
+                        // No existing ExposureEntity with the given date, must add an entity for this summary.
                         somethingAdded = true
                         db.insert(
                             ExposureEntity.create(dateMillisSinceEpoch, System.currentTimeMillis())
