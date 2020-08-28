@@ -133,41 +133,39 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               onPress={handleOnPressRestartOnboarding}
             />
           </View>
-          {__DEV__ ? (
-            <View style={style.section}>
-              <DebugMenuListItem
-                label="Show Exposures"
-                onPress={() => {
-                  navigation.navigate(Screens.ExposureListDebugScreen)
-                }}
-              />
-              <DebugMenuListItem
-                label="Toggle Exposure Notifications"
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.toggleExposureNotifications,
-                )}
-              />
-              <DebugMenuListItem
-                label="Detect Exposures Now"
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.detectExposuresNow,
-                )}
-              />
-              <DebugMenuListItem
-                label="Reset Exposures"
-                itemStyle={style.lastListItem}
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.resetExposures,
-                )}
-              />
-              <DebugMenuListItem
-                label="Simulate Exposure Detection Error"
-                onPress={handleOnPressSimulationButton(
-                  NativeModule.simulateExposureDetectionError,
-                )}
-              />
-            </View>
-          ) : null}
+          <View style={style.section}>
+            <DebugMenuListItem
+              label="Show Exposures"
+              onPress={() => {
+                navigation.navigate(Screens.ExposureListDebugScreen)
+              }}
+            />
+            <DebugMenuListItem
+              label="Toggle Exposure Notifications"
+              onPress={handleOnPressSimulationButton(
+                NativeModule.toggleExposureNotifications,
+              )}
+            />
+            <DebugMenuListItem
+              label="Detect Exposures Now"
+              onPress={handleOnPressSimulationButton(
+                NativeModule.detectExposuresNow,
+              )}
+            />
+            <DebugMenuListItem
+              label="Reset Exposures"
+              itemStyle={style.lastListItem}
+              onPress={handleOnPressSimulationButton(
+                NativeModule.resetExposures,
+              )}
+            />
+            <DebugMenuListItem
+              label="Simulate Exposure Detection Error"
+              onPress={handleOnPressSimulationButton(
+                NativeModule.simulateExposureDetectionError,
+              )}
+            />
+          </View>
         </ScrollView>
       )}
     </>
