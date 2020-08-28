@@ -42,9 +42,12 @@ end
 ########################## FILE MANIPULATION AND RESCUE START #################
 
 def unzip_to_working_directory
+  resources_commit = mobile_resources_commit()
+  puts "Fetching configuration from pathcheck-mobile-resources commit #{resources_commit}"
+
   zip_name = "app-assets.zip"
   icons_zip_url =
-  "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/assets/#{HA_LABEL}/#{zip_name}"
+  "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{resources_commit}/assets/#{HA_LABEL}/#{zip_name}"
   file_destination = "#{WORKING_DIRECTORY}/#{zip_name}"
   clear_temporary_assets
   Dir.mkdir(WORKING_DIRECTORY)

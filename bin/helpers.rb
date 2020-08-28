@@ -62,3 +62,12 @@ end
 def valid_token(token)
   token.length == 40
 end
+
+def mobile_resources_commit()
+  _output, error, status = Open3.capture3("cat", "./bin/mobile_resources_commit")
+  return _output if status.success?
+
+  puts error
+  # Return master branch as default
+  "master"
+end
