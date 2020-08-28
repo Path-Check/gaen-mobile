@@ -43,6 +43,9 @@ import org.threeten.bp.Instant;
 
 /**
  * Performs work to provide diagnosis keys to the exposure notifications API.
+ *
+ * <p>This Worker will run every 12 hours.
+ * It won't do anything if the index files have already been processed.
  */
 public class ProvideDiagnosisKeysWorker extends ListenableWorker {
 
