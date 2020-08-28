@@ -18,6 +18,7 @@ export type ActivationScreen =
   | "AcceptEula"
   | "ActivateProximityTracing"
   | "NotificationPermissions"
+  | "ActivationSummary"
 
 export const ActivationScreens: {
   [key in ActivationScreen]: ActivationScreen
@@ -25,6 +26,7 @@ export const ActivationScreens: {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
   NotificationPermissions: "NotificationPermissions",
+  ActivationSummary: "ActivationSummary",
 }
 
 export type HomeScreen =

@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../More/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
@@ -24,7 +23,6 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { completeOnboarding } = useOnboardingContext()
   const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressEnable = () => {
@@ -40,7 +38,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
     if (Platform.OS === "ios") {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
-      completeOnboarding()
+      navigation.navigate(ActivationScreens.ActivationSummary)
     }
   }
 
