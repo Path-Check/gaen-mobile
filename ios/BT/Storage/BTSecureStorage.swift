@@ -159,10 +159,12 @@ extension BTSecureStorage {
     let ids = summaries.map { "\($0.startOfDateReceived):\($0.sequenceNumberInDay)" }
     try! realm.write {
       let cutoff = Date().posixRepresentation - 1209600 // 2 weeks ago
-      let oldSummaries = realm.objects(ExposureDetectionSummary.self).filter("dateReceived > \(cutoff)")
-      let specifiedSummaries = realm.objects(ExposureDetectionSummary.self).filter("id IN %@ \(ids)")
+      let oldSummaries = realm.objects(ExposureDetectionSummary.self).filter("startOfDateReceived > \(cutoff)")
       realm.delete(oldSummaries)
-      realm.delete(specifiedSummaries)
+      if ids.count > 0 {
+        let specifiedSummaries = realm.objects(ExposureDetectionSummary.self).filter("id IN %@ \(ids)")
+        realm.delete(specifiedSummaries)
+      }
     }
   }
 

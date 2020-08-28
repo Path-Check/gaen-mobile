@@ -8,6 +8,17 @@ import XCTest
 
 // MARK: == Mocks ==
 
+class MockENExposureDetectionSummary: ENExposureDetectionSummary {
+
+  override var attenuationDurations: [NSNumber] {
+    return [0,0,0]
+  }
+
+  override var riskScoreSumFullRange: Double {
+    return 0
+  }
+}
+
 class MockENExposureInfo: ENExposureInfo {
 
   override var date: Date {
@@ -359,10 +370,7 @@ class ExposureManagerTests: XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: 0,
-                                          duration: 10,
-                                          totalRiskScore: ENRiskScore(ENRiskScoreMin),
-                                          transmissionRiskLevel: ENRiskScore(ENRiskScoreMin)))
+                                          date: 0))
       return userState
     }
     let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
@@ -815,7 +823,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresGetExposureInfoError() {
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
+      completionHandler(MockENExposureDetectionSummary(), nil)
       return Progress()
     }
     enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in
@@ -824,7 +832,7 @@ class ExposureManagerTests: XCTestCase {
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      return Result<ScoringServerResponse>.success(ScoringServerResponse(notifications: [])) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       return URL(fileURLWithPath: "url")
@@ -856,7 +864,7 @@ class ExposureManagerTests: XCTestCase {
     }
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
+      completionHandler(MockENExposureDetectionSummary(), nil)
       return Progress()
     }
     enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in

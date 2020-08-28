@@ -294,7 +294,8 @@ final class ExposureManager: NSObject {
         processedFileCount = targetUrls.count
         for remoteURL in targetUrls {
           dispatchGroup.enter()
-          self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL), requestType: .downloadKeys) { result in
+          self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+                                         requestType: .downloadKeys) { result in
             switch result {
             case .success (let package):
               self.downloadedPackages.append(package)

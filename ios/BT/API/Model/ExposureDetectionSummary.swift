@@ -16,9 +16,11 @@ class ExposureDetectionSummary: Object, Codable {
 
   init(_ enExposureDetectionSummary: ENExposureDetectionSummary) {
     timezoneOffset = TimeZone.current.secondsFromGMT()
-    attenuationDuration?.low = Int(truncating: enExposureDetectionSummary.attenuationDurations[0])
-    attenuationDuration?.medium = Int(truncating: enExposureDetectionSummary.attenuationDurations[1])
-    attenuationDuration?.high = Int(truncating: enExposureDetectionSummary.attenuationDurations[2])
+    if enExposureDetectionSummary.attenuationDurations.count >= 3 {
+      attenuationDuration?.low = Int(truncating: enExposureDetectionSummary.attenuationDurations[0])
+      attenuationDuration?.medium = Int(truncating: enExposureDetectionSummary.attenuationDurations[1])
+      attenuationDuration?.high = Int(truncating: enExposureDetectionSummary.attenuationDurations[2])
+    }
     daysSinceLastExposure = enExposureDetectionSummary.daysSinceLastExposure
     matchedKeyCount = Int64(bitPattern: enExposureDetectionSummary.matchedKeyCount)
     maximumRiskScore = Int8(enExposureDetectionSummary.maximumRiskScore)
