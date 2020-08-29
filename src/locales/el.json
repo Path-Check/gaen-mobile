@@ -142,6 +142,7 @@
     "proximity_tracing_info_subheader_2": "Είναι τα δεδομένα μου ασφαλή;"
   },
   "label": {
+    "activate_proximity_tracing": "Ενεργοποίηση εντοπισμού εγγύτητας",
     "check": "Σημάδι ελέγχου",
     "checked_checkbox": "Επιλεγμένο πλαίσιο",
     "language_icon": "Εικονίδιο με περίγραμμα μιας υδρογείου σφαίρας",

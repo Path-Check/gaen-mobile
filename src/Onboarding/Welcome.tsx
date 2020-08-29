@@ -12,7 +12,7 @@ import { useApplicationName } from "../More/useApplicationInfo"
 import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
 
 import { Images } from "../assets"
-import { Layout, Spacing, Colors, Typography, Outlines } from "../styles"
+import { Spacing, Colors, Typography, Outlines } from "../styles"
 
 const Welcome: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -29,8 +29,7 @@ const Welcome: FunctionComponent = () => {
   }
 
   return (
-    <>
-      <GradientBackground />
+    <GradientBackground>
       <View style={style.container}>
         <TouchableOpacity
           onPress={handleOnPressSelectLanguage}
@@ -66,13 +65,12 @@ const Welcome: FunctionComponent = () => {
           hasRightArrow
         />
       </View>
-    </>
+    </GradientBackground>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    ...Layout.positionOverBackground,
     flex: 1,
     paddingVertical: Spacing.xxHuge,
     paddingHorizontal: Spacing.large,

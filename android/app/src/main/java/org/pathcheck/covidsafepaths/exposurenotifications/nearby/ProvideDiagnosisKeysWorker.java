@@ -43,14 +43,17 @@ import org.threeten.bp.Instant;
 
 /**
  * Performs work to provide diagnosis keys to the exposure notifications API.
+ *
+ * <p>This Worker will run every 12 hours.
+ * It won't do anything if the index files have already been processed.
  */
 public class ProvideDiagnosisKeysWorker extends ListenableWorker {
 
   private static final String TAG = "ProvideDiagnosisKeysWkr";
 
   private static final Duration IS_ENABLED_TIMEOUT = Duration.ofSeconds(10);
-  public static final Duration JOB_INTERVAL = Duration.ofHours(24);
-  public static final Duration JOB_FLEX_INTERVAL = Duration.ofHours(6);
+  public static final Duration JOB_INTERVAL = Duration.ofHours(12);
+  public static final Duration JOB_FLEX_INTERVAL = Duration.ofHours(3);
   public static final String WORKER_NAME = "ProvideDiagnosisKeysWorker";
 
   private final DiagnosisKeys diagnosisKeys;

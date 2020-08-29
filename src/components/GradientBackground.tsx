@@ -5,7 +5,7 @@ import LinearGradient from "react-native-linear-gradient"
 
 import { Colors } from "../styles"
 
-const GradientBackground: FunctionComponent = () => {
+const GradientBackground: FunctionComponent = ({ children }) => {
   return (
     <LinearGradient
       colors={Colors.gradientPrimary10}
@@ -13,7 +13,9 @@ const GradientBackground: FunctionComponent = () => {
       useAngle
       angle={0}
       angleCenter={{ x: 0.5, y: 0.25 }}
-    />
+    >
+      {children}
+    </LinearGradient>
   )
 }
 

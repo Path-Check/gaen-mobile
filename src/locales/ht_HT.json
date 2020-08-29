@@ -1,6 +1,7 @@
 {
   "_display_name": "Kreyòl ayisyen",
   "about": {
+    "description": "Aplikasyon [1$s: app aplikasyonName] fèt pa [1 $ s: healthAuthorityName]",
     "operating_system_abbr": "OS:",
     "version": "Vèsyon:"
   },
@@ -32,22 +33,31 @@
     "start_title": "Reponn kesyon sou sentom ou yo ak istwa medikal pou aprann Kisa pou fe aprè sou COVID-19"
   },
   "common": {
+    "alert": "Alèt",
+    "back": "Retounen",
     "cancel": "Anile",
     "continue": "Kontinye",
+    "disabled": "dezaktive",
     "done": "Fini",
     "enable": "Aktive",
+    "enabled": "Aktive",
     "next": "Fini",
+    "okay": "Oke",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse"
   },
   "export": {
     "code_input_body_bluetooth": "Tape kòd verifikasyon {{name}} ki bay rezilta tès la pou verifye dyagnostik ou.",
+    "code_input_button_back": "Retounen",
     "code_input_title_bluetooth": "Verifye dyagnostik ou an",
     "complete_body_bluetooth": "Lè w chwazi pou pataje estati ou ak notifye lòt moun anoniman, ou ap ede evite pwopagasyon viris la ak pwoteje lòt moun nan kominote ou.",
     "complete_title": "Mèsi pou kenbe kominote ou an sekirite!",
     "consent_button_title": "Mwen konprann epi mwen konsanti",
     "consent_subheader_1": "Poukisa mwen ta dwe pataje?",
     "consent_subheader_2": "kijan sa mache?",
+    "error": {
+      "invalid_format": "Fòma envalid"
+    },
     "publish_consent_title_bluetooth": "Notifye lòt moun nan kominote ou",
     "start_header_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w "
   },
@@ -55,15 +65,27 @@
     "how_does_this_work": "Kouman travay sa a fèt?",
     "how_does_this_work_para": "Lè Notifikasyon Ekspozisyon yo aktive, telefòn ou itilize Bluetooth pou echanje e anrejistre nimewo o aza (yo rele sa idantifikasyon o aza) apati nenpot ki telefòn li rankontre ki gen Notifikasyon Ekspozisyon aktive tou. Idantifikasyon o aza pa pral idantifye ou pèsonèlman kote lòt itilizatè yo ni fè echanj plizyè fwa nan yon jounen pou pwoteje vi prive ou. Dat ak dire rankont lan anrejistre daprè estimasyon distans de telefòn yo te ye yonn pa rapò ak lòt. Lè yon moun rapòte yon dyagnostik pozitif, dènye idantifikasyon o aza telefòn nan siyale lòt moun yo pa notifikasyon anonim. Pa gen lokalizasyon oswa enfòmasyon pèsonèl ki pataje.",
     "last_days": "21 jou pase yo",
+    "no_connectivity_message": "Ou pa konekte sou entènèt!",
     "why_did_i_get_an_en": "Poukisa mwen te resevwa yon notifikasyon ekspozisyon?",
     "why_did_i_get_an_en_para": "Ou pral resevwa yon notifikasyon ekspozisyon lè yon moun ou kwaze chemen ak li resevwa yon dyagnostik pozitif oswa tès pou COVID-19 aprè ou te kwaze li e chwazi notifye lòt moun."
   },
   "home": {
+    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
+      "bluetooth_disabled_error_message": "Aktive Bluetooth nan tablodbò aplikasyon an",
+      "bluetooth_disabled_error_title": "Aktive Bluetooth nan tablodbò ",
+      "bluetooth_header": "Bluetooth",
+      "fix": "Ranje",
+      "proximity_tracing_header": "Trasaj Pwoksimite ",
+      "report_positive_result": "Rapòte yon rezilta tès pozitif",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
-      "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo"
-    }
+      "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
+      "tracing_on_header": "Aktif"
+    },
+    "proximity_tracing_info_header": "Trasaj Pwoksimite ",
+    "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
+    "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
   "label": {
     "launch_enable_notif": "Aktive notifikasyon",
@@ -78,15 +100,41 @@
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
     "more": "Plis",
+    "report_issue": "Rapòte yon pwoblèm",
     "self_assessment": "Sante"
   },
   "onboarding": {
-    "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?"
+    "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
+    "protect_privacy_button": "Ki jan nou pwoteje vi prive ou",
+    "protect_privacy": {
+      "header": "Ki jan nou pwoteje vi prive ou"
+    },
+    "proximity_tracing_alert_header": "Aktive Trasaj Pwoksimite Tracing soti apati \"[1 $ s: aplikasyonName]\"?",
+    "screen_5_button": "Kòmanse",
+    "screen1_button": "kijan sa mache?",
+    "screen1_header": "Ansanm, nou ka ralanti pwopagasyon COVID-19.",
+    "screen2_button": "Èske vi prive mwen an pwoteje?",
+    "screen2_header": "Telefòn ou sonje lòt aparèy li rankontre men li pap idantifye ou ak lòt moun.",
+    "screen2_image_label": "De moun ki sou telefòn yo",
+    "screen3_button": "E si mwen ekspoze?",
+    "select_language": "Chwazi lang",
+    "step": "Etap {{currentStep}} nan {{totalSteps}}",
+    "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
+  },
+  "report_issue": {
+    "body": "Fidbak (obligatwa)",
+    "email": "Imèl (obligatwa)",
+    "errors": {
+      "invalid_email": "Tanpri antre yon imèl ki valab"
+    },
+    "name": "Non konplè",
+    "success": "Nou te resevwa demann ou an. Mèsi!"
   },
   "screen_titles": {
     "about": "Apropo",
     "exposure_history": "Lis ekspozisyon",
     "exposures": "Ekspozisyon yo",
-    "legal": "Legal"
+    "legal": "Legal",
+    "report_issue": "Rapòte yon pwoblèm"
   }
 }

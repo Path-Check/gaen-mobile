@@ -90,6 +90,7 @@ public class ExposureNotificationClientWrapper {
   }
 
   public Task<Void> provideDiagnosisKeys(List<File> files) {
+    // Calls to this method are limited to six per day, we are only calling it once a day.
     return exposureNotificationClient.provideDiagnosisKeys(files);
   }
 

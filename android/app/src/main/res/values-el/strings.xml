@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <!-- Shown on app info, app switcher, etc -->
+  <string name="app_name" translatable="false">PathCheck BT</string>
+  <!-- Shown below icon on launcher only -->
+  <string name="app_name_short" translatable="false">PathCheck BT</string>
   <string name="exposure_notification_channel_description">Ειδοποιήσεις έκθεσης</string>
   <string name="exposure_notification_channel_name">Ειδοποίηση έκθεσης</string>
   <string name="exposure_notification_message">Κάποιος που βρέθηκε κοντά σας έχει διαγνωστεί θετικά με COVID-19. Πατήστε για περισσότερες πληροφορίες.</string>

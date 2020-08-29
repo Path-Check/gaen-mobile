@@ -20,7 +20,7 @@ const MenuScreen: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   useStatusBarEffect("light-content")
-  const showDebugMenu = env.DEV === "true"
+  const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
