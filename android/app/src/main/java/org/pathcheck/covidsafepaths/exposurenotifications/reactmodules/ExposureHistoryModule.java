@@ -56,7 +56,7 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
         for (DailySummary dailySummary : result) {
           RNExposureInformation exposure = new RNExposureInformation(
               Duration.ofDays(dailySummary.getDaysSinceEpoch()).toMillis(),
-              dailySummary.getSummaryData().getWeightedDurationSum()
+              Duration.ofSeconds((int) dailySummary.getSummaryData().getWeightedDurationSum()).toMinutes()
           );
 
           exposures.add(exposure);

@@ -5,7 +5,7 @@ import java.util.UUID;
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class RNExposureInformation {
   private String id;
-  private long date;
+  private long date; // Milliseconds
   private double duration; // Minutes
 
   public RNExposureInformation(long date, double duration) {

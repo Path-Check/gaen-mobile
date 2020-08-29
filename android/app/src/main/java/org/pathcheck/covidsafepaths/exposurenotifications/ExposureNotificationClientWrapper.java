@@ -158,7 +158,11 @@ public class ExposureNotificationClientWrapper {
 
       List<DailySummary> filteredSummaries = new ArrayList<>();
       for (DailySummary summary : summaries) {
-        if (summary.getSummaryData().getWeightedDurationSum() >= config.getTriggerThresholdWeightedDuration()) {
+        long exposureDurationMinutes = Duration
+            .ofSeconds((int) summary.getSummaryData().getWeightedDurationSum())
+            .toMinutes();
+
+        if (exposureDurationMinutes >= config.getTriggerThresholdWeightedDuration()) {
           filteredSummaries.add(summary);
         }
       }
