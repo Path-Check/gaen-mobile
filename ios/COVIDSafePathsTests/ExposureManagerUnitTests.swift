@@ -873,15 +873,15 @@ class ExposureManagerTests: XCTestCase {
     let configuration = ExposureConfiguration.placeholder
     let scoreResult = ExposureManager.score(summary: enExposureSummary,
                                             with: configuration)
-    XCTAssertTrue(scoreResult)
+    XCTAssertFalse(scoreResult)
   }
 
-  func testDetectExposuresSuccess() {
-    let storeExposureExpectation = self.expectation(description: "The exposure gets stored")
+  func testDetectExposuresSuccessButNoNotification() {
+    let storeExposureExpectation = self.expectation(description: "The exposure does not gets stored")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.storeExposuresHandler = { exposures in
       storeExposureExpectation.fulfill()
-      XCTAssertEqual(exposures.count, 1)
+      XCTAssertEqual(exposures.count, 0)
     }
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
