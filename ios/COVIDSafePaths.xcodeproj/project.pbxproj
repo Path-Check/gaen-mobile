@@ -11,6 +11,7 @@
 		A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */; };
 		A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */; };
 		A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2824F43F6E00C5E30A /* ExposureManager+Debug.swift */; };
+		A53F7B8C24FB3ADC00C5E30A /* Scoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B8B24FB3ADC00C5E30A /* Scoring.swift */; };
 		A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */; };
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
@@ -194,6 +195,7 @@
 		A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BGTaskScheduler+Extensions.swift"; sourceTree = "<group>"; };
 		A53F7B2824F43F6E00C5E30A /* ExposureManager+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExposureManager+Debug.swift"; sourceTree = "<group>"; };
+		A53F7B8B24FB3ADC00C5E30A /* Scoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoring.swift; sourceTree = "<group>"; };
 		A57577D96B89452694B53982 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 			children = (
 				B5FC37F5248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift */,
 				A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */,
+				A53F7B8B24FB3ADC00C5E30A /* Scoring.swift */,
 			);
 			path = "Exposure Notifications";
 			sourceTree = "<group>";
@@ -962,6 +965,7 @@
 				B5FBB0D124916A7200433980 /* Persisted.swift in Sources */,
 				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
+				A53F7B8C24FB3ADC00C5E30A /* Scoring.swift in Sources */,
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
 				A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */,
 				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,

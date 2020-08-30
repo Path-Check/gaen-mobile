@@ -8,6 +8,24 @@ import XCTest
 
 // MARK: == Mocks ==
 
+class MockENExposureDetectionSummary: ENExposureDetectionSummary {
+
+  var matchedKeyCountHandler: (() -> UInt64)?
+  var attenuationDurationsHandler: (() -> [NSNumber])?
+
+  override var matchedKeyCount: UInt64 {
+    return matchedKeyCountHandler?() ?? 0
+  }
+
+  override var attenuationDurations: [NSNumber] {
+    return attenuationDurationsHandler?() ?? [0,0,0]
+  }
+
+  override var riskScoreSumFullRange: Double {
+    return 0
+  }
+}
+
 class MockENExposureInfo: ENExposureInfo {
 
   override var date: Date {
@@ -845,6 +863,17 @@ class ExposureManagerTests: XCTestCase {
       default: XCTFail()
       }
     }
+  }
+
+  func testExposureSummaryScoring() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 2
+    }
+    let configuration = ExposureConfiguration.placeholder
+    let scoreResult = ExposureManager.score(summary: enExposureSummary,
+                                            with: configuration)
+    XCTAssertTrue(scoreResult)
   }
 
   func testDetectExposuresSuccess() {

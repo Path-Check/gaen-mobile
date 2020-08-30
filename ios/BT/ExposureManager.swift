@@ -337,7 +337,7 @@ final class ExposureManager: NSObject {
               }
               let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
               self.manager.getExposureInfo(summary: summary!,
-                                               userExplanation: userExplanation) { exposures, error in
+                                           userExplanation: userExplanation) { exposures, error in
                 if let error = error {
                   self.finish(.failure(error),
                               processedFileCount: processedFileCount,
