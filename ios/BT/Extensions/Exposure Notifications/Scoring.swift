@@ -50,6 +50,6 @@ extension ExposureConfiguration {
   // weighted duration ends up being capped at.
 
   var maxWeightedDuration: Int {
-    return Int((attenuationBucketWeights[0] + attenuationBucketWeights[1] + attenuationBucketWeights[3]) * 30 * 60)
+    return Int((attenuationBucketWeights[0] + attenuationBucketWeights[1] + attenuationBucketWeights[2]) * 30 * 60)
   }
 }
