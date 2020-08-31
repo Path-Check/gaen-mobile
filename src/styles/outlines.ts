@@ -31,3 +31,11 @@ export const baseShadow: ViewStyle = {
   shadowRadius: 13.16,
   elevation: 20,
 }
+
+export const lightShadow: ViewStyle = {
+  ...roundedBorder,
+  ...baseShadow,
+  shadowColor: Colors.neutral30,
+  shadowRadius: 5,
+  borderColor: Colors.neutral25,
+}
