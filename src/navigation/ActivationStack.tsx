@@ -12,6 +12,7 @@ import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
+import EnableLocation from "../Activation/EnableLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 
@@ -38,6 +39,11 @@ const ActivationStack: FunctionComponent = () => {
     component: ActivateProximityTracing,
   }
 
+  const enableLocation: ActivationStep = {
+    screenName: ActivationScreens.EnableLocation,
+    component: EnableLocation,
+  }
+
   const notificationPermissions: ActivationStep = {
     screenName: ActivationScreens.NotificationPermissions,
     component: NotificationPermissions,
@@ -48,7 +54,10 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const activationStepsAndroid: ActivationStep[] = [activateProximityTracing]
+  const activationStepsAndroid: ActivationStep[] = [
+    activateProximityTracing,
+    enableLocation,
+  ]
 
   const activationSteps =
     Platform.OS === "ios" ? activationStepsIOS : activationStepsAndroid
