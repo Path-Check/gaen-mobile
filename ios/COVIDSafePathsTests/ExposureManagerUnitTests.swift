@@ -799,6 +799,7 @@ class ExposureManagerTests: XCTestCase {
       }
     }
   }
+  
   func testDetectExposuresDetectExposureError() {
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
@@ -865,15 +866,82 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
-  func testExposureSummaryScoring() {
+  func testExposureSummaryScoringMatchedKey0() {
     let enExposureSummary = MockENExposureDetectionSummary()
     enExposureSummary.matchedKeyCountHandler = {
-      return 2
+      return 0
+    }
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: ExposureConfiguration.placeholder))
+  }
+
+  func testExposureSummaryScoringMatchedKey1() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 1
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,0,0]
     }
     let configuration = ExposureConfiguration.placeholder
-    let scoreResult = ExposureManager.score(summary: enExposureSummary,
-                                            with: configuration)
-    XCTAssertFalse(scoreResult)
+    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
+                                        with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [800,0,0]
+    }
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [0,900,0]
+    }
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [600,600,0]
+    }
+    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
+                                        with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [0,0,1800]
+    }
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: configuration))
+  }
+
+  func testExposureSummaryScoringMatchedKey3() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 3
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,1800,0]
+    }
+    let configuration = ExposureConfiguration.placeholder
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [1800,1800,0]
+    }
+    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
+                                        with: configuration))
+  }
+
+  func testExposureSummaryScoringMatchedKey4() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 4
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,1800,0]
+    }
+    let configuration = ExposureConfiguration.placeholder
+    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
+                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [1800,1800,0]
+    }
+    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
+                                        with: configuration))
   }
 
   func testDetectExposuresSuccessButNoNotification() {
@@ -916,7 +984,7 @@ class ExposureManagerTests: XCTestCase {
       default: XCTFail()
       }
     }
-    wait(for: [storeExposureExpectation], timeout:1)
+    wait(for: [storeExposureExpectation], timeout:2)
   }
 
   func testRegisterBackgroundTask() {

@@ -7,15 +7,17 @@ extension ExposureManager {
 
   static func score(summary: ENExposureDetectionSummary,
                     with configuration: ExposureConfiguration) -> Bool {
+    let matchedKeyCount = Int(summary.matchedKeyCount)
+    if matchedKeyCount == 0 {
+      return false
+    }
     if summary.matchedKeyCount <= matchedKeyCountMax {
       // If the weighted average duration per matched key exceeds the
       // threshold, we know that there was at least one day where the exposure
       // exceeded the threshold.
-      let matchedKeyCount = Int(summary.matchedKeyCount)
-      if (matchedKeyCount > 0 &&
-        (weightedDuration(summary: summary,
-                          config: configuration) / matchedKeyCount) >=
-        configuration.triggerThresholdWeightedDuration * 60) {
+      let weightedDurationForKeys = weightedDuration(summary: summary,
+                                              config: configuration) / matchedKeyCount
+      if (weightedDurationForKeys >= configuration.triggerThresholdWeightedDuration * 60) {
         return true
       } else {
         return false
