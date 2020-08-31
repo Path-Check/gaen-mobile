@@ -88,10 +88,7 @@ const style = StyleSheet.create({
   },
   shareText: {
     ...Typography.header4,
-<<<<<<< HEAD
-=======
     lineHeight: Typography.smallLineHeight,
->>>>>>> fc59ecc0... WIP
   },
   shareIconContainer: {
     width: rightColumnWidth,
