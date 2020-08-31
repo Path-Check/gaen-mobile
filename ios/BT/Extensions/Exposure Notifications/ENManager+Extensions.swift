@@ -21,6 +21,9 @@ protocol ExposureNotificationManager {
 extension ENManager: ExposureNotificationManager {
 
   func authorizationStatus() -> ENAuthorizationStatus {
+    if #available(iOS 14, *) {
+      return exposureNotificationStatus == .active ? .authorized : .notAuthorized
+    }
     return ENManager.authorizationStatus
   }
 }
