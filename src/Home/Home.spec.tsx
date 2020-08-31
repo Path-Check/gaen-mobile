@@ -12,7 +12,7 @@ import {
 } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
-import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "./useHasLocationRequirements"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
@@ -36,7 +36,7 @@ jest.mock("../More/useApplicationInfo", () => {
   }
 })
 
-jest.mock("./useBluetoothStatus.ts")
+jest.mock("../useBluetoothStatus.ts")
 jest.mock("./useHasLocationRequirements.ts")
 
 describe("Home", () => {

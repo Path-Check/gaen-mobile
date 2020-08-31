@@ -25,7 +25,7 @@ import { Button } from "../components/Button"
 import { isPlatformiOS } from "../utils/index"
 import { getLocalNames } from "../locales/languages"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useBluetoothStatus } from "./useBluetoothStatus"
+import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "./useHasLocationRequirements"
 
 import { Icons, Images } from "../assets"

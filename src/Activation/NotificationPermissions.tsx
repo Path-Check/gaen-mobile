@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
+import { ActivationScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
 import { GlobalText } from "../components"
 import { Button } from "../components"
 
@@ -18,19 +19,18 @@ import { Colors, Spacing, Typography, Buttons } from "../styles"
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { completeOnboarding } = useOnboardingContext()
-
-  const requestPermission = async () => {
-    await notification.request()
-  }
+  const navigation = useNavigation()
 
   const handleOnPressEnable = async () => {
-    await requestPermission()
-    completeOnboarding()
+    await new Promise((resolve) => {
+      notification.request()
+      resolve()
+    })
+    navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
   const handleOnPressMaybeLater = () => {
-    completeOnboarding()
+    navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
   return (

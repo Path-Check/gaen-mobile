@@ -9,8 +9,6 @@ import { useFocusEffect } from "@react-navigation/native"
 
 import { ExposureDatum } from "../exposure"
 
-import { Colors } from "../styles"
-
 export type NavigationProp = NavigationScreenProp<
   NavigationState,
   NavigationParams
@@ -20,6 +18,7 @@ export type ActivationScreen =
   | "AcceptEula"
   | "ActivateProximityTracing"
   | "NotificationPermissions"
+  | "ActivationSummary"
 
 export const ActivationScreens: {
   [key in ActivationScreen]: ActivationScreen
@@ -27,6 +26,7 @@ export const ActivationScreens: {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
   NotificationPermissions: "NotificationPermissions",
+  ActivationSummary: "ActivationSummary",
 }
 
 export type HomeScreen =
@@ -188,18 +188,13 @@ export const Stacks: { [key in Stack]: Stack } = {
 export type StatusBarStyle = "dark-content" | "light-content"
 
 export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
-  const backgroundColor =
-    statusBarStyle === "dark-content"
-      ? Colors.primaryLightBackground
-      : Colors.primary125
-
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
       if (Platform.OS === "android") {
-        StatusBar.setBackgroundColor(backgroundColor)
+        StatusBar.setBackgroundColor("transparent")
         StatusBar.setTranslucent(true)
       }
-    }, [statusBarStyle, backgroundColor]),
+    }, [statusBarStyle]),
   )
 }

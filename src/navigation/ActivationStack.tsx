@@ -13,6 +13,7 @@ import { Stacks, ActivationScreen, ActivationScreens } from "./index"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
 import NotificationPermissions from "../Activation/NotificationPermissions"
+import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
@@ -52,23 +53,43 @@ const ActivationStack: FunctionComponent = () => {
   const activationSteps =
     Platform.OS === "ios" ? activationStepsIOS : activationStepsAndroid
 
-  const HeaderRight = (currentStep: number, totalSteps: number) => {
+  const CloseButton = () => {
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate(Stacks.Onboarding)}>
+        <SvgXml
+          xml={Icons.Close}
+          fill={Colors.neutral140}
+          style={style.closeIcon}
+          accessible
+          accessibilityLabel={t("common.close")}
+        />
+      </TouchableOpacity>
+    )
+  }
+
+  const HeaderRight: FunctionComponent = () => {
+    return (
+      <View style={style.headerRight}>
+        <CloseButton />
+      </View>
+    )
+  }
+
+  interface HeaderRightWithStepsProps {
+    currentStep: number
+    totalSteps: number
+  }
+
+  const HeaderRightWithSteps: FunctionComponent<HeaderRightWithStepsProps> = ({
+    currentStep,
+    totalSteps,
+  }) => {
     return (
       <View style={style.headerRight}>
         <GlobalText style={style.headerRightText}>
           {t("onboarding.step", { currentStep, totalSteps })}
         </GlobalText>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Stacks.Onboarding)}
-        >
-          <SvgXml
-            xml={Icons.Close}
-            fill={Colors.neutral140}
-            style={style.closeIcon}
-            accessible
-            accessibilityLabel={t("common.close")}
-          />
-        </TouchableOpacity>
+        <CloseButton />
       </View>
     )
   }
@@ -92,11 +113,21 @@ const ActivationStack: FunctionComponent = () => {
             key={`activation-screen-${step.screenName}`}
             options={{
               headerRight: () =>
-                HeaderRight(currentStep, activationSteps.length),
+                HeaderRightWithSteps({
+                  currentStep,
+                  totalSteps: activationSteps.length,
+                }),
             }}
           />
         )
       })}
+      <Stack.Screen
+        name={ActivationScreens.ActivationSummary}
+        component={ActivationSummary}
+        options={{
+          headerRight: () => HeaderRight({}),
+        }}
+      />
     </Stack.Navigator>
   )
 }

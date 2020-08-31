@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <!-- Channel label for notifications shown in App > Notifications > Path Check BT -->
+  <!-- Shown on app info, app switcher, etc -->
+  <string name="app_name" translatable="false">PathCheck BT</string>
+  <!-- Shown below icon on launcher only -->
+  <string name="app_name_short" translatable="false">PathCheck BT</string>
 </resources>

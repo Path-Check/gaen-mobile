@@ -21,15 +21,13 @@ interface NetworkFailure<U> {
   message?: string
 }
 
-export type NetworkResponse<T, U = "Unknown"> =
-  | NetworkSuccess<T>
-  | NetworkFailure<U>
+export type NetworkResponse<T, U> = NetworkSuccess<T> | NetworkFailure<U>
 
 type PostKeysSuccess = {
   revisionToken: Token
 }
 
-export type PostKeysError = "Unknown"
+export type PostKeysError = "Unknown" | "Internal"
 
 type RegionCode = string
 
@@ -71,6 +69,6 @@ export const postDiagnosisKeys = async (
       }
     }
   } catch (e) {
-    return { kind: "failure", error: "Unknown" }
+    return { kind: "failure", error: "Internal", message: e.message }
   }
 }

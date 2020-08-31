@@ -24,6 +24,7 @@ interface ButtonProps {
   customTextStyle?: TextStyle
   testID?: string
   hasRightArrow?: boolean
+  outlined?: boolean
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
@@ -35,11 +36,14 @@ export const Button: FunctionComponent<ButtonProps> = ({
   customTextStyle,
   testID,
   hasRightArrow,
+  outlined,
 }) => {
   const { t } = useTranslation()
 
   const determineGradient = (): string[] => {
-    if (disabled || loading) {
+    if (outlined) {
+      return [Colors.transparent, Colors.transparent]
+    } else if (disabled || loading) {
       return [Colors.secondary75, Colors.secondary75]
     } else {
       return Colors.gradientPrimary110
@@ -47,7 +51,9 @@ export const Button: FunctionComponent<ButtonProps> = ({
   }
 
   const determineTextStyle = (): TextStyle => {
-    if (disabled || loading) {
+    if (outlined) {
+      return style.outlinedButtonText
+    } else if (disabled || loading) {
       return style.textDisabled
     } else {
       return style.text
@@ -56,15 +62,23 @@ export const Button: FunctionComponent<ButtonProps> = ({
   const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
   const determineShadowEnabled = (): ViewStyle => {
-    if (disabled || loading) {
+    if (disabled || loading || outlined) {
       return {}
     } else {
       return style.buttonContainerShadow
     }
   }
+  const determineBorder = (): ViewStyle => {
+    if (outlined) {
+      return style.buttonBorder
+    } else {
+      return {}
+    }
+  }
   const buttonContainerStyle = {
     ...style.buttonContainer,
     ...determineShadowEnabled(),
+    ...determineBorder(),
     ...customButtonStyle,
   }
 
@@ -129,6 +143,14 @@ const style = StyleSheet.create({
   textDisabled: {
     textAlign: "center",
     ...Typography.buttonPrimaryDisabled,
+  },
+  outlinedButtonText: {
+    ...Typography.buttonPrimary,
+    color: Colors.primary110,
+  },
+  buttonBorder: {
+    borderWidth: Outlines.thin,
+    borderColor: Colors.primary110,
   },
   rightArrow: {
     marginLeft: Spacing.medium,

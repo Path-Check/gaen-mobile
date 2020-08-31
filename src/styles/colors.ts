@@ -61,7 +61,7 @@ export const disabledButton = neutral100
 export const disabledButtonText = secondary50
 
 // Text
-export const primaryText = black
+export const primaryText = neutral140
 export const anchorLinkText = primary100
 export const errorText = danger100
 export const placeholderText = neutral75

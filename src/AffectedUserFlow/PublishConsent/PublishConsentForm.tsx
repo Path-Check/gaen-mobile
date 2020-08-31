@@ -56,39 +56,28 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
-
-    try {
-      const response = await ExposureAPI.postDiagnosisKeys(
-        exposureKeys,
-        regionCodes,
-        certificate,
-        hmacKey,
-        appPackageName,
-        revisionToken,
-      )
-      setIsLoading(false)
-      if (response.kind === "success") {
-        storeRevisionToken(response.body.revisionToken)
-        navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
-      } else {
-        const errorMessage = response.message
-        Logger.addMetadata("publishKeys", {
-          errorMessage,
-          revisionToken,
-        })
-        Logger.error(`IncompleteKeySumbission.${errorMessage}`)
-        if (response.error === "Unknown") {
-          Alert.alert(t("common.something_went_wrong"), errorMessage)
-        }
-      }
-    } catch (e) {
-      setIsLoading(false)
-      const errorMessage = e.message
+    const response = await ExposureAPI.postDiagnosisKeys(
+      exposureKeys,
+      regionCodes,
+      certificate,
+      hmacKey,
+      appPackageName,
+      revisionToken,
+    )
+    setIsLoading(false)
+    if (response.kind === "success") {
+      storeRevisionToken(response.body.revisionToken)
+      navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+    } else {
+      const errorMessage = response.message
       Logger.addMetadata("publishKeys", {
         errorMessage,
+        revisionToken,
       })
-      Logger.error(`IncompleteKeySumbission.Exception.${errorMessage}`)
-      Alert.alert(t("common.something_went_wrong"), e.message)
+      Logger.error(`IncompleteKeySumbission.${response.error}.${errorMessage}`)
+      if (response.error === "Unknown") {
+        Alert.alert(t("common.something_went_wrong"), errorMessage)
+      }
     }
   }
   useStatusBarEffect("dark-content")
