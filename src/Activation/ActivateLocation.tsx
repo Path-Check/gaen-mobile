@@ -17,7 +17,7 @@ import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
-const EnableLocation: FunctionComponent = () => {
+const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
@@ -32,11 +32,11 @@ const EnableLocation: FunctionComponent = () => {
       t("onboarding.location_alert_body"),
       [
         {
-          text: t("common.dontAllow"),
+          text: t("common.back"),
           style: "cancel",
         },
         {
-          text: t("common.allow"),
+          text: t("common.settings"),
           onPress: () => Linking.openSettings(),
         },
       ],
@@ -122,4 +122,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default EnableLocation
+export default ActivateLocation

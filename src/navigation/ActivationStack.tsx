@@ -10,9 +10,10 @@ import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
+import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
-import EnableLocation from "../Activation/EnableLocation"
+import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 
@@ -28,6 +29,7 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { isLocationOffAndNeeded } = useHasLocationRequirements()
 
   interface ActivationStep {
     screenName: ActivationScreen
@@ -39,9 +41,9 @@ const ActivationStack: FunctionComponent = () => {
     component: ActivateProximityTracing,
   }
 
-  const enableLocation: ActivationStep = {
-    screenName: ActivationScreens.EnableLocation,
-    component: EnableLocation,
+  const activateLocation: ActivationStep = {
+    screenName: ActivationScreens.ActivateLocation,
+    component: ActivateLocation,
   }
 
   const notificationPermissions: ActivationStep = {
@@ -54,17 +56,22 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const activationStepsAndroid: ActivationStep[] = [
-    activateProximityTracing,
-    enableLocation,
-  ]
+  const activationStepsAndroid: ActivationStep[] = isLocationOffAndNeeded
+    ? [activateProximityTracing, activateLocation]
+    : [activateProximityTracing]
 
-  const activationSteps =
-    Platform.OS === "ios" ? activationStepsIOS : activationStepsAndroid
+  const activationSteps = Platform.select({
+    ios: activationStepsIOS,
+    android: activationStepsAndroid,
+  })
 
   const CloseButton = () => {
+    const handleOnPressClose = () => {
+      navigation.navigate(Stacks.Onboarding)
+    }
+
     return (
-      <TouchableOpacity onPress={() => navigation.navigate(Stacks.Onboarding)}>
+      <TouchableOpacity onPress={handleOnPressClose}>
         <SvgXml
           xml={Icons.Close}
           fill={Colors.neutral140}
@@ -113,7 +120,7 @@ const ActivationStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      {activationSteps.map((step, idx) => {
+      {activationSteps?.map((step, idx) => {
         const currentStep = idx + 1
         return (
           <Stack.Screen

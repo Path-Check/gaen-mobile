@@ -14,8 +14,8 @@ import { useNavigation } from "@react-navigation/native"
 import { usePermissionsContext } from "../PermissionsContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
-import { GlobalText } from "../components"
-import { Button } from "../components"
+import { GlobalText, Button } from "../components"
+import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
@@ -24,6 +24,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { exposureNotifications } = usePermissionsContext()
+  const { isLocationOffAndNeeded } = useHasLocationRequirements()
 
   const handleOnPressEnable = () => {
     exposureNotifications.request()
@@ -38,7 +39,9 @@ const ActivateProximityTracing: FunctionComponent = () => {
     if (Platform.OS === "ios") {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
-      navigation.navigate(ActivationScreens.EnableLocation)
+      isLocationOffAndNeeded
+        ? navigation.navigate(ActivationScreens.ActivateLocation)
+        : navigation.navigate(ActivationScreens.ActivationSummary)
     }
   }
 

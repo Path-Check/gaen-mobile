@@ -8,12 +8,12 @@ import { ActivationStatus } from "./ActivationStatus"
 import { HomeScreens } from "../navigation"
 
 export const LocationActivationStatus: FunctionComponent = () => {
+  const navigation = useNavigation()
+  const { t } = useTranslation()
   const {
     isLocationOn,
     isLocationNeeded: showLocationStatus,
   } = useHasLocationRequirements()
-  const navigation = useNavigation()
-  const { t } = useTranslation()
 
   const handleOnPressFix = () => {
     showFixLocationAlert()
