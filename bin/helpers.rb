@@ -63,11 +63,10 @@ def valid_token(token)
   token.length == 40
 end
 
-def mobile_resources_commit()
-  _output, error, status = Open3.capture3("cat", "./bin/mobile_resources_commit")
-  return _output if status.success?
+def mobile_resources_commit
+  file = File.open("mobile_resources_commit")
+  commit = file.read.chomp # the chomp is to drop the `/n`
+  file.close
 
-  puts error
-  # Return master branch as default
-  "master"
+  commit
 end
