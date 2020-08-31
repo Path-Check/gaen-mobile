@@ -11,7 +11,7 @@ extension ExposureManager {
     if matchedKeyCount == 0 {
       return false
     }
-    if summary.matchedKeyCount <= matchedKeyCountMax {
+    if matchedKeyCount <= matchedKeyCountMax {
       // If the weighted average duration per matched key exceeds the
       // threshold, we know that there was at least one day where the exposure
       // exceeded the threshold.

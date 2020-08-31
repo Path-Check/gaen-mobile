@@ -834,7 +834,14 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresGetExposureInfoError() {
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
+      let enExposureSummary = MockENExposureDetectionSummary()
+      enExposureSummary.matchedKeyCountHandler = {
+        return 1
+      }
+      enExposureSummary.attenuationDurationsHandler = {
+        return [900,0,0]
+      }
+      completionHandler(enExposureSummary, nil)
       return Progress()
     }
     enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in
@@ -944,7 +951,7 @@ class ExposureManagerTests: XCTestCase {
                                         with: configuration))
   }
 
-  func testDetectExposuresSuccessButNoNotification() {
+  func testDetectExposuresSuccessScoreBellow() {
     let storeExposureExpectation = self.expectation(description: "The exposure does not gets stored")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.storeExposuresHandler = { exposures in
@@ -953,11 +960,7 @@ class ExposureManagerTests: XCTestCase {
     }
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
-      return Progress()
-    }
-    enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in
-      completionHandler([MockENExposureInfo()], nil)
+      completionHandler(MockENExposureDetectionSummary(), nil)
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
@@ -979,12 +982,55 @@ class ExposureManagerTests: XCTestCase {
                                           btSecureStorage: btSecureStorageMock)
     exposureManager.detectExposures { (result) in
       switch result {
-      case .success(let exposures):
-        XCTAssertEqual(exposures, 1)
+      case .success(let files):
+        XCTAssertEqual(files, 1)
       default: XCTFail()
       }
     }
-    wait(for: [storeExposureExpectation], timeout:2)
+    wait(for: [storeExposureExpectation], timeout:1)
+  }
+
+  func testDetectExposuresSuccessScoreAbove() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.storeExposuresHandler = { exposures in
+      XCTAssertEqual(exposures.count, 1)
+    }
+    let enManagerMock = ENManagerMock()
+    enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
+      let enExposureSummary = MockENExposureDetectionSummary()
+      enExposureSummary.matchedKeyCountHandler = {
+        return 1
+      }
+      enExposureSummary.attenuationDurationsHandler = {
+        return [900,0,0]
+      }
+      completionHandler(enExposureSummary, nil)
+      return Progress()
+    }
+    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
+      XCTAssertEqual(requestType, RequestType.downloadKeys)
+      return Result<String>.success("indexFilePath") as AnyObject
+    }
+    let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
+      return URL(fileURLWithPath: "url")
+    }
+    apiClientMock.downloadRequestHander = { (request, requestType) in
+      let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
+      XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
+      XCTAssertEqual(requestType, RequestType.downloadKeys)
+
+      return Result<DownloadedPackage>.success(mockDownloadedPackage)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
+                                          apiClient: apiClientMock,
+                                          btSecureStorage: btSecureStorageMock)
+    exposureManager.detectExposures { (result) in
+      switch result {
+      case .success(let files):
+        XCTAssertEqual(files, 1)
+      default: XCTFail()
+      }
+    }
   }
 
   func testRegisterBackgroundTask() {
