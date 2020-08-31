@@ -6,7 +6,7 @@ import { useStatusBarEffect } from "../navigation"
 import { SvgXml } from "react-native-svg"
 
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { Icons } from "../assets"
 
 import {

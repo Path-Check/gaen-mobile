@@ -9,9 +9,9 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { usePermissionsContext } from "../PermissionsContext"
+import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useApplicationName } from "../More/useApplicationInfo"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
 import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
@@ -27,11 +27,9 @@ const ActivationSummary: FunctionComponent = () => {
   const isBluetoothOn = useBluetoothStatus()
 
   const {
-    exposureNotifications: {
-      status: { authorized, enabled },
-    },
+    exposureNotifications: { status },
   } = usePermissionsContext()
-  const isProximityTracingOn = authorized && enabled
+  const isProximityTracingOn = status === ENStatus.AUTHORIZED_ENABLED
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()

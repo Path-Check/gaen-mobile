@@ -10,7 +10,7 @@ interface GlobalTextProps {
   children: JSX.Element | string
 }
 
-export const GlobalText = ({
+const GlobalText = ({
   style,
   testID,
   children,
@@ -28,3 +28,5 @@ export const GlobalText = ({
     </Text>
   )
 }
+
+export default GlobalText

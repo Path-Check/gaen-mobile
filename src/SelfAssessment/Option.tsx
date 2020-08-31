@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import Icon from "../assets/svgs/check"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import {
   SCREEN_TYPE_CHECKBOX,
   SCREEN_TYPE_DATE,

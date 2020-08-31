@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"

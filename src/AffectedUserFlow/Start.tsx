@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
+import { GlobalText, Button } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { Screens } from "../navigation"
 

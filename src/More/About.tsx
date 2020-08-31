@@ -2,10 +2,10 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { Platform, ScrollView, StyleSheet, View } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 
 import { Colors, Spacing, Typography } from "../styles"
-import { useApplicationInfo } from "./useApplicationInfo"
+import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 export const AboutScreen: FunctionComponent = () => {

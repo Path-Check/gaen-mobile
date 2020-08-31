@@ -12,8 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../../exposureKey"
-import { Button } from "../../components/Button"
-import { GlobalText } from "../../components/GlobalText"
+import { GlobalText, Button } from "../../components"
 
 import {
   AffectedUserFlowScreens,

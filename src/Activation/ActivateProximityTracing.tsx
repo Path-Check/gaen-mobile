@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useApplicationName } from "../More/useApplicationInfo"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText } from "../components"
 import { Button } from "../components"

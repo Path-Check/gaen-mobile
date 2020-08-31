@@ -6,8 +6,7 @@ import { SvgXml } from "react-native-svg"
 import NetInfo from "@react-native-community/netinfo"
 
 import { ExposureHistoryStackParamList, Screens } from "../navigation"
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
+import { GlobalText, Button } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { ExposureDatum, exposureWindowBucket } from "../exposure"
 

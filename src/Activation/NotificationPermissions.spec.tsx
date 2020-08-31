@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import {
   PermissionsContext,
   PermissionsContextState,
+  ENStatus,
 } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import NotificationPermissions from "./NotificationPermissions"
@@ -85,7 +86,7 @@ const createPermissionProviderValue = (
       request: requestPermission,
     },
     exposureNotifications: {
-      status: { authorized: true, enabled: true },
+      status: ENStatus.AUTHORIZED_ENABLED,
       check: () => {},
       request: () => {},
     },

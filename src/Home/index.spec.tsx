@@ -5,11 +5,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
-import Home from "./Home"
-import {
-  PermissionsContext,
-  ENAuthorizationEnablementStatus,
-} from "../PermissionsContext"
+import Home from "."
+import { PermissionsContext, ENStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { isPlatformiOS } from "../utils/index"
 import { useBluetoothStatus } from "../useBluetoothStatus"
@@ -25,12 +22,11 @@ jest.mock("react-native-safe-area-context")
 jest.mock("../utils/index")
 const mockedApplicationName = "applicationName"
 
-jest.mock("../More/useApplicationInfo", () => {
+jest.mock("../hooks/useApplicationInfo", () => {
   return {
-    useApplicationInfo: () => {
+    useApplicationName: () => {
       return {
         applicationName: mockedApplicationName,
-        versionInfo: "versionInfo",
       }
     },
   }
@@ -42,10 +38,9 @@ jest.mock("./useHasLocationRequirements.ts")
 describe("Home", () => {
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
-    const permissionProviderValue = createPermissionProviderValue({
-      authorized: true,
-      enabled: true,
-    })
+    const permissionProviderValue = createPermissionProviderValue(
+      ENStatus.AUTHORIZED_ENABLED,
+    )
     ;(useHasLocationRequirements as jest.Mock).mockReturnValue({})
 
     const shareSpy = jest.spyOn(Share, "share")
@@ -76,10 +71,7 @@ describe("Home", () => {
         isLocationOn,
       })
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: true,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -120,10 +112,7 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: true,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -155,10 +144,7 @@ describe("Home", () => {
       const isBluetoothOn = false
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: true,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -189,10 +175,7 @@ describe("Home", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: true,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -215,10 +198,7 @@ describe("Home", () => {
       const isBluetoothOn = true
       ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: false,
-        enabled: false,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -248,10 +228,7 @@ describe("Home", () => {
 
   describe("When exposure notification permissions are authorized and the app is not enabled", () => {
     it("shows an enable proximity tracing alert", () => {
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: false,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_DISABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -289,10 +266,7 @@ describe("Home", () => {
         navigate: navigationSpy,
       })
 
-      const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-        authorized: true,
-        enabled: true,
-      }
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -315,10 +289,7 @@ describe("Home", () => {
   describe("When exposure notification permissions are unauthorized", () => {
     describe("and the platform is iOS", () => {
       it("shows an unauthorized alert", () => {
-        const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = {
-          authorized: false,
-          enabled: false,
-        }
+        const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
         const permissionProviderValue = createPermissionProviderValue(
           isENAuthorizedAndEnabled,
         )
@@ -413,7 +384,7 @@ describe("Home", () => {
 })
 
 const createPermissionProviderValue = (
-  isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus,
+  enStatus: ENStatus,
   requestPermission: () => void = () => {},
 ) => {
   return {
@@ -423,7 +394,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: isENAuthorizedAndEnabled,
+      status: enStatus,
       check: () => {},
       request: requestPermission,
     },

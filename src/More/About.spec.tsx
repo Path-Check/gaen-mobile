@@ -2,11 +2,11 @@ import React from "react"
 import { render } from "@testing-library/react-native"
 
 import AboutScreen from "./About"
-import { useApplicationInfo } from "./useApplicationInfo"
+import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 
-jest.mock("./useApplicationInfo")
+jest.mock("../hooks/useApplicationInfo")
 describe("About", () => {
   it("shows the name of the application", () => {
     const applicationName = "application name"

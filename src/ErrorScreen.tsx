@@ -2,8 +2,7 @@ import React, { FunctionComponent } from "react"
 import { SafeAreaView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "./components/GlobalText"
-import { Button } from "./components/Button"
+import { GlobalText, Button } from "./components"
 
 import { Colors, Spacing, Typography } from "./styles"
 

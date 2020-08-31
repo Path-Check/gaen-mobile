@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native"
 
 import { AssessmentLayout } from "../AssessmentLayout"
 import InfoText from "../InfoText"
-import { Button } from "../../components/Button"
+import { Button } from "../../components"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
 import { Icons } from "../../assets"

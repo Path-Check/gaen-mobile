@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
-import { GlobalText } from "../../components/GlobalText"
+import { GlobalText } from "../../components"
 
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
