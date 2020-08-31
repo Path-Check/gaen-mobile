@@ -42,6 +42,8 @@ const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
   return ENStatus.UNAUTHORIZED_DISABLED
 }
 
+const initialENStatus: ENStatus = toENStatus(initialENPermissionStatus)
+
 export enum ENStatus {
   UNAUTHORIZED_DISABLED,
   AUTHORIZED_DISABLED,
@@ -68,7 +70,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: ENStatus.UNAUTHORIZED_DISABLED,
+    status: initialENStatus,
     check: () => {},
     request: () => {},
   },
