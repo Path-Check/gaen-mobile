@@ -23,6 +23,12 @@ const initialENPermissionStatus: ENPermissionStatus = [
   "DISABLED",
 ]
 
+export enum ENStatus {
+  UNAUTHORIZED_DISABLED,
+  AUTHORIZED_DISABLED,
+  AUTHORIZED_ENABLED,
+}
+
 const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
   const isEnabled = enPermissionStatus[1] === "ENABLED"
@@ -43,12 +49,6 @@ const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
 }
 
 const initialENStatus: ENStatus = toENStatus(initialENPermissionStatus)
-
-export enum ENStatus {
-  UNAUTHORIZED_DISABLED,
-  AUTHORIZED_DISABLED,
-  AUTHORIZED_ENABLED,
-}
 
 export interface PermissionsContextState {
   notification: {
