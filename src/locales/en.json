@@ -132,6 +132,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
   "home": {
+    "status_icon_active_label": "A white check in a green circle",
+    "status_icon_inactive_label": "A white x in a red circle",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
