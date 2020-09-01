@@ -26,7 +26,6 @@ const ActivateLocation: FunctionComponent = () => {
 
   useEffect(() => {
     if (isLocationOn) {
-      console.log("in locations screen", { isLocationOn })
       navigation.navigate(ActivationScreens.ActivationSummary)
     }
   })
@@ -77,7 +76,7 @@ const ActivateLocation: FunctionComponent = () => {
         <View style={style.buttonsContainer}>
           <Button
             onPress={handleOnPressAllowLocationAccess}
-            label={t("label.launch_activate_location")}
+            label={t("common.settings")}
           />
           <TouchableOpacity
             onPress={handleOnPressMaybeLater}

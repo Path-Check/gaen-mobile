@@ -33,12 +33,12 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
-    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
+    "share_cta_skip": "No thanks, I don't want to share data"
   },
   "common": {
     "alert": "Alert",
@@ -65,6 +65,9 @@
     "description": "An error has ocurred. Please reload the app.",
     "reload": "Reload",
     "title": "Unknown Error"
+  },
+  "exoprt": {
+    "start_image_label": ""
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
@@ -167,16 +170,14 @@
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
-    "proximity_tracing_info_subheader_2": "Is my data secure?",
-    "status_icon_active_label": "A white check in a green circle",
-    "status_icon_inactive_label": "A white x in a red circle"
+    "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
-    "activate_proximity_tracing": "Activate Proximity Tracing",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
     "language_icon": "Outlined icon of a globe",
+    "launch_activate_location": "Activate Location",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
@@ -201,8 +202,14 @@
     "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "app_setup_incomplete_header": "App Setup Incomplete",
     "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
-    "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
+    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
+    "privacy_policy": "Privacy Policy",
+    "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
+    "eula": "End User Legal Agreement",
+    "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
+    "location_header": "Activate Location",
+    "location_subheader": "Why do I need to turn on my phone's location setting?",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
@@ -210,7 +217,6 @@
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
     "please_read_the": "Please read the",
-    "privacy_policy": "Privacy Policy",
     "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
       "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
