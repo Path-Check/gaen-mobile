@@ -41,7 +41,10 @@ const Home: FunctionComponent = () => {
   const style = createStyle(insets)
 
   const isBluetoothOn = useBluetoothStatus()
-  const { isLocationOffAndNeeded } = useHasLocationRequirements()
+  const {
+    isLocationNeeded,
+    isLocationOffAndNeeded,
+  } = useHasLocationRequirements()
   const { exposureNotifications } = usePermissionsContext()
 
   const isProximityTracingOn =
@@ -62,9 +65,18 @@ const Home: FunctionComponent = () => {
   const headerText = appIsActive
     ? t("home.bluetooth.tracing_on_header")
     : t("home.bluetooth.tracing_off_header")
-  const subheaderText = appIsActive
-    ? t("home.bluetooth.all_services_on_subheader", { applicationName })
-    : t("home.bluetooth.tracing_off_subheader")
+  const subheaderText = () => {
+    switch (appIsActive) {
+      case true:
+        return t("home.bluetooth.all_services_on_subheader", {
+          applicationName,
+        })
+      case false:
+        return isLocationNeeded
+          ? t("home.bluetooth.tracing_off_subheader_location")
+          : t("home.bluetooth.tracing_off_subheader")
+    }
+  }
 
   return (
     <>
@@ -103,7 +115,7 @@ const Home: FunctionComponent = () => {
               {headerText}
             </GlobalText>
             <GlobalText style={style.subheaderText} testID={"home-subheader"}>
-              {subheaderText}
+              {subheaderText()}
             </GlobalText>
           </View>
         </GradientBackground>
