@@ -2,11 +2,15 @@ import React, { FunctionComponent } from "react"
 import { View, StatusBar as RNStatusBar, StyleSheet } from "react-native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
+import { Colors } from "../styles"
+
 interface StatusBarProps {
-  backgroundColor: string
+  backgroundColor?: string
 }
 
-const StatusBar: FunctionComponent<StatusBarProps> = ({ backgroundColor }) => {
+const StatusBar: FunctionComponent<StatusBarProps> = ({
+  backgroundColor = Colors.primaryLightBackground,
+}) => {
   const insets = useSafeAreaInsets()
   const style = createStyle({ insets, backgroundColor })
 

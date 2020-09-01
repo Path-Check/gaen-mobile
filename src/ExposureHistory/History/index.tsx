@@ -57,11 +57,9 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const showExposureHistory = exposures.length > 0
 
-  const titleText = t("screen_titles.exposure_history")
-
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -71,7 +69,9 @@ const History: FunctionComponent<HistoryProps> = ({
       >
         <View>
           <View style={style.headerRow}>
-            <GlobalText style={style.headerText}>{titleText}</GlobalText>
+            <GlobalText style={style.headerText}>
+              {t("screen_titles.exposure_history")}
+            </GlobalText>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}
