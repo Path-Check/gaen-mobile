@@ -10,6 +10,7 @@ import React, {
 import gaenStrategy from "./gaen"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
+import { AppState } from "react-native"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
@@ -17,11 +18,12 @@ const {
   getExposureKeys,
   storeRevisionToken,
   getRevisionToken,
+  getCurrentExposures,
 } = exposureEventsStrategy
 
 export interface ExposureState {
   exposureInfo: ExposureInfo
-  getCurrentExposures: () => void
+  getCurrentExposures: () => Promise<ExposureInfo>
   getExposureKeys: () => Promise<ExposureKey[]>
   getRevisionToken: () => Promise<string>
   hasBeenExposed: boolean
@@ -34,7 +36,9 @@ export interface ExposureState {
 
 const initialState = {
   exposureInfo: [],
-  getCurrentExposures: (): void => {},
+  getCurrentExposures: () => {
+    return Promise.resolve([])
+  },
   getExposureKeys: () => {
     return Promise.resolve([])
   },
@@ -73,12 +77,20 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [getLastDetectionDate])
 
-  const getCurrentExposures = useCallback(() => {
-    const cb = (exposureInfo: ExposureInfo) => {
-      setExposureInfo(exposureInfo)
+  useEffect(() => {
+    const handleAppStateChange = async () => {
+      const exposureInfos = await getCurrentExposures()
+      setExposureInfo(exposureInfos)
     }
-    exposureEventsStrategy.getCurrentExposures(cb)
-  }, [])
+
+    AppState.addEventListener("change", handleAppStateChange)
+
+    handleAppStateChange()
+
+    return () => {
+      AppState.removeEventListener("change", handleAppStateChange)
+    }
+  }, [getCurrentExposures])
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
@@ -92,10 +104,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
 
     return subscription.remove
   }, [exposureInfoSubscription, getLastExposureDetectionDate])
-
-  useEffect(() => {
-    getCurrentExposures()
-  }, [getCurrentExposures])
 
   const observeExposures = () => {
     setUserHasNewExposure(false)
