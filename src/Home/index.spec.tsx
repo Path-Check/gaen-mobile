@@ -14,10 +14,10 @@ import { useHasLocationRequirements } from "./useHasLocationRequirements"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
 
-jest.mock("@react-navigation/native")
-
 jest.mock("react-native-safe-area-context")
 ;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
+
+jest.mock("@react-navigation/native")
 
 jest.mock("../utils/index")
 const mockedApplicationName = "applicationName"
