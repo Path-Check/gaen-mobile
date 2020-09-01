@@ -23,7 +23,10 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { isLocationOffAndNeeded } = useHasLocationRequirements()
+  const {
+    isLocationNeeded,
+    isLocationOffAndNeeded,
+  } = useHasLocationRequirements()
   const isBluetoothOn = useBluetoothStatus()
 
   const {
@@ -80,7 +83,7 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationOffAndNeeded
+    bodyText: isLocationNeeded
       ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
       : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
@@ -119,14 +122,13 @@ const ActivationSummary: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
     flexGrow: 1,
     justifyContent: "center",
     paddingTop: Spacing.small,
+    paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xLarge,
   },
   innerContainer: {
