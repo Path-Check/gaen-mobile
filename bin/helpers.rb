@@ -65,7 +65,7 @@ end
 
 def mobile_resources_commit
   file = File.open("mobile_resources_commit")
-  commit = file.read.chomp # the chomp is to drop the `/n`
+  commit = file.read.chomp
   file.close
 
   commit
