@@ -43,10 +43,8 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       setIsBluetoothOn(status)
     }
     determineBTStatus()
-    AppState.addEventListener(determineOSListener(), () => determineBTStatus())
-    return AppState.removeEventListener(determineOSListener(), () =>
-      determineBTStatus(),
-    )
+    addListener(determineBTStatus)
+    return removeListener(determineBTStatus)
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
@@ -71,12 +69,8 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       setIsLocationOn(status)
     }
     determineIsLocationOn()
-    AppState.addEventListener(determineOSListener(), () =>
-      determineIsLocationOn(),
-    )
-    return AppState.removeEventListener(determineOSListener(), () =>
-      determineIsLocationOn(),
-    )
+    addListener(determineIsLocationOn)
+    return removeListener(determineIsLocationOn)
   }, [])
 
   useEffect(() => {
@@ -118,4 +112,12 @@ const determineOSListener = (): ListenerMethod => {
     android: "focus",
     default: "change",
   })
+}
+
+const addListener = (listener: () => void) => {
+  return AppState.addEventListener(determineOSListener(), () => listener)
+}
+
+const removeListener = (listener: () => void) => {
+  return AppState.removeEventListener(determineOSListener(), () => listener)
 }
