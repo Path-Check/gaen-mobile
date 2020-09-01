@@ -13,8 +13,7 @@ import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
-import { useBluetoothStatus } from "../useBluetoothStatus"
-import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
+import { useActivationContext } from "../ActivationContext"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -24,10 +23,11 @@ const ActivationSummary: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
   const {
+    isBluetoothOn,
+    isLocationOn,
     isLocationNeeded,
-    isLocationOffAndNeeded,
-  } = useHasLocationRequirements()
-  const isBluetoothOn = useBluetoothStatus()
+  } = useActivationContext()
+  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const {
     exposureNotifications: { status },

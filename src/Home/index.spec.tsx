@@ -143,7 +143,7 @@ describe("Home", () => {
         isENAuthorizedAndEnabled,
       )
 
-      const { getByTestId, debug } = render(
+      const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
           <ActivationContext.Provider
             value={{
@@ -156,8 +156,6 @@ describe("Home", () => {
           </ActivationContext.Provider>
         </PermissionsContext.Provider>,
       )
-
-      debug()
 
       const fixBluetoothButton = getByTestId("home-bluetooth-status-container")
       const alert = jest.spyOn(Alert, "alert")
