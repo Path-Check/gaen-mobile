@@ -1,16 +1,12 @@
 import React from "react"
 import { render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 
 import History from "."
-
-jest.mock("react-native-safe-area-context")
-;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
