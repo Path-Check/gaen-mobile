@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react"
 import {
-  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -13,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
-import { GlobalText } from "../../components"
+import { StatusBar, GlobalText } from "../../components"
 
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
@@ -62,57 +61,46 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <>
-      <SafeAreaView style={style.safeAreaTop} />
-      <SafeAreaView style={style.safeAreaBottom}>
-        <ScrollView
-          contentContainerStyle={style.contentContainer}
-          style={style.container}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={handleOnRefresh}
-            />
-          }
-        >
-          <View>
-            <View style={style.headerRow}>
-              <GlobalText style={style.headerText}>{titleText}</GlobalText>
-              <TouchableOpacity
-                onPress={handleOnPressMoreInfo}
-                style={style.moreInfoButton}
-              >
-                <SvgXml
-                  xml={Icons.QuestionMark}
-                  accessible
-                  accessibilityLabel={t("label.question_icon")}
-                  style={style.moreInfoButtonIcon}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={style.subheaderRow}>
-              <DateInfoHeader lastDetectionDate={lastDetectionDate} />
-            </View>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        style={style.container}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
+        }
+      >
+        <View>
+          <View style={style.headerRow}>
+            <GlobalText style={style.headerText}>{titleText}</GlobalText>
+            <TouchableOpacity
+              onPress={handleOnPressMoreInfo}
+              style={style.moreInfoButton}
+            >
+              <SvgXml
+                xml={Icons.QuestionMark}
+                accessible
+                accessibilityLabel={t("label.question_icon")}
+                style={style.moreInfoButtonIcon}
+              />
+            </TouchableOpacity>
           </View>
-          <View style={style.listContainer}>
-            {showExposureHistory ? (
-              <ExposureList exposures={exposures} />
-            ) : (
-              <NoExposures />
-            )}
+          <View style={style.subheaderRow}>
+            <DateInfoHeader lastDetectionDate={lastDetectionDate} />
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </View>
+        <View style={style.listContainer}>
+          {showExposureHistory ? (
+            <ExposureList exposures={exposures} />
+          ) : (
+            <NoExposures />
+          )}
+        </View>
+      </ScrollView>
     </>
   )
 }
 
 const style = StyleSheet.create({
-  safeAreaTop: {
-    backgroundColor: Colors.secondary10,
-  },
-  safeAreaBottom: {
-    flex: 1,
-  },
   contentContainer: {
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xxHuge,
