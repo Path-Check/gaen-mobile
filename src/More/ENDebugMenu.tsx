@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"

@@ -6,20 +6,25 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
-import com.google.android.gms.nearby.exposurenotification.ExposureWindow;
-import com.google.android.gms.nearby.exposurenotification.ScanInstance;
+import com.google.android.gms.nearby.exposurenotification.DailySummary;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
+import org.threeten.bp.Duration;
 
 @SuppressWarnings("unused")
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
 public class ExposureHistoryModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ExposureHistoryModule";
-  public static final String TAG = "ExposureHistoryModule";
+  private static final String TAG = "ExposureHistoryModule";
 
   private ExposureNotificationSharedPreferences prefs;
 
@@ -38,25 +43,40 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
   public void getCurrentExposures(final Promise promise) {
     ExposureNotificationClientWrapper exposureNotificationsClient =
         ExposureNotificationClientWrapper.get(getReactApplicationContext());
-    exposureNotificationsClient.getExposureWindows()
-        .addOnSuccessListener(exposureWindows -> {
-          List<RNExposureInformation> exposures = new ArrayList<>();
-          for (ExposureWindow window : exposureWindows) {
-            long durationMinutes = 0;
-            for (ScanInstance scan : window.getScanInstances()) {
-              // We don't need a float type here, getSecondsSinceLastScan() is coarsened to 60-second increments
-              durationMinutes += scan.getSecondsSinceLastScan() / 60;
-            }
-            RNExposureInformation exposure = new RNExposureInformation(
-                window.getDateMillisSinceEpoch(),
-                durationMinutes
-            );
-            exposures.add(exposure);
-          }
 
-          String json = new Gson().toJson(exposures);
-          promise.resolve(json);
-        });
+    FutureCallback<List<DailySummary>> callback = new FutureCallback<List<DailySummary>>() {
+      @Override
+      public void onSuccess(@NullableDecl List<DailySummary> result) {
+        if (result == null) {
+          promise.resolve(null);
+          return;
+        }
+
+        List<RNExposureInformation> exposures = new ArrayList<>();
+        for (DailySummary dailySummary : result) {
+          RNExposureInformation exposure = new RNExposureInformation(
+              Duration.ofDays(dailySummary.getDaysSinceEpoch()).toMillis(),
+              Duration.ofSeconds((int) dailySummary.getSummaryData().getWeightedDurationSum()).toMinutes()
+          );
+
+          exposures.add(exposure);
+        }
+
+        String json = new Gson().toJson(exposures);
+        promise.resolve(json);
+      }
+
+      @Override
+      public void onFailure(@NotNull Throwable t) {
+        promise.reject(t);
+      }
+    };
+
+    Futures.addCallback(
+        exposureNotificationsClient.getDailySummaries(),
+        callback,
+        AppExecutors.getLightweightExecutor()
+    );
   }
 
   @ReactMethod

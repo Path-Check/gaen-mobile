@@ -3,7 +3,7 @@ import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../../components/GlobalText"
+import { GlobalText } from "../../components"
 import { Colors, Typography, Spacing, Outlines } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"

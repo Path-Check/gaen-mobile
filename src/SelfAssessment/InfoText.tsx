@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 
 import { Typography } from "../styles"
 

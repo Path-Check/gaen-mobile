@@ -9,7 +9,7 @@ import {
 import LinearGradient from "react-native-linear-gradient"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "./GlobalText"
+import GlobalText from "./GlobalText"
 import { Icons } from "../assets"
 
 import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
@@ -27,7 +27,7 @@ interface ButtonProps {
   outlined?: boolean
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   label,
   onPress,
   disabled,
@@ -156,3 +156,5 @@ const style = StyleSheet.create({
     marginLeft: Spacing.medium,
   },
 })
+
+export default Button

@@ -16,7 +16,7 @@ type ExposureInfoSubscription = (
 
 export interface ExposureEventsStrategy {
   exposureInfoSubscription: ExposureInfoSubscription
-  getCurrentExposures: (cb: (exposureInfo: ExposureInfo) => void) => void
+  getCurrentExposures: () => Promise<ExposureInfo>
   getLastDetectionDate: () => Promise<Posix | null>
   getExposureKeys: () => Promise<ExposureKey[]>
   getRevisionToken: () => Promise<string>

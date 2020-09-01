@@ -91,7 +91,17 @@
       "verification_code_used": "Verification code has already been used"
     },
     "publish_consent_title_bluetooth": "Notify others in your community",
-    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
+    "publish_keys": {
+      "no_op": {
+        "title": "Attempt to submit existing keys",
+        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added."
+      },
+      "errors": {
+        "unknown": "Failed to submit the exposure data",
+        "description": "The operation could not be completed. {{message}}"
+      }
+    }
   },
   "exposure_history": {
     "exposure_detail": {
@@ -132,6 +142,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
   "home": {
+    "status_icon_active_label": "A white check in a green circle",
+    "status_icon_inactive_label": "A white x in a red circle",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
@@ -193,7 +205,11 @@
     "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
-    "notification_body1": "You’ll receive notifications when you may have been in close proximity with someone who has reported testing positive for COVID-19.",
+    "please_read_the": "Please read the",
+    "privacy_policy": "Privacy Policy",
+    "eula": "End User Legal Agreement",
+    "terms_header_title": "Terms of use",
+    "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",

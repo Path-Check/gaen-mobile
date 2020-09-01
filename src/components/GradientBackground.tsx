@@ -3,16 +3,28 @@ import { StyleSheet } from "react-native"
 
 import LinearGradient from "react-native-linear-gradient"
 
-import { Colors } from "../styles"
+interface GradientBackgroundProps {
+  gradient: string[]
+  angleCenterY?: number
+  children: JSX.Element
+}
 
-const GradientBackground: FunctionComponent = ({ children }) => {
+const GradientBackground: FunctionComponent<GradientBackgroundProps> = ({
+  gradient,
+  angleCenterY = 0.5,
+  children,
+}) => {
+  if (angleCenterY < 0 || angleCenterY > 1) {
+    throw new Error("angleCenterY must be between 0 and 1")
+  }
+
   return (
     <LinearGradient
-      colors={Colors.gradientPrimary10}
+      colors={gradient}
       style={style.gradient}
       useAngle
       angle={0}
-      angleCenter={{ x: 0.5, y: 0.25 }}
+      angleCenter={{ x: 0.5, y: angleCenterY }}
     >
       {children}
     </LinearGradient>

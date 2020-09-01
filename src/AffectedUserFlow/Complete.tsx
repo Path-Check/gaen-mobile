@@ -4,8 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
+import { GlobalText, Button } from "../components"
 import { Screens } from "../navigation"
 
 import { Images } from "../assets"

@@ -1,7 +1,7 @@
 import React, { useEffect, FunctionComponent } from "react"
 import { FlatList, StyleSheet, View, Text } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 
 import dayjs from "dayjs"
 

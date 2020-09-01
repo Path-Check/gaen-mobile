@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
+import { GlobalText, Button } from "../components"
 import { AnswersContext } from "./Context"
 import { AssessmentOption } from "./AssessmentOption"
 import {

@@ -7,7 +7,7 @@ export default Factory.define<ExposureState>(() => ({
   userHasNewExposure: true,
   observeExposures: (): void => {},
   resetExposures: (): void => {},
-  getCurrentExposures: (): void => {},
+  getCurrentExposures: () => Promise.resolve([]),
   getExposureKeys: () => Promise.resolve([]),
   lastExposureDetectionDate: null,
   storeRevisionToken: (_revisionToken: string) => Promise.resolve(),

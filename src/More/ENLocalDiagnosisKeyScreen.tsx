@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { NavigationProp } from "../navigation"
 
 import { NativeModule } from "../gaen"

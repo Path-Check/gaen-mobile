@@ -23,25 +23,32 @@ const initialENPermissionStatus: ENPermissionStatus = [
   "DISABLED",
 ]
 
-const toAuthorizationEnablementStatus = (
-  enPermissionStatus: ENPermissionStatus,
-): ENAuthorizationEnablementStatus => {
-  const isENAuthorized = enPermissionStatus[0] === "AUTHORIZED"
-  const isENEnabled = enPermissionStatus[1] === "ENABLED"
+export enum ENStatus {
+  UNAUTHORIZED_DISABLED,
+  AUTHORIZED_DISABLED,
+  AUTHORIZED_ENABLED,
+}
 
-  return {
-    authorized: isENAuthorized,
-    enabled: isENEnabled,
+const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
+  const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
+  const isEnabled = enPermissionStatus[1] === "ENABLED"
+
+  if (!isAuthorized && !isEnabled) {
+    return ENStatus.UNAUTHORIZED_DISABLED
   }
+
+  if (isAuthorized && !isEnabled) {
+    return ENStatus.AUTHORIZED_DISABLED
+  }
+
+  if (isAuthorized && isEnabled) {
+    return ENStatus.AUTHORIZED_ENABLED
+  }
+
+  return ENStatus.UNAUTHORIZED_DISABLED
 }
 
-export type ENAuthorizationEnablementStatus = {
-  authorized: boolean
-  enabled: boolean
-}
-const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
-  initialENPermissionStatus,
-)
+const initialENStatus: ENStatus = toENStatus(initialENPermissionStatus)
 
 export interface PermissionsContextState {
   notification: {
@@ -50,7 +57,7 @@ export interface PermissionsContextState {
     request: () => void
   }
   exposureNotifications: {
-    status: ENAuthorizationEnablementStatus
+    status: ENStatus
     check: () => void
     request: () => void
   }
@@ -63,7 +70,7 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENAuthorizationEnablementStatus,
+    status: initialENStatus,
     check: () => {},
     request: () => {},
   },
@@ -142,7 +149,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
+  const isENAuthorizedAndEnabled: ENStatus = toENStatus(
     exposureNotificationsPermissionStatus,
   )
 

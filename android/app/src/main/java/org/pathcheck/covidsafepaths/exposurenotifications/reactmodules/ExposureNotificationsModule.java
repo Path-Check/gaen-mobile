@@ -24,7 +24,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 @ReactModule(name = MODULE_NAME)
 public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ENPermissionsModule";
-  public static final String TAG = "ENModule";
+  private static final String TAG = "ENModule";
 
   private final ExposureNotificationClient exposureNotificationClient;
 

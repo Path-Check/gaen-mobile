@@ -4,9 +4,8 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import InfoText from "./InfoText"
-import { Button } from "../components/Button"
+import { GlobalText, Button } from "../components"
 import { AssessmentLayout } from "./AssessmentLayout"
-import { GlobalText } from "../components/GlobalText"
 
 import { Colors, Typography } from "../styles"
 import { Icons } from "../assets"
