@@ -50,18 +50,19 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
-    if (Platform.OS === "android") {
-      return isLocationEnabled()
-    } else {
-      return true
-    }
+    return Platform.select({
+      android: isLocationEnabled(),
+      ios: new Promise(() => true),
+      default: new Promise(() => true),
+    })
   }
+
   const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {
-    if (Platform.OS === "android") {
-      return doesDeviceSupportLocationlessScanning()
-    } else {
-      return true
-    }
+    return Platform.select({
+      android: doesDeviceSupportLocationlessScanning(),
+      ios: new Promise(() => true),
+      default: new Promise(() => true),
+    })
   }
 
   useEffect(() => {
