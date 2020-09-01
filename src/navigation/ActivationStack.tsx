@@ -18,7 +18,6 @@ import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
-import AcceptEula from "../Activation/AcceptEula"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -58,7 +57,6 @@ const ActivationStack: FunctionComponent = () => {
   const activationStepsAndroid: ActivationStep[] = [
     activateProximityTracing,
     activateLocation,
-    { screenName: "AcceptEula", component: AcceptEula },
   ]
 
   const activationSteps = Platform.select({
