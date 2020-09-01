@@ -29,10 +29,10 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
   const leftIcon = isActive ? Icons.CheckInCircle : Icons.XInCircle
   const leftIconFill = isActive ? Colors.success100 : Colors.danger75
   const rightIcon = isActive ? Icons.HomeInfo : Icons.Wrench
+  const onPress = isActive ? infoAction : fixAction
   const accessibilityLabel = isActive
     ? t("home.get_more_info", { technology: headerText })
     : t("home.fix", { technology: headerText })
-  const onPress = isActive ? infoAction : fixAction
 
   return (
     <TouchableOpacity
