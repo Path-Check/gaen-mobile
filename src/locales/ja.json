@@ -14,9 +14,6 @@
     "launch_enable_notif": "お知らせを有効にする",
     "launch_get_started": "開始する"
   },
-  "onboarding": {
-    "terms_header_title": "利用規約"
-  },
   "screen_titles": {
     "about": "セーフパスについて",
     "legal": "リーガル"

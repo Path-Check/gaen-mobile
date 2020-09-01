@@ -15,9 +15,6 @@
     "launch_get_started": "Mulai",
     "launch_screen1_header": "Selamat datang di PathCheck"
   },
-  "onboarding": {
-    "terms_header_title": "Syarat Penggunaan"
-  },
   "screen_titles": {
     "about": "Tentang",
     "legal": "Hukum"

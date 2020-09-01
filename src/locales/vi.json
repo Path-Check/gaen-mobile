@@ -14,9 +14,6 @@
     "launch_enable_notif": "Cho phép gửi thông báo",
     "launch_get_started": "Bắt đầu"
   },
-  "onboarding": {
-    "terms_header_title": "Điều khoản sử dụng"
-  },
   "screen_titles": {
     "about": "Giới thiệu",
     "legal": "Pháp lý"

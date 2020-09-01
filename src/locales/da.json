@@ -24,10 +24,6 @@
     "launch_get_started": "Lad os komme i gang",
     "privacy_policy": "Privatlivspolitik"
   },
-  "onboarding": {
-    "privacy_policy": "Privatlivspolitik",
-    "terms_header_title": "Vilkår for brug"
-  },
   "screen_titles": {
     "about": "Om",
     "legal": "Juridisk"

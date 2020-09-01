@@ -105,7 +105,6 @@
   },
   "onboarding": {
     "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
-    "privacy_policy": "Règleman sou enfòmasyon prive",
     "protect_privacy_button": "Ki jan nou pwoteje vi prive ou",
     "protect_privacy": {
       "header": "Ki jan nou pwoteje vi prive ou"
@@ -120,7 +119,6 @@
     "screen3_button": "E si mwen ekspoze?",
     "select_language": "Chwazi lang",
     "step": "Etap {{currentStep}} nan {{totalSteps}}",
-    "terms_header_title": "Règleman itilizasyon",
     "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
   },
   "report_issue": {

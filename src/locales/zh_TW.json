@@ -14,9 +14,6 @@
     "launch_enable_notif": "開啟通知",
     "launch_get_started": "開始"
   },
-  "onboarding": {
-    "terms_header_title": "使用條款"
-  },
   "screen_titles": {
     "about": "關於",
     "legal": "法遵"

@@ -56,9 +56,7 @@
     "more": "Más"
   },
   "onboarding": {
-    "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?",
-    "privacy_policy": "Política de privacidad",
-    "terms_header_title": "Condiciones de uso"
+    "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?"
   },
   "screen_titles": {
     "about": "Acerca de",
