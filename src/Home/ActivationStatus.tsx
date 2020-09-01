@@ -26,19 +26,26 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
   const { t } = useTranslation()
 
   const bodyText = isActive ? t("common.enabled") : t("common.disabled")
-  const icon = isActive ? Icons.CheckInCircle : Icons.XInCircle
-  const iconFill = isActive ? Colors.success100 : Colors.danger75
+  const leftIcon = isActive ? Icons.CheckInCircle : Icons.XInCircle
+  const leftIconFill = isActive ? Colors.success100 : Colors.danger75
+  const rightIcon = isActive ? Icons.HomeInfo : Icons.Wrench
+  const accessibilityLabel = isActive
+    ? t("home.get_more_info", { technology: headerText })
+    : t("home.fix", { technology: headerText })
+  const onPress = isActive ? infoAction : fixAction
 
   return (
     <TouchableOpacity
-      onPress={isActive ? infoAction : fixAction}
+      onPress={onPress}
       style={style.activationStatusContainer}
+      accessible
+      accessibilityLabel={accessibilityLabel}
       testID={testID}
     >
       <View style={style.activationStatusLeftContainer}>
         <SvgXml
-          xml={icon}
-          fill={iconFill}
+          xml={leftIcon}
+          fill={leftIconFill}
           width={Iconography.medium}
           height={Iconography.medium}
         />
@@ -48,15 +55,7 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
         </View>
       </View>
       <View style={style.activationStatusRightContainer}>
-        {isActive ? (
-          <SvgXml xml={Icons.HomeInfo} />
-        ) : (
-          <View style={style.fixButtonContainer}>
-            <GlobalText style={style.fixButtonText}>
-              {t("home.bluetooth.fix")}
-            </GlobalText>
-          </View>
-        )}
+        <SvgXml xml={rightIcon} />
       </View>
     </TouchableOpacity>
   )
@@ -83,18 +82,6 @@ const style = StyleSheet.create({
   activationStatusRightContainer: {
     width: rightColumnWidth,
     alignItems: "center",
-  },
-  fixButtonContainer: {
-    alignItems: "center",
-    backgroundColor: Colors.secondary50,
-    paddingVertical: Spacing.xxxSmall,
-    paddingHorizontal: Spacing.small,
-    borderRadius: Outlines.baseBorderRadius,
-  },
-  fixButtonText: {
-    ...Typography.header4,
-    color: Colors.primary100,
-    textTransform: "uppercase",
   },
   bottomHeaderText: {
     ...Typography.header4,
