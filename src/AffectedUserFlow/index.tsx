@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
 import { AffectedUserProvider } from "./AffectedUserContext"
@@ -14,14 +14,13 @@ type AffectedUserFlowStackParams = {
 }
 const Stack = createStackNavigator<AffectedUserFlowStackParams>()
 
-const AffectedUserStack = (): JSX.Element => {
+const AffectedUserStack: FunctionComponent = () => {
   return (
     <AffectedUserProvider>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={AffectedUserFlowScreens.AffectedUserStart}
       >
         <Stack.Screen
           name={AffectedUserFlowScreens.AffectedUserStart}
