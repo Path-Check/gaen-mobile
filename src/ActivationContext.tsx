@@ -38,13 +38,13 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
   }
 
   useEffect(() => {
-    const determineBTStatus = async () => {
+    const determineIsBluetoothOn = async () => {
       const status = await fetchBTStatus()
       setIsBluetoothOn(status)
     }
-    determineBTStatus()
-    addListener(determineBTStatus)
-    return removeListener(determineBTStatus)
+    determineIsBluetoothOn()
+    addListener(determineIsBluetoothOn)
+    return removeListener(determineIsBluetoothOn)
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
@@ -115,9 +115,9 @@ const determineOSListener = (): ListenerMethod => {
 }
 
 const addListener = (listener: () => void) => {
-  return AppState.addEventListener(determineOSListener(), () => listener)
+  return AppState.addEventListener(determineOSListener(), () => listener())
 }
 
 const removeListener = (listener: () => void) => {
-  return AppState.removeEventListener(determineOSListener(), () => listener)
+  return AppState.removeEventListener(determineOSListener(), () => listener())
 }
