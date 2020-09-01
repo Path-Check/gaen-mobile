@@ -211,6 +211,47 @@ describe("PublishConsentForm", () => {
       })
     })
 
+    describe("when the response is an internal server error", () => {
+      it("displays an alert with the server error message", async () => {
+        const errorMessage = "internal_error"
+        const postDiagnosisKeysSpy = jest.spyOn(
+          ExposureAPI,
+          "postDiagnosisKeys",
+        )
+        postDiagnosisKeysSpy.mockResolvedValueOnce({
+          kind: "failure",
+          nature: ExposureAPI.PostKeysError.InternalServerError,
+          message: errorMessage,
+        })
+        const alertSpy = jest.spyOn(Alert, "alert")
+        const loggerSpy = jest.spyOn(Logger, "error")
+
+        const { getByLabelText } = render(
+          <PublishConsentForm
+            hmacKey="hmacKey"
+            certificate="certificate"
+            exposureKeys={[]}
+            storeRevisionToken={jest.fn()}
+            revisionToken=""
+            appPackageName=""
+            regionCodes={[""]}
+          />,
+        )
+
+        fireEvent.press(getByLabelText("I Understand and Consent"))
+
+        await waitFor(() => {
+          expect(alertSpy).toHaveBeenCalledWith(
+            "The server is experiencing problems, please try again later",
+            `The operation could not be completed. ${errorMessage}`,
+          )
+          expect(loggerSpy).toHaveBeenCalledWith(
+            `IncompleteKeySumbission.InternalServerError.${errorMessage}`,
+          )
+        })
+      })
+    })
+
     describe("when the request times out", () => {
       it("displays an alert with the timeout error", async () => {
         const errorMessage = "timeout"
