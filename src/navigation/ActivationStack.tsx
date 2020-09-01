@@ -63,6 +63,7 @@ const ActivationStack: FunctionComponent = () => {
   const activationSteps = Platform.select({
     ios: activationStepsIOS,
     android: activationStepsAndroid,
+    default: activationStepsIOS,
   })
 
   const CloseButton = () => {
@@ -120,7 +121,7 @@ const ActivationStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      {activationSteps?.map((step, idx) => {
+      {activationSteps.map((step, idx) => {
         const currentStep = idx + 1
         return (
           <Stack.Screen
