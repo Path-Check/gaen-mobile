@@ -85,8 +85,8 @@
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
-      "invalid_code": "Try a different code",
       "invalid_format": "Invalid format",
+      "invalid_code": "Try a different code",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
@@ -142,6 +142,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
   "home": {
+    "status_icon_active_label": "A white check in a green circle",
+    "status_icon_inactive_label": "A white x in a red circle",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
@@ -173,11 +175,12 @@
     "proximity_tracing_info_subheader_2": "Is my data secure?"
   },
   "label": {
+    "activate_proximity_tracing": "Activate Proximity Tracing",
+    "launch_activate_location": "Activate Location",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
     "language_icon": "Outlined icon of a globe",
-    "launch_activate_location": "Activate Location",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
@@ -196,27 +199,28 @@
     "self_assessment": "Self Assessment"
   },
   "onboarding": {
-    "activation_header_title": "App Setup",
-    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",
-    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "app_setup_incomplete_header": "App Setup Incomplete",
+    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
+    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
-    "privacy_policy": "Privacy Policy",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
-    "eula": "End User Legal Agreement",
     "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
     "location_header": "Activate Location",
     "location_subheader": "Why do I need to turn on my phone's location setting?",
+    "please_read_the": "Please read the",
+    "privacy_policy": "Privacy Policy",
+    "eula": "End User Legal Agreement",
+    "terms_header_title": "Terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
-    "please_read_the": "Please read the",
     "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
       "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
@@ -257,7 +261,6 @@
     "screen5_image_label": "A person talking to a health expert virtually",
     "select_language": "Select Language",
     "step": "Step {{currentStep}} of {{totalSteps}}",
-    "terms_header_title": "Terms of use",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
   "report_issue": {
