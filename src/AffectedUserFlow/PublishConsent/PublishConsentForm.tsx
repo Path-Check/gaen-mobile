@@ -86,6 +86,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
   const errorMessageTitle = (errorNature: PostKeysError) => {
     switch (errorNature) {
+      case PostKeysError.Timeout: {
+        return t("export.publish_keys.errors.timeout")
+      }
       case PostKeysError.Unknown: {
         return t("export.publish_keys.errors.unknown")
       }
