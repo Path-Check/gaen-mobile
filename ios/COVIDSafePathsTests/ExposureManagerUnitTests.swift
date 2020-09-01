@@ -98,7 +98,7 @@ class APIClientMock: APIClient {
   }
 
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
-
+    print("ACA??")
   }
 
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
@@ -757,7 +757,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresFailsDownloadingKeysError() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      return Result<String>.success("indexFilePath\nanotherFilePath") as AnyObject
     }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
@@ -778,7 +778,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresUnpackagingError() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      return Result<String>.success("indexFilePath\nanotherFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       throw GenericError.unknown
@@ -807,8 +807,11 @@ class ExposureManagerTests: XCTestCase {
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
+
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       return URL(fileURLWithPath: "url")
@@ -849,8 +852,11 @@ class ExposureManagerTests: XCTestCase {
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
+
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       return URL(fileURLWithPath: "url")
@@ -954,6 +960,9 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresSuccessScoreBellow() {
     let storeExposureExpectation = self.expectation(description: "The exposure does not gets stored")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      return UserState()
+    }
     btSecureStorageMock.storeExposuresHandler = { exposures in
       storeExposureExpectation.fulfill()
       XCTAssertEqual(exposures.count, 0)
@@ -964,8 +973,11 @@ class ExposureManagerTests: XCTestCase {
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
+
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       return URL(fileURLWithPath: "url")
@@ -995,6 +1007,9 @@ class ExposureManagerTests: XCTestCase {
     btSecureStorageMock.storeExposuresHandler = { exposures in
       XCTAssertEqual(exposures.count, 1)
     }
+    btSecureStorageMock.userStateHandler = {
+      return UserState()
+    }
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
       let enExposureSummary = MockENExposureDetectionSummary()
@@ -1007,9 +1022,15 @@ class ExposureManagerTests: XCTestCase {
       completionHandler(enExposureSummary, nil)
       return Progress()
     }
+    enManagerMock.getExposureInfoHandler = { summary, useExplanation, completionHandler in
+      completionHandler([MockENExposureInfo()], nil)
+      return Progress()
+    }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       return URL(fileURLWithPath: "url")
