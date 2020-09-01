@@ -2,7 +2,6 @@ import React from "react"
 import { Alert, Share } from "react-native"
 import { render, fireEvent, within } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "."
@@ -15,9 +14,6 @@ import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
 
 jest.mock("@react-navigation/native")
-
-jest.mock("react-native-safe-area-context")
-;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
 
 jest.mock("../utils/index")
 const mockedApplicationName = "applicationName"
