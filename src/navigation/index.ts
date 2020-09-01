@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { Platform, StatusBar } from "react-native"
+import { StatusBar } from "react-native"
 import {
   NavigationParams,
   NavigationScreenProp,
@@ -193,10 +193,6 @@ export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-      if (Platform.OS === "android") {
-        StatusBar.setBackgroundColor("transparent")
-        StatusBar.setTranslucent(true)
-      }
     }, [statusBarStyle]),
   )
 }
