@@ -9,6 +9,7 @@ import { Screens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
 import { factories } from "../../factories"
 import * as ExposureAPI from "../exposureNotificationAPI"
+import Logger from "../../logger"
 
 jest.mock("@react-navigation/native")
 jest.mock("../../logger.ts")
@@ -91,7 +92,7 @@ describe("PublishConsentScreen", () => {
       const newRevisionToken = "newRevisionToken"
       const successfulPostResponse = {
         kind: "success" as const,
-        body: { revisionToken: newRevisionToken },
+        revisionToken: newRevisionToken,
       }
       const postDiagnosisKeysSpy = jest.spyOn(ExposureAPI, "postDiagnosisKeys")
       postDiagnosisKeysSpy.mockResolvedValue(successfulPostResponse)
@@ -125,20 +126,61 @@ describe("PublishConsentScreen", () => {
     })
   })
 
+  describe("on a no-op key submission", () => {
+    it("displays a message explaining the cause to the user", async () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+      const newKeysInserted = 1
+      const noOpPostResponse = {
+        kind: "no-op" as const,
+        reason: ExposureAPI.PostKeysNoOpReason.NoTokenForExistingKeys,
+        newKeysInserted,
+        message: "no_token_for_existing_keys",
+      }
+      const postDiagnosisKeysSpy = jest.spyOn(ExposureAPI, "postDiagnosisKeys")
+      postDiagnosisKeysSpy.mockResolvedValueOnce(noOpPostResponse)
+      const alertSpy = jest.spyOn(Alert, "alert")
+
+      const { getByLabelText } = render(
+        <PublishConsentForm
+          hmacKey="hmacKey"
+          certificate="certificate"
+          exposureKeys={[]}
+          storeRevisionToken={jest.fn()}
+          revisionToken=""
+          appPackageName=""
+          regionCodes={[""]}
+        />,
+      )
+
+      fireEvent.press(getByLabelText("I Understand and Consent"))
+
+      await waitFor(() => {
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Attempt to submit existing keys",
+          `Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were ${newKeysInserted} new keys added.`,
+          [{ onPress: expect.any(Function) }],
+        )
+      })
+      jest.resetAllMocks()
+    })
+  })
+
   describe("on a failed key submission", () => {
-    describe("when there is a server error", () => {
-      it("displays an alert with the error message from the server", async () => {
+    describe("when the error is unknown", () => {
+      it("displays an alert with the error message", async () => {
         const errorMessage = "error"
         const postDiagnosisKeysSpy = jest.spyOn(
           ExposureAPI,
           "postDiagnosisKeys",
         )
         postDiagnosisKeysSpy.mockResolvedValueOnce({
-          kind: "failure" as const,
-          error: "Unknown",
+          kind: "failure",
+          nature: ExposureAPI.PostKeysError.Unknown,
           message: errorMessage,
         })
         const alertSpy = jest.spyOn(Alert, "alert")
+        const loggerSpy = jest.spyOn(Logger, "error")
 
         const { getByLabelText } = render(
           <PublishConsentForm
@@ -156,22 +198,32 @@ describe("PublishConsentScreen", () => {
 
         await waitFor(() => {
           expect(alertSpy).toHaveBeenCalledWith(
-            "Something went wrong",
-            errorMessage,
+            "Failed to submit the exposure data",
+            `The operation could not be completed. ${errorMessage}`,
+          )
+          expect(loggerSpy).toHaveBeenCalledWith(
+            `IncompleteKeySumbission.Unknown.${errorMessage}`,
           )
         })
+        jest.resetAllMocks()
       })
     })
 
-    describe("when there is an unhandled exception", () => {
-      it("displays an alert with a generic message", async () => {
+    describe("when the request processing fails", () => {
+      it("displays an alert with the error message", async () => {
         const errorMessage = "error"
         const postDiagnosisKeysSpy = jest.spyOn(
           ExposureAPI,
           "postDiagnosisKeys",
         )
-        postDiagnosisKeysSpy.mockRejectedValueOnce(new Error(errorMessage))
+        postDiagnosisKeysSpy.mockResolvedValueOnce({
+          kind: "failure",
+          nature: ExposureAPI.PostKeysError.RequestFailed,
+          message: errorMessage,
+        })
+
         const alertSpy = jest.spyOn(Alert, "alert")
+        const loggerSpy = jest.spyOn(Logger, "error")
 
         const { getByLabelText } = render(
           <PublishConsentForm
@@ -190,9 +242,13 @@ describe("PublishConsentScreen", () => {
         await waitFor(() => {
           expect(alertSpy).toHaveBeenCalledWith(
             "Something went wrong",
-            errorMessage,
+            `The operation could not be completed. ${errorMessage}`,
+          )
+          expect(loggerSpy).toHaveBeenCalledWith(
+            `IncompleteKeySumbission.RequestFailed.${errorMessage}`,
           )
         })
+        jest.resetAllMocks()
       })
     })
   })

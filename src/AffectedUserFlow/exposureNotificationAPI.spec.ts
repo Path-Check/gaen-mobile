@@ -1,4 +1,8 @@
-import { postDiagnosisKeys } from "./exposureNotificationAPI"
+import {
+  postDiagnosisKeys,
+  PostKeysNoOpReason,
+  PostKeysError,
+} from "./exposureNotificationAPI"
 import { ExposureKey } from "../exposureKey"
 
 describe("postDiagnosisKeys", () => {
@@ -43,14 +47,12 @@ describe("postDiagnosisKeys", () => {
   })
 
   describe("on a successful request", () => {
-    it("returns a body with the revision token", async () => {
-      const jsonResponse = {
-        revisionToken: "revisionToken",
-      }
+    it("returns a success response with the revisionToken", async () => {
+      const revisionToken = "revisionToken"
 
       ;(fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValueOnce(jsonResponse),
+        json: jest.fn().mockResolvedValueOnce({ revisionToken }),
       })
 
       const result = await postDiagnosisKeys(
@@ -64,7 +66,39 @@ describe("postDiagnosisKeys", () => {
 
       expect(result).toEqual({
         kind: "success",
-        body: jsonResponse,
+        revisionToken,
+      })
+    })
+  })
+
+  describe("on a no op response", () => {
+    it("returns a NoTokenForExistingKeys response if the error corresponds", async () => {
+      const newKeysInserted = 0
+      const message = "no revision token, but sent existing keys"
+      const jsonResponse = {
+        error: message,
+        insertedExposures: newKeysInserted,
+      }
+
+      ;(fetch as jest.Mock).mockResolvedValueOnce({
+        ok: false,
+        json: jest.fn().mockResolvedValueOnce(jsonResponse),
+      })
+
+      const result = await postDiagnosisKeys(
+        [],
+        [],
+        "certificate",
+        "hmacKey",
+        "appPackageName",
+        "revisionToken",
+      )
+
+      expect(result).toEqual({
+        kind: "no-op",
+        reason: PostKeysNoOpReason.NoTokenForExistingKeys,
+        newKeysInserted,
+        message,
       })
     })
   })
@@ -88,7 +122,7 @@ describe("postDiagnosisKeys", () => {
 
         expect(result).toEqual({
           kind: "failure",
-          error: "Internal",
+          nature: PostKeysError.RequestFailed,
           message: errorMessage,
         })
       })
@@ -113,7 +147,7 @@ describe("postDiagnosisKeys", () => {
 
         expect(result).toEqual({
           kind: "failure",
-          error: "Unknown",
+          nature: PostKeysError.Unknown,
           message: error,
         })
       })
