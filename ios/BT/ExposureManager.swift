@@ -322,50 +322,57 @@ final class ExposureManager: NSObject {
         do {
           try self.downloadedPackages.unpack { urls in
             self.localUncompressedURLs = urls
-
-            // TODO: Fetch configuration from API
-            let configuration = ExposureConfiguration.placeholder
-            self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
-                                             diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
-              if let error = error {
-                self.finish(.failure(error),
-                            processedFileCount: processedFileCount,
-                            lastProcessedUrlPath: lastProcessedUrlPath,
-                            progress: progress,
-                            completionHandler: completionHandler)
-                return
+            self.apiClient.request(ExposureConfigurationRequest.get,
+                                           requestType: .exposureConfiguration) { (result) in
+              var configuration = ExposureConfiguration.placeholder
+              switch result {
+              case.success(let exposureConfiguration):
+                configuration = exposureConfiguration
+              case .failure(_):
+                break
               }
-              if let summary = summary, ExposureManager.score(summary: summary, with: configuration) {
-                let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-                self.manager.getExposureInfo(summary: summary,
-                                             userExplanation: userExplanation) { exposures, error in
-                  if let error = error {
-                    self.finish(.failure(error),
+              self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
+                                               diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
+                if let error = error {
+                  self.finish(.failure(error),
+                              processedFileCount: processedFileCount,
+                              lastProcessedUrlPath: lastProcessedUrlPath,
+                              progress: progress,
+                              completionHandler: completionHandler)
+                  return
+                }
+                if let summary = summary, ExposureManager.score(summary: summary, with: configuration) {
+                  let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
+                  self.manager.getExposureInfo(summary: summary,
+                                               userExplanation: userExplanation) { exposures, error in
+                    if let error = error {
+                      self.finish(.failure(error),
+                                  processedFileCount: processedFileCount,
+                                  lastProcessedUrlPath: lastProcessedUrlPath,
+                                  progress: progress,
+                                  completionHandler: completionHandler)
+                      return
+                    }
+                    let newExposures = (exposures ?? []).map { exposure in
+                      Exposure(id: UUID().uuidString,
+                               date: exposure.date.posixRepresentation,
+                               duration: exposure.duration,
+                               totalRiskScore: exposure.totalRiskScore,
+                               transmissionRiskLevel: exposure.transmissionRiskLevel)
+                    }
+                    self.finish(.success(newExposures),
                                 processedFileCount: processedFileCount,
                                 lastProcessedUrlPath: lastProcessedUrlPath,
                                 progress: progress,
                                 completionHandler: completionHandler)
-                    return
                   }
-                  let newExposures = (exposures ?? []).map { exposure in
-                    Exposure(id: UUID().uuidString,
-                             date: exposure.date.posixRepresentation,
-                             duration: exposure.duration,
-                             totalRiskScore: exposure.totalRiskScore,
-                             transmissionRiskLevel: exposure.transmissionRiskLevel)
-                  }
-                  self.finish(.success(newExposures),
+                } else {
+                  self.finish(.success([]),
                               processedFileCount: processedFileCount,
                               lastProcessedUrlPath: lastProcessedUrlPath,
                               progress: progress,
                               completionHandler: completionHandler)
                 }
-              } else {
-                self.finish(.success([]),
-                            processedFileCount: processedFileCount,
-                            lastProcessedUrlPath: lastProcessedUrlPath,
-                            progress: progress,
-                            completionHandler: completionHandler)
               }
             }
           }
