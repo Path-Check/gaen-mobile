@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
-import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
 import ActivateLocation from "../Activation/ActivateLocation"
@@ -19,6 +18,7 @@ import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
+import AcceptEula from "../Activation/AcceptEula"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -29,7 +29,6 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { isLocationOffAndNeeded } = useHasLocationRequirements()
 
   interface ActivationStep {
     screenName: ActivationScreen
@@ -56,9 +55,11 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const activationStepsAndroid: ActivationStep[] = isLocationOffAndNeeded
-    ? [activateProximityTracing, activateLocation]
-    : [activateProximityTracing]
+  const activationStepsAndroid: ActivationStep[] = [
+    activateProximityTracing,
+    activateLocation,
+    { screenName: "AcceptEula", component: AcceptEula },
+  ]
 
   const activationSteps = Platform.select({
     ios: activationStepsIOS,

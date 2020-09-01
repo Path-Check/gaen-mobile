@@ -58,6 +58,7 @@ const useIsLocationOffAndNeeded = (): Pick<
 > => {
   const { isLocationOn } = useIsLocationOn()
   const { isLocationNeeded } = useIsLocationNeeded()
+  console.log({ isLocationNeeded })
 
   const isLocationOffAndNeeded = isLocationNeeded && !isLocationOn
 

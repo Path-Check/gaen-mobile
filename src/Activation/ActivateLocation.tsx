@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import {
   Alert,
   ScrollView,
@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -21,6 +22,14 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
+  const { isLocationOn } = useHasLocationRequirements()
+
+  useEffect(() => {
+    if (isLocationOn) {
+      console.log("in locations screen", { isLocationOn })
+      navigation.navigate(ActivationScreens.ActivationSummary)
+    }
+  })
 
   const handleOnPressMaybeLater = () => {
     navigation.navigate(ActivationScreens.ActivationSummary)

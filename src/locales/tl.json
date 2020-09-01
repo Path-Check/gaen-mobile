@@ -75,7 +75,9 @@
     "self_assessment": "Kalusugan"
   },
   "onboarding": {
-    "notification_header": "Nais mo bang makatanggap ng mga abiso o mga notifications kung mayroon kang napuntahan o nakasalamuha na tao, gamit o lugar na posibleng may virus?"
+    "notification_header": "Nais mo bang makatanggap ng mga abiso o mga notifications kung mayroon kang napuntahan o nakasalamuha na tao, gamit o lugar na posibleng may virus?",
+    "privacy_policy": "Patakaran sa Pagkapribado",
+    "terms_header_title": "Mga Tuntunin ng Paggamit"
   },
   "screen_titles": {
     "about": "Tungkol",

@@ -184,6 +184,7 @@
     "notification_subheader1": "¿Cuando recibiré la notificación?",
     "notification_subheader2": "¿Cómo funciona?",
     "notification_subheader3": "Esta aplicación no te protege de la infección por COVID-19.",
+    "privacy_policy": "Política de privacidad",
     "protect_privacy_button": "Cómo protegemos su privacidad",
     "protect_privacy": {
       "body_1": "Estos códigos no contienen información personal y cambian cada 10 - 20 minutos para proteger su identidad.",
@@ -224,6 +225,7 @@
     "screen5_image_label": "Una persona conversando virtualmente con un profesional de la salud",
     "select_language": "Seleccionar idioma",
     "step": "Paso {{currentStep}} de {{totalSteps}}",
+    "terms_header_title": "Términos de Uso",
     "welcome_image_label": "Una ilustración de personas usando máscaras, conectadas como nodos en una red."
   },
   "report_issue": {
