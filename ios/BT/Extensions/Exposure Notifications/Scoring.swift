@@ -5,8 +5,8 @@ extension ExposureManager {
 
   private static let matchedKeyCountMax = 3
 
-  static func score(summary: ENExposureDetectionSummary,
-                    with configuration: ExposureConfiguration) -> Bool {
+  static func isAboveScoreThreshold(summary: ENExposureDetectionSummary,
+                                    with configuration: ExposureConfiguration) -> Bool {
     let matchedKeyCount = Int(summary.matchedKeyCount)
     if matchedKeyCount == 0 {
       return false
@@ -17,20 +17,14 @@ extension ExposureManager {
       // exceeded the threshold.
       let weightedDurationForKeys = weightedDuration(summary: summary,
                                               config: configuration) / matchedKeyCount
-      if (weightedDurationForKeys >= configuration.triggerThresholdWeightedDuration * 60) {
-        return true
-      } else {
-        return false
-      }
+      let isAboveAverageDurationThreshold = (weightedDurationForKeys >= configuration.triggerThresholdWeightedDuration * 60)
+      return isAboveAverageDurationThreshold
     } else {
       // If the # matched keys is 4 or more, average duration is no longer
       // useful because we have reached the cap of the attenuation buckets.
       // (This assumes a trigger threshold of 15 minutes.)
-      if weightedDuration(summary: summary, config: configuration) >= configuration.maxWeightedDuration {
-        return true
-      } else {
-        return false
-      }
+      let isAboveMaxDurationThreshold = (weightedDuration(summary: summary, config: configuration) >= configuration.maxWeightedDuration)
+      return isAboveMaxDurationThreshold
     }
   }
 

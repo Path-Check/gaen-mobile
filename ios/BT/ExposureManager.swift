@@ -341,7 +341,8 @@ final class ExposureManager: NSObject {
                               completionHandler: completionHandler)
                   return
                 }
-                if let summary = summary, ExposureManager.score(summary: summary, with: configuration) {
+                if let summary = summary, ExposureManager.isAboveScoreThreshold(summary: summary,
+                                                                                with: configuration) {
                   let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
                   self.manager.getExposureInfo(summary: summary,
                                                userExplanation: userExplanation) { exposures, error in

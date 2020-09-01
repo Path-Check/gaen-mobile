@@ -98,7 +98,6 @@ class APIClientMock: APIClient {
   }
 
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
-    print("ACA??")
   }
 
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
@@ -884,8 +883,8 @@ class ExposureManagerTests: XCTestCase {
     enExposureSummary.matchedKeyCountHandler = {
       return 0
     }
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: ExposureConfiguration.placeholder))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: ExposureConfiguration.placeholder))
   }
 
   func testExposureSummaryScoringMatchedKey1() {
@@ -897,28 +896,28 @@ class ExposureManagerTests: XCTestCase {
       return [900,0,0]
     }
     let configuration = ExposureConfiguration.placeholder
-    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
-                                        with: configuration))
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [800,0,0]
     }
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: configuration))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [0,900,0]
     }
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: configuration))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [600,600,0]
     }
-    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
-                                        with: configuration))
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [0,0,1800]
     }
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: configuration))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
   }
 
   func testExposureSummaryScoringMatchedKey3() {
@@ -930,13 +929,13 @@ class ExposureManagerTests: XCTestCase {
       return [900,1800,0]
     }
     let configuration = ExposureConfiguration.placeholder
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: configuration))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [1800,1800,0]
     }
-    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
-                                        with: configuration))
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
   }
 
   func testExposureSummaryScoringMatchedKey4() {
@@ -948,13 +947,13 @@ class ExposureManagerTests: XCTestCase {
       return [900,1800,0]
     }
     let configuration = ExposureConfiguration.placeholder
-    XCTAssertFalse(ExposureManager.score(summary: enExposureSummary,
-                                         with: configuration))
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
     enExposureSummary.attenuationDurationsHandler = {
       return [1800,1800,0]
     }
-    XCTAssertTrue(ExposureManager.score(summary: enExposureSummary,
-                                        with: configuration))
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
   }
 
   func testDetectExposuresSuccessScoreBellow() {
