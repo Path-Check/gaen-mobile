@@ -17,6 +17,7 @@ export type NavigationProp = NavigationScreenProp<
 export type ActivationScreen =
   | "AcceptEula"
   | "ActivateProximityTracing"
+  | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
 
@@ -25,6 +26,7 @@ export const ActivationScreens: {
 } = {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
+  ActivateLocation: "ActivateLocation",
   NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
 }
