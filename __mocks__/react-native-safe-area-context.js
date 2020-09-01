@@ -1,1 +1,1 @@
-export const useSafeAreaInsets = jest.fn().mockReturnValue({insets: {bottom: 0}})
+export const useSafeAreaInsets = jest.fn().mockReturnValue({ insets: { bottom: 0 } })
