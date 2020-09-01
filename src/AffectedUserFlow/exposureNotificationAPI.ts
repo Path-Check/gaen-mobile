@@ -1,6 +1,7 @@
 import env from "react-native-config"
 
 import { ExposureKey } from "../exposureKey"
+import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
 
 const exposureUrl = env.POST_DIAGNOSIS_KEYS_URL
 
@@ -23,6 +24,7 @@ interface PostKeysResponseBody {
 export enum PostKeysError {
   Unknown = "Unknown",
   RequestFailed = "RequestFailed",
+  Timeout = "Timeout",
 }
 
 export type PostKeysFailure = {
@@ -52,6 +54,7 @@ type PostKeysResponse = PostKeysSuccess | PostKeysNoOp
 type RegionCode = string
 
 const DEFAULT_PADDING = ""
+const TIMEOUT = 5000
 
 export const postDiagnosisKeys = async (
   exposureKeys: ExposureKey[],
@@ -72,13 +75,18 @@ export const postDiagnosisKeys = async (
   }
 
   try {
-    const response = await fetch(exposureUrl, {
-      method: "POST",
-      headers: defaultHeaders,
-      body: JSON.stringify(data),
-    })
+    const response = (await fetchWithTimeout(
+      exposureUrl,
+      {
+        method: "POST",
+        headers: defaultHeaders,
+        body: JSON.stringify(data),
+      },
+      TIMEOUT,
+    )) as Response
 
     const json: PostKeysResponseBody = await response.json()
+
     if (response.ok) {
       return { kind: "success", revisionToken: json.revisionToken }
     } else {
@@ -103,7 +111,10 @@ export const postDiagnosisKeys = async (
   } catch (e) {
     return {
       kind: "failure",
-      nature: PostKeysError.RequestFailed,
+      nature:
+        e.message === TIMEOUT_ERROR
+          ? PostKeysError.Timeout
+          : PostKeysError.RequestFailed,
       message: e.message,
     }
   }

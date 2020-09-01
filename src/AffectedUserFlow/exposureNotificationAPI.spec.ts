@@ -4,6 +4,9 @@ import {
   PostKeysError,
 } from "./exposureNotificationAPI"
 import { ExposureKey } from "../exposureKey"
+import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
+
+jest.mock("./fetchWithTimeout")
 
 describe("postDiagnosisKeys", () => {
   it("executes requests with default headers and serialized data", async () => {
@@ -14,9 +17,8 @@ describe("postDiagnosisKeys", () => {
     const appPackageName = "appPackageName"
     const revisionToken = "revisionToken"
 
-    const fetchSpy = jest.fn()
-    ;(fetch as jest.Mock) = fetchSpy
-    fetchSpy.mockRejectedValueOnce("error")
+    const fetchWithTimeoutSpy = fetchWithTimeout as jest.Mock
+    fetchWithTimeoutSpy.mockRejectedValueOnce("error")
 
     await postDiagnosisKeys(
       exposureKeys,
@@ -28,29 +30,33 @@ describe("postDiagnosisKeys", () => {
     )
 
     // The constants are taken from "__mocks__/react-native-config.js"
-    expect(fetchSpy).toHaveBeenCalledWith("POST_DIAGNOSIS_KEYS_URL", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accept: "application/json",
+    expect(fetchWithTimeoutSpy).toHaveBeenCalledWith(
+      "POST_DIAGNOSIS_KEYS_URL",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          temporaryExposureKeys: exposureKeys,
+          regions: regionCodes,
+          appPackageName,
+          verificationPayload: certificate,
+          hmackey: hmacKey,
+          padding: "",
+          revisionToken,
+        }),
       },
-      body: JSON.stringify({
-        temporaryExposureKeys: exposureKeys,
-        regions: regionCodes,
-        appPackageName,
-        verificationPayload: certificate,
-        hmackey: hmacKey,
-        padding: "",
-        revisionToken,
-      }),
-    })
+      5000,
+    )
   })
 
   describe("on a successful request", () => {
     it("returns a success response with the revisionToken", async () => {
       const revisionToken = "revisionToken"
 
-      ;(fetch as jest.Mock).mockResolvedValueOnce({
+      ;(fetchWithTimeout as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({ revisionToken }),
       })
@@ -80,7 +86,7 @@ describe("postDiagnosisKeys", () => {
         insertedExposures: newKeysInserted,
       }
 
-      ;(fetch as jest.Mock).mockResolvedValueOnce({
+      ;(fetchWithTimeout as jest.Mock).mockResolvedValueOnce({
         ok: false,
         json: jest.fn().mockResolvedValueOnce(jsonResponse),
       })
@@ -107,9 +113,9 @@ describe("postDiagnosisKeys", () => {
     describe("when the error is a catched exception", () => {
       it("returns the error message if the request errors", async () => {
         const errorMessage = "errorMessage"
-        const fetchSpy = jest.fn()
-        ;(fetch as jest.Mock) = fetchSpy
-        fetchSpy.mockRejectedValueOnce(new Error(errorMessage))
+        ;(fetchWithTimeout as jest.Mock).mockRejectedValueOnce(
+          new Error(errorMessage),
+        )
 
         const result = await postDiagnosisKeys(
           [],
@@ -128,10 +134,33 @@ describe("postDiagnosisKeys", () => {
       })
     })
 
+    describe("when the error is a timeout", () => {
+      it("returns a timeout failure", async () => {
+        const timeoutError = new Error(TIMEOUT_ERROR)
+        ;(fetchWithTimeout as jest.Mock).mockRejectedValueOnce(timeoutError)
+
+        const result = await postDiagnosisKeys(
+          [],
+          [],
+          "certificate",
+          "hmacKey",
+          "appPackageName",
+          "revisionToken",
+        )
+
+        expect(result).toEqual({
+          kind: "failure",
+          nature: PostKeysError.Timeout,
+          message: TIMEOUT_ERROR,
+        })
+      })
+    })
+
     describe("when the error is a failed response from the server", () => {
       it("returns the error on the response ", async () => {
         const error = "error"
-        ;(fetch as jest.Mock).mockResolvedValueOnce({
+
+        ;(fetchWithTimeout as jest.Mock).mockResolvedValueOnce({
           ok: false,
           json: jest.fn().mockResolvedValueOnce({ error }),
         })
