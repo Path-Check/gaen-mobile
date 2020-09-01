@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { usePermissionsContext, ENStatus } from "../PermissionsContext"
+import { useActivationContext } from "../ActivationContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
@@ -14,8 +15,7 @@ import {
   GradientBackground,
 } from "../components"
 import { getLocalNames } from "../locales/languages"
-import { useBluetoothStatus } from "../useBluetoothStatus"
-import { useHasLocationRequirements } from "./useHasLocationRequirements"
+
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
 import { LocationActivationStatus } from "./LocationActivationStatus"
@@ -35,13 +35,14 @@ const Home: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
-  const isBluetoothOn = useBluetoothStatus()
   const {
+    isBluetoothOn,
+    isLocationOn,
     isLocationNeeded,
-    isLocationOffAndNeeded,
-  } = useHasLocationRequirements()
-  const { exposureNotifications } = usePermissionsContext()
+  } = useActivationContext()
+  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
+  const { exposureNotifications } = usePermissionsContext()
   const isProximityTracingOn =
     exposureNotifications.status === ENStatus.AUTHORIZED_ENABLED
 

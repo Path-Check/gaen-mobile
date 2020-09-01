@@ -15,34 +15,32 @@ import { doesDeviceSupportLocationlessScanning } from "./gaen/nativeModule"
 import { AppState } from "react-native"
 
 export interface ActivationState {
-  btStatus: boolean
+  isBluetoothOn: boolean
   isLocationOn: boolean
   isLocationNeeded: boolean
-  isLocationOffAndNeeded: boolean
 }
 
 const initialState: ActivationState = {
-  btStatus: false,
+  isBluetoothOn: false,
   isLocationOn: false,
   isLocationNeeded: true,
-  isLocationOffAndNeeded: false,
 }
 
 export const ActivationContext = createContext<ActivationState>(initialState)
 
 const ActivationProvider: FunctionComponent = ({ children }) => {
-  const [btStatus, setBTStatus] = useState(false)
+  const [isBluetoothOn, setIsBluetoothOn] = useState(false)
   const [isLocationOn, setIsLocationOn] = useState(false)
   const [isLocationNeeded, setIsLocationNeeded] = useState(false)
 
-  // Bluetooth
   const fetchBTStatus = async (): Promise<boolean> => {
     return isBluetoothEnabled()
   }
+
   useEffect(() => {
     const determineBTStatus = async () => {
       const status = await fetchBTStatus()
-      setBTStatus(status)
+      setIsBluetoothOn(status)
     }
     determineBTStatus()
     AppState.addEventListener(determineOSListener(), () => determineBTStatus())
@@ -51,7 +49,6 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
     )
   }, [])
 
-  // Location
   const fetchIsLocationOn = async (): Promise<boolean> => {
     if (Platform.OS === "android") {
       return isLocationEnabled()
@@ -66,6 +63,7 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       return true
     }
   }
+
   useEffect(() => {
     const determineIsLocationOn = async () => {
       const status = await fetchIsLocationOn()
@@ -79,6 +77,7 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       determineIsLocationOn(),
     )
   }, [])
+
   useEffect(() => {
     const determineLocationIsNeeded = async () => {
       const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
@@ -86,15 +85,13 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
     }
     determineLocationIsNeeded()
   }, [])
-  const isLocationOffAndNeeded = isLocationNeeded && !isLocationOn
 
   return (
     <ActivationContext.Provider
       value={{
-        btStatus,
+        isBluetoothOn,
         isLocationOn,
         isLocationNeeded,
-        isLocationOffAndNeeded,
       }}
     >
       {children}
