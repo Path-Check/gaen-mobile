@@ -52,11 +52,7 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
-    return Platform.select({
-      android: isLocationEnabled(),
-      ios: new Promise(() => true),
-      default: new Promise(() => true),
-    })
+    return isLocationEnabled()
   }
 
   const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {

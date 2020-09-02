@@ -46,11 +46,11 @@ const App: FunctionComponent = () => {
               userHasCompletedOnboarding={onboardingIsComplete}
             >
               <PermissionsProvider>
-                <ExposureProvider>
-                  <SystemServicesProvider>
+                <SystemServicesProvider>
+                  <ExposureProvider>
                     <MainNavigator />
-                  </SystemServicesProvider>
-                </ExposureProvider>
+                  </ExposureProvider>
+                </SystemServicesProvider>
               </PermissionsProvider>
             </OnboardingProvider>
           </ConfigurationProvider>
