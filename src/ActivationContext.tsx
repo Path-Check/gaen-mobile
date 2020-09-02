@@ -5,14 +5,11 @@ import React, {
   FunctionComponent,
   useContext,
 } from "react"
-import { Platform } from "react-native"
+import { AppState, Platform } from "react-native"
 
 import { isBluetoothEnabled } from "./gaen/nativeModule"
-
 import { isLocationEnabled } from "./gaen/nativeModule"
 import { doesDeviceSupportLocationlessScanning } from "./gaen/nativeModule"
-
-import { AppState } from "react-native"
 
 export interface ActivationState {
   isBluetoothOn: boolean
@@ -42,9 +39,14 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       const status = await fetchBTStatus()
       setIsBluetoothOn(status)
     }
+
     determineIsBluetoothOn()
-    addListener(determineIsBluetoothOn)
-    return removeListener(determineIsBluetoothOn)
+
+    const handleAppStateChange = () => {
+      determineIsBluetoothOn()
+    }
+    addListener(handleAppStateChange)
+    return removeListener(handleAppStateChange)
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
@@ -68,9 +70,14 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       const status = await fetchIsLocationOn()
       setIsLocationOn(status)
     }
+
     determineIsLocationOn()
-    addListener(determineIsLocationOn)
-    return removeListener(determineIsLocationOn)
+
+    const handleAppStateChange = () => {
+      determineIsLocationOn()
+    }
+    addListener(handleAppStateChange)
+    return removeListener(handleAppStateChange)
   }, [])
 
   useEffect(() => {
@@ -78,6 +85,7 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
       setIsLocationNeeded(!supportsLocationlessScanning)
     }
+
     determineLocationIsNeeded()
   }, [])
 
@@ -114,10 +122,12 @@ const determineOSListener = (): ListenerMethod => {
   })
 }
 
-const addListener = (listener: () => void) => {
-  return AppState.addEventListener(determineOSListener(), () => listener())
+const addListener = (handleAppStateChange: () => void): void => {
+  AppState.addEventListener(determineOSListener(), () => handleAppStateChange())
 }
 
-const removeListener = (listener: () => void) => {
-  return AppState.removeEventListener(determineOSListener(), () => listener())
+const removeListener = (handleAppStateChange: () => void): void => {
+  AppState.removeEventListener(determineOSListener(), () =>
+    handleAppStateChange(),
+  )
 }
