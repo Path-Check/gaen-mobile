@@ -13,7 +13,7 @@ import {
 } from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
-import { ActivationProvider } from "./src/ActivationContext"
+import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 
 Bugsnag.start()
@@ -47,9 +47,9 @@ const App: FunctionComponent = () => {
             >
               <PermissionsProvider>
                 <ExposureProvider>
-                  <ActivationProvider>
+                  <SystemServicesProvider>
                     <MainNavigator />
-                  </ActivationProvider>
+                  </SystemServicesProvider>
                 </ExposureProvider>
               </PermissionsProvider>
             </OnboardingProvider>
