@@ -111,7 +111,6 @@ const useSystemServicesContext = (): SystemServicesState => {
 export { SystemServicesProvider, useSystemServicesContext }
 
 type ListenerMethod = "focus" | "change"
-
 const determineOSListener = (): ListenerMethod => {
   return Platform.select({
     ios: "change",
