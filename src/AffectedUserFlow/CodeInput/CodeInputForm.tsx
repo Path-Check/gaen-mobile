@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   Keyboard,
+  ScrollView,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -31,7 +32,7 @@ import {
 } from "../../styles"
 import Logger from "../../logger"
 
-const defaultErrorMessage = " "
+const defaultErrorMessage = ""
 
 const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -155,7 +156,10 @@ const CodeInputForm: FunctionComponent = () => {
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
   return (
-    <View style={style.container} testID={"affected-user-code-input-form"}>
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      testID={"affected-user-code-input-form"}
+    >
       <View style={style.backButtonContainer}>
         <TouchableOpacity
           onPress={handleOnPressBack}
@@ -228,7 +232,7 @@ const CodeInputForm: FunctionComponent = () => {
         customButtonStyle={style.button}
         hasRightArrow
       />
-    </View>
+    </ScrollView>
   )
 }
 
@@ -246,13 +250,12 @@ const LoadingIndicator = () => {
 }
 
 const indicatorWidth = 120
-
 const style = StyleSheet.create({
-  container: {
-    paddingHorizontal: Spacing.medium,
-    paddingTop: 110,
-    paddingBottom: Spacing.small,
+  contentContainer: {
     backgroundColor: Colors.primaryLightBackground,
+    paddingTop: 110,
+    paddingBottom: Spacing.xxxHuge,
+    paddingHorizontal: Spacing.medium,
   },
   backButtonContainer: {
     position: "absolute",
@@ -289,10 +292,9 @@ const style = StyleSheet.create({
   codeInput: {
     ...Forms.textInput,
     ...Typography.mediumBold,
-    height: 70,
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
-    lineHeight: Typography.largeLineHeight,
+    lineHeight: 0,
     letterSpacing: 8,
   },
   codeInputFocused: {

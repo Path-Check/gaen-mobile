@@ -99,6 +99,7 @@
       },
       "errors": {
         "unknown": "Failed to submit the exposure data",
+        "timeout": "The request took too long to complete",
         "description": "The operation could not be completed. {{message}}"
       }
     }
@@ -161,6 +162,7 @@
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Inactive",
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+      "tracing_off_subheader_location": "Enable Bluetooth, Proximity Tracing, and Location to get info about possible exposures",
       "tracing_on_header": "Active",
       "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
       "unauthorized_error_title": "Authorize in Settings"
@@ -176,6 +178,7 @@
   },
   "label": {
     "activate_proximity_tracing": "Activate Proximity Tracing",
+    "launch_activate_location": "Activate Location",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
@@ -205,6 +208,11 @@
     "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
+    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
+    "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
+    "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
+    "location_header": "Activate Location",
+    "location_subheader": "Why do I need to turn on my phone's location setting?",
     "please_read_the": "Please read the",
     "privacy_policy": "Privacy Policy",
     "eula": "End User Legal Agreement",

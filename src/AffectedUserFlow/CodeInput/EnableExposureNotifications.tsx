@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { TouchableOpacity, Linking, View, StyleSheet } from "react-native"
+import {
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+  View,
+  StyleSheet,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -22,8 +28,9 @@ const EnableExposureNotifications: FunctionComponent = () => {
   }
 
   return (
-    <View
+    <ScrollView
       style={style.container}
+      contentContainerStyle={style.contentContainer}
       testID={"affected-user-enable-exposure-notifications-screen"}
     >
       <View style={style.cancelButtonContainer}>
@@ -56,17 +63,19 @@ const EnableExposureNotifications: FunctionComponent = () => {
           label={t("common.settings")}
         />
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  contentContainer: {
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
     paddingTop: Layout.oneEighthHeight,
-    paddingBottom: 70,
+    paddingBottom: Spacing.xxxHuge,
     backgroundColor: Colors.primaryLightBackground,
   },
   cancelButtonContainer: {

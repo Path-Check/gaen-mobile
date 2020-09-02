@@ -209,6 +209,48 @@ describe("PublishConsentScreen", () => {
       })
     })
 
+    describe("when the request times out", () => {
+      it("displays an alert with the timeout error", async () => {
+        const errorMessage = "timeout"
+        const postDiagnosisKeysSpy = jest.spyOn(
+          ExposureAPI,
+          "postDiagnosisKeys",
+        )
+        postDiagnosisKeysSpy.mockResolvedValueOnce({
+          kind: "failure",
+          nature: ExposureAPI.PostKeysError.Timeout,
+          message: errorMessage,
+        })
+        const alertSpy = jest.spyOn(Alert, "alert")
+        const loggerSpy = jest.spyOn(Logger, "error")
+
+        const { getByLabelText } = render(
+          <PublishConsentForm
+            hmacKey="hmacKey"
+            certificate="certificate"
+            exposureKeys={[]}
+            storeRevisionToken={jest.fn()}
+            revisionToken=""
+            appPackageName=""
+            regionCodes={[""]}
+          />,
+        )
+
+        fireEvent.press(getByLabelText("I Understand and Consent"))
+
+        await waitFor(() => {
+          expect(alertSpy).toHaveBeenCalledWith(
+            "The request took too long to complete",
+            `The operation could not be completed. ${errorMessage}`,
+          )
+          expect(loggerSpy).toHaveBeenCalledWith(
+            `IncompleteKeySumbission.Timeout.${errorMessage}`,
+          )
+        })
+        jest.resetAllMocks()
+      })
+    })
+
     describe("when the request processing fails", () => {
       it("displays an alert with the error message", async () => {
         const errorMessage = "error"

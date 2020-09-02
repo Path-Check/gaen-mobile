@@ -33,14 +33,18 @@ def fetch_env
   staging_env_source = ".env.bt.staging"
   release_env_source = ".env.bt.release"
 
-  dev_env_url =
-  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt"
+  puts "Fetching configuration from pathcheck-mobile-resources commit #{mobile_resources_commit}"
+
+  base_url = "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/"
+
+  dev_env_url = 
+  "#{base_url}#{mobile_resources_commit}/environment/#{HA_LABEL}/.env.bt"
 
   staging_env_url =
-  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.staging"
+  "#{base_url}#{mobile_resources_commit}/environment/#{HA_LABEL}/.env.bt.staging"
 
   release_env_url =
-  "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/master/environment/#{HA_LABEL}/.env.bt.release"
+  "#{base_url}#{mobile_resources_commit}/environment/#{HA_LABEL}/.env.bt.release"
 
   fetch_and_write_file(dev_env_source, dev_env_url)
   fetch_and_write_file(staging_env_source, staging_env_url)

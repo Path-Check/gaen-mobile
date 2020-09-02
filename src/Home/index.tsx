@@ -1,20 +1,18 @@
 import React, { FunctionComponent } from "react"
-import {
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  View,
-} from "react-native"
+import { ScrollView, TouchableOpacity, StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
-import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { GlobalText, Button, GradientBackground } from "../components"
+import {
+  StatusBar,
+  GlobalText,
+  Button,
+  GradientBackground,
+} from "../components"
 import { getLocalNames } from "../locales/languages"
 import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useHasLocationRequirements } from "./useHasLocationRequirements"
@@ -37,11 +35,11 @@ const Home: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
-  const insets = useSafeAreaInsets()
-  const style = createStyle(insets)
-
   const isBluetoothOn = useBluetoothStatus()
-  const { isLocationOffAndNeeded } = useHasLocationRequirements()
+  const {
+    isLocationNeeded,
+    isLocationOffAndNeeded,
+  } = useHasLocationRequirements()
   const { exposureNotifications } = usePermissionsContext()
 
   const isProximityTracingOn =
@@ -62,15 +60,21 @@ const Home: FunctionComponent = () => {
   const headerText = appIsActive
     ? t("home.bluetooth.tracing_on_header")
     : t("home.bluetooth.tracing_off_header")
-  const subheaderText = appIsActive
-    ? t("home.bluetooth.all_services_on_subheader", { applicationName })
-    : t("home.bluetooth.tracing_off_subheader")
+  const subheaderText = () => {
+    if (appIsActive) {
+      return t("home.bluetooth.all_services_on_subheader", {
+        applicationName,
+      })
+    } else {
+      return isLocationNeeded
+        ? t("home.bluetooth.tracing_off_subheader_location")
+        : t("home.bluetooth.tracing_off_subheader")
+    }
+  }
 
   return (
     <>
-      <View style={style.statusBarContainer}>
-        <StatusBar />
-      </View>
+      <StatusBar backgroundColor={Colors.gradientPrimary100Lighter} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -103,7 +107,7 @@ const Home: FunctionComponent = () => {
               {headerText}
             </GlobalText>
             <GlobalText style={style.subheaderText} testID={"home-subheader"}>
-              {subheaderText}
+              {subheaderText()}
             </GlobalText>
           </View>
         </GradientBackground>
@@ -126,82 +130,75 @@ const Home: FunctionComponent = () => {
   )
 }
 
-const createStyle = (insets: EdgeInsets) => {
-  /* es-lint-disable-no-unused-styles */
-  return StyleSheet.create({
-    statusBarContainer: {
-      height: insets.top,
-      backgroundColor: Colors.gradientPrimary100Lighter,
-    },
-    topScrollViewBackground: {
-      position: "absolute",
-      top: "-100%",
-      left: 0,
-      right: 0,
-      backgroundColor: Colors.gradientPrimary100Lighter,
-      height: "100%",
-    },
-    container: {
-      backgroundColor: Colors.primaryLightBackground,
-    },
-    contentContainer: {
-      paddingBottom: Spacing.large,
-      backgroundColor: Colors.primaryLightBackground,
-    },
-    topContainer: {
-      width: "100%",
-      alignItems: "center",
-      paddingTop: Spacing.xxSmall,
-      paddingBottom: Spacing.xLarge,
-    },
-    languageButtonContainer: {
-      alignSelf: "center",
-      paddingVertical: Spacing.xxSmall,
-      paddingHorizontal: Spacing.large,
-      backgroundColor: Colors.transparentNeutral30,
-      borderRadius: Outlines.borderRadiusMax,
-      marginBottom: Spacing.large,
-    },
-    languageButtonText: {
-      ...Typography.body3,
-      letterSpacing: Typography.xLargeLetterSpacing,
-      color: Colors.primary150,
-      textAlign: "center",
-      textTransform: "uppercase",
-    },
-    topIcon: {
-      backgroundColor: Colors.white,
-      borderRadius: Outlines.borderRadiusMax,
-      padding: 10,
-      marginBottom: Spacing.large,
-    },
-    headerText: {
-      ...Typography.header1,
-      ...Typography.mediumBold,
-      color: Colors.white,
-      textAlign: "center",
-      marginBottom: Spacing.xxSmall,
-    },
-    subheaderText: {
-      ...Typography.body1,
-      fontSize: Typography.large,
-      paddingHorizontal: Spacing.medium,
-      color: Colors.white,
-      textAlign: "center",
-      marginBottom: Spacing.xxSmall,
-    },
-    bottomContainer: {
-      backgroundColor: Colors.primaryLightBackground,
-    },
-    buttonContainer: {
-      paddingTop: Spacing.medium,
-      paddingHorizontal: Spacing.small,
-    },
-    button: {
-      alignSelf: "center",
-      width: "100%",
-    },
-  })
-}
+const style = StyleSheet.create({
+  topScrollViewBackground: {
+    position: "absolute",
+    top: "-100%",
+    left: 0,
+    right: 0,
+    backgroundColor: Colors.gradientPrimary100Lighter,
+    height: "100%",
+  },
+  container: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  contentContainer: {
+    paddingBottom: Spacing.large,
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  topContainer: {
+    width: "100%",
+    alignItems: "center",
+    paddingTop: Spacing.xxSmall,
+    paddingBottom: Spacing.xLarge,
+  },
+  languageButtonContainer: {
+    alignSelf: "center",
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.large,
+    backgroundColor: Colors.transparentNeutral30,
+    borderRadius: Outlines.borderRadiusMax,
+    marginBottom: Spacing.large,
+  },
+  languageButtonText: {
+    ...Typography.body3,
+    letterSpacing: Typography.xLargeLetterSpacing,
+    color: Colors.primary150,
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+  topIcon: {
+    backgroundColor: Colors.white,
+    borderRadius: Outlines.borderRadiusMax,
+    padding: 10,
+    marginBottom: Spacing.large,
+  },
+  headerText: {
+    ...Typography.header1,
+    ...Typography.mediumBold,
+    color: Colors.white,
+    textAlign: "center",
+    marginBottom: Spacing.xxSmall,
+  },
+  subheaderText: {
+    ...Typography.body1,
+    fontSize: Typography.large,
+    paddingHorizontal: Spacing.medium,
+    color: Colors.white,
+    textAlign: "center",
+    marginBottom: Spacing.xxSmall,
+  },
+  bottomContainer: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  buttonContainer: {
+    paddingTop: Spacing.medium,
+    paddingHorizontal: Spacing.small,
+  },
+  button: {
+    alignSelf: "center",
+    width: "100%",
+  },
+})
 
 export default Home
