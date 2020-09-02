@@ -18,12 +18,14 @@ import { useVersionInfo } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
 import { reportAnIssue, ReportIssueError } from "../More/zendeskAPI"
 import { Icons } from "../assets"
+import { useStatusBarEffect } from "../navigation"
 
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = ""
 
 const ReportIssueForm: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
   const { versionInfo } = useVersionInfo()
 
