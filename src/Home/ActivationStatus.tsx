@@ -25,37 +25,59 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
 }) => {
   const { t } = useTranslation()
 
-  const bodyText = isActive ? t("common.enabled") : t("common.disabled")
-  const leftIcon = isActive ? Icons.CheckInCircle : Icons.XInCircle
-  const leftIconFill = isActive ? Colors.success100 : Colors.danger75
-  const rightIcon = isActive ? Icons.HomeInfo : Icons.Wrench
-  const onPress = isActive ? infoAction : fixAction
-  const accessibilityLabel = isActive
-    ? t("home.get_more_info", { technology: headerText })
-    : t("home.fix", { technology: headerText })
+  type Content = {
+    bodyText: string
+    leftIcon: string
+    leftIconFill: string
+    rightIcon: string
+    onPress: () => void
+    accessibilityLabel: string
+  }
+
+  const activeContent: Content = {
+    bodyText: t("common.enabled"),
+    leftIcon: Icons.CheckInCircle,
+    leftIconFill: Colors.success100,
+    rightIcon: Icons.HomeInfo,
+    onPress: infoAction,
+    accessibilityLabel: t("home.get_more_info", { technology: headerText }),
+  }
+
+  const inactiveContent: Content = {
+    bodyText: t("common.disabled"),
+    leftIcon: Icons.XInCircle,
+    leftIconFill: Colors.danger75,
+    rightIcon: Icons.Wrench,
+    onPress: fixAction,
+    accessibilityLabel: t("home.fix", { technology: headerText }),
+  }
+
+  const content = isActive ? activeContent : inactiveContent
 
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={content.onPress}
       style={style.activationStatusContainer}
       accessible
-      accessibilityLabel={accessibilityLabel}
+      accessibilityLabel={content.accessibilityLabel}
       testID={testID}
     >
       <View style={style.activationStatusLeftContainer}>
         <SvgXml
-          xml={leftIcon}
-          fill={leftIconFill}
+          xml={content.leftIcon}
+          fill={content.leftIconFill}
           width={Iconography.medium}
           height={Iconography.medium}
         />
         <View style={style.activationStatusTextContainer}>
           <GlobalText style={style.bottomHeaderText}>{headerText}</GlobalText>
-          <GlobalText style={style.bottomBodyText}>{bodyText}</GlobalText>
+          <GlobalText style={style.bottomBodyText}>
+            {content.bodyText}
+          </GlobalText>
         </View>
       </View>
       <View style={style.activationStatusRightContainer}>
-        <SvgXml xml={rightIcon} />
+        <SvgXml xml={content.rightIcon} />
       </View>
     </TouchableOpacity>
   )
