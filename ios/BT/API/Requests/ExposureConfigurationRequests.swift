@@ -17,7 +17,7 @@ enum ExposureConfigurationRequest: APIRequest {
   var path: String {
     switch self {
     case .get:
-      return "v1.config.json"
+      return ExposureConfiguration.configurationFileName
     }
   }
 

@@ -283,7 +283,8 @@ final class ExposureManager: NSObject {
       return progress
     }
 
-    apiClient.requestString(IndexFileRequest.get, requestType: .downloadKeys) { result in
+    apiClient.requestString(IndexFileRequest.get,
+                            requestType: .downloadKeys) { result in
       let dispatchGroup = DispatchGroup()
 
       switch result {
@@ -322,7 +323,7 @@ final class ExposureManager: NSObject {
         do {
           try self.downloadedPackages.unpack { urls in
             self.localUncompressedURLs = urls
-            self.apiClient.request(ExposureConfigurationRequest.get,
+            self.apiClient.downloadRequest(ExposureConfigurationRequest.get,
                                            requestType: .exposureConfiguration) { (result) in
               var configuration = ExposureConfiguration.placeholder
               switch result {
