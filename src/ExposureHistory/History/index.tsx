@@ -13,6 +13,7 @@ import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
 import { StatusBar, GlobalText } from "../../components"
+import { useStatusBarEffect } from "../../navigation/index"
 
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
@@ -33,6 +34,7 @@ const History: FunctionComponent<HistoryProps> = ({
   lastDetectionDate,
   exposures,
 }) => {
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false)
@@ -59,7 +61,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <>
-      <StatusBar />
+      <StatusBar backgroundColor={Colors.secondary10} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -106,7 +108,8 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xxHuge,
   },
   container: {
-    padding: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
+    paddingBottom: Spacing.medium,
     backgroundColor: Colors.secondary10,
   },
   headerRow: {

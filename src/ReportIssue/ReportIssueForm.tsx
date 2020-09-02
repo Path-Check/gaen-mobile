@@ -25,9 +25,9 @@ import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 const defaultErrorMessage = ""
 
 const ReportIssueForm: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
   const { versionInfo } = useVersionInfo()
-  useStatusBarEffect("light-content")
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")

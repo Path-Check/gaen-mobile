@@ -12,9 +12,8 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { GradientBackground } from "../components"
-import { GlobalText, Button } from "../components"
-import { ActivationScreens } from "../navigation"
+import { GlobalText, Button, GradientBackground } from "../components"
+import { ActivationScreens, useStatusBarEffect } from "../navigation"
 
 import {
   Forms,
@@ -24,11 +23,10 @@ import {
   Outlines,
   Typography,
 } from "../styles"
-import { useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 const AcceptEula: FunctionComponent = () => {
-  useStatusBarEffect("dark-content")
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const configuration = useConfigurationContext()
   const [boxChecked, toggleCheckbox] = useState(false)
   const { t } = useTranslation()
@@ -55,43 +53,45 @@ const AcceptEula: FunctionComponent = () => {
     : t("label.unchecked_checkbox")
 
   return (
-    <GradientBackground gradient={Colors.gradientPrimary10}>
-      <SafeAreaView style={style.container}>
-        <GlobalText style={style.headerText}>
-          {t("onboarding.terms_header_title")}
-        </GlobalText>
-        <EulaLink
-          docName={"onboarding.privacy_policy"}
-          onPress={linkToPrivacyPolicy}
-        />
-        <EulaLink docName={"onboarding.eula"} onPress={linkToEula} />
-        <View style={style.footerContainer}>
-          <TouchableOpacity
-            style={style.checkboxContainer}
-            onPress={() => toggleCheckbox(!boxChecked)}
-            accessible
-            accessibilityRole="checkbox"
-            accessibilityLabel={checkboxLabel}
-            testID="accept-terms-of-use-checkbox"
-          >
-            <SvgXml
-              xml={checkboxIcon}
-              fill={Colors.primary100}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-            <GlobalText style={style.checkboxText}>
-              {t("onboarding.eula_agree_terms_of_use")}
-            </GlobalText>
-          </TouchableOpacity>
-          <Button
-            onPress={handleOnPressNext}
-            disabled={!boxChecked}
-            label={t("common.continue")}
+    <>
+      <GradientBackground gradient={Colors.gradientPrimary10}>
+        <SafeAreaView style={style.container}>
+          <GlobalText style={style.headerText}>
+            {t("onboarding.terms_header_title")}
+          </GlobalText>
+          <EulaLink
+            docName={"onboarding.privacy_policy"}
+            onPress={linkToPrivacyPolicy}
           />
-        </View>
-      </SafeAreaView>
-    </GradientBackground>
+          <EulaLink docName={"onboarding.eula"} onPress={linkToEula} />
+          <View style={style.footerContainer}>
+            <TouchableOpacity
+              style={style.checkboxContainer}
+              onPress={() => toggleCheckbox(!boxChecked)}
+              accessible
+              accessibilityRole="checkbox"
+              accessibilityLabel={checkboxLabel}
+              testID="accept-terms-of-use-checkbox"
+            >
+              <SvgXml
+                xml={checkboxIcon}
+                fill={Colors.primary100}
+                width={Iconography.small}
+                height={Iconography.small}
+              />
+              <GlobalText style={style.checkboxText}>
+                {t("onboarding.eula_agree_terms_of_use")}
+              </GlobalText>
+            </TouchableOpacity>
+            <Button
+              onPress={handleOnPressNext}
+              disabled={!boxChecked}
+              label={t("common.continue")}
+            />
+          </View>
+        </SafeAreaView>
+      </GradientBackground>
+    </>
   )
 }
 
