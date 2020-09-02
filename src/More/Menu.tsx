@@ -7,19 +7,20 @@ import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components"
-import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
+import { Screens, MoreStackScreens } from "../navigation"
+import { useStatusBarEffect } from "../navigation/index"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
 const MenuScreen: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  useStatusBarEffect("light-content")
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
@@ -27,49 +28,51 @@ const MenuScreen: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView style={style.container}>
-      <View style={[style.section, style.firstSection]}>
-        <TouchableOpacity
-          onPress={handleOnPressSelectLanguage}
-          accessible
-          accessibilityLabel={t("more.select_language")}
-        >
-          <View style={[style.listItem, style.languageButtonContainer]}>
-            <SvgXml
-              xml={Icons.LanguagesIcon}
-              width={Iconography.small}
-              height={Iconography.small}
-              style={style.icon}
-              accessible
-              accessibilityLabel={t("label.language_icon")}
-            />
-            <GlobalText style={style.languageButtonText}>
-              {languageName}
-            </GlobalText>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={style.section}>
-        <SettingsListItem
-          label={t("screen_titles.about")}
-          onPress={() => navigation.navigate(MoreStackScreens.About)}
-        />
-        <SettingsListItem
-          label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(MoreStackScreens.Legal)}
-          lastItem
-        />
-      </View>
-      {showDebugMenu ? (
+    <>
+      <ScrollView style={style.container}>
+        <View style={[style.section, style.firstSection]}>
+          <TouchableOpacity
+            onPress={handleOnPressSelectLanguage}
+            accessible
+            accessibilityLabel={t("more.select_language")}
+          >
+            <View style={[style.listItem, style.languageButtonContainer]}>
+              <SvgXml
+                xml={Icons.LanguagesIcon}
+                width={Iconography.small}
+                height={Iconography.small}
+                style={style.icon}
+                accessible
+                accessibilityLabel={t("label.language_icon")}
+              />
+              <GlobalText style={style.languageButtonText}>
+                {languageName}
+              </GlobalText>
+            </View>
+          </TouchableOpacity>
+        </View>
         <View style={style.section}>
           <SettingsListItem
-            label="EN Debug Menu"
-            onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+            label={t("screen_titles.about")}
+            onPress={() => navigation.navigate(MoreStackScreens.About)}
+          />
+          <SettingsListItem
+            label={t("screen_titles.legal")}
+            onPress={() => navigation.navigate(MoreStackScreens.Legal)}
             lastItem
           />
         </View>
-      ) : null}
-    </ScrollView>
+        {showDebugMenu ? (
+          <View style={style.section}>
+            <SettingsListItem
+              label="EN Debug Menu"
+              onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+              lastItem
+            />
+          </View>
+        ) : null}
+      </ScrollView>
+    </>
   )
 }
 

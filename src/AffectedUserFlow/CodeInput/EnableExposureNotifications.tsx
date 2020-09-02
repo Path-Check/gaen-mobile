@@ -10,12 +10,13 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText, Button } from "../../components"
-import { Screens } from "../../navigation"
+import { GlobalText, Button, StatusBar } from "../../components"
+import { Screens, useStatusBarEffect } from "../../navigation"
 import { Iconography, Colors, Typography, Spacing, Layout } from "../../styles"
 import { Icons } from "../../assets"
 
 const EnableExposureNotifications: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -28,42 +29,45 @@ const EnableExposureNotifications: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      testID={"affected-user-enable-exposure-notifications-screen"}
-    >
-      <View style={style.cancelButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressCancel}
-          accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={style.headerContainer}>
-        <GlobalText style={style.header}>
-          {t("export.enable_exposure_notifications_title")}
-        </GlobalText>
-        <GlobalText style={style.subheader}>
-          {t("export.enable_exposure_notifications_body")}
-        </GlobalText>
-      </View>
-      <View style={style.buttonContainer}>
-        <Button
-          onPress={handleOnPressOpenSettings}
-          label={t("common.settings")}
-        />
-      </View>
-    </ScrollView>
+    <>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        testID={"affected-user-enable-exposure-notifications-screen"}
+      >
+        <View style={style.cancelButtonContainer}>
+          <TouchableOpacity
+            onPress={handleOnPressCancel}
+            accessible
+            accessibilityLabel={t("export.code_input_button_cancel")}
+          >
+            <View style={style.cancelButtonInnerContainer}>
+              <SvgXml
+                xml={Icons.X}
+                fill={Colors.black}
+                width={Iconography.xSmall}
+                height={Iconography.xSmall}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={style.headerContainer}>
+          <GlobalText style={style.header}>
+            {t("export.enable_exposure_notifications_title")}
+          </GlobalText>
+          <GlobalText style={style.subheader}>
+            {t("export.enable_exposure_notifications_body")}
+          </GlobalText>
+        </View>
+        <View style={style.buttonContainer}>
+          <Button
+            onPress={handleOnPressOpenSettings}
+            label={t("common.settings")}
+          />
+        </View>
+      </ScrollView>
+    </>
   )
 }
 

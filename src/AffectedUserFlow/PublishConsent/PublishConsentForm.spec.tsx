@@ -14,7 +14,11 @@ import Logger from "../../logger"
 jest.mock("@react-navigation/native")
 jest.mock("../../logger.ts")
 
-describe("PublishConsentScreen", () => {
+describe("PublishConsentForm", () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   it("navigates to the home screen when user cancels", () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
@@ -162,7 +166,6 @@ describe("PublishConsentScreen", () => {
           [{ onPress: expect.any(Function) }],
         )
       })
-      jest.resetAllMocks()
     })
   })
 
@@ -205,7 +208,6 @@ describe("PublishConsentScreen", () => {
             `IncompleteKeySumbission.Unknown.${errorMessage}`,
           )
         })
-        jest.resetAllMocks()
       })
     })
 
@@ -247,7 +249,6 @@ describe("PublishConsentScreen", () => {
             `IncompleteKeySumbission.Timeout.${errorMessage}`,
           )
         })
-        jest.resetAllMocks()
       })
     })
 
@@ -290,7 +291,6 @@ describe("PublishConsentScreen", () => {
             `IncompleteKeySumbission.RequestFailed.${errorMessage}`,
           )
         })
-        jest.resetAllMocks()
       })
     })
   })

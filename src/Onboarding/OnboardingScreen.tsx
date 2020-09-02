@@ -8,14 +8,14 @@ import {
   ImageSourcePropType,
   ViewStyle,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import LinearGradient from "react-native-linear-gradient"
+import { SafeAreaView } from "react-navigation"
 
-import { GlobalText, Button } from "../components"
+import { StatusBar, GlobalText, Button } from "../components"
 import {
   Screens,
   OnboardingScreens,
@@ -56,13 +56,13 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   onboardingScreenContent,
   onboardingScreenActions,
 }: OnboardingScreenProps) => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  useStatusBarEffect("dark-content")
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
@@ -74,8 +74,11 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
 
   return (
     <>
-      <SafeAreaView style={style.topSafeArea} />
-      <SafeAreaView style={style.bottomSafeArea}>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <SafeAreaView
+        style={{ flex: 1 }}
+        forceInset={{ top: "never", bottom: "always" }}
+      >
         <View style={style.header}>
           <TouchableOpacity onPress={handleOnPressSelectLanguage}>
             <LinearGradient
@@ -178,26 +181,17 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
   )
 }
 
-const iosHeaderHeight = 65
-const androidHeaderHeight = 90
+const iosPaddingTop = 65
+const androidPaddingTop = 90
 const headerHeight = Platform.select({
-  ios: iosHeaderHeight,
-  android: androidHeaderHeight,
-  default: iosHeaderHeight,
+  ios: iosPaddingTop,
+  android: androidPaddingTop,
+  default: iosPaddingTop,
 })
 
 const style = StyleSheet.create({
-  topSafeArea: {
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  bottomSafeArea: {
-    flex: 1,
-    backgroundColor: Colors.secondary10,
-  },
   header: {
     position: "absolute",
-    top: 0,
-    height: headerHeight,
     width: "100%",
     zIndex: Layout.zLevel1,
     flexDirection: "row",

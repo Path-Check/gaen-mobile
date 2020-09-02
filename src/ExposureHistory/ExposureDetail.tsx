@@ -19,7 +19,7 @@ const ExposureDetail: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
-  useStatusBarEffect("light-content")
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
   const {
     healthAuthorityName,

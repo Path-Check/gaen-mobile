@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { StatusBar } from "react-native"
+import { Platform, StatusBar, StatusBarStyle } from "react-native"
 import {
   NavigationParams,
   NavigationScreenProp,
@@ -187,12 +187,16 @@ export const Stacks: { [key in Stack]: Stack } = {
   ReportIssue: "ReportIssue",
 }
 
-export type StatusBarStyle = "dark-content" | "light-content"
-
-export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
+export const useStatusBarEffect = (
+  statusBarStyle: StatusBarStyle,
+  backgroundColor: string,
+): void => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
-    }, [statusBarStyle]),
+      if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor(backgroundColor)
+      }
+    }, [statusBarStyle, backgroundColor]),
   )
 }

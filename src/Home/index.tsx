@@ -25,7 +25,7 @@ import { Icons } from "../assets"
 import { Spacing, Colors, Typography, Outlines, Iconography } from "../styles"
 
 const Home: FunctionComponent = () => {
-  useStatusBarEffect("light-content")
+  useStatusBarEffect("light-content", Colors.gradientPrimary100Lighter)
   const {
     t,
     i18n: { language: localeCode },

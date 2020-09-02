@@ -2,12 +2,12 @@ import React, { FunctionComponent } from "react"
 import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { useStatusBarEffect } from "../navigation"
 import { SvgXml } from "react-native-svg"
 
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
 import { GlobalText } from "../components"
 import { Icons } from "../assets"
+import { useStatusBarEffect } from "../navigation"
 
 import {
   Outlines,
@@ -19,13 +19,13 @@ import {
 } from "../styles"
 
 const LanguageSelection: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const {
     i18n: { language },
     t,
   } = useTranslation()
   const navigation = useNavigation()
   const localeList = getLocaleList()
-  useStatusBarEffect("light-content")
 
   type ListItem = {
     label: string
@@ -58,33 +58,35 @@ const LanguageSelection: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.container}>
-      <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
-          {t("onboarding.select_language")}
-        </GlobalText>
-        <TouchableOpacity
-          style={style.closeIconContainer}
-          onPress={navigation.goBack}
-        >
-          <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
-          />
-        </TouchableOpacity>
+    <>
+      <View style={style.container}>
+        <View style={style.headerContainer}>
+          <GlobalText style={style.headerText}>
+            {t("onboarding.select_language")}
+          </GlobalText>
+          <TouchableOpacity
+            style={style.closeIconContainer}
+            onPress={navigation.goBack}
+          >
+            <SvgXml
+              xml={Icons.XInCircle}
+              fill={Colors.neutral30}
+              width={Iconography.small}
+              height={Iconography.small}
+            />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          keyExtractor={(_, i) => `${i}`}
+          data={localeList}
+          renderItem={renderItem}
+          ItemSeparatorComponent={itemSeparatorComponent}
+          ListFooterComponent={itemSeparatorComponent}
+          alwaysBounceVertical={false}
+          style={style.languageButtonsContainer}
+        />
       </View>
-      <FlatList
-        keyExtractor={(_, i) => `${i}`}
-        data={localeList}
-        renderItem={renderItem}
-        ItemSeparatorComponent={itemSeparatorComponent}
-        ListFooterComponent={itemSeparatorComponent}
-        alwaysBounceVertical={false}
-        style={style.languageButtonsContainer}
-      />
-    </View>
+    </>
   )
 }
 
