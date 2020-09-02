@@ -58,35 +58,33 @@ const LanguageSelection: FunctionComponent = () => {
   }
 
   return (
-    <>
-      <View style={style.container}>
-        <View style={style.headerContainer}>
-          <GlobalText style={style.headerText}>
-            {t("onboarding.select_language")}
-          </GlobalText>
-          <TouchableOpacity
-            style={style.closeIconContainer}
-            onPress={navigation.goBack}
-          >
-            <SvgXml
-              xml={Icons.XInCircle}
-              fill={Colors.neutral30}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          keyExtractor={(_, i) => `${i}`}
-          data={localeList}
-          renderItem={renderItem}
-          ItemSeparatorComponent={itemSeparatorComponent}
-          ListFooterComponent={itemSeparatorComponent}
-          alwaysBounceVertical={false}
-          style={style.languageButtonsContainer}
-        />
+    <View style={style.container}>
+      <View style={style.headerContainer}>
+        <GlobalText style={style.headerText}>
+          {t("onboarding.select_language")}
+        </GlobalText>
+        <TouchableOpacity
+          style={style.closeIconContainer}
+          onPress={navigation.goBack}
+        >
+          <SvgXml
+            xml={Icons.XInCircle}
+            fill={Colors.neutral30}
+            width={Iconography.small}
+            height={Iconography.small}
+          />
+        </TouchableOpacity>
       </View>
-    </>
+      <FlatList
+        keyExtractor={(_, i) => `${i}`}
+        data={localeList}
+        renderItem={renderItem}
+        ItemSeparatorComponent={itemSeparatorComponent}
+        ListFooterComponent={itemSeparatorComponent}
+        alwaysBounceVertical={false}
+        style={style.languageButtonsContainer}
+      />
+    </View>
   )
 }
 
