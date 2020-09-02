@@ -8,6 +8,15 @@ import { GlobalText } from "../components"
 import { Icons } from "../assets"
 import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
 
+type Content = {
+  bodyText: string
+  leftIcon: string
+  leftIconFill: string
+  rightIcon: string
+  onPress: () => void
+  accessibilityLabel: string
+}
+
 interface ActivationStatusProps {
   headerText: string
   isActive: boolean
@@ -24,15 +33,6 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
   testID,
 }) => {
   const { t } = useTranslation()
-
-  type Content = {
-    bodyText: string
-    leftIcon: string
-    leftIconFill: string
-    rightIcon: string
-    onPress: () => void
-    accessibilityLabel: string
-  }
 
   const activeContent: Content = {
     bodyText: t("common.enabled"),
