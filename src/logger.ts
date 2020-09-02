@@ -1,12 +1,19 @@
+import env from "react-native-config"
 import Bugsnag from "@bugsnag/react-native"
 
 type Loggable = Record<string, unknown>
 
 class Logger {
+  static start(): void {
+    if (env.STAGING === "true") {
+      Bugsnag.start()
+    }
+  }
+
   static error(message: string, data?: Loggable): void {
     if (__DEV__) {
-      console.error(message, data)
-    } else {
+      console.warn(message, data)
+    } else if (env.STAGING === "true") {
       if (data) {
         Bugsnag.addMetadata("data", data)
       }
@@ -17,7 +24,7 @@ class Logger {
   static event(message: string, data?: Loggable): void {
     if (__DEV__) {
       console.warn(message, data)
-    } else {
+    } else if (env.STAGING === "true") {
       Bugsnag.leaveBreadcrumb(message, data)
     }
   }
@@ -25,7 +32,7 @@ class Logger {
   static addMetadata(section: string, data: Loggable): void {
     if (__DEV__) {
       console.log(`Adding to the metadata: ${section}`, data)
-    } else {
+    } else if (env.STAGING === "true") {
       Bugsnag.addMetadata(section, data)
     }
   }
