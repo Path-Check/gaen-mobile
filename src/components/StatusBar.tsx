@@ -12,7 +12,7 @@ const StatusBar: FunctionComponent<StatusBarProps> = ({ backgroundColor }) => {
 
   return (
     <View style={style.statusBarContainer}>
-      <RNStatusBar backgroundColor={backgroundColor} />
+      <RNStatusBar />
     </View>
   )
 }
