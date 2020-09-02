@@ -81,12 +81,12 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    const determineLocationIsNeeded = async () => {
+    const determineIsLocationNeeded = async () => {
       const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
       setIsLocationNeeded(!supportsLocationlessScanning)
     }
 
-    determineLocationIsNeeded()
+    determineIsLocationNeeded()
   }, [])
 
   return (
