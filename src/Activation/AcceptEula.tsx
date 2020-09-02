@@ -12,9 +12,8 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { GradientBackground, StatusBar } from "../components"
-import { GlobalText, Button } from "../components"
-import { ActivationScreens } from "../navigation"
+import { GlobalText, Button, GradientBackground } from "../components"
+import { ActivationScreens, useStatusBarEffect } from "../navigation"
 
 import {
   Forms,
@@ -27,6 +26,7 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 
 const AcceptEula: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const configuration = useConfigurationContext()
   const [boxChecked, toggleCheckbox] = useState(false)
   const { t } = useTranslation()
@@ -54,7 +54,6 @@ const AcceptEula: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <GradientBackground gradient={Colors.gradientPrimary10}>
         <SafeAreaView style={style.container}>
           <GlobalText style={style.headerText}>
