@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../components"
 import { Stacks, ActivationScreen, ActivationScreens } from "./index"
-import { useActivationContext } from "../ActivationContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
 import ActivateLocation from "../Activation/ActivateLocation"
@@ -29,7 +29,7 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { isLocationNeeded } = useActivationContext()
+  const { isLocationNeeded } = useSystemServicesContext()
 
   interface ActivationStep {
     screenName: ActivationScreen

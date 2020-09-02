@@ -13,7 +13,7 @@ import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
-import { useActivationContext } from "../ActivationContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -26,7 +26,7 @@ const ActivationSummary: FunctionComponent = () => {
     isBluetoothOn,
     isLocationOn,
     isLocationNeeded,
-  } = useActivationContext()
+  } = useSystemServicesContext()
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const {

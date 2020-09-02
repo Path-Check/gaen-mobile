@@ -7,7 +7,7 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "."
 import { PermissionsContext, ENStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
-import { ActivationContext } from "../ActivationContext"
+import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { isPlatformiOS } from "../utils/index"
 import { factories } from "../factories"
@@ -62,7 +62,7 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
               isLocationOn: true,
@@ -70,7 +70,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -108,7 +108,7 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
               isLocationOn: true,
@@ -116,7 +116,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -145,7 +145,7 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
               isLocationOn: true,
@@ -153,7 +153,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -181,7 +181,7 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
               isLocationOn: true,
@@ -189,7 +189,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -209,7 +209,7 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
               isLocationOn: true,
@@ -217,7 +217,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -335,7 +335,7 @@ describe("Home", () => {
     describe("and location is on", () => {
       it("location is shown as enabled", () => {
         const { getByTestId } = render(
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
               isLocationOn: true,
@@ -343,7 +343,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>,
+          </SystemServicesContext.Provider>,
         )
 
         const locationStatusContainer = getByTestId(
@@ -358,7 +358,7 @@ describe("Home", () => {
     describe("and the location is off", () => {
       it("location is shown as disabled", () => {
         const { getByTestId } = render(
-          <ActivationContext.Provider
+          <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
               isLocationOn: false,
@@ -366,7 +366,7 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </ActivationContext.Provider>,
+          </SystemServicesContext.Provider>,
         )
 
         const locationStatusContainer = getByTestId(
@@ -384,7 +384,7 @@ describe("Home", () => {
   describe("When the device supports locationless scanning", () => {
     it("location is not shown", () => {
       const { queryByTestId } = render(
-        <ActivationContext.Provider
+        <SystemServicesContext.Provider
           value={{
             isBluetoothOn: true,
             isLocationOn: true,
@@ -392,7 +392,7 @@ describe("Home", () => {
           }}
         >
           <Home />
-        </ActivationContext.Provider>,
+        </SystemServicesContext.Provider>,
       )
 
       const locationStatusContainer = queryByTestId(

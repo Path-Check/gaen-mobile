@@ -3,7 +3,7 @@ import { Alert, Linking } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useActivationContext } from "../ActivationContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
 import { HomeScreens } from "../navigation"
 
@@ -13,7 +13,7 @@ export const LocationActivationStatus: FunctionComponent = () => {
   const {
     isLocationOn,
     isLocationNeeded: showLocationStatus,
-  } = useActivationContext()
+  } = useSystemServicesContext()
 
   const handleOnPressFix = () => {
     showFixLocationAlert()

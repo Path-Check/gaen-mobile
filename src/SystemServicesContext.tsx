@@ -11,21 +11,23 @@ import { isBluetoothEnabled } from "./gaen/nativeModule"
 import { isLocationEnabled } from "./gaen/nativeModule"
 import { doesDeviceSupportLocationlessScanning } from "./gaen/nativeModule"
 
-export interface ActivationState {
+export interface SystemServicesState {
   isBluetoothOn: boolean
   isLocationOn: boolean
   isLocationNeeded: boolean
 }
 
-const initialState: ActivationState = {
+const initialState: SystemServicesState = {
   isBluetoothOn: false,
   isLocationOn: false,
   isLocationNeeded: true,
 }
 
-export const ActivationContext = createContext<ActivationState>(initialState)
+export const SystemServicesContext = createContext<SystemServicesState>(
+  initialState,
+)
 
-const ActivationProvider: FunctionComponent = ({ children }) => {
+const SystemServicesProvider: FunctionComponent = ({ children }) => {
   const [isBluetoothOn, setIsBluetoothOn] = useState(false)
   const [isLocationOn, setIsLocationOn] = useState(false)
   const [isLocationNeeded, setIsLocationNeeded] = useState(false)
@@ -90,7 +92,7 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   return (
-    <ActivationContext.Provider
+    <SystemServicesContext.Provider
       value={{
         isBluetoothOn,
         isLocationOn,
@@ -98,19 +100,19 @@ const ActivationProvider: FunctionComponent = ({ children }) => {
       }}
     >
       {children}
-    </ActivationContext.Provider>
+    </SystemServicesContext.Provider>
   )
 }
 
-const useActivationContext = (): ActivationState => {
-  const context = useContext(ActivationContext)
+const useSystemServicesContext = (): SystemServicesState => {
+  const context = useContext(SystemServicesContext)
   if (context === undefined) {
-    throw new Error("ActivationContext muse be used with a provider")
+    throw new Error("SystemServicesContext muse be used with a provider")
   }
   return context
 }
 
-export { ActivationProvider, useActivationContext }
+export { SystemServicesProvider, useSystemServicesContext }
 
 type ListenerMethod = "focus" | "change"
 

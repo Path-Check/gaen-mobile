@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { usePermissionsContext, ENStatus } from "../PermissionsContext"
-import { useActivationContext } from "../ActivationContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
@@ -39,7 +39,7 @@ const Home: FunctionComponent = () => {
     isBluetoothOn,
     isLocationOn,
     isLocationNeeded,
-  } = useActivationContext()
+  } = useSystemServicesContext()
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const { exposureNotifications } = usePermissionsContext()

@@ -15,7 +15,7 @@ import { usePermissionsContext } from "../PermissionsContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
-import { useActivationContext } from "../ActivationContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
@@ -24,7 +24,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { exposureNotifications } = usePermissionsContext()
-  const { isLocationOn, isLocationNeeded } = useActivationContext()
+  const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const handleOnPressEnable = () => {
