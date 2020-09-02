@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Alert } from "react-native"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
-import { useBluetoothStatus } from "../useBluetoothStatus"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { HomeScreens } from "../navigation"
@@ -9,7 +9,7 @@ import { HomeScreens } from "../navigation"
 export const BluetoothActivationStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const isBluetoothOn = useBluetoothStatus()
+  const { isBluetoothOn } = useSystemServicesContext()
 
   const handleOnPressFix = () => {
     showFixBluetoothAlert()

@@ -12,6 +12,7 @@ import {
 } from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
+import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 
@@ -45,9 +46,11 @@ const App: FunctionComponent = () => {
               userHasCompletedOnboarding={onboardingIsComplete}
             >
               <PermissionsProvider>
-                <ExposureProvider>
-                  <MainNavigator />
-                </ExposureProvider>
+                <SystemServicesProvider>
+                  <ExposureProvider>
+                    <MainNavigator />
+                  </ExposureProvider>
+                </SystemServicesProvider>
               </PermissionsProvider>
             </OnboardingProvider>
           </ConfigurationProvider>

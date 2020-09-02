@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -22,7 +22,7 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { isLocationOn } = useHasLocationRequirements()
+  const { isLocationOn } = useSystemServicesContext()
 
   useEffect(() => {
     if (isLocationOn) {
