@@ -35,6 +35,7 @@ import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
 import Upload from "./upload"
 import WashHands from "./WashHands"
+import Wrench from "./wrench"
 import X from "./x"
 import XInCircle from "./xInCircle"
 
@@ -76,6 +77,7 @@ export const Icons = {
   StateUnknown,
   Upload,
   WashHands,
+  Wrench,
   XInCircle,
   X,
 }
