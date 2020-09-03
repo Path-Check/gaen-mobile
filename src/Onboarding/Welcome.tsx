@@ -36,7 +36,7 @@ const Welcome: FunctionComponent = () => {
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <GradientBackground
         gradient={Colors.gradientPrimary10}
-        angleCenterY={0.25}
+        angleCenterY={0.75}
       >
         <View style={style.container}>
           <TouchableOpacity
