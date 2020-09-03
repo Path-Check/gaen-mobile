@@ -200,7 +200,7 @@ describe("Home", () => {
     })
   })
 
-  describe("When the exposure notification permissions are not enabled and the app is not authorized", () => {
+  describe("When the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", () => {
       const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const permissionProviderValue = createPermissionProviderValue(
@@ -235,6 +235,31 @@ describe("Home", () => {
         "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       )
       expect(proximityTracingDisabledText).toBeDefined()
+    })
+
+    it("requests exposure notifications and shows an unauthorized alert", () => {
+      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
+      const requestSpy = jest.fn()
+      const permissionProviderValue = createPermissionProviderValue(
+        isENAuthorizedAndEnabled,
+        requestSpy,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const alertSpy = jest.spyOn(Alert, "alert")
+
+      const fixProximityTracingButton = getByTestId(
+        "home-proximity-tracing-status-container",
+      )
+
+      fireEvent.press(fixProximityTracingButton)
+      expect(requestSpy).toHaveBeenCalled()
+      expect(alertSpy).toHaveBeenCalled()
     })
   })
 
