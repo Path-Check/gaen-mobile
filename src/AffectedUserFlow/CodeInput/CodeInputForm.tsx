@@ -298,7 +298,6 @@ const style = StyleSheet.create({
     ...Typography.mediumBold,
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
-    lineHeight: 0,
     letterSpacing: 8,
   },
   codeInputFocused: {
