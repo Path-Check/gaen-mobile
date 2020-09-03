@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react"
 import {
   Platform,
-  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -12,7 +11,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
@@ -22,19 +20,9 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { applicationName } = useApplicationName()
   const { exposureNotifications } = usePermissionsContext()
   const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
-
-  const handleOnPressEnable = () => {
-    exposureNotifications.request()
-    navigateToNextScreen()
-  }
-
-  const handleOnPressDontEnable = () => {
-    navigateToNextScreen()
-  }
 
   const navigateToNextScreen = () => {
     if (Platform.OS === "ios") {
@@ -46,25 +34,13 @@ const ActivateProximityTracing: FunctionComponent = () => {
     }
   }
 
-  const showProximityTracingAlert = () => {
-    Alert.alert(
-      t("onboarding.proximity_tracing_alert_header", { applicationName }),
-      t("onboarding.proximity_tracing_alert_body", { applicationName }),
-      [
-        {
-          text: t("common.cancel"),
-          style: "cancel",
-        },
-        {
-          text: t("common.enable"),
-          onPress: handleOnPressEnable,
-        },
-      ],
-    )
+  const handleOnPressActivateProximityTracing = () => {
+    exposureNotifications.request()
+    navigateToNextScreen()
   }
 
-  const handleOnPressActivateProximityTracing = () => {
-    showProximityTracingAlert()
+  const handleOnPressDontEnable = () => {
+    navigateToNextScreen()
   }
 
   return (
