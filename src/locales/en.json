@@ -100,7 +100,8 @@
       "errors": {
         "unknown": "Failed to submit the exposure data",
         "timeout": "The request took too long to complete",
-        "description": "The operation could not be completed. {{message}}"
+        "description": "The operation could not be completed. {{message}}",
+        "internal_server_error": "The server is experiencing problems, please try again later"
       }
     }
   },

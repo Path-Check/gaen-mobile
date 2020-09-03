@@ -33,4 +33,8 @@ end
 
 result = fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN)
 
-result ? exit 0 : exit 1
+if result
+  exit 0
+else
+  exit 1
+end

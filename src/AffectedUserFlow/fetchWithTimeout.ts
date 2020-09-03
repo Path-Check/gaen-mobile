@@ -7,7 +7,6 @@ const fetchWithTimeout = async (
   timeoutInMs = DEFAULT_TIMEOUT,
 ): Promise<Response | unknown> => {
   return new Promise((resolve, reject) => {
-    // Need to get a hold of the timeout function to avoid orphan promises
     const timeoutId = setTimeout(() => {
       reject(new Error(TIMEOUT_ERROR))
     }, timeoutInMs)
