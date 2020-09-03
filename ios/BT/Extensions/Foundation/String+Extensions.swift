@@ -48,6 +48,10 @@ extension String {
   static let cannotEnableNotifications = "Error enabling notifications"
   static let noLocalKeysFound = "No exposure keys on device, please try again in 60 minutes"
   static let noLastResetDateAvailable = "No lastResetDate available"
+  static let emptyMessageError = ""
+  static let dailyFileProcessingLimitExceeded = "Daily exposure detection file processing limit exceeded"
+  static let exposureDetectionCanceled = "Exposure Detection Cancelled"
+  
   // Computed Properties
   var gaenFilePaths: [String] {
     split(separator: "\n").map { String($0) }
