@@ -207,7 +207,6 @@
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
-    "activation_header_title": "App Setup",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",

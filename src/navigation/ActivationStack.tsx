@@ -115,8 +115,7 @@ const ActivationStack: FunctionComponent = () => {
     headerShown: true,
     headerLeft: () => null,
     headerTitleAlign: "left",
-    headerTitle: t("onboarding.activation_header_title"),
-    headerTitleStyle: style.headerTitle,
+    headerTitle: () => null,
   }
 
   return (
@@ -150,11 +149,6 @@ const ActivationStack: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
-  headerTitle: {
-    ...Typography.header4,
-    color: Colors.neutral100,
-    maxWidth: "50%",
-  },
   headerRight: {
     flexDirection: "row",
     alignItems: "center",
