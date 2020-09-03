@@ -89,6 +89,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       case PostKeysError.Timeout: {
         return t("export.publish_keys.errors.timeout")
       }
+      case PostKeysError.InternalServerError: {
+        return t("export.publish_keys.errors.internal_server_error")
+      }
       case PostKeysError.Unknown: {
         return t("export.publish_keys.errors.unknown")
       }
