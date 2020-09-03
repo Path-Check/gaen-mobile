@@ -153,6 +153,7 @@ const style = StyleSheet.create({
   headerTitle: {
     ...Typography.header4,
     color: Colors.neutral100,
+    maxWidth: "50%",
   },
   headerRight: {
     flexDirection: "row",
