@@ -17,7 +17,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 @ReactModule(name = DeviceInfoModule.MODULE_NAME)
 public class DeviceInfoModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "DeviceInfoModule";
-  public static final String TAG = "DeviceInfoModule";
+  private static final String TAG = "DeviceInfoModule";
 
   public DeviceInfoModule(@NonNull ReactApplicationContext reactContext) {
     super(reactContext);

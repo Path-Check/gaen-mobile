@@ -8,6 +8,24 @@ import XCTest
 
 // MARK: == Mocks ==
 
+class MockENExposureDetectionSummary: ENExposureDetectionSummary {
+
+  var matchedKeyCountHandler: (() -> UInt64)?
+  var attenuationDurationsHandler: (() -> [NSNumber])?
+
+  override var matchedKeyCount: UInt64 {
+    return matchedKeyCountHandler?() ?? 0
+  }
+
+  override var attenuationDurations: [NSNumber] {
+    return attenuationDurationsHandler?() ?? [0,0,0]
+  }
+
+  override var riskScoreSumFullRange: Double {
+    return 0
+  }
+}
+
 class MockENExposureInfo: ENExposureInfo {
 
   override var date: Date {
@@ -15,13 +33,20 @@ class MockENExposureInfo: ENExposureInfo {
   }
 }
 
-struct MockDownloadedPackage: DownloadedPackage {
+class MockDownloadedPackage: DownloadedPackage {
+
   var handler: () throws -> URL
-  func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL {
+
+  init(handler: @escaping () throws -> URL) {
+    self.handler = handler
+    super.init(keysBin: Data(), signature: Data())
+  }
+
+  override func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL {
     return try handler()
   }
 
-  func writeKeysEntry(toDirectory directory: URL, filename: String) throws -> URL {
+  override func writeKeysEntry(toDirectory directory: URL, filename: String) throws -> URL {
     return try handler()
   }
 
@@ -61,7 +86,7 @@ class BTSecureStorageMock: BTSecureStorage {
 class APIClientMock: APIClient {
 
   var requestHander: (Any, RequestType) -> (Any)
-  var downloadRequestHander: ((Any, RequestType) -> (Result<DownloadedPackage>))?
+  var downloadRequestHander: ((Any, RequestType) -> (Any))?
 
   init(requestHander: @escaping (Any, RequestType) -> (Any)) {
     self.requestHander = requestHander
@@ -71,16 +96,15 @@ class APIClientMock: APIClient {
     return nil
   }
 
+  func downloadRequest<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : DownloadableFile {
+    completion(downloadRequestHander!(request, requestType) as! Result<T.ResponseType>)
+  }
+
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping GenericCompletion) where T : APIRequest, T.ResponseType == Void {
 
   }
 
-  func downloadRequest<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<DownloadedPackage>) -> Void) where T : APIRequest {
-    completion(downloadRequestHander!(request, requestType))
-  }
-
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
-
   }
 
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
@@ -739,7 +763,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresFailsDownloadingKeysError() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      return Result<String>.success("indexFilePath\nanotherFilePath") as AnyObject
     }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
@@ -760,7 +784,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresUnpackagingError() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
       XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      return Result<String>.success("indexFilePath\nanotherFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       throw GenericError.unknown
@@ -781,6 +805,7 @@ class ExposureManagerTests: XCTestCase {
       }
     }
   }
+  
   func testDetectExposuresDetectExposureError() {
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
@@ -788,18 +813,21 @@ class ExposureManagerTests: XCTestCase {
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
       return Result<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-      return URL(fileURLWithPath: "url")
-    }
+         return URL(fileURLWithPath: "url")
+       }
     apiClientMock.downloadRequestHander = { (request, requestType) in
-      let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
-      XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-
-      return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      switch requestType {
+      case .downloadKeys:
+        let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
+        XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
+        XCTAssertEqual(requestType, RequestType.downloadKeys)
+        return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      default:
+        return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder)
+      }
     }
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
                                           apiClient: apiClientMock)
@@ -815,7 +843,14 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresGetExposureInfoError() {
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
+      let enExposureSummary = MockENExposureDetectionSummary()
+      enExposureSummary.matchedKeyCountHandler = {
+        return 1
+      }
+      enExposureSummary.attenuationDurationsHandler = {
+        return [900,0,0]
+      }
+      completionHandler(enExposureSummary, nil)
       return Progress()
     }
     enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in
@@ -823,18 +858,24 @@ class ExposureManagerTests: XCTestCase {
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-      return URL(fileURLWithPath: "url")
-    }
+         return URL(fileURLWithPath: "url")
+       }
     apiClientMock.downloadRequestHander = { (request, requestType) in
-      let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
-      XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-
-      return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      switch requestType {
+      case .downloadKeys:
+        let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
+        XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
+        XCTAssertEqual(requestType, RequestType.downloadKeys)
+        return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      default:
+        return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder)
+      }
     }
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
                                           apiClient: apiClientMock)
@@ -847,47 +888,187 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
-  func testDetectExposuresSuccess() {
-    let storeExposureExpectation = self.expectation(description: "The exposure gets stored")
+  func testExposureSummaryScoringMatchedKey0() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 0
+    }
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: ExposureConfiguration.placeholder))
+  }
+
+  func testExposureSummaryScoringMatchedKey1() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 1
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,0,0]
+    }
+    let configuration = ExposureConfiguration.placeholder
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [800,0,0]
+    }
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [0,900,0]
+    }
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [600,600,0]
+    }
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [0,0,1800]
+    }
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
+  }
+
+  func testExposureSummaryScoringMatchedKey3() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 3
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,1800,0]
+    }
+    let configuration = ExposureConfiguration.placeholder
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [1800,1800,0]
+    }
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
+  }
+
+  func testExposureSummaryScoringMatchedKey4() {
+    let enExposureSummary = MockENExposureDetectionSummary()
+    enExposureSummary.matchedKeyCountHandler = {
+      return 4
+    }
+    enExposureSummary.attenuationDurationsHandler = {
+      return [900,1800,0]
+    }
+    let configuration = ExposureConfiguration.placeholder
+    XCTAssertFalse(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                         with: configuration))
+    enExposureSummary.attenuationDurationsHandler = {
+      return [1800,1800,0]
+    }
+    XCTAssertTrue(ExposureManager.isAboveScoreThreshold(summary: enExposureSummary,
+                                                        with: configuration))
+  }
+
+  func testDetectExposuresSuccessScoreBellow() {
+    let storeExposureExpectation = self.expectation(description: "The exposure does not gets stored")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      return UserState()
+    }
     btSecureStorageMock.storeExposuresHandler = { exposures in
       storeExposureExpectation.fulfill()
-      XCTAssertEqual(exposures.count, 1)
+      XCTAssertEqual(exposures.count, 0)
     }
     let enManagerMock = ENManagerMock()
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
-      completionHandler(ENExposureDetectionSummary(), nil)
-      return Progress()
-    }
-    enManagerMock.getExposureInfoHandler = { summary, explanation, completionHandler in
-      completionHandler([MockENExposureInfo()], nil)
+      completionHandler(MockENExposureDetectionSummary(), nil)
       return Progress()
     }
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.success("indexFilePath") as AnyObject
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
+
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-      return URL(fileURLWithPath: "url")
-    }
+         return URL(fileURLWithPath: "url")
+       }
     apiClientMock.downloadRequestHander = { (request, requestType) in
-      let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
-      XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-
-      return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      switch requestType {
+      case .downloadKeys:
+        let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
+        XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
+        XCTAssertEqual(requestType, RequestType.downloadKeys)
+        return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      default:
+        return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder)
+      }
     }
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
                                           apiClient: apiClientMock,
                                           btSecureStorage: btSecureStorageMock)
     exposureManager.detectExposures { (result) in
       switch result {
-      case .success(let exposures):
-        XCTAssertEqual(exposures, 1)
+      case .success(let files):
+        XCTAssertEqual(files, 1)
       default: XCTFail()
       }
     }
     wait(for: [storeExposureExpectation], timeout:1)
+  }
+
+  func testDetectExposuresSuccessScoreAbove() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.storeExposuresHandler = { exposures in
+      XCTAssertEqual(exposures.count, 1)
+    }
+    btSecureStorageMock.userStateHandler = {
+      return UserState()
+    }
+    let enManagerMock = ENManagerMock()
+    enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
+      let enExposureSummary = MockENExposureDetectionSummary()
+      enExposureSummary.matchedKeyCountHandler = {
+        return 1
+      }
+      enExposureSummary.attenuationDurationsHandler = {
+        return [900,0,0]
+      }
+      completionHandler(enExposureSummary, nil)
+      return Progress()
+    }
+    enManagerMock.getExposureInfoHandler = { summary, useExplanation, completionHandler in
+      completionHandler([MockENExposureInfo()], nil)
+      return Progress()
+    }
+    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
+      if requestType == RequestType.downloadKeys {
+        return Result<String>.success("indexFilePath") as AnyObject
+      }
+      return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder) as AnyObject
+    }
+    let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
+         return URL(fileURLWithPath: "url")
+       }
+    apiClientMock.downloadRequestHander = { (request, requestType) in
+      switch requestType {
+      case .downloadKeys:
+        let diagnosisKeyUrlRequest = request as! DiagnosisKeyUrlRequest
+        XCTAssertEqual(diagnosisKeyUrlRequest.method, .get)
+        XCTAssertEqual(requestType, RequestType.downloadKeys)
+        return Result<DownloadedPackage>.success(mockDownloadedPackage)
+      default:
+        return Result<ExposureConfiguration>.success(ExposureConfiguration.placeholder)
+      }
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
+                                          apiClient: apiClientMock,
+                                          btSecureStorage: btSecureStorageMock)
+    exposureManager.detectExposures { (result) in
+      switch result {
+      case .success(let files):
+        XCTAssertEqual(files, 1)
+      default: XCTFail()
+      }
+    }
   }
 
   func testRegisterBackgroundTask() {

@@ -1,70 +1,58 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import {
-  Platform,
   Alert,
   ScrollView,
   SafeAreaView,
   View,
   StyleSheet,
   TouchableOpacity,
+  Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../PermissionsContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
 
-import { Spacing, Typography, Buttons, Colors } from "../styles"
+import { Colors, Spacing, Typography, Buttons } from "../styles"
 
-const ActivateProximityTracing: FunctionComponent = () => {
+const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { exposureNotifications } = usePermissionsContext()
-  const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
-  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+  const { isLocationOn } = useSystemServicesContext()
 
-  const handleOnPressEnable = () => {
-    exposureNotifications.request()
-    navigateToNextScreen()
-  }
-
-  const handleOnPressDontEnable = () => {
-    navigateToNextScreen()
-  }
-
-  const navigateToNextScreen = () => {
-    if (Platform.OS === "ios") {
-      navigation.navigate(ActivationScreens.NotificationPermissions)
-    } else {
-      isLocationOffAndNeeded
-        ? navigation.navigate(ActivationScreens.ActivateLocation)
-        : navigation.navigate(ActivationScreens.ActivationSummary)
+  useEffect(() => {
+    if (isLocationOn) {
+      navigation.navigate(ActivationScreens.ActivationSummary)
     }
+  })
+
+  const handleOnPressMaybeLater = () => {
+    navigation.navigate(ActivationScreens.ActivationSummary)
   }
 
-  const showProximityTracingAlert = () => {
+  const showLocationAccessAlert = () => {
     Alert.alert(
-      t("onboarding.proximity_tracing_alert_header", { applicationName }),
-      t("onboarding.proximity_tracing_alert_body", { applicationName }),
+      t("onboarding.location_alert_header", { applicationName }),
+      t("onboarding.location_alert_body"),
       [
         {
-          text: t("common.cancel"),
+          text: t("common.back"),
           style: "cancel",
         },
         {
-          text: t("common.enable"),
-          onPress: handleOnPressEnable,
+          text: t("common.settings"),
+          onPress: () => Linking.openSettings(),
         },
       ],
     )
   }
 
-  const handleOnPressActivateProximityTracing = () => {
-    showProximityTracingAlert()
+  const handleOnPressAllowLocationAccess = () => {
+    showLocationAccessAlert()
   }
 
   return (
@@ -76,35 +64,26 @@ const ActivateProximityTracing: FunctionComponent = () => {
       >
         <View style={style.content}>
           <GlobalText style={style.header}>
-            {t("onboarding.proximity_tracing_header")}
+            {t("onboarding.location_header")}
           </GlobalText>
           <GlobalText style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader1")}
+            {t("onboarding.location_subheader")}
           </GlobalText>
           <GlobalText style={style.body}>
-            {t("onboarding.proximity_tracing_body1")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader2")}
-          </GlobalText>
-          <GlobalText style={style.body}>
-            {t("onboarding.proximity_tracing_body2")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader3")}
+            {t("onboarding.location_body")}
           </GlobalText>
         </View>
         <View style={style.buttonsContainer}>
           <Button
-            onPress={handleOnPressActivateProximityTracing}
-            label={t("onboarding.proximity_tracing_button")}
+            onPress={handleOnPressAllowLocationAccess}
+            label={t("common.settings")}
           />
           <TouchableOpacity
-            onPress={handleOnPressDontEnable}
+            onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
           >
             <GlobalText style={style.secondaryButtonText}>
-              {t("common.no_thanks")}
+              {t("common.maybe_later")}
             </GlobalText>
           </TouchableOpacity>
         </View>
@@ -112,6 +91,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
     </SafeAreaView>
   )
 }
+
 const style = StyleSheet.create({
   safeArea: {
     backgroundColor: Colors.primaryLightBackground,
@@ -150,4 +130,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ActivateProximityTracing
+export default ActivateLocation

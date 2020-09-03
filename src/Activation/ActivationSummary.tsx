@@ -13,8 +13,7 @@ import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
-import { useBluetoothStatus } from "../useBluetoothStatus"
-import { useHasLocationRequirements } from "../Home/useHasLocationRequirements"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -23,8 +22,12 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { isLocationOffAndNeeded } = useHasLocationRequirements()
-  const isBluetoothOn = useBluetoothStatus()
+  const {
+    isBluetoothOn,
+    isLocationOn,
+    isLocationNeeded,
+  } = useSystemServicesContext()
+  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const {
     exposureNotifications: { status },
@@ -80,7 +83,7 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationOffAndNeeded
+    bodyText: isLocationNeeded
       ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
       : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
@@ -119,14 +122,13 @@ const ActivationSummary: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
     flexGrow: 1,
     justifyContent: "center",
     paddingTop: Spacing.small,
+    paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xLarge,
   },
   innerContainer: {

@@ -12,8 +12,12 @@ protocol ExposureNotificationManager {
 
   var exposureNotificationEnabled: Bool { get }
   func setExposureNotificationEnabled(_ enabled: Bool, completionHandler: @escaping ENErrorHandler)
-  @discardableResult func detectExposures(configuration: ENExposureConfiguration, diagnosisKeyURLs: [URL], completionHandler: @escaping ENDetectExposuresHandler) -> Progress
-  @discardableResult func getExposureInfo(summary: ENExposureDetectionSummary, userExplanation: String, completionHandler: @escaping ENGetExposureInfoHandler) -> Progress
+  @discardableResult func detectExposures(configuration: ENExposureConfiguration,
+                                          diagnosisKeyURLs: [URL],
+                                          completionHandler: @escaping ENDetectExposuresHandler) -> Progress
+  @discardableResult func getExposureInfo(summary: ENExposureDetectionSummary,
+                                          userExplanation: String,
+                                          completionHandler: @escaping ENGetExposureInfoHandler) -> Progress
   func getDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
   func getTestDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
 }

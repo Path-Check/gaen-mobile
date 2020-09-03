@@ -3,6 +3,8 @@ import ExposureNotification
 
 struct ExposureConfiguration: Codable {
 
+  static let configurationFileName = "v1.config.json"
+
   let minimumRiskScore: ENRiskScore
   let attenuationDurationThresholds: [Int]
   let attenuationLevelValues: [ENRiskLevelValue]
@@ -36,5 +38,29 @@ extension ExposureConfiguration {
     config.transmissionRiskLevelValues = transmissionRiskLevelValues.map { NSNumber(value: $0) }
     return config
   }
+}
 
+extension ExposureConfiguration: DownloadableFile {
+
+  static func create(from data: Data) -> ExposureConfiguration? {
+    guard var saveLocalPath = BTAPIClient.documentsDirectory else {
+      return nil
+    }
+    saveLocalPath.appendPathComponent(ExposureConfiguration.configurationFileName)
+    var exposureConfiguration: ExposureConfiguration
+    do {
+      exposureConfiguration = try JSONDecoder().decode(ExposureConfiguration.self,
+                                      from: data)
+      try data.write(to: saveLocalPath)
+    } catch {
+      do {
+        let jsonData = try Data(contentsOf: saveLocalPath)
+        exposureConfiguration = try JSONDecoder().decode(ExposureConfiguration.self,
+                                        from: jsonData)
+      } catch {
+        return nil
+      }
+    }
+    return exposureConfiguration
+  }
 }

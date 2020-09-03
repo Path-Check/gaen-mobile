@@ -4,8 +4,7 @@ export const xxSmall = 14
 export const xSmall = 18
 export const small = 30
 export const medium = 60
-export const large = 70
-export const extraLarge = 100
+export const large = 85
 
 const baseIcon: ViewStyle = {
   alignItems: "center",
@@ -28,10 +27,4 @@ export const largeIcon: ViewStyle = {
   ...baseIcon,
   height: large,
   width: large,
-}
-
-export const extraLargeIcon: ViewStyle = {
-  ...baseIcon,
-  height: extraLarge,
-  width: extraLarge,
 }

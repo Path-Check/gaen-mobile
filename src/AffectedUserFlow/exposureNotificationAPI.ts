@@ -1,6 +1,7 @@
 import env from "react-native-config"
 
 import { ExposureKey } from "../exposureKey"
+import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
 
 const exposureUrl = env.POST_DIAGNOSIS_KEYS_URL
 
@@ -9,29 +10,51 @@ const defaultHeaders = {
   accept: "application/json",
 }
 
+const EXISTING_KEYS_SENT_RESPONSE = "no revision token, but sent existing keys"
+
 type Token = string
 
-interface NetworkSuccess<T> {
-  kind: "success"
-  body: T
-}
-interface NetworkFailure<U> {
-  kind: "failure"
-  error: U
-  message?: string
-}
-
-export type NetworkResponse<T, U> = NetworkSuccess<T> | NetworkFailure<U>
-
-type PostKeysSuccess = {
+interface PostKeysResponseBody {
+  error: string
+  insertedExposures: number
+  padding: string
   revisionToken: Token
 }
 
-export type PostKeysError = "Unknown" | "Internal"
+export enum PostKeysError {
+  Unknown = "Unknown",
+  RequestFailed = "RequestFailed",
+  Timeout = "Timeout",
+}
+
+export type PostKeysFailure = {
+  kind: "failure"
+  nature: PostKeysError
+  message: string
+}
+
+export type PostKeysSuccess = {
+  kind: "success"
+  revisionToken: Token
+}
+
+export enum PostKeysNoOpReason {
+  NoTokenForExistingKeys = "NoTokenForExistingKeys",
+}
+
+export type PostKeysNoOp = {
+  kind: "no-op"
+  reason: PostKeysNoOpReason
+  newKeysInserted: number
+  message: string
+}
+
+type PostKeysResponse = PostKeysSuccess | PostKeysNoOp
 
 type RegionCode = string
 
 const DEFAULT_PADDING = ""
+const TIMEOUT = 5000
 
 export const postDiagnosisKeys = async (
   exposureKeys: ExposureKey[],
@@ -40,7 +63,7 @@ export const postDiagnosisKeys = async (
   hmacKey: string,
   appPackageName: string,
   revisionToken: string,
-): Promise<NetworkResponse<PostKeysSuccess, PostKeysError>> => {
+): Promise<PostKeysResponse | PostKeysFailure> => {
   const data = {
     temporaryExposureKeys: exposureKeys,
     regions: regionCodes,
@@ -52,23 +75,47 @@ export const postDiagnosisKeys = async (
   }
 
   try {
-    const response = await fetch(exposureUrl, {
-      method: "POST",
-      headers: defaultHeaders,
-      body: JSON.stringify(data),
-    })
+    const response = (await fetchWithTimeout(
+      exposureUrl,
+      {
+        method: "POST",
+        headers: defaultHeaders,
+        body: JSON.stringify(data),
+      },
+      TIMEOUT,
+    )) as Response
 
-    const json = await response.json()
+    const json: PostKeysResponseBody = await response.json()
+
     if (response.ok) {
-      return { kind: "success", body: json }
+      return { kind: "success", revisionToken: json.revisionToken }
     } else {
       switch (json.error) {
+        case EXISTING_KEYS_SENT_RESPONSE: {
+          return {
+            kind: "no-op",
+            reason: PostKeysNoOpReason.NoTokenForExistingKeys,
+            newKeysInserted: json.insertedExposures || 0,
+            message: json.error,
+          }
+        }
         default: {
-          return { kind: "failure", error: "Unknown", message: json.error }
+          return {
+            kind: "failure",
+            nature: PostKeysError.Unknown,
+            message: json.error,
+          }
         }
       }
     }
   } catch (e) {
-    return { kind: "failure", error: "Internal", message: e.message }
+    return {
+      kind: "failure",
+      nature:
+        e.message === TIMEOUT_ERROR
+          ? PostKeysError.Timeout
+          : PostKeysError.RequestFailed,
+      message: e.message,
+    }
   }
 }

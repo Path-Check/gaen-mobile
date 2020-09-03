@@ -17,6 +17,7 @@
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
 #import <Bugsnag/Bugsnag.h>
+#import "ReactNativeConfig.h"
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -43,7 +44,15 @@
   [[ExposureManager shared] registerBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+  
+  // Read dev environment variable
+#if DEBUG
   [Bugsnag start];
+#else
+  if ([[ReactNativeConfig envFor:@"STAGING"]  isEqual: @"true"]) {
+    [Bugsnag start];
+  }
+#endif
   return YES;
 }
 

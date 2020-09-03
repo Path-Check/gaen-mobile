@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
-  SafeAreaView,
   Alert,
   TouchableOpacity,
   StyleSheet,
@@ -15,9 +14,9 @@ import { ExposureKey } from "../../exposureKey"
 import { GlobalText, Button } from "../../components"
 
 import {
+  useStatusBarEffect,
   AffectedUserFlowScreens,
   Screens,
-  useStatusBarEffect,
 } from "../../navigation"
 import { Icons } from "../../assets"
 import {
@@ -29,7 +28,12 @@ import {
   Layout,
 } from "../../styles"
 import Logger from "../../logger"
-import * as ExposureAPI from "../exposureNotificationAPI"
+import {
+  postDiagnosisKeys,
+  PostKeysError,
+  PostKeysNoOp,
+  PostKeysFailure,
+} from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -50,12 +54,67 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   appPackageName,
   regionCodes,
 }) => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
+    const newKeysInserted = noOpResponse.newKeysInserted
+    Logger.addMetadata("publishKeys", {
+      noOpReason: noOpResponse.reason,
+      errorMessage: noOpResponse.message,
+      newKeysInserted,
+      revisionToken,
+    })
+    Logger.error(
+      `IncompleteKeySumbission.${noOpResponse.reason}.${noOpResponse.message}`,
+    )
+    Alert.alert(
+      t("export.publish_keys.no_op.title"),
+      t("export.publish_keys.no_op.no_token_for_existing_keys", {
+        newKeysInserted,
+      }),
+      [
+        {
+          onPress: () =>
+            navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete),
+        },
+      ],
+    )
+  }
+
+  const errorMessageTitle = (errorNature: PostKeysError) => {
+    switch (errorNature) {
+      case PostKeysError.Timeout: {
+        return t("export.publish_keys.errors.timeout")
+      }
+      case PostKeysError.Unknown: {
+        return t("export.publish_keys.errors.unknown")
+      }
+      case PostKeysError.RequestFailed: {
+        return t("common.something_went_wrong")
+      }
+    }
+  }
+
+  const handleFailureResponse = ({ nature, message }: PostKeysFailure) => {
+    Logger.addMetadata("publishKeys", {
+      errorMessage: message,
+      revisionToken,
+    })
+    Logger.error(`IncompleteKeySumbission.${nature}.${message}`)
+    Alert.alert(
+      errorMessageTitle(nature),
+      t("export.publish_keys.errors.description", {
+        message,
+      }),
+    )
+  }
+
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
-    const response = await ExposureAPI.postDiagnosisKeys(
+    const response = await postDiagnosisKeys(
       exposureKeys,
       regionCodes,
       certificate,
@@ -65,21 +124,14 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     )
     setIsLoading(false)
     if (response.kind === "success") {
-      storeRevisionToken(response.body.revisionToken)
+      storeRevisionToken(response.revisionToken)
       navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+    } else if (response.kind === "no-op") {
+      handleNoOpResponse(response)
     } else {
-      const errorMessage = response.message
-      Logger.addMetadata("publishKeys", {
-        errorMessage,
-        revisionToken,
-      })
-      Logger.error(`IncompleteKeySumbission.${response.error}.${errorMessage}`)
-      if (response.error === "Unknown") {
-        Alert.alert(t("common.something_went_wrong"), errorMessage)
-      }
+      handleFailureResponse(response)
     }
   }
-  useStatusBarEffect("dark-content")
 
   const handleOnPressBack = () => {
     navigation.goBack()
@@ -94,103 +146,91 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   return (
-    <>
-      <SafeAreaView style={style.topSafeArea} />
-      <SafeAreaView style={style.bottomSafeArea}>
-        <View style={style.outerContainer}>
-          <View style={style.navButtonContainer}>
-            <TouchableOpacity
-              onPress={handleOnPressBack}
-              accessible
-              accessibilityLabel={t("export.code_input_button_back")}
-            >
-              <View style={style.backButtonInnerContainer}>
-                <SvgXml
-                  xml={Icons.ArrowLeft}
-                  fill={Colors.black}
-                  width={Iconography.xSmall}
-                  height={Iconography.xSmall}
-                />
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={handleOnPressCancel}
-              accessible
-              accessibilityLabel={t("export.code_input_button_cancel")}
-            >
-              <View style={style.cancelButtonInnerContainer}>
-                <SvgXml
-                  xml={Icons.X}
-                  fill={Colors.black}
-                  width={Iconography.xSmall}
-                  height={Iconography.xSmall}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
-
-          <ScrollView
-            contentContainerStyle={style.contentContainer}
-            testID="publish-consent-form"
-            alwaysBounceVertical={false}
-          >
-            <View style={style.content}>
-              <GlobalText style={style.header}>
-                {t("export.publish_consent_title_bluetooth")}
-              </GlobalText>
-              <GlobalText style={style.bodyText}>
-                {t("export.consent_body_0")}
-              </GlobalText>
-              <GlobalText style={style.subheaderText}>
-                {t("export.consent_subheader_1")}
-              </GlobalText>
-              <GlobalText style={style.bodyText}>
-                {t("export.consent_body_1")}
-              </GlobalText>
-              <GlobalText style={style.subheaderText}>
-                {t("export.consent_subheader_2")}
-              </GlobalText>
-              <GlobalText style={style.bodyText}>
-                {t("export.consent_body_2")}
-              </GlobalText>
-            </View>
-
-            <Button
-              loading={isLoading}
-              label={t("export.consent_button_title")}
-              onPress={handleOnPressConfirm}
-              customButtonStyle={style.button}
-            />
-          </ScrollView>
-          <TouchableOpacity
-            style={style.bottomButtonContainer}
-            onPress={handleOnPressProtectPrivacy}
-          >
-            <GlobalText style={style.bottomButtonText}>
-              {t("onboarding.protect_privacy_button")}
-            </GlobalText>
+    <View style={style.outerContainer}>
+      <View style={style.navButtonContainer}>
+        <TouchableOpacity
+          onPress={handleOnPressBack}
+          accessible
+          accessibilityLabel={t("export.code_input_button_back")}
+        >
+          <View style={style.backButtonInnerContainer}>
             <SvgXml
-              xml={Icons.ChevronUp}
-              fill={Colors.primary150}
-              width={Iconography.xxSmall}
-              height={Iconography.xxSmall}
+              xml={Icons.ArrowLeft}
+              fill={Colors.black}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
             />
-          </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleOnPressCancel}
+          accessible
+          accessibilityLabel={t("export.code_input_button_cancel")}
+        >
+          <View style={style.cancelButtonInnerContainer}>
+            <SvgXml
+              xml={Icons.X}
+              fill={Colors.black}
+              width={Iconography.xSmall}
+              height={Iconography.xSmall}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        testID="publish-consent-form"
+        alwaysBounceVertical={false}
+      >
+        <View style={style.content}>
+          <GlobalText style={style.header}>
+            {t("export.publish_consent_title_bluetooth")}
+          </GlobalText>
+          <GlobalText style={style.bodyText}>
+            {t("export.consent_body_0")}
+          </GlobalText>
+          <GlobalText style={style.subheaderText}>
+            {t("export.consent_subheader_1")}
+          </GlobalText>
+          <GlobalText style={style.bodyText}>
+            {t("export.consent_body_1")}
+          </GlobalText>
+          <GlobalText style={style.subheaderText}>
+            {t("export.consent_subheader_2")}
+          </GlobalText>
+          <GlobalText style={style.bodyText}>
+            {t("export.consent_body_2")}
+          </GlobalText>
         </View>
-      </SafeAreaView>
-    </>
+
+        <Button
+          loading={isLoading}
+          label={t("export.consent_button_title")}
+          onPress={handleOnPressConfirm}
+          customButtonStyle={style.button}
+        />
+      </ScrollView>
+      <TouchableOpacity
+        style={style.bottomButtonContainer}
+        onPress={handleOnPressProtectPrivacy}
+      >
+        <GlobalText style={style.bottomButtonText}>
+          {t("onboarding.protect_privacy_button")}
+        </GlobalText>
+        <SvgXml
+          xml={Icons.ChevronUp}
+          fill={Colors.primary150}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+        />
+      </TouchableOpacity>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
-  topSafeArea: {
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  bottomSafeArea: {
-    flex: 1,
-    backgroundColor: Colors.secondary10,
-  },
   outerContainer: {
     flex: 1,
     backgroundColor: Colors.primaryLightBackground,

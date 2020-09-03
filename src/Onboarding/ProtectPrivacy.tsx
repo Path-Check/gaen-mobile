@@ -13,7 +13,6 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { useStatusBarEffect } from "../navigation"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -28,7 +27,6 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  useStatusBarEffect("dark-content")
 
   const headerContainerConditionalStyle = modalStyle && {
     ...style.headerContainerModal,

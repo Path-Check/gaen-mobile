@@ -2,22 +2,17 @@ import React from "react"
 import { Alert, Share } from "react-native"
 import { render, fireEvent, within } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "."
 import { PermissionsContext, ENStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
-import { isPlatformiOS } from "../utils/index"
-import { useBluetoothStatus } from "../useBluetoothStatus"
-import { useHasLocationRequirements } from "./useHasLocationRequirements"
-import { factories } from "../factories"
+import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
+import { isPlatformiOS } from "../utils/index"
+import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
-
-jest.mock("react-native-safe-area-context")
-;(useSafeAreaInsets as jest.Mock).mockReturnValue({ insets: { bottom: 0 } })
 
 jest.mock("../utils/index")
 const mockedApplicationName = "applicationName"
@@ -32,16 +27,12 @@ jest.mock("../hooks/useApplicationInfo", () => {
   }
 })
 
-jest.mock("../useBluetoothStatus.ts")
-jest.mock("./useHasLocationRequirements.ts")
-
 describe("Home", () => {
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
     const permissionProviderValue = createPermissionProviderValue(
       ENStatus.AUTHORIZED_ENABLED,
     )
-    ;(useHasLocationRequirements as jest.Mock).mockReturnValue({})
 
     const shareSpy = jest.spyOn(Share, "share")
 
@@ -64,13 +55,6 @@ describe("Home", () => {
 
   describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
     it("renders an active message", () => {
-      const isBluetoothOn = true
-      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
-      const isLocationOn = true
-      ;(useHasLocationRequirements as jest.Mock).mockReturnValue({
-        isLocationOn,
-      })
-
       const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -78,7 +62,15 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              isLocationOn: true,
+              isLocationNeeded: true,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -109,9 +101,6 @@ describe("Home", () => {
 
   describe("When Bluetooth is off", () => {
     it("renders an inactive message and a disabled message for bluetooth", () => {
-      const isBluetoothOn = false
-      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
-
       const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -119,7 +108,15 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: false,
+              isLocationOn: true,
+              isLocationNeeded: false,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -141,9 +138,6 @@ describe("Home", () => {
     })
 
     it("prompts the user to enable Bluetooth", () => {
-      const isBluetoothOn = false
-      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
-
       const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -151,7 +145,15 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: false,
+              isLocationOn: true,
+              isLocationNeeded: true,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -169,9 +171,6 @@ describe("Home", () => {
 
   describe("When Bluetooth is enabled", () => {
     it("allows the user to get more information", () => {
-      const isBluetoothOn = true
-      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
-
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
@@ -182,7 +181,15 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              isLocationOn: true,
+              isLocationNeeded: true,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -195,9 +202,6 @@ describe("Home", () => {
 
   describe("When the exposure notification permissions are not enabled and the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", () => {
-      const isBluetoothOn = true
-      ;(useBluetoothStatus as jest.Mock).mockReturnValue(isBluetoothOn)
-
       const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
@@ -205,7 +209,15 @@ describe("Home", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              isLocationOn: true,
+              isLocationNeeded: false,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
         </PermissionsContext.Provider>,
       )
 
@@ -320,16 +332,19 @@ describe("Home", () => {
   })
 
   describe("When the device does not support locationless scanning", () => {
-    describe("and the location permissions are on", () => {
-      it("the location permissions are shown as enabled", () => {
-        const isLocationOn = true
-        const isLocationNeeded = true
-        ;(useHasLocationRequirements as jest.Mock).mockReturnValue({
-          isLocationOn,
-          isLocationNeeded,
-        })
-
-        const { getByTestId } = render(<Home />)
+    describe("and location is on", () => {
+      it("location is shown as enabled", () => {
+        const { getByTestId } = render(
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              isLocationOn: true,
+              isLocationNeeded: true,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>,
+        )
 
         const locationStatusContainer = getByTestId(
           "home-location-status-container",
@@ -340,16 +355,19 @@ describe("Home", () => {
       })
     })
 
-    describe("and the location permissions are off", () => {
-      it("the location permissions are shown as disabled", () => {
-        const isLocationOn = false
-        const isLocationNeeded = true
-        ;(useHasLocationRequirements as jest.Mock).mockReturnValue({
-          isLocationOn,
-          isLocationNeeded,
-        })
-
-        const { getByTestId } = render(<Home />)
+    describe("and the location is off", () => {
+      it("location is shown as disabled", () => {
+        const { getByTestId } = render(
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              isLocationOn: false,
+              isLocationNeeded: true,
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>,
+        )
 
         const locationStatusContainer = getByTestId(
           "home-location-status-container",
@@ -364,15 +382,18 @@ describe("Home", () => {
   })
 
   describe("When the device supports locationless scanning", () => {
-    it("the location permissions are not shown", () => {
-      const isLocationOn = true
-      const isLocationNeeded = false
-      ;(useHasLocationRequirements as jest.Mock).mockReturnValue({
-        isLocationOn,
-        isLocationNeeded,
-      })
-
-      const { queryByTestId } = render(<Home />)
+    it("location is not shown", () => {
+      const { queryByTestId } = render(
+        <SystemServicesContext.Provider
+          value={{
+            isBluetoothOn: true,
+            isLocationOn: true,
+            isLocationNeeded: false,
+          }}
+        >
+          <Home />
+        </SystemServicesContext.Provider>,
+      )
 
       const locationStatusContainer = queryByTestId(
         "home-location-status-container",
