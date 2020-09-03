@@ -1,11 +1,14 @@
 import React from "react"
-import { render } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
+import { Linking } from "react-native"
 
 import AboutScreen from "./About"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
+import useAuthorityLinks from "../configuration/useAuthorityLinks"
 
+jest.mock("../configuration/useAuthorityLinks")
 jest.mock("../hooks/useApplicationInfo")
 describe("About", () => {
   it("shows the name of the application", () => {
@@ -72,5 +75,28 @@ describe("About", () => {
         `The ${applicationName} app is made available by ${healthAuthorityName}`,
       ),
     ).toBeDefined()
+  })
+
+  it("navigates to the authority links when clicked", async () => {
+    const url = "overrideUrl"
+    const label = "labelOverride"
+
+    const authorityLinks = [{ url, label }]
+    const useAuthorityLinksSpy = useAuthorityLinks as jest.Mock
+    useAuthorityLinksSpy.mockReturnValueOnce(authorityLinks)
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName: "applicationName",
+      versionInfo: "versionInfo",
+    })
+    const openURLSpy = jest.spyOn(Linking, "openURL")
+
+    const { getByLabelText } = render(<AboutScreen />)
+
+    fireEvent.press(getByLabelText(label))
+
+    await waitFor(() => {
+      expect(useAuthorityLinksSpy).toHaveBeenCalledWith("about", "en")
+      expect(openURLSpy).toHaveBeenCalledWith(url)
+    })
   })
 })

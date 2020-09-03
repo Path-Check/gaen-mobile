@@ -7,6 +7,8 @@ import { Colors, Spacing, Typography } from "../styles"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import useAuthorityCopy from "../configuration/useAuthorityCopy"
+import useAuthorityLinks from "../configuration/useAuthorityLinks"
+import ExternalLink from "./ExternalLink"
 
 export const AboutScreen: FunctionComponent = () => {
   const {
@@ -23,12 +25,17 @@ export const AboutScreen: FunctionComponent = () => {
     t("about.description", { applicationName, healthAuthorityName }),
   )
 
+  const authorityLinks = useAuthorityLinks("about", localeCode)
+
   return (
     <ScrollView style={style.container} alwaysBounceVertical={false}>
       <View>
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
+      {authorityLinks?.map(({ url, label }) => {
+        return <ExternalLink key={label} url={url} label={label} />
+      })}
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
           <GlobalText style={style.aboutSectionParaLabel}>
@@ -65,6 +72,7 @@ const style = StyleSheet.create({
   },
   aboutContent: {
     ...Typography.body1,
+    marginBottom: Spacing.medium,
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
@@ -77,7 +85,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   infoRowContainer: {
-    marginTop: Spacing.medium,
+    marginTop: Spacing.small,
     marginBottom: Spacing.medium,
   },
   infoRow: {

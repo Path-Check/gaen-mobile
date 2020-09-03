@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 #
-# Download the copy json for a specific HA and places it on the configuration
+# Download the links json for a specific HA and places it on the configuration
 # folder
 #
 # Usage
 #
-#   bin/download_copy.sh <health-authority-label> <github-token>
+#   bin/download_links.sh <health-authority-label> <github-token>
 #
 # Example
 #
-#   bin/download_copy.sh guam <token>
+#   bin/download_links.sh guam <token>
 #
 # Requirements
 #
@@ -19,7 +19,7 @@
 
 require "open3"
 require "dotenv"
-require_relative "./download_copy_methods"
+require_relative "./download_links_methods"
 Dotenv.load
 
 HA_LABEL = ARGV[0]
@@ -27,6 +27,6 @@ ACCESS_TOKEN = ARGV[1] || ENV.fetch("ACCESS_TOKEN")
 validate_token!(ACCESS_TOKEN)
 validate_ha_label!(HA_LABEL, "download_copy")
 
-puts "...fetching copy for #{HA_LABEL}"
+puts "...fetching links for #{HA_LABEL}"
 
-download_copy_file(HA_LABEL, ACCESS_TOKEN)
+download_links_file(HA_LABEL, ACCESS_TOKEN)
