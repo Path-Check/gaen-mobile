@@ -13,6 +13,7 @@ import {
 import { getLocalNames } from "../locales/languages"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
+import useAuthorityCopy from "../configuration/useAuthorityCopy"
 
 import { Images } from "../assets"
 import { Spacing, Colors, Typography, Outlines } from "../styles"
@@ -26,6 +27,12 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
+
+  const welcomeMessage = useAuthorityCopy(
+    "welcome_message",
+    localeCode,
+    t("label.launch_screen1_header"),
+  )
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
@@ -62,9 +69,7 @@ const Welcome: FunctionComponent = () => {
               accessible
               accessibilityLabel={t("onboarding.welcome_image_label")}
             />
-            <GlobalText style={style.mainText}>
-              {t("label.launch_screen1_header")}
-            </GlobalText>
+            <GlobalText style={style.mainText}>{welcomeMessage}</GlobalText>
             <GlobalText style={style.mainText}>{applicationName}</GlobalText>
           </View>
           <Button
