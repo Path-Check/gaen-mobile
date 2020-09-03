@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native"
 import { Linking } from "react-native"
 
 import AcceptEula from "./AcceptEula"
+import { ConfigurationContext } from "../ConfigurationContext"
+import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
@@ -39,5 +41,36 @@ describe("EulaModal", () => {
     await waitFor(() => {
       expect(linkSpy).toHaveBeenCalled()
     })
+  })
+
+  it("opens the link to the eula if present", async () => {
+    const healthAuthorityEulaUrl = "healthAuthorityEulaUrl"
+    const linkSpy = jest.spyOn(Linking, "openURL")
+    const { getByText } = render(
+      <ConfigurationContext.Provider
+        value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
+      >
+        <AcceptEula />
+      </ConfigurationContext.Provider>,
+    )
+
+    fireEvent.press(getByText(/End User Legal Agreement/))
+
+    await waitFor(() => {
+      expect(linkSpy).toHaveBeenCalledWith(healthAuthorityEulaUrl)
+    })
+  })
+
+  it("does not show the eula link if the url is null", () => {
+    const healthAuthorityEulaUrl = null
+    const { queryByText } = render(
+      <ConfigurationContext.Provider
+        value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
+      >
+        <AcceptEula />
+      </ConfigurationContext.Provider>,
+    )
+
+    expect(queryByText(/End User Legal Agreement/)).toBeNull()
   })
 })

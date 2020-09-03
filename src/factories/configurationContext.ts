@@ -7,6 +7,7 @@ export default Factory.define<Configuration>(() => ({
   displayReportAnIssue: false,
   displaySelfAssessment: false,
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
+  healthAuthorityEulaUrl: "healthAuthorityEulaUrl",
   healthAuthorityName: "authorityName",
   healthAuthorityPrivacyPolicyUrl: "authorityPrivacyPolicyUrl",
   regionCodes: ["REGION"],

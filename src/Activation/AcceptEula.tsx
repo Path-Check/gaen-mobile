@@ -36,14 +36,6 @@ const AcceptEula: FunctionComponent = () => {
     navigation.navigate(ActivationScreens.ActivateProximityTracing)
   }
 
-  const linkToPrivacyPolicy = async () => {
-    await Linking.openURL(configuration.healthAuthorityPrivacyPolicyUrl)
-  }
-
-  const linkToEula = async () => {
-    await Promise.resolve()
-  }
-
   const checkboxIcon = boxChecked
     ? Icons.CheckboxChecked
     : Icons.CheckboxUnchecked
@@ -59,11 +51,14 @@ const AcceptEula: FunctionComponent = () => {
           <GlobalText style={style.headerText}>
             {t("onboarding.terms_header_title")}
           </GlobalText>
-          <EulaLink
+          <DocumentLink
             docName={"onboarding.privacy_policy"}
-            onPress={linkToPrivacyPolicy}
+            url={configuration.healthAuthorityPrivacyPolicyUrl}
           />
-          <EulaLink docName={"onboarding.eula"} onPress={linkToEula} />
+          <DocumentLink
+            docName={"onboarding.eula"}
+            url={configuration.healthAuthorityEulaUrl}
+          />
           <View style={style.footerContainer}>
             <TouchableOpacity
               style={style.checkboxContainer}
@@ -95,14 +90,27 @@ const AcceptEula: FunctionComponent = () => {
   )
 }
 
-type EulaLinkProps = {
+type DocumentLinkProps = {
   docName: string
-  onPress: () => Promise<void>
+  url: string | null
 }
-const EulaLink: FunctionComponent<EulaLinkProps> = ({ docName, onPress }) => {
+
+const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
+  docName,
+  url,
+}) => {
   const { t } = useTranslation()
+
+  if (url === null) {
+    return null
+  }
+
+  const openLink = async () => {
+    await Linking.openURL(url)
+  }
+
   return (
-    <TouchableOpacity style={style.eulaLinkContainer} onPress={onPress}>
+    <TouchableOpacity style={style.eulaLinkContainer} onPress={openLink}>
       <View style={style.eulaTextContainer}>
         <GlobalText style={style.eulaText}>
           {t("onboarding.please_read_the")}
@@ -118,6 +126,7 @@ const EulaLink: FunctionComponent<EulaLinkProps> = ({ docName, onPress }) => {
     </TouchableOpacity>
   )
 }
+
 const style = StyleSheet.create({
   container: {
     flex: 1,

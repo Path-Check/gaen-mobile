@@ -22,7 +22,7 @@ const ValueProposition: FunctionComponent = () => {
   const onboardingScreenActions = {
     primaryButtonOnPress: () => {
       return navigation.navigate(Stacks.Activation, {
-        screen: ActivationScreens.ActivateProximityTracing,
+        screen: ActivationScreens.AcceptEula,
       })
     },
   }
