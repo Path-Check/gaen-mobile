@@ -117,6 +117,7 @@ const ActivationStack: FunctionComponent = () => {
     headerTitleAlign: "left",
     headerTitle: t("onboarding.activation_header_title"),
     headerTitleStyle: style.headerTitle,
+    gestureEnabled: false,
   }
 
   return (

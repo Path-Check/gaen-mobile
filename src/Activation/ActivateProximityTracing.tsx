@@ -2,6 +2,8 @@ import React, { FunctionComponent } from "react"
 import {
   Platform,
   ScrollView,
+  Linking,
+  Alert,
   SafeAreaView,
   View,
   StyleSheet,
@@ -20,9 +22,13 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { exposureNotifications } = usePermissionsContext()
+
   const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+
+  const { exposureNotifications } = usePermissionsContext()
+  const { status } = exposureNotifications
+  console.log(status)
 
   const navigateToNextScreen = () => {
     if (Platform.OS === "ios") {
@@ -34,8 +40,8 @@ const ActivateProximityTracing: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressActivateProximityTracing = () => {
-    exposureNotifications.request()
+  const handleOnPressActivateProximityTracing = async () => {
+    await exposureNotifications.request()
     navigateToNextScreen()
   }
 
