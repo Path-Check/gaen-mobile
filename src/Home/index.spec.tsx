@@ -9,7 +9,6 @@ import { PermissionsContext, ENStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { isPlatformiOS } from "../utils/index"
 import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
@@ -200,7 +199,7 @@ describe("Home", () => {
     })
   })
 
-  describe("When the exposure notification permissions are not enabled and the app is not authorized", () => {
+  describe("When the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", () => {
       const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const permissionProviderValue = createPermissionProviderValue(
@@ -236,13 +235,40 @@ describe("Home", () => {
       )
       expect(proximityTracingDisabledText).toBeDefined()
     })
-  })
 
-  describe("When exposure notification permissions are authorized and the app is not enabled", () => {
-    it("shows an enable proximity tracing alert", () => {
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_DISABLED
+    it("requests exposure notifications and shows an unauthorized alert", () => {
+      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
+      const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
+        requestSpy,
+      )
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const alertSpy = jest.spyOn(Alert, "alert")
+
+      const fixProximityTracingButton = getByTestId(
+        "home-proximity-tracing-status-container",
+      )
+
+      fireEvent.press(fixProximityTracingButton)
+      expect(requestSpy).toHaveBeenCalled()
+      expect(alertSpy).toHaveBeenCalled()
+    })
+  })
+
+  describe("When the app is not enabled", () => {
+    it("requests exposure notification permissions", () => {
+      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_DISABLED
+      const requestSpy = jest.fn()
+      const permissionProviderValue = createPermissionProviderValue(
+        isENAuthorizedAndEnabled,
+        requestSpy,
       )
 
       const { getByTestId } = render(
@@ -255,19 +281,8 @@ describe("Home", () => {
         "home-proximity-tracing-status-container",
       )
 
-      const alert = jest.spyOn(Alert, "alert")
-
       fireEvent.press(fixProximityTracingButton)
-      expect(
-        alert,
-      ).toHaveBeenCalledWith(
-        `Enable Proximity Tracing from "${mockedApplicationName}"?`,
-        `Your mobile device can securely collect and share random IDs with nearby devices. ${mockedApplicationName} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with ${mockedApplicationName}.`,
-        [
-          expect.objectContaining({ text: "Cancel" }),
-          expect.objectContaining({ text: "Enable" }),
-        ],
-      )
+      expect(requestSpy).toHaveBeenCalled()
     })
   })
 
@@ -295,39 +310,6 @@ describe("Home", () => {
 
       fireEvent.press(proximityTracingInfoButton)
       expect(navigationSpy).toHaveBeenCalledWith("ProximityTracingInfo")
-    })
-  })
-
-  describe("When exposure notification permissions are unauthorized", () => {
-    describe("and the platform is iOS", () => {
-      it("shows an unauthorized alert", () => {
-        const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
-        const permissionProviderValue = createPermissionProviderValue(
-          isENAuthorizedAndEnabled,
-        )
-        ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
-
-        const { getByTestId } = render(
-          <PermissionsContext.Provider value={permissionProviderValue}>
-            <Home />
-          </PermissionsContext.Provider>,
-        )
-
-        const fixProximityTracingButton = getByTestId(
-          "home-proximity-tracing-status-container",
-        )
-        const alert = jest.spyOn(Alert, "alert")
-
-        fireEvent.press(fixProximityTracingButton)
-        expect(alert).toHaveBeenCalledWith(
-          "Authorize in Settings",
-          "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
-          [
-            expect.objectContaining({ text: "Back" }),
-            expect.objectContaining({ text: "Open Settings" }),
-          ],
-        )
-      })
     })
   })
 
@@ -406,7 +388,7 @@ describe("Home", () => {
 
 const createPermissionProviderValue = (
   enStatus: ENStatus,
-  requestPermission: () => void = () => {},
+  requestPermission: () => Promise<void> = () => Promise.resolve(),
 ) => {
   return {
     notification: {

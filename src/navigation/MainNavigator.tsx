@@ -118,7 +118,10 @@ const MainNavigator: FunctionComponent = () => {
               <Stack.Screen
                 name={Stacks.Activation}
                 component={ActivationStack}
-                options={defaultScreenOptions}
+                options={{
+                  ...defaultScreenOptions,
+                  gestureEnabled: false,
+                }}
               />
             </>
           )}

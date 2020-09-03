@@ -59,7 +59,7 @@ export interface PermissionsContextState {
   exposureNotifications: {
     status: ENStatus
     check: () => void
-    request: () => void
+    request: () => Promise<void>
   }
 }
 
@@ -72,7 +72,7 @@ const initialState = {
   exposureNotifications: {
     status: initialENStatus,
     check: () => {},
-    request: () => {},
+    request: () => Promise.resolve(),
   },
 }
 
@@ -83,7 +83,7 @@ export interface PermissionStrategy {
     cb: (status: ENPermissionStatus) => void,
   ) => { remove: () => void }
   check: (cb: (status: ENPermissionStatus) => void) => void
-  request: (cb: (response: string) => void) => void
+  request: () => Promise<string>
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
@@ -138,9 +138,8 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     setNotificationPermission(statusToEnum(status))
   }
 
-  const requestENPermission = () => {
-    const handleNativeResponse = () => {}
-    permissionStrategy.request(handleNativeResponse)
+  const requestENPermission = async () => {
+    permissionStrategy.request()
   }
 
   const requestNotificationPermission = async () => {
