@@ -25,8 +25,6 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
 
   const { exposureNotifications } = usePermissionsContext()
-  const { status } = exposureNotifications
-  console.log(status)
 
   const navigateToNextScreen = () => {
     if (Platform.OS === "ios") {
