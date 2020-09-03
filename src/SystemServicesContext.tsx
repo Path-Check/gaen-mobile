@@ -52,15 +52,19 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const fetchIsLocationOn = async (): Promise<boolean> => {
-    return isLocationEnabled()
+    if (Platform.OS === "android") {
+      return isLocationEnabled()
+    } else {
+      return Promise.resolve(true)
+    }
   }
 
-  const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {
-    return Platform.select({
-      android: doesDeviceSupportLocationlessScanning(),
-      ios: new Promise(() => true),
-      default: new Promise(() => true),
-    })
+  const supportsLocationlessScanning = async (): Promise<boolean> => {
+    if (Platform.OS === "android") {
+      return doesDeviceSupportLocationlessScanning()
+    } else {
+      return Promise.resolve(true)
+    }
   }
 
   useEffect(() => {
@@ -80,8 +84,8 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     const determineIsLocationNeeded = async () => {
-      const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
-      setIsLocationNeeded(!supportsLocationlessScanning)
+      const doesSupportLocationlessScanning = await supportsLocationlessScanning()
+      setIsLocationNeeded(!doesSupportLocationlessScanning)
     }
 
     determineIsLocationNeeded()
