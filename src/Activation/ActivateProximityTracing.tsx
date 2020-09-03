@@ -2,8 +2,6 @@ import React, { FunctionComponent } from "react"
 import {
   Platform,
   ScrollView,
-  Linking,
-  Alert,
   SafeAreaView,
   View,
   StyleSheet,

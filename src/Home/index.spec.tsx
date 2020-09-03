@@ -9,7 +9,6 @@ import { PermissionsContext, ENStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { isPlatformiOS } from "../utils/index"
 import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
