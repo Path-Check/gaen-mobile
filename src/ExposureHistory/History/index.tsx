@@ -40,10 +40,6 @@ const History: FunctionComponent<HistoryProps> = ({
   const [refreshing, setRefreshing] = useState(false)
   const previousExposuresRef = useRef<ExposureDatum[]>()
 
-  useEffect(() => {
-    previousExposuresRef.current = exposures
-  })
-
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
   }
@@ -58,6 +54,10 @@ const History: FunctionComponent<HistoryProps> = ({
   }
 
   const showExposureHistory = exposures.length > 0
+
+  useEffect(() => {
+    previousExposuresRef.current = exposures
+  })
 
   return (
     <>
