@@ -238,7 +238,7 @@ describe("Home", () => {
       expect(proximityTracingDisabledText).toBeDefined()
     })
 
-    it("requests exposure notifications and shows an unauthorized alert", () => {
+    it("requests exposure notifications and shows a not authorized alert", () => {
       const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(

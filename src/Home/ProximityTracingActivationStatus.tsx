@@ -19,9 +19,9 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const { status } = exposureNotifications
 
-  const isUnauthorized = status === ENPermissionStatus.NOT_AUTHORIZED
+  const isNotAuthorized = status === ENPermissionStatus.NOT_AUTHORIZED
 
-  const showUnauthorizedAlert = () => {
+  const showNotAuthorizedAlert = () => {
     Alert.alert(
       t("home.bluetooth.unauthorized_error_title"),
       t("home.bluetooth.unauthorized_error_message", { applicationName }),
@@ -40,8 +40,8 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const handleOnPressFix = () => {
     exposureNotifications.request()
-    if (isUnauthorized) {
-      showUnauthorizedAlert()
+    if (isNotAuthorized) {
+      showNotAuthorizedAlert()
     }
   }
 
