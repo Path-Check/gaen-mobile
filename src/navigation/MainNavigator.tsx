@@ -39,6 +39,7 @@ const headerScreenOptions: StackNavigationOptions = {
   },
   headerBackTitleVisible: false,
   headerTintColor: Colors.headerText,
+  headerTitleAlign: "center",
 }
 const cardScreenOptions: StackNavigationOptions = {
   ...TransitionPresets.ModalPresentationIOS,
