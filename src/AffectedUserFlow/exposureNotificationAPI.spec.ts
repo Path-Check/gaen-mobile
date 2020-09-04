@@ -9,6 +9,10 @@ import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
 jest.mock("./fetchWithTimeout")
 
 describe("postDiagnosisKeys", () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   it("executes requests with default headers and serialized data", async () => {
     const exposureKeys: ExposureKey[] = []
     const regionCodes: string[] = []
@@ -106,6 +110,81 @@ describe("postDiagnosisKeys", () => {
         newKeysInserted,
         message,
       })
+    })
+  })
+
+  describe("on a retry response", () => {
+    it("retries and returns the next not retry response", async () => {
+      const successResponse = {
+        revisionToken: "revisionToken",
+      }
+
+      const fetchWithTimeoutSpy = fetchWithTimeout as jest.Mock
+
+      fetchWithTimeoutSpy
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 429,
+          json: jest.fn().mockResolvedValueOnce({}),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: jest.fn().mockResolvedValueOnce(successResponse),
+        })
+
+      const result = await postDiagnosisKeys(
+        [],
+        [],
+        "certificate",
+        "hmacKey",
+        "appPackageName",
+        "revisionToken",
+      )
+
+      expect(result).toEqual({
+        kind: "success",
+        ...successResponse,
+      })
+      expect(fetchWithTimeoutSpy).toHaveBeenCalledTimes(2)
+    })
+
+    it("retries a max of 3 times and returns that last response", async () => {
+      const internalError = "internal_error"
+      const retryResponse = {
+        error: internalError,
+      }
+
+      const fetchWithTimeoutSpy = fetchWithTimeout as jest.Mock
+
+      fetchWithTimeoutSpy
+        .mockResolvedValueOnce({
+          ok: false,
+          json: jest.fn().mockResolvedValueOnce(retryResponse),
+        })
+        .mockResolvedValueOnce({
+          ok: false,
+          json: jest.fn().mockResolvedValueOnce(retryResponse),
+        })
+        .mockResolvedValueOnce({
+          ok: false,
+          json: jest.fn().mockResolvedValueOnce(retryResponse),
+        })
+
+      const result = await postDiagnosisKeys(
+        [],
+        [],
+        "certificate",
+        "hmacKey",
+        "appPackageName",
+        "revisionToken",
+      )
+
+      expect(result).toEqual({
+        kind: "failure",
+        nature: PostKeysError.InternalServerError,
+        message: internalError,
+      })
+      expect(fetchWithTimeoutSpy).toHaveBeenCalledTimes(3)
     })
   })
 

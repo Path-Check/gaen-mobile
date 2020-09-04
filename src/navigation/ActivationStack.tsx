@@ -18,7 +18,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
-import { Spacing, Colors, Typography } from "../styles"
+import { Layout, Spacing, Colors, Typography } from "../styles"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -117,6 +117,7 @@ const ActivationStack: FunctionComponent = () => {
     headerTitleAlign: "left",
     headerTitle: t("onboarding.activation_header_title"),
     headerTitleStyle: style.headerTitle,
+    gestureEnabled: false,
   }
 
   return (
@@ -153,6 +154,7 @@ const style = StyleSheet.create({
   headerTitle: {
     ...Typography.header4,
     color: Colors.neutral100,
+    maxWidth: Layout.halfWidth,
   },
   headerRight: {
     flexDirection: "row",

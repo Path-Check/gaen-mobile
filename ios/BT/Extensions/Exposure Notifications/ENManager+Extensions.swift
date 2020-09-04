@@ -25,6 +25,13 @@ protocol ExposureNotificationManager {
 extension ENManager: ExposureNotificationManager {
 
   func authorizationStatus() -> ENAuthorizationStatus {
+    if #available(iOS 14, *) {
+      // On iOS 14, authorization status appears to be incorrectly reported
+      // when first being authorized, and only returns the accurate value
+      // after force quitting and re-launching the app, so we coalesce here
+      // based on exposureNotificationStatus instead
+      return exposureNotificationStatus == .active ? .authorized : .notAuthorized
+    }
     return ENManager.authorizationStatus
   }
 }

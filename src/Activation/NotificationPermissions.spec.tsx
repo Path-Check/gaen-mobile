@@ -88,7 +88,7 @@ const createPermissionProviderValue = (
     exposureNotifications: {
       status: ENStatus.AUTHORIZED_ENABLED,
       check: () => {},
-      request: () => {},
+      request: () => Promise.resolve(),
     },
   }
 }

@@ -20,6 +20,6 @@ export default Factory.define<GaenStrategy>(() => ({
       return { remove: () => {} }
     },
     check: () => {},
-    request: () => {},
+    request: () => Promise.resolve(),
   },
 }))

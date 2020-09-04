@@ -18,6 +18,8 @@
 
 require 'open3'
 require 'dotenv'
+require_relative "./download_copy_methods"
+
 Dotenv.load
 
 HA_LABEL = ARGV[0]
@@ -29,4 +31,10 @@ else
    raise "Empty github access token"
 end
 
-fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}")
+result = fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN)
+
+if result
+  exit 0
+else
+  exit 1
+end

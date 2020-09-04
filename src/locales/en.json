@@ -85,8 +85,8 @@
     "enable_exposure_notifications_body": "You must enable exposure notifcations to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
-      "invalid_format": "Invalid format",
       "invalid_code": "Try a different code",
+      "invalid_format": "Invalid format",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
@@ -100,7 +100,8 @@
       "errors": {
         "unknown": "Failed to submit the exposure data",
         "timeout": "The request took too long to complete",
-        "description": "The operation could not be completed. {{message}}"
+        "description": "The operation could not be completed. {{message}}",
+        "internal_server_error": "The server is experiencing problems, please try again later"
       }
     }
   },
@@ -165,8 +166,8 @@
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_off_subheader_location": "Enable Bluetooth, Proximity Tracing, and Location to get info about possible exposures",
       "tracing_on_header": "Active",
-      "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
-      "unauthorized_error_title": "Authorize in Settings"
+      "unauthorized_error_message": "To activate Proximity Tracing, ensure \"Share Exposure Information\" is enabled in Settings > {{applicationName}} > Exposure Notifications",
+      "unauthorized_error_title": "Share Expsoure Information"
     },
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_header": "Location",
