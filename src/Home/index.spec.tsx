@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "."
-import { PermissionsContext, ENStatus } from "../PermissionsContext"
+import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
 import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
@@ -32,7 +32,7 @@ describe("Home", () => {
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
     const permissionProviderValue = createPermissionProviderValue(
-      ENStatus.AUTHORIZED_ENABLED,
+      ENPermissionStatus.ENABLED,
     )
 
     const shareSpy = jest.spyOn(Share, "share")
@@ -56,9 +56,9 @@ describe("Home", () => {
 
   describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
     it("renders an active message", () => {
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
+      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -102,9 +102,9 @@ describe("Home", () => {
 
   describe("When Bluetooth is off", () => {
     it("renders an inactive message and a disabled message for bluetooth", () => {
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
+      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -139,9 +139,9 @@ describe("Home", () => {
     })
 
     it("prompts the user to enable Bluetooth", () => {
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
+      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -175,9 +175,9 @@ describe("Home", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
+      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -203,9 +203,9 @@ describe("Home", () => {
 
   describe("When the app is not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", () => {
-      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
+      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -239,10 +239,10 @@ describe("Home", () => {
     })
 
     it("requests exposure notifications and shows an unauthorized alert", () => {
-      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
+      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
         requestSpy,
       )
 
@@ -272,10 +272,10 @@ describe("Home", () => {
 
   describe("When the app is not enabled", () => {
     it("requests exposure notification permissions", () => {
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_DISABLED
+      const enPermissionStatus = ENPermissionStatus.DISABLED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
         requestSpy,
       )
 
@@ -301,9 +301,9 @@ describe("Home", () => {
         navigate: navigationSpy,
       })
 
-      const isENAuthorizedAndEnabled = ENStatus.AUTHORIZED_ENABLED
+      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
+        enPermissionStatus,
       )
 
       const { getByTestId } = render(
@@ -395,7 +395,7 @@ describe("Home", () => {
 })
 
 const createPermissionProviderValue = (
-  enStatus: ENStatus,
+  enPermissionStatus: ENPermissionStatus,
   requestPermission: () => Promise<void> = () => Promise.resolve(),
 ) => {
   return {
@@ -405,7 +405,7 @@ const createPermissionProviderValue = (
       request: () => {},
     },
     exposureNotifications: {
-      status: enStatus,
+      status: enPermissionStatus,
       check: () => {},
       request: requestPermission,
     },

@@ -18,40 +18,38 @@ import { isPlatformiOS } from "./utils"
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`
-export type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
-const initialENPermissionStatus: ENPermissionStatus = [
+export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
+const initialENPermissionStatus: RawENPermissionStatus = [
   "UNAUTHORIZED",
   "DISABLED",
 ]
 
-export enum ENStatus {
-  UNAUTHORIZED_DISABLED,
-  AUTHORIZED_DISABLED,
-  AUTHORIZED_ENABLED,
+export enum ENPermissionStatus {
+  NOT_AUTHORIZED,
+  DISABLED,
+  ENABLED,
 }
 
-const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
+const toENPermissionStatusEnum = (
+  enPermissionStatus: RawENPermissionStatus,
+): ENPermissionStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
   const isEnabled = enPermissionStatus[1] === "ENABLED"
 
-  if (!isAuthorized && !isEnabled) {
+  if (!isAuthorized) {
     return isPlatformiOS()
-      ? ENStatus.UNAUTHORIZED_DISABLED
-      : ENStatus.AUTHORIZED_DISABLED
+      ? ENPermissionStatus.NOT_AUTHORIZED
+      : ENPermissionStatus.DISABLED
+  } else if (!isEnabled) {
+    return ENPermissionStatus.DISABLED
+  } else {
+    return ENPermissionStatus.ENABLED
   }
-
-  if (isAuthorized && !isEnabled) {
-    return ENStatus.AUTHORIZED_DISABLED
-  }
-
-  if (isAuthorized && isEnabled) {
-    return ENStatus.AUTHORIZED_ENABLED
-  }
-
-  return ENStatus.UNAUTHORIZED_DISABLED
 }
 
-const initialENStatus: ENStatus = toENStatus(initialENPermissionStatus)
+const initialENStatus: ENPermissionStatus = toENPermissionStatusEnum(
+  initialENPermissionStatus,
+)
 
 export interface PermissionsContextState {
   notification: {
@@ -60,7 +58,7 @@ export interface PermissionsContextState {
     request: () => void
   }
   exposureNotifications: {
-    status: ENStatus
+    status: ENPermissionStatus
     check: () => void
     request: () => Promise<void>
   }
@@ -83,9 +81,9 @@ const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 export interface PermissionStrategy {
   statusSubscription: (
-    cb: (status: ENPermissionStatus) => void,
+    cb: (status: RawENPermissionStatus) => void,
   ) => { remove: () => void }
-  check: (cb: (status: ENPermissionStatus) => void) => void
+  check: (cb: (status: RawENPermissionStatus) => void) => void
   request: () => Promise<void>
 }
 
@@ -93,7 +91,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [
     exposureNotificationsPermissionStatus,
     setExposureNotificationsPermissionStatus,
-  ] = useState<ENPermissionStatus>(initialENPermissionStatus)
+  ] = useState<RawENPermissionStatus>(initialENPermissionStatus)
 
   const [notificationPermission, setNotificationPermission] = useState(
     PermissionStatus.UNKNOWN,
@@ -102,7 +100,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   const { permissionStrategy } = gaenStrategy
 
   const checkENPermission = useCallback(() => {
-    const handleNativeResponse = (status: ENPermissionStatus) => {
+    const handleNativeResponse = (status: RawENPermissionStatus) => {
       setExposureNotificationsPermissionStatus(status)
     }
     permissionStrategy.check(handleNativeResponse)
@@ -115,7 +113,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 
     AppState.addEventListener("change", handleAppStateChange)
     const subscription = permissionStrategy.statusSubscription(
-      (status: ENPermissionStatus) => {
+      (status: RawENPermissionStatus) => {
         setExposureNotificationsPermissionStatus(status)
       },
     )
@@ -155,7 +153,9 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const enStatus: ENStatus = toENStatus(exposureNotificationsPermissionStatus)
+  const enPermission: ENPermissionStatus = toENPermissionStatusEnum(
+    exposureNotificationsPermissionStatus,
+  )
 
   return (
     <PermissionsContext.Provider
@@ -166,7 +166,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: enStatus,
+          status: enPermission,
           check: checkENPermission,
           request: requestENPermission,
         },

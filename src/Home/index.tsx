@@ -4,7 +4,10 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { usePermissionsContext, ENStatus } from "../PermissionsContext"
+import {
+  usePermissionsContext,
+  ENPermissionStatus,
+} from "../PermissionsContext"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
@@ -44,7 +47,7 @@ const Home: FunctionComponent = () => {
 
   const { exposureNotifications } = usePermissionsContext()
   const isProximityTracingOn =
-    exposureNotifications.status === ENStatus.AUTHORIZED_ENABLED
+    exposureNotifications.status === ENPermissionStatus.ENABLED
 
   const appIsActive =
     isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
