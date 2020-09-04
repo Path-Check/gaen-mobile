@@ -83,7 +83,7 @@ export interface PermissionStrategy {
     cb: (status: ENPermissionStatus) => void,
   ) => { remove: () => void }
   check: (cb: (status: ENPermissionStatus) => void) => void
-  request: () => Promise<string>
+  request: () => Promise<void>
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
@@ -139,7 +139,11 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   }
 
   const requestENPermission = async () => {
-    permissionStrategy.request()
+    permissionStrategy.request().catch((error) => {
+      if (error.message !== "Error enabling notifications") {
+        throw Error(error)
+      }
+    })
   }
 
   const requestNotificationPermission = async () => {
