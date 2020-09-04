@@ -3,7 +3,10 @@ import { Linking, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { usePermissionsContext, ENStatus } from "../PermissionsContext"
+import {
+  usePermissionsContext,
+  ENPermissionStatus,
+} from "../PermissionsContext"
 import { HomeScreens } from "../navigation"
 import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
@@ -16,9 +19,9 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const { status } = exposureNotifications
 
-  const isUnauthorized = status === ENStatus.UNAUTHORIZED_DISABLED
+  const isNotAuthorized = status === ENPermissionStatus.NOT_AUTHORIZED
 
-  const showUnauthorizedAlert = () => {
+  const showNotAuthorizedAlert = () => {
     Alert.alert(
       t("home.bluetooth.unauthorized_error_title"),
       t("home.bluetooth.unauthorized_error_message", { applicationName }),
@@ -37,8 +40,8 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const handleOnPressFix = () => {
     exposureNotifications.request()
-    if (isUnauthorized) {
-      showUnauthorizedAlert()
+    if (isNotAuthorized) {
+      showNotAuthorizedAlert()
     }
   }
 
@@ -46,10 +49,12 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
     navigation.navigate(HomeScreens.ProximityTracingInfo)
   }
 
+  const isENEnabled = status === ENPermissionStatus.ENABLED
+
   return (
     <ActivationStatus
       headerText={t("home.bluetooth.proximity_tracing_header")}
-      isActive={status === ENStatus.AUTHORIZED_ENABLED}
+      isActive={isENEnabled}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
       testID={"home-proximity-tracing-status-container"}
