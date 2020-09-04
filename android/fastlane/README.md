@@ -25,7 +25,7 @@ Increment version code
 ```
 fastlane android debug_bt
 ```
-Build a Debug AAB
+Build a Debug APK
 ### android staging_apk
 ```
 fastlane android staging_apk

@@ -35,7 +35,10 @@ platform :ios do
   desc "Format last commit"
   private_lane :format_last_commit do
     commit = last_git_commit
-    "Commit: " + commit[:commit_hash] +
-    "\nChanges: " + commit[:message]
-  end
+    resources_commit = sh("ruby -r ../../bin/helpers.rb -e 'p mobile_resources_commit' | tr -d '\"'")
+
+    "Changes: " + commit[:message] + "\n\n" +
+    "Commit: " + commit[:commit_hash] + "\n\n" +
+    "Configuration: https://github.com/Path-Check/pathcheck-mobile-resources/tree/" + resources_commit
+  end  
 end
