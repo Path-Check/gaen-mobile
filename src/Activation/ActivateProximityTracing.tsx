@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
 import {
-  Platform,
   ScrollView,
   SafeAreaView,
   View,
@@ -14,6 +13,7 @@ import { usePermissionsContext } from "../PermissionsContext"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
+import { isPlatformiOS } from "../utils"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
@@ -27,7 +27,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { exposureNotifications } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
-    if (Platform.OS === "ios") {
+    if (isPlatformiOS()) {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
       isLocationOffAndNeeded

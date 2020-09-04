@@ -10,12 +10,13 @@ import { PermissionStatus } from "../permissionStatus"
 import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
+import { isPlatformiOS } from "../utils"
 
 jest.mock("@react-navigation/native")
 
 jest.mock("../utils/index")
-const mockedApplicationName = "applicationName"
 
+const mockedApplicationName = "applicationName"
 jest.mock("../hooks/useApplicationInfo", () => {
   return {
     useApplicationName: () => {
@@ -27,6 +28,10 @@ jest.mock("../hooks/useApplicationInfo", () => {
 })
 
 describe("Home", () => {
+  beforeEach(() => {
+    jest.resetAllMocks()
+  })
+
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
     const permissionProviderValue = createPermissionProviderValue(
@@ -157,10 +162,10 @@ describe("Home", () => {
       )
 
       const fixBluetoothButton = getByTestId("home-bluetooth-status-container")
-      const alert = jest.spyOn(Alert, "alert")
+      const alertSpy = jest.spyOn(Alert, "alert")
 
       fireEvent.press(fixBluetoothButton)
-      expect(alert).toHaveBeenCalledWith(
+      expect(alertSpy).toHaveBeenCalledWith(
         "Enable Bluetooth in Settings",
         "Go to the Settings app and enable Bluetooth to fix this error",
         [{ text: "Okay" }],
@@ -236,13 +241,14 @@ describe("Home", () => {
       expect(proximityTracingDisabledText).toBeDefined()
     })
 
-    it("requests exposure notifications and shows an unauthorized alert", () => {
+    it("requests exposure notifications and shows an unauthorized alert on ios", () => {
       const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
         requestSpy,
       )
+      ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -251,14 +257,45 @@ describe("Home", () => {
       )
 
       const alertSpy = jest.spyOn(Alert, "alert")
-
       const fixProximityTracingButton = getByTestId(
         "home-proximity-tracing-status-container",
       )
 
       fireEvent.press(fixProximityTracingButton)
       expect(requestSpy).toHaveBeenCalled()
-      expect(alertSpy).toHaveBeenCalled()
+      expect(alertSpy).toHaveBeenCalledWith(
+        "Share Exposure Information",
+        `To activate Proximity Tracing, ensure "Share Exposure Information" is enabled in Settings > ${mockedApplicationName} > Exposure Notifications`,
+        [
+          expect.objectContaining({ text: "Back" }),
+          expect.objectContaining({ text: "Open Settings" }),
+        ],
+      )
+    })
+
+    it("requests exposure notifications and does not show an unauthorized alert on android", () => {
+      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
+      const requestSpy = jest.fn()
+      const permissionProviderValue = createPermissionProviderValue(
+        isENAuthorizedAndEnabled,
+        requestSpy,
+      )
+      ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(false)
+
+      const { getByTestId } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <Home />
+        </PermissionsContext.Provider>,
+      )
+
+      const alertSpy = jest.spyOn(Alert, "alert")
+      const fixProximityTracingButton = getByTestId(
+        "home-proximity-tracing-status-container",
+      )
+
+      fireEvent.press(fixProximityTracingButton)
+      expect(requestSpy).toHaveBeenCalled()
+      expect(alertSpy).not.toHaveBeenCalled()
     })
   })
 
