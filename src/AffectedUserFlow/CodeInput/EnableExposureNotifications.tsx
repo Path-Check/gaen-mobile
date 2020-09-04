@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText, Button, StatusBar } from "../../components"
 import { Screens, useStatusBarEffect } from "../../navigation"
-import { Iconography, Colors, Typography, Spacing, Layout } from "../../styles"
+import { Spacing, Iconography, Colors, Typography, Layout } from "../../styles"
 import { Icons } from "../../assets"
 
 const EnableExposureNotifications: FunctionComponent = () => {
@@ -32,9 +32,9 @@ const EnableExposureNotifications: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
-        style={style.container}
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-enable-exposure-notifications-screen"}
+        alwaysBounceVertical={false}
       >
         <View style={style.cancelButtonContainer}>
           <TouchableOpacity
@@ -72,20 +72,19 @@ const EnableExposureNotifications: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   contentContainer: {
+    flexGrow: 1,
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
     paddingTop: Layout.oneEighthHeight,
-    paddingBottom: Spacing.xxxHuge,
+    paddingBottom: Spacing.massive,
     backgroundColor: Colors.primaryLightBackground,
   },
   cancelButtonContainer: {
     position: "absolute",
-    top: Layout.oneTwentiethHeight,
-    right: Spacing.xxSmall,
+    top: Spacing.medium,
+    right: Spacing.medium,
+    zIndex: Layout.zLevel1,
   },
   cancelButtonInnerContainer: {
     padding: Spacing.medium,

@@ -53,15 +53,17 @@ export const ExportIntro: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <Image
-          source={Images.PersonAndHealthExpert}
-          style={style.image}
-          accessible
-          accessibilityLabel={t("exoprt.start_image_label")}
-        />
-        <GlobalText style={style.header}>
-          {t("export.start_header_bluetooth")}
-        </GlobalText>
+        <View>
+          <Image
+            source={Images.PersonAndHealthExpert}
+            style={style.image}
+            accessible
+            accessibilityLabel={t("exoprt.start_image_label")}
+          />
+          <GlobalText style={style.header}>
+            {t("export.start_header_bluetooth")}
+          </GlobalText>
+        </View>
         <View style={style.buttonContainer}>
           <Button
             label={t("common.start")}
@@ -76,18 +78,20 @@ export const ExportIntro: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: Spacing.large,
-    paddingTop: Spacing.huge,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingBottom: 80,
+    flexGrow: 1,
+    justifyContent: "space-between",
+    paddingHorizontal: Spacing.large,
+    paddingTop: Spacing.huge,
+    paddingBottom: Spacing.massive,
+    backgroundColor: Colors.primaryLightBackground,
   },
   cancelButtonContainer: {
     position: "absolute",
-    top: Spacing.xxxSmall,
-    right: Spacing.xxxSmall,
+    top: Spacing.medium,
+    right: Spacing.medium,
     zIndex: Layout.zLevel1,
   },
   cancelButtonInnerContainer: {
