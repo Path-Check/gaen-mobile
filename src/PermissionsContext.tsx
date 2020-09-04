@@ -14,6 +14,7 @@ import {
 
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
 import gaenStrategy from "./gaen"
+import { isPlatformiOS } from "./utils"
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`
@@ -34,7 +35,9 @@ const toENStatus = (enPermissionStatus: ENPermissionStatus): ENStatus => {
   const isEnabled = enPermissionStatus[1] === "ENABLED"
 
   if (!isAuthorized && !isEnabled) {
-    return ENStatus.UNAUTHORIZED_DISABLED
+    return isPlatformiOS()
+      ? ENStatus.UNAUTHORIZED_DISABLED
+      : ENStatus.AUTHORIZED_DISABLED
   }
 
   if (isAuthorized && !isEnabled) {
@@ -152,9 +155,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const isENAuthorizedAndEnabled: ENStatus = toENStatus(
-    exposureNotificationsPermissionStatus,
-  )
+  const enStatus: ENStatus = toENStatus(exposureNotificationsPermissionStatus)
 
   return (
     <PermissionsContext.Provider
@@ -165,7 +166,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: isENAuthorizedAndEnabled,
+          status: enStatus,
           check: checkENPermission,
           request: requestENPermission,
         },

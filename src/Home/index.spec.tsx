@@ -10,11 +10,8 @@ import { PermissionStatus } from "../permissionStatus"
 import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
-import { isPlatformiOS } from "../utils"
 
 jest.mock("@react-navigation/native")
-
-jest.mock("../utils/index")
 
 const mockedApplicationName = "applicationName"
 jest.mock("../hooks/useApplicationInfo", () => {
@@ -241,14 +238,13 @@ describe("Home", () => {
       expect(proximityTracingDisabledText).toBeDefined()
     })
 
-    it("requests exposure notifications and shows an unauthorized alert on ios", () => {
+    it("requests exposure notifications and shows an unauthorized alert", () => {
       const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
         requestSpy,
       )
-      ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(true)
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -271,31 +267,6 @@ describe("Home", () => {
           expect.objectContaining({ text: "Open Settings" }),
         ],
       )
-    })
-
-    it("requests exposure notifications and does not show an unauthorized alert on android", () => {
-      const isENAuthorizedAndEnabled = ENStatus.UNAUTHORIZED_DISABLED
-      const requestSpy = jest.fn()
-      const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
-        requestSpy,
-      )
-      ;(isPlatformiOS as jest.Mock).mockReturnValueOnce(false)
-
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>,
-      )
-
-      const alertSpy = jest.spyOn(Alert, "alert")
-      const fixProximityTracingButton = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-
-      fireEvent.press(fixProximityTracingButton)
-      expect(requestSpy).toHaveBeenCalled()
-      expect(alertSpy).not.toHaveBeenCalled()
     })
   })
 

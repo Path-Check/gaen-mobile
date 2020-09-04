@@ -7,7 +7,6 @@ import { usePermissionsContext, ENStatus } from "../PermissionsContext"
 import { HomeScreens } from "../navigation"
 import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { isPlatformiOS } from "../utils"
 
 export const ProximityTracingActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -38,7 +37,7 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const handleOnPressFix = () => {
     exposureNotifications.request()
-    if (isUnauthorized && isPlatformiOS()) {
+    if (isUnauthorized) {
       showUnauthorizedAlert()
     }
   }
