@@ -60,7 +60,7 @@ const toStatus = (data: string[]): ENPermissionStatus => {
 // Permissions Module
 const permissionsModule = NativeModules.ENPermissionsModule
 
-export const requestAuthorization = async (): Promise<string> => {
+export const requestAuthorization = async (): Promise<void> => {
   return permissionsModule.requestExposureNotificationAuthorization()
 }
 
