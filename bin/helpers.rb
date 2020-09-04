@@ -78,7 +78,8 @@ def valid_token(token)
 end
 
 def mobile_resources_commit
-  file = File.open("mobile_resources_commit")
+  dir = File.join(File.dirname(__FILE__), '../mobile_resources_commit')
+  file = File.open(dir)
   commit = file.read.chomp
   file.close
 
