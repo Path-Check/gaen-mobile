@@ -53,11 +53,11 @@ const History: FunctionComponent<HistoryProps> = ({
     setRefreshing(false)
   }
 
-  const showExposureHistory = exposures.length > 0
-
   useEffect(() => {
     previousExposuresRef.current = exposures
-  })
+  }, [exposures])
+
+  const showExposureHistory = exposures.length > 0
 
   return (
     <>
