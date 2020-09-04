@@ -9,7 +9,10 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { usePermissionsContext, ENStatus } from "../PermissionsContext"
+import {
+  usePermissionsContext,
+  ENPermissionStatus,
+} from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
@@ -32,7 +35,7 @@ const ActivationSummary: FunctionComponent = () => {
   const {
     exposureNotifications: { status },
   } = usePermissionsContext()
-  const isProximityTracingOn = status === ENStatus.AUTHORIZED_ENABLED
+  const isENEnabled = status === ENPermissionStatus.ENABLED
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()
@@ -90,7 +93,7 @@ const ActivationSummary: FunctionComponent = () => {
   }
 
   const isAppSetupComplete =
-    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+    isENEnabled && isBluetoothOn && !isLocationOffAndNeeded
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent
