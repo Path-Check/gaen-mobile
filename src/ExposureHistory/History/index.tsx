@@ -57,6 +57,10 @@ const History: FunctionComponent<HistoryProps> = ({
     previousExposuresRef.current = exposures
   }, [exposures])
 
+  const refreshControl = (
+    <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
+  )
+
   const showExposureHistory = exposures.length > 0
 
   return (
@@ -65,9 +69,7 @@ const History: FunctionComponent<HistoryProps> = ({
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
-        }
+        refreshControl={refreshControl}
       >
         <View>
           <View style={style.headerRow}>
