@@ -18,7 +18,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
-import { Spacing, Colors, Typography } from "../styles"
+import { Layout, Spacing, Colors, Typography } from "../styles"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -154,7 +154,7 @@ const style = StyleSheet.create({
   headerTitle: {
     ...Typography.header4,
     color: Colors.neutral100,
-    maxWidth: "50%",
+    maxWidth: Layout.halfWidth,
   },
   headerRight: {
     flexDirection: "row",
