@@ -19,6 +19,7 @@ import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
 import { Spacing, Colors, Typography } from "../styles"
+import AcceptEula from "../Activation/AcceptEula"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -36,6 +37,11 @@ const ActivationStack: FunctionComponent = () => {
     component: FunctionComponent
   }
 
+  const acceptEulaStep: ActivationStep = {
+    screenName: ActivationScreens.AcceptEula,
+    component: AcceptEula,
+  }
+
   const activateProximityTracing: ActivationStep = {
     screenName: ActivationScreens.ActivateProximityTracing,
     component: ActivateProximityTracing,
@@ -51,14 +57,16 @@ const ActivationStack: FunctionComponent = () => {
     component: NotificationPermissions,
   }
 
+  const defaultSteps = [acceptEulaStep, activateProximityTracing]
+
   const activationStepsIOS: ActivationStep[] = [
-    activateProximityTracing,
+    ...defaultSteps,
     notificationPermissions,
   ]
 
   const activationStepsAndroid: ActivationStep[] = isLocationNeeded
-    ? [activateProximityTracing, activateLocation]
-    : [activateProximityTracing]
+    ? [...defaultSteps, activateLocation]
+    : defaultSteps
 
   const activationSteps = Platform.select({
     ios: activationStepsIOS,
