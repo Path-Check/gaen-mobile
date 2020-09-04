@@ -27,7 +27,7 @@ const ExposureDetail: FunctionComponent = () => {
     healthAuthorityAdviceUrl,
   } = useConfigurationContext()
 
-  const isConnected = useConnectionStatus()
+  const isInternetReachable = useConnectionStatus()
 
   const { exposureDatum } = route.params
 
@@ -108,11 +108,11 @@ const ExposureDetail: FunctionComponent = () => {
           <Button
             onPress={handleOnPressNextStep}
             label={t("exposure_history.exposure_detail.next_steps")}
-            disabled={!isConnected}
+            disabled={!isInternetReachable}
             hasRightArrow
           />
         </View>
-        {!isConnected && (
+        {!isInternetReachable && (
           <GlobalText style={style.connectivityWarningText}>
             {t("exposure_history.no_connectivity_message")}
           </GlobalText>
