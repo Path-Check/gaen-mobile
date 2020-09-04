@@ -5,10 +5,10 @@ import java.util.UUID;
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class RNExposureInformation {
   private String id;
-  private long date;
-  private long duration; // Minutes
+  private long date; // Milliseconds
+  private double duration; // Minutes
 
-  public RNExposureInformation(long date, long duration) {
+  public RNExposureInformation(long date, double duration) {
     this.id = UUID.randomUUID().toString();
     this.date = date;
     this.duration = duration;

@@ -2,35 +2,44 @@ import Foundation
 import ZIPFoundation
 import CryptoKit
 
-protocol DownloadedPackage {
-  func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL
-  func writeKeysEntry(toDirectory directory: URL, filename: String) throws -> URL
+protocol DownloadableFile {
+
+  static func create(from data: Data) -> Self?
 }
 
-struct DownloadedPackageImpl: DownloadedPackage {
+class DownloadedPackage: DownloadableFile {
+  
+  static func create(from data: Data) -> Self? {
+    guard let archive = Archive(data: data, accessMode: .read) else {
+      return nil
+    }
+    do {
+      return try archive.extractKeyPackage() as? Self
+    } catch {
+      return nil
+    }
+  }
+
 
   init(keysBin: Data, signature: Data) {
     bin = keysBin
     self.signature = signature
   }
 
-  init?(compressedData: Data) {
-    guard let archive = Archive(data: compressedData, accessMode: .read) else {
-      return nil
-    }
-    do {
-      guard let package = try archive.extractKeyPackage() as? DownloadedPackageImpl else {
-        return nil
-      }
-      self = package
-    } catch {
-      return nil
-    }
-  }
-
   let bin: Data
   let signature: Data
 
+  func writeSignatureEntry(toDirectory directory: URL, filename: String) throws -> URL {
+    let url = directory.appendingPathComponent(filename).appendingPathExtension(String.sigExtension)
+    try signature.write(to: url)
+    return url
+  }
+
+  func writeKeysEntry(toDirectory directory: URL, filename: String) throws -> URL {
+    let url = directory.appendingPathComponent(filename).appendingPathExtension(String.binExtension)
+    try bin.write(to: url)
+    return url
+  }
 }
 
 private extension Archive {
@@ -50,15 +59,27 @@ private extension Archive {
   }
 
   func extractKeyPackage() throws -> DownloadedPackage {
-    guard let binEntry = self["export.bin"] else {
+    guard let binEntry = self[String.binEntry] else {
       throw KeyPackageError.binNotFound
     }
-    guard let sigEntry = self["export.sig"] else {
+    guard let sigEntry = self[String.sigEntry] else {
       throw KeyPackageError.sigNotFound
     }
-    return DownloadedPackageImpl(
+    return DownloadedPackage(
       keysBin: try extractData(from: binEntry),
       signature: try extractData(from: sigEntry)
     )
+  }
+}
+
+fileprivate extension String {
+  static let binExtension = "bin"
+  static let sigExtension = "sig"
+  static let exportFilename = "export"
+  static var binEntry: String {
+    "\(exportFilename).\(binExtension)"
+  }
+  static var sigEntry: String {
+    "\(exportFilename).\(sigExtension)"
   }
 }

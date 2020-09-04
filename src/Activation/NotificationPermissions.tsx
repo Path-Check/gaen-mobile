@@ -11,8 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { ActivationScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
-import { GlobalText } from "../components"
-import { Button } from "../components"
+import { GlobalText, Button } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 

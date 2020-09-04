@@ -30,6 +30,7 @@ const SCREEN_OPTIONS: StackNavigationOptions = {
   },
   headerBackTitleVisible: false,
   headerTintColor: Colors.headerText,
+  headerTitleAlign: "center",
 }
 
 const MoreStack: FunctionComponent = () => {

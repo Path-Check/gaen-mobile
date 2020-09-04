@@ -120,8 +120,7 @@ public class Uris {
 
           Uri indexUri = baseDownloadUri.buildUpon().appendEncodedPath(INDEX_FILE_PATH).build();
           Log.d(TAG, "Getting index file from " + indexUri);
-          StringRequest request =
-              new StringRequest(indexUri.toString(), responseListener, errorListener);
+          StringRequest request = new StringRequest(indexUri.toString(), responseListener, errorListener);
           request.setShouldCache(false);
           RequestQueueSingleton.get().add(request);
           return request;

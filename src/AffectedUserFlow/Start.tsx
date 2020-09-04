@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
   View,
   Image,
   ScrollView,
@@ -10,19 +10,16 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
-import { useStatusBarEffect } from "../navigation"
-import { Screens } from "../navigation"
+import { StatusBar, GlobalText, Button } from "../components"
+import { Screens, useStatusBarEffect } from "../navigation"
 
-import { Spacing, Colors, Iconography, Typography, Layout } from "../styles"
+import { Layout, Spacing, Colors, Iconography, Typography } from "../styles"
 import { Images, Icons } from "../assets"
 
 export const ExportIntro: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
-
-  useStatusBarEffect("dark-content")
 
   const handleOnPressNext = () => {
     navigation.navigate(Screens.AffectedUserCodeInput)
@@ -33,44 +30,47 @@ export const ExportIntro: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      <View style={style.cancelButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressCancel}
+    <>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <View style={style.cancelButtonContainer}>
+          <TouchableOpacity
+            onPress={handleOnPressCancel}
+            accessible
+            accessibilityLabel={t("export.code_input_button_cancel")}
+          >
+            <View style={style.cancelButtonInnerContainer}>
+              <SvgXml
+                xml={Icons.X}
+                fill={Colors.black}
+                width={Iconography.xSmall}
+                height={Iconography.xSmall}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Image
+          source={Images.PersonAndHealthExpert}
+          style={style.image}
           accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-      <Image
-        source={Images.PersonAndHealthExpert}
-        style={style.image}
-        accessible
-        accessibilityLabel={t("exoprt.start_image_label")}
-      />
-      <GlobalText style={style.header}>
-        {t("export.start_header_bluetooth")}
-      </GlobalText>
-      <View style={style.buttonContainer}>
-        <Button
-          label={t("common.start")}
-          onPress={handleOnPressNext}
-          hasRightArrow
+          accessibilityLabel={t("exoprt.start_image_label")}
         />
-      </View>
-    </ScrollView>
+        <GlobalText style={style.header}>
+          {t("export.start_header_bluetooth")}
+        </GlobalText>
+        <View style={style.buttonContainer}>
+          <Button
+            label={t("common.start")}
+            onPress={handleOnPressNext}
+            hasRightArrow
+          />
+        </View>
+      </ScrollView>
+    </>
   )
 }
 

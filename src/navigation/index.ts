@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { Platform, StatusBar } from "react-native"
+import { Platform, StatusBar, StatusBarStyle } from "react-native"
 import {
   NavigationParams,
   NavigationScreenProp,
@@ -17,6 +17,7 @@ export type NavigationProp = NavigationScreenProp<
 export type ActivationScreen =
   | "AcceptEula"
   | "ActivateProximityTracing"
+  | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
 
@@ -25,6 +26,7 @@ export const ActivationScreens: {
 } = {
   AcceptEula: "AcceptEula",
   ActivateProximityTracing: "ActivateProximityTracing",
+  ActivateLocation: "ActivateLocation",
   NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
 }
@@ -185,16 +187,16 @@ export const Stacks: { [key in Stack]: Stack } = {
   ReportIssue: "ReportIssue",
 }
 
-export type StatusBarStyle = "dark-content" | "light-content"
-
-export const useStatusBarEffect = (statusBarStyle: StatusBarStyle): void => {
+export const useStatusBarEffect = (
+  statusBarStyle: StatusBarStyle,
+  backgroundColor: string,
+): void => {
   useFocusEffect(
     useCallback(() => {
       StatusBar.setBarStyle(statusBarStyle)
       if (Platform.OS === "android") {
-        StatusBar.setBackgroundColor("transparent")
-        StatusBar.setTranslucent(true)
+        StatusBar.setBackgroundColor(backgroundColor)
       }
-    }, [statusBarStyle]),
+    }, [statusBarStyle, backgroundColor]),
   )
 }

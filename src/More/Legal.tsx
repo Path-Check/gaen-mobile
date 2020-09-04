@@ -1,16 +1,20 @@
 import React, { FunctionComponent } from "react"
-import { Linking, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Linking, ScrollView, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { useApplicationName } from "./useApplicationInfo"
-import { GlobalText } from "../components/GlobalText"
+import { useApplicationName } from "../hooks/useApplicationInfo"
+import { GlobalText } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 import { useConfigurationContext } from "../ConfigurationContext"
+import useAuthorityCopy from "../configuration/useAuthorityCopy"
 
 const Legal: FunctionComponent = () => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
   const { applicationName } = useApplicationName()
   const {
     healthAuthorityName,
@@ -21,12 +25,17 @@ const Legal: FunctionComponent = () => {
     Linking.openURL(healthAuthorityPrivacyPolicyUrl)
   }
 
+  const legalContent = useAuthorityCopy(
+    "legal",
+    localeCode,
+    healthAuthorityName,
+  )
+
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container} alwaysBounceVertical={false}>
       <GlobalText style={style.headerContent} testID={"licenses-legal-header"}>
         {applicationName}
       </GlobalText>
-      <GlobalText style={style.contentText}>{healthAuthorityName}</GlobalText>
       <TouchableOpacity
         onPress={handleOnPressLink}
         accessibilityLabel={t("label.privacy_policy")}
@@ -36,7 +45,8 @@ const Legal: FunctionComponent = () => {
         </GlobalText>
         <SvgXml xml={Icons.ChevronRight} fill={Colors.white} />
       </TouchableOpacity>
-    </View>
+      <GlobalText style={style.contentText}>{legalContent}</GlobalText>
+    </ScrollView>
   )
 }
 

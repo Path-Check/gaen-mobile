@@ -10,10 +10,11 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, Screens } from "../navigation"
+import { useStatusBarEffect } from "../navigation/index"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
 
@@ -22,6 +23,7 @@ type ENDebugMenuProps = {
 }
 
 const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
 

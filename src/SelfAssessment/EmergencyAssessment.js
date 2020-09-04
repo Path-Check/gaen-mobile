@@ -9,7 +9,7 @@ import {
 } from "./constants"
 import { AssessmentLayout } from "./AssessmentLayout"
 import InfoText from "./InfoText"
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 
 import { Typography, Buttons, Colors } from "../styles"
 

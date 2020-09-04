@@ -11,9 +11,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components/GlobalText"
-import { useApplicationName } from "../More/useApplicationInfo"
-import { useStatusBarEffect } from "../navigation"
+import { GlobalText } from "../components"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -28,7 +27,6 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  useStatusBarEffect("dark-content")
 
   const headerContainerConditionalStyle = modalStyle && {
     ...style.headerContainerModal,

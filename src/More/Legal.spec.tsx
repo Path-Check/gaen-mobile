@@ -3,7 +3,7 @@ import "react-native"
 import { render, waitFor, fireEvent } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
-import { useApplicationName } from "./useApplicationInfo"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import Legal from "./Legal"
 import { Linking } from "react-native"
@@ -11,7 +11,7 @@ import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
-jest.mock("./useApplicationInfo")
+jest.mock("../hooks/useApplicationInfo")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 ;(useFocusEffect as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 

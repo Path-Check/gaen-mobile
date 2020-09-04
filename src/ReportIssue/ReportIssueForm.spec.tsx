@@ -6,7 +6,7 @@ import ReportIssueForm from "./ReportIssueForm"
 import * as API from "../More/zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"
-jest.mock("../More/useApplicationInfo", () => {
+jest.mock("../hooks/useApplicationInfo", () => {
   return {
     useVersionInfo: () => {
       return {

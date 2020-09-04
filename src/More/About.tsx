@@ -2,29 +2,33 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { Platform, ScrollView, StyleSheet, View } from "react-native"
 
-import { GlobalText } from "../components/GlobalText"
-
+import { GlobalText } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
-import { useApplicationInfo } from "./useApplicationInfo"
+import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
+import useAuthorityCopy from "../configuration/useAuthorityCopy"
 
 export const AboutScreen: FunctionComponent = () => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
   const { healthAuthorityName } = useConfigurationContext()
 
+  const aboutContent = useAuthorityCopy(
+    "about",
+    localeCode,
+    t("about.description", { applicationName, healthAuthorityName }),
+  )
+
   return (
-    <ScrollView
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
+    <ScrollView style={style.container} alwaysBounceVertical={false}>
       <View>
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
-      <GlobalText style={style.aboutContent}>
-        {t("about.description", { applicationName, healthAuthorityName })}
-      </GlobalText>
+      <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
           <GlobalText style={style.aboutSectionParaLabel}>
@@ -48,7 +52,7 @@ export const AboutScreen: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
-  contentContainer: {
+  container: {
     flex: 1,
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
@@ -74,6 +78,7 @@ const style = StyleSheet.create({
   },
   infoRowContainer: {
     marginTop: Spacing.medium,
+    marginBottom: Spacing.medium,
   },
   infoRow: {
     flexDirection: "row",

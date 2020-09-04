@@ -7,18 +7,18 @@ import {
   TextInput,
   View,
   Keyboard,
+  ScrollView,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../../components/GlobalText"
-import { Button } from "../../components/Button"
+import { GlobalText, Button, StatusBar } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { Screens } from "../../navigation"
+import { Screens, useStatusBarEffect } from "../../navigation"
 
 import { Icons } from "../../assets"
 import {
@@ -32,9 +32,10 @@ import {
 } from "../../styles"
 import Logger from "../../logger"
 
-const defaultErrorMessage = " "
+const defaultErrorMessage = ""
 
 const CodeInputForm: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
@@ -156,80 +157,86 @@ const CodeInputForm: FunctionComponent = () => {
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
   return (
-    <View style={style.container} testID={"affected-user-code-input-form"}>
-      <View style={style.backButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressBack}
-          accessible
-          accessibilityLabel={t("export.code_input_button_back")}
-        >
-          <View style={style.backButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.ArrowLeft}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
+    <>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        testID={"affected-user-code-input-form"}
+      >
+        <View style={style.backButtonContainer}>
+          <TouchableOpacity
+            onPress={handleOnPressBack}
+            accessible
+            accessibilityLabel={t("export.code_input_button_back")}
+          >
+            <View style={style.backButtonInnerContainer}>
+              <SvgXml
+                xml={Icons.ArrowLeft}
+                fill={Colors.black}
+                width={Iconography.xSmall}
+                height={Iconography.xSmall}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
 
-      <View style={style.cancelButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressCancel}
-          accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
+        <View style={style.cancelButtonContainer}>
+          <TouchableOpacity
+            onPress={handleOnPressCancel}
+            accessible
+            accessibilityLabel={t("export.code_input_button_cancel")}
+          >
+            <View style={style.cancelButtonInnerContainer}>
+              <SvgXml
+                xml={Icons.X}
+                fill={Colors.black}
+                width={Iconography.xSmall}
+                height={Iconography.xSmall}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
 
-      <View style={style.headerContainer}>
-        <GlobalText style={style.header}>
-          {t("export.code_input_title_bluetooth")}
-        </GlobalText>
+        <View style={style.headerContainer}>
+          <GlobalText style={style.header}>
+            {t("export.code_input_title_bluetooth")}
+          </GlobalText>
 
-        <GlobalText style={style.subheader}>
-          {t("export.code_input_body_bluetooth")}
-        </GlobalText>
-      </View>
+          <GlobalText style={style.subheader}>
+            {t("export.code_input_body_bluetooth")}
+          </GlobalText>
+        </View>
 
-      <View>
-        <TextInput
-          testID="code-input"
-          value={code}
-          placeholder="00000000"
-          placeholderTextColor={Colors.placeholderText}
-          maxLength={codeLength}
-          style={codeInputStyle}
-          keyboardType="number-pad"
-          returnKeyType="done"
-          onChangeText={handleOnChangeText}
-          onFocus={handleOnToggleFocus}
-          onBlur={handleOnToggleFocus}
-          onSubmitEditing={Keyboard.dismiss}
-          blurOnSubmit={false}
+        <View>
+          <TextInput
+            testID="code-input"
+            value={code}
+            placeholder="00000000"
+            placeholderTextColor={Colors.placeholderText}
+            maxLength={codeLength}
+            style={codeInputStyle}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            onChangeText={handleOnChangeText}
+            onFocus={handleOnToggleFocus}
+            onBlur={handleOnToggleFocus}
+            onSubmitEditing={Keyboard.dismiss}
+            blurOnSubmit={false}
+          />
+        </View>
+
+        <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
+        {isLoading ? <LoadingIndicator /> : null}
+
+        <Button
+          onPress={handleOnPressSubmit}
+          label={t("common.next")}
+          disabled={isDisabled}
+          customButtonStyle={style.button}
+          hasRightArrow
         />
-      </View>
-
-      <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
-      {isLoading ? <LoadingIndicator /> : null}
-
-      <Button
-        onPress={handleOnPressSubmit}
-        label={t("common.next")}
-        disabled={isDisabled}
-        customButtonStyle={style.button}
-        hasRightArrow
-      />
-    </View>
+      </ScrollView>
+    </>
   )
 }
 
@@ -247,13 +254,12 @@ const LoadingIndicator = () => {
 }
 
 const indicatorWidth = 120
-
 const style = StyleSheet.create({
-  container: {
-    paddingHorizontal: Spacing.medium,
-    paddingTop: 110,
-    paddingBottom: Spacing.small,
+  contentContainer: {
     backgroundColor: Colors.primaryLightBackground,
+    paddingTop: 110,
+    paddingBottom: Spacing.xxxHuge,
+    paddingHorizontal: Spacing.medium,
   },
   backButtonContainer: {
     position: "absolute",
@@ -290,10 +296,8 @@ const style = StyleSheet.create({
   codeInput: {
     ...Forms.textInput,
     ...Typography.mediumBold,
-    height: 70,
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
-    lineHeight: Typography.largeLineHeight,
     letterSpacing: 8,
   },
   codeInputFocused: {

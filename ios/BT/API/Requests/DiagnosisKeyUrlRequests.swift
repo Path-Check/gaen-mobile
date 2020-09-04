@@ -3,7 +3,7 @@ import ExposureNotification
 
 enum DiagnosisKeyUrlRequest: APIRequest {
 
-  typealias ResponseType = Void
+  typealias ResponseType = DownloadedPackage
 
   case get(String)
 

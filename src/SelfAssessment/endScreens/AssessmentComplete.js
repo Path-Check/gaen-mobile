@@ -6,7 +6,7 @@ import { Icons, Images } from "../../assets"
 import { AssessmentNavigationContext } from "../Context"
 import { AssessmentLayout } from "../AssessmentLayout"
 import InfoText from "../InfoText"
-import { Button } from "../../components/Button"
+import { Button } from "../../components"
 
 import { Colors } from "../../styles"
 
