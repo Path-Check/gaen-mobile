@@ -6,9 +6,15 @@ import { GlobalText } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
-import useAuthorityCopy from "../configuration/useAuthorityCopy"
-import useAuthorityLinks from "../configuration/useAuthorityLinks"
 import ExternalLink from "./ExternalLink"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
 export const AboutScreen: FunctionComponent = () => {
   const {
@@ -19,13 +25,16 @@ export const AboutScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const { healthAuthorityName } = useConfigurationContext()
 
-  const aboutContent = useAuthorityCopy(
-    "about",
+  const aboutContent = authorityCopyTranslation(
+    loadAuthorityCopy("about"),
     localeCode,
     t("about.description", { applicationName, healthAuthorityName }),
   )
 
-  const authorityLinks = useAuthorityLinks("about", localeCode)
+  const authorityLinks = applyTranslations(
+    loadAuthorityLinks("about"),
+    localeCode,
+  )
 
   return (
     <ScrollView style={style.container} alwaysBounceVertical={false}>

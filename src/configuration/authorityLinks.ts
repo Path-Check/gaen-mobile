@@ -13,15 +13,20 @@ type DisplayableLink = {
   label: string
 }
 
-const useAuthorityLinks = (
-  key: LinkKeys,
+const loadAuthorityLinks = (key: LinkKeys): LinkData[] => {
+  const authorityLinks = links as AuthorityLinksContent
+  if (authorityLinks && authorityLinks[key]) {
+    return authorityLinks[key]
+  }
+  return []
+}
+
+const applyTranslations = (
+  links: LinkData[],
   localeCode: string,
 ): DisplayableLink[] => {
   try {
-    const authorityLinks = links as AuthorityLinksContent
-    const linksForKey = authorityLinks[key] || []
-
-    const linksOverride = linksForKey
+    return links
       .filter(({ label }) => {
         const localizedLabel = label[localeCode] || label[DEFAULT_LOCALE]
         return localizedLabel.length > 0
@@ -30,10 +35,9 @@ const useAuthorityLinks = (
         const localizedLabel = label[localeCode] || label[DEFAULT_LOCALE]
         return { url, label: localizedLabel }
       })
-    return linksOverride
   } catch {
     return []
   }
 }
 
-export default useAuthorityLinks
+export { applyTranslations, loadAuthorityLinks }

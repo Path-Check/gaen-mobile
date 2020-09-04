@@ -6,9 +6,15 @@ import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
-import useAuthorityCopy from "../configuration/useAuthorityCopy"
-import useAuthorityLinks from "../configuration/useAuthorityLinks"
 import ExternalLink from "./ExternalLink"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
 const Legal: FunctionComponent = () => {
   const {
@@ -21,13 +27,16 @@ const Legal: FunctionComponent = () => {
     healthAuthorityPrivacyPolicyUrl,
   } = useConfigurationContext()
 
-  const legalContent = useAuthorityCopy(
-    "legal",
+  const legalContent = authorityCopyTranslation(
+    loadAuthorityCopy("legal"),
     localeCode,
     healthAuthorityName,
   )
 
-  const authorityLinks = useAuthorityLinks("legal", localeCode)
+  const authorityLinks = applyTranslations(
+    loadAuthorityLinks("legal"),
+    localeCode,
+  )
 
   return (
     <ScrollView style={style.container} alwaysBounceVertical={false}>

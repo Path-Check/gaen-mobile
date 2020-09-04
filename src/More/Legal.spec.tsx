@@ -6,14 +6,17 @@ import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import useAuthorityLinks from "../configuration/useAuthorityLinks"
 import Legal from "./Legal"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
 jest.mock("@react-navigation/native")
 jest.mock("../hooks/useApplicationInfo")
-jest.mock("../configuration/useAuthorityLinks")
+jest.mock("../configuration/authorityLinks")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 ;(useFocusEffect as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
@@ -24,7 +27,6 @@ describe("Legal", () => {
     ;(useApplicationName as jest.Mock).mockReturnValueOnce({
       applicationName,
     })
-    ;(useAuthorityLinks as jest.Mock).mockReturnValueOnce([])
 
     const { getByText } = render(<Legal />)
 
@@ -39,7 +41,6 @@ describe("Legal", () => {
     ;(useApplicationName as jest.Mock).mockReturnValueOnce({
       applicationName: "applicationName",
     })
-    ;(useAuthorityLinks as jest.Mock).mockReturnValueOnce([])
     const { getByText } = render(
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityName })}
@@ -57,7 +58,6 @@ describe("Legal", () => {
     ;(useApplicationName as jest.Mock).mockReturnValueOnce({
       applicationName: "applicationName",
     })
-    ;(useAuthorityLinks as jest.Mock).mockReturnValueOnce([])
 
     const openURLSpy = jest.spyOn(Linking, "openURL")
 
@@ -83,8 +83,10 @@ describe("Legal", () => {
     const label = "labelOverride"
 
     const authorityLinks = [{ url, label }]
-    const useAuthorityLinksSpy = useAuthorityLinks as jest.Mock
-    useAuthorityLinksSpy.mockReturnValueOnce(authorityLinks)
+    const loadAuthorityLinksSpy = loadAuthorityLinks as jest.Mock
+    loadAuthorityLinksSpy.mockReturnValueOnce([])
+    const applyTranslationsSpy = applyTranslations as jest.Mock
+    applyTranslationsSpy.mockReturnValueOnce(authorityLinks)
     ;(useApplicationName as jest.Mock).mockReturnValueOnce({
       applicationName: "applicationName",
     })
@@ -95,7 +97,8 @@ describe("Legal", () => {
     fireEvent.press(getByLabelText(label))
 
     await waitFor(() => {
-      expect(useAuthorityLinksSpy).toHaveBeenCalledWith("legal", "en")
+      expect(loadAuthorityLinksSpy).toHaveBeenCalledWith("legal")
+      expect(applyTranslationsSpy).toHaveBeenCalledWith([], "en")
       expect(openURLSpy).toHaveBeenCalledWith(url)
     })
   })

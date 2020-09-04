@@ -6,9 +6,12 @@ import AboutScreen from "./About"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
-import useAuthorityLinks from "../configuration/useAuthorityLinks"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
-jest.mock("../configuration/useAuthorityLinks")
+jest.mock("../configuration/authorityLinks")
 jest.mock("../hooks/useApplicationInfo")
 describe("About", () => {
   it("shows the name of the application", () => {
@@ -82,8 +85,10 @@ describe("About", () => {
     const label = "labelOverride"
 
     const authorityLinks = [{ url, label }]
-    const useAuthorityLinksSpy = useAuthorityLinks as jest.Mock
-    useAuthorityLinksSpy.mockReturnValueOnce(authorityLinks)
+    const loadAuthorityLinksSpy = loadAuthorityLinks as jest.Mock
+    loadAuthorityLinksSpy.mockReturnValueOnce([])
+    const applyTranslationsSpy = applyTranslations as jest.Mock
+    applyTranslationsSpy.mockReturnValueOnce(authorityLinks)
     ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
       applicationName: "applicationName",
       versionInfo: "versionInfo",
@@ -95,7 +100,8 @@ describe("About", () => {
     fireEvent.press(getByLabelText(label))
 
     await waitFor(() => {
-      expect(useAuthorityLinksSpy).toHaveBeenCalledWith("about", "en")
+      expect(loadAuthorityLinksSpy).toHaveBeenCalledWith("about")
+      expect(applyTranslationsSpy).toHaveBeenCalledWith([], "en")
       expect(openURLSpy).toHaveBeenCalledWith(url)
     })
   })
