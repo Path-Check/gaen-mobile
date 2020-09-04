@@ -35,7 +35,7 @@ const ActivationSummary: FunctionComponent = () => {
   const {
     exposureNotifications: { status },
   } = usePermissionsContext()
-  const isProximityTracingOn = status === ENPermissionStatus.ENABLED
+  const isENEnabled = status === ENPermissionStatus.ENABLED
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()
@@ -93,7 +93,7 @@ const ActivationSummary: FunctionComponent = () => {
   }
 
   const isAppSetupComplete =
-    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+    isENEnabled && isBluetoothOn && !isLocationOffAndNeeded
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent

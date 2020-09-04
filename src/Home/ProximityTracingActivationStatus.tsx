@@ -49,10 +49,12 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
     navigation.navigate(HomeScreens.ProximityTracingInfo)
   }
 
+  const isENEnabled = status === ENPermissionStatus.ENABLED
+
   return (
     <ActivationStatus
       headerText={t("home.bluetooth.proximity_tracing_header")}
-      isActive={status === ENPermissionStatus.ENABLED}
+      isActive={isENEnabled}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
       testID={"home-proximity-tracing-status-container"}
