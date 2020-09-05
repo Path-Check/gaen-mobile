@@ -8,7 +8,7 @@ import {
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useIsFocused } from "@react-navigation/native"
 import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
@@ -34,15 +34,12 @@ const History: FunctionComponent<HistoryProps> = ({
   lastDetectionDate,
   exposures,
 }) => {
+  useIsFocused()
   useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false)
   const previousExposuresRef = useRef<ExposureDatum[]>()
-
-  useEffect(() => {
-    previousExposuresRef.current = exposures
-  })
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
@@ -57,6 +54,14 @@ const History: FunctionComponent<HistoryProps> = ({
     setRefreshing(false)
   }
 
+  useEffect(() => {
+    previousExposuresRef.current = exposures
+  }, [exposures])
+
+  const refreshControl = (
+    <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
+  )
+
   const showExposureHistory = exposures.length > 0
 
   return (
@@ -65,9 +70,7 @@ const History: FunctionComponent<HistoryProps> = ({
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
-        }
+        refreshControl={refreshControl}
       >
         <View>
           <View style={style.headerRow}>
