@@ -59,6 +59,7 @@
     "react": "16.11.0",
     "react-i18next": "^11.4.0",
     "react-native": "0.62.2",
+    "react-native-appstate-hook": "^1.0.4",
     "react-native-config": "^1.2.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",

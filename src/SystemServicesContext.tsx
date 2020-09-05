@@ -2,10 +2,12 @@ import React, {
   createContext,
   useState,
   useEffect,
+  useCallback,
   FunctionComponent,
   useContext,
 } from "react"
 import { AppState, Platform } from "react-native"
+import useAppState from "react-native-appstate-hook"
 
 import { isBluetoothEnabled } from "./gaen/nativeModule"
 import { isLocationEnabled } from "./gaen/nativeModule"
@@ -34,20 +36,16 @@ const useIsBluetoothOn = () => {
     return isBluetoothEnabled()
   }
 
-  useEffect(() => {
-    const determineIsBluetoothOn = async () => {
-      const status = await fetchIsBluetoothOn()
-      setIsBluetoothOn(status)
-    }
-
-    determineIsBluetoothOn()
-
-    const handleAppStateChange = () => {
-      determineIsBluetoothOn()
-    }
-    addListener(handleAppStateChange)
-    return removeListener(handleAppStateChange)
+  const determineIsBluetoothOn = useCallback(async () => {
+    const status = await fetchIsBluetoothOn()
+    setIsBluetoothOn(status)
   }, [])
+
+  useEffect(() => {
+    determineIsBluetoothOn()
+  }, [determineIsBluetoothOn])
+
+  useAppState({ onForeground: () => determineIsBluetoothOn() })
 
   return isBluetoothOn
 }
@@ -63,20 +61,17 @@ const useIsLocationOn = () => {
     }
   }
 
-  useEffect(() => {
-    const determineIsLocationOn = async () => {
-      const status = await fetchIsLocationOn()
-      setIsLocationOn(status)
-    }
-
-    determineIsLocationOn()
-
-    const handleAppStateChange = () => {
-      determineIsLocationOn()
-    }
-    addListener(handleAppStateChange)
-    return removeListener(handleAppStateChange)
+  const determineIsLocationOn = useCallback(async () => {
+    console.log("on run")
+    const status = await fetchIsLocationOn()
+    setIsLocationOn(status)
   }, [])
+
+  useEffect(() => {
+    determineIsLocationOn()
+  }, [determineIsLocationOn])
+
+  useAppState({ onForeground: () => determineIsLocationOn() })
 
   return isLocationOn
 }
@@ -84,22 +79,25 @@ const useIsLocationOn = () => {
 const useIsLocationNeeded = () => {
   const [isLocationNeeded, setIsLocationNeeded] = useState(false)
 
-  const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {
+  const fetchIsLocationNeeded = async (): Promise<boolean> => {
     if (Platform.OS === "android") {
-      return doesDeviceSupportLocationlessScanning()
+      return !doesDeviceSupportLocationlessScanning()
     } else {
       return Promise.resolve(true)
     }
   }
 
-  useEffect(() => {
-    const determineIsLocationNeeded = async () => {
-      const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
-      setIsLocationNeeded(!supportsLocationlessScanning)
-    }
-
-    determineIsLocationNeeded()
+  const determineIsLocationNeeded = useCallback(async () => {
+    console.log("need run")
+    const status = await fetchIsLocationNeeded()
+    setIsLocationNeeded(status)
   }, [])
+
+  useEffect(() => {
+    determineIsLocationNeeded()
+  }, [determineIsLocationNeeded])
+
+  useAppState({ onForeground: () => determineIsLocationNeeded() })
 
   return isLocationNeeded
 }
@@ -131,22 +129,3 @@ const useSystemServicesContext = (): SystemServicesState => {
 }
 
 export { SystemServicesProvider, useSystemServicesContext }
-
-type ListenerMethod = "focus" | "change"
-const determineOSListener = (): ListenerMethod => {
-  return Platform.select({
-    ios: "change",
-    android: "focus",
-    default: "change",
-  })
-}
-
-const addListener = (handleAppStateChange: () => void): void => {
-  AppState.addEventListener(determineOSListener(), () => handleAppStateChange())
-}
-
-const removeListener = (handleAppStateChange: () => void): void => {
-  AppState.removeEventListener(determineOSListener(), () =>
-    handleAppStateChange(),
-  )
-}
