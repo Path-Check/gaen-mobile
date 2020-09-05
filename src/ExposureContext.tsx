@@ -26,12 +26,8 @@ export interface ExposureState {
   getCurrentExposures: () => Promise<ExposureInfo>
   getExposureKeys: () => Promise<ExposureKey[]>
   getRevisionToken: () => Promise<string>
-  hasBeenExposed: boolean
   lastExposureDetectionDate: Posix | null
-  observeExposures: () => void
-  resetExposures: () => void
   storeRevisionToken: (revisionToken: string) => Promise<void>
-  userHasNewExposure: boolean
 }
 
 const initialState = {
@@ -45,14 +41,10 @@ const initialState = {
   getRevisionToken: () => {
     return Promise.resolve("")
   },
-  hasBeenExposed: false,
   lastExposureDetectionDate: null,
-  observeExposures: (): void => {},
-  resetExposures: (): void => {},
   storeRevisionToken: () => {
     return Promise.resolve()
   },
-  userHasNewExposure: true,
 }
 
 export const ExposureContext = createContext<ExposureState>(initialState)
@@ -64,7 +56,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   } = exposureEventsStrategy
 
   const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
-  const [userHasNewExposure, setUserHasNewExposure] = useState<boolean>(false)
 
   const [
     lastExposureDetectionDate,
@@ -105,15 +96,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     return subscription.remove
   }, [exposureInfoSubscription, getLastExposureDetectionDate])
 
-  const observeExposures = () => {
-    setUserHasNewExposure(false)
-  }
-
-  const resetExposures = () => {
-    setUserHasNewExposure(true)
-  }
-
-  const hasBeenExposed = false
   return (
     <ExposureContext.Provider
       value={{
@@ -121,12 +103,8 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
         getCurrentExposures,
         getExposureKeys,
         getRevisionToken,
-        hasBeenExposed,
         lastExposureDetectionDate,
-        observeExposures,
-        resetExposures,
         storeRevisionToken,
-        userHasNewExposure,
       }}
     >
       {children}
