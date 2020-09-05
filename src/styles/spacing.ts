@@ -12,3 +12,7 @@ export const huge = 40
 export const xHuge = 44
 export const xxHuge = 48
 export const xxxHuge = 52
+export const massive = 70
+export const xMassive = 80
+export const xxMassive = 90
+export const xxxMassive = 100
