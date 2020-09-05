@@ -6,7 +6,7 @@ import React, {
   FunctionComponent,
   useContext,
 } from "react"
-import { AppState, Platform } from "react-native"
+import { Platform } from "react-native"
 import useAppState from "react-native-appstate-hook"
 
 import { isBluetoothEnabled } from "./gaen/nativeModule"
@@ -32,13 +32,8 @@ export const SystemServicesContext = createContext<SystemServicesState>(
 const useIsBluetoothOn = () => {
   const [isBluetoothOn, setIsBluetoothOn] = useState(false)
 
-  const fetchIsBluetoothOn = async (): Promise<boolean> => {
-    return isBluetoothEnabled()
-  }
-
   const determineIsBluetoothOn = useCallback(async () => {
-    const status = await fetchIsBluetoothOn()
-    setIsBluetoothOn(status)
+    isBluetoothEnabled().then((result) => setIsBluetoothOn(result))
   }, [])
 
   useEffect(() => {
@@ -53,18 +48,12 @@ const useIsBluetoothOn = () => {
 const useIsLocationOn = () => {
   const [isLocationOn, setIsLocationOn] = useState(false)
 
-  const fetchIsLocationOn = async (): Promise<boolean> => {
-    if (Platform.OS === "android") {
-      return isLocationEnabled()
-    } else {
-      return Promise.resolve(true)
-    }
-  }
-
   const determineIsLocationOn = useCallback(async () => {
-    console.log("on run")
-    const status = await fetchIsLocationOn()
-    setIsLocationOn(status)
+    if (Platform.OS === "android") {
+      isLocationEnabled().then((result) => setIsLocationOn(result))
+    } else {
+      setIsLocationOn(true)
+    }
   }, [])
 
   useEffect(() => {
@@ -79,18 +68,14 @@ const useIsLocationOn = () => {
 const useIsLocationNeeded = () => {
   const [isLocationNeeded, setIsLocationNeeded] = useState(false)
 
-  const fetchIsLocationNeeded = async (): Promise<boolean> => {
-    if (Platform.OS === "android") {
-      return !doesDeviceSupportLocationlessScanning()
-    } else {
-      return Promise.resolve(true)
-    }
-  }
-
   const determineIsLocationNeeded = useCallback(async () => {
-    console.log("need run")
-    const status = await fetchIsLocationNeeded()
-    setIsLocationNeeded(status)
+    if (Platform.OS === "android") {
+      doesDeviceSupportLocationlessScanning().then((result) =>
+        setIsLocationNeeded(!result),
+      )
+    } else {
+      setIsLocationNeeded(false)
+    }
   }, [])
 
   useEffect(() => {
