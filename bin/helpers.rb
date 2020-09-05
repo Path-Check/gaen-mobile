@@ -1,5 +1,19 @@
+def url_exists?(remote_url)
+  output, _error, status = Open3.capture3(
+    "curl", "-I", remote_url
+  )
+  url_exists = output.split("\n")[0].match("404").to_a.empty?
+
+  return true if status.success? && url_exists
+
+  puts "#{remote_url} could not be found"
+  false
+end
+
 def download_file(file_name, remote_url)
-  _output, _error, status = Open3.capture3(
+  return false unless url_exists?(remote_url)
+
+  _output, error, status = Open3.capture3(
     "curl", remote_url, "-L", "-o", file_name
   )
   return true if status.success?
@@ -61,4 +75,13 @@ end
 
 def valid_token(token)
   token.length == 40
+end
+
+def mobile_resources_commit
+  dir = File.join(File.dirname(__FILE__), '../mobile_resources_commit')
+  file = File.open(dir)
+  commit = file.read.chomp
+  file.close
+
+  commit
 end

@@ -14,32 +14,40 @@ import {
 
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
 import gaenStrategy from "./gaen"
+import { isPlatformiOS } from "./utils"
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`
-export type ENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
-const initialENPermissionStatus: ENPermissionStatus = [
+export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
+const initialENPermissionStatus: RawENPermissionStatus = [
   "UNAUTHORIZED",
   "DISABLED",
 ]
 
-const toAuthorizationEnablementStatus = (
-  enPermissionStatus: ENPermissionStatus,
-): ENAuthorizationEnablementStatus => {
-  const isENAuthorized = enPermissionStatus[0] === "AUTHORIZED"
-  const isENEnabled = enPermissionStatus[1] === "ENABLED"
+export enum ENPermissionStatus {
+  NOT_AUTHORIZED,
+  DISABLED,
+  ENABLED,
+}
 
-  return {
-    authorized: isENAuthorized,
-    enabled: isENEnabled,
+const toENPermissionStatusEnum = (
+  enPermissionStatus: RawENPermissionStatus,
+): ENPermissionStatus => {
+  const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
+  const isEnabled = enPermissionStatus[1] === "ENABLED"
+
+  if (!isAuthorized) {
+    return isPlatformiOS()
+      ? ENPermissionStatus.NOT_AUTHORIZED
+      : ENPermissionStatus.DISABLED
+  } else if (!isEnabled) {
+    return ENPermissionStatus.DISABLED
+  } else {
+    return ENPermissionStatus.ENABLED
   }
 }
 
-export type ENAuthorizationEnablementStatus = {
-  authorized: boolean
-  enabled: boolean
-}
-const initialENAuthorizationEnablementStatus: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
+const initialENStatus: ENPermissionStatus = toENPermissionStatusEnum(
   initialENPermissionStatus,
 )
 
@@ -50,9 +58,9 @@ export interface PermissionsContextState {
     request: () => void
   }
   exposureNotifications: {
-    status: ENAuthorizationEnablementStatus
+    status: ENPermissionStatus
     check: () => void
-    request: () => void
+    request: () => Promise<void>
   }
 }
 
@@ -63,9 +71,9 @@ const initialState = {
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENAuthorizationEnablementStatus,
+    status: initialENStatus,
     check: () => {},
-    request: () => {},
+    request: () => Promise.resolve(),
   },
 }
 
@@ -73,17 +81,17 @@ const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 export interface PermissionStrategy {
   statusSubscription: (
-    cb: (status: ENPermissionStatus) => void,
+    cb: (status: RawENPermissionStatus) => void,
   ) => { remove: () => void }
-  check: (cb: (status: ENPermissionStatus) => void) => void
-  request: (cb: (response: string) => void) => void
+  check: (cb: (status: RawENPermissionStatus) => void) => void
+  request: () => Promise<void>
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
   const [
     exposureNotificationsPermissionStatus,
     setExposureNotificationsPermissionStatus,
-  ] = useState<ENPermissionStatus>(initialENPermissionStatus)
+  ] = useState<RawENPermissionStatus>(initialENPermissionStatus)
 
   const [notificationPermission, setNotificationPermission] = useState(
     PermissionStatus.UNKNOWN,
@@ -92,7 +100,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   const { permissionStrategy } = gaenStrategy
 
   const checkENPermission = useCallback(() => {
-    const handleNativeResponse = (status: ENPermissionStatus) => {
+    const handleNativeResponse = (status: RawENPermissionStatus) => {
       setExposureNotificationsPermissionStatus(status)
     }
     permissionStrategy.check(handleNativeResponse)
@@ -105,7 +113,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 
     AppState.addEventListener("change", handleAppStateChange)
     const subscription = permissionStrategy.statusSubscription(
-      (status: ENPermissionStatus) => {
+      (status: RawENPermissionStatus) => {
         setExposureNotificationsPermissionStatus(status)
       },
     )
@@ -131,9 +139,12 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     setNotificationPermission(statusToEnum(status))
   }
 
-  const requestENPermission = () => {
-    const handleNativeResponse = () => {}
-    permissionStrategy.request(handleNativeResponse)
+  const requestENPermission = async () => {
+    permissionStrategy.request().catch((error) => {
+      if (error.message !== "Error enabling notifications") {
+        throw Error(error)
+      }
+    })
   }
 
   const requestNotificationPermission = async () => {
@@ -142,7 +153,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     return status
   }
 
-  const isENAuthorizedAndEnabled: ENAuthorizationEnablementStatus = toAuthorizationEnablementStatus(
+  const enPermission: ENPermissionStatus = toENPermissionStatusEnum(
     exposureNotificationsPermissionStatus,
   )
 
@@ -155,7 +166,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: isENAuthorizedAndEnabled,
+          status: enPermission,
           check: checkENPermission,
           request: requestENPermission,
         },

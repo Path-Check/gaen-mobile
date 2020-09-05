@@ -1,6 +1,6 @@
 import GradientBackground from "./GradientBackground"
+import Button from "./Button"
+import GlobalText from "./GlobalText"
+import StatusBar from "./StatusBar"
 
-export { Button } from "./Button"
-export { GlobalText } from "./GlobalText"
-
-export { GradientBackground }
+export { GradientBackground, GlobalText, Button, StatusBar }

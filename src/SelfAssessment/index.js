@@ -29,7 +29,6 @@ import { Emergency } from "./endScreens/Emergency"
 import { Isolate } from "./endScreens/Isolate"
 import { Share } from "./endScreens/Share"
 
-import { useStatusBarEffect } from "../navigation"
 import { Icons } from "../assets"
 import { Colors, Spacing } from "../styles"
 
@@ -68,8 +67,6 @@ import { Colors, Spacing } from "../styles"
 const Stack = createStackNavigator()
 
 const Assessment = ({ navigation }) => {
-  useStatusBarEffect("dark-content")
-
   /** @type {React.MutableRefObject<SurveyAnswers>} */
   const answers = useRef({})
   const survey = survey_en

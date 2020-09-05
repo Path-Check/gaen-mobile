@@ -13,7 +13,7 @@ protocol APIClient {
                               completion: @escaping GenericCompletion) where T.ResponseType == Void
   func downloadRequest<T: APIRequest>(_ request: T,
                                       requestType: RequestType,
-                                      completion: @escaping (Result<DownloadedPackage>) -> Void)
+                                      completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile
   func request<T: APIRequest>(_ request: T,
                               requestType: RequestType,
                               completion: @escaping (Result<JSONObject>) -> Void) where T.ResponseType == JSONObject
@@ -72,17 +72,17 @@ class BTAPIClient: APIClient {
     }
   }
   
-  func downloadRequest<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<DownloadedPackage>) -> Void) {
-    downloadRequest(for: request).responseData { response in
+  func downloadRequest<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile {
+    downloadRequest(for: request, requestType: requestType).responseData { response in
       guard let data = response.result.value else {
         completion(.failure(GenericError.unknown))
         return
       }
-        if let downloadedPackage = DownloadedPackageImpl(compressedData: data) {
-          completion(.success(downloadedPackage))
-        } else {
-          completion(.failure(GenericError.unknown))
-        }
+      if let file = T.ResponseType.create(from: data) {
+        completion(.success(file))
+      } else {
+        completion(.failure(GenericError.unknown))
+      }
     }
   }
   
@@ -143,22 +143,17 @@ private extension BTAPIClient {
     static let errorMessage = "error_description"
   }
   
-  func downloadRequest<T: APIRequest>(for request: T) -> DataRequest {
-    let r = sessionManager.request(downloadBaseUrl.appendingPathComponent(request.path))
+  func downloadRequest<T: APIRequest>(for request: T,
+                                      requestType: RequestType) -> DataRequest {
+    let baseUrl = baseUrlFor(requestType)
+    let r = sessionManager.request(baseUrl.appendingPathComponent(request.path))
     debugPrint(r)
     return r
   }
 
-  func dataRequest<T: APIRequest>(for request: T, requestType: RequestType) -> DataRequest {
-    var baseUrl: URL!
-    switch requestType {
-    case .postKeys:
-      baseUrl = postKeysUrl
-    case .downloadKeys:
-      baseUrl = downloadBaseUrl
-    case .exposureConfiguration:
-      baseUrl = exposureConfigurationUrl
-    }
+  func dataRequest<T: APIRequest>(for request: T,
+                                  requestType: RequestType) -> DataRequest {
+    let baseUrl = baseUrlFor(requestType)
     let r = sessionManager.request(
       baseUrl.appendingPathComponent(request.path, isDirectory: false),
       method: request.method,
@@ -216,7 +211,19 @@ private extension BTAPIClient {
       }
     }
   }
-  
+
+  func baseUrlFor(_ requestType: RequestType) -> URL {
+    var baseUrl: URL!
+    switch requestType {
+    case .postKeys:
+      baseUrl = postKeysUrl
+    case .downloadKeys:
+      baseUrl = downloadBaseUrl
+    case .exposureConfiguration:
+      baseUrl = exposureConfigurationUrl
+    }
+    return baseUrl
+  }
 }
 
 private struct CollectionAPIRequest<T: APIRequest>: APIRequest where T.ResponseType: Collection, T.ResponseType.Element: Decodable {

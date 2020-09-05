@@ -39,6 +39,7 @@ const headerScreenOptions: StackNavigationOptions = {
   },
   headerBackTitleVisible: false,
   headerTintColor: Colors.headerText,
+  headerTitleAlign: "center",
 }
 const cardScreenOptions: StackNavigationOptions = {
   ...TransitionPresets.ModalPresentationIOS,
@@ -118,7 +119,10 @@ const MainNavigator: FunctionComponent = () => {
               <Stack.Screen
                 name={Stacks.Activation}
                 component={ActivationStack}
-                options={defaultScreenOptions}
+                options={{
+                  ...defaultScreenOptions,
+                  gestureEnabled: false,
+                }}
               />
             </>
           )}

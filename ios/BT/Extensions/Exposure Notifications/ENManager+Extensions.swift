@@ -12,8 +12,12 @@ protocol ExposureNotificationManager {
 
   var exposureNotificationEnabled: Bool { get }
   func setExposureNotificationEnabled(_ enabled: Bool, completionHandler: @escaping ENErrorHandler)
-  func detectExposures(configuration: ENExposureConfiguration, diagnosisKeyURLs: [URL], completionHandler: @escaping ENDetectExposuresHandler) -> Progress
-  @discardableResult func getExposureInfo(summary: ENExposureDetectionSummary, userExplanation: String, completionHandler: @escaping ENGetExposureInfoHandler) -> Progress
+  @discardableResult func detectExposures(configuration: ENExposureConfiguration,
+                                          diagnosisKeyURLs: [URL],
+                                          completionHandler: @escaping ENDetectExposuresHandler) -> Progress
+  @discardableResult func getExposureInfo(summary: ENExposureDetectionSummary,
+                                          userExplanation: String,
+                                          completionHandler: @escaping ENGetExposureInfoHandler) -> Progress
   func getDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
   func getTestDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
 }
@@ -21,6 +25,13 @@ protocol ExposureNotificationManager {
 extension ENManager: ExposureNotificationManager {
 
   func authorizationStatus() -> ENAuthorizationStatus {
+    if #available(iOS 14, *) {
+      // On iOS 14, authorization status appears to be incorrectly reported
+      // when first being authorized, and only returns the accurate value
+      // after force quitting and re-launching the app, so we coalesce here
+      // based on exposureNotificationStatus instead
+      return exposureNotificationStatus == .active ? .authorized : .notAuthorized
+    }
     return ENManager.authorizationStatus
   }
 }

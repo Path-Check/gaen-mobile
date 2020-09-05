@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from "react"
 import {
-  Platform,
-  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -12,51 +10,39 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useApplicationName } from "../More/useApplicationInfo"
 import { ActivationScreens } from "../navigation"
-import { GlobalText } from "../components"
-import { Button } from "../components"
+import { GlobalText, Button } from "../components"
+import { useSystemServicesContext } from "../SystemServicesContext"
+import { isPlatformiOS } from "../utils"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { applicationName } = useApplicationName()
+
+  const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
+  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+
   const { exposureNotifications } = usePermissionsContext()
 
-  const handleOnPressEnable = () => {
-    exposureNotifications.request()
+  const navigateToNextScreen = () => {
+    if (isPlatformiOS()) {
+      navigation.navigate(ActivationScreens.NotificationPermissions)
+    } else {
+      isLocationOffAndNeeded
+        ? navigation.navigate(ActivationScreens.ActivateLocation)
+        : navigation.navigate(ActivationScreens.ActivationSummary)
+    }
+  }
+
+  const handleOnPressActivateProximityTracing = async () => {
+    await exposureNotifications.request()
     navigateToNextScreen()
   }
 
   const handleOnPressDontEnable = () => {
     navigateToNextScreen()
-  }
-
-  const navigateToNextScreen = () => {
-    if (Platform.OS === "ios") {
-      navigation.navigate(ActivationScreens.NotificationPermissions)
-    } else {
-      navigation.navigate(ActivationScreens.ActivationSummary)
-    }
-  }
-
-  const handleOnPressActivateProximityTracing = () => {
-    Alert.alert(
-      t("onboarding.proximity_tracing_alert_header", { applicationName }),
-      t("onboarding.proximity_tracing_alert_body", { applicationName }),
-      [
-        {
-          text: t("common.cancel"),
-          style: "cancel",
-        },
-        {
-          text: t("common.enable"),
-          onPress: handleOnPressEnable,
-        },
-      ],
-    )
   }
 
   return (

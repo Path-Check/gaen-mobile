@@ -6,20 +6,21 @@ import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
-import { GlobalText } from "../components/GlobalText"
-import { Screens, MoreStackScreens, useStatusBarEffect } from "../navigation"
+import { GlobalText } from "../components"
+import { Screens, MoreStackScreens } from "../navigation"
+import { useStatusBarEffect } from "../navigation/index"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
 const MenuScreen: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  useStatusBarEffect("light-content")
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {

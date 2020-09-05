@@ -5,7 +5,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime)
 
-import { GlobalText } from "../../components/GlobalText"
+import { GlobalText } from "../../components"
 import { DateTimeUtils } from "../../utils"
 
 import { Colors, Typography } from "../../styles"

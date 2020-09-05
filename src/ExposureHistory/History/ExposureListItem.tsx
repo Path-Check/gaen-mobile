@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../../components/GlobalText"
+import { GlobalText } from "../../components"
 import { ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"

@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react"
 import {
-  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -9,11 +8,12 @@ import {
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useIsFocused } from "@react-navigation/native"
 import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
-import { GlobalText } from "../../components/GlobalText"
+import { StatusBar, GlobalText } from "../../components"
+import { useStatusBarEffect } from "../../navigation/index"
 
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
@@ -34,14 +34,12 @@ const History: FunctionComponent<HistoryProps> = ({
   lastDetectionDate,
   exposures,
 }) => {
+  useIsFocused()
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false)
   const previousExposuresRef = useRef<ExposureDatum[]>()
-
-  useEffect(() => {
-    previousExposuresRef.current = exposures
-  })
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(Screens.MoreInfo)
@@ -56,69 +54,65 @@ const History: FunctionComponent<HistoryProps> = ({
     setRefreshing(false)
   }
 
-  const showExposureHistory = exposures.length > 0
+  useEffect(() => {
+    previousExposuresRef.current = exposures
+  }, [exposures])
 
-  const titleText = t("screen_titles.exposure_history")
+  const refreshControl = (
+    <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
+  )
+
+  const showExposureHistory = exposures.length > 0
 
   return (
     <>
-      <SafeAreaView style={style.safeAreaTop} />
-      <SafeAreaView style={style.safeAreaBottom}>
-        <ScrollView
-          contentContainerStyle={style.contentContainer}
-          style={style.container}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={handleOnRefresh}
-            />
-          }
-        >
-          <View>
-            <View style={style.headerRow}>
-              <GlobalText style={style.headerText}>{titleText}</GlobalText>
-              <TouchableOpacity
-                onPress={handleOnPressMoreInfo}
-                style={style.moreInfoButton}
-              >
-                <SvgXml
-                  xml={Icons.QuestionMark}
-                  accessible
-                  accessibilityLabel={t("label.question_icon")}
-                  style={style.moreInfoButtonIcon}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={style.subheaderRow}>
-              <DateInfoHeader lastDetectionDate={lastDetectionDate} />
-            </View>
+      <StatusBar backgroundColor={Colors.secondary10} />
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        style={style.container}
+        refreshControl={refreshControl}
+      >
+        <View>
+          <View style={style.headerRow}>
+            <GlobalText style={style.headerText}>
+              {t("screen_titles.exposure_history")}
+            </GlobalText>
+            <TouchableOpacity
+              onPress={handleOnPressMoreInfo}
+              style={style.moreInfoButton}
+            >
+              <SvgXml
+                xml={Icons.QuestionMark}
+                accessible
+                accessibilityLabel={t("label.question_icon")}
+                style={style.moreInfoButtonIcon}
+              />
+            </TouchableOpacity>
           </View>
-          <View style={style.listContainer}>
-            {showExposureHistory ? (
-              <ExposureList exposures={exposures} />
-            ) : (
-              <NoExposures />
-            )}
+          <View style={style.subheaderRow}>
+            <DateInfoHeader lastDetectionDate={lastDetectionDate} />
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </View>
+        <View style={style.listContainer}>
+          {showExposureHistory ? (
+            <ExposureList exposures={exposures} />
+          ) : (
+            <NoExposures />
+          )}
+        </View>
+      </ScrollView>
     </>
   )
 }
 
 const style = StyleSheet.create({
-  safeAreaTop: {
-    backgroundColor: Colors.secondary10,
-  },
-  safeAreaBottom: {
-    flex: 1,
-  },
   contentContainer: {
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xxHuge,
   },
   container: {
-    padding: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
+    paddingBottom: Spacing.medium,
     backgroundColor: Colors.secondary10,
   },
   headerRow: {

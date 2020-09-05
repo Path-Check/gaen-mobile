@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/stack"
 
 import { HomeScreens } from "./index"
-import Home from "../Home/Home"
+import Home from "../Home"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ProximityTracingInfo from "../Home/ProximityTracingInfo"
 import LocationInfo from "../Home/LocationInfo"

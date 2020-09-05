@@ -10,7 +10,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { GlobalText } from "../components/GlobalText"
+import { GlobalText } from "../components"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"

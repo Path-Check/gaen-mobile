@@ -19,6 +19,10 @@ package org.pathcheck.covidsafepaths.exposurenotifications.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Key value storage for ExposureNotification.
@@ -35,6 +39,30 @@ public class ExposureNotificationSharedPreferences {
   private static final String LAST_DETECTION_PROCESS_DATE =
       "ExposureNotificationSharedPreferences.LAST_DETECTION_PROCESS_DATE";
 
+  private static final String TRIGGER_THRESHOLD_WEIGHTED_DURATION =
+      "ExposureNotificationSharedPreferences.TRIGGER_THRESHOLD_WEIGHTED_DURATION";
+
+  private static final String ATTENUATION_DURATION_THRESHOLDS =
+      "ExposureNotificationSharedPreferences.ATTENUATION_DURATION_THRESHOLDS";
+
+  private static final String ATTENUATION_BUCKET_WEIGHTS =
+      "ExposureNotificationSharedPreferences.ATTENUATION_BUCKET_WEIGHTS";
+
+  private static final String REPORT_TYPE_WEIGHTS =
+      "ExposureNotificationSharedPreferences.REPORT_TYPE_WEIGHTS";
+
+  private static final String INFECTIOUSNESS_WEIGHTS =
+      "ExposureNotificationSharedPreferences.INFECTIOUSNESS_WEIGHTS";
+
+  private static final String INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING =
+      "ExposureNotificationSharedPreferences.INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING";
+
+  private static final String DAYS_SINCE_ONSET_TO_INFECTIOUSNESS =
+      "ExposureNotificationSharedPreferences.DAYS_SINCE_ONSET_TO_INFECTIOUSNESS";
+
+  private static final String REPORT_TYPE_WHEN_MISSING =
+      "ExposureNotificationSharedPreferences.REPORT_TYPE_WHEN_MISSING";
+
   private final SharedPreferences sharedPreferences;
 
   public ExposureNotificationSharedPreferences(Context context) {
@@ -43,12 +71,91 @@ public class ExposureNotificationSharedPreferences {
     sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
   }
 
+  public void setLastDetectionProcessDate(Long date) {
+    sharedPreferences.edit().putLong(LAST_DETECTION_PROCESS_DATE, date).commit();
+  }
+
   public Long getLastDetectionProcessDate() {
     long date = sharedPreferences.getLong(LAST_DETECTION_PROCESS_DATE, -1);
     return date != -1 ? date : null;
   }
 
-  public void setLastDetectionProcessDate(Long date) {
-    sharedPreferences.edit().putLong(LAST_DETECTION_PROCESS_DATE, date).commit();
+  public void setTriggerThresholdWeightedDuration(Integer duration) {
+    sharedPreferences.edit().putInt(TRIGGER_THRESHOLD_WEIGHTED_DURATION, duration).commit();
+  }
+
+  public Integer getTriggerThresholdWeightedDuration(Integer defaultValue) {
+    return sharedPreferences.getInt(TRIGGER_THRESHOLD_WEIGHTED_DURATION, defaultValue);
+  }
+
+  public void setAttenuationDurationThresholds(List<Integer> thresholds) {
+    sharedPreferences.edit().putString(ATTENUATION_DURATION_THRESHOLDS, new Gson().toJson(thresholds)).commit();
+  }
+
+  public List<Integer> getAttenuationDurationThresholds(List<Integer> defaultValue) {
+    String json = sharedPreferences.getString(ATTENUATION_DURATION_THRESHOLDS, null);
+    return json == null
+        ? defaultValue
+        : new Gson().fromJson(json, new TypeToken<List<Integer>>() {}.getType());
+  }
+
+  public void setAttenuationBucketWeights(List<Double> weights) {
+    sharedPreferences.edit().putString(ATTENUATION_BUCKET_WEIGHTS, new Gson().toJson(weights)).commit();
+  }
+
+  public List<Double> getAttenuationBucketWeights(List<Double> defaultValue) {
+    String json = sharedPreferences.getString(ATTENUATION_BUCKET_WEIGHTS, null);
+    return json == null
+        ? defaultValue
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
+  }
+
+  public void setReportTypeWeights(List<Double> weights) {
+    sharedPreferences.edit().putString(REPORT_TYPE_WEIGHTS, new Gson().toJson(weights)).commit();
+  }
+
+  public List<Double> getReportTypeWeights(List<Double> defaultValue) {
+    String json = sharedPreferences.getString(REPORT_TYPE_WEIGHTS, null);
+    return json == null
+        ? defaultValue
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
+  }
+
+  public void setInfectiousnessWeights(List<Double> weights) {
+    sharedPreferences.edit().putString(INFECTIOUSNESS_WEIGHTS, new Gson().toJson(weights)).commit();
+  }
+
+  public List<Double> getInfectiousnessWeights(List<Double> defaultValue) {
+    String json = sharedPreferences.getString(INFECTIOUSNESS_WEIGHTS, null);
+    return json == null
+        ? defaultValue
+        : new Gson().fromJson(json, new TypeToken<List<Double>>() {}.getType());
+  }
+
+  public void setInfectiousnessWhenDaysSinceOnsetMissing(Integer infectiousness) {
+    sharedPreferences.edit().putInt(INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING, infectiousness).commit();
+  }
+
+  public Integer getInfectiousnessWhenDaysSinceOnsetMissing(Integer defaultValue) {
+    return sharedPreferences.getInt(INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING, defaultValue);
+  }
+
+  public void setDaysSinceOnsetToInfectiousness(Map<Integer, Integer> map) {
+    sharedPreferences.edit().putString(DAYS_SINCE_ONSET_TO_INFECTIOUSNESS, new Gson().toJson(map)).commit();
+  }
+
+  public Map<Integer, Integer> getDaysSinceOnsetToInfectiousness(Map<Integer, Integer> defaultValue) {
+    String json = sharedPreferences.getString(DAYS_SINCE_ONSET_TO_INFECTIOUSNESS, null);
+    return json == null
+        ? defaultValue
+        : new Gson().fromJson(json, new TypeToken<Map<Integer, Integer>>() {}.getType());
+  }
+
+  public void setReportTypeWhenMissing(Integer reportType) {
+    sharedPreferences.edit().putInt(REPORT_TYPE_WHEN_MISSING, reportType).commit();
+  }
+
+  public Integer getReportTypeWhenMissing(Integer defaultValue) {
+    return sharedPreferences.getInt(REPORT_TYPE_WHEN_MISSING, defaultValue);
   }
 }
