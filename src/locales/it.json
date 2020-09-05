@@ -74,7 +74,9 @@
     "self_assessment": "Salute"
   },
   "onboarding": {
-    "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?"
+    "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",
+    "privacy_policy": "Informativa sulla privacy",
+    "terms_header_title": "Termini per l'utilizzo"
   },
   "screen_titles": {
     "about": "Informazioni",

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <!-- Shown on app info, app switcher, etc -->
-  <string name="app_name" translatable="false">BT de PathCheck</string>
-  <!-- Shown below icon on launcher only -->
-  <string name="app_name_short" translatable="false">BT de PathCheck</string>
   <string name="exposure_notification_channel_description">Alertas de notificaciones de exposición.</string>
   <string name="exposure_notification_channel_name">Notificación de Exposición</string>
   <string name="exposure_notification_message">Has estado cerca de alguien que tuvo un positivo por COVID-19. Pulse para obtener más información.</string>
