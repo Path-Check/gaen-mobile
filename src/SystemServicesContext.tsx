@@ -27,18 +27,16 @@ export const SystemServicesContext = createContext<SystemServicesState>(
   initialState,
 )
 
-const SystemServicesProvider: FunctionComponent = ({ children }) => {
+const useIsBluetoothOn = () => {
   const [isBluetoothOn, setIsBluetoothOn] = useState(false)
-  const [isLocationOn, setIsLocationOn] = useState(false)
-  const [isLocationNeeded, setIsLocationNeeded] = useState(false)
 
-  const fetchBTStatus = async (): Promise<boolean> => {
+  const fetchIsBluetoothOn = async (): Promise<boolean> => {
     return isBluetoothEnabled()
   }
 
   useEffect(() => {
     const determineIsBluetoothOn = async () => {
-      const status = await fetchBTStatus()
+      const status = await fetchIsBluetoothOn()
       setIsBluetoothOn(status)
     }
 
@@ -51,17 +49,15 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
     return removeListener(handleAppStateChange)
   }, [])
 
+  return isBluetoothOn
+}
+
+const useIsLocationOn = () => {
+  const [isLocationOn, setIsLocationOn] = useState(false)
+
   const fetchIsLocationOn = async (): Promise<boolean> => {
     if (Platform.OS === "android") {
       return isLocationEnabled()
-    } else {
-      return Promise.resolve(true)
-    }
-  }
-
-  const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {
-    if (Platform.OS === "android") {
-      return doesDeviceSupportLocationlessScanning()
     } else {
       return Promise.resolve(true)
     }
@@ -82,6 +78,20 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
     return removeListener(handleAppStateChange)
   }, [])
 
+  return isLocationOn
+}
+
+const useIsLocationNeeded = () => {
+  const [isLocationNeeded, setIsLocationNeeded] = useState(false)
+
+  const fetchSupportsLocationlessScanning = async (): Promise<boolean> => {
+    if (Platform.OS === "android") {
+      return doesDeviceSupportLocationlessScanning()
+    } else {
+      return Promise.resolve(true)
+    }
+  }
+
   useEffect(() => {
     const determineIsLocationNeeded = async () => {
       const supportsLocationlessScanning = await fetchSupportsLocationlessScanning()
@@ -90,6 +100,14 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
 
     determineIsLocationNeeded()
   }, [])
+
+  return isLocationNeeded
+}
+
+const SystemServicesProvider: FunctionComponent = ({ children }) => {
+  const isBluetoothOn = useIsBluetoothOn()
+  const isLocationOn = useIsLocationOn()
+  const isLocationNeeded = useIsLocationNeeded()
 
   return (
     <SystemServicesContext.Provider
