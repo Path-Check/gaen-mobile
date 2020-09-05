@@ -14,7 +14,7 @@ const useIsBluetoothOn = (): boolean => {
     determineIsBluetoothOn()
   }, [determineIsBluetoothOn])
 
-  useOnAppStateChange(() => determineIsBluetoothOn)
+  useOnAppStateChange(determineIsBluetoothOn)
 
   return isBluetoothOn
 }

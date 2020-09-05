@@ -19,7 +19,7 @@ const useIsLocationOn = (): boolean => {
     determineIsLocationOn()
   }, [determineIsLocationOn])
 
-  useOnAppStateChange(() => determineIsLocationOn)
+  useOnAppStateChange(determineIsLocationOn)
 
   return isLocationOn
 }

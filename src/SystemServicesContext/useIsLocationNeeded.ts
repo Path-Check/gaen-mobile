@@ -21,7 +21,7 @@ const useIsLocationNeeded = (): boolean => {
     determineIsLocationNeeded()
   }, [determineIsLocationNeeded])
 
-  useOnAppStateChange(() => determineIsLocationNeeded)
+  useOnAppStateChange(determineIsLocationNeeded)
 
   return isLocationNeeded
 }
