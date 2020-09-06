@@ -5,12 +5,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
-import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeStack from "./HomeStack"
-import MoreStack from "./MoreStack"
-import ReportIssueStack from "./ReportIssueStack"
-
-import { useConfigurationContext } from "../ConfigurationContext"
+import ConnectStack from "./ConnectStack"
 
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
@@ -21,10 +17,6 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
-  const {
-    displaySelfAssessment,
-    displayReportAnIssue,
-  } = useConfigurationContext()
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
@@ -80,6 +72,20 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
+  const ConnectIcon: FunctionComponent<TabBarIconProps> = ({
+    focused,
+    size,
+  }) => {
+    const tabIcon = (
+      <TabIcon
+        icon={TabBarIcons.PersonInHand}
+        label={t("navigation.connect")}
+        focused={focused}
+        size={size}
+      />
+    )
+    return tabIcon
+  }
   return (
     <Tab.Navigator
       initialRouteName={Screens.Home}
@@ -106,6 +112,14 @@ const MainTabNavigator: FunctionComponent = () => {
         options={{
           tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Stacks.Connect}
+        component={ConnectStack}
+        options={{
+          tabBarLabel: t("navigation.connect"),
+          tabBarIcon: ConnectIcon,
         }}
       />
     </Tab.Navigator>

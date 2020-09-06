@@ -195,11 +195,8 @@
   "navigation": {
     "exposure_history": "Exposure History",
     "home": "Home",
-    "more": "More",
-    "report_issue": "Report Issue",
-    "self_assessment": "Self Assessment",
-    "more_info": "More Info",
-    "exposure": "Exposure"
+    "exposure": "Exposure",
+    "connect": "Connect"
   },
   "onboarding": {
     "app_setup_complete_header": "App Setup Complete!",
