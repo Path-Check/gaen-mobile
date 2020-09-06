@@ -40,10 +40,12 @@ export const warning100 = "#ffc000"
 
 // Gradients
 export const gradientPrimary10 = ["#ececff", "#ffffff"]
+export const gradientPrimary20 = ["#f4edfe", secondary10]
+export const gradientPrimary20Lighter = secondary10
 export const gradientPrimary100 = ["#3a4cd7", "#6979f8"]
 export const gradientPrimary100Lighter = "#6979f8"
-export const gradientPrimary110 = ["#4051db", "#6e50e4"]
-export const gradientNeutral75 = ["#3c475b", "#9ba0aa"]
+export const gradientPrimary110 = [primary100, "#6e50e4"]
+export const gradientNeutral75 = [neutral75, neutral100]
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"

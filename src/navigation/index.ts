@@ -94,6 +94,14 @@ export const ReportIssueScreens: {
   ReportIssueForm: "ReportIssueForm",
 }
 
+export type ConnectStackScreen = "Connect"
+
+export const ConnectStackScreens: {
+  [key in ConnectStackScreen]: ConnectStackScreen
+} = {
+  Connect: "Connect",
+}
+
 export type MoreStackScreen =
   | "Menu"
   | "About"
@@ -170,21 +178,17 @@ export const Screens: { [key in Screen]: Screen } = {
 
 export type Stack =
   | "Activation"
-  | "Onboarding"
-  | "ExposureHistoryFlow"
-  | "SelfAssessment"
-  | "More"
   | "AffectedUserStack"
-  | "ReportIssue"
+  | "Connect"
+  | "ExposureHistoryFlow"
+  | "Onboarding"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
-  Onboarding: "Onboarding",
-  ExposureHistoryFlow: "ExposureHistoryFlow",
-  SelfAssessment: "SelfAssessment",
-  More: "More",
   AffectedUserStack: "AffectedUserStack",
-  ReportIssue: "ReportIssue",
+  Connect: "Connect",
+  ExposureHistoryFlow: "ExposureHistoryFlow",
+  Onboarding: "Onboarding",
 }
 
 export const useStatusBarEffect = (
