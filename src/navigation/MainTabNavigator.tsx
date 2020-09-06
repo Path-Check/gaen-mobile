@@ -80,45 +80,6 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
-  const QuestionMarkIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.QuestionMark}
-        label={t("navigation.report_issue")}
-        focused={focused}
-        size={size}
-      />
-    )
-  }
-
-  const SelfAssessmentIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.CheckInBox}
-        label={t("navigation.self_assessment")}
-        focused={focused}
-        size={size}
-      />
-    )
-  }
-
-  const MoreIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.HorizontalDots}
-        label={t("navigation.more")}
-        focused={focused}
-        size={size}
-      />
-    )
-  }
-
   return (
     <Tab.Navigator
       initialRouteName={Screens.Home}
@@ -145,34 +106,6 @@ const MainTabNavigator: FunctionComponent = () => {
         options={{
           tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
-        }}
-      />
-      {displayReportAnIssue && (
-        <Tab.Screen
-          name={Stacks.ReportIssue}
-          component={ReportIssueStack}
-          options={{
-            tabBarLabel: t("navigation.report_issue"),
-            tabBarIcon: QuestionMarkIcon,
-          }}
-        />
-      )}
-      {displaySelfAssessment && (
-        <Tab.Screen
-          name={Stacks.SelfAssessment}
-          component={SelfAssessmentStack}
-          options={{
-            tabBarLabel: t("navigation.self_assessment"),
-            tabBarIcon: SelfAssessmentIcon,
-          }}
-        />
-      )}
-      <Tab.Screen
-        name={Stacks.More}
-        component={MoreStack}
-        options={{
-          tabBarLabel: t("navigation.more"),
-          tabBarIcon: MoreIcon,
         }}
       />
     </Tab.Navigator>
