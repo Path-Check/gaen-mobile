@@ -92,8 +92,8 @@ const MainTabNavigator: FunctionComponent = () => {
       tabBarOptions={{
         showLabel: false,
         style: {
-          backgroundColor: Colors.white,
-          borderTopColor: Colors.neutral30,
+          backgroundColor: Colors.primaryLightBackground,
+          borderTopWidth: 0,
           height: insets.bottom + 60,
         },
       }}
