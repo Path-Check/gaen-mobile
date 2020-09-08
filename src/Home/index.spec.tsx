@@ -165,7 +165,10 @@ describe("Home", () => {
       expect(alertSpy).toHaveBeenCalledWith(
         "Enable Bluetooth in Settings",
         "Go to the Settings app and enable Bluetooth to fix this error",
-        [{ text: "Okay" }],
+        [
+          expect.objectContaining({ text: "Back" }),
+          expect.objectContaining({ text: "Open Settings" }),
+        ],
       )
     })
   })
