@@ -25,7 +25,7 @@ import {
 } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-const AcceptEula: FunctionComponent = () => {
+const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const configuration = useConfigurationContext()
   const [boxChecked, toggleCheckbox] = useState(false)
@@ -184,4 +184,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default AcceptEula
+export default AcceptTermsOfService

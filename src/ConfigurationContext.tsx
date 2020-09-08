@@ -5,6 +5,7 @@ import env from "react-native-config"
 export interface Configuration {
   appDownloadLink: string
   appPackageName: string
+  displayAcceptTermsOfService: boolean
   displayReportAnIssue: boolean
   displaySelfAssessment: boolean
   healthAuthorityAdviceUrl: string
@@ -17,6 +18,7 @@ export interface Configuration {
 const initialState = {
   appDownloadLink: "",
   appPackageName: "",
+  displayAcceptTermsOfService: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
   healthAuthorityAdviceUrl: "",
@@ -35,6 +37,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
     EULA_URL: eulaUrl,
   } = env
+  const displayAcceptTermsOfService =
+    env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const appDownloadLink = env.SHARE_APP_LINK
@@ -49,6 +53,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
       value={{
         appDownloadLink,
         appPackageName,
+        displayAcceptTermsOfService,
         displayReportAnIssue,
         displaySelfAssessment,
         healthAuthorityAdviceUrl,

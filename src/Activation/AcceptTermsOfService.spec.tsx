@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 import { Linking } from "react-native"
 
-import AcceptEula from "./AcceptEula"
+import AcceptTermsOfService from "./AcceptTermsOfService"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 
@@ -15,7 +15,7 @@ describe("EulaModal", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const { getByLabelText, getByTestId } = render(<AcceptEula />)
+    const { getByLabelText, getByTestId } = render(<AcceptTermsOfService />)
 
     const continueButton = getByLabelText("Continue")
     fireEvent.press(continueButton)
@@ -34,7 +34,7 @@ describe("EulaModal", () => {
 
   it("links out to the privacy policy", async () => {
     const linkSpy = jest.spyOn(Linking, "openURL")
-    const { getByText } = render(<AcceptEula />)
+    const { getByText } = render(<AcceptTermsOfService />)
 
     fireEvent.press(getByText(/Privacy Policy/))
 
@@ -50,7 +50,7 @@ describe("EulaModal", () => {
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
       >
-        <AcceptEula />
+        <AcceptTermsOfService />
       </ConfigurationContext.Provider>,
     )
 
@@ -67,7 +67,7 @@ describe("EulaModal", () => {
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
       >
-        <AcceptEula />
+        <AcceptTermsOfService />
       </ConfigurationContext.Provider>,
     )
 

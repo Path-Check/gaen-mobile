@@ -4,6 +4,7 @@ import { Configuration } from "../ConfigurationContext"
 export default Factory.define<Configuration>(() => ({
   appDownloadLink: "appDownloadLink",
   appPackageName: "appPackageName",
+  displayAcceptTermsOfService: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
