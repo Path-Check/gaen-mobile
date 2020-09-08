@@ -4,11 +4,7 @@ import useIsBluetoothOn from "./useIsBluetoothOn"
 import useIsLocationOn from "./useIsLocationOn"
 import useIsLocationRequired from "./useIsLocationRequired"
 
-export enum LocationPermissions {
-  NOT_REQUIRED,
-  REQUIRED_OFF,
-  REQUIRED_ON,
-}
+type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
 
 export interface SystemServicesState {
   isBluetoothOn: boolean
@@ -17,7 +13,7 @@ export interface SystemServicesState {
 
 const initialState: SystemServicesState = {
   isBluetoothOn: false,
-  locationPermissions: LocationPermissions.REQUIRED_OFF,
+  locationPermissions: "RequiredOff",
 }
 
 export const SystemServicesContext = createContext<SystemServicesState>(
@@ -31,11 +27,11 @@ const SystemServicesProvider: FunctionComponent = ({ children }) => {
 
   const determineLocationPermissions = (): LocationPermissions => {
     if (!isLocationRequired) {
-      return LocationPermissions.NOT_REQUIRED
+      return "NotRequired"
     } else if (!isLocationOn) {
-      return LocationPermissions.REQUIRED_OFF
+      return "RequiredOff"
     } else {
-      return LocationPermissions.REQUIRED_ON
+      return "RequiredOn"
     }
   }
 

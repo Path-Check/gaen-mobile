@@ -26,10 +26,8 @@ const ActivationSummary: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
   const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff =
-    locationPermissions === LocationPermissions.REQUIRED_OFF
-  const isLocationRequired =
-    locationPermissions !== LocationPermissions.NOT_REQUIRED
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const {
     exposureNotifications: { status },

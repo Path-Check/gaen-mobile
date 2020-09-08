@@ -7,10 +7,7 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "."
 import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
-import {
-  SystemServicesContext,
-  LocationPermissions,
-} from "../SystemServicesContext"
+import { SystemServicesContext } from "../SystemServicesContext"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 
@@ -69,7 +66,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              locationPermissions: LocationPermissions.REQUIRED_ON,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -114,7 +111,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
-              locationPermissions: LocationPermissions.NOT_REQUIRED,
+              locationPermissions: "NotRequired",
             }}
           >
             <Home />
@@ -150,7 +147,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
-              locationPermissions: LocationPermissions.REQUIRED_ON,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -185,7 +182,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              locationPermissions: LocationPermissions.REQUIRED_ON,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -212,7 +209,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              locationPermissions: LocationPermissions.NOT_REQUIRED,
+              locationPermissions: "NotRequired",
             }}
           >
             <Home />
@@ -326,7 +323,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              locationPermissions: LocationPermissions.REQUIRED_ON,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -348,7 +345,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              locationPermissions: LocationPermissions.REQUIRED_OFF,
+              locationPermissions: "RequiredOff",
             }}
           >
             <Home />
@@ -373,7 +370,7 @@ describe("Home", () => {
         <SystemServicesContext.Provider
           value={{
             isBluetoothOn: true,
-            locationPermissions: LocationPermissions.NOT_REQUIRED,
+            locationPermissions: "NotRequired",
           }}
         >
           <Home />

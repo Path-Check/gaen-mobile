@@ -68,8 +68,7 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const isLocationRequired =
-    locationPermissions !== LocationPermissions.NOT_REQUIRED
+  const isLocationRequired = locationPermissions !== "NotRequired"
   const activationStepsAndroid: ActivationStep[] = isLocationRequired
     ? [...baseActivationSteps, activateLocation]
     : [...baseActivationSteps]

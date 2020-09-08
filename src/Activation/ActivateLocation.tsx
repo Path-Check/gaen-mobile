@@ -25,7 +25,7 @@ const ActivateLocation: FunctionComponent = () => {
   const { locationPermissions } = useSystemServicesContext()
 
   useEffect(() => {
-    const isLocationOn = locationPermissions === LocationPermissions.REQUIRED_ON
+    const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
       navigation.navigate(ActivationScreens.ActivationSummary)
     }

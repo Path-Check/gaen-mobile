@@ -12,10 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import { usePermissionsContext } from "../PermissionsContext"
 import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
-import {
-  useSystemServicesContext,
-  LocationPermissions,
-} from "../SystemServicesContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { isPlatformiOS } from "../utils"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
@@ -25,8 +22,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const { locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff =
-    locationPermissions === LocationPermissions.REQUIRED_OFF
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const { exposureNotifications } = usePermissionsContext()
 

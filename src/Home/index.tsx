@@ -8,10 +8,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import {
-  useSystemServicesContext,
-  LocationPermissions,
-} from "../SystemServicesContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
@@ -42,10 +39,8 @@ const Home: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
 
   const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff =
-    locationPermissions === LocationPermissions.REQUIRED_OFF
-  const isLocationRequired =
-    locationPermissions !== LocationPermissions.NOT_REQUIRED
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const { exposureNotifications } = usePermissionsContext()
   const isProximityTracingOn =

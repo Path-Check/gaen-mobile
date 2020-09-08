@@ -3,10 +3,7 @@ import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import {
-  useSystemServicesContext,
-  LocationPermissions,
-} from "../SystemServicesContext"
+import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
 import { HomeScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -41,11 +38,11 @@ export const LocationActivationStatus: FunctionComponent = () => {
     )
   }
 
-  if (locationPermissions === LocationPermissions.NOT_REQUIRED) {
+  if (locationPermissions === "NotRequired") {
     return null
   }
 
-  const isLocationOn = locationPermissions === LocationPermissions.REQUIRED_ON
+  const isLocationOn = locationPermissions === "RequiredOn"
 
   return (
     <ActivationStatus
