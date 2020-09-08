@@ -20,7 +20,6 @@ import {
   Screens,
   OnboardingScreens,
   Stacks,
-  ActivationScreens,
   useStatusBarEffect,
 } from "../navigation"
 import { getLocalNames } from "../locales/languages"
@@ -94,11 +93,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(Stacks.Activation, {
-                screen: ActivationScreens.AcceptEula,
-              })
-            }
+            onPress={() => navigation.navigate(Stacks.Activation)}
           >
             <GlobalText style={style.skipButtonText}>
               {t("common.skip")}
