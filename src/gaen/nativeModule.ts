@@ -2,6 +2,8 @@ import {
   NativeEventEmitter,
   NativeModules,
   EventSubscription,
+  Platform,
+  Linking,
 } from "react-native"
 
 import { RawENPermissionStatus } from "../PermissionsContext"
@@ -196,4 +198,15 @@ export const simulateExposureDetectionError = async (): Promise<"success"> => {
 
 export const resetExposures = async (): Promise<"success"> => {
   return debugModule.resetExposures()
+}
+
+// Utils Module
+const utilsModule = NativeModules.UtilsModule
+
+export const openAppSettings = (): void => {
+  if (Platform.OS === "android") {
+    utilsModule.openAppSettings()
+  } else {
+    Linking.openSettings()
+  }
 }

@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react"
-import { Alert, Linking } from "react-native"
+import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
 import { HomeScreens } from "../navigation"
+import { openAppSettings } from "../gaen/nativeModule"
 
 export const LocationActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -34,7 +35,7 @@ export const LocationActivationStatus: FunctionComponent = () => {
         },
         {
           text: t("common.settings"),
-          onPress: () => Linking.openSettings(),
+          onPress: () => openAppSettings(),
         },
       ],
     )
