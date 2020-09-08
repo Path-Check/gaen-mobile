@@ -10,7 +10,7 @@ import { factories } from "../factories"
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
-describe("EulaModal", () => {
+describe("AcceptTermsOfService", () => {
   it("won't continue until a user accepts the terms of use", async () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
