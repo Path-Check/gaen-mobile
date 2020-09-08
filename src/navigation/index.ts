@@ -102,7 +102,7 @@ export const ConnectStackScreens: {
   Connect: "Connect",
 }
 
-export type MoreStackScreen =
+export type SettingsScreen =
   | "Menu"
   | "About"
   | "Legal"
@@ -112,8 +112,8 @@ export type MoreStackScreen =
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
 
-export const MoreStackScreens: {
-  [key in MoreStackScreen]: MoreStackScreen
+export const SettingsScreens: {
+  [key in SettingsScreen]: SettingsScreen
 } = {
   Menu: "Menu",
   About: "About",
@@ -157,7 +157,7 @@ export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
   | ReportIssueScreen
-  | MoreStackScreen
+  | SettingsScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
   | HomeScreen
@@ -168,7 +168,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
   ...ReportIssueScreens,
-  ...MoreStackScreens,
+  ...SettingsScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
   ...HomeScreens,
@@ -182,6 +182,7 @@ export type Stack =
   | "Connect"
   | "ExposureHistoryFlow"
   | "Onboarding"
+  | "Settings"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -189,6 +190,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Onboarding: "Onboarding",
+  Settings: "Settings",
 }
 
 export const useStatusBarEffect = (

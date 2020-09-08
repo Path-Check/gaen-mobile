@@ -4,12 +4,14 @@ import {
   TransitionPresets,
   StackNavigationOptions,
 } from "@react-navigation/stack"
+import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
 import ActivationStack from "./ActivationStack"
+import SettingsStack from "./SettingsStack"
 import { useOnboardingContext } from "../OnboardingContext"
 import {
   OnboardingScreens,
@@ -21,7 +23,7 @@ import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
-import LanguageSelection from "../More/LanguageSelection"
+import LanguageSelection from "../Settings/LanguageSelection"
 
 import { Headers, Colors } from "../styles"
 
@@ -61,6 +63,11 @@ const MainNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { onboardingIsComplete } = useOnboardingContext()
 
+  const settingsStackTransitionPreset = Platform.select({
+    ios: TransitionPresets.SlideFromRightIOS,
+    android: TransitionPresets.DefaultTransition,
+  })
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -79,6 +86,14 @@ const MainNavigator: FunctionComponent = () => {
                   ...TransitionPresets.ModalTransition,
                   ...defaultScreenOptions,
                   gestureEnabled: false,
+                }}
+              />
+              <Stack.Screen
+                name={Stacks.Settings}
+                component={SettingsStack}
+                options={{
+                  ...headerScreenOptions,
+                  ...settingsStackTransitionPreset,
                 }}
               />
               <Stack.Screen

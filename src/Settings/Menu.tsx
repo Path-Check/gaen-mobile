@@ -7,7 +7,7 @@ import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components"
-import { Screens, MoreStackScreens } from "../navigation"
+import { Screens, SettingsScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
 import { Icons } from "../assets"
@@ -53,11 +53,11 @@ const MenuScreen: FunctionComponent = () => {
       <View style={style.section}>
         <SettingsListItem
           label={t("screen_titles.about")}
-          onPress={() => navigation.navigate(MoreStackScreens.About)}
+          onPress={() => navigation.navigate(SettingsScreens.About)}
         />
         <SettingsListItem
           label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(MoreStackScreens.Legal)}
+          onPress={() => navigation.navigate(SettingsScreens.Legal)}
           lastItem
         />
       </View>
@@ -65,7 +65,7 @@ const MenuScreen: FunctionComponent = () => {
         <View style={style.section}>
           <SettingsListItem
             label="EN Debug Menu"
-            onPress={() => navigation.navigate(MoreStackScreens.ENDebugMenu)}
+            onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
             lastItem
           />
         </View>
