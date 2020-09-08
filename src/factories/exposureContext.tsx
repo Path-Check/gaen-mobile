@@ -3,10 +3,6 @@ import { ExposureState } from "../ExposureContext"
 
 export default Factory.define<ExposureState>(() => ({
   exposureInfo: [],
-  hasBeenExposed: false,
-  userHasNewExposure: true,
-  observeExposures: (): void => {},
-  resetExposures: (): void => {},
   getCurrentExposures: () => Promise.resolve([]),
   getExposureKeys: () => Promise.resolve([]),
   lastExposureDetectionDate: null,
