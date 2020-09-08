@@ -248,7 +248,7 @@ final class ExposureManager: NSObject {
     let progress = Progress()
     var lastProcessedUrlPath: String = .default
     var processedFileCount: Int = 0
-    var unpackedKeysURLs: [URL] = []
+    var unpackedArchiveURLs: [URL] = []
 
     Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
@@ -263,16 +263,16 @@ final class ExposureManager: NSObject {
         // Abort if daily file capacity is exceeded
         return []
       }
-      let indexFileString = try await(self.fetchFilesIndexes())
+      let indexFileString = try await(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
       let targetUrls = self.urlPathsToProcess(remoteURLs)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
-      let downloadedPackedKeys = try await(self.downloadPackedKeys(targetUrls: targetUrls))
-      unpackedKeysURLs = try await(self.unpackPackages(packages: downloadedPackedKeys))
+      let downloadedPackedKeys = try await(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try await(self.unpackedKeyArchives(packages: downloadedPackedKeys))
       let exposureConfiguraton = try await(self.getExposureConfiguration())
       let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton,
-                                                               diagnosisKeyURLs: unpackedKeysURLs))
+                                                               diagnosisKeyURLs: unpackedArchiveURLs))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary, ExposureManager.isAboveScoreThreshold(summary: summary,
                                                                               with: exposureConfiguraton) {
@@ -292,7 +292,7 @@ final class ExposureManager: NSObject {
                   progress: progress,
                   completionHandler: completionHandler)
     }.always {
-      unpackedKeysURLs.cleanup()
+      unpackedArchiveURLs.cleanup()
       self.isDetectingExposures = false
     }
     return progress
@@ -442,13 +442,13 @@ private extension ExposureManager {
 
   // MARK: == Exposure Detection Private Promisses ==
 
-  func fetchFilesIndexes() -> Promise<String> {
+  func fetchIndexFile() -> Promise<String> {
     return Promise<String> { fullfill, reject in
       self.apiClient.requestString(IndexFileRequest.get,
                               requestType: .downloadKeys) { result in
         switch result {
-        case .success(let index):
-          fullfill(index)
+        case .success(let keyArchiveFilePathsString):
+          fullfill(keyArchiveFilePathsString)
         case .failure(let error):
           reject(error)
         }
@@ -456,13 +456,14 @@ private extension ExposureManager {
     }
   }
 
-  func downloadPackedKeys(targetUrls: [String]) -> Promise<[DownloadedPackage]> {
+  func downloadKeyArchives(targetUrls: [String]) -> Promise<[DownloadedPackage]> {
     return Promise { fullfill, reject in
       var downloadedPackages = [DownloadedPackage]()
       let dispatchGroup = DispatchGroup()
       for remoteURL in targetUrls {
         dispatchGroup.enter()
-        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL), requestType: .downloadKeys) { result in
+        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+                                       requestType: .downloadKeys) { result in
           switch result {
           case .success (let package):
             downloadedPackages.append(package)
@@ -478,7 +479,7 @@ private extension ExposureManager {
     }
   }
 
-  func unpackPackages(packages: [DownloadedPackage]) -> Promise<[URL]> {
+  func unpackedKeyArchives(packages: [DownloadedPackage]) -> Promise<[URL]> {
     return Promise<[URL]>(on: .global()) { fullfill, reject in
       do {
         try packages.unpack({ (urls) in
@@ -506,7 +507,8 @@ private extension ExposureManager {
     }
   }
 
-  func callDetectExposures(configuration: ExposureConfiguration, diagnosisKeyURLs: [URL]) -> Promise<ENExposureDetectionSummary?> {
+  func callDetectExposures(configuration: ExposureConfiguration,
+                           diagnosisKeyURLs: [URL]) -> Promise<ENExposureDetectionSummary?> {
     return Promise { fullfill, reject in
       self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
                                    diagnosisKeyURLs: diagnosisKeyURLs) { summary, error in
