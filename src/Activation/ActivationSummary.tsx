@@ -28,7 +28,7 @@ const ActivationSummary: FunctionComponent = () => {
   const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
   const isLocationRequiredAndOff =
     locationPermissions === LocationPermissions.REQUIRED_OFF
-  const isLocationNeeded =
+  const isLocationRequired =
     locationPermissions !== LocationPermissions.NOT_REQUIRED
 
   const {
@@ -85,14 +85,14 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationNeeded
+    bodyText: isLocationRequired
       ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
       : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
   }
 
   const isAppSetupComplete =
-    isENEnabled && isBluetoothOn && !isLocationOffAndNeeded
+    isENEnabled && isBluetoothOn && !isLocationRequiredAndOff
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent

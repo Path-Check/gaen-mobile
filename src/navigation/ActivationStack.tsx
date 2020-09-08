@@ -31,7 +31,7 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { isLocationNeeded } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
   const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {
@@ -68,9 +68,11 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const activationStepsAndroid: ActivationStep[] = isLocationNeeded
+  const isLocationRequired =
+    locationPermissions !== LocationPermissions.NOT_REQUIRED
+  const activationStepsAndroid: ActivationStep[] = isLocationRequired
     ? [...baseActivationSteps, activateLocation]
-    : baseActivationSteps
+    : [...baseActivationSteps]
 
   const activationSteps = Platform.select({
     ios: activationStepsIOS,
