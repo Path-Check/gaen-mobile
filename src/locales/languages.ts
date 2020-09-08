@@ -16,6 +16,7 @@ import es_PR from "./es_PR.json"
 import es from "./es.json"
 import fil from "./fil.json"
 import fr from "./fr.json"
+import hmn from "./hmn.json"
 import ht from "./ht.json"
 import id from "./id.json"
 import it from "./it.json"
@@ -27,6 +28,7 @@ import pt_BR from "./pt_BR.json"
 import ro from "./ro.json"
 import ru from "./ru.json"
 import sk from "./sk.json"
+import so from "./so.json"
 import tl from "./tl.json"
 import vi from "./vi.json"
 import zh_Hant from "./zh_Hant.json"
@@ -79,6 +81,7 @@ const AVAILABLE_TRANSLATIONS: Resource = {
   ht: { label: ht._display_name, translation: ht },
   fil: { label: fil._display_name, translation: fil },
   fr: { label: fr._display_name, translation: fr },
+  hmn: { label: hmn._display_name, translation: hmn },
   id: { label: id._display_name, translation: id },
   it: { label: it._display_name, translation: it },
   ja: { label: ja._display_name, translation: ja },
@@ -89,6 +92,7 @@ const AVAILABLE_TRANSLATIONS: Resource = {
   ro: { label: ro._display_name, translation: ro },
   ru: { label: ru._display_name, translation: ru },
   sk: { label: sk._display_name, translation: sk },
+  so: { label: so._display_name, translation: so },
   tl: { label: tl._display_name, translation: tl },
   vi: { label: vi._display_name, translation: vi },
   zh_Hant: { label: zh_Hant._display_name, translation: zh_Hant },

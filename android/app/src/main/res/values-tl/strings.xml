@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <!-- Shown on app info, app switcher, etc -->
-  <string name="app_name" translatable="false">PathCheck BT</string>
-  <!-- Shown below icon on launcher only -->
-  <string name="app_name_short" translatable="false">PathCheck BT</string>
+  <string name="exposure_notification_channel_description">Mga alerto sa notification sa pagkakalantad o exposure notification</string>
+  <string name="exposure_notification_channel_name">Exposure Notification</string>
+  <string name="exposure_notification_message">Napalapit ka sa isang taong nagpositibo sa COVID-19. Mag-tap dito para sa karagdagang impormasyon.</string>
+  <string name="exposure_notification_title">May posibleng exposure o pagkahawa sa COVID-19</string>
 </resources>
