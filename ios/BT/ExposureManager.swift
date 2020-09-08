@@ -440,7 +440,7 @@ private extension ExposureManager {
     }
   }
 
-  // MARK: == Exposure Detection Private Promisses ==
+  // MARK: == Exposure Detection Private Promises ==
 
   func fetchIndexFile() -> Promise<String> {
     return Promise<String> { fullfill, reject in
