@@ -62,12 +62,9 @@
     "success": "Success"
   },
   "errors": {
-    "description": "An error has ocurred. Please reload the app.",
+    "description": "An error has occurred. Please reload the app.",
     "reload": "Reload",
     "title": "Unknown Error"
-  },
-  "exoprt": {
-    "start_image_label": ""
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
