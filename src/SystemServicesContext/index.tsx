@@ -1,10 +1,9 @@
 import React, { createContext, FunctionComponent, useContext } from "react"
 
 import useIsBluetoothOn from "./useIsBluetoothOn"
-import useIsLocationOn from "./useIsLocationOn"
-import useIsLocationRequired from "./useIsLocationRequired"
-
-type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
+import useLocationPermissions, {
+  LocationPermissions,
+} from "./useLocationPermissions"
 
 export interface SystemServicesState {
   isBluetoothOn: boolean
@@ -22,20 +21,7 @@ export const SystemServicesContext = createContext<SystemServicesState>(
 
 const SystemServicesProvider: FunctionComponent = ({ children }) => {
   const isBluetoothOn = useIsBluetoothOn()
-  const isLocationOn = useIsLocationOn()
-  const isLocationRequired = useIsLocationRequired()
-
-  const determineLocationPermissions = (): LocationPermissions => {
-    if (!isLocationRequired) {
-      return "NotRequired"
-    } else if (!isLocationOn) {
-      return "RequiredOff"
-    } else {
-      return "RequiredOn"
-    }
-  }
-
-  const locationPermissions = determineLocationPermissions()
+  const locationPermissions = useLocationPermissions()
 
   return (
     <SystemServicesContext.Provider
