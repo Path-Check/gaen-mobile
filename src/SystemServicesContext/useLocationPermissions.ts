@@ -2,8 +2,10 @@ import { useEffect, useState, useCallback } from "react"
 import { Platform } from "react-native"
 
 import useOnAppStateChange from "./useOnAppStateChange"
-import { isLocationEnabled } from "../gaen/nativeModule"
-import { doesDeviceSupportLocationlessScanning } from "../gaen/nativeModule"
+import {
+  isLocationEnabled,
+  doesDeviceSupportLocationlessScanning,
+} from "../gaen/nativeModule"
 
 export type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
 type LocationEnabledState = "Unknown" | "Off" | "On"
@@ -47,19 +49,25 @@ const useLocationPermissions = (): LocationPermissions => {
 
   useOnAppStateChange(handleOnAppStateChange)
 
-  const determineLocationPermissions = (): LocationPermissions => {
-    if (!isLocationRequired) {
-      return "NotRequired"
-    } else if (locationEnabledState === "Off") {
-      return "RequiredOff"
-    } else {
-      return "RequiredOn"
-    }
-  }
-
-  const locationPermissions = determineLocationPermissions()
+  const locationPermissions = determineLocationPermissions(
+    isLocationRequired,
+    locationEnabledState,
+  )
 
   return locationPermissions
 }
 
 export default useLocationPermissions
+
+const determineLocationPermissions = (
+  isLocationRequired: boolean,
+  locationEnabledState: LocationEnabledState,
+): LocationPermissions => {
+  if (!isLocationRequired) {
+    return "NotRequired"
+  } else if (locationEnabledState === "Off") {
+    return "RequiredOff"
+  } else {
+    return "RequiredOn"
+  }
+}
