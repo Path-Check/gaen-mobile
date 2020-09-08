@@ -5,6 +5,7 @@ import {
   StackNavigationOptions,
 } from "@react-navigation/stack"
 import { NavigationContainer } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
 import MainTabNavigator from "./MainTabNavigator"
 import OnboardingStack from "./OnboardingStack"
@@ -57,6 +58,7 @@ const ProtectPrivacyCard = () => {
 }
 
 const MainNavigator: FunctionComponent = () => {
+  const { t } = useTranslation()
   const { onboardingIsComplete } = useOnboardingContext()
 
   return (
@@ -91,7 +93,7 @@ const MainNavigator: FunctionComponent = () => {
                 name={Screens.MoreInfo}
                 component={MoreInfo}
                 options={{
-                  title: "MORE INFO",
+                  title: t("navigation.more_info"),
                   ...headerScreenOptions,
                 }}
               />
@@ -99,7 +101,7 @@ const MainNavigator: FunctionComponent = () => {
                 name={Screens.ExposureDetail}
                 component={ExposureDetail}
                 options={{
-                  title: "EXPOSURE",
+                  title: t("navigation.exposure"),
                   ...headerScreenOptions,
                 }}
               />
