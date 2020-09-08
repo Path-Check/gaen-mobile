@@ -25,7 +25,7 @@ const useLocationPermissions = (): LocationPermissions => {
     if (isLocationRequired) {
       isLocationEnabled().then((result) => setIsLocationOn(result))
     }
-  }, [])
+  }, [isLocationRequired])
 
   const handleOnAppStateChange = useCallback(() => {
     determineIsLocationOn()
