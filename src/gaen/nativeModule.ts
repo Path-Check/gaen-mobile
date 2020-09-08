@@ -197,3 +197,10 @@ export const simulateExposureDetectionError = async (): Promise<"success"> => {
 export const resetExposures = async (): Promise<"success"> => {
   return debugModule.resetExposures()
 }
+
+// Utils Module
+const utilsModule = NativeModules.UtilsModule
+
+export const openAppSettings = (): void => {
+  utilsModule.openAppSettings()
+}
