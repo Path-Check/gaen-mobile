@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.location.LocationManager;
 import androidx.annotation.NonNull;
+import androidx.core.location.LocationManagerCompat;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -72,7 +73,7 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
     final LocationManager manager =
         (LocationManager) getReactApplicationContext().getSystemService(Context.LOCATION_SERVICE);
     if (manager != null) {
-      promise.resolve(manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+      promise.resolve(LocationManagerCompat.isLocationEnabled(manager));
     } else {
       promise.reject(new Exception("Location manager not found"));
     }
