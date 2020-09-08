@@ -3,11 +3,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 project 'COVIDSafePaths.xcodeproj',
 'Debug-BT' => :debug,
-'Debug-GPS' => :debug,
 'Release-BT' => :release,
-'Release-GPS' => :release,
 'Staging-BT' => :release,
-'Staging-GPS' => :release
 
 def shared_pods
   # Pods for COVIDSafePaths
