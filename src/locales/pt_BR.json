@@ -23,6 +23,10 @@
     "launch_screen1_header": "Bem-vindo ao PathCheck",
     "privacy_policy": "Política de Privacidade"
   },
+  "onboarding": {
+    "privacy_policy": "Política de Privacidade",
+    "terms_header_title": "Termos de uso"
+  },
   "screen_titles": {
     "about": "Sobre",
     "legal": "Legal"
