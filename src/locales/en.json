@@ -40,6 +40,13 @@
     "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
     "share_cta_skip": "No thanks, I don't want to share data"
   },
+  "callback_form": {
+    "well_get_in_touch": "We'll get in touch",
+    "fill_out_the_info": "Fill out the information below and a contact tracer from {{ healthAuthorityName }} will get in touch.",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "phone_number_required": "Phone number (required)"
+  },
   "common": {
     "alert": "Alert",
     "back": "Back",
@@ -276,6 +283,7 @@
   },
   "screen_titles": {
     "about": "About",
+    "callback_form": "Callback Form",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposures": "Exposures",

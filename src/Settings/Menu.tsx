@@ -12,6 +12,7 @@ import { useStatusBarEffect } from "../navigation/index"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const MenuScreen: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
@@ -21,6 +22,7 @@ const MenuScreen: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
+  const { displayCallbackForm } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
@@ -60,6 +62,13 @@ const MenuScreen: FunctionComponent = () => {
           onPress={() => navigation.navigate(SettingsScreens.Legal)}
           lastItem
         />
+        {displayCallbackForm && (
+          <SettingsListItem
+            label={t("screen_titles.callback_form")}
+            onPress={() => navigation.navigate(SettingsScreens.CallbackForm)}
+            lastItem
+          />
+        )}
       </View>
       {showDebugMenu ? (
         <View style={style.section}>
