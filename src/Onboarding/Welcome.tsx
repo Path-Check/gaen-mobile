@@ -67,7 +67,7 @@ const Welcome: FunctionComponent = () => {
           </TouchableOpacity>
           <View>
             <Image
-              source={Images.PeopleOnNetworkNodes}
+              source={Images.WelcomeImage}
               style={style.image}
               accessible
               accessibilityLabel={t("onboarding.welcome_image_label")}

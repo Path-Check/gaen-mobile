@@ -20,6 +20,7 @@ require 'open3'
 require 'dotenv'
 require_relative "./download_copy_methods"
 require_relative "./download_links_methods"
+require_relative "./download_welcome_image_methods"
 
 Dotenv.load
 
@@ -29,12 +30,15 @@ ACCESS_TOKEN = ARGV[1] || ENV.fetch("ACCESS_TOKEN")
 if (ACCESS_TOKEN) then
   fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL} #{ACCESS_TOKEN}")
 else
-   raise "Empty github access token"
+  raise "Empty github access token"
 end
 
-result = fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN) && download_links_file(HA_LABEL, ACCESS_TOKEN)
+def download_all_assets
+  system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN) && download_links_file(HA_LABEL, ACCESS_TOKEN) && download_welcome_image(HA_LABEL, ACCESS_TOKEN)
+end
 
-if result
+if fetching_env_succeeded && system("./bin/configure_builds.sh") &&
+  download_all_assets
   exit 0
 else
   exit 1
