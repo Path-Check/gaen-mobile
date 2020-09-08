@@ -6,9 +6,12 @@ import { isLocationEnabled } from "../gaen/nativeModule"
 import { doesDeviceSupportLocationlessScanning } from "../gaen/nativeModule"
 
 export type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
+type LocationEnabledState = "Unknown" | "Off" | "On"
 
 const useLocationPermissions = (): LocationPermissions => {
-  const [isLocationOn, setIsLocationOn] = useState(false)
+  const [locationEnabledState, setLocationEnabledState] = useState<
+    LocationEnabledState
+  >("Unknown")
   const [isLocationRequired, setIsLocationRequired] = useState(false)
 
   const determineIsLocationRequired = useCallback(async () => {
@@ -16,32 +19,38 @@ const useLocationPermissions = (): LocationPermissions => {
       doesDeviceSupportLocationlessScanning().then((result) =>
         setIsLocationRequired(!result),
       )
-    } else {
-      setIsLocationRequired(false)
     }
   }, [])
 
-  const determineIsLocationOn = useCallback(async () => {
+  const determineLocationEnabledState = useCallback(async () => {
     if (isLocationRequired) {
-      isLocationEnabled().then((result) => setIsLocationOn(result))
+      isLocationEnabled().then((result) => {
+        if (result) {
+          setLocationEnabledState("On")
+        } else {
+          setLocationEnabledState("Off")
+        }
+      })
     }
   }, [isLocationRequired])
 
-  const handleOnAppStateChange = useCallback(() => {
-    determineIsLocationOn()
-    determineIsLocationRequired()
-  }, [determineIsLocationOn, determineIsLocationRequired])
-
   useEffect(() => {
-    handleOnAppStateChange()
-  }, [handleOnAppStateChange])
+    determineIsLocationRequired()
+    determineLocationEnabledState()
+  }, [determineIsLocationRequired, determineLocationEnabledState])
+
+  const handleOnAppStateChange = useCallback(() => {
+    if (isLocationRequired) {
+      determineLocationEnabledState()
+    }
+  }, [isLocationRequired, determineLocationEnabledState])
 
   useOnAppStateChange(handleOnAppStateChange)
 
   const determineLocationPermissions = (): LocationPermissions => {
     if (!isLocationRequired) {
       return "NotRequired"
-    } else if (!isLocationOn) {
+    } else if (locationEnabledState === "Off") {
       return "RequiredOff"
     } else {
       return "RequiredOn"
