@@ -22,10 +22,10 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { isLocationOn } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
 
   useEffect(() => {
-    if (isLocationOn) {
+    if (locationPermissions === LocationPermissions.REQUIRED_ON) {
       navigation.navigate(ActivationScreens.ActivationSummary)
     }
   })

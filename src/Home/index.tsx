@@ -8,7 +8,10 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import {
+  useSystemServicesContext,
+  LocationPermissions,
+} from "../SystemServicesContext"
 import { Screens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
@@ -38,19 +41,18 @@ const Home: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
-  const {
-    isBluetoothOn,
-    isLocationOn,
-    isLocationNeeded,
-  } = useSystemServicesContext()
-  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const isLocationRequiredAndOff =
+    locationPermissions === LocationPermissions.REQUIRED_OFF
+  const isLocationRequired =
+    locationPermissions !== LocationPermissions.NOT_REQUIRED
 
   const { exposureNotifications } = usePermissionsContext()
   const isProximityTracingOn =
     exposureNotifications.status === ENPermissionStatus.ENABLED
 
   const appIsActive =
-    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+    isProximityTracingOn && isBluetoothOn && !isLocationRequiredAndOff
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
@@ -70,7 +72,7 @@ const Home: FunctionComponent = () => {
         applicationName,
       })
     } else {
-      return isLocationNeeded
+      return isLocationRequired
         ? t("home.bluetooth.tracing_off_subheader_location")
         : t("home.bluetooth.tracing_off_subheader")
     }

@@ -3,7 +3,10 @@ import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useSystemServicesContext } from "../SystemServicesContext"
+import {
+  useSystemServicesContext,
+  LocationPermissions,
+} from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
 import { HomeScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -11,10 +14,7 @@ import { openAppSettings } from "../gaen/nativeModule"
 export const LocationActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const {
-    isLocationOn,
-    isLocationNeeded: showLocationStatus,
-  } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
 
   const handleOnPressFix = () => {
     showFixLocationAlert()
@@ -41,9 +41,11 @@ export const LocationActivationStatus: FunctionComponent = () => {
     )
   }
 
-  if (!showLocationStatus) {
+  if (locationPermissions === LocationPermissions.NOT_REQUIRED) {
     return null
   }
+
+  const isLocationOn = locationPermissions === LocationPermissions.REQUIRED_ON
 
   return (
     <ActivationStatus
