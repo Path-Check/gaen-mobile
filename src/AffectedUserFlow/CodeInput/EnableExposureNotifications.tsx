@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  ScrollView,
-  TouchableOpacity,
-  Linking,
-  View,
-  StyleSheet,
-} from "react-native"
+import { ScrollView, TouchableOpacity, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -14,6 +8,7 @@ import { GlobalText, Button, StatusBar } from "../../components"
 import { Screens, useStatusBarEffect } from "../../navigation"
 import { Spacing, Iconography, Colors, Typography, Layout } from "../../styles"
 import { Icons } from "../../assets"
+import { openAppSettings } from "../../gaen/nativeModule"
 
 const EnableExposureNotifications: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -21,7 +16,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressOpenSettings = () => {
-    Linking.openSettings()
+    openAppSettings()
   }
 
   const handleOnPressCancel = () => {

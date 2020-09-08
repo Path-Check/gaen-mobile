@@ -1,10 +1,11 @@
 import React from "react"
-import { Linking } from "react-native"
+import { openAppSettings } from "../../gaen/nativeModule"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import EnableExposureNotifications from "./EnableExposureNotifications"
 
+jest.mock("../../gaen/nativeModule")
 jest.mock("@react-navigation/native")
 describe("EnableExposureNotifications", () => {
   it("displays the explanations for the exposure notifications", () => {
@@ -27,10 +28,9 @@ describe("EnableExposureNotifications", () => {
   })
 
   it("takes user to system settings if decide to activate notifications", () => {
-    const openSettingsSpy = jest.spyOn(Linking, "openSettings")
     const { getByLabelText } = render(<EnableExposureNotifications />)
 
     fireEvent.press(getByLabelText("Open Settings"))
-    expect(openSettingsSpy).toHaveBeenCalled()
+    expect(openAppSettings).toHaveBeenCalled()
   })
 })

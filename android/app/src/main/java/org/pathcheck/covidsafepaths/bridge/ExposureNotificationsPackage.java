@@ -13,6 +13,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DeviceInf
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureHistoryModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureKeyModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureNotificationsModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.UtilsModule;
 
 public class ExposureNotificationsPackage implements ReactPackage {
   @NonNull
@@ -24,6 +25,7 @@ public class ExposureNotificationsPackage implements ReactPackage {
     modules.add(new ExposureKeyModule(reactContext));
     modules.add(new DeviceInfoModule(reactContext));
     modules.add(new ExposureHistoryModule(reactContext));
+    modules.add(new UtilsModule(reactContext));
 
     return modules;
   }
