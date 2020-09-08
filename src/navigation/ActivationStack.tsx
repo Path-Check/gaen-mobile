@@ -59,7 +59,7 @@ const ActivationStack: FunctionComponent = () => {
     component: NotificationPermissions,
   }
 
-  const baseActivationSteps = displayAcceptTermsOfService
+  const baseActivationSteps: ActivationStep[] = displayAcceptTermsOfService
     ? [acceptTermsOfServiceStep, activateProximityTracing]
     : [activateProximityTracing]
 
@@ -71,7 +71,7 @@ const ActivationStack: FunctionComponent = () => {
   const isLocationRequired = locationPermissions !== "NotRequired"
   const activationStepsAndroid: ActivationStep[] = isLocationRequired
     ? [...baseActivationSteps, activateLocation]
-    : [...baseActivationSteps]
+    : baseActivationSteps
 
   const activationSteps = Platform.select({
     ios: activationStepsIOS,
