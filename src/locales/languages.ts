@@ -9,6 +9,7 @@ import { StorageUtils } from "../utils"
 
 import ar from "./ar.json"
 import da from "./da.json"
+import ch from "./ch.json"
 import el from "./el.json"
 import en from "./en.json"
 import es_419 from "./es_419.json"
@@ -21,6 +22,7 @@ import ht from "./ht.json"
 import id from "./id.json"
 import it from "./it.json"
 import ja from "./ja.json"
+import ko from "./ko.json"
 import ml from "./ml.json"
 import nl from "./nl.json"
 import pl from "./pl.json"
@@ -73,6 +75,7 @@ export async function setUserLocaleOverride(locale: Locale): Promise<void> {
 /* eslint-disable no-underscore-dangle */
 const AVAILABLE_TRANSLATIONS: Resource = {
   ar: { label: ar._display_name, translation: ar },
+  ch: { label: ch._display_name, translation: ch },
   da: { label: da._display_name, translation: da },
   el: { label: el._display_name, translation: el },
   es: { label: es._display_name, translation: es },
@@ -85,6 +88,7 @@ const AVAILABLE_TRANSLATIONS: Resource = {
   id: { label: id._display_name, translation: id },
   it: { label: it._display_name, translation: it },
   ja: { label: ja._display_name, translation: ja },
+  ko: { label: ko._display_name, translation: ko },
   ml: { label: ml._display_name, translation: ml },
   nl: { label: nl._display_name, translation: nl },
   pl: { label: pl._display_name, translation: pl },

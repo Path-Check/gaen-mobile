@@ -33,12 +33,12 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
+    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
-    "share_cta_skip": "No thanks, I don't want to share data"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
   },
   "common": {
     "alert": "Alert",
@@ -66,9 +66,6 @@
     "reload": "Reload",
     "title": "Unknown Error"
   },
-  "exoprt": {
-    "start_image_label": ""
-  },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
     "code_input_button_back": "Back",
@@ -91,19 +88,19 @@
       "verification_code_used": "Verification code has already been used"
     },
     "publish_consent_title_bluetooth": "Notify others in your community",
-    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
     "publish_keys": {
-      "no_op": {
-        "title": "Attempt to submit existing keys",
-        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added."
-      },
       "errors": {
-        "unknown": "Failed to submit the exposure data",
-        "timeout": "The request took too long to complete",
         "description": "The operation could not be completed. {{message}}",
-        "internal_server_error": "The server is experiencing problems, please try again later"
+        "internal_server_error": "The server is experiencing problems, please try again later",
+        "timeout": "The request took too long to complete",
+        "unknown": "Failed to submit the exposure data"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added.",
+        "title": "Attempt to submit existing keys"
       }
-    }
+    },
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
     "exposure_detail": {
@@ -144,12 +141,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
   "home": {
-    "status_icon_active_label": "A white check in a green circle",
-    "status_icon_inactive_label": "A white x in a red circle",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
-    "get_more_info": "Get more info on {{technology}}",
-    "fix": "Fix issues with {{technology}}",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
@@ -169,6 +162,8 @@
       "unauthorized_error_message": "To activate Proximity Tracing, ensure \"Share Exposure Information\" is enabled in Settings > {{applicationName}} > Exposure Notifications",
       "unauthorized_error_title": "Share Exposure Information"
     },
+    "fix": "Fix issues with {{technology}}",
+    "get_more_info": "Get more info on {{technology}}",
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
@@ -176,15 +171,17 @@
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
-    "proximity_tracing_info_subheader_2": "Is my data secure?"
+    "proximity_tracing_info_subheader_2": "Is my data secure?",
+    "status_icon_active_label": "A white check in a green circle",
+    "status_icon_inactive_label": "A white x in a red circle"
   },
   "label": {
     "activate_proximity_tracing": "Activate Proximity Tracing",
-    "launch_activate_location": "Activate Location",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
     "language_icon": "Outlined icon of a globe",
+    "launch_activate_location": "Activate Location",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
@@ -196,37 +193,36 @@
     "select_language": "Select language"
   },
   "navigation": {
+    "exposure": "Exposure",
     "exposure_history": "Exposure History",
     "home": "Home",
     "more": "More",
-    "report_issue": "Report Issue",
-    "self_assessment": "Self Assessment",
     "more_info": "More Info",
-    "exposure": "Exposure"
+    "report_issue": "Report Issue",
+    "self_assessment": "Self Assessment"
   },
   "onboarding": {
-    "app_setup_complete_header": "App Setup Complete!",
-    "app_setup_incomplete_header": "App Setup Incomplete",
-    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
-    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
-    "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "activation_header_title": "App Setup",
+    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
+    "app_setup_complete_header": "App Setup Complete!",
+    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "app_setup_incomplete_header": "App Setup Incomplete",
+    "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
-    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
+    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
     "location_header": "Activate Location",
     "location_subheader": "Why do I need to turn on my phone's location setting?",
-    "please_read_the": "Please read the",
-    "privacy_policy": "Privacy Policy",
-    "eula": "End User Legal Agreement",
-    "terms_header_title": "Terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
+    "please_read_the": "Please read the",
+    "privacy_policy": "Privacy Policy",
     "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
       "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
@@ -267,6 +263,7 @@
     "screen5_image_label": "A person talking to a health expert virtually",
     "select_language": "Select Language",
     "step": "Step {{currentStep}} of {{totalSteps}}",
+    "terms_header_title": "Terms of use",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
   "report_issue": {

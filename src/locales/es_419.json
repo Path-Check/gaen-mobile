@@ -35,6 +35,9 @@
     "home": "Inicio",
     "more": "Más"
   },
+  "onboarding": {
+    "privacy_policy": "Política de privacidad"
+  },
   "screen_titles": {
     "about": "Acerca de",
     "legal": "Legal"

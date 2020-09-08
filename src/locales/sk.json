@@ -27,7 +27,12 @@
     "launch_get_started": "Začať"
   },
   "navigation": {
-    "exposure_history": "História vystavenia sa riziku"
+    "exposure_history": "História vystavenia sa riziku",
+    "more_info": "Viac informácií"
+  },
+  "onboarding": {
+    "privacy_policy": "Ochrana osobných údajov",
+    "terms_header_title": "Podmienky používania"
   },
   "onboarding": {
     "privacy_policy": "Ochrana osobných údajov",
