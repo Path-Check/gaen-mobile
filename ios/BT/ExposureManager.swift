@@ -268,8 +268,8 @@ final class ExposureManager: NSObject {
       let targetUrls = self.urlPathsToProcess(remoteURLs)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
-      let downloadedPackedKeys = try await(self.downloadKeyArchives(targetUrls: targetUrls))
-      unpackedArchiveURLs = try await(self.unpackedKeyArchives(packages: downloadedPackedKeys))
+      let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
       let exposureConfiguraton = try await(self.getExposureConfiguration())
       let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
@@ -479,7 +479,7 @@ private extension ExposureManager {
     }
   }
 
-  func unpackedKeyArchives(packages: [DownloadedPackage]) -> Promise<[URL]> {
+  func unpackKeyArchives(packages: [DownloadedPackage]) -> Promise<[URL]> {
     return Promise<[URL]>(on: .global()) { fullfill, reject in
       do {
         try packages.unpack({ (urls) in
