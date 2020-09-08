@@ -14,6 +14,9 @@
     "launch_enable_notif": "Activer les notifications",
     "launch_get_started": "Commencer"
   },
+  "onboarding": {
+    "terms_header_title": "Conditions d’utilisation (en anglais)"
+  },
   "screen_titles": {
     "about": "À propos",
     "legal": "Juridique"

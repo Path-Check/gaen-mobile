@@ -19,6 +19,8 @@ import ActivationSummary from "../Activation/ActivationSummary"
 
 import { Icons } from "../assets"
 import { Layout, Spacing, Colors, Typography } from "../styles"
+import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 type ActivationStackParams = {
   [key in ActivationScreen]: undefined
@@ -30,10 +32,16 @@ const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { isLocationNeeded } = useSystemServicesContext()
+  const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {
     screenName: ActivationScreen
     component: FunctionComponent
+  }
+
+  const acceptTermsOfServiceStep: ActivationStep = {
+    screenName: ActivationScreens.AcceptTermsOfService,
+    component: AcceptTermsOfService,
   }
 
   const activateProximityTracing: ActivationStep = {
@@ -51,14 +59,18 @@ const ActivationStack: FunctionComponent = () => {
     component: NotificationPermissions,
   }
 
+  const baseActivationSteps = displayAcceptTermsOfService
+    ? [acceptTermsOfServiceStep, activateProximityTracing]
+    : [activateProximityTracing]
+
   const activationStepsIOS: ActivationStep[] = [
-    activateProximityTracing,
+    ...baseActivationSteps,
     notificationPermissions,
   ]
 
   const activationStepsAndroid: ActivationStep[] = isLocationNeeded
-    ? [activateProximityTracing, activateLocation]
-    : [activateProximityTracing]
+    ? [...baseActivationSteps, activateLocation]
+    : baseActivationSteps
 
   const activationSteps = Platform.select({
     ios: activationStepsIOS,
@@ -121,7 +133,10 @@ const ActivationStack: FunctionComponent = () => {
   }
 
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator
+      initialRouteName={ActivationScreens.AcceptTermsOfService}
+      screenOptions={screenOptions}
+    >
       {activationSteps.map((step, idx) => {
         const currentStep = idx + 1
         return (

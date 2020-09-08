@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -11,38 +10,21 @@ import HomeStack from "./HomeStack"
 import MoreStack from "./MoreStack"
 import ReportIssueStack from "./ReportIssueStack"
 
-import { useExposureContext } from "../ExposureContext"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
-import { Affordances, Colors } from "../styles"
+import { Colors } from "../styles"
 
 const Tab = createBottomTabNavigator()
 
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { userHasNewExposure } = useExposureContext()
   const insets = useSafeAreaInsets()
   const {
     displaySelfAssessment,
     displayReportAnIssue,
   } = useConfigurationContext()
-
-  const applyBadge = (icon: JSX.Element) => {
-    return (
-      <>
-        {icon}
-        <View style={style.iconBadge} />
-      </>
-    )
-  }
-
-  const style = StyleSheet.create({
-    iconBadge: {
-      ...Affordances.iconBadge,
-    },
-  })
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
@@ -95,7 +77,7 @@ const MainTabNavigator: FunctionComponent = () => {
         size={size}
       />
     )
-    return userHasNewExposure ? applyBadge(tabIcon) : tabIcon
+    return tabIcon
   }
 
   const QuestionMarkIcon: FunctionComponent<TabBarIconProps> = ({
