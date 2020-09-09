@@ -13,7 +13,10 @@ import {
 import { getLocalNames } from "../locales/languages"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
-import useAuthorityCopy from "../configuration/useAuthorityCopy"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
 
 import { Images } from "../assets"
 import { Spacing, Colors, Typography, Outlines } from "../styles"
@@ -28,8 +31,8 @@ const Welcome: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
-  const welcomeMessage = useAuthorityCopy(
-    "welcome_message",
+  const welcomeMessage = authorityCopyTranslation(
+    loadAuthorityCopy("welcome_message"),
     localeCode,
     t("label.launch_screen1_header"),
   )

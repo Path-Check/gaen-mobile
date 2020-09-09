@@ -6,7 +6,15 @@ import { GlobalText } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
-import useAuthorityCopy from "../configuration/useAuthorityCopy"
+import ExternalLink from "./ExternalLink"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
 export const AboutScreen: FunctionComponent = () => {
   const {
@@ -17,10 +25,15 @@ export const AboutScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const { healthAuthorityName } = useConfigurationContext()
 
-  const aboutContent = useAuthorityCopy(
-    "about",
+  const aboutContent = authorityCopyTranslation(
+    loadAuthorityCopy("about"),
     localeCode,
     t("about.description", { applicationName, healthAuthorityName }),
+  )
+
+  const authorityLinks = applyTranslations(
+    loadAuthorityLinks("about"),
+    localeCode,
   )
 
   return (
@@ -29,6 +42,9 @@ export const AboutScreen: FunctionComponent = () => {
         <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
       </View>
       <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
+      {authorityLinks?.map(({ url, label }) => {
+        return <ExternalLink key={label} url={url} label={label} />
+      })}
       <View style={style.infoRowContainer}>
         <View style={style.infoRow}>
           <GlobalText style={style.aboutSectionParaLabel}>
@@ -65,6 +81,7 @@ const style = StyleSheet.create({
   },
   aboutContent: {
     ...Typography.body1,
+    marginBottom: Spacing.medium,
   },
   aboutSectionParaLabel: {
     ...Typography.header5,
@@ -77,7 +94,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   infoRowContainer: {
-    marginTop: Spacing.medium,
+    marginTop: Spacing.small,
     marginBottom: Spacing.medium,
   },
   infoRow: {

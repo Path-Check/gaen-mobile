@@ -19,6 +19,7 @@
 require 'open3'
 require 'dotenv'
 require_relative "./download_copy_methods"
+require_relative "./download_links_methods"
 
 Dotenv.load
 
@@ -31,7 +32,7 @@ else
    raise "Empty github access token"
 end
 
-result = fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN)
+result = fetching_env_succeeded && system("./bin/configure_builds.sh") && system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN) && download_links_file(HA_LABEL, ACCESS_TOKEN)
 
 if result
   exit 0
