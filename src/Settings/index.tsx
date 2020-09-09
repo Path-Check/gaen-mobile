@@ -63,11 +63,6 @@ const Settings: FunctionComponent = () => {
           label={t("screen_titles.legal")}
           onPress={() => navigation.navigate(SettingsScreens.Legal)}
         />
-        <SettingsListItem
-          label={t("screen_titles.report_issue")}
-          onPress={() => navigation.navigate(SettingsScreens.ReportIssue)}
-          lastItem
-        />
         {displayCallbackForm && (
           <SettingsListItem
             label={t("screen_titles.callback_form")}
@@ -75,8 +70,13 @@ const Settings: FunctionComponent = () => {
             lastItem
           />
         )}
+        <SettingsListItem
+          label={t("screen_titles.report_issue")}
+          onPress={() => navigation.navigate(SettingsScreens.ReportIssue)}
+          lastItem
+        />
       </View>
-      {showDebugMenu ? (
+      {showDebugMenu && (
         <View style={style.section}>
           <SettingsListItem
             label="EN Debug Menu"
@@ -84,7 +84,7 @@ const Settings: FunctionComponent = () => {
             lastItem
           />
         </View>
-      ) : null}
+      )}
     </ScrollView>
   )
 }
