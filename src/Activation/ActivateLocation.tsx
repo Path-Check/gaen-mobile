@@ -6,7 +6,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -15,6 +14,7 @@ import { ActivationScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
+import { openAppSettings } from "../gaen/nativeModule"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -22,9 +22,10 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { isLocationOn } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
 
   useEffect(() => {
+    const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
       navigation.navigate(ActivationScreens.ActivationSummary)
     }
@@ -45,7 +46,7 @@ const ActivateLocation: FunctionComponent = () => {
         },
         {
           text: t("common.settings"),
-          onPress: () => Linking.openSettings(),
+          onPress: () => openAppSettings(),
         },
       ],
     )

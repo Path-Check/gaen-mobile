@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react"
 import {
   TouchableOpacity,
-  Linking,
   ScrollView,
   View,
   StyleSheet,
@@ -17,6 +16,7 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
+import { openAppSettings } from "../gaen/nativeModule"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -25,12 +25,9 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const {
-    isBluetoothOn,
-    isLocationOn,
-    isLocationNeeded,
-  } = useSystemServicesContext()
-  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const {
     exposureNotifications: { status },
@@ -42,7 +39,7 @@ const ActivationSummary: FunctionComponent = () => {
   }
 
   const handleOnPressOpenSettings = async () => {
-    Linking.openSettings()
+    openAppSettings()
     completeOnboarding()
   }
 
@@ -86,14 +83,14 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationNeeded
+    bodyText: isLocationRequired
       ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
       : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
   }
 
   const isAppSetupComplete =
-    isENEnabled && isBluetoothOn && !isLocationOffAndNeeded
+    isENEnabled && isBluetoothOn && !isLocationRequiredAndOff
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent

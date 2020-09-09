@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="exposure_notification_channel_description">Notifikasion put Exposure Alerts.</string>
+  <string name="exposure_notification_channel_name">Notifikasion Exposure</string>
+  <string name="exposure_notification_message">Guaha ginen i fion-mu na taotao positive i test-na para COVID 19. Tap para mas infotmasion.</string>
+  <string name="exposure_notification_title">Sina ha tinanmi COVID 19</string>
+</resources>

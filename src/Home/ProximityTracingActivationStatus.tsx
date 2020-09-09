@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Linking, Alert } from "react-native"
+import { Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
@@ -10,6 +10,7 @@ import {
 import { HomeScreens } from "../navigation"
 import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
+import { openAppSettings } from "../gaen/nativeModule"
 
 export const ProximityTracingActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -32,7 +33,7 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
         },
         {
           text: t("common.settings"),
-          onPress: () => Linking.openSettings(),
+          onPress: () => openAppSettings(),
         },
       ],
     )

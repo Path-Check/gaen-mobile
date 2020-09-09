@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <!-- Shown on app info, app switcher, etc -->
-  <string name="app_name" translatable="false">PathCheck BT</string>
-  <!-- Shown below icon on launcher only -->
-  <string name="app_name_short" translatable="false">PathCheck BT</string>
+  <string name="exposure_notification_channel_description">接触通知アラート</string>
+  <string name="exposure_notification_channel_name">感染リスクの通知</string>
+  <string name="exposure_notification_message">あなたの近くにいた誰かがCOVID-19の検査で陽性を示しました。詳細はタップしてください。</string>
+  <string name="exposure_notification_title">COVID-19への接触の可能性</string>
 </resources>

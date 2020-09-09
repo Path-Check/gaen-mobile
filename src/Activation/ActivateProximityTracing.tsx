@@ -21,8 +21,8 @@ const ActivateProximityTracing: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const { isLocationOn, isLocationNeeded } = useSystemServicesContext()
-  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+  const { locationPermissions } = useSystemServicesContext()
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const { exposureNotifications } = usePermissionsContext()
 
@@ -30,7 +30,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
     if (isPlatformiOS()) {
       navigation.navigate(ActivationScreens.NotificationPermissions)
     } else {
-      isLocationOffAndNeeded
+      isLocationRequiredAndOff
         ? navigation.navigate(ActivationScreens.ActivateLocation)
         : navigation.navigate(ActivationScreens.ActivationSummary)
     }

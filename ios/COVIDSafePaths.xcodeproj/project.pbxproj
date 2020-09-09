@@ -30,6 +30,8 @@
 		B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */; };
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
 		B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */; };
+		B5BD2BC02507E81A00B2F62E /* UtilsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */; };
+		B5BD2BC22507E84D00B2F62E /* UtilsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BC12507E84D00B2F62E /* UtilsModule.m */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
@@ -228,6 +230,8 @@
 		B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExposureHistoryModule.m; sourceTree = "<group>"; };
 		B59F4C3624BE0658007B09D5 /* List+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extensions.swift"; sourceTree = "<group>"; };
 		B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerUnitTests.swift; sourceTree = "<group>"; };
+		B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsModule.swift; sourceTree = "<group>"; };
+		B5BD2BC12507E84D00B2F62E /* UtilsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilsModule.m; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -646,6 +650,8 @@
 			children = (
 				A5A3043A24E565F900C3157A /* ENBridgeConstants.h */,
 				B596C0712488127D00943B79 /* ENPermissionsModule.m */,
+				B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */,
+				B5BD2BC12507E84D00B2F62E /* UtilsModule.m */,
 				C550A66524B7906F002CA7F2 /* ExposureKeyModule.m */,
 				B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */,
 				B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */,
@@ -941,6 +947,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5FBB0D524916D8900433980 /* UserState.swift in Sources */,
+				B5BD2BC22507E84D00B2F62E /* UtilsModule.m in Sources */,
 				B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */,
 				C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */,
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
@@ -958,6 +965,7 @@
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
 				A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */,
 				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
+				B5BD2BC02507E81A00B2F62E /* UtilsModule.swift in Sources */,
 				B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */,
 				B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */,
 				B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */,
