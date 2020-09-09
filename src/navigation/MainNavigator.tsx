@@ -92,7 +92,7 @@ const MainNavigator: FunctionComponent = () => {
                 name={Stacks.Settings}
                 component={SettingsStack}
                 options={{
-                  ...headerScreenOptions,
+                  headerShown: false,
                   ...settingsStackTransitionPreset,
                 }}
               />

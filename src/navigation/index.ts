@@ -86,14 +86,6 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
-export type ReportIssueScreen = "ReportIssueForm"
-
-export const ReportIssueScreens: {
-  [key in ReportIssueScreen]: ReportIssueScreen
-} = {
-  ReportIssueForm: "ReportIssueForm",
-}
-
 export type ConnectStackScreen = "Connect"
 
 export const ConnectStackScreens: {
@@ -103,11 +95,12 @@ export const ConnectStackScreens: {
 }
 
 export type SettingsScreen =
-  | "Menu"
+  | "Settings"
   | "About"
   | "Legal"
   | "AffectedUserFlow"
   | "CallbackForm"
+  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -116,10 +109,11 @@ export type SettingsScreen =
 export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
 } = {
-  Menu: "Menu",
+  Settings: "Settings",
   About: "About",
   Legal: "Legal",
   CallbackForm: "CallbackForm",
+  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
@@ -158,23 +152,19 @@ export const AffectedUserFlowScreens: {
 export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
-  | ReportIssueScreen
   | SettingsScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
   | HomeScreen
-  | "ReportIssueForm"
   | "LanguageSelection"
 
 export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
-  ...ReportIssueScreens,
   ...SettingsScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
   ...HomeScreens,
-  ReportIssueForm: "ReportIssueForm",
   LanguageSelection: "LanguageSelection",
 }
 

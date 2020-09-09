@@ -14,7 +14,7 @@ import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-const MenuScreen: FunctionComponent = () => {
+const Settings: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
   const {
@@ -31,7 +31,7 @@ const MenuScreen: FunctionComponent = () => {
 
   return (
     <ScrollView style={style.container}>
-      <View style={[style.section, style.firstSection]}>
+      <View style={style.section}>
         <TouchableOpacity
           onPress={handleOnPressSelectLanguage}
           accessible
@@ -60,6 +60,10 @@ const MenuScreen: FunctionComponent = () => {
         <SettingsListItem
           label={t("screen_titles.legal")}
           onPress={() => navigation.navigate(SettingsScreens.Legal)}
+        />
+        <SettingsListItem
+          label={t("screen_titles.report_issue")}
+          onPress={() => navigation.navigate(SettingsScreens.ReportIssue)}
           lastItem
         />
         {displayCallbackForm && (
@@ -109,17 +113,11 @@ const SettingsListItem = ({
 const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.xxLarge,
   },
   section: {
     backgroundColor: Colors.primaryLightBackground,
-    marginBottom: Spacing.medium,
-    borderBottomColor: Colors.secondary50,
-    borderBottomWidth: Outlines.hairline,
-    borderTopColor: Colors.secondary50,
-    borderTopWidth: Outlines.hairline,
-  },
-  firstSection: {
-    borderTopWidth: 0,
+    marginBottom: Spacing.xxLarge,
   },
   languageButtonContainer: {
     flexDirection: "row",
@@ -133,17 +131,16 @@ const style = StyleSheet.create({
   },
   listItem: {
     paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.medium,
-    borderBottomWidth: 0,
+    paddingVertical: Spacing.large,
   },
   listItemText: {
     ...Typography.tappableListItem,
   },
   divider: {
     height: Outlines.hairline,
-    backgroundColor: Colors.secondary50,
+    backgroundColor: Colors.neutral10,
     marginHorizontal: Spacing.medium,
   },
 })
 
-export default MenuScreen
+export default Settings
