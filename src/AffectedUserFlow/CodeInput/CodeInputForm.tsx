@@ -131,8 +131,8 @@ const CodeInputForm: FunctionComponent = () => {
       case "VerificationCodeUsed": {
         return t("export.error.verification_code_used")
       }
-      case "InvalidVerificationUrl": {
-        return "Invalid Verification Url"
+      case "NetworkConnection": {
+        return t("export.error.network_connection_error")
       }
       default: {
         return t("export.error.unknown_code_verification_error")
@@ -144,6 +144,9 @@ const CodeInputForm: FunctionComponent = () => {
     switch (error) {
       case "TokenMetaDataMismatch": {
         return "token meta data mismatch"
+      }
+      case "NetworkConnection": {
+        return t("export.error.network_connection_error")
       }
       default: {
         return t("export.error.unknown_code_verification_error")

@@ -31,7 +31,7 @@ type CodeVerificationSuccess = VerifiedCodeResponse
 export type CodeVerificationError =
   | "InvalidCode"
   | "VerificationCodeUsed"
-  | "InvalidVerificationUrl"
+  | "NetworkConnection"
   | "Unknown"
 
 type TestType = "confirmed" | "likely"
@@ -77,7 +77,11 @@ export const postCode = async (
       }
     }
   } catch (e) {
-    return { kind: "failure", error: "Unknown" }
+    if (e.message === "Network request failed") {
+      return { kind: "failure", error: "NetworkConnection" }
+    } else {
+      return { kind: "failure", error: "Unknown" }
+    }
   }
 }
 
@@ -88,7 +92,10 @@ interface TokenVerificationResponse {
 
 type TokenVerificationSuccess = TokenVerificationResponse
 
-export type TokenVerificationError = "TokenMetaDataMismatch" | "Unknown"
+export type TokenVerificationError =
+  | "TokenMetaDataMismatch"
+  | "Unknown"
+  | "NetworkConnection"
 
 export const postTokenAndHmac = async (
   token: Token,
@@ -126,6 +133,10 @@ export const postTokenAndHmac = async (
       }
     }
   } catch (e) {
-    return { kind: "failure", error: "Unknown" }
+    if (e.message === "Network request failed") {
+      return { kind: "failure", error: "NetworkConnection" }
+    } else {
+      return { kind: "failure", error: "Unknown" }
+    }
   }
 }
