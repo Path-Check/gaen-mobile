@@ -31,7 +31,7 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { isLocationNeeded } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
   const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {
@@ -59,7 +59,7 @@ const ActivationStack: FunctionComponent = () => {
     component: NotificationPermissions,
   }
 
-  const baseActivationSteps = displayAcceptTermsOfService
+  const baseActivationSteps: ActivationStep[] = displayAcceptTermsOfService
     ? [acceptTermsOfServiceStep, activateProximityTracing]
     : [activateProximityTracing]
 
@@ -68,7 +68,8 @@ const ActivationStack: FunctionComponent = () => {
     notificationPermissions,
   ]
 
-  const activationStepsAndroid: ActivationStep[] = isLocationNeeded
+  const isLocationRequired = locationPermissions !== "NotRequired"
+  const activationStepsAndroid: ActivationStep[] = isLocationRequired
     ? [...baseActivationSteps, activateLocation]
     : baseActivationSteps
 

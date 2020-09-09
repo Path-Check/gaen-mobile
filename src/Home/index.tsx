@@ -38,19 +38,16 @@ const Home: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
-  const {
-    isBluetoothOn,
-    isLocationOn,
-    isLocationNeeded,
-  } = useSystemServicesContext()
-  const isLocationOffAndNeeded = !isLocationOn && isLocationNeeded
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const { exposureNotifications } = usePermissionsContext()
   const isProximityTracingOn =
     exposureNotifications.status === ENPermissionStatus.ENABLED
 
   const appIsActive =
-    isProximityTracingOn && isBluetoothOn && !isLocationOffAndNeeded
+    isProximityTracingOn && isBluetoothOn && !isLocationRequiredAndOff
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Screens.LanguageSelection)
@@ -70,7 +67,7 @@ const Home: FunctionComponent = () => {
         applicationName,
       })
     } else {
-      return isLocationNeeded
+      return isLocationRequired
         ? t("home.bluetooth.tracing_off_subheader_location")
         : t("home.bluetooth.tracing_off_subheader")
     }

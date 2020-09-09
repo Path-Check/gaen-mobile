@@ -66,8 +66,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              isLocationOn: true,
-              isLocationNeeded: true,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -112,8 +111,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
-              isLocationOn: true,
-              isLocationNeeded: false,
+              locationPermissions: "NotRequired",
             }}
           >
             <Home />
@@ -149,8 +147,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: false,
-              isLocationOn: true,
-              isLocationNeeded: true,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -185,8 +182,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              isLocationOn: true,
-              isLocationNeeded: true,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -213,8 +209,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              isLocationOn: true,
-              isLocationNeeded: false,
+              locationPermissions: "NotRequired",
             }}
           >
             <Home />
@@ -328,8 +323,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              isLocationOn: true,
-              isLocationNeeded: true,
+              locationPermissions: "RequiredOn",
             }}
           >
             <Home />
@@ -351,8 +345,7 @@ describe("Home", () => {
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
-              isLocationOn: false,
-              isLocationNeeded: true,
+              locationPermissions: "RequiredOff",
             }}
           >
             <Home />
@@ -377,8 +370,7 @@ describe("Home", () => {
         <SystemServicesContext.Provider
           value={{
             isBluetoothOn: true,
-            isLocationOn: true,
-            isLocationNeeded: false,
+            locationPermissions: "NotRequired",
           }}
         >
           <Home />

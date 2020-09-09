@@ -11,10 +11,7 @@ import { openAppSettings } from "../gaen/nativeModule"
 export const LocationActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const {
-    isLocationOn,
-    isLocationNeeded: showLocationStatus,
-  } = useSystemServicesContext()
+  const { locationPermissions } = useSystemServicesContext()
 
   const handleOnPressFix = () => {
     showFixLocationAlert()
@@ -41,9 +38,11 @@ export const LocationActivationStatus: FunctionComponent = () => {
     )
   }
 
-  if (!showLocationStatus) {
+  if (locationPermissions === "NotRequired") {
     return null
   }
+
+  const isLocationOn = locationPermissions === "RequiredOn"
 
   return (
     <ActivationStatus
