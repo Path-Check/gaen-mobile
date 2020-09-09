@@ -17,7 +17,6 @@ import {
   Button,
   GradientBackground,
 } from "../components"
-import { getLocalNames } from "../locales/languages"
 
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
@@ -29,13 +28,9 @@ import { Spacing, Colors, Typography, Outlines, Iconography } from "../styles"
 
 const Home: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.gradientPrimary100Lighter)
-  const {
-    t,
-    i18n: { language: localeCode },
-  } = useTranslation()
+  const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
 
   const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
@@ -48,12 +43,6 @@ const Home: FunctionComponent = () => {
 
   const appIsActive =
     isProximityTracingOn && isBluetoothOn && !isLocationRequiredAndOff
-
-  const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
-    })
-  }
 
   const handleOnPressSettings = () => {
     navigation.navigate(Stacks.Settings)
@@ -111,14 +100,6 @@ const Home: FunctionComponent = () => {
         >
           <View style={style.topContainer}>
             <SettingsButton />
-            <TouchableOpacity
-              onPress={handleOnPressSelectLanguage}
-              style={style.languageButtonContainer}
-            >
-              <GlobalText style={style.languageButtonText}>
-                {languageName}
-              </GlobalText>
-            </TouchableOpacity>
             <View style={style.topIcon}>
               <SvgXml
                 xml={topIcon}
@@ -175,7 +156,7 @@ const style = StyleSheet.create({
   topContainer: {
     width: "100%",
     alignItems: "center",
-    paddingTop: Spacing.xxSmall,
+    paddingTop: Spacing.small,
     paddingBottom: Spacing.xLarge,
   },
   settingsButtonContainer: {
@@ -183,21 +164,6 @@ const style = StyleSheet.create({
     top: 0,
     right: 0,
     padding: Spacing.medium,
-  },
-  languageButtonContainer: {
-    alignSelf: "center",
-    paddingVertical: Spacing.xxSmall,
-    paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.transparentNeutral30,
-    borderRadius: Outlines.borderRadiusMax,
-    marginBottom: Spacing.large,
-  },
-  languageButtonText: {
-    ...Typography.body3,
-    letterSpacing: Typography.xLargeLetterSpacing,
-    color: Colors.primary150,
-    textAlign: "center",
-    textTransform: "uppercase",
   },
   topIcon: {
     backgroundColor: Colors.white,
