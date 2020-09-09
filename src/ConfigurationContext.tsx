@@ -6,6 +6,7 @@ export interface Configuration {
   appDownloadLink: string
   appPackageName: string
   displayAcceptTermsOfService: boolean
+  displayCallbackForm: boolean
   displayReportAnIssue: boolean
   displaySelfAssessment: boolean
   healthAuthorityAdviceUrl: string
@@ -19,6 +20,7 @@ const initialState = {
   appDownloadLink: "",
   appPackageName: "",
   displayAcceptTermsOfService: false,
+  displayCallbackForm: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
   healthAuthorityAdviceUrl: "",
@@ -47,6 +49,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     android: env.ANDROID_APPLICATION_ID,
   }) as string
   const regionCodes = env.REGION_CODES.split(",")
+  const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
 
   return (
     <ConfigurationContext.Provider
@@ -54,6 +57,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appDownloadLink,
         appPackageName,
         displayAcceptTermsOfService,
+        displayCallbackForm,
         displayReportAnIssue,
         displaySelfAssessment,
         healthAuthorityAdviceUrl,

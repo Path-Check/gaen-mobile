@@ -7,6 +7,7 @@ export default Factory.define<Configuration>(() => ({
   displayAcceptTermsOfService: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
+  displayCallbackForm: false,
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
   healthAuthorityEulaUrl: "healthAuthorityEulaUrl",
   healthAuthorityName: "authorityName",

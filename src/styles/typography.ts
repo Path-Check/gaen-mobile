@@ -166,7 +166,6 @@ export const body3: TextStyle = {
 }
 
 // Forms
-
 export const formInputLabel: TextStyle = {
   ...smallFont,
   color: Colors.primaryText,

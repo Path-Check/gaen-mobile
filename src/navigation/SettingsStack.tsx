@@ -9,6 +9,7 @@ import MenuScreen from "../Settings/Menu"
 import AboutScreen from "../Settings/About"
 import LegalScreen from "../Settings/Legal"
 import ENDebugMenu from "../Settings/ENDebugMenu"
+import CallbackFormScreen from "../More/CallbackForm"
 import ENLocalDiagnosisKeyScreen from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebugScreen from "../Settings/ExposureListDebugScreen"
 
@@ -46,6 +47,10 @@ const SettingsStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen name={SettingsScreens.About} component={AboutScreen} />
+      <Stack.Screen
+        name={SettingsScreens.CallbackForm}
+        component={CallbackFormScreen}
+      />
       <Stack.Screen
         name={SettingsScreens.Legal}
         component={LegalScreen}

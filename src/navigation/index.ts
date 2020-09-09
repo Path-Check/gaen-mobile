@@ -106,9 +106,10 @@ export type SettingsScreen =
   | "Menu"
   | "About"
   | "Legal"
+  | "AffectedUserFlow"
+  | "CallbackForm"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
-  | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
 
@@ -118,6 +119,7 @@ export const SettingsScreens: {
   Menu: "Menu",
   About: "About",
   Legal: "Legal",
+  CallbackForm: "CallbackForm",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   AffectedUserFlow: "AffectedUserFlow",
