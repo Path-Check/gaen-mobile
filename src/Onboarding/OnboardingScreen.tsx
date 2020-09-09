@@ -72,7 +72,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(OnboardingScreens.ProtectPrivacy)
+    navigation.navigate(Stacks.Modal, { screen: ModalScreens.ProtectPrivacy })
   }
 
   return (

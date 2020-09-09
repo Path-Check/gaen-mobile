@@ -48,6 +48,12 @@ const Home: FunctionComponent = () => {
     navigation.navigate(Stacks.Settings)
   }
 
+  const handleOnPressReportTestResult = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.AffectedUserStack,
+    })
+  }
+
   const topIcon = appIsActive ? Icons.CheckInCircle : Icons.XInCircle
   const topIconFill = appIsActive ? Colors.success100 : Colors.danger75
   const topIconAccessibilityLabel = appIsActive
@@ -125,7 +131,7 @@ const Home: FunctionComponent = () => {
           <LocationActivationStatus />
           <View style={style.buttonContainer}>
             <Button
-              onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+              onPress={handleOnPressReportTestResult}
               label={t("home.bluetooth.report_positive_result")}
               customButtonStyle={style.button}
               hasRightArrow

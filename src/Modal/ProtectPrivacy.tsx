@@ -10,43 +10,26 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { GlobalText } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
+import { useStatusBarEffect } from "../navigation"
 
-interface ProtectPrivacyProps {
-  modalStyle?: boolean
-}
-
-const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
-  modalStyle,
-}) => {
+const ProtectPrivacy: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-
-  const headerContainerConditionalStyle = modalStyle && {
-    ...style.headerContainerModal,
-  }
-  const headerContainerStyle = {
-    ...style.headerContainer,
-    ...headerContainerConditionalStyle,
-  }
-
-  const mainContentContainerConditionalStyle = modalStyle
-    ? { ...style.mainContentContainerModal }
-    : { ...style.mainContentContainerCard }
-  const mainContentContainerStyle = {
-    ...style.mainContentContainer,
-    ...mainContentContainerConditionalStyle,
-  }
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   return (
     <View style={style.container}>
-      <View style={headerContainerStyle}>
+      <View style={style.headerContainer}>
         <GlobalText style={style.headerText}>
           {t("onboarding.protect_privacy.header")}
         </GlobalText>
@@ -62,7 +45,7 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
           />
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={mainContentContainerStyle}>
+      <ScrollView contentContainerStyle={style.mainContentContainer}>
         <Section
           image={Images.PersonOnPhoneWithCode}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
@@ -101,6 +84,44 @@ const ProtectPrivacy: FunctionComponent<ProtectPrivacyProps> = ({
   )
 }
 
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      height: "100%",
+      backgroundColor: Colors.primaryLightBackground,
+    },
+    headerContainer: {
+      position: "absolute",
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      backgroundColor: Colors.secondary10,
+      zIndex: Layout.zLevel1,
+      paddingTop: insets.top + Spacing.xxxSmall,
+    },
+    headerText: {
+      flex: 10,
+      ...Typography.header1,
+      paddingVertical: Spacing.medium,
+      paddingHorizontal: Spacing.large,
+      color: Colors.primary125,
+    },
+    closeIconContainer: {
+      flex: 1,
+      alignItems: "flex-end",
+      padding: Spacing.medium,
+    },
+    mainContentContainer: {
+      paddingBottom: Spacing.large,
+      paddingTop: 170,
+    },
+  })
+}
+
+export default ProtectPrivacy
+
 interface SectionProps {
   image: ImageSourcePropType
   subheaderText: string
@@ -114,53 +135,18 @@ const Section: FunctionComponent<SectionProps> = ({
 }) => {
   return (
     <View>
-      <Image source={image} style={style.image} />
-      <View style={style.textContainer}>
-        <GlobalText style={style.subheaderText}>{subheaderText}</GlobalText>
-        <GlobalText style={style.bodyText}>{bodyText}</GlobalText>
+      <Image source={image} style={sectionStyle.image} />
+      <View style={sectionStyle.textContainer}>
+        <GlobalText style={sectionStyle.subheaderText}>
+          {subheaderText}
+        </GlobalText>
+        <GlobalText style={sectionStyle.bodyText}>{bodyText}</GlobalText>
       </View>
     </View>
   )
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: "100%",
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  headerContainer: {
-    position: "absolute",
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: Colors.secondary10,
-    zIndex: Layout.zLevel1,
-  },
-  headerContainerModal: {
-    paddingTop: 40,
-  },
-  headerText: {
-    flex: 10,
-    ...Typography.header1,
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
-    color: Colors.primary125,
-  },
-  closeIconContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-    padding: Spacing.medium,
-  },
-  mainContentContainer: {
-    paddingBottom: Spacing.large,
-  },
-  mainContentContainerModal: {
-    paddingTop: 170,
-  },
-  mainContentContainerCard: {
-    paddingTop: 130,
-  },
+const sectionStyle = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
@@ -180,5 +166,3 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
 })
-
-export default ProtectPrivacy

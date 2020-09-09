@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack"
 
-import { ModalScreen, ModalScreens } from "./index"
+import { Stacks, ModalScreens } from "./index"
 import LanguageSelection from "../Modal/LanguageSelection"
+import ProtectPrivacy from "../Modal/ProtectPrivacy"
+import AffectedUserStack from "../AffectedUserFlow/"
 
-type ModalStackParams = {
-  [key in ModalScreen]: undefined
-}
-const Stack = createStackNavigator<ModalStackParams>()
+const Stack = createStackNavigator()
 
 const ModalStack: FunctionComponent = () => {
   return (
@@ -15,6 +17,21 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={ModalScreens.LanguageSelection}
         component={LanguageSelection}
+      />
+      <Stack.Screen
+        name={ModalScreens.ProtectPrivacy}
+        component={ProtectPrivacy}
+        options={{
+          ...TransitionPresets.ModalTransition,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={Stacks.AffectedUserStack}
+        component={AffectedUserStack}
+        options={{
+          gestureEnabled: false,
+        }}
       />
     </Stack.Navigator>
   )

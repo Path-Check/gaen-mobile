@@ -53,7 +53,6 @@ export type OnboardingScreen =
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "ProtectPrivacy"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
@@ -64,7 +63,6 @@ export const OnboardingScreens: {
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =
@@ -94,12 +92,17 @@ export const ConnectStackScreens: {
   Connect: "Connect",
 }
 
-export type ModalScreen = "LanguageSelection"
+export type ModalScreen =
+  | "LanguageSelection"
+  | "ProtectPrivacy"
+  | "AffectedUserStack"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
 } = {
   LanguageSelection: "LanguageSelection",
+  ProtectPrivacy: "ProtectPrivacy",
+  AffectedUserStack: "AffectedUserStack",
 }
 
 export type SettingsScreen =
@@ -144,7 +147,6 @@ export type AffectedUserFlowScreen =
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
-  | "ProtectPrivacy"
 
 export const AffectedUserFlowScreens: {
   [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
@@ -155,7 +157,6 @@ export const AffectedUserFlowScreens: {
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
-  ProtectPrivacy: "ProtectPrivacy",
 }
 export type Screen =
   | OnboardingScreen

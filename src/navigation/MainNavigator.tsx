@@ -19,10 +19,8 @@ import {
   Screens,
   Stacks,
 } from "./index"
-import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
-import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
 import ModalStack from "./ModalStack"
 
 import { Headers, Colors } from "../styles"
@@ -45,29 +43,14 @@ const headerScreenOptions: StackNavigationOptions = {
   headerTitleAlign: "center",
 }
 
-const cardScreenOptions: StackNavigationOptions = {
-  ...TransitionPresets.ModalPresentationIOS,
-  headerShown: false,
-  cardOverlayEnabled: true,
-  cardShadowEnabled: true,
-}
-
-const ProtectPrivacyModal = () => {
-  return <ProtectPrivacy modalStyle />
-}
-
-const ProtectPrivacyCard = () => {
-  return <ProtectPrivacy />
-}
+const settingsStackTransitionPreset = Platform.select({
+  ios: TransitionPresets.SlideFromRightIOS,
+  android: TransitionPresets.DefaultTransition,
+})
 
 const MainNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { onboardingIsComplete } = useOnboardingContext()
-
-  const settingsStackTransitionPreset = Platform.select({
-    ios: TransitionPresets.SlideFromRightIOS,
-    android: TransitionPresets.DefaultTransition,
-  })
 
   return (
     <NavigationContainer>
@@ -81,28 +64,11 @@ const MainNavigator: FunctionComponent = () => {
                 options={defaultScreenOptions}
               />
               <Stack.Screen
-                name={Stacks.AffectedUserStack}
-                component={AffectedUserStack}
-                options={{
-                  ...TransitionPresets.ModalTransition,
-                  ...defaultScreenOptions,
-                  gestureEnabled: false,
-                }}
-              />
-              <Stack.Screen
                 name={Stacks.Settings}
                 component={SettingsStack}
                 options={{
                   ...settingsStackTransitionPreset,
                   headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name={AffectedUserFlowScreens.ProtectPrivacy}
-                component={ProtectPrivacyModal}
-                options={{
-                  ...TransitionPresets.ModalTransition,
-                  ...defaultScreenOptions,
                 }}
               />
               <Stack.Screen
@@ -128,11 +94,6 @@ const MainNavigator: FunctionComponent = () => {
                 name={Stacks.Onboarding}
                 component={OnboardingStack}
                 options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={OnboardingScreens.ProtectPrivacy}
-                component={ProtectPrivacyCard}
-                options={cardScreenOptions}
               />
               <Stack.Screen
                 name={Stacks.Activation}
