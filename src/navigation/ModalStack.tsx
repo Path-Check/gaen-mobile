@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from "@react-navigation/stack"
+import { createStackNavigator } from "@react-navigation/stack"
 
 import { Stacks, ModalScreens } from "./index"
 import LanguageSelection from "../Modal/LanguageSelection"
@@ -21,10 +18,6 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={ModalScreens.ProtectPrivacy}
         component={ProtectPrivacy}
-        options={{
-          ...TransitionPresets.ModalTransition,
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name={Stacks.AffectedUserStack}
