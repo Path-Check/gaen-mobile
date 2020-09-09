@@ -16,12 +16,7 @@ import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import {
-  ModalScreens,
-  OnboardingScreens,
-  Stacks,
-  useStatusBarEffect,
-} from "../navigation"
+import { ModalScreens, Stacks, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
 import { Icons } from "../assets"

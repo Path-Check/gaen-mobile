@@ -13,12 +13,7 @@ import OnboardingStack from "./OnboardingStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import {
-  OnboardingScreens,
-  AffectedUserFlowScreens,
-  Screens,
-  Stacks,
-} from "./index"
+import { Screens, Stacks } from "./index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ModalStack from "./ModalStack"
