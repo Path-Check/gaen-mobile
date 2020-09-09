@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
 
 import ReportIssueForm from "./ReportIssueForm"
-import * as API from "../More/zendeskAPI"
+import * as API from "../Settings/zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"
 jest.mock("../hooks/useApplicationInfo", () => {

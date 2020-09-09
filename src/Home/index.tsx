@@ -53,6 +53,10 @@ const Home: FunctionComponent = () => {
     navigation.navigate(Screens.LanguageSelection)
   }
 
+  const handleOnPressSettings = () => {
+    navigation.navigate(Stacks.Settings)
+  }
+
   const topIcon = appIsActive ? Icons.CheckInCircle : Icons.XInCircle
   const topIconFill = appIsActive ? Colors.success100 : Colors.danger75
   const topIconAccessibilityLabel = appIsActive
@@ -73,6 +77,24 @@ const Home: FunctionComponent = () => {
     }
   }
 
+  const SettingsButton = () => {
+    return (
+      <TouchableOpacity
+        style={style.settingsButtonContainer}
+        accessible
+        accessibilityLabel={t("home.open_settings")}
+        onPress={handleOnPressSettings}
+      >
+        <SvgXml
+          xml={Icons.Gear}
+          width={Iconography.small}
+          height={Iconography.small}
+          fill={Colors.white}
+        />
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <>
       <StatusBar backgroundColor={Colors.gradientPrimary100Lighter} />
@@ -86,6 +108,7 @@ const Home: FunctionComponent = () => {
           angleCenterY={1}
         >
           <View style={style.topContainer}>
+            <SettingsButton />
             <TouchableOpacity
               onPress={handleOnPressSelectLanguage}
               style={style.languageButtonContainer}
@@ -152,6 +175,12 @@ const style = StyleSheet.create({
     alignItems: "center",
     paddingTop: Spacing.xxSmall,
     paddingBottom: Spacing.xLarge,
+  },
+  settingsButtonContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    padding: Spacing.medium,
   },
   languageButtonContainer: {
     alignSelf: "center",

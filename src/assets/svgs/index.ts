@@ -16,6 +16,7 @@ import ChevronUp from "./chevronUp"
 import Close from "./close"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
+import Gear from "./gear"
 import GoogleMapsLogo from "./google-maps-logo"
 import Heart from "./heart"
 import HomeInfo from "./homeInfo"
@@ -58,6 +59,7 @@ export const Icons = {
   Close,
   Export,
   ExposureIcon,
+  Gear,
   GoogleMapsLogo,
   Heart,
   HomeInfo,

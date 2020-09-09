@@ -94,7 +94,15 @@ export const ReportIssueScreens: {
   ReportIssueForm: "ReportIssueForm",
 }
 
-export type MoreStackScreen =
+export type ConnectStackScreen = "Connect"
+
+export const ConnectStackScreens: {
+  [key in ConnectStackScreen]: ConnectStackScreen
+} = {
+  Connect: "Connect",
+}
+
+export type SettingsScreen =
   | "Menu"
   | "About"
   | "Legal"
@@ -104,8 +112,8 @@ export type MoreStackScreen =
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
 
-export const MoreStackScreens: {
-  [key in MoreStackScreen]: MoreStackScreen
+export const SettingsScreens: {
+  [key in SettingsScreen]: SettingsScreen
 } = {
   Menu: "Menu",
   About: "About",
@@ -149,7 +157,7 @@ export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
   | ReportIssueScreen
-  | MoreStackScreen
+  | SettingsScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
   | HomeScreen
@@ -160,7 +168,7 @@ export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
   ...ReportIssueScreens,
-  ...MoreStackScreens,
+  ...SettingsScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
   ...HomeScreens,
@@ -170,21 +178,19 @@ export const Screens: { [key in Screen]: Screen } = {
 
 export type Stack =
   | "Activation"
-  | "Onboarding"
-  | "ExposureHistoryFlow"
-  | "SelfAssessment"
-  | "More"
   | "AffectedUserStack"
-  | "ReportIssue"
+  | "Connect"
+  | "ExposureHistoryFlow"
+  | "Onboarding"
+  | "Settings"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
-  Onboarding: "Onboarding",
-  ExposureHistoryFlow: "ExposureHistoryFlow",
-  SelfAssessment: "SelfAssessment",
-  More: "More",
   AffectedUserStack: "AffectedUserStack",
-  ReportIssue: "ReportIssue",
+  Connect: "Connect",
+  ExposureHistoryFlow: "ExposureHistoryFlow",
+  Onboarding: "Onboarding",
+  Settings: "Settings",
 }
 
 export const useStatusBarEffect = (

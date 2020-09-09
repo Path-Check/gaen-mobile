@@ -5,12 +5,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
-import SelfAssessmentStack from "./SelfAssessmentStack"
 import HomeStack from "./HomeStack"
-import MoreStack from "./MoreStack"
-import ReportIssueStack from "./ReportIssueStack"
-
-import { useConfigurationContext } from "../ConfigurationContext"
+import ConnectStack from "./ConnectStack"
 
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
@@ -21,10 +17,6 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
-  const {
-    displaySelfAssessment,
-    displayReportAnIssue,
-  } = useConfigurationContext()
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
@@ -80,53 +72,28 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
-  const QuestionMarkIcon: FunctionComponent<TabBarIconProps> = ({
+  const ConnectIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
     size,
   }) => {
-    return (
+    const tabIcon = (
       <TabIcon
-        icon={TabBarIcons.QuestionMark}
-        label={t("navigation.report_issue")}
+        icon={TabBarIcons.PersonInHand}
+        label={t("navigation.connect")}
         focused={focused}
         size={size}
       />
     )
+    return tabIcon
   }
-
-  const SelfAssessmentIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.CheckInBox}
-        label={t("navigation.self_assessment")}
-        focused={focused}
-        size={size}
-      />
-    )
-  }
-
-  const MoreIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.HorizontalDots}
-        label={t("navigation.more")}
-        focused={focused}
-        size={size}
-      />
-    )
-  }
-
   return (
     <Tab.Navigator
       initialRouteName={Screens.Home}
       tabBarOptions={{
         showLabel: false,
         style: {
-          backgroundColor: Colors.white,
-          borderTopColor: Colors.neutral30,
+          backgroundColor: Colors.primaryLightBackground,
+          borderTopWidth: 0,
           height: insets.bottom + 60,
         },
       }}
@@ -147,32 +114,12 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      {displayReportAnIssue && (
-        <Tab.Screen
-          name={Stacks.ReportIssue}
-          component={ReportIssueStack}
-          options={{
-            tabBarLabel: t("navigation.report_issue"),
-            tabBarIcon: QuestionMarkIcon,
-          }}
-        />
-      )}
-      {displaySelfAssessment && (
-        <Tab.Screen
-          name={Stacks.SelfAssessment}
-          component={SelfAssessmentStack}
-          options={{
-            tabBarLabel: t("navigation.self_assessment"),
-            tabBarIcon: SelfAssessmentIcon,
-          }}
-        />
-      )}
       <Tab.Screen
-        name={Stacks.More}
-        component={MoreStack}
+        name={Stacks.Connect}
+        component={ConnectStack}
         options={{
-          tabBarLabel: t("navigation.more"),
-          tabBarIcon: MoreIcon,
+          tabBarLabel: t("navigation.connect"),
+          tabBarIcon: ConnectIcon,
         }}
       />
     </Tab.Navigator>

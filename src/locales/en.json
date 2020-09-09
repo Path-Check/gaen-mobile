@@ -147,6 +147,7 @@
     "bluetooth_info_header": "Bluetooth",
     "get_more_info": "Get more info on {{technology}}",
     "fix": "Fix issues with {{technology}}",
+    "open_settings": "Open Settings",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
@@ -195,11 +196,8 @@
   "navigation": {
     "exposure_history": "Exposure History",
     "home": "Home",
-    "more": "More",
-    "report_issue": "Report Issue",
-    "self_assessment": "Self Assessment",
-    "more_info": "More Info",
-    "exposure": "Exposure"
+    "exposure": "Exposure",
+    "connect": "Connect"
   },
   "onboarding": {
     "app_setup_complete_header": "App Setup Complete!",
