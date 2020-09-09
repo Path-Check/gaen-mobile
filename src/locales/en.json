@@ -85,6 +85,7 @@
       "invalid_code": "Try a different code",
       "invalid_format": "Invalid format",
       "unknown_code_verification_error": "Try a different code",
+      "network_connection_error": "There is no internet connection",
       "verification_code_used": "Verification code has already been used"
     },
     "publish_consent_title_bluetooth": "Notify others in your community",
