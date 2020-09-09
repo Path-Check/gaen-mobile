@@ -5,6 +5,7 @@ import { ActivationStatus } from "./ActivationStatus"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { HomeScreens } from "../navigation"
+import { openAppSettings } from "../gaen/nativeModule"
 
 export const BluetoothActivationStatus: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -25,7 +26,12 @@ export const BluetoothActivationStatus: FunctionComponent = () => {
       t("home.bluetooth.bluetooth_disabled_error_message"),
       [
         {
-          text: t("common.okay"),
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => openAppSettings(),
         },
       ],
     )

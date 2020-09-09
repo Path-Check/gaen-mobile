@@ -27,7 +27,7 @@ export const LocationActivationStatus: FunctionComponent = () => {
       t("home.bluetooth.location_disabled_error_message"),
       [
         {
-          text: t("common.cancel"),
+          text: t("common.back"),
           style: "cancel",
         },
         {
