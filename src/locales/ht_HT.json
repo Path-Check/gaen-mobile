@@ -59,6 +59,12 @@
       "invalid_format": "Fòma envalid"
     },
     "publish_consent_title_bluetooth": "Notifye lòt moun nan kominote ou",
+    "publish_keys": {
+      "errors": {
+        "internal_server_error": "Sèvè a gen pwoblèm, tanpri eseye ankò pita",
+        "timeout": "Demann lan te pran twòp tan pou konplete"
+      }
+    },
     "start_header_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w "
   },
   "exposure_history": {
@@ -82,6 +88,8 @@
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
       "tracing_on_header": "Aktif"
     },
+    "fix": "Ranje pwoblèm ak {{technology}}",
+    "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
     "proximity_tracing_info_header": "Trasaj Pwoksimite ",
     "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
@@ -96,6 +104,7 @@
     "select_language": "Chwazi lang"
   },
   "navigation": {
+    "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
     "more": "Plis",
@@ -104,6 +113,8 @@
     "self_assessment": "Sante"
   },
   "onboarding": {
+    "location_header": "Aktive lokalizasyon",
+    "location_subheader": "Poukisa mwen bezwen louvri tablodbò telefòn mwen an?",
     "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "protect_privacy_button": "Ki jan nou pwoteje vi prive ou",

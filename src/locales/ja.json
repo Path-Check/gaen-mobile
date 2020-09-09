@@ -193,9 +193,11 @@
     "select_language": "言語を選択する"
   },
   "navigation": {
+    "exposure": "接触",
     "exposure_history": "感染リスクの履歴",
     "home": "ホーム",
     "more": "もっと",
+    "more_info": "より詳しい情報",
     "report_issue": "問題の報告",
     "self_assessment": "自己評価"
   },

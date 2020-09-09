@@ -22,7 +22,7 @@
     "distancing_description": "Putfabot dalalaki i guidelines i iyo-mu local, state pat national put i social distancing yan Personal Protection Equipment (PPE)taiguihi siha i mask yan/pat guantis para i kannai. Taya mas un nesisita chumugue pago.",
     "distancing_title": "Distancing yan PPE",
     "emergency_cta": "Agang 911",
-    "emergency_description": "Ginen i kondision siha ni un sangan, debi di un espiha atension para ma amti insigidas .",
+    "emergency_description": "Ginen i kondision siha ni un sangan, debi di un espiha atension para ma amti insigidas.",
     "emergency_title": "Agang i Emergency na setbisio",
     "experiencing_any_symptoms": "guaha guini na sinienti un sesienti",
     "experiencing_some_symptoms": "expirerensia guaha siha na sinienti",
@@ -31,9 +31,10 @@
     "isolate_cta": "I otro",
     "isolate_description": "Guah pinadisisimnu siha ni sina ginen i COVID 19. Agang i iyo-mu \"health care provider\"yanggen umatdid mas i kondision-mu. Saga ya un kuarentena hao gi gima.",
     "isolate_title": "kuarentena hao",
+    "next": "I otro",
     "share_cta": "Hu komprendi yan hu konsienti.",
     "share_cta_skip": "Munga, ti malago yu umena'i ni infotmasion-hu",
-    "share_description": "I man 'anonymous' siha na infotmasion-mu ha ayuyuda i {{authority}} umnalisa, tumattiyi  yan sumusteni i machalapun i COVID 19. I infotmasion-mu para umana dana yan ayu i ginen PathCheckusers ni dumisidi para u fan a'ayuda.\nI iyo-mu data ha gogoti i ennepe-mu siha gi survey yan i zip code,lao taya mas infotmasion pat petsinot na infotmasion.\nI {{authority}} hu goti i iyo-mu \"anonymous data\"para hafa na tiempo ma na'i.",
+    "share_description": "I man 'anonymous' siha na infotmasion-mu ha ayuyuda i {{authority}} umnalisa, tumattiyi  yan sumusteni i machalapun i COVID 19. I infotmasion-mu para umana dana yan ayu i ginen PathCheckusers ni dumisidi para u fan a'ayuda.\n\nI iyo-mu data ha gogoti i ennepe-mu siha gi survey yan i zip code,lao taya mas infotmasion pat petsinot na infotmasion.\n\nI {{authority}} hu goti i iyo-mu \"anonymous data\"para hafa na tiempo ma na'i.",
     "share_title": "Pupblisa i \"anonymous data\"",
     "start_cta": "Tutuhun",
     "start_description": "I infotmasion private, taya sina muli'e pat tumatitai. Taya infotmasion sina dumingo i iyommu device solo un na'i petmiso.",
@@ -61,7 +62,7 @@
     "success": "Munhayan Maolik"
   },
   "errors": {
-    "description": "Guaha lachi ma susedi. Potfabot load talu i app.",
+    "description": "Guaha lachi ma susedi. Potfabot na 'on' talo i app.",
     "reload": "Load talu",
     "title": "Ti tungo-un i lachi"
   },
@@ -78,7 +79,7 @@
     "consent_button_title": "Hu Komprendi yan hu Konsienti",
     "consent_subheader_1": "Sa put hafa na bai ena'i?",
     "consent_subheader_2": "Taimanu ma chochu?",
-    "enable_exposure_notifications_body": "Na sina na i exposure notification u ripot i man positive na test.",
+    "enable_exposure_notifications_body": "Nesisita un na kalamten i exposure notification para un repot i resuttan i test.",
     "enable_exposure_notifications_title": "Polu ha ya ulalala i exposure notification",
     "error": {
       "invalid_code": "Chagi otro na code",
@@ -95,7 +96,7 @@
         "unknown": "Ti sina ma submiti i infotmasion put i exposure"
       },
       "no_op": {
-        "no_token_for_existing_keys": "I guaha na infotmasion mana hanao para i server. Kumekeilekna na sina ha esta ma chagi esti ginen esti na device lao otro na applikasion. Sina un sangani i magas ni munae hao ni verification code ni ma usa. Guaha {{newKeysInserted}}nuebu siha na keys manmanadania.",
+        "no_token_for_existing_keys": "I guaha na infotmasion mana hanao para i server. Kumekeilekna na sina ha esta ma chagi esti ginen esti na device lao otro na applikasion. Sina un sangani i magas ni munae hao ni verification code ni ma usa. Guaha  {{newKeysInserted}}nuebu siha na keys manmanadania.",
         "title": "Chagi sumatmiti i mangaigi siha na keys"
       }
     },
@@ -106,7 +107,7 @@
       "6ft_apart": "Sipara 6 pi'e",
       "content": "Guaha taotao ni ginen gaigi gi fion-mu ha test positive para COVID 19.",
       "ha_guidance_header": "Hafa bai hu chogui?",
-      "ha_guidance_subheader": "Atan i guidance finen {{healthAuthorityName}}",
+      "ha_guidance_subheader": "Atan i guidance ginen {{healthAuthorityName}}.",
       "header": "Sina ha umafakcha hao yan  i COVID 19 virus.",
       "isolate": "Suhayi, na suha",
       "next_steps": "Otro mona para ma chogui",
@@ -161,7 +162,7 @@
       "unauthorized_error_message": "Para un na lala i Proximity Tracing , na siguro na kalalamten i \"Share Exposure Information\"  gi Settings> {{applicationName}} >Exposure Notifications",
       "unauthorized_error_title": "Fan ana'i ni Exposure Information"
     },
-    "fix": "famauleg i problema ni {{technology}}",
+    "fix": "Famauleg i problema ni {{technology}}",
     "get_more_info": "Chuli mas infotmasion put {{technology}}",
     "location_info_body_1": "I Exposure Notification technology ha u'usa Bluetooth scanning  para u komprendi hafa siha na devices man hihot. Gi todo siha i telefon ni manmalalagu gi Android 6.0 pat mas taghilo para u usa Bluetooth scanning , nesisita i device location setting man 'on' para todo i apps , ahe ti para eyu ha i apps ni guaha Exposure Notifications System.",
     "location_info_header": "Location",
@@ -192,15 +193,17 @@
     "select_language": "Achig i lenguahi"
   },
   "navigation": {
+    "exposure": "Tinanmi or Ninayi",
     "exposure_history": "Historian i ninayi (chetnot)",
     "home": "Guma",
     "more": "Mas",
+    "more_info": "Mas infotmasion",
     "report_issue": "Ripotti put problema",
     "self_assessment": "Assessment mismo"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
-    "app_setup_complete_body": "Acive si {{applicationName}}. Si yu'us ma'asi ni ayudu-mu para umautut esti i kadenan i chetnot.",
+    "app_setup_complete_body": "Kalalamten i {{applicationName}}. Si yu'us ma'asi ni ayudu-mu para umautut esti i kadenan i chetnot.",
     "app_setup_complete_header": "Kumpledo i App Setup",
     "app_setup_incomplete_body": "{{applicationName}} ha nesisita petmisu para Proximity Tracing and Bluetooth para umatungo ngaian yan manu na ma tanmi hao ni COVID 19. Sina un autorisa esti gi Settings.",
     "app_setup_incomplete_header": "Inkumpledo i App Setup",
@@ -223,10 +226,10 @@
     "protect_privacy_button": "Taimanu in protehi i infotmasion put hagu",
     "protect_privacy": {
       "body_1": "Esti siha na IDs ti manunuli personat na infotmasion ya matulalaika kada 10-20 minutos para u protehi i na ti uma tungo put hagu.",
-      "body_2": "I telefon siha man a'atulaika random IDs yan otro siha devices ni umu'usa Bluetooth Low Energy . Ha na posisibbli  si {{applicationName}} para u tattiyi i diario siha na encounters ni un susesedi achugha ti ma bababa i iyo-mu device.",
+      "body_2": "I telefon siha man a'atulaika random IDs yan otro siha devices ni umu'usa Bluetooth Low Energy . Ha na posisibbli  i {{applicationName}} para u tattiyi i diario siha na encounters ni un susesedi achugha ti ma bababa i iyo-mu device.",
       "body_3": "Yanggen positive i test para COVID 19, sina i 'users' man a'usa passcode yan {{applicationName}} para umansiguro i iyon-niha diagnosis.I mas fresko na random ID gi telefon-niha man ma flagged yan sigoru na ma upload para i server. Esti na verifikasion ina yuyuda para taya false poitive na report.",
       "body_4": "Yanggen guaha flagged ID parehu yan an ID gi telefon-mu, kumekeilekna na sina ha umafakcha hao yan taotao ni positive i test-na para COVID 19. Taiguini {{applicationName}} na sina ha ditetmina kao ma tanmi hao ni virus.",
-      "body_5": "Yanggen guaha match, {{applicationName}} para un sinangani ya un nina'i mas ayudo ginen i iyo-mu health department.",
+      "body_5": "Yanggen guaha match, {{applicationName}} para un sinangani ya un nina'i mas ayudo ginen i iyo-mu health department.\n\nTaiguini i {{applicationName}} na sina nina'i hao autoridad para un famatinas desision put i nilala-mu, yan para un na safu i kommunidad-mu, todo ginen i infotmasion put hayi hao yan ginen manu hao.",
       "header": "Taimanu in protehi i iyo-mu privacy",
       "subheader_1": "Yanggen un na 'on' Proximity Tracing, ma tagged i telefon-mu ni sessu ma tulaika siha na random IDs",
       "subheader_2": "Fons ni man gai Proximity Tracing sina ha man atulika IDs yan otro siha devices ni man afakcha",
@@ -259,7 +262,7 @@
     "screen5_header": "I app, sina un ayuda muna dispasio i machalapun i COVID 19,  protehi i pumalu yan  sina un risibi directo na ayudo ginen i manfayi gi nilala yan hinemlu.",
     "screen5_image_label": "I taotao kumekuentos yan i gumeftungo put linala 'virtually",
     "select_language": "Achig i lenguahi",
-    "step": "Gi {{currentStep}} tutuhon {{totalSteps}}",
+    "step": "{{currentStep}} gi {{totalSteps}}  na iskalera",
     "terms_header_title": "Palabra ni ma u'usa",
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },

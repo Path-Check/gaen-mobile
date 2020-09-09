@@ -1,5 +1,5 @@
 {
-  "_display_name": "Ingles",
+  "_display_name": "Tagalog",
   "about": {
     "description": "Ang {{applicationName}} app ay ginawang magagamit ng {{healthAuthorityName}}",
     "operating_system_abbr": "OS",
@@ -193,6 +193,7 @@
     "select_language": "Piliin ang wika"
   },
   "navigation": {
+    "exposure": "Pagkakalantad",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "home": "Home o Umpisa",
     "more": "Higit pa",

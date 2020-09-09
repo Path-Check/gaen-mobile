@@ -1,5 +1,5 @@
 {
-  "_display_name": "Korean",
+  "_display_name": "한국어",
   "about": {
     "description": "{{applicationName}}앱은 {{healthAuthorityName}}에 의해 사용할 수 있습니다.",
     "operating_system_abbr": "OS:",
@@ -193,9 +193,11 @@
     "select_language": "언어 선택"
   },
   "navigation": {
+    "exposure": "노출",
     "exposure_history": "노출 이력",
     "home": "집",
     "more": "더 많은",
+    "more_info": "더 많은 정보",
     "report_issue": "문제 보고",
     "self_assessment": "자체 평가"
   },
