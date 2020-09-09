@@ -7,7 +7,7 @@ import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components"
-import { Screens, SettingsScreens } from "../navigation"
+import { Stacks, ModalScreens, SettingsScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
 import { Icons } from "../assets"
@@ -26,7 +26,9 @@ const Settings: FunctionComponent = () => {
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Screens.LanguageSelection)
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.LanguageSelection,
+    })
   }
 
   return (

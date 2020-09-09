@@ -23,7 +23,7 @@ import AffectedUserStack from "../AffectedUserFlow"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
-import LanguageSelection from "../Settings/LanguageSelection"
+import ModalStack from "./ModalStack"
 
 import { Headers, Colors } from "../styles"
 
@@ -44,6 +44,7 @@ const headerScreenOptions: StackNavigationOptions = {
   headerTintColor: Colors.headerText,
   headerTitleAlign: "center",
 }
+
 const cardScreenOptions: StackNavigationOptions = {
   ...TransitionPresets.ModalPresentationIOS,
   headerShown: false,
@@ -92,8 +93,8 @@ const MainNavigator: FunctionComponent = () => {
                 name={Stacks.Settings}
                 component={SettingsStack}
                 options={{
-                  headerShown: false,
                   ...settingsStackTransitionPreset,
+                  headerShown: false,
                 }}
               />
               <Stack.Screen
@@ -108,16 +109,16 @@ const MainNavigator: FunctionComponent = () => {
                 name={Screens.MoreInfo}
                 component={MoreInfo}
                 options={{
-                  title: t("navigation.more_info"),
                   ...headerScreenOptions,
+                  title: t("navigation.more_info"),
                 }}
               />
               <Stack.Screen
                 name={Screens.ExposureDetail}
                 component={ExposureDetail}
                 options={{
-                  title: t("navigation.exposure"),
                   ...headerScreenOptions,
+                  title: t("navigation.exposure"),
                 }}
               />
             </>
@@ -144,9 +145,12 @@ const MainNavigator: FunctionComponent = () => {
             </>
           )}
           <Stack.Screen
-            name={Screens.LanguageSelection}
-            component={LanguageSelection}
-            options={cardScreenOptions}
+            name={Stacks.Modal}
+            component={ModalStack}
+            options={{
+              ...TransitionPresets.ModalTransition,
+              headerShown: false,
+            }}
           />
         </>
       </Stack.Navigator>

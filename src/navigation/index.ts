@@ -94,6 +94,14 @@ export const ConnectStackScreens: {
   Connect: "Connect",
 }
 
+export type ModalScreen = "LanguageSelection"
+
+export const ModalScreens: {
+  [key in ModalScreen]: ModalScreen
+} = {
+  LanguageSelection: "LanguageSelection",
+}
+
 export type SettingsScreen =
   | "Settings"
   | "About"
@@ -173,6 +181,7 @@ export type Stack =
   | "AffectedUserStack"
   | "Connect"
   | "ExposureHistoryFlow"
+  | "Modal"
   | "Onboarding"
   | "Settings"
 
@@ -181,6 +190,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   AffectedUserStack: "AffectedUserStack",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
+  Modal: "Modal",
   Onboarding: "Onboarding",
   Settings: "Settings",
 }

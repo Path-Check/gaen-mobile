@@ -9,7 +9,7 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { Screens, useStatusBarEffect, Stacks } from "../navigation"
+import { ModalScreens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
   StatusBar,
@@ -50,7 +50,9 @@ const Home: FunctionComponent = () => {
     isProximityTracingOn && isBluetoothOn && !isLocationRequiredAndOff
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Screens.LanguageSelection)
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.LanguageSelection,
+    })
   }
 
   const handleOnPressSettings = () => {

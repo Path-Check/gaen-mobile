@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
 import { GlobalText } from "../components"
@@ -19,13 +20,15 @@ import {
 } from "../styles"
 
 const LanguageSelection: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const {
     i18n: { language },
     t,
   } = useTranslation()
   const navigation = useNavigation()
   const localeList = getLocaleList()
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   type ListItem = {
     label: string
@@ -100,46 +103,50 @@ const itemSeparatorComponent = () => {
   )
 }
 
-const headerHeight = 70
+const createStyle = (insets: EdgeInsets) => {
+  const headerHeight = insets.top + Spacing.massive
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  headerContainer: {
-    position: "absolute",
-    height: headerHeight,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    backgroundColor: Colors.secondary10,
-    zIndex: Layout.zLevel1,
-  },
-  headerText: {
-    flex: 10,
-    ...Typography.header2,
-    paddingHorizontal: Spacing.large,
-    color: Colors.primary125,
-  },
-  closeIconContainer: {
-    flex: 1,
-    padding: Spacing.small,
-  },
-  languageButtonsContainer: {
-    marginTop: headerHeight,
-  },
-  languageButton: {
-    paddingVertical: Spacing.medium,
-    paddingHorizontal: Spacing.large,
-  },
-  languageButtonText: {
-    ...Typography.tappableListItem,
-  },
-  languageButtonTextSelected: {
-    ...Typography.semiBold,
-  },
-})
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: Colors.primaryLightBackground,
+    },
+    headerContainer: {
+      position: "absolute",
+      height: headerHeight,
+      flexDirection: "row",
+      alignItems: "flex-end",
+      justifyContent: "space-between",
+      width: "100%",
+      backgroundColor: Colors.secondary10,
+      zIndex: Layout.zLevel1,
+    },
+    headerText: {
+      flex: 10,
+      ...Typography.header2,
+      paddingHorizontal: Spacing.large,
+      color: Colors.primary125,
+      paddingBottom: Spacing.xSmall,
+    },
+    closeIconContainer: {
+      flex: 1,
+      padding: Spacing.small,
+    },
+    languageButtonsContainer: {
+      marginTop: headerHeight,
+    },
+    languageButton: {
+      paddingVertical: Spacing.medium,
+      paddingHorizontal: Spacing.large,
+    },
+    languageButtonText: {
+      ...Typography.tappableListItem,
+    },
+    languageButtonTextSelected: {
+      ...Typography.semiBold,
+    },
+  })
+}
 
 export default LanguageSelection
