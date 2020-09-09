@@ -3,6 +3,7 @@ import ExposureNotification
 import RealmSwift
 import UserNotifications
 import BackgroundTasks
+import Promises
 
 enum ExposureManagerErrorCode: String {
   case cannotEnableNotifications = "cannot_enable_notifications"
@@ -10,7 +11,6 @@ enum ExposureManagerErrorCode: String {
   case noExposureKeysFound = "no_exposure_keys_found"
   case detectionNeverPerformed = "no_last_detection_date"
 }
-
 
 @objc(ExposureManagerError)
 final class ExposureManagerError: NSObject, LocalizedError {
@@ -195,6 +195,9 @@ final class ExposureManager: NSObject {
     }, callback: callback)
   }
 
+
+  // MARK: == Exposure Detection ==
+
   /**
    Registers the background task of detecting exposures
     All launch handlers must be registered before application finishes launching
@@ -239,153 +242,58 @@ final class ExposureManager: NSObject {
   }
 
   private var isDetectingExposures = false
-  
-  /// Downloaded archives from the GAEN server
-  private var downloadedPackages = [DownloadedPackage]()
-  
-  /// Local urls of the bin/sig files from each archive
-  private var localUncompressedURLs = [URL]()
 
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
     
     let progress = Progress()
-    
     var lastProcessedUrlPath: String = .default
     var processedFileCount: Int = 0
+    var unpackedArchiveURLs: [URL] = []
 
-    // Disallow concurrent exposure detection,
-    // because if allowed we might try to detect the same diagnosis keys more than once
-    guard !isDetectingExposures else {
-      finish(
-        .failure(ExposureError.default("Detection Already in Progress")),
-        processedFileCount: processedFileCount,
-        lastProcessedUrlPath: lastProcessedUrlPath,
-        progress: progress,
-        completionHandler: completionHandler
-      )
-      return progress
-    }
-
-    isDetectingExposures = true
-
-    // Reset file capacity to 15 if > 24 hours have elapsed since last reset
-    self.updateRemainingFileCapacity()
-
-    // Abort if daily file capacity is exceeded
-    guard btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
-      finish(
-        .success([]),
-        processedFileCount: processedFileCount,
-        lastProcessedUrlPath: lastProcessedUrlPath,
-        progress: progress,
-        completionHandler: completionHandler
-      )
-      return progress
-    }
-
-    apiClient.requestString(IndexFileRequest.get,
-                            requestType: .downloadKeys) { result in
-      let dispatchGroup = DispatchGroup()
-
-      switch result {
-      case let .success(indexFileString):
-        let remoteURLs = indexFileString.gaenFilePaths
-        let targetUrls = self.urlPathsToProcess(remoteURLs)
-        lastProcessedUrlPath = targetUrls.last ?? .default
-        processedFileCount = targetUrls.count
-        for remoteURL in targetUrls {
-          dispatchGroup.enter()
-          self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL), requestType: .downloadKeys) { result in
-            switch result {
-            case .success (let package):
-              self.downloadedPackages.append(package)
-            case .failure(let error):
-              self.finish(.failure(error),
-                          processedFileCount: processedFileCount,
-                          lastProcessedUrlPath: lastProcessedUrlPath,
-                          progress: progress,
-                          completionHandler: completionHandler)
-              return
-            }
-            dispatchGroup.leave()
-          }
-        }
-
-      case let .failure(error):
-        self.finish(.failure(error),
-                    processedFileCount: processedFileCount,
-                    lastProcessedUrlPath: lastProcessedUrlPath,
-                    progress: progress,
-                    completionHandler: completionHandler)
-        return
+    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+      if self.isDetectingExposures {
+        // Disallow concurrent exposure detection,
+        // because if allowed we might try to detect the same diagnosis keys more than once
+        throw ExposureError.default("Detection Already in Progress")
       }
-      dispatchGroup.notify(queue: .main) {
-        do {
-          try self.downloadedPackages.unpack { urls in
-            self.localUncompressedURLs = urls
-            self.apiClient.downloadRequest(ExposureConfigurationRequest.get,
-                                           requestType: .exposureConfiguration) { (result) in
-              var configuration = ExposureConfiguration.placeholder
-              switch result {
-              case.success(let exposureConfiguration):
-                configuration = exposureConfiguration
-              case .failure(_):
-                break
-              }
-              self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
-                                               diagnosisKeyURLs: self.localUncompressedURLs) { summary, error in
-                if let error = error {
-                  self.finish(.failure(error),
-                              processedFileCount: processedFileCount,
-                              lastProcessedUrlPath: lastProcessedUrlPath,
-                              progress: progress,
-                              completionHandler: completionHandler)
-                  return
-                }
-                if let summary = summary, ExposureManager.isAboveScoreThreshold(summary: summary,
-                                                                                with: configuration) {
-                  let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
-                  self.manager.getExposureInfo(summary: summary,
-                                               userExplanation: userExplanation) { exposures, error in
-                    if let error = error {
-                      self.finish(.failure(error),
-                                  processedFileCount: processedFileCount,
-                                  lastProcessedUrlPath: lastProcessedUrlPath,
-                                  progress: progress,
-                                  completionHandler: completionHandler)
-                      return
-                    }
-                    let newExposures = (exposures ?? []).map { exposure in
-                      Exposure(id: UUID().uuidString,
-                               date: exposure.date.posixRepresentation,
-                               duration: exposure.duration,
-                               totalRiskScore: exposure.totalRiskScore,
-                               transmissionRiskLevel: exposure.transmissionRiskLevel)
-                    }
-                    self.finish(.success(newExposures),
-                                processedFileCount: processedFileCount,
-                                lastProcessedUrlPath: lastProcessedUrlPath,
-                                progress: progress,
-                                completionHandler: completionHandler)
-                  }
-                } else {
-                  self.finish(.success([]),
-                              processedFileCount: processedFileCount,
-                              lastProcessedUrlPath: lastProcessedUrlPath,
-                              progress: progress,
-                              completionHandler: completionHandler)
-                }
-              }
-            }
-          }
-        } catch(let error) {
-          self.finish(.failure(error),
-                      processedFileCount: processedFileCount,
-                      lastProcessedUrlPath: lastProcessedUrlPath,
-                      progress: progress,
-                      completionHandler: completionHandler)
-        }
+      self.isDetectingExposures = true
+      // Reset file capacity to 15 if > 24 hours have elapsed since last reset
+      self.updateRemainingFileCapacity()
+      guard self.btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
+        // Abort if daily file capacity is exceeded
+        return []
       }
+      let indexFileString = try await(self.fetchIndexFile())
+      let remoteURLs = indexFileString.gaenFilePaths
+      let targetUrls = self.urlPathsToProcess(remoteURLs)
+      lastProcessedUrlPath = targetUrls.last ?? .default
+      processedFileCount = targetUrls.count
+      let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
+      let exposureConfiguraton = try await(self.getExposureConfiguration())
+      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton,
+                                                               diagnosisKeyURLs: unpackedArchiveURLs))
+      var newExposures: [Exposure] = []
+      if let summary = exposureSummary, ExposureManager.isAboveScoreThreshold(summary: summary,
+                                                                              with: exposureConfiguraton) {
+        newExposures = try await(self.getExposureInfoAndNotifyUser(summary: summary))
+      }
+      return newExposures
+    }.then { result in
+      self.finish(.success(result),
+                  processedFileCount: processedFileCount,
+                  lastProcessedUrlPath: lastProcessedUrlPath,
+                  progress: progress,
+                  completionHandler: completionHandler)
+    }.catch { error in
+      self.finish(.failure(error),
+                  processedFileCount: processedFileCount,
+                  lastProcessedUrlPath: lastProcessedUrlPath,
+                  progress: progress,
+                  completionHandler: completionHandler)
+    }.always {
+      unpackedArchiveURLs.cleanup()
+      self.isDetectingExposures = false
     }
     return progress
   }
@@ -395,11 +303,7 @@ final class ExposureManager: NSObject {
               lastProcessedUrlPath: String,
               progress: Progress,
               completionHandler: ((ExposureResult) -> Void)) {
-    
-    cleanup()
-    
-    isDetectingExposures = false
-    
+
     if progress.isCancelled {
       btSecureStorage.exposureDetectionErrorLocalizedDescription = GenericError.unknown.localizedDescription
       completionHandler(.failure(ExposureError.cancelled))
@@ -536,10 +440,105 @@ private extension ExposureManager {
     }
   }
 
-  func cleanup() {
-    // Delete downloaded files from file system
-    localUncompressedURLs.cleanup()
-    localUncompressedURLs = []
-    downloadedPackages = []
+  // MARK: == Exposure Detection Private Promises ==
+
+  func fetchIndexFile() -> Promise<String> {
+    return Promise<String> { fullfill, reject in
+      self.apiClient.requestString(IndexFileRequest.get,
+                              requestType: .downloadKeys) { result in
+        switch result {
+        case .success(let keyArchiveFilePathsString):
+          fullfill(keyArchiveFilePathsString)
+        case .failure(let error):
+          reject(error)
+        }
+      }
+    }
+  }
+
+  func downloadKeyArchives(targetUrls: [String]) -> Promise<[DownloadedPackage]> {
+    return Promise { fullfill, reject in
+      var downloadedPackages = [DownloadedPackage]()
+      let dispatchGroup = DispatchGroup()
+      for remoteURL in targetUrls {
+        dispatchGroup.enter()
+        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+                                       requestType: .downloadKeys) { result in
+          switch result {
+          case .success (let package):
+            downloadedPackages.append(package)
+          case .failure(let error):
+            reject(error)
+          }
+          dispatchGroup.leave()
+        }
+      }
+      dispatchGroup.notify(queue: .main) {
+        fullfill(downloadedPackages)
+      }
+    }
+  }
+
+  func unpackKeyArchives(packages: [DownloadedPackage]) -> Promise<[URL]> {
+    return Promise<[URL]>(on: .global()) { fullfill, reject in
+      do {
+        try packages.unpack({ (urls) in
+          fullfill(urls)
+        })
+      } catch(let error) {
+        reject(error)
+      }
+    }
+  }
+
+  func getExposureConfiguration() -> Promise<ExposureConfiguration> {
+    return Promise { fullfill, _ in
+      self.apiClient.downloadRequest(ExposureConfigurationRequest.get,
+                                     requestType: .exposureConfiguration) { (result) in
+        var configuration = ExposureConfiguration.placeholder
+        switch result {
+        case.success(let exposureConfiguration):
+          configuration = exposureConfiguration
+          fullfill(configuration)
+        case .failure(_):
+          fullfill(configuration)
+        }
+      }
+    }
+  }
+
+  func callDetectExposures(configuration: ExposureConfiguration,
+                           diagnosisKeyURLs: [URL]) -> Promise<ENExposureDetectionSummary?> {
+    return Promise { fullfill, reject in
+      self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
+                                   diagnosisKeyURLs: diagnosisKeyURLs) { summary, error in
+        if let error = error {
+          reject(error)
+        } else {
+          fullfill(summary)
+        }
+      }
+    }
+  }
+
+  func getExposureInfoAndNotifyUser(summary: ENExposureDetectionSummary) -> Promise<[Exposure]> {
+    return Promise { fullfill, reject in
+      let userExplanation = NSLocalizedString(String.newExposureNotificationBody, comment: .default)
+      self.manager.getExposureInfo(summary: summary,
+                                   userExplanation: userExplanation) { exposures, error in
+        if let error = error {
+          reject(error)
+        } else {
+          let newExposures = (exposures ?? []).map { exposure in
+            Exposure(id: UUID().uuidString,
+                     date: exposure.date.posixRepresentation,
+                     duration: exposure.duration,
+                     totalRiskScore: exposure.totalRiskScore,
+                     transmissionRiskLevel: exposure.transmissionRiskLevel)
+          }
+          fullfill(newExposures)
+        }
+      }
+    }
   }
 }

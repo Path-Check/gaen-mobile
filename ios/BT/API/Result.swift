@@ -31,17 +31,15 @@ public enum ExposureError: LocalizedError {
   case dailyFileProcessingLimitExceeded
   case cancelled
 
+  /// TODO localize this
   public var errorDescription: String? {
     switch self {
     case .default(message: let message):
-      guard let unwrappedMessage = message else {
-        return localizedDescription
-      }
-      return unwrappedMessage
+      return message ?? String.emptyMessageError
     case .dailyFileProcessingLimitExceeded:
-      return "Daily exposure detection file processing limit exceeded"
+      return String.dailyFileProcessingLimitExceeded.localized
     case .cancelled:
-      return "Exposure Detection Cancelled"
+      return String.exposureDetectionCanceled.localized
     }
   }
 
@@ -53,30 +51,9 @@ public enum APIError: LocalizedError {
   public var errorDescription: String? {
     switch self {
     case .default(message: let message):
-      guard let unwrappedMessage = message else {
-        return ""
-      }
-      return unwrappedMessage
+      return message  ?? String.emptyMessageError
     }
   }
-
 }
 
 public let GenericSuccess = GenericResult.success(())
-
-public func GenericFailure<T>(_ error: GenericError) -> Result<T> {
-  return .failure(error)
-}
-
-extension Error {
-
-  public var isCancellation: Bool {
-    switch self {
-    case let error as GenericError:
-      return error == .cancelled
-    case let error as NSError:
-      return error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled
-    }
-  }
-
-}
