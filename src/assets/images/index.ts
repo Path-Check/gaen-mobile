@@ -5,8 +5,8 @@ const CheckInCircle = require("./checkInCircle.png")
 const CodesAndPhone = require("./codesAndPhone.png")
 const ConcentricCircles = require("./concentricCircles.png")
 const Doctors = require("./doctors.png")
-const ExclamationInCircle = require("./exclamationInCircle.png")
 const EmptyPathBackground = require("./emptyPathBackground.png")
+const ExclamationInCircle = require("./exclamationInCircle.png")
 const Export = require("./export.png")
 const ForeArrow = require("./foreArrow.png")
 const HomeActive = require("./homeActive.png")
@@ -17,16 +17,16 @@ const MinnesotaMap = require("./minnesotaMap.png")
 const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
 const PeopleHighFiving = require("./peopleHighFiving.png")
 const PeopleOnPhones = require("./peopleOnPhones.png")
-const PeopleOnNetworkNodes = require("./peopleOnNetworkNodes.png")
 const PersonAndHealthExpert = require("./personAndHealthExpert.png")
 const PersonGettingNotification = require("./personGettingNotification.png")
 const PersonOnComputer = require("./personOnComputer.png")
 const PersonOnPhoneWithCode = require("./personOnPhoneWithCode.png")
 const PersonWithCodesInBackground = require("./personWithCodesInBackground.png")
-const PersonWithPhoneAndCode = require("./personWithPhoneAndCode.png")
 const PersonWithLockedPhone = require("./personWithLockedPhone.png")
+const PersonWithPhoneAndCode = require("./personWithPhoneAndCode.png")
 const PhonesSharingCodes = require("./phonesSharingCodes.png")
 const SingleCrossPathBackground = require("./singleCrossPathBackground.png")
+const WelcomeImage = require("./welcomeImage.png")
 
 export const Images = {
   BlueGradientBackground,
@@ -36,8 +36,8 @@ export const Images = {
   CodesAndPhone,
   ConcentricCircles,
   Doctors,
-  ExclamationInCircle,
   EmptyPathBackground,
+  ExclamationInCircle,
   Export,
   ForeArrow,
   HomeActive,
@@ -48,14 +48,14 @@ export const Images = {
   MultipleCrossPathBackground,
   PeopleHighFiving,
   PeopleOnPhones,
-  PeopleOnNetworkNodes,
   PersonAndHealthExpert,
   PersonGettingNotification,
   PersonOnComputer,
   PersonOnPhoneWithCode,
   PersonWithCodesInBackground,
+  PersonWithLockedPhone,
   PersonWithPhoneAndCode,
   PhonesSharingCodes,
-  PersonWithLockedPhone,
   SingleCrossPathBackground,
+  WelcomeImage,
 }
