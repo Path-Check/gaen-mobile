@@ -12,7 +12,12 @@ import {
 } from "../components"
 import { getLocalNames } from "../locales/languages"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { Screens, OnboardingScreens, useStatusBarEffect } from "../navigation"
+import {
+  ModalScreens,
+  OnboardingScreens,
+  useStatusBarEffect,
+  Stacks,
+} from "../navigation"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
@@ -38,7 +43,9 @@ const Welcome: FunctionComponent = () => {
   )
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Screens.LanguageSelection)
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.LanguageSelection,
+    })
   }
 
   return (

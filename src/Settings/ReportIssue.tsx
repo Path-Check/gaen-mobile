@@ -16,7 +16,7 @@ import { SvgXml } from "react-native-svg"
 
 import { useVersionInfo } from "../hooks/useApplicationInfo"
 import { GlobalText, Button } from "../components"
-import { reportAnIssue, ReportIssueError } from "../Settings/zendeskAPI"
+import { reportAnIssue, ReportIssueError } from "./zendeskAPI"
 import { Icons } from "../assets"
 import { useStatusBarEffect } from "../navigation"
 
@@ -24,7 +24,7 @@ import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = ""
 
-const ReportIssueForm: FunctionComponent = () => {
+const ReportIssue: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
   const { versionInfo } = useVersionInfo()
@@ -274,4 +274,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ReportIssueForm
+export default ReportIssue

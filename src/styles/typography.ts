@@ -206,6 +206,7 @@ export const buttonSecondary: TextStyle = {
 
 export const tappableListItem: TextStyle = {
   ...body1,
+  fontSize: large,
 }
 
 export const anchorLink: TextStyle = {

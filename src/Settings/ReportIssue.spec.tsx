@@ -2,8 +2,8 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
 
-import ReportIssueForm from "./ReportIssueForm"
-import * as API from "../Settings/zendeskAPI"
+import ReportIssue from "./ReportIssue"
+import * as API from "./zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"
 jest.mock("../hooks/useApplicationInfo", () => {
@@ -17,11 +17,11 @@ jest.mock("../hooks/useApplicationInfo", () => {
 })
 jest.mock("@react-navigation/native")
 
-describe("ReportIssueForm", () => {
+describe("ReportIssue", () => {
   describe("validations", () => {
     it("only allows submit when valid email and body are present", async () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
-      const { getByLabelText } = render(<ReportIssueForm />)
+      const { getByLabelText } = render(<ReportIssue />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -51,7 +51,7 @@ describe("ReportIssueForm", () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockResolvedValueOnce({ kind: "success" })
       const alertSpy = jest.spyOn(Alert, "alert")
-      const { getByLabelText, getByTestId } = render(<ReportIssueForm />)
+      const { getByLabelText, getByTestId } = render(<ReportIssue />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -87,7 +87,7 @@ describe("ReportIssueForm", () => {
     it("displays an error message", async () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockResolvedValueOnce({ kind: "failure", error: "Unknown" })
-      const { getByLabelText, getByText } = render(<ReportIssueForm />)
+      const { getByLabelText, getByText } = render(<ReportIssue />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")
@@ -111,7 +111,7 @@ describe("ReportIssueForm", () => {
       const submitSpy = jest.spyOn(API, "reportAnIssue")
       submitSpy.mockRejectedValueOnce(new Error(errorMessage))
       const alertSpy = jest.spyOn(Alert, "alert")
-      const { getByLabelText } = render(<ReportIssueForm />)
+      const { getByLabelText } = render(<ReportIssue />)
       const submitButton = getByLabelText("Submit")
 
       const emailInput = getByLabelText("Email (required)")

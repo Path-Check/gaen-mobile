@@ -2,17 +2,19 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   StackNavigationOptions,
+  HeaderBackButton,
 } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
-import MenuScreen from "../Settings/Menu"
-import AboutScreen from "../Settings/About"
-import LegalScreen from "../Settings/Legal"
+import Settings from "../Settings/"
+import About from "../Settings/About"
+import Legal from "../Settings/Legal"
+import ReportIssue from "../Settings/ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
-import CallbackFormScreen from "../More/CallbackForm"
-import ENLocalDiagnosisKeyScreen from "../Settings/ENLocalDiagnosisKeyScreen"
-import ExposureListDebugScreen from "../Settings/ExposureListDebugScreen"
-
+import CallbackFormScreen from "../Settings/CallbackForm"
+import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
+import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import { SettingsScreens, SettingsScreen } from "./index"
 
 import { Colors, Headers } from "../styles"
@@ -22,39 +24,55 @@ type SettingsStackParams = {
 }
 const Stack = createStackNavigator<SettingsStackParams>()
 
-const defaultScreenOptions: StackNavigationOptions = {
-  headerStyle: {
-    ...Headers.headerStyle,
-  },
-  headerTitleStyle: {
-    ...Headers.headerTitleStyle,
-  },
-  headerBackTitleVisible: false,
-  headerTintColor: Colors.headerText,
-  headerTitleAlign: "center",
+const headerLeft = () => {
+  return <HeaderLeft />
+}
+
+const HeaderLeft = () => {
+  const navigation = useNavigation()
+
+  return (
+    <HeaderBackButton
+      labelVisible={false}
+      tintColor={Colors.white}
+      onPress={() => navigation.goBack()}
+    />
+  )
 }
 
 const SettingsStack: FunctionComponent = () => {
   const { t } = useTranslation()
 
+  const defaultScreenOptions: StackNavigationOptions = {
+    headerStyle: {
+      ...Headers.headerStyle,
+    },
+    headerTitleStyle: {
+      ...Headers.headerTitleStyle,
+    },
+    headerBackTitleVisible: false,
+    headerTintColor: Colors.headerText,
+    headerTitleAlign: "center",
+    headerLeft: headerLeft,
+  }
+
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen
-        name={SettingsScreens.Menu}
-        component={MenuScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen name={SettingsScreens.About} component={AboutScreen} />
+      <Stack.Screen name={SettingsScreens.Settings} component={Settings} />
+      <Stack.Screen name={SettingsScreens.About} component={About} />
       <Stack.Screen
         name={SettingsScreens.CallbackForm}
         component={CallbackFormScreen}
       />
       <Stack.Screen
         name={SettingsScreens.Legal}
-        component={LegalScreen}
+        component={Legal}
         options={{ headerTitle: t("screen_titles.legal") }}
+      />
+      <Stack.Screen
+        name={SettingsScreens.ReportIssue}
+        component={ReportIssue}
+        options={{ headerTitle: t("screen_titles.report_issue") }}
       />
       <Stack.Screen
         name={SettingsScreens.ENDebugMenu}
@@ -63,12 +81,12 @@ const SettingsStack: FunctionComponent = () => {
       />
       <Stack.Screen
         name={SettingsScreens.ExposureListDebugScreen}
-        component={ExposureListDebugScreen}
+        component={ExposureListDebug}
         options={{ headerTitle: t("screen_titles.exposures") }}
       />
       <Stack.Screen
         name={SettingsScreens.ENLocalDiagnosisKey}
-        component={ENLocalDiagnosisKeyScreen}
+        component={ENLocalDiagnosisKey}
       />
     </Stack.Navigator>
   )

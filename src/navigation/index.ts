@@ -53,7 +53,6 @@ export type OnboardingScreen =
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "ProtectPrivacy"
 
 export const OnboardingScreens: {
   [key in OnboardingScreen]: OnboardingScreen
@@ -64,7 +63,6 @@ export const OnboardingScreens: {
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =
@@ -86,14 +84,6 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
-export type ReportIssueScreen = "ReportIssueForm"
-
-export const ReportIssueScreens: {
-  [key in ReportIssueScreen]: ReportIssueScreen
-} = {
-  ReportIssueForm: "ReportIssueForm",
-}
-
 export type ConnectStackScreen = "Connect"
 
 export const ConnectStackScreens: {
@@ -102,12 +92,25 @@ export const ConnectStackScreens: {
   Connect: "Connect",
 }
 
+export type ModalScreen =
+  | "LanguageSelection"
+  | "ProtectPrivacy"
+  | "AffectedUserStack"
+
+export const ModalScreens: {
+  [key in ModalScreen]: ModalScreen
+} = {
+  LanguageSelection: "LanguageSelection",
+  ProtectPrivacy: "ProtectPrivacy",
+  AffectedUserStack: "AffectedUserStack",
+}
+
 export type SettingsScreen =
-  | "Menu"
+  | "Settings"
   | "About"
   | "Legal"
-  | "AffectedUserFlow"
   | "CallbackForm"
+  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -116,13 +119,13 @@ export type SettingsScreen =
 export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
 } = {
-  Menu: "Menu",
+  Settings: "Settings",
   About: "About",
   Legal: "Legal",
   CallbackForm: "CallbackForm",
+  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
-  AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
 }
@@ -142,7 +145,6 @@ export type AffectedUserFlowScreen =
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
-  | "ProtectPrivacy"
 
 export const AffectedUserFlowScreens: {
   [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
@@ -153,28 +155,23 @@ export const AffectedUserFlowScreens: {
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
-  ProtectPrivacy: "ProtectPrivacy",
 }
 export type Screen =
   | OnboardingScreen
   | ExposureHistoryScreen
-  | ReportIssueScreen
   | SettingsScreen
   | SelfAssessmentScreen
   | AffectedUserFlowScreen
   | HomeScreen
-  | "ReportIssueForm"
   | "LanguageSelection"
 
 export const Screens: { [key in Screen]: Screen } = {
   ...OnboardingScreens,
   ...ExposureHistoryScreens,
-  ...ReportIssueScreens,
   ...SettingsScreens,
   ...SelfAssessmentScreens,
   ...AffectedUserFlowScreens,
   ...HomeScreens,
-  ReportIssueForm: "ReportIssueForm",
   LanguageSelection: "LanguageSelection",
 }
 
@@ -183,6 +180,7 @@ export type Stack =
   | "AffectedUserStack"
   | "Connect"
   | "ExposureHistoryFlow"
+  | "Modal"
   | "Onboarding"
   | "Settings"
 
@@ -191,6 +189,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   AffectedUserStack: "AffectedUserStack",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
+  Modal: "Modal",
   Onboarding: "Onboarding",
   Settings: "Settings",
 }
