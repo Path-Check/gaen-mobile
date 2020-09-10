@@ -12,11 +12,13 @@ import {
   Stacks,
   ModalScreens,
   SettingsScreens,
+  Screens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
+import { useOnboardingContext } from "../OnboardingContext"
 
 type SettingsListItem = {
   label: string
@@ -27,6 +29,7 @@ type SettingsListItem = {
 const Settings: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
+  const { updateDestinationAfterComplete } = useOnboardingContext()
   const {
     t,
     i18n: { language: localeCode },
@@ -42,6 +45,11 @@ const Settings: FunctionComponent = () => {
     navigation.navigate(Stacks.Modal, {
       screen: ModalScreens.LanguageSelection,
     })
+  }
+
+  const handleOnPressHowTheAppWorks = () => {
+    updateDestinationAfterComplete(Stacks.Settings)
+    navigation.navigate(Stacks.Onboarding)
   }
 
   const About: SettingsListItem = {
@@ -66,7 +74,7 @@ const Settings: FunctionComponent = () => {
   }
   const HowTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
-    onPress: () => {},
+    onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
 

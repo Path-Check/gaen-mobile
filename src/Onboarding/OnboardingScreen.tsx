@@ -28,6 +28,7 @@ import {
   Typography,
   Iconography,
 } from "../styles"
+import { useOnboardingContext } from "../OnboardingContext"
 
 type OnboardingScreenContent = {
   screenNumber: number
@@ -52,6 +53,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
 }: OnboardingScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
+  const { destinationAfterComplete } = useOnboardingContext()
   const {
     t,
     i18n: { language: localeCode },
@@ -88,7 +90,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
           </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Stacks.Activation)}
+          onPress={() => navigation.navigate(destinationAfterComplete)}
         >
           <GlobalText style={style.skipButtonText}>
             {t("common.skip")}

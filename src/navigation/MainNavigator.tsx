@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
   StackNavigationOptions,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import MainTabNavigator from "./MainTabNavigator"
@@ -50,65 +50,68 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <>
-          {onboardingIsComplete ? (
-            <>
-              <Stack.Screen
-                name={"App"}
-                component={MainTabNavigator}
-                options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={Stacks.Settings}
-                component={SettingsStack}
-                options={{
-                  ...settingsStackTransitionPreset,
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name={Screens.MoreInfo}
-                component={MoreInfo}
-                options={{
-                  ...headerScreenOptions,
-                  title: t("navigation.more_info"),
-                }}
-              />
-              <Stack.Screen
-                name={Screens.ExposureDetail}
-                component={ExposureDetail}
-                options={{
-                  ...headerScreenOptions,
-                  title: t("navigation.exposure"),
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                name={Stacks.Onboarding}
-                component={OnboardingStack}
-                options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={Stacks.Activation}
-                component={ActivationStack}
-                options={{
-                  ...defaultScreenOptions,
-                  gestureEnabled: false,
-                }}
-              />
-            </>
-          )}
-          <Stack.Screen
-            name={Stacks.Modal}
-            component={ModalStack}
-            options={{
-              ...TransitionPresets.ModalTransition,
-              headerShown: false,
-            }}
-          />
-        </>
+        {true ? (
+          <>
+            <Stack.Screen
+              name={"App"}
+              component={MainTabNavigator}
+              options={defaultScreenOptions}
+            />
+            <Stack.Screen
+              name={Stacks.Settings}
+              component={SettingsStack}
+              options={{
+                ...settingsStackTransitionPreset,
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Screens.MoreInfo}
+              component={MoreInfo}
+              options={{
+                ...headerScreenOptions,
+                title: t("navigation.more_info"),
+              }}
+            />
+            <Stack.Screen
+              name={Screens.ExposureDetail}
+              component={ExposureDetail}
+              options={{
+                ...headerScreenOptions,
+                title: t("navigation.exposure"),
+              }}
+            />
+            <Stack.Screen
+              name={Stacks.Onboarding}
+              component={OnboardingStack}
+              options={defaultScreenOptions}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name={Stacks.Onboarding}
+              component={OnboardingStack}
+              options={defaultScreenOptions}
+            />
+            <Stack.Screen
+              name={Stacks.Activation}
+              component={ActivationStack}
+              options={{
+                ...defaultScreenOptions,
+                gestureEnabled: false,
+              }}
+            />
+          </>
+        )}
+        <Stack.Screen
+          name={Stacks.Modal}
+          component={ModalStack}
+          options={{
+            ...TransitionPresets.ModalTransition,
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

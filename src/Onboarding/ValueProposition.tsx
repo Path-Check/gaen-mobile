@@ -4,12 +4,13 @@ import { useNavigation } from "@react-navigation/native"
 
 import OnboardingScreen from "./OnboardingScreen"
 
-import { Stacks } from "../navigation"
 import { Images } from "../assets"
+import { useOnboardingContext } from "../OnboardingContext"
 
 const ValueProposition: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const { destinationAfterComplete } = useOnboardingContext()
 
   const onboardingScreenContent = {
     screenNumber: 5,
@@ -21,7 +22,7 @@ const ValueProposition: FunctionComponent = () => {
 
   const onboardingScreenActions = {
     primaryButtonOnPress: () => {
-      return navigation.navigate(Stacks.Activation)
+      return navigation.navigate(destinationAfterComplete)
     },
   }
 

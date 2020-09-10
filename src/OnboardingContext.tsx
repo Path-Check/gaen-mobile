@@ -3,9 +3,11 @@ import React, {
   useState,
   useContext,
   FunctionComponent,
+  useEffect,
 } from "react"
 
 import { StorageUtils } from "./utils"
+import { Stack, Stacks } from "./navigation"
 
 export const onboardingHasBeenCompleted = async (): Promise<boolean> => {
   return await StorageUtils.getIsOnboardingComplete()
@@ -19,19 +21,27 @@ export interface OnboardingContextState {
   onboardingIsComplete: boolean
   completeOnboarding: () => void
   resetOnboarding: () => void
+  destinationAfterComplete: Stack
+  updateDestinationAfterComplete: (stack: Stack) => void
 }
 
-interface OnboardingProviderProps {
-  userHasCompletedOnboarding: boolean
-}
+// interface OnboardingProviderProps {
+//   userHasCompletedOnboarding: boolean
+// }
 
-export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
-  children,
-  userHasCompletedOnboarding,
-}) => {
+export const OnboardingProvider: FunctionComponent = ({ children }) => {
   const [onboardingIsComplete, setOnboardingIsComplete] = useState<boolean>(
-    userHasCompletedOnboarding,
+    false,
   )
+
+  useEffect(() => {
+    onboardingHasBeenCompleted().then((isComplete) => {
+      setOnboardingIsComplete(isComplete)
+    })
+  }, [])
+  const [destinationAfterComplete, setDestinationAfterComplete] = useState<
+    Stack
+  >(Stacks.Activation)
 
   const completeOnboarding = () => {
     StorageUtils.setIsOnboardingComplete()
@@ -40,12 +50,23 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
 
   const resetOnboarding = () => {
     StorageUtils.removeIsOnboardingComplete()
+    setDestinationAfterComplete(Stacks.Activation)
     setOnboardingIsComplete(false)
+  }
+
+  const updateDestinationAfterComplete = (stack: Stack) => {
+    setDestinationAfterComplete(stack)
   }
 
   return (
     <OnboardingContext.Provider
-      value={{ onboardingIsComplete, completeOnboarding, resetOnboarding }}
+      value={{
+        onboardingIsComplete,
+        completeOnboarding,
+        resetOnboarding,
+        destinationAfterComplete,
+        updateDestinationAfterComplete,
+      }}
     >
       {children}
     </OnboardingContext.Provider>
