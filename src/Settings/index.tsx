@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet, TouchableOpacity, FlatList } from "react-native"
+import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
@@ -7,12 +7,16 @@ import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components"
-import { Stacks, ModalScreens, SettingsScreens } from "../navigation"
-import { useStatusBarEffect } from "../navigation/index"
+import {
+  useStatusBarEffect,
+  Stacks,
+  ModalScreens,
+  SettingsScreens,
+} from "../navigation"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
-import { useConfigurationContext } from "../ConfigurationContext"
 
 const Settings: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
@@ -68,14 +72,6 @@ const Settings: FunctionComponent = () => {
     (el): el is SettingsListItem => typeof el !== "undefined",
   )
 
-  const renderItem = ({ item }: { item: ListItemProps }) => {
-    return (
-      <View style={style.flatListItemContainer}>
-        <ListItem label={item.label} onPress={item.onPress} />
-      </View>
-    )
-  }
-
   interface ListItemProps {
     label: string
     onPress: () => void
@@ -93,8 +89,12 @@ const Settings: FunctionComponent = () => {
     )
   }
 
-  const ListHeaderComponent = () => {
-    return (
+  const ItemSeparator = () => {
+    return <View style={style.divider} />
+  }
+
+  return (
+    <ScrollView style={style.container}>
       <View style={style.section}>
         <TouchableOpacity
           onPress={handleOnPressSelectLanguage}
@@ -116,38 +116,28 @@ const Settings: FunctionComponent = () => {
           </View>
         </TouchableOpacity>
       </View>
-    )
-  }
-
-  const ListFooterComponent = () => {
-    if (!showDebugMenu) {
-      return null
-    }
-    return (
       <View style={style.section}>
-        <ListItem
-          label="EN Debug Menu"
-          onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
-        />
+        {settingsListItemsToDisplay.map(({ label, onPress }, idx) => {
+          const isLastItem = idx === settingsListItemsToDisplay.length - 1
+          return (
+            <>
+              <View key={label}>
+                <ListItem label={label} onPress={onPress} />
+              </View>
+              {!isLastItem && <ItemSeparator />}
+            </>
+          )
+        })}
       </View>
-    )
-  }
-
-  const ItemSeparatorComponent = () => {
-    return <View style={style.divider} />
-  }
-
-  return (
-    <View style={style.container}>
-      <FlatList
-        data={settingsListItemsToDisplay}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.label}
-        ListHeaderComponent={ListHeaderComponent}
-        ListFooterComponent={ListFooterComponent}
-        ItemSeparatorComponent={ItemSeparatorComponent}
-      />
-    </View>
+      {showDebugMenu && (
+        <View style={style.section}>
+          <ListItem
+            label="EN Debug Menu"
+            onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
+          />
+        </View>
+      )}
+    </ScrollView>
   )
 }
 
@@ -155,10 +145,11 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.xxLarge,
   },
   section: {
     backgroundColor: Colors.primaryLightBackground,
-    marginVertical: Spacing.xxLarge,
+    marginBottom: Spacing.xxLarge,
   },
   languageButtonContainer: {
     flexDirection: "row",
@@ -169,9 +160,6 @@ const style = StyleSheet.create({
   },
   icon: {
     marginRight: Spacing.small,
-  },
-  flatListItemContainer: {
-    backgroundColor: Colors.primaryLightBackground,
   },
   listItem: {
     paddingHorizontal: Spacing.medium,
