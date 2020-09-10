@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { Image, StyleSheet, View, TouchableOpacity } from "react-native"
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
@@ -51,50 +57,60 @@ const Welcome: FunctionComponent = () => {
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
-      <GradientBackground
-        gradient={Colors.gradientPrimary10}
-        angleCenterY={0.75}
+      <ScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={style.contentContainer}
       >
-        <View style={style.container}>
-          <TouchableOpacity
-            onPress={handleOnPressSelectLanguage}
-            style={style.languageButtonContainer}
-          >
-            <LinearGradient
-              colors={Colors.gradientPrimary10}
-              useAngle
-              angle={0}
-              angleCenter={{ x: 0.5, y: 0.5 }}
+        <GradientBackground
+          gradient={Colors.gradientPrimary10}
+          angleCenterY={0.75}
+        >
+          <View style={style.mainContentContainer}>
+            <TouchableOpacity
+              onPress={handleOnPressSelectLanguage}
               style={style.languageButtonContainer}
             >
-              <GlobalText style={style.languageButtonText}>
-                {languageName}
-              </GlobalText>
-            </LinearGradient>
-          </TouchableOpacity>
-          <View>
-            <Image
-              source={Images.WelcomeImage}
-              style={style.image}
-              accessible
-              accessibilityLabel={t("onboarding.welcome_image_label")}
+              <LinearGradient
+                colors={Colors.gradientPrimary10}
+                useAngle
+                angle={0}
+                angleCenter={{ x: 0.5, y: 0.5 }}
+                style={style.languageButtonContainer}
+              >
+                <GlobalText style={style.languageButtonText}>
+                  {languageName}
+                </GlobalText>
+              </LinearGradient>
+            </TouchableOpacity>
+            <View>
+              <Image
+                source={Images.WelcomeImage}
+                style={style.image}
+                accessible
+                accessibilityLabel={t("onboarding.welcome_image_label")}
+              />
+              <GlobalText style={style.mainText}>{welcomeMessage}</GlobalText>
+              <GlobalText style={style.mainText}>{applicationName}</GlobalText>
+            </View>
+            <Button
+              label={t("label.launch_get_started")}
+              onPress={() =>
+                navigation.navigate(OnboardingScreens.Introduction)
+              }
+              hasRightArrow
             />
-            <GlobalText style={style.mainText}>{welcomeMessage}</GlobalText>
-            <GlobalText style={style.mainText}>{applicationName}</GlobalText>
           </View>
-          <Button
-            label={t("label.launch_get_started")}
-            onPress={() => navigation.navigate(OnboardingScreens.Introduction)}
-            hasRightArrow
-          />
-        </View>
-      </GradientBackground>
+        </GradientBackground>
+      </ScrollView>
     </>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
+  contentContainer: {
+    flexGrow: 1,
+  },
+  mainContentContainer: {
     flex: 1,
     paddingBottom: Spacing.xxHuge,
     paddingHorizontal: Spacing.large,
