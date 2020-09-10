@@ -5,6 +5,7 @@ import { Stacks, ModalScreens } from "./index"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
+import OnboardingStack from "./OnboardingStack"
 
 const Stack = createStackNavigator()
 
@@ -25,6 +26,10 @@ const ModalStack: FunctionComponent = () => {
         options={{
           gestureEnabled: false,
         }}
+      />
+      <Stack.Screen
+        name={Stacks.OnboardingReview}
+        component={OnboardingStack}
       />
     </Stack.Navigator>
   )

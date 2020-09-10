@@ -49,7 +49,7 @@ const Settings: FunctionComponent = () => {
 
   const handleOnPressHowTheAppWorks = () => {
     updateDestinationAfterComplete(Stacks.Settings)
-    navigation.navigate(Stacks.Onboarding)
+    navigation.navigate(Stacks.Modal, { screen: ModalScreens.OnboardingReview })
   }
 
   const About: SettingsListItem = {

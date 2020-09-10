@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
   StackNavigationOptions,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
-import { NavigationContainer, useNavigation } from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import MainTabNavigator from "./MainTabNavigator"
@@ -50,7 +50,7 @@ const MainNavigator: FunctionComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {true ? (
+        {onboardingIsComplete ? (
           <>
             <Stack.Screen
               name={"App"}
@@ -80,11 +80,6 @@ const MainNavigator: FunctionComponent = () => {
                 ...headerScreenOptions,
                 title: t("navigation.exposure"),
               }}
-            />
-            <Stack.Screen
-              name={Stacks.Onboarding}
-              component={OnboardingStack}
-              options={defaultScreenOptions}
             />
           </>
         ) : (
