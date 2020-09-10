@@ -92,7 +92,7 @@ const Settings: FunctionComponent = () => {
   }) => {
     return (
       <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
-        <View style={[style.listItem, style.languageButtonContainer]}>
+        <View style={style.listItem}>
           <SvgXml
             fill={Colors.primary100}
             xml={icon}
@@ -102,7 +102,7 @@ const Settings: FunctionComponent = () => {
             accessible
             accessibilityLabel={label}
           />
-          <GlobalText style={style.languageButtonText}>{label}</GlobalText>
+          <GlobalText style={style.listItemText}>{label}</GlobalText>
         </View>
       </TouchableOpacity>
     )
@@ -155,19 +155,17 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
   },
-  languageButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  languageButtonText: {
-    ...Typography.tappableListItem,
-  },
   icon: {
     marginRight: Spacing.small,
   },
   listItem: {
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
+  },
+  listItemText: {
+    ...Typography.tappableListItem,
   },
   divider: {
     height: Outlines.hairline,

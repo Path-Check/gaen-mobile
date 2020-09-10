@@ -17,7 +17,7 @@ export const OnboardingContext = createContext<
 >(undefined)
 
 export interface OnboardingContextState {
-  onboardingIsComplete: boolean
+  isOnboardingComplete: boolean
   completeOnboarding: () => void
   resetOnboarding: () => void
   destinationAfterComplete: Stack
@@ -32,7 +32,7 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   children,
   userHasCompletedOnboarding,
 }) => {
-  const [onboardingIsComplete, setOnboardingIsComplete] = useState<boolean>(
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState<boolean>(
     userHasCompletedOnboarding,
   )
   const [destinationAfterComplete, setDestinationAfterComplete] = useState<
@@ -41,13 +41,13 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
 
   const completeOnboarding = () => {
     StorageUtils.setIsOnboardingComplete()
-    setOnboardingIsComplete(true)
+    setIsOnboardingComplete(true)
   }
 
   const resetOnboarding = () => {
     StorageUtils.removeIsOnboardingComplete()
     setDestinationAfterComplete(Stacks.Activation)
-    setOnboardingIsComplete(false)
+    setIsOnboardingComplete(false)
   }
 
   const updateDestinationAfterComplete = (stack: Stack) => {
@@ -57,7 +57,7 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   return (
     <OnboardingContext.Provider
       value={{
-        onboardingIsComplete,
+        isOnboardingComplete,
         completeOnboarding,
         resetOnboarding,
         destinationAfterComplete,

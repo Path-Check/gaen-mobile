@@ -45,12 +45,12 @@ const settingsStackTransitionPreset = Platform.select({
 
 const MainNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { onboardingIsComplete } = useOnboardingContext()
+  const { isOnboardingComplete } = useOnboardingContext()
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {onboardingIsComplete ? (
+        {isOnboardingComplete ? (
           <>
             <Stack.Screen
               name={"App"}
