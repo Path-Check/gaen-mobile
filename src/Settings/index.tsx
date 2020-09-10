@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-} from "react-native"
+import { View, StyleSheet, TouchableOpacity, FlatList } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"

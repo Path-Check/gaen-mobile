@@ -2,8 +2,8 @@ import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
 import { Stacks, ModalScreens } from "./index"
-import LanguageSelection from "../Modal/LanguageSelection"
-import ProtectPrivacy from "../Modal/ProtectPrivacy"
+import LanguageSelection from "../modals/LanguageSelection"
+import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
 
 const Stack = createStackNavigator()

@@ -223,8 +223,6 @@ const createStyle = (insets: EdgeInsets) => {
   })
 }
 
-export default OnboardingScreen
-
 interface PositionDotsProps {
   screenNumber: number
 }
@@ -274,3 +272,5 @@ const dotsStyle = StyleSheet.create({
     borderRadius: Outlines.borderRadiusMax,
   },
 })
+
+export default OnboardingScreen
