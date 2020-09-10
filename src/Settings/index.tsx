@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
@@ -22,7 +28,10 @@ const Settings: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  const { displayCallbackForm } = useConfigurationContext()
+  const {
+    displayCallbackForm,
+    displayReportAnIssue,
+  } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
@@ -31,8 +40,67 @@ const Settings: FunctionComponent = () => {
     })
   }
 
-  return (
-    <ScrollView style={style.container}>
+  type SettingsListItem = {
+    label: string
+    onPress: () => void
+  }
+
+  const About: SettingsListItem = {
+    label: t("screen_titles.about"),
+    onPress: () => navigation.navigate(SettingsScreens.About),
+  }
+  const Legal: SettingsListItem = {
+    label: t("screen_titles.legal"),
+    onPress: () => navigation.navigate(SettingsScreens.Legal),
+  }
+  const CallbackForm: SettingsListItem = {
+    label: t("screen_titles.callback_form"),
+    onPress: () => navigation.navigate(SettingsScreens.CallbackForm),
+  }
+  const ReportAnIssue: SettingsListItem = {
+    label: t("screen_titles.report_issue"),
+    onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
+  }
+
+  const baseListItems: SettingsListItem[] = [About, Legal]
+
+  const settingsListItems: (SettingsListItem | undefined)[] = [
+    ...baseListItems,
+    displayCallbackForm ? CallbackForm : undefined,
+    displayReportAnIssue ? ReportAnIssue : undefined,
+  ]
+
+  const settingsListItemsToDisplay: SettingsListItem[] = settingsListItems.filter(
+    (el): el is SettingsListItem => typeof el !== "undefined",
+  )
+
+  const renderItem = ({ item }: { item: ListItemProps }) => {
+    return (
+      <View style={style.flatListItemContainer}>
+        <ListItem label={item.label} onPress={item.onPress} />
+      </View>
+    )
+  }
+
+  interface ListItemProps {
+    label: string
+    onPress: () => void
+  }
+
+  const ListItem = ({ label, onPress }: ListItemProps) => {
+    return (
+      <View>
+        <TouchableOpacity onPress={onPress}>
+          <View style={style.listItem}>
+            <GlobalText style={style.listItemText}>{label}</GlobalText>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  const ListHeaderComponent = () => {
+    return (
       <View style={style.section}>
         <TouchableOpacity
           onPress={handleOnPressSelectLanguage}
@@ -54,72 +122,49 @@ const Settings: FunctionComponent = () => {
           </View>
         </TouchableOpacity>
       </View>
+    )
+  }
+
+  const ListFooterComponent = () => {
+    if (!showDebugMenu) {
+      return null
+    }
+    return (
       <View style={style.section}>
-        <SettingsListItem
-          label={t("screen_titles.about")}
-          onPress={() => navigation.navigate(SettingsScreens.About)}
-        />
-        <SettingsListItem
-          label={t("screen_titles.legal")}
-          onPress={() => navigation.navigate(SettingsScreens.Legal)}
-        />
-        {displayCallbackForm && (
-          <SettingsListItem
-            label={t("screen_titles.callback_form")}
-            onPress={() => navigation.navigate(SettingsScreens.CallbackForm)}
-            lastItem
-          />
-        )}
-        <SettingsListItem
-          label={t("screen_titles.report_issue")}
-          onPress={() => navigation.navigate(SettingsScreens.ReportIssue)}
-          lastItem
+        <ListItem
+          label="EN Debug Menu"
+          onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
         />
       </View>
-      {showDebugMenu && (
-        <View style={style.section}>
-          <SettingsListItem
-            label="EN Debug Menu"
-            onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
-            lastItem
-          />
-        </View>
-      )}
-    </ScrollView>
-  )
-}
+    )
+  }
 
-interface SettingsListItemProps {
-  label: string
-  onPress: () => void
-  lastItem?: boolean
-}
+  const ItemSeparatorComponent = () => {
+    return <View style={style.divider} />
+  }
 
-const SettingsListItem = ({
-  label,
-  onPress,
-  lastItem,
-}: SettingsListItemProps) => {
   return (
-    <View>
-      <TouchableOpacity onPress={onPress}>
-        <View style={style.listItem}>
-          <GlobalText style={style.listItemText}>{label}</GlobalText>
-        </View>
-      </TouchableOpacity>
-      {!lastItem && <View style={style.divider} />}
+    <View style={style.container}>
+      <FlatList
+        data={settingsListItemsToDisplay}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.label}
+        ListHeaderComponent={ListHeaderComponent}
+        ListFooterComponent={ListFooterComponent}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+      />
     </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.xxLarge,
   },
   section: {
     backgroundColor: Colors.primaryLightBackground,
-    marginBottom: Spacing.xxLarge,
+    marginVertical: Spacing.xxLarge,
   },
   languageButtonContainer: {
     flexDirection: "row",
@@ -130,6 +175,9 @@ const style = StyleSheet.create({
   },
   icon: {
     marginRight: Spacing.small,
+  },
+  flatListItemContainer: {
+    backgroundColor: Colors.primaryLightBackground,
   },
   listItem: {
     paddingHorizontal: Spacing.medium,
