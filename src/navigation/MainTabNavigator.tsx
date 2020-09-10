@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import SplashScreen from "react-native-splash-screen"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
@@ -12,21 +11,12 @@ import ConnectStack from "./ConnectStack"
 import { Screens, Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Colors } from "../styles"
-import { useNavigation } from "@react-navigation/native"
-import { useOnboardingContext } from "../OnboardingContext"
 
 const Tab = createBottomTabNavigator()
 
 const MainTabNavigator: FunctionComponent = () => {
-  const navigation = useNavigation()
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
-  const { onboardingIsComplete } = useOnboardingContext()
-  // useEffect(() => {
-  //   if (!onboardingIsComplete) {
-  //     navigation.navigate(Stacks.Onboarding)
-  //   }
-  // }, [])
 
   interface TabIconProps extends TabBarIconProps {
     icon: string

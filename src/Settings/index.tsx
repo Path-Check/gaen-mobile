@@ -12,7 +12,6 @@ import {
   Stacks,
   ModalScreens,
   SettingsScreens,
-  Screens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 

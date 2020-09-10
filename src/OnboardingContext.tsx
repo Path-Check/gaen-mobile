@@ -3,7 +3,6 @@ import React, {
   useState,
   useContext,
   FunctionComponent,
-  useEffect,
 } from "react"
 
 import { StorageUtils } from "./utils"
@@ -25,20 +24,17 @@ export interface OnboardingContextState {
   updateDestinationAfterComplete: (stack: Stack) => void
 }
 
-// interface OnboardingProviderProps {
-//   userHasCompletedOnboarding: boolean
-// }
+interface OnboardingProviderProps {
+  userHasCompletedOnboarding: boolean
+}
 
-export const OnboardingProvider: FunctionComponent = ({ children }) => {
+export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
+  children,
+  userHasCompletedOnboarding,
+}) => {
   const [onboardingIsComplete, setOnboardingIsComplete] = useState<boolean>(
-    false,
+    userHasCompletedOnboarding,
   )
-
-  useEffect(() => {
-    onboardingHasBeenCompleted().then((isComplete) => {
-      setOnboardingIsComplete(isComplete)
-    })
-  }, [])
   const [destinationAfterComplete, setDestinationAfterComplete] = useState<
     Stack
   >(Stacks.Activation)
