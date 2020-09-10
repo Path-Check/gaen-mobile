@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react"
 import "array-flat-polyfill"
 import env from "react-native-config"
+import SplashScreen from "react-native-splash-screen"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
@@ -10,21 +11,32 @@ import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
+import { StorageUtils } from "./src/utils"
 import Logger from "./src/logger"
-import SplashScreen from "react-native-splash-screen"
 
 Logger.start()
 
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState(true)
+
+  const determineIsOnboardingComplete = async (): Promise<boolean> => {
+    return await StorageUtils.getIsOnboardingComplete()
+  }
 
   useEffect(() => {
     const locales = env.SUPPORTED_LOCALES?.split(",") || []
     initializei18next(locales)
     loadUserLocale()
 
-    setIsLoading(false)
-    SplashScreen.hide()
+    determineIsOnboardingComplete()
+      .then((result) => {
+        setIsOnboardingComplete(result)
+      })
+      .finally(() => {
+        setIsLoading(false)
+        SplashScreen.hide()
+      })
   }, [])
 
   return (
@@ -32,7 +44,9 @@ const App: FunctionComponent = () => {
       {!isLoading ? (
         <ErrorBoundary>
           <ConfigurationProvider>
-            <OnboardingProvider>
+            <OnboardingProvider
+              userHasCompletedOnboarding={isOnboardingComplete}
+            >
               <PermissionsProvider>
                 <SystemServicesProvider>
                   <ExposureProvider>
