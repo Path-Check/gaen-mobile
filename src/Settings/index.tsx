@@ -18,6 +18,11 @@ import { useConfigurationContext } from "../ConfigurationContext"
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 
+type SettingsListItem = {
+  label: string
+  onPress: () => void
+}
+
 const Settings: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
@@ -38,11 +43,6 @@ const Settings: FunctionComponent = () => {
     })
   }
 
-  type SettingsListItem = {
-    label: string
-    onPress: () => void
-  }
-
   const About: SettingsListItem = {
     label: t("screen_titles.about"),
     onPress: () => navigation.navigate(SettingsScreens.About),
@@ -60,17 +60,13 @@ const Settings: FunctionComponent = () => {
     onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
   }
 
-  const baseListItems: SettingsListItem[] = [About, Legal]
-
-  const settingsListItems: (SettingsListItem | undefined)[] = [
-    ...baseListItems,
-    displayCallbackForm ? CallbackForm : undefined,
-    displayReportAnIssue ? ReportAnIssue : undefined,
-  ]
-
-  const settingsListItemsToDisplay: SettingsListItem[] = settingsListItems.filter(
-    (el): el is SettingsListItem => typeof el !== "undefined",
-  )
+  const listItems: SettingsListItem[] = [About, Legal]
+  if (displayCallbackForm) {
+    listItems.push(CallbackForm)
+  }
+  if (displayReportAnIssue) {
+    listItems.push(ReportAnIssue)
+  }
 
   interface ListItemProps {
     label: string
@@ -117,8 +113,8 @@ const Settings: FunctionComponent = () => {
         </TouchableOpacity>
       </View>
       <View style={style.section}>
-        {settingsListItemsToDisplay.map(({ label, onPress }, idx) => {
-          const isLastItem = idx === settingsListItemsToDisplay.length - 1
+        {listItems.map(({ label, onPress }, idx) => {
+          const isLastItem = idx === listItems.length - 1
           return (
             <>
               <View key={label}>
