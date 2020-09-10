@@ -43,17 +43,14 @@
   "common": {
     "alert": "警告",
     "back": "戻る",
-    "cancel": "キャンセル",
     "close": "閉じる",
     "continue": "継続する",
     "disabled": "無効",
     "done": "完成です",
-    "enable": "有効にする",
     "enabled": "有効",
     "maybe_later": "あとで",
     "next": "次へ進む",
     "no_thanks": "結構です",
-    "okay": "オーケー",
     "settings": "設定を開く",
     "skip": "スキップ",
     "something_went_wrong": "問題が発生しました",
@@ -167,6 +164,7 @@
     "location_info_body_1": "露出通知テクノロジーはBluetoothスキャンを使用して、どのデバイスが互いに近くにあるかを判断します。 Android 6.0以降を実行しているすべてのスマートフォンでBluetoothスキャンを使用するには、露出通知システムで構築されたアプリだけでなく、すべてのアプリでデバイスの場所の設定をオンにする必要があります。",
     "location_info_header": "ロケーション",
     "location_info_subheader_1": "位置情報を有効にする必要があるのはなぜですか?",
+    "open_settings": "設定を開く",
     "proximity_tracing_info_body_1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_header": "近接トレース",
@@ -176,12 +174,10 @@
     "status_icon_inactive_label": "赤い丸の中の白いx"
   },
   "label": {
-    "activate_proximity_tracing": "近接トレースをアクティブにする",
     "check": "チェックマーク",
     "checked_checkbox": "チェックされたチェックボックス",
     "go_to_home_view": "ホーム ビューに移動する",
     "language_icon": "地球儀の輪郭付きアイコン",
-    "launch_activate_location": "位置情報を有効にする",
     "launch_enable_notif": "お知らせを有効にする",
     "launch_get_started": "開始する",
     "launch_screen1_header": "へようこそ",
@@ -196,10 +192,7 @@
     "exposure": "接触",
     "exposure_history": "感染リスクの履歴",
     "home": "ホーム",
-    "more": "もっと",
-    "more_info": "より詳しい情報",
-    "report_issue": "問題の報告",
-    "self_assessment": "自己評価"
+    "more_info": "より詳しい情報"
   },
   "onboarding": {
     "activation_header_title": "アプリの設定",
@@ -237,8 +230,6 @@
       "subheader_4": "各電話は、フラグが設定されたIDのリストを定期的にサーバーにピングし、一致するものを探します",
       "subheader_5": "{{applicationName}} がフラグ付き ID との一致を検出した場合は通知されます"
     },
-    "proximity_tracing_alert_body": "モバイルデバイスは、ランダムなIDを安全に収集し、近くのデバイスと共有することができます。{{applicationName}} アプリは、これらの ID を使用して、COVID-19 に接触した場合に通知します。接触の日付、期間、および信号強度は、{{applicationName}}と共有されます。",
-    "proximity_tracing_alert_header": "「 {{applicationName}} 」からの近接トレースを有効にしますか？",
     "proximity_tracing_body1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_body2": "接触した場合、あなたのデータと情報は匿名のままです。アプリは個人データを保存しません。ランダムIDのみが交換されます。これらは14日以内に削除されます。",
     "proximity_tracing_button": "近接トレースを有効にする",

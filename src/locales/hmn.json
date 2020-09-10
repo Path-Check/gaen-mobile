@@ -42,7 +42,6 @@
   },
   "common": {
     "alert": "Faj Seeb",
-    "cancel": "Rho Tawm",
     "close": "Kaw",
     "continue": "Txuas Ntxiv",
     "disabled": "Muab Tua",
@@ -51,7 +50,6 @@
     "maybe_later": "Tej zaum lwm zaus tso",
     "next": "Tom ntej",
     "no_thanks": "Kav liam",
-    "okay": "Okay",
     "settings": "Qhib Mus Kho",
     "skip": "Hla",
     "something_went_wrong": "Dabtsi puas lawm",
@@ -137,6 +135,7 @@
       "tracing_off_subheader": "Taws qhov Bluetooth thiab Proximity Tracing kom thiaj li paub txog seb tau mus raug kis mob li cas lawm",
       "tracing_on_header": "Tseem Ciaj"
     },
+    "open_settings": "Qhib Mus Kho",
     "proximity_tracing_info_body_1": "Yog tias cov xov tooj uas muaj lub app nyob hauv thiab muab taws, muaj Bluetooth, thiab nyob sib ze rau ib lub sijhawm twg, ces yuav cuv cia tias tau mus raug nyob rau hauv koj lub xov tooj.",
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_info_header": "Proximity Tracing",
@@ -144,7 +143,6 @@
     "proximity_tracing_info_subheader_2": "Kuv li ntaub ntawv puas ceev zoo cia?"
   },
   "label": {
-    "activate_proximity_tracing": "Taws Proximity Tracing",
     "check": "Cim tseg",
     "checked_checkbox": "Lub npov uas kos lawm",
     "language_icon": "Lub cim ntiaj teb",
@@ -160,10 +158,7 @@
   },
   "navigation": {
     "exposure_history": "Keeb Kwm Tau Mus Raug",
-    "home": "Home",
-    "more": "Ntxiv",
-    "report_issue": "Qhia Tawm Qhov Teeb Meem",
-    "self_assessment": "Tus Kheej Ntsuas"
+    "home": "Home"
   },
   "onboarding": {
     "activation_header_title": "App Setup",

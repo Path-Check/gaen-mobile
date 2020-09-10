@@ -43,17 +43,14 @@
   "common": {
     "alert": "Advertencia",
     "back": "Regresar",
-    "cancel": "Cancelar",
     "close": "Cerrar",
     "continue": "Continuar",
     "disabled": "Desactivado",
     "done": "Hecho",
-    "enable": "Habilitar",
     "enabled": "Activado",
     "maybe_later": "Quizá después",
     "next": "Siguiente",
     "no_thanks": "No, gracias",
-    "okay": "Sí",
     "settings": "Abrir Configuración",
     "skip": "Saltar",
     "something_went_wrong": "Algo salió mal",
@@ -146,6 +143,7 @@
       "unauthorized_error_message": "Para activar el rastreo de proximidad, autorice el registro de la exposición de COVID-19 en la aplicación de configuración",
       "unauthorized_error_title": "Autorizar en la configuración del sistema"
     },
+    "open_settings": "Abrir Configuración",
     "proximity_tracing_info_body_1": "Si los teléfonos con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_header": "Rastreo de proximidad",
@@ -153,7 +151,6 @@
     "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?"
   },
   "label": {
-    "activate_proximity_tracing": "Activar seguimiento de proximidad",
     "check": "✔",
     "checked_checkbox": "Casilla marcada",
     "language_icon": "🌎",
@@ -170,10 +167,7 @@
   "navigation": {
     "exposure_history": "Historial de exposición",
     "home": "Inicio",
-    "more": "Más",
-    "more_info": "Más información",
-    "report_issue": "Reportar problema",
-    "self_assessment": "Autoevaluación"
+    "more_info": "Más información"
   },
   "onboarding": {
     "activation_header_title": "Configuración de la Aplicación",
@@ -199,8 +193,6 @@
       "subheader_4": "Cada teléfono solicita periódicamente la lista de códigos marcados como positivo del servidor y busca coincidencias",
       "subheader_5": "Informamos a los usuarios si la aplicación encuentra algún código de otro dispositivo que haya sido marcado como positivo"
     },
-    "proximity_tracing_alert_body": "Su dispositivo móvil puede recopilar y compartir identificadores aleatorios con dispositivos cercanos de manera segura. {{applicationName}} hace uso de estos para notificarle si ha estado expuesto al COVID-19. La fecha, duración e intensidad de la señal correspondientes a una exposición se compartirán con {{applicationName}}.",
-    "proximity_tracing_alert_header": "¿Habilitar el seguimiento de proximidad desde \" {{applicationName}} \"?",
     "proximity_tracing_body1": "Si teléfonos que están encendidos con la aplicación instalada, Bluetooth activado y cercanos uno del otro por un período de tiempo, su dispositivo registra un encuentro.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_button": "Activar seguimiento de proximidad",

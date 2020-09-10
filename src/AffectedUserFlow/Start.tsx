@@ -58,7 +58,7 @@ export const ExportIntro: FunctionComponent = () => {
             source={Images.PersonAndHealthExpert}
             style={style.image}
             accessible
-            accessibilityLabel={t("exoprt.start_image_label")}
+            accessibilityLabel={t("export.person_and_health_expert")}
           />
           <GlobalText style={style.header}>
             {t("export.start_header_bluetooth")}

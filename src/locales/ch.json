@@ -43,17 +43,14 @@
   "common": {
     "alert": "Claro man hasso",
     "back": "Tatti",
-    "cancel": "Na para",
     "close": "Huchum",
     "continue": "Kontinua",
     "disabled": "Na para",
     "done": "Munhayan",
-    "enable": "Na lala or na kalamten",
     "enabled": "Na kalamten",
     "maybe_later": "Polu esta i dispues",
     "next": "I otro",
     "no_thanks": "Para hafa, si yu'us ma'asi",
-    "okay": "OK",
     "settings": "Baba i Settings",
     "skip": "Upus",
     "something_went_wrong": "Guaha problema",
@@ -167,6 +164,7 @@
     "location_info_body_1": "I Exposure Notification technology ha u'usa Bluetooth scanning  para u komprendi hafa siha na devices man hihot. Gi todo siha i telefon ni manmalalagu gi Android 6.0 pat mas taghilo para u usa Bluetooth scanning , nesisita i device location setting man 'on' para todo i apps , ahe ti para eyu ha i apps ni guaha Exposure Notifications System.",
     "location_info_header": "Location",
     "location_info_subheader_1": "Hafa na hu nesisita muna 'on' i iyoku location?",
+    "open_settings": "Baba i Settings",
     "proximity_tracing_info_body_1": "Yanggen man mana 'on' i smartphones  ni man gaieyu app,  kalalamten i Bluetooth ya manhihot kon tiempo i encounter ma register gi iyo-mu device.",
     "proximity_tracing_info_body_2": "Put sienkasu guaha un susedi, todu infotmasion put hagu man manana.I app ti sina ha goti ni hafafa' na petsonat na infotmasion. I kosequat ha siha na IDs sina man ma usa.Man ma na suha est siha gi duranten i 14 dias.",
     "proximity_tracing_info_header": "Matatiyen i man akihut",
@@ -176,12 +174,10 @@
     "status_icon_inactive_label": "I apaka na  x gi agaga na sitkulu"
   },
   "label": {
-    "activate_proximity_tracing": "Na lala i Proximity Setting",
     "check": "Checkmark",
     "checked_checkbox": "Ma check na checkbox",
     "go_to_home_view": "Hanao para i Home view",
     "language_icon": "Outline i icon i globe",
-    "launch_activate_location": "Na lala i Location",
     "launch_enable_notif": "Na kalamten para i Notifikasion",
     "launch_get_started": "Tutuhon",
     "launch_screen1_header": "Bienvenidu para",
@@ -196,10 +192,7 @@
     "exposure": "Tinanmi or Ninayi",
     "exposure_history": "Historian i ninayi (chetnot)",
     "home": "Guma",
-    "more": "Mas",
-    "more_info": "Mas infotmasion",
-    "report_issue": "Ripotti put problema",
-    "self_assessment": "Assessment mismo"
+    "more_info": "Mas infotmasion"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
@@ -237,8 +230,6 @@
       "subheader_4": "Kada telefon ha piping i server periodically para i listan i flagged IDs  para hu espiha siha i man match",
       "subheader_5": "Un manotifika yanggen {{applicationName}} manoda positive na match ni ma flagged na ID"
     },
-    "proximity_tracing_alert_body": "Sina ha i iyo-mu mobile device manule yan man nae konsikuat siha na ID's yan i otro siha devices gi  oriya siha. {{applicationName}} sina ha usa esti siha na IDs para un manatungo na ma exposed hao ni COVID 19.  I fecha, i tiempo, yan sinat i minetgot i exposure ufan masangani siha i {{applicationName}}",
-    "proximity_tracing_alert_header": "Na kalamten i Proximity Tracing ginen \"{{applicationName}}\"?",
     "proximity_tracing_body1": "Yanggen ma na'on' i smartphone ni gai app, ya kalalamten i Bluetooth, ya hihot i dos, kontiempo un encounter ma register gi iyo-mu device.",
     "proximity_tracing_body2": "Yanggen guaha encounter, i iyo-mu data yan infotmasion ti umatungo.I app ti ha gogoti personat na infotmasion. Ayu ha i random siha na IDs man ma tulalaika. Pues man ma funas gi 14 dias.",
     "proximity_tracing_button": "Na lala i Proximity Tracin",

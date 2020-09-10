@@ -52,11 +52,11 @@ const AcceptTermsOfService: FunctionComponent = () => {
             {t("onboarding.terms_header_title")}
           </GlobalText>
           <DocumentLink
-            docName={"onboarding.privacy_policy"}
+            docName={t("onboarding.privacy_policy")}
             url={configuration.healthAuthorityPrivacyPolicyUrl}
           />
           <DocumentLink
-            docName={"onboarding.eula"}
+            docName={t("onboarding.eula")}
             url={configuration.healthAuthorityEulaUrl}
           />
           <View style={style.footerContainer}>
@@ -116,7 +116,7 @@ const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
           {t("onboarding.please_read_the")}
         </GlobalText>
         <Text> </Text>
-        <GlobalText style={style.eulaLink}>{t(docName)}</GlobalText>
+        <GlobalText style={style.eulaLink}>{docName}</GlobalText>
       </View>
       <SvgXml
         xml={Icons.Arrow}

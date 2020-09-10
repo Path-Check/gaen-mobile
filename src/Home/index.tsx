@@ -60,8 +60,8 @@ const Home: FunctionComponent = () => {
   const topIcon = appIsActive ? Icons.CheckInCircle : Icons.XInCircle
   const topIconFill = appIsActive ? Colors.success100 : Colors.danger75
   const topIconAccessibilityLabel = appIsActive
-    ? t("status_icon_active_label")
-    : t("status_icon_inactive_label")
+    ? t("home.status_icon_active_label")
+    : t("home.status_icon_inactive_label")
   const headerText = appIsActive
     ? t("home.bluetooth.tracing_on_header")
     : t("home.bluetooth.tracing_off_header")
