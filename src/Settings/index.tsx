@@ -21,6 +21,7 @@ import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 type SettingsListItem = {
   label: string
   onPress: () => void
+  icon: string
 }
 
 const Settings: FunctionComponent = () => {
@@ -46,21 +47,30 @@ const Settings: FunctionComponent = () => {
   const About: SettingsListItem = {
     label: t("screen_titles.about"),
     onPress: () => navigation.navigate(SettingsScreens.About),
+    icon: Icons.Document,
   }
   const Legal: SettingsListItem = {
     label: t("screen_titles.legal"),
     onPress: () => navigation.navigate(SettingsScreens.Legal),
+    icon: Icons.Document,
   }
   const CallbackForm: SettingsListItem = {
     label: t("screen_titles.callback_form"),
     onPress: () => navigation.navigate(SettingsScreens.CallbackForm),
+    icon: Icons.Document,
   }
   const ReportAnIssue: SettingsListItem = {
     label: t("screen_titles.report_issue"),
     onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
+    icon: Icons.QuestionMark,
+  }
+  const HowTheAppWorks: SettingsListItem = {
+    label: t("screen_titles.how_the_app_works"),
+    onPress: () => {},
+    icon: Icons.RestartWithCheck,
   }
 
-  const listItems: SettingsListItem[] = [About, Legal]
+  const listItems: SettingsListItem[] = [About, Legal, HowTheAppWorks]
   if (displayCallbackForm) {
     listItems.push(CallbackForm)
   }
@@ -68,20 +78,26 @@ const Settings: FunctionComponent = () => {
     listItems.push(ReportAnIssue)
   }
 
-  interface ListItemProps {
-    label: string
-    onPress: () => void
-  }
-
-  const ListItem = ({ label, onPress }: ListItemProps) => {
+  const ListItem: FunctionComponent<SettingsListItem> = ({
+    label,
+    onPress,
+    icon,
+  }) => {
     return (
-      <View>
-        <TouchableOpacity onPress={onPress}>
-          <View style={style.listItem}>
-            <GlobalText style={style.listItemText}>{label}</GlobalText>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
+        <View style={[style.listItem, style.languageButtonContainer]}>
+          <SvgXml
+            fill={Colors.primary100}
+            xml={icon}
+            width={Iconography.small}
+            height={Iconography.small}
+            style={style.icon}
+            accessible
+            accessibilityLabel={label}
+          />
+          <GlobalText style={style.languageButtonText}>{label}</GlobalText>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -92,42 +108,27 @@ const Settings: FunctionComponent = () => {
   return (
     <ScrollView style={style.container}>
       <View style={style.section}>
-        <TouchableOpacity
+        <ListItem
+          label={languageName}
           onPress={handleOnPressSelectLanguage}
-          accessible
-          accessibilityLabel={t("more.select_language")}
-        >
-          <View style={[style.listItem, style.languageButtonContainer]}>
-            <SvgXml
-              xml={Icons.LanguagesIcon}
-              width={Iconography.small}
-              height={Iconography.small}
-              style={style.icon}
-              accessible
-              accessibilityLabel={t("label.language_icon")}
-            />
-            <GlobalText style={style.languageButtonText}>
-              {languageName}
-            </GlobalText>
-          </View>
-        </TouchableOpacity>
+          icon={Icons.LanguagesIcon}
+        />
       </View>
       <View style={style.section}>
-        {listItems.map(({ label, onPress }, idx) => {
+        {listItems.map(({ label, onPress, icon }, idx) => {
           const isLastItem = idx === listItems.length - 1
           return (
-            <>
-              <View key={label}>
-                <ListItem label={label} onPress={onPress} />
-              </View>
+            <View key={label}>
+              <ListItem icon={icon} label={label} onPress={onPress} />
               {!isLastItem && <ItemSeparator />}
-            </>
+            </View>
           )
         })}
       </View>
       {showDebugMenu && (
         <View style={style.section}>
           <ListItem
+            icon={Icons.Document}
             label="EN Debug Menu"
             onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
           />
@@ -160,9 +161,6 @@ const style = StyleSheet.create({
   listItem: {
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
-  },
-  listItemText: {
-    ...Typography.tappableListItem,
   },
   divider: {
     height: Outlines.hairline,
