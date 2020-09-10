@@ -43,17 +43,14 @@
   "common": {
     "alert": "경고",
     "back": "뒤로 가기",
-    "cancel": "취소",
     "close": "닫기",
     "continue": "계속",
     "disabled": "비활성화",
     "done": "완료",
-    "enable": "활성화",
     "enabled": "활성화",
     "maybe_later": "나중에",
     "next": "다음",
     "no_thanks": "아니오 괜찮습니다.",
-    "okay": "확인",
     "settings": "설정 열기",
     "skip": "건너 뛰기",
     "something_went_wrong": "문제가 발생했습니다.",
@@ -167,6 +164,7 @@
     "location_info_body_1": "노출 알림 기술은 블루투스 스캔을 사용하여 서로 가까이있는 장치를 파악합니다.  블루투스 스캔을 사용하려면 안드로이드 6.0 이상을 실행하는 모든 휴대폰은 노출 알림 시스템이 내장된 앱뿐만 아니라 모든 앱에 위치 설정을 켜야합니다.",
     "location_info_header": "위치",
     "location_info_subheader_1": "내 위치를 켜야하는 이유는 무엇입니까?",
+    "open_settings": "설정 열기",
     "proximity_tracing_info_body_1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_info_header": "근접 추적",
@@ -176,12 +174,10 @@
     "status_icon_inactive_label": "빨간색 원 안의 흰색 x"
   },
   "label": {
-    "activate_proximity_tracing": "근접 추적 활성화",
     "check": "체크 표시",
     "checked_checkbox": "체크된 확인란",
     "go_to_home_view": "홈으로 이동",
     "language_icon": "지구본 아이콘",
-    "launch_activate_location": "위치 활성화",
     "launch_enable_notif": "알림 활성화",
     "launch_get_started": "시작",
     "launch_screen1_header": "에 오신 것을 환영합니다.",
@@ -196,10 +192,7 @@
     "exposure": "노출",
     "exposure_history": "노출 이력",
     "home": "집",
-    "more": "더 많은",
-    "more_info": "더 많은 정보",
-    "report_issue": "문제 보고",
-    "self_assessment": "자체 평가"
+    "more_info": "더 많은 정보"
   },
   "onboarding": {
     "activation_header_title": "앱 설정",
@@ -237,8 +230,6 @@
       "subheader_4": "각 휴대 전화는 플래그가 부착된 ID 목록 찾기위해 서버에 주기적으로 접속하고 일치하는 항목을 찾습니다.",
       "subheader_5": "만약 {{applicationName}}이 플래그가 부착된 ID와 긍정적인 일치를 찾으면 알림을 받습니다."
     },
-    "proximity_tracing_alert_body": "귀하의 휴대 전화는 안전하게 임의ID를 수집하고 근처에 있는 다른 휴대 전화와 공유 할 수 있습니다. {{applicationName}} 앱은 이러한 ID를 사용하여 코로나19에 노출 된 경우 알림을 제공 할 수 있습니다. 노출된 날짜, 기간 및 신호 강도는 {{applicationName}}에서 공유됩니다.",
-    "proximity_tracing_alert_header": "\"{{applicationName}}\"에서 근접 추적을 사용 하시겠습니까?",
     "proximity_tracing_body1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_body2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 정보는 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_button": "근접 추적 활성화",

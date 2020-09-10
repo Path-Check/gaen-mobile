@@ -43,17 +43,14 @@
   "common": {
     "alert": "Alerto",
     "back": "Bumalik",
-    "cancel": "Kanselahin",
     "close": "Isara",
     "continue": "Ituloy",
     "disabled": "Hindi pinagana",
     "done": "Tapos",
-    "enable": "Paganahin",
     "enabled": "Pinagana",
     "maybe_later": "Baka Mamaya",
     "next": "Sa susunod",
     "no_thanks": "Salamat nalang",
-    "okay": "Okay",
     "settings": "Buksan ang Settings",
     "skip": "I-Skip o Laktawan",
     "something_went_wrong": "May maling nangyari",
@@ -167,6 +164,7 @@
     "location_info_body_1": "Gumagamit ang Teknolohiya ng Abiso sa Exposure ng pag-scan ng Bluetooth upang maunawaan kung anong mga aparato ang malapit sa isa't isa. Sa lahat ng mga teleponong nagpapatakbo ng Android 6.0 at mas bago, upang magamit ang pag-scan sa Bluetooth, kailangang i-on ang setting ng lokasyon ng aparato para sa lahat ng mga app, hindi lamang mga app na binuo gamit ang Exposure Notification System.",
     "location_info_header": "Lokasyon",
     "location_info_subheader_1": "Bakit ko kailangang i-on ang setting ng lokasyon ng aking telepono o device?",
+    "open_settings": "Buksan ang Settings",
     "proximity_tracing_info_body_1": "Kung ang mga smartphone na naka-install ang app ay naka-on o pinagagana, naka-enable ang Bluetooth, at malapit sa isa't isa sa loob ng takdang panahon, irirehistro ang engkwentrong ito sa iyong aparato.",
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_header": "Proximity Tracing",
@@ -176,12 +174,10 @@
     "status_icon_inactive_label": "Isang puting x sa isang pulang bilog"
   },
   "label": {
-    "activate_proximity_tracing": "Isaaktibo ang Proximity Tracing",
     "check": "Checkmark",
     "checked_checkbox": "Na-check na checkbox",
     "go_to_home_view": "Pumunta sa Home view",
     "language_icon": "Naka-outline na icon ng isang globo",
-    "launch_activate_location": "Isaaktibo ang Lokasyon",
     "launch_enable_notif": "Paganahin ang mga Abiso o Notifications",
     "launch_get_started": "Simulan",
     "launch_screen1_header": "Welcome sa",
@@ -196,10 +192,7 @@
     "exposure": "Pagkakalantad",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "home": "Home o Umpisa",
-    "more": "Higit pa",
-    "more_info": "Karagdagang Impormasyon",
-    "report_issue": "Ipagbigay-alam ang Isyu",
-    "self_assessment": "Pagsusuri sa Sarili"
+    "more_info": "Karagdagang Impormasyon"
   },
   "onboarding": {
     "activation_header_title": "Setup ng App",
@@ -237,8 +230,6 @@
       "subheader_4": "Ang bawat ng cellphone o device ay panay na nag-pi-ping o kumukunekta sa server para sa listahan ng mga naka-flag na mga ID at humahanap ng mga katugma",
       "subheader_5": "Aabisuhan ka kung ang {{applicationName}} ay makakahanap ng positibong katugma sa isang naka-flag na ID"
     },
-    "proximity_tracing_alert_body": "Ang iyong mobile device ay maaaring ligtas na mangolekta at magbahagi ng mga random na ID sa mga kalapit na aparato. {{applicationName}} app ay maaaring gumamit ng mga ID na ito upang maabisuhan ka sa posibleng pagkalantad sa COVID-19. Ang petsa, tagal, at lakas ng signal ng isang pagkakalantad ay ibabahagi sa {{applicationName}} .",
-    "proximity_tracing_alert_header": "Paganahin ang Proximity Tracing mula sa \" {{applicationName}}\"?",
     "proximity_tracing_body1": "Kung ang mga smartphone na naka-install ang app ay naka-on, naka-on ang Bluetooth, at malapit sa bawat isa sa isang tagal ng panahon, nakarehistro ang isang engkwentro sa iyong aparato.",
     "proximity_tracing_body2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_button": "Isaaktibo ang Proximity Tracing",

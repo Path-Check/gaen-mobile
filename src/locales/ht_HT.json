@@ -35,14 +35,11 @@
   "common": {
     "alert": "Alèt",
     "back": "Retounen",
-    "cancel": "Anile",
     "continue": "Kontinye",
     "disabled": "dezaktive",
     "done": "Fini",
-    "enable": "Aktive",
     "enabled": "Aktive",
     "next": "Fini",
-    "okay": "Oke",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse"
   },
@@ -86,10 +83,12 @@
       "report_positive_result": "Rapòte yon rezilta tès pozitif",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
+      "tracing_off_subheader_location": "Pèmèt Bluetooth, Pwoksimite Tracing, ak lokalizasyon pou  yo ka resevwa enfòmasyon sou expozosyon posib yo.",
       "tracing_on_header": "Aktif"
     },
     "fix": "Ranje pwoblèm ak {{technology}}",
     "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
+    "open_settings": "Louvri tablodbò",
     "proximity_tracing_info_header": "Trasaj Pwoksimite ",
     "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
@@ -107,10 +106,7 @@
     "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
-    "more": "Plis",
-    "more_info": "Plis enfòmasyon",
-    "report_issue": "Rapòte yon pwoblèm",
-    "self_assessment": "Sante"
+    "more_info": "Plis enfòmasyon"
   },
   "onboarding": {
     "location_header": "Aktive lokalizasyon",
@@ -121,7 +117,6 @@
     "protect_privacy": {
       "header": "Ki jan nou pwoteje vi prive ou"
     },
-    "proximity_tracing_alert_header": "Aktive Trasaj Pwoksimite Tracing soti apati \"[1 $ s: aplikasyonName]\"?",
     "screen_5_button": "Kòmanse",
     "screen1_button": "kijan sa mache?",
     "screen1_header": "Ansanm, nou ka ralanti pwopagasyon COVID-19.",

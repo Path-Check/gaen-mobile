@@ -32,10 +32,8 @@
     "start_title": "Rispondi alle domande sui sintomi e sull'anamnesi per sapere cosa in caso di COVID-19"
   },
   "common": {
-    "cancel": "Annulla",
     "continue": "Continua",
     "done": "Fatto",
-    "enable": "Attiva",
     "next": "Fatto",
     "something_went_wrong": "Si è verificato un errore",
     "start": "Inizio"
@@ -70,9 +68,7 @@
   "navigation": {
     "exposure_history": "Cronologia delle esposizioni",
     "home": "Home",
-    "more": "Altro",
-    "more_info": "Ulteriori informazioni",
-    "self_assessment": "Salute"
+    "more_info": "Ulteriori informazioni"
   },
   "onboarding": {
     "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",

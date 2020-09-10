@@ -23,10 +23,8 @@
     "start_title": "Odpowiedz na pytania dotyczące objawów i historii medycznej, aby dowiedzieć się, co dalej robić z COVID-19"
   },
   "common": {
-    "cancel": "Anuluj",
     "continue": "Dalej",
     "done": "Gotowe",
-    "enable": "Włącz",
     "next": "Dalej",
     "something_went_wrong": "Coś poszło nie tak",
     "start": "Start"
@@ -49,7 +47,8 @@
       "all_services_on_subheader": "Powiadomienia o narażeniu są włączone",
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
       "tracing_off_subheader": "Włącz powiadomienia o narażeniu, aby otrzymywać informacje o możliwych ekspozycjach"
-    }
+    },
+    "open_settings": "Otwórz ustawienia"
   },
   "label": {
     "launch_enable_notif": "Włącz powiadomienia",
@@ -59,9 +58,7 @@
   },
   "navigation": {
     "exposure_history": "Historia Ekspozycji",
-    "more": "Więcej",
-    "more_info": "Więcej informacji",
-    "self_assessment": "Zdrowie"
+    "more_info": "Więcej informacji"
   },
   "onboarding": {
     "privacy_policy": "Polityka prywatności",
