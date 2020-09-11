@@ -6,12 +6,14 @@ import SplashScreen from "react-native-splash-screen"
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
 import { ExposureProvider } from "./src/ExposureContext"
-import { OnboardingProvider } from "./src/OnboardingContext"
+import {
+  OnboardingProvider,
+  determineIsOnboardingComplete,
+} from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
 import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
-import { StorageUtils } from "./src/utils"
 import Logger from "./src/logger"
 
 Logger.start()
@@ -19,10 +21,6 @@ Logger.start()
 const App: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isOnboardingComplete, setIsOnboardingComplete] = useState(true)
-
-  const determineIsOnboardingComplete = async (): Promise<boolean> => {
-    return await StorageUtils.getIsOnboardingComplete()
-  }
 
   useEffect(() => {
     const locales = env.SUPPORTED_LOCALES?.split(",") || []

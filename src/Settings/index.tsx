@@ -51,38 +51,48 @@ const Settings: FunctionComponent = () => {
     navigation.navigate(Stacks.Modal, { screen: ModalScreens.OnboardingReview })
   }
 
-  const About: SettingsListItem = {
+  const selectLanguage: SettingsListItem = {
+    label: languageName,
+    onPress: handleOnPressSelectLanguage,
+    icon: Icons.LanguagesIcon,
+  }
+  const about: SettingsListItem = {
     label: t("screen_titles.about"),
     onPress: () => navigation.navigate(SettingsScreens.About),
     icon: Icons.Document,
   }
-  const Legal: SettingsListItem = {
+  const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
     onPress: () => navigation.navigate(SettingsScreens.Legal),
     icon: Icons.Document,
   }
-  const CallbackForm: SettingsListItem = {
+  const callbackForm: SettingsListItem = {
     label: t("screen_titles.callback_form"),
     onPress: () => navigation.navigate(SettingsScreens.CallbackForm),
     icon: Icons.Document,
   }
-  const ReportAnIssue: SettingsListItem = {
+  const reportAnIssue: SettingsListItem = {
     label: t("screen_titles.report_issue"),
     onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
     icon: Icons.QuestionMark,
   }
-  const HowTheAppWorks: SettingsListItem = {
+  const howTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+  const debugMenu: SettingsListItem = {
+    label: "EN Debug Menu",
+    onPress: () => navigation.navigate(SettingsScreens.ENDebugMenu),
+    icon: Icons.Document,
+  }
 
-  const listItems: SettingsListItem[] = [About, Legal, HowTheAppWorks]
+  const middleListItems: SettingsListItem[] = [about, legal, howTheAppWorks]
   if (displayCallbackForm) {
-    listItems.push(CallbackForm)
+    middleListItems.push(callbackForm)
   }
   if (displayReportAnIssue) {
-    listItems.push(ReportAnIssue)
+    middleListItems.push(reportAnIssue)
   }
 
   const ListItem: FunctionComponent<SettingsListItem> = ({
@@ -116,14 +126,14 @@ const Settings: FunctionComponent = () => {
     <ScrollView style={style.container}>
       <View style={style.section}>
         <ListItem
-          label={languageName}
-          onPress={handleOnPressSelectLanguage}
-          icon={Icons.LanguagesIcon}
+          label={selectLanguage.label}
+          onPress={selectLanguage.onPress}
+          icon={selectLanguage.icon}
         />
       </View>
       <View style={style.section}>
-        {listItems.map(({ label, onPress, icon }, idx) => {
-          const isLastItem = idx === listItems.length - 1
+        {middleListItems.map(({ label, onPress, icon }, idx) => {
+          const isLastItem = idx === middleListItems.length - 1
           return (
             <View key={label}>
               <ListItem icon={icon} label={label} onPress={onPress} />
@@ -135,9 +145,9 @@ const Settings: FunctionComponent = () => {
       {showDebugMenu && (
         <View style={style.section}>
           <ListItem
-            icon={Icons.Document}
-            label="EN Debug Menu"
-            onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
+            label={debugMenu.label}
+            onPress={debugMenu.onPress}
+            icon={debugMenu.icon}
           />
         </View>
       )}

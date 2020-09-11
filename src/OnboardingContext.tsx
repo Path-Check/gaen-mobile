@@ -8,7 +8,7 @@ import React, {
 import { StorageUtils } from "./utils"
 import { Stack, Stacks } from "./navigation"
 
-export const onboardingHasBeenCompleted = async (): Promise<boolean> => {
+export const determineIsOnboardingComplete = async (): Promise<boolean> => {
   return await StorageUtils.getIsOnboardingComplete()
 }
 
