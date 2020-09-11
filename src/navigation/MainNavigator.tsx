@@ -2,41 +2,23 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
-  StackNavigationOptions,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { OtherScreens, ExposureHistoryScreens, Stacks } from "./index"
+import { OtherScreens, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
 import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
-import MoreInfo from "../ExposureHistory/MoreInfo"
 import Welcome from "../Welcome"
-import ExposureDetail from "../ExposureHistory/ExposureDetail"
-
-import { Headers, Colors } from "../styles"
 
 const Stack = createStackNavigator()
 
 const defaultScreenOptions = {
   headerShown: false,
-}
-
-const headerScreenOptions: StackNavigationOptions = {
-  headerStyle: {
-    ...Headers.headerStyle,
-  },
-  headerTitleStyle: {
-    ...Headers.headerTitleStyle,
-  },
-  headerBackTitleVisible: false,
-  headerTintColor: Colors.headerText,
-  headerTitleAlign: "center",
 }
 
 const settingsStackTransitionPreset = Platform.select({
@@ -45,7 +27,6 @@ const settingsStackTransitionPreset = Platform.select({
 })
 
 const MainNavigator: FunctionComponent = () => {
-  const { t } = useTranslation()
   const { isOnboardingComplete } = useOnboardingContext()
 
   return (
@@ -64,22 +45,6 @@ const MainNavigator: FunctionComponent = () => {
               options={{
                 ...settingsStackTransitionPreset,
                 headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={ExposureHistoryScreens.MoreInfo}
-              component={MoreInfo}
-              options={{
-                ...headerScreenOptions,
-                title: t("navigation.more_info"),
-              }}
-            />
-            <Stack.Screen
-              name={ExposureHistoryScreens.ExposureDetail}
-              component={ExposureDetail}
-              options={{
-                ...headerScreenOptions,
-                title: t("navigation.exposure"),
               }}
             />
           </>
