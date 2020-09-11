@@ -12,7 +12,6 @@ import { Images } from "../assets"
 
 type OnboardingScreenContent = {
   name: Screen
-  screenNumber: number
   image: ImageSourcePropType
   imageLabel: string
   header: string
@@ -28,7 +27,6 @@ const useOnboardingData = (
 
   const introduction: OnboardingScreenContent = {
     name: Screens.Introduction,
-    screenNumber: 1,
     image: Images.PeopleHighFiving,
     imageLabel: t("onboarding.screen1_image_label"),
     header: t("onboarding.screen1_header"),
@@ -38,7 +36,6 @@ const useOnboardingData = (
   }
   const phoneRemembersDevices: OnboardingScreenContent = {
     name: Screens.PhoneRemembersDevices,
-    screenNumber: 2,
     image: Images.PeopleOnPhones,
     imageLabel: t("onboarding.screen2_image_label"),
     header: t("onboarding.screen2_header"),
@@ -47,7 +44,6 @@ const useOnboardingData = (
   }
   const personalPrivacy: OnboardingScreenContent = {
     name: Screens.PersonalPrivacy,
-    screenNumber: 3,
     image: Images.PersonWithLockedPhone,
     imageLabel: t("onboarding.screen3_image_label"),
     header: t("onboarding.screen3_header"),
@@ -56,7 +52,6 @@ const useOnboardingData = (
   }
   const getNotified: OnboardingScreenContent = {
     name: Screens.GetNotified,
-    screenNumber: 4,
     image: Images.PersonGettingNotification,
     imageLabel: t("onboarding.screen4_image_label"),
     header: t("onboarding.screen4_header"),
@@ -65,7 +60,6 @@ const useOnboardingData = (
   }
   const valueProposition: OnboardingScreenContent = {
     name: Screens.ValueProposition,
-    screenNumber: 5,
     image: Images.PersonAndHealthExpert,
     imageLabel: t("onboarding.screen5_image_label"),
     header: t("onboarding.screen5_header"),

@@ -17,7 +17,6 @@ import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
-import { useOnboardingContext } from "../OnboardingContext"
 
 type SettingsListItem = {
   label: string
@@ -28,7 +27,6 @@ type SettingsListItem = {
 const Settings: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const navigation = useNavigation()
-  const { updateDestinationAfterComplete } = useOnboardingContext()
   const {
     t,
     i18n: { language: localeCode },
@@ -47,7 +45,6 @@ const Settings: FunctionComponent = () => {
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    updateDestinationAfterComplete(Stacks.Settings)
     navigation.navigate(Stacks.Modal, { screen: ModalScreens.OnboardingReview })
   }
 

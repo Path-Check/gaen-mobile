@@ -34,22 +34,44 @@ const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
   return (
     <Stack.Navigator screenOptions={onboardingScreenOptions}>
       <Stack.Screen name={Screens.Welcome} component={Welcome} />
-      {onboardingScreens.map((onboardingScreenContent) => {
-        return (
-          <Stack.Screen
-            key={onboardingScreenContent.header}
-            name={onboardingScreenContent.name}
-          >
-            {(props) => (
-              <OnboardingScreen
-                {...props}
-                onboardingScreenContent={onboardingScreenContent}
-                destinationOnSkip={destinationOnSkip}
-              />
-            )}
-          </Stack.Screen>
-        )
-      })}
+      {onboardingScreens.map(
+        (
+          {
+            name,
+            image,
+            imageLabel,
+            header,
+            primaryButtonLabel,
+            primaryButtonOnPress,
+          },
+          idx,
+        ) => {
+          const screenNumber = idx + 1
+          const onboardingScreenContent = {
+            screenNumber,
+            name,
+            image,
+            imageLabel,
+            header,
+            primaryButtonLabel,
+            primaryButtonOnPress,
+          }
+          return (
+            <Stack.Screen
+              key={onboardingScreenContent.header}
+              name={onboardingScreenContent.name}
+            >
+              {(props) => (
+                <OnboardingScreen
+                  {...props}
+                  onboardingScreenContent={onboardingScreenContent}
+                  destinationOnSkip={destinationOnSkip}
+                />
+              )}
+            </Stack.Screen>
+          )
+        },
+      )}
     </Stack.Navigator>
   )
 }
