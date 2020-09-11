@@ -44,14 +44,7 @@ interface OnboardingScreenProps {
 }
 
 const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
-  onboardingScreenContent: {
-    screenNumber,
-    image,
-    imageLabel,
-    header,
-    primaryButtonLabel,
-    primaryButtonOnPress,
-  },
+  onboardingScreenContent,
   destinationOnSkip,
 }: OnboardingScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -108,19 +101,21 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
         >
           <View>
             <Image
-              source={image}
-              accessibilityLabel={imageLabel}
+              source={onboardingScreenContent.image}
+              accessibilityLabel={onboardingScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots screenNumber={screenNumber} />
-            <GlobalText style={style.headerText}>{header}</GlobalText>
+            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
+            <GlobalText style={style.headerText}>
+              {onboardingScreenContent.header}
+            </GlobalText>
           </View>
           <View style={style.nextButtonContainer}>
             <Button
-              label={primaryButtonLabel}
-              onPress={primaryButtonOnPress}
+              label={onboardingScreenContent.primaryButtonLabel}
+              onPress={onboardingScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
           </View>
