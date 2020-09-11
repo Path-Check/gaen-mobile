@@ -11,7 +11,6 @@ const Stack = createStackNavigator()
 
 interface HowItWorksStackProps {
   destinationOnSkip: DestinationStack
-  displayWelcomeScreen?: boolean
 }
 
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
