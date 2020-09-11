@@ -245,14 +245,11 @@ class IntegrationTests: XCTestCase {
     XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 0)
 
     let exposure = Exposure(id: UUID().uuidString,
-                            date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000,
-                            duration: TimeInterval(Int.random(in: 1...10) * 60 * 5 * 1000),
-                            totalRiskScore: .random(in: 1...8),
-                            transmissionRiskLevel: .random(in: 0...7))
+                            date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000)
     exposureManager.finish(.success([exposure]),
-                                  processedFileCount: 4,
-                                  lastProcessedUrlPath: .default,
-                                  progress: Progress()) { _ in }
+                           processedFileCount: 4,
+                           lastProcessedUrlPath: .default,
+                           progress: Progress()) { _ in }
     XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 1)
   }
 
