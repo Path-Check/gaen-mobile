@@ -92,6 +92,7 @@ const MainNavigator: FunctionComponent = () => {
                 <OnboardingStack
                   {...props}
                   destinationOnSkip={Stacks.Activation}
+                  displayWelcomeScreen
                 />
               )}
             </Stack.Screen>

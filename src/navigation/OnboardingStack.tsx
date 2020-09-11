@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from "@react-navigation/stack"
+import { createStackNavigator } from "@react-navigation/stack"
 
 import {
   OnboardingScreen as Screen,
@@ -21,16 +18,14 @@ type OnboardingStackParams = {
 
 const Stack = createStackNavigator<OnboardingStackParams>()
 
-const onboardingScreenOptions: StackNavigationOptions = {
-  headerShown: false,
-}
-
 interface OnboardingStackProps {
   destinationOnSkip: DestinationStack
+  displayWelcomeScreen?: boolean
 }
 
 const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
   destinationOnSkip,
+  displayWelcomeScreen,
 }) => {
   const onboardingScreens = useOnboardingData(destinationOnSkip)
 
@@ -57,8 +52,10 @@ const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
   }
 
   return (
-    <Stack.Navigator screenOptions={onboardingScreenOptions}>
-      <Stack.Screen name={Screens.Welcome} component={Welcome} />
+    <Stack.Navigator headerMode="none">
+      {displayWelcomeScreen && (
+        <Stack.Screen name={Screens.Welcome} component={Welcome} />
+      )}
       {onboardingScreens.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
