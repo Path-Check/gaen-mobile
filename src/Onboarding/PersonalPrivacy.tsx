@@ -11,18 +11,9 @@ const PersonalPrivacy: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const onboardingScreenContent = {
-    screenNumber: 3,
-    image: Images.PersonWithLockedPhone,
-    imageLabel: t("onboarding.screen3_image_label"),
-    header: t("onboarding.screen3_header"),
-    primaryButtonLabel: t("onboarding.screen3_button"),
-  }
+  const onboardingScreenContent = {}
 
-  const onboardingScreenActions = {
-    primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.GetNotified),
-  }
+  const onboardingScreenActions = {}
 
   return (
     <OnboardingScreen

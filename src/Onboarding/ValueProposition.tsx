@@ -21,8 +21,6 @@ const ValueProposition: FunctionComponent = () => {
   }
 
   const onboardingScreenActions = {
-    primaryButtonOnPress: () => {
-      return navigation.navigate(destinationAfterComplete)
     },
   }
 

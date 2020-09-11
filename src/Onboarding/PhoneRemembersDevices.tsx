@@ -11,18 +11,9 @@ const PhoneRemembersDevices: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const onboardingScreenContent = {
-    screenNumber: 2,
-    image: Images.PeopleOnPhones,
-    imageLabel: t("onboarding.screen2_image_label"),
-    header: t("onboarding.screen2_header"),
-    primaryButtonLabel: t("onboarding.screen2_button"),
-  }
+  const onboardingScreenContent = {}
 
-  const onboardingScreenActions = {
-    primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.PersonalPrivacy),
-  }
+  const onboardingScreenActions = {}
 
   return (
     <OnboardingScreen

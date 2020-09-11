@@ -16,10 +16,15 @@ import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import { ModalScreens, Stacks, useStatusBarEffect } from "../navigation"
+import {
+  OnboardingScreens,
+  ModalScreens,
+  Stacks,
+  useStatusBarEffect,
+} from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
-import { Icons } from "../assets"
+import { Images, Icons } from "../assets"
 import {
   Layout,
   Outlines,
@@ -36,20 +41,22 @@ type OnboardingScreenContent = {
   imageLabel: string
   header: string
   primaryButtonLabel: string
-}
-
-type OnboardingScreenActions = {
   primaryButtonOnPress: () => void
 }
 
 interface OnboardingScreenProps {
   onboardingScreenContent: OnboardingScreenContent
-  onboardingScreenActions: OnboardingScreenActions
 }
 
 const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
-  onboardingScreenContent,
-  onboardingScreenActions,
+  onboardingScreenContent: {
+    screenNumber,
+    image,
+    imageLabel,
+    header,
+    primaryButtonLabel,
+    primaryButtonOnPress,
+  },
 }: OnboardingScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
@@ -104,21 +111,19 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
         >
           <View>
             <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
+              source={image}
+              accessibilityLabel={imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
-            <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
-            </GlobalText>
+            <PositionDots screenNumber={screenNumber} />
+            <GlobalText style={style.headerText}>{header}</GlobalText>
           </View>
           <View style={style.nextButtonContainer}>
             <Button
-              label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenActions.primaryButtonOnPress}
+              label={primaryButtonLabel}
+              onPress={primaryButtonOnPress}
               hasRightArrow
             />
           </View>

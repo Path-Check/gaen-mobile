@@ -11,18 +11,9 @@ const GetNotified: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const onboardingScreenContent = {
-    screenNumber: 4,
-    image: Images.PersonGettingNotification,
-    imageLabel: t("onboarding.screen4_image_label"),
-    header: t("onboarding.screen4_header"),
-    primaryButtonLabel: t("onboarding.screen4_button"),
-  }
+  const onboardingScreenContent = {}
 
-  const onboardingScreenActions = {
-    primaryButtonOnPress: () =>
-      navigation.navigate(OnboardingScreens.ValueProposition),
-  }
+  const onboardingScreenActions = {}
 
   return (
     <OnboardingScreen
