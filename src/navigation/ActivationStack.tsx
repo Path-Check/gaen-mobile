@@ -81,7 +81,7 @@ const ActivationStack: FunctionComponent = () => {
 
   const CloseButton = () => {
     const handleOnPressClose = () => {
-      navigation.navigate(Stacks.Onboarding)
+      navigation.navigate(Stacks.HowItWorks)
     }
 
     return (

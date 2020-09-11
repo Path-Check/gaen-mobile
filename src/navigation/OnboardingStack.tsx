@@ -1,49 +1,41 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
-import {
-  OnboardingScreen as Screen,
-  OnboardingScreens as Screens,
-  Stack as DestinationStack,
-} from "./index"
-import Welcome from "../Onboarding/Welcome"
-import OnboardingScreen from "../Onboarding/OnboardingScreen"
-import useOnboardingData, {
-  OnboardingScreenContent,
-} from "../Onboarding/useOnboardingData"
+import { OtherScreens, Stack as DestinationStack } from "./index"
+import Welcome from "../Welcome"
+import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
+import useHowItWorksData, {
+  HowItWorksScreenDatum,
+} from "../HowItWorks/useHowItWorksData"
 
-type OnboardingStackParams = {
-  [key in Screen]: undefined
-}
+const Stack = createStackNavigator()
 
-const Stack = createStackNavigator<OnboardingStackParams>()
-
-interface OnboardingStackProps {
+interface HowItWorksStackProps {
   destinationOnSkip: DestinationStack
   displayWelcomeScreen?: boolean
 }
 
-const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
+const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   destinationOnSkip,
   displayWelcomeScreen,
 }) => {
-  const onboardingScreens = useOnboardingData(destinationOnSkip)
+  const howItWorksScreens = useHowItWorksData(destinationOnSkip)
 
-  const toStackScreen = (data: OnboardingScreenContent, idx: number) => {
+  const toStackScreen = (datum: HowItWorksScreenDatum, idx: number) => {
     const screenNumber = idx + 1
-    const onboardingScreenContent = {
+    const howItWorksScreenDisplayDatum = {
       screenNumber,
-      ...data,
+      ...datum,
     }
     return (
       <Stack.Screen
-        key={onboardingScreenContent.header}
-        name={onboardingScreenContent.name}
+        key={howItWorksScreenDisplayDatum.header}
+        name={howItWorksScreenDisplayDatum.name}
       >
         {(props) => (
-          <OnboardingScreen
+          <HowItWorksScreen
             {...props}
-            onboardingScreenContent={onboardingScreenContent}
+            howItWorksScreenContent={howItWorksScreenDisplayDatum}
             destinationOnSkip={destinationOnSkip}
           />
         )}
@@ -54,13 +46,13 @@ const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
   return (
     <Stack.Navigator headerMode="none">
       {displayWelcomeScreen && (
-        <Stack.Screen name={Screens.Welcome} component={Welcome} />
+        <Stack.Screen name={OtherScreens.Welcome} component={Welcome} />
       )}
-      {onboardingScreens.map((data, idx) => toStackScreen(data, idx))}
+      {howItWorksScreens.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
 }
 
-const MemoizedOnboardingStack = React.memo(OnboardingStack)
+const MemoizedHowItWorksStack = React.memo(HowItWorksStack)
 
-export default MemoizedOnboardingStack
+export default MemoizedHowItWorksStack

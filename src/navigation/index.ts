@@ -46,18 +46,16 @@ export const HomeScreens: {
   LocationInfo: "LocationInfo",
 }
 
-export type OnboardingScreen =
-  | "Welcome"
+export type HowItWorksScreen =
   | "Introduction"
   | "PhoneRemembersDevices"
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
 
-export const OnboardingScreens: {
-  [key in OnboardingScreen]: OnboardingScreen
+export const HowItWorksScreens: {
+  [key in HowItWorksScreen]: HowItWorksScreen
 } = {
-  Welcome: "Welcome",
   Introduction: "Introduction",
   PhoneRemembersDevices: "PhoneRemembersDevices",
   PersonalPrivacy: "PersonalPrivacy",
@@ -96,7 +94,7 @@ export type ModalScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
   | "AffectedUserStack"
-  | "OnboardingReview"
+  | "HowItWorksReview"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -104,7 +102,7 @@ export const ModalScreens: {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
   AffectedUserStack: "AffectedUserStack",
-  OnboardingReview: "OnboardingReview",
+  HowItWorksReview: "HowItWorksReview",
 }
 
 export type SettingsScreen =
@@ -158,23 +156,10 @@ export const AffectedUserFlowScreens: {
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
 }
-export type Screen =
-  | OnboardingScreen
-  | ExposureHistoryScreen
-  | SettingsScreen
-  | SelfAssessmentScreen
-  | AffectedUserFlowScreen
-  | HomeScreen
-  | "LanguageSelection"
+export type OtherScreen = "Welcome"
 
-export const Screens: { [key in Screen]: Screen } = {
-  ...OnboardingScreens,
-  ...ExposureHistoryScreens,
-  ...SettingsScreens,
-  ...SelfAssessmentScreens,
-  ...AffectedUserFlowScreens,
-  ...HomeScreens,
-  LanguageSelection: "LanguageSelection",
+export const OtherScreens: { [key in OtherScreen]: OtherScreen } = {
+  Welcome: "Welcome",
 }
 
 export type Stack =
@@ -183,9 +168,10 @@ export type Stack =
   | "Connect"
   | "ExposureHistoryFlow"
   | "Modal"
-  | "Onboarding"
-  | "OnboardingReview"
+  | "HowItWorks"
+  | "HowItWorksReview"
   | "Settings"
+  | "Home"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -193,9 +179,10 @@ export const Stacks: { [key in Stack]: Stack } = {
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",
-  Onboarding: "Onboarding",
-  OnboardingReview: "OnboardingReview",
+  HowItWorks: "HowItWorks",
+  HowItWorksReview: "HowItWorksReview",
   Settings: "Settings",
+  Home: "Home",
 }
 
 export const useStatusBarEffect = (

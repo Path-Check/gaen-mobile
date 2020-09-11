@@ -3,14 +3,14 @@ import { ImageSourcePropType } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import {
-  OnboardingScreen as Screen,
-  OnboardingScreens as Screens,
+  HowItWorksScreen as Screen,
+  HowItWorksScreens as Screens,
   Stack,
 } from "../navigation/index"
 
 import { Images } from "../assets"
 
-export type OnboardingScreenContent = {
+export type HowItWorksScreenDatum = {
   name: Screen
   image: ImageSourcePropType
   imageLabel: string
@@ -21,11 +21,11 @@ export type OnboardingScreenContent = {
 
 const useOnboardingData = (
   destinationAfterComplete: Stack,
-): OnboardingScreenContent[] => {
+): HowItWorksScreenDatum[] => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const introduction: OnboardingScreenContent = {
+  const introduction: HowItWorksScreenDatum = {
     name: Screens.Introduction,
     image: Images.PeopleHighFiving,
     imageLabel: t("onboarding.screen1_image_label"),
@@ -34,7 +34,7 @@ const useOnboardingData = (
     primaryButtonOnPress: () =>
       navigation.navigate(Screens.PhoneRemembersDevices),
   }
-  const phoneRemembersDevices: OnboardingScreenContent = {
+  const phoneRemembersDevices: HowItWorksScreenDatum = {
     name: Screens.PhoneRemembersDevices,
     image: Images.PeopleOnPhones,
     imageLabel: t("onboarding.screen2_image_label"),
@@ -42,7 +42,7 @@ const useOnboardingData = (
     primaryButtonLabel: t("onboarding.screen2_button"),
     primaryButtonOnPress: () => navigation.navigate(Screens.PersonalPrivacy),
   }
-  const personalPrivacy: OnboardingScreenContent = {
+  const personalPrivacy: HowItWorksScreenDatum = {
     name: Screens.PersonalPrivacy,
     image: Images.PersonWithLockedPhone,
     imageLabel: t("onboarding.screen3_image_label"),
@@ -50,7 +50,7 @@ const useOnboardingData = (
     primaryButtonLabel: t("onboarding.screen3_button"),
     primaryButtonOnPress: () => navigation.navigate(Screens.GetNotified),
   }
-  const getNotified: OnboardingScreenContent = {
+  const getNotified: HowItWorksScreenDatum = {
     name: Screens.GetNotified,
     image: Images.PersonGettingNotification,
     imageLabel: t("onboarding.screen4_image_label"),
@@ -58,7 +58,7 @@ const useOnboardingData = (
     primaryButtonLabel: t("onboarding.screen4_button"),
     primaryButtonOnPress: () => navigation.navigate(Screens.ValueProposition),
   }
-  const valueProposition: OnboardingScreenContent = {
+  const valueProposition: HowItWorksScreenDatum = {
     name: Screens.ValueProposition,
     image: Images.PersonAndHealthExpert,
     imageLabel: t("onboarding.screen5_image_label"),
@@ -67,7 +67,7 @@ const useOnboardingData = (
     primaryButtonOnPress: () => navigation.navigate(destinationAfterComplete),
   }
 
-  const onboardingScreens: OnboardingScreenContent[] = [
+  const howItWorksScreensScreensData: HowItWorksScreenDatum[] = [
     introduction,
     phoneRemembersDevices,
     personalPrivacy,
@@ -75,7 +75,7 @@ const useOnboardingData = (
     valueProposition,
   ]
 
-  return onboardingScreens
+  return howItWorksScreensScreensData
 }
 
 export default useOnboardingData

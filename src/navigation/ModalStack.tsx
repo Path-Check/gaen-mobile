@@ -32,7 +32,7 @@ const ModalStack: FunctionComponent = () => {
           gestureEnabled: false,
         }}
       />
-      <Stack.Screen name={Stacks.OnboardingReview}>
+      <Stack.Screen name={Stacks.HowItWorksReview}>
         {(props) => (
           <OnboardingStack {...props} destinationOnSkip={Stacks.Settings} />
         )}

@@ -16,7 +16,6 @@ import { GlobalText, Button } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowScreens,
-  Screens,
   ModalScreens,
   Stacks,
 } from "../../navigation"
@@ -145,7 +144,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   const handleOnPressProtectPrivacy = () => {

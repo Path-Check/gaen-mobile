@@ -29,7 +29,7 @@ import {
   Iconography,
 } from "../styles"
 
-type OnboardingScreenContent = {
+type HowItWorksScreenContent = {
   screenNumber: number
   image: ImageSourcePropType
   imageLabel: string
@@ -38,15 +38,15 @@ type OnboardingScreenContent = {
   primaryButtonOnPress: () => void
 }
 
-interface OnboardingScreenProps {
-  onboardingScreenContent: OnboardingScreenContent
+interface HowItWorksScreenProps {
+  howItWorksScreenContent: HowItWorksScreenContent
   destinationOnSkip: Stack
 }
 
-const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
-  onboardingScreenContent,
+const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
+  howItWorksScreenContent,
   destinationOnSkip,
-}: OnboardingScreenProps) => {
+}: HowItWorksScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
   const {
@@ -101,21 +101,21 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
         >
           <View>
             <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
+              source={howItWorksScreenContent.image}
+              accessibilityLabel={howItWorksScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
+            <PositionDots screenNumber={howItWorksScreenContent.screenNumber} />
             <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
+              {howItWorksScreenContent.header}
             </GlobalText>
           </View>
           <View style={style.nextButtonContainer}>
             <Button
-              label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenContent.primaryButtonOnPress}
+              label={howItWorksScreenContent.primaryButtonLabel}
+              onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
           </View>
@@ -125,7 +125,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
           onPress={handleOnPressProtectPrivacy}
         >
           <GlobalText style={style.bottomButtonText}>
-            {t("onboarding.protect_privacy_button")}
+            {t("howItWorks.protect_privacy_button")}
           </GlobalText>
           <SvgXml
             xml={Icons.ChevronUp}
@@ -272,6 +272,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-const MemoizedOnboardingScreen = React.memo(OnboardingScreen)
+const MemoizedHowItWorksScreen = React.memo(HowItWorksScreen)
 
-export default MemoizedOnboardingScreen
+export default MemoizedHowItWorksScreen

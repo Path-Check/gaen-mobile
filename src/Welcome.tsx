@@ -10,27 +10,17 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
 
-import {
-  StatusBar,
-  GlobalText,
-  Button,
-  GradientBackground,
-} from "../components"
-import { getLocalNames } from "../locales/languages"
-import { useApplicationName } from "../hooks/useApplicationInfo"
-import {
-  ModalScreens,
-  OnboardingScreens,
-  useStatusBarEffect,
-  Stacks,
-} from "../navigation"
+import { StatusBar, GlobalText, Button, GradientBackground } from "./components"
+import { getLocalNames } from "./locales/languages"
+import { useApplicationName } from "./hooks/useApplicationInfo"
+import { ModalScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
-} from "../configuration/authorityCopy"
+} from "./configuration/authorityCopy"
 
-import { Images } from "../assets"
-import { Spacing, Colors, Typography, Outlines } from "../styles"
+import { Images } from "./assets"
+import { Spacing, Colors, Typography, Outlines } from "./styles"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -94,9 +84,7 @@ const Welcome: FunctionComponent = () => {
             </View>
             <Button
               label={t("label.launch_get_started")}
-              onPress={() =>
-                navigation.navigate(OnboardingScreens.Introduction)
-              }
+              onPress={() => navigation.navigate(Stacks.HowItWorks)}
               hasRightArrow
             />
           </View>

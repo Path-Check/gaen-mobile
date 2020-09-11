@@ -13,7 +13,7 @@ import OnboardingStack from "./OnboardingStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import { Screens, Stacks } from "./index"
+import { ExposureHistoryScreens, Stacks } from "./index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ModalStack from "./ModalStack"
@@ -66,7 +66,7 @@ const MainNavigator: FunctionComponent = () => {
               }}
             />
             <Stack.Screen
-              name={Screens.MoreInfo}
+              name={ExposureHistoryScreens.MoreInfo}
               component={MoreInfo}
               options={{
                 ...headerScreenOptions,
@@ -74,7 +74,7 @@ const MainNavigator: FunctionComponent = () => {
               }}
             />
             <Stack.Screen
-              name={Screens.ExposureDetail}
+              name={ExposureHistoryScreens.ExposureDetail}
               component={ExposureDetail}
               options={{
                 ...headerScreenOptions,
@@ -85,7 +85,7 @@ const MainNavigator: FunctionComponent = () => {
         ) : (
           <>
             <Stack.Screen
-              name={Stacks.Onboarding}
+              name={Stacks.HowItWorks}
               options={defaultScreenOptions}
             >
               {(props) => (

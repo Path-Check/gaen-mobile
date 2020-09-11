@@ -20,7 +20,7 @@ import ExposureList from "./ExposureList"
 import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
-import { Screens } from "../../navigation"
+import { ExposureHistoryScreens } from "../../navigation"
 import { Buttons, Spacing, Typography, Colors } from "../../styles"
 
 type Posix = number
@@ -42,7 +42,7 @@ const History: FunctionComponent<HistoryProps> = ({
   const previousExposuresRef = useRef<ExposureDatum[]>()
 
   const handleOnPressMoreInfo = () => {
-    navigation.navigate(Screens.MoreInfo)
+    navigation.navigate(ExposureHistoryScreens.MoreInfo)
   }
 
   const handleOnRefresh = () => {

@@ -18,7 +18,11 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { Screens, useStatusBarEffect } from "../../navigation"
+import {
+  Stacks,
+  useStatusBarEffect,
+  AffectedUserFlowScreens,
+} from "../../navigation"
 
 import { Icons } from "../../assets"
 import {
@@ -71,7 +75,7 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   const handleOnPressSubmit = async () => {
@@ -99,7 +103,9 @@ const CodeInputForm: FunctionComponent = () => {
           setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(Screens.AffectedUserPublishConsent)
+          navigation.navigate(
+            AffectedUserFlowScreens.AffectedUserPublishConsent,
+          )
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(

@@ -13,7 +13,7 @@ import {
 import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { NativeModule } from "../gaen"
-import { NavigationProp, Screens } from "../navigation"
+import { NavigationProp, SettingsScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
@@ -121,7 +121,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
               onPress={() => {
-                navigation.navigate(Screens.ENLocalDiagnosisKey)
+                navigation.navigate(SettingsScreens.ENLocalDiagnosisKey)
               }}
             />
             <DebugMenuListItem
@@ -139,7 +139,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
             <DebugMenuListItem
               label="Show Exposures"
               onPress={() => {
-                navigation.navigate(Screens.ExposureListDebugScreen)
+                navigation.navigate(SettingsScreens.ExposureListDebugScreen)
               }}
             />
             <DebugMenuListItem
