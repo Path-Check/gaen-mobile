@@ -10,7 +10,7 @@ import {
 
 import { Images } from "../assets"
 
-type OnboardingScreenContent = {
+export type OnboardingScreenContent = {
   name: Screen
   image: ImageSourcePropType
   imageLabel: string
