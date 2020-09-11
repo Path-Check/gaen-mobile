@@ -86,9 +86,15 @@ const MainNavigator: FunctionComponent = () => {
           <>
             <Stack.Screen
               name={Stacks.Onboarding}
-              component={OnboardingStack}
               options={defaultScreenOptions}
-            />
+            >
+              {(props) => (
+                <OnboardingStack
+                  {...props}
+                  destinationOnSkip={Stacks.Activation}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen
               name={Stacks.Activation}
               component={ActivationStack}

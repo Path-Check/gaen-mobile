@@ -16,15 +16,10 @@ import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import {
-  OnboardingScreens,
-  ModalScreens,
-  Stacks,
-  useStatusBarEffect,
-} from "../navigation"
+import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
-import { Images, Icons } from "../assets"
+import { Icons } from "../assets"
 import {
   Layout,
   Outlines,
@@ -33,7 +28,6 @@ import {
   Typography,
   Iconography,
 } from "../styles"
-import { useOnboardingContext } from "../OnboardingContext"
 
 type OnboardingScreenContent = {
   screenNumber: number
@@ -46,6 +40,7 @@ type OnboardingScreenContent = {
 
 interface OnboardingScreenProps {
   onboardingScreenContent: OnboardingScreenContent
+  destinationOnSkip: Stack
 }
 
 const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
@@ -57,10 +52,10 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
     primaryButtonLabel,
     primaryButtonOnPress,
   },
+  destinationOnSkip,
 }: OnboardingScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
-  const { destinationAfterComplete } = useOnboardingContext()
   const {
     t,
     i18n: { language: localeCode },
@@ -73,6 +68,10 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
     navigation.navigate(Stacks.Modal, {
       screen: ModalScreens.LanguageSelection,
     })
+  }
+
+  const handleOnPressSkip = () => {
+    navigation.navigate(destinationOnSkip)
   }
 
   const handleOnPressProtectPrivacy = () => {
@@ -96,9 +95,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             </GlobalText>
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(destinationAfterComplete)}
-        >
+        <TouchableOpacity onPress={handleOnPressSkip}>
           <GlobalText style={style.skipButtonText}>
             {t("common.skip")}
           </GlobalText>
@@ -280,4 +277,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-export default OnboardingScreen
+const MemoizedOnboardingScreen = React.memo(OnboardingScreen)
+
+export default MemoizedOnboardingScreen

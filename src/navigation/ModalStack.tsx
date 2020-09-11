@@ -18,6 +18,7 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={ModalScreens.LanguageSelection}
         component={LanguageSelection}
+        options={TransitionPresets.ModalTransition}
       />
       <Stack.Screen
         name={ModalScreens.ProtectPrivacy}
@@ -31,10 +32,11 @@ const ModalStack: FunctionComponent = () => {
           gestureEnabled: false,
         }}
       />
-      <Stack.Screen
-        name={Stacks.OnboardingReview}
-        component={OnboardingStack}
-      />
+      <Stack.Screen name={Stacks.OnboardingReview}>
+        {(props) => (
+          <OnboardingStack {...props} destinationOnSkip={Stacks.Settings} />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

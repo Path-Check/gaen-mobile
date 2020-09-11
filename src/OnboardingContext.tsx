@@ -6,7 +6,6 @@ import React, {
 } from "react"
 
 import { StorageUtils } from "./utils"
-import { Stack, Stacks } from "./navigation"
 
 export const determineIsOnboardingComplete = async (): Promise<boolean> => {
   return await StorageUtils.getIsOnboardingComplete()
@@ -20,8 +19,6 @@ export interface OnboardingContextState {
   isOnboardingComplete: boolean
   completeOnboarding: () => void
   resetOnboarding: () => void
-  destinationAfterComplete: Stack
-  updateDestinationAfterComplete: (stack: Stack) => void
 }
 
 interface OnboardingProviderProps {
@@ -35,9 +32,6 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   const [isOnboardingComplete, setIsOnboardingComplete] = useState<boolean>(
     userHasCompletedOnboarding,
   )
-  const [destinationAfterComplete, setDestinationAfterComplete] = useState<
-    Stack
-  >(Stacks.Activation)
 
   const completeOnboarding = () => {
     StorageUtils.setIsOnboardingComplete()
@@ -46,12 +40,7 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
 
   const resetOnboarding = () => {
     StorageUtils.removeIsOnboardingComplete()
-    setDestinationAfterComplete(Stacks.Activation)
     setIsOnboardingComplete(false)
-  }
-
-  const updateDestinationAfterComplete = (stack: Stack) => {
-    setDestinationAfterComplete(stack)
   }
 
   return (
@@ -60,8 +49,6 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
         isOnboardingComplete,
         completeOnboarding,
         resetOnboarding,
-        destinationAfterComplete,
-        updateDestinationAfterComplete,
       }}
     >
       {children}
