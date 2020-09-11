@@ -6,6 +6,7 @@ import {
   HowItWorksScreen as Screen,
   HowItWorksScreens as Screens,
   Stack,
+  Stacks,
 } from "../navigation/index"
 
 import { Images } from "../assets"
@@ -20,7 +21,7 @@ export type HowItWorksScreenDatum = {
 }
 
 const useHowItWorksData = (
-  destinationAfterComplete?: Stack,
+  destinationAfterComplete: Stack = Stacks.Home,
 ): HowItWorksScreenDatum[] => {
   const { t } = useTranslation()
   const navigation = useNavigation()
