@@ -56,11 +56,17 @@ public abstract class DiagnosisKey {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setKey(ByteArrayValue key);
+
     public abstract Builder setIntervalNumber(int intervalNumber);
+
     public abstract Builder setRollingPeriod(int rollingPeriod);
+
     public abstract Builder setTransmissionRisk(int risk);
+
     abstract int getRollingPeriod();
+
     abstract int getTransmissionRisk();
+
     abstract DiagnosisKey autoBuild();
 
     public DiagnosisKey build() {
