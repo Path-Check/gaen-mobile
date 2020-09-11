@@ -4,17 +4,19 @@ import {
   StackNavigationOptions,
 } from "@react-navigation/stack"
 
-import { OnboardingScreen, OnboardingScreens } from "./index"
-
+import {
+  OnboardingScreen as Screen,
+  OnboardingScreens as Screens,
+  Stack as DestinationStack,
+} from "./index"
 import Welcome from "../Onboarding/Welcome"
-import PersonalPrivacy from "../Onboarding/PersonalPrivacy"
-import Introduction from "../Onboarding/Introduction"
-import PhoneRemembersDevices from "../Onboarding/PhoneRemembersDevices"
-import GetNotified from "../Onboarding/GetNotified"
-import ValueProposition from "../Onboarding/ValueProposition"
+import OnboardingScreen from "../Onboarding/OnboardingScreen"
+import useOnboardingData, {
+  OnboardingScreenContent,
+} from "../Onboarding/useOnboardingData"
 
 type OnboardingStackParams = {
-  [key in OnboardingScreen]: undefined
+  [key in Screen]: undefined
 }
 
 const Stack = createStackNavigator<OnboardingStackParams>()
@@ -23,32 +25,45 @@ const onboardingScreenOptions: StackNavigationOptions = {
   headerShown: false,
 }
 
-const OnboardingStack: FunctionComponent = () => {
+interface OnboardingStackProps {
+  destinationOnSkip: DestinationStack
+}
+
+const OnboardingStack: FunctionComponent<OnboardingStackProps> = ({
+  destinationOnSkip,
+}) => {
+  const onboardingScreens = useOnboardingData(destinationOnSkip)
+
+  const toStackScreen = (data: OnboardingScreenContent, idx: number) => {
+    const screenNumber = idx + 1
+    const onboardingScreenContent = {
+      screenNumber,
+      ...data,
+    }
+    return (
+      <Stack.Screen
+        key={onboardingScreenContent.header}
+        name={onboardingScreenContent.name}
+      >
+        {(props) => (
+          <OnboardingScreen
+            {...props}
+            onboardingScreenContent={onboardingScreenContent}
+            destinationOnSkip={destinationOnSkip}
+          />
+        )}
+      </Stack.Screen>
+    )
+  }
+
   return (
     <Stack.Navigator screenOptions={onboardingScreenOptions}>
-      <Stack.Screen name={OnboardingScreens.Welcome} component={Welcome} />
-      <Stack.Screen
-        name={OnboardingScreens.Introduction}
-        component={Introduction}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.PhoneRemembersDevices}
-        component={PhoneRemembersDevices}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.PersonalPrivacy}
-        component={PersonalPrivacy}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.GetNotified}
-        component={GetNotified}
-      />
-      <Stack.Screen
-        name={OnboardingScreens.ValueProposition}
-        component={ValueProposition}
-      />
+      <Stack.Screen name={Screens.Welcome} component={Welcome} />
+      {onboardingScreens.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
 }
 
-export default OnboardingStack
+const MemoizedOnboardingStack = React.memo(OnboardingStack)
+
+export default MemoizedOnboardingStack

@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack"
 
 import { Stacks, ModalScreens } from "./index"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
+import OnboardingStack from "./OnboardingStack"
 
 const Stack = createStackNavigator()
 
@@ -14,10 +18,12 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={ModalScreens.LanguageSelection}
         component={LanguageSelection}
+        options={TransitionPresets.ModalTransition}
       />
       <Stack.Screen
         name={ModalScreens.ProtectPrivacy}
         component={ProtectPrivacy}
+        options={TransitionPresets.ModalTransition}
       />
       <Stack.Screen
         name={Stacks.AffectedUserStack}
@@ -26,6 +32,11 @@ const ModalStack: FunctionComponent = () => {
           gestureEnabled: false,
         }}
       />
+      <Stack.Screen name={Stacks.OnboardingReview}>
+        {(props) => (
+          <OnboardingStack {...props} destinationOnSkip={Stacks.Settings} />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

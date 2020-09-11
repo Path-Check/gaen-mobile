@@ -21,6 +21,7 @@ import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
 type SettingsListItem = {
   label: string
   onPress: () => void
+  icon: string
 }
 
 const Settings: FunctionComponent = () => {
@@ -43,45 +44,74 @@ const Settings: FunctionComponent = () => {
     })
   }
 
-  const About: SettingsListItem = {
+  const handleOnPressHowTheAppWorks = () => {
+    navigation.navigate(Stacks.Modal, { screen: ModalScreens.OnboardingReview })
+  }
+
+  const selectLanguage: SettingsListItem = {
+    label: languageName,
+    onPress: handleOnPressSelectLanguage,
+    icon: Icons.LanguagesIcon,
+  }
+  const about: SettingsListItem = {
     label: t("screen_titles.about"),
     onPress: () => navigation.navigate(SettingsScreens.About),
+    icon: Icons.Document,
   }
-  const Legal: SettingsListItem = {
+  const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
     onPress: () => navigation.navigate(SettingsScreens.Legal),
+    icon: Icons.Document,
   }
-  const CallbackForm: SettingsListItem = {
+  const callbackForm: SettingsListItem = {
     label: t("screen_titles.callback_form"),
     onPress: () => navigation.navigate(SettingsScreens.CallbackForm),
+    icon: Icons.Document,
   }
-  const ReportAnIssue: SettingsListItem = {
+  const reportAnIssue: SettingsListItem = {
     label: t("screen_titles.report_issue"),
     onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
+    icon: Icons.QuestionMark,
+  }
+  const howTheAppWorks: SettingsListItem = {
+    label: t("screen_titles.how_the_app_works"),
+    onPress: handleOnPressHowTheAppWorks,
+    icon: Icons.RestartWithCheck,
+  }
+  const debugMenu: SettingsListItem = {
+    label: "EN Debug Menu",
+    onPress: () => navigation.navigate(SettingsScreens.ENDebugMenu),
+    icon: Icons.Document,
   }
 
-  const listItems: SettingsListItem[] = [About, Legal]
+  const middleListItems: SettingsListItem[] = [about, legal, howTheAppWorks]
   if (displayCallbackForm) {
-    listItems.push(CallbackForm)
+    middleListItems.push(callbackForm)
   }
   if (displayReportAnIssue) {
-    listItems.push(ReportAnIssue)
+    middleListItems.push(reportAnIssue)
   }
 
-  interface ListItemProps {
-    label: string
-    onPress: () => void
-  }
-
-  const ListItem = ({ label, onPress }: ListItemProps) => {
+  const ListItem: FunctionComponent<SettingsListItem> = ({
+    label,
+    onPress,
+    icon,
+  }) => {
     return (
-      <View>
-        <TouchableOpacity onPress={onPress}>
-          <View style={style.listItem}>
-            <GlobalText style={style.listItemText}>{label}</GlobalText>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
+        <View style={style.listItem}>
+          <SvgXml
+            fill={Colors.primary100}
+            xml={icon}
+            width={Iconography.small}
+            height={Iconography.small}
+            style={style.icon}
+            accessible
+            accessibilityLabel={label}
+          />
+          <GlobalText style={style.listItemText}>{label}</GlobalText>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -92,44 +122,29 @@ const Settings: FunctionComponent = () => {
   return (
     <ScrollView style={style.container}>
       <View style={style.section}>
-        <TouchableOpacity
-          onPress={handleOnPressSelectLanguage}
-          accessible
-          accessibilityLabel={t("more.select_language")}
-        >
-          <View style={[style.listItem, style.languageButtonContainer]}>
-            <SvgXml
-              xml={Icons.LanguagesIcon}
-              width={Iconography.small}
-              height={Iconography.small}
-              style={style.icon}
-              accessible
-              accessibilityLabel={t("label.language_icon")}
-            />
-            <GlobalText style={style.languageButtonText}>
-              {languageName}
-            </GlobalText>
-          </View>
-        </TouchableOpacity>
+        <ListItem
+          label={selectLanguage.label}
+          onPress={selectLanguage.onPress}
+          icon={selectLanguage.icon}
+        />
       </View>
       <View style={style.section}>
-        {listItems.map(({ label, onPress }, idx) => {
-          const isLastItem = idx === listItems.length - 1
+        {middleListItems.map(({ label, onPress, icon }, idx) => {
+          const isLastItem = idx === middleListItems.length - 1
           return (
-            <>
-              <View key={label}>
-                <ListItem label={label} onPress={onPress} />
-              </View>
+            <View key={label}>
+              <ListItem icon={icon} label={label} onPress={onPress} />
               {!isLastItem && <ItemSeparator />}
-            </>
+            </View>
           )
         })}
       </View>
       {showDebugMenu && (
         <View style={style.section}>
           <ListItem
-            label="EN Debug Menu"
-            onPress={() => navigation.navigate(SettingsScreens.ENDebugMenu)}
+            label={debugMenu.label}
+            onPress={debugMenu.onPress}
+            icon={debugMenu.icon}
           />
         </View>
       )}
@@ -147,17 +162,12 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
   },
-  languageButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  languageButtonText: {
-    ...Typography.tappableListItem,
-  },
   icon: {
     marginRight: Spacing.small,
   },
   listItem: {
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
   },

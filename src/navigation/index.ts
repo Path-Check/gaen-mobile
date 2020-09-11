@@ -96,6 +96,7 @@ export type ModalScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
   | "AffectedUserStack"
+  | "OnboardingReview"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -103,6 +104,7 @@ export const ModalScreens: {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
   AffectedUserStack: "AffectedUserStack",
+  OnboardingReview: "OnboardingReview",
 }
 
 export type SettingsScreen =
@@ -182,6 +184,7 @@ export type Stack =
   | "ExposureHistoryFlow"
   | "Modal"
   | "Onboarding"
+  | "OnboardingReview"
   | "Settings"
 
 export const Stacks: { [key in Stack]: Stack } = {
@@ -191,6 +194,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",
   Onboarding: "Onboarding",
+  OnboardingReview: "OnboardingReview",
   Settings: "Settings",
 }
 

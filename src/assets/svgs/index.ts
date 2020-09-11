@@ -14,6 +14,7 @@ import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
 import ChevronUp from "./chevronUp"
 import Close from "./close"
+import Document from "./document"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import Gear from "./gear"
@@ -29,6 +30,7 @@ import Mask from "./mask"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import RadioWave from "./radioWave"
+import RestartWithCheck from "./restartWithCheck"
 import SelfAssessment from "./selfAssessment"
 import Share from "./share"
 import SixFeet from "./sixFeet"
@@ -57,6 +59,7 @@ export const Icons = {
   ChevronRight,
   ChevronUp,
   Close,
+  Document,
   Export,
   ExposureIcon,
   Gear,
@@ -72,6 +75,7 @@ export const Icons = {
   Publish,
   QuestionMark,
   RadioWave,
+  RestartWithCheck,
   SelfAssessment,
   Share,
   SixFeet,

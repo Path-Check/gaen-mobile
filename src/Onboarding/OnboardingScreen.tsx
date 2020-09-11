@@ -16,7 +16,7 @@ import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import { ModalScreens, Stacks, useStatusBarEffect } from "../navigation"
+import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
 import { Icons } from "../assets"
@@ -35,20 +35,17 @@ type OnboardingScreenContent = {
   imageLabel: string
   header: string
   primaryButtonLabel: string
-}
-
-type OnboardingScreenActions = {
   primaryButtonOnPress: () => void
 }
 
 interface OnboardingScreenProps {
   onboardingScreenContent: OnboardingScreenContent
-  onboardingScreenActions: OnboardingScreenActions
+  destinationOnSkip: Stack
 }
 
 const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
   onboardingScreenContent,
-  onboardingScreenActions,
+  destinationOnSkip,
 }: OnboardingScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
@@ -64,6 +61,10 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
     navigation.navigate(Stacks.Modal, {
       screen: ModalScreens.LanguageSelection,
     })
+  }
+
+  const handleOnPressSkip = () => {
+    navigation.navigate(destinationOnSkip)
   }
 
   const handleOnPressProtectPrivacy = () => {
@@ -87,9 +88,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
             </GlobalText>
           </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(Stacks.Activation)}
-        >
+        <TouchableOpacity onPress={handleOnPressSkip}>
           <GlobalText style={style.skipButtonText}>
             {t("common.skip")}
           </GlobalText>
@@ -116,7 +115,7 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
           <View style={style.nextButtonContainer}>
             <Button
               label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenActions.primaryButtonOnPress}
+              onPress={onboardingScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
           </View>
@@ -273,4 +272,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-export default OnboardingScreen
+const MemoizedOnboardingScreen = React.memo(OnboardingScreen)
+
+export default MemoizedOnboardingScreen
