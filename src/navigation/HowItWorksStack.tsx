@@ -16,7 +16,7 @@ interface HowItWorksStackProps {
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   destinationOnSkip,
 }) => {
-  const howItWorksScreens = useHowItWorksData(destinationOnSkip)
+  const howItWorksData = useHowItWorksData(destinationOnSkip)
 
   const toStackScreen = (datum: HowItWorksScreenDatum, idx: number) => {
     const screenNumber = idx + 1
@@ -24,6 +24,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
       screenNumber,
       ...datum,
     }
+
     return (
       <Stack.Screen
         key={howItWorksScreenDisplayDatum.header}
@@ -42,7 +43,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 
   return (
     <Stack.Navigator headerMode="none">
-      {howItWorksScreens.map((data, idx) => toStackScreen(data, idx))}
+      {howItWorksData.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
 }
