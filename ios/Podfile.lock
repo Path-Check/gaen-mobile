@@ -27,9 +27,9 @@ PODS:
   - KeychainAccess (4.2.0)
   - Permission-Notifications (2.1.4):
     - RNPermissions
-  - PromisesObjC (1.2.10)
-  - PromisesSwift (1.2.10):
-    - PromisesObjC (= 1.2.10)
+  - PromisesObjC (1.2.9)
+  - PromisesSwift (1.2.9):
+    - PromisesObjC (= 1.2.9)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
     - FBLazyVector (= 0.62.2)
@@ -449,15 +449,15 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BugsnagReactNative: 3e44e73c4ec6b68e46ed1f2163229dd535522990
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
   Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
-  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  PromisesSwift: ce4c7602f91a6bfc8732039f1bc1a3fcded1a302
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3
@@ -497,6 +497,6 @@ SPEC CHECKSUMS:
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: ff6f3e8664bc0c675edee871662a1a890cf5be3b
+PODFILE CHECKSUM: f9a5c5ef025e9c6a2ee9fe85c0d0f93d1502e09e
 
 COCOAPODS: 1.9.3
