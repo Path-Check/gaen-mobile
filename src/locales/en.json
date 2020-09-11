@@ -41,7 +41,7 @@
     "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
   },
   "callback_form": {
-    "fill_out_the_info": "Fill out the information below and a contact tracer from {{ healthAuthorityName }} will get in touch.",
+    "fill_out_the_info": "Fill out the information below and a contact tracer from {{healthAuthorityName}} will get in touch.",
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
