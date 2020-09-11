@@ -18,6 +18,7 @@ import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { StatusBar, GlobalText, Button } from "../components"
 import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
+import useHowItWorksData from "./useHowItWorksData"
 
 import { Icons } from "../assets"
 import {
@@ -125,7 +126,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
           onPress={handleOnPressProtectPrivacy}
         >
           <GlobalText style={style.bottomButtonText}>
-            {t("howItWorks.protect_privacy_button")}
+            {t("onboarding.protect_privacy_button")}
           </GlobalText>
           <SvgXml
             xml={Icons.ChevronUp}
@@ -226,11 +227,11 @@ interface PositionDotsProps {
   screenNumber: number
 }
 
-const NUMBER_OF_ONBOARDING_SCREENS = 5
-
 const PositionDots: FunctionComponent<PositionDotsProps> = ({
   screenNumber,
 }) => {
+  const howItWorksData = useHowItWorksData()
+
   const determineCircleStyle = (circlePosition: number): ViewStyle => {
     if (circlePosition === screenNumber) {
       return dotsStyle.circleActive
@@ -239,7 +240,7 @@ const PositionDots: FunctionComponent<PositionDotsProps> = ({
     }
   }
 
-  const screens = Array.from(Array(NUMBER_OF_ONBOARDING_SCREENS), (i) => i + 1)
+  const screens = Array.from(Array(howItWorksData.length), (i) => i + 1)
 
   return (
     <View style={dotsStyle.circles}>

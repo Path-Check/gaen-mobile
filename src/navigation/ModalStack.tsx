@@ -8,7 +8,7 @@ import { Stacks, ModalScreens } from "./index"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
-import OnboardingStack from "./OnboardingStack"
+import HowItWorksStack from "./HowItWorksStack"
 
 const Stack = createStackNavigator()
 
@@ -34,7 +34,7 @@ const ModalStack: FunctionComponent = () => {
       />
       <Stack.Screen name={Stacks.HowItWorksReview}>
         {(props) => (
-          <OnboardingStack {...props} destinationOnSkip={Stacks.Settings} />
+          <HowItWorksStack {...props} destinationOnSkip={Stacks.Settings} />
         )}
       </Stack.Screen>
     </Stack.Navigator>

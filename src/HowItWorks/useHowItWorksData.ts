@@ -19,8 +19,8 @@ export type HowItWorksScreenDatum = {
   primaryButtonOnPress: () => void
 }
 
-const useOnboardingData = (
-  destinationAfterComplete: Stack,
+const useHowItWorksData = (
+  destinationAfterComplete?: Stack,
 ): HowItWorksScreenDatum[] => {
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -78,4 +78,4 @@ const useOnboardingData = (
   return howItWorksScreensScreensData
 }
 
-export default useOnboardingData
+export default useHowItWorksData

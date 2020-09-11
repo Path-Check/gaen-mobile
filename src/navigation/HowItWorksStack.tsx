@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 
-import { OtherScreens, Stack as DestinationStack } from "./index"
-import Welcome from "../Welcome"
+import { Stack as DestinationStack } from "./index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
 import useHowItWorksData, {
   HowItWorksScreenDatum,
@@ -17,7 +16,6 @@ interface HowItWorksStackProps {
 
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   destinationOnSkip,
-  displayWelcomeScreen,
 }) => {
   const howItWorksScreens = useHowItWorksData(destinationOnSkip)
 
@@ -45,9 +43,6 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 
   return (
     <Stack.Navigator headerMode="none">
-      {displayWelcomeScreen && (
-        <Stack.Screen name={OtherScreens.Welcome} component={Welcome} />
-      )}
       {howItWorksScreens.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )

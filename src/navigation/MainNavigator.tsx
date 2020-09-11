@@ -8,15 +8,16 @@ import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
+import { useOnboardingContext } from "../OnboardingContext"
+import { OtherScreens, ExposureHistoryScreens, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
-import OnboardingStack from "./OnboardingStack"
+import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
-import { useOnboardingContext } from "../OnboardingContext"
-import { ExposureHistoryScreens, Stacks } from "./index"
-import MoreInfo from "../ExposureHistory/MoreInfo"
-import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import ModalStack from "./ModalStack"
+import MoreInfo from "../ExposureHistory/MoreInfo"
+import Welcome from "../Welcome"
+import ExposureDetail from "../ExposureHistory/ExposureDetail"
 
 import { Headers, Colors } from "../styles"
 
@@ -85,14 +86,18 @@ const MainNavigator: FunctionComponent = () => {
         ) : (
           <>
             <Stack.Screen
+              name={OtherScreens.Welcome}
+              component={Welcome}
+              options={defaultScreenOptions}
+            />
+            <Stack.Screen
               name={Stacks.HowItWorks}
               options={defaultScreenOptions}
             >
               {(props) => (
-                <OnboardingStack
+                <HowItWorksStack
                   {...props}
                   destinationOnSkip={Stacks.Activation}
-                  displayWelcomeScreen
                 />
               )}
             </Stack.Screen>
