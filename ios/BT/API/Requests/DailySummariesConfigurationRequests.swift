@@ -1,9 +1,10 @@
 import Alamofire
 import Foundation
 
-enum ExposureConfigurationV1Request: APIRequest {
+@available(iOS 13.7, *)
+enum DailySummariesConfigurationRequest: APIRequest {
 
-  typealias ResponseType = ExposureConfigurationV1
+  typealias ResponseType = DailySummariesConfiguration
 
   case get
 
@@ -17,7 +18,7 @@ enum ExposureConfigurationV1Request: APIRequest {
   var path: String {
     switch self {
     case .get:
-      return ExposureConfigurationV1.configurationFileName
+      return DailySummariesConfiguration.configurationFileName
     }
   }
 
