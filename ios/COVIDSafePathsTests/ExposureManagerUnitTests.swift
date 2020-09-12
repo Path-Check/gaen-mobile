@@ -966,7 +966,6 @@ class ExposureManagerTests: XCTestCase {
     btSecureStorageMock.userStateHandler = {
       return UserState()
     }
-    storeExposureExpectation.isInverted = true
     btSecureStorageMock.storeExposuresHandler = { exposures in
       storeExposureExpectation.fulfill()
       XCTAssertEqual(exposures.count, 0)
