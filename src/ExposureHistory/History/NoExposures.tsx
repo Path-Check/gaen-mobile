@@ -29,11 +29,11 @@ const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
   const {
     healthAuthorityName,
-    healthAuthorityAdviceUrl,
+    healthAuthorityLearnMoreUrl,
   } = useConfigurationContext()
 
   const handleOnPressHALink = () => {
-    Linking.openURL(healthAuthorityAdviceUrl)
+    Linking.openURL(healthAuthorityLearnMoreUrl)
   }
 
   return (
@@ -41,7 +41,7 @@ const HealthGuidelines: FunctionComponent = () => {
       <GlobalText style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
       </GlobalText>
-      {Boolean(healthAuthorityAdviceUrl) && (
+      {Boolean(healthAuthorityLearnMoreUrl) && (
         <>
           <GlobalText style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {

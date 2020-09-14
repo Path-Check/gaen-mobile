@@ -11,6 +11,7 @@ export interface Configuration {
   displaySelfAssessment: boolean
   displaySymptomChecker: boolean
   healthAuthorityAdviceUrl: string
+  healthAuthorityLearnMoreUrl: string
   healthAuthorityEulaUrl: string | null
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
@@ -27,6 +28,7 @@ const initialState = {
   displaySelfAssessment: false,
   displaySymptomChecker: false,
   healthAuthorityAdviceUrl: "",
+  healthAuthorityLearnMoreUrl: "",
   healthAuthorityEulaUrl: null,
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
@@ -39,6 +41,7 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
+    LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
     LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
@@ -68,6 +71,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displaySelfAssessment,
         displaySymptomChecker,
         healthAuthorityAdviceUrl,
+        healthAuthorityLearnMoreUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityName,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
