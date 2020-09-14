@@ -40,12 +40,15 @@
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
     "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
   },
-  "callback_form": {
+  "callback": {
     "fill_out_the_info": "Fill out the information below and a contact tracer from {{healthAuthorityName}} will get in touch.",
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
-    "well_get_in_touch": "We'll get in touch"
+    "well_get_in_touch": "We'll get in touch",
+    "success_header": "You're in the queue",
+    "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
+    "success_got_it": "Got it"
   },
   "common": {
     "alert": "Alert",
@@ -281,7 +284,7 @@
   },
   "screen_titles": {
     "about": "About",
-    "callback_form": "Callback Form",
+    "callback": "Request Call Back",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposures": "Exposures",

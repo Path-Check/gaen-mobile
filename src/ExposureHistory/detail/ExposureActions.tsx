@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { SettingsScreens, Stacks } from "../../navigation"
+import { Stacks } from "../../navigation"
 import { GlobalText, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
@@ -91,9 +91,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const { t } = useTranslation()
 
   const navigateToCallbackForm = () => {
-    navigation.navigate(Stacks.Settings, {
-      screen: SettingsScreens.CallbackForm,
-    })
+    navigation.navigate(Stacks.Callback)
   }
 
   const navigateToConnectStack = () => {

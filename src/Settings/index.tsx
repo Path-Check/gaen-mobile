@@ -61,8 +61,8 @@ const Settings: FunctionComponent = () => {
     icon: Icons.Document,
   }
   const callbackForm: SettingsListItem = {
-    label: t("screen_titles.callback_form"),
-    onPress: () => navigation.navigate(SettingsScreens.CallbackForm),
+    label: t("screen_titles.callback"),
+    onPress: () => navigation.navigate(Stacks.Callback),
     icon: Icons.Document,
   }
   const reportAnIssue: SettingsListItem = {
