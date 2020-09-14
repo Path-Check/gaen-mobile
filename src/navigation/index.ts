@@ -107,7 +107,6 @@ export const ModalScreens: {
 
 export type SettingsScreen =
   | "Settings"
-  | "About"
   | "Legal"
   | "CallbackForm"
   | "ReportIssue"
@@ -120,7 +119,6 @@ export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
 } = {
   Settings: "Settings",
-  About: "About",
   Legal: "Legal",
   CallbackForm: "CallbackForm",
   ReportIssue: "ReportIssue",

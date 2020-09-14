@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import Settings from "../Settings/"
-import About from "../Settings/About"
 import Legal from "../Settings/Legal"
 import ReportIssue from "../Settings/ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
@@ -59,7 +58,6 @@ const SettingsStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen name={SettingsScreens.Settings} component={Settings} />
-      <Stack.Screen name={SettingsScreens.About} component={About} />
       <Stack.Screen
         name={SettingsScreens.CallbackForm}
         component={CallbackFormScreen}

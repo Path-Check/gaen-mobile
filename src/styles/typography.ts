@@ -211,7 +211,6 @@ export const tappableListItem: TextStyle = {
 
 export const anchorLink: TextStyle = {
   ...body1,
-  ...mediumBold,
   color: Colors.anchorLinkText,
   textDecorationLine: "underline",
 }
