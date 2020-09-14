@@ -156,9 +156,9 @@ export const AffectedUserFlowScreens: {
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
 }
-export type OtherScreen = "Welcome"
+export type WelcomeScreen = "Welcome"
 
-export const OtherScreens: { [key in OtherScreen]: OtherScreen } = {
+export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
   Welcome: "Welcome",
 }
 

@@ -18,7 +18,6 @@ import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { StatusBar, GlobalText, Button } from "../components"
 import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
-import useHowItWorksData from "./useHowItWorksData"
 
 import { Icons } from "../assets"
 import {
@@ -41,11 +40,13 @@ type HowItWorksScreenContent = {
 
 interface HowItWorksScreenProps {
   howItWorksScreenContent: HowItWorksScreenContent
+  totalScreenCount: number
   destinationOnSkip: Stack
 }
 
 const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   howItWorksScreenContent,
+  totalScreenCount,
   destinationOnSkip,
 }: HowItWorksScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -108,7 +109,10 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots screenNumber={howItWorksScreenContent.screenNumber} />
+            <PositionDots
+              highlightedDotIdx={howItWorksScreenContent.screenNumber}
+              totalDotCount={totalScreenCount}
+            />
             <GlobalText style={style.headerText}>
               {howItWorksScreenContent.header}
             </GlobalText>
@@ -224,34 +228,34 @@ const createStyle = (insets: EdgeInsets) => {
 }
 
 interface PositionDotsProps {
-  screenNumber: number
+  highlightedDotIdx: number
+  totalDotCount: number
 }
 
 const PositionDots: FunctionComponent<PositionDotsProps> = ({
-  screenNumber,
+  highlightedDotIdx,
+  totalDotCount,
 }) => {
-  const howItWorksData = useHowItWorksData()
-
-  const determineCircleStyle = (circlePosition: number): ViewStyle => {
-    if (circlePosition === screenNumber) {
-      return dotsStyle.circleActive
+  const determineDotStyle = (dotPosition: number): ViewStyle => {
+    if (dotPosition === highlightedDotIdx) {
+      return dotsStyle.dotHighlighted
     } else {
-      return dotsStyle.circleInactive
+      return dotsStyle.dot
     }
   }
 
-  const screens = Array.from(Array(howItWorksData.length), (i) => i + 1)
+  const screens = Array.from(Array(totalDotCount), (i) => i + 1)
 
   return (
-    <View style={dotsStyle.circles}>
+    <View style={dotsStyle.dotsContainer}>
       {screens.map((_, idx) => {
-        return <View style={determineCircleStyle(idx + 1)} key={idx} />
+        return <View style={determineDotStyle(idx + 1)} key={idx} />
       })}
     </View>
   )
 }
 const dotsStyle = StyleSheet.create({
-  circles: {
+  dotsContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: 150,
@@ -259,13 +263,13 @@ const dotsStyle = StyleSheet.create({
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.large,
   },
-  circleActive: {
+  dotHighlighted: {
     backgroundColor: Colors.primary100,
     width: 10,
     height: 10,
     borderRadius: Outlines.borderRadiusMax,
   },
-  circleInactive: {
+  dot: {
     backgroundColor: Colors.neutral30,
     width: 5,
     height: 5,

@@ -20,15 +20,6 @@ jest.mock("react-native-webview", () => {
     },
   }
 })
-jest.mock("./locales/eula/en.html", () => {
-  return "en"
-})
-jest.mock("./locales/eula/es_PR.html", () => {
-  return "es_PR"
-})
-jest.mock("./locales/eula/ht.html", () => {
-  return "ht"
-})
 jest.mock("@react-navigation/native")
 
 describe("Welcome", () => {

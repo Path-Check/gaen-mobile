@@ -7,7 +7,7 @@ import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { OtherScreens, Stacks } from "./index"
+import { WelcomeScreens, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
 import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
@@ -51,7 +51,7 @@ const MainNavigator: FunctionComponent = () => {
         ) : (
           <>
             <Stack.Screen
-              name={OtherScreens.Welcome}
+              name={WelcomeScreens.Welcome}
               component={Welcome}
               options={defaultScreenOptions}
             />
