@@ -155,8 +155,17 @@ final class ExposureManager: NSObject {
   }
 
   /// Returns the current exposures as a json string representation
-  @objc var currentExposures: String {
-    return Array(btSecureStorage.userState.exposures).jsonStringRepresentation()
+  @objc func getCurrentExposures(_ completion: ((String) -> Void)) {
+    if #available(iOS 13.7, *) {
+      do {
+        let exposures = try await(exposuresV2())
+        completion(exposures.jsonStringRepresentation())
+      } catch {
+        completion(String.default)
+      }
+    } else {
+      completion(exposuresV1().jsonStringRepresentation())
+    }
   }
 
   ///Notifies the user to enable bluetooth to be able to exchange keys
@@ -330,21 +339,8 @@ final class ExposureManager: NSObject {
       processedFileCount = targetUrls.count
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
       unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
-      let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-      var exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
-                                                               diagnosisKeyURLs: unpackedArchiveURLs))
-      exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
-      var newExposures: [Exposure] = []
-      if let summary = exposureSummary {
-        summary.daySummaries.forEach { (daySummary) in
-          if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
-              self.btSecureStorage.canStoreExposure(for: daySummary.date) {
-            let exposure = Exposure(id: UUID().uuidString,
-                                    date: daySummary.date.toMidnight.posixRepresentation)
-            newExposures.append(exposure)
-          }
-        }
-      }
+      let newExposures = try await(self.exposuresV2())
+
       if newExposures.count > 0 {
         self.notifyUserExposureDetected()
       }
@@ -462,6 +458,10 @@ extension ExposureManager {
 // MARK: - Private
 
 private extension ExposureManager {
+
+  func exposuresV1() -> [Exposure] {
+    return Array(btSecureStorage.userState.exposures)
+  }
 
   func activateSuccess() {
     awake()
@@ -604,7 +604,7 @@ extension ExposureManager {
   // MARK: == Exposure Detection V2 Private Promises ==
 
   func getExposureConfigurationV2() -> Promise<DailySummariesConfiguration> {
-    return Promise { fullfill, _ in
+    return Promise(on: .global())  { fullfill, _ in
       self.apiClient.downloadRequest(DailySummariesConfigurationRequest.get,
                                      requestType: .exposureConfiguration) { (result) in
         var configuration = DailySummariesConfiguration.placeholder
@@ -620,13 +620,36 @@ extension ExposureManager {
   }
 
   func callAggregateDetectExposures(configuration: ENExposureConfiguration) -> Promise<ENExposureDetectionSummary?> {
-    return Promise { fullfill, reject in
+    return Promise(on: .global()) { fullfill, reject in
       self.manager.detectExposures(configuration: configuration) { summary, error in
         if let error = error {
           reject(error)
         } else {
           fullfill(summary)
         }
+      }
+    }
+  }
+
+  func exposuresV2() -> Promise<[Exposure]> {
+    return Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+      do {
+        let exposureConfiguraton = try await(self.getExposureConfigurationV2())
+        let exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
+        var newExposures: [Exposure] = []
+        if let summary = exposureSummary {
+          summary.daySummaries.forEach { (daySummary) in
+            if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
+                self.btSecureStorage.canStoreExposure(for: daySummary.date) {
+              let exposure = Exposure(id: UUID().uuidString,
+                                      date: daySummary.date.toMidnight.posixRepresentation)
+              newExposures.append(exposure)
+            }
+          }
+        }
+        return newExposures
+      } catch {
+        return []
       }
     }
   }

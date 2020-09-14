@@ -13,7 +13,9 @@ RCT_EXPORT_MODULE();
 RCT_REMAP_METHOD(getCurrentExposures,
                  getCurrentExposuresWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-  resolve([[ExposureManager shared] currentExposures]);
+  [[ExposureManager shared] getCurrentExposures:^(NSString * currentExposures) {
+    resolve(currentExposures);
+  }];
 }
 
 RCT_REMAP_METHOD(fetchLastDetectionDate,
