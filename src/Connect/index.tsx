@@ -54,7 +54,7 @@ const ConnectScreen: FunctionComponent = () => {
   const aboutContent = authorityCopyTranslation(
     loadAuthorityCopy("about"),
     localeCode,
-    t("connect.description", {
+    t("about.description", {
       applicationName,
       healthAuthorityName,
     }),
@@ -97,17 +97,7 @@ const ConnectScreen: FunctionComponent = () => {
       <ScrollView style={style.container} alwaysBounceVertical={false}>
         <View style={style.topContainer}>
           <GlobalText style={style.headerText}>{applicationName}</GlobalText>
-          <GlobalText style={style.aboutContent}>
-            <>
-              {aboutContent}
-              <GlobalText
-                onPress={handleOnPressLink}
-                style={style.healthAuthorityLink}
-              >
-                {t("connect.ha_link", { healthAuthorityName })}
-              </GlobalText>
-            </>
-          </GlobalText>
+          <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
           {authorityLinks?.map(({ url, label }) => {
             return <ExternalLink key={label} url={url} label={label} />
           })}
@@ -127,13 +117,13 @@ const ConnectScreen: FunctionComponent = () => {
           <View style={style.infoRowContainer}>
             <View style={style.infoRow}>
               <GlobalText style={style.infoRowLabel}>
-                {t("connect.version")}
+                {t("about.version")}
               </GlobalText>
               <GlobalText style={style.infoRowValue}>{versionInfo}</GlobalText>
             </View>
             <View style={style.infoRow}>
               <GlobalText style={style.infoRowLabel}>
-                {t("connect.operating_system_abbr")}
+                {t("about.operating_system_abbr")}
               </GlobalText>
               <GlobalText style={style.infoRowValue}>{osInfo}</GlobalText>
             </View>

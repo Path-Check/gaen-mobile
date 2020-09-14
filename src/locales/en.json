@@ -1,10 +1,9 @@
 {
   "_display_name": "English",
-  "connect": {
-    "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}.\n\nFor more information, visit the ",
+  "about": {
+    "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}",
     "operating_system_abbr": "OS:",
-    "version": "Version:",
-    "ha_link": "{{healthAuthorityName}} website."
+    "version": "Version:"
   },
   "assessment": {
     "agree_question_description": "Stop and call emergency services if you are experiencing:\n• Severe, constant chest pain or pressure \n• Extreme difficulty breathing \n• Severe, constant lightheadedness \n• Serious disorientation or unresponsiveness",
