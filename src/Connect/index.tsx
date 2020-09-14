@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Platform, ScrollView, StyleSheet, View, Linking } from "react-native"
+import { Platform, ScrollView, StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -47,14 +47,13 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    healthAuthorityAdviceUrl,
     displayReportAnIssue,
   } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
     loadAuthorityCopy("about"),
     localeCode,
-    t("connect.description", {
+    t("about.description", {
       applicationName,
       healthAuthorityName,
     }),
@@ -64,10 +63,6 @@ const ConnectScreen: FunctionComponent = () => {
     loadAuthorityLinks("about"),
     localeCode,
   )
-
-  const handleOnPressLink = () => {
-    Linking.openURL(healthAuthorityAdviceUrl)
-  }
 
   const handleOnPressHowTheAppWorks = () => {
     navigation.navigate(Stacks.Modal, {
@@ -97,17 +92,7 @@ const ConnectScreen: FunctionComponent = () => {
       <ScrollView style={style.container} alwaysBounceVertical={false}>
         <View style={style.topContainer}>
           <GlobalText style={style.headerText}>{applicationName}</GlobalText>
-          <GlobalText style={style.aboutContent}>
-            <>
-              {aboutContent}
-              <GlobalText
-                onPress={handleOnPressLink}
-                style={style.healthAuthorityLink}
-              >
-                {t("connect.ha_link", { healthAuthorityName })}
-              </GlobalText>
-            </>
-          </GlobalText>
+          <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
           {authorityLinks?.map(({ url, label }) => {
             return <ExternalLink key={label} url={url} label={label} />
           })}
@@ -127,13 +112,13 @@ const ConnectScreen: FunctionComponent = () => {
           <View style={style.infoRowContainer}>
             <View style={style.infoRow}>
               <GlobalText style={style.infoRowLabel}>
-                {t("connect.version")}
+                {t("about.version")}
               </GlobalText>
               <GlobalText style={style.infoRowValue}>{versionInfo}</GlobalText>
             </View>
             <View style={style.infoRow}>
               <GlobalText style={style.infoRowLabel}>
-                {t("connect.operating_system_abbr")}
+                {t("about.operating_system_abbr")}
               </GlobalText>
               <GlobalText style={style.infoRowValue}>{osInfo}</GlobalText>
             </View>
@@ -162,10 +147,6 @@ const style = StyleSheet.create({
     ...Typography.body1,
     fontSize: Typography.large,
     marginBottom: Spacing.medium,
-  },
-  healthAuthorityLink: {
-    ...Typography.anchorLink,
-    fontSize: Typography.large,
   },
   listItemContainer: {
     backgroundColor: Colors.primaryLightBackground,
