@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.IntentSender;
 import android.util.Log;
 import androidx.annotation.Nullable;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.common.api.ApiException;
@@ -45,6 +46,9 @@ public class ExposureNotificationClientWrapper {
   private final ExposureNotificationClient exposureNotificationClient;
   private final ExposureConfigurations config;
 
+  @Nullable private CallbackToFutureAdapter.Completer<Void> startTracingCompleter;
+  @Nullable private CallbackToFutureAdapter.Completer<List<TemporaryExposureKey>> getKeysCompleter;
+
   public static ExposureNotificationClientWrapper get(Context context) {
     if (INSTANCE == null) {
       INSTANCE = new ExposureNotificationClientWrapper(context);
@@ -57,26 +61,72 @@ public class ExposureNotificationClientWrapper {
     config = new ExposureConfigurations(context);
   }
 
-  public Task<Void> start(ReactContext context) {
-    return exposureNotificationClient.start()
-        .addOnSuccessListener(unused -> onExposureNotificationStateChanged(context, true))
-        .addOnFailureListener(exception -> {
-          onExposureNotificationStateChanged(context, false);
-          if (!(exception instanceof ApiException)) {
-            return;
+  public ListenableFuture<Void> requestPermissionToStartTracing(ReactContext context) {
+    return CallbackToFutureAdapter.getFuture(completer -> exposureNotificationClient.start()
+        .addOnSuccessListener(unused -> {
+          if (startTracingCompleter != null) {
+            startTracingCompleter.set(unused);
+            startTracingCompleter = null;
           }
 
-          ApiException apiException = (ApiException) exception;
-          if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-            showPermissionDialog(context, apiException,
-                RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
-          }
+          onExposureNotificationStateChanged(context, true);
+          completer.set(unused);
         })
-        .addOnCanceledListener(() -> onExposureNotificationStateChanged(context, false));
+        .addOnFailureListener(exception -> {
+          if (exception instanceof ApiException) {
+            ApiException apiException = (ApiException) exception;
+            if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+              startTracingCompleter = completer;
+              showPermissionDialog(context, apiException, RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
+              return;
+            }
+          }
+
+          if (startTracingCompleter != null) {
+            startTracingCompleter.setException(exception);
+            startTracingCompleter = null;
+          }
+
+          onExposureNotificationStateChanged(context, false);
+          completer.setException(exception);
+        })
+    );
   }
 
-  public void showPermissionDialog(ReactContext reactContext, ApiException apiException,
-                                   int requestCode) {
+  /**
+   * Gets recent (initially 14 days) Temporary Exposure Keys from Google Play Services.
+   */
+  public ListenableFuture<List<TemporaryExposureKey>> requestPermissionToGetExposureKeys(ReactContext context) {
+    return CallbackToFutureAdapter.getFuture(completer -> exposureNotificationClient.getTemporaryExposureKeyHistory()
+        .addOnSuccessListener(keys -> {
+          if (getKeysCompleter != null) {
+            getKeysCompleter.set(keys);
+            getKeysCompleter = null;
+          }
+
+          completer.set(keys);
+        })
+        .addOnFailureListener(exception -> {
+          if (exception instanceof ApiException) {
+            ApiException apiException = (ApiException) exception;
+            if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
+              getKeysCompleter = completer;
+              showPermissionDialog(context, apiException, RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY);
+              return;
+            }
+          }
+
+          if (getKeysCompleter != null) {
+            getKeysCompleter.setException(exception);
+            getKeysCompleter = null;
+          }
+
+          completer.setException(exception);
+        })
+    );
+  }
+
+  public void showPermissionDialog(ReactContext reactContext, ApiException apiException, int requestCode) {
     try {
       Activity activity = reactContext.getCurrentActivity();
       if (activity != null) {
@@ -89,7 +139,30 @@ public class ExposureNotificationClientWrapper {
     }
   }
 
-  public Task<Void> stop(ReactContext context) {
+  public void onPermissionDialogResult(ReactContext context, int requestCode, boolean resultOk) {
+    if (requestCode == RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION) {
+      if (resultOk) {
+        requestPermissionToStartTracing(context);
+      } else {
+        onExposureNotificationStateChanged(context, false);
+        if (startTracingCompleter != null) {
+          startTracingCompleter.setException(new Exception("Cancelled by user"));
+          startTracingCompleter = null;
+        }
+      }
+    } else if (requestCode == RequestCodes.REQUEST_CODE_GET_TEMP_EXPOSURE_KEY_HISTORY) {
+      if (resultOk) {
+        requestPermissionToGetExposureKeys(context);
+      } else {
+        if (getKeysCompleter != null) {
+          getKeysCompleter.setException(new Exception("Cancelled by user"));
+          getKeysCompleter = null;
+        }
+      }
+    }
+  }
+
+  public Task<Void> stopTracing(ReactContext context) {
     return exposureNotificationClient.stop()
         .addOnSuccessListener(unused -> onExposureNotificationStateChanged(context, false))
         .addOnFailureListener(exception -> onExposureNotificationStateChanged(context, true))
@@ -98,10 +171,6 @@ public class ExposureNotificationClientWrapper {
 
   public Task<Boolean> isEnabled() {
     return exposureNotificationClient.isEnabled();
-  }
-
-  public Task<List<TemporaryExposureKey>> getTemporaryExposureKeyHistory() {
-    return exposureNotificationClient.getTemporaryExposureKeyHistory();
   }
 
   public ListenableFuture<Void> provideDiagnosisKeys(List<File> files) {
