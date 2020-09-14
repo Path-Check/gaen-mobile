@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Platform, ScrollView, StyleSheet, View, Linking } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import {
   loadAuthorityCopy,
@@ -10,16 +11,18 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import { useStatusBarEffect } from "../navigation"
-import { StatusBar, GlobalText } from "../components"
+import { Stacks, ModalScreens, useStatusBarEffect } from "../navigation"
+import { ListItem, StatusBar, GlobalText } from "../components"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "../Settings/ExternalLink"
 
 import { Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
 const ConnectScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
+  const navigation = useNavigation()
   const {
     t,
     i18n: { language: localeCode },
@@ -49,43 +52,54 @@ const ConnectScreen: FunctionComponent = () => {
     Linking.openURL(healthAuthorityAdviceUrl)
   }
 
+  const handleOnPressHowTheAppWorks = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.HowItWorksReviewFromConnect,
+    })
+  }
+
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
       <ScrollView style={style.container} alwaysBounceVertical={false}>
-        <View>
-          <GlobalText style={style.headerContent}>{applicationName}</GlobalText>
+        <View style={style.topContainer}>
+          <GlobalText style={style.headerText}>{applicationName}</GlobalText>
+          <GlobalText style={style.aboutContent}>
+            <>
+              {aboutContent}
+              <GlobalText
+                onPress={handleOnPressLink}
+                style={style.healthAuthorityLink}
+              >
+                {t("connect.ha_link", { healthAuthorityName })}
+              </GlobalText>
+            </>
+          </GlobalText>
+          {authorityLinks?.map(({ url, label }) => {
+            return <ExternalLink key={label} url={url} label={label} />
+          })}
         </View>
-        <GlobalText style={style.aboutContent}>
-          <>
-            {aboutContent}
-            <GlobalText
-              onPress={handleOnPressLink}
-              style={style.healthAuthorityLink}
-            >
-              {t("connect.ha_link", { healthAuthorityName })}
-            </GlobalText>
-          </>
-        </GlobalText>
-        {authorityLinks?.map(({ url, label }) => {
-          return <ExternalLink key={label} url={url} label={label} />
-        })}
-        <View style={style.infoRowContainer}>
-          <View style={style.infoRow}>
-            <GlobalText style={style.aboutSectionParaLabel}>
-              {t("connect.version")}
-            </GlobalText>
-            <GlobalText style={style.aboutSectionParaContent}>
-              {versionInfo}
-            </GlobalText>
-          </View>
-          <View style={style.infoRow}>
-            <GlobalText style={style.aboutSectionParaLabel}>
-              {t("connect.operating_system_abbr")}
-            </GlobalText>
-            <GlobalText style={style.aboutSectionParaContent}>
-              {osInfo}
-            </GlobalText>
+        <View style={style.listItemContainer}>
+          <ListItem
+            label={t("screen_titles.how_the_app_works")}
+            onPress={handleOnPressHowTheAppWorks}
+            icon={Icons.RestartWithCheck}
+          />
+        </View>
+        <View style={style.bottomContainer}>
+          <View style={style.infoRowContainer}>
+            <View style={style.infoRow}>
+              <GlobalText style={style.infoRowLabel}>
+                {t("connect.version")}
+              </GlobalText>
+              <GlobalText style={style.infoRowValue}>{versionInfo}</GlobalText>
+            </View>
+            <View style={style.infoRow}>
+              <GlobalText style={style.infoRowLabel}>
+                {t("connect.operating_system_abbr")}
+              </GlobalText>
+              <GlobalText style={style.infoRowValue}>{osInfo}</GlobalText>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -98,9 +112,11 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.secondary10,
     paddingTop: Spacing.large,
-    paddingHorizontal: Spacing.small,
   },
-  headerContent: {
+  topContainer: {
+    paddingHorizontal: Spacing.large,
+  },
+  headerText: {
     ...Typography.header2,
     marginBottom: Spacing.small,
   },
@@ -113,15 +129,11 @@ const style = StyleSheet.create({
     ...Typography.anchorLink,
     fontSize: Typography.large,
   },
-  aboutSectionParaLabel: {
-    ...Typography.header5,
-    color: Colors.primary150,
-    width: 100,
-    marginTop: Spacing.small,
+  listItemContainer: {
+    backgroundColor: Colors.primaryLightBackground,
   },
-  aboutSectionParaContent: {
-    ...Typography.body1,
-    marginTop: Spacing.small,
+  bottomContainer: {
+    paddingHorizontal: Spacing.large,
   },
   infoRowContainer: {
     marginTop: Spacing.small,
@@ -129,6 +141,16 @@ const style = StyleSheet.create({
   },
   infoRow: {
     flexDirection: "row",
+  },
+  infoRowLabel: {
+    ...Typography.header5,
+    color: Colors.primary150,
+    width: 100,
+    marginTop: Spacing.small,
+  },
+  infoRowValue: {
+    ...Typography.body1,
+    marginTop: Spacing.small,
   },
 })
 

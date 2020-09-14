@@ -94,7 +94,8 @@ export type ModalScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
   | "AffectedUserStack"
-  | "HowItWorksReview"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -102,7 +103,8 @@ export const ModalScreens: {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
   AffectedUserStack: "AffectedUserStack",
-  HowItWorksReview: "HowItWorksReview",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
 }
 
 export type SettingsScreen =
@@ -167,7 +169,8 @@ export type Stack =
   | "ExposureHistoryFlow"
   | "Modal"
   | "HowItWorks"
-  | "HowItWorksReview"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
 
@@ -178,7 +181,8 @@ export const Stacks: { [key in Stack]: Stack } = {
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",
   HowItWorks: "HowItWorks",
-  HowItWorksReview: "HowItWorksReview",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
 }

@@ -1,12 +1,10 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
+import { ScrollView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
 import { getLocalNames } from "../locales/languages"
-import { GlobalText } from "../components"
 import {
   useStatusBarEffect,
   Stacks,
@@ -14,9 +12,10 @@ import {
   SettingsScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
+import { ListItem } from "../components"
 
 import { Icons } from "../assets"
-import { Iconography, Colors, Spacing, Typography, Outlines } from "../styles"
+import { Colors, Spacing, Outlines } from "../styles"
 
 type SettingsListItem = {
   label: string
@@ -45,18 +44,15 @@ const Settings: FunctionComponent = () => {
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(Stacks.Modal, { screen: ModalScreens.HowItWorksReview })
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.HowItWorksReviewFromSettings,
+    })
   }
 
   const selectLanguage: SettingsListItem = {
     label: languageName,
     onPress: handleOnPressSelectLanguage,
     icon: Icons.LanguagesIcon,
-  }
-  const about: SettingsListItem = {
-    label: t("screen_titles.about"),
-    onPress: () => navigation.navigate(SettingsScreens.About),
-    icon: Icons.Document,
   }
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
@@ -84,35 +80,12 @@ const Settings: FunctionComponent = () => {
     icon: Icons.Document,
   }
 
-  const middleListItems: SettingsListItem[] = [about, legal, howTheAppWorks]
+  const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
   if (displayCallbackForm) {
     middleListItems.push(callbackForm)
   }
   if (displayReportAnIssue) {
     middleListItems.push(reportAnIssue)
-  }
-
-  const ListItem: FunctionComponent<SettingsListItem> = ({
-    label,
-    onPress,
-    icon,
-  }) => {
-    return (
-      <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
-        <View style={style.listItem}>
-          <SvgXml
-            fill={Colors.primary100}
-            xml={icon}
-            width={Iconography.small}
-            height={Iconography.small}
-            style={style.icon}
-            accessible
-            accessibilityLabel={label}
-          />
-          <GlobalText style={style.listItemText}>{label}</GlobalText>
-        </View>
-      </TouchableOpacity>
-    )
   }
 
   const ItemSeparator = () => {
@@ -162,22 +135,8 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
   },
-  icon: {
-    marginRight: Spacing.small,
-  },
-  listItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.large,
-  },
-  listItemText: {
-    ...Typography.tappableListItem,
-  },
   divider: {
-    height: Outlines.hairline,
-    backgroundColor: Colors.neutral10,
-    marginHorizontal: Spacing.medium,
+    ...Outlines.dividerLine,
   },
 })
 
