@@ -29,6 +29,7 @@ import LocationPin from "./locationPin"
 import Mask from "./mask"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
+import QuestionMarkInCircle from "./questionMarkInCircle"
 import RadioWave from "./radioWave"
 import RestartWithCheck from "./restartWithCheck"
 import SelfAssessment from "./selfAssessment"
@@ -74,6 +75,7 @@ export const Icons = {
   Mask,
   Publish,
   QuestionMark,
+  QuestionMarkInCircle,
   RadioWave,
   RestartWithCheck,
   SelfAssessment,

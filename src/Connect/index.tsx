@@ -17,13 +17,24 @@ import {
   ModalScreens,
   useStatusBarEffect,
 } from "../navigation"
-import { ListItem, StatusBar, GlobalText } from "../components"
+import {
+  ListItem,
+  ListItemSeparator,
+  StatusBar,
+  GlobalText,
+} from "../components"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "../Settings/ExternalLink"
 
 import { Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
+
+type ConnectListItem = {
+  label: string
+  onPress: () => void
+  icon: string
+}
 
 const ConnectScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
@@ -37,6 +48,7 @@ const ConnectScreen: FunctionComponent = () => {
   const {
     healthAuthorityName,
     healthAuthorityAdviceUrl,
+    displayReportAnIssue,
   } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
@@ -63,8 +75,20 @@ const ConnectScreen: FunctionComponent = () => {
     })
   }
 
-  const handleOnPressReportIssue = () => {
-    navigation.navigate(ReportIssueScreens.ReportIssue)
+  const howTheAppWorks: ConnectListItem = {
+    label: t("screen_titles.how_the_app_works"),
+    onPress: handleOnPressHowTheAppWorks,
+    icon: Icons.RestartWithCheck,
+  }
+  const reportAnIssue: ConnectListItem = {
+    label: t("screen_titles.report_issue"),
+    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
+    icon: Icons.QuestionMarkInCircle,
+  }
+
+  const listItems: ConnectListItem[] = [howTheAppWorks]
+  if (displayReportAnIssue) {
+    listItems.push(reportAnIssue)
   }
 
   return (
@@ -89,16 +113,15 @@ const ConnectScreen: FunctionComponent = () => {
           })}
         </View>
         <View style={style.listItemContainer}>
-          <ListItem
-            label={t("screen_titles.how_the_app_works")}
-            onPress={handleOnPressHowTheAppWorks}
-            icon={Icons.RestartWithCheck}
-          />
-          <ListItem
-            label={t("screen_titles.report_issue")}
-            onPress={handleOnPressReportIssue}
-            icon={Icons.QuestionMark}
-          />
+          {listItems.map((params, idx) => {
+            const isLastItem = idx === listItems.length - 1
+            return (
+              <View key={params.label}>
+                <ListItem {...params} />
+                {!isLastItem && <ListItemSeparator />}
+              </View>
+            )
+          })}
         </View>
         <View style={style.bottomContainer}>
           <View style={style.infoRowContainer}>
@@ -129,6 +152,7 @@ const style = StyleSheet.create({
   },
   topContainer: {
     paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.large,
   },
   headerText: {
     ...Typography.header2,

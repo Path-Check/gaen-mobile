@@ -41,7 +41,7 @@ export const lightShadow: ViewStyle = {
   borderColor: Colors.neutral25,
 }
 
-export const dividerLine: ViewStyle = {
+export const separatorLine: ViewStyle = {
   height: hairline,
   backgroundColor: Colors.neutral10,
   marginHorizontal: Spacing.medium,

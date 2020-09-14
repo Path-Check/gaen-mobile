@@ -13,10 +13,10 @@ import {
   ReportIssueScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { ListItem } from "../components"
+import { ListItem, ListItemSeparator } from "../components"
 
 import { Icons } from "../assets"
-import { Colors, Spacing, Outlines } from "../styles"
+import { Colors, Spacing } from "../styles"
 
 type SettingsListItem = {
   label: string
@@ -89,10 +89,6 @@ const Settings: FunctionComponent = () => {
     middleListItems.push(reportAnIssue)
   }
 
-  const ItemSeparator = () => {
-    return <View style={style.divider} />
-  }
-
   return (
     <ScrollView style={style.container}>
       <View style={style.section}>
@@ -103,12 +99,12 @@ const Settings: FunctionComponent = () => {
         />
       </View>
       <View style={style.section}>
-        {middleListItems.map(({ label, onPress, icon }, idx) => {
+        {middleListItems.map((params, idx) => {
           const isLastItem = idx === middleListItems.length - 1
           return (
-            <View key={label}>
-              <ListItem icon={icon} label={label} onPress={onPress} />
-              {!isLastItem && <ItemSeparator />}
+            <View key={params.label}>
+              <ListItem {...params} />
+              {!isLastItem && <ListItemSeparator />}
             </View>
           )
         })}
@@ -135,9 +131,6 @@ const style = StyleSheet.create({
   section: {
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
-  },
-  divider: {
-    ...Outlines.dividerLine,
   },
 })
 
