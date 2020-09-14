@@ -8,21 +8,17 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import Settings from "../Settings/"
-import About from "../Settings/About"
 import Legal from "../Settings/Legal"
-import ReportIssue from "../Settings/ReportIssue"
+import ReportIssue from "../ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
 import CallbackFormScreen from "../Settings/CallbackForm"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
-import { SettingsScreens, SettingsScreen } from "./index"
+import { ReportIssueScreens, SettingsScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
 
-type SettingsStackParams = {
-  [key in SettingsScreen]: undefined
-}
-const Stack = createStackNavigator<SettingsStackParams>()
+const Stack = createStackNavigator()
 
 const headerLeft = () => {
   return <HeaderLeft />
@@ -59,7 +55,6 @@ const SettingsStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen name={SettingsScreens.Settings} component={Settings} />
-      <Stack.Screen name={SettingsScreens.About} component={About} />
       <Stack.Screen
         name={SettingsScreens.CallbackForm}
         component={CallbackFormScreen}
@@ -70,7 +65,7 @@ const SettingsStack: FunctionComponent = () => {
         options={{ headerTitle: t("screen_titles.legal") }}
       />
       <Stack.Screen
-        name={SettingsScreens.ReportIssue}
+        name={ReportIssueScreens.ReportIssue}
         component={ReportIssue}
         options={{ headerTitle: t("screen_titles.report_issue") }}
       />

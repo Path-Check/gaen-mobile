@@ -1,24 +1,145 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, Text, StyleSheet } from "react-native"
+import { Platform, ScrollView, StyleSheet, View, Linking } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
-import { GradientBackground, StatusBar } from "../components"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
+import {
+  Stacks,
+  ReportIssueScreens,
+  ModalScreens,
+  useStatusBarEffect,
+} from "../navigation"
+import {
+  ListItem,
+  ListItemSeparator,
+  StatusBar,
+  GlobalText,
+} from "../components"
+import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import { useConfigurationContext } from "../ConfigurationContext"
+import ExternalLink from "../Settings/ExternalLink"
 
-import { Colors } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
+
+type ConnectListItem = {
+  label: string
+  onPress: () => void
+  icon: string
+}
 
 const ConnectScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.gradientPrimary20Lighter)
-  const { t } = useTranslation()
+  useStatusBarEffect("dark-content", Colors.secondary10)
+  const navigation = useNavigation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
+  const osInfo = `${Platform.OS} v${Platform.Version}`
+  const { applicationName, versionInfo } = useApplicationInfo()
+  const {
+    healthAuthorityName,
+    healthAuthorityAdviceUrl,
+    displayReportAnIssue,
+  } = useConfigurationContext()
+
+  const aboutContent = authorityCopyTranslation(
+    loadAuthorityCopy("about"),
+    localeCode,
+    t("connect.description", {
+      applicationName,
+      healthAuthorityName,
+    }),
+  )
+
+  const authorityLinks = applyTranslations(
+    loadAuthorityLinks("about"),
+    localeCode,
+  )
+
+  const handleOnPressLink = () => {
+    Linking.openURL(healthAuthorityAdviceUrl)
+  }
+
+  const handleOnPressHowTheAppWorks = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.HowItWorksReviewFromConnect,
+    })
+  }
+
+  const howTheAppWorks: ConnectListItem = {
+    label: t("screen_titles.how_the_app_works"),
+    onPress: handleOnPressHowTheAppWorks,
+    icon: Icons.RestartWithCheck,
+  }
+  const reportAnIssue: ConnectListItem = {
+    label: t("screen_titles.report_issue"),
+    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
+    icon: Icons.QuestionMarkInCircle,
+  }
+
+  const listItems: ConnectListItem[] = [howTheAppWorks]
+  if (displayReportAnIssue) {
+    listItems.push(reportAnIssue)
+  }
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.gradientPrimary20Lighter} />
-      <GradientBackground gradient={Colors.gradientPrimary20}>
-        <ScrollView style={style.container}>
-          <Text>{t("navigation.connect")}</Text>
-        </ScrollView>
-      </GradientBackground>
+      <StatusBar backgroundColor={Colors.secondary10} />
+      <ScrollView style={style.container} alwaysBounceVertical={false}>
+        <View style={style.topContainer}>
+          <GlobalText style={style.headerText}>{applicationName}</GlobalText>
+          <GlobalText style={style.aboutContent}>
+            <>
+              {aboutContent}
+              <GlobalText
+                onPress={handleOnPressLink}
+                style={style.healthAuthorityLink}
+              >
+                {t("connect.ha_link", { healthAuthorityName })}
+              </GlobalText>
+            </>
+          </GlobalText>
+          {authorityLinks?.map(({ url, label }) => {
+            return <ExternalLink key={label} url={url} label={label} />
+          })}
+        </View>
+        <View style={style.listItemContainer}>
+          {listItems.map((params, idx) => {
+            const isLastItem = idx === listItems.length - 1
+            return (
+              <View key={params.label}>
+                <ListItem {...params} />
+                {!isLastItem && <ListItemSeparator />}
+              </View>
+            )
+          })}
+        </View>
+        <View style={style.bottomContainer}>
+          <View style={style.infoRowContainer}>
+            <View style={style.infoRow}>
+              <GlobalText style={style.infoRowLabel}>
+                {t("connect.version")}
+              </GlobalText>
+              <GlobalText style={style.infoRowValue}>{versionInfo}</GlobalText>
+            </View>
+            <View style={style.infoRow}>
+              <GlobalText style={style.infoRowLabel}>
+                {t("connect.operating_system_abbr")}
+              </GlobalText>
+              <GlobalText style={style.infoRowValue}>{osInfo}</GlobalText>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </>
   )
 }
@@ -26,6 +147,48 @@ const ConnectScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.large,
+  },
+  topContainer: {
+    paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.large,
+  },
+  headerText: {
+    ...Typography.header2,
+    marginBottom: Spacing.small,
+  },
+  aboutContent: {
+    ...Typography.body1,
+    fontSize: Typography.large,
+    marginBottom: Spacing.medium,
+  },
+  healthAuthorityLink: {
+    ...Typography.anchorLink,
+    fontSize: Typography.large,
+  },
+  listItemContainer: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  bottomContainer: {
+    paddingHorizontal: Spacing.large,
+  },
+  infoRowContainer: {
+    marginTop: Spacing.small,
+    marginBottom: Spacing.medium,
+  },
+  infoRow: {
+    flexDirection: "row",
+  },
+  infoRowLabel: {
+    ...Typography.header5,
+    color: Colors.primary150,
+    width: 100,
+    marginTop: Spacing.small,
+  },
+  infoRowValue: {
+    ...Typography.body1,
+    marginTop: Spacing.small,
   },
 })
 

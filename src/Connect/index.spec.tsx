@@ -2,7 +2,7 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Linking } from "react-native"
 
-import AboutScreen from "./About"
+import ConnectScreen from "./index"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
@@ -11,16 +11,18 @@ import {
   applyTranslations,
 } from "../configuration/authorityLinks"
 
+jest.mock("@react-navigation/native")
 jest.mock("../configuration/authorityLinks")
 jest.mock("../hooks/useApplicationInfo")
-describe("About", () => {
+
+describe("Connect", () => {
   it("shows the name of the application", () => {
     const applicationName = "application name"
     ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
       applicationName,
       versionInfo: "versionInfo",
     })
-    const { getByText } = render(<AboutScreen />)
+    const { getByText } = render(<ConnectScreen />)
 
     expect(getByText(applicationName)).toBeDefined()
   })
@@ -34,7 +36,7 @@ describe("About", () => {
       versionInfo,
     })
 
-    const { getByText } = render(<AboutScreen />)
+    const { getByText } = render(<ConnectScreen />)
 
     expect(getByText("Version:")).toBeDefined()
     expect(getByText(versionInfo)).toBeDefined()
@@ -51,13 +53,13 @@ describe("About", () => {
       versionInfo: "versionInfo",
     })
 
-    const { getByText } = render(<AboutScreen />)
+    const { getByText } = render(<ConnectScreen />)
 
     expect(getByText(`${mockOsName} v${mockOsVersion}`)).toBeDefined()
   })
 
   it("shows the screen description with the app name and the authority", () => {
-    const healthAuthorityName = "authority name"
+    const healthAuthorityName = "authorityName"
     const applicationName = "applicationName"
 
     ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
@@ -69,14 +71,12 @@ describe("About", () => {
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityName })}
       >
-        <AboutScreen />
+        <ConnectScreen />
       </ConfigurationContext.Provider>,
     )
 
     expect(
-      getByText(
-        `The ${applicationName} app is made available by ${healthAuthorityName}`,
-      ),
+      getByText(/The applicationName app is made available by authorityName./),
     ).toBeDefined()
   })
 
@@ -95,7 +95,7 @@ describe("About", () => {
     })
     const openURLSpy = jest.spyOn(Linking, "openURL")
 
-    const { getByLabelText } = render(<AboutScreen />)
+    const { getByLabelText } = render(<ConnectScreen />)
 
     fireEvent.press(getByLabelText(label))
 

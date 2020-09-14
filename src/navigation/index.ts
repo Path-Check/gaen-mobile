@@ -94,7 +94,8 @@ export type ModalScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
   | "AffectedUserStack"
-  | "HowItWorksReview"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -102,15 +103,14 @@ export const ModalScreens: {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
   AffectedUserStack: "AffectedUserStack",
-  HowItWorksReview: "HowItWorksReview",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
 }
 
 export type SettingsScreen =
   | "Settings"
-  | "About"
   | "Legal"
   | "CallbackForm"
-  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -120,10 +120,8 @@ export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
 } = {
   Settings: "Settings",
-  About: "About",
   Legal: "Legal",
   CallbackForm: "CallbackForm",
-  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
@@ -162,6 +160,14 @@ export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
   Welcome: "Welcome",
 }
 
+export type ReportIssueScreen = "ReportIssue"
+
+export const ReportIssueScreens: {
+  [key in ReportIssueScreen]: ReportIssueScreen
+} = {
+  ReportIssue: "ReportIssue",
+}
+
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
@@ -169,7 +175,8 @@ export type Stack =
   | "ExposureHistoryFlow"
   | "Modal"
   | "HowItWorks"
-  | "HowItWorksReview"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
 
@@ -180,7 +187,8 @@ export const Stacks: { [key in Stack]: Stack } = {
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",
   HowItWorks: "HowItWorks",
-  HowItWorksReview: "HowItWorksReview",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
 }
