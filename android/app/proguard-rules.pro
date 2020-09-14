@@ -9,8 +9,17 @@
 
 # Add any project specific keep options here:
 
-# react-native-config, prevents obfuscating of .env flags
--keep class org.pathcheck.covidsafepaths.BuildConfig { *; }
+-keepattributes LineNumberTable,SourceFile
+
+# This allows proguard to strip isLoggable() blocks containing only <=INFO log
+# code from release builds.
+-assumenosideeffects class android.util.Log {
+  public static *** d(...);
+  public static *** v(...);
+  public static *** isLoggable(...);
+}
+
+-dontwarn android.support.annotation.**
 
 -keep class androidx.core.app.CoreComponentFactory { *; }
 
@@ -40,3 +49,21 @@
 
 # Joda
 -dontwarn org.joda.convert.**
+
+# -----------------------------------------------
+# React Native Libraries
+# -----------------------------------------------
+
+# react-native
+-keep class com.facebook.react.devsupport.** { *; }
+-dontwarn com.facebook.react.devsupport.**
+
+# react-native-config, prevents obfuscating of .env flags
+-keep class org.pathcheck.covidsafepaths.BuildConfig { *; }
+
+# Hermes
+-keep class com.facebook.hermes.unicode.** { *; }
+-keep class com.facebook.jni.** { *; }
+
+# react-native-svg
+-keep public class com.horcrux.svg.** {*;}
