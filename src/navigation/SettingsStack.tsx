@@ -9,19 +9,16 @@ import { useNavigation } from "@react-navigation/native"
 
 import Settings from "../Settings/"
 import Legal from "../Settings/Legal"
-import ReportIssue from "../Settings/ReportIssue"
+import ReportIssue from "../ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
 import CallbackFormScreen from "../Settings/CallbackForm"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
-import { SettingsScreens, SettingsScreen } from "./index"
+import { ReportIssueScreens, SettingsScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
 
-type SettingsStackParams = {
-  [key in SettingsScreen]: undefined
-}
-const Stack = createStackNavigator<SettingsStackParams>()
+const Stack = createStackNavigator()
 
 const headerLeft = () => {
   return <HeaderLeft />
@@ -68,7 +65,7 @@ const SettingsStack: FunctionComponent = () => {
         options={{ headerTitle: t("screen_titles.legal") }}
       />
       <Stack.Screen
-        name={SettingsScreens.ReportIssue}
+        name={ReportIssueScreens.ReportIssue}
         component={ReportIssue}
         options={{ headerTitle: t("screen_titles.report_issue") }}
       />

@@ -10,6 +10,7 @@ import {
   Stacks,
   ModalScreens,
   SettingsScreens,
+  ReportIssueScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { ListItem } from "../components"
@@ -66,7 +67,7 @@ const Settings: FunctionComponent = () => {
   }
   const reportAnIssue: SettingsListItem = {
     label: t("screen_titles.report_issue"),
-    onPress: () => navigation.navigate(SettingsScreens.ReportIssue),
+    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
     icon: Icons.QuestionMark,
   }
   const howTheAppWorks: SettingsListItem = {

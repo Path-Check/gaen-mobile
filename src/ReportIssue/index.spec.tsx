@@ -2,7 +2,7 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Platform, Alert } from "react-native"
 
-import ReportIssue from "./ReportIssue"
+import ReportIssue from "."
 import * as API from "./zendeskAPI"
 
 const mockedVersionInfo = "versionInfo"

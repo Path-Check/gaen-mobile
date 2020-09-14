@@ -11,7 +11,12 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import { Stacks, ModalScreens, useStatusBarEffect } from "../navigation"
+import {
+  Stacks,
+  ReportIssueScreens,
+  ModalScreens,
+  useStatusBarEffect,
+} from "../navigation"
 import { ListItem, StatusBar, GlobalText } from "../components"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -58,6 +63,10 @@ const ConnectScreen: FunctionComponent = () => {
     })
   }
 
+  const handleOnPressReportIssue = () => {
+    navigation.navigate(ReportIssueScreens.ReportIssue)
+  }
+
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
@@ -84,6 +93,11 @@ const ConnectScreen: FunctionComponent = () => {
             label={t("screen_titles.how_the_app_works")}
             onPress={handleOnPressHowTheAppWorks}
             icon={Icons.RestartWithCheck}
+          />
+          <ListItem
+            label={t("screen_titles.report_issue")}
+            onPress={handleOnPressReportIssue}
+            icon={Icons.QuestionMark}
           />
         </View>
         <View style={style.bottomContainer}>

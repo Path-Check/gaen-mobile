@@ -111,7 +111,6 @@ export type SettingsScreen =
   | "Settings"
   | "Legal"
   | "CallbackForm"
-  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -123,7 +122,6 @@ export const SettingsScreens: {
   Settings: "Settings",
   Legal: "Legal",
   CallbackForm: "CallbackForm",
-  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
@@ -160,6 +158,14 @@ export type WelcomeScreen = "Welcome"
 
 export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
   Welcome: "Welcome",
+}
+
+export type ReportIssueScreen = "ReportIssue"
+
+export const ReportIssueScreens: {
+  [key in ReportIssueScreen]: ReportIssueScreen
+} = {
+  ReportIssue: "ReportIssue",
 }
 
 export type Stack =
