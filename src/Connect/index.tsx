@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Platform, ScrollView, StyleSheet, View, Linking } from "react-native"
+import { Platform, ScrollView, StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -47,7 +47,6 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    healthAuthorityAdviceUrl,
     displayReportAnIssue,
   } = useConfigurationContext()
 
@@ -64,10 +63,6 @@ const ConnectScreen: FunctionComponent = () => {
     loadAuthorityLinks("about"),
     localeCode,
   )
-
-  const handleOnPressLink = () => {
-    Linking.openURL(healthAuthorityAdviceUrl)
-  }
 
   const handleOnPressHowTheAppWorks = () => {
     navigation.navigate(Stacks.Modal, {
@@ -152,10 +147,6 @@ const style = StyleSheet.create({
     ...Typography.body1,
     fontSize: Typography.large,
     marginBottom: Spacing.medium,
-  },
-  healthAuthorityLink: {
-    ...Typography.anchorLink,
-    fontSize: Typography.large,
   },
   listItemContainer: {
     backgroundColor: Colors.primaryLightBackground,
