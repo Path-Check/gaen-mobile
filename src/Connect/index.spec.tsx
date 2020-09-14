@@ -76,7 +76,7 @@ describe("Connect", () => {
     )
 
     expect(
-      getByText(/The applicationName app is made available by authorityName./),
+      getByText(/The applicationName app is made available by authorityName/),
     ).toBeDefined()
   })
 
