@@ -1,18 +1,17 @@
 import React, { FunctionComponent } from "react"
-import { View, ScrollView, StyleSheet, Linking } from "react-native"
+import { View, ScrollView, StyleSheet } from "react-native"
 import { RouteProp, useRoute } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ExposureHistoryStackParamList } from "../navigation"
-import { GlobalText, Button } from "../components"
+import { GlobalText } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { ExposureDatum, exposureWindowBucket } from "../exposure"
-import { useConnectionStatus } from "../hooks/useConnectionStatus"
 
 import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
-import { useConfigurationContext } from "../ConfigurationContext"
+import ExposureActions from "./detail/ExposureActions"
 
 const ExposureDetail: FunctionComponent = () => {
   const route = useRoute<
@@ -20,12 +19,6 @@ const ExposureDetail: FunctionComponent = () => {
   >()
   useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
-  const {
-    healthAuthorityName,
-    healthAuthorityAdviceUrl,
-  } = useConfigurationContext()
-
-  const isInternetReachable = useConnectionStatus()
 
   const { exposureDatum } = route.params
 
@@ -45,11 +38,6 @@ const ExposureDetail: FunctionComponent = () => {
       }
     }
   }
-  const handleOnPressNextStep = () => {
-    Linking.openURL(healthAuthorityAdviceUrl)
-  }
-
-  const displayNextStepsLink = healthAuthorityAdviceUrl !== ""
 
   return (
     <ScrollView style={style.container}>
@@ -75,74 +63,11 @@ const ExposureDetail: FunctionComponent = () => {
         </GlobalText>
       </View>
       <View style={style.bottomContainer}>
-        <GlobalText style={style.bottomHeaderText}>
-          {t("exposure_history.exposure_detail.ha_guidance_header")}
-        </GlobalText>
-        <GlobalText style={style.bottomSubheaderText}>
-          {t("exposure_history.exposure_detail.ha_guidance_subheader", {
-            healthAuthorityName,
-          })}
-        </GlobalText>
-        <View style={style.recommendations}>
-          <RecommendationBubble
-            icon={Icons.IsolateBubbles}
-            text={t("exposure_history.exposure_detail.isolate")}
-          />
-          <RecommendationBubble
-            icon={Icons.Mask}
-            text={t("exposure_history.exposure_detail.wear_a_mask")}
-          />
-          <RecommendationBubble
-            icon={Icons.SixFeet}
-            text={t("exposure_history.exposure_detail.6ft_apart")}
-          />
-          <RecommendationBubble
-            icon={Icons.WashHands}
-            text={t("exposure_history.exposure_detail.wash_your_hands")}
-          />
-        </View>
-        {displayNextStepsLink && (
-          <View style={style.buttonContainer}>
-            <Button
-              onPress={handleOnPressNextStep}
-              label={t("exposure_history.exposure_detail.next_steps")}
-              disabled={!isInternetReachable}
-              hasRightArrow
-            />
-          </View>
-        )}
-        {!isInternetReachable && (
-          <GlobalText style={style.connectivityWarningText}>
-            {t("exposure_history.no_connectivity_message")}
-          </GlobalText>
-        )}
+        <ExposureActions />
       </View>
     </ScrollView>
   )
 }
-
-type RecommendationBubbleProps = {
-  text: string
-  icon: string
-}
-const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
-  text,
-  icon,
-}) => {
-  return (
-    <View style={style.recommendation}>
-      <View style={style.recommendationBubbleCircle}>
-        <SvgXml
-          xml={icon}
-          width={Iconography.small}
-          height={Iconography.small}
-        />
-      </View>
-      <GlobalText style={style.recommendationText}>{text}</GlobalText>
-    </View>
-  )
-}
-
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -178,42 +103,6 @@ const style = StyleSheet.create({
     paddingTop: Spacing.medium,
     paddingBottom: Spacing.xLarge,
     marginTop: Spacing.xxSmall,
-  },
-  bottomHeaderText: {
-    ...Typography.header5,
-    marginBottom: Spacing.xxSmall,
-  },
-  bottomSubheaderText: {
-    ...Typography.body2,
-    color: Colors.neutral100,
-    marginBottom: Spacing.medium,
-  },
-  recommendations: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: Spacing.xxxLarge,
-  },
-  recommendation: {
-    display: "flex",
-    alignItems: "center",
-  },
-  recommendationBubbleCircle: {
-    ...Iconography.smallIcon,
-    borderRadius: 50,
-    backgroundColor: Colors.primaryLightBackground,
-    padding: Spacing.xLarge,
-    marginBottom: Spacing.xSmall,
-  },
-  recommendationText: {
-    ...Typography.body3,
-  },
-  buttonContainer: {
-    alignSelf: "flex-start",
-  },
-  connectivityWarningText: {
-    ...Typography.error,
-    marginTop: Spacing.small,
   },
 })
 
