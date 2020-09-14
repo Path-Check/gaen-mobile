@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react"
 import { View, ScrollView, StyleSheet, Linking } from "react-native"
-import { RouteProp, useRoute, useNavigation } from "@react-navigation/native"
+import { RouteProp, useRoute } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { ExposureHistoryStackParamList, Screens } from "../navigation"
+import { ExposureHistoryStackParamList } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { ExposureDatum, exposureWindowBucket } from "../exposure"
@@ -15,7 +15,6 @@ import { Icons } from "../assets"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 const ExposureDetail: FunctionComponent = () => {
-  const navigation = useNavigation()
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
@@ -46,12 +45,11 @@ const ExposureDetail: FunctionComponent = () => {
       }
     }
   }
-
   const handleOnPressNextStep = () => {
-    healthAuthorityAdviceUrl
-      ? Linking.openURL(healthAuthorityAdviceUrl)
-      : navigation.navigate(Screens.SelfAssessment)
+    Linking.openURL(healthAuthorityAdviceUrl)
   }
+
+  const displayNextStepsLink = healthAuthorityAdviceUrl !== ""
 
   return (
     <ScrollView style={style.container}>
@@ -103,14 +101,16 @@ const ExposureDetail: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        <View style={style.buttonContainer}>
-          <Button
-            onPress={handleOnPressNextStep}
-            label={t("exposure_history.exposure_detail.next_steps")}
-            disabled={!isInternetReachable}
-            hasRightArrow
-          />
-        </View>
+        {displayNextStepsLink && (
+          <View style={style.buttonContainer}>
+            <Button
+              onPress={handleOnPressNextStep}
+              label={t("exposure_history.exposure_detail.next_steps")}
+              disabled={!isInternetReachable}
+              hasRightArrow
+            />
+          </View>
+        )}
         {!isInternetReachable && (
           <GlobalText style={style.connectivityWarningText}>
             {t("exposure_history.no_connectivity_message")}

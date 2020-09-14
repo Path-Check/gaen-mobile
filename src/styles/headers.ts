@@ -1,4 +1,5 @@
 import { TextStyle, ViewStyle } from "react-native"
+import { StackNavigationOptions } from "@react-navigation/stack"
 
 import * as Colors from "./colors"
 import * as Typography from "./typography"
@@ -12,4 +13,16 @@ export const headerTitleStyle: TextStyle = {
   color: Colors.headerText,
   letterSpacing: Typography.mediumLetterSpacing,
   textTransform: "uppercase",
+}
+
+export const headerScreenOptions: StackNavigationOptions = {
+  headerStyle: {
+    ...headerStyle,
+  },
+  headerTitleStyle: {
+    ...headerTitleStyle,
+  },
+  headerBackTitleVisible: false,
+  headerTintColor: Colors.headerText,
+  headerTitleAlign: "center",
 }

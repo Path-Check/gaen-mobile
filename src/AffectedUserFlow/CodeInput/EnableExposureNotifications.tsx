@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText, Button, StatusBar } from "../../components"
-import { Screens, useStatusBarEffect } from "../../navigation"
+import { useStatusBarEffect, Stacks } from "../../navigation"
 import { Spacing, Iconography, Colors, Typography, Layout } from "../../styles"
 import { Icons } from "../../assets"
 import { openAppSettings } from "../../gaen/nativeModule"
@@ -20,7 +20,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   return (

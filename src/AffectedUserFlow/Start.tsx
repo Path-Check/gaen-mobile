@@ -11,7 +11,11 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import { Screens, useStatusBarEffect } from "../navigation"
+import {
+  useStatusBarEffect,
+  AffectedUserFlowScreens,
+  Stacks,
+} from "../navigation"
 
 import { Layout, Spacing, Colors, Iconography, Typography } from "../styles"
 import { Images, Icons } from "../assets"
@@ -22,11 +26,11 @@ export const ExportIntro: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressNext = () => {
-    navigation.navigate(Screens.AffectedUserCodeInput)
+    navigation.navigate(AffectedUserFlowScreens.AffectedUserCodeInput)
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   return (

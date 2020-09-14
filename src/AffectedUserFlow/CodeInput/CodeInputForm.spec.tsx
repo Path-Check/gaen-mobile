@@ -7,7 +7,7 @@ import CodeInputForm from "./CodeInputForm"
 import { AffectedUserProvider } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import * as Hmac from "../hmac"
-import { Screens } from "../../navigation"
+import { AffectedUserFlowScreens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
 import { factories } from "../../factories"
 
@@ -89,7 +89,7 @@ describe("CodeInputForm", () => {
         expect(apiSpy).toHaveBeenCalledWith(code)
         expect(postTokenSpy).toHaveBeenCalledWith(verificationToken, hmacDigest)
         expect(navigateSpy).toHaveBeenCalledWith(
-          Screens.AffectedUserPublishConsent,
+          AffectedUserFlowScreens.AffectedUserPublishConsent,
         )
       })
     })

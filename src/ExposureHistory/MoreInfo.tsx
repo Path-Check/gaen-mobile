@@ -40,7 +40,7 @@ const MoreInfo: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.secondary10,
     padding: Spacing.medium,
   },
   contentContainer: {

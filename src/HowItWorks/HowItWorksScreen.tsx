@@ -29,7 +29,7 @@ import {
   Iconography,
 } from "../styles"
 
-type OnboardingScreenContent = {
+type HowItWorksScreenContent = {
   screenNumber: number
   image: ImageSourcePropType
   imageLabel: string
@@ -38,15 +38,17 @@ type OnboardingScreenContent = {
   primaryButtonOnPress: () => void
 }
 
-interface OnboardingScreenProps {
-  onboardingScreenContent: OnboardingScreenContent
+interface HowItWorksScreenProps {
+  howItWorksScreenContent: HowItWorksScreenContent
+  totalScreenCount: number
   destinationOnSkip: Stack
 }
 
-const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
-  onboardingScreenContent,
+const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
+  howItWorksScreenContent,
+  totalScreenCount,
   destinationOnSkip,
-}: OnboardingScreenProps) => {
+}: HowItWorksScreenProps) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
   const {
@@ -101,21 +103,24 @@ const OnboardingScreen: FunctionComponent<OnboardingScreenProps> = ({
         >
           <View>
             <Image
-              source={onboardingScreenContent.image}
-              accessibilityLabel={onboardingScreenContent.imageLabel}
+              source={howItWorksScreenContent.image}
+              accessibilityLabel={howItWorksScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
-            <PositionDots screenNumber={onboardingScreenContent.screenNumber} />
+            <PositionDots
+              highlightedDotIdx={howItWorksScreenContent.screenNumber}
+              totalDotCount={totalScreenCount}
+            />
             <GlobalText style={style.headerText}>
-              {onboardingScreenContent.header}
+              {howItWorksScreenContent.header}
             </GlobalText>
           </View>
           <View style={style.nextButtonContainer}>
             <Button
-              label={onboardingScreenContent.primaryButtonLabel}
-              onPress={onboardingScreenContent.primaryButtonOnPress}
+              label={howItWorksScreenContent.primaryButtonLabel}
+              onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
           </View>
@@ -223,34 +228,34 @@ const createStyle = (insets: EdgeInsets) => {
 }
 
 interface PositionDotsProps {
-  screenNumber: number
+  highlightedDotIdx: number
+  totalDotCount: number
 }
 
-const NUMBER_OF_ONBOARDING_SCREENS = 5
-
 const PositionDots: FunctionComponent<PositionDotsProps> = ({
-  screenNumber,
+  highlightedDotIdx,
+  totalDotCount,
 }) => {
-  const determineCircleStyle = (circlePosition: number): ViewStyle => {
-    if (circlePosition === screenNumber) {
-      return dotsStyle.circleActive
+  const determineDotStyle = (dotPosition: number): ViewStyle => {
+    if (dotPosition === highlightedDotIdx) {
+      return dotsStyle.dotHighlighted
     } else {
-      return dotsStyle.circleInactive
+      return dotsStyle.dot
     }
   }
 
-  const screens = Array.from(Array(NUMBER_OF_ONBOARDING_SCREENS), (i) => i + 1)
+  const screens = Array.from(Array(totalDotCount), (i) => i + 1)
 
   return (
-    <View style={dotsStyle.circles}>
+    <View style={dotsStyle.dotsContainer}>
       {screens.map((_, idx) => {
-        return <View style={determineCircleStyle(idx + 1)} key={idx} />
+        return <View style={determineDotStyle(idx + 1)} key={idx} />
       })}
     </View>
   )
 }
 const dotsStyle = StyleSheet.create({
-  circles: {
+  dotsContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: 150,
@@ -258,13 +263,13 @@ const dotsStyle = StyleSheet.create({
     marginBottom: Spacing.medium,
     paddingHorizontal: Spacing.large,
   },
-  circleActive: {
+  dotHighlighted: {
     backgroundColor: Colors.primary100,
     width: 10,
     height: 10,
     borderRadius: Outlines.borderRadiusMax,
   },
-  circleInactive: {
+  dot: {
     backgroundColor: Colors.neutral30,
     width: 5,
     height: 5,
@@ -272,6 +277,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-const MemoizedOnboardingScreen = React.memo(OnboardingScreen)
+const MemoizedHowItWorksScreen = React.memo(HowItWorksScreen)
 
-export default MemoizedOnboardingScreen
+export default MemoizedHowItWorksScreen

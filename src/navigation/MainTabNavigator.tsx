@@ -8,7 +8,7 @@ import ExposureHistoryStack from "./ExposureHistoryStack"
 import HomeStack from "./HomeStack"
 import ConnectStack from "./ConnectStack"
 
-import { Screens, Stacks } from "./index"
+import { Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Colors } from "../styles"
 
@@ -86,20 +86,20 @@ const MainTabNavigator: FunctionComponent = () => {
     )
     return tabIcon
   }
+
+  const tabBarOptions = {
+    showLabel: false,
+    style: {
+      backgroundColor: Colors.primaryLightBackground,
+      borderTopWidth: 0,
+      height: insets.bottom + 60,
+    },
+  }
+
   return (
-    <Tab.Navigator
-      initialRouteName={Screens.Home}
-      tabBarOptions={{
-        showLabel: false,
-        style: {
-          backgroundColor: Colors.primaryLightBackground,
-          borderTopWidth: 0,
-          height: insets.bottom + 60,
-        },
-      }}
-    >
+    <Tab.Navigator tabBarOptions={tabBarOptions}>
       <Tab.Screen
-        name={Screens.Home}
+        name={Stacks.Home}
         component={HomeStack}
         options={{
           tabBarLabel: t("navigation.home"),

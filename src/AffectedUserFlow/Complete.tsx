@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import { Screens, useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, Stacks } from "../navigation"
 
 import { Images } from "../assets"
 import { Colors, Layout, Spacing, Typography } from "../styles"
@@ -15,7 +15,7 @@ export const AffectedUserComplete: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressDone = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   return (

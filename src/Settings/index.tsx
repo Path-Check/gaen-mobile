@@ -45,7 +45,7 @@ const Settings: FunctionComponent = () => {
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(Stacks.Modal, { screen: ModalScreens.OnboardingReview })
+    navigation.navigate(Stacks.Modal, { screen: ModalScreens.HowItWorksReview })
   }
 
   const selectLanguage: SettingsListItem = {
