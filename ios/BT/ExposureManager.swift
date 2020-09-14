@@ -337,9 +337,10 @@ final class ExposureManager: NSObject {
       var newExposures: [Exposure] = []
       if let summary = exposureSummary {
         summary.daySummaries.forEach { (daySummary) in
-          if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) {
+          if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
+              self.btSecureStorage.canStoreExposure(for: daySummary.date) {
             let exposure = Exposure(id: UUID().uuidString,
-                                    date: daySummary.date.posixRepresentation)
+                                    date: daySummary.date.toMidnight.posixRepresentation)
             newExposures.append(exposure)
           }
         }
@@ -588,7 +589,7 @@ private extension ExposureManager {
         } else {
           let newExposures = (exposures ?? []).map { exposure in
             Exposure(id: UUID().uuidString,
-                     date: exposure.date.posixRepresentation)
+                     date: exposure.date.toMidnight.posixRepresentation)
           }
           fullfill(newExposures)
         }
