@@ -81,6 +81,11 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func canStoreExposure(for date: Date) -> Bool {
+    let posixToMidnight = date.toMidnight.posixRepresentation
+    return !userState.exposures.map { $0.date }.contains(posixToMidnight)
+  }
+
   @Persisted(keyPath: .remainingDailyFileProcessingCapacity, notificationName: .remainingDailyFileProcessingCapacityDidChange, defaultValue: Constants.dailyFileProcessingCapacity)
   var remainingDailyFileProcessingCapacity: Int
 
