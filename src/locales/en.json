@@ -213,6 +213,9 @@
     "symptom_checker": "symptom_checker",
     "more_info": "More Info"
   },
+  "symptom_checker": {
+    "my_health": "My Health"
+  },
   "onboarding": {
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
