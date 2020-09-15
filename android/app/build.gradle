@@ -251,6 +251,7 @@ dependencies {
     implementation 'com.google.auto.value:auto-value-annotations:1.7.3'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'commons-io:commons-io:2.6'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.1"
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/"
