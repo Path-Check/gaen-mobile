@@ -9,6 +9,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayReportAnIssue: boolean
   displaySelfAssessment: boolean
+  displaySymptomChecker: boolean
   healthAuthorityAdviceUrl: string
   healthAuthorityEulaUrl: string | null
   healthAuthorityName: string
@@ -23,6 +24,7 @@ const initialState = {
   displayCallbackForm: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
+  displaySymptomChecker: false,
   healthAuthorityAdviceUrl: "",
   healthAuthorityEulaUrl: null,
   healthAuthorityName: "",
@@ -41,15 +43,16 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   } = env
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
-  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+  const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
+  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+  const displaySymptomChecker = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
     android: env.ANDROID_APPLICATION_ID,
   }) as string
   const regionCodes = env.REGION_CODES.split(",")
-  const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
 
   return (
     <ConfigurationContext.Provider
@@ -60,6 +63,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayReportAnIssue,
         displaySelfAssessment,
+        displaySymptomChecker,
         healthAuthorityAdviceUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityName,
