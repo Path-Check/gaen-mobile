@@ -453,6 +453,23 @@ extension ExposureManager {
     let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
     return callback(posixRepresentation, nil)
   }
+
+  func getExposureConfigurationV1() -> Promise<ExposureConfigurationV1> {
+    return Promise(on: .global()) { fullfill, _ in
+      self.apiClient.downloadRequest(ExposureConfigurationV1Request.get,
+                                     requestType: .exposureConfiguration) { (result) in
+        var configuration = ExposureConfigurationV1.placeholder
+        switch result {
+        case.success(let exposureConfiguration):
+          configuration = exposureConfiguration
+          fullfill(configuration)
+        case .failure(_):
+          fullfill(configuration)
+        }
+      }
+    }
+  }
+
 }
 
 // MARK: - Private
@@ -545,22 +562,6 @@ private extension ExposureManager {
         })
       } catch(let error) {
         reject(error)
-      }
-    }
-  }
-
-  func getExposureConfigurationV1() -> Promise<ExposureConfigurationV1> {
-    return Promise { fullfill, _ in
-      self.apiClient.downloadRequest(ExposureConfigurationV1Request.get,
-                                     requestType: .exposureConfiguration) { (result) in
-        var configuration = ExposureConfigurationV1.placeholder
-        switch result {
-        case.success(let exposureConfiguration):
-          configuration = exposureConfiguration
-          fullfill(configuration)
-        case .failure(_):
-          fullfill(configuration)
-        }
       }
     }
   }

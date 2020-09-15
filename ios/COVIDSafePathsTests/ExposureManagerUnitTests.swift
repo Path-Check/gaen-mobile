@@ -2,6 +2,7 @@ import Foundation
 import UserNotifications
 import BackgroundTasks
 import ExposureNotification
+import Promises
 import XCTest
 
 @testable import BT
@@ -332,7 +333,7 @@ class ExposureManagerTests: XCTestCase {
     }
 
     _ = ExposureManager(exposureNotificationManager: mockENManager,
-                    notificationCenter: notificationCenterMock)
+                        notificationCenter: notificationCenterMock)
     wait(for: [activateExpectation,
                invalidateExpectation,
                registerNotificationExpectation,
@@ -835,7 +836,7 @@ class ExposureManagerTests: XCTestCase {
   func testDetectExposuresDisalowConcurrentExposures() {
     let exposureManager = ExposureManager()
     exposureManager.detectExposuresV1 { (result) in
-        //no op
+      //no op
     }
     exposureManager.detectExposuresV1 { (result) in
       switch result {
@@ -934,8 +935,8 @@ class ExposureManagerTests: XCTestCase {
       return Result<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -982,8 +983,8 @@ class ExposureManagerTests: XCTestCase {
       return Result<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -1097,8 +1098,8 @@ class ExposureManagerTests: XCTestCase {
 
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -1154,8 +1155,8 @@ class ExposureManagerTests: XCTestCase {
       return Result<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -1194,9 +1195,9 @@ class ExposureManagerTests: XCTestCase {
   func testSubmitBackgroundTask() {
     let mockEnManager = ENManagerMock()
     mockEnManager.authorizationStatusHandler = {
-       return .authorized
-     }
-    let submitExpectation = self.expectation(description: "A background task request issubmitted")
+      return .authorized
+    }
+    let submitExpectation = self.expectation(description: "A background task request is submitted")
     let bgSchedulerMock = BGTaskSchedulerMock()
     bgSchedulerMock.submitHandler = { taskRequest in
       submitExpectation.fulfill()
@@ -1205,6 +1206,24 @@ class ExposureManagerTests: XCTestCase {
                                           backgroundTaskScheduler: bgSchedulerMock)
     exposureManager.scheduleBackgroundTaskIfNeeded()
     wait(for: [submitExpectation], timeout: 0)
+  }
+
+  func testGetExposureConfigurationV1FallbackToDefault() {
+    let enManagerMock = ENManagerMock()
+    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
+      return Result<String>.success("indexFilePath") as AnyObject
+    }
+    apiClientMock.downloadRequestHander = { (request, requestType) in
+      return Result<ExposureConfigurationV1>.failure(GenericError.unknown)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
+                                          apiClient: apiClientMock)
+    do {
+      let config = try await(exposureManager.getExposureConfigurationV1())
+      XCTAssertEqual(config, ExposureConfigurationV1.placeholder)
+    } catch {
+      XCTFail()
+    }
   }
 
   // MARK: == DETECTION EXPOSURE V2 TESTS ==
@@ -1233,7 +1252,7 @@ class ExposureManagerTests: XCTestCase {
       return Result<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder) as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
+      return URL(fileURLWithPath: "url")
     }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
@@ -1436,8 +1455,8 @@ class ExposureManagerTests: XCTestCase {
 
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -1503,8 +1522,8 @@ class ExposureManagerTests: XCTestCase {
 
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
-         return URL(fileURLWithPath: "url")
-       }
+      return URL(fileURLWithPath: "url")
+    }
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
@@ -1527,6 +1546,25 @@ class ExposureManagerTests: XCTestCase {
       }
     }
     wait(for: [storeExposureExpectation], timeout:2)
+  }
+
+  @available(iOS 13.7, *)
+  func testGetExposureConfigurationV2FallbackToDefault() {
+    let enManagerMock = ENManagerMock()
+    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
+      return Result<String>.success("indexFilePath") as AnyObject
+    }
+    apiClientMock.downloadRequestHander = { (request, requestType) in
+      return Result<DailySummariesConfiguration>.failure(GenericError.unknown)
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
+                                          apiClient: apiClientMock)
+    do {
+      let config = try await(exposureManager.getExposureConfigurationV2())
+      XCTAssertEqual(config, DailySummariesConfiguration.placeholder)
+    } catch {
+      XCTFail()
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import Foundation
 import ExposureNotification
 
-protocol ExposureConfiguration {
+protocol ExposureConfiguration: Equatable {
 
   static var configurationFileName: String { get }
   static var placeholder: Self { get }
