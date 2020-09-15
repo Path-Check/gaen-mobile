@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import { CallbackStackScreens, CallbackStackScreen } from "./index"
 import CallbackScreen from "../Callback/Form"
 import CallbackSuccess from "../Callback/Success"
+import { CallbackFormContext } from "../Callback/CallbackFormContext"
 
 import { Colors, Headers } from "../styles"
 
@@ -32,6 +33,7 @@ const HeaderLeft = () => {
 
 const CallbackStack: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
   const defaultScreenOptions: StackNavigationOptions = {
     headerStyle: {
       ...Headers.headerStyle,
@@ -49,16 +51,24 @@ const CallbackStack: FunctionComponent = () => {
   }
 
   return (
-    <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen
-        name={CallbackStackScreens.Form}
-        component={CallbackScreen}
-      />
-      <Stack.Screen
-        name={CallbackStackScreens.Success}
-        component={CallbackSuccess}
-      />
-    </Stack.Navigator>
+    <CallbackFormContext.Provider
+      value={{
+        callBackRequestCompleted: () => {
+          navigation.goBack()
+        },
+      }}
+    >
+      <Stack.Navigator screenOptions={defaultScreenOptions}>
+        <Stack.Screen
+          name={CallbackStackScreens.Form}
+          component={CallbackScreen}
+        />
+        <Stack.Screen
+          name={CallbackStackScreens.Success}
+          component={CallbackSuccess}
+        />
+      </Stack.Navigator>
+    </CallbackFormContext.Provider>
   )
 }
 

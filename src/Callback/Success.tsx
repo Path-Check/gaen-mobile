@@ -5,11 +5,13 @@ import { useNavigation } from "@react-navigation/native"
 
 import { GlobalText, Button } from "../components"
 import { Typography, Spacing, Colors } from "../styles"
-import { Stacks, useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { Images } from "../assets"
+import { useCallbackFormContext } from "./CallbackFormContext"
 
 const Success: FunctionComponent = () => {
   const { t } = useTranslation()
+  const { callBackRequestCompleted } = useCallbackFormContext()
   const navigation = useNavigation()
   useStatusBarEffect("light-content", Colors.headerBackground)
 
@@ -19,7 +21,7 @@ const Success: FunctionComponent = () => {
   })
 
   const handleOnPressGotIt = () => {
-    navigation.navigate(Stacks.Home)
+    callBackRequestCompleted()
   }
 
   return (
