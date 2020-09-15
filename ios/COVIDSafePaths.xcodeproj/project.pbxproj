@@ -12,6 +12,8 @@
 		A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */; };
 		A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2824F43F6E00C5E30A /* ExposureManager+Debug.swift */; };
 		A53F7B8C24FB3ADC00C5E30A /* Scoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B8B24FB3ADC00C5E30A /* Scoring.swift */; };
+		A575A3F8250B719300AA742C /* DailySummariesConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A3F6250B719300AA742C /* DailySummariesConfiguration.swift */; };
+		A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A3F9250B7BA400AA742C /* DailySummariesConfigurationRequests.swift */; };
 		A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */; };
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
@@ -199,6 +201,8 @@
 		A53F7B2824F43F6E00C5E30A /* ExposureManager+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExposureManager+Debug.swift"; sourceTree = "<group>"; };
 		A53F7B8B24FB3ADC00C5E30A /* Scoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoring.swift; sourceTree = "<group>"; };
 		A57577D96B89452694B53982 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		A575A3F6250B719300AA742C /* DailySummariesConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySummariesConfiguration.swift; sourceTree = "<group>"; };
+		A575A3F9250B7BA400AA742C /* DailySummariesConfigurationRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySummariesConfigurationRequests.swift; sourceTree = "<group>"; };
 		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043A24E565F900C3157A /* ENBridgeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ENBridgeConstants.h; sourceTree = "<group>"; };
@@ -584,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */,
+				A575A3F9250B7BA400AA742C /* DailySummariesConfigurationRequests.swift */,
 				B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */,
 				B54CBF31249A738500218477 /* IndexFileRequests.swift */,
 				B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */,
@@ -598,6 +603,7 @@
 				B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */,
 				B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */,
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
+				A575A3F6250B719300AA742C /* DailySummariesConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
@@ -977,10 +983,12 @@
 				A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */,
 				B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */,
 				B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */,
+				A575A3F8250B719300AA742C /* DailySummariesConfiguration.swift in Sources */,
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
+				A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
 				B5FC37F6248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift in Sources */,
 				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,

@@ -6,7 +6,6 @@ type UUID = string
 export interface ExposureDatum {
   id: UUID
   date: Posix
-  duration: number
 }
 
 export type ExposureInfo = ExposureDatum[]

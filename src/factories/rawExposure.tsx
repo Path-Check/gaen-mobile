@@ -8,7 +8,6 @@ export default Factory.define<RawExposure>(() => {
   return {
     id: "raw-exposure",
     date: defaultDate,
-    duration: 300000,
     totalRiskScore: 4,
   }
 })

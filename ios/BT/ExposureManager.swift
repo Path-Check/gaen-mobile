@@ -41,8 +41,6 @@ final class ExposureManager: NSObject {
 
   private static let backgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
 
-  private var exposureConfiguration = ExposureConfiguration.placeholder
-
   @objc private(set) static var shared: ExposureManager?
 
   // MARK: == Lifecycle ==
@@ -96,10 +94,9 @@ final class ExposureManager: NSObject {
   deinit {
     manager.invalidate()
   }
-  
-  /// Broadcast EN Status and fetch exposure configuration
+
+  /// Broadcast EN Status
   @objc func awake() {
-    fetchExposureConfiguration()
     broadcastCurrentEnabledStatus()
   }
 
@@ -109,7 +106,7 @@ final class ExposureManager: NSObject {
     case enabled = "ENABLED"
     case disabled = "DISABLED"
   }
-  
+
   enum AuthorizationState: String {
     case authorized = "AUTHORIZED"
     case unauthorized = "UNAUTHORIZED"
@@ -158,8 +155,17 @@ final class ExposureManager: NSObject {
   }
 
   /// Returns the current exposures as a json string representation
-  @objc var currentExposures: String {
-    return Array(btSecureStorage.userState.exposures).jsonStringRepresentation()
+  @objc func getCurrentExposures(_ completion: ((String) -> Void)) {
+    if #available(iOS 13.7, *) {
+      do {
+        let exposures = try await(exposuresV2())
+        completion(exposures.jsonStringRepresentation())
+      } catch {
+        completion(String.default)
+      }
+    } else {
+      completion(exposuresV1().jsonStringRepresentation())
+    }
   }
 
   ///Notifies the user to enable bluetooth to be able to exchange keys
@@ -244,7 +250,15 @@ final class ExposureManager: NSObject {
   private var isDetectingExposures = false
 
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
-    
+    if #available(iOS 13.7, *) {
+      return detectExposuresV2(completionHandler: completionHandler)
+    } else {
+      return detectExposuresV1(completionHandler: completionHandler)
+    }
+  }
+
+  @discardableResult func detectExposuresV1(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
+
     let progress = Progress()
     var lastProcessedUrlPath: String = .default
     var processedFileCount: Int = 0
@@ -270,12 +284,11 @@ final class ExposureManager: NSObject {
       processedFileCount = targetUrls.count
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
       unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
-      let exposureConfiguraton = try await(self.getExposureConfiguration())
-      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton,
+      let exposureConfiguration = try await(self.getExposureConfigurationV1())
+      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguration.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
       var newExposures: [Exposure] = []
-      if let summary = exposureSummary, ExposureManager.isAboveScoreThreshold(summary: summary,
-                                                                              with: exposureConfiguraton) {
+      if let summary = exposureSummary, summary.isAboveScoreThreshold(with: exposureConfiguration) {
         newExposures = try await(self.getExposureInfoAndNotifyUser(summary: summary))
       }
       return newExposures
@@ -297,7 +310,60 @@ final class ExposureManager: NSObject {
     }
     return progress
   }
-  
+
+  @available(iOS 13.7, *)
+  @discardableResult func detectExposuresV2(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
+
+    let progress = Progress()
+    var lastProcessedUrlPath: String = .default
+    var processedFileCount: Int = 0
+    var unpackedArchiveURLs: [URL] = []
+
+    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+      if self.isDetectingExposures {
+        // Disallow concurrent exposure detection,
+        // because if allowed we might try to detect the same diagnosis keys more than once
+        throw ExposureError.default("Detection Already in Progress")
+      }
+      self.isDetectingExposures = true
+      // Reset file capacity to 15 if > 24 hours have elapsed since last reset
+      self.updateRemainingFileCapacity()
+      guard self.btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
+        // Abort if daily file capacity is exceeded
+        return []
+      }
+      let indexFileString = try await(self.fetchIndexFile())
+      let remoteURLs = indexFileString.gaenFilePaths
+      let targetUrls = self.urlPathsToProcess(remoteURLs)
+      lastProcessedUrlPath = targetUrls.last ?? .default
+      processedFileCount = targetUrls.count
+      let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
+      let newExposures = try await(self.exposuresV2())
+
+      if newExposures.count > 0 {
+        self.notifyUserExposureDetected()
+      }
+      return newExposures
+    }.then { result in
+      self.finish(.success(result),
+                  processedFileCount: processedFileCount,
+                  lastProcessedUrlPath: lastProcessedUrlPath,
+                  progress: progress,
+                  completionHandler: completionHandler)
+    }.catch { error in
+      self.finish(.failure(error),
+                  processedFileCount: processedFileCount,
+                  lastProcessedUrlPath: lastProcessedUrlPath,
+                  progress: progress,
+                  completionHandler: completionHandler)
+    }.always {
+      unpackedArchiveURLs.cleanup()
+      self.isDetectingExposures = false
+    }
+    return progress
+  }
+
   func finish(_ result: Result<[Exposure]>,
               processedFileCount: Int,
               lastProcessedUrlPath: String,
@@ -325,11 +391,11 @@ final class ExposureManager: NSObject {
       }
     }
   }
-  
+
   func postExposureDetectionErrorNotification(_ errorString: String?) {
     #if DEBUG
     let identifier = String.exposureDetectionErrorNotificationIdentifier
-    
+
     let content = UNMutableNotificationContent()
     content.title = String.exposureDetectionErrorNotificationTitle.localized
     content.body = errorString ?? String.exposureDetectionErrorNotificationBody.localized
@@ -349,7 +415,7 @@ final class ExposureManager: NSObject {
 // MARK: - FileProcessing
 
 extension ExposureManager {
-  
+
   func startIndex(for urlPaths: [String]) -> Int {
     let path = btSecureStorage.userState.urlOfMostRecentlyDetectedKeyFile
     if let lastIdx = urlPaths.firstIndex(of: path) {
@@ -357,27 +423,27 @@ extension ExposureManager {
     }
     return 0
   }
-  
+
   func urlPathsToProcess(_ urlPaths: [String]) -> [String] {
     let startIdx = startIndex(for: urlPaths)
     let endIdx = min(startIdx + btSecureStorage.userState.remainingDailyFileProcessingCapacity, urlPaths.count)
     return Array(urlPaths[startIdx..<endIdx])
   }
-  
+
   func updateRemainingFileCapacity() {
     guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
       btSecureStorage.dateLastPerformedFileCapacityReset = Date()
       btSecureStorage.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
       return
     }
-    
+
     // Reset remainingDailyFileProcessingCapacity if 24 hours have elapsed since last detection
     if  Date.hourDifference(from: lastResetDate, to: Date()) > 24 {
       btSecureStorage.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
       btSecureStorage.dateLastPerformedFileCapacityReset = Date()
     }
   }
-  
+
   @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
    guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
     let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
@@ -387,11 +453,32 @@ extension ExposureManager {
     let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
     return callback(posixRepresentation, nil)
   }
+
+  func getExposureConfigurationV1() -> Promise<ExposureConfigurationV1> {
+    return Promise(on: .global()) { fullfill, _ in
+      self.apiClient.downloadRequest(ExposureConfigurationV1Request.get,
+                                     requestType: .exposureConfiguration) { (result) in
+        var configuration = ExposureConfigurationV1.placeholder
+        switch result {
+        case.success(let exposureConfiguration):
+          configuration = exposureConfiguration
+          fullfill(configuration)
+        case .failure(_):
+          fullfill(configuration)
+        }
+      }
+    }
+  }
+
 }
 
 // MARK: - Private
 
 private extension ExposureManager {
+
+  func exposuresV1() -> [Exposure] {
+    return Array(btSecureStorage.userState.exposures)
+  }
 
   func activateSuccess() {
     awake()
@@ -407,18 +494,6 @@ private extension ExposureManager {
     }
   }
 
-  func fetchExposureConfiguration() {
-    apiClient.request(ExposureConfigurationRequest.get,
-                      requestType: .exposureConfiguration) { [weak self] result in
-      switch result {
-      case .success(let exposureConfiguration):
-        self?.exposureConfiguration = exposureConfiguration
-      case .failure(let error):
-        print("Error fetching exposure configuration: \(error)")
-      }
-    }
-  }
-  
   func broadcastCurrentEnabledStatus() {
     notificationCenter.post(Notification(
       name: .AuthorizationStatusDidChange,
@@ -491,26 +566,10 @@ private extension ExposureManager {
     }
   }
 
-  func getExposureConfiguration() -> Promise<ExposureConfiguration> {
-    return Promise { fullfill, _ in
-      self.apiClient.downloadRequest(ExposureConfigurationRequest.get,
-                                     requestType: .exposureConfiguration) { (result) in
-        var configuration = ExposureConfiguration.placeholder
-        switch result {
-        case.success(let exposureConfiguration):
-          configuration = exposureConfiguration
-          fullfill(configuration)
-        case .failure(_):
-          fullfill(configuration)
-        }
-      }
-    }
-  }
-
-  func callDetectExposures(configuration: ExposureConfiguration,
+  func callDetectExposures(configuration: ENExposureConfiguration,
                            diagnosisKeyURLs: [URL]) -> Promise<ENExposureDetectionSummary?> {
     return Promise { fullfill, reject in
-      self.manager.detectExposures(configuration: configuration.asENExposureConfiguration,
+      self.manager.detectExposures(configuration: configuration,
                                    diagnosisKeyURLs: diagnosisKeyURLs) { summary, error in
         if let error = error {
           reject(error)
@@ -531,12 +590,84 @@ private extension ExposureManager {
         } else {
           let newExposures = (exposures ?? []).map { exposure in
             Exposure(id: UUID().uuidString,
-                     date: exposure.date.posixRepresentation,
-                     duration: exposure.duration,
-                     totalRiskScore: exposure.totalRiskScore,
-                     transmissionRiskLevel: exposure.transmissionRiskLevel)
+                     date: exposure.date.toMidnight.posixRepresentation)
           }
           fullfill(newExposures)
+        }
+      }
+    }
+  }
+}
+
+@available(iOS 13.7, *)
+extension ExposureManager {
+
+  // MARK: == Exposure Detection V2 Private Promises ==
+
+  func getExposureConfigurationV2() -> Promise<DailySummariesConfiguration> {
+    return Promise(on: .global())  { fullfill, _ in
+      self.apiClient.downloadRequest(DailySummariesConfigurationRequest.get,
+                                     requestType: .exposureConfiguration) { (result) in
+        var configuration = DailySummariesConfiguration.placeholder
+        switch result {
+        case.success(let exposureConfiguration):
+          configuration = exposureConfiguration
+          fullfill(configuration)
+        case .failure(_):
+          fullfill(configuration)
+        }
+      }
+    }
+  }
+
+  func callAggregateDetectExposures(configuration: ENExposureConfiguration) -> Promise<ENExposureDetectionSummary?> {
+    return Promise(on: .global()) { fullfill, reject in
+      self.manager.detectExposures(configuration: configuration) { summary, error in
+        if let error = error {
+          reject(error)
+        } else {
+          fullfill(summary)
+        }
+      }
+    }
+  }
+
+  func exposuresV2() -> Promise<[Exposure]> {
+    return Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+      do {
+        let exposureConfiguraton = try await(self.getExposureConfigurationV2())
+        let exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
+        var newExposures: [Exposure] = []
+        if let summary = exposureSummary {
+          summary.daySummaries.forEach { (daySummary) in
+            if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
+                self.btSecureStorage.canStoreExposure(for: daySummary.date) {
+              let exposure = Exposure(id: UUID().uuidString,
+                                      date: daySummary.date.toMidnight.posixRepresentation)
+              newExposures.append(exposure)
+            }
+          }
+        }
+        return newExposures
+      } catch {
+        return []
+      }
+    }
+  }
+
+  ///Notifies the user that an exposure has been detected
+  func notifyUserExposureDetected() {
+    let content = UNMutableNotificationContent()
+    content.title = String.newExposureNotificationTitle.localized
+    content.body = String.newExposureNotificationBody.localized
+    content.sound = .default
+    let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
+                                        content: content,
+                                        trigger: nil)
+    userNotificationCenter.add(request) { error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print("Error showing error user notification: \(error)")
         }
       }
     }
