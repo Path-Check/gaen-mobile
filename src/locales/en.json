@@ -48,7 +48,8 @@
     "well_get_in_touch": "We'll get in touch",
     "success_header": "You're in the queue",
     "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
-    "success_got_it": "Got it"
+    "success_got_it": "Got it",
+    "success_requested": "Call Back Requested"
   },
   "common": {
     "alert": "Alert",

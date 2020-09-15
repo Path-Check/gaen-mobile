@@ -13,6 +13,11 @@ const Success: FunctionComponent = () => {
   const navigation = useNavigation()
   useStatusBarEffect("light-content", Colors.headerBackground)
 
+  navigation.setOptions({
+    headerLeft: null,
+    title: t("callback.success_requested"),
+  })
+
   const handleOnPressGotIt = () => {
     navigation.navigate(Stacks.Home)
   }

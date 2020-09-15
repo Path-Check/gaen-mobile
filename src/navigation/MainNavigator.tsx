@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
 
 import { useOnboardingContext } from "../OnboardingContext"
 import { WelcomeScreens, Stacks } from "./index"
@@ -16,7 +15,6 @@ import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
 import CallbackStack from "./CallbackStack"
-import { Headers } from "../styles"
 
 const Stack = createStackNavigator()
 
@@ -31,7 +29,6 @@ const settingsStackTransitionPreset = Platform.select({
 
 const MainNavigator: FunctionComponent = () => {
   const { isOnboardingComplete } = useOnboardingContext()
-  const { t } = useTranslation()
 
   return (
     <NavigationContainer>
@@ -55,8 +52,7 @@ const MainNavigator: FunctionComponent = () => {
               name={Stacks.Callback}
               component={CallbackStack}
               options={{
-                ...Headers.headerScreenOptions,
-                title: t("screen_titles.callback"),
+                headerShown: false,
               }}
             />
           </>
