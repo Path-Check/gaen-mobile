@@ -34,12 +34,12 @@ const SymptomCheckerScreen: FunctionComponent = () => {
           </GlobalText>
           <View style={style.feelingButtonsContainer}>
             <FeelingButton
-              image={Images.HugEmoji}
+              image={Images.SmileEmoji}
               text={t("symptom_checker.good")}
             />
             <View style={style.feelingButtonsInnerSpacer} />
             <FeelingButton
-              image={Images.HugEmoji}
+              image={Images.SickEmoji}
               text={t("symptom_checker.not_well")}
             />
           </View>
