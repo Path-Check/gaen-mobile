@@ -1283,7 +1283,7 @@ class ExposureManagerTests: XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: halloween.toMidnight.posixRepresentation))
+                                          date: halloween.posixRepresentation))
       return userState
     }
     btSecureStorageMock.storeExposuresHandler = { exposures in
@@ -1348,7 +1348,7 @@ class ExposureManagerTests: XCTestCase {
 
   @available(iOS 13.7, *)
   func testDetectExposuresSuccessNoPreexistingSavedExposureForDate() {
-    let date = Date().toMidnight.posixRepresentation
+    let date = Date().posixRepresentation
     let storeExposureExpectation = self.expectation(description: "The exposure is stored successfully")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.userStateHandler = {
