@@ -7,9 +7,4 @@ extension Date {
     Calendar.current.dateComponents([.hour], from: startDate, to: endDate).hour ?? 0
   }
   
-  var toMidnight: Date {
-    let cal = Calendar(identifier: .gregorian)
-    return cal.startOfDay(for: self)
-  }
-  
 }
