@@ -47,6 +47,7 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
+    displayCallbackForm,
     displayReportAnIssue,
   } = useConfigurationContext()
 
@@ -93,6 +94,15 @@ const ConnectScreen: FunctionComponent = () => {
   const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
   if (displayReportAnIssue) {
     listItems.push(reportAnIssue)
+  }
+
+  if (displayCallbackForm) {
+    const callbackForm: ConnectListItem = {
+      label: t("screen_titles.callback"),
+      onPress: () => navigation.navigate(Stacks.Callback),
+      icon: Icons.Headset,
+    }
+    listItems.push(callbackForm)
   }
 
   return (
