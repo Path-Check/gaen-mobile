@@ -14,6 +14,7 @@ export interface Configuration {
   healthAuthorityEulaUrl: string | null
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
+  healthAuthorityLegalPrivacyPolicyUrl: string | null
   regionCodes: string[]
 }
 
@@ -29,6 +30,7 @@ const initialState = {
   healthAuthorityEulaUrl: null,
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
+  healthAuthorityLegalPrivacyPolicyUrl: "",
   regionCodes: [],
 }
 
@@ -39,6 +41,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
+    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
     EULA_URL: eulaUrl,
   } = env
   const displayAcceptTermsOfService =
@@ -67,6 +70,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityAdviceUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityName,
+        healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
         healthAuthorityPrivacyPolicyUrl,
         regionCodes,
       }}
