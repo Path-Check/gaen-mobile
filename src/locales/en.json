@@ -218,7 +218,9 @@
     "check-in": "Check-in",
     "how_are_you_feeling": "How are you feeling today?",
     "good": "Good",
-    "not_well": "Not well"
+    "not_well": "Not well",
+    "glad_to_hear_it": "Glad to hear it!",
+    "sorry_to_hear_it": "Sorry to hear you're not feeling well!"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
