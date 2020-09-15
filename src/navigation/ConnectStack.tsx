@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
 import { ReportIssueScreens, ConnectStackScreens } from "./index"
-import ConnectScreen from "./../Connect"
+import ConnectScreen from "../Connect"
 import ReportIssue from "../ReportIssue"
 
 import { Headers } from "../styles"

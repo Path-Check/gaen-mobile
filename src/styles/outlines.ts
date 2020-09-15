@@ -23,7 +23,7 @@ export const ovalBorder: ViewStyle = {
 }
 
 export const baseShadow: ViewStyle = {
-  shadowColor: Colors.primary150,
+  shadowColor: Colors.neutral75,
   shadowOffset: {
     width: 0,
     height: 8,
