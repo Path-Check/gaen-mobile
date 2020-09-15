@@ -182,8 +182,8 @@ const CodeInputForm: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.ArrowLeft}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>
@@ -199,8 +199,8 @@ const CodeInputForm: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.X}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>

@@ -135,8 +135,8 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
           <SvgXml
             xml={Icons.ChevronUp}
             fill={Colors.primary100}
-            width={Iconography.xxSmall}
-            height={Iconography.xxSmall}
+            width={Iconography.xxxSmall}
+            height={Iconography.xxxSmall}
           />
         </TouchableOpacity>
       </View>

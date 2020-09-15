@@ -7,11 +7,12 @@ import {
   ImageSourcePropType,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
-import { Images } from "../assets"
+import { Icons, Images } from "../assets"
 
 enum CheckInStatus {
   NotCheckedIn,
@@ -50,12 +51,24 @@ const CheckIn: FunctionComponent = () => {
     }
   }
 
+  const iconFill =
+    checkInStatus === CheckInStatus.NotCheckedIn
+      ? Colors.secondary50
+      : Colors.primary100
+
   return (
     <>
       <GlobalText style={style.headerText}>
         {t("symptom_checker.my_health")}
       </GlobalText>
       <View style={style.checkInContainer}>
+        <SvgXml
+          xml={Icons.CheckInBrokenCircle}
+          fill={iconFill}
+          width={Iconography.xSmall}
+          height={Iconography.xSmall}
+          style={style.checkmarkIcon}
+        />
         <GlobalText style={style.checkInEyebrowText}>
           {t("symptom_checker.check-in")}
         </GlobalText>
@@ -155,6 +168,11 @@ const style = StyleSheet.create({
     borderRadius: Outlines.borderRadiusLarge,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
+  },
+  checkmarkIcon: {
+    position: "absolute",
+    top: Spacing.medium,
+    right: Spacing.medium,
   },
   checkInEyebrowText: {
     ...Typography.body1,

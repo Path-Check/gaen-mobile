@@ -165,8 +165,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <SvgXml
               xml={Icons.ArrowLeft}
               fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
             />
           </View>
         </TouchableOpacity>
@@ -180,8 +180,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <SvgXml
               xml={Icons.X}
               fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
             />
           </View>
         </TouchableOpacity>
@@ -230,8 +230,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         <SvgXml
           xml={Icons.ChevronUp}
           fill={Colors.primary150}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
+          width={Iconography.xxxSmall}
+          height={Iconography.xxxSmall}
         />
       </TouchableOpacity>
     </View>

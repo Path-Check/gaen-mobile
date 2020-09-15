@@ -8,6 +8,7 @@ import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import ChatBubble from "./chatBubble"
 import CheckInCircle from "./checkInCircle"
+import CheckInBrokenCircle from "./checkInBrokenCircle"
 import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
 import Checkmark from "./checkmark"
@@ -56,6 +57,7 @@ export const Icons = {
   BellYellow,
   ChatBubble,
   CheckInCircle,
+  CheckInBrokenCircle,
   CheckboxChecked,
   CheckboxUnchecked,
   Checkmark,

@@ -41,8 +41,8 @@ const EnableExposureNotifications: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.X}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>

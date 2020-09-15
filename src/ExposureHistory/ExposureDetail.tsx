@@ -48,8 +48,8 @@ const ExposureDetail: FunctionComponent = () => {
             accessible
             accessibilityLabel={t("exposure_history.possible_exposure")}
             fill={Colors.primary125}
-            width={Iconography.xSmall}
-            height={Iconography.xSmall}
+            width={Iconography.xxSmall}
+            height={Iconography.xxSmall}
           />
           <GlobalText style={style.exposureWindowText}>
             {exposureWindowBucketInWords(exposureDatum)}

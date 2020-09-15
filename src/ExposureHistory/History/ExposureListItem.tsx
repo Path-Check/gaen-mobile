@@ -67,8 +67,8 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           xml={Icons.ChevronRight}
           accessible
           accessibilityLabel={t("label.check")}
-          width={Iconography.xSmall}
-          height={Iconography.xSmall}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
           fill={Colors.primary100}
         />
       </View>
