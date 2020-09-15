@@ -14,6 +14,7 @@ import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
+import CallbackStack from "./CallbackStack"
 
 const Stack = createStackNavigator()
 
@@ -44,6 +45,13 @@ const MainNavigator: FunctionComponent = () => {
               component={SettingsStack}
               options={{
                 ...settingsStackTransitionPreset,
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Stacks.Callback}
+              component={CallbackStack}
+              options={{
                 headerShown: false,
               }}
             />

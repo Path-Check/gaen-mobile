@@ -7,7 +7,7 @@ import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 import ExposureDetail from "./ExposureDetail"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { Stacks, SettingsScreens } from "../navigation"
+import { Stacks } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("ExposureDetail", () => {
@@ -155,9 +155,7 @@ describe("ExposureDetail", () => {
         "Speak with a contact tracer",
       )
       fireEvent.press(showCallbackFormAction)
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Settings, {
-        screen: SettingsScreens.CallbackForm,
-      })
+      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Callback)
       const callLaterAction = getByLabelText("Call later")
       fireEvent.press(callLaterAction)
       expect(navigateSpy).toHaveBeenCalledWith(Stacks.Connect)

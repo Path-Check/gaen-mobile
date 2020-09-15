@@ -11,7 +11,6 @@ import Settings from "../Settings/"
 import Legal from "../Settings/Legal"
 import ReportIssue from "../ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
-import CallbackFormScreen from "../Settings/CallbackForm"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import { ReportIssueScreens, SettingsScreens } from "./index"
@@ -55,10 +54,6 @@ const SettingsStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen name={SettingsScreens.Settings} component={Settings} />
-      <Stack.Screen
-        name={SettingsScreens.CallbackForm}
-        component={CallbackFormScreen}
-      />
       <Stack.Screen
         name={SettingsScreens.Legal}
         component={Legal}

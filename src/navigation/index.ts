@@ -82,6 +82,14 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
+export type CallbackStackScreen = "Form" | "Success"
+export const CallbackStackScreens: {
+  [key in CallbackStackScreen]: CallbackStackScreen
+} = {
+  Form: "Form",
+  Success: "Success",
+}
+
 export type ConnectStackScreen = "Connect"
 
 export const ConnectStackScreens: {
@@ -110,7 +118,7 @@ export const ModalScreens: {
 export type SettingsScreen =
   | "Settings"
   | "Legal"
-  | "CallbackForm"
+  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -121,7 +129,7 @@ export const SettingsScreens: {
 } = {
   Settings: "Settings",
   Legal: "Legal",
-  CallbackForm: "CallbackForm",
+  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
@@ -171,6 +179,7 @@ export const ReportIssueScreens: {
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
+  | "Callback"
   | "Connect"
   | "ExposureHistoryFlow"
   | "Modal"
@@ -183,6 +192,7 @@ export type Stack =
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
+  Callback: "Callback",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",

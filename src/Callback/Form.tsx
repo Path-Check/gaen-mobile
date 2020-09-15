@@ -11,12 +11,12 @@ import {
   ScrollView,
   Keyboard,
 } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Button, GlobalText } from "../components"
 import * as API from "./callbackAPI"
-
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = " "
@@ -25,6 +25,7 @@ const CallbackForm: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const { t } = useTranslation()
   const { healthAuthorityName } = useConfigurationContext()
+  const navigation = useNavigation()
 
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
@@ -63,7 +64,7 @@ const CallbackForm: FunctionComponent = () => {
       })
 
       if (response.kind === "success") {
-        Alert.alert(t("common.success"))
+        navigation.navigate(CallbackStackScreens.Success)
       } else {
         setErrorMessage(showError(response.error))
       }
@@ -94,10 +95,10 @@ const CallbackForm: FunctionComponent = () => {
         <View>
           <View style={style.headerContainer}>
             <GlobalText style={style.header}>
-              {t("callback_form.well_get_in_touch")}
+              {t("callback.well_get_in_touch")}
             </GlobalText>
             <GlobalText style={style.subheader}>
-              {t("callback_form.fill_out_the_info", {
+              {t("callback.fill_out_the_info", {
                 healthAuthorityName,
               })}
             </GlobalText>
@@ -105,7 +106,7 @@ const CallbackForm: FunctionComponent = () => {
 
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
-              {t("callback_form.firstname")}
+              {t("callback.firstname")}
             </GlobalText>
             <TextInput
               value={firstname}
@@ -121,7 +122,7 @@ const CallbackForm: FunctionComponent = () => {
 
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
-              {t("callback_form.lastname")}
+              {t("callback.lastname")}
             </GlobalText>
             <TextInput
               value={lastname}
@@ -137,7 +138,7 @@ const CallbackForm: FunctionComponent = () => {
 
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
-              {t("callback_form.phone_number_required")}
+              {t("callback.phone_number_required")}
             </GlobalText>
             <TextInput
               value={phoneNumber}
