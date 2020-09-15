@@ -33,7 +33,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ENAPIVersion</key>
-	<string>1</string>
+	<integer>2</integer>
 	<key>ENDeveloperRegion</key>
 	<string>PC</string>
 	<key>LSApplicationCategoryType</key>
