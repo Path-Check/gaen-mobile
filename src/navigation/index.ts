@@ -176,6 +176,14 @@ export const ReportIssueScreens: {
   ReportIssue: "ReportIssue",
 }
 
+export type SymptomCheckerStackScreen = "SymptomChecker"
+
+export const SymptomCheckerStackScreens: {
+  [key in SymptomCheckerStackScreen]: SymptomCheckerStackScreen
+} = {
+  SymptomChecker: "SymptomChecker",
+}
+
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
@@ -188,6 +196,7 @@ export type Stack =
   | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
+  | "SymptomChecker"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -201,6 +210,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
+  SymptomChecker: "SymptomChecker",
 }
 
 export const useStatusBarEffect = (

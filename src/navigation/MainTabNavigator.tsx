@@ -6,6 +6,7 @@ import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import HomeStack from "./HomeStack"
+import SymptomCheckerStack from "./SymptomCheckerStack"
 import ConnectStack from "./ConnectStack"
 
 import { Stacks } from "./index"
@@ -72,6 +73,21 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
+  const HeartbeatIcon: FunctionComponent<TabBarIconProps> = ({
+    focused,
+    size,
+  }) => {
+    const tabIcon = (
+      <TabIcon
+        icon={TabBarIcons.Heartbeat}
+        label={t("navigation.symptom_checker")}
+        focused={focused}
+        size={size}
+      />
+    )
+    return tabIcon
+  }
+
   const ConnectIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
     size,
@@ -112,6 +128,14 @@ const MainTabNavigator: FunctionComponent = () => {
         options={{
           tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Stacks.SymptomChecker}
+        component={SymptomCheckerStack}
+        options={{
+          tabBarLabel: t("navigation.symptom_checker"),
+          tabBarIcon: HeartbeatIcon,
         }}
       />
       <Tab.Screen
