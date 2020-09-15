@@ -7,9 +7,9 @@ import BackArrow from "./backArrow"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import ChatBubble from "./chatBubble"
+import CheckInCircle from "./checkInCircle"
 import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
-import CheckInCircle from "./checkInCircle"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
@@ -20,6 +20,7 @@ import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import Gear from "./gear"
 import GoogleMapsLogo from "./google-maps-logo"
+import Headset from "./headset"
 import Heart from "./heart"
 import HomeInfo from "./homeInfo"
 import House from "./house"
@@ -54,9 +55,9 @@ export const Icons = {
   Bell,
   BellYellow,
   ChatBubble,
+  CheckInCircle,
   CheckboxChecked,
   CheckboxUnchecked,
-  CheckInCircle,
   Checkmark,
   CheckmarkCircle,
   ChevronRight,
@@ -67,6 +68,7 @@ export const Icons = {
   ExposureIcon,
   Gear,
   GoogleMapsLogo,
+  Headset,
   Heart,
   HomeInfo,
   House,
@@ -88,6 +90,6 @@ export const Icons = {
   Upload,
   WashHands,
   Wrench,
-  XInCircle,
   X,
+  XInCircle,
 }

@@ -32,10 +32,7 @@ const Settings: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  const {
-    displayCallbackForm,
-    displayReportAnIssue,
-  } = useConfigurationContext()
+  const { displayReportAnIssue } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
@@ -60,11 +57,6 @@ const Settings: FunctionComponent = () => {
     onPress: () => navigation.navigate(SettingsScreens.Legal),
     icon: Icons.Document,
   }
-  const callbackForm: SettingsListItem = {
-    label: t("screen_titles.callback"),
-    onPress: () => navigation.navigate(Stacks.Callback),
-    icon: Icons.Document,
-  }
   const reportAnIssue: SettingsListItem = {
     label: t("screen_titles.report_issue"),
     onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
@@ -82,9 +74,6 @@ const Settings: FunctionComponent = () => {
   }
 
   const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
-  if (displayCallbackForm) {
-    middleListItems.push(callbackForm)
-  }
   if (displayReportAnIssue) {
     middleListItems.push(reportAnIssue)
   }
