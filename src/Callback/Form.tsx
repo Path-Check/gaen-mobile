@@ -17,6 +17,8 @@ import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Button, GlobalText } from "../components"
 import * as API from "./callbackAPI"
+import Logger from "../logger"
+
 import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
 
 const defaultErrorMessage = " "
@@ -66,10 +68,19 @@ const CallbackForm: FunctionComponent = () => {
       if (response.kind === "success") {
         navigation.navigate(CallbackStackScreens.Success)
       } else {
+        Logger.addMetadata("requestCallbackError", {
+          errorMessage: response.message,
+        })
+        Logger.error(
+          `FailureToRequestCallback.${response.error}.${
+            response.message || "failure_handled_response"
+          }`,
+        )
         setErrorMessage(showError(response.error))
       }
       setIsLoading(false)
     } catch (e) {
+      Logger.error(`FailureToRequestCallback.exception.${e.message}`)
       Alert.alert(t("common.something_went_wrong"), e.message)
       setIsLoading(false)
     }

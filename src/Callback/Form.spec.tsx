@@ -5,19 +5,78 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { postCallbackInfo } from "./callbackAPI"
 import Form from "./Form"
 import { CallbackStackScreens } from "../navigation"
+import Logger from "../logger"
+import { Alert } from "react-native"
 
 jest.mock("./callbackAPI")
 jest.mock("@react-navigation/native")
+jest.mock("../logger.ts")
 describe("Form", () => {
-  it("navigates to the success screen on a requested call back", async () => {
-    const navigateSpy = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValueOnce({ navigate: navigateSpy })
-    ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce({ kind: "success" })
-    const { getByLabelText } = render(<Form />)
+  describe("on a successful call back requested", () => {
+    it("navigates to the success screen", async () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValueOnce({
+        navigate: navigateSpy,
+      })
+      ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce({
+        kind: "success",
+      })
+      const { getByLabelText } = render(<Form />)
 
-    fireEvent.press(getByLabelText("Submit"))
-    await waitFor(() => {
-      expect(navigateSpy).toHaveBeenCalledWith(CallbackStackScreens.Success)
+      fireEvent.press(getByLabelText("Submit"))
+      await waitFor(() => {
+        expect(navigateSpy).toHaveBeenCalledWith(CallbackStackScreens.Success)
+      })
+    })
+  })
+
+  describe("on a failed call back requested", () => {
+    it("displays an error to the user and logs it", async () => {
+      const loggMetadataSpy = jest.spyOn(Logger, "addMetadata")
+      const loggErrorSpy = jest.spyOn(Logger, "error")
+      const errorMessage = "errorMessage"
+      const errorNature = "Unknown"
+      const errorResponse = {
+        kind: "failure",
+        error: errorNature,
+        message: errorMessage,
+      }
+      ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce(errorResponse)
+      const { getByText, getByLabelText } = render(<Form />)
+
+      fireEvent.press(getByLabelText("Submit"))
+      await waitFor(() => {
+        expect(getByText("Something went wrong")).toBeDefined()
+        expect(loggMetadataSpy).toHaveBeenCalledWith("requestCallbackError", {
+          errorMessage,
+        })
+        expect(loggErrorSpy).toHaveBeenCalledWith(
+          `FailureToRequestCallback.${errorNature}.${errorMessage}`,
+        )
+      })
+    })
+  })
+
+  describe("on a error for a requested call back", () => {
+    it("shows an alert to the user and logs the error", async () => {
+      const alertSpy = jest.spyOn(Alert, "alert")
+      const loggErrorSpy = jest.spyOn(Logger, "error")
+      const errorMessage = "errorMessage"
+      ;(postCallbackInfo as jest.Mock).mockRejectedValueOnce(
+        new Error(errorMessage),
+      )
+      const { getByLabelText } = render(<Form />)
+
+      fireEvent.press(getByLabelText("Submit"))
+      await waitFor(() => {
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Something went wrong",
+          errorMessage,
+        )
+        expect(loggErrorSpy).toHaveBeenCalledWith(
+          `FailureToRequestCallback.exception.${errorMessage}`,
+        )
+      })
     })
   })
 })
