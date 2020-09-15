@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Platform, ScrollView, StyleSheet, View } from "react-native"
+import { Linking, Platform, ScrollView, StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -70,6 +70,10 @@ const ConnectScreen: FunctionComponent = () => {
     })
   }
 
+  const handleOnPressEmergencyContact = () => {
+    Linking.openURL("tel:911")
+  }
+
   const howTheAppWorks: ConnectListItem = {
     label: t("screen_titles.how_the_app_works"),
     onPress: handleOnPressHowTheAppWorks,
@@ -80,8 +84,13 @@ const ConnectScreen: FunctionComponent = () => {
     onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
     icon: Icons.QuestionMarkInCircle,
   }
+  const emergencyContact: ConnectListItem = {
+    label: t("about.emergency_contact"),
+    onPress: handleOnPressEmergencyContact,
+    icon: Icons.ChatBubble,
+  }
 
-  const listItems: ConnectListItem[] = [howTheAppWorks]
+  const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
   if (displayReportAnIssue) {
     listItems.push(reportAnIssue)
   }

@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.9.1)
   - boost-for-react-native (1.63.0)
-  - BugsnagReactNative (7.3.2):
+  - BugsnagReactNative (7.3.4):
     - React
   - BVLinearGradient (2.5.6):
     - React
@@ -447,7 +447,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  BugsnagReactNative: 3e44e73c4ec6b68e46ed1f2163229dd535522990
+  BugsnagReactNative: 22d9092497ba2b828827800825840fa7560583e5
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245

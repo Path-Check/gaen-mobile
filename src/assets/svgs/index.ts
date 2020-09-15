@@ -6,6 +6,7 @@ import ArrowLeft from "./arrowLeft"
 import BackArrow from "./backArrow"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
+import ChatBubble from "./chatBubble"
 import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
 import CheckInCircle from "./checkInCircle"
@@ -52,6 +53,7 @@ export const Icons = {
   BackArrow,
   Bell,
   BellYellow,
+  ChatBubble,
   CheckboxChecked,
   CheckboxUnchecked,
   CheckInCircle,
