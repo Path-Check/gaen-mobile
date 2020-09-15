@@ -339,8 +339,21 @@ final class ExposureManager: NSObject {
       processedFileCount = targetUrls.count
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
       unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
-      let newExposures = try await(self.exposuresV2())
-
+      let exposureConfiguraton = try await(self.getExposureConfigurationV2())
+      var exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
+                                                               diagnosisKeyURLs: unpackedArchiveURLs))
+      exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
+      var newExposures: [Exposure] = []
+      if let summary = exposureSummary {
+        summary.daySummaries.forEach { (daySummary) in
+          if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
+              self.btSecureStorage.canStoreExposure(for: daySummary.date) {
+            let exposure = Exposure(id: UUID().uuidString,
+                                    date: daySummary.date.posixRepresentation)
+            newExposures.append(exposure)
+          }
+        }
+      }
       if newExposures.count > 0 {
         self.notifyUserExposureDetected()
       }
@@ -590,7 +603,7 @@ private extension ExposureManager {
         } else {
           let newExposures = (exposures ?? []).map { exposure in
             Exposure(id: UUID().uuidString,
-                     date: exposure.date.toMidnight.posixRepresentation)
+                     date: exposure.date.posixRepresentation)
           }
           fullfill(newExposures)
         }
@@ -641,9 +654,9 @@ extension ExposureManager {
         if let summary = exposureSummary {
           summary.daySummaries.forEach { (daySummary) in
             if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
-                self.btSecureStorage.canStoreExposure(for: daySummary.date) {
+                !newExposures.map({ $0.date }).contains(daySummary.date.posixRepresentation) {
               let exposure = Exposure(id: UUID().uuidString,
-                                      date: daySummary.date.toMidnight.posixRepresentation)
+                                      date: daySummary.date.posixRepresentation)
               newExposures.append(exposure)
             }
           }
