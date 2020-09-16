@@ -176,12 +176,13 @@ export const ReportIssueScreens: {
   ReportIssue: "ReportIssue",
 }
 
-export type SymptomCheckerStackScreen = "SymptomChecker"
+export type SymptomCheckerStackScreen = "SymptomChecker" | "SelectSymptoms"
 
 export const SymptomCheckerStackScreens: {
   [key in SymptomCheckerStackScreen]: SymptomCheckerStackScreen
 } = {
   SymptomChecker: "SymptomChecker",
+  SelectSymptoms: "SelectSymptoms",
 }
 
 export type Stack =

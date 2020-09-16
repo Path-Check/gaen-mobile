@@ -1,24 +1,24 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet, ScrollView } from "react-native"
+import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
-import { StatusBar } from "../components"
-import CheckIn from "./CheckIn"
+import { GlobalText } from "../components"
 
 import { Colors, Spacing } from "../styles"
 
-const SymptomCheckerScreen: FunctionComponent = () => {
+const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  const { t } = useTranslation()
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <CheckIn />
+        <GlobalText>{t("common.continue")}</GlobalText>
       </ScrollView>
     </>
   )
@@ -36,4 +36,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SymptomCheckerScreen
+export default SelectSymptomsScreen

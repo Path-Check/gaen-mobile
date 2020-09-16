@@ -7,12 +7,14 @@ import {
   ImageSourcePropType,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
+import { SymptomCheckerStackScreens } from "../navigation"
 
 enum CheckInStatus {
   NotCheckedIn,
@@ -22,6 +24,7 @@ enum CheckInStatus {
 
 const CheckIn: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
@@ -33,6 +36,7 @@ const CheckIn: FunctionComponent = () => {
 
   const handleOnPressNotWell = () => {
     setCheckInStatus(CheckInStatus.FeelingNotWell)
+    navigation.navigate(SymptomCheckerStackScreens.SelectSymptoms)
   }
 
   const determineStatusContent = () => {
