@@ -155,17 +155,8 @@ final class ExposureManager: NSObject {
   }
 
   /// Returns the current exposures as a json string representation
-  @objc func getCurrentExposures(_ completion: ((String) -> Void)) {
-    if #available(iOS 13.7, *) {
-      do {
-        let exposures = try await(exposuresV2())
-        completion(exposures.jsonStringRepresentation())
-      } catch {
-        completion(String.default)
-      }
-    } else {
-      completion(exposuresV1().jsonStringRepresentation())
-    }
+  @objc var currentExposures: String {
+    return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
   }
 
   ///Notifies the user to enable bluetooth to be able to exchange keys
@@ -483,10 +474,6 @@ extension ExposureManager {
 
 private extension ExposureManager {
 
-  func exposuresV1() -> [Exposure] {
-    return Array(btSecureStorage.userState.exposures)
-  }
-
   func activateSuccess() {
     awake()
     // Ensure exposure notifications are enabled if the app is authorized. The app
@@ -635,29 +622,6 @@ extension ExposureManager {
         } else {
           fullfill(summary)
         }
-      }
-    }
-  }
-
-  func exposuresV2() -> Promise<[Exposure]> {
-    return Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
-      do {
-        let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-        let exposureSummary = try await(self.getCachedExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
-        var newExposures: [Exposure] = []
-        if let summary = exposureSummary {
-          summary.daySummaries.forEach { (daySummary) in
-            if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
-                !newExposures.map({ $0.date }).contains(daySummary.date.posixRepresentation) {
-              let exposure = Exposure(id: UUID().uuidString,
-                                      date: daySummary.date.posixRepresentation)
-              newExposures.append(exposure)
-            }
-          }
-        }
-        return newExposures
-      } catch {
-        return []
       }
     }
   }

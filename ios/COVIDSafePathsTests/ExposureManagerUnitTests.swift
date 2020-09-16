@@ -428,8 +428,6 @@ class ExposureManagerTests: XCTestCase {
   }
 
   func testCurrentExposures() {
-    let getCurrentExposuresExpectation = self.expectation(description: "Get current exposures")
-
     let enManagerMock = ENManagerMock()
 
     enManagerMock.detectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
@@ -469,11 +467,8 @@ class ExposureManagerTests: XCTestCase {
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
                                           apiClient: apiClientMock,
                                           btSecureStorage: btSecureStorageMock)
-    exposureManager.getCurrentExposures { exposures in
-      XCTAssertNoThrow(try! JSONDecoder().decode(Array<Exposure>.self, from: exposures.data(using: .utf8) ?? Data()))
-      getCurrentExposuresExpectation.fulfill()
-    }
-    wait(for: [getCurrentExposuresExpectation], timeout: 2)
+    let currentExposures = exposureManager.currentExposures
+    XCTAssertNoThrow(try! JSONDecoder().decode(Array<Exposure>.self, from: currentExposures.data(using: .utf8) ?? Data()))
   }
 
   func testEnableNotificationsSuccess() {
@@ -569,6 +564,19 @@ class ExposureManagerTests: XCTestCase {
     removeNotificationsExpectation.isInverted = true
     exposureManager.notifyUserBlueToothOffIfNeeded()
     wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
+  }
+
+  func testRecentExposures() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      let userState = UserState()
+      userState.exposures.append(Exposure(id: "1",
+                                          date: halloween.posixRepresentation))
+      userState.exposures.append(Exposure(id: "2",
+                                          date: Date().posixRepresentation))
+      return userState
+    }
+    XCTAssertEqual(btSecureStorageMock.userState.recentExposures.count, 1)
   }
 
   func testBluetoothNotificationOff() {

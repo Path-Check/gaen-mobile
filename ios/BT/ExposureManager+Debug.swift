@@ -69,9 +69,7 @@ extension ExposureManager: ExposureManagerDebuggable {
       }
       resolve("Exposures: \(btSecureStorage.userState.exposures)")
     case .fetchExposures:
-      getCurrentExposures { currentExposures in
-        resolve(currentExposures)
-      }
+      resolve(currentExposures)
     case .resetExposures:
       btSecureStorage.exposures = List<Exposure>()
       resolve("Exposures: \(btSecureStorage.exposures.count)")
