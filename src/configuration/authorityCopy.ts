@@ -1,7 +1,7 @@
 import copy from "./copy.json"
 
 const DEFAULT_LOCALE = "en"
-type CopyKey = "welcome_message" | "about" | "legal"
+type CopyKey = "welcome_message" | "about" | "legal" | "callback_success"
 type CopyValues = Record<string, string>
 type AuthorityCopyContent = Record<CopyKey, CopyValues>
 
@@ -14,10 +14,15 @@ const authorityCopyTranslation = (
   localeCode: string,
   defaultValue: string,
 ): string => {
-  const overrideCopy =
-    authorityCopyOverrides[localeCode] || authorityCopyOverrides[DEFAULT_LOCALE]
+  try {
+    const overrideCopy =
+      authorityCopyOverrides[localeCode] ||
+      authorityCopyOverrides[DEFAULT_LOCALE]
 
-  return overrideCopy?.length > 0 ? overrideCopy : defaultValue
+    return overrideCopy?.length > 0 ? overrideCopy : defaultValue
+  } catch {
+    return defaultValue
+  }
 }
 
 export { loadAuthorityCopy, authorityCopyTranslation }

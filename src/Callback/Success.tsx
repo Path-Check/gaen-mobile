@@ -4,16 +4,32 @@ import { ScrollView, StyleSheet, Image } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { GlobalText, Button } from "../components"
-import { Typography, Spacing, Colors } from "../styles"
 import { useStatusBarEffect } from "../navigation"
-import { Images } from "../assets"
 import { useCallbackFormContext } from "./CallbackFormContext"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+
+import { Images } from "../assets"
+import { Typography, Spacing, Colors } from "../styles"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 const Success: FunctionComponent = () => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
   const { callBackRequestCompleted } = useCallbackFormContext()
   const navigation = useNavigation()
   useStatusBarEffect("light-content", Colors.headerBackground)
+  const { healthAuthorityName } = useConfigurationContext()
+
+  const successMessage = authorityCopyTranslation(
+    loadAuthorityCopy("callback_success"),
+    localeCode,
+    t("callback.success_body", { healthAuthorityName }),
+  )
 
   navigation.setOptions({
     headerLeft: null,
@@ -35,7 +51,7 @@ const Success: FunctionComponent = () => {
       <GlobalText style={style.header}>
         {t("callback.success_header")}
       </GlobalText>
-      <GlobalText style={style.body}>{t("callback.success_body")}</GlobalText>
+      <GlobalText style={style.body}>{successMessage}</GlobalText>
       <Button
         label={t("callback.success_got_it")}
         onPress={handleOnPressGotIt}
