@@ -62,7 +62,7 @@ const CheckIn: FunctionComponent = () => {
         return (
           <FeelingNotWellContent
             symptoms={symptoms}
-            healthAssessment={healthRecommendation}
+            healthAssessment={healthAssessment}
           />
         )
     }
