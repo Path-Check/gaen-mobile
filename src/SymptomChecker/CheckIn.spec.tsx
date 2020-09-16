@@ -1,7 +1,12 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
+import { useNavigation } from "@react-navigation/native"
+
+import { SymptomCheckerStackScreens } from "../navigation"
 
 import CheckIn from "./CheckIn"
+
+jest.mock("@react-navigation/native")
 
 describe("CheckIn", () => {
   it("shows a glad to hear it message when the user says they feel good", () => {
@@ -12,9 +17,16 @@ describe("CheckIn", () => {
   })
 
   it("shows a sorry to hear you're not feeling well message when the user says they feel not well", () => {
-    const { getByLabelText, getByText } = render(<CheckIn />)
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({
+      navigate: navigateSpy,
+    })
+
+    const { getByLabelText } = render(<CheckIn />)
 
     fireEvent.press(getByLabelText("Not well"))
-    expect(getByText("Sorry to hear you're not feeling well!")).toBeDefined()
+    expect(navigateSpy).toHaveBeenCalledWith(
+      SymptomCheckerStackScreens.SelectSymptoms,
+    )
   })
 })
