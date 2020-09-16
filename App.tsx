@@ -15,6 +15,7 @@ import { PermissionsProvider } from "./src/PermissionsContext"
 import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
+import { AnalyticsProvider } from "./src/AnalyticsContext"
 
 Logger.start()
 
@@ -48,7 +49,9 @@ const App: FunctionComponent = () => {
               <PermissionsProvider>
                 <SystemServicesProvider>
                   <ExposureProvider>
-                    <MainNavigator />
+                    <AnalyticsProvider>
+                      <MainNavigator />
+                    </AnalyticsProvider>
                   </ExposureProvider>
                 </SystemServicesProvider>
               </PermissionsProvider>

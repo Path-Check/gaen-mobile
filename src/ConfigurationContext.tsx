@@ -15,6 +15,7 @@ export interface Configuration {
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
+  healthAuthoritySupportsAnalytics: boolean
   regionCodes: string[]
 }
 
@@ -31,6 +32,7 @@ const initialState = {
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
+  healthAuthoritySupportsAnalytics: false,
   regionCodes: [],
 }
 
@@ -50,6 +52,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displaySymptomChecker = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const healthAuthoritySupportsAnalytics = env.COLLECT_ANALYTICS_DATA === "true"
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
@@ -72,6 +75,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityName,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
         healthAuthorityPrivacyPolicyUrl,
+        healthAuthoritySupportsAnalytics,
         regionCodes,
       }}
     >

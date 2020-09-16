@@ -8,7 +8,7 @@ import React, {
 import { StorageUtils } from "./utils"
 import { actions } from "./analytics"
 
-interface AnalyticsContextState {
+export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
   updateUserConsent: (consent: boolean) => Promise<void>
   trackEvent: (event: string) => Promise<string | boolean>

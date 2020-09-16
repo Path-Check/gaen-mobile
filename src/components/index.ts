@@ -4,6 +4,7 @@ import GlobalText from "./GlobalText"
 import StatusBar from "./StatusBar"
 import ListItem from "./ListItem"
 import ListItemSeparator from "./ListItemSeparator"
+import SwitchListItem from "./SwitchListItem"
 
 export {
   GradientBackground,
@@ -12,4 +13,5 @@ export {
   StatusBar,
   ListItem,
   ListItemSeparator,
+  SwitchListItem,
 }

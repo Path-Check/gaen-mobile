@@ -16,6 +16,7 @@ import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import { ReportIssueScreens, SettingsScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
+import AnonymizedDataConsentScreen from "../Settings/AnonymizedDataConsentScreen"
 
 const Stack = createStackNavigator()
 
@@ -77,6 +78,11 @@ const SettingsStack: FunctionComponent = () => {
       <Stack.Screen
         name={SettingsScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKey}
+      />
+      <Stack.Screen
+        name={SettingsScreens.AnonymizedDataConsent}
+        component={AnonymizedDataConsentScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   )
