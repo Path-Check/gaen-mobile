@@ -109,8 +109,8 @@ const Home: FunctionComponent = () => {
             <View style={style.topIcon}>
               <SvgXml
                 xml={topIcon}
-                width={Iconography.large}
-                height={Iconography.large}
+                width={Iconography.medium}
+                height={Iconography.medium}
                 fill={topIconFill}
                 accessible
                 accessibilityLabel={topIconAccessibilityLabel}
@@ -178,7 +178,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header2,
     ...Typography.mediumBold,
     color: Colors.white,
     textAlign: "center",
@@ -202,6 +202,8 @@ const style = StyleSheet.create({
   button: {
     alignSelf: "center",
     width: "100%",
+    paddingTop: Spacing.xSmall,
+    paddingBottom: Spacing.xSmall + 1,
   },
 })
 

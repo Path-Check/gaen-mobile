@@ -184,7 +184,7 @@ export const error: TextStyle = {
 
 // Tappables
 const baseButtonText: TextStyle = {
-  ...largeFont,
+  ...mediumFont,
   ...semiBold,
 }
 

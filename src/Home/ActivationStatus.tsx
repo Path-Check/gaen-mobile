@@ -66,8 +66,8 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
         <SvgXml
           xml={content.leftIcon}
           fill={content.leftIconFill}
-          width={Iconography.medium}
-          height={Iconography.medium}
+          width={Iconography.small}
+          height={Iconography.small}
         />
         <View style={style.activationStatusTextContainer}>
           <GlobalText style={style.bottomHeaderText}>{headerText}</GlobalText>
@@ -89,7 +89,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Spacing.large,
+    paddingVertical: Spacing.xSmall,
     marginHorizontal: Spacing.small,
     borderBottomWidth: Outlines.hairline,
     borderBottomColor: Colors.neutral10,
@@ -106,11 +106,13 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   bottomHeaderText: {
-    ...Typography.header4,
-    marginBottom: Spacing.xxxSmall,
+    ...Typography.body1,
+    color: Colors.black,
+    lineHeight: Typography.smallLineHeight,
   },
   bottomBodyText: {
-    ...Typography.header6,
-    color: Colors.neutral100,
+    ...Typography.body2,
+    color: Colors.neutral75,
+    lineHeight: Typography.xSmallLineHeight,
   },
 })

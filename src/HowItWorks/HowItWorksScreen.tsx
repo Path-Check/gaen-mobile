@@ -11,23 +11,13 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
 import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
-
 import { StatusBar, GlobalText, Button } from "../components"
 import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
-import { Icons } from "../assets"
-import {
-  Layout,
-  Outlines,
-  Colors,
-  Spacing,
-  Typography,
-  Iconography,
-} from "../styles"
+import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
 
 type HowItWorksScreenContent = {
   screenNumber: number
@@ -48,7 +38,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   howItWorksScreenContent,
   totalScreenCount,
   destinationOnSkip,
-}: HowItWorksScreenProps) => {
+}) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const navigation = useNavigation()
   const {
@@ -117,28 +107,22 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
               {howItWorksScreenContent.header}
             </GlobalText>
           </View>
-          <View style={style.nextButtonContainer}>
+        </ScrollView>
+        <View style={style.bottomButtonContainer}>
+          <>
             <Button
+              customButtonStyle={style.nextButton}
               label={howItWorksScreenContent.primaryButtonLabel}
               onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
-          </View>
-        </ScrollView>
-        <TouchableOpacity
-          style={style.bottomButtonContainer}
-          onPress={handleOnPressProtectPrivacy}
-        >
-          <GlobalText style={style.bottomButtonText}>
-            {t("onboarding.protect_privacy_button")}
-          </GlobalText>
-          <SvgXml
-            xml={Icons.ChevronUp}
-            fill={Colors.primary100}
-            width={Iconography.xxxSmall}
-            height={Iconography.xxxSmall}
-          />
-        </TouchableOpacity>
+            <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
+              <GlobalText style={style.bottomButtonText}>
+                {t("onboarding.protect_privacy_button")}
+              </GlobalText>
+            </TouchableOpacity>
+          </>
+        </View>
       </View>
     </>
   )
@@ -203,26 +187,24 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.medium,
     },
     headerText: {
-      ...Typography.header1,
+      ...Typography.header2,
       marginBottom: Spacing.xLarge,
       paddingHorizontal: Spacing.large,
     },
-    nextButtonContainer: {
-      alignSelf: "flex-start",
-      paddingHorizontal: Spacing.large,
+    nextButton: {
+      paddingTop: Spacing.xSmall,
+      paddingBottom: Spacing.xSmall + 1,
+      width: "95%",
+      alignSelf: "center",
     },
     bottomButtonContainer: {
-      backgroundColor: Colors.secondary10,
-      flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
       paddingTop: Spacing.small,
       paddingBottom: insets.bottom + Spacing.small,
     },
     bottomButtonText: {
       ...Typography.header5,
       color: Colors.primary100,
-      marginRight: Spacing.xSmall,
     },
   })
 }
