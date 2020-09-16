@@ -24,29 +24,54 @@ describe("NoExposures", () => {
     expect(queryByText("Wash your hands often")).not.toBeNull()
   })
 
-  describe("when the HA has provided a link", () => {
-    it("prompts the user to see HA guidance", () => {
-      expect.assertions(2)
-      const healthAuthorityAdviceUrl = "https://www.health.state.mn.us/"
-      const healthAuthorityName = "healthAuthorityName"
-      const openURLSpy = jest.spyOn(Linking, "openURL")
+  describe("clicking the Learn more link", () => {
+    describe("when the health authority has provided a learn more url", () => {
+      it("prompts the user to see HA guidance", () => {
+        expect.assertions(2)
+        const healthAuthorityLearnMoreUrl = "https://www.example.com/"
+        const healthAuthorityName = "healthAuthorityName"
+        const openURLSpy = jest.spyOn(Linking, "openURL")
 
-      const { queryByText, getByText } = render(
-        <ConfigurationContext.Provider
-          value={factories.configurationContext.build({
-            healthAuthorityAdviceUrl,
-            healthAuthorityName,
-          })}
-        >
-          <NoExposures />
-        </ConfigurationContext.Provider>,
-      )
+        const { queryByText, getByText } = render(
+          <ConfigurationContext.Provider
+            value={factories.configurationContext.build({
+              healthAuthorityLearnMoreUrl,
+              healthAuthorityName,
+            })}
+          >
+            <NoExposures />
+          </ConfigurationContext.Provider>,
+        )
 
-      expect(
-        queryByText(`Review guidance from ${healthAuthorityName}`),
-      ).not.toBeNull()
-      fireEvent.press(getByText("Learn More"))
-      expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityAdviceUrl)
+        expect(
+          queryByText(`Review guidance from ${healthAuthorityName}`),
+        ).not.toBeNull()
+        fireEvent.press(getByText("Learn More"))
+        expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityLearnMoreUrl)
+      })
+    })
+
+    describe("when the health authority has not provided a link", () => {
+      it("does not display a Learn More link", () => {
+        expect.assertions(1)
+        const healthAuthorityAdviceUrl = ""
+        const healthAuthorityLearnMoreUrl = ""
+        const healthAuthorityName = "healthAuthorityName"
+
+        const { queryByText } = render(
+          <ConfigurationContext.Provider
+            value={factories.configurationContext.build({
+              healthAuthorityAdviceUrl,
+              healthAuthorityLearnMoreUrl,
+              healthAuthorityName,
+            })}
+          >
+            <NoExposures />
+          </ConfigurationContext.Provider>,
+        )
+
+        expect(queryByText("Learn More")).toBeNull()
+      })
     })
   })
 })
