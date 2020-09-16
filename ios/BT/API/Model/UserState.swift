@@ -23,7 +23,7 @@ class UserState: Object {
       to: Date())!
     let allExposures: [Exposure] = Array(exposures)
     return allExposures.filter { (exposure: Exposure) in
-      return Date(timeIntervalSince1970: TimeInterval(exposure.date)) > dateCutoff
+      return exposure.date.fromPosixRepresentation > dateCutoff
     }
   }
 

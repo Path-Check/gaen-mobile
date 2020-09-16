@@ -566,6 +566,19 @@ class ExposureManagerTests: XCTestCase {
     wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
   }
 
+  func testRecentExposures() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      let userState = UserState()
+      userState.exposures.append(Exposure(id: "1",
+                                          date: halloween.posixRepresentation))
+      userState.exposures.append(Exposure(id: "2",
+                                          date: Date().posixRepresentation))
+      return userState
+    }
+    XCTAssertEqual(btSecureStorageMock.userState.recentExposures.count, 1)
+  }
+
   func testBluetoothNotificationOff() {
     let addNotificatiionRequestExpectation = self.expectation(description: "A notification request is added with the proper title and body")
     let removeNotificationsExpectation = self.expectation(description: "when is not authorized and bluetooth is not off we just remove all delivered notifications")
