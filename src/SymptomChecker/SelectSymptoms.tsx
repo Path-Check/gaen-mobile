@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
-import { TouchableOpacity, StyleSheet, ScrollView } from "react-native"
+import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -7,7 +7,7 @@ import { useStatusBarEffect } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
 
-import { Colors, Spacing } from "../styles"
+import { Colors, Spacing, Typography, Outlines } from "../styles"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -51,8 +51,14 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const determineSymptomButtonStyle = (symptom: string) => {
     return selectedSymptoms.includes(symptom)
-      ? style.symptomButtonSelected
+      ? { ...style.symptomButton, ...style.symptomButtonSelected }
       : style.symptomButton
+  }
+
+  const determineSymptomButtonTextStyle = (symptom: string) => {
+    return selectedSymptoms.includes(symptom)
+      ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
+      : style.symptomButtonText
   }
 
   return (
@@ -62,17 +68,25 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        {symptoms.map((value) => {
-          return (
-            <TouchableOpacity
-              key={value}
-              onPress={() => handleOnPressSymptom(value)}
-              style={determineSymptomButtonStyle(value)}
-            >
-              <GlobalText>{value}</GlobalText>
-            </TouchableOpacity>
-          )
-        })}
+        <GlobalText style={style.headerText}>
+          {t("symptom_checker.what_symptoms")}
+        </GlobalText>
+        <View style={style.symptomButtonsContainer}>
+          {symptoms.map((value) => {
+            return (
+              <TouchableHighlight
+                key={value}
+                onPress={() => handleOnPressSymptom(value)}
+                style={determineSymptomButtonStyle(value)}
+                underlayColor={Colors.neutral10}
+              >
+                <GlobalText style={determineSymptomButtonTextStyle(value)}>
+                  {value}
+                </GlobalText>
+              </TouchableHighlight>
+            )
+          })}
+        </View>
         <Button
           onPress={handleOnPressSave}
           label={t("common.save")}
@@ -92,10 +106,36 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xxHuge,
   },
-  symptomButton: {},
+  headerText: {
+    ...Typography.header2,
+    marginBottom: Spacing.large,
+  },
+  symptomButtonsContainer: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    marginBottom: Spacing.medium,
+  },
+  symptomButton: {
+    alignSelf: "flex-start",
+    borderWidth: Outlines.hairline,
+    borderColor: Colors.neutral25,
+    borderRadius: Outlines.borderRadiusMax,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.medium,
+    marginBottom: Spacing.small,
+    marginRight: Spacing.small,
+  },
   symptomButtonSelected: {
-    backgroundColor: Colors.success100,
+    backgroundColor: Colors.primary100,
+    borderColor: Colors.primary100,
+  },
+  symptomButtonText: {
+    ...Typography.body1,
+  },
+  symptomButtonTextSelected: {
+    color: Colors.white,
   },
 })
 
