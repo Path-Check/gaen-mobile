@@ -73,7 +73,11 @@ const SelectSymptomsScreen: FunctionComponent = () => {
             </TouchableOpacity>
           )
         })}
-        <Button onPress={handleOnPressSave} label={t("common.save")} />
+        <Button
+          onPress={handleOnPressSave}
+          label={t("common.save")}
+          disabled={selectedSymptoms.length === 0}
+        />
       </ScrollView>
     </>
   )
