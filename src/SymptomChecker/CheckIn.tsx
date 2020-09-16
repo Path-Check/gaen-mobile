@@ -224,9 +224,11 @@ const style = StyleSheet.create({
   },
   checkInEyebrowText: {
     ...Typography.body1,
+    marginBottom: Spacing.xxxSmall,
   },
   checkInHeaderText: {
     ...Typography.header3,
+    paddingRight: Spacing.xxLarge,
   },
   feelingButtonsContainer: {
     flexDirection: "row",
