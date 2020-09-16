@@ -33,7 +33,7 @@ describe("loadAuthorityLinks", () => {
 })
 
 describe("applyTranslations", () => {
-  it("filters the links with no translation", () => {
+  it("filters the links with no translation for the passed locale", () => {
     const links = [
       {
         url: "firstUrl",
@@ -59,7 +59,7 @@ describe("applyTranslations", () => {
     ])
   })
 
-  it("defaults to the en default translation", () => {
+  it("returns an empty array if no translations are present", () => {
     const links = [
       {
         url: "thirdUrl",
@@ -70,11 +70,6 @@ describe("applyTranslations", () => {
       },
     ]
 
-    expect(applyTranslations(links, "el")).toEqual([
-      {
-        url: "thirdUrl",
-        label: "thirdUrl",
-      },
-    ])
+    expect(applyTranslations(links, "el")).toEqual([])
   })
 })

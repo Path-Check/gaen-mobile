@@ -24,7 +24,7 @@ const Legal: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const {
     healthAuthorityName,
-    healthAuthorityPrivacyPolicyUrl,
+    healthAuthorityLegalPrivacyPolicyUrl,
   } = useConfigurationContext()
 
   const legalContent = authorityCopyTranslation(
@@ -44,10 +44,12 @@ const Legal: FunctionComponent = () => {
         {applicationName}
       </GlobalText>
       <GlobalText style={style.contentText}>{legalContent}</GlobalText>
-      <ExternalLink
-        url={healthAuthorityPrivacyPolicyUrl}
-        label={t("label.privacy_policy")}
-      />
+      {healthAuthorityLegalPrivacyPolicyUrl && (
+        <ExternalLink
+          url={healthAuthorityLegalPrivacyPolicyUrl}
+          label={t("label.privacy_policy")}
+        />
+      )}
       {authorityLinks?.map(({ url, label }) => {
         return <ExternalLink key={label} url={url} label={label} />
       })}

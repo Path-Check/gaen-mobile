@@ -41,6 +41,7 @@ describe("Legal", () => {
     ;(useApplicationName as jest.Mock).mockReturnValueOnce({
       applicationName: "applicationName",
     })
+
     const { getByText } = render(
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityName })}
@@ -52,29 +53,52 @@ describe("Legal", () => {
     expect(getByText(healthAuthorityName)).toBeDefined()
   })
 
-  it("navigates to the authority privacy policy url", async () => {
-    const healthAuthorityPrivacyPolicyUrl = "authorityPrivacyPolicyUrl"
+  describe("authority legal privacy policy url", () => {
+    it("displays the link and can navigate to it if present", async () => {
+      const healthAuthorityLegalPrivacyPolicyUrl = "authorityPrivacyPolicyUrl"
 
-    ;(useApplicationName as jest.Mock).mockReturnValueOnce({
-      applicationName: "applicationName",
+      ;(useApplicationName as jest.Mock).mockReturnValueOnce({
+        applicationName: "applicationName",
+      })
+
+      const openURLSpy = jest.spyOn(Linking, "openURL")
+
+      const { getByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityLegalPrivacyPolicyUrl,
+          })}
+        >
+          <Legal />
+        </ConfigurationContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Privacy Policy"))
+
+      await waitFor(() => {
+        expect(openURLSpy).toHaveBeenCalledWith(
+          healthAuthorityLegalPrivacyPolicyUrl,
+        )
+      })
     })
 
-    const openURLSpy = jest.spyOn(Linking, "openURL")
+    it("hides the link if the value is not provided", () => {
+      const healthAuthorityLegalPrivacyPolicyUrl = null
+      ;(useApplicationName as jest.Mock).mockReturnValueOnce({
+        applicationName: "applicationName",
+      })
 
-    const { getByLabelText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({
-          healthAuthorityPrivacyPolicyUrl,
-        })}
-      >
-        <Legal />
-      </ConfigurationContext.Provider>,
-    )
+      const { queryByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityLegalPrivacyPolicyUrl,
+          })}
+        >
+          <Legal />
+        </ConfigurationContext.Provider>,
+      )
 
-    fireEvent.press(getByLabelText("Privacy Policy"))
-
-    await waitFor(() => {
-      expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityPrivacyPolicyUrl)
+      expect(queryByLabelText("Privacy Policy")).toBeNull()
     })
   })
 

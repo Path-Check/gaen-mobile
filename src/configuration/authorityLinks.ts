@@ -1,6 +1,5 @@
 import links from "./links.json"
 
-const DEFAULT_LOCALE = "en"
 type TranslationValue = Record<string, string>
 type LinkData = {
   url: string
@@ -28,12 +27,11 @@ const applyTranslations = (
   try {
     return links
       .filter(({ label }) => {
-        const localizedLabel = label[localeCode] || label[DEFAULT_LOCALE]
+        const localizedLabel = label[localeCode] || ""
         return localizedLabel.length > 0
       })
       .map(({ url, label }) => {
-        const localizedLabel = label[localeCode] || label[DEFAULT_LOCALE]
-        return { url, label: localizedLabel }
+        return { url, label: label[localeCode] }
       })
   } catch {
     return []
