@@ -118,7 +118,6 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   symptomButton: {
-    alignSelf: "flex-start",
     borderWidth: Outlines.hairline,
     borderColor: Colors.neutral25,
     borderRadius: Outlines.borderRadiusMax,

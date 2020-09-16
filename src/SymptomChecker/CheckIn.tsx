@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import {
   TouchableOpacity,
   View,
@@ -12,6 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { HealthRecommendation, determineHealthRecommendation } from "./symptoms"
 import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
@@ -26,18 +27,23 @@ enum CheckInStatus {
 const CheckIn: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { symptoms } = useSymptomCheckerContext()
+  const { symptoms, healthRecommendation } = useSymptomCheckerContext()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
   )
+
+  useEffect(() => {
+    if (symptoms.length > 0) {
+      setCheckInStatus(CheckInStatus.FeelingNotWell)
+    }
+  }, [symptoms])
 
   const handleOnPressGood = () => {
     setCheckInStatus(CheckInStatus.FeelingGood)
   }
 
   const handleOnPressNotWell = () => {
-    setCheckInStatus(CheckInStatus.FeelingNotWell)
     navigation.navigate(SymptomCheckerStackScreens.SelectSymptoms)
   }
 
@@ -53,22 +59,19 @@ const CheckIn: FunctionComponent = () => {
       case CheckInStatus.FeelingGood:
         return <FeelingGoodContent />
       case CheckInStatus.FeelingNotWell:
-        if (symptoms.length !== 0) {
-          return <FeelingNotWellContent symptoms={symptoms} />
-        } else {
-          return (
-            <SelectFeeling
-              handleOnPressGood={handleOnPressGood}
-              handleOnPressNotWell={handleOnPressNotWell}
-            />
-          )
-        }
+        return (
+          <FeelingNotWellContent
+            symptoms={symptoms}
+            healthRecommendation={healthRecommendation}
+          />
+        )
     }
   }
 
-  const showFilledIcon =
-    checkInStatus === CheckInStatus.NotCheckedIn && symptoms.length !== 0
-  const iconFill = showFilledIcon ? Colors.secondary50 : Colors.primary100
+  const iconFill =
+    checkInStatus === CheckInStatus.NotCheckedIn
+      ? Colors.secondary50
+      : Colors.primary100
 
   return (
     <>
@@ -137,21 +140,41 @@ const FeelingGoodContent: FunctionComponent = () => {
 
 interface FeelingNotWellContentProps {
   symptoms: string[]
+  healthRecommendation: HealthRecommendation
 }
 
 const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
   symptoms,
+  healthRecommendation,
 }) => {
   const { t } = useTranslation()
+
+  const determineHealthRecommendationText = () => {
+    switch (healthRecommendation) {
+      case HealthRecommendation.GetTested:
+        return t("symptom_checker.get_tested")
+      case HealthRecommendation.FollowHAGuidance:
+        return t("symptom_checker.follow_ha_guidance")
+    }
+  }
 
   return (
     <>
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
-      {symptoms.map((value) => {
-        return <GlobalText key={value}>{value}</GlobalText>
-      })}
+      <GlobalText style={style.healthRecommendationText}>
+        {determineHealthRecommendationText()}
+      </GlobalText>
+      <View style={style.symptomsContainer}>
+        {symptoms.map((value) => {
+          return (
+            <View style={style.symptomContainer} key={value}>
+              <GlobalText style={style.symptomText}>{value}</GlobalText>
+            </View>
+          )
+        })}
+      </View>
     </>
   )
 }
@@ -230,6 +253,27 @@ const style = StyleSheet.create({
     width: Iconography.small,
     height: Iconography.small,
     marginBottom: Spacing.xxSmall,
+  },
+  healthRecommendationText: {
+    ...Typography.header5,
+    marginTop: Spacing.medium,
+    marginBottom: Spacing.large,
+  },
+  symptomsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  symptomContainer: {
+    backgroundColor: Colors.neutral10,
+    borderRadius: Outlines.borderRadiusLarge,
+    paddingVertical: Spacing.xxxSmall,
+    paddingHorizontal: Spacing.small,
+    marginRight: Spacing.xxSmall,
+    marginBottom: Spacing.xxSmall,
+  },
+  symptomText: {
+    ...Typography.body2,
+    color: Colors.primaryText,
   },
 })
 
