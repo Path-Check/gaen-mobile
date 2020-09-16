@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
-import { HealthRecommendation, determineHealthRecommendation } from "./symptoms"
+import { HealthRecommendation } from "./symptoms"
 import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
