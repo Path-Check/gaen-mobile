@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react"
-import { StyleSheet, ScrollView } from "react-native"
+import React, { FunctionComponent, useState } from "react"
+import { TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
@@ -10,6 +10,41 @@ import { Colors, Spacing } from "../styles"
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
+  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
+
+  const symptoms = [
+    t("symptoms.chest_pain_or_pressure"),
+    t("symptoms.difficulty_breathing"),
+    t("symptoms.lightheadedness"),
+    t("symptoms.disorientation_or_unresponsiveness"),
+    t("symptoms.fever"),
+    t("symptoms.chills"),
+    t("symptoms.cough"),
+    t("symptoms.loss_of_smell"),
+    t("symptoms.loss_of_taste"),
+    t("symptoms.loss_of_appetite"),
+    t("symptoms.vomiting"),
+    t("symptoms.diarrhea"),
+    t("symptoms.body_aches"),
+    t("symptoms.other"),
+  ]
+
+  const handleOnPressSymptom = (selectedSymptom: string) => {
+    const indexOfSelectedSymptom = selectedSymptoms.indexOf(selectedSymptom)
+    if (indexOfSelectedSymptom >= 0) {
+      const newSelectedSymptoms = [...selectedSymptoms]
+      newSelectedSymptoms.splice(indexOfSelectedSymptom, 1)
+      setSelectedSymptoms(newSelectedSymptoms)
+    } else {
+      setSelectedSymptoms([...selectedSymptoms, selectedSymptom])
+    }
+  }
+
+  const determineSymptomButtonStyle = (symptom: string) => {
+    return selectedSymptoms.includes(symptom)
+      ? style.symptomButtonSelected
+      : style.symptomButton
+  }
 
   return (
     <>
@@ -18,7 +53,17 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <GlobalText>{t("common.continue")}</GlobalText>
+        {symptoms.map((value) => {
+          return (
+            <TouchableOpacity
+              key={value}
+              onPress={() => handleOnPressSymptom(value)}
+              style={determineSymptomButtonStyle(value)}
+            >
+              <GlobalText>{value}</GlobalText>
+            </TouchableOpacity>
+          )
+        })}
       </ScrollView>
     </>
   )
@@ -33,6 +78,10 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
+  },
+  symptomButton: {},
+  symptomButtonSelected: {
+    backgroundColor: Colors.success100,
   },
 })
 
