@@ -1,15 +1,15 @@
-export enum HealthRecommendation {
+export enum HealthAssessment {
   GetTested,
   FollowHAGuidance,
 }
 
 export type Symptom = string
 
-export const determineHealthRecommendation = (
+export const determineHealthAssessment = (
   symptoms: Symptom[],
-): HealthRecommendation => {
+): HealthAssessment => {
   if (symptoms.length > 3) {
-    return HealthRecommendation.GetTested
+    return HealthAssessment.GetTested
   }
-  return HealthRecommendation.FollowHAGuidance
+  return HealthAssessment.FollowHAGuidance
 }

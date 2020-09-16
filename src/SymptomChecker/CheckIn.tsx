@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
-import { HealthRecommendation } from "./symptoms"
+import { HealthAssessment } from "./symptoms"
 import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
@@ -27,7 +27,7 @@ enum CheckInStatus {
 const CheckIn: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { symptoms, healthRecommendation } = useSymptomCheckerContext()
+  const { symptoms, healthAssessment } = useSymptomCheckerContext()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
@@ -62,7 +62,7 @@ const CheckIn: FunctionComponent = () => {
         return (
           <FeelingNotWellContent
             symptoms={symptoms}
-            healthRecommendation={healthRecommendation}
+            healthAssessment={healthRecommendation}
           />
         )
     }
@@ -140,20 +140,20 @@ const FeelingGoodContent: FunctionComponent = () => {
 
 interface FeelingNotWellContentProps {
   symptoms: string[]
-  healthRecommendation: HealthRecommendation
+  healthAssessment: HealthAssessment
 }
 
 const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
   symptoms,
-  healthRecommendation,
+  healthAssessment,
 }) => {
   const { t } = useTranslation()
 
-  const determineHealthRecommendationText = () => {
-    switch (healthRecommendation) {
-      case HealthRecommendation.GetTested:
+  const determineHealthAssessmentText = () => {
+    switch (healthAssessment) {
+      case HealthAssessment.GetTested:
         return t("symptom_checker.get_tested")
-      case HealthRecommendation.FollowHAGuidance:
+      case HealthAssessment.FollowHAGuidance:
         return t("symptom_checker.follow_ha_guidance")
     }
   }
@@ -163,8 +163,8 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
-      <GlobalText style={style.healthRecommendationText}>
-        {determineHealthRecommendationText()}
+      <GlobalText style={style.healthAssessmentText}>
+        {determineHealthAssessmentText()}
       </GlobalText>
       <View style={style.symptomsContainer}>
         {symptoms.map((value) => {
@@ -256,7 +256,7 @@ const style = StyleSheet.create({
     height: Iconography.small,
     marginBottom: Spacing.xxSmall,
   },
-  healthRecommendationText: {
+  healthAssessmentText: {
     ...Typography.header5,
     ...Typography.base,
     marginTop: Spacing.medium,

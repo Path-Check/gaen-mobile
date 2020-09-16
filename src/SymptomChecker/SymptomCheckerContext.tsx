@@ -2,40 +2,40 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import { createContext, useContext } from "react"
 
 import {
-  determineHealthRecommendation,
+  determineHealthAssessment,
   Symptom,
-  HealthRecommendation,
+  HealthAssessment,
 } from "./symptoms"
 
 type SymptomCheckerContextState = {
   symptoms: Symptom[]
   updateSymptoms: (newSymptoms: Symptom[]) => void
-  healthRecommendation: HealthRecommendation
+  healthAssessment: HealthAssessment
 }
 
 export const SymptomCheckerContext = createContext<SymptomCheckerContextState>({
   symptoms: [],
   updateSymptoms: () => {},
-  healthRecommendation: HealthRecommendation.FollowHAGuidance,
+  healthAssessment: HealthAssessment.FollowHAGuidance,
 })
 
 const SymptomCheckerProvider: FunctionComponent = ({ children }) => {
   const [symptoms, setSymptoms] = useState<Symptom[]>([])
-  const [healthRecommendation, setHealthRecommendation] = useState<
-    HealthRecommendation
-  >(HealthRecommendation.FollowHAGuidance)
+  const [healthAssessment, setHealthAssessment] = useState<HealthAssessment>(
+    HealthAssessment.FollowHAGuidance,
+  )
 
   const updateSymptoms = (newSymptoms: Symptom[]) => {
     setSymptoms(newSymptoms)
   }
 
   useEffect(() => {
-    setHealthRecommendation(determineHealthRecommendation(symptoms))
-  }, [setHealthRecommendation, symptoms])
+    setHealthAssessment(determineHealthAssessment(symptoms))
+  }, [setHealthAssessment, symptoms])
 
   return (
     <SymptomCheckerContext.Provider
-      value={{ symptoms, updateSymptoms, healthRecommendation }}
+      value={{ symptoms, updateSymptoms, healthAssessment }}
     >
       {children}
     </SymptomCheckerContext.Provider>

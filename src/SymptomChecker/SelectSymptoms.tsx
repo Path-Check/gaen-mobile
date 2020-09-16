@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
-import { HealthRecommendation, determineHealthRecommendation } from "./symptoms"
+import { HealthAssessment, determineHealthAssessment } from "./symptoms"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
 
@@ -15,7 +15,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
-  const { updateSymptoms, healthRecommendation } = useSymptomCheckerContext()
+  const { updateSymptoms } = useSymptomCheckerContext()
 
   const symptoms = [
     t("symptoms.chest_pain_or_pressure"),
@@ -47,10 +47,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const handleOnPressSave = () => {
     updateSymptoms(selectedSymptoms)
-    const currentHealthRecommendation = determineHealthRecommendation(
-      selectedSymptoms,
-    )
-    if (currentHealthRecommendation === HealthRecommendation.GetTested) {
+    const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
+    if (currentHealthAssessment === HealthAssessment.GetTested) {
       navigation.navigate(SymptomCheckerStackScreens.AtRiskRecommendation)
     } else {
       navigation.goBack()
