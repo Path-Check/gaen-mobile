@@ -635,6 +635,43 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
+  func testRemainingFileCapacityReset() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      let userState = UserState()
+      userState.remainingDailyFileProcessingCapacity = 0
+      return userState
+    }
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    exposureManager.detectExposuresV1 { (result) in
+      switch result {
+      case .success:
+        XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+      default: XCTFail()
+      }
+    }
+  }
+
+  func testRemainingFileCapacityNoResetForDetectionError() {
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    btSecureStorageMock.userStateHandler = {
+      let userState = UserState()
+      userState.remainingDailyFileProcessingCapacity = 0
+      return userState
+    }
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    exposureManager.detectExposuresV1 { (result) in
+      //no op
+    }
+    exposureManager.detectExposuresV1 { (result) in
+      switch result {
+      case .failure:
+        XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, 0)
+      default: XCTFail()
+      }
+    }
+  }
+
   func testDebugFetchDiagnosisKeys() {
     let debugAction = DebugAction.fetchDiagnosisKeys
     let enManagerMock = ENManagerMock()
