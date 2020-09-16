@@ -20,7 +20,10 @@ interface NetworkFailure<U> {
 
 export type NetworkResponse<U = "Unknown"> = NetworkSuccess | NetworkFailure<U>
 
-export type PostCallbackInfoError = "Unknown"
+export type PostCallbackInfoError =
+  | "AuthorizationFailed"
+  | "Unknown"
+  | "InvalidRequest"
 
 interface CallbackInfo {
   firstname: string
@@ -56,6 +59,10 @@ export const postCallbackInfo = async ({
     const oauthResponse = await postOAuth()
     const data = await oauthResponse.json()
 
+    if (!data?.access_token) {
+      return { kind: "failure", error: "AuthorizationFailed" }
+    }
+
     const response = await fetch(callbackFormUrl, {
       method: "POST",
       headers: {
@@ -71,6 +78,6 @@ export const postCallbackInfo = async ({
       return { kind: "failure", error: "Unknown" }
     }
   } catch (e) {
-    return { kind: "failure", error: "Unknown", message: e.message }
+    return { kind: "failure", error: "InvalidRequest", message: e.message }
   }
 }
