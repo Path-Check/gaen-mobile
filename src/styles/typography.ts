@@ -39,7 +39,7 @@ export const semiBoldFontFamily = "IBMPlexSans-SemiBold"
 export const boldFontFamily = "IBMPlexSans-Bold"
 export const monospaceFontFamily = "IBMPlexMono"
 
-const base: TextStyle = {
+export const base: TextStyle = {
   fontFamily: baseFontFamily,
   fontWeight: baseWeight,
   letterSpacing: baseLetterSpacing,

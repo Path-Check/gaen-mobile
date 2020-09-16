@@ -258,8 +258,9 @@ const style = StyleSheet.create({
   },
   healthRecommendationText: {
     ...Typography.header5,
+    ...Typography.base,
     marginTop: Spacing.medium,
-    marginBottom: Spacing.large,
+    marginBottom: Spacing.xxLarge,
   },
   symptomsContainer: {
     flexDirection: "row",
