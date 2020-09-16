@@ -4,10 +4,11 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import { SymptomCheckerStackScreens } from "./index"
 import SymptomCheckerScreen from "../SymptomChecker/"
 import SelectSymptomsScreen from "../SymptomChecker/SelectSymptoms"
+import AtRiskRecommendationScreen from "../SymptomChecker/AtRiskRecommendation"
 import { SymptomCheckerProvider } from "../SymptomChecker/SymptomCheckerContext"
+import { SymptomCheckerStackScreens } from "./index"
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,13 @@ const SymptomCheckerStack: FunctionComponent = () => {
             ...TransitionPresets.ModalPresentationIOS,
             cardOverlayEnabled: true,
             gestureEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name={SymptomCheckerStackScreens.AtRiskRecommendation}
+          component={AtRiskRecommendationScreen}
+          options={{
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

@@ -3,9 +3,10 @@ import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { HealthRecommendation, determineHealthRecommendation } from "./symptoms"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
 
@@ -14,7 +15,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
-  const { updateSymptoms } = useSymptomCheckerContext()
+  const { updateSymptoms, healthRecommendation } = useSymptomCheckerContext()
 
   const symptoms = [
     t("symptoms.chest_pain_or_pressure"),
@@ -46,7 +47,14 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const handleOnPressSave = () => {
     updateSymptoms(selectedSymptoms)
-    navigation.goBack()
+    const currentHealthRecommendation = determineHealthRecommendation(
+      selectedSymptoms,
+    )
+    if (currentHealthRecommendation === HealthRecommendation.GetTested) {
+      navigation.navigate(SymptomCheckerStackScreens.AtRiskRecommendation)
+    } else {
+      navigation.goBack()
+    }
   }
 
   const determineSymptomButtonStyle = (symptom: string) => {
