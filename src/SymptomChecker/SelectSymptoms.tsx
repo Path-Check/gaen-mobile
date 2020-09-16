@@ -68,38 +68,36 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   return (
-    <>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.what_symptoms")}
-        </GlobalText>
-        <View style={style.symptomButtonsContainer}>
-          {symptoms.map((value) => {
-            return (
-              <TouchableHighlight
-                key={value}
-                onPress={() => handleOnPressSymptom(value)}
-                style={determineSymptomButtonStyle(value)}
-                underlayColor={Colors.neutral10}
-              >
-                <GlobalText style={determineSymptomButtonTextStyle(value)}>
-                  {value}
-                </GlobalText>
-              </TouchableHighlight>
-            )
-          })}
-        </View>
-        <Button
-          onPress={handleOnPressSave}
-          label={t("common.save")}
-          disabled={selectedSymptoms.length === 0}
-        />
-      </ScrollView>
-    </>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      <GlobalText style={style.headerText}>
+        {t("symptom_checker.what_symptoms")}
+      </GlobalText>
+      <View style={style.symptomButtonsContainer}>
+        {symptoms.map((value) => {
+          return (
+            <TouchableHighlight
+              key={value}
+              onPress={() => handleOnPressSymptom(value)}
+              style={determineSymptomButtonStyle(value)}
+              underlayColor={Colors.neutral10}
+            >
+              <GlobalText style={determineSymptomButtonTextStyle(value)}>
+                {value}
+              </GlobalText>
+            </TouchableHighlight>
+          )
+        })}
+      </View>
+      <Button
+        onPress={handleOnPressSave}
+        label={t("common.save")}
+        disabled={selectedSymptoms.length === 0}
+      />
+    </ScrollView>
   )
 }
 
