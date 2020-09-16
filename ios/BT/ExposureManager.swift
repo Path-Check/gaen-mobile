@@ -326,12 +326,6 @@ final class ExposureManager: NSObject {
         throw ExposureError.default("Detection Already in Progress")
       }
       self.isDetectingExposures = true
-      // Reset file capacity to 15 if > 24 hours have elapsed since last reset
-      self.updateRemainingFileCapacity()
-      guard self.btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
-        // Abort if daily file capacity is exceeded
-        return []
-      }
       let indexFileString = try await(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
       let targetUrls = self.urlPathsToProcess(remoteURLs)
@@ -342,7 +336,7 @@ final class ExposureManager: NSObject {
       let exposureConfiguraton = try await(self.getExposureConfigurationV2())
       var exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
-      exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
+      exposureSummary = try await(self.getCachedExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary {
         summary.daySummaries.forEach { (daySummary) in
@@ -633,7 +627,7 @@ extension ExposureManager {
     }
   }
 
-  func callAggregateDetectExposures(configuration: ENExposureConfiguration) -> Promise<ENExposureDetectionSummary?> {
+  func getCachedExposures(configuration: ENExposureConfiguration) -> Promise<ENExposureDetectionSummary?> {
     return Promise(on: .global()) { fullfill, reject in
       self.manager.detectExposures(configuration: configuration) { summary, error in
         if let error = error {
@@ -649,7 +643,7 @@ extension ExposureManager {
     return Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       do {
         let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-        let exposureSummary = try await(self.callAggregateDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
+        let exposureSummary = try await(self.getCachedExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
         var newExposures: [Exposure] = []
         if let summary = exposureSummary {
           summary.daySummaries.forEach { (daySummary) in
