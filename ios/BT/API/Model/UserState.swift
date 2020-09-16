@@ -16,4 +16,15 @@ class UserState: Object {
     "id"
   }
 
+  var recentExposures: [Exposure] {
+    let dateCutoff = Calendar.current.date(
+      byAdding: .hour,
+      value: -350,
+      to: Date())!
+    let allExposures: [Exposure] = Array(exposures)
+    return allExposures.filter { (exposure: Exposure) in
+      return Date(timeIntervalSince1970: TimeInterval(exposure.date)) > dateCutoff
+    }
+  }
+
 }

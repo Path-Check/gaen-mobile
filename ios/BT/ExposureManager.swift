@@ -156,6 +156,10 @@ final class ExposureManager: NSObject {
 
   /// Returns the current exposures as a json string representation
   @objc func getCurrentExposures(_ completion: ((String) -> Void)) {
+    // Temporary workaround for an apparent EN framework bug whereby
+    // the cached exposures call is limited to 6 per day
+    completion(exposuresV1().jsonStringRepresentation())
+    return
     if #available(iOS 13.7, *) {
       do {
         let exposures = try await(exposuresV2())
@@ -484,7 +488,7 @@ extension ExposureManager {
 private extension ExposureManager {
 
   func exposuresV1() -> [Exposure] {
-    return Array(btSecureStorage.userState.exposures)
+    btSecureStorage.userState.recentExposures
   }
 
   func activateSuccess() {
