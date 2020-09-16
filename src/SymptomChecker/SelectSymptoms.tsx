@@ -1,16 +1,20 @@
 import React, { FunctionComponent, useState } from "react"
 import { TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
-import { GlobalText } from "../components"
+import { GlobalText, Button } from "../components"
+import { useSymptomCheckerContext } from "./SymptomCheckerContext"
 
 import { Colors, Spacing } from "../styles"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
+  const navigation = useNavigation()
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
+  const { updateSymptoms } = useSymptomCheckerContext()
 
   const symptoms = [
     t("symptoms.chest_pain_or_pressure"),
@@ -40,6 +44,11 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressSave = () => {
+    updateSymptoms(selectedSymptoms)
+    navigation.goBack()
+  }
+
   const determineSymptomButtonStyle = (symptom: string) => {
     return selectedSymptoms.includes(symptom)
       ? style.symptomButtonSelected
@@ -64,6 +73,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
             </TouchableOpacity>
           )
         })}
+        <Button onPress={handleOnPressSave} label={t("common.save")} />
       </ScrollView>
     </>
   )

@@ -11,10 +11,11 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
+import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
-import { SymptomCheckerStackScreens } from "../navigation"
 
 enum CheckInStatus {
   NotCheckedIn,
@@ -25,6 +26,7 @@ enum CheckInStatus {
 const CheckIn: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { symptoms } = useSymptomCheckerContext()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
@@ -51,14 +53,22 @@ const CheckIn: FunctionComponent = () => {
       case CheckInStatus.FeelingGood:
         return <FeelingGoodContent />
       case CheckInStatus.FeelingNotWell:
-        return <FeelingNotWellContent />
+        if (symptoms.length !== 0) {
+          return <FeelingNotWellContent symptoms={symptoms} />
+        } else {
+          return (
+            <SelectFeeling
+              handleOnPressGood={handleOnPressGood}
+              handleOnPressNotWell={handleOnPressNotWell}
+            />
+          )
+        }
     }
   }
 
-  const iconFill =
-    checkInStatus === CheckInStatus.NotCheckedIn
-      ? Colors.secondary50
-      : Colors.primary100
+  const showFilledIcon =
+    checkInStatus === CheckInStatus.NotCheckedIn && symptoms.length !== 0
+  const iconFill = showFilledIcon ? Colors.secondary50 : Colors.primary100
 
   return (
     <>
@@ -115,7 +125,7 @@ const SelectFeeling: FunctionComponent<SelectFeelingProps> = ({
   )
 }
 
-const FeelingGoodContent = () => {
+const FeelingGoodContent: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
@@ -125,13 +135,24 @@ const FeelingGoodContent = () => {
   )
 }
 
-const FeelingNotWellContent = () => {
+interface FeelingNotWellContentProps {
+  symptoms: string[]
+}
+
+const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
+  symptoms,
+}) => {
   const { t } = useTranslation()
 
   return (
-    <GlobalText style={style.checkInHeaderText}>
-      {t("symptom_checker.sorry_to_hear_it")}
-    </GlobalText>
+    <>
+      <GlobalText style={style.checkInHeaderText}>
+        {t("symptom_checker.sorry_to_hear_it")}
+      </GlobalText>
+      {symptoms.map((value) => {
+        return <GlobalText key={value}>{value}</GlobalText>
+      })}
+    </>
   )
 }
 
