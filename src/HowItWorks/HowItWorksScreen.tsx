@@ -112,6 +112,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
           <>
             <Button
               customButtonStyle={style.nextButton}
+              customButtonInnerStyle={style.nextButtonGradient}
               label={howItWorksScreenContent.primaryButtonLabel}
               onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
@@ -192,6 +193,11 @@ const createStyle = (insets: EdgeInsets) => {
       paddingHorizontal: Spacing.large,
     },
     nextButton: {
+      width: "95%",
+      alignSelf: "center",
+      marginBottom: Spacing.xxSmall,
+    },
+    nextButtonGradient: {
       paddingTop: Spacing.xSmall,
       paddingBottom: Spacing.xSmall + 1,
       width: "95%",

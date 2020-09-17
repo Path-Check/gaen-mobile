@@ -106,6 +106,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
       </GlobalText>
       <Button
         customButtonStyle={style.requestCallbackButton}
+        customButtonInnerStyle={style.requestCallbackButtonGradient}
         onPress={navigateToCallbackForm}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
         hasRightArrow
@@ -184,6 +185,11 @@ const style = StyleSheet.create({
   },
   requestCallbackButton: {
     marginBottom: Spacing.small,
+    width: "100%",
+    alignSelf: "center",
+  },
+  requestCallbackButtonGradient: {
+    width: "100%",
     padding: Spacing.small,
   },
   callLaterButton: {

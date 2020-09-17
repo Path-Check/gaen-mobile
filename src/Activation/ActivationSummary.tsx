@@ -50,6 +50,7 @@ const ActivationSummary: FunctionComponent = () => {
           label={t("common.settings")}
           onPress={handleOnPressOpenSettings}
           customButtonStyle={style.primaryButton}
+          customButtonInnerStyle={style.primaryButtonGradient}
         />
         <TouchableOpacity
           onPress={handleOnPressGoToHome}
@@ -69,6 +70,7 @@ const ActivationSummary: FunctionComponent = () => {
         label={t("label.go_to_home_view")}
         onPress={handleOnPressGoToHome}
         customButtonStyle={style.primaryButton}
+        customButtonInnerStyle={style.primaryButtonGradient}
       />
     )
   }
@@ -161,6 +163,9 @@ const style = StyleSheet.create({
   primaryButton: {
     width: "100%",
     marginBottom: Spacing.xxSmall,
+  },
+  primaryButtonGradient: {
+    width: "100%",
   },
   secondaryButton: {
     ...Buttons.secondary,

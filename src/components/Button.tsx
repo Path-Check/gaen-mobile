@@ -21,6 +21,7 @@ interface ButtonProps {
   loading?: boolean
   disabled?: boolean
   customButtonStyle?: ViewStyle
+  customButtonInnerStyle?: ViewStyle
   customTextStyle?: TextStyle
   testID?: string
   hasRightArrow?: boolean
@@ -33,6 +34,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   disabled,
   loading,
   customButtonStyle,
+  customButtonInnerStyle,
   customTextStyle,
   testID,
   hasRightArrow,
@@ -84,7 +86,7 @@ const Button: FunctionComponent<ButtonProps> = ({
 
   const buttonStyle = {
     ...style.button,
-    ...customButtonStyle,
+    ...customButtonInnerStyle,
   }
 
   return (
