@@ -185,9 +185,6 @@
     "question_icon": "물음표 아이콘",
     "unchecked_checkbox": "체크되지 않은 확인란"
   },
-  "more": {
-    "select_language": "언어 선택"
-  },
   "navigation": {
     "exposure": "노출",
     "exposure_history": "노출 이력",

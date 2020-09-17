@@ -40,8 +40,7 @@
     "start_description": "Enfòmasyon ou an prive, anonim, e kode. Pa gen done kap kite aparèy ou sof si ou bay pèmisyon.",
     "start_title": "Reponn kesyon sou sentom ou yo ak istwa medikal pou aprann Kisa pou fe aprè sou COVID-19"
   },
-  "callback_form": {
-    "fill_out_the_info": "Ranpli enfòmasyon ki anba a epi yon kontak ki soti nan {{healthAuthorityName}} ap pran kontak ak ou.",
+  "callback": {
     "firstname": "Prenon",
     "lastname": "Siyati",
     "phone_number_required": "Nimewo telefòn (obligatwa)",
@@ -172,9 +171,6 @@
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "question_icon": "Imaj pwen entèwogasyon"
   },
-  "more": {
-    "select_language": "Chwazi lang"
-  },
   "navigation": {
     "connect": "Konekte",
     "exposure": "Ekspozisyon",
@@ -227,7 +223,6 @@
   },
   "screen_titles": {
     "about": "Apropo",
-    "callback_form": "Fòm rapèl",
     "debug": "Debug",
     "exposure_history": "Lis ekspozisyon",
     "exposures": "Ekspozisyon yo",

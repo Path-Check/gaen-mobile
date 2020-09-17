@@ -185,9 +185,6 @@
     "question_icon": "クエスチョンマーク",
     "unchecked_checkbox": "未チェックのチェックボックス"
   },
-  "more": {
-    "select_language": "言語を選択する"
-  },
   "navigation": {
     "exposure": "接触",
     "exposure_history": "感染リスクの履歴",

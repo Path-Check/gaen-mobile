@@ -1,5 +1,5 @@
 {
-  "_display_name": "Somali",
+  "_display_name": "Soomaali",
   "about": {
     "description": "Aabka {{applicationName}} waxa bixinaysa samafalka {{healthAuthorityName}}",
     "operating_system_abbr": "OS:",
@@ -42,11 +42,12 @@
   },
   "common": {
     "alert": "Feejignaan",
+    "back": "Noqo",
     "close": "Xir",
     "continue": "Sii wado",
     "disabled": "La damiyay",
     "done": "Dhammaad",
-    "enabled": "Shidan",
+    "enabled": "Daar",
     "maybe_later": "Laga yaabee hadhow",
     "next": "Ka xiga",
     "no_thanks": "Maya waad mahadsantahay",
@@ -64,6 +65,7 @@
   },
   "export": {
     "code_input_body_bluetooth": "Gali koodhkaaga xaqiijinta",
+    "code_input_button_back": "Noqo",
     "code_input_button_cancel": "Buri",
     "code_input_title_bluetooth": "Xaqiiji ogaanshaha xaaladdaada",
     "complete_body_bluetooth": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
@@ -72,15 +74,29 @@
     "consent_body_1": "Haddii aad doorbiddo inaad sidaas samayso, waxaad wax taraysaa dadka kale ee bulshadaadu inay gaaraan go'aanno warqab ah oo ku saabsan caafimaadkooda oo aad kaalin ka qaatadato in la xakameeyo faafidda fayraska.",
     "consent_body_2": "Macluumaadka kaliya ee la wadaagi doono ayaa noqonaya koox tirooyin bakhtiyaanasiibaka ah ee telefankaagu kala kala beddehsay Bluetooth-ka telefoonka kale ee ka ag dhawaa 14kii maalmood ee la soo dhaafay, oo ay weheliso dhibco halis la misaamay oo ku saleysan goorta ay astaamahaagu ay soo baxeen.",
     "consent_button_title": "Waan fahmay oo waan oggolahay",
+    "consent_subheader_1": "Maxay tahay sababta aan ula wadaagayo?",
     "consent_subheader_2": "Sidee ayey u shaqeysaa?",
     "enable_exposure_notifications_body": "Waa inaad fasaxdaa ogaysimaha ufeydsanka si aad uga warbixiso natiijada ka tijaabinta toganaha (positive) ah.",
     "enable_exposure_notifications_title": "Oggolow ogaysimaha ufeydsanku inay sii jirto",
     "error": {
       "invalid_code": "Ku day koodh ka duwan",
+      "invalid_format": "Qaab aan sax ahayn",
       "unknown_code_verification_error": "Ku day koodh ka duwan",
       "verification_code_used": "Koodhka qarsoon ee xaqiijinta ayaa horay loo adeegsaday"
     },
     "publish_consent_title_bluetooth": "U wagali bulshadaada",
+    "publish_keys": {
+      "errors": {
+        "description": "Hawlgalka lama dhammaystirin. {{message}}",
+        "internal_server_error": "Sarfarka wuxuu wajahayaa dhibaatooyin, fadlan markale iskuday",
+        "timeout": "Codsiga ayaa qaatay waqti aad u dheer si loo dhammaystiro",
+        "unknown": "Ku guuldaraystay soo gudbinta xogta soogaaritaannada"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "Xogta taala ayaa waxaa loo diray sarfarka. Tan badanaa waxay ka dhigan tahay in nidaamkan horeyba telefoonkan la isku day,  laakiin ahaa barnaamij ka duwan. Tan waxaad kala xiriiri kartaa hey'adda bixisay lambarka xaqiijinta ee la adeegsaday. Waxay ahaayeen {{newKeysInserted}} furayaal cusub oo lagu daray.",
+        "title": "Isku day inaad gudbiso furayaasha jira"
+      }
+    },
     "start_header_bluetooth": "Gacan ka geyso xakamaynta faafidda fayraska iyo inaad difaacdo dadka kale ee ka tirsan bulshadaada."
   },
   "exposure_history": {
@@ -111,6 +127,7 @@
     "how_does_this_work_para": "Markay Ogeysiinta Ufeydsanku daaran tahay, telefoonkaaga ayaa isticmaala Bluetooth ayaa u kala doorsHa iyo kaydiYA tirada taxanaha bakhtiyaanasiibka ah (loo yaqaan Aqoonsiga bakhtiyaanasiibka ah) telefoon kasta kasta oo u la kulmo oo sidoo kale leh Kartiyaynta Ogeysiimaha Ufeydsanka. Aqoonsiyada bakhtiyaanasiibka ah ayaan qof ahaan garanayn ugama isticmaaleyaasha oo beddelma maanitiiba marar badan si asturnaantaada loo daafo.",
     "last_days": "14kii maalmood ee ugu dambeysay",
     "learn_more": "Ogow Waxyaabo Dheeraad Ah",
+    "no_connectivity_message": "Kuma xirnid interneetka!",
     "no_exposure_reports": "Ma Jiraan Warbixinno Ufeydsani",
     "no_exposure_reports_over_past": "Ma aadan helin innaba warbixinno ufeydsanaan 14kii-maalmood ee la soo dhaafay.",
     "possible_exposure": "Ufeydsanaan COVID-19 suurtagal ah",
@@ -121,30 +138,45 @@
     "why_did_i_get_an_en_para": "Waxaad heli doontaa ogeysiinta ufeydsanaanta marka qofka aad si lama filaan u kulanteeni hadhow si xaqiiq ah, looga helo cudrka, ama laga tijaabiyo oo COVID-19 oo u xusho inuu u wargaliyo dadka kale."
   },
   "home": {
+    "bluetooth_info_body": "Telefoonkaagu wuxuu ogaadaa taleefanada kale ee aad waqtiga ugu dhow ku qaadato iyadoo la isticmaalayo Bluetooth Tamar Hooseeysa. Tan waxay barnaamijka aabka u oggolaaneysaa inuu ku soo galo soogaliddada maalin walba si qarsoodi ah, xitaa marka aanu furnayn barnaamijka telfoonkaaga.",
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} ayaa shaqayn doonta marka aabka(app) la xiro.",
       "bluetooth_disabled_error_message": "Karti ugu yeel Bluetooth-ka Dejimaha aabka (app)",
       "bluetooth_disabled_error_title": "Karti ugu yeel Bluetooth-ka goobta Dejimaha (setting)",
       "bluetooth_header": "Bluetooth",
+      "location_disabled_error_message": "Si aad u shiddo tikniyoolajiyadda Ogeysiiska Soo-gaarista, u oggolow in la ogaado Goobta (Location) ee ku yaala (Settings) aabka",
       "location_disabled_error_title": "Uga Oggolow gudaha Dejimaha",
+      "location_header": "Goobta (Location)",
       "proximity_tracing_header": "Raadraaca Isku Dhawaanshaha",
       "report_positive_result": "Ka soo warbixi natiijada ka tijaabinta togan ",
+      "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan",
       "share_message": "Check out this app {{applicationName}}, oo naga caawin kara xakamaynta cudurka COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Ma shaqaynayo",
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
-      "tracing_on_header": "Wuu shaqaynayaa"
+      "tracing_off_subheader_location": "Shid Bluetooth, Raadinta Dhawaanshaha (Proximity Tracing), iyo Goobta (Location) si aad u hesho macluumaad ku saabsan soo-bandhigista suurtagalka ah",
+      "tracing_on_header": "Wuu shaqaynayaa",
+      "unauthorized_error_message": "Si aad u hawlgeliso Raadinta U Dhowaanshaha, hubi in \"Share Exposure Information\" shidan yahay Dejin (Settings) > {{applicationName}} > Ogeysiisyada Soo-gaarista",
+      "unauthorized_error_title": "La wadaag Macluumaadka Soo-gaarista"
     },
+    "fix": "Ku hagaaji cilladaha {{technology}}",
+    "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
+    "location_info_body_1": "Tikniyoolajiyadda Ogeysiiska Soo-gaarista waxay isticmaashaa iskaanka Bluetooth ka si loo fahmo aaladaha midba midka kale u dhow. Dhammaan taleefannada gacanta ee isticmaala Android 6.0 iyo wixii ka sareeya, si loogu adeegsado iskaanka Bluetooth ka, waxaa loo baahan yahay in qaybta dejinta (location setting) ee barnaamijka la shido dhammaan barnaamijyada, ma ahan oo keliya barnaamijyada ku yimid Nidaamka Ogeysiisyada Soo-gaarsinta.",
+    "location_info_header": "Goobta (Location)",
+    "location_info_subheader_1": "Maxaan ugu baahanahay in goobtaydu shidan tahay?",
     "open_settings": "Fur Dejinta",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_header": "Raadraaca Isku Dhawaanshaha",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
-    "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?"
+    "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?",
+    "status_icon_active_label": "Soo xaadirin cad oo ku jira wareeg cagaaran",
+    "status_icon_inactive_label": "X cad oo ku jira wareeg casaan"
   },
   "label": {
     "check": "Sax ku samaynta",
     "checked_checkbox": "Sanduuqa saxda lagu sameey",
+    "go_to_home_view": "Tag muuqaalka Home (Kadinka)",
     "language_icon": "Calaamad Adduun oo Kooban",
     "launch_enable_notif": "Karti u Yeel Ogeysiimaha",
     "launch_get_started": "Billow haddaba",
@@ -153,30 +185,45 @@
     "question_icon": "Calaamadda sumadda su’aasha ",
     "unchecked_checkbox": "Sanduuqa aan saxda lahayn"
   },
-  "more": {
-    "select_language": "Xulo Luqadda"
-  },
   "navigation": {
     "exposure_history": "Taariikhda ufeydsanka",
     "home": "Hoy"
   },
   "onboarding": {
     "activation_header_title": "Rakibaadda Aabka (App)",
+    "app_setup_complete_body": "{{applicationName}} waa shidan yahay. Waad ku mahadsantahay gacanta aad ka geysanayso joojinta silsiladda caabuqa.",
+    "app_setup_complete_header": "Samaynta Aabka waa Dhammeystiran yahay!",
+    "app_setup_incomplete_body": "{{applicationName}} wuxuu ubaahanyahay Raadinta Dhawaanshaha (Proximity Tracing) iyo oggolaanshaha Bluetooth ka si loo ogaado goorta iyo meesha aad bay’la ugu noqotay COVID 19. Waxaad tan ku fasaxi kartaa qaybta Setting (Dejinta).",
+    "app_setup_incomplete_header": "Samaynta Aabka ma Dhameystirna!",
+    "app_setup_incomplete_location_body": "{{applicationName}} wuxuu ubaahanyahay Raadinta Dhawaanshaha (Proximity Tracing), oggolaanshaha Bluetooth ka, iyo Goobta si loo ogaado goorta iyo meesha aad ugu feydsantay COVID 19. Waxaad tan ku fasaxi kartaa Setting (Dejinta).",
+    "eula": "Heshiiska Sharciga Isticmaalaha Dambe",
     "eula_agree_terms_of_use": "Waan oggolahay inaan aqriyay oo aan aqbalay shuruudaha isticmaalka",
+    "location_alert_body": "Si aad u isticmaasho iskaanka Bluetooth ka, waxaa loo baahan yahay in dejinta aaladda goobteedu daaran Tahay.",
+    "location_alert_header": "Goobta (location) laga daaro \"{{applicationName}}\"",
+    "location_body": "Si aad u isticmaasho iskaanka Bluetooth ka, waxaa loo baahan yahay in aaladda dejinteeda goobtu inay daaran yahay. Barnaamijka aabka ma isticmaalayo xogtaada goobta iyo telfoonkaaga shakhsiga la lama dabagali karo.",
+    "location_header": "Shid Goobta (Location)",
+    "location_subheader": "Maxaan ugu baahanahay inaan daarto barta (setting) kayga telfoonka?",
     "notification_body1": "Waxaad heli doontaa ogeysiinnada markaad meel uun aad ku kulanteen qof ka warbixiyay inuu u noqday togane cudurka COVID-19.",
     "notification_body2": "Aabka ayaa ku sameeyaa sidaa isaga oo adeegsanaya Bluetooth Low Energy (Tamar HooseBluetooth) oo wuxuu ilaaliyaa koodhadhka bakhtiyaanasiibka iyada oo aanu garanyn qofkaad tahay ama meesha aad tagtay. Waad ka damin kartaa mar kasta gudaha dejimaha.",
     "notification_header": "Ha lagula socodsiiyo haddii laga yaabaa ay dhacdo inaad ufeydsantay",
     "notification_subheader1": "Goorma ayaa la isoo ogaysiinayaa?",
     "notification_subheader2": "Sidee ayey u shaqeysaa?",
     "notification_subheader3": "Aabkan kaama ilaalin doono caabuqa COVID-19.",
+    "please_read_the": "Fadlan akhri",
     "privacy_policy": "Xeerka Asurnaanta",
     "protect_privacy_button": "Sidaan u ilaalinno asturnaantaada",
     "protect_privacy": {
       "body_1": "Koodhadhka kuma jiraan wax macluumaad shaqsiyeed ah waxayna beddelaan 10-20 daqiiqo kasta si loo ilaaliyo aqoonsigaaga.",
       "body_2": "Telefoonnada ayay isweydaarsadaan koodhadhka aaladaha kale istcimaalya Tamar Hoose Bluetooth. Taasi waxay u oggolaanaysaa {{applicationName}} inuu raadraaco kulannadaada maalinlaha ah si aan adigu qof aad la garanayn, xitaa marka aanay ka gurnayn aaladdaada.",
       "body_3": "Kaddib marka la noqdo togane ka ijaabinta COVID-19, isticmaaleyaasha ayaa la wadaagi kare koodh fure ah {{applicationName}} si loo xaqiijiyo ka helkooda cudurka. Hadday taa sameeyaan, koodhadhkooda dhawaanta ahaa ee telefoonnadooda ayaa loo haadin doonaa oo si xasilan kor loogu rari doonaa serferka. Nidaamkan xaqiijintu waxay waxtar u leedahay kahortagga warbixinnada toganaha khaladka ah (false positive report).",
+      "body_4": "Haddii aqoonsi la calaamadeeyay ay iswaafaqaan aqoonsi ku keydsan taleefankaaga, tani waxay muujineysaa inaad la kulantay qof laga helay cudurka COVID-19. Tan waa sida {{applicationName}} go'aamin kara haddii adiga ay dhici karto in fayraska aad u feydsantay",
+      "body_5": "Haddii uu jiro iswaafaqsanaan, {{applicationName}} ayaa ku ogeysiin doona oo ku siin doona hagitaan dheeraad ah oo ka socda waaxdaada caafimaadka.\n\nTani waa sida {{applicationName}} uu awood uu kuu siin karo inaad go'aan ka gaarto waxyaabo ku saabsan caafimaadkaaga, oo aad ammaanka bulshadaada ku ilaaliso, dhammaantood iyadoon la ogeyn cidda aad tahay iyo halka aad joogtay.",
       "header": "Sidaan u ilaalinno asturnaantaada",
-      "subheader_2": "Telefoonnada raadraacidda u dhawaanshaha kartida loo siisay koodhadh ku kala beddelashada aaladaha kale ee ay la kulmaan"
+      "subheader_1": "Markaad daarto Raadinta U dhowaanshaha (Proximity Tracing) taleefankaaga waxaa lagu calaamadeeyaa si isdaba-joog ah oo is beddelaya, aqoonsiyo qori-tuur ah",
+      "subheader_2": "Telefoonnada raadraacidda u dhawaanshaha kartida loo siisay koodhadh ku kala beddelashada aaladaha kale ee ay la kulmaan",
+      "subheader_3": "Markuu adeegsade baaritaanka laga helo, waxay dooran karaan inay si qarsoodi ah ula wadaagaan xaaladdooda caafimaad",
+      "subheader_4": "Telefoon kasta wuxuu marba sarfarka ugu baaqaa liiska aqoonsiyada la calaamadeeyay wuxuu raadiyaa mid waafaqa",
+      "subheader_5": "Waa lagugu soo wargelin doonaa haddii {{applicationName}} helo qof laga helay oo togane ah aqoonsi la calaamadeeyay"
     },
     "proximity_tracing_body1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_body2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
@@ -189,6 +236,7 @@
     "screen1_button": "Sidee ayey u shaqeysaa?",
     "screen1_header": "Wadajir ahaan, waxaan xakayn karnaa faafka COVID-19",
     "screen1_image_label": "Laba qof shan sare (high five) isku bogaadinaya.",
+    "screen2_button": "Ma dhowrsan tahay qarsoodigayga?",
     "screen2_header": "Telefoonkaaga ayaa xasuusan doona aaladaha kale ee ay kulmeen, laakiin cidna ku garan mayso. ",
     "screen2_image_label": "Laba qof oo telefoonnadooda ku jira",
     "screen3_button": "Maxaa dhacaya haddii aan ufeydsamo cudrka?",
@@ -197,9 +245,11 @@
     "screen4_button": "Maxaa dhacaya haddaan bukoodo?",
     "screen4_header": "Aabka ayaa kula soo socodsiin doona adiga haddii aad ufeydsantay cudurka koronofayraska",
     "screen4_image_label": "Qof ogeysiin ku helaya telefoonkooda",
+    "screen5_header": "Adiga oo isticmaalaya barnaamijkan, waxaad ka caawin kartaa hoos u dhigidda faafitaanka COVID-19, ka dhowri kartaa dadka kale, oo aad si toosna caawinaad uga heli kartaa khubarada caafimaadka.",
     "screen5_image_label": "Qofka kula hadlaya khabiir caafimaad aalad internet ahaan,",
     "select_language": "Xulo Luqadda",
     "step": "Tallaabo {{currentStep}} ee {{totalSteps}}",
+    "terms_header_title": "Shuruudaha adeegsiga",
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
   "report_issue": {
@@ -215,6 +265,7 @@
     "about": "Ku saabasan",
     "debug": "Cillad ka saarka",
     "exposure_history": "Taariikhda Ufeydsanka",
+    "exposures": "Soo gaarista",
     "legal": "Sharciyeedka",
     "report_issue": "Ka Warbixi Dhibaato"
   }
