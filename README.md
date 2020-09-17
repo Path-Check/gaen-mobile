@@ -309,7 +309,6 @@ Once a new HA is created we need to add some secrets:
 - Encoded keystore file (`openssl base64 -A -in key.jks`)
 - Keystore password
 - Key password
-- AppCenter token
 
 # License
   [MIT License](LICENSE)
