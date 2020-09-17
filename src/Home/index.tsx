@@ -196,11 +196,10 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   buttonContainer: {
-    paddingTop: Spacing.medium,
-    paddingHorizontal: Spacing.small,
+    marginTop: Spacing.medium,
+    marginHorizontal: Spacing.small,
   },
   button: {
-    alignSelf: "center",
     width: "100%",
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xSmall + 1,
