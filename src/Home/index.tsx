@@ -161,6 +161,7 @@ const Home: FunctionComponent = () => {
               onPress={handleOnPressReportTestResult}
               label={t("home.bluetooth.report_positive_result")}
               customButtonStyle={style.button}
+              customButtonInnerStyle={style.buttonGradient}
               hasRightArrow
             />
           </View>
@@ -234,6 +235,9 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.small,
   },
   button: {
+    width: "100%",
+  },
+  buttonGradient: {
     width: "100%",
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xSmall + 1,
