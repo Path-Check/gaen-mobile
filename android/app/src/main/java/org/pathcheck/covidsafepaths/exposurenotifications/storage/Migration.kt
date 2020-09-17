@@ -31,6 +31,14 @@ internal class Migration : RealmMigration {
 
         if (version == 3L) {
             schema.remove("PositiveDiagnosis")
+            version++
+        }
+
+        if (version == 4L) {
+            schema.create("CheckInStatus")
+                .addField("posixDate", Long::class.java, FieldAttribute.PRIMARY_KEY)
+                .addField("feeling", Boolean::class.java)
+                .addRealmListField("symptoms", String::class.java)
         }
     }
 }

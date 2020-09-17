@@ -204,3 +204,22 @@ const utilsModule = NativeModules.UtilsModule
 export const openAppSettings = (): void => {
   utilsModule.openAppSettings()
 }
+
+// Check In Module
+const checkInModule = NativeModules.CheckInModule
+
+interface CheckInStatus {
+  posixDate: number
+  feelingGood: boolean
+  symptoms: string[]
+}
+
+export const saveCheckInStatus = async (
+  checkInStatus: CheckInStatus,
+): Promise<void> => {
+  return checkInModule.saveCheckInStatus(checkInStatus)
+}
+
+export const getCheckInStatuses = async (): Promise<CheckInStatus> => {
+  return checkInModule.getCheckInStatuses()
+}
