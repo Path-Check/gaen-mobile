@@ -125,10 +125,12 @@ const Home: FunctionComponent = () => {
           </View>
         </GradientBackground>
         <View style={style.bottomContainer}>
-          <ShareLink />
-          <BluetoothActivationStatus />
-          <ProximityTracingActivationStatus />
-          <LocationActivationStatus />
+          <View>
+            <ShareLink />
+            <BluetoothActivationStatus />
+            <ProximityTracingActivationStatus />
+            <LocationActivationStatus />
+          </View>
           <View style={style.buttonContainer}>
             <Button
               onPress={handleOnPressReportTestResult}
@@ -156,11 +158,14 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingBottom: Spacing.large,
+    flexGrow: 1,
+    paddingBottom: Spacing.small,
     backgroundColor: Colors.primaryLightBackground,
   },
   topContainer: {
+    flexGrow: 1,
     width: "100%",
+    justifyContent: "center",
     alignItems: "center",
     paddingTop: Spacing.small,
     paddingBottom: Spacing.xLarge,
@@ -174,7 +179,7 @@ const style = StyleSheet.create({
   topIcon: {
     backgroundColor: Colors.white,
     borderRadius: Outlines.borderRadiusMax,
-    padding: 10,
+    padding: 5,
     marginBottom: Spacing.large,
   },
   headerText: {
@@ -193,6 +198,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   bottomContainer: {
+    justifyContent: "space-between",
     backgroundColor: Colors.primaryLightBackground,
   },
   buttonContainer: {
