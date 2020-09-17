@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import {
   TouchableOpacity,
   View,
@@ -7,9 +7,13 @@ import {
   ImageSourcePropType,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
+import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { HealthAssessment } from "./symptoms"
+import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -22,17 +26,25 @@ enum CheckInStatus {
 
 const CheckIn: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
+  const { symptoms, healthAssessment } = useSymptomCheckerContext()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
   )
+
+  useEffect(() => {
+    if (symptoms.length > 0) {
+      setCheckInStatus(CheckInStatus.FeelingNotWell)
+    }
+  }, [symptoms])
 
   const handleOnPressGood = () => {
     setCheckInStatus(CheckInStatus.FeelingGood)
   }
 
   const handleOnPressNotWell = () => {
-    setCheckInStatus(CheckInStatus.FeelingNotWell)
+    navigation.navigate(SymptomCheckerStackScreens.SelectSymptoms)
   }
 
   const determineStatusContent = () => {
@@ -47,7 +59,12 @@ const CheckIn: FunctionComponent = () => {
       case CheckInStatus.FeelingGood:
         return <FeelingGoodContent />
       case CheckInStatus.FeelingNotWell:
-        return <FeelingNotWellContent />
+        return (
+          <FeelingNotWellContent
+            symptoms={symptoms}
+            healthAssessment={healthAssessment}
+          />
+        )
     }
   }
 
@@ -111,7 +128,7 @@ const SelectFeeling: FunctionComponent<SelectFeelingProps> = ({
   )
 }
 
-const FeelingGoodContent = () => {
+const FeelingGoodContent: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
@@ -121,13 +138,44 @@ const FeelingGoodContent = () => {
   )
 }
 
-const FeelingNotWellContent = () => {
+interface FeelingNotWellContentProps {
+  symptoms: string[]
+  healthAssessment: HealthAssessment
+}
+
+const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
+  symptoms,
+  healthAssessment,
+}) => {
   const { t } = useTranslation()
 
+  const determineHealthAssessmentText = () => {
+    switch (healthAssessment) {
+      case HealthAssessment.AtRisk:
+        return t("symptom_checker.get_tested")
+      case HealthAssessment.NotAtRisk:
+        return t("symptom_checker.follow_ha_guidance")
+    }
+  }
+
   return (
-    <GlobalText style={style.checkInHeaderText}>
-      {t("symptom_checker.sorry_to_hear_it")}
-    </GlobalText>
+    <>
+      <GlobalText style={style.checkInHeaderText}>
+        {t("symptom_checker.sorry_to_hear_it")}
+      </GlobalText>
+      <GlobalText style={style.healthAssessmentText}>
+        {determineHealthAssessmentText()}
+      </GlobalText>
+      <View style={style.symptomsContainer}>
+        {symptoms.map((value) => {
+          return (
+            <View style={style.symptomContainer} key={value}>
+              <GlobalText style={style.symptomText}>{value}</GlobalText>
+            </View>
+          )
+        })}
+      </View>
+    </>
   )
 }
 
@@ -176,9 +224,11 @@ const style = StyleSheet.create({
   },
   checkInEyebrowText: {
     ...Typography.body1,
+    marginBottom: Spacing.xxxSmall,
   },
   checkInHeaderText: {
     ...Typography.header3,
+    paddingRight: Spacing.xxLarge,
   },
   feelingButtonsContainer: {
     flexDirection: "row",
@@ -205,6 +255,28 @@ const style = StyleSheet.create({
     width: Iconography.small,
     height: Iconography.small,
     marginBottom: Spacing.xxSmall,
+  },
+  healthAssessmentText: {
+    ...Typography.header5,
+    ...Typography.base,
+    marginTop: Spacing.medium,
+    marginBottom: Spacing.xxLarge,
+  },
+  symptomsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  symptomContainer: {
+    backgroundColor: Colors.neutral10,
+    borderRadius: Outlines.borderRadiusLarge,
+    paddingVertical: Spacing.xxxSmall,
+    paddingHorizontal: Spacing.small,
+    marginRight: Spacing.xxSmall,
+    marginBottom: Spacing.xxSmall,
+  },
+  symptomText: {
+    ...Typography.body2,
+    color: Colors.primaryText,
   },
 })
 

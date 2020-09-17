@@ -13,7 +13,11 @@ const SymptomCheckerScreen: FunctionComponent = () => {
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
-      <ScrollView contentContainerStyle={style.contentContainer}>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
         <CheckIn />
       </ScrollView>
     </>
@@ -21,6 +25,9 @@ const SymptomCheckerScreen: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
   contentContainer: {
     flexGrow: 1,
     backgroundColor: Colors.primaryLightBackground,

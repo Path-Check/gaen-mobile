@@ -2,9 +2,9 @@
   "_display_name": "English",
   "about": {
     "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}",
+    "emergency_contact": "Emergency Contact",
     "operating_system_abbr": "OS:",
-    "version": "Version:",
-    "emergency_contact": "Emergency Contact"
+    "version": "Version:"
   },
   "assessment": {
     "agree_question_description": "Stop and call emergency services if you are experiencing:\n• Severe, constant chest pain or pressure \n• Extreme difficulty breathing \n• Severe, constant lightheadedness \n• Serious disorientation or unresponsiveness",
@@ -34,23 +34,23 @@
     "isolate_title": "Isolate Yourself",
     "next": "Next",
     "share_cta": "I understand and consent",
-    "share_cta_skip": "No thanks, I don't want to share data",
     "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
     "share_title": "Publish anonymized data",
     "start_cta": "Start",
     "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19"
+    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
+    "share_cta_skip": "No thanks, I don't want to share data"
   },
   "callback": {
     "fill_out_the_info": "Fill out the information below and a contact tracer from {{healthAuthorityName}} will get in touch.",
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
-    "well_get_in_touch": "We'll get in touch",
-    "success_header": "You're in the queue",
     "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
-    "success_requested": "Call Back Requested"
+    "success_header": "You're in the queue",
+    "success_requested": "Call Back Requested",
+    "well_get_in_touch": "We'll get in touch"
   },
   "common": {
     "alert": "Alert",
@@ -63,6 +63,7 @@
     "maybe_later": "Maybe later",
     "next": "Next",
     "no_thanks": "No thanks",
+    "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -116,17 +117,17 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6ft apart",
+      "call_later": "Call later",
       "content": "Someone you were nearby has since tested positive for COVID-19.",
       "ha_guidance_header": "What should I do?",
       "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
       "header": "You may have crossed paths with the COVID-19 virus.",
       "isolate": "Isolate",
       "next_steps": "Next Steps",
-      "wash_your_hands": "Wash your hands",
-      "wear_a_mask": "Wear a mask",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
       "speak_with_contact_tracer": "Speak with a contact tracer",
-      "call_later": "Call later"
+      "wash_your_hands": "Wash your hands",
+      "wear_a_mask": "Wear a mask"
     },
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
@@ -194,7 +195,6 @@
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
-    "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
@@ -202,25 +202,13 @@
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
-  "more": {
-    "select_language": "Select language"
-  },
   "navigation": {
     "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
     "home": "Home",
-    "symptom_checker": "symptom_checker",
-    "more_info": "More Info"
-  },
-  "symptom_checker": {
-    "my_health": "My Health",
-    "check-in": "Check-in",
-    "how_are_you_feeling": "How are you feeling today?",
-    "good": "Good",
-    "not_well": "Not well",
-    "glad_to_hear_it": "Glad to hear it!",
-    "sorry_to_hear_it": "Sorry to hear you're not feeling well!"
+    "more_info": "More Info",
+    "symptom_checker": "symptom_checker"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
@@ -295,13 +283,40 @@
     "success": "We received your request. Thank you!"
   },
   "screen_titles": {
-    "about": "About",
     "callback": "Request Call Back",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposures": "Exposures",
+    "how_the_app_works": "How the app works",
     "legal": "Legal",
-    "report_issue": "Report an Issue",
-    "how_the_app_works": "How the app works"
+    "report_issue": "Report an Issue"
+  },
+  "symptom_checker": {
+    "check-in": "Check-in",
+    "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
+    "get_tested": "Based on your symptoms, we recommend you get tested for COVID-19.",
+    "glad_to_hear_it": "Glad to hear it!",
+    "good": "Good",
+    "how_are_you_feeling": "How are you feeling today?",
+    "my_health": "My Health",
+    "not_well": "Not well",
+    "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
+    "what_symptoms": "What symptoms are you experiencing?"
+  },
+  "symptoms": {
+    "body_aches": "Body aches",
+    "chest_pain_or_pressure": "Chest pain or pressure",
+    "chills": "Chills",
+    "cough": "Cough",
+    "diarrhea": "Diarrhea",
+    "difficulty_breathing": "Difficulty breathing",
+    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
+    "fever": "Fever",
+    "lightheadedness": "Lightheadedness",
+    "loss_of_appetite": "Loss of appetite",
+    "loss_of_smell": "Loss of smell",
+    "loss_of_taste": "Loss of taste",
+    "other": "Other",
+    "vomiting": "Vomiting"
   }
 }
