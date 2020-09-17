@@ -48,7 +48,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const handleOnPressSave = () => {
     updateSymptoms(selectedSymptoms)
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
-    if (currentHealthAssessment === HealthAssessment.GetTested) {
+    if (currentHealthAssessment === HealthAssessment.AtRisk) {
       navigation.navigate(SymptomCheckerStackScreens.AtRiskRecommendation)
     } else {
       navigation.goBack()

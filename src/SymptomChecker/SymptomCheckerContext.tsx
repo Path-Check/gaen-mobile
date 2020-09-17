@@ -16,13 +16,13 @@ type SymptomCheckerContextState = {
 export const SymptomCheckerContext = createContext<SymptomCheckerContextState>({
   symptoms: [],
   updateSymptoms: () => {},
-  healthAssessment: HealthAssessment.FollowHAGuidance,
+  healthAssessment: HealthAssessment.NotAtRisk,
 })
 
 const SymptomCheckerProvider: FunctionComponent = ({ children }) => {
   const [symptoms, setSymptoms] = useState<Symptom[]>([])
   const [healthAssessment, setHealthAssessment] = useState<HealthAssessment>(
-    HealthAssessment.FollowHAGuidance,
+    HealthAssessment.NotAtRisk,
   )
 
   const updateSymptoms = (newSymptoms: Symptom[]) => {

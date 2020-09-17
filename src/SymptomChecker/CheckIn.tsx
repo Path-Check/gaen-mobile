@@ -151,9 +151,9 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
 
   const determineHealthAssessmentText = () => {
     switch (healthAssessment) {
-      case HealthAssessment.GetTested:
+      case HealthAssessment.AtRisk:
         return t("symptom_checker.get_tested")
-      case HealthAssessment.FollowHAGuidance:
+      case HealthAssessment.NotAtRisk:
         return t("symptom_checker.follow_ha_guidance")
     }
   }
