@@ -7,8 +7,9 @@ import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
 import { GlobalText, Button, StatusBar } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
 import { HealthAssessment, determineHealthAssessment } from "./symptoms"
+import { showMessage } from "react-native-flash-message"
 
-import { Colors, Spacing, Typography, Outlines } from "../styles"
+import { Affordances, Colors, Spacing, Typography, Outlines } from "../styles"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -49,6 +50,10 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     updateSymptoms(selectedSymptoms)
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
+      showMessage({
+        message: t("symptom_checker.success_message"),
+        ...Affordances.successFlashMessageOptions,
+      })
       navigation.navigate(SymptomCheckerStackScreens.AtRiskRecommendation)
     } else {
       navigation.goBack()
@@ -86,6 +91,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
                 onPress={() => handleOnPressSymptom(value)}
                 style={determineSymptomButtonStyle(value)}
                 underlayColor={Colors.neutral10}
+                accessibilityLabel={value}
               >
                 <GlobalText style={determineSymptomButtonTextStyle(value)}>
                   {value}
