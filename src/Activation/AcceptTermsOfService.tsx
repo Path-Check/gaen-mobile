@@ -24,6 +24,7 @@ import {
   Typography,
 } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
+import { ScrollView } from "react-native-gesture-handler"
 
 const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -45,48 +46,53 @@ const AcceptTermsOfService: FunctionComponent = () => {
     : t("label.unchecked_checkbox")
 
   return (
-    <>
-      <GradientBackground gradient={Colors.gradientPrimary10}>
-        <SafeAreaView style={style.container}>
+    <GradientBackground gradient={Colors.gradientPrimary10}>
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <View>
           <GlobalText style={style.headerText}>
             {t("onboarding.terms_header_title")}
           </GlobalText>
-          <DocumentLink
-            docName={t("onboarding.privacy_policy")}
-            url={configuration.healthAuthorityPrivacyPolicyUrl}
-          />
-          <DocumentLink
-            docName={t("onboarding.eula")}
-            url={configuration.healthAuthorityEulaUrl}
-          />
-          <View style={style.footerContainer}>
-            <TouchableOpacity
-              style={style.checkboxContainer}
-              onPress={() => toggleCheckbox(!boxChecked)}
-              accessible
-              accessibilityRole="checkbox"
-              accessibilityLabel={checkboxLabel}
-              testID="accept-terms-of-use-checkbox"
-            >
-              <SvgXml
-                xml={checkboxIcon}
-                fill={Colors.primary100}
-                width={Iconography.small}
-                height={Iconography.small}
-              />
-              <GlobalText style={style.checkboxText}>
-                {t("onboarding.eula_agree_terms_of_use")}
-              </GlobalText>
-            </TouchableOpacity>
-            <Button
-              onPress={handleOnPressNext}
-              disabled={!boxChecked}
-              label={t("common.continue")}
+          <View style={style.linksContainer}>
+            <DocumentLink
+              docName={t("onboarding.privacy_policy")}
+              url={configuration.healthAuthorityPrivacyPolicyUrl}
+            />
+            <DocumentLink
+              docName={t("onboarding.eula")}
+              url={configuration.healthAuthorityEulaUrl}
             />
           </View>
-        </SafeAreaView>
-      </GradientBackground>
-    </>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={style.checkboxContainer}
+            onPress={() => toggleCheckbox(!boxChecked)}
+            accessible
+            accessibilityRole="checkbox"
+            accessibilityLabel={checkboxLabel}
+            testID="accept-terms-of-use-checkbox"
+          >
+            <SvgXml
+              xml={checkboxIcon}
+              fill={Colors.primary100}
+              width={Iconography.small}
+              height={Iconography.small}
+            />
+            <GlobalText style={style.checkboxText}>
+              {t("onboarding.eula_agree_terms_of_use")}
+            </GlobalText>
+          </TouchableOpacity>
+          <Button
+            onPress={handleOnPressNext}
+            disabled={!boxChecked}
+            label={t("common.continue")}
+          />
+        </View>
+      </ScrollView>
+    </GradientBackground>
   )
 }
 
@@ -110,63 +116,64 @@ const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
   }
 
   return (
-    <TouchableOpacity style={style.eulaLinkContainer} onPress={openLink}>
-      <View style={style.eulaTextContainer}>
-        <GlobalText style={style.eulaText}>
+    <TouchableOpacity style={style.linkContainer} onPress={openLink}>
+      <View style={style.linkTextContainer}>
+        <GlobalText style={style.linkText}>
           {t("onboarding.please_read_the")}
         </GlobalText>
         <Text> </Text>
-        <GlobalText style={style.eulaLink}>{docName}</GlobalText>
+        <GlobalText style={style.link}>{docName}</GlobalText>
       </View>
       <SvgXml
         xml={Icons.Arrow}
         fill={Colors.primary100}
-        style={style.eulaLinkArrow}
+        style={style.linkArrow}
       />
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: Spacing.xxLarge,
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: "space-between",
+    paddingTop: Spacing.xLarge,
+    paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xxxLarge,
   },
   headerText: {
     ...Typography.header1,
   },
-  eulaLinkContainer: {
+  linksContainer: {
+    marginBottom: Spacing.large,
+  },
+  linkContainer: {
     ...Outlines.lightShadow,
-    borderRadius: Outlines.baseBorderRadius,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: Spacing.small,
-    marginTop: Spacing.large,
+    marginVertical: Spacing.large,
+    borderRadius: Outlines.baseBorderRadius,
     backgroundColor: Colors.primaryLightBackground,
   },
-  eulaTextContainer: {
+  linkTextContainer: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
     flexWrap: "wrap",
   },
-  eulaText: {
+  linkText: {
     ...Typography.body1,
     fontSize: Typography.large,
   },
-  eulaLink: {
+  link: {
     ...Typography.anchorLink,
     flexWrap: "wrap",
     fontSize: Typography.large,
   },
-  eulaLinkArrow: {
+  linkArrow: {
     flex: 1,
-  },
-  footerContainer: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
   },
   checkboxContainer: {
     flexDirection: "row",
