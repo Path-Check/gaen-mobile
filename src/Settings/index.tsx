@@ -17,6 +17,7 @@ import { ListItem, ListItemSeparator } from "../components"
 
 import { Icons } from "../assets"
 import { Colors, Spacing } from "../styles"
+import ShareAnonymizedDataSwitch from "./ShareAnonymizedDataSwitch"
 
 type SettingsListItem = {
   label: string
@@ -34,6 +35,7 @@ const Settings: FunctionComponent = () => {
   const languageName = getLocalNames()[localeCode]
   const { displayReportAnIssue } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
+  const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
@@ -86,6 +88,12 @@ const Settings: FunctionComponent = () => {
           onPress={selectLanguage.onPress}
           icon={selectLanguage.icon}
         />
+        {healthAuthoritySupportsAnalytics && (
+          <>
+            <ListItemSeparator />
+            <ShareAnonymizedDataSwitch />
+          </>
+        )}
       </View>
       <View style={style.section}>
         {middleListItems.map((params, idx) => {

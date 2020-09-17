@@ -123,6 +123,7 @@ export type SettingsScreen =
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
+  | "AnonymizedDataConsent"
 
 export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
@@ -134,6 +135,7 @@ export const SettingsScreens: {
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
+  AnonymizedDataConsent: "AnonymizedDataConsent",
 }
 
 export type SelfAssessmentScreen = "SelfAssessment"
