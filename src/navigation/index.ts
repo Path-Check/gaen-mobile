@@ -178,15 +178,15 @@ export const ReportIssueScreens: {
   ReportIssue: "ReportIssue",
 }
 
-export type SymptomCheckerStackScreen =
-  | "SymptomChecker"
+export type MyHealthStackScreen =
+  | "MyHealth"
   | "SelectSymptoms"
   | "AtRiskRecommendation"
 
-export const SymptomCheckerStackScreens: {
-  [key in SymptomCheckerStackScreen]: SymptomCheckerStackScreen
+export const MyHealthStackScreens: {
+  [key in MyHealthStackScreen]: MyHealthStackScreen
 } = {
-  SymptomChecker: "SymptomChecker",
+  MyHealth: "MyHealth",
   SelectSymptoms: "SelectSymptoms",
   AtRiskRecommendation: "AtRiskRecommendation",
 }
@@ -203,7 +203,7 @@ export type Stack =
   | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
-  | "SymptomChecker"
+  | "MyHealth"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -217,7 +217,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
-  SymptomChecker: "SymptomChecker",
+  MyHealth: "MyHealth",
 }
 
 export const useStatusBarEffect = (

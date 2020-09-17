@@ -9,7 +9,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayReportAnIssue: boolean
   displaySelfAssessment: boolean
-  displaySymptomChecker: boolean
+  displayMyHealth: boolean
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
@@ -28,7 +28,7 @@ const initialState = {
   displayCallbackForm: false,
   displayReportAnIssue: false,
   displaySelfAssessment: false,
-  displaySymptomChecker: false,
+  displayMyHealth: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
@@ -57,7 +57,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
-  const displaySymptomChecker = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const healthAuthoritySupportsAnalytics = env.COLLECT_ANALYTICS_DATA === "true"
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
@@ -75,7 +75,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayReportAnIssue,
         displaySelfAssessment,
-        displaySymptomChecker,
+        displayMyHealth,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,

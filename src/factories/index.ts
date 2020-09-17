@@ -1,16 +1,18 @@
 import { register } from "fishery"
 import analyticsContext from "./analyticsContext"
-import gaenStrategy from "./gaenStrategy"
-import exposureDatum from "./exposureDatum"
-import rawExposure from "./rawExposure"
-import exposureContext from "./exposureContext"
 import configurationContext from "./configurationContext"
+import exposureContext from "./exposureContext"
+import exposureDatum from "./exposureDatum"
+import gaenStrategy from "./gaenStrategy"
+import symptomLogContext from "./symptomLogContext"
+import rawExposure from "./rawExposure"
 
 export const factories = register({
   analyticsContext,
   configurationContext,
   exposureContext,
   exposureDatum,
-  rawExposure,
   gaenStrategy,
+  symptomLogContext,
+  rawExposure,
 })

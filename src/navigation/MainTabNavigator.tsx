@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import HomeStack from "./HomeStack"
-import SymptomCheckerStack from "./SymptomCheckerStack"
+import MyHealthStack from "./MyHealthStack"
 import ConnectStack from "./ConnectStack"
 import { useConfigurationContext } from "../ConfigurationContext"
 
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
-  const { displaySymptomChecker } = useConfigurationContext()
+  const { displayMyHealth } = useConfigurationContext()
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
@@ -132,10 +132,10 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      {displaySymptomChecker && (
+      {displayMyHealth && (
         <Tab.Screen
-          name={Stacks.SymptomChecker}
-          component={SymptomCheckerStack}
+          name={Stacks.MyHealth}
+          component={MyHealthStack}
           options={{
             tabBarLabel: t("navigation.symptom_checker"),
             tabBarIcon: HeartbeatIcon,

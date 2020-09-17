@@ -3,9 +3,9 @@ import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
+import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
 import { GlobalText, Button, StatusBar } from "../components"
-import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { useMyHealthContext } from "./MyHealthContext"
 import { HealthAssessment, determineHealthAssessment } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
@@ -16,7 +16,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
-  const { updateSymptoms } = useSymptomCheckerContext()
+  const { updateSymptoms } = useMyHealthContext()
 
   const symptoms = [
     t("symptoms.chest_pain_or_pressure"),
