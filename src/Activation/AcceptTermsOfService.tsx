@@ -4,7 +4,7 @@ import {
   Linking,
   StyleSheet,
   View,
-  SafeAreaView,
+  ScrollView,
   Text,
 } from "react-native"
 import { useTranslation } from "react-i18next"
@@ -14,6 +14,7 @@ import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
 import { GlobalText, Button, GradientBackground } from "../components"
 import { ActivationScreens, useStatusBarEffect } from "../navigation"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import {
   Forms,
@@ -23,8 +24,6 @@ import {
   Outlines,
   Typography,
 } from "../styles"
-import { useConfigurationContext } from "../ConfigurationContext"
-import { ScrollView } from "react-native-gesture-handler"
 
 const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
