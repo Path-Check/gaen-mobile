@@ -8,6 +8,7 @@ import { RawENPermissionStatus } from "../PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
+import Logger from "../logger"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
@@ -92,20 +93,47 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
 const exposureKeyModule = NativeModules.ExposureKeyModule
 
 interface RawExposureKey {
-  key: null | string
+  key: string
   rollingPeriod: number
   rollingStartNumber: number
   transmissionRisk: number
 }
 
 export const getExposureKeys = async (): Promise<ExposureKey[]> => {
-  const keys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
-  return keys.map(toExposureKey)
+  const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
+  if (rawKeys.every(validRawExposureKey)) {
+    const exposureKeys = rawKeys.map(toExposureKey)
+    return exposureKeys
+  } else {
+    Logger.error("Invalid expousre keys from native layer", { rawKeys })
+    throw new Error("Invalid exposure keys from native layer")
+  }
+}
+
+const validRawExposureKey = (rawKey: RawExposureKey): boolean => {
+  const { key, rollingPeriod, rollingStartNumber, transmissionRisk } = rawKey
+  if (typeof key !== "string" || key.length === 0) {
+    Logger.addMetadata("InvalidRawKey", { key })
+    return false
+  }
+  if (typeof rollingPeriod !== "number") {
+    Logger.addMetadata("InvalidRawKey", { rollingPeriod })
+    return false
+  }
+  if (typeof rollingStartNumber !== "number") {
+    Logger.addMetadata("InvalidRawKey", { rollingStartNumber })
+    return false
+  }
+  if (typeof transmissionRisk !== "number") {
+    Logger.addMetadata("InvalidRawKey", { transmissionRisk })
+    return false
+  }
+  return true
 }
 
 const toExposureKey = (rawExposureKey: RawExposureKey): ExposureKey => {
   return {
-    key: rawExposureKey.key || "",
+    key: rawExposureKey.key,
     rollingPeriod: rawExposureKey.rollingPeriod,
     rollingStartNumber: rawExposureKey.rollingStartNumber,
     transmissionRisk: rawExposureKey.transmissionRisk,
