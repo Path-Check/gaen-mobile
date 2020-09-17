@@ -136,13 +136,14 @@ const style = StyleSheet.create({
     ...Typography.header1,
   },
   eulaLinkContainer: {
+    ...Outlines.lightShadow,
+    borderRadius: Outlines.baseBorderRadius,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: Spacing.small,
     marginTop: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
-    ...Outlines.lightShadow,
   },
   eulaTextContainer: {
     flexDirection: "row",

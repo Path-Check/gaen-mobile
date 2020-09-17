@@ -211,7 +211,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   checkInContainer: {
-    ...Outlines.baseShadow,
+    ...Outlines.lightShadow,
     backgroundColor: Colors.primaryLightBackground,
     borderRadius: Outlines.borderRadiusLarge,
     paddingVertical: Spacing.medium,

@@ -23,7 +23,6 @@ export const ovalBorder: ViewStyle = {
 }
 
 export const baseShadow: ViewStyle = {
-  shadowColor: Colors.neutral75,
   shadowOffset: {
     width: 0,
     height: 8,
@@ -34,11 +33,8 @@ export const baseShadow: ViewStyle = {
 }
 
 export const lightShadow: ViewStyle = {
-  ...roundedBorder,
   ...baseShadow,
-  shadowColor: Colors.neutral30,
-  shadowRadius: 5,
-  borderColor: Colors.neutral25,
+  shadowColor: Colors.neutral75,
 }
 
 export const separatorLine: ViewStyle = {
