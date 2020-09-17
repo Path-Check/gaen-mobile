@@ -3,7 +3,7 @@ import { View, Text, Button } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { StatusBar } from "../../components"
-import { Screens, useStatusBarEffect } from "../../navigation"
+import { Stacks, useStatusBarEffect } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import PublishConsentForm from "./PublishConsentForm"
 import { useExposureContext } from "../../ExposureContext"
@@ -45,7 +45,7 @@ const PublishConsentScreen: FunctionComponent = () => {
           <Text>Invalid State</Text>
           <Button
             onPress={() => {
-              navigation.navigate(Screens.Home)
+              navigation.navigate(Stacks.Home)
             }}
             title={"Go Back"}
           />

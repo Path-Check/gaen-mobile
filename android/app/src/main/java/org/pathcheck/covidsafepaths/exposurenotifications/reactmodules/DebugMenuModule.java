@@ -8,19 +8,20 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 
 @SuppressWarnings("unused")
@@ -45,37 +46,32 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void fetchDiagnosisKeys(Promise promise) {
-    ExposureNotificationClientWrapper client =
-        ExposureNotificationClientWrapper.get(getReactApplicationContext());
-    client.getTemporaryExposureKeyHistory()
-        .addOnSuccessListener(keys -> {
-          List<RNDiagnosisKey> diagnosisKeys = new ArrayList<>();
-          for (TemporaryExposureKey key : keys) {
-            RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
-            diagnosisKeys.add(diagnosisKey);
-          }
+    ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+    ReactContext reactContext = getReactApplicationContext();
 
-          promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
-        })
-        .addOnFailureListener(exception -> {
-          if (!(exception instanceof ApiException)) {
-            promise.reject(exception);
-            return;
-          }
+    FutureCallback<List<TemporaryExposureKey>> callback = new FutureCallback<List<TemporaryExposureKey>>() {
+      @Override
+      public void onSuccess(List<TemporaryExposureKey> result) {
+        List<RNDiagnosisKey> diagnosisKeys = new ArrayList<>();
+        for (TemporaryExposureKey key : result) {
+          RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
+          diagnosisKeys.add(diagnosisKey);
+        }
 
-          ApiException apiException = (ApiException) exception;
-          if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-            // TODO Call this method after permission is accepted and remove promise.reject
-            client.showPermissionDialog(
-                getReactApplicationContext(),
-                apiException,
-                RequestCodes.REQUEST_GET_DIAGNOSIS_KEYS
-            );
-            promise.reject(new Exception("Needs user permission, try again"));
-          } else {
-            promise.reject(exception);
-          }
-        });
+        promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
+      }
+
+      @Override
+      public void onFailure(@NotNull Throwable exception) {
+        promise.reject(exception);
+      }
+    };
+
+    Futures.addCallback(
+        client.requestPermissionToGetExposureKeys(reactContext),
+        callback,
+        AppExecutors.getLightweightExecutor()
+    );
   }
 
   @ReactMethod
@@ -119,13 +115,26 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     exposureNotificationsClient.isEnabled()
         .addOnSuccessListener(enabled -> {
           if (enabled) {
-            exposureNotificationsClient.stop(reactContext)
+            exposureNotificationsClient.stopTracing(reactContext)
                 .addOnSuccessListener(promise::resolve)
                 .addOnFailureListener(promise::reject);
           } else {
-            exposureNotificationsClient.start(reactContext)
-                .addOnSuccessListener(promise::resolve)
-                .addOnFailureListener(promise::reject);
+            FutureCallback<Void> callback = new FutureCallback<Void>() {
+              @Override
+              public void onSuccess(Void result) {
+                promise.resolve(result);
+              }
+
+              @Override
+              public void onFailure(@NotNull Throwable exception) {
+                promise.reject(exception);
+              }
+            };
+
+            Futures.addCallback(
+                exposureNotificationsClient.requestPermissionToStartTracing(reactContext),
+                callback,
+                AppExecutors.getLightweightExecutor());
           }
         })
         .addOnFailureListener(promise::reject);

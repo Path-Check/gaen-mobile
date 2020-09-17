@@ -9,14 +9,15 @@ import {
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
 import { GlobalText, Button } from "../../components"
-
 import {
   useStatusBarEffect,
   AffectedUserFlowScreens,
-  Screens,
+  ModalScreens,
+  Stacks,
 } from "../../navigation"
 import { Icons } from "../../assets"
 import {
@@ -58,6 +59,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
     const newKeysInserted = noOpResponse.newKeysInserted
@@ -141,11 +144,13 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(AffectedUserFlowScreens.ProtectPrivacy)
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalScreens.ProtectPrivacy,
+    })
   }
 
   return (
@@ -160,8 +165,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <SvgXml
               xml={Icons.ArrowLeft}
               fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
             />
           </View>
         </TouchableOpacity>
@@ -175,8 +180,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             <SvgXml
               xml={Icons.X}
               fill={Colors.black}
-              width={Iconography.xSmall}
-              height={Iconography.xSmall}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
             />
           </View>
         </TouchableOpacity>
@@ -225,75 +230,77 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         <SvgXml
           xml={Icons.ChevronUp}
           fill={Colors.primary150}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
+          width={Iconography.xxxSmall}
+          height={Iconography.xxxSmall}
         />
       </TouchableOpacity>
     </View>
   )
 }
 
-const style = StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  navButtonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    position: "absolute",
-    paddingTop: 25,
-    width: "100%",
-    borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.neutral10,
-    backgroundColor: Colors.primaryLightBackground,
-    zIndex: Layout.zLevel1,
-  },
-  backButtonInnerContainer: {
-    padding: Spacing.medium,
-  },
-  cancelButtonInnerContainer: {
-    padding: Spacing.medium,
-  },
-  contentContainer: {
-    paddingHorizontal: Spacing.large,
-    paddingTop: 105,
-    paddingBottom: Spacing.huge,
-  },
-  content: {
-    marginBottom: Spacing.small,
-  },
-  header: {
-    ...Typography.header1,
-    paddingBottom: Spacing.medium,
-  },
-  subheaderText: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
-    color: Colors.black,
-    marginBottom: Spacing.xxSmall,
-  },
-  bodyText: {
-    ...Typography.body1,
-    marginBottom: Spacing.xxLarge,
-  },
-  button: {
-    alignSelf: "flex-start",
-  },
-  bottomButtonContainer: {
-    backgroundColor: Colors.secondary10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: Spacing.small,
-    borderTopColor: Colors.neutral25,
-    borderTopWidth: Outlines.hairline,
-  },
-  bottomButtonText: {
-    ...Typography.header5,
-    color: Colors.primary100,
-    marginRight: Spacing.xSmall,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    outerContainer: {
+      flex: 1,
+      backgroundColor: Colors.primaryLightBackground,
+    },
+    navButtonContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      position: "absolute",
+      paddingTop: 25,
+      width: "100%",
+      borderBottomWidth: Outlines.hairline,
+      borderBottomColor: Colors.neutral10,
+      backgroundColor: Colors.primaryLightBackground,
+      zIndex: Layout.zLevel1,
+    },
+    backButtonInnerContainer: {
+      padding: Spacing.medium,
+    },
+    cancelButtonInnerContainer: {
+      padding: Spacing.medium,
+    },
+    contentContainer: {
+      paddingHorizontal: Spacing.large,
+      paddingTop: 105,
+      paddingBottom: Spacing.huge,
+    },
+    content: {
+      marginBottom: Spacing.small,
+    },
+    header: {
+      ...Typography.header1,
+      paddingBottom: Spacing.medium,
+    },
+    subheaderText: {
+      ...Typography.body1,
+      ...Typography.mediumBold,
+      color: Colors.black,
+      marginBottom: Spacing.xxSmall,
+    },
+    bodyText: {
+      ...Typography.body1,
+      marginBottom: Spacing.xxLarge,
+    },
+    button: {
+      alignSelf: "flex-start",
+    },
+    bottomButtonContainer: {
+      backgroundColor: Colors.secondary10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: Spacing.small,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    bottomButtonText: {
+      ...Typography.header5,
+      color: Colors.primary100,
+      marginRight: Spacing.xSmall,
+    },
+  })
+}
 
 export default PublishConsentForm

@@ -1,9 +1,9 @@
 import Alamofire
 import Foundation
 
-enum ExposureConfigurationRequest: APIRequest {
+enum ExposureConfigurationV1Request: APIRequest {
 
-  typealias ResponseType = ExposureConfiguration
+  typealias ResponseType = ExposureConfigurationV1
 
   case get
 
@@ -17,7 +17,7 @@ enum ExposureConfigurationRequest: APIRequest {
   var path: String {
     switch self {
     case .get:
-      return ExposureConfiguration.configurationFileName
+      return ExposureConfigurationV1.configurationFileName
     }
   }
 

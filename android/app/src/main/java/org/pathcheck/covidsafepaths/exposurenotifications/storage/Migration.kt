@@ -29,7 +29,7 @@ internal class Migration : RealmMigration {
             version++
         }
 
-        if (version === 3L) {
+        if (version == 3L) {
             schema.remove("PositiveDiagnosis")
         }
     }

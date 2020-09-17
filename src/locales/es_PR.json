@@ -40,20 +40,24 @@
     "start_description": "Su información es privada, anónima y encriptada. Ningún dato sale de su dispositivo a menos que usted lo autorice.",
     "start_title": "Responda preguntas sobre sus síntomas e historial médico para saber qué hacer a continuación sobre COVID-19"
   },
+  "callback_form": {
+    "fill_out_the_info": "Rellene la información que se necesita a continuación y un agente afiliado con {{healthAuthorityName}} se pondrá en contacto.",
+    "firstname": "Nombre",
+    "lastname": "Apellido",
+    "phone_number_required": "Número de teléfono (requerido)",
+    "well_get_in_touch": "Nos pondremos en contacto"
+  },
   "common": {
     "alert": "Advertencia",
     "back": "Regresar",
-    "cancel": "Cancelar",
     "close": "Cerrar",
     "continue": "Continuar",
     "disabled": "Desactivado",
     "done": "Hecho",
-    "enable": "Habilitar",
     "enabled": "Activado",
     "maybe_later": "Quizá después",
     "next": "Siguiente",
     "no_thanks": "No, gracias",
-    "okay": "Sí",
     "settings": "Abrir Configuración",
     "skip": "Saltar",
     "something_went_wrong": "Algo salió mal",
@@ -83,10 +87,25 @@
     "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
     "error": {
       "invalid_code": "Intentar con otro código",
+      "invalid_format": "Formato inválido",
+      "network_connection_error": "No hay conexión a internet",
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue utilizado"
     },
+    "person_and_health_expert": "Una persona conversando virtualmente con un profesional de la salud",
     "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
+    "publish_keys": {
+      "errors": {
+        "description": "No se pudo completar la operación. {{message}}",
+        "internal_server_error": "El servidor está experimentando problemas, por favor inténtelo de nuevo más tarde.",
+        "timeout": "No se pudo completar la operación",
+        "unknown": "No se pudieron transmitir los datos de exposición"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "Intento de enviar datos de exposición previamente transmitidos. Este proceso fue intentado previamente desde este mismo dispositivo pero desde otra aplicación distinta. Por favor comuníquese con la autoridad que le procuró el código utilizado en el paseo previo. Se insertaron un total de {{newKeysInserted}} nuevos datos de exposición.",
+        "title": "Intento de enviar datos existentes"
+      }
+    },
     "start_header_bluetooth": "Al elegir compartir su estatus y notificar anónimamente a otros, está ayudando a contener la propagación del virus y a proteger a otros en su comunidad."
   },
   "exposure_history": {
@@ -135,27 +154,38 @@
       "bluetooth_disabled_error_message": "Active el Bluetooth visitando la configuración de la aplicación",
       "bluetooth_disabled_error_title": "Active el Bluetooth visitando la Configuración",
       "bluetooth_header": "Bluetooth",
+      "location_disabled_error_message": "Para activar la tecnología de Notificación de Exposición, permita el acceso a la ubicación en la aplicación de Ajustes",
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
+      "location_header": "Ubicación",
       "proximity_tracing_header": "Rastreo de Proximidad",
       "report_positive_result": "Informar resultado positivo de la prueba",
       "share": "Comparta la aplicación y ayude a contener el brote",
       "share_message": "¡Echa un vistazo al app {{applicationName}}, puedes ayudar a detener el COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Notificaciones Desactivadas",
       "tracing_off_subheader": "No recibirá notificaciones sobre posibles exposiciones.",
+      "tracing_off_subheader_location": "Habilite Bluetooth, seguimiento de proximidad y ubicación para obtener información sobre posibles exposiciones",
       "tracing_on_header": "Activado",
       "unauthorized_error_message": "Para activar el rastreo de proximidad, autorice el registro de la exposición de COVID-19 en la aplicación de configuración",
       "unauthorized_error_title": "Autorizar en la configuración del sistema"
     },
+    "fix": "Arreglar problemas de {{technology}}",
+    "get_more_info": "Obtén información sobre {{technology}}",
+    "location_info_body_1": "La tecnología de notificación de exposición utiliza el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos utilizando Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el sistema de notificaciones de exposición.",
+    "location_info_header": "Ubicación",
+    "location_info_subheader_1": "¿Por qué necesito activar los servicios de ubicación de mi teléfono?",
+    "open_settings": "Abrir Configuración",
     "proximity_tracing_info_body_1": "Si los teléfonos con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_header": "Rastreo de proximidad",
     "proximity_tracing_info_subheader_1": "¿Cómo funciona el seguimiento de proximidad?",
-    "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?"
+    "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?",
+    "status_icon_active_label": "Una símbolo de hecho en un círculo verde",
+    "status_icon_inactive_label": "Una x blanca en un círculo rojo"
   },
   "label": {
-    "activate_proximity_tracing": "Activar seguimiento de proximidad",
     "check": "✔",
     "checked_checkbox": "Casilla marcada",
+    "go_to_home_view": "Ir a la vista Inicio",
     "language_icon": "🌎",
     "launch_enable_notif": "Permitir notificaciones",
     "launch_get_started": "Empezar",
@@ -168,22 +198,33 @@
     "select_language": "Seleccionar idioma"
   },
   "navigation": {
+    "connect": "Conectar",
+    "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Inicio",
-    "more": "Más",
-    "more_info": "Más información",
-    "report_issue": "Reportar problema",
-    "self_assessment": "Autoevaluación"
+    "more_info": "Más información"
   },
   "onboarding": {
     "activation_header_title": "Configuración de la Aplicación",
+    "app_setup_complete_body": "{{applicationName}} se encuentra activa. Gracias por ayudar a romper la cadena de infecciones.",
+    "app_setup_complete_header": "¡Configuración de la aplicación completada!",
+    "app_setup_incomplete_body": "{{applicationName}} requiere permisos de rastreo de proximidad, Bluetooth y ubicación para saber cuándo y dónde ha estado expuesto a COVID 19. Puede autorizar esto en Configuración.",
+    "app_setup_incomplete_header": "Configuración de aplicación incompleta",
+    "app_setup_incomplete_location_body": "{{applicationName}} requiere permisos de rastreo de proximidad, Bluetooth y ubicación para saber cuándo y dónde ha estado expuesto a COVID 19. Puede autorizar esto en Configuración.",
+    "eula": "Acuerdo Legal de Usuario Final (EULA)",
     "eula_agree_terms_of_use": "Reconozco haber leído y aceptado las condiciones de uso",
+    "location_alert_body": "Para utilizar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada.",
+    "location_alert_header": "Permitir acceso a la ubicación desde \"{{applicationName}} \"",
+    "location_body": "Para utilizar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada. La aplicación nunca utiliza ni accede a los datos de ubicación y su dispositivo no puede ser rastreado.",
+    "location_header": "Habilitar Servicios de Ubicación",
+    "location_subheader": "¿Por qué necesito activar los servicios de ubicación de mi teléfono?",
     "notification_body1": "Recibirá notificaciones cuando usted tenido contacto con alguien que haya informado un resultado positivo a COVID-19.",
     "notification_body2": "La aplicación funciona haciendo uso del Bluetooth de baja energía y códigos aleatorios generados de manera segura, sin saber quién eres o dónde has estado. Esto puede ser desactivado en cualquier momento.",
     "notification_header": "Recibir notificación si pudiera haber sido expuesto al virus.",
     "notification_subheader1": "¿Cuando recibiré la notificación?",
     "notification_subheader2": "¿Cómo funciona?",
     "notification_subheader3": "Esta aplicación no te protege de la infección por COVID-19.",
+    "please_read_the": "Por favor leer la",
     "privacy_policy": "Política de privacidad",
     "protect_privacy_button": "Cómo protegemos su privacidad",
     "protect_privacy": {
@@ -199,8 +240,6 @@
       "subheader_4": "Cada teléfono solicita periódicamente la lista de códigos marcados como positivo del servidor y busca coincidencias",
       "subheader_5": "Informamos a los usuarios si la aplicación encuentra algún código de otro dispositivo que haya sido marcado como positivo"
     },
-    "proximity_tracing_alert_body": "Su dispositivo móvil puede recopilar y compartir identificadores aleatorios con dispositivos cercanos de manera segura. {{applicationName}} hace uso de estos para notificarle si ha estado expuesto al COVID-19. La fecha, duración e intensidad de la señal correspondientes a una exposición se compartirán con {{applicationName}}.",
-    "proximity_tracing_alert_header": "¿Habilitar el seguimiento de proximidad desde \" {{applicationName}} \"?",
     "proximity_tracing_body1": "Si teléfonos que están encendidos con la aplicación instalada, Bluetooth activado y cercanos uno del otro por un período de tiempo, su dispositivo registra un encuentro.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Sólo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_button": "Activar seguimiento de proximidad",
@@ -239,6 +278,7 @@
   },
   "screen_titles": {
     "about": "Acerca de",
+    "callback_form": "Devolución de Llamada",
     "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
     "exposures": "Exposiciones",

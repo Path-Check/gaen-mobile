@@ -18,7 +18,11 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { Screens, useStatusBarEffect } from "../../navigation"
+import {
+  Stacks,
+  useStatusBarEffect,
+  AffectedUserFlowScreens,
+} from "../../navigation"
 
 import { Icons } from "../../assets"
 import {
@@ -71,7 +75,7 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   const handleOnPressSubmit = async () => {
@@ -99,7 +103,9 @@ const CodeInputForm: FunctionComponent = () => {
           setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(Screens.AffectedUserPublishConsent)
+          navigation.navigate(
+            AffectedUserFlowScreens.AffectedUserPublishConsent,
+          )
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(
@@ -131,8 +137,8 @@ const CodeInputForm: FunctionComponent = () => {
       case "VerificationCodeUsed": {
         return t("export.error.verification_code_used")
       }
-      case "InvalidVerificationUrl": {
-        return "Invalid Verification Url"
+      case "NetworkConnection": {
+        return t("export.error.network_connection_error")
       }
       default: {
         return t("export.error.unknown_code_verification_error")
@@ -144,6 +150,9 @@ const CodeInputForm: FunctionComponent = () => {
     switch (error) {
       case "TokenMetaDataMismatch": {
         return "token meta data mismatch"
+      }
+      case "NetworkConnection": {
+        return t("export.error.network_connection_error")
       }
       default: {
         return t("export.error.unknown_code_verification_error")
@@ -173,8 +182,8 @@ const CodeInputForm: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.ArrowLeft}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>
@@ -190,8 +199,8 @@ const CodeInputForm: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.X}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>

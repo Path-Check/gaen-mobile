@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <!-- Shown on app info, app switcher, etc -->
-  <string name="app_name" translatable="false">Chase Kowona (\"PathCheck\") BT</string>
-  <!-- Shown below icon on launcher only -->
-  <string name="app_name_short" translatable="false">Chase Kowona (\"PathCheck\") BT</string>
+  <string name="exposure_notification_channel_description">Avètisman Notifikasyon Ekspozisyon.</string>
+  <string name="exposure_notification_channel_name">Notifikasyon Ekspozisyon</string>
+  <string name="exposure_notification_message">Yon moun ou te tou pre teste pozitif pou COVID-19. Tape pou plis enfòmasyon.</string>
+  <string name="exposure_notification_title">Ekspozisyon a COVID-19 posib</string>
 </resources>

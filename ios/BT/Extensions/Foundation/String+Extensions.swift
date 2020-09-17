@@ -37,6 +37,7 @@ extension String {
   static let bluetoothNotificationIdentifier = "bluetooth-off"
   static let exposureDetectionErrorNotificationTitle = "Error Detecting Exposures"
   static let exposureDetectionErrorNotificationBody = "An error occurred while attempting to detect exposures."
+  static let newExposureNotificationIdentifier = "new-exposure-notification"
   static let newExposureNotificationTitle = "Possible COVID-19 Exposure"
   static let newExposureNotificationBody = "Someone you were near recently has been diagnosed with COVID-19. Tap for more details."
   static let exposureDetectionErrorNotificationIdentifier = "expososure-notification-error"
@@ -48,6 +49,10 @@ extension String {
   static let cannotEnableNotifications = "Error enabling notifications"
   static let noLocalKeysFound = "No exposure keys on device, please try again in 60 minutes"
   static let noLastResetDateAvailable = "No lastResetDate available"
+  static let emptyMessageError = ""
+  static let dailyFileProcessingLimitExceeded = "Daily exposure detection file processing limit exceeded"
+  static let exposureDetectionCanceled = "Exposure Detection Cancelled"
+  
   // Computed Properties
   var gaenFilePaths: [String] {
     split(separator: "\n").map { String($0) }

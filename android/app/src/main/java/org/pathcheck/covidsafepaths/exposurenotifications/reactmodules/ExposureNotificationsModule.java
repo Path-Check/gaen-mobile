@@ -12,12 +12,14 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
-import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 
 @SuppressWarnings("unused")
@@ -46,24 +48,22 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   public void requestExposureNotificationAuthorization(final Promise promise) {
     ReactContext reactContext = getReactApplicationContext();
     ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(reactContext);
-    client.start(reactContext)
-        .addOnSuccessListener(unused -> promise.resolve(CallbackMessages.GENERIC_SUCCESS))
-        .addOnFailureListener(exception -> {
-          if (!(exception instanceof ApiException)) {
-            promise.reject(new Exception(CallbackMessages.ERROR_UNKNOWN));
-            return;
-          }
-          ApiException apiException = (ApiException) exception;
-          if (apiException.getStatusCode() == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-            // TODO Call resolve after the dialog is closed
-            promise.resolve(CallbackMessages.GENERIC_SUCCESS);
-            client.showPermissionDialog(getReactApplicationContext(), apiException,
-                RequestCodes.REQUEST_CODE_START_EXPOSURE_NOTIFICATION);
-          } else {
-            promise.reject(apiException);
-          }
-        })
-        .addOnCanceledListener(() -> promise.reject(new Exception(CallbackMessages.CANCELLED)));
+    FutureCallback<Void> callback = new FutureCallback<Void>() {
+      @Override
+      public void onSuccess(Void result) {
+        promise.resolve(CallbackMessages.GENERIC_SUCCESS);
+      }
+
+      @Override
+      public void onFailure(@NotNull Throwable exception) {
+        promise.reject(exception);
+      }
+    };
+
+    Futures.addCallback(
+        client.requestPermissionToStartTracing(reactContext),
+        callback,
+        AppExecutors.getLightweightExecutor());
   }
 
   @ReactMethod

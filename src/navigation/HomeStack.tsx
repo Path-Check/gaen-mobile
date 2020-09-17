@@ -23,7 +23,7 @@ const cardScreenOptions = {
   cardShadowEnabled: true,
 }
 
-const ExposureHistoryStack: FunctionComponent = () => {
+const HomeStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={HomeScreens.Home} component={Home} />
@@ -46,4 +46,4 @@ const ExposureHistoryStack: FunctionComponent = () => {
   )
 }
 
-export default ExposureHistoryStack
+export default HomeStack

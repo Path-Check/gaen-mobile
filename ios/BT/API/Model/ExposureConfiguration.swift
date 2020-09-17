@@ -1,7 +1,19 @@
 import Foundation
 import ExposureNotification
 
-struct ExposureConfiguration: Codable {
+protocol ExposureConfiguration: Equatable {
+
+  static var configurationFileName: String { get }
+  static var placeholder: Self { get }
+
+  var triggerThresholdWeightedDuration: Int { get }
+  
+  @available(iOS 13.5, *)
+  var asENExposureConfiguration: ENExposureConfiguration { get }
+}
+
+
+struct ExposureConfigurationV1: ExposureConfiguration, Codable {
 
   static let configurationFileName = "v1.config.json"
 
@@ -14,19 +26,15 @@ struct ExposureConfiguration: Codable {
   let attenuationBucketWeights: [Float]
   let triggerThresholdWeightedDuration: Int
 
-}
-
-extension ExposureConfiguration {
-
-  static var placeholder: ExposureConfiguration = {
-    ExposureConfiguration(minimumRiskScore: 0,
-                          attenuationDurationThresholds: [53, 60],
-                          attenuationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
-                          daysSinceLastExposureLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
-                          durationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
-                          transmissionRiskLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
-                          attenuationBucketWeights: [1, 0.5, 0],
-                          triggerThresholdWeightedDuration: 15)
+  static var placeholder: ExposureConfigurationV1 = {
+    ExposureConfigurationV1(minimumRiskScore: 0,
+                            attenuationDurationThresholds: [53, 60],
+                            attenuationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
+                            daysSinceLastExposureLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
+                            durationLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
+                            transmissionRiskLevelValues: [1, 2, 3, 4, 5, 6, 7, 8],
+                            attenuationBucketWeights: [1, 0.5, 0],
+                            triggerThresholdWeightedDuration: 15)
   }()
 
   var asENExposureConfiguration: ENExposureConfiguration {
@@ -38,25 +46,32 @@ extension ExposureConfiguration {
     config.transmissionRiskLevelValues = transmissionRiskLevelValues.map { NSNumber(value: $0) }
     return config
   }
+
+  // Each bucket is capped at 30 minutes, this method calculates what the
+  // weighted duration ends up being capped at.
+
+  var maxWeightedDuration: Int {
+    return Int((attenuationBucketWeights[0] + attenuationBucketWeights[1] + attenuationBucketWeights[2]) * 30 * 60)
+  }
 }
 
-extension ExposureConfiguration: DownloadableFile {
+extension ExposureConfigurationV1: DownloadableFile {
 
-  static func create(from data: Data) -> ExposureConfiguration? {
+  static func create(from data: Data) -> ExposureConfigurationV1? {
     guard var saveLocalPath = BTAPIClient.documentsDirectory else {
       return nil
     }
-    saveLocalPath.appendPathComponent(ExposureConfiguration.configurationFileName)
-    var exposureConfiguration: ExposureConfiguration
+    saveLocalPath.appendPathComponent(ExposureConfigurationV1.configurationFileName)
+    var exposureConfiguration: ExposureConfigurationV1
     do {
-      exposureConfiguration = try JSONDecoder().decode(ExposureConfiguration.self,
-                                      from: data)
+      exposureConfiguration = try JSONDecoder().decode(ExposureConfigurationV1.self,
+                                                       from: data)
       try data.write(to: saveLocalPath)
     } catch {
       do {
         let jsonData = try Data(contentsOf: saveLocalPath)
-        exposureConfiguration = try JSONDecoder().decode(ExposureConfiguration.self,
-                                        from: jsonData)
+        exposureConfiguration = try JSONDecoder().decode(ExposureConfigurationV1.self,
+                                                         from: jsonData)
       } catch {
         return nil
       }

@@ -1,11 +1,13 @@
 import React from "react"
 import { Linking } from "react-native"
 import { render, fireEvent } from "@testing-library/react-native"
+import { useRoute, useNavigation } from "@react-navigation/native"
+
 import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 import ExposureDetail from "./ExposureDetail"
-import { useRoute } from "@react-navigation/native"
 import { ConfigurationContext } from "../ConfigurationContext"
+import { Stacks } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("ExposureDetail", () => {
@@ -72,6 +74,91 @@ describe("ExposureDetail", () => {
       fireEvent.press(nextStepsButton)
 
       expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityAdviceUrl)
+    })
+  })
+
+  describe("when the health authority does not provide a link", () => {
+    it("does not displays the next steps link", () => {
+      const healthAuthorityAdviceUrl = ""
+      const { queryByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityAdviceUrl,
+          })}
+        >
+          <ExposureDetail />
+        </ConfigurationContext.Provider>,
+      )
+      expect(queryByLabelText("Next Steps")).toBeNull()
+    })
+  })
+
+  describe("when the health authority does not have a callback form", () => {
+    it("only shows the guidance information", () => {
+      const healthAuthorityName = "healthAuthorityName"
+      const { getByText, queryByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            displayCallbackForm: false,
+            healthAuthorityName,
+          })}
+        >
+          <ExposureDetail />
+        </ConfigurationContext.Provider>,
+      )
+
+      expect(queryByLabelText("Speak with a contact tracer")).toBeNull()
+      expect(
+        getByText(`See guidance from ${healthAuthorityName}.`),
+      ).toBeDefined()
+    })
+  })
+
+  describe("when the health authority has a callback form", () => {
+    it("shows info about what to do next and no general guidance", () => {
+      const healthAuthorityName = "healthAuthorityName"
+      const { getByText, queryByText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            displayCallbackForm: true,
+            healthAuthorityName,
+          })}
+        >
+          <ExposureDetail />
+        </ConfigurationContext.Provider>,
+      )
+
+      expect(
+        getByText(
+          `Schedule a call to get support from a contact tracer from the ${healthAuthorityName}.`,
+        ),
+      ).toBeDefined()
+      expect(
+        queryByText(`See guidance from ${healthAuthorityName}.`),
+      ).toBeNull()
+    })
+
+    it("allow user to navigate to the form or the connect screen", () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+      const { getByLabelText } = render(
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            displayCallbackForm: true,
+          })}
+        >
+          <ExposureDetail />
+        </ConfigurationContext.Provider>,
+      )
+
+      const showCallbackFormAction = getByLabelText(
+        "Speak with a contact tracer",
+      )
+      fireEvent.press(showCallbackFormAction)
+      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Callback)
+      const callLaterAction = getByLabelText("Call later")
+      fireEvent.press(callLaterAction)
+      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Connect)
     })
   })
 })

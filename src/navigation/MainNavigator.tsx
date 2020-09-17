@@ -2,28 +2,19 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
-  StackNavigationOptions,
 } from "@react-navigation/stack"
+import { Platform } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
 
-import MainTabNavigator from "./MainTabNavigator"
-import OnboardingStack from "./OnboardingStack"
-import ActivationStack from "./ActivationStack"
 import { useOnboardingContext } from "../OnboardingContext"
-import {
-  OnboardingScreens,
-  AffectedUserFlowScreens,
-  Screens,
-  Stacks,
-} from "./index"
-import AffectedUserStack from "../AffectedUserFlow"
-import MoreInfo from "../ExposureHistory/MoreInfo"
-import ExposureDetail from "../ExposureHistory/ExposureDetail"
-import ProtectPrivacy from "../Onboarding/ProtectPrivacy"
-import LanguageSelection from "../More/LanguageSelection"
-
-import { Headers, Colors } from "../styles"
+import { WelcomeScreens, Stacks } from "./index"
+import MainTabNavigator from "./MainTabNavigator"
+import HowItWorksStack from "./HowItWorksStack"
+import ActivationStack from "./ActivationStack"
+import SettingsStack from "./SettingsStack"
+import ModalStack from "./ModalStack"
+import Welcome from "../Welcome"
+import CallbackStack from "./CallbackStack"
 
 const Stack = createStackNavigator()
 
@@ -31,109 +22,76 @@ const defaultScreenOptions = {
   headerShown: false,
 }
 
-const headerScreenOptions: StackNavigationOptions = {
-  headerStyle: {
-    ...Headers.headerStyle,
-  },
-  headerTitleStyle: {
-    ...Headers.headerTitleStyle,
-  },
-  headerBackTitleVisible: false,
-  headerTintColor: Colors.headerText,
-  headerTitleAlign: "center",
-}
-const cardScreenOptions: StackNavigationOptions = {
-  ...TransitionPresets.ModalPresentationIOS,
-  headerShown: false,
-  cardOverlayEnabled: true,
-  cardShadowEnabled: true,
-}
-
-const ProtectPrivacyModal = () => {
-  return <ProtectPrivacy modalStyle />
-}
-
-const ProtectPrivacyCard = () => {
-  return <ProtectPrivacy />
-}
+const settingsStackTransitionPreset = Platform.select({
+  ios: TransitionPresets.SlideFromRightIOS,
+  android: TransitionPresets.DefaultTransition,
+})
 
 const MainNavigator: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { onboardingIsComplete } = useOnboardingContext()
+  const { isOnboardingComplete } = useOnboardingContext()
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <>
-          {onboardingIsComplete ? (
-            <>
-              <Stack.Screen
-                name={"App"}
-                component={MainTabNavigator}
-                options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={Stacks.AffectedUserStack}
-                component={AffectedUserStack}
-                options={{
-                  ...TransitionPresets.ModalTransition,
-                  ...defaultScreenOptions,
-                  gestureEnabled: false,
-                }}
-              />
-              <Stack.Screen
-                name={AffectedUserFlowScreens.ProtectPrivacy}
-                component={ProtectPrivacyModal}
-                options={{
-                  ...TransitionPresets.ModalTransition,
-                  ...defaultScreenOptions,
-                }}
-              />
-              <Stack.Screen
-                name={Screens.MoreInfo}
-                component={MoreInfo}
-                options={{
-                  title: t("navigation.more_info"),
-                  ...headerScreenOptions,
-                }}
-              />
-              <Stack.Screen
-                name={Screens.ExposureDetail}
-                component={ExposureDetail}
-                options={{
-                  title: t("navigation.exposure"),
-                  ...headerScreenOptions,
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                name={Stacks.Onboarding}
-                component={OnboardingStack}
-                options={defaultScreenOptions}
-              />
-              <Stack.Screen
-                name={OnboardingScreens.ProtectPrivacy}
-                component={ProtectPrivacyCard}
-                options={cardScreenOptions}
-              />
-              <Stack.Screen
-                name={Stacks.Activation}
-                component={ActivationStack}
-                options={{
-                  ...defaultScreenOptions,
-                  gestureEnabled: false,
-                }}
-              />
-            </>
-          )}
-          <Stack.Screen
-            name={Screens.LanguageSelection}
-            component={LanguageSelection}
-            options={cardScreenOptions}
-          />
-        </>
+        {isOnboardingComplete ? (
+          <>
+            <Stack.Screen
+              name={"App"}
+              component={MainTabNavigator}
+              options={defaultScreenOptions}
+            />
+            <Stack.Screen
+              name={Stacks.Settings}
+              component={SettingsStack}
+              options={{
+                ...settingsStackTransitionPreset,
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Stacks.Callback}
+              component={CallbackStack}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name={WelcomeScreens.Welcome}
+              component={Welcome}
+              options={defaultScreenOptions}
+            />
+            <Stack.Screen
+              name={Stacks.HowItWorks}
+              options={defaultScreenOptions}
+            >
+              {(props) => (
+                <HowItWorksStack
+                  {...props}
+                  destinationOnSkip={Stacks.Activation}
+                />
+              )}
+            </Stack.Screen>
+            <Stack.Screen
+              name={Stacks.Activation}
+              component={ActivationStack}
+              options={{
+                ...defaultScreenOptions,
+                gestureEnabled: false,
+              }}
+            />
+          </>
+        )}
+        <Stack.Screen
+          name={Stacks.Modal}
+          component={ModalStack}
+          options={{
+            ...TransitionPresets.ModalTransition,
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

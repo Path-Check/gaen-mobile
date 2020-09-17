@@ -14,10 +14,8 @@
     "start_cta": "Inicio"
   },
   "common": {
-    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Hecho",
-    "enable": "Habilitar",
     "next": "Siguiente",
     "start": "Inicio"
   },
@@ -32,8 +30,10 @@
     "privacy_policy": "Política de privacidad"
   },
   "navigation": {
-    "home": "Inicio",
-    "more": "Más"
+    "home": "Inicio"
+  },
+  "onboarding": {
+    "privacy_policy": "Política de privacidad"
   },
   "screen_titles": {
     "about": "Acerca de",

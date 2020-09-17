@@ -2,6 +2,7 @@
   "_display_name": "English",
   "about": {
     "description": "The {{applicationName}} app is made available by {{healthAuthorityName}}",
+    "emergency_contact": "Emergency Contact",
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
@@ -40,20 +41,29 @@
     "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
     "share_cta_skip": "No thanks, I don't want to share data"
   },
+  "callback": {
+    "fill_out_the_info": "Fill out the information below and a contact tracer from {{healthAuthorityName}} will get in touch.",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "phone_number_required": "Phone number (required)",
+    "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
+    "success_got_it": "Got it",
+    "success_header": "You're in the queue",
+    "success_requested": "Call Back Requested",
+    "well_get_in_touch": "We'll get in touch"
+  },
   "common": {
     "alert": "Alert",
     "back": "Back",
-    "cancel": "Cancel",
     "close": "Close",
     "continue": "Continue",
     "disabled": "Disabled",
     "done": "Done",
-    "enable": "Enable",
     "enabled": "Enabled",
     "maybe_later": "Maybe later",
     "next": "Next",
     "no_thanks": "No thanks",
-    "okay": "Okay",
+    "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -84,33 +94,38 @@
     "error": {
       "invalid_code": "Try a different code",
       "invalid_format": "Invalid format",
+      "network_connection_error": "There is no internet connection",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
+    "person_and_health_expert": "A person talking to a health expert",
     "publish_consent_title_bluetooth": "Notify others in your community",
-    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
     "publish_keys": {
-      "no_op": {
-        "title": "Attempt to submit existing keys",
-        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added."
-      },
       "errors": {
-        "unknown": "Failed to submit the exposure data",
-        "timeout": "The request took too long to complete",
         "description": "The operation could not be completed. {{message}}",
-        "internal_server_error": "The server is experiencing problems, please try again later"
+        "internal_server_error": "The server is experiencing problems, please try again later",
+        "timeout": "The request took too long to complete",
+        "unknown": "Failed to submit the exposure data"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added.",
+        "title": "Attempt to submit existing keys"
       }
-    }
+    },
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6ft apart",
+      "call_later": "Call later",
       "content": "Someone you were nearby has since tested positive for COVID-19.",
       "ha_guidance_header": "What should I do?",
       "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
       "header": "You may have crossed paths with the COVID-19 virus.",
       "isolate": "Isolate",
       "next_steps": "Next Steps",
+      "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
+      "speak_with_contact_tracer": "Speak with a contact tracer",
       "wash_your_hands": "Wash your hands",
       "wear_a_mask": "Wear a mask"
     },
@@ -141,12 +156,8 @@
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
   "home": {
-    "status_icon_active_label": "A white check in a green circle",
-    "status_icon_inactive_label": "A white x in a red circle",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
-    "get_more_info": "Get more info on {{technology}}",
-    "fix": "Fix issues with {{technology}}",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
@@ -166,22 +177,24 @@
       "unauthorized_error_message": "To activate Proximity Tracing, ensure \"Share Exposure Information\" is enabled in Settings > {{applicationName}} > Exposure Notifications",
       "unauthorized_error_title": "Share Exposure Information"
     },
+    "fix": "Fix issues with {{technology}}",
+    "get_more_info": "Get more info on {{technology}}",
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
+    "open_settings": "Open Settings",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
-    "proximity_tracing_info_subheader_2": "Is my data secure?"
+    "proximity_tracing_info_subheader_2": "Is my data secure?",
+    "status_icon_active_label": "A white check in a green circle",
+    "status_icon_inactive_label": "A white x in a red circle"
   },
   "label": {
-    "activate_proximity_tracing": "Activate Proximity Tracing",
-    "launch_activate_location": "Activate Location",
     "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
-    "language_icon": "Outlined icon of a globe",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
@@ -189,41 +202,36 @@
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
-  "more": {
-    "select_language": "Select language"
-  },
   "navigation": {
+    "connect": "Connect",
+    "exposure": "Exposure",
     "exposure_history": "Exposure History",
     "home": "Home",
-    "more": "More",
-    "report_issue": "Report Issue",
-    "self_assessment": "Self Assessment",
     "more_info": "More Info",
-    "exposure": "Exposure"
+    "symptom_checker": "symptom_checker"
   },
   "onboarding": {
-    "app_setup_complete_header": "App Setup Complete!",
-    "app_setup_incomplete_header": "App Setup Incomplete",
-    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
-    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
-    "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "activation_header_title": "App Setup",
+    "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
+    "app_setup_complete_header": "App Setup Complete!",
+    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "app_setup_incomplete_header": "App Setup Incomplete",
+    "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
-    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
+    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
     "location_header": "Activate Location",
     "location_subheader": "Why do I need to turn on my phone's location setting?",
-    "please_read_the": "Please read the",
-    "privacy_policy": "Privacy Policy",
-    "eula": "End User Legal Agreement",
-    "terms_header_title": "Terms of use",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
+    "please_read_the": "Please read the",
+    "privacy_policy": "Privacy Policy",
     "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
       "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
@@ -238,8 +246,6 @@
       "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
-    "proximity_tracing_alert_body": "Your mobile device can securely collect and share random IDs with nearby devices. {{applicationName}} app can use these IDs to notify you if you’ve been exposed to COVID-19. The date, duration, and signal strength of an exposure will be shared with {{applicationName}}.",
-    "proximity_tracing_alert_header": "Enable Proximity Tracing from \"{{applicationName}}\"?",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_button": "Activate Proximity Tracing",
@@ -264,6 +270,7 @@
     "screen5_image_label": "A person talking to a health expert virtually",
     "select_language": "Select Language",
     "step": "Step {{currentStep}} of {{totalSteps}}",
+    "terms_header_title": "Terms of use",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
   "report_issue": {
@@ -276,11 +283,40 @@
     "success": "We received your request. Thank you!"
   },
   "screen_titles": {
-    "about": "About",
+    "callback": "Request Call Back",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposures": "Exposures",
+    "how_the_app_works": "How the app works",
     "legal": "Legal",
     "report_issue": "Report an Issue"
+  },
+  "symptom_checker": {
+    "check-in": "Check-in",
+    "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
+    "get_tested": "Based on your symptoms, we recommend you get tested for COVID-19.",
+    "glad_to_hear_it": "Glad to hear it!",
+    "good": "Good",
+    "how_are_you_feeling": "How are you feeling today?",
+    "my_health": "My Health",
+    "not_well": "Not well",
+    "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
+    "what_symptoms": "What symptoms are you experiencing?"
+  },
+  "symptoms": {
+    "body_aches": "Body aches",
+    "chest_pain_or_pressure": "Chest pain or pressure",
+    "chills": "Chills",
+    "cough": "Cough",
+    "diarrhea": "Diarrhea",
+    "difficulty_breathing": "Difficulty breathing",
+    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
+    "fever": "Fever",
+    "lightheadedness": "Lightheadedness",
+    "loss_of_appetite": "Loss of appetite",
+    "loss_of_smell": "Loss of smell",
+    "loss_of_taste": "Loss of taste",
+    "other": "Other",
+    "vomiting": "Vomiting"
   }
 }

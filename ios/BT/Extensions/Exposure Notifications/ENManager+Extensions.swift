@@ -15,9 +15,15 @@ protocol ExposureNotificationManager {
   @discardableResult func detectExposures(configuration: ENExposureConfiguration,
                                           diagnosisKeyURLs: [URL],
                                           completionHandler: @escaping ENDetectExposuresHandler) -> Progress
+  @available(iOS 13.7, *)
+  @discardableResult func detectExposures(configuration: ENExposureConfiguration,
+                                          completionHandler: @escaping ENDetectExposuresHandler) -> Progress
   @discardableResult func getExposureInfo(summary: ENExposureDetectionSummary,
                                           userExplanation: String,
                                           completionHandler: @escaping ENGetExposureInfoHandler) -> Progress
+  @available(iOS 13.7, *)
+  @discardableResult func getExposureWindows(summary: ENExposureDetectionSummary,
+                               completionHandler: @escaping ENGetExposureWindowsHandler) -> Progress
   func getDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
   func getTestDiagnosisKeys(completionHandler: @escaping ENGetDiagnosisKeysHandler)
 }

@@ -42,7 +42,7 @@
     ]
   },
   "dependencies": {
-    "@bugsnag/react-native": "^7.3.2",
+    "@bugsnag/react-native": "^7.3.4",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/masked-view": "^0.1.10",

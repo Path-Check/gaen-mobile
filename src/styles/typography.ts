@@ -39,7 +39,7 @@ export const semiBoldFontFamily = "IBMPlexSans-SemiBold"
 export const boldFontFamily = "IBMPlexSans-Bold"
 export const monospaceFontFamily = "IBMPlexMono"
 
-const base: TextStyle = {
+export const base: TextStyle = {
   fontFamily: baseFontFamily,
   fontWeight: baseWeight,
   letterSpacing: baseLetterSpacing,
@@ -166,7 +166,6 @@ export const body3: TextStyle = {
 }
 
 // Forms
-
 export const formInputLabel: TextStyle = {
   ...smallFont,
   color: Colors.primaryText,
@@ -185,7 +184,7 @@ export const error: TextStyle = {
 
 // Tappables
 const baseButtonText: TextStyle = {
-  ...largeFont,
+  ...mediumFont,
   ...semiBold,
 }
 
@@ -207,11 +206,11 @@ export const buttonSecondary: TextStyle = {
 
 export const tappableListItem: TextStyle = {
   ...body1,
+  fontSize: large,
 }
 
 export const anchorLink: TextStyle = {
   ...body1,
-  ...mediumBold,
   color: Colors.anchorLinkText,
   textDecorationLine: "underline",
 }

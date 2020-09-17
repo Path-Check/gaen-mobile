@@ -46,25 +46,21 @@ export const HomeScreens: {
   LocationInfo: "LocationInfo",
 }
 
-export type OnboardingScreen =
-  | "Welcome"
+export type HowItWorksScreen =
   | "Introduction"
   | "PhoneRemembersDevices"
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
-  | "ProtectPrivacy"
 
-export const OnboardingScreens: {
-  [key in OnboardingScreen]: OnboardingScreen
+export const HowItWorksScreens: {
+  [key in HowItWorksScreen]: HowItWorksScreen
 } = {
-  Welcome: "Welcome",
   Introduction: "Introduction",
   PhoneRemembersDevices: "PhoneRemembersDevices",
   PersonalPrivacy: "PersonalPrivacy",
   GetNotified: "GetNotified",
   ValueProposition: "ValueProposition",
-  ProtectPrivacy: "ProtectPrivacy",
 }
 
 export type ExposureHistoryScreen =
@@ -86,33 +82,56 @@ export type ExposureHistoryStackParamList = {
   }
 }
 
-export type ReportIssueScreen = "ReportIssueForm"
-
-export const ReportIssueScreens: {
-  [key in ReportIssueScreen]: ReportIssueScreen
+export type CallbackStackScreen = "Form" | "Success"
+export const CallbackStackScreens: {
+  [key in CallbackStackScreen]: CallbackStackScreen
 } = {
-  ReportIssueForm: "ReportIssueForm",
+  Form: "Form",
+  Success: "Success",
 }
 
-export type MoreStackScreen =
-  | "Menu"
-  | "About"
+export type ConnectStackScreen = "Connect"
+
+export const ConnectStackScreens: {
+  [key in ConnectStackScreen]: ConnectStackScreen
+} = {
+  Connect: "Connect",
+}
+
+export type ModalScreen =
+  | "LanguageSelection"
+  | "ProtectPrivacy"
+  | "AffectedUserStack"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
+
+export const ModalScreens: {
+  [key in ModalScreen]: ModalScreen
+} = {
+  LanguageSelection: "LanguageSelection",
+  ProtectPrivacy: "ProtectPrivacy",
+  AffectedUserStack: "AffectedUserStack",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
+}
+
+export type SettingsScreen =
+  | "Settings"
   | "Legal"
+  | "ReportIssue"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
-  | "AffectedUserFlow"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
 
-export const MoreStackScreens: {
-  [key in MoreStackScreen]: MoreStackScreen
+export const SettingsScreens: {
+  [key in SettingsScreen]: SettingsScreen
 } = {
-  Menu: "Menu",
-  About: "About",
+  Settings: "Settings",
   Legal: "Legal",
+  ReportIssue: "ReportIssue",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
-  AffectedUserFlow: "AffectedUserFlow",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
 }
@@ -132,7 +151,6 @@ export type AffectedUserFlowScreen =
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
-  | "ProtectPrivacy"
 
 export const AffectedUserFlowScreens: {
   [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
@@ -143,48 +161,61 @@ export const AffectedUserFlowScreens: {
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
-  ProtectPrivacy: "ProtectPrivacy",
 }
-export type Screen =
-  | OnboardingScreen
-  | ExposureHistoryScreen
-  | ReportIssueScreen
-  | MoreStackScreen
-  | SelfAssessmentScreen
-  | AffectedUserFlowScreen
-  | HomeScreen
-  | "ReportIssueForm"
-  | "LanguageSelection"
+export type WelcomeScreen = "Welcome"
 
-export const Screens: { [key in Screen]: Screen } = {
-  ...OnboardingScreens,
-  ...ExposureHistoryScreens,
-  ...ReportIssueScreens,
-  ...MoreStackScreens,
-  ...SelfAssessmentScreens,
-  ...AffectedUserFlowScreens,
-  ...HomeScreens,
-  ReportIssueForm: "ReportIssueForm",
-  LanguageSelection: "LanguageSelection",
+export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
+  Welcome: "Welcome",
+}
+
+export type ReportIssueScreen = "ReportIssue"
+
+export const ReportIssueScreens: {
+  [key in ReportIssueScreen]: ReportIssueScreen
+} = {
+  ReportIssue: "ReportIssue",
+}
+
+export type SymptomCheckerStackScreen =
+  | "SymptomChecker"
+  | "SelectSymptoms"
+  | "AtRiskRecommendation"
+
+export const SymptomCheckerStackScreens: {
+  [key in SymptomCheckerStackScreen]: SymptomCheckerStackScreen
+} = {
+  SymptomChecker: "SymptomChecker",
+  SelectSymptoms: "SelectSymptoms",
+  AtRiskRecommendation: "AtRiskRecommendation",
 }
 
 export type Stack =
   | "Activation"
-  | "Onboarding"
-  | "ExposureHistoryFlow"
-  | "SelfAssessment"
-  | "More"
   | "AffectedUserStack"
-  | "ReportIssue"
+  | "Callback"
+  | "Connect"
+  | "ExposureHistoryFlow"
+  | "Modal"
+  | "HowItWorks"
+  | "HowItWorksReviewFromSettings"
+  | "HowItWorksReviewFromConnect"
+  | "Settings"
+  | "Home"
+  | "SymptomChecker"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
-  Onboarding: "Onboarding",
-  ExposureHistoryFlow: "ExposureHistoryFlow",
-  SelfAssessment: "SelfAssessment",
-  More: "More",
   AffectedUserStack: "AffectedUserStack",
-  ReportIssue: "ReportIssue",
+  Callback: "Callback",
+  Connect: "Connect",
+  ExposureHistoryFlow: "ExposureHistoryFlow",
+  Modal: "Modal",
+  HowItWorks: "HowItWorks",
+  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
+  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
+  Settings: "Settings",
+  Home: "Home",
+  SymptomChecker: "SymptomChecker",
 }
 
 export const useStatusBarEffect = (

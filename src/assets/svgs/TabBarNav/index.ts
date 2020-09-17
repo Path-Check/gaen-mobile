@@ -1,13 +1,11 @@
 import Exposure from "./exposure"
-import QuestionMark from "./questionMark"
-import HorizontalDots from "./horizontalDots"
+import Heartbeat from "./heartbeat"
 import House from "./house"
-import CheckInBox from "./checkInBox"
+import PersonInHand from "./personInHand"
 
 export const TabBarIcons = {
   Exposure,
-  QuestionMark,
-  HorizontalDots,
+  Heartbeat,
   House,
-  CheckInBox,
+  PersonInHand,
 }

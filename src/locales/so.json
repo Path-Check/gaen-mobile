@@ -42,7 +42,6 @@
   },
   "common": {
     "alert": "Feejignaan",
-    "cancel": "Buri",
     "close": "Xir",
     "continue": "Sii wado",
     "disabled": "La damiyay",
@@ -51,7 +50,6 @@
     "maybe_later": "Laga yaabee hadhow",
     "next": "Ka xiga",
     "no_thanks": "Maya waad mahadsantahay",
-    "okay": "Haye",
     "settings": "Fur Dejinta",
     "skip": "Dhaaf",
     "something_went_wrong": "Waxbaa qaldamay",
@@ -137,6 +135,7 @@
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
       "tracing_on_header": "Wuu shaqaynayaa"
     },
+    "open_settings": "Fur Dejinta",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_header": "Raadraaca Isku Dhawaanshaha",
@@ -144,7 +143,6 @@
     "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?"
   },
   "label": {
-    "activate_proximity_tracing": "Ka Shaqaysii Raadraaca Isku-Dhowaanshaha",
     "check": "Sax ku samaynta",
     "checked_checkbox": "Sanduuqa saxda lagu sameey",
     "language_icon": "Calaamad Adduun oo Kooban",
@@ -160,10 +158,7 @@
   },
   "navigation": {
     "exposure_history": "Taariikhda ufeydsanka",
-    "home": "Hoy",
-    "more": "In kale",
-    "report_issue": "Ka Warbixi Arrin",
-    "self_assessment": "Is-qiimaynta Xaaladdaada"
+    "home": "Hoy"
   },
   "onboarding": {
     "activation_header_title": "Rakibaadda Aabka (App)",

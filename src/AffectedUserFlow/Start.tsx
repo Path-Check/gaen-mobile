@@ -11,7 +11,11 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { StatusBar, GlobalText, Button } from "../components"
-import { Screens, useStatusBarEffect } from "../navigation"
+import {
+  useStatusBarEffect,
+  AffectedUserFlowScreens,
+  Stacks,
+} from "../navigation"
 
 import { Layout, Spacing, Colors, Iconography, Typography } from "../styles"
 import { Images, Icons } from "../assets"
@@ -22,11 +26,11 @@ export const ExportIntro: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressNext = () => {
-    navigation.navigate(Screens.AffectedUserCodeInput)
+    navigation.navigate(AffectedUserFlowScreens.AffectedUserCodeInput)
   }
 
   const handleOnPressCancel = () => {
-    navigation.navigate(Screens.Home)
+    navigation.navigate(Stacks.Home)
   }
 
   return (
@@ -47,8 +51,8 @@ export const ExportIntro: FunctionComponent = () => {
               <SvgXml
                 xml={Icons.X}
                 fill={Colors.black}
-                width={Iconography.xSmall}
-                height={Iconography.xSmall}
+                width={Iconography.xxSmall}
+                height={Iconography.xxSmall}
               />
             </View>
           </TouchableOpacity>
@@ -58,7 +62,7 @@ export const ExportIntro: FunctionComponent = () => {
             source={Images.PersonAndHealthExpert}
             style={style.image}
             accessible
-            accessibilityLabel={t("exoprt.start_image_label")}
+            accessibilityLabel={t("export.person_and_health_expert")}
           />
           <GlobalText style={style.header}>
             {t("export.start_header_bluetooth")}

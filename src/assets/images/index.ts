@@ -1,32 +1,34 @@
-const BlueGradientBackground = require("./blueGradientBackground.png")
-const BoxCheckedIcon = require("./boxCheckedIcon.png")
-const BoxUncheckedIcon = require("./boxUncheckedIcon.png")
-const CheckInCircle = require("./checkInCircle.png")
-const CodesAndPhone = require("./codesAndPhone.png")
-const ConcentricCircles = require("./concentricCircles.png")
-const Doctors = require("./doctors.png")
-const ExclamationInCircle = require("./exclamationInCircle.png")
-const EmptyPathBackground = require("./emptyPathBackground.png")
-const Export = require("./export.png")
-const ForeArrow = require("./foreArrow.png")
-const HomeActive = require("./homeActive.png")
-const HomeInactive = require("./homeInactive.png")
-const HugEmoji = require("./hugEmoji.png")
-const IsolatePathBackground = require("./isolatePathBackground.png")
-const MinnesotaMap = require("./minnesotaMap.png")
-const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
-const PeopleHighFiving = require("./peopleHighFiving.png")
-const PeopleOnPhones = require("./peopleOnPhones.png")
-const PeopleOnNetworkNodes = require("./peopleOnNetworkNodes.png")
-const PersonAndHealthExpert = require("./personAndHealthExpert.png")
-const PersonGettingNotification = require("./personGettingNotification.png")
-const PersonOnComputer = require("./personOnComputer.png")
-const PersonOnPhoneWithCode = require("./personOnPhoneWithCode.png")
-const PersonWithCodesInBackground = require("./personWithCodesInBackground.png")
-const PersonWithPhoneAndCode = require("./personWithPhoneAndCode.png")
-const PersonWithLockedPhone = require("./personWithLockedPhone.png")
-const PhonesSharingCodes = require("./phonesSharingCodes.png")
-const SingleCrossPathBackground = require("./singleCrossPathBackground.png")
+import BlueGradientBackground from "./blueGradientBackground.png"
+import BoxCheckedIcon from "./boxCheckedIcon.png"
+import BoxUncheckedIcon from "./boxUncheckedIcon.png"
+import CheckInCircle from "./checkInCircle.png"
+import CodesAndPhone from "./codesAndPhone.png"
+import ConcentricCircles from "./concentricCircles.png"
+import Doctors from "./doctors.png"
+import EmptyPathBackground from "./emptyPathBackground.png"
+import ExclamationInCircle from "./exclamationInCircle.png"
+import Export from "./export.png"
+import ForeArrow from "./foreArrow.png"
+import HomeActive from "./homeActive.png"
+import HomeInactive from "./homeInactive.png"
+import HugEmoji from "./hugEmoji.png"
+import IsolatePathBackground from "./isolatePathBackground.png"
+import MinnesotaMap from "./minnesotaMap.png"
+import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
+import PeopleHighFiving from "./peopleHighFiving.png"
+import PeopleOnPhones from "./peopleOnPhones.png"
+import PersonAndHealthExpert from "./personAndHealthExpert.png"
+import PersonGettingNotification from "./personGettingNotification.png"
+import PersonOnComputer from "./personOnComputer.png"
+import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
+import PersonWithCodesInBackground from "./personWithCodesInBackground.png"
+import PersonWithLockedPhone from "./personWithLockedPhone.png"
+import PersonWithPhoneAndCode from "./personWithPhoneAndCode.png"
+import PhonesSharingCodes from "./phonesSharingCodes.png"
+import SickEmoji from "./sickEmoji.png"
+import SingleCrossPathBackground from "./singleCrossPathBackground.png"
+import SmileEmoji from "./smileEmoji.png"
+import WelcomeImage from "./welcomeImage.png"
 
 export const Images = {
   BlueGradientBackground,
@@ -36,8 +38,8 @@ export const Images = {
   CodesAndPhone,
   ConcentricCircles,
   Doctors,
-  ExclamationInCircle,
   EmptyPathBackground,
+  ExclamationInCircle,
   Export,
   ForeArrow,
   HomeActive,
@@ -48,14 +50,16 @@ export const Images = {
   MultipleCrossPathBackground,
   PeopleHighFiving,
   PeopleOnPhones,
-  PeopleOnNetworkNodes,
   PersonAndHealthExpert,
   PersonGettingNotification,
   PersonOnComputer,
   PersonOnPhoneWithCode,
   PersonWithCodesInBackground,
+  PersonWithLockedPhone,
   PersonWithPhoneAndCode,
   PhonesSharingCodes,
-  PersonWithLockedPhone,
+  SickEmoji,
   SingleCrossPathBackground,
+  SmileEmoji,
+  WelcomeImage,
 }

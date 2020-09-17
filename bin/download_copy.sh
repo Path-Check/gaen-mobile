@@ -9,7 +9,7 @@
 #
 # Example
 #
-#   bin/download_assets.sh guam <token>
+#   bin/download_copy.sh guam <token>
 #
 # Requirements
 #

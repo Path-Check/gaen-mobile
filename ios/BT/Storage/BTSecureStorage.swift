@@ -30,10 +30,10 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 6,
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 7,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 6,
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 7,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
       }
     } else {
@@ -79,6 +79,10 @@ class BTSecureStorage: SafePathsSecureStorage {
       let jsonString = userState.exposures.jsonStringRepresentation()
       notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
     }
+  }
+
+  func canStoreExposure(for date: Date) -> Bool {
+    return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }
 
   @Persisted(keyPath: .remainingDailyFileProcessingCapacity, notificationName: .remainingDailyFileProcessingCapacityDidChange, defaultValue: Constants.dailyFileProcessingCapacity)
