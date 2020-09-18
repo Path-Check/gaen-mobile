@@ -10,7 +10,6 @@ export const determineHealthAssessment = (
 ): HealthAssessment => {
   if (symptoms.length > 0) {
     return HealthAssessment.AtRisk
-  } else {
-    return HealthAssessment.NotAtRisk
   }
+  return HealthAssessment.NotAtRisk
 }
