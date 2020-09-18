@@ -11,7 +11,6 @@ import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 import { Colors, Iconography, Spacing, Typography, Buttons } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
-import { Layout } from "../../styles"
 
 const ExposureActions: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -42,13 +41,7 @@ const ExposureActions: FunctionComponent = () => {
               healthAuthorityName,
             })}
           </GlobalText>
-          <View
-            style={
-              Layout.screenWidth > 350
-                ? [style.row, style.recommendations]
-                : [style.column, style.recommendations]
-            }
-          >
+          <View style={style.recommendations}>
             <RecommendationBubble
               icon={Icons.IsolateBubbles}
               text={t("exposure_history.exposure_detail.isolate")}
@@ -164,15 +157,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   recommendations: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     display: "flex",
     justifyContent: "space-between",
     marginBottom: Spacing.xxxLarge,
-  },
-  column: {
-    flexDirection: "column",
-  },
-  row: {
-    flexDirection: "row",
   },
   recommendation: {
     display: "flex",
