@@ -1,14 +1,12 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.storage.objects
 
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.ReadableNativeMap
 import com.facebook.react.bridge.WritableNativeArray
 import com.facebook.react.bridge.WritableNativeMap
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import org.threeten.bp.Instant
-import java.util.ArrayList
 
 open class CheckInStatus(
     @PrimaryKey
