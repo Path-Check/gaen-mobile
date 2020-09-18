@@ -11,7 +11,7 @@ import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 import { Colors, Iconography, Spacing, Typography, Buttons } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
-import { screenWidth } from "../../styles/layout"
+import { Layout } from "../../styles"
 
 const ExposureActions: FunctionComponent = () => {
   const { t } = useTranslation()
