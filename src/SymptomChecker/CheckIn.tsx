@@ -176,15 +176,13 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
     }
   }
 
-  const displayFindTestCenterButton = findATestCenterUrl !== null
-
   return (
     <>
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
       {determineHealthAssessmentText()}
-      {displayFindTestCenterButton && (
+      {findATestCenterUrl && (
         <Button
           label={t("symptom_checker.find_a_test_center")}
           onPress={handleOnPressFindTestCenter}

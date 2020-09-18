@@ -34,8 +34,6 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
     }
   }
 
-  const displayFindTestCenterButton = findATestCenterUrl !== null
-
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
@@ -79,7 +77,7 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
             {t("symptom_checker.get_tested")}
           </GlobalText>
         </View>
-        {displayFindTestCenterButton && (
+        {findATestCenterUrl && (
           <Button
             label={t("symptom_checker.find_a_test_center_nearby")}
             onPress={handleOnPressFindTestCenter}
