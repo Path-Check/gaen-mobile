@@ -115,8 +115,8 @@ const style = StyleSheet.create({
   image: {
     resizeMode: "contain",
     width: "97%",
-    height: 300,
-    marginBottom: Spacing.xxxLarge,
+    height: 150,
+    marginBottom: Spacing.large,
   },
   headerText: {
     ...Typography.header1,
@@ -126,7 +126,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   bodyText: {
-    ...Typography.header3,
+    ...Typography.header4,
     ...Typography.base,
     marginBottom: Spacing.medium,
     color: Colors.neutral100,
