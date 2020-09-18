@@ -6,10 +6,7 @@ export enum HealthAssessment {
 export type Symptom = string
 
 export const determineHealthAssessment = (
-  symptoms: Symptom[],
+  _symptoms: Symptom[],
 ): HealthAssessment => {
-  if (symptoms.length > 3) {
-    return HealthAssessment.AtRisk
-  }
-  return HealthAssessment.NotAtRisk
+  return HealthAssessment.AtRisk
 }

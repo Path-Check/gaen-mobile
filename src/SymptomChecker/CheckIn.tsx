@@ -5,12 +5,13 @@ import {
   Image,
   StyleSheet,
   ImageSourcePropType,
+  Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components"
+import { GlobalText, Button } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
 import { HealthAssessment } from "./symptoms"
 import { SymptomCheckerStackScreens } from "../navigation"
@@ -149,10 +150,23 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
 }) => {
   const { t } = useTranslation()
 
+  const handleOnPressFindTestCenter = () => {
+    Linking.openURL("https://google.com")
+  }
+
   const determineHealthAssessmentText = () => {
     switch (healthAssessment) {
       case HealthAssessment.AtRisk:
-        return t("symptom_checker.get_tested")
+        return (
+          <View style={style.healthAssessmentContainer}>
+            <GlobalText style={style.healthAssessmentText}>
+              {t("symptom_checker.sorry_not_feeling_well")}
+            </GlobalText>
+            <GlobalText style={style.healthAssessmentText}>
+              {t("symptom_checker.get_tested")}
+            </GlobalText>
+          </View>
+        )
       case HealthAssessment.NotAtRisk:
         return t("symptom_checker.follow_ha_guidance")
     }
@@ -163,8 +177,16 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
-      <GlobalText style={style.healthAssessmentText}>
-        {determineHealthAssessmentText()}
+      {determineHealthAssessmentText()}
+      <Button
+        label={t("symptom_checker.find_a_test_center")}
+        onPress={handleOnPressFindTestCenter}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
+        hasRightArrow
+      />
+      <GlobalText style={style.sectionLabel}>
+        {t("symptom_checker.symptoms")}
       </GlobalText>
       <View style={style.symptomsContainer}>
         {symptoms.map((value) => {
@@ -229,6 +251,7 @@ const style = StyleSheet.create({
   checkInHeaderText: {
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
+    marginBottom: Spacing.xSmall,
   },
   feelingButtonsContainer: {
     flexDirection: "row",
@@ -256,11 +279,26 @@ const style = StyleSheet.create({
     height: Iconography.small,
     marginBottom: Spacing.xxSmall,
   },
+  healthAssessmentContainer: {
+    marginBottom: Spacing.xSmall,
+  },
   healthAssessmentText: {
     ...Typography.header5,
     ...Typography.base,
-    marginTop: Spacing.medium,
-    marginBottom: Spacing.xxLarge,
+    marginBottom: Spacing.xSmall,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    width: "100%",
+    paddingTop: Spacing.xSmall,
+    paddingBottom: Spacing.xSmall + 1,
+    marginBottom: Spacing.medium,
+  },
+  sectionLabel: {
+    ...Typography.body2,
+    marginBottom: Spacing.xSmall,
   },
   symptomsContainer: {
     flexDirection: "row",

@@ -33,6 +33,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xxxHuge,
   },
 })
 
