@@ -44,7 +44,7 @@ const ExposureActions: FunctionComponent = () => {
           </GlobalText>
           <View
             style={
-              screenWidth > 350
+              Layout.screenWidth > 350
                 ? [style.row, style.recommendations]
                 : [style.column, style.recommendations]
             }
