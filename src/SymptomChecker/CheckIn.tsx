@@ -18,6 +18,7 @@ import { SymptomCheckerStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 enum CheckInStatus {
   NotCheckedIn,
@@ -149,9 +150,12 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
   healthAssessment,
 }) => {
   const { t } = useTranslation()
+  const { findATestCenterUrl } = useConfigurationContext()
 
   const handleOnPressFindTestCenter = () => {
-    Linking.openURL("https://ldh.la.gov/index.cfm/page/3934")
+    if (findATestCenterUrl) {
+      Linking.openURL(findATestCenterUrl)
+    }
   }
 
   const determineHealthAssessmentText = () => {
@@ -172,19 +176,23 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
     }
   }
 
+  const displayFindTestCenterButton = findATestCenterUrl !== null
+
   return (
     <>
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
       {determineHealthAssessmentText()}
-      <Button
-        label={t("symptom_checker.find_a_test_center")}
-        onPress={handleOnPressFindTestCenter}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-        hasRightArrow
-      />
+      {displayFindTestCenterButton && (
+        <Button
+          label={t("symptom_checker.find_a_test_center")}
+          onPress={handleOnPressFindTestCenter}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasRightArrow
+        />
+      )}
       <GlobalText style={style.sectionLabel}>
         {t("symptom_checker.symptoms")}
       </GlobalText>
