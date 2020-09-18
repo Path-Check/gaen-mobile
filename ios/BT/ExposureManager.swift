@@ -325,9 +325,8 @@ final class ExposureManager: NSObject {
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
       unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
       let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-      var exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
+      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
-      exposureSummary = try await(self.getCachedExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary {
         summary.daySummaries.forEach { (daySummary) in
