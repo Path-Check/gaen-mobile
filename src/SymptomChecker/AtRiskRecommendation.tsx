@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
+import { useConfigurationContext } from "../ConfigurationContext"
 import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
 import { GlobalText, StatusBar, Button } from "../components"
 
@@ -21,14 +22,19 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { findATestCenterUrl } = useConfigurationContext()
 
   const handleOnPressCancel = () => {
     navigation.navigate(SymptomCheckerStackScreens.SymptomChecker)
   }
 
   const handleOnPressFindTestCenter = () => {
-    Linking.openURL("https://google.com")
+    if (findATestCenterUrl) {
+      Linking.openURL(findATestCenterUrl)
+    }
   }
+
+  const displayFindTestCenterButton = findATestCenterUrl !== null
 
   return (
     <>
@@ -73,13 +79,15 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
             {t("symptom_checker.get_tested")}
           </GlobalText>
         </View>
-        <Button
-          label={t("symptom_checker.find_a_test_center_nearby")}
-          onPress={handleOnPressFindTestCenter}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-          hasRightArrow
-        />
+        {displayFindTestCenterButton && (
+          <Button
+            label={t("symptom_checker.find_a_test_center_nearby")}
+            onPress={handleOnPressFindTestCenter}
+            customButtonStyle={style.button}
+            customButtonInnerStyle={style.buttonInner}
+            hasRightArrow
+          />
+        )}
       </ScrollView>
     </>
   )

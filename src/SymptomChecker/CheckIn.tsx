@@ -151,7 +151,7 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
   const { t } = useTranslation()
 
   const handleOnPressFindTestCenter = () => {
-    Linking.openURL("https://google.com")
+    Linking.openURL("https://ldh.la.gov/index.cfm/page/3934")
   }
 
   const determineHealthAssessmentText = () => {
@@ -289,6 +289,8 @@ const style = StyleSheet.create({
   },
   button: {
     width: "100%",
+    elevation: 0,
+    shadowOpacity: 0,
   },
   buttonInner: {
     width: "100%",
