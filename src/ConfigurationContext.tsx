@@ -10,6 +10,7 @@ export interface Configuration {
   displayReportAnIssue: boolean
   displaySelfAssessment: boolean
   displaySymptomChecker: boolean
+  findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
   healthAuthorityEulaUrl: string | null
@@ -28,6 +29,7 @@ const initialState = {
   displayReportAnIssue: false,
   displaySelfAssessment: false,
   displaySymptomChecker: false,
+  findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityEulaUrl: null,
@@ -43,11 +45,12 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
-    LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
-    GAEN_AUTHORITY_NAME: healthAuthorityName,
-    PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
-    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
+    FIND_A_TEST_CENTER_URL: findATestCenterUrl,
     EULA_URL: eulaUrl,
+    GAEN_AUTHORITY_NAME: healthAuthorityName,
+    LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
+    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
+    PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
@@ -73,6 +76,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayReportAnIssue,
         displaySelfAssessment,
         displaySymptomChecker,
+        findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,
         healthAuthorityEulaUrl: eulaUrl || null,

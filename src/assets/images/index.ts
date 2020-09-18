@@ -18,6 +18,7 @@ import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
 import PeopleHighFiving from "./peopleHighFiving.png"
 import PeopleOnPhones from "./peopleOnPhones.png"
 import PersonAndHealthExpert from "./personAndHealthExpert.png"
+import PersonFindingLocation from "./personFindingLocation.png"
 import PersonGettingNotification from "./personGettingNotification.png"
 import PersonOnComputer from "./personOnComputer.png"
 import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
@@ -51,6 +52,7 @@ export const Images = {
   PeopleHighFiving,
   PeopleOnPhones,
   PersonAndHealthExpert,
+  PersonFindingLocation,
   PersonGettingNotification,
   PersonOnComputer,
   PersonOnPhoneWithCode,

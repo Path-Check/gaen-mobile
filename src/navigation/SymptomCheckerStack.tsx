@@ -25,9 +25,8 @@ const SymptomCheckerStack: FunctionComponent = () => {
           name={SymptomCheckerStackScreens.SelectSymptoms}
           component={SelectSymptomsScreen}
           options={{
+            ...TransitionPresets.ModalTransition,
             headerShown: false,
-            ...TransitionPresets.ModalPresentationIOS,
-            cardOverlayEnabled: true,
             gestureEnabled: false,
           }}
         />

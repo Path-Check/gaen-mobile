@@ -301,14 +301,20 @@
   },
   "symptom_checker": {
     "check-in": "Check-in",
+    "find_a_test_center_nearby": "Find a test center nearby",
+    "find_a_test_center": "Find a test center",
     "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
-    "get_tested": "Based on your symptoms, we recommend you get tested for COVID-19.",
+    "sorry_not_feeling_well": "Sorry you're not feeling well. Your symptoms may be related to COVID-19.",
+    "get_tested": "We recommend you get tested for COVID-19.",
     "glad_to_hear_it": "Glad to hear it!",
     "good": "Good",
+    "guidance": "Guidance",
     "how_are_you_feeling": "How are you feeling today?",
     "my_health": "My Health",
     "not_well": "Not well",
+    "person_finding_location_label": "A person on their phone searching for a location.",
     "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
+    "symptoms": "Symptoms",
     "what_symptoms": "What symptoms are you experiencing?"
   },
   "symptoms": {

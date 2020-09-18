@@ -31,8 +31,9 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     backgroundColor: Colors.primaryLightBackground,
-    paddingTop: Spacing.xxxHuge,
+    paddingTop: Spacing.large,
     paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.xxxHuge,
   },
 })
 

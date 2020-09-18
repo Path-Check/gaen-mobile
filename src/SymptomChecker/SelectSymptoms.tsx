@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, SymptomCheckerStackScreens } from "../navigation"
-import { GlobalText, Button } from "../components"
+import { GlobalText, Button, StatusBar } from "../components"
 import { useSymptomCheckerContext } from "./SymptomCheckerContext"
 import { HealthAssessment, determineHealthAssessment } from "./symptoms"
 
@@ -68,36 +68,39 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      <GlobalText style={style.headerText}>
-        {t("symptom_checker.what_symptoms")}
-      </GlobalText>
-      <View style={style.symptomButtonsContainer}>
-        {symptoms.map((value) => {
-          return (
-            <TouchableHighlight
-              key={value}
-              onPress={() => handleOnPressSymptom(value)}
-              style={determineSymptomButtonStyle(value)}
-              underlayColor={Colors.neutral10}
-            >
-              <GlobalText style={determineSymptomButtonTextStyle(value)}>
-                {value}
-              </GlobalText>
-            </TouchableHighlight>
-          )
-        })}
-      </View>
-      <Button
-        onPress={handleOnPressSave}
-        label={t("common.save")}
-        disabled={selectedSymptoms.length === 0}
-      />
-    </ScrollView>
+    <>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <GlobalText style={style.headerText}>
+          {t("symptom_checker.what_symptoms")}
+        </GlobalText>
+        <View style={style.symptomButtonsContainer}>
+          {symptoms.map((value) => {
+            return (
+              <TouchableHighlight
+                key={value}
+                onPress={() => handleOnPressSymptom(value)}
+                style={determineSymptomButtonStyle(value)}
+                underlayColor={Colors.neutral10}
+              >
+                <GlobalText style={determineSymptomButtonTextStyle(value)}>
+                  {value}
+                </GlobalText>
+              </TouchableHighlight>
+            )
+          })}
+        </View>
+        <Button
+          onPress={handleOnPressSave}
+          label={t("common.save")}
+          disabled={selectedSymptoms.length === 0}
+        />
+      </ScrollView>
+    </>
   )
 }
 
