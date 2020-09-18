@@ -30,11 +30,15 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 7,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 8,
+                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self,
+                                                                              Exposure.self,
+                                                                              CheckInStatus.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 7,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 8,
+                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self,
+                                                                              Exposure.self,
+                                                                              CheckInStatus.self])
       }
     } else {
       return nil
@@ -81,6 +85,13 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func storeCheckInStatus(_ checkInStatus: CheckInStatus) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.add(checkInStatus, update: .modified)
+    }
+  }
+
   func canStoreExposure(for date: Date) -> Bool {
     return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }
@@ -109,5 +120,10 @@ class BTSecureStorage: SafePathsSecureStorage {
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
     .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
+
+  var checkInStatuses: [CheckInStatus] {
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(CheckInStatus.self))
+  }
 
 }

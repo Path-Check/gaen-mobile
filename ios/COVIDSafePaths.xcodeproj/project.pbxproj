@@ -19,6 +19,8 @@
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
 		A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CE5FC425005BE40045251A /* MiscUnitTests.swift */; };
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
+		B501F76925153CD200C9B22F /* CheckInModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B501F76825153CD200C9B22F /* CheckInModule.m */; };
+		B501F76E25154D0000C9B22F /* CheckInStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501F76D25154D0000C9B22F /* CheckInStatus.swift */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
@@ -224,6 +226,8 @@
 		B2A5822C244CEA8F000F39A6 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B2A5822E244CEA9F000F39A6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B3D0B8224679467D85423742 /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../app/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
+		B501F76825153CD200C9B22F /* CheckInModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckInModule.m; sourceTree = "<group>"; };
+		B501F76D25154D0000C9B22F /* CheckInStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInStatus.swift; sourceTree = "<group>"; };
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B508170524EC7647000C5449 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
@@ -608,6 +612,7 @@
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
 				A575A3F6250B719300AA742C /* DailySummariesConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
+				B501F76D25154D0000C9B22F /* CheckInStatus.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
 			path = Model;
@@ -667,6 +672,7 @@
 				C550A66524B7906F002CA7F2 /* ExposureKeyModule.m */,
 				B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */,
 				B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */,
+				B501F76825153CD200C9B22F /* CheckInModule.m */,
 				B5081E4924D9B8E300121884 /* DeviceInfoModule.m */,
 				B5582D43249943DE001458A9 /* ExposureEventEmitter.m */,
 			);
@@ -990,6 +996,7 @@
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
+				B501F76E25154D0000C9B22F /* CheckInStatus.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
 				A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
@@ -997,6 +1004,7 @@
 				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,
 				B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */,
 				B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */,
+				B501F76925153CD200C9B22F /* CheckInModule.m in Sources */,
 				B5FBB0CF24916A4C00433980 /* DebugAction.swift in Sources */,
 				B5FC37E1248A7EED006474EB /* ExposureConfigurationRequests.swift in Sources */,
 				B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */,
