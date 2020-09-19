@@ -157,8 +157,9 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   recommendations: {
-    display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
+    display: "flex",
     justifyContent: "space-between",
     marginBottom: Spacing.xxxLarge,
   },
