@@ -6,12 +6,13 @@ import RealmSwift
 class CheckInStatus: Object, Codable {
   @objc dynamic var id: String = .default
   @objc dynamic var date: Int = 0
-  var feelingGood: Bool = false
+  var feelingGood: Int = 0
   var symptoms: List<String> = List<String>()
 
   init(date: Int,
-       feelingGood: Bool,
+       feelingGood: Int,
        symptoms: [String]) {
+    self.id = UUID().uuidString
     self.date = date
     self.feelingGood = feelingGood
     let list = List<String>()
@@ -25,11 +26,12 @@ class CheckInStatus: Object, Codable {
   }
 
   override class func primaryKey() -> String? {
-    "date"
+    "id"
   }
 
   var asDictionary : [String: Any] {
     return [
+      "id": id,
       "posixDate": date,
       "feelingGood": feelingGood,
       "symptoms": Array(symptoms)
