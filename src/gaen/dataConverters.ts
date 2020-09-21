@@ -1,6 +1,5 @@
-import dayjs from "dayjs"
-
 import { ExposureDatum } from "../exposure"
+import { DateTimeUtils } from "../utils"
 
 type UUID = string
 type Posix = number
@@ -18,9 +17,8 @@ export const toExposureInfo = (
 }
 
 const toExposureDatum = (r: RawExposure): ExposureDatum => {
-  const beginningOfDay = (date: Posix) => dayjs(date).startOf("day")
   return {
     id: r.id,
-    date: beginningOfDay(r.date).valueOf(),
+    date: DateTimeUtils.beginningOfDay(r.date),
   }
 }

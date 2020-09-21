@@ -10,6 +10,7 @@ import io.realm.RealmConfiguration
 import io.realm.RealmResults
 import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckInStatus
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
@@ -21,7 +22,7 @@ import org.threeten.bp.Duration
  */
 object RealmSecureStorageBte {
 
-    private const val SCHEMA_VERSION: Long = 4
+    private const val SCHEMA_VERSION: Long = 5
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
@@ -136,6 +137,29 @@ object RealmSecureStorageBte {
                     .findFirst()
                     ?.deleteFromRealm()
             }
+        }
+    }
+
+    fun upsertCheckInStatus(checkInStatus: CheckInStatus) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.insertOrUpdate(checkInStatus)
+            }
+        }
+    }
+
+    fun getCheckInStatuses(): List<CheckInStatus> {
+        return getRealmInstance().use {
+            it.copyFromRealm(it.where(CheckInStatus::class.java).findAll())
+        }
+    }
+
+    fun getCheckInStatus(id: String): CheckInStatus? {
+        return getRealmInstance().use {
+            val checkInStatus = it.where(CheckInStatus::class.java)
+                .equalTo("id", id)
+                .findFirst()
+            if (checkInStatus != null) it.copyFromRealm(checkInStatus) else null
         }
     }
 
