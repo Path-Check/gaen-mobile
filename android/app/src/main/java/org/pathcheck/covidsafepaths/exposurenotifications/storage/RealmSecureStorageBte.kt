@@ -154,6 +154,15 @@ object RealmSecureStorageBte {
         }
     }
 
+    fun getCheckInStatus(id: String): CheckInStatus? {
+        return getRealmInstance().use {
+            val checkInStatus = it.where(CheckInStatus::class.java)
+                .equalTo("id", id)
+                .findFirst()
+            if (checkInStatus != null) it.copyFromRealm(checkInStatus) else null
+        }
+    }
+
     @VisibleForTesting
     fun getRealmInstance(): Realm {
         return Realm.getInstance(realmConfig)

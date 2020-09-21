@@ -36,8 +36,9 @@ internal class Migration : RealmMigration {
 
         if (version == 4L) {
             schema.create("CheckInStatus")
-                .addField("posixDate", Long::class.java, FieldAttribute.PRIMARY_KEY)
-                .addField("feeling", Boolean::class.java)
+                .addField("id", String::class.java, FieldAttribute.PRIMARY_KEY)
+                .addField("posixDate", Long::class.java)
+                .addField("feelingGood", Int::class.java)
                 .addRealmListField("symptoms", String::class.java)
         }
     }

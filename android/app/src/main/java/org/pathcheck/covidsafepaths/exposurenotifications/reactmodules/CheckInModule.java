@@ -45,4 +45,10 @@ public class CheckInModule extends ReactContextBaseJavaModule {
     }
     promise.resolve(writableArray);
   }
+
+  @ReactMethod
+  public void getCheckInStatus(String id, Promise promise) {
+    CheckInStatus checkInStatus = RealmSecureStorageBte.INSTANCE.getCheckInStatus(id);
+    promise.resolve(checkInStatus != null ? checkInStatus.toReadableMap() : null);
+  }
 }

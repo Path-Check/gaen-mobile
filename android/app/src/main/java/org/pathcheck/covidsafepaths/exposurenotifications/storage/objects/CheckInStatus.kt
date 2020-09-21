@@ -6,13 +6,15 @@ import com.facebook.react.bridge.WritableNativeMap
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.util.UUID
 import org.threeten.bp.Instant
 
 open class CheckInStatus(
     @PrimaryKey
+    var id: String = UUID.randomUUID().toString(),
     var posixDate: Long = Instant.now().toEpochMilli(),
-    var feelingGood: Boolean = true,
-    var symptoms: RealmList<String> = RealmList(),
+    var feelingGood: Int = 0,
+    var symptoms: RealmList<String> = RealmList()
 ) : RealmObject() {
     companion object {
         fun fromReadableMap(map: ReadableMap): CheckInStatus {
@@ -25,17 +27,18 @@ open class CheckInStatus(
             }
 
             return CheckInStatus(
-                map.getDouble("posixDate").toLong(),
-                map.getBoolean("feelingGood"),
-                symptomsStrings
+                posixDate = map.getDouble("posixDate").toLong(),
+                feelingGood = map.getInt("feelingGood"),
+                symptoms = symptomsStrings
             )
         }
     }
 
     fun toReadableMap(): ReadableMap {
         val map = WritableNativeMap()
+        map.putString("id", id)
         map.putDouble("posixDate", posixDate.toDouble())
-        map.putBoolean("feelingGood", feelingGood)
+        map.putInt("feelingGood", feelingGood)
 
         val array = WritableNativeArray()
         for (symptom in symptoms) {
