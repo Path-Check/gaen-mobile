@@ -2,7 +2,9 @@ import dayjs, { Dayjs } from "dayjs"
 import duration from "dayjs/plugin/duration"
 import localizedFormat from "dayjs/plugin/localizedFormat"
 import relativeTime from "dayjs/plugin/relativeTime"
+import utc from "dayjs/plugin/utc"
 
+dayjs.extend(utc)
 dayjs.extend(relativeTime)
 dayjs.extend(duration)
 dayjs.extend(localizedFormat)
@@ -18,16 +20,16 @@ export const durationToString = (duration: DurationMinutes): string => {
 export const isToday = (date: Posix): boolean => {
   const now = Date.now()
   const beginningOfToday = beginningOfDay(now)
-  const endOfToday = dayjs(now).endOf("day").valueOf()
+  const endOfToday = dayjs.utc(now).endOf("day").valueOf()
   return beginningOfToday <= date && endOfToday >= date
 }
 
 export const daysAgo = (days: number): Posix => {
-  return dayjs(Date.now()).subtract(days, "day").valueOf()
+  return dayjs.utc(Date.now()).subtract(days, "day").valueOf()
 }
 
 export const beginningOfDay = (date: Posix): Posix => {
-  return dayjs(date).startOf("day").valueOf()
+  return dayjs.utc(date).startOf("day").valueOf()
 }
 
 export const isInFuture = (date: Posix): boolean => {
@@ -35,7 +37,7 @@ export const isInFuture = (date: Posix): boolean => {
 }
 
 export const posixToDayjs = (posixDate: Posix): Dayjs | null => {
-  const dayJsDate = dayjs(posixDate)
+  const dayJsDate = dayjs.utc(posixDate)
   return dayJsDate.isValid() ? dayJsDate : null
 }
 
