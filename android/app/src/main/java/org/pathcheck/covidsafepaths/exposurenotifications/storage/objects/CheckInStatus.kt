@@ -26,7 +26,14 @@ open class CheckInStatus(
                 }
             }
 
+            val id: String = if (map.hasKey("id")) {
+                map.getString("id") ?: UUID.randomUUID().toString()
+            } else {
+                UUID.randomUUID().toString()
+            }
+
             return CheckInStatus(
+                id = id,
                 posixDate = map.getDouble("posixDate").toLong(),
                 feelingGood = map.getInt("feelingGood"),
                 symptoms = symptomsStrings
