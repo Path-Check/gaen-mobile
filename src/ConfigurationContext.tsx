@@ -17,6 +17,8 @@ export interface Configuration {
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthoritySupportsAnalytics: boolean
+  healthAuthorityAnalyticsUrl: string | null
+  healthAuthorityAnalyticsSiteId: number | null
   regionCodes: string[]
 }
 
@@ -35,6 +37,8 @@ const initialState = {
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthoritySupportsAnalytics: false,
+  healthAuthorityAnalyticsUrl: null,
+  healthAuthorityAnalyticsSiteId: null,
   regionCodes: [],
 }
 
@@ -55,7 +59,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
-  const healthAuthoritySupportsAnalytics = env.COLLECT_ANALYTICS_DATA === "true"
+  const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
+  const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
+  const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
@@ -80,6 +86,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
         healthAuthorityPrivacyPolicyUrl,
         healthAuthoritySupportsAnalytics,
+        healthAuthorityAnalyticsUrl,
+        healthAuthorityAnalyticsSiteId,
         regionCodes,
       }}
     >

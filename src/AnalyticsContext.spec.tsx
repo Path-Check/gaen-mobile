@@ -4,6 +4,8 @@ import { AnalyticsContext, AnalyticsProvider } from "./AnalyticsContext"
 import { render, waitFor } from "@testing-library/react-native"
 import { actions } from "./analytics"
 import { StorageUtils } from "./utils"
+import { ConfigurationContext } from "./ConfigurationContext"
+import { factories } from "./factories"
 
 const SAMPLE_EVENT = "SAMPLE_EVENT"
 describe("AnalyticsContext", () => {
@@ -49,39 +51,163 @@ describe("AnalyticsContext", () => {
   describe("tracking events", () => {
     afterEach(() => jest.resetAllMocks())
 
-    describe("when a user has consented to analytics", () => {
-      it("tracks the event", async () => {
+    describe("when a health authority supports analytics tracking", () => {
+      describe("and the user has consented to analytics", () => {
+        it("tracks the event", async () => {
+          expect.assertions(1)
+          const configurationContext = factories.configurationContext.build({
+            healthAuthoritySupportsAnalytics: true,
+          })
+          jest
+            .spyOn(StorageUtils, "getAnalyticsConsent")
+            .mockResolvedValueOnce(true)
+          render(
+            <ConfigurationContext.Provider value={configurationContext}>
+              <AnalyticsProvider>
+                <TrackEvent />
+              </AnalyticsProvider>
+            </ConfigurationContext.Provider>,
+          )
+
+          const trackEventSpy = jest.spyOn(actions, "trackEvent")
+
+          await waitFor(() => {
+            expect(trackEventSpy).toHaveBeenCalledWith(SAMPLE_EVENT)
+          })
+        })
+      })
+
+      describe("and the user has not consented to analytics", () => {
+        it("does not track the event", () => {
+          expect.assertions(1)
+          jest
+            .spyOn(StorageUtils, "getAnalyticsConsent")
+            .mockResolvedValue(false)
+
+          render(
+            <AnalyticsProvider>
+              <TrackEvent />
+            </AnalyticsProvider>,
+          )
+          const trackEventSpy = jest.spyOn(actions, "trackEvent")
+
+          expect(trackEventSpy).not.toHaveBeenCalled()
+        })
+      })
+    })
+
+    describe("when a health authority does not support analytics tracking", () => {
+      it("does not tracks the event", async () => {
         expect.assertions(1)
+        const configurationContext = factories.configurationContext.build({
+          healthAuthoritySupportsAnalytics: false,
+        })
         jest
           .spyOn(StorageUtils, "getAnalyticsConsent")
           .mockResolvedValueOnce(true)
         render(
-          <AnalyticsProvider>
-            <TrackEvent />
-          </AnalyticsProvider>,
+          <ConfigurationContext.Provider value={configurationContext}>
+            <AnalyticsProvider>
+              <TrackEvent />
+            </AnalyticsProvider>
+          </ConfigurationContext.Provider>,
         )
 
         const trackEventSpy = jest.spyOn(actions, "trackEvent")
 
         await waitFor(() => {
-          expect(trackEventSpy).toHaveBeenCalledWith(SAMPLE_EVENT)
+          expect(trackEventSpy).not.toHaveBeenCalled()
+        })
+      })
+    })
+  })
+
+  describe("tracking screen views", () => {
+    afterEach(() => jest.resetAllMocks())
+
+    describe("when the health authority supports analytics tracking", () => {
+      describe("and the user has consented to anonymized data sharing", () => {
+        it("tracks the screen view", async () => {
+          expect.assertions(1)
+          const configurationContext = factories.configurationContext.build({
+            healthAuthoritySupportsAnalytics: true,
+            healthAuthorityAnalyticsUrl: "http://example.com",
+            healthAuthorityAnalyticsSiteId: 12,
+          })
+
+          jest
+            .spyOn(StorageUtils, "getAnalyticsConsent")
+            .mockResolvedValueOnce(true)
+          render(
+            <ConfigurationContext.Provider value={configurationContext}>
+              <AnalyticsProvider>
+                <TrackScreenView />
+              </AnalyticsProvider>
+            </ConfigurationContext.Provider>,
+          )
+
+          const trackScreenView = jest.spyOn(actions, "trackScreenView")
+
+          await waitFor(() => {
+            expect(trackScreenView).toHaveBeenCalledWith("Home")
+          })
+        })
+      })
+
+      describe("and the user has not consented to anonymized data sharing", () => {
+        it("does not track the screen view", async () => {
+          expect.assertions(1)
+          const configurationContext = factories.configurationContext.build({
+            healthAuthoritySupportsAnalytics: true,
+            healthAuthorityAnalyticsUrl: "http://example.com",
+            healthAuthorityAnalyticsSiteId: 12,
+          })
+
+          jest
+            .spyOn(StorageUtils, "getAnalyticsConsent")
+            .mockResolvedValueOnce(false)
+          render(
+            <ConfigurationContext.Provider value={configurationContext}>
+              <AnalyticsProvider>
+                <TrackScreenView />
+              </AnalyticsProvider>
+            </ConfigurationContext.Provider>,
+          )
+
+          const trackScreenView = jest.spyOn(actions, "trackScreenView")
+
+          await waitFor(() => {
+            expect(trackScreenView).not.toHaveBeenCalled()
+          })
         })
       })
     })
 
-    describe("when a user has not consented to analytics", () => {
-      it("does not track the event", () => {
+    describe("when the health authority does not support analytics tracking", () => {
+      it("does not track the screen view", async () => {
         expect.assertions(1)
-        jest.spyOn(StorageUtils, "getAnalyticsConsent").mockResolvedValue(false)
+        const configurationContext = factories.configurationContext.build({
+          healthAuthoritySupportsAnalytics: false,
+          healthAuthorityAnalyticsUrl: null,
+          healthAuthorityAnalyticsSiteId: null,
+        })
 
+        jest
+          .spyOn(StorageUtils, "getAnalyticsConsent")
+          .mockResolvedValueOnce(false)
         render(
-          <AnalyticsProvider>
-            <TrackEvent />
-          </AnalyticsProvider>,
+          <ConfigurationContext.Provider value={configurationContext}>
+            <AnalyticsProvider>
+              <TrackScreenView />
+            </AnalyticsProvider>
+          </ConfigurationContext.Provider>,
         )
-        const trackEventSpy = jest.spyOn(actions, "trackEvent")
 
-        expect(trackEventSpy).not.toHaveBeenCalled()
+        const trackScreenView = jest.spyOn(actions, "trackScreenView")
+
+        await waitFor(() => {
+          expect(trackScreenView).not.toHaveBeenCalled()
+        })
       })
     })
   })
@@ -107,6 +233,15 @@ const TrackEvent: FunctionComponent = () => {
 
   useEffect(() => {
     context.trackEvent(SAMPLE_EVENT)
+  }, [context])
+  return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
+}
+
+const TrackScreenView: FunctionComponent = () => {
+  const context = useContext(AnalyticsContext)
+
+  useEffect(() => {
+    context.trackScreenView("Home")
   }, [context])
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }

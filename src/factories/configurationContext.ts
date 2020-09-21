@@ -16,5 +16,7 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityPrivacyPolicyUrl: "authorityPrivacyPolicyUrl",
   healthAuthorityLegalPrivacyPolicyUrl: "authorityLegalPrivacyPolicyUrl",
   healthAuthoritySupportsAnalytics: false,
+  healthAuthorityAnalyticsUrl: null,
+  healthAuthorityAnalyticsSiteId: null,
   regionCodes: ["REGION"],
 }))
