@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-dayjs.extend(relativeTime)
 
 import { GlobalText } from "../../components"
 import { DateTimeUtils } from "../../utils"
