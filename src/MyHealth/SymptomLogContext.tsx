@@ -6,28 +6,56 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomLogEntry, HealthAssessment } from "./symptoms"
+import {
+  SymptomLogEntry,
+  DailyCheckIn,
+  CheckInStatus,
+  DayLogData,
+  serializeDailyLogData,
+} from "./symptoms"
 
 const fetchLogEntries = (): Promise<SymptomLogEntry[]> => {
   return Promise.resolve([
     {
-      id: 1,
-      symptoms: [],
-      healthAssessment: HealthAssessment.NotAtRisk,
-      date: new Date().getTime() / 1000,
+      id: "1",
+      symptoms: ["Loss of Breath"],
+      date: 1600614626042,
+    },
+    {
+      id: "2",
+      symptoms: ["Cough", "Fever"],
+      date: 1600610400000,
+    },
+    {
+      id: "3",
+      symptoms: ["Fever"],
+      date: 1599919200000,
+    },
+  ])
+}
+
+const fetchDailyCheckIns = (): Promise<DailyCheckIn[]> => {
+  return Promise.resolve([
+    {
+      date: 1600804626042,
+      status: CheckInStatus.FeelingGood,
+    },
+    {
+      date: 1599919200000,
+      status: CheckInStatus.FeelingNotWell,
     },
   ])
 }
 
 export type SymptomLogState = {
-  logEntries: SymptomLogEntry[]
+  dailyLogData: DayLogData[]
   addLogEntry: (entry: SymptomLogEntry) => Promise<void>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<void>
   deleteLogEntry: (entry: SymptomLogEntry) => Promise<void>
 }
 
 const initialState = {
-  logEntries: [],
+  dailyLogData: [],
   addLogEntry: (_entry: SymptomLogEntry) => {
     return Promise.resolve()
   },
@@ -42,12 +70,21 @@ const initialState = {
 export const SymptomLogContext = createContext<SymptomLogState>(initialState)
 
 export const SymptomLogProvider: FunctionComponent = ({ children }) => {
+  const [dailyLogData, setDailyLogData] = useState<DayLogData[]>([])
   const [logEntries, setLogEntries] = useState<SymptomLogEntry[]>([])
+  const [dailyCheckIns, setDailyCheckIns] = useState<DailyCheckIn[]>([])
   useEffect(() => {
     fetchLogEntries().then((entries) => {
       setLogEntries(entries)
     })
+    fetchDailyCheckIns().then((checkIns) => {
+      setDailyCheckIns(checkIns)
+    })
   }, [])
+
+  useEffect(() => {
+    setDailyLogData(serializeDailyLogData(logEntries, dailyCheckIns))
+  }, [dailyCheckIns, logEntries])
 
   const addLogEntry = async (newEntry: SymptomLogEntry) => {
     const newLogEntries = [...logEntries, newEntry]
@@ -71,7 +108,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   return (
     <SymptomLogContext.Provider
       value={{
-        logEntries,
+        dailyLogData,
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,
