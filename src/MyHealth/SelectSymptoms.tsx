@@ -54,7 +54,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         message: t("symptom_checker.success_message"),
         ...Affordances.successFlashMessageOptions,
       })
-      navigation.navigate(SymptomCheckerStackScreens.AtRiskRecommendation)
+      navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
     } else {
       navigation.goBack()
     }
