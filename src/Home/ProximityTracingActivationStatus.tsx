@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Alert } from "react-native"
+import { Alert, Platform } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
@@ -20,12 +20,19 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
 
   const { status } = exposureNotifications
 
-  const isNotAuthorized = status === ENPermissionStatus.NOT_AUTHORIZED
-
   const showNotAuthorizedAlert = () => {
+    const errorMessage = Platform.select({
+      ios: t("home.proximity_tracing.unauthorized_error_message_ios", {
+        applicationName,
+      }),
+      android: t("home.proximity_tracing.unauthorized_error_message_android", {
+        applicationName,
+      }),
+    })
+
     Alert.alert(
-      t("home.bluetooth.unauthorized_error_title"),
-      t("home.bluetooth.unauthorized_error_message", { applicationName }),
+      t("home.proximity_tracing.unauthorized_error_title"),
+      errorMessage,
       [
         {
           text: t("common.back"),
@@ -39,9 +46,14 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
     )
   }
 
-  const handleOnPressFix = () => {
-    exposureNotifications.request()
-    if (isNotAuthorized) {
+  const handleOnPressFix = async () => {
+    try {
+      await exposureNotifications.request()
+
+      if (status !== ENPermissionStatus.ENABLED) {
+        showNotAuthorizedAlert()
+      }
+    } catch {
       showNotAuthorizedAlert()
     }
   }

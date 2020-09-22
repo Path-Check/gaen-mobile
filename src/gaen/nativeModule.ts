@@ -62,7 +62,14 @@ const toStatus = (data: string[]): RawENPermissionStatus => {
 const permissionsModule = NativeModules.ENPermissionsModule
 
 export const requestAuthorization = async (): Promise<void> => {
-  return permissionsModule.requestExposureNotificationAuthorization()
+  return permissionsModule
+    .requestExposureNotificationAuthorization()
+    .catch((error: string) => {
+      Logger.error("Failed to request ExposureNotification API Authorization", {
+        error,
+      })
+      throw new Error(error)
+    })
 }
 
 export const getCurrentENPermissionsStatus = async (
