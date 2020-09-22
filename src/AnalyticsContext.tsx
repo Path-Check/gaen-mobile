@@ -13,19 +13,25 @@ import { useConfigurationContext } from "./ConfigurationContext"
 export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
   updateUserConsent: (consent: boolean) => Promise<void>
+} & AnalyticsConfiguration
+
+type AnalyticsConfiguration = {
   trackEvent: (event: string) => Promise<string | boolean>
   trackScreenView: (screen: string) => Promise<void>
 }
 
-const initialState: AnalyticsContextState = {
-  userConsentedToAnalytics: false,
-  updateUserConsent: () => Promise.resolve(),
-  trackEvent: actions.trackEvent,
-  trackScreenView: actions.trackScreenView,
+const initialAnalyticsConfiguration = {
+  trackEvent: () => Promise.resolve(""),
+  trackScreenView: () => Promise.resolve(),
 }
 
-const AnalyticsContext = createContext<AnalyticsContextState>(initialState)
+const initialContext = {
+  userConsentedToAnalytics: false,
+  updateUserConsent: () => Promise.resolve(),
+  ...initialAnalyticsConfiguration,
+}
 
+const AnalyticsContext = createContext<AnalyticsContextState>(initialContext)
 const AnalyticsProvider: FunctionComponent = ({ children }) => {
   const {
     healthAuthoritySupportsAnalytics,
@@ -35,8 +41,10 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
   const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
     boolean
   >(false)
-  const supportAnalyticsTracking =
-    healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+
+  const [analyticsConfiguration, setAnalyticsConfiguration] = useState<
+    AnalyticsConfiguration
+  >(initialAnalyticsConfiguration)
 
   useEffect(() => {
     const checkAnalyticsConsent = async () => {
@@ -48,13 +56,30 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
   }, [userConsentedToAnalytics])
 
   useEffect(() => {
-    supportAnalyticsTracking &&
+    const supportAnalyticsTracking =
+      healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+
+    const initializeAnalyticsTracking = () => {
       Matomo.initTracker(
         healthAuthorityAnalyticsUrl,
         healthAuthorityAnalyticsSiteId,
       )
+    }
+    const trackEvent = async (event: string) => {
+      return actions.trackEvent(event)
+    }
+
+    const trackScreenView = async (screen: string) => {
+      actions.trackScreenView(screen)
+    }
+
+    if (supportAnalyticsTracking) {
+      initializeAnalyticsTracking()
+      setAnalyticsConfiguration({ trackEvent, trackScreenView })
+    }
   }, [
-    supportAnalyticsTracking,
+    healthAuthoritySupportsAnalytics,
+    userConsentedToAnalytics,
     healthAuthorityAnalyticsSiteId,
     healthAuthorityAnalyticsUrl,
   ])
@@ -64,21 +89,12 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
     setUserConsentedToAnalytics(consent)
   }
 
-  const trackEvent = async (event: string) => {
-    return supportAnalyticsTracking && actions.trackEvent(event)
-  }
-
-  const trackScreenView = async (screen: string) => {
-    supportAnalyticsTracking && actions.trackScreenView(screen)
-  }
-
   return (
     <AnalyticsContext.Provider
       value={{
         userConsentedToAnalytics,
         updateUserConsent,
-        trackEvent,
-        trackScreenView,
+        ...analyticsConfiguration,
       }}
     >
       {children}

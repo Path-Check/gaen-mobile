@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useRef } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
@@ -41,8 +41,8 @@ const linking = {
 const MainNavigator: FunctionComponent = () => {
   const { isOnboardingComplete } = useOnboardingContext()
   const { trackScreenView } = useAnalyticsContext()
-  const navigationRef = React.useRef<NavigationContainerRef>(null)
-  const routeNameRef = React.useRef<string>()
+  const navigationRef = useRef<NavigationContainerRef>(null)
+  const routeNameRef = useRef<string>()
 
   const setInitialRoute = () => {
     routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name
