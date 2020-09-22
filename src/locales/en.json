@@ -318,6 +318,14 @@
     "symptoms": "Symptoms",
     "what_symptoms": "What symptoms are you experiencing?"
   },
+  "my_health": {
+    "today": "Today",
+    "over_time": "Over Time",
+    "symptom_log": {
+      "feeling_well": "You were feeling well",
+      "feeling_not_well": "You were not feeling well"
+    }
+  },
   "symptoms": {
     "body_aches": "Body aches",
     "chest_pain_or_pressure": "Chest pain or pressure",

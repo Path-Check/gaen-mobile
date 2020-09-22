@@ -12,9 +12,9 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText, Button } from "../components"
-import { useSymptomCheckerContext } from "./SymptomCheckerContext"
+import { useMyHealthContext } from "./MyHealthContext"
 import { HealthAssessment } from "./symptoms"
-import { SymptomCheckerStackScreens } from "../navigation"
+import { MyHealthStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -26,10 +26,10 @@ enum CheckInStatus {
   FeelingNotWell,
 }
 
-const CheckIn: FunctionComponent = () => {
+const Today: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { symptoms, healthAssessment } = useSymptomCheckerContext()
+  const { symptoms, healthAssessment } = useMyHealthContext()
 
   const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
     CheckInStatus.NotCheckedIn,
@@ -46,7 +46,7 @@ const CheckIn: FunctionComponent = () => {
   }
 
   const handleOnPressNotWell = () => {
-    navigation.navigate(SymptomCheckerStackScreens.SelectSymptoms)
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
   }
 
   const determineStatusContent = () => {
@@ -77,9 +77,6 @@ const CheckIn: FunctionComponent = () => {
 
   return (
     <>
-      <GlobalText style={style.headerText}>
-        {t("symptom_checker.my_health")}
-      </GlobalText>
       <View style={style.checkInContainer}>
         <SvgXml
           xml={Icons.CheckInBrokenCircle}
@@ -233,11 +230,6 @@ const FeelingButton: FunctionComponent<FeelingButtonProps> = ({
 
 const feelingButtonHeight = 120
 const style = StyleSheet.create({
-  headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
-    marginBottom: Spacing.xLarge,
-  },
   checkInContainer: {
     ...Outlines.lightShadow,
     backgroundColor: Colors.primaryLightBackground,
@@ -326,4 +318,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default CheckIn
+export default Today

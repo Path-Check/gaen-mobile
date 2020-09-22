@@ -7,19 +7,19 @@ import {
   HealthAssessment,
 } from "./symptoms"
 
-type SymptomCheckerContextState = {
+export type MyHealthContextState = {
   symptoms: Symptom[]
   updateSymptoms: (newSymptoms: Symptom[]) => void
   healthAssessment: HealthAssessment
 }
 
-export const SymptomCheckerContext = createContext<SymptomCheckerContextState>({
+export const MyHealthContext = createContext<MyHealthContextState>({
   symptoms: [],
   updateSymptoms: () => {},
   healthAssessment: HealthAssessment.NotAtRisk,
 })
 
-const SymptomCheckerProvider: FunctionComponent = ({ children }) => {
+export const MyHealthProvider: FunctionComponent = ({ children }) => {
   const [symptoms, setSymptoms] = useState<Symptom[]>([])
   const [healthAssessment, setHealthAssessment] = useState<HealthAssessment>(
     HealthAssessment.NotAtRisk,
@@ -34,20 +34,18 @@ const SymptomCheckerProvider: FunctionComponent = ({ children }) => {
   }, [setHealthAssessment, symptoms])
 
   return (
-    <SymptomCheckerContext.Provider
+    <MyHealthContext.Provider
       value={{ symptoms, updateSymptoms, healthAssessment }}
     >
       {children}
-    </SymptomCheckerContext.Provider>
+    </MyHealthContext.Provider>
   )
 }
 
-const useSymptomCheckerContext = (): SymptomCheckerContextState => {
-  const context = useContext(SymptomCheckerContext)
+export const useMyHealthContext = (): MyHealthContextState => {
+  const context = useContext(MyHealthContext)
   if (context === undefined) {
-    throw new Error("SymptomCheckerContext must be used with a provider")
+    throw new Error("MyHealthContext must be used with a provider")
   }
   return context
 }
-
-export { SymptomCheckerProvider, useSymptomCheckerContext }

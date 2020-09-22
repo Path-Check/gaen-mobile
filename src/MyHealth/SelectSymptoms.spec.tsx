@@ -4,9 +4,9 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import SelectSymptomsScreen from "./SelectSymptoms"
-import { SymptomCheckerContext } from "./SymptomCheckerContext"
+import { MyHealthContext } from "./MyHealthContext"
 import { HealthAssessment } from "./symptoms"
-import { SymptomCheckerStackScreens } from "../navigation"
+import { MyHealthStackScreens } from "../navigation"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
@@ -19,7 +19,7 @@ describe("SelectSymptomsScreen", () => {
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
 
     const { getByLabelText } = render(
-      <SymptomCheckerContext.Provider
+      <MyHealthContext.Provider
         value={{
           updateSymptoms: updateSymptomsSpy,
           symptoms: [],
@@ -27,7 +27,7 @@ describe("SelectSymptomsScreen", () => {
         }}
       >
         <SelectSymptomsScreen />
-      </SymptomCheckerContext.Provider>,
+      </MyHealthContext.Provider>,
     )
 
     fireEvent.press(getByLabelText("Cough"))
@@ -40,7 +40,7 @@ describe("SelectSymptomsScreen", () => {
         }),
       )
       expect(navigateSpy).toHaveBeenCalledWith(
-        SymptomCheckerStackScreens.AtRiskRecommendation,
+        MyHealthStackScreens.AtRiskRecommendation,
       )
     })
   })
