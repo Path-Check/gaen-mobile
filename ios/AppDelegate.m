@@ -134,5 +134,16 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
   return [RCTLinkingManager application:application openURL:url options:options];
 }
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)(void))completionHandler
+{
+  NSString *urlString = response.notification.request.content.userInfo[@"url"];
+  if (urlString != nil) {
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    NSDictionary *options = [[NSDictionary alloc] init];
+    [RCTLinkingManager application:[UIApplication sharedApplication] openURL:url options:options];
+  }
+}
 
 @end
