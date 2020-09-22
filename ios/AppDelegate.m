@@ -18,6 +18,7 @@
 #import <BT-Swift.h>
 #import <Bugsnag/Bugsnag.h>
 #import "ReactNativeConfig.h"
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -125,6 +126,24 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
 {
   completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
+}
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)(void))completionHandler
+{
+  NSString *urlString = response.notification.request.content.userInfo[@"url"];
+  if (urlString != nil) {
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    NSDictionary *options = [[NSDictionary alloc] init];
+    [RCTLinkingManager application:[UIApplication sharedApplication] openURL:url options:options];
+  }
 }
 
 @end

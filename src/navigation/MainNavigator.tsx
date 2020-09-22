@@ -27,11 +27,18 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
+const linking = {
+  prefixes: ["pathcheck://"],
+  config: {
+    ExposureHistoryFlow: "exposureHistory",
+  },
+}
+
 const MainNavigator: FunctionComponent = () => {
   const { isOnboardingComplete } = useOnboardingContext()
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Stack.Navigator>
         {isOnboardingComplete ? (
           <>

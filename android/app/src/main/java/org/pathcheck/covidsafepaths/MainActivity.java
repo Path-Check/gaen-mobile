@@ -13,9 +13,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 
 public class MainActivity extends ReactActivity {
 
-  public static final String ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION =
-      "org.pathcheck.covidsafepaths.ACTION_LAUNCH_FROM_EXPOSURE_NOTIFICATION";
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this, R.style.SplashTheme);

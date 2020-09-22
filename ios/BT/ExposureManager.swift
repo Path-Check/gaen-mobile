@@ -641,6 +641,7 @@ extension ExposureManager {
     content.title = String.newExposureNotificationTitle.localized
     content.body = String.newExposureNotificationBody.localized
     content.sound = .default
+    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
     let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
                                         content: content,
                                         trigger: nil)
