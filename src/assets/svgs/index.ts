@@ -35,7 +35,6 @@ import QuestionMark from "./questionMark"
 import QuestionMarkInCircle from "./questionMarkInCircle"
 import RadioWave from "./radioWave"
 import RestartWithCheck from "./restartWithCheck"
-import SelfAssessment from "./selfAssessment"
 import Share from "./share"
 import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
@@ -84,7 +83,6 @@ export const Icons = {
   QuestionMarkInCircle,
   RadioWave,
   RestartWithCheck,
-  SelfAssessment,
   Share,
   SixFeet,
   StateNoContact,

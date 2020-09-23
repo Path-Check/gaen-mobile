@@ -138,14 +138,6 @@ export const SettingsScreens: {
   AnonymizedDataConsent: "AnonymizedDataConsent",
 }
 
-export type SelfAssessmentScreen = "SelfAssessment"
-
-export const SelfAssessmentScreens: {
-  [key in SelfAssessmentScreen]: SelfAssessmentScreen
-} = {
-  SelfAssessment: "SelfAssessment",
-}
-
 export type AffectedUserFlowScreen =
   | "AffectedUserStart"
   | "AffectedUserCodeInput"
