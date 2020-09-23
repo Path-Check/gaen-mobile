@@ -6,6 +6,7 @@ import { CheckInStatus } from "./symptoms"
 
 import OverTime from "./OverTime"
 import { factories } from "../factories"
+import { posixToDayjs } from "../utils/dateTime"
 
 jest.mock("@react-navigation/native")
 
@@ -43,12 +44,12 @@ describe("OverTime", () => {
   describe("when the user has log data with no checkIn entries", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "2020-09-21"
-      const firstTimeString = "10:00"
-      const firstLogEntryPosix = Date.parse(`${dateString} ${firstTimeString}`)
-      const secondTimeString = "12:00"
-      const secondLogEntryPosix = Date.parse(
-        `${dateString} ${secondTimeString}`,
-      )
+      const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
+      const firstTimeString =
+        posixToDayjs(firstLogEntryPosix)?.format("HH:mm") || "not a date"
+      const secondLogEntryPosix = Date.parse(`${dateString} 12:00`)
+      const secondTimeString =
+        posixToDayjs(secondLogEntryPosix)?.format("HH:mm") || "not a date"
       const coughSymptom = "cough"
       const lossOfSmellSymptom = "loss_of_smell"
       const { getByText, queryByText } = render(

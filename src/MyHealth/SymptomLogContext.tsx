@@ -8,50 +8,20 @@ import React, {
 
 import {
   SymptomLogEntry,
-  DailyCheckIn,
+  CheckIn,
   CheckInStatus,
   DayLogData,
-  serializeDailyLogData,
+  combineSymptomAndCheckInLogs,
 } from "./symptoms"
-
-const fetchLogEntries = (): Promise<SymptomLogEntry[]> => {
-  return Promise.resolve([
-    {
-      id: "1",
-      symptoms: ["Loss of Breath"],
-      date: 1600614626042,
-    },
-    {
-      id: "2",
-      symptoms: ["Cough", "Fever"],
-      date: 1600610400000,
-    },
-    {
-      id: "3",
-      symptoms: ["Fever"],
-      date: 1599919200000,
-    },
-  ])
-}
-
-const fetchDailyCheckIns = (): Promise<DailyCheckIn[]> => {
-  return Promise.resolve([
-    {
-      date: 1600804626042,
-      status: CheckInStatus.FeelingGood,
-    },
-    {
-      date: 1599919200000,
-      status: CheckInStatus.FeelingNotWell,
-    },
-  ])
-}
+import { getLogEntries, getCheckIns, addCheckIn } from "../gaen/nativeModule"
+import { isToday } from "../utils/dateTime"
 
 export type SymptomLogState = {
   dailyLogData: DayLogData[]
   addLogEntry: (entry: SymptomLogEntry) => Promise<void>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<void>
-  deleteLogEntry: (entry: SymptomLogEntry) => Promise<void>
+  todaysCheckIn: CheckIn
+  addTodaysCheckIn: (status: CheckInStatus) => Promise<void>
 }
 
 const initialState = {
@@ -62,7 +32,8 @@ const initialState = {
   updateLogEntry: (_entry: SymptomLogEntry) => {
     return Promise.resolve()
   },
-  deleteLogEntry: (_entry: SymptomLogEntry) => {
+  todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
+  addTodaysCheckIn: (_status: CheckInStatus) => {
     return Promise.resolve()
   },
 }
@@ -72,19 +43,31 @@ export const SymptomLogContext = createContext<SymptomLogState>(initialState)
 export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   const [dailyLogData, setDailyLogData] = useState<DayLogData[]>([])
   const [logEntries, setLogEntries] = useState<SymptomLogEntry[]>([])
-  const [dailyCheckIns, setDailyCheckIns] = useState<DailyCheckIn[]>([])
+  const [checkIns, setCheckIns] = useState<CheckIn[]>([])
+  const [todaysCheckIn, setTodaysCheckIn] = useState<CheckIn>(
+    initialState.todaysCheckIn,
+  )
+
+  const detectTodaysCheckIn = (rawCheckIns: CheckIn[]) => {
+    const checkInAddedToday = rawCheckIns.find(({ date }) => {
+      return isToday(date)
+    })
+    checkInAddedToday && setTodaysCheckIn(checkInAddedToday)
+  }
+
   useEffect(() => {
-    fetchLogEntries().then((entries) => {
+    getLogEntries().then((entries) => {
       setLogEntries(entries)
     })
-    fetchDailyCheckIns().then((checkIns) => {
-      setDailyCheckIns(checkIns)
+    getCheckIns().then((checkIns) => {
+      setCheckIns(checkIns)
+      detectTodaysCheckIn(checkIns)
     })
   }, [])
 
   useEffect(() => {
-    setDailyLogData(serializeDailyLogData(logEntries, dailyCheckIns))
-  }, [dailyCheckIns, logEntries])
+    setDailyLogData(combineSymptomAndCheckInLogs(logEntries, checkIns))
+  }, [checkIns, logEntries])
 
   const addLogEntry = async (newEntry: SymptomLogEntry) => {
     const newLogEntries = [...logEntries, newEntry]
@@ -98,20 +81,23 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     setLogEntries([...entriesWithoutTheUpdatedLog, updatedLogEntry])
   }
 
-  const deleteLogEntry = async (deletedLogEntry: SymptomLogEntry) => {
-    const entriesWithoutTheDeletedLog = logEntries.filter((entry) => {
-      return entry.id !== deletedLogEntry.id
+  const addTodaysCheckIn = async (status: CheckInStatus) => {
+    const newCheckIn = { date: Date.now(), status }
+    await addCheckIn(newCheckIn)
+    setTodaysCheckIn(newCheckIn)
+    getCheckIns().then((checkIns) => {
+      setCheckIns(checkIns)
     })
-    setLogEntries(entriesWithoutTheDeletedLog)
   }
 
   return (
     <SymptomLogContext.Provider
       value={{
+        addTodaysCheckIn,
+        todaysCheckIn,
         dailyLogData,
         addLogEntry,
         updateLogEntry,
-        deleteLogEntry,
       }}
     >
       {children}

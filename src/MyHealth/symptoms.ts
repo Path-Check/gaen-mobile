@@ -14,12 +14,11 @@ export enum CheckInStatus {
 }
 
 // Raw Daily Checkin
-export type DailyCheckIn = {
+export type CheckIn = {
   date: Posix
   status: CheckInStatus
 }
 
-// Raw Log Entry
 export type SymptomLogEntry = {
   id: string
   date: Posix
@@ -27,7 +26,7 @@ export type SymptomLogEntry = {
 }
 
 type LogData = {
-  checkIn: DailyCheckIn | null
+  checkIn: CheckIn | null
   logEntries: SymptomLogEntry[]
 }
 
@@ -60,7 +59,7 @@ const compareDatesDescending = (
   return dateLeft < dateRight ? 1 : -1
 }
 
-const groupLogEntriesDaily = (allEntries: SymptomLogEntry[]): LogDataByDay => {
+const groupLogEntriesByDay = (allEntries: SymptomLogEntry[]): LogDataByDay => {
   const groupedEntries: LogDataByDay = {}
 
   allEntries.forEach((entry) => {
@@ -83,35 +82,32 @@ const groupLogEntriesDaily = (allEntries: SymptomLogEntry[]): LogDataByDay => {
   return groupedEntries
 }
 
-const joinLogDataAndDailyCheckIns = (
-  logData: LogDataByDay,
-  dailyCheckIns: DailyCheckIn[],
+const joinLogDataAndCheckIns = (
+  logDataByDay: LogDataByDay,
+  checkIns: CheckIn[],
 ): LogDataByDay => {
-  dailyCheckIns.forEach((checkIn) => {
+  checkIns.forEach((checkIn) => {
     const { date } = checkIn
     const checkInBeginningOfDay = beginningOfDay(date)
 
-    if (logData[checkInBeginningOfDay]) {
-      logData[checkInBeginningOfDay].checkIn = checkIn
+    if (logDataByDay[checkInBeginningOfDay]) {
+      logDataByDay[checkInBeginningOfDay].checkIn = checkIn
     } else {
-      logData[checkInBeginningOfDay] = {
+      logDataByDay[checkInBeginningOfDay] = {
         logEntries: [],
         checkIn,
       }
     }
   })
-  return logData
+  return logDataByDay
 }
 
-export const serializeDailyLogData = (
+export const combineSymptomAndCheckInLogs = (
   symptomLogEntries: SymptomLogEntry[],
-  dailyCheckIns: DailyCheckIn[],
+  checkIns: CheckIn[],
 ): DayLogData[] => {
-  const symptomEntriesLogData = groupLogEntriesDaily(symptomLogEntries)
-  const dailyLogData = joinLogDataAndDailyCheckIns(
-    symptomEntriesLogData,
-    dailyCheckIns,
-  )
+  const symptomEntriesLogData = groupLogEntriesByDay(symptomLogEntries)
+  const dailyLogData = joinLogDataAndCheckIns(symptomEntriesLogData, checkIns)
 
   return Object.keys(dailyLogData)
     .map((date: string) => {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import {
   TouchableOpacity,
   View,
@@ -12,40 +12,28 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { GlobalText, Button } from "../components"
-import { useMyHealthContext } from "./MyHealthContext"
-import { HealthAssessment } from "./symptoms"
+import { CheckInStatus } from "./symptoms"
 import { MyHealthStackScreens } from "../navigation"
 
 import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 import { useConfigurationContext } from "../ConfigurationContext"
-
-enum CheckInStatus {
-  NotCheckedIn,
-  FeelingGood,
-  FeelingNotWell,
-}
+import { useSymptomLogContext } from "./SymptomLogContext"
 
 const Today: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { symptoms, healthAssessment } = useMyHealthContext()
-
-  const [checkInStatus, setCheckInStatus] = useState<CheckInStatus>(
-    CheckInStatus.NotCheckedIn,
-  )
-
-  useEffect(() => {
-    if (symptoms.length > 0) {
-      setCheckInStatus(CheckInStatus.FeelingNotWell)
-    }
-  }, [symptoms])
+  const {
+    todaysCheckIn: { status: checkInStatus },
+    addTodaysCheckIn,
+  } = useSymptomLogContext()
 
   const handleOnPressGood = () => {
-    setCheckInStatus(CheckInStatus.FeelingGood)
+    addTodaysCheckIn(CheckInStatus.FeelingGood)
   }
 
   const handleOnPressNotWell = () => {
+    addTodaysCheckIn(CheckInStatus.FeelingNotWell)
     navigation.navigate(MyHealthStackScreens.SelectSymptoms)
   }
 
@@ -61,12 +49,7 @@ const Today: FunctionComponent = () => {
       case CheckInStatus.FeelingGood:
         return <FeelingGoodContent />
       case CheckInStatus.FeelingNotWell:
-        return (
-          <FeelingNotWellContent
-            symptoms={symptoms}
-            healthAssessment={healthAssessment}
-          />
-        )
+        return <FeelingNotWellContent />
     }
   }
 
@@ -137,15 +120,7 @@ const FeelingGoodContent: FunctionComponent = () => {
   )
 }
 
-interface FeelingNotWellContentProps {
-  symptoms: string[]
-  healthAssessment: HealthAssessment
-}
-
-const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
-  symptoms,
-  healthAssessment,
-}) => {
+const FeelingNotWellContent: FunctionComponent = () => {
   const { t } = useTranslation()
   const { findATestCenterUrl } = useConfigurationContext()
 
@@ -155,30 +130,14 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
     }
   }
 
-  const determineHealthAssessmentText = () => {
-    switch (healthAssessment) {
-      case HealthAssessment.AtRisk:
-        return (
-          <View style={style.healthAssessmentContainer}>
-            <GlobalText style={style.healthAssessmentText}>
-              {t("symptom_checker.sorry_not_feeling_well")}
-            </GlobalText>
-            <GlobalText style={style.healthAssessmentText}>
-              {t("symptom_checker.get_tested")}
-            </GlobalText>
-          </View>
-        )
-      case HealthAssessment.NotAtRisk:
-        return t("symptom_checker.follow_ha_guidance")
-    }
-  }
-
   return (
     <>
       <GlobalText style={style.checkInHeaderText}>
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
-      {determineHealthAssessmentText()}
+      <GlobalText style={style.healthAssessmentText}>
+        {t("symptom_checker.sorry_not_feeling_well")}
+      </GlobalText>
       {findATestCenterUrl && (
         <Button
           label={t("symptom_checker.find_a_test_center")}
@@ -188,18 +147,6 @@ const FeelingNotWellContent: FunctionComponent<FeelingNotWellContentProps> = ({
           hasRightArrow
         />
       )}
-      <GlobalText style={style.sectionLabel}>
-        {t("symptom_checker.symptoms")}
-      </GlobalText>
-      <View style={style.symptomsContainer}>
-        {symptoms.map((value) => {
-          return (
-            <View style={style.symptomContainer} key={value}>
-              <GlobalText style={style.symptomText}>{value}</GlobalText>
-            </View>
-          )
-        })}
-      </View>
     </>
   )
 }
@@ -277,9 +224,6 @@ const style = StyleSheet.create({
     height: Iconography.small,
     marginBottom: Spacing.xxSmall,
   },
-  healthAssessmentContainer: {
-    marginBottom: Spacing.xSmall,
-  },
   healthAssessmentText: {
     ...Typography.header5,
     ...Typography.base,
@@ -295,26 +239,6 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xSmall + 1,
     marginBottom: Spacing.medium,
-  },
-  sectionLabel: {
-    ...Typography.body2,
-    marginBottom: Spacing.xSmall,
-  },
-  symptomsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  symptomContainer: {
-    backgroundColor: Colors.neutral10,
-    borderRadius: Outlines.borderRadiusLarge,
-    paddingVertical: Spacing.xxxSmall,
-    paddingHorizontal: Spacing.small,
-    marginRight: Spacing.xxSmall,
-    marginBottom: Spacing.xxSmall,
-  },
-  symptomText: {
-    ...Typography.body2,
-    color: Colors.primaryText,
   },
 })
 

@@ -41,13 +41,11 @@ const LogEntry: FunctionComponent<LogEntryProps> = ({
   return <SymptomsList symptoms={symptoms} timestamp={date} />
 }
 
-type DailyCheckInSummaryProps = {
+type CheckInSummaryProps = {
   status: CheckInStatus
 }
 
-const DailyCheckInSummary: FunctionComponent<DailyCheckInSummaryProps> = ({
-  status,
-}) => {
+const CheckInSummary: FunctionComponent<CheckInSummaryProps> = ({ status }) => {
   const { t } = useTranslation()
   const reportedStatusText =
     status === CheckInStatus.FeelingNotWell
@@ -68,7 +66,7 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
   return (
     <>
       {dayJsDate && <GlobalText>{dayJsDate.format("YYYY-MM-DD")}</GlobalText>}
-      {checkIn && <DailyCheckInSummary status={checkIn.status} />}
+      {checkIn && <CheckInSummary status={checkIn.status} />}
       {logEntries.map((logEntry) => {
         return <LogEntry key={logEntry.id} logEntry={logEntry} />
       })}
