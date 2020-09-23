@@ -2,7 +2,7 @@ import React from "react"
 import { render } from "@testing-library/react-native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
-import { HealthAssessment } from "./symptoms"
+import { CheckInStatus } from "./symptoms"
 
 import OverTime from "./OverTime"
 import { factories } from "../factories"
@@ -10,17 +10,22 @@ import { factories } from "../factories"
 jest.mock("@react-navigation/native")
 
 describe("OverTime", () => {
-  describe("when the user has a not at risk log entry", () => {
-    it("shows a 'feeling well' message", () => {
-      const { getByText } = render(
+  describe("when the user has log entries with only a checkIn", () => {
+    it("shows the correct message, and a date", () => {
+      const dateString = "2020-09-21"
+      const timeString = "10:00"
+      const logEntryPosix = Date.parse(`${dateString} ${timeString}`)
+      const { getByText, queryByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
-            logEntries: [
+            dailyLogData: [
               {
-                id: 1,
-                symptoms: [],
-                healthAssessment: HealthAssessment.NotAtRisk,
-                date: new Date().getTime() / 1000,
+                date: logEntryPosix,
+                checkIn: {
+                  status: CheckInStatus.FeelingGood,
+                  date: logEntryPosix,
+                },
+                logEntries: [],
               },
             ],
           })}
@@ -30,20 +35,41 @@ describe("OverTime", () => {
       )
 
       expect(getByText("You were feeling well")).toBeDefined()
+      expect(getByText(dateString)).toBeDefined()
+      expect(queryByText(timeString)).toBeNull()
     })
   })
 
-  describe("when the user has an at risk log entry", () => {
-    it("shows a 'feeling not well' message", () => {
-      const { getByText } = render(
+  describe("when the user has log data with no checkIn entries", () => {
+    it("shows the correct message, date and symptoms", () => {
+      const dateString = "2020-09-21"
+      const firstTimeString = "10:00"
+      const firstLogEntryPosix = Date.parse(`${dateString} ${firstTimeString}`)
+      const secondTimeString = "12:00"
+      const secondLogEntryPosix = Date.parse(
+        `${dateString} ${secondTimeString}`,
+      )
+      const coughSymptom = "cough"
+      const lossOfSmellSymptom = "loss_of_smell"
+      const { getByText, queryByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
-            logEntries: [
+            dailyLogData: [
               {
-                id: 1,
-                symptoms: [],
-                healthAssessment: HealthAssessment.AtRisk,
-                date: new Date().getTime() / 1000,
+                date: firstLogEntryPosix,
+                checkIn: null,
+                logEntries: [
+                  {
+                    id: "1",
+                    symptoms: [coughSymptom],
+                    date: firstLogEntryPosix,
+                  },
+                  {
+                    id: "2",
+                    symptoms: [lossOfSmellSymptom],
+                    date: secondLogEntryPosix,
+                  },
+                ],
               },
             ],
           })}
@@ -52,7 +78,12 @@ describe("OverTime", () => {
         </SymptomLogContext.Provider>,
       )
 
-      expect(getByText("You were not feeling well")).toBeDefined()
+      expect(queryByText("You were not feeling well")).toBeNull()
+      expect(getByText(dateString)).toBeDefined()
+      expect(getByText(firstTimeString)).toBeDefined()
+      expect(getByText(secondTimeString)).toBeDefined()
+      expect(getByText(coughSymptom)).toBeDefined()
+      expect(getByText(lossOfSmellSymptom)).toBeDefined()
     })
   })
 })

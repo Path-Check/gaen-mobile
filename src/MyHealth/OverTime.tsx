@@ -3,22 +3,86 @@ import { View } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { useSymptomLogContext } from "./SymptomLogContext"
-import { HealthAssessment } from "./symptoms"
+import { SymptomLogEntry, Symptom, DayLogData, CheckInStatus } from "./symptoms"
 import { GlobalText } from "../components"
+import { Posix, posixToDayjs } from "../utils/dateTime"
+
+type SymptomsListProps = {
+  symptoms: Symptom[]
+  timestamp: Posix
+}
+
+const SymptomsList: FunctionComponent<SymptomsListProps> = ({
+  symptoms,
+  timestamp,
+}) => {
+  if (symptoms.length === 0) {
+    return null
+  }
+  const dayJsDate = posixToDayjs(timestamp)
+
+  return (
+    <>
+      {dayJsDate && <GlobalText>{dayJsDate.format("HH:mm")}</GlobalText>}
+      {symptoms.map((symptom) => {
+        return <GlobalText key={symptom}>{symptom}</GlobalText>
+      })}
+    </>
+  )
+}
+
+type LogEntryProps = {
+  logEntry: SymptomLogEntry
+}
+
+const LogEntry: FunctionComponent<LogEntryProps> = ({
+  logEntry: { date, symptoms },
+}) => {
+  return <SymptomsList symptoms={symptoms} timestamp={date} />
+}
+
+type DailyCheckInSummaryProps = {
+  status: CheckInStatus
+}
+
+const DailyCheckInSummary: FunctionComponent<DailyCheckInSummaryProps> = ({
+  status,
+}) => {
+  const { t } = useTranslation()
+  const reportedStatusText =
+    status === CheckInStatus.FeelingNotWell
+      ? t("my_health.symptom_log.feeling_not_well")
+      : t("my_health.symptom_log.feeling_well")
+  return <GlobalText>{reportedStatusText}</GlobalText>
+}
+
+type DaySummaryProps = {
+  dayLogData: DayLogData
+}
+
+const DaySummary: FunctionComponent<DaySummaryProps> = ({
+  dayLogData: { date, checkIn, logEntries },
+}) => {
+  const dayJsDate = posixToDayjs(date)
+
+  return (
+    <>
+      {dayJsDate && <GlobalText>{dayJsDate.format("YYYY-MM-DD")}</GlobalText>}
+      {checkIn && <DailyCheckInSummary status={checkIn.status} />}
+      {logEntries.map((logEntry) => {
+        return <LogEntry key={logEntry.id} logEntry={logEntry} />
+      })}
+    </>
+  )
+}
 
 const OverTime: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { logEntries } = useSymptomLogContext()
+  const { dailyLogData } = useSymptomLogContext()
 
   return (
     <View>
-      {logEntries.map((logEntry) => {
-        const healthAssessmentText =
-          logEntry.healthAssessment === HealthAssessment.AtRisk
-            ? t("my_health.symptom_log.feeling_not_well")
-            : t("my_health.symptom_log.feeling_well")
-
-        return <GlobalText key={logEntry.id}>{healthAssessmentText}</GlobalText>
+      {dailyLogData.map((logData) => {
+        return <DaySummary key={logData.date} dayLogData={logData} />
       })}
     </View>
   )
