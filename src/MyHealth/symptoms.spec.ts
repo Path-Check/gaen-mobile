@@ -1,7 +1,7 @@
-import { serializeDailyLogData, CheckInStatus } from "./symptoms"
+import { combineSymptomAndCheckInLogs, CheckInStatus } from "./symptoms"
 import { beginningOfDay } from "../utils/dateTime"
 
-describe("serializeDailyLogData", () => {
+describe("combineSymptomAndCheckInLogs", () => {
   it("returns a set of log entries grouped by day with entries sorted", () => {
     const earlierDayDateString = "2020-09-21"
     const earlierDayLogEntryOnePosix = Date.parse(
@@ -47,7 +47,7 @@ describe("serializeDailyLogData", () => {
       date: recentDayLogEntryPosix,
     }
     expect(
-      serializeDailyLogData(
+      combineSymptomAndCheckInLogs(
         [
           middleDayLogEntryTwo,
           recentDayEntry,
@@ -111,7 +111,7 @@ describe("serializeDailyLogData", () => {
     }
 
     expect(
-      serializeDailyLogData(symptomLogEntries, [
+      combineSymptomAndCheckInLogs(symptomLogEntries, [
         sameDateCheckIn,
         laterDateCheckIn,
         earlierDateCheckIn,

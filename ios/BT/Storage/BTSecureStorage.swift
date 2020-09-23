@@ -30,15 +30,17 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 8,
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 9,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
-                                                                              CheckInStatus.self])
+                                                                              CheckIn.self,
+                                                                              SymptomLogEntry.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 8,
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 9,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
-                                                                              CheckInStatus.self])
+                                                                              CheckIn.self,
+                                                                              SymptomLogEntry.self])
       }
     } else {
       return nil
@@ -85,10 +87,17 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
-  func storeCheckInStatus(_ checkInStatus: CheckInStatus) {
+  func storeCheckIn(_ checkIn: CheckIn) {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
-      realm.add(checkInStatus, update: .modified)
+      realm.add(checkIn, update: .modified)
+    }
+  }
+
+  func storeSymptomLogEntry(_ entry: SymptomLogEntry) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.add(entry, update: .modified)
     }
   }
 
@@ -121,9 +130,14 @@ class BTSecureStorage: SafePathsSecureStorage {
     .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
 
-  var checkInStatuses: [CheckInStatus] {
+  var checkIns: [CheckIn] {
     let realm = try! Realm(configuration: realmConfig)
-    return Array(realm.objects(CheckInStatus.self))
+    return Array(realm.objects(CheckIn.self))
+  }
+
+  var symptomLogEntries: [SymptomLogEntry] {
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(SymptomLogEntry.self))
   }
 
 }
