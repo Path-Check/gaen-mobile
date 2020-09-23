@@ -8,7 +8,6 @@ export interface Configuration {
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
   displayReportAnIssue: boolean
-  displaySelfAssessment: boolean
   displayMyHealth: boolean
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
@@ -27,7 +26,6 @@ const initialState = {
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
   displayReportAnIssue: false,
-  displaySelfAssessment: false,
   displayMyHealth: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
@@ -56,7 +54,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
-  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const healthAuthoritySupportsAnalytics = env.COLLECT_ANALYTICS_DATA === "true"
   const appDownloadLink = env.SHARE_APP_LINK
@@ -74,7 +71,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayAcceptTermsOfService,
         displayCallbackForm,
         displayReportAnIssue,
-        displaySelfAssessment,
         displayMyHealth,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
