@@ -1,3 +1,4 @@
+import "react-native"
 import env from "react-native-config"
 
 import { ExposureKey } from "../exposureKey"

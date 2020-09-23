@@ -1,15 +1,15 @@
-import React from "react"
+import React, { ReactNode, Component } from "react"
 
 import { ErrorScreen } from "./ErrorScreen"
 
 type Props = {
-  children: JSX.Element
+  children: ReactNode
   onError?: () => void
 }
 
 type State = { error: Error | string; hasError: boolean }
 
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   state = { error: "", hasError: false }
 
   static getDerivedStateFromError(error: Error): State {
@@ -20,7 +20,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     this.setState({ error: "", hasError: false })
   }
 
-  render(): JSX.Element {
+  render(): ReactNode {
     return this.state.hasError ? (
       <ErrorScreen error={this.state.error} resetError={this.resetError} />
     ) : (

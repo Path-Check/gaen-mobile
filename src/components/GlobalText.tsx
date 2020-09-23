@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode, FunctionComponent } from "react"
 import { Text, TextStyle } from "react-native"
 
 import { useLanguageDirection } from "../locales/languages"
@@ -7,15 +7,15 @@ interface GlobalTextProps {
   style?: TextStyle
   testID?: string
   onPress?: () => void
-  children: JSX.Element | string
+  children: ReactNode | string
 }
 
-const GlobalText = ({
+const GlobalText: FunctionComponent<GlobalTextProps> = ({
   style,
   testID,
   children,
   onPress,
-}: GlobalTextProps): JSX.Element => {
+}: GlobalTextProps) => {
   const writingDirection = useLanguageDirection()
 
   return (

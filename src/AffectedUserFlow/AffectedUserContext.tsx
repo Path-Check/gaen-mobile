@@ -1,4 +1,9 @@
-import React, { createContext, useState, useContext } from "react"
+import React, {
+  FunctionComponent,
+  createContext,
+  useState,
+  useContext,
+} from "react"
 
 import { ExposureKey } from "../exposureKey"
 
@@ -17,11 +22,7 @@ export const AffectedUserContext = createContext<
   AffectedUserContextState | undefined
 >(undefined)
 
-export const AffectedUserProvider = ({
-  children,
-}: {
-  children: JSX.Element
-}): JSX.Element => {
+export const AffectedUserProvider: FunctionComponent = ({ children }) => {
   const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
