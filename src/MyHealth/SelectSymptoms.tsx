@@ -1,5 +1,11 @@
 import React, { FunctionComponent, useState } from "react"
-import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
+import {
+  View,
+  TouchableHighlight,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -9,7 +15,16 @@ import { useMyHealthContext } from "./MyHealthContext"
 import { HealthAssessment, determineHealthAssessment } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
-import { Affordances, Colors, Spacing, Typography, Outlines } from "../styles"
+import {
+  Affordances,
+  Colors,
+  Spacing,
+  Typography,
+  Outlines,
+  Iconography,
+} from "../styles"
+import { SvgXml } from "react-native-svg"
+import { Icons } from "../assets"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -75,6 +90,19 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <View style={style.headerContainer}>
+        <TouchableOpacity
+          style={style.closeIconContainer}
+          onPress={navigation.goBack}
+        >
+          <SvgXml
+            xml={Icons.XInCircle}
+            fill={Colors.neutral30}
+            width={Iconography.small}
+            height={Iconography.small}
+          />
+        </TouchableOpacity>
+      </View>
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -110,6 +138,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   )
 }
 
+const headerHeight = 50
+
 const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryLightBackground,
@@ -120,6 +150,20 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
+  },
+  closeIconContainer: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    padding: Spacing.medium,
+  },
+  headerContainer: {
+    width: "100%",
+    height: headerHeight,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    backgroundColor: Colors.white,
   },
   headerText: {
     ...Typography.header2,
