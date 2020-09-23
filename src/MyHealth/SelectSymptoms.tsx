@@ -91,6 +91,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <View style={style.headerContainer}>
+        <GlobalText style={style.headerText}>
+          {t("symptom_checker.what_symptoms")}
+        </GlobalText>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -108,9 +111,6 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.what_symptoms")}
-        </GlobalText>
         <View style={style.symptomButtonsContainer}>
           {symptoms.map((value) => {
             return (
@@ -138,7 +138,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   )
 }
 
-const headerHeight = 50
+const headerHeight = 100
 
 const style = StyleSheet.create({
   container: {
@@ -168,6 +168,7 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header2,
     marginBottom: Spacing.large,
+    marginLeft: Spacing.small,
   },
   symptomButtonsContainer: {
     flexWrap: "wrap",
