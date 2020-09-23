@@ -5,35 +5,22 @@ import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
 import { GlobalText, Button, StatusBar } from "../components"
-import { useMyHealthContext } from "./MyHealthContext"
-import { HealthAssessment, determineHealthAssessment } from "./symptoms"
+import {
+  symptoms,
+  HealthAssessment,
+  determineHealthAssessment,
+} from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
 import { Affordances, Colors, Spacing, Typography, Outlines } from "../styles"
+import { useSymptomLogContext } from "./SymptomLogContext"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
-  const { updateSymptoms } = useMyHealthContext()
-
-  const symptoms = [
-    t("symptoms.chest_pain_or_pressure"),
-    t("symptoms.difficulty_breathing"),
-    t("symptoms.lightheadedness"),
-    t("symptoms.disorientation_or_unresponsiveness"),
-    t("symptoms.fever"),
-    t("symptoms.chills"),
-    t("symptoms.cough"),
-    t("symptoms.loss_of_smell"),
-    t("symptoms.loss_of_taste"),
-    t("symptoms.loss_of_appetite"),
-    t("symptoms.vomiting"),
-    t("symptoms.diarrhea"),
-    t("symptoms.body_aches"),
-    t("symptoms.other"),
-  ]
+  const { addLogEntry } = useSymptomLogContext()
 
   const handleOnPressSymptom = (selectedSymptom: string) => {
     const indexOfSelectedSymptom = selectedSymptoms.indexOf(selectedSymptom)
@@ -47,7 +34,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const handleOnPressSave = () => {
-    updateSymptoms(selectedSymptoms)
+    addLogEntry(selectedSymptoms)
+
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
       showMessage({
@@ -85,16 +73,17 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         </GlobalText>
         <View style={style.symptomButtonsContainer}>
           {symptoms.map((value) => {
+            const translatedSymptom = t(`symptoms.${value}`)
             return (
               <TouchableHighlight
                 key={value}
                 onPress={() => handleOnPressSymptom(value)}
                 style={determineSymptomButtonStyle(value)}
                 underlayColor={Colors.neutral10}
-                accessibilityLabel={value}
+                accessibilityLabel={translatedSymptom}
               >
                 <GlobalText style={determineSymptomButtonTextStyle(value)}>
-                  {value}
+                  {translatedSymptom}
                 </GlobalText>
               </TouchableHighlight>
             )

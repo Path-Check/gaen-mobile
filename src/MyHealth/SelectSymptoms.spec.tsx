@@ -4,9 +4,9 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import SelectSymptomsScreen from "./SelectSymptoms"
-import { MyHealthContext } from "./MyHealthContext"
-import { HealthAssessment } from "./symptoms"
 import { MyHealthStackScreens } from "../navigation"
+import { SymptomLogContext } from "./SymptomLogContext"
+import { factories } from "../factories"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
@@ -14,26 +14,27 @@ jest.mock("@react-navigation/native")
 describe("SelectSymptomsScreen", () => {
   it("shows a success flash message when symptoms are saved", async () => {
     const showMessageSpy = showMessage as jest.Mock
-    const updateSymptomsSpy = jest.fn()
+    const addLogEntrySpy = jest.fn()
+    addLogEntrySpy.mockResolvedValueOnce({})
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+    const coughSymptom = "cough"
 
     const { getByLabelText } = render(
-      <MyHealthContext.Provider
-        value={{
-          updateSymptoms: updateSymptomsSpy,
-          symptoms: [],
-          healthAssessment: HealthAssessment.NotAtRisk,
-        }}
+      <SymptomLogContext.Provider
+        value={factories.symptomLogContext.build({
+          addLogEntry: addLogEntrySpy,
+        })}
       >
         <SelectSymptomsScreen />
-      </MyHealthContext.Provider>,
+      </SymptomLogContext.Provider>,
     )
 
     fireEvent.press(getByLabelText("Cough"))
     fireEvent.press(getByLabelText("Save"))
 
     await waitFor(() => {
+      expect(addLogEntrySpy).toHaveBeenCalledWith([coughSymptom])
       expect(showMessageSpy).toHaveBeenCalledWith(
         expect.objectContaining({
           message: "Symptoms saved!",
