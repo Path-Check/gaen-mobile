@@ -23,7 +23,9 @@ const SymptomsList: FunctionComponent<SymptomsListProps> = ({
 
   return (
     <>
-      {dayJsDate && <GlobalText>{dayJsDate.format("HH:mm")}</GlobalText>}
+      {dayJsDate && (
+        <GlobalText>{dayJsDate.local().format("HH:mm")}</GlobalText>
+      )}
       {symptoms.map((symptom) => {
         return <GlobalText key={symptom}>{symptom}</GlobalText>
       })}
@@ -65,7 +67,9 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
 
   return (
     <>
-      {dayJsDate && <GlobalText>{dayJsDate.format("YYYY-MM-DD")}</GlobalText>}
+      {dayJsDate && (
+        <GlobalText>{dayJsDate.local().format("YYYY-MM-DD")}</GlobalText>
+      )}
       {checkIn && <CheckInSummary status={checkIn.status} />}
       {logEntries.map((logEntry) => {
         return <LogEntry key={logEntry.id} logEntry={logEntry} />
