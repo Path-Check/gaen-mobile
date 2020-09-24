@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useContext,
 } from "react"
-import Matomo from "react-native-matomo"
+import Matomo from "react-native-matomo-sdk"
 import { StorageUtils } from "./utils"
 import { actions } from "./analytics"
 import { useConfigurationContext } from "./ConfigurationContext"
@@ -60,7 +60,7 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
       healthAuthoritySupportsAnalytics && userConsentedToAnalytics
 
     const initializeAnalyticsTracking = () => {
-      Matomo.initTracker(
+      Matomo.initialize(
         healthAuthorityAnalyticsUrl,
         healthAuthorityAnalyticsSiteId,
       )
