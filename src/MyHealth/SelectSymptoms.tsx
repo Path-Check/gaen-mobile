@@ -32,7 +32,7 @@ import { Icons } from "../assets"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
@@ -77,19 +77,18 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       addLogEntry(selectedSymptoms)
     }
 
-    const flashMessage = isEditingLogEntry
-      ? t("symptom_checker.symptoms_updated")
-      : t("symptom_checker.symptoms_saved")
-
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
+      navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
+    } else {
+      navigation.goBack()
+      const flashMessage = isEditingLogEntry
+        ? t("symptom_checker.symptoms_updated")
+        : t("symptom_checker.symptoms_saved")
       showMessage({
         message: flashMessage,
         ...Affordances.successFlashMessageOptions,
       })
-      navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
-    } else {
-      navigation.goBack()
     }
   }
 
@@ -107,7 +106,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.secondary10} />
       <View style={style.headerContainer}>
         <GlobalText style={style.headerText}>
           {t("symptom_checker.what_symptoms")}
@@ -174,7 +173,7 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     backgroundColor: Colors.primaryLightBackground,
-    paddingTop: Spacing.xxxHuge,
+    paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
   },
@@ -190,7 +189,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.secondary10,
   },
   headerText: {
     ...Typography.header2,
