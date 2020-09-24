@@ -25,6 +25,9 @@ PODS:
     - glog
   - glog (0.3.5)
   - KeychainAccess (4.2.0)
+  - MatomoTracker (7.2.2):
+    - MatomoTracker/Core (= 7.2.2)
+  - MatomoTracker/Core (7.2.2)
   - Permission-Notifications (2.1.4):
     - RNPermissions
   - PromisesObjC (1.2.10)
@@ -198,6 +201,9 @@ PODS:
   - React-jsinspector (0.63.2)
   - react-native-config (1.2.1):
     - React
+  - react-native-matomo-sdk (0.4.0):
+    - MatomoTracker (~> 7)
+    - React (~> 0.60)
   - react-native-netinfo (5.9.7):
     - React-Core
   - react-native-safe-area-context (3.0.5):
@@ -322,6 +328,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-matomo-sdk (from `../node_modules/react-native-matomo-sdk`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-segmented-control (from `../node_modules/@react-native-community/segmented-control`)"
@@ -357,6 +364,7 @@ SPEC REPOS:
     - Alamofire
     - boost-for-react-native
     - KeychainAccess
+    - MatomoTracker
     - PromisesObjC
     - PromisesSwift
     - Realm
@@ -402,6 +410,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-matomo-sdk:
+    :path: "../node_modules/react-native-matomo-sdk"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
@@ -466,6 +476,7 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
+  MatomoTracker: a59ec4da0f580be57bdc6baa708a71a86532a832
   Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   PromisesSwift: ce4c7602f91a6bfc8732039f1bc1a3fcded1a302
@@ -480,6 +491,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
   react-native-config: ae9ef3bdbf539f2d14ebaf4ebeba508f766e066a
+  react-native-matomo-sdk: 03b35acda42463614f10ac61d013f7ae7dc8beed
   react-native-netinfo: 250dc0ca126512f618a8a2ca6a936577e1f66586
   react-native-safe-area-context: e768fca90207ee68924b3d0877633f2ce9cc9d68
   react-native-segmented-control: e257b39e80733b848d7d040e07c29eee99396aff
