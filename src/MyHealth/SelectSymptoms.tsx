@@ -164,7 +164,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   )
 }
 
-const headerHeight = 100
+const headerHeight = 130
 
 const style = StyleSheet.create({
   container: {
@@ -177,12 +177,6 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
   },
-  closeIconContainer: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    padding: Spacing.medium,
-  },
   headerContainer: {
     width: "100%",
     height: headerHeight,
@@ -190,11 +184,17 @@ const style = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     backgroundColor: Colors.secondary10,
+    paddingHorizontal: Spacing.small,
+    paddingBottom: Spacing.medium,
   },
   headerText: {
     ...Typography.header2,
-    marginBottom: Spacing.large,
-    marginLeft: Spacing.small,
+  },
+  closeIconContainer: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    padding: Spacing.medium,
   },
   symptomButtonsContainer: {
     flexWrap: "wrap",
