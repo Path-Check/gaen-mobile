@@ -269,6 +269,10 @@ export const modifyLogEntry = (entry: SymptomLogEntry): Promise<void> => {
   return symptomLogEntryModule.updateSymptomLogEntry(entry)
 }
 
+export const deleteLogEntry = (symptomLogEntryId: string): Promise<void> => {
+  return symptomLogEntryModule.deleteSymptomLogEntry(symptomLogEntryId)
+}
+
 export const getLogEntries = (): Promise<SymptomLogEntry[]> => {
   return symptomLogEntryModule.getSymptomLogEntries()
 }

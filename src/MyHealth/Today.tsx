@@ -37,6 +37,10 @@ const Today: FunctionComponent = () => {
     navigation.navigate(MyHealthStackScreens.SelectSymptoms)
   }
 
+  const handleOnPressLogSymptoms = () => {
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+  }
+
   const determineStatusContent = () => {
     switch (checkInStatus) {
       case CheckInStatus.NotCheckedIn:
@@ -60,7 +64,7 @@ const Today: FunctionComponent = () => {
 
   return (
     <>
-      <View style={style.checkInContainer}>
+      <View style={style.floatingContainer}>
         <SvgXml
           xml={Icons.CheckInBrokenCircle}
           fill={iconFill}
@@ -72,6 +76,15 @@ const Today: FunctionComponent = () => {
           {t("symptom_checker.check-in")}
         </GlobalText>
         {determineStatusContent()}
+      </View>
+      <View style={style.floatingContainer}>
+        <Button
+          onPress={handleOnPressLogSymptoms}
+          label={t("symptom_checker.log_symptoms")}
+          customButtonStyle={{ ...style.button, ...style.logSymptomsButton }}
+          customButtonInnerStyle={style.buttonInner}
+          hasPlusIcon
+        />
       </View>
     </>
   )
@@ -114,9 +127,14 @@ const FeelingGoodContent: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
-    <GlobalText style={style.checkInHeaderText}>
-      {t("symptom_checker.glad_to_hear_it")}
-    </GlobalText>
+    <>
+      <GlobalText style={style.checkInHeaderText}>
+        {t("symptom_checker.glad_to_hear_it")}
+      </GlobalText>
+      <GlobalText style={style.healthAssessmentText}>
+        {t("symptom_checker.check_in_again")}
+      </GlobalText>
+    </>
   )
 }
 
@@ -136,7 +154,7 @@ const FeelingNotWellContent: FunctionComponent = () => {
         {t("symptom_checker.sorry_to_hear_it")}
       </GlobalText>
       <GlobalText style={style.healthAssessmentText}>
-        {t("symptom_checker.sorry_not_feeling_well")}
+        {t("symptom_checker.get_tested")}
       </GlobalText>
       {findATestCenterUrl && (
         <Button
@@ -177,12 +195,13 @@ const FeelingButton: FunctionComponent<FeelingButtonProps> = ({
 
 const feelingButtonHeight = 120
 const style = StyleSheet.create({
-  checkInContainer: {
+  floatingContainer: {
     ...Outlines.lightShadow,
     backgroundColor: Colors.primaryLightBackground,
     borderRadius: Outlines.borderRadiusLarge,
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.large,
   },
   checkmarkIcon: {
     position: "absolute",
@@ -196,7 +215,7 @@ const style = StyleSheet.create({
   checkInHeaderText: {
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
-    marginBottom: Spacing.xSmall,
+    marginBottom: Spacing.xxxSmall,
   },
   feelingButtonsContainer: {
     flexDirection: "row",
@@ -227,18 +246,20 @@ const style = StyleSheet.create({
   healthAssessmentText: {
     ...Typography.header5,
     ...Typography.base,
-    marginBottom: Spacing.xSmall,
   },
   button: {
     width: "100%",
     elevation: 0,
     shadowOpacity: 0,
+    marginTop: Spacing.large,
+  },
+  logSymptomsButton: {
+    marginTop: 0,
   },
   buttonInner: {
     width: "100%",
     paddingTop: Spacing.xSmall,
     paddingBottom: Spacing.xSmall + 1,
-    marginBottom: Spacing.medium,
   },
 })
 

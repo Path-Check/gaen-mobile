@@ -101,6 +101,15 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func deleteSymptomLogEntry(_ id: String) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      if let target = realm.objects(SymptomLogEntry.self).filter("id = %@", id).first {
+        realm.delete(target)
+      }
+    }
+  }
+
   func canStoreExposure(for date: Date) -> Bool {
     return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }

@@ -36,12 +36,13 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
-  const { addLogEntry, updateLogEntry } = useSymptomLogContext()
+  const { addLogEntry, updateLogEntry, deleteLogEntry } = useSymptomLogContext()
 
-  const { logEntry } = route.params
+  const logEntry = route.params?.logEntry
   const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
-  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
+  const isEditingLogEntry = symptomLogEntryToEdit !== null
 
+  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>(
     initialSelectedSymptoms,
   )
@@ -57,14 +58,26 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressDelete = () => {
+    if (isEditingLogEntry) {
+      deleteLogEntry(symptomLogEntryToEdit.id)
+      showMessage({
+        message: t("symptom_checker.entry_deleted"),
+        ...Affordances.successFlashMessageOptions,
+      })
+
+      navigation.goBack()
+    }
+  }
+
   const handleOnPressSave = () => {
-    if (symptomLogEntryToEdit !== null) {
+    if (isEditingLogEntry) {
       updateLogEntry({ ...symptomLogEntryToEdit, symptoms: selectedSymptoms })
     } else {
       addLogEntry(selectedSymptoms)
     }
 
-    const flashMessage = symptomLogEntryToEdit
+    const flashMessage = isEditingLogEntry
       ? t("symptom_checker.symptoms_updated")
       : t("symptom_checker.symptoms_saved")
 
@@ -139,6 +152,14 @@ const SelectSymptomsScreen: FunctionComponent = () => {
           label={t("common.save")}
           disabled={selectedSymptoms.length === 0}
         />
+        {isEditingLogEntry && (
+          <TouchableOpacity
+            onPress={handleOnPressDelete}
+            accessibilityLabel={t("symptom_checker.delete_entry")}
+          >
+            <GlobalText>{t("symptom_checker.delete_entry")}</GlobalText>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </>
   )

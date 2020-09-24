@@ -308,7 +308,7 @@
     "find_a_test_center_nearby": "Find a test center nearby",
     "find_a_test_center": "Find a test center",
     "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
-    "sorry_not_feeling_well": "Sorry you're not feeling well. Check-in again tomorrow.",
+    "sorry_not_feeling_well": "Sorry you're not feeling well.",
     "symptoms_saved": "Symptoms saved!",
     "symptoms_updated": "Symptoms updated!",
     "get_tested": "We recommend you get tested for COVID-19.",
@@ -321,7 +321,11 @@
     "person_finding_location_label": "A person on their phone searching for a location.",
     "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
     "symptoms": "Symptoms",
-    "what_symptoms": "What symptoms are you experiencing?"
+    "what_symptoms": "What symptoms are you experiencing?",
+    "delete_entry": "Delete entry",
+    "entry_deleted": "Entry deleted",
+    "log_symptoms": "Log symptoms",
+    "check_in_again": "Check in again tomorrow."
   },
   "my_health": {
     "today": "Today",

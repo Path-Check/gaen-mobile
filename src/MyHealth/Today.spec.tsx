@@ -48,14 +48,14 @@ describe("Today", () => {
         )
 
         expect(
-          getByText("Sorry you're not feeling well. Check-in again tomorrow."),
+          getByText("Sorry to hear you're not feeling well!"),
         ).toBeDefined()
       })
     })
   })
 
   describe("when the user has not checked in today", () => {
-    it("promts the user to check-in", () => {
+    it("prompts the user to check-in", () => {
       const { getByLabelText, getByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
@@ -121,6 +121,24 @@ describe("Today", () => {
           CheckInStatus.FeelingNotWell,
         )
       })
+    })
+
+    it("allows the user to add a symptom log entry", () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({
+        navigate: navigateSpy,
+      })
+
+      const { getByLabelText } = render(
+        <SymptomLogContext.Provider value={factories.symptomLogContext.build()}>
+          <Today />
+        </SymptomLogContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Log symptoms"))
+      expect(navigateSpy).toHaveBeenCalledWith(
+        MyHealthStackScreens.SelectSymptoms,
+      )
     })
   })
 })
