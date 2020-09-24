@@ -123,11 +123,12 @@ describe("OverTime", () => {
       )
 
       fireEvent.press(getByLabelText("Edit"))
-      expect(
-        navigateSpy,
-      ).toHaveBeenCalledWith(MyHealthStackScreens.SelectSymptoms, {
-        logEntry: JSON.stringify(logEntry),
-      })
+      expect(navigateSpy).toHaveBeenCalledWith(
+        MyHealthStackScreens.SelectSymptoms,
+        {
+          logEntry: JSON.stringify(logEntry),
+        },
+      )
     })
   })
 })
