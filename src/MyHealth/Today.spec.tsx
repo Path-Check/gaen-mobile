@@ -47,7 +47,9 @@ describe("Today", () => {
           </SymptomLogContext.Provider>,
         )
 
-        expect(getByText("Sorry you're not feeling well.")).toBeDefined()
+        expect(
+          getByText("Sorry to hear you're not feeling well!"),
+        ).toBeDefined()
       })
     })
   })
