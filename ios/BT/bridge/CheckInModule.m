@@ -10,26 +10,25 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_REMAP_METHOD(saveCheckInStatus,
-                 checkInStatus:(NSDictionary *)checkInStatus
-                 saveCheckInStatusWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_REMAP_METHOD(addCheckIn,
+                 checkIn:(NSDictionary *)checkIn
+                 saveCheckInWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  NSInteger date = [RCTConvert NSInteger:checkInStatus[@"posixDate"]];
-  BOOL feelingGood = [RCTConvert NSString:checkInStatus[@"feelingGood"]];
-  NSArray *symptoms = [RCTConvert NSArray:checkInStatus[@"symptoms"]];
+  NSInteger date = [RCTConvert NSInteger:checkIn[@"date"]];
+  NSInteger status = [RCTConvert NSInteger:checkIn[@"status"]];
 
-  CheckInStatus *status = [[CheckInStatus alloc] initWithDate:date feelingGood:feelingGood symptoms:symptoms];
-  [[ExposureManager shared] saveCheckInStatus:status];
+  CheckIn *checkInModel = [[CheckIn alloc] initWithDate:date status:status];
+  [[ExposureManager shared] saveCheckIn:checkInModel];
 
   resolve(nil);
 }
 
-RCT_REMAP_METHOD(getCheckInStatuses,
-                 getCheckInStatusesWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_REMAP_METHOD(getCheckIns,
+                 getCheckInsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  NSArray *checkInStatuses = [[ExposureManager shared] checkInStatuses];
+  NSArray *checkInStatuses = [[ExposureManager shared] checkIns];
   resolve(checkInStatuses);
 }
 

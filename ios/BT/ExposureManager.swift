@@ -159,14 +159,24 @@ final class ExposureManager: NSObject {
     return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
   }
 
-  /// Returns the check in statuses as array of dictionaries
-  @objc var checkInStatuses: [[String: Any]] {
-    return btSecureStorage.checkInStatuses.map { $0.asDictionary }
+  /// Returns the check ins as array of dictionaries
+  @objc var checkIns: [[String: Any]] {
+    return btSecureStorage.checkIns.map { $0.asDictionary }
   }
 
   /// Persists CheckInStatus in Realm
-  @objc func saveCheckInStatus(_ checkInStatus: CheckInStatus) {
-    return btSecureStorage.storeCheckInStatus(checkInStatus)
+  @objc func saveCheckIn(_ checkInStatus: CheckIn) {
+    return btSecureStorage.storeCheckIn(checkInStatus)
+  }
+
+  /// Returns the symptom log entries as array of dictionaries
+  @objc var symptomLogEntries: [[String: Any]] {
+    return btSecureStorage.symptomLogEntries.map { $0.asDictionary }
+  }
+
+  /// Persists SymptomLogEntry in Realm
+  @objc func saveSymptomLogEntry(_ entry: SymptomLogEntry) {
+    return btSecureStorage.storeSymptomLogEntry(entry)
   }
 
   ///Notifies the user to enable bluetooth to be able to exchange keys

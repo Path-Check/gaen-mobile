@@ -173,9 +173,7 @@
       "tracing_off_header": "Inactive",
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_off_subheader_location": "Enable Bluetooth, Proximity Tracing, and Location to get info about possible exposures",
-      "tracing_on_header": "Active",
-      "unauthorized_error_message": "To activate Proximity Tracing, ensure \"Share Exposure Information\" is enabled in Settings > {{applicationName}} > Exposure Notifications",
-      "unauthorized_error_title": "Share Exposure Information"
+      "tracing_on_header": "Active"
     },
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
@@ -183,6 +181,11 @@
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
     "open_settings": "Open Settings",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "To enable Proximity Tracing and Exposure Notifications, please go to the COVID-19 Exposure Notifications of your Settings App and enable 'Use Exposure Notifications'",
+      "unauthorized_error_message_ios": "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
+      "unauthorized_error_title": "Enable Proximity Tracing"
+    },
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",
@@ -304,7 +307,7 @@
     "find_a_test_center_nearby": "Find a test center nearby",
     "find_a_test_center": "Find a test center",
     "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
-    "sorry_not_feeling_well": "Sorry you're not feeling well. Your symptoms may be related to COVID-19.",
+    "sorry_not_feeling_well": "Sorry you're not feeling well. Check-in again tomorrow.",
     "success_message": "Symptoms saved!",
     "get_tested": "We recommend you get tested for COVID-19.",
     "glad_to_hear_it": "Glad to hear it!",
