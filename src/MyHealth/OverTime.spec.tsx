@@ -46,10 +46,12 @@ describe("OverTime", () => {
       const dateString = "2020-09-21"
       const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
       const firstTimeString =
-        posixToDayjs(firstLogEntryPosix)?.format("HH:mm") || "not a date"
+        posixToDayjs(firstLogEntryPosix)?.local()?.format("HH:mm") ||
+        "not a date"
       const secondLogEntryPosix = Date.parse(`${dateString} 12:00`)
       const secondTimeString =
-        posixToDayjs(secondLogEntryPosix)?.format("HH:mm") || "not a date"
+        posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm") ||
+        "not a date"
       const coughSymptom = "cough"
       const lossOfSmellSymptom = "loss_of_smell"
       const { getByText, queryByText } = render(
