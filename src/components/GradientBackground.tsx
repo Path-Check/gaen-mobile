@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { ReactNode, FunctionComponent } from "react"
 import { StyleSheet } from "react-native"
 
 import LinearGradient from "react-native-linear-gradient"
@@ -6,7 +6,7 @@ import LinearGradient from "react-native-linear-gradient"
 interface GradientBackgroundProps {
   gradient: string[]
   angleCenterY?: number
-  children: JSX.Element
+  children: ReactNode
 }
 
 const GradientBackground: FunctionComponent<GradientBackgroundProps> = ({

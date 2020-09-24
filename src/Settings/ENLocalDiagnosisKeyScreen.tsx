@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   Alert,
   BackHandler,
@@ -24,9 +24,9 @@ type ENLocalDiagnosisKeyScreenProp = {
   navigation: NavigationProp
 }
 
-const ENLocalDiagnosisKeyScreen = ({
+const ENLocalDiagnosisKeyScreen: FunctionComponent<ENLocalDiagnosisKeyScreenProp> = ({
   navigation,
-}: ENLocalDiagnosisKeyScreenProp): JSX.Element => {
+}) => {
   const initialKeys: ENDiagnosisKey[] = []
 
   const fetchDiagnosisKeys = async () => {

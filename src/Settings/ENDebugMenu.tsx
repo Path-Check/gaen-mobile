@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   View,
   ViewStyle,
@@ -22,7 +22,7 @@ type ENDebugMenuProps = {
   navigation: NavigationProp
 }
 
-const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
+const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
