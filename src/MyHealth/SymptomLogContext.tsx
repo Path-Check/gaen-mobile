@@ -20,6 +20,7 @@ import {
   addCheckIn,
   createLogEntry,
   modifyLogEntry,
+  deleteLogEntry as removeLogEntry,
 } from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
 
@@ -27,6 +28,7 @@ export type SymptomLogState = {
   dailyLogData: DayLogData[]
   addLogEntry: (symptoms: Symptom[]) => Promise<void>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<void>
+  deleteLogEntry: (symptomLogEntryId: string) => Promise<void>
   todaysCheckIn: CheckIn
   addTodaysCheckIn: (status: CheckInStatus) => Promise<void>
 }
@@ -37,6 +39,9 @@ const initialState = {
     return Promise.resolve()
   },
   updateLogEntry: (_entry: SymptomLogEntry) => {
+    return Promise.resolve()
+  },
+  deleteLogEntry: (_symptomLogEntryId: string) => {
     return Promise.resolve()
   },
   todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
@@ -93,6 +98,11 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     await fetchLogEntries()
   }
 
+  const deleteLogEntry = async (symptomLogEntryId: string) => {
+    await removeLogEntry(symptomLogEntryId)
+    await fetchLogEntries()
+  }
+
   const addTodaysCheckIn = async (status: CheckInStatus) => {
     const newCheckIn = { date: Date.now(), status }
     await addCheckIn(newCheckIn)
@@ -109,6 +119,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
         dailyLogData,
         addLogEntry,
         updateLogEntry,
+        deleteLogEntry,
       }}
     >
       {children}

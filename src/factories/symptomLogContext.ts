@@ -7,5 +7,6 @@ export default Factory.define<SymptomLogState>(() => ({
   dailyLogData: [],
   addLogEntry: jest.fn(),
   updateLogEntry: jest.fn(),
+  deleteLogEntry: jest.fn(),
   addTodaysCheckIn: jest.fn(),
 }))

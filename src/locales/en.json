@@ -321,7 +321,9 @@
     "person_finding_location_label": "A person on their phone searching for a location.",
     "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
     "symptoms": "Symptoms",
-    "what_symptoms": "What symptoms are you experiencing?"
+    "what_symptoms": "What symptoms are you experiencing?",
+    "delete_entry": "Delete entry",
+    "entry_deleted": "Entry deleted"
   },
   "my_health": {
     "today": "Today",
