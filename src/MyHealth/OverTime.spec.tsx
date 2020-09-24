@@ -91,7 +91,7 @@ describe("OverTime", () => {
   })
 
   describe("when the user has symptom logs", () => {
-    it("can edit a symptom log", () => {
+    it("allows the user to edit a symptom log", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
