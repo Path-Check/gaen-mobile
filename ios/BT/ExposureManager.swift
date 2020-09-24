@@ -179,6 +179,11 @@ final class ExposureManager: NSObject {
     return btSecureStorage.storeSymptomLogEntry(entry)
   }
 
+  /// Deletes SymptomLogEntry in Realm
+  @objc func deleteSymptomLogEntry(_ id: String) {
+    return btSecureStorage.deleteSymptomLogEntry(id)
+  }
+
   ///Notifies the user to enable bluetooth to be able to exchange keys
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
