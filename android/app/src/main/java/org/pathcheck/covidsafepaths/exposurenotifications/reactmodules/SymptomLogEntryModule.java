@@ -11,14 +11,14 @@ import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.module.annotations.ReactModule;
 import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckIn;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.SymptomLogEntry;
 
 @SuppressWarnings("unused")
-@ReactModule(name = CheckInModule.MODULE_NAME)
-public class CheckInModule extends ReactContextBaseJavaModule {
-  static final String MODULE_NAME = "CheckInModule";
+@ReactModule(name = SymptomLogEntryModule.MODULE_NAME)
+public class SymptomLogEntryModule extends ReactContextBaseJavaModule {
+  static final String MODULE_NAME = "SymptomLogEntryModule";
 
-  public CheckInModule(ReactApplicationContext context) {
+  public SymptomLogEntryModule(ReactApplicationContext context) {
     super(context);
   }
 
@@ -29,19 +29,24 @@ public class CheckInModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void addCheckIn(ReadableMap map, Promise promise) {
-    CheckIn checkIn = CheckIn.Companion.fromReadableMap(map);
-    RealmSecureStorageBte.INSTANCE.upsertCheckIn(checkIn);
+  public void addSymptomLogEntry(ReadableMap map, Promise promise) {
+    SymptomLogEntry logEntry = SymptomLogEntry.Companion.fromReadableMap(map);
+    RealmSecureStorageBte.INSTANCE.upsertLogEntry(logEntry);
     promise.resolve(null);
   }
 
   @ReactMethod
-  public void getCheckIns(Promise promise) {
-    List<CheckIn> checkIns = RealmSecureStorageBte.INSTANCE.getCheckIns();
+  public void updateSymptomLogEntry(ReadableMap map, Promise promise) {
+    addSymptomLogEntry(map, promise);
+  }
+
+  @ReactMethod
+  public void getSymptomLogEntries(Promise promise) {
+    List<SymptomLogEntry> logEntries = RealmSecureStorageBte.INSTANCE.getLogEntries();
 
     WritableArray writableArray = new WritableNativeArray();
-    for (CheckIn checkInStatus : checkIns) {
-      writableArray.pushMap(checkInStatus.toReadableMap());
+    for (SymptomLogEntry logEntry : logEntries) {
+      writableArray.pushMap(logEntry.toReadableMap());
     }
     promise.resolve(writableArray);
   }

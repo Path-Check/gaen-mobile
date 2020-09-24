@@ -9,15 +9,14 @@ import io.realm.annotations.PrimaryKey
 import java.util.UUID
 import org.threeten.bp.Instant
 
-open class CheckInStatus(
+open class SymptomLogEntry(
     @PrimaryKey
     var id: String = UUID.randomUUID().toString(),
-    var posixDate: Long = Instant.now().toEpochMilli(),
-    var feelingGood: Int = 0,
+    var date: Long = Instant.now().toEpochMilli(),
     var symptoms: RealmList<String> = RealmList()
 ) : RealmObject() {
     companion object {
-        fun fromReadableMap(map: ReadableMap): CheckInStatus {
+        fun fromReadableMap(map: ReadableMap): SymptomLogEntry {
             val symptoms = map.getArray("symptoms")
             val symptomsStrings = RealmList<String>()
             if (symptoms != null) {
@@ -32,10 +31,9 @@ open class CheckInStatus(
                 UUID.randomUUID().toString()
             }
 
-            return CheckInStatus(
+            return SymptomLogEntry(
                 id = id,
-                posixDate = map.getDouble("posixDate").toLong(),
-                feelingGood = map.getInt("feelingGood"),
+                date = map.getDouble("date").toLong(),
                 symptoms = symptomsStrings
             )
         }
@@ -44,8 +42,7 @@ open class CheckInStatus(
     fun toReadableMap(): ReadableMap {
         val map = WritableNativeMap()
         map.putString("id", id)
-        map.putDouble("posixDate", posixDate.toDouble())
-        map.putInt("feelingGood", feelingGood)
+        map.putDouble("date", date.toDouble())
 
         val array = WritableNativeArray()
         for (symptom in symptoms) {
