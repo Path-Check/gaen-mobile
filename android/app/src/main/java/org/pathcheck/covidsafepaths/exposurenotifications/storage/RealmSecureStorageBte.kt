@@ -8,6 +8,7 @@ import com.google.android.gms.nearby.exposurenotification.DailySummary
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
+import io.realm.kotlin.delete
 import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckIn
@@ -159,6 +160,17 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.insertOrUpdate(logEntry)
+            }
+        }
+    }
+
+    fun deleteLogEntry(id: String) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.where(SymptomLogEntry::class.java)
+                    .equalTo("id", id)
+                    .findFirst()
+                    ?.deleteFromRealm()
             }
         }
     }
