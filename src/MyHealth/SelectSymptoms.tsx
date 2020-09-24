@@ -40,9 +40,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const logEntry = route.params?.logEntry
   const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
-  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
   const isEditingLogEntry = symptomLogEntryToEdit !== null
 
+  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>(
     initialSelectedSymptoms,
   )
