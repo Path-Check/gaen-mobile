@@ -156,6 +156,7 @@ export const AffectedUserFlowScreens: {
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
 }
+
 export type WelcomeScreen = "Welcome"
 
 export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
