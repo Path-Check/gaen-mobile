@@ -5,27 +5,47 @@ import React, {
   useEffect,
   useContext,
 } from "react"
+import Matomo from "react-native-matomo"
 import { StorageUtils } from "./utils"
 import { actions } from "./analytics"
+import { useConfigurationContext } from "./ConfigurationContext"
 
 export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
   updateUserConsent: (consent: boolean) => Promise<void>
+} & AnalyticsConfiguration
+
+type AnalyticsConfiguration = {
   trackEvent: (event: string) => Promise<string | boolean>
+  trackScreenView: (screen: string) => Promise<void>
 }
 
-const initialState: AnalyticsContextState = {
+const initialAnalyticsConfiguration = {
+  trackEvent: () => Promise.resolve(""),
+  trackScreenView: () => Promise.resolve(),
+}
+
+const initialContext = {
   userConsentedToAnalytics: false,
   updateUserConsent: () => Promise.resolve(),
-  trackEvent: () => Promise.resolve(false),
+  ...initialAnalyticsConfiguration,
 }
 
-const AnalyticsContext = createContext<AnalyticsContextState>(initialState)
-
+const AnalyticsContext = createContext<AnalyticsContextState>(initialContext)
 const AnalyticsProvider: FunctionComponent = ({ children }) => {
+  const {
+    healthAuthoritySupportsAnalytics,
+    healthAuthorityAnalyticsUrl,
+    healthAuthorityAnalyticsSiteId,
+  } = useConfigurationContext()
   const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
     boolean
   >(false)
+
+  const [analyticsConfiguration, setAnalyticsConfiguration] = useState<
+    AnalyticsConfiguration
+  >(initialAnalyticsConfiguration)
+
   useEffect(() => {
     const checkAnalyticsConsent = async () => {
       const userConsented = await StorageUtils.getAnalyticsConsent()
@@ -35,18 +55,47 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
     checkAnalyticsConsent()
   }, [userConsentedToAnalytics])
 
+  useEffect(() => {
+    const supportAnalyticsTracking =
+      healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+
+    const initializeAnalyticsTracking = () => {
+      Matomo.initTracker(
+        healthAuthorityAnalyticsUrl,
+        healthAuthorityAnalyticsSiteId,
+      )
+    }
+    const trackEvent = async (event: string) => {
+      return actions.trackEvent(event)
+    }
+
+    const trackScreenView = async (screen: string) => {
+      actions.trackScreenView(screen)
+    }
+
+    if (supportAnalyticsTracking) {
+      initializeAnalyticsTracking()
+      setAnalyticsConfiguration({ trackEvent, trackScreenView })
+    }
+  }, [
+    healthAuthoritySupportsAnalytics,
+    userConsentedToAnalytics,
+    healthAuthorityAnalyticsSiteId,
+    healthAuthorityAnalyticsUrl,
+  ])
+
   const updateUserConsent = async (consent: boolean) => {
     await StorageUtils.setAnalyticsConsent(consent)
     setUserConsentedToAnalytics(consent)
   }
 
-  const trackEvent = async (event: string) => {
-    return userConsentedToAnalytics && actions.trackEvent(event)
-  }
-
   return (
     <AnalyticsContext.Provider
-      value={{ userConsentedToAnalytics, updateUserConsent, trackEvent }}
+      value={{
+        userConsentedToAnalytics,
+        updateUserConsent,
+        ...analyticsConfiguration,
+      }}
     >
       {children}
     </AnalyticsContext.Provider>

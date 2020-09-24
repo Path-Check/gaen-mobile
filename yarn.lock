@@ -1343,23 +1343,17 @@
     query-string "^6.11.1"
     react-is "^16.13.0"
 
-"@react-navigation/core@^5.10.0":
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.10.0.tgz#aee9e22a5f0f458ebeadc155f347b13eb5ff5212"
+"@react-navigation/core@^5.12.3":
+  version "5.12.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.3.tgz#0484fcca290569a0dc10b70b99f00edd3f1fd93c"
+  integrity sha512-aEOTAw4FRRNsNu6F9ibLk3SVSs4Res8BI832NEZN6qUto5ZgtuYnQHWeWV2cZ43Nc9KvUyQC/vXvO2RScwgFwA==
   dependencies:
-    "@react-navigation/routers" "^5.4.7"
+    "@react-navigation/routers" "^5.4.11"
     escape-string-regexp "^4.0.0"
-    nanoid "^3.1.5"
-    query-string "^6.12.1"
+    nanoid "^3.1.12"
+    query-string "^6.13.1"
     react-is "^16.13.0"
     use-subscription "^1.4.0"
-
-"@react-navigation/native@5.5.1":
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.5.1.tgz#e669d9561e54d86b1315637b8d5630dc55ee9383"
-  dependencies:
-    "@react-navigation/core" "^5.10.0"
-    nanoid "^3.1.9"
 
 "@react-navigation/native@^3.7.13":
   version "3.7.13"
@@ -1368,11 +1362,20 @@
     hoist-non-react-statics "^3.3.2"
     react-native-safe-area-view "^0.14.9"
 
-"@react-navigation/routers@^5.4.7":
-  version "5.4.7"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.7.tgz#05f85a099d7ee5677edeced98959e4b87562e3b5"
+"@react-navigation/native@^5.7.3":
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.3.tgz#3cda5ee7b0fe0d980db6d788419f0af50a64deac"
+  integrity sha512-bXb1g/cLpGF2DW1Vxk90Ch5vbaZTk5b/4Fn5xjQlueQODgc9ca+GPEssKZ84hCrNmS+Xg+iK1m/ArawLF5gMlw==
   dependencies:
-    nanoid "^3.1.5"
+    "@react-navigation/core" "^5.12.3"
+    nanoid "^3.1.12"
+
+"@react-navigation/routers@^5.4.11":
+  version "5.4.11"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.11.tgz#75dbec1809e282c3749068845099c5bee2c792f0"
+  integrity sha512-J/CsHdIjYBRe81UUiLOoz9NSrQ91uP23Oe21QPCALInRHx+rfwo2oPl6Fn8xAa7n8Dtt2oQUGyF+g5d05cB74w==
+  dependencies:
+    nanoid "^3.1.12"
 
 "@react-navigation/stack@5.1.1":
   version "5.1.1"
@@ -6451,9 +6454,10 @@ nan@^2.12.1, nan@^2.14.0:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
 
-nanoid@^3.1.5, nanoid@^3.1.9:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.9.tgz#1f148669c70bb2072dc5af0666e46edb6cd31fb2"
+nanoid@^3.1.12:
+  version "3.1.12"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.12.tgz#6f7736c62e8d39421601e4a0c77623a97ea69654"
+  integrity sha512-1qstj9z5+x491jfiC4Nelk+f8XBad7LN20PmyWINJEMRSf3wcAjAWysw1qaA8z6NSKe2sjq1hRSDpBH5paCb6A==
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -7174,9 +7178,18 @@ qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-query-string@^6.11.1, query-string@^6.12.1:
+query-string@^6.11.1:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.0.tgz#8d875f66581c854d7480ac79478abb847de742f6"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
+query-string@^6.13.1:
+  version "6.13.2"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.2.tgz#3585aa9412c957cbd358fd5eaca7466f05586dda"
+  integrity sha512-BMmDaUiLDFU1hlM38jTFcRt7HYiGP/zt1sRzrIWm5zpeEuO1rkbPS0ELI3uehoLuuhHDCS8u8lhFN3fEN4JzPQ==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -7260,6 +7273,11 @@ react-native-linear-gradient@^2.5.6:
 react-native-local-resource@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/react-native-local-resource/-/react-native-local-resource-0.1.6.tgz#9aea39488c7b3f3d107e9459d3d83c3ac707d24e"
+
+react-native-matomo@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-matomo/-/react-native-matomo-0.1.1.tgz#399331f3b76f3afa5a01363d62aa1a7db6f11356"
+  integrity sha512-7QJOZIaS7Pi/vHS9+bdebZ7moh/r4Cxu1SOc9pUlOwQIwskOQSCWL9gbxjYVPInTgWNYYc9rP+fR3so00bOOxA==
 
 react-native-permissions@^2.0.10:
   version "2.1.4"

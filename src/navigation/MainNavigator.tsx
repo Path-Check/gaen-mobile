@@ -1,10 +1,13 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useRef } from "react"
 import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from "@react-navigation/native"
 
 import { useOnboardingContext } from "../OnboardingContext"
 import { WelcomeScreens, Stacks } from "./index"
@@ -15,6 +18,7 @@ import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
 import CallbackStack from "./CallbackStack"
+import { useAnalyticsContext } from "../AnalyticsContext"
 
 const Stack = createStackNavigator()
 
@@ -36,9 +40,32 @@ const linking = {
 
 const MainNavigator: FunctionComponent = () => {
   const { isOnboardingComplete } = useOnboardingContext()
+  const { trackScreenView } = useAnalyticsContext()
+  const navigationRef = useRef<NavigationContainerRef>(null)
+  const routeNameRef = useRef<string>()
+
+  const setInitialRoute = () => {
+    routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name
+  }
+
+  const trackPageView = () => {
+    const previousRouteName = routeNameRef.current
+    const currentRouteName = navigationRef?.current?.getCurrentRoute()?.name
+
+    if (currentRouteName && previousRouteName !== currentRouteName) {
+      trackScreenView(currentRouteName)
+    }
+
+    routeNameRef.current = currentRouteName
+  }
 
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer
+      linking={linking}
+      onReady={setInitialRoute}
+      ref={navigationRef}
+      onStateChange={trackPageView}
+    >
       <Stack.Navigator>
         {isOnboardingComplete ? (
           <>
