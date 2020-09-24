@@ -30,6 +30,7 @@ import IsolateBubbles from "./isolateBubbles"
 import LanguagesIcon from "./languagesIcon"
 import LocationPin from "./locationPin"
 import Mask from "./mask"
+import Plus from "./plus"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import QuestionMarkInCircle from "./questionMarkInCircle"
@@ -78,6 +79,7 @@ export const Icons = {
   LanguagesIcon,
   LocationPin,
   Mask,
+  Plus,
   Publish,
   QuestionMark,
   QuestionMarkInCircle,

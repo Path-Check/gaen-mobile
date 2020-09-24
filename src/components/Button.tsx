@@ -13,7 +13,6 @@ import GlobalText from "./GlobalText"
 import { Icons } from "../assets"
 
 import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
-import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
@@ -25,6 +24,7 @@ interface ButtonProps {
   customTextStyle?: TextStyle
   testID?: string
   hasRightArrow?: boolean
+  hasPlusIcon?: boolean
   outlined?: boolean
 }
 
@@ -38,10 +38,9 @@ const Button: FunctionComponent<ButtonProps> = ({
   customTextStyle,
   testID,
   hasRightArrow,
+  hasPlusIcon,
   outlined,
 }) => {
-  const { t } = useTranslation()
-
   const determineGradient = (): string[] => {
     if (outlined) {
       return [Colors.transparent, Colors.transparent]
@@ -110,14 +109,19 @@ const Button: FunctionComponent<ButtonProps> = ({
           <ActivityIndicator size={"large"} />
         ) : (
           <>
+            {hasPlusIcon && (
+              <SvgXml
+                xml={Icons.Plus}
+                fill={disabled ? Colors.black : Colors.white}
+                style={style.leftPlus}
+              />
+            )}
             <GlobalText style={textStyle}>{label}</GlobalText>
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
                 fill={disabled ? Colors.black : Colors.white}
                 style={style.rightArrow}
-                accessible
-                accessibilityLabel={t("common.next")}
               />
             )}
           </>
@@ -156,6 +160,9 @@ const style = StyleSheet.create({
   },
   rightArrow: {
     marginLeft: Spacing.medium,
+  },
+  leftPlus: {
+    marginRight: Spacing.xSmall,
   },
 })
 
