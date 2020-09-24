@@ -81,7 +81,7 @@ const Today: FunctionComponent = () => {
         <Button
           onPress={handleOnPressLogSymptoms}
           label={t("symptom_checker.log_symptoms")}
-          customButtonStyle={style.button}
+          customButtonStyle={{ ...style.button, ...style.logSymptomsButton }}
           customButtonInnerStyle={style.buttonInner}
           hasPlusIcon
         />
@@ -127,9 +127,14 @@ const FeelingGoodContent: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
-    <GlobalText style={style.checkInHeaderText}>
-      {t("symptom_checker.glad_to_hear_it")}
-    </GlobalText>
+    <>
+      <GlobalText style={style.checkInHeaderText}>
+        {t("symptom_checker.glad_to_hear_it")}
+      </GlobalText>
+      <GlobalText style={style.healthAssessmentText}>
+        {t("symptom_checker.check_in_again")}
+      </GlobalText>
+    </>
   )
 }
 
@@ -210,7 +215,7 @@ const style = StyleSheet.create({
   checkInHeaderText: {
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
-    marginBottom: Spacing.xSmall,
+    marginBottom: Spacing.xxxSmall,
   },
   feelingButtonsContainer: {
     flexDirection: "row",
@@ -241,12 +246,15 @@ const style = StyleSheet.create({
   healthAssessmentText: {
     ...Typography.header5,
     ...Typography.base,
-    marginBottom: Spacing.large,
   },
   button: {
     width: "100%",
     elevation: 0,
     shadowOpacity: 0,
+    marginTop: Spacing.large,
+  },
+  logSymptomsButton: {
+    marginTop: 0,
   },
   buttonInner: {
     width: "100%",
