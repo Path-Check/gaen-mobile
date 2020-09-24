@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
@@ -29,13 +29,22 @@ import {
 } from "../styles"
 import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
+import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([])
-  const { addLogEntry } = useSymptomLogContext()
+  const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
+  const { addLogEntry, updateLogEntry } = useSymptomLogContext()
+
+  const { logEntry } = route.params
+  const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
+  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
+
+  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>(
+    initialSelectedSymptoms,
+  )
 
   const handleOnPressSymptom = (selectedSymptom: string) => {
     const indexOfSelectedSymptom = selectedSymptoms.indexOf(selectedSymptom)
@@ -49,12 +58,20 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const handleOnPressSave = () => {
-    addLogEntry(selectedSymptoms)
+    if (symptomLogEntryToEdit !== null) {
+      updateLogEntry({ ...symptomLogEntryToEdit, symptoms: selectedSymptoms })
+    } else {
+      addLogEntry(selectedSymptoms)
+    }
+
+    const flashMessage = symptomLogEntryToEdit
+      ? t("symptom_checker.symptoms_updated")
+      : t("symptom_checker.symptoms_saved")
 
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
       showMessage({
-        message: t("symptom_checker.success_message"),
+        message: flashMessage,
         ...Affordances.successFlashMessageOptions,
       })
       navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)

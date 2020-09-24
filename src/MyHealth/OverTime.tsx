@@ -1,11 +1,15 @@
 import React, { FunctionComponent } from "react"
-import { View } from "react-native"
+import { TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
 import { useSymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry, Symptom, DayLogData, CheckInStatus } from "./symptoms"
 import { GlobalText } from "../components"
 import { Posix, posixToDayjs } from "../utils/dateTime"
+import { MyHealthStackScreens } from "../navigation"
+import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 type SymptomsListProps = {
   symptoms: Symptom[]
@@ -37,10 +41,28 @@ type LogEntryProps = {
   logEntry: SymptomLogEntry
 }
 
-const LogEntry: FunctionComponent<LogEntryProps> = ({
-  logEntry: { date, symptoms },
-}) => {
-  return <SymptomsList symptoms={symptoms} timestamp={date} />
+const LogEntry: FunctionComponent<LogEntryProps> = ({ logEntry }) => {
+  const { t } = useTranslation()
+  const navigation = useNavigation<StackNavigationProp<MyHealthStackParams>>()
+  const { symptoms, date } = logEntry
+
+  const handleOnPressEdit = () => {
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms, {
+      logEntry: JSON.stringify(logEntry),
+    })
+  }
+
+  return (
+    <>
+      <SymptomsList symptoms={symptoms} timestamp={date} />
+      <TouchableOpacity
+        onPress={handleOnPressEdit}
+        accessibilityLabel={t("common.edit")}
+      >
+        <GlobalText>{t("common.edit")}</GlobalText>
+      </TouchableOpacity>
+    </>
+  )
 }
 
 type CheckInSummaryProps = {

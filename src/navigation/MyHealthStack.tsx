@@ -10,7 +10,12 @@ import AtRiskRecommendationScreen from "../MyHealth/AtRiskRecommendation"
 import { SymptomLogProvider } from "../MyHealth/SymptomLogContext"
 import { MyHealthStackScreens } from "./index"
 
-const Stack = createStackNavigator()
+export type MyHealthStackParams = {
+  MyHealth: undefined
+  AtRiskRecommendation: undefined
+  SelectSymptoms: { logEntry?: string }
+}
+const Stack = createStackNavigator<MyHealthStackParams>()
 
 const MyHealthStack: FunctionComponent = () => {
   return (

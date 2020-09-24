@@ -1,5 +1,6 @@
 import React from "react"
-import { render } from "@testing-library/react-native"
+import { fireEvent, render } from "@testing-library/react-native"
+import { useNavigation } from "@react-navigation/native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
 import { CheckInStatus } from "./symptoms"
@@ -7,6 +8,7 @@ import { CheckInStatus } from "./symptoms"
 import OverTime from "./OverTime"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
+import { MyHealthStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
@@ -87,6 +89,48 @@ describe("OverTime", () => {
       expect(getByText(secondTimeString)).toBeDefined()
       expect(getByText(coughSymptom)).toBeDefined()
       expect(getByText(lossOfSmellSymptom)).toBeDefined()
+    })
+  })
+
+  describe("when the user has symptom logs", () => {
+    it("allows the user to edit a symptom log", () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({
+        navigate: navigateSpy,
+      })
+
+      const logEntryPosix = Date.parse(`2020-09-21 10:00`)
+      const logEntry = {
+        id: "1",
+        symptoms: ["Cough"],
+        date: logEntryPosix,
+      }
+      const { getByLabelText } = render(
+        <SymptomLogContext.Provider
+          value={factories.symptomLogContext.build({
+            dailyLogData: [
+              {
+                date: logEntryPosix,
+                checkIn: {
+                  status: CheckInStatus.FeelingGood,
+                  date: logEntryPosix,
+                },
+                logEntries: [logEntry],
+              },
+            ],
+          })}
+        >
+          <OverTime />
+        </SymptomLogContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Edit"))
+      expect(navigateSpy).toHaveBeenCalledWith(
+        MyHealthStackScreens.SelectSymptoms,
+        {
+          logEntry: JSON.stringify(logEntry),
+        },
+      )
     })
   })
 })
