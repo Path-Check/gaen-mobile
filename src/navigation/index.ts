@@ -104,6 +104,7 @@ export type ModalScreen =
   | "AffectedUserStack"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
+  | "AnonymizedDataConsent"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -113,6 +114,7 @@ export const ModalScreens: {
   AffectedUserStack: "AffectedUserStack",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
+  AnonymizedDataConsent: "AnonymizedDataConsent",
 }
 
 export type SettingsScreen =
@@ -123,7 +125,6 @@ export type SettingsScreen =
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
-  | "AnonymizedDataConsent"
 
 export const SettingsScreens: {
   [key in SettingsScreen]: SettingsScreen
@@ -135,7 +136,6 @@ export const SettingsScreens: {
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
-  AnonymizedDataConsent: "AnonymizedDataConsent",
 }
 
 export type AffectedUserFlowScreen =

@@ -4,6 +4,7 @@ import AnonymizedDataInverted from "./anonymizedDataInverted"
 import Arrow from "./arrow"
 import ArrowLeft from "./arrowLeft"
 import BackArrow from "./backArrow"
+import BarGraph from "./barGraph"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import ChatBubble from "./chatBubble"
@@ -53,6 +54,7 @@ export const Icons = {
   Arrow,
   ArrowLeft,
   BackArrow,
+  BarGraph,
   Bell,
   BellYellow,
   ChatBubble,

@@ -279,11 +279,15 @@
   },
   "settings": {
     "share_anonymized_data": "Share Anonymized Data",
+    "you_are_sharing_data": "You are sharing anonymized data",
     "share_anonymized_data_para": "Your anonymous data helps the {{healthAuthorityName}} Commission analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zipcode, but no additional or personally-identifying information.\n\n The {{healthAuthorityName}} will retain your anonymous data for a specific period of time.",
     "i_understand_and_consent": "I Understand and Consent",
+    "stop_sharing_data": "Stop Sharing Data",
     "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening quesitons with the {{healthAuthorityName}}",
     "please_view_privacy_policy": "Please view their privacy policy",
-    "here": "here"
+    "here": "here",
+    "sharing_anonymized_data": "Sharing anonymized data",
+    "not_sharing_anonymized_data": "Not sharing anonymized data"
   },
   "report_issue": {
     "body": "Feedback (required)",
