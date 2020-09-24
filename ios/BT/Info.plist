@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>bugsnag</key>
+	<dict>
+		<key>apiKey</key>
+		<string>3950fbb2e58f6b77c75ac53b8559aad8</string>
+	</dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.transistorsoft.fetch</string>
@@ -10,7 +15,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>COVIDHelp</string>
+	<string>PathCheck BT</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -43,7 +48,7 @@
 	<key>ENAPIVersion</key>
 	<integer>2</integer>
 	<key>ENDeveloperRegion</key>
-	<string>US-LA</string>
+	<string>PC</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -115,10 +120,5 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>bugsnag</key>
-	<dict>
-		<key>apiKey</key>
-		<string>3950fbb2e58f6b77c75ac53b8559aad8</string>
-	</dict>
 </dict>
 </plist>
