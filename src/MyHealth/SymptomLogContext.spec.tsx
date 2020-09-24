@@ -3,7 +3,12 @@ import { Text, TouchableOpacity } from "react-native"
 import { render, waitFor, fireEvent } from "@testing-library/react-native"
 
 import { useSymptomLogContext, SymptomLogProvider } from "./SymptomLogContext"
-import { getLogEntries, getCheckIns, addCheckIn } from "../gaen/nativeModule"
+import {
+  getLogEntries,
+  getCheckIns,
+  addCheckIn,
+  createLogEntry,
+} from "../gaen/nativeModule"
 import { CheckInStatus, combineSymptomAndCheckInLogs } from "./symptoms"
 
 jest.mock("../gaen/nativeModule.ts")
@@ -54,11 +59,52 @@ describe("SymptomLogProvider", () => {
         expect(getByText(newStatus.toString())).toBeDefined()
       })
     })
+
+    it("allows for the creation of a new symptom log", async () => {
+      const createLogEntrySpy = createLogEntry as jest.Mock
+      createLogEntrySpy.mockResolvedValueOnce({})
+      const mockedDate = Date.parse("2020-09-22 10:00")
+      jest.spyOn(Date, "now").mockReturnValue(mockedDate)
+      const symptoms = ["newSymptom"]
+      const newLogEntry = {
+        date: mockedDate,
+        symptoms,
+      }
+      ;(getCheckIns as jest.Mock).mockResolvedValue([])
+      ;(getLogEntries as jest.Mock).mockResolvedValue([])
+
+      const AddCheckInStatus = () => {
+        const { addLogEntry } = useSymptomLogContext()
+
+        return (
+          <>
+            <TouchableOpacity
+              accessibilityLabel="add-log-entry"
+              onPress={() => {
+                addLogEntry(symptoms)
+              }}
+            />
+          </>
+        )
+      }
+
+      const { getByLabelText } = render(
+        <SymptomLogProvider>
+          <AddCheckInStatus />
+        </SymptomLogProvider>,
+      )
+
+      fireEvent.press(getByLabelText("add-log-entry"))
+
+      await waitFor(() => {
+        expect(createLogEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
+      })
+    })
   })
 
   describe("data seeding", () => {
     it("fetch all daily check-in and log entries to serialize", async () => {
-      const checkIns = [{ date: Date.now, status: CheckInStatus.FeelingGood }]
+      const checkIns = [{ date: Date.now(), status: CheckInStatus.FeelingGood }]
       const logEntries = [{ date: Date.now(), symptoms: [], id: "1" }]
       ;(getCheckIns as jest.Mock).mockResolvedValueOnce(checkIns)
       ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)

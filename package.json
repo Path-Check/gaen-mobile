@@ -106,7 +106,7 @@
     "eslint-plugin-react-hooks": "^4.0.3",
     "fishery": "^0.4.1",
     "husky": "^4.2.3",
-    "i18next-parser": "tstirrat/i18next-parser#guard-plural-rule",
+    "i18next-parser": "2.1.1",
     "jest": "^26.2.2",
     "lint-diff": "^1.2.1",
     "lint-staged": "^10.0.9",

@@ -12,13 +12,20 @@ import {
   CheckInStatus,
   DayLogData,
   combineSymptomAndCheckInLogs,
+  Symptom,
 } from "./symptoms"
-import { getLogEntries, getCheckIns, addCheckIn } from "../gaen/nativeModule"
+import {
+  getLogEntries,
+  getCheckIns,
+  addCheckIn,
+  createLogEntry,
+  modifyLogEntry,
+} from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
 
 export type SymptomLogState = {
   dailyLogData: DayLogData[]
-  addLogEntry: (entry: SymptomLogEntry) => Promise<void>
+  addLogEntry: (symptoms: Symptom[]) => Promise<void>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<void>
   todaysCheckIn: CheckIn
   addTodaysCheckIn: (status: CheckInStatus) => Promise<void>
@@ -26,7 +33,7 @@ export type SymptomLogState = {
 
 const initialState = {
   dailyLogData: [],
-  addLogEntry: (_entry: SymptomLogEntry) => {
+  addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve()
   },
   updateLogEntry: (_entry: SymptomLogEntry) => {
@@ -55,10 +62,13 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     checkInAddedToday && setTodaysCheckIn(checkInAddedToday)
   }
 
+  const fetchLogEntries = async () => {
+    const entries = await getLogEntries()
+    setLogEntries(entries)
+  }
+
   useEffect(() => {
-    getLogEntries().then((entries) => {
-      setLogEntries(entries)
-    })
+    fetchLogEntries()
     getCheckIns().then((checkIns) => {
       setCheckIns(checkIns)
       detectTodaysCheckIn(checkIns)
@@ -69,25 +79,26 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     setDailyLogData(combineSymptomAndCheckInLogs(logEntries, checkIns))
   }, [checkIns, logEntries])
 
-  const addLogEntry = async (newEntry: SymptomLogEntry) => {
-    const newLogEntries = [...logEntries, newEntry]
-    setLogEntries(newLogEntries)
+  const addLogEntry = async (symptoms: Symptom[]) => {
+    const newEntry = {
+      symptoms,
+      date: Date.now(),
+    }
+    await createLogEntry(newEntry)
+    await fetchLogEntries()
   }
 
   const updateLogEntry = async (updatedLogEntry: SymptomLogEntry) => {
-    const entriesWithoutTheUpdatedLog = logEntries.filter((entry) => {
-      return entry.id !== updatedLogEntry.id
-    })
-    setLogEntries([...entriesWithoutTheUpdatedLog, updatedLogEntry])
+    await modifyLogEntry(updatedLogEntry)
+    await fetchLogEntries()
   }
 
   const addTodaysCheckIn = async (status: CheckInStatus) => {
     const newCheckIn = { date: Date.now(), status }
     await addCheckIn(newCheckIn)
     setTodaysCheckIn(newCheckIn)
-    getCheckIns().then((checkIns) => {
-      setCheckIns(checkIns)
-    })
+    const newCheckIns = await getCheckIns()
+    setCheckIns(newCheckIns)
   }
 
   return (

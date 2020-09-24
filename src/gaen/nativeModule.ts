@@ -11,7 +11,11 @@ import { ExposureKey } from "../exposureKey"
 import Logger from "../logger"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
-import { CheckIn, SymptomLogEntry } from "../MyHealth/symptoms"
+import {
+  CheckIn,
+  SymptomLogEntry,
+  SymptomLogEntryAttributes,
+} from "../MyHealth/symptoms"
 
 // Event Subscriptions
 export const subscribeToExposureEvents = (
@@ -255,11 +259,13 @@ export const addCheckIn = (checkIn: CheckIn): Promise<void> => {
 // Symptom Log Entry Module
 const symptomLogEntryModule = NativeModules.SymptomLogEntryModule
 
-export const addLogEntry = (entry: SymptomLogEntry): Promise<void> => {
+export const createLogEntry = (
+  entry: SymptomLogEntryAttributes,
+): Promise<void> => {
   return symptomLogEntryModule.addSymptomLogEntry(entry)
 }
 
-export const updateLogEntry = (entry: SymptomLogEntry): Promise<void> => {
+export const modifyLogEntry = (entry: SymptomLogEntry): Promise<void> => {
   return symptomLogEntryModule.updateSymptomLogEntry(entry)
 }
 
