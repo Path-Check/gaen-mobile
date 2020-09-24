@@ -59,7 +59,8 @@ describe("SelectSymptomsScreen", () => {
         )
       })
     })
-    it("deletes the symptom log", async () => {
+
+    it("allows the user to delete the symptom log", async () => {
       const showMessageSpy = showMessage as jest.Mock
       const deleteLogEntrySpy = jest.fn()
       deleteLogEntrySpy.mockResolvedValueOnce({})

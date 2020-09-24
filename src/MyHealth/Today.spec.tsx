@@ -55,7 +55,7 @@ describe("Today", () => {
   })
 
   describe("when the user has not checked in today", () => {
-    it("promts the user to check-in", () => {
+    it("prompts the user to check-in", () => {
       const { getByLabelText, getByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
