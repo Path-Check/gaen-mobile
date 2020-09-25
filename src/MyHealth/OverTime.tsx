@@ -141,7 +141,10 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
 }
 
 const OverTime: FunctionComponent = () => {
+  const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
+
+  const noSymptomHistory = dailyLogData.length === 0
 
   return (
     <ScrollView
@@ -149,9 +152,15 @@ const OverTime: FunctionComponent = () => {
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
-      {dailyLogData.map((logData) => {
-        return <DaySummary key={logData.date} dayLogData={logData} />
-      })}
+      {noSymptomHistory ? (
+        <GlobalText style={style.noSymptomHistoryText}>
+          {t("symptom_checker.no_symptom_history")}
+        </GlobalText>
+      ) : (
+        dailyLogData.map((logData) => {
+          return <DaySummary key={logData.date} dayLogData={logData} />
+        })
+      )}
     </ScrollView>
   )
 }
@@ -225,6 +234,10 @@ const style = StyleSheet.create({
   },
   symptomText: {
     ...Typography.body2,
+  },
+  noSymptomHistoryText: {
+    alignSelf: "center",
+    ...Typography.body1,
   },
 })
 

@@ -13,6 +13,22 @@ import { MyHealthStackScreens } from "../navigation"
 jest.mock("@react-navigation/native")
 
 describe("OverTime", () => {
+  describe("when the user has no checkins or symptom logs", () => {
+    it("displays a 'no logs' message", () => {
+      const { getByText } = render(
+        <SymptomLogContext.Provider
+          value={factories.symptomLogContext.build({
+            dailyLogData: [],
+          })}
+        >
+          <OverTime />
+        </SymptomLogContext.Provider>,
+      )
+
+      expect(getByText("No symptom history")).toBeDefined()
+    })
+  })
+
   describe("when the user has log entries with only a checkIn", () => {
     it("shows the correct message, and a date", () => {
       const dateString = "September 21, 2020"
