@@ -7,6 +7,7 @@ import { ExposureKey } from "../exposureKey"
 import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
 
 jest.mock("./fetchWithTimeout")
+jest.mock("../logger")
 
 describe("postDiagnosisKeys", () => {
   afterEach(() => {
