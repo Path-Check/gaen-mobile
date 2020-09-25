@@ -17,7 +17,6 @@ describe("SelectSymptomsScreen", () => {
       jest.resetAllMocks()
     })
     it("updates the symptom log", async () => {
-      const showMessageSpy = showMessage as jest.Mock
       const updateLogEntrySpy = jest.fn()
       updateLogEntrySpy.mockResolvedValueOnce({})
       const logEntry = {
@@ -49,11 +48,6 @@ describe("SelectSymptomsScreen", () => {
           ...logEntry,
           symptoms: ["cough", "fever"],
         })
-        expect(showMessageSpy).toHaveBeenCalledWith(
-          expect.objectContaining({
-            message: "Symptoms updated!",
-          }),
-        )
         expect(navigateSpy).toHaveBeenCalledWith(
           MyHealthStackScreens.AtRiskRecommendation,
         )
@@ -116,7 +110,6 @@ describe("SelectSymptomsScreen", () => {
       expect(queryByLabelText("Delete entry")).toBeNull()
     })
     it("creates a new symptom log", async () => {
-      const showMessageSpy = showMessage as jest.Mock
       const addLogEntrySpy = jest.fn()
       addLogEntrySpy.mockResolvedValueOnce({})
       const navigateSpy = jest.fn()
@@ -139,11 +132,6 @@ describe("SelectSymptomsScreen", () => {
 
       await waitFor(() => {
         expect(addLogEntrySpy).toHaveBeenCalledWith([coughSymptom])
-        expect(showMessageSpy).toHaveBeenCalledWith(
-          expect.objectContaining({
-            message: "Symptoms saved!",
-          }),
-        )
         expect(navigateSpy).toHaveBeenCalledWith(
           MyHealthStackScreens.AtRiskRecommendation,
         )

@@ -123,7 +123,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header1,
-    color: Colors.primaryText,
+    ...Typography.bold,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {

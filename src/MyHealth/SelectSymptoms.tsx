@@ -26,13 +26,14 @@ import {
   Typography,
   Outlines,
   Iconography,
+  Buttons,
 } from "../styles"
 import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
@@ -77,19 +78,18 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       addLogEntry(selectedSymptoms)
     }
 
-    const flashMessage = isEditingLogEntry
-      ? t("symptom_checker.symptoms_updated")
-      : t("symptom_checker.symptoms_saved")
-
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
+      navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
+    } else {
+      navigation.goBack()
+      const flashMessage = isEditingLogEntry
+        ? t("symptom_checker.symptoms_updated")
+        : t("symptom_checker.symptoms_saved")
       showMessage({
         message: flashMessage,
         ...Affordances.successFlashMessageOptions,
       })
-      navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
-    } else {
-      navigation.goBack()
     }
   }
 
@@ -107,7 +107,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.secondary10} />
       <View style={style.headerContainer}>
         <GlobalText style={style.headerText}>
           {t("symptom_checker.what_symptoms")}
@@ -151,13 +151,18 @@ const SelectSymptomsScreen: FunctionComponent = () => {
           onPress={handleOnPressSave}
           label={t("common.save")}
           disabled={selectedSymptoms.length === 0}
+          customButtonStyle={style.saveButton}
+          customButtonInnerStyle={style.saveButtonInner}
         />
         {isEditingLogEntry && (
           <TouchableOpacity
             onPress={handleOnPressDelete}
             accessibilityLabel={t("symptom_checker.delete_entry")}
+            style={style.deleteButtonContainer}
           >
-            <GlobalText>{t("symptom_checker.delete_entry")}</GlobalText>
+            <GlobalText style={style.deleteButtonText}>
+              {t("symptom_checker.delete_entry")}
+            </GlobalText>
           </TouchableOpacity>
         )}
       </ScrollView>
@@ -165,7 +170,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   )
 }
 
-const headerHeight = 100
+const headerHeight = 130
 
 const style = StyleSheet.create({
   container: {
@@ -174,15 +179,9 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     backgroundColor: Colors.primaryLightBackground,
-    paddingTop: Spacing.xxxHuge,
+    paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
-  },
-  closeIconContainer: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    padding: Spacing.medium,
   },
   headerContainer: {
     width: "100%",
@@ -190,12 +189,18 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.secondary10,
+    paddingHorizontal: Spacing.small,
+    paddingBottom: Spacing.medium,
   },
   headerText: {
     ...Typography.header2,
-    marginBottom: Spacing.large,
-    marginLeft: Spacing.small,
+  },
+  closeIconContainer: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    padding: Spacing.medium,
   },
   symptomButtonsContainer: {
     flexWrap: "wrap",
@@ -212,14 +217,31 @@ const style = StyleSheet.create({
     marginRight: Spacing.small,
   },
   symptomButtonSelected: {
-    backgroundColor: Colors.primary100,
-    borderColor: Colors.primary100,
+    backgroundColor: Colors.neutral100,
+    borderColor: Colors.neutral100,
   },
   symptomButtonText: {
     ...Typography.body1,
   },
   symptomButtonTextSelected: {
     color: Colors.white,
+  },
+  saveButton: {
+    width: "100%",
+    paddingHorizontal: Spacing.xHuge,
+  },
+  saveButtonInner: {
+    width: "100%",
+  },
+  deleteButtonContainer: {
+    ...Buttons.secondary,
+    alignSelf: "center",
+    marginTop: Spacing.medium,
+  },
+  deleteButtonText: {
+    ...Typography.buttonSecondary,
+    fontSize: Typography.small,
+    color: Colors.danger100,
   },
 })
 

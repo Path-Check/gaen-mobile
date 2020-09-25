@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
   TouchableOpacity,
+  ScrollView,
   View,
   Image,
   StyleSheet,
@@ -63,7 +64,11 @@ const Today: FunctionComponent = () => {
       : Colors.primary100
 
   return (
-    <>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
       <View style={style.floatingContainer}>
         <SvgXml
           xml={Icons.CheckInBrokenCircle}
@@ -86,7 +91,7 @@ const Today: FunctionComponent = () => {
           hasPlusIcon
         />
       </View>
-    </>
+    </ScrollView>
   )
 }
 
@@ -195,6 +200,14 @@ const FeelingButton: FunctionComponent<FeelingButtonProps> = ({
 
 const feelingButtonHeight = 120
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  contentContainer: {
+    paddingVertical: Spacing.large,
+    paddingHorizontal: Spacing.xLarge,
+  },
   floatingContainer: {
     ...Outlines.lightShadow,
     backgroundColor: Colors.primaryLightBackground,

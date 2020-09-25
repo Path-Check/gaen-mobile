@@ -336,7 +336,8 @@
     "over_time": "Over Time",
     "symptom_log": {
       "feeling_well": "You were feeling well",
-      "feeling_not_well": "You were not feeling well"
+      "feeling_not_well": "You were not feeling well",
+      "did_not_check_in": "You did not check in"
     }
   },
   "symptoms": {

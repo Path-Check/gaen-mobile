@@ -15,7 +15,7 @@ jest.mock("@react-navigation/native")
 describe("OverTime", () => {
   describe("when the user has log entries with only a checkIn", () => {
     it("shows the correct message, and a date", () => {
-      const dateString = "2020-09-21"
+      const dateString = "September 21, 2020"
       const timeString = "10:00"
       const logEntryPosix = Date.parse(`${dateString} ${timeString}`)
       const { getByText, queryByText } = render(
@@ -45,17 +45,15 @@ describe("OverTime", () => {
 
   describe("when the user has log data with no checkIn entries", () => {
     it("shows the correct message, date and symptoms", () => {
-      const dateString = "2020-09-21"
+      const dateString = "September 21, 2020"
       const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
       const firstTimeString =
-        posixToDayjs(firstLogEntryPosix)?.local()?.format("HH:mm") ||
+        posixToDayjs(firstLogEntryPosix)?.local()?.format("HH:mm A") ||
         "not a date"
       const secondLogEntryPosix = Date.parse(`${dateString} 12:00`)
       const secondTimeString =
-        posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm") ||
+        posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm A") ||
         "not a date"
-      const coughSymptom = "cough"
-      const lossOfSmellSymptom = "loss_of_smell"
       const { getByText, queryByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
@@ -66,12 +64,12 @@ describe("OverTime", () => {
                 logEntries: [
                   {
                     id: "1",
-                    symptoms: [coughSymptom],
+                    symptoms: ["cough"],
                     date: firstLogEntryPosix,
                   },
                   {
                     id: "2",
-                    symptoms: [lossOfSmellSymptom],
+                    symptoms: ["loss_of_smell"],
                     date: secondLogEntryPosix,
                   },
                 ],
@@ -87,8 +85,8 @@ describe("OverTime", () => {
       expect(getByText(dateString)).toBeDefined()
       expect(getByText(firstTimeString)).toBeDefined()
       expect(getByText(secondTimeString)).toBeDefined()
-      expect(getByText(coughSymptom)).toBeDefined()
-      expect(getByText(lossOfSmellSymptom)).toBeDefined()
+      expect(getByText("Cough")).toBeDefined()
+      expect(getByText("Loss of smell")).toBeDefined()
     })
   })
 
