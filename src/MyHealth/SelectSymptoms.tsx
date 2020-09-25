@@ -26,6 +26,7 @@ import {
   Typography,
   Outlines,
   Iconography,
+  Buttons,
 } from "../styles"
 import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
@@ -150,13 +151,18 @@ const SelectSymptomsScreen: FunctionComponent = () => {
           onPress={handleOnPressSave}
           label={t("common.save")}
           disabled={selectedSymptoms.length === 0}
+          customButtonStyle={style.saveButton}
+          customButtonInnerStyle={style.saveButtonInner}
         />
         {isEditingLogEntry && (
           <TouchableOpacity
             onPress={handleOnPressDelete}
             accessibilityLabel={t("symptom_checker.delete_entry")}
+            style={style.deleteButtonContainer}
           >
-            <GlobalText>{t("symptom_checker.delete_entry")}</GlobalText>
+            <GlobalText style={style.deleteButtonText}>
+              {t("symptom_checker.delete_entry")}
+            </GlobalText>
           </TouchableOpacity>
         )}
       </ScrollView>
@@ -211,14 +217,31 @@ const style = StyleSheet.create({
     marginRight: Spacing.small,
   },
   symptomButtonSelected: {
-    backgroundColor: Colors.primary100,
-    borderColor: Colors.primary100,
+    backgroundColor: Colors.neutral100,
+    borderColor: Colors.neutral100,
   },
   symptomButtonText: {
     ...Typography.body1,
   },
   symptomButtonTextSelected: {
     color: Colors.white,
+  },
+  saveButton: {
+    width: "100%",
+    paddingHorizontal: Spacing.xHuge,
+  },
+  saveButtonInner: {
+    width: "100%",
+  },
+  deleteButtonContainer: {
+    ...Buttons.secondary,
+    alignSelf: "center",
+    marginTop: Spacing.medium,
+  },
+  deleteButtonText: {
+    ...Typography.buttonSecondary,
+    fontSize: Typography.small,
+    color: Colors.danger100,
   },
 })
 

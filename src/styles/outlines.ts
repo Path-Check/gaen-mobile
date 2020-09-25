@@ -27,7 +27,7 @@ export const baseShadow: ViewStyle = {
     width: 0,
     height: 8,
   },
-  shadowOpacity: 0.3,
+  shadowOpacity: 0.15,
   shadowRadius: 13.16,
   elevation: 20,
 }

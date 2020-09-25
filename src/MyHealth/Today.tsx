@@ -202,12 +202,11 @@ const feelingButtonHeight = 120
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Spacing.xLarge,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingTop: Spacing.large,
-    paddingBottom: Spacing.large,
+    paddingVertical: Spacing.large,
+    paddingHorizontal: Spacing.xLarge,
   },
   floatingContainer: {
     ...Outlines.lightShadow,

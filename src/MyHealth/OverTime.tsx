@@ -126,12 +126,11 @@ const OverTime: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingTop: Spacing.large,
-    paddingBottom: Spacing.large,
+    paddingVertical: Spacing.large,
+    paddingHorizontal: Spacing.large,
   },
   dateText: {
     ...Typography.header4,
