@@ -153,8 +153,8 @@ const CallbackForm: FunctionComponent = () => {
             <TextInput
               value={phoneNumber}
               style={style.textInput}
-              keyboardType={"phone-pad"}
-              returnKeyType={"done"}
+              keyboardType="phone-pad"
+              returnKeyType="done"
               onChangeText={handleOnChangePhoneNumber}
               blurOnSubmit={false}
               onSubmitEditing={Keyboard.dismiss}

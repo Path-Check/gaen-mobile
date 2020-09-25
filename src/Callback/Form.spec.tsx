@@ -14,8 +14,9 @@ jest.mock("../logger.ts")
 describe("Form", () => {
   describe("on a successful call back requested", () => {
     it("navigates to the success screen", async () => {
+      expect.assertions(1)
       const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValueOnce({
+      ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
       })
       ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce({
