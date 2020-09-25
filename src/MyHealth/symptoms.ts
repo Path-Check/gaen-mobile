@@ -5,38 +5,21 @@ export enum HealthAssessment {
   NotAtRisk,
 }
 
-// All symptoms translations
-// t("symptoms.chest_pain_or_pressure"),
-// t("symptoms.difficulty_breathing"),
-// t("symptoms.lightheadedness"),
-// t("symptoms.disorientation_or_unresponsiveness"),
-// t("symptoms.fever"),
-// t("symptoms.chills"),
-// t("symptoms.cough"),
-// t("symptoms.loss_of_smell"),
-// t("symptoms.loss_of_taste"),
-// t("symptoms.loss_of_appetite"),
-// t("symptoms.vomiting"),
-// t("symptoms.diarrhea"),
-// t("symptoms.body_aches"),
-// t("symptoms.other"),
-export type Symptom = string
-export const symptoms: Symptom[] = [
-  "chest_pain_or_pressure",
-  "difficulty_breathing",
-  "lightheadedness",
-  "disorientation_or_unresponsiveness",
-  "fever",
-  "chills",
-  "cough",
-  "loss_of_smell",
-  "loss_of_taste",
-  "loss_of_appetite",
-  "vomiting",
-  "diarrhea",
-  "body_aches",
-  "other",
-]
+export type Symptom =
+  | "chest_pain_or_pressure"
+  | "difficulty_breathing"
+  | "lightheadedness"
+  | "disorientation_or_unresponsiveness"
+  | "fever"
+  | "chills"
+  | "cough"
+  | "loss_of_smell"
+  | "loss_of_taste"
+  | "loss_of_appetite"
+  | "vomiting"
+  | "diarrhea"
+  | "body_aches"
+  | "other"
 
 export enum CheckInStatus {
   NotCheckedIn,
