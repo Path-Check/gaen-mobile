@@ -156,6 +156,14 @@ object RealmSecureStorageBte {
         }
     }
 
+    fun deleteCheckins() {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.delete(CheckIn::class.java)
+            }
+        }
+    }
+
     fun upsertLogEntry(logEntry: SymptomLogEntry) {
         getRealmInstance().use {
             it.executeTransaction { db ->
@@ -171,6 +179,14 @@ object RealmSecureStorageBte {
                     .equalTo("id", id)
                     .findFirst()
                     ?.deleteFromRealm()
+            }
+        }
+    }
+
+    fun deleteSymptomLogs() {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.delete(SymptomLogEntry::class.java)
             }
         }
     }
