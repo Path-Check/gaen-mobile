@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
@@ -18,15 +24,42 @@ type CheckInSummaryProps = {
 
 const CheckInSummary: FunctionComponent<CheckInSummaryProps> = ({ status }) => {
   const { t } = useTranslation()
-  const [statusDotText, statusDotStyle] =
-    status === CheckInStatus.FeelingNotWell
-      ? [t("my_health.symptom_log.feeling_not_well"), style.statusDotOrange]
-      : [t("my_health.symptom_log.feeling_well"), style.statusDotGreen]
+
+  type CheckInContent = {
+    text: string
+    colorStyle: ViewStyle
+  }
+
+  const determineCheckInStatusContent = (): CheckInContent => {
+    const didNotCheckInContent: CheckInContent = {
+      text: t("my_health.symptom_log.did_not_check_in"),
+      colorStyle: style.statusDotGray,
+    }
+    const feelingNotWellContent: CheckInContent = {
+      text: t("my_health.symptom_log.feeling_not_well"),
+      colorStyle: style.statusDotOrange,
+    }
+    const feelingGoodContent: CheckInContent = {
+      text: t("my_health.symptom_log.feeling_well"),
+      colorStyle: style.statusDotGreen,
+    }
+
+    switch (status) {
+      case CheckInStatus.NotCheckedIn:
+        return didNotCheckInContent
+      case CheckInStatus.FeelingNotWell:
+        return feelingNotWellContent
+      case CheckInStatus.FeelingGood:
+        return feelingGoodContent
+    }
+  }
+
+  const content = determineCheckInStatusContent()
 
   return (
     <View style={style.checkInStatusContainer}>
-      <View style={{ ...style.statusDot, ...statusDotStyle }} />
-      <GlobalText style={style.checkInStatusText}>{statusDotText}</GlobalText>
+      <View style={{ ...style.statusDot, ...content.colorStyle }} />
+      <GlobalText style={style.checkInStatusText}>{content.text}</GlobalText>
     </View>
   )
 }
@@ -145,6 +178,9 @@ const style = StyleSheet.create({
     width: Spacing.xxSmall,
     height: Spacing.xxSmall,
     borderRadius: Outlines.borderRadiusMax,
+  },
+  statusDotGray: {
+    backgroundColor: Colors.neutral75,
   },
   statusDotOrange: {
     backgroundColor: Colors.warning100,

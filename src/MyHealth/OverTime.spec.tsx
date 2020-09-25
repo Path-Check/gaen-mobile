@@ -54,7 +54,7 @@ describe("OverTime", () => {
       const secondTimeString =
         posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm A") ||
         "not a date"
-      const { debug, getByText, queryByText } = render(
+      const { getByText, queryByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
             dailyLogData: [
@@ -80,7 +80,6 @@ describe("OverTime", () => {
           <OverTime />
         </SymptomLogContext.Provider>,
       )
-      debug()
 
       expect(queryByText("You were not feeling well")).toBeNull()
       expect(getByText(dateString)).toBeDefined()
