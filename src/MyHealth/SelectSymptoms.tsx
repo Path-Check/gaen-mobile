@@ -266,10 +266,11 @@ const style = StyleSheet.create({
   },
   saveButton: {
     width: "100%",
-    paddingHorizontal: Spacing.xHuge,
   },
   saveButtonInner: {
     width: "100%",
+    paddingTop: Spacing.xSmall,
+    paddingBottom: Spacing.xSmall + 1,
   },
   deleteButtonContainer: {
     ...Buttons.secondary,
