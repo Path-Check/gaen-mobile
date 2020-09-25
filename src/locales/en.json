@@ -330,6 +330,7 @@
     "entry_deleted": "Entry deleted",
     "log_symptoms": "Log symptoms",
     "check_in_again": "Check in again tomorrow.",
+    "no_symptom_history": "No symptom history",
     "errors": {
       "adding_check_in": "Sorry, we could not add todays check in",
       "adding_symptoms": "Sorry, we could not log your symptoms",
