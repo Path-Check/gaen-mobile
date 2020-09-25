@@ -21,6 +21,8 @@ import {
   createLogEntry,
   modifyLogEntry,
   deleteLogEntry as removeLogEntry,
+  deleteAllCheckIns as deleteCheckIns,
+  deleteAllSymptomLogs as deleteLogs,
 } from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
 
@@ -31,9 +33,11 @@ export type SymptomLogState = {
   deleteLogEntry: (symptomLogEntryId: string) => Promise<void>
   todaysCheckIn: CheckIn
   addTodaysCheckIn: (status: CheckInStatus) => Promise<void>
+  deleteAllCheckIns: () => Promise<void>
+  deleteAllLogEntries: () => Promise<void>
 }
 
-const initialState = {
+const initialState: SymptomLogState = {
   dailyLogData: [],
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve()
@@ -46,6 +50,12 @@ const initialState = {
   },
   todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
   addTodaysCheckIn: (_status: CheckInStatus) => {
+    return Promise.resolve()
+  },
+  deleteAllCheckIns: () => {
+    return Promise.resolve()
+  },
+  deleteAllLogEntries: () => {
     return Promise.resolve()
   },
 }
@@ -111,6 +121,16 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     setCheckIns(newCheckIns)
   }
 
+  const deleteAllCheckIns = async () => {
+    await deleteCheckIns()
+    await getCheckIns()
+  }
+
+  const deleteAllLogEntries = async () => {
+    await deleteLogs()
+    await fetchLogEntries()
+  }
+
   return (
     <SymptomLogContext.Provider
       value={{
@@ -120,6 +140,8 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,
+        deleteAllCheckIns,
+        deleteAllLogEntries,
       }}
     >
       {children}

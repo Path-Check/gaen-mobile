@@ -17,6 +17,7 @@ import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/AnalyticsContext"
+import { SymptomLogProvider } from "./src/MyHealth/SymptomLogContext"
 
 Logger.start()
 
@@ -51,8 +52,10 @@ const App: FunctionComponent = () => {
                 <SystemServicesProvider>
                   <ExposureProvider>
                     <AnalyticsProvider>
-                      <MainNavigator />
-                      <FlashMessage />
+                      <SymptomLogProvider>
+                        <MainNavigator />
+                        <FlashMessage />
+                      </SymptomLogProvider>
                     </AnalyticsProvider>
                   </ExposureProvider>
                 </SystemServicesProvider>

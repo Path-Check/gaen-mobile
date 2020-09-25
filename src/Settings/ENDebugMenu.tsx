@@ -12,6 +12,7 @@ import {
 
 import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
+import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, SettingsScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
@@ -26,6 +27,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
+  const { deleteAllCheckIns, deleteAllLogEntries } = useSymptomLogContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -60,14 +62,18 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   }
 
   const handleOnPressSimulationButton = (
-    callSimulatedEvent: () => Promise<string>,
+    callSimulatedEvent: () => Promise<string | void>,
   ) => {
     return async () => {
       try {
         setLoading(true)
         const result = await callSimulatedEvent()
         setLoading(false)
-        showSuccessAlert(result)
+        if (result) {
+          showSuccessAlert(result)
+        } else {
+          showSuccessAlert("success")
+        }
       } catch (e) {
         setLoading(false)
         showErrorAlert(e.message)
@@ -133,6 +139,14 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
+            />
+            <DebugMenuListItem
+              label="Delete All CheckIns"
+              onPress={handleOnPressSimulationButton(deleteAllCheckIns)}
+            />
+            <DebugMenuListItem
+              label="Delete All Symptom Logs"
+              onPress={handleOnPressSimulationButton(deleteAllLogEntries)}
             />
           </View>
           <View style={style.section}>

@@ -9,4 +9,6 @@ export default Factory.define<SymptomLogState>(() => ({
   updateLogEntry: jest.fn(),
   deleteLogEntry: jest.fn(),
   addTodaysCheckIn: jest.fn(),
+  deleteAllCheckIns: jest.fn(),
+  deleteAllLogEntries: jest.fn(),
 }))

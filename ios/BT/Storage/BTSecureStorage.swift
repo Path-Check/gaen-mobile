@@ -58,11 +58,11 @@ class BTSecureStorage: SafePathsSecureStorage {
   }
 
   func setUserValue<Value: Codable>(value: Value, keyPath: String, notificationName: Notification.Name) {
-      let realm = try! Realm(configuration: realmConfig)
-      try! realm.write {
-        realm.create(UserState.self, value: [keyPath: value], update: .modified)
-        let jsonString = value.jsonStringRepresentation()
-        notificationCenter.post(name: notificationName, object: jsonString)
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.create(UserState.self, value: [keyPath: value], update: .modified)
+      let jsonString = value.jsonStringRepresentation()
+      notificationCenter.post(name: notificationName, object: jsonString)
     }
   }
 
@@ -110,6 +110,22 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func deleteSymptomLogEntries() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let allObjects = realm.objects(SymptomLogEntry.self)
+      realm.delete(allObjects)
+    }
+  }
+
+  func deleteCheckins() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let allObjects = realm.objects(CheckIn.self)
+      realm.delete(allObjects)
+    }
+  }
+
   func canStoreExposure(for date: Date) -> Bool {
     return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }
@@ -136,7 +152,7 @@ class BTSecureStorage: SafePathsSecureStorage {
   var revisionToken: String
 
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
-    .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
+              .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
 
   var checkIns: [CheckIn] {

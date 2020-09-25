@@ -24,6 +24,15 @@ RCT_REMAP_METHOD(addCheckIn,
   resolve(nil);
 }
 
+
+RCT_REMAP_METHOD(deleteCheckins,
+                 deleteCheckinsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] deleteCheckins];
+  resolve(nil);
+}
+
 RCT_REMAP_METHOD(getCheckIns,
                  getCheckInsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
