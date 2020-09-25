@@ -23,30 +23,35 @@ import {
   deleteLogEntry as removeLogEntry,
 } from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
+import Logger from "../logger"
+
+type OperationResult = "success" | "failure"
+type OperationResponse = { kind: OperationResult }
+const SUCCESS_RESPONSE: OperationResponse = { kind: "success" }
 
 export type SymptomLogState = {
   dailyLogData: DayLogData[]
-  addLogEntry: (symptoms: Symptom[]) => Promise<void>
-  updateLogEntry: (entry: SymptomLogEntry) => Promise<void>
-  deleteLogEntry: (symptomLogEntryId: string) => Promise<void>
+  addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
+  updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
+  deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
   todaysCheckIn: CheckIn
-  addTodaysCheckIn: (status: CheckInStatus) => Promise<void>
+  addTodaysCheckIn: (status: CheckInStatus) => Promise<OperationResponse>
 }
 
 const initialState = {
   dailyLogData: [],
   addLogEntry: (_symptoms: Symptom[]) => {
-    return Promise.resolve()
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
   updateLogEntry: (_entry: SymptomLogEntry) => {
-    return Promise.resolve()
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
   deleteLogEntry: (_symptomLogEntryId: string) => {
-    return Promise.resolve()
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
   todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
   addTodaysCheckIn: (_status: CheckInStatus) => {
-    return Promise.resolve()
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
 }
 
@@ -84,31 +89,56 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     setDailyLogData(combineSymptomAndCheckInLogs(logEntries, checkIns))
   }, [checkIns, logEntries])
 
+  const failureResponse = (errorMessage: string): OperationResponse => {
+    Logger.error(errorMessage)
+    return { kind: "failure" }
+  }
+
   const addLogEntry = async (symptoms: Symptom[]) => {
-    const newEntry = {
-      symptoms,
-      date: Date.now(),
+    try {
+      const newEntry = {
+        symptoms,
+        date: Date.now(),
+      }
+      await createLogEntry(newEntry)
+      await fetchLogEntries()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
     }
-    await createLogEntry(newEntry)
-    await fetchLogEntries()
   }
 
   const updateLogEntry = async (updatedLogEntry: SymptomLogEntry) => {
-    await modifyLogEntry(updatedLogEntry)
-    await fetchLogEntries()
+    try {
+      await modifyLogEntry(updatedLogEntry)
+      await fetchLogEntries()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
   }
 
   const deleteLogEntry = async (symptomLogEntryId: string) => {
-    await removeLogEntry(symptomLogEntryId)
-    await fetchLogEntries()
+    try {
+      await removeLogEntry(symptomLogEntryId)
+      await fetchLogEntries()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
   }
 
   const addTodaysCheckIn = async (status: CheckInStatus) => {
-    const newCheckIn = { date: Date.now(), status }
-    await addCheckIn(newCheckIn)
-    setTodaysCheckIn(newCheckIn)
-    const newCheckIns = await getCheckIns()
-    setCheckIns(newCheckIns)
+    try {
+      const newCheckIn = { date: Date.now(), status }
+      await addCheckIn(newCheckIn)
+      setTodaysCheckIn(newCheckIn)
+      const newCheckIns = await getCheckIns()
+      setCheckIns(newCheckIns)
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
   }
 
   return (

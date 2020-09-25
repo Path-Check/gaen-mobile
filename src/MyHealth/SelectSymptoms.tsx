@@ -59,25 +59,63 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressDelete = () => {
+  const handleOnPressDelete = async () => {
     if (isEditingLogEntry) {
-      deleteLogEntry(symptomLogEntryToEdit.id)
-      showMessage({
-        message: t("symptom_checker.entry_deleted"),
-        ...Affordances.successFlashMessageOptions,
-      })
+      const result = await deleteLogEntry(symptomLogEntryToEdit.id)
+      if (result.kind === "success") {
+        showMessage({
+          message: t("symptom_checker.entry_deleted"),
+          ...Affordances.successFlashMessageOptions,
+        })
 
-      navigation.goBack()
+        navigation.goBack()
+      } else {
+        showMessage({
+          message: t("symptom_checker.errors.deleting_symptom_log"),
+          ...Affordances.errorFlashMessageOptions,
+        })
+      }
     }
   }
 
-  const handleOnPressSave = () => {
+  const handleOnPressSave = async () => {
     if (isEditingLogEntry) {
-      updateLogEntry({ ...symptomLogEntryToEdit, symptoms: selectedSymptoms })
+      await updateSymptomLog()
     } else {
-      addLogEntry(selectedSymptoms)
+      await createNewSymptomLog()
     }
+  }
 
+  const createNewSymptomLog = async () => {
+    const result = await addLogEntry(selectedSymptoms)
+
+    if (result.kind === "success") {
+      completeOnPressSave()
+    } else {
+      showMessage({
+        message: t("symptom_checker.errors.adding_symptoms"),
+        ...Affordances.successFlashMessageOptions,
+      })
+    }
+  }
+
+  const updateSymptomLog = async () => {
+    const result = await updateLogEntry({
+      ...symptomLogEntryToEdit,
+      symptoms: selectedSymptoms,
+    })
+
+    if (result.kind === "success") {
+      completeOnPressSave()
+    } else {
+      showMessage({
+        message: t("symptom_checker.errors.updating_symptoms"),
+        ...Affordances.successFlashMessageOptions,
+      })
+    }
+  }
+
+  const completeOnPressSave = () => {
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
       navigation.navigate(MyHealthStackScreens.AtRiskRecommendation)
