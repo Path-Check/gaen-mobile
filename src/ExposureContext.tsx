@@ -15,7 +15,6 @@ import {
 } from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
-import { AppState } from "react-native"
 import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
 
 type Posix = number
@@ -34,6 +33,7 @@ export interface ExposureState {
   getRevisionToken: () => Promise<string>
   lastExposureDetectionDate: Posix | null
   storeRevisionToken: (revisionToken: string) => Promise<void>
+  refreshExposureInfo: () => Promise<void>
   checkForNewExposures: () => Promise<OperationResponse>
 }
 
@@ -50,6 +50,9 @@ const initialState = {
   },
   lastExposureDetectionDate: null,
   storeRevisionToken: () => {
+    return Promise.resolve()
+  },
+  refreshExposureInfo: () => {
     return Promise.resolve()
   },
   checkForNewExposures: () => {
@@ -78,21 +81,15 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [getLastDetectionDate])
 
-  useEffect(() => {
-    const handleAppStateChange = async () => {
-      const exposureInfos = await getCurrentExposures()
-      setExposureInfo(exposureInfos)
-      getLastDetectionDate()
-    }
+  const refreshExposureInfo = async () => {
+    const exposureInfos = await getCurrentExposures()
+    setExposureInfo(exposureInfos)
 
-    AppState.addEventListener("change", handleAppStateChange)
+    const detectionDate = await getLastDetectionDate()
+    setLastExposureDetectionDate(detectionDate)
 
-    handleAppStateChange()
-
-    return () => {
-      AppState.removeEventListener("change", handleAppStateChange)
-    }
-  }, [])
+    return Promise.resolve()
+  }
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
@@ -126,6 +123,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
         getRevisionToken,
         lastExposureDetectionDate,
         storeRevisionToken,
+        refreshExposureInfo,
         checkForNewExposures,
       }}
     >
