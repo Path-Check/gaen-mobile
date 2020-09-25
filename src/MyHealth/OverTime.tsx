@@ -38,13 +38,13 @@ type LogEntryProps = {
 const LogEntry: FunctionComponent<LogEntryProps> = ({ logEntry }) => {
   const { t } = useTranslation()
   const navigation = useNavigation<StackNavigationProp<MyHealthStackParams>>()
-  const { symptoms, date: timestamp } = logEntry
+  const { symptoms, date } = logEntry
 
   if (symptoms.length === 0) {
     return null
   }
 
-  const dayJsDate = posixToDayjs(timestamp)
+  const dayJsDate = posixToDayjs(date)
 
   const handleOnPressEdit = () => {
     navigation.navigate(MyHealthStackScreens.SelectSymptoms, {
