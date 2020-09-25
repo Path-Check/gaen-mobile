@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "clean": "rm -rf node_modules && yarn",
+    "clean": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && rm ios/Podfile.lock && yarn install:pod && react-native start --resetCache",
     "start": "yarn && react-native start",
     "tsc": "tsc --noEmit",
     "prettier": "prettier \"(e2e|src)/**/*.+(js|jsx|ts|tsx|json)\"",
