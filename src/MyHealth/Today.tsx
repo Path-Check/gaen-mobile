@@ -249,7 +249,7 @@ const style = StyleSheet.create({
   checkInHeaderText: {
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
-    marginBottom: Spacing.xxxSmall,
+    marginBottom: Spacing.xSmall,
   },
   feelingButtonsContainer: {
     flexDirection: "row",

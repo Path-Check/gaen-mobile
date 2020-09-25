@@ -109,7 +109,8 @@ const MainTabNavigator: FunctionComponent = () => {
     showLabel: false,
     style: {
       backgroundColor: Colors.primaryLightBackground,
-      borderTopWidth: 0,
+      borderTopWidth: 1,
+      borderTopColor: Colors.neutral10,
       height: insets.bottom + 60,
     },
   }

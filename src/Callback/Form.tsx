@@ -86,6 +86,8 @@ const CallbackForm: FunctionComponent = () => {
     }
   }
 
+  const buttonDisabled = phoneNumber.length === 0
+
   const showError = (error: string): string => {
     switch (error) {
       default: {
@@ -100,8 +102,8 @@ const CallbackForm: FunctionComponent = () => {
       contentContainerStyle={style.contentContainer}
     >
       <KeyboardAvoidingView
-        keyboardVerticalOffset={Spacing.tiny}
-        behavior={isIOS ? "padding" : undefined}
+        keyboardVerticalOffset={Spacing.xSmall}
+        behavior={isIOS ? "position" : undefined}
       >
         <View>
           <View style={style.headerContainer}>
@@ -114,7 +116,6 @@ const CallbackForm: FunctionComponent = () => {
               })}
             </GlobalText>
           </View>
-
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
               {t("callback.firstname")}
@@ -130,7 +131,6 @@ const CallbackForm: FunctionComponent = () => {
               autoCapitalize={"none"}
             />
           </View>
-
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
               {t("callback.lastname")}
@@ -146,7 +146,6 @@ const CallbackForm: FunctionComponent = () => {
               autoCapitalize={"none"}
             />
           </View>
-
           <View style={style.inputContainer}>
             <GlobalText style={style.inputLabel}>
               {t("callback.phone_number_required")}
@@ -154,23 +153,24 @@ const CallbackForm: FunctionComponent = () => {
             <TextInput
               value={phoneNumber}
               style={style.textInput}
-              keyboardType={"phone-pad"}
-              returnKeyType={"done"}
+              keyboardType="phone-pad"
+              returnKeyType="done"
               onChangeText={handleOnChangePhoneNumber}
               blurOnSubmit={false}
               onSubmitEditing={Keyboard.dismiss}
+              testID="phone-number-input"
               multiline
             />
           </View>
-
           <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
         </View>
         {isLoading ? <LoadingIndicator /> : null}
-
         <Button
           onPress={handleOnPressSubmit}
           label={t("common.submit")}
           loading={isLoading}
+          customButtonStyle={style.button}
+          disabled={buttonDisabled}
         />
       </KeyboardAvoidingView>
     </ScrollView>
@@ -209,7 +209,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...Typography.header4,
+    ...Typography.body1,
     marginBottom: Spacing.xxSmall,
   },
   errorSubtitle: {
@@ -217,7 +217,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxSmall,
   },
   inputContainer: {
-    marginTop: Spacing.large,
+    marginBottom: Spacing.medium,
   },
   inputLabel: {
     ...Typography.formInputLabel,
@@ -225,6 +225,9 @@ const style = StyleSheet.create({
   },
   textInput: {
     ...Forms.textInput,
+  },
+  button: {
+    alignSelf: "flex-start",
   },
   activityIndicatorContainer: {
     position: "absolute",
