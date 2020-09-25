@@ -9,6 +9,7 @@ import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
 import HowItWorksStack from "./HowItWorksStack"
+import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
 
 const Stack = createStackNavigator()
 
@@ -42,6 +43,10 @@ const ModalStack: FunctionComponent = () => {
           <HowItWorksStack {...props} destinationOnSkip={Stacks.Connect} />
         )}
       </Stack.Screen>
+      <Stack.Screen
+        name={ModalScreens.AnonymizedDataConsent}
+        component={AnonymizedDataConsentScreen}
+      />
     </Stack.Navigator>
   )
 }
