@@ -11,7 +11,7 @@ import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.module.annotations.ReactModule;
 import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckInStatus;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckIn;
 
 @SuppressWarnings("unused")
 @ReactModule(name = CheckInModule.MODULE_NAME)
@@ -29,26 +29,20 @@ public class CheckInModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void saveCheckInStatus(ReadableMap map, Promise promise) {
-    CheckInStatus checkInStatus = CheckInStatus.Companion.fromReadableMap(map);
-    RealmSecureStorageBte.INSTANCE.upsertCheckInStatus(checkInStatus);
+  public void addCheckIn(ReadableMap map, Promise promise) {
+    CheckIn checkIn = CheckIn.Companion.fromReadableMap(map);
+    RealmSecureStorageBte.INSTANCE.upsertCheckIn(checkIn);
     promise.resolve(null);
   }
 
   @ReactMethod
-  public void getCheckInStatuses(Promise promise) {
-    List<CheckInStatus> checkInStatuses = RealmSecureStorageBte.INSTANCE.getCheckInStatuses();
+  public void getCheckIns(Promise promise) {
+    List<CheckIn> checkIns = RealmSecureStorageBte.INSTANCE.getCheckIns();
 
     WritableArray writableArray = new WritableNativeArray();
-    for (CheckInStatus checkInStatus : checkInStatuses) {
+    for (CheckIn checkInStatus : checkIns) {
       writableArray.pushMap(checkInStatus.toReadableMap());
     }
     promise.resolve(writableArray);
-  }
-
-  @ReactMethod
-  public void getCheckInStatus(String id, Promise promise) {
-    CheckInStatus checkInStatus = RealmSecureStorageBte.INSTANCE.getCheckInStatus(id);
-    promise.resolve(checkInStatus != null ? checkInStatus.toReadableMap() : null);
   }
 }

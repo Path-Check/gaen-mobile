@@ -40,6 +40,22 @@ internal class Migration : RealmMigration {
                 .addField("posixDate", Long::class.java)
                 .addField("feelingGood", Int::class.java)
                 .addRealmListField("symptoms", String::class.java)
+            version++
+        }
+
+        if (version == 5L) {
+            schema.rename("CheckInStatus", "CheckIn")
+                .removeField("symptoms")
+                .renameField("posixDate", "date")
+                .renameField("feelingGood", "status")
+                .removePrimaryKey()
+                .removeField("id")
+                .addPrimaryKey("date")
+
+            schema.create("SymptomLogEntry")
+                .addField("id", String::class.java, FieldAttribute.PRIMARY_KEY, FieldAttribute.REQUIRED)
+                .addField("date", Long::class.java)
+                .addRealmListField("symptoms", String::class.java)
         }
     }
 }
