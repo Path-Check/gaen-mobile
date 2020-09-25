@@ -158,6 +158,7 @@ const CallbackForm: FunctionComponent = () => {
               onChangeText={handleOnChangePhoneNumber}
               blurOnSubmit={false}
               onSubmitEditing={Keyboard.dismiss}
+              testID="phone-number-input"
               multiline
             />
           </View>

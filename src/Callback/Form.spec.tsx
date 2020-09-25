@@ -21,8 +21,9 @@ describe("Form", () => {
       ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce({
         kind: "success",
       })
-      const { getByLabelText } = render(<Form />)
+      const { getByLabelText, getByTestId } = render(<Form />)
 
+      fireEvent.changeText(getByTestId("phone-number-input"), "1234567890")
       fireEvent.press(getByLabelText("Submit"))
       await waitFor(() => {
         expect(navigateSpy).toHaveBeenCalledWith(CallbackStackScreens.Success)
@@ -42,9 +43,11 @@ describe("Form", () => {
         message: errorMessage,
       }
       ;(postCallbackInfo as jest.Mock).mockResolvedValueOnce(errorResponse)
-      const { getByText, getByLabelText } = render(<Form />)
+      const { getByText, getByLabelText, getByTestId } = render(<Form />)
 
+      fireEvent.changeText(getByTestId("phone-number-input"), "1234567890")
       fireEvent.press(getByLabelText("Submit"))
+
       await waitFor(() => {
         expect(getByText("Something went wrong")).toBeDefined()
         expect(loggMetadataSpy).toHaveBeenCalledWith("requestCallbackError", {
@@ -65,9 +68,11 @@ describe("Form", () => {
       ;(postCallbackInfo as jest.Mock).mockRejectedValueOnce(
         new Error(errorMessage),
       )
-      const { getByLabelText } = render(<Form />)
+      const { getByLabelText, getByTestId } = render(<Form />)
 
+      fireEvent.changeText(getByTestId("phone-number-input"), "1234567890")
       fireEvent.press(getByLabelText("Submit"))
+
       await waitFor(() => {
         expect(alertSpy).toHaveBeenCalledWith(
           "Something went wrong",
