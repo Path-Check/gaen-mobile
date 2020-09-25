@@ -1,6 +1,7 @@
 import React from "react"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
+import { showMessage } from "react-native-flash-message"
 
 import { MyHealthStackScreens } from "../navigation"
 
@@ -10,6 +11,7 @@ import { factories } from "../factories"
 import { CheckInStatus } from "./symptoms"
 
 jest.mock("@react-navigation/native")
+jest.mock("react-native-flash-message")
 
 describe("Today", () => {
   describe("when the user has checked in today", () => {
@@ -55,6 +57,34 @@ describe("Today", () => {
   })
 
   describe("when the user has not checked in today", () => {
+    it("shows an error if checking in fails", async () => {
+      const showMessageSpy = showMessage as jest.Mock
+      const errorMessage = "errorMessage"
+      const addTodaysCheckInSpy = jest
+        .fn()
+        .mockResolvedValueOnce({ kind: "failure", errorMessage })
+
+      const { getByLabelText } = render(
+        <SymptomLogContext.Provider
+          value={factories.symptomLogContext.build({
+            addTodaysCheckIn: addTodaysCheckInSpy,
+          })}
+        >
+          <Today />
+        </SymptomLogContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Good"))
+
+      await waitFor(() => {
+        expect(showMessageSpy).toHaveBeenCalledWith(
+          expect.objectContaining({
+            message: "Sorry, we could not add todays check in",
+          }),
+        )
+      })
+    })
+
     it("prompts the user to check-in", () => {
       const { getByLabelText, getByText } = render(
         <SymptomLogContext.Provider
@@ -74,8 +104,10 @@ describe("Today", () => {
     })
 
     describe("when the user selects that they are feeling well", () => {
-      it("saves today check-in with the feeling well status", () => {
-        const addTodaysCheckInSpy = jest.fn()
+      it("saves today check-in with the feeling well status", async () => {
+        const addTodaysCheckInSpy = jest
+          .fn()
+          .mockResolvedValueOnce({ kind: "success" })
 
         const { getByLabelText } = render(
           <SymptomLogContext.Provider
@@ -89,19 +121,23 @@ describe("Today", () => {
 
         fireEvent.press(getByLabelText("Good"))
 
-        expect(addTodaysCheckInSpy).toHaveBeenCalledWith(
-          CheckInStatus.FeelingGood,
-        )
+        await waitFor(() => {
+          expect(addTodaysCheckInSpy).toHaveBeenCalledWith(
+            CheckInStatus.FeelingGood,
+          )
+        })
       })
     })
 
     describe("when the user selects that they are not feeling well", () => {
-      it("saves today check-in with the feeling not well status", () => {
+      it("saves today check-in with the feeling not well status", async () => {
         const navigateSpy = jest.fn()
         ;(useNavigation as jest.Mock).mockReturnValue({
           navigate: navigateSpy,
         })
-        const addTodaysCheckInSpy = jest.fn()
+        const addTodaysCheckInSpy = jest
+          .fn()
+          .mockResolvedValueOnce({ kind: "success" })
 
         const { getByLabelText } = render(
           <SymptomLogContext.Provider
@@ -114,31 +150,43 @@ describe("Today", () => {
         )
 
         fireEvent.press(getByLabelText("Not well"))
-        expect(navigateSpy).toHaveBeenCalledWith(
-          MyHealthStackScreens.SelectSymptoms,
-        )
-        expect(addTodaysCheckInSpy).toHaveBeenCalledWith(
-          CheckInStatus.FeelingNotWell,
-        )
+        await waitFor(() => {
+          expect(navigateSpy).toHaveBeenCalledWith(
+            MyHealthStackScreens.SelectSymptoms,
+          )
+          expect(addTodaysCheckInSpy).toHaveBeenCalledWith(
+            CheckInStatus.FeelingNotWell,
+          )
+        })
       })
     })
 
-    it("allows the user to add a symptom log entry", () => {
+    it("allows the user to add a symptom log entry", async () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
       })
+      const addTodaysCheckInSpy = jest
+        .fn()
+        .mockResolvedValueOnce({ kind: "success" })
 
       const { getByLabelText } = render(
-        <SymptomLogContext.Provider value={factories.symptomLogContext.build()}>
+        <SymptomLogContext.Provider
+          value={factories.symptomLogContext.build({
+            addTodaysCheckIn: addTodaysCheckInSpy,
+          })}
+        >
           <Today />
         </SymptomLogContext.Provider>,
       )
 
       fireEvent.press(getByLabelText("Log symptoms"))
-      expect(navigateSpy).toHaveBeenCalledWith(
-        MyHealthStackScreens.SelectSymptoms,
-      )
+
+      await waitFor(() => {
+        expect(navigateSpy).toHaveBeenCalledWith(
+          MyHealthStackScreens.SelectSymptoms,
+        )
+      })
     })
   })
 })
