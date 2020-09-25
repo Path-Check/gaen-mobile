@@ -62,18 +62,14 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   }
 
   const handleOnPressSimulationButton = (
-    callSimulatedEvent: () => Promise<string | void>,
+    callSimulatedEvent: () => Promise<string>,
   ) => {
     return async () => {
       try {
         setLoading(true)
         const result = await callSimulatedEvent()
         setLoading(false)
-        if (result) {
-          showSuccessAlert(result)
-        } else {
-          showSuccessAlert("success")
-        }
+        showSuccessAlert(result)
       } catch (e) {
         setLoading(false)
         showErrorAlert(e.message)
@@ -142,11 +138,17 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             />
             <DebugMenuListItem
               label="Delete All CheckIns"
-              onPress={handleOnPressSimulationButton(deleteAllCheckIns)}
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllCheckIns()
+                return Promise.resolve(result.kind)
+              })}
             />
             <DebugMenuListItem
               label="Delete All Symptom Logs"
-              onPress={handleOnPressSimulationButton(deleteAllLogEntries)}
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllLogEntries()
+                return Promise.resolve(result.kind)
+              })}
             />
           </View>
           <View style={style.section}>

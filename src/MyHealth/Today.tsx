@@ -11,12 +11,20 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
+import { showMessage } from "react-native-flash-message"
 
 import { GlobalText, Button } from "../components"
 import { CheckInStatus } from "./symptoms"
 import { MyHealthStackScreens } from "../navigation"
 
-import { Outlines, Colors, Typography, Spacing, Iconography } from "../styles"
+import {
+  Outlines,
+  Colors,
+  Typography,
+  Spacing,
+  Iconography,
+  Affordances,
+} from "../styles"
 import { Icons, Images } from "../assets"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useSymptomLogContext } from "./SymptomLogContext"
@@ -29,13 +37,26 @@ const Today: FunctionComponent = () => {
     addTodaysCheckIn,
   } = useSymptomLogContext()
 
-  const handleOnPressGood = () => {
-    addTodaysCheckIn(CheckInStatus.FeelingGood)
+  const handleOnPressGood = async () => {
+    const result = await addTodaysCheckIn(CheckInStatus.FeelingGood)
+    if (result.kind === "failure") {
+      showMessage({
+        message: t("symptom_checker.errors.adding_check_in"),
+        ...Affordances.errorFlashMessageOptions,
+      })
+    }
   }
 
-  const handleOnPressNotWell = () => {
-    addTodaysCheckIn(CheckInStatus.FeelingNotWell)
-    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+  const handleOnPressNotWell = async () => {
+    const result = await addTodaysCheckIn(CheckInStatus.FeelingNotWell)
+    if (result.kind === "failure") {
+      showMessage({
+        message: t("symptom_checker.errors.adding_check_in"),
+        ...Affordances.errorFlashMessageOptions,
+      })
+    } else {
+      navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+    }
   }
 
   const handleOnPressLogSymptoms = () => {

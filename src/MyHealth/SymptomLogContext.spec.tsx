@@ -10,9 +10,11 @@ import {
   createLogEntry,
 } from "../gaen/nativeModule"
 import { CheckInStatus, combineSymptomAndCheckInLogs } from "./symptoms"
+import Logger from "../logger"
 
 jest.mock("../gaen/nativeModule.ts")
 jest.mock("./symptoms.ts")
+jest.mock("../logger.ts")
 describe("SymptomLogProvider", () => {
   describe("data creation", () => {
     it("allows for the creation of a new check-in", async () => {
@@ -98,6 +100,48 @@ describe("SymptomLogProvider", () => {
 
       await waitFor(() => {
         expect(createLogEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
+      })
+    })
+
+    it("captures exceptions and return failure responses", async () => {
+      const errorMessage = "error"
+      ;(createLogEntry as jest.Mock).mockRejectedValueOnce(
+        new Error(errorMessage),
+      )
+      const resultSpy = jest.fn()
+      const loggerSpy = jest.spyOn(Logger, "error")
+      ;(getCheckIns as jest.Mock).mockResolvedValue([])
+      ;(getLogEntries as jest.Mock).mockResolvedValue([])
+
+      const AddCheckInStatus = () => {
+        const { addLogEntry } = useSymptomLogContext()
+
+        return (
+          <>
+            <TouchableOpacity
+              accessibilityLabel="add-log-entry"
+              onPress={async () => {
+                const result = await addLogEntry([])
+                resultSpy(result)
+              }}
+            />
+          </>
+        )
+      }
+
+      const { getByLabelText } = render(
+        <SymptomLogProvider>
+          <AddCheckInStatus />
+        </SymptomLogProvider>,
+      )
+
+      fireEvent.press(getByLabelText("add-log-entry"))
+
+      await waitFor(() => {
+        expect(resultSpy).toHaveBeenCalledWith({
+          kind: "failure",
+        })
+        expect(loggerSpy).toHaveBeenCalledWith(errorMessage)
       })
     })
   })
