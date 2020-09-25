@@ -34,6 +34,7 @@ export const baseShadow: ViewStyle = {
 
 export const lightShadow: ViewStyle = {
   ...baseShadow,
+  shadowOpacity: 0.25,
   shadowColor: Colors.neutral75,
 }
 
