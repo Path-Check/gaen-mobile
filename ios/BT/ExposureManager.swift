@@ -159,6 +159,11 @@ final class ExposureManager: NSObject {
     return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
   }
 
+  /// Update last exposure check date
+  func updateLastExposureCheckDate() {
+    btSecureStorage.lastExposureCheckDate = Date()
+  }
+
   /// Returns the check ins as array of dictionaries
   @objc var checkIns: [[String: Any]] {
     return btSecureStorage.checkIns.map { $0.asDictionary }
@@ -290,6 +295,9 @@ final class ExposureManager: NSObject {
     var processedFileCount: Int = 0
     var unpackedArchiveURLs: [URL] = []
 
+    // Update last exposure check date for representation in the UI
+    updateLastExposureCheckDate()
+
     Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
         // Disallow concurrent exposure detection,
@@ -344,6 +352,9 @@ final class ExposureManager: NSObject {
     var lastProcessedUrlPath: String = .default
     var processedFileCount: Int = 0
     var unpackedArchiveURLs: [URL] = []
+
+    // Update last exposure check date for representation in the UI
+    updateLastExposureCheckDate()
 
     Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
@@ -477,12 +488,12 @@ extension ExposureManager {
   }
 
   @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
+   guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
     let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
                                        localizedMessage: String.noLastResetDateAvailable.localized)
     return callback(nil, emError)
     }
-    let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
+    let posixRepresentation = NSNumber(value: lastDetectionDate.posixRepresentation)
     return callback(posixRepresentation, nil)
   }
 

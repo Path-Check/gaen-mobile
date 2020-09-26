@@ -113,7 +113,7 @@ class BTSecureStorageMock: BTSecureStorage {
   var userStateHandler: (() -> UserState)?
   var storeExposuresHandler: (([Exposure]) -> Void)?
   init(notificationCenter: NotificationCenter) {
-    super.init(inMemory: true, notificationCenter: notificationCenter)
+    super.init(notificationCenter: notificationCenter)
   }
 
   override var userState: UserState {
@@ -636,7 +636,7 @@ class ExposureManagerTests: XCTestCase {
     }
 
     let date = Date()
-    userState.dateLastPerformedFileCapacityReset = date
+    userState.lastExposureCheckDate = date
     exposureManager.fetchLastDetectionDate { (posixDate, error) in
       XCTAssertNil(error)
       XCTAssertEqual(posixDate, NSNumber(value: date.posixRepresentation))
@@ -1319,6 +1319,17 @@ class ExposureManagerTests: XCTestCase {
       default: XCTFail()
       }
     }
+  }
+
+  func testUpdateLastExposureDetectionDate() {
+    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    exposureManager.detectExposures { _ in
+      XCTAssertNotNil(btSecureStorageMock.userState.lastExposureCheckDate)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout:5)
   }
 
   @available(iOS 13.7, *)

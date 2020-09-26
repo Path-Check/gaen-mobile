@@ -19,6 +19,7 @@ extension String {
   static let keyPathTestResults = "testResults"
   static let keyPathExposureDetectionErrorLocalizedDescription = "exposureDetectionErrorLocalizedDescription"
   static let keyPathdateLastPerformedFileCapacityReset = "dateLastPerformedFileCapacityReset"
+  static let keyPathLastExposureCheckDate = "lastExposureCheckDate"
   static let keyPathExposures = "exposures"
   static let keyPathHMACKey = "HMACKey"
 
