@@ -188,7 +188,6 @@ const CodeInputForm: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
         </View>
-
         <View style={style.cancelButtonContainer}>
           <TouchableOpacity
             onPress={handleOnPressCancel}
@@ -205,7 +204,6 @@ const CodeInputForm: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
         </View>
-
         <View style={style.headerContainer}>
           <GlobalText style={style.header}>
             {t("export.code_input_title_bluetooth")}
@@ -215,7 +213,6 @@ const CodeInputForm: FunctionComponent = () => {
             {t("export.code_input_body_bluetooth")}
           </GlobalText>
         </View>
-
         <View>
           <TextInput
             testID="code-input"
@@ -233,10 +230,8 @@ const CodeInputForm: FunctionComponent = () => {
             blurOnSubmit={false}
           />
         </View>
-
         <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
         {isLoading ? <LoadingIndicator /> : null}
-
         <Button
           onPress={handleOnPressSubmit}
           label={t("common.next")}
@@ -307,7 +302,9 @@ const style = StyleSheet.create({
     ...Typography.mediumBold,
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
+    textAlign: "center",
     letterSpacing: 8,
+    paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {
     borderColor: Colors.primary125,

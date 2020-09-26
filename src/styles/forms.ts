@@ -40,8 +40,9 @@ export const textInput: TextStyle = {
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.neutral10,
   borderWidth: Outlines.hairline,
-  padding: Spacing.small,
-  textAlign: "center",
+  paddingTop: Spacing.small - 1,
+  paddingBottom: Spacing.small,
+  paddingHorizontal: Spacing.small,
 }
 
 export const inputIndicator: ViewStyle = {
