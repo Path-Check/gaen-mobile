@@ -164,7 +164,7 @@ final class ExposureManager: NSObject {
     return btSecureStorage.checkIns.map { $0.asDictionary }
   }
 
-  /// Persists CheckInStatus in Realm
+  /// Persists CheckIn in Realm
   @objc func saveCheckIn(_ checkInStatus: CheckIn) {
     return btSecureStorage.storeCheckIn(checkInStatus)
   }
@@ -172,6 +172,11 @@ final class ExposureManager: NSObject {
   /// Returns the symptom log entries as array of dictionaries
   @objc var symptomLogEntries: [[String: Any]] {
     return btSecureStorage.symptomLogEntries.map { $0.asDictionary }
+  }
+
+  /// Deletes All CheckIns from Realm
+  @objc func deleteCheckins() {
+    return btSecureStorage.deleteCheckins()
   }
 
   /// Persists SymptomLogEntry in Realm
@@ -182,6 +187,11 @@ final class ExposureManager: NSObject {
   /// Deletes SymptomLogEntry in Realm
   @objc func deleteSymptomLogEntry(_ id: String) {
     return btSecureStorage.deleteSymptomLogEntry(id)
+  }
+
+  /// Deletes All SymptomLogEntries from Realm
+  @objc func deleteSymptomLogEntries() {
+    return btSecureStorage.deleteSymptomLogEntries()
   }
 
   ///Notifies the user to enable bluetooth to be able to exchange keys

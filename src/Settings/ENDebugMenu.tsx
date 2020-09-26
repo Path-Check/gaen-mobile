@@ -12,6 +12,7 @@ import {
 
 import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
+import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, SettingsScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
@@ -26,6 +27,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
+  const { deleteAllCheckIns, deleteAllLogEntries } = useSymptomLogContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -133,6 +135,20 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
+            />
+            <DebugMenuListItem
+              label="Delete All CheckIns"
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllCheckIns()
+                return Promise.resolve(result.kind)
+              })}
+            />
+            <DebugMenuListItem
+              label="Delete All Symptom Logs"
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllLogEntries()
+                return Promise.resolve(result.kind)
+              })}
             />
           </View>
           <View style={style.section}>

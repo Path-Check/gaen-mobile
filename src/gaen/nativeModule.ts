@@ -256,6 +256,10 @@ export const addCheckIn = (checkIn: CheckIn): Promise<void> => {
   return checkInModule.addCheckIn(checkIn)
 }
 
+export const deleteAllCheckIns = async (): Promise<"success"> => {
+  return checkInModule.deleteCheckins()
+}
+
 // Symptom Log Entry Module
 const symptomLogEntryModule = NativeModules.SymptomLogEntryModule
 
@@ -275,4 +279,8 @@ export const deleteLogEntry = (symptomLogEntryId: string): Promise<void> => {
 
 export const getLogEntries = (): Promise<SymptomLogEntry[]> => {
   return symptomLogEntryModule.getSymptomLogEntries()
+}
+
+export const deleteAllSymptomLogs = async (): Promise<void> => {
+  return symptomLogEntryModule.deleteSymptomLogs()
 }

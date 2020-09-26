@@ -21,6 +21,8 @@ import {
   createLogEntry,
   modifyLogEntry,
   deleteLogEntry as removeLogEntry,
+  deleteAllCheckIns as deleteCheckIns,
+  deleteAllSymptomLogs as deleteLogs,
 } from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
 import Logger from "../logger"
@@ -36,9 +38,11 @@ export type SymptomLogState = {
   deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
   todaysCheckIn: CheckIn
   addTodaysCheckIn: (status: CheckInStatus) => Promise<OperationResponse>
+  deleteAllCheckIns: () => Promise<OperationResponse>
+  deleteAllLogEntries: () => Promise<OperationResponse>
 }
 
-const initialState = {
+const initialState: SymptomLogState = {
   dailyLogData: [],
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
@@ -51,6 +55,12 @@ const initialState = {
   },
   todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
   addTodaysCheckIn: (_status: CheckInStatus) => {
+    return Promise.resolve(SUCCESS_RESPONSE)
+  },
+  deleteAllCheckIns: () => {
+    return Promise.resolve(SUCCESS_RESPONSE)
+  },
+  deleteAllLogEntries: () => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
 }
@@ -141,6 +151,26 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     }
   }
 
+  const deleteAllCheckIns = async () => {
+    try {
+      await deleteCheckIns()
+      await getCheckIns()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
+  }
+
+  const deleteAllLogEntries = async () => {
+    try {
+      await deleteLogs()
+      await fetchLogEntries()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
+  }
+
   return (
     <SymptomLogContext.Provider
       value={{
@@ -150,6 +180,8 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,
+        deleteAllCheckIns,
+        deleteAllLogEntries,
       }}
     >
       {children}
