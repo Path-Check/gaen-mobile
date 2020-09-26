@@ -12,6 +12,18 @@ jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("History", () => {
+  describe("when exposures have not been updated yet", () => {
+    it("shows the appropriate message", () => {
+      const exposures: ExposureDatum[] = []
+
+      const { queryByText } = render(
+        <History exposures={exposures} lastDetectionDate={null} />,
+      )
+
+      expect(queryByText("No checks yet")).not.toBeNull()
+    })
+  })
+
   describe("when there are no exposures", () => {
     it("shows a no exposure reports message", () => {
       const exposures: ExposureDatum[] = []

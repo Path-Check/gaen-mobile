@@ -29,4 +29,11 @@ RCT_REMAP_METHOD(fetchLastDetectionDate,
   }];
 }
 
+RCT_REMAP_METHOD(detectExposures,
+                 detectExposuresWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] detectExposuresWithResolve:resolve reject:reject];
+}
+
 @end
