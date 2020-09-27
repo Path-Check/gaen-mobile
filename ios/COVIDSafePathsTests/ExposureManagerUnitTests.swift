@@ -654,7 +654,7 @@ class ExposureManagerTests: XCTestCase {
     exposureManager.detectExposuresV1 { (result) in
       switch result {
       case .success:
-        XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+        XCTAssertEqual(btSecureStorageMock.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
       default: XCTFail()
       }
     }
@@ -1321,11 +1321,25 @@ class ExposureManagerTests: XCTestCase {
     }
   }
 
-  func testUpdateLastExposureDetectionDate() {
+  @available(iOS 13.7, *)
+  func testUpdateLastExposureDetectionDateV2() {
     let expectation = self.expectation(description: "lastExposureCheckDate is updated")
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
-    exposureManager.detectExposures { _ in
+    XCTAssertNil(btSecureStorageMock.lastExposureCheckDate)
+    exposureManager.detectExposuresV2 { _ in
+      XCTAssertNotNil(btSecureStorageMock.lastExposureCheckDate)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout:5)
+  }
+
+  func testUpdateLastExposureDetectionDateV1() {
+    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    XCTAssertNil(btSecureStorageMock.lastExposureCheckDate)
+    exposureManager.detectExposuresV1 { _ in
       XCTAssertNotNil(btSecureStorageMock.lastExposureCheckDate)
       expectation.fulfill()
     }
