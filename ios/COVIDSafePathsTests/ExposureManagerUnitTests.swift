@@ -113,7 +113,7 @@ class BTSecureStorageMock: BTSecureStorage {
   var userStateHandler: (() -> UserState)?
   var storeExposuresHandler: (([Exposure]) -> Void)?
   init(notificationCenter: NotificationCenter) {
-    super.init(notificationCenter: notificationCenter)
+    super.init(inMemory: true, notificationCenter: notificationCenter)
   }
 
   override var userState: UserState {
@@ -1326,7 +1326,7 @@ class ExposureManagerTests: XCTestCase {
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
     exposureManager.detectExposures { _ in
-      XCTAssertNotNil(btSecureStorageMock.userState.lastExposureCheckDate)
+      XCTAssertNotNil(btSecureStorageMock.lastExposureCheckDate)
       expectation.fulfill()
     }
     wait(for: [expectation], timeout:5)
