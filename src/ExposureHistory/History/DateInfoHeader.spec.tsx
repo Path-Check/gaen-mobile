@@ -24,14 +24,6 @@ describe("DateInfoHeader", () => {
     })
   })
 
-  it('displays the "refresh" button', async () => {
-    const { getByTestId } = render(<DateInfoHeader lastDetectionDate={null} />)
-
-    await waitFor(() => {
-      expect(getByTestId("refresh-button")).toBeDefined()
-    })
-  })
-
   describe("when the refresh button is tapped", () => {
     it("calls checkForNewExposures", async () => {
       const checkForNewExposuresSpy = checkForNewExposures as jest.Mock
