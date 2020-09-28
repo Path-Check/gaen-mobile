@@ -50,7 +50,7 @@ import {
 const TOP_ICON_SIZE = Iconography.medium
 
 const Home: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.gradientPrimary100Lighter)
+  useStatusBarEffect("light-content", Colors.gradient100Light)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -117,16 +117,13 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.gradientPrimary100Lighter} />
+      <StatusBar backgroundColor={Colors.gradient100Light} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
       >
         <View style={style.topScrollViewBackground} />
-        <GradientBackground
-          gradient={Colors.gradientPrimary100}
-          angleCenterY={1}
-        >
+        <GradientBackground gradient={Colors.gradient100} angleCenterY={1}>
           <View style={style.topContainer}>
             <SettingsButton />
             <View style={style.topIconContainer}>
@@ -177,7 +174,7 @@ const style = StyleSheet.create({
     top: "-100%",
     left: 0,
     right: 0,
-    backgroundColor: Colors.gradientPrimary100Lighter,
+    backgroundColor: Colors.gradient100Light,
     height: "100%",
   },
   container: {

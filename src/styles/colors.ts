@@ -45,27 +45,13 @@ export const primaryLightBackground = white
 export const primaryDarkBackround = primary125
 
 // Gradients
-export const gradientPrimary20Darker = BrandColors.gradientPrimary20Darker
-export const gradientPrimary20Lighter = BrandColors.gradientPrimary20Lighter
-export const gradientPrimary100Darker = BrandColors.gradientPrimary100Darker
-export const gradientPrimary100Lighter = BrandColors.gradientPrimary100Lighter
+export const gradient10Dark = "#ececff"
+export const gradient10Light = primaryLightBackground
+export const gradient10 = [gradient10Dark, gradient10Light]
 
-export const gradientPrimary20 = [
-  gradientPrimary20Darker,
-  gradientPrimary20Lighter,
-]
-export const gradientPrimary100 = [
-  gradientPrimary100Darker,
-  gradientPrimary100Lighter,
-]
-
-export const gradientNeutral75 = [neutral75, neutral100]
-export const gradientPrimary10Darker = "#ececff"
-export const gradientPrimary10Lighter = primaryLightBackground
-export const gradientPrimary10 = [
-  gradientPrimary10Darker,
-  gradientPrimary10Lighter,
-]
+export const gradient100Dark = BrandColors.gradient100Dark
+export const gradient100Light = BrandColors.gradient100Light
+export const gradient100 = [gradient100Dark, gradient100Light]
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"

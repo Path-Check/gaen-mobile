@@ -1,16 +1,16 @@
 # Utility to fetch the copy json from the configuration repo.
 require_relative "./helpers"
 
-COPY_FILE_NAME = "brandColors.ts"
-COPY_FILE_PATH = "src/configuration"
+BRAND_COLORS_FILE_NAME = "brandColors.ts"
+BRAND_COLORS_FILE_PATH = "src/configuration"
 
 def download_brand_colors_file(ha_label, access_token)
-  brand_colors_file_url = "https://#{access_token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{mobile_resources_commit}/brand_colors/#{HA_LABEL}/#{COPY_FILE_NAME}"
+  brand_colors_file_url = "https://#{access_token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{mobile_resources_commit}/brand_colors/#{HA_LABEL}/#{BRAND_COLORS_FILE_NAME}"
 
   if url_exists?(brand_colors_file_url)
-    file_destination = "#{COPY_FILE_PATH}/#{COPY_FILE_NAME}"
+    file_destination = "#{BRAND_COLORS_FILE_PATH}/#{BRAND_COLORS_FILE_NAME}"
 
-    return true if download_file(file_destination, copy_file_url)
+    return true if download_file(file_destination, brand_colors_file_url)
 
     puts "Failed to download brand colors file for #{ha_label}"
   else
