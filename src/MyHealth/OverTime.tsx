@@ -189,7 +189,7 @@ const OverTime: FunctionComponent = () => {
             width={Iconography.xSmall}
             height={Iconography.xSmall}
             testID="list-view-button"
-            onPress={() => {
+            onPress={handleOnPressToggleView}
               setViewSelection(ViewSelection.LIST)
             }}
           />
