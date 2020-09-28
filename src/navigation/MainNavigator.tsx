@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
 import {
+  LinkingOptions,
   NavigationContainer,
   NavigationContainerRef,
 } from "@react-navigation/native"
@@ -31,10 +32,10 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
-const linking = {
+const linking: LinkingOptions = {
   prefixes: ["pathcheck://"],
   config: {
-    ExposureHistoryFlow: "exposureHistory",
+    screens: { ExposureHistoryFlow: "exposureHistory" },
   },
 }
 
