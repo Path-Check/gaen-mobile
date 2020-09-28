@@ -9,7 +9,11 @@ import {
   addCheckIn,
   createLogEntry,
 } from "../gaen/nativeModule"
-import { CheckInStatus, combineSymptomAndCheckInLogs } from "./symptoms"
+import {
+  Symptom,
+  CheckInStatus,
+  combineSymptomAndCheckInLogs,
+} from "./symptoms"
 import Logger from "../logger"
 
 jest.mock("../gaen/nativeModule.ts")
@@ -67,7 +71,7 @@ describe("SymptomLogProvider", () => {
       createLogEntrySpy.mockResolvedValueOnce({})
       const mockedDate = Date.parse("2020-09-22 10:00")
       jest.spyOn(Date, "now").mockReturnValue(mockedDate)
-      const symptoms = ["newSymptom"]
+      const symptoms: Symptom[] = ["cough"]
       const newLogEntry = {
         date: mockedDate,
         symptoms,

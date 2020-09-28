@@ -164,6 +164,10 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       : style.symptomButtonText
   }
 
+  const symptomsWithTranslationsList = Object.entries(
+    symptomsWithTranslations,
+  ) as [Symptom, string][]
+
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
@@ -189,7 +193,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.symptomButtonsContainer}>
-          {Object.entries(symptomsWithTranslations).map(
+          {symptomsWithTranslationsList.map(
             ([symptom, translation]: [Symptom, string]) => {
               return (
                 <TouchableHighlight
