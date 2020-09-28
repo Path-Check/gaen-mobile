@@ -68,8 +68,8 @@ describe("OverTime", () => {
 
   describe("when the user views their log history", () => {
     it('shows the "History" header title', () => {
-      const { getByText, getByTestId } = render(<OverTime />)
-      fireEvent.press(getByTestId("calendar-button"))
+      const { getByText, getByLabelText } = render(<OverTime />)
+      fireEvent.press(getByLabelText("Toggle symptom log view"))
       expect(getByText("HISTORY")).toBeDefined()
     })
   })

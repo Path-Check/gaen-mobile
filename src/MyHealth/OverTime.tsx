@@ -151,47 +151,40 @@ const OverTime: FunctionComponent = () => {
     CALENDAR,
   }
 
-  const [viewSelection, setViewSelection] = useState<ViewSelection>(ViewSelection.LIST)
+  const [viewSelection, setViewSelection] = useState<ViewSelection>(
+    ViewSelection.LIST,
+  )
 
   const noSymptomHistory = dailyLogData.length === 0
 
-  const last14DaysStyle =
-    viewSelection === ViewSelection.LIST ? null : style.hidden
+  const headerTitle =
+    viewSelection === ViewSelection.LIST
+      ? t("symptom_checker.last_14_days")
+      : t("symptom_checker.history")
 
-  const historyStyle =
-    viewSelection === ViewSelection.CALENDAR ? {} : style.hidden
+  const headerIcon =
+    viewSelection === ViewSelection.LIST ? Icons.Calendar : Icons.Hamburger
+
+  const handleOnPressToggleView = () => {
+    if (viewSelection === ViewSelection.LIST) {
+      setViewSelection(ViewSelection.CALENDAR)
+    } else {
+      setViewSelection(ViewSelection.LIST)
+    }
+  }
 
   return (
     <>
-      <View style={[style.headerContainer, last14DaysStyle]}>
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.last_14_days")}
-        </GlobalText>
+      <View style={style.headerContainer}>
+        <GlobalText style={style.headerText}>{headerTitle}</GlobalText>
         <TouchableOpacity>
           <SvgXml
-            xml={Icons.Calendar}
+            xml={headerIcon}
             width={Iconography.xSmall}
             height={Iconography.xSmall}
-            testID="calendar-button"
-            onPress={() => {
-              setViewSelection(ViewSelection.CALENDAR)
-            }}
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={[style.headerContainer, historyStyle]}>
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.history")}
-        </GlobalText>
-        <TouchableOpacity>
-          <SvgXml
-            xml={Icons.Hamburger}
-            width={Iconography.xSmall}
-            height={Iconography.xSmall}
-            testID="list-view-button"
+            accessibilityLabel="Toggle symptom log view"
             onPress={handleOnPressToggleView}
-              setViewSelection(ViewSelection.LIST)
-            }}
+            fill={Colors.primary100}
           />
         </TouchableOpacity>
       </View>
@@ -213,8 +206,6 @@ const OverTime: FunctionComponent = () => {
     </>
   )
 }
-
-const headerHeight = 50
 
 const style = StyleSheet.create({
   container: {
@@ -292,7 +283,7 @@ const style = StyleSheet.create({
   },
   headerContainer: {
     width: "100%",
-    height: headerHeight,
+    height: Spacing.xxHuge,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
@@ -303,7 +294,7 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
-    paddingTop: 8,
+    paddingTop: Spacing.xxSmall,
   },
   hidden: {
     display: "none",
