@@ -296,7 +296,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryLightBackground,
     paddingHorizontal: Spacing.small,
     paddingBottom: Spacing.small,
   },
