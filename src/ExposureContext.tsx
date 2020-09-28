@@ -33,7 +33,7 @@ export interface ExposureState {
   getRevisionToken: () => Promise<string>
   lastExposureDetectionDate: Posix | null
   storeRevisionToken: (revisionToken: string) => Promise<void>
-  refreshExposureInfo: () => Promise<void>
+  refreshExposureInfo: () => void
   checkForNewExposures: () => Promise<OperationResponse>
 }
 
@@ -52,9 +52,7 @@ const initialState = {
   storeRevisionToken: () => {
     return Promise.resolve()
   },
-  refreshExposureInfo: () => {
-    return Promise.resolve()
-  },
+  refreshExposureInfo: () => {},
   checkForNewExposures: () => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -87,8 +85,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
 
     const detectionDate = await getLastDetectionDate()
     setLastExposureDetectionDate(detectionDate)
-
-    return Promise.resolve()
   }
 
   useEffect(() => {
