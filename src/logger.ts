@@ -5,7 +5,8 @@ type Loggable = Record<string, unknown>
 
 class Logger {
   static start(): void {
-    if (env.STAGING === "true") {
+    const isStagingEnv = !__DEV__ && env.STAGING === "true"
+    if (isStagingEnv) {
       Bugsnag.start()
     }
   }
