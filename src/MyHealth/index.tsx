@@ -54,7 +54,7 @@ const MyHealthScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.large,
   },
   headerContainer: {
