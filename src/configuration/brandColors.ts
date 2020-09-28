@@ -13,5 +13,5 @@ export const secondary100 = "#a5affb"
 // Gradients
 export const gradientPrimary20Darker = "#f4edfe"
 export const gradientPrimary20Lighter = secondary10
-export const gradientPrimary100Darker = primary100
+export const gradient100Dark = primary100
 export const gradientPrimary100Lighter = "#6979f8"
