@@ -59,7 +59,7 @@ const style = StyleSheet.create({
   },
   headerContainer: {
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerText: {
     ...Typography.header1,
