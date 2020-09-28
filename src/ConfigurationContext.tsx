@@ -9,6 +9,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayReportAnIssue: boolean
   displayMyHealth: boolean
+  displaySelfScreener: boolean
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
@@ -29,6 +30,7 @@ const initialState = {
   displayCallbackForm: false,
   displayReportAnIssue: false,
   displayMyHealth: false,
+  displaySelfScreener: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
@@ -59,6 +61,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
   const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
@@ -78,6 +81,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayReportAnIssue,
         displayMyHealth,
+        displaySelfScreener,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,

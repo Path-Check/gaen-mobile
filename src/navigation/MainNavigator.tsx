@@ -18,6 +18,7 @@ import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
 import CallbackStack from "./CallbackStack"
+import SelfScreenerStack from "./SelfScreenerStack"
 import { useAnalyticsContext } from "../AnalyticsContext"
 
 const Stack = createStackNavigator()
@@ -125,6 +126,10 @@ const MainNavigator: FunctionComponent = () => {
             ...TransitionPresets.ModalTransition,
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+          name={Stacks.SelfScreener}
+          component={SelfScreenerStack}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -122,8 +122,10 @@
       "content": "Someone you were nearby has since tested positive for COVID-19.",
       "ha_guidance_header": "What should I do?",
       "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
-      "header": "You may have crossed paths with the COVID-19 virus.",
+      "general_guidance": "General Guidance",
+      "header": "Someone you were nearby has since tested positive for COVID-19.",
       "isolate": "Isolate",
+      "personalize_my_guidance": "Personalize my guidance",
       "next_steps": "Next Steps",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
       "speak_with_contact_tracer": "Speak with a contact tracer",
@@ -155,6 +157,11 @@
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
+  },
+  "self-screener": {
+    "intro": {
+      "header": "COVID-19 Self Screener"
+    }
   },
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",

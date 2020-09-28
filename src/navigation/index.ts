@@ -182,6 +182,13 @@ export const MyHealthStackScreens: {
   SelectSymptoms: "SelectSymptoms",
 }
 
+export type SelfScreenerScreen = "SelfScreenerIntro"
+
+export const SelfScreenerScreens: {
+  [key in SelfScreenerScreen]: SelfScreenerScreen
+} = {
+  SelfScreenerIntro: "SelfScreenerIntro",
+}
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
@@ -195,6 +202,7 @@ export type Stack =
   | "Settings"
   | "Home"
   | "MyHealth"
+  | "SelfScreener"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -209,6 +217,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   Settings: "Settings",
   Home: "Home",
   MyHealth: "MyHealth",
+  SelfScreener: "SelfScreener",
 }
 
 export const useStatusBarEffect = (
