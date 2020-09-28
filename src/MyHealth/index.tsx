@@ -22,7 +22,7 @@ const MyHealthScreen: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.white} />
       <View style={style.container}>
         <View style={style.headerContainer}>
           <GlobalText style={style.headerText}>
@@ -54,12 +54,12 @@ const MyHealthScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.white,
     paddingTop: Spacing.large,
   },
   headerContainer: {
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.white,
   },
   headerText: {
     ...Typography.header1,

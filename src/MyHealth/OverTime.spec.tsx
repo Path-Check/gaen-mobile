@@ -59,6 +59,21 @@ describe("OverTime", () => {
     })
   })
 
+  describe("when the user views their last 14 days", () => {
+    it('shows the "Last 14 Days" header title', () => {
+      const { getByText } = render(<OverTime />)
+      expect(getByText("LAST 14 DAYS")).toBeDefined()
+    })
+  })
+
+  describe("when the user views their log history", () => {
+    it('shows the "History" header title', () => {
+      const { getByText, getByTestId } = render(<OverTime />)
+      fireEvent.press(getByTestId("calendar-button"))
+      expect(getByText("HISTORY")).toBeDefined()
+    })
+  })
+
   describe("when the user has log data with no checkIn entries", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "September 21, 2020"

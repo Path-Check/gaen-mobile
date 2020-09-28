@@ -7,6 +7,7 @@ import BackArrow from "./backArrow"
 import BarGraph from "./barGraph"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
+import Calendar from "./calendar"
 import ChatBubble from "./chatBubble"
 import CheckInCircle from "./checkInCircle"
 import CheckInBrokenCircle from "./checkInBrokenCircle"
@@ -22,6 +23,7 @@ import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import Gear from "./gear"
 import GoogleMapsLogo from "./google-maps-logo"
+import Hamburger from "./hamburger"
 import Headset from "./headset"
 import Heart from "./heart"
 import HomeInfo from "./homeInfo"
@@ -58,6 +60,7 @@ export const Icons = {
   BarGraph,
   Bell,
   BellYellow,
+  Calendar,
   ChatBubble,
   CheckInCircle,
   CheckInBrokenCircle,
@@ -73,6 +76,7 @@ export const Icons = {
   ExposureIcon,
   Gear,
   GoogleMapsLogo,
+  Hamburger,
   Headset,
   Heart,
   HomeInfo,

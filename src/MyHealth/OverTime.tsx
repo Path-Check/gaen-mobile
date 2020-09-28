@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
 import {
   ScrollView,
   StyleSheet,
@@ -16,7 +16,9 @@ import { GlobalText } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
 import { MyHealthStackScreens } from "../navigation"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
-import { Typography, Colors, Outlines, Spacing } from "../styles"
+import { Typography, Colors, Outlines, Spacing, Iconography } from "../styles"
+import { SvgXml } from "react-native-svg"
+import { Icons } from "../assets"
 
 type CheckInSummaryProps = {
   status: CheckInStatus
@@ -144,26 +146,75 @@ const OverTime: FunctionComponent = () => {
   const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
 
+  enum ViewSelection {
+    LIST,
+    CALENDAR,
+  }
+
+  const [viewSelection, setViewSelection] = useState(ViewSelection.LIST)
+
   const noSymptomHistory = dailyLogData.length === 0
 
+  const last14DaysStyle =
+    viewSelection === ViewSelection.LIST ? null : style.hidden
+
+  const historyStyle =
+    viewSelection === ViewSelection.CALENDAR ? null : style.hidden
+
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      {noSymptomHistory ? (
-        <GlobalText style={style.noSymptomHistoryText}>
-          {t("symptom_checker.no_symptom_history")}
+    <>
+      <View style={[style.headerContainer, last14DaysStyle]}>
+        <GlobalText style={style.headerText}>
+          {t("symptom_checker.last_14_days")}
         </GlobalText>
-      ) : (
-        dailyLogData.map((logData) => {
-          return <DaySummary key={logData.date} dayLogData={logData} />
-        })
-      )}
-    </ScrollView>
+        <TouchableOpacity>
+          <SvgXml
+            xml={Icons.Calendar}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+            testID="calendar-button"
+            onPress={() => {
+              setViewSelection(ViewSelection.CALENDAR)
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={[style.headerContainer, historyStyle]}>
+        <GlobalText style={style.headerText}>
+          {t("symptom_checker.history")}
+        </GlobalText>
+        <TouchableOpacity>
+          <SvgXml
+            xml={Icons.Hamburger}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+            testID="list-view-button"
+            onPress={() => {
+              setViewSelection(ViewSelection.LIST)
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        {noSymptomHistory ? (
+          <GlobalText style={style.noSymptomHistoryText}>
+            {t("symptom_checker.no_symptom_history")}
+          </GlobalText>
+        ) : (
+          dailyLogData.map((logData) => {
+            return <DaySummary key={logData.date} dayLogData={logData} />
+          })
+        )}
+      </ScrollView>
+    </>
   )
 }
+
+const headerHeight = 50
 
 const style = StyleSheet.create({
   container: {
@@ -238,6 +289,24 @@ const style = StyleSheet.create({
   noSymptomHistoryText: {
     alignSelf: "center",
     ...Typography.body1,
+  },
+  headerContainer: {
+    width: "100%",
+    height: headerHeight,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    backgroundColor: Colors.white,
+    paddingHorizontal: Spacing.small,
+    paddingBottom: Spacing.small,
+  },
+  headerText: {
+    ...Typography.header3,
+    paddingRight: Spacing.xxLarge,
+    paddingTop: 8,
+  },
+  hidden: {
+    display: "none",
   },
 })
 
