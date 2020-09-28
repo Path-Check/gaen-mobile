@@ -159,7 +159,7 @@ const OverTime: FunctionComponent = () => {
     viewSelection === ViewSelection.LIST ? null : style.hidden
 
   const historyStyle =
-    viewSelection === ViewSelection.CALENDAR ? null : style.hidden
+    viewSelection === ViewSelection.CALENDAR ? {} : style.hidden
 
   return (
     <>
