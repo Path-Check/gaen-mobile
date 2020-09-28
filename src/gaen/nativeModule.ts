@@ -210,10 +210,6 @@ export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
 export type ENModuleErrorMessage = string | null
 export type ENModuleSuccessMessage = string | null
 
-export const detectExposuresNow = async (): Promise<string> => {
-  return debugModule.detectExposuresNow()
-}
-
 export const simulateExposure = async (): Promise<"success"> => {
   return debugModule.simulateExposure()
 }
