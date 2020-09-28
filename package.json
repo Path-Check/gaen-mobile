@@ -14,6 +14,7 @@
     "run-ios": "yarn install:pod && react-native run-ios --scheme \"BT_Development\" --configuration \"Debug-BT\" --simulator \"iPhone 11 (13.5)\"",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
     "install:pod": "cd ios && bundle install --quiet && bundle exec pod install --silent",
+    "reset": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && ./android/gradlew -p ./android clean && rm ios/Podfile.lock && yarn install:pod",
     "postinstall": "npx react-native-jetifier",
     "detox-setup": "detox clean-framework-cache && detox build-framework-cache",
     "build:e2e:android": "detox build -c android.emu.release",
