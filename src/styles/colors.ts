@@ -1,4 +1,4 @@
-import * as BrandColors from "./brandColors"
+import * as BrandColors from "../configuration/brandColors"
 
 const applyOpacity = (hexColor: string, opacity: number): string => {
   const red = parseInt(hexColor.slice(1, 3), 16)
