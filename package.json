@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "clean": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && rm ios/Podfile.lock && yarn install:pod",
+    "clean": "rm -rf node_modules && yarn",
+    "nuke": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && ./android/gradlew -p ./android clean && rm ios/Podfile.lock && cd ios && pod install && cd ..",
     "start": "yarn && react-native start",
     "tsc": "tsc --noEmit",
     "prettier": "prettier \"(e2e|src)/**/*.+(js|jsx|ts|tsx|json)\"",
