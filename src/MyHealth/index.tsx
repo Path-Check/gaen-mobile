@@ -22,7 +22,7 @@ const MyHealthScreen: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.white} />
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <View style={style.container}>
         <View style={style.headerContainer}>
           <GlobalText style={style.headerText}>
