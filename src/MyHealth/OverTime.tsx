@@ -146,30 +146,24 @@ const OverTime: FunctionComponent = () => {
   const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
 
-  enum ViewSelection {
-    LIST,
-    CALENDAR,
-  }
+  type ViewSelection = "List" | "Calendar"
 
-  const [viewSelection, setViewSelection] = useState<ViewSelection>(
-    ViewSelection.LIST,
-  )
+  const [viewSelection, setViewSelection] = useState<ViewSelection>("List")
 
   const noSymptomHistory = dailyLogData.length === 0
 
   const headerTitle =
-    viewSelection === ViewSelection.LIST
+    viewSelection === "List"
       ? t("symptom_checker.last_14_days")
       : t("symptom_checker.history")
 
-  const headerIcon =
-    viewSelection === ViewSelection.LIST ? Icons.Calendar : Icons.Hamburger
+  const headerIcon = viewSelection === "List" ? Icons.Calendar : Icons.Hamburger
 
   const handleOnPressToggleView = () => {
-    if (viewSelection === ViewSelection.LIST) {
-      setViewSelection(ViewSelection.CALENDAR)
+    if (viewSelection === "List") {
+      setViewSelection("Calendar")
     } else {
-      setViewSelection(ViewSelection.LIST)
+      setViewSelection("List")
     }
   }
 
