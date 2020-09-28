@@ -1,7 +1,5 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -19,9 +17,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
-import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 
 @SuppressWarnings("unused")
@@ -89,22 +85,6 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void resetExposures(Promise promise) {
     RealmSecureStorageBte.INSTANCE.resetExposures();
     promise.resolve(null);
-  }
-
-  @ReactMethod
-  public void detectExposuresNow(Promise promise) {
-    ExposureNotificationClientWrapper.get(getReactApplicationContext())
-        .isEnabled()
-        .addOnSuccessListener(enabled -> {
-          if (enabled) {
-            WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
-            workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
-            promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
-          } else {
-            promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
-          }
-        })
-        .addOnFailureListener(promise::reject);
   }
 
   @ReactMethod

@@ -103,7 +103,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   const checkForNewExposures = async (): Promise<OperationResponse> => {
     try {
       await detectExposures()
-      getLastExposureDetectionDate()
+      await refreshExposureInfo()
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
