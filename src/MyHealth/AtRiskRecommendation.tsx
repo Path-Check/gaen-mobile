@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
+import { useStatusBarEffect, MyHealthStackScreens, Stacks } from "../navigation"
 import { GlobalText, StatusBar, Button } from "../components"
 
 import { Icons, Images } from "../assets"
@@ -25,7 +25,9 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
   const { findATestCenterUrl } = useConfigurationContext()
 
   const handleOnPressCancel = () => {
-    navigation.navigate(MyHealthStackScreens.MyHealth)
+    navigation.navigate(Stacks.MyHealth, {
+      screen: MyHealthStackScreens.MyHealth,
+    })
   }
 
   const handleOnPressFindTestCenter = () => {

@@ -6,7 +6,6 @@ import {
 
 import MyHealthScreen from "../MyHealth/"
 import SelectSymptomsScreen from "../MyHealth/SelectSymptoms"
-import AtRiskRecommendationScreen from "../MyHealth/AtRiskRecommendation"
 import { MyHealthStackScreens } from "./index"
 
 export type MyHealthStackParams = {
@@ -31,14 +30,6 @@ const MyHealthStack: FunctionComponent = () => {
           ...TransitionPresets.ModalTransition,
           headerShown: false,
           gestureEnabled: false,
-        }}
-      />
-      <Stack.Screen
-        name={MyHealthStackScreens.AtRiskRecommendation}
-        component={AtRiskRecommendationScreen}
-        options={{
-          ...TransitionPresets.ModalTransition,
-          headerShown: false,
         }}
       />
     </Stack.Navigator>

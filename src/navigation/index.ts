@@ -105,6 +105,7 @@ export type ModalScreen =
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
+  | "AtRiskRecommendation"
 
 export const ModalScreens: {
   [key in ModalScreen]: ModalScreen
@@ -115,6 +116,7 @@ export const ModalScreens: {
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
+  AtRiskRecommendation: "AtRiskRecommendation",
 }
 
 export type SettingsScreen =
@@ -171,17 +173,13 @@ export const ReportIssueScreens: {
   ReportIssue: "ReportIssue",
 }
 
-export type MyHealthStackScreen =
-  | "MyHealth"
-  | "SelectSymptoms"
-  | "AtRiskRecommendation"
+export type MyHealthStackScreen = "MyHealth" | "SelectSymptoms"
 
 export const MyHealthStackScreens: {
   [key in MyHealthStackScreen]: MyHealthStackScreen
 } = {
   MyHealth: "MyHealth",
   SelectSymptoms: "SelectSymptoms",
-  AtRiskRecommendation: "AtRiskRecommendation",
 }
 
 export type Stack =
