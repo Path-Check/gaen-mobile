@@ -5,6 +5,7 @@ module.exports = {
     "./jest/setupFile.js",
     "./node_modules/react-native-gesture-handler/jestSetup.js",
   ],
+  testEnvironment: "jsdom",
   collectCoverage: true,
   coverageReporters: ["lcov", "text-summary"],
   coverageDirectory: "test-coverage",

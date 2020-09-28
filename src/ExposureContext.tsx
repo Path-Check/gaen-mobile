@@ -8,9 +8,15 @@ import React, {
 } from "react"
 
 import gaenStrategy from "./gaen"
+import {
+  failureResponse,
+  OperationResponse,
+  SUCCESS_RESPONSE,
+} from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { AppState } from "react-native"
+import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
@@ -28,6 +34,7 @@ export interface ExposureState {
   getRevisionToken: () => Promise<string>
   lastExposureDetectionDate: Posix | null
   storeRevisionToken: (revisionToken: string) => Promise<void>
+  checkForNewExposures: () => Promise<OperationResponse>
 }
 
 const initialState = {
@@ -44,6 +51,9 @@ const initialState = {
   lastExposureDetectionDate: null,
   storeRevisionToken: () => {
     return Promise.resolve()
+  },
+  checkForNewExposures: () => {
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
 }
 
@@ -72,6 +82,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     const handleAppStateChange = async () => {
       const exposureInfos = await getCurrentExposures()
       setExposureInfo(exposureInfos)
+      getLastDetectionDate()
     }
 
     AppState.addEventListener("change", handleAppStateChange)
@@ -96,6 +107,16 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     return subscription.remove
   }, [exposureInfoSubscription, getLastExposureDetectionDate])
 
+  const checkForNewExposures = async (): Promise<OperationResponse> => {
+    try {
+      await detectExposures()
+      getLastExposureDetectionDate()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
+  }
+
   return (
     <ExposureContext.Provider
       value={{
@@ -105,6 +126,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
         getRevisionToken,
         lastExposureDetectionDate,
         storeRevisionToken,
+        checkForNewExposures,
       }}
     >
       {children}

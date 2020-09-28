@@ -101,6 +101,10 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
   }
 }
 
+export const checkForNewExposures = async (): Promise<void> => {
+  return await exposureHistoryModule.detectExposures()
+}
+
 // Exposure Key Module
 const exposureKeyModule = NativeModules.ExposureKeyModule
 

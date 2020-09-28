@@ -30,13 +30,13 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 9,
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 10,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
                                                                               CheckIn.self,
                                                                               SymptomLogEntry.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 9,
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 10,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
                                                                               CheckIn.self,
@@ -142,6 +142,10 @@ class BTSecureStorage: SafePathsSecureStorage {
   @Persisted(keyPath: .keyPathdateLastPerformedFileCapacityReset,
              notificationName: .dateLastPerformedFileCapacityResetDidChange, defaultValue: nil)
   var dateLastPerformedFileCapacityReset: Date?
+
+  @Persisted(keyPath: .keyPathLastExposureCheckDate,
+             notificationName: .lastExposureCheckDateDidChange, defaultValue: nil)
+  var lastExposureCheckDate: Date?
 
   @Persisted(keyPath: .keyPathHMACKey,
              notificationName: .HMACKeyDidChange, defaultValue: "")

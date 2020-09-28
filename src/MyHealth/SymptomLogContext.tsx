@@ -25,11 +25,11 @@ import {
   deleteAllSymptomLogs as deleteLogs,
 } from "../gaen/nativeModule"
 import { isToday } from "../utils/dateTime"
-import Logger from "../logger"
-
-type OperationResult = "success" | "failure"
-type OperationResponse = { kind: OperationResult }
-const SUCCESS_RESPONSE: OperationResponse = { kind: "success" }
+import {
+  failureResponse,
+  OperationResponse,
+  SUCCESS_RESPONSE,
+} from "../OperationResponse"
 
 export type SymptomLogState = {
   dailyLogData: DayLogData[]
@@ -98,11 +98,6 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   useEffect(() => {
     setDailyLogData(combineSymptomAndCheckInLogs(logEntries, checkIns))
   }, [checkIns, logEntries])
-
-  const failureResponse = (errorMessage: string): OperationResponse => {
-    Logger.error(errorMessage)
-    return { kind: "failure" }
-  }
 
   const addLogEntry = async (symptoms: Symptom[]) => {
     try {

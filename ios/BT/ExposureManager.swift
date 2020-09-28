@@ -159,6 +159,11 @@ final class ExposureManager: NSObject {
     return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
   }
 
+  /// Update last exposure check date
+  func updateLastExposureCheckDate() {
+    btSecureStorage.lastExposureCheckDate = Date()
+  }
+
   /// Returns the check ins as array of dictionaries
   @objc var checkIns: [[String: Any]] {
     return btSecureStorage.checkIns.map { $0.asDictionary }
@@ -275,6 +280,18 @@ final class ExposureManager: NSObject {
 
   private var isDetectingExposures = false
 
+  @objc func detectExposures(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    detectExposures { result in
+      switch result {
+      case .success:
+        resolve(String.genericSuccess)
+      case .failure(let exposureError):
+        reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      }
+    }
+  }
+
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
     if #available(iOS 13.7, *) {
       return detectExposuresV2(completionHandler: completionHandler)
@@ -300,7 +317,10 @@ final class ExposureManager: NSObject {
       // Reset file capacity to 15 if > 24 hours have elapsed since last reset
       self.updateRemainingFileCapacity()
       guard self.btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
-        // Abort if daily file capacity is exceeded
+        // Update last exposure check date for representation in the UI
+        self.updateLastExposureCheckDate()
+
+        // Abort because daily file capacity is exceeded
         return []
       }
       let indexFileString = try await(self.fetchIndexFile())
@@ -402,6 +422,9 @@ final class ExposureManager: NSObject {
               progress: Progress,
               completionHandler: ((ExposureResult) -> Void)) {
 
+    // Update last exposure check date for representation in the UI
+    updateLastExposureCheckDate()
+
     if progress.isCancelled {
       btSecureStorage.exposureDetectionErrorLocalizedDescription = GenericError.unknown.localizedDescription
       completionHandler(.failure(ExposureError.cancelled))
@@ -477,12 +500,12 @@ extension ExposureManager {
   }
 
   @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
+   guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
     let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
                                        localizedMessage: String.noLastResetDateAvailable.localized)
     return callback(nil, emError)
     }
-    let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
+    let posixRepresentation = NSNumber(value: lastDetectionDate.posixRepresentation)
     return callback(posixRepresentation, nil)
   }
 

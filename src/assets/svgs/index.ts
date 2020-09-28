@@ -36,6 +36,7 @@ import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import QuestionMarkInCircle from "./questionMarkInCircle"
 import RadioWave from "./radioWave"
+import Refresh from "./refresh"
 import RestartWithCheck from "./restartWithCheck"
 import Share from "./share"
 import SixFeet from "./sixFeet"
@@ -86,6 +87,7 @@ export const Icons = {
   QuestionMark,
   QuestionMarkInCircle,
   RadioWave,
+  Refresh,
   RestartWithCheck,
   Share,
   SixFeet,
