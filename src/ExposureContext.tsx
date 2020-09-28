@@ -80,8 +80,8 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   }, [getLastDetectionDate])
 
   const refreshExposureInfo = async () => {
-    const exposureInfos = await getCurrentExposures()
-    setExposureInfo(exposureInfos)
+    const exposureInfo = await getCurrentExposures()
+    setExposureInfo(exposureInfo)
 
     const detectionDate = await getLastDetectionDate()
     setLastExposureDetectionDate(detectionDate)
