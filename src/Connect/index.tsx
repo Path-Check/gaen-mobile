@@ -11,12 +11,7 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import {
-  Stacks,
-  ReportIssueScreens,
-  ModalScreens,
-  useStatusBarEffect,
-} from "../navigation"
+import { Stacks, ModalScreens, useStatusBarEffect } from "../navigation"
 import {
   ListItem,
   ListItemSeparator,
@@ -45,11 +40,7 @@ const ConnectScreen: FunctionComponent = () => {
   } = useTranslation()
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
-  const {
-    healthAuthorityName,
-    displayCallbackForm,
-    displayReportAnIssue,
-  } = useConfigurationContext()
+  const { healthAuthorityName, displayCallbackForm } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
     loadAuthorityCopy("about"),
@@ -80,11 +71,6 @@ const ConnectScreen: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
-  const reportAnIssue: ConnectListItem = {
-    label: t("screen_titles.report_issue"),
-    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
-    icon: Icons.QuestionMarkInCircle,
-  }
   const emergencyContact: ConnectListItem = {
     label: t("about.emergency_contact"),
     onPress: handleOnPressEmergencyContact,
@@ -92,9 +78,6 @@ const ConnectScreen: FunctionComponent = () => {
   }
 
   const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
-  if (displayReportAnIssue) {
-    listItems.push(reportAnIssue)
-  }
 
   if (displayCallbackForm) {
     const callbackForm: ConnectListItem = {

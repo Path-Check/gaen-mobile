@@ -5,7 +5,6 @@ export default Factory.define<Configuration>(() => ({
   appDownloadLink: "appDownloadLink",
   appPackageName: "appPackageName",
   displayAcceptTermsOfService: false,
-  displayReportAnIssue: false,
   displayCallbackForm: false,
   displayMyHealth: false,
   findATestCenterUrl: "findATestCenterUrl",

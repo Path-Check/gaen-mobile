@@ -7,7 +7,6 @@ export interface Configuration {
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
-  displayReportAnIssue: boolean
   displayMyHealth: boolean
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
@@ -27,7 +26,6 @@ const initialState = {
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
-  displayReportAnIssue: false,
   displayMyHealth: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
@@ -57,7 +55,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
-  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
@@ -76,7 +73,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appPackageName,
         displayAcceptTermsOfService,
         displayCallbackForm,
-        displayReportAnIssue,
         displayMyHealth,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,

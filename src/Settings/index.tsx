@@ -10,7 +10,6 @@ import {
   Stacks,
   ModalScreens,
   SettingsScreens,
-  ReportIssueScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { ListItem, ListItemSeparator } from "../components"
@@ -33,7 +32,6 @@ const Settings: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  const { displayReportAnIssue } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
   const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
@@ -59,11 +57,6 @@ const Settings: FunctionComponent = () => {
     onPress: () => navigation.navigate(SettingsScreens.Legal),
     icon: Icons.Document,
   }
-  const reportAnIssue: SettingsListItem = {
-    label: t("screen_titles.report_issue"),
-    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
-    icon: Icons.QuestionMark,
-  }
   const howTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
     onPress: handleOnPressHowTheAppWorks,
@@ -76,9 +69,6 @@ const Settings: FunctionComponent = () => {
   }
 
   const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
-  if (displayReportAnIssue) {
-    middleListItems.push(reportAnIssue)
-  }
 
   return (
     <ScrollView style={style.container}>
