@@ -151,7 +151,7 @@ const OverTime: FunctionComponent = () => {
     CALENDAR,
   }
 
-  const [viewSelection, setViewSelection] = useState(ViewSelection.LIST)
+  const [viewSelection, setViewSelection] = useState<ViewSelection>(ViewSelection.LIST)
 
   const noSymptomHistory = dailyLogData.length === 0
 
