@@ -98,6 +98,8 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
           if (enabled) {
             WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
             workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
+            // We are not waiting until the job is completed.
+            // Is there any way to pass the promise through all the workers?
             promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
           } else {
             promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
