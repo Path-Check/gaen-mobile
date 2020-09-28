@@ -13,9 +13,9 @@ import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
 import { GlobalText, Button, StatusBar } from "../components"
 import {
-  symptoms,
   HealthAssessment,
   determineHealthAssessment,
+  Symptom,
 } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
@@ -39,16 +39,35 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
   const { addLogEntry, updateLogEntry, deleteLogEntry } = useSymptomLogContext()
 
+  const symptomsWithTranslations: Record<Symptom, string> = {
+    chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),
+    difficulty_breathing: t("symptoms.difficulty_breathing"),
+    lightheadedness: t("symptoms.lightheadedness"),
+    disorientation_or_unresponsiveness: t(
+      "symptoms.disorientation_or_unresponsiveness",
+    ),
+    fever: t("symptoms.fever"),
+    chills: t("symptoms.chills"),
+    cough: t("symptoms.cough"),
+    loss_of_smell: t("symptoms.loss_of_smell"),
+    loss_of_taste: t("symptoms.loss_of_taste"),
+    loss_of_appetite: t("symptoms.loss_of_appetite"),
+    vomiting: t("symptoms.vomiting"),
+    diarrhea: t("symptoms.diarrhea"),
+    body_aches: t("symptoms.body_aches"),
+    other: t("symptoms.other"),
+  }
+
   const logEntry = route.params?.logEntry
   const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
   const isEditingLogEntry = symptomLogEntryToEdit !== null
 
   const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>(
+  const [selectedSymptoms, setSelectedSymptoms] = useState<Symptom[]>(
     initialSelectedSymptoms,
   )
 
-  const handleOnPressSymptom = (selectedSymptom: string) => {
+  const handleOnPressSymptom = (selectedSymptom: Symptom) => {
     const indexOfSelectedSymptom = selectedSymptoms.indexOf(selectedSymptom)
     if (indexOfSelectedSymptom >= 0) {
       const newSelectedSymptoms = [...selectedSymptoms]
@@ -131,13 +150,13 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     }
   }
 
-  const determineSymptomButtonStyle = (symptom: string) => {
+  const determineSymptomButtonStyle = (symptom: Symptom) => {
     return selectedSymptoms.includes(symptom)
       ? { ...style.symptomButton, ...style.symptomButtonSelected }
       : style.symptomButton
   }
 
-  const determineSymptomButtonTextStyle = (symptom: string) => {
+  const determineSymptomButtonTextStyle = (symptom: Symptom) => {
     return selectedSymptoms.includes(symptom)
       ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
       : style.symptomButtonText
@@ -168,22 +187,23 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.symptomButtonsContainer}>
-          {symptoms.map((value) => {
-            const translatedSymptom = t(`symptoms.${value}`)
-            return (
-              <TouchableHighlight
-                key={value}
-                onPress={() => handleOnPressSymptom(value)}
-                style={determineSymptomButtonStyle(value)}
-                underlayColor={Colors.neutral10}
-                accessibilityLabel={translatedSymptom}
-              >
-                <GlobalText style={determineSymptomButtonTextStyle(value)}>
-                  {translatedSymptom}
-                </GlobalText>
-              </TouchableHighlight>
-            )
-          })}
+          {Object.entries(symptomsWithTranslations).map(
+            ([symptom, translation]: [Symptom, string]) => {
+              return (
+                <TouchableHighlight
+                  key={symptom}
+                  onPress={() => handleOnPressSymptom(symptom)}
+                  style={determineSymptomButtonStyle(symptom)}
+                  underlayColor={Colors.neutral10}
+                  accessibilityLabel={translation}
+                >
+                  <GlobalText style={determineSymptomButtonTextStyle(symptom)}>
+                    {translation}
+                  </GlobalText>
+                </TouchableHighlight>
+              )
+            },
+          )}
         </View>
         <Button
           onPress={handleOnPressSave}
