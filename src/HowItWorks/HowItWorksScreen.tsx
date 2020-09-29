@@ -14,7 +14,12 @@ import { useTranslation } from "react-i18next"
 import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { StatusBar, GlobalText, Button } from "../components"
-import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
+import {
+  ModalStackScreens,
+  Stacks,
+  Stack,
+  useStatusBarEffect,
+} from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
@@ -51,7 +56,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
+      screen: ModalStackScreens.LanguageSelection,
     })
   }
 
@@ -60,7 +65,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, { screen: ModalScreens.ProtectPrivacy })
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.ProtectPrivacy,
+    })
   }
 
   return (

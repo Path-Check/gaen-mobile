@@ -8,7 +8,7 @@ import { GlobalText } from "../../components"
 import { ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"
-import { ExposureHistoryScreens } from "../../navigation"
+import { ExposureHistoryStackScreens } from "../../navigation"
 import {
   Iconography,
   Colors,
@@ -49,7 +49,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
       underlayColor={Colors.secondary50}
       style={style.container}
       onPress={() =>
-        navigation.navigate(ExposureHistoryScreens.ExposureDetail, {
+        navigation.navigate(ExposureHistoryStackScreens.ExposureDetail, {
           exposureDatum,
         })
       }

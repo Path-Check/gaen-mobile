@@ -14,15 +14,15 @@ export type NavigationProp = NavigationScreenProp<
   NavigationParams
 >
 
-export type ActivationScreen =
+export type ActivationStackScreen =
   | "AcceptTermsOfService"
   | "ActivateProximityTracing"
   | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
 
-export const ActivationScreens: {
-  [key in ActivationScreen]: ActivationScreen
+export const ActivationStackScreens: {
+  [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
   ActivateProximityTracing: "ActivateProximityTracing",
@@ -31,14 +31,14 @@ export const ActivationScreens: {
   ActivationSummary: "ActivationSummary",
 }
 
-export type HomeScreen =
+export type HomeStackScreen =
   | "Home"
   | "BluetoothInfo"
   | "ProximityTracingInfo"
   | "LocationInfo"
 
-export const HomeScreens: {
-  [key in HomeScreen]: HomeScreen
+export const HomeStackScreens: {
+  [key in HomeStackScreen]: HomeStackScreen
 } = {
   Home: "Home",
   BluetoothInfo: "BluetoothInfo",
@@ -46,15 +46,15 @@ export const HomeScreens: {
   LocationInfo: "LocationInfo",
 }
 
-export type HowItWorksScreen =
+export type HowItWorksStackScreen =
   | "Introduction"
   | "PhoneRemembersDevices"
   | "PersonalPrivacy"
   | "GetNotified"
   | "ValueProposition"
 
-export const HowItWorksScreens: {
-  [key in HowItWorksScreen]: HowItWorksScreen
+export const HowItWorksStackScreens: {
+  [key in HowItWorksStackScreen]: HowItWorksStackScreen
 } = {
   Introduction: "Introduction",
   PhoneRemembersDevices: "PhoneRemembersDevices",
@@ -63,13 +63,13 @@ export const HowItWorksScreens: {
   ValueProposition: "ValueProposition",
 }
 
-export type ExposureHistoryScreen =
+export type ExposureHistoryStackScreen =
   | "ExposureHistory"
   | "ExposureDetail"
   | "MoreInfo"
 
-export const ExposureHistoryScreens: {
-  [key in ExposureHistoryScreen]: ExposureHistoryScreen
+export const ExposureHistoryStackScreens: {
+  [key in ExposureHistoryStackScreen]: ExposureHistoryStackScreen
 } = {
   ExposureHistory: "ExposureHistory",
   ExposureDetail: "ExposureDetail",
@@ -83,6 +83,7 @@ export type ExposureHistoryStackParamList = {
 }
 
 export type CallbackStackScreen = "Form" | "Success"
+
 export const CallbackStackScreens: {
   [key in CallbackStackScreen]: CallbackStackScreen
 } = {
@@ -98,7 +99,7 @@ export const ConnectStackScreens: {
   Connect: "Connect",
 }
 
-export type ModalScreen =
+export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
   | "AffectedUserStack"
@@ -107,8 +108,8 @@ export type ModalScreen =
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
 
-export const ModalScreens: {
-  [key in ModalScreen]: ModalScreen
+export const ModalStackScreens: {
+  [key in ModalStackScreen]: ModalStackScreen
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
@@ -119,7 +120,7 @@ export const ModalScreens: {
   AtRiskRecommendation: "AtRiskRecommendation",
 }
 
-export type SettingsScreen =
+export type SettingsStackScreen =
   | "Settings"
   | "Legal"
   | "ENDebugMenu"
@@ -127,8 +128,8 @@ export type SettingsScreen =
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
 
-export const SettingsScreens: {
-  [key in SettingsScreen]: SettingsScreen
+export const SettingsStackScreens: {
+  [key in SettingsStackScreen]: SettingsStackScreen
 } = {
   Settings: "Settings",
   Legal: "Legal",
@@ -138,7 +139,7 @@ export const SettingsScreens: {
   ExposureListDebugScreen: "ExposureListDebugScreen",
 }
 
-export type AffectedUserFlowScreen =
+export type AffectedUserFlowStackScreen =
   | "AffectedUserStart"
   | "AffectedUserCodeInput"
   | "AffectedUserPublishConsent"
@@ -146,8 +147,8 @@ export type AffectedUserFlowScreen =
   | "AffectedUserExportDone"
   | "AffectedUserComplete"
 
-export const AffectedUserFlowScreens: {
-  [key in AffectedUserFlowScreen]: AffectedUserFlowScreen
+export const AffectedUserFlowStackScreens: {
+  [key in AffectedUserFlowStackScreen]: AffectedUserFlowStackScreen
 } = {
   AffectedUserStart: "AffectedUserStart",
   AffectedUserCodeInput: "AffectedUserCodeInput",
@@ -157,9 +158,11 @@ export const AffectedUserFlowScreens: {
   AffectedUserComplete: "AffectedUserComplete",
 }
 
-export type WelcomeScreen = "Welcome"
+export type WelcomeStackScreen = "Welcome"
 
-export const WelcomeScreens: { [key in WelcomeScreen]: WelcomeScreen } = {
+export const WelcomeStackScreens: {
+  [key in WelcomeStackScreen]: WelcomeStackScreen
+} = {
   Welcome: "Welcome",
 }
 
@@ -172,10 +175,10 @@ export const MyHealthStackScreens: {
   SelectSymptoms: "SelectSymptoms",
 }
 
-export type SelfScreenerScreen = "SelfScreenerIntro"
+export type SelfScreenerStackScreen = "SelfScreenerIntro"
 
-export const SelfScreenerScreens: {
-  [key in SelfScreenerScreen]: SelfScreenerScreen
+export const SelfScreenerStackScreens: {
+  [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
 } = {
   SelfScreenerIntro: "SelfScreenerIntro",
 }

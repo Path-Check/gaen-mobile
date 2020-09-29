@@ -11,7 +11,7 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import { Stacks, ModalScreens, useStatusBarEffect } from "../navigation"
+import { Stacks, ModalStackScreens, useStatusBarEffect } from "../navigation"
 import {
   ListItem,
   ListItemSeparator,
@@ -58,7 +58,7 @@ const ConnectScreen: FunctionComponent = () => {
 
   const handleOnPressHowTheAppWorks = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.HowItWorksReviewFromConnect,
+      screen: ModalStackScreens.HowItWorksReviewFromConnect,
     })
   }
 

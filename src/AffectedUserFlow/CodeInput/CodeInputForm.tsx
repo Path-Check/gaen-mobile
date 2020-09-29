@@ -21,7 +21,7 @@ import { useExposureContext } from "../../ExposureContext"
 import {
   Stacks,
   useStatusBarEffect,
-  AffectedUserFlowScreens,
+  AffectedUserFlowStackScreens,
 } from "../../navigation"
 
 import { Icons } from "../../assets"
@@ -104,7 +104,7 @@ const CodeInputForm: FunctionComponent = () => {
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
           navigation.navigate(
-            AffectedUserFlowScreens.AffectedUserPublishConsent,
+            AffectedUserFlowStackScreens.AffectedUserPublishConsent,
           )
         } else {
           const errorMessage = showCertificateError(certResponse.error)

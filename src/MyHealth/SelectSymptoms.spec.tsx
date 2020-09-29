@@ -4,7 +4,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation, useRoute } from "@react-navigation/native"
 
 import SelectSymptomsScreen from "./SelectSymptoms"
-import { Stacks, ModalScreens } from "../navigation"
+import { Stacks, ModalStackScreens } from "../navigation"
 import { SymptomLogContext } from "./SymptomLogContext"
 import { factories } from "../factories"
 
@@ -51,7 +51,7 @@ describe("SelectSymptomsScreen", () => {
             symptoms: ["cough", "fever"],
           })
           expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-            screen: ModalScreens.AtRiskRecommendation,
+            screen: ModalStackScreens.AtRiskRecommendation,
           })
         })
       })
@@ -215,7 +215,7 @@ describe("SelectSymptomsScreen", () => {
         await waitFor(() => {
           expect(addLogEntrySpy).toHaveBeenCalledWith([coughSymptom])
           expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-            screen: ModalScreens.AtRiskRecommendation,
+            screen: ModalStackScreens.AtRiskRecommendation,
           })
         })
       })

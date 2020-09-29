@@ -5,8 +5,8 @@ import { useNavigation } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 
 import {
-  HowItWorksScreen as HowItWorksScreenType,
-  HowItWorksScreens,
+  HowItWorksStackScreen,
+  HowItWorksStackScreens,
   Stack as StackType,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
@@ -20,7 +20,7 @@ interface HowItWorksStackProps {
 }
 
 type HowItWorksScreenDatum = {
-  name: HowItWorksScreenType
+  name: HowItWorksStackScreen
   image: ImageSourcePropType
   imageLabel: string
   header: string
@@ -35,43 +35,43 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   const navigation = useNavigation()
 
   const introduction: HowItWorksScreenDatum = {
-    name: HowItWorksScreens.Introduction,
+    name: HowItWorksStackScreens.Introduction,
     image: Images.HowItWorksIntroduction,
     imageLabel: t("onboarding.screen1_image_label"),
     header: t("onboarding.screen1_header"),
     primaryButtonLabel: t("onboarding.screen1_button"),
     primaryButtonOnPress: () =>
-      navigation.navigate(HowItWorksScreens.PhoneRemembersDevices),
+      navigation.navigate(HowItWorksStackScreens.PhoneRemembersDevices),
   }
   const phoneRemembersDevices: HowItWorksScreenDatum = {
-    name: HowItWorksScreens.PhoneRemembersDevices,
+    name: HowItWorksStackScreens.PhoneRemembersDevices,
     image: Images.HowItWorksPhoneRemembersDevice,
     imageLabel: t("onboarding.screen2_image_label"),
     header: t("onboarding.screen2_header"),
     primaryButtonLabel: t("onboarding.screen2_button"),
     primaryButtonOnPress: () =>
-      navigation.navigate(HowItWorksScreens.PersonalPrivacy),
+      navigation.navigate(HowItWorksStackScreens.PersonalPrivacy),
   }
   const personalPrivacy: HowItWorksScreenDatum = {
-    name: HowItWorksScreens.PersonalPrivacy,
+    name: HowItWorksStackScreens.PersonalPrivacy,
     image: Images.HowItWorksPersonalPrivacy,
     imageLabel: t("onboarding.screen3_image_label"),
     header: t("onboarding.screen3_header"),
     primaryButtonLabel: t("onboarding.screen3_button"),
     primaryButtonOnPress: () =>
-      navigation.navigate(HowItWorksScreens.GetNotified),
+      navigation.navigate(HowItWorksStackScreens.GetNotified),
   }
   const getNotified: HowItWorksScreenDatum = {
-    name: HowItWorksScreens.GetNotified,
+    name: HowItWorksStackScreens.GetNotified,
     image: Images.HowItWorksGetNotified,
     imageLabel: t("onboarding.screen4_image_label"),
     header: t("onboarding.screen4_header"),
     primaryButtonLabel: t("onboarding.screen4_button"),
     primaryButtonOnPress: () =>
-      navigation.navigate(HowItWorksScreens.ValueProposition),
+      navigation.navigate(HowItWorksStackScreens.ValueProposition),
   }
   const valueProposition: HowItWorksScreenDatum = {
-    name: HowItWorksScreens.ValueProposition,
+    name: HowItWorksStackScreens.ValueProposition,
     image: Images.HowItWorksValueProposition,
     imageLabel: t("onboarding.screen5_image_label"),
     header: t("onboarding.screen5_header"),

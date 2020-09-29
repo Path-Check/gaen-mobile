@@ -4,7 +4,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import { Stacks, ModalScreens } from "./index"
+import { Stacks, ModalStackScreens } from "./index"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
@@ -18,12 +18,12 @@ const ModalStack: FunctionComponent = () => {
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen
-        name={ModalScreens.LanguageSelection}
+        name={ModalStackScreens.LanguageSelection}
         component={LanguageSelection}
         options={TransitionPresets.ModalTransition}
       />
       <Stack.Screen
-        name={ModalScreens.ProtectPrivacy}
+        name={ModalStackScreens.ProtectPrivacy}
         component={ProtectPrivacy}
         options={TransitionPresets.ModalTransition}
       />
@@ -45,11 +45,11 @@ const ModalStack: FunctionComponent = () => {
         )}
       </Stack.Screen>
       <Stack.Screen
-        name={ModalScreens.AnonymizedDataConsent}
+        name={ModalStackScreens.AnonymizedDataConsent}
         component={AnonymizedDataConsentScreen}
       />
       <Stack.Screen
-        name={ModalScreens.AtRiskRecommendation}
+        name={ModalStackScreens.AtRiskRecommendation}
         component={AtRiskRecommendationScreen}
         options={{
           ...TransitionPresets.ModalTransition,

@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { ActivationScreens } from "../navigation"
+import { ActivationStackScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
 import { GlobalText, Button } from "../components"
 
@@ -25,11 +25,11 @@ const NotificationsPermissions: FunctionComponent = () => {
       notification.request()
       resolve()
     })
-    navigation.navigate(ActivationScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.ActivationSummary)
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.ActivationSummary)
   }
 
   return (
