@@ -54,7 +54,7 @@ const ExposureActions: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wear_a_mask")}
           />
           <RecommendationBubble
-            icon={Icons.SixFeet}
+            icon={Icons.StayApart}
             text={t("exposure_history.exposure_detail.6ft_apart")}
           />
           <RecommendationBubble

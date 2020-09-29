@@ -39,9 +39,9 @@ import RadioWave from "./radioWave"
 import Refresh from "./refresh"
 import RestartWithCheck from "./restartWithCheck"
 import Share from "./share"
-import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
+import StayApart from "./stayApart"
 import Upload from "./upload"
 import WashHands from "./WashHands"
 import Wrench from "./wrench"
@@ -90,9 +90,9 @@ export const Icons = {
   Refresh,
   RestartWithCheck,
   Share,
-  SixFeet,
   StateNoContact,
   StateUnknown,
+  StayApart,
   Upload,
   WashHands,
   Wrench,

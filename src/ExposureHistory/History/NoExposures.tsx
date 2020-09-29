@@ -79,7 +79,7 @@ const HealthGuidelines: FunctionComponent = () => {
         text={t("exposure_history.health_guidelines.wear_a_mask")}
       />
       <HealthGuidelineItem
-        icon={Icons.SixFeet}
+        icon={Icons.StayApart}
         text={t("exposure_history.health_guidelines.six_feet_apart")}
       />
     </View>
