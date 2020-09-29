@@ -107,10 +107,9 @@ const DayIndicator: FunctionComponent<DayIndicatorProps> = ({
   const [circleStyle, textStyle] = [baseStyles]
     .map(applyIsTodayStyle)
     .map(applyRiskStyle)
-    .flatMap(applyIsSelectedStyle)
+    .map(applyIsSelectedStyle)
 
   const dayNumber = dayjs(logData.date).format("D")
-  console.log(dayNumber)
 
   const indicator = <Text style={textStyle}>{dayNumber}</Text>
 

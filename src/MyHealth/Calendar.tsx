@@ -5,7 +5,7 @@ import dayjs from "dayjs"
 import { Spacing, Typography } from "../styles"
 import { GlobalText } from "../components"
 import { DayLogData } from "./symptoms"
-import DayIndicator from "./DayIndicator."
+import DayIndicator from "./DayIndicator"
 
 interface CalendarProps {
   logDataHistory: DayLogData[]
