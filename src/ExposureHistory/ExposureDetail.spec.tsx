@@ -108,14 +108,12 @@ describe("ExposureDetail", () => {
       )
 
       expect(queryByLabelText("Speak with a contact tracer")).toBeNull()
-      expect(
-        getByText(`See guidance from ${healthAuthorityName}.`),
-      ).toBeDefined()
+      expect(getByText("General Guidance")).toBeDefined()
     })
   })
 
   describe("when the health authority has a callback form", () => {
-    it("shows info about what to do next and no general guidance", () => {
+    it("shows info about what to do next and general guidance", () => {
       const healthAuthorityName = "healthAuthorityName"
       const { getByText, queryByText } = render(
         <ConfigurationContext.Provider
@@ -133,32 +131,29 @@ describe("ExposureDetail", () => {
           `Schedule a call to get support from a contact tracer from the ${healthAuthorityName}.`,
         ),
       ).toBeDefined()
-      expect(
-        queryByText(`See guidance from ${healthAuthorityName}.`),
-      ).toBeNull()
+      expect(queryByText("General Guidance")).not.toBeNull()
     })
+  })
 
-    it("allow user to navigate to the form or the connect screen", () => {
+  describe("when the health authority supports the self screener", () => {
+    it("prompts the user to get personalized guidance", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const { getByLabelText } = render(
         <ConfigurationContext.Provider
           value={factories.configurationContext.build({
-            displayCallbackForm: true,
+            displaySelfScreener: true,
           })}
         >
           <ExposureDetail />
         </ConfigurationContext.Provider>,
       )
 
-      const showCallbackFormAction = getByLabelText(
-        "Speak with a contact tracer",
-      )
-      fireEvent.press(showCallbackFormAction)
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Callback)
-      const callLaterAction = getByLabelText("Call later")
-      fireEvent.press(callLaterAction)
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Connect)
+      const selfScreenerButton = getByLabelText("Personalize my guidance")
+
+      expect(selfScreenerButton).not.toBeNull()
+      fireEvent.press(selfScreenerButton)
+      expect(navigateSpy).toHaveBeenCalledWith(Stacks.SelfScreener)
     })
   })
 })
