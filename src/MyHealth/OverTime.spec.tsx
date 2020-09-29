@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
-import { CheckInStatus } from "./symptoms"
+import { SymptomLogEntry, CheckInStatus } from "./symptoms"
 
 import OverTime from "./OverTime"
 import { factories } from "../factories"
@@ -114,9 +114,9 @@ describe("OverTime", () => {
       })
 
       const logEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const logEntry = {
+      const logEntry: SymptomLogEntry = {
         id: "1",
-        symptoms: ["Cough"],
+        symptoms: ["cough"],
         date: logEntryPosix,
       }
       const { getByLabelText } = render(

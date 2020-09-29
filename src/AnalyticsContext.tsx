@@ -60,10 +60,12 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
       healthAuthoritySupportsAnalytics && userConsentedToAnalytics
 
     const initializeAnalyticsTracking = () => {
-      Matomo.initialize(
-        healthAuthorityAnalyticsUrl,
-        healthAuthorityAnalyticsSiteId,
-      )
+      if (healthAuthorityAnalyticsUrl && healthAuthorityAnalyticsSiteId) {
+        Matomo.initialize(
+          healthAuthorityAnalyticsUrl,
+          healthAuthorityAnalyticsSiteId,
+        )
+      }
     }
     const trackEvent = async (event: string) => {
       return actions.trackEvent(event)
