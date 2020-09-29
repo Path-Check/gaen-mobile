@@ -43,7 +43,7 @@ const Success: FunctionComponent = () => {
   return (
     <ScrollView contentContainerStyle={style.contentContainer}>
       <Image
-        source={Images.PersonAndHealthExpert}
+        source={Images.HowItWorksValueProposition}
         style={style.image}
         accessible
         accessibilityLabel={t("onboarding.welcome_image_label")}

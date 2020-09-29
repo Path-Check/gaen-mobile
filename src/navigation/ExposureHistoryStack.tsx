@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import { useNavigation } from "@react-navigation/native"
+import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
 import ExposureHistoryScreen from "../ExposureHistory/index"
@@ -10,7 +11,7 @@ import {
   ExposureHistoryScreen as Screen,
 } from "./index"
 
-import { Headers } from "../styles"
+import { Headers, Colors } from "../styles"
 
 type ExposureHistoryStackParams = {
   [key in Screen]: undefined
@@ -39,11 +40,25 @@ const ExposureHistoryStack: FunctionComponent = () => {
         name={ExposureHistoryScreens.ExposureDetail}
         component={ExposureDetail}
         options={{
-          ...Headers.headerScreenOptions,
+          ...Headers.headerLightOptions,
           title: t("navigation.exposure"),
+          headerLeft: function headerLeft() {
+            return <BackButton />
+          },
         }}
       />
     </Stack.Navigator>
+  )
+}
+
+const BackButton: FunctionComponent = () => {
+  const navigation = useNavigation()
+  return (
+    <HeaderBackButton
+      labelVisible={false}
+      tintColor={Colors.primary125}
+      onPress={navigation.goBack}
+    />
   )
 }
 

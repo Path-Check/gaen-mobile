@@ -17,7 +17,7 @@ const ExposureDetail: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
 
   const { exposureDatum } = route.params
@@ -42,6 +42,9 @@ const ExposureDetail: FunctionComponent = () => {
   return (
     <ScrollView style={style.container}>
       <View style={style.headerContainer}>
+        <GlobalText style={style.headerText}>
+          {t("exposure_history.exposure_detail.header")}
+        </GlobalText>
         <View style={style.exposureWindowContainer}>
           <SvgXml
             xml={Icons.ExposureIcon}
@@ -55,12 +58,6 @@ const ExposureDetail: FunctionComponent = () => {
             {exposureWindowBucketInWords(exposureDatum)}
           </GlobalText>
         </View>
-        <GlobalText style={style.headerText}>
-          {t("exposure_history.exposure_detail.header")}
-        </GlobalText>
-        <GlobalText style={style.contentText}>
-          {t("exposure_history.exposure_detail.content")}
-        </GlobalText>
       </View>
       <View style={style.bottomContainer}>
         <ExposureActions />
@@ -71,11 +68,12 @@ const ExposureDetail: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
-    backgroundColor: Colors.primaryLightBackground,
-    paddingHorizontal: Spacing.medium,
+    backgroundColor: Colors.secondary10,
+    paddingLeft: Spacing.medium,
+    paddingRight: Spacing.massive,
     paddingVertical: Spacing.large,
   },
   exposureWindowContainer: {
@@ -90,11 +88,9 @@ const style = StyleSheet.create({
     marginLeft: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header3,
-    marginBottom: Spacing.xxSmall,
-  },
-  contentText: {
-    ...Typography.body2,
+    ...Typography.header2,
+    color: Colors.primary125,
+    marginBottom: Spacing.medium,
   },
   bottomContainer: {
     backgroundColor: Colors.primaryLightBackground,

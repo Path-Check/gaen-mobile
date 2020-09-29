@@ -20,7 +20,7 @@ const ExposureHistoryScreen: FunctionComponent = () => {
   useFocusEffect(
     useCallback(() => {
       refreshExposureInfo()
-    }, []),
+    }, [refreshExposureInfo]),
   )
 
   const exposures = toExposureList(exposureInfo)

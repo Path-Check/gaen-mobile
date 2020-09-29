@@ -1,4 +1,8 @@
-import { combineSymptomAndCheckInLogs, CheckInStatus } from "./symptoms"
+import {
+  SymptomLogEntry,
+  combineSymptomAndCheckInLogs,
+  CheckInStatus,
+} from "./symptoms"
 import { beginningOfDay } from "../utils/dateTime"
 
 describe("combineSymptomAndCheckInLogs", () => {
@@ -8,31 +12,31 @@ describe("combineSymptomAndCheckInLogs", () => {
       `${earlierDayDateString} 10:00`,
     )
     const earlierDayDatePosix = beginningOfDay(earlierDayLogEntryOnePosix)
-    const earlierDayLogEntryOne = {
+    const earlierDayLogEntryOne: SymptomLogEntry = {
       id: "1",
-      symptoms: ["symptom1", "symptom2"],
+      symptoms: ["fever", "cough"],
       date: earlierDayLogEntryOnePosix,
     }
     const earlierDayLogEntryTwoPosix = Date.parse(
       `${earlierDayDateString} 12:00`,
     )
-    const earlierDayLogEntryTwo = {
+    const earlierDayLogEntryTwo: SymptomLogEntry = {
       id: "2",
-      symptoms: ["symptom1"],
+      symptoms: ["fever"],
       date: earlierDayLogEntryTwoPosix,
     }
     const middleDayDateString = "2020-09-22"
     const middleDayLogEntryOnePosix = Date.parse(`${middleDayDateString} 10:00`)
     const middleDayDatePosix = beginningOfDay(middleDayLogEntryOnePosix)
-    const middleDayLogEntryOne = {
+    const middleDayLogEntryOne: SymptomLogEntry = {
       id: "3",
-      symptoms: ["symptom1"],
+      symptoms: ["fever"],
       date: middleDayLogEntryOnePosix,
     }
     const middleDayLogEntryTwoPosix = Date.parse(`${middleDayDateString} 12:00`)
-    const middleDayLogEntryTwo = {
+    const middleDayLogEntryTwo: SymptomLogEntry = {
       id: "4",
-      symptoms: ["symptom2"],
+      symptoms: ["cough"],
       date: middleDayLogEntryTwoPosix,
     }
 
@@ -41,9 +45,9 @@ describe("combineSymptomAndCheckInLogs", () => {
       `${recentDayEntryDateString} 12:00`,
     )
     const recentDayEntryDatePosix = beginningOfDay(recentDayLogEntryPosix)
-    const recentDayEntry = {
+    const recentDayEntry: SymptomLogEntry = {
       id: "5",
-      symptoms: ["symptom2"],
+      symptoms: ["cough"],
       date: recentDayLogEntryPosix,
     }
     expect(
@@ -80,12 +84,12 @@ describe("combineSymptomAndCheckInLogs", () => {
     const logEntryDateString = "2020-09-21"
     const logEntryDatePosix = Date.parse(`${logEntryDateString} 10:00`)
     const logEntryKeyDate = beginningOfDay(logEntryDatePosix)
-    const logEntry = {
+    const logEntry: SymptomLogEntry = {
       id: "1",
-      symptoms: ["symptom1", "symptom2"],
+      symptoms: ["fever", "cough"],
       date: logEntryDatePosix,
     }
-    const symptomLogEntries = [logEntry]
+    const symptomLogEntries: SymptomLogEntry[] = [logEntry]
     const sameDateCheckInPosix = Date.parse(`${logEntryDateString} 12:00`)
     const sameDateCheckIn = {
       date: sameDateCheckInPosix,

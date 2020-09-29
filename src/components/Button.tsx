@@ -51,6 +51,16 @@ const Button: FunctionComponent<ButtonProps> = ({
     }
   }
 
+  const determineRightArrowColor = (): string => {
+    if (disabled) {
+      return Colors.black
+    } else if (outlined) {
+      return Colors.primary110
+    } else {
+      return Colors.white
+    }
+  }
+
   const determineTextStyle = (): TextStyle => {
     if (outlined) {
       return style.outlinedButtonText
@@ -120,7 +130,7 @@ const Button: FunctionComponent<ButtonProps> = ({
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={disabled ? Colors.black : Colors.white}
+                fill={determineRightArrowColor()}
                 style={style.rightArrow}
               />
             )}

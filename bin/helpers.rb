@@ -23,6 +23,8 @@ def download_file(file_name, remote_url)
 end
 
 def delete_folder(path)
+  return false unless Dir.exist?(path)
+
   _output, error, status = Open3.capture3("rm", "-rf", path)
   return true if status.success?
 
@@ -84,4 +86,8 @@ def mobile_resources_commit
   file.close
 
   commit
+end
+
+def resources_base_url(access_token)
+  "https://#{access_token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{mobile_resources_commit}"
 end

@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
 import {
+  LinkingOptions,
   NavigationContainer,
   NavigationContainerRef,
 } from "@react-navigation/native"
@@ -18,6 +19,7 @@ import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
 import CallbackStack from "./CallbackStack"
+import SelfScreenerStack from "./SelfScreenerStack"
 import { useAnalyticsContext } from "../AnalyticsContext"
 
 const Stack = createStackNavigator()
@@ -31,10 +33,12 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
-const linking = {
+const linking: LinkingOptions = {
   prefixes: ["pathcheck://"],
   config: {
-    ExposureHistoryFlow: "exposureHistory",
+    screens: {
+      ExposureHistoryFlow: "exposureHistory",
+    },
   },
 }
 
@@ -125,6 +129,10 @@ const MainNavigator: FunctionComponent = () => {
             ...TransitionPresets.ModalTransition,
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+          name={Stacks.SelfScreener}
+          component={SelfScreenerStack}
         />
       </Stack.Navigator>
     </NavigationContainer>
