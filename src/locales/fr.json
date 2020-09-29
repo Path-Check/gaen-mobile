@@ -1,23 +1,150 @@
 {
   "_display_name": "Français",
-  "assessment": {
-    "caregiver_cta": "Suivant",
-    "distancing_cta": "Suivant",
-    "isolate_cta": "Suivant",
-    "next": "Suivant"
+  "about": {
+    "emergency_contact": "Contact d’urgence"
+  },
+  "callback": {
+    "firstname": "Prénom",
+    "lastname": "Nom de famille",
+    "phone_number_required": "Numéro de téléphone (obligatoire)",
+    "success_got_it": "Compris",
+    "success_header": "Vous êtes dans la file d'attente",
+    "success_requested": "Rappel demandé",
+    "well_get_in_touch": "Nous vous contacterons"
   },
   "common": {
-    "next": "Suivant"
+    "back": "Précédent",
+    "disabled": "Désactivé",
+    "edit": "Modifier",
+    "enabled": "Activé",
+    "next": "Suivant",
+    "save": "Sauvegarder"
+  },
+  "export": {
+    "code_input_button_back": "Précédent",
+    "consent_body_0": "Le partage de votre diagnostic positif est facultatif et ne peut se faire qu'avec votre consentement.",
+    "consent_body_1": "Si vous acceptez de le faire, vous aidez les autres membres de votre communauté à prendre des décisions éclairées concernant leur santé et vous jouez votre rôle pour contenir la propagation du virus.",
+    "consent_body_2": "La seule information partagée sera l'ensemble aléatoire de numéros que votre téléphone a échangé par Bluetooth avec d'autres téléphones qui se trouvaient à proximité au cours des 14 derniers jours, ainsi qu'un score de risque pondéré basé sur le moment où vos symptômes se sont développés.",
+    "consent_subheader_1": "Pourquoi devrais-je partager ?",
+    "consent_subheader_2": "Comment ça marche?",
+    "error": {
+      "invalid_format": "Format non valide",
+      "network_connection_error": "Il n'y a pas de connexion internet"
+    },
+    "person_and_health_expert": "Une personne parlant à un expert de la santé",
+    "publish_keys": {
+      "errors": {
+        "internal_server_error": "Le serveur rencontre des problèmes, veuillez réessayer plus tard"
+      }
+    },
+    "start_header_bluetooth": "Aidez à contenir la propagation du virus et à protéger les autres membres de votre communauté"
+  },
+  "exposure_history": {
+    "no_connectivity_message": "Vous n'êtes pas connecté à Internet!"
+  },
+  "home": {
+    "bluetooth_info_body": "Votre téléphone détecte les autres téléphones qui sont restés à proximité en utilisant Bluetooth Low Energy. Cela permet à l'application d'enregistrer vos rencontres quotidiennes de façon anonyme, même lorsque l'application n'est pas ouverte sur votre appareil.",
+    "bluetooth_info_header": "Bluetooth",
+    "bluetooth": {
+      "bluetooth_disabled_error_message": "Allez dans les paramètres et activez Bluetooth pour corriger cette erreur",
+      "bluetooth_disabled_error_title": "Activez le Bluetooth dans les paramètres",
+      "bluetooth_header": "Bluetooth",
+      "location_disabled_error_message": "Pour activer la technologie de notification d'exposition, autorisez l'accès à la localisation dans les paramètres de l'application",
+      "location_disabled_error_title": "Autorisez dans les paramètres",
+      "proximity_tracing_header": "Traçage de proximité",
+      "tracing_off_subheader_location": "Activez Bluetooth, le traçage de proximité et la localisation pour obtenir des informations sur les expositions possibles"
+    },
+    "location_info_subheader_1": "Pourquoi dois-je activer la localisation ?",
+    "open_settings": "Ouvrir les paramètres",
+    "proximity_tracing": {
+      "unauthorized_error_title": "Activer le suivi de proximité"
+    },
+    "status_icon_active_label": "Un coche dans un cercle vert",
+    "status_icon_inactive_label": "Un x blanc dans un cercle rouge"
   },
   "label": {
+    "go_to_home_view": "Afficher l’accueil",
     "launch_enable_notif": "Activer les notifications",
     "launch_get_started": "Commencer"
   },
+  "my_health": {
+    "symptom_log": {
+      "feeling_not_well": "Vous ne vous sentiez pas bien",
+      "feeling_well": "Vous vous sentiez bien"
+    },
+    "today": "Aujourd'hui"
+  },
+  "navigation": {
+    "more_info": "Plus d'informations"
+  },
   "onboarding": {
-    "terms_header_title": "Conditions d’utilisation (en anglais)"
+    "app_setup_complete_header": "Configuration de l'application terminée!",
+    "app_setup_incomplete_header": "Configuration de l'application incomplète",
+    "eula": "Accord juridique de l'utilisateur final",
+    "privacy_policy": "Politique de confidentialité",
+    "protect_privacy": {
+      "header": "Comment nous protégeons votre vie privée",
+      "subheader_2": "Les téléphones équipés d'un système de détection de proximité échangent leurs identifiants avec les autres appareils qu'ils rencontrent",
+      "subheader_3": "Lorsqu'un utilisateur est testé positif, il peut choisir de partager anonymement son état de santé",
+      "subheader_4": "Chaque téléphone interroge périodiquement le serveur pour obtenir la liste des identifiants marqués et recherche les correspondances"
+    },
+    "screen3_image_label": "Une personne devant un téléphone verrouillé",
+    "screen4_button": "Et si je tombe malade ?",
+    "screen4_header": "L'application vous informera si vous avez pu être exposé au COVID-19.",
+    "screen4_image_label": "Une personne recevant une notification sur son téléphone",
+    "screen5_header": "Grâce à l'application, vous pouvez contribuer à ralentir la propagation de COVID-19, protéger les autres et obtenir directement de l'aide des experts de la santé.",
+    "screen5_image_label": "Une personne parlant à un expert de la santé virtuellement",
+    "select_language": "Sélectionnez une langue",
+    "terms_header_title": "Conditions d’utilisation (en anglais)",
+    "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau."
   },
   "screen_titles": {
-    "about": "À propos",
+    "callback": "Demander un rappel",
+    "exposures": "Expositions",
+    "how_the_app_works": "Fonctionnement de l’application",
     "legal": "Juridique"
+  },
+  "settings": {
+    "here": "ici",
+    "i_understand_and_consent": "Je comprends et je consens",
+    "not_sharing_anonymized_data": "Ne pas partager de données anonymisées",
+    "please_view_privacy_policy": "Veuillez consulter leur politique de confidentialité",
+    "share_anonymized_data": "Partager les données anonymes",
+    "sharing_anonymized_data": "Partage de données anonymisées",
+    "stop_sharing_data": "Arrêt du partage des données",
+    "you_are_sharing_data": "Vous partagez des données anonymisées"
+  },
+  "symptom_checker": {
+    "delete_entry": "Supprimer l'entrée",
+    "entry_deleted": "Entrée supprimée",
+    "find_a_test_center": "Trouver un centre de test",
+    "find_a_test_center_nearby": "Trouver un centre de test à proximité",
+    "get_tested": "Nous vous recommandons de vous faire tester pour la COVID-19.",
+    "glad_to_hear_it": "Ravi de l'entendre !",
+    "good": "Bien",
+    "how_are_you_feeling": "Comment vous sentez-vous aujourd'hui ?",
+    "my_health": "Ma santé",
+    "not_well": "Pas bien",
+    "sorry_not_feeling_well": "Désolé que vous ne vous sentiez pas bien. Revenez demain.",
+    "sorry_to_hear_it": "Désolé d'apprendre que vous ne vous sentez pas bien !",
+    "symptoms_saved": "Symptômes sauvegardés !",
+    "symptoms_updated": "Symptômes mis à jour !",
+    "what_symptoms": "Quels symptômes ressentez-vous?"
+  },
+  "symptoms": {
+    "body_aches": "Courbatures",
+    "chest_pain_or_pressure": "Douleurs ou pressions à la poitrine",
+    "chills": "Frissons",
+    "cough": "Toux",
+    "diarrhea": "Diarrhée",
+    "difficulty_breathing": "Difficulté à respirer",
+    "disorientation_or_unresponsiveness": "Désorientation ou manque de réactivité",
+    "fever": "Fièvre",
+    "lightheadedness": "Étourdissements",
+    "loss_of_appetite": "Perte d'appétit",
+    "loss_of_smell": "Perte d’odorat",
+    "loss_of_taste": "Perte du goût",
+    "other": "Autres",
+    "vomiting": "Vomissements"
   }
 }

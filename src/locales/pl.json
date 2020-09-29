@@ -4,24 +4,6 @@
     "operating_system_abbr": "OS:",
     "version": "Wersja:"
   },
-  "assessment": {
-    "caregiver_cta": "Dalej",
-    "caregiver_title": "Powiadom opiekuna",
-    "complete_cta": "Gotowe",
-    "complete_title": "Wszystko gotowe!",
-    "distancing_cta": "Dalej",
-    "emergency_cta": "Wezwij służby ratunkowe",
-    "emergency_title": "Służby ratunkowe",
-    "isolate_cta": "Dalej",
-    "isolate_title": "Odizoluj się",
-    "next": "Dalej",
-    "share_cta": "Rozumiem i wyrażam zgodę",
-    "share_cta_skip": "Nie, dziękuję, nie chcę udostępniać danych",
-    "share_title": "Publikuj anonimowe dane",
-    "start_cta": "Start",
-    "start_description": "Twoje informacje są prywatne, anonimowe i szyfrowane. Żadne dane nie opuszczają twojego urządzenia, chyba że wyrazisz na to zgodę.",
-    "start_title": "Odpowiedz na pytania dotyczące objawów i historii medycznej, aby dowiedzieć się, co dalej robić z COVID-19"
-  },
   "common": {
     "continue": "Dalej",
     "done": "Gotowe",
@@ -56,6 +38,9 @@
     "launch_screen1_header": "Witamy w PathCheck",
     "privacy_policy": "Polityka prywatności"
   },
+  "my_health": {
+    "today": "Dziś"
+  },
   "navigation": {
     "exposure_history": "Historia Ekspozycji",
     "more_info": "Więcej informacji"
@@ -65,7 +50,6 @@
     "terms_header_title": "Warunki korzystania"
   },
   "screen_titles": {
-    "about": "O nas",
     "exposure_history": "Historia Ekspozycji",
     "legal": "Informacje prawne"
   }

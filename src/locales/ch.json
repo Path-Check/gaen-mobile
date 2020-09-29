@@ -5,43 +5,7 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
-  "assessment": {
-    "agree_question_description": "Para ya agang i setbision emergency yahggen un susesedi:\n, Atdid ya sumasaga ha na puti gi pecho pat kalan mafufunot i pecho\n. Mampus chatsaga humagung\n.Atdid na bulachun ulo\n. Atdid na ti manungu yan ti murespopon",
-    "agree_question_text": "Kao emergency esti?",
-    "agreement_cta": "Hu komrendi yan hu konsienti",
-    "agreement_description": "I iscreening para un inayuda dumisidi i propriat na inamti. Ahe ti ma intensiona para uma ditetmina i chetnot pat uma amti i chetnot pat otro siha na kondision.",
-    "agreement_footer": "Put i un kontinunu'a esti,  un tungo ha na i resuttan i iyo-mu survey  ti ma intensiona para umaditetmina i chetnot pat para ma amti.",
-    "agreement_title": "Ahe ti para umaditetmina hafa na chetnot",
-    "caregiver_cta": "I otro",
-    "caregiver_description": "Notifika i health care provider gi iyo-mu long-term care facility.  I sumasaga gi long-term care facility pat nursing home sina mas gai risk para addit na minalangu.\n\nSangani i caregiver gi facility na malangu hao ya un nesisita muli'e i mediko insigidas.",
-    "caregiver_title": "Sangani i caregiver",
-    "complete_cta": "Munhayan",
-    "complete_description": "Yanggen un nana'i i kommunidad-mu ni i estau i nilala-mu yan i iyo-mu exposure history anonymously, un imbebesti i virus yan un ababansa i proteksion i kommunidad gi COVID 19.",
-    "complete_title": "si yu'us ma'asi ni un adadahi i kommunidad-mu",
-    "distancing_cta": "I otro",
-    "distancing_description": "Putfabot dalalaki i guidelines i iyo-mu local, state pat national put i social distancing yan Personal Protection Equipment (PPE)taiguihi siha i mask yan/pat guantis para i kannai. Taya mas un nesisita chumugue pago.",
-    "distancing_title": "Distancing yan PPE",
-    "emergency_cta": "Agang 911",
-    "emergency_description": "Ginen i kondision siha ni un sangan, debi di un espiha atension para ma amti insigidas.",
-    "emergency_title": "Agang i Emergency na setbisio",
-    "experiencing_any_symptoms": "guaha guini na sinienti un sesienti",
-    "experiencing_some_symptoms": "expirerensia guaha siha na sinienti",
-    "i_am": "Guahu",
-    "i_am_not": "Ahe, ti guahu",
-    "isolate_cta": "I otro",
-    "isolate_description": "Guah pinadisisimnu siha ni sina ginen i COVID 19. Agang i iyo-mu \"health care provider\"yanggen umatdid mas i kondision-mu. Saga ya un kuarentena hao gi gima.",
-    "isolate_title": "kuarentena hao",
-    "next": "I otro",
-    "share_cta": "Hu komprendi yan hu konsienti.",
-    "share_cta_skip": "Munga, ti malago yu umena'i ni infotmasion-hu",
-    "share_description": "I man 'anonymous' siha na infotmasion-mu ha ayuyuda i {{authority}} umnalisa, tumattiyi  yan sumusteni i machalapun i COVID 19. I infotmasion-mu para umana dana yan ayu i ginen PathCheckusers ni dumisidi para u fan a'ayuda.\n\nI iyo-mu data ha gogoti i ennepe-mu siha gi survey yan i zip code,lao taya mas infotmasion pat petsinot na infotmasion.\n\nI {{authority}} hu goti i iyo-mu \"anonymous data\"para hafa na tiempo ma na'i.",
-    "share_title": "Pupblisa i \"anonymous data\"",
-    "start_cta": "Tutuhun",
-    "start_description": "I infotmasion private, taya sina muli'e pat tumatitai. Taya infotmasion sina dumingo i iyommu device solo un na'i petmiso.",
-    "start_title": "Oppe i kuestonia siha put i pinadesisi-mu yan hafa siha chetnot-mu para un tungo hafa mas sina un chogui put i COVID 19."
-  },
   "common": {
-    "alert": "Claro man hasso",
     "back": "Tatti",
     "close": "Huchum",
     "continue": "Kontinua",
@@ -55,8 +19,7 @@
     "skip": "Upus",
     "something_went_wrong": "Guaha problema",
     "start": "Tutuhon",
-    "submit": "Submiti",
-    "success": "Munhayan Maolik"
+    "submit": "Submiti"
   },
   "errors": {
     "description": "Guaha lachi ma susedi. Potfabot na 'on' talo i app.",
@@ -102,9 +65,7 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "Sipara 6 pi'e",
-      "content": "Guaha taotao ni ginen gaigi gi fion-mu ha test positive para COVID 19.",
       "ha_guidance_header": "Hafa bai hu chogui?",
-      "ha_guidance_subheader": "Atan i guidance ginen {{healthAuthorityName}}.",
       "header": "Sina ha umafakcha hao yan  i COVID 19 virus.",
       "isolate": "Suhayi, na suha",
       "next_steps": "Otro mona para ma chogui",
@@ -155,9 +116,7 @@
       "tracing_off_header": "Ti kalalamten",
       "tracing_off_subheader": "Na lala i Bluetooth yan i Proximity Tracing para uchuli infotmasion yanggen guaha exposures siha",
       "tracing_off_subheader_location": "Sotta i Bluetooth, i proximity Tracing yan i Location para u chuli infotmasion put i tinanmi siha",
-      "tracing_on_header": "Lalala",
-      "unauthorized_error_message": "Para un na lala i Proximity Tracing , na siguro na kalalamten i \"Share Exposure Information\"  gi Settings> {{applicationName}} >Exposure Notifications",
-      "unauthorized_error_title": "Fan ana'i ni Exposure Information"
+      "tracing_on_header": "Lalala"
     },
     "fix": "Famauleg i problema ni {{technology}}",
     "get_more_info": "Chuli mas infotmasion put {{technology}}",
@@ -177,7 +136,6 @@
     "check": "Checkmark",
     "checked_checkbox": "Ma check na checkbox",
     "go_to_home_view": "Hanao para i Home view",
-    "language_icon": "Outline i icon i globe",
     "launch_enable_notif": "Na kalamten para i Notifikasion",
     "launch_get_started": "Tutuhon",
     "launch_screen1_header": "Bienvenidu para",
@@ -254,21 +212,13 @@
     "terms_header_title": "Palabra ni ma u'usa",
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },
-  "report_issue": {
-    "body": "Nesisita innepe",
-    "email": "Nesisita email",
-    "errors": {
-      "invalid_email": "Putfabot pega i magahit na email"
-    },
-    "name": "Kumpledo i na'an or todo i na'an",
-    "success": "In risibi i ginagao-mu. Si Yu'us Ma'asi!"
-  },
   "screen_titles": {
-    "about": "Put",
     "debug": "Dibug",
     "exposure_history": "Historian i ninayi",
     "exposures": "man ninayi  or mantinanmi",
-    "legal": "Legat",
-    "report_issue": "Ripotti i problema"
+    "legal": "Legat"
+  },
+  "settings": {
+    "i_understand_and_consent": "Hu Komprendi yan hu Konsienti"
   }
 }

@@ -4,13 +4,6 @@
     "operating_system_abbr": "SO:",
     "version": "Versão:"
   },
-  "assessment": {
-    "caregiver_cta": "Próximo",
-    "complete_cta": "Feito",
-    "distancing_cta": "Próximo",
-    "isolate_cta": "Próximo",
-    "next": "Próximo"
-  },
   "common": {
     "continue": "Continuar",
     "done": "Feito",
@@ -27,7 +20,6 @@
     "terms_header_title": "Termos de uso"
   },
   "screen_titles": {
-    "about": "Sobre",
     "legal": "Legal"
   }
 }

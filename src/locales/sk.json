@@ -4,13 +4,6 @@
     "operating_system_abbr": "OS:",
     "version": "Verzia:"
   },
-  "assessment": {
-    "caregiver_cta": "Ďalej",
-    "complete_cta": "Hotovo",
-    "distancing_cta": "Ďalej",
-    "isolate_cta": "Ďalej",
-    "next": "Ďalej"
-  },
   "common": {
     "continue": "Pokračovať",
     "done": "Hotovo",
@@ -24,6 +17,9 @@
     "launch_enable_notif": "Umožniť upozornenia",
     "launch_get_started": "Začať"
   },
+  "my_health": {
+    "today": "Dnes"
+  },
   "navigation": {
     "exposure_history": "História vystavenia sa riziku",
     "more_info": "Viac informácií"
@@ -33,7 +29,6 @@
     "terms_header_title": "Podmienky používania"
   },
   "screen_titles": {
-    "about": "O",
     "legal": "Právne oznámenie"
   }
 }

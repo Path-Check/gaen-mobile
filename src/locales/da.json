@@ -4,15 +4,6 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
-  "assessment": {
-    "agree_question_description": "Screeningen hjælper dig med at tage beslutninger om at søge passende medicinsk behandling. Den er ikke beregnet til diagnose eller behandling af sygdom eller andre tilstande.",
-    "agree_question_text": "Formål med denne COVID-19-screening",
-    "caregiver_cta": "Næste",
-    "complete_cta": "Udført",
-    "distancing_cta": "Næste",
-    "isolate_cta": "Næste",
-    "next": "Næste"
-  },
   "common": {
     "continue": "Fortsæt",
     "done": "Udført",
@@ -28,7 +19,6 @@
     "terms_header_title": "Vilkår for brug"
   },
   "screen_titles": {
-    "about": "Om",
     "legal": "Juridisk"
   }
 }

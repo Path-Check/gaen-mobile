@@ -5,43 +5,7 @@
     "operating_system_abbr": "OS：",
     "version": "バージョン："
   },
-  "assessment": {
-    "agree_question_description": "次の場合は、サービスを停止して救急サービスへ電話してください。\n• 重度の一定の胸痛または圧力\n•極端な難しい呼吸\n• 重度で一定の立ちくらみ\n• 深刻な見当識障害または応答不能",
-    "agree_question_text": "これは緊急事態ですか？",
-    "agreement_cta": "理解して同意します",
-    "agreement_description": "スクリーニングは、適切な医療を求めることについての意思決定を支援します。疾患やその他の状態の診断や治療を目的としたものではありません。",
-    "agreement_footer": "続行すると、調査結果が診断や治療を目的としていないことに同意したことになります。",
-    "agreement_title": "これは診断のためではありません",
-    "caregiver_cta": "次へ進む",
-    "caregiver_description": "あなたの長期介護施設の医療提供者に通知してください。介護施設や特別養護老人ホームに住んでいると、重症になる危険があります。 \n\nあなたが病気で、できるだけ早く医療提供者に会う必要があることを施設の介護者に伝えてください。",
-    "caregiver_title": "介護者に通知する",
-    "complete_cta": "完成です",
-    "complete_description": "健康状態と接触履歴を匿名でコミュニティと共有することで、COVID-19の蔓延との戦いに積極的に取り組んでいます。",
-    "complete_title": "コミュニティを安全に守るためへのご協力ありがとう！",
-    "distancing_cta": "次へ進む",
-    "distancing_description": "マスク、手袋など社会的距離および個人用保護具（PPE）については、地域、州、または国のガイドラインに従ってください。現時点では、追加のアクションは必要ありません。",
-    "distancing_title": "距離とPPE",
-    "emergency_cta": "911に電話する",
-    "emergency_description": "報告された症状に基づいて、すぐに治療を受けてください。",
-    "emergency_title": "緊急サービスに電話する",
-    "experiencing_any_symptoms": "これらの症状のいずれかが発生しています",
-    "experiencing_some_symptoms": "これらの症状のいくつかが発生しています",
-    "i_am": "私は",
-    "i_am_not": "私は違います",
-    "isolate_cta": "次へ進む",
-    "isolate_description": "COVID-19に関連している可能性のあるいくつかの症状があります。症状が悪化した場合は、医療提供者に連絡してください。自宅隔離を開始してください。",
-    "isolate_title": "隔離する",
-    "next": "次へ進む",
-    "share_cta": "理解して同意します",
-    "share_cta_skip": "いいえ、データを共有したくありません",
-    "share_description": "匿名データは、 {{authority}}によるCOVID-19の拡散の分析、追跡、および抑制に役立ちます。データは、共有を選択した他のPathCheckユーザーから収集されます。 \n\nデータにはアンケートの回答と郵便番号が含まれますが、追加情報や個人を特定する情報は含まれません。 \n\n {{authority}}は、匿名データを一定期間保持します。",
-    "share_title": "匿名化されたデータを公開する",
-    "start_cta": "開始",
-    "start_description": "お客様の情報は非公開で、匿名化され、暗号化されています。あなたが許可を与えない限り、あなたのデバイスから情報がリリースされることはありません。",
-    "start_title": "COVID-19について次に何をすべきかを知るため、あなたの症状と病歴についての質問に答えてください"
-  },
   "common": {
-    "alert": "警告",
     "back": "戻る",
     "close": "閉じる",
     "continue": "継続する",
@@ -55,8 +19,7 @@
     "skip": "スキップ",
     "something_went_wrong": "問題が発生しました",
     "start": "開始",
-    "submit": "送信",
-    "success": "成功"
+    "submit": "送信"
   },
   "errors": {
     "description": "エラーが発生しました。アプリを再読み込みしてください。",
@@ -102,9 +65,7 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6フィート間隔を取る",
-      "content": "あなたの近くにいた誰かがCOVID-19の検査で陽性を示しました。",
       "ha_guidance_header": "私は何をすべきか？",
-      "ha_guidance_subheader": "{{healthAuthorityName}} からのガイダンスを参照してください。",
       "header": "新型コロナウイルス感染者と遭遇していた可能性があります。",
       "isolate": "隔離する",
       "next_steps": "次へ進む",
@@ -155,9 +116,7 @@
       "tracing_off_header": "非 アクティブ",
       "tracing_off_subheader": "Bluetoothおよび近接トレースを有効にして、可能性のある接触に関する情報を取得します",
       "tracing_off_subheader_location": "Bluetooth、近接トレース、位置情報を有効にして、可能性のある露出に関する情報を取得します",
-      "tracing_on_header": "アクティブ",
-      "unauthorized_error_message": "近接トレースをアクティブにするには、[設定] > {{applicationName}} > [露出通知] で [公開情報の共有] が有効になっていることを確認します。",
-      "unauthorized_error_title": "接触情報を共有する"
+      "tracing_on_header": "アクティブ"
     },
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
@@ -177,7 +136,6 @@
     "check": "チェックマーク",
     "checked_checkbox": "チェックされたチェックボックス",
     "go_to_home_view": "ホーム ビューに移動する",
-    "language_icon": "地球儀の輪郭付きアイコン",
     "launch_enable_notif": "お知らせを有効にする",
     "launch_get_started": "開始する",
     "launch_screen1_header": "へようこそ",
@@ -254,21 +212,16 @@
     "terms_header_title": "利用規約",
     "welcome_image_label": "ネットワーク内のノードのように接続されたマスクを使用した人物のイラスト。"
   },
-  "report_issue": {
-    "body": "フィードバック(必須)",
-    "email": "電子メール (必須)",
-    "errors": {
-      "invalid_email": "有効な電子メールを入力してください"
-    },
-    "name": "フルネーム",
-    "success": "リクエストをお受けしました。ありがとうございました！"
-  },
   "screen_titles": {
-    "about": "約",
     "debug": "デバッグ",
     "exposure_history": "接触履歴",
     "exposures": "接触",
-    "legal": "リーガル",
-    "report_issue": "問題を報告する"
+    "legal": "リーガル"
+  },
+  "settings": {
+    "i_understand_and_consent": "私は理解して同意します"
+  },
+  "symptom_checker": {
+    "get_tested": "COVID-19のテストを受けることをお勧めします。"
   }
 }

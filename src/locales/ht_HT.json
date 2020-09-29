@@ -2,52 +2,19 @@
   "_display_name": "Kreyòl ayisyen",
   "about": {
     "description": "Aplikasyon [1$s: app aplikasyonName] fèt pa [1 $ s: healthAuthorityName]",
+    "emergency_contact": "Kontak Ijans",
     "operating_system_abbr": "OS:",
     "version": "Vèsyon:"
-  },
-  "assessment": {
-    "agree_question_description": "Egzamen an ede w pran desizyon pou chèche swen medikal apwopriye. Li pa fèt pou dyagnostik oswa trètman maladi oswa lòt kondisyon.",
-    "agree_question_text": "Objektif tès depistaj COVID-19 sa a",
-    "agreement_cta": "Mwen konprann e mwen dakò",
-    "agreement_description": "Depistaj la ede ou pran desizyon sou chèche swen medikal apwopriye. Li pa fèt pou dyagnostik ni tretman pou maladi oswa lòt kondisyon.",
-    "agreement_footer": "Pa pwosedi sa, ou dakò ke rezilta sondaj ou yo pa fèt pou dyagnostik oswa pou tretman.",
-    "agreement_title": "Sa a se pa pou dyagnostik",
-    "caregiver_cta": "Kontinye",
-    "caregiver_description": "Notifye yon founisè swen sante nan etablisman swen alontem ou. Viv nan yon etablisman swen alontem oswa yon mezon retrèt kapab mete ou nan risk pou maladi grav.\n\n<1>Di yon moun kap bay swen</1> nan etablisman an ke ou malad epi ou bezwen we yon founisè medikal pi vit ke posib.",
-    "caregiver_title": "Enfòme Moun Kap Bay Swen",
-    "complete_cta": "Fini",
-    "complete_description": "Kontinye itilize aplikasyon sa a epi pase tès depistaj sa a <1>ankò nan semèn kap vini</1> pou ede pwoteje tèt ou ak kominote w a.",
-    "complete_title": "Tout fini!",
-    "distancing_cta": "Kontinye",
-    "distancing_description": "Tanpri, swiv lokal ou, leta, oswa gid nasyonal pou <1>distans sosyal</1> ak Ekipman Pwoteksyon Pèsonèl (PPE) tankou mask ak/oswa gan. Pa gen okenn aksyon adisyonel ki nesese nan moman sa a.",
-    "distancing_title": "Distans & PPE",
-    "emergency_cta": "Rele Sèvis Ijans yo",
-    "emergency_description": "Ou ka gen yon <1>ijans medikal</1>. Atansyon medikal imedya nesesè.\n\nFè operatè ijans lan konnen si ou te an kontak ak yon moun ki gen COVID-19 oswa si resamman ou te nan yon zòn kote COVID-19 pwopaje.",
-    "emergency_title": "Sèvis Ijans yo",
-    "experiencing_any_symptoms": "Fè eksperyans nenpòt nan sentom sa yo",
-    "experiencing_some_symptoms": "Fè eksperyans kèk nan sentom sa yo",
-    "i_am": "Mwen se",
-    "i_am_not": "Mwen pa ",
-    "isolate_cta": "Kontinye",
-    "isolate_description": "Ou <1>gen kèk sentòm</1> ki ka ki gen rapò ak COVID-19. Rele founisè swen sante ou si senptom ou yo vin pi mal. Kòmanse izole lakay ou.",
-    "isolate_title": "Izole tèt ou",
-    "next": "Kontinye",
-    "share_cta": "Mwen konprann epi mwen konsanti",
-    "share_cta_skip": "Non mèsi, mwen pa vle pataje done",
-    "share_description": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona (\"PathCheck\") ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\nOtorite Swen Sante Ayiti yo pral kenbe done anonim ou pou yon peryòd tan espesifik.",
-    "share_title": "Pibliye done anonim",
-    "start_cta": "Kòmanse",
-    "start_description": "Enfòmasyon ou an prive, anonim, e kode. Pa gen done kap kite aparèy ou sof si ou bay pèmisyon.",
-    "start_title": "Reponn kesyon sou sentom ou yo ak istwa medikal pou aprann Kisa pou fe aprè sou COVID-19"
   },
   "callback": {
     "firstname": "Prenon",
     "lastname": "Siyati",
     "phone_number_required": "Nimewo telefòn (obligatwa)",
+    "success_got_it": "Mwen konprann",
+    "success_requested": "Rele Ankò Mande fèt ",
     "well_get_in_touch": "Nou pral pran kontak"
   },
   "common": {
-    "alert": "Alèt",
     "back": "Retounen",
     "close": "Fèmen",
     "continue": "Kontinye",
@@ -57,12 +24,12 @@
     "maybe_later": "Petèt pita",
     "next": "Kontinye",
     "no_thanks": "Non mèsi",
+    "save": "Anrejistre",
     "settings": "Louvri tablodbò",
     "skip": "Sote",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse",
-    "submit": "Soumèt",
-    "success": "Siksè"
+    "submit": "Soumèt"
   },
   "errors": {
     "description": "Yon erè fèt. Tanpri relanse aplikasyon an.",
@@ -107,9 +74,10 @@
     "exposure_detail": {
       "6ft_apart": "6 pye apa",
       "ha_guidance_header": "Kisa mwen ta dwe fè?",
-      "ha_guidance_subheader": "Gade konsèy apati {{healthAuthorityName}} .",
       "isolate": "Izolman",
       "next_steps": "Pwochen etap yo",
+      "schedule_callback": "Orè yon apèl pou jwenn sipò nan men yon traseur kontak ki soti nan {{healthAuthorityName}} .",
+      "speak_with_contact_tracer": "Pale avèk yon trasè kontak",
       "wash_your_hands": "Lave men w",
       "wear_a_mask": "Mete yon mas"
     },
@@ -146,9 +114,7 @@
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
       "tracing_off_subheader_location": "Pèmèt Bluetooth, Pwoksimite Tracing, ak lokalizasyon pou  yo ka resevwa enfòmasyon sou expozosyon posib yo.",
-      "tracing_on_header": "Aktif",
-      "unauthorized_error_message": "Pou aktive Trasaj Pwoksimite , asire ou ke \"Pataj Enfòmasyon sou Ekspozisyon\" louvri nan tablodbò > {{applicationName}} > Notifikasyon Ekspozisyon",
-      "unauthorized_error_title": "Pataje Enfòmasyon sou Ekspozisyon"
+      "tracing_on_header": "Aktif"
     },
     "fix": "Ranje pwoblèm ak {{technology}}",
     "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
@@ -164,19 +130,22 @@
   "label": {
     "check": "Kwochè ",
     "go_to_home_view": "Ale nan Akèy",
-    "language_icon": "Imaj ki dekri yon glòb",
     "launch_enable_notif": "Aktive notifikasyon",
     "launch_get_started": "Kòmanse",
     "launch_screen1_header": "Byenveni nan Chase Kowona (\"PathCheck\")",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "question_icon": "Imaj pwen entèwogasyon"
   },
+  "my_health": {
+    "today": "Jodi a"
+  },
   "navigation": {
     "connect": "Konekte",
     "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
-    "more_info": "Plis enfòmasyon"
+    "more_info": "Plis enfòmasyon",
+    "symptom_checker": "Tcheke sentòm"
   },
   "onboarding": {
     "activation_header_title": "Enstalasyon Aplikasyon",
@@ -194,12 +163,16 @@
     "location_subheader": "Poukisa mwen bezwen louvri tablodbò telefòn mwen an?",
     "notification_header": "Èske ou ta renmen resevwa notifikasyon lè ou ka te kwaze chemen ak viris la?",
     "notification_subheader1": "Kilè mwen pral resevwa avi?",
+    "notification_subheader2": "Ki jan li fonksyone?",
     "please_read_the": "Tanpri, li",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "protect_privacy_button": "Ki jan nou pwoteje vi prive ou",
     "protect_privacy": {
       "header": "Ki jan nou pwoteje vi prive ou"
     },
+    "proximity_tracing_header": "Aktive Trasaj Pwoksimite ",
+    "proximity_tracing_subheader1": "Ki jan li fonksyone?",
+    "proximity_tracing_subheader2": "Èske done mwen an sekirite?",
     "screen_5_button": "Kòmanse",
     "screen1_button": "kijan sa mache?",
     "screen1_header": "Ansanm, nou ka ralanti pwopagasyon COVID-19.",
@@ -207,26 +180,59 @@
     "screen2_header": "Telefòn ou sonje lòt aparèy li rankontre men li pap idantifye ou ak lòt moun.",
     "screen2_image_label": "De moun ki sou telefòn yo",
     "screen3_button": "E si mwen ekspoze?",
+    "screen3_image_label": "Yon moun devan yon telefòn ki kode",
     "select_language": "Chwazi lang",
     "step": "Etap {{currentStep}} nan {{totalSteps}}",
     "terms_header_title": "Règleman itilizasyon",
     "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
   },
-  "report_issue": {
-    "body": "Fidbak (obligatwa)",
-    "email": "Imèl (obligatwa)",
-    "errors": {
-      "invalid_email": "Tanpri antre yon imèl ki valab"
-    },
-    "name": "Non konplè",
-    "success": "Nou te resevwa demann ou an. Mèsi!"
-  },
   "screen_titles": {
-    "about": "Apropo",
+    "callback": "Mande Rele Ankò",
     "debug": "Debug",
     "exposure_history": "Lis ekspozisyon",
     "exposures": "Ekspozisyon yo",
-    "legal": "Legal",
-    "report_issue": "Rapòte yon pwoblèm"
+    "how_the_app_works": "Kijan aplikasyon an fonksyone",
+    "legal": "Legal"
+  },
+  "settings": {
+    "here": "isit la",
+    "i_understand_and_consent": "Mwen konprann e mwen dakò",
+    "please_view_privacy_policy": "Tanpri gade politik vi prive yo",
+    "share_anonymized_data": "Pataje Done Anonim",
+    "share_anonymized_data_disclaimer": "Pa pwosedi sa, ou dakò yo pataje repons anonim pou kesyon tès depistaj ak {{healthAuthorityName}}",
+    "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona (\"PathCheck\") ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
+  },
+  "symptom_checker": {
+    "check-in": "Tcheke-antre",
+    "find_a_test_center": "Jwenn yon sant tès",
+    "find_a_test_center_nearby": "Jwenn yon sant tès ki tou pre",
+    "get_tested": "Nou rekòmande ou fè tès pou COVID-19.",
+    "glad_to_hear_it": "Kontan tande sa!",
+    "good": "Byen",
+    "guidance": "Gid",
+    "how_are_you_feeling": "Kijan ou santi ou jodi a?",
+    "my_health": "Sante mwen",
+    "not_well": "Pa byen",
+    "person_finding_location_label": "Yon moun sou telefòn kap chèche yon kote.",
+    "sorry_not_feeling_well": "Nou dezole ke ou pa santi w byen. Sentòm ou yo ka gen rapò ak COVID-19.",
+    "sorry_to_hear_it": "Nou dezole ke ou pa santi w byen!",
+    "symptoms_saved": "Sentòm yo anrejistre!",
+    "what_symptoms": "Ki sentòm ou genyen?"
+  },
+  "symptoms": {
+    "body_aches": "Kò fè mal",
+    "chest_pain_or_pressure": "Doulè nan pwatrin oswa presyon",
+    "chills": "Frison",
+    "cough": "Tous",
+    "diarrhea": "Dyare",
+    "difficulty_breathing": "Difikilte pou respire",
+    "disorientation_or_unresponsiveness": "Dezoryantasyon oswa san reaksyon",
+    "fever": "Lafyèv",
+    "lightheadedness": "Toudisman",
+    "loss_of_appetite": "Pèdi apeti",
+    "loss_of_smell": "Pèdi sant",
+    "loss_of_taste": "Pèdi gou",
+    "other": "Lòt",
+    "vomiting": "Vomisman"
   }
 }

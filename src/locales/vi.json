@@ -1,11 +1,5 @@
 {
   "_display_name": "Tiếng Việt",
-  "assessment": {
-    "caregiver_cta": "Tiếp theo",
-    "distancing_cta": "Tiếp theo",
-    "isolate_cta": "Tiếp theo",
-    "next": "Tiếp theo"
-  },
   "common": {
     "next": "Tiếp theo"
   },
@@ -17,7 +11,6 @@
     "terms_header_title": "Điều khoản sử dụng"
   },
   "screen_titles": {
-    "about": "Giới thiệu",
     "legal": "Pháp lý"
   }
 }
