@@ -2,8 +2,6 @@ import React, { FunctionComponent, createContext, useContext } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
 
-const USA_EMERGENCY_NUMBER = "911"
-
 export interface Configuration {
   appDownloadLink: string
   appPackageName: string
@@ -52,6 +50,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
     FIND_A_TEST_CENTER_URL: findATestCenterUrl,
+    EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
@@ -63,8 +62,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
-  const emergencyPhoneNumber =
-    env.EMERGENCY_PHONE_NUMBER || USA_EMERGENCY_NUMBER
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
   const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null

@@ -66,8 +66,19 @@ const ConnectScreen: FunctionComponent = () => {
     })
   }
 
-  const handleOnPressEmergencyContact = () => {
-    Linking.openURL(`tel:${emergencyPhoneNumber}`)
+  const listItems: ConnectListItem[] = []
+
+  if (emergencyPhoneNumber) {
+    const handleOnPressEmergencyContact = () => {
+      Linking.openURL(`tel:${emergencyPhoneNumber}`)
+    }
+
+    const emergencyContact: ConnectListItem = {
+      label: t("about.emergency_contact"),
+      onPress: handleOnPressEmergencyContact,
+      icon: Icons.ChatBubble,
+    }
+    listItems.push(emergencyContact)
   }
 
   const howTheAppWorks: ConnectListItem = {
@@ -76,13 +87,7 @@ const ConnectScreen: FunctionComponent = () => {
     icon: Icons.RestartWithCheck,
   }
 
-  const emergencyContact: ConnectListItem = {
-    label: t("about.emergency_contact"),
-    onPress: handleOnPressEmergencyContact,
-    icon: Icons.ChatBubble,
-  }
-
-  const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
+  listItems.push(howTheAppWorks)
 
   if (displayCallbackForm) {
     const callbackForm: ConnectListItem = {
