@@ -16,15 +16,15 @@ import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
 import HowItWorksPhoneRemembersDevice from "./howItWorksPhoneRemembersDevice.png"
 import HowItWorksValueProposition from "./howItWorksValueProposition.png"
 import HugEmoji from "./hugEmoji.png"
+import InfoHeader from "./infoHeader.png"
 import IsolatePathBackground from "./isolatePathBackground.png"
 import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
 import PersonFindingLocation from "./personFindingLocation.png"
-import InfoHeader from "./infoHeader.png"
-import ProtectPrivacy1 from "./protectPrivacy1.png"
-import ProtectPrivacy2 from "./protectPrivacy2.png"
-import ProtectPrivacy3 from "./protectPrivacy3.png"
-import ProtectPrivacy4 from "./protectPrivacy4.png"
-import ProtectPrivacy5 from "./protectPrivacy5.png"
+import ProtectPrivacyExchangeKeys from "./protectPrivacyExchangeKeys.png"
+import ProtectPrivacyReceiveKeys from "./protectPrivacyReceiveKeys.png"
+import ProtectPrivacyReceiveNotification from "./protectPrivacyReceiveNotification.png"
+import ProtectPrivacySubmitKeys from "./protectPrivacySubmitKeys.png"
+import ProtectPrivacyTop from "./protectPrivacyTop.png"
 import SickEmoji from "./sickEmoji.png"
 import SingleCrossPathBackground from "./singleCrossPathBackground.png"
 import SmileEmoji from "./smileEmoji.png"
@@ -49,15 +49,15 @@ export const Images = {
   HowItWorksPhoneRemembersDevice,
   HowItWorksValueProposition,
   HugEmoji,
+  InfoHeader,
   IsolatePathBackground,
   MultipleCrossPathBackground,
   PersonFindingLocation,
-  InfoHeader,
-  ProtectPrivacy1,
-  ProtectPrivacy2,
-  ProtectPrivacy3,
-  ProtectPrivacy4,
-  ProtectPrivacy5,
+  ProtectPrivacyExchangeKeys,
+  ProtectPrivacyReceiveKeys,
+  ProtectPrivacyReceiveNotification,
+  ProtectPrivacySubmitKeys,
+  ProtectPrivacyTop,
   SickEmoji,
   SingleCrossPathBackground,
   SmileEmoji,

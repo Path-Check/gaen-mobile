@@ -47,7 +47,10 @@ const BluetoothInfo: FunctionComponent = () => {
             {t("home.bluetooth_info_body")}
           </GlobalText>
         </View>
-        <Image source={Images.ProtectPrivacy4} style={style.bodyImage} />
+        <Image
+          source={Images.ProtectPrivacyReceiveKeys}
+          style={style.bodyImage}
+        />
       </ScrollView>
     </View>
   )
