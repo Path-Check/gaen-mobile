@@ -40,7 +40,11 @@ const ConnectScreen: FunctionComponent = () => {
   } = useTranslation()
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
-  const { healthAuthorityName, displayCallbackForm } = useConfigurationContext()
+  const {
+    healthAuthorityName,
+    displayCallbackForm,
+    emergencyPhoneNumber,
+  } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
     loadAuthorityCopy("about"),
@@ -63,7 +67,7 @@ const ConnectScreen: FunctionComponent = () => {
   }
 
   const handleOnPressEmergencyContact = () => {
-    Linking.openURL("tel:911")
+    Linking.openURL(`tel:${emergencyPhoneNumber}`)
   }
 
   const howTheAppWorks: ConnectListItem = {
@@ -71,6 +75,7 @@ const ConnectScreen: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+
   const emergencyContact: ConnectListItem = {
     label: t("about.emergency_contact"),
     onPress: handleOnPressEmergencyContact,

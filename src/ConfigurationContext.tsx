@@ -2,6 +2,8 @@ import React, { FunctionComponent, createContext, useContext } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
 
+const USA_EMERGENCY_NUMBER = "911"
+
 export interface Configuration {
   appDownloadLink: string
   appPackageName: string
@@ -9,6 +11,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayMyHealth: boolean
   displaySelfScreener: boolean
+  emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
@@ -29,6 +32,7 @@ const initialState = {
   displayCallbackForm: false,
   displayMyHealth: false,
   displaySelfScreener: false,
+  emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
@@ -59,6 +63,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
+  const emergencyPhoneNumber =
+    env.EMERGENCY_PHONE_NUMBER || USA_EMERGENCY_NUMBER
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
   const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
@@ -78,6 +84,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayMyHealth,
         displaySelfScreener,
+        emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,

@@ -8,6 +8,7 @@ export default Factory.define<Configuration>(() => ({
   displayCallbackForm: false,
   displayMyHealth: false,
   displaySelfScreener: false,
+  emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
   healthAuthorityLearnMoreUrl: "authorityLearnMoreUrl",
