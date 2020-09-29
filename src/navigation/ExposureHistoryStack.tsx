@@ -3,12 +3,12 @@ import { useNavigation } from "@react-navigation/native"
 import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
-import ExposureHistoryScreen from "../ExposureHistory/index"
+import ExposureHistoryStackScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import {
-  ExposureHistoryScreens,
-  ExposureHistoryScreen as Screen,
+  ExposureHistoryStackScreens,
+  ExposureHistoryStackScreen as Screen,
 } from "./index"
 
 import { Headers, Colors } from "../styles"
@@ -24,12 +24,12 @@ const ExposureHistoryStack: FunctionComponent = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={ExposureHistoryScreens.ExposureHistory}
-        component={ExposureHistoryScreen}
+        name={ExposureHistoryStackScreens.ExposureHistory}
+        component={ExposureHistoryStackScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={ExposureHistoryScreens.MoreInfo}
+        name={ExposureHistoryStackScreens.MoreInfo}
         component={MoreInfo}
         options={{
           ...Headers.headerScreenOptions,
@@ -37,7 +37,7 @@ const ExposureHistoryStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={ExposureHistoryScreens.ExposureDetail}
+        name={ExposureHistoryStackScreens.ExposureDetail}
         component={ExposureDetail}
         options={{
           ...Headers.headerLightOptions,

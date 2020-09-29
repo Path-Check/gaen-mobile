@@ -14,7 +14,7 @@ import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
-import { NavigationProp, SettingsScreens } from "../navigation"
+import { NavigationProp, SettingsStackScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
@@ -123,7 +123,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
               onPress={() => {
-                navigation.navigate(SettingsScreens.ENLocalDiagnosisKey)
+                navigation.navigate(SettingsStackScreens.ENLocalDiagnosisKey)
               }}
             />
             <DebugMenuListItem
@@ -155,7 +155,9 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Show Exposures"
               onPress={() => {
-                navigation.navigate(SettingsScreens.ExposureListDebugScreen)
+                navigation.navigate(
+                  SettingsStackScreens.ExposureListDebugScreen,
+                )
               }}
             />
             <DebugMenuListItem

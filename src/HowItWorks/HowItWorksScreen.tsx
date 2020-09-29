@@ -14,7 +14,12 @@ import { useTranslation } from "react-i18next"
 import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { StatusBar, GlobalText, Button } from "../components"
-import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
+import {
+  ModalStackScreens,
+  Stacks,
+  Stack,
+  useStatusBarEffect,
+} from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
@@ -29,13 +34,13 @@ type HowItWorksScreenContent = {
 }
 
 interface HowItWorksScreenProps {
-  howItWorksScreenContent: HowItWorksScreenContent
+  HowItWorksScreenContent: HowItWorksScreenContent
   totalScreenCount: number
   destinationOnSkip: Stack
 }
 
-const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
-  howItWorksScreenContent,
+const HowItWorksStackScreen: FunctionComponent<HowItWorksScreenProps> = ({
+  HowItWorksScreenContent,
   totalScreenCount,
   destinationOnSkip,
 }) => {
@@ -51,7 +56,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
+      screen: ModalStackScreens.LanguageSelection,
     })
   }
 
@@ -60,7 +65,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, { screen: ModalScreens.ProtectPrivacy })
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.ProtectPrivacy,
+    })
   }
 
   return (
@@ -93,18 +100,18 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
         >
           <View>
             <Image
-              source={howItWorksScreenContent.image}
-              accessibilityLabel={howItWorksScreenContent.imageLabel}
+              source={HowItWorksScreenContent.image}
+              accessibilityLabel={HowItWorksScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
             <PositionDots
-              highlightedDotIdx={howItWorksScreenContent.screenNumber}
+              highlightedDotIdx={HowItWorksScreenContent.screenNumber}
               totalDotCount={totalScreenCount}
             />
             <GlobalText style={style.headerText}>
-              {howItWorksScreenContent.header}
+              {HowItWorksScreenContent.header}
             </GlobalText>
           </View>
         </ScrollView>
@@ -113,8 +120,8 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             <Button
               customButtonStyle={style.nextButton}
               customButtonInnerStyle={style.nextButtonGradient}
-              label={howItWorksScreenContent.primaryButtonLabel}
-              onPress={howItWorksScreenContent.primaryButtonOnPress}
+              label={HowItWorksScreenContent.primaryButtonLabel}
+              onPress={HowItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
             <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
@@ -265,6 +272,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-const MemoizedHowItWorksScreen = React.memo(HowItWorksScreen)
+const MemoizedHowItWorksStackScreen = React.memo(HowItWorksStackScreen)
 
-export default MemoizedHowItWorksScreen
+export default MemoizedHowItWorksStackScreen

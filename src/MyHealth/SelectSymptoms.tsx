@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect, Stacks, ModalScreens } from "../navigation"
+import { useStatusBarEffect, Stacks, ModalStackScreens } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
 import { GlobalText, Button, StatusBar } from "../components"
 import {
@@ -138,7 +138,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
     if (currentHealthAssessment === HealthAssessment.AtRisk) {
       navigation.navigate(Stacks.Modal, {
-        screen: ModalScreens.AtRiskRecommendation,
+        screen: ModalStackScreens.AtRiskRecommendation,
       })
     } else {
       navigation.goBack()

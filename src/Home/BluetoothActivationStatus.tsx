@@ -4,7 +4,7 @@ import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { HomeScreens } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
 
 export const BluetoothActivationStatus: FunctionComponent = () => {
@@ -17,7 +17,7 @@ export const BluetoothActivationStatus: FunctionComponent = () => {
   }
 
   const handleOnPressShowInfo = () => {
-    navigation.navigate(HomeScreens.BluetoothInfo)
+    navigation.navigate(HomeStackScreens.BluetoothInfo)
   }
 
   const showFixBluetoothAlert = () => {

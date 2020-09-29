@@ -15,8 +15,8 @@ import { ExposureKey } from "../../exposureKey"
 import { GlobalText, Button } from "../../components"
 import {
   useStatusBarEffect,
-  AffectedUserFlowScreens,
-  ModalScreens,
+  AffectedUserFlowStackScreens,
+  ModalStackScreens,
   Stacks,
 } from "../../navigation"
 import { Icons } from "../../assets"
@@ -81,7 +81,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       [
         {
           onPress: () =>
-            navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete),
+            navigation.navigate(
+              AffectedUserFlowStackScreens.AffectedUserComplete,
+            ),
         },
       ],
     )
@@ -131,7 +133,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     setIsLoading(false)
     if (response.kind === "success") {
       storeRevisionToken(response.revisionToken)
-      navigation.navigate(AffectedUserFlowScreens.AffectedUserComplete)
+      navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
       handleNoOpResponse(response)
     } else {
@@ -149,7 +151,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.ProtectPrivacy,
+      screen: ModalStackScreens.ProtectPrivacy,
     })
   }
 

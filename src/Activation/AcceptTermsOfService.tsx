@@ -13,7 +13,7 @@ import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { GlobalText, Button, GradientBackground } from "../components"
-import { ActivationScreens, useStatusBarEffect } from "../navigation"
+import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import {
@@ -33,7 +33,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressNext = () => {
-    navigation.navigate(ActivationScreens.ActivateProximityTracing)
+    navigation.navigate(ActivationStackScreens.ActivateProximityTracing)
   }
 
   const checkboxIcon = boxChecked

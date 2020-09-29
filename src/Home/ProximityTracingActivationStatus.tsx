@@ -7,7 +7,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { HomeScreens } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -59,7 +59,7 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
   }
 
   const handleOnPressShowInfo = () => {
-    navigation.navigate(HomeScreens.ProximityTracingInfo)
+    navigation.navigate(HomeStackScreens.ProximityTracingInfo)
   }
 
   const isENEnabled = status === ENPermissionStatus.ENABLED

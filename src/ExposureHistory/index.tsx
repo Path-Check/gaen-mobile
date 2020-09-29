@@ -10,7 +10,7 @@ const toExposureList = (exposureInfo: ExposureInfo): ExposureDatum[] => {
   return exposureInfo
 }
 
-const ExposureHistoryScreen: FunctionComponent = () => {
+const ExposureHistoryStackScreen: FunctionComponent = () => {
   const {
     lastExposureDetectionDate,
     exposureInfo,
@@ -33,4 +33,4 @@ const ExposureHistoryScreen: FunctionComponent = () => {
   )
 }
 
-export default ExposureHistoryScreen
+export default ExposureHistoryStackScreen

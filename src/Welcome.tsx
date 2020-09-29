@@ -13,7 +13,7 @@ import LinearGradient from "react-native-linear-gradient"
 import { StatusBar, GlobalText, Button, GradientBackground } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
-import { ModalScreens, useStatusBarEffect, Stacks } from "./navigation"
+import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
@@ -40,7 +40,7 @@ const Welcome: FunctionComponent = () => {
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
+      screen: ModalStackScreens.LanguageSelection,
     })
   }
 

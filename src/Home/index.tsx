@@ -23,7 +23,7 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { ModalScreens, useStatusBarEffect, Stacks } from "../navigation"
+import { ModalStackScreens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
   StatusBar,
@@ -73,7 +73,7 @@ const Home: FunctionComponent = () => {
 
   const handleOnPressReportTestResult = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.AffectedUserStack,
+      screen: ModalStackScreens.AffectedUserStack,
     })
   }
 

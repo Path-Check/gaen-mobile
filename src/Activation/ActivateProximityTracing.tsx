@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { ActivationScreens } from "../navigation"
+import { ActivationStackScreens } from "../navigation"
 import { GlobalText, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { isPlatformiOS } from "../utils"
@@ -28,11 +28,11 @@ const ActivateProximityTracing: FunctionComponent = () => {
 
   const navigateToNextScreen = () => {
     if (isPlatformiOS()) {
-      navigation.navigate(ActivationScreens.NotificationPermissions)
+      navigation.navigate(ActivationStackScreens.NotificationPermissions)
     } else {
       isLocationRequiredAndOff
-        ? navigation.navigate(ActivationScreens.ActivateLocation)
-        : navigation.navigate(ActivationScreens.ActivationSummary)
+        ? navigation.navigate(ActivationStackScreens.ActivateLocation)
+        : navigation.navigate(ActivationStackScreens.ActivationSummary)
     }
   }
 
