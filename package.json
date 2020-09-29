@@ -1,6 +1,7 @@
 {
   "name": "PathCheckBT",
   "version": "0.0.1",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules && yarn",
