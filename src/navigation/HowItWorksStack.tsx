@@ -81,7 +81,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     },
   }
 
-  const HowItWorksScreenData: HowItWorksScreenDatum[] = [
+  const howItWorksScreenData: HowItWorksScreenDatum[] = [
     introduction,
     phoneRemembersDevices,
     personalPrivacy,
@@ -91,21 +91,21 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 
   const toStackScreen = (datum: HowItWorksScreenDatum, idx: number) => {
     const screenNumber = idx + 1
-    const HowItWorksScreenDisplayDatum = {
+    const howItWorksScreenDisplayDatum = {
       screenNumber,
       ...datum,
     }
 
     return (
       <Stack.Screen
-        key={HowItWorksScreenDisplayDatum.header}
-        name={HowItWorksScreenDisplayDatum.name}
+        key={howItWorksScreenDisplayDatum.header}
+        name={howItWorksScreenDisplayDatum.name}
       >
         {(props) => (
           <HowItWorksScreen
             {...props}
-            HowItWorksScreenContent={HowItWorksScreenDisplayDatum}
-            totalScreenCount={HowItWorksScreenData.length}
+            howItWorksScreenContent={howItWorksScreenDisplayDatum}
+            totalScreenCount={howItWorksScreenData.length}
             destinationOnSkip={destinationOnSkip}
           />
         )}
@@ -115,7 +115,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 
   return (
     <Stack.Navigator headerMode="none">
-      {HowItWorksScreenData.map((data, idx) => toStackScreen(data, idx))}
+      {howItWorksScreenData.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
 }

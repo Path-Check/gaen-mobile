@@ -3,18 +3,18 @@ import { useNavigation } from "@react-navigation/native"
 import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
-import ExposureHistoryStackScreen from "../ExposureHistory/index"
+import ExposureHistoryScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import {
   ExposureHistoryStackScreens,
-  ExposureHistoryStackScreen as Screen,
+  ExposureHistoryStackScreen,
 } from "./index"
 
 import { Headers, Colors } from "../styles"
 
 type ExposureHistoryStackParams = {
-  [key in Screen]: undefined
+  [key in ExposureHistoryStackScreen]: undefined
 }
 const Stack = createStackNavigator<ExposureHistoryStackParams>()
 
@@ -25,7 +25,7 @@ const ExposureHistoryStack: FunctionComponent = () => {
     <Stack.Navigator>
       <Stack.Screen
         name={ExposureHistoryStackScreens.ExposureHistory}
-        component={ExposureHistoryStackScreen}
+        component={ExposureHistoryScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

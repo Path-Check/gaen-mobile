@@ -34,13 +34,13 @@ type HowItWorksScreenContent = {
 }
 
 interface HowItWorksScreenProps {
-  HowItWorksScreenContent: HowItWorksScreenContent
+  howItWorksScreenContent: HowItWorksScreenContent
   totalScreenCount: number
   destinationOnSkip: Stack
 }
 
-const HowItWorksStackScreen: FunctionComponent<HowItWorksScreenProps> = ({
-  HowItWorksScreenContent,
+const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
+  howItWorksScreenContent,
   totalScreenCount,
   destinationOnSkip,
 }) => {
@@ -100,18 +100,18 @@ const HowItWorksStackScreen: FunctionComponent<HowItWorksScreenProps> = ({
         >
           <View>
             <Image
-              source={HowItWorksScreenContent.image}
-              accessibilityLabel={HowItWorksScreenContent.imageLabel}
+              source={howItWorksScreenContent.image}
+              accessibilityLabel={howItWorksScreenContent.imageLabel}
               accessible
               style={style.image}
               resizeMode={"contain"}
             />
             <PositionDots
-              highlightedDotIdx={HowItWorksScreenContent.screenNumber}
+              highlightedDotIdx={howItWorksScreenContent.screenNumber}
               totalDotCount={totalScreenCount}
             />
             <GlobalText style={style.headerText}>
-              {HowItWorksScreenContent.header}
+              {howItWorksScreenContent.header}
             </GlobalText>
           </View>
         </ScrollView>
@@ -120,8 +120,8 @@ const HowItWorksStackScreen: FunctionComponent<HowItWorksScreenProps> = ({
             <Button
               customButtonStyle={style.nextButton}
               customButtonInnerStyle={style.nextButtonGradient}
-              label={HowItWorksScreenContent.primaryButtonLabel}
-              onPress={HowItWorksScreenContent.primaryButtonOnPress}
+              label={howItWorksScreenContent.primaryButtonLabel}
+              onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
             />
             <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
@@ -272,6 +272,6 @@ const dotsStyle = StyleSheet.create({
   },
 })
 
-const MemoizedHowItWorksStackScreen = React.memo(HowItWorksStackScreen)
+const MemoizedHowItWorksScreen = React.memo(HowItWorksScreen)
 
-export default MemoizedHowItWorksStackScreen
+export default MemoizedHowItWorksScreen
