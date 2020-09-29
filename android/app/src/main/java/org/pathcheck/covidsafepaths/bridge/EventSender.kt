@@ -5,8 +5,9 @@ import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEm
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
 
 object EventSender {
-    private const val BLUETOOTH_STATUS_CHANGED_EVENT = "onBluetoothStatusUpdated"
     private const val EN_STATUS_CHANGED_EVENT = "onEnabledStatusUpdated"
+    private const val BLUETOOTH_STATUS_CHANGED_EVENT = "onBluetoothStatusUpdated"
+    private const val LOCATION_STATUS_CHANGED_EVENT = "onLocationStatusUpdated"
 
     fun sendExposureNotificationStatusChanged(reactContext: ReactContext?, enabled: Boolean) {
         reactContext
@@ -18,5 +19,11 @@ object EventSender {
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
             ?.emit(BLUETOOTH_STATUS_CHANGED_EVENT, enabled)
+    }
+
+    fun sendLocationStatusChangedEvent(reactContext: ReactContext?, enabled: Boolean) {
+        reactContext
+            ?.getJSModule(RCTDeviceEventEmitter::class.java)
+            ?.emit(LOCATION_STATUS_CHANGED_EVENT, enabled)
     }
 }

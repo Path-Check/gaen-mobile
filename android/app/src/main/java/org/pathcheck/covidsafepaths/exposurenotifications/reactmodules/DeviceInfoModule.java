@@ -1,10 +1,7 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.location.LocationManager;
 import androidx.annotation.NonNull;
-import androidx.core.location.LocationManagerCompat;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -13,6 +10,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import javax.annotation.Nonnull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.helpers.BluetoothHelper;
+import org.pathcheck.covidsafepaths.helpers.LocationHelper;
 
 @SuppressWarnings("unused")
 @ReactModule(name = DeviceInfoModule.MODULE_NAME)
@@ -69,13 +67,7 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void isLocationEnabled(final Promise promise) {
-    final LocationManager manager =
-        (LocationManager) getReactApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-    if (manager != null) {
-      promise.resolve(LocationManagerCompat.isLocationEnabled(manager));
-    } else {
-      promise.reject(new Exception("Location manager not found"));
-    }
+    promise.resolve(LocationHelper.Companion.isLocationEnabled(getReactApplicationContext()));
   }
 
   @ReactMethod
