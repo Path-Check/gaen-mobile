@@ -11,26 +11,10 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoImage" translatesAutoresizingMaskIntoConstraints="NO" id="q8g-oj-mOm">
-                    <rect key="frame" x="190" y="190" width="100" height="100"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="100" id="EXe-K5-Sov"/>
-                        <constraint firstAttribute="height" constant="100" id="n6f-I6-D0G"/>
-                    </constraints>
-                </imageView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="q8g-oj-mOm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bgz-o7-bCb"/>
-                <constraint firstItem="q8g-oj-mOm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oiS-aV-r80"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="547.20000000000005" y="454.43349753694582"/>
         </view>
     </objects>
-    <resources>
-        <image name="logoImage" width="512" height="512"/>
-    </resources>
 </document>
