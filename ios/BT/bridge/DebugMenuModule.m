@@ -21,13 +21,6 @@ RCT_EXPORT_METHOD(forceAppCrash)
   @throw [NSException exceptionWithName:NSGenericException reason:@"Forced Crash (Debug)" userInfo:nil];
 }
 
-RCT_REMAP_METHOD(detectExposuresNow,
-                 detectExposuresNowWithResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [[ExposureManager shared] handleDebugAction:DebugActionDetectExposuresNow resolve:resolve reject:reject];
-}
-
 RCT_REMAP_METHOD(simulateExposureDetectionError,
                  simulateExposureDetectionErrorWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
