@@ -68,11 +68,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   )
 
   const handleOnPressSymptom = (selectedSymptom: Symptom) => {
-    const indexOfSelectedSymptom = selectedSymptoms.indexOf(selectedSymptom)
-    if (indexOfSelectedSymptom >= 0) {
-      const newSelectedSymptoms = [...selectedSymptoms]
-      newSelectedSymptoms.splice(indexOfSelectedSymptom, 1)
-      setSelectedSymptoms(newSelectedSymptoms)
+    if (selectedSymptoms.includes(selectedSymptom)) {
+      setSelectedSymptoms(selectedSymptoms.filter((s) => s !== selectedSymptom))
     } else {
       setSelectedSymptoms([...selectedSymptoms, selectedSymptom])
     }

@@ -257,8 +257,64 @@
     "legal": "Legal"
   },
   "self_screener": {
+    "age_range": {
+      "eighteen_to_sixty_four": "18 - 64",
+      "how_old_are_you": "How old are you?",
+      "sixty_five_and_over": "65+"
+    },
+    "call_emergency_services": {
+      "call_emergency_services": "Call 911"
+    },
+    "call911": {
+      "based_on_your_symptoms": "",
+      "seek_medical_attention": "",
+      "urgent_medical_attention_needed": ""
+    },
+    "emergency_symptoms": {
+      "chest_pain": "Severe, constant chest pain or pressure",
+      "difficulty_breathing": "Extreme difficulty breathing",
+      "disorientation": "Serious disorientation or unresponsiveness",
+      "lightheadedness": "Severe, constant lightheadedness",
+      "select_any": "Select all that apply (or none)."
+    },
+    "general_symptoms_summary": {
+      "sorry_to_hear": "",
+      "two_more_questions": ""
+    },
+    "general_symptoms": {
+      "aching": "Aching throughout the body",
+      "cough": "New or worsening cough",
+      "difficulty_breathing": "Mild or moderate difficulty breathing",
+      "fever_or_chills": "Fevers or chills",
+      "loss_of_smell_taste_appetite": "Sustained loss of smell, taste, or appetite",
+      "other": "Other",
+      "vomiting_or_diarrhea": "Vomiting or diarrhea"
+    },
     "intro": {
-      "header": "COVID-19 Self Screener"
+      "agree_and_start_screener": "Agree and start screener",
+      "covid19_self_screener": "COVID-19 Self Screener"
+    },
+    "no_emergency_symptoms": {
+      "glad_to_hear": "",
+      "one_more_question": ""
+    },
+    "summary": {
+      "sorry_youre_not_feeling_well": "Sorry to hear you're not feeling well."
+    },
+    "underlying_conditions": {
+      "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",
+      "cerebrovascular_disease": "Cerebrovascular disease or nerological condition, such as stroke or dementia",
+      "diabetes": "Diabetes",
+      "heart_condition": "Serious heart condition, such as heart failure, coronary artery disease, or cardiomyopathy",
+      "high_blood_pressure": "High blood pressuer",
+      "kidney_disease": "Chronic kidney disease",
+      "liver_disease": "Liver disease",
+      "lung_disease": "Chronic lung disease, such as moderate to sever asthma, COPD, cystic fibrosis, or pumonary fibrosis",
+      "obesity": "Obesity",
+      "pregnancy": "Pregnancy",
+      "select_all_or_none": "Select all that apply (or none)",
+      "smoking": "Smoking",
+      "weakened_immune_system": "Weakened immune system or taking medications that may cause immune suppression"
     }
   },
   "settings": {
