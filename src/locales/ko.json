@@ -2,46 +2,22 @@
   "_display_name": "한국어",
   "about": {
     "description": "{{applicationName}}앱은 {{healthAuthorityName}}에 의해 사용할 수 있습니다.",
+    "emergency_contact": "긴급 연락처",
     "operating_system_abbr": "OS:",
     "version": "버전:"
   },
-  "assessment": {
-    "agree_question_description": "다음과 같은 증상을 보이는 경우 응급 서비스에 연락하십시오.\n• 극심한 지속적인 가슴 통증 또는 압박 \n• 호흡 곤란 \n• 극심한 지속적인 어지러움\n• 극심한 방향 감각 상실 또는 무응답 상태",
-    "agree_question_text": "응급상태 입니까?",
-    "agreement_cta": "본인은 이해하고 동의합니다.",
-    "agreement_description": "선별 검사는 적절한 의료 서비스를 결정하는데 도움이 됩니다. 이는 질병이나 질환을 진단하거나 치료를 위한 것은 아닙니다.",
-    "agreement_footer": "귀하는 검사 결과가 진단이나 치료를 위한 것이 아니라는 것에 동의합니다.",
-    "agreement_title": "이것은 진단을 위한 것이 아닙니다.",
-    "caregiver_cta": "다음",
-    "caregiver_description": "장기 요양시설에 있는 의료진에 알립니다. 장기 요양시설이나 요양원에서 생활하는 것은 심각한 질병에 걸릴 위험이 있습니다.\n\n요양시설의 간병인에게 당신이 아프기 때문에 가능한 한 빨리 의료진을 만나야 한다고 말하십시오.",
-    "caregiver_title": "간병인에게 알림",
-    "complete_cta": "완료",
-    "complete_description": "귀하의 건강상태와 노출 이력을 익명으로 지역사회에 공유함으로써, 코로나19의 확산 방지에 큰 기여를 하고 있습니다.",
-    "complete_title": "지역사회를 안전하게 지켜주셔서 감사합니다!",
-    "distancing_cta": "다음",
-    "distancing_description": "사회적 거리 두기 및 개인 보호 장비(마스크 또는 장갑)와 관련해서는 현지(주/국가)의 지침을 따르십시오. 현재로서는 추가 조치가 필요하지 않습니다.",
-    "distancing_title": "사회적 거리두기 & 개인 보호 장비",
-    "emergency_cta": "911 호출",
-    "emergency_description": "보고된 증상에 따라 즉시 치료를 받아야 합니다.",
-    "emergency_title": "응급 서비스 호출",
-    "experiencing_any_symptoms": "이러한 증상 중 일부를 경험",
-    "experiencing_some_symptoms": "이러한 증상 중 일부를 경험",
-    "i_am": "본인은",
-    "i_am_not": "본인은 아닙니다.",
-    "isolate_cta": "다음",
-    "isolate_description": "귀하는 코로나19와 관련이 있을 수 있는 몇몇 증상을 보이고 있습니다. 증상이 악화되면 의료진에게 문의하시고, 우선 자가 격리하시길 바랍니다.",
-    "isolate_title": "자가 격리",
-    "next": "다음",
-    "share_cta": "본인은 이해했으며, 동의합니다.",
-    "share_cta_skip": "아니요, 본인의 데이터를 공유하고 싶지 않습니다.",
-    "share_description": "귀하의 익명 데이터는 {{authority}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 \"경로확인(PathCheck)\" 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{authority}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다.",
-    "share_title": "익명 데이터 게시",
-    "start_cta": "시작",
-    "start_description": "귀하의 정보는 비공개, 익명화 및 암호화됩니다. 권한을 부여하지 않는 한 데이터를 기기에서 남기지 않습니다.",
-    "start_title": "코로나19에 대해 앞으로 무엇을 해야 할지 알아보려면 증상과 병력에 대한 질문에 답변하십시오."
+  "callback": {
+    "fill_out_the_info": "아래 정보를 입력하고 {{healthAuthorityName}}를 통해 이동경로 조사 담당자에게 연락 받으십시오. ",
+    "firstname": "이름",
+    "lastname": "성",
+    "phone_number_required": "전화 번호 (필수)",
+    "success_body": "이동경로 추적 담당자들은 귀하와 지역사회를 안전하게 지키기 위해 열심히 노력하고 있습니다. {{healthAuthorityName}}가 귀하의 전화 회신 요청을 받았습니다. 전문가가 24시간 이내에 귀하에게 연락을 드릴 것입니다.",
+    "success_got_it": "알겠습니다.",
+    "success_header": "귀하는 대기중입니다.",
+    "success_requested": "전화 회신 요청하셨습니다.",
+    "well_get_in_touch": "연락 드리겠습니다."
   },
   "common": {
-    "alert": "경고",
     "back": "뒤로 가기",
     "close": "닫기",
     "continue": "계속",
@@ -51,12 +27,12 @@
     "maybe_later": "나중에",
     "next": "다음",
     "no_thanks": "아니오 괜찮습니다.",
+    "save": "저장",
     "settings": "설정 열기",
     "skip": "건너 뛰기",
     "something_went_wrong": "문제가 발생했습니다.",
     "start": "시작",
-    "submit": "제출",
-    "success": "성공"
+    "submit": "제출"
   },
   "errors": {
     "description": "오류가 발생했습니다. 앱을 새로 고침하세요.",
@@ -81,9 +57,11 @@
     "error": {
       "invalid_code": "다른 코드로 시도하십시오.",
       "invalid_format": "잘못된 형식",
+      "network_connection_error": "인터넷에 연결되지 않았습니다.",
       "unknown_code_verification_error": "다른 코드로 시도하십시오.",
       "verification_code_used": "인증 코드가 이미 사용되었습니다."
     },
+    "person_and_health_expert": "의료 전문가와 이야기하는 사람",
     "publish_consent_title_bluetooth": "지역사회의 다른 사람에게 알리기",
     "publish_keys": {
       "errors": {
@@ -102,12 +80,12 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6피트 간격",
-      "content": "귀하의 주변에서 코로나19 감염 확진자가 발생했습니다.",
       "ha_guidance_header": "본인은 어떻게 해야합니까?",
-      "ha_guidance_subheader": "{{healthAuthorityName}}에서 지침을 검토하십시오.",
       "header": "코로나19 확진자와 동선이 겹쳤을 수 있습니다.",
       "isolate": "격리",
       "next_steps": "다음 단계",
+      "schedule_callback": "{{healthAuthorityName}} 에서 이동경로 조사 담당자의 지원을 받으려면 전화를 예약하십시오.",
+      "speak_with_contact_tracer": "이동경로 조사 담당자와 대화하기",
       "wash_your_hands": "손을 씻으십시오.",
       "wear_a_mask": "마스크 착용"
     },
@@ -155,9 +133,7 @@
       "tracing_off_header": "비활성",
       "tracing_off_subheader": "블루투스 및 근접 추적을 활성화하여 노출에 대한 정보를 얻을 수 있습니다.",
       "tracing_off_subheader_location": "블루투스, 근접 추적 및 위치를 활성화하여 가능한 노출에 대한 정보를 얻을 수 있습니다.",
-      "tracing_on_header": "활성",
-      "unauthorized_error_message": "근접 추적을 활성화하려면 설정 > {{applicationName}} > 노출 알림에서 \"노출 정보 공유\"가 활성화되어 있는지 확인하십시오.",
-      "unauthorized_error_title": "노출 정보 공유"
+      "tracing_on_header": "활성"
     },
     "fix": "{{technology}}로 문제 해결",
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
@@ -177,7 +153,6 @@
     "check": "체크 표시",
     "checked_checkbox": "체크된 확인란",
     "go_to_home_view": "홈으로 이동",
-    "language_icon": "지구본 아이콘",
     "launch_enable_notif": "알림 활성화",
     "launch_get_started": "시작",
     "launch_screen1_header": "에 오신 것을 환영합니다.",
@@ -185,11 +160,21 @@
     "question_icon": "물음표 아이콘",
     "unchecked_checkbox": "체크되지 않은 확인란"
   },
+  "my_health": {
+    "over_time": "시간 초과",
+    "symptom_log": {
+      "feeling_not_well": "귀하의 컨디션이 좋지않았습니다.",
+      "feeling_well": "귀하의 컨디션이 좋았습니다."
+    },
+    "today": "오늘"
+  },
   "navigation": {
+    "connect": "연결",
     "exposure": "노출",
     "exposure_history": "노출 이력",
     "home": "집",
-    "more_info": "더 많은 정보"
+    "more_info": "더 많은 정보",
+    "symptom_checker": "증상 검사기"
   },
   "onboarding": {
     "activation_header_title": "앱 설정",
@@ -254,21 +239,53 @@
     "terms_header_title": "이용 약관",
     "welcome_image_label": "네트워크의 연결된 노드처럼 마스크를 착용한 사람들의 그림."
   },
-  "report_issue": {
-    "body": "피드백 (필수)",
-    "email": "이메일 (필수)",
-    "errors": {
-      "invalid_email": "유효한 이메일을 입력하십시오."
-    },
-    "name": "성명",
-    "success": "귀하의 요청이 등록되었습니다. 감사합니다!"
-  },
   "screen_titles": {
-    "about": "에 대해",
+    "callback": "전화 회신 요청",
     "debug": "디버그",
     "exposure_history": "노출 이력",
     "exposures": "노출",
-    "legal": "법률",
-    "report_issue": "문제 보고"
+    "how_the_app_works": "어떻게 앱이 작동하나요?",
+    "legal": "법률"
+  },
+  "settings": {
+    "here": "여기",
+    "i_understand_and_consent": "본인은 이해했으며, 동의합니다.",
+    "please_view_privacy_policy": "개인 정보 보호 정책을 확인하십시오.",
+    "share_anonymized_data": "익명화된 데이터 공유",
+    "share_anonymized_data_disclaimer": "계속 진행하면 {{healthAuthorityName}}의 검사 질의에 익명의 답변을 공유하는데 동의합니다.",
+    "share_anonymized_data_para": "귀하의 익명 데이터는 {{healthAuthorityName}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 \"경로확인(PathCheck)\" 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{healthAuthorityName}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다."
+  },
+  "symptom_checker": {
+    "check-in": "체크인",
+    "find_a_test_center": "코로나19 검사소 찾기",
+    "find_a_test_center_nearby": "인근 코로나19 검사소 찾기",
+    "get_tested": "코로나19 검사를 받는 것을 권장드립니다.",
+    "glad_to_hear_it": "다행입니다!",
+    "good": "좋습니다.",
+    "guidance": "지침",
+    "how_are_you_feeling": "오늘은 컨디션이 어떻습니까?",
+    "my_health": "나의 건강",
+    "not_well": "좋지 않습니다.",
+    "person_finding_location_label": "휴대 전화에서 위치를 검색하는 사람.",
+    "sorry_not_feeling_well": "귀하의 컨디션이 좋지 않으시다니 걱정입니다. 귀하의 증상은 코로나19와 관련이 있을 수 있습니다.",
+    "sorry_to_hear_it": "귀하의 컨디션이 안좋으시다니 걱정입니다!",
+    "symptoms_saved": "증상이 저장되었습니다!",
+    "what_symptoms": "어떤 증상이 있습니까?"
+  },
+  "symptoms": {
+    "body_aches": "몸살",
+    "chest_pain_or_pressure": "가슴 통증 또는 압박",
+    "chills": "오한",
+    "cough": "기침",
+    "diarrhea": "설사",
+    "difficulty_breathing": "호흡 곤란",
+    "disorientation_or_unresponsiveness": "방향 감각 상실 또는 무반응",
+    "fever": "발열",
+    "lightheadedness": "현기증",
+    "loss_of_appetite": "식욕 부진",
+    "loss_of_smell": "후각 상실",
+    "loss_of_taste": "미각 상실",
+    "other": "그 외 증상",
+    "vomiting": "구토"
   }
 }

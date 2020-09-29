@@ -5,43 +5,7 @@
     "operating_system_abbr": "OS:",
     "version": "Nooca:"
   },
-  "assessment": {
-    "agree_question_description": "Jooji oo wac adeegyada gurmadka haddii ay ku hayso:\n• Xanuun ama cadaadis daran, oo joogto laabta (xabadka) ah  \n• Aad dhibaato xoog ah ku qabto neefsashada. \n• Madax-wareer daran, oo joogto ah \n• Jahawareer daran ama jawaab celin la'aan ah",
-    "agree_question_text": "Tani ma xaalad degdeg ah baa?",
-    "agreement_cta": "Waan fahmay oo waan oggolahay",
-    "agreement_description": "Baaritaanku wuxuu kaa caawinayaa inaad go'aanno ka gaarto arrimaha ku saabsan raadin daryeel caafimaad oo habboon. Looguma talagalin helidda ama daawaynta cudurka ama xaaladaha kale.",
-    "agreement_footer": "Markaad ku sii socoto, waxaad oggolaatay in natiijooyinka sahankaaga aan loogu talagalin heltaanka ama daawaynta xaaladda.",
-    "agreement_title": "Tan looguma talagalin helitaan xaalad",
-    "caregiver_cta": "Ka xiga",
-    "caregiver_description": "Ogeysii daryeel caafimaad bixiyaha ee jooga rugtaada daryeelka muddada-dheer. Ku noolaanshaha rugta daryeelka muddada dheer ama hoyga daryeelka dadka da'da ah ama xaaladda muddada dheer qaba ayaa khatar ugu jira bukaansho daran.\n\nU sheeg daryeelaha rugta inaad jirran tahay oo aad u baahan tahay inaad aragto bixiye caafimaad sida ugu dhaqsaha badan.",
-    "caregiver_title": "Ogeysii Daryeel-bixiye",
-    "complete_cta": "Dhammaad",
-    "complete_description": "Markaad la wadaagto xaaladdaada caafimaad iyo taariikhda u-feydsankaaga magacaaga oo qarsoodi ah bulshadaada, waxaad tahay qof xaaladaha ka hortagaya oo la dagaallamaya faafitaanka cudurka COVID-19.",
-    "complete_title": "Waad ku mahadsantahay badbaadinta bulshadaada!",
-    "distancing_cta": "Ka xiga",
-    "distancing_description": "Fadlan raac tilmaamaha deegaankaaga, gobolkaaga, ama qarankaba ee loogu talagalay kala fogaanshaynta bulsheed iyo Qalabka Difaaca Shaqsiyadeed (PPE) sida maaskaraha iyo/ama gacmo-gashiyada. Lama rabo tallaabo dheeraada wakhtigan.",
-    "distancing_title": "Kala fogaanshaynta & Qalabka Difaaca (PPE)",
-    "emergency_cta": "Wac 911",
-    "emergency_description": "Iyadoo ku xiran astaamahaaga laga warbixiyay, waa inaad isla markaaba raadsataa daryeel.",
-    "emergency_title": "Wac adeegyada Xaaladaha Degdegga Ah (Imerjansiga)",
-    "experiencing_any_symptoms": "lihi midkoodna astaamahan",
-    "experiencing_some_symptoms": "leeyahay qaarkood xaaladahan",
-    "i_am": "Anigu waan ",
-    "i_am_not": "Anigu ma ",
-    "isolate_cta": "Ka xiga",
-    "isolate_description": "Waxaad leedahay qaarkkod calaamadaha la xiriiri kara COVID-19. Wac daryeel-caafimaad bixiyahaaga haddii ay astaamahaagu ka sii daraan. Billow isgo'doomin guri.",
-    "isolate_title": "Adigu is-go'doomi",
-    "next": "Ka xiga",
-    "share_cta": "Waan fahmay oo waan oggolahay",
-    "share_cta_skip": "Maya mahadsanid, ma rabo inaan xogta wadaago",
-    "share_description": "Xogtaada aan magaca lahayn ayaa waxtar u leh {{authority}} inay falanqeeyaan, raadraacaan, oo ay xakameeyaan fiditaanka cudurka COVID-19. Xogtaada ayaa lagu dari doonaa kuwa kale ee ka yimid isticmaaleyaasha PathCheck kale ee doorta inay wadaagaan.\n\nXogtaada waxa ku jira jawaabahaaga sahanka iyo sib koodhka, laakiin laakiin kuma jiraan macluumaad dheeri ama qof ahaan lagu garan karo.\n\nThe {{authority}} ayaa hayn doonta xogtaada aan magaca lahayn muddo cayiman.",
-    "share_title": "Daabac xogta magaca qofka aan lahayn",
-    "start_cta": "Billow",
-    "start_description": "Macluumaadkaaga ayaa ah qarsoodi, oo magaca aan la garayn, oo la qufulay (encrypted). Xogna kama baxayso aaladdaada haddii aad fasax bixiso mooyee.",
-    "start_title": "Ka jawaab su'aalaha ku saabsan astaamahaaga iyo taariikhda caafimaadkaga si aad wax uga ogaato waxa ku xiga ee lagu kacayo ee ku saabsan cudurka COVID-19"
-  },
   "common": {
-    "alert": "Feejignaan",
     "back": "Noqo",
     "close": "Xir",
     "continue": "Sii wado",
@@ -55,8 +19,7 @@
     "skip": "Dhaaf",
     "something_went_wrong": "Waxbaa qaldamay",
     "start": "Billow",
-    "submit": "Gudbi",
-    "success": "Guul"
+    "submit": "Gudbi"
   },
   "errors": {
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
@@ -102,9 +65,7 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6ft kala fogaan",
-      "content": "Qof aad u dhawaatay mar hore ayaa hadda togane u noqday ka tijaabintii COVID-19.",
       "ha_guidance_header": "Maxaan sameeyaa?",
-      "ha_guidance_subheader": "Eeg tilmaamaha ka yimid {{healthAuthorityName}}.",
       "header": "Waxa suuragal ah inaad meel uun kula kulanaty dad qaba fayraska COVID-19.",
       "isolate": "Go'doon gal",
       "next_steps": "Tallaabooyinka xiga",
@@ -155,9 +116,7 @@
       "tracing_off_header": "Ma shaqaynayo",
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
       "tracing_off_subheader_location": "Shid Bluetooth, Raadinta Dhawaanshaha (Proximity Tracing), iyo Goobta (Location) si aad u hesho macluumaad ku saabsan soo-bandhigista suurtagalka ah",
-      "tracing_on_header": "Wuu shaqaynayaa",
-      "unauthorized_error_message": "Si aad u hawlgeliso Raadinta U Dhowaanshaha, hubi in \"Share Exposure Information\" shidan yahay Dejin (Settings) > {{applicationName}} > Ogeysiisyada Soo-gaarista",
-      "unauthorized_error_title": "La wadaag Macluumaadka Soo-gaarista"
+      "tracing_on_header": "Wuu shaqaynayaa"
     },
     "fix": "Ku hagaaji cilladaha {{technology}}",
     "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
@@ -177,7 +136,6 @@
     "check": "Sax ku samaynta",
     "checked_checkbox": "Sanduuqa saxda lagu sameey",
     "go_to_home_view": "Tag muuqaalka Home (Kadinka)",
-    "language_icon": "Calaamad Adduun oo Kooban",
     "launch_enable_notif": "Karti u Yeel Ogeysiimaha",
     "launch_get_started": "Billow haddaba",
     "launch_screen1_header": "Ku soo dhowow ",
@@ -252,21 +210,13 @@
     "terms_header_title": "Shuruudaha adeegsiga",
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
-  "report_issue": {
-    "body": "Ra'yicelin (waa loo baahan yahay)",
-    "email": "Iimayl (Waa loo baahan yahay)",
-    "errors": {
-      "invalid_email": "Fadlan gali iimayl sax ah."
-    },
-    "name": "Magaca oo Buuxa",
-    "success": "Waan helnnay weyddisadkaagii. Mahadsanid!"
-  },
   "screen_titles": {
-    "about": "Ku saabasan",
     "debug": "Cillad ka saarka",
     "exposure_history": "Taariikhda Ufeydsanka",
     "exposures": "Soo gaarista",
-    "legal": "Sharciyeedka",
-    "report_issue": "Ka Warbixi Dhibaato"
+    "legal": "Sharciyeedka"
+  },
+  "settings": {
+    "i_understand_and_consent": "Waan fahmay oo waan oggolahay"
   }
 }

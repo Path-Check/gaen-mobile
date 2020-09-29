@@ -5,43 +5,7 @@
     "operating_system_abbr": "OS",
     "version": "Bersyon:"
   },
-  "assessment": {
-    "agree_question_description": "Huminto at tawagan ang mga serbisyong pang-emergency kung nakakaranas ka ng: \n • Matindi, patuloy na pananakit sa dibdib o presyon \n • Labis na paghihirap sa paghinga \n • Matindi, palagiang paggaan ng ulo \n • Malubhang disorientasyon o hindi pagtugon",
-    "agree_question_text": "Emergency ba ito?",
-    "agreement_cta": "Naiintindihan ko at sumasangayon ako",
-    "agreement_description": "Ang screening ay makakatulong sa iyong paggawa ng desisyon ukol sa kinakailangang pangangalagang medikal. Hindi ito para sa dyagnosis o paggamot ng karamdaman o ano mang ibang kundisyon.",
-    "agreement_footer": "Kung magpapatuloy, sumasangayon ka na ang  mga resulta ng iyong survey ay hindi ukol sa diagnosis o paggamot.",
-    "agreement_title": "Hindi ito para sa diagnosis",
-    "caregiver_cta": "Sa susunod",
-    "caregiver_description": "Ipagbigay-alam sa doktor o healthcare provider sa iyong long-term care facility. Ang pagtira sa long-term care facility, nursing home o home for the aged ay posibleng maglagay sa iyo sa peligro at magdulot ng malubhang sakit.\n\nSabihin sa caregiver o tagapagalaga sa pasilidad na ikaw ay may sakit at kailangang sumangguni sa doktor o medical provider sa lalo't madaling panahon.",
-    "caregiver_title": "Ipagbigay-alam sa Caregiver o Tagapagalaga",
-    "complete_cta": "Tapos",
-    "complete_description": "Sa pamamagitan ng anonimong pagbabahagi ng iyong katayuan sa kalusugan at kasaysayan ng lokasyon o location history sa iyong komunidad, ikaw ay aktibong tumutulong ukol sa paglaban sa pagkalat ng COVID-19.",
-    "complete_title": "Salamat sa pagpapanatiling ligtas ang iyong komunidad!",
-    "distancing_cta": "Sa susunod",
-    "distancing_description": "Sundin ang mga alituntunin sa iyong lokal, estado o pamahalaan sa social distancing o pagdistansya ng layo sa iba, at Personal Protection Equipment (PPE), Kagamitang pang-proteksyon sa sarili, kagaya ng takip sa mukha, face mask, at/o guwantes. Walang ibang aksyon ang kailangan sa ngayon.",
-    "distancing_title": "Paglayo at PPE/Kagamitang pang-proteksyon sa sarili",
-    "emergency_cta": "Tumawag sa Emergency Services o 911",
-    "emergency_description": "Base sa iyong itinalang nakararanasang mag sintomas, dapat kang humingi ng agarang lunas.",
-    "emergency_title": "Tumawag sa Serbisyong Pang-emergency o Emergency Services",
-    "experiencing_any_symptoms": "nakakaranas ng anuman sa mga sintomas na ito",
-    "experiencing_some_symptoms": "nakakaranas ng ilan sa mga sintomas na ito",
-    "i_am": "Ako ay",
-    "i_am_not": "Hindi ako",
-    "isolate_cta": "Sa susunod",
-    "isolate_description": "Ikaw ay may mga sintomas na posibleng may kaugnayan sa COVID-19. Tawagan ang iyong doktor o healthcare provider kung ang mga sintomas mo ay lumalala. Simula ngayon ay manantiling mag-isa sa iyong tahanan.",
-    "isolate_title": "Manatiling mag-isa sa iyong tahanan",
-    "next": "Sa susunod",
-    "share_cta": "Naiintindihan ko at pumapayag ako",
-    "share_cta_skip": "Salamat na lang, ayaw ko'ng magbahagi ng data",
-    "share_description": "Ang anonimong, o walang pangalan na, na data ay tumutulong sa Boston Public Health Commission{{authority}} sa paganalisa, pagsubaybay at pagpigil sa paglaganap ng COVID-19. Ang iyong data ay isasama sa impormasyon ng ibang gumagamit ng PathCheck na pinili na makipagbigay-alam.\n\nAng iyong data ay naglalaman ng iyong mga sagot sa survey, o pagsisiyasat, at zip code. Walang halong personal na impormasyon na maaring magamit sa pagkilala sa iyo ang isasama rito.\n\nAng anonimong data mo ay mamalagi sa {{authority}}Boston Public Health Commission sa loob ng tinakdang panahon lamang.",
-    "share_title": "I-Publish and anonimong data",
-    "start_cta": "Simula",
-    "start_description": "Ang impormasyon mo ay pribado, hindi kilala at encrypted.  Walang data ang ilalabas sa iyong cellphone o device na walang pahintulot na nanggaling sa iyo.",
-    "start_title": "Sagutin ang mga tanong tungkol sa iyong mga sintomas at medical history upang malaman ang susunod na hakbang na gagawin hinggil sa COVID-19"
-  },
   "common": {
-    "alert": "Alerto",
     "back": "Bumalik",
     "close": "Isara",
     "continue": "Ituloy",
@@ -55,8 +19,7 @@
     "skip": "I-Skip o Laktawan",
     "something_went_wrong": "May maling nangyari",
     "start": "Simula",
-    "submit": "Isumite",
-    "success": "Tagumpay"
+    "submit": "Isumite"
   },
   "errors": {
     "description": "May naganap na error. Mangyaring i-reload ang app.",
@@ -102,9 +65,7 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6 na talampakan ang layo",
-      "content": "Napalapit ka sa isang taong nagpositibo sa COVID-19.",
       "ha_guidance_header": "Anong dapat kong gawin?",
-      "ha_guidance_subheader": "Tingnan ang patnubay mula sa {{healthAuthorityName}}.",
       "header": "Mayroon kang posibleng nakapagungnayan o nakasalamuha na pasyente na may COVID-19 virus.",
       "isolate": "Ihiwalay",
       "next_steps": "Mga Susunod na Hakbang",
@@ -155,9 +116,7 @@
       "tracing_off_header": "Hindi Aktibo",
       "tracing_off_subheader": "Paganahin ang Bluetooth at Proximity Tracing upang makakuha ng impormasyon tungkol sa mga posibleng pagkakalantad",
       "tracing_off_subheader_location": "Paganahin ang Bluetooth, Proximity Tracing, at Location upang makakuha ng impormasyon tungkol sa mga posibleng pagkahawa o pagkasalamuha",
-      "tracing_on_header": "Aktibo",
-      "unauthorized_error_message": "Upang paganahin ang Proximity Tracing, tiyakin na ang \"Ibahagi ang Impormasyon sa Exposure\" o \"Share Exposure Information\" ay pinagana sa Settings > {{applicationName}} > Exposure Notifications",
-      "unauthorized_error_title": "Ibahagi ang Expsoure Information"
+      "tracing_on_header": "Aktibo"
     },
     "fix": "Ayusin ang mga isyu sa {{technology}}",
     "get_more_info": "Kumuha ng karagdagang impormasyon sa {{technology}}",
@@ -177,13 +136,15 @@
     "check": "Checkmark",
     "checked_checkbox": "Na-check na checkbox",
     "go_to_home_view": "Pumunta sa Home view",
-    "language_icon": "Naka-outline na icon ng isang globo",
     "launch_enable_notif": "Paganahin ang mga Abiso o Notifications",
     "launch_get_started": "Simulan",
     "launch_screen1_header": "Welcome sa",
     "privacy_policy": "Patakaran sa Pagkapribado",
     "question_icon": "Icon ng Tandang Pananong",
     "unchecked_checkbox": "Hindi naka-check na checkbox"
+  },
+  "my_health": {
+    "today": "Ngayong Araw na Ito"
   },
   "navigation": {
     "exposure": "Pagkakalantad",
@@ -254,21 +215,13 @@
     "terms_header_title": "Mga Tuntunin ng Paggamit",
     "welcome_image_label": "Isang ilustrasyon ng mga taong may suot na mask, nakakonekta tulad ng mga node sa isang network."
   },
-  "report_issue": {
-    "body": "Feedback (kinakailangan)",
-    "email": "Email (kinakailangan)",
-    "errors": {
-      "invalid_email": "Mangyaring maglagay ng valid o wastong email"
-    },
-    "name": "Buong pangalan",
-    "success": "Natanggap namin ang iyong kahilingan. Salamat!"
-  },
   "screen_titles": {
-    "about": "Tungkol",
     "debug": "Pag-debug",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "exposures": "Mga Pagkakalantad",
-    "legal": "Ligal",
-    "report_issue": "Iulat ang Isyu"
+    "legal": "Ligal"
+  },
+  "settings": {
+    "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako"
   }
 }

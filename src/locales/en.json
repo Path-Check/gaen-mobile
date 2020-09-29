@@ -6,41 +6,6 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
-  "assessment": {
-    "agree_question_description": "Stop and call emergency services if you are experiencing:\n• Severe, constant chest pain or pressure \n• Extreme difficulty breathing \n• Severe, constant lightheadedness \n• Serious disorientation or unresponsiveness",
-    "agree_question_text": "Is this an emergency?",
-    "agreement_cta": "I understand and consent",
-    "agreement_description": "The screening helps you make decisions about seeking appropriate medical care. It is not intended for the diagnosis or treatment of disease or other conditions.",
-    "agreement_footer": "By proceeding, you agree that your survey results are not intended for diagnosis or treatment.",
-    "agreement_title": "This is not for diagnosis",
-    "caregiver_cta": "Next",
-    "caregiver_description": "Notify a healthcare provider in your long-term care facility. Living in a long-term care facility or nursing home may put you at risk for severe illness.\n\nTell a caregiver at the facility that you are sick and need to see a medical provider as soon as possible.",
-    "caregiver_title": "Notify Caregiver",
-    "complete_cta": "Done",
-    "complete_description": "By sharing your health status and exposure history anonymously with your community, you are being proactive about fighting the spread of COVID-19.",
-    "complete_title": "Thanks for keeping your community safe!",
-    "distancing_cta": "Next",
-    "distancing_description": "Please follow your local, state, or national guidelines for social distancing and Personal Protection Equipment (PPE) like masks and/or gloves. No additional action is needed at this time.",
-    "distancing_title": "Distancing & PPE",
-    "emergency_cta": "Call 911",
-    "emergency_description": " Based on your reported symptoms, you should seek care immediately.",
-    "emergency_title": "Call Emergency Services",
-    "experiencing_any_symptoms": "experiencing any of these symptoms",
-    "experiencing_some_symptoms": "experiencing some of these symptoms",
-    "i_am": "I am ",
-    "i_am_not": "I am not ",
-    "isolate_cta": "Next",
-    "isolate_description": "You have some symptoms that may be related to COVID-19. Call your healthcare provider if your symptoms get worse. Start home isolation.",
-    "isolate_title": "Isolate Yourself",
-    "next": "Next",
-    "share_cta": "I understand and consent",
-    "share_description": "Your anonymous data helps the {{authority}} analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zip code, but no additional or personally-identifying information.\n\nThe {{authority}} will retain your anonymous data for a specific period of time.",
-    "share_title": "Publish anonymized data",
-    "start_cta": "Start",
-    "start_description": "Your information is private, anonymized, and encrypted. No data leaves your device unless you give permission.",
-    "start_title": "Answer questions about your symptoms and medical history to learn what to do next about COVID-19",
-    "share_cta_skip": "No thanks, I don't want to share data"
-  },
   "callback": {
     "fill_out_the_info": "Fill out the information below and a contact tracer from {{healthAuthorityName}} will get in touch.",
     "firstname": "First name",
@@ -53,7 +18,6 @@
     "well_get_in_touch": "We'll get in touch"
   },
   "common": {
-    "alert": "Alert",
     "back": "Back",
     "close": "Close",
     "continue": "Continue",
@@ -69,8 +33,7 @@
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
-    "submit": "Submit",
-    "success": "Success"
+    "submit": "Submit"
   },
   "errors": {
     "description": "An error has occurred. Please reload the app.",
@@ -118,15 +81,12 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "6ft apart",
-      "call_later": "Call later",
-      "content": "Someone you were nearby has since tested positive for COVID-19.",
-      "ha_guidance_header": "What should I do?",
-      "ha_guidance_subheader": "See guidance from {{healthAuthorityName}}.",
       "general_guidance": "General Guidance",
+      "ha_guidance_header": "What should I do?",
       "header": "Someone you were nearby has since tested positive for COVID-19.",
       "isolate": "Isolate",
-      "personalize_my_guidance": "Personalize my guidance",
       "next_steps": "Next Steps",
+      "personalize_my_guidance": "Personalize my guidance",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
       "speak_with_contact_tracer": "Speak with a contact tracer",
       "wash_your_hands": "Wash your hands",
@@ -158,11 +118,6 @@
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
-  "self-screener": {
-    "intro": {
-      "header": "COVID-19 Self Screener"
-    }
-  },
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
@@ -189,16 +144,16 @@
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
     "open_settings": "Open Settings",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "To enable Proximity Tracing and Exposure Notifications, please go to the COVID-19 Exposure Notifications of your Settings App and enable 'Use Exposure Notifications'",
-      "unauthorized_error_message_ios": "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
-      "unauthorized_error_title": "Enable Proximity Tracing"
-    },
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
     "proximity_tracing_info_subheader_2": "Is my data secure?",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "To enable Proximity Tracing and Exposure Notifications, please go to the COVID-19 Exposure Notifications of your Settings App and enable 'Use Exposure Notifications'",
+      "unauthorized_error_message_ios": "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
+      "unauthorized_error_title": "Enable Proximity Tracing"
+    },
     "status_icon_active_label": "A white check in a green circle",
     "status_icon_inactive_label": "A white x in a red circle"
   },
@@ -212,6 +167,15 @@
     "privacy_policy": "Privacy Policy",
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
+  },
+  "my_health": {
+    "over_time": "Over Time",
+    "symptom_log": {
+      "did_not_check_in": "You did not check in",
+      "feeling_not_well": "You were not feeling well",
+      "feeling_well": "You were feeling well"
+    },
+    "today": "Today"
   },
   "navigation": {
     "connect": "Connect",
@@ -275,7 +239,7 @@
     "screen3_header": "No personally identifiable information ever leaves your phone.",
     "screen3_image_label": "A person in front of a locked phone",
     "screen4_button": "What if I get sick?",
-    "screen4_header": "The app will notify you if you have may have been exposed to COVID-19.",
+    "screen4_header": "The app will notify you if you may have been exposed to COVID 19",
     "screen4_image_label": "A person getting a notification on their phone",
     "screen5_header": "With the app, you can help slow the spread of COVID-19, protect others, and get help directly from health experts.",
     "screen5_image_label": "A person talking to a health expert virtually",
@@ -284,75 +248,59 @@
     "terms_header_title": "Terms of use",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
-  "settings": {
-    "share_anonymized_data": "Share Anonymized Data",
-    "you_are_sharing_data": "You are sharing anonymized data",
-    "share_anonymized_data_para": "Your anonymous data helps the {{healthAuthorityName}} Commission analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zipcode, but no additional or personally-identifying information.\n\n The {{healthAuthorityName}} will retain your anonymous data for a specific period of time.",
-    "i_understand_and_consent": "I Understand and Consent",
-    "stop_sharing_data": "Stop Sharing Data",
-    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening quesitons with the {{healthAuthorityName}}",
-    "please_view_privacy_policy": "Please view their privacy policy",
-    "here": "here",
-    "sharing_anonymized_data": "Sharing anonymized data",
-    "not_sharing_anonymized_data": "Not sharing anonymized data"
-  },
-  "report_issue": {
-    "body": "Feedback (required)",
-    "email": "Email (required)",
-    "errors": {
-      "invalid_email": "Please enter a valid email"
-    },
-    "name": "Full Name",
-    "success": "We received your request. Thank you!"
-  },
   "screen_titles": {
     "callback": "Request Call Back",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposures": "Exposures",
     "how_the_app_works": "How the app works",
-    "legal": "Legal",
-    "report_issue": "Report an Issue"
+    "legal": "Legal"
+  },
+  "self_screener": {
+    "intro": {
+      "header": "COVID-19 Self Screener"
+    }
+  },
+  "settings": {
+    "here": "here",
+    "i_understand_and_consent": "I Understand and Consent",
+    "not_sharing_anonymized_data": "Not sharing anonymized data",
+    "please_view_privacy_policy": "Please view their privacy policy",
+    "share_anonymized_data": "Share Anonymized Data",
+    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening quesitons with the {{healthAuthorityName}}",
+    "share_anonymized_data_para": "Your anonymous data helps the {{healthAuthorityName}} Commission analyze, track, and contain the spread of COVID-19. Your data will be aggregated that from other PathCheck users who choose to share.\n\nYour data contains your survey responses and zipcode, but no additional or personally-identifying information.\n\n The {{healthAuthorityName}} will retain your anonymous data for a specific period of time.",
+    "sharing_anonymized_data": "Sharing anonymized data",
+    "stop_sharing_data": "Stop Sharing Data",
+    "you_are_sharing_data": "You are sharing anonymized data"
   },
   "symptom_checker": {
+    "check_in_again": "Check in again tomorrow.",
     "check-in": "Check-in",
-    "find_a_test_center_nearby": "Find a test center nearby",
+    "delete_entry": "Delete entry",
+    "entry_deleted": "Entry deleted",
+    "errors": {
+      "adding_check_in": "Sorry, we could not add todays check in",
+      "adding_symptoms": "Sorry, we could not log your symptoms",
+      "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
+      "updating_symptoms": "Sorry, we could not update your symptoms"
+    },
     "find_a_test_center": "Find a test center",
-    "follow_ha_guidance": "Based on your symptoms, it does not seem like you have COVID-19.",
-    "sorry_not_feeling_well": "Sorry you're not feeling well.",
-    "symptoms_saved": "Symptoms saved!",
-    "symptoms_updated": "Symptoms updated!",
+    "find_a_test_center_nearby": "Find a test center nearby",
     "get_tested": "We recommend you get tested for COVID-19.",
     "glad_to_hear_it": "Glad to hear it!",
     "good": "Good",
     "guidance": "Guidance",
     "how_are_you_feeling": "How are you feeling today?",
+    "log_symptoms": "Log symptoms",
     "my_health": "My Health",
+    "no_symptom_history": "No symptom history",
     "not_well": "Not well",
     "person_finding_location_label": "A person on their phone searching for a location.",
+    "sorry_not_feeling_well": "Sorry you're not feeling well.",
     "sorry_to_hear_it": "Sorry to hear you're not feeling well!",
-    "symptoms": "Symptoms",
-    "what_symptoms": "What symptoms are you experiencing?",
-    "delete_entry": "Delete entry",
-    "entry_deleted": "Entry deleted",
-    "log_symptoms": "Log symptoms",
-    "check_in_again": "Check in again tomorrow.",
-    "no_symptom_history": "No symptom history",
-    "errors": {
-      "adding_check_in": "Sorry, we could not add todays check in",
-      "adding_symptoms": "Sorry, we could not log your symptoms",
-      "updating_symptoms": "Sorry, we could not update your symptoms",
-      "deleting_symptom_log": "Sorry, we could not delete the symptoms log"
-    }
-  },
-  "my_health": {
-    "today": "Today",
-    "over_time": "Over Time",
-    "symptom_log": {
-      "feeling_well": "You were feeling well",
-      "feeling_not_well": "You were not feeling well",
-      "did_not_check_in": "You did not check in"
-    }
+    "symptoms_saved": "Symptoms saved!",
+    "symptoms_updated": "Symptoms updated!",
+    "what_symptoms": "What symptoms are you experiencing?"
   },
   "symptoms": {
     "body_aches": "Body aches",

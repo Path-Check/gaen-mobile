@@ -5,43 +5,7 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
-  "assessment": {
-    "agree_question_description": "Nres thiab hu rau kev pab xwm ceev thaum koj ntsib tej yam no:\n• Mob hauv siab heev\n• Ua pa nyuaj heeev\n• Dias taub hau heev\n• Tsis meej pem heev lossis tsis teb",
-    "agree_question_text": "Qhov no puas yog ib qho xwm ceev?",
-    "agreement_cta": "Kuv nkag siab thiab tso cai",
-    "agreement_description": "Qhov kev ntsuas no yog pab koj txiav txim seb qhov kev kho mob twg tsim nyog rau koj. Nws tsis yog kev ntsuas kho mob lossis rau lwm yam.",
-    "agreement_footer": "Yog koj txuas mus ntxiv, ces twb yog koj txaus siab rau tej kev ntsuas no thiab yuav tsis coj los siv kho koj tus mob.",
-    "agreement_title": "Qhov no tsis yog kev ntsuas kho mob",
-    "caregiver_cta": "Tom ntej",
-    "caregiver_description": "Mus qhia ib tus kws kho mob nyob hauv koj lub tsev tu neeg mob sijhawm ntev. Kev nyob hauv ib lub tsev tu neeg mob sijhawm ntev lossis tsev laus kuj yuav ua rau qhov kis tau mob siab dua.  \n\nQhia rau ib tus tu neeg mob tias koj mob lawm thiab xav mus ntsib ib tus kws kho mob kom sai li sai tau.",
-    "caregiver_title": "Mus Qhia Tus Tu Neeg Mob",
-    "complete_cta": "Ua tiav lawm",
-    "complete_description": "Qhov koj qhia txog koj tus kheej li mob thiab tau tawm rooj mus twg rau koj lub zej zog yam tsis tas qhia koj npe, twb yog koj nqis tes pab tiv thaiv tus kab mob COVID-19 txhob nthuav dav.",
-    "complete_title": "Mus Qhia Tus Tu Neeg Mob!",
-    "distancing_cta": "Tom ntej",
-    "distancing_description": "Thov ua raws li koj lub zos, xeev, lossis tsoom fwv loj tej txheem lus hais koj sib cais deb thiab siv cov cuab yeej tiv thaiv ntiag tus (Personal Protection Equipment, PPE) xws li looj lub npog ntsej muag thiab/lossis hnab looj tes. Tsis tas yuav dabtsi ntxiv rau lub sijhawm no.",
-    "distancing_title": "Kev Sib Cais Deb thiab PPE",
-    "emergency_cta": "Hu rau 911",
-    "emergency_description": "Raws li koj cov tsos mob, koj yuav tsum mus cuag kev kho mob tam sim no.",
-    "emergency_title": "Hu mus rau Kev Pab Cuam Xwm Ceev",
-    "experiencing_any_symptoms": "muaj tej tsos mob zoo li no",
-    "experiencing_some_symptoms": "muaj tej txhia tsos mob zoo li no",
-    "i_am": "Kuv muaj ",
-    "i_am_not": "Kuv tsis muaj ",
-    "isolate_cta": "Tom ntej",
-    "isolate_description": "Koj muaj tej tsos mob uas tej zaum yog kab mob COVID-19. Hu mus rau koj tus kws kho mob yog tias koj cov tsos mob tsuas muaj phem zuj zus. Pib cais nyob ib leeg hauv tsev.",
-    "isolate_title": "Cais Nyob Ib Leeg",
-    "next": "Tom ntej",
-    "share_cta": "Kuv nkag siab thiab tso cai",
-    "share_cta_skip": "Kav liam, kuv tsis xav tso tawm kuv li ntaub ntawv",
-    "share_description": "Koj li ntaub ntawv yam tsis qhia tawm koj npe yuav pab cov {{authority}} ntsuas, soj qab, thiab tswj tus kab mob COVID-19. Koj li ntaub ntawv yuav muab sib xyaw nrog cov sab nraud uas siv PathCheck thiab txaus siab tso tawm ib yam.\n\nKoj li ntaub ntawv yog tej uas rub los ntawm cov lus nug thiab tus zauv cheeb tsam, tiamsis yuav tsis qhia tso tawm koj npe thiab tej ntaub ntawv txuam nrog koj npe.\n\nLub {{authority}} yuav ceev tseg koj li ntaub ntawv rau ib lub sijhawm.",
-    "share_title": "Tso tawm ntaub ntawv tsis muaj npe",
-    "start_cta": "Pib",
-    "start_description": "Koj li ntaub ntawv yuav khaws cia zoo thiab tsis qhia tawm. Txhua yam yuav tsis pub tso tawm yam tsis tau koj kev tso cai.",
-    "start_title": "Teb cov lus nug txog koj li tsos mob thiab keeb kwm kev kho mob los mus kawm txog seb yuav ua li cas txog tus kab mob COVID-19"
-  },
   "common": {
-    "alert": "Faj Seeb",
     "back": "Tom qab",
     "close": "Kaw",
     "continue": "Txuas Ntxiv",
@@ -55,8 +19,7 @@
     "skip": "Hla",
     "something_went_wrong": "Dabtsi puas lawm",
     "start": "Pib",
-    "submit": "Xa Mus",
-    "success": "Tiav Zoo Lawm"
+    "submit": "Xa Mus"
   },
   "errors": {
     "description": "Tau tshwm sim ib qho teeb meem. Thov muab kaw mam rov qhib lub app dua.",
@@ -101,9 +64,7 @@
   "exposure_history": {
     "exposure_detail": {
       "6ft_apart": "Sib cais deb 2 dag (6 ft)",
-      "content": "Ib tus neeg twg koj tau mus ze tau kuaj tias yog mob COVID-19 lawm.",
       "ha_guidance_header": "Kuv yuav ua li cas?",
-      "ha_guidance_subheader": "Mus cuag kev pab taw qhia los ntawm {{healthAuthorityName}}.",
       "header": "Tej zaum koj tau mus raug tus kab mob COVID-19 lawm.",
       "isolate": "Cais Nyob Ib Leeg",
       "next_steps": "Kauj Ruam Tom Ntej",
@@ -153,9 +114,7 @@
       "tracing_off_header": "Tsis Ciaj",
       "tracing_off_subheader": "Taws qhov Bluetooth thiab Proximity Tracing kom thiaj li paub txog seb tau mus raug kis mob li cas lawm",
       "tracing_off_subheader_location": "Taws Bluetooth, Proximity Tracing, thiab Location kom thiaj paub zoo txog seb puas tau mus nyob ze raug leejtwg",
-      "tracing_on_header": "Tseem Ciaj",
-      "unauthorized_error_message": "Yuav kom taws tau Proximity Tracing, mus xyuas seb \"Share Exposure Information\" puas taws nyob hauv Settings > {{applicationName}} > Exposure Notifications",
-      "unauthorized_error_title": "Pab Qhia Tawm Kev Mus Raug"
+      "tracing_on_header": "Tseem Ciaj"
     },
     "fix": "Mus kho teeb meem nrog {{technology}}",
     "get_more_info": "Xa paub ntxiv txog {{technology}}",
@@ -175,7 +134,6 @@
     "check": "Cim tseg",
     "checked_checkbox": "Lub npov uas kos lawm",
     "go_to_home_view": "Mus rau Home",
-    "language_icon": "Lub cim ntiaj teb",
     "launch_enable_notif": "Taws Qhov Notification",
     "launch_get_started": "Pib",
     "launch_screen1_header": "Tos txais tuaj rau ",
@@ -249,21 +207,13 @@
     "terms_header_title": "Kev cai siv",
     "welcome_image_label": "Daim duab qhia txog cov neeg looj lub npog ntsej muag, sib txuas sawvdaws nyob hauv ib pab pawg network."
   },
-  "report_issue": {
-    "body": "Lus pab kom peb ua tau zoo dua li qub (yuav tsum ua)",
-    "email": "Email (yuav tsum qhia)",
-    "errors": {
-      "invalid_email": "Thov sau tus email uas tseem siv tau"
-    },
-    "name": "Lub Npe",
-    "success": "Peb tau txais qhov koj thov lawm. Ua tsaug!"
-  },
   "screen_titles": {
-    "about": "Txog",
     "debug": "Debug",
     "exposure_history": "Keeb Kwm Mus Raug",
     "exposures": "Kev mus nyob ze raug mob",
-    "legal": "Kev Cai Lij Choj",
-    "report_issue": "Qhia tawm txog ib qho teeb meem twg"
+    "legal": "Kev Cai Lij Choj"
+  },
+  "settings": {
+    "i_understand_and_consent": "Kuv nkag siab thiab tso cai"
   }
 }

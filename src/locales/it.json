@@ -4,33 +4,6 @@
     "operating_system_abbr": "Sistema Operativo:",
     "version": "Versione:"
   },
-  "assessment": {
-    "agree_question_description": "Lo screening ti aiuta a prendere decisioni sulla ricerca di cure mediche appropriate. Non è destinato alla diagnosi o al trattamento della malattia o di altre condizioni.",
-    "agree_question_text": "Scopo di questo screening COVID-19",
-    "caregiver_cta": "Prossimo",
-    "caregiver_description": "Avvisare un operatore sanitario nella struttura di assistenza a lungo termine. Vivere in una struttura di cura a lungo termine o in una casa di cura può mettere a rischio di gravi malattie. \n\n<1>Informa un assistente</1> presso la struttura che sei malato e devi consultare un medico il prima possibile.",
-    "caregiver_title": "Notifica a un Assistente",
-    "complete_cta": "Fatto",
-    "complete_description": "Continua a usare questa applicazione ed esegui nuovamente lo screening la <1>prossima settimana</1> per proteggere te stessi e la tua comunità.",
-    "complete_title": "Completato!",
-    "distancing_cta": "Prossimo",
-    "distancing_description": "Seguire le linee guida locali, statali o nazionali per il <1>distanziamento sociale</1> e per i dispositivi di protezione individuale (DPI) come maschere e / o guanti. Non è necessaria alcuna azione aggiuntiva in questo momento.",
-    "distancing_title": "Distanziamento e DPI",
-    "emergency_cta": "Chiama i servizi di emergenza",
-    "emergency_description": "Potresti avere <1>un'emergenza medica</1>. È necessaria assistenza medica immediata. \n\nInforma l'operatore di emergenza se sei stato in contatto con qualcuno con il COVID-19 o se sei stato di recente in un'area in cui COVID-19 si sta diffondendo.",
-    "emergency_title": "Servizi di emergenza",
-    "isolate_cta": "Prossimo",
-    "isolate_description": "Hai <1>alcuni sintomi</1> che potrebbero essere correlati al COVID-19. Chiama il tuo medico se i sintomi peggiorano. Inizia l'isolamento a casa.",
-    "isolate_title": "Isola te stesso",
-    "next": "Prossimo",
-    "share_cta": "Capisco e acconsento",
-    "share_cta_skip": "No grazie, non voglio condividere i dati",
-    "share_description": "I tuoi dati anonimi aiutano la Boston Public Health Commission ad analizzare, tracciare e contenere la diffusione del COVID-19. I tuoi dati verranno aggregati a quelli di altri utenti PathCheck che scelgono di condividere. \n\nI tuoi dati contengono le risposte al sondaggio e il codice postale, ma nessuna informazione aggiuntiva o d'identificazione personale. \n\nLa Commissione per la salute pubblica di Boston conserverà i tuoi dati anonimi per un determinato periodo di tempo.",
-    "share_title": "Pubblica dati anonimi",
-    "start_cta": "Inizio",
-    "start_description": "Le tue informazioni sono private, anonime e crittografate. Nessun dato lascia il tuo dispositivo senza la tua autorizzazione.",
-    "start_title": "Rispondi alle domande sui sintomi e sull'anamnesi per sapere cosa in caso di COVID-19"
-  },
   "common": {
     "continue": "Continua",
     "done": "Fatto",
@@ -65,6 +38,9 @@
     "launch_screen1_header": "Benvenuti in PathCheck",
     "privacy_policy": "Informativa sulla privacy"
   },
+  "my_health": {
+    "today": "Oggi"
+  },
   "navigation": {
     "exposure_history": "Cronologia delle esposizioni",
     "home": "Home",
@@ -76,7 +52,6 @@
     "terms_header_title": "Termini per l'utilizzo"
   },
   "screen_titles": {
-    "about": "Informazioni",
     "exposure_history": "Cronologia delle esposizioni",
     "legal": "Legale"
   }
