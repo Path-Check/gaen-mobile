@@ -47,7 +47,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     } else if (disabled || loading) {
       return [Colors.secondary75, Colors.secondary75]
     } else {
-      return Colors.gradientPrimary110
+      return Colors.gradient100
     }
   }
 

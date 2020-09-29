@@ -69,7 +69,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
       <View style={style.header}>
         <TouchableOpacity onPress={handleOnPressSelectLanguage}>
           <LinearGradient
-            colors={Colors.gradientPrimary10}
+            colors={Colors.gradient10}
             useAngle
             angle={0}
             angleCenter={{ x: 0.5, y: 0.5 }}

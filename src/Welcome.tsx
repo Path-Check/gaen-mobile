@@ -51,17 +51,14 @@ const Welcome: FunctionComponent = () => {
         alwaysBounceVertical={false}
         contentContainerStyle={style.contentContainer}
       >
-        <GradientBackground
-          gradient={Colors.gradientPrimary10}
-          angleCenterY={0.75}
-        >
+        <GradientBackground gradient={Colors.gradient10} angleCenterY={0.75}>
           <View style={style.mainContentContainer}>
             <TouchableOpacity
               onPress={handleOnPressSelectLanguage}
               style={style.languageButtonContainer}
             >
               <LinearGradient
-                colors={Colors.gradientPrimary10}
+                colors={Colors.gradient10}
                 useAngle
                 angle={0}
                 angleCenter={{ x: 0.5, y: 0.5 }}

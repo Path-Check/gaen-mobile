@@ -15,8 +15,5 @@ def download_welcome_image(ha_label, access_token)
 
     puts "Failed to download welcome image file for #{ha_label}"
   else
-    puts "Welcome image override for #{HA_LABEL} not present, if this is an error, copy it and try again"
-
-    true
   end
 end

@@ -45,7 +45,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
     : t("label.unchecked_checkbox")
 
   return (
-    <GradientBackground gradient={Colors.gradientPrimary10}>
+    <GradientBackground gradient={Colors.gradient10}>
       <ScrollView
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}

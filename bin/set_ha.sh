@@ -21,6 +21,7 @@ require 'dotenv'
 require_relative "./download_copy_methods"
 require_relative "./download_links_methods"
 require_relative "./download_welcome_image_methods"
+require_relative "./download_brand_colors_methods"
 require_relative "./fetch_configurable_images_methods"
 
 Dotenv.load
@@ -35,7 +36,12 @@ else
 end
 
 def download_all_assets
-system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}") && download_copy_file(HA_LABEL, ACCESS_TOKEN) && download_links_file(HA_LABEL, ACCESS_TOKEN) && download_welcome_image(HA_LABEL, ACCESS_TOKEN) && fetch_configurable_images(HA_LABEL, ACCESS_TOKEN)
+  system("./bin/download_assets.sh #{HA_LABEL} #{ACCESS_TOKEN}")
+  download_copy_file(HA_LABEL, ACCESS_TOKEN)
+  download_links_file(HA_LABEL, ACCESS_TOKEN)
+  download_welcome_image(HA_LABEL, ACCESS_TOKEN)
+  download_brand_colors_file(HA_LABEL, ACCESS_TOKEN)
+  fetch_configurable_images(HA_LABEL, ACCESS_TOKEN)
 end
 
 if fetching_env_succeeded && system("./bin/configure_builds.sh") &&
