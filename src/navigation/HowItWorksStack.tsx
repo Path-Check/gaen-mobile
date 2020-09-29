@@ -36,7 +36,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 
   const introduction: HowItWorksScreenDatum = {
     name: HowItWorksScreens.Introduction,
-    image: Images.PeopleHighFiving,
+    image: Images.HowItWorksIntroduction,
     imageLabel: t("onboarding.screen1_image_label"),
     header: t("onboarding.screen1_header"),
     primaryButtonLabel: t("onboarding.screen1_button"),
@@ -45,7 +45,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
   const phoneRemembersDevices: HowItWorksScreenDatum = {
     name: HowItWorksScreens.PhoneRemembersDevices,
-    image: Images.PeopleOnPhones,
+    image: Images.HowItWorksPhoneRemembersDevice,
     imageLabel: t("onboarding.screen2_image_label"),
     header: t("onboarding.screen2_header"),
     primaryButtonLabel: t("onboarding.screen2_button"),
@@ -54,7 +54,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
   const personalPrivacy: HowItWorksScreenDatum = {
     name: HowItWorksScreens.PersonalPrivacy,
-    image: Images.PersonWithLockedPhone,
+    image: Images.HowItWorksPersonalPrivacy,
     imageLabel: t("onboarding.screen3_image_label"),
     header: t("onboarding.screen3_header"),
     primaryButtonLabel: t("onboarding.screen3_button"),
@@ -63,7 +63,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
   const getNotified: HowItWorksScreenDatum = {
     name: HowItWorksScreens.GetNotified,
-    image: Images.PersonGettingNotification,
+    image: Images.HowItWorksGetNotified,
     imageLabel: t("onboarding.screen4_image_label"),
     header: t("onboarding.screen4_header"),
     primaryButtonLabel: t("onboarding.screen4_button"),
@@ -72,7 +72,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
   const valueProposition: HowItWorksScreenDatum = {
     name: HowItWorksScreens.ValueProposition,
-    image: Images.PersonAndHealthExpert,
+    image: Images.HowItWorksValueProposition,
     imageLabel: t("onboarding.screen5_image_label"),
     header: t("onboarding.screen5_header"),
     primaryButtonLabel: t("onboarding.screen_5_button"),

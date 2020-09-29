@@ -59,7 +59,7 @@ export const ExportIntro: FunctionComponent = () => {
         </View>
         <View>
           <Image
-            source={Images.PersonAndHealthExpert}
+            source={Images.HowItWorksValueProposition}
             style={style.image}
             accessible
             accessibilityLabel={t("export.person_and_health_expert")}

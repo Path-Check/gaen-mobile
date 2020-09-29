@@ -11,19 +11,18 @@ import Export from "./export.png"
 import ForeArrow from "./foreArrow.png"
 import HomeActive from "./homeActive.png"
 import HomeInactive from "./homeInactive.png"
+import HowItWorksGetNotified from "./howItWorksGetNotified.png"
+import HowItWorksIntroduction from "./howItWorksIntroduction.png"
+import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
+import HowItWorksPhoneRemembersDevice from "./howItWorksPhoneRemembersDevice.png"
+import HowItWorksValueProposition from "./howItWorksValueProposition.png"
 import HugEmoji from "./hugEmoji.png"
 import IsolatePathBackground from "./isolatePathBackground.png"
-import MinnesotaMap from "./minnesotaMap.png"
 import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
-import PeopleHighFiving from "./peopleHighFiving.png"
-import PeopleOnPhones from "./peopleOnPhones.png"
-import PersonAndHealthExpert from "./personAndHealthExpert.png"
 import PersonFindingLocation from "./personFindingLocation.png"
-import PersonGettingNotification from "./personGettingNotification.png"
 import PersonOnComputer from "./personOnComputer.png"
 import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
 import PersonWithCodesInBackground from "./personWithCodesInBackground.png"
-import PersonWithLockedPhone from "./personWithLockedPhone.png"
 import PersonWithPhoneAndCode from "./personWithPhoneAndCode.png"
 import PhonesSharingCodes from "./phonesSharingCodes.png"
 import SickEmoji from "./sickEmoji.png"
@@ -45,19 +44,18 @@ export const Images = {
   ForeArrow,
   HomeActive,
   HomeInactive,
+  HowItWorksGetNotified,
+  HowItWorksIntroduction,
+  HowItWorksPersonalPrivacy,
+  HowItWorksPhoneRemembersDevice,
+  HowItWorksValueProposition,
   HugEmoji,
   IsolatePathBackground,
-  MinnesotaMap,
   MultipleCrossPathBackground,
-  PeopleHighFiving,
-  PeopleOnPhones,
-  PersonAndHealthExpert,
   PersonFindingLocation,
-  PersonGettingNotification,
   PersonOnComputer,
   PersonOnPhoneWithCode,
   PersonWithCodesInBackground,
-  PersonWithLockedPhone,
   PersonWithPhoneAndCode,
   PhonesSharingCodes,
   SickEmoji,
