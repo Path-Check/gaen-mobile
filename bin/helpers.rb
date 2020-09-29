@@ -1,3 +1,11 @@
+def red_output(text)
+  "\e[31m#{text}\e[0m"
+end
+
+def print_error(message)
+  puts red_output(message)
+end
+
 def url_exists?(remote_url)
   output, _error, status = Open3.capture3(
     "curl", "-I", remote_url

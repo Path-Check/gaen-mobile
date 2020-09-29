@@ -2,7 +2,6 @@ import BlueGradientBackground from "./blueGradientBackground.png"
 import BoxCheckedIcon from "./boxCheckedIcon.png"
 import BoxUncheckedIcon from "./boxUncheckedIcon.png"
 import CheckInCircle from "./checkInCircle.png"
-import CodesAndPhone from "./codesAndPhone.png"
 import ConcentricCircles from "./concentricCircles.png"
 import Doctors from "./doctors.png"
 import EmptyPathBackground from "./emptyPathBackground.png"
@@ -20,11 +19,12 @@ import HugEmoji from "./hugEmoji.png"
 import IsolatePathBackground from "./isolatePathBackground.png"
 import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
 import PersonFindingLocation from "./personFindingLocation.png"
-import PersonOnComputer from "./personOnComputer.png"
-import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
-import PersonWithCodesInBackground from "./personWithCodesInBackground.png"
-import PersonWithPhoneAndCode from "./personWithPhoneAndCode.png"
-import PhonesSharingCodes from "./phonesSharingCodes.png"
+import InfoHeader from "./infoHeader.png"
+import ProtectPrivacy1 from "./protectPrivacy1.png"
+import ProtectPrivacy2 from "./protectPrivacy2.png"
+import ProtectPrivacy3 from "./protectPrivacy3.png"
+import ProtectPrivacy4 from "./protectPrivacy4.png"
+import ProtectPrivacy5 from "./protectPrivacy5.png"
 import SickEmoji from "./sickEmoji.png"
 import SingleCrossPathBackground from "./singleCrossPathBackground.png"
 import SmileEmoji from "./smileEmoji.png"
@@ -35,7 +35,6 @@ export const Images = {
   BoxCheckedIcon,
   BoxUncheckedIcon,
   CheckInCircle,
-  CodesAndPhone,
   ConcentricCircles,
   Doctors,
   EmptyPathBackground,
@@ -53,11 +52,12 @@ export const Images = {
   IsolatePathBackground,
   MultipleCrossPathBackground,
   PersonFindingLocation,
-  PersonOnComputer,
-  PersonOnPhoneWithCode,
-  PersonWithCodesInBackground,
-  PersonWithPhoneAndCode,
-  PhonesSharingCodes,
+  InfoHeader,
+  ProtectPrivacy1,
+  ProtectPrivacy2,
+  ProtectPrivacy3,
+  ProtectPrivacy4,
+  ProtectPrivacy5,
   SickEmoji,
   SingleCrossPathBackground,
   SmileEmoji,
