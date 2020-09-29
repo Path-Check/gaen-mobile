@@ -19,6 +19,8 @@ import { MyHealthStackParams } from "../navigation/MyHealthStack"
 import { Typography, Colors, Outlines, Spacing, Iconography } from "../styles"
 import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
+import Calendar from "./Calendar"
+import { toLogDataHistory } from "./logDataHistory"
 
 type CheckInSummaryProps = {
   status: CheckInStatus
@@ -152,6 +154,13 @@ const OverTime: FunctionComponent = () => {
 
   const noSymptomHistory = dailyLogData.length === 0
 
+  const [selectedDay, setSelectedDay] = useState<DayLogData | null>(null)
+
+  const logDataHistory = toLogDataHistory(dailyLogData, 30)
+
+  const handleOnSelectDate = (logData: DayLogData) => {
+    setSelectedDay(logData)
+  }
   const headerTitle =
     viewSelection === "List"
       ? t("symptom_checker.last_14_days")
@@ -178,25 +187,44 @@ const OverTime: FunctionComponent = () => {
             height={Iconography.xSmall}
             accessibilityLabel="Toggle symptom log view"
             onPress={handleOnPressToggleView}
-            fill={Colors.primary100}
           />
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        {noSymptomHistory ? (
-          <GlobalText style={style.noSymptomHistoryText}>
-            {t("symptom_checker.no_symptom_history")}
-          </GlobalText>
-        ) : (
-          dailyLogData.map((logData) => {
-            return <DaySummary key={logData.date} dayLogData={logData} />
-          })
-        )}
-      </ScrollView>
+      {viewSelection === "List" ? (
+        <ScrollView
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
+          alwaysBounceVertical={false}
+        >
+          {noSymptomHistory ? (
+            <GlobalText style={style.noSymptomHistoryText}>
+              {t("symptom_checker.no_symptom_history")}
+            </GlobalText>
+          ) : (
+            dailyLogData.map((logData) => {
+              return <DaySummary key={logData.date} dayLogData={logData} />
+            })
+          )}
+        </ScrollView>
+      ) : (
+        <ScrollView
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
+          alwaysBounceVertical={false}
+        >
+          <Calendar
+            logDataHistory={logDataHistory}
+            onSelectDate={handleOnSelectDate}
+            selectedDay={selectedDay}
+          />
+          {selectedDay && (
+            <DaySummary
+              key={selectedDay.checkIn.date}
+              dayLogData={selectedDay}
+            />
+          )}
+        </ScrollView>
+      )}
     </>
   )
 }
@@ -289,9 +317,6 @@ const style = StyleSheet.create({
     ...Typography.header3,
     paddingRight: Spacing.xxLarge,
     paddingTop: Spacing.xxSmall,
-  },
-  hidden: {
-    display: "none",
   },
 })
 
