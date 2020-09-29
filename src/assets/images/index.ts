@@ -2,7 +2,6 @@ import BlueGradientBackground from "./blueGradientBackground.png"
 import BoxCheckedIcon from "./boxCheckedIcon.png"
 import BoxUncheckedIcon from "./boxUncheckedIcon.png"
 import CheckInCircle from "./checkInCircle.png"
-import CodesAndPhone from "./codesAndPhone.png"
 import ConcentricCircles from "./concentricCircles.png"
 import Doctors from "./doctors.png"
 import EmptyPathBackground from "./emptyPathBackground.png"
@@ -17,14 +16,15 @@ import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
 import HowItWorksPhoneRemembersDevice from "./howItWorksPhoneRemembersDevice.png"
 import HowItWorksValueProposition from "./howItWorksValueProposition.png"
 import HugEmoji from "./hugEmoji.png"
+import InfoHeader from "./infoHeader.png"
 import IsolatePathBackground from "./isolatePathBackground.png"
 import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
 import PersonFindingLocation from "./personFindingLocation.png"
-import PersonOnComputer from "./personOnComputer.png"
-import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
-import PersonWithCodesInBackground from "./personWithCodesInBackground.png"
-import PersonWithPhoneAndCode from "./personWithPhoneAndCode.png"
-import PhonesSharingCodes from "./phonesSharingCodes.png"
+import ProtectPrivacyExchangeKeys from "./protectPrivacyExchangeKeys.png"
+import ProtectPrivacyReceiveKeys from "./protectPrivacyReceiveKeys.png"
+import ProtectPrivacyReceiveNotification from "./protectPrivacyReceiveNotification.png"
+import ProtectPrivacySubmitKeys from "./protectPrivacySubmitKeys.png"
+import ProtectPrivacyTop from "./protectPrivacyTop.png"
 import SickEmoji from "./sickEmoji.png"
 import SingleCrossPathBackground from "./singleCrossPathBackground.png"
 import SmileEmoji from "./smileEmoji.png"
@@ -35,7 +35,6 @@ export const Images = {
   BoxCheckedIcon,
   BoxUncheckedIcon,
   CheckInCircle,
-  CodesAndPhone,
   ConcentricCircles,
   Doctors,
   EmptyPathBackground,
@@ -50,14 +49,15 @@ export const Images = {
   HowItWorksPhoneRemembersDevice,
   HowItWorksValueProposition,
   HugEmoji,
+  InfoHeader,
   IsolatePathBackground,
   MultipleCrossPathBackground,
   PersonFindingLocation,
-  PersonOnComputer,
-  PersonOnPhoneWithCode,
-  PersonWithCodesInBackground,
-  PersonWithPhoneAndCode,
-  PhonesSharingCodes,
+  ProtectPrivacyExchangeKeys,
+  ProtectPrivacyReceiveKeys,
+  ProtectPrivacyReceiveNotification,
+  ProtectPrivacySubmitKeys,
+  ProtectPrivacyTop,
   SickEmoji,
   SingleCrossPathBackground,
   SmileEmoji,

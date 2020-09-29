@@ -247,5 +247,3 @@ else
   failure_message "#{ENV_FILE} not found on the root folder, environment file is needed"
   exit 1
 end
-
-

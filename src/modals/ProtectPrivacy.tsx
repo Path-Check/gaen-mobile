@@ -47,31 +47,31 @@ const ProtectPrivacy: FunctionComponent = () => {
       </View>
       <ScrollView contentContainerStyle={style.mainContentContainer}>
         <Section
-          image={Images.PersonOnPhoneWithCode}
+          image={Images.ProtectPrivacyTop}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
           bodyText={t("onboarding.protect_privacy.body_1")}
         />
         <Section
-          image={Images.PhonesSharingCodes}
+          image={Images.ProtectPrivacyExchangeKeys}
           subheaderText={t("onboarding.protect_privacy.subheader_2")}
           bodyText={t("onboarding.protect_privacy.body_2", { applicationName })}
         />
         <Section
-          image={Images.PersonWithPhoneAndCode}
+          image={Images.ProtectPrivacySubmitKeys}
           subheaderText={t("onboarding.protect_privacy.subheader_3")}
           bodyText={t("onboarding.protect_privacy.body_3", {
             applicationName,
           })}
         />
         <Section
-          image={Images.CodesAndPhone}
+          image={Images.ProtectPrivacyReceiveKeys}
           subheaderText={t("onboarding.protect_privacy.subheader_4")}
           bodyText={t("onboarding.protect_privacy.body_4", {
             applicationName,
           })}
         />
         <Section
-          image={Images.PersonWithCodesInBackground}
+          image={Images.ProtectPrivacyReceiveNotification}
           subheaderText={t("onboarding.protect_privacy.subheader_5", {
             applicationName,
           })}

@@ -25,7 +25,7 @@ const LocationInfo: FunctionComponent = () => {
         <GlobalText style={style.headerText}>
           {t("home.location_info_header")}
         </GlobalText>
-        <Image source={Images.PersonOnComputer} style={style.headerImage} />
+        <Image source={Images.InfoHeader} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
