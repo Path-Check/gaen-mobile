@@ -1,15 +1,8 @@
-import React, { FunctionComponent, useState, useEffect, useRef } from "react"
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  RefreshControl,
-} from "react-native"
+import React, { FunctionComponent, useState } from "react"
+import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
-import isEqual from "lodash.isequal"
 
 import { ExposureDatum } from "../../exposure"
 import { StatusBar, GlobalText, Button } from "../../components"
@@ -41,11 +34,9 @@ const History: FunctionComponent<HistoryProps> = ({
   const navigation = useNavigation()
   const { checkForNewExposures } = useExposureContext()
 
-  const [refreshing, setRefreshing] = useState<boolean>(false)
   const [checkingForExposures, setCheckingForExposures] = useState<boolean>(
     false,
   )
-  const previousExposuresRef = useRef<ExposureDatum[]>()
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(ExposureHistoryStackScreens.MoreInfo)
@@ -57,23 +48,6 @@ const History: FunctionComponent<HistoryProps> = ({
     setCheckingForExposures(false)
   }
 
-  const handleOnRefresh = () => {
-    const previousExposures = previousExposuresRef.current
-
-    if (!isEqual(previousExposures, exposures)) {
-      setRefreshing(true)
-    }
-    setRefreshing(false)
-  }
-
-  useEffect(() => {
-    previousExposuresRef.current = exposures
-  }, [exposures])
-
-  const refreshControl = (
-    <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
-  )
-
   const showExposureHistory = exposures.length > 0
 
   return (
@@ -82,7 +56,7 @@ const History: FunctionComponent<HistoryProps> = ({
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
-        refreshControl={refreshControl}
+        alwaysBounceVertical={false}
       >
         <View>
           <View style={style.headerRow}>
