@@ -9,6 +9,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayMyHealth: boolean
   displaySelfScreener: boolean
+  emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
@@ -29,6 +30,7 @@ const initialState = {
   displayCallbackForm: false,
   displayMyHealth: false,
   displaySelfScreener: false,
+  emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
@@ -48,6 +50,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
     FIND_A_TEST_CENTER_URL: findATestCenterUrl,
+    EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
@@ -78,6 +81,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayMyHealth,
         displaySelfScreener,
+        emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,

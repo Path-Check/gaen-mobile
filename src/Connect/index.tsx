@@ -40,7 +40,11 @@ const ConnectScreen: FunctionComponent = () => {
   } = useTranslation()
   const osInfo = `${Platform.OS} v${Platform.Version}`
   const { applicationName, versionInfo } = useApplicationInfo()
-  const { healthAuthorityName, displayCallbackForm } = useConfigurationContext()
+  const {
+    healthAuthorityName,
+    displayCallbackForm,
+    emergencyPhoneNumber,
+  } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
     loadAuthorityCopy("about"),
@@ -62,8 +66,19 @@ const ConnectScreen: FunctionComponent = () => {
     })
   }
 
-  const handleOnPressEmergencyContact = () => {
-    Linking.openURL("tel:911")
+  const listItems: ConnectListItem[] = []
+
+  if (emergencyPhoneNumber) {
+    const handleOnPressEmergencyContact = () => {
+      Linking.openURL(`tel:${emergencyPhoneNumber}`)
+    }
+
+    const emergencyContact: ConnectListItem = {
+      label: t("about.emergency_contact"),
+      onPress: handleOnPressEmergencyContact,
+      icon: Icons.ChatBubble,
+    }
+    listItems.push(emergencyContact)
   }
 
   const howTheAppWorks: ConnectListItem = {
@@ -71,13 +86,8 @@ const ConnectScreen: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
-  const emergencyContact: ConnectListItem = {
-    label: t("about.emergency_contact"),
-    onPress: handleOnPressEmergencyContact,
-    icon: Icons.ChatBubble,
-  }
 
-  const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
+  listItems.push(howTheAppWorks)
 
   if (displayCallbackForm) {
     const callbackForm: ConnectListItem = {

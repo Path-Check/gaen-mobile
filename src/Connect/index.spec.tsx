@@ -105,4 +105,28 @@ describe("Connect", () => {
       expect(openURLSpy).toHaveBeenCalledWith(url)
     })
   })
+
+  it("dials the emergency phone number from the configuration", async () => {
+    const emergencyPhoneNumber = "emergencyPhoneNumber"
+
+    const openURLSpy = jest.spyOn(Linking, "openURL")
+    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+      applicationName: "applicationName",
+      versionInfo: "versionInfo",
+    })
+
+    const { getByLabelText } = render(
+      <ConfigurationContext.Provider
+        value={factories.configurationContext.build({ emergencyPhoneNumber })}
+      >
+        <ConnectScreen />
+      </ConfigurationContext.Provider>,
+    )
+
+    fireEvent.press(getByLabelText("Emergency Contact"))
+
+    await waitFor(() => {
+      expect(openURLSpy).toHaveBeenCalledWith(`tel:${emergencyPhoneNumber}`)
+    })
+  })
 })
