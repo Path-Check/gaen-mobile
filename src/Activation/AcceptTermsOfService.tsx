@@ -16,14 +16,7 @@ import { GlobalText, Button, GradientBackground } from "../components"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import {
-  Forms,
-  Iconography,
-  Colors,
-  Spacing,
-  Outlines,
-  Typography,
-} from "../styles"
+import { Iconography, Colors, Spacing, Outlines, Typography } from "../styles"
 
 const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -182,11 +175,10 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.xLarge,
   },
   checkboxText: {
-    ...Forms.checkboxText,
+    ...Typography.body1,
     color: Colors.primaryText,
     flex: 1,
     paddingLeft: Spacing.medium,
-    ...Typography.body1,
     fontSize: Typography.large,
   },
 })

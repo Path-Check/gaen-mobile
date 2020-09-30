@@ -25,6 +25,7 @@ import ProtectPrivacyReceiveKeys from "./protectPrivacyReceiveKeys.png"
 import ProtectPrivacyReceiveNotification from "./protectPrivacyReceiveNotification.png"
 import ProtectPrivacySubmitKeys from "./protectPrivacySubmitKeys.png"
 import ProtectPrivacyTop from "./protectPrivacyTop.png"
+import SelfScreenerIntro from "./selfScreenerIntro.png"
 import SickEmoji from "./sickEmoji.png"
 import SingleCrossPathBackground from "./singleCrossPathBackground.png"
 import SmileEmoji from "./smileEmoji.png"
@@ -58,6 +59,7 @@ export const Images = {
   ProtectPrivacyReceiveNotification,
   ProtectPrivacySubmitKeys,
   ProtectPrivacyTop,
+  SelfScreenerIntro,
   SickEmoji,
   SingleCrossPathBackground,
   SmileEmoji,

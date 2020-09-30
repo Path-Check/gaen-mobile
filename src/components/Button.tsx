@@ -101,7 +101,6 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      accessible
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}

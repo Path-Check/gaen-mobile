@@ -3,6 +3,7 @@ import AnonymizedData from "./anonymizedData"
 import AnonymizedDataInverted from "./anonymizedDataInverted"
 import Arrow from "./arrow"
 import ArrowLeft from "./arrowLeft"
+import AsteriskInCircle from "./asteriskInCircle"
 import BackArrow from "./backArrow"
 import BarGraph from "./barGraph"
 import Bell from "./bell"
@@ -18,6 +19,7 @@ import ChevronRight from "./chevronRight"
 import ChevronUp from "./chevronUp"
 import Close from "./close"
 import Document from "./document"
+import EmergencyPlusInCircle from "./emergencyPlusInCircle"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import Gear from "./gear"
@@ -54,6 +56,7 @@ export const Icons = {
   AnonymizedDataInverted,
   Arrow,
   ArrowLeft,
+  AsteriskInCircle,
   BackArrow,
   BarGraph,
   Bell,
@@ -69,6 +72,7 @@ export const Icons = {
   ChevronUp,
   Close,
   Document,
+  EmergencyPlusInCircle,
   Export,
   ExposureIcon,
   Gear,
