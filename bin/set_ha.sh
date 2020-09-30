@@ -40,6 +40,7 @@ def download_all_assets
   download_links_file(HA_LABEL, ACCESS_TOKEN)
   download_brand_colors_file(HA_LABEL, ACCESS_TOKEN)
   fetch_configurable_images(HA_LABEL, ACCESS_TOKEN)
+  true
 end
 
 if fetching_env_succeeded && system("./bin/configure_builds.sh") &&
