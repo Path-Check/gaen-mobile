@@ -16,7 +16,14 @@ import { useStatusBarEffect, MyHealthStackScreens, Stacks } from "../navigation"
 import { GlobalText, StatusBar, Button } from "../components"
 
 import { Icons, Images } from "../assets"
-import { Layout, Colors, Spacing, Typography, Iconography } from "../styles"
+import {
+  Layout,
+  Colors,
+  Spacing,
+  Typography,
+  Iconography,
+  Buttons,
+} from "../styles"
 
 const AtRiskRecommendationScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -137,9 +144,8 @@ const style = StyleSheet.create({
     width: "100%",
   },
   buttonInner: {
+    ...Buttons.medium,
     width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
   },
 })
 
