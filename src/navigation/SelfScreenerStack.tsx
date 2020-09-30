@@ -10,6 +10,7 @@ import GeneralSymptomsSummary from "../SelfScreener/GeneralSymptomsSummary"
 import UnderlyingConditions from "../SelfScreener/UnderlyingConditions"
 import AgeRangeQuestion from "../SelfScreener/AgeRangeQuestion"
 import Summary from "../SelfScreener/Summary"
+import Guidance from "../SelfScreener/Guidance"
 import { SelfScreenerProvider } from "../SelfScreenerContext"
 
 const Stack = createStackNavigator()
@@ -60,6 +61,11 @@ const SelfAssessmentStack: FunctionComponent = () => {
         <Stack.Screen
           name={SelfScreenerStackScreens.Summary}
           component={Summary}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={SelfScreenerStackScreens.Guidance}
+          component={Guidance}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

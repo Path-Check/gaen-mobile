@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { SelfScreenerContext } from "../SelfScreenerContext"
 import EmergencySymptomsQuestions from "./EmergencySymptomsQuestions"
-import { EmergencySymptom } from "./selfScreener"
+import { EmergencySymptom, SymptomGroup } from "./selfScreener"
 import { factories } from "../factories"
 import { SelfScreenerStackScreens } from "../navigation"
 
@@ -42,7 +42,7 @@ describe("EmergencySymptomsQuestions", () => {
           navigate: navigationSpy,
         })
         const context = factories.selfScreenerContext.build({
-          emergencySymptoms: [EmergencySymptom.SEVERE_DIFFICULTY_BREATHING],
+          symptomGroup: SymptomGroup.EMERGENCY,
         })
 
         const { getByText } = render(

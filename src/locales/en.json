@@ -291,6 +291,35 @@
       "other": "Other",
       "vomiting_or_diarrhea": "Vomiting or diarrhea"
     },
+    "guidance": {
+      "call_your_healthcare_provider": "Call your healthcare provider, clinician advice line, or telemedicine provider within 24 hours.",
+      "clean_hands": "Clean your hands often.",
+      "cover_coughs": "Cover your coughs and sneezes.",
+      "dont_go_to_work": "Do not go to work, school, or public areas.",
+      "dont_use_public_transport": "Do not use public transportation or ride sharing.",
+      "drink_water": "Drink plenty of water and other clear liquids to prevent fluid loss (dehydration).",
+      "feeling_fine": "Good to hear you’re feeling fine. You shuold monitor your symptoms and stay at home.",
+      "find_telehealth": "Find telehealth services",
+      "follow_cdc_guidance": "If you develop symptoms, follow CDC guidance.",
+      "guidance": "Guidance",
+      "how_to_care_for_yourself_and_others": "How to care for yourself and others while sick with COVID-19 symptoms:",
+      "if_symptoms_develop": "If you develop any of these symptoms or if you start to feel worse, call your healthcare provider, clinician advice line, or telemedicine provider.",
+      "may_help_you_feel_better": "Here are some steps that may help you feel better:",
+      "monitor_your_symptoms": "Sorry you’re feeling ill. Stay at home and monitor your symptoms. Call your provider if you get worse symptoms, stay at home.",
+      "practice_social_distancing": "Practice social distancing.",
+      "protect_others": "Take these steps to help protect others from getting sick.",
+      "rest": "Stay at home and rest.",
+      "seek_medical_care": "If you think it is an emergency or you feel worse, seek medical care.",
+      "stay_6_feet_away": "Stay at least 6 feet away from others and stay out of crowded places.",
+      "stay_at_home": "Stay at home except to get medical care.",
+      "stay_away_from_higher_risk_people": "If possible, stay away from people who are at higher risk for getting very sick from COVID-19.",
+      "stay_home_14_days": "Stay home for 14 days.",
+      "take_care_of_yourself": "Learn how to take care of yourself or someone else who is sick.",
+      "take_temperature": "Take your temperature twice a day and watch for symptoms of COVID-19.",
+      "watch_for_covid_symptoms": "Watch for COVID-19 symptoms.",
+      "you_have_underlying_conditions": "Sorry you’re not feeling well. Your symptoms may be related to COVID-19. You also have medical conditions that may put you at risk of becoming more seriously ill.",
+      "your_symptoms_might_be_related": "Sorry you’re not feeling well. Your symptoms may be related to COVID-19."
+    },
     "intro": {
       "agree_and_start_screener": "Agree and start screener",
       "covid19_self_screener": "COVID-19 Self Screener"
@@ -300,7 +329,14 @@
       "one_more_question": ""
     },
     "summary": {
-      "sorry_youre_not_feeling_well": "Sorry to hear you're not feeling well."
+      "asymptomatic_group": "Glad to hear you’re feeling well!\nEven though you’re not ill, you should stay home for 14 days. COVID-19 may be spread by people who are not showing symptoms.",
+      "get_my_guidance": "Get my guidance",
+      "non_covid_symptom_group": "Sorry you’re not feeling well.\nBased on your answers, you’re not currently showing common symptoms of COVID-19.",
+      "primary_symptom_group_1": "Sorry you’re not feeling well.\nYour symptoms may be related to COVID-19. You also have medical conditions that may put you at risk of becoming more seriously ill.",
+      "primary_symptom_group_2": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
+      "primary_symptom_group_3": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
+      "secondary_symptom_group_1": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
+      "secondary_symptom_group_2": "Sorry you’re not feeling well. Based on your answers, your symptoms may be related to COVID-19."
     },
     "underlying_conditions": {
       "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",
