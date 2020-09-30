@@ -45,6 +45,7 @@ import {
   Typography,
   Outlines,
   Iconography,
+  Buttons,
 } from "../styles"
 
 const TOP_ICON_SIZE = Iconography.medium
@@ -158,7 +159,7 @@ const Home: FunctionComponent = () => {
               onPress={handleOnPressReportTestResult}
               label={t("home.bluetooth.report_positive_result")}
               customButtonStyle={style.button}
-              customButtonInnerStyle={style.buttonGradient}
+              customButtonInnerStyle={style.buttonInner}
               hasRightArrow
             />
           </View>
@@ -234,10 +235,9 @@ const style = StyleSheet.create({
   button: {
     width: "100%",
   },
-  buttonGradient: {
+  buttonInner: {
+    ...Buttons.medium,
     width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
   },
 })
 

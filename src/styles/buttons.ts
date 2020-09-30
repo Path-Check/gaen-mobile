@@ -18,7 +18,7 @@ const tiny: ViewStyle = {
   paddingBottom: Spacing.xxxSmall + 1,
 }
 
-const medium: ViewStyle = {
+export const medium: ViewStyle = {
   paddingTop: Spacing.small,
   paddingBottom: Spacing.small + 1,
 }

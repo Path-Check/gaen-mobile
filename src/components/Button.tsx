@@ -116,7 +116,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         angleCenter={{ x: 0.5, y: 0.5 }}
       >
         {loading ? (
-          <ActivityIndicator size={"large"} />
+          <ActivityIndicator size={"small"} />
         ) : (
           <>
             {hasPlusIcon && (

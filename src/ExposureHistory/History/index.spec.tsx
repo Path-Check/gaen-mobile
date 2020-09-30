@@ -1,12 +1,13 @@
 import React from "react"
-import { render } from "@testing-library/react-native"
+import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
+import { ExposureContext } from "../../ExposureContext"
 
-import History from "."
+import History from "./index"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
@@ -21,6 +22,29 @@ describe("History", () => {
       )
 
       expect(queryByText("No Exposure Reports")).not.toBeNull()
+    })
+  })
+
+  describe("when the refresh button is tapped", () => {
+    it("checks for new exposures", async () => {
+      const exposures: ExposureDatum[] = []
+      const checkForNewExposuresSpy = jest.fn()
+
+      const { getByLabelText } = render(
+        <ExposureContext.Provider
+          value={factories.exposureContext.build({
+            checkForNewExposures: checkForNewExposuresSpy,
+          })}
+        >
+          <History exposures={exposures} lastDetectionDate={null} />
+        </ExposureContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Check for exposures"))
+
+      await waitFor(() => {
+        expect(checkForNewExposuresSpy).toHaveBeenCalled()
+      })
     })
   })
 

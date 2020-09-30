@@ -24,6 +24,7 @@ import {
   Spacing,
   Iconography,
   Affordances,
+  Buttons,
 } from "../styles"
 import { Icons, Images } from "../assets"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -291,9 +292,8 @@ const style = StyleSheet.create({
     marginTop: 0,
   },
   buttonInner: {
+    ...Buttons.medium,
     width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
   },
 })
 
