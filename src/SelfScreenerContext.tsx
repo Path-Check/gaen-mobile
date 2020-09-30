@@ -1,36 +1,52 @@
 import React, {
   FunctionComponent,
   useContext,
+  useEffect,
   useState,
   createContext,
 } from "react"
 import {
   AgeRange,
   EmergencySymptom,
-  GeneralSymptom,
+  PrimarySymptom,
+  SecondarySymptom,
+  OtherSymptom,
+  SymptomGroup,
   UnderlyingCondition,
+  determineSymptomGroup,
+  SelfScreenerAnswers,
 } from "./SelfScreener/selfScreener"
 
 export type SelfScreenerContextState = {
   emergencySymptoms: EmergencySymptom[]
   updateEmergencySymptoms: (symptom: EmergencySymptom) => void
-  generalSymptoms: GeneralSymptom[]
-  updateGeneralSymptoms: (symptom: GeneralSymptom) => void
+  primarySymptoms: PrimarySymptom[]
+  updatePrimarySymptoms: (symptom: PrimarySymptom) => void
+  secondarySymptoms: SecondarySymptom[]
+  updateSecondarySymptoms: (symptom: SecondarySymptom) => void
+  otherSymptoms: OtherSymptom[]
+  updateOtherSymptoms: (symptom: OtherSymptom) => void
   underlyingConditions: UnderlyingCondition[]
   updateUnderlyingConditions: (condition: UnderlyingCondition) => void
   ageRange: AgeRange | null
   updateAgeRange: (range: AgeRange) => void
+  symptomGroup: SymptomGroup | null
 }
 
 const initialState = {
   emergencySymptoms: [],
   updateEmergencySymptoms: () => {},
-  generalSymptoms: [],
-  updateGeneralSymptoms: () => {},
+  primarySymptoms: [],
+  updatePrimarySymptoms: () => {},
+  secondarySymptoms: [],
+  updateSecondarySymptoms: () => {},
+  otherSymptoms: [],
+  updateOtherSymptoms: () => {},
   underlyingConditions: [],
   updateUnderlyingConditions: () => {},
   ageRange: null,
   updateAgeRange: () => {},
+  symptomGroup: null,
 }
 
 export const SelfScreenerContext = createContext<SelfScreenerContextState>(
@@ -38,24 +54,39 @@ export const SelfScreenerContext = createContext<SelfScreenerContextState>(
 )
 export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
   const { emergencySymptoms, updateEmergencySymptoms } = useEmergencySymptoms()
-  const { generalSymptoms, updateGeneralSymptoms } = useGeneralSymptoms()
+  const { primarySymptoms, updatePrimarySymptoms } = usePrimarySymptoms()
+  const { secondarySymptoms, updateSecondarySymptoms } = useSecondarySymptoms()
+  const { otherSymptoms, updateOtherSymptoms } = useOtherSymptoms()
   const {
     underlyingConditions,
     updateUnderlyingConditions,
   } = useUnderlyingConditions()
   const { ageRange, updateAgeRange } = useAgeRange()
+  const { symptomGroup } = useSymptomGroup({
+    emergencySymptoms,
+    primarySymptoms,
+    secondarySymptoms,
+    otherSymptoms,
+    underlyingConditions,
+    ageRange,
+  })
 
   return (
     <SelfScreenerContext.Provider
       value={{
         emergencySymptoms,
         updateEmergencySymptoms,
-        generalSymptoms,
-        updateGeneralSymptoms,
+        primarySymptoms,
+        updatePrimarySymptoms,
+        secondarySymptoms,
+        updateSecondarySymptoms,
+        otherSymptoms,
+        updateOtherSymptoms,
         underlyingConditions,
         updateUnderlyingConditions,
         ageRange,
         updateAgeRange,
+        symptomGroup,
       }}
     >
       {children}
@@ -76,7 +107,6 @@ const useEmergencySymptoms = () => {
   const [emergencySymptoms, setEmergencySymptoms] = useState<
     EmergencySymptom[]
   >([])
-
   const updateEmergencySymptoms = (symptom: EmergencySymptom) => {
     if (emergencySymptoms.includes(symptom)) {
       setEmergencySymptoms(emergencySymptoms.filter((s) => s !== symptom))
@@ -88,18 +118,48 @@ const useEmergencySymptoms = () => {
   return { emergencySymptoms, updateEmergencySymptoms }
 }
 
-const useGeneralSymptoms = () => {
-  const [generalSymptoms, setGeneralSymptoms] = useState<GeneralSymptom[]>([])
+const usePrimarySymptoms = () => {
+  const [primarySymptoms, setPrimarySymptoms] = useState<PrimarySymptom[]>([])
 
-  const updateGeneralSymptoms = (symptom: GeneralSymptom) => {
-    if (generalSymptoms.includes(symptom)) {
-      setGeneralSymptoms(generalSymptoms.filter((s) => s !== symptom))
+  const updatePrimarySymptoms = (symptom: PrimarySymptom) => {
+    if (primarySymptoms.includes(symptom)) {
+      setPrimarySymptoms(primarySymptoms.filter((s) => s !== symptom))
     } else {
-      setGeneralSymptoms([...generalSymptoms, symptom])
+      setPrimarySymptoms([...primarySymptoms, symptom])
     }
   }
 
-  return { generalSymptoms, updateGeneralSymptoms }
+  return { primarySymptoms, updatePrimarySymptoms }
+}
+
+const useSecondarySymptoms = () => {
+  const [secondarySymptoms, setSecondarySymptoms] = useState<
+    SecondarySymptom[]
+  >([])
+
+  const updateSecondarySymptoms = (symptom: SecondarySymptom) => {
+    if (secondarySymptoms.includes(symptom)) {
+      setSecondarySymptoms(secondarySymptoms.filter((s) => s !== symptom))
+    } else {
+      setSecondarySymptoms([...secondarySymptoms, symptom])
+    }
+  }
+
+  return { secondarySymptoms, updateSecondarySymptoms }
+}
+
+const useOtherSymptoms = () => {
+  const [otherSymptoms, setOtherSymptoms] = useState<OtherSymptom[]>([])
+
+  const updateOtherSymptoms = (symptom: OtherSymptom) => {
+    if (otherSymptoms.includes(symptom)) {
+      setOtherSymptoms(otherSymptoms.filter((s) => s !== symptom))
+    } else {
+      setOtherSymptoms([...otherSymptoms, symptom])
+    }
+  }
+
+  return { otherSymptoms, updateOtherSymptoms }
 }
 
 const useUnderlyingConditions = () => {
@@ -118,6 +178,39 @@ const useUnderlyingConditions = () => {
   }
 
   return { underlyingConditions, updateUnderlyingConditions }
+}
+
+const useSymptomGroup = ({
+  emergencySymptoms,
+  primarySymptoms,
+  secondarySymptoms,
+  otherSymptoms,
+  underlyingConditions,
+  ageRange,
+}: SelfScreenerAnswers) => {
+  const [symptomGroup, setSymptomGroup] = useState<SymptomGroup | null>(null)
+
+  useEffect(() => {
+    setSymptomGroup(
+      determineSymptomGroup({
+        emergencySymptoms,
+        primarySymptoms,
+        secondarySymptoms,
+        otherSymptoms,
+        underlyingConditions,
+        ageRange,
+      }),
+    )
+  }, [
+    emergencySymptoms,
+    primarySymptoms,
+    secondarySymptoms,
+    otherSymptoms,
+    underlyingConditions,
+    ageRange,
+  ])
+
+  return { symptomGroup }
 }
 
 export const useSelfScreenerContext = (): SelfScreenerContextState => {
