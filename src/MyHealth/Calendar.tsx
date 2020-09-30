@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native"
 import dayjs from "dayjs"
 
@@ -6,6 +6,7 @@ import { Spacing, Typography } from "../styles"
 import { GlobalText } from "../components"
 import { DayLogData } from "./symptoms"
 import DayIndicator from "./DayIndicator"
+import { DateTimeUtils } from "../utils"
 
 interface CalendarProps {
   logDataHistory: DayLogData[]
@@ -22,6 +23,17 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const title = `${lastMonth.format("MMMM")} | ${dayjs().format(
     "MMMM",
   )}`.toUpperCase()
+
+  useEffect(() => {
+    if (!selectedDay) {
+      logDataHistory.forEach((logData: DayLogData) => {
+        if (DateTimeUtils.isToday(logData.date)) {
+          selectedDay = logData
+          onSelectDate(logData)
+        }
+      })
+    }
+  }, [])
 
   const week1 = logDataHistory.slice(0, 7)
   const week2 = logDataHistory.slice(7, 14)
