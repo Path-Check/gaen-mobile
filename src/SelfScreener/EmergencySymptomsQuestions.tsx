@@ -13,13 +13,10 @@ import SymptomCheckbox from "./SymptomCheckbox"
 const EmergencySymptomsQuestions: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const {
-    emergencySymptoms,
-    updateEmergencySymptoms,
-  } = useSelfScreenerContext()
+  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
   const {
     CHEST_PAIN,
-    DIFFICULTY_BREATHING,
+    SEVERE_DIFFICULTY_BREATHING,
     LIGHTHEADEDNESS,
     DISORIENTATION,
   } = EmergencySymptom
@@ -36,7 +33,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
     switch (symptom) {
       case EmergencySymptom.CHEST_PAIN:
         return t("self_screener.emergency_symptoms.chest_pain")
-      case EmergencySymptom.DIFFICULTY_BREATHING:
+      case EmergencySymptom.SEVERE_DIFFICULTY_BREATHING:
         return t("self_screener.emergency_symptoms.difficulty_breathing")
       case EmergencySymptom.LIGHTHEADEDNESS:
         return t("self_screener.emergency_symptoms.lightheadedness")
@@ -52,22 +49,22 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
       </GlobalText>
       <SymptomCheckbox
         label={emergencySymptomToString(CHEST_PAIN)}
-        onPress={() => updateEmergencySymptoms(CHEST_PAIN)}
+        onPress={() => updateSymptoms(CHEST_PAIN)}
         checked={emergencySymptoms.includes(CHEST_PAIN)}
       />
       <SymptomCheckbox
-        label={emergencySymptomToString(DIFFICULTY_BREATHING)}
-        onPress={() => updateEmergencySymptoms(DIFFICULTY_BREATHING)}
-        checked={emergencySymptoms.includes(DIFFICULTY_BREATHING)}
+        label={emergencySymptomToString(SEVERE_DIFFICULTY_BREATHING)}
+        onPress={() => updateSymptoms(SEVERE_DIFFICULTY_BREATHING)}
+        checked={emergencySymptoms.includes(SEVERE_DIFFICULTY_BREATHING)}
       />
       <SymptomCheckbox
         label={emergencySymptomToString(LIGHTHEADEDNESS)}
-        onPress={() => updateEmergencySymptoms(LIGHTHEADEDNESS)}
+        onPress={() => updateSymptoms(LIGHTHEADEDNESS)}
         checked={emergencySymptoms.includes(LIGHTHEADEDNESS)}
       />
       <SymptomCheckbox
         label={emergencySymptomToString(DISORIENTATION)}
-        onPress={() => updateEmergencySymptoms(DISORIENTATION)}
+        onPress={() => updateSymptoms(DISORIENTATION)}
         checked={emergencySymptoms.includes(DISORIENTATION)}
       />
       <Button

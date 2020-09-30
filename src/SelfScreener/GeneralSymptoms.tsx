@@ -7,7 +7,7 @@ import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 
 import { Button, GlobalText } from "../components"
-import { GeneralSymptom } from "./selfScreener"
+import { OtherSymptom, PrimarySymptom, SecondarySymptom } from "./selfScreener"
 
 import SymptomCheckbox from "./SymptomCheckbox"
 
@@ -16,29 +16,34 @@ const GeneralSymptoms: FunctionComponent = () => {
   const navigation = useNavigation()
   const {
     FEVER_OR_CHILLS,
-    DIFFICULTY_BREATHING,
     COUGH,
-    LOSS_OF_SMELL_TASTE_APPETITE,
-    VOMITING_OR_DIARRHEA,
-    ACHING,
-    OTHER,
-  } = GeneralSymptom
-  const { generalSymptoms, updateGeneralSymptoms } = useSelfScreenerContext()
+    MODERATE_DIFFICULTY_BREATHING,
+  } = PrimarySymptom
+  const { ACHING, LOSS_OF_SMELL_TASTE_APPETITE } = SecondarySymptom
+  const { VOMITING_OR_DIARRHEA, OTHER } = OtherSymptom
+  const {
+    primarySymptoms,
+    secondarySymptoms,
+    otherSymptoms,
+    updateSymptoms,
+  } = useSelfScreenerContext()
 
-  const symptomToString = (symptom: GeneralSymptom) => {
+  const symptomToString = (
+    symptom: PrimarySymptom | SecondarySymptom | OtherSymptom,
+  ) => {
     switch (symptom) {
       case FEVER_OR_CHILLS:
         return t("self_screener.general_symptoms.fever_or_chills")
-      case DIFFICULTY_BREATHING:
+      case MODERATE_DIFFICULTY_BREATHING:
         return t("self_screener.general_symptoms.difficulty_breathing")
       case COUGH:
         return t("self_screener.general_symptoms.cough")
       case LOSS_OF_SMELL_TASTE_APPETITE:
         return t("self_screener.general_symptoms.loss_of_smell_taste_appetite")
-      case VOMITING_OR_DIARRHEA:
-        return t("self_screener.general_symptoms.vomiting_or_diarrhea")
       case ACHING:
         return t("self_screener.general_symptoms.aching")
+      case VOMITING_OR_DIARRHEA:
+        return t("self_screener.general_symptoms.vomiting_or_diarrhea")
       case OTHER:
         return t("self_screener.general_symptoms.other")
     }
@@ -48,6 +53,8 @@ const GeneralSymptoms: FunctionComponent = () => {
     navigation.navigate(SelfScreenerStackScreens.GeneralSymptomsSummary)
   }
 
+  const noSymptomsSelected =
+    [...primarySymptoms, ...secondarySymptoms, ...otherSymptoms].length === 0
   return (
     <ScrollView>
       <GlobalText>
@@ -55,44 +62,44 @@ const GeneralSymptoms: FunctionComponent = () => {
       </GlobalText>
       <SymptomCheckbox
         label={symptomToString(FEVER_OR_CHILLS)}
-        onPress={() => updateGeneralSymptoms(FEVER_OR_CHILLS)}
-        checked={generalSymptoms.includes(FEVER_OR_CHILLS)}
+        onPress={() => updateSymptoms(FEVER_OR_CHILLS)}
+        checked={primarySymptoms.includes(FEVER_OR_CHILLS)}
       />
       <SymptomCheckbox
-        label={symptomToString(DIFFICULTY_BREATHING)}
-        onPress={() => updateGeneralSymptoms(DIFFICULTY_BREATHING)}
-        checked={generalSymptoms.includes(DIFFICULTY_BREATHING)}
+        label={symptomToString(MODERATE_DIFFICULTY_BREATHING)}
+        onPress={() => updateSymptoms(MODERATE_DIFFICULTY_BREATHING)}
+        checked={primarySymptoms.includes(MODERATE_DIFFICULTY_BREATHING)}
       />
       <SymptomCheckbox
         label={symptomToString(COUGH)}
-        onPress={() => updateGeneralSymptoms(COUGH)}
-        checked={generalSymptoms.includes(COUGH)}
+        onPress={() => updateSymptoms(COUGH)}
+        checked={primarySymptoms.includes(COUGH)}
       />
       <SymptomCheckbox
         label={symptomToString(LOSS_OF_SMELL_TASTE_APPETITE)}
-        onPress={() => updateGeneralSymptoms(LOSS_OF_SMELL_TASTE_APPETITE)}
-        checked={generalSymptoms.includes(LOSS_OF_SMELL_TASTE_APPETITE)}
+        onPress={() => updateSymptoms(LOSS_OF_SMELL_TASTE_APPETITE)}
+        checked={secondarySymptoms.includes(LOSS_OF_SMELL_TASTE_APPETITE)}
       />
       <SymptomCheckbox
         label={symptomToString(VOMITING_OR_DIARRHEA)}
-        onPress={() => updateGeneralSymptoms(VOMITING_OR_DIARRHEA)}
-        checked={generalSymptoms.includes(VOMITING_OR_DIARRHEA)}
+        onPress={() => updateSymptoms(VOMITING_OR_DIARRHEA)}
+        checked={otherSymptoms.includes(VOMITING_OR_DIARRHEA)}
       />
       <SymptomCheckbox
         label={symptomToString(ACHING)}
-        onPress={() => updateGeneralSymptoms(ACHING)}
-        checked={generalSymptoms.includes(ACHING)}
+        onPress={() => updateSymptoms(ACHING)}
+        checked={secondarySymptoms.includes(ACHING)}
       />
       <SymptomCheckbox
         label={symptomToString(OTHER)}
-        onPress={() => updateGeneralSymptoms(OTHER)}
-        checked={generalSymptoms.includes(OTHER)}
+        onPress={() => updateSymptoms(OTHER)}
+        checked={otherSymptoms.includes(OTHER)}
       />
       <Button
         label={t("common.next")}
         onPress={handleOnPressNext}
         hasRightArrow
-        disabled={generalSymptoms.length === 0}
+        disabled={noSymptomsSelected}
       />
     </ScrollView>
   )

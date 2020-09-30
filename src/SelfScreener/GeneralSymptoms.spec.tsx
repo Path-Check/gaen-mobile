@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { SelfScreenerContext } from "../SelfScreenerContext"
 import GeneralSymptoms from "./GeneralSymptoms"
-import { GeneralSymptom } from "./selfScreener"
+import { PrimarySymptom, SecondarySymptom } from "./selfScreener"
 import { factories } from "../factories"
 import { SelfScreenerStackScreens } from "../navigation"
 
@@ -15,7 +15,7 @@ describe("GeneralSymptoms", () => {
       expect.assertions(1)
       const updateSymptomsSpy = jest.fn()
       const context = factories.selfScreenerContext.build({
-        updateGeneralSymptoms: updateSymptomsSpy,
+        updateSymptoms: updateSymptomsSpy,
       })
 
       const { getByText } = render(
@@ -27,7 +27,7 @@ describe("GeneralSymptoms", () => {
       const achingCheckbox = getByText("Aching throughout the body")
 
       fireEvent.press(achingCheckbox)
-      expect(updateSymptomsSpy).toHaveBeenCalledWith(GeneralSymptom.ACHING)
+      expect(updateSymptomsSpy).toHaveBeenCalledWith(SecondarySymptom.ACHING)
     })
   })
 
@@ -38,7 +38,7 @@ describe("GeneralSymptoms", () => {
         navigate: navigationSpy,
       })
       const context = factories.selfScreenerContext.build({
-        generalSymptoms: [GeneralSymptom.COUGH],
+        primarySymptoms: [PrimarySymptom.COUGH],
       })
 
       const { getByText } = render(
