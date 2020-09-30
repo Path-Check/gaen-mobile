@@ -6,14 +6,18 @@ import { useNavigation } from "@react-navigation/native"
 import { SelfScreenerStackScreens } from "../navigation"
 import { Button, GlobalText } from "../components"
 
-import { EmergencySymptom } from "./selfScreener"
+import { EmergencySymptom, SymptomGroup } from "./selfScreener"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import SymptomCheckbox from "./SymptomCheckbox"
 
 const EmergencySymptomsQuestions: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
+  const {
+    symptomGroup,
+    emergencySymptoms,
+    updateSymptoms,
+  } = useSelfScreenerContext()
   const {
     CHEST_PAIN,
     SEVERE_DIFFICULTY_BREATHING,
@@ -22,7 +26,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
   } = EmergencySymptom
 
   const handleOnPressNext = () => {
-    if (emergencySymptoms.length > 0) {
+    if (symptomGroup === SymptomGroup.EMERGENCY) {
       return navigation.navigate(SelfScreenerStackScreens.CallEmergencyServices)
     }
 

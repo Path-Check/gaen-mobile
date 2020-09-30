@@ -185,6 +185,7 @@ export type SelfScreenerStackScreen =
   | "UnderlyingConditions"
   | "AgeRange"
   | "Summary"
+  | "Guidance"
 
 export const SelfScreenerStackScreens: {
   [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
@@ -198,6 +199,7 @@ export const SelfScreenerStackScreens: {
   UnderlyingConditions: "UnderlyingConditions",
   AgeRange: "AgeRange",
   Summary: "Summary",
+  Guidance: "Guidance",
 }
 export type Stack =
   | "Activation"
