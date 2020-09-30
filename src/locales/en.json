@@ -79,6 +79,7 @@
     "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
   },
   "exposure_history": {
+    "check_for_exposures": "Check for exposures",
     "exposure_detail": {
       "6ft_apart": "6ft apart",
       "general_guidance": "General Guidance",
