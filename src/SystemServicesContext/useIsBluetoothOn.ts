@@ -25,7 +25,7 @@ const useIsBluetoothOn = (): boolean => {
     )
 
     return () => {
-      subscription?.remove()
+      subscription.remove()
     }
   }, [])
 

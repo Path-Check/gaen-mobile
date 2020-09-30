@@ -52,7 +52,7 @@ const useLocationPermissions = (): LocationPermissions => {
     })
 
     return () => {
-      subscription?.remove()
+      subscription.remove()
     }
   }, [])
 
