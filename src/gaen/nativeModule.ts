@@ -50,6 +50,34 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
+export const subscribeToBluetoothStatusEvents = (
+  cb: (enabled: boolean) => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+  return ExposureEvents.addListener(
+    "onBluetoothStatusUpdated",
+    (enabled: boolean) => {
+      cb(enabled)
+    },
+  )
+}
+
+export const subscribeToLocationStatusEvents = (
+  cb: (enabled: boolean) => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+  return ExposureEvents.addListener(
+    "onLocationStatusUpdated",
+    (enabled: boolean) => {
+      cb(enabled)
+    },
+  )
+}
+
 const toStatus = (data: string[]): RawENPermissionStatus => {
   const networkAuthorization = data[0]
   const networkEnablement = data[1]

@@ -9,20 +9,59 @@ import com.facebook.react.ReactRootView;
 import com.facebook.react.bridge.ReactContext;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import org.devio.rn.splashscreen.SplashScreen;
+import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.helpers.BluetoothHelper;
+import org.pathcheck.covidsafepaths.helpers.LocationHelper;
 
 public class MainActivity extends ReactActivity {
+
+  private BluetoothHelper bluetoothHelper;
+  private LocationHelper locationHelper;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this, R.style.SplashTheme);
     super.onCreate(savedInstanceState);
+
+    bluetoothHelper = new BluetoothHelper(new BluetoothHelper.BluetoothCallback() {
+      @Override
+      public void onBluetoothAvailable() {
+        EventSender.INSTANCE.sendBluetoothStatusChangedEvent(getReactContext(), true);
+      }
+
+      @Override
+      public void onBluetoothUnavailable() {
+        EventSender.INSTANCE.sendBluetoothStatusChangedEvent(getReactContext(), false);
+      }
+    });
+
+    locationHelper = new LocationHelper(new LocationHelper.LocationCallback() {
+      @Override
+      public void onLocationAvailable() {
+        EventSender.INSTANCE.sendLocationStatusChangedEvent(getReactContext(), true);
+      }
+
+      @Override
+      public void onLocationUnavailable() {
+        EventSender.INSTANCE.sendLocationStatusChangedEvent(getReactContext(), false);
+      }
+    });
   }
 
   @Override
   protected void onResume() {
     super.onResume();
     checkIfExposureNotificationsEnabled();
+    bluetoothHelper.registerBluetoothStatusCallback(this);
+    locationHelper.registerLocationStatusCallback(this);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    bluetoothHelper.unregisterBluetoothStatusCallback(this);
+    locationHelper.unregisterLocationStatusCallback(this);
   }
 
   /**

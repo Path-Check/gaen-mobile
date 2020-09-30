@@ -5,6 +5,7 @@ import useOnAppStateChange from "./useOnAppStateChange"
 import {
   isLocationEnabled,
   doesDeviceSupportLocationlessScanning,
+  subscribeToLocationStatusEvents,
 } from "../gaen/nativeModule"
 
 export type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
@@ -40,6 +41,20 @@ const useLocationPermissions = (): LocationPermissions => {
     determineIsLocationRequired()
     determineLocationEnabledState()
   }, [determineIsLocationRequired, determineLocationEnabledState])
+
+  useEffect(() => {
+    const subscription = subscribeToLocationStatusEvents((enabled: boolean) => {
+      if (enabled) {
+        setLocationEnabledState("On")
+      } else {
+        setLocationEnabledState("Off")
+      }
+    })
+
+    return () => {
+      subscription.remove()
+    }
+  }, [])
 
   const handleOnAppStateChange = useCallback(() => {
     if (isLocationRequired) {

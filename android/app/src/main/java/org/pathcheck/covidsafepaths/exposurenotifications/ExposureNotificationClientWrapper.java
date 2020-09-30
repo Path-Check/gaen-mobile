@@ -1,7 +1,5 @@
 package org.pathcheck.covidsafepaths.exposurenotifications;
 
-import static org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages.EN_STATUS_EVENT;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender;
@@ -9,7 +7,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.concurrent.futures.CallbackToFutureAdapter;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.DailySummary;
@@ -23,12 +20,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Duration;
 
 /**
@@ -252,10 +249,6 @@ public class ExposureNotificationClientWrapper {
       ProvideDiagnosisKeysWorker.cancel(context);
     }
 
-    if (context != null) {
-      context
-          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-          .emit(EN_STATUS_EVENT, Util.getEnStatusWritableArray(enabled));
-    }
+    EventSender.INSTANCE.sendExposureNotificationStatusChanged(context, enabled);
   }
 }
