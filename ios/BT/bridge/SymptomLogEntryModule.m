@@ -56,6 +56,14 @@ RCT_REMAP_METHOD(deleteSymptomLogs,
   resolve(nil);
 }
 
+RCT_REMAP_METHOD(deleteStaleSymptomLogs,
+                 deleteStaleSymptomLogsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] deleteStaleLogEntries];
+  resolve(nil);
+}
+
 RCT_REMAP_METHOD(getSymptomLogEntries,
                  getSymptomLogEntriesWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)

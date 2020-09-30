@@ -18,6 +18,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyVal
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.REVISION_TOKEN_KEY
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.SymptomLogEntry
 import org.threeten.bp.Duration
+import org.threeten.bp.Instant
+import org.threeten.bp.temporal.ChronoUnit
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
@@ -164,6 +166,17 @@ object RealmSecureStorageBte {
         }
     }
 
+    fun deleteStaleCheckIns() {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.where(CheckIn::class.java)
+                    .lessThan("date", fourteenDaysAgo())
+                    .findAll()
+                    ?.deleteAllFromRealm()
+            }
+        }
+    }
+
     fun upsertLogEntry(logEntry: SymptomLogEntry) {
         getRealmInstance().use {
             it.executeTransaction { db ->
@@ -191,6 +204,17 @@ object RealmSecureStorageBte {
         }
     }
 
+    fun deleteStaleSymptomLogs() {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.where(SymptomLogEntry::class.java)
+                    .lessThan("date", fourteenDaysAgo())
+                    .findAll()
+                    ?.deleteAllFromRealm()
+            }
+        }
+    }
+
     fun getLogEntries(): List<SymptomLogEntry> {
         return getRealmInstance().use {
             it.copyFromRealm(it.where(SymptomLogEntry::class.java).findAll())
@@ -200,5 +224,9 @@ object RealmSecureStorageBte {
     @VisibleForTesting
     fun getRealmInstance(): Realm {
         return Realm.getInstance(realmConfig)
+    }
+
+    private fun fourteenDaysAgo(): Long {
+        return Instant.now().plus(-14, ChronoUnit.DAYS).toEpochMilli()
     }
 }

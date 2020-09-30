@@ -41,4 +41,12 @@ RCT_REMAP_METHOD(getCheckIns,
   resolve(checkInStatuses);
 }
 
+RCT_REMAP_METHOD(deleteStaleCheckIns,
+                 deleteStaleCheckInsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] deleteStaleCheckIns];
+  resolve(nil);
+}
+
 @end

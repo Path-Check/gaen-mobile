@@ -174,14 +174,22 @@ final class ExposureManager: NSObject {
     return btSecureStorage.storeCheckIn(checkInStatus)
   }
 
+  /// Deletes All CheckIns from Realm
+  @objc func deleteCheckins() {
+    return btSecureStorage.deleteCheckins()
+  }
+
+  @objc func deleteStaleCheckIns() {
+    btSecureStorage.deleteFourteenDaysOldCheckIns()
+  }
+
   /// Returns the symptom log entries as array of dictionaries
   @objc var symptomLogEntries: [[String: Any]] {
     return btSecureStorage.symptomLogEntries.map { $0.asDictionary }
   }
 
-  /// Deletes All CheckIns from Realm
-  @objc func deleteCheckins() {
-    return btSecureStorage.deleteCheckins()
+  @objc func deleteStaleLogEntries() {
+    btSecureStorage.deleteFourteenDaysOldSymptomLogEntries()
   }
 
   /// Persists SymptomLogEntry in Realm

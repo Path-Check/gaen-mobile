@@ -7,4 +7,7 @@ extension Date {
     Calendar.current.dateComponents([.hour], from: startDate, to: endDate).hour ?? 0
   }
   
+  static func daysAgoInPosix(_ days: Int) -> Int {
+    return Calendar.current.date(byAdding: DateComponents(day: -1 * days), to: Date())!.posixRepresentation
+  }
 }

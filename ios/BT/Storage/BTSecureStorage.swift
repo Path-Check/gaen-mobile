@@ -110,6 +110,14 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func deleteFourteenDaysOldSymptomLogEntries() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let staleObjects = realm.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(14))
+      realm.delete(staleObjects)
+    }
+  }
+
   func deleteSymptomLogEntries() {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
@@ -123,6 +131,14 @@ class BTSecureStorage: SafePathsSecureStorage {
     try! realm.write {
       let allObjects = realm.objects(CheckIn.self)
       realm.delete(allObjects)
+    }
+  }
+
+  func deleteFourteenDaysOldCheckIns() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let staleObjects = realm.objects(CheckIn.self).filter("date <= %@", Date.daysAgoInPosix(14))
+      realm.delete(staleObjects)
     }
   }
 
@@ -168,5 +184,4 @@ class BTSecureStorage: SafePathsSecureStorage {
     let realm = try! Realm(configuration: realmConfig)
     return Array(realm.objects(SymptomLogEntry.self))
   }
-
 }

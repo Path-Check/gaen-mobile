@@ -51,4 +51,10 @@ public class CheckInModule extends ReactContextBaseJavaModule {
     RealmSecureStorageBte.INSTANCE.deleteCheckins();
     promise.resolve(null);
   }
+
+  @ReactMethod
+  public void deleteStaleCheckIns(Promise promise) {
+    RealmSecureStorageBte.INSTANCE.deleteStaleCheckIns();
+    promise.resolve(null);
+  }
 }

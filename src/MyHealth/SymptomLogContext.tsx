@@ -23,7 +23,9 @@ import {
   deleteLogEntry as removeLogEntry,
   deleteAllCheckIns as deleteCheckIns,
   deleteAllSymptomLogs as deleteLogs,
-} from "../gaen/nativeModule"
+  deleteStaleCheckIns,
+  deleteStaleSymptomLogs,
+} from "./nativeModule"
 import { isToday } from "../utils/dateTime"
 import {
   failureResponse,
@@ -87,7 +89,13 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     setLogEntries(entries)
   }
 
+  const cleanupStaleData = async () => {
+    await deleteStaleCheckIns()
+    await deleteStaleSymptomLogs()
+  }
+
   useEffect(() => {
+    cleanupStaleData()
     fetchLogEntries()
     getCheckIns().then((checkIns) => {
       setCheckIns(checkIns)
