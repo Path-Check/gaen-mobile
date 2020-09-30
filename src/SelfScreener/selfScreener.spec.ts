@@ -18,9 +18,7 @@ describe("determineSymptomGroup", () => {
         emergencySymptoms: [EmergencySymptom.CHEST_PAIN],
       })
 
-      expect(determineSymptomGroup(answers)).toEqual(
-        SymptomGroup.EMERGENCY_SYMPTOM_GROUP,
-      )
+      expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.EMERGENCY)
     })
   })
 
@@ -33,9 +31,7 @@ describe("determineSymptomGroup", () => {
           underlyingConditions: [UnderlyingCondition.SMOKING],
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.PRIMARY_SYMPTOM_GROUP_1,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.PRIMARY_1)
       })
     })
 
@@ -47,9 +43,7 @@ describe("determineSymptomGroup", () => {
           ageRange: AgeRange.SIXTY_FIVE_AND_OVER,
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.PRIMARY_SYMPTOM_GROUP_2,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.PRIMARY_2)
       })
     })
 
@@ -61,9 +55,7 @@ describe("determineSymptomGroup", () => {
           ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.PRIMARY_SYMPTOM_GROUP_3,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.PRIMARY_3)
       })
     })
 
@@ -76,9 +68,7 @@ describe("determineSymptomGroup", () => {
           underlyingConditions: [UnderlyingCondition.HIGH_BLOOD_PRESSURE],
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.SECONDARY_SYMPTOM_GROUP_1,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.SECONDARY_1)
       })
     })
 
@@ -91,9 +81,7 @@ describe("determineSymptomGroup", () => {
           ageRange: AgeRange.SIXTY_FIVE_AND_OVER,
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.SECONDARY_SYMPTOM_GROUP_1,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.SECONDARY_1)
       })
     })
 
@@ -106,9 +94,7 @@ describe("determineSymptomGroup", () => {
           ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.SECONDARY_SYMPTOM_GROUP_2,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.SECONDARY_2)
       })
     })
 
@@ -120,9 +106,7 @@ describe("determineSymptomGroup", () => {
           otherSymptoms: [OtherSymptom.VOMITING_OR_DIARRHEA],
         })
 
-        expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.NON_COVID_SYMPTOM_GROUP,
-        )
+        expect(determineSymptomGroup(answers)).toEqual(SymptomGroup.NON_COVID)
       })
     })
 
@@ -136,7 +120,7 @@ describe("determineSymptomGroup", () => {
         })
 
         expect(determineSymptomGroup(answers)).toEqual(
-          SymptomGroup.ASYMPTOMATIC_GROUP,
+          SymptomGroup.ASYMPTOMATIC,
         )
       })
     })

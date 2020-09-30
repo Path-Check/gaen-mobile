@@ -15,7 +15,7 @@ describe("EmergencySymptomsQuestions", () => {
 
     const updateSymptomsSpy = jest.fn()
     const context = factories.selfScreenerContext.build({
-      updateEmergencySymptoms: updateSymptomsSpy,
+      updateSymptoms: updateSymptomsSpy,
     })
 
     const { getByText } = render(
@@ -30,7 +30,7 @@ describe("EmergencySymptomsQuestions", () => {
 
     fireEvent.press(difficultyBreathingCheckbox)
     expect(updateSymptomsSpy).toHaveBeenCalledWith(
-      EmergencySymptom.DIFFICULTY_BREATHING,
+      EmergencySymptom.SEVERE_DIFFICULTY_BREATHING,
     )
   })
 
@@ -42,7 +42,7 @@ describe("EmergencySymptomsQuestions", () => {
           navigate: navigationSpy,
         })
         const context = factories.selfScreenerContext.build({
-          emergencySymptoms: [EmergencySymptom.DIFFICULTY_BREATHING],
+          emergencySymptoms: [EmergencySymptom.SEVERE_DIFFICULTY_BREATHING],
         })
 
         const { getByText } = render(

@@ -15,18 +15,16 @@ import {
   UnderlyingCondition,
   determineSymptomGroup,
   SelfScreenerAnswers,
+  GeneralSymptom,
 } from "./SelfScreener/selfScreener"
 
 export type SelfScreenerContextState = {
   emergencySymptoms: EmergencySymptom[]
-  updateEmergencySymptoms: (symptom: EmergencySymptom) => void
   primarySymptoms: PrimarySymptom[]
-  updatePrimarySymptoms: (symptom: PrimarySymptom) => void
   secondarySymptoms: SecondarySymptom[]
-  updateSecondarySymptoms: (symptom: SecondarySymptom) => void
   otherSymptoms: OtherSymptom[]
-  updateOtherSymptoms: (symptom: OtherSymptom) => void
   underlyingConditions: UnderlyingCondition[]
+  updateSymptoms: (symptom: GeneralSymptom) => void
   updateUnderlyingConditions: (condition: UnderlyingCondition) => void
   ageRange: AgeRange | null
   updateAgeRange: (range: AgeRange) => void
@@ -35,13 +33,10 @@ export type SelfScreenerContextState = {
 
 const initialState = {
   emergencySymptoms: [],
-  updateEmergencySymptoms: () => {},
   primarySymptoms: [],
-  updatePrimarySymptoms: () => {},
   secondarySymptoms: [],
-  updateSecondarySymptoms: () => {},
   otherSymptoms: [],
-  updateOtherSymptoms: () => {},
+  updateSymptoms: () => {},
   underlyingConditions: [],
   updateUnderlyingConditions: () => {},
   ageRange: null,
@@ -71,17 +66,32 @@ export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
     ageRange,
   })
 
+  const updateSymptoms = (symptom: GeneralSymptom) => {
+    if (isEmergencySymptom(symptom)) {
+      return updateEmergencySymptoms(symptom)
+    }
+
+    if (isPrimarySymptom(symptom)) {
+      return updatePrimarySymptoms(symptom)
+    }
+
+    if (isSecondarySymptom(symptom)) {
+      return updateSecondarySymptoms(symptom)
+    }
+
+    if (isOtherSymptom(symptom)) {
+      return updateOtherSymptoms(symptom)
+    }
+  }
+
   return (
     <SelfScreenerContext.Provider
       value={{
         emergencySymptoms,
-        updateEmergencySymptoms,
         primarySymptoms,
-        updatePrimarySymptoms,
         secondarySymptoms,
-        updateSecondarySymptoms,
         otherSymptoms,
-        updateOtherSymptoms,
+        updateSymptoms,
         underlyingConditions,
         updateUnderlyingConditions,
         ageRange,
@@ -220,4 +230,41 @@ export const useSelfScreenerContext = (): SelfScreenerContextState => {
   }
 
   return context
+}
+
+const isEmergencySymptom = (
+  symptom: GeneralSymptom,
+): symptom is EmergencySymptom => {
+  return (
+    symptom === EmergencySymptom.SEVERE_DIFFICULTY_BREATHING ||
+    symptom === EmergencySymptom.CHEST_PAIN ||
+    symptom === EmergencySymptom.DISORIENTATION ||
+    symptom === EmergencySymptom.LIGHTHEADEDNESS
+  )
+}
+
+const isPrimarySymptom = (
+  symptom: GeneralSymptom,
+): symptom is PrimarySymptom => {
+  return (
+    symptom === PrimarySymptom.COUGH ||
+    symptom === PrimarySymptom.FEVER_OR_CHILLS ||
+    symptom === PrimarySymptom.MODERATE_DIFFICULTY_BREATHING
+  )
+}
+
+const isSecondarySymptom = (
+  symptom: GeneralSymptom,
+): symptom is SecondarySymptom => {
+  return (
+    symptom === SecondarySymptom.ACHING ||
+    symptom === SecondarySymptom.LOSS_OF_SMELL_TASTE_APPETITE
+  )
+}
+
+const isOtherSymptom = (symptom: GeneralSymptom): symptom is OtherSymptom => {
+  return (
+    symptom === OtherSymptom.OTHER ||
+    symptom === OtherSymptom.VOMITING_OR_DIARRHEA
+  )
 }

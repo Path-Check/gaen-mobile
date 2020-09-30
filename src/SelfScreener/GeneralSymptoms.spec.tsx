@@ -15,7 +15,7 @@ describe("GeneralSymptoms", () => {
       expect.assertions(1)
       const updateSymptomsSpy = jest.fn()
       const context = factories.selfScreenerContext.build({
-        updateSecondarySymptoms: updateSymptomsSpy,
+        updateSymptoms: updateSymptomsSpy,
       })
 
       const { getByText } = render(

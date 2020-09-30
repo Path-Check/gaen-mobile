@@ -3,13 +3,10 @@ import { SelfScreenerContextState } from "../SelfScreenerContext"
 
 export default Factory.define<SelfScreenerContextState>(() => ({
   emergencySymptoms: [],
-  updateEmergencySymptoms: () => {},
   primarySymptoms: [],
-  updatePrimarySymptoms: () => {},
   secondarySymptoms: [],
-  updateSecondarySymptoms: () => {},
   otherSymptoms: [],
-  updateOtherSymptoms: () => {},
+  updateSymptoms: () => {},
   underlyingConditions: [],
   updateUnderlyingConditions: () => {},
   ageRange: null,

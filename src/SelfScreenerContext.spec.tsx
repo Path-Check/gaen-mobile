@@ -300,17 +300,14 @@ const DisplayEmergencySymptoms: FunctionComponent = () => {
 const RemoveEmergencySymptom: FunctionComponent<{
   symptom: EmergencySymptom
 }> = ({ symptom }) => {
-  const {
-    emergencySymptoms,
-    updateEmergencySymptoms,
-  } = useSelfScreenerContext()
+  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
 
   useEffect(() => {
-    updateEmergencySymptoms(symptom)
+    updateSymptoms(symptom)
   }, [])
 
   const updateSymptom = () => {
-    updateEmergencySymptoms(symptom)
+    updateSymptoms(symptom)
   }
 
   return (
@@ -326,13 +323,10 @@ const RemoveEmergencySymptom: FunctionComponent<{
 const AddEmergencySymptom: FunctionComponent<{ symptom: EmergencySymptom }> = ({
   symptom,
 }) => {
-  const {
-    emergencySymptoms,
-    updateEmergencySymptoms,
-  } = useSelfScreenerContext()
+  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
 
   useEffect(() => {
-    updateEmergencySymptoms(symptom)
+    updateSymptoms(symptom)
   }, [])
 
   return (
@@ -359,10 +353,10 @@ const DisplayPrimarySymptoms: FunctionComponent = () => {
 const AddPrimarySymptom: FunctionComponent<{ symptom: PrimarySymptom }> = ({
   symptom,
 }) => {
-  const { primarySymptoms, updatePrimarySymptoms } = useSelfScreenerContext()
+  const { primarySymptoms, updateSymptoms } = useSelfScreenerContext()
 
   useEffect(() => {
-    updatePrimarySymptoms(symptom)
+    updateSymptoms(symptom)
   }, [])
 
   return (
@@ -377,14 +371,14 @@ const AddPrimarySymptom: FunctionComponent<{ symptom: PrimarySymptom }> = ({
 const RemovePrimarySymptom: FunctionComponent<{
   symptom: PrimarySymptom
 }> = ({ symptom }) => {
-  const { primarySymptoms, updatePrimarySymptoms } = useSelfScreenerContext()
+  const { primarySymptoms, updateSymptoms } = useSelfScreenerContext()
 
   useEffect(() => {
-    updatePrimarySymptoms(symptom)
+    updateSymptoms(symptom)
   }, [])
 
   const updateSymptom = () => {
-    updatePrimarySymptoms(symptom)
+    updateSymptoms(symptom)
   }
 
   return (

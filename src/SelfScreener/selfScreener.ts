@@ -1,6 +1,6 @@
 export enum EmergencySymptom {
   CHEST_PAIN = "CHEST_PAIN",
-  DIFFICULTY_BREATHING = "DIFFICULTY_BREATHING",
+  SEVERE_DIFFICULTY_BREATHING = "SEVERE_DIFFICULTY_BREATHING",
   LIGHTHEADEDNESS = "LIGHTHEADEDNESS",
   DISORIENTATION = "DISORIENTATION",
 }
@@ -8,7 +8,7 @@ export enum EmergencySymptom {
 export enum PrimarySymptom {
   FEVER_OR_CHILLS = "FEVER_OR_CHILLS",
   COUGH = "COUGH",
-  DIFFICULTY_BREATHING = "DIFFICULTY_BREATHING",
+  MODERATE_DIFFICULTY_BREATHING = "MODERATE_DIFFICULTY_BREATHING",
 }
 
 export enum SecondarySymptom {
@@ -20,7 +20,11 @@ export enum OtherSymptom {
   OTHER = "OTHER",
 }
 
-export type GeneralSymptom = PrimarySymptom | SecondarySymptom | OtherSymptom
+export type GeneralSymptom =
+  | EmergencySymptom
+  | PrimarySymptom
+  | SecondarySymptom
+  | OtherSymptom
 
 export enum UnderlyingCondition {
   LUNG_DISEASE,
@@ -43,14 +47,14 @@ export enum AgeRange {
 }
 
 export enum SymptomGroup {
-  EMERGENCY_SYMPTOM_GROUP,
-  PRIMARY_SYMPTOM_GROUP_1,
-  PRIMARY_SYMPTOM_GROUP_2,
-  PRIMARY_SYMPTOM_GROUP_3,
-  SECONDARY_SYMPTOM_GROUP_1,
-  SECONDARY_SYMPTOM_GROUP_2,
-  NON_COVID_SYMPTOM_GROUP,
-  ASYMPTOMATIC_GROUP,
+  EMERGENCY,
+  PRIMARY_1,
+  PRIMARY_2,
+  PRIMARY_3,
+  SECONDARY_1,
+  SECONDARY_2,
+  NON_COVID,
+  ASYMPTOMATIC,
 }
 
 export type SelfScreenerAnswers = {
@@ -66,23 +70,23 @@ export const determineSymptomGroup = (
   answers: SelfScreenerAnswers,
 ): SymptomGroup => {
   if (isEmergencySymptomGroup(answers)) {
-    return SymptomGroup.EMERGENCY_SYMPTOM_GROUP
+    return SymptomGroup.EMERGENCY
   } else if (isPrimarySymptomGroup1(answers)) {
-    return SymptomGroup.PRIMARY_SYMPTOM_GROUP_1
+    return SymptomGroup.PRIMARY_1
   } else if (isPrimarySymptomGroup2(answers)) {
-    return SymptomGroup.PRIMARY_SYMPTOM_GROUP_2
+    return SymptomGroup.PRIMARY_2
   } else if (isPrimarySymptomGroup3(answers)) {
-    return SymptomGroup.PRIMARY_SYMPTOM_GROUP_3
+    return SymptomGroup.PRIMARY_3
   } else if (isSecondarySymptomGroup1(answers)) {
-    return SymptomGroup.SECONDARY_SYMPTOM_GROUP_1
+    return SymptomGroup.SECONDARY_1
   } else if (isSecondarySymptomGroup2(answers)) {
-    return SymptomGroup.SECONDARY_SYMPTOM_GROUP_2
+    return SymptomGroup.SECONDARY_2
   } else if (isNonCovidSymptomGroup(answers)) {
-    return SymptomGroup.NON_COVID_SYMPTOM_GROUP
+    return SymptomGroup.NON_COVID
   } else if (isAsymptomaticGroup(answers)) {
-    return SymptomGroup.ASYMPTOMATIC_GROUP
+    return SymptomGroup.ASYMPTOMATIC
   } else {
-    return SymptomGroup.ASYMPTOMATIC_GROUP
+    return SymptomGroup.ASYMPTOMATIC
   }
 }
 
@@ -162,7 +166,7 @@ const hasUnderlyingCondition = (
 }
 
 const isOver65 = (ageRange: AgeRange | null): boolean => {
-  return ageRange !== null && ageRange === AgeRange.SIXTY_FIVE_AND_OVER
+  return ageRange === AgeRange.SIXTY_FIVE_AND_OVER
 }
 
 const isUnder65 = (ageRange: AgeRange | null): boolean => {

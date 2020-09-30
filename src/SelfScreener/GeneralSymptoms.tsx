@@ -7,35 +7,34 @@ import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 
 import { Button, GlobalText } from "../components"
-import {
-  GeneralSymptom,
-  OtherSymptom,
-  PrimarySymptom,
-  SecondarySymptom,
-} from "./selfScreener"
+import { OtherSymptom, PrimarySymptom, SecondarySymptom } from "./selfScreener"
 
 import SymptomCheckbox from "./SymptomCheckbox"
 
 const GeneralSymptoms: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { FEVER_OR_CHILLS, COUGH, DIFFICULTY_BREATHING } = PrimarySymptom
+  const {
+    FEVER_OR_CHILLS,
+    COUGH,
+    MODERATE_DIFFICULTY_BREATHING,
+  } = PrimarySymptom
   const { ACHING, LOSS_OF_SMELL_TASTE_APPETITE } = SecondarySymptom
   const { VOMITING_OR_DIARRHEA, OTHER } = OtherSymptom
   const {
     primarySymptoms,
     secondarySymptoms,
     otherSymptoms,
-    updatePrimarySymptoms,
-    updateSecondarySymptoms,
-    updateOtherSymptoms,
+    updateSymptoms,
   } = useSelfScreenerContext()
 
-  const symptomToString = (symptom: GeneralSymptom) => {
+  const symptomToString = (
+    symptom: PrimarySymptom | SecondarySymptom | OtherSymptom,
+  ) => {
     switch (symptom) {
       case FEVER_OR_CHILLS:
         return t("self_screener.general_symptoms.fever_or_chills")
-      case DIFFICULTY_BREATHING:
+      case MODERATE_DIFFICULTY_BREATHING:
         return t("self_screener.general_symptoms.difficulty_breathing")
       case COUGH:
         return t("self_screener.general_symptoms.cough")
@@ -63,37 +62,37 @@ const GeneralSymptoms: FunctionComponent = () => {
       </GlobalText>
       <SymptomCheckbox
         label={symptomToString(FEVER_OR_CHILLS)}
-        onPress={() => updatePrimarySymptoms(FEVER_OR_CHILLS)}
+        onPress={() => updateSymptoms(FEVER_OR_CHILLS)}
         checked={primarySymptoms.includes(FEVER_OR_CHILLS)}
       />
       <SymptomCheckbox
-        label={symptomToString(DIFFICULTY_BREATHING)}
-        onPress={() => updatePrimarySymptoms(DIFFICULTY_BREATHING)}
-        checked={primarySymptoms.includes(DIFFICULTY_BREATHING)}
+        label={symptomToString(MODERATE_DIFFICULTY_BREATHING)}
+        onPress={() => updateSymptoms(MODERATE_DIFFICULTY_BREATHING)}
+        checked={primarySymptoms.includes(MODERATE_DIFFICULTY_BREATHING)}
       />
       <SymptomCheckbox
         label={symptomToString(COUGH)}
-        onPress={() => updatePrimarySymptoms(COUGH)}
+        onPress={() => updateSymptoms(COUGH)}
         checked={primarySymptoms.includes(COUGH)}
       />
       <SymptomCheckbox
         label={symptomToString(LOSS_OF_SMELL_TASTE_APPETITE)}
-        onPress={() => updateSecondarySymptoms(LOSS_OF_SMELL_TASTE_APPETITE)}
+        onPress={() => updateSymptoms(LOSS_OF_SMELL_TASTE_APPETITE)}
         checked={secondarySymptoms.includes(LOSS_OF_SMELL_TASTE_APPETITE)}
       />
       <SymptomCheckbox
         label={symptomToString(VOMITING_OR_DIARRHEA)}
-        onPress={() => updateOtherSymptoms(VOMITING_OR_DIARRHEA)}
+        onPress={() => updateSymptoms(VOMITING_OR_DIARRHEA)}
         checked={otherSymptoms.includes(VOMITING_OR_DIARRHEA)}
       />
       <SymptomCheckbox
         label={symptomToString(ACHING)}
-        onPress={() => updateSecondarySymptoms(ACHING)}
+        onPress={() => updateSymptoms(ACHING)}
         checked={secondarySymptoms.includes(ACHING)}
       />
       <SymptomCheckbox
         label={symptomToString(OTHER)}
-        onPress={() => updateOtherSymptoms(OTHER)}
+        onPress={() => updateSymptoms(OTHER)}
         checked={otherSymptoms.includes(OTHER)}
       />
       <Button
