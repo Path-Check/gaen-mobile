@@ -23,10 +23,12 @@
     "continue": "Continuar",
     "disabled": "Desactivado",
     "done": "Finalizado",
+    "edit": "Editar",
     "enabled": "Habilitado",
     "maybe_later": "Quizás más tarde",
     "next": "Próximo",
     "no_thanks": "No, gracias",
+    "save": "Salvar",
     "settings": "Abrir Configuración",
     "skip": "Omitir",
     "something_went_wrong": "Algo salió mal",
@@ -60,6 +62,7 @@
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue utilizado"
     },
+    "person_and_health_expert": "Una persona hablando con un experto en salud",
     "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
     "publish_keys": {
       "errors": {
@@ -76,12 +79,15 @@
     "start_header_bluetooth": "Ayude a contener la propagación del virus y proteja a otros en su comunidad"
   },
   "exposure_history": {
+    "check_for_exposures": "Compruebe si hay exposiciones",
     "exposure_detail": {
       "6ft_apart": "6 pies de distancia",
+      "general_guidance": "Orientación general",
       "ha_guidance_header": "¿Qué debo hacer?",
       "header": "Es posible que haya sido expuesto al virus COVID-19",
       "isolate": "Debe aislarse",
       "next_steps": "Próximos pasos",
+      "personalize_my_guidance": "Personaliza mi orientación",
       "schedule_callback": "Coordine una llamada para recibir asistencia de un rastreador de contactos de {{healthAuthorityName}}",
       "speak_with_contact_tracer": "Hable con un rastreador de contactos",
       "wash_your_hands": "Lávese las manos",
@@ -143,9 +149,17 @@
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_header": "Rastreo de proximidad",
     "proximity_tracing_info_subheader_1": "¿Cómo funciona el Rastreo de proximidad?",
-    "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?"
+    "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "Para activar el rastreo de proximidad y las notificaciones de exposición, vaya a la aplicación de notificaciones de exposición de COVID-19 de su configuración y active la opción \"Usar notificaciones de exposición\".",
+      "unauthorized_error_message_ios": "Para habilitar el rastreo de proximidad y las notificaciones de exposición, por favor vaya a la sección de Notificación de Exposición en Ajustes y Comparta la Información de Exposición y establezca la Región Activa en {{applicationName}}",
+      "unauthorized_error_title": "Activar Rastreo de Proximidad"
+    },
+    "status_icon_active_label": "Una x blanca en un círculo verde",
+    "status_icon_inactive_label": "Una x blanca en un círculo rojo"
   },
   "label": {
+    "check": "Marca de verificación",
     "checked_checkbox": "Casilla de verificación marcada",
     "go_to_home_view": "Ir a la vista de Inicio",
     "launch_enable_notif": "Permitir notificaciones",
@@ -156,6 +170,12 @@
     "unchecked_checkbox": "Casilla de verificación sin marcar"
   },
   "my_health": {
+    "over_time": "Con el tiempo",
+    "symptom_log": {
+      "did_not_check_in": "No se ha registrado",
+      "feeling_not_well": "No te sentías bien.",
+      "feeling_well": "Te sentías bien."
+    },
     "today": "Hoy"
   },
   "navigation": {
@@ -163,7 +183,8 @@
     "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Página de Inicio",
-    "more_info": "Más información"
+    "more_info": "Más información",
+    "symptom_checker": "symptom_checker"
   },
   "onboarding": {
     "activation_header_title": "Configuración de la Aplicación",
@@ -211,17 +232,22 @@
     "screen_5_button": "Comenzar",
     "screen1_button": "¿Cómo funciona?",
     "screen1_header": "Juntos, podemos disminuir la propagación de COVID-19",
+    "screen1_image_label": "Dos personas chocando cinco",
     "screen2_button": "¿Está protegida mi privacidad?",
     "screen2_header": "Su teléfono recuerda otros dispositivos que encuentra, pero no le identificará ante nadie",
+    "screen2_image_label": "Dos personas usando sus teléfonos",
     "screen3_button": "¿Qué pasa si estoy expuesto?",
     "screen3_header": "Ninguna información de identificación personal sale de su teléfono",
-    "screen3_image_label": ".",
+    "screen3_image_label": "Una persona frente a un teléfono bloqueado.",
     "screen4_button": "¿Qué pasa si me enfermo?",
     "screen4_header": "La aplicación le notificará si pudo haber estado expuesto al COVID-19.",
+    "screen4_image_label": "Una persona recibe una notificación en su teléfono",
     "screen5_header": "Con la aplicación, usted puede ayudar a disminuir la propagación de COVID-19, proteger a otros y obtener ayuda directamente de expertos en salud.",
+    "screen5_image_label": "Una persona que habla con un experto en salud virtualmente",
     "select_language": "Seleccionar idioma",
     "step": "Paso {{currentStep}} de {{totalSteps}}",
-    "terms_header_title": "Condiciones de uso"
+    "terms_header_title": "Condiciones de uso",
+    "welcome_image_label": "Una ilustración de personas con mascarillas, conectadas como nodos en una red."
   },
   "screen_titles": {
     "callback": "Solicitar que se devuelva la llamada",
@@ -231,7 +257,145 @@
     "how_the_app_works": "¿Cómo funciona la aplicación?",
     "legal": "Legal"
   },
+  "self_screener": {
+    "age_range": {
+      "eighteen_to_sixty_four": "18 - 64",
+      "how_old_are_you": "¿Cuántos años tienes?",
+      "sixty_five_and_over": "65+"
+    },
+    "call_emergency_services": {
+      "call_emergency_services": "Llama al 911"
+    },
+    "emergency_symptoms": {
+      "chest_pain": "Dolor o presión en el pecho severos y constantes",
+      "difficulty_breathing": "Dificultad extrema para respirar",
+      "disorientation": "Desorientación grave o falta de respuesta",
+      "lightheadedness": "Mareos intensos y constantes",
+      "select_any": "Seleccione todos los que correspondan (o ninguno)."
+    },
+    "general_symptoms": {
+      "aching": "Dolor en todo el cuerpo",
+      "cough": "Tos nueva o tos empeorando",
+      "difficulty_breathing": "Dificultad para respirar leve o moderada",
+      "fever_or_chills": "Fiebre o escalofríos",
+      "loss_of_smell_taste_appetite": "Pérdida sostenida del olfato, el gusto o el apetito",
+      "other": "Otro",
+      "vomiting_or_diarrhea": "Vómitos o diarrea"
+    },
+    "guidance": {
+      "call_your_healthcare_provider": "Llame a su proveedor de atención médica, línea de asesoramiento clínico o proveedor de telemedicina en un plazo de 24 horas.",
+      "clean_hands": "Lávese las manos frecuentemente",
+      "cover_coughs": "Cúbrase al toser y estornudar.",
+      "dont_go_to_work": "No vaya al trabajo, la escuela o áreas públicas.",
+      "dont_use_public_transport": "No utilice el transporte público ni el uso compartido de viajes.",
+      "drink_water": "Beba mucha agua para evitar deshidratarte.",
+      "feeling_fine": "Me alegro de saber que te sientes bien. Usted debería monitorear sus síntomas y permanecer en casa.",
+      "find_telehealth": "Buscar servicios de telemedicina",
+      "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
+      "guidance": "Guía",
+      "how_to_care_for_yourself_and_others": "Cómo cuidarse a sí mismo y a los demás mientras está enfermo con síntomas de COVID-19:",
+      "if_symptoms_develop": "Si presenta alguno de estos síntomas o si comienza a sentirse peor, llame a su proveedor de atención médica, a su clínica o a un proveedor de telemedicina.",
+      "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
+      "monitor_your_symptoms": "Lamento que te sientas mal. Quédese en casa y monitorea sus síntomas. Llame a su proveedor si empeora sus síntomas.",
+      "practice_social_distancing": "Practica el distanciamiento social.",
+      "protect_others": "Tome estas medidas para ayudar a proteger a los demás de enfermarse.",
+      "rest": "Quédate en casa y descansa.",
+      "seek_medical_care": "Si crees que es una emergencia o te sientes peor, busca atención médica.",
+      "stay_6_feet_away": "Manténgase al menos a 6 pies de distancia de los demás y manténgase alejado de lugares concurridos.",
+      "stay_at_home": "Quédese en casa, excepto para recibir atención médica.",
+      "stay_away_from_higher_risk_people": "Si es posible, manténgase alejado de las personas que están en mayor riesgo de enfermarse de COVID-19.",
+      "stay_home_14_days": "Quédese en casa durante 14 días.",
+      "take_care_of_yourself": "Aprende a cuidarte a ti mismo o a otra persona que esté enferma.",
+      "take_temperature": "Tómese la temperatura dos veces al día y esté atento a los síntomas de COVID-19.",
+      "watch_for_covid_symptoms": "Esté atento a los síntomas de COVID-19.",
+      "you_have_underlying_conditions": "Siento que no te sientas bien. Sus síntomas pueden estar relacionados con COVID-19. También tienes condiciones médicas que pueden ponerte en riesgo de enfermarse más gravemente.",
+      "your_symptoms_might_be_related": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19."
+    },
+    "intro": {
+      "agree_and_start_screener": "Acepte y comience el evaluador",
+      "covid19_self_screener": "Autoevaluación COVID-19"
+    },
+    "summary": {
+      "asymptomatic_group": "¡Me alegra saber que se siente bien!\n Aunque no esté enfermo, debe quedarse en su casa durante 14 días. COVID-19 puede ser transmitido por personas que no presentan síntomas.",
+      "get_my_guidance": "Obtén mi orientación",
+      "non_covid_symptom_group": "Siento que no te sientas bien.\nSegún tus respuestas, actualmente no estás mostrando síntomas comunes de COVID-19.",
+      "primary_symptom_group_1": "Siento que no te sientas bien.\nSus síntomas pueden estar relacionados con COVID-19. También tienes condiciones médicas que pueden ponerte en riesgo de enfermarte más gravemente.",
+      "primary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
+      "primary_symptom_group_3": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
+      "secondary_symptom_group_1": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
+      "secondary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19."
+    },
+    "underlying_conditions": {
+      "blood_disorder": "Trastorno sanguíneo, como enfermedad de células falciformes o talasemia",
+      "cerebrovascular_disease": "Enfermedad cerebrovascular o afección nerológica, como accidente cerebrovascular o demencia",
+      "diabetes": "Diabetes",
+      "heart_condition": "Condición cardíaca grave, como insuficiencia cardíaca, enfermedad de las arterias coronarias o miocardiopatía",
+      "high_blood_pressure": "Alta presión sanguínea",
+      "kidney_disease": "Enfermedad renal crónica",
+      "liver_disease": "Enfermedad del hígado",
+      "lung_disease": "Enfermedad pulmonar crónica, como asma de moderada a grave, EPOC, fibrosis quística o fibrosis pulmonaria",
+      "obesity": "Obesidad",
+      "pregnancy": "Embarazo",
+      "select_all_or_none": "Seleccione todos los que correspondan (o ninguno)",
+      "smoking": "Fumar",
+      "weakened_immune_system": "Sistema inmunológico debilitado o tomando medicamentos que pueden causar supresión inmunológica"
+    }
+  },
   "settings": {
-    "i_understand_and_consent": "Comprendo y doy mi consentimiento"
+    "here": "aquí",
+    "i_understand_and_consent": "Comprendo y doy mi consentimiento",
+    "not_sharing_anonymized_data": "No compartir datos anónimos",
+    "please_view_privacy_policy": "Consulte su política de privacidad",
+    "share_anonymized_data": "Comparta datos anónimos",
+    "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a preguntas de detección con {{healthAuthorityName}}",
+    "share_anonymized_data_para": "Sus datos anónimos ayudan al {{healthAuthorityName}} a analizar, rastrear y contener la propagación de COVID-19. Sus datos serán agregados a los de otros usuarios de PathCheck que elijan compartir.\n\nSus datos contienen sus respuestas a la encuesta y el código postal, pero ninguna información adicional o de identificación personal.\n\nEl {{healthAuthorityName}} retendrá sus datos anónimos por un período de tiempo específico.",
+    "sharing_anonymized_data": "Compartiendo datos anónimos",
+    "stop_sharing_data": "Dejar de compartir datos",
+    "you_are_sharing_data": "Estás compartiendo datos anónimos"
+  },
+  "symptom_checker": {
+    "check_in_again": "Regístrese de nuevo mañana.",
+    "check-in": "Check-in",
+    "delete_entry": "Borrar entrada",
+    "entry_deleted": "Entrada eliminada",
+    "errors": {
+      "adding_check_in": "Lo sentimos, no pudimos agregar el registro de hoy.",
+      "adding_symptoms": "Lo sentimos, no pudimos registrar sus síntomas",
+      "deleting_symptom_log": "Lo sentimos, no pudimos eliminar el registro de síntomas",
+      "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
+    },
+    "find_a_test_center": "Encuentre un centro de pruebas",
+    "find_a_test_center_nearby": "Encuentre un centro de pruebas cercano",
+    "get_tested": "Le recomendamos que se haga la prueba de COVID-19.",
+    "glad_to_hear_it": "¡Me alegra escucharlo!",
+    "good": "Bien",
+    "guidance": "Guía",
+    "how_are_you_feeling": "¿Cómo te sientes hoy?",
+    "log_symptoms": "Registrar los síntomas",
+    "my_health": "Mi salud",
+    "no_symptom_history": "Sin historial de síntomas",
+    "not_well": "Mal",
+    "person_finding_location_label": "Una persona en su teléfono buscando una ubicación.",
+    "sorry_not_feeling_well": "Lamento que no se sienta bien.",
+    "sorry_to_hear_it": "¡Lamento que no te sientas bien!",
+    "symptoms_saved": "¡Síntomas guardados!",
+    "symptoms_updated": "¡Síntomas actualizados!",
+    "what_symptoms": "¿Qué síntomas tienes?"
+  },
+  "symptoms": {
+    "body_aches": "Dolor de cuerpo",
+    "chest_pain_or_pressure": "Dolor o presión en el pecho",
+    "chills": "Escalofríos",
+    "cough": "Tos",
+    "diarrhea": "Diarrea",
+    "difficulty_breathing": "Dificultad para respirar",
+    "disorientation_or_unresponsiveness": "Desorientación o falta de respuesta",
+    "fever": "Fiebre",
+    "lightheadedness": "Mareos",
+    "loss_of_appetite": "Pérdida de apetito",
+    "loss_of_smell": "Pérdida del olfato",
+    "loss_of_taste": "Pérdida del gusto",
+    "other": "Otro",
+    "vomiting": "Vómitos"
   }
 }

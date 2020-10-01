@@ -267,9 +267,9 @@
       "call_emergency_services": "Call 911"
     },
     "call911": {
-      "based_on_your_symptoms": "",
-      "seek_medical_attention": "",
-      "urgent_medical_attention_needed": ""
+      "based_on_your_symptoms": "Based on your symptoms, you may need urgent medical care. Please call 911 or got to the nearest emergency department.\nTell the 911 operator or emergency staff if you have had contact with someone with COVID-19",
+      "seek_medical_attention": "Seek medical attention immediately",
+      "urgent_medical_attention_needed": "Urgent medical attention may be needed. Please call 911 or go to the Emergency Department"
     },
     "emergency_symptoms": {
       "chest_pain": "Severe, constant chest pain or pressure",
@@ -279,8 +279,8 @@
       "select_any": "Select all that apply (or none)."
     },
     "general_symptoms_summary": {
-      "sorry_to_hear": "",
-      "two_more_questions": ""
+      "sorry_to_hear": "It's too bad you're feeling that way.",
+      "two_more_questions": "Since it's your first time here, let's answer two more questions to determine if you're at higher risk for getting very sick from COVID-19."
     },
     "general_symptoms": {
       "aching": "Aching throughout the body",
@@ -325,8 +325,8 @@
       "covid19_self_screener": "COVID-19 Self Screener"
     },
     "no_emergency_symptoms": {
-      "glad_to_hear": "",
-      "one_more_question": ""
+      "glad_to_hear": "Thanks, glad you're no experiencing emergency symptoms.",
+      "one_more_question": "One more question to determine if your symptoms might be related to COVID-19."
     },
     "summary": {
       "asymptomatic_group": "Glad to hear you’re feeling well!\nEven though you’re not ill, you should stay home for 14 days. COVID-19 may be spread by people who are not showing symptoms.",
@@ -343,7 +343,7 @@
       "cerebrovascular_disease": "Cerebrovascular disease or nerological condition, such as stroke or dementia",
       "diabetes": "Diabetes",
       "heart_condition": "Serious heart condition, such as heart failure, coronary artery disease, or cardiomyopathy",
-      "high_blood_pressure": "High blood pressuer",
+      "high_blood_pressure": "High blood pressure",
       "kidney_disease": "Chronic kidney disease",
       "liver_disease": "Liver disease",
       "lung_disease": "Chronic lung disease, such as moderate to sever asthma, COPD, cystic fibrosis, or pumonary fibrosis",

@@ -52,5 +52,10 @@
   "screen_titles": {
     "exposure_history": "Historia Ekspozycji",
     "legal": "Informacje prawne"
+  },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Wezwij służby ratunkowe"
+    }
   }
 }

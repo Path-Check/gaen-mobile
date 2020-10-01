@@ -247,6 +247,17 @@
     "how_the_app_works": "어떻게 앱이 작동하나요?",
     "legal": "법률"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "911 호출"
+    },
+    "general_symptoms": {
+      "other": "그 외 증상"
+    },
+    "guidance": {
+      "guidance": "지침"
+    }
+  },
   "settings": {
     "here": "여기",
     "i_understand_and_consent": "본인은 이해했으며, 동의합니다.",

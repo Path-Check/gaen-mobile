@@ -46,5 +46,10 @@
   },
   "screen_titles": {
     "legal": "Правовая информация"
+  },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Вызов скорой помощи"
+    }
   }
 }

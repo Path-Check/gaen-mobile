@@ -194,6 +194,17 @@
     "how_the_app_works": "Kijan aplikasyon an fonksyone",
     "legal": "Legal"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Rele Sèvis Ijans yo"
+    },
+    "general_symptoms": {
+      "other": "Lòt"
+    },
+    "guidance": {
+      "guidance": "Gid"
+    }
+  },
   "settings": {
     "here": "isit la",
     "i_understand_and_consent": "Mwen konprann e mwen dakò",

@@ -218,6 +218,11 @@
     "exposures": "man ninayi  or mantinanmi",
     "legal": "Legat"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Agang 911"
+    }
+  },
   "settings": {
     "i_understand_and_consent": "Hu Komprendi yan hu Konsienti"
   }
