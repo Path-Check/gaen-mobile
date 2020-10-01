@@ -221,6 +221,11 @@
     "exposures": "Mga Pagkakalantad",
     "legal": "Ligal"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Tumawag sa Emergency Services o 911"
+    }
+  },
   "settings": {
     "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako"
   }

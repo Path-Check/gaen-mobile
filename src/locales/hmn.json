@@ -213,6 +213,11 @@
     "exposures": "Kev mus nyob ze raug mob",
     "legal": "Kev Cai Lij Choj"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Hu rau 911"
+    }
+  },
   "settings": {
     "i_understand_and_consent": "Kuv nkag siab thiab tso cai"
   }

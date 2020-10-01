@@ -218,6 +218,11 @@
     "exposures": "接触",
     "legal": "リーガル"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "911に電話する"
+    }
+  },
   "settings": {
     "i_understand_and_consent": "私は理解して同意します"
   },

@@ -54,5 +54,10 @@
   "screen_titles": {
     "exposure_history": "Cronologia delle esposizioni",
     "legal": "Legale"
+  },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Chiama i servizi di emergenza"
+    }
   }
 }

@@ -216,6 +216,11 @@
     "exposures": "Soo gaarista",
     "legal": "Sharciyeedka"
   },
+  "self_screener": {
+    "call_emergency_services": {
+      "call_emergency_services": "Wac 911"
+    }
+  },
   "settings": {
     "i_understand_and_consent": "Waan fahmay oo waan oggolahay"
   }

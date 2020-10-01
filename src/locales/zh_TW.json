@@ -1,16 +1,167 @@
 {
   "_display_name": "繁體中文",
+  "about": {
+    "description": "{{applicationName}}應用程序由{{healthAuthorityName}}提供",
+    "emergency_contact": "緊急聯絡人"
+  },
+  "callback": {
+    "fill_out_the_info": "請填寫以下信息，將位有一位{{healthAuthorityName}}追蹤接觸者的人員與您聯繫。",
+    "firstname": "名字",
+    "lastname": "姓氏",
+    "phone_number_required": "電話號碼（必填）",
+    "success_body": "我們的追踪器正在努力確保您和您所在社區的安全。 {{healthAuthorityName}}已收到您的回電請求。會有專人在24小時內與您聯繫。",
+    "success_got_it": "知道了",
+    "success_header": "您在隊列中",
+    "success_requested": "已要求回電",
+    "well_get_in_touch": "我們聯繫您"
+  },
   "common": {
-    "next": "下一個"
+    "edit": "編輯",
+    "next": "下一個",
+    "save": "救"
+  },
+  "export": {
+    "error": {
+      "network_connection_error": "沒有網路"
+    },
+    "person_and_health_expert": "與健康專家交談的人",
+    "publish_keys": {
+      "errors": {
+        "description": "操作無法完成。 {{message}}",
+        "internal_server_error": "伺服器發生問題，請稍後再試",
+        "timeout": "請求的完成時間過長",
+        "unknown": "提交接觸資料失敗"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "已將現有資料發送到服務器。這通常代表此程序曾在此設備上嘗試過，但使用的是不同的應用程式，您可以將此信息告知提供所使用驗證碼的機構。添加了{{newKeysInserted}}新密鑰。",
+        "title": "嘗試提交現有密鑰"
+      }
+    }
+  },
+  "exposure_history": {
+    "exposure_detail": {
+      "general_guidance": "一般指南",
+      "personalize_my_guidance": "指引個人化",
+      "schedule_callback": "安排與{{healthAuthorityName}}追蹤接觸者的人員的聯繫。",
+      "speak_with_contact_tracer": "與接追蹤接觸者的人員通話"
+    }
+  },
+  "home": {
+    "bluetooth": {
+      "tracing_off_subheader_location": "啟用藍牙，接近追蹤和位置以獲取可能的接觸資訊"
+    },
+    "fix": "透過{{technology}}解決問題",
+    "get_more_info": "透過{{technology}}獲得更多資訊",
+    "open_settings": "打開設定",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "若要啟動接近追蹤和接處通知，請至\"COVID-19接觸通知設計\"，並開啟\"使用接觸通知\"",
+      "unauthorized_error_message_ios": "若要啟用接近追蹤和接觸通知，請到“接觸通知設定”中的“接觸通知”部分，並將“啟動區域”設置為{{applicationName}}",
+      "unauthorized_error_title": "啟用接近追蹤"
+    },
+    "status_icon_active_label": "一個綠色圓圈內的白色打勾字樣",
+    "status_icon_inactive_label": "紅色圓圈中的白色叉叉字樣"
   },
   "label": {
     "launch_enable_notif": "開啟通知",
     "launch_get_started": "開始"
   },
+  "my_health": {
+    "over_time": "在這段時間內",
+    "symptom_log": {
+      "did_not_check_in": "您沒有簽到",
+      "feeling_not_well": "你感到不舒服",
+      "feeling_well": "你沒有不舒服"
+    },
+    "today": "今天"
+  },
+  "navigation": {
+    "connect": "連接",
+    "exposure": "接觸",
+    "more_info": "更多資訊",
+    "symptom_checker": "症狀檢驗"
+  },
   "onboarding": {
+    "eula": "最終用戶法律協議",
+    "location_alert_body": "若要使用藍牙掃描，需要打開設備的定位設置。",
+    "location_alert_header": "從“ {{applicationName}} ”啟用定位",
+    "location_body": "若要使用藍牙掃描，您需要開啟設備位置。該應用程序不會使用您的訂位資料，且不會無法追蹤您的設備。",
+    "location_header": "開啟定位",
+    "location_subheader": "為什麼需要打開手機的定位設置？",
+    "please_read_the": "請閱讀",
+    "privacy_policy": "隱私政策",
     "terms_header_title": "使用條款"
   },
   "screen_titles": {
+    "callback": "回電要求",
+    "how_the_app_works": "該應用程序的運作方式",
     "legal": "法遵"
+  },
+  "self_screener": {
+    "general_symptoms": {
+      "other": "其他"
+    },
+    "guidance": {
+      "guidance": "指南"
+    },
+    "intro": {
+      "covid19_self_screener": "COVID-19自我篩選"
+    }
+  },
+  "settings": {
+    "here": "這裡",
+    "i_understand_and_consent": "我理解並同意",
+    "not_sharing_anonymized_data": "不分享匿名數據",
+    "please_view_privacy_policy": "請查看他們的隱私政策",
+    "share_anonymized_data": "分享匿名資料",
+    "share_anonymized_data_disclaimer": "若要繼續進行，您同意與{{healthAuthorityName}}分享篩查問題的匿名答案",
+    "share_anonymized_data_para": "您的匿名資料可幫助{{healthAuthorityName}}委員會的分析，追蹤和停止COVID-19的傳播。您的資料將匯總來自其他選擇共享的PathCheck用戶的數據。\n\n您的資料包含您的調查回復和郵政編碼，但沒有其他或個人識別信息。\n\n {{healthAuthorityName}}將保留您的匿名資料一段時間。",
+    "sharing_anonymized_data": "分享匿名數據",
+    "stop_sharing_data": "停止分享數據",
+    "you_are_sharing_data": "您正在分享匿名數據"
+  },
+  "symptom_checker": {
+    "check_in_again": "明天再次登記",
+    "check-in": "報到",
+    "delete_entry": "刪除條目",
+    "entry_deleted": "條目已刪除",
+    "errors": {
+      "adding_check_in": "抱歉，我們無法幫您做今日簽到",
+      "adding_symptoms": "抱歉，我們無法紀錄您的症狀",
+      "deleting_symptom_log": "抱歉，我們無法刪除您的症狀紀錄",
+      "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
+    },
+    "find_a_test_center": "尋找檢疫中心",
+    "find_a_test_center_nearby": "尋找您鄰近的檢疫中心",
+    "get_tested": "我們建議您針對COVID-19做檢疫。",
+    "glad_to_hear_it": "很高興聽到這個消息！",
+    "good": "好",
+    "guidance": "指南",
+    "how_are_you_feeling": "你今天感覺如何？",
+    "log_symptoms": "記錄症狀",
+    "my_health": "我的健康",
+    "no_symptom_history": "無症狀史",
+    "not_well": "不太好",
+    "person_finding_location_label": "一個人在電話上搜索位置。",
+    "sorry_not_feeling_well": "很抱歉您感到不適",
+    "sorry_to_hear_it": "很抱歉您感到不適",
+    "symptoms_saved": "症狀已保存！",
+    "symptoms_updated": "症狀已更新！",
+    "what_symptoms": "您有甚麼症狀？"
+  },
+  "symptoms": {
+    "body_aches": "身體酸痛",
+    "chest_pain_or_pressure": "胸痛或壓力過高",
+    "chills": "寒意",
+    "cough": "咳嗽",
+    "diarrhea": "腹瀉",
+    "difficulty_breathing": "呼吸困難",
+    "disorientation_or_unresponsiveness": "迷失方向或反應遲鈍",
+    "fever": "發燒",
+    "lightheadedness": "頭昏眼花",
+    "loss_of_appetite": "食慾不振",
+    "loss_of_smell": "失去嗅覺",
+    "loss_of_taste": "失去味覺",
+    "other": "其他",
+    "vomiting": "嘔吐"
   }
 }

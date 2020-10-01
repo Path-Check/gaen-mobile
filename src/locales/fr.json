@@ -1,7 +1,9 @@
 {
   "_display_name": "Français",
   "about": {
-    "emergency_contact": "Contact d’urgence"
+    "emergency_contact": "Contact d’urgence",
+    "operating_system_abbr": "OS:",
+    "version": "Version:"
   },
   "callback": {
     "firstname": "Prénom",
@@ -15,23 +17,45 @@
   "common": {
     "back": "Précédent",
     "disabled": "Désactivé",
+    "done": "Terminé",
     "edit": "Modifier",
     "enabled": "Activé",
     "next": "Suivant",
-    "save": "Sauvegarder"
+    "save": "Sauvegarder",
+    "settings": "Ouvrir les paramètres",
+    "something_went_wrong": "Un problème est survenu",
+    "start": "Démarrer",
+    "submit": "Envoyer"
+  },
+  "errors": {
+    "description": "Une erreur s'est produite. Veuillez recharger l'application.",
+    "reload": "Recharger",
+    "title": "Erreur inconnue"
   },
   "export": {
+    "code_input_body_bluetooth": "Entrez votre code de vérification",
     "code_input_button_back": "Précédent",
+    "code_input_button_cancel": "Annuler",
+    "code_input_title_bluetooth": "Vérifiez votre diagnostic",
+    "complete_body_bluetooth": "Vous contribuez à contenir la propagation du virus et à protéger les autres membres de votre communauté.",
+    "complete_title": "Merci de protéger votre communauté!",
     "consent_body_0": "Le partage de votre diagnostic positif est facultatif et ne peut se faire qu'avec votre consentement.",
     "consent_body_1": "Si vous acceptez de le faire, vous aidez les autres membres de votre communauté à prendre des décisions éclairées concernant leur santé et vous jouez votre rôle pour contenir la propagation du virus.",
     "consent_body_2": "La seule information partagée sera l'ensemble aléatoire de numéros que votre téléphone a échangé par Bluetooth avec d'autres téléphones qui se trouvaient à proximité au cours des 14 derniers jours, ainsi qu'un score de risque pondéré basé sur le moment où vos symptômes se sont développés.",
+    "consent_button_title": "Je comprends et j'accepte",
     "consent_subheader_1": "Pourquoi devrais-je partager ?",
     "consent_subheader_2": "Comment ça marche?",
+    "enable_exposure_notifications_body": "Vous devez activer les notifications d'exposition pour signaler un résultat de test positif.",
+    "enable_exposure_notifications_title": "Activer les notifications d'exposition pour continuer",
     "error": {
+      "invalid_code": "Essayez un autre code",
       "invalid_format": "Format non valide",
-      "network_connection_error": "Il n'y a pas de connexion internet"
+      "network_connection_error": "Il n'y a pas de connexion internet",
+      "unknown_code_verification_error": "Essayez un autre code",
+      "verification_code_used": "Le code de vérification a déjà été utilisé"
     },
     "person_and_health_expert": "Une personne parlant à un expert de la santé",
+    "publish_consent_title_bluetooth": "Avertissez les autres membres de votre communauté",
     "publish_keys": {
       "errors": {
         "internal_server_error": "Le serveur rencontre des problèmes, veuillez réessayer plus tard"
@@ -40,7 +64,11 @@
     "start_header_bluetooth": "Aidez à contenir la propagation du virus et à protéger les autres membres de votre communauté"
   },
   "exposure_history": {
-    "no_connectivity_message": "Vous n'êtes pas connecté à Internet!"
+    "how_does_this_work": "Comment cela marche-t-il?",
+    "last_days": "Les 14 derniers jours",
+    "no_connectivity_message": "Vous n'êtes pas connecté à Internet!",
+    "updated": "Mise à jour",
+    "why_did_i_get_an_en": "Pourquoi ai-je reçu une notification d'exposition ?"
   },
   "home": {
     "bluetooth_info_body": "Votre téléphone détecte les autres téléphones qui sont restés à proximité en utilisant Bluetooth Low Energy. Cela permet à l'application d'enregistrer vos rencontres quotidiennes de façon anonyme, même lorsque l'application n'est pas ouverte sur votre appareil.",
@@ -52,6 +80,8 @@
       "location_disabled_error_message": "Pour activer la technologie de notification d'exposition, autorisez l'accès à la localisation dans les paramètres de l'application",
       "location_disabled_error_title": "Autorisez dans les paramètres",
       "proximity_tracing_header": "Traçage de proximité",
+      "tracing_off_header": "Inactif",
+      "tracing_off_subheader": "Activer le Bluetooth et la recherche de proximité pour obtenir des informations sur les expositions possibles",
       "tracing_off_subheader_location": "Activez Bluetooth, le traçage de proximité et la localisation pour obtenir des informations sur les expositions possibles"
     },
     "location_info_subheader_1": "Pourquoi dois-je activer la localisation ?",
@@ -75,12 +105,14 @@
     "today": "Aujourd'hui"
   },
   "navigation": {
+    "home": "Accueil",
     "more_info": "Plus d'informations"
   },
   "onboarding": {
     "app_setup_complete_header": "Configuration de l'application terminée!",
     "app_setup_incomplete_header": "Configuration de l'application incomplète",
     "eula": "Accord juridique de l'utilisateur final",
+    "notification_header": "Recevez une notification si vous avez peut-être été exposé",
     "privacy_policy": "Politique de confidentialité",
     "protect_privacy": {
       "header": "Comment nous protégeons votre vie privée",
@@ -100,9 +132,19 @@
   },
   "screen_titles": {
     "callback": "Demander un rappel",
+    "debug": "Debug",
+    "exposure_history": "Historique des expositions",
     "exposures": "Expositions",
     "how_the_app_works": "Fonctionnement de l’application",
     "legal": "Juridique"
+  },
+  "self_screener": {
+    "general_symptoms": {
+      "other": "Autres"
+    },
+    "guidance": {
+      "guidance": "Orientation"
+    }
   },
   "settings": {
     "here": "ici",
@@ -117,6 +159,11 @@
   "symptom_checker": {
     "delete_entry": "Supprimer l'entrée",
     "entry_deleted": "Entrée supprimée",
+    "errors": {
+      "adding_symptoms": "Désolé, nous n'avons pas pu enregistrer vos symptômes",
+      "deleting_symptom_log": "Désolé, nous n'avons pas pu supprimer le journal des symptômes",
+      "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
+    },
     "find_a_test_center": "Trouver un centre de test",
     "find_a_test_center_nearby": "Trouver un centre de test à proximité",
     "get_tested": "Nous vous recommandons de vous faire tester pour la COVID-19.",
