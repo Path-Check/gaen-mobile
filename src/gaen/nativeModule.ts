@@ -11,11 +11,6 @@ import { ExposureKey } from "../exposureKey"
 import Logger from "../logger"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
-import {
-  CheckIn,
-  SymptomLogEntry,
-  SymptomLogEntryAttributes,
-} from "../MyHealth/symptoms"
 
 // Event Subscriptions
 export const subscribeToExposureEvents = (
@@ -271,44 +266,4 @@ const utilsModule = NativeModules.UtilsModule
 
 export const openAppSettings = (): void => {
   utilsModule.openAppSettings()
-}
-
-// Check In Module
-const checkInModule = NativeModules.CheckInModule
-
-export const getCheckIns = async (): Promise<CheckIn[]> => {
-  return checkInModule.getCheckIns()
-}
-
-export const addCheckIn = (checkIn: CheckIn): Promise<void> => {
-  return checkInModule.addCheckIn(checkIn)
-}
-
-export const deleteAllCheckIns = async (): Promise<"success"> => {
-  return checkInModule.deleteCheckins()
-}
-
-// Symptom Log Entry Module
-const symptomLogEntryModule = NativeModules.SymptomLogEntryModule
-
-export const createLogEntry = (
-  entry: SymptomLogEntryAttributes,
-): Promise<void> => {
-  return symptomLogEntryModule.addSymptomLogEntry(entry)
-}
-
-export const modifyLogEntry = (entry: SymptomLogEntry): Promise<void> => {
-  return symptomLogEntryModule.updateSymptomLogEntry(entry)
-}
-
-export const deleteLogEntry = (symptomLogEntryId: string): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogEntry(symptomLogEntryId)
-}
-
-export const getLogEntries = (): Promise<SymptomLogEntry[]> => {
-  return symptomLogEntryModule.getSymptomLogEntries()
-}
-
-export const deleteAllSymptomLogs = async (): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogs()
 }

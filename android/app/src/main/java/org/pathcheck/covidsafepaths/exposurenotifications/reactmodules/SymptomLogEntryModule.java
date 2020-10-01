@@ -62,4 +62,10 @@ public class SymptomLogEntryModule extends ReactContextBaseJavaModule {
     RealmSecureStorageBte.INSTANCE.deleteSymptomLogs();
     promise.resolve(null);
   }
+
+  @ReactMethod
+  public void deleteStaleSymptomLogs(Promise promise) {
+    RealmSecureStorageBte.INSTANCE.deleteStaleSymptomLogs();
+    promise.resolve(null);
+  }
 }

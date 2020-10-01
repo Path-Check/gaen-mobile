@@ -8,7 +8,9 @@ import {
   getCheckIns,
   addCheckIn,
   createLogEntry,
-} from "../gaen/nativeModule"
+  deleteStaleCheckIns,
+  deleteStaleSymptomLogs,
+} from "./nativeModule"
 import {
   Symptom,
   CheckInStatus,
@@ -16,7 +18,7 @@ import {
 } from "./symptoms"
 import Logger from "../logger"
 
-jest.mock("../gaen/nativeModule.ts")
+jest.mock("./nativeModule.ts")
 jest.mock("./symptoms.ts")
 jest.mock("../logger.ts")
 describe("SymptomLogProvider", () => {
@@ -166,6 +168,22 @@ describe("SymptomLogProvider", () => {
 
       await waitFor(() => {
         expect(serializeSpy).toHaveBeenCalledWith(logEntries, checkIns)
+      })
+    })
+
+    it("deletes all the stale data on load", async () => {
+      const deleteStaleCheckInsSpy = deleteStaleCheckIns as jest.Mock
+      const deleteStaleSymptomLogsSpy = deleteStaleSymptomLogs as jest.Mock
+
+      render(
+        <SymptomLogProvider>
+          <CurrentCheckInStatus />
+        </SymptomLogProvider>,
+      )
+
+      await waitFor(() => {
+        expect(deleteStaleSymptomLogsSpy).toHaveBeenCalled()
+        expect(deleteStaleCheckInsSpy).toHaveBeenCalled()
       })
     })
 
