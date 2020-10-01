@@ -266,12 +266,9 @@
       "sixty_five_and_over": "65+"
     },
     "call_emergency_services": {
-      "call_emergency_services": "Call 911"
-    },
-    "call911": {
-      "based_on_your_symptoms": "Based on your symptoms, you may need urgent medical care. Please call 911 or got to the nearest emergency department.\nTell the 911 operator or emergency staff if you have had contact with someone with COVID-19",
+      "call_emergencies": "Call {{emergencyPhoneNumber}}",
       "seek_medical_attention": "Seek medical attention immediately",
-      "urgent_medical_attention_needed": "Urgent medical attention may be needed. Please call 911 or go to the Emergency Department"
+      "urgent_medical_attention_needed": "Urgent medical attention may be needed. Please call {{emergencyPhoneNumber}} or go to the Emergency Department"
     },
     "emergency_symptoms": {
       "are_you_experiencing": "Are you experiencing any of these emergency symptoms?",
