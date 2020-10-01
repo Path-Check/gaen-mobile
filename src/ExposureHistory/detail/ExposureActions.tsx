@@ -4,11 +4,11 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { Stacks } from "../../navigation"
+import { ModalStackScreens, Stacks } from "../../navigation"
 import { GlobalText, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
-import { Colors, Iconography, Spacing, Typography } from "../../styles"
+import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
@@ -25,6 +25,12 @@ const ExposureActions: FunctionComponent = () => {
 
   const handleOnPressNextStep = () => {
     Linking.openURL(healthAuthorityAdviceUrl)
+  }
+
+  const handleOnPressPersonalizeMyGuidance = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.SelfScreener,
+    })
   }
 
   const displayNextStepsLink =
@@ -64,12 +70,12 @@ const ExposureActions: FunctionComponent = () => {
         </View>
         {displaySelfScreener && (
           <Button
-            onPress={() => navigation.navigate(Stacks.SelfScreener)}
+            onPress={handleOnPressPersonalizeMyGuidance}
             label={t(
               "exposure_history.exposure_detail.personalize_my_guidance",
             )}
             customButtonStyle={style.personalizeGuidanceButton}
-            customButtonInnerStyle={style.personalizeGuidanceButtonGradient}
+            customButtonInnerStyle={style.personalizeGuidanceButtonInner}
             customTextStyle={style.personalizeGuidanceButtonText}
             hasRightArrow
             outlined
@@ -105,7 +111,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const navigateToCallbackForm = () => {
+  const handleOnPressRequestCallback = () => {
     navigation.navigate(Stacks.Callback)
   }
 
@@ -118,8 +124,8 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
       </GlobalText>
       <Button
         customButtonStyle={style.requestCallbackButton}
-        customButtonInnerStyle={style.requestCallbackButtonGradient}
-        onPress={navigateToCallbackForm}
+        customButtonInnerStyle={style.requestCallbackButtonInner}
+        onPress={handleOnPressRequestCallback}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
         hasRightArrow
       />
@@ -193,7 +199,8 @@ const style = StyleSheet.create({
     alignSelf: "center",
     paddingVertical: Spacing.small,
   },
-  requestCallbackButtonGradient: {
+  requestCallbackButtonInner: {
+    ...Buttons.medium,
     width: "100%",
   },
   personalizeGuidanceButton: {
@@ -206,7 +213,8 @@ const style = StyleSheet.create({
     ...Typography.buttonPrimary,
     color: Colors.primary110,
   },
-  personalizeGuidanceButtonGradient: {
+  personalizeGuidanceButtonInner: {
+    ...Buttons.medium,
     width: "100%",
     justifyContent: "space-between",
   },

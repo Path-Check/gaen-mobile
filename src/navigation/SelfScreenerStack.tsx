@@ -1,6 +1,17 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
-import { SelfScreenerStackScreens } from "."
+import { StyleSheet, TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+  StackNavigationOptions,
+} from "@react-navigation/stack"
+import { SvgXml } from "react-native-svg"
+
+import { SelfScreenerProvider } from "../SelfScreenerContext"
+import { SelfScreenerStackScreens, Stacks } from "./index"
+
 import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
 import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
 import NoEmergencySymptoms from "../SelfScreener/NoEmergencySymptoms"
@@ -11,13 +22,76 @@ import UnderlyingConditions from "../SelfScreener/UnderlyingConditions"
 import AgeRangeQuestion from "../SelfScreener/AgeRangeQuestion"
 import Summary from "../SelfScreener/Summary"
 import Guidance from "../SelfScreener/Guidance"
-import { SelfScreenerProvider } from "../SelfScreenerContext"
+
+import { Icons } from "../assets"
+import { Colors, Iconography, Spacing } from "../styles"
 
 const Stack = createStackNavigator()
+
+const backButton = () => <BackButton />
+const BackButton = () => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  return (
+    <TouchableOpacity
+      onPress={navigation.goBack}
+      accessible
+      accessibilityLabel={t("export.code_input_button_back")}
+    >
+      <View style={style.navigationButton}>
+        <SvgXml
+          xml={Icons.ArrowLeft}
+          fill={Colors.black}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+        />
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+const cancelButton = () => <CancelButton />
+const CancelButton = () => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate(Stacks.ExposureHistoryFlow)}
+      accessible
+      accessibilityLabel={t("export.code_input_button_cancel")}
+    >
+      <View style={style.navigationButton}>
+        <SvgXml
+          xml={Icons.X}
+          fill={Colors.black}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+        />
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+const style = StyleSheet.create({
+  navigationButton: {
+    padding: Spacing.medium,
+  },
+})
+
+const navigationBarOptions: StackNavigationOptions = {
+  title: "",
+  headerStyle: { backgroundColor: Colors.secondary10 },
+  headerLeft: backButton,
+  headerRight: cancelButton,
+  headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
+}
+
 const SelfAssessmentStack: FunctionComponent = () => {
   return (
     <SelfScreenerProvider>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={navigationBarOptions}>
         <Stack.Screen
           name={SelfScreenerStackScreens.SelfScreenerIntro}
           component={SelfScreenerIntro}
@@ -26,37 +100,30 @@ const SelfAssessmentStack: FunctionComponent = () => {
         <Stack.Screen
           name={SelfScreenerStackScreens.EmergencySymptomsQuestions}
           component={EmergencySymptomsQuestions}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.NoEmergencySymptoms}
           component={NoEmergencySymptoms}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.CallEmergencyServices}
           component={CallEmergencyServices}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.GeneralSymptoms}
           component={GeneralSymptoms}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.GeneralSymptomsSummary}
           component={GeneralSymptomsSummary}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.UnderlyingConditions}
           component={UnderlyingConditions}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.AgeRange}
           component={AgeRangeQuestion}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.Summary}

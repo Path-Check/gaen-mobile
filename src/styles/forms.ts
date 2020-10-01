@@ -1,4 +1,4 @@
-import { ViewStyle, TextStyle, ImageStyle } from "react-native"
+import { ViewStyle, TextStyle } from "react-native"
 
 import * as Colors from "./colors"
 import * as Spacing from "./spacing"
@@ -24,15 +24,6 @@ export const required: TextStyle = {
   fontSize: Typography.xSmall,
   color: Colors.primaryText,
   marginTop: Spacing.xSmall,
-}
-
-export const checkboxIcon: ImageStyle = {
-  width: 30,
-  height: 30,
-}
-
-export const checkboxText: TextStyle = {
-  ...Typography.mediumFont,
 }
 
 export const textInput: TextStyle = {

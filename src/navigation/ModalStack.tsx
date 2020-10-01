@@ -11,6 +11,7 @@ import AffectedUserStack from "../AffectedUserFlow/"
 import HowItWorksStack from "./HowItWorksStack"
 import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
 import AtRiskRecommendationScreen from "../MyHealth/AtRiskRecommendation"
+import SelfScreenerStack from "./SelfScreenerStack"
 
 const Stack = createStackNavigator()
 
@@ -30,9 +31,6 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={Stacks.AffectedUserStack}
         component={AffectedUserStack}
-        options={{
-          gestureEnabled: false,
-        }}
       />
       <Stack.Screen name={Stacks.HowItWorksReviewFromSettings}>
         {(props) => (
@@ -53,6 +51,13 @@ const ModalStack: FunctionComponent = () => {
         component={AtRiskRecommendationScreen}
         options={{
           ...TransitionPresets.ModalTransition,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={Stacks.SelfScreener}
+        component={SelfScreenerStack}
+        options={{
           headerShown: false,
         }}
       />

@@ -107,6 +107,7 @@ export type ModalStackScreen =
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
+  | "SelfScreener"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
@@ -118,6 +119,7 @@ export const ModalStackScreens: {
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
+  SelfScreener: "SelfScreener",
 }
 
 export type SettingsStackScreen =
