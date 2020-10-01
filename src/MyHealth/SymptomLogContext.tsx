@@ -158,6 +158,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     try {
       await deleteCheckIns()
       await getCheckIns()
+      setTodaysCheckIn(initialState.todaysCheckIn)
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)

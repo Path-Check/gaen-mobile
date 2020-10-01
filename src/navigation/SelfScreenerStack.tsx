@@ -10,7 +10,7 @@ import {
 import { SvgXml } from "react-native-svg"
 
 import { SelfScreenerProvider } from "../SelfScreenerContext"
-import { SelfScreenerStackScreens, Stacks } from "./index"
+import { SelfScreenerStackScreens, Stack as AllStacks } from "./index"
 
 import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
 import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
@@ -51,44 +51,48 @@ const BackButton = () => {
   )
 }
 
-const cancelButton = () => <CancelButton />
-const CancelButton = () => {
-  const { t } = useTranslation()
-  const navigation = useNavigation()
+type SelfScreenerStackProps = {
+  destinationOnCancel: AllStacks
+}
 
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(Stacks.ExposureHistoryFlow)}
-      accessible
-      accessibilityLabel={t("export.code_input_button_cancel")}
-    >
-      <View style={style.navigationButton}>
-        <SvgXml
-          xml={Icons.X}
-          fill={Colors.black}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
-        />
-      </View>
-    </TouchableOpacity>
+const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
+  destinationOnCancel,
+}) => {
+  const cancelButton = () => (
+    <CancelButton destinationOnCancel={destinationOnCancel} />
   )
-}
+  const CancelButton: FunctionComponent<SelfScreenerStackProps> = ({
+    destinationOnCancel,
+  }) => {
+    const { t } = useTranslation()
+    const navigation = useNavigation()
 
-const style = StyleSheet.create({
-  navigationButton: {
-    padding: Spacing.medium,
-  },
-})
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate(destinationOnCancel)}
+        accessible
+        accessibilityLabel={t("export.code_input_button_cancel")}
+      >
+        <View style={style.navigationButton}>
+          <SvgXml
+            xml={Icons.X}
+            fill={Colors.black}
+            width={Iconography.xxSmall}
+            height={Iconography.xxSmall}
+          />
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
-const navigationBarOptions: StackNavigationOptions = {
-  title: "",
-  headerStyle: { backgroundColor: Colors.secondary10 },
-  headerLeft: backButton,
-  headerRight: cancelButton,
-  headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
-}
+  const navigationBarOptions: StackNavigationOptions = {
+    title: "",
+    headerStyle: { backgroundColor: Colors.secondary10 },
+    headerLeft: backButton,
+    headerRight: cancelButton,
+    headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
+  }
 
-const SelfAssessmentStack: FunctionComponent = () => {
   return (
     <SelfScreenerProvider>
       <Stack.Navigator screenOptions={navigationBarOptions}>
@@ -140,4 +144,10 @@ const SelfAssessmentStack: FunctionComponent = () => {
   )
 }
 
-export default SelfAssessmentStack
+const style = StyleSheet.create({
+  navigationButton: {
+    padding: Spacing.medium,
+  },
+})
+
+export default SelfScreenerStack

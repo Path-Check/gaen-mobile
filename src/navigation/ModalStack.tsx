@@ -55,12 +55,35 @@ const ModalStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={Stacks.SelfScreener}
-        component={SelfScreenerStack}
+        name={Stacks.SelfScreenerFromExposureDetails}
         options={{
           headerShown: false,
         }}
-      />
+      >
+        {(props) => {
+          return (
+            <SelfScreenerStack
+              {...props}
+              destinationOnCancel={Stacks.ExposureHistoryFlow}
+            />
+          )
+        }}
+      </Stack.Screen>
+      <Stack.Screen
+        name={Stacks.SelfScreenerFromMyHealth}
+        options={{
+          headerShown: false,
+        }}
+      >
+        {(props) => {
+          return (
+            <SelfScreenerStack
+              {...props}
+              destinationOnCancel={Stacks.MyHealth}
+            />
+          )
+        }}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

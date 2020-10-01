@@ -15,7 +15,7 @@ import { showMessage } from "react-native-flash-message"
 
 import { GlobalText, Button } from "../components"
 import { CheckInStatus } from "./symptoms"
-import { MyHealthStackScreens } from "../navigation"
+import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
 
 import {
   Outlines,
@@ -56,7 +56,9 @@ const Today: FunctionComponent = () => {
         ...Affordances.errorFlashMessageOptions,
       })
     } else {
-      navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+      navigation.navigate(Stacks.Modal, {
+        screen: ModalStackScreens.SelfScreenerFromMyHealth,
+      })
     }
   }
 
@@ -183,7 +185,7 @@ const FeelingNotWellContent: FunctionComponent = () => {
       <GlobalText style={style.healthAssessmentText}>
         {t("symptom_checker.get_tested")}
       </GlobalText>
-      {findATestCenterUrl && (
+      {Boolean(findATestCenterUrl) && (
         <Button
           label={t("symptom_checker.find_a_test_center")}
           onPress={handleOnPressFindTestCenter}

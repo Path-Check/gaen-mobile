@@ -86,7 +86,7 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
             {t("symptom_checker.get_tested")}
           </GlobalText>
         </View>
-        {findATestCenterUrl && (
+        {Boolean(findATestCenterUrl) && (
           <Button
             label={t("symptom_checker.find_a_test_center_nearby")}
             onPress={handleOnPressFindTestCenter}
