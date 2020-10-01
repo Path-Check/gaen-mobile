@@ -33,6 +33,8 @@ import {
 
 export type SymptomLogState = {
   dailyLogData: DayLogData[]
+  selectLogEntry: (logEntry: DayLogData) => void
+  selectedLogEntry: DayLogData | null
   addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
   deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
@@ -44,6 +46,8 @@ export type SymptomLogState = {
 
 const initialState: SymptomLogState = {
   dailyLogData: [],
+  selectLogEntry: (_logEntry: DayLogData) => {},
+  selectedLogEntry: null,
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -74,6 +78,13 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   const [todaysCheckIn, setTodaysCheckIn] = useState<CheckIn>(
     initialState.todaysCheckIn,
   )
+  const [selectedLogEntry, setSelectedLogEntry] = useState(
+    initialState.selectedLogEntry,
+  )
+
+  const selectLogEntry = (logEntry: DayLogData) => {
+    setSelectedLogEntry(logEntry)
+  }
 
   const detectTodaysCheckIn = (rawCheckIns: CheckIn[]) => {
     const checkInAddedToday = rawCheckIns.find(({ date }) => {
@@ -172,6 +183,8 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
         addTodaysCheckIn,
         todaysCheckIn,
         dailyLogData,
+        selectLogEntry,
+        selectedLogEntry,
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,

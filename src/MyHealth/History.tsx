@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet } from "react-native"
 
 import { useSymptomLogContext } from "./SymptomLogContext"
@@ -9,14 +9,16 @@ import DaySummary from "./DaySummary"
 import { DayLogData } from "./symptoms"
 
 const History: FunctionComponent = () => {
-  const { dailyLogData } = useSymptomLogContext()
-
-  const [selectedDay, setSelectedDay] = useState<DayLogData | null>(null)
+  const {
+    dailyLogData,
+    selectLogEntry,
+    selectedLogEntry,
+  } = useSymptomLogContext()
 
   const logDataHistory = toLogDataHistory(dailyLogData, 30)
 
   const handleOnSelectDate = (logData: DayLogData) => {
-    setSelectedDay(logData)
+    selectLogEntry(logData)
   }
 
   return (
@@ -29,10 +31,13 @@ const History: FunctionComponent = () => {
         <Calendar
           logDataHistory={logDataHistory}
           onSelectDate={handleOnSelectDate}
-          selectedDay={selectedDay}
+          selectedDay={selectedLogEntry}
         />
-        {selectedDay && (
-          <DaySummary key={selectedDay.checkIn.date} dayLogData={selectedDay} />
+        {selectedLogEntry && (
+          <DaySummary
+            key={selectedLogEntry.checkIn.date}
+            dayLogData={selectedLogEntry}
+          />
         )}
       </ScrollView>
     </>
