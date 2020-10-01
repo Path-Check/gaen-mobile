@@ -50,6 +50,7 @@ export const gradientNeutral75 = [neutral75, neutral100]
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"
 export const transparentNeutral30 = applyOpacity(neutral30, 0.4)
+export const transparentPrimaryText = applyOpacity(neutral140, 0.3)
 
 // Backgrounds
 export const primaryLightBackground = white

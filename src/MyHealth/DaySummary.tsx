@@ -28,6 +28,10 @@ const CheckInSummary: FunctionComponent<CheckInSummaryProps> = ({ status }) => {
       text: t("my_health.symptom_log.did_not_check_in"),
       colorStyle: style.statusDotGray,
     }
+    const tooOldContent: CheckInContent = {
+      text: t("my_health.symptom_log.too_old"),
+      colorStyle: style.statusDotGray,
+    }
     const feelingNotWellContent: CheckInContent = {
       text: t("my_health.symptom_log.feeling_not_well"),
       colorStyle: style.statusDotOrange,
@@ -40,6 +44,8 @@ const CheckInSummary: FunctionComponent<CheckInSummaryProps> = ({ status }) => {
     switch (status) {
       case CheckInStatus.NotCheckedIn:
         return didNotCheckInContent
+      case CheckInStatus.TooOld:
+        return tooOldContent
       case CheckInStatus.FeelingNotWell:
         return feelingNotWellContent
       case CheckInStatus.FeelingGood:

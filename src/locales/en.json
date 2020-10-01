@@ -346,7 +346,8 @@
     "symptom_log": {
       "feeling_well": "You were feeling well",
       "feeling_not_well": "You were not feeling well",
-      "did_not_check_in": "You did not check in"
+      "did_not_check_in": "You did not check in",
+      "too_old": "Data older than 14 days is not stored"
     }
   },
   "symptoms": {

@@ -15,9 +15,28 @@ jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 const defaultDate = dayjs(DateTimeUtils.daysAgo(2)).startOf("day").valueOf()
+const fifteenDaysAgo = dayjs(DateTimeUtils.daysAgo(15)).startOf("day").valueOf()
 
 describe("History", () => {
   describe("when a day is selected", () => {
+    describe("when a day > 14 days ago is selected", () => {
+      it('displays the "Datstore data older than 14 days" message', () => {
+        const { queryByText, getByTestId } = render(
+          <SymptomLogContext.Provider
+            value={factories.symptomLogContext.build({
+              dailyLogData: [],
+            })}
+          >
+            <History />
+          </SymptomLogContext.Provider>,
+        )
+        fireEvent.press(getByTestId(`calendar-day-${fifteenDaysAgo}`))
+        expect(
+          queryByText("Data older than 14 days is not stored"),
+        ).not.toBeNull()
+      })
+    })
+
     describe("before a day is manually selected", () => {
       it("displays the log for the current day", () => {
         const { queryByText } = render(

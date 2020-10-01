@@ -36,6 +36,10 @@ export const isInFuture = (date: Posix): boolean => {
   return date > Date.now()
 }
 
+export const isOlderThan14Days = (date: Posix): boolean => {
+  return date < daysAgo(14)
+}
+
 export const posixToDayjs = (posixDate: Posix): Dayjs | null => {
   const dayJsDate = dayjs.utc(posixDate)
   return dayJsDate.isValid() ? dayJsDate : null

@@ -23,6 +23,7 @@ export type Symptom =
 
 export enum CheckInStatus {
   NotCheckedIn,
+  TooOld,
   FeelingGood,
   FeelingNotWell,
 }

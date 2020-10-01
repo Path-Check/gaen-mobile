@@ -27,6 +27,12 @@ const DayIndicator: FunctionComponent<DayIndicatorProps> = ({
       case CheckInStatus.NotCheckedIn: {
         return [{ ...circleStyle }, { ...textStyle, color: Colors.primaryText }]
       }
+      case CheckInStatus.TooOld: {
+        return [
+          { ...circleStyle },
+          { ...textStyle, color: Colors.transparentPrimaryText },
+        ]
+      }
       case CheckInStatus.FeelingGood: {
         return [
           { ...circleStyle, borderColor: Colors.success100 },
@@ -96,6 +102,8 @@ const DayIndicator: FunctionComponent<DayIndicatorProps> = ({
             { ...textStyle, color: Colors.primaryText },
           ]
         }
+        default:
+          return [circleStyle, textStyle]
       }
     } else {
       return [circleStyle, textStyle]
@@ -104,7 +112,7 @@ const DayIndicator: FunctionComponent<DayIndicatorProps> = ({
 
   const baseStyles: IndicatorStyle = [styles.circleBase, styles.textBase]
 
-  const [circleStyle, textStyle] = [baseStyles]
+  const [[circleStyle, textStyle]] = [baseStyles]
     .map(applyIsTodayStyle)
     .map(applyRiskStyle)
     .map(applyIsSelectedStyle)

@@ -1,4 +1,5 @@
 import dayjs from "dayjs"
+import { DateTimeUtils } from "../utils"
 
 import { CheckInStatus, DayLogData } from "./symptoms"
 
@@ -19,6 +20,9 @@ export const toLogDataHistory = (
     {},
   )
   return calendar.map((date: Posix) => {
+    const status = DateTimeUtils.isOlderThan14Days(date)
+      ? CheckInStatus.TooOld
+      : CheckInStatus.NotCheckedIn
     if (dateLogDataMap[date]) {
       return dateLogDataMap[date]
     } else {
@@ -26,7 +30,7 @@ export const toLogDataHistory = (
         date,
         logEntries: [],
         checkIn: {
-          status: CheckInStatus.NotCheckedIn,
+          status: status,
           date,
         },
       }
