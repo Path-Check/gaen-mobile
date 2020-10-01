@@ -154,7 +154,7 @@ describe("ExposureDetail", () => {
       expect(selfScreenerButton).not.toBeNull()
       fireEvent.press(selfScreenerButton)
       expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-        screen: ModalStackScreens.SelfScreener,
+        screen: ModalStackScreens.SelfScreenerFromExposureDetails,
       })
     })
   })
