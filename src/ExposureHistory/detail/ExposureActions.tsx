@@ -146,6 +146,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
       <View style={style.recommendationBubbleCircle}>
         <SvgXml
           xml={icon}
+          fill={Colors.primary125}
           width={Iconography.small}
           height={Iconography.small}
         />
