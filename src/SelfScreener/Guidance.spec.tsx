@@ -5,6 +5,8 @@ import Guidance from "./Guidance"
 import { factories } from "../factories"
 import { SymptomGroup } from "./selfScreener"
 
+jest.mock("@react-navigation/native")
+
 describe("Guidance", () => {
   it("displays the appropriate heading for primary 1 symptoms", () => {
     const context = factories.selfScreenerContext.build({

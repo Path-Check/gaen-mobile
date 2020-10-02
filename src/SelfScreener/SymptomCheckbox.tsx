@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 
-import { Typography, Colors, Iconography, Outlines, Spacing } from "../styles"
+import { Colors, Iconography, Forms } from "../styles"
 import { Icons } from "../assets"
 
 interface SymptomCheckboxProps {
@@ -54,23 +54,10 @@ const SymptomCheckbox: FunctionComponent<SymptomCheckboxProps> = ({
 
 const style = StyleSheet.create({
   checkboxContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: Spacing.medium,
-    paddingLeft: Spacing.medium,
-    marginBottom: Spacing.medium,
-    borderRadius: Outlines.baseBorderRadius,
-    borderColor: Colors.secondary100,
-    borderWidth: Outlines.hairline,
-    backgroundColor: Colors.white,
+    ...Forms.radioOrCheckboxContainer,
   },
   checkboxText: {
-    ...Typography.body1,
-    ...Typography.largeFont,
-    color: Colors.primaryText,
-    width: "80%",
-    marginLeft: Spacing.medium,
+    ...Forms.radioOrCheckboxText,
   },
   pressing: {
     opacity: 0.5,

@@ -1,16 +1,18 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { TouchableOpacity, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { Button, GlobalText } from "../components"
-import { Colors, Iconography } from "../styles"
+import { Colors, Forms, Iconography } from "../styles"
 import { SelfScreenerStackScreens } from "../navigation"
-
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { AgeRange } from "./selfScreener"
+import SelfScreenerLayout from "./SelfScreenerLayout"
+
+import { Typography, Spacing, Buttons } from "../styles"
 
 const AgeRangeQuestion: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -28,12 +30,24 @@ const AgeRangeQuestion: FunctionComponent = () => {
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.Summary)
+    navigation.navigate(SelfScreenerStackScreens.Guidance)
   }
 
   return (
-    <View>
-      <GlobalText>{t("self_screener.age_range.how_old_are_you")}</GlobalText>
+    <SelfScreenerLayout
+      bottomActionsContent={
+        <Button
+          label={t("self_screener.age_range.get_my_guidance")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      }
+    >
+      <GlobalText style={style.headerText}>
+        {t("self_screener.age_range.how_old_are_you")}
+      </GlobalText>
       <RadioButton
         onPress={() => updateAgeRange(EIGHTEEN_TO_SIXTY_FOUR)}
         isSelected={ageRange === EIGHTEEN_TO_SIXTY_FOUR}
@@ -44,8 +58,7 @@ const AgeRangeQuestion: FunctionComponent = () => {
         isSelected={ageRange === SIXTY_FIVE_AND_OVER}
         label={ageRangeToString(SIXTY_FIVE_AND_OVER)}
       />
-      <Button label={t("common.next")} onPress={handleOnPressNext} />
-    </View>
+    </SelfScreenerLayout>
   )
 }
 
@@ -59,20 +72,60 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
   isSelected,
   label,
 }) => {
-  const checkboxIcon = isSelected
-    ? Icons.CheckboxChecked
-    : Icons.CheckboxUnchecked
+  const [pressing, setPressing] = useState<boolean>(false)
+
+  const radioIcon = isSelected ? Icons.RadioSelected : Icons.RadioUnselected
+  const radioColor = isSelected ? Colors.primary100 : Colors.neutral75
+
+  const handleOnPressIn = () => {
+    setPressing(true)
+  }
+  const handleOnPressOut = () => {
+    setPressing(false)
+  }
+  const pressingStyle = pressing ? style.pressing : {}
+
   return (
-    <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
-      <SvgXml
-        xml={checkboxIcon}
-        fill={Colors.primary125}
-        width={Iconography.small}
-        height={Iconography.small}
-      />
-      <GlobalText>{label}</GlobalText>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback
+      onPress={onPress}
+      onPressIn={handleOnPressIn}
+      onPressOut={handleOnPressOut}
+      accessibilityLabel={label}
+    >
+      <View style={{ ...style.radioContainer, ...pressingStyle }}>
+        <SvgXml
+          xml={radioIcon}
+          fill={radioColor}
+          width={Iconography.small}
+          height={Iconography.small}
+        />
+        <GlobalText style={style.radioText}>{label}</GlobalText>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
+
+const style = StyleSheet.create({
+  headerText: {
+    ...Typography.header1,
+    marginBottom: Spacing.medium,
+  },
+  radioContainer: {
+    ...Forms.radioOrCheckboxContainer,
+  },
+  radioText: {
+    ...Forms.radioOrCheckboxText,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
+  },
+  pressing: {
+    opacity: 0.5,
+  },
+})
 
 export default AgeRangeQuestion

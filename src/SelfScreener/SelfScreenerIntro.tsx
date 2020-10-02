@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-} from "react-native"
+import { ScrollView, StyleSheet, View, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
@@ -14,15 +8,8 @@ import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
 import { Button, GlobalText, StatusBar } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import {
-  Colors,
-  Iconography,
-  Layout,
-  Outlines,
-  Spacing,
-  Typography,
-} from "../styles"
-import { Images, Icons } from "../assets"
+import { Colors, Iconography, Layout, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
 const SelfScreenerIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -65,7 +52,6 @@ const SelfScreenerIntro: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <Image source={Images.SelfScreenerIntro} style={style.image} />
         <GlobalText style={style.headerText}>
           {t("self_screener.intro.covid19_self_screener")}
         </GlobalText>
@@ -73,45 +59,20 @@ const SelfScreenerIntro: FunctionComponent = () => {
           {t("self_screener.intro.find_out_how_to_care")}
         </GlobalText>
         <View style={style.bulletListContainer}>
-          <View style={style.bulletRow}>
-            <View style={style.bulletContainer}>
-              <View style={style.bullet} />
-            </View>
-            <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.this_is_not_intended")}
-            </GlobalText>
-          </View>
-          <View style={style.bulletRow}>
-            <View style={style.bulletContainer}>
-              <View style={style.bullet} />
-            </View>
-            <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.you_are_a_resident", {
-                healthAuthorityName,
-              })}
-            </GlobalText>
-          </View>
-          <View style={style.bulletRow}>
-            <View style={style.bulletContainer}>
-              <View style={style.bullet} />
-            </View>
-            <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.this_is_based_on")}
-            </GlobalText>
-          </View>
-          <View style={style.bulletRow}>
-            <View style={style.bulletContainer}>
-              <SvgXml
-                xml={Icons.EmergencyPlusInCircle}
-                fill={Colors.danger100}
-                width={Iconography.xxSmall}
-                height={Iconography.xxSmall}
-              />
-            </View>
-            <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
-            </GlobalText>
-          </View>
+          <GlobalText style={style.bulletText}>
+            {t("self_screener.intro.this_is_not_intended")}
+          </GlobalText>
+          <GlobalText style={style.bulletText}>
+            {t("self_screener.intro.you_are_a_resident", {
+              healthAuthorityName,
+            })}
+          </GlobalText>
+          <GlobalText style={style.bulletText}>
+            {t("self_screener.intro.this_is_based_on")}
+          </GlobalText>
+          <GlobalText style={style.bulletText}>
+            {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
+          </GlobalText>
         </View>
         <Button
           onPress={handleOnPressStartScreener}
@@ -133,6 +94,7 @@ const style = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingHorizontal: Spacing.xLarge,
+    paddingVertical: Spacing.xxxLarge,
   },
   cancelButtonContainer: {
     position: "absolute",
@@ -143,41 +105,22 @@ const style = StyleSheet.create({
   cancelButtonInnerContainer: {
     padding: Spacing.medium,
   },
-  image: {
-    width: "100%",
-    height: 200,
-    resizeMode: "contain",
-    marginBottom: Spacing.xxLarge,
-  },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
+    ...Typography.bold,
     marginBottom: Spacing.xSmall,
   },
   subheaderText: {
     ...Typography.body1,
-    marginBottom: Spacing.medium,
+    color: Colors.primaryText,
+    marginBottom: Spacing.xxxHuge,
   },
   bulletListContainer: {
-    marginBottom: Spacing.xxLarge,
-  },
-  bulletRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: Spacing.medium,
-  },
-  bulletContainer: {
-    width: Spacing.xSmall,
-    alignItems: "center",
-  },
-  bullet: {
-    borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.primary100,
-    width: Spacing.xxxSmall,
-    height: Spacing.xxxSmall,
+    marginBottom: Spacing.large,
   },
   bulletText: {
     ...Typography.body2,
-    marginLeft: Spacing.medium,
+    marginBottom: Spacing.medium,
   },
   button: {
     width: "100%",

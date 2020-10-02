@@ -262,6 +262,7 @@
   "self_screener": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
+      "get_my_guidance": "Get my guidance",
       "how_old_are_you": "How old are you?",
       "sixty_five_and_over": "65+"
     },
@@ -278,17 +279,15 @@
       "lightheadedness": "Severe, constant lightheadedness",
       "select_any": "Select all that apply (or none)."
     },
-    "general_symptoms_summary": {
-      "sorry_to_hear": "It's too bad you're feeling that way.",
-      "two_more_questions": "Since it's your first time here, let's answer two more questions to determine if you're at higher risk for getting very sick from COVID-19."
-    },
     "general_symptoms": {
       "aching": "Aching throughout the body",
+      "are_you_experiencing": "Are you experiencing any of these symptoms?",
       "cough": "New or worsening cough",
       "difficulty_breathing": "Mild or moderate difficulty breathing",
       "fever_or_chills": "Fevers or chills",
       "loss_of_smell_taste_appetite": "Sustained loss of smell, taste, or appetite",
       "other": "Other",
+      "select_any": "Select all that apply.",
       "vomiting_or_diarrhea": "Vomiting or diarrhea"
     },
     "guidance": {
@@ -302,8 +301,7 @@
       "find_telehealth": "Find telehealth services",
       "follow_cdc_guidance": "If you develop symptoms, follow CDC guidance.",
       "guidance": "Guidance",
-      "how_to_care_for_yourself_and_others": "How to care for yourself and others while sick with COVID-19 symptoms:",
-      "if_symptoms_develop": "If you develop any of these symptoms or if you start to feel worse, call your healthcare provider, clinician advice line, or telemedicine provider.",
+      "if_symptoms_develop": "If you develop any COVID-19 symptoms or if you start to feel worse, call your healthcare provider, clinician advice line, or telemedicine provider.",
       "may_help_you_feel_better": "Here are some steps that may help you feel better:",
       "monitor_your_symptoms": "Sorry you’re feeling ill. Stay at home and monitor your symptoms. Call your provider if you get worse symptoms, stay at home.",
       "practice_social_distancing": "Practice social distancing.",
@@ -329,24 +327,11 @@
       "this_is_not_intended": "This is not intended for diagnosis or treatment",
       "you_are_a_resident": "You are a resident of the community supported by {{ healthAuthorityName }}"
     },
-    "no_emergency_symptoms": {
-      "glad_to_hear": "Thanks, glad you're no experiencing emergency symptoms.",
-      "one_more_question": "One more question to determine if your symptoms might be related to COVID-19."
-    },
-    "summary": {
-      "asymptomatic_group": "Glad to hear you’re feeling well!\nEven though you’re not ill, you should stay home for 14 days. COVID-19 may be spread by people who are not showing symptoms.",
-      "get_my_guidance": "Get my guidance",
-      "non_covid_symptom_group": "Sorry you’re not feeling well.\nBased on your answers, you’re not currently showing common symptoms of COVID-19.",
-      "primary_symptom_group_1": "Sorry you’re not feeling well.\nYour symptoms may be related to COVID-19. You also have medical conditions that may put you at risk of becoming more seriously ill.",
-      "primary_symptom_group_2": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "primary_symptom_group_3": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "secondary_symptom_group_1": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "secondary_symptom_group_2": "Sorry you’re not feeling well. Based on your answers, your symptoms may be related to COVID-19."
-    },
     "underlying_conditions": {
       "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",
       "cerebrovascular_disease": "Cerebrovascular disease or nerological condition, such as stroke or dementia",
       "diabetes": "Diabetes",
+      "do_you_have": "Do you have any of the following conditions?",
       "heart_condition": "Serious heart condition, such as heart failure, coronary artery disease, or cardiomyopathy",
       "high_blood_pressure": "High blood pressure",
       "kidney_disease": "Chronic kidney disease",

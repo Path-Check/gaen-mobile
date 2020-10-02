@@ -14,13 +14,10 @@ import { SelfScreenerStackScreens, Stack as AllStacks } from "./index"
 
 import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
 import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
-import NoEmergencySymptoms from "../SelfScreener/NoEmergencySymptoms"
 import CallEmergencyServices from "../SelfScreener/CallEmergencyServices"
 import GeneralSymptoms from "../SelfScreener/GeneralSymptoms"
-import GeneralSymptomsSummary from "../SelfScreener/GeneralSymptomsSummary"
 import UnderlyingConditions from "../SelfScreener/UnderlyingConditions"
 import AgeRangeQuestion from "../SelfScreener/AgeRangeQuestion"
-import Summary from "../SelfScreener/Summary"
 import Guidance from "../SelfScreener/Guidance"
 
 import { Icons } from "../assets"
@@ -106,20 +103,12 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
           component={EmergencySymptomsQuestions}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.NoEmergencySymptoms}
-          component={NoEmergencySymptoms}
-        />
-        <Stack.Screen
           name={SelfScreenerStackScreens.CallEmergencyServices}
           component={CallEmergencyServices}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.GeneralSymptoms}
           component={GeneralSymptoms}
-        />
-        <Stack.Screen
-          name={SelfScreenerStackScreens.GeneralSymptomsSummary}
-          component={GeneralSymptomsSummary}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.UnderlyingConditions}
@@ -129,16 +118,13 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
           name={SelfScreenerStackScreens.AgeRange}
           component={AgeRangeQuestion}
         />
-        <Stack.Screen
-          name={SelfScreenerStackScreens.Summary}
-          component={Summary}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name={SelfScreenerStackScreens.Guidance}
-          component={Guidance}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name={SelfScreenerStackScreens.Guidance}>
+          {(props) => {
+            return (
+              <Guidance {...props} destinationOnCancel={destinationOnCancel} />
+            )
+          }}
+        </Stack.Screen>
       </Stack.Navigator>
     </SelfScreenerProvider>
   )

@@ -57,7 +57,10 @@ const CallEmergencyServices: FunctionComponent = () => {
       <TouchableOpacity
         onPress={handleOnPressCallEmergencyServices}
         accessibilityLabel={t(
-          "self_screener.call_emergency_services.call_emergency_services",
+          "self_screener.call_emergency_services.call_emergencies",
+          {
+            emergencyPhoneNumber,
+          },
         )}
         accessibilityRole="button"
         style={style.buttonContainer}
@@ -81,7 +84,7 @@ const CallEmergencyServices: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
     flexGrow: 1,
@@ -90,11 +93,11 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   icon: {
-    marginBottom: Spacing.huge,
+    marginBottom: Spacing.small,
   },
   headerText: {
     ...Typography.header2,
-    marginBottom: Spacing.small,
+    marginBottom: Spacing.medium,
   },
   bodyText: {
     ...Typography.body1,
