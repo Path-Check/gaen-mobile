@@ -45,13 +45,13 @@ const CallEmergencyServices: FunctionComponent = () => {
           style={style.icon}
         />
         <GlobalText style={style.headerText}>
-          {t("self_screener.call911.seek_medical_attention")}
-        </GlobalText>
-        <GlobalText style={style.subheaderText}>
-          {t("self_screener.call911.urgent_medical_attention_needed")}
+          {t("self_screener.call_emergency_services.seek_medical_attention")}
         </GlobalText>
         <GlobalText style={style.bodyText}>
-          {t("self_screener.call911.based_on_your_symptoms")}
+          {t(
+            "self_screener.call_emergency_services.urgent_medical_attention_needed",
+            { emergencyPhoneNumber },
+          )}
         </GlobalText>
       </View>
       <TouchableOpacity
@@ -63,7 +63,9 @@ const CallEmergencyServices: FunctionComponent = () => {
         style={style.buttonContainer}
       >
         <GlobalText style={style.buttonText}>
-          {t("self_screener.call_emergency_services.call_emergency_services")}
+          {t("self_screener.call_emergency_services.call_emergencies", {
+            emergencyPhoneNumber,
+          })}
         </GlobalText>
         <SvgXml
           xml={Icons.Arrow}
@@ -83,7 +85,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     paddingVertical: Spacing.xxxHuge,
     paddingHorizontal: Spacing.large,
   },
@@ -94,14 +96,9 @@ const style = StyleSheet.create({
     ...Typography.header2,
     marginBottom: Spacing.small,
   },
-  subheaderText: {
-    ...Typography.header3,
-    marginBottom: Spacing.xLarge,
-  },
   bodyText: {
-    ...Typography.header4,
-    ...Typography.base,
-    marginBottom: Spacing.huge,
+    ...Typography.body1,
+    marginBottom: Spacing.xLarge,
   },
   buttonContainer: {
     ...Buttons.primary,
