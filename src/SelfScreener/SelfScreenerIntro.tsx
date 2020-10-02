@@ -12,6 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
 import { Button, GlobalText, StatusBar } from "../components"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import {
   Colors,
@@ -27,6 +28,10 @@ const SelfScreenerIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const {
+    emergencyPhoneNumber,
+    healthAuthorityName,
+  } = useConfigurationContext()
 
   const handleOnPressStartScreener = () => {
     navigation.navigate(SelfScreenerStackScreens.EmergencySymptomsQuestions)
@@ -81,7 +86,9 @@ const SelfScreenerIntro: FunctionComponent = () => {
               <View style={style.bullet} />
             </View>
             <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.you_are_a_resident")}
+              {t("self_screener.intro.you_are_a_resident", {
+                healthAuthorityName,
+              })}
             </GlobalText>
           </View>
           <View style={style.bulletRow}>
@@ -102,7 +109,7 @@ const SelfScreenerIntro: FunctionComponent = () => {
               />
             </View>
             <GlobalText style={style.bulletText}>
-              {t("self_screener.intro.if_this_is")}
+              {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
             </GlobalText>
           </View>
         </View>
