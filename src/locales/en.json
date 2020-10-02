@@ -81,6 +81,7 @@
   "exposure_history": {
     "check_for_exposures": "Check for exposures",
     "exposure_detail": {
+      "2m_apart": "2m apart",
       "6ft_apart": "6ft apart",
       "general_guidance": "General Guidance",
       "ha_guidance_header": "What should I do?",
@@ -102,6 +103,7 @@
       "six_feet_apart": "Stay 6 feet apart",
       "stay_home": "Stay home when sick",
       "title": "Health Guidelines",
+      "two_meters_apart": "Stay 2 meters apart",
       "wash_your_hands": "Wash your hands often",
       "wear_a_mask": "Wear a mask"
     },

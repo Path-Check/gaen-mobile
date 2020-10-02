@@ -21,6 +21,7 @@ const ExposureActions: FunctionComponent = () => {
     displaySelfScreener,
     healthAuthorityName,
     healthAuthorityAdviceUrl,
+    measurementSystem,
   } = useConfigurationContext()
 
   const handleOnPressNextStep = () => {
@@ -35,6 +36,11 @@ const ExposureActions: FunctionComponent = () => {
 
   const displayNextStepsLink =
     !displaySelfScreener && healthAuthorityAdviceUrl !== ""
+
+  const stayApartRecommendationText =
+    measurementSystem === "Imperial"
+      ? t("exposure_history.exposure_detail.6ft_apart")
+      : t("exposure_history.exposure_detail.2m_apart")
 
   return (
     <>
@@ -61,7 +67,7 @@ const ExposureActions: FunctionComponent = () => {
           />
           <RecommendationBubble
             icon={Icons.StayApart}
-            text={t("exposure_history.exposure_detail.6ft_apart")}
+            text={stayApartRecommendationText}
           />
           <RecommendationBubble
             icon={Icons.WashHands}
