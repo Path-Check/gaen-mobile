@@ -133,6 +133,7 @@ const style = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingHorizontal: Spacing.xLarge,
+    paddingVertical: Spacing.xxxLarge,
   },
   cancelButtonContainer: {
     position: "absolute",
