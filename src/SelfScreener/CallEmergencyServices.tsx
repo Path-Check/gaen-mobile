@@ -57,7 +57,10 @@ const CallEmergencyServices: FunctionComponent = () => {
       <TouchableOpacity
         onPress={handleOnPressCallEmergencyServices}
         accessibilityLabel={t(
-          "self_screener.call_emergency_services.call_emergency_services",
+          "self_screener.call_emergency_services.call_emergencies",
+          {
+            emergencyPhoneNumber,
+          },
         )}
         accessibilityRole="button"
         style={style.buttonContainer}
