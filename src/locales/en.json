@@ -272,6 +272,7 @@
       "urgent_medical_attention_needed": "Urgent medical attention may be needed. Please call 911 or go to the Emergency Department"
     },
     "emergency_symptoms": {
+      "are_you_experiencing": "Are you experiencing any of these emergency symptoms?",
       "chest_pain": "Severe, constant chest pain or pressure",
       "difficulty_breathing": "Extreme difficulty breathing",
       "disorientation": "Serious disorientation or unresponsiveness",
@@ -322,7 +323,12 @@
     },
     "intro": {
       "agree_and_start_screener": "Agree and start screener",
-      "covid19_self_screener": "COVID-19 Self Screener"
+      "covid19_self_screener": "COVID-19 Self Screener",
+      "find_out_how_to_care": "Find out how to care for yourself and others after close contact with someone positive for COVID-19",
+      "if_this_is": "If this is an emergency, please call {{emergencyPhoneNumber}}",
+      "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn move about how the virus spreads and the illness it causes",
+      "this_is_not_intended": "This is not intended for diagnosis or treatment",
+      "you_are_a_resident": "You are a resident of the community supported by {{ healthAuthorityName }}"
     },
     "no_emergency_symptoms": {
       "glad_to_hear": "Thanks, glad you're no experiencing emergency symptoms.",
