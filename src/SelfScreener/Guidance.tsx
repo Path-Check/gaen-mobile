@@ -213,7 +213,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingBottom: Spacing.xxLarge,
+    paddingBottom: Spacing.huge,
   },
   topScrollViewBackground: {
     position: "absolute",
