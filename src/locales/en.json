@@ -262,9 +262,9 @@
   "self_screener": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
+      "get_my_guidance": "Get my guidance",
       "how_old_are_you": "How old are you?",
-      "sixty_five_and_over": "65+",
-      "get_my_guidance": "Get my guidance"
+      "sixty_five_and_over": "65+"
     },
     "call_emergency_services": {
       "call_emergencies": "Call {{emergencyPhoneNumber}}",
@@ -280,14 +280,14 @@
       "select_any": "Select all that apply (or none)."
     },
     "general_symptoms": {
-      "are_you_experiencing": "Are you experiencing any of these symptoms?",
-      "select_any": "Select all that apply.",
       "aching": "Aching throughout the body",
+      "are_you_experiencing": "Are you experiencing any of these symptoms?",
       "cough": "New or worsening cough",
       "difficulty_breathing": "Mild or moderate difficulty breathing",
       "fever_or_chills": "Fevers or chills",
       "loss_of_smell_taste_appetite": "Sustained loss of smell, taste, or appetite",
       "other": "Other",
+      "select_any": "Select all that apply.",
       "vomiting_or_diarrhea": "Vomiting or diarrhea"
     },
     "guidance": {
@@ -301,7 +301,6 @@
       "find_telehealth": "Find telehealth services",
       "follow_cdc_guidance": "If you develop symptoms, follow CDC guidance.",
       "guidance": "Guidance",
-      "how_to_care_for_yourself_and_others": "How to care for yourself and others while sick with COVID-19 symptoms:",
       "if_symptoms_develop": "If you develop any COVID-19 symptoms or if you start to feel worse, call your healthcare provider, clinician advice line, or telemedicine provider.",
       "may_help_you_feel_better": "Here are some steps that may help you feel better:",
       "monitor_your_symptoms": "Sorry you’re feeling ill. Stay at home and monitor your symptoms. Call your provider if you get worse symptoms, stay at home.",
@@ -331,8 +330,8 @@
     "underlying_conditions": {
       "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",
       "cerebrovascular_disease": "Cerebrovascular disease or nerological condition, such as stroke or dementia",
-      "do_you_have": "Do you have any of the following conditions?",
       "diabetes": "Diabetes",
+      "do_you_have": "Do you have any of the following conditions?",
       "heart_condition": "Serious heart condition, such as heart failure, coronary artery disease, or cardiomyopathy",
       "high_blood_pressure": "High blood pressure",
       "kidney_disease": "Chronic kidney disease",
