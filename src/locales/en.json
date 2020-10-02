@@ -331,6 +331,7 @@
     "underlying_conditions": {
       "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",
       "cerebrovascular_disease": "Cerebrovascular disease or nerological condition, such as stroke or dementia",
+      "do_you_have": "Do you have any of the following conditions?",
       "diabetes": "Diabetes",
       "heart_condition": "Serious heart condition, such as heart failure, coronary artery disease, or cardiomyopathy",
       "high_blood_pressure": "High blood pressure",

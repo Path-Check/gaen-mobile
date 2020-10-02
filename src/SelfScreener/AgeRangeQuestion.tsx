@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from "react"
+import { StyleSheet, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { TouchableOpacity, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { Button, GlobalText } from "../components"
 import { Colors, Iconography } from "../styles"
 import { SelfScreenerStackScreens } from "../navigation"
-
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { AgeRange } from "./selfScreener"
+import SelfScreenerLayout from "./SelfScreenerLayout"
+
+import { Typography, Spacing, Buttons } from "../styles"
 
 const AgeRangeQuestion: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -32,8 +34,20 @@ const AgeRangeQuestion: FunctionComponent = () => {
   }
 
   return (
-    <View>
-      <GlobalText>{t("self_screener.age_range.how_old_are_you")}</GlobalText>
+    <SelfScreenerLayout
+      bottomActionsContent={
+        <Button
+          label={t("self_screener.age_range.get_my_guidance")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      }
+    >
+      <GlobalText style={style.headerText}>
+        {t("self_screener.age_range.how_old_are_you")}
+      </GlobalText>
       <RadioButton
         onPress={() => updateAgeRange(EIGHTEEN_TO_SIXTY_FOUR)}
         isSelected={ageRange === EIGHTEEN_TO_SIXTY_FOUR}
@@ -44,11 +58,7 @@ const AgeRangeQuestion: FunctionComponent = () => {
         isSelected={ageRange === SIXTY_FIVE_AND_OVER}
         label={ageRangeToString(SIXTY_FIVE_AND_OVER)}
       />
-      <Button
-        label={t("self_screener.age_range.get_my_guidance")}
-        onPress={handleOnPressNext}
-      />
-    </View>
+    </SelfScreenerLayout>
   )
 }
 
@@ -77,5 +87,19 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
     </TouchableOpacity>
   )
 }
+
+const style = StyleSheet.create({
+  headerText: {
+    ...Typography.header1,
+    marginBottom: Spacing.medium,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
+  },
+})
 
 export default AgeRangeQuestion

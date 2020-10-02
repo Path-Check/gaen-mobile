@@ -1,12 +1,16 @@
-import { useNavigation } from "@react-navigation/native"
-import { ScrollView } from "react-native"
 import React, { FunctionComponent } from "react"
+import { StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { Button, GlobalText } from "../components"
 import { UnderlyingCondition } from "./selfScreener"
 import SymptomCheckbox from "./SymptomCheckbox"
+import SelfScreenerLayout from "./SelfScreenerLayout"
+
+import { Typography, Spacing, Buttons } from "../styles"
 
 const UnderlyingConditions: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -64,8 +68,21 @@ const UnderlyingConditions: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView>
-      <GlobalText>
+    <SelfScreenerLayout
+      bottomActionsContent={
+        <Button
+          label={t("common.next")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      }
+    >
+      <GlobalText style={style.headerText}>
+        {t("self_screener.underlying_conditions.do_you_have")}
+      </GlobalText>
+      <GlobalText style={style.subheaderText}>
         {t("self_screener.underlying_conditions.select_all_or_none")}
       </GlobalText>
       <SymptomCheckbox
@@ -128,13 +145,27 @@ const UnderlyingConditions: FunctionComponent = () => {
         onPress={() => updateUnderlyingConditions(PREGNANCY)}
         checked={underlyingConditions.includes(PREGNANCY)}
       />
-      <Button
-        label={t("common.next")}
-        onPress={handleOnPressNext}
-        hasRightArrow
-      />
-    </ScrollView>
+    </SelfScreenerLayout>
   )
 }
+
+const style = StyleSheet.create({
+  headerText: {
+    ...Typography.header1,
+    marginBottom: Spacing.medium,
+  },
+  subheaderText: {
+    ...Typography.header4,
+    ...Typography.base,
+    marginBottom: Spacing.huge,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
+  },
+})
 
 export default UnderlyingConditions
