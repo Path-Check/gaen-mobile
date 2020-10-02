@@ -121,7 +121,6 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
         <Stack.Screen
           name={SelfScreenerStackScreens.Guidance}
           component={Guidance}
-          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </SelfScreenerProvider>
