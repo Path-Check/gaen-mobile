@@ -1,18 +1,32 @@
 import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { GlobalText } from "../components"
+
+import { Button, GlobalText } from "../components"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { SymptomGroup } from "./selfScreener"
+import { Stack, Stacks } from "../navigation"
 
 import { Outlines, Colors, Spacing, Typography } from "../styles"
 
-const Guidance: FunctionComponent = () => {
+interface GuidanceProps {
+  destinationOnCancel?: Stack
+}
+
+const Guidance: FunctionComponent<GuidanceProps> = ({
+  destinationOnCancel = Stacks.ExposureHistoryFlow,
+}) => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
   const { symptomGroup } = useSelfScreenerContext()
 
   if (symptomGroup === null) {
     return null
+  }
+
+  const handleOnPressDone = () => {
+    navigation.navigate(destinationOnCancel)
   }
 
   const CallYourHealthcareProvider: FunctionComponent = () => {
@@ -54,16 +68,18 @@ const Guidance: FunctionComponent = () => {
 
     return (
       <>
-        <GlobalText>{t("self_screener.guidance.stay_at_home")}</GlobalText>
-        <GlobalText>{t("self_screener.guidance.dont_go_to_work")}</GlobalText>
-        <GlobalText>
+        <GlobalText style={style.bullet1}>
+          {t("self_screener.guidance.stay_at_home")}
+        </GlobalText>
+        <GlobalText style={style.bullet2}>
+          {t("self_screener.guidance.dont_go_to_work")}
+        </GlobalText>
+        <GlobalText style={style.bullet2}>
           {t("self_screener.guidance.dont_use_public_transport")}
         </GlobalText>
-        <GlobalText>{t("self_screener.guidance.seek_medical_care")}</GlobalText>
-        <GlobalText>
-          {t("self_screener.guidance.take_care_of_yourself")}
+        <GlobalText style={style.bullet2}>
+          {t("self_screener.guidance.seek_medical_care")}
         </GlobalText>
-        <GlobalText>{t("self_screener.guidance.protect_others")}</GlobalText>
       </>
     )
   }
@@ -72,22 +88,29 @@ const Guidance: FunctionComponent = () => {
     const { t } = useTranslation()
     return (
       <>
-        <GlobalText>
+        <GlobalText style={style.bullet1}>
           {t("self_screener.guidance.watch_for_covid_symptoms")}
         </GlobalText>
-        <GlobalText>
+        <GlobalText style={style.bullet1}>
           {t("self_screener.guidance.if_symptoms_develop")}
         </GlobalText>
-
-        <GlobalText>
+        <GlobalText style={style.bullet2}>
           {t("self_screener.guidance.may_help_you_feel_better")}
         </GlobalText>
-
-        <GlobalText>{t("self_screener.guidance.rest")}</GlobalText>
-
-        <GlobalText>{t("self_screener.guidance.drink_water")}</GlobalText>
-        <GlobalText>{t("self_screener.guidance.cover_coughs")}</GlobalText>
-        <GlobalText>{t("self_screener.guidance.clean_hands")}</GlobalText>
+        <View style={style.bullet3Container}>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.rest")}
+          </GlobalText>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.drink_water")}
+          </GlobalText>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.cover_coughs")}
+          </GlobalText>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.clean_hands")}
+          </GlobalText>
+        </View>
       </>
     )
   }
@@ -97,16 +120,24 @@ const Guidance: FunctionComponent = () => {
 
     return (
       <>
-        <GlobalText>{t("self_screener.guidance.stay_home_14_days")}</GlobalText>
-        <GlobalText>{t("self_screener.guidance.take_temperature")}</GlobalText>
-        <GlobalText>
+        <GlobalText style={style.bullet1}>
+          {t("self_screener.guidance.stay_home_14_days")}
+        </GlobalText>
+        <GlobalText style={style.bullet2}>
+          {t("self_screener.guidance.take_temperature")}
+        </GlobalText>
+        <GlobalText style={style.bullet2}>
           {t("self_screener.guidance.practice_social_distancing")}
         </GlobalText>
-        <GlobalText>{t("self_screener.guidance.stay_6_feet_away")}</GlobalText>
-        <GlobalText>
-          {t("self_screener.guidance.stay_away_from_higher_risk_people")}
-        </GlobalText>
-        <GlobalText>
+        <View style={style.bullet3Container}>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.stay_6_feet_away")}
+          </GlobalText>
+          <GlobalText style={style.bullet3}>
+            {t("self_screener.guidance.stay_away_from_higher_risk_people")}
+          </GlobalText>
+        </View>
+        <GlobalText style={style.bullet2}>
           {t("self_screener.guidance.follow_cdc_guidance")}
         </GlobalText>
       </>
@@ -153,6 +184,7 @@ const Guidance: FunctionComponent = () => {
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
     >
       <View style={style.topScrollViewBackground} />
       <View style={style.headerContainer}>
@@ -166,6 +198,12 @@ const Guidance: FunctionComponent = () => {
       <View style={style.bulletListContainer}>
         {instructionsForSymptomGroup(symptomGroup)}
       </View>
+      <Button
+        onPress={handleOnPressDone}
+        label={t("common.done")}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
+      />
     </ScrollView>
   )
 }
@@ -205,6 +243,7 @@ const style = StyleSheet.create({
   bulletListContainer: {
     paddingHorizontal: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
+    marginBottom: Spacing.xxLarge,
   },
   bullet1: {
     ...Typography.header4,
@@ -219,14 +258,21 @@ const style = StyleSheet.create({
   },
   bullet3Container: {
     paddingLeft: Spacing.medium,
-    paddingTop: Spacing.xSmall,
+    paddingTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
     borderLeftWidth: Outlines.hairline,
     borderLeftColor: Colors.neutral25,
   },
   bullet3: {
     ...Typography.body1,
-    marginBottom: Spacing.xSmall,
+    marginBottom: Spacing.xxSmall,
+  },
+  button: {
+    width: "100%",
+    paddingHorizontal: Spacing.large,
+  },
+  buttonInner: {
+    width: "100%",
   },
 })
 

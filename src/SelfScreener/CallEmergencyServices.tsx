@@ -81,7 +81,7 @@ const CallEmergencyServices: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
     flexGrow: 1,

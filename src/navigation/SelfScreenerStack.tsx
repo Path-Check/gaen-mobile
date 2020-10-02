@@ -118,10 +118,13 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
           name={SelfScreenerStackScreens.AgeRange}
           component={AgeRangeQuestion}
         />
-        <Stack.Screen
-          name={SelfScreenerStackScreens.Guidance}
-          component={Guidance}
-        />
+        <Stack.Screen name={SelfScreenerStackScreens.Guidance}>
+          {(props) => {
+            return (
+              <Guidance {...props} destinationOnCancel={destinationOnCancel} />
+            )
+          }}
+        </Stack.Screen>
       </Stack.Navigator>
     </SelfScreenerProvider>
   )
