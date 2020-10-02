@@ -18,17 +18,15 @@ const SelfScreenerLayout: FunctionComponent<SelfScreenerLayoutProps> = ({
   const style = createStyle(insets)
 
   return (
-    <>
-      <View style={style.outerContainer}>
-        <ScrollView
-          alwaysBounceVertical={false}
-          contentContainerStyle={style.contentContainer}
-        >
-          {children}
-        </ScrollView>
-        <View style={style.bottomActionsContainer}>{bottomActionsContent}</View>
-      </View>
-    </>
+    <View style={style.outerContainer}>
+      <ScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={style.contentContainer}
+      >
+        {children}
+      </ScrollView>
+      <View style={style.bottomActionsContainer}>{bottomActionsContent}</View>
+    </View>
   )
 }
 
