@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { View, ScrollView, StyleSheet } from "react-native"
+import { View, ScrollView, StyleSheet, SafeAreaView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -83,15 +83,17 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
           checked={emergencySymptoms.includes(DISORIENTATION)}
         />
       </ScrollView>
-      <View style={style.buttonContainer}>
-        <Button
-          label={t("common.next")}
-          onPress={handleOnPressNext}
-          hasRightArrow
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
-      </View>
+      <SafeAreaView>
+        <View style={style.buttonContainer}>
+          <Button
+            label={t("common.next")}
+            onPress={handleOnPressNext}
+            hasRightArrow
+            customButtonStyle={style.button}
+            customButtonInnerStyle={style.buttonInner}
+          />
+        </View>
+      </SafeAreaView>
     </View>
   )
 }
@@ -118,7 +120,7 @@ const style = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     paddingTop: Spacing.medium,
-    paddingBottom: Spacing.huge,
+    paddingBottom: Spacing.xxMassive,
     paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.secondary10,
   },
