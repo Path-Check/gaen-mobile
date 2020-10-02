@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react"
-import { StyleSheet, TouchableOpacity } from "react-native"
+import React, { FunctionComponent, useState } from "react"
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { Button, GlobalText } from "../components"
-import { Colors, Iconography } from "../styles"
+import { Colors, Forms, Iconography } from "../styles"
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { AgeRange } from "./selfScreener"
@@ -72,19 +72,36 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
   isSelected,
   label,
 }) => {
-  const checkboxIcon = isSelected
-    ? Icons.CheckboxChecked
-    : Icons.CheckboxUnchecked
+  const [pressing, setPressing] = useState<boolean>(false)
+
+  const radioIcon = isSelected ? Icons.RadioSelected : Icons.RadioUnselected
+  const radioColor = isSelected ? Colors.primary100 : Colors.neutral75
+
+  const handleOnPressIn = () => {
+    setPressing(true)
+  }
+  const handleOnPressOut = () => {
+    setPressing(false)
+  }
+  const pressingStyle = pressing ? style.pressing : {}
+
   return (
-    <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
-      <SvgXml
-        xml={checkboxIcon}
-        fill={Colors.primary125}
-        width={Iconography.small}
-        height={Iconography.small}
-      />
-      <GlobalText>{label}</GlobalText>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback
+      onPress={onPress}
+      onPressIn={handleOnPressIn}
+      onPressOut={handleOnPressOut}
+      accessibilityLabel={label}
+    >
+      <View style={{ ...style.radioContainer, ...pressingStyle }}>
+        <SvgXml
+          xml={radioIcon}
+          fill={radioColor}
+          width={Iconography.small}
+          height={Iconography.small}
+        />
+        <GlobalText style={style.radioText}>{label}</GlobalText>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -93,12 +110,21 @@ const style = StyleSheet.create({
     ...Typography.header1,
     marginBottom: Spacing.medium,
   },
+  radioContainer: {
+    ...Forms.radioOrCheckboxContainer,
+  },
+  radioText: {
+    ...Forms.radioOrCheckboxText,
+  },
   button: {
     width: "100%",
   },
   buttonInner: {
     ...Buttons.medium,
     width: "100%",
+  },
+  pressing: {
+    opacity: 0.5,
   },
 })
 

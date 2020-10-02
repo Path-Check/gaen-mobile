@@ -46,3 +46,24 @@ export const inputIndicator: ViewStyle = {
   marginRight: Spacing.large,
   width: Spacing.large,
 }
+
+export const radioOrCheckboxContainer: ViewStyle = {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  paddingVertical: Spacing.medium,
+  paddingLeft: Spacing.medium,
+  marginBottom: Spacing.medium,
+  borderRadius: Outlines.baseBorderRadius,
+  borderColor: Colors.secondary100,
+  borderWidth: Outlines.hairline,
+  backgroundColor: Colors.white,
+}
+
+export const radioOrCheckboxText: TextStyle = {
+  ...Typography.body1,
+  ...Typography.largeFont,
+  color: Colors.primaryText,
+  width: "80%",
+  marginLeft: Spacing.medium,
+}

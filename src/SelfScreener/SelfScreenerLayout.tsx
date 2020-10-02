@@ -41,7 +41,6 @@ const createStyle = (insets: EdgeInsets) => {
       backgroundColor: Colors.primaryLightBackground,
     },
     contentContainer: {
-      flexGrow: 1,
       justifyContent: "space-between",
       paddingBottom: Spacing.xxLarge,
       paddingHorizontal: Spacing.large,

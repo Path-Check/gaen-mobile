@@ -37,6 +37,8 @@ import Plus from "./plus"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import QuestionMarkInCircle from "./questionMarkInCircle"
+import RadioSelected from "./radioSelected"
+import RadioUnselected from "./radioUnselected"
 import RadioWave from "./radioWave"
 import Refresh from "./refresh"
 import RestartWithCheck from "./restartWithCheck"
@@ -90,6 +92,8 @@ export const Icons = {
   Publish,
   QuestionMark,
   QuestionMarkInCircle,
+  RadioSelected,
+  RadioUnselected,
   RadioWave,
   Refresh,
   RestartWithCheck,
