@@ -19,5 +19,6 @@ export default Factory.define<Configuration>(() => ({
   healthAuthoritySupportsAnalytics: false,
   healthAuthorityAnalyticsUrl: null,
   healthAuthorityAnalyticsSiteId: null,
+  measurementSystem: "Imperial",
   regionCodes: ["REGION"],
 }))

@@ -2,6 +2,8 @@ import React, { FunctionComponent, createContext, useContext } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
 
+type MeasurementSystem = "Imperial" | "Metric"
+
 export interface Configuration {
   appDownloadLink: string
   appPackageName: string
@@ -20,6 +22,7 @@ export interface Configuration {
   healthAuthoritySupportsAnalytics: boolean
   healthAuthorityAnalyticsUrl: string | null
   healthAuthorityAnalyticsSiteId: number | null
+  measurementSystem: MeasurementSystem
   regionCodes: string[]
 }
 
@@ -41,6 +44,7 @@ const initialState = {
   healthAuthoritySupportsAnalytics: false,
   healthAuthorityAnalyticsUrl: null,
   healthAuthorityAnalyticsSiteId: null,
+  measurementSystem: "Imperial" as const,
   regionCodes: [],
 }
 
@@ -49,22 +53,28 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
-    FIND_A_TEST_CENTER_URL: findATestCenterUrl,
     EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
+    FIND_A_TEST_CENTER_URL: findATestCenterUrl,
     GAEN_AUTHORITY_NAME: healthAuthorityName,
     LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
     LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
+
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
   const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
+
+  const measurementSystem =
+    env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
+
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
   const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
+
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
@@ -92,6 +102,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthoritySupportsAnalytics,
         healthAuthorityAnalyticsUrl,
         healthAuthorityAnalyticsSiteId,
+        measurementSystem,
         regionCodes,
       }}
     >
