@@ -90,11 +90,11 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   icon: {
-    marginBottom: Spacing.huge,
+    marginBottom: Spacing.small,
   },
   headerText: {
     ...Typography.header2,
-    marginBottom: Spacing.small,
+    marginBottom: Spacing.medium,
   },
   bodyText: {
     ...Typography.body1,
