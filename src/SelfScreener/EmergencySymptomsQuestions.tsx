@@ -11,6 +11,7 @@ import { useSelfScreenerContext } from "../SelfScreenerContext"
 import SymptomCheckbox from "./SymptomCheckbox"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
+import SelfScreenerLayout from "./SelfScreenerLayout"
 
 const EmergencySymptomsQuestions: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
@@ -51,39 +52,8 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
   }
 
   return (
-    <View style={style.container}>
-      <ScrollView
-        contentContainerStyle={style.mainContentContainer}
-        alwaysBounceVertical={false}
-      >
-        <GlobalText style={style.headerText}>
-          {t("self_screener.emergency_symptoms.are_you_experiencing")}
-        </GlobalText>
-        <GlobalText style={style.subheaderText}>
-          {t("self_screener.emergency_symptoms.select_any")}
-        </GlobalText>
-        <SymptomCheckbox
-          label={emergencySymptomToString(CHEST_PAIN)}
-          onPress={() => updateSymptoms(CHEST_PAIN)}
-          checked={emergencySymptoms.includes(CHEST_PAIN)}
-        />
-        <SymptomCheckbox
-          label={emergencySymptomToString(SEVERE_DIFFICULTY_BREATHING)}
-          onPress={() => updateSymptoms(SEVERE_DIFFICULTY_BREATHING)}
-          checked={emergencySymptoms.includes(SEVERE_DIFFICULTY_BREATHING)}
-        />
-        <SymptomCheckbox
-          label={emergencySymptomToString(LIGHTHEADEDNESS)}
-          onPress={() => updateSymptoms(LIGHTHEADEDNESS)}
-          checked={emergencySymptoms.includes(LIGHTHEADEDNESS)}
-        />
-        <SymptomCheckbox
-          label={emergencySymptomToString(DISORIENTATION)}
-          onPress={() => updateSymptoms(DISORIENTATION)}
-          checked={emergencySymptoms.includes(DISORIENTATION)}
-        />
-      </ScrollView>
-      <View style={style.buttonContainer}>
+    <SelfScreenerLayout
+      bottomActionsContent={
         <Button
           label={t("common.next")}
           onPress={handleOnPressNext}
@@ -91,21 +61,39 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
           customButtonStyle={style.button}
           customButtonInnerStyle={style.buttonInner}
         />
-      </View>
-    </View>
+      }
+    >
+      <GlobalText style={style.headerText}>
+        {t("self_screener.emergency_symptoms.are_you_experiencing")}
+      </GlobalText>
+      <GlobalText style={style.subheaderText}>
+        {t("self_screener.emergency_symptoms.select_any")}
+      </GlobalText>
+      <SymptomCheckbox
+        label={emergencySymptomToString(CHEST_PAIN)}
+        onPress={() => updateSymptoms(CHEST_PAIN)}
+        checked={emergencySymptoms.includes(CHEST_PAIN)}
+      />
+      <SymptomCheckbox
+        label={emergencySymptomToString(SEVERE_DIFFICULTY_BREATHING)}
+        onPress={() => updateSymptoms(SEVERE_DIFFICULTY_BREATHING)}
+        checked={emergencySymptoms.includes(SEVERE_DIFFICULTY_BREATHING)}
+      />
+      <SymptomCheckbox
+        label={emergencySymptomToString(LIGHTHEADEDNESS)}
+        onPress={() => updateSymptoms(LIGHTHEADEDNESS)}
+        checked={emergencySymptoms.includes(LIGHTHEADEDNESS)}
+      />
+      <SymptomCheckbox
+        label={emergencySymptomToString(DISORIENTATION)}
+        onPress={() => updateSymptoms(DISORIENTATION)}
+        checked={emergencySymptoms.includes(DISORIENTATION)}
+      />
+    </SelfScreenerLayout>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: Colors.secondary10,
-    justifyContent: "center",
-  },
-  mainContentContainer: {
-    flexGrow: 1,
-    padding: Spacing.large,
-  },
   headerText: {
     ...Typography.header1,
     marginBottom: Spacing.medium,
@@ -114,13 +102,6 @@ const style = StyleSheet.create({
     ...Typography.header4,
     ...Typography.base,
     marginBottom: Spacing.huge,
-  },
-  buttonContainer: {
-    width: "100%",
-    paddingTop: Spacing.medium,
-    paddingBottom: Spacing.huge,
-    paddingHorizontal: Spacing.medium,
-    backgroundColor: Colors.secondary10,
   },
   button: {
     width: "100%",
