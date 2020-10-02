@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode } from "react"
-import { StyleSheet, Platform, View, ScrollView } from "react-native"
+import { StyleSheet, View, ScrollView } from "react-native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { useStatusBarEffect } from "../navigation"
 

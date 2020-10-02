@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 
 import { GlobalText } from "../components"
 
-import { Typography, Colors, Iconography, Spacing, Forms } from "../styles"
+import { Colors, Iconography, Forms } from "../styles"
 import { Icons } from "../assets"
 
 interface SymptomCheckboxProps {
