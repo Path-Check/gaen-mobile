@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import { ScrollView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { StyleSheet } from "react-native"
 
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
-
 import { Button, GlobalText } from "../components"
 import { OtherSymptom, PrimarySymptom, SecondarySymptom } from "./selfScreener"
-
 import SymptomCheckbox from "./SymptomCheckbox"
+import SelfScreenerLayout from "./SelfScreenerLayout"
+
+import { Typography, Spacing, Buttons } from "../styles"
 
 const GeneralSymptoms: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -50,15 +51,29 @@ const GeneralSymptoms: FunctionComponent = () => {
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.GeneralSymptomsSummary)
+    navigation.navigate(SelfScreenerStackScreens.UnderlyingConditions)
   }
 
   const noSymptomsSelected =
     [...primarySymptoms, ...secondarySymptoms, ...otherSymptoms].length === 0
   return (
-    <ScrollView>
-      <GlobalText>
-        {t("self_screener.emergency_symptoms.select_any")}
+    <SelfScreenerLayout
+      bottomActionsContent={
+        <Button
+          label={t("common.next")}
+          onPress={handleOnPressNext}
+          hasRightArrow
+          disabled={noSymptomsSelected}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      }
+    >
+      <GlobalText style={style.headerText}>
+        {t("self_screener.general_symptoms.are_you_experiencing")}
+      </GlobalText>
+      <GlobalText style={style.subheaderText}>
+        {t("self_screener.general_symptoms.select_any")}
       </GlobalText>
       <SymptomCheckbox
         label={symptomToString(FEVER_OR_CHILLS)}
@@ -95,14 +110,27 @@ const GeneralSymptoms: FunctionComponent = () => {
         onPress={() => updateSymptoms(OTHER)}
         checked={otherSymptoms.includes(OTHER)}
       />
-      <Button
-        label={t("common.next")}
-        onPress={handleOnPressNext}
-        hasRightArrow
-        disabled={noSymptomsSelected}
-      />
-    </ScrollView>
+    </SelfScreenerLayout>
   )
 }
+
+const style = StyleSheet.create({
+  headerText: {
+    ...Typography.header1,
+    marginBottom: Spacing.medium,
+  },
+  subheaderText: {
+    ...Typography.header4,
+    ...Typography.base,
+    marginBottom: Spacing.huge,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
+  },
+})
 
 export default GeneralSymptoms

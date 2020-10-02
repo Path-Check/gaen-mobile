@@ -263,7 +263,8 @@
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
       "how_old_are_you": "How old are you?",
-      "sixty_five_and_over": "65+"
+      "sixty_five_and_over": "65+",
+      "get_my_guidance": "Get my guidance"
     },
     "call_emergency_services": {
       "call_emergencies": "Call {{emergencyPhoneNumber}}",
@@ -278,11 +279,9 @@
       "lightheadedness": "Severe, constant lightheadedness",
       "select_any": "Select all that apply (or none)."
     },
-    "general_symptoms_summary": {
-      "sorry_to_hear": "It's too bad you're feeling that way.",
-      "two_more_questions": "Since it's your first time here, let's answer two more questions to determine if you're at higher risk for getting very sick from COVID-19."
-    },
     "general_symptoms": {
+      "are_you_experiencing": "Are you experiencing any of these symptoms?",
+      "select_any": "Select all that apply.",
       "aching": "Aching throughout the body",
       "cough": "New or worsening cough",
       "difficulty_breathing": "Mild or moderate difficulty breathing",
@@ -328,20 +327,6 @@
       "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn move about how the virus spreads and the illness it causes",
       "this_is_not_intended": "This is not intended for diagnosis or treatment",
       "you_are_a_resident": "You are a resident of the community supported by {{ healthAuthorityName }}"
-    },
-    "no_emergency_symptoms": {
-      "glad_to_hear": "Thanks, glad you're no experiencing emergency symptoms.",
-      "one_more_question": "One more question to determine if your symptoms might be related to COVID-19."
-    },
-    "summary": {
-      "asymptomatic_group": "Glad to hear you’re feeling well!\nEven though you’re not ill, you should stay home for 14 days. COVID-19 may be spread by people who are not showing symptoms.",
-      "get_my_guidance": "Get my guidance",
-      "non_covid_symptom_group": "Sorry you’re not feeling well.\nBased on your answers, you’re not currently showing common symptoms of COVID-19.",
-      "primary_symptom_group_1": "Sorry you’re not feeling well.\nYour symptoms may be related to COVID-19. You also have medical conditions that may put you at risk of becoming more seriously ill.",
-      "primary_symptom_group_2": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "primary_symptom_group_3": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "secondary_symptom_group_1": "Sorry you’re not feeling well.\nBased on your answers, your symptoms may be related to COVID-19.",
-      "secondary_symptom_group_2": "Sorry you’re not feeling well. Based on your answers, your symptoms may be related to COVID-19."
     },
     "underlying_conditions": {
       "blood_disorder": "Blood disorder, such as sickle cell disease or thalassemia",

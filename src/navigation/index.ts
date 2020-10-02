@@ -182,13 +182,10 @@ export const MyHealthStackScreens: {
 export type SelfScreenerStackScreen =
   | "SelfScreenerIntro"
   | "EmergencySymptomsQuestions"
-  | "NoEmergencySymptoms"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
-  | "GeneralSymptomsSummary"
   | "UnderlyingConditions"
   | "AgeRange"
-  | "Summary"
   | "Guidance"
 
 export const SelfScreenerStackScreens: {
@@ -196,13 +193,10 @@ export const SelfScreenerStackScreens: {
 } = {
   SelfScreenerIntro: "SelfScreenerIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
-  NoEmergencySymptoms: "NoEmergencySymptoms",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",
-  GeneralSymptomsSummary: "GeneralSymptomsSummary",
   UnderlyingConditions: "UnderlyingConditions",
   AgeRange: "AgeRange",
-  Summary: "Summary",
   Guidance: "Guidance",
 }
 

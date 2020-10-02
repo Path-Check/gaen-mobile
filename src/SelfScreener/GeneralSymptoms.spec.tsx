@@ -51,7 +51,7 @@ describe("GeneralSymptoms", () => {
 
       fireEvent.press(nextButton)
       expect(navigationSpy).toHaveBeenCalledWith(
-        SelfScreenerStackScreens.GeneralSymptomsSummary,
+        SelfScreenerStackScreens.UnderlyingConditions,
       )
     })
   })

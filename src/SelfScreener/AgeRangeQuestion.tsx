@@ -28,7 +28,7 @@ const AgeRangeQuestion: FunctionComponent = () => {
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.Summary)
+    navigation.navigate(SelfScreenerStackScreens.Guidance)
   }
 
   return (
@@ -44,7 +44,10 @@ const AgeRangeQuestion: FunctionComponent = () => {
         isSelected={ageRange === SIXTY_FIVE_AND_OVER}
         label={ageRangeToString(SIXTY_FIVE_AND_OVER)}
       />
-      <Button label={t("common.next")} onPress={handleOnPressNext} />
+      <Button
+        label={t("self_screener.age_range.get_my_guidance")}
+        onPress={handleOnPressNext}
+      />
     </View>
   )
 }

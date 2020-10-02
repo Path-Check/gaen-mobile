@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { View, ScrollView, StyleSheet } from "react-native"
+import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -9,9 +9,9 @@ import { Button, GlobalText } from "../components"
 import { EmergencySymptom, SymptomGroup } from "./selfScreener"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import SymptomCheckbox from "./SymptomCheckbox"
+import SelfScreenerLayout from "./SelfScreenerLayout"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
-import SelfScreenerLayout from "./SelfScreenerLayout"
 
 const EmergencySymptomsQuestions: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
@@ -35,7 +35,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
       return navigation.navigate(SelfScreenerStackScreens.CallEmergencyServices)
     }
 
-    navigation.navigate(SelfScreenerStackScreens.NoEmergencySymptoms)
+    navigation.navigate(SelfScreenerStackScreens.GeneralSymptoms)
   }
 
   const emergencySymptomToString = (symptom: EmergencySymptom): string => {
