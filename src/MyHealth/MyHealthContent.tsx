@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
@@ -14,10 +8,9 @@ import { useSymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry, DayLogData } from "./symptoms"
 import { GlobalText, Button } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { MyHealthStackScreens } from "../navigation"
+import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
-import HowAreYouFeeling from "./HowAreYouFeeling"
 
 type LogEntryProps = {
   logEntry: SymptomLogEntry
@@ -45,7 +38,7 @@ const LogEntry: FunctionComponent<LogEntryProps> = ({ logEntry }) => {
       <View style={style.timeAndEditContainer}>
         {dayJsDate && (
           <GlobalText style={style.timeText}>
-            {dayJsDate.local().format("HH:mm A")}
+            {dayJsDate.local().format("h:mm A")}
           </GlobalText>
         )}
         <TouchableOpacity
@@ -94,12 +87,18 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
   )
 }
 
-const OverTime: FunctionComponent = () => {
+const MyHealthContent: FunctionComponent = () => {
   const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
-  const navigation = useNavigation<StackNavigationProp<MyHealthStackParams>>()
+  const navigation = useNavigation()
 
   const noSymptomHistory = dailyLogData.length === 0
+
+  const handleOnPressNotFeelingWell = async () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.SelfScreenerFromMyHealth,
+    })
+  }
 
   const handleOnPressLogSymptoms = () => {
     navigation.navigate(MyHealthStackScreens.SelectSymptoms)
@@ -112,12 +111,19 @@ const OverTime: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <HowAreYouFeeling />
+        <View style={style.floatingContainer}>
+          <Button
+            onPress={handleOnPressNotFeelingWell}
+            label={t("symptom_checker.not_feeling_well")}
+            customButtonStyle={{ ...style.button, ...style.noMarginButton }}
+            customButtonInnerStyle={style.buttonInner}
+          />
+        </View>
         <View style={style.floatingContainer}>
           <Button
             onPress={handleOnPressLogSymptoms}
             label={t("symptom_checker.log_symptoms")}
-            customButtonStyle={{ ...style.button, ...style.logSymptomsButton }}
+            customButtonStyle={{ ...style.button, ...style.noMarginButton }}
             customButtonInnerStyle={style.buttonInner}
             hasPlusIcon
           />
@@ -200,7 +206,7 @@ const style = StyleSheet.create({
     shadowOpacity: 0,
     marginTop: Spacing.large,
   },
-  logSymptomsButton: {
+  noMarginButton: {
     marginTop: 0,
   },
   buttonInner: {
@@ -209,4 +215,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default OverTime
+export default MyHealthContent

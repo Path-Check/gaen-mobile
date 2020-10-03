@@ -1,18 +1,60 @@
 import React from "react"
-import { fireEvent, render } from "@testing-library/react-native"
+import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry } from "./symptoms"
 
-import OverTime from "./OverTime"
+import MyHealthContent from "./MyHealthContent"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
-import { MyHealthStackScreens } from "../navigation"
+import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
-describe("OverTime", () => {
+describe("MyHealthContent", () => {
+  it("allows the user to add a symptom log entry", async () => {
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({
+      navigate: navigateSpy,
+    })
+    const { getByLabelText } = render(
+      <SymptomLogContext.Provider value={factories.symptomLogContext.build({})}>
+        <MyHealthContent />
+      </SymptomLogContext.Provider>,
+    )
+
+    fireEvent.press(getByLabelText("Log symptoms"))
+
+    await waitFor(() => {
+      expect(navigateSpy).toHaveBeenCalledWith(
+        MyHealthStackScreens.SelectSymptoms,
+      )
+    })
+  })
+
+  describe("when the user is not feeling well", () => {
+    it("launches the self screener", async () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({
+        navigate: navigateSpy,
+      })
+      const { getByLabelText } = render(
+        <SymptomLogContext.Provider
+          value={factories.symptomLogContext.build({})}
+        >
+          <MyHealthContent />
+        </SymptomLogContext.Provider>,
+      )
+      fireEvent.press(getByLabelText("Not Feeling Well?"))
+      await waitFor(() => {
+        expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
+          screen: ModalStackScreens.SelfScreenerFromMyHealth,
+        })
+      })
+    })
+  })
+
   describe("when the user has no checkins or symptom logs", () => {
     it("displays a 'no logs' message", () => {
       const { getByText } = render(
@@ -21,7 +63,7 @@ describe("OverTime", () => {
             dailyLogData: [],
           })}
         >
-          <OverTime />
+          <MyHealthContent />
         </SymptomLogContext.Provider>,
       )
 
@@ -62,7 +104,7 @@ describe("OverTime", () => {
             ],
           })}
         >
-          <OverTime />
+          <MyHealthContent />
         </SymptomLogContext.Provider>,
       )
 
@@ -99,7 +141,7 @@ describe("OverTime", () => {
             ],
           })}
         >
-          <OverTime />
+          <MyHealthContent />
         </SymptomLogContext.Provider>,
       )
 

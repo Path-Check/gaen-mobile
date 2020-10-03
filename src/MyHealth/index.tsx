@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 
 import { useStatusBarEffect } from "../navigation"
 import { GlobalText, StatusBar } from "../components"
-import OverTime from "./OverTime"
+import MyHealthContent from "./MyHealthContent"
 
 import { Typography, Colors, Spacing } from "../styles"
 
@@ -22,7 +22,7 @@ const MyHealthScreen: FunctionComponent = () => {
           </GlobalText>
         </View>
         <View style={style.innerContainer}>
-          <OverTime />
+          <MyHealthContent />
         </View>
       </View>
     </>
