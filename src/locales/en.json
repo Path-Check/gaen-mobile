@@ -171,15 +171,6 @@
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
-  "my_health": {
-    "over_time": "Over Time",
-    "symptom_log": {
-      "did_not_check_in": "You did not check in",
-      "feeling_not_well": "You were not feeling well",
-      "feeling_well": "You were feeling well"
-    },
-    "today": "Today"
-  },
   "navigation": {
     "connect": "Connect",
     "exposure": "Exposure",
@@ -357,8 +348,6 @@
     "you_are_sharing_data": "You are sharing anonymized data"
   },
   "symptom_checker": {
-    "check_in_again": "Check in again tomorrow.",
-    "check-in": "Check-in",
     "delete_entry": "Delete entry",
     "entry_deleted": "Entry deleted",
     "errors": {

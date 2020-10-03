@@ -1,68 +1,23 @@
 import React, { FunctionComponent } from "react"
 import {
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
 
 import { useSymptomLogContext } from "./SymptomLogContext"
-import { SymptomLogEntry, DayLogData, CheckInStatus } from "./symptoms"
-import { GlobalText } from "../components"
+import { SymptomLogEntry, DayLogData } from "./symptoms"
+import { GlobalText, Button } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
 import { MyHealthStackScreens } from "../navigation"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
-import { Typography, Colors, Outlines, Spacing } from "../styles"
-
-type CheckInSummaryProps = {
-  status: CheckInStatus
-}
-
-const CheckInSummary: FunctionComponent<CheckInSummaryProps> = ({ status }) => {
-  const { t } = useTranslation()
-
-  type CheckInContent = {
-    text: string
-    colorStyle: ViewStyle
-  }
-
-  const determineCheckInStatusContent = (): CheckInContent => {
-    const didNotCheckInContent: CheckInContent = {
-      text: t("my_health.symptom_log.did_not_check_in"),
-      colorStyle: style.statusDotGray,
-    }
-    const feelingNotWellContent: CheckInContent = {
-      text: t("my_health.symptom_log.feeling_not_well"),
-      colorStyle: style.statusDotOrange,
-    }
-    const feelingGoodContent: CheckInContent = {
-      text: t("my_health.symptom_log.feeling_well"),
-      colorStyle: style.statusDotGreen,
-    }
-
-    switch (status) {
-      case CheckInStatus.NotCheckedIn:
-        return didNotCheckInContent
-      case CheckInStatus.FeelingNotWell:
-        return feelingNotWellContent
-      case CheckInStatus.FeelingGood:
-        return feelingGoodContent
-    }
-  }
-
-  const content = determineCheckInStatusContent()
-
-  return (
-    <View style={style.checkInStatusContainer}>
-      <View style={{ ...style.statusDot, ...content.colorStyle }} />
-      <GlobalText style={style.checkInStatusText}>{content.text}</GlobalText>
-    </View>
-  )
-}
+import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
+import HowAreYouFeeling from "./HowAreYouFeeling"
 
 type LogEntryProps = {
   logEntry: SymptomLogEntry
@@ -121,7 +76,7 @@ type DaySummaryProps = {
 }
 
 const DaySummary: FunctionComponent<DaySummaryProps> = ({
-  dayLogData: { date, checkIn, logEntries },
+  dayLogData: { date, symptomLogEntries },
 }) => {
   const dayJsDate = posixToDayjs(date)
 
@@ -132,8 +87,7 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
           {dayJsDate.local().format("MMMM D, YYYY")}
         </GlobalText>
       )}
-      {checkIn && <CheckInSummary status={checkIn.status} />}
-      {logEntries.map((logEntry) => {
+      {symptomLogEntries.map((logEntry) => {
         return <LogEntry key={logEntry.id} logEntry={logEntry} />
       })}
     </>
@@ -143,32 +97,48 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
 const OverTime: FunctionComponent = () => {
   const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
+  const navigation = useNavigation<StackNavigationProp<MyHealthStackParams>>()
 
   const noSymptomHistory = dailyLogData.length === 0
 
+  const handleOnPressLogSymptoms = () => {
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+  }
+
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      {noSymptomHistory ? (
-        <GlobalText style={style.noSymptomHistoryText}>
-          {t("symptom_checker.no_symptom_history")}
-        </GlobalText>
-      ) : (
-        dailyLogData.map((logData) => {
-          return <DaySummary key={logData.date} dayLogData={logData} />
-        })
-      )}
-    </ScrollView>
+    <>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <HowAreYouFeeling />
+        <View style={style.floatingContainer}>
+          <Button
+            onPress={handleOnPressLogSymptoms}
+            label={t("symptom_checker.log_symptoms")}
+            customButtonStyle={{ ...style.button, ...style.logSymptomsButton }}
+            customButtonInnerStyle={style.buttonInner}
+            hasPlusIcon
+          />
+        </View>
+        {noSymptomHistory ? (
+          <GlobalText style={style.noSymptomHistoryText}>
+            {t("symptom_checker.no_symptom_history")}
+          </GlobalText>
+        ) : (
+          dailyLogData.map((logData) => {
+            return <DaySummary key={logData.date} dayLogData={logData} />
+          })
+        )}
+      </ScrollView>
+    </>
   )
 }
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
     paddingVertical: Spacing.large,
@@ -177,29 +147,6 @@ const style = StyleSheet.create({
   dateText: {
     ...Typography.header4,
     marginBottom: Spacing.xxxSmall,
-  },
-  checkInStatusContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: Spacing.small,
-  },
-  statusDot: {
-    width: Spacing.xxSmall,
-    height: Spacing.xxSmall,
-    borderRadius: Outlines.borderRadiusMax,
-  },
-  statusDotGray: {
-    backgroundColor: Colors.neutral75,
-  },
-  statusDotOrange: {
-    backgroundColor: Colors.warning100,
-  },
-  statusDotGreen: {
-    backgroundColor: Colors.success100,
-  },
-  checkInStatusText: {
-    ...Typography.body1,
-    marginLeft: Spacing.xxSmall,
   },
   symptomLogContainer: {
     paddingBottom: Spacing.medium,
@@ -220,6 +167,14 @@ const style = StyleSheet.create({
   editText: {
     ...Typography.body2,
   },
+  floatingContainer: {
+    ...Outlines.lightShadow,
+    backgroundColor: Colors.primaryLightBackground,
+    borderRadius: Outlines.borderRadiusLarge,
+    paddingVertical: Spacing.medium,
+    paddingHorizontal: Spacing.large,
+    marginBottom: Spacing.large,
+  },
   symptomsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -238,6 +193,19 @@ const style = StyleSheet.create({
   noSymptomHistoryText: {
     alignSelf: "center",
     ...Typography.body1,
+  },
+  button: {
+    width: "100%",
+    elevation: 0,
+    shadowOpacity: 0,
+    marginTop: Spacing.large,
+  },
+  logSymptomsButton: {
+    marginTop: 0,
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
 })
 

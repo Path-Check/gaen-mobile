@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
-import { SymptomLogEntry, CheckInStatus } from "./symptoms"
+import { SymptomLogEntry } from "./symptoms"
 
 import OverTime from "./OverTime"
 import { factories } from "../factories"
@@ -29,36 +29,6 @@ describe("OverTime", () => {
     })
   })
 
-  describe("when the user has log entries with only a checkIn", () => {
-    it("shows the correct message, and a date", () => {
-      const dateString = "September 21, 2020"
-      const timeString = "10:00"
-      const logEntryPosix = Date.parse(`${dateString} ${timeString}`)
-      const { getByText, queryByText } = render(
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({
-            dailyLogData: [
-              {
-                date: logEntryPosix,
-                checkIn: {
-                  status: CheckInStatus.FeelingGood,
-                  date: logEntryPosix,
-                },
-                logEntries: [],
-              },
-            ],
-          })}
-        >
-          <OverTime />
-        </SymptomLogContext.Provider>,
-      )
-
-      expect(getByText("You were feeling well")).toBeDefined()
-      expect(getByText(dateString)).toBeDefined()
-      expect(queryByText(timeString)).toBeNull()
-    })
-  })
-
   describe("when the user has log data with no checkIn entries", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "September 21, 2020"
@@ -76,8 +46,7 @@ describe("OverTime", () => {
             dailyLogData: [
               {
                 date: firstLogEntryPosix,
-                checkIn: null,
-                logEntries: [
+                symptomLogEntries: [
                   {
                     id: "1",
                     symptoms: ["cough"],
@@ -125,11 +94,7 @@ describe("OverTime", () => {
             dailyLogData: [
               {
                 date: logEntryPosix,
-                checkIn: {
-                  status: CheckInStatus.FeelingGood,
-                  date: logEntryPosix,
-                },
-                logEntries: [logEntry],
+                symptomLogEntries: [logEntry],
               },
             ],
           })}
