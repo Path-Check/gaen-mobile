@@ -180,10 +180,12 @@ export const MyHealthStackScreens: {
 }
 
 export type SelfScreenerStackScreen =
+  | "AsymptomaticFlowIntro"
   | "SelfScreenerIntro"
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
+  | "HowAreYouFeeling"
   | "UnderlyingConditions"
   | "AgeRange"
   | "Guidance"
@@ -191,10 +193,12 @@ export type SelfScreenerStackScreen =
 export const SelfScreenerStackScreens: {
   [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
 } = {
+  AsymptomaticFlowIntro: "AsymptomaticFlowIntro",
   SelfScreenerIntro: "SelfScreenerIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",
+  HowAreYouFeeling: "HowAreYouFeeling",
   UnderlyingConditions: "UnderlyingConditions",
   AgeRange: "AgeRange",
   Guidance: "Guidance",

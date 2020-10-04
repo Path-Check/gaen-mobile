@@ -21,7 +21,7 @@ const SelfScreenerIntro: FunctionComponent = () => {
   } = useConfigurationContext()
 
   const handleOnPressStartScreener = () => {
-    navigation.navigate(SelfScreenerStackScreens.EmergencySymptomsQuestions)
+    navigation.navigate(SelfScreenerStackScreens.HowAreYouFeeling)
   }
 
   const handleOnPressCancel = () => {
