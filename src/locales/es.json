@@ -38,10 +38,5 @@
   },
   "screen_titles": {
     "legal": "Aviso legal"
-  },
-  "self_screener": {
-    "call_emergency_services": {
-      "call_emergency_services": "Llamar a servicios de emergencia"
-    }
   }
 }
