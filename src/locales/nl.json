@@ -4,13 +4,6 @@
     "operating_system_abbr": "OS:",
     "version": "Versie:"
   },
-  "assessment": {
-    "caregiver_cta": "Volgende",
-    "complete_cta": "Klaar",
-    "distancing_cta": "Volgende",
-    "isolate_cta": "Volgende",
-    "next": "Volgende"
-  },
   "common": {
     "continue": "Ga verder",
     "done": "Klaar",
@@ -24,7 +17,6 @@
     "terms_header_title": "Gebruiksvoorwaarden"
   },
   "screen_titles": {
-    "about": "Informatie",
     "legal": "Juridisch"
   }
 }

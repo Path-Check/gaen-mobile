@@ -9,7 +9,7 @@
 #
 # Example
 #
-#   bin/download_copy.sh guam <token>
+#   bin/download_copy.sh pc <token>
 #
 # Requirements
 #

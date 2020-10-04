@@ -4,13 +4,6 @@
     "operating_system_abbr": "OS:",
     "version": "പതിപ്പ്:"
   },
-  "assessment": {
-    "caregiver_cta": "അടുത്തത്",
-    "complete_cta": "ചെയ്‌തു",
-    "distancing_cta": "അടുത്തത്",
-    "isolate_cta": "അടുത്തത്",
-    "next": "അടുത്തത്"
-  },
   "common": {
     "continue": "തുടരുക",
     "done": "ചെയ്‌തു",
@@ -26,7 +19,6 @@
     "terms_header_title": "നിബന്ധനകൾ"
   },
   "screen_titles": {
-    "about": "വിവരങ്ങൾ",
     "legal": "നിയമപരമായ വിവരങ്ങൾ"
   }
 }

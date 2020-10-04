@@ -19,6 +19,7 @@ extension String {
   static let keyPathTestResults = "testResults"
   static let keyPathExposureDetectionErrorLocalizedDescription = "exposureDetectionErrorLocalizedDescription"
   static let keyPathdateLastPerformedFileCapacityReset = "dateLastPerformedFileCapacityReset"
+  static let keyPathLastExposureCheckDate = "lastExposureCheckDate"
   static let keyPathExposures = "exposures"
   static let keyPathHMACKey = "HMACKey"
 
@@ -41,6 +42,9 @@ extension String {
   static let newExposureNotificationTitle = "Possible COVID-19 Exposure"
   static let newExposureNotificationBody = "Someone you were near recently has been diagnosed with COVID-19. Tap for more details."
   static let exposureDetectionErrorNotificationIdentifier = "expososure-notification-error"
+  static let notificationUrlKey = "url"
+  static let notificationUrlBasePath = "pathcheck://"
+  static let notificationUrlExposureHistoryPath = "exposureHistory"
 
   // JS Layer
   static let genericSuccess = "success"

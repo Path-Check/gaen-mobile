@@ -7,35 +7,34 @@ import CodeInput from "./CodeInput/CodeInputScreen"
 import Complete from "./Complete"
 import PublishConsent from "./PublishConsent/PublishConsentScreen"
 
-import { AffectedUserFlowScreen, AffectedUserFlowScreens } from "../navigation"
+import {
+  AffectedUserFlowStackScreen,
+  AffectedUserFlowStackScreens,
+} from "../navigation"
 
 type AffectedUserFlowStackParams = {
-  [key in AffectedUserFlowScreen]: undefined
+  [key in AffectedUserFlowStackScreen]: undefined
 }
 const Stack = createStackNavigator<AffectedUserFlowStackParams>()
 
 const AffectedUserStack: FunctionComponent = () => {
   return (
     <AffectedUserProvider>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name={AffectedUserFlowScreens.AffectedUserStart}
+          name={AffectedUserFlowStackScreens.AffectedUserStart}
           component={Start}
         />
         <Stack.Screen
-          name={AffectedUserFlowScreens.AffectedUserCodeInput}
+          name={AffectedUserFlowStackScreens.AffectedUserCodeInput}
           component={CodeInput}
         />
         <Stack.Screen
-          name={AffectedUserFlowScreens.AffectedUserPublishConsent}
+          name={AffectedUserFlowStackScreens.AffectedUserPublishConsent}
           component={PublishConsent}
         />
         <Stack.Screen
-          name={AffectedUserFlowScreens.AffectedUserComplete}
+          name={AffectedUserFlowStackScreens.AffectedUserComplete}
           component={Complete}
         />
       </Stack.Navigator>

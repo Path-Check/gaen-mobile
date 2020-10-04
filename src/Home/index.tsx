@@ -1,5 +1,19 @@
-import React, { FunctionComponent } from "react"
-import { ScrollView, TouchableOpacity, StyleSheet, View } from "react-native"
+import React, {
+  FunctionComponent,
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from "react"
+import {
+  Easing,
+  Animated,
+  AccessibilityInfo,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -9,7 +23,7 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { ModalScreens, useStatusBarEffect, Stacks } from "../navigation"
+import { ModalStackScreens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import {
   StatusBar,
@@ -24,10 +38,20 @@ import { LocationActivationStatus } from "./LocationActivationStatus"
 import { ShareLink } from "./ShareLink"
 
 import { Icons } from "../assets"
-import { Spacing, Colors, Typography, Outlines, Iconography } from "../styles"
+import {
+  Layout,
+  Spacing,
+  Colors,
+  Typography,
+  Outlines,
+  Iconography,
+  Buttons,
+} from "../styles"
+
+const TOP_ICON_SIZE = Iconography.medium
 
 const Home: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.gradientPrimary100Lighter)
+  useStatusBarEffect("light-content", Colors.gradient100Light)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -50,7 +74,7 @@ const Home: FunctionComponent = () => {
 
   const handleOnPressReportTestResult = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.AffectedUserStack,
+      screen: ModalStackScreens.AffectedUserStack,
     })
   }
 
@@ -94,27 +118,26 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.gradientPrimary100Lighter} />
+      <StatusBar backgroundColor={Colors.gradient100Light} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
       >
         <View style={style.topScrollViewBackground} />
-        <GradientBackground
-          gradient={Colors.gradientPrimary100}
-          angleCenterY={1}
-        >
+        <GradientBackground gradient={Colors.gradient100} angleCenterY={1}>
           <View style={style.topContainer}>
             <SettingsButton />
-            <View style={style.topIcon}>
+            <View style={style.topIconContainer}>
               <SvgXml
                 xml={topIcon}
-                width={Iconography.medium}
-                height={Iconography.medium}
+                width={TOP_ICON_SIZE}
+                height={TOP_ICON_SIZE}
                 fill={topIconFill}
                 accessible
+                style={style.topIcon}
                 accessibilityLabel={topIconAccessibilityLabel}
               />
+              {appIsActive && <ExpandingCircleAnimation />}
             </View>
             <GlobalText style={style.headerText} testID={"home-header"}>
               {headerText}
@@ -125,15 +148,18 @@ const Home: FunctionComponent = () => {
           </View>
         </GradientBackground>
         <View style={style.bottomContainer}>
-          <ShareLink />
-          <BluetoothActivationStatus />
-          <ProximityTracingActivationStatus />
-          <LocationActivationStatus />
+          <View>
+            <ShareLink />
+            <BluetoothActivationStatus />
+            <ProximityTracingActivationStatus />
+            <LocationActivationStatus />
+          </View>
           <View style={style.buttonContainer}>
             <Button
               onPress={handleOnPressReportTestResult}
               label={t("home.bluetooth.report_positive_result")}
               customButtonStyle={style.button}
+              customButtonInnerStyle={style.buttonInner}
               hasRightArrow
             />
           </View>
@@ -149,18 +175,21 @@ const style = StyleSheet.create({
     top: "-100%",
     left: 0,
     right: 0,
-    backgroundColor: Colors.gradientPrimary100Lighter,
+    backgroundColor: Colors.gradient100Light,
     height: "100%",
   },
   container: {
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingBottom: Spacing.large,
+    flexGrow: 1,
+    paddingBottom: Spacing.small,
     backgroundColor: Colors.primaryLightBackground,
   },
   topContainer: {
+    flexGrow: 1,
     width: "100%",
+    justifyContent: "center",
     alignItems: "center",
     paddingTop: Spacing.small,
     paddingBottom: Spacing.xLarge,
@@ -171,11 +200,14 @@ const style = StyleSheet.create({
     right: 0,
     padding: Spacing.medium,
   },
-  topIcon: {
+  topIconContainer: {
     backgroundColor: Colors.white,
     borderRadius: Outlines.borderRadiusMax,
-    padding: 10,
+    padding: 5,
     marginBottom: Spacing.large,
+  },
+  topIcon: {
+    zIndex: Layout.zLevel1,
   },
   headerText: {
     ...Typography.header2,
@@ -193,6 +225,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   bottomContainer: {
+    justifyContent: "space-between",
     backgroundColor: Colors.primaryLightBackground,
   },
   buttonContainer: {
@@ -201,9 +234,92 @@ const style = StyleSheet.create({
   },
   button: {
     width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
 })
+
+const ExpandingCircleAnimation: FunctionComponent = () => {
+  const [isReduceMotionEnabled, setIsReduceMotionEnabled] = useState<boolean>(
+    false,
+  )
+
+  const animationTime = 1200
+  const delayTime = 2500
+  const initialCircleSize = 0
+  const endingCircleSize = 600
+  const initialTopValue = TOP_ICON_SIZE / 2
+  const endingTopValue = endingCircleSize * -0.42
+  const initialOpacity = 0.05
+  const endingOpacity = 0
+
+  const sizeAnimatedValue = useRef(new Animated.Value(initialCircleSize))
+    .current
+  const topAnimatedValue = useRef(new Animated.Value(initialTopValue)).current
+  const opacityAnimatedValue = useRef(new Animated.Value(initialOpacity))
+    .current
+
+  const playAnimation = useCallback(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.parallel([
+          Animated.timing(sizeAnimatedValue, {
+            toValue: endingCircleSize,
+            duration: animationTime,
+            easing: Easing.quad,
+            useNativeDriver: false,
+          }),
+          Animated.timing(topAnimatedValue, {
+            toValue: endingTopValue,
+            duration: animationTime,
+            easing: Easing.quad,
+            useNativeDriver: false,
+          }),
+          Animated.timing(opacityAnimatedValue, {
+            toValue: endingOpacity,
+            duration: animationTime,
+            easing: Easing.quad,
+            useNativeDriver: false,
+          }),
+          Animated.delay(delayTime),
+        ]),
+      ]),
+    ).start()
+  }, [
+    endingTopValue,
+    opacityAnimatedValue,
+    sizeAnimatedValue,
+    topAnimatedValue,
+  ])
+
+  useEffect(playAnimation, [playAnimation])
+
+  useEffect(() => {
+    AccessibilityInfo.isReduceMotionEnabled()?.then((result) => {
+      setIsReduceMotionEnabled(result)
+    })
+  }, [])
+
+  if (isReduceMotionEnabled) {
+    return null
+  }
+
+  return (
+    <Animated.View
+      style={{
+        position: "absolute",
+        top: topAnimatedValue,
+        alignSelf: "center",
+        width: sizeAnimatedValue,
+        height: sizeAnimatedValue,
+        backgroundColor: Colors.white,
+        opacity: opacityAnimatedValue,
+        borderRadius: Outlines.borderRadiusMax,
+      }}
+    />
+  )
+}
 
 export default Home

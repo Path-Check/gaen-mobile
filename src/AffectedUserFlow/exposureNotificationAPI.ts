@@ -1,7 +1,9 @@
+import "react-native"
 import env from "react-native-config"
 
 import { ExposureKey } from "../exposureKey"
 import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
+import Logger from "../logger"
 
 const exposureUrl = env.POST_DIAGNOSIS_KEYS_URL
 
@@ -91,7 +93,7 @@ class PostDiagnosisKeysRequest {
         {
           method: "POST",
           headers: defaultHeaders,
-          body: JSON.stringify(this.requestData),
+          body: this.requestBody(),
         },
         PostDiagnosisKeysRequest.TIMEOUT,
       )) as Response
@@ -171,6 +173,12 @@ class PostDiagnosisKeysRequest {
     return new Promise((resolve) =>
       setTimeout(resolve, PostDiagnosisKeysRequest.DEFAULT_RETRY_DELAY_MS),
     )
+  }
+
+  private requestBody = () => {
+    const encodedBody = JSON.stringify(this.requestData)
+    Logger.addMetadata("publishKeys", { requestBody: encodedBody })
+    return encodedBody
   }
 }
 

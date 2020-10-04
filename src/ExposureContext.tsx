@@ -8,9 +8,14 @@ import React, {
 } from "react"
 
 import gaenStrategy from "./gaen"
+import {
+  failureResponse,
+  OperationResponse,
+  SUCCESS_RESPONSE,
+} from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
-import { AppState } from "react-native"
+import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
@@ -28,6 +33,8 @@ export interface ExposureState {
   getRevisionToken: () => Promise<string>
   lastExposureDetectionDate: Posix | null
   storeRevisionToken: (revisionToken: string) => Promise<void>
+  refreshExposureInfo: () => void
+  checkForNewExposures: () => Promise<OperationResponse>
 }
 
 const initialState = {
@@ -44,6 +51,10 @@ const initialState = {
   lastExposureDetectionDate: null,
   storeRevisionToken: () => {
     return Promise.resolve()
+  },
+  refreshExposureInfo: () => {},
+  checkForNewExposures: () => {
+    return Promise.resolve(SUCCESS_RESPONSE)
   },
 }
 
@@ -68,20 +79,13 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [getLastDetectionDate])
 
-  useEffect(() => {
-    const handleAppStateChange = async () => {
-      const exposureInfos = await getCurrentExposures()
-      setExposureInfo(exposureInfos)
-    }
+  const refreshExposureInfo = async () => {
+    const exposureInfo = await getCurrentExposures()
+    setExposureInfo(exposureInfo)
 
-    AppState.addEventListener("change", handleAppStateChange)
-
-    handleAppStateChange()
-
-    return () => {
-      AppState.removeEventListener("change", handleAppStateChange)
-    }
-  }, [])
+    const detectionDate = await getLastDetectionDate()
+    setLastExposureDetectionDate(detectionDate)
+  }
 
   useEffect(() => {
     const subscription = exposureInfoSubscription(
@@ -96,6 +100,16 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     return subscription.remove
   }, [exposureInfoSubscription, getLastExposureDetectionDate])
 
+  const checkForNewExposures = async (): Promise<OperationResponse> => {
+    try {
+      await detectExposures()
+      await refreshExposureInfo()
+      return SUCCESS_RESPONSE
+    } catch (e) {
+      return failureResponse(e.message)
+    }
+  }
+
   return (
     <ExposureContext.Provider
       value={{
@@ -105,6 +119,8 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
         getRevisionToken,
         lastExposureDetectionDate,
         storeRevisionToken,
+        refreshExposureInfo,
+        checkForNewExposures,
       }}
     >
       {children}

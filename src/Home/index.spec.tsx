@@ -1,6 +1,11 @@
 import React from "react"
 import { Alert, Share } from "react-native"
-import { render, fireEvent, within } from "@testing-library/react-native"
+import {
+  waitFor,
+  render,
+  fireEvent,
+  within,
+} from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
 
@@ -201,70 +206,77 @@ describe("Home", () => {
   })
 
   describe("When the app is not authorized", () => {
-    it("renders an inactive message and a disabled message for proximity tracing", () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-      )
+    describe("When the platform is iOS", () => {
+      it("renders an inactive message and a disabled message for proximity tracing", () => {
+        const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+        const permissionProviderValue = createPermissionProviderValue(
+          enPermissionStatus,
+        )
 
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "NotRequired",
-            }}
-          >
+        const { getByTestId } = render(
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <SystemServicesContext.Provider
+              value={{
+                isBluetoothOn: true,
+                locationPermissions: "NotRequired",
+              }}
+            >
+              <Home />
+            </SystemServicesContext.Provider>
+          </PermissionsContext.Provider>,
+        )
+
+        const header = getByTestId("home-header")
+        const subheader = getByTestId("home-subheader")
+        const proximityTracingStatusContainer = getByTestId(
+          "home-proximity-tracing-status-container",
+        )
+        const proximityTracingDisabledText = within(
+          proximityTracingStatusContainer,
+        ).getByText("Disabled")
+
+        expect(header).toHaveTextContent("Inactive")
+        expect(subheader).toHaveTextContent(
+          "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
+        )
+        expect(proximityTracingDisabledText).toBeDefined()
+      })
+
+      it("requests exposure notifications and shows a not authorized alert", async () => {
+        const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+        const requestSpy = jest.fn()
+        const permissionProviderValue = createPermissionProviderValue(
+          enPermissionStatus,
+          requestSpy,
+        )
+
+        const { getByTestId } = render(
+          <PermissionsContext.Provider value={permissionProviderValue}>
             <Home />
-          </SystemServicesContext.Provider>
-        </PermissionsContext.Provider>,
-      )
+          </PermissionsContext.Provider>,
+        )
 
-      const header = getByTestId("home-header")
-      const subheader = getByTestId("home-subheader")
-      const proximityTracingStatusContainer = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-      const proximityTracingDisabledText = within(
-        proximityTracingStatusContainer,
-      ).getByText("Disabled")
+        const alertSpy = jest.spyOn(Alert, "alert")
+        const fixProximityTracingButton = getByTestId(
+          "home-proximity-tracing-status-container",
+        )
 
-      expect(header).toHaveTextContent("Inactive")
-      expect(subheader).toHaveTextContent(
-        "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
-      )
-      expect(proximityTracingDisabledText).toBeDefined()
-    })
+        const expectedMessage =
+          "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to applicationName"
 
-    it("requests exposure notifications and shows a not authorized alert", () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
-      const requestSpy = jest.fn()
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        requestSpy,
-      )
-
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>,
-      )
-
-      const alertSpy = jest.spyOn(Alert, "alert")
-      const fixProximityTracingButton = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-
-      fireEvent.press(fixProximityTracingButton)
-      expect(requestSpy).toHaveBeenCalled()
-      expect(alertSpy).toHaveBeenCalledWith(
-        "Share Exposure Information",
-        `To activate Proximity Tracing, ensure "Share Exposure Information" is enabled in Settings > ${mockedApplicationName} > Exposure Notifications`,
-        [
-          expect.objectContaining({ text: "Back" }),
-          expect.objectContaining({ text: "Open Settings" }),
-        ],
-      )
+        fireEvent.press(fixProximityTracingButton)
+        expect(requestSpy).toHaveBeenCalled()
+        await waitFor(() => {
+          expect(alertSpy).toHaveBeenCalledWith(
+            "Enable Proximity Tracing",
+            expectedMessage,
+            [
+              expect.objectContaining({ text: "Back" }),
+              expect.objectContaining({ text: "Open Settings" }),
+            ],
+          )
+        })
+      })
     })
   })
 

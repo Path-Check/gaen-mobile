@@ -8,15 +8,15 @@ import { getLocalNames } from "../locales/languages"
 import {
   useStatusBarEffect,
   Stacks,
-  ModalScreens,
-  SettingsScreens,
-  ReportIssueScreens,
+  ModalStackScreens,
+  SettingsStackScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { ListItem, ListItemSeparator } from "../components"
 
 import { Icons } from "../assets"
 import { Colors, Spacing } from "../styles"
+import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 
 type SettingsListItem = {
   label: string
@@ -32,18 +32,18 @@ const Settings: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
-  const { displayReportAnIssue } = useConfigurationContext()
   const showDebugMenu = env.STAGING === "true" || __DEV__
+  const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
+      screen: ModalStackScreens.LanguageSelection,
     })
   }
 
   const handleOnPressHowTheAppWorks = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.HowItWorksReviewFromSettings,
+      screen: ModalStackScreens.HowItWorksReviewFromSettings,
     })
   }
 
@@ -54,13 +54,8 @@ const Settings: FunctionComponent = () => {
   }
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
-    onPress: () => navigation.navigate(SettingsScreens.Legal),
+    onPress: () => navigation.navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
-  }
-  const reportAnIssue: SettingsListItem = {
-    label: t("screen_titles.report_issue"),
-    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
-    icon: Icons.QuestionMark,
   }
   const howTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
@@ -69,14 +64,11 @@ const Settings: FunctionComponent = () => {
   }
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
-    onPress: () => navigation.navigate(SettingsScreens.ENDebugMenu),
+    onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }
 
   const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
-  if (displayReportAnIssue) {
-    middleListItems.push(reportAnIssue)
-  }
 
   return (
     <ScrollView style={style.container}>
@@ -86,6 +78,12 @@ const Settings: FunctionComponent = () => {
           onPress={selectLanguage.onPress}
           icon={selectLanguage.icon}
         />
+        {healthAuthoritySupportsAnalytics && (
+          <>
+            <ListItemSeparator />
+            <ShareAnonymizedDataListItem />
+          </>
+        )}
       </View>
       <View style={style.section}>
         {middleListItems.map((params, idx) => {

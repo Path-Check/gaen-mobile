@@ -14,7 +14,12 @@ import { useTranslation } from "react-i18next"
 import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { StatusBar, GlobalText, Button } from "../components"
-import { ModalScreens, Stacks, Stack, useStatusBarEffect } from "../navigation"
+import {
+  ModalStackScreens,
+  Stacks,
+  Stack,
+  useStatusBarEffect,
+} from "../navigation"
 import { getLocalNames } from "../locales/languages"
 
 import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
@@ -51,7 +56,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.LanguageSelection,
+      screen: ModalStackScreens.LanguageSelection,
     })
   }
 
@@ -60,7 +65,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, { screen: ModalScreens.ProtectPrivacy })
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.ProtectPrivacy,
+    })
   }
 
   return (
@@ -69,7 +76,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
       <View style={style.header}>
         <TouchableOpacity onPress={handleOnPressSelectLanguage}>
           <LinearGradient
-            colors={Colors.gradientPrimary10}
+            colors={Colors.gradient10}
             useAngle
             angle={0}
             angleCenter={{ x: 0.5, y: 0.5 }}
@@ -112,6 +119,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
           <>
             <Button
               customButtonStyle={style.nextButton}
+              customButtonInnerStyle={style.nextButtonGradient}
               label={howItWorksScreenContent.primaryButtonLabel}
               onPress={howItWorksScreenContent.primaryButtonOnPress}
               hasRightArrow
@@ -192,6 +200,11 @@ const createStyle = (insets: EdgeInsets) => {
       paddingHorizontal: Spacing.large,
     },
     nextButton: {
+      width: "95%",
+      alignSelf: "center",
+      marginBottom: Spacing.xxSmall,
+    },
+    nextButtonGradient: {
       paddingTop: Spacing.xSmall,
       paddingBottom: Spacing.xSmall + 1,
       width: "95%",

@@ -30,11 +30,17 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 7,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 10,
+                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self,
+                                                                              Exposure.self,
+                                                                              CheckIn.self,
+                                                                              SymptomLogEntry.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 7,
-                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self, Exposure.self])
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 10,
+                                   migrationBlock: { _, _ in }, objectTypes: [UserState.self,
+                                                                              Exposure.self,
+                                                                              CheckIn.self,
+                                                                              SymptomLogEntry.self])
       }
     } else {
       return nil
@@ -52,11 +58,11 @@ class BTSecureStorage: SafePathsSecureStorage {
   }
 
   func setUserValue<Value: Codable>(value: Value, keyPath: String, notificationName: Notification.Name) {
-      let realm = try! Realm(configuration: realmConfig)
-      try! realm.write {
-        realm.create(UserState.self, value: [keyPath: value], update: .modified)
-        let jsonString = value.jsonStringRepresentation()
-        notificationCenter.post(name: notificationName, object: jsonString)
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.create(UserState.self, value: [keyPath: value], update: .modified)
+      let jsonString = value.jsonStringRepresentation()
+      notificationCenter.post(name: notificationName, object: jsonString)
     }
   }
 
@@ -81,6 +87,61 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
+  func storeCheckIn(_ checkIn: CheckIn) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.add(checkIn, update: .modified)
+    }
+  }
+
+  func storeSymptomLogEntry(_ entry: SymptomLogEntry) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      realm.add(entry, update: .modified)
+    }
+  }
+
+  func deleteSymptomLogEntry(_ id: String) {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      if let target = realm.objects(SymptomLogEntry.self).filter("id = %@", id).first {
+        realm.delete(target)
+      }
+    }
+  }
+
+  func deleteFourteenDaysOldSymptomLogEntries() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let staleObjects = realm.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(14))
+      realm.delete(staleObjects)
+    }
+  }
+
+  func deleteSymptomLogEntries() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let allObjects = realm.objects(SymptomLogEntry.self)
+      realm.delete(allObjects)
+    }
+  }
+
+  func deleteCheckins() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let allObjects = realm.objects(CheckIn.self)
+      realm.delete(allObjects)
+    }
+  }
+
+  func deleteFourteenDaysOldCheckIns() {
+    let realm = try! Realm(configuration: realmConfig)
+    try! realm.write {
+      let staleObjects = realm.objects(CheckIn.self).filter("date <= %@", Date.daysAgoInPosix(14))
+      realm.delete(staleObjects)
+    }
+  }
+
   func canStoreExposure(for date: Date) -> Bool {
     return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }
@@ -98,6 +159,10 @@ class BTSecureStorage: SafePathsSecureStorage {
              notificationName: .dateLastPerformedFileCapacityResetDidChange, defaultValue: nil)
   var dateLastPerformedFileCapacityReset: Date?
 
+  @Persisted(keyPath: .keyPathLastExposureCheckDate,
+             notificationName: .lastExposureCheckDateDidChange, defaultValue: nil)
+  var lastExposureCheckDate: Date?
+
   @Persisted(keyPath: .keyPathHMACKey,
              notificationName: .HMACKeyDidChange, defaultValue: "")
   var HMACKey: String
@@ -107,7 +172,16 @@ class BTSecureStorage: SafePathsSecureStorage {
   var revisionToken: String
 
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
-    .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
+              .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
 
+  var checkIns: [CheckIn] {
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(CheckIn.self))
+  }
+
+  var symptomLogEntries: [SymptomLogEntry] {
+    let realm = try! Realm(configuration: realmConfig)
+    return Array(realm.objects(SymptomLogEntry.self))
+  }
 }

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { ActivationStatus } from "./ActivationStatus"
-import { HomeScreens } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
 
 export const LocationActivationStatus: FunctionComponent = () => {
@@ -18,7 +18,7 @@ export const LocationActivationStatus: FunctionComponent = () => {
   }
 
   const handleOnPressShowInfo = () => {
-    navigation.navigate(HomeScreens.LocationInfo)
+    navigation.navigate(HomeStackScreens.LocationInfo)
   }
 
   const showFixLocationAlert = () => {

@@ -13,7 +13,7 @@ import { SvgXml } from "react-native-svg"
 import { StatusBar, GlobalText, Button } from "../components"
 import {
   useStatusBarEffect,
-  AffectedUserFlowScreens,
+  AffectedUserFlowStackScreens,
   Stacks,
 } from "../navigation"
 
@@ -26,7 +26,7 @@ export const ExportIntro: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressNext = () => {
-    navigation.navigate(AffectedUserFlowScreens.AffectedUserCodeInput)
+    navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
   }
 
   const handleOnPressCancel = () => {
@@ -59,7 +59,7 @@ export const ExportIntro: FunctionComponent = () => {
         </View>
         <View>
           <Image
-            source={Images.PersonAndHealthExpert}
+            source={Images.HowItWorksValueProposition}
             style={style.image}
             accessible
             accessibilityLabel={t("export.person_and_health_expert")}

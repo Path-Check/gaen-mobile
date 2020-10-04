@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { GlobalText } from "../components"
-import { Stacks, ActivationScreen, ActivationScreens } from "./index"
+import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
 import { useSystemServicesContext } from "../SystemServicesContext"
 
 import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
@@ -23,7 +23,7 @@ import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 type ActivationStackParams = {
-  [key in ActivationScreen]: undefined
+  [key in ActivationStackScreen]: undefined
 }
 
 const Stack = createStackNavigator<ActivationStackParams>()
@@ -35,27 +35,27 @@ const ActivationStack: FunctionComponent = () => {
   const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {
-    screenName: ActivationScreen
+    screenName: ActivationStackScreen
     component: FunctionComponent
   }
 
   const acceptTermsOfServiceStep: ActivationStep = {
-    screenName: ActivationScreens.AcceptTermsOfService,
+    screenName: ActivationStackScreens.AcceptTermsOfService,
     component: AcceptTermsOfService,
   }
 
   const activateProximityTracing: ActivationStep = {
-    screenName: ActivationScreens.ActivateProximityTracing,
+    screenName: ActivationStackScreens.ActivateProximityTracing,
     component: ActivateProximityTracing,
   }
 
   const activateLocation: ActivationStep = {
-    screenName: ActivationScreens.ActivateLocation,
+    screenName: ActivationStackScreens.ActivateLocation,
     component: ActivateLocation,
   }
 
   const notificationPermissions: ActivationStep = {
-    screenName: ActivationScreens.NotificationPermissions,
+    screenName: ActivationStackScreens.NotificationPermissions,
     component: NotificationPermissions,
   }
 
@@ -135,7 +135,7 @@ const ActivationStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={ActivationScreens.AcceptTermsOfService}
+      initialRouteName={ActivationStackScreens.AcceptTermsOfService}
       screenOptions={screenOptions}
     >
       {activationSteps.map((step, idx) => {
@@ -156,7 +156,7 @@ const ActivationStack: FunctionComponent = () => {
         )
       })}
       <Stack.Screen
-        name={ActivationScreens.ActivationSummary}
+        name={ActivationStackScreens.ActivationSummary}
         component={ActivationSummary}
         options={{
           headerRight: () => HeaderRight({}),

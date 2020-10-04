@@ -1,4 +1,5 @@
-import { isToday, posixToDayjs } from "./dateTime"
+import dayjs from "dayjs"
+import { isToday, posixToDayjs, beginningOfDay } from "./dateTime"
 
 describe("isToday", () => {
   describe("when provided a posix that is today", () => {
@@ -42,5 +43,14 @@ describe("posixToDayjs", () => {
 
   it("returns null for an invalid posix timestamp", () => {
     expect(posixToDayjs(parseInt("not a valid int"))).toBeNull()
+  })
+})
+
+describe("begginingOfDay", () => {
+  it("returns UTC date", () => {
+    const date = beginningOfDay(1600387200000)
+    expect(dayjs.utc(date).format("YYYY-MM-DD HH:mm Z")).toEqual(
+      "2020-09-18 00:00 +00:00",
+    )
   })
 })

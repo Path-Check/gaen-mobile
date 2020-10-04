@@ -26,3 +26,19 @@ export const headerScreenOptions: StackNavigationOptions = {
   headerTintColor: Colors.headerText,
   headerTitleAlign: "center",
 }
+
+export const headerLightOptions: StackNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Colors.secondary10,
+    shadowColor: "transparent",
+    elevation: 0,
+  },
+  headerTitleStyle: {
+    ...Typography.mediumBold,
+    color: Colors.primaryText,
+    letterSpacing: Typography.largeLetterSpacing,
+    textTransform: "uppercase",
+  },
+  headerBackTitleVisible: false,
+  headerTitleAlign: "center",
+}

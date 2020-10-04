@@ -1,11 +1,5 @@
 {
   "_display_name": "Filipino",
-  "assessment": {
-    "caregiver_cta": "Susunod",
-    "distancing_cta": "Susunod",
-    "isolate_cta": "Susunod",
-    "next": "Susunod"
-  },
   "common": {
     "continue": "Ituloy",
     "next": "Susunod"
@@ -15,7 +9,6 @@
     "launch_get_started": "Magsimula"
   },
   "screen_titles": {
-    "about": "Tungkol",
     "legal": "Legal"
   }
 }

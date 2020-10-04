@@ -30,11 +30,17 @@ const HealthGuidelines: FunctionComponent = () => {
   const {
     healthAuthorityName,
     healthAuthorityLearnMoreUrl,
+    measurementSystem,
   } = useConfigurationContext()
 
   const handleOnPressHALink = () => {
     Linking.openURL(healthAuthorityLearnMoreUrl)
   }
+
+  const stayApartRecommendationText =
+    measurementSystem === "Imperial"
+      ? t("exposure_history.health_guidelines.six_feet_apart")
+      : t("exposure_history.health_guidelines.two_meters_apart")
 
   return (
     <View style={style.card}>
@@ -79,8 +85,8 @@ const HealthGuidelines: FunctionComponent = () => {
         text={t("exposure_history.health_guidelines.wear_a_mask")}
       />
       <HealthGuidelineItem
-        icon={Icons.SixFeet}
-        text={t("exposure_history.health_guidelines.six_feet_apart")}
+        icon={Icons.StayApart}
+        text={stayApartRecommendationText}
       />
     </View>
   )

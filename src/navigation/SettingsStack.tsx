@@ -9,11 +9,10 @@ import { useNavigation } from "@react-navigation/native"
 
 import Settings from "../Settings/"
 import Legal from "../Settings/Legal"
-import ReportIssue from "../ReportIssue"
 import ENDebugMenu from "../Settings/ENDebugMenu"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
-import { ReportIssueScreens, SettingsScreens } from "./index"
+import { SettingsStackScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
 
@@ -53,29 +52,24 @@ const SettingsStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={SettingsScreens.Settings} component={Settings} />
+      <Stack.Screen name={SettingsStackScreens.Settings} component={Settings} />
       <Stack.Screen
-        name={SettingsScreens.Legal}
+        name={SettingsStackScreens.Legal}
         component={Legal}
         options={{ headerTitle: t("screen_titles.legal") }}
       />
       <Stack.Screen
-        name={ReportIssueScreens.ReportIssue}
-        component={ReportIssue}
-        options={{ headerTitle: t("screen_titles.report_issue") }}
-      />
-      <Stack.Screen
-        name={SettingsScreens.ENDebugMenu}
+        name={SettingsStackScreens.ENDebugMenu}
         component={ENDebugMenu}
         options={{ headerTitle: t("screen_titles.debug") }}
       />
       <Stack.Screen
-        name={SettingsScreens.ExposureListDebugScreen}
+        name={SettingsStackScreens.ExposureListDebugScreen}
         component={ExposureListDebug}
         options={{ headerTitle: t("screen_titles.exposures") }}
       />
       <Stack.Screen
-        name={SettingsScreens.ENLocalDiagnosisKey}
+        name={SettingsStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKey}
       />
     </Stack.Navigator>

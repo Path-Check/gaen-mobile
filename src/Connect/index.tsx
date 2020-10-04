@@ -11,12 +11,7 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import {
-  Stacks,
-  ReportIssueScreens,
-  ModalScreens,
-  useStatusBarEffect,
-} from "../navigation"
+import { Stacks, ModalStackScreens, useStatusBarEffect } from "../navigation"
 import {
   ListItem,
   ListItemSeparator,
@@ -48,7 +43,7 @@ const ConnectScreen: FunctionComponent = () => {
   const {
     healthAuthorityName,
     displayCallbackForm,
-    displayReportAnIssue,
+    emergencyPhoneNumber,
   } = useConfigurationContext()
 
   const aboutContent = authorityCopyTranslation(
@@ -67,12 +62,23 @@ const ConnectScreen: FunctionComponent = () => {
 
   const handleOnPressHowTheAppWorks = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalScreens.HowItWorksReviewFromConnect,
+      screen: ModalStackScreens.HowItWorksReviewFromConnect,
     })
   }
 
-  const handleOnPressEmergencyContact = () => {
-    Linking.openURL("tel:911")
+  const listItems: ConnectListItem[] = []
+
+  if (emergencyPhoneNumber) {
+    const handleOnPressEmergencyContact = () => {
+      Linking.openURL(`tel:${emergencyPhoneNumber}`)
+    }
+
+    const emergencyContact: ConnectListItem = {
+      label: t("about.emergency_contact"),
+      onPress: handleOnPressEmergencyContact,
+      icon: Icons.ChatBubble,
+    }
+    listItems.push(emergencyContact)
   }
 
   const howTheAppWorks: ConnectListItem = {
@@ -80,21 +86,8 @@ const ConnectScreen: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
-  const reportAnIssue: ConnectListItem = {
-    label: t("screen_titles.report_issue"),
-    onPress: () => navigation.navigate(ReportIssueScreens.ReportIssue),
-    icon: Icons.QuestionMarkInCircle,
-  }
-  const emergencyContact: ConnectListItem = {
-    label: t("about.emergency_contact"),
-    onPress: handleOnPressEmergencyContact,
-    icon: Icons.ChatBubble,
-  }
 
-  const listItems: ConnectListItem[] = [emergencyContact, howTheAppWorks]
-  if (displayReportAnIssue) {
-    listItems.push(reportAnIssue)
-  }
+  listItems.push(howTheAppWorks)
 
   if (displayCallbackForm) {
     const callbackForm: ConnectListItem = {

@@ -229,7 +229,6 @@ ktlint {
 dependencies {
     implementation fileTree(dir: "libs", include: ['*.jar', '*.aar'])
     // loading html files
-    implementation project(':react-native-local-resource')
     implementation project(':react-native-reanimated')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

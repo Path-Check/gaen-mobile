@@ -140,11 +140,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   }
 
   const requestENPermission = async () => {
-    permissionStrategy.request().catch((error) => {
-      if (error.message !== "Error enabling notifications") {
-        throw Error(error)
-      }
-    })
+    return permissionStrategy.request()
   }
 
   const requestNotificationPermission = async () => {

@@ -19,6 +19,8 @@
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
 		A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CE5FC425005BE40045251A /* MiscUnitTests.swift */; };
 		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
+		B501F76925153CD200C9B22F /* CheckInModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B501F76825153CD200C9B22F /* CheckInModule.m */; };
+		B501F76E25154D0000C9B22F /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501F76D25154D0000C9B22F /* CheckIn.swift */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
@@ -30,6 +32,8 @@
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
 		B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */; };
+		B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */; };
+		B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */; };
 		B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B596C0712488127D00943B79 /* ENPermissionsModule.m */; };
 		B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */; };
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
@@ -224,6 +228,8 @@
 		B2A5822C244CEA8F000F39A6 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B2A5822E244CEA9F000F39A6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B3D0B8224679467D85423742 /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../app/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
+		B501F76825153CD200C9B22F /* CheckInModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckInModule.m; sourceTree = "<group>"; };
+		B501F76D25154D0000C9B22F /* CheckIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
 		B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedPackage.swift; sourceTree = "<group>"; };
 		B508170524EC7647000C5449 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
@@ -234,6 +240,8 @@
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
+		B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomLogEntry.swift; sourceTree = "<group>"; };
+		B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymptomLogEntryModule.m; sourceTree = "<group>"; };
 		B596C0712488127D00943B79 /* ENPermissionsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ENPermissionsModule.m; sourceTree = "<group>"; };
 		B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExposureHistoryModule.m; sourceTree = "<group>"; };
 		B59F4C3624BE0658007B09D5 /* List+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extensions.swift"; sourceTree = "<group>"; };
@@ -608,6 +616,8 @@
 				B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */,
 				A575A3F6250B719300AA742C /* DailySummariesConfiguration.swift */,
 				B5FC37E2248A82AE006474EB /* Exposure.swift */,
+				B501F76D25154D0000C9B22F /* CheckIn.swift */,
+				B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */,
 				B5FBB0D424916D8900433980 /* UserState.swift */,
 			);
 			path = Model;
@@ -667,6 +677,8 @@
 				C550A66524B7906F002CA7F2 /* ExposureKeyModule.m */,
 				B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */,
 				B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */,
+				B501F76825153CD200C9B22F /* CheckInModule.m */,
+				B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */,
 				B5081E4924D9B8E300121884 /* DeviceInfoModule.m */,
 				B5582D43249943DE001458A9 /* ExposureEventEmitter.m */,
 			);
@@ -706,6 +718,7 @@
 				C53FD09B24719AD1006D3268 /* Resources */,
 				D447FDBA24BF332B00250621 /* Configure ATS */,
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
+				CA7A0CD328168F07F79863AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -933,6 +946,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CA7A0CD328168F07F79863AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D447FDBA24BF332B00250621 /* Configure ATS */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -963,10 +993,12 @@
 				B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */,
 				C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */,
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
+				B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
 				B5FC37CC2489B251006474EB /* Result.swift in Sources */,
 				A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */,
 				A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */,
+				B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */,
 				B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */,
 				C58463E42486C51100BCB842 /* ExposureManager.swift in Sources */,
 				B5FC37C62489B1B3006474EB /* APIRequest.swift in Sources */,
@@ -990,6 +1022,7 @@
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
+				B501F76E25154D0000C9B22F /* CheckIn.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
 				A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
@@ -997,6 +1030,7 @@
 				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,
 				B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */,
 				B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */,
+				B501F76925153CD200C9B22F /* CheckInModule.m in Sources */,
 				B5FBB0CF24916A4C00433980 /* DebugAction.swift in Sources */,
 				B5FC37E1248A7EED006474EB /* ExposureConfigurationRequests.swift in Sources */,
 				B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */,

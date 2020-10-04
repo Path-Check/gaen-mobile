@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-dayjs.extend(relativeTime)
 
 import { GlobalText } from "../../components"
 import { DateTimeUtils } from "../../utils"
@@ -33,12 +30,14 @@ const DateInfoHeader: FunctionComponent<DateInfoHeaderProps> = ({
     : ""
 
   return (
-    <GlobalText style={style.subHeaderText}>
-      <>
-        {lastDaysText}
-        {updatedAtText}
-      </>
-    </GlobalText>
+    <View style={style.headerContainer}>
+      <GlobalText style={style.subHeaderText}>
+        <>
+          {lastDaysText}
+          {updatedAtText}
+        </>
+      </GlobalText>
+    </View>
   )
 }
 
@@ -47,6 +46,10 @@ const style = StyleSheet.create({
     ...Typography.header6,
     textTransform: "uppercase",
     color: Colors.neutral140,
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 })
 

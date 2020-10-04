@@ -1,11 +1,5 @@
 {
   "_display_name": "Indonesia",
-  "assessment": {
-    "caregiver_cta": "Selanjutnya",
-    "distancing_cta": "Selanjutnya",
-    "isolate_cta": "Selanjutnya",
-    "next": "Selanjutnya"
-  },
   "common": {
     "next": "Selanjutnya"
   },
@@ -18,7 +12,6 @@
     "terms_header_title": "Syarat Penggunaan"
   },
   "screen_titles": {
-    "about": "Tentang",
     "legal": "Hukum"
   }
 }

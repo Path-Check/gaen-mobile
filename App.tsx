@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react"
 import "array-flat-polyfill"
 import env from "react-native-config"
 import SplashScreen from "react-native-splash-screen"
+import FlashMessage from "react-native-flash-message"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
@@ -15,6 +16,8 @@ import { PermissionsProvider } from "./src/PermissionsContext"
 import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
+import { AnalyticsProvider } from "./src/AnalyticsContext"
+import { SymptomLogProvider } from "./src/MyHealth/SymptomLogContext"
 
 Logger.start()
 
@@ -48,7 +51,12 @@ const App: FunctionComponent = () => {
               <PermissionsProvider>
                 <SystemServicesProvider>
                   <ExposureProvider>
-                    <MainNavigator />
+                    <AnalyticsProvider>
+                      <SymptomLogProvider>
+                        <MainNavigator />
+                        <FlashMessage />
+                      </SymptomLogProvider>
+                    </AnalyticsProvider>
                   </ExposureProvider>
                 </SystemServicesProvider>
               </PermissionsProvider>

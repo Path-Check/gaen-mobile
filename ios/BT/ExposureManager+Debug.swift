@@ -29,24 +29,6 @@ extension ExposureManager: ExposureManagerDebuggable {
           resolve(keys!.map { $0.asDictionary })
         }
       }
-    case .detectExposuresNow:
-      guard btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
-        let hoursRemaining = 24 - Date.hourDifference(from: btSecureStorage.userState.dateLastPerformedFileCapacityReset ?? Date(),
-                                                      to: Date())
-        reject("Time window Error.",
-               "You have reached the exposure file submission limit. Please wait \(hoursRemaining) hours before detecting exposures again.",
-          GenericError.unknown)
-        return
-      }
-
-      detectExposures { result in
-        switch result {
-        case .success(let numberOfFilesProcessed):
-          resolve("Exposure detection successfully executed. Processed \(numberOfFilesProcessed) files.")
-        case .failure(let exposureError):
-          reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
-        }
-      }
     case .simulateExposureDetectionError:
       btSecureStorage.exposureDetectionErrorLocalizedDescription = "Unable to connect to server."
       postExposureDetectionErrorNotification("Simulated Error")

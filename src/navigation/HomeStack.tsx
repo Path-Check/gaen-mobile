@@ -4,7 +4,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import { HomeScreens } from "./index"
+import { HomeStackScreens } from "./index"
 import Home from "../Home"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ProximityTracingInfo from "../Home/ProximityTracingInfo"
@@ -26,19 +26,19 @@ const cardScreenOptions = {
 const HomeStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name={HomeScreens.Home} component={Home} />
+      <Stack.Screen name={HomeStackScreens.Home} component={Home} />
       <Stack.Screen
-        name={HomeScreens.BluetoothInfo}
+        name={HomeStackScreens.BluetoothInfo}
         component={BluetoothInfo}
         options={cardScreenOptions}
       />
       <Stack.Screen
-        name={HomeScreens.ProximityTracingInfo}
+        name={HomeStackScreens.ProximityTracingInfo}
         component={ProximityTracingInfo}
         options={cardScreenOptions}
       />
       <Stack.Screen
-        name={HomeScreens.LocationInfo}
+        name={HomeStackScreens.LocationInfo}
         component={LocationInfo}
         options={cardScreenOptions}
       />

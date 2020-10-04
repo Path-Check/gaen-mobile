@@ -1,4 +1,4 @@
-import { ViewStyle, TextStyle, ImageStyle } from "react-native"
+import { ViewStyle, TextStyle } from "react-native"
 
 import * as Colors from "./colors"
 import * as Spacing from "./spacing"
@@ -26,22 +26,14 @@ export const required: TextStyle = {
   marginTop: Spacing.xSmall,
 }
 
-export const checkboxIcon: ImageStyle = {
-  width: 30,
-  height: 30,
-}
-
-export const checkboxText: TextStyle = {
-  ...Typography.mediumFont,
-}
-
 export const textInput: TextStyle = {
   ...Typography.formInputText,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.neutral10,
   borderWidth: Outlines.hairline,
-  padding: Spacing.small,
-  textAlign: "center",
+  paddingTop: Spacing.small - 1,
+  paddingBottom: Spacing.small,
+  paddingHorizontal: Spacing.small,
 }
 
 export const inputIndicator: ViewStyle = {
@@ -53,4 +45,25 @@ export const inputIndicator: ViewStyle = {
   marginTop: Spacing.tiny,
   marginRight: Spacing.large,
   width: Spacing.large,
+}
+
+export const radioOrCheckboxContainer: ViewStyle = {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  paddingVertical: Spacing.medium,
+  paddingLeft: Spacing.medium,
+  marginBottom: Spacing.medium,
+  borderRadius: Outlines.baseBorderRadius,
+  borderColor: Colors.secondary100,
+  borderWidth: Outlines.hairline,
+  backgroundColor: Colors.white,
+}
+
+export const radioOrCheckboxText: TextStyle = {
+  ...Typography.body1,
+  ...Typography.largeFont,
+  color: Colors.primaryText,
+  width: "80%",
+  marginLeft: Spacing.medium,
 }

@@ -1,81 +1,108 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet, Linking, TouchableOpacity } from "react-native"
+import { View, StyleSheet, Linking } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { Stacks } from "../../navigation"
+import { ModalStackScreens, Stacks } from "../../navigation"
 import { GlobalText, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
-import { Colors, Iconography, Spacing, Typography, Buttons } from "../../styles"
+import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
 const ExposureActions: FunctionComponent = () => {
   const { t } = useTranslation()
   const isInternetReachable = useConnectionStatus()
+  const navigation = useNavigation()
   const {
     displayCallbackForm,
+    displaySelfScreener,
     healthAuthorityName,
     healthAuthorityAdviceUrl,
+    measurementSystem,
   } = useConfigurationContext()
 
   const handleOnPressNextStep = () => {
     Linking.openURL(healthAuthorityAdviceUrl)
   }
 
-  const displayNextStepsLink = healthAuthorityAdviceUrl !== ""
+  const handleOnPressPersonalizeMyGuidance = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.SelfScreenerFromExposureDetails,
+    })
+  }
+
+  const displayNextStepsLink =
+    !displaySelfScreener && healthAuthorityAdviceUrl !== ""
+
+  const stayApartRecommendationText =
+    measurementSystem === "Imperial"
+      ? t("exposure_history.exposure_detail.6ft_apart")
+      : t("exposure_history.exposure_detail.2m_apart")
 
   return (
     <>
       <GlobalText style={style.bottomHeaderText}>
         {t("exposure_history.exposure_detail.ha_guidance_header")}
       </GlobalText>
-      {displayCallbackForm ? (
-        <RequestCallBackActions healthAuthorityName={healthAuthorityName} />
-      ) : (
-        <>
-          <GlobalText style={style.bottomSubheaderText}>
-            {t("exposure_history.exposure_detail.ha_guidance_subheader", {
-              healthAuthorityName,
-            })}
-          </GlobalText>
-          <View style={style.recommendations}>
-            <RecommendationBubble
-              icon={Icons.IsolateBubbles}
-              text={t("exposure_history.exposure_detail.isolate")}
-            />
-            <RecommendationBubble
-              icon={Icons.Mask}
-              text={t("exposure_history.exposure_detail.wear_a_mask")}
-            />
-            <RecommendationBubble
-              icon={Icons.SixFeet}
-              text={t("exposure_history.exposure_detail.6ft_apart")}
-            />
-            <RecommendationBubble
-              icon={Icons.WashHands}
-              text={t("exposure_history.exposure_detail.wash_your_hands")}
+      <>
+        {displayCallbackForm && (
+          <RequestCallBackActions healthAuthorityName={healthAuthorityName} />
+        )}
+        <GlobalText style={style.bottomHeaderText}>
+          {t("exposure_history.exposure_detail.general_guidance", {
+            healthAuthorityName,
+          })}
+        </GlobalText>
+        <View style={style.recommendations}>
+          <RecommendationBubble
+            icon={Icons.IsolateBubbles}
+            text={t("exposure_history.exposure_detail.isolate")}
+          />
+          <RecommendationBubble
+            icon={Icons.Mask}
+            text={t("exposure_history.exposure_detail.wear_a_mask")}
+          />
+          <RecommendationBubble
+            icon={Icons.StayApart}
+            text={stayApartRecommendationText}
+          />
+          <RecommendationBubble
+            icon={Icons.WashHands}
+            text={t("exposure_history.exposure_detail.wash_your_hands")}
+          />
+        </View>
+        {displaySelfScreener && (
+          <Button
+            onPress={handleOnPressPersonalizeMyGuidance}
+            label={t(
+              "exposure_history.exposure_detail.personalize_my_guidance",
+            )}
+            customButtonStyle={style.personalizeGuidanceButton}
+            customButtonInnerStyle={style.personalizeGuidanceButtonInner}
+            customTextStyle={style.personalizeGuidanceButtonText}
+            hasRightArrow
+            outlined
+          />
+        )}
+        {displayNextStepsLink && (
+          <View style={style.buttonContainer}>
+            <Button
+              onPress={handleOnPressNextStep}
+              label={t("exposure_history.exposure_detail.next_steps")}
+              disabled={!isInternetReachable}
+              hasRightArrow
             />
           </View>
-          {displayNextStepsLink && (
-            <View style={style.buttonContainer}>
-              <Button
-                onPress={handleOnPressNextStep}
-                label={t("exposure_history.exposure_detail.next_steps")}
-                disabled={!isInternetReachable}
-                hasRightArrow
-              />
-            </View>
-          )}
-          {!isInternetReachable && (
-            <GlobalText style={style.connectivityWarningText}>
-              {t("exposure_history.no_connectivity_message")}
-            </GlobalText>
-          )}
-        </>
-      )}
+        )}
+        {!isInternetReachable && (
+          <GlobalText style={style.connectivityWarningText}>
+            {t("exposure_history.no_connectivity_message")}
+          </GlobalText>
+        )}
+      </>
     </>
   )
 }
@@ -90,13 +117,10 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const navigateToCallbackForm = () => {
+  const handleOnPressRequestCallback = () => {
     navigation.navigate(Stacks.Callback)
   }
 
-  const navigateToConnectStack = () => {
-    navigation.navigate(Stacks.Connect)
-  }
   return (
     <>
       <GlobalText style={style.bottomSubheaderText}>
@@ -106,19 +130,11 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
       </GlobalText>
       <Button
         customButtonStyle={style.requestCallbackButton}
-        onPress={navigateToCallbackForm}
+        customButtonInnerStyle={style.requestCallbackButtonInner}
+        onPress={handleOnPressRequestCallback}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
         hasRightArrow
       />
-      <TouchableOpacity
-        onPress={navigateToConnectStack}
-        accessibilityLabel={t("exposure_history.exposure_detail.call_later")}
-        style={style.callLaterButton}
-      >
-        <GlobalText style={style.callLaterButtonText}>
-          {t("exposure_history.exposure_detail.call_later")}
-        </GlobalText>
-      </TouchableOpacity>
     </>
   )
 }
@@ -136,6 +152,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
       <View style={style.recommendationBubbleCircle}>
         <SvgXml
           xml={icon}
+          fill={Colors.primary125}
           width={Iconography.small}
           height={Iconography.small}
         />
@@ -147,17 +164,18 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 
 const style = StyleSheet.create({
   bottomHeaderText: {
-    ...Typography.header5,
+    ...Typography.header4,
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.body2,
+    ...Typography.body1,
     color: Colors.neutral100,
     marginBottom: Spacing.medium,
   },
   recommendations: {
-    display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
+    display: "flex",
     justifyContent: "space-between",
     marginBottom: Spacing.xxxLarge,
   },
@@ -168,7 +186,7 @@ const style = StyleSheet.create({
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
     borderRadius: 50,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.secondary10,
     padding: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
   },
@@ -184,17 +202,28 @@ const style = StyleSheet.create({
   },
   requestCallbackButton: {
     marginBottom: Spacing.small,
-    padding: Spacing.small,
+    width: "100%",
+    alignSelf: "center",
+    paddingVertical: Spacing.small,
   },
-  callLaterButton: {
-    ...Buttons.primary,
-    backgroundColor: Colors.secondary50,
-    minWidth: "100%",
+  requestCallbackButtonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
-  callLaterButtonText: {
-    ...Typography.body1,
-    ...Typography.bold,
-    color: Colors.primary100,
+  personalizeGuidanceButton: {
+    marginBottom: Spacing.small,
+    width: "100%",
+    alignSelf: "center",
+    borderColor: Colors.secondary100,
+  },
+  personalizeGuidanceButtonText: {
+    ...Typography.buttonPrimary,
+    color: Colors.primary110,
+  },
+  personalizeGuidanceButtonInner: {
+    ...Buttons.medium,
+    width: "100%",
+    justifyContent: "space-between",
   },
 })
 

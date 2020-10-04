@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { Alert } from "react-native"
 
 import PublishConsentForm from "./PublishConsentForm"
-import { AffectedUserFlowScreens } from "../../navigation"
+import { AffectedUserFlowStackScreens } from "../../navigation"
 import { ExposureContext } from "../../ExposureContext"
 import { factories } from "../../factories"
 import * as ExposureAPI from "../exposureNotificationAPI"
@@ -126,7 +126,7 @@ describe("PublishConsentForm", () => {
         )
         expect(storeRevisionTokenSpy).toHaveBeenCalledWith(newRevisionToken)
         expect(navigateSpy).toHaveBeenCalledWith(
-          AffectedUserFlowScreens.AffectedUserComplete,
+          AffectedUserFlowStackScreens.AffectedUserComplete,
         )
       })
     })

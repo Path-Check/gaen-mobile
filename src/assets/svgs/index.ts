@@ -3,7 +3,9 @@ import AnonymizedData from "./anonymizedData"
 import AnonymizedDataInverted from "./anonymizedDataInverted"
 import Arrow from "./arrow"
 import ArrowLeft from "./arrowLeft"
+import AsteriskInCircle from "./asteriskInCircle"
 import BackArrow from "./backArrow"
+import BarGraph from "./barGraph"
 import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import ChatBubble from "./chatBubble"
@@ -17,6 +19,7 @@ import ChevronRight from "./chevronRight"
 import ChevronUp from "./chevronUp"
 import Close from "./close"
 import Document from "./document"
+import EmergencyPlusInCircle from "./emergencyPlusInCircle"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
 import Gear from "./gear"
@@ -30,16 +33,19 @@ import IsolateBubbles from "./isolateBubbles"
 import LanguagesIcon from "./languagesIcon"
 import LocationPin from "./locationPin"
 import Mask from "./mask"
+import Plus from "./plus"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import QuestionMarkInCircle from "./questionMarkInCircle"
+import RadioSelected from "./radioSelected"
+import RadioUnselected from "./radioUnselected"
 import RadioWave from "./radioWave"
+import Refresh from "./refresh"
 import RestartWithCheck from "./restartWithCheck"
-import SelfAssessment from "./selfAssessment"
 import Share from "./share"
-import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
+import StayApart from "./stayApart"
 import Upload from "./upload"
 import WashHands from "./WashHands"
 import Wrench from "./wrench"
@@ -52,7 +58,9 @@ export const Icons = {
   AnonymizedDataInverted,
   Arrow,
   ArrowLeft,
+  AsteriskInCircle,
   BackArrow,
+  BarGraph,
   Bell,
   BellYellow,
   ChatBubble,
@@ -66,6 +74,7 @@ export const Icons = {
   ChevronUp,
   Close,
   Document,
+  EmergencyPlusInCircle,
   Export,
   ExposureIcon,
   Gear,
@@ -79,16 +88,19 @@ export const Icons = {
   LanguagesIcon,
   LocationPin,
   Mask,
+  Plus,
   Publish,
   QuestionMark,
   QuestionMarkInCircle,
+  RadioSelected,
+  RadioUnselected,
   RadioWave,
+  Refresh,
   RestartWithCheck,
-  SelfAssessment,
   Share,
-  SixFeet,
   StateNoContact,
   StateUnknown,
+  StayApart,
   Upload,
   WashHands,
   Wrench,

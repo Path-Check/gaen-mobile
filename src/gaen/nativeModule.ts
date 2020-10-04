@@ -8,6 +8,7 @@ import { RawENPermissionStatus } from "../PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
+import Logger from "../logger"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
@@ -44,6 +45,34 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
+export const subscribeToBluetoothStatusEvents = (
+  cb: (enabled: boolean) => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+  return ExposureEvents.addListener(
+    "onBluetoothStatusUpdated",
+    (enabled: boolean) => {
+      cb(enabled)
+    },
+  )
+}
+
+export const subscribeToLocationStatusEvents = (
+  cb: (enabled: boolean) => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+  return ExposureEvents.addListener(
+    "onLocationStatusUpdated",
+    (enabled: boolean) => {
+      cb(enabled)
+    },
+  )
+}
+
 const toStatus = (data: string[]): RawENPermissionStatus => {
   const networkAuthorization = data[0]
   const networkEnablement = data[1]
@@ -61,7 +90,14 @@ const toStatus = (data: string[]): RawENPermissionStatus => {
 const permissionsModule = NativeModules.ENPermissionsModule
 
 export const requestAuthorization = async (): Promise<void> => {
-  return permissionsModule.requestExposureNotificationAuthorization()
+  return permissionsModule
+    .requestExposureNotificationAuthorization()
+    .catch((error: string) => {
+      Logger.error("Failed to request ExposureNotification API Authorization", {
+        error,
+      })
+      throw new Error(error)
+    })
 }
 
 export const getCurrentENPermissionsStatus = async (
@@ -88,24 +124,55 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
   }
 }
 
+export const checkForNewExposures = async (): Promise<void> => {
+  return await exposureHistoryModule.detectExposures()
+}
+
 // Exposure Key Module
 const exposureKeyModule = NativeModules.ExposureKeyModule
 
 interface RawExposureKey {
-  key: null | string
+  key: string
   rollingPeriod: number
   rollingStartNumber: number
   transmissionRisk: number
 }
 
 export const getExposureKeys = async (): Promise<ExposureKey[]> => {
-  const keys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
-  return keys.map(toExposureKey)
+  const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
+  if (rawKeys.every(validRawExposureKey)) {
+    const exposureKeys = rawKeys.map(toExposureKey)
+    return exposureKeys
+  } else {
+    Logger.error("Invalid expousre keys from native layer", { rawKeys })
+    throw new Error("Invalid exposure keys from native layer")
+  }
+}
+
+const validRawExposureKey = (rawKey: RawExposureKey): boolean => {
+  const { key, rollingPeriod, rollingStartNumber, transmissionRisk } = rawKey
+  if (typeof key !== "string" || key.length === 0) {
+    Logger.addMetadata("InvalidRawKey", { key })
+    return false
+  }
+  if (typeof rollingPeriod !== "number") {
+    Logger.addMetadata("InvalidRawKey", { rollingPeriod })
+    return false
+  }
+  if (typeof rollingStartNumber !== "number") {
+    Logger.addMetadata("InvalidRawKey", { rollingStartNumber })
+    return false
+  }
+  if (typeof transmissionRisk !== "number") {
+    Logger.addMetadata("InvalidRawKey", { transmissionRisk })
+    return false
+  }
+  return true
 }
 
 const toExposureKey = (rawExposureKey: RawExposureKey): ExposureKey => {
   return {
-    key: rawExposureKey.key || "",
+    key: rawExposureKey.key,
     rollingPeriod: rawExposureKey.rollingPeriod,
     rollingStartNumber: rawExposureKey.rollingStartNumber,
     transmissionRisk: rawExposureKey.transmissionRisk,
@@ -165,10 +232,6 @@ export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
 
 export type ENModuleErrorMessage = string | null
 export type ENModuleSuccessMessage = string | null
-
-export const detectExposuresNow = async (): Promise<string> => {
-  return debugModule.detectExposuresNow()
-}
 
 export const simulateExposure = async (): Promise<"success"> => {
   return debugModule.simulateExposure()

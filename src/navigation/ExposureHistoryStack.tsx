@@ -6,14 +6,14 @@ import ExposureHistoryScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
 import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import {
-  ExposureHistoryScreens,
-  ExposureHistoryScreen as Screen,
+  ExposureHistoryStackScreens,
+  ExposureHistoryStackScreen,
 } from "./index"
 
 import { Headers } from "../styles"
 
 type ExposureHistoryStackParams = {
-  [key in Screen]: undefined
+  [key in ExposureHistoryStackScreen]: undefined
 }
 const Stack = createStackNavigator<ExposureHistoryStackParams>()
 
@@ -23,12 +23,12 @@ const ExposureHistoryStack: FunctionComponent = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={ExposureHistoryScreens.ExposureHistory}
+        name={ExposureHistoryStackScreens.ExposureHistory}
         component={ExposureHistoryScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={ExposureHistoryScreens.MoreInfo}
+        name={ExposureHistoryStackScreens.MoreInfo}
         component={MoreInfo}
         options={{
           ...Headers.headerScreenOptions,
@@ -36,7 +36,7 @@ const ExposureHistoryStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={ExposureHistoryScreens.ExposureDetail}
+        name={ExposureHistoryStackScreens.ExposureDetail}
         component={ExposureDetail}
         options={{
           ...Headers.headerScreenOptions,

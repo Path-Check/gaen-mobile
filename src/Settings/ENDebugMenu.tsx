@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   View,
   ViewStyle,
@@ -12,8 +12,9 @@ import {
 
 import { GlobalText } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
+import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
-import { NavigationProp, SettingsScreens } from "../navigation"
+import { NavigationProp, SettingsStackScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
 import { Colors, Spacing, Typography, Outlines } from "../styles"
@@ -22,10 +23,11 @@ type ENDebugMenuProps = {
   navigation: NavigationProp
 }
 
-const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
+const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
+  const { deleteAllCheckIns, deleteAllLogEntries } = useSymptomLogContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -121,7 +123,7 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
             <DebugMenuListItem
               label="Show Local Diagnosis Keys"
               onPress={() => {
-                navigation.navigate(SettingsScreens.ENLocalDiagnosisKey)
+                navigation.navigate(SettingsStackScreens.ENLocalDiagnosisKey)
               }}
             />
             <DebugMenuListItem
@@ -134,24 +136,34 @@ const ENDebugMenu = ({ navigation }: ENDebugMenuProps): JSX.Element => {
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
             />
+            <DebugMenuListItem
+              label="Delete All CheckIns"
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllCheckIns()
+                return Promise.resolve(result.kind)
+              })}
+            />
+            <DebugMenuListItem
+              label="Delete All Symptom Logs"
+              onPress={handleOnPressSimulationButton(async () => {
+                const result = await deleteAllLogEntries()
+                return Promise.resolve(result.kind)
+              })}
+            />
           </View>
           <View style={style.section}>
             <DebugMenuListItem
               label="Show Exposures"
               onPress={() => {
-                navigation.navigate(SettingsScreens.ExposureListDebugScreen)
+                navigation.navigate(
+                  SettingsStackScreens.ExposureListDebugScreen,
+                )
               }}
             />
             <DebugMenuListItem
               label="Toggle Exposure Notifications"
               onPress={handleOnPressSimulationButton(
                 NativeModule.toggleExposureNotifications,
-              )}
-            />
-            <DebugMenuListItem
-              label="Detect Exposures Now"
-              onPress={handleOnPressSimulationButton(
-                NativeModule.detectExposuresNow,
               )}
             />
             <DebugMenuListItem

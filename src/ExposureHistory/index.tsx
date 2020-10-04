@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useCallback } from "react"
+import { useFocusEffect } from "@react-navigation/native"
 
 import { useExposureContext } from "../ExposureContext"
 import History from "./History"
@@ -9,8 +10,18 @@ const toExposureList = (exposureInfo: ExposureInfo): ExposureDatum[] => {
   return exposureInfo
 }
 
-const ExposureHistoryScreen: FunctionComponent = () => {
-  const { lastExposureDetectionDate, exposureInfo } = useExposureContext()
+const ExposureHistoryStackScreen: FunctionComponent = () => {
+  const {
+    lastExposureDetectionDate,
+    exposureInfo,
+    refreshExposureInfo,
+  } = useExposureContext()
+
+  useFocusEffect(
+    useCallback(() => {
+      refreshExposureInfo()
+    }, [refreshExposureInfo]),
+  )
 
   const exposures = toExposureList(exposureInfo)
 
@@ -22,4 +33,4 @@ const ExposureHistoryScreen: FunctionComponent = () => {
   )
 }
 
-export default ExposureHistoryScreen
+export default ExposureHistoryStackScreen

@@ -4,22 +4,6 @@ import { useNavigation } from "@react-navigation/native"
 
 import Welcome from "./Welcome"
 
-jest.mock("react-native-local-resource", () => {
-  return {
-    __esModule: true,
-    default: () => {
-      return jest.fn()
-    },
-  }
-})
-jest.mock("react-native-webview", () => {
-  return {
-    __esModule: true,
-    default: function WebView() {
-      return <></>
-    },
-  }
-})
 jest.mock("@react-navigation/native")
 
 describe("Welcome", () => {

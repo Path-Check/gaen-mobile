@@ -5,6 +5,7 @@ module.exports = {
     "./jest/setupFile.js",
     "./node_modules/react-native-gesture-handler/jestSetup.js",
   ],
+  testEnvironment: "jsdom",
   collectCoverage: true,
   coverageReporters: ["lcov", "text-summary"],
   coverageDirectory: "test-coverage",
@@ -17,7 +18,7 @@ module.exports = {
     },
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(@react-native-community|react-native|react-native-linear-gradient|react-native-simple-crypto)/)",
+    "node_modules/(?!(@react-native-community|react-native|react-native-linear-gradient|react-native-simple-crypto|react-native-flash-message|react-native-iphone-x-helper)/)",
   ],
   rootDir: "../",
   testPathIgnorePatterns: [

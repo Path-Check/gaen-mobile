@@ -636,7 +636,7 @@ class ExposureManagerTests: XCTestCase {
     }
 
     let date = Date()
-    userState.dateLastPerformedFileCapacityReset = date
+    userState.lastExposureCheckDate = date
     exposureManager.fetchLastDetectionDate { (posixDate, error) in
       XCTAssertNil(error)
       XCTAssertEqual(posixDate, NSNumber(value: date.posixRepresentation))
@@ -654,7 +654,7 @@ class ExposureManagerTests: XCTestCase {
     exposureManager.detectExposuresV1 { (result) in
       switch result {
       case .success:
-        XCTAssertEqual(btSecureStorageMock.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
+        XCTAssertEqual(btSecureStorageMock.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
       default: XCTFail()
       }
     }
@@ -704,42 +704,6 @@ class ExposureManagerTests: XCTestCase {
       callback(nil, ExposureManagerError(errorCode: ExposureManagerErrorCode.noExposureKeysFound,
                                          localizedMessage: "Message"))
     }
-    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-      failExpectationResolve.fulfill()
-    }) { (_, _, _) in
-      failExpectationReject.fulfill()
-    }
-    wait(for: [failExpectationResolve, failExpectationReject], timeout: 0)
-  }
-
-  func testDebugDetectExposuresNow() {
-    let debugAction = DebugAction.detectExposuresNow
-    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
-    btSecureStorageMock.userStateHandler = {
-      let userState = UserState()
-      userState.remainingDailyFileProcessingCapacity = 0
-      return userState
-    }
-    var exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
-
-    let failureExpectactionResolve = self.expectation(description: "resolve is not called")
-    let failureExpectationReject = self.expectation(description: "reject is  called")
-    failureExpectactionResolve.isInverted = true
-    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-      failureExpectactionResolve.fulfill()
-    }) { (_, _, _) in
-      failureExpectationReject.fulfill()
-    }
-    wait(for: [failureExpectactionResolve, failureExpectationReject], timeout: 0)
-
-    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      XCTAssertEqual(requestType, RequestType.downloadKeys)
-      return Result<String>.failure(GenericError.unknown) as AnyObject
-    }
-    let failExpectationResolve = self.expectation(description: "resolve is not called")
-    failExpectationResolve.isInverted = true
-    let failExpectationReject = self.expectation(description: "reject is called")
-    exposureManager = ExposureManager(apiClient: apiClientMock, btSecureStorage: btSecureStorageMock)
     exposureManager.handleDebugAction(debugAction, resolve: { (success) in
       failExpectationResolve.fulfill()
     }) { (_, _, _) in
@@ -1319,6 +1283,31 @@ class ExposureManagerTests: XCTestCase {
       default: XCTFail()
       }
     }
+  }
+
+  @available(iOS 13.7, *)
+  func testUpdateLastExposureDetectionDateV2() {
+    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    XCTAssertNil(btSecureStorageMock.lastExposureCheckDate)
+    exposureManager.detectExposuresV2 { _ in
+      XCTAssertNotNil(btSecureStorageMock.lastExposureCheckDate)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout:5)
+  }
+
+  func testUpdateLastExposureDetectionDateV1() {
+    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
+    let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
+    let exposureManager = ExposureManager(btSecureStorage: btSecureStorageMock)
+    XCTAssertNil(btSecureStorageMock.lastExposureCheckDate)
+    exposureManager.detectExposuresV1 { _ in
+      XCTAssertNotNil(btSecureStorageMock.lastExposureCheckDate)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout:5)
   }
 
   @available(iOS 13.7, *)

@@ -25,7 +25,7 @@ const BluetoothInfo: FunctionComponent = () => {
         <GlobalText style={style.headerText}>
           {t("home.bluetooth_info_header")}
         </GlobalText>
-        <Image source={Images.PersonOnComputer} style={style.headerImage} />
+        <Image source={Images.InfoHeader} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -47,7 +47,10 @@ const BluetoothInfo: FunctionComponent = () => {
             {t("home.bluetooth_info_body")}
           </GlobalText>
         </View>
-        <Image source={Images.PhonesSharingCodes} style={style.bodyImage} />
+        <Image
+          source={Images.ProtectPrivacyReceiveKeys}
+          style={style.bodyImage}
+        />
       </ScrollView>
     </View>
   )

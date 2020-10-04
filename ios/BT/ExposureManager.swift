@@ -159,6 +159,54 @@ final class ExposureManager: NSObject {
     return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
   }
 
+  /// Update last exposure check date
+  func updateLastExposureCheckDate() {
+    btSecureStorage.lastExposureCheckDate = Date()
+  }
+
+  /// Returns the check ins as array of dictionaries
+  @objc var checkIns: [[String: Any]] {
+    return btSecureStorage.checkIns.map { $0.asDictionary }
+  }
+
+  /// Persists CheckIn in Realm
+  @objc func saveCheckIn(_ checkInStatus: CheckIn) {
+    return btSecureStorage.storeCheckIn(checkInStatus)
+  }
+
+  /// Deletes All CheckIns from Realm
+  @objc func deleteCheckins() {
+    return btSecureStorage.deleteCheckins()
+  }
+
+  @objc func deleteStaleCheckIns() {
+    btSecureStorage.deleteFourteenDaysOldCheckIns()
+  }
+
+  /// Returns the symptom log entries as array of dictionaries
+  @objc var symptomLogEntries: [[String: Any]] {
+    return btSecureStorage.symptomLogEntries.map { $0.asDictionary }
+  }
+
+  @objc func deleteStaleLogEntries() {
+    btSecureStorage.deleteFourteenDaysOldSymptomLogEntries()
+  }
+
+  /// Persists SymptomLogEntry in Realm
+  @objc func saveSymptomLogEntry(_ entry: SymptomLogEntry) {
+    return btSecureStorage.storeSymptomLogEntry(entry)
+  }
+
+  /// Deletes SymptomLogEntry in Realm
+  @objc func deleteSymptomLogEntry(_ id: String) {
+    return btSecureStorage.deleteSymptomLogEntry(id)
+  }
+
+  /// Deletes All SymptomLogEntries from Realm
+  @objc func deleteSymptomLogEntries() {
+    return btSecureStorage.deleteSymptomLogEntries()
+  }
+
   ///Notifies the user to enable bluetooth to be able to exchange keys
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
@@ -240,6 +288,18 @@ final class ExposureManager: NSObject {
 
   private var isDetectingExposures = false
 
+  @objc func detectExposures(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    detectExposures { result in
+      switch result {
+      case .success:
+        resolve(String.genericSuccess)
+      case .failure(let exposureError):
+        reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      }
+    }
+  }
+
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
     if #available(iOS 13.7, *) {
       return detectExposuresV2(completionHandler: completionHandler)
@@ -265,7 +325,10 @@ final class ExposureManager: NSObject {
       // Reset file capacity to 15 if > 24 hours have elapsed since last reset
       self.updateRemainingFileCapacity()
       guard self.btSecureStorage.userState.remainingDailyFileProcessingCapacity > 0 else {
-        // Abort if daily file capacity is exceeded
+        // Update last exposure check date for representation in the UI
+        self.updateLastExposureCheckDate()
+
+        // Abort because daily file capacity is exceeded
         return []
       }
       let indexFileString = try await(self.fetchIndexFile())
@@ -325,9 +388,8 @@ final class ExposureManager: NSObject {
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
       unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
       let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-      var exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
+      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
-      exposureSummary = try await(self.getCachedExposures(configuration: exposureConfiguraton.asENExposureConfiguration))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary {
         summary.daySummaries.forEach { (daySummary) in
@@ -367,6 +429,9 @@ final class ExposureManager: NSObject {
               lastProcessedUrlPath: String,
               progress: Progress,
               completionHandler: ((ExposureResult) -> Void)) {
+
+    // Update last exposure check date for representation in the UI
+    updateLastExposureCheckDate()
 
     if progress.isCancelled {
       btSecureStorage.exposureDetectionErrorLocalizedDescription = GenericError.unknown.localizedDescription
@@ -443,12 +508,12 @@ extension ExposureManager {
   }
 
   @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastResetDate = btSecureStorage.userState.dateLastPerformedFileCapacityReset else {
+   guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
     let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
                                        localizedMessage: String.noLastResetDateAvailable.localized)
     return callback(nil, emError)
     }
-    let posixRepresentation = NSNumber(value: lastResetDate.posixRepresentation)
+    let posixRepresentation = NSNumber(value: lastDetectionDate.posixRepresentation)
     return callback(posixRepresentation, nil)
   }
 
@@ -632,6 +697,7 @@ extension ExposureManager {
     content.title = String.newExposureNotificationTitle.localized
     content.body = String.newExposureNotificationBody.localized
     content.sound = .default
+    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
     let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
                                         content: content,
                                         trigger: nil)

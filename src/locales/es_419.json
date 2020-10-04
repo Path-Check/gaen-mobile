@@ -1,18 +1,5 @@
 {
   "_display_name": "Español (LA)",
-  "assessment": {
-    "caregiver_cta": "Siguiente",
-    "caregiver_title": "Notificar al cuidador",
-    "complete_cta": "Hecho",
-    "complete_title": "¡Todo listo!",
-    "distancing_cta": "Siguiente",
-    "distancing_title": "Distanciamiento y PPE",
-    "emergency_title": "Servicios de Emergencia",
-    "isolate_cta": "Siguiente",
-    "isolate_title": "Aislarse",
-    "next": "Siguiente",
-    "start_cta": "Inicio"
-  },
   "common": {
     "continue": "Continuar",
     "done": "Hecho",
@@ -36,7 +23,6 @@
     "privacy_policy": "Política de privacidad"
   },
   "screen_titles": {
-    "about": "Acerca de",
     "legal": "Legal"
   }
 }

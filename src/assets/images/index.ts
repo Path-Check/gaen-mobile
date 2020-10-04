@@ -2,7 +2,6 @@ import BlueGradientBackground from "./blueGradientBackground.png"
 import BoxCheckedIcon from "./boxCheckedIcon.png"
 import BoxUncheckedIcon from "./boxUncheckedIcon.png"
 import CheckInCircle from "./checkInCircle.png"
-import CodesAndPhone from "./codesAndPhone.png"
 import ConcentricCircles from "./concentricCircles.png"
 import Doctors from "./doctors.png"
 import EmptyPathBackground from "./emptyPathBackground.png"
@@ -11,20 +10,22 @@ import Export from "./export.png"
 import ForeArrow from "./foreArrow.png"
 import HomeActive from "./homeActive.png"
 import HomeInactive from "./homeInactive.png"
+import HowItWorksGetNotified from "./howItWorksGetNotified.png"
+import HowItWorksIntroduction from "./howItWorksIntroduction.png"
+import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
+import HowItWorksPhoneRemembersDevice from "./howItWorksPhoneRemembersDevice.png"
+import HowItWorksValueProposition from "./howItWorksValueProposition.png"
 import HugEmoji from "./hugEmoji.png"
+import InfoHeader from "./infoHeader.png"
 import IsolatePathBackground from "./isolatePathBackground.png"
-import MinnesotaMap from "./minnesotaMap.png"
 import MultipleCrossPathBackground from "./multipleCrossPathBackground.png"
-import PeopleHighFiving from "./peopleHighFiving.png"
-import PeopleOnPhones from "./peopleOnPhones.png"
-import PersonAndHealthExpert from "./personAndHealthExpert.png"
-import PersonGettingNotification from "./personGettingNotification.png"
-import PersonOnComputer from "./personOnComputer.png"
-import PersonOnPhoneWithCode from "./personOnPhoneWithCode.png"
-import PersonWithCodesInBackground from "./personWithCodesInBackground.png"
-import PersonWithLockedPhone from "./personWithLockedPhone.png"
-import PersonWithPhoneAndCode from "./personWithPhoneAndCode.png"
-import PhonesSharingCodes from "./phonesSharingCodes.png"
+import PersonFindingLocation from "./personFindingLocation.png"
+import ProtectPrivacyExchangeKeys from "./protectPrivacyExchangeKeys.png"
+import ProtectPrivacyReceiveKeys from "./protectPrivacyReceiveKeys.png"
+import ProtectPrivacyReceiveNotification from "./protectPrivacyReceiveNotification.png"
+import ProtectPrivacySubmitKeys from "./protectPrivacySubmitKeys.png"
+import ProtectPrivacyTop from "./protectPrivacyTop.png"
+import SelfScreenerIntro from "./selfScreenerIntro.png"
 import SickEmoji from "./sickEmoji.png"
 import SingleCrossPathBackground from "./singleCrossPathBackground.png"
 import SmileEmoji from "./smileEmoji.png"
@@ -35,7 +36,6 @@ export const Images = {
   BoxCheckedIcon,
   BoxUncheckedIcon,
   CheckInCircle,
-  CodesAndPhone,
   ConcentricCircles,
   Doctors,
   EmptyPathBackground,
@@ -44,20 +44,22 @@ export const Images = {
   ForeArrow,
   HomeActive,
   HomeInactive,
+  HowItWorksGetNotified,
+  HowItWorksIntroduction,
+  HowItWorksPersonalPrivacy,
+  HowItWorksPhoneRemembersDevice,
+  HowItWorksValueProposition,
   HugEmoji,
+  InfoHeader,
   IsolatePathBackground,
-  MinnesotaMap,
   MultipleCrossPathBackground,
-  PeopleHighFiving,
-  PeopleOnPhones,
-  PersonAndHealthExpert,
-  PersonGettingNotification,
-  PersonOnComputer,
-  PersonOnPhoneWithCode,
-  PersonWithCodesInBackground,
-  PersonWithLockedPhone,
-  PersonWithPhoneAndCode,
-  PhonesSharingCodes,
+  PersonFindingLocation,
+  ProtectPrivacyExchangeKeys,
+  ProtectPrivacyReceiveKeys,
+  ProtectPrivacyReceiveNotification,
+  ProtectPrivacySubmitKeys,
+  ProtectPrivacyTop,
+  SelfScreenerIntro,
   SickEmoji,
   SingleCrossPathBackground,
   SmileEmoji,

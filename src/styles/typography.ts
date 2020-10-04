@@ -13,12 +13,12 @@ export const xxxLarge = 30
 
 // Line Height
 export const xSmallLineHeight = 20
-export const smallLineHeight = 24
-export const mediumLineHeight = 28
-export const largeLineHeight = 30
-export const xLargeLineHeight = 32
-export const xxLargeLineHeight = 34
-export const xxxLargeLineHeight = 36
+export const smallLineHeight = 20
+export const mediumLineHeight = 24
+export const largeLineHeight = 28
+export const xLargeLineHeight = 30
+export const xxLargeLineHeight = 32
+export const xxxLargeLineHeight = 34
 
 // Letter Spacing
 export const baseLetterSpacing = 0.25

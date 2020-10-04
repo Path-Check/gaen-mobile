@@ -2,20 +2,27 @@ import React, { FunctionComponent, createContext, useContext } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
 
+type MeasurementSystem = "Imperial" | "Metric"
+
 export interface Configuration {
   appDownloadLink: string
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
-  displayReportAnIssue: boolean
-  displaySelfAssessment: boolean
-  displaySymptomChecker: boolean
+  displayMyHealth: boolean
+  displaySelfScreener: boolean
+  emergencyPhoneNumber: string
+  findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityLearnMoreUrl: string
   healthAuthorityEulaUrl: string | null
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
+  healthAuthoritySupportsAnalytics: boolean
+  healthAuthorityAnalyticsUrl: string | null
+  healthAuthorityAnalyticsSiteId: number | null
+  measurementSystem: MeasurementSystem
   regionCodes: string[]
 }
 
@@ -24,15 +31,20 @@ const initialState = {
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
-  displayReportAnIssue: false,
-  displaySelfAssessment: false,
-  displaySymptomChecker: false,
+  displayMyHealth: false,
+  displaySelfScreener: false,
+  emergencyPhoneNumber: "",
+  findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityEulaUrl: null,
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
+  healthAuthoritySupportsAnalytics: false,
+  healthAuthorityAnalyticsUrl: null,
+  healthAuthorityAnalyticsSiteId: null,
+  measurementSystem: "Imperial" as const,
   regionCodes: [],
 }
 
@@ -41,18 +53,28 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
-    LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
-    GAEN_AUTHORITY_NAME: healthAuthorityName,
-    PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
-    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
+    EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
+    FIND_A_TEST_CENTER_URL: findATestCenterUrl,
+    GAEN_AUTHORITY_NAME: healthAuthorityName,
+    LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
+    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
+    PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
+
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
-  const displayReportAnIssue = env.DISPLAY_REPORT_AN_ISSUE === "true"
-  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
-  const displaySymptomChecker = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
+
+  const measurementSystem =
+    env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
+
+  const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
+  const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
+  const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
+
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
@@ -67,15 +89,20 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appPackageName,
         displayAcceptTermsOfService,
         displayCallbackForm,
-        displayReportAnIssue,
-        displaySelfAssessment,
-        displaySymptomChecker,
+        displayMyHealth,
+        displaySelfScreener,
+        emergencyPhoneNumber,
+        findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityLearnMoreUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityName,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
         healthAuthorityPrivacyPolicyUrl,
+        healthAuthoritySupportsAnalytics,
+        healthAuthorityAnalyticsUrl,
+        healthAuthorityAnalyticsSiteId,
+        measurementSystem,
         regionCodes,
       }}
     >

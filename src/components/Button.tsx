@@ -13,7 +13,6 @@ import GlobalText from "./GlobalText"
 import { Icons } from "../assets"
 
 import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
-import { useTranslation } from "react-i18next"
 
 interface ButtonProps {
   label: string
@@ -21,9 +20,11 @@ interface ButtonProps {
   loading?: boolean
   disabled?: boolean
   customButtonStyle?: ViewStyle
+  customButtonInnerStyle?: ViewStyle
   customTextStyle?: TextStyle
   testID?: string
   hasRightArrow?: boolean
+  hasPlusIcon?: boolean
   outlined?: boolean
 }
 
@@ -33,20 +34,30 @@ const Button: FunctionComponent<ButtonProps> = ({
   disabled,
   loading,
   customButtonStyle,
+  customButtonInnerStyle,
   customTextStyle,
   testID,
   hasRightArrow,
+  hasPlusIcon,
   outlined,
 }) => {
-  const { t } = useTranslation()
-
   const determineGradient = (): string[] => {
     if (outlined) {
       return [Colors.transparent, Colors.transparent]
     } else if (disabled || loading) {
       return [Colors.secondary75, Colors.secondary75]
     } else {
-      return Colors.gradientPrimary110
+      return Colors.gradient100
+    }
+  }
+
+  const determineRightArrowColor = (): string => {
+    if (disabled) {
+      return Colors.black
+    } else if (outlined) {
+      return Colors.primary110
+    } else {
+      return Colors.white
     }
   }
 
@@ -84,13 +95,12 @@ const Button: FunctionComponent<ButtonProps> = ({
 
   const buttonStyle = {
     ...style.button,
-    ...customButtonStyle,
+    ...customButtonInnerStyle,
   }
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      accessible
       accessibilityLabel={label}
       accessibilityRole="button"
       disabled={disabled || loading}
@@ -105,17 +115,22 @@ const Button: FunctionComponent<ButtonProps> = ({
         angleCenter={{ x: 0.5, y: 0.5 }}
       >
         {loading ? (
-          <ActivityIndicator size={"large"} />
+          <ActivityIndicator size={"small"} />
         ) : (
           <>
+            {hasPlusIcon && (
+              <SvgXml
+                xml={Icons.Plus}
+                fill={disabled ? Colors.black : Colors.white}
+                style={style.leftPlus}
+              />
+            )}
             <GlobalText style={textStyle}>{label}</GlobalText>
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}
-                fill={disabled ? Colors.black : Colors.white}
+                fill={determineRightArrowColor()}
                 style={style.rightArrow}
-                accessible
-                accessibilityLabel={t("common.next")}
               />
             )}
           </>
@@ -154,6 +169,9 @@ const style = StyleSheet.create({
   },
   rightArrow: {
     marginLeft: Spacing.medium,
+  },
+  leftPlus: {
+    marginRight: Spacing.xSmall,
   },
 })
 

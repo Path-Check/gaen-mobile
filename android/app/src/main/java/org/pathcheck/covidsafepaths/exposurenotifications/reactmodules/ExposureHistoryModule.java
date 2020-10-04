@@ -1,6 +1,8 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import androidx.annotation.NonNull;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -17,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
+import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
+import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
 import org.threeten.bp.Duration;
 
 @SuppressWarnings("unused")
@@ -84,5 +88,23 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
     Long lastDetectionDate = prefs.getLastDetectionProcessDate();
     // Convert to double, we cannot send longs through the RN bridge
     promise.resolve(lastDetectionDate != null ? lastDetectionDate.doubleValue() : null);
+  }
+
+  @ReactMethod
+  public void detectExposures(Promise promise) {
+    ExposureNotificationClientWrapper.get(getReactApplicationContext())
+        .isEnabled()
+        .addOnSuccessListener(enabled -> {
+          if (enabled) {
+            WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
+            workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
+            // We are not waiting until the job is completed.
+            // Is there any way to pass the promise through all the workers?
+            promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
+          } else {
+            promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
+          }
+        })
+        .addOnFailureListener(promise::reject);
   }
 }
