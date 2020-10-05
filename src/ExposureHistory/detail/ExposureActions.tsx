@@ -88,14 +88,14 @@ const ExposureActions: FunctionComponent = () => {
           />
         )}
         {displayNextStepsLink && (
-          <View style={style.buttonContainer}>
-            <Button
-              onPress={handleOnPressNextStep}
-              label={t("exposure_history.exposure_detail.next_steps")}
-              disabled={!isInternetReachable}
-              hasRightArrow
-            />
-          </View>
+          <Button
+            onPress={handleOnPressNextStep}
+            label={t("exposure_history.exposure_detail.next_steps")}
+            disabled={!isInternetReachable}
+            customButtonStyle={style.button}
+            customButtonInnerStyle={style.buttonInner}
+            hasRightArrow
+          />
         )}
         {!isInternetReachable && (
           <GlobalText style={style.connectivityWarningText}>
@@ -129,10 +129,10 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
         })}
       </GlobalText>
       <Button
-        customButtonStyle={style.requestCallbackButton}
-        customButtonInnerStyle={style.requestCallbackButtonInner}
         onPress={handleOnPressRequestCallback}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
         hasRightArrow
       />
     </>
@@ -193,20 +193,17 @@ const style = StyleSheet.create({
   recommendationText: {
     ...Typography.body3,
   },
-  buttonContainer: {
-    alignSelf: "flex-start",
-  },
   connectivityWarningText: {
     ...Typography.error,
     marginTop: Spacing.small,
   },
-  requestCallbackButton: {
+  button: {
     marginBottom: Spacing.small,
     width: "100%",
     alignSelf: "center",
     paddingVertical: Spacing.small,
   },
-  requestCallbackButtonInner: {
+  buttonInner: {
     ...Buttons.medium,
     width: "100%",
   },

@@ -260,14 +260,16 @@
   "self_screener": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
+      "get_my_guidance": "Obtén mi orientación",
       "how_old_are_you": "¿Cuántos años tienes?",
       "sixty_five_and_over": "65+"
     },
     "call_emergency_services": {
-      "call_emergency_services": "Llama al 911"
+      "seek_medical_attention": "Busque atención médica inmediatamente"
     },
     "emergency_symptoms": {
-      "chest_pain": "Dolor o presión en el pecho severos y constantes",
+      "are_you_experiencing": "¿Tiene alguno de estos síntomas de emergencia?",
+      "chest_pain": "Dolor o presión en el pecho severo y constantes",
       "difficulty_breathing": "Dificultad extrema para respirar",
       "disorientation": "Desorientación grave o falta de respuesta",
       "lightheadedness": "Mareos intensos y constantes",
@@ -293,7 +295,6 @@
       "find_telehealth": "Buscar servicios de telemedicina",
       "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
       "guidance": "Guía",
-      "how_to_care_for_yourself_and_others": "Cómo cuidarse a sí mismo y a los demás mientras está enfermo con síntomas de COVID-19:",
       "if_symptoms_develop": "Si presenta alguno de estos síntomas o si comienza a sentirse peor, llame a su proveedor de atención médica, a su clínica o a un proveedor de telemedicina.",
       "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
       "monitor_your_symptoms": "Lamento que te sientas mal. Quédese en casa y monitorea sus síntomas. Llame a su proveedor si empeora sus síntomas.",
@@ -313,17 +314,12 @@
     },
     "intro": {
       "agree_and_start_screener": "Acepte y comience el evaluador",
-      "covid19_self_screener": "Autoevaluación COVID-19"
-    },
-    "summary": {
-      "asymptomatic_group": "¡Me alegra saber que se siente bien!\n Aunque no esté enfermo, debe quedarse en su casa durante 14 días. COVID-19 puede ser transmitido por personas que no presentan síntomas.",
-      "get_my_guidance": "Obtén mi orientación",
-      "non_covid_symptom_group": "Siento que no te sientas bien.\nSegún tus respuestas, actualmente no estás mostrando síntomas comunes de COVID-19.",
-      "primary_symptom_group_1": "Siento que no te sientas bien.\nSus síntomas pueden estar relacionados con COVID-19. También tienes condiciones médicas que pueden ponerte en riesgo de enfermarte más gravemente.",
-      "primary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "primary_symptom_group_3": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "secondary_symptom_group_1": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "secondary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19."
+      "covid19_self_screener": "Autoevaluación COVID-19",
+      "find_out_how_to_care": "Averigua cómo cuidarte a ti mismo y a los demás después de un contacto cercano con alguien positivo para COVID-19",
+      "if_this_is": "Si se trata de una emergencia, llame al {{emergencyPhoneNumber}}",
+      "this_is_based_on": "Esto se basa en la guía más reciente del CDC y puede actualizarse con el tiempo a medida que aprendamos sobre cómo se propaga el virus y la enfermedad que causa.",
+      "this_is_not_intended": "Esto no es un diagnóstico o tratamiento oficial",
+      "you_are_a_resident": "Usted es un residente de la comunidad apoyado por {{healthauthorityname}}"
     },
     "underlying_conditions": {
       "blood_disorder": "Trastorno sanguíneo, como enfermedad de células falciformes o talasemia",
