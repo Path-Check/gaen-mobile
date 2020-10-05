@@ -59,7 +59,7 @@ const compareDatesDescending = (
   return dateLeft < dateRight ? 1 : -1
 }
 
-const groupLogEntriesByDay = (allEntries: SymptomLogEntry[]): LogDataByDay => {
+const logEntryBuckets = (allEntries: SymptomLogEntry[]): LogDataByDay => {
   const groupedEntries: LogDataByDay = {}
 
   allEntries.forEach((entry) => {
@@ -79,10 +79,10 @@ const groupLogEntriesByDay = (allEntries: SymptomLogEntry[]): LogDataByDay => {
   return groupedEntries
 }
 
-export const combineSymptomAndCheckInLogs = (
+export const dayLogData = (
   symptomLogEntries: SymptomLogEntry[],
 ): DayLogData[] => {
-  const symptomEntriesLogData = groupLogEntriesByDay(symptomLogEntries)
+  const symptomEntriesLogData = logEntryBuckets(symptomLogEntries)
 
   return Object.keys(symptomEntriesLogData)
     .map((date: string) => {

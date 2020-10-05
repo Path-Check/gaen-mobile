@@ -6,12 +6,7 @@ import React, {
   useState,
 } from "react"
 
-import {
-  SymptomLogEntry,
-  DayLogData,
-  combineSymptomAndCheckInLogs,
-  Symptom,
-} from "./symptoms"
+import { SymptomLogEntry, DayLogData, dayLogData, Symptom } from "./symptoms"
 import {
   getLogEntries,
   createLogEntry,
@@ -71,7 +66,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    setDailyLogData(combineSymptomAndCheckInLogs(logEntries))
+    setDailyLogData(dayLogData(logEntries))
   }, [logEntries])
 
   const addLogEntry = async (symptoms: Symptom[]) => {
