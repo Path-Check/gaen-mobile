@@ -1,7 +1,7 @@
-import { SymptomLogEntry, combineSymptomAndCheckInLogs } from "./symptoms"
+import { SymptomLogEntry, dayLogData } from "./symptoms"
 import { beginningOfDay } from "../utils/dateTime"
 
-describe("combineSymptomAndCheckInLogs", () => {
+describe("dayLogData", () => {
   it("returns a set of log entries grouped by day with entries sorted", () => {
     const earlierDayDateString = "2020-09-21"
     const earlierDayLogEntryOnePosix = Date.parse(
@@ -47,7 +47,7 @@ describe("combineSymptomAndCheckInLogs", () => {
       date: recentDayLogEntryPosix,
     }
     expect(
-      combineSymptomAndCheckInLogs([
+      dayLogData([
         middleDayLogEntryTwo,
         recentDayEntry,
         earlierDayLogEntryOne,
@@ -101,9 +101,7 @@ describe("combineSymptomAndCheckInLogs", () => {
       date: laterDateCheckInBeginningOfDay,
     }
 
-    expect(
-      combineSymptomAndCheckInLogs([logEntryA, logEntryB, logEntryC]),
-    ).toEqual([
+    expect(dayLogData([logEntryA, logEntryB, logEntryC])).toEqual([
       {
         date: laterDateCheckInBeginningOfDay,
         symptomLogEntries: [logEntryC],

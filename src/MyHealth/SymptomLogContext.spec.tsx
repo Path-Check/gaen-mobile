@@ -8,7 +8,7 @@ import {
   createLogEntry,
   deleteStaleSymptomLogs,
 } from "./nativeModule"
-import { Symptom, combineSymptomAndCheckInLogs } from "./symptoms"
+import { Symptom, dayLogData } from "./symptoms"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
@@ -28,7 +28,7 @@ describe("SymptomLogProvider", () => {
       }
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
-      const AddCheckSymptomLogEntry = () => {
+      const AddCheckLogSymptoms = () => {
         const { addLogEntry } = useSymptomLogContext()
 
         return (
@@ -45,7 +45,7 @@ describe("SymptomLogProvider", () => {
 
       const { getByLabelText } = render(
         <SymptomLogProvider>
-          <AddCheckSymptomLogEntry />
+          <AddCheckLogSymptoms />
         </SymptomLogProvider>,
       )
 
@@ -102,7 +102,7 @@ describe("SymptomLogProvider", () => {
     it("fetch all daily check-in and log entries to serialize", async () => {
       const logEntries = [{ date: Date.now(), symptoms: [], id: "1" }]
       ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)
-      const serializeSpy = combineSymptomAndCheckInLogs as jest.Mock
+      const serializeSpy = dayLogData as jest.Mock
 
       render(
         <SymptomLogProvider>

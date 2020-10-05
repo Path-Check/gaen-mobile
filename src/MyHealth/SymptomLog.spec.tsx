@@ -5,22 +5,23 @@ import { useNavigation } from "@react-navigation/native"
 import { SymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry } from "./symptoms"
 
-import MyHealthContent from "./MyHealthContent"
+import SymptomLog from "./SymptomLog"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
-import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
+import { MyHealthStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
-describe("MyHealthContent", () => {
+describe("SymptomLog", () => {
   it("allows the user to add a symptom log entry", async () => {
     const navigateSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({
       navigate: navigateSpy,
     })
+    const defaultContext = factories.symptomLogContext.build()
     const { getByLabelText } = render(
-      <SymptomLogContext.Provider value={factories.symptomLogContext.build({})}>
-        <MyHealthContent />
+      <SymptomLogContext.Provider value={defaultContext}>
+        <SymptomLog />
       </SymptomLogContext.Provider>,
     )
 
@@ -33,29 +34,7 @@ describe("MyHealthContent", () => {
     })
   })
 
-  describe("when the user is not feeling well", () => {
-    it("launches the self screener", async () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({
-        navigate: navigateSpy,
-      })
-      const { getByLabelText } = render(
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({})}
-        >
-          <MyHealthContent />
-        </SymptomLogContext.Provider>,
-      )
-      fireEvent.press(getByLabelText("Not Feeling Well?"))
-      await waitFor(() => {
-        expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-          screen: ModalStackScreens.SelfScreenerFromMyHealth,
-        })
-      })
-    })
-  })
-
-  describe("when the user has no checkins or symptom logs", () => {
+  describe("when the user has no symptom logs", () => {
     it("displays a 'no logs' message", () => {
       const { getByText } = render(
         <SymptomLogContext.Provider
@@ -63,7 +42,7 @@ describe("MyHealthContent", () => {
             dailyLogData: [],
           })}
         >
-          <MyHealthContent />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
@@ -71,7 +50,7 @@ describe("MyHealthContent", () => {
     })
   })
 
-  describe("when the user has log data with no checkIn entries", () => {
+  describe("when the user has log data", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "September 21, 2020"
       const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
@@ -104,7 +83,7 @@ describe("MyHealthContent", () => {
             ],
           })}
         >
-          <MyHealthContent />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
@@ -141,7 +120,7 @@ describe("MyHealthContent", () => {
             ],
           })}
         >
-          <MyHealthContent />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
