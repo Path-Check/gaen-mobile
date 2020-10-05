@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { TouchableOpacity, View, StyleSheet } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import { Icons } from "../assets"
 import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
@@ -70,10 +70,8 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
           height={Iconography.small}
         />
         <View style={style.activationStatusTextContainer}>
-          <GlobalText style={style.bottomHeaderText}>{headerText}</GlobalText>
-          <GlobalText style={style.bottomBodyText}>
-            {content.bodyText}
-          </GlobalText>
+          <Text style={style.bottomHeaderText}>{headerText}</Text>
+          <Text style={style.bottomBodyText}>{content.bodyText}</Text>
         </View>
       </View>
       <View style={style.activationStatusRightContainer}>

@@ -1,32 +1,32 @@
 import React, { ReactNode, FunctionComponent } from "react"
-import { Text, TextStyle } from "react-native"
+import { Text as RNText, TextStyle } from "react-native"
 
 import { useLanguageDirection } from "../locales/languages"
 
-interface GlobalTextProps {
+interface TextProps {
   style?: TextStyle
   testID?: string
   onPress?: () => void
   children: ReactNode | string
 }
 
-const GlobalText: FunctionComponent<GlobalTextProps> = ({
+const Text: FunctionComponent<TextProps> = ({
   style,
   testID,
   children,
   onPress,
-}: GlobalTextProps) => {
+}: TextProps) => {
   const writingDirection = useLanguageDirection()
 
   return (
-    <Text
+    <RNText
       onPress={onPress}
       style={[{ writingDirection }, style]}
       testID={testID}
     >
       {children}
-    </Text>
+    </RNText>
   )
 }
 
-export default GlobalText
+export default Text

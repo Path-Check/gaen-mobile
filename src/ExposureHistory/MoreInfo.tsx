@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useStatusBarEffect } from "../navigation/index"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import { Spacing, Typography, Colors } from "../styles"
 
@@ -18,20 +18,20 @@ const MoreInfo: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <View style={style.section}>
-          <GlobalText style={style.headerText}>
+          <Text style={style.headerText}>
             {t("exposure_history.why_did_i_get_an_en")}
-          </GlobalText>
-          <GlobalText style={style.contentText}>
+          </Text>
+          <Text style={style.contentText}>
             {t("exposure_history.why_did_i_get_an_en_para")}
-          </GlobalText>
+          </Text>
         </View>
         <View style={style.section}>
-          <GlobalText style={style.headerText}>
+          <Text style={style.headerText}>
             {t("exposure_history.how_does_this_work")}
-          </GlobalText>
-          <GlobalText style={style.contentText}>
+          </Text>
+          <Text style={style.contentText}>
             {t("exposure_history.how_does_this_work_para")}
-          </GlobalText>
+          </Text>
         </View>
       </ScrollView>
     </>

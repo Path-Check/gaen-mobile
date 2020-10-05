@@ -11,7 +11,7 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect, Stacks, ModalStackScreens } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
-import { GlobalText, Button, StatusBar } from "../components"
+import { Text, Button, StatusBar } from "../components"
 import {
   HealthAssessment,
   determineHealthAssessment,
@@ -169,9 +169,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("symptom_checker.what_symptoms")}
-        </GlobalText>
+        </Text>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -200,9 +200,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
                   underlayColor={Colors.neutral10}
                   accessibilityLabel={translation}
                 >
-                  <GlobalText style={determineSymptomButtonTextStyle(symptom)}>
+                  <Text style={determineSymptomButtonTextStyle(symptom)}>
                     {translation}
-                  </GlobalText>
+                  </Text>
                 </TouchableHighlight>
               )
             },
@@ -221,9 +221,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
             accessibilityLabel={t("symptom_checker.delete_entry")}
             style={style.deleteButtonContainer}
           >
-            <GlobalText style={style.deleteButtonText}>
+            <Text style={style.deleteButtonText}>
               {t("symptom_checker.delete_entry")}
-            </GlobalText>
+            </Text>
           </TouchableOpacity>
         )}
       </ScrollView>

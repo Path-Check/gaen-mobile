@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import GlobalText from "./GlobalText"
+import Text from "./Text"
 
 import { Iconography, Spacing, Typography, Colors } from "../styles"
 
@@ -29,7 +29,7 @@ const ListItem: FunctionComponent<ListItemProps> = ({
           accessible
           accessibilityLabel={label}
         />
-        <GlobalText style={style.listItemText}>{label}</GlobalText>
+        <Text style={style.listItemText}>{label}</Text>
       </View>
     </TouchableOpacity>
   )

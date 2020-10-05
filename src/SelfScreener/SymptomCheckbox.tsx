@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react"
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import { Colors, Iconography, Forms } from "../styles"
 import { Icons } from "../assets"
@@ -46,7 +46,7 @@ const SymptomCheckbox: FunctionComponent<SymptomCheckboxProps> = ({
           width={Iconography.small}
           height={Iconography.small}
         />
-        <GlobalText style={style.checkboxText}>{label}</GlobalText>
+        <Text style={style.checkboxText}>{label}</Text>
       </View>
     </TouchableWithoutFeedback>
   )

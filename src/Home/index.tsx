@@ -25,13 +25,8 @@ import {
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "../navigation"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import {
-  StatusBar,
-  GlobalText,
-  Button,
-  GradientBackground,
-} from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
+import { StatusBar, Text, Button, GradientBackground } from "../components"
 
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
@@ -147,12 +142,12 @@ const Home: FunctionComponent = () => {
               />
               {appIsActive && <ExpandingCircleAnimation />}
             </View>
-            <GlobalText style={style.headerText} testID={"home-header"}>
+            <Text style={style.headerText} testID={"home-header"}>
               {headerText}
-            </GlobalText>
-            <GlobalText style={style.subheaderText} testID={"home-subheader"}>
+            </Text>
+            <Text style={style.subheaderText} testID={"home-subheader"}>
               {subheaderText()}
-            </GlobalText>
+            </Text>
           </View>
         </GradientBackground>
         <View style={style.bottomContainer}>

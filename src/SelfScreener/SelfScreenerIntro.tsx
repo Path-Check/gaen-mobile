@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, GlobalText, StatusBar } from "../components"
+import { Button, Text, StatusBar } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Colors, Iconography, Layout, Spacing, Typography } from "../styles"
@@ -52,27 +52,27 @@ const SelfScreenerIntro: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("self_screener.intro.covid19_self_screener")}
-        </GlobalText>
-        <GlobalText style={style.subheaderText}>
+        </Text>
+        <Text style={style.subheaderText}>
           {t("self_screener.intro.find_out_how_to_care")}
-        </GlobalText>
+        </Text>
         <View style={style.bulletListContainer}>
-          <GlobalText style={style.bulletText}>
+          <Text style={style.bulletText}>
             {t("self_screener.intro.this_is_not_intended")}
-          </GlobalText>
-          <GlobalText style={style.bulletText}>
+          </Text>
+          <Text style={style.bulletText}>
             {t("self_screener.intro.you_are_a_resident", {
               healthAuthorityName,
             })}
-          </GlobalText>
-          <GlobalText style={style.bulletText}>
+          </Text>
+          <Text style={style.bulletText}>
             {t("self_screener.intro.this_is_based_on")}
-          </GlobalText>
-          <GlobalText style={{ ...style.bulletText, ...style.emergencyText }}>
+          </Text>
+          <Text style={{ ...style.bulletText, ...style.emergencyText }}>
             {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
-          </GlobalText>
+          </Text>
         </View>
         <Button
           onPress={handleOnPressStartScreener}

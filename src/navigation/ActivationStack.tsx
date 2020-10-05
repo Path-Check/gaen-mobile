@@ -8,7 +8,7 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
 import { useSystemServicesContext } from "../SystemServicesContext"
 
@@ -116,9 +116,9 @@ const ActivationStack: FunctionComponent = () => {
   }) => {
     return (
       <View style={style.headerRight}>
-        <GlobalText style={style.headerRightText}>
+        <Text style={style.headerRightText}>
           {t("onboarding.step", { currentStep, totalSteps })}
-        </GlobalText>
+        </Text>
         <CloseButton />
       </View>
     )

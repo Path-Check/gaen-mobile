@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ModalStackScreens, Stacks } from "../../navigation"
-import { GlobalText, Button } from "../../components"
+import { Text, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
@@ -44,18 +44,18 @@ const ExposureActions: FunctionComponent = () => {
 
   return (
     <>
-      <GlobalText style={style.bottomHeaderText}>
+      <Text style={style.bottomHeaderText}>
         {t("exposure_history.exposure_detail.ha_guidance_header")}
-      </GlobalText>
+      </Text>
       <>
         {displayCallbackForm && (
           <RequestCallBackActions healthAuthorityName={healthAuthorityName} />
         )}
-        <GlobalText style={style.bottomHeaderText}>
+        <Text style={style.bottomHeaderText}>
           {t("exposure_history.exposure_detail.general_guidance", {
             healthAuthorityName,
           })}
-        </GlobalText>
+        </Text>
         <View style={style.recommendations}>
           <RecommendationBubble
             icon={Icons.IsolateBubbles}
@@ -98,9 +98,9 @@ const ExposureActions: FunctionComponent = () => {
           />
         )}
         {!isInternetReachable && (
-          <GlobalText style={style.connectivityWarningText}>
+          <Text style={style.connectivityWarningText}>
             {t("exposure_history.no_connectivity_message")}
-          </GlobalText>
+          </Text>
         )}
       </>
     </>
@@ -123,11 +123,11 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
 
   return (
     <>
-      <GlobalText style={style.bottomSubheaderText}>
+      <Text style={style.bottomSubheaderText}>
         {t("exposure_history.exposure_detail.schedule_callback", {
           healthAuthorityName,
         })}
-      </GlobalText>
+      </Text>
       <Button
         onPress={handleOnPressRequestCallback}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
@@ -157,7 +157,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
           height={Iconography.small}
         />
       </View>
-      <GlobalText style={style.recommendationText}>{text}</GlobalText>
+      <Text style={style.recommendationText}>{text}</Text>
     </View>
   )
 }

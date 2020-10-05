@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ExposureHistoryStackParamList } from "../navigation"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { ExposureDatum, exposureWindowBucket } from "../exposure"
 
@@ -42,9 +42,9 @@ const ExposureDetail: FunctionComponent = () => {
   return (
     <ScrollView style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("exposure_history.exposure_detail.header")}
-        </GlobalText>
+        </Text>
         <View style={style.exposureWindowContainer}>
           <SvgXml
             xml={Icons.ExposureIcon}
@@ -54,9 +54,9 @@ const ExposureDetail: FunctionComponent = () => {
             width={Iconography.xxSmall}
             height={Iconography.xxSmall}
           />
-          <GlobalText style={style.exposureWindowText}>
+          <Text style={style.exposureWindowText}>
             {exposureWindowBucketInWords(exposureDatum)}
-          </GlobalText>
+          </Text>
         </View>
       </View>
       <View style={style.bottomContainer}>

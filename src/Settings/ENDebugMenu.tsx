@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
@@ -94,7 +94,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[style.listItem, itemStyle]} onPress={onPress}>
-        <GlobalText style={style.listItemText}>{label}</GlobalText>
+        <Text style={style.listItemText}>{label}</Text>
       </TouchableOpacity>
     )
   }

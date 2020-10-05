@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 import { useSymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry, DayLogData } from "./symptoms"
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
 import { MyHealthStackScreens } from "../navigation"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
@@ -37,15 +37,15 @@ const LogEntry: FunctionComponent<LogEntryProps> = ({ logEntry }) => {
     <View style={style.symptomLogContainer}>
       <View style={style.timeAndEditContainer}>
         {dayJsDate && (
-          <GlobalText style={style.timeText}>
+          <Text style={style.timeText}>
             {dayJsDate.local().format("h:mm A")}
-          </GlobalText>
+          </Text>
         )}
         <TouchableOpacity
           onPress={handleOnPressEdit}
           accessibilityLabel={t("common.edit")}
         >
-          <GlobalText style={style.editText}>{t("common.edit")}</GlobalText>
+          <Text style={style.editText}>{t("common.edit")}</Text>
         </TouchableOpacity>
       </View>
       <View style={style.symptomsContainer}>
@@ -53,9 +53,7 @@ const LogEntry: FunctionComponent<LogEntryProps> = ({ logEntry }) => {
           const translatedSymptom = t(`symptoms.${symptom}`)
           return (
             <View style={style.symptomTextContainer} key={translatedSymptom}>
-              <GlobalText style={style.symptomText}>
-                {translatedSymptom}
-              </GlobalText>
+              <Text style={style.symptomText}>{translatedSymptom}</Text>
             </View>
           )
         })}
@@ -76,9 +74,9 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
   return (
     <>
       {dayJsDate && (
-        <GlobalText style={style.dateText}>
+        <Text style={style.dateText}>
           {dayJsDate.local().format("MMMM D, YYYY")}
-        </GlobalText>
+        </Text>
       )}
       {symptomLogEntries.map((logEntry) => {
         return <LogEntry key={logEntry.id} logEntry={logEntry} />
@@ -115,9 +113,9 @@ const SymptomLog: FunctionComponent = () => {
           />
         </View>
         {noSymptomHistory ? (
-          <GlobalText style={style.noSymptomHistoryText}>
+          <Text style={style.noSymptomHistoryText}>
             {t("symptom_checker.no_symptom_history")}
-          </GlobalText>
+          </Text>
         ) : (
           dailyLogData.map((logData) => {
             return <DaySummary key={logData.date} dayLogData={logData} />

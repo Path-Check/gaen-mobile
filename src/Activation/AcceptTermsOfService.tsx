@@ -5,14 +5,13 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  Text,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { GlobalText, Button, GradientBackground } from "../components"
+import { Text, Button, GradientBackground } from "../components"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
@@ -44,9 +43,9 @@ const AcceptTermsOfService: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View>
-          <GlobalText style={style.headerText}>
+          <Text style={style.headerText}>
             {t("onboarding.terms_header_title")}
-          </GlobalText>
+          </Text>
           <View style={style.linksContainer}>
             <DocumentLink
               docName={t("onboarding.privacy_policy")}
@@ -73,9 +72,9 @@ const AcceptTermsOfService: FunctionComponent = () => {
               width={Iconography.small}
               height={Iconography.small}
             />
-            <GlobalText style={style.checkboxText}>
+            <Text style={style.checkboxText}>
               {t("onboarding.eula_agree_terms_of_use")}
-            </GlobalText>
+            </Text>
           </TouchableOpacity>
           <Button
             onPress={handleOnPressNext}
@@ -110,11 +109,8 @@ const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
   return (
     <TouchableOpacity style={style.linkContainer} onPress={openLink}>
       <View style={style.linkTextContainer}>
-        <GlobalText style={style.linkText}>
-          {t("onboarding.please_read_the")}
-        </GlobalText>
-        <Text> </Text>
-        <GlobalText style={style.link}>{docName}</GlobalText>
+        <Text style={style.linkText}>{t("onboarding.please_read_the")}</Text>
+        <Text style={style.link}>{docName}</Text>
       </View>
       <SvgXml
         xml={Icons.Arrow}

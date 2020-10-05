@@ -9,7 +9,7 @@ import {
 import LinearGradient from "react-native-linear-gradient"
 import { SvgXml } from "react-native-svg"
 
-import GlobalText from "./GlobalText"
+import Text from "./Text"
 import { Icons } from "../assets"
 
 import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
@@ -125,7 +125,7 @@ const Button: FunctionComponent<ButtonProps> = ({
                 style={style.leftPlus}
               />
             )}
-            <GlobalText style={textStyle}>{label}</GlobalText>
+            <Text style={textStyle}>{label}</Text>
             {hasRightArrow && (
               <SvgXml
                 xml={Icons.Arrow}

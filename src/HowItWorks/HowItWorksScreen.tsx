@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
-import { StatusBar, GlobalText, Button } from "../components"
+import { StatusBar, Text, Button } from "../components"
 import {
   ModalStackScreens,
   Stacks,
@@ -82,15 +82,11 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             angleCenter={{ x: 0.5, y: 0.5 }}
             style={style.languageButtonContainer}
           >
-            <GlobalText style={style.languageButtonText}>
-              {languageName}
-            </GlobalText>
+            <Text style={style.languageButtonText}>{languageName}</Text>
           </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleOnPressSkip}>
-          <GlobalText style={style.skipButtonText}>
-            {t("common.skip")}
-          </GlobalText>
+          <Text style={style.skipButtonText}>{t("common.skip")}</Text>
         </TouchableOpacity>
       </View>
       <View style={style.outerContainer}>
@@ -110,9 +106,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
               highlightedDotIdx={howItWorksScreenContent.screenNumber}
               totalDotCount={totalScreenCount}
             />
-            <GlobalText style={style.headerText}>
+            <Text style={style.headerText}>
               {howItWorksScreenContent.header}
-            </GlobalText>
+            </Text>
           </View>
         </ScrollView>
         <View style={style.bottomButtonContainer}>
@@ -125,9 +121,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
               hasRightArrow
             />
             <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
-              <GlobalText style={style.bottomButtonText}>
+              <Text style={style.bottomButtonText}>
                 {t("onboarding.protect_privacy_button")}
-              </GlobalText>
+              </Text>
             </TouchableOpacity>
           </>
         </View>

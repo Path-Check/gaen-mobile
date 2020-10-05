@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { ActivationStackScreens } from "../navigation"
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { isPlatformiOS } from "../utils"
 
@@ -53,24 +53,24 @@ const ActivateProximityTracing: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("onboarding.proximity_tracing_header")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("onboarding.proximity_tracing_subheader1")}
-          </GlobalText>
-          <GlobalText style={style.body}>
+          </Text>
+          <Text style={style.body}>
             {t("onboarding.proximity_tracing_body1")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("onboarding.proximity_tracing_subheader2")}
-          </GlobalText>
-          <GlobalText style={style.body}>
+          </Text>
+          <Text style={style.body}>
             {t("onboarding.proximity_tracing_body2")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("onboarding.proximity_tracing_subheader3")}
-          </GlobalText>
+          </Text>
         </View>
         <View style={style.buttonsContainer}>
           <Button
@@ -81,9 +81,9 @@ const ActivateProximityTracing: FunctionComponent = () => {
             onPress={handleOnPressDontEnable}
             style={style.secondaryButton}
           >
-            <GlobalText style={style.secondaryButtonText}>
+            <Text style={style.secondaryButtonText}>
               {t("common.no_thanks")}
-            </GlobalText>
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -64,15 +64,11 @@ const ActivateLocation: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <GlobalText style={style.header}>
-            {t("onboarding.location_header")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          <Text style={style.header}>{t("onboarding.location_header")}</Text>
+          <Text style={style.subheader}>
             {t("onboarding.location_subheader")}
-          </GlobalText>
-          <GlobalText style={style.body}>
-            {t("onboarding.location_body")}
-          </GlobalText>
+          </Text>
+          <Text style={style.body}>{t("onboarding.location_body")}</Text>
         </View>
         <View style={style.buttonsContainer}>
           <Button
@@ -83,9 +79,9 @@ const ActivateLocation: FunctionComponent = () => {
             onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
           >
-            <GlobalText style={style.secondaryButtonText}>
+            <Text style={style.secondaryButtonText}>
               {t("common.maybe_later")}
-            </GlobalText>
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

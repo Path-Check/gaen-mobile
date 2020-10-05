@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
-import { StatusBar, GlobalText, Button } from "../../components"
+import { StatusBar, Text, Button } from "../../components"
 import { useStatusBarEffect } from "../../navigation/index"
 import { useExposureContext } from "../../ExposureContext"
 
@@ -60,9 +60,9 @@ const History: FunctionComponent<HistoryProps> = ({
       >
         <View>
           <View style={style.headerRow}>
-            <GlobalText style={style.headerText}>
+            <Text style={style.headerText}>
               {t("screen_titles.exposure_history")}
-            </GlobalText>
+            </Text>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}

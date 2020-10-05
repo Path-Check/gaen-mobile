@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 
 import { EmergencySymptom, SymptomGroup } from "./selfScreener"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
@@ -63,12 +63,12 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
         />
       }
     >
-      <GlobalText style={style.headerText}>
+      <Text style={style.headerText}>
         {t("self_screener.emergency_symptoms.are_you_experiencing")}
-      </GlobalText>
-      <GlobalText style={style.subheaderText}>
+      </Text>
+      <Text style={style.subheaderText}>
         {t("self_screener.emergency_symptoms.select_any")}
-      </GlobalText>
+      </Text>
       <SymptomCheckbox
         label={emergencySymptomToString(CHEST_PAIN)}
         onPress={() => updateSymptoms(CHEST_PAIN)}
