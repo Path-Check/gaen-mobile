@@ -84,7 +84,7 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
 
   const navigationBarOptions: StackNavigationOptions = {
     title: "",
-    headerStyle: { backgroundColor: Colors.secondary10 },
+    headerStyle: { backgroundColor: Colors.primaryLightBackground },
     headerLeft: backButton,
     headerRight: cancelButton,
     headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
