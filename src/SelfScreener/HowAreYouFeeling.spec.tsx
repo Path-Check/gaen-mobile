@@ -9,14 +9,8 @@ import { factories } from "../factories"
 jest.mock("@react-navigation/native")
 
 describe("HowAreYouFeeling", () => {
-  it("displays the screen header", () => {
-    const { queryByText } = render(<HowAreYouFeeling />)
-
-    expect(queryByText("How are you feeling?")).not.toBeNull()
-  })
-
   describe("when the user taps the feeling good button", () => {
-    it("clears the symptoms and navigates to the guidence screen", async () => {
+    it("clears the symptoms and navigates to the guidence screen", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
@@ -32,28 +26,24 @@ describe("HowAreYouFeeling", () => {
         </SelfScreenerContext.Provider>,
       )
       fireEvent.press(getByLabelText("Good"))
-      await waitFor(() => {
-        expect(navigateSpy).toHaveBeenCalledWith(
-          SelfScreenerStackScreens.Guidance,
-        )
-        expect(clearSymptomsSpy).toHaveBeenCalled()
-      })
+      expect(navigateSpy).toHaveBeenCalledWith(
+        SelfScreenerStackScreens.Guidance,
+      )
+      expect(clearSymptomsSpy).toHaveBeenCalled()
     })
   })
 
   describe("when the user taps the not feeling good button", () => {
-    it("navigates to the symptomatic flow", async () => {
+    it("navigates to the symptomatic flow", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
       })
-      await waitFor(() => {
-        const { getByLabelText } = render(<HowAreYouFeeling />)
-        fireEvent.press(getByLabelText("Not well"))
-        expect(navigateSpy).toHaveBeenCalledWith(
-          SelfScreenerStackScreens.EmergencySymptomsQuestions,
-        )
-      })
+      const { getByLabelText } = render(<HowAreYouFeeling />)
+      fireEvent.press(getByLabelText("Not well"))
+      expect(navigateSpy).toHaveBeenCalledWith(
+        SelfScreenerStackScreens.EmergencySymptomsQuestions,
+      )
     })
   })
 })

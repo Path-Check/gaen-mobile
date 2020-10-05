@@ -4,55 +4,40 @@ import { useNavigation } from "@react-navigation/native"
 import {
   Image,
   ImageSourcePropType,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native"
 
-import { SelfScreenerStackScreens } from "../navigation"
-import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
 import { GlobalText } from "../components"
-import { Images } from "../assets"
+import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
+
+import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
+import { Images } from "../assets"
 
 const HowAreYouFeeling: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const selfScreenerContext = useSelfScreenerContext()
 
-  const handlePressGood = () => {
+  const handleOnPressGood = () => {
     selfScreenerContext.clearSymptoms()
     navigation.navigate(SelfScreenerStackScreens.Guidance)
   }
-  const handlePressNotWell = () => {
+  const handleOnPressNotWell = () => {
     navigation.navigate(SelfScreenerStackScreens.EmergencySymptomsQuestions)
   }
 
   return (
-    <View style={style.contentContainer}>
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
       <GlobalText style={style.headerText}>
         {t("self_screener.how_are_you_feeling.title")}
       </GlobalText>
-      <SelectFeeling
-        handleOnPressGood={handlePressGood}
-        handleOnPressNotWell={handlePressNotWell}
-      />
-    </View>
-  )
-}
-
-interface SelectFeelingProps {
-  handleOnPressGood: () => void
-  handleOnPressNotWell: () => void
-}
-
-const SelectFeeling: FunctionComponent<SelectFeelingProps> = ({
-  handleOnPressGood,
-  handleOnPressNotWell,
-}) => {
-  const { t } = useTranslation()
-  return (
-    <>
       <View style={style.feelingButtonsContainer}>
         <FeelingButton
           image={Images.SmileEmoji}
@@ -66,7 +51,7 @@ const SelectFeeling: FunctionComponent<SelectFeelingProps> = ({
           onPress={handleOnPressNotWell}
         />
       </View>
-    </>
+    </ScrollView>
   )
 }
 

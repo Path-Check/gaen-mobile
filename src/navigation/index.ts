@@ -180,7 +180,6 @@ export const MyHealthStackScreens: {
 }
 
 export type SelfScreenerStackScreen =
-  | "AsymptomaticFlowIntro"
   | "SelfScreenerIntro"
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
@@ -193,7 +192,6 @@ export type SelfScreenerStackScreen =
 export const SelfScreenerStackScreens: {
   [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
 } = {
-  AsymptomaticFlowIntro: "AsymptomaticFlowIntro",
   SelfScreenerIntro: "SelfScreenerIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
