@@ -1,19 +1,40 @@
 import React from "react"
-import { fireEvent, render } from "@testing-library/react-native"
+import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomLogContext } from "./SymptomLogContext"
-import { SymptomLogEntry, CheckInStatus } from "./symptoms"
+import { SymptomLogEntry } from "./symptoms"
 
-import OverTime from "./OverTime"
+import SymptomLog from "./SymptomLog"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
 import { MyHealthStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
-describe("OverTime", () => {
-  describe("when the user has no checkins or symptom logs", () => {
+describe("SymptomLog", () => {
+  it("allows the user to add a symptom log entry", async () => {
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({
+      navigate: navigateSpy,
+    })
+    const defaultContext = factories.symptomLogContext.build()
+    const { getByLabelText } = render(
+      <SymptomLogContext.Provider value={defaultContext}>
+        <SymptomLog />
+      </SymptomLogContext.Provider>,
+    )
+
+    fireEvent.press(getByLabelText("Log symptoms"))
+
+    await waitFor(() => {
+      expect(navigateSpy).toHaveBeenCalledWith(
+        MyHealthStackScreens.SelectSymptoms,
+      )
+    })
+  })
+
+  describe("when the user has no symptom logs", () => {
     it("displays a 'no logs' message", () => {
       const { getByText } = render(
         <SymptomLogContext.Provider
@@ -21,7 +42,7 @@ describe("OverTime", () => {
             dailyLogData: [],
           })}
         >
-          <OverTime />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
@@ -29,37 +50,7 @@ describe("OverTime", () => {
     })
   })
 
-  describe("when the user has log entries with only a checkIn", () => {
-    it("shows the correct message, and a date", () => {
-      const dateString = "September 21, 2020"
-      const timeString = "10:00"
-      const logEntryPosix = Date.parse(`${dateString} ${timeString}`)
-      const { getByText, queryByText } = render(
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({
-            dailyLogData: [
-              {
-                date: logEntryPosix,
-                checkIn: {
-                  status: CheckInStatus.FeelingGood,
-                  date: logEntryPosix,
-                },
-                logEntries: [],
-              },
-            ],
-          })}
-        >
-          <OverTime />
-        </SymptomLogContext.Provider>,
-      )
-
-      expect(getByText("You were feeling well")).toBeDefined()
-      expect(getByText(dateString)).toBeDefined()
-      expect(queryByText(timeString)).toBeNull()
-    })
-  })
-
-  describe("when the user has log data with no checkIn entries", () => {
+  describe("when the user has log data", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "September 21, 2020"
       const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
@@ -76,8 +67,7 @@ describe("OverTime", () => {
             dailyLogData: [
               {
                 date: firstLogEntryPosix,
-                checkIn: null,
-                logEntries: [
+                symptomLogEntries: [
                   {
                     id: "1",
                     symptoms: ["cough"],
@@ -93,7 +83,7 @@ describe("OverTime", () => {
             ],
           })}
         >
-          <OverTime />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
@@ -125,16 +115,12 @@ describe("OverTime", () => {
             dailyLogData: [
               {
                 date: logEntryPosix,
-                checkIn: {
-                  status: CheckInStatus.FeelingGood,
-                  date: logEntryPosix,
-                },
-                logEntries: [logEntry],
+                symptomLogEntries: [logEntry],
               },
             ],
           })}
         >
-          <OverTime />
+          <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 

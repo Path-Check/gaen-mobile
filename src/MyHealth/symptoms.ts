@@ -21,18 +21,6 @@ export type Symptom =
   | "body_aches"
   | "other"
 
-export enum CheckInStatus {
-  NotCheckedIn,
-  FeelingGood,
-  FeelingNotWell,
-}
-
-// Raw Daily Checkin
-export type CheckIn = {
-  date: Posix
-  status: CheckInStatus
-}
-
 export type SymptomLogEntry = {
   id: string
   date: Posix
@@ -41,15 +29,11 @@ export type SymptomLogEntry = {
 
 export type SymptomLogEntryAttributes = Omit<SymptomLogEntry, "id">
 
-type LogData = {
-  checkIn: CheckIn | null
-  logEntries: SymptomLogEntry[]
-}
+type LogDataByDay = Record<Posix, SymptomLogEntry[]>
 
-type LogDataByDay = Record<Posix, LogData>
-
-export type DayLogData = LogData & {
+export type DayLogData = {
   date: Posix
+  symptomLogEntries: SymptomLogEntry[]
 }
 
 export const determineHealthAssessment = (
@@ -75,7 +59,7 @@ const compareDatesDescending = (
   return dateLeft < dateRight ? 1 : -1
 }
 
-const groupLogEntriesByDay = (allEntries: SymptomLogEntry[]): LogDataByDay => {
+const logEntryBuckets = (allEntries: SymptomLogEntry[]): LogDataByDay => {
   const groupedEntries: LogDataByDay = {}
 
   allEntries.forEach((entry) => {
@@ -83,54 +67,29 @@ const groupLogEntriesByDay = (allEntries: SymptomLogEntry[]): LogDataByDay => {
     const entryDateBeginningOfDay = beginningOfDay(date)
 
     if (groupedEntries[entryDateBeginningOfDay]) {
-      const newLogEntries = groupedEntries[entryDateBeginningOfDay].logEntries
+      const newLogEntries = groupedEntries[entryDateBeginningOfDay]
       newLogEntries.push(entry)
       newLogEntries.sort(compareDatesAscending)
-      groupedEntries[entryDateBeginningOfDay].logEntries = newLogEntries
+      groupedEntries[entryDateBeginningOfDay] = newLogEntries
     } else {
-      groupedEntries[entryDateBeginningOfDay] = {
-        logEntries: [entry],
-        checkIn: null,
-      }
+      groupedEntries[entryDateBeginningOfDay] = [entry]
     }
   })
 
   return groupedEntries
 }
 
-const joinLogDataAndCheckIns = (
-  logDataByDay: LogDataByDay,
-  checkIns: CheckIn[],
-): LogDataByDay => {
-  checkIns.forEach((checkIn) => {
-    const { date } = checkIn
-    const checkInBeginningOfDay = beginningOfDay(date)
-
-    if (logDataByDay[checkInBeginningOfDay]) {
-      logDataByDay[checkInBeginningOfDay].checkIn = checkIn
-    } else {
-      logDataByDay[checkInBeginningOfDay] = {
-        logEntries: [],
-        checkIn,
-      }
-    }
-  })
-  return logDataByDay
-}
-
-export const combineSymptomAndCheckInLogs = (
+export const dayLogData = (
   symptomLogEntries: SymptomLogEntry[],
-  checkIns: CheckIn[],
 ): DayLogData[] => {
-  const symptomEntriesLogData = groupLogEntriesByDay(symptomLogEntries)
-  const dailyLogData = joinLogDataAndCheckIns(symptomEntriesLogData, checkIns)
+  const symptomEntriesLogData = logEntryBuckets(symptomLogEntries)
 
-  return Object.keys(dailyLogData)
+  return Object.keys(symptomEntriesLogData)
     .map((date: string) => {
       const posixDate = Number(date)
       return {
         date: posixDate,
-        ...dailyLogData[posixDate],
+        symptomLogEntries: symptomEntriesLogData[posixDate],
       }
     })
     .sort(compareDatesDescending)

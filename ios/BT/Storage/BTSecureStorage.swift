@@ -30,16 +30,14 @@ class BTSecureStorage: SafePathsSecureStorage {
   override func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 10,
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 11,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
-                                                                              CheckIn.self,
                                                                               SymptomLogEntry.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 10,
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 11,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
-                                                                              CheckIn.self,
                                                                               SymptomLogEntry.self])
       }
     } else {
@@ -87,13 +85,6 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
-  func storeCheckIn(_ checkIn: CheckIn) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      realm.add(checkIn, update: .modified)
-    }
-  }
-
   func storeSymptomLogEntry(_ entry: SymptomLogEntry) {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
@@ -123,22 +114,6 @@ class BTSecureStorage: SafePathsSecureStorage {
     try! realm.write {
       let allObjects = realm.objects(SymptomLogEntry.self)
       realm.delete(allObjects)
-    }
-  }
-
-  func deleteCheckins() {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      let allObjects = realm.objects(CheckIn.self)
-      realm.delete(allObjects)
-    }
-  }
-
-  func deleteFourteenDaysOldCheckIns() {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      let staleObjects = realm.objects(CheckIn.self).filter("date <= %@", Date.daysAgoInPosix(14))
-      realm.delete(staleObjects)
     }
   }
 
@@ -174,11 +149,6 @@ class BTSecureStorage: SafePathsSecureStorage {
   @Persisted(keyPath: .keyPathExposureDetectionErrorLocalizedDescription, notificationName:
               .StorageExposureDetectionErrorLocalizedDescriptionDidChange, defaultValue: .default)
   var exposureDetectionErrorLocalizedDescription: String
-
-  var checkIns: [CheckIn] {
-    let realm = try! Realm(configuration: realmConfig)
-    return Array(realm.objects(CheckIn.self))
-  }
 
   var symptomLogEntries: [SymptomLogEntry] {
     let realm = try! Realm(configuration: realmConfig)
