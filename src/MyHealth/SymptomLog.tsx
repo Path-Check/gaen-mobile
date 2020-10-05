@@ -8,7 +8,7 @@ import { useSymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry, DayLogData } from "./symptoms"
 import { GlobalText, Button } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
+import { MyHealthStackScreens } from "../navigation"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 
@@ -87,18 +87,12 @@ const DaySummary: FunctionComponent<DaySummaryProps> = ({
   )
 }
 
-const MyHealthContent: FunctionComponent = () => {
+const SymptomLog: FunctionComponent = () => {
   const { t } = useTranslation()
   const { dailyLogData } = useSymptomLogContext()
   const navigation = useNavigation()
 
   const noSymptomHistory = dailyLogData.length === 0
-
-  const handleOnPressNotFeelingWell = async () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfScreenerFromMyHealth,
-    })
-  }
 
   const handleOnPressLogSymptoms = () => {
     navigation.navigate(MyHealthStackScreens.SelectSymptoms)
@@ -111,14 +105,6 @@ const MyHealthContent: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <View style={style.floatingContainer}>
-          <Button
-            onPress={handleOnPressNotFeelingWell}
-            label={t("symptom_checker.not_feeling_well")}
-            customButtonStyle={{ ...style.button, ...style.noMarginButton }}
-            customButtonInnerStyle={style.buttonInner}
-          />
-        </View>
         <View style={style.floatingContainer}>
           <Button
             onPress={handleOnPressLogSymptoms}
@@ -215,4 +201,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default MyHealthContent
+export default SymptomLog
