@@ -13,13 +13,16 @@ import { SelfScreenerStackScreens } from "../navigation"
 import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
 import { GlobalText } from "../components"
 import { Images } from "../assets"
+import { useSelfScreenerContext } from "../SelfScreenerContext"
 
 const HowAreYouFeeling: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const selfScreenerContext = useSelfScreenerContext()
 
   const handlePressGood = () => {
-    navigation.navigate(SelfScreenerStackScreens.AsymptomaticFlowIntro)
+    selfScreenerContext.clearSymptoms()
+    navigation.navigate(SelfScreenerStackScreens.Guidance)
   }
   const handlePressNotWell = () => {
     navigation.navigate(SelfScreenerStackScreens.EmergencySymptomsQuestions)
@@ -53,13 +56,13 @@ const SelectFeeling: FunctionComponent<SelectFeelingProps> = ({
       <View style={style.feelingButtonsContainer}>
         <FeelingButton
           image={Images.SmileEmoji}
-          text={t("symptom_checker.good")}
+          text={t("self_screener.how_are_you_feeling.good")}
           onPress={handleOnPressGood}
         />
         <View style={style.feelingButtonsInnerSpacer} />
         <FeelingButton
           image={Images.SickEmoji}
-          text={t("symptom_checker.not_well")}
+          text={t("self_screener.how_are_you_feeling.not_well")}
           onPress={handleOnPressNotWell}
         />
       </View>

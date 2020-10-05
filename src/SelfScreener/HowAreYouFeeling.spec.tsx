@@ -1,8 +1,10 @@
 import { useNavigation } from "@react-navigation/native"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import React from "react"
+import { SelfScreenerContext } from "../SelfScreenerContext"
 import { SelfScreenerStackScreens } from "../navigation"
 import HowAreYouFeeling from "./HowAreYouFeeling"
+import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
 
@@ -14,17 +16,27 @@ describe("HowAreYouFeeling", () => {
   })
 
   describe("when the user taps the feeling good button", () => {
-    it("navigates to the asymptomatic flow", async () => {
+    it("clears the symptoms and navigates to the guidence screen", async () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigateSpy,
       })
-      const { getByLabelText } = render(<HowAreYouFeeling />)
+      const clearSymptomsSpy = jest.fn()
+      const context = factories.selfScreenerContext.build({
+        clearSymptoms: clearSymptomsSpy,
+      })
+
+      const { getByLabelText } = render(
+        <SelfScreenerContext.Provider value={context}>
+          <HowAreYouFeeling />
+        </SelfScreenerContext.Provider>,
+      )
       fireEvent.press(getByLabelText("Good"))
       await waitFor(() => {
         expect(navigateSpy).toHaveBeenCalledWith(
-          SelfScreenerStackScreens.AsymptomaticFlowIntro,
+          SelfScreenerStackScreens.Guidance,
         )
+        expect(clearSymptomsSpy).toHaveBeenCalled()
       })
     })
   })

@@ -310,7 +310,9 @@
       "your_symptoms_might_be_related": "Sorry you’re not feeling well. Your symptoms may be related to COVID-19."
     },
     "how_are_you_feeling": {
-      "title": "How are you feeling?"
+      "title": "How are you feeling?",
+      "good": "Good",
+      "not_well": "Not well"
     },
     "intro": {
       "agree_and_start_screener": "Agree and start screener",

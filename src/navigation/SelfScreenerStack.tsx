@@ -12,7 +12,6 @@ import { SvgXml } from "react-native-svg"
 import { SelfScreenerProvider } from "../SelfScreenerContext"
 import { SelfScreenerStackScreens, Stack as AllStacks } from "./index"
 
-import AsymptomaticFlowIntro from "../SelfScreener/AsymptomaticFlowIntro"
 import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
 import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
 import HowAreYouFeeling from "../SelfScreener/HowAreYouFeeling"
@@ -99,10 +98,6 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
           name={SelfScreenerStackScreens.SelfScreenerIntro}
           component={SelfScreenerIntro}
           options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name={SelfScreenerStackScreens.AsymptomaticFlowIntro}
-          component={AsymptomaticFlowIntro}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.EmergencySymptomsQuestions}
