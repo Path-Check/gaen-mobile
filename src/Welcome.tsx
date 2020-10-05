@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
 
-import { StatusBar, GlobalText, Button, GradientBackground } from "./components"
+import { StatusBar, GlobalText, Button } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
@@ -42,6 +42,10 @@ const Welcome: FunctionComponent = () => {
     navigation.navigate(Stacks.Modal, {
       screen: ModalStackScreens.LanguageSelection,
     })
+  }
+
+  const handleOnPressGetStarted = () => {
+    navigation.navigate(Stacks.HowItWorks)
   }
 
   return (
@@ -83,7 +87,7 @@ const Welcome: FunctionComponent = () => {
           </View>
           <Button
             label={t("label.launch_get_started")}
-            onPress={() => navigation.navigate(Stacks.HowItWorks)}
+            onPress={handleOnPressGetStarted}
             hasRightArrow
           />
         </View>
