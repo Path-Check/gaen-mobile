@@ -111,7 +111,7 @@
       buildConfiguration = "Debug-BT">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release-BT"
+      buildConfiguration = "Debug-BT"
       customArchiveName = "BT"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
