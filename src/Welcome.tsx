@@ -20,7 +20,7 @@ import {
 } from "./configuration/authorityCopy"
 
 import { Images } from "./assets"
-import { Spacing, Colors, Typography, Outlines } from "./styles"
+import { Spacing, Colors, Typography, Outlines, Layout } from "./styles"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -48,52 +48,57 @@ const Welcome: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
-        alwaysBounceVertical={false}
+        style={style.container}
         contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
       >
-        <GradientBackground gradient={Colors.gradient10} angleCenterY={0.75}>
-          <View style={style.mainContentContainer}>
-            <TouchableOpacity
-              onPress={handleOnPressSelectLanguage}
+        <View style={style.mainContentContainer}>
+          <TouchableOpacity
+            onPress={handleOnPressSelectLanguage}
+            style={style.languageButtonContainer}
+          >
+            <LinearGradient
+              colors={Colors.gradient10}
+              useAngle
+              angle={0}
+              angleCenter={{ x: 0.5, y: 0.5 }}
               style={style.languageButtonContainer}
             >
-              <LinearGradient
-                colors={Colors.gradient10}
-                useAngle
-                angle={0}
-                angleCenter={{ x: 0.5, y: 0.5 }}
-                style={style.languageButtonContainer}
-              >
-                <GlobalText style={style.languageButtonText}>
-                  {languageName}
-                </GlobalText>
-              </LinearGradient>
-            </TouchableOpacity>
-            <View>
-              <Image
-                source={Images.WelcomeImage}
-                style={style.image}
-                accessible
-                accessibilityLabel={t("onboarding.welcome_image_label")}
-              />
-              <GlobalText style={style.mainText}>{welcomeMessage}</GlobalText>
-              <GlobalText style={style.mainText}>{applicationName}</GlobalText>
-            </View>
-            <Button
-              label={t("label.launch_get_started")}
-              onPress={() => navigation.navigate(Stacks.HowItWorks)}
-              hasRightArrow
+              <GlobalText style={style.languageButtonText}>
+                {languageName}
+              </GlobalText>
+            </LinearGradient>
+          </TouchableOpacity>
+          <View style={style.imageAndText}>
+            <Image
+              source={Images.WelcomeImage}
+              style={style.image}
+              accessible
+              accessibilityLabel={t("onboarding.welcome_image_label")}
             />
+            <GlobalText style={style.welcomeToText}>
+              {welcomeMessage}
+            </GlobalText>
+            <GlobalText style={style.nameText}>{applicationName}</GlobalText>
           </View>
-        </GradientBackground>
+          <Button
+            label={t("label.launch_get_started")}
+            onPress={() => navigation.navigate(Stacks.HowItWorks)}
+            hasRightArrow
+          />
+        </View>
       </ScrollView>
     </>
   )
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
   contentContainer: {
     flexGrow: 1,
+    backgroundColor: Colors.primaryLightBackground,
   },
   mainContentContainer: {
     flex: 1,
@@ -115,15 +120,25 @@ const style = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
   },
+  imageAndText: {
+    alignItems: "center",
+  },
   image: {
-    resizeMode: "contain",
     height: 280,
+    width: Layout.screenWidth * 0.8,
+    resizeMode: "contain",
     marginBottom: Spacing.huge,
   },
-  mainText: {
+  welcomeToText: {
     ...Typography.header1,
     color: Colors.primaryText,
     textAlign: "center",
+  },
+  nameText: {
+    ...Typography.header1,
+    color: Colors.primaryText,
+    textAlign: "center",
+    marginBottom: Spacing.huge,
   },
 })
 
