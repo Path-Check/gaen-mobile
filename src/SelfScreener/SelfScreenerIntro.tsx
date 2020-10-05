@@ -8,14 +8,7 @@ import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
 import { Button, GlobalText, StatusBar } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import {
-  Colors,
-  Iconography,
-  Layout,
-  Outlines,
-  Spacing,
-  Typography,
-} from "../styles"
+import { Colors, Iconography, Layout, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 const SelfScreenerIntro: FunctionComponent = () => {

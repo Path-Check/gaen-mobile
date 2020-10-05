@@ -136,6 +136,7 @@
       "report_positive_result": "Report positive test result",
       "share": "Share the app and help protect yourself and others.",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
+      "take_self_assessment": "Take self assessment",
       "tracing_off_header": "Inactive",
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_off_subheader_location": "Enable Bluetooth, Proximity Tracing, and Location to get info about possible exposures",

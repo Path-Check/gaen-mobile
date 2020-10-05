@@ -31,6 +31,7 @@ import {
   Button,
   GradientBackground,
 } from "../components"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
@@ -54,6 +55,7 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.gradient100Light)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { displaySelfScreener } = useConfigurationContext()
 
   const { applicationName } = useApplicationName()
 
@@ -75,6 +77,12 @@ const Home: FunctionComponent = () => {
   const handleOnPressReportTestResult = () => {
     navigation.navigate(Stacks.Modal, {
       screen: ModalStackScreens.AffectedUserStack,
+    })
+  }
+
+  const handleOnPressTakeSelfAssessment = () => {
+    navigation.navigate(Stacks.Modal, {
+      screen: ModalStackScreens.SelfScreenerFromHome,
     })
   }
 
@@ -154,7 +162,7 @@ const Home: FunctionComponent = () => {
             <ProximityTracingActivationStatus />
             <LocationActivationStatus />
           </View>
-          <View style={style.buttonContainer}>
+          <View style={style.ctaContainer}>
             <Button
               onPress={handleOnPressReportTestResult}
               label={t("home.bluetooth.report_positive_result")}
@@ -162,6 +170,18 @@ const Home: FunctionComponent = () => {
               customButtonInnerStyle={style.buttonInner}
               hasRightArrow
             />
+            {displaySelfScreener && (
+              <Button
+                onPress={handleOnPressTakeSelfAssessment}
+                label={t("home.bluetooth.take_self_assessment")}
+                customButtonStyle={{
+                  ...style.button,
+                  ...style.selfAssessmentButton,
+                }}
+                customButtonInnerStyle={style.buttonInner}
+                outlined
+              />
+            )}
           </View>
         </View>
       </ScrollView>
@@ -183,7 +203,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingBottom: Spacing.small,
+    paddingBottom: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
   },
   topContainer: {
@@ -228,12 +248,15 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: Colors.primaryLightBackground,
   },
-  buttonContainer: {
+  ctaContainer: {
     marginTop: Spacing.medium,
     marginHorizontal: Spacing.small,
   },
   button: {
     width: "100%",
+  },
+  selfAssessmentButton: {
+    marginTop: Spacing.medium,
   },
   buttonInner: {
     ...Buttons.medium,
