@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SymptomLogContext } from "./SymptomLogContext"
 import { SymptomLogEntry } from "./symptoms"
 
-import SymptomLog from "./SymptomLog"
+import SymptomLog from "./index"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
 import { MyHealthStackScreens } from "../navigation"
@@ -39,14 +39,14 @@ describe("SymptomLog", () => {
       const { getByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
-            dailyLogData: [],
+            symptomLogEntries: [],
           })}
         >
           <SymptomLog />
         </SymptomLogContext.Provider>,
       )
 
-      expect(getByText("No symptom history")).toBeDefined()
+      expect(getByText("No symptom history…")).toBeDefined()
     })
   })
 
@@ -61,24 +61,19 @@ describe("SymptomLog", () => {
       const secondTimeString =
         posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm A") ||
         "not a date"
-      const { getByText, queryByText } = render(
+      const { getByText, queryByText, getAllByText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
-            dailyLogData: [
+            symptomLogEntries: [
               {
+                id: "1",
+                symptoms: ["cough"],
                 date: firstLogEntryPosix,
-                symptomLogEntries: [
-                  {
-                    id: "1",
-                    symptoms: ["cough"],
-                    date: firstLogEntryPosix,
-                  },
-                  {
-                    id: "2",
-                    symptoms: ["loss_of_smell"],
-                    date: secondLogEntryPosix,
-                  },
-                ],
+              },
+              {
+                id: "2",
+                symptoms: ["loss_of_smell"],
+                date: secondLogEntryPosix,
               },
             ],
           })}
@@ -88,7 +83,7 @@ describe("SymptomLog", () => {
       )
 
       expect(queryByText("You were not feeling well")).toBeNull()
-      expect(getByText(dateString)).toBeDefined()
+      expect(getAllByText(dateString)).toHaveLength(2)
       expect(getByText(firstTimeString)).toBeDefined()
       expect(getByText(secondTimeString)).toBeDefined()
       expect(getByText("Cough")).toBeDefined()
@@ -112,12 +107,7 @@ describe("SymptomLog", () => {
       const { getByLabelText } = render(
         <SymptomLogContext.Provider
           value={factories.symptomLogContext.build({
-            dailyLogData: [
-              {
-                date: logEntryPosix,
-                symptomLogEntries: [logEntry],
-              },
-            ],
+            symptomLogEntries: [logEntry],
           })}
         >
           <SymptomLog />
