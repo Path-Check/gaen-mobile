@@ -14,6 +14,7 @@ import { SelfScreenerStackScreens, Stack as AllStacks } from "./index"
 
 import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
 import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
+import HowAreYouFeeling from "../SelfScreener/HowAreYouFeeling"
 import CallEmergencyServices from "../SelfScreener/CallEmergencyServices"
 import GeneralSymptoms from "../SelfScreener/GeneralSymptoms"
 import UnderlyingConditions from "../SelfScreener/UnderlyingConditions"
@@ -84,7 +85,7 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
 
   const navigationBarOptions: StackNavigationOptions = {
     title: "",
-    headerStyle: { backgroundColor: Colors.secondary10 },
+    headerStyle: { backgroundColor: Colors.primaryLightBackground },
     headerLeft: backButton,
     headerRight: cancelButton,
     headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
@@ -101,6 +102,10 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
         <Stack.Screen
           name={SelfScreenerStackScreens.EmergencySymptomsQuestions}
           component={EmergencySymptomsQuestions}
+        />
+        <Stack.Screen
+          name={SelfScreenerStackScreens.HowAreYouFeeling}
+          component={HowAreYouFeeling}
         />
         <Stack.Screen
           name={SelfScreenerStackScreens.CallEmergencyServices}

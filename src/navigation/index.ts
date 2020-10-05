@@ -184,6 +184,7 @@ export type SelfScreenerStackScreen =
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
+  | "HowAreYouFeeling"
   | "UnderlyingConditions"
   | "AgeRange"
   | "Guidance"
@@ -195,6 +196,7 @@ export const SelfScreenerStackScreens: {
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",
+  HowAreYouFeeling: "HowAreYouFeeling",
   UnderlyingConditions: "UnderlyingConditions",
   AgeRange: "AgeRange",
   Guidance: "Guidance",

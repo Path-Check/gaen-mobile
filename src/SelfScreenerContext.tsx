@@ -24,6 +24,7 @@ export type SelfScreenerContextState = {
   secondarySymptoms: SecondarySymptom[]
   otherSymptoms: OtherSymptom[]
   underlyingConditions: UnderlyingCondition[]
+  clearSymptoms: () => void
   updateSymptoms: (symptom: GeneralSymptom) => void
   updateUnderlyingConditions: (condition: UnderlyingCondition) => void
   ageRange: AgeRange | null
@@ -36,6 +37,7 @@ const initialState = {
   primarySymptoms: [],
   secondarySymptoms: [],
   otherSymptoms: [],
+  clearSymptoms: () => {},
   updateSymptoms: () => {},
   underlyingConditions: [],
   updateUnderlyingConditions: () => {},
@@ -48,10 +50,26 @@ export const SelfScreenerContext = createContext<SelfScreenerContextState>(
   initialState,
 )
 export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
-  const { emergencySymptoms, updateEmergencySymptoms } = useEmergencySymptoms()
-  const { primarySymptoms, updatePrimarySymptoms } = usePrimarySymptoms()
-  const { secondarySymptoms, updateSecondarySymptoms } = useSecondarySymptoms()
-  const { otherSymptoms, updateOtherSymptoms } = useOtherSymptoms()
+  const {
+    emergencySymptoms,
+    updateEmergencySymptoms,
+    clearEmergencySymptoms,
+  } = useEmergencySymptoms()
+  const {
+    primarySymptoms,
+    updatePrimarySymptoms,
+    clearPrimarySymptoms,
+  } = usePrimarySymptoms()
+  const {
+    secondarySymptoms,
+    updateSecondarySymptoms,
+    clearSecondarySymptoms,
+  } = useSecondarySymptoms()
+  const {
+    otherSymptoms,
+    updateOtherSymptoms,
+    clearOtherSymptoms,
+  } = useOtherSymptoms()
   const {
     underlyingConditions,
     updateUnderlyingConditions,
@@ -84,6 +102,13 @@ export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
     }
   }
 
+  const clearSymptoms = () => {
+    clearEmergencySymptoms()
+    clearPrimarySymptoms()
+    clearSecondarySymptoms()
+    clearOtherSymptoms()
+  }
+
   return (
     <SelfScreenerContext.Provider
       value={{
@@ -92,6 +117,7 @@ export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
         secondarySymptoms,
         otherSymptoms,
         updateSymptoms,
+        clearSymptoms,
         underlyingConditions,
         updateUnderlyingConditions,
         ageRange,
@@ -124,8 +150,11 @@ const useEmergencySymptoms = () => {
       setEmergencySymptoms([...emergencySymptoms, symptom])
     }
   }
+  const clearEmergencySymptoms = () => {
+    setEmergencySymptoms([])
+  }
 
-  return { emergencySymptoms, updateEmergencySymptoms }
+  return { emergencySymptoms, updateEmergencySymptoms, clearEmergencySymptoms }
 }
 
 const usePrimarySymptoms = () => {
@@ -139,7 +168,11 @@ const usePrimarySymptoms = () => {
     }
   }
 
-  return { primarySymptoms, updatePrimarySymptoms }
+  const clearPrimarySymptoms = () => {
+    setPrimarySymptoms([])
+  }
+
+  return { primarySymptoms, updatePrimarySymptoms, clearPrimarySymptoms }
 }
 
 const useSecondarySymptoms = () => {
@@ -155,7 +188,11 @@ const useSecondarySymptoms = () => {
     }
   }
 
-  return { secondarySymptoms, updateSecondarySymptoms }
+  const clearSecondarySymptoms = () => {
+    setSecondarySymptoms([])
+  }
+
+  return { secondarySymptoms, updateSecondarySymptoms, clearSecondarySymptoms }
 }
 
 const useOtherSymptoms = () => {
@@ -169,7 +206,11 @@ const useOtherSymptoms = () => {
     }
   }
 
-  return { otherSymptoms, updateOtherSymptoms }
+  const clearOtherSymptoms = () => {
+    setOtherSymptoms([])
+  }
+
+  return { otherSymptoms, updateOtherSymptoms, clearOtherSymptoms }
 }
 
 const useUnderlyingConditions = () => {

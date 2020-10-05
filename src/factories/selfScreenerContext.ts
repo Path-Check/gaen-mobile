@@ -7,6 +7,7 @@ export default Factory.define<SelfScreenerContextState>(() => ({
   secondarySymptoms: [],
   otherSymptoms: [],
   updateSymptoms: () => {},
+  clearSymptoms: () => {},
   underlyingConditions: [],
   updateUnderlyingConditions: () => {},
   ageRange: null,
