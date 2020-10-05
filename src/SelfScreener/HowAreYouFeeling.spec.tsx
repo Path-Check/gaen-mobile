@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { fireEvent, render, waitFor } from "@testing-library/react-native"
+import { fireEvent, render } from "@testing-library/react-native"
 import React from "react"
 import { SelfScreenerContext } from "../SelfScreenerContext"
 import { SelfScreenerStackScreens } from "../navigation"
