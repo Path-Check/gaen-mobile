@@ -28,7 +28,7 @@ describe("SymptomLogProvider", () => {
       }
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
-      const AddCheckSymptomLogEntry = () => {
+      const AddCheckLogSymptoms = () => {
         const { addLogEntry } = useSymptomLogContext()
 
         return (
@@ -45,7 +45,7 @@ describe("SymptomLogProvider", () => {
 
       const { getByLabelText } = render(
         <SymptomLogProvider>
-          <AddCheckSymptomLogEntry />
+          <AddCheckLogSymptoms />
         </SymptomLogProvider>,
       )
 

@@ -8,7 +8,7 @@ import { SymptomLogEntry } from "./symptoms"
 import SymptomLog from "./SymptomLog"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
-import { ModalStackScreens, MyHealthStackScreens, Stacks } from "../navigation"
+import { MyHealthStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
@@ -18,8 +18,9 @@ describe("SymptomLog", () => {
     ;(useNavigation as jest.Mock).mockReturnValue({
       navigate: navigateSpy,
     })
+    const defaultContext = factories.symptomLogContext.build()
     const { getByLabelText } = render(
-      <SymptomLogContext.Provider value={factories.symptomLogContext.build({})}>
+      <SymptomLogContext.Provider value={defaultContext}>
         <SymptomLog />
       </SymptomLogContext.Provider>,
     )
