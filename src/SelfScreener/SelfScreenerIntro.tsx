@@ -70,7 +70,7 @@ const SelfScreenerIntro: FunctionComponent = () => {
           <GlobalText style={style.bulletText}>
             {t("self_screener.intro.this_is_based_on")}
           </GlobalText>
-          <GlobalText style={style.bulletText}>
+          <GlobalText style={{ ...style.bulletText, ...style.emergencyText }}>
             {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
           </GlobalText>
         </View>
@@ -121,6 +121,10 @@ const style = StyleSheet.create({
   bulletText: {
     ...Typography.body2,
     marginBottom: Spacing.medium,
+  },
+  emergencyText: {
+    ...Typography.mediumBold,
+    color: Colors.danger100,
   },
   button: {
     width: "100%",

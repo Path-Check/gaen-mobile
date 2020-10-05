@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
@@ -9,6 +9,7 @@ import { SymptomGroup } from "./selfScreener"
 import { Stack, Stacks } from "../navigation"
 
 import { Outlines, Colors, Spacing, Typography } from "../styles"
+import { Images } from "../assets"
 
 interface GuidanceProps {
   destinationOnCancel?: Stack
@@ -188,6 +189,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     >
       <View style={style.topScrollViewBackground} />
       <View style={style.headerContainer}>
+        <Image source={Images.SelfScreenerIntro} style={style.image} />
         <GlobalText style={style.headerText}>
           {t("self_screener.guidance.guidance")}
         </GlobalText>
@@ -213,7 +215,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingBottom: Spacing.huge,
+    paddingBottom: Spacing.xxxHuge,
   },
   topScrollViewBackground: {
     position: "absolute",
@@ -224,12 +226,16 @@ const style = StyleSheet.create({
     height: "100%",
   },
   headerContainer: {
-    paddingVertical: Spacing.xLarge,
+    paddingVertical: Spacing.huge,
     paddingHorizontal: Spacing.large,
     marginBottom: Spacing.large,
     backgroundColor: Colors.secondary10,
-    borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.secondary75,
+  },
+  image: {
+    width: 70,
+    height: 70,
+    resizeMode: "contain",
+    marginBottom: Spacing.xLarge,
   },
   headerText: {
     ...Typography.header1,

@@ -108,7 +108,7 @@ export type ModalStackScreen =
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
   | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromMyHealth"
+  | "SelfScreenerFromHome"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
@@ -121,7 +121,7 @@ export const ModalStackScreens: {
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
   SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromMyHealth: "SelfScreenerFromMyHealth",
+  SelfScreenerFromHome: "SelfScreenerFromHome",
 }
 
 export type SettingsStackScreen =
@@ -210,13 +210,9 @@ export type Stack =
   | "ExposureHistoryFlow"
   | "Modal"
   | "HowItWorks"
-  | "HowItWorksReviewFromSettings"
-  | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
   | "MyHealth"
-  | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromMyHealth"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -226,13 +222,9 @@ export const Stacks: { [key in Stack]: Stack } = {
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",
   HowItWorks: "HowItWorks",
-  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
-  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
   MyHealth: "MyHealth",
-  SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromMyHealth: "SelfScreenerFromMyHealth",
 }
 
 export const useStatusBarEffect = (

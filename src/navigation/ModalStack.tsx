@@ -32,12 +32,12 @@ const ModalStack: FunctionComponent = () => {
         name={Stacks.AffectedUserStack}
         component={AffectedUserStack}
       />
-      <Stack.Screen name={Stacks.HowItWorksReviewFromSettings}>
+      <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
         {(props) => (
           <HowItWorksStack {...props} destinationOnSkip={Stacks.Settings} />
         )}
       </Stack.Screen>
-      <Stack.Screen name={Stacks.HowItWorksReviewFromConnect}>
+      <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromConnect}>
         {(props) => (
           <HowItWorksStack {...props} destinationOnSkip={Stacks.Connect} />
         )}
@@ -55,7 +55,7 @@ const ModalStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={Stacks.SelfScreenerFromExposureDetails}
+        name={ModalStackScreens.SelfScreenerFromExposureDetails}
         options={{
           headerShown: false,
         }}
@@ -70,17 +70,14 @@ const ModalStack: FunctionComponent = () => {
         }}
       </Stack.Screen>
       <Stack.Screen
-        name={Stacks.SelfScreenerFromMyHealth}
+        name={ModalStackScreens.SelfScreenerFromHome}
         options={{
           headerShown: false,
         }}
       >
         {(props) => {
           return (
-            <SelfScreenerStack
-              {...props}
-              destinationOnCancel={Stacks.MyHealth}
-            />
+            <SelfScreenerStack {...props} destinationOnCancel={Stacks.Home} />
           )
         }}
       </Stack.Screen>
