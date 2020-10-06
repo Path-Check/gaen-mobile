@@ -169,8 +169,8 @@ final class ExposureManager: NSObject {
     return btSecureStorage.symptomLogEntries.map { $0.asDictionary }
   }
 
-  @objc func deleteStaleLogEntries() {
-    btSecureStorage.deleteFourteenDaysOldSymptomLogEntries()
+  @objc func deleteSymptomLogsOlderThan(_ days: Int) {
+    btSecureStorage.deleteSymptomLogsOlderThan(days)
   }
 
   /// Persists SymptomLogEntry in Realm

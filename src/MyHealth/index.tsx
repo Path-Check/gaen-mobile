@@ -3,7 +3,10 @@ import { ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useSymptomLogContext } from "./SymptomLogContext"
+import {
+  DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
+  useSymptomLogContext,
+} from "./SymptomLogContext"
 import { SymptomLogEntry } from "./symptoms"
 import { Text, StatusBar, Button } from "../components"
 import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
@@ -50,6 +53,12 @@ const SymptomLog: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <Text style={style.headerText}>{t("symptom_checker.symptom_log")}</Text>
+        <Text style={style.subHeaderText}>
+          {t("symptom_checker.to_protect_your_privacy", {
+            days: DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
+          })}
+        </Text>
+
         {hasSymptomHistory ? <SymptomHistory /> : <NoSymptomHistory />}
       </ScrollView>
       <View style={style.bottomActionsContainer}>
@@ -80,6 +89,10 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header1,
     ...Typography.bold,
+    marginBottom: Spacing.xxxSmall,
+  },
+  subHeaderText: {
+    ...Typography.body3,
     marginBottom: Spacing.large,
   },
   noSymptomHistoryText: {

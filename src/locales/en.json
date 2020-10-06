@@ -365,6 +365,7 @@
     "get_tested": "We recommend you get tested for COVID-19.",
     "guidance": "Guidance",
     "log_symptoms": "Log symptoms",
+    "to_protect_your_privacy": "To protect your privacy, logs more than {{days}} days old are deleted",
     "no_symptom_history": "No symptom history…",
     "person_finding_location_label": "A person on their phone searching for a location.",
     "sorry_not_feeling_well": "Sorry you're not feeling well.",

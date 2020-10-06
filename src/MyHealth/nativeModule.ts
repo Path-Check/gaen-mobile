@@ -30,6 +30,8 @@ export const deleteAllSymptomLogs = async (): Promise<void> => {
   return symptomLogEntryModule.deleteSymptomLogs()
 }
 
-export const deleteStaleSymptomLogs = async (): Promise<void> => {
-  return symptomLogEntryModule.deleteStaleSymptomLogs()
+export const deleteSymptomLogsOlderThan = async (
+  days: number,
+): Promise<void> => {
+  return symptomLogEntryModule.deleteSymptomLogsOlderThan(days)
 }
