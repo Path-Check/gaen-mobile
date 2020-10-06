@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomLogEntry, DayLogData, dayLogData, Symptom } from "./symptoms"
+import { SymptomLogEntry, Symptom } from "./symptoms"
 import {
   getLogEntries,
   createLogEntry,
@@ -22,7 +22,7 @@ import {
 } from "../OperationResponse"
 
 export type SymptomLogState = {
-  dailyLogData: DayLogData[]
+  symptomLogEntries: SymptomLogEntry[]
   addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
   deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
@@ -30,7 +30,7 @@ export type SymptomLogState = {
 }
 
 const initialState: SymptomLogState = {
-  dailyLogData: [],
+  symptomLogEntries: [],
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -48,12 +48,13 @@ const initialState: SymptomLogState = {
 export const SymptomLogContext = createContext<SymptomLogState>(initialState)
 
 export const SymptomLogProvider: FunctionComponent = ({ children }) => {
-  const [dailyLogData, setDailyLogData] = useState<DayLogData[]>([])
-  const [logEntries, setLogEntries] = useState<SymptomLogEntry[]>([])
+  const [symptomLogEntries, setSymptomLogEntries] = useState<SymptomLogEntry[]>(
+    [],
+  )
 
   const fetchLogEntries = async () => {
     const entries = await getLogEntries()
-    setLogEntries(entries)
+    setSymptomLogEntries(entries)
   }
 
   const cleanupStaleData = async () => {
@@ -64,10 +65,6 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     cleanupStaleData()
     fetchLogEntries()
   }, [])
-
-  useEffect(() => {
-    setDailyLogData(dayLogData(logEntries))
-  }, [logEntries])
 
   const addLogEntry = async (symptoms: Symptom[]) => {
     try {
@@ -116,7 +113,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   return (
     <SymptomLogContext.Provider
       value={{
-        dailyLogData,
+        symptomLogEntries,
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,

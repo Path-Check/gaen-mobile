@@ -311,9 +311,9 @@
       "your_symptoms_might_be_related": "Sorry you’re not feeling well. Your symptoms may be related to COVID-19."
     },
     "how_are_you_feeling": {
-      "title": "How are you feeling?",
       "good": "Good",
-      "not_well": "Not well"
+      "not_well": "Not well",
+      "title": "How are you feeling?"
     },
     "intro": {
       "agree_and_start_screener": "Agree and start screener",
@@ -365,7 +365,7 @@
     "get_tested": "We recommend you get tested for COVID-19.",
     "guidance": "Guidance",
     "log_symptoms": "Log symptoms",
-    "no_symptom_history": "No symptom history",
+    "no_symptom_history": "No symptom history…",
     "person_finding_location_label": "A person on their phone searching for a location.",
     "sorry_not_feeling_well": "Sorry you're not feeling well.",
     "symptom_log": "Symptom Log",

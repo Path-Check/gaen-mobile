@@ -8,12 +8,13 @@ import {
   createLogEntry,
   deleteStaleSymptomLogs,
 } from "./nativeModule"
-import { Symptom, dayLogData } from "./symptoms"
+import { Symptom } from "./symptoms"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
 jest.mock("./symptoms.ts")
 jest.mock("../logger.ts")
+
 describe("SymptomLogProvider", () => {
   describe("data creation", () => {
     it("allows for the creation of a new symptom log", async () => {
@@ -99,19 +100,18 @@ describe("SymptomLogProvider", () => {
   })
 
   describe("data seeding", () => {
-    it("fetch all daily check-in and log entries to serialize", async () => {
+    it("fetchs all daily log entries", async () => {
       const logEntries = [{ date: Date.now(), symptoms: [], id: "1" }]
       ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)
-      const serializeSpy = dayLogData as jest.Mock
 
       render(
         <SymptomLogProvider>
-          <CurrentCheckInStatus />
+          <SymptomLogConsumer />
         </SymptomLogProvider>,
       )
 
       await waitFor(() => {
-        expect(serializeSpy).toHaveBeenCalledWith(logEntries)
+        expect(getLogEntries).toHaveBeenCalled()
       })
     })
 
@@ -120,7 +120,7 @@ describe("SymptomLogProvider", () => {
 
       render(
         <SymptomLogProvider>
-          <CurrentCheckInStatus />
+          <SymptomLogConsumer />
         </SymptomLogProvider>,
       )
 
@@ -131,8 +131,8 @@ describe("SymptomLogProvider", () => {
   })
 })
 
-const CurrentCheckInStatus = () => {
-  const { dailyLogData } = useSymptomLogContext()
+const SymptomLogConsumer = () => {
+  const { symptomLogEntries } = useSymptomLogContext()
 
-  return <Text>{JSON.stringify(dailyLogData)}</Text>
+  return <Text>{JSON.stringify(symptomLogEntries)}</Text>
 }

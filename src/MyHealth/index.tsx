@@ -1,64 +1,106 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useStatusBarEffect } from "../navigation"
-import { Text, StatusBar } from "../components"
-import SymptomLog from "./SymptomLog"
+import { useSymptomLogContext } from "./SymptomLogContext"
+import { SymptomLogEntry } from "./symptoms"
+import { Text, StatusBar, Button } from "../components"
+import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
+import SymptomLogListItem from "./SymptomLogListItem"
 
-import { Typography, Colors, Spacing } from "../styles"
+import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 
-const MyHealthScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+const SymptomLog: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
+  const { symptomLogEntries } = useSymptomLogContext()
+  const navigation = useNavigation()
+
+  const hasSymptomHistory = symptomLogEntries.length > 0
+
+  const handleOnPressLogSymptoms = () => {
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+  }
+
+  const NoSymptomHistory = () => {
+    return (
+      <Text style={style.noSymptomHistoryText}>
+        {t("symptom_checker.no_symptom_history")}
+      </Text>
+    )
+  }
+
+  const SymptomHistory = () => {
+    return (
+      <View>
+        {symptomLogEntries.map((logEntry: SymptomLogEntry) => {
+          return <SymptomLogListItem key={logEntry.date} logEntry={logEntry} />
+        })}
+      </View>
+    )
+  }
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.secondary10} />
-      <View style={style.container}>
-        <View style={style.headerContainer}>
-          <Text style={style.headerText}>
-            {t("symptom_checker.symptom_log")}
-          </Text>
-        </View>
-        <View style={style.innerContainer}>
-          <SymptomLog />
-        </View>
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <Text style={style.headerText}>{t("symptom_checker.symptom_log")}</Text>
+
+        {hasSymptomHistory ? <SymptomHistory /> : <NoSymptomHistory />}
+      </ScrollView>
+
+      <View style={style.bottomActionsContainer}>
+        <Button
+          onPress={handleOnPressLogSymptoms}
+          label={t("symptom_checker.log_symptoms")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasPlusIcon
+        />
       </View>
-    </>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.large,
+    flex: 1,
+    backgroundColor: Colors.primaryLightBackground,
   },
-  headerContainer: {
+  contentContainer: {
+    paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.secondary10,
   },
   headerText: {
     ...Typography.header1,
     ...Typography.bold,
-    marginBottom: Spacing.medium,
-  },
-  segmentedControlContainer: {
     marginBottom: Spacing.large,
   },
-  segmentedControlText: {
-    fontFamily: "IBMPlexSans",
+  noSymptomHistoryText: {
+    ...Typography.body1,
   },
-  activeSegmentedControlText: {
-    fontFamily: "IBMPlexSans-Medium",
+  button: {
+    width: "100%",
   },
-  innerContainer: {
-    flexGrow: 1,
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
-  hidden: {
-    display: "none",
+  bottomActionsContainer: {
+    alignItems: "center",
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral10,
+    backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.small,
+    paddingBottom: Spacing.small,
+    paddingHorizontal: Spacing.large,
   },
 })
 
-export default MyHealthScreen
+export default SymptomLog

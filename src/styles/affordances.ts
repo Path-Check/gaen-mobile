@@ -3,6 +3,8 @@ import { MessageOptions } from "react-native-flash-message"
 
 import * as Colors from "./colors"
 import * as Typography from "./typography"
+import * as Outlines from "./outlines"
+import * as Spacing from "./spacing"
 
 export const iconBadge: ViewStyle = {
   position: "absolute",
@@ -31,4 +33,13 @@ export const successFlashMessageOptions: FlashMessageOptions = {
 export const errorFlashMessageOptions: FlashMessageOptions = {
   ...flashMessageOptions,
   backgroundColor: Colors.danger75,
+}
+
+export const floatingContainer: ViewStyle = {
+  ...Outlines.lightShadow,
+  backgroundColor: Colors.primaryLightBackground,
+  borderRadius: Outlines.borderRadiusLarge,
+  paddingVertical: Spacing.medium,
+  paddingHorizontal: Spacing.large,
+  marginBottom: Spacing.large,
 }
