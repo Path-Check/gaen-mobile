@@ -23,3 +23,16 @@ export type SymptomLogEntry = {
 }
 
 export type SymptomLogEntryAttributes = Omit<SymptomLogEntry, "id">
+
+export const sortSymptomEntries = (
+  entries: SymptomLogEntry[],
+): SymptomLogEntry[] => {
+  const compareEntries = (
+    entryA: SymptomLogEntry,
+    entryB: SymptomLogEntry,
+  ): number => {
+    return Math.sign(entryB.date - entryA.date)
+  }
+
+  return entries.sort(compareEntries)
+}

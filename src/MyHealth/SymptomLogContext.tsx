@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomLogEntry, Symptom } from "./symptoms"
+import { SymptomLogEntry, Symptom, sortSymptomEntries } from "./symptoms"
 import {
   getLogEntries,
   createLogEntry,
@@ -54,7 +54,8 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
 
   const fetchLogEntries = async () => {
     const entries = await getLogEntries()
-    setSymptomLogEntries(entries)
+    const sortedEntries = sortSymptomEntries(entries)
+    setSymptomLogEntries(sortedEntries)
   }
 
   const cleanupStaleData = async () => {
