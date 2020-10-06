@@ -9,14 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect, Stacks, ModalStackScreens } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
 import { Text, Button, StatusBar } from "../components"
-import {
-  HealthAssessment,
-  determineHealthAssessment,
-  Symptom,
-} from "./symptoms"
+import { Symptom } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
 import {
@@ -132,21 +128,14 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const completeOnPressSave = () => {
-    const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
-    if (currentHealthAssessment === HealthAssessment.AtRisk) {
-      navigation.navigate(Stacks.Modal, {
-        screen: ModalStackScreens.AtRiskRecommendation,
-      })
-    } else {
-      navigation.goBack()
-      const flashMessage = isEditingLogEntry
-        ? t("symptom_checker.symptoms_updated")
-        : t("symptom_checker.symptoms_saved")
-      showMessage({
-        message: flashMessage,
-        ...Affordances.successFlashMessageOptions,
-      })
-    }
+    navigation.goBack()
+    const flashMessage = isEditingLogEntry
+      ? t("symptom_checker.symptoms_updated")
+      : t("symptom_checker.symptoms_saved")
+    showMessage({
+      message: flashMessage,
+      ...Affordances.successFlashMessageOptions,
+    })
   }
 
   const determineSymptomButtonStyle = (symptom: Symptom) => {

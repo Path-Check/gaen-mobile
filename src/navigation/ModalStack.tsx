@@ -10,7 +10,6 @@ import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
 import HowItWorksStack from "./HowItWorksStack"
 import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
-import AtRiskRecommendationScreen from "../MyHealth/AtRiskRecommendation"
 import SelfScreenerStack from "./SelfScreenerStack"
 
 const Stack = createStackNavigator()
@@ -45,14 +44,6 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={ModalStackScreens.AnonymizedDataConsent}
         component={AnonymizedDataConsentScreen}
-      />
-      <Stack.Screen
-        name={ModalStackScreens.AtRiskRecommendation}
-        component={AtRiskRecommendationScreen}
-        options={{
-          ...TransitionPresets.ModalTransition,
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name={ModalStackScreens.SelfScreenerFromExposureDetails}
