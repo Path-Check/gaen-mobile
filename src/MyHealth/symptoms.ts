@@ -1,10 +1,5 @@
 import { Posix } from "../utils/dateTime"
 
-export enum HealthAssessment {
-  AtRisk,
-  NotAtRisk,
-}
-
 export type Symptom =
   | "chest_pain_or_pressure"
   | "difficulty_breathing"
@@ -28,17 +23,3 @@ export type SymptomLogEntry = {
 }
 
 export type SymptomLogEntryAttributes = Omit<SymptomLogEntry, "id">
-
-export type DayLogData = {
-  date: Posix
-  symptomLogEntries: SymptomLogEntry[]
-}
-
-export const determineHealthAssessment = (
-  symptoms: Symptom[],
-): HealthAssessment => {
-  if (symptoms.length > 0) {
-    return HealthAssessment.AtRisk
-  }
-  return HealthAssessment.NotAtRisk
-}
