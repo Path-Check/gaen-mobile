@@ -97,13 +97,6 @@
     "launch_enable_notif": "Activer les notifications",
     "launch_get_started": "Commencer"
   },
-  "my_health": {
-    "symptom_log": {
-      "feeling_not_well": "Vous ne vous sentiez pas bien",
-      "feeling_well": "Vous vous sentiez bien"
-    },
-    "today": "Aujourd'hui"
-  },
   "navigation": {
     "home": "Accueil",
     "more_info": "Plus d'informations"
@@ -144,6 +137,10 @@
     },
     "guidance": {
       "guidance": "Orientation"
+    },
+    "how_are_you_feeling": {
+      "good": "Bien",
+      "not_well": "Pas bien"
     }
   },
   "settings": {
@@ -164,16 +161,9 @@
       "deleting_symptom_log": "Désolé, nous n'avons pas pu supprimer le journal des symptômes",
       "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
     },
-    "find_a_test_center": "Trouver un centre de test",
     "find_a_test_center_nearby": "Trouver un centre de test à proximité",
     "get_tested": "Nous vous recommandons de vous faire tester pour la COVID-19.",
-    "glad_to_hear_it": "Ravi de l'entendre !",
-    "good": "Bien",
-    "how_are_you_feeling": "Comment vous sentez-vous aujourd'hui ?",
-    "my_health": "Ma santé",
-    "not_well": "Pas bien",
     "sorry_not_feeling_well": "Désolé que vous ne vous sentiez pas bien. Revenez demain.",
-    "sorry_to_hear_it": "Désolé d'apprendre que vous ne vous sentez pas bien !",
     "symptoms_saved": "Symptômes sauvegardés !",
     "symptoms_updated": "Symptômes mis à jour !",
     "what_symptoms": "Quels symptômes ressentez-vous?"
