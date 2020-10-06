@@ -58,7 +58,6 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
           <Text style={style.datetimeText}>{dateText}</Text>
           <Text style={style.datetimeText}>{timeText}</Text>
         </View>
-
         <View style={style.symptomsContainer}>
           {symptoms.map(toSymptomText)}
         </View>
@@ -69,18 +68,23 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
 
 const style = StyleSheet.create({
   symptomLogContainer: {
-    marginBottom: Spacing.xLarge,
     ...Affordances.floatingContainer,
-    paddingBottom: Spacing.medium,
+    paddingTop: 0,
+    paddingBottom: Spacing.small,
+    paddingHorizontal: 0,
+    marginBottom: Spacing.xLarge,
   },
   timeContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    paddingBottom: Spacing.xxxSmall,
+    paddingTop: Spacing.xSmall + 1,
+    paddingBottom: Spacing.xSmall,
+    paddingHorizontal: Spacing.medium,
     marginBottom: Spacing.small,
-    borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.neutral75,
+    backgroundColor: Colors.neutral5,
+    borderTopLeftRadius: Outlines.borderRadiusLarge,
+    borderTopRightRadius: Outlines.borderRadiusLarge,
   },
   datetimeText: {
     ...Typography.monospace,
@@ -88,6 +92,7 @@ const style = StyleSheet.create({
   },
   symptomsContainer: {
     flexDirection: "column",
+    paddingHorizontal: Spacing.medium,
   },
   symptomTextContainer: {
     marginBottom: Spacing.xxxSmall,

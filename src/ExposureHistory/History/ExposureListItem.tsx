@@ -14,7 +14,7 @@ import {
   Colors,
   Spacing,
   Typography,
-  Outlines,
+  Affordances,
 } from "../../styles"
 
 interface ExposureListItemProps {
@@ -78,12 +78,8 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    ...Affordances.floatingContainer,
     marginBottom: Spacing.medium,
-    paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.xSmall,
-    borderRadius: Outlines.borderRadiusLarge,
   },
   innerContainer: {
     flexDirection: "row",

@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
-import { Colors, Typography, Spacing, Outlines } from "../../styles"
+import { Colors, Typography, Spacing, Affordances } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
@@ -112,10 +112,11 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
 
 const style = StyleSheet.create({
   noExposureCard: {
+    ...Affordances.floatingContainer,
     backgroundColor: Colors.primary125,
-    ...Outlines.roundedBorder,
     borderColor: Colors.primary125,
     padding: Spacing.large,
+    marginBottom: Spacing.small,
   },
   headerText: {
     ...Typography.header5,
@@ -127,11 +128,7 @@ const style = StyleSheet.create({
     color: Colors.secondary10,
   },
   card: {
-    backgroundColor: Colors.primaryLightBackground,
-    ...Outlines.roundedBorder,
-    borderColor: Colors.white,
-    padding: Spacing.large,
-    marginTop: Spacing.large,
+    ...Affordances.floatingContainer,
   },
   cardHeaderText: {
     ...Typography.header3,

@@ -198,7 +198,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingBottom: Spacing.large,
+    paddingBottom: Spacing.medium,
     backgroundColor: Colors.primaryLightBackground,
   },
   topContainer: {

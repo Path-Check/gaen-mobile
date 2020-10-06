@@ -15,7 +15,7 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors } from "../../styles"
+import { Buttons, Spacing, Typography, Colors, Outlines } from "../../styles"
 
 type Posix = number
 
@@ -29,7 +29,7 @@ const History: FunctionComponent<HistoryProps> = ({
   exposures,
 }) => {
   useIsFocused()
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { checkForNewExposures } = useExposureContext()
@@ -52,7 +52,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -86,6 +86,8 @@ const History: FunctionComponent<HistoryProps> = ({
             <NoExposures />
           )}
         </View>
+      </ScrollView>
+      <View style={style.bottomActionsContainer}>
         <Button
           label={t("exposure_history.check_for_exposures")}
           onPress={handleOnPressCheckForExposures}
@@ -93,7 +95,7 @@ const History: FunctionComponent<HistoryProps> = ({
           customButtonStyle={style.button}
           customButtonInnerStyle={style.buttonInner}
         />
-      </ScrollView>
+      </View>
     </>
   )
 }
@@ -104,9 +106,9 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xxHuge,
   },
   container: {
-    paddingHorizontal: Spacing.medium,
+    paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.medium,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerRow: {
     flexDirection: "row",
@@ -134,6 +136,15 @@ const style = StyleSheet.create({
   listContainer: {
     marginTop: Spacing.xxLarge,
     marginBottom: Spacing.large,
+  },
+  bottomActionsContainer: {
+    alignItems: "center",
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral10,
+    backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.small,
+    paddingBottom: Spacing.medium,
+    paddingHorizontal: Spacing.small,
   },
   button: {
     width: "100%",
