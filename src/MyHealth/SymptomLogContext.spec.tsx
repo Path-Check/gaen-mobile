@@ -134,5 +134,5 @@ describe("SymptomLogProvider", () => {
 const SymptomLogConsumer = () => {
   const { symptomLogEntries } = useSymptomLogContext()
 
-  return <Text>{JSON.stringify(symptomLogEntries)}</Text>
+  return <Text testID="symptom-logs">{JSON.stringify(symptomLogEntries)}</Text>
 }
