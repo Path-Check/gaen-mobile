@@ -1445,7 +1445,6 @@ class ExposureManagerTests: XCTestCase {
       switch result {
       case .success(let files):
         XCTAssertEqual(files, 1)
-        storeExposureExpectation.fulfill()
       default: XCTFail()
       }
     }
@@ -1454,49 +1453,33 @@ class ExposureManagerTests: XCTestCase {
 
   @available(iOS 13.7, *)
   func testValidDailySummariesConfiguration() {
-    let configMissingENDaysSinceOnsetOfSymptomsUnknown: DailySummariesConfiguration = {
-      let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber] = [-2:1,
-                                                                 -1:1,
-                                                                 0:1,
-                                                                 1:1,
-                                                                 2:1,
-                                                                 3:1,
-                                                                 4:1,
-                                                                 5:1,
-                                                                 6:1,
-                                                                 7:1,
-                                                                 8:1,
-                                                                 9:1,
-                                                                 10:1,
-                                                                 11:1,
-                                                                 12:1,
-                                                                 13:1,
-                                                                 14:1]
-      return DailySummariesConfiguration(attenuationDurationThresholds: [40, 53, 60],
-                                         attenuationBucketWeights: [1, 1, 0.5, 0],
-                                         reportTypeWeights: [1, 0, 0, 0],
-                                         reportTypeWhenMissing: 1,
-                                         infectiousnessWeights: [1, 1],
-                                         infectiousnessWhenDaysSinceOnsetMissing: 1,
-                                         triggerThresholdWeightedDuration: 15,
-                                         daysSinceOnsetToInfectiousness: daysSinceOnsetToInfectiousness)
-    }()
-    let enManagerMock = ENManagerMock()
-    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
-    }
-
-    apiClientMock.downloadRequestHander = { (request, requestType) in
-      return Result<DailySummariesConfiguration>.success(configMissingENDaysSinceOnsetOfSymptomsUnknown)
-    }
-    let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
-                                          apiClient: apiClientMock)
-    do {
-      let config = try await(exposureManager.getExposureConfigurationV2())
-      XCTAssertEqual(config.daysSinceOnsetToInfectiousness[NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown)], 1)
-    } catch {
-      XCTFail()
-    }
+    let dict: [String: Any] = ["DailySummariesConfig": ["attenuationDurationThresholds": [40,53,60],
+                                                        "attenuationBucketWeights": [1,1,0.5,0],
+                                                        "reportTypeWeights": [1,0,0,0],
+                                                        "reportTypeWhenMissing": 1,
+                                                        "infectiousnessWeights": [1,1],
+                                                        "infectiousnessWhenDaysSinceOnsetMissing": 1,
+                                                        "daysSinceOnsetToInfectiousness": [[-2,1],
+                                                                                           [-1,1],
+                                                                                           [0,1],
+                                                                                           [1,1],
+                                                                                           [2,1],
+                                                                                           [3,1],
+                                                                                           [4,1],
+                                                                                           [5,1],
+                                                                                           [6,1],
+                                                                                           [7,1],
+                                                                                           [8,1],
+                                                                                           [9,1],
+                                                                                           [10,1],
+                                                                                           [11,1],
+                                                                                           [12,1],
+                                                                                           [13,1],
+                                                                                           [14,1]]],
+                               "triggerThresholdWeightedDuration": 15]
+    let jsonData = try! JSONSerialization.data(withJSONObject: dict)
+    let config = DailySummariesConfiguration.create(from: jsonData)!
+    XCTAssertEqual(config.daysSinceOnsetToInfectiousness[NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown)], 1)
   }
 
   @available(iOS 13.7, *)
