@@ -170,7 +170,7 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.where(CheckIn::class.java)
-                    .lessThan("date", fourteenDaysAgo())
+                    .lessThan("date", daysAgo(14))
                     .findAll()
                     ?.deleteAllFromRealm()
             }
@@ -204,11 +204,11 @@ object RealmSecureStorageBte {
         }
     }
 
-    fun deleteStaleSymptomLogs() {
+    fun deleteSymptomLogsOlderThan(days: Long) {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.where(SymptomLogEntry::class.java)
-                    .lessThan("date", fourteenDaysAgo())
+                    .lessThan("date", daysAgo(days))
                     .findAll()
                     ?.deleteAllFromRealm()
             }
@@ -226,7 +226,7 @@ object RealmSecureStorageBte {
         return Realm.getInstance(realmConfig)
     }
 
-    private fun fourteenDaysAgo(): Long {
-        return Instant.now().plus(-14, ChronoUnit.DAYS).toEpochMilli()
+    private fun daysAgo(days: Long): Long {
+        return Instant.now().plus(-1 * days, ChronoUnit.DAYS).toEpochMilli()
     }
 }

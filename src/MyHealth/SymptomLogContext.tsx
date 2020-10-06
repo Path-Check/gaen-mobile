@@ -13,7 +13,7 @@ import {
   modifyLogEntry,
   deleteLogEntry as removeLogEntry,
   deleteAllSymptomLogs as deleteLogs,
-  deleteStaleSymptomLogs,
+  deleteSymptomLogsOlderThan,
 } from "./nativeModule"
 import {
   failureResponse,
@@ -47,6 +47,8 @@ const initialState: SymptomLogState = {
 
 export const SymptomLogContext = createContext<SymptomLogState>(initialState)
 
+export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
+
 export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   const [symptomLogEntries, setSymptomLogEntries] = useState<SymptomLogEntry[]>(
     [],
@@ -59,7 +61,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   }
 
   const cleanupStaleData = async () => {
-    await deleteStaleSymptomLogs()
+    await deleteSymptomLogsOlderThan(DAYS_AFTER_LOG_IS_CONSIDERED_STALE)
   }
 
   useEffect(() => {

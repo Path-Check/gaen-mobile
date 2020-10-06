@@ -6,7 +6,7 @@ import { useSymptomLogContext, SymptomLogProvider } from "./SymptomLogContext"
 import {
   getLogEntries,
   createLogEntry,
-  deleteStaleSymptomLogs,
+  deleteSymptomLogsOlderThan,
 } from "./nativeModule"
 import { Symptom } from "./symptoms"
 import Logger from "../logger"
@@ -116,7 +116,7 @@ describe("SymptomLogProvider", () => {
     })
 
     it("deletes all the stale data on load", async () => {
-      const deleteStaleSymptomLogsSpy = deleteStaleSymptomLogs as jest.Mock
+      const deleteSymptomLogsOlderThanSpy = deleteSymptomLogsOlderThan as jest.Mock
 
       render(
         <SymptomLogProvider>
@@ -125,7 +125,7 @@ describe("SymptomLogProvider", () => {
       )
 
       await waitFor(() => {
-        expect(deleteStaleSymptomLogsSpy).toHaveBeenCalled()
+        expect(deleteSymptomLogsOlderThanSpy).toHaveBeenCalledWith(14)
       })
     })
   })
