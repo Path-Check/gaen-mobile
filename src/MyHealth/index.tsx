@@ -42,19 +42,16 @@ const SymptomLog: FunctionComponent = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={style.outerContainer}>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
-
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
         <Text style={style.headerText}>{t("symptom_checker.symptom_log")}</Text>
-
         {hasSymptomHistory ? <SymptomHistory /> : <NoSymptomHistory />}
       </ScrollView>
-
       <View style={style.bottomActionsContainer}>
         <Button
           onPress={handleOnPressLogSymptoms}
@@ -69,6 +66,9 @@ const SymptomLog: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.primaryLightBackground,
@@ -85,21 +85,21 @@ const style = StyleSheet.create({
   noSymptomHistoryText: {
     ...Typography.body1,
   },
-  button: {
-    width: "100%",
-  },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
-  },
   bottomActionsContainer: {
     alignItems: "center",
     borderTopWidth: Outlines.hairline,
     borderColor: Colors.neutral10,
     backgroundColor: Colors.secondary10,
     paddingTop: Spacing.small,
-    paddingBottom: Spacing.small,
-    paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.medium,
+    paddingHorizontal: Spacing.small,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
 })
 

@@ -145,7 +145,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
+    ...Typography.bold,
     marginBottom: Spacing.small,
   },
   aboutContent: {

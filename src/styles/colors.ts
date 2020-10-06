@@ -10,6 +10,7 @@ const applyOpacity = (hexColor: string, opacity: number): string => {
 
 // Neutrals
 export const white = "#ffffff"
+export const neutral5 = "#edeef3"
 export const neutral10 = "#e9eaf0"
 export const neutral25 = "#d8d8de"
 export const neutral30 = "#d6d6da"
