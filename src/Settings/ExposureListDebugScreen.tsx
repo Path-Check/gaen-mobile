@@ -1,7 +1,7 @@
 import React, { useEffect, FunctionComponent } from "react"
-import { FlatList, StyleSheet, View, Text } from "react-native"
+import { FlatList, StyleSheet, View } from "react-native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import dayjs from "dayjs"
 
@@ -30,9 +30,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
               testID={"exposure-list-debug-item"}
               style={style.flatlistRowView}
             >
-              <GlobalText style={style.itemText}>
-                <Text>Date: {item.item.date}</Text>
-              </GlobalText>
+              <Text style={style.itemText}>Date: {item.item.date}</Text>
             </View>
           )}
         />

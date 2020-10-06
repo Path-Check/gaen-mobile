@@ -10,7 +10,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -22,9 +22,7 @@ const BluetoothInfo: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
-          {t("home.bluetooth_info_header")}
-        </GlobalText>
+        <Text style={style.headerText}>{t("home.bluetooth_info_header")}</Text>
         <Image source={Images.InfoHeader} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
@@ -43,9 +41,7 @@ const BluetoothInfo: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.textContainer}>
-          <GlobalText style={style.bodyText}>
-            {t("home.bluetooth_info_body")}
-          </GlobalText>
+          <Text style={style.bodyText}>{t("home.bluetooth_info_body")}</Text>
         </View>
         <Image
           source={Images.ProtectPrivacyReceiveKeys}

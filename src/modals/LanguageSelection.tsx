@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { Icons } from "../assets"
 import { useStatusBarEffect } from "../navigation"
 
@@ -55,7 +55,7 @@ const LanguageSelection: FunctionComponent = () => {
         style={style.languageButton}
         onPress={handleOnSelectLanguage}
       >
-        <GlobalText style={languageButtonTextStyles}>{item.label}</GlobalText>
+        <Text style={languageButtonTextStyles}>{item.label}</Text>
       </TouchableOpacity>
     )
   }
@@ -63,9 +63,7 @@ const LanguageSelection: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
-          {t("onboarding.select_language")}
-        </GlobalText>
+        <Text style={style.headerText}>{t("onboarding.select_language")}</Text>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}

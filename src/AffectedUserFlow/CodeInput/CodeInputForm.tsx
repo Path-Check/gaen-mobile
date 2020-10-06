@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText, Button, StatusBar } from "../../components"
+import { Text, Button, StatusBar } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -205,13 +205,13 @@ const CodeInputForm: FunctionComponent = () => {
           </TouchableOpacity>
         </View>
         <View style={style.headerContainer}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("export.code_input_title_bluetooth")}
-          </GlobalText>
+          </Text>
 
-          <GlobalText style={style.subheader}>
+          <Text style={style.subheader}>
             {t("export.code_input_body_bluetooth")}
-          </GlobalText>
+          </Text>
         </View>
         <View>
           <TextInput
@@ -230,7 +230,7 @@ const CodeInputForm: FunctionComponent = () => {
             blurOnSubmit={false}
           />
         </View>
-        <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
+        <Text style={style.errorSubtitle}>{errorMessage}</Text>
         {isLoading ? <LoadingIndicator /> : null}
         <Button
           onPress={handleOnPressSubmit}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet, TouchableOpacity, Linking } from "react-native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { Typography } from "../styles"
 
 interface ExternalLinkProps {
@@ -16,7 +16,7 @@ const ExternalLink: FunctionComponent<ExternalLinkProps> = ({ url, label }) => {
 
   return (
     <TouchableOpacity onPress={handleOnPressLink} accessibilityLabel={label}>
-      <GlobalText style={style.externalLinkText}>{label}</GlobalText>
+      <Text style={style.externalLinkText}>{label}</Text>
     </TouchableOpacity>
   )
 }

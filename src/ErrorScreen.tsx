@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { SafeAreaView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText, Button } from "./components"
+import { Text, Button } from "./components"
 
 import { Colors, Spacing, Typography } from "./styles"
 
@@ -22,11 +22,9 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
     <SafeAreaView style={style.container}>
       <View style={style.content}>
         <View style={style.textContainer}>
-          <GlobalText style={style.title}>{t("errors.title")}</GlobalText>
-          <GlobalText style={style.subtitle}>
-            {t("errors.description")}
-          </GlobalText>
-          <GlobalText style={style.error}>{parseError}</GlobalText>
+          <Text style={style.title}>{t("errors.title")}</Text>
+          <Text style={style.subtitle}>{t("errors.description")}</Text>
+          <Text style={style.error}>{parseError}</Text>
         </View>
         <View style={style.buttonContainer}>
           <Button label={t("errors.reload")} onPress={resetError} />

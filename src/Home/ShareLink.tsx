@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Icons, Images } from "../assets"
@@ -45,9 +45,7 @@ export const ShareLink: FunctionComponent = () => {
         <Image source={Images.HugEmoji} style={style.shareImage} />
       </View>
       <View style={style.shareTextContainer}>
-        <GlobalText style={style.shareText}>
-          {t("home.bluetooth.share")}
-        </GlobalText>
+        <Text style={style.shareText}>{t("home.bluetooth.share")}</Text>
       </View>
       <View style={style.shareIconContainer}>
         <SvgXml

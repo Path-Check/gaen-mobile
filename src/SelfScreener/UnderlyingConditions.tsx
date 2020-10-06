@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import { UnderlyingCondition } from "./selfScreener"
 import SymptomCheckbox from "./SymptomCheckbox"
 import SelfScreenerLayout from "./SelfScreenerLayout"
@@ -79,12 +79,12 @@ const UnderlyingConditions: FunctionComponent = () => {
         />
       }
     >
-      <GlobalText style={style.headerText}>
+      <Text style={style.headerText}>
         {t("self_screener.underlying_conditions.do_you_have")}
-      </GlobalText>
-      <GlobalText style={style.subheaderText}>
+      </Text>
+      <Text style={style.subheaderText}>
         {t("self_screener.underlying_conditions.select_all_or_none")}
-      </GlobalText>
+      </Text>
       <SymptomCheckbox
         label={underlyingConditionToString(LUNG_DISEASE)}
         onPress={() => updateUnderlyingConditions(LUNG_DISEASE)}

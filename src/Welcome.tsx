@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import LinearGradient from "react-native-linear-gradient"
 
-import { StatusBar, GlobalText, Button } from "./components"
+import { StatusBar, Text, Button } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
@@ -68,9 +68,7 @@ const Welcome: FunctionComponent = () => {
               angleCenter={{ x: 0.5, y: 0.5 }}
               style={style.languageButtonContainer}
             >
-              <GlobalText style={style.languageButtonText}>
-                {languageName}
-              </GlobalText>
+              <Text style={style.languageButtonText}>{languageName}</Text>
             </LinearGradient>
           </TouchableOpacity>
           <View style={style.imageAndText}>
@@ -80,10 +78,8 @@ const Welcome: FunctionComponent = () => {
               accessible
               accessibilityLabel={t("onboarding.welcome_image_label")}
             />
-            <GlobalText style={style.welcomeToText}>
-              {welcomeMessage}
-            </GlobalText>
-            <GlobalText style={style.nameText}>{applicationName}</GlobalText>
+            <Text style={style.welcomeToText}>{welcomeMessage}</Text>
+            <Text style={style.nameText}>{applicationName}</Text>
           </View>
           <Button
             label={t("label.launch_get_started")}

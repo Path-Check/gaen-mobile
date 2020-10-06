@@ -10,7 +10,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
@@ -22,9 +22,9 @@ const ProximityTracingInfo: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("home.proximity_tracing_info_header")}
-        </GlobalText>
+        </Text>
         <Image source={Images.InfoHeader} style={style.headerImage} />
         <TouchableOpacity
           style={style.closeIconContainer}
@@ -43,18 +43,18 @@ const ProximityTracingInfo: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.textContainer}>
-          <GlobalText style={style.subheaderText}>
+          <Text style={style.subheaderText}>
             {t("home.proximity_tracing_info_subheader_1")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
+          </Text>
+          <Text style={style.bodyText}>
             {t("home.proximity_tracing_info_body_1")}
-          </GlobalText>
-          <GlobalText style={style.subheaderText}>
+          </Text>
+          <Text style={style.subheaderText}>
             {t("home.proximity_tracing_info_subheader_2")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
+          </Text>
+          <Text style={style.bodyText}>
             {t("home.proximity_tracing_info_body_2")}
-          </GlobalText>
+          </Text>
         </View>
       </ScrollView>
     </View>

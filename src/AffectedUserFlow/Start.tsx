@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { StatusBar, GlobalText, Button } from "../components"
+import { StatusBar, Text, Button } from "../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -64,9 +64,7 @@ export const ExportIntro: FunctionComponent = () => {
             accessible
             accessibilityLabel={t("export.person_and_health_expert")}
           />
-          <GlobalText style={style.header}>
-            {t("export.start_header_bluetooth")}
-          </GlobalText>
+          <Text style={style.header}>{t("export.start_header_bluetooth")}</Text>
         </View>
         <View style={style.buttonContainer}>
           <Button

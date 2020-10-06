@@ -14,7 +14,7 @@ import {
 } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { openAppSettings } from "../gaen/nativeModule"
 
@@ -56,9 +56,9 @@ const ActivationSummary: FunctionComponent = () => {
           onPress={handleOnPressGoToHome}
           style={style.secondaryButton}
         >
-          <GlobalText style={style.secondaryButtonText}>
+          <Text style={style.secondaryButtonText}>
             {t("label.go_to_home_view")}
-          </GlobalText>
+          </Text>
         </TouchableOpacity>
       </View>
     )
@@ -108,12 +108,8 @@ const ActivationSummary: FunctionComponent = () => {
         <View style={style.topContainer}>
           <Image source={screenContent.headerImage} style={style.headerImage} />
           <View style={style.textContainer}>
-            <GlobalText style={style.headerText}>
-              {screenContent.headerText}
-            </GlobalText>
-            <GlobalText style={style.bodyText}>
-              {screenContent.bodyText}
-            </GlobalText>
+            <Text style={style.headerText}>{screenContent.headerText}</Text>
+            <Text style={style.bodyText}>{screenContent.bodyText}</Text>
           </View>
         </View>
         <Buttons />

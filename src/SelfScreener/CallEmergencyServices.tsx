@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 
 import {
   Buttons,
@@ -44,15 +44,15 @@ const CallEmergencyServices: FunctionComponent = () => {
           height={Iconography.medium}
           style={style.icon}
         />
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("self_screener.call_emergency_services.seek_medical_attention")}
-        </GlobalText>
-        <GlobalText style={style.bodyText}>
+        </Text>
+        <Text style={style.bodyText}>
           {t(
             "self_screener.call_emergency_services.urgent_medical_attention_needed",
             { emergencyPhoneNumber },
           )}
-        </GlobalText>
+        </Text>
       </View>
       <TouchableOpacity
         onPress={handleOnPressCallEmergencyServices}
@@ -65,11 +65,11 @@ const CallEmergencyServices: FunctionComponent = () => {
         accessibilityRole="button"
         style={style.buttonContainer}
       >
-        <GlobalText style={style.buttonText}>
+        <Text style={style.buttonText}>
           {t("self_screener.call_emergency_services.call_emergencies", {
             emergencyPhoneNumber,
           })}
-        </GlobalText>
+        </Text>
         <SvgXml
           xml={Icons.Arrow}
           fill={Colors.white}

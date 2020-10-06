@@ -13,7 +13,7 @@ import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useStatusBarEffect, MyHealthStackScreens, Stacks } from "../navigation"
-import { GlobalText, StatusBar, Button } from "../components"
+import { Text, StatusBar, Button } from "../components"
 
 import { Icons, Images } from "../assets"
 import {
@@ -75,16 +75,12 @@ const AtRiskRecommendationScreen: FunctionComponent = () => {
           )}
           style={style.image}
         />
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.guidance")}
-        </GlobalText>
+        <Text style={style.headerText}>{t("symptom_checker.guidance")}</Text>
         <View style={style.bodyTextContainer}>
-          <GlobalText style={style.bodyText}>
+          <Text style={style.bodyText}>
             {t("symptom_checker.sorry_not_feeling_well")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
-            {t("symptom_checker.get_tested")}
-          </GlobalText>
+          </Text>
+          <Text style={style.bodyText}>{t("symptom_checker.get_tested")}</Text>
         </View>
         {Boolean(findATestCenterUrl) && (
           <Button

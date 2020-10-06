@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
@@ -30,9 +30,9 @@ const ProtectPrivacy: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("onboarding.protect_privacy.header")}
-        </GlobalText>
+        </Text>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={navigation.goBack}
@@ -137,10 +137,8 @@ const Section: FunctionComponent<SectionProps> = ({
     <View>
       <Image source={image} style={sectionStyle.image} />
       <View style={sectionStyle.textContainer}>
-        <GlobalText style={sectionStyle.subheaderText}>
-          {subheaderText}
-        </GlobalText>
-        <GlobalText style={sectionStyle.bodyText}>{bodyText}</GlobalText>
+        <Text style={sectionStyle.subheaderText}>{subheaderText}</Text>
+        <Text style={sectionStyle.bodyText}>{bodyText}</Text>
       </View>
     </View>
   )

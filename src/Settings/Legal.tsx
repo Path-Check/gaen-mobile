@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "./ExternalLink"
@@ -40,10 +40,10 @@ const Legal: FunctionComponent = () => {
 
   return (
     <ScrollView style={style.container} alwaysBounceVertical={false}>
-      <GlobalText style={style.headerContent} testID={"licenses-legal-header"}>
+      <Text style={style.headerContent} testID={"licenses-legal-header"}>
         {applicationName}
-      </GlobalText>
-      <GlobalText style={style.contentText}>{legalContent}</GlobalText>
+      </Text>
+      <Text style={style.contentText}>{legalContent}</Text>
       {healthAuthorityLegalPrivacyPolicyUrl && (
         <ExternalLink
           url={healthAuthorityLegalPrivacyPolicyUrl}

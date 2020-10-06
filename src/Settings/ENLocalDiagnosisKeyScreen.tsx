@@ -1,17 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import {
-  Alert,
-  BackHandler,
-  FlatList,
-  StyleSheet,
-  View,
-  Text,
-} from "react-native"
+import { Alert, BackHandler, FlatList, StyleSheet, View } from "react-native"
 
-import { GlobalText } from "../components"
 import { NavigationProp } from "../navigation"
-
 import { NativeModule } from "../gaen"
+import { Text } from "../components"
 
 import { Typography } from "../styles"
 
@@ -76,9 +68,9 @@ const ENLocalDiagnosisKeyScreen: FunctionComponent<ENLocalDiagnosisKeyScreenProp
       keyExtractor={(item) => item.id}
       renderItem={(item) => (
         <View style={style.flatlistRowView}>
-          <GlobalText style={style.itemText}>
-            <Text>Rolling start number: {item.item.rollingStartNumber}</Text>
-          </GlobalText>
+          <Text style={style.itemText}>
+            Rolling start number: {item.item.rollingStartNumber}
+          </Text>
         </View>
       )}
     />

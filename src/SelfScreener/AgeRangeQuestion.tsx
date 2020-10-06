@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import { Colors, Forms, Iconography } from "../styles"
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
@@ -45,9 +45,9 @@ const AgeRangeQuestion: FunctionComponent = () => {
         />
       }
     >
-      <GlobalText style={style.headerText}>
+      <Text style={style.headerText}>
         {t("self_screener.age_range.how_old_are_you")}
-      </GlobalText>
+      </Text>
       <RadioButton
         onPress={() => updateAgeRange(EIGHTEEN_TO_SIXTY_FOUR)}
         isSelected={ageRange === EIGHTEEN_TO_SIXTY_FOUR}
@@ -99,7 +99,7 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
           width={Iconography.small}
           height={Iconography.small}
         />
-        <GlobalText style={style.radioText}>{label}</GlobalText>
+        <Text style={style.radioText}>{label}</Text>
       </View>
     </TouchableWithoutFeedback>
   )

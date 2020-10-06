@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native"
 
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import { OtherSymptom, PrimarySymptom, SecondarySymptom } from "./selfScreener"
 import SymptomCheckbox from "./SymptomCheckbox"
 import SelfScreenerLayout from "./SelfScreenerLayout"
@@ -69,12 +69,12 @@ const GeneralSymptoms: FunctionComponent = () => {
         />
       }
     >
-      <GlobalText style={style.headerText}>
+      <Text style={style.headerText}>
         {t("self_screener.general_symptoms.are_you_experiencing")}
-      </GlobalText>
-      <GlobalText style={style.subheaderText}>
+      </Text>
+      <Text style={style.subheaderText}>
         {t("self_screener.general_symptoms.select_any")}
-      </GlobalText>
+      </Text>
       <SymptomCheckbox
         label={symptomToString(FEVER_OR_CHILLS)}
         onPress={() => updateSymptoms(FEVER_OR_CHILLS)}

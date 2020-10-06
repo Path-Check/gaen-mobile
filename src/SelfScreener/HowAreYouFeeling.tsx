@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { SelfScreenerStackScreens } from "../navigation"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 
@@ -35,9 +35,9 @@ const HowAreYouFeeling: FunctionComponent = () => {
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
-      <GlobalText style={style.headerText}>
+      <Text style={style.headerText}>
         {t("self_screener.how_are_you_feeling.title")}
-      </GlobalText>
+      </Text>
       <View style={style.feelingButtonsContainer}>
         <FeelingButton
           image={Images.SmileEmoji}
@@ -74,7 +74,7 @@ const FeelingButton: FunctionComponent<FeelingButtonProps> = ({
         accessible
         style={style.feelingButtonImage}
       />
-      <GlobalText style={style.feelingButtonText}>{text}</GlobalText>
+      <Text style={style.feelingButtonText}>{text}</Text>
     </TouchableOpacity>
   )
 }

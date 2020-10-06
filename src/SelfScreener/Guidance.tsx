@@ -3,7 +3,7 @@ import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import { useSelfScreenerContext } from "../SelfScreenerContext"
 import { SymptomGroup } from "./selfScreener"
 import { Stack, Stacks } from "../navigation"
@@ -34,32 +34,32 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     const { t } = useTranslation()
     return (
       <>
-        <GlobalText style={style.bullet1}>
+        <Text style={style.bullet1}>
           {t("self_screener.guidance.call_your_healthcare_provider")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.stay_at_home")}
-        </GlobalText>
+        </Text>
         <View style={style.bullet3Container}>
-          <GlobalText style={style.bullet3}>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.dont_go_to_work")}
-          </GlobalText>
-          <GlobalText style={style.bullet3}>
+          </Text>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.dont_use_public_transport")}
-          </GlobalText>
+          </Text>
         </View>
-        <GlobalText style={style.bullet2}>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.seek_medical_care")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.find_telehealth")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.take_care_of_yourself")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.protect_others")}
-        </GlobalText>
+        </Text>
       </>
     )
   }
@@ -69,18 +69,18 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
     return (
       <>
-        <GlobalText style={style.bullet1}>
+        <Text style={style.bullet1}>
           {t("self_screener.guidance.stay_at_home")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.dont_go_to_work")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.dont_use_public_transport")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.seek_medical_care")}
-        </GlobalText>
+        </Text>
       </>
     )
   }
@@ -89,28 +89,26 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     const { t } = useTranslation()
     return (
       <>
-        <GlobalText style={style.bullet1}>
+        <Text style={style.bullet1}>
           {t("self_screener.guidance.watch_for_covid_symptoms")}
-        </GlobalText>
-        <GlobalText style={style.bullet1}>
+        </Text>
+        <Text style={style.bullet1}>
           {t("self_screener.guidance.if_symptoms_develop")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.may_help_you_feel_better")}
-        </GlobalText>
+        </Text>
         <View style={style.bullet3Container}>
-          <GlobalText style={style.bullet3}>
-            {t("self_screener.guidance.rest")}
-          </GlobalText>
-          <GlobalText style={style.bullet3}>
+          <Text style={style.bullet3}>{t("self_screener.guidance.rest")}</Text>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.drink_water")}
-          </GlobalText>
-          <GlobalText style={style.bullet3}>
+          </Text>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.cover_coughs")}
-          </GlobalText>
-          <GlobalText style={style.bullet3}>
+          </Text>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.clean_hands")}
-          </GlobalText>
+          </Text>
         </View>
       </>
     )
@@ -121,26 +119,26 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
     return (
       <>
-        <GlobalText style={style.bullet1}>
+        <Text style={style.bullet1}>
           {t("self_screener.guidance.stay_home_14_days")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.take_temperature")}
-        </GlobalText>
-        <GlobalText style={style.bullet2}>
+        </Text>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.practice_social_distancing")}
-        </GlobalText>
+        </Text>
         <View style={style.bullet3Container}>
-          <GlobalText style={style.bullet3}>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.stay_6_feet_away")}
-          </GlobalText>
-          <GlobalText style={style.bullet3}>
+          </Text>
+          <Text style={style.bullet3}>
             {t("self_screener.guidance.stay_away_from_higher_risk_people")}
-          </GlobalText>
+          </Text>
         </View>
-        <GlobalText style={style.bullet2}>
+        <Text style={style.bullet2}>
           {t("self_screener.guidance.follow_cdc_guidance")}
-        </GlobalText>
+        </Text>
       </>
     )
   }
@@ -190,12 +188,12 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
       <View style={style.topScrollViewBackground} />
       <View style={style.headerContainer}>
         <Image source={Images.SelfScreenerIntro} style={style.image} />
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("self_screener.guidance.guidance")}
-        </GlobalText>
-        <GlobalText style={style.subheaderText}>
+        </Text>
+        <Text style={style.subheaderText}>
           {introForSymptomGroup(symptomGroup)}
-        </GlobalText>
+        </Text>
       </View>
       <View style={style.bulletListContainer}>
         {instructionsForSymptomGroup(symptomGroup)}

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText, Button, StatusBar } from "../../components"
+import { Text, Button, StatusBar } from "../../components"
 import { useStatusBarEffect, Stacks } from "../../navigation"
 import { Spacing, Iconography, Colors, Typography, Layout } from "../../styles"
 import { Icons } from "../../assets"
@@ -48,12 +48,12 @@ const EnableExposureNotifications: FunctionComponent = () => {
           </TouchableOpacity>
         </View>
         <View style={style.headerContainer}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("export.enable_exposure_notifications_title")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("export.enable_exposure_notifications_body")}
-          </GlobalText>
+          </Text>
         </View>
         <View style={style.buttonContainer}>
           <Button

@@ -8,7 +8,7 @@ import { useConfigurationContext } from "../ConfigurationContext"
 import { useAnalyticsContext } from "../AnalyticsContext"
 import { Stacks, useStatusBarEffect } from "../navigation"
 
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import { Colors, Typography, Spacing, Iconography } from "../styles"
 import { Icons } from "../assets"
 import ExternalLink from "../Settings/ExternalLink"
@@ -44,7 +44,7 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
   return (
     <View style={style.container}>
       <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>{headerText}</GlobalText>
+        <Text style={style.headerText}>{headerText}</Text>
         <TouchableOpacity
           style={style.closeIconContainer}
           onPress={handleOnPressClose}
@@ -59,24 +59,24 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={style.mainContentContainer}>
-        <GlobalText style={style.paragraph}>
+        <Text style={style.paragraph}>
           {t("settings.share_anonymized_data_para", { healthAuthorityName })}
-        </GlobalText>
+        </Text>
         <View style={style.privacyPolicyContainer}>
-          <GlobalText style={style.privacyPolicy}>
+          <Text style={style.privacyPolicy}>
             {t("settings.please_view_privacy_policy")}
-          </GlobalText>
+          </Text>
           <ExternalLink
             url={healthAuthorityPrivacyPolicyUrl}
             label={t("settings.here")}
           />
         </View>
         <Button onPress={handleOnPressButton} label={buttonText} />
-        <GlobalText style={style.disclaimer}>
+        <Text style={style.disclaimer}>
           {t("settings.share_anonymized_data_disclaimer", {
             healthAuthorityName,
           })}
-        </GlobalText>
+        </Text>
       </ScrollView>
     </View>
   )
