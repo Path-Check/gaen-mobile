@@ -31,6 +31,7 @@ import { StatusBar, Text, Button, GradientBackground } from "../components"
 import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
 import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
 import { LocationActivationStatus } from "./LocationActivationStatus"
+import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
 import { ShareLink } from "./ShareLink"
 
 import { Icons } from "../assets"
@@ -50,7 +51,7 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.gradient100Light)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { displaySelfScreener } = useConfigurationContext()
+  const { displaySelfScreener, displayCovidData } = useConfigurationContext()
 
   const { applicationName } = useApplicationName()
 
@@ -156,6 +157,7 @@ const Home: FunctionComponent = () => {
             <BluetoothActivationStatus />
             <ProximityTracingActivationStatus />
             <LocationActivationStatus />
+            {displayCovidData && <COVIDDataDashboard />}
           </View>
           <View style={style.ctaContainer}>
             <Button
