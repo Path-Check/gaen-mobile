@@ -8,7 +8,6 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.CheckInModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DebugMenuModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DeviceInfoModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureHistoryModule;
@@ -28,7 +27,6 @@ public class ExposureNotificationsPackage implements ReactPackage {
     modules.add(new DeviceInfoModule(reactContext));
     modules.add(new ExposureHistoryModule(reactContext));
     modules.add(new UtilsModule(reactContext));
-    modules.add(new CheckInModule(reactContext));
     modules.add(new SymptomLogEntryModule(reactContext));
 
     return modules;
