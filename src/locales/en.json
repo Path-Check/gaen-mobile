@@ -35,6 +35,13 @@
     "start": "Start",
     "submit": "Submit"
   },
+  "covid_data": {
+    "covid_data": "COVID Data",
+    "cases_today": "Cases today",
+    "deaths_today": "Deaths today",
+    "total_cases": "Total cases",
+    "total_deaths": "Total deaths"
+  },
   "errors": {
     "description": "An error has occurred. Please reload the app.",
     "reload": "Reload",
