@@ -12,7 +12,7 @@ import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { openAppSettings } from "../gaen/nativeModule"
 
-export const ProximityTracingActivationStatus: FunctionComponent = () => {
+export const ExposureNotificationsActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
   const { t } = useTranslation()
@@ -59,7 +59,7 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
   }
 
   const handleOnPressShowInfo = () => {
-    navigation.navigate(HomeStackScreens.ProximityTracingInfo)
+    navigation.navigate(HomeStackScreens.ExposureNotificationsInfo)
   }
 
   const isENEnabled = status === ENPermissionStatus.ENABLED
@@ -70,7 +70,7 @@ export const ProximityTracingActivationStatus: FunctionComponent = () => {
       isActive={isENEnabled}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
-      testID={"home-proximity-tracing-status-container"}
+      testID={"exposure-notifications-status-container"}
     />
   )
 }

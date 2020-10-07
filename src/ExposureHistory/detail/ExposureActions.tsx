@@ -118,7 +118,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const { t } = useTranslation()
 
   const handleOnPressRequestCallback = () => {
-    navigation.navigate(Stacks.Callback)
+    navigation.navigate(ModalStackScreens.CallbackStack)
   }
 
   return (

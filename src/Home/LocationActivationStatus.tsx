@@ -50,7 +50,7 @@ export const LocationActivationStatus: FunctionComponent = () => {
       isActive={isLocationOn}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
-      testID={"home-location-status-container"}
+      testID={"location-status-container"}
     />
   )
 }

@@ -80,6 +80,7 @@ const style = StyleSheet.create({
   container: {
     ...Affordances.floatingContainer,
     marginBottom: Spacing.medium,
+    marginHorizontal: Spacing.medium,
   },
   innerContainer: {
     flexDirection: "row",

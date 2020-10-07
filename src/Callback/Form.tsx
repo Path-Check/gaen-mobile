@@ -107,7 +107,7 @@ const CallbackForm: FunctionComponent = () => {
       >
         <View>
           <View style={style.headerContainer}>
-            <Text style={style.header}>{t("callback.well_get_in_touch")}</Text>
+            <Text style={style.header}>{t("callback.request_a_call")}</Text>
             <Text style={style.subheader}>
               {t("callback.fill_out_the_info", {
                 healthAuthorityName,

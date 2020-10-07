@@ -1,18 +1,26 @@
 import React, { FunctionComponent } from "react"
-import { useTranslation } from "react-i18next"
 import { TouchableOpacity, View, StyleSheet } from "react-native"
 import { SvgXml } from "react-native-svg"
+import { useTranslation } from "react-i18next"
 
 import { Text } from "../components"
 
 import { Icons } from "../assets"
-import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
+import {
+  Affordances,
+  Colors,
+  Iconography,
+  Outlines,
+  Spacing,
+  Typography,
+} from "../styles"
 
 type Content = {
+  backgroundColor: string
+  borderColor: string
   bodyText: string
-  leftIcon: string
-  leftIconFill: string
-  rightIcon: string
+  statusIcon: string
+  actionText: string
   onPress: () => void
   accessibilityLabel: string
 }
@@ -35,82 +43,124 @@ export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
   const { t } = useTranslation()
 
   const activeContent: Content = {
-    bodyText: t("common.enabled"),
-    leftIcon: Icons.CheckInCircle,
-    leftIconFill: Colors.success100,
-    rightIcon: Icons.HomeInfo,
+    backgroundColor: Colors.success10,
+    borderColor: Colors.success100,
+    bodyText: t("common.on"),
+    statusIcon: Icons.CheckInCircle,
+    actionText: t("exposure_scanning_status.learn_more"),
     onPress: infoAction,
     accessibilityLabel: t("home.get_more_info", { technology: headerText }),
   }
 
   const inactiveContent: Content = {
-    bodyText: t("common.disabled"),
-    leftIcon: Icons.XInCircle,
-    leftIconFill: Colors.danger75,
-    rightIcon: Icons.Wrench,
+    backgroundColor: Colors.danger10,
+    borderColor: Colors.danger100,
+    bodyText: t("common.off"),
+    statusIcon: Icons.XInCircle,
+    actionText: t("exposure_scanning_status.fix_this"),
     onPress: fixAction,
     accessibilityLabel: t("home.fix", { technology: headerText }),
   }
 
   const content = isActive ? activeContent : inactiveContent
 
+  const {
+    backgroundColor,
+    borderColor,
+    bodyText,
+    statusIcon,
+    actionText,
+    onPress,
+    accessibilityLabel,
+  } = content
+
+  const outerContainerStyle = {
+    ...style.outerContainer,
+    backgroundColor: backgroundColor,
+    borderColor: borderColor,
+  }
+
+  const statusTextContainerStyle = {
+    ...style.statusTextContainer,
+    backgroundColor: borderColor,
+  }
+
   return (
     <TouchableOpacity
-      onPress={content.onPress}
-      style={style.activationStatusContainer}
+      onPress={onPress}
+      style={outerContainerStyle}
       accessible
-      accessibilityLabel={content.accessibilityLabel}
+      accessibilityLabel={accessibilityLabel}
       testID={testID}
     >
-      <View style={style.activationStatusLeftContainer}>
-        <SvgXml
-          xml={content.leftIcon}
-          fill={content.leftIconFill}
-          width={Iconography.small}
-          height={Iconography.small}
-        />
-        <View style={style.activationStatusTextContainer}>
-          <Text style={style.bottomHeaderText}>{headerText}</Text>
-          <Text style={style.bottomBodyText}>{content.bodyText}</Text>
+      <View style={style.topContainer}>
+        <View style={style.topTextContainer}>
+          <Text style={style.systemServiceText}>{headerText}</Text>
+          <View style={statusTextContainerStyle}>
+            <Text style={style.statusText}>{bodyText}</Text>
+          </View>
         </View>
+        <SvgXml
+          xml={statusIcon}
+          fill={borderColor}
+          width={Iconography.medium}
+          height={Iconography.medium}
+        />
       </View>
-      <View style={style.activationStatusRightContainer}>
-        <SvgXml xml={content.rightIcon} />
+      <View style={style.bottomContainer}>
+        <Text style={style.actionText}>{actionText}</Text>
+        <SvgXml
+          xml={Icons.ChevronRight}
+          fill={Colors.black}
+          width={Iconography.tiny}
+          height={Iconography.tiny}
+        />
       </View>
     </TouchableOpacity>
   )
 }
 
-const rightColumnWidth = 70
 const style = StyleSheet.create({
-  activationStatusContainer: {
+  outerContainer: {
+    ...Affordances.floatingContainer,
+    borderWidth: Outlines.hairline,
+  },
+  topContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingVertical: Spacing.xSmall,
-    marginHorizontal: Spacing.small,
-    borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.neutral10,
+    marginBottom: Spacing.small,
   },
-  activationStatusLeftContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+  topTextContainer: {
+    marginTop: Spacing.xxSmall,
+    borderColor: Colors.neutral10,
   },
-  activationStatusTextContainer: {
-    marginLeft: Spacing.medium,
-  },
-  activationStatusRightContainer: {
-    width: rightColumnWidth,
-    alignItems: "center",
-  },
-  bottomHeaderText: {
-    ...Typography.body1,
+  systemServiceText: {
+    ...Typography.header3,
     color: Colors.black,
     lineHeight: Typography.smallLineHeight,
+    marginBottom: Spacing.xSmall,
   },
-  bottomBodyText: {
+  statusTextContainer: {
+    alignSelf: "flex-start",
+    paddingVertical: Spacing.xxxSmall,
+    paddingHorizontal: Spacing.xxSmall,
+    borderRadius: Outlines.baseBorderRadius,
+  },
+  statusText: {
     ...Typography.body2,
-    color: Colors.neutral75,
+    ...Typography.mediumBold,
+    color: Colors.white,
     lineHeight: Typography.xSmallLineHeight,
+  },
+  bottomContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  actionText: {
+    ...Typography.body1,
+    color: Colors.black,
+    marginRight: Spacing.xxSmall,
+    paddingBottom: 2,
   },
 })

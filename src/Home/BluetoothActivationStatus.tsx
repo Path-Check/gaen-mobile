@@ -42,7 +42,7 @@ export const BluetoothActivationStatus: FunctionComponent = () => {
       isActive={isBluetoothOn}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
-      testID={"home-bluetooth-status-container"}
+      testID={"bluetooth-status-container"}
     />
   )
 }

@@ -15,7 +15,7 @@ import { Text } from "../components"
 import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
-const ProximityTracingInfo: FunctionComponent = () => {
+const ExposureNotificationsInfo: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
@@ -31,10 +31,10 @@ const ProximityTracingInfo: FunctionComponent = () => {
           onPress={navigation.goBack}
         >
           <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
+            xml={Icons.ChevronLeft}
+            fill={Colors.black}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
           />
         </TouchableOpacity>
       </View>
@@ -93,8 +93,8 @@ const style = StyleSheet.create({
   },
   closeIconContainer: {
     position: "absolute",
-    right: 0,
-    top: 0,
+    left: 0,
+    top: Spacing.xLarge,
     padding: Spacing.medium,
   },
   mainContentContainer: {
@@ -117,4 +117,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ProximityTracingInfo
+export default ExposureNotificationsInfo

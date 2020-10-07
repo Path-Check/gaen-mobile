@@ -25,7 +25,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const handleOnPressNext = () => {
-    navigation.navigate(ActivationStackScreens.ActivateProximityTracing)
+    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
   }
 
   const checkboxIcon = boxChecked

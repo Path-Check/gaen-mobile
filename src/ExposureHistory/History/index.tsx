@@ -103,10 +103,8 @@ const History: FunctionComponent<HistoryProps> = ({
 const style = StyleSheet.create({
   contentContainer: {
     paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xxHuge,
   },
   container: {
-    paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.medium,
     backgroundColor: Colors.primaryLightBackground,
   },
@@ -115,6 +113,7 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     marginTop: Spacing.xSmall,
+    marginHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header1,
@@ -132,6 +131,7 @@ const style = StyleSheet.create({
   },
   subheaderRow: {
     marginTop: Spacing.xxxSmall,
+    marginHorizontal: Spacing.medium,
   },
   listContainer: {
     marginTop: Spacing.xxLarge,
@@ -144,7 +144,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.secondary10,
     paddingTop: Spacing.small,
     paddingBottom: Spacing.medium,
-    paddingHorizontal: Spacing.small,
+    paddingHorizontal: Spacing.medium,
   },
   button: {
     width: "100%",

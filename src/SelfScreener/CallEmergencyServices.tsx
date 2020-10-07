@@ -40,8 +40,8 @@ const CallEmergencyServices: FunctionComponent = () => {
         <SvgXml
           xml={Icons.AsteriskInCircle}
           fill={Colors.danger100}
-          width={Iconography.medium}
-          height={Iconography.medium}
+          width={Iconography.large}
+          height={Iconography.large}
           style={style.icon}
         />
         <Text style={style.headerText}>

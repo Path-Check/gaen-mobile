@@ -1,20 +1,16 @@
 import React from "react"
-import { Alert, Share } from "react-native"
-import {
-  waitFor,
-  render,
-  fireEvent,
-  within,
-} from "@testing-library/react-native"
+import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
 
-import Home from "."
-import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
-import { PermissionStatus } from "../permissionStatus"
-import { SystemServicesContext } from "../SystemServicesContext"
-import { ConfigurationContext } from "../ConfigurationContext"
+import Home from "./index"
+import { HomeStackScreens, Stacks } from "../navigation"
 import { factories } from "../factories"
+import { Share } from "react-native"
+import { ConfigurationContext } from "../ConfigurationContext"
+import { ENPermissionStatus, PermissionsContext } from "../PermissionsContext"
+import { SystemServicesContext } from "../SystemServicesContext"
+import { PermissionStatus } from "../permissionStatus"
 
 jest.mock("@react-navigation/native")
 
@@ -30,23 +26,28 @@ jest.mock("../hooks/useApplicationInfo", () => {
 })
 
 describe("Home", () => {
-  beforeEach(() => {
-    jest.resetAllMocks()
+  it("allows the user to get more information on Exposure Detection status", () => {
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({
+      navigate: navigateSpy,
+    })
+
+    const { getByTestId } = render(<Home />)
+
+    fireEvent.press(getByTestId("exposure-scanning-status-button"))
+    expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
+      screen: HomeStackScreens.ExposureDetectionStatus,
+    })
   })
 
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
-    const permissionProviderValue = createPermissionProviderValue(
-      ENPermissionStatus.ENABLED,
-    )
 
     const shareSpy = jest.spyOn(Share, "share")
 
     const { getByLabelText } = render(
       <ConfigurationContext.Provider value={configuration}>
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>
+        <Home />
       </ConfigurationContext.Provider>,
     )
 
@@ -60,13 +61,13 @@ describe("Home", () => {
   })
 
   describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
-    it("renders an active message", () => {
+    it("renders an on message", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
       )
 
-      const { getByTestId } = render(
+      const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
           <SystemServicesContext.Provider
             value={{
@@ -79,75 +80,18 @@ describe("Home", () => {
         </PermissionsContext.Provider>,
       )
 
-      const header = getByTestId("home-header")
-      const subheader = getByTestId("home-subheader")
-      const bluetoothStatusContainer = getByTestId(
-        "home-bluetooth-status-container",
-      )
-      const proximityTracingStatusContainer = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-      const bluetoothEnabledText = within(bluetoothStatusContainer).getByText(
-        "Enabled",
-      )
-
-      const proximityTracingEnabledText = within(
-        proximityTracingStatusContainer,
-      ).getByText("Enabled")
-
-      expect(header).toHaveTextContent("Active")
-      expect(subheader).toHaveTextContent(
-        `${mockedApplicationName} will remain active after the app has been closed`,
-      )
-      expect(bluetoothEnabledText).toBeDefined()
-      expect(proximityTracingEnabledText).toBeDefined()
+      expect(getByText("Exposure Detection On")).toBeDefined()
     })
   })
 
-  describe("When Bluetooth is off", () => {
-    it("renders an inactive message and a disabled message for bluetooth", () => {
+  describe("When bluetooth is off", () => {
+    it("renders an off message", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
       )
 
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: false,
-              locationPermissions: "NotRequired",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
-        </PermissionsContext.Provider>,
-      )
-
-      const header = getByTestId("home-header")
-      const subheader = getByTestId("home-subheader")
-      const bluetoothStatusContainer = getByTestId(
-        "home-bluetooth-status-container",
-      )
-
-      const bluetoothDisabledText = within(bluetoothStatusContainer).getByText(
-        "Disabled",
-      )
-
-      expect(header).toHaveTextContent("Inactive")
-      expect(subheader).toHaveTextContent(
-        "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
-      )
-      expect(bluetoothDisabledText).toBeDefined()
-    })
-
-    it("prompts the user to enable Bluetooth", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-      )
-
-      const { getByTestId } = render(
+      const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
           <SystemServicesContext.Provider
             value={{
@@ -160,60 +104,43 @@ describe("Home", () => {
         </PermissionsContext.Provider>,
       )
 
-      const fixBluetoothButton = getByTestId("home-bluetooth-status-container")
-      const alertSpy = jest.spyOn(Alert, "alert")
-
-      fireEvent.press(fixBluetoothButton)
-      expect(alertSpy).toHaveBeenCalledWith(
-        "Enable Bluetooth in Settings",
-        "Go to the Settings app and enable Bluetooth to fix this error",
-        [
-          expect.objectContaining({ text: "Back" }),
-          expect.objectContaining({ text: "Open Settings" }),
-        ],
-      )
+      expect(getByText("Exposure Detection Off")).toBeDefined()
     })
   })
 
-  describe("When Bluetooth is enabled", () => {
-    it("allows the user to get more information", () => {
-      const navigationSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
-
-      const enPermissionStatus = ENPermissionStatus.ENABLED
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-      )
-
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
-        </PermissionsContext.Provider>,
-      )
-
-      const bluetoothInfoButton = getByTestId("home-bluetooth-status-container")
-
-      fireEvent.press(bluetoothInfoButton)
-      expect(navigationSpy).toHaveBeenCalledWith("BluetoothInfo")
-    })
-  })
-
-  describe("When the app is not authorized", () => {
-    describe("When the platform is iOS", () => {
-      it("renders an inactive message and a disabled message for proximity tracing", () => {
-        const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+  describe("When location is off", () => {
+    describe("and location is required", () => {
+      it("renders an off message", () => {
+        const enPermissionStatus = ENPermissionStatus.ENABLED
         const permissionProviderValue = createPermissionProviderValue(
           enPermissionStatus,
         )
 
-        const { getByTestId } = render(
+        const { getByText } = render(
+          <PermissionsContext.Provider value={permissionProviderValue}>
+            <SystemServicesContext.Provider
+              value={{
+                isBluetoothOn: true,
+                locationPermissions: "RequiredOff",
+              }}
+            >
+              <Home />
+            </SystemServicesContext.Provider>
+          </PermissionsContext.Provider>,
+        )
+
+        expect(getByText("Exposure Detection Off")).toBeDefined()
+      })
+    })
+
+    describe("and location is not required", () => {
+      it("renders an on message", () => {
+        const enPermissionStatus = ENPermissionStatus.ENABLED
+        const permissionProviderValue = createPermissionProviderValue(
+          enPermissionStatus,
+        )
+
+        const { getByText } = render(
           <PermissionsContext.Provider value={permissionProviderValue}>
             <SystemServicesContext.Provider
               value={{
@@ -226,115 +153,20 @@ describe("Home", () => {
           </PermissionsContext.Provider>,
         )
 
-        const header = getByTestId("home-header")
-        const subheader = getByTestId("home-subheader")
-        const proximityTracingStatusContainer = getByTestId(
-          "home-proximity-tracing-status-container",
-        )
-        const proximityTracingDisabledText = within(
-          proximityTracingStatusContainer,
-        ).getByText("Disabled")
-
-        expect(header).toHaveTextContent("Inactive")
-        expect(subheader).toHaveTextContent(
-          "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
-        )
-        expect(proximityTracingDisabledText).toBeDefined()
-      })
-
-      it("requests exposure notifications and shows a not authorized alert", async () => {
-        const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
-        const requestSpy = jest.fn()
-        const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
-          requestSpy,
-        )
-
-        const { getByTestId } = render(
-          <PermissionsContext.Provider value={permissionProviderValue}>
-            <Home />
-          </PermissionsContext.Provider>,
-        )
-
-        const alertSpy = jest.spyOn(Alert, "alert")
-        const fixProximityTracingButton = getByTestId(
-          "home-proximity-tracing-status-container",
-        )
-
-        const expectedMessage =
-          "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to applicationName"
-
-        fireEvent.press(fixProximityTracingButton)
-        expect(requestSpy).toHaveBeenCalled()
-        await waitFor(() => {
-          expect(alertSpy).toHaveBeenCalledWith(
-            "Enable Proximity Tracing",
-            expectedMessage,
-            [
-              expect.objectContaining({ text: "Back" }),
-              expect.objectContaining({ text: "Open Settings" }),
-            ],
-          )
-        })
+        expect(getByText("Exposure Detection On")).toBeDefined()
       })
     })
   })
 
-  describe("When the app is not enabled", () => {
-    it("requests exposure notification permissions", () => {
+  describe("When exposure notifications are disabled", () => {
+    it("renders an off message", () => {
       const enPermissionStatus = ENPermissionStatus.DISABLED
-      const requestSpy = jest.fn()
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        requestSpy,
-      )
-
-      const { getByTestId } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>,
-      )
-
-      const fixProximityTracingButton = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-
-      fireEvent.press(fixProximityTracingButton)
-      expect(requestSpy).toHaveBeenCalled()
-    })
-  })
-
-  describe("When exposure notification permissions are authorized and the app is enabled", () => {
-    it("allows the user to get more information", () => {
-      const navigationSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({
-        navigate: navigationSpy,
-      })
-
-      const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
       )
 
-      const { getByTestId } = render(
+      const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>,
-      )
-
-      const proximityTracingInfoButton = getByTestId(
-        "home-proximity-tracing-status-container",
-      )
-
-      fireEvent.press(proximityTracingInfoButton)
-      expect(navigationSpy).toHaveBeenCalledWith("ProximityTracingInfo")
-    })
-  })
-
-  describe("When the device does not support locationless scanning", () => {
-    describe("and location is on", () => {
-      it("location is shown as enabled", () => {
-        const { getByTestId } = render(
           <SystemServicesContext.Provider
             value={{
               isBluetoothOn: true,
@@ -342,61 +174,35 @@ describe("Home", () => {
             }}
           >
             <Home />
-          </SystemServicesContext.Provider>,
-        )
+          </SystemServicesContext.Provider>
+        </PermissionsContext.Provider>,
+      )
 
-        const locationStatusContainer = getByTestId(
-          "home-location-status-container",
-        )
-        const enabledText = within(locationStatusContainer).getByText("Enabled")
-
-        expect(enabledText).toBeDefined()
-      })
-    })
-
-    describe("and the location is off", () => {
-      it("location is shown as disabled", () => {
-        const { getByTestId } = render(
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOff",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>,
-        )
-
-        const locationStatusContainer = getByTestId(
-          "home-location-status-container",
-        )
-
-        const disabledText = within(locationStatusContainer).getByText(
-          "Disabled",
-        )
-        expect(disabledText).toBeDefined()
-      })
+      expect(getByText("Exposure Detection Off")).toBeDefined()
     })
   })
 
-  describe("When the device supports locationless scanning", () => {
-    it("location is not shown", () => {
-      const { queryByTestId } = render(
-        <SystemServicesContext.Provider
-          value={{
-            isBluetoothOn: true,
-            locationPermissions: "NotRequired",
-          }}
-        >
-          <Home />
-        </SystemServicesContext.Provider>,
+  describe("When exposure notifications are not authorized", () => {
+    it("renders an off message", () => {
+      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const permissionProviderValue = createPermissionProviderValue(
+        enPermissionStatus,
       )
 
-      const locationStatusContainer = queryByTestId(
-        "home-location-status-container",
+      const { getByText } = render(
+        <PermissionsContext.Provider value={permissionProviderValue}>
+          <SystemServicesContext.Provider
+            value={{
+              isBluetoothOn: true,
+              locationPermissions: "RequiredOn",
+            }}
+          >
+            <Home />
+          </SystemServicesContext.Provider>
+        </PermissionsContext.Provider>,
       )
 
-      expect(locationStatusContainer).toBeNull()
+      expect(getByText("Exposure Detection Off")).toBeDefined()
     })
   })
 })

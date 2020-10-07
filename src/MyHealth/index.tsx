@@ -84,7 +84,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: Spacing.large,
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header1,
@@ -105,7 +105,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.secondary10,
     paddingTop: Spacing.small,
     paddingBottom: Spacing.medium,
-    paddingHorizontal: Spacing.small,
+    paddingHorizontal: Spacing.medium,
   },
   button: {
     width: "100%",

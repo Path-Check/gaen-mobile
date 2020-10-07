@@ -18,7 +18,6 @@ import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import ModalStack from "./ModalStack"
 import Welcome from "../Welcome"
-import CallbackStack from "./CallbackStack"
 import { useAnalyticsContext } from "../AnalyticsContext"
 
 const Stack = createStackNavigator()
@@ -85,13 +84,6 @@ const MainNavigator: FunctionComponent = () => {
                 headerShown: false,
               }}
             />
-            <Stack.Screen
-              name={Stacks.Callback}
-              component={CallbackStack}
-              options={{
-                headerShown: false,
-              }}
-            />
           </>
         ) : (
           <>
@@ -125,7 +117,6 @@ const MainNavigator: FunctionComponent = () => {
           name={Stacks.Modal}
           component={ModalStack}
           options={{
-            ...TransitionPresets.ModalTransition,
             headerShown: false,
           }}
         />
