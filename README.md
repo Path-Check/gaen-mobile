@@ -27,7 +27,6 @@
   * [Project Overview](#project-overview) 
     * [Privacy Preserving](#privacy-preserving) 
     * [Custom Builds](#custom-builds)
-    * [GAEN Instances](#gaen-instances)
     * [Broad Non-Developer Community](#broad-non-developer-community)
     * [Learn More](#learn-more)
   * [Development Overview](#development-overview) 
@@ -61,9 +60,6 @@ Help us stop COVID-19.
 COVID PathCheck is a mobile app for digital contract tracing (DCT) sponsored by Path Check a nonprofit and developed by a growing global community of engineers, designers, and contributors. PathCheck is based on research originally conducted at the MIT Media Lab. 
 
 The PathCheck Google Apple Exposure Notification (GAEN) solution is a full open source system for deploying the GAEN API. PathCheck GAEN includes a customizable mobile app and a production-ready exposure notification server based on the Google open source project.
-App permissions            |  Report Diagnosis         | Complete Questionaire
-:-------------------------:|:-------------------------:|:-------------------------:
-![GAEN App settings](assets/GAEN_Permissions.gif "GAEN App settings") | ![GAEN Report Case](assets/GAEN_Report_Case.gif "GAEN Report Case") | ![GAEN Questionaire](assets/GAEN_Questionaire.gif "GAEN Questionaire")
 
 ## Privacy Preserving 
 
@@ -72,10 +68,6 @@ What’s truly special about PathCheck is our strong commitment to preserving th
 ## Custom Builds 
 
 We welcome public health authorities and other organizations implementing digital contact tracing strategies to create custom builds for their specific needs, incorporate PathCheck features into their applications, or create downstream projects that stay linked to the PathCheck project. If intending to fork the repository and develop off of it, be aware that this comes "at your own risk" for continued maintenance.
-
-## GAEN Instances
-
-The rules for GAEN require that each public health authority release their own application. The goal with the PathCheck Project is to support this deployment strategy. 
 
 ## Broad Non-Developer Community 
 
@@ -94,7 +86,7 @@ One of the important aspects of the PathCheck open source project is that it's s
 
 # Development Overview
 
-_PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started) v0.61.5
+_PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started)
 
 ## Contributing
 
@@ -167,7 +159,7 @@ yarn lint:android
 First, install the pod files:
 
 ```
-yarn install:pod ## only needs to be ran once
+yarn install:pod
 ```
 
 Then, run the application:
@@ -175,12 +167,6 @@ Then, run the application:
 ```
 yarn run-ios
 ```
-
-Device storage can be cleared by clicking "Hardware" on the system toolbar, and then "Erase all content and settings".
-
-Privacy settings can be reset by going to Settings > General > Reset > Reset
-Location & Privacy
-
 
 **Note:** Members of the `Path-Check` org should update the environment variables of the release build corresponding with the health authority, for this we need to execute the script `bin/set_ha.sh ${HA_LABEL}` where HA_LABEL is the corresponding health authority label. This will setup the values for the display name of the applications and will ensure that we are working with the latest configuration.
 
@@ -199,9 +185,6 @@ Run the complier with:
 ```
 yarn tsc
 ```
-
-Not every file *needs* to be written in TypeScript, but we are preferring to use
-TypeScript in general.
 
 Note that for React-Native projects, TypeScript complication is handled by the
 metro-bundler build process and there is no need to emit js code into a bundle
