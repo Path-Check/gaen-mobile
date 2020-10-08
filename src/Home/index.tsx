@@ -58,61 +58,199 @@ const Home: FunctionComponent = () => {
     emergencyPhoneNumber,
   } = useConfigurationContext()
 
-  const handleOnPressSettings = () => {
-    navigation.navigate(Stacks.Settings)
+  const ExposureDetectionStatus: FunctionComponent = () => {
+    const handleOnPressExposureDetectionStatus = () => {
+      navigation.navigate(Stacks.Modal, {
+        screen: HomeStackScreens.ExposureDetectionStatus,
+      })
+    }
+
+    const statusBackgroundColor = exposureDetectionStatus
+      ? Colors.success10
+      : Colors.danger10
+    const statusBorderColor = exposureDetectionStatus
+      ? Colors.success100
+      : Colors.danger100
+    const statusIcon = exposureDetectionStatus
+      ? Icons.CheckInCircle
+      : Icons.XInCircle
+    const statusIconFill = exposureDetectionStatus
+      ? Colors.success100
+      : Colors.danger100
+    const statusText = exposureDetectionStatus
+      ? t("home.bluetooth.tracing_on_header")
+      : t("home.bluetooth.tracing_off_header")
+    const actionText = exposureDetectionStatus
+      ? t("exposure_scanning_status.learn_more")
+      : t("exposure_scanning_status.fix_this")
+
+    const statusContainerStyle = {
+      ...style.statusContainer,
+      backgroundColor: statusBackgroundColor,
+      borderColor: statusBorderColor,
+    }
+
+    return (
+      <TouchableOpacity
+        style={statusContainerStyle}
+        accessibilityLabel={statusText}
+        testID={"exposure-scanning-status-button"}
+        onPress={handleOnPressExposureDetectionStatus}
+      >
+        <View style={style.statusTopContainer}>
+          <Text style={style.statusText} testID={"home-header"}>
+            {statusText}
+          </Text>
+          <View>
+            <SvgXml
+              xml={statusIcon}
+              width={STATUS_ICON_SIZE}
+              height={STATUS_ICON_SIZE}
+              fill={statusIconFill}
+              style={style.statusIcon}
+            />
+            {exposureDetectionStatus && <ExpandingCircleAnimation />}
+          </View>
+        </View>
+        <View style={style.statusBottomContainer}>
+          <Text style={style.statusActionText}>{actionText}</Text>
+          <SvgXml
+            xml={Icons.ChevronRight}
+            fill={Colors.black}
+            width={Iconography.tiny}
+            height={Iconography.tiny}
+          />
+        </View>
+      </TouchableOpacity>
+    )
+  }
+  const TalkToContactTracer: FunctionComponent = () => {
+    const handleOnPressTalkToContactTracer = () => {
+      navigation.navigate(Stacks.Modal, {
+        screen: ModalStackScreens.CallbackStack,
+      })
+    }
+
+    return (
+      <View style={style.floatingContainer}>
+        <Text style={style.sectionHeaderText}>
+          {t("home.did_you_test_positive")}
+        </Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.to_submit_your_test")}
+        </Text>
+        <Button
+          onPress={handleOnPressTalkToContactTracer}
+          label={t("home.talk_to_a_contact")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasRightArrow
+        />
+      </View>
+    )
   }
 
-  const handleOnPressExposureDetectionStatus = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: HomeStackScreens.ExposureDetectionStatus,
-    })
+  const ReportTestResult: FunctionComponent = () => {
+    const handleOnPressReportTestResult = () => {
+      navigation.navigate(Stacks.Modal, {
+        screen: HomeStackScreens.AffectedUserStack,
+      })
+    }
+
+    return (
+      <View style={style.floatingContainer}>
+        <Text style={style.sectionHeaderText}>
+          {t("home.have_a_positive_test")}
+        </Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.if_you_have_a_code")}
+        </Text>
+        <Button
+          onPress={handleOnPressReportTestResult}
+          label={t("home.submit_test_result_code")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasRightArrow
+        />
+      </View>
+    )
   }
 
-  const handleOnPressTalkToContactTracer = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.CallbackStack,
-    })
+  const SelfAssessment: FunctionComponent = () => {
+    const handleOnPressTakeSelfAssessment = () => {
+      navigation.navigate(Stacks.Modal, {
+        screen: ModalStackScreens.SelfScreenerFromHome,
+      })
+    }
+
+    return (
+      <View style={style.floatingContainer}>
+        <Text style={style.sectionHeaderText}>{t("home.feeling_sick")}</Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.check_if_your_symptoms")}
+        </Text>
+        <Button
+          onPress={handleOnPressTakeSelfAssessment}
+          label={t("home.bluetooth.take_self_assessment")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      </View>
+    )
   }
 
-  const handleOnPressReportTestResult = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: HomeStackScreens.AffectedUserStack,
-    })
+  const CallEmergencyServices: FunctionComponent = () => {
+    const handleOnPressCallEmergencyServices = () => {
+      Linking.openURL(`tel:${emergencyPhoneNumber}`)
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressCallEmergencyServices}
+        accessibilityLabel={t(
+          "self_screener.call_emergency_services.call_emergencies",
+          {
+            emergencyPhoneNumber,
+          },
+        )}
+        accessibilityRole="button"
+        style={style.emergencyButtonContainer}
+      >
+        <SvgXml
+          xml={Icons.Phone}
+          fill={Colors.white}
+          width={Iconography.xSmall}
+          height={Iconography.xSmall}
+        />
+        <Text style={style.emergencyButtonText}>
+          {t("home.call_emergency_services", {
+            emergencyPhoneNumber,
+          })}
+        </Text>
+      </TouchableOpacity>
+    )
   }
 
-  const handleOnPressTakeSelfAssessment = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfScreenerFromHome,
-    })
-  }
+  const SettingsButton = () => {
+    const handleOnPressSettings = () => {
+      navigation.navigate(Stacks.Settings)
+    }
 
-  const handleOnPressCallEmergencyServices = () => {
-    Linking.openURL(`tel:${emergencyPhoneNumber}`)
-  }
-
-  const statusBackgroundColor = exposureDetectionStatus
-    ? Colors.success10
-    : Colors.danger10
-  const statusBorderColor = exposureDetectionStatus
-    ? Colors.success100
-    : Colors.danger100
-  const statusIcon = exposureDetectionStatus
-    ? Icons.CheckInCircle
-    : Icons.XInCircle
-  const statusIconFill = exposureDetectionStatus
-    ? Colors.success100
-    : Colors.danger100
-  const statusText = exposureDetectionStatus
-    ? t("home.bluetooth.tracing_on_header")
-    : t("home.bluetooth.tracing_off_header")
-  const actionText = exposureDetectionStatus
-    ? t("exposure_scanning_status.learn_more")
-    : t("exposure_scanning_status.fix_this")
-
-  const statusContainerStyle = {
-    ...style.statusContainer,
-    backgroundColor: statusBackgroundColor,
-    borderColor: statusBorderColor,
+    return (
+      <TouchableOpacity
+        style={style.settingsButtonContainer}
+        accessible
+        accessibilityLabel={t("home.open_settings")}
+        onPress={handleOnPressSettings}
+      >
+        <SvgXml
+          xml={Icons.Gear}
+          width={Iconography.small}
+          height={Iconography.small}
+          fill={Colors.neutral100}
+        />
+      </TouchableOpacity>
+    )
   }
 
   return (
@@ -123,123 +261,14 @@ const Home: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
-        <TouchableOpacity
-          style={style.settingsButtonContainer}
-          accessible
-          accessibilityLabel={t("home.open_settings")}
-          onPress={handleOnPressSettings}
-        >
-          <SvgXml
-            xml={Icons.Gear}
-            width={Iconography.small}
-            height={Iconography.small}
-            fill={Colors.neutral100}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={statusContainerStyle}
-          accessibilityLabel={statusText}
-          testID={"exposure-scanning-status-button"}
-          onPress={handleOnPressExposureDetectionStatus}
-        >
-          <View style={style.statusTopContainer}>
-            <Text style={style.statusText} testID={"home-header"}>
-              {statusText}
-            </Text>
-            <View>
-              <SvgXml
-                xml={statusIcon}
-                width={STATUS_ICON_SIZE}
-                height={STATUS_ICON_SIZE}
-                fill={statusIconFill}
-                style={style.statusIcon}
-              />
-              {exposureDetectionStatus && <ExpandingCircleAnimation />}
-            </View>
-          </View>
-          <View style={style.statusBottomContainer}>
-            <Text style={style.statusActionText}>{actionText}</Text>
-            <SvgXml
-              xml={Icons.ChevronRight}
-              fill={Colors.black}
-              width={Iconography.tiny}
-              height={Iconography.tiny}
-            />
-          </View>
-        </TouchableOpacity>
+        <SettingsButton />
+        <ExposureDetectionStatus />
         <ShareLink />
         {displayCovidData && <COVIDDataDashboard />}
-        {displayCallbackForm && (
-          <View style={style.floatingContainer}>
-            <Text style={style.sectionHeaderText}>
-              {t("home.did_you_test_positive")}
-            </Text>
-            <Text style={style.sectionBodyText}>
-              {t("home.to_submit_your_test")}
-            </Text>
-            <Button
-              onPress={handleOnPressTalkToContactTracer}
-              label={t("home.talk_to_a_contact")}
-              customButtonStyle={style.button}
-              customButtonInnerStyle={style.buttonInner}
-              hasRightArrow
-            />
-          </View>
-        )}
-        <View style={style.floatingContainer}>
-          <Text style={style.sectionHeaderText}>
-            {t("home.have_a_positive_test")}
-          </Text>
-          <Text style={style.sectionBodyText}>
-            {t("home.if_you_have_a_code")}
-          </Text>
-          <Button
-            onPress={handleOnPressReportTestResult}
-            label={t("home.submit_test_result_code")}
-            customButtonStyle={style.button}
-            customButtonInnerStyle={style.buttonInner}
-            hasRightArrow
-          />
-        </View>
-        {displaySelfAssessment && (
-          <View style={style.floatingContainer}>
-            <Text style={style.sectionHeaderText}>
-              {t("home.feeling_sick")}
-            </Text>
-            <Text style={style.sectionBodyText}>
-              {t("home.check_if_your_symptoms")}
-            </Text>
-            <Button
-              onPress={handleOnPressTakeSelfAssessment}
-              label={t("home.bluetooth.take_self_assessment")}
-              customButtonStyle={style.button}
-              customButtonInnerStyle={style.buttonInner}
-            />
-          </View>
-        )}
-        <TouchableOpacity
-          onPress={handleOnPressCallEmergencyServices}
-          accessibilityLabel={t(
-            "self_screener.call_emergency_services.call_emergencies",
-            {
-              emergencyPhoneNumber,
-            },
-          )}
-          accessibilityRole="button"
-          style={style.emergencyButtonContainer}
-        >
-          <SvgXml
-            xml={Icons.Phone}
-            fill={Colors.white}
-            width={Iconography.xSmall}
-            height={Iconography.xSmall}
-          />
-          <Text style={style.emergencyButtonText}>
-            {t("home.call_emergency_services", {
-              emergencyPhoneNumber,
-            })}
-          </Text>
-        </TouchableOpacity>
+        {displayCallbackForm && <TalkToContactTracer />}
+        <ReportTestResult />
+        {displaySelfAssessment && <SelfAssessment />}
+        <CallEmergencyServices />
       </ScrollView>
     </>
   )
