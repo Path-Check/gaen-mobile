@@ -64,10 +64,12 @@ const ENLocalDiagnosisKeyScreen: FunctionComponent<ENLocalDiagnosisKeyScreenProp
 
   return (
     <ScrollView>
-      {diagnosisKeys.map((_key: ENDiagnosisKey, index: number) => {
+      {diagnosisKeys.map((key: ENDiagnosisKey, index: number) => {
         return (
           <View key={index.toString()} style={style.flatlistRowView}>
-            <Text style={style.itemText}>{index}</Text>
+            <Text
+              style={style.itemText}
+            >{`${index}:${key.rollingStartNumber}`}</Text>
           </View>
         )
       })}
