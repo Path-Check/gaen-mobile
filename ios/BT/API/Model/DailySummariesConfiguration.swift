@@ -11,12 +11,13 @@ struct DailySummariesConfiguration: ExposureConfiguration {
   let reportTypeWeights: [Double]
   let reportTypeWhenMissing: Int
   let infectiousnessWeights: [Double]
-  let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber]
   let infectiousnessWhenDaysSinceOnsetMissing: Int
   let triggerThresholdWeightedDuration: Int
+  var daysSinceOnsetToInfectiousness: [NSNumber:NSNumber]
 
   static var placeholder: DailySummariesConfiguration = {
-    let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber] = [-2:1,
+    let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber] = [NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown): infectiousnessValueUnknownDaysSinceOnsetOfSymptoms,
+                                                               -2:1,
                                                                -1:1,
                                                                0:1,
                                                                1:1,
@@ -34,13 +35,13 @@ struct DailySummariesConfiguration: ExposureConfiguration {
                                                                13:1,
                                                                14:1]
     return DailySummariesConfiguration(attenuationDurationThresholds: [40, 53, 60],
-                                   attenuationBucketWeights: [1, 1, 0.5, 0],
-                                   reportTypeWeights: [1, 0, 0, 0],
-                                   reportTypeWhenMissing: 1,
-                                   infectiousnessWeights: [1, 1],
-                                   daysSinceOnsetToInfectiousness: daysSinceOnsetToInfectiousness,
-                                   infectiousnessWhenDaysSinceOnsetMissing: 1,
-                                   triggerThresholdWeightedDuration: 15)
+                                       attenuationBucketWeights: [1, 1, 0.5, 0],
+                                       reportTypeWeights: [1, 0, 0, 0],
+                                       reportTypeWhenMissing: 1,
+                                       infectiousnessWeights: [1, 1],
+                                       infectiousnessWhenDaysSinceOnsetMissing: 1,
+                                       triggerThresholdWeightedDuration: 15,
+                                       daysSinceOnsetToInfectiousness: daysSinceOnsetToInfectiousness)
   }()
 
   var asENExposureConfiguration: ENExposureConfiguration {
@@ -60,6 +61,8 @@ struct DailySummariesConfiguration: ExposureConfiguration {
     config.reportTypeNoneMap = ENDiagnosisReportType.confirmedTest
     return config
   }
+
+  private static let infectiousnessValueUnknownDaysSinceOnsetOfSymptoms: NSNumber = 1
 }
 
 @available(iOS 13.7, *)
@@ -73,6 +76,7 @@ extension DailySummariesConfiguration: DownloadableFile {
     var dailySummariesConfiguration: DailySummariesConfiguration
     do {
       dailySummariesConfiguration = try parse(data: data)
+      dailySummariesConfiguration.daysSinceOnsetToInfectiousness[NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown)] = infectiousnessValueUnknownDaysSinceOnsetOfSymptoms
       try data.write(to: saveLocalPath)
     } catch {
       do {
@@ -104,8 +108,9 @@ extension DailySummariesConfiguration: DownloadableFile {
                                        reportTypeWeights: reportTypeWeights,
                                        reportTypeWhenMissing: reportTypeWhenMissing,
                                        infectiousnessWeights: infectiousnessWeights,
-                                       daysSinceOnsetToInfectiousness: daysSinceOnsetToInfectiousness,
                                        infectiousnessWhenDaysSinceOnsetMissing: infectiousnessWhenDaysSinceOnsetMissing,
-                                       triggerThresholdWeightedDuration: triggerThresholdWeightedDuration)
+                                       triggerThresholdWeightedDuration: triggerThresholdWeightedDuration,
+                                       daysSinceOnsetToInfectiousness: daysSinceOnsetToInfectiousness)
   }
+
 }
