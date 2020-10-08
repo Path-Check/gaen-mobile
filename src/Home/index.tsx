@@ -30,7 +30,7 @@ import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
 
 import ShareLink from "./ShareLink"
-import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
+import CovidDataClip from "../CovidDataDashboard/CovidDataClip"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
 import { Icons, Images } from "../assets"
@@ -289,7 +289,7 @@ const Home: FunctionComponent = () => {
         <SettingsButton />
         <ExposureDetectionStatus />
         <ShareLink />
-        {displayCovidData && <COVIDDataDashboard />}
+        {displayCovidData && <CovidDataClip />}
         {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
         {displaySelfAssessment && <SelfAssessment />}
@@ -364,8 +364,8 @@ const style = StyleSheet.create({
   },
   sectionHeaderText: {
     ...Typography.header3,
-    color: Colors.black,
     marginBottom: Spacing.xxSmall,
+    color: Colors.black,
   },
   sectionBodyText: {
     ...Typography.header4,

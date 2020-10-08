@@ -54,7 +54,6 @@ export const fetchCovidDataForState = async (
 
     const jsonResponse = await response.json()
     const historicData = jsonResponse[DATA_KEY]
-    console.log(historicData)
 
     if (historicData.every(isValidCovidDataResponse)) {
       return {

@@ -15,6 +15,7 @@ import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
+import ChevronDown from "./chevronDown"
 import ChevronLeft from "./chevronLeft"
 import ChevronRight from "./chevronRight"
 import ChevronUp from "./chevronUp"
@@ -72,6 +73,7 @@ export const Icons = {
   CheckboxUnchecked,
   Checkmark,
   CheckmarkCircle,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,

@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { CovidData } from "../COVIDDataDashboard/covidDataAPI"
+import { CovidData } from "../CovidDataDashboard/covidDataAPI"
 
 export default Factory.define<CovidData>(() => ({
   peopleDeathCt: 0,
