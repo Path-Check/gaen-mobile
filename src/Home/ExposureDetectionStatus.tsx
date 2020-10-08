@@ -22,8 +22,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
-  const { isBluetoothOn } = useSystemServicesContext()
-  const { locationPermissions } = useSystemServicesContext()
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
   const { exposureNotifications } = usePermissionsContext()
   const { applicationName } = useApplicationName()
 
