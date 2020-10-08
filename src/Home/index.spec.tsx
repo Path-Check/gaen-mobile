@@ -51,9 +51,7 @@ describe("Home", () => {
       </ConfigurationContext.Provider>,
     )
 
-    fireEvent.press(
-      getByLabelText("Share the app and help protect yourself and others."),
-    )
+    fireEvent.press(getByLabelText(`Share ${mockedApplicationName}`))
 
     expect(shareSpy).toHaveBeenCalledWith({
       message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadLink}`,

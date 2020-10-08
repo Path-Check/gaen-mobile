@@ -92,7 +92,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxxSmall,
   },
   subHeaderText: {
-    ...Typography.body3,
+    ...Typography.body1,
     marginBottom: Spacing.large,
   },
   noSymptomHistoryText: {

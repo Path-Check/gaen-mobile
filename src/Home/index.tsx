@@ -28,11 +28,8 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text, Button } from "../components"
 
-import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
-import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
-import { LocationActivationStatus } from "./LocationActivationStatus"
-import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
 import { ShareLink } from "./ShareLink"
+import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
 import { Icons } from "../assets"
@@ -253,7 +250,8 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingVertical: Spacing.medium,
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.primaryLightBackground,
   },
@@ -272,7 +270,7 @@ const style = StyleSheet.create({
     ...Affordances.floatingContainer,
     paddingVertical: Spacing.small,
     elevation: 0,
-    borderWidth: Outlines.hairline,
+    borderWidth: Outlines.thin,
     overflow: "hidden",
   },
   statusTopContainer: {
@@ -319,11 +317,11 @@ const style = StyleSheet.create({
   emergencyButtonContainer: {
     ...Buttons.primary,
     ...Buttons.medium,
+    borderRadius: Outlines.borderRadiusLarge,
     width: "100%",
     flexDirection: "row",
     alignSelf: "center",
     paddingHorizontal: Spacing.xLarge,
-    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.danger100,
   },
   emergencyButtonText: {

@@ -56,7 +56,7 @@ describe("ExposureDetectionStatus", () => {
       const bluetoothStatusContainer = getByTestId("bluetooth-status-container")
 
       const bluetoothDisabledText = within(bluetoothStatusContainer).getByText(
-        "Off",
+        "OFF",
       )
 
       expect(bluetoothDisabledText).toBeDefined()
@@ -153,7 +153,7 @@ describe("ExposureDetectionStatus", () => {
       )
       const exposureNotificationsDisabledText = within(
         exposureNotificationsStatusContainer,
-      ).getByText("Off")
+      ).getByText("OFF")
 
       expect(
         getByText(
@@ -257,7 +257,7 @@ describe("ExposureDetectionStatus", () => {
         )
 
         const locationStatusContainer = getByTestId("location-status-container")
-        const enabledText = within(locationStatusContainer).getByText("On")
+        const enabledText = within(locationStatusContainer).getByText("ON")
         expect(enabledText).toBeDefined()
       })
 
@@ -295,7 +295,7 @@ describe("ExposureDetectionStatus", () => {
         )
 
         const locationStatusContainer = getByTestId("location-status-container")
-        const disabledText = within(locationStatusContainer).getByText("Off")
+        const disabledText = within(locationStatusContainer).getByText("OFF")
         expect(disabledText).toBeDefined()
         expect(
           getByText(

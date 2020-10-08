@@ -149,7 +149,7 @@ const style = StyleSheet.create({
   },
   statusText: {
     ...Typography.body2,
-    ...Typography.mediumBold,
+    ...Typography.bold,
     color: Colors.white,
     lineHeight: Typography.xSmallLineHeight,
   },
