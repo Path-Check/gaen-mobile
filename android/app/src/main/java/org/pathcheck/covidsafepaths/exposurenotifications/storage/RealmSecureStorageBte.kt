@@ -8,10 +8,8 @@ import com.google.android.gms.nearby.exposurenotification.DailySummary
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
-import io.realm.kotlin.delete
 import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.CheckIn
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
@@ -26,7 +24,7 @@ import org.threeten.bp.temporal.ChronoUnit
  */
 object RealmSecureStorageBte {
 
-    private const val SCHEMA_VERSION: Long = 6
+    private const val SCHEMA_VERSION: Long = 7
 
     private const val MANUALLY_KEYED_PREF_FILE_NAME = "safepathsbte_enc_prefs"
     private const val MANUALLY_KEYED_KEY_FILE_NAME = "safepathsbte_enc_key"
@@ -140,39 +138,6 @@ object RealmSecureStorageBte {
                     .equalTo("id", LAST_PROCESSED_FILE_NAME_KEY)
                     .findFirst()
                     ?.deleteFromRealm()
-            }
-        }
-    }
-
-    fun upsertCheckIn(checkIn: CheckIn) {
-        getRealmInstance().use {
-            it.executeTransaction { db ->
-                db.insertOrUpdate(checkIn)
-            }
-        }
-    }
-
-    fun getCheckIns(): List<CheckIn> {
-        return getRealmInstance().use {
-            it.copyFromRealm(it.where(CheckIn::class.java).findAll())
-        }
-    }
-
-    fun deleteCheckins() {
-        getRealmInstance().use {
-            it.executeTransaction { db ->
-                db.delete(CheckIn::class.java)
-            }
-        }
-    }
-
-    fun deleteStaleCheckIns() {
-        getRealmInstance().use {
-            it.executeTransaction { db ->
-                db.where(CheckIn::class.java)
-                    .lessThan("date", daysAgo(14))
-                    .findAll()
-                    ?.deleteAllFromRealm()
             }
         }
     }
