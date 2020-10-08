@@ -179,7 +179,7 @@ const Home: FunctionComponent = () => {
   const SelfAssessment: FunctionComponent = () => {
     const handleOnPressTakeSelfAssessment = () => {
       navigation.navigate(Stacks.Modal, {
-        screen: ModalStackScreens.SelfScreenerFromHome,
+        screen: ModalStackScreens.SelfAssessmentFromHome,
       })
     }
 
@@ -208,7 +208,7 @@ const Home: FunctionComponent = () => {
       <TouchableOpacity
         onPress={handleOnPressCallEmergencyServices}
         accessibilityLabel={t(
-          "self_screener.call_emergency_services.call_emergencies",
+          "self_assessment.call_emergency_services.call_emergencies",
           {
             emergencyPhoneNumber,
           },

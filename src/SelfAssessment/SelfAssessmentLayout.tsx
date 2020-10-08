@@ -5,11 +5,11 @@ import { useStatusBarEffect } from "../navigation"
 
 import { Colors, Spacing } from "../styles"
 
-interface SelfScreenerLayoutProps {
+interface SelfAssessmentLayoutProps {
   bottomActionsContent: ReactNode
 }
 
-const SelfScreenerLayout: FunctionComponent<SelfScreenerLayoutProps> = ({
+const SelfAssessmentLayout: FunctionComponent<SelfAssessmentLayoutProps> = ({
   children,
   bottomActionsContent,
 }) => {
@@ -54,4 +54,4 @@ const createStyle = (insets: EdgeInsets) => {
   })
 }
 
-export default SelfScreenerLayout
+export default SelfAssessmentLayout

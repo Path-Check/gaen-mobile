@@ -13,7 +13,7 @@ import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
 import HowItWorksStack from "./HowItWorksStack"
 import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
-import SelfScreenerStack from "./SelfScreenerStack"
+import SelfAssessmentStack from "./SelfAssessmentStack"
 import ExposureDetectionStatus from "../Home/ExposureDetectionStatus"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
@@ -71,12 +71,12 @@ const ModalStack: FunctionComponent = () => {
         component={AnonymizedDataConsentScreen}
       />
       <Stack.Screen
-        name={ModalStackScreens.SelfScreenerFromExposureDetails}
+        name={ModalStackScreens.SelfAssessmentFromExposureDetails}
         options={TransitionPresets.ModalTransition}
       >
         {(props) => {
           return (
-            <SelfScreenerStack
+            <SelfAssessmentStack
               {...props}
               destinationOnCancel={Stacks.ExposureHistoryFlow}
             />
@@ -84,12 +84,12 @@ const ModalStack: FunctionComponent = () => {
         }}
       </Stack.Screen>
       <Stack.Screen
-        name={ModalStackScreens.SelfScreenerFromHome}
+        name={ModalStackScreens.SelfAssessmentFromHome}
         options={TransitionPresets.ModalTransition}
       >
         {(props) => {
           return (
-            <SelfScreenerStack {...props} destinationOnCancel={Stacks.Home} />
+            <SelfAssessmentStack {...props} destinationOnCancel={Stacks.Home} />
           )
         }}
       </Stack.Screen>

@@ -1,7 +1,7 @@
 import { Factory } from "fishery"
-import { SelfScreenerAnswers } from "src/SelfScreener/selfScreener"
+import { SelfAssessmentAnswers } from "src/SelfAssessment/selfAssessment"
 
-export default Factory.define<SelfScreenerAnswers>(() => {
+export default Factory.define<SelfAssessmentAnswers>(() => {
   return {
     emergencySymptoms: [],
     primarySymptoms: [],

@@ -3,12 +3,16 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet } from "react-native"
 
-import { SelfScreenerStackScreens } from "../navigation"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentStackScreens } from "../navigation"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { Button, Text } from "../components"
-import { OtherSymptom, PrimarySymptom, SecondarySymptom } from "./selfScreener"
+import {
+  OtherSymptom,
+  PrimarySymptom,
+  SecondarySymptom,
+} from "./selfAssessment"
 import SymptomCheckbox from "./SymptomCheckbox"
-import SelfScreenerLayout from "./SelfScreenerLayout"
+import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Typography, Spacing, Buttons } from "../styles"
 
@@ -27,37 +31,39 @@ const GeneralSymptoms: FunctionComponent = () => {
     secondarySymptoms,
     otherSymptoms,
     updateSymptoms,
-  } = useSelfScreenerContext()
+  } = useSelfAssessmentContext()
 
   const symptomToString = (
     symptom: PrimarySymptom | SecondarySymptom | OtherSymptom,
   ) => {
     switch (symptom) {
       case FEVER_OR_CHILLS:
-        return t("self_screener.general_symptoms.fever_or_chills")
+        return t("self_assessment.general_symptoms.fever_or_chills")
       case MODERATE_DIFFICULTY_BREATHING:
-        return t("self_screener.general_symptoms.difficulty_breathing")
+        return t("self_assessment.general_symptoms.difficulty_breathing")
       case COUGH:
-        return t("self_screener.general_symptoms.cough")
+        return t("self_assessment.general_symptoms.cough")
       case LOSS_OF_SMELL_TASTE_APPETITE:
-        return t("self_screener.general_symptoms.loss_of_smell_taste_appetite")
+        return t(
+          "self_assessment.general_symptoms.loss_of_smell_taste_appetite",
+        )
       case ACHING:
-        return t("self_screener.general_symptoms.aching")
+        return t("self_assessment.general_symptoms.aching")
       case VOMITING_OR_DIARRHEA:
-        return t("self_screener.general_symptoms.vomiting_or_diarrhea")
+        return t("self_assessment.general_symptoms.vomiting_or_diarrhea")
       case OTHER:
-        return t("self_screener.general_symptoms.other")
+        return t("self_assessment.general_symptoms.other")
     }
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.UnderlyingConditions)
+    navigation.navigate(SelfAssessmentStackScreens.UnderlyingConditions)
   }
 
   const noSymptomsSelected =
     [...primarySymptoms, ...secondarySymptoms, ...otherSymptoms].length === 0
   return (
-    <SelfScreenerLayout
+    <SelfAssessmentLayout
       bottomActionsContent={
         <Button
           label={t("common.next")}
@@ -70,10 +76,10 @@ const GeneralSymptoms: FunctionComponent = () => {
       }
     >
       <Text style={style.headerText}>
-        {t("self_screener.general_symptoms.are_you_experiencing")}
+        {t("self_assessment.general_symptoms.are_you_experiencing")}
       </Text>
       <Text style={style.subheaderText}>
-        {t("self_screener.general_symptoms.select_any")}
+        {t("self_assessment.general_symptoms.select_any")}
       </Text>
       <SymptomCheckbox
         label={symptomToString(FEVER_OR_CHILLS)}
@@ -110,7 +116,7 @@ const GeneralSymptoms: FunctionComponent = () => {
         onPress={() => updateSymptoms(OTHER)}
         checked={otherSymptoms.includes(OTHER)}
       />
-    </SelfScreenerLayout>
+    </SelfAssessmentLayout>
   )
 }
 

@@ -248,7 +248,7 @@
     "how_the_app_works": "¿Cómo funciona la aplicación?",
     "legal": "Legal"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
       "get_my_guidance": "Obtén mi orientación",
@@ -308,8 +308,8 @@
       "not_well": "Mal"
     },
     "intro": {
-      "agree_and_start_screener": "Acepte y comience el evaluador",
-      "covid19_self_screener": "Autoevaluación COVID-19",
+      "agree_and_start_assessment": "Acepte y comience el evaluador",
+      "covid19_self_assessment": "Autoevaluación COVID-19",
       "find_out_how_to_care": "Averigua cómo cuidarte a ti mismo y a los demás después de un contacto cercano con alguien positivo para COVID-19",
       "if_this_is": "Si se trata de una emergencia, llame al {{emergencyPhoneNumber}}",
       "this_is_based_on": "Esto se basa en la guía más reciente del CDC y puede actualizarse con el tiempo a medida que aprendamos sobre cómo se propaga el virus y la enfermedad que causa.",

@@ -4,10 +4,10 @@ import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { Text, View } from "react-native"
 
 import {
-  SelfScreenerContext,
-  SelfScreenerProvider,
-  useSelfScreenerContext,
-} from "./SelfScreenerContext"
+  SelfAssessmentContext,
+  SelfAssessmentProvider,
+  useSelfAssessmentContext,
+} from "./SelfAssessmentContext"
 import { factories } from "./factories"
 import { Button } from "./components"
 import {
@@ -15,18 +15,18 @@ import {
   EmergencySymptom,
   PrimarySymptom,
   UnderlyingCondition,
-} from "./SelfScreener/selfScreener"
-describe("SelfScreenerContext", () => {
+} from "./SelfAssessment/selfAssessment"
+describe("SelfAssessmentContext", () => {
   describe("emergency symptoms", () => {
     it("passes down the correct emergency symptoms to its children", () => {
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         emergencySymptoms: [EmergencySymptom.CHEST_PAIN],
       })
 
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <DisplayEmergencySymptoms />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       expect(queryByText(/CHEST_PAIN/)).not.toBeNull()
@@ -38,9 +38,9 @@ describe("SelfScreenerContext", () => {
           expect.assertions(1)
 
           const { queryByText, getByText } = render(
-            <SelfScreenerProvider>
+            <SelfAssessmentProvider>
               <RemoveEmergencySymptom symptom={EmergencySymptom.CHEST_PAIN} />
-            </SelfScreenerProvider>,
+            </SelfAssessmentProvider>,
           )
 
           const updateButton = getByText("Update")
@@ -57,9 +57,9 @@ describe("SelfScreenerContext", () => {
           expect.assertions(1)
 
           const { queryByText } = render(
-            <SelfScreenerProvider>
+            <SelfAssessmentProvider>
               <AddEmergencySymptom symptom={EmergencySymptom.CHEST_PAIN} />
-            </SelfScreenerProvider>,
+            </SelfAssessmentProvider>,
           )
 
           await waitFor(() => {
@@ -74,13 +74,13 @@ describe("SelfScreenerContext", () => {
     it("passes down the current general symptoms to its children", () => {
       expect.assertions(1)
 
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         primarySymptoms: [PrimarySymptom.COUGH],
       })
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <DisplayPrimarySymptoms />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       expect(queryByText(/COUGH/)).not.toBeNull()
@@ -93,9 +93,9 @@ describe("SelfScreenerContext", () => {
         expect.assertions(1)
 
         const { queryByText, getByText } = render(
-          <SelfScreenerProvider>
+          <SelfAssessmentProvider>
             <RemovePrimarySymptom symptom={PrimarySymptom.FEVER_OR_CHILLS} />
-          </SelfScreenerProvider>,
+          </SelfAssessmentProvider>,
         )
 
         const updateButton = getByText("Update")
@@ -110,9 +110,9 @@ describe("SelfScreenerContext", () => {
       it("adds the symptom to context", async () => {
         expect.assertions(1)
         const { queryByText } = render(
-          <SelfScreenerProvider>
+          <SelfAssessmentProvider>
             <AddPrimarySymptom symptom={PrimarySymptom.FEVER_OR_CHILLS} />
-          </SelfScreenerProvider>,
+          </SelfAssessmentProvider>,
         )
 
         await waitFor(() => {
@@ -127,14 +127,14 @@ describe("underlying conditions", () => {
   describe("getting the current underlying conditions", () => {
     it("passes down the correct conditions to its children", () => {
       expect.assertions(1)
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         underlyingConditions: [UnderlyingCondition.BLOOD_DISORDER],
       })
 
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <DisplayUnderlyingConditions />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       expect(queryByText(/BLOOD_DISORDER/)).not.toBeNull()
@@ -146,11 +146,11 @@ describe("underlying conditions", () => {
         expect.assertions(1)
 
         const { queryByText, getByText } = render(
-          <SelfScreenerProvider>
+          <SelfAssessmentProvider>
             <RemoveUnderlyingCondition
               condition={UnderlyingCondition.SMOKING}
             />
-          </SelfScreenerProvider>,
+          </SelfAssessmentProvider>,
         )
 
         const updateButton = getByText("Update")
@@ -166,11 +166,11 @@ describe("underlying conditions", () => {
       it("adds the symptom to context", async () => {
         expect.assertions(1)
         const { queryByText } = render(
-          <SelfScreenerProvider>
+          <SelfAssessmentProvider>
             <AddUnderlyingCondition
               condition={UnderlyingCondition.KIDNEY_DISEASE}
             />
-          </SelfScreenerProvider>,
+          </SelfAssessmentProvider>,
         )
 
         await waitFor(() => {
@@ -183,13 +183,13 @@ describe("underlying conditions", () => {
 
 describe("age range", () => {
   it("passes down the age range to its children", () => {
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
     })
     const { queryByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <DisplayAgeRange />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     expect(queryByText(/EIGHTEEN_TO_SIXTY_FOUR/)).not.toBeNull()
@@ -197,9 +197,9 @@ describe("age range", () => {
 
   it("updates the age range", async () => {
     const { queryByText } = render(
-      <SelfScreenerProvider>
+      <SelfAssessmentProvider>
         <UpdateAgeRange range={AgeRange.SIXTY_FIVE_AND_OVER} />
-      </SelfScreenerProvider>,
+      </SelfAssessmentProvider>,
     )
 
     await waitFor(() => {
@@ -209,7 +209,7 @@ describe("age range", () => {
 })
 
 const DisplayAgeRange: FunctionComponent = () => {
-  const { ageRange } = useSelfScreenerContext()
+  const { ageRange } = useSelfAssessmentContext()
   return (
     <View>
       <Text>{ageRange !== null && AgeRange[ageRange]}</Text>
@@ -218,7 +218,7 @@ const DisplayAgeRange: FunctionComponent = () => {
 }
 
 const UpdateAgeRange: FunctionComponent<{ range: AgeRange }> = ({ range }) => {
-  const { ageRange, updateAgeRange } = useSelfScreenerContext()
+  const { ageRange, updateAgeRange } = useSelfAssessmentContext()
   useEffect(() => {
     updateAgeRange(range)
   }, [])
@@ -230,7 +230,7 @@ const UpdateAgeRange: FunctionComponent<{ range: AgeRange }> = ({ range }) => {
 }
 
 const DisplayUnderlyingConditions: FunctionComponent = () => {
-  const { underlyingConditions } = useSelfScreenerContext()
+  const { underlyingConditions } = useSelfAssessmentContext()
   return (
     <View>
       {underlyingConditions.map((s) => {
@@ -246,7 +246,7 @@ const AddUnderlyingCondition: FunctionComponent<{
   const {
     underlyingConditions,
     updateUnderlyingConditions,
-  } = useSelfScreenerContext()
+  } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateUnderlyingConditions(condition)
@@ -267,7 +267,7 @@ const RemoveUnderlyingCondition: FunctionComponent<{
   const {
     underlyingConditions,
     updateUnderlyingConditions,
-  } = useSelfScreenerContext()
+  } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateUnderlyingConditions(condition)
@@ -287,7 +287,7 @@ const RemoveUnderlyingCondition: FunctionComponent<{
   )
 }
 const DisplayEmergencySymptoms: FunctionComponent = () => {
-  const { emergencySymptoms } = useSelfScreenerContext()
+  const { emergencySymptoms } = useSelfAssessmentContext()
   return (
     <View>
       {emergencySymptoms.map((s) => {
@@ -300,7 +300,7 @@ const DisplayEmergencySymptoms: FunctionComponent = () => {
 const RemoveEmergencySymptom: FunctionComponent<{
   symptom: EmergencySymptom
 }> = ({ symptom }) => {
-  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
+  const { emergencySymptoms, updateSymptoms } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateSymptoms(symptom)
@@ -323,7 +323,7 @@ const RemoveEmergencySymptom: FunctionComponent<{
 const AddEmergencySymptom: FunctionComponent<{ symptom: EmergencySymptom }> = ({
   symptom,
 }) => {
-  const { emergencySymptoms, updateSymptoms } = useSelfScreenerContext()
+  const { emergencySymptoms, updateSymptoms } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateSymptoms(symptom)
@@ -339,7 +339,7 @@ const AddEmergencySymptom: FunctionComponent<{ symptom: EmergencySymptom }> = ({
 }
 
 const DisplayPrimarySymptoms: FunctionComponent = () => {
-  const { primarySymptoms } = useSelfScreenerContext()
+  const { primarySymptoms } = useSelfAssessmentContext()
 
   return (
     <View>
@@ -353,7 +353,7 @@ const DisplayPrimarySymptoms: FunctionComponent = () => {
 const AddPrimarySymptom: FunctionComponent<{ symptom: PrimarySymptom }> = ({
   symptom,
 }) => {
-  const { primarySymptoms, updateSymptoms } = useSelfScreenerContext()
+  const { primarySymptoms, updateSymptoms } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateSymptoms(symptom)
@@ -371,7 +371,7 @@ const AddPrimarySymptom: FunctionComponent<{ symptom: PrimarySymptom }> = ({
 const RemovePrimarySymptom: FunctionComponent<{
   symptom: PrimarySymptom
 }> = ({ symptom }) => {
-  const { primarySymptoms, updateSymptoms } = useSelfScreenerContext()
+  const { primarySymptoms, updateSymptoms } = useSelfAssessmentContext()
 
   useEffect(() => {
     updateSymptoms(symptom)

@@ -4,8 +4,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { Button, Text } from "../components"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
-import { SymptomGroup } from "./selfScreener"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks } from "../navigation"
 
 import { Outlines, Colors, Spacing, Typography } from "../styles"
@@ -20,7 +20,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { symptomGroup } = useSelfScreenerContext()
+  const { symptomGroup } = useSelfAssessmentContext()
 
   if (symptomGroup === null) {
     return null
@@ -35,30 +35,30 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     return (
       <>
         <Text style={style.bullet1}>
-          {t("self_screener.guidance.call_your_healthcare_provider")}
+          {t("self_assessment.guidance.call_your_healthcare_provider")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.stay_at_home")}
+          {t("self_assessment.guidance.stay_at_home")}
         </Text>
         <View style={style.bullet3Container}>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.dont_go_to_work")}
+            {t("self_assessment.guidance.dont_go_to_work")}
           </Text>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.dont_use_public_transport")}
+            {t("self_assessment.guidance.dont_use_public_transport")}
           </Text>
         </View>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.seek_medical_care")}
+          {t("self_assessment.guidance.seek_medical_care")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.find_telehealth")}
+          {t("self_assessment.guidance.find_telehealth")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.take_care_of_yourself")}
+          {t("self_assessment.guidance.take_care_of_yourself")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.protect_others")}
+          {t("self_assessment.guidance.protect_others")}
         </Text>
       </>
     )
@@ -70,16 +70,16 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     return (
       <>
         <Text style={style.bullet1}>
-          {t("self_screener.guidance.stay_at_home")}
+          {t("self_assessment.guidance.stay_at_home")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.dont_go_to_work")}
+          {t("self_assessment.guidance.dont_go_to_work")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.dont_use_public_transport")}
+          {t("self_assessment.guidance.dont_use_public_transport")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.seek_medical_care")}
+          {t("self_assessment.guidance.seek_medical_care")}
         </Text>
       </>
     )
@@ -90,24 +90,26 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     return (
       <>
         <Text style={style.bullet1}>
-          {t("self_screener.guidance.watch_for_covid_symptoms")}
+          {t("self_assessment.guidance.watch_for_covid_symptoms")}
         </Text>
         <Text style={style.bullet1}>
-          {t("self_screener.guidance.if_symptoms_develop")}
+          {t("self_assessment.guidance.if_symptoms_develop")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.may_help_you_feel_better")}
+          {t("self_assessment.guidance.may_help_you_feel_better")}
         </Text>
         <View style={style.bullet3Container}>
-          <Text style={style.bullet3}>{t("self_screener.guidance.rest")}</Text>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.drink_water")}
+            {t("self_assessment.guidance.rest")}
           </Text>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.cover_coughs")}
+            {t("self_assessment.guidance.drink_water")}
           </Text>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.clean_hands")}
+            {t("self_assessment.guidance.cover_coughs")}
+          </Text>
+          <Text style={style.bullet3}>
+            {t("self_assessment.guidance.clean_hands")}
           </Text>
         </View>
       </>
@@ -120,24 +122,24 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     return (
       <>
         <Text style={style.bullet1}>
-          {t("self_screener.guidance.stay_home_14_days")}
+          {t("self_assessment.guidance.stay_home_14_days")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.take_temperature")}
+          {t("self_assessment.guidance.take_temperature")}
         </Text>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.practice_social_distancing")}
+          {t("self_assessment.guidance.practice_social_distancing")}
         </Text>
         <View style={style.bullet3Container}>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.stay_6_feet_away")}
+            {t("self_assessment.guidance.stay_6_feet_away")}
           </Text>
           <Text style={style.bullet3}>
-            {t("self_screener.guidance.stay_away_from_higher_risk_people")}
+            {t("self_assessment.guidance.stay_away_from_higher_risk_people")}
           </Text>
         </View>
         <Text style={style.bullet2}>
-          {t("self_screener.guidance.follow_cdc_guidance")}
+          {t("self_assessment.guidance.follow_cdc_guidance")}
         </Text>
       </>
     )
@@ -146,18 +148,18 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
   const introForSymptomGroup = (group: SymptomGroup) => {
     switch (group) {
       case SymptomGroup.PRIMARY_1:
-        return t("self_screener.guidance.you_have_underlying_conditions")
+        return t("self_assessment.guidance.you_have_underlying_conditions")
       case SymptomGroup.PRIMARY_2:
       case SymptomGroup.SECONDARY_2:
       case SymptomGroup.PRIMARY_3:
       case SymptomGroup.SECONDARY_1:
-        return t("self_screener.guidance.your_symptoms_might_be_related")
+        return t("self_assessment.guidance.your_symptoms_might_be_related")
       case SymptomGroup.NON_COVID:
-        return t("self_screener.guidance.monitor_your_symptoms")
+        return t("self_assessment.guidance.monitor_your_symptoms")
       case SymptomGroup.ASYMPTOMATIC:
-        return t("self_screener.guidance.feeling_fine")
+        return t("self_assessment.guidance.feeling_fine")
       default:
-        return t("self_screener.guidance.feeling_fine")
+        return t("self_assessment.guidance.feeling_fine")
     }
   }
 
@@ -187,9 +189,9 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     >
       <View style={style.topScrollViewBackground} />
       <View style={style.headerContainer}>
-        <Image source={Images.SelfScreenerIntro} style={style.image} />
+        <Image source={Images.SelfAssessmentIntro} style={style.image} />
         <Text style={style.headerText}>
-          {t("self_screener.guidance.guidance")}
+          {t("self_assessment.guidance.guidance")}
         </Text>
         <Text style={style.subheaderText}>
           {introForSymptomGroup(symptomGroup)}

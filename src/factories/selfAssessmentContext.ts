@@ -1,7 +1,7 @@
 import { Factory } from "fishery"
-import { SelfScreenerContextState } from "../SelfScreenerContext"
+import { SelfAssessmentContextState } from "../SelfAssessmentContext"
 
-export default Factory.define<SelfScreenerContextState>(() => ({
+export default Factory.define<SelfAssessmentContextState>(() => ({
   emergencySymptoms: [],
   primarySymptoms: [],
   secondarySymptoms: [],

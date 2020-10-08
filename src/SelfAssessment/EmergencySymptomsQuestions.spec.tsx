@@ -2,11 +2,11 @@ import React from "react"
 import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { SelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentContext } from "../SelfAssessmentContext"
 import EmergencySymptomsQuestions from "./EmergencySymptomsQuestions"
-import { EmergencySymptom, SymptomGroup } from "./selfScreener"
+import { EmergencySymptom, SymptomGroup } from "./selfAssessment"
 import { factories } from "../factories"
-import { SelfScreenerStackScreens } from "../navigation"
+import { SelfAssessmentStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("EmergencySymptomsQuestions", () => {
@@ -14,14 +14,14 @@ describe("EmergencySymptomsQuestions", () => {
     expect.assertions(1)
 
     const updateSymptomsSpy = jest.fn()
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       updateSymptoms: updateSymptomsSpy,
     })
 
     const { getByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <EmergencySymptomsQuestions />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     const difficultyBreathingCheckbox = getByText(
@@ -41,21 +41,21 @@ describe("EmergencySymptomsQuestions", () => {
         ;(useNavigation as jest.Mock).mockReturnValue({
           navigate: navigationSpy,
         })
-        const context = factories.selfScreenerContext.build({
+        const context = factories.selfAssessmentContext.build({
           symptomGroup: SymptomGroup.EMERGENCY,
         })
 
         const { getByText } = render(
-          <SelfScreenerContext.Provider value={context}>
+          <SelfAssessmentContext.Provider value={context}>
             <EmergencySymptomsQuestions />
-          </SelfScreenerContext.Provider>,
+          </SelfAssessmentContext.Provider>,
         )
 
         const nextButton = getByText("Next")
 
         fireEvent.press(nextButton)
         expect(navigationSpy).toHaveBeenCalledWith(
-          SelfScreenerStackScreens.CallEmergencyServices,
+          SelfAssessmentStackScreens.CallEmergencyServices,
         )
       })
     })
@@ -66,19 +66,19 @@ describe("EmergencySymptomsQuestions", () => {
         ;(useNavigation as jest.Mock).mockReturnValue({
           navigate: navigationSpy,
         })
-        const context = factories.selfScreenerContext.build()
+        const context = factories.selfAssessmentContext.build()
 
         const { getByText } = render(
-          <SelfScreenerContext.Provider value={context}>
+          <SelfAssessmentContext.Provider value={context}>
             <EmergencySymptomsQuestions />
-          </SelfScreenerContext.Provider>,
+          </SelfAssessmentContext.Provider>,
         )
 
         const nextButton = getByText("Next")
 
         fireEvent.press(nextButton)
         expect(navigationSpy).toHaveBeenCalledWith(
-          SelfScreenerStackScreens.GeneralSymptoms,
+          SelfAssessmentStackScreens.GeneralSymptoms,
         )
       })
     })

@@ -3,12 +3,12 @@ import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import {
-  SelfScreenerContext,
-  SelfScreenerProvider,
-} from "../SelfScreenerContext"
-import { UnderlyingCondition } from "./selfScreener"
+  SelfAssessmentContext,
+  SelfAssessmentProvider,
+} from "../SelfAssessmentContext"
+import { UnderlyingCondition } from "./selfAssessment"
 import { factories } from "../factories"
-import { SelfScreenerStackScreens } from "../navigation"
+import { SelfAssessmentStackScreens } from "../navigation"
 import UnderlyingConditions from "./UnderlyingConditions"
 
 jest.mock("@react-navigation/native")
@@ -18,14 +18,14 @@ describe("UnderlyingConditions", () => {
       expect.assertions(1)
 
       const updateConditionsSpy = jest.fn()
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         updateUnderlyingConditions: updateConditionsSpy,
       })
 
       const { getByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <UnderlyingConditions />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const smokingCheckbox = getByText("Smoking")
@@ -45,16 +45,16 @@ describe("UnderlyingConditions", () => {
       })
 
       const { getByText } = render(
-        <SelfScreenerProvider>
+        <SelfAssessmentProvider>
           <UnderlyingConditions />
-        </SelfScreenerProvider>,
+        </SelfAssessmentProvider>,
       )
 
       const nextButton = getByText("Next")
 
       fireEvent.press(nextButton)
       expect(navigationSpy).toHaveBeenCalledWith(
-        SelfScreenerStackScreens.AgeRange,
+        SelfAssessmentStackScreens.AgeRange,
       )
     })
   })

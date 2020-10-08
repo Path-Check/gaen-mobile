@@ -110,8 +110,8 @@ export type ModalStackScreen =
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
-  | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromHome"
+  | "SelfAssessmentFromExposureDetails"
+  | "SelfAssessmentFromHome"
   | "CallbackStack"
 
 export const ModalStackScreens: {
@@ -123,8 +123,8 @@ export const ModalStackScreens: {
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
-  SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromHome: "SelfScreenerFromHome",
+  SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
+  SelfAssessmentFromHome: "SelfAssessmentFromHome",
   CallbackStack: "CallbackStack",
 }
 
@@ -183,8 +183,8 @@ export const MyHealthStackScreens: {
   SelectSymptoms: "SelectSymptoms",
 }
 
-export type SelfScreenerStackScreen =
-  | "SelfScreenerIntro"
+export type SelfAssessmentStackScreen =
+  | "SelfAssessmentIntro"
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
@@ -193,10 +193,10 @@ export type SelfScreenerStackScreen =
   | "AgeRange"
   | "Guidance"
 
-export const SelfScreenerStackScreens: {
-  [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
+export const SelfAssessmentStackScreens: {
+  [key in SelfAssessmentStackScreen]: SelfAssessmentStackScreen
 } = {
-  SelfScreenerIntro: "SelfScreenerIntro",
+  SelfAssessmentIntro: "SelfAssessmentIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",

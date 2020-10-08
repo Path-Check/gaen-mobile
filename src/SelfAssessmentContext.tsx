@@ -14,11 +14,11 @@ import {
   SymptomGroup,
   UnderlyingCondition,
   determineSymptomGroup,
-  SelfScreenerAnswers,
+  SelfAssessmentAnswers,
   GeneralSymptom,
-} from "./SelfScreener/selfScreener"
+} from "./SelfAssessment/selfAssessment"
 
-export type SelfScreenerContextState = {
+export type SelfAssessmentContextState = {
   emergencySymptoms: EmergencySymptom[]
   primarySymptoms: PrimarySymptom[]
   secondarySymptoms: SecondarySymptom[]
@@ -46,10 +46,10 @@ const initialState = {
   symptomGroup: null,
 }
 
-export const SelfScreenerContext = createContext<SelfScreenerContextState>(
+export const SelfAssessmentContext = createContext<SelfAssessmentContextState>(
   initialState,
 )
-export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
+export const SelfAssessmentProvider: FunctionComponent = ({ children }) => {
   const {
     emergencySymptoms,
     updateEmergencySymptoms,
@@ -110,7 +110,7 @@ export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <SelfScreenerContext.Provider
+    <SelfAssessmentContext.Provider
       value={{
         emergencySymptoms,
         primarySymptoms,
@@ -126,7 +126,7 @@ export const SelfScreenerProvider: FunctionComponent = ({ children }) => {
       }}
     >
       {children}
-    </SelfScreenerContext.Provider>
+    </SelfAssessmentContext.Provider>
   )
 }
 
@@ -238,7 +238,7 @@ const useSymptomGroup = ({
   otherSymptoms,
   underlyingConditions,
   ageRange,
-}: SelfScreenerAnswers) => {
+}: SelfAssessmentAnswers) => {
   const [symptomGroup, setSymptomGroup] = useState<SymptomGroup | null>(null)
 
   useEffect(() => {
@@ -264,10 +264,10 @@ const useSymptomGroup = ({
   return { symptomGroup }
 }
 
-export const useSelfScreenerContext = (): SelfScreenerContextState => {
-  const context = useContext(SelfScreenerContext)
+export const useSelfAssessmentContext = (): SelfAssessmentContextState => {
+  const context = useContext(SelfAssessmentContext)
   if (context === undefined) {
-    throw new Error("SelfScreenerContext must be used with a provider")
+    throw new Error("SelfAssessmentContext must be used with a provider")
   }
 
   return context

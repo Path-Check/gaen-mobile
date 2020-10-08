@@ -57,7 +57,7 @@ export enum SymptomGroup {
   ASYMPTOMATIC,
 }
 
-export type SelfScreenerAnswers = {
+export type SelfAssessmentAnswers = {
   emergencySymptoms: EmergencySymptom[]
   primarySymptoms: PrimarySymptom[]
   secondarySymptoms: SecondarySymptom[]
@@ -67,7 +67,7 @@ export type SelfScreenerAnswers = {
 }
 
 export const determineSymptomGroup = (
-  answers: SelfScreenerAnswers,
+  answers: SelfAssessmentAnswers,
 ): SymptomGroup => {
   if (isEmergencySymptomGroup(answers)) {
     return SymptomGroup.EMERGENCY
@@ -90,18 +90,18 @@ export const determineSymptomGroup = (
   }
 }
 
-const isEmergencySymptomGroup = (answers: SelfScreenerAnswers): boolean => {
+const isEmergencySymptomGroup = (answers: SelfAssessmentAnswers): boolean => {
   return hasEmergencySymptom(answers.emergencySymptoms)
 }
 
-const isPrimarySymptomGroup1 = (answers: SelfScreenerAnswers) => {
+const isPrimarySymptomGroup1 = (answers: SelfAssessmentAnswers) => {
   return (
     hasPrimarySymptom(answers.primarySymptoms) &&
     hasUnderlyingCondition(answers.underlyingConditions)
   )
 }
 
-const isPrimarySymptomGroup2 = (answers: SelfScreenerAnswers) => {
+const isPrimarySymptomGroup2 = (answers: SelfAssessmentAnswers) => {
   return (
     hasPrimarySymptom(answers.primarySymptoms) &&
     isOver65(answers.ageRange) &&
@@ -109,7 +109,7 @@ const isPrimarySymptomGroup2 = (answers: SelfScreenerAnswers) => {
   )
 }
 
-const isPrimarySymptomGroup3 = (answers: SelfScreenerAnswers) => {
+const isPrimarySymptomGroup3 = (answers: SelfAssessmentAnswers) => {
   return (
     hasPrimarySymptom(answers.primarySymptoms) &&
     isUnder65(answers.ageRange) &&
@@ -117,7 +117,7 @@ const isPrimarySymptomGroup3 = (answers: SelfScreenerAnswers) => {
   )
 }
 
-const isSecondarySymptomGroup1 = (answers: SelfScreenerAnswers) => {
+const isSecondarySymptomGroup1 = (answers: SelfAssessmentAnswers) => {
   const isUnder65WithUnderlyingConditions =
     isUnder65(answers.ageRange) &&
     hasUnderlyingCondition(answers.underlyingConditions)
@@ -128,7 +128,7 @@ const isSecondarySymptomGroup1 = (answers: SelfScreenerAnswers) => {
   )
 }
 
-const isSecondarySymptomGroup2 = (answers: SelfScreenerAnswers) => {
+const isSecondarySymptomGroup2 = (answers: SelfAssessmentAnswers) => {
   return (
     !hasPrimarySymptom(answers.primarySymptoms) &&
     hasSecondarySymptoms(answers.secondarySymptoms) &&
@@ -137,7 +137,7 @@ const isSecondarySymptomGroup2 = (answers: SelfScreenerAnswers) => {
   )
 }
 
-const isNonCovidSymptomGroup = (answers: SelfScreenerAnswers) => {
+const isNonCovidSymptomGroup = (answers: SelfAssessmentAnswers) => {
   return (
     !hasPrimarySymptom(answers.primarySymptoms) &&
     !hasSecondarySymptoms(answers.secondarySymptoms) &&
@@ -145,7 +145,7 @@ const isNonCovidSymptomGroup = (answers: SelfScreenerAnswers) => {
   )
 }
 
-const isAsymptomaticGroup = (answers: SelfScreenerAnswers) => {
+const isAsymptomaticGroup = (answers: SelfAssessmentAnswers) => {
   return hasNoSymptoms(answers)
 }
 
@@ -183,7 +183,7 @@ const hasNonCovidSymptoms = (otherSymptoms: OtherSymptom[]): boolean => {
   return otherSymptoms.length > 0
 }
 
-const hasNoSymptoms = (answers: SelfScreenerAnswers): boolean => {
+const hasNoSymptoms = (answers: SelfAssessmentAnswers): boolean => {
   const { primarySymptoms, secondarySymptoms, otherSymptoms } = answers
   return (
     primarySymptoms.length === 0 &&

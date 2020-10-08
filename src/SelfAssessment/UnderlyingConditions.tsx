@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { SelfScreenerStackScreens } from "../navigation"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentStackScreens } from "../navigation"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { Button, Text } from "../components"
-import { UnderlyingCondition } from "./selfScreener"
+import { UnderlyingCondition } from "./selfAssessment"
 import SymptomCheckbox from "./SymptomCheckbox"
-import SelfScreenerLayout from "./SelfScreenerLayout"
+import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Typography, Spacing, Buttons } from "../styles"
 
@@ -32,43 +32,45 @@ const UnderlyingConditions: FunctionComponent = () => {
   const {
     underlyingConditions,
     updateUnderlyingConditions,
-  } = useSelfScreenerContext()
+  } = useSelfAssessmentContext()
 
   const underlyingConditionToString = (condition: UnderlyingCondition) => {
     switch (condition) {
       case LUNG_DISEASE:
-        return t("self_screener.underlying_conditions.lung_disease")
+        return t("self_assessment.underlying_conditions.lung_disease")
       case HEART_CONDITION:
-        return t("self_screener.underlying_conditions.heart_condition")
+        return t("self_assessment.underlying_conditions.heart_condition")
       case WEAKENED_IMMUNE_SYSTEM:
-        return t("self_screener.underlying_conditions.weakened_immune_system")
+        return t("self_assessment.underlying_conditions.weakened_immune_system")
       case OBESITY:
-        return t("self_screener.underlying_conditions.obesity")
+        return t("self_assessment.underlying_conditions.obesity")
       case KIDNEY_DISEASE:
-        return t("self_screener.underlying_conditions.kidney_disease")
+        return t("self_assessment.underlying_conditions.kidney_disease")
       case DIABETES:
-        return t("self_screener.underlying_conditions.diabetes")
+        return t("self_assessment.underlying_conditions.diabetes")
       case LIVER_DISEASE:
-        return t("self_screener.underlying_conditions.liver_disease")
+        return t("self_assessment.underlying_conditions.liver_disease")
       case HIGH_BLOOD_PRESSURE:
-        return t("self_screener.underlying_conditions.high_blood_pressure")
+        return t("self_assessment.underlying_conditions.high_blood_pressure")
       case BLOOD_DISORDER:
-        return t("self_screener.underlying_conditions.blood_disorder")
+        return t("self_assessment.underlying_conditions.blood_disorder")
       case CEREBROVASCULAR_DISEASE:
-        return t("self_screener.underlying_conditions.cerebrovascular_disease")
+        return t(
+          "self_assessment.underlying_conditions.cerebrovascular_disease",
+        )
       case SMOKING:
-        return t("self_screener.underlying_conditions.smoking")
+        return t("self_assessment.underlying_conditions.smoking")
       case PREGNANCY:
-        return t("self_screener.underlying_conditions.pregnancy")
+        return t("self_assessment.underlying_conditions.pregnancy")
     }
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.AgeRange)
+    navigation.navigate(SelfAssessmentStackScreens.AgeRange)
   }
 
   return (
-    <SelfScreenerLayout
+    <SelfAssessmentLayout
       bottomActionsContent={
         <Button
           label={t("common.next")}
@@ -80,10 +82,10 @@ const UnderlyingConditions: FunctionComponent = () => {
       }
     >
       <Text style={style.headerText}>
-        {t("self_screener.underlying_conditions.do_you_have")}
+        {t("self_assessment.underlying_conditions.do_you_have")}
       </Text>
       <Text style={style.subheaderText}>
-        {t("self_screener.underlying_conditions.select_all_or_none")}
+        {t("self_assessment.underlying_conditions.select_all_or_none")}
       </Text>
       <SymptomCheckbox
         label={underlyingConditionToString(LUNG_DISEASE)}
@@ -145,7 +147,7 @@ const UnderlyingConditions: FunctionComponent = () => {
         onPress={() => updateUnderlyingConditions(PREGNANCY)}
         checked={underlyingConditions.includes(PREGNANCY)}
       />
-    </SelfScreenerLayout>
+    </SelfAssessmentLayout>
   )
 }
 
