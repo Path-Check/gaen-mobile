@@ -8,13 +8,13 @@ import {
   SymptomGroup,
   UnderlyingCondition,
   AgeRange,
-} from "./selfScreener"
+} from "./selfAssessment"
 
 describe("determineSymptomGroup", () => {
   describe("when a user reports experiencing an emergency symptom", () => {
     it("returns the emergency symptom group", () => {
       expect.assertions(1)
-      const answers = factories.selfScreenerAnswers.build({
+      const answers = factories.selfAssessmentAnswers.build({
         emergencySymptoms: [EmergencySymptom.CHEST_PAIN],
       })
 
@@ -26,7 +26,7 @@ describe("determineSymptomGroup", () => {
     describe("when a user with underlying conditions is experiencing primarySymptoms", () => {
       it("returns the first primary symptom group", () => {
         expect.assertions(1)
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           primarySymptoms: [PrimarySymptom.FEVER_OR_CHILLS],
           underlyingConditions: [UnderlyingCondition.SMOKING],
         })
@@ -38,7 +38,7 @@ describe("determineSymptomGroup", () => {
     describe("when a user over 65 is experiencing primary symptoms", () => {
       it("returns the second  primary symptom group", () => {
         expect.assertions(1)
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           primarySymptoms: [PrimarySymptom.FEVER_OR_CHILLS],
           ageRange: AgeRange.SIXTY_FIVE_AND_OVER,
         })
@@ -50,7 +50,7 @@ describe("determineSymptomGroup", () => {
     describe("when a user under 65 with no underlying conditions is experiencing primary symptoms", () => {
       it("returns the third primary symptom group", () => {
         expect.assertions(1)
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           primarySymptoms: [PrimarySymptom.COUGH],
           ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
         })
@@ -62,7 +62,7 @@ describe("determineSymptomGroup", () => {
     describe("when a user under 65 with underlying conditions is experiencing secondary symptoms", () => {
       it("returns the first secondary symptom group", () => {
         expect.assertions(1)
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           secondarySymptoms: [SecondarySymptom.LOSS_OF_SMELL_TASTE_APPETITE],
           ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
           underlyingConditions: [UnderlyingCondition.HIGH_BLOOD_PRESSURE],
@@ -76,7 +76,7 @@ describe("determineSymptomGroup", () => {
       it("returns the first secondary symptom group", () => {
         expect.assertions(1)
 
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           secondarySymptoms: [SecondarySymptom.ACHING],
           ageRange: AgeRange.SIXTY_FIVE_AND_OVER,
         })
@@ -89,7 +89,7 @@ describe("determineSymptomGroup", () => {
       it("returns the second secondary symptom group", () => {
         expect.assertions(1)
 
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           secondarySymptoms: [SecondarySymptom.LOSS_OF_SMELL_TASTE_APPETITE],
           ageRange: AgeRange.EIGHTEEN_TO_SIXTY_FOUR,
         })
@@ -102,7 +102,7 @@ describe("determineSymptomGroup", () => {
       it("returns the non-COVID symptom group", () => {
         expect.assertions(1)
 
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           otherSymptoms: [OtherSymptom.VOMITING_OR_DIARRHEA],
         })
 
@@ -114,7 +114,7 @@ describe("determineSymptomGroup", () => {
       it("returns the asymptomatic group", () => {
         expect.assertions(1)
 
-        const answers = factories.selfScreenerAnswers.build({
+        const answers = factories.selfAssessmentAnswers.build({
           ageRange: AgeRange.SIXTY_FIVE_AND_OVER,
           underlyingConditions: [UnderlyingCondition.PREGNANCY],
         })

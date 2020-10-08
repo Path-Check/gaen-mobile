@@ -1,21 +1,21 @@
 import React from "react"
 import { render } from "@testing-library/react-native"
-import { SelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentContext } from "../SelfAssessmentContext"
 import Guidance from "./Guidance"
 import { factories } from "../factories"
-import { SymptomGroup } from "./selfScreener"
+import { SymptomGroup } from "./selfAssessment"
 
 jest.mock("@react-navigation/native")
 
 describe("Guidance", () => {
   it("displays the appropriate heading for primary 1 symptoms", () => {
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       symptomGroup: SymptomGroup.PRIMARY_1,
     })
     const { queryByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <Guidance />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     expect(
@@ -24,13 +24,13 @@ describe("Guidance", () => {
   })
 
   it("displays the appropriate heading for primary 2 symptoms", () => {
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       symptomGroup: SymptomGroup.PRIMARY_2,
     })
     const { queryByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <Guidance />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     expect(
@@ -40,13 +40,13 @@ describe("Guidance", () => {
   })
 
   it("displays the appropriate heading for non covid symptoms", () => {
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       symptomGroup: SymptomGroup.NON_COVID,
     })
     const { queryByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <Guidance />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     expect(queryByText(/Stay at home and monitor your symptoms/)).not.toBeNull()
@@ -54,13 +54,13 @@ describe("Guidance", () => {
   })
 
   it("displays the appropriate heading for no symptoms", () => {
-    const context = factories.selfScreenerContext.build({
+    const context = factories.selfAssessmentContext.build({
       symptomGroup: SymptomGroup.ASYMPTOMATIC,
     })
     const { queryByText } = render(
-      <SelfScreenerContext.Provider value={context}>
+      <SelfAssessmentContext.Provider value={context}>
         <Guidance />
-      </SelfScreenerContext.Provider>,
+      </SelfAssessmentContext.Provider>,
     )
 
     expect(queryByText(/Good to hear you’re feeling fine./)).not.toBeNull()
@@ -69,13 +69,13 @@ describe("Guidance", () => {
 
   describe("displaying instructions", () => {
     it("displays the appropriate instructions for primary 1 symptoms", () => {
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         symptomGroup: SymptomGroup.PRIMARY_1,
       })
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <Guidance />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const callYourDoctorSoon =
@@ -84,13 +84,13 @@ describe("Guidance", () => {
     })
 
     it("displays the appropriate instructions for secondary 1 symptoms", () => {
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         symptomGroup: SymptomGroup.SECONDARY_1,
       })
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <Guidance />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const stayAtHome = "Stay at home except to get medical care."
@@ -98,13 +98,13 @@ describe("Guidance", () => {
     })
 
     it("displays the appropriate instructions for non covid symptoms", () => {
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         symptomGroup: SymptomGroup.NON_COVID,
       })
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <Guidance />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const stayAtHome = /if you get worse symptoms, stay at home/
@@ -112,13 +112,13 @@ describe("Guidance", () => {
     })
 
     it("displays the appropriate instructions for no symptoms", () => {
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         symptomGroup: SymptomGroup.ASYMPTOMATIC,
       })
       const { queryByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <Guidance />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const stayAtHome = /Stay home for 14 days/

@@ -7,10 +7,10 @@ import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
 import { Button, Text } from "../components"
 import { Colors, Forms, Iconography } from "../styles"
-import { SelfScreenerStackScreens } from "../navigation"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
-import { AgeRange } from "./selfScreener"
-import SelfScreenerLayout from "./SelfScreenerLayout"
+import { SelfAssessmentStackScreens } from "../navigation"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { AgeRange } from "./selfAssessment"
+import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Typography, Spacing, Buttons } from "../styles"
 
@@ -18,26 +18,26 @@ const AgeRangeQuestion: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { EIGHTEEN_TO_SIXTY_FOUR, SIXTY_FIVE_AND_OVER } = AgeRange
-  const { ageRange, updateAgeRange } = useSelfScreenerContext()
+  const { ageRange, updateAgeRange } = useSelfAssessmentContext()
 
   const ageRangeToString = (range: AgeRange) => {
     switch (range) {
       case EIGHTEEN_TO_SIXTY_FOUR:
-        return t("self_screener.age_range.eighteen_to_sixty_four")
+        return t("self_assessment.age_range.eighteen_to_sixty_four")
       case SIXTY_FIVE_AND_OVER:
-        return t("self_screener.age_range.sixty_five_and_over")
+        return t("self_assessment.age_range.sixty_five_and_over")
     }
   }
 
   const handleOnPressNext = () => {
-    navigation.navigate(SelfScreenerStackScreens.Guidance)
+    navigation.navigate(SelfAssessmentStackScreens.Guidance)
   }
 
   return (
-    <SelfScreenerLayout
+    <SelfAssessmentLayout
       bottomActionsContent={
         <Button
-          label={t("self_screener.age_range.get_my_guidance")}
+          label={t("self_assessment.age_range.get_my_guidance")}
           onPress={handleOnPressNext}
           hasRightArrow
           customButtonStyle={style.button}
@@ -46,7 +46,7 @@ const AgeRangeQuestion: FunctionComponent = () => {
       }
     >
       <Text style={style.headerText}>
-        {t("self_screener.age_range.how_old_are_you")}
+        {t("self_assessment.age_range.how_old_are_you")}
       </Text>
       <RadioButton
         onPress={() => updateAgeRange(EIGHTEEN_TO_SIXTY_FOUR)}
@@ -58,7 +58,7 @@ const AgeRangeQuestion: FunctionComponent = () => {
         isSelected={ageRange === SIXTY_FIVE_AND_OVER}
         label={ageRangeToString(SIXTY_FIVE_AND_OVER)}
       />
-    </SelfScreenerLayout>
+    </SelfAssessmentLayout>
   )
 }
 

@@ -271,7 +271,7 @@
     "how_the_app_works": "How the app works",
     "legal": "Legal"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
       "get_my_guidance": "Get my guidance",
@@ -336,8 +336,8 @@
       "title": "How are you feeling?"
     },
     "intro": {
-      "agree_and_start_screener": "Agree and start screener",
-      "covid19_self_screener": "COVID-19 Self Screener",
+      "agree_and_start_assessment": "Agree and start assessment",
+      "covid19_self_assessment": "COVID-19 Self Assessment",
       "find_out_how_to_care": "Find out how to care for yourself and others after close contact with someone positive for COVID-19",
       "if_this_is": "If this is an emergency, please call {{emergencyPhoneNumber}}",
       "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn move about how the virus spreads and the illness it causes",

@@ -155,7 +155,7 @@
     "how_the_app_works": "該應用程序的運作方式",
     "legal": "法遵"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18-64",
       "get_my_guidance": "得到我的指南",
@@ -180,7 +180,7 @@
       "not_well": "不太好"
     },
     "intro": {
-      "covid19_self_screener": "COVID-19自我篩選"
+      "covid19_self_assessment": "COVID-19自我篩選"
     },
     "underlying_conditions": {
       "do_you_have": "您是否具有以下任何條件？"

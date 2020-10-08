@@ -2,11 +2,11 @@ import React from "react"
 import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { SelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentContext } from "../SelfAssessmentContext"
 import GeneralSymptoms from "./GeneralSymptoms"
-import { PrimarySymptom, SecondarySymptom } from "./selfScreener"
+import { PrimarySymptom, SecondarySymptom } from "./selfAssessment"
 import { factories } from "../factories"
-import { SelfScreenerStackScreens } from "../navigation"
+import { SelfAssessmentStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("GeneralSymptoms", () => {
@@ -14,14 +14,14 @@ describe("GeneralSymptoms", () => {
     it("calls the update function", () => {
       expect.assertions(1)
       const updateSymptomsSpy = jest.fn()
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         updateSymptoms: updateSymptomsSpy,
       })
 
       const { getByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <GeneralSymptoms />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const achingCheckbox = getByText("Aching throughout the body")
@@ -37,21 +37,21 @@ describe("GeneralSymptoms", () => {
       ;(useNavigation as jest.Mock).mockReturnValue({
         navigate: navigationSpy,
       })
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         primarySymptoms: [PrimarySymptom.COUGH],
       })
 
       const { getByText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <GeneralSymptoms />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
 
       const nextButton = getByText("Next")
 
       fireEvent.press(nextButton)
       expect(navigationSpy).toHaveBeenCalledWith(
-        SelfScreenerStackScreens.UnderlyingConditions,
+        SelfAssessmentStackScreens.UnderlyingConditions,
       )
     })
   })

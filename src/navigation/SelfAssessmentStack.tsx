@@ -9,17 +9,17 @@ import {
 } from "@react-navigation/stack"
 import { SvgXml } from "react-native-svg"
 
-import { SelfScreenerProvider } from "../SelfScreenerContext"
-import { SelfScreenerStackScreens, Stack as AllStacks } from "./index"
+import { SelfAssessmentProvider } from "../SelfAssessmentContext"
+import { SelfAssessmentStackScreens, Stack as AllStacks } from "./index"
 
-import SelfScreenerIntro from "../SelfScreener/SelfScreenerIntro"
-import EmergencySymptomsQuestions from "../SelfScreener/EmergencySymptomsQuestions"
-import HowAreYouFeeling from "../SelfScreener/HowAreYouFeeling"
-import CallEmergencyServices from "../SelfScreener/CallEmergencyServices"
-import GeneralSymptoms from "../SelfScreener/GeneralSymptoms"
-import UnderlyingConditions from "../SelfScreener/UnderlyingConditions"
-import AgeRangeQuestion from "../SelfScreener/AgeRangeQuestion"
-import Guidance from "../SelfScreener/Guidance"
+import SelfAssessmentIntro from "../SelfAssessment/SelfAssessmentIntro"
+import EmergencySymptomsQuestions from "../SelfAssessment/EmergencySymptomsQuestions"
+import HowAreYouFeeling from "../SelfAssessment/HowAreYouFeeling"
+import CallEmergencyServices from "../SelfAssessment/CallEmergencyServices"
+import GeneralSymptoms from "../SelfAssessment/GeneralSymptoms"
+import UnderlyingConditions from "../SelfAssessment/UnderlyingConditions"
+import AgeRangeQuestion from "../SelfAssessment/AgeRangeQuestion"
+import Guidance from "../SelfAssessment/Guidance"
 
 import { Icons } from "../assets"
 import { Colors, Iconography, Spacing } from "../styles"
@@ -49,17 +49,17 @@ const BackButton = () => {
   )
 }
 
-type SelfScreenerStackProps = {
+type SelfAssessmentStackProps = {
   destinationOnCancel: AllStacks
 }
 
-const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
+const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
   destinationOnCancel,
 }) => {
   const cancelButton = () => (
     <CancelButton destinationOnCancel={destinationOnCancel} />
   )
-  const CancelButton: FunctionComponent<SelfScreenerStackProps> = ({
+  const CancelButton: FunctionComponent<SelfAssessmentStackProps> = ({
     destinationOnCancel,
   }) => {
     const { t } = useTranslation()
@@ -92,38 +92,38 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
   }
 
   return (
-    <SelfScreenerProvider>
+    <SelfAssessmentProvider>
       <Stack.Navigator screenOptions={navigationBarOptions}>
         <Stack.Screen
-          name={SelfScreenerStackScreens.SelfScreenerIntro}
-          component={SelfScreenerIntro}
+          name={SelfAssessmentStackScreens.SelfAssessmentIntro}
+          component={SelfAssessmentIntro}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.EmergencySymptomsQuestions}
+          name={SelfAssessmentStackScreens.EmergencySymptomsQuestions}
           component={EmergencySymptomsQuestions}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.HowAreYouFeeling}
+          name={SelfAssessmentStackScreens.HowAreYouFeeling}
           component={HowAreYouFeeling}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.CallEmergencyServices}
+          name={SelfAssessmentStackScreens.CallEmergencyServices}
           component={CallEmergencyServices}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.GeneralSymptoms}
+          name={SelfAssessmentStackScreens.GeneralSymptoms}
           component={GeneralSymptoms}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.UnderlyingConditions}
+          name={SelfAssessmentStackScreens.UnderlyingConditions}
           component={UnderlyingConditions}
         />
         <Stack.Screen
-          name={SelfScreenerStackScreens.AgeRange}
+          name={SelfAssessmentStackScreens.AgeRange}
           component={AgeRangeQuestion}
         />
-        <Stack.Screen name={SelfScreenerStackScreens.Guidance}>
+        <Stack.Screen name={SelfAssessmentStackScreens.Guidance}>
           {(props) => {
             return (
               <Guidance {...props} destinationOnCancel={destinationOnCancel} />
@@ -131,7 +131,7 @@ const SelfScreenerStack: FunctionComponent<SelfScreenerStackProps> = ({
           }}
         </Stack.Screen>
       </Stack.Navigator>
-    </SelfScreenerProvider>
+    </SelfAssessmentProvider>
   )
 }
 
@@ -141,4 +141,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SelfScreenerStack
+export default SelfAssessmentStack

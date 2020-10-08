@@ -4,14 +4,14 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
+import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Button, Text, StatusBar } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Colors, Iconography, Layout, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
-const SelfScreenerIntro: FunctionComponent = () => {
+const SelfAssessmentIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -20,8 +20,8 @@ const SelfScreenerIntro: FunctionComponent = () => {
     healthAuthorityName,
   } = useConfigurationContext()
 
-  const handleOnPressStartScreener = () => {
-    navigation.navigate(SelfScreenerStackScreens.HowAreYouFeeling)
+  const handleOnPressStartAssessment = () => {
+    navigation.navigate(SelfAssessmentStackScreens.HowAreYouFeeling)
   }
 
   const handleOnPressCancel = () => {
@@ -53,30 +53,30 @@ const SelfScreenerIntro: FunctionComponent = () => {
           </TouchableOpacity>
         </View>
         <Text style={style.headerText}>
-          {t("self_screener.intro.covid19_self_screener")}
+          {t("self_assessment.intro.covid19_self_assessment")}
         </Text>
         <Text style={style.subheaderText}>
-          {t("self_screener.intro.find_out_how_to_care")}
+          {t("self_assessment.intro.find_out_how_to_care")}
         </Text>
         <View style={style.bulletListContainer}>
           <Text style={style.bulletText}>
-            {t("self_screener.intro.this_is_not_intended")}
+            {t("self_assessment.intro.this_is_not_intended")}
           </Text>
           <Text style={style.bulletText}>
-            {t("self_screener.intro.you_are_a_resident", {
+            {t("self_assessment.intro.you_are_a_resident", {
               healthAuthorityName,
             })}
           </Text>
           <Text style={style.bulletText}>
-            {t("self_screener.intro.this_is_based_on")}
+            {t("self_assessment.intro.this_is_based_on")}
           </Text>
           <Text style={{ ...style.bulletText, ...style.emergencyText }}>
-            {t("self_screener.intro.if_this_is", { emergencyPhoneNumber })}
+            {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
           </Text>
         </View>
         <Button
-          onPress={handleOnPressStartScreener}
-          label={t("self_screener.intro.agree_and_start_screener")}
+          onPress={handleOnPressStartAssessment}
+          label={t("self_assessment.intro.agree_and_start_assessment")}
           customButtonStyle={style.button}
           customButtonInnerStyle={style.buttonInner}
         />
@@ -134,4 +134,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SelfScreenerIntro
+export default SelfAssessmentIntro

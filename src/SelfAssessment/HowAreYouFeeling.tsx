@@ -11,8 +11,8 @@ import {
 } from "react-native"
 
 import { Text } from "../components"
-import { SelfScreenerStackScreens } from "../navigation"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
+import { SelfAssessmentStackScreens } from "../navigation"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 
 import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
 import { Images } from "../assets"
@@ -20,14 +20,14 @@ import { Images } from "../assets"
 const HowAreYouFeeling: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const selfScreenerContext = useSelfScreenerContext()
+  const selfAssessmentContext = useSelfAssessmentContext()
 
   const handleOnPressGood = () => {
-    selfScreenerContext.clearSymptoms()
-    navigation.navigate(SelfScreenerStackScreens.Guidance)
+    selfAssessmentContext.clearSymptoms()
+    navigation.navigate(SelfAssessmentStackScreens.Guidance)
   }
   const handleOnPressNotWell = () => {
-    navigation.navigate(SelfScreenerStackScreens.EmergencySymptomsQuestions)
+    navigation.navigate(SelfAssessmentStackScreens.EmergencySymptomsQuestions)
   }
 
   return (
@@ -36,18 +36,18 @@ const HowAreYouFeeling: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <Text style={style.headerText}>
-        {t("self_screener.how_are_you_feeling.title")}
+        {t("self_assessment.how_are_you_feeling.title")}
       </Text>
       <View style={style.feelingButtonsContainer}>
         <FeelingButton
           image={Images.SmileEmoji}
-          text={t("self_screener.how_are_you_feeling.good")}
+          text={t("self_assessment.how_are_you_feeling.good")}
           onPress={handleOnPressGood}
         />
         <View style={style.feelingButtonsInnerSpacer} />
         <FeelingButton
           image={Images.SickEmoji}
-          text={t("self_screener.how_are_you_feeling.not_well")}
+          text={t("self_assessment.how_are_you_feeling.not_well")}
           onPress={handleOnPressNotWell}
         />
       </View>

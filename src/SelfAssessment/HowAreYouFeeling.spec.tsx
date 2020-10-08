@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native"
 import { fireEvent, render } from "@testing-library/react-native"
 import React from "react"
-import { SelfScreenerContext } from "../SelfScreenerContext"
-import { SelfScreenerStackScreens } from "../navigation"
+import { SelfAssessmentContext } from "../SelfAssessmentContext"
+import { SelfAssessmentStackScreens } from "../navigation"
 import HowAreYouFeeling from "./HowAreYouFeeling"
 import { factories } from "../factories"
 
@@ -16,18 +16,18 @@ describe("HowAreYouFeeling", () => {
         navigate: navigateSpy,
       })
       const clearSymptomsSpy = jest.fn()
-      const context = factories.selfScreenerContext.build({
+      const context = factories.selfAssessmentContext.build({
         clearSymptoms: clearSymptomsSpy,
       })
 
       const { getByLabelText } = render(
-        <SelfScreenerContext.Provider value={context}>
+        <SelfAssessmentContext.Provider value={context}>
           <HowAreYouFeeling />
-        </SelfScreenerContext.Provider>,
+        </SelfAssessmentContext.Provider>,
       )
       fireEvent.press(getByLabelText("Good"))
       expect(navigateSpy).toHaveBeenCalledWith(
-        SelfScreenerStackScreens.Guidance,
+        SelfAssessmentStackScreens.Guidance,
       )
       expect(clearSymptomsSpy).toHaveBeenCalled()
     })
@@ -42,7 +42,7 @@ describe("HowAreYouFeeling", () => {
       const { getByLabelText } = render(<HowAreYouFeeling />)
       fireEvent.press(getByLabelText("Not well"))
       expect(navigateSpy).toHaveBeenCalledWith(
-        SelfScreenerStackScreens.EmergencySymptomsQuestions,
+        SelfAssessmentStackScreens.EmergencySymptomsQuestions,
       )
     })
   })

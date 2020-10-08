@@ -45,11 +45,11 @@ const CallEmergencyServices: FunctionComponent = () => {
           style={style.icon}
         />
         <Text style={style.headerText}>
-          {t("self_screener.call_emergency_services.seek_medical_attention")}
+          {t("self_assessment.call_emergency_services.seek_medical_attention")}
         </Text>
         <Text style={style.bodyText}>
           {t(
-            "self_screener.call_emergency_services.urgent_medical_attention_needed",
+            "self_assessment.call_emergency_services.urgent_medical_attention_needed",
             { emergencyPhoneNumber },
           )}
         </Text>
@@ -57,7 +57,7 @@ const CallEmergencyServices: FunctionComponent = () => {
       <TouchableOpacity
         onPress={handleOnPressCallEmergencyServices}
         accessibilityLabel={t(
-          "self_screener.call_emergency_services.call_emergencies",
+          "self_assessment.call_emergency_services.call_emergencies",
           {
             emergencyPhoneNumber,
           },
@@ -66,7 +66,7 @@ const CallEmergencyServices: FunctionComponent = () => {
         style={style.buttonContainer}
       >
         <Text style={style.buttonText}>
-          {t("self_screener.call_emergency_services.call_emergencies", {
+          {t("self_assessment.call_emergency_services.call_emergencies", {
             emergencyPhoneNumber,
           })}
         </Text>

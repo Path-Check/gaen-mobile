@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { SelfScreenerStackScreens, useStatusBarEffect } from "../navigation"
+import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Button, Text } from "../components"
 
-import { EmergencySymptom, SymptomGroup } from "./selfScreener"
-import { useSelfScreenerContext } from "../SelfScreenerContext"
+import { EmergencySymptom, SymptomGroup } from "./selfAssessment"
+import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import SymptomCheckbox from "./SymptomCheckbox"
-import SelfScreenerLayout from "./SelfScreenerLayout"
+import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
@@ -21,7 +21,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
     symptomGroup,
     emergencySymptoms,
     updateSymptoms,
-  } = useSelfScreenerContext()
+  } = useSelfAssessmentContext()
 
   const {
     CHEST_PAIN,
@@ -32,27 +32,29 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
 
   const handleOnPressNext = () => {
     if (symptomGroup === SymptomGroup.EMERGENCY) {
-      return navigation.navigate(SelfScreenerStackScreens.CallEmergencyServices)
+      return navigation.navigate(
+        SelfAssessmentStackScreens.CallEmergencyServices,
+      )
     }
 
-    navigation.navigate(SelfScreenerStackScreens.GeneralSymptoms)
+    navigation.navigate(SelfAssessmentStackScreens.GeneralSymptoms)
   }
 
   const emergencySymptomToString = (symptom: EmergencySymptom): string => {
     switch (symptom) {
       case EmergencySymptom.CHEST_PAIN:
-        return t("self_screener.emergency_symptoms.chest_pain")
+        return t("self_assessment.emergency_symptoms.chest_pain")
       case EmergencySymptom.SEVERE_DIFFICULTY_BREATHING:
-        return t("self_screener.emergency_symptoms.difficulty_breathing")
+        return t("self_assessment.emergency_symptoms.difficulty_breathing")
       case EmergencySymptom.LIGHTHEADEDNESS:
-        return t("self_screener.emergency_symptoms.lightheadedness")
+        return t("self_assessment.emergency_symptoms.lightheadedness")
       case EmergencySymptom.DISORIENTATION:
-        return t("self_screener.emergency_symptoms.disorientation")
+        return t("self_assessment.emergency_symptoms.disorientation")
     }
   }
 
   return (
-    <SelfScreenerLayout
+    <SelfAssessmentLayout
       bottomActionsContent={
         <Button
           label={t("common.next")}
@@ -64,10 +66,10 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
       }
     >
       <Text style={style.headerText}>
-        {t("self_screener.emergency_symptoms.are_you_experiencing")}
+        {t("self_assessment.emergency_symptoms.are_you_experiencing")}
       </Text>
       <Text style={style.subheaderText}>
-        {t("self_screener.emergency_symptoms.select_any")}
+        {t("self_assessment.emergency_symptoms.select_any")}
       </Text>
       <SymptomCheckbox
         label={emergencySymptomToString(CHEST_PAIN)}
@@ -89,7 +91,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
         onPress={() => updateSymptoms(DISORIENTATION)}
         checked={emergencySymptoms.includes(DISORIENTATION)}
       />
-    </SelfScreenerLayout>
+    </SelfAssessmentLayout>
   )
 }
 

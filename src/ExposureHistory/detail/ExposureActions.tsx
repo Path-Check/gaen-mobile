@@ -30,7 +30,7 @@ const ExposureActions: FunctionComponent = () => {
 
   const handleOnPressPersonalizeMyGuidance = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfScreenerFromExposureDetails,
+      screen: ModalStackScreens.SelfAssessmentFromExposureDetails,
     })
   }
 
