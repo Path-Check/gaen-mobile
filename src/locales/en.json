@@ -36,8 +36,10 @@
     "submit": "Submit"
   },
   "covid_data": {
-    "covid_data": "COVID Data",
+    "cases_are_up": "Cases are up from last week",
+    "cases_are_down": "Cases are down from last week",
     "cases_today": "Cases today",
+    "covid_data": "COVID Data",
     "deaths_today": "Deaths today",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths"

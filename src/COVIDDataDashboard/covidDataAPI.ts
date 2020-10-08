@@ -1,9 +1,9 @@
-import { Posix, posixToDayjs } from "../utils/dateTime"
 import Logger from "../logger"
 
-const COVID_DATA_ENDPOINT = "https://api.covidtracking.com/v1/states/"
-const DATE_ARGUMENT_FORMAT = "YYYYDDMM"
-const ENDPOINT_FORMAT = "json"
+const COVID_DATA_ENDPOINT =
+  "https://localcoviddata.com/covid19/v1/cases/covidTracking?state="
+const DAYS_IN_PAST_PARAM = "&daysInPast=7"
+const DATA_KEY = "historicData"
 
 const requestHeaders = {
   "content-type": "application/json",
@@ -11,19 +11,15 @@ const requestHeaders = {
 }
 
 export type CovidData = {
-  positive: number
-  totalTestResults: number
-  hospitalizedCurrently: number
-  inIcuCurrently: number
-  death: number
-  positiveIncrease: number
-  totalTestResultsIncrease: number
-  deathIncrease: number
+  peoplePositiveCasesCt: number
+  peoplePositiveNewCasesCt: number
+  peopleDeathCt: number
+  peopleDeathNewCt: number
 }
 
 export interface RequestSuccess {
   kind: "success"
-  covidData: CovidData
+  lastWeekCovidData: CovidData[]
 }
 
 type FailureNature =
@@ -38,25 +34,18 @@ export interface RequestFailure {
 }
 
 const isValidCovidDataResponse = (jsonResponse: Record<string, number>) => {
-  return jsonResponse["positive"] >= 0 && jsonResponse["totalTestResults"] >= 0
+  return (
+    jsonResponse["peoplePositiveNewCasesCt"] >= 0 &&
+    jsonResponse["peoplePositiveCasesCt"] >= 0 &&
+    jsonResponse["peopleDeathNewCt"] >= 0 &&
+    jsonResponse["peopleDeathCt"] >= 0
+  )
 }
 
 export const fetchCovidDataForState = async (
   state: string,
-  date?: Posix,
 ): Promise<RequestSuccess | RequestFailure> => {
-  const dateForTheData = date || Date.now()
-  const dayJsDate = posixToDayjs(dateForTheData)
-  if (dayJsDate === null) {
-    return {
-      kind: "failure",
-      nature: "InternalError",
-    }
-  }
-
-  const dateString = dayJsDate.local().format(DATE_ARGUMENT_FORMAT)
-
-  const endpointURL = `${COVID_DATA_ENDPOINT}/${state}/${dateString}.${ENDPOINT_FORMAT}`
+  const endpointURL = `${COVID_DATA_ENDPOINT}${state}${DAYS_IN_PAST_PARAM}`
   try {
     const response = await fetch(endpointURL, {
       method: "GET",
@@ -64,17 +53,18 @@ export const fetchCovidDataForState = async (
     })
 
     const jsonResponse = await response.json()
+    const historicData = jsonResponse[DATA_KEY]
+    console.log(historicData)
 
-    if (isValidCovidDataResponse(jsonResponse)) {
+    if (historicData.every(isValidCovidDataResponse)) {
       return {
         kind: "success",
-        covidData: jsonResponse as CovidData,
+        lastWeekCovidData: jsonResponse[DATA_KEY],
       }
     } else {
       Logger.error("Invalid response for covid data", {
         jsonResponse,
         state,
-        dateString,
       })
       return { kind: "failure", nature: "RequestFailed" }
     }
@@ -82,7 +72,6 @@ export const fetchCovidDataForState = async (
     Logger.error("Exception retrieving covid data", {
       message: e.message,
       state,
-      dateString,
     })
     if (e.message === "Network request failed") {
       return { kind: "failure", nature: "NetworkConnection" }

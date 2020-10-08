@@ -8,10 +8,12 @@ import symptomLogContext from "./symptomLogContext"
 import selfScreenerContext from "./selfScreenerContext"
 import selfScreenerAnswers from "./selfScreenerAnswers"
 import rawExposure from "./rawExposure"
+import covidData from "./covidData"
 
 export const factories = register({
   analyticsContext,
   configurationContext,
+  covidData,
   exposureContext,
   exposureDatum,
   gaenStrategy,

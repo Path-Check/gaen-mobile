@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet, View } from "react-native"
 
-import StateData from "./StateData"
+import COVIDDataStateTrend from "./COVIDDataStateTrend"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Affordances, Spacing } from "../styles"
@@ -15,7 +15,7 @@ const COVIDDataDashboard: FunctionComponent = () => {
 
   return (
     <View style={style.dataContainer}>
-      <StateData stateAbbreviation={stateAbbreviation} />
+      <COVIDDataStateTrend stateAbbreviation={stateAbbreviation} />
     </View>
   )
 }

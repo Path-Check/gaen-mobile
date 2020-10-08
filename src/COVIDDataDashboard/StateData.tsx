@@ -1,46 +1,22 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useState,
-  useCallback,
-} from "react"
+import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { StyleSheet, View } from "react-native"
 
 import { Text } from "../components"
-import { CovidData, fetchCovidDataForState } from "./covidDataAPI"
-import { beginningOfDay } from "../utils/dateTime"
+import { CovidData } from "./covidDataAPI"
 
 import { Typography, Colors, Outlines, Spacing } from "../styles"
 
 type StateDataProps = {
+  todayCovidData: CovidData
   stateAbbreviation: string
 }
 
 const StateData: FunctionComponent<StateDataProps> = ({
+  todayCovidData,
   stateAbbreviation,
 }) => {
   const { t } = useTranslation()
-  const [todayCovidData, setTodayCovidData] = useState<CovidData | null>(null)
-
-  const getTodayCovidData = useCallback(async () => {
-    const todayDate = beginningOfDay(Date.now())
-    const todayCovidDataRequestResponse = await fetchCovidDataForState(
-      stateAbbreviation,
-      todayDate,
-    )
-    if (todayCovidDataRequestResponse.kind === "success") {
-      setTodayCovidData(todayCovidDataRequestResponse.covidData)
-    }
-  }, [stateAbbreviation])
-
-  useEffect(() => {
-    getTodayCovidData()
-  }, [getTodayCovidData])
-
-  if (todayCovidData === null) {
-    return null
-  }
 
   return (
     <View>
@@ -50,19 +26,23 @@ const StateData: FunctionComponent<StateDataProps> = ({
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.cases_today")}</Text>
-        <Text style={style.dataText}>{todayCovidData.positiveIncrease}</Text>
+        <Text style={style.dataText}>
+          {todayCovidData.peoplePositiveNewCasesCt}
+        </Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.deaths_today")}</Text>
-        <Text style={style.dataText}>{todayCovidData.deathIncrease}</Text>
+        <Text style={style.dataText}>{todayCovidData.peopleDeathNewCt}</Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.total_cases")}</Text>
-        <Text style={style.dataText}>{todayCovidData.positive}</Text>
+        <Text style={style.dataText}>
+          {todayCovidData.peoplePositiveCasesCt}
+        </Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.total_deaths")}</Text>
-        <Text style={style.dataText}>{todayCovidData.death}</Text>
+        <Text style={style.dataText}>{todayCovidData.peopleDeathCt}</Text>
       </View>
     </View>
   )
