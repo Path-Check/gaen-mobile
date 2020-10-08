@@ -8,7 +8,7 @@ import { ActivationStatus } from "./ActivationStatus"
 import { HomeStackScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
 
-export const LocationActivationStatus: FunctionComponent = () => {
+const LocationActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { locationPermissions } = useSystemServicesContext()
@@ -54,3 +54,5 @@ export const LocationActivationStatus: FunctionComponent = () => {
     />
   )
 }
+
+export default LocationActivationStatus

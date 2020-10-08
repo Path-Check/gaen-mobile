@@ -12,7 +12,7 @@ import { ActivationStatus } from "./ActivationStatus"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { openAppSettings } from "../gaen/nativeModule"
 
-export const ExposureNotificationsActivationStatus: FunctionComponent = () => {
+const ExposureNotificationsActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
   const { t } = useTranslation()
@@ -74,3 +74,5 @@ export const ExposureNotificationsActivationStatus: FunctionComponent = () => {
     />
   )
 }
+
+export default ExposureNotificationsActivationStatus

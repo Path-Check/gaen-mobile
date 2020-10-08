@@ -17,7 +17,7 @@ import {
   Affordances,
 } from "../styles"
 
-export const ShareLink: FunctionComponent = () => {
+const ShareLink: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { t } = useTranslation()
   const configuration = useConfigurationContext()
@@ -92,3 +92,5 @@ const style = StyleSheet.create({
     color: Colors.primaryText,
   },
 })
+
+export default ShareLink

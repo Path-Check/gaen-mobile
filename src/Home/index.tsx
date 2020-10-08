@@ -28,7 +28,7 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text, Button } from "../components"
 
-import { ShareLink } from "./ShareLink"
+import ShareLink from "./ShareLink"
 import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 

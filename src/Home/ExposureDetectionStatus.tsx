@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 
-import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
-import { ExposureNotificationsActivationStatus } from "./ExposureNotificationsActivationStatus"
-import { LocationActivationStatus } from "./LocationActivationStatus"
+import BluetoothActivationStatus from "./BluetoothActivationStatus"
+import ExposureNotificationsActivationStatus from "./ExposureNotificationsActivationStatus"
+import LocationActivationStatus from "./LocationActivationStatus"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
 import { Colors, Spacing, Typography } from "../styles"

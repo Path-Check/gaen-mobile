@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native"
 import { HomeStackScreens } from "../navigation"
 import { openAppSettings } from "../gaen/nativeModule"
 
-export const BluetoothActivationStatus: FunctionComponent = () => {
+const BluetoothActivationStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { isBluetoothOn } = useSystemServicesContext()
@@ -46,3 +46,5 @@ export const BluetoothActivationStatus: FunctionComponent = () => {
     />
   )
 }
+
+export default BluetoothActivationStatus
