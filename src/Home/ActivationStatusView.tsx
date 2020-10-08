@@ -33,7 +33,7 @@ interface ActivationStatusProps {
   testID: string
 }
 
-export const ActivationStatus: FunctionComponent<ActivationStatusProps> = ({
+const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   headerText,
   isActive,
   infoAction,
@@ -164,3 +164,5 @@ const style = StyleSheet.create({
     paddingBottom: 2,
   },
 })
+
+export default ActivationStatusView
