@@ -11,23 +11,23 @@
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
+    "request_a_call": "Request a call from a contact tracer",
     "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
     "success_header": "You're in the queue",
-    "success_requested": "Call Back Requested",
-    "request_a_call": "Request a call from a contact tracer"
+    "success_requested": "Call Back Requested"
   },
   "common": {
     "back": "Back",
     "close": "Close",
     "continue": "Continue",
-    "off": "OFF",
     "done": "Done",
     "edit": "Edit",
-    "on": "ON",
     "maybe_later": "Maybe later",
     "next": "Next",
     "no_thanks": "No thanks",
+    "off": "OFF",
+    "on": "ON",
     "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
@@ -130,11 +130,16 @@
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
+  "exposure_scanning_status": {
+    "fix_this": "Fix this",
+    "learn_more": "Learn more",
+    "your_device_is_not": "Your device is not scanning for exposures. Fix the issues below to enable Exposure Detection.",
+    "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
+  },
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
-      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
       "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
       "bluetooth_header": "Bluetooth",
@@ -142,26 +147,20 @@
       "location_disabled_error_title": "Authorize in Settings",
       "location_header": "Location",
       "proximity_tracing_header": "Exposure Notifications",
-      "report_positive_result": "Report positive test result",
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
       "take_self_assessment": "Take self assessment",
       "tracing_off_header": "Exposure Detection Off",
-      "tracing_off_subheader": "Your device is not scanning for exposures because Bluetooth and Exposure Notifications are off",
-      "tracing_off_subheader_location": "Enable Bluetooth, Exposure Notifications, and Location to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
-    "feeling_sick": "Feeling sick?",
-    "did_you_test_positive": "Did you test positive for COVID-19?",
-    "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer.",
-    "talk_to_a_contact": "Talk to a contact tracer",
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symtpoms and get an instant recommendation on how to stay safe.",
-    "have_a_positive_test": "Have a positive test result code?",
-    "if_you_have_a_code": "Report your result to help keep your community safe.",
-    "submit_test_result_code": "Submit test result code",
+    "did_you_test_positive": "Did you test positive for COVID-19?",
+    "feeling_sick": "Feeling sick?",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
+    "have_a_positive_test": "Have a positive test result code?",
+    "if_you_have_a_code": "Report your result to help keep your community safe.",
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
@@ -176,8 +175,9 @@
       "unauthorized_error_message_ios": "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "status_icon_active_label": "A white check in a green circle",
-    "status_icon_inactive_label": "A white x in a red circle"
+    "submit_test_result_code": "Submit test result code",
+    "talk_to_a_contact": "Talk to a contact tracer",
+    "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer."
   },
   "label": {
     "check": "Checkmark",
@@ -265,8 +265,8 @@
     "callback": "Request call",
     "debug": "Debug",
     "exposure_history": "Exposure History",
-    "exposures": "Exposures",
     "exposure_scanning": "Exposure Detection",
+    "exposures": "Exposures",
     "home": "Home",
     "how_the_app_works": "How the app works",
     "legal": "Legal"
@@ -381,17 +381,12 @@
       "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
       "updating_symptoms": "Sorry, we could not update your symptoms"
     },
-    "find_a_test_center_nearby": "Find a test center nearby",
-    "get_tested": "We recommend you get tested for COVID-19.",
-    "guidance": "Guidance",
     "log_symptoms": "Log symptoms",
-    "to_protect_your_privacy": "To protect your privacy, logs are stored on your device and deleted automatically after {{days}} days.",
     "no_symptom_history": "No symptom history…",
-    "person_finding_location_label": "A person on their phone searching for a location.",
-    "sorry_not_feeling_well": "Sorry you're not feeling well.",
     "symptom_log": "Symptom Log",
     "symptoms_saved": "Symptoms saved!",
     "symptoms_updated": "Symptoms updated!",
+    "to_protect_your_privacy": "To protect your privacy, logs are stored on your device and deleted automatically after {{days}} days.",
     "what_symptoms": "What symptoms are you experiencing?"
   },
   "symptoms": {
@@ -409,10 +404,5 @@
     "loss_of_taste": "Loss of taste",
     "other": "Other",
     "vomiting": "Vomiting"
-  },
-  "exposure_scanning_status": {
-    "fix_this": "Fix this",
-    "learn_more": "Learn more",
-    "your_device_is_not": "Your device is not scanning for exposures. Fix the issues below to enable Exposure Detection."
   }
 }
