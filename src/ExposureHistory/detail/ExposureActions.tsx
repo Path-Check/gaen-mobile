@@ -18,7 +18,7 @@ const ExposureActions: FunctionComponent = () => {
   const navigation = useNavigation()
   const {
     displayCallbackForm,
-    displaySelfScreener,
+    displaySelfAssessment,
     healthAuthorityName,
     healthAuthorityAdviceUrl,
     measurementSystem,
@@ -35,7 +35,7 @@ const ExposureActions: FunctionComponent = () => {
   }
 
   const displayNextStepsLink =
-    !displaySelfScreener && healthAuthorityAdviceUrl !== ""
+    !displaySelfAssessment && healthAuthorityAdviceUrl !== ""
 
   const stayApartRecommendationText =
     measurementSystem === "Imperial"
@@ -74,7 +74,7 @@ const ExposureActions: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        {displaySelfScreener && (
+        {displaySelfAssessment && (
           <Button
             onPress={handleOnPressPersonalizeMyGuidance}
             label={t(

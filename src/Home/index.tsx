@@ -51,7 +51,7 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("light-content", Colors.gradient100Light)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { displaySelfScreener, displayCovidData } = useConfigurationContext()
+  const { displaySelfAssessment, displayCovidData } = useConfigurationContext()
 
   const { applicationName } = useApplicationName()
 
@@ -167,7 +167,7 @@ const Home: FunctionComponent = () => {
               customButtonInnerStyle={style.buttonInner}
               hasRightArrow
             />
-            {displaySelfScreener && (
+            {displaySelfAssessment && (
               <Button
                 onPress={handleOnPressTakeSelfAssessment}
                 label={t("home.bluetooth.take_self_assessment")}

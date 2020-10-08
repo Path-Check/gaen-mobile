@@ -11,7 +11,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayCovidData: boolean
   displayMyHealth: boolean
-  displaySelfScreener: boolean
+  displaySelfAssessment: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
@@ -35,7 +35,7 @@ const initialState: Configuration = {
   displayCallbackForm: false,
   displayCovidData: false,
   displayMyHealth: false,
-  displaySelfScreener: false,
+  displaySelfAssessment: false,
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
@@ -71,7 +71,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
-  const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
+  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
@@ -99,7 +99,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayCovidData,
         displayMyHealth,
-        displaySelfScreener,
+        displaySelfAssessment,
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
