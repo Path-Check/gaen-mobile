@@ -9,6 +9,7 @@ import BluetoothActivationStatus from "./BluetoothActivationStatus"
 import ExposureNotificationsActivationStatus from "./ExposureNotificationsActivationStatus"
 import LocationActivationStatus from "./LocationActivationStatus"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
+import { useSystemServicesContext } from "../SystemServicesContext"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -16,10 +17,13 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
+  const { locationPermissions } = useSystemServicesContext()
 
   const subheaderText = exposureDetectionStatus
     ? t("exposure_scanning_status.your_device_is_scanning")
     : t("exposure_scanning_status.your_device_is_not")
+
+  const locationIsNotRequired = locationPermissions !== "NotRequired"
 
   return (
     <ScrollView
@@ -32,7 +36,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       <Text style={style.subheaderText}>{subheaderText}</Text>
       <BluetoothActivationStatus />
       <ExposureNotificationsActivationStatus />
-      <LocationActivationStatus />
+      {locationIsNotRequired && <LocationActivationStatus />}
     </ScrollView>
   )
 }
@@ -42,7 +46,8 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    paddingVertical: Spacing.medium,
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.primaryLightBackground,
   },

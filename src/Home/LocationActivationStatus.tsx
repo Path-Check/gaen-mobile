@@ -38,10 +38,6 @@ const LocationActivationStatus: FunctionComponent = () => {
     )
   }
 
-  if (locationPermissions === "NotRequired") {
-    return null
-  }
-
   const isLocationOn = locationPermissions === "RequiredOn"
 
   return (
