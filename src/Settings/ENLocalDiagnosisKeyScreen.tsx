@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { Alert, BackHandler, FlatList, StyleSheet, View } from "react-native"
+import { Alert, BackHandler, ScrollView, StyleSheet, View } from "react-native"
 
 import { NavigationProp } from "../navigation"
 import { NativeModule } from "../gaen"
@@ -63,17 +63,17 @@ const ENLocalDiagnosisKeyScreen: FunctionComponent<ENLocalDiagnosisKeyScreenProp
   }
 
   return (
-    <FlatList
-      data={diagnosisKeys}
-      keyExtractor={(item) => item.id}
-      renderItem={(item) => (
-        <View style={style.flatlistRowView}>
-          <Text style={style.itemText}>
-            Rolling start number: {item.item.rollingStartNumber}
-          </Text>
-        </View>
-      )}
-    />
+    <ScrollView>
+      {diagnosisKeys.map((key: ENDiagnosisKey, index: number) => {
+        return (
+          <View key={index.toString()} style={style.flatlistRowView}>
+            <Text
+              style={style.itemText}
+            >{`${index}:${key.rollingStartNumber}`}</Text>
+          </View>
+        )
+      })}
+    </ScrollView>
   )
 }
 
