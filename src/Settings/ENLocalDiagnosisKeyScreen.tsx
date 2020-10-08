@@ -65,12 +65,12 @@ const ENLocalDiagnosisKeyScreen: FunctionComponent<ENLocalDiagnosisKeyScreenProp
   return (
     <FlatList
       data={diagnosisKeys}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => {
+        return item.id
+      }}
       renderItem={(item) => (
         <View style={style.flatlistRowView}>
-          <Text style={style.itemText}>
-            Rolling start number: {item.item.rollingStartNumber}
-          </Text>
+          <Text style={style.itemText}>{item.item.id}</Text>
         </View>
       )}
     />

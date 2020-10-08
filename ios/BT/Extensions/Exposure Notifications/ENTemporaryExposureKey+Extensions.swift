@@ -12,6 +12,7 @@ extension ENTemporaryExposureKey {
 
   var asDictionary : [String: Any] {
     return [
+      "id": UUID().uuidString,
       "key": keyData.base64EncodedString(),
       "rollingPeriod": rollingPeriod,
       "rollingStartNumber": rollingStartNumber,
