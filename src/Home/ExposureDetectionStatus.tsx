@@ -169,7 +169,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
     ? t("exposure_scanning_status.your_device_is_scanning")
     : t("exposure_scanning_status.your_device_is_not")
 
-  const locationIsNotRequired = locationPermissions !== "NotRequired"
+  const locationIsRequired = locationPermissions !== "NotRequired"
 
   return (
     <ScrollView
@@ -182,7 +182,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       <Text style={style.subheaderText}>{subheaderText}</Text>
       <BluetoothActivationStatus />
       <ExposureNotificationsActivationStatus />
-      {locationIsNotRequired && <LocationActivationStatus />}
+      {locationIsRequired && <LocationActivationStatus />}
     </ScrollView>
   )
 }
