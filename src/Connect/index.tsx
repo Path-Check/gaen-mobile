@@ -87,7 +87,7 @@ const ConnectScreen: FunctionComponent = () => {
   if (displayCallbackForm) {
     const callbackForm: ConnectListItem = {
       label: t("screen_titles.callback"),
-      onPress: () => navigation.navigate(Stacks.Callback),
+      onPress: () => navigation.navigate(ModalStackScreens.CallbackStack),
       icon: Icons.Headset,
     }
     listItems.push(callbackForm)
@@ -141,7 +141,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.large,
   },
   topContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
     marginBottom: Spacing.large,
   },
   headerText: {
@@ -158,7 +158,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   bottomContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
   },
   infoRowContainer: {
     marginTop: Spacing.small,

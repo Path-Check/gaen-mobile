@@ -16,7 +16,7 @@ export type NavigationProp = NavigationScreenProp<
 
 export type ActivationStackScreen =
   | "AcceptTermsOfService"
-  | "ActivateProximityTracing"
+  | "ActivateExposureNotifications"
   | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
@@ -25,7 +25,7 @@ export const ActivationStackScreens: {
   [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
-  ActivateProximityTracing: "ActivateProximityTracing",
+  ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
   NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
@@ -34,16 +34,20 @@ export const ActivationStackScreens: {
 export type HomeStackScreen =
   | "Home"
   | "BluetoothInfo"
-  | "ProximityTracingInfo"
+  | "ExposureNotificationsInfo"
   | "LocationInfo"
+  | "ExposureDetectionStatus"
+  | "AffectedUserStack"
 
 export const HomeStackScreens: {
   [key in HomeStackScreen]: HomeStackScreen
 } = {
   Home: "Home",
   BluetoothInfo: "BluetoothInfo",
-  ProximityTracingInfo: "ProximityTracingInfo",
+  ExposureNotificationsInfo: "ExposureNotificationsInfo",
   LocationInfo: "LocationInfo",
+  ExposureDetectionStatus: "ExposureDetectionStatus",
+  AffectedUserStack: "AffectedUserStack",
 }
 
 export type HowItWorksStackScreen =
@@ -102,26 +106,26 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
-  | "AffectedUserStack"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
   | "SelfScreenerFromExposureDetails"
   | "SelfScreenerFromHome"
+  | "CallbackStack"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
-  AffectedUserStack: "AffectedUserStack",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
   SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
   SelfScreenerFromHome: "SelfScreenerFromHome",
+  CallbackStack: "CallbackStack",
 }
 
 export type SettingsStackScreen =
@@ -205,7 +209,6 @@ export const SelfScreenerStackScreens: {
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
-  | "Callback"
   | "Connect"
   | "ExposureHistoryFlow"
   | "Modal"
@@ -217,7 +220,6 @@ export type Stack =
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
-  Callback: "Callback",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",

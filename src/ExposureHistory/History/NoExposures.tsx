@@ -115,8 +115,8 @@ const style = StyleSheet.create({
     ...Affordances.floatingContainer,
     backgroundColor: Colors.primary125,
     borderColor: Colors.primary125,
-    padding: Spacing.large,
     marginBottom: Spacing.small,
+    marginHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header5,
@@ -129,6 +129,7 @@ const style = StyleSheet.create({
   },
   card: {
     ...Affordances.floatingContainer,
+    marginHorizontal: Spacing.medium,
   },
   cardHeaderText: {
     ...Typography.header3,

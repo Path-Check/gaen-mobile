@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native"
 import COVIDDataStateTrend from "./COVIDDataStateTrend"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Affordances, Spacing } from "../styles"
+import { Affordances } from "../styles"
 
 const COVIDDataDashboard: FunctionComponent = () => {
   const { stateAbbreviation } = useConfigurationContext()
@@ -23,9 +23,6 @@ const COVIDDataDashboard: FunctionComponent = () => {
 const style = StyleSheet.create({
   dataContainer: {
     ...Affordances.floatingContainer,
-    marginTop: Spacing.large,
-    marginHorizontal: Spacing.small,
-    padding: 0,
   },
 })
 

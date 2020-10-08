@@ -41,7 +41,10 @@ const Success: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={style.contentContainer}>
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
       <Image
         source={Images.HowItWorksValueProposition}
         style={style.image}
@@ -53,6 +56,8 @@ const Success: FunctionComponent = () => {
       <Button
         label={t("callback.success_got_it")}
         onPress={handleOnPressGotIt}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
       />
     </ScrollView>
   )
@@ -76,6 +81,12 @@ const style = StyleSheet.create({
     width: "97%",
     height: 220,
     marginBottom: Spacing.huge,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    width: "100%",
   },
 })
 

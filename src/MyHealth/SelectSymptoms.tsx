@@ -240,7 +240,7 @@ const style = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
     backgroundColor: Colors.secondary10,
-    paddingHorizontal: Spacing.small,
+    paddingHorizontal: Spacing.medium,
     paddingBottom: Spacing.small,
   },
   headerText: {

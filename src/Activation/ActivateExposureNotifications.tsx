@@ -17,7 +17,7 @@ import { isPlatformiOS } from "../utils"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
-const ActivateProximityTracing: FunctionComponent = () => {
+const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -36,7 +36,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
     }
   }
 
-  const handleOnPressActivateProximityTracing = async () => {
+  const handleOnPressActivateExposureNotifications = async () => {
     await exposureNotifications.request()
     navigateToNextScreen()
   }
@@ -74,7 +74,7 @@ const ActivateProximityTracing: FunctionComponent = () => {
         </View>
         <View style={style.buttonsContainer}>
           <Button
-            onPress={handleOnPressActivateProximityTracing}
+            onPress={handleOnPressActivateExposureNotifications}
             label={t("onboarding.proximity_tracing_button")}
           />
           <TouchableOpacity
@@ -128,4 +128,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ActivateProximityTracing
+export default ActivateExposureNotifications

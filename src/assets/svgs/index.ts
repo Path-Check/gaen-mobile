@@ -15,6 +15,7 @@ import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
+import ChevronLeft from "./chevronLeft"
 import ChevronRight from "./chevronRight"
 import ChevronUp from "./chevronUp"
 import Close from "./close"
@@ -33,6 +34,7 @@ import IsolateBubbles from "./isolateBubbles"
 import LanguagesIcon from "./languagesIcon"
 import LocationPin from "./locationPin"
 import Mask from "./mask"
+import Phone from "./phone"
 import Plus from "./plus"
 import Publish from "./publish"
 import QuestionMark from "./questionMark"
@@ -70,6 +72,7 @@ export const Icons = {
   CheckboxUnchecked,
   Checkmark,
   CheckmarkCircle,
+  ChevronLeft,
   ChevronRight,
   ChevronUp,
   Close,
@@ -88,6 +91,7 @@ export const Icons = {
   LanguagesIcon,
   LocationPin,
   Mask,
+  Phone,
   Plus,
   Publish,
   QuestionMark,
