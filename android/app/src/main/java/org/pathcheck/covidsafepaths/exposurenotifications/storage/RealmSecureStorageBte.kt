@@ -130,6 +130,20 @@ object RealmSecureStorageBte {
         return somethingAdded
     }
 
+    fun insertExposure(exposure: ExposureEntity) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.insert(exposure)
+            }
+        }
+    }
+
+    fun getExposures(): List<ExposureEntity> {
+        return getRealmInstance().use {
+            it.copyFromRealm(it.where(ExposureEntity::class.java).findAll())
+        }
+    }
+
     fun resetExposures() {
         getRealmInstance().use {
             it.executeTransaction { db ->
