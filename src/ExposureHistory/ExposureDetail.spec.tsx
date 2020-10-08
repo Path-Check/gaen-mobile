@@ -142,7 +142,7 @@ describe("ExposureDetail", () => {
       const { getByLabelText } = render(
         <ConfigurationContext.Provider
           value={factories.configurationContext.build({
-            displaySelfScreener: true,
+            displaySelfAssessment: true,
           })}
         >
           <ExposureDetail />
