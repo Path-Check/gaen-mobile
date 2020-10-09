@@ -18,7 +18,7 @@ const ExposureActions: FunctionComponent = () => {
   const navigation = useNavigation()
   const {
     displayCallbackForm,
-    displaySelfScreener,
+    displaySelfAssessment,
     healthAuthorityName,
     healthAuthorityAdviceUrl,
     measurementSystem,
@@ -30,12 +30,12 @@ const ExposureActions: FunctionComponent = () => {
 
   const handleOnPressPersonalizeMyGuidance = () => {
     navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfScreenerFromExposureDetails,
+      screen: ModalStackScreens.SelfAssessmentFromExposureDetails,
     })
   }
 
   const displayNextStepsLink =
-    !displaySelfScreener && healthAuthorityAdviceUrl !== ""
+    !displaySelfAssessment && healthAuthorityAdviceUrl !== ""
 
   const stayApartRecommendationText =
     measurementSystem === "Imperial"
@@ -74,7 +74,7 @@ const ExposureActions: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        {displaySelfScreener && (
+        {displaySelfAssessment && (
           <Button
             onPress={handleOnPressPersonalizeMyGuidance}
             label={t(
@@ -118,7 +118,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const { t } = useTranslation()
 
   const handleOnPressRequestCallback = () => {
-    navigation.navigate(Stacks.Callback)
+    navigation.navigate(ModalStackScreens.CallbackStack)
   }
 
   return (

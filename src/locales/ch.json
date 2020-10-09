@@ -9,9 +9,7 @@
     "back": "Tatti",
     "close": "Huchum",
     "continue": "Kontinua",
-    "disabled": "Na para",
     "done": "Munhayan",
-    "enabled": "Na kalamten",
     "maybe_later": "Polu esta i dispues",
     "next": "I otro",
     "no_thanks": "Para hafa, si yu'us ma'asi",
@@ -110,14 +108,13 @@
       "location_disabled_error_title": "Ma autorisa gi Settings",
       "location_header": "Lokasion",
       "proximity_tracing_header": "Matattiyen i man akihut.",
-      "report_positive_result": "Ripot i resuttun i man positive siha na test.",
       "share": "Usa yan otro siha i app ya protehi hao yan i pumalu siha.",
       "share_message": "Atan esti na app {{applicationName}}, ni sina ha ayuda hit muna para i COVID 19!\n{{appDownloadLink}}",
       "tracing_off_header": "Ti kalalamten",
       "tracing_off_subheader": "Na lala i Bluetooth yan i Proximity Tracing para uchuli infotmasion yanggen guaha exposures siha",
-      "tracing_off_subheader_location": "Sotta i Bluetooth, i proximity Tracing yan i Location para u chuli infotmasion put i tinanmi siha",
       "tracing_on_header": "Lalala"
     },
+    "call_emergency_services": "Agang i Emergency na setbisio",
     "fix": "Famauleg i problema ni {{technology}}",
     "get_more_info": "Chuli mas infotmasion put {{technology}}",
     "location_info_body_1": "I Exposure Notification technology ha u'usa Bluetooth scanning  para u komprendi hafa siha na devices man hihot. Gi todo siha i telefon ni manmalalagu gi Android 6.0 pat mas taghilo para u usa Bluetooth scanning , nesisita i device location setting man 'on' para todo i apps , ahe ti para eyu ha i apps ni guaha Exposure Notifications System.",
@@ -128,9 +125,7 @@
     "proximity_tracing_info_body_2": "Put sienkasu guaha un susedi, todu infotmasion put hagu man manana.I app ti sina ha goti ni hafafa' na petsonat na infotmasion. I kosequat ha siha na IDs sina man ma usa.Man ma na suha est siha gi duranten i 14 dias.",
     "proximity_tracing_info_header": "Matatiyen i man akihut",
     "proximity_tracing_info_subheader_1": "Hafa bidada-na i Proximity Tracing?",
-    "proximity_tracing_info_subheader_2": "Kao siguro i iyo-ku infotmasion?",
-    "status_icon_active_label": "I apka na  x  gi betde na sitkulu",
-    "status_icon_inactive_label": "I apaka na  x gi agaga na sitkulu"
+    "proximity_tracing_info_subheader_2": "Kao siguro i iyo-ku infotmasion?"
   },
   "label": {
     "check": "Checkmark",
@@ -216,6 +211,7 @@
     "debug": "Dibug",
     "exposure_history": "Historian i ninayi",
     "exposures": "man ninayi  or mantinanmi",
+    "home": "Guma",
     "legal": "Legat"
   },
   "settings": {

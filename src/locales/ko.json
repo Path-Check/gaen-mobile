@@ -14,16 +14,13 @@
     "success_body": "이동경로 추적 담당자들은 귀하와 지역사회를 안전하게 지키기 위해 열심히 노력하고 있습니다. {{healthAuthorityName}}가 귀하의 전화 회신 요청을 받았습니다. 전문가가 24시간 이내에 귀하에게 연락을 드릴 것입니다.",
     "success_got_it": "알겠습니다.",
     "success_header": "귀하는 대기중입니다.",
-    "success_requested": "전화 회신 요청하셨습니다.",
-    "well_get_in_touch": "연락 드리겠습니다."
+    "success_requested": "전화 회신 요청하셨습니다."
   },
   "common": {
     "back": "뒤로 가기",
     "close": "닫기",
     "continue": "계속",
-    "disabled": "비활성화",
     "done": "완료",
-    "enabled": "활성화",
     "maybe_later": "나중에",
     "next": "다음",
     "no_thanks": "아니오 괜찮습니다.",
@@ -127,14 +124,13 @@
       "location_disabled_error_title": "설정에서 권한 부여",
       "location_header": "위치",
       "proximity_tracing_header": "근접 추적",
-      "report_positive_result": "양성 검진 결과 보고",
       "share": "앱을 공유하고 귀하와 다른 사람을 보호하십시오.",
       "share_message": "본 앱 {{applicationName}}을 확인하세요, 코로나19 확산을 방지하는데 도움이 될 수 있습니다! {{appDownloadLink}}",
       "tracing_off_header": "비활성",
       "tracing_off_subheader": "블루투스 및 근접 추적을 활성화하여 노출에 대한 정보를 얻을 수 있습니다.",
-      "tracing_off_subheader_location": "블루투스, 근접 추적 및 위치를 활성화하여 가능한 노출에 대한 정보를 얻을 수 있습니다.",
       "tracing_on_header": "활성"
     },
+    "call_emergency_services": "응급 서비스 호출",
     "fix": "{{technology}}로 문제 해결",
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
     "location_info_body_1": "노출 알림 기술은 블루투스 스캔을 사용하여 서로 가까이있는 장치를 파악합니다.  블루투스 스캔을 사용하려면 안드로이드 6.0 이상을 실행하는 모든 휴대폰은 노출 알림 시스템이 내장된 앱뿐만 아니라 모든 앱에 위치 설정을 켜야합니다.",
@@ -145,9 +141,7 @@
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_info_header": "근접 추적",
     "proximity_tracing_info_subheader_1": "근접 추적은 어떻게 작동됩니까?",
-    "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?",
-    "status_icon_active_label": "녹색 원 안의 흰색 체크",
-    "status_icon_inactive_label": "빨간색 원 안의 흰색 x"
+    "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?"
   },
   "label": {
     "check": "체크 표시",
@@ -236,15 +230,13 @@
     "debug": "디버그",
     "exposure_history": "노출 이력",
     "exposures": "노출",
+    "home": "집",
     "how_the_app_works": "어떻게 앱이 작동하나요?",
     "legal": "법률"
   },
-  "self_screener": {
+  "self_assessment": {
     "general_symptoms": {
       "other": "그 외 증상"
-    },
-    "guidance": {
-      "guidance": "지침"
     },
     "how_are_you_feeling": {
       "good": "좋습니다.",
@@ -260,11 +252,6 @@
     "share_anonymized_data_para": "귀하의 익명 데이터는 {{healthAuthorityName}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{healthAuthorityName}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다."
   },
   "symptom_checker": {
-    "find_a_test_center_nearby": "인근 코로나19 검사소 찾기",
-    "get_tested": "코로나19 검사를 받는 것을 권장드립니다.",
-    "guidance": "지침",
-    "person_finding_location_label": "휴대 전화에서 위치를 검색하는 사람.",
-    "sorry_not_feeling_well": "귀하의 컨디션이 좋지 않으시다니 걱정입니다. 귀하의 증상은 코로나19와 관련이 있을 수 있습니다.",
     "symptoms_saved": "증상이 저장되었습니다!",
     "what_symptoms": "어떤 증상이 있습니까?"
   },

@@ -1,11 +1,15 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { StatusBar, StyleSheet, View } from "react-native"
+import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 
 import { Text } from "../components"
+import { TouchableOpacity } from "react-native"
+import { useStatusBarEffect } from "../navigation"
+import { SUCCESS_RESPONSE } from "../OperationResponse"
 
 import {
   Outlines,
@@ -16,10 +20,6 @@ import {
   Colors,
   Affordances,
 } from "../styles"
-import { TouchableOpacity } from "react-native"
-import { useStatusBarEffect } from "../navigation"
-import { SUCCESS_RESPONSE } from "../OperationResponse"
-import { showMessage } from "react-native-flash-message"
 
 const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)

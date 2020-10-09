@@ -1,17 +1,33 @@
-<!-- Required: read https://github.com/Path-Check/covid-safe-paths/wiki/Pull-Request-Best-Practices for recommended best practices before opening your first pull request.  PR's raised not following those guidelines will require rework, so you might as well start off right -->
+#### Why:
 
-#### Description:
+<!-- Provide context to the reader as to why this PR is useful or needed. -->
 
-<!-- Description of what the PR does.  YOUR PR WILL BE REJECTED IF YOU DO NOT HAVE A DESCRIPTION -->
+#### This commit:
+
+<!-- Describe how this PR achieves the desired change in functionality. -->
+
+#### Screenshots:
+
+<!-- Provide screenshots or gif for visual changes -->
+
+#### How to test:
+
+<!-- Provide steps to test this PR -->
 
 #### Linked issues:
 
 <!-- Add issues here e.g.: Fixes #1234 -->
 
-#### Screenshots:
 
-<!-- If you're changing visuals, add a screenshot here -->
+---
 
-#### How to test:
+<!-- Commits, PRs, and Code Review should follow these guidelines: -->
 
-<!-- Description of how to validate or test this PR.  If it's a code change, you must describe what and how to test. -->
+<!-- How to Write a Git Commit Message -->
+<!-- https://chris.beams.io/posts/git-commit/ -->
+
+<!-- The anatomy of a perfect pull request -->
+<!-- https://medium.com/@hugooodias/the-anatomy-of-a-perfect-pull-request-567382bb6067 -->
+
+<!-- Implementing a Strong Code-Review Culture -->
+<!-- https://www.youtube.com/watch?v=PJjmw9TRB7s -->

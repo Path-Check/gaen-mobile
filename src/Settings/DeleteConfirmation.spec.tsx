@@ -1,11 +1,12 @@
 import React from "react"
+import { fireEvent, render, waitFor } from "@testing-library/react-native"
+import { showMessage } from "react-native-flash-message"
+
 import { SymptomLogContext } from "../MyHealth/SymptomLogContext"
-import { factories } from "../factories"
 import { OnboardingProvider } from "../OnboardingContext"
 import { failureResponse, SUCCESS_RESPONSE } from "../OperationResponse"
-import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import DeleteConfirmation from "./DeleteConfirmation"
-import { showMessage } from "react-native-flash-message"
+import { factories } from "../factories"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")

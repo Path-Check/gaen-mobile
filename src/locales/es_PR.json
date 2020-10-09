@@ -14,17 +14,14 @@
     "success_body": "Nuestros rastreadores de contactos están trabajando arduamente para que usted y su comunidad estén seguros. {{healthAuthorityName}} ha recibido su solicitud de devolución de llamada. Un experto se pondrá en contacto con usted dentro de 24 horas.",
     "success_got_it": "Entendido",
     "success_header": "Usted está en fila",
-    "success_requested": "Devolución de llamada solicitada",
-    "well_get_in_touch": "Nos pondremos en contacto"
+    "success_requested": "Devolución de llamada solicitada"
   },
   "common": {
     "back": "Regresar",
     "close": "Cerrar",
     "continue": "Continuar",
-    "disabled": "Desactivado",
     "done": "Finalizado",
     "edit": "Editar",
-    "enabled": "Habilitado",
     "maybe_later": "Quizás más tarde",
     "next": "Próximo",
     "no_thanks": "No, gracias",
@@ -131,14 +128,13 @@
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
       "proximity_tracing_header": "Rastreo de Proximidad",
-      "report_positive_result": "Informar resultado positivo de la prueba",
       "share": "Comparta la aplicación y ayude a protegerse a sí mismo y a los demás.",
       "share_message": "Echa un vistazo a esta aplicación {{applicationName}}, que puede ayudarnos a contener el COVID-19. {{appDownloadLink}}",
       "tracing_off_header": "Inactivo",
       "tracing_off_subheader": "Habilite Bluetooth, rastreo de proximidad y localización para obtener información sobre posibles exposiciones",
-      "tracing_off_subheader_location": "Habilite Bluetooth, rastreo de proximidad y localización para obtener información sobre posibles exposiciones",
       "tracing_on_header": "Activo"
     },
+    "call_emergency_services": "Servicios de Emergencia",
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "location_info_body_1": "La tecnología de notificación de exposición utiliza el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos utilizando Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el Sistema de Notificaciones de Exposición.",
@@ -154,9 +150,7 @@
       "unauthorized_error_message_android": "Para activar el rastreo de proximidad y las notificaciones de exposición, vaya a la aplicación de notificaciones de exposición de COVID-19 de su configuración y active la opción \"Usar notificaciones de exposición\".",
       "unauthorized_error_message_ios": "Para habilitar el rastreo de proximidad y las notificaciones de exposición, por favor vaya a la sección de Notificación de Exposición en Ajustes y Comparta la Información de Exposición y establezca la Región Activa en {{applicationName}}",
       "unauthorized_error_title": "Activar Rastreo de Proximidad"
-    },
-    "status_icon_active_label": "Una x blanca en un círculo verde",
-    "status_icon_inactive_label": "Una x blanca en un círculo rojo"
+    }
   },
   "label": {
     "check": "Marca de verificación",
@@ -245,10 +239,11 @@
     "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
     "exposures": "Exposiciones",
+    "home": "Página de Inicio",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
     "legal": "Legal"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
       "get_my_guidance": "Obtén mi orientación",
@@ -285,8 +280,6 @@
       "feeling_fine": "Me alegro de saber que te sientes bien. Usted debería monitorear sus síntomas y permanecer en casa.",
       "find_telehealth": "Buscar servicios de telemedicina",
       "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
-      "guidance": "Guía",
-      "if_symptoms_develop": "Si presenta alguno de estos síntomas o si comienza a sentirse peor, llame a su proveedor de atención médica, a su clínica o a un proveedor de telemedicina.",
       "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
       "monitor_your_symptoms": "Lamento que te sientas mal. Quédese en casa y monitorea sus síntomas. Llame a su proveedor si empeora sus síntomas.",
       "practice_social_distancing": "Practica el distanciamiento social.",
@@ -308,8 +301,6 @@
       "not_well": "Mal"
     },
     "intro": {
-      "agree_and_start_screener": "Acepte y comience el evaluador",
-      "covid19_self_screener": "Autoevaluación COVID-19",
       "find_out_how_to_care": "Averigua cómo cuidarte a ti mismo y a los demás después de un contacto cercano con alguien positivo para COVID-19",
       "if_this_is": "Si se trata de una emergencia, llame al {{emergencyPhoneNumber}}",
       "this_is_based_on": "Esto se basa en la guía más reciente del CDC y puede actualizarse con el tiempo a medida que aprendamos sobre cómo se propaga el virus y la enfermedad que causa.",
@@ -321,7 +312,6 @@
       "cerebrovascular_disease": "Enfermedad cerebrovascular o afección nerológica, como accidente cerebrovascular o demencia",
       "diabetes": "Diabetes",
       "heart_condition": "Condición cardíaca grave, como insuficiencia cardíaca, enfermedad de las arterias coronarias o miocardiopatía",
-      "high_blood_pressure": "Alta presión sanguínea",
       "kidney_disease": "Enfermedad renal crónica",
       "liver_disease": "Enfermedad del hígado",
       "lung_disease": "Enfermedad pulmonar crónica, como asma de moderada a grave, EPOC, fibrosis quística o fibrosis pulmonaria",
@@ -352,13 +342,8 @@
       "deleting_symptom_log": "Lo sentimos, no pudimos eliminar el registro de síntomas",
       "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
     },
-    "find_a_test_center_nearby": "Encuentre un centro de pruebas cercano",
-    "get_tested": "Le recomendamos que se haga la prueba de COVID-19.",
-    "guidance": "Guía",
     "log_symptoms": "Registrar los síntomas",
     "no_symptom_history": "Sin historial de síntomas",
-    "person_finding_location_label": "Una persona en su teléfono buscando una ubicación.",
-    "sorry_not_feeling_well": "Lamento que no se sienta bien.",
     "symptoms_saved": "¡Síntomas guardados!",
     "symptoms_updated": "¡Síntomas actualizados!",
     "what_symptoms": "¿Qué síntomas tienes?"

@@ -14,6 +14,7 @@ export const neutral5 = "#edeef3"
 export const neutral10 = "#e9eaf0"
 export const neutral25 = "#d8d8de"
 export const neutral30 = "#d6d6da"
+export const neutral50 = "#c5c5c9"
 export const neutral75 = "#9ba0aa"
 export const neutral100 = "#3c475b"
 export const neutral110 = "#374357"
@@ -34,9 +35,11 @@ export const secondary75 = BrandColors.secondary75
 export const secondary100 = BrandColors.secondary100
 
 // Accents
+export const danger10 = "#fff0f0"
 export const danger75 = "#ff7d7d"
 export const danger100 = "#ff5656"
-export const success100 = "#41dca4"
+export const success10 = "#f2fcf4"
+export const success100 = "#24a36c"
 export const warning25 = "#f9edcc"
 export const warning50 = "#ffdc6f"
 export const warning100 = "#ffc000"

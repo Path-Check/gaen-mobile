@@ -101,10 +101,10 @@ class BTSecureStorage: SafePathsSecureStorage {
     }
   }
 
-  func deleteFourteenDaysOldSymptomLogEntries() {
+  func deleteSymptomLogsOlderThan(_ days: Int) {
     let realm = try! Realm(configuration: realmConfig)
     try! realm.write {
-      let staleObjects = realm.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(14))
+      let staleObjects = realm.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(days))
       realm.delete(staleObjects)
     }
   }

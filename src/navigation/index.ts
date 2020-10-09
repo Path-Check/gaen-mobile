@@ -16,7 +16,7 @@ export type NavigationProp = NavigationScreenProp<
 
 export type ActivationStackScreen =
   | "AcceptTermsOfService"
-  | "ActivateProximityTracing"
+  | "ActivateExposureNotifications"
   | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
@@ -25,24 +25,30 @@ export const ActivationStackScreens: {
   [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
-  ActivateProximityTracing: "ActivateProximityTracing",
+  ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
   NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
 }
 
 export type HomeStackScreen =
-  | "Home"
+  | "AffectedUserStack"
   | "BluetoothInfo"
-  | "ProximityTracingInfo"
+  | "CovidDataDashboard"
+  | "ExposureDetectionStatus"
+  | "ExposureNotificationsInfo"
+  | "Home"
   | "LocationInfo"
 
 export const HomeStackScreens: {
   [key in HomeStackScreen]: HomeStackScreen
 } = {
-  Home: "Home",
+  AffectedUserStack: "AffectedUserStack",
   BluetoothInfo: "BluetoothInfo",
-  ProximityTracingInfo: "ProximityTracingInfo",
+  CovidDataDashboard: "CovidDataDashboard",
+  ExposureDetectionStatus: "ExposureDetectionStatus",
+  ExposureNotificationsInfo: "ExposureNotificationsInfo",
+  Home: "Home",
   LocationInfo: "LocationInfo",
 }
 
@@ -102,26 +108,26 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
-  | "AffectedUserStack"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
-  | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromHome"
+  | "SelfAssessmentFromExposureDetails"
+  | "SelfAssessmentFromHome"
+  | "CallbackStack"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
-  AffectedUserStack: "AffectedUserStack",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
-  SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromHome: "SelfScreenerFromHome",
+  SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
+  SelfAssessmentFromHome: "SelfAssessmentFromHome",
+  CallbackStack: "CallbackStack",
 }
 
 export type SettingsStackScreen =
@@ -181,8 +187,8 @@ export const MyHealthStackScreens: {
   SelectSymptoms: "SelectSymptoms",
 }
 
-export type SelfScreenerStackScreen =
-  | "SelfScreenerIntro"
+export type SelfAssessmentStackScreen =
+  | "SelfAssessmentIntro"
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
@@ -191,10 +197,10 @@ export type SelfScreenerStackScreen =
   | "AgeRange"
   | "Guidance"
 
-export const SelfScreenerStackScreens: {
-  [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
+export const SelfAssessmentStackScreens: {
+  [key in SelfAssessmentStackScreen]: SelfAssessmentStackScreen
 } = {
-  SelfScreenerIntro: "SelfScreenerIntro",
+  SelfAssessmentIntro: "SelfAssessmentIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",
@@ -207,7 +213,6 @@ export const SelfScreenerStackScreens: {
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
-  | "Callback"
   | "Connect"
   | "ExposureHistoryFlow"
   | "Modal"
@@ -219,7 +224,6 @@ export type Stack =
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
-  Callback: "Callback",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
   Modal: "Modal",

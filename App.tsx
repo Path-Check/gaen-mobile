@@ -18,6 +18,7 @@ import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/AnalyticsContext"
 import { SymptomLogProvider } from "./src/MyHealth/SymptomLogContext"
+import { CovidDataContextProvider } from "./src/CovidDataContext"
 
 Logger.start()
 
@@ -53,8 +54,10 @@ const App: FunctionComponent = () => {
                   <ExposureProvider>
                     <AnalyticsProvider>
                       <SymptomLogProvider>
-                        <MainNavigator />
-                        <FlashMessage />
+                        <CovidDataContextProvider>
+                          <MainNavigator />
+                          <FlashMessage />
+                        </CovidDataContextProvider>
                       </SymptomLogProvider>
                     </AnalyticsProvider>
                   </ExposureProvider>

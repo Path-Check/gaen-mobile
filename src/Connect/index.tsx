@@ -37,7 +37,6 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
 
@@ -83,15 +82,6 @@ const ConnectScreen: FunctionComponent = () => {
   }
 
   listItems.push(howTheAppWorks)
-
-  if (displayCallbackForm) {
-    const callbackForm: ConnectListItem = {
-      label: t("screen_titles.callback"),
-      onPress: () => navigation.navigate(Stacks.Callback),
-      icon: Icons.Headset,
-    }
-    listItems.push(callbackForm)
-  }
 
   return (
     <>
@@ -141,7 +131,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.large,
   },
   topContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
     marginBottom: Spacing.large,
   },
   headerText: {
@@ -158,7 +148,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   bottomContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
   },
   infoRowContainer: {
     marginTop: Spacing.small,

@@ -11,29 +11,42 @@
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
+    "request_a_call": "Request a call from a contact tracer",
     "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
     "success_header": "You're in the queue",
-    "success_requested": "Call Back Requested",
-    "well_get_in_touch": "We'll get in touch"
+    "success_requested": "Call Back Requested"
   },
   "common": {
     "back": "Back",
     "close": "Close",
     "continue": "Continue",
-    "disabled": "Disabled",
     "done": "Done",
     "edit": "Edit",
-    "enabled": "Enabled",
     "maybe_later": "Maybe later",
     "next": "Next",
     "no_thanks": "No thanks",
+    "off": "OFF",
+    "on": "ON",
     "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit"
+  },
+  "covid_data": {
+    "covid_stats_in": "COVID Stats in {{location}}",
+    "up_from_last_week": "Up from last week",
+    "down_from_last_week": "Down from last week",
+    "new_cases": "New Cases",
+    "cases_today": "Cases today",
+    "covid_data": "COVID Data",
+    "deaths_today": "Deaths today",
+    "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
+    "see_more": "See more",
+    "total_cases": "Total cases",
+    "total_deaths": "Total deaths"
   },
   "errors": {
     "description": "An error has occurred. Please reload the app.",
@@ -121,6 +134,12 @@
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
+  "exposure_scanning_status": {
+    "fix_this": "Fix this",
+    "learn_more": "Learn more",
+    "your_device_is_not": "Your device is not scanning for exposures. Fix the issues below to enable Exposure Detection.",
+    "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
+  },
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth_info_header": "Bluetooth",
@@ -132,34 +151,36 @@
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
       "location_header": "Location",
-      "proximity_tracing_header": "Proximity Tracing",
-      "report_positive_result": "Report positive test result",
-      "share": "Share the app and help protect yourself and others.",
+      "proximity_tracing_header": "Exposure Notifications",
+      "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
-      "take_self_assessment": "Take self assessment",
-      "tracing_off_header": "Inactive",
+      "tracing_off_header": "Exposure Detection Off",
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
-      "tracing_off_subheader_location": "Enable Bluetooth, Proximity Tracing, and Location to get info about possible exposures",
-      "tracing_on_header": "Active"
+      "tracing_on_header": "Exposure Detection On"
     },
+    "call_emergency_services": "Call Emergency Services",
+    "check_if_your_symptoms": "Enter your symtpoms and get an instant recommendation on how to stay safe.",
+    "did_you_test_positive": "Did you test positive for COVID-19?",
+    "feeling_sick": "Feeling sick?",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
+    "have_a_positive_test": "Have a positive test result code?",
+    "if_you_have_a_code": "Report your result to help keep your community safe.",
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_header": "Location",
     "location_info_subheader_1": "Why do I need my location turned on?",
     "open_settings": "Open Settings",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
-    "proximity_tracing_info_header": "Proximity Tracing",
-    "proximity_tracing_info_subheader_1": "How does Proximity Tracing work?",
+    "proximity_tracing_info_header": "Exposure Notifications",
+    "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Is my data secure?",
     "proximity_tracing": {
-      "unauthorized_error_message_android": "To enable Proximity Tracing and Exposure Notifications, please go to the COVID-19 Exposure Notifications of your Settings App and enable 'Use Exposure Notifications'",
-      "unauthorized_error_message_ios": "To enable Proximity Tracing and Exposure Notifications, please go to the Exposure Notificaiton section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
-      "unauthorized_error_title": "Enable Proximity Tracing"
+      "unauthorized_error_message_android": "To enable Exposure Notifications, go to the COVID-19 Exposure Notifications of your Settings App and enable 'Use Exposure Notifications'",
+      "unauthorized_error_message_ios": "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
+      "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "status_icon_active_label": "A white check in a green circle",
-    "status_icon_inactive_label": "A white x in a red circle"
+    "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer."
   },
   "label": {
     "check": "Checkmark",
@@ -176,7 +197,7 @@
     "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
-    "home": "Home",
+    "home": "Dashboard",
     "more_info": "More Info",
     "symptom_checker": "symptom_checker"
   },
@@ -184,9 +205,9 @@
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",
-    "app_setup_incomplete_body": "{{applicationName}} requires Proximity Tracing and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "app_setup_incomplete_body": "{{applicationName}} requires Exposure Notifications and Bluetooth permissions to know when  and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "app_setup_incomplete_header": "App Setup Incomplete",
-    "app_setup_incomplete_location_body": "{{applicationName}} requires Proximity Tracing, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
+    "app_setup_incomplete_location_body": "{{applicationName}} requires Exposure Notifications, Bluetooth, and Location permissions to know when and where you have been exposed to COVID 19. You can authorize this in Settings.",
     "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
@@ -210,16 +231,16 @@
       "body_4": "If a flagged ID matches with an ID stored on your phone, this indicates you may have encountered someone who has tested positive for COVID-19. This is how {{applicationName}} can determine if you may have been exposed to the virus.",
       "body_5": "If there’s a match, {{applicationName}} will notify you and provide further guidance from your health department.\n\nThis is how {{applicationName}} can empower you to make decisions about your health, and keep your community safe, all without knowing who you are or where you’ve been.",
       "header": "How we protect your privacy",
-      "subheader_1": "When you turn on Proximity Tracing, your phone is tagged with frequently-changing, random IDs",
-      "subheader_2": "Phones with Proximity Tracing enabled swap IDs with other devices they encounter",
+      "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random IDs",
+      "subheader_2": "Phones with Exposure Notifications enabled swap IDs with other devices they encounter",
       "subheader_3": "When a user tests positive, they can choose to anonymously share their health status",
       "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
-    "proximity_tracing_button": "Activate Proximity Tracing",
-    "proximity_tracing_header": "Activate Proximity Tracing",
+    "proximity_tracing_button": "Activate Exposure Notifications",
+    "proximity_tracing_header": "Activate Exposure Notifications",
     "proximity_tracing_subheader1": "How does it work?",
     "proximity_tracing_subheader2": "Is my data secure?",
     "proximity_tracing_subheader3": "This app does not protect you from COVID-19 infection.",
@@ -244,15 +265,17 @@
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
   },
   "screen_titles": {
-    "callback": "Request Call Back",
+    "callback": "Request call",
     "debug": "Debug",
     "exposure_history": "Exposure History",
+    "exposure_scanning": "Exposure Detection",
     "exposures": "Exposures",
+    "home": "Dashboard",
     "how_the_app_works": "How the app works",
     "legal": "Legal",
     "delete_my_data": "Delete My Data"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
       "get_my_guidance": "Get my guidance",
@@ -291,6 +314,7 @@
       "dont_use_public_transport": "Do not use public transportation or ride sharing.",
       "drink_water": "Drink plenty of water and other clear liquids to prevent fluid loss (dehydration).",
       "feeling_fine": "Good to hear you’re feeling fine. You shuold monitor your symptoms and stay at home.",
+      "find_a_test_center_nearby": "Find a test center nearby",
       "find_telehealth": "Find telehealth services",
       "follow_cdc_guidance": "If you develop symptoms, follow CDC guidance.",
       "guidance": "Your Guidance",
@@ -317,8 +341,8 @@
       "title": "How are you feeling?"
     },
     "intro": {
-      "agree_and_start_screener": "Agree and start screener",
-      "covid19_self_screener": "COVID-19 Self Screener",
+      "agree_and_start_assessment": "Agree and start assessment",
+      "covid19_self_assessment": "COVID-19 Self Assessment",
       "find_out_how_to_care": "Find out how to care for yourself and others after close contact with someone positive for COVID-19",
       "if_this_is": "If this is an emergency, please call {{emergencyPhoneNumber}}",
       "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn move about how the virus spreads and the illness it causes",
@@ -370,16 +394,12 @@
       "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
       "updating_symptoms": "Sorry, we could not update your symptoms"
     },
-    "find_a_test_center_nearby": "Find a test center nearby",
-    "get_tested": "We recommend you get tested for COVID-19.",
-    "guidance": "Guidance",
     "log_symptoms": "Log symptoms",
     "no_symptom_history": "No symptom history…",
-    "person_finding_location_label": "A person on their phone searching for a location.",
-    "sorry_not_feeling_well": "Sorry you're not feeling well.",
     "symptom_log": "Symptom Log",
     "symptoms_saved": "Symptoms saved!",
     "symptoms_updated": "Symptoms updated!",
+    "to_protect_your_privacy": "To protect your privacy, logs are stored on your device and deleted automatically after {{days}} days.",
     "what_symptoms": "What symptoms are you experiencing?"
   },
   "symptoms": {

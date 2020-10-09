@@ -4,7 +4,7 @@ import * as Colors from "./colors"
 import * as Spacing from "./spacing"
 
 export const baseBorderRadius = 8
-export const borderRadiusLarge = 20
+export const borderRadiusLarge = 16
 export const borderRadiusMax = 500
 
 export const hairline = 1
@@ -35,7 +35,7 @@ export const baseShadow: ViewStyle = {
 export const lightShadow: ViewStyle = {
   ...baseShadow,
   shadowOpacity: 0.25,
-  shadowColor: Colors.neutral75,
+  shadowColor: Colors.neutral100,
 }
 
 export const separatorLine: ViewStyle = {

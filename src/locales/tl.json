@@ -9,9 +9,7 @@
     "back": "Bumalik",
     "close": "Isara",
     "continue": "Ituloy",
-    "disabled": "Hindi pinagana",
     "done": "Tapos",
-    "enabled": "Pinagana",
     "maybe_later": "Baka Mamaya",
     "next": "Sa susunod",
     "no_thanks": "Salamat nalang",
@@ -110,14 +108,13 @@
       "location_disabled_error_title": "Pahintulutan sa Mga Setting",
       "location_header": "Lokasyon",
       "proximity_tracing_header": "Proximity Tracing",
-      "report_positive_result": "Iulat ang positibong resulta",
       "share": "Ibahagi ang app at tulungan protektahan ang iyong sarili at ang ibang tao.",
       "share_message": "Suriin ang app na{{applicationName}}, na maaring makatulong mapigilan ang pagkalat ng COVID-19!{{appDownloadLink}}",
       "tracing_off_header": "Hindi Aktibo",
       "tracing_off_subheader": "Paganahin ang Bluetooth at Proximity Tracing upang makakuha ng impormasyon tungkol sa mga posibleng pagkakalantad",
-      "tracing_off_subheader_location": "Paganahin ang Bluetooth, Proximity Tracing, at Location upang makakuha ng impormasyon tungkol sa mga posibleng pagkahawa o pagkasalamuha",
       "tracing_on_header": "Aktibo"
     },
+    "call_emergency_services": "Tumawag sa Serbisyong Pang-emergency o Emergency Services",
     "fix": "Ayusin ang mga isyu sa {{technology}}",
     "get_more_info": "Kumuha ng karagdagang impormasyon sa {{technology}}",
     "location_info_body_1": "Gumagamit ang Teknolohiya ng Abiso sa Exposure ng pag-scan ng Bluetooth upang maunawaan kung anong mga aparato ang malapit sa isa't isa. Sa lahat ng mga teleponong nagpapatakbo ng Android 6.0 at mas bago, upang magamit ang pag-scan sa Bluetooth, kailangang i-on ang setting ng lokasyon ng aparato para sa lahat ng mga app, hindi lamang mga app na binuo gamit ang Exposure Notification System.",
@@ -128,9 +125,7 @@
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
-    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?",
-    "status_icon_active_label": "Isang puting tseke sa isang berdeng bilog",
-    "status_icon_inactive_label": "Isang puting x sa isang pulang bilog"
+    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?"
   },
   "label": {
     "check": "Checkmark",
@@ -216,6 +211,7 @@
     "debug": "Pag-debug",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "exposures": "Mga Pagkakalantad",
+    "home": "Home o Umpisa",
     "legal": "Ligal"
   },
   "settings": {

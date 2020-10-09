@@ -6,8 +6,9 @@ export default Factory.define<Configuration>(() => ({
   appPackageName: "appPackageName",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
+  displayCovidData: false,
   displayMyHealth: false,
-  displaySelfScreener: false,
+  displaySelfAssessment: false,
   emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
@@ -21,4 +22,5 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityAnalyticsSiteId: null,
   measurementSystem: "Imperial",
   regionCodes: ["REGION"],
+  stateAbbreviation: null,
 }))

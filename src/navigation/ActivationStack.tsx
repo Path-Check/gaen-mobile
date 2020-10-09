@@ -12,7 +12,7 @@ import { Text } from "../components"
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
 import { useSystemServicesContext } from "../SystemServicesContext"
 
-import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
+import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
@@ -44,9 +44,9 @@ const ActivationStack: FunctionComponent = () => {
     component: AcceptTermsOfService,
   }
 
-  const activateProximityTracing: ActivationStep = {
-    screenName: ActivationStackScreens.ActivateProximityTracing,
-    component: ActivateProximityTracing,
+  const activateExposureNotifications: ActivationStep = {
+    screenName: ActivationStackScreens.ActivateExposureNotifications,
+    component: ActivateExposureNotifications,
   }
 
   const activateLocation: ActivationStep = {
@@ -60,8 +60,8 @@ const ActivationStack: FunctionComponent = () => {
   }
 
   const baseActivationSteps: ActivationStep[] = displayAcceptTermsOfService
-    ? [acceptTermsOfServiceStep, activateProximityTracing]
-    : [activateProximityTracing]
+    ? [acceptTermsOfServiceStep, activateExposureNotifications]
+    : [activateExposureNotifications]
 
   const activationStepsIOS: ActivationStep[] = [
     ...baseActivationSteps,
