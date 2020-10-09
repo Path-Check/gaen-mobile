@@ -35,7 +35,7 @@ export const baseShadow: ViewStyle = {
 export const lightShadow: ViewStyle = {
   ...baseShadow,
   shadowOpacity: 0.25,
-  shadowColor: Colors.neutral75,
+  shadowColor: Colors.neutral100,
 }
 
 export const separatorLine: ViewStyle = {
