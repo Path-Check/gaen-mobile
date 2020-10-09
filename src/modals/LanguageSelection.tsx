@@ -77,7 +77,6 @@ const LanguageSelection: FunctionComponent = () => {
           ItemSeparatorComponent={itemSeparatorComponent}
           ListFooterComponent={itemSeparatorComponent}
           alwaysBounceVertical={false}
-          style={style.languageButtonsContainer}
         />
       </View>
     </>
@@ -119,7 +118,6 @@ const style = StyleSheet.create({
     flex: 1,
     padding: Spacing.small,
   },
-  languageButtonsContainer: {},
   languageButton: {
     paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.large,
