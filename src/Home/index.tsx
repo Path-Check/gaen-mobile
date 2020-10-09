@@ -395,12 +395,12 @@ const ExpandingCircleAnimation: FunctionComponent = () => {
   )
 
   const animationTime = 1600
-  const delayTime = 800
+  const delayTime = 2000
   const initialCircleSize = 0
   const endingCircleSize = 600
   const initialTopValue = STATUS_ICON_SIZE / 2
   const endingTopValue = endingCircleSize * -0.46
-  const initialOpacity = 0.3
+  const initialOpacity = 0.2
   const endingOpacity = 0.0
 
   const sizeAnimatedValue = useRef(new Animated.Value(initialCircleSize))
