@@ -37,7 +37,6 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
 
@@ -83,15 +82,6 @@ const ConnectScreen: FunctionComponent = () => {
   }
 
   listItems.push(howTheAppWorks)
-
-  if (displayCallbackForm) {
-    const callbackForm: ConnectListItem = {
-      label: t("screen_titles.callback"),
-      onPress: () => navigation.navigate(ModalStackScreens.CallbackStack),
-      icon: Icons.Headset,
-    }
-    listItems.push(callbackForm)
-  }
 
   return (
     <>
