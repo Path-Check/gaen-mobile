@@ -12,14 +12,11 @@
     "success_body": "我們的追踪器正在努力確保您和您所在社區的安全。 {{healthAuthorityName}}已收到您的回電請求。會有專人在24小時內與您聯繫。",
     "success_got_it": "知道了",
     "success_header": "您在隊列中",
-    "success_requested": "已要求回電",
-    "well_get_in_touch": "我們聯繫您"
+    "success_requested": "已要求回電"
   },
   "common": {
     "back": "返回",
-    "disabled": "關閉",
     "edit": "編輯",
-    "enabled": "已啟用",
     "next": "下一個",
     "save": "救"
   },
@@ -46,11 +43,16 @@
     "start_header_bluetooth": "幫助抑制病毒的傳播並保護社區中的其他人"
   },
   "exposure_history": {
+    "check_for_exposures": "檢測暴露情況。",
     "exposure_detail": {
+      "2m_apart": "2公尺距離",
       "general_guidance": "一般指南",
       "personalize_my_guidance": "指引個人化",
       "schedule_callback": "安排與{{healthAuthorityName}}追蹤接觸者的人員的聯繫。",
       "speak_with_contact_tracer": "與接追蹤接觸者的人員通話"
+    },
+    "health_guidelines": {
+      "two_meters_apart": "保持2公尺距離"
     },
     "no_connectivity_message": "您沒有連接到網路！"
   },
@@ -63,10 +65,8 @@
       "location_disabled_error_title": "在設定中授權",
       "location_header": "定位",
       "proximity_tracing_header": "接觸追蹤",
-      "report_positive_result": "回報陽性測試結果",
       "share": "分享應用程式來幫助保護自己和他人。",
       "share_message": "用用看這個應用程式{{applicationName}} ，它可以幫助我們預防COVID-19！ {{appDownloadLink}}",
-      "tracing_off_subheader_location": "啟用藍牙，接近追蹤和位置以獲取可能的接觸資訊",
       "tracing_on_header": "啟動"
     },
     "fix": "透過{{technology}}解決問題",
@@ -79,9 +79,7 @@
       "unauthorized_error_message_android": "若要啟動接近追蹤和接處通知，請至\"COVID-19接觸通知設計\"，並開啟\"使用接觸通知\"",
       "unauthorized_error_message_ios": "若要啟用接近追蹤和接觸通知，請到“接觸通知設定”中的“接觸通知”部分，並將“啟動區域”設置為{{applicationName}}",
       "unauthorized_error_title": "啟用接近追蹤"
-    },
-    "status_icon_active_label": "一個綠色圓圈內的白色打勾字樣",
-    "status_icon_inactive_label": "紅色圓圈中的白色叉叉字樣"
+    }
   },
   "label": {
     "checked_checkbox": "選取的選項",
@@ -167,23 +165,67 @@
       "seek_medical_attention": "需要即刻的醫療照護",
       "urgent_medical_attention_needed": "若您需要緊急醫療服務，請致電{{emergencyPhoneNumber}}或去急診室"
     },
+    "emergency_symptoms": {
+      "are_you_experiencing": "您是否具有這些緊急症狀？"
+    },
     "general_symptoms": {
       "are_you_experiencing": "您是否具有以下症狀？",
       "other": "其他",
-      "select_any": "選擇所有符合條件的選項。"
+      "select_any": "選擇所有符合條件的選項。",
+      "vomiting_or_diarrhea": "嘔吐或腹瀉"
     },
     "guidance": {
-      "guidance": "指南"
+      "call_your_healthcare_provider": "於24小時內打電話給您的醫護人員、臨床醫師諮詢專線或是遠距醫療人員。",
+      "clean_hands": "常洗手。",
+      "cover_coughs": "咳嗽和打噴嚏時，請遮掩。",
+      "dont_go_to_work": "請勿外出上班、上學或到公共場所。",
+      "dont_use_public_transport": "請勿搭乘大眾運輸或共享乘車。",
+      "drink_water": "多喝水或其他乾淨液體，以防止液體流失(脫水)。",
+      "feeling_fine": "很高興您感覺良好，您應該監測您的症狀並待在家中。",
+      "find_telehealth": "尋找遠距醫療服務。",
+      "follow_cdc_guidance": "如果您出現症狀，請遵循CDC指示。",
+      "if_symptoms_develop": "如果您出現任何COVID-19症狀或開始感到不適，請致電您的醫療保健提供者、臨床醫生諮詢專線或遠距醫療人員。",
+      "may_help_you_feel_better": "這些步驟可能幫助您感覺好一點：",
+      "monitor_your_symptoms": "抱歉，您現在感到不適。待在家中並監測您的症狀。症狀惡化，請致電您的醫護人員並留在家中。",
+      "practice_social_distancing": "實施社交距離",
+      "protect_others": "遵循這些步驟以保護他人免於患病。",
+      "rest": "待在家中休息。",
+      "seek_medical_care": "如果您認為情況緊急，或是感覺惡化，請就醫。",
+      "stay_6_feet_away": "人潮擁擠處，與他人保持至少6英尺的距離",
+      "stay_at_home": "若非就醫，請留在家中。",
+      "stay_away_from_higher_risk_people": "盡可能避免接觸COVID-19重症的高風險者。",
+      "stay_home_14_days": "居家隔離14天。",
+      "take_care_of_yourself": "了結如何照顧自我及其他病患。",
+      "take_temperature": "每日測量體溫2次，並注意COVID-19相關症狀。",
+      "watch_for_covid_symptoms": "注意COVID-19症狀。",
+      "you_have_underlying_conditions": "很抱歉，您現在感到不適，症狀可能與COVID-19有關，且您目前的症狀有惡化的風險。",
+      "your_symptoms_might_be_related": "很抱歉，您現在感到不適，症狀可能與COVID-19有關"
     },
     "how_are_you_feeling": {
       "good": "好",
-      "not_well": "不太好"
+      "not_well": "不太好",
+      "title": "您現在感覺如何？"
     },
     "intro": {
-      "covid19_self_assessment": "COVID-19自我篩選"
+      "find_out_how_to_care": "了解在與COVID-19陽性者接觸後的自我及他人照顧方法",
+      "if_this_is": "如遇緊急狀況，請致電{{emergencyPhoneNumber}}",
+      "this_is_based_on": "這是根據CDC最新指示，可能在我們進一步了解病毒擴散原因與引起病症後隨時更新",
+      "this_is_not_intended": "這不適用於診斷或治療",
+      "you_are_a_resident": "您是{{ healthAuthorityName }}支援之社區居民"
     },
     "underlying_conditions": {
-      "do_you_have": "您是否具有以下任何條件？"
+      "diabetes": "糖尿病",
+      "do_you_have": "您是否具有以下任何狀況？",
+      "heart_condition": "嚴重的心臟病，如心臟衰竭、冠心病或心肌症",
+      "high_blood_pressure": "高血壓",
+      "kidney_disease": "慢性腎臟病",
+      "liver_disease": "肝病",
+      "lung_disease": "慢性肺病如中度至重度氣喘、慢性阻塞性肺病(COPD)、囊腫性纖維化、肺纖維化",
+      "obesity": "肥胖",
+      "pregnancy": "懷孕",
+      "select_all_or_none": "選擇所有符合條件的選項（或不選擇任何一項）",
+      "smoking": "吸菸",
+      "weakened_immune_system": "免疫系統衰弱或服用可能引起免疫抑制的藥物。"
     }
   },
   "settings": {
@@ -206,15 +248,12 @@
       "deleting_symptom_log": "抱歉，我們無法刪除您的症狀紀錄",
       "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
     },
-    "find_a_test_center_nearby": "尋找您鄰近的檢疫中心",
-    "get_tested": "我們建議您針對COVID-19做檢疫。",
-    "guidance": "指南",
     "log_symptoms": "記錄症狀",
     "no_symptom_history": "無症狀史",
-    "person_finding_location_label": "一個人在電話上搜索位置。",
-    "sorry_not_feeling_well": "很抱歉您感到不適",
+    "symptom_log": "症狀紀錄",
     "symptoms_saved": "症狀已保存！",
     "symptoms_updated": "症狀已更新！",
+    "to_protect_your_privacy": "為保護您的隱私，登入超過一日將自動取消",
     "what_symptoms": "您有甚麼症狀？"
   },
   "symptoms": {

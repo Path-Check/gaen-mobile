@@ -9,11 +9,12 @@
   "home": {
     "bluetooth": {
       "tracing_off_header": "Notificaciones desactivadas"
-    }
+    },
+    "call_emergency_services": "Servicios de Emergencia"
   },
   "label": {
     "launch_enable_notif": "Permitir notificaciones",
-    "launch_screen1_header": "Bienvenido a PathCheck",
+    "launch_screen1_header": "Bienvenido a ",
     "privacy_policy": "Política de privacidad"
   },
   "navigation": {
@@ -23,6 +24,7 @@
     "privacy_policy": "Política de privacidad"
   },
   "screen_titles": {
+    "home": "Inicio",
     "legal": "Legal"
   }
 }

@@ -11,15 +11,12 @@
     "phone_number_required": "Numéro de téléphone (obligatoire)",
     "success_got_it": "Compris",
     "success_header": "Vous êtes dans la file d'attente",
-    "success_requested": "Rappel demandé",
-    "well_get_in_touch": "Nous vous contacterons"
+    "success_requested": "Rappel demandé"
   },
   "common": {
     "back": "Précédent",
-    "disabled": "Désactivé",
     "done": "Terminé",
     "edit": "Modifier",
-    "enabled": "Activé",
     "next": "Suivant",
     "save": "Sauvegarder",
     "settings": "Ouvrir les paramètres",
@@ -81,16 +78,13 @@
       "location_disabled_error_title": "Autorisez dans les paramètres",
       "proximity_tracing_header": "Traçage de proximité",
       "tracing_off_header": "Inactif",
-      "tracing_off_subheader": "Activer le Bluetooth et la recherche de proximité pour obtenir des informations sur les expositions possibles",
-      "tracing_off_subheader_location": "Activez Bluetooth, le traçage de proximité et la localisation pour obtenir des informations sur les expositions possibles"
+      "tracing_off_subheader": "Activer le Bluetooth et la recherche de proximité pour obtenir des informations sur les expositions possibles"
     },
     "location_info_subheader_1": "Pourquoi dois-je activer la localisation ?",
     "open_settings": "Ouvrir les paramètres",
     "proximity_tracing": {
       "unauthorized_error_title": "Activer le suivi de proximité"
-    },
-    "status_icon_active_label": "Un coche dans un cercle vert",
-    "status_icon_inactive_label": "Un x blanc dans un cercle rouge"
+    }
   },
   "label": {
     "go_to_home_view": "Afficher l’accueil",
@@ -128,15 +122,13 @@
     "debug": "Debug",
     "exposure_history": "Historique des expositions",
     "exposures": "Expositions",
+    "home": "Accueil",
     "how_the_app_works": "Fonctionnement de l’application",
     "legal": "Juridique"
   },
   "self_assessment": {
     "general_symptoms": {
       "other": "Autres"
-    },
-    "guidance": {
-      "guidance": "Orientation"
     },
     "how_are_you_feeling": {
       "good": "Bien",
@@ -161,9 +153,6 @@
       "deleting_symptom_log": "Désolé, nous n'avons pas pu supprimer le journal des symptômes",
       "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
     },
-    "find_a_test_center_nearby": "Trouver un centre de test à proximité",
-    "get_tested": "Nous vous recommandons de vous faire tester pour la COVID-19.",
-    "sorry_not_feeling_well": "Désolé que vous ne vous sentiez pas bien. Revenez demain.",
     "symptoms_saved": "Symptômes sauvegardés !",
     "symptoms_updated": "Symptômes mis à jour !",
     "what_symptoms": "Quels symptômes ressentez-vous?"
