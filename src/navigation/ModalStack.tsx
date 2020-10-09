@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import {
   createStackNavigator,
   HeaderBackButton,
+  StackNavigationOptions,
   TransitionPresets,
 } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
@@ -19,6 +20,7 @@ import BluetoothInfo from "../Home/BluetoothInfo"
 import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
 import LocationInfo from "../Home/LocationInfo"
 import CallbackStack from "./CallbackStack"
+import CovidDataDashboard from "../CovidDataDashboard/CovidDataDashboard"
 
 import { Headers, Colors } from "../styles"
 
@@ -39,6 +41,11 @@ const HeaderLeft = () => {
 const Stack = createStackNavigator()
 
 const ModalStack: FunctionComponent = () => {
+  const headerOptions: StackNavigationOptions = {
+    ...Headers.headerMinimalOptions,
+    headerLeft: headerLeft,
+  }
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
@@ -92,10 +99,7 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={HomeStackScreens.ExposureDetectionStatus}
         component={ExposureDetectionStatus}
-        options={{
-          ...Headers.headerMinimalOptions,
-          headerLeft: headerLeft,
-        }}
+        options={headerOptions}
       />
       <Stack.Screen
         name={HomeStackScreens.BluetoothInfo}
@@ -115,6 +119,11 @@ const ModalStack: FunctionComponent = () => {
         options={{
           headerShown: false,
         }}
+      />
+      <Stack.Screen
+        name={HomeStackScreens.CovidDataDashboard}
+        component={CovidDataDashboard}
+        options={headerOptions}
       />
     </Stack.Navigator>
   )

@@ -36,11 +36,15 @@
     "submit": "Submit"
   },
   "covid_data": {
-    "cases_are_down": "Cases are down from last week",
-    "cases_are_up": "Cases are up from last week",
+    "covid_stats_in": "COVID Stats in {{location}}",
+    "up_from_last_week": "Up from last week",
+    "down_from_last_week": "Down from last week",
+    "new_cases": "New Cases",
     "cases_today": "Cases today",
     "covid_data": "COVID Data",
     "deaths_today": "Deaths today",
+    "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
+    "see_more": "See more",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths"
   },

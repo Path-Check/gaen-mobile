@@ -32,22 +32,24 @@ export const ActivationStackScreens: {
 }
 
 export type HomeStackScreen =
-  | "Home"
-  | "BluetoothInfo"
-  | "ExposureNotificationsInfo"
-  | "LocationInfo"
-  | "ExposureDetectionStatus"
   | "AffectedUserStack"
+  | "BluetoothInfo"
+  | "CovidDataDashboard"
+  | "ExposureDetectionStatus"
+  | "ExposureNotificationsInfo"
+  | "Home"
+  | "LocationInfo"
 
 export const HomeStackScreens: {
   [key in HomeStackScreen]: HomeStackScreen
 } = {
-  Home: "Home",
-  BluetoothInfo: "BluetoothInfo",
-  ExposureNotificationsInfo: "ExposureNotificationsInfo",
-  LocationInfo: "LocationInfo",
-  ExposureDetectionStatus: "ExposureDetectionStatus",
   AffectedUserStack: "AffectedUserStack",
+  BluetoothInfo: "BluetoothInfo",
+  CovidDataDashboard: "CovidDataDashboard",
+  ExposureDetectionStatus: "ExposureDetectionStatus",
+  ExposureNotificationsInfo: "ExposureNotificationsInfo",
+  Home: "Home",
+  LocationInfo: "LocationInfo",
 }
 
 export type HowItWorksStackScreen =
