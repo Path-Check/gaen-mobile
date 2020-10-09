@@ -36,8 +36,8 @@
     "submit": "Submit"
   },
   "covid_data": {
-    "cases_are_up": "Cases are up from last week",
     "cases_are_down": "Cases are down from last week",
+    "cases_are_up": "Cases are up from last week",
     "cases_today": "Cases today",
     "covid_data": "COVID Data",
     "deaths_today": "Deaths today",
@@ -149,7 +149,6 @@
       "proximity_tracing_header": "Exposure Notifications",
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
-      "take_self_assessment": "Take self assessment",
       "tracing_off_header": "Exposure Detection Off",
       "tracing_on_header": "Exposure Detection On"
     },
@@ -175,8 +174,6 @@
       "unauthorized_error_message_ios": "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "submit_test_result_code": "Submit test result code",
-    "talk_to_a_contact": "Talk to a contact tracer",
     "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer."
   },
   "label": {
@@ -194,7 +191,7 @@
     "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
-    "home": "Home",
+    "home": "Dashboard",
     "more_info": "More Info",
     "symptom_checker": "symptom_checker"
   },
@@ -267,7 +264,7 @@
     "exposure_history": "Exposure History",
     "exposure_scanning": "Exposure Detection",
     "exposures": "Exposures",
-    "home": "Home",
+    "home": "Dashboard",
     "how_the_app_works": "How the app works",
     "legal": "Legal"
   },

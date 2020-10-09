@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, View, TouchableOpacity } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, Text, StatusBar } from "../components"
+import { Button, Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Colors, Iconography, Layout, Spacing, Typography } from "../styles"
-import { Icons } from "../assets"
+import { Colors, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -24,64 +22,41 @@ const SelfAssessmentIntro: FunctionComponent = () => {
     navigation.navigate(SelfAssessmentStackScreens.HowAreYouFeeling)
   }
 
-  const handleOnPressCancel = () => {
-    navigation.goBack()
-  }
-
   return (
-    <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        <View style={style.cancelButtonContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressCancel}
-            accessible
-            accessibilityLabel={t("export.code_input_button_cancel")}
-          >
-            <View style={style.cancelButtonInnerContainer}>
-              <SvgXml
-                xml={Icons.X}
-                fill={Colors.black}
-                width={Iconography.xxSmall}
-                height={Iconography.xxSmall}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <Text style={style.headerText}>
-          {t("self_assessment.intro.covid19_self_assessment")}
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      <Text style={style.headerText}>
+        {t("self_assessment.intro.covid19_self_assessment")}
+      </Text>
+      <Text style={style.subheaderText}>
+        {t("self_assessment.intro.find_out_how_to_care")}
+      </Text>
+      <View style={style.bulletListContainer}>
+        <Text style={style.bulletText}>
+          {t("self_assessment.intro.this_is_not_intended")}
         </Text>
-        <Text style={style.subheaderText}>
-          {t("self_assessment.intro.find_out_how_to_care")}
+        <Text style={style.bulletText}>
+          {t("self_assessment.intro.you_are_a_resident", {
+            healthAuthorityName,
+          })}
         </Text>
-        <View style={style.bulletListContainer}>
-          <Text style={style.bulletText}>
-            {t("self_assessment.intro.this_is_not_intended")}
-          </Text>
-          <Text style={style.bulletText}>
-            {t("self_assessment.intro.you_are_a_resident", {
-              healthAuthorityName,
-            })}
-          </Text>
-          <Text style={style.bulletText}>
-            {t("self_assessment.intro.this_is_based_on")}
-          </Text>
-          <Text style={{ ...style.bulletText, ...style.emergencyText }}>
-            {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
-          </Text>
-        </View>
-        <Button
-          onPress={handleOnPressStartAssessment}
-          label={t("self_assessment.intro.agree_and_start_assessment")}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
-      </ScrollView>
-    </>
+        <Text style={style.bulletText}>
+          {t("self_assessment.intro.this_is_based_on")}
+        </Text>
+        <Text style={{ ...style.bulletText, ...style.emergencyText }}>
+          {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
+        </Text>
+      </View>
+      <Button
+        onPress={handleOnPressStartAssessment}
+        label={t("self_assessment.intro.agree_and_start_assessment")}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
+      />
+    </ScrollView>
   )
 }
 
@@ -95,15 +70,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: Spacing.xLarge,
     paddingVertical: Spacing.xxxLarge,
-  },
-  cancelButtonContainer: {
-    position: "absolute",
-    top: Spacing.medium,
-    right: Spacing.medium,
-    zIndex: Layout.zLevel1,
-  },
-  cancelButtonInnerContainer: {
-    padding: Spacing.medium,
   },
   headerText: {
     ...Typography.header1,

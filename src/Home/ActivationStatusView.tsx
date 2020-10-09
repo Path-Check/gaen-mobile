@@ -123,7 +123,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
 const style = StyleSheet.create({
   outerContainer: {
     ...Affordances.floatingContainer,
-    borderWidth: Outlines.hairline,
+    borderWidth: Outlines.thin,
   },
   topContainer: {
     flexDirection: "row",

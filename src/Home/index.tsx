@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
+  Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -26,13 +27,13 @@ import {
   Stacks,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { StatusBar, Text, Button } from "../components"
+import { StatusBar, Text } from "../components"
 
 import ShareLink from "./ShareLink"
 import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
-import { Icons } from "../assets"
+import { Icons, Images } from "../assets"
 import {
   Layout,
   Spacing,
@@ -45,6 +46,7 @@ import {
 } from "../styles"
 
 const STATUS_ICON_SIZE = Iconography.small
+const IMAGE_HEIGHT = 170
 
 const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -57,6 +59,19 @@ const Home: FunctionComponent = () => {
     displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
+
+  const ChevronRightIcon = () => {
+    return (
+      <View style={style.chevronRightIcon}>
+        <SvgXml
+          xml={Icons.ChevronRight}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+          fill={Colors.neutral75}
+        />
+      </View>
+    )
+  }
 
   const ExposureDetectionStatus: FunctionComponent = () => {
     const handleOnPressExposureDetectionStatus = () => {
@@ -132,21 +147,24 @@ const Home: FunctionComponent = () => {
     }
 
     return (
-      <View style={style.floatingContainer}>
+      <TouchableOpacity
+        onPress={handleOnPressTalkToContactTracer}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.HowItWorksValueProposition}
+          style={style.image}
+          width={200}
+          height={IMAGE_HEIGHT}
+        />
         <Text style={style.sectionHeaderText}>
           {t("home.did_you_test_positive")}
         </Text>
         <Text style={style.sectionBodyText}>
           {t("home.to_submit_your_test")}
         </Text>
-        <Button
-          onPress={handleOnPressTalkToContactTracer}
-          label={t("home.talk_to_a_contact")}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-          hasRightArrow
-        />
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -158,21 +176,24 @@ const Home: FunctionComponent = () => {
     }
 
     return (
-      <View style={style.floatingContainer}>
+      <TouchableOpacity
+        onPress={handleOnPressReportTestResult}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.ProtectPrivacySubmitKeys}
+          style={style.image}
+          width={130}
+          height={IMAGE_HEIGHT}
+        />
         <Text style={style.sectionHeaderText}>
           {t("home.have_a_positive_test")}
         </Text>
         <Text style={style.sectionBodyText}>
           {t("home.if_you_have_a_code")}
         </Text>
-        <Button
-          onPress={handleOnPressReportTestResult}
-          label={t("home.submit_test_result_code")}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-          hasRightArrow
-        />
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -184,18 +205,22 @@ const Home: FunctionComponent = () => {
     }
 
     return (
-      <View style={style.floatingContainer}>
+      <TouchableOpacity
+        onPress={handleOnPressTakeSelfAssessment}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.SelfAssessmentIntro}
+          style={style.image}
+          width={150}
+          height={IMAGE_HEIGHT}
+        />
         <Text style={style.sectionHeaderText}>{t("home.feeling_sick")}</Text>
         <Text style={style.sectionBodyText}>
           {t("home.check_if_your_symptoms")}
         </Text>
-        <Button
-          onPress={handleOnPressTakeSelfAssessment}
-          label={t("home.bluetooth.take_self_assessment")}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -328,20 +353,25 @@ const style = StyleSheet.create({
   floatingContainer: {
     ...Affordances.floatingContainer,
   },
+  chevronRightIcon: {
+    position: "absolute",
+    top: Spacing.large,
+    right: Spacing.large,
+  },
+  image: {
+    resizeMode: "contain",
+    marginBottom: Spacing.xSmall,
+  },
   sectionHeaderText: {
     ...Typography.header3,
+    color: Colors.black,
     marginBottom: Spacing.xxSmall,
   },
   sectionBodyText: {
-    ...Typography.body1,
-    marginBottom: Spacing.medium,
-  },
-  button: {
-    width: "100%",
-  },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
+    ...Typography.header4,
+    ...Typography.base,
+    color: Colors.neutral100,
+    marginBottom: Spacing.small,
   },
   emergencyButtonContainer: {
     ...Buttons.primary,
@@ -365,12 +395,12 @@ const ExpandingCircleAnimation: FunctionComponent = () => {
   )
 
   const animationTime = 1600
-  const delayTime = 800
+  const delayTime = 2000
   const initialCircleSize = 0
   const endingCircleSize = 600
   const initialTopValue = STATUS_ICON_SIZE / 2
   const endingTopValue = endingCircleSize * -0.46
-  const initialOpacity = 0.3
+  const initialOpacity = 0.2
   const endingOpacity = 0.0
 
   const sizeAnimatedValue = useRef(new Animated.Value(initialCircleSize))
