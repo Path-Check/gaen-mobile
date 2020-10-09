@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { Image, ScrollView, StyleSheet, View } from "react-native"
+import { Linking, Image, ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { Button, Text } from "../components"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks } from "../navigation"
 
@@ -21,6 +22,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { symptomGroup } = useSelfAssessmentContext()
+  const { findATestCenterUrl } = useConfigurationContext()
 
   if (symptomGroup === null) {
     return null
@@ -181,6 +183,14 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     }
   }
 
+  const displayFindATestCenter = Boolean(findATestCenterUrl)
+
+  const handleOnPressFindTestCenter = () => {
+    if (findATestCenterUrl) {
+      Linking.openURL(findATestCenterUrl)
+    }
+  }
+
   return (
     <ScrollView
       style={style.container}
@@ -200,12 +210,22 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
       <View style={style.bulletListContainer}>
         {instructionsForSymptomGroup(symptomGroup)}
       </View>
-      <Button
-        onPress={handleOnPressDone}
-        label={t("common.done")}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-      />
+      {displayFindATestCenter ? (
+        <Button
+          label={t("self_assessment.guidance.find_a_test_center_nearby")}
+          onPress={handleOnPressFindTestCenter}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasRightArrow
+        />
+      ) : (
+        <Button
+          onPress={handleOnPressDone}
+          label={t("common.done")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+        />
+      )}
     </ScrollView>
   )
 }
