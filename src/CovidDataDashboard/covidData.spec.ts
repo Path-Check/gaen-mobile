@@ -3,10 +3,10 @@ import { calculateCasesPercentageTrend } from "./covidData"
 
 describe("calculateCasesPercentageTrend", () => {
   it("returns a positive percentage trend when the cases are growing", () => {
-    const todayData = factories.covidData.build({
+    const trendReferenceData = factories.covidData.build({
       peoplePositiveNewCasesCt: 10,
     })
-    const pastData = [
+    const collectionForTrend = [
       factories.covidData.build({
         peoplePositiveNewCasesCt: 6,
       }),
@@ -15,16 +15,16 @@ describe("calculateCasesPercentageTrend", () => {
       }),
     ]
 
-    const cumulativeData = [todayData, ...pastData]
-
-    expect(calculateCasesPercentageTrend(cumulativeData)).toEqual(40)
+    expect(
+      calculateCasesPercentageTrend(trendReferenceData, collectionForTrend),
+    ).toEqual(40)
   })
 
   it("returns a negative percentage trend when the cases are shrinking", () => {
-    const todayData = factories.covidData.build({
+    const trendReferenceData = factories.covidData.build({
       peoplePositiveNewCasesCt: 6,
     })
-    const pastData = [
+    const collectionForTrend = [
       factories.covidData.build({
         peoplePositiveNewCasesCt: 10,
       }),
@@ -33,8 +33,8 @@ describe("calculateCasesPercentageTrend", () => {
       }),
     ]
 
-    const cumulativeData = [todayData, ...pastData]
-
-    expect(calculateCasesPercentageTrend(cumulativeData)).toEqual(-67)
+    expect(
+      calculateCasesPercentageTrend(trendReferenceData, collectionForTrend),
+    ).toEqual(-67)
   })
 })

@@ -42,6 +42,7 @@
     "down_from_last_week": "Down from last week",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
     "new_cases": "New Cases",
+    "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "see_more": "See more",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths",
