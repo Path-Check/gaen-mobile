@@ -11,6 +11,7 @@ import AffectedUserStack from "../AffectedUserFlow/"
 import HowItWorksStack from "./HowItWorksStack"
 import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
 import SelfScreenerStack from "./SelfScreenerStack"
+import DeleteConfirmation from "../Settings/DeleteConfirmation"
 
 const Stack = createStackNavigator()
 

@@ -127,6 +127,7 @@ export const ModalStackScreens: {
 export type SettingsStackScreen =
   | "Settings"
   | "Legal"
+  | "DeleteConfirmation"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -137,6 +138,7 @@ export const SettingsStackScreens: {
 } = {
   Settings: "Settings",
   Legal: "Legal",
+  DeleteConfirmation: "DeleteConfirmation",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
