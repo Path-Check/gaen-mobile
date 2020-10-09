@@ -35,7 +35,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={icon}
-        fill={focused ? Colors.black : Colors.neutral50}
+        fill={focused ? Colors.primary100 : Colors.neutral50}
         accessible
         accessibilityLabel={label}
         width={size}
