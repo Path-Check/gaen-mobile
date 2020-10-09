@@ -30,12 +30,13 @@
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
       "tracing_off_subheader": "Włącz powiadomienia o narażeniu, aby otrzymywać informacje o możliwych ekspozycjach"
     },
+    "call_emergency_services": "Służby ratunkowe",
     "open_settings": "Otwórz ustawienia"
   },
   "label": {
     "launch_enable_notif": "Włącz powiadomienia",
     "launch_get_started": "Zaczynamy",
-    "launch_screen1_header": "Witamy w PathCheck",
+    "launch_screen1_header": "Witamy w ",
     "privacy_policy": "Polityka prywatności"
   },
   "navigation": {
@@ -48,6 +49,7 @@
   },
   "screen_titles": {
     "exposure_history": "Historia Ekspozycji",
+    "home": "Strona główna",
     "legal": "Informacje prawne"
   }
 }
