@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
-import { useNavigation } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
+import { createStackNavigator } from "@react-navigation/stack"
 
 import { AffectedUserProvider } from "./AffectedUserContext"
 import Start from "./Start"
@@ -12,25 +10,12 @@ import {
   AffectedUserFlowStackScreen,
   AffectedUserFlowStackScreens,
 } from "../navigation"
+import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
-import { Colors, Headers } from "../styles"
+import { Headers } from "../styles"
 
 type AffectedUserFlowStackParams = {
   [key in AffectedUserFlowStackScreen]: undefined
-}
-
-const headerLeft = () => <HeaderLeft />
-const HeaderLeft = () => {
-  const navigation = useNavigation()
-  const { t } = useTranslation()
-
-  return (
-    <HeaderBackButton
-      tintColor={Colors.primary150}
-      onPress={() => navigation.goBack()}
-      label={t("screen_titles.home")}
-    />
-  )
 }
 
 const Stack = createStackNavigator<AffectedUserFlowStackParams>()
@@ -42,7 +27,10 @@ const AffectedUserStack: FunctionComponent = () => {
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserStart}
           component={Start}
-          options={{ ...Headers.headerMinimalOptions, headerLeft: headerLeft }}
+          options={{
+            ...Headers.headerMinimalOptions,
+            headerLeft: applyHeaderLeftBackButton(),
+          }}
         />
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserCodeInput}

@@ -7,7 +7,6 @@ import env from "react-native-config"
 import { getLocalNames } from "../locales/languages"
 import {
   useStatusBarEffect,
-  Stacks,
   ModalStackScreens,
   SettingsStackScreens,
 } from "../navigation"
@@ -36,15 +35,11 @@ const Settings: FunctionComponent = () => {
   const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.LanguageSelection,
-    })
+    navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.HowItWorksReviewFromSettings,
-    })
+    navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings)
   }
 
   const selectLanguage: SettingsListItem = {

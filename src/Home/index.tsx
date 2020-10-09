@@ -75,9 +75,7 @@ const Home: FunctionComponent = () => {
 
   const ExposureDetectionStatus: FunctionComponent = () => {
     const handleOnPressExposureDetectionStatus = () => {
-      navigation.navigate(Stacks.Modal, {
-        screen: HomeStackScreens.ExposureDetectionStatus,
-      })
+      navigation.navigate(HomeStackScreens.ExposureDetectionStatus)
     }
 
     const statusBackgroundColor = exposureDetectionStatus
@@ -141,9 +139,7 @@ const Home: FunctionComponent = () => {
   }
   const TalkToContactTracer: FunctionComponent = () => {
     const handleOnPressTalkToContactTracer = () => {
-      navigation.navigate(Stacks.Modal, {
-        screen: ModalStackScreens.CallbackStack,
-      })
+      navigation.navigate(ModalStackScreens.CallbackStack)
     }
 
     return (
@@ -170,9 +166,7 @@ const Home: FunctionComponent = () => {
 
   const ReportTestResult: FunctionComponent = () => {
     const handleOnPressReportTestResult = () => {
-      navigation.navigate(Stacks.Modal, {
-        screen: HomeStackScreens.AffectedUserStack,
-      })
+      navigation.navigate(HomeStackScreens.AffectedUserStack)
     }
 
     return (
@@ -199,9 +193,7 @@ const Home: FunctionComponent = () => {
 
   const SelfAssessment: FunctionComponent = () => {
     const handleOnPressTakeSelfAssessment = () => {
-      navigation.navigate(Stacks.Modal, {
-        screen: ModalStackScreens.SelfAssessmentFromHome,
-      })
+      navigation.navigate(ModalStackScreens.SelfAssessmentFromHome)
     }
 
     return (

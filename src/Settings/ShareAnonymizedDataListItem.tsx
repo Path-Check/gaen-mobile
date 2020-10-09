@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 import { useAnalyticsContext } from "../AnalyticsContext"
 import { Text } from "../components"
-import { ModalStackScreens, Stacks } from "../navigation"
+import { ModalStackScreens } from "../navigation"
 import { Icons } from "../assets"
 import { Colors, Iconography, Typography, Spacing } from "../styles"
 
@@ -16,9 +16,7 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
   const { userConsentedToAnalytics } = useAnalyticsContext()
 
   const onPressShareAnonymizedData = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.AnonymizedDataConsent,
-    })
+    navigation.navigate(ModalStackScreens.AnonymizedDataConsent)
   }
 
   const rightIconColor = userConsentedToAnalytics

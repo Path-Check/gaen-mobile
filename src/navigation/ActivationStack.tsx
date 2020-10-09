@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import { Platform, TouchableOpacity, StyleSheet, View } from "react-native"
 import {
   createStackNavigator,
+  HeaderStyleInterpolators,
   StackNavigationOptions,
 } from "@react-navigation/stack"
 import { SvgXml } from "react-native-svg"
@@ -131,6 +132,7 @@ const ActivationStack: FunctionComponent = () => {
     headerTitle: t("onboarding.activation_header_title"),
     headerTitleStyle: style.headerTitle,
     gestureEnabled: false,
+    headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
   }
 
   return (
