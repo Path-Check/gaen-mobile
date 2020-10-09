@@ -194,7 +194,7 @@
     "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
-    "home": "Home",
+    "home": "Dashboard",
     "more_info": "More Info",
     "symptom_checker": "symptom_checker"
   },
@@ -267,7 +267,7 @@
     "exposure_history": "Exposure History",
     "exposure_scanning": "Exposure Detection",
     "exposures": "Exposures",
-    "home": "Home",
+    "home": "Dashboard",
     "how_the_app_works": "How the app works",
     "legal": "Legal"
   },

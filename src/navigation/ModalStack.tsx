@@ -20,7 +20,7 @@ import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
 import LocationInfo from "../Home/LocationInfo"
 import CallbackStack from "./CallbackStack"
 
-import { Colors } from "../styles"
+import { Headers, Colors } from "../styles"
 
 const headerLeft = () => <HeaderLeft />
 const HeaderLeft = () => {
@@ -54,7 +54,6 @@ const ModalStack: FunctionComponent = () => {
       <Stack.Screen
         name={Stacks.AffectedUserStack}
         component={AffectedUserStack}
-        options={TransitionPresets.ModalTransition}
       />
       <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
         {(props) => (
@@ -83,10 +82,7 @@ const ModalStack: FunctionComponent = () => {
           )
         }}
       </Stack.Screen>
-      <Stack.Screen
-        name={ModalStackScreens.SelfAssessmentFromHome}
-        options={TransitionPresets.ModalTransition}
-      >
+      <Stack.Screen name={ModalStackScreens.SelfAssessmentFromHome}>
         {(props) => {
           return (
             <SelfAssessmentStack {...props} destinationOnCancel={Stacks.Home} />
@@ -97,10 +93,8 @@ const ModalStack: FunctionComponent = () => {
         name={HomeStackScreens.ExposureDetectionStatus}
         component={ExposureDetectionStatus}
         options={{
-          title: "",
-          headerShown: true,
+          ...Headers.headerMinimalOptions,
           headerLeft: headerLeft,
-          headerStyle: { shadowColor: Colors.transparent },
         }}
       />
       <Stack.Screen

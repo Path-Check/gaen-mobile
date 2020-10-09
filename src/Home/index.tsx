@@ -27,7 +27,7 @@ import {
   Stacks,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { StatusBar, Text, Button } from "../components"
+import { StatusBar, Text } from "../components"
 
 import ShareLink from "./ShareLink"
 import COVIDDataDashboard from "../COVIDDataDashboard/COVIDDataDashboard"
