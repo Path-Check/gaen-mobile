@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { calculateCasesPercentageTrend } from "./covidData"
 import { CovidData } from "./covidDataAPI"
-import { HomeStackScreens, Stacks } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 
 import { Text } from "../components"
 import { Icons } from "../assets"
@@ -29,9 +29,7 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
   >(null)
 
   const handleOnPressDataClip = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: HomeStackScreens.CovidDataDashboard,
-    })
+    navigation.navigate(HomeStackScreens.CovidDataDashboard)
   }
 
   useEffect(() => {
