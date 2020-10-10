@@ -63,7 +63,7 @@ describe("DeleteConfirmation", () => {
     })
   })
 
-  describe("when data deletion is NOT successful", () => {
+  describe("when data deletion fails", () => {
     it("presents an error message", async () => {
       const showMessageSpy = showMessage as jest.Mock
       const deleteAllLogEntriesSpy = jest.fn()
@@ -87,7 +87,7 @@ describe("DeleteConfirmation", () => {
       await waitFor(() => {
         expect(showMessageSpy).toHaveBeenCalledWith(
           expect.objectContaining({
-            message: "Sorry, an error occured attempting to delete data",
+            message: "Sorry, we could not delete your data",
           }),
         )
       })

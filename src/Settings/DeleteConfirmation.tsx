@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import { StatusBar, StyleSheet, View } from "react-native"
+import { StatusBar, StyleSheet, View, ScrollView } from "react-native"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
@@ -38,7 +38,7 @@ const DeleteConfirmation: FunctionComponent = () => {
     } else {
       showMessage({
         message: t("settings.errors.deleting_data"),
-        ...Affordances.successFlashMessageOptions,
+        ...Affordances.errorFlashMessageOptions,
       })
     }
   }
@@ -46,18 +46,20 @@ const DeleteConfirmation: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
       <View style={style.container}>
-        <View style={style.headerContainer}>
-          <Text style={style.headerText}>{t("settings.delete_my_data")}</Text>
-        </View>
-        <View style={style.bodyContainer}>
-          <Text style={style.bodyText}>
-            {t("settings.delete_data_disclosure1")}
-          </Text>
-          <Text style={style.subheaderText}>{"Note"}</Text>
-          <Text style={style.bodyText}>
-            {t("settings.delete_data_disclosure2")}
-          </Text>
-        </View>
+        <ScrollView>
+          <View style={style.headerContainer}>
+            <Text style={style.headerText}>{t("settings.delete_my_data")}</Text>
+          </View>
+          <View style={style.bodyContainer}>
+            <Text style={style.bodyText}>
+              {t("settings.delete_data_disclosure1")}
+            </Text>
+            <Text style={style.subheaderText}>{"Note"}</Text>
+            <Text style={style.bodyText}>
+              {t("settings.delete_data_disclosure2")}
+            </Text>
+          </View>
+        </ScrollView>
         <View style={style.bottomActionsContainer}>
           <TouchableOpacity
             onPress={handleOnPressDeleteAllData}

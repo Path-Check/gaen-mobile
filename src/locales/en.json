@@ -383,7 +383,7 @@
     "data_deleted": "Data deleted",
     "delete_confirmation_header": "Are you sure?",
     "errors": {
-      "deleting_data": "Sorry, an error occured attempting to delete data"
+      "deleting_data": "Sorry, we could not delete your data"
     }
   },
   "symptom_checker": {

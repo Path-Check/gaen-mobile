@@ -20,20 +20,24 @@ import DeleteConfirmation from "../Settings/DeleteConfirmation"
 const Stack = createStackNavigator()
 
 const headerLeftDark = () => {
-  return <HeaderLeft color={Colors.white} />
+  return <HeaderLeft tintColor={Colors.white} />
 }
 
 const headerLeftLight = () => {
-  return <HeaderLeft color={Colors.primaryDarkBackround} />
+  return <HeaderLeft tintColor={Colors.primaryDarkBackround} />
 }
 
-const HeaderLeft = ({ color = Colors.white }) => {
+interface HeaderLeftProps {
+  tintColor: string
+}
+
+const HeaderLeft: FunctionComponent<HeaderLeftProps> = ({ tintColor }) => {
   const navigation = useNavigation()
 
   return (
     <HeaderBackButton
       labelVisible={false}
-      tintColor={color}
+      tintColor={tintColor}
       onPress={() => navigation.goBack()}
     />
   )
