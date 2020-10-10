@@ -9,7 +9,7 @@ jest.mock("@react-navigation/native")
 
 describe("Settings", () => {
   describe('when the user taps "Delete All Data"', () => {
-    it("presents a confirmation modal", () => {
+    it("presents a confirmation screen", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const { getByLabelText } = render(<Settings />)
