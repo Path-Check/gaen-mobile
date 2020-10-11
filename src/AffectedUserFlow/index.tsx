@@ -37,7 +37,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={CodeInput}
           options={{
             ...Headers.headerMinimalOptions,
-            headerLeft: () => applyHeaderLeftBackButton(),
+            headerLeft: applyHeaderLeftBackButton(),
           }}
         />
         <Stack.Screen
@@ -45,7 +45,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={PublishConsent}
           options={{
             ...Headers.headerMinimalOptions,
-            headerLeft: () => applyHeaderLeftBackButton(),
+            headerLeft: applyHeaderLeftBackButton(),
           }}
         />
         <Stack.Screen

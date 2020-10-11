@@ -18,7 +18,6 @@ const HeaderLeftBackButton = () => {
     <HeaderBackButton
       tintColor={Colors.primary150}
       onPress={() => navigation.goBack()}
-      labelVisible={false}
     />
   )
 }
