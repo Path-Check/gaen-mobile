@@ -17,13 +17,13 @@ export type CovidData = {
   peopleDeathNewCt: number
 }
 
-const toCovidData = ( jsonResponse: Record<string, string>[] ): CovidData[] => { 
-  return jsonResponse.map( ( json ) => {
+const toCovidData = (jsonResponse: Record<string, string>[]): CovidData[] => {
+  return jsonResponse.map((json) => {
     return {
-      peoplePositiveNewCasesCt: parseInt( json["peoplePositiveNewCasesCt"] ),
-      peoplePositiveCasesCt: parseInt( json["peoplePositiveCasesCt"] ),
-      peopleDeathNewCt: parseInt( json["peopleDeathNewCt"] ),
-      peopleDeathCt: parseInt( json["peopleDeathCt"] ),
+      peoplePositiveNewCasesCt: parseInt(json["peoplePositiveNewCasesCt"]),
+      peoplePositiveCasesCt: parseInt(json["peoplePositiveCasesCt"]),
+      peopleDeathNewCt: parseInt(json["peopleDeathNewCt"]),
+      peopleDeathCt: parseInt(json["peopleDeathCt"]),
     }
   })
 }
