@@ -35,10 +35,18 @@ const AffectedUserStack: FunctionComponent = () => {
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserCodeInput}
           component={CodeInput}
+          options={{
+            ...Headers.headerMinimalOptions,
+            headerLeft: applyHeaderLeftBackButton(),
+          }}
         />
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserPublishConsent}
           component={PublishConsent}
+          options={{
+            ...Headers.headerMinimalOptions,
+            headerLeft: applyHeaderLeftBackButton(),
+          }}
         />
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserComplete}

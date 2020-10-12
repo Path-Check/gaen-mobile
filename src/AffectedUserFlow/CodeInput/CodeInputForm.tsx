@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  TouchableOpacity,
   TextInput,
   View,
   Keyboard,
@@ -11,7 +10,6 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
 
 import { Text, Button, StatusBar } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
@@ -19,12 +17,10 @@ import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
 import {
-  Stacks,
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 
-import { Icons } from "../../assets"
 import {
   Spacing,
   Layout,
@@ -32,7 +28,6 @@ import {
   Colors,
   Outlines,
   Typography,
-  Iconography,
 } from "../../styles"
 import Logger from "../../logger"
 
@@ -68,14 +63,6 @@ const CodeInputForm: FunctionComponent = () => {
 
   const handleOnToggleFocus = () => {
     setIsFocused(!isFocused)
-  }
-
-  const handleOnPressBack = () => {
-    navigation.goBack()
-  }
-
-  const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.Home)
   }
 
   const handleOnPressSubmit = async () => {
@@ -172,38 +159,6 @@ const CodeInputForm: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-code-input-form"}
       >
-        <View style={style.backButtonContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressBack}
-            accessible
-            accessibilityLabel={t("export.code_input_button_back")}
-          >
-            <View style={style.backButtonInnerContainer}>
-              <SvgXml
-                xml={Icons.ArrowLeft}
-                fill={Colors.black}
-                width={Iconography.xxSmall}
-                height={Iconography.xxSmall}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={style.cancelButtonContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressCancel}
-            accessible
-            accessibilityLabel={t("export.code_input_button_cancel")}
-          >
-            <View style={style.cancelButtonInnerContainer}>
-              <SvgXml
-                xml={Icons.X}
-                fill={Colors.black}
-                width={Iconography.xxSmall}
-                height={Iconography.xxSmall}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
         <View style={style.headerContainer}>
           <Text style={style.header}>
             {t("export.code_input_title_bluetooth")}
@@ -261,25 +216,8 @@ const indicatorWidth = 120
 const style = StyleSheet.create({
   contentContainer: {
     backgroundColor: Colors.primaryLightBackground,
-    paddingTop: 110,
     paddingBottom: Spacing.xxxHuge,
     paddingHorizontal: Spacing.medium,
-  },
-  backButtonContainer: {
-    position: "absolute",
-    top: Layout.oneTwentiethHeight,
-    left: 0,
-  },
-  backButtonInnerContainer: {
-    padding: Spacing.medium,
-  },
-  cancelButtonContainer: {
-    position: "absolute",
-    top: Layout.oneTwentiethHeight,
-    right: 0,
-  },
-  cancelButtonInnerContainer: {
-    padding: Spacing.medium,
   },
   headerContainer: {
     marginBottom: Spacing.xxLarge,
