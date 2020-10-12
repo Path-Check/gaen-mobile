@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import {
   createStackNavigator,
-  HeaderBackButton,
   HeaderStyleInterpolators,
   StackNavigationOptions,
 } from "@react-navigation/stack"
@@ -21,25 +20,12 @@ import GeneralSymptoms from "../SelfAssessment/GeneralSymptoms"
 import UnderlyingConditions from "../SelfAssessment/UnderlyingConditions"
 import AgeRangeQuestion from "../SelfAssessment/AgeRangeQuestion"
 import Guidance from "../SelfAssessment/Guidance"
+import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Icons } from "../assets"
 import { Headers, Colors, Iconography, Spacing } from "../styles"
 
 const Stack = createStackNavigator()
-
-const headerLeft = () => <HeaderLeft />
-const HeaderLeft = () => {
-  const navigation = useNavigation()
-  const { t } = useTranslation()
-
-  return (
-    <HeaderBackButton
-      tintColor={Colors.primary150}
-      onPress={() => navigation.goBack()}
-      label={t("screen_titles.home")}
-    />
-  )
-}
 
 const backButton = () => <BackButton />
 const BackButton = () => {
@@ -108,13 +94,13 @@ const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
 
   return (
     <SelfAssessmentProvider>
-      <Stack.Navigator screenOptions={navigationBarOptions}>
+      <Stack.Navigator headerMode="screen" screenOptions={navigationBarOptions}>
         <Stack.Screen
           name={SelfAssessmentStackScreens.SelfAssessmentIntro}
           component={SelfAssessmentIntro}
           options={{
             ...Headers.headerMinimalOptions,
-            headerLeft: headerLeft,
+            headerLeft: applyHeaderLeftBackButton(),
             headerRight: () => null,
           }}
         />

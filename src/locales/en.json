@@ -266,13 +266,19 @@
   },
   "screen_titles": {
     "callback": "Request call",
+    "bluetooth": "Bluetooth",
+    "location": "Location",
+    "exposure_notifications": "Exposure Notifications",
     "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposure_scanning": "Exposure Detection",
     "exposures": "Exposures",
     "home": "Dashboard",
     "how_the_app_works": "How the app works",
-    "legal": "Legal"
+    "legal": "Legal",
+    "protect_privacy": "How we protect your privacy",
+    "select_language": "Select Language",
+    "select_symptoms": "Select Symptoms"
   },
   "self_assessment": {
     "age_range": {

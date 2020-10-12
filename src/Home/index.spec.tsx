@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
 
 import Home from "./index"
-import { HomeStackScreens, Stacks } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
 import { Share } from "react-native"
 import { ConfigurationContext } from "../ConfigurationContext"
@@ -35,9 +35,9 @@ describe("Home", () => {
     const { getByTestId } = render(<Home />)
 
     fireEvent.press(getByTestId("exposure-scanning-status-button"))
-    expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-      screen: HomeStackScreens.ExposureDetectionStatus,
-    })
+    expect(navigateSpy).toHaveBeenCalledWith(
+      HomeStackScreens.ExposureDetectionStatus,
+    )
   })
 
   it("allows users to share the application", () => {

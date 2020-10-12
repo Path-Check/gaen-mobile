@@ -150,9 +150,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.ProtectPrivacy,
-    })
+    navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (

@@ -39,9 +39,7 @@ const Welcome: FunctionComponent = () => {
   )
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.LanguageSelection,
-    })
+    navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
   const handleOnPressGetStarted = () => {

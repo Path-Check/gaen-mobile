@@ -5,46 +5,23 @@ import {
   View,
   ScrollView,
   ImageSourcePropType,
-  TouchableOpacity,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
-import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 
-import { Layout, Typography, Spacing, Colors, Iconography } from "../styles"
-import { Icons, Images } from "../assets"
+import { Typography, Spacing, Colors } from "../styles"
+import { Images } from "../assets"
 import { useStatusBarEffect } from "../navigation"
 
 const ProtectPrivacy: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
-  const navigation = useNavigation()
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const insets = useSafeAreaInsets()
-  const style = createStyle(insets)
 
   return (
     <View style={style.container}>
-      <View style={style.headerContainer}>
-        <Text style={style.headerText}>
-          {t("onboarding.protect_privacy.header")}
-        </Text>
-        <TouchableOpacity
-          style={style.closeIconContainer}
-          onPress={navigation.goBack}
-        >
-          <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
-          />
-        </TouchableOpacity>
-      </View>
       <ScrollView contentContainerStyle={style.mainContentContainer}>
         <Section
           image={Images.ProtectPrivacyTop}
@@ -84,41 +61,16 @@ const ProtectPrivacy: FunctionComponent = () => {
   )
 }
 
-const createStyle = (insets: EdgeInsets) => {
-  /* eslint-disable react-native/no-unused-styles */
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      height: "100%",
-      backgroundColor: Colors.primaryLightBackground,
-    },
-    headerContainer: {
-      position: "absolute",
-      width: "100%",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      backgroundColor: Colors.secondary10,
-      zIndex: Layout.zLevel1,
-      paddingTop: insets.top + Spacing.xxxSmall,
-    },
-    headerText: {
-      flex: 10,
-      ...Typography.header1,
-      paddingVertical: Spacing.medium,
-      paddingHorizontal: Spacing.large,
-      color: Colors.primary125,
-    },
-    closeIconContainer: {
-      flex: 1,
-      alignItems: "flex-end",
-      padding: Spacing.medium,
-    },
-    mainContentContainer: {
-      paddingBottom: Spacing.large,
-      paddingTop: 170,
-    },
-  })
-}
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: "100%",
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  mainContentContainer: {
+    paddingVertical: Spacing.large,
+  },
+})
 
 export default ProtectPrivacy
 

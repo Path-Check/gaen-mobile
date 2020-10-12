@@ -1,17 +1,29 @@
 import React, { FunctionComponent } from "react"
-import { ImageSourcePropType } from "react-native"
+import {
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+} from "@react-navigation/stack"
+import LinearGradient from "react-native-linear-gradient"
 
 import {
   HowItWorksStackScreen,
   HowItWorksStackScreens,
+  ModalStackScreens,
   Stack as StackType,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
+import { getLocalNames } from "../locales/languages"
 
 import { Images } from "../assets"
+import { Colors, Outlines, Spacing, Typography } from "../styles"
 
 const Stack = createStackNavigator()
 
@@ -31,8 +43,20 @@ type HowItWorksScreenDatum = {
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   destinationOnSkip,
 }) => {
-  const { t } = useTranslation()
+  const {
+    t,
+    i18n: { language: localeCode },
+  } = useTranslation()
   const navigation = useNavigation()
+  const languageName = getLocalNames()[localeCode]
+
+  const handleOnPressSelectLanguage = () => {
+    navigation.navigate(ModalStackScreens.LanguageSelection)
+  }
+
+  const handleOnPressSkip = () => {
+    navigation.navigate(destinationOnSkip)
+  }
 
   const introduction: HowItWorksScreenDatum = {
     name: HowItWorksStackScreens.Introduction,
@@ -106,19 +130,81 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
             {...props}
             howItWorksScreenContent={howItWorksScreenDisplayDatum}
             totalScreenCount={howItWorksScreenData.length}
-            destinationOnSkip={destinationOnSkip}
           />
         )}
       </Stack.Screen>
     )
   }
 
+  const headerLeft = () => <HeaderLeft />
+  const HeaderLeft = () => {
+    return (
+      <TouchableOpacity onPress={handleOnPressSelectLanguage}>
+        <LinearGradient
+          colors={Colors.gradient10}
+          useAngle
+          angle={0}
+          angleCenter={{ x: 0.5, y: 0.5 }}
+          style={style.languageButtonContainer}
+        >
+          <Text style={style.languageButtonText}>{languageName}</Text>
+        </LinearGradient>
+      </TouchableOpacity>
+    )
+  }
+
+  const headerRight = () => <HeaderRight />
+  const HeaderRight = () => {
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressSkip}
+        style={style.skipButtonContainer}
+      >
+        <Text style={style.skipButtonText}>{t("common.skip")}</Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator
+      screenOptions={{
+        title: "",
+        headerLeft: headerLeft,
+        headerRight: headerRight,
+        headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
+      }}
+    >
       {howItWorksScreenData.map((data, idx) => toStackScreen(data, idx))}
     </Stack.Navigator>
   )
 }
+
+const style = StyleSheet.create({
+  languageButtonContainer: {
+    borderRadius: Outlines.borderRadiusMax,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.xLarge,
+    marginBottom: Spacing.xSmall,
+    marginLeft: Spacing.small,
+  },
+  languageButtonText: {
+    ...Typography.body3,
+    letterSpacing: Typography.largeLetterSpacing,
+    color: Colors.primary125,
+    textAlign: "center",
+    textTransform: "uppercase",
+  },
+  skipButtonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: Spacing.small,
+    padding: Spacing.xSmall,
+  },
+  skipButtonText: {
+    ...Typography.body2,
+    color: Colors.neutral100,
+  },
+})
 
 const MemoizedHowItWorksStack = React.memo(HowItWorksStack)
 
