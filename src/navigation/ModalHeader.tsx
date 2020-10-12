@@ -29,10 +29,10 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ headerTitle }) => {
         hitSlop={{ top: 30, right: 30, bottom: 30, left: 30 }}
       >
         <SvgXml
-          xml={Icons.XInCircle}
-          fill={Colors.neutral30}
-          width={Iconography.small}
-          height={Iconography.small}
+          xml={Icons.X}
+          fill={Colors.black}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
         />
       </TouchableOpacity>
     </View>
@@ -47,7 +47,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.white,
   },
   headerText: {
     ...Typography.header1,
