@@ -4,8 +4,8 @@ import Foundation
 @testable import BT
 
 extension ExposureManagerTests {
-
-  func storageWithExposures() -> BTSecureStorageMock {
+  
+  func defaultStorage() -> BTSecureStorageMock {
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
@@ -15,7 +15,7 @@ extension ExposureManagerTests {
     }
     return btSecureStorageMock
   }
-
+  
   func defaultExposureManager(withKeys: Bool = true, enAPIVersion: ENAPIVersion,
                               userState: UserState? = nil,
                               forceRiskScore: RiskScore = .aboveThreshold,
@@ -24,13 +24,13 @@ extension ExposureManagerTests {
                               forceKeyUnpackingError: Bool = false,
                               forceGetExposureInfoError: Bool = false,
                               forceDownloadConfigurationError: Bool = false) -> ExposureManager {
-
+    
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter.default)
-
+    
     var apiClientMock: APIClientMock!
     var enManagerMock: ENManagerMock!
-
-
+    
+    
     if enAPIVersion == .v2, #available(iOS 13.7, *) {
       apiClientMock = apiClientV2(forceDownloadKeyError: forceDownloadKeyError,
                                   forceKeyUnpackingError: forceKeyUnpackingError,
@@ -44,13 +44,13 @@ extension ExposureManagerTests {
       enManagerMock = eNManagerMockV1(forceExposureDetectionError: forceExposureDetectionError,
                                       forceGetExposureInfoError: forceGetExposureInfoError)
     }
-
+    
     if let userState = userState {
       btSecureStorageMock.userStateHandler = {
         return userState
       }
     }
-
+    
     if withKeys {
       enManagerMock.getDiagnosisKeysHandler = { callback in
         callback([ENTemporaryExposureKey()], nil)
@@ -60,17 +60,17 @@ extension ExposureManagerTests {
         callback(nil, GenericError.unknown)
       }
     }
-
+    
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
                                           apiClient: apiClientMock,
                                           btSecureStorage: btSecureStorageMock)
     return exposureManager
   }
-
+  
   func eNManagerMockV1(forceExposureDetectionError: Bool,
                        forceGetExposureInfoError: Bool) -> ENManagerMock {
     let enManagerMock = ENManagerMock()
-
+    
     enManagerMock.enDetectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
       let enExposureSummary = MockENExposureDetectionSummary()
       enExposureSummary.matchedKeyCountHandler = {
@@ -79,7 +79,7 @@ extension ExposureManagerTests {
       enExposureSummary.attenuationDurationsHandler = {
         return [900,0,0]
       }
-
+      
       if forceExposureDetectionError {
         completionHandler(nil, GenericError.unknown)
       } else {
@@ -87,11 +87,11 @@ extension ExposureManagerTests {
       }
       return Progress()
     }
-
+    
     enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
       completionHandler(nil)
     }
-
+    
     enManagerMock.getExposureInfoHandler = { summary, useExplanation, completionHandler in
       guard !forceGetExposureInfoError else {
         completionHandler(nil, GenericError.unknown)
@@ -100,34 +100,34 @@ extension ExposureManagerTests {
       completionHandler([MockENExposureInfo()], nil)
       return Progress()
     }
-
+    
     return enManagerMock
   }
-
+  
   @available(iOS 13.7, *)
   func eNManagerMockV2(forceExposureDetectionError: Bool = false, forceRiskScore: RiskScore) -> ENManagerMock {
     let enManagerMock = ENManagerMock()
-
+    
     let mockDaySummariesENExposureDetectionSummary = MockDaySummariesENExposureDetectionSummary()
-
+    
     let enExposureSummaryItemMock = MockENExposureSummaryItem()
     enExposureSummaryItemMock.weightedDurationSumHandler = {
       return forceRiskScore == .aboveThreshold ? 20 : 0
     }
-
+    
     let enExposureDaySummaryMock = MockENExposureDaySummary()
     enExposureDaySummaryMock.daySummaryHandler = {
       return enExposureSummaryItemMock
     }
-
+    
     mockDaySummariesENExposureDetectionSummary.daySummariesHandler = {
       return [enExposureDaySummaryMock]
     }
-
+    
     enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
       completionHandler(nil)
     }
-
+    
     enManagerMock.enDetectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
       if forceExposureDetectionError {
         completionHandler(nil, GenericError.unknown)
@@ -136,10 +136,10 @@ extension ExposureManagerTests {
       }
       return Progress()
     }
-
+    
     return enManagerMock
   }
-
+  
   func apiClientV1(forceDownloadKeyError: Bool,
                    forceKeyUnpackingError: Bool,
                    forceDownloadConfigurationError: Bool) -> APIClientMock {
@@ -162,7 +162,7 @@ extension ExposureManagerTests {
     }
     return apiClientMock
   }
-
+  
   @available(iOS 13.7, *)
   func apiClientV2(forceDownloadKeyError: Bool,
                    forceKeyUnpackingError: Bool,
@@ -187,7 +187,7 @@ extension ExposureManagerTests {
     }
     return apiClientMock
   }
-
+  
 }
 
 enum RiskScore {
