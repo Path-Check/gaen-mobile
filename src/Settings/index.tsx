@@ -40,6 +40,7 @@ const Settings: FunctionComponent = () => {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
+  // @ts-ignore
   const { push, navigate } = useNavigation<any>()
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
