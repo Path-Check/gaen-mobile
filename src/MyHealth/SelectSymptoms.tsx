@@ -11,7 +11,7 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
-import { Text, Button, StatusBar } from "../components"
+import { Text, Button } from "../components"
 import { Symptom } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
@@ -21,11 +21,8 @@ import {
   Spacing,
   Typography,
   Outlines,
-  Iconography,
   Buttons,
 } from "../styles"
-import { SvgXml } from "react-native-svg"
-import { Icons } from "../assets"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
@@ -155,72 +152,51 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   ) as [Symptom, string][]
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.secondary10} />
-      <View style={style.headerContainer}>
-        <Text style={style.headerText}>
-          {t("symptom_checker.what_symptoms")}
-        </Text>
-        <TouchableOpacity
-          style={style.closeIconContainer}
-          onPress={navigation.goBack}
-        >
-          <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
-          />
-        </TouchableOpacity>
-      </View>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        <View style={style.symptomButtonsContainer}>
-          {symptomsWithTranslationsList.map(
-            ([symptom, translation]: [Symptom, string]) => {
-              return (
-                <TouchableHighlight
-                  key={symptom}
-                  onPress={() => handleOnPressSymptom(symptom)}
-                  style={determineSymptomButtonStyle(symptom)}
-                  underlayColor={Colors.neutral10}
-                  accessibilityLabel={translation}
-                >
-                  <Text style={determineSymptomButtonTextStyle(symptom)}>
-                    {translation}
-                  </Text>
-                </TouchableHighlight>
-              )
-            },
-          )}
-        </View>
-        <Button
-          onPress={handleOnPressSave}
-          label={t("common.save")}
-          disabled={selectedSymptoms.length === 0}
-          customButtonStyle={style.saveButton}
-          customButtonInnerStyle={style.saveButtonInner}
-        />
-        {isEditingLogEntry && (
-          <TouchableOpacity
-            onPress={handleOnPressDelete}
-            accessibilityLabel={t("symptom_checker.delete_entry")}
-            style={style.deleteButtonContainer}
-          >
-            <Text style={style.deleteButtonText}>
-              {t("symptom_checker.delete_entry")}
-            </Text>
-          </TouchableOpacity>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      <View style={style.symptomButtonsContainer}>
+        {symptomsWithTranslationsList.map(
+          ([symptom, translation]: [Symptom, string]) => {
+            return (
+              <TouchableHighlight
+                key={symptom}
+                onPress={() => handleOnPressSymptom(symptom)}
+                style={determineSymptomButtonStyle(symptom)}
+                underlayColor={Colors.neutral10}
+                accessibilityLabel={translation}
+              >
+                <Text style={determineSymptomButtonTextStyle(symptom)}>
+                  {translation}
+                </Text>
+              </TouchableHighlight>
+            )
+          },
         )}
-      </ScrollView>
-    </>
+      </View>
+      <Button
+        onPress={handleOnPressSave}
+        label={t("common.save")}
+        disabled={selectedSymptoms.length === 0}
+        customButtonStyle={style.saveButton}
+        customButtonInnerStyle={style.saveButtonInner}
+      />
+      {isEditingLogEntry && (
+        <TouchableOpacity
+          onPress={handleOnPressDelete}
+          accessibilityLabel={t("symptom_checker.delete_entry")}
+          style={style.deleteButtonContainer}
+        >
+          <Text style={style.deleteButtonText}>
+            {t("symptom_checker.delete_entry")}
+          </Text>
+        </TouchableOpacity>
+      )}
+    </ScrollView>
   )
 }
-
-const headerHeight = 90
 
 const style = StyleSheet.create({
   container: {
@@ -232,26 +208,6 @@ const style = StyleSheet.create({
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
-  },
-  headerContainer: {
-    width: "100%",
-    height: headerHeight,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    backgroundColor: Colors.secondary10,
-    paddingHorizontal: Spacing.medium,
-    paddingBottom: Spacing.small,
-  },
-  headerText: {
-    ...Typography.header3,
-    paddingRight: Spacing.xxLarge,
-  },
-  closeIconContainer: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    padding: Spacing.medium,
   },
   symptomButtonsContainer: {
     flexWrap: "wrap",

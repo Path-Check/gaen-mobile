@@ -67,9 +67,8 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     alignItems: "flex-start",
-    justifyContent: "center",
     paddingHorizontal: Spacing.xLarge,
-    paddingVertical: Spacing.xxxLarge,
+    paddingVertical: Spacing.large,
   },
   headerText: {
     ...Typography.header1,

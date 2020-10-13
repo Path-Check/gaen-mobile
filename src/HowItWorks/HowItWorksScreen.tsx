@@ -11,18 +11,11 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import LinearGradient from "react-native-linear-gradient"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
-import { StatusBar, Text, Button } from "../components"
-import {
-  ModalStackScreens,
-  Stacks,
-  Stack,
-  useStatusBarEffect,
-} from "../navigation"
-import { getLocalNames } from "../locales/languages"
+import { Text, Button } from "../components"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
 
-import { Layout, Outlines, Colors, Spacing, Typography } from "../styles"
+import { Outlines, Colors, Spacing, Typography } from "../styles"
 
 type HowItWorksScreenContent = {
   screenNumber: number
@@ -36,97 +29,58 @@ type HowItWorksScreenContent = {
 interface HowItWorksScreenProps {
   howItWorksScreenContent: HowItWorksScreenContent
   totalScreenCount: number
-  destinationOnSkip: Stack
 }
 
 const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   howItWorksScreenContent,
   totalScreenCount,
-  destinationOnSkip,
 }) => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  const { t } = useTranslation()
   const navigation = useNavigation()
-  const {
-    t,
-    i18n: { language: localeCode },
-  } = useTranslation()
-  const languageName = getLocalNames()[localeCode]
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
 
-  const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.LanguageSelection,
-    })
-  }
-
-  const handleOnPressSkip = () => {
-    navigation.navigate(destinationOnSkip)
-  }
-
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.ProtectPrivacy,
-    })
+    navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
-      <View style={style.header}>
-        <TouchableOpacity onPress={handleOnPressSelectLanguage}>
-          <LinearGradient
-            colors={Colors.gradient10}
-            useAngle
-            angle={0}
-            angleCenter={{ x: 0.5, y: 0.5 }}
-            style={style.languageButtonContainer}
-          >
-            <Text style={style.languageButtonText}>{languageName}</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleOnPressSkip}>
-          <Text style={style.skipButtonText}>{t("common.skip")}</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={style.outerContainer}>
-        <ScrollView
-          alwaysBounceVertical={false}
-          contentContainerStyle={style.contentContainer}
-        >
-          <View>
-            <Image
-              source={howItWorksScreenContent.image}
-              accessibilityLabel={howItWorksScreenContent.imageLabel}
-              accessible
-              style={style.image}
-              resizeMode={"contain"}
-            />
-            <PositionDots
-              highlightedDotIdx={howItWorksScreenContent.screenNumber}
-              totalDotCount={totalScreenCount}
-            />
-            <Text style={style.headerText}>
-              {howItWorksScreenContent.header}
-            </Text>
-          </View>
-        </ScrollView>
-        <View style={style.bottomButtonContainer}>
-          <>
-            <Button
-              customButtonStyle={style.nextButton}
-              customButtonInnerStyle={style.nextButtonGradient}
-              label={howItWorksScreenContent.primaryButtonLabel}
-              onPress={howItWorksScreenContent.primaryButtonOnPress}
-              hasRightArrow
-            />
-            <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
-              <Text style={style.bottomButtonText}>
-                {t("onboarding.protect_privacy_button")}
-              </Text>
-            </TouchableOpacity>
-          </>
+      <ScrollView
+        alwaysBounceVertical={false}
+        contentContainerStyle={style.contentContainer}
+      >
+        <View>
+          <Image
+            source={howItWorksScreenContent.image}
+            accessibilityLabel={howItWorksScreenContent.imageLabel}
+            accessible
+            style={style.image}
+            resizeMode={"contain"}
+          />
+          <PositionDots
+            highlightedDotIdx={howItWorksScreenContent.screenNumber}
+            totalDotCount={totalScreenCount}
+          />
+          <Text style={style.headerText}>{howItWorksScreenContent.header}</Text>
         </View>
+      </ScrollView>
+      <View style={style.bottomButtonContainer}>
+        <>
+          <Button
+            customButtonStyle={style.nextButton}
+            customButtonInnerStyle={style.nextButtonGradient}
+            label={howItWorksScreenContent.primaryButtonLabel}
+            onPress={howItWorksScreenContent.primaryButtonOnPress}
+            hasRightArrow
+          />
+          <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
+            <Text style={style.bottomButtonText}>
+              {t("onboarding.protect_privacy_button")}
+            </Text>
+          </TouchableOpacity>
+        </>
       </View>
     </>
   )
@@ -143,47 +97,12 @@ const createStyle = (insets: EdgeInsets) => {
 
   /* eslint-disable react-native/no-unused-styles */
   return StyleSheet.create({
-    header: {
-      position: "absolute",
-      width: "100%",
-      zIndex: Layout.zLevel1,
-      flexDirection: "row",
-      alignItems: "flex-end",
-      justifyContent: "space-between",
-      paddingTop: insets.top,
-      paddingHorizontal: Spacing.xSmall,
-      backgroundColor: Colors.primaryLightBackground,
-      borderBottomColor: Colors.neutral10,
-      borderBottomWidth: Outlines.hairline,
-    },
-    languageButtonContainer: {
-      borderRadius: Outlines.borderRadiusMax,
-      paddingVertical: Spacing.xxSmall,
-      paddingHorizontal: Spacing.xLarge,
-      marginBottom: Spacing.xSmall,
-    },
-    languageButtonText: {
-      ...Typography.body3,
-      letterSpacing: Typography.largeLetterSpacing,
-      color: Colors.primary125,
-      textAlign: "center",
-      textTransform: "uppercase",
-    },
-    skipButtonText: {
-      ...Typography.body2,
-      color: Colors.neutral100,
-      padding: Spacing.medium,
-    },
-    outerContainer: {
-      justifyContent: "space-between",
-      flex: 1,
-      backgroundColor: Colors.primaryLightBackground,
-    },
     contentContainer: {
       flexGrow: 1,
       justifyContent: "space-between",
       paddingTop: headerHeight + Spacing.medium,
       paddingBottom: Spacing.xxLarge,
+      backgroundColor: Colors.primaryLightBackground,
     },
     image: {
       width: "97%",
@@ -198,7 +117,7 @@ const createStyle = (insets: EdgeInsets) => {
     nextButton: {
       width: "95%",
       alignSelf: "center",
-      marginBottom: Spacing.xxSmall,
+      marginBottom: Spacing.small,
     },
     nextButtonGradient: {
       paddingTop: Spacing.xSmall,
@@ -210,6 +129,7 @@ const createStyle = (insets: EdgeInsets) => {
       alignItems: "center",
       paddingTop: Spacing.small,
       paddingBottom: insets.bottom + Spacing.small,
+      backgroundColor: Colors.primaryLightBackground,
     },
     bottomButtonText: {
       ...Typography.header5,

@@ -7,7 +7,7 @@ import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 import ExposureDetail from "./ExposureDetail"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { ModalStackScreens, Stacks } from "../navigation"
+import { ModalStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("ExposureDetail", () => {
@@ -153,9 +153,9 @@ describe("ExposureDetail", () => {
 
       expect(selfAssessmentButton).not.toBeNull()
       fireEvent.press(selfAssessmentButton)
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-        screen: ModalStackScreens.SelfAssessmentFromExposureDetails,
-      })
+      expect(navigateSpy).toHaveBeenCalledWith(
+        ModalStackScreens.SelfAssessmentFromExposureDetails,
+      )
     })
   })
 })

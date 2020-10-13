@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { ModalStackScreens, Stacks } from "../../navigation"
+import { ModalStackScreens } from "../../navigation"
 import { Text, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
@@ -29,9 +29,7 @@ const ExposureActions: FunctionComponent = () => {
   }
 
   const handleOnPressPersonalizeMyGuidance = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfAssessmentFromExposureDetails,
-    })
+    navigation.navigate(ModalStackScreens.SelfAssessmentFromExposureDetails)
   }
 
   const displayNextStepsLink =

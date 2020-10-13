@@ -23,6 +23,7 @@ type Content = {
   actionText: string
   onPress: () => void
   accessibilityLabel: string
+  chevron: string
 }
 
 interface ActivationStatusProps {
@@ -50,6 +51,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.learn_more"),
     onPress: infoAction,
     accessibilityLabel: t("home.get_more_info", { technology: headerText }),
+    chevron: Icons.ChevronUp,
   }
 
   const inactiveContent: Content = {
@@ -60,6 +62,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.fix_this"),
     onPress: fixAction,
     accessibilityLabel: t("home.fix", { technology: headerText }),
+    chevron: Icons.ChevronRight,
   }
 
   const content = isActive ? activeContent : inactiveContent
@@ -72,6 +75,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText,
     onPress,
     accessibilityLabel,
+    chevron,
   } = content
 
   const outerContainerStyle = {
@@ -110,7 +114,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
       <View style={style.bottomContainer}>
         <Text style={style.actionText}>{actionText}</Text>
         <SvgXml
-          xml={Icons.ChevronRight}
+          xml={chevron}
           fill={Colors.black}
           width={Iconography.tiny}
           height={Iconography.tiny}

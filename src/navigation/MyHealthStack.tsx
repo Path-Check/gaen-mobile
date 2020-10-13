@@ -7,6 +7,8 @@ import {
 import MyHealthScreen from "../MyHealth/"
 import SelectSymptomsScreen from "../MyHealth/SelectSymptoms"
 import { MyHealthStackScreens } from "./index"
+import { applyModalHeader } from "./ModalHeader"
+import { useTranslation } from "react-i18next"
 
 export type MyHealthStackParams = {
   MyHealth: undefined
@@ -16,8 +18,10 @@ export type MyHealthStackParams = {
 const Stack = createStackNavigator<MyHealthStackParams>()
 
 const MyHealthStack: FunctionComponent = () => {
+  const { t } = useTranslation()
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="screen">
       <Stack.Screen
         name={MyHealthStackScreens.MyHealth}
         component={MyHealthScreen}
@@ -28,8 +32,8 @@ const MyHealthStack: FunctionComponent = () => {
         component={SelectSymptomsScreen}
         options={{
           ...TransitionPresets.ModalTransition,
-          headerShown: false,
           gestureEnabled: false,
+          header: applyModalHeader(t("screen_titles.select_symptoms")),
         }}
       />
     </Stack.Navigator>

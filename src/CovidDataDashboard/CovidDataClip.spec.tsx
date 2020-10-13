@@ -7,7 +7,7 @@ import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { CovidDataContext, CovidDataRequestStatus } from "../CovidDataContext"
 import { calculateCasesPercentageTrend } from "./covidData"
-import { HomeStackScreens, Stacks } from "../navigation"
+import { HomeStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("CovidDataClip", () => {
@@ -141,9 +141,9 @@ describe("CovidDataClip", () => {
 
       fireEvent.press(getByLabelText("See more"))
 
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-        screen: HomeStackScreens.CovidDataDashboard,
-      })
+      expect(navigateSpy).toHaveBeenCalledWith(
+        HomeStackScreens.CovidDataDashboard,
+      )
     })
 
     describe("when the cases count is dropping", () => {
