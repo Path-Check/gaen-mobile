@@ -17,7 +17,7 @@ import {
   HowItWorksStackScreen,
   HowItWorksStackScreens,
   ModalStackScreens,
-  Stack as StackType,
+  Stacks,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
 import { getLocalNames } from "../locales/languages"
@@ -28,7 +28,7 @@ import { Colors, Outlines, Spacing, Typography } from "../styles"
 const Stack = createStackNavigator()
 
 interface HowItWorksStackProps {
-  destinationOnSkip: StackType
+  mountLocation: "Onboarding" | "Settings"
 }
 
 type HowItWorksScreenDatum = {
@@ -41,7 +41,7 @@ type HowItWorksScreenDatum = {
 }
 
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
-  destinationOnSkip,
+  mountLocation,
 }) => {
   const {
     t,
@@ -54,9 +54,20 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
-  const handleOnPressSkip = () => {
-    navigation.navigate(destinationOnSkip)
+  const handleOnNavigateOutOfStack = () => {
+    switch (mountLocation) {
+      case "Onboarding": {
+        navigation.goBack()
+        break
+      }
+      case "Settings": {
+        navigation.navigate(Stacks.Activation)
+        break
+      }
+    }
   }
+  const handleOnPressSkip = handleOnNavigateOutOfStack
+  const handleOnPressNextOnValueProposition = handleOnNavigateOutOfStack
 
   const introduction: HowItWorksScreenDatum = {
     name: HowItWorksStackScreens.Introduction,
@@ -100,9 +111,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     imageLabel: t("onboarding.screen5_image_label"),
     header: t("onboarding.screen5_header"),
     primaryButtonLabel: t("onboarding.screen_5_button"),
-    primaryButtonOnPress: () => {
-      navigation.navigate(destinationOnSkip)
-    },
+    primaryButtonOnPress: handleOnPressNextOnValueProposition,
   }
 
   const howItWorksScreenData: HowItWorksScreenDatum[] = [
