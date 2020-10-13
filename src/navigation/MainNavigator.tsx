@@ -143,14 +143,12 @@ const MainNavigator: FunctionComponent = () => {
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
         />
-        <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
+        <Stack.Screen
+          name={ModalStackScreens.HowItWorksReviewFromSettings}
+          options={TransitionPresets.ModalTransition}
+        >
           {(props) => (
             <HowItWorksStack {...props} destinationOnSkip={Stacks.Settings} />
-          )}
-        </Stack.Screen>
-        <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromConnect}>
-          {(props) => (
-            <HowItWorksStack {...props} destinationOnSkip={Stacks.Connect} />
           )}
         </Stack.Screen>
         <Stack.Screen

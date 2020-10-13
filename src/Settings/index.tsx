@@ -9,6 +9,7 @@ import {
   useStatusBarEffect,
   ModalStackScreens,
   SettingsStackScreens,
+  HowItWorksStackScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
@@ -39,7 +40,7 @@ const Settings: FunctionComponent = () => {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
-  const navigation = useNavigation()
+  const { push, navigate } = useNavigation<any>()
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
@@ -50,11 +51,13 @@ const Settings: FunctionComponent = () => {
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(ModalStackScreens.LanguageSelection)
+    navigate(ModalStackScreens.LanguageSelection)
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings)
+    push(ModalStackScreens.HowItWorksReviewFromSettings, {
+      screen: HowItWorksStackScreens.Introduction,
+    })
   }
 
   const handleOnPressDeleteMyData = () => {
@@ -68,7 +71,7 @@ const Settings: FunctionComponent = () => {
   }
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
-    onPress: () => navigation.navigate(SettingsStackScreens.Legal),
+    onPress: () => navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
   }
   const howTheAppWorks: SettingsListItem = {
@@ -85,7 +88,7 @@ const Settings: FunctionComponent = () => {
 
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
-    onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
+    onPress: () => navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }
 

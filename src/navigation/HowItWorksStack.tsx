@@ -17,7 +17,8 @@ import {
   HowItWorksStackScreen,
   HowItWorksStackScreens,
   ModalStackScreens,
-  Stack as StackType,
+  Stacks,
+  Stack as NavigationStack,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
 import { getLocalNames } from "../locales/languages"
@@ -28,7 +29,7 @@ import { Colors, Outlines, Spacing, Typography } from "../styles"
 const Stack = createStackNavigator()
 
 interface HowItWorksStackProps {
-  destinationOnSkip: StackType
+  destinationOnSkip: NavigationStack
 }
 
 type HowItWorksScreenDatum = {
@@ -55,7 +56,11 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
 
   const handleOnPressSkip = () => {
-    navigation.navigate(destinationOnSkip)
+    if (destinationOnSkip === Stacks.Settings) {
+      navigation.goBack()
+    } else if (destinationOnSkip === Stacks.Activation) {
+      navigation.navigate(Stacks.Activation)
+    }
   }
 
   const introduction: HowItWorksScreenDatum = {
