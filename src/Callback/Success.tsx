@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { ScrollView, StyleSheet, Image } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useCallbackFormContext } from "./CallbackFormContext"
 import {
@@ -41,20 +41,23 @@ const Success: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={style.contentContainer}>
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
       <Image
         source={Images.HowItWorksValueProposition}
         style={style.image}
         accessible
         accessibilityLabel={t("onboarding.welcome_image_label")}
       />
-      <GlobalText style={style.header}>
-        {t("callback.success_header")}
-      </GlobalText>
-      <GlobalText style={style.body}>{successMessage}</GlobalText>
+      <Text style={style.header}>{t("callback.success_header")}</Text>
+      <Text style={style.body}>{successMessage}</Text>
       <Button
         label={t("callback.success_got_it")}
         onPress={handleOnPressGotIt}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
       />
     </ScrollView>
   )
@@ -78,6 +81,12 @@ const style = StyleSheet.create({
     width: "97%",
     height: 220,
     marginBottom: Spacing.huge,
+  },
+  button: {
+    width: "100%",
+  },
+  buttonInner: {
+    width: "100%",
   },
 })
 

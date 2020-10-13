@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
 import { NativeModule } from "../gaen"
@@ -27,7 +27,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllCheckIns, deleteAllLogEntries } = useSymptomLogContext()
+  const { deleteAllLogEntries } = useSymptomLogContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -94,7 +94,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   }: DebugMenuListItemProps) => {
     return (
       <TouchableOpacity style={[style.listItem, itemStyle]} onPress={onPress}>
-        <GlobalText style={style.listItemText}>{label}</GlobalText>
+        <Text style={style.listItemText}>{label}</Text>
       </TouchableOpacity>
     )
   }
@@ -135,13 +135,6 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
-            />
-            <DebugMenuListItem
-              label="Delete All CheckIns"
-              onPress={handleOnPressSimulationButton(async () => {
-                const result = await deleteAllCheckIns()
-                return Promise.resolve(result.kind)
-              })}
             />
             <DebugMenuListItem
               label="Delete All Symptom Logs"

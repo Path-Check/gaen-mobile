@@ -3,8 +3,8 @@ import { Linking, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../../components"
-import { Colors, Typography, Spacing, Outlines } from "../../styles"
+import { Text } from "../../components"
+import { Colors, Typography, Spacing, Affordances } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
@@ -13,12 +13,12 @@ const NoExposures: FunctionComponent = () => {
   return (
     <View>
       <View style={style.noExposureCard}>
-        <GlobalText style={style.headerText}>
+        <Text style={style.headerText}>
           {t("exposure_history.no_exposure_reports")}
-        </GlobalText>
-        <GlobalText style={style.subheaderText}>
+        </Text>
+        <Text style={style.subheaderText}>
           {t("exposure_history.no_exposure_reports_over_past")}
-        </GlobalText>
+        </Text>
       </View>
       <HealthGuidelines />
     </View>
@@ -44,32 +44,32 @@ const HealthGuidelines: FunctionComponent = () => {
 
   return (
     <View style={style.card}>
-      <GlobalText style={style.cardHeaderText}>
+      <Text style={style.cardHeaderText}>
         {t("exposure_history.protect_yourself_and_others")}
-      </GlobalText>
+      </Text>
       {Boolean(healthAuthorityLearnMoreUrl) && (
         <>
-          <GlobalText style={style.cardSubheaderText}>
+          <Text style={style.cardSubheaderText}>
             {t("exposure_history.review_guidance_from_ha", {
               healthAuthorityName,
             })}
-          </GlobalText>
+          </Text>
           <TouchableOpacity
             onPress={handleOnPressHALink}
             style={style.learnMoreCtaContainer}
           >
-            <GlobalText style={style.learnMoreCta}>
+            <Text style={style.learnMoreCta}>
               {t("exposure_history.learn_more")}
-            </GlobalText>
+            </Text>
             <SvgXml
               xml={Icons.Arrow}
               fill={Colors.primary125}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
-          <GlobalText style={style.listHeading}>
+          <Text style={style.listHeading}>
             {t("exposure_history.health_guidelines.title")}
-          </GlobalText>
+          </Text>
         </>
       )}
       <HealthGuidelineItem
@@ -105,17 +105,18 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
       <View style={style.listItemIconContainer}>
         <SvgXml xml={icon} fill={Colors.primary125} />
       </View>
-      <GlobalText style={style.listItemText}>{text}</GlobalText>
+      <Text style={style.listItemText}>{text}</Text>
     </View>
   )
 }
 
 const style = StyleSheet.create({
   noExposureCard: {
+    ...Affordances.floatingContainer,
     backgroundColor: Colors.primary125,
-    ...Outlines.roundedBorder,
     borderColor: Colors.primary125,
-    padding: Spacing.large,
+    marginBottom: Spacing.small,
+    marginHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header5,
@@ -127,11 +128,8 @@ const style = StyleSheet.create({
     color: Colors.secondary10,
   },
   card: {
-    backgroundColor: Colors.primaryLightBackground,
-    ...Outlines.roundedBorder,
-    borderColor: Colors.white,
-    padding: Spacing.large,
-    marginTop: Spacing.large,
+    ...Affordances.floatingContainer,
+    marginHorizontal: Spacing.medium,
   },
   cardHeaderText: {
     ...Typography.header3,

@@ -1,8 +1,8 @@
 {
-  "my_health": {
-    "today": "Ikanai"
-  },
   "navigation": {
     "more_info": "Pwan ekoch porous"
+  },
+  "screen_titles": {
+    "home": "Nepoputan"
   }
 }

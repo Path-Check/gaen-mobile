@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
-import { GlobalText, Button } from "../../components"
+import { Text, Button } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -150,9 +150,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   }
 
   const handleOnPressProtectPrivacy = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.ProtectPrivacy,
-    })
+    navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (
@@ -195,24 +193,18 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("export.publish_consent_title_bluetooth")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
-            {t("export.consent_body_0")}
-          </GlobalText>
-          <GlobalText style={style.subheaderText}>
+          </Text>
+          <Text style={style.bodyText}>{t("export.consent_body_0")}</Text>
+          <Text style={style.subheaderText}>
             {t("export.consent_subheader_1")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
-            {t("export.consent_body_1")}
-          </GlobalText>
-          <GlobalText style={style.subheaderText}>
+          </Text>
+          <Text style={style.bodyText}>{t("export.consent_body_1")}</Text>
+          <Text style={style.subheaderText}>
             {t("export.consent_subheader_2")}
-          </GlobalText>
-          <GlobalText style={style.bodyText}>
-            {t("export.consent_body_2")}
-          </GlobalText>
+          </Text>
+          <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
         </View>
 
         <Button
@@ -226,9 +218,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         style={style.bottomButtonContainer}
         onPress={handleOnPressProtectPrivacy}
       >
-        <GlobalText style={style.bottomButtonText}>
+        <Text style={style.bottomButtonText}>
           {t("onboarding.protect_privacy_button")}
-        </GlobalText>
+        </Text>
         <SvgXml
           xml={Icons.ChevronUp}
           fill={Colors.primary150}

@@ -56,11 +56,12 @@ RCT_REMAP_METHOD(deleteSymptomLogs,
   resolve(nil);
 }
 
-RCT_REMAP_METHOD(deleteStaleSymptomLogs,
-                 deleteStaleSymptomLogsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_REMAP_METHOD(deleteSymptomLogsOlderThan,
+                 days:(NSInteger)days
+                 resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[ExposureManager shared] deleteStaleLogEntries];
+  [[ExposureManager shared] deleteSymptomLogsOlderThan:days];
   resolve(nil);
 }
 

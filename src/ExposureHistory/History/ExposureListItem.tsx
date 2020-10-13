@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { GlobalText } from "../../components"
+import { Text } from "../../components"
 import { ExposureDatum, exposureWindowBucket } from "../../exposure"
 
 import { Icons } from "../../assets"
@@ -14,7 +14,7 @@ import {
   Colors,
   Spacing,
   Typography,
-  Outlines,
+  Affordances,
 } from "../../styles"
 
 interface ExposureListItemProps {
@@ -56,12 +56,12 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
     >
       <View style={style.innerContainer}>
         <View>
-          <GlobalText style={style.primaryText}>
+          <Text style={style.primaryText}>
             {t("exposure_history.possible_exposure")}
-          </GlobalText>
-          <GlobalText style={style.secondaryText}>
+          </Text>
+          <Text style={style.secondaryText}>
             {exposureWindowBucketInWords(exposureDatum)}
-          </GlobalText>
+          </Text>
         </View>
         <SvgXml
           xml={Icons.ChevronRight}
@@ -78,12 +78,9 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    ...Affordances.floatingContainer,
     marginBottom: Spacing.medium,
-    paddingHorizontal: Spacing.medium,
-    paddingVertical: Spacing.xSmall,
-    borderRadius: Outlines.borderRadiusLarge,
+    marginHorizontal: Spacing.medium,
   },
   innerContainer: {
     flexDirection: "row",

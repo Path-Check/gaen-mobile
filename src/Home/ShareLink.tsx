@@ -4,13 +4,20 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 
 import { Icons, Images } from "../assets"
-import { Spacing, Colors, Typography, Outlines, Iconography } from "../styles"
+import {
+  Spacing,
+  Colors,
+  Typography,
+  Outlines,
+  Iconography,
+  Affordances,
+} from "../styles"
 
-export const ShareLink: FunctionComponent = () => {
+const ShareLink: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { t } = useTranslation()
   const configuration = useConfigurationContext()
@@ -34,67 +41,56 @@ export const ShareLink: FunctionComponent = () => {
     return null
   }
 
-  const shareIconSize = 22
   return (
     <TouchableOpacity
       style={style.shareContainer}
       onPress={handleOnPressShare}
-      accessibilityLabel={t("home.bluetooth.share")}
+      accessibilityLabel={t("home.bluetooth.share", { applicationName })}
     >
       <View style={style.shareImageContainer}>
         <Image source={Images.HugEmoji} style={style.shareImage} />
       </View>
       <View style={style.shareTextContainer}>
-        <GlobalText style={style.shareText}>
-          {t("home.bluetooth.share")}
-        </GlobalText>
+        <Text style={style.shareText}>
+          {t("home.bluetooth.share", { applicationName })}
+        </Text>
       </View>
-      <View style={style.shareIconContainer}>
-        <SvgXml
-          xml={Icons.Share}
-          width={shareIconSize}
-          height={shareIconSize}
-        />
-      </View>
+      <SvgXml
+        xml={Icons.ChevronRight}
+        fill={Colors.neutral75}
+        width={Iconography.xxSmall}
+        height={Iconography.xxSmall}
+      />
     </TouchableOpacity>
   )
 }
 
-const rightColumnWidth = 70
 const style = StyleSheet.create({
   shareContainer: {
+    ...Affordances.floatingContainer,
+    paddingVertical: Spacing.small,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: Spacing.small,
-    paddingHorizontal: Spacing.small,
-    backgroundColor: Colors.secondary10,
-    borderBottomColor: Colors.neutral10,
-    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.primary100,
+    borderWidth: Outlines.thin,
   },
   shareImageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.secondary50,
-    borderRadius: Outlines.borderRadiusMax,
-    width: Iconography.small,
-    height: Iconography.small,
   },
   shareImage: {
-    width: Iconography.xSmall,
-    height: Iconography.xSmall,
+    width: Iconography.small,
+    height: Iconography.small,
   },
   shareTextContainer: {
     flex: 1,
     marginLeft: Spacing.medium,
   },
   shareText: {
-    ...Typography.body2,
+    ...Typography.body1,
     ...Typography.mediumBold,
     color: Colors.primaryText,
   },
-  shareIconContainer: {
-    width: rightColumnWidth,
-    alignItems: "center",
-    justifyContent: "center",
-  },
 })
+
+export default ShareLink

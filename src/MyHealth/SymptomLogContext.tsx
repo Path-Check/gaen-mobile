@@ -6,27 +6,15 @@ import React, {
   useState,
 } from "react"
 
-import {
-  SymptomLogEntry,
-  CheckIn,
-  CheckInStatus,
-  DayLogData,
-  combineSymptomAndCheckInLogs,
-  Symptom,
-} from "./symptoms"
+import { SymptomLogEntry, Symptom, sortSymptomEntries } from "./symptoms"
 import {
   getLogEntries,
-  getCheckIns,
-  addCheckIn,
   createLogEntry,
   modifyLogEntry,
   deleteLogEntry as removeLogEntry,
-  deleteAllCheckIns as deleteCheckIns,
   deleteAllSymptomLogs as deleteLogs,
-  deleteStaleCheckIns,
-  deleteStaleSymptomLogs,
+  deleteSymptomLogsOlderThan,
 } from "./nativeModule"
-import { isToday } from "../utils/dateTime"
 import {
   failureResponse,
   OperationResponse,
@@ -34,18 +22,15 @@ import {
 } from "../OperationResponse"
 
 export type SymptomLogState = {
-  dailyLogData: DayLogData[]
+  symptomLogEntries: SymptomLogEntry[]
   addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
   deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
-  todaysCheckIn: CheckIn
-  addTodaysCheckIn: (status: CheckInStatus) => Promise<OperationResponse>
-  deleteAllCheckIns: () => Promise<OperationResponse>
   deleteAllLogEntries: () => Promise<OperationResponse>
 }
 
 const initialState: SymptomLogState = {
-  dailyLogData: [],
+  symptomLogEntries: [],
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -55,13 +40,6 @@ const initialState: SymptomLogState = {
   deleteLogEntry: (_symptomLogEntryId: string) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
-  todaysCheckIn: { date: Date.now(), status: CheckInStatus.NotCheckedIn },
-  addTodaysCheckIn: (_status: CheckInStatus) => {
-    return Promise.resolve(SUCCESS_RESPONSE)
-  },
-  deleteAllCheckIns: () => {
-    return Promise.resolve(SUCCESS_RESPONSE)
-  },
   deleteAllLogEntries: () => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -69,43 +47,27 @@ const initialState: SymptomLogState = {
 
 export const SymptomLogContext = createContext<SymptomLogState>(initialState)
 
-export const SymptomLogProvider: FunctionComponent = ({ children }) => {
-  const [dailyLogData, setDailyLogData] = useState<DayLogData[]>([])
-  const [logEntries, setLogEntries] = useState<SymptomLogEntry[]>([])
-  const [checkIns, setCheckIns] = useState<CheckIn[]>([])
-  const [todaysCheckIn, setTodaysCheckIn] = useState<CheckIn>(
-    initialState.todaysCheckIn,
-  )
+export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
 
-  const detectTodaysCheckIn = (rawCheckIns: CheckIn[]) => {
-    const checkInAddedToday = rawCheckIns.find(({ date }) => {
-      return isToday(date)
-    })
-    checkInAddedToday && setTodaysCheckIn(checkInAddedToday)
-  }
+export const SymptomLogProvider: FunctionComponent = ({ children }) => {
+  const [symptomLogEntries, setSymptomLogEntries] = useState<SymptomLogEntry[]>(
+    [],
+  )
 
   const fetchLogEntries = async () => {
     const entries = await getLogEntries()
-    setLogEntries(entries)
+    const sortedEntries = sortSymptomEntries(entries)
+    setSymptomLogEntries(sortedEntries)
   }
 
   const cleanupStaleData = async () => {
-    await deleteStaleCheckIns()
-    await deleteStaleSymptomLogs()
+    await deleteSymptomLogsOlderThan(DAYS_AFTER_LOG_IS_CONSIDERED_STALE)
   }
 
   useEffect(() => {
     cleanupStaleData()
     fetchLogEntries()
-    getCheckIns().then((checkIns) => {
-      setCheckIns(checkIns)
-      detectTodaysCheckIn(checkIns)
-    })
   }, [])
-
-  useEffect(() => {
-    setDailyLogData(combineSymptomAndCheckInLogs(logEntries, checkIns))
-  }, [checkIns, logEntries])
 
   const addLogEntry = async (symptoms: Symptom[]) => {
     try {
@@ -141,30 +103,6 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
     }
   }
 
-  const addTodaysCheckIn = async (status: CheckInStatus) => {
-    try {
-      const newCheckIn = { date: Date.now(), status }
-      await addCheckIn(newCheckIn)
-      setTodaysCheckIn(newCheckIn)
-      const newCheckIns = await getCheckIns()
-      setCheckIns(newCheckIns)
-      return SUCCESS_RESPONSE
-    } catch (e) {
-      return failureResponse(e.message)
-    }
-  }
-
-  const deleteAllCheckIns = async () => {
-    try {
-      await deleteCheckIns()
-      await getCheckIns()
-      setTodaysCheckIn(initialState.todaysCheckIn)
-      return SUCCESS_RESPONSE
-    } catch (e) {
-      return failureResponse(e.message)
-    }
-  }
-
   const deleteAllLogEntries = async () => {
     try {
       await deleteLogs()
@@ -178,13 +116,10 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   return (
     <SymptomLogContext.Provider
       value={{
-        addTodaysCheckIn,
-        todaysCheckIn,
-        dailyLogData,
+        symptomLogEntries,
         addLogEntry,
         updateLogEntry,
         deleteLogEntry,
-        deleteAllCheckIns,
         deleteAllLogEntries,
       }}
     >

@@ -11,13 +11,8 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
-import { Stacks, ModalStackScreens, useStatusBarEffect } from "../navigation"
-import {
-  ListItem,
-  ListItemSeparator,
-  StatusBar,
-  GlobalText,
-} from "../components"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { ListItem, ListItemSeparator, StatusBar, Text } from "../components"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "../Settings/ExternalLink"
@@ -42,7 +37,6 @@ const ConnectScreen: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
 
@@ -61,9 +55,7 @@ const ConnectScreen: FunctionComponent = () => {
   )
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.HowItWorksReviewFromConnect,
-    })
+    navigation.navigate(ModalStackScreens.HowItWorksReviewFromConnect)
   }
 
   const listItems: ConnectListItem[] = []
@@ -89,22 +81,13 @@ const ConnectScreen: FunctionComponent = () => {
 
   listItems.push(howTheAppWorks)
 
-  if (displayCallbackForm) {
-    const callbackForm: ConnectListItem = {
-      label: t("screen_titles.callback"),
-      onPress: () => navigation.navigate(Stacks.Callback),
-      icon: Icons.Headset,
-    }
-    listItems.push(callbackForm)
-  }
-
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary10} />
       <ScrollView style={style.container} alwaysBounceVertical={false}>
         <View style={style.topContainer}>
-          <GlobalText style={style.headerText}>{applicationName}</GlobalText>
-          <GlobalText style={style.aboutContent}>{aboutContent}</GlobalText>
+          <Text style={style.headerText}>{applicationName}</Text>
+          <Text style={style.aboutContent}>{aboutContent}</Text>
           {authorityLinks?.map(({ url, label }) => {
             return <ExternalLink key={label} url={url} label={label} />
           })}
@@ -123,16 +106,14 @@ const ConnectScreen: FunctionComponent = () => {
         <View style={style.bottomContainer}>
           <View style={style.infoRowContainer}>
             <View style={style.infoRow}>
-              <GlobalText style={style.infoRowLabel}>
-                {t("about.version")}
-              </GlobalText>
-              <GlobalText style={style.infoRowValue}>{versionInfo}</GlobalText>
+              <Text style={style.infoRowLabel}>{t("about.version")}</Text>
+              <Text style={style.infoRowValue}>{versionInfo}</Text>
             </View>
             <View style={style.infoRow}>
-              <GlobalText style={style.infoRowLabel}>
+              <Text style={style.infoRowLabel}>
                 {t("about.operating_system_abbr")}
-              </GlobalText>
-              <GlobalText style={style.infoRowValue}>{osInfo}</GlobalText>
+              </Text>
+              <Text style={style.infoRowValue}>{osInfo}</Text>
             </View>
           </View>
         </View>
@@ -148,11 +129,12 @@ const style = StyleSheet.create({
     paddingTop: Spacing.large,
   },
   topContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
     marginBottom: Spacing.large,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header1,
+    ...Typography.bold,
     marginBottom: Spacing.small,
   },
   aboutContent: {
@@ -164,7 +146,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   bottomContainer: {
-    paddingHorizontal: Spacing.large,
+    paddingHorizontal: Spacing.medium,
   },
   infoRowContainer: {
     marginTop: Spacing.small,

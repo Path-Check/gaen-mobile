@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
-import { GlobalText, Button } from "../components"
+import { Text, Button } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -40,24 +40,20 @@ const NotificationsPermissions: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("onboarding.notification_header")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("onboarding.notification_subheader1")}
-          </GlobalText>
-          <GlobalText style={style.body}>
-            {t("onboarding.notification_body1")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.body}>{t("onboarding.notification_body1")}</Text>
+          <Text style={style.subheader}>
             {t("onboarding.notification_subheader2")}
-          </GlobalText>
-          <GlobalText style={style.body}>
-            {t("onboarding.notification_body2")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.body}>{t("onboarding.notification_body2")}</Text>
+          <Text style={style.subheader}>
             {t("onboarding.notification_subheader3")}
-          </GlobalText>
+          </Text>
         </View>
         <View style={style.buttonsContainer}>
           <Button
@@ -68,9 +64,9 @@ const NotificationsPermissions: FunctionComponent = () => {
             onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
           >
-            <GlobalText style={style.secondaryButtonText}>
+            <Text style={style.secondaryButtonText}>
               {t("common.maybe_later")}
-            </GlobalText>
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

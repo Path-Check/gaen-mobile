@@ -9,14 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect, Stacks, ModalStackScreens } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { useSymptomLogContext } from "./SymptomLogContext"
-import { GlobalText, Button, StatusBar } from "../components"
-import {
-  HealthAssessment,
-  determineHealthAssessment,
-  Symptom,
-} from "./symptoms"
+import { Text, Button } from "../components"
+import { Symptom } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
 
 import {
@@ -25,11 +21,8 @@ import {
   Spacing,
   Typography,
   Outlines,
-  Iconography,
   Buttons,
 } from "../styles"
-import { SvgXml } from "react-native-svg"
-import { Icons } from "../assets"
 import { MyHealthStackParams } from "../navigation/MyHealthStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
@@ -132,21 +125,14 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const completeOnPressSave = () => {
-    const currentHealthAssessment = determineHealthAssessment(selectedSymptoms)
-    if (currentHealthAssessment === HealthAssessment.AtRisk) {
-      navigation.navigate(Stacks.Modal, {
-        screen: ModalStackScreens.AtRiskRecommendation,
-      })
-    } else {
-      navigation.goBack()
-      const flashMessage = isEditingLogEntry
-        ? t("symptom_checker.symptoms_updated")
-        : t("symptom_checker.symptoms_saved")
-      showMessage({
-        message: flashMessage,
-        ...Affordances.successFlashMessageOptions,
-      })
-    }
+    navigation.goBack()
+    const flashMessage = isEditingLogEntry
+      ? t("symptom_checker.symptoms_updated")
+      : t("symptom_checker.symptoms_saved")
+    showMessage({
+      message: flashMessage,
+      ...Affordances.successFlashMessageOptions,
+    })
   }
 
   const determineSymptomButtonStyle = (symptom: Symptom) => {
@@ -166,72 +152,51 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   ) as [Symptom, string][]
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.secondary10} />
-      <View style={style.headerContainer}>
-        <GlobalText style={style.headerText}>
-          {t("symptom_checker.what_symptoms")}
-        </GlobalText>
-        <TouchableOpacity
-          style={style.closeIconContainer}
-          onPress={navigation.goBack}
-        >
-          <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
-          />
-        </TouchableOpacity>
-      </View>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        <View style={style.symptomButtonsContainer}>
-          {symptomsWithTranslationsList.map(
-            ([symptom, translation]: [Symptom, string]) => {
-              return (
-                <TouchableHighlight
-                  key={symptom}
-                  onPress={() => handleOnPressSymptom(symptom)}
-                  style={determineSymptomButtonStyle(symptom)}
-                  underlayColor={Colors.neutral10}
-                  accessibilityLabel={translation}
-                >
-                  <GlobalText style={determineSymptomButtonTextStyle(symptom)}>
-                    {translation}
-                  </GlobalText>
-                </TouchableHighlight>
-              )
-            },
-          )}
-        </View>
-        <Button
-          onPress={handleOnPressSave}
-          label={t("common.save")}
-          disabled={selectedSymptoms.length === 0}
-          customButtonStyle={style.saveButton}
-          customButtonInnerStyle={style.saveButtonInner}
-        />
-        {isEditingLogEntry && (
-          <TouchableOpacity
-            onPress={handleOnPressDelete}
-            accessibilityLabel={t("symptom_checker.delete_entry")}
-            style={style.deleteButtonContainer}
-          >
-            <GlobalText style={style.deleteButtonText}>
-              {t("symptom_checker.delete_entry")}
-            </GlobalText>
-          </TouchableOpacity>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      <View style={style.symptomButtonsContainer}>
+        {symptomsWithTranslationsList.map(
+          ([symptom, translation]: [Symptom, string]) => {
+            return (
+              <TouchableHighlight
+                key={symptom}
+                onPress={() => handleOnPressSymptom(symptom)}
+                style={determineSymptomButtonStyle(symptom)}
+                underlayColor={Colors.neutral10}
+                accessibilityLabel={translation}
+              >
+                <Text style={determineSymptomButtonTextStyle(symptom)}>
+                  {translation}
+                </Text>
+              </TouchableHighlight>
+            )
+          },
         )}
-      </ScrollView>
-    </>
+      </View>
+      <Button
+        onPress={handleOnPressSave}
+        label={t("common.save")}
+        disabled={selectedSymptoms.length === 0}
+        customButtonStyle={style.saveButton}
+        customButtonInnerStyle={style.saveButtonInner}
+      />
+      {isEditingLogEntry && (
+        <TouchableOpacity
+          onPress={handleOnPressDelete}
+          accessibilityLabel={t("symptom_checker.delete_entry")}
+          style={style.deleteButtonContainer}
+        >
+          <Text style={style.deleteButtonText}>
+            {t("symptom_checker.delete_entry")}
+          </Text>
+        </TouchableOpacity>
+      )}
+    </ScrollView>
   )
 }
-
-const headerHeight = 90
 
 const style = StyleSheet.create({
   container: {
@@ -243,26 +208,6 @@ const style = StyleSheet.create({
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xxHuge,
-  },
-  headerContainer: {
-    width: "100%",
-    height: headerHeight,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    backgroundColor: Colors.secondary10,
-    paddingHorizontal: Spacing.small,
-    paddingBottom: Spacing.small,
-  },
-  headerText: {
-    ...Typography.header3,
-    paddingRight: Spacing.xxLarge,
-  },
-  closeIconContainer: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    padding: Spacing.medium,
   },
   symptomButtonsContainer: {
     flexWrap: "wrap",

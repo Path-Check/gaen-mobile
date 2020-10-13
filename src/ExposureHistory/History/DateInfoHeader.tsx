@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../../components"
+import { Text } from "../../components"
 import { DateTimeUtils } from "../../utils"
 
 import { Colors, Typography } from "../../styles"
@@ -31,12 +31,12 @@ const DateInfoHeader: FunctionComponent<DateInfoHeaderProps> = ({
 
   return (
     <View style={style.headerContainer}>
-      <GlobalText style={style.subHeaderText}>
+      <Text style={style.subHeaderText}>
         <>
           {lastDaysText}
           {updatedAtText}
         </>
-      </GlobalText>
+      </Text>
     </View>
   )
 }

@@ -5,8 +5,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useAnalyticsContext } from "../AnalyticsContext"
-import { GlobalText } from "../components"
-import { ModalStackScreens, Stacks } from "../navigation"
+import { Text } from "../components"
+import { ModalStackScreens } from "../navigation"
 import { Icons } from "../assets"
 import { Colors, Iconography, Typography, Spacing } from "../styles"
 
@@ -16,9 +16,7 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
   const { userConsentedToAnalytics } = useAnalyticsContext()
 
   const onPressShareAnonymizedData = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.AnonymizedDataConsent,
-    })
+    navigation.navigate(ModalStackScreens.AnonymizedDataConsent)
   }
 
   const rightIconColor = userConsentedToAnalytics
@@ -50,9 +48,9 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
             accessibilityLabel={accessibilityLabel}
             testID={testID}
           />
-          <GlobalText style={style.listItemText}>
+          <Text style={style.listItemText}>
             {t("settings.share_anonymized_data")}
-          </GlobalText>
+          </Text>
         </View>
         <SvgXml
           fill={rightIconColor}

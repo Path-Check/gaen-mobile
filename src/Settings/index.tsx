@@ -7,7 +7,6 @@ import env from "react-native-config"
 import { getLocalNames } from "../locales/languages"
 import {
   useStatusBarEffect,
-  Stacks,
   ModalStackScreens,
   SettingsStackScreens,
 } from "../navigation"
@@ -36,15 +35,15 @@ const Settings: FunctionComponent = () => {
   const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
   const handleOnPressSelectLanguage = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.LanguageSelection,
-    })
+    navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.HowItWorksReviewFromSettings,
-    })
+    navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings)
+  }
+
+  const handleOnPressDeleteMyData = () => {
+    navigation.navigate(SettingsStackScreens.DeleteConfirmation)
   }
 
   const selectLanguage: SettingsListItem = {
@@ -62,6 +61,13 @@ const Settings: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+
+  const deleteMyData: SettingsListItem = {
+    label: t("settings.delete_my_data"),
+    onPress: handleOnPressDeleteMyData,
+    icon: Icons.Trash,
+  }
+
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
@@ -95,6 +101,13 @@ const Settings: FunctionComponent = () => {
             </View>
           )
         })}
+      </View>
+      <View style={style.section}>
+        <ListItem
+          label={deleteMyData.label}
+          onPress={deleteMyData.onPress}
+          icon={deleteMyData.icon}
+        />
       </View>
       {showDebugMenu && (
         <View style={style.section}>

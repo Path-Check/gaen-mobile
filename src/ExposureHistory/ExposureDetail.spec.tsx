@@ -7,7 +7,7 @@ import { DateTimeUtils } from "../utils"
 import { factories } from "../factories"
 import ExposureDetail from "./ExposureDetail"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { ModalStackScreens, Stacks } from "../navigation"
+import { ModalStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("ExposureDetail", () => {
@@ -135,27 +135,27 @@ describe("ExposureDetail", () => {
     })
   })
 
-  describe("when the health authority supports the self screener", () => {
+  describe("when the health authority supports the self assessment", () => {
     it("prompts the user to get personalized guidance", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
       const { getByLabelText } = render(
         <ConfigurationContext.Provider
           value={factories.configurationContext.build({
-            displaySelfScreener: true,
+            displaySelfAssessment: true,
           })}
         >
           <ExposureDetail />
         </ConfigurationContext.Provider>,
       )
 
-      const selfScreenerButton = getByLabelText("Personalize my guidance")
+      const selfAssessmentButton = getByLabelText("Personalize my guidance")
 
-      expect(selfScreenerButton).not.toBeNull()
-      fireEvent.press(selfScreenerButton)
-      expect(navigateSpy).toHaveBeenCalledWith(Stacks.Modal, {
-        screen: ModalStackScreens.SelfScreenerFromExposureDetails,
-      })
+      expect(selfAssessmentButton).not.toBeNull()
+      fireEvent.press(selfAssessmentButton)
+      expect(navigateSpy).toHaveBeenCalledWith(
+        ModalStackScreens.SelfAssessmentFromExposureDetails,
+      )
     })
   })
 })

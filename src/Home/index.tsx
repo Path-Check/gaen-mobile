@@ -10,34 +10,30 @@ import {
   Animated,
   AccessibilityInfo,
   ScrollView,
+  Linking,
   TouchableOpacity,
   StyleSheet,
   View,
+  Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../PermissionsContext"
-import { useSystemServicesContext } from "../SystemServicesContext"
-import { ModalStackScreens, useStatusBarEffect, Stacks } from "../navigation"
-import { useApplicationName } from "../hooks/useApplicationInfo"
-import {
-  StatusBar,
-  GlobalText,
-  Button,
-  GradientBackground,
-} from "../components"
+  HomeStackScreens,
+  ModalStackScreens,
+  useStatusBarEffect,
+  Stacks,
+} from "../navigation"
+import { useConfigurationContext } from "../ConfigurationContext"
+import { StatusBar, Text } from "../components"
 
-import { BluetoothActivationStatus } from "./BluetoothActivationStatus"
-import { ProximityTracingActivationStatus } from "./ProximityTracingActivationStatus"
-import { LocationActivationStatus } from "./LocationActivationStatus"
-import { ShareLink } from "./ShareLink"
+import ShareLink from "./ShareLink"
+import CovidDataClip from "../CovidDataDashboard/CovidDataClip"
+import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
-import { Icons } from "../assets"
+import { Icons, Images } from "../assets"
 import {
   Layout,
   Spacing,
@@ -46,59 +42,217 @@ import {
   Outlines,
   Iconography,
   Buttons,
+  Affordances,
 } from "../styles"
 
-const TOP_ICON_SIZE = Iconography.medium
+const STATUS_ICON_SIZE = Iconography.small
+const IMAGE_HEIGHT = 170
 
 const Home: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.gradient100Light)
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { exposureDetectionStatus } = useExposureDetectionStatus()
+  const {
+    displaySelfAssessment,
+    displayCovidData,
+    displayCallbackForm,
+    emergencyPhoneNumber,
+  } = useConfigurationContext()
 
-  const { applicationName } = useApplicationName()
-
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
-
-  const { exposureNotifications } = usePermissionsContext()
-  const isProximityTracingOn =
-    exposureNotifications.status === ENPermissionStatus.ENABLED
-
-  const appIsActive =
-    isProximityTracingOn && isBluetoothOn && !isLocationRequiredAndOff
-
-  const handleOnPressSettings = () => {
-    navigation.navigate(Stacks.Settings)
+  const ChevronRightIcon = () => {
+    return (
+      <View style={style.chevronRightIcon}>
+        <SvgXml
+          xml={Icons.ChevronRight}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+          fill={Colors.neutral75}
+        />
+      </View>
+    )
   }
 
-  const handleOnPressReportTestResult = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.AffectedUserStack,
-    })
-  }
-
-  const topIcon = appIsActive ? Icons.CheckInCircle : Icons.XInCircle
-  const topIconFill = appIsActive ? Colors.success100 : Colors.danger75
-  const topIconAccessibilityLabel = appIsActive
-    ? t("home.status_icon_active_label")
-    : t("home.status_icon_inactive_label")
-  const headerText = appIsActive
-    ? t("home.bluetooth.tracing_on_header")
-    : t("home.bluetooth.tracing_off_header")
-  const subheaderText = () => {
-    if (appIsActive) {
-      return t("home.bluetooth.all_services_on_subheader", {
-        applicationName,
-      })
-    } else {
-      return isLocationRequired
-        ? t("home.bluetooth.tracing_off_subheader_location")
-        : t("home.bluetooth.tracing_off_subheader")
+  const ExposureDetectionStatus: FunctionComponent = () => {
+    const handleOnPressExposureDetectionStatus = () => {
+      navigation.navigate(HomeStackScreens.ExposureDetectionStatus)
     }
+
+    const statusBackgroundColor = exposureDetectionStatus
+      ? Colors.success10
+      : Colors.danger10
+    const statusBorderColor = exposureDetectionStatus
+      ? Colors.success100
+      : Colors.danger100
+    const statusIcon = exposureDetectionStatus
+      ? Icons.CheckInCircle
+      : Icons.XInCircle
+    const statusIconFill = exposureDetectionStatus
+      ? Colors.success100
+      : Colors.danger100
+    const statusText = exposureDetectionStatus
+      ? t("home.bluetooth.tracing_on_header")
+      : t("home.bluetooth.tracing_off_header")
+    const actionText = exposureDetectionStatus
+      ? t("exposure_scanning_status.learn_more")
+      : t("exposure_scanning_status.fix_this")
+
+    const statusContainerStyle = {
+      ...style.statusContainer,
+      backgroundColor: statusBackgroundColor,
+      borderColor: statusBorderColor,
+    }
+
+    return (
+      <TouchableOpacity
+        style={statusContainerStyle}
+        accessibilityLabel={statusText}
+        testID={"exposure-scanning-status-button"}
+        onPress={handleOnPressExposureDetectionStatus}
+      >
+        <View style={style.statusTopContainer}>
+          <Text style={style.statusText} testID={"home-header"}>
+            {statusText}
+          </Text>
+          <View>
+            <SvgXml
+              xml={statusIcon}
+              width={STATUS_ICON_SIZE}
+              height={STATUS_ICON_SIZE}
+              fill={statusIconFill}
+              style={style.statusIcon}
+            />
+            {exposureDetectionStatus && <ExpandingCircleAnimation />}
+          </View>
+        </View>
+        <View style={style.statusBottomContainer}>
+          <Text style={style.statusActionText}>{actionText}</Text>
+          <SvgXml
+            xml={Icons.ChevronRight}
+            fill={Colors.black}
+            width={Iconography.tiny}
+            height={Iconography.tiny}
+          />
+        </View>
+      </TouchableOpacity>
+    )
+  }
+  const TalkToContactTracer: FunctionComponent = () => {
+    const handleOnPressTalkToContactTracer = () => {
+      navigation.navigate(ModalStackScreens.CallbackStack)
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressTalkToContactTracer}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.HowItWorksValueProposition}
+          style={style.image}
+          width={200}
+          height={IMAGE_HEIGHT}
+        />
+        <Text style={style.sectionHeaderText}>
+          {t("home.did_you_test_positive")}
+        </Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.to_submit_your_test")}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const ReportTestResult: FunctionComponent = () => {
+    const handleOnPressReportTestResult = () => {
+      navigation.navigate(HomeStackScreens.AffectedUserStack)
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressReportTestResult}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.ProtectPrivacySubmitKeys}
+          style={style.image}
+          width={130}
+          height={IMAGE_HEIGHT}
+        />
+        <Text style={style.sectionHeaderText}>
+          {t("home.have_a_positive_test")}
+        </Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.if_you_have_a_code")}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const SelfAssessment: FunctionComponent = () => {
+    const handleOnPressTakeSelfAssessment = () => {
+      navigation.navigate(ModalStackScreens.SelfAssessmentFromHome)
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressTakeSelfAssessment}
+        style={style.floatingContainer}
+      >
+        <ChevronRightIcon />
+        <Image
+          source={Images.SelfAssessmentIntro}
+          style={style.image}
+          width={150}
+          height={IMAGE_HEIGHT}
+        />
+        <Text style={style.sectionHeaderText}>{t("home.feeling_sick")}</Text>
+        <Text style={style.sectionBodyText}>
+          {t("home.check_if_your_symptoms")}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const CallEmergencyServices: FunctionComponent = () => {
+    const handleOnPressCallEmergencyServices = () => {
+      Linking.openURL(`tel:${emergencyPhoneNumber}`)
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={handleOnPressCallEmergencyServices}
+        accessibilityLabel={t(
+          "self_assessment.call_emergency_services.call_emergencies",
+          {
+            emergencyPhoneNumber,
+          },
+        )}
+        accessibilityRole="button"
+        style={style.emergencyButtonContainer}
+      >
+        <SvgXml
+          xml={Icons.Phone}
+          fill={Colors.white}
+          width={Iconography.xSmall}
+          height={Iconography.xSmall}
+        />
+        <Text style={style.emergencyButtonText}>
+          {t("home.call_emergency_services", {
+            emergencyPhoneNumber,
+          })}
+        </Text>
+      </TouchableOpacity>
+    )
   }
 
   const SettingsButton = () => {
+    const handleOnPressSettings = () => {
+      navigation.navigate(Stacks.Settings)
+    }
+
     return (
       <TouchableOpacity
         style={style.settingsButtonContainer}
@@ -110,7 +264,7 @@ const Home: FunctionComponent = () => {
           xml={Icons.Gear}
           width={Iconography.small}
           height={Iconography.small}
-          fill={Colors.white}
+          fill={Colors.neutral100}
         />
       </TouchableOpacity>
     )
@@ -118,81 +272,39 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.gradient100Light} />
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
       >
-        <View style={style.topScrollViewBackground} />
-        <GradientBackground gradient={Colors.gradient100} angleCenterY={1}>
-          <View style={style.topContainer}>
-            <SettingsButton />
-            <View style={style.topIconContainer}>
-              <SvgXml
-                xml={topIcon}
-                width={TOP_ICON_SIZE}
-                height={TOP_ICON_SIZE}
-                fill={topIconFill}
-                accessible
-                style={style.topIcon}
-                accessibilityLabel={topIconAccessibilityLabel}
-              />
-              {appIsActive && <ExpandingCircleAnimation />}
-            </View>
-            <GlobalText style={style.headerText} testID={"home-header"}>
-              {headerText}
-            </GlobalText>
-            <GlobalText style={style.subheaderText} testID={"home-subheader"}>
-              {subheaderText()}
-            </GlobalText>
-          </View>
-        </GradientBackground>
-        <View style={style.bottomContainer}>
-          <View>
-            <ShareLink />
-            <BluetoothActivationStatus />
-            <ProximityTracingActivationStatus />
-            <LocationActivationStatus />
-          </View>
-          <View style={style.buttonContainer}>
-            <Button
-              onPress={handleOnPressReportTestResult}
-              label={t("home.bluetooth.report_positive_result")}
-              customButtonStyle={style.button}
-              customButtonInnerStyle={style.buttonInner}
-              hasRightArrow
-            />
-          </View>
-        </View>
+        <Text style={style.headerText}>{t("screen_titles.home")}</Text>
+        <SettingsButton />
+        <ExposureDetectionStatus />
+        <ShareLink />
+        {displayCovidData && <CovidDataClip />}
+        {displayCallbackForm && <TalkToContactTracer />}
+        <ReportTestResult />
+        {displaySelfAssessment && <SelfAssessment />}
+        <CallEmergencyServices />
       </ScrollView>
     </>
   )
 }
 
 const style = StyleSheet.create({
-  topScrollViewBackground: {
-    position: "absolute",
-    top: "-100%",
-    left: 0,
-    right: 0,
-    backgroundColor: Colors.gradient100Light,
-    height: "100%",
-  },
   container: {
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
-    flexGrow: 1,
-    paddingBottom: Spacing.small,
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.xxxLarge,
+    paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.primaryLightBackground,
   },
-  topContainer: {
-    flexGrow: 1,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Spacing.small,
-    paddingBottom: Spacing.xLarge,
+  headerText: {
+    ...Typography.header1,
+    ...Typography.bold,
+    marginBottom: Spacing.medium,
   },
   settingsButtonContainer: {
     position: "absolute",
@@ -200,44 +312,72 @@ const style = StyleSheet.create({
     right: 0,
     padding: Spacing.medium,
   },
-  topIconContainer: {
-    backgroundColor: Colors.white,
-    borderRadius: Outlines.borderRadiusMax,
-    padding: 5,
-    marginBottom: Spacing.large,
+  statusContainer: {
+    ...Affordances.floatingContainer,
+    paddingVertical: Spacing.small,
+    elevation: 0,
+    borderWidth: Outlines.thin,
+    overflow: "hidden",
   },
-  topIcon: {
+  statusTopContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: Spacing.xxxSmall,
+  },
+  statusIcon: {
     zIndex: Layout.zLevel1,
   },
-  headerText: {
-    ...Typography.header2,
-    ...Typography.mediumBold,
-    color: Colors.white,
-    textAlign: "center",
+  statusText: {
+    ...Typography.header3,
+    color: Colors.black,
+  },
+  statusBottomContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statusActionText: {
+    ...Typography.body2,
+    color: Colors.black,
+    marginRight: Spacing.xxxSmall,
+    paddingBottom: 2,
+  },
+  floatingContainer: {
+    ...Affordances.floatingContainer,
+  },
+  chevronRightIcon: {
+    position: "absolute",
+    top: Spacing.large,
+    right: Spacing.large,
+  },
+  image: {
+    resizeMode: "contain",
+    marginBottom: Spacing.xSmall,
+  },
+  sectionHeaderText: {
+    ...Typography.header3,
     marginBottom: Spacing.xxSmall,
+    color: Colors.black,
   },
-  subheaderText: {
-    ...Typography.body1,
-    fontSize: Typography.large,
-    paddingHorizontal: Spacing.medium,
-    color: Colors.white,
-    textAlign: "center",
-    marginBottom: Spacing.xxSmall,
+  sectionBodyText: {
+    ...Typography.header4,
+    ...Typography.base,
+    color: Colors.neutral100,
+    marginBottom: Spacing.small,
   },
-  bottomContainer: {
-    justifyContent: "space-between",
-    backgroundColor: Colors.primaryLightBackground,
-  },
-  buttonContainer: {
-    marginTop: Spacing.medium,
-    marginHorizontal: Spacing.small,
-  },
-  button: {
-    width: "100%",
-  },
-  buttonInner: {
+  emergencyButtonContainer: {
+    ...Buttons.primary,
     ...Buttons.medium,
+    borderRadius: Outlines.borderRadiusLarge,
     width: "100%",
+    flexDirection: "row",
+    alignSelf: "center",
+    paddingHorizontal: Spacing.xLarge,
+    backgroundColor: Colors.danger100,
+  },
+  emergencyButtonText: {
+    ...Typography.buttonPrimary,
+    marginLeft: Spacing.small,
   },
 })
 
@@ -246,14 +386,14 @@ const ExpandingCircleAnimation: FunctionComponent = () => {
     false,
   )
 
-  const animationTime = 1200
-  const delayTime = 2500
+  const animationTime = 1600
+  const delayTime = 2000
   const initialCircleSize = 0
   const endingCircleSize = 600
-  const initialTopValue = TOP_ICON_SIZE / 2
-  const endingTopValue = endingCircleSize * -0.42
-  const initialOpacity = 0.05
-  const endingOpacity = 0
+  const initialTopValue = STATUS_ICON_SIZE / 2
+  const endingTopValue = endingCircleSize * -0.46
+  const initialOpacity = 0.2
+  const endingOpacity = 0.0
 
   const sizeAnimatedValue = useRef(new Animated.Value(initialCircleSize))
     .current
@@ -314,9 +454,10 @@ const ExpandingCircleAnimation: FunctionComponent = () => {
         alignSelf: "center",
         width: sizeAnimatedValue,
         height: sizeAnimatedValue,
-        backgroundColor: Colors.white,
-        opacity: opacityAnimatedValue,
+        borderColor: Colors.success100,
+        borderWidth: Outlines.hairline,
         borderRadius: Outlines.borderRadiusMax,
+        opacity: opacityAnimatedValue,
       }}
     />
   )

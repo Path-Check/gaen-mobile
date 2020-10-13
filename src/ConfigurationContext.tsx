@@ -9,43 +9,47 @@ export interface Configuration {
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
+  displayCovidData: boolean
   displayMyHealth: boolean
-  displaySelfScreener: boolean
+  displaySelfAssessment: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
-  healthAuthorityLearnMoreUrl: string
+  healthAuthorityAnalyticsSiteId: number | null
+  healthAuthorityAnalyticsUrl: string | null
   healthAuthorityEulaUrl: string | null
+  healthAuthorityLearnMoreUrl: string
+  healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
-  healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthoritySupportsAnalytics: boolean
-  healthAuthorityAnalyticsUrl: string | null
-  healthAuthorityAnalyticsSiteId: number | null
   measurementSystem: MeasurementSystem
   regionCodes: string[]
+  stateAbbreviation: string | null
 }
 
-const initialState = {
+const initialState: Configuration = {
   appDownloadLink: "",
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
+  displayCovidData: false,
   displayMyHealth: false,
-  displaySelfScreener: false,
+  displaySelfAssessment: false,
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
-  healthAuthorityLearnMoreUrl: "",
+  healthAuthorityAnalyticsSiteId: null,
+  healthAuthorityAnalyticsUrl: null,
   healthAuthorityEulaUrl: null,
+  healthAuthorityLearnMoreUrl: "",
+  healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
-  healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthoritySupportsAnalytics: false,
-  healthAuthorityAnalyticsUrl: null,
-  healthAuthorityAnalyticsSiteId: null,
   measurementSystem: "Imperial" as const,
   regionCodes: [],
+  stateAbbreviation: "",
 }
 
 const ConfigurationContext = createContext<Configuration>(initialState)
@@ -65,8 +69,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
+  const displayCovidData = env.DISPLAY_COVID_DATA === "true"
   const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
-  const displaySelfScreener = env.DISPLAY_SELF_SCREENER === "true"
+  const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
@@ -82,6 +87,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   }) as string
   const regionCodes = env.REGION_CODES.split(",")
 
+  const stateAbbreviation =
+    env.STATE_ABBREVIATION?.length > 0 ? env.STATE_ABBREVIATION : null
+
   return (
     <ConfigurationContext.Provider
       value={{
@@ -89,21 +97,23 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appPackageName,
         displayAcceptTermsOfService,
         displayCallbackForm,
+        displayCovidData,
         displayMyHealth,
-        displaySelfScreener,
+        displaySelfAssessment,
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
-        healthAuthorityLearnMoreUrl,
+        healthAuthorityAnalyticsSiteId,
+        healthAuthorityAnalyticsUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
-        healthAuthorityName,
+        healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
+        healthAuthorityName,
         healthAuthorityPrivacyPolicyUrl,
         healthAuthoritySupportsAnalytics,
-        healthAuthorityAnalyticsUrl,
-        healthAuthorityAnalyticsSiteId,
         measurementSystem,
         regionCodes,
+        stateAbbreviation,
       }}
     >
       {children}

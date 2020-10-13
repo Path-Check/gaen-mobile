@@ -6,11 +6,9 @@ import java.util.UUID;
 public class RNExposureInformation {
   private String id;
   private long date; // Milliseconds
-  private double duration; // Minutes
 
-  public RNExposureInformation(long date, double duration) {
+  public RNExposureInformation(long date) {
     this.id = UUID.randomUUID().toString();
     this.date = date;
-    this.duration = duration;
   }
 }

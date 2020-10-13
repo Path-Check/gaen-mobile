@@ -1,141 +1,43 @@
-import {
-  SymptomLogEntry,
-  combineSymptomAndCheckInLogs,
-  CheckInStatus,
-} from "./symptoms"
-import { beginningOfDay } from "../utils/dateTime"
+import { SymptomLogEntry, sortSymptomEntries } from "./symptoms"
 
-describe("combineSymptomAndCheckInLogs", () => {
-  it("returns a set of log entries grouped by day with entries sorted", () => {
-    const earlierDayDateString = "2020-09-21"
-    const earlierDayLogEntryOnePosix = Date.parse(
-      `${earlierDayDateString} 10:00`,
-    )
-    const earlierDayDatePosix = beginningOfDay(earlierDayLogEntryOnePosix)
-    const earlierDayLogEntryOne: SymptomLogEntry = {
+describe("sortSymptomEntries", () => {
+  it("returns a list log entries sorted by time descending", () => {
+    const log1DateTime = Date.parse("10-1-2020 10:00")
+    const log2DateTime = Date.parse("10-2-2020 10:00")
+    const log3DateTime = Date.parse("10-2-2020 10:05")
+    const log4DateTime = Date.parse("10-2-2020 10:10")
+    const log5DateTime = Date.parse("10-3-2020 10:00")
+
+    const log1: SymptomLogEntry = {
       id: "1",
       symptoms: ["fever", "cough"],
-      date: earlierDayLogEntryOnePosix,
+      date: log1DateTime,
     }
-    const earlierDayLogEntryTwoPosix = Date.parse(
-      `${earlierDayDateString} 12:00`,
-    )
-    const earlierDayLogEntryTwo: SymptomLogEntry = {
+    const log2: SymptomLogEntry = {
       id: "2",
-      symptoms: ["fever"],
-      date: earlierDayLogEntryTwoPosix,
-    }
-    const middleDayDateString = "2020-09-22"
-    const middleDayLogEntryOnePosix = Date.parse(`${middleDayDateString} 10:00`)
-    const middleDayDatePosix = beginningOfDay(middleDayLogEntryOnePosix)
-    const middleDayLogEntryOne: SymptomLogEntry = {
-      id: "3",
-      symptoms: ["fever"],
-      date: middleDayLogEntryOnePosix,
-    }
-    const middleDayLogEntryTwoPosix = Date.parse(`${middleDayDateString} 12:00`)
-    const middleDayLogEntryTwo: SymptomLogEntry = {
-      id: "4",
-      symptoms: ["cough"],
-      date: middleDayLogEntryTwoPosix,
-    }
-
-    const recentDayEntryDateString = "2020-09-23"
-    const recentDayLogEntryPosix = Date.parse(
-      `${recentDayEntryDateString} 12:00`,
-    )
-    const recentDayEntryDatePosix = beginningOfDay(recentDayLogEntryPosix)
-    const recentDayEntry: SymptomLogEntry = {
-      id: "5",
-      symptoms: ["cough"],
-      date: recentDayLogEntryPosix,
-    }
-    expect(
-      combineSymptomAndCheckInLogs(
-        [
-          middleDayLogEntryTwo,
-          recentDayEntry,
-          earlierDayLogEntryOne,
-          middleDayLogEntryOne,
-          earlierDayLogEntryTwo,
-        ],
-        [],
-      ),
-    ).toEqual([
-      {
-        date: recentDayEntryDatePosix,
-        logEntries: [recentDayEntry],
-        checkIn: null,
-      },
-      {
-        date: middleDayDatePosix,
-        logEntries: [middleDayLogEntryOne, middleDayLogEntryTwo],
-        checkIn: null,
-      },
-      {
-        date: earlierDayDatePosix,
-        logEntries: [earlierDayLogEntryOne, earlierDayLogEntryTwo],
-        checkIn: null,
-      },
-    ])
-  })
-
-  it("sort and combine daily log entries with daily check ins", () => {
-    const logEntryDateString = "2020-09-21"
-    const logEntryDatePosix = Date.parse(`${logEntryDateString} 10:00`)
-    const logEntryKeyDate = beginningOfDay(logEntryDatePosix)
-    const logEntry: SymptomLogEntry = {
-      id: "1",
       symptoms: ["fever", "cough"],
-      date: logEntryDatePosix,
+      date: log2DateTime,
     }
-    const symptomLogEntries: SymptomLogEntry[] = [logEntry]
-    const sameDateCheckInPosix = Date.parse(`${logEntryDateString} 12:00`)
-    const sameDateCheckIn = {
-      date: sameDateCheckInPosix,
-      status: CheckInStatus.FeelingGood,
+    const log3: SymptomLogEntry = {
+      id: "3",
+      symptoms: ["fever", "cough"],
+      date: log3DateTime,
     }
-    const earlierDateCheckInString = "2020-09-20"
-    const earlierDateCheckInPosix = Date.parse(
-      `${earlierDateCheckInString} 12:00`,
-    )
-    const earlierDateCheckInBeginningOfDay = beginningOfDay(
-      earlierDateCheckInPosix,
-    )
-    const earlierDateCheckIn = {
-      date: earlierDateCheckInPosix,
-      status: CheckInStatus.NotCheckedIn,
+    const log4: SymptomLogEntry = {
+      id: "4",
+      symptoms: ["fever", "cough"],
+      date: log4DateTime,
     }
-    const laterDateCheckInString = "2020-09-22"
-    const laterDateCheckInPosix = Date.parse(`${laterDateCheckInString} 12:00`)
-    const laterDateCheckInBeginningOfDay = beginningOfDay(laterDateCheckInPosix)
-    const laterDateCheckIn = {
-      date: laterDateCheckInPosix,
-      status: CheckInStatus.FeelingNotWell,
+    const log5: SymptomLogEntry = {
+      id: "5",
+      symptoms: ["fever", "cough"],
+      date: log5DateTime,
     }
+    const unsortedEntries = [log3, log1, log4, log2, log5]
 
-    expect(
-      combineSymptomAndCheckInLogs(symptomLogEntries, [
-        sameDateCheckIn,
-        laterDateCheckIn,
-        earlierDateCheckIn,
-      ]),
-    ).toEqual([
-      {
-        date: laterDateCheckInBeginningOfDay,
-        checkIn: laterDateCheckIn,
-        logEntries: [],
-      },
-      {
-        date: logEntryKeyDate,
-        checkIn: sameDateCheckIn,
-        logEntries: [logEntry],
-      },
-      {
-        date: earlierDateCheckInBeginningOfDay,
-        checkIn: earlierDateCheckIn,
-        logEntries: [],
-      },
-    ])
+    const result = sortSymptomEntries(unsortedEntries)
+
+    const expected = [log5, log4, log3, log2, log1]
+    expect(result).toEqual(expected)
   })
 })

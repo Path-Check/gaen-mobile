@@ -56,6 +56,11 @@ internal class Migration : RealmMigration {
                 .addField("id", String::class.java, FieldAttribute.PRIMARY_KEY, FieldAttribute.REQUIRED)
                 .addField("date", Long::class.java)
                 .addRealmListField("symptoms", String::class.java)
+            version++
+        }
+
+        if (version == 6L) {
+            schema.remove("CheckIn")
         }
     }
 }

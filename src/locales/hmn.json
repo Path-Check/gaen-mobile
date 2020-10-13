@@ -9,9 +9,7 @@
     "back": "Tom qab",
     "close": "Kaw",
     "continue": "Txuas Ntxiv",
-    "disabled": "Muab Tua",
     "done": "Ua Tiav Lawm",
-    "enabled": "Muab Taws",
     "maybe_later": "Tej zaum lwm zaus tso",
     "next": "Tom ntej",
     "no_thanks": "Kav liam",
@@ -108,14 +106,13 @@
       "location_disabled_error_title": "Tso cai nyob hauv Settings",
       "location_header": "Location",
       "proximity_tracing_header": "Proximity Tracing",
-      "report_positive_result": "Qhia tawm kev kuaj uas yog positive",
       "share": "Qhia lub app no mus rau lwm tus neeg kom thiaj li tiv thaiv tau koj thiab lwm tus",
       "share_message": "Mus xyuas lub app no {{applicationName}}, uas pab peb tswj tau tus kab mob COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Tsis Ciaj",
       "tracing_off_subheader": "Taws qhov Bluetooth thiab Proximity Tracing kom thiaj li paub txog seb tau mus raug kis mob li cas lawm",
-      "tracing_off_subheader_location": "Taws Bluetooth, Proximity Tracing, thiab Location kom thiaj paub zoo txog seb puas tau mus nyob ze raug leejtwg",
       "tracing_on_header": "Tseem Ciaj"
     },
+    "call_emergency_services": "Hu mus rau Kev Pab Cuam Xwm Ceev",
     "fix": "Mus kho teeb meem nrog {{technology}}",
     "get_more_info": "Xa paub ntxiv txog {{technology}}",
     "location_info_body_1": "Qhov qhia tawm thaum mus raug neeg mob siv Bluetooth los mus ntsuas seb lwm lub twj puas nyob sib ze. Txhua lub xov tooj uas lub hlwb khiav Andriod 6.0 thiab siab dua, yog xav siv Bluetooth los ntsuas, ces lub twj li location yuav tsum muab taws rau txhua lub app, tsis yog lub app uas muaj qhov qhia xov xwm thaum mus raug neeg mob xwb.",
@@ -126,9 +123,7 @@
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "Proximity Tracing ua haujlwm li cas?",
-    "proximity_tracing_info_subheader_2": "Kuv li ntaub ntawv puas ceev zoo cia?",
-    "status_icon_active_label": "Lub cim kos dawb nyob hauv lub voj voos ntsuab",
-    "status_icon_inactive_label": "Tus tsiaj ntawv x nyob hauv lub voj voos liab"
+    "proximity_tracing_info_subheader_2": "Kuv li ntaub ntawv puas ceev zoo cia?"
   },
   "label": {
     "check": "Cim tseg",
@@ -211,12 +206,8 @@
     "debug": "Debug",
     "exposure_history": "Keeb Kwm Mus Raug",
     "exposures": "Kev mus nyob ze raug mob",
+    "home": "Home",
     "legal": "Kev Cai Lij Choj"
-  },
-  "self_screener": {
-    "call_emergency_services": {
-      "call_emergency_services": "Hu rau 911"
-    }
   },
   "settings": {
     "i_understand_and_consent": "Kuv nkag siab thiab tso cai"

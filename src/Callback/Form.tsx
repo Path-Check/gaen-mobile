@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { Button, GlobalText } from "../components"
+import { Button, Text } from "../components"
 import * as API from "./callbackAPI"
 import Logger from "../logger"
 
@@ -107,19 +107,15 @@ const CallbackForm: FunctionComponent = () => {
       >
         <View>
           <View style={style.headerContainer}>
-            <GlobalText style={style.header}>
-              {t("callback.well_get_in_touch")}
-            </GlobalText>
-            <GlobalText style={style.subheader}>
+            <Text style={style.header}>{t("callback.request_a_call")}</Text>
+            <Text style={style.subheader}>
               {t("callback.fill_out_the_info", {
                 healthAuthorityName,
               })}
-            </GlobalText>
+            </Text>
           </View>
           <View style={style.inputContainer}>
-            <GlobalText style={style.inputLabel}>
-              {t("callback.firstname")}
-            </GlobalText>
+            <Text style={style.inputLabel}>{t("callback.firstname")}</Text>
             <TextInput
               value={firstname}
               style={style.textInput}
@@ -132,9 +128,7 @@ const CallbackForm: FunctionComponent = () => {
             />
           </View>
           <View style={style.inputContainer}>
-            <GlobalText style={style.inputLabel}>
-              {t("callback.lastname")}
-            </GlobalText>
+            <Text style={style.inputLabel}>{t("callback.lastname")}</Text>
             <TextInput
               value={lastname}
               style={style.textInput}
@@ -147,9 +141,9 @@ const CallbackForm: FunctionComponent = () => {
             />
           </View>
           <View style={style.inputContainer}>
-            <GlobalText style={style.inputLabel}>
+            <Text style={style.inputLabel}>
               {t("callback.phone_number_required")}
-            </GlobalText>
+            </Text>
             <TextInput
               value={phoneNumber}
               style={style.textInput}
@@ -162,7 +156,7 @@ const CallbackForm: FunctionComponent = () => {
               multiline
             />
           </View>
-          <GlobalText style={style.errorSubtitle}>{errorMessage}</GlobalText>
+          <Text style={style.errorSubtitle}>{errorMessage}</Text>
         </View>
         {isLoading ? <LoadingIndicator /> : null}
         <Button

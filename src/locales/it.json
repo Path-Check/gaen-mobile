@@ -30,16 +30,14 @@
       "all_services_on_subheader": "Le notifiche di esposizione sono attive",
       "tracing_off_header": "Notifiche disabilitate",
       "tracing_off_subheader": "Non riceverai notifiche su possibili esposizioni"
-    }
+    },
+    "call_emergency_services": "Servizi di emergenza"
   },
   "label": {
     "launch_enable_notif": "Attiva le Notifiche",
     "launch_get_started": "Cominciamo",
-    "launch_screen1_header": "Benvenuti in PathCheck",
+    "launch_screen1_header": "Benvenuti in ",
     "privacy_policy": "Informativa sulla privacy"
-  },
-  "my_health": {
-    "today": "Oggi"
   },
   "navigation": {
     "exposure_history": "Cronologia delle esposizioni",
@@ -53,11 +51,7 @@
   },
   "screen_titles": {
     "exposure_history": "Cronologia delle esposizioni",
+    "home": "Home",
     "legal": "Legale"
-  },
-  "self_screener": {
-    "call_emergency_services": {
-      "call_emergency_services": "Chiama i servizi di emergenza"
-    }
   }
 }

@@ -28,7 +28,9 @@ describe("AcceptTermsOfService", () => {
 
     await waitFor(() => {
       expect(getByLabelText("Checked checkbox")).toBeDefined()
-      expect(navigationSpy).toHaveBeenCalledWith("ActivateProximityTracing")
+      expect(navigationSpy).toHaveBeenCalledWith(
+        "ActivateExposureNotifications",
+      )
     })
   })
 

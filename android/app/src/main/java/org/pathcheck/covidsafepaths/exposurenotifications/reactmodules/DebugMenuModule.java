@@ -9,6 +9,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -18,7 +19,9 @@ import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+import org.threeten.bp.Instant;
 
 @SuppressWarnings("unused")
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
@@ -72,8 +75,22 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void simulateExposure(Promise promise) {
+    RealmSecureStorageBte.INSTANCE.insertExposure(
+        ExposureEntity.create(getRandomExposureDate(), Instant.now().toEpochMilli())
+    );
     NotificationHelper.showPossibleExposureNotification(getReactApplicationContext());
     promise.resolve(null);
+  }
+
+  /**
+   * Get a random date between the last 14 days and now.
+   * @return random exposure date
+   */
+  private Long getRandomExposureDate() {
+    SecureRandom random = new SecureRandom();
+    int randomDayMillis = random.nextInt(13) * 24 * 60 * 60 * 1000;
+
+    return Instant.now().toEpochMilli() - randomDayMillis;
   }
 
   @ReactMethod

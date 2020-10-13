@@ -3,7 +3,7 @@ import { ScrollView, Image, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { StatusBar, GlobalText, Button } from "../components"
+import { StatusBar, Text, Button } from "../components"
 import { useStatusBarEffect, Stacks } from "../navigation"
 
 import { Images } from "../assets"
@@ -26,12 +26,10 @@ export const AffectedUserComplete: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <Image source={Images.CheckInCircle} style={style.image} />
-        <GlobalText style={style.header}>
-          {t("export.complete_title")}
-        </GlobalText>
-        <GlobalText style={style.contentText}>
+        <Text style={style.header}>{t("export.complete_title")}</Text>
+        <Text style={style.contentText}>
           {t("export.complete_body_bluetooth")}
-        </GlobalText>
+        </Text>
         <Button onPress={handleOnPressDone} label={t("common.done")} />
       </ScrollView>
     </>

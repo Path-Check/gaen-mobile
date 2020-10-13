@@ -9,9 +9,7 @@
     "back": "戻る",
     "close": "閉じる",
     "continue": "継続する",
-    "disabled": "無効",
     "done": "完成です",
-    "enabled": "有効",
     "maybe_later": "あとで",
     "next": "次へ進む",
     "no_thanks": "結構です",
@@ -110,14 +108,13 @@
       "location_disabled_error_title": "設定での承認",
       "location_header": "ロケーション",
       "proximity_tracing_header": "近接トレース",
-      "report_positive_result": "陽性の検査結果を報告する",
       "share": "アプリを共有して、自分自身と他の人を保護します。",
       "share_message": "このアプリ{{applicationName}}チェックしてください。COVID-19の封じ込めに役立ちます！ {{appDownloadLink}}",
       "tracing_off_header": "非 アクティブ",
       "tracing_off_subheader": "Bluetoothおよび近接トレースを有効にして、可能性のある接触に関する情報を取得します",
-      "tracing_off_subheader_location": "Bluetooth、近接トレース、位置情報を有効にして、可能性のある露出に関する情報を取得します",
       "tracing_on_header": "アクティブ"
     },
+    "call_emergency_services": "緊急サービスに電話する",
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
     "location_info_body_1": "露出通知テクノロジーはBluetoothスキャンを使用して、どのデバイスが互いに近くにあるかを判断します。 Android 6.0以降を実行しているすべてのスマートフォンでBluetoothスキャンを使用するには、露出通知システムで構築されたアプリだけでなく、すべてのアプリでデバイスの場所の設定をオンにする必要があります。",
@@ -128,9 +125,7 @@
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_header": "近接トレース",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
-    "proximity_tracing_info_subheader_2": "データは安全ですか?",
-    "status_icon_active_label": "緑丸の白のチェック",
-    "status_icon_inactive_label": "赤い丸の中の白いx"
+    "proximity_tracing_info_subheader_2": "データは安全ですか?"
   },
   "label": {
     "check": "チェックマーク",
@@ -216,17 +211,10 @@
     "debug": "デバッグ",
     "exposure_history": "接触履歴",
     "exposures": "接触",
+    "home": "ホーム",
     "legal": "リーガル"
-  },
-  "self_screener": {
-    "call_emergency_services": {
-      "call_emergency_services": "911に電話する"
-    }
   },
   "settings": {
     "i_understand_and_consent": "私は理解して同意します"
-  },
-  "symptom_checker": {
-    "get_tested": "COVID-19のテストを受けることをお勧めします。"
   }
 }

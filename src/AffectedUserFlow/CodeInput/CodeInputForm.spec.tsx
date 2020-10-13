@@ -26,19 +26,6 @@ describe("CodeInputForm", () => {
     expect(getByTestId("code-input")).toHaveTextContent("")
   })
 
-  it("navigates to the home screen when user cancels the process", () => {
-    const navigateSpy = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-    const { getByLabelText } = render(
-      <AffectedUserProvider>
-        <CodeInputForm />
-      </AffectedUserProvider>,
-    )
-
-    fireEvent.press(getByLabelText("Cancel"))
-    expect(navigateSpy).toHaveBeenCalledWith("Home")
-  })
-
   describe("on a successful code verification", () => {
     it("navigates to the affected user publish consent", async () => {
       const navigateSpy = jest.fn()

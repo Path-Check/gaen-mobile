@@ -5,69 +5,18 @@ import { render, waitFor, fireEvent } from "@testing-library/react-native"
 import { useSymptomLogContext, SymptomLogProvider } from "./SymptomLogContext"
 import {
   getLogEntries,
-  getCheckIns,
-  addCheckIn,
   createLogEntry,
-  deleteStaleCheckIns,
-  deleteStaleSymptomLogs,
+  deleteSymptomLogsOlderThan,
 } from "./nativeModule"
-import {
-  Symptom,
-  CheckInStatus,
-  combineSymptomAndCheckInLogs,
-} from "./symptoms"
+import { Symptom } from "./symptoms"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
 jest.mock("./symptoms.ts")
 jest.mock("../logger.ts")
+
 describe("SymptomLogProvider", () => {
   describe("data creation", () => {
-    it("allows for the creation of a new check-in", async () => {
-      const newStatus = CheckInStatus.FeelingGood
-      const addCheckInSpy = addCheckIn as jest.Mock
-      addCheckInSpy.mockResolvedValueOnce({})
-      const mockedDate = Date.parse("2020-09-22 10:00")
-      jest.spyOn(Date, "now").mockReturnValue(mockedDate)
-      const newCheckIn = {
-        date: mockedDate,
-        status: newStatus,
-      }
-      ;(getCheckIns as jest.Mock).mockResolvedValue([])
-      ;(getLogEntries as jest.Mock).mockResolvedValue([])
-
-      const AddCheckInStatus = () => {
-        const { todaysCheckIn, addTodaysCheckIn } = useSymptomLogContext()
-
-        return (
-          <>
-            <Text>{todaysCheckIn.status}</Text>
-            <TouchableOpacity
-              accessibilityLabel="add-check-in"
-              onPress={() => {
-                addTodaysCheckIn(newStatus)
-              }}
-            />
-          </>
-        )
-      }
-
-      const { getByLabelText, getByText } = render(
-        <SymptomLogProvider>
-          <AddCheckInStatus />
-        </SymptomLogProvider>,
-      )
-
-      expect(getByText(CheckInStatus.NotCheckedIn.toString())).toBeDefined()
-
-      fireEvent.press(getByLabelText("add-check-in"))
-
-      await waitFor(() => {
-        expect(addCheckInSpy).toHaveBeenCalledWith({ ...newCheckIn })
-        expect(getByText(newStatus.toString())).toBeDefined()
-      })
-    })
-
     it("allows for the creation of a new symptom log", async () => {
       const createLogEntrySpy = createLogEntry as jest.Mock
       createLogEntrySpy.mockResolvedValueOnce({})
@@ -78,10 +27,9 @@ describe("SymptomLogProvider", () => {
         date: mockedDate,
         symptoms,
       }
-      ;(getCheckIns as jest.Mock).mockResolvedValue([])
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
-      const AddCheckInStatus = () => {
+      const AddCheckLogSymptoms = () => {
         const { addLogEntry } = useSymptomLogContext()
 
         return (
@@ -98,7 +46,7 @@ describe("SymptomLogProvider", () => {
 
       const { getByLabelText } = render(
         <SymptomLogProvider>
-          <AddCheckInStatus />
+          <AddCheckLogSymptoms />
         </SymptomLogProvider>,
       )
 
@@ -116,7 +64,6 @@ describe("SymptomLogProvider", () => {
       )
       const resultSpy = jest.fn()
       const loggerSpy = jest.spyOn(Logger, "error")
-      ;(getCheckIns as jest.Mock).mockResolvedValue([])
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
       const AddCheckInStatus = () => {
@@ -153,94 +100,39 @@ describe("SymptomLogProvider", () => {
   })
 
   describe("data seeding", () => {
-    it("fetch all daily check-in and log entries to serialize", async () => {
-      const checkIns = [{ date: Date.now(), status: CheckInStatus.FeelingGood }]
+    it("fetchs all daily log entries", async () => {
       const logEntries = [{ date: Date.now(), symptoms: [], id: "1" }]
-      ;(getCheckIns as jest.Mock).mockResolvedValueOnce(checkIns)
       ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)
-      const serializeSpy = combineSymptomAndCheckInLogs as jest.Mock
 
       render(
         <SymptomLogProvider>
-          <CurrentCheckInStatus />
+          <SymptomLogConsumer />
         </SymptomLogProvider>,
       )
 
       await waitFor(() => {
-        expect(serializeSpy).toHaveBeenCalledWith(logEntries, checkIns)
+        expect(getLogEntries).toHaveBeenCalled()
       })
     })
 
     it("deletes all the stale data on load", async () => {
-      const deleteStaleCheckInsSpy = deleteStaleCheckIns as jest.Mock
-      const deleteStaleSymptomLogsSpy = deleteStaleSymptomLogs as jest.Mock
+      const deleteSymptomLogsOlderThanSpy = deleteSymptomLogsOlderThan as jest.Mock
 
       render(
         <SymptomLogProvider>
-          <CurrentCheckInStatus />
+          <SymptomLogConsumer />
         </SymptomLogProvider>,
       )
 
       await waitFor(() => {
-        expect(deleteStaleSymptomLogsSpy).toHaveBeenCalled()
-        expect(deleteStaleCheckInsSpy).toHaveBeenCalled()
-      })
-    })
-
-    describe("when the user checked in today", () => {
-      it("sets todays check in to todays entry", async () => {
-        const mockedDate = Date.parse("2020-09-22 10:00")
-        jest.spyOn(Date, "now").mockReturnValue(mockedDate)
-        const todaysCheckIn = {
-          date: mockedDate,
-          status: CheckInStatus.FeelingGood,
-        }
-        const checkIns = [todaysCheckIn]
-        ;(getCheckIns as jest.Mock).mockResolvedValueOnce(checkIns)
-        ;(getLogEntries as jest.Mock).mockResolvedValueOnce([])
-
-        const { getByText } = render(
-          <SymptomLogProvider>
-            <CurrentCheckInStatus />
-          </SymptomLogProvider>,
-        )
-
-        await waitFor(() => {
-          expect(getByText(todaysCheckIn.status.toString())).toBeDefined()
-        })
-      })
-    })
-
-    describe("when the user has not checked in today", () => {
-      it("sets todays check in to a default not checked in", async () => {
-        const mockedTodaysDate = Date.parse("2020-09-22 10:00")
-        const mockedYesterdaysDate = Date.parse("2020-09-21 10:00")
-        jest.spyOn(Date, "now").mockReturnValue(mockedTodaysDate)
-        const yesterdaysCheckIn = {
-          date: mockedYesterdaysDate,
-          status: CheckInStatus.FeelingGood,
-        }
-        const checkIns = [yesterdaysCheckIn]
-        ;(getCheckIns as jest.Mock).mockResolvedValueOnce(checkIns)
-        ;(getLogEntries as jest.Mock).mockResolvedValueOnce([])
-
-        const { getByText, queryByText } = render(
-          <SymptomLogProvider>
-            <CurrentCheckInStatus />
-          </SymptomLogProvider>,
-        )
-
-        await waitFor(() => {
-          expect(queryByText(yesterdaysCheckIn.status.toString())).toBeNull()
-          expect(getByText(CheckInStatus.NotCheckedIn.toString())).toBeDefined()
-        })
+        expect(deleteSymptomLogsOlderThanSpy).toHaveBeenCalledWith(14)
       })
     })
   })
 })
 
-const CurrentCheckInStatus = () => {
-  const { todaysCheckIn } = useSymptomLogContext()
+const SymptomLogConsumer = () => {
+  const { symptomLogEntries } = useSymptomLogContext()
 
-  return <Text>{todaysCheckIn.status}</Text>
+  return <Text testID="symptom-logs">{JSON.stringify(symptomLogEntries)}</Text>
 }

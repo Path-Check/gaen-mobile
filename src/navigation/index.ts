@@ -16,7 +16,7 @@ export type NavigationProp = NavigationScreenProp<
 
 export type ActivationStackScreen =
   | "AcceptTermsOfService"
-  | "ActivateProximityTracing"
+  | "ActivateExposureNotifications"
   | "ActivateLocation"
   | "NotificationPermissions"
   | "ActivationSummary"
@@ -25,24 +25,30 @@ export const ActivationStackScreens: {
   [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
-  ActivateProximityTracing: "ActivateProximityTracing",
+  ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
   NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
 }
 
 export type HomeStackScreen =
-  | "Home"
+  | "AffectedUserStack"
   | "BluetoothInfo"
-  | "ProximityTracingInfo"
+  | "CovidDataDashboard"
+  | "ExposureDetectionStatus"
+  | "ExposureNotificationsInfo"
+  | "Home"
   | "LocationInfo"
 
 export const HomeStackScreens: {
   [key in HomeStackScreen]: HomeStackScreen
 } = {
-  Home: "Home",
+  AffectedUserStack: "AffectedUserStack",
   BluetoothInfo: "BluetoothInfo",
-  ProximityTracingInfo: "ProximityTracingInfo",
+  CovidDataDashboard: "CovidDataDashboard",
+  ExposureDetectionStatus: "ExposureDetectionStatus",
+  ExposureNotificationsInfo: "ExposureNotificationsInfo",
+  Home: "Home",
   LocationInfo: "LocationInfo",
 }
 
@@ -102,31 +108,32 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
-  | "AffectedUserStack"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "AnonymizedDataConsent"
   | "AtRiskRecommendation"
-  | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromMyHealth"
+  | "SelfAssessmentFromExposureDetails"
+  | "SelfAssessmentFromHome"
+  | "CallbackStack"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
-  AffectedUserStack: "AffectedUserStack",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   AnonymizedDataConsent: "AnonymizedDataConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
-  SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromMyHealth: "SelfScreenerFromMyHealth",
+  SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
+  SelfAssessmentFromHome: "SelfAssessmentFromHome",
+  CallbackStack: "CallbackStack",
 }
 
 export type SettingsStackScreen =
   | "Settings"
   | "Legal"
+  | "DeleteConfirmation"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -137,6 +144,7 @@ export const SettingsStackScreens: {
 } = {
   Settings: "Settings",
   Legal: "Legal",
+  DeleteConfirmation: "DeleteConfirmation",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
@@ -179,22 +187,24 @@ export const MyHealthStackScreens: {
   SelectSymptoms: "SelectSymptoms",
 }
 
-export type SelfScreenerStackScreen =
-  | "SelfScreenerIntro"
+export type SelfAssessmentStackScreen =
+  | "SelfAssessmentIntro"
   | "EmergencySymptomsQuestions"
   | "CallEmergencyServices"
   | "GeneralSymptoms"
+  | "HowAreYouFeeling"
   | "UnderlyingConditions"
   | "AgeRange"
   | "Guidance"
 
-export const SelfScreenerStackScreens: {
-  [key in SelfScreenerStackScreen]: SelfScreenerStackScreen
+export const SelfAssessmentStackScreens: {
+  [key in SelfAssessmentStackScreen]: SelfAssessmentStackScreen
 } = {
-  SelfScreenerIntro: "SelfScreenerIntro",
+  SelfAssessmentIntro: "SelfAssessmentIntro",
   EmergencySymptomsQuestions: "EmergencySymptomsQuestions",
   CallEmergencyServices: "CallEmergencyServices",
   GeneralSymptoms: "GeneralSymptoms",
+  HowAreYouFeeling: "HowAreYouFeeling",
   UnderlyingConditions: "UnderlyingConditions",
   AgeRange: "AgeRange",
   Guidance: "Guidance",
@@ -203,34 +213,22 @@ export const SelfScreenerStackScreens: {
 export type Stack =
   | "Activation"
   | "AffectedUserStack"
-  | "Callback"
   | "Connect"
   | "ExposureHistoryFlow"
-  | "Modal"
   | "HowItWorks"
-  | "HowItWorksReviewFromSettings"
-  | "HowItWorksReviewFromConnect"
   | "Settings"
   | "Home"
   | "MyHealth"
-  | "SelfScreenerFromExposureDetails"
-  | "SelfScreenerFromMyHealth"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
-  Callback: "Callback",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
-  Modal: "Modal",
   HowItWorks: "HowItWorks",
-  HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
-  HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   Settings: "Settings",
   Home: "Home",
   MyHealth: "MyHealth",
-  SelfScreenerFromExposureDetails: "SelfScreenerFromExposureDetails",
-  SelfScreenerFromMyHealth: "SelfScreenerFromMyHealth",
 }
 
 export const useStatusBarEffect = (

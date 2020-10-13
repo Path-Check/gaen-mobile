@@ -14,17 +14,14 @@
     "success_body": "Nuestros rastreadores de contactos están trabajando arduamente para que usted y su comunidad estén seguros. {{healthAuthorityName}} ha recibido su solicitud de devolución de llamada. Un experto se pondrá en contacto con usted dentro de 24 horas.",
     "success_got_it": "Entendido",
     "success_header": "Usted está en fila",
-    "success_requested": "Devolución de llamada solicitada",
-    "well_get_in_touch": "Nos pondremos en contacto"
+    "success_requested": "Devolución de llamada solicitada"
   },
   "common": {
     "back": "Regresar",
     "close": "Cerrar",
     "continue": "Continuar",
-    "disabled": "Desactivado",
     "done": "Finalizado",
     "edit": "Editar",
-    "enabled": "Habilitado",
     "maybe_later": "Quizás más tarde",
     "next": "Próximo",
     "no_thanks": "No, gracias",
@@ -131,14 +128,13 @@
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
       "proximity_tracing_header": "Rastreo de Proximidad",
-      "report_positive_result": "Informar resultado positivo de la prueba",
       "share": "Comparta la aplicación y ayude a protegerse a sí mismo y a los demás.",
       "share_message": "Echa un vistazo a esta aplicación {{applicationName}}, que puede ayudarnos a contener el COVID-19. {{appDownloadLink}}",
       "tracing_off_header": "Inactivo",
       "tracing_off_subheader": "Habilite Bluetooth, rastreo de proximidad y localización para obtener información sobre posibles exposiciones",
-      "tracing_off_subheader_location": "Habilite Bluetooth, rastreo de proximidad y localización para obtener información sobre posibles exposiciones",
       "tracing_on_header": "Activo"
     },
+    "call_emergency_services": "Servicios de Emergencia",
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "location_info_body_1": "La tecnología de notificación de exposición utiliza el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos utilizando Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el Sistema de Notificaciones de Exposición.",
@@ -154,9 +150,7 @@
       "unauthorized_error_message_android": "Para activar el rastreo de proximidad y las notificaciones de exposición, vaya a la aplicación de notificaciones de exposición de COVID-19 de su configuración y active la opción \"Usar notificaciones de exposición\".",
       "unauthorized_error_message_ios": "Para habilitar el rastreo de proximidad y las notificaciones de exposición, por favor vaya a la sección de Notificación de Exposición en Ajustes y Comparta la Información de Exposición y establezca la Región Activa en {{applicationName}}",
       "unauthorized_error_title": "Activar Rastreo de Proximidad"
-    },
-    "status_icon_active_label": "Una x blanca en un círculo verde",
-    "status_icon_inactive_label": "Una x blanca en un círculo rojo"
+    }
   },
   "label": {
     "check": "Marca de verificación",
@@ -168,15 +162,6 @@
     "privacy_policy": "Política de privacidad",
     "question_icon": "¿?",
     "unchecked_checkbox": "Casilla de verificación sin marcar"
-  },
-  "my_health": {
-    "over_time": "Con el tiempo",
-    "symptom_log": {
-      "did_not_check_in": "No se ha registrado",
-      "feeling_not_well": "No te sentías bien.",
-      "feeling_well": "Te sentías bien."
-    },
-    "today": "Hoy"
   },
   "navigation": {
     "connect": "Conectar",
@@ -254,20 +239,23 @@
     "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
     "exposures": "Exposiciones",
+    "home": "Página de Inicio",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
     "legal": "Legal"
   },
-  "self_screener": {
+  "self_assessment": {
     "age_range": {
       "eighteen_to_sixty_four": "18 - 64",
+      "get_my_guidance": "Obtén mi orientación",
       "how_old_are_you": "¿Cuántos años tienes?",
       "sixty_five_and_over": "65+"
     },
     "call_emergency_services": {
-      "call_emergency_services": "Llama al 911"
+      "seek_medical_attention": "Busque atención médica inmediatamente"
     },
     "emergency_symptoms": {
-      "chest_pain": "Dolor o presión en el pecho severos y constantes",
+      "are_you_experiencing": "¿Tiene alguno de estos síntomas de emergencia?",
+      "chest_pain": "Dolor o presión en el pecho severo y constantes",
       "difficulty_breathing": "Dificultad extrema para respirar",
       "disorientation": "Desorientación grave o falta de respuesta",
       "lightheadedness": "Mareos intensos y constantes",
@@ -292,9 +280,6 @@
       "feeling_fine": "Me alegro de saber que te sientes bien. Usted debería monitorear sus síntomas y permanecer en casa.",
       "find_telehealth": "Buscar servicios de telemedicina",
       "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
-      "guidance": "Guía",
-      "how_to_care_for_yourself_and_others": "Cómo cuidarse a sí mismo y a los demás mientras está enfermo con síntomas de COVID-19:",
-      "if_symptoms_develop": "Si presenta alguno de estos síntomas o si comienza a sentirse peor, llame a su proveedor de atención médica, a su clínica o a un proveedor de telemedicina.",
       "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
       "monitor_your_symptoms": "Lamento que te sientas mal. Quédese en casa y monitorea sus síntomas. Llame a su proveedor si empeora sus síntomas.",
       "practice_social_distancing": "Practica el distanciamiento social.",
@@ -311,26 +296,22 @@
       "you_have_underlying_conditions": "Siento que no te sientas bien. Sus síntomas pueden estar relacionados con COVID-19. También tienes condiciones médicas que pueden ponerte en riesgo de enfermarse más gravemente.",
       "your_symptoms_might_be_related": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19."
     },
-    "intro": {
-      "agree_and_start_screener": "Acepte y comience el evaluador",
-      "covid19_self_screener": "Autoevaluación COVID-19"
+    "how_are_you_feeling": {
+      "good": "Bien",
+      "not_well": "Mal"
     },
-    "summary": {
-      "asymptomatic_group": "¡Me alegra saber que se siente bien!\n Aunque no esté enfermo, debe quedarse en su casa durante 14 días. COVID-19 puede ser transmitido por personas que no presentan síntomas.",
-      "get_my_guidance": "Obtén mi orientación",
-      "non_covid_symptom_group": "Siento que no te sientas bien.\nSegún tus respuestas, actualmente no estás mostrando síntomas comunes de COVID-19.",
-      "primary_symptom_group_1": "Siento que no te sientas bien.\nSus síntomas pueden estar relacionados con COVID-19. También tienes condiciones médicas que pueden ponerte en riesgo de enfermarte más gravemente.",
-      "primary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "primary_symptom_group_3": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "secondary_symptom_group_1": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19.",
-      "secondary_symptom_group_2": "Lamento que no se sienta bien. Según sus respuestas, sus síntomas pueden estar relacionados con COVID-19."
+    "intro": {
+      "find_out_how_to_care": "Averigua cómo cuidarte a ti mismo y a los demás después de un contacto cercano con alguien positivo para COVID-19",
+      "if_this_is": "Si se trata de una emergencia, llame al {{emergencyPhoneNumber}}",
+      "this_is_based_on": "Esto se basa en la guía más reciente del CDC y puede actualizarse con el tiempo a medida que aprendamos sobre cómo se propaga el virus y la enfermedad que causa.",
+      "this_is_not_intended": "Esto no es un diagnóstico o tratamiento oficial",
+      "you_are_a_resident": "Usted es un residente de la comunidad apoyado por {{healthauthorityname}}"
     },
     "underlying_conditions": {
       "blood_disorder": "Trastorno sanguíneo, como enfermedad de células falciformes o talasemia",
       "cerebrovascular_disease": "Enfermedad cerebrovascular o afección nerológica, como accidente cerebrovascular o demencia",
       "diabetes": "Diabetes",
       "heart_condition": "Condición cardíaca grave, como insuficiencia cardíaca, enfermedad de las arterias coronarias o miocardiopatía",
-      "high_blood_pressure": "Alta presión sanguínea",
       "kidney_disease": "Enfermedad renal crónica",
       "liver_disease": "Enfermedad del hígado",
       "lung_disease": "Enfermedad pulmonar crónica, como asma de moderada a grave, EPOC, fibrosis quística o fibrosis pulmonaria",
@@ -348,36 +329,21 @@
     "please_view_privacy_policy": "Consulte su política de privacidad",
     "share_anonymized_data": "Comparta datos anónimos",
     "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a preguntas de detección con {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Sus datos anónimos ayudan al {{healthAuthorityName}} a analizar, rastrear y contener la propagación de COVID-19. Sus datos serán agregados a los de otros usuarios de PathCheck que elijan compartir.\n\nSus datos contienen sus respuestas a la encuesta y el código postal, pero ninguna información adicional o de identificación personal.\n\nEl {{healthAuthorityName}} retendrá sus datos anónimos por un período de tiempo específico.",
+    "share_anonymized_data_para": "Sus datos anónimos ayudan al {{healthAuthorityName}} a analizar, rastrear y contener la propagación de COVID-19. Sus datos serán agregados a los de otros usuarios que elijan compartir.\n\nSus datos contienen sus respuestas a la encuesta y el código postal, pero ninguna información adicional o de identificación personal.\n\nEl {{healthAuthorityName}} retendrá sus datos anónimos por un período de tiempo específico.",
     "sharing_anonymized_data": "Compartiendo datos anónimos",
     "stop_sharing_data": "Dejar de compartir datos",
     "you_are_sharing_data": "Estás compartiendo datos anónimos"
   },
   "symptom_checker": {
-    "check_in_again": "Regístrese de nuevo mañana.",
-    "check-in": "Check-in",
     "delete_entry": "Borrar entrada",
     "entry_deleted": "Entrada eliminada",
     "errors": {
-      "adding_check_in": "Lo sentimos, no pudimos agregar el registro de hoy.",
       "adding_symptoms": "Lo sentimos, no pudimos registrar sus síntomas",
       "deleting_symptom_log": "Lo sentimos, no pudimos eliminar el registro de síntomas",
       "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
     },
-    "find_a_test_center": "Encuentre un centro de pruebas",
-    "find_a_test_center_nearby": "Encuentre un centro de pruebas cercano",
-    "get_tested": "Le recomendamos que se haga la prueba de COVID-19.",
-    "glad_to_hear_it": "¡Me alegra escucharlo!",
-    "good": "Bien",
-    "guidance": "Guía",
-    "how_are_you_feeling": "¿Cómo te sientes hoy?",
     "log_symptoms": "Registrar los síntomas",
-    "my_health": "Mi salud",
     "no_symptom_history": "Sin historial de síntomas",
-    "not_well": "Mal",
-    "person_finding_location_label": "Una persona en su teléfono buscando una ubicación.",
-    "sorry_not_feeling_well": "Lamento que no se sienta bien.",
-    "sorry_to_hear_it": "¡Lamento que no te sientas bien!",
     "symptoms_saved": "¡Síntomas guardados!",
     "symptoms_updated": "¡Síntomas actualizados!",
     "what_symptoms": "¿Qué síntomas tienes?"

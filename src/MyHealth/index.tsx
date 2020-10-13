@@ -1,86 +1,119 @@
-import React, { FunctionComponent, useState } from "react"
-import { View, StyleSheet } from "react-native"
-import SegmentedControl from "@react-native-community/segmented-control"
+import React, { FunctionComponent } from "react"
+import { ScrollView, StyleSheet, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useStatusBarEffect } from "../navigation"
-import { GlobalText, StatusBar } from "../components"
-import Today from "./Today"
-import OverTime from "./OverTime"
+import {
+  DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
+  useSymptomLogContext,
+} from "./SymptomLogContext"
+import { SymptomLogEntry } from "./symptoms"
+import { Text, StatusBar, Button } from "../components"
+import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
+import SymptomLogListItem from "./SymptomLogListItem"
 
-import { Typography, Colors, Spacing } from "../styles"
+import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 
-const MyHealthScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+const SymptomLog: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const { symptomLogEntries } = useSymptomLogContext()
+  const navigation = useNavigation()
 
-  const todayStyle = selectedIndex === 0 ? style.innerContainer : style.hidden
+  const hasSymptomHistory = symptomLogEntries.length > 0
 
-  const overTimeStyle =
-    selectedIndex === 1 ? style.innerContainer : style.hidden
+  const handleOnPressLogSymptoms = () => {
+    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+  }
+
+  const NoSymptomHistory = () => {
+    return (
+      <Text style={style.noSymptomHistoryText}>
+        {t("symptom_checker.no_symptom_history")}
+      </Text>
+    )
+  }
+
+  const SymptomHistory = () => {
+    return (
+      <View>
+        {symptomLogEntries.map((logEntry: SymptomLogEntry) => {
+          return <SymptomLogListItem key={logEntry.date} logEntry={logEntry} />
+        })}
+      </View>
+    )
+  }
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.secondary10} />
-      <View style={style.container}>
-        <View style={style.headerContainer}>
-          <GlobalText style={style.headerText}>
-            {t("symptom_checker.my_health")}
-          </GlobalText>
-          <View style={style.segmentedControlContainer}>
-            <SegmentedControl
-              values={[t("my_health.today"), t("my_health.over_time")]}
-              selectedIndex={selectedIndex}
-              onChange={(event) => {
-                setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
-              }}
-              fontStyle={style.segmentedControlText}
-              activeFontStyle={style.activeSegmentedControlText}
-            />
-          </View>
-        </View>
-        <View style={todayStyle}>
-          <Today />
-        </View>
-        <View style={overTimeStyle}>
-          <OverTime />
-        </View>
+    <View style={style.outerContainer}>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <Text style={style.headerText}>{t("symptom_checker.symptom_log")}</Text>
+        <Text style={style.subHeaderText}>
+          {t("symptom_checker.to_protect_your_privacy", {
+            days: DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
+          })}
+        </Text>
+
+        {hasSymptomHistory ? <SymptomHistory /> : <NoSymptomHistory />}
+      </ScrollView>
+      <View style={style.bottomActionsContainer}>
+        <Button
+          onPress={handleOnPressLogSymptoms}
+          label={t("symptom_checker.log_symptoms")}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasPlusIcon
+        />
       </View>
-    </>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.large,
+  outerContainer: {
+    flex: 1,
   },
-  headerContainer: {
-    paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.secondary10,
+  container: {
+    flex: 1,
+    backgroundColor: Colors.primaryLightBackground,
+  },
+  contentContainer: {
+    paddingVertical: Spacing.large,
+    paddingHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header1,
     ...Typography.bold,
-    marginBottom: Spacing.medium,
+    marginBottom: Spacing.xxxSmall,
   },
-  segmentedControlContainer: {
+  subHeaderText: {
+    ...Typography.body1,
     marginBottom: Spacing.large,
   },
-  segmentedControlText: {
-    fontFamily: "IBMPlexSans",
+  noSymptomHistoryText: {
+    ...Typography.body1,
   },
-  activeSegmentedControlText: {
-    fontFamily: "IBMPlexSans-Medium",
+  bottomActionsContainer: {
+    alignItems: "center",
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral10,
+    backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.small,
+    paddingBottom: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
   },
-  innerContainer: {
-    flexGrow: 1,
+  button: {
+    width: "100%",
   },
-  hidden: {
-    display: "none",
+  buttonInner: {
+    ...Buttons.medium,
+    width: "100%",
   },
 })
 
-export default MyHealthScreen
+export default SymptomLog

@@ -2,17 +2,18 @@ import React, { FunctionComponent } from "react"
 import { Platform, TouchableOpacity, StyleSheet, View } from "react-native"
 import {
   createStackNavigator,
+  HeaderStyleInterpolators,
   StackNavigationOptions,
 } from "@react-navigation/stack"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { GlobalText } from "../components"
+import { Text } from "../components"
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
 import { useSystemServicesContext } from "../SystemServicesContext"
 
-import ActivateProximityTracing from "../Activation/ActivateProximityTracing"
+import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
@@ -44,9 +45,9 @@ const ActivationStack: FunctionComponent = () => {
     component: AcceptTermsOfService,
   }
 
-  const activateProximityTracing: ActivationStep = {
-    screenName: ActivationStackScreens.ActivateProximityTracing,
-    component: ActivateProximityTracing,
+  const activateExposureNotifications: ActivationStep = {
+    screenName: ActivationStackScreens.ActivateExposureNotifications,
+    component: ActivateExposureNotifications,
   }
 
   const activateLocation: ActivationStep = {
@@ -60,8 +61,8 @@ const ActivationStack: FunctionComponent = () => {
   }
 
   const baseActivationSteps: ActivationStep[] = displayAcceptTermsOfService
-    ? [acceptTermsOfServiceStep, activateProximityTracing]
-    : [activateProximityTracing]
+    ? [acceptTermsOfServiceStep, activateExposureNotifications]
+    : [activateExposureNotifications]
 
   const activationStepsIOS: ActivationStep[] = [
     ...baseActivationSteps,
@@ -116,9 +117,9 @@ const ActivationStack: FunctionComponent = () => {
   }) => {
     return (
       <View style={style.headerRight}>
-        <GlobalText style={style.headerRightText}>
+        <Text style={style.headerRightText}>
           {t("onboarding.step", { currentStep, totalSteps })}
-        </GlobalText>
+        </Text>
         <CloseButton />
       </View>
     )
@@ -131,6 +132,7 @@ const ActivationStack: FunctionComponent = () => {
     headerTitle: t("onboarding.activation_header_title"),
     headerTitleStyle: style.headerTitle,
     gestureEnabled: false,
+    headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
   }
 
   return (

@@ -1,26 +1,18 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, TouchableOpacity, View, StyleSheet } from "react-native"
+import { ScrollView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
-import { SvgXml } from "react-native-svg"
 
-import { GlobalText, Button, StatusBar } from "../../components"
-import { useStatusBarEffect, Stacks } from "../../navigation"
-import { Spacing, Iconography, Colors, Typography, Layout } from "../../styles"
-import { Icons } from "../../assets"
+import { Text, Button, StatusBar } from "../../components"
+import { useStatusBarEffect } from "../../navigation"
+import { Spacing, Colors, Typography } from "../../styles"
 import { openAppSettings } from "../../gaen/nativeModule"
 
 const EnableExposureNotifications: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
-  const navigation = useNavigation()
 
   const handleOnPressOpenSettings = () => {
     openAppSettings()
-  }
-
-  const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.Home)
   }
 
   return (
@@ -31,29 +23,13 @@ const EnableExposureNotifications: FunctionComponent = () => {
         testID={"affected-user-enable-exposure-notifications-screen"}
         alwaysBounceVertical={false}
       >
-        <View style={style.cancelButtonContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressCancel}
-            accessible
-            accessibilityLabel={t("export.code_input_button_cancel")}
-          >
-            <View style={style.cancelButtonInnerContainer}>
-              <SvgXml
-                xml={Icons.X}
-                fill={Colors.black}
-                width={Iconography.xxSmall}
-                height={Iconography.xxSmall}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
         <View style={style.headerContainer}>
-          <GlobalText style={style.header}>
+          <Text style={style.header}>
             {t("export.enable_exposure_notifications_title")}
-          </GlobalText>
-          <GlobalText style={style.subheader}>
+          </Text>
+          <Text style={style.subheader}>
             {t("export.enable_exposure_notifications_body")}
-          </GlobalText>
+          </Text>
         </View>
         <View style={style.buttonContainer}>
           <Button
@@ -71,18 +47,8 @@ const style = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
-    paddingTop: Layout.oneEighthHeight,
     paddingBottom: Spacing.massive,
     backgroundColor: Colors.primaryLightBackground,
-  },
-  cancelButtonContainer: {
-    position: "absolute",
-    top: Spacing.medium,
-    right: Spacing.medium,
-    zIndex: Layout.zLevel1,
-  },
-  cancelButtonInnerContainer: {
-    padding: Spacing.medium,
   },
   headerContainer: {
     marginBottom: Spacing.huge,

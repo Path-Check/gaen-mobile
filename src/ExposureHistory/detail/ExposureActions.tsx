@@ -4,8 +4,8 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { ModalStackScreens, Stacks } from "../../navigation"
-import { GlobalText, Button } from "../../components"
+import { ModalStackScreens } from "../../navigation"
+import { Text, Button } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
@@ -18,7 +18,7 @@ const ExposureActions: FunctionComponent = () => {
   const navigation = useNavigation()
   const {
     displayCallbackForm,
-    displaySelfScreener,
+    displaySelfAssessment,
     healthAuthorityName,
     healthAuthorityAdviceUrl,
     measurementSystem,
@@ -29,13 +29,11 @@ const ExposureActions: FunctionComponent = () => {
   }
 
   const handleOnPressPersonalizeMyGuidance = () => {
-    navigation.navigate(Stacks.Modal, {
-      screen: ModalStackScreens.SelfScreenerFromExposureDetails,
-    })
+    navigation.navigate(ModalStackScreens.SelfAssessmentFromExposureDetails)
   }
 
   const displayNextStepsLink =
-    !displaySelfScreener && healthAuthorityAdviceUrl !== ""
+    !displaySelfAssessment && healthAuthorityAdviceUrl !== ""
 
   const stayApartRecommendationText =
     measurementSystem === "Imperial"
@@ -44,18 +42,18 @@ const ExposureActions: FunctionComponent = () => {
 
   return (
     <>
-      <GlobalText style={style.bottomHeaderText}>
+      <Text style={style.bottomHeaderText}>
         {t("exposure_history.exposure_detail.ha_guidance_header")}
-      </GlobalText>
+      </Text>
       <>
         {displayCallbackForm && (
           <RequestCallBackActions healthAuthorityName={healthAuthorityName} />
         )}
-        <GlobalText style={style.bottomHeaderText}>
+        <Text style={style.bottomHeaderText}>
           {t("exposure_history.exposure_detail.general_guidance", {
             healthAuthorityName,
           })}
-        </GlobalText>
+        </Text>
         <View style={style.recommendations}>
           <RecommendationBubble
             icon={Icons.IsolateBubbles}
@@ -74,7 +72,7 @@ const ExposureActions: FunctionComponent = () => {
             text={t("exposure_history.exposure_detail.wash_your_hands")}
           />
         </View>
-        {displaySelfScreener && (
+        {displaySelfAssessment && (
           <Button
             onPress={handleOnPressPersonalizeMyGuidance}
             label={t(
@@ -88,19 +86,19 @@ const ExposureActions: FunctionComponent = () => {
           />
         )}
         {displayNextStepsLink && (
-          <View style={style.buttonContainer}>
-            <Button
-              onPress={handleOnPressNextStep}
-              label={t("exposure_history.exposure_detail.next_steps")}
-              disabled={!isInternetReachable}
-              hasRightArrow
-            />
-          </View>
+          <Button
+            onPress={handleOnPressNextStep}
+            label={t("exposure_history.exposure_detail.next_steps")}
+            disabled={!isInternetReachable}
+            customButtonStyle={style.button}
+            customButtonInnerStyle={style.buttonInner}
+            hasRightArrow
+          />
         )}
         {!isInternetReachable && (
-          <GlobalText style={style.connectivityWarningText}>
+          <Text style={style.connectivityWarningText}>
             {t("exposure_history.no_connectivity_message")}
-          </GlobalText>
+          </Text>
         )}
       </>
     </>
@@ -118,21 +116,21 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const { t } = useTranslation()
 
   const handleOnPressRequestCallback = () => {
-    navigation.navigate(Stacks.Callback)
+    navigation.navigate(ModalStackScreens.CallbackStack)
   }
 
   return (
     <>
-      <GlobalText style={style.bottomSubheaderText}>
+      <Text style={style.bottomSubheaderText}>
         {t("exposure_history.exposure_detail.schedule_callback", {
           healthAuthorityName,
         })}
-      </GlobalText>
+      </Text>
       <Button
-        customButtonStyle={style.requestCallbackButton}
-        customButtonInnerStyle={style.requestCallbackButtonInner}
         onPress={handleOnPressRequestCallback}
         label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
+        customButtonStyle={style.button}
+        customButtonInnerStyle={style.buttonInner}
         hasRightArrow
       />
     </>
@@ -157,7 +155,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
           height={Iconography.small}
         />
       </View>
-      <GlobalText style={style.recommendationText}>{text}</GlobalText>
+      <Text style={style.recommendationText}>{text}</Text>
     </View>
   )
 }
@@ -193,20 +191,17 @@ const style = StyleSheet.create({
   recommendationText: {
     ...Typography.body3,
   },
-  buttonContainer: {
-    alignSelf: "flex-start",
-  },
   connectivityWarningText: {
     ...Typography.error,
     marginTop: Spacing.small,
   },
-  requestCallbackButton: {
+  button: {
     marginBottom: Spacing.small,
     width: "100%",
     alignSelf: "center",
     paddingVertical: Spacing.small,
   },
-  requestCallbackButtonInner: {
+  buttonInner: {
     ...Buttons.medium,
     width: "100%",
   },

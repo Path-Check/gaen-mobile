@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
-import { StatusBar, GlobalText, Button } from "../../components"
+import { StatusBar, Text, Button } from "../../components"
 import { useStatusBarEffect } from "../../navigation/index"
 import { useExposureContext } from "../../ExposureContext"
 
@@ -15,7 +15,7 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors } from "../../styles"
+import { Buttons, Spacing, Typography, Colors, Outlines } from "../../styles"
 
 type Posix = number
 
@@ -29,7 +29,7 @@ const History: FunctionComponent<HistoryProps> = ({
   exposures,
 }) => {
   useIsFocused()
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { checkForNewExposures } = useExposureContext()
@@ -52,7 +52,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -60,9 +60,9 @@ const History: FunctionComponent<HistoryProps> = ({
       >
         <View>
           <View style={style.headerRow}>
-            <GlobalText style={style.headerText}>
+            <Text style={style.headerText}>
               {t("screen_titles.exposure_history")}
-            </GlobalText>
+            </Text>
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}
@@ -86,6 +86,8 @@ const History: FunctionComponent<HistoryProps> = ({
             <NoExposures />
           )}
         </View>
+      </ScrollView>
+      <View style={style.bottomActionsContainer}>
         <Button
           label={t("exposure_history.check_for_exposures")}
           onPress={handleOnPressCheckForExposures}
@@ -93,7 +95,7 @@ const History: FunctionComponent<HistoryProps> = ({
           customButtonStyle={style.button}
           customButtonInnerStyle={style.buttonInner}
         />
-      </ScrollView>
+      </View>
     </>
   )
 }
@@ -101,18 +103,17 @@ const History: FunctionComponent<HistoryProps> = ({
 const style = StyleSheet.create({
   contentContainer: {
     paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xxHuge,
   },
   container: {
-    paddingHorizontal: Spacing.medium,
     paddingBottom: Spacing.medium,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.primaryLightBackground,
   },
   headerRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
     marginTop: Spacing.xSmall,
+    marginHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header1,
@@ -130,10 +131,20 @@ const style = StyleSheet.create({
   },
   subheaderRow: {
     marginTop: Spacing.xxxSmall,
+    marginHorizontal: Spacing.medium,
   },
   listContainer: {
     marginTop: Spacing.xxLarge,
     marginBottom: Spacing.large,
+  },
+  bottomActionsContainer: {
+    alignItems: "center",
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral10,
+    backgroundColor: Colors.secondary10,
+    paddingTop: Spacing.small,
+    paddingBottom: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
   },
   button: {
     width: "100%",

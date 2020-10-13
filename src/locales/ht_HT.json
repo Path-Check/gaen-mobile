@@ -11,16 +11,13 @@
     "lastname": "Siyati",
     "phone_number_required": "Nimewo telefòn (obligatwa)",
     "success_got_it": "Mwen konprann",
-    "success_requested": "Rele Ankò Mande fèt ",
-    "well_get_in_touch": "Nou pral pran kontak"
+    "success_requested": "Rele Ankò Mande fèt "
   },
   "common": {
     "back": "Retounen",
     "close": "Fèmen",
     "continue": "Kontinye",
-    "disabled": "dezaktive",
     "done": "Fini",
-    "enabled": "Aktive",
     "maybe_later": "Petèt pita",
     "next": "Kontinye",
     "no_thanks": "Non mèsi",
@@ -110,12 +107,11 @@
       "bluetooth_disabled_error_title": "Aktive Bluetooth nan tablodbò ",
       "bluetooth_header": "Bluetooth",
       "proximity_tracing_header": "Trasaj Pwoksimite ",
-      "report_positive_result": "Rapòte yon rezilta tès pozitif",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
-      "tracing_off_subheader_location": "Pèmèt Bluetooth, Pwoksimite Tracing, ak lokalizasyon pou  yo ka resevwa enfòmasyon sou expozosyon posib yo.",
       "tracing_on_header": "Aktif"
     },
+    "call_emergency_services": "Sèvis Ijans yo",
     "fix": "Ranje pwoblèm ak {{technology}}",
     "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
     "location_info_header": "Lokalizasyon",
@@ -123,21 +119,16 @@
     "open_settings": "Louvri tablodbò",
     "proximity_tracing_info_header": "Trasaj Pwoksimite ",
     "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
-    "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?",
-    "status_icon_active_label": "Yon kwochè blan nan yon sèk vèt",
-    "status_icon_inactive_label": "Yon x blan nan yon sèk wouj"
+    "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
   "label": {
     "check": "Kwochè ",
     "go_to_home_view": "Ale nan Akèy",
     "launch_enable_notif": "Aktive notifikasyon",
     "launch_get_started": "Kòmanse",
-    "launch_screen1_header": "Byenveni nan Chase Kowona (\"PathCheck\")",
+    "launch_screen1_header": "Byenveni nan Chase Kowona",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "question_icon": "Imaj pwen entèwogasyon"
-  },
-  "my_health": {
-    "today": "Jodi a"
   },
   "navigation": {
     "connect": "Konekte",
@@ -191,18 +182,17 @@
     "debug": "Debug",
     "exposure_history": "Lis ekspozisyon",
     "exposures": "Ekspozisyon yo",
+    "home": "Lakay",
     "how_the_app_works": "Kijan aplikasyon an fonksyone",
     "legal": "Legal"
   },
-  "self_screener": {
-    "call_emergency_services": {
-      "call_emergency_services": "Rele Sèvis Ijans yo"
-    },
+  "self_assessment": {
     "general_symptoms": {
       "other": "Lòt"
     },
-    "guidance": {
-      "guidance": "Gid"
+    "how_are_you_feeling": {
+      "good": "Byen",
+      "not_well": "Pa byen"
     }
   },
   "settings": {
@@ -211,22 +201,9 @@
     "please_view_privacy_policy": "Tanpri gade politik vi prive yo",
     "share_anonymized_data": "Pataje Done Anonim",
     "share_anonymized_data_disclaimer": "Pa pwosedi sa, ou dakò yo pataje repons anonim pou kesyon tès depistaj ak {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona (\"PathCheck\") ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
+    "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
   },
   "symptom_checker": {
-    "check-in": "Tcheke-antre",
-    "find_a_test_center": "Jwenn yon sant tès",
-    "find_a_test_center_nearby": "Jwenn yon sant tès ki tou pre",
-    "get_tested": "Nou rekòmande ou fè tès pou COVID-19.",
-    "glad_to_hear_it": "Kontan tande sa!",
-    "good": "Byen",
-    "guidance": "Gid",
-    "how_are_you_feeling": "Kijan ou santi ou jodi a?",
-    "my_health": "Sante mwen",
-    "not_well": "Pa byen",
-    "person_finding_location_label": "Yon moun sou telefòn kap chèche yon kote.",
-    "sorry_not_feeling_well": "Nou dezole ke ou pa santi w byen. Sentòm ou yo ka gen rapò ak COVID-19.",
-    "sorry_to_hear_it": "Nou dezole ke ou pa santi w byen!",
     "symptoms_saved": "Sentòm yo anrejistre!",
     "what_symptoms": "Ki sentòm ou genyen?"
   },
