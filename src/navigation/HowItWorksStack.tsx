@@ -55,13 +55,15 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
-  const handleOnPressSkip = () => {
+  const handleOnNavigateOutOfStack = () => {
     if (destinationOnSkip === Stacks.Settings) {
       navigation.goBack()
     } else if (destinationOnSkip === Stacks.Activation) {
       navigation.navigate(Stacks.Activation)
     }
   }
+  const handleOnPressSkip = handleOnNavigateOutOfStack
+  const handleOnPressNextOnValueProposition = handleOnNavigateOutOfStack
 
   const introduction: HowItWorksScreenDatum = {
     name: HowItWorksStackScreens.Introduction,
@@ -105,9 +107,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     imageLabel: t("onboarding.screen5_image_label"),
     header: t("onboarding.screen5_header"),
     primaryButtonLabel: t("onboarding.screen_5_button"),
-    primaryButtonOnPress: () => {
-      navigation.navigate(destinationOnSkip)
-    },
+    primaryButtonOnPress: handleOnPressNextOnValueProposition,
   }
 
   const howItWorksScreenData: HowItWorksScreenDatum[] = [
