@@ -7,7 +7,7 @@ import { SvgXml } from "react-native-svg"
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import HomeStack from "./HomeStack"
 import MyHealthStack from "./MyHealthStack"
-import ConnectStack from "./ConnectStack"
+import SettingsStack from "./SettingsStack"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Stacks } from "./index"
@@ -90,14 +90,14 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
-  const ConnectIcon: FunctionComponent<TabBarIconProps> = ({
+  const SettingsIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
     size,
   }) => {
     const tabIcon = (
       <TabIcon
-        icon={TabBarIcons.PersonInHand}
-        label={t("navigation.connect")}
+        icon={TabBarIcons.Gear}
+        label={t("navigation.settings")}
         focused={focused}
         size={size}
       />
@@ -145,10 +145,10 @@ const MainTabNavigator: FunctionComponent = () => {
       )}
       <Tab.Screen
         name={Stacks.Connect}
-        component={ConnectStack}
+        component={SettingsStack}
         options={{
           tabBarLabel: t("navigation.connect"),
-          tabBarIcon: ConnectIcon,
+          tabBarIcon: SettingsIcon,
         }}
       />
     </Tab.Navigator>

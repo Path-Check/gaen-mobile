@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, View, StyleSheet } from "react-native"
+import { Platform, ScrollView, View, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
@@ -11,10 +11,20 @@ import {
   SettingsStackScreens,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { ListItem, ListItemSeparator } from "../components"
+import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
+import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import {
+  loadAuthorityCopy,
+  authorityCopyTranslation,
+} from "../configuration/authorityCopy"
+import ExternalLink from "../Settings/ExternalLink"
+import {
+  loadAuthorityLinks,
+  applyTranslations,
+} from "../configuration/authorityLinks"
 
 import { Icons } from "../assets"
-import { Colors, Spacing } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 
 type SettingsListItem = {
@@ -24,15 +34,20 @@ type SettingsListItem = {
 }
 
 const Settings: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
-  const navigation = useNavigation()
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
+  const navigation = useNavigation()
+  const { applicationName, versionInfo } = useApplicationInfo()
+  const {
+    healthAuthorityName,
+    healthAuthoritySupportsAnalytics,
+  } = useConfigurationContext()
+
   const languageName = getLocalNames()[localeCode]
   const showDebugMenu = env.STAGING === "true" || __DEV__
-  const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
@@ -76,49 +91,84 @@ const Settings: FunctionComponent = () => {
 
   const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
 
+  const authorityLinks = applyTranslations(
+    loadAuthorityLinks("about"),
+    localeCode,
+  )
+  const aboutContent = authorityCopyTranslation(
+    loadAuthorityCopy("about"),
+    localeCode,
+    t("about.description", {
+      applicationName,
+      healthAuthorityName,
+    }),
+  )
+  const osInfo = `${Platform.OS} v${Platform.Version}`
+
   return (
-    <ScrollView style={style.container}>
-      <View style={style.section}>
-        <ListItem
-          label={selectLanguage.label}
-          onPress={selectLanguage.onPress}
-          icon={selectLanguage.icon}
-        />
-        {healthAuthoritySupportsAnalytics && (
-          <>
-            <ListItemSeparator />
-            <ShareAnonymizedDataListItem />
-          </>
-        )}
-      </View>
-      <View style={style.section}>
-        {middleListItems.map((params, idx) => {
-          const isLastItem = idx === middleListItems.length - 1
-          return (
-            <View key={params.label}>
-              <ListItem {...params} />
-              {!isLastItem && <ListItemSeparator />}
-            </View>
-          )
-        })}
-      </View>
-      <View style={style.section}>
-        <ListItem
-          label={deleteMyData.label}
-          onPress={deleteMyData.onPress}
-          icon={deleteMyData.icon}
-        />
-      </View>
-      {showDebugMenu && (
+    <>
+      <StatusBar backgroundColor={Colors.secondary10} />
+      <ScrollView style={style.container} alwaysBounceVertical={false}>
         <View style={style.section}>
           <ListItem
-            label={debugMenu.label}
-            onPress={debugMenu.onPress}
-            icon={debugMenu.icon}
+            label={selectLanguage.label}
+            onPress={selectLanguage.onPress}
+            icon={selectLanguage.icon}
+          />
+          {healthAuthoritySupportsAnalytics && (
+            <>
+              <ListItemSeparator />
+              <ShareAnonymizedDataListItem />
+            </>
+          )}
+        </View>
+        <View style={style.section}>
+          {middleListItems.map((params, idx) => {
+            const isLastItem = idx === middleListItems.length - 1
+            return (
+              <View key={params.label}>
+                <ListItem {...params} />
+                {!isLastItem && <ListItemSeparator />}
+              </View>
+            )
+          })}
+        </View>
+        <View style={style.section}>
+          <ListItem
+            label={deleteMyData.label}
+            onPress={deleteMyData.onPress}
+            icon={deleteMyData.icon}
           />
         </View>
-      )}
-    </ScrollView>
+        {showDebugMenu && (
+          <View style={style.section}>
+            <ListItem
+              label={debugMenu.label}
+              onPress={debugMenu.onPress}
+              icon={debugMenu.icon}
+            />
+          </View>
+        )}
+        <View style={style.bottomContainer}>
+          <Text style={style.aboutContent}>{aboutContent}</Text>
+          {authorityLinks?.map(({ url, label }) => {
+            return <ExternalLink key={label} url={url} label={label} />
+          })}
+          <View style={style.infoRowContainer}>
+            <View style={style.infoRow}>
+              <Text style={style.infoRowLabel}>{t("about.version")}</Text>
+              <Text style={style.infoRowValue}>{versionInfo}</Text>
+            </View>
+            <View style={style.infoRow}>
+              <Text style={style.infoRowLabel}>
+                {t("about.operating_system_abbr")}
+              </Text>
+              <Text style={style.infoRowValue}>{osInfo}</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </>
   )
 }
 
@@ -126,11 +176,34 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.xxLarge,
   },
   section: {
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
+  },
+  bottomContainer: {
+    paddingHorizontal: Spacing.medium,
+  },
+  aboutContent: {
+    ...Typography.body1,
+    fontSize: Typography.large,
+  },
+  infoRowContainer: {
+    marginTop: Spacing.small,
+    marginBottom: Spacing.medium,
+  },
+  infoRow: {
+    flexDirection: "row",
+  },
+  infoRowLabel: {
+    ...Typography.header5,
+    color: Colors.primary150,
+    width: 100,
+    marginTop: Spacing.small,
+  },
+  infoRowValue: {
+    ...Typography.body1,
+    marginTop: Spacing.small,
   },
 })
 

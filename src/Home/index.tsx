@@ -24,7 +24,6 @@ import {
   HomeStackScreens,
   ModalStackScreens,
   useStatusBarEffect,
-  Stacks,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
@@ -248,28 +247,6 @@ const Home: FunctionComponent = () => {
     )
   }
 
-  const SettingsButton = () => {
-    const handleOnPressSettings = () => {
-      navigation.navigate(Stacks.Settings)
-    }
-
-    return (
-      <TouchableOpacity
-        style={style.settingsButtonContainer}
-        accessible
-        accessibilityLabel={t("home.open_settings")}
-        onPress={handleOnPressSettings}
-      >
-        <SvgXml
-          xml={Icons.Gear}
-          width={Iconography.small}
-          height={Iconography.small}
-          fill={Colors.neutral100}
-        />
-      </TouchableOpacity>
-    )
-  }
-
   return (
     <>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
@@ -278,7 +255,6 @@ const Home: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
-        <SettingsButton />
         <ExposureDetectionStatus />
         <ShareLink />
         {displayCovidData && <CovidDataClip />}
@@ -305,12 +281,6 @@ const style = StyleSheet.create({
     ...Typography.header1,
     ...Typography.bold,
     marginBottom: Spacing.medium,
-  },
-  settingsButtonContainer: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    padding: Spacing.medium,
   },
   statusContainer: {
     ...Affordances.floatingContainer,
