@@ -118,17 +118,23 @@
     "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "callback": "Demander un rappel",
     "debug": "Debug",
     "exposure_history": "Historique des expositions",
     "exposures": "Expositions",
     "home": "Accueil",
     "how_the_app_works": "Fonctionnement de l’application",
-    "legal": "Juridique"
+    "legal": "Juridique",
+    "protect_privacy": "Comment nous protégeons votre vie privée",
+    "select_language": "Sélectionnez une langue"
   },
   "self_assessment": {
     "general_symptoms": {
       "other": "Autres"
+    },
+    "guidance": {
+      "find_a_test_center_nearby": "Trouver un centre de test à proximité"
     },
     "how_are_you_feeling": {
       "good": "Bien",

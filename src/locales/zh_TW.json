@@ -1,14 +1,17 @@
 {
-  "_display_name": "繁體中文",
+  "_display_name": "英文",
   "about": {
     "description": "{{applicationName}}應用程序由{{healthAuthorityName}}提供",
-    "emergency_contact": "緊急聯絡人"
+    "emergency_contact": "緊急聯絡人",
+    "operating_system_abbr": "作業系統：",
+    "version": "版本："
   },
   "callback": {
     "fill_out_the_info": "請填寫以下信息，將位有一位{{healthAuthorityName}}追蹤接觸者的人員與您聯繫。",
     "firstname": "名字",
     "lastname": "姓氏",
     "phone_number_required": "電話號碼（必填）",
+    "request_a_call": "要求防疫人員回電",
     "success_body": "我們的追踪器正在努力確保您和您所在社區的安全。 {{healthAuthorityName}}已收到您的回電請求。會有專人在24小時內與您聯繫。",
     "success_got_it": "知道了",
     "success_header": "您在隊列中",
@@ -16,18 +19,64 @@
   },
   "common": {
     "back": "返回",
+    "close": "關閉",
+    "continue": "繼續",
+    "done": "完成",
     "edit": "編輯",
+    "maybe_later": "也許以後",
     "next": "下一個",
-    "save": "救"
+    "no_thanks": "不用了，謝謝",
+    "off": "關",
+    "on": "開",
+    "save": "救",
+    "settings": "打開設定",
+    "skip": "略過",
+    "something_went_wrong": "有什麼出現了問題",
+    "start": "開始",
+    "submit": "提交"
+  },
+  "covid_data": {
+    "cases_today": "今日案例人數",
+    "covid_data": "COVID數據",
+    "covid_stats_in": "{{location}}的COVID統計數字",
+    "deaths_today": "今日死亡人數",
+    "down_from_last_week": "較上週下降",
+    "error_getting_data": "很抱歉，我們無法取得{{location}}最新的COVID案例數據。",
+    "new_cases": "新增案例",
+    "see_more": "查看更多",
+    "total_cases": "案例總數",
+    "total_deaths": "死亡總數",
+    "up_from_last_week": "較上週上升"
+  },
+  "errors": {
+    "description": "發生了錯誤。請重新加載應用程式。",
+    "reload": "重新加載",
+    "title": "未知錯誤"
   },
   "export": {
+    "code_input_body_bluetooth": "輸入您的驗證碼",
+    "code_input_button_back": "返回",
+    "code_input_button_cancel": "取消",
+    "code_input_title_bluetooth": "驗證您的診斷結果",
+    "complete_body_bluetooth": "您正在協助遏止病毒的傳播並保護您社區的其他人。",
+    "complete_title": "感謝您保護社區安全！",
+    "consent_body_0": "分享陽性診斷結果並非強制，只有在您同意的情況下才能進行。",
+    "consent_body_1": "如果您選擇這樣做，則是在幫助社區中的其他人做出有關他們的健康狀況的明智決定，並協助遏制病毒的傳播。",
+    "consent_body_2": "唯一共享的訊息為您的手機於過去14天透過藍牙，與附近手機交換之隨機數字組合，以及基於您的症狀發作時間之加權風險評估。",
+    "consent_button_title": "我了解並同意",
     "consent_subheader_1": "為什麼我要分享？",
     "consent_subheader_2": "該應用程序的運作方式",
+    "enable_exposure_notifications_body": "您必須開啟接觸提醒以紀錄陽性反應結果。",
+    "enable_exposure_notifications_title": "開啟接觸提醒以繼續",
     "error": {
+      "invalid_code": "嘗試其他代碼",
       "invalid_format": "無效的格式",
-      "network_connection_error": "沒有網路"
+      "network_connection_error": "沒有網路",
+      "unknown_code_verification_error": "嘗試其他代碼",
+      "verification_code_used": "驗證碼已被使用"
     },
     "person_and_health_expert": "與健康專家交談的人",
+    "publish_consent_title_bluetooth": "通知您社區中的其他人",
     "publish_keys": {
       "errors": {
         "description": "操作無法完成。 {{message}}",
@@ -46,18 +95,56 @@
     "check_for_exposures": "檢測暴露情況。",
     "exposure_detail": {
       "2m_apart": "2公尺距離",
+      "6ft_apart": "6英尺距離",
       "general_guidance": "一般指南",
+      "ha_guidance_header": "我該怎麼做？",
+      "header": "您接觸的某個人在之後被檢測為COVID-19陽性反應。",
+      "isolate": "隔離",
+      "next_steps": "下一步",
       "personalize_my_guidance": "指引個人化",
       "schedule_callback": "安排與{{healthAuthorityName}}追蹤接觸者的人員的聯繫。",
-      "speak_with_contact_tracer": "與接追蹤接觸者的人員通話"
+      "speak_with_contact_tracer": "與接追蹤接觸者的人員通話",
+      "wash_your_hands": "洗手",
+      "wear_a_mask": "戴口罩"
+    },
+    "exposure_window": {
+      "four_to_six_days_ago": "4到6天以前",
+      "seven_to_fourteen_days_ago": "7到14天以前",
+      "today_to_three_days_ago": "最近3天內"
     },
     "health_guidelines": {
-      "two_meters_apart": "保持2公尺距離"
+      "six_feet_apart": "保持6英尺距離",
+      "stay_home": "生病時請待在家",
+      "title": "健康指南",
+      "two_meters_apart": "保持2公尺距離",
+      "wash_your_hands": "勤洗手",
+      "wear_a_mask": "戴口罩"
     },
-    "no_connectivity_message": "您沒有連接到網路！"
+    "how_does_this_work": "該功能如何運作？",
+    "how_does_this_work_para": "當接觸通知開啟時，您的手機會使用藍牙與鄰近任何開啟接觸提醒的手機交換並儲存隨機ID，隨機ID並不會將您的個人訊息告知其他用戶，並在一日內多次更換以保護您的隱私。",
+    "last_days": "最近14天",
+    "learn_more": "了解更多",
+    "no_connectivity_message": "您沒有連接到網路！",
+    "no_exposure_reports": "無接觸紀錄",
+    "no_exposure_reports_over_past": "您在過去14天內並未收到任何接觸報紀錄",
+    "possible_exposure": "可能的COVID-19接觸",
+    "protect_yourself_and_others": "保護您自己與社區中的其他人",
+    "review_guidance_from_ha": "檢視來自{{healthAuthorityName}}的指示",
+    "updated": "更新",
+    "why_did_i_get_an_en": "我為什麼收到接觸通知？",
+    "why_did_i_get_an_en_para": "當您最近曾經接近的某個人收到COVID-19陽性結果並選擇通知其他人時，您將會收到通知。"
+  },
+  "exposure_scanning_status": {
+    "fix_this": "修復此問題",
+    "learn_more": "了解更多",
+    "your_device_is_not": "您的設備並未搜尋接觸狀況，解決以下問題以啟用接觸檢驗。",
+    "your_device_is_scanning": "您的裝置正在搜尋接觸狀況，並在您關閉app以後仍會持續運作。"
   },
   "home": {
+    "bluetooth_info_body": "您的手機以低功耗藍牙偵測到與您相鄰一段時間的其他手機。這允許應用程式匿名紀錄您的每日接觸者，即使您裝置上的應用程式並未開啟。",
+    "bluetooth_info_header": "藍牙",
     "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}}在應用程式關閉後仍會保持運作",
       "bluetooth_disabled_error_message": "到設定中打開藍芽來修正錯誤",
       "bluetooth_disabled_error_title": "在設定中開啟藍芽",
       "bluetooth_header": "藍牙",
@@ -65,47 +152,74 @@
       "location_disabled_error_title": "在設定中授權",
       "location_header": "定位",
       "proximity_tracing_header": "接觸追蹤",
-      "share": "分享應用程式來幫助保護自己和他人。",
+      "share": "分享應用程式來幫助保護自己和他人。{{applicationName}}",
       "share_message": "用用看這個應用程式{{applicationName}} ，它可以幫助我們預防COVID-19！ {{appDownloadLink}}",
+      "tracing_off_header": "接觸檢查關閉",
+      "tracing_off_subheader": "開啟藍牙與鄰近位置追蹤以獲得可能的接觸資訊",
       "tracing_on_header": "啟動"
     },
+    "call_emergency_services": "致電緊急服務人員",
+    "check_if_your_symptoms": "輸入您的症狀並立即獲得有關如何保持安全的建議。",
+    "did_you_test_positive": "您是否對COVID-19檢測為陽性？",
+    "feeling_sick": "是否感到不適？",
     "fix": "透過{{technology}}解決問題",
     "get_more_info": "透過{{technology}}獲得更多資訊",
+    "have_a_positive_test": "測試結果代碼是否為陽性？",
+    "if_you_have_a_code": "回報您的結果，確保社區安全。",
     "location_info_body_1": "接觸通知技術使用藍牙掃描來了解哪些設備相鄰。若要在具備Android 6.0及更高版本的所有手機上使用藍牙掃描，需要為所有應用程式打開設備定位，而不僅是使用“接觸通知系統”的應用程式。",
     "location_info_header": "定位",
     "location_info_subheader_1": "為什麼我需要打開我的定位？",
     "open_settings": "打開設定",
+    "proximity_tracing_info_body_1": "如果安裝了應用程式的智慧手機為開機狀態、已啟用藍牙並在彼此附近達一段時間，則會在您的設備上紀錄一個接觸案例。",
+    "proximity_tracing_info_body_2": "如果接觸到他人，您的數據和訊息將保持匿名。應用程式不存儲任何資料，僅交換隨機ID，而這些資訊將在14天內刪除。",
+    "proximity_tracing_info_header": "接觸提醒",
+    "proximity_tracing_info_subheader_1": "接觸提醒如何運作？",
+    "proximity_tracing_info_subheader_2": "我的資料安全嗎？",
     "proximity_tracing": {
       "unauthorized_error_message_android": "若要啟動接近追蹤和接處通知，請至\"COVID-19接觸通知設計\"，並開啟\"使用接觸通知\"",
       "unauthorized_error_message_ios": "若要啟用接近追蹤和接觸通知，請到“接觸通知設定”中的“接觸通知”部分，並將“啟動區域”設置為{{applicationName}}",
       "unauthorized_error_title": "啟用接近追蹤"
-    }
+    },
+    "to_submit_your_test": "與防疫電話客服人員通話，以取得您的檢驗結果代碼。"
   },
   "label": {
+    "check": "複選標記",
     "checked_checkbox": "選取的選項",
     "go_to_home_view": "回到首頁",
     "launch_enable_notif": "開啟通知",
     "launch_get_started": "開始",
+    "launch_screen1_header": "歡迎來到",
+    "privacy_policy": "隱私政策",
+    "question_icon": "問號",
     "unchecked_checkbox": "未選取的選項"
   },
   "navigation": {
     "connect": "連接",
     "exposure": "接觸",
+    "exposure_history": "接觸史",
+    "home": "工作介面",
     "more_info": "更多資訊",
     "symptom_checker": "症狀檢驗"
   },
   "onboarding": {
+    "activation_header_title": "應用程式設定",
     "app_setup_complete_body": "{{applicationName}}已開啟。感謝您一同幫助打擊病毒。",
     "app_setup_complete_header": "應用程式設置完成！",
     "app_setup_incomplete_body": "{{applicationName}}需要“接處追蹤”和Bluetooth權限才能得知您於何時何地接觸到COVID-19病毒。您可以在“設置”中對此進行授權。",
     "app_setup_incomplete_header": "應用程式設定不完整",
     "app_setup_incomplete_location_body": "{{applicationName}}需要“接處追蹤”和Bluetooth權限才能得知您於何時何地接觸到COVID-19病毒。您可以在“設置”中對此進行授權。",
     "eula": "最終用戶法律協議",
+    "eula_agree_terms_of_use": "我同意我已閱讀並接受使用條款",
     "location_alert_body": "若要使用藍牙掃描，需要打開設備的定位設置。",
     "location_alert_header": "從“ {{applicationName}} ”啟用定位",
     "location_body": "若要使用藍牙掃描，您需要開啟設備位置。該應用程序不會使用您的訂位資料，且不會無法追蹤您的設備。",
     "location_header": "開啟定位",
     "location_subheader": "為什麼需要打開手機的定位設置？",
+    "notification_body1": "當您有可能遇到被紀錄為COVID-19陽性反應者後，您會收到通知。",
+    "notification_body2": "應用程式匿名地以低功耗藍牙以及安全隨機代碼運作，您可以隨時於設定中關閉此功能。",
+    "notification_header": "如果您曾有接觸狀況，則會收到通知",
+    "notification_subheader1": "我何時會收到通知？",
+    "notification_subheader2": "該功能如何運作？",
     "notification_subheader3": "此應用程式不能使您免於COVID-19的感染。",
     "please_read_the": "請閱讀",
     "privacy_policy": "隱私政策",
@@ -145,13 +259,26 @@
     "screen4_image_label": "在手機上收到通知的人",
     "screen5_header": "您可以透過應用程式幫助減緩COVID-19的傳播、保護他人並直接從健康專家那裡獲得幫助。",
     "screen5_image_label": "與健康專家線上交談的人",
-    "terms_header_title": "使用條款"
+    "select_language": "選擇語言",
+    "step": "{{totalSteps}}中的{{currentStep}}步驟",
+    "terms_header_title": "使用條款",
+    "welcome_image_label": "人們戴著口罩，像在網路中相互連結的插圖"
   },
   "screen_titles": {
+    "bluetooth": "藍牙",
     "callback": "回電要求",
+    "debug": "排除錯誤",
+    "exposure_history": "接觸史",
+    "exposure_notifications": "接觸提醒",
+    "exposure_scanning": "接觸檢查",
     "exposures": "接觸",
+    "home": "工作介面",
     "how_the_app_works": "該應用程序的運作方式",
-    "legal": "法遵"
+    "legal": "合法的",
+    "location": "定位",
+    "protect_privacy": "我們如何保護您的隱私",
+    "select_language": "選擇語言",
+    "select_symptoms": "選擇症狀"
   },
   "self_assessment": {
     "age_range": {
@@ -166,10 +293,20 @@
       "urgent_medical_attention_needed": "若您需要緊急醫療服務，請致電{{emergencyPhoneNumber}}或去急診室"
     },
     "emergency_symptoms": {
-      "are_you_experiencing": "您是否具有這些緊急症狀？"
+      "are_you_experiencing": "您是否具有這些緊急症狀？",
+      "chest_pain": "劇烈、持續的胸痛或胸悶",
+      "difficulty_breathing": "嚴重呼吸困難",
+      "disorientation": "嚴重的定向力障礙或反應遲鈍",
+      "lightheadedness": "嚴重且持續的頭暈",
+      "select_any": "選擇所有符合的選項（或不選擇任何一項）"
     },
     "general_symptoms": {
+      "aching": "全身痠痛",
       "are_you_experiencing": "您是否具有以下症狀？",
+      "cough": "咳嗽症狀開始或惡化",
+      "difficulty_breathing": "輕度或中度呼吸困難",
+      "fever_or_chills": "發燒或發冷",
+      "loss_of_smell_taste_appetite": "嗅覺、味覺或食慾持續喪失",
       "other": "其他",
       "select_any": "選擇所有符合條件的選項。",
       "vomiting_or_diarrhea": "嘔吐或腹瀉"
@@ -182,8 +319,10 @@
       "dont_use_public_transport": "請勿搭乘大眾運輸或共享乘車。",
       "drink_water": "多喝水或其他乾淨液體，以防止液體流失(脫水)。",
       "feeling_fine": "很高興您感覺良好，您應該監測您的症狀並待在家中。",
+      "find_a_test_center_nearby": "尋找您鄰近的檢疫中心",
       "find_telehealth": "尋找遠距醫療服務。",
       "follow_cdc_guidance": "如果您出現症狀，請遵循CDC指示。",
+      "guidance": "您的指南",
       "if_symptoms_develop": "如果您出現任何COVID-19症狀或開始感到不適，請致電您的醫療保健提供者、臨床醫生諮詢專線或遠距醫療人員。",
       "may_help_you_feel_better": "這些步驟可能幫助您感覺好一點：",
       "monitor_your_symptoms": "抱歉，您現在感到不適。待在家中並監測您的症狀。症狀惡化，請致電您的醫護人員並留在家中。",
@@ -207,6 +346,8 @@
       "title": "您現在感覺如何？"
     },
     "intro": {
+      "agree_and_start_assessment": "同意並開始檢測",
+      "covid19_self_assessment": "COVID-19自我檢測",
       "find_out_how_to_care": "了解在與COVID-19陽性者接觸後的自我及他人照顧方法",
       "if_this_is": "如遇緊急狀況，請致電{{emergencyPhoneNumber}}",
       "this_is_based_on": "這是根據CDC最新指示，可能在我們進一步了解病毒擴散原因與引起病症後隨時更新",
@@ -214,6 +355,8 @@
       "you_are_a_resident": "您是{{ healthAuthorityName }}支援之社區居民"
     },
     "underlying_conditions": {
+      "blood_disorder": "血液相關疾病，例如鐮刀型細胞貧血或地中海型貧血",
+      "cerebrovascular_disease": "腦血管疾病或神經系統疾病，例如中風或失智。",
       "diabetes": "糖尿病",
       "do_you_have": "您是否具有以下任何狀況？",
       "heart_condition": "嚴重的心臟病，如心臟衰竭、冠心病或心肌症",

@@ -235,13 +235,17 @@
     "welcome_image_label": "Una ilustración de personas con mascarillas, conectadas como nodos en una red."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "callback": "Solicitar que se devuelva la llamada",
     "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
     "exposures": "Exposiciones",
     "home": "Página de Inicio",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
-    "legal": "Legal"
+    "legal": "Legal",
+    "location": "Localización",
+    "protect_privacy": "Cómo protegemos su privacidad",
+    "select_language": "Seleccionar idioma"
   },
   "self_assessment": {
     "age_range": {
@@ -278,6 +282,7 @@
       "dont_use_public_transport": "No utilice el transporte público ni el uso compartido de viajes.",
       "drink_water": "Beba mucha agua para evitar deshidratarte.",
       "feeling_fine": "Me alegro de saber que te sientes bien. Usted debería monitorear sus síntomas y permanecer en casa.",
+      "find_a_test_center_nearby": "Encuentre un centro de pruebas cercano",
       "find_telehealth": "Buscar servicios de telemedicina",
       "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
       "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
@@ -323,6 +328,7 @@
     }
   },
   "settings": {
+    "delete_confirmation_header": "¿Estás seguro?",
     "here": "aquí",
     "i_understand_and_consent": "Comprendo y doy mi consentimiento",
     "not_sharing_anonymized_data": "No compartir datos anónimos",

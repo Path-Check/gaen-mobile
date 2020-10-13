@@ -178,17 +178,24 @@
     "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "callback": "Mande Rele Ankò",
     "debug": "Debug",
     "exposure_history": "Lis ekspozisyon",
     "exposures": "Ekspozisyon yo",
     "home": "Lakay",
     "how_the_app_works": "Kijan aplikasyon an fonksyone",
-    "legal": "Legal"
+    "legal": "Legal",
+    "location": "Lokalizasyon",
+    "protect_privacy": "Ki jan nou pwoteje vi prive ou",
+    "select_language": "Chwazi lang"
   },
   "self_assessment": {
     "general_symptoms": {
       "other": "Lòt"
+    },
+    "guidance": {
+      "find_a_test_center_nearby": "Jwenn yon sant tès ki tou pre"
     },
     "how_are_you_feeling": {
       "good": "Byen",
@@ -196,6 +203,7 @@
     }
   },
   "settings": {
+    "delete_confirmation_header": "Èske w sèten?",
     "here": "isit la",
     "i_understand_and_consent": "Mwen konprann e mwen dakò",
     "please_view_privacy_policy": "Tanpri gade politik vi prive yo",
