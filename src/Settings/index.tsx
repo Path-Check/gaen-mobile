@@ -42,6 +42,10 @@ const Settings: FunctionComponent = () => {
     navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings)
   }
 
+  const handleOnPressDeleteMyData = () => {
+    navigation.navigate(SettingsStackScreens.DeleteConfirmation)
+  }
+
   const selectLanguage: SettingsListItem = {
     label: languageName,
     onPress: handleOnPressSelectLanguage,
@@ -57,6 +61,13 @@ const Settings: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+
+  const deleteMyData: SettingsListItem = {
+    label: t("settings.delete_my_data"),
+    onPress: handleOnPressDeleteMyData,
+    icon: Icons.Trash,
+  }
+
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
@@ -90,6 +101,13 @@ const Settings: FunctionComponent = () => {
             </View>
           )
         })}
+      </View>
+      <View style={style.section}>
+        <ListItem
+          label={deleteMyData.label}
+          onPress={deleteMyData.onPress}
+          icon={deleteMyData.icon}
+        />
       </View>
       {showDebugMenu && (
         <View style={style.section}>

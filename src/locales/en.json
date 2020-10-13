@@ -276,6 +276,7 @@
     "home": "Dashboard",
     "how_the_app_works": "How the app works",
     "legal": "Legal",
+    "delete_my_data": "Delete My Data",
     "protect_privacy": "How we protect your privacy",
     "select_language": "Select Language",
     "select_symptoms": "Select Symptoms"
@@ -381,7 +382,15 @@
     "share_anonymized_data_para": "Your anonymous data helps the {{healthAuthorityName}} Commission analyze, track, and contain the spread of COVID-19. Your data will be aggregated with data from other users who choose to share.\n\nYour data contains your survey responses and zipcode, but no additional or personally-identifying information.\n\n The {{healthAuthorityName}} will retain your anonymous data for a specific period of time.",
     "sharing_anonymized_data": "Sharing anonymized data",
     "stop_sharing_data": "Stop Sharing Data",
-    "you_are_sharing_data": "You are sharing anonymized data"
+    "you_are_sharing_data": "You are sharing anonymized data",
+    "delete_my_data": "Delete My Data",
+    "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, we'll remove the data that the app has stored on your phone.",
+    "delete_data_disclosure2": "This button does not delete the Rotating Proximity Identifiers or Temporary Exposure Keys created or collected by your phone for Proximity Tracing.\n\nYou can delete additional data through your phone's Settings.",
+    "data_deleted": "Data deleted",
+    "delete_confirmation_header": "Are you sure?",
+    "errors": {
+      "deleting_data": "Sorry, we could not delete your data"
+    }
   },
   "symptom_checker": {
     "delete_entry": "Delete entry",

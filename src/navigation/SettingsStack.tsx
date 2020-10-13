@@ -15,20 +15,29 @@ import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import { SettingsStackScreens } from "./index"
 
 import { Colors, Headers } from "../styles"
+import DeleteConfirmation from "../Settings/DeleteConfirmation"
 
 const Stack = createStackNavigator()
 
-const headerLeft = () => {
-  return <HeaderLeft />
+const headerLeftDark = () => {
+  return <HeaderLeft tintColor={Colors.white} />
 }
 
-const HeaderLeft = () => {
+const headerLeftLight = () => {
+  return <HeaderLeft tintColor={Colors.primaryDarkBackround} />
+}
+
+interface HeaderLeftProps {
+  tintColor: string
+}
+
+const HeaderLeft: FunctionComponent<HeaderLeftProps> = ({ tintColor }) => {
   const navigation = useNavigation()
 
   return (
     <HeaderBackButton
       labelVisible={false}
-      tintColor={Colors.white}
+      tintColor={tintColor}
       onPress={() => navigation.goBack()}
     />
   )
@@ -47,7 +56,7 @@ const SettingsStack: FunctionComponent = () => {
     headerBackTitleVisible: false,
     headerTintColor: Colors.headerText,
     headerTitleAlign: "center",
-    headerLeft: headerLeft,
+    headerLeft: headerLeftDark,
   }
 
   return (
@@ -57,6 +66,15 @@ const SettingsStack: FunctionComponent = () => {
         name={SettingsStackScreens.Legal}
         component={Legal}
         options={{ headerTitle: t("screen_titles.legal") }}
+      />
+      <Stack.Screen
+        name={SettingsStackScreens.DeleteConfirmation}
+        component={DeleteConfirmation}
+        options={{
+          headerTitle: "",
+          headerLeft: headerLeftLight,
+          headerStyle: { backgroundColor: Colors.primaryLightBackground },
+        }}
       />
       <Stack.Screen
         name={SettingsStackScreens.ENDebugMenu}
