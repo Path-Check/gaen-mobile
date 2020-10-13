@@ -86,7 +86,6 @@ module.exports = {
     "@typescript-eslint/no-empty-function": [2, { allow: ["arrowFunctions"] }],
     "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],
     "@typescript-eslint/explicit-module-boundary-types": 0,
-    "@typescript-eslint/ban-ts-comment": 0,
   },
   overrides: [
     {

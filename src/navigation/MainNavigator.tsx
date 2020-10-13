@@ -36,6 +36,7 @@ import { applyModalHeader } from "./ModalHeader"
 import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
 import { Headers } from "../styles"
+import { Transition } from "react-native-reanimated"
 
 const Stack = createStackNavigator()
 

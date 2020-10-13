@@ -40,8 +40,7 @@ const Settings: FunctionComponent = () => {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
-  // @ts-ignore
-  const { push, navigate } = useNavigation<any>()
+  const navigation = useNavigation()
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
@@ -52,17 +51,17 @@ const Settings: FunctionComponent = () => {
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
-    navigate(ModalStackScreens.LanguageSelection)
+    navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
   const handleOnPressHowTheAppWorks = () => {
-    push(ModalStackScreens.HowItWorksReviewFromSettings, {
+    navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings, {
       screen: HowItWorksStackScreens.Introduction,
     })
   }
 
   const handleOnPressDeleteMyData = () => {
-    navigate(SettingsStackScreens.DeleteConfirmation)
+    navigation.navigate(SettingsStackScreens.DeleteConfirmation)
   }
 
   const selectLanguage: SettingsListItem = {
@@ -72,7 +71,7 @@ const Settings: FunctionComponent = () => {
   }
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
-    onPress: () => navigate(SettingsStackScreens.Legal),
+    onPress: () => navigation.navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
   }
   const howTheAppWorks: SettingsListItem = {
@@ -89,7 +88,7 @@ const Settings: FunctionComponent = () => {
 
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
-    onPress: () => navigate(SettingsStackScreens.ENDebugMenu),
+    onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }
 
