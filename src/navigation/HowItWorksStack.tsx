@@ -18,7 +18,6 @@ import {
   HowItWorksStackScreens,
   ModalStackScreens,
   Stacks,
-  Stack as NavigationStack,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
 import { getLocalNames } from "../locales/languages"
@@ -29,7 +28,7 @@ import { Colors, Outlines, Spacing, Typography } from "../styles"
 const Stack = createStackNavigator()
 
 interface HowItWorksStackProps {
-  destinationOnSkip: NavigationStack
+  mountLocation: "Onboarding" | "Settings"
 }
 
 type HowItWorksScreenDatum = {
@@ -42,7 +41,7 @@ type HowItWorksScreenDatum = {
 }
 
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
-  destinationOnSkip,
+  mountLocation,
 }) => {
   const {
     t,
@@ -56,10 +55,15 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   }
 
   const handleOnNavigateOutOfStack = () => {
-    if (destinationOnSkip === Stacks.Settings) {
-      navigation.goBack()
-    } else if (destinationOnSkip === Stacks.Activation) {
-      navigation.navigate(Stacks.Activation)
+    switch (mountLocation) {
+      case "Onboarding": {
+        navigation.goBack()
+        break
+      }
+      case "Settings": {
+        navigation.navigate(Stacks.Activation)
+        break
+      }
     }
   }
   const handleOnPressSkip = handleOnNavigateOutOfStack

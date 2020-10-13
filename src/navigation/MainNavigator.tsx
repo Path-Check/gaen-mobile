@@ -36,7 +36,6 @@ import { applyModalHeader } from "./ModalHeader"
 import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
 import { Headers } from "../styles"
-import { Transition } from "react-native-reanimated"
 
 const Stack = createStackNavigator()
 
@@ -106,10 +105,7 @@ const MainNavigator: FunctionComponent = () => {
             />
             <Stack.Screen name={Stacks.HowItWorks}>
               {(props) => (
-                <HowItWorksStack
-                  {...props}
-                  destinationOnSkip={Stacks.Activation}
-                />
+                <HowItWorksStack {...props} mountLocation="Onboarding" />
               )}
             </Stack.Screen>
             <Stack.Screen
@@ -148,9 +144,7 @@ const MainNavigator: FunctionComponent = () => {
           name={ModalStackScreens.HowItWorksReviewFromSettings}
           options={TransitionPresets.ModalTransition}
         >
-          {(props) => (
-            <HowItWorksStack {...props} destinationOnSkip={Stacks.Settings} />
-          )}
+          {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
         </Stack.Screen>
         <Stack.Screen
           name={ModalStackScreens.AnonymizedDataConsent}
