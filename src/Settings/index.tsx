@@ -62,7 +62,7 @@ const Settings: FunctionComponent = () => {
   }
 
   const handleOnPressDeleteMyData = () => {
-    navigation.navigate(SettingsStackScreens.DeleteConfirmation)
+    navigate(SettingsStackScreens.DeleteConfirmation)
   }
 
   const selectLanguage: SettingsListItem = {

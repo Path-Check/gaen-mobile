@@ -1,29 +1,10 @@
 import React from "react"
-<<<<<<< HEAD
-import { render, fireEvent } from "@testing-library/react-native"
-import Settings from "."
-import { useNavigation } from "@react-navigation/native"
-import { SettingsStackScreens } from "../navigation"
-
-jest.mock("@react-navigation/native")
-
-describe("Settings", () => {
-  describe('when the user taps "Delete All Data"', () => {
-    it("presents a confirmation screen", () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-      const { getByLabelText } = render(<Settings />)
-
-      const deleteMyDataButton = getByLabelText("Delete My Data")
-      fireEvent.press(deleteMyDataButton)
-      expect(navigateSpy).toHaveBeenCalledWith(
-        SettingsStackScreens.DeleteConfirmation,
-      )
-=======
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Linking } from "react-native"
 
+import { SettingsStackScreens } from "../navigation"
 import SettingsScreen from "./index"
+import { useNavigation } from "@react-navigation/native"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
@@ -37,6 +18,24 @@ jest.mock("../configuration/authorityLinks")
 jest.mock("../hooks/useApplicationInfo")
 
 describe("Settings", () => {
+  describe("when the user deletes their data", () => {
+    it("navigates them to a confirmation screen", () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+      ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+        applicationName: "name",
+      })
+
+      const { getByLabelText } = render(<SettingsScreen />)
+
+      const deleteMyDataButton = getByLabelText("Delete My Data")
+      fireEvent.press(deleteMyDataButton)
+      expect(navigateSpy).toHaveBeenCalledWith(
+        SettingsStackScreens.DeleteConfirmation,
+      )
+    })
+  })
+
   it("shows the build and version number of the application", () => {
     const buildNumber = "8"
     const versionNumber = "0.18"
@@ -113,7 +112,6 @@ describe("Settings", () => {
       expect(loadAuthorityLinksSpy).toHaveBeenCalledWith("about")
       expect(applyTranslationsSpy).toHaveBeenCalledWith([], "en")
       expect(openURLSpy).toHaveBeenCalledWith(url)
->>>>>>> 49c5cc64... Swap Connect tab for Settings tab and move content to Settings
     })
   })
 })
