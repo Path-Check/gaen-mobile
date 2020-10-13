@@ -17,6 +17,17 @@ export type CovidData = {
   peopleDeathNewCt: number
 }
 
+const toCovidData = (jsonResponse: Record<string, string>[]): CovidData[] => {
+  return jsonResponse.map((json) => {
+    return {
+      peoplePositiveNewCasesCt: parseInt(json["peoplePositiveNewCasesCt"]),
+      peoplePositiveCasesCt: parseInt(json["peoplePositiveCasesCt"]),
+      peopleDeathNewCt: parseInt(json["peopleDeathNewCt"]),
+      peopleDeathCt: parseInt(json["peopleDeathCt"]),
+    }
+  })
+}
+
 export interface RequestSuccess {
   kind: "success"
   lastWeekCovidData: CovidData[]
@@ -33,12 +44,12 @@ export interface RequestFailure {
   nature: FailureNature
 }
 
-const isValidCovidDataResponse = (jsonResponse: Record<string, number>) => {
+const isValidCovidDataResponse = (jsonResponse: Record<string, string>) => {
   return (
-    jsonResponse["peoplePositiveNewCasesCt"] >= 0 &&
-    jsonResponse["peoplePositiveCasesCt"] >= 0 &&
-    jsonResponse["peopleDeathNewCt"] >= 0 &&
-    jsonResponse["peopleDeathCt"] >= 0
+    parseInt(jsonResponse["peoplePositiveNewCasesCt"]) >= 0 &&
+    parseInt(jsonResponse["peoplePositiveCasesCt"]) >= 0 &&
+    parseInt(jsonResponse["peopleDeathNewCt"]) >= 0 &&
+    parseInt(jsonResponse["peopleDeathCt"]) >= 0
   )
 }
 
@@ -58,7 +69,7 @@ export const fetchCovidDataForState = async (
     if (historicData.every(isValidCovidDataResponse)) {
       return {
         kind: "success",
-        lastWeekCovidData: jsonResponse[DATA_KEY],
+        lastWeekCovidData: toCovidData(jsonResponse[DATA_KEY]),
       }
     } else {
       Logger.error("Invalid response for covid data", {
