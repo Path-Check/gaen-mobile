@@ -208,11 +208,15 @@
     "welcome_image_label": "ネットワーク内のノードのように接続されたマスクを使用した人物のイラスト。"
   },
   "screen_titles": {
+    "bluetooth": "ブルートゥース",
     "debug": "デバッグ",
     "exposure_history": "接触履歴",
     "exposures": "接触",
     "home": "ホーム",
-    "legal": "リーガル"
+    "legal": "リーガル",
+    "location": "ロケーション",
+    "protect_privacy": "プライバシーを保護する方法",
+    "select_language": "言語を選択する"
   },
   "settings": {
     "i_understand_and_consent": "私は理解して同意します"

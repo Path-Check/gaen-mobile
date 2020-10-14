@@ -106,7 +106,7 @@
       "location_disabled_error_title": "Tso cai nyob hauv Settings",
       "location_header": "Location",
       "proximity_tracing_header": "Proximity Tracing",
-      "share": "Qhia lub app no mus rau lwm tus neeg kom thiaj li tiv thaiv tau koj thiab lwm tus",
+      "share": "Qhia lub app no mus rau lwm tus neeg kom thiaj li tiv thaiv tau koj thiab lwm tus {{applicationName}}",
       "share_message": "Mus xyuas lub app no {{applicationName}}, uas pab peb tswj tau tus kab mob COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Tsis Ciaj",
       "tracing_off_subheader": "Taws qhov Bluetooth thiab Proximity Tracing kom thiaj li paub txog seb tau mus raug kis mob li cas lawm",
@@ -203,11 +203,15 @@
     "welcome_image_label": "Daim duab qhia txog cov neeg looj lub npog ntsej muag, sib txuas sawvdaws nyob hauv ib pab pawg network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Debug",
     "exposure_history": "Keeb Kwm Mus Raug",
     "exposures": "Kev mus nyob ze raug mob",
     "home": "Home",
-    "legal": "Kev Cai Lij Choj"
+    "legal": "Kev Cai Lij Choj",
+    "location": "Location",
+    "protect_privacy": "Peb tiv thaiv koj ntaub ntawv li cas",
+    "select_language": "Xaiv Koj Yam Lus"
   },
   "settings": {
     "i_understand_and_consent": "Kuv nkag siab thiab tso cai"

@@ -1,5 +1,8 @@
 {
   "navigation": {
     "more_info": "Komakai lomesodel"
+  },
+  "settings": {
+    "delete_confirmation_header": "Ke kmal mla mo sure?"
   }
 }
