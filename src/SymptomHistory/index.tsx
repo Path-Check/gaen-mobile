@@ -5,25 +5,25 @@ import { useTranslation } from "react-i18next"
 
 import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
-  useSymptomLogContext,
-} from "./SymptomLogContext"
+  useSymptomHistoryContext,
+} from "./SymptomHistoryContext"
 import { SymptomLogEntry } from "./symptoms"
 import { Text, StatusBar, Button } from "../components"
-import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
+import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
 import SymptomLogListItem from "./SymptomLogListItem"
 
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 
-const SymptomLog: FunctionComponent = () => {
+const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
-  const { symptomLogEntries } = useSymptomLogContext()
+  const { symptomLogEntries } = useSymptomHistoryContext()
   const navigation = useNavigation()
 
   const hasSymptomHistory = symptomLogEntries.length > 0
 
   const handleOnPressLogSymptoms = () => {
-    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+    navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms)
   }
 
   const NoSymptomHistory = () => {
@@ -116,4 +116,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SymptomLog
+export default SymptomHistory

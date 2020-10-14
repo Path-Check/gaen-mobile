@@ -2,7 +2,7 @@ import React from "react"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { showMessage } from "react-native-flash-message"
 
-import { SymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { SymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { OnboardingProvider } from "../OnboardingContext"
 import { failureResponse, SUCCESS_RESPONSE } from "../OperationResponse"
 import DeleteConfirmation from "./DeleteConfirmation"
@@ -18,13 +18,13 @@ describe("DeleteConfirmation", () => {
 
     const { getByLabelText } = render(
       <OnboardingProvider userHasCompletedOnboarding={false}>
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({
+        <SymptomHistoryContext.Provider
+          value={factories.symptomHistoryContext.build({
             deleteAllLogEntries: deleteAllLogEntriesSpy,
           })}
         >
           <DeleteConfirmation />
-        </SymptomLogContext.Provider>
+        </SymptomHistoryContext.Provider>
       </OnboardingProvider>,
     )
 
@@ -42,13 +42,13 @@ describe("DeleteConfirmation", () => {
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               deleteAllLogEntries: deleteAllLogEntriesSpy,
             })}
           >
             <DeleteConfirmation />
-          </SymptomLogContext.Provider>
+          </SymptomHistoryContext.Provider>
         </OnboardingProvider>,
       )
 
@@ -73,13 +73,13 @@ describe("DeleteConfirmation", () => {
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               deleteAllLogEntries: deleteAllLogEntriesSpy,
             })}
           >
             <DeleteConfirmation />
-          </SymptomLogContext.Provider>
+          </SymptomHistoryContext.Provider>
         </OnboardingProvider>,
       )
 
