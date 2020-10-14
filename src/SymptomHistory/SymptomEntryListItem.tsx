@@ -24,7 +24,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     StackNavigationProp<SymptomHistoryStackParams>
   >()
 
-  const { date, symptoms } = entry
+  const { date } = entry
 
   const dayJsDate = posixToDayjs(date)
 
@@ -50,6 +50,15 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     )
   }
 
+  const determineCardContent = (entry: SymptomEntry) => {
+    if (entry.kind === "NoData") {
+      return <Text>{"No Data"}</Text>
+    } else {
+      const arr = Array.from(entry.symptoms)
+      return arr.map(toSymptomText)
+    }
+  }
+
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
@@ -61,7 +70,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
           <Text style={style.datetimeText}>{timeText}</Text>
         </View>
         <View style={style.symptomsContainer}>
-          {symptoms.map(toSymptomText)}
+          {determineCardContent(entry)}
         </View>
       </View>
     </TouchableOpacity>

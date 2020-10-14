@@ -25,8 +25,8 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
-
+    "resolveJsonModule": true,
+    "downlevelIteration": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js", "jest/*", "**/*.svg"]

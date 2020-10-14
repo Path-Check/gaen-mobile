@@ -4,7 +4,9 @@ import {
   SymptomEntry,
   SymptomHistory,
   SymptomEntryAttributes,
-} from "../SymptomHistory/symptoms"
+  toSymptomHistory,
+  RawEntry,
+} from "./symptoms"
 
 // Symptom Log Entry Module
 const symptomHistoryModule = NativeModules.SymptomLogEntryModule
@@ -21,25 +23,10 @@ export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {
   return symptomHistoryModule.deleteSymptomLogEntry(symptomLogEntryId)
 }
 
-type RawEntry = {
-  id: string
-  date: number
-  symptoms: string[]
-}
-
-const toSymptomHistory = (rawEntries: RawEntry[]): SymptomHistory => {
-  return [
-    { id: "a", kind: "NoData", date: 1234, symptoms: [] },
-    { id: "b", kind: "Symptoms", date: 1234, symptoms: ["cough"] },
-    { id: "c", kind: "NoSymptoms", date: 1234, symptoms: [] },
-  ]
-}
-
-export const readEntries = (): Promise<SymptomEntry[]> => {
-  const rawEntries: RawEntry[] = symptomHistoryModule.getSymptomLogEntries()
-
+export const readEntries = async (): Promise<SymptomHistory> => {
+  const rawEntries: RawEntry[] = await symptomHistoryModule.getSymptomLogEntries()
   const symptomHistory = toSymptomHistory(rawEntries)
-  return
+  return symptomHistory
 }
 
 export const deleteAllEntries = async (): Promise<void> => {
@@ -49,4 +36,3 @@ export const deleteAllEntries = async (): Promise<void> => {
 export const deleteEntriesOlderThan = async (days: number): Promise<void> => {
   return symptomHistoryModule.deleteSymptomLogsOlderThan(days)
 }
-

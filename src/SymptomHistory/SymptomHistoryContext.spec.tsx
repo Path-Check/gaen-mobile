@@ -131,7 +131,7 @@ describe("SymptomHistoryProvider", () => {
 })
 
 const SymptomHistoryConsumer = () => {
-  const { symptomEntries } = useSymptomHistoryContext()
+  const { symptomHistory } = useSymptomHistoryContext()
 
-  return <Text testID="symptom-logs">{JSON.stringify(symptomEntries)}</Text>
+  return <Text testID="symptom-logs">{JSON.stringify(symptomHistory)}</Text>
 }

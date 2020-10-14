@@ -10,7 +10,7 @@ import {
   SymptomEntry,
   SymptomHistory,
   Symptom,
-  sortSymptomEntries,
+  SymptomEntryAttributes,
 } from "./symptoms"
 import * as NativeModule from "./nativeModule"
 
@@ -21,7 +21,7 @@ import {
 } from "../OperationResponse"
 
 export type SymptomHistoryState = {
-  symptomEntries: SymptomHistory
+  symptomHistory: SymptomHistory
   createEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateEntry: (entry: SymptomEntry) => Promise<OperationResponse>
   deleteEntry: (symptomEntryId: string) => Promise<OperationResponse>
@@ -29,7 +29,7 @@ export type SymptomHistoryState = {
 }
 
 const initialState: SymptomHistoryState = {
-  symptomEntries: [],
+  symptomHistory: [],
   createEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
@@ -51,12 +51,11 @@ export const SymptomHistoryContext = createContext<SymptomHistoryState>(
 export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
 
 export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
-  const [symptomEntries, setSymptomEntries] = useState<SymptomHistory>([])
+  const [symptomHistory, setSymptomHistory] = useState<SymptomHistory>([])
 
   const fetchEntries = async () => {
-    const entries = await NativeModule.readEntries()
-    const sortedEntries = sortSymptomEntries(entries)
-    setSymptomEntries(sortedEntries)
+    const history = await NativeModule.readEntries()
+    setSymptomHistory(history)
   }
 
   const cleanupStaleData = async () => {
@@ -72,8 +71,8 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
 
   const createEntry = async (symptoms: Symptom[]) => {
     try {
-      const newEntry = {
-        symptoms,
+      const newEntry: SymptomEntryAttributes = {
+        symptoms: new Set(symptoms),
         date: Date.now(),
       }
       await NativeModule.createEntry(newEntry)
@@ -117,7 +116,7 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   return (
     <SymptomHistoryContext.Provider
       value={{
-        symptomEntries,
+        symptomHistory,
         createEntry,
         updateEntry,
         deleteEntry,

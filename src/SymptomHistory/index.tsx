@@ -17,31 +17,11 @@ import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
-  const { symptomEntries } = useSymptomHistoryContext()
+  const { symptomHistory } = useSymptomHistoryContext()
   const navigation = useNavigation()
-
-  const hasSymptomHistory = symptomEntries.length > 0
 
   const handleOnPressLogSymptoms = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms)
-  }
-
-  const NoSymptomHistory = () => {
-    return (
-      <Text style={style.noSymptomHistoryText}>
-        {t("symptom_checker.no_symptom_history")}
-      </Text>
-    )
-  }
-
-  const SymptomHistory = () => {
-    return (
-      <View>
-        {symptomEntries.map((entry: SymptomEntry) => {
-          return <SymptomEntryListItem key={entry.date} entry={entry} />
-        })}
-      </View>
-    )
   }
 
   return (
@@ -59,7 +39,9 @@ const SymptomHistory: FunctionComponent = () => {
           })}
         </Text>
 
-        {hasSymptomHistory ? <SymptomHistory /> : <NoSymptomHistory />}
+        {symptomHistory.reverse().map((entry: SymptomEntry) => {
+          return <SymptomEntryListItem key={entry.date} entry={entry} />
+        })}
       </ScrollView>
       <View style={style.bottomActionsContainer}>
         <Button

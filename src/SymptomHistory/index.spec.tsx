@@ -39,7 +39,7 @@ describe("SymptomHistory", () => {
       const { getByText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomEntries: [],
+            symptomHistory: [],
           })}
         >
           <SymptomHistory />
@@ -64,15 +64,17 @@ describe("SymptomHistory", () => {
       const { getByText, queryByText, getAllByText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomEntries: [
+            symptomHistory: [
               {
                 id: "1",
-                symptoms: ["cough"],
+                kind: "Symptoms",
+                symptoms: new Set(["cough"]),
                 date: firstLogEntryPosix,
               },
               {
                 id: "2",
-                symptoms: ["loss_of_smell"],
+                kind: "Symptoms",
+                symptoms: new Set(["loss_of_smell"]),
                 date: secondLogEntryPosix,
               },
             ],
@@ -101,13 +103,14 @@ describe("SymptomHistory", () => {
       const logEntryPosix = Date.parse(`2020-09-21 10:00`)
       const logEntry: SymptomEntry = {
         id: "1",
-        symptoms: ["cough"],
+        kind: "Symptoms",
+        symptoms: new Set(["cough"]),
         date: logEntryPosix,
       }
       const { getByLabelText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomEntries: [logEntry],
+            symptomHistory: [logEntry],
           })}
         >
           <SymptomHistory />

@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 
-import { Posix } from "../utils/dateTime"
+import { Posix, isSameDay } from "../utils/dateTime"
 
 export type Symptom =
   | "chest_pain_or_pressure"
@@ -66,14 +66,7 @@ const toSymptom = (rawSymptom: string): Symptom | null => {
 }
 
 export interface NoData {
-  id: string
   kind: "NoData"
-  date: Posix
-}
-
-export interface NoSymptoms {
-  id: string
-  kind: "NoSymptoms"
   date: Posix
 }
 
@@ -81,16 +74,19 @@ export interface Symptoms {
   id: string
   kind: "Symptoms"
   date: Posix
-  symptoms: Symptom[]
+  symptoms: Set<Symptom>
 }
 
-export type SymptomEntry = NoData | NoSymptoms | Symptoms
+export type SymptomEntry = NoData | Symptoms
 
 export type SymptomHistory = SymptomEntry[]
 
 export type SymptomHistoryByDay = Record<Posix, SymptomEntry>
 
-export type SymptomEntryAttributes = Omit<SymptomEntry, "id">
+export interface SymptomEntryAttributes {
+  date: Posix
+  symptoms: Set<Symptom>
+}
 
 export const sortSymptomEntries = (entries: SymptomEntry[]): SymptomEntry[] => {
   const compareEntries = (
@@ -103,53 +99,47 @@ export const sortSymptomEntries = (entries: SymptomEntry[]): SymptomEntry[] => {
   return entries.sort(compareEntries)
 }
 
-type RawEntry = {
+export type RawEntry = {
   id: string
   date: number
   symptoms: string[]
 }
 
 export const toSymptomHistory = (rawEntries: RawEntry[]): SymptomHistory => {
-  const blankHistory: SymptomHistory = calendarDays(14)
+  const initialHistory: SymptomHistory = blankHistory(14)
 
-  rawEntries.reduce<SymptomHistory>(
+  return rawEntries.reduce<SymptomHistory>(
     (acc: SymptomHistory, rawEntry: RawEntry) => {
-      // what day the raw entry belongs to
-      // make a new history with the entry added to that date.
-      //
-      return addEntry(toEntry(rawEntry), acc)
+      const entry = toEntry(rawEntry)
+
+      return addEntry(entry, acc)
     },
-    blankHistory,
+    initialHistory,
   )
 }
 
 const toEntry = (rawEntry: RawEntry): SymptomEntry => {
   const { id, date, symptoms: rawSymptoms } = rawEntry
-  if (rawSymptoms.length > 0) {
-    const symptoms: Symptom[] = rawSymptoms.reduce<Symptom[]>(
-      (acc: Symptom[], rawSymptom: string) => {
+
+  const toSymptomSet = (rawSymptoms: string[]): Set<Symptom> => {
+    return rawSymptoms.reduce<Set<Symptom>>(
+      (acc: Set<Symptom>, rawSymptom: string) => {
         const symptom = toSymptom(rawSymptom)
         if (symptom) {
-          return [symptom, ...acc]
+          return acc.add(symptom)
         } else {
           return acc
         }
       },
-      [],
+      new Set(),
     )
+  }
 
-    return {
-      kind: "Symptoms",
-      id,
-      date,
-      symptoms,
-    }
-  } else {
-    return {
-      kind: "NoSymptoms",
-      id,
-      date,
-    }
+  return {
+    kind: "Symptoms",
+    id,
+    date,
+    symptoms: toSymptomSet(rawSymptoms),
   }
 }
 
@@ -157,10 +147,56 @@ const addEntry = (
   entry: SymptomEntry,
   history: SymptomHistory,
 ): SymptomHistory => {
-  return history
+  return history.map(
+    (el: SymptomEntry): SymptomEntry => {
+      if (isSameDay(entry.date, el.date)) {
+        return combineEntries(entry, el)
+      } else {
+        return el
+      }
+    },
+  )
 }
 
-export const calendarDays = (totalDays: number): Posix[] => {
+const union = <T>(setA: Set<T>, setB: Set<T>): Set<T> => {
+  const union = new Set(setA)
+  for (const elem of setB) {
+    union.add(elem)
+  }
+  return union
+}
+
+const combineEntries = (
+  entryA: SymptomEntry,
+  entryB: SymptomEntry,
+): SymptomEntry => {
+  switch ([entryA.kind, entryB.kind]) {
+    case ["NoData", "NoData"]: {
+      return entryA
+    }
+    case ["NoData", "Symptoms"]: {
+      return entryB
+    }
+    case ["Symptoms", "NoData"]: {
+      return entryA
+    }
+    case ["Symptoms", "Symptoms"]: {
+      const a = entryA as Symptoms
+      const b = entryB as Symptoms
+      return {
+        id: a.id,
+        kind: "Symptoms",
+        date: a.date,
+        symptoms: union(a.symptoms, b.symptoms),
+      }
+    }
+    default: {
+      return entryA
+    }
+  }
+}
+
+const blankHistory = (totalDays: number): SymptomHistory => {
   const now = Date.now()
 
   const daysAgo = [...Array(totalDays)].map((_v, idx: number) => {
@@ -168,8 +204,11 @@ export const calendarDays = (totalDays: number): Posix[] => {
   })
 
   return daysAgo.map(
-    (daysAgo: number): Posix => {
-      return dayjs(now).subtract(daysAgo, "day").startOf("day").valueOf()
+    (daysAgo: number): SymptomEntry => {
+      return {
+        kind: "NoData",
+        date: dayjs(now).subtract(daysAgo, "day").startOf("day").valueOf(),
+      }
     },
   )
 }

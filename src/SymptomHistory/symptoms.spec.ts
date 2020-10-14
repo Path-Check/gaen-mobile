@@ -10,27 +10,32 @@ describe("sortSymptomEntries", () => {
 
     const log1: SymptomEntry = {
       id: "1",
-      symptoms: ["fever", "cough"],
+      kind: "Symptoms",
+      symptoms: new Set(["fever", "cough"]),
       date: log1DateTime,
     }
     const log2: SymptomEntry = {
       id: "2",
-      symptoms: ["fever", "cough"],
+      kind: "Symptoms",
+      symptoms: new Set(["fever", "cough"]),
       date: log2DateTime,
     }
     const log3: SymptomEntry = {
       id: "3",
-      symptoms: ["fever", "cough"],
+      kind: "Symptoms",
+      symptoms: new Set(["fever", "cough"]),
       date: log3DateTime,
     }
     const log4: SymptomEntry = {
       id: "4",
-      symptoms: ["fever", "cough"],
+      kind: "Symptoms",
+      symptoms: new Set(["fever", "cough"]),
       date: log4DateTime,
     }
     const log5: SymptomEntry = {
       id: "5",
-      symptoms: ["fever", "cough"],
+      kind: "Symptoms",
+      symptoms: new Set(["fever", "cough"]),
       date: log5DateTime,
     }
     const unsortedEntries = [log3, log1, log4, log2, log5]
