@@ -26,6 +26,7 @@
 		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
+		B54FAEFF2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */; };
 		B5525E5D2512B3D90093614A /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5525E5C2512B3D90093614A /* Int+Extensions.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
@@ -232,6 +233,7 @@
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
+		B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExposureManagerUnitTests+Extensions.swift"; sourceTree = "<group>"; };
 		B5525E5C2512B3D90093614A /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
+				B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */,
 				A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */,
 				A5CE5FC425005BE40045251A /* MiscUnitTests.swift */,
 			);
@@ -1044,6 +1047,7 @@
 				A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */,
 				C5AA24D824768FFF00BA0A99 /* COVIDSafePathsTests.m in Sources */,
 				A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */,
+				B54FAEFF2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
