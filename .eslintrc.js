@@ -95,12 +95,6 @@ module.exports = {
       },
     },
     {
-      files: ["e2e/**/*.js"], // Or *.test.js
-      rules: {
-        "jest/expect-expect": 0, // these files do expectations inside page objects
-      },
-    },
-    {
       // enable the rule specifically for TypeScript files
       files: ["*.ts", "*.tsx"],
       rules: {

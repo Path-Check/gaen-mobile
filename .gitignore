@@ -69,9 +69,6 @@ buck-out/
 ios/vendor/bundle/*
 android/vendor/bundle/*
 
-# Screenshots
-e2e/artifacts/*
-
 # VSCode
 .vscode/*
 
