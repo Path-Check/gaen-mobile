@@ -174,6 +174,25 @@ yarn run-ios
 
 [react-native-debugger](https://github.com/jhen0409/react-native-debugger) is recommended. This tool will provide visibility of the JSX hierarchy, breakpoint usage, monitoring of network calls, and other common debugging tasks.
 
+## Localization
+
+This project is using [Lokalise](https://lokalise.com/) for translations
+
+Use the following scripts to keep the local translations in sync with the remote
+Lokalise translation:
+
+```
+yarn i18n:pull     // pulls new translations from lokalise, requires an API key
+yarn i18n:push     // pushes new entries to lokalise, requires an API key
+```
+
+Valid translations are required to pass CI, use the following scrips to keep the
+local translation file valid:
+```
+yarn i18n:check    // checks if all translations have an entry
+yarn i18n:extract  // updates en.json to match current entries
+```
+
 ## Tooling
 
 ### TypeScript
