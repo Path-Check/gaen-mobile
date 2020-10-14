@@ -8,23 +8,23 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { Symptom, SymptomLogEntry } from "./symptoms"
+import { Symptom, SymptomEntry } from "./symptoms"
 
 import { Affordances, Typography, Colors, Outlines, Spacing } from "../styles"
 
-type SymptomLogListItemProps = {
-  logEntry: SymptomLogEntry
+type SymptomEntryListItemProps = {
+  entry: SymptomEntry
 }
 
-const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
-  logEntry,
+const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
+  entry,
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation<
     StackNavigationProp<SymptomHistoryStackParams>
   >()
 
-  const { date, symptoms } = logEntry
+  const { date, symptoms } = entry
 
   const dayJsDate = posixToDayjs(date)
 
@@ -34,7 +34,7 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
 
   const handleOnPressEdit = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms, {
-      logEntry: JSON.stringify(logEntry),
+      logEntry: JSON.stringify(entry),
     })
   }
 

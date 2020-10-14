@@ -32,11 +32,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
-  const {
-    addLogEntry,
-    updateLogEntry,
-    deleteLogEntry,
-  } = useSymptomHistoryContext()
+  const { createEntry, updateEntry, deleteEntry } = useSymptomHistoryContext()
 
   const symptomsWithTranslations: Record<Symptom, string> = {
     chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),
@@ -58,10 +54,10 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const logEntry = route.params?.logEntry
-  const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
-  const isEditingLogEntry = symptomLogEntryToEdit !== null
+  const symptomEntryToEdit = logEntry ? JSON.parse(logEntry) : null
+  const isEditingEntry = symptomEntryToEdit !== null
 
-  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
+  const initialSelectedSymptoms = symptomEntryToEdit?.symptoms || []
   const [selectedSymptoms, setSelectedSymptoms] = useState<Symptom[]>(
     initialSelectedSymptoms,
   )
@@ -75,8 +71,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const handleOnPressDelete = async () => {
-    if (isEditingLogEntry) {
-      const result = await deleteLogEntry(symptomLogEntryToEdit.id)
+    if (isEditingEntry) {
+      const result = await deleteEntry(symptomEntryToEdit.id)
       if (result.kind === "success") {
         showMessage({
           message: t("symptom_checker.entry_deleted"),
@@ -94,7 +90,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const handleOnPressSave = async () => {
-    if (isEditingLogEntry) {
+    if (isEditingEntry) {
       await updateSymptomLog()
     } else {
       await createNewSymptomLog()
@@ -102,7 +98,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const createNewSymptomLog = async () => {
-    const result = await addLogEntry(selectedSymptoms)
+    const result = await createEntry(selectedSymptoms)
 
     if (result.kind === "success") {
       completeOnPressSave()
@@ -115,8 +111,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const updateSymptomLog = async () => {
-    const result = await updateLogEntry({
-      ...symptomLogEntryToEdit,
+    const result = await updateEntry({
+      ...symptomEntryToEdit,
       symptoms: selectedSymptoms,
     })
 
@@ -132,7 +128,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const completeOnPressSave = () => {
     navigation.goBack()
-    const flashMessage = isEditingLogEntry
+    const flashMessage = isEditingEntry
       ? t("symptom_checker.symptoms_updated")
       : t("symptom_checker.symptoms_saved")
     showMessage({
@@ -189,7 +185,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         customButtonStyle={style.saveButton}
         customButtonInnerStyle={style.saveButtonInner}
       />
-      {isEditingLogEntry && (
+      {isEditingEntry && (
         <TouchableOpacity
           onPress={handleOnPressDelete}
           accessibilityLabel={t("symptom_checker.delete_entry")}

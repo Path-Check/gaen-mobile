@@ -6,15 +6,9 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomLogEntry, Symptom, sortSymptomEntries } from "./symptoms"
-import {
-  getLogEntries,
-  createLogEntry,
-  modifyLogEntry,
-  deleteLogEntry as removeLogEntry,
-  deleteAllSymptomLogs as deleteLogs,
-  deleteSymptomLogsOlderThan,
-} from "./nativeModule"
+import { SymptomEntry, Symptom, sortSymptomEntries } from "./symptoms"
+import * as NativeModule from "./nativeModule"
+
 import {
   failureResponse,
   OperationResponse,
@@ -22,25 +16,25 @@ import {
 } from "../OperationResponse"
 
 export type SymptomHistoryState = {
-  symptomLogEntries: SymptomLogEntry[]
-  addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
-  updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
-  deleteLogEntry: (symptomLogEntryId: string) => Promise<OperationResponse>
-  deleteAllLogEntries: () => Promise<OperationResponse>
+  symptomEntries: SymptomEntry[]
+  createEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
+  updateEntry: (entry: SymptomEntry) => Promise<OperationResponse>
+  deleteEntry: (symptomEntryId: string) => Promise<OperationResponse>
+  deleteAllEntries: () => Promise<OperationResponse>
 }
 
 const initialState: SymptomHistoryState = {
-  symptomLogEntries: [],
-  addLogEntry: (_symptoms: Symptom[]) => {
+  symptomEntries: [],
+  createEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
-  updateLogEntry: (_entry: SymptomLogEntry) => {
+  updateEntry: (_entry: SymptomEntry) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
-  deleteLogEntry: (_symptomLogEntryId: string) => {
+  deleteEntry: (_symptomEntryId: string) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
-  deleteAllLogEntries: () => {
+  deleteAllEntries: () => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
 }
@@ -52,63 +46,63 @@ export const SymptomHistoryContext = createContext<SymptomHistoryState>(
 export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
 
 export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
-  const [symptomLogEntries, setSymptomLogEntries] = useState<SymptomLogEntry[]>(
-    [],
-  )
+  const [symptomEntries, setSymptomEntries] = useState<SymptomEntry[]>([])
 
-  const fetchLogEntries = async () => {
-    const entries = await getLogEntries()
+  const fetchEntries = async () => {
+    const entries = await NativeModule.readEntries()
     const sortedEntries = sortSymptomEntries(entries)
-    setSymptomLogEntries(sortedEntries)
+    setSymptomEntries(sortedEntries)
   }
 
   const cleanupStaleData = async () => {
-    await deleteSymptomLogsOlderThan(DAYS_AFTER_LOG_IS_CONSIDERED_STALE)
+    await NativeModule.deleteEntriesOlderThan(
+      DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
+    )
   }
 
   useEffect(() => {
     cleanupStaleData()
-    fetchLogEntries()
+    fetchEntries()
   }, [])
 
-  const addLogEntry = async (symptoms: Symptom[]) => {
+  const createEntry = async (symptoms: Symptom[]) => {
     try {
       const newEntry = {
         symptoms,
         date: Date.now(),
       }
-      await createLogEntry(newEntry)
-      await fetchLogEntries()
+      await NativeModule.createEntry(newEntry)
+      await fetchEntries()
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
     }
   }
 
-  const updateLogEntry = async (updatedLogEntry: SymptomLogEntry) => {
+  const updateEntry = async (entry: SymptomEntry) => {
     try {
-      await modifyLogEntry(updatedLogEntry)
-      await fetchLogEntries()
+      await NativeModule.updateEntry(entry)
+      await fetchEntries()
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
     }
   }
 
-  const deleteLogEntry = async (symptomLogEntryId: string) => {
+  const deleteEntry = async (symptomEntryId: string) => {
     try {
-      await removeLogEntry(symptomLogEntryId)
-      await fetchLogEntries()
+      await NativeModule.deleteEntry(symptomEntryId)
+      await fetchEntries()
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
     }
   }
 
-  const deleteAllLogEntries = async () => {
+  const deleteAllEntries = async () => {
     try {
-      await deleteLogs()
-      await fetchLogEntries()
+      await NativeModule.deleteAllEntries()
+      await fetchEntries()
       return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
@@ -118,11 +112,11 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   return (
     <SymptomHistoryContext.Provider
       value={{
-        symptomLogEntries,
-        addLogEntry,
-        updateLogEntry,
-        deleteLogEntry,
-        deleteAllLogEntries,
+        symptomEntries,
+        createEntry,
+        updateEntry,
+        deleteEntry,
+        deleteAllEntries,
       }}
     >
       {children}
@@ -131,9 +125,9 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
 }
 
 export const useSymptomHistoryContext = (): SymptomHistoryState => {
-  const symptomLogContext = useContext(SymptomHistoryContext)
-  if (symptomLogContext === undefined) {
+  const symptomHistoryContext = useContext(SymptomHistoryContext)
+  if (symptomHistoryContext === undefined) {
     throw new Error("SymptomHistoryContext must be used with a provider")
   }
-  return symptomLogContext
+  return symptomHistoryContext
 }

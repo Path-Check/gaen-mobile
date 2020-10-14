@@ -18,8 +18,8 @@ describe("SelectSymptomsScreen", () => {
 
     describe("updating the symptom log", () => {
       it("allows user to update the log symptoms", async () => {
-        const updateLogEntrySpy = jest.fn()
-        updateLogEntrySpy.mockResolvedValueOnce({ kind: "success" })
+        const updateEntrySpy = jest.fn()
+        updateEntrySpy.mockResolvedValueOnce({ kind: "success" })
         const logEntry = {
           id: "1",
           symptoms: ["cough"],
@@ -34,7 +34,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              updateLogEntry: updateLogEntrySpy,
+              updateEntry: updateEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -45,7 +45,7 @@ describe("SelectSymptomsScreen", () => {
         fireEvent.press(getByLabelText("Save"))
 
         await waitFor(() => {
-          expect(updateLogEntrySpy).toHaveBeenCalledWith({
+          expect(updateEntrySpy).toHaveBeenCalledWith({
             ...logEntry,
             symptoms: ["cough", "fever"],
           })
@@ -54,8 +54,8 @@ describe("SelectSymptomsScreen", () => {
 
       it("shows an error message if updating the symptom log fails", async () => {
         const showMessageSpy = showMessage as jest.Mock
-        const updateLogEntrySpy = jest.fn()
-        updateLogEntrySpy.mockResolvedValueOnce({ kind: "failure" })
+        const updateEntrySpy = jest.fn()
+        updateEntrySpy.mockResolvedValueOnce({ kind: "failure" })
         const logEntry = {
           id: "1",
           symptoms: ["cough"],
@@ -70,7 +70,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              updateLogEntry: updateLogEntrySpy,
+              updateEntry: updateEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -94,8 +94,8 @@ describe("SelectSymptomsScreen", () => {
     describe("deleting a symptom log", () => {
       it("allows the user to delete the symptom log", async () => {
         const showMessageSpy = showMessage as jest.Mock
-        const deleteLogEntrySpy = jest.fn()
-        deleteLogEntrySpy.mockResolvedValueOnce({ kind: "success" })
+        const deleteEntrySpy = jest.fn()
+        deleteEntrySpy.mockResolvedValueOnce({ kind: "success" })
         const logEntryId = "1"
         const logEntry = {
           id: logEntryId,
@@ -111,7 +111,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              deleteLogEntry: deleteLogEntrySpy,
+              deleteEntry: deleteEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -121,7 +121,7 @@ describe("SelectSymptomsScreen", () => {
         fireEvent.press(getByLabelText("Delete entry"))
 
         await waitFor(() => {
-          expect(deleteLogEntrySpy).toHaveBeenCalledWith(logEntryId)
+          expect(deleteEntrySpy).toHaveBeenCalledWith(logEntryId)
           expect(showMessageSpy).toHaveBeenCalledWith(
             expect.objectContaining({
               message: "Entry deleted",
@@ -133,8 +133,8 @@ describe("SelectSymptomsScreen", () => {
 
       it("shows an error message if deleting a log fails", async () => {
         const showMessageSpy = showMessage as jest.Mock
-        const deleteLogEntrySpy = jest.fn()
-        deleteLogEntrySpy.mockResolvedValueOnce({ kind: "failure" })
+        const deleteEntrySpy = jest.fn()
+        deleteEntrySpy.mockResolvedValueOnce({ kind: "failure" })
         const logEntry = {
           id: "1",
           symptoms: ["cough"],
@@ -149,7 +149,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              deleteLogEntry: deleteLogEntrySpy,
+              deleteEntry: deleteEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -188,8 +188,8 @@ describe("SelectSymptomsScreen", () => {
 
     describe("creating a new symptom log", () => {
       it("allows the user to select symptoms to log", async () => {
-        const addLogEntrySpy = jest.fn()
-        addLogEntrySpy.mockResolvedValueOnce({ kind: "success" })
+        const createEntrySpy = jest.fn()
+        createEntrySpy.mockResolvedValueOnce({ kind: "success" })
         const navigateSpy = jest.fn()
         ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
         ;(useRoute as jest.Mock).mockReturnValue({ params: {} })
@@ -198,7 +198,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              addLogEntry: addLogEntrySpy,
+              createEntry: createEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -209,14 +209,14 @@ describe("SelectSymptomsScreen", () => {
         fireEvent.press(getByLabelText("Save"))
 
         await waitFor(() => {
-          expect(addLogEntrySpy).toHaveBeenCalledWith([coughSymptom])
+          expect(createEntrySpy).toHaveBeenCalledWith([coughSymptom])
         })
       })
 
       it("shows an error message when creating a symptom log fails", async () => {
         const showMessageSpy = showMessage as jest.Mock
-        const addLogEntrySpy = jest.fn()
-        addLogEntrySpy.mockResolvedValueOnce({ kind: "failure" })
+        const createEntrySpy = jest.fn()
+        createEntrySpy.mockResolvedValueOnce({ kind: "failure" })
         const navigateSpy = jest.fn()
         ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
         ;(useRoute as jest.Mock).mockReturnValue({ params: {} })
@@ -224,7 +224,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              addLogEntry: addLogEntrySpy,
+              createEntry: createEntrySpy,
             })}
           >
             <SelectSymptomsScreen />

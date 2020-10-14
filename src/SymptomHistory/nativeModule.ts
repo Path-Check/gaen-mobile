@@ -1,37 +1,34 @@
 import { NativeModules } from "react-native"
 
 import {
-  SymptomLogEntry,
-  SymptomLogEntryAttributes,
+  SymptomEntry,
+  SymptomEntryAttributes,
 } from "../SymptomHistory/symptoms"
 
 // Symptom Log Entry Module
-const symptomLogEntryModule = NativeModules.SymptomLogEntryModule
+const symptomHistoryModule = NativeModules.SymptomLogEntryModule
 
-export const createLogEntry = (
-  entry: SymptomLogEntryAttributes,
-): Promise<void> => {
-  return symptomLogEntryModule.addSymptomLogEntry(entry)
+export const createEntry = (entry: SymptomEntryAttributes): Promise<void> => {
+  return symptomHistoryModule.addSymptomLogEntry(entry)
 }
 
-export const modifyLogEntry = (entry: SymptomLogEntry): Promise<void> => {
-  return symptomLogEntryModule.updateSymptomLogEntry(entry)
+export const updateEntry = (entry: SymptomEntry): Promise<void> => {
+  return symptomHistoryModule.updateSymptomLogEntry(entry)
 }
 
-export const deleteLogEntry = (symptomLogEntryId: string): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogEntry(symptomLogEntryId)
+export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogEntry(symptomLogEntryId)
 }
 
-export const getLogEntries = (): Promise<SymptomLogEntry[]> => {
-  return symptomLogEntryModule.getSymptomLogEntries()
+export const readEntries = (): Promise<SymptomEntry[]> => {
+  return symptomHistoryModule.getSymptomLogEntries()
 }
 
-export const deleteAllSymptomLogs = async (): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogs()
+export const deleteAllEntries = async (): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogs()
 }
 
-export const deleteSymptomLogsOlderThan = async (
-  days: number,
-): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogsOlderThan(days)
+export const deleteEntriesOlderThan = async (days: number): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogsOlderThan(days)
 }
+

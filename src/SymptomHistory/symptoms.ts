@@ -16,20 +16,18 @@ export type Symptom =
   | "body_aches"
   | "other"
 
-export type SymptomLogEntry = {
+export type SymptomEntry = {
   id: string
   date: Posix
   symptoms: Symptom[]
 }
 
-export type SymptomLogEntryAttributes = Omit<SymptomLogEntry, "id">
+export type SymptomEntryAttributes = Omit<SymptomEntry, "id">
 
-export const sortSymptomEntries = (
-  entries: SymptomLogEntry[],
-): SymptomLogEntry[] => {
+export const sortSymptomEntries = (entries: SymptomEntry[]): SymptomEntry[] => {
   const compareEntries = (
-    entryA: SymptomLogEntry,
-    entryB: SymptomLogEntry,
+    entryA: SymptomEntry,
+    entryB: SymptomEntry,
   ): number => {
     return Math.sign(entryB.date - entryA.date)
   }

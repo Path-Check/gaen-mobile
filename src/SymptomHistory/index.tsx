@@ -7,20 +7,20 @@ import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
   useSymptomHistoryContext,
 } from "./SymptomHistoryContext"
-import { SymptomLogEntry } from "./symptoms"
+import { SymptomEntry } from "./symptoms"
 import { Text, StatusBar, Button } from "../components"
 import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
-import SymptomLogListItem from "./SymptomLogListItem"
+import SymptomEntryListItem from "./SymptomEntryListItem"
 
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
 
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
-  const { symptomLogEntries } = useSymptomHistoryContext()
+  const { symptomEntries } = useSymptomHistoryContext()
   const navigation = useNavigation()
 
-  const hasSymptomHistory = symptomLogEntries.length > 0
+  const hasSymptomHistory = symptomEntries.length > 0
 
   const handleOnPressLogSymptoms = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms)
@@ -37,8 +37,8 @@ const SymptomHistory: FunctionComponent = () => {
   const SymptomHistory = () => {
     return (
       <View>
-        {symptomLogEntries.map((logEntry: SymptomLogEntry) => {
-          return <SymptomLogListItem key={logEntry.date} logEntry={logEntry} />
+        {symptomEntries.map((entry: SymptomEntry) => {
+          return <SymptomEntryListItem key={entry.date} entry={entry} />
         })}
       </View>
     )

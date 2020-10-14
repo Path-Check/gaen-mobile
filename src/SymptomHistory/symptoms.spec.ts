@@ -1,4 +1,4 @@
-import { SymptomLogEntry, sortSymptomEntries } from "./symptoms"
+import { SymptomEntry, sortSymptomEntries } from "./symptoms"
 
 describe("sortSymptomEntries", () => {
   it("returns a list log entries sorted by time descending", () => {
@@ -8,27 +8,27 @@ describe("sortSymptomEntries", () => {
     const log4DateTime = Date.parse("10-2-2020 10:10")
     const log5DateTime = Date.parse("10-3-2020 10:00")
 
-    const log1: SymptomLogEntry = {
+    const log1: SymptomEntry = {
       id: "1",
       symptoms: ["fever", "cough"],
       date: log1DateTime,
     }
-    const log2: SymptomLogEntry = {
+    const log2: SymptomEntry = {
       id: "2",
       symptoms: ["fever", "cough"],
       date: log2DateTime,
     }
-    const log3: SymptomLogEntry = {
+    const log3: SymptomEntry = {
       id: "3",
       symptoms: ["fever", "cough"],
       date: log3DateTime,
     }
-    const log4: SymptomLogEntry = {
+    const log4: SymptomEntry = {
       id: "4",
       symptoms: ["fever", "cough"],
       date: log4DateTime,
     }
-    const log5: SymptomLogEntry = {
+    const log5: SymptomEntry = {
       id: "5",
       symptoms: ["fever", "cough"],
       date: log5DateTime,

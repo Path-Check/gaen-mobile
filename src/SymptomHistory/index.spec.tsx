@@ -3,7 +3,7 @@ import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
-import { SymptomLogEntry } from "./symptoms"
+import { SymptomEntry } from "./symptoms"
 
 import SymptomHistory from "./index"
 import { factories } from "../factories"
@@ -39,7 +39,7 @@ describe("SymptomHistory", () => {
       const { getByText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [],
+            symptomEntries: [],
           })}
         >
           <SymptomHistory />
@@ -64,7 +64,7 @@ describe("SymptomHistory", () => {
       const { getByText, queryByText, getAllByText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [
+            symptomEntries: [
               {
                 id: "1",
                 symptoms: ["cough"],
@@ -99,7 +99,7 @@ describe("SymptomHistory", () => {
       })
 
       const logEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const logEntry: SymptomLogEntry = {
+      const logEntry: SymptomEntry = {
         id: "1",
         symptoms: ["cough"],
         date: logEntryPosix,
@@ -107,7 +107,7 @@ describe("SymptomHistory", () => {
       const { getByLabelText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [logEntry],
+            symptomEntries: [logEntry],
           })}
         >
           <SymptomHistory />
