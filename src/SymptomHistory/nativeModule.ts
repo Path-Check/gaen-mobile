@@ -1,21 +1,24 @@
 import { NativeModules } from "react-native"
 
-import {
-  SymptomEntry,
-  SymptomHistory,
-  SymptomEntryAttributes,
-  toSymptomHistory,
-  RawEntry,
-} from "./symptoms"
+import { SymptomHistory, toSymptomHistory, RawEntry, Symptom } from "./symptoms"
+import { Posix } from "../utils/dateTime"
 
 // Symptom Log Entry Module
 const symptomHistoryModule = NativeModules.SymptomLogEntryModule
 
-export const createEntry = (entry: SymptomEntryAttributes): Promise<void> => {
+export const createEntry = (
+  date: Posix,
+  symptoms: Set<Symptom>,
+): Promise<void> => {
+  const entry = { date, symptoms: Array.from(symptoms) }
   return symptomHistoryModule.addSymptomLogEntry(entry)
 }
 
-export const updateEntry = (entry: SymptomEntry): Promise<void> => {
+export const updateEntry = (
+  date: Posix,
+  symptoms: Set<Symptom>,
+): Promise<void> => {
+  const entry = { date, symptoms: Array.from(symptoms) }
   return symptomHistoryModule.updateSymptomLogEntry(entry)
 }
 

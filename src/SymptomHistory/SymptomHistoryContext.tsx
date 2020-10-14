@@ -6,14 +6,9 @@ import React, {
   useState,
 } from "react"
 
-import {
-  SymptomEntry,
-  SymptomHistory,
-  Symptom,
-  SymptomEntryAttributes,
-} from "./symptoms"
+import { SymptomEntry, SymptomHistory, Symptom } from "./symptoms"
 import * as NativeModule from "./nativeModule"
-
+import { Posix, isSameDay } from "../utils/dateTime"
 import {
   failureResponse,
   OperationResponse,
@@ -22,21 +17,16 @@ import {
 
 export type SymptomHistoryState = {
   symptomHistory: SymptomHistory
-  createEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
-  updateEntry: (entry: SymptomEntry) => Promise<OperationResponse>
-  deleteEntry: (symptomEntryId: string) => Promise<OperationResponse>
+  updateEntry: (
+    date: Posix,
+    symptoms: Set<Symptom>,
+  ) => Promise<OperationResponse>
   deleteAllEntries: () => Promise<OperationResponse>
 }
 
 const initialState: SymptomHistoryState = {
   symptomHistory: [],
-  createEntry: (_symptoms: Symptom[]) => {
-    return Promise.resolve(SUCCESS_RESPONSE)
-  },
-  updateEntry: (_entry: SymptomEntry) => {
-    return Promise.resolve(SUCCESS_RESPONSE)
-  },
-  deleteEntry: (_symptomEntryId: string) => {
+  updateEntry: (_date: Posix, _symptoms: Set<Symptom>) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
   deleteAllEntries: () => {
@@ -69,36 +59,21 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
     fetchEntries()
   }, [])
 
-  const createEntry = async (symptoms: Symptom[]) => {
+  const updateEntry = async (date: Posix, symptoms: Set<Symptom>) => {
+    const entryToUpdate = symptomHistory.find((el: SymptomEntry) => {
+      return isSameDay(el.date, date) && el.kind === "Symptoms"
+    })
+
     try {
-      const newEntry: SymptomEntryAttributes = {
-        symptoms: new Set(symptoms),
-        date: Date.now(),
+      if (entryToUpdate) {
+        await NativeModule.updateEntry(date, symptoms)
+        await fetchEntries()
+        return SUCCESS_RESPONSE
+      } else {
+        await NativeModule.createEntry(date, symptoms)
+        await fetchEntries()
+        return SUCCESS_RESPONSE
       }
-      await NativeModule.createEntry(newEntry)
-      await fetchEntries()
-      return SUCCESS_RESPONSE
-    } catch (e) {
-      console.log("error", e)
-      return failureResponse(e.message)
-    }
-  }
-
-  const updateEntry = async (entry: SymptomEntry) => {
-    try {
-      await NativeModule.updateEntry(entry)
-      await fetchEntries()
-      return SUCCESS_RESPONSE
-    } catch (e) {
-      return failureResponse(e.message)
-    }
-  }
-
-  const deleteEntry = async (symptomEntryId: string) => {
-    try {
-      await NativeModule.deleteEntry(symptomEntryId)
-      await fetchEntries()
-      return SUCCESS_RESPONSE
     } catch (e) {
       return failureResponse(e.message)
     }
@@ -118,9 +93,7 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
     <SymptomHistoryContext.Provider
       value={{
         symptomHistory,
-        createEntry,
         updateEntry,
-        deleteEntry,
         deleteAllEntries,
       }}
     >

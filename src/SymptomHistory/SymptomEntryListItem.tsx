@@ -34,7 +34,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
 
   const handleOnPressEdit = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms, {
-      logEntry: JSON.stringify(entry),
+      date,
     })
   }
 

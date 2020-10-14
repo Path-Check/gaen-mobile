@@ -1,19 +1,14 @@
 import React, { FunctionComponent, useState } from "react"
-import {
-  View,
-  TouchableHighlight,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native"
+import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import { Text, Button } from "../components"
-import { Symptom } from "./symptoms"
+import { Symptom, SymptomEntry } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
+import { isSameDay } from "../utils/dateTime"
 
 import {
   Affordances,
@@ -32,7 +27,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
-  const { createEntry, updateEntry, deleteEntry } = useSymptomHistoryContext()
+  const { updateEntry, symptomHistory } = useSymptomHistoryContext()
 
   const symptomsWithTranslations: Record<Symptom, string> = {
     chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),
@@ -53,68 +48,30 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     other: t("symptoms.other"),
   }
 
-  const logEntry = route.params?.logEntry
-  const symptomEntryToEdit = logEntry ? JSON.parse(logEntry) : null
-  const isEditingEntry = symptomEntryToEdit !== null
+  const entryDate = route.params?.date
+  const entryToEdit = symptomHistory.find((el: SymptomEntry) => {
+    return isSameDay(el.date, entryDate)
+  })
 
-  const initialSelectedSymptoms = symptomEntryToEdit?.symptoms || []
-  const [selectedSymptoms, setSelectedSymptoms] = useState<Symptom[]>(
+  const initialSelectedSymptoms =
+    entryToEdit?.kind === "Symptoms" ? entryToEdit.symptoms : new Set<Symptom>()
+
+  const [selectedSymptoms, setSelectedSymptoms] = useState<Set<Symptom>>(
     initialSelectedSymptoms,
   )
 
   const handleOnPressSymptom = (selectedSymptom: Symptom) => {
-    if (selectedSymptoms.includes(selectedSymptom)) {
-      setSelectedSymptoms(selectedSymptoms.filter((s) => s !== selectedSymptom))
+    const nextSymptoms = new Set(Array.from(selectedSymptoms))
+    if (nextSymptoms.has(selectedSymptom)) {
+      nextSymptoms.delete(selectedSymptom)
     } else {
-      setSelectedSymptoms([...selectedSymptoms, selectedSymptom])
+      nextSymptoms.add(selectedSymptom)
     }
-  }
-
-  const handleOnPressDelete = async () => {
-    if (isEditingEntry) {
-      const result = await deleteEntry(symptomEntryToEdit.id)
-      if (result.kind === "success") {
-        showMessage({
-          message: t("symptom_checker.entry_deleted"),
-          ...Affordances.successFlashMessageOptions,
-        })
-
-        navigation.goBack()
-      } else {
-        showMessage({
-          message: t("symptom_checker.errors.deleting_symptom_log"),
-          ...Affordances.errorFlashMessageOptions,
-        })
-      }
-    }
+    setSelectedSymptoms(nextSymptoms)
   }
 
   const handleOnPressSave = async () => {
-    if (isEditingEntry) {
-      await updateSymptomLog()
-    } else {
-      await createNewSymptomLog()
-    }
-  }
-
-  const createNewSymptomLog = async () => {
-    const result = await createEntry(selectedSymptoms)
-
-    if (result.kind === "success") {
-      completeOnPressSave()
-    } else {
-      showMessage({
-        message: t("symptom_checker.errors.adding_symptoms"),
-        ...Affordances.successFlashMessageOptions,
-      })
-    }
-  }
-
-  const updateSymptomLog = async () => {
-    const result = await updateEntry({
-      ...symptomEntryToEdit,
-      symptoms: selectedSymptoms,
-    })
+    const result = await updateEntry(entryDate, selectedSymptoms)
 
     if (result.kind === "success") {
       completeOnPressSave()
@@ -128,23 +85,20 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const completeOnPressSave = () => {
     navigation.goBack()
-    const flashMessage = isEditingEntry
-      ? t("symptom_checker.symptoms_updated")
-      : t("symptom_checker.symptoms_saved")
     showMessage({
-      message: flashMessage,
+      message: t("symptom_checker.symptoms_saved"),
       ...Affordances.successFlashMessageOptions,
     })
   }
 
   const determineSymptomButtonStyle = (symptom: Symptom) => {
-    return selectedSymptoms.includes(symptom)
+    return selectedSymptoms.has(symptom)
       ? { ...style.symptomButton, ...style.symptomButtonSelected }
       : style.symptomButton
   }
 
   const determineSymptomButtonTextStyle = (symptom: Symptom) => {
-    return selectedSymptoms.includes(symptom)
+    return selectedSymptoms.has(symptom)
       ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
       : style.symptomButtonText
   }
@@ -181,21 +135,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       <Button
         onPress={handleOnPressSave}
         label={t("common.save")}
-        disabled={selectedSymptoms.length === 0}
         customButtonStyle={style.saveButton}
         customButtonInnerStyle={style.saveButtonInner}
       />
-      {isEditingEntry && (
-        <TouchableOpacity
-          onPress={handleOnPressDelete}
-          accessibilityLabel={t("symptom_checker.delete_entry")}
-          style={style.deleteButtonContainer}
-        >
-          <Text style={style.deleteButtonText}>
-            {t("symptom_checker.delete_entry")}
-          </Text>
-        </TouchableOpacity>
-      )}
     </ScrollView>
   )
 }
