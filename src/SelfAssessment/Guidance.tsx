@@ -11,7 +11,6 @@ import { Stack, Stacks } from "../navigation"
 
 import { Buttons, Outlines, Colors, Spacing, Typography } from "../styles"
 import { Images } from "../assets"
-import { TouchableOpacity } from "react-native-gesture-handler"
 
 interface GuidanceProps {
   destinationOnCancel?: Stack
