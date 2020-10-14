@@ -57,11 +57,11 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   const handleOnNavigateOutOfStack = () => {
     switch (mountLocation) {
       case "Onboarding": {
-        navigation.goBack()
+        navigation.navigate(Stacks.Activation)
         break
       }
       case "Settings": {
-        navigation.navigate(Stacks.Activation)
+        navigation.goBack()
         break
       }
     }
