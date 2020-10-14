@@ -183,6 +183,8 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
     }
   }
 
+  const displayFindATestCenter = Boolean(findATestCenterUrl)
+
   const handleOnPressFindTestCenter = () => {
     if (findATestCenterUrl) {
       Linking.openURL(findATestCenterUrl)
@@ -208,13 +210,15 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
       <View style={style.bulletListContainer}>
         {instructionsForSymptomGroup(symptomGroup)}
       </View>
-      <Button
-        label={t("self_assessment.guidance.find_a_test_center_nearby")}
-        onPress={handleOnPressFindTestCenter}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-        hasRightArrow
-      />
+      {displayFindATestCenter && (
+        <Button
+          label={t("self_assessment.guidance.find_a_test_center_nearby")}
+          onPress={handleOnPressFindTestCenter}
+          customButtonStyle={style.button}
+          customButtonInnerStyle={style.buttonInner}
+          hasRightArrow
+        />
+      )}
       <Button
         onPress={handleOnPressDone}
         label={t("common.done")}
