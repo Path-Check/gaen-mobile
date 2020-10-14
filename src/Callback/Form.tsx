@@ -56,13 +56,12 @@ const CallbackForm: FunctionComponent = () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
 
-    const fakeExposureDate = "2020-01-01"
     try {
       const response = await API.postCallbackInfo({
         firstname,
         lastname,
         phoneNumber,
-        exposureDate: fakeExposureDate,
+        exposureDate: null,
       })
 
       if (response.kind === "success") {
