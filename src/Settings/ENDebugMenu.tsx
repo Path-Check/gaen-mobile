@@ -12,7 +12,7 @@ import {
 
 import { Text } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useSymptomLogContext } from "../SymptomHistory/SymptomLogContext"
+import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, SettingsStackScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
@@ -27,7 +27,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllLogEntries } = useSymptomLogContext()
+  const { deleteAllLogEntries } = useSymptomHistoryContext()
 
   useEffect(() => {
     const handleBackPress = () => {

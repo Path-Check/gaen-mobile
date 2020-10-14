@@ -4,7 +4,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation, useRoute } from "@react-navigation/native"
 
 import SelectSymptomsScreen from "./SelectSymptoms"
-import { SymptomLogContext } from "./SymptomLogContext"
+import { SymptomHistoryContext } from "./SymptomHistoryContext"
 import { factories } from "../factories"
 
 jest.mock("react-native-flash-message")
@@ -32,13 +32,13 @@ describe("SelectSymptomsScreen", () => {
         })
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               updateLogEntry: updateLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Fever"))
@@ -68,13 +68,13 @@ describe("SelectSymptomsScreen", () => {
         })
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               updateLogEntry: updateLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Fever"))
@@ -109,13 +109,13 @@ describe("SelectSymptomsScreen", () => {
         })
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               deleteLogEntry: deleteLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Delete entry"))
@@ -147,13 +147,13 @@ describe("SelectSymptomsScreen", () => {
         })
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               deleteLogEntry: deleteLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Delete entry"))
@@ -177,11 +177,11 @@ describe("SelectSymptomsScreen", () => {
       ;(useNavigation as jest.Mock).mockReturnValue({})
 
       const { queryByLabelText } = render(
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({})}
+        <SymptomHistoryContext.Provider
+          value={factories.symptomHistoryContext.build({})}
         >
           <SelectSymptomsScreen />
-        </SymptomLogContext.Provider>,
+        </SymptomHistoryContext.Provider>,
       )
       expect(queryByLabelText("Delete entry")).toBeNull()
     })
@@ -196,13 +196,13 @@ describe("SelectSymptomsScreen", () => {
         const coughSymptom = "cough"
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               addLogEntry: addLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Cough"))
@@ -222,13 +222,13 @@ describe("SelectSymptomsScreen", () => {
         ;(useRoute as jest.Mock).mockReturnValue({ params: {} })
 
         const { getByLabelText } = render(
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
               addLogEntry: addLogEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
-          </SymptomLogContext.Provider>,
+          </SymptomHistoryContext.Provider>,
         )
 
         fireEvent.press(getByLabelText("Cough"))

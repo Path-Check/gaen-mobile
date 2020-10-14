@@ -46,7 +46,7 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
   return (
     <OnboardingContext.Provider
       value={{
-        isOnboardingComplete: true,
+        isOnboardingComplete,
         completeOnboarding,
         resetOnboarding,
       }}

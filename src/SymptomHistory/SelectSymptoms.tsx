@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
-import { useSymptomLogContext } from "./SymptomLogContext"
+import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import { Text, Button } from "../components"
 import { Symptom } from "./symptoms"
 import { showMessage } from "react-native-flash-message"
@@ -32,7 +32,11 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
-  const { addLogEntry, updateLogEntry, deleteLogEntry } = useSymptomLogContext()
+  const {
+    addLogEntry,
+    updateLogEntry,
+    deleteLogEntry,
+  } = useSymptomHistoryContext()
 
   const symptomsWithTranslations: Record<Symptom, string> = {
     chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),

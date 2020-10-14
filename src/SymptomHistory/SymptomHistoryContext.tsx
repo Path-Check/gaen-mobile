@@ -21,7 +21,7 @@ import {
   SUCCESS_RESPONSE,
 } from "../OperationResponse"
 
-export type SymptomLogState = {
+export type SymptomHistoryState = {
   symptomLogEntries: SymptomLogEntry[]
   addLogEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateLogEntry: (entry: SymptomLogEntry) => Promise<OperationResponse>
@@ -29,7 +29,7 @@ export type SymptomLogState = {
   deleteAllLogEntries: () => Promise<OperationResponse>
 }
 
-const initialState: SymptomLogState = {
+const initialState: SymptomHistoryState = {
   symptomLogEntries: [],
   addLogEntry: (_symptoms: Symptom[]) => {
     return Promise.resolve(SUCCESS_RESPONSE)
@@ -45,11 +45,13 @@ const initialState: SymptomLogState = {
   },
 }
 
-export const SymptomLogContext = createContext<SymptomLogState>(initialState)
+export const SymptomHistoryContext = createContext<SymptomHistoryState>(
+  initialState,
+)
 
 export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
 
-export const SymptomLogProvider: FunctionComponent = ({ children }) => {
+export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   const [symptomLogEntries, setSymptomLogEntries] = useState<SymptomLogEntry[]>(
     [],
   )
@@ -114,7 +116,7 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <SymptomLogContext.Provider
+    <SymptomHistoryContext.Provider
       value={{
         symptomLogEntries,
         addLogEntry,
@@ -124,14 +126,14 @@ export const SymptomLogProvider: FunctionComponent = ({ children }) => {
       }}
     >
       {children}
-    </SymptomLogContext.Provider>
+    </SymptomHistoryContext.Provider>
   )
 }
 
-export const useSymptomLogContext = (): SymptomLogState => {
-  const symptomLogContext = useContext(SymptomLogContext)
+export const useSymptomHistoryContext = (): SymptomHistoryState => {
+  const symptomLogContext = useContext(SymptomHistoryContext)
   if (symptomLogContext === undefined) {
-    throw new Error("SymptomLogContext must be used with a provider")
+    throw new Error("SymptomHistoryContext must be used with a provider")
   }
   return symptomLogContext
 }

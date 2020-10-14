@@ -4,7 +4,7 @@ import configurationContext from "./configurationContext"
 import exposureContext from "./exposureContext"
 import exposureDatum from "./exposureDatum"
 import gaenStrategy from "./gaenStrategy"
-import symptomLogContext from "./symptomLogContext"
+import symptomHistoryContext from "./symptomHistoryContext"
 import selfAssessmentContext from "./selfAssessmentContext"
 import selfAssessmentAnswers from "./selfAssessmentAnswers"
 import rawExposure from "./rawExposure"
@@ -19,7 +19,7 @@ export const factories = register({
   exposureContext,
   exposureDatum,
   gaenStrategy,
-  symptomLogContext,
+  symptomHistoryContext,
   selfAssessmentContext,
   selfAssessmentAnswers,
   rawExposure,
