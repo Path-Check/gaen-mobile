@@ -2,7 +2,7 @@ import React from "react"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { showMessage } from "react-native-flash-message"
 
-import { SymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { SymptomLogContext } from "../SymptomHistory/SymptomLogContext"
 import { OnboardingProvider } from "../OnboardingContext"
 import { failureResponse, SUCCESS_RESPONSE } from "../OperationResponse"
 import DeleteConfirmation from "./DeleteConfirmation"

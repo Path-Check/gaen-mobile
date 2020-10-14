@@ -9,7 +9,7 @@ import {
 } from "./SymptomLogContext"
 import { SymptomLogEntry } from "./symptoms"
 import { Text, StatusBar, Button } from "../components"
-import { useStatusBarEffect, MyHealthStackScreens } from "../navigation"
+import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
 import SymptomLogListItem from "./SymptomLogListItem"
 
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
@@ -23,7 +23,7 @@ const SymptomLog: FunctionComponent = () => {
   const hasSymptomHistory = symptomLogEntries.length > 0
 
   const handleOnPressLogSymptoms = () => {
-    navigation.navigate(MyHealthStackScreens.SelectSymptoms)
+    navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms)
   }
 
   const NoSymptomHistory = () => {

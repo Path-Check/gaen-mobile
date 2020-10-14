@@ -4,31 +4,31 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import MyHealthScreen from "../MyHealth/"
-import SelectSymptomsScreen from "../MyHealth/SelectSymptoms"
-import { MyHealthStackScreens } from "./index"
+import SymptomHistoryScreen from "../SymptomHistory/"
+import SelectSymptomsScreen from "../SymptomHistory/SelectSymptoms"
+import { SymptomHistoryStackScreens } from "./index"
 import { applyModalHeader } from "./ModalHeader"
 import { useTranslation } from "react-i18next"
 
-export type MyHealthStackParams = {
-  MyHealth: undefined
+export type SymptomHistoryStackParams = {
+  SymptomHistory: undefined
   AtRiskRecommendation: undefined
   SelectSymptoms: { logEntry?: string }
 }
-const Stack = createStackNavigator<MyHealthStackParams>()
+const Stack = createStackNavigator<SymptomHistoryStackParams>()
 
-const MyHealthStack: FunctionComponent = () => {
+const SymptomHistoryStack: FunctionComponent = () => {
   const { t } = useTranslation()
 
   return (
     <Stack.Navigator headerMode="screen">
       <Stack.Screen
-        name={MyHealthStackScreens.MyHealth}
-        component={MyHealthScreen}
+        name={SymptomHistoryStackScreens.SymptomHistory}
+        component={SymptomHistoryScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={MyHealthStackScreens.SelectSymptoms}
+        name={SymptomHistoryStackScreens.SelectSymptoms}
         component={SelectSymptomsScreen}
         options={{
           ...TransitionPresets.ModalTransition,
@@ -40,4 +40,4 @@ const MyHealthStack: FunctionComponent = () => {
   )
 }
 
-export default MyHealthStack
+export default SymptomHistoryStack

@@ -4,7 +4,7 @@ import { StatusBar, StyleSheet, View, ScrollView } from "react-native"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { useSymptomLogContext } from "../SymptomHistory/SymptomLogContext"
 
 import { Text } from "../components"
 import { TouchableOpacity } from "react-native"

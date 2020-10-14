@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { SymptomLogState } from "../MyHealth/SymptomLogContext"
+import { SymptomLogState } from "../SymptomHistory/SymptomLogContext"
 
 export default Factory.define<SymptomLogState>(() => ({
   symptomLogEntries: [],

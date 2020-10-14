@@ -3,7 +3,7 @@ import { NativeModules } from "react-native"
 import {
   SymptomLogEntry,
   SymptomLogEntryAttributes,
-} from "../MyHealth/symptoms"
+} from "../SymptomHistory/symptoms"
 
 // Symptom Log Entry Module
 const symptomLogEntryModule = NativeModules.SymptomLogEntryModule

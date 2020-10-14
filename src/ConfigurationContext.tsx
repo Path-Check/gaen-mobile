@@ -10,7 +10,7 @@ export interface Configuration {
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
   displayCovidData: boolean
-  displayMyHealth: boolean
+  displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
@@ -34,7 +34,7 @@ const initialState: Configuration = {
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
   displayCovidData: false,
-  displayMyHealth: false,
+  displaySymptomHistory: false,
   displaySelfAssessment: false,
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
@@ -70,7 +70,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
-  const displayMyHealth = env.DISPLAY_SYMPTOM_CHECKER === "true"
+  const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
 
   const measurementSystem =
@@ -98,7 +98,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayAcceptTermsOfService,
         displayCallbackForm,
         displayCovidData,
-        displayMyHealth,
+        displaySymptomHistory,
         displaySelfAssessment,
         emergencyPhoneNumber,
         findATestCenterUrl,

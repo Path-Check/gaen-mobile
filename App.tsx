@@ -17,7 +17,7 @@ import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/AnalyticsContext"
-import { SymptomLogProvider } from "./src/MyHealth/SymptomLogContext"
+import { SymptomLogProvider } from "./src/SymptomHistory/SymptomLogContext"
 import { CovidDataContextProvider } from "./src/CovidDataContext"
 
 Logger.start()

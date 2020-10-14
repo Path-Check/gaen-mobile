@@ -23,13 +23,15 @@ import {
   Outlines,
   Buttons,
 } from "../styles"
-import { MyHealthStackParams } from "../navigation/MyHealthStack"
+import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute<RouteProp<MyHealthStackParams, "SelectSymptoms">>()
+  const route = useRoute<
+    RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
+  >()
   const { addLogEntry, updateLogEntry, deleteLogEntry } = useSymptomLogContext()
 
   const symptomsWithTranslations: Record<Symptom, string> = {

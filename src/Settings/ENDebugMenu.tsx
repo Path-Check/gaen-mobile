@@ -12,7 +12,7 @@ import {
 
 import { Text } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { useSymptomLogContext } from "../SymptomHistory/SymptomLogContext"
 import { NativeModule } from "../gaen"
 import { NavigationProp, SettingsStackScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"

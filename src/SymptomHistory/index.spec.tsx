@@ -8,7 +8,7 @@ import { SymptomLogEntry } from "./symptoms"
 import SymptomLog from "./index"
 import { factories } from "../factories"
 import { posixToDayjs } from "../utils/dateTime"
-import { MyHealthStackScreens } from "../navigation"
+import { SymptomHistoryStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
@@ -29,7 +29,7 @@ describe("SymptomLog", () => {
 
     await waitFor(() => {
       expect(navigateSpy).toHaveBeenCalledWith(
-        MyHealthStackScreens.SelectSymptoms,
+        SymptomHistoryStackScreens.SelectSymptoms,
       )
     })
   })
@@ -116,7 +116,7 @@ describe("SymptomLog", () => {
 
       fireEvent.press(getByLabelText("Edit"))
       expect(navigateSpy).toHaveBeenCalledWith(
-        MyHealthStackScreens.SelectSymptoms,
+        SymptomHistoryStackScreens.SelectSymptoms,
         {
           logEntry: JSON.stringify(logEntry),
         },
