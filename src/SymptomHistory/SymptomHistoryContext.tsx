@@ -79,6 +79,7 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
       await fetchEntries()
       return SUCCESS_RESPONSE
     } catch (e) {
+      console.log("error", e)
       return failureResponse(e.message)
     }
   }

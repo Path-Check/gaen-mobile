@@ -7,6 +7,7 @@ import {
   SymptomHistoryProvider,
 } from "./SymptomHistoryContext"
 import * as NativeModule from "./nativeModule"
+import { createEntry } from "./nativeModule"
 import { Symptom } from "./symptoms"
 import Logger from "../logger"
 
@@ -17,14 +18,14 @@ jest.mock("../logger.ts")
 describe("SymptomHistoryProvider", () => {
   describe("data creation", () => {
     it("allows for the creation of a new symptom log", async () => {
-      const createLogEntrySpy = NativeModule.createEntry as jest.Mock
-      createLogEntrySpy.mockResolvedValueOnce({})
+      const createEntrySpy = createEntry as jest.Mock
+      createEntrySpy.mockResolvedValueOnce({})
       const mockedDate = Date.parse("2020-09-22 10:00")
       jest.spyOn(Date, "now").mockReturnValue(mockedDate)
       const symptoms: Symptom[] = ["cough"]
       const newLogEntry = {
         date: mockedDate,
-        symptoms,
+        symptoms: new Set(symptoms),
       }
       ;(NativeModule.readEntries as jest.Mock).mockResolvedValue([])
 
@@ -52,7 +53,8 @@ describe("SymptomHistoryProvider", () => {
       fireEvent.press(getByLabelText("add-log-entry"))
 
       await waitFor(() => {
-        expect(createLogEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
+        expect(createEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
+        //expect(createEntrySpy).toHaveBeenCalled()
       })
     })
 

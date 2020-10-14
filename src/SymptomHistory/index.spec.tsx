@@ -34,22 +34,6 @@ describe("SymptomHistory", () => {
     })
   })
 
-  describe("when the user has no symptom logs", () => {
-    it("displays a 'no logs' message", () => {
-      const { getByText } = render(
-        <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({
-            symptomHistory: [],
-          })}
-        >
-          <SymptomHistory />
-        </SymptomHistoryContext.Provider>,
-      )
-
-      expect(getByText("No symptom history…")).toBeDefined()
-    })
-  })
-
   describe("when the user has log data", () => {
     it("shows the correct message, date and symptoms", () => {
       const dateString = "September 21, 2020"
