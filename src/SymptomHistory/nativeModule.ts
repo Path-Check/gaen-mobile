@@ -2,6 +2,7 @@ import { NativeModules } from "react-native"
 
 import {
   SymptomEntry,
+  SymptomHistory,
   SymptomEntryAttributes,
 } from "../SymptomHistory/symptoms"
 
@@ -20,8 +21,25 @@ export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {
   return symptomHistoryModule.deleteSymptomLogEntry(symptomLogEntryId)
 }
 
+type RawEntry = {
+  id: string
+  date: number
+  symptoms: string[]
+}
+
+const toSymptomHistory = (rawEntries: RawEntry[]): SymptomHistory => {
+  return [
+    { id: "a", kind: "NoData", date: 1234, symptoms: [] },
+    { id: "b", kind: "Symptoms", date: 1234, symptoms: ["cough"] },
+    { id: "c", kind: "NoSymptoms", date: 1234, symptoms: [] },
+  ]
+}
+
 export const readEntries = (): Promise<SymptomEntry[]> => {
-  return symptomHistoryModule.getSymptomLogEntries()
+  const rawEntries: RawEntry[] = symptomHistoryModule.getSymptomLogEntries()
+
+  const symptomHistory = toSymptomHistory(rawEntries)
+  return
 }
 
 export const deleteAllEntries = async (): Promise<void> => {

@@ -6,7 +6,12 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomEntry, Symptom, sortSymptomEntries } from "./symptoms"
+import {
+  SymptomEntry,
+  SymptomHistory,
+  Symptom,
+  sortSymptomEntries,
+} from "./symptoms"
 import * as NativeModule from "./nativeModule"
 
 import {
@@ -16,7 +21,7 @@ import {
 } from "../OperationResponse"
 
 export type SymptomHistoryState = {
-  symptomEntries: SymptomEntry[]
+  symptomEntries: SymptomHistory
   createEntry: (symptoms: Symptom[]) => Promise<OperationResponse>
   updateEntry: (entry: SymptomEntry) => Promise<OperationResponse>
   deleteEntry: (symptomEntryId: string) => Promise<OperationResponse>
@@ -46,7 +51,7 @@ export const SymptomHistoryContext = createContext<SymptomHistoryState>(
 export const DAYS_AFTER_LOG_IS_CONSIDERED_STALE = 14
 
 export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
-  const [symptomEntries, setSymptomEntries] = useState<SymptomEntry[]>([])
+  const [symptomEntries, setSymptomEntries] = useState<SymptomHistory>([])
 
   const fetchEntries = async () => {
     const entries = await NativeModule.readEntries()
