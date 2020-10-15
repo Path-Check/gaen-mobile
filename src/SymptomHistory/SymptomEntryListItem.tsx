@@ -69,7 +69,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
-      accessibilityLabel={t("common.edit")}
+      accessibilityLabel={`${t("common.edit")} - ${dateText}`}
     >
       <View style={style.symptomLogContainer}>
         <View style={style.timeContainer}>

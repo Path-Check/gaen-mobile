@@ -1,34 +1,83 @@
 import React from "react"
-import { fireEvent, render } from "@testing-library/react-native"
+import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { SymptomHistoryContext } from "./SymptomHistoryContext"
 import { SymptomEntry } from "./symptomHistory"
-
-import SymptomHistory from "./index"
-import { factories } from "../factories"
-import { posixToDayjs } from "../utils/dateTime"
+import SymptomEntryListItem from "./SymptomEntryListItem"
+import { Symptom } from "./symptom"
 import { SymptomHistoryStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 
-// when the given entry is no data it shows no data.
-// when the given entry is no symptoms it shows no symptoms
-// when the given entry symptoms is hows symptoms
-// when the user taps the card, they are navigated to the select symptoms form and passes the correct date through the route
-
 describe("SymptomEntryListItem", () => {
   describe("when the entry is of kind NoData", () => {
-    it("indicates to the user that no entry has been made", () => {})
+    it("indicates to the user that no entry has been made", () => {
+      const date = Date.parse("2020-1-1")
+      const entry: SymptomEntry = {
+        kind: "NoData",
+        date,
+      }
+      const { getByText } = render(<SymptomEntryListItem entry={entry} />)
+
+      expect(getByText("No Data")).toBeDefined()
+    })
   })
 
   describe("when the entry is of kind Symptoms", () => {
     describe("when the entry has no symptoms", () => {
-      it("indicates to the user that they had no symptoms that day", () => {})
+      it("indicates to the user that they had no symptoms that day", () => {
+        const date = Date.parse("2020-1-1")
+        const entry: SymptomEntry = {
+          id: "asdf",
+          kind: "Symptoms",
+          date,
+          symptoms: new Set<Symptom>(),
+        }
+        const { getByText } = render(<SymptomEntryListItem entry={entry} />)
+
+        expect(getByText("No Symptoms")).toBeDefined()
+      })
     })
 
     describe("when the entry has symptoms", () => {
-      it("displays the correct symptoms", () => {})
+      it("displays the correct symptoms", () => {
+        const date = Date.parse("2020-1-1")
+        const entry: SymptomEntry = {
+          id: "asdf",
+          kind: "Symptoms",
+          date,
+          symptoms: new Set<Symptom>(["cough", "fever"]),
+        }
+        const { getByText } = render(<SymptomEntryListItem entry={entry} />)
+
+        expect(getByText("Cough")).toBeDefined()
+        expect(getByText("Fever")).toBeDefined()
+      })
+    })
+  })
+
+  describe("when the user taps the card", () => {
+    it("triggers navigation to the select symptoms form with the correct date", async () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValueOnce({
+        navigate: navigateSpy,
+      })
+      const date = Date.parse("2020-1-1")
+      const entry: SymptomEntry = {
+        kind: "NoData",
+        date,
+      }
+
+      const { getByLabelText } = render(<SymptomEntryListItem entry={entry} />)
+
+      const editButton = getByLabelText("Edit - January 1, 2020")
+      fireEvent.press(editButton)
+
+      const expectedScreen = SymptomHistoryStackScreens.SelectSymptoms
+      const expectedParams = { date }
+      await waitFor(() => {
+        expect(navigateSpy).toHaveBeenCalledWith(expectedScreen, expectedParams)
+      })
     })
   })
 })
