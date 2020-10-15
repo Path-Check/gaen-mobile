@@ -15,11 +15,14 @@ export const createEntry = (
   return symptomHistoryModule.addSymptomLogEntry(entry)
 }
 
+type UUID = string
+
 export const updateEntry = (
+  id: UUID,
   date: Posix,
   symptoms: Set<Symptom>,
 ): Promise<void> => {
-  const entry = { date, symptoms: Array.from(symptoms) }
+  const entry = { id, date, symptoms: Array.from(symptoms) }
   return symptomHistoryModule.updateSymptomLogEntry(entry)
 }
 
