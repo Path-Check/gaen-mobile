@@ -1,34 +1,15 @@
 import React from "react"
 import { render } from "@testing-library/react-native"
+import dayjs from "dayjs"
 
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
+import { SymptomHistory } from "./symptomHistory"
 import { Symptom } from "./symptom"
 
-import SymptomHistory from "./index"
+import SymptomHistoryScreen from "./index"
 import { factories } from "../factories"
 
-// as a user,
-// when i am on the symptom history screen
-// i see the last 14 days of my symptom history.
-// the are all blank and indicate that i have no data.
-// I tap a date card
-// I see a sympotom form
-// I fill the sympotom form out with some symptom
-// I hit sav
-// i see a success message
-// I am navigated to the history screen.
-// I see the correct symptoms on the correct day.
-//
-
-//when the suer has no entries
-//it shows 14 days of blank stuff
-//
-//When the user has some days entered
-//it shows the correct card with the correct sympotomHistoryStackScreen
-//
-//
-//when the user taps a card the select sympotom screen opens with the correct sympotoms pre filled
-//
+jest.mock("@react-navigation/native")
 describe("SymptomHistory", () => {
   describe("when given a symptom history", () => {
     it("renders the history", () => {
@@ -59,16 +40,23 @@ describe("SymptomHistory", () => {
             symptomHistory: history,
           })}
         >
-          <SymptomHistory />
+          <SymptomHistoryScreen />
         </SymptomHistoryContext.Provider>,
       )
 
-      expect(getByText("Jan 1, 2020")).toBeDefined()
+      const expectedTodayText = dayjs(today).local().format("MMMM D, YYYY")
+      const expectedOneDayAgoText = dayjs(oneDayAgo)
+        .local()
+        .format("MMMM D, YYYY")
+      const expectedTwoDaysAgoText = dayjs(twoDaysAgo)
+        .local()
+        .format("MMMM D, YYYY")
+      expect(getByText(expectedTodayText)).toBeDefined()
       expect(getAllByText("No Data")).toHaveLength(1)
-      expect(getByText("Jan 2, 2020")).toBeDefined()
+      expect(getByText(expectedOneDayAgoText)).toBeDefined()
       expect(getAllByText("No Symptoms")).toHaveLength(1)
-      expect(getByText("Jan 3, 2020")).toBeDefined()
-      expect(getAllByText("cough")).toHaveLength(1)
+      expect(getByText(expectedTwoDaysAgoText)).toBeDefined()
+      expect(getAllByText("Cough")).toHaveLength(1)
     })
   })
 })

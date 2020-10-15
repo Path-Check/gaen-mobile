@@ -138,9 +138,11 @@ const combineEntries = (
 }
 
 const blankHistory = (today: Posix, totalDays: number): SymptomHistory => {
-  const daysAgo = [...Array(totalDays)].map((_v, idx: number) => {
-    return totalDays - 1 - idx
-  })
+  const daysAgo = [...Array(totalDays)]
+    .map((_v, idx: number) => {
+      return totalDays - 1 - idx
+    })
+    .reverse()
 
   return daysAgo.map(
     (daysAgo: number): SymptomEntry => {

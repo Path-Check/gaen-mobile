@@ -67,9 +67,7 @@ describe("DeleteConfirmation", () => {
     it("presents an error message", async () => {
       const showMessageSpy = showMessage as jest.Mock
       const deleteAllEntriesSpy = jest.fn()
-      deleteAllEntriesSpy.mockResolvedValueOnce(
-        failureResponse("operation failed"),
-      )
+      deleteAllEntriesSpy.mockResolvedValueOnce({ kind: "failure" })
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>

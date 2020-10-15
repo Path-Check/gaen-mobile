@@ -1,4 +1,4 @@
-import { daysAgoFrom } from "../utils/dateTime"
+import { beginningOfDay, daysAgoFrom } from "../utils/dateTime"
 
 import { Symptom } from "./symptom"
 import {
@@ -16,7 +16,7 @@ describe("toSymptomHistory", () => {
   describe("when given an empty list", () => {
     it("returns a symptom history of the last 14 days each with a no data entry", () => {
       const today = Date.parse("2020-1-15")
-      const rawEntries = []
+      const rawEntries: RawEntry[] = []
 
       const result = toSymptomHistory(today, rawEntries)
 
@@ -43,7 +43,7 @@ describe("toSymptomHistory", () => {
   describe("when given a list of raw entries", () => {
     it("returns a symptom history with the correct days having the correct symptoms", () => {
       const today = Date.parse("2020-1-15")
-      const rawEntries: RawEntry = [
+      const rawEntries: RawEntry[] = [
         { id: "a", date: today, symptoms: ["cough"] },
       ]
 
