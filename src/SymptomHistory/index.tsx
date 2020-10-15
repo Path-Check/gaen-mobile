@@ -11,7 +11,7 @@ import { Text, StatusBar } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
 
-import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
+import { Typography, Colors, Spacing } from "../styles"
 
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -65,22 +65,6 @@ const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.body1,
     marginBottom: Spacing.large,
-  },
-  bottomActionsContainer: {
-    alignItems: "center",
-    borderTopWidth: Outlines.hairline,
-    borderColor: Colors.neutral10,
-    backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.small,
-    paddingBottom: Spacing.medium,
-    paddingHorizontal: Spacing.medium,
-  },
-  button: {
-    width: "100%",
-  },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
   },
 })
 

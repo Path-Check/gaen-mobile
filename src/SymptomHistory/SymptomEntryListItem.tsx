@@ -75,7 +75,6 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
       <View style={style.symptomLogContainer}>
         <View style={style.timeContainer}>
           <Text style={style.datetimeText}>{dateText}</Text>
-          <Text style={style.datetimeText}>{timeText}</Text>
         </View>
         <View style={style.symptomsContainer}>
           {determineCardContent(entry)}
@@ -94,9 +93,6 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   timeContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
     paddingTop: Spacing.xSmall + 1,
     paddingBottom: Spacing.xSmall,
     paddingHorizontal: Spacing.medium,

@@ -14,7 +14,7 @@ import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
-import { isSameDay } from "../utils/dateTime"
+import { isSameDay, posixToDayjs } from "../utils/dateTime"
 import Checkbox from "./Checkbox"
 
 import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
@@ -80,6 +80,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const hasNoSymptomsSelected = selectedSymptoms.size === 0
+  const date = entryToEdit && posixToDayjs(entryToEdit?.date)
 
   return (
     <View style={style.container}>
@@ -87,6 +88,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
+        <Text style={style.dateText}>{date?.format("MMMM D, YYYY")}</Text>
         <View style={style.symptomButtonsContainer}>
           <View style={style.noSymptomsCheckbox}>
             <Checkbox
@@ -126,6 +128,10 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
+  },
+  dateText: {
+    ...Typography.header3,
+    marginBottom: Spacing.small,
   },
   symptomButtonsContainer: {
     marginBottom: Spacing.medium,
