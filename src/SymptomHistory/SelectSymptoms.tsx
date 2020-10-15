@@ -80,7 +80,9 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const hasNoSymptomsSelected = selectedSymptoms.size === 0
-  const date = entryToEdit && posixToDayjs(entryToEdit?.date)
+
+  const dayJsDate = entryToEdit && posixToDayjs(entryToEdit?.date)
+  const dateText = dayJsDate?.local().format("MMMM D, YYYY")
 
   return (
     <View style={style.container}>
@@ -88,7 +90,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <Text style={style.dateText}>{date?.format("MMMM D, YYYY")}</Text>
+        <Text style={style.dateText}>{dateText}</Text>
         <View style={style.symptomButtonsContainer}>
           <View style={style.noSymptomsCheckbox}>
             <Checkbox

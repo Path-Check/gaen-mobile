@@ -12,7 +12,7 @@ import { Symptom } from "./symptom"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
-jest.mock("./symptoms.ts")
+jest.mock("./symptom.ts")
 jest.mock("../logger.ts")
 
 describe("SymptomHistoryProvider", () => {

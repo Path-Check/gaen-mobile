@@ -10,6 +10,9 @@ import { factories } from "../factories"
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
 
+// when given an entry it populates the correct symptoms (or no symptoms)
+// when a user changes the symptoms and hits change, the backend API receives an update call with the correct parameters
+
 describe("SelectSymptomsScreen", () => {
   describe("when a symptom log is passed as an argument", () => {
     afterEach(() => {

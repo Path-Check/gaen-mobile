@@ -40,7 +40,6 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   }
 
   const dateText = dayJsDate.local().format("MMMM D, YYYY")
-  const timeText = dayJsDate.local().format("h:mm A")
 
   const toSymptomText = (symptom: Symptom.Symptom) => {
     const translatedSymptom = t(Symptom.toTranslationKey(symptom))
