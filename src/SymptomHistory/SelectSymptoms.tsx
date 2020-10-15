@@ -37,13 +37,15 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   })
 
   const initialSelectedSymptoms =
-    entryToEdit?.kind === "Symptoms" ? entryToEdit.symptoms : new Set<Symptom>()
+    entryToEdit?.kind === "Symptoms"
+      ? entryToEdit.symptoms
+      : new Set<Symptom.Symptom>()
 
-  const [selectedSymptoms, setSelectedSymptoms] = useState<Set<Symptom>>(
-    initialSelectedSymptoms,
-  )
+  const [selectedSymptoms, setSelectedSymptoms] = useState<
+    Set<Symptom.Symptom>
+  >(initialSelectedSymptoms)
 
-  const handleOnPressSymptom = (selectedSymptom: Symptom) => {
+  const handleOnPressSymptom = (selectedSymptom: Symptom.Symptom) => {
     const nextSymptoms = new Set(Array.from(selectedSymptoms))
     if (nextSymptoms.has(selectedSymptom)) {
       nextSymptoms.delete(selectedSymptom)
@@ -74,13 +76,13 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     })
   }
 
-  const determineSymptomButtonStyle = (symptom: Symptom) => {
+  const determineSymptomButtonStyle = (symptom: Symptom.Symptom) => {
     return selectedSymptoms.has(symptom)
       ? { ...style.symptomButton, ...style.symptomButtonSelected }
       : style.symptomButton
   }
 
-  const determineSymptomButtonTextStyle = (symptom: Symptom) => {
+  const determineSymptomButtonTextStyle = (symptom: Symptom.Symptom) => {
     return selectedSymptoms.has(symptom)
       ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
       : style.symptomButtonText
@@ -93,7 +95,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <View style={style.symptomButtonsContainer}>
-        {Symptom.all.map((symptom: [Symptom, string]) => {
+        {Symptom.all.map((symptom: Symptom.Symptom) => {
           const translation = t(Symptom.toTranslationKey(symptom))
           return (
             <TouchableHighlight
@@ -132,8 +134,6 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xxHuge,
   },
   symptomButtonsContainer: {
-    flexWrap: "wrap",
-    flexDirection: "row",
     marginBottom: Spacing.medium,
   },
   symptomButton: {

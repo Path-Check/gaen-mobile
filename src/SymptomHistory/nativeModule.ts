@@ -1,6 +1,7 @@
 import { NativeModules } from "react-native"
 
-import { SymptomHistory, toSymptomHistory, RawEntry, Symptom } from "./symptoms"
+import { Symptom } from "./symptom"
+import { SymptomHistory, toSymptomHistory, RawEntry } from "./symptomHistory"
 import { Posix } from "../utils/dateTime"
 
 // Symptom Log Entry Module

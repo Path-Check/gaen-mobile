@@ -3,7 +3,7 @@ import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
-import { SymptomEntry } from "./symptoms"
+import { SymptomEntry } from "./symptomHistory"
 
 import SymptomHistory from "./index"
 import { factories } from "../factories"

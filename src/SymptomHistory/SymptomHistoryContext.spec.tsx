@@ -8,7 +8,7 @@ import {
 } from "./SymptomHistoryContext"
 import * as NativeModule from "./nativeModule"
 import { createEntry } from "./nativeModule"
-import { Symptom } from "./symptoms"
+import { Symptom } from "./symptom"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
@@ -22,22 +22,24 @@ describe("SymptomHistoryProvider", () => {
       createEntrySpy.mockResolvedValueOnce({})
       const mockedDate = Date.parse("2020-09-22 10:00")
       jest.spyOn(Date, "now").mockReturnValue(mockedDate)
-      const symptoms: Symptom[] = ["cough"]
+      const symptoms = new Set<Symptom>(["cough"])
       const newLogEntry = {
         date: mockedDate,
-        symptoms: new Set(symptoms),
+        symptoms,
       }
       ;(NativeModule.readEntries as jest.Mock).mockResolvedValue([])
 
       const AddCheckLogSymptoms = () => {
-        const { createEntry } = useSymptomHistoryContext()
+        const { updateEntry } = useSymptomHistoryContext()
+
+        const date = Date.now()
 
         return (
           <>
             <TouchableOpacity
               accessibilityLabel="add-log-entry"
               onPress={() => {
-                createEntry(symptoms)
+                updateEntry(date, symptoms)
               }}
             />
           </>
@@ -54,7 +56,6 @@ describe("SymptomHistoryProvider", () => {
 
       await waitFor(() => {
         expect(createEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
-        //expect(createEntrySpy).toHaveBeenCalled()
       })
     })
 
@@ -68,14 +69,16 @@ describe("SymptomHistoryProvider", () => {
       ;(NativeModule.readEntries as jest.Mock).mockResolvedValue([])
 
       const AddCheckInStatus = () => {
-        const { createEntry } = useSymptomHistoryContext()
+        const { updateEntry } = useSymptomHistoryContext()
+
+        const date = Date.now()
 
         return (
           <>
             <TouchableOpacity
               accessibilityLabel="add-log-entry"
               onPress={async () => {
-                const result = await createEntry([])
+                const result = await updateEntry(date, new Set<Symptom>())
                 resultSpy(result)
               }}
             />

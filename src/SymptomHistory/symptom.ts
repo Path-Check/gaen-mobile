@@ -15,13 +15,13 @@ export type Symptom =
   | "other"
 
 export const all: Symptom[] = [
+  "cough",
+  "fever",
   "chest_pain_or_pressure",
   "difficulty_breathing",
   "lightheadedness",
   "disorientation_or_unresponsiveness",
-  "fever",
   "chills",
-  "cough",
   "loss_of_smell",
   "loss_of_taste",
   "loss_of_appetite",
@@ -72,6 +72,9 @@ export const fromString = (rawSymptom: string): Symptom | null => {
     case "body_aches": {
       return "body_aches"
     }
+    case "other": {
+      return "other"
+    }
     default: {
       return null
     }
@@ -119,9 +122,12 @@ export const toString = (symptom: Symptom): string => {
     case "body_aches": {
       return "body_aches"
     }
+    case "other": {
+      return "other"
+    }
   }
 }
 
 export const toTranslationKey = (symptom: Symptom): string => {
-  `symptoms.${toString(symptom)}`
+  return `symptoms.${toString(symptom)}`
 }

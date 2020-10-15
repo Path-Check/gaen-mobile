@@ -23,7 +23,7 @@ export type SymptomHistoryByDay = Record<Posix, SymptomEntry>
 
 export interface SymptomEntryAttributes {
   date: Posix
-  symptoms: Set<Symptom>
+  symptoms: Set<Symptom.Symptom>
 }
 
 export const sortSymptomEntries = (entries: SymptomEntry[]): SymptomEntry[] => {
@@ -59,9 +59,9 @@ export const toSymptomHistory = (rawEntries: RawEntry[]): SymptomHistory => {
 const toEntry = (rawEntry: RawEntry): SymptomEntry => {
   const { id, date, symptoms: rawSymptoms } = rawEntry
 
-  const toSymptomSet = (rawSymptoms: string[]): Set<Symptom> => {
-    return rawSymptoms.reduce<Set<Symptom>>(
-      (acc: Set<Symptom>, rawSymptom: string) => {
+  const toSymptomSet = (rawSymptoms: string[]): Set<Symptom.Symptom> => {
+    return rawSymptoms.reduce<Set<Symptom.Symptom>>(
+      (acc: Set<Symptom.Symptom>, rawSymptom: string) => {
         const symptom = Symptom.fromString(rawSymptom)
         if (symptom) {
           return acc.add(symptom)

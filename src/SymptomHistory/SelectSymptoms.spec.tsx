@@ -90,84 +90,6 @@ describe("SelectSymptomsScreen", () => {
         })
       })
     })
-
-    describe("deleting a symptom log", () => {
-      it("allows the user to delete the symptom log", async () => {
-        const showMessageSpy = showMessage as jest.Mock
-        const deleteEntrySpy = jest.fn()
-        deleteEntrySpy.mockResolvedValueOnce({ kind: "success" })
-        const logEntryId = "1"
-        const logEntry = {
-          id: logEntryId,
-          symptoms: ["cough"],
-          date: Date.now(),
-        }
-        const goBackSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ goBack: goBackSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({
-          params: { logEntry: JSON.stringify(logEntry) },
-        })
-
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              deleteEntry: deleteEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
-        )
-
-        fireEvent.press(getByLabelText("Delete entry"))
-
-        await waitFor(() => {
-          expect(deleteEntrySpy).toHaveBeenCalledWith(logEntryId)
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Entry deleted",
-            }),
-          )
-          expect(goBackSpy).toHaveBeenCalled()
-        })
-      })
-
-      it("shows an error message if deleting a log fails", async () => {
-        const showMessageSpy = showMessage as jest.Mock
-        const deleteEntrySpy = jest.fn()
-        deleteEntrySpy.mockResolvedValueOnce({ kind: "failure" })
-        const logEntry = {
-          id: "1",
-          symptoms: ["cough"],
-          date: Date.now(),
-        }
-        const goBackSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ goBack: goBackSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({
-          params: { logEntry: JSON.stringify(logEntry) },
-        })
-
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              deleteEntry: deleteEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
-        )
-
-        fireEvent.press(getByLabelText("Delete entry"))
-
-        await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Sorry, we could not delete the symptoms log",
-            }),
-          )
-          expect(goBackSpy).not.toHaveBeenCalled()
-        })
-      })
-    })
   })
 
   describe("when no symptom log is passed as an argument", () => {
@@ -198,7 +120,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              createEntry: createEntrySpy,
+              updateEntry: createEntrySpy,
             })}
           >
             <SelectSymptomsScreen />
@@ -224,7 +146,7 @@ describe("SelectSymptomsScreen", () => {
         const { getByLabelText } = render(
           <SymptomHistoryContext.Provider
             value={factories.symptomHistoryContext.build({
-              createEntry: createEntrySpy,
+              updateEntry: createEntrySpy,
             })}
           >
             <SelectSymptomsScreen />

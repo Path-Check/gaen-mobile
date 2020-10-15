@@ -7,7 +7,7 @@ import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
   useSymptomHistoryContext,
 } from "./SymptomHistoryContext"
-import { SymptomEntry } from "./symptoms"
+import { SymptomEntry } from "./symptomHistory"
 import { Text, StatusBar, Button } from "../components"
 import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
@@ -76,9 +76,6 @@ const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.body1,
     marginBottom: Spacing.large,
-  },
-  noSymptomHistoryText: {
-    ...Typography.body1,
   },
   bottomActionsContainer: {
     alignItems: "center",

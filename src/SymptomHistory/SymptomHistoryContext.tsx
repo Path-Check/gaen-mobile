@@ -6,7 +6,8 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomEntry, SymptomHistory, Symptom } from "./symptoms"
+import { SymptomEntry, SymptomHistory } from "./symptomHistory"
+import { Symptom } from "./symptom"
 import * as NativeModule from "./nativeModule"
 import { Posix, isSameDay } from "../utils/dateTime"
 import {

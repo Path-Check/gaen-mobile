@@ -8,7 +8,8 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { Symptom, SymptomEntry } from "./symptoms"
+import { Symptom } from "./symptom"
+import { SymptomEntry } from "./symptomHistory"
 
 import { Affordances, Typography, Colors, Outlines, Spacing } from "../styles"
 
