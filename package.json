@@ -7,7 +7,7 @@
     "clean": "rm -rf node_modules && yarn",
     "start": "yarn && react-native start",
     "tsc": "tsc --noEmit",
-    "prettier": "prettier \"(e2e|src)/**/*.+(js|jsx|ts|tsx|json)\"",
+    "prettier": "prettier \"src/**/*.+(js|jsx|ts|tsx|json)\"",
     "format": "yarn prettier --write",
     "lint": "eslint ./",
     "validate": "yarn prettier --list-different && yarn tsc && yarn lint",
@@ -18,12 +18,6 @@
     "reset": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && ./android/gradlew -p ./android clean && rm ios/Podfile.lock && yarn install:pod",
     "postinstall": "npx react-native-jetifier",
     "detox-setup": "detox clean-framework-cache && detox build-framework-cache",
-    "build:e2e:android": "detox build -c android.emu.release",
-    "test:e2e:android": "detox test -c android.emu.release",
-    "build:e2e:ios": "detox build -c iphone11.sim",
-    "test:e2e:iphone11": "detox test -c iphone11.sim --loglevel=warn",
-    "test:e2e:iphone-se": "detox test -c iphone-se.sim --loglevel=warn",
-    "test:e2e:iphone8": "detox test -c iphone8.sim --loglevel=warn",
     "i18n:check": "./src/locales/check.sh",
     "i18n:extract": "i18next",
     "i18n:pull": "./src/locales/pull.sh",
@@ -117,47 +111,5 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "^16.13.1",
     "typescript": "^4.0.3"
-  },
-  "detox": {
-    "artifacts": {
-      "rootDir": "./e2e/artifacts/",
-      "plugins": {
-        "screenshot": {
-          "shouldTakeAutomaticSnapshots": true,
-          "takeWhen": {
-            "testStart": false,
-            "testDone": false
-          }
-        }
-      }
-    },
-    "configurations": {
-      "iphone11.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 11"
-        }
-      },
-      "iphone8.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone 8"
-        }
-      },
-      "iphone-se.sim": {
-        "binaryPath": "ios/build/Build/Products/Release-BT-iphonesimulator/BT.app",
-        "build": "xcodebuild -workspace ios/COVIDSafePaths.xcworkspace -scheme BT_Production -configuration Release-BT -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "device": {
-          "type": "iPhone SE (2nd generation)"
-        }
-      }
-    },
-    "runner-config": "./jest/detox.config.js",
-    "test-runner": "jest"
   }
 }
