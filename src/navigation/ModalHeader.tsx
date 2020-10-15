@@ -4,7 +4,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { Colors, Iconography, Typography, Spacing, Layout } from "../styles"
+import {
+  Colors,
+  Iconography,
+  Typography,
+  Spacing,
+  Layout,
+  Outlines,
+} from "../styles"
 
 interface ModalHeaderProps {
   headerTitle: string
@@ -30,7 +37,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ headerTitle }) => {
       >
         <SvgXml
           xml={Icons.XInCircle}
-          fill={Colors.neutral30}
+          fill={Colors.neutral50}
           width={Iconography.small}
           height={Iconography.small}
         />
@@ -42,16 +49,19 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ headerTitle }) => {
 const style = StyleSheet.create({
   container: {
     width: "100%",
+    paddingHorizontal: Spacing.large,
     paddingTop: Spacing.massive,
-    padding: Spacing.large,
+    paddingBottom: Spacing.small,
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: Colors.secondary10,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral10,
   },
   headerText: {
-    ...Typography.header1,
-    color: Colors.primary125,
+    ...Typography.header2,
+    color: Colors.primaryText,
     maxWidth: Layout.screenWidth * 0.75,
   },
 })

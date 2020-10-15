@@ -385,6 +385,7 @@
     "you_are_sharing_data": "You are sharing anonymized data"
   },
   "symptom_checker": {
+    "no_symptoms": "No symptoms",
     "errors": {
       "adding_symptoms": "Sorry, we could not log your symptoms",
       "deleting_symptom_log": "Sorry, we could not delete the symptoms log",

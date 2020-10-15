@@ -1,24 +1,23 @@
 import React, { FunctionComponent, useState } from "react"
-import { View, TouchableHighlight, StyleSheet, ScrollView } from "react-native"
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
-import { Text, Button } from "../components"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
 import { isSameDay } from "../utils/dateTime"
+import Checkbox from "./Checkbox"
 
-import {
-  Affordances,
-  Colors,
-  Spacing,
-  Typography,
-  Outlines,
-  Buttons,
-} from "../styles"
+import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
@@ -55,6 +54,10 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     setSelectedSymptoms(nextSymptoms)
   }
 
+  const handleOnPressNoSymptoms = () => {
+    setSelectedSymptoms(new Set<Symptom.Symptom>())
+  }
+
   const handleOnPressSave = async () => {
     const result = await updateEntry(entryDate, selectedSymptoms)
 
@@ -71,59 +74,51 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   const completeOnPressSave = () => {
     navigation.goBack()
     showMessage({
-      message: t("symptom_checker.symptoms_saved"),
+      message: t("common.success"),
       ...Affordances.successFlashMessageOptions,
     })
   }
 
-  const determineSymptomButtonStyle = (symptom: Symptom.Symptom) => {
-    return selectedSymptoms.has(symptom)
-      ? { ...style.symptomButton, ...style.symptomButtonSelected }
-      : style.symptomButton
-  }
-
-  const determineSymptomButtonTextStyle = (symptom: Symptom.Symptom) => {
-    return selectedSymptoms.has(symptom)
-      ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
-      : style.symptomButtonText
-  }
+  const hasNoSymptomsSelected = selectedSymptoms.size === 0
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      <View style={style.symptomButtonsContainer}>
-        {Symptom.all.map((symptom: Symptom.Symptom) => {
-          const translation = t(Symptom.toTranslationKey(symptom))
-          return (
-            <TouchableHighlight
-              key={symptom}
-              onPress={() => handleOnPressSymptom(symptom)}
-              style={determineSymptomButtonStyle(symptom)}
-              underlayColor={Colors.neutral10}
-              accessibilityLabel={translation}
-            >
-              <Text style={determineSymptomButtonTextStyle(symptom)}>
-                {translation}
-              </Text>
-            </TouchableHighlight>
-          )
-        })}
-      </View>
-      <Button
-        onPress={handleOnPressSave}
-        label={t("common.save")}
-        customButtonStyle={style.saveButton}
-        customButtonInnerStyle={style.saveButtonInner}
-      />
-    </ScrollView>
+    <View style={style.container}>
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <View style={style.symptomButtonsContainer}>
+          <View style={style.noSymptomsCheckbox}>
+            <Checkbox
+              key={"no_symptoms"}
+              label={t("symptom_checker.no_symptoms")}
+              onPress={handleOnPressNoSymptoms}
+              checked={hasNoSymptomsSelected}
+            />
+          </View>
+          {Symptom.all.map((symptom: Symptom.Symptom) => {
+            const translation = t(Symptom.toTranslationKey(symptom))
+            return (
+              <Checkbox
+                key={symptom}
+                label={translation}
+                onPress={() => handleOnPressSymptom(symptom)}
+                checked={selectedSymptoms.has(symptom)}
+              />
+            )
+          })}
+        </View>
+      </ScrollView>
+      <TouchableOpacity onPress={handleOnPressSave} style={style.button}>
+        <Text style={style.buttonText}>{t("common.save")}</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
@@ -131,48 +126,25 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
-    paddingBottom: Spacing.xxHuge,
   },
   symptomButtonsContainer: {
     marginBottom: Spacing.medium,
   },
-  symptomButton: {
-    borderWidth: Outlines.hairline,
-    borderColor: Colors.neutral25,
-    borderRadius: Outlines.borderRadiusMax,
-    paddingTop: Spacing.xxSmall - 2,
-    paddingBottom: Spacing.xxSmall,
-    paddingHorizontal: Spacing.medium,
-    marginBottom: Spacing.xSmall,
-    marginRight: Spacing.xxSmall,
+  noSymptomsCheckbox: {
+    paddingBottom: Spacing.xSmall - 2,
+    marginBottom: Spacing.xLarge,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral50,
   },
-  symptomButtonSelected: {
-    backgroundColor: Colors.neutral100,
-    borderColor: Colors.neutral100,
+  button: {
+    alignItems: "center",
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.medium,
+    backgroundColor: Colors.primary100,
   },
-  symptomButtonText: {
-    ...Typography.body1,
-  },
-  symptomButtonTextSelected: {
-    color: Colors.white,
-  },
-  saveButton: {
-    width: "100%",
-  },
-  saveButtonInner: {
-    width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
-  },
-  deleteButtonContainer: {
-    ...Buttons.secondary,
-    alignSelf: "center",
-    marginTop: Spacing.medium,
-  },
-  deleteButtonText: {
-    ...Typography.buttonSecondary,
-    fontSize: Typography.small,
-    color: Colors.danger100,
+  buttonText: {
+    ...Typography.buttonPrimary,
+    fontSize: Typography.large,
   },
 })
 
