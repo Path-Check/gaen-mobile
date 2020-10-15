@@ -1,4 +1,79 @@
-import { SymptomEntry, sortByDate } from "./symptomHistory"
+import { daysAgoFrom } from "../utils/dateTime"
+
+import { Symptom } from "./symptom"
+import {
+  SymptomHistory,
+  RawEntry,
+  toSymptomHistory,
+  SymptomEntry,
+  sortByDate,
+} from "./symptomHistory"
+
+// when given a empty it returns 14 days of NoData
+// when given a list of raw entries it returns a symptom history with the correct entries
+
+describe("toSymptomHistory", () => {
+  describe("when given an empty list", () => {
+    it("returns a symptom history of the last 14 days each with a no data entry", () => {
+      const today = Date.parse("2020-1-15")
+      const rawEntries = []
+
+      const result = toSymptomHistory(today, rawEntries)
+
+      const expected: SymptomHistory = [
+        { kind: "NoData", date: today },
+        { kind: "NoData", date: daysAgoFrom(1, today) },
+        { kind: "NoData", date: daysAgoFrom(2, today) },
+        { kind: "NoData", date: daysAgoFrom(3, today) },
+        { kind: "NoData", date: daysAgoFrom(4, today) },
+        { kind: "NoData", date: daysAgoFrom(5, today) },
+        { kind: "NoData", date: daysAgoFrom(6, today) },
+        { kind: "NoData", date: daysAgoFrom(7, today) },
+        { kind: "NoData", date: daysAgoFrom(8, today) },
+        { kind: "NoData", date: daysAgoFrom(9, today) },
+        { kind: "NoData", date: daysAgoFrom(10, today) },
+        { kind: "NoData", date: daysAgoFrom(11, today) },
+        { kind: "NoData", date: daysAgoFrom(12, today) },
+        { kind: "NoData", date: daysAgoFrom(13, today) },
+      ]
+      expect(result).toEqual(expected)
+    })
+  })
+
+  describe("when given a list of raw entries", () => {
+    it("returns a symptom history with the correct days having the correct symptoms", () => {
+      const today = Date.parse("2020-1-15")
+      const rawEntries: RawEntry = [
+        { id: "a", date: today, symptoms: ["cough"] },
+      ]
+
+      const result = toSymptomHistory(today, rawEntries)
+
+      const expected: SymptomHistory = [
+        {
+          kind: "Symptoms",
+          id: "a",
+          date: today,
+          symptoms: new Set<Symptom>(["cough"]),
+        },
+        { kind: "NoData", date: daysAgoFrom(1, today) },
+        { kind: "NoData", date: daysAgoFrom(2, today) },
+        { kind: "NoData", date: daysAgoFrom(3, today) },
+        { kind: "NoData", date: daysAgoFrom(4, today) },
+        { kind: "NoData", date: daysAgoFrom(5, today) },
+        { kind: "NoData", date: daysAgoFrom(6, today) },
+        { kind: "NoData", date: daysAgoFrom(7, today) },
+        { kind: "NoData", date: daysAgoFrom(8, today) },
+        { kind: "NoData", date: daysAgoFrom(9, today) },
+        { kind: "NoData", date: daysAgoFrom(10, today) },
+        { kind: "NoData", date: daysAgoFrom(11, today) },
+        { kind: "NoData", date: daysAgoFrom(12, today) },
+        { kind: "NoData", date: daysAgoFrom(13, today) },
+      ]
+      expect(result).toEqual(expected)
+    })
+  })
+})
 
 describe("sortByDate", () => {
   it("returns a list log entries sorted by time descending", () => {

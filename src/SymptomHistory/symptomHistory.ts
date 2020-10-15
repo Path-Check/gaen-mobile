@@ -43,8 +43,11 @@ export type RawEntry = {
   symptoms: string[]
 }
 
-export const toSymptomHistory = (rawEntries: RawEntry[]): SymptomHistory => {
-  const initialHistory: SymptomHistory = blankHistory(14)
+export const toSymptomHistory = (
+  today: Posix,
+  rawEntries: RawEntry[],
+): SymptomHistory => {
+  const initialHistory: SymptomHistory = blankHistory(today, 14)
 
   return rawEntries.reduce<SymptomHistory>(
     (acc: SymptomHistory, rawEntry: RawEntry) => {
@@ -134,9 +137,7 @@ const combineEntries = (
   }
 }
 
-const blankHistory = (totalDays: number): SymptomHistory => {
-  const now = Date.now()
-
+const blankHistory = (today: Posix, totalDays: number): SymptomHistory => {
   const daysAgo = [...Array(totalDays)].map((_v, idx: number) => {
     return totalDays - 1 - idx
   })
@@ -145,7 +146,7 @@ const blankHistory = (totalDays: number): SymptomHistory => {
     (daysAgo: number): SymptomEntry => {
       return {
         kind: "NoData",
-        date: dayjs(now).subtract(daysAgo, "day").startOf("day").valueOf(),
+        date: dayjs(today).subtract(daysAgo, "day").startOf("day").valueOf(),
       }
     },
   )

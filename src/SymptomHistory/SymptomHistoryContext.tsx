@@ -6,10 +6,14 @@ import React, {
   useState,
 } from "react"
 
-import { SymptomEntry, SymptomHistory } from "./symptomHistory"
+import {
+  toSymptomHistory,
+  SymptomEntry,
+  SymptomHistory,
+} from "./symptomHistory"
 import { Symptom } from "./symptom"
 import * as NativeModule from "./nativeModule"
-import { Posix, isSameDay } from "../utils/dateTime"
+import { Posix } from "../utils/dateTime"
 import {
   failureResponse,
   OperationResponse,
@@ -21,13 +25,17 @@ export type SymptomHistoryState = {
   updateEntry: (
     date: Posix,
     symptoms: Set<Symptom>,
+    oldEntry: SymptomEntry,
   ) => Promise<OperationResponse>
   deleteAllEntries: () => Promise<OperationResponse>
 }
-
 const initialState: SymptomHistoryState = {
   symptomHistory: [],
-  updateEntry: (_date: Posix, _symptoms: Set<Symptom>) => {
+  updateEntry: (
+    _date: Posix,
+    _symptoms: Set<Symptom>,
+    _oldEntry: SymptomEntry,
+  ) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
   deleteAllEntries: () => {
@@ -45,7 +53,8 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   const [symptomHistory, setSymptomHistory] = useState<SymptomHistory>([])
 
   const fetchEntries = async () => {
-    const history = await NativeModule.readEntries()
+    const rawEntries = await NativeModule.readEntries()
+    const history = toSymptomHistory(Date.now(), rawEntries)
     setSymptomHistory(history)
   }
 
@@ -60,14 +69,14 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
     fetchEntries()
   }, [])
 
-  const updateEntry = async (date: Posix, symptoms: Set<Symptom>) => {
-    const entryToUpdate = symptomHistory.find((el: SymptomEntry) => {
-      return isSameDay(el.date, date) && el.kind === "Symptoms"
-    })
-
+  const updateEntry = async (
+    date: Posix,
+    symptoms: Set<Symptom>,
+    oldEntry: SymptomEntry,
+  ) => {
     try {
-      if (entryToUpdate?.kind === "Symptoms") {
-        await NativeModule.updateEntry(entryToUpdate.id, date, symptoms)
+      if (oldEntry?.kind === "Symptoms") {
+        await NativeModule.updateEntry(oldEntry.id, date, symptoms)
         await fetchEntries()
         return SUCCESS_RESPONSE
       } else {

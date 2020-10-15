@@ -32,6 +32,10 @@ export const daysAgo = (days: number): Posix => {
   return dayjs.utc(Date.now()).subtract(days, "day").valueOf()
 }
 
+export const daysAgoFrom = (days: number, today: Posix): Posix => {
+  return dayjs.utc(today).subtract(days, "day").valueOf()
+}
+
 export const beginningOfDay = (date: Posix): Posix => {
   return dayjs.utc(date).startOf("day").valueOf()
 }

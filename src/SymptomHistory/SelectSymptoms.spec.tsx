@@ -1,172 +1,86 @@
 import React from "react"
 import { showMessage } from "react-native-flash-message"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
-import { useNavigation, useRoute } from "@react-navigation/native"
 
-import SelectSymptomsScreen from "./SelectSymptoms"
+import { SelectSymptomsForm } from "./SelectSymptoms"
+import { SymptomEntry } from "./symptomHistory"
+import { Symptom } from "./symptom"
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
 import { factories } from "../factories"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
 
-// when given an entry it populates the correct symptoms (or no symptoms)
-// when a user changes the symptoms and hits change, the backend API receives an update call with the correct parameters
-
-describe("SelectSymptomsScreen", () => {
-  describe("when a symptom log is passed as an argument", () => {
-    afterEach(() => {
-      jest.resetAllMocks()
-    })
-
-    describe("updating the symptom log", () => {
-      it("allows user to update the log symptoms", async () => {
-        const updateEntrySpy = jest.fn()
-        updateEntrySpy.mockResolvedValueOnce({ kind: "success" })
-        const logEntry = {
-          id: "1",
-          symptoms: ["cough"],
-          date: Date.now(),
-        }
-        const navigateSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({
-          params: { logEntry: JSON.stringify(logEntry) },
-        })
-
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              updateEntry: updateEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
-        )
-
-        fireEvent.press(getByLabelText("Fever"))
-        fireEvent.press(getByLabelText("Save"))
-
-        await waitFor(() => {
-          expect(updateEntrySpy).toHaveBeenCalledWith({
-            ...logEntry,
-            symptoms: ["cough", "fever"],
-          })
-        })
-      })
-
-      it("shows an error message if updating the symptom log fails", async () => {
-        const showMessageSpy = showMessage as jest.Mock
-        const updateEntrySpy = jest.fn()
-        updateEntrySpy.mockResolvedValueOnce({ kind: "failure" })
-        const logEntry = {
-          id: "1",
-          symptoms: ["cough"],
-          date: Date.now(),
-        }
-        const navigateSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({
-          params: { logEntry: JSON.stringify(logEntry) },
-        })
-
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              updateEntry: updateEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
-        )
-
-        fireEvent.press(getByLabelText("Fever"))
-        fireEvent.press(getByLabelText("Save"))
-
-        await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Sorry, we could not update your symptoms",
-            }),
-          )
-          expect(navigateSpy).not.toHaveBeenCalled()
-        })
-      })
-    })
+describe("SelectSymptomsForm", () => {
+  afterEach(() => {
+    jest.resetAllMocks()
   })
 
-  describe("when no symptom log is passed as an argument", () => {
-    it("does not display the delete entry button", () => {
-      const params = {}
-      ;(useRoute as jest.Mock).mockReturnValue({ params })
-      ;(useNavigation as jest.Mock).mockReturnValue({})
-
-      const { queryByLabelText } = render(
+  describe("when the user changes the symptoms and taps save", () => {
+    it("invokes the update function on the context with the correct symptoms", async () => {
+      const updateEntrySpy = jest.fn()
+      updateEntrySpy.mockResolvedValueOnce({ kind: "success" })
+      const testId = "1"
+      const date = Date.now()
+      const entry: SymptomEntry = {
+        id: testId,
+        kind: "Symptoms",
+        symptoms: new Set<Symptom>(["cough"]),
+        date,
+      }
+      const { getByLabelText, getByTestId } = render(
         <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({})}
+          value={factories.symptomHistoryContext.build({
+            updateEntry: updateEntrySpy,
+          })}
         >
-          <SelectSymptomsScreen />
+          <SelectSymptomsForm entryToEdit={entry} />
         </SymptomHistoryContext.Provider>,
       )
-      expect(queryByLabelText("Delete entry")).toBeNull()
+
+      fireEvent.press(getByLabelText("Fever"))
+      fireEvent.press(getByTestId("select-symptoms-save"))
+
+      const expectedSymptoms = new Set<Symptom>(["cough", "fever"])
+      await waitFor(() => {
+        expect(updateEntrySpy).toHaveBeenCalledWith(
+          date,
+          expectedSymptoms,
+          entry,
+        )
+      })
     })
 
-    describe("creating a new symptom log", () => {
-      it("allows the user to select symptoms to log", async () => {
-        const createEntrySpy = jest.fn()
-        createEntrySpy.mockResolvedValueOnce({ kind: "success" })
-        const navigateSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({ params: {} })
-        const coughSymptom = "cough"
+    it("shows an error message if updating the symptom log fails", async () => {
+      const showMessageSpy = showMessage as jest.Mock
+      const updateEntrySpy = jest.fn()
+      updateEntrySpy.mockResolvedValueOnce({ kind: "failure" })
+      const entry: SymptomEntry = {
+        id: "1",
+        kind: "Symptoms",
+        symptoms: new Set(["cough"]),
+        date: Date.now(),
+      }
 
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              updateEntry: createEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
+      const { getByLabelText, getByTestId } = render(
+        <SymptomHistoryContext.Provider
+          value={factories.symptomHistoryContext.build({
+            updateEntry: updateEntrySpy,
+          })}
+        >
+          <SelectSymptomsForm entryToEdit={entry} />
+        </SymptomHistoryContext.Provider>,
+      )
+
+      fireEvent.press(getByLabelText("Fever"))
+      fireEvent.press(getByTestId("select-symptoms-save"))
+
+      await waitFor(() => {
+        expect(showMessageSpy).toHaveBeenCalledWith(
+          expect.objectContaining({
+            message: "Sorry, we could not update your symptoms",
+          }),
         )
-
-        fireEvent.press(getByLabelText("Cough"))
-        fireEvent.press(getByLabelText("Save"))
-
-        await waitFor(() => {
-          expect(createEntrySpy).toHaveBeenCalledWith([coughSymptom])
-        })
-      })
-
-      it("shows an error message when creating a symptom log fails", async () => {
-        const showMessageSpy = showMessage as jest.Mock
-        const createEntrySpy = jest.fn()
-        createEntrySpy.mockResolvedValueOnce({ kind: "failure" })
-        const navigateSpy = jest.fn()
-        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-        ;(useRoute as jest.Mock).mockReturnValue({ params: {} })
-
-        const { getByLabelText } = render(
-          <SymptomHistoryContext.Provider
-            value={factories.symptomHistoryContext.build({
-              updateEntry: createEntrySpy,
-            })}
-          >
-            <SelectSymptomsScreen />
-          </SymptomHistoryContext.Provider>,
-        )
-
-        fireEvent.press(getByLabelText("Cough"))
-        fireEvent.press(getByLabelText("Save"))
-
-        await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Sorry, we could not log your symptoms",
-            }),
-          )
-          expect(navigateSpy).not.toHaveBeenCalled()
-        })
       })
     })
   })

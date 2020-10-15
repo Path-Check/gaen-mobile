@@ -1,7 +1,7 @@
 import { NativeModules } from "react-native"
 
 import { Symptom } from "./symptom"
-import { SymptomHistory, toSymptomHistory, RawEntry } from "./symptomHistory"
+import { RawEntry } from "./symptomHistory"
 import { Posix } from "../utils/dateTime"
 
 // Symptom Log Entry Module
@@ -30,10 +30,9 @@ export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {
   return symptomHistoryModule.deleteSymptomLogEntry(symptomLogEntryId)
 }
 
-export const readEntries = async (): Promise<SymptomHistory> => {
+export const readEntries = async (): Promise<RawEntry[]> => {
   const rawEntries: RawEntry[] = await symptomHistoryModule.getSymptomLogEntries()
-  const symptomHistory = toSymptomHistory(rawEntries)
-  return symptomHistory
+  return rawEntries
 }
 
 export const deleteAllEntries = async (): Promise<void> => {

@@ -1,16 +1,11 @@
 import React from "react"
-import { fireEvent, render } from "@testing-library/react-native"
-import { useNavigation } from "@react-navigation/native"
+import { render } from "@testing-library/react-native"
 
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
-import { SymptomEntry } from "./symptomHistory"
+import { Symptom } from "./symptom"
 
 import SymptomHistory from "./index"
 import { factories } from "../factories"
-import { posixToDayjs } from "../utils/dateTime"
-import { SymptomHistoryStackScreens } from "../navigation"
-
-jest.mock("@react-navigation/native")
 
 // as a user,
 // when i am on the symptom history screen
@@ -35,79 +30,45 @@ jest.mock("@react-navigation/native")
 //when the user taps a card the select sympotom screen opens with the correct sympotoms pre filled
 //
 describe("SymptomHistory", () => {
-  describe("when the user has not enterd any symptoms for a day", () => {
-    it("shows the last 14 days of entries and they all say 'no data'", () => {
-      const dateString = "September 21, 2020"
-      const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const firstTimeString =
-        posixToDayjs(firstLogEntryPosix)?.local()?.format("HH:mm A") ||
-        "not a date"
-      const secondLogEntryPosix = Date.parse(`${dateString} 12:00`)
-      const secondTimeString =
-        posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm A") ||
-        "not a date"
+  describe("when given a symptom history", () => {
+    it("renders the history", () => {
+      const today = Date.parse("2020-1-3")
+      const oneDayAgo = Date.parse("2020-1-2")
+      const twoDaysAgo = Date.parse("2020-1-1")
+      const history: SymptomHistory = [
+        {
+          kind: "NoData",
+          date: today,
+        },
+        {
+          id: "a",
+          kind: "Symptoms",
+          date: oneDayAgo,
+          symptoms: new Set<Symptom>(),
+        },
+        {
+          id: "b",
+          kind: "Symptoms",
+          date: twoDaysAgo,
+          symptoms: new Set<Symptom>(["cough"]),
+        },
+      ]
       const { getByText, getAllByText } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
-            symptomHistory: [
-              {
-                id: "1",
-                kind: "Symptoms",
-                symptoms: new Set(["cough"]),
-                date: firstLogEntryPosix,
-              },
-              {
-                id: "2",
-                kind: "Symptoms",
-                symptoms: new Set(["loss_of_smell"]),
-                date: secondLogEntryPosix,
-              },
-            ],
+            symptomHistory: history,
           })}
         >
           <SymptomHistory />
         </SymptomHistoryContext.Provider>,
       )
 
-      expect(getAllByText(dateString)).toHaveLength(2)
-      expect(getByText(firstTimeString)).toBeDefined()
-      expect(getByText(secondTimeString)).toBeDefined()
-      expect(getByText("Cough")).toBeDefined()
-      expect(getByText("Loss of smell")).toBeDefined()
-    })
-  })
-
-  describe("when the user previoused created symptom entries", () => {
-    it("shows the symptom entries in the correct day with the correct symptoms", () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({
-        navigate: navigateSpy,
-      })
-
-      const logEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const logEntry: SymptomEntry = {
-        id: "1",
-        kind: "Symptoms",
-        symptoms: new Set(["cough"]),
-        date: logEntryPosix,
-      }
-      const { getByLabelText } = render(
-        <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({
-            symptomHistory: [logEntry],
-          })}
-        >
-          <SymptomHistory />
-        </SymptomHistoryContext.Provider>,
-      )
-
-      fireEvent.press(getByLabelText("Edit"))
-      expect(navigateSpy).toHaveBeenCalledWith(
-        SymptomHistoryStackScreens.SelectSymptoms,
-        {
-          logEntry: JSON.stringify(logEntry),
-        },
-      )
+      expect(getByText("Jan 1, 2020")).toBeDefined()
+      expect(getAllByText("No Data")).toHaveLength(1)
+      expect(getByText("Jan 2, 2020")).toBeDefined()
+      expect(getAllByText("No Symptoms")).toHaveLength(1)
+      expect(getByText("Jan 3, 2020")).toBeDefined()
+      expect(getAllByText("cough")).toHaveLength(1)
     })
   })
 })

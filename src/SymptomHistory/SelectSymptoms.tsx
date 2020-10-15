@@ -21,19 +21,35 @@ import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
-  const { t } = useTranslation()
-  const navigation = useNavigation()
+  const { symptomHistory } = useSymptomHistoryContext()
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
-  const { updateEntry, symptomHistory } = useSymptomHistoryContext()
 
   const entryDate = route.params?.date
-
   const entryToEdit = symptomHistory.find((el: SymptomEntry) => {
     return isSameDay(el.date, entryDate)
   })
+
+  if (entryToEdit) {
+    return <SelectSymptomsForm entryToEdit={entryToEdit} />
+  } else {
+    return <Text>{"This should never happen"}</Text>
+  }
+}
+
+interface SelectSymptomsFormProps {
+  entryToEdit: SymptomEntry
+}
+
+export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
+  entryToEdit,
+}) => {
+  useStatusBarEffect("dark-content", Colors.secondary10)
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  const { updateEntry } = useSymptomHistoryContext()
 
   const initialSelectedSymptoms =
     entryToEdit?.kind === "Symptoms"
@@ -59,7 +75,11 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   }
 
   const handleOnPressSave = async () => {
-    const result = await updateEntry(entryDate, selectedSymptoms)
+    const result = await updateEntry(
+      entryToEdit.date,
+      selectedSymptoms,
+      entryToEdit,
+    )
 
     if (result.kind === "success") {
       completeOnPressSave()
@@ -113,7 +133,11 @@ const SelectSymptomsScreen: FunctionComponent = () => {
           })}
         </View>
       </ScrollView>
-      <TouchableOpacity onPress={handleOnPressSave} style={style.button}>
+      <TouchableOpacity
+        testID={"select-symptoms-save"}
+        onPress={handleOnPressSave}
+        style={style.button}
+      >
         <Text style={style.buttonText}>{t("common.save")}</Text>
       </TouchableOpacity>
     </View>
