@@ -30,6 +30,7 @@
     "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
+    "success": "Success",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit"
@@ -384,19 +385,13 @@
     "you_are_sharing_data": "You are sharing anonymized data"
   },
   "symptom_checker": {
-    "delete_entry": "Delete entry",
-    "entry_deleted": "Entry deleted",
     "errors": {
       "adding_symptoms": "Sorry, we could not log your symptoms",
       "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
       "updating_symptoms": "Sorry, we could not update your symptoms"
     },
-    "log_symptoms": "Log symptoms",
-    "no_symptom_history": "No symptom history…",
-    "symptom_log": "Symptom Log",
-    "symptoms_saved": "Symptoms saved!",
-    "symptoms_updated": "Symptoms updated!",
-    "to_protect_your_privacy": "To protect your privacy, logs are stored on your device and deleted automatically after {{days}} days."
+    "symptom_history": "Symptom History",
+    "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },
   "symptoms": {
     "body_aches": "Body aches",

@@ -1,6 +1,6 @@
-import { SymptomEntry, sortSymptomEntries } from "./symptomHistory"
+import { SymptomEntry, sortByDate } from "./symptomHistory"
 
-describe("sortSymptomEntries", () => {
+describe("sortByDate", () => {
   it("returns a list log entries sorted by time descending", () => {
     const log1DateTime = Date.parse("10-1-2020 10:00")
     const log2DateTime = Date.parse("10-2-2020 10:00")
@@ -40,7 +40,7 @@ describe("sortSymptomEntries", () => {
     }
     const unsortedEntries = [log3, log1, log4, log2, log5]
 
-    const result = sortSymptomEntries(unsortedEntries)
+    const result = sortByDate(unsortedEntries)
 
     const expected = [log5, log4, log3, log2, log1]
     expect(result).toEqual(expected)

@@ -26,7 +26,7 @@ export interface SymptomEntryAttributes {
   symptoms: Set<Symptom.Symptom>
 }
 
-export const sortSymptomEntries = (entries: SymptomEntry[]): SymptomEntry[] => {
+export const sortByDate = (entries: SymptomEntry[]): SymptomEntry[] => {
   const compareEntries = (
     entryA: SymptomEntry,
     entryB: SymptomEntry,

@@ -8,7 +8,7 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { Symptom } from "./symptom"
+import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 
 import { Affordances, Typography, Colors, Outlines, Spacing } from "../styles"
@@ -42,8 +42,8 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   const dateText = dayJsDate.local().format("MMMM D, YYYY")
   const timeText = dayJsDate.local().format("h:mm A")
 
-  const toSymptomText = (symptom: Symptom) => {
-    const translatedSymptom = t(`symptoms.${symptom}`)
+  const toSymptomText = (symptom: Symptom.Symptom) => {
+    const translatedSymptom = t(Symptom.toTranslationKey(symptom))
     return (
       <View style={style.symptomTextContainer} key={translatedSymptom}>
         <Text style={style.symptomText}>{translatedSymptom}</Text>
@@ -52,11 +52,18 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   }
 
   const determineCardContent = (entry: SymptomEntry) => {
-    if (entry.kind === "NoData") {
-      return <Text>{"No Data"}</Text>
-    } else {
-      const arr = Array.from(entry.symptoms)
-      return arr.map(toSymptomText)
+    switch (entry.kind) {
+      case "NoData": {
+        return <Text>{"No Data"}</Text>
+      }
+      case "Symptoms": {
+        const symptoms = Array.from(entry.symptoms)
+        if (symptoms.length > 0) {
+          return symptoms.map(toSymptomText)
+        } else {
+          return <Text>{"No Symptoms"}</Text>
+        }
+      }
     }
   }
 

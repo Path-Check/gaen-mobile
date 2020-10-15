@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
   useSymptomHistoryContext,
 } from "./SymptomHistoryContext"
-import { SymptomEntry } from "./symptomHistory"
-import { Text, StatusBar, Button } from "../components"
-import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
+import { SymptomEntry, sortByDate } from "./symptomHistory"
+import { Text, StatusBar } from "../components"
+import { useStatusBarEffect } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
 
 import { Buttons, Typography, Colors, Outlines, Spacing } from "../styles"
@@ -18,11 +17,8 @@ const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const { symptomHistory } = useSymptomHistoryContext()
-  const navigation = useNavigation()
 
-  const handleOnPressLogSymptoms = () => {
-    navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms)
-  }
+  const history = sortByDate(symptomHistory)
 
   return (
     <View style={style.outerContainer}>
@@ -32,26 +28,19 @@ const SymptomHistory: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <Text style={style.headerText}>{t("symptom_checker.symptom_log")}</Text>
+        <Text style={style.headerText}>
+          {t("symptom_checker.symptom_history")}
+        </Text>
         <Text style={style.subHeaderText}>
           {t("symptom_checker.to_protect_your_privacy", {
             days: DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
           })}
         </Text>
 
-        {symptomHistory.reverse().map((entry: SymptomEntry) => {
+        {history.map((entry: SymptomEntry) => {
           return <SymptomEntryListItem key={entry.date} entry={entry} />
         })}
       </ScrollView>
-      <View style={style.bottomActionsContainer}>
-        <Button
-          onPress={handleOnPressLogSymptoms}
-          label={t("symptom_checker.log_symptoms")}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-          hasPlusIcon
-        />
-      </View>
     </View>
   )
 }
