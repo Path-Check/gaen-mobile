@@ -1,4 +1,4 @@
-import { SymptomEntry, sortSymptomEntries } from "./symptoms"
+import { SymptomEntry, sortSymptomEntries } from "./symptomHistory"
 
 describe("sortSymptomEntries", () => {
   it("returns a list log entries sorted by time descending", () => {

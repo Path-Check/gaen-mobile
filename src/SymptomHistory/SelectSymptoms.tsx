@@ -6,7 +6,8 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 import { useStatusBarEffect } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import { Text, Button } from "../components"
-import { Symptom, SymptomEntry } from "./symptoms"
+import * as Symptom from "./symptom"
+import { SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
 import { isSameDay } from "../utils/dateTime"
 
@@ -29,26 +30,8 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   >()
   const { updateEntry, symptomHistory } = useSymptomHistoryContext()
 
-  const symptomsWithTranslations: Record<Symptom, string> = {
-    chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),
-    difficulty_breathing: t("symptoms.difficulty_breathing"),
-    lightheadedness: t("symptoms.lightheadedness"),
-    disorientation_or_unresponsiveness: t(
-      "symptoms.disorientation_or_unresponsiveness",
-    ),
-    fever: t("symptoms.fever"),
-    chills: t("symptoms.chills"),
-    cough: t("symptoms.cough"),
-    loss_of_smell: t("symptoms.loss_of_smell"),
-    loss_of_taste: t("symptoms.loss_of_taste"),
-    loss_of_appetite: t("symptoms.loss_of_appetite"),
-    vomiting: t("symptoms.vomiting"),
-    diarrhea: t("symptoms.diarrhea"),
-    body_aches: t("symptoms.body_aches"),
-    other: t("symptoms.other"),
-  }
-
   const entryDate = route.params?.date
+
   const entryToEdit = symptomHistory.find((el: SymptomEntry) => {
     return isSameDay(el.date, entryDate)
   })
@@ -103,10 +86,6 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       : style.symptomButtonText
   }
 
-  const symptomsWithTranslationsList = Object.entries(
-    symptomsWithTranslations,
-  ) as [Symptom, string][]
-
   return (
     <ScrollView
       style={style.container}
@@ -114,23 +93,22 @@ const SelectSymptomsScreen: FunctionComponent = () => {
       alwaysBounceVertical={false}
     >
       <View style={style.symptomButtonsContainer}>
-        {symptomsWithTranslationsList.map(
-          ([symptom, translation]: [Symptom, string]) => {
-            return (
-              <TouchableHighlight
-                key={symptom}
-                onPress={() => handleOnPressSymptom(symptom)}
-                style={determineSymptomButtonStyle(symptom)}
-                underlayColor={Colors.neutral10}
-                accessibilityLabel={translation}
-              >
-                <Text style={determineSymptomButtonTextStyle(symptom)}>
-                  {translation}
-                </Text>
-              </TouchableHighlight>
-            )
-          },
-        )}
+        {Symptom.all.map((symptom: [Symptom, string]) => {
+          const translation = t(Symptom.toTranslationKey(symptom))
+          return (
+            <TouchableHighlight
+              key={symptom}
+              onPress={() => handleOnPressSymptom(symptom)}
+              style={determineSymptomButtonStyle(symptom)}
+              underlayColor={Colors.neutral10}
+              accessibilityLabel={translation}
+            >
+              <Text style={determineSymptomButtonTextStyle(symptom)}>
+                {translation}
+              </Text>
+            </TouchableHighlight>
+          )
+        })}
       </View>
       <Button
         onPress={handleOnPressSave}
