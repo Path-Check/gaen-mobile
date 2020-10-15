@@ -18,7 +18,17 @@ jest.mock("@react-navigation/native")
 // when the user taps the card, they are navigated to the select symptoms form and passes the correct date through the route
 
 describe("SymptomEntryListItem", () => {
-  it("returns true", () => {
-    expect(true).toBe(true)
+  describe("when the entry is of kind NoData", () => {
+    it("indicates to the user that no entry has been made", () => {})
+  })
+
+  describe("when the entry is of kind Symptoms", () => {
+    describe("when the entry has no symptoms", () => {
+      it("indicates to the user that they had no symptoms that day", () => {})
+    })
+
+    describe("when the entry has symptoms", () => {
+      it("displays the correct symptoms", () => {})
+    })
   })
 })

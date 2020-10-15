@@ -4,7 +4,7 @@ import { showMessage } from "react-native-flash-message"
 
 import { SymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { OnboardingProvider } from "../OnboardingContext"
-import { failureResponse, SUCCESS_RESPONSE } from "../OperationResponse"
+import { SUCCESS_RESPONSE } from "../OperationResponse"
 import DeleteConfirmation from "./DeleteConfirmation"
 import { factories } from "../factories"
 
