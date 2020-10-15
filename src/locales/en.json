@@ -92,6 +92,8 @@
   },
   "exposure_history": {
     "check_for_exposures": "Check for exposures",
+    "check_successful": "Successfully checked for exposures",
+    "check_error": "There was a problem checking for exposures",
     "exposure_detail": {
       "2m_apart": "2m apart",
       "6ft_apart": "6ft apart",
