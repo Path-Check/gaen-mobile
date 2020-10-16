@@ -10,8 +10,6 @@ project "COVIDSafePaths.xcodeproj",
 def shared_pods
   config = use_native_modules!
   use_react_native!(path: config["reactNativePath"])
-  # Pods for COVIDSafePaths
-  pod "RNReanimated", path: "../node_modules/react-native-reanimated"
 
   permissions_path = "../node_modules/react-native-permissions/ios"
   pod "Permission-Notifications", path: "#{permissions_path}/Notifications.podspec"
