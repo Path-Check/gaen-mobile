@@ -2,7 +2,6 @@
   "_display_name": "Kreyòl ayisyen",
   "about": {
     "description": "Aplikasyon [1$s: app aplikasyonName] fèt pa [1 $ s: healthAuthorityName]",
-    "emergency_contact": "Kontak Ijans",
     "operating_system_abbr": "OS:",
     "version": "Vèsyon:"
   },
@@ -26,7 +25,8 @@
     "skip": "Sote",
     "something_went_wrong": "Yon bagay mal pase",
     "start": "Kòmanse",
-    "submit": "Soumèt"
+    "submit": "Soumèt",
+    "success": "Siksè"
   },
   "errors": {
     "description": "Yon erè fèt. Tanpri relanse aplikasyon an.",
@@ -100,7 +100,6 @@
     "why_did_i_get_an_en_para": "Ou pral resevwa yon notifikasyon ekspozisyon lè yon moun ou kwaze chemen ak li resevwa yon dyagnostik pozitif oswa tès pou COVID-19 aprè ou te kwaze li e chwazi notifye lòt moun."
   },
   "home": {
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
       "bluetooth_disabled_error_message": "Aktive Bluetooth nan tablodbò aplikasyon an",
@@ -114,10 +113,7 @@
     "call_emergency_services": "Sèvis Ijans yo",
     "fix": "Ranje pwoblèm ak {{technology}}",
     "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
-    "location_info_header": "Lokalizasyon",
     "location_info_subheader_1": "Poukisa mwen bezwen louvri lokalizasyon mwen an?",
-    "open_settings": "Louvri tablodbò",
-    "proximity_tracing_info_header": "Trasaj Pwoksimite ",
     "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
@@ -135,8 +131,7 @@
     "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
-    "more_info": "Plis enfòmasyon",
-    "symptom_history": "Tcheke sentòm"
+    "more_info": "Plis enfòmasyon"
   },
   "onboarding": {
     "activation_header_title": "Enstalasyon Aplikasyon",
@@ -158,9 +153,6 @@
     "please_read_the": "Tanpri, li",
     "privacy_policy": "Règleman sou enfòmasyon prive",
     "protect_privacy_button": "Ki jan nou pwoteje vi prive ou",
-    "protect_privacy": {
-      "header": "Ki jan nou pwoteje vi prive ou"
-    },
     "proximity_tracing_header": "Aktive Trasaj Pwoksimite ",
     "proximity_tracing_subheader1": "Ki jan li fonksyone?",
     "proximity_tracing_subheader2": "Èske done mwen an sekirite?",
@@ -172,7 +164,6 @@
     "screen2_image_label": "De moun ki sou telefòn yo",
     "screen3_button": "E si mwen ekspoze?",
     "screen3_image_label": "Yon moun devan yon telefòn ki kode",
-    "select_language": "Chwazi lang",
     "step": "Etap {{currentStep}} nan {{totalSteps}}",
     "terms_header_title": "Règleman itilizasyon",
     "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
@@ -203,17 +194,12 @@
     }
   },
   "settings": {
-    "delete_confirmation_header": "Èske w sèten?",
     "here": "isit la",
     "i_understand_and_consent": "Mwen konprann e mwen dakò",
     "please_view_privacy_policy": "Tanpri gade politik vi prive yo",
     "share_anonymized_data": "Pataje Done Anonim",
     "share_anonymized_data_disclaimer": "Pa pwosedi sa, ou dakò yo pataje repons anonim pou kesyon tès depistaj ak {{healthAuthorityName}}",
     "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
-  },
-  "symptom_history": {
-    "symptoms_saved": "Sentòm yo anrejistre!",
-    "what_symptoms": "Ki sentòm ou genyen?"
   },
   "symptoms": {
     "body_aches": "Kò fè mal",
