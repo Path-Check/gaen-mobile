@@ -28,10 +28,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotifi
 class ExposureConfigurations(context: Context) {
     companion object {
         private const val TAG = "ExposureConfigurations"
-        private const val configurationV6Path = "v1.6.config.json"
-        private val configurationUri = Uri.parse(BuildConfig.EXPOSURE_CONFIGURATION_BASE_URL)
-            .buildUpon()
-            .appendEncodedPath(configurationV6Path)
+        private val configurationUri = Uri.parse(BuildConfig.EXPOSURE_CONFIGURATION_JSON_RESOURCE_V6)
 
         private const val DEFAULT_TRIGGER_THRESHOLD_WEIGHTED_DURATION = 15
         private val DEFAULT_ATTENUATION_DURATION_THRESHOLDS = listOf(40, 53, 60)
