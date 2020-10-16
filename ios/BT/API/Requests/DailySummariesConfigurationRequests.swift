@@ -18,7 +18,7 @@ enum DailySummariesConfigurationRequest: APIRequest {
   var path: String {
     switch self {
     case .get:
-      return DailySummariesConfiguration.configurationFileName
+      return .default
     }
   }
 
