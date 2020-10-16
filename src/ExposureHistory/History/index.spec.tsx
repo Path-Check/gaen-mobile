@@ -57,7 +57,7 @@ describe("History", () => {
         const checkForNewExposuresSpy = jest.fn()
         const showMessageSpy = showMessage as jest.Mock
 
-        const { getByLabelText } = render(
+        const { getByTestId } = render(
           <ExposureContext.Provider
             value={factories.exposureContext.build({
               checkForNewExposures: checkForNewExposuresSpy,
@@ -67,7 +67,7 @@ describe("History", () => {
           </ExposureContext.Provider>,
         )
 
-        fireEvent.press(getByLabelText("Check for exposures"))
+        fireEvent.press(getByTestId("check-for-exposures-button"))
 
         await waitFor(() => {
           expect(showMessageSpy).toHaveBeenCalledWith(
@@ -85,7 +85,7 @@ describe("History", () => {
         checkForNewExposuresSpy.mockResolvedValueOnce(failureResponse)
         const showMessageSpy = showMessage as jest.Mock
 
-        const { getByLabelText } = render(
+        const { getByTestId } = render(
           <ExposureContext.Provider
             value={factories.exposureContext.build({
               checkForNewExposures: checkForNewExposuresSpy,
@@ -95,7 +95,7 @@ describe("History", () => {
           </ExposureContext.Provider>,
         )
 
-        fireEvent.press(getByLabelText("Check for exposures"))
+        fireEvent.press(getByTestId("check-for-exposures-button"))
 
         await waitFor(() => {
           expect(showMessageSpy).toHaveBeenCalledWith(
