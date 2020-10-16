@@ -40,7 +40,7 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   const dateText = dayJsDate.local().format("MMMM D, YYYY")
 
   const toSymptomText = (symptom: Symptom.Symptom) => {
-    const translatedSymptom = t(Symptom.toTranslationKey(symptom))
+    const translatedSymptom = Symptom.toTranslation(t, symptom)
     return (
       <View style={style.symptomTextContainer} key={translatedSymptom}>
         <Text style={style.symptomText}>{translatedSymptom}</Text>

@@ -54,7 +54,7 @@ describe("SymptomHistory", () => {
       expect(getByText(expectedTodayText)).toBeDefined()
       expect(getAllByText("No data")).toHaveLength(1)
       expect(getByText(expectedOneDayAgoText)).toBeDefined()
-      expect(getAllByText("No Symptoms")).toHaveLength(1)
+      expect(getAllByText("No symptoms")).toHaveLength(1)
       expect(getByText(expectedTwoDaysAgoText)).toBeDefined()
       expect(getAllByText("Cough")).toHaveLength(1)
     })

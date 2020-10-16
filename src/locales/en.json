@@ -392,5 +392,21 @@
     "no_symptoms": "No symptoms",
     "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
+  },
+  "symptoms": {
+    "body_aches": "Body aches",
+    "chest_pain_or_pressure": "Chest pain or pressure",
+    "chills": "Chills",
+    "cough": "Cough",
+    "diarrhea": "Diarrhea",
+    "difficulty_breathing": "Difficulty breathing",
+    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
+    "fever": "Fever",
+    "lightheadedness": "Lightheadedness",
+    "loss_of_appetite": "Loss of appetite",
+    "loss_of_smell": "Loss of smell",
+    "loss_of_taste": "Loss of taste",
+    "other": "Other",
+    "vomiting": "Vomiting"
   }
 }

@@ -148,7 +148,7 @@ export const toTranslation = (t: TFunction, symptom: Symptom): string => {
       return t("symptoms.fever")
     }
     case "chills": {
-      return t("sympotoms.chills")
+      return t("symptoms.chills")
     }
     case "cough": {
       return t("symptoms.cough")
@@ -166,7 +166,7 @@ export const toTranslation = (t: TFunction, symptom: Symptom): string => {
       return t("symptoms.vomiting")
     }
     case "diarrhea": {
-      return t("sympotoms.diarrhea")
+      return t("symptoms.diarrhea")
     }
     case "body_aches": {
       return t("symptoms.body_aches")
