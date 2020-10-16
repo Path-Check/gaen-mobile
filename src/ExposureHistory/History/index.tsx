@@ -55,12 +55,12 @@ const History: FunctionComponent<HistoryProps> = ({
     const checkResult = await checkForNewExposures()
     if (checkResult.kind === "success") {
       showMessage({
-        message: t("exposure_history.check_successful"),
+        message: t("common.success"),
         ...Affordances.successFlashMessageOptions,
       })
     } else {
       showMessage({
-        message: t("exposure_history.check_error"),
+        message: t("common.something_went_wrong"),
         ...Affordances.errorFlashMessageOptions,
       })
     }

@@ -72,7 +72,7 @@ describe("History", () => {
         await waitFor(() => {
           expect(showMessageSpy).toHaveBeenCalledWith(
             expect.objectContaining({
-              message: "Successfully checked for exposures",
+              message: "Success",
             }),
           )
         })
@@ -100,7 +100,7 @@ describe("History", () => {
         await waitFor(() => {
           expect(showMessageSpy).toHaveBeenCalledWith(
             expect.objectContaining({
-              message: "There was a problem checking for exposures",
+              message: "Something went wrong",
             }),
           )
         })
