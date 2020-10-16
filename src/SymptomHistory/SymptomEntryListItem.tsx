@@ -49,53 +49,71 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   }
 
   interface CardConfig {
-    content: ReactNode
-    containerStyle: ViewStyle
+    containerBorderColor: string
+    headerContent: string
+    headerStyle: ViewStyle
+    symptoms: Set<Symptom.Symptom> | null
   }
 
   const determineCardConfig = (entry: SymptomEntry): CardConfig => {
     switch (entry.kind) {
       case "NoUserInput": {
         return {
-          content: <Text>{t("symptom_history.no_data")}</Text>,
-          containerStyle: {
-            ...style.symptomEntryContainer,
-            backgroundColor: "gray",
+          containerBorderColor: Colors.neutral100,
+          headerContent: "No entries for this day.",
+          headerStyle: {
+            borderBottomLeftRadius: Outlines.borderRadiusLarge,
+            borderBottomRightRadius: Outlines.borderRadiusLarge,
           },
+          symptoms: null,
         }
       }
       case "UserInput": {
         if (entry.symptoms.size > 0) {
           return {
-            content: <View>{[...entry.symptoms].map(toSymptomText)}</View>,
-            containerStyle: {
-              ...style.symptomEntryContainer,
-              backgroundColor: "red",
-            },
+            containerBorderColor: Colors.danger100,
+            headerContent: "You didn't feel well.",
+            headerStyle: {},
+            symptoms: entry.symptoms,
           }
         } else {
           return {
-            content: <Text>{t("symptom_history.no_symptoms")}</Text>,
-            containerStyle: {
-              ...style.symptomEntryContainer,
-              backgroundColor: "green",
+            containerBorderColor: Colors.success100,
+            headerContent: "You felt well.",
+            headerStyle: {
+              borderBottomLeftRadius: Outlines.borderRadiusLarge,
+              borderBottomRightRadius: Outlines.borderRadiusLarge,
             },
+            symptoms: null,
           }
         }
       }
     }
   }
 
+  const {
+    containerBorderColor,
+    headerStyle,
+    headerContent,
+    symptoms,
+  } = determineCardConfig(entry)
+
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
       accessibilityLabel={`${t("common.edit")} - ${dateText}`}
-      style={}
+      style={{
+        ...style.symptomEntryContainer,
+        borderColor: containerBorderColor,
+      }}
     >
-      <View style={style.timeContainer}>
-        <Text style={style.datetimeText}>{dateText}</Text>
-      </View>
-      <View style={style.symptomsContainer}>{determineCardContent(entry)}</View>
+      <Text style={style.dateText}>{dateText}</Text>
+      <Text style={style.healthStatusText}>{headerContent}</Text>
+      {symptoms && (
+        <View style={style.symptomsContainer}>
+          {[...symptoms].map(toSymptomText)}
+        </View>
+      )}
     </TouchableOpacity>
   )
 }
@@ -103,33 +121,26 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
 const style = StyleSheet.create({
   symptomEntryContainer: {
     ...Affordances.floatingContainer,
-    paddingTop: 0,
-    paddingBottom: Spacing.small,
-    paddingHorizontal: 0,
     marginBottom: Spacing.xLarge,
+    borderWidth: Outlines.thin,
   },
-  timeContainer: {
-    paddingTop: Spacing.xSmall + 1,
-    paddingBottom: Spacing.xSmall,
-    paddingHorizontal: Spacing.medium,
-    marginBottom: Spacing.small,
-    backgroundColor: Colors.neutral5,
-    borderTopLeftRadius: Outlines.borderRadiusLarge,
-    borderTopRightRadius: Outlines.borderRadiusLarge,
-  },
-  datetimeText: {
+  dateText: {
     ...Typography.monospace,
     color: Colors.black,
+    marginBottom: Spacing.xSmall,
+  },
+  healthStatusText: {
+    ...Typography.header4,
   },
   symptomsContainer: {
     flexDirection: "column",
-    paddingHorizontal: Spacing.medium,
+    marginTop: Spacing.small,
   },
   symptomTextContainer: {
     marginBottom: Spacing.xxxSmall,
   },
   symptomText: {
-    ...Typography.body2,
+    ...Typography.body1,
   },
 })
 
