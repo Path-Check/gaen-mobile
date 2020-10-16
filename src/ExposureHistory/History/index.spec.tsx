@@ -35,7 +35,7 @@ describe("History", () => {
         .fn()
         .mockResolvedValueOnce(SUCCESS_RESPONSE)
 
-      const { getByLabelText } = render(
+      const { getByTestId } = render(
         <ExposureContext.Provider
           value={factories.exposureContext.build({
             checkForNewExposures: checkForNewExposuresSpy,
@@ -45,7 +45,7 @@ describe("History", () => {
         </ExposureContext.Provider>,
       )
 
-      fireEvent.press(getByLabelText("Check for exposures"))
+      fireEvent.press(getByTestId("check-for-exposures-button"))
 
       await waitFor(() => {
         expect(checkForNewExposuresSpy).toHaveBeenCalled()

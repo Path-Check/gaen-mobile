@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
+import { showMessage } from "react-native-flash-message"
 
 import { ExposureDatum } from "../../exposure"
 import { LoadingIndicator, StatusBar, Text } from "../../components"
@@ -15,15 +16,7 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import {
-  Buttons,
-  Spacing,
-  Typography,
-  Colors,
-  Outlines,
-  Affordances,
-} from "../../styles"
-import { showMessage } from "react-native-flash-message"
+import { Buttons, Spacing, Typography, Colors, Affordances } from "../../styles"
 
 type Posix = number
 
@@ -109,6 +102,7 @@ const History: FunctionComponent<HistoryProps> = ({
       <TouchableOpacity
         onPress={handleOnPressCheckForExposures}
         style={style.button}
+        testID="check-for-exposures-button"
       >
         <Text style={style.buttonText}>
           {t("exposure_history.check_for_exposures")}
