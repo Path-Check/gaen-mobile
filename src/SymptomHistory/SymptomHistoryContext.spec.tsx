@@ -8,7 +8,7 @@ import {
 } from "./SymptomHistoryContext"
 import * as NativeModule from "./nativeModule"
 import { Symptom } from "./symptom"
-import { NoData, Symptoms } from "./symptomHistory"
+import { NoUserInput, UserInput } from "./symptomHistory"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
@@ -23,12 +23,12 @@ describe("SymptomHistoryProvider", () => {
         createEntrySpy.mockResolvedValueOnce({})
         const date = Date.parse("2020-09-22 10:00")
         const symptoms = new Set<Symptom>(["cough"])
-        const entry: NoData = {
-          kind: "NoData",
+        const entry: NoUserInput = {
+          kind: "NoUserInput",
           date,
         }
 
-        const AddCheckLogSymptoms = () => {
+        const AddCheckLogUserInput = () => {
           const { updateEntry } = useSymptomHistoryContext()
 
           return (
@@ -43,7 +43,7 @@ describe("SymptomHistoryProvider", () => {
 
         const { getByLabelText } = render(
           <SymptomHistoryProvider>
-            <AddCheckLogSymptoms />
+            <AddCheckLogUserInput />
           </SymptomHistoryProvider>,
         )
 
@@ -63,14 +63,14 @@ describe("SymptomHistoryProvider", () => {
 
         const symptoms = new Set<Symptom>(["cough"])
         const testId = "asdf-asdf-asdf-asdf"
-        const entry: Symptoms = {
+        const entry: UserInput = {
           id: testId,
-          kind: "Symptoms",
+          kind: "UserInput",
           date,
           symptoms,
         }
 
-        const AddCheckLogSymptoms = () => {
+        const AddCheckLogUserInput = () => {
           const { updateEntry } = useSymptomHistoryContext()
 
           return (
@@ -85,7 +85,7 @@ describe("SymptomHistoryProvider", () => {
 
         const { getByLabelText } = render(
           <SymptomHistoryProvider>
-            <AddCheckLogSymptoms />
+            <AddCheckLogUserInput />
           </SymptomHistoryProvider>,
         )
 
@@ -113,7 +113,7 @@ describe("SymptomHistoryProvider", () => {
           const { updateEntry } = useSymptomHistoryContext()
 
           const date = Date.now()
-          const entry: NoData = { kind: "NoData", date }
+          const entry: NoUserInput = { kind: "NoUserInput", date }
 
           return (
             <TouchableOpacity

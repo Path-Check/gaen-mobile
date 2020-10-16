@@ -18,18 +18,18 @@ describe("SymptomHistory", () => {
       const twoDaysAgo = Date.parse("2020-1-1")
       const history: SymptomHistory = [
         {
-          kind: "NoData",
+          kind: "NoUserInput",
           date: today,
         },
         {
           id: "a",
-          kind: "Symptoms",
+          kind: "UserInput",
           date: oneDayAgo,
           symptoms: new Set<Symptom>(),
         },
         {
           id: "b",
-          kind: "Symptoms",
+          kind: "UserInput",
           date: twoDaysAgo,
           symptoms: new Set<Symptom>(["cough"]),
         },

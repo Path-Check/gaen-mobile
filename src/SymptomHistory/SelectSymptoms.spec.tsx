@@ -24,7 +24,7 @@ describe("SelectSymptomsForm", () => {
       const date = Date.now()
       const entry: SymptomEntry = {
         id: testId,
-        kind: "Symptoms",
+        kind: "UserInput",
         symptoms: new Set<Symptom>(["cough"]),
         date,
       }
@@ -53,7 +53,7 @@ describe("SelectSymptomsForm", () => {
       updateEntrySpy.mockResolvedValueOnce({ kind: "failure" })
       const entry: SymptomEntry = {
         id: "1",
-        kind: "Symptoms",
+        kind: "UserInput",
         symptoms: new Set(["cough"]),
         date: Date.now(),
       }

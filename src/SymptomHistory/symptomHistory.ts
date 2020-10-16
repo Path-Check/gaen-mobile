@@ -3,19 +3,19 @@ import { Posix, isSameDay } from "../utils/dateTime"
 
 import * as Symptom from "./symptom"
 
-export interface NoData {
-  kind: "NoData"
+export interface NoUserInput {
+  kind: "NoUserInput"
   date: Posix
 }
 
-export interface Symptoms {
+export interface UserInput {
   id: string
-  kind: "Symptoms"
+  kind: "UserInput"
   date: Posix
   symptoms: Set<Symptom.Symptom>
 }
 
-export type SymptomEntry = NoData | Symptoms
+export type SymptomEntry = NoUserInput | UserInput
 
 export type SymptomHistory = SymptomEntry[]
 
@@ -64,7 +64,7 @@ const toEntry = (rawEntry: RawEntry): SymptomEntry => {
   }
 
   return {
-    kind: "Symptoms",
+    kind: "UserInput",
     id,
     date,
     symptoms: toSymptomSet(rawSymptoms),
@@ -100,21 +100,21 @@ const combineEntries = (
 ): SymptomEntry => {
   const entries = `${entryA.kind} ${entryB.kind}`
   switch (entries) {
-    case "NoData NoData": {
+    case "NoUserInput NoUserInput": {
       return entryA
     }
-    case "NoData Symptoms": {
+    case "NoUserInput UserInput": {
       return entryB
     }
-    case "Symptoms NoData": {
+    case "UserInput NoUserInput": {
       return entryA
     }
-    case "Symptoms Symptoms": {
-      const a = entryA as Symptoms
-      const b = entryB as Symptoms
+    case "UserInput UserInput": {
+      const a = entryA as UserInput
+      const b = entryB as UserInput
       return {
         id: a.id,
-        kind: "Symptoms",
+        kind: "UserInput",
         date: a.date,
         symptoms: union(a.symptoms, b.symptoms),
       }
@@ -126,16 +126,16 @@ const combineEntries = (
 }
 
 const blankHistory = (today: Posix, totalDays: number): SymptomHistory => {
-  const daysAgo = [...Array(totalDays)]
-    .map((_v, idx: number) => {
-      return totalDays - 1 - idx
-    })
-    .reverse()
+  const range = (length: number) => {
+    return [...Array(length)].map((_v, idx: number) => idx)
+  }
+
+  const daysAgo = range(totalDays)
 
   return daysAgo.map(
     (daysAgo: number): SymptomEntry => {
       return {
-        kind: "NoData",
+        kind: "NoUserInput",
         date: dayjs(today).subtract(daysAgo, "day").startOf("day").valueOf(),
       }
     },

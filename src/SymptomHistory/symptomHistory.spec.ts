@@ -17,20 +17,20 @@ describe("toSymptomHistory", () => {
       const result = toSymptomHistory(today, rawEntries)
 
       const expected: SymptomHistory = [
-        { kind: "NoData", date: today },
-        { kind: "NoData", date: daysAgoFrom(1, today) },
-        { kind: "NoData", date: daysAgoFrom(2, today) },
-        { kind: "NoData", date: daysAgoFrom(3, today) },
-        { kind: "NoData", date: daysAgoFrom(4, today) },
-        { kind: "NoData", date: daysAgoFrom(5, today) },
-        { kind: "NoData", date: daysAgoFrom(6, today) },
-        { kind: "NoData", date: daysAgoFrom(7, today) },
-        { kind: "NoData", date: daysAgoFrom(8, today) },
-        { kind: "NoData", date: daysAgoFrom(9, today) },
-        { kind: "NoData", date: daysAgoFrom(10, today) },
-        { kind: "NoData", date: daysAgoFrom(11, today) },
-        { kind: "NoData", date: daysAgoFrom(12, today) },
-        { kind: "NoData", date: daysAgoFrom(13, today) },
+        { kind: "NoUserInput", date: today },
+        { kind: "NoUserInput", date: daysAgoFrom(1, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(2, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(3, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(4, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(5, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(6, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(7, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(8, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(9, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(10, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(11, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(12, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(13, today) },
       ]
       expect(result).toEqual(expected)
     })
@@ -48,29 +48,29 @@ describe("toSymptomHistory", () => {
 
       const expected: SymptomHistory = [
         {
-          kind: "Symptoms",
+          kind: "UserInput",
           id: "a",
           date: today,
           symptoms: new Set<Symptom>(["cough"]),
         },
-        { kind: "NoData", date: daysAgoFrom(1, today) },
-        { kind: "NoData", date: daysAgoFrom(2, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(1, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(2, today) },
         {
-          kind: "Symptoms",
+          kind: "UserInput",
           id: "b",
           date: daysAgoFrom(3, today),
           symptoms: new Set<Symptom>(),
         },
-        { kind: "NoData", date: daysAgoFrom(4, today) },
-        { kind: "NoData", date: daysAgoFrom(5, today) },
-        { kind: "NoData", date: daysAgoFrom(6, today) },
-        { kind: "NoData", date: daysAgoFrom(7, today) },
-        { kind: "NoData", date: daysAgoFrom(8, today) },
-        { kind: "NoData", date: daysAgoFrom(9, today) },
-        { kind: "NoData", date: daysAgoFrom(10, today) },
-        { kind: "NoData", date: daysAgoFrom(11, today) },
-        { kind: "NoData", date: daysAgoFrom(12, today) },
-        { kind: "NoData", date: daysAgoFrom(13, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(4, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(5, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(6, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(7, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(8, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(9, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(10, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(11, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(12, today) },
+        { kind: "NoUserInput", date: daysAgoFrom(13, today) },
       ]
       expect(result).toEqual(expected)
     })
@@ -87,7 +87,7 @@ describe("toSymptomHistory", () => {
       const result = toSymptomHistory(today, rawEntries)
 
       const expected: SymptomEntry = {
-        kind: "Symptoms",
+        kind: "UserInput",
         id: "b",
         date: today,
         symptoms: new Set<Symptom>(["cough", "fever", "chills"]),
@@ -101,7 +101,7 @@ describe("toSymptomHistory", () => {
 const entryIsEqual = (entryA: SymptomEntry, entryB: SymptomEntry): boolean => {
   if (entryA.kind !== entryB.kind || entryA.date !== entryB.date) {
     return false
-  } else if (entryA.kind === "Symptoms" && entryB.kind === "Symptoms") {
+  } else if (entryA.kind === "UserInput" && entryB.kind === "UserInput") {
     return (
       entryA.id === entryB.id && setIsEqual(entryA.symptoms, entryB.symptoms)
     )

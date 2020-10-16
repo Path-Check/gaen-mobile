@@ -10,11 +10,11 @@ import { SymptomHistoryStackScreens } from "../navigation"
 jest.mock("@react-navigation/native")
 
 describe("SymptomEntryListItem", () => {
-  describe("when the entry is of kind NoData", () => {
+  describe("when the entry is of kind NoUserInput", () => {
     it("indicates to the user that no entry has been made", () => {
       const date = Date.parse("2020-1-1")
       const entry: SymptomEntry = {
-        kind: "NoData",
+        kind: "NoUserInput",
         date,
       }
       const { getByText } = render(<SymptomEntryListItem entry={entry} />)
@@ -23,13 +23,13 @@ describe("SymptomEntryListItem", () => {
     })
   })
 
-  describe("when the entry is of kind Symptoms", () => {
+  describe("when the entry is of kind UserInput", () => {
     describe("when the entry has no symptoms", () => {
       it("indicates to the user that they had no symptoms that day", () => {
         const date = Date.parse("2020-1-1")
         const entry: SymptomEntry = {
           id: "asdf",
-          kind: "Symptoms",
+          kind: "UserInput",
           date,
           symptoms: new Set<Symptom>(),
         }
@@ -44,7 +44,7 @@ describe("SymptomEntryListItem", () => {
         const date = Date.parse("2020-1-1")
         const entry: SymptomEntry = {
           id: "asdf",
-          kind: "Symptoms",
+          kind: "UserInput",
           date,
           symptoms: new Set<Symptom>(["cough", "fever"]),
         }
@@ -64,7 +64,7 @@ describe("SymptomEntryListItem", () => {
       })
       const date = Date.parse("2020-1-1")
       const symptomEntry: SymptomEntry = {
-        kind: "NoData",
+        kind: "NoUserInput",
         date,
       }
 
