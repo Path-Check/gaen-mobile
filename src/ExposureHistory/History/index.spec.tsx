@@ -1,14 +1,17 @@
 import React from "react"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
+import { showMessage } from "react-native-flash-message"
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 import { ExposureContext } from "../../ExposureContext"
+import { failureResponse, SUCCESS_RESPONSE } from "../../OperationResponse"
 
 import History from "./index"
 
+jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
@@ -28,7 +31,9 @@ describe("History", () => {
   describe("when the refresh button is tapped", () => {
     it("checks for new exposures", async () => {
       const exposures: ExposureDatum[] = []
-      const checkForNewExposuresSpy = jest.fn()
+      const checkForNewExposuresSpy = jest
+        .fn()
+        .mockResolvedValueOnce(SUCCESS_RESPONSE)
 
       const { getByLabelText } = render(
         <ExposureContext.Provider
@@ -44,6 +49,61 @@ describe("History", () => {
 
       await waitFor(() => {
         expect(checkForNewExposuresSpy).toHaveBeenCalled()
+      })
+    })
+
+    describe("when exposure check is successful", () => {
+      it("displays a success message", async () => {
+        const checkForNewExposuresSpy = jest.fn()
+        const showMessageSpy = showMessage as jest.Mock
+
+        const { getByLabelText } = render(
+          <ExposureContext.Provider
+            value={factories.exposureContext.build({
+              checkForNewExposures: checkForNewExposuresSpy,
+            })}
+          >
+            <History exposures={[]} lastDetectionDate={null} />
+          </ExposureContext.Provider>,
+        )
+
+        fireEvent.press(getByLabelText("Check for exposures"))
+
+        await waitFor(() => {
+          expect(showMessageSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+              message: "Success",
+            }),
+          )
+        })
+      })
+    })
+
+    describe("when exposure check is not successful", () => {
+      it("displays a failure message", async () => {
+        const checkForNewExposuresSpy = jest.fn()
+        checkForNewExposuresSpy.mockResolvedValueOnce(failureResponse)
+        const showMessageSpy = showMessage as jest.Mock
+
+        const { getByLabelText } = render(
+          <ExposureContext.Provider
+            value={factories.exposureContext.build({
+              checkForNewExposures: checkForNewExposuresSpy,
+            })}
+          >
+            <History exposures={[]} lastDetectionDate={null} />
+          </ExposureContext.Provider>,
+        )
+
+        fireEvent.press(getByLabelText("Check for exposures"))
+
+        await waitFor(() => {
+          expect(showMessageSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+              message: "Something went wrong",
+            }),
+          )
+        })
       })
     })
   })

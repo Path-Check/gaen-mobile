@@ -15,7 +15,15 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors, Outlines } from "../../styles"
+import {
+  Buttons,
+  Spacing,
+  Typography,
+  Colors,
+  Outlines,
+  Affordances,
+} from "../../styles"
+import { showMessage } from "react-native-flash-message"
 
 type Posix = number
 
@@ -44,7 +52,18 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const handleOnPressCheckForExposures = async () => {
     setCheckingForExposures(true)
-    await checkForNewExposures()
+    const checkResult = await checkForNewExposures()
+    if (checkResult.kind === "success") {
+      showMessage({
+        message: t("common.success"),
+        ...Affordances.successFlashMessageOptions,
+      })
+    } else {
+      showMessage({
+        message: t("common.something_went_wrong"),
+        ...Affordances.errorFlashMessageOptions,
+      })
+    }
     setCheckingForExposures(false)
   }
 
