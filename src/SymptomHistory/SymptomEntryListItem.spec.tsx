@@ -19,7 +19,7 @@ describe("SymptomEntryListItem", () => {
       }
       const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
-      expect(getByText("No data")).toBeDefined()
+      expect(getByText("No entry")).toBeDefined()
     })
   })
 
@@ -35,7 +35,7 @@ describe("SymptomEntryListItem", () => {
         }
         const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
-        expect(getByText("No symptoms")).toBeDefined()
+        expect(getByText("You felt well")).toBeDefined()
       })
     })
 
@@ -50,8 +50,8 @@ describe("SymptomEntryListItem", () => {
         }
         const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
-        expect(getByText("Cough")).toBeDefined()
-        expect(getByText("Fever")).toBeDefined()
+        expect(getByText("- Cough")).toBeDefined()
+        expect(getByText("- Fever")).toBeDefined()
       })
     })
   })
@@ -72,7 +72,7 @@ describe("SymptomEntryListItem", () => {
         <SymptomEntryListItem entry={symptomEntry} />,
       )
 
-      const editButton = getByLabelText("Edit - January 1, 2020")
+      const editButton = getByLabelText("Edit - Jan 1, '20")
       fireEvent.press(editButton)
 
       const expectedScreen = SymptomHistoryStackScreens.SelectSymptoms

@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
@@ -11,7 +12,16 @@ import { posixToDayjs } from "../utils/dateTime"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 
-import { Affordances, Typography, Colors, Outlines, Spacing } from "../styles"
+import { Icons } from "../assets"
+import {
+  Affordances,
+  Typography,
+  Colors,
+  Outlines,
+  Spacing,
+  Iconography,
+  Layout,
+} from "../styles"
 
 type SymptomEntryListItemProps = {
   entry: SymptomEntry
@@ -37,79 +47,131 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     })
   }
 
-  const dateText = dayJsDate.local().format("MMMM D, YYYY")
+  const dateText = dayJsDate.local().format("MMM D, 'YY")
 
   const toSymptomText = (symptom: Symptom.Symptom) => {
     const translatedSymptom = Symptom.toTranslation(t, symptom)
     return (
-      <View style={style.symptomTextContainer} key={translatedSymptom}>
-        <Text style={style.symptomText}>{translatedSymptom}</Text>
-      </View>
+      <Text style={style.symptomText} key={translatedSymptom}>
+        {`- ${translatedSymptom}`}
+      </Text>
     )
   }
 
-  const determineCardContent = (entry: SymptomEntry) => {
+  interface CardConfig {
+    headerContent: string
+    symptoms: Set<Symptom.Symptom> | null
+    circleColor: string
+  }
+
+  const determineCardConfig = (entry: SymptomEntry): CardConfig => {
     switch (entry.kind) {
       case "NoUserInput": {
-        return <Text>{t("symptom_history.no_data")}</Text>
+        return {
+          headerContent: t("symptom_history.no_entry"),
+          symptoms: null,
+          circleColor: Colors.white,
+        }
       }
       case "UserInput": {
         if (entry.symptoms.size > 0) {
-          return [...entry.symptoms].map(toSymptomText)
+          return {
+            headerContent: t("symptom_history.did_not_feel_well"),
+            symptoms: entry.symptoms,
+            circleColor: Colors.danger25,
+          }
         } else {
-          return <Text>{t("symptom_history.no_symptoms")}</Text>
+          return {
+            headerContent: t("symptom_history.felt_well"),
+            symptoms: null,
+            circleColor: Colors.success25,
+          }
         }
       }
     }
   }
 
+  const { headerContent, symptoms, circleColor } = determineCardConfig(entry)
+
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
       accessibilityLabel={`${t("common.edit")} - ${dateText}`}
+      style={style.outerContainer}
     >
-      <View style={style.symptomLogContainer}>
-        <View style={style.timeContainer}>
-          <Text style={style.datetimeText}>{dateText}</Text>
+      <View style={style.container}>
+        <View style={style.chevronRightIcon}>
+          <SvgXml
+            xml={Icons.ChevronRight}
+            width={Iconography.xxSmall}
+            height={Iconography.xxSmall}
+            fill={Colors.neutral50}
+          />
         </View>
-        <View style={style.symptomsContainer}>
-          {determineCardContent(entry)}
+        <View style={style.contentContainer}>
+          <Text style={style.headerText}>{headerContent}</Text>
+          {symptoms && (
+            <View style={style.symptomsContainer}>
+              {[...symptoms].map(toSymptomText)}
+            </View>
+          )}
+          <View style={style.dateTextContainer}>
+            <Text style={style.dateText}>{dateText}</Text>
+          </View>
         </View>
+        <View style={{ ...style.circle, backgroundColor: circleColor }} />
       </View>
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
-  symptomLogContainer: {
+  outerContainer: {
+    ...Outlines.lightShadow,
+  },
+  container: {
     ...Affordances.floatingContainer,
-    paddingTop: 0,
-    paddingBottom: Spacing.small,
-    paddingHorizontal: 0,
     marginBottom: Spacing.xLarge,
+    overflow: "hidden",
   },
-  timeContainer: {
-    paddingTop: Spacing.xSmall + 1,
-    paddingBottom: Spacing.xSmall,
-    paddingHorizontal: Spacing.medium,
-    marginBottom: Spacing.small,
-    backgroundColor: Colors.neutral5,
-    borderTopLeftRadius: Outlines.borderRadiusLarge,
-    borderTopRightRadius: Outlines.borderRadiusLarge,
+  contentContainer: {
+    zIndex: Layout.zLevel1,
   },
-  datetimeText: {
-    ...Typography.monospace,
-    color: Colors.black,
+  chevronRightIcon: {
+    position: "absolute",
+    top: Spacing.large,
+    right: Spacing.large,
+    zIndex: Layout.zLevel1,
+  },
+  headerText: {
+    ...Typography.header3,
+    paddingRight: Spacing.xLarge,
   },
   symptomsContainer: {
     flexDirection: "column",
-    paddingHorizontal: Spacing.medium,
-  },
-  symptomTextContainer: {
-    marginBottom: Spacing.xxxSmall,
+    marginTop: Spacing.small,
   },
   symptomText: {
-    ...Typography.body2,
+    ...Typography.body1,
+    marginBottom: Spacing.xxxSmall,
+  },
+  dateTextContainer: {
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral30,
+    marginTop: Spacing.small,
+  },
+  dateText: {
+    ...Typography.monospace,
+    color: Colors.neutral100,
+    paddingTop: Spacing.xxSmall,
+  },
+  circle: {
+    width: 150,
+    height: 150,
+    position: "absolute",
+    bottom: -80,
+    right: -80,
+    borderRadius: Outlines.borderRadiusMax,
   },
 })
 

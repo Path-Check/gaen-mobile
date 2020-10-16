@@ -36,9 +36,11 @@ export const secondary100 = BrandColors.secondary100
 
 // Accents
 export const danger10 = "#fff0f0"
+export const danger25 = "#ffe0e0"
 export const danger75 = "#ff7d7d"
 export const danger100 = "#ff5656"
 export const success10 = "#f2fcf4"
+export const success25 = "#deffe4"
 export const success50 = "#5bd9a2"
 export const success100 = "#24a36c"
 export const warning25 = "#f9edcc"
