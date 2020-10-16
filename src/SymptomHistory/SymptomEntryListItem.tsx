@@ -20,6 +20,7 @@ import {
   Outlines,
   Spacing,
   Iconography,
+  Layout,
 } from "../styles"
 
 type SymptomEntryListItemProps = {
@@ -58,82 +59,89 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   }
 
   interface CardConfig {
-    containerBorderColor: string
     headerContent: string
     symptoms: Set<Symptom.Symptom> | null
+    circleColor: string
   }
 
   const determineCardConfig = (entry: SymptomEntry): CardConfig => {
     switch (entry.kind) {
       case "NoUserInput": {
         return {
-          containerBorderColor: Colors.neutral100,
           headerContent: t("symptom_history.no_entry"),
           symptoms: null,
+          circleColor: Colors.white,
         }
       }
       case "UserInput": {
         if (entry.symptoms.size > 0) {
           return {
-            containerBorderColor: Colors.danger100,
             headerContent: t("symptom_history.did_not_feel_well"),
             symptoms: entry.symptoms,
+            circleColor: Colors.danger25,
           }
         } else {
           return {
-            containerBorderColor: Colors.success100,
             headerContent: t("symptom_history.felt_well"),
             symptoms: null,
+            circleColor: Colors.success25,
           }
         }
       }
     }
   }
 
-  const { containerBorderColor, headerContent, symptoms } = determineCardConfig(
-    entry,
-  )
+  const { headerContent, symptoms, circleColor } = determineCardConfig(entry)
 
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
       accessibilityLabel={`${t("common.edit")} - ${dateText}`}
-      style={{
-        ...style.container,
-        borderColor: containerBorderColor,
-      }}
+      style={style.outerContainer}
     >
-      <View style={style.chevronRightIcon}>
-        <SvgXml
-          xml={Icons.ChevronRight}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
-          fill={Colors.neutral50}
-        />
-      </View>
-      <Text style={style.headerText}>{headerContent}</Text>
-      {symptoms && (
-        <View style={style.symptomsContainer}>
-          {[...symptoms].map(toSymptomText)}
+      <View style={style.container}>
+        <View style={style.chevronRightIcon}>
+          <SvgXml
+            xml={Icons.ChevronRight}
+            width={Iconography.xxSmall}
+            height={Iconography.xxSmall}
+            fill={Colors.neutral50}
+          />
         </View>
-      )}
-      <View style={style.dateTextContainer}>
-        <Text style={style.dateText}>{dateText}</Text>
+        <View style={style.contentContainer}>
+          <Text style={style.headerText}>{headerContent}</Text>
+          {symptoms && (
+            <View style={style.symptomsContainer}>
+              {[...symptoms].map(toSymptomText)}
+            </View>
+          )}
+          <View style={style.dateTextContainer}>
+            <Text style={style.dateText}>{dateText}</Text>
+          </View>
+        </View>
+        <View style={{ ...style.circle, backgroundColor: circleColor }} />
       </View>
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
+  outerContainer: {
+    ...Outlines.lightShadow,
+  },
   container: {
     ...Affordances.floatingContainer,
     marginBottom: Spacing.xLarge,
-    borderWidth: Outlines.thin,
+    overflow: "hidden",
+  },
+  contentContainer: {
+    zIndex: Layout.zLevel1,
   },
   chevronRightIcon: {
     position: "absolute",
     top: Spacing.large,
     right: Spacing.large,
+    zIndex: Layout.zLevel1,
   },
   headerText: {
     ...Typography.header3,
@@ -156,6 +164,14 @@ const style = StyleSheet.create({
     ...Typography.monospace,
     color: Colors.neutral100,
     paddingTop: Spacing.xxSmall,
+  },
+  circle: {
+    width: 150,
+    height: 150,
+    position: "absolute",
+    bottom: -80,
+    right: -80,
+    borderRadius: Outlines.borderRadiusMax,
   },
 })
 
