@@ -3,11 +3,11 @@ import { Linking, Image, ScrollView, StyleSheet, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Button, Text } from "../components"
+import { Button, StatusBar, Text } from "../components"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { SymptomGroup } from "./selfAssessment"
-import { Stack, Stacks } from "../navigation"
+import { Stack, Stacks, useStatusBarEffect } from "../navigation"
 
 import { Buttons, Outlines, Colors, Spacing, Typography } from "../styles"
 import { Images } from "../assets"
@@ -19,6 +19,7 @@ interface GuidanceProps {
 const Guidance: FunctionComponent<GuidanceProps> = ({
   destinationOnCancel = Stacks.ExposureHistoryFlow,
 }) => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { symptomGroup } = useSelfAssessmentContext()
@@ -192,42 +193,45 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
   }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      <View style={style.topScrollViewBackground} />
-      <View style={style.headerContainer}>
-        <Image source={Images.SelfAssessmentIntro} style={style.image} />
-        <Text style={style.headerText}>
-          {t("self_assessment.guidance.guidance")}
-        </Text>
-        <Text style={style.subheaderText}>
-          {introForSymptomGroup(symptomGroup)}
-        </Text>
-      </View>
-      <View style={style.bulletListContainer}>
-        {instructionsForSymptomGroup(symptomGroup)}
-      </View>
-      {displayFindATestCenter && (
+    <>
+      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <View style={style.topScrollViewBackground} />
+        <View style={style.headerContainer}>
+          <Image source={Images.SelfAssessmentIntro} style={style.image} />
+          <Text style={style.headerText}>
+            {t("self_assessment.guidance.guidance")}
+          </Text>
+          <Text style={style.subheaderText}>
+            {introForSymptomGroup(symptomGroup)}
+          </Text>
+        </View>
+        <View style={style.bulletListContainer}>
+          {instructionsForSymptomGroup(symptomGroup)}
+        </View>
+        {displayFindATestCenter && (
+          <Button
+            label={t("self_assessment.guidance.find_a_test_center_nearby")}
+            onPress={handleOnPressFindTestCenter}
+            customButtonStyle={style.button}
+            customButtonInnerStyle={style.buttonInner}
+            hasRightArrow
+          />
+        )}
         <Button
-          label={t("self_assessment.guidance.find_a_test_center_nearby")}
-          onPress={handleOnPressFindTestCenter}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-          hasRightArrow
+          onPress={handleOnPressDone}
+          label={t("common.done")}
+          customButtonStyle={style.doneButton}
+          customButtonInnerStyle={style.doneButtonInner}
+          customTextStyle={style.doneButtonText}
+          outlined
         />
-      )}
-      <Button
-        onPress={handleOnPressDone}
-        label={t("common.done")}
-        customButtonStyle={style.doneButton}
-        customButtonInnerStyle={style.doneButtonInner}
-        customTextStyle={style.doneButtonText}
-        outlined
-      />
-    </ScrollView>
+      </ScrollView>
+    </>
   )
 }
 
