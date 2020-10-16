@@ -15,8 +15,6 @@ jest.mock("./nativeModule.ts")
 jest.mock("./symptom.ts")
 jest.mock("../logger.ts")
 
-// symptomHistory, updateEntry, deleteAllEntries
-
 describe("SymptomHistoryProvider", () => {
   describe("updateEntry", () => {
     describe("when updating a day's entry that is currently No Data", () => {

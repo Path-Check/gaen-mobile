@@ -69,7 +69,7 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   ) => {
     try {
       if (entry.kind === "Symptoms") {
-        await NativeModule.updateEntry(entry, newSymptoms)
+        await NativeModule.updateEntry(entry.id, entry.date, newSymptoms)
         await fetchEntries()
         return SUCCESS_RESPONSE
       } else {
