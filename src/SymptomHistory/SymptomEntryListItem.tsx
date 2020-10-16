@@ -25,9 +25,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     StackNavigationProp<SymptomHistoryStackParams>
   >()
 
-  const { date } = entry
-
-  const dayJsDate = posixToDayjs(date)
+  const dayJsDate = posixToDayjs(entry.date)
 
   if (!dayJsDate) {
     return null
@@ -35,7 +33,7 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
 
   const handleOnPressEdit = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms, {
-      date,
+      symptomEntry: entry,
     })
   }
 

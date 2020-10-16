@@ -9,12 +9,12 @@ import SymptomHistoryScreen from "../SymptomHistory/"
 import SelectSymptomsScreen from "../SymptomHistory/SelectSymptoms"
 import { SymptomHistoryStackScreens } from "./index"
 import { applyModalHeader } from "./ModalHeader"
-import { Posix } from "../utils/dateTime"
+import { SymptomEntry } from "../SymptomHistory/symptomHistory"
 
 export type SymptomHistoryStackParams = {
   SymptomHistory: undefined
   AtRiskRecommendation: undefined
-  SelectSymptoms: { date: Posix }
+  SelectSymptoms: { symptomEntry: SymptomEntry }
 }
 const Stack = createStackNavigator<SymptomHistoryStackParams>()
 

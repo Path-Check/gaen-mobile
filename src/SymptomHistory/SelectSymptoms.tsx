@@ -14,28 +14,23 @@ import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
-import { isSameDay, posixToDayjs } from "../utils/dateTime"
+import { posixToDayjs } from "../utils/dateTime"
 import Checkbox from "./Checkbox"
 
 import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
-  const { symptomHistory } = useSymptomHistoryContext()
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
 
-  const entryDate = route.params?.date
-  const entryToEdit = symptomHistory.find((el: SymptomEntry) => {
-    return isSameDay(el.date, entryDate)
-  })
-
-  if (entryToEdit) {
-    return <SelectSymptomsForm entryToEdit={entryToEdit} />
-  } else {
-    return <Text>{"This should never happen"}</Text>
+  const entry = route.params?.symptomEntry || {
+    kind: "NoData",
+    date: Date.now(),
   }
+
+  return <SelectSymptomsForm entryToEdit={entry} />
 }
 
 interface SelectSymptomsFormProps {
@@ -52,7 +47,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   const { updateEntry } = useSymptomHistoryContext()
 
   const initialSelectedSymptoms =
-    entryToEdit?.kind === "Symptoms"
+    entryToEdit.kind === "Symptoms"
       ? entryToEdit.symptoms
       : new Set<Symptom.Symptom>()
 
@@ -61,7 +56,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   >(initialSelectedSymptoms)
 
   const handleOnPressSymptom = (selectedSymptom: Symptom.Symptom) => {
-    const nextSymptoms = new Set(Array.from(selectedSymptoms))
+    const nextSymptoms = new Set(selectedSymptoms)
     if (nextSymptoms.has(selectedSymptom)) {
       nextSymptoms.delete(selectedSymptom)
     } else {
@@ -101,7 +96,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 
   const hasNoSymptomsSelected = selectedSymptoms.size === 0
 
-  const dayJsDate = entryToEdit && posixToDayjs(entryToEdit?.date)
+  const dayJsDate = posixToDayjs(entryToEdit.date)
   const dateText = dayJsDate?.local().format("MMMM D, YYYY")
 
   return (

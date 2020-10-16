@@ -63,18 +63,20 @@ describe("SymptomEntryListItem", () => {
         navigate: navigateSpy,
       })
       const date = Date.parse("2020-1-1")
-      const entry: SymptomEntry = {
+      const symptomEntry: SymptomEntry = {
         kind: "NoData",
         date,
       }
 
-      const { getByLabelText } = render(<SymptomEntryListItem entry={entry} />)
+      const { getByLabelText } = render(
+        <SymptomEntryListItem entry={symptomEntry} />,
+      )
 
       const editButton = getByLabelText("Edit - January 1, 2020")
       fireEvent.press(editButton)
 
       const expectedScreen = SymptomHistoryStackScreens.SelectSymptoms
-      const expectedParams = { date }
+      const expectedParams = { symptomEntry }
       await waitFor(() => {
         expect(navigateSpy).toHaveBeenCalledWith(expectedScreen, expectedParams)
       })
