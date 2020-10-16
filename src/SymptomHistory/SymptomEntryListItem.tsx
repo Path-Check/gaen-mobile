@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react"
-import { StyleSheet, TouchableOpacity, View } from "react-native"
+import React, { FunctionComponent, ReactNode } from "react"
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -48,16 +48,39 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     )
   }
 
-  const determineCardContent = (entry: SymptomEntry) => {
+  interface CardConfig {
+    content: ReactNode
+    containerStyle: ViewStyle
+  }
+
+  const determineCardConfig = (entry: SymptomEntry): CardConfig => {
     switch (entry.kind) {
       case "NoUserInput": {
-        return <Text>{t("symptom_history.no_data")}</Text>
+        return {
+          content: <Text>{t("symptom_history.no_data")}</Text>,
+          containerStyle: {
+            ...style.symptomEntryContainer,
+            backgroundColor: "gray",
+          },
+        }
       }
       case "UserInput": {
         if (entry.symptoms.size > 0) {
-          return [...entry.symptoms].map(toSymptomText)
+          return {
+            content: <View>{[...entry.symptoms].map(toSymptomText)}</View>,
+            containerStyle: {
+              ...style.symptomEntryContainer,
+              backgroundColor: "red",
+            },
+          }
         } else {
-          return <Text>{t("symptom_history.no_symptoms")}</Text>
+          return {
+            content: <Text>{t("symptom_history.no_symptoms")}</Text>,
+            containerStyle: {
+              ...style.symptomEntryContainer,
+              backgroundColor: "green",
+            },
+          }
         }
       }
     }
@@ -67,21 +90,18 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     <TouchableOpacity
       onPress={handleOnPressEdit}
       accessibilityLabel={`${t("common.edit")} - ${dateText}`}
+      style={}
     >
-      <View style={style.symptomLogContainer}>
-        <View style={style.timeContainer}>
-          <Text style={style.datetimeText}>{dateText}</Text>
-        </View>
-        <View style={style.symptomsContainer}>
-          {determineCardContent(entry)}
-        </View>
+      <View style={style.timeContainer}>
+        <Text style={style.datetimeText}>{dateText}</Text>
       </View>
+      <View style={style.symptomsContainer}>{determineCardContent(entry)}</View>
     </TouchableOpacity>
   )
 }
 
 const style = StyleSheet.create({
-  symptomLogContainer: {
+  symptomEntryContainer: {
     ...Affordances.floatingContainer,
     paddingTop: 0,
     paddingBottom: Spacing.small,
