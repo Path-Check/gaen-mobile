@@ -6,7 +6,7 @@ import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
   useSymptomHistoryContext,
 } from "./SymptomHistoryContext"
-import { SymptomEntry, sortByDate } from "./symptomHistory"
+import { SymptomEntry } from "./symptomHistory"
 import { Text, StatusBar } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
@@ -18,8 +18,6 @@ const SymptomHistory: FunctionComponent = () => {
   const { t } = useTranslation()
   const { symptomHistory } = useSymptomHistoryContext()
 
-  const history = sortByDate(symptomHistory)
-
   return (
     <View style={style.outerContainer}>
       <StatusBar backgroundColor={Colors.primaryLightBackground} />
@@ -29,15 +27,15 @@ const SymptomHistory: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <Text style={style.headerText}>
-          {t("symptom_checker.symptom_history")}
+          {t("symptom_history.symptom_history")}
         </Text>
         <Text style={style.subHeaderText}>
-          {t("symptom_checker.to_protect_your_privacy", {
+          {t("symptom_history.to_protect_your_privacy", {
             days: DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
           })}
         </Text>
 
-        {history.map((entry: SymptomEntry) => {
+        {symptomHistory.map((entry: SymptomEntry) => {
           return <SymptomEntryListItem key={entry.date} entry={entry} />
         })}
       </ScrollView>

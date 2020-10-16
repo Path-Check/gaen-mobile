@@ -19,22 +19,9 @@ export type SymptomEntry = NoData | Symptoms
 
 export type SymptomHistory = SymptomEntry[]
 
-export type SymptomHistoryByDay = Record<Posix, SymptomEntry>
-
 export interface SymptomEntryAttributes {
   date: Posix
   symptoms: Set<Symptom.Symptom>
-}
-
-export const sortByDate = (entries: SymptomEntry[]): SymptomEntry[] => {
-  const compareEntries = (
-    entryA: SymptomEntry,
-    entryB: SymptomEntry,
-  ): number => {
-    return Math.sign(entryB.date - entryA.date)
-  }
-
-  return entries.sort(compareEntries)
 }
 
 export type RawEntry = {
@@ -111,17 +98,18 @@ const combineEntries = (
   entryA: SymptomEntry,
   entryB: SymptomEntry,
 ): SymptomEntry => {
-  switch ([entryA.kind, entryB.kind]) {
-    case ["NoData", "NoData"]: {
+  const entries = `${entryA.kind} ${entryB.kind}`
+  switch (entries) {
+    case "NoData NoData": {
       return entryA
     }
-    case ["NoData", "Symptoms"]: {
+    case "NoData Symptoms": {
       return entryB
     }
-    case ["Symptoms", "NoData"]: {
+    case "Symptoms NoData": {
       return entryA
     }
-    case ["Symptoms", "Symptoms"]: {
+    case "Symptoms Symptoms": {
       const a = entryA as Symptoms
       const b = entryB as Symptoms
       return {

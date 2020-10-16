@@ -30,10 +30,10 @@
     "save": "Save",
     "settings": "Open Settings",
     "skip": "Skip",
-    "success": "Success",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
-    "submit": "Submit"
+    "submit": "Submit",
+    "success": "Success"
   },
   "covid_data": {
     "cases_today": "Cases today",
@@ -195,7 +195,7 @@
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_checker": "Symptom Checker"
+    "symptom_history": "Symptom Checker"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
@@ -384,30 +384,13 @@
     "stop_sharing_data": "Stop Sharing Data",
     "you_are_sharing_data": "You are sharing anonymized data"
   },
-  "symptom_checker": {
-    "no_symptoms": "No symptoms",
+  "symptom_history": {
     "errors": {
-      "adding_symptoms": "Sorry, we could not log your symptoms",
-      "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
       "updating_symptoms": "Sorry, we could not update your symptoms"
     },
+    "no_data": "No data",
+    "no_symptoms": "No symptoms",
     "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
-  },
-  "symptoms": {
-    "body_aches": "Body aches",
-    "chest_pain_or_pressure": "Chest pain or pressure",
-    "chills": "Chills",
-    "cough": "Cough",
-    "diarrhea": "Diarrhea",
-    "difficulty_breathing": "Difficulty breathing",
-    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
-    "fever": "Fever",
-    "lightheadedness": "Lightheadedness",
-    "loss_of_appetite": "Loss of appetite",
-    "loss_of_smell": "Loss of smell",
-    "loss_of_taste": "Loss of taste",
-    "other": "Other",
-    "vomiting": "Vomiting"
   }
 }

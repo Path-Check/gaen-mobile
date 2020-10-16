@@ -199,7 +199,7 @@
     "exposure_history": "接觸史",
     "home": "工作介面",
     "more_info": "更多資訊",
-    "symptom_checker": "症狀檢驗"
+    "symptom_history": "症狀檢驗"
   },
   "onboarding": {
     "activation_header_title": "應用程式設定",
@@ -383,7 +383,7 @@
     "stop_sharing_data": "停止分享數據",
     "you_are_sharing_data": "您正在分享匿名數據"
   },
-  "symptom_checker": {
+  "symptom_history": {
     "delete_entry": "刪除條目",
     "entry_deleted": "條目已刪除",
     "errors": {

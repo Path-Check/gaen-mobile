@@ -13,7 +13,6 @@ import {
 } from "./symptomHistory"
 import { Symptom } from "./symptom"
 import * as NativeModule from "./nativeModule"
-import { Posix } from "../utils/dateTime"
 import {
   failureResponse,
   OperationResponse,
@@ -23,19 +22,14 @@ import {
 export type SymptomHistoryState = {
   symptomHistory: SymptomHistory
   updateEntry: (
-    date: Posix,
-    symptoms: Set<Symptom>,
-    oldEntry: SymptomEntry,
+    entry: SymptomEntry,
+    newSymptoms: Set<Symptom>,
   ) => Promise<OperationResponse>
   deleteAllEntries: () => Promise<OperationResponse>
 }
 const initialState: SymptomHistoryState = {
   symptomHistory: [],
-  updateEntry: (
-    _date: Posix,
-    _symptoms: Set<Symptom>,
-    _oldEntry: SymptomEntry,
-  ) => {
+  updateEntry: (_entry: SymptomEntry, _newSymptoms: Set<Symptom>) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
   deleteAllEntries: () => {
@@ -70,17 +64,16 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const updateEntry = async (
-    date: Posix,
-    symptoms: Set<Symptom>,
-    oldEntry: SymptomEntry,
+    entry: SymptomEntry,
+    newSymptoms: Set<Symptom>,
   ) => {
     try {
-      if (oldEntry?.kind === "Symptoms") {
-        await NativeModule.updateEntry(oldEntry.id, date, symptoms)
+      if (entry.kind === "Symptoms") {
+        await NativeModule.updateEntry(entry, newSymptoms)
         await fetchEntries()
         return SUCCESS_RESPONSE
       } else {
-        await NativeModule.createEntry(date, symptoms)
+        await NativeModule.createEntry(entry.date, newSymptoms)
         await fetchEntries()
         return SUCCESS_RESPONSE
       }

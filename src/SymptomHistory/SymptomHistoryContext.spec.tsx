@@ -19,21 +19,16 @@ jest.mock("../logger.ts")
 
 describe("SymptomHistoryProvider", () => {
   describe("updateEntry", () => {
-    describe("when updating a days entry that is currently No Data", () => {
-      it("creates a new entry", async () => {
-        const createEntrySpy = (NativeModule.createEntry as jest.Mock).mockResolvedValueOnce(
-          {},
-        )
-        const mockedDate = Date.parse("2020-09-22 10:00")
-        const dateSpy = jest.spyOn(Date, "now")
-        dateSpy.mockReturnValue(mockedDate)
-
+    describe("when updating a day's entry that is currently No Data", () => {
+      it("asks the native layer to create a new entry", async () => {
+        const createEntrySpy = NativeModule.createEntry as jest.Mock
+        createEntrySpy.mockResolvedValueOnce({})
+        const date = Date.parse("2020-09-22 10:00")
         const symptoms = new Set<Symptom>(["cough"])
-        const symptomEntry: NoData = {
+        const entry: NoData = {
           kind: "NoData",
-          date: mockedDate,
+          date,
         }
-        const date = Date.now()
 
         const AddCheckLogSymptoms = () => {
           const { updateEntry } = useSymptomHistoryContext()
@@ -42,7 +37,7 @@ describe("SymptomHistoryProvider", () => {
             <TouchableOpacity
               accessibilityLabel="add-log-entry"
               onPress={() => {
-                updateEntry(date, symptoms, symptomEntry)
+                updateEntry(entry, symptoms)
               }}
             />
           )
@@ -62,35 +57,31 @@ describe("SymptomHistoryProvider", () => {
       })
     })
 
-    describe("when updating a days entry that already has sympotoms", () => {
+    describe("when updating a day's entry that already has symptoms", () => {
       it("updates the existing entry", async () => {
         const updateEntrySpy = NativeModule.updateEntry as jest.Mock
         updateEntrySpy.mockResolvedValueOnce({})
-        const mockedDate = Date.parse("2020-09-22 10:00")
-        jest.spyOn(Date, "now").mockReturnValue(mockedDate)
+        const date = Date.parse("2020-09-22 10:00")
 
         const symptoms = new Set<Symptom>(["cough"])
         const testId = "asdf-asdf-asdf-asdf"
-        const symptomEntry: Symptoms = {
+        const entry: Symptoms = {
           id: testId,
           kind: "Symptoms",
-          date: mockedDate,
+          date,
           symptoms,
         }
 
-        const date = Date.now()
         const AddCheckLogSymptoms = () => {
           const { updateEntry } = useSymptomHistoryContext()
 
           return (
-            <>
-              <TouchableOpacity
-                accessibilityLabel="add-log-entry"
-                onPress={() => {
-                  updateEntry(date, symptoms, symptomEntry)
-                }}
-              />
-            </>
+            <TouchableOpacity
+              accessibilityLabel="add-log-entry"
+              onPress={() => {
+                updateEntry(entry, symptoms)
+              }}
+            />
           )
         }
 
@@ -103,7 +94,7 @@ describe("SymptomHistoryProvider", () => {
         fireEvent.press(getByLabelText("add-log-entry"))
 
         await waitFor(() => {
-          expect(updateEntrySpy).toHaveBeenCalledWith(testId, date, symptoms)
+          expect(updateEntrySpy).toHaveBeenCalledWith(entry, symptoms)
         })
       })
 
@@ -120,22 +111,15 @@ describe("SymptomHistoryProvider", () => {
           const { updateEntry } = useSymptomHistoryContext()
 
           const date = Date.now()
-          const symptomEntry: NoData = { kind: "NoData", date }
+          const entry: NoData = { kind: "NoData", date }
 
           return (
-            <>
-              <TouchableOpacity
-                accessibilityLabel="add-log-entry"
-                onPress={async () => {
-                  const result = await updateEntry(
-                    date,
-                    new Set<Symptom>(),
-                    symptomEntry,
-                  )
-                  resultSpy(result)
-                }}
-              />
-            </>
+            <TouchableOpacity
+              accessibilityLabel="add-log-entry"
+              onPress={async () => {
+                updateEntry(entry, new Set<Symptom>()).then(resultSpy)
+              }}
+            />
           )
         }
 

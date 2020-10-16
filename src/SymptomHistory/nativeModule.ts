@@ -1,7 +1,7 @@
 import { NativeModules } from "react-native"
 
 import { Symptom } from "./symptom"
-import { RawEntry } from "./symptomHistory"
+import { RawEntry, SymptomEntry } from "./symptomHistory"
 import { Posix } from "../utils/dateTime"
 
 // Symptom Log Entry Module
@@ -15,15 +15,19 @@ export const createEntry = (
   return symptomHistoryModule.addSymptomLogEntry(entry)
 }
 
-type UUID = string
-
 export const updateEntry = (
-  id: UUID,
-  date: Posix,
+  entry: SymptomEntry,
   symptoms: Set<Symptom>,
 ): Promise<void> => {
-  const entry = { id, date, symptoms: Array.from(symptoms) }
-  return symptomHistoryModule.updateSymptomLogEntry(entry)
+  if (entry.kind === "NoData") {
+    return Promise.reject("")
+  } // Talk to john about this
+  const nextEntry = {
+    id: entry.id,
+    date: entry.date,
+    symptoms: Array.from(symptoms),
+  }
+  return symptomHistoryModule.updateSymptomLogEntry(nextEntry)
 }
 
 export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {

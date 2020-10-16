@@ -34,7 +34,7 @@ describe("SelectSymptomsForm", () => {
             updateEntry: updateEntrySpy,
           })}
         >
-          <SelectSymptomsForm entryToEdit={entry} />
+          <SelectSymptomsForm entry={entry} />
         </SymptomHistoryContext.Provider>,
       )
 
@@ -43,11 +43,7 @@ describe("SelectSymptomsForm", () => {
 
       const expectedSymptoms = new Set<Symptom>(["cough", "fever"])
       await waitFor(() => {
-        expect(updateEntrySpy).toHaveBeenCalledWith(
-          date,
-          expectedSymptoms,
-          entry,
-        )
+        expect(updateEntrySpy).toHaveBeenCalledWith(entry, expectedSymptoms)
       })
     })
 
@@ -68,7 +64,7 @@ describe("SelectSymptomsForm", () => {
             updateEntry: updateEntrySpy,
           })}
         >
-          <SelectSymptomsForm entryToEdit={entry} />
+          <SelectSymptomsForm entry={entry} />
         </SymptomHistoryContext.Provider>,
       )
 

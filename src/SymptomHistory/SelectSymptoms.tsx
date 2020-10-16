@@ -30,15 +30,15 @@ const SelectSymptomsScreen: FunctionComponent = () => {
     date: Date.now(),
   }
 
-  return <SelectSymptomsForm entryToEdit={entry} />
+  return <SelectSymptomsForm entry={entry} />
 }
 
 interface SelectSymptomsFormProps {
-  entryToEdit: SymptomEntry
+  entry: SymptomEntry
 }
 
 export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
-  entryToEdit,
+  entry,
 }) => {
   useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
@@ -47,9 +47,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   const { updateEntry } = useSymptomHistoryContext()
 
   const initialSelectedSymptoms =
-    entryToEdit.kind === "Symptoms"
-      ? entryToEdit.symptoms
-      : new Set<Symptom.Symptom>()
+    entry.kind === "Symptoms" ? entry.symptoms : new Set<Symptom.Symptom>()
 
   const [selectedSymptoms, setSelectedSymptoms] = useState<
     Set<Symptom.Symptom>
@@ -70,17 +68,13 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   }
 
   const handleOnPressSave = async () => {
-    const result = await updateEntry(
-      entryToEdit.date,
-      selectedSymptoms,
-      entryToEdit,
-    )
+    const result = await updateEntry(entry, selectedSymptoms)
 
     if (result.kind === "success") {
       completeOnPressSave()
     } else {
       showMessage({
-        message: t("symptom_checker.errors.updating_symptoms"),
+        message: t("symptom_history.errors.updating_symptoms"),
         ...Affordances.successFlashMessageOptions,
       })
     }
@@ -96,7 +90,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 
   const hasNoSymptomsSelected = selectedSymptoms.size === 0
 
-  const dayJsDate = posixToDayjs(entryToEdit.date)
+  const dayJsDate = posixToDayjs(entry.date)
   const dateText = dayJsDate?.local().format("MMMM D, YYYY")
 
   return (
@@ -110,7 +104,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
           <View style={style.noSymptomsCheckbox}>
             <Checkbox
               key={"no_symptoms"}
-              label={t("symptom_checker.no_symptoms")}
+              label={t("symptom_history.no_symptoms")}
               onPress={handleOnPressNoSymptoms}
               checked={hasNoSymptomsSelected}
             />

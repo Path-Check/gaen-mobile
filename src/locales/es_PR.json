@@ -169,7 +169,7 @@
     "exposure_history": "Historial de exposición",
     "home": "Página de Inicio",
     "more_info": "Más información",
-    "symptom_checker": "symptom_checker"
+    "symptom_history": "symptom_history"
   },
   "onboarding": {
     "activation_header_title": "Configuración de la Aplicación",
@@ -340,7 +340,7 @@
     "stop_sharing_data": "Dejar de compartir datos",
     "you_are_sharing_data": "Estás compartiendo datos anónimos"
   },
-  "symptom_checker": {
+  "symptom_history": {
     "delete_entry": "Borrar entrada",
     "entry_deleted": "Entrada eliminada",
     "errors": {

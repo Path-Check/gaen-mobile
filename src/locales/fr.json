@@ -151,7 +151,7 @@
     "stop_sharing_data": "Arrêt du partage des données",
     "you_are_sharing_data": "Vous partagez des données anonymisées"
   },
-  "symptom_checker": {
+  "symptom_history": {
     "delete_entry": "Supprimer l'entrée",
     "entry_deleted": "Entrée supprimée",
     "errors": {

@@ -17,7 +17,7 @@ type SymptomEntryListItemProps = {
   entry: SymptomEntry
 }
 
-const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
+const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   entry,
 }) => {
   const { t } = useTranslation()
@@ -51,14 +51,13 @@ const SymptomLogListItem: FunctionComponent<SymptomEntryListItemProps> = ({
   const determineCardContent = (entry: SymptomEntry) => {
     switch (entry.kind) {
       case "NoData": {
-        return <Text>{"No Data"}</Text>
+        return <Text>{t("symptom_history.no_data")}</Text>
       }
       case "Symptoms": {
-        const symptoms = Array.from(entry.symptoms)
-        if (symptoms.length > 0) {
-          return symptoms.map(toSymptomText)
+        if (entry.symptoms.size > 0) {
+          return [...entry.symptoms].map(toSymptomText)
         } else {
-          return <Text>{"No Symptoms"}</Text>
+          return <Text>{t("symptom_history.no_symptoms")}</Text>
         }
       }
     }
@@ -114,4 +113,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SymptomLogListItem
+export default SymptomEntryListItem
