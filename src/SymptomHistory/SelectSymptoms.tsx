@@ -17,7 +17,14 @@ import { showMessage } from "react-native-flash-message"
 import { posixToDayjs } from "../utils/dateTime"
 import Checkbox from "./Checkbox"
 
-import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
+import {
+  Affordances,
+  Buttons,
+  Colors,
+  Outlines,
+  Spacing,
+  Typography,
+} from "../styles"
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
@@ -158,14 +165,10 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral50,
   },
   button: {
-    alignItems: "center",
-    paddingTop: Spacing.medium,
-    paddingBottom: Spacing.medium,
-    backgroundColor: Colors.primary100,
+    ...Buttons.fixedBottom,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
-    fontSize: Typography.large,
+    ...Typography.buttonFixedBottom,
   },
 })
 
