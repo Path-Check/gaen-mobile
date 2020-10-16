@@ -30,8 +30,7 @@
       "tracing_off_header": "Powiadomienia o narażeniu wyłączone",
       "tracing_off_subheader": "Włącz powiadomienia o narażeniu, aby otrzymywać informacje o możliwych ekspozycjach"
     },
-    "call_emergency_services": "Służby ratunkowe",
-    "open_settings": "Otwórz ustawienia"
+    "call_emergency_services": "Służby ratunkowe"
   },
   "label": {
     "launch_enable_notif": "Włącz powiadomienia",
@@ -51,8 +50,5 @@
     "exposure_history": "Historia Ekspozycji",
     "home": "Strona główna",
     "legal": "Informacje prawne"
-  },
-  "settings": {
-    "delete_confirmation_header": "Jesteś pewien?"
   }
 }

@@ -1,11 +1,11 @@
 {
+  "common": {
+    "success": "Tawefich"
+  },
   "navigation": {
     "more_info": "Pwan ekoch porous"
   },
   "screen_titles": {
     "home": "Nepoputan"
-  },
-  "settings": {
-    "delete_confirmation_header": "Fokun pun ina?"
   }
 }
