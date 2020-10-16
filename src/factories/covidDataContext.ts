@@ -3,7 +3,14 @@ import {
   CovidDataContextState,
   CovidDataRequestStatus,
 } from "../CovidDataContext"
+import covidData from "./covidData"
 
 export default Factory.define<CovidDataContextState>(() => ({
-  covidDataRequest: { status: CovidDataRequestStatus.NOT_STARTED, data: [] },
+  stateAbbreviation: "state",
+  covidDataRequest: {
+    status: CovidDataRequestStatus.MISSING_INFO,
+    todayData: covidData.build(),
+    trendReferenceData: covidData.build(),
+    collectionForTrend: [],
+  },
 }))

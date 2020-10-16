@@ -45,5 +45,8 @@
   "screen_titles": {
     "home": "Главная страница",
     "legal": "Правовая информация"
+  },
+  "settings": {
+    "delete_confirmation_header": "Вы уверены?"
   }
 }

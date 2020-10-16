@@ -7,7 +7,7 @@ export default Factory.define<Configuration>(() => ({
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
   displayCovidData: false,
-  displayMyHealth: false,
+  displaySymptomHistory: false,
   displaySelfAssessment: false,
   emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",

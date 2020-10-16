@@ -133,6 +133,7 @@ export const ModalStackScreens: {
 export type SettingsStackScreen =
   | "Settings"
   | "Legal"
+  | "DeleteConfirmation"
   | "ENDebugMenu"
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
@@ -143,6 +144,7 @@ export const SettingsStackScreens: {
 } = {
   Settings: "Settings",
   Legal: "Legal",
+  DeleteConfirmation: "DeleteConfirmation",
   ENDebugMenu: "ENDebugMenu",
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
@@ -176,12 +178,12 @@ export const WelcomeStackScreens: {
   Welcome: "Welcome",
 }
 
-export type MyHealthStackScreen = "MyHealth" | "SelectSymptoms"
+export type SympotomHistoryStackScreen = "SymptomHistory" | "SelectSymptoms"
 
-export const MyHealthStackScreens: {
-  [key in MyHealthStackScreen]: MyHealthStackScreen
+export const SymptomHistoryStackScreens: {
+  [key in SympotomHistoryStackScreen]: SympotomHistoryStackScreen
 } = {
-  MyHealth: "MyHealth",
+  SymptomHistory: "SymptomHistory",
   SelectSymptoms: "SelectSymptoms",
 }
 
@@ -216,7 +218,7 @@ export type Stack =
   | "HowItWorks"
   | "Settings"
   | "Home"
-  | "MyHealth"
+  | "SymptomHistory"
 
 export const Stacks: { [key in Stack]: Stack } = {
   Activation: "Activation",
@@ -226,7 +228,7 @@ export const Stacks: { [key in Stack]: Stack } = {
   HowItWorks: "HowItWorks",
   Settings: "Settings",
   Home: "Home",
-  MyHealth: "MyHealth",
+  SymptomHistory: "SymptomHistory",
 }
 
 export const useStatusBarEffect = (

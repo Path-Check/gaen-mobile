@@ -208,11 +208,15 @@
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Dibug",
     "exposure_history": "Historian i ninayi",
     "exposures": "man ninayi  or mantinanmi",
     "home": "Guma",
-    "legal": "Legat"
+    "legal": "Legat",
+    "location": "Lokasion",
+    "protect_privacy": "Taimanu in protehi i iyo-mu privacy",
+    "select_language": "Achig i lenguahi"
   },
   "settings": {
     "i_understand_and_consent": "Hu Komprendi yan hu Konsienti"

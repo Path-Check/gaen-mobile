@@ -2,7 +2,9 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { Linking } from "react-native"
 
-import ConnectScreen from "./index"
+import { SettingsStackScreens } from "../navigation"
+import SettingsScreen from "./index"
+import { useNavigation } from "@react-navigation/native"
 import { useApplicationInfo } from "../hooks/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
@@ -15,16 +17,23 @@ jest.mock("@react-navigation/native")
 jest.mock("../configuration/authorityLinks")
 jest.mock("../hooks/useApplicationInfo")
 
-describe("Connect", () => {
-  it("shows the name of the application", () => {
-    const applicationName = "application name"
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName,
-      versionInfo: "versionInfo",
-    })
-    const { getByText } = render(<ConnectScreen />)
+describe("Settings", () => {
+  describe("when the user deletes their data", () => {
+    it("navigates them to a confirmation screen", () => {
+      const navigateSpy = jest.fn()
+      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+      ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
+        applicationName: "name",
+      })
 
-    expect(getByText(applicationName)).toBeDefined()
+      const { getByLabelText } = render(<SettingsScreen />)
+
+      const deleteMyDataButton = getByLabelText("Delete My Data")
+      fireEvent.press(deleteMyDataButton)
+      expect(navigateSpy).toHaveBeenCalledWith(
+        SettingsStackScreens.DeleteConfirmation,
+      )
+    })
   })
 
   it("shows the build and version number of the application", () => {
@@ -36,7 +45,7 @@ describe("Connect", () => {
       versionInfo,
     })
 
-    const { getByText } = render(<ConnectScreen />)
+    const { getByText } = render(<SettingsScreen />)
 
     expect(getByText("Version:")).toBeDefined()
     expect(getByText(versionInfo)).toBeDefined()
@@ -53,7 +62,7 @@ describe("Connect", () => {
       versionInfo: "versionInfo",
     })
 
-    const { getByText } = render(<ConnectScreen />)
+    const { getByText } = render(<SettingsScreen />)
 
     expect(getByText(`${mockOsName} v${mockOsVersion}`)).toBeDefined()
   })
@@ -71,7 +80,7 @@ describe("Connect", () => {
       <ConfigurationContext.Provider
         value={factories.configurationContext.build({ healthAuthorityName })}
       >
-        <ConnectScreen />
+        <SettingsScreen />
       </ConfigurationContext.Provider>,
     )
 
@@ -95,7 +104,7 @@ describe("Connect", () => {
     })
     const openURLSpy = jest.spyOn(Linking, "openURL")
 
-    const { getByLabelText } = render(<ConnectScreen />)
+    const { getByLabelText } = render(<SettingsScreen />)
 
     fireEvent.press(getByLabelText(label))
 
@@ -103,30 +112,6 @@ describe("Connect", () => {
       expect(loadAuthorityLinksSpy).toHaveBeenCalledWith("about")
       expect(applyTranslationsSpy).toHaveBeenCalledWith([], "en")
       expect(openURLSpy).toHaveBeenCalledWith(url)
-    })
-  })
-
-  it("dials the emergency phone number from the configuration", async () => {
-    const emergencyPhoneNumber = "emergencyPhoneNumber"
-
-    const openURLSpy = jest.spyOn(Linking, "openURL")
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName: "applicationName",
-      versionInfo: "versionInfo",
-    })
-
-    const { getByLabelText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({ emergencyPhoneNumber })}
-      >
-        <ConnectScreen />
-      </ConfigurationContext.Provider>,
-    )
-
-    fireEvent.press(getByLabelText("Emergency Contact"))
-
-    await waitFor(() => {
-      expect(openURLSpy).toHaveBeenCalledWith(`tel:${emergencyPhoneNumber}`)
     })
   })
 })

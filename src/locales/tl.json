@@ -208,13 +208,18 @@
     "welcome_image_label": "Isang ilustrasyon ng mga taong may suot na mask, nakakonekta tulad ng mga node sa isang network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Pag-debug",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "exposures": "Mga Pagkakalantad",
     "home": "Home o Umpisa",
-    "legal": "Ligal"
+    "legal": "Ligal",
+    "location": "Lokasyon",
+    "protect_privacy": "Paano namin protektahan ang iyong privacy",
+    "select_language": "Piliin ang Wika"
   },
   "settings": {
+    "delete_confirmation_header": "Sigurado ka ba?",
     "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako"
   }
 }

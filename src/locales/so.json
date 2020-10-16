@@ -108,7 +108,7 @@
       "location_disabled_error_title": "Uga Oggolow gudaha Dejimaha",
       "location_header": "Goobta (Location)",
       "proximity_tracing_header": "Raadraaca Isku Dhawaanshaha",
-      "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan",
+      "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, oo naga caawin kara xakamaynta cudurka COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Ma shaqaynayo",
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
@@ -135,7 +135,7 @@
     "launch_get_started": "Billow haddaba",
     "launch_screen1_header": "Ku soo dhowow ",
     "privacy_policy": "Xeerka Asurnaanta",
-    "question_icon": "Calaamadda sumadda su’aasha ",
+    "question_icon": "Calaamadda sumadda su’aasha",
     "unchecked_checkbox": "Sanduuqa aan saxda lahayn"
   },
   "navigation": {
@@ -190,7 +190,7 @@
     "screen1_header": "Wadajir ahaan, waxaan xakayn karnaa faafka COVID-19",
     "screen1_image_label": "Laba qof shan sare (high five) isku bogaadinaya.",
     "screen2_button": "Ma dhowrsan tahay qarsoodigayga?",
-    "screen2_header": "Telefoonkaaga ayaa xasuusan doona aaladaha kale ee ay kulmeen, laakiin cidna ku garan mayso. ",
+    "screen2_header": "Telefoonkaaga ayaa xasuusan doona aaladaha kale ee ay kulmeen, laakiin cidna ku garan mayso.",
     "screen2_image_label": "Laba qof oo telefoonnadooda ku jira",
     "screen3_button": "Maxaa dhacaya haddii aan ufeydsamo cudrka?",
     "screen3_header": "Wax macluumaad shaqsi ahaan la garan karo ayaa marnaba ka bixi doonin telefoonkaaga.",
@@ -206,11 +206,15 @@
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Cillad ka saarka",
     "exposure_history": "Taariikhda Ufeydsanka",
     "exposures": "Soo gaarista",
     "home": "Hoy",
-    "legal": "Sharciyeedka"
+    "legal": "Sharciyeedka",
+    "location": "Goobta (Location)",
+    "protect_privacy": "Sidaan u ilaalinno asturnaantaada",
+    "select_language": "Xulo Luqadda"
   },
   "settings": {
     "i_understand_and_consent": "Waan fahmay oo waan oggolahay"

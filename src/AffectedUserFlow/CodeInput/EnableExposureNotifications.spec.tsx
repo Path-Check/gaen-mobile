@@ -11,7 +11,7 @@ describe("EnableExposureNotifications", () => {
     const { getByText } = render(<EnableExposureNotifications />)
     expect(
       getByText(
-        "You must enable exposure notifcations to report a positive test result.",
+        "You must enable exposure notifications to report a positive test result.",
       ),
     ).toBeDefined()
     expect(getByText("Enable exposure notifications to continue")).toBeDefined()

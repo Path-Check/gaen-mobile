@@ -4,8 +4,8 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { MyHealthStackParams } from "../navigation/MyHealthStack"
-import { MyHealthStackScreens } from "../navigation"
+import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
+import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
 import { Symptom, SymptomLogEntry } from "./symptoms"
@@ -20,7 +20,9 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
   logEntry,
 }) => {
   const { t } = useTranslation()
-  const navigation = useNavigation<StackNavigationProp<MyHealthStackParams>>()
+  const navigation = useNavigation<
+    StackNavigationProp<SymptomHistoryStackParams>
+  >()
 
   const { date, symptoms } = logEntry
 
@@ -31,7 +33,7 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
   }
 
   const handleOnPressEdit = () => {
-    navigation.navigate(MyHealthStackScreens.SelectSymptoms, {
+    navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms, {
       logEntry: JSON.stringify(logEntry),
     })
   }

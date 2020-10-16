@@ -5,18 +5,18 @@ const percentageChange = (average: number, todayCases: number) => {
 }
 
 export const calculateCasesPercentageTrend = (
-  cumulativeCovidData: CovidData[],
+  trendReferenceData: CovidData,
+  collectionForTrend: CovidData[],
 ): number => {
-  if (cumulativeCovidData.length === 0) {
+  if (collectionForTrend.length === 0) {
     return 0
   }
-  const [todayData, ...pastDaysData] = cumulativeCovidData
-  const sumOfNewCases = pastDaysData.reduce((sum, covidData) => {
+  const sumOfNewCases = collectionForTrend.reduce((sum, covidData) => {
     return sum + covidData.peoplePositiveNewCasesCt
   }, 0)
-  const averageOfNewCases = sumOfNewCases / pastDaysData.length
+  const averageOfNewCases = sumOfNewCases / collectionForTrend.length
 
-  const newCasesToday = todayData.peoplePositiveNewCasesCt
+  const newCasesToday = trendReferenceData.peoplePositiveNewCasesCt
 
   return percentageChange(averageOfNewCases, newCasesToday)
 }

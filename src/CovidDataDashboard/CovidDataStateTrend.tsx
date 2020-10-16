@@ -14,12 +14,14 @@ import { Icons } from "../assets"
 import { Colors, Typography, Spacing, Outlines, Iconography } from "../styles"
 
 type CovidDataStateTrendProps = {
-  lastWeekData: CovidData[]
+  trendReferenceData: CovidData
+  collectionForTrend: CovidData[]
   stateAbbreviation: string
 }
 
 const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
-  lastWeekData,
+  trendReferenceData,
+  collectionForTrend,
   stateAbbreviation,
 }) => {
   const { t } = useTranslation()
@@ -33,8 +35,10 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
   }
 
   useEffect(() => {
-    setCasesPercentageTrend(calculateCasesPercentageTrend(lastWeekData))
-  }, [lastWeekData])
+    setCasesPercentageTrend(
+      calculateCasesPercentageTrend(trendReferenceData, collectionForTrend),
+    )
+  }, [trendReferenceData, collectionForTrend])
 
   if (casesPercentageTrend === null) {
     return null

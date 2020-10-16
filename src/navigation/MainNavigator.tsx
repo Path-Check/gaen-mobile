@@ -105,10 +105,7 @@ const MainNavigator: FunctionComponent = () => {
             />
             <Stack.Screen name={Stacks.HowItWorks}>
               {(props) => (
-                <HowItWorksStack
-                  {...props}
-                  destinationOnSkip={Stacks.Activation}
-                />
+                <HowItWorksStack {...props} mountLocation="Onboarding" />
               )}
             </Stack.Screen>
             <Stack.Screen
@@ -143,15 +140,11 @@ const MainNavigator: FunctionComponent = () => {
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
         />
-        <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
-          {(props) => (
-            <HowItWorksStack {...props} destinationOnSkip={Stacks.Settings} />
-          )}
-        </Stack.Screen>
-        <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromConnect}>
-          {(props) => (
-            <HowItWorksStack {...props} destinationOnSkip={Stacks.Connect} />
-          )}
+        <Stack.Screen
+          name={ModalStackScreens.HowItWorksReviewFromSettings}
+          options={TransitionPresets.ModalTransition}
+        >
+          {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
         </Stack.Screen>
         <Stack.Screen
           name={ModalStackScreens.AnonymizedDataConsent}

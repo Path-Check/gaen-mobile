@@ -2,7 +2,10 @@ import React from "react"
 import { Text, TouchableOpacity } from "react-native"
 import { render, waitFor, fireEvent } from "@testing-library/react-native"
 
-import { useSymptomLogContext, SymptomLogProvider } from "./SymptomLogContext"
+import {
+  useSymptomHistoryContext,
+  SymptomHistoryProvider,
+} from "./SymptomHistoryContext"
 import {
   getLogEntries,
   createLogEntry,
@@ -15,7 +18,7 @@ jest.mock("./nativeModule.ts")
 jest.mock("./symptoms.ts")
 jest.mock("../logger.ts")
 
-describe("SymptomLogProvider", () => {
+describe("SymptomHistoryProvider", () => {
   describe("data creation", () => {
     it("allows for the creation of a new symptom log", async () => {
       const createLogEntrySpy = createLogEntry as jest.Mock
@@ -30,7 +33,7 @@ describe("SymptomLogProvider", () => {
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
       const AddCheckLogSymptoms = () => {
-        const { addLogEntry } = useSymptomLogContext()
+        const { addLogEntry } = useSymptomHistoryContext()
 
         return (
           <>
@@ -45,9 +48,9 @@ describe("SymptomLogProvider", () => {
       }
 
       const { getByLabelText } = render(
-        <SymptomLogProvider>
+        <SymptomHistoryProvider>
           <AddCheckLogSymptoms />
-        </SymptomLogProvider>,
+        </SymptomHistoryProvider>,
       )
 
       fireEvent.press(getByLabelText("add-log-entry"))
@@ -67,7 +70,7 @@ describe("SymptomLogProvider", () => {
       ;(getLogEntries as jest.Mock).mockResolvedValue([])
 
       const AddCheckInStatus = () => {
-        const { addLogEntry } = useSymptomLogContext()
+        const { addLogEntry } = useSymptomHistoryContext()
 
         return (
           <>
@@ -83,9 +86,9 @@ describe("SymptomLogProvider", () => {
       }
 
       const { getByLabelText } = render(
-        <SymptomLogProvider>
+        <SymptomHistoryProvider>
           <AddCheckInStatus />
-        </SymptomLogProvider>,
+        </SymptomHistoryProvider>,
       )
 
       fireEvent.press(getByLabelText("add-log-entry"))
@@ -105,9 +108,9 @@ describe("SymptomLogProvider", () => {
       ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)
 
       render(
-        <SymptomLogProvider>
-          <SymptomLogConsumer />
-        </SymptomLogProvider>,
+        <SymptomHistoryProvider>
+          <SymptomHistoryConsumer />
+        </SymptomHistoryProvider>,
       )
 
       await waitFor(() => {
@@ -119,9 +122,9 @@ describe("SymptomLogProvider", () => {
       const deleteSymptomLogsOlderThanSpy = deleteSymptomLogsOlderThan as jest.Mock
 
       render(
-        <SymptomLogProvider>
-          <SymptomLogConsumer />
-        </SymptomLogProvider>,
+        <SymptomHistoryProvider>
+          <SymptomHistoryConsumer />
+        </SymptomHistoryProvider>,
       )
 
       await waitFor(() => {
@@ -131,8 +134,8 @@ describe("SymptomLogProvider", () => {
   })
 })
 
-const SymptomLogConsumer = () => {
-  const { symptomLogEntries } = useSymptomLogContext()
+const SymptomHistoryConsumer = () => {
+  const { symptomLogEntries } = useSymptomHistoryContext()
 
   return <Text testID="symptom-logs">{JSON.stringify(symptomLogEntries)}</Text>
 }
