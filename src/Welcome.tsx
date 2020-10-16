@@ -8,7 +8,6 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import LinearGradient from "react-native-linear-gradient"
 
 import { StatusBar, Text, Button } from "./components"
 import { getLocalNames } from "./locales/languages"
@@ -55,19 +54,10 @@ const Welcome: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.mainContentContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressSelectLanguage}
-            style={style.languageButtonContainer}
-          >
-            <LinearGradient
-              colors={Colors.gradient10}
-              useAngle
-              angle={0}
-              angleCenter={{ x: 0.5, y: 0.5 }}
-              style={style.languageButtonContainer}
-            >
+          <TouchableOpacity onPress={handleOnPressSelectLanguage}>
+            <View style={style.languageButtonContainer}>
               <Text style={style.languageButtonText}>{languageName}</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
           <View style={style.imageAndText}>
             <Image
@@ -106,6 +96,8 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
   languageButtonContainer: {
+    marginTop: Spacing.medium,
+    backgroundColor: Colors.secondary50,
     borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.xLarge,
