@@ -92,7 +92,11 @@ describe("SymptomHistoryProvider", () => {
         fireEvent.press(getByLabelText("add-log-entry"))
 
         await waitFor(() => {
-          expect(updateEntrySpy).toHaveBeenCalledWith(entry, symptoms)
+          expect(updateEntrySpy).toHaveBeenCalledWith(
+            entry.id,
+            entry.date,
+            symptoms,
+          )
         })
       })
 
