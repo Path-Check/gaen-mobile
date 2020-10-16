@@ -1,11 +1,14 @@
 import React from "react"
-import { render } from "@testing-library/react-native"
+import { useNavigation } from "@react-navigation/native"
+import { fireEvent, render } from "@testing-library/react-native"
+
 import { SelfAssessmentContext } from "../SelfAssessmentContext"
 import Guidance from "./Guidance"
 import { factories } from "../factories"
 import { SymptomGroup } from "./selfAssessment"
 
 jest.mock("@react-navigation/native")
+;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 describe("Guidance", () => {
   it("displays the appropriate heading for primary 1 symptoms", () => {
@@ -65,6 +68,22 @@ describe("Guidance", () => {
 
     expect(queryByText(/Good to hear you’re feeling fine./)).not.toBeNull()
     expect(queryByText(/Your symptoms may be related to COVID-19/)).toBeNull()
+  })
+
+  it("allows the user to navigate back to the exposure history screen", () => {
+    const navigateSpy = jest.fn()
+    ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+    const context = factories.selfAssessmentContext.build({
+      symptomGroup: SymptomGroup.ASYMPTOMATIC,
+    })
+    const { getByLabelText } = render(
+      <SelfAssessmentContext.Provider value={context}>
+        <Guidance />
+      </SelfAssessmentContext.Provider>,
+    )
+
+    fireEvent.press(getByLabelText("Done"))
+    expect(navigateSpy).toHaveBeenCalledWith("ExposureHistoryFlow")
   })
 
   describe("displaying instructions", () => {
