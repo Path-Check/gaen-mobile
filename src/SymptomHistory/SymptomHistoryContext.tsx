@@ -29,7 +29,7 @@ export type SymptomHistoryState = {
 }
 const initialState: SymptomHistoryState = {
   symptomHistory: [],
-  updateEntry: (_entry: SymptomEntry, _newSymptoms: Set<Symptom>) => {
+  updateEntry: (_entry: SymptomEntry, _newUserInput: Set<Symptom>) => {
     return Promise.resolve(SUCCESS_RESPONSE)
   },
   deleteAllEntries: () => {
@@ -68,7 +68,7 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
     newSymptoms: Set<Symptom>,
   ) => {
     try {
-      if (entry.kind === "Symptoms") {
+      if (entry.kind === "UserInput") {
         await NativeModule.updateEntry(entry.id, entry.date, newSymptoms)
         await fetchEntries()
         return SUCCESS_RESPONSE

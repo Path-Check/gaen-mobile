@@ -50,10 +50,10 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
 
   const determineCardContent = (entry: SymptomEntry) => {
     switch (entry.kind) {
-      case "NoData": {
+      case "NoUserInput": {
         return <Text>{t("symptom_history.no_data")}</Text>
       }
-      case "Symptoms": {
+      case "UserInput": {
         if (entry.symptoms.size > 0) {
           return [...entry.symptoms].map(toSymptomText)
         } else {

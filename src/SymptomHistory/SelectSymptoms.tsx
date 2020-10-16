@@ -26,7 +26,7 @@ const SelectSymptomsScreen: FunctionComponent = () => {
   >()
 
   const entry = route.params?.symptomEntry || {
-    kind: "NoData",
+    kind: "NoUserInput",
     date: Date.now(),
   }
 
@@ -47,7 +47,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   const { updateEntry } = useSymptomHistoryContext()
 
   const initialSelectedSymptoms =
-    entry.kind === "Symptoms" ? entry.symptoms : new Set<Symptom.Symptom>()
+    entry.kind === "UserInput" ? entry.symptoms : new Set<Symptom.Symptom>()
 
   const [selectedSymptoms, setSelectedSymptoms] = useState<
     Set<Symptom.Symptom>
@@ -88,7 +88,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
     })
   }
 
-  const hasNoSymptomsSelected = selectedSymptoms.size === 0
+  const hasNoUserInputSelected = selectedSymptoms.size === 0
 
   const dayJsDate = posixToDayjs(entry.date)
   const dateText = dayJsDate?.local().format("MMMM D, YYYY")
@@ -106,7 +106,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
               key={"no_symptoms"}
               label={t("symptom_history.no_symptoms")}
               onPress={handleOnPressNoSymptoms}
-              checked={hasNoSymptomsSelected}
+              checked={hasNoUserInputSelected}
             />
           </View>
           {Symptom.all.map((symptom: Symptom.Symptom) => {
