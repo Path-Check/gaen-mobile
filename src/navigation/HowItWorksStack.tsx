@@ -11,19 +11,17 @@ import {
   createStackNavigator,
   HeaderStyleInterpolators,
 } from "@react-navigation/stack"
-import LinearGradient from "react-native-linear-gradient"
 
 import {
   HowItWorksStackScreen,
   HowItWorksStackScreens,
-  ModalStackScreens,
   Stacks,
 } from "../navigation/index"
 import HowItWorksScreen from "../HowItWorks/HowItWorksScreen"
-import { getLocalNames } from "../locales/languages"
+import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Images } from "../assets"
-import { Colors, Outlines, Spacing, Typography } from "../styles"
+import { Colors, Spacing, Typography } from "../styles"
 
 const Stack = createStackNavigator()
 
@@ -43,16 +41,8 @@ type HowItWorksScreenDatum = {
 const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   mountLocation,
 }) => {
-  const {
-    t,
-    i18n: { language: localeCode },
-  } = useTranslation()
+  const { t } = useTranslation()
   const navigation = useNavigation()
-  const languageName = getLocalNames()[localeCode]
-
-  const handleOnPressSelectLanguage = () => {
-    navigation.navigate(ModalStackScreens.LanguageSelection)
-  }
 
   const handleOnNavigateOutOfStack = () => {
     switch (mountLocation) {
@@ -145,23 +135,6 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     )
   }
 
-  const headerLeft = () => <HeaderLeft />
-  const HeaderLeft = () => {
-    return (
-      <TouchableOpacity onPress={handleOnPressSelectLanguage}>
-        <LinearGradient
-          colors={Colors.gradient10}
-          useAngle
-          angle={0}
-          angleCenter={{ x: 0.5, y: 0.5 }}
-          style={style.languageButtonContainer}
-        >
-          <Text style={style.languageButtonText}>{languageName}</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    )
-  }
-
   const headerRight = () => <HeaderRight />
   const HeaderRight = () => {
     return (
@@ -178,7 +151,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     <Stack.Navigator
       screenOptions={{
         title: "",
-        headerLeft: headerLeft,
+        headerLeft: applyHeaderLeftBackButton(),
         headerRight: headerRight,
         headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
       }}
@@ -189,20 +162,6 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
 }
 
 const style = StyleSheet.create({
-  languageButtonContainer: {
-    borderRadius: Outlines.borderRadiusMax,
-    paddingVertical: Spacing.xxSmall,
-    paddingHorizontal: Spacing.xLarge,
-    marginBottom: Spacing.xSmall,
-    marginLeft: Spacing.small,
-  },
-  languageButtonText: {
-    ...Typography.body3,
-    letterSpacing: Typography.largeLetterSpacing,
-    color: Colors.primary125,
-    textAlign: "center",
-    textTransform: "uppercase",
-  },
   skipButtonContainer: {
     justifyContent: "center",
     alignItems: "center",

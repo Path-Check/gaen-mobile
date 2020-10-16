@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { Text, Button, GradientBackground } from "../components"
+import { Text, Button } from "../components"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
@@ -37,53 +37,51 @@ const AcceptTermsOfService: FunctionComponent = () => {
     : t("label.unchecked_checkbox")
 
   return (
-    <GradientBackground gradient={Colors.gradient10}>
-      <ScrollView
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
-      >
-        <View>
-          <Text style={style.headerText}>
-            {t("onboarding.terms_header_title")}
-          </Text>
-          <View style={style.linksContainer}>
-            <DocumentLink
-              docName={t("onboarding.privacy_policy")}
-              url={configuration.healthAuthorityPrivacyPolicyUrl}
-            />
-            <DocumentLink
-              docName={t("onboarding.eula")}
-              url={configuration.healthAuthorityEulaUrl}
-            />
-          </View>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={style.checkboxContainer}
-            onPress={() => toggleCheckbox(!boxChecked)}
-            accessible
-            accessibilityRole="checkbox"
-            accessibilityLabel={checkboxLabel}
-            testID="accept-terms-of-use-checkbox"
-          >
-            <SvgXml
-              xml={checkboxIcon}
-              fill={Colors.primary100}
-              width={Iconography.small}
-              height={Iconography.small}
-            />
-            <Text style={style.checkboxText}>
-              {t("onboarding.eula_agree_terms_of_use")}
-            </Text>
-          </TouchableOpacity>
-          <Button
-            onPress={handleOnPressNext}
-            disabled={!boxChecked}
-            label={t("common.continue")}
+    <ScrollView
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      <View>
+        <Text style={style.headerText}>
+          {t("onboarding.terms_header_title")}
+        </Text>
+        <View style={style.linksContainer}>
+          <DocumentLink
+            docName={t("onboarding.privacy_policy")}
+            url={configuration.healthAuthorityPrivacyPolicyUrl}
+          />
+          <DocumentLink
+            docName={t("onboarding.eula")}
+            url={configuration.healthAuthorityEulaUrl}
           />
         </View>
-      </ScrollView>
-    </GradientBackground>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={style.checkboxContainer}
+          onPress={() => toggleCheckbox(!boxChecked)}
+          accessible
+          accessibilityRole="checkbox"
+          accessibilityLabel={checkboxLabel}
+          testID="accept-terms-of-use-checkbox"
+        >
+          <SvgXml
+            xml={checkboxIcon}
+            fill={Colors.primary100}
+            width={Iconography.small}
+            height={Iconography.small}
+          />
+          <Text style={style.checkboxText}>
+            {t("onboarding.eula_agree_terms_of_use")}
+          </Text>
+        </TouchableOpacity>
+        <Button
+          onPress={handleOnPressNext}
+          disabled={!boxChecked}
+          label={t("common.continue")}
+        />
+      </View>
+    </ScrollView>
   )
 }
 
