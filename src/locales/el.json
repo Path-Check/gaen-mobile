@@ -171,7 +171,7 @@
     "exposure_history": "Ιστορικό Εκθέσεων",
     "home": "Αρχική",
     "more_info": "Περισσότερες Πληροφορίες",
-    "symptom_checker": "ελεγκτής συμπτωμάτων"
+    "symptom_history": "ελεγκτής συμπτωμάτων"
   },
   "onboarding": {
     "activation_header_title": "Ρύθμιση εφαρμογής",
@@ -348,7 +348,7 @@
     "stop_sharing_data": "Διακοπή κοινοποίησης δεδομένων",
     "you_are_sharing_data": "Μοιράζεστε ανώνυμα δεδομένα"
   },
-  "symptom_checker": {
+  "symptom_history": {
     "delete_entry": "Διαγραφή καταχώρησης",
     "entry_deleted": "Η καταχώρηση διαγράφηκε",
     "errors": {

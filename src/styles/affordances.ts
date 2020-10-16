@@ -21,13 +21,14 @@ export const iconBadge: ViewStyle = {
 type FlashMessageOptions = Omit<MessageOptions, "message">
 
 export const flashMessageOptions: FlashMessageOptions = {
-  floating: true,
   titleStyle: { ...Typography.header3, color: Colors.black },
+  animationDuration: 100,
+  hideStatusBar: false,
 }
 
 export const successFlashMessageOptions: FlashMessageOptions = {
   ...flashMessageOptions,
-  backgroundColor: Colors.success100,
+  backgroundColor: Colors.success50,
 }
 
 export const errorFlashMessageOptions: FlashMessageOptions = {

@@ -1,37 +1,46 @@
 import { NativeModules } from "react-native"
 
-import {
-  SymptomLogEntry,
-  SymptomLogEntryAttributes,
-} from "../SymptomHistory/symptoms"
+import { Symptom } from "./symptom"
+import { RawEntry } from "./symptomHistory"
+import { Posix } from "../utils/dateTime"
 
 // Symptom Log Entry Module
-const symptomLogEntryModule = NativeModules.SymptomLogEntryModule
+const symptomHistoryModule = NativeModules.SymptomLogEntryModule
 
-export const createLogEntry = (
-  entry: SymptomLogEntryAttributes,
+export const createEntry = (
+  date: Posix,
+  symptoms: Set<Symptom>,
 ): Promise<void> => {
-  return symptomLogEntryModule.addSymptomLogEntry(entry)
+  const entry = { date, symptoms: Array.from(symptoms) }
+  return symptomHistoryModule.addSymptomLogEntry(entry)
 }
 
-export const modifyLogEntry = (entry: SymptomLogEntry): Promise<void> => {
-  return symptomLogEntryModule.updateSymptomLogEntry(entry)
-}
-
-export const deleteLogEntry = (symptomLogEntryId: string): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogEntry(symptomLogEntryId)
-}
-
-export const getLogEntries = (): Promise<SymptomLogEntry[]> => {
-  return symptomLogEntryModule.getSymptomLogEntries()
-}
-
-export const deleteAllSymptomLogs = async (): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogs()
-}
-
-export const deleteSymptomLogsOlderThan = async (
-  days: number,
+export const updateEntry = (
+  id: string,
+  date: Posix,
+  symptoms: Set<Symptom>,
 ): Promise<void> => {
-  return symptomLogEntryModule.deleteSymptomLogsOlderThan(days)
+  const nextEntry = {
+    id,
+    date,
+    symptoms: Array.from(symptoms),
+  }
+  return symptomHistoryModule.updateSymptomLogEntry(nextEntry)
+}
+
+export const deleteEntry = (symptomLogEntryId: string): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogEntry(symptomLogEntryId)
+}
+
+export const readEntries = async (): Promise<RawEntry[]> => {
+  const rawEntries: RawEntry[] = await symptomHistoryModule.getSymptomLogEntries()
+  return rawEntries
+}
+
+export const deleteAllEntries = async (): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogs()
+}
+
+export const deleteEntriesOlderThan = async (days: number): Promise<void> => {
+  return symptomHistoryModule.deleteSymptomLogsOlderThan(days)
 }

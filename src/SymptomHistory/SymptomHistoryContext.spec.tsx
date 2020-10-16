@@ -6,106 +6,147 @@ import {
   useSymptomHistoryContext,
   SymptomHistoryProvider,
 } from "./SymptomHistoryContext"
-import {
-  getLogEntries,
-  createLogEntry,
-  deleteSymptomLogsOlderThan,
-} from "./nativeModule"
-import { Symptom } from "./symptoms"
+import * as NativeModule from "./nativeModule"
+import { Symptom } from "./symptom"
+import { NoData, Symptoms } from "./symptomHistory"
 import Logger from "../logger"
 
 jest.mock("./nativeModule.ts")
-jest.mock("./symptoms.ts")
+jest.mock("./symptom.ts")
 jest.mock("../logger.ts")
 
 describe("SymptomHistoryProvider", () => {
-  describe("data creation", () => {
-    it("allows for the creation of a new symptom log", async () => {
-      const createLogEntrySpy = createLogEntry as jest.Mock
-      createLogEntrySpy.mockResolvedValueOnce({})
-      const mockedDate = Date.parse("2020-09-22 10:00")
-      jest.spyOn(Date, "now").mockReturnValue(mockedDate)
-      const symptoms: Symptom[] = ["cough"]
-      const newLogEntry = {
-        date: mockedDate,
-        symptoms,
-      }
-      ;(getLogEntries as jest.Mock).mockResolvedValue([])
+  describe("updateEntry", () => {
+    describe("when updating a day's entry that is currently No Data", () => {
+      it("asks the native layer to create a new entry", async () => {
+        const createEntrySpy = NativeModule.createEntry as jest.Mock
+        createEntrySpy.mockResolvedValueOnce({})
+        const date = Date.parse("2020-09-22 10:00")
+        const symptoms = new Set<Symptom>(["cough"])
+        const entry: NoData = {
+          kind: "NoData",
+          date,
+        }
 
-      const AddCheckLogSymptoms = () => {
-        const { addLogEntry } = useSymptomHistoryContext()
+        const AddCheckLogSymptoms = () => {
+          const { updateEntry } = useSymptomHistoryContext()
 
-        return (
-          <>
+          return (
             <TouchableOpacity
               accessibilityLabel="add-log-entry"
               onPress={() => {
-                addLogEntry(symptoms)
+                updateEntry(entry, symptoms)
               }}
             />
-          </>
+          )
+        }
+
+        const { getByLabelText } = render(
+          <SymptomHistoryProvider>
+            <AddCheckLogSymptoms />
+          </SymptomHistoryProvider>,
         )
-      }
 
-      const { getByLabelText } = render(
-        <SymptomHistoryProvider>
-          <AddCheckLogSymptoms />
-        </SymptomHistoryProvider>,
-      )
+        fireEvent.press(getByLabelText("add-log-entry"))
 
-      fireEvent.press(getByLabelText("add-log-entry"))
-
-      await waitFor(() => {
-        expect(createLogEntrySpy).toHaveBeenCalledWith({ ...newLogEntry })
+        await waitFor(() => {
+          expect(createEntrySpy).toHaveBeenCalledWith(date, symptoms)
+        })
       })
     })
 
-    it("captures exceptions and return failure responses", async () => {
-      const errorMessage = "error"
-      ;(createLogEntry as jest.Mock).mockRejectedValueOnce(
-        new Error(errorMessage),
-      )
-      const resultSpy = jest.fn()
-      const loggerSpy = jest.spyOn(Logger, "error")
-      ;(getLogEntries as jest.Mock).mockResolvedValue([])
+    describe("when updating a day's entry that already has symptoms", () => {
+      it("updates the existing entry", async () => {
+        const updateEntrySpy = NativeModule.updateEntry as jest.Mock
+        updateEntrySpy.mockResolvedValueOnce({})
+        const date = Date.parse("2020-09-22 10:00")
 
-      const AddCheckInStatus = () => {
-        const { addLogEntry } = useSymptomHistoryContext()
+        const symptoms = new Set<Symptom>(["cough"])
+        const testId = "asdf-asdf-asdf-asdf"
+        const entry: Symptoms = {
+          id: testId,
+          kind: "Symptoms",
+          date,
+          symptoms,
+        }
 
-        return (
-          <>
+        const AddCheckLogSymptoms = () => {
+          const { updateEntry } = useSymptomHistoryContext()
+
+          return (
+            <TouchableOpacity
+              accessibilityLabel="add-log-entry"
+              onPress={() => {
+                updateEntry(entry, symptoms)
+              }}
+            />
+          )
+        }
+
+        const { getByLabelText } = render(
+          <SymptomHistoryProvider>
+            <AddCheckLogSymptoms />
+          </SymptomHistoryProvider>,
+        )
+
+        fireEvent.press(getByLabelText("add-log-entry"))
+
+        await waitFor(() => {
+          expect(updateEntrySpy).toHaveBeenCalledWith(
+            entry.id,
+            entry.date,
+            symptoms,
+          )
+        })
+      })
+
+      it("captures exceptions and return failure responses", async () => {
+        const errorMessage = "error"
+        ;(NativeModule.createEntry as jest.Mock).mockRejectedValueOnce(
+          new Error(errorMessage),
+        )
+        const resultSpy = jest.fn()
+        const loggerSpy = jest.spyOn(Logger, "error")
+        ;(NativeModule.readEntries as jest.Mock).mockResolvedValue([])
+
+        const AddCheckInStatus = () => {
+          const { updateEntry } = useSymptomHistoryContext()
+
+          const date = Date.now()
+          const entry: NoData = { kind: "NoData", date }
+
+          return (
             <TouchableOpacity
               accessibilityLabel="add-log-entry"
               onPress={async () => {
-                const result = await addLogEntry([])
-                resultSpy(result)
+                updateEntry(entry, new Set<Symptom>()).then(resultSpy)
               }}
             />
-          </>
+          )
+        }
+
+        const { getByLabelText } = render(
+          <SymptomHistoryProvider>
+            <AddCheckInStatus />
+          </SymptomHistoryProvider>,
         )
-      }
 
-      const { getByLabelText } = render(
-        <SymptomHistoryProvider>
-          <AddCheckInStatus />
-        </SymptomHistoryProvider>,
-      )
+        fireEvent.press(getByLabelText("add-log-entry"))
 
-      fireEvent.press(getByLabelText("add-log-entry"))
-
-      await waitFor(() => {
-        expect(resultSpy).toHaveBeenCalledWith({
-          kind: "failure",
+        await waitFor(() => {
+          expect(resultSpy).toHaveBeenCalledWith({
+            kind: "failure",
+          })
+          expect(loggerSpy).toHaveBeenCalledWith(errorMessage)
         })
-        expect(loggerSpy).toHaveBeenCalledWith(errorMessage)
       })
     })
   })
 
-  describe("data seeding", () => {
+  describe("when the component mounts", () => {
     it("fetchs all daily log entries", async () => {
       const logEntries = [{ date: Date.now(), symptoms: [], id: "1" }]
-      ;(getLogEntries as jest.Mock).mockResolvedValueOnce(logEntries)
+      ;(NativeModule.readEntries as jest.Mock).mockResolvedValueOnce(logEntries)
 
       render(
         <SymptomHistoryProvider>
@@ -114,12 +155,12 @@ describe("SymptomHistoryProvider", () => {
       )
 
       await waitFor(() => {
-        expect(getLogEntries).toHaveBeenCalled()
+        expect(NativeModule.readEntries).toHaveBeenCalled()
       })
     })
 
     it("deletes all the stale data on load", async () => {
-      const deleteSymptomLogsOlderThanSpy = deleteSymptomLogsOlderThan as jest.Mock
+      const deleteSymptomLogsOlderThanSpy = NativeModule.deleteEntriesOlderThan as jest.Mock
 
       render(
         <SymptomHistoryProvider>
@@ -135,7 +176,7 @@ describe("SymptomHistoryProvider", () => {
 })
 
 const SymptomHistoryConsumer = () => {
-  const { symptomLogEntries } = useSymptomHistoryContext()
+  const { symptomHistory } = useSymptomHistoryContext()
 
-  return <Text testID="symptom-logs">{JSON.stringify(symptomLogEntries)}</Text>
+  return <Text testID="symptom-logs">{JSON.stringify(symptomHistory)}</Text>
 }

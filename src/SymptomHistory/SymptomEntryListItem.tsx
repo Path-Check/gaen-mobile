@@ -8,25 +8,24 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { Symptom, SymptomLogEntry } from "./symptoms"
+import * as Symptom from "./symptom"
+import { SymptomEntry } from "./symptomHistory"
 
 import { Affordances, Typography, Colors, Outlines, Spacing } from "../styles"
 
-type SymptomLogListItemProps = {
-  logEntry: SymptomLogEntry
+type SymptomEntryListItemProps = {
+  entry: SymptomEntry
 }
 
-const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
-  logEntry,
+const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
+  entry,
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation<
     StackNavigationProp<SymptomHistoryStackParams>
   >()
 
-  const { date, symptoms } = logEntry
-
-  const dayJsDate = posixToDayjs(date)
+  const dayJsDate = posixToDayjs(entry.date)
 
   if (!dayJsDate) {
     return null
@@ -34,15 +33,14 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
 
   const handleOnPressEdit = () => {
     navigation.navigate(SymptomHistoryStackScreens.SelectSymptoms, {
-      logEntry: JSON.stringify(logEntry),
+      symptomEntry: entry,
     })
   }
 
   const dateText = dayJsDate.local().format("MMMM D, YYYY")
-  const timeText = dayJsDate.local().format("h:mm A")
 
-  const toSymptomText = (symptom: Symptom) => {
-    const translatedSymptom = t(`symptoms.${symptom}`)
+  const toSymptomText = (symptom: Symptom.Symptom) => {
+    const translatedSymptom = Symptom.toTranslation(t, symptom)
     return (
       <View style={style.symptomTextContainer} key={translatedSymptom}>
         <Text style={style.symptomText}>{translatedSymptom}</Text>
@@ -50,18 +48,32 @@ const SymptomLogListItem: FunctionComponent<SymptomLogListItemProps> = ({
     )
   }
 
+  const determineCardContent = (entry: SymptomEntry) => {
+    switch (entry.kind) {
+      case "NoData": {
+        return <Text>{t("symptom_history.no_data")}</Text>
+      }
+      case "Symptoms": {
+        if (entry.symptoms.size > 0) {
+          return [...entry.symptoms].map(toSymptomText)
+        } else {
+          return <Text>{t("symptom_history.no_symptoms")}</Text>
+        }
+      }
+    }
+  }
+
   return (
     <TouchableOpacity
       onPress={handleOnPressEdit}
-      accessibilityLabel={t("common.edit")}
+      accessibilityLabel={`${t("common.edit")} - ${dateText}`}
     >
       <View style={style.symptomLogContainer}>
         <View style={style.timeContainer}>
           <Text style={style.datetimeText}>{dateText}</Text>
-          <Text style={style.datetimeText}>{timeText}</Text>
         </View>
         <View style={style.symptomsContainer}>
-          {symptoms.map(toSymptomText)}
+          {determineCardContent(entry)}
         </View>
       </View>
     </TouchableOpacity>
@@ -77,9 +89,6 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   timeContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
     paddingTop: Spacing.xSmall + 1,
     paddingBottom: Spacing.xSmall,
     paddingHorizontal: Spacing.medium,
@@ -104,4 +113,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SymptomLogListItem
+export default SymptomEntryListItem

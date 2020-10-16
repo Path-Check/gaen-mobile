@@ -136,7 +136,7 @@
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
     "more_info": "Plis enfòmasyon",
-    "symptom_checker": "Tcheke sentòm"
+    "symptom_history": "Tcheke sentòm"
   },
   "onboarding": {
     "activation_header_title": "Enstalasyon Aplikasyon",
@@ -211,7 +211,7 @@
     "share_anonymized_data_disclaimer": "Pa pwosedi sa, ou dakò yo pataje repons anonim pou kesyon tès depistaj ak {{healthAuthorityName}}",
     "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
   },
-  "symptom_checker": {
+  "symptom_history": {
     "symptoms_saved": "Sentòm yo anrejistre!",
     "what_symptoms": "Ki sentòm ou genyen?"
   },

@@ -1,130 +1,80 @@
 import React, { FunctionComponent, useState } from "react"
 import {
   View,
-  TouchableHighlight,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Text,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import { useStatusBarEffect } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
-import { Text, Button } from "../components"
-import { Symptom } from "./symptoms"
+import * as Symptom from "./symptom"
+import { SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
+import { posixToDayjs } from "../utils/dateTime"
+import Checkbox from "./Checkbox"
 
-import {
-  Affordances,
-  Colors,
-  Spacing,
-  Typography,
-  Outlines,
-  Buttons,
-} from "../styles"
+import { Affordances, Colors, Outlines, Spacing, Typography } from "../styles"
 import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
-  const { t } = useTranslation()
-  const navigation = useNavigation()
   const route = useRoute<
     RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
   >()
-  const {
-    addLogEntry,
-    updateLogEntry,
-    deleteLogEntry,
-  } = useSymptomHistoryContext()
 
-  const symptomsWithTranslations: Record<Symptom, string> = {
-    chest_pain_or_pressure: t("symptoms.chest_pain_or_pressure"),
-    difficulty_breathing: t("symptoms.difficulty_breathing"),
-    lightheadedness: t("symptoms.lightheadedness"),
-    disorientation_or_unresponsiveness: t(
-      "symptoms.disorientation_or_unresponsiveness",
-    ),
-    fever: t("symptoms.fever"),
-    chills: t("symptoms.chills"),
-    cough: t("symptoms.cough"),
-    loss_of_smell: t("symptoms.loss_of_smell"),
-    loss_of_taste: t("symptoms.loss_of_taste"),
-    loss_of_appetite: t("symptoms.loss_of_appetite"),
-    vomiting: t("symptoms.vomiting"),
-    diarrhea: t("symptoms.diarrhea"),
-    body_aches: t("symptoms.body_aches"),
-    other: t("symptoms.other"),
+  const entry = route.params?.symptomEntry || {
+    kind: "NoData",
+    date: Date.now(),
   }
 
-  const logEntry = route.params?.logEntry
-  const symptomLogEntryToEdit = logEntry ? JSON.parse(logEntry) : null
-  const isEditingLogEntry = symptomLogEntryToEdit !== null
+  return <SelectSymptomsForm entry={entry} />
+}
 
-  const initialSelectedSymptoms = symptomLogEntryToEdit?.symptoms || []
-  const [selectedSymptoms, setSelectedSymptoms] = useState<Symptom[]>(
-    initialSelectedSymptoms,
-  )
+interface SelectSymptomsFormProps {
+  entry: SymptomEntry
+}
 
-  const handleOnPressSymptom = (selectedSymptom: Symptom) => {
-    if (selectedSymptoms.includes(selectedSymptom)) {
-      setSelectedSymptoms(selectedSymptoms.filter((s) => s !== selectedSymptom))
+export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
+  entry,
+}) => {
+  useStatusBarEffect("dark-content", Colors.secondary10)
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  const { updateEntry } = useSymptomHistoryContext()
+
+  const initialSelectedSymptoms =
+    entry.kind === "Symptoms" ? entry.symptoms : new Set<Symptom.Symptom>()
+
+  const [selectedSymptoms, setSelectedSymptoms] = useState<
+    Set<Symptom.Symptom>
+  >(initialSelectedSymptoms)
+
+  const handleOnPressSymptom = (selectedSymptom: Symptom.Symptom) => {
+    const nextSymptoms = new Set(selectedSymptoms)
+    if (nextSymptoms.has(selectedSymptom)) {
+      nextSymptoms.delete(selectedSymptom)
     } else {
-      setSelectedSymptoms([...selectedSymptoms, selectedSymptom])
+      nextSymptoms.add(selectedSymptom)
     }
+    setSelectedSymptoms(nextSymptoms)
   }
 
-  const handleOnPressDelete = async () => {
-    if (isEditingLogEntry) {
-      const result = await deleteLogEntry(symptomLogEntryToEdit.id)
-      if (result.kind === "success") {
-        showMessage({
-          message: t("symptom_checker.entry_deleted"),
-          ...Affordances.successFlashMessageOptions,
-        })
-
-        navigation.goBack()
-      } else {
-        showMessage({
-          message: t("symptom_checker.errors.deleting_symptom_log"),
-          ...Affordances.errorFlashMessageOptions,
-        })
-      }
-    }
+  const handleOnPressNoSymptoms = () => {
+    setSelectedSymptoms(new Set<Symptom.Symptom>())
   }
 
   const handleOnPressSave = async () => {
-    if (isEditingLogEntry) {
-      await updateSymptomLog()
-    } else {
-      await createNewSymptomLog()
-    }
-  }
-
-  const createNewSymptomLog = async () => {
-    const result = await addLogEntry(selectedSymptoms)
+    const result = await updateEntry(entry, selectedSymptoms)
 
     if (result.kind === "success") {
       completeOnPressSave()
     } else {
       showMessage({
-        message: t("symptom_checker.errors.adding_symptoms"),
-        ...Affordances.successFlashMessageOptions,
-      })
-    }
-  }
-
-  const updateSymptomLog = async () => {
-    const result = await updateLogEntry({
-      ...symptomLogEntryToEdit,
-      symptoms: selectedSymptoms,
-    })
-
-    if (result.kind === "success") {
-      completeOnPressSave()
-    } else {
-      showMessage({
-        message: t("symptom_checker.errors.updating_symptoms"),
+        message: t("symptom_history.errors.updating_symptoms"),
         ...Affordances.successFlashMessageOptions,
       })
     }
@@ -132,80 +82,60 @@ const SelectSymptomsScreen: FunctionComponent = () => {
 
   const completeOnPressSave = () => {
     navigation.goBack()
-    const flashMessage = isEditingLogEntry
-      ? t("symptom_checker.symptoms_updated")
-      : t("symptom_checker.symptoms_saved")
     showMessage({
-      message: flashMessage,
+      message: t("common.success"),
       ...Affordances.successFlashMessageOptions,
     })
   }
 
-  const determineSymptomButtonStyle = (symptom: Symptom) => {
-    return selectedSymptoms.includes(symptom)
-      ? { ...style.symptomButton, ...style.symptomButtonSelected }
-      : style.symptomButton
-  }
+  const hasNoSymptomsSelected = selectedSymptoms.size === 0
 
-  const determineSymptomButtonTextStyle = (symptom: Symptom) => {
-    return selectedSymptoms.includes(symptom)
-      ? { ...style.symptomButtonText, ...style.symptomButtonTextSelected }
-      : style.symptomButtonText
-  }
-
-  const symptomsWithTranslationsList = Object.entries(
-    symptomsWithTranslations,
-  ) as [Symptom, string][]
+  const dayJsDate = posixToDayjs(entry.date)
+  const dateText = dayJsDate?.local().format("MMMM D, YYYY")
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
-      <View style={style.symptomButtonsContainer}>
-        {symptomsWithTranslationsList.map(
-          ([symptom, translation]: [Symptom, string]) => {
+    <View style={style.container}>
+      <ScrollView
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <Text style={style.dateText}>{dateText}</Text>
+        <View style={style.symptomButtonsContainer}>
+          <View style={style.noSymptomsCheckbox}>
+            <Checkbox
+              key={"no_symptoms"}
+              label={t("symptom_history.no_symptoms")}
+              onPress={handleOnPressNoSymptoms}
+              checked={hasNoSymptomsSelected}
+            />
+          </View>
+          {Symptom.all.map((symptom: Symptom.Symptom) => {
+            const translation = Symptom.toTranslation(t, symptom)
             return (
-              <TouchableHighlight
+              <Checkbox
                 key={symptom}
+                label={translation}
                 onPress={() => handleOnPressSymptom(symptom)}
-                style={determineSymptomButtonStyle(symptom)}
-                underlayColor={Colors.neutral10}
-                accessibilityLabel={translation}
-              >
-                <Text style={determineSymptomButtonTextStyle(symptom)}>
-                  {translation}
-                </Text>
-              </TouchableHighlight>
+                checked={selectedSymptoms.has(symptom)}
+              />
             )
-          },
-        )}
-      </View>
-      <Button
+          })}
+        </View>
+      </ScrollView>
+      <TouchableOpacity
+        testID={"select-symptoms-save"}
         onPress={handleOnPressSave}
-        label={t("common.save")}
-        disabled={selectedSymptoms.length === 0}
-        customButtonStyle={style.saveButton}
-        customButtonInnerStyle={style.saveButtonInner}
-      />
-      {isEditingLogEntry && (
-        <TouchableOpacity
-          onPress={handleOnPressDelete}
-          accessibilityLabel={t("symptom_checker.delete_entry")}
-          style={style.deleteButtonContainer}
-        >
-          <Text style={style.deleteButtonText}>
-            {t("symptom_checker.delete_entry")}
-          </Text>
-        </TouchableOpacity>
-      )}
-    </ScrollView>
+        style={style.button}
+      >
+        <Text style={style.buttonText}>{t("common.save")}</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.primaryLightBackground,
   },
   contentContainer: {
@@ -213,50 +143,29 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
-    paddingBottom: Spacing.xxHuge,
+  },
+  dateText: {
+    ...Typography.header3,
+    marginBottom: Spacing.small,
   },
   symptomButtonsContainer: {
-    flexWrap: "wrap",
-    flexDirection: "row",
     marginBottom: Spacing.medium,
   },
-  symptomButton: {
-    borderWidth: Outlines.hairline,
-    borderColor: Colors.neutral25,
-    borderRadius: Outlines.borderRadiusMax,
-    paddingTop: Spacing.xxSmall - 2,
-    paddingBottom: Spacing.xxSmall,
-    paddingHorizontal: Spacing.medium,
-    marginBottom: Spacing.xSmall,
-    marginRight: Spacing.xxSmall,
+  noSymptomsCheckbox: {
+    paddingBottom: Spacing.xSmall - 2,
+    marginBottom: Spacing.xLarge,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral50,
   },
-  symptomButtonSelected: {
-    backgroundColor: Colors.neutral100,
-    borderColor: Colors.neutral100,
+  button: {
+    alignItems: "center",
+    paddingTop: Spacing.medium,
+    paddingBottom: Spacing.medium,
+    backgroundColor: Colors.primary100,
   },
-  symptomButtonText: {
-    ...Typography.body1,
-  },
-  symptomButtonTextSelected: {
-    color: Colors.white,
-  },
-  saveButton: {
-    width: "100%",
-  },
-  saveButtonInner: {
-    width: "100%",
-    paddingTop: Spacing.xSmall,
-    paddingBottom: Spacing.xSmall + 1,
-  },
-  deleteButtonContainer: {
-    ...Buttons.secondary,
-    alignSelf: "center",
-    marginTop: Spacing.medium,
-  },
-  deleteButtonText: {
-    ...Typography.buttonSecondary,
-    fontSize: Typography.small,
-    color: Colors.danger100,
+  buttonText: {
+    ...Typography.buttonPrimary,
+    fontSize: Typography.large,
   },
 })
 

@@ -82,7 +82,7 @@ const MainTabNavigator: FunctionComponent = () => {
     const tabIcon = (
       <TabIcon
         icon={TabBarIcons.Heartbeat}
-        label={t("navigation.symptom_checker")}
+        label={t("navigation.symptom_history")}
         focused={focused}
         size={size}
       />
@@ -138,7 +138,7 @@ const MainTabNavigator: FunctionComponent = () => {
           name={Stacks.SymptomHistory}
           component={SymptomHistoryStack}
           options={{
-            tabBarLabel: t("navigation.symptom_checker"),
+            tabBarLabel: t("navigation.symptom_history"),
             tabBarIcon: HeartbeatIcon,
           }}
         />
