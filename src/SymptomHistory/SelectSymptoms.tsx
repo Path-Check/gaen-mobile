@@ -110,7 +110,7 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
             />
           </View>
           {Symptom.all.map((symptom: Symptom.Symptom) => {
-            const translation = t(Symptom.toTranslationKey(symptom))
+            const translation = Symptom.toTranslation(t, symptom)
             return (
               <Checkbox
                 key={symptom}

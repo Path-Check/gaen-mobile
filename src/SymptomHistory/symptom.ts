@@ -1,3 +1,5 @@
+import { TFunction } from "i18next"
+
 export type Symptom =
   | "chest_pain_or_pressure"
   | "difficulty_breathing"
@@ -128,6 +130,49 @@ export const toString = (symptom: Symptom): string => {
   }
 }
 
-export const toTranslationKey = (symptom: Symptom): string => {
-  return `symptoms.${toString(symptom)}`
+export const toTranslation = (t: TFunction, symptom: Symptom): string => {
+  switch (symptom) {
+    case "chest_pain_or_pressure": {
+      return t("symptoms.chest_pain_or_pressure")
+    }
+    case "difficulty_breathing": {
+      return t("symptoms.difficulty_breathing")
+    }
+    case "lightheadedness": {
+      return t("symptoms.lightheadedness")
+    }
+    case "disorientation_or_unresponsiveness": {
+      return t("symptoms.disorientation_or_unresponsiveness")
+    }
+    case "fever": {
+      return t("symptoms.fever")
+    }
+    case "chills": {
+      return t("sympotoms.chills")
+    }
+    case "cough": {
+      return t("symptoms.cough")
+    }
+    case "loss_of_smell": {
+      return t("symptoms.loss_of_smell")
+    }
+    case "loss_of_taste": {
+      return t("symptoms.loss_of_taste")
+    }
+    case "loss_of_appetite": {
+      return t("symptoms.loss_of_appetite")
+    }
+    case "vomiting": {
+      return t("symptoms.vomiting")
+    }
+    case "diarrhea": {
+      return t("sympotoms.diarrhea")
+    }
+    case "body_aches": {
+      return t("symptoms.body_aches")
+    }
+    case "other": {
+      return t("symptoms.other")
+    }
+  }
 }
