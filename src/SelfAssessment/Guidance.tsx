@@ -19,7 +19,7 @@ interface GuidanceProps {
 const Guidance: FunctionComponent<GuidanceProps> = ({
   destinationOnCancel = Stacks.ExposureHistoryFlow,
 }) => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.secondary10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { symptomGroup } = useSelfAssessmentContext()
@@ -194,7 +194,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.secondary10} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
