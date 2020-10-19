@@ -346,7 +346,7 @@
       "covid19_self_assessment": "COVID-19 Self Assessment",
       "find_out_how_to_care": "Find out how to care for yourself and others after close contact with someone positive for COVID-19",
       "if_this_is": "If this is an emergency, please call {{emergencyPhoneNumber}}",
-      "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn move about how the virus spreads and the illness it causes",
+      "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn more about how the virus spreads and the illness it causes",
       "this_is_not_intended": "This is not intended for diagnosis or treatment",
       "you_are_a_resident": "You are a resident of the community supported by {{ healthAuthorityName }}"
     },
@@ -394,6 +394,13 @@
     "felt_well": "You felt well",
     "no_entry": "No entry",
     "no_symptoms": "No symptoms",
+    "share_history": "Share symptom history",
+    "sharing": {
+      "header": "Symptom history from {{startDate}} to {{endDate}}",
+      "no_symptoms_were_logged": "No symptoms were logged",
+      "you_did_not_feel_well": "You did not feel well, symptoms included: {{symptomList}}",
+      "you_felt_well": "You felt well"
+    },
     "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },

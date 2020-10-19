@@ -1,6 +1,13 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import {
+  ScrollView,
+  Share,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import {
   DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
@@ -10,13 +17,29 @@ import { SymptomEntry } from "./symptomHistory"
 import { Text, StatusBar } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
+import Formatter from "./Formatter"
 
-import { Typography, Colors, Spacing } from "../styles"
+import { Colors, Spacing, Typography, Iconography } from "../styles"
+import { Icons } from "../assets"
 
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const { symptomHistory } = useSymptomHistoryContext()
+
+  const handleOnPressShareHistory = async () => {
+    const message = Formatter.forSharing(t, symptomHistory)
+
+    if (message) {
+      try {
+        await Share.share({
+          message,
+        })
+      } catch (error) {
+        throw new Error(error)
+      }
+    }
+  }
 
   return (
     <View style={style.outerContainer}>
@@ -26,9 +49,24 @@ const SymptomHistory: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
       >
-        <Text style={style.headerText}>
-          {t("symptom_history.symptom_history")}
-        </Text>
+        <View style={style.headerContainer}>
+          <Text style={style.headerText}>
+            {t("symptom_history.symptom_history")}
+          </Text>
+
+          <TouchableOpacity
+            accessibilityLabel={t("symptom_history.share_history")}
+            style={style.shareButton}
+            onPress={handleOnPressShareHistory}
+          >
+            <SvgXml
+              xml={Icons.Share}
+              fill={Colors.primary100}
+              width={Iconography.xxSmall}
+              height={Iconography.xxSmall}
+            />
+          </TouchableOpacity>
+        </View>
         <Text style={style.subHeaderText}>
           {t("symptom_history.to_protect_your_privacy", {
             days: DAYS_AFTER_LOG_IS_CONSIDERED_STALE,
@@ -55,10 +93,19 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.medium,
   },
+  headerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   headerText: {
     ...Typography.header1,
     ...Typography.bold,
     marginBottom: Spacing.xxxSmall,
+  },
+  shareButton: {
+    paddingBottom: Spacing.xxxSmall,
   },
   subHeaderText: {
     ...Typography.body1,
