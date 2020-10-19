@@ -228,8 +228,6 @@ ktlint {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ['*.jar', '*.aar'])
-    // loading html files
-    implementation project(':react-native-reanimated')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.annotation:annotation:1.1.0"

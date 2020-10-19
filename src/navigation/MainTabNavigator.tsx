@@ -6,8 +6,8 @@ import { SvgXml } from "react-native-svg"
 
 import ExposureHistoryStack from "./ExposureHistoryStack"
 import HomeStack from "./HomeStack"
-import MyHealthStack from "./MyHealthStack"
-import ConnectStack from "./ConnectStack"
+import SymptomHistoryStack from "./SymptomHistoryStack"
+import SettingsStack from "./SettingsStack"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Stacks } from "./index"
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator()
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
-  const { displayMyHealth } = useConfigurationContext()
+  const { displaySymptomHistory } = useConfigurationContext()
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
@@ -82,7 +82,7 @@ const MainTabNavigator: FunctionComponent = () => {
     const tabIcon = (
       <TabIcon
         icon={TabBarIcons.Heartbeat}
-        label={t("navigation.symptom_checker")}
+        label={t("navigation.symptom_history")}
         focused={focused}
         size={size}
       />
@@ -90,14 +90,14 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
-  const ConnectIcon: FunctionComponent<TabBarIconProps> = ({
+  const SettingsIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
     size,
   }) => {
     const tabIcon = (
       <TabIcon
-        icon={TabBarIcons.PersonInHand}
-        label={t("navigation.connect")}
+        icon={TabBarIcons.Gear}
+        label={t("navigation.settings")}
         focused={focused}
         size={size}
       />
@@ -133,22 +133,22 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      {displayMyHealth && (
+      {displaySymptomHistory && (
         <Tab.Screen
-          name={Stacks.MyHealth}
-          component={MyHealthStack}
+          name={Stacks.SymptomHistory}
+          component={SymptomHistoryStack}
           options={{
-            tabBarLabel: t("navigation.symptom_checker"),
+            tabBarLabel: t("navigation.symptom_history"),
             tabBarIcon: HeartbeatIcon,
           }}
         />
       )}
       <Tab.Screen
         name={Stacks.Connect}
-        component={ConnectStack}
+        component={SettingsStack}
         options={{
           tabBarLabel: t("navigation.connect"),
-          tabBarIcon: ConnectIcon,
+          tabBarIcon: SettingsIcon,
         }}
       />
     </Tab.Navigator>

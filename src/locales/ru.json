@@ -25,8 +25,7 @@
       "tracing_off_header": "Уведомления об опасности отключены",
       "tracing_off_subheader": "Включить уведомления об опасности, чтобы получать информацию о нахождении в опасных зонах"
     },
-    "call_emergency_services": "Скорая помощь",
-    "open_settings": "Откройте настройки"
+    "call_emergency_services": "Скорая помощь"
   },
   "label": {
     "launch_enable_notif": "Включить уведомления",

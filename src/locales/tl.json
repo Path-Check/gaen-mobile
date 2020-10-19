@@ -17,7 +17,8 @@
     "skip": "I-Skip o Laktawan",
     "something_went_wrong": "May maling nangyari",
     "start": "Simula",
-    "submit": "Isumite"
+    "submit": "Isumite",
+    "success": "Tagumpay"
   },
   "errors": {
     "description": "May naganap na error. Mangyaring i-reload ang app.",
@@ -98,7 +99,6 @@
   },
   "home": {
     "bluetooth_info_body": "Natutuklasan ng iyong cellphone o device na mayroon kang malapitang nakakasalamuha na gumagamit ng Bluetooth Low Energy.  Pinapayagan nito ang app na anonimong itala ang iyong pangaraw-araw na pagkatagpo, hahit hindi nakabukas ang app sa iyong cellphone o device.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "Mananatiling aktibo ang {{applicationName}} kahit ang app ay isinara",
       "bluetooth_disabled_error_message": "Pumunta sa app na Mga Setting at paganahin ang Bluetooth upang ayusin ang error na ito",
@@ -118,12 +118,9 @@
     "fix": "Ayusin ang mga isyu sa {{technology}}",
     "get_more_info": "Kumuha ng karagdagang impormasyon sa {{technology}}",
     "location_info_body_1": "Gumagamit ang Teknolohiya ng Abiso sa Exposure ng pag-scan ng Bluetooth upang maunawaan kung anong mga aparato ang malapit sa isa't isa. Sa lahat ng mga teleponong nagpapatakbo ng Android 6.0 at mas bago, upang magamit ang pag-scan sa Bluetooth, kailangang i-on ang setting ng lokasyon ng aparato para sa lahat ng mga app, hindi lamang mga app na binuo gamit ang Exposure Notification System.",
-    "location_info_header": "Lokasyon",
     "location_info_subheader_1": "Bakit ko kailangang i-on ang setting ng lokasyon ng aking telepono o device?",
-    "open_settings": "Buksan ang Settings",
     "proximity_tracing_info_body_1": "Kung ang mga smartphone na naka-install ang app ay naka-on o pinagagana, naka-enable ang Bluetooth, at malapit sa isa't isa sa loob ng takdang panahon, irirehistro ang engkwentrong ito sa iyong aparato.",
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
-    "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
     "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?"
   },
@@ -173,7 +170,6 @@
       "body_3": "Pagkatapos ng pumositibo sa COVID-19, maaaring magbahagi ang mga gumagamit ng isang passcode sa {{applicationName}} upang beripikahin ang kanilang diagnosis. Ang mga kamakailang random na ID sa kanilang telepono ay na-flag at ligtas na ini-upload sa server. Ang proseso ng pag-beripika na ito ay makakatulong na maiwasan ang pagulat ng maling pagkapositibo.",
       "body_4": "Kung ang isang naka-flag na ID ay tumutugma sa isang ID na nakaimbak sa iyong telepono, ipinapahiwatig nito na maaaring nakahalubilo ka ng isang taong nagpositibo sa COVID-19. Ganito matutukoy ng {{applicationName}} kung ikaw ay nahantad o na-expose sa virus.",
       "body_5": "Kung mayroong katugma, aabisuhan ka ng {{applicationName}} at magbibigay ng karagdagang gabay mula sa iyong kagawaran ng kalusugan. \n\n Ito ang makapagbibigay sa iyo ng kapangyarihan  {{applicationName}} upang gumawa ng mga desisyon tungkol sa iyong kalusugan, at mapanatiling ligtas ang iyong komunidad, habang hindi mo ipinaaalam kung sino ka o kung saan ka man nakapunta.",
-      "header": "Paano namin protektahan ang iyong privacy",
       "subheader_1": "Kapag pinagana mo ang Proximity Tracing, naka-tag ang iyong cellphone o device ng madalas na nagbabago na mga random na ID",
       "subheader_2": "Ang mga cellphone o device na may Proximity Tracing ay nagpapaganang mag-swap ng mga ID sa iba pang mga aparato na nakasalubong nila",
       "subheader_3": "Kapag ang isang gumagamit ay pumositibo, maaari nilang piliing anonimong ibahagi ang katayuan ng kanilang kalusugan",
@@ -202,17 +198,20 @@
     "screen4_image_label": "Tao na nakakakuha ng isang abiso sa kanilang cellphone o device",
     "screen5_header": "Gamit ang app, makakatulong kang pabagalin ang pagkalat ng COVID-19, protektahan ang iba, at direktang makakuha ng tulong mula sa mga eksperto sa kalusugan.",
     "screen5_image_label": "Tao na nakikipag-usap sa isang dalubhasang pangkalusugan sa pamamagitan ng virtual na pamamaraan",
-    "select_language": "Piliin ang Wika",
     "step": "Hakbang {{currentStep}} ng {{totalSteps}}",
     "terms_header_title": "Mga Tuntunin ng Paggamit",
     "welcome_image_label": "Isang ilustrasyon ng mga taong may suot na mask, nakakonekta tulad ng mga node sa isang network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Pag-debug",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
     "exposures": "Mga Pagkakalantad",
     "home": "Home o Umpisa",
-    "legal": "Ligal"
+    "legal": "Ligal",
+    "location": "Lokasyon",
+    "protect_privacy": "Paano namin protektahan ang iyong privacy",
+    "select_language": "Piliin ang Wika"
   },
   "settings": {
     "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako"

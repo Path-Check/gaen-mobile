@@ -17,7 +17,8 @@
     "skip": "Hla",
     "something_went_wrong": "Dabtsi puas lawm",
     "start": "Pib",
-    "submit": "Xa Mus"
+    "submit": "Xa Mus",
+    "success": "Tiav Zoo Lawm"
   },
   "errors": {
     "description": "Tau tshwm sim ib qho teeb meem. Thov muab kaw mam rov qhib lub app dua.",
@@ -96,7 +97,6 @@
   },
   "home": {
     "bluetooth_info_body": "Koj lub xov tooj yuav cim tau lwm tus lub xov tooj uas koj tau mus ze thiab siv Bluetooth Low Energy. Qhov no yuav ua rau lub twj teev tseg txhua zaus koj mus nyob ze raug leejtwg, tab txawm koj twb tsis qhib lub app hauv koj lub twj.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} yuav tseem cia siv tau tom qab muab lub app kawm lawm",
       "bluetooth_disabled_error_message": "Taws qhov Bluetooth hauv qhov Settings app",
@@ -106,7 +106,7 @@
       "location_disabled_error_title": "Tso cai nyob hauv Settings",
       "location_header": "Location",
       "proximity_tracing_header": "Proximity Tracing",
-      "share": "Qhia lub app no mus rau lwm tus neeg kom thiaj li tiv thaiv tau koj thiab lwm tus",
+      "share": "Qhia lub app no mus rau lwm tus neeg kom thiaj li tiv thaiv tau koj thiab lwm tus {{applicationName}}",
       "share_message": "Mus xyuas lub app no {{applicationName}}, uas pab peb tswj tau tus kab mob COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Tsis Ciaj",
       "tracing_off_subheader": "Taws qhov Bluetooth thiab Proximity Tracing kom thiaj li paub txog seb tau mus raug kis mob li cas lawm",
@@ -116,12 +116,9 @@
     "fix": "Mus kho teeb meem nrog {{technology}}",
     "get_more_info": "Xa paub ntxiv txog {{technology}}",
     "location_info_body_1": "Qhov qhia tawm thaum mus raug neeg mob siv Bluetooth los mus ntsuas seb lwm lub twj puas nyob sib ze. Txhua lub xov tooj uas lub hlwb khiav Andriod 6.0 thiab siab dua, yog xav siv Bluetooth los ntsuas, ces lub twj li location yuav tsum muab taws rau txhua lub app, tsis yog lub app uas muaj qhov qhia xov xwm thaum mus raug neeg mob xwb.",
-    "location_info_header": "Location",
     "location_info_subheader_1": "Vim li cas kuv yuav tsum taws kuv li location?",
-    "open_settings": "Qhib Mus Kho",
     "proximity_tracing_info_body_1": "Yog tias cov xov tooj uas muaj lub app nyob hauv thiab muab taws, muaj Bluetooth, thiab nyob sib ze rau ib lub sijhawm twg, ces yuav cuv cia tias tau mus raug nyob rau hauv koj lub xov tooj.",
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
-    "proximity_tracing_info_header": "Proximity Tracing",
     "proximity_tracing_info_subheader_1": "Proximity Tracing ua haujlwm li cas?",
     "proximity_tracing_info_subheader_2": "Kuv li ntaub ntawv puas ceev zoo cia?"
   },
@@ -168,7 +165,6 @@
       "body_3": "Tom qab koj kuaj yog mob COVID-19 lawm, cov neeg siv yuav tso tawm tus naj npawb mus rau {{applicationName}} kom nias meej tias yeej yog lawv mob tiag tiag. Yog lawv ua li no, ces lawv lub xov tooj tus naj npawb uas tsim los ntawd yuav muab cim tseg thiab xa mus rau lub twj ntsuas kuaj. Qhov ua li thiaj li pab cheem lwm tus neeg dag tias nws mob.",
       "body_4": "Yog tias ib tus naj npawb ID raug tus ID muab sau tseg hauv koj lub xov tooj, ces txhais tau tias koj tau mus ze raug ib tus neeg mob COVID-19 lawm. Qhov no yog {{applicationName}} li kev pab thiaj txiav txim seb koj puas tau mus ze rau ib tus neeg mob tus vais lav.",
       "body_5": "Yog tias tus naj npawb raug, ces {{applicationName}} mam li qhia koj paub thiab taw qhia koj mus cuag kev kho mob li cas.\n\nQhov no yog {{applicationName}} li kev pab kom koj txawj txiav txim zoo txog koj li kev noj qab nyob zoo, thiab pab kom lub zej zog nyab xeeb, yam tsis tas qhia tawm seb koj yog leejtwg lossis koj tau mus rau qhov chaw twg lawm.",
-      "header": "Peb tiv thaiv koj ntaub ntawv li cas",
       "subheader_1": "Thaum koj taws Proximity Tracing, yuav muab ntau tus naj npawb rhais rau koj lub xov tooj, thiab cov naj npawb no yuav hloov tas li.",
       "subheader_2": "Cov xov tooj uas taws qhov proximity tracing yuav sib hloov cov naj npawb no nrog lwm lub xov tooj uas nws tau mus ze",
       "subheader_3": "Thaum ib tus neeg twg kuaj tias mob, ces nws yuav qhia tawm yam tsis muaj neeg paub nws npe",
@@ -197,17 +193,20 @@
     "screen4_image_label": "Ib tus neeg txais xov xwm nyob hauv nws lub xov tooj",
     "screen5_header": "Thaum siv lub app lawm, koj pab cheem kom tus kab mob COVID-19 tsis txhob kis mus deb, tiv thaiv lwm tus, thiab tau txais kev pab kiag los ntawm cov kws kho mob.",
     "screen5_image_label": "Ib tus neeg siv twj nrog kws kho mob tham",
-    "select_language": "Xaiv Koj Yam Lus",
     "step": "Kauj ruam {{currentStep}} ntawm {{totalSteps}}",
     "terms_header_title": "Kev cai siv",
     "welcome_image_label": "Daim duab qhia txog cov neeg looj lub npog ntsej muag, sib txuas sawvdaws nyob hauv ib pab pawg network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Debug",
     "exposure_history": "Keeb Kwm Mus Raug",
     "exposures": "Kev mus nyob ze raug mob",
     "home": "Home",
-    "legal": "Kev Cai Lij Choj"
+    "legal": "Kev Cai Lij Choj",
+    "location": "Location",
+    "protect_privacy": "Peb tiv thaiv koj ntaub ntawv li cas",
+    "select_language": "Xaiv Koj Yam Lus"
   },
   "settings": {
     "i_understand_and_consent": "Kuv nkag siab thiab tso cai"

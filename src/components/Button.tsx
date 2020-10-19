@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react"
 import {
   ActivityIndicator,
   StyleSheet,
+  View,
   ViewStyle,
   TextStyle,
   TouchableOpacity,
 } from "react-native"
-import LinearGradient from "react-native-linear-gradient"
 import { SvgXml } from "react-native-svg"
 
 import Text from "./Text"
@@ -41,13 +41,13 @@ const Button: FunctionComponent<ButtonProps> = ({
   hasPlusIcon,
   outlined,
 }) => {
-  const determineGradient = (): string[] => {
+  const determineBackgroundColor = (): string => {
     if (outlined) {
-      return [Colors.transparent, Colors.transparent]
+      return Colors.transparent
     } else if (disabled || loading) {
-      return [Colors.secondary75, Colors.secondary75]
+      return Colors.secondary75
     } else {
-      return Colors.gradient100
+      return Colors.primary100
     }
   }
 
@@ -93,8 +93,11 @@ const Button: FunctionComponent<ButtonProps> = ({
     ...customButtonStyle,
   }
 
+  const backgroundColor = determineBackgroundColor()
+
   const buttonStyle = {
     ...style.button,
+    backgroundColor,
     ...customButtonInnerStyle,
   }
 
@@ -107,13 +110,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       testID={testID}
       style={buttonContainerStyle}
     >
-      <LinearGradient
-        colors={determineGradient()}
-        style={buttonStyle}
-        useAngle
-        angle={213.69}
-        angleCenter={{ x: 0.5, y: 0.5 }}
-      >
+      <View style={buttonStyle}>
         {loading ? (
           <ActivityIndicator size={"small"} />
         ) : (
@@ -135,7 +132,7 @@ const Button: FunctionComponent<ButtonProps> = ({
             )}
           </>
         )}
-      </LinearGradient>
+      </View>
     </TouchableOpacity>
   )
 }
@@ -143,7 +140,6 @@ const Button: FunctionComponent<ButtonProps> = ({
 const style = StyleSheet.create({
   buttonContainer: {
     alignSelf: "center",
-    borderRadius: Outlines.borderRadiusMax,
   },
   buttonContainerShadow: {
     ...Outlines.baseShadow,

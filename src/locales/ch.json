@@ -17,7 +17,8 @@
     "skip": "Upus",
     "something_went_wrong": "Guaha problema",
     "start": "Tutuhon",
-    "submit": "Submiti"
+    "submit": "Submiti",
+    "success": "Munhayan Maolik"
   },
   "errors": {
     "description": "Guaha lachi ma susedi. Potfabot na 'on' talo i app.",
@@ -98,7 +99,6 @@
   },
   "home": {
     "bluetooth_info_body": "I telefon-mu ha sesienti otro siha telefon ni man hihot gi fion-mu ni umu'usa Bluetooth Low Energy. Ha nana'i esti lugat i app para u log i iyo-mu daily encounters sin taya tumungo achuk ha ti un bababa i app gi iyo-mu device.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} para u lalala ha maseha ma huchum i app",
       "bluetooth_disabled_error_message": "Falak i Settings app ya un na kalamten i Bluetooth para u famauleg i lachi",
@@ -118,12 +118,9 @@
     "fix": "Famauleg i problema ni {{technology}}",
     "get_more_info": "Chuli mas infotmasion put {{technology}}",
     "location_info_body_1": "I Exposure Notification technology ha u'usa Bluetooth scanning  para u komprendi hafa siha na devices man hihot. Gi todo siha i telefon ni manmalalagu gi Android 6.0 pat mas taghilo para u usa Bluetooth scanning , nesisita i device location setting man 'on' para todo i apps , ahe ti para eyu ha i apps ni guaha Exposure Notifications System.",
-    "location_info_header": "Location",
     "location_info_subheader_1": "Hafa na hu nesisita muna 'on' i iyoku location?",
-    "open_settings": "Baba i Settings",
     "proximity_tracing_info_body_1": "Yanggen man mana 'on' i smartphones  ni man gaieyu app,  kalalamten i Bluetooth ya manhihot kon tiempo i encounter ma register gi iyo-mu device.",
     "proximity_tracing_info_body_2": "Put sienkasu guaha un susedi, todu infotmasion put hagu man manana.I app ti sina ha goti ni hafafa' na petsonat na infotmasion. I kosequat ha siha na IDs sina man ma usa.Man ma na suha est siha gi duranten i 14 dias.",
-    "proximity_tracing_info_header": "Matatiyen i man akihut",
     "proximity_tracing_info_subheader_1": "Hafa bidada-na i Proximity Tracing?",
     "proximity_tracing_info_subheader_2": "Kao siguro i iyo-ku infotmasion?"
   },
@@ -173,7 +170,6 @@
       "body_3": "Yanggen positive i test para COVID 19, sina i 'users' man a'usa passcode yan {{applicationName}} para umansiguro i iyon-niha diagnosis.I mas fresko na random ID gi telefon-niha man ma flagged yan sigoru na ma upload para i server. Esti na verifikasion ina yuyuda para taya false poitive na report.",
       "body_4": "Yanggen guaha flagged ID parehu yan an ID gi telefon-mu, kumekeilekna na sina ha umafakcha hao yan taotao ni positive i test-na para COVID 19. Taiguini {{applicationName}} na sina ha ditetmina kao ma tanmi hao ni virus.",
       "body_5": "Yanggen guaha match, {{applicationName}} para un sinangani ya un nina'i mas ayudo ginen i iyo-mu health department.\n\nTaiguini i {{applicationName}} na sina nina'i hao autoridad para un famatinas desision put i nilala-mu, yan para un na safu i kommunidad-mu, todo ginen i infotmasion put hayi hao yan ginen manu hao.",
-      "header": "Taimanu in protehi i iyo-mu privacy",
       "subheader_1": "Yanggen un na 'on' Proximity Tracing, ma tagged i telefon-mu ni sessu ma tulaika siha na random IDs",
       "subheader_2": "Fons ni man gai Proximity Tracing sina ha man atulika IDs yan otro siha devices ni man afakcha",
       "subheader_3": "Yanggen positive i test-na i server, sina ha ha na matungo put i kondision-na sin una matungo hayi gui.",
@@ -202,17 +198,20 @@
     "screen4_image_label": "I taotao ha risisibi notifikasion gi telefon-na",
     "screen5_header": "I app, sina un ayuda muna dispasio i machalapun i COVID 19,  protehi i pumalu yan  sina un risibi directo na ayudo ginen i manfayi gi nilala yan hinemlu.",
     "screen5_image_label": "I taotao kumekuentos yan i gumeftungo put linala 'virtually",
-    "select_language": "Achig i lenguahi",
     "step": "{{currentStep}} gi {{totalSteps}}  na iskalera",
     "terms_header_title": "Palabra ni ma u'usa",
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Dibug",
     "exposure_history": "Historian i ninayi",
     "exposures": "man ninayi  or mantinanmi",
     "home": "Guma",
-    "legal": "Legat"
+    "legal": "Legat",
+    "location": "Lokasion",
+    "protect_privacy": "Taimanu in protehi i iyo-mu privacy",
+    "select_language": "Achig i lenguahi"
   },
   "settings": {
     "i_understand_and_consent": "Hu Komprendi yan hu Konsienti"

@@ -17,7 +17,8 @@
     "skip": "スキップ",
     "something_went_wrong": "問題が発生しました",
     "start": "開始",
-    "submit": "送信"
+    "submit": "送信",
+    "success": "成功"
   },
   "errors": {
     "description": "エラーが発生しました。アプリを再読み込みしてください。",
@@ -98,7 +99,6 @@
   },
   "home": {
     "bluetooth_info_body": "お使いの携帯電話は、Bluetooth低エネルギーを使用して近接して時間を過ごす他の携帯電話を検出します。これにより、アプリをデバイスで開いていなくても、アプリは毎日のログインを匿名で記録できます。",
-    "bluetooth_info_header": "ブルートゥース",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}は、アプリが閉じられた後もアクティブのままになります",
       "bluetooth_disabled_error_message": "アプリ設定に移動し、Bluetoothを有効にしてこのエラーを修正してください",
@@ -118,12 +118,9 @@
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
     "location_info_body_1": "露出通知テクノロジーはBluetoothスキャンを使用して、どのデバイスが互いに近くにあるかを判断します。 Android 6.0以降を実行しているすべてのスマートフォンでBluetoothスキャンを使用するには、露出通知システムで構築されたアプリだけでなく、すべてのアプリでデバイスの場所の設定をオンにする必要があります。",
-    "location_info_header": "ロケーション",
     "location_info_subheader_1": "位置情報を有効にする必要があるのはなぜですか?",
-    "open_settings": "設定を開く",
     "proximity_tracing_info_body_1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
-    "proximity_tracing_info_header": "近接トレース",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
     "proximity_tracing_info_subheader_2": "データは安全ですか?"
   },
@@ -173,7 +170,6 @@
       "body_3": "COVID-19のテストで陽性診断された後、ユーザーは診断を確認するために{{applicationName}}とパスコードを共有することができます。携帯電話の最近のランダムなIDはフラグが立てられ、安全にサーバーにアップロードされます。この検証プロセスは、誤検知の報告を防ぐのに役立ちます。",
       "body_4": "フラグが立てられたIDが携帯電話に保存されているIDと一致する場合、COVID-19の検査で陽性と判定された人物に遭遇した可能性があります。これは、 {{applicationName}}がウイルスに感染した可能性があるかどうかを判断する方法です。",
       "body_5": "一致する場合は、 {{applicationName}}が通知し、保健部門からの詳細なガイダンスを提供します。 \n\nこのようにして、 {{applicationName}}は、自分が誰であるか、どこにいたかを知らなくても、健康に関する意思決定を行い、コミュニティを安全に保つことができます。",
-      "header": "プライバシーを保護する方法",
       "subheader_1": "近接トレースをオンにすると、頻繁に変更されるランダムな ID が携帯電話にタグ付けされます。",
       "subheader_2": "近接トレースが有効な電話機は、他のデバイスとのスワップ ID を検出します",
       "subheader_3": "もし陽性と診断された場合、あなたのデータを匿名で提供する事ができます。",
@@ -202,17 +198,20 @@
     "screen4_image_label": "スマートフォンで通知を受け取る人",
     "screen5_header": "このアプリを使用することで、COVID-19の拡散を遅らせ、他の人を保護し、医療専門家からの直接支援を受けることができます。",
     "screen5_image_label": "健康の専門家とバーチャルで話している人",
-    "select_language": "言語を選択する",
     "step": "ステップ {{currentStep}} の {{totalSteps}}",
     "terms_header_title": "利用規約",
     "welcome_image_label": "ネットワーク内のノードのように接続されたマスクを使用した人物のイラスト。"
   },
   "screen_titles": {
+    "bluetooth": "ブルートゥース",
     "debug": "デバッグ",
     "exposure_history": "接触履歴",
     "exposures": "接触",
     "home": "ホーム",
-    "legal": "リーガル"
+    "legal": "リーガル",
+    "location": "ロケーション",
+    "protect_privacy": "プライバシーを保護する方法",
+    "select_language": "言語を選択する"
   },
   "settings": {
     "i_understand_and_consent": "私は理解して同意します"

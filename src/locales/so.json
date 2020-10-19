@@ -17,7 +17,8 @@
     "skip": "Dhaaf",
     "something_went_wrong": "Waxbaa qaldamay",
     "start": "Billow",
-    "submit": "Gudbi"
+    "submit": "Gudbi",
+    "success": "Guul"
   },
   "errors": {
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
@@ -98,7 +99,6 @@
   },
   "home": {
     "bluetooth_info_body": "Telefoonkaagu wuxuu ogaadaa taleefanada kale ee aad waqtiga ugu dhow ku qaadato iyadoo la isticmaalayo Bluetooth Tamar Hooseeysa. Tan waxay barnaamijka aabka u oggolaaneysaa inuu ku soo galo soogaliddada maalin walba si qarsoodi ah, xitaa marka aanu furnayn barnaamijka telfoonkaaga.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} ayaa shaqayn doonta marka aabka(app) la xiro.",
       "bluetooth_disabled_error_message": "Karti ugu yeel Bluetooth-ka Dejimaha aabka (app)",
@@ -108,7 +108,7 @@
       "location_disabled_error_title": "Uga Oggolow gudaha Dejimaha",
       "location_header": "Goobta (Location)",
       "proximity_tracing_header": "Raadraaca Isku Dhawaanshaha",
-      "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan",
+      "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, oo naga caawin kara xakamaynta cudurka COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Ma shaqaynayo",
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
@@ -118,12 +118,9 @@
     "fix": "Ku hagaaji cilladaha {{technology}}",
     "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
     "location_info_body_1": "Tikniyoolajiyadda Ogeysiiska Soo-gaarista waxay isticmaashaa iskaanka Bluetooth ka si loo fahmo aaladaha midba midka kale u dhow. Dhammaan taleefannada gacanta ee isticmaala Android 6.0 iyo wixii ka sareeya, si loogu adeegsado iskaanka Bluetooth ka, waxaa loo baahan yahay in qaybta dejinta (location setting) ee barnaamijka la shido dhammaan barnaamijyada, ma ahan oo keliya barnaamijyada ku yimid Nidaamka Ogeysiisyada Soo-gaarsinta.",
-    "location_info_header": "Goobta (Location)",
     "location_info_subheader_1": "Maxaan ugu baahanahay in goobtaydu shidan tahay?",
-    "open_settings": "Fur Dejinta",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
-    "proximity_tracing_info_header": "Raadraaca Isku Dhawaanshaha",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
     "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?"
   },
@@ -135,7 +132,7 @@
     "launch_get_started": "Billow haddaba",
     "launch_screen1_header": "Ku soo dhowow ",
     "privacy_policy": "Xeerka Asurnaanta",
-    "question_icon": "Calaamadda sumadda su’aasha ",
+    "question_icon": "Calaamadda sumadda su’aasha",
     "unchecked_checkbox": "Sanduuqa aan saxda lahayn"
   },
   "navigation": {
@@ -171,7 +168,6 @@
       "body_3": "Kaddib marka la noqdo togane ka ijaabinta COVID-19, isticmaaleyaasha ayaa la wadaagi kare koodh fure ah {{applicationName}} si loo xaqiijiyo ka helkooda cudurka. Hadday taa sameeyaan, koodhadhkooda dhawaanta ahaa ee telefoonnadooda ayaa loo haadin doonaa oo si xasilan kor loogu rari doonaa serferka. Nidaamkan xaqiijintu waxay waxtar u leedahay kahortagga warbixinnada toganaha khaladka ah (false positive report).",
       "body_4": "Haddii aqoonsi la calaamadeeyay ay iswaafaqaan aqoonsi ku keydsan taleefankaaga, tani waxay muujineysaa inaad la kulantay qof laga helay cudurka COVID-19. Tan waa sida {{applicationName}} go'aamin kara haddii adiga ay dhici karto in fayraska aad u feydsantay",
       "body_5": "Haddii uu jiro iswaafaqsanaan, {{applicationName}} ayaa ku ogeysiin doona oo ku siin doona hagitaan dheeraad ah oo ka socda waaxdaada caafimaadka.\n\nTani waa sida {{applicationName}} uu awood uu kuu siin karo inaad go'aan ka gaarto waxyaabo ku saabsan caafimaadkaaga, oo aad ammaanka bulshadaada ku ilaaliso, dhammaantood iyadoon la ogeyn cidda aad tahay iyo halka aad joogtay.",
-      "header": "Sidaan u ilaalinno asturnaantaada",
       "subheader_1": "Markaad daarto Raadinta U dhowaanshaha (Proximity Tracing) taleefankaaga waxaa lagu calaamadeeyaa si isdaba-joog ah oo is beddelaya, aqoonsiyo qori-tuur ah",
       "subheader_2": "Telefoonnada raadraacidda u dhawaanshaha kartida loo siisay koodhadh ku kala beddelashada aaladaha kale ee ay la kulmaan",
       "subheader_3": "Markuu adeegsade baaritaanka laga helo, waxay dooran karaan inay si qarsoodi ah ula wadaagaan xaaladdooda caafimaad",
@@ -190,7 +186,7 @@
     "screen1_header": "Wadajir ahaan, waxaan xakayn karnaa faafka COVID-19",
     "screen1_image_label": "Laba qof shan sare (high five) isku bogaadinaya.",
     "screen2_button": "Ma dhowrsan tahay qarsoodigayga?",
-    "screen2_header": "Telefoonkaaga ayaa xasuusan doona aaladaha kale ee ay kulmeen, laakiin cidna ku garan mayso. ",
+    "screen2_header": "Telefoonkaaga ayaa xasuusan doona aaladaha kale ee ay kulmeen, laakiin cidna ku garan mayso.",
     "screen2_image_label": "Laba qof oo telefoonnadooda ku jira",
     "screen3_button": "Maxaa dhacaya haddii aan ufeydsamo cudrka?",
     "screen3_header": "Wax macluumaad shaqsi ahaan la garan karo ayaa marnaba ka bixi doonin telefoonkaaga.",
@@ -200,17 +196,20 @@
     "screen4_image_label": "Qof ogeysiin ku helaya telefoonkooda",
     "screen5_header": "Adiga oo isticmaalaya barnaamijkan, waxaad ka caawin kartaa hoos u dhigidda faafitaanka COVID-19, ka dhowri kartaa dadka kale, oo aad si toosna caawinaad uga heli kartaa khubarada caafimaadka.",
     "screen5_image_label": "Qofka kula hadlaya khabiir caafimaad aalad internet ahaan,",
-    "select_language": "Xulo Luqadda",
     "step": "Tallaabo {{currentStep}} ee {{totalSteps}}",
     "terms_header_title": "Shuruudaha adeegsiga",
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "debug": "Cillad ka saarka",
     "exposure_history": "Taariikhda Ufeydsanka",
     "exposures": "Soo gaarista",
     "home": "Hoy",
-    "legal": "Sharciyeedka"
+    "legal": "Sharciyeedka",
+    "location": "Goobta (Location)",
+    "protect_privacy": "Sidaan u ilaalinno asturnaantaada",
+    "select_language": "Xulo Luqadda"
   },
   "settings": {
     "i_understand_and_consent": "Waan fahmay oo waan oggolahay"

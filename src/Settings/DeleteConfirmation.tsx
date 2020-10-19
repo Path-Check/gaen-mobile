@@ -4,7 +4,7 @@ import { StatusBar, StyleSheet, View, ScrollView } from "react-native"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { useSymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 
 import { Text } from "../components"
 import { TouchableOpacity } from "react-native"
@@ -24,11 +24,11 @@ import {
 const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
   const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllLogEntries } = useSymptomLogContext()
+  const { deleteAllEntries } = useSymptomHistoryContext()
 
   const { t } = useTranslation()
   const handleOnPressDeleteAllData = async () => {
-    const deleteLogEntriesResult = await deleteAllLogEntries()
+    const deleteLogEntriesResult = await deleteAllEntries()
     if (deleteLogEntriesResult === SUCCESS_RESPONSE) {
       resetOnboarding()
       showMessage({

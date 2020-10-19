@@ -29,14 +29,14 @@ interface CallbackInfo {
   firstname: string
   lastname: string
   phoneNumber: string
-  exposureDate: string
+  exposureDate: string | null
 }
 
 export const postCallbackInfo = async ({
   firstname,
   lastname,
   phoneNumber,
-  exposureDate = "2020-06-16",
+  exposureDate,
 }: CallbackInfo): Promise<NetworkResponse<PostCallbackInfoError>> => {
   const postOAuth = async () => {
     const oauthBody = `grant_type=password&client_id=${callbackClientId}&client_secret=${callbackClientSecret}&username=${callbackUsername}&password=${callbackPassword}`

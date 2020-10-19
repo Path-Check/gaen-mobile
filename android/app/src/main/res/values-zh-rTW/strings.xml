@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="exposure_notification_channel_description">接觸提醒警示</string>
+  <string name="exposure_notification_channel_name">接觸提醒</string>
+  <string name="exposure_notification_message">您曾接觸的某人被檢驗為COVID-19陽性。按此獲得更多資訊。</string>
+  <string name="exposure_notification_title">可能的COVID-19接觸</string>
+</resources>

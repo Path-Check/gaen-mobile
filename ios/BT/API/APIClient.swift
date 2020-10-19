@@ -34,11 +34,17 @@ class BTAPIClient: APIClient {
   let postKeysUrl: URL
   let downloadBaseUrl: URL
   let exposureConfigurationUrl: URL
-  static let shared = BTAPIClient(
-    postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
-    downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
-    exposureConfigurationUrl: URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrl))!
-  )
+  static let shared: BTAPIClient = {
+    var exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV1))!
+    if #available(iOS 13.7, *) {
+      exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV6))!
+    }
+    return BTAPIClient(
+      postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
+      downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
+      exposureConfigurationUrl: exposureConfigurationUrl
+    )
+  }()
   
   private let sessionManager: SessionManager
 

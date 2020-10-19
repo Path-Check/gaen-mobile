@@ -198,6 +198,11 @@ export const buttonPrimaryDisabled: TextStyle = {
   color: Colors.neutral140,
 }
 
+export const buttonFixedBottom: TextStyle = {
+  ...buttonPrimary,
+  fontSize: large,
+}
+
 export const buttonSecondary: TextStyle = {
   ...body1,
   ...semiBold,

@@ -24,7 +24,6 @@ import Document from "./document"
 import EmergencyPlusInCircle from "./emergencyPlusInCircle"
 import Export from "./export"
 import ExposureIcon from "./exposureIcon"
-import Gear from "./gear"
 import GoogleMapsLogo from "./google-maps-logo"
 import Headset from "./headset"
 import Heart from "./heart"
@@ -83,7 +82,6 @@ export const Icons = {
   EmergencyPlusInCircle,
   Export,
   ExposureIcon,
-  Gear,
   GoogleMapsLogo,
   Headset,
   Heart,

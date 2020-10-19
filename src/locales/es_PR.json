@@ -2,7 +2,6 @@
   "_display_name": "Español (PR)",
   "about": {
     "description": "Esta aplicación {{applicationName}} está disponible gracias a {{healthAuthorityName}}",
-    "emergency_contact": "Contacto para emergencias",
     "operating_system_abbr": "OS:",
     "version": "Versión:"
   },
@@ -30,7 +29,8 @@
     "skip": "Omitir",
     "something_went_wrong": "Algo salió mal",
     "start": "Empezar",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "success": "Éxito"
   },
   "errors": {
     "description": "Se ha producido un error. Por favor, vuelva a cargar la aplicación.",
@@ -118,7 +118,6 @@
   },
   "home": {
     "bluetooth_info_body": "Su teléfono detecta otros teléfonos con los que pasa tiempo cerca mediante el uso de Bluetooth de baja energía. Esto permite que la aplicación registre sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación abierta en su dispositivo.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} permanecerá activo después de que la aplicación haya sido cerrada",
       "bluetooth_disabled_error_message": "Vaya a la aplicación Configuración y habilite Bluetooth para corregir este error",
@@ -138,12 +137,9 @@
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "location_info_body_1": "La tecnología de notificación de exposición utiliza el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos utilizando Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el Sistema de Notificaciones de Exposición.",
-    "location_info_header": "Localización",
     "location_info_subheader_1": "¿Por qué necesito que mi localización esté activada?",
-    "open_settings": "Abrir Configuración",
     "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
-    "proximity_tracing_info_header": "Rastreo de proximidad",
     "proximity_tracing_info_subheader_1": "¿Cómo funciona el Rastreo de proximidad?",
     "proximity_tracing_info_subheader_2": "¿Están seguros mis datos?",
     "proximity_tracing": {
@@ -168,8 +164,7 @@
     "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Página de Inicio",
-    "more_info": "Más información",
-    "symptom_checker": "symptom_checker"
+    "more_info": "Más información"
   },
   "onboarding": {
     "activation_header_title": "Configuración de la Aplicación",
@@ -200,7 +195,6 @@
       "body_3": "Después de dar positivo por COVID-19, los usuarios pueden compartir una contraseña con {{applicationName}} para verificar su diagnóstico. Las identificaciones aleatorias recientes de su teléfono se marcan y se cargan de forma segura en el servidor. Este proceso de verificación ayuda a prevenir informes de falsos positivos.",
       "body_4": "Si una identificación marcada coincide con una identificación almacenada en su teléfono, esto indica que usted puede haber encontrado a alguien que dio positivo a COVID-19. Así es como {{applicationName}} puede determinar si usted puede haber estado expuesto al virus.",
       "body_5": "Si hay una coincidencia, {{applicationName}} se lo notificará y le brindará más orientación de su departamento de salud. \n\n Así es como {{applicationName}} puede empoderarlo para usted tomar decisiones sobre su salud y mantener su comunidad segura, todo sin saber quién es usted o dónde ha estado.",
-      "header": "Cómo protegemos su privacidad",
       "subheader_1": "Cuando usted enciende el Rastreo de Proximidad, su teléfono es etiquetado con identificaciones aleatorias que cambian con frecuencia",
       "subheader_2": "Los teléfonos con el Rastreo de Proximidad habilitado intercambian ID con otros dispositivos que encuentran",
       "subheader_3": "Cuando un usuario da positivo, puede optar por compartir su estado de salud de forma anónima",
@@ -229,19 +223,22 @@
     "screen4_image_label": "Una persona recibe una notificación en su teléfono",
     "screen5_header": "Con la aplicación, usted puede ayudar a disminuir la propagación de COVID-19, proteger a otros y obtener ayuda directamente de expertos en salud.",
     "screen5_image_label": "Una persona que habla con un experto en salud virtualmente",
-    "select_language": "Seleccionar idioma",
     "step": "Paso {{currentStep}} de {{totalSteps}}",
     "terms_header_title": "Condiciones de uso",
     "welcome_image_label": "Una ilustración de personas con mascarillas, conectadas como nodos en una red."
   },
   "screen_titles": {
+    "bluetooth": "Bluetooth",
     "callback": "Solicitar que se devuelva la llamada",
     "debug": "Eliminar errores",
     "exposure_history": "Historial de exposición",
     "exposures": "Exposiciones",
     "home": "Página de Inicio",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
-    "legal": "Legal"
+    "legal": "Legal",
+    "location": "Localización",
+    "protect_privacy": "Cómo protegemos su privacidad",
+    "select_language": "Seleccionar idioma"
   },
   "self_assessment": {
     "age_range": {
@@ -278,6 +275,7 @@
       "dont_use_public_transport": "No utilice el transporte público ni el uso compartido de viajes.",
       "drink_water": "Beba mucha agua para evitar deshidratarte.",
       "feeling_fine": "Me alegro de saber que te sientes bien. Usted debería monitorear sus síntomas y permanecer en casa.",
+      "find_a_test_center_nearby": "Encuentre un centro de pruebas cercano",
       "find_telehealth": "Buscar servicios de telemedicina",
       "follow_cdc_guidance": "Si presenta síntomas, siga las instrucciones del CDC.",
       "may_help_you_feel_better": "Estos son algunos pasos que pueden ayudarte a sentirte mejor:",
@@ -334,19 +332,10 @@
     "stop_sharing_data": "Dejar de compartir datos",
     "you_are_sharing_data": "Estás compartiendo datos anónimos"
   },
-  "symptom_checker": {
-    "delete_entry": "Borrar entrada",
-    "entry_deleted": "Entrada eliminada",
+  "symptom_history": {
     "errors": {
-      "adding_symptoms": "Lo sentimos, no pudimos registrar sus síntomas",
-      "deleting_symptom_log": "Lo sentimos, no pudimos eliminar el registro de síntomas",
       "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
-    },
-    "log_symptoms": "Registrar los síntomas",
-    "no_symptom_history": "Sin historial de síntomas",
-    "symptoms_saved": "¡Síntomas guardados!",
-    "symptoms_updated": "¡Síntomas actualizados!",
-    "what_symptoms": "¿Qué síntomas tienes?"
+    }
   },
   "symptoms": {
     "body_aches": "Dolor de cuerpo",

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 
 import CovidDataStateTrend from "./CovidDataStateTrend"
 import { Text } from "../components"
-import { useConfigurationContext } from "../ConfigurationContext"
 import {
   CovidDataRequestStatus,
   useCovidDataContext,
@@ -32,15 +31,11 @@ const LoadingIndicator = () => {
 }
 
 const CovidDataClip: FunctionComponent = () => {
-  const { stateAbbreviation } = useConfigurationContext()
   const { t } = useTranslation()
   const {
-    covidDataRequest: { data, status },
+    stateAbbreviation,
+    covidDataRequest: { trendReferenceData, collectionForTrend, status },
   } = useCovidDataContext()
-
-  if (stateAbbreviation === null) {
-    return null
-  }
 
   const dataClipContent = () => {
     switch (status) {
@@ -57,14 +52,15 @@ const CovidDataClip: FunctionComponent = () => {
       case CovidDataRequestStatus.SUCCESS:
         return (
           <CovidDataStateTrend
-            lastWeekData={data}
+            trendReferenceData={trendReferenceData}
+            collectionForTrend={collectionForTrend}
             stateAbbreviation={stateAbbreviation}
           />
         )
-      case CovidDataRequestStatus.NOT_STARTED:
+      case CovidDataRequestStatus.MISSING_INFO:
         return (
           <Text style={style.errorMessageText}>
-            {t("covid_data.error_getting_data", { stateAbbreviation })}
+            {t("covid_data.apologies_data_unavailable")}
           </Text>
         )
     }

@@ -2,9 +2,9 @@ import React from "react"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
 import { showMessage } from "react-native-flash-message"
 
-import { SymptomLogContext } from "../MyHealth/SymptomLogContext"
+import { SymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { OnboardingProvider } from "../OnboardingContext"
-import { failureResponse, SUCCESS_RESPONSE } from "../OperationResponse"
+import { SUCCESS_RESPONSE } from "../OperationResponse"
 import DeleteConfirmation from "./DeleteConfirmation"
 import { factories } from "../factories"
 
@@ -13,42 +13,42 @@ jest.mock("@react-navigation/native")
 
 describe("DeleteConfirmation", () => {
   it("allows users to delete their data", async () => {
-    const deleteAllLogEntriesSpy = jest.fn()
-    deleteAllLogEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
+    const deleteAllEntriesSpy = jest.fn()
+    deleteAllEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
 
     const { getByLabelText } = render(
       <OnboardingProvider userHasCompletedOnboarding={false}>
-        <SymptomLogContext.Provider
-          value={factories.symptomLogContext.build({
-            deleteAllLogEntries: deleteAllLogEntriesSpy,
+        <SymptomHistoryContext.Provider
+          value={factories.symptomHistoryContext.build({
+            deleteAllEntries: deleteAllEntriesSpy,
           })}
         >
           <DeleteConfirmation />
-        </SymptomLogContext.Provider>
+        </SymptomHistoryContext.Provider>
       </OnboardingProvider>,
     )
 
     fireEvent.press(getByLabelText("Delete My Data"))
     await waitFor(() => {
-      expect(deleteAllLogEntriesSpy).toHaveBeenCalled()
+      expect(deleteAllEntriesSpy).toHaveBeenCalled()
     })
   })
 
   describe("when data deletion is successful", () => {
     it("presents a success message", async () => {
       const showMessageSpy = showMessage as jest.Mock
-      const deleteAllLogEntriesSpy = jest.fn()
-      deleteAllLogEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
+      const deleteAllEntriesSpy = jest.fn()
+      deleteAllEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
-              deleteAllLogEntries: deleteAllLogEntriesSpy,
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
+              deleteAllEntries: deleteAllEntriesSpy,
             })}
           >
             <DeleteConfirmation />
-          </SymptomLogContext.Provider>
+          </SymptomHistoryContext.Provider>
         </OnboardingProvider>,
       )
 
@@ -66,20 +66,18 @@ describe("DeleteConfirmation", () => {
   describe("when data deletion fails", () => {
     it("presents an error message", async () => {
       const showMessageSpy = showMessage as jest.Mock
-      const deleteAllLogEntriesSpy = jest.fn()
-      deleteAllLogEntriesSpy.mockResolvedValueOnce(
-        failureResponse("operation failed"),
-      )
+      const deleteAllEntriesSpy = jest.fn()
+      deleteAllEntriesSpy.mockResolvedValueOnce({ kind: "failure" })
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>
-          <SymptomLogContext.Provider
-            value={factories.symptomLogContext.build({
-              deleteAllLogEntries: deleteAllLogEntriesSpy,
+          <SymptomHistoryContext.Provider
+            value={factories.symptomHistoryContext.build({
+              deleteAllEntries: deleteAllEntriesSpy,
             })}
           >
             <DeleteConfirmation />
-          </SymptomLogContext.Provider>
+          </SymptomHistoryContext.Provider>
         </OnboardingProvider>,
       )
 

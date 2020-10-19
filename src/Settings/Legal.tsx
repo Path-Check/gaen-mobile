@@ -3,8 +3,6 @@ import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { Text } from "../components"
-import { Colors, Spacing, Typography } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "./ExternalLink"
 import {
@@ -15,8 +13,13 @@ import {
   loadAuthorityLinks,
   applyTranslations,
 } from "../configuration/authorityLinks"
+import { Text } from "../components"
+import { useStatusBarEffect } from "../navigation"
+
+import { Colors, Spacing, Typography } from "../styles"
 
 const Legal: FunctionComponent = () => {
+  useStatusBarEffect("light-content", Colors.headerBackground)
   const {
     t,
     i18n: { language: localeCode },

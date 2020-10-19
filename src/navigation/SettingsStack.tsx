@@ -61,7 +61,11 @@ const SettingsStack: FunctionComponent = () => {
 
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={SettingsStackScreens.Settings} component={Settings} />
+      <Stack.Screen
+        name={SettingsStackScreens.Settings}
+        component={Settings}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name={SettingsStackScreens.Legal}
         component={Legal}

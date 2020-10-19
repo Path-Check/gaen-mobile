@@ -36,9 +36,12 @@ export const secondary100 = BrandColors.secondary100
 
 // Accents
 export const danger10 = "#fff0f0"
+export const danger25 = "#ffe0e0"
 export const danger75 = "#ff7d7d"
 export const danger100 = "#ff5656"
 export const success10 = "#f2fcf4"
+export const success25 = "#deffe4"
+export const success50 = "#5bd9a2"
 export const success100 = "#24a36c"
 export const warning25 = "#f9edcc"
 export const warning50 = "#ffdc6f"
@@ -47,15 +50,6 @@ export const warning100 = "#ffc000"
 // Backgrounds
 export const primaryLightBackground = white
 export const primaryDarkBackround = primary125
-
-// Gradients
-export const gradient10Dark = "#ececff"
-export const gradient10Light = primaryLightBackground
-export const gradient10 = [gradient10Dark, gradient10Light]
-
-export const gradient100Dark = BrandColors.gradient100Dark
-export const gradient100Light = BrandColors.gradient100Light
-export const gradient100 = [gradient100Dark, gradient100Light]
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"

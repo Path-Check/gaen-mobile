@@ -85,19 +85,13 @@ module.exports = {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-empty-function": [2, { allow: ["arrowFunctions"] }],
     "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": 0,
   },
   overrides: [
     {
       files: ["*.spec.js"], // Or *.test.js
       rules: {
         "react-native/no-raw-text": 0,
-      },
-    },
-    {
-      files: ["e2e/**/*.js"], // Or *.test.js
-      rules: {
-        "jest/expect-expect": 0, // these files do expectations inside page objects
       },
     },
     {
