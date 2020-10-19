@@ -16,14 +16,12 @@ describe("postCallbackInfo", () => {
       const firstname = "firstname"
       const lastname = "lastname"
       const phoneNumber = "phoneNumber"
-      const exposureDate = "2020-09-16"
       const body = `grant_type=password&client_id=CALLBACK_CLIENT_ID&client_secret=CALLBACK_CLIENT_SECRET&username=CALLBACK_USERNAME&password=CALLBACK_PASSWORD`
 
       const result = await postCallbackInfo({
         firstname,
         lastname,
         phoneNumber,
-        exposureDate,
       })
 
       expect(fetchSpy).toHaveBeenCalledWith("CALLBACK_OAUTH_URL", {
@@ -41,7 +39,6 @@ describe("postCallbackInfo", () => {
           LA_First_Name__c: firstname,
           LA_Last_Name__c: lastname,
           LA_Mobile_Phone__c: phoneNumber,
-          LA_Exposure_Date__c: exposureDate,
         }),
       })
       expect(result).toEqual({ kind: "success" })
@@ -65,7 +62,6 @@ describe("postCallbackInfo", () => {
           firstname: "firstname",
           lastname: "lastname",
           phoneNumber: "phoneNumber",
-          exposureDate: "exposureDate",
         })
 
         expect(result).toEqual({ kind: "failure", error: "Unknown" })
@@ -90,7 +86,6 @@ describe("postCallbackInfo", () => {
           firstname: "firstname",
           lastname: "lastname",
           phoneNumber: "phoneNumber",
-          exposureDate: "exposureDate",
         })
 
         expect(result).toEqual({
@@ -115,7 +110,6 @@ describe("postCallbackInfo", () => {
         firstname: "firstname",
         lastname: "lastname",
         phoneNumber: "phoneNumber",
-        exposureDate: "exposureDate",
       })
 
       expect(result).toEqual({ kind: "failure", error: "AuthorizationFailed" })
@@ -133,7 +127,6 @@ describe("postCallbackInfo", () => {
         firstname: "firstname",
         lastname: "lastname",
         phoneNumber: "phoneNumber",
-        exposureDate: "exposureDate",
       })
 
       expect(result).toEqual({

@@ -61,7 +61,6 @@ const CallbackForm: FunctionComponent = () => {
         firstname,
         lastname,
         phoneNumber,
-        exposureDate: null,
       })
 
       if (response.kind === "success") {
