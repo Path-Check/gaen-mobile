@@ -15,16 +15,36 @@ import {
 
 interface ModalHeaderProps {
   headerTitle: string
+  handleOnDismiss?: () => void
 }
 
-export const applyModalHeader = (headerTitle: string) => {
+export const applyModalHeader = (
+  headerTitle: string,
+  handleOnDismiss?: () => void,
+) => {
   return function modalHeader(): ReactNode {
-    return <ModalHeader headerTitle={headerTitle} />
+    return (
+      <ModalHeader
+        headerTitle={headerTitle}
+        handleOnDismiss={handleOnDismiss}
+      />
+    )
   }
 }
 
-const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ headerTitle }) => {
+const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
+  headerTitle,
+  handleOnDismiss,
+}) => {
   const navigation = useNavigation()
+
+  const handleOnPressBack = () => {
+    if (handleOnDismiss) {
+      handleOnDismiss()
+    } else {
+      navigation.goBack()
+    }
+  }
 
   return (
     <View style={style.container}>
@@ -32,7 +52,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ headerTitle }) => {
         {headerTitle}
       </Text>
       <TouchableOpacity
-        onPress={navigation.goBack}
+        onPress={handleOnPressBack}
         hitSlop={{ top: 30, right: 30, bottom: 30, left: 30 }}
       >
         <SvgXml

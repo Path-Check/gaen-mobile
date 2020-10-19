@@ -141,3 +141,13 @@ const blankHistory = (today: Posix, totalDays: number): SymptomHistory => {
     },
   )
 }
+
+export const hasEmergencySymptoms = (
+  loggedSymptoms: Set<Symptom.Symptom>,
+): boolean => {
+  return Boolean(
+    Symptom.emergencySymptoms.find((emergencySymptom) => {
+      return loggedSymptoms.has(emergencySymptom)
+    }),
+  )
+}

@@ -9,10 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import * as Symptom from "./symptom"
-import { SymptomEntry } from "./symptomHistory"
+import { hasEmergencySymptoms, SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
 import { posixToDayjs } from "../utils/dateTime"
 import Checkbox from "./Checkbox"
@@ -88,11 +88,15 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   }
 
   const completeOnPressSave = () => {
-    navigation.goBack()
-    showMessage({
-      message: t("common.success"),
-      ...Affordances.successFlashMessageOptions,
-    })
+    if (hasEmergencySymptoms(selectedSymptoms)) {
+      navigation.navigate(SymptomHistoryStackScreens.CallEmergencyServices)
+    } else {
+      navigation.goBack()
+      showMessage({
+        message: t("common.success"),
+        ...Affordances.successFlashMessageOptions,
+      })
+    }
   }
 
   const hasNoUserInputSelected = selectedSymptoms.size === 0
