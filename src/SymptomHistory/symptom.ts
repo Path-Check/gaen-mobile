@@ -40,14 +40,6 @@ export const emergencySymptoms: Symptom[] = [
   "disorientation_or_unresponsiveness",
 ]
 
-export const hasEmergencySymptoms = (loggedSymptoms: Set<Symptom>): boolean => {
-  return Boolean(
-    emergencySymptoms.find((emergencySymptom) => {
-      return loggedSymptoms.has(emergencySymptom)
-    }),
-  )
-}
-
 export const fromString = (rawSymptom: string): Symptom | null => {
   switch (rawSymptom) {
     case "chest_pain_or_pressure": {
