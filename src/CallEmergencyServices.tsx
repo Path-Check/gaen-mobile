@@ -9,8 +9,8 @@ import {
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { useConfigurationContext } from "../ConfigurationContext"
-import { Text } from "../components"
+import { useConfigurationContext } from "./ConfigurationContext"
+import { Text } from "./components"
 
 import {
   Buttons,
@@ -19,8 +19,8 @@ import {
   Outlines,
   Spacing,
   Typography,
-} from "../styles"
-import { Icons } from "../assets"
+} from "./styles"
+import { Icons } from "./assets"
 
 const CallEmergencyServices: FunctionComponent = () => {
   const { t } = useTranslation()

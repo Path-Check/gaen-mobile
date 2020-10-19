@@ -178,13 +178,17 @@ export const WelcomeStackScreens: {
   Welcome: "Welcome",
 }
 
-export type SympotomHistoryStackScreen = "SymptomHistory" | "SelectSymptoms"
+export type SymptomHistoryStackScreen =
+  | "SymptomHistory"
+  | "SelectSymptoms"
+  | "CallEmergencyServices"
 
 export const SymptomHistoryStackScreens: {
-  [key in SympotomHistoryStackScreen]: SympotomHistoryStackScreen
+  [key in SymptomHistoryStackScreen]: SymptomHistoryStackScreen
 } = {
   SymptomHistory: "SymptomHistory",
   SelectSymptoms: "SelectSymptoms",
+  CallEmergencyServices: "CallEmergencyServices",
 }
 
 export type SelfAssessmentStackScreen =
