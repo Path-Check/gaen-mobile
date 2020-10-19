@@ -24,8 +24,16 @@ export const isToday = (date: Posix): boolean => {
   return beginningOfToday <= date && endOfToday >= date
 }
 
+export const isSameDay = (dateA: Posix, dateB: Posix): boolean => {
+  return dayjs(dateA).isSame(dateB, "day")
+}
+
 export const daysAgo = (days: number): Posix => {
   return dayjs.utc(Date.now()).subtract(days, "day").valueOf()
+}
+
+export const daysAgoFrom = (days: number, today: Posix): Posix => {
+  return dayjs.utc(today).subtract(days, "day").valueOf()
 }
 
 export const beginningOfDay = (date: Posix): Posix => {

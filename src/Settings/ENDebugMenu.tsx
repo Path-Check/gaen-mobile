@@ -27,7 +27,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
   useStatusBarEffect("light-content", Colors.headerBackground)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllLogEntries } = useSymptomHistoryContext()
+  const { deleteAllEntries } = useSymptomHistoryContext()
 
   useEffect(() => {
     const handleBackPress = () => {
@@ -139,7 +139,7 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             <DebugMenuListItem
               label="Delete All Symptom Logs"
               onPress={handleOnPressSimulationButton(async () => {
-                const result = await deleteAllLogEntries()
+                const result = await deleteAllEntries()
                 return Promise.resolve(result.kind)
               })}
             />

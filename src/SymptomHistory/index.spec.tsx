@@ -1,126 +1,62 @@
 import React from "react"
-import { fireEvent, render, waitFor } from "@testing-library/react-native"
-import { useNavigation } from "@react-navigation/native"
+import { render } from "@testing-library/react-native"
+import dayjs from "dayjs"
 
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
-import { SymptomLogEntry } from "./symptoms"
+import { SymptomHistory } from "./symptomHistory"
+import { Symptom } from "./symptom"
 
-import SymptomHistory from "./index"
+import SymptomHistoryScreen from "./index"
 import { factories } from "../factories"
-import { posixToDayjs } from "../utils/dateTime"
-import { SymptomHistoryStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
-
 describe("SymptomHistory", () => {
-  it("allows the user to add a symptom log entry", async () => {
-    const navigateSpy = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValue({
-      navigate: navigateSpy,
-    })
-    const defaultContext = factories.symptomHistoryContext.build()
-    const { getByLabelText } = render(
-      <SymptomHistoryContext.Provider value={defaultContext}>
-        <SymptomHistory />
-      </SymptomHistoryContext.Provider>,
-    )
-
-    fireEvent.press(getByLabelText("Log symptoms"))
-
-    await waitFor(() => {
-      expect(navigateSpy).toHaveBeenCalledWith(
-        SymptomHistoryStackScreens.SelectSymptoms,
-      )
-    })
-  })
-
-  describe("when the user has no symptom logs", () => {
-    it("displays a 'no logs' message", () => {
-      const { getByText } = render(
-        <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [],
-          })}
-        >
-          <SymptomHistory />
-        </SymptomHistoryContext.Provider>,
-      )
-
-      expect(getByText("No symptom history…")).toBeDefined()
-    })
-  })
-
-  describe("when the user has log data", () => {
-    it("shows the correct message, date and symptoms", () => {
-      const dateString = "September 21, 2020"
-      const firstLogEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const firstTimeString =
-        posixToDayjs(firstLogEntryPosix)?.local()?.format("HH:mm A") ||
-        "not a date"
-      const secondLogEntryPosix = Date.parse(`${dateString} 12:00`)
-      const secondTimeString =
-        posixToDayjs(secondLogEntryPosix)?.local()?.format("HH:mm A") ||
-        "not a date"
-      const { getByText, queryByText, getAllByText } = render(
-        <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [
-              {
-                id: "1",
-                symptoms: ["cough"],
-                date: firstLogEntryPosix,
-              },
-              {
-                id: "2",
-                symptoms: ["loss_of_smell"],
-                date: secondLogEntryPosix,
-              },
-            ],
-          })}
-        >
-          <SymptomHistory />
-        </SymptomHistoryContext.Provider>,
-      )
-
-      expect(queryByText("You were not feeling well")).toBeNull()
-      expect(getAllByText(dateString)).toHaveLength(2)
-      expect(getByText(firstTimeString)).toBeDefined()
-      expect(getByText(secondTimeString)).toBeDefined()
-      expect(getByText("Cough")).toBeDefined()
-      expect(getByText("Loss of smell")).toBeDefined()
-    })
-  })
-
-  describe("when the user has symptom logs", () => {
-    it("allows the user to edit a symptom log", () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({
-        navigate: navigateSpy,
-      })
-
-      const logEntryPosix = Date.parse(`2020-09-21 10:00`)
-      const logEntry: SymptomLogEntry = {
-        id: "1",
-        symptoms: ["cough"],
-        date: logEntryPosix,
-      }
-      const { getByLabelText } = render(
-        <SymptomHistoryContext.Provider
-          value={factories.symptomHistoryContext.build({
-            symptomLogEntries: [logEntry],
-          })}
-        >
-          <SymptomHistory />
-        </SymptomHistoryContext.Provider>,
-      )
-
-      fireEvent.press(getByLabelText("Edit"))
-      expect(navigateSpy).toHaveBeenCalledWith(
-        SymptomHistoryStackScreens.SelectSymptoms,
+  describe("when given a symptom history", () => {
+    it("renders the history", () => {
+      const today = Date.parse("2020-1-3")
+      const oneDayAgo = Date.parse("2020-1-2")
+      const twoDaysAgo = Date.parse("2020-1-1")
+      const history: SymptomHistory = [
         {
-          logEntry: JSON.stringify(logEntry),
+          kind: "NoUserInput",
+          date: today,
         },
+        {
+          id: "a",
+          kind: "UserInput",
+          date: oneDayAgo,
+          symptoms: new Set<Symptom>(),
+        },
+        {
+          id: "b",
+          kind: "UserInput",
+          date: twoDaysAgo,
+          symptoms: new Set<Symptom>(["cough"]),
+        },
+      ]
+      const { getByText, getAllByText } = render(
+        <SymptomHistoryContext.Provider
+          value={factories.symptomHistoryContext.build({
+            symptomHistory: history,
+          })}
+        >
+          <SymptomHistoryScreen />
+        </SymptomHistoryContext.Provider>,
       )
+
+      const expectedTodayText = dayjs(today).local().format("MMM D, 'YY")
+      const expectedOneDayAgoText = dayjs(oneDayAgo)
+        .local()
+        .format("MMM D, 'YY")
+      const expectedTwoDaysAgoText = dayjs(twoDaysAgo)
+        .local()
+        .format("MMM D, 'YY")
+      expect(getByText(expectedTodayText)).toBeDefined()
+      expect(getAllByText("No entry")).toHaveLength(1)
+      expect(getByText(expectedOneDayAgoText)).toBeDefined()
+      expect(getAllByText("You felt well")).toHaveLength(1)
+      expect(getByText(expectedTwoDaysAgoText)).toBeDefined()
+      expect(getAllByText("- Cough")).toHaveLength(1)
     })
   })
 })

@@ -3,17 +3,18 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import SymptomHistoryScreen from "../SymptomHistory/"
 import SelectSymptomsScreen from "../SymptomHistory/SelectSymptoms"
 import { SymptomHistoryStackScreens } from "./index"
 import { applyModalHeader } from "./ModalHeader"
-import { useTranslation } from "react-i18next"
+import { SymptomEntry } from "../SymptomHistory/symptomHistory"
 
 export type SymptomHistoryStackParams = {
   SymptomHistory: undefined
   AtRiskRecommendation: undefined
-  SelectSymptoms: { logEntry?: string }
+  SelectSymptoms: { symptomEntry: SymptomEntry }
 }
 const Stack = createStackNavigator<SymptomHistoryStackParams>()
 

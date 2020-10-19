@@ -3,9 +3,10 @@ import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
+import { showMessage } from "react-native-flash-message"
 
 import { ExposureDatum } from "../../exposure"
-import { StatusBar, Text, Button } from "../../components"
+import { LoadingIndicator, StatusBar, Text } from "../../components"
 import { useStatusBarEffect } from "../../navigation/index"
 import { useExposureContext } from "../../ExposureContext"
 
@@ -15,7 +16,7 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors, Outlines } from "../../styles"
+import { Buttons, Spacing, Typography, Colors, Affordances } from "../../styles"
 
 type Posix = number
 
@@ -44,7 +45,18 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const handleOnPressCheckForExposures = async () => {
     setCheckingForExposures(true)
-    await checkForNewExposures()
+    const checkResult = await checkForNewExposures()
+    if (checkResult.kind === "success") {
+      showMessage({
+        message: t("common.success"),
+        ...Affordances.successFlashMessageOptions,
+      })
+    } else {
+      showMessage({
+        message: t("common.something_went_wrong"),
+        ...Affordances.errorFlashMessageOptions,
+      })
+    }
     setCheckingForExposures(false)
   }
 
@@ -87,15 +99,16 @@ const History: FunctionComponent<HistoryProps> = ({
           )}
         </View>
       </ScrollView>
-      <View style={style.bottomActionsContainer}>
-        <Button
-          label={t("exposure_history.check_for_exposures")}
-          onPress={handleOnPressCheckForExposures}
-          loading={checkingForExposures}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={handleOnPressCheckForExposures}
+        style={style.button}
+        testID="check-for-exposures-button"
+      >
+        <Text style={style.buttonText}>
+          {t("exposure_history.check_for_exposures")}
+        </Text>
+      </TouchableOpacity>
+      {checkingForExposures && <LoadingIndicator />}
     </>
   )
 }
@@ -137,21 +150,11 @@ const style = StyleSheet.create({
     marginTop: Spacing.xxLarge,
     marginBottom: Spacing.large,
   },
-  bottomActionsContainer: {
-    alignItems: "center",
-    borderTopWidth: Outlines.hairline,
-    borderColor: Colors.neutral10,
-    backgroundColor: Colors.secondary10,
-    paddingTop: Spacing.small,
-    paddingBottom: Spacing.medium,
-    paddingHorizontal: Spacing.medium,
-  },
   button: {
-    width: "100%",
+    ...Buttons.fixedBottom,
   },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonFixedBottom,
   },
 })
 

@@ -2,7 +2,6 @@
   "_display_name": "英文",
   "about": {
     "description": "{{applicationName}}應用程序由{{healthAuthorityName}}提供",
-    "emergency_contact": "緊急聯絡人",
     "operating_system_abbr": "作業系統：",
     "version": "版本："
   },
@@ -142,7 +141,6 @@
   },
   "home": {
     "bluetooth_info_body": "您的手機以低功耗藍牙偵測到與您相鄰一段時間的其他手機。這允許應用程式匿名紀錄您的每日接觸者，即使您裝置上的應用程式並未開啟。",
-    "bluetooth_info_header": "藍牙",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}在應用程式關閉後仍會保持運作",
       "bluetooth_disabled_error_message": "到設定中打開藍芽來修正錯誤",
@@ -167,12 +165,9 @@
     "have_a_positive_test": "測試結果代碼是否為陽性？",
     "if_you_have_a_code": "回報您的結果，確保社區安全。",
     "location_info_body_1": "接觸通知技術使用藍牙掃描來了解哪些設備相鄰。若要在具備Android 6.0及更高版本的所有手機上使用藍牙掃描，需要為所有應用程式打開設備定位，而不僅是使用“接觸通知系統”的應用程式。",
-    "location_info_header": "定位",
     "location_info_subheader_1": "為什麼我需要打開我的定位？",
-    "open_settings": "打開設定",
     "proximity_tracing_info_body_1": "如果安裝了應用程式的智慧手機為開機狀態、已啟用藍牙並在彼此附近達一段時間，則會在您的設備上紀錄一個接觸案例。",
     "proximity_tracing_info_body_2": "如果接觸到他人，您的數據和訊息將保持匿名。應用程式不存儲任何資料，僅交換隨機ID，而這些資訊將在14天內刪除。",
-    "proximity_tracing_info_header": "接觸提醒",
     "proximity_tracing_info_subheader_1": "接觸提醒如何運作？",
     "proximity_tracing_info_subheader_2": "我的資料安全嗎？",
     "proximity_tracing": {
@@ -198,8 +193,7 @@
     "exposure": "接觸",
     "exposure_history": "接觸史",
     "home": "工作介面",
-    "more_info": "更多資訊",
-    "symptom_checker": "症狀檢驗"
+    "more_info": "更多資訊"
   },
   "onboarding": {
     "activation_header_title": "應用程式設定",
@@ -230,7 +224,6 @@
       "body_3": "去診之後，用戶可以透過一組密碼與{{applicationName}}來分享診診斷說明。他們的手機裡最後的隨機ID將被被標記並安全地上傳到伺服器。此驗證過程有助於防止誤報。",
       "body_4": "如果被標記的ID與手機中存儲的ID相匹配，則表明您可能遇到了確診病患。 {{applicationName}}可以通過這種方式確定您是否接觸到病毒。",
       "body_5": "如果我們有發現接觸對象， {{applicationName}}將通知您並提供衛生部門的指示。\n\n這就是{{applicationName}}可以如何幫助您做出健康的決定，並確保社區的安全，而這一切都是匿名的。",
-      "header": "我們如何保護您的隱私",
       "subheader_1": "當您啟用“接觸追蹤”時，您的電話會以隨機變化的ID標記",
       "subheader_2": "啟用“接觸追蹤”功能的手機可以與他們遇到的其他設備交換ID",
       "subheader_3": "當用戶確診時，他們可以選擇匿名分享其健康狀況",
@@ -259,7 +252,6 @@
     "screen4_image_label": "在手機上收到通知的人",
     "screen5_header": "您可以透過應用程式幫助減緩COVID-19的傳播、保護他人並直接從健康專家那裡獲得幫助。",
     "screen5_image_label": "與健康專家線上交談的人",
-    "select_language": "選擇語言",
     "step": "{{totalSteps}}中的{{currentStep}}步驟",
     "terms_header_title": "使用條款",
     "welcome_image_label": "人們戴著口罩，像在網路中相互連結的插圖"
@@ -383,21 +375,10 @@
     "stop_sharing_data": "停止分享數據",
     "you_are_sharing_data": "您正在分享匿名數據"
   },
-  "symptom_checker": {
-    "delete_entry": "刪除條目",
-    "entry_deleted": "條目已刪除",
+  "symptom_history": {
     "errors": {
-      "adding_symptoms": "抱歉，我們無法紀錄您的症狀",
-      "deleting_symptom_log": "抱歉，我們無法刪除您的症狀紀錄",
       "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
-    },
-    "log_symptoms": "記錄症狀",
-    "no_symptom_history": "無症狀史",
-    "symptom_log": "症狀紀錄",
-    "symptoms_saved": "症狀已保存！",
-    "symptoms_updated": "症狀已更新！",
-    "to_protect_your_privacy": "為保護您的隱私，登入超過一日將自動取消",
-    "what_symptoms": "您有甚麼症狀？"
+    }
   },
   "symptoms": {
     "body_aches": "身體酸痛",

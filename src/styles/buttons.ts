@@ -64,3 +64,11 @@ export const tinyRounded: ViewStyle = {
   ...maxCornerRoundness,
   ...tertiaryBlue,
 }
+
+export const fixedBottom: ViewStyle = {
+  ...base,
+  paddingTop: Spacing.medium,
+  paddingBottom: Spacing.medium,
+  backgroundColor: Colors.primary100,
+  width: "100%",
+}

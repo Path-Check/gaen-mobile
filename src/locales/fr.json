@@ -1,7 +1,6 @@
 {
   "_display_name": "Français",
   "about": {
-    "emergency_contact": "Contact d’urgence",
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
@@ -69,7 +68,6 @@
   },
   "home": {
     "bluetooth_info_body": "Votre téléphone détecte les autres téléphones qui sont restés à proximité en utilisant Bluetooth Low Energy. Cela permet à l'application d'enregistrer vos rencontres quotidiennes de façon anonyme, même lorsque l'application n'est pas ouverte sur votre appareil.",
-    "bluetooth_info_header": "Bluetooth",
     "bluetooth": {
       "bluetooth_disabled_error_message": "Allez dans les paramètres et activez Bluetooth pour corriger cette erreur",
       "bluetooth_disabled_error_title": "Activez le Bluetooth dans les paramètres",
@@ -81,7 +79,6 @@
       "tracing_off_subheader": "Activer le Bluetooth et la recherche de proximité pour obtenir des informations sur les expositions possibles"
     },
     "location_info_subheader_1": "Pourquoi dois-je activer la localisation ?",
-    "open_settings": "Ouvrir les paramètres",
     "proximity_tracing": {
       "unauthorized_error_title": "Activer le suivi de proximité"
     }
@@ -102,7 +99,6 @@
     "notification_header": "Recevez une notification si vous avez peut-être été exposé",
     "privacy_policy": "Politique de confidentialité",
     "protect_privacy": {
-      "header": "Comment nous protégeons votre vie privée",
       "subheader_2": "Les téléphones équipés d'un système de détection de proximité échangent leurs identifiants avec les autres appareils qu'ils rencontrent",
       "subheader_3": "Lorsqu'un utilisateur est testé positif, il peut choisir de partager anonymement son état de santé",
       "subheader_4": "Chaque téléphone interroge périodiquement le serveur pour obtenir la liste des identifiants marqués et recherche les correspondances"
@@ -113,7 +109,6 @@
     "screen4_image_label": "Une personne recevant une notification sur son téléphone",
     "screen5_header": "Grâce à l'application, vous pouvez contribuer à ralentir la propagation de COVID-19, protéger les autres et obtenir directement de l'aide des experts de la santé.",
     "screen5_image_label": "Une personne parlant à un expert de la santé virtuellement",
-    "select_language": "Sélectionnez une langue",
     "terms_header_title": "Conditions d’utilisation (en anglais)",
     "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau."
   },
@@ -151,17 +146,10 @@
     "stop_sharing_data": "Arrêt du partage des données",
     "you_are_sharing_data": "Vous partagez des données anonymisées"
   },
-  "symptom_checker": {
-    "delete_entry": "Supprimer l'entrée",
-    "entry_deleted": "Entrée supprimée",
+  "symptom_history": {
     "errors": {
-      "adding_symptoms": "Désolé, nous n'avons pas pu enregistrer vos symptômes",
-      "deleting_symptom_log": "Désolé, nous n'avons pas pu supprimer le journal des symptômes",
       "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
-    },
-    "symptoms_saved": "Symptômes sauvegardés !",
-    "symptoms_updated": "Symptômes mis à jour !",
-    "what_symptoms": "Quels symptômes ressentez-vous?"
+    }
   },
   "symptoms": {
     "body_aches": "Courbatures",

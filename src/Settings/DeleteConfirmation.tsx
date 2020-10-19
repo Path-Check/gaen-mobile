@@ -24,11 +24,11 @@ import {
 const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
   const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllLogEntries } = useSymptomHistoryContext()
+  const { deleteAllEntries } = useSymptomHistoryContext()
 
   const { t } = useTranslation()
   const handleOnPressDeleteAllData = async () => {
-    const deleteLogEntriesResult = await deleteAllLogEntries()
+    const deleteLogEntriesResult = await deleteAllEntries()
     if (deleteLogEntriesResult === SUCCESS_RESPONSE) {
       resetOnboarding()
       showMessage({

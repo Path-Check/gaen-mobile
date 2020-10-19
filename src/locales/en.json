@@ -32,9 +32,11 @@
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
     "start": "Start",
-    "submit": "Submit"
+    "submit": "Submit",
+    "success": "Success"
   },
   "covid_data": {
+    "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "cases_today": "Cases today",
     "covid_data": "COVID Data",
     "covid_stats_in": "COVID Stats in {{location}}",
@@ -42,7 +44,6 @@
     "down_from_last_week": "Down from last week",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
     "new_cases": "New Cases",
-    "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "see_more": "See more",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths",
@@ -143,6 +144,7 @@
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
       "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
       "bluetooth_header": "Bluetooth",
@@ -153,6 +155,7 @@
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Exposure Detection Off",
+      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
     "call_emergency_services": "Call Emergency Services",
@@ -194,7 +197,7 @@
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_checker": "Symptom Checker"
+    "symptom_history": "Symptom Checker"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
@@ -383,20 +386,16 @@
     "stop_sharing_data": "Stop Sharing Data",
     "you_are_sharing_data": "You are sharing anonymized data"
   },
-  "symptom_checker": {
-    "delete_entry": "Delete entry",
-    "entry_deleted": "Entry deleted",
+  "symptom_history": {
+    "did_not_feel_well": "You did not feel well",
     "errors": {
-      "adding_symptoms": "Sorry, we could not log your symptoms",
-      "deleting_symptom_log": "Sorry, we could not delete the symptoms log",
       "updating_symptoms": "Sorry, we could not update your symptoms"
     },
-    "log_symptoms": "Log symptoms",
-    "no_symptom_history": "No symptom history…",
-    "symptom_log": "Symptom Log",
-    "symptoms_saved": "Symptoms saved!",
-    "symptoms_updated": "Symptoms updated!",
-    "to_protect_your_privacy": "To protect your privacy, logs are stored on your device and deleted automatically after {{days}} days."
+    "felt_well": "You felt well",
+    "no_entry": "No entry",
+    "no_symptoms": "No symptoms",
+    "symptom_history": "Symptom History",
+    "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },
   "symptoms": {
     "body_aches": "Body aches",

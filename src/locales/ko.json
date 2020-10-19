@@ -2,7 +2,6 @@
   "_display_name": "한국어",
   "about": {
     "description": "{{applicationName}}앱은 {{healthAuthorityName}}에 의해 사용할 수 있습니다.",
-    "emergency_contact": "긴급 연락처",
     "operating_system_abbr": "OS:",
     "version": "버전:"
   },
@@ -29,7 +28,8 @@
     "skip": "건너 뛰기",
     "something_went_wrong": "문제가 발생했습니다.",
     "start": "시작",
-    "submit": "제출"
+    "submit": "제출",
+    "success": "성공"
   },
   "covid_data": {
     "down_from_last_week": "지난 주 대비 감소",
@@ -121,7 +121,6 @@
   },
   "home": {
     "bluetooth_info_body": "휴대 전화는 블루투스 저 에너지를 사용하여 가까이에 있는 다른 휴대 전화를 감지합니다. 이 경우, 휴대 전화에서 앱을 열지 않아도 앱이 매일 로그를 익명으로 기록 할 수 있습니다.",
-    "bluetooth_info_header": "블루투스",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} 앱이 종료 된 후에도 활성 상태로 유지됩니다.",
       "bluetooth_disabled_error_message": "설정 앱에서 블루투스를 활성화하여 이 오류를 수정하십시오.",
@@ -141,12 +140,9 @@
     "fix": "{{technology}}로 문제 해결",
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
     "location_info_body_1": "노출 알림 기술은 블루투스 스캔을 사용하여 서로 가까이있는 장치를 파악합니다.  블루투스 스캔을 사용하려면 안드로이드 6.0 이상을 실행하는 모든 휴대폰은 노출 알림 시스템이 내장된 앱뿐만 아니라 모든 앱에 위치 설정을 켜야합니다.",
-    "location_info_header": "위치",
     "location_info_subheader_1": "내 위치를 켜야하는 이유는 무엇입니까?",
-    "open_settings": "설정 열기",
     "proximity_tracing_info_body_1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
-    "proximity_tracing_info_header": "근접 추적",
     "proximity_tracing_info_subheader_1": "근접 추적은 어떻게 작동됩니까?",
     "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?"
   },
@@ -166,8 +162,7 @@
     "exposure": "노출",
     "exposure_history": "노출 이력",
     "home": "집",
-    "more_info": "더 많은 정보",
-    "symptom_checker": "증상 검사기"
+    "more_info": "더 많은 정보"
   },
   "onboarding": {
     "activation_header_title": "앱 설정",
@@ -198,7 +193,6 @@
       "body_3": "코로나19 감염 확진 후 사용자는 {{applicationName}} 과 패스코드를 공유하여 진단을 확인할 수 있습니다. 휴대 전화의 최근 임의ID는 플래그가 부착되어 안전하게 서버에 업로드됩니다. 해당 확인 프로세스는 잘못된 코로나19 양성 판단 보고를 방지하는 데 도움이됩니다.",
       "body_4": "플래그가 부착된 ID가 휴대 전화에 저장된 ID와 일치할 경우, 코로나19 확진자와 만난 사실이 있음을 나타낸다. 이는 {{applicationName}}이 사용자가 바이러스에 노출되었는지 확인하는 방법입니다.",
       "body_5": "만약 일치하는 경우 {{applicationName}}은 귀하에게 해당 내용을 알리고, 보건부의 추가 지침을 제공합니다.\n\n이것은 {{applicationName}}이 귀하가 누구이며, 어디에 있었는지에 대한 정보 없이 건강에 대한 결정을 내리고 지역사회를 안전하게 유지할 수 있는 방법입니다.",
-      "header": "개인 정보를 보호하는 방법",
       "subheader_1": "근접 추적을 켜면 휴대 전화기에 자주 변경되는 임의ID 태그가 지정됩니다.",
       "subheader_2": "근접 추적이 활성화 된 휴대 전화기는 다른 휴대 전화기와 ID를 교환합니다.",
       "subheader_3": "사용자가 양성으로 확진받으면, 자신의 건강 상태를 익명으로 공유하도록 선택할 수 있습니다.",
@@ -227,7 +221,6 @@
     "screen4_image_label": "휴대 전화로 알림을 받는 사람",
     "screen5_header": "본 앱을 사용하면 코로나19의 확산을 방지하고, 타인을 보호하는 동시에 보건 전문가로부터 직접 도움을 받을 수 있습니다.",
     "screen5_image_label": "의료 전문가와 가상으로 이야기하는 사람",
-    "select_language": "언어 선택",
     "step": "{{totalSteps}}에서의 {{currentStep}} 단계",
     "terms_header_title": "이용 약관",
     "welcome_image_label": "네트워크의 연결된 노드처럼 마스크를 착용한 사람들의 그림."
@@ -280,10 +273,6 @@
     "share_anonymized_data": "익명화된 데이터 공유",
     "share_anonymized_data_disclaimer": "계속 진행하면 {{healthAuthorityName}}의 검사 질의에 익명의 답변을 공유하는데 동의합니다.",
     "share_anonymized_data_para": "귀하의 익명 데이터는 {{healthAuthorityName}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{healthAuthorityName}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다."
-  },
-  "symptom_checker": {
-    "symptoms_saved": "증상이 저장되었습니다!",
-    "what_symptoms": "어떤 증상이 있습니까?"
   },
   "symptoms": {
     "body_aches": "몸살",
