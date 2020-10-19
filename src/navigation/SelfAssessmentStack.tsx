@@ -7,7 +7,7 @@ import {
 } from "@react-navigation/stack"
 
 import { SelfAssessmentProvider } from "../SelfAssessmentContext"
-import { SelfAssessmentStackScreens, Stack as AllStacks, Stacks } from "./index"
+import { SelfAssessmentStackScreens, Stack as AllStacks } from "./index"
 
 import SelfAssessmentIntro from "../SelfAssessment/SelfAssessmentIntro"
 import EmergencySymptomsQuestions from "../SelfAssessment/EmergencySymptomsQuestions"
