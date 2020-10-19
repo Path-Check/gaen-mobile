@@ -3,7 +3,6 @@ import ExposureNotification
 
 protocol ExposureConfiguration: Equatable {
 
-  static var configurationFileName: String { get }
   static var placeholder: Self { get }
 
   var triggerThresholdWeightedDuration: Int { get }
@@ -14,8 +13,6 @@ protocol ExposureConfiguration: Equatable {
 
 
 struct ExposureConfigurationV1: ExposureConfiguration, Codable {
-
-  static let configurationFileName = "v1.config.json"
 
   let minimumRiskScore: ENRiskScore
   let attenuationDurationThresholds: [Int]
@@ -58,10 +55,9 @@ struct ExposureConfigurationV1: ExposureConfiguration, Codable {
 extension ExposureConfigurationV1: DownloadableFile {
 
   static func create(from data: Data) -> ExposureConfigurationV1? {
-    guard var saveLocalPath = BTAPIClient.documentsDirectory else {
+    guard let saveLocalPath = BTAPIClient.documentsDirectory else {
       return nil
     }
-    saveLocalPath.appendPathComponent(ExposureConfigurationV1.configurationFileName)
     var exposureConfiguration: ExposureConfigurationV1
     do {
       exposureConfiguration = try JSONDecoder().decode(ExposureConfigurationV1.self,
