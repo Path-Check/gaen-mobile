@@ -86,8 +86,10 @@
         "unknown": "Failed to submit the exposure data"
       },
       "no_op": {
+        "empty_exposure_keys_title": "No encounter logging data is available",
+        "empty_exposure_keys": "It looks like you have no encounter logs on your device, please wait 24 hours to proceed if you recently reset your data. You may need to request a new verification code.",
         "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added.",
-        "title": "Attempt to submit existing keys"
+        "no_token_for_existing_keys_title": "Attempt to submit existing keys"
       }
     },
     "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
