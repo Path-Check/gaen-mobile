@@ -198,13 +198,16 @@ describe("CodeInputForm", () => {
       )
       fireEvent.changeText(getByTestId("code-input"), "$A12345")
 
-      expect(getByLabelText("Next")).toBeDisabled()
-      expect(getByText("Invalid format")).toBeDefined()
+      const nextButton = getByLabelText("Next")
+      const errorMessageText = "Codes may only contain numbers and letters"
+
+      expect(nextButton).toBeDisabled()
+      expect(getByText(errorMessageText)).toBeDefined()
 
       fireEvent.changeText(getByTestId("code-input"), "A1234578")
 
-      expect(getByLabelText("Next")).toBeEnabled()
-      expect(queryByText("Invalid format")).toBeNull()
+      expect(nextButton).toBeEnabled()
+      expect(queryByText(errorMessageText)).toBeNull()
     })
   })
 })
