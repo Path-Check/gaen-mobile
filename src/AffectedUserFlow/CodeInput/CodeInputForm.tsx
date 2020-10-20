@@ -8,6 +8,7 @@ import {
   Keyboard,
   ScrollView,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -157,10 +158,16 @@ const CodeInputForm: FunctionComponent = () => {
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
+  const keyboardAvoidingViewBehavior = Platform.select({
+    ios: "position" as const,
+    android: "height" as const,
+    default: "position" as const,
+  })
+
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
-      behavior="position"
+      behavior={keyboardAvoidingViewBehavior}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
