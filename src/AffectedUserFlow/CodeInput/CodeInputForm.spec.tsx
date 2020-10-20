@@ -191,15 +191,20 @@ describe("CodeInputForm", () => {
     })
 
     it("informs of a formatting error", async () => {
-      const { getByTestId, getByLabelText, getByText } = render(
+      const { getByTestId, getByLabelText, getByText, queryByText } = render(
         <AffectedUserProvider>
           <CodeInputForm />
         </AffectedUserProvider>,
       )
-      fireEvent.changeText(getByTestId("code-input"), "1234-678")
+      fireEvent.changeText(getByTestId("code-input"), "$A12345")
 
       expect(getByLabelText("Next")).toBeDisabled()
       expect(getByText("Invalid format")).toBeDefined()
+
+      fireEvent.changeText(getByTestId("code-input"), "A1234578")
+
+      expect(getByLabelText("Next")).toBeEnabled()
+      expect(queryByText("Invalid format")).toBeNull()
     })
   })
 })

@@ -48,13 +48,16 @@ const CodeInputForm: FunctionComponent = () => {
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  const codeLength = 8
-  const codeIsInvalidLength = code.length !== codeLength
-  const codeContainsNonDigitChars = (code: string) => !code.match(/^\d+$/)
+  const codeLengthMin = 6
+  const codeLengthMax = 16
+  const codeIsInvalidLength =
+    code.length < codeLengthMin || code.length > codeLengthMax
+  const codeContainsNonAlphanumericChars = (code: string) =>
+    !code.match(/^[a-zA-Z0-9]*$/)
 
   const handleOnChangeText = (newCode: string) => {
     setErrorMessage("")
-    if (newCode && codeContainsNonDigitChars(newCode)) {
+    if (newCode && codeContainsNonAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
     } else {
       setCode(newCode)
@@ -147,7 +150,8 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled = codeIsInvalidLength || codeContainsNonDigitChars(code)
+  const isDisabled =
+    codeIsInvalidLength || codeContainsNonAlphanumericChars(code)
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
@@ -174,7 +178,7 @@ const CodeInputForm: FunctionComponent = () => {
             value={code}
             placeholder="00000000"
             placeholderTextColor={Colors.placeholderText}
-            maxLength={codeLength}
+            maxLength={codeLengthMax}
             style={codeInputStyle}
             keyboardType="number-pad"
             returnKeyType="done"
