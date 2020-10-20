@@ -83,7 +83,7 @@ describe("SymptomHistory", () => {
         },
       ]
       const shareSpy = jest.spyOn(Share, "share")
-      const { getByLabelText } = render(
+      const { getByTestId } = render(
         <SymptomHistoryContext.Provider
           value={factories.symptomHistoryContext.build({
             symptomHistory: history,
@@ -93,7 +93,7 @@ describe("SymptomHistory", () => {
         </SymptomHistoryContext.Provider>,
       )
 
-      const shareButton = getByLabelText("Share symptom history")
+      const shareButton = getByTestId("shareButton")
       fireEvent.press(shareButton)
 
       expect(shareSpy).toHaveBeenCalledWith({

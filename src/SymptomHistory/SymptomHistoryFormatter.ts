@@ -4,7 +4,7 @@ import { posixToDayjs } from "../utils/dateTime"
 import { SymptomHistory, SymptomEntry } from "./symptomHistory"
 import * as Symptom from "./symptom"
 
-class Formatter {
+class SymptomHistoryFormatter {
   private DATE_FORMAT = "MMM D, 'YY"
   private t: TFunction
   private symptomHistory: SymptomHistory
@@ -13,7 +13,7 @@ class Formatter {
     t: TFunction,
     symptomHistory: SymptomHistory,
   ): string => {
-    const formatter = new Formatter(t, symptomHistory)
+    const formatter = new SymptomHistoryFormatter(t, symptomHistory)
     return formatter.toShareableText()
   }
 
@@ -92,4 +92,4 @@ class Formatter {
   }
 }
 
-export default Formatter
+export default SymptomHistoryFormatter
