@@ -58,11 +58,10 @@ const CodeInputForm: FunctionComponent = () => {
     !code.match(/^[a-zA-Z0-9]*$/)
 
   const handleOnChangeText = (newCode: string) => {
+    setCode(newCode)
     setErrorMessage("")
     if (newCode && codeContainsNonAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
-    } else {
-      setCode(newCode)
     }
   }
 
@@ -190,7 +189,6 @@ const CodeInputForm: FunctionComponent = () => {
           placeholderTextColor={Colors.placeholderText}
           maxLength={codeLengthMax}
           style={codeInputStyle}
-          keyboardType="number-pad"
           returnKeyType="done"
           onChangeText={handleOnChangeText}
           onFocus={handleOnToggleFocus}
@@ -251,8 +249,9 @@ const style = StyleSheet.create({
   errorSubtitle: {
     ...Typography.error,
     color: Colors.errorText,
-    marginTop: Spacing.xSmall,
+    marginTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
+    minHeight: Spacing.xxxHuge,
   },
   codeInput: {
     ...Forms.textInput,

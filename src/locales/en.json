@@ -72,7 +72,7 @@
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
       "invalid_code": "Try a different code",
-      "invalid_format": "Invalid format",
+      "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
