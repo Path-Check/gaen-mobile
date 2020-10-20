@@ -7,11 +7,12 @@ import {
   View,
   Keyboard,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Text, Button, StatusBar } from "../../components"
+import { Text, Button } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -157,11 +158,14 @@ const CodeInputForm: FunctionComponent = () => {
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+    <KeyboardAvoidingView
+      contentContainerStyle={style.outerContentContainer}
+      behavior="position"
+    >
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-code-input-form"}
+        alwaysBounceVertical={false}
       >
         <View style={style.headerContainer}>
           <Text style={style.header}>
@@ -172,23 +176,21 @@ const CodeInputForm: FunctionComponent = () => {
             {t("export.code_input_body_bluetooth")}
           </Text>
         </View>
-        <View>
-          <TextInput
-            testID="code-input"
-            value={code}
-            placeholder="00000000"
-            placeholderTextColor={Colors.placeholderText}
-            maxLength={codeLengthMax}
-            style={codeInputStyle}
-            keyboardType="number-pad"
-            returnKeyType="done"
-            onChangeText={handleOnChangeText}
-            onFocus={handleOnToggleFocus}
-            onBlur={handleOnToggleFocus}
-            onSubmitEditing={Keyboard.dismiss}
-            blurOnSubmit={false}
-          />
-        </View>
+        <TextInput
+          testID="code-input"
+          value={code}
+          placeholder={t("export.code_input_placeholder").toUpperCase()}
+          placeholderTextColor={Colors.placeholderText}
+          maxLength={codeLengthMax}
+          style={codeInputStyle}
+          keyboardType="number-pad"
+          returnKeyType="done"
+          onChangeText={handleOnChangeText}
+          onFocus={handleOnToggleFocus}
+          onBlur={handleOnToggleFocus}
+          onSubmitEditing={Keyboard.dismiss}
+          blurOnSubmit={false}
+        />
         <Text style={style.errorSubtitle}>{errorMessage}</Text>
         {isLoading ? <LoadingIndicator /> : null}
         <Button
@@ -199,7 +201,7 @@ const CodeInputForm: FunctionComponent = () => {
           hasRightArrow
         />
       </ScrollView>
-    </>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -218,10 +220,16 @@ const LoadingIndicator = () => {
 
 const indicatorWidth = 120
 const style = StyleSheet.create({
+  outerContentContainer: {
+    minHeight: "100%",
+  },
   contentContainer: {
+    minHeight: "100%",
     backgroundColor: Colors.primaryLightBackground,
+    paddingTop: Spacing.large,
     paddingBottom: Spacing.xxxHuge,
     paddingHorizontal: Spacing.medium,
+    justifyContent: "center",
   },
   headerContainer: {
     marginBottom: Spacing.xxLarge,
@@ -245,7 +253,7 @@ const style = StyleSheet.create({
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
     textAlign: "center",
-    letterSpacing: 8,
+    letterSpacing: 4,
     paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {
