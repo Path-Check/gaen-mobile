@@ -59,9 +59,10 @@ const CodeInputForm: FunctionComponent = () => {
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
-    setErrorMessage("")
     if (newCode && codeContainsNonAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
+    } else {
+      setErrorMessage("")
     }
   }
 
