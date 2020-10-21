@@ -202,7 +202,7 @@ const Home: FunctionComponent = () => {
       >
         <ChevronRightIcon />
         <Image
-          source={Images.SelfAssessmentIntro}
+          source={Images.SelfAssessment}
           style={style.image}
           width={150}
           height={IMAGE_HEIGHT}
