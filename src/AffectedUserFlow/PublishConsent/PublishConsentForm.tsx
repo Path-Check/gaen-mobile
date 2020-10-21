@@ -19,14 +19,7 @@ import {
   ModalStackScreens,
 } from "../../navigation"
 import { Icons } from "../../assets"
-import {
-  Outlines,
-  Colors,
-  Spacing,
-  Iconography,
-  Typography,
-  Layout,
-} from "../../styles"
+import { Colors, Spacing, Iconography, Typography } from "../../styles"
 import Logger from "../../logger"
 import {
   postDiagnosisKeys,
