@@ -19,28 +19,6 @@ describe("PublishConsentForm", () => {
     jest.resetAllMocks()
   })
 
-  it("navigates to the home screen when user cancels", () => {
-    const navigateSpy = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-    const { getByLabelText } = render(
-      <ExposureContext.Provider value={factories.exposureContext.build()}>
-        <PublishConsentForm
-          hmacKey="hmacKey"
-          certificate="certificate"
-          exposureKeys={[]}
-          storeRevisionToken={jest.fn()}
-          revisionToken=""
-          appPackageName=""
-          regionCodes={[""]}
-        />
-      </ExposureContext.Provider>,
-    )
-
-    fireEvent.press(getByLabelText("Cancel"))
-
-    expect(navigateSpy).toHaveBeenCalledWith("Home")
-  })
-
   it("displays the consent title and body", () => {
     const { getByText } = render(
       <ExposureContext.Provider value={factories.exposureContext.build()}>
