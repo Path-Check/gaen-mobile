@@ -6,7 +6,6 @@ import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
 import HowItWorksPhoneRemembersDevice from "./howItWorksPhoneRemembersDevice.png"
 import HowItWorksValueProposition from "./howItWorksValueProposition.png"
 import HugEmoji from "./hugEmoji.png"
-import PersonFindingLocation from "./personFindingLocation.png"
 import ProtectPrivacyExchangeKeys from "./protectPrivacyExchangeKeys.png"
 import ProtectPrivacyReceiveKeys from "./protectPrivacyReceiveKeys.png"
 import ProtectPrivacyReceiveNotification from "./protectPrivacyReceiveNotification.png"
@@ -26,7 +25,6 @@ export const Images = {
   HowItWorksPhoneRemembersDevice,
   HowItWorksValueProposition,
   HugEmoji,
-  PersonFindingLocation,
   ProtectPrivacyExchangeKeys,
   ProtectPrivacyReceiveKeys,
   ProtectPrivacyReceiveNotification,
