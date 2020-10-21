@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
 import {
-  ActivityIndicator,
   Alert,
   StyleSheet,
   TextInput,
@@ -13,7 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Text, Button } from "../../components"
+import { Text, Button, LoadingIndicator } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -23,14 +22,7 @@ import {
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 
-import {
-  Spacing,
-  Layout,
-  Forms,
-  Colors,
-  Outlines,
-  Typography,
-} from "../../styles"
+import { Spacing, Forms, Colors, Typography } from "../../styles"
 import Logger from "../../logger"
 
 const defaultErrorMessage = ""
@@ -198,7 +190,6 @@ const CodeInputForm: FunctionComponent = () => {
           blurOnSubmit={false}
         />
         <Text style={style.errorSubtitle}>{errorMessage}</Text>
-        {isLoading ? <LoadingIndicator /> : null}
         <Button
           onPress={handleOnPressSubmit}
           label={t("common.next")}
@@ -207,24 +198,11 @@ const CodeInputForm: FunctionComponent = () => {
           hasRightArrow
         />
       </ScrollView>
+      {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
   )
 }
 
-const LoadingIndicator = () => {
-  return (
-    <View style={style.activityIndicatorContainer}>
-      <ActivityIndicator
-        size={"large"}
-        color={Colors.neutral100}
-        style={style.activityIndicator}
-        testID={"loading-indicator"}
-      />
-    </View>
-  )
-}
-
-const indicatorWidth = 120
 const style = StyleSheet.create({
   outerContentContainer: {
     minHeight: "100%",
@@ -268,20 +246,6 @@ const style = StyleSheet.create({
   },
   button: {
     alignSelf: "flex-start",
-  },
-  activityIndicatorContainer: {
-    position: "absolute",
-    left: Layout.halfWidth,
-    top: Layout.halfHeight,
-    marginLeft: -(indicatorWidth / 2),
-    marginTop: -(indicatorWidth / 2),
-    zIndex: Layout.zLevel2,
-  },
-  activityIndicator: {
-    width: indicatorWidth,
-    height: indicatorWidth,
-    backgroundColor: Colors.transparentNeutral30,
-    borderRadius: Outlines.baseBorderRadius,
   },
 })
 

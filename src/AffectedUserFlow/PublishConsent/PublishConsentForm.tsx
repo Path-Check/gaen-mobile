@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
-import { Text, Button } from "../../components"
+import { Text, Button, LoadingIndicator } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -230,7 +230,6 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         </View>
 
         <Button
-          loading={isLoading}
           label={t("export.consent_button_title")}
           onPress={handleOnPressConfirm}
           customButtonStyle={style.button}
@@ -250,6 +249,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           height={Iconography.xxxSmall}
         />
       </TouchableOpacity>
+      {isLoading && <LoadingIndicator />}
     </View>
   )
 }
