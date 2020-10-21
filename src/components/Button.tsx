@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
 import {
-  ActivityIndicator,
   StyleSheet,
   View,
   ViewStyle,
@@ -17,7 +16,6 @@ import { Outlines, Spacing, Colors, Buttons, Typography } from "../styles"
 interface ButtonProps {
   label: string
   onPress: () => void
-  loading?: boolean
   disabled?: boolean
   customButtonStyle?: ViewStyle
   customButtonInnerStyle?: ViewStyle
@@ -32,7 +30,6 @@ const Button: FunctionComponent<ButtonProps> = ({
   label,
   onPress,
   disabled,
-  loading,
   customButtonStyle,
   customButtonInnerStyle,
   customTextStyle,
@@ -44,7 +41,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   const determineBackgroundColor = (): string => {
     if (outlined) {
       return Colors.transparent
-    } else if (disabled || loading) {
+    } else if (disabled) {
       return Colors.secondary75
     } else {
       return Colors.primary100
@@ -64,7 +61,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   const determineTextStyle = (): TextStyle => {
     if (outlined) {
       return style.outlinedButtonText
-    } else if (disabled || loading) {
+    } else if (disabled) {
       return style.textDisabled
     } else {
       return style.text
@@ -73,7 +70,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   const textStyle = { ...determineTextStyle(), ...customTextStyle }
 
   const determineShadowEnabled = (): ViewStyle => {
-    if (disabled || loading || outlined) {
+    if (disabled || outlined) {
       return {}
     } else {
       return style.buttonContainerShadow
@@ -106,32 +103,28 @@ const Button: FunctionComponent<ButtonProps> = ({
       onPress={onPress}
       accessibilityLabel={label}
       accessibilityRole="button"
-      disabled={disabled || loading}
+      disabled={disabled}
       testID={testID}
       style={buttonContainerStyle}
     >
       <View style={buttonStyle}>
-        {loading ? (
-          <ActivityIndicator size={"small"} />
-        ) : (
-          <>
-            {hasPlusIcon && (
-              <SvgXml
-                xml={Icons.Plus}
-                fill={disabled ? Colors.black : Colors.white}
-                style={style.leftPlus}
-              />
-            )}
-            <Text style={textStyle}>{label}</Text>
-            {hasRightArrow && (
-              <SvgXml
-                xml={Icons.Arrow}
-                fill={determineRightArrowColor()}
-                style={style.rightArrow}
-              />
-            )}
-          </>
-        )}
+        <>
+          {hasPlusIcon && (
+            <SvgXml
+              xml={Icons.Plus}
+              fill={disabled ? Colors.black : Colors.white}
+              style={style.leftPlus}
+            />
+          )}
+          <Text style={textStyle}>{label}</Text>
+          {hasRightArrow && (
+            <SvgXml
+              xml={Icons.Arrow}
+              fill={determineRightArrowColor()}
+              style={style.rightArrow}
+            />
+          )}
+        </>
       </View>
     </TouchableOpacity>
   )
