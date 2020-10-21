@@ -17,7 +17,6 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
-  Stacks,
 } from "../../navigation"
 import { Icons } from "../../assets"
 import {
@@ -163,52 +162,12 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     }
   }
 
-  const handleOnPressBack = () => {
-    navigation.goBack()
-  }
-
-  const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.Home)
-  }
-
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (
     <View style={style.outerContainer}>
-      <View style={style.navButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressBack}
-          accessible
-          accessibilityLabel={t("export.code_input_button_back")}
-        >
-          <View style={style.backButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.ArrowLeft}
-              fill={Colors.black}
-              width={Iconography.xxSmall}
-              height={Iconography.xxSmall}
-            />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={handleOnPressCancel}
-          accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xxSmall}
-              height={Iconography.xxSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID="publish-consent-form"
@@ -261,26 +220,9 @@ const createStyle = (insets: EdgeInsets) => {
       flex: 1,
       backgroundColor: Colors.primaryLightBackground,
     },
-    navButtonContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      position: "absolute",
-      paddingTop: 25,
-      width: "100%",
-      borderBottomWidth: Outlines.hairline,
-      borderBottomColor: Colors.neutral10,
-      backgroundColor: Colors.primaryLightBackground,
-      zIndex: Layout.zLevel1,
-    },
-    backButtonInnerContainer: {
-      padding: Spacing.medium,
-    },
-    cancelButtonInnerContainer: {
-      padding: Spacing.medium,
-    },
     contentContainer: {
+      paddingTop: Spacing.medium,
       paddingHorizontal: Spacing.large,
-      paddingTop: 105,
       paddingBottom: Spacing.huge,
     },
     content: {

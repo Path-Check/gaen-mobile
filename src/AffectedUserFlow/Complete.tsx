@@ -24,6 +24,7 @@ export const AffectedUserComplete: FunctionComponent = () => {
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
       >
         <Image source={Images.CheckInCircle} style={style.image} />
         <Text style={style.header}>{t("export.complete_title")}</Text>
