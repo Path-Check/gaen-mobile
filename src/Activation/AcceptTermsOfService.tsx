@@ -11,11 +11,18 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Iconography, Colors, Spacing, Outlines, Typography } from "../styles"
+import {
+  Buttons,
+  Iconography,
+  Colors,
+  Spacing,
+  Outlines,
+  Typography,
+} from "../styles"
 
 const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -75,11 +82,18 @@ const AcceptTermsOfService: FunctionComponent = () => {
             {t("onboarding.eula_agree_terms_of_use")}
           </Text>
         </TouchableOpacity>
-        <Button
+        <TouchableOpacity
           onPress={handleOnPressNext}
           disabled={!boxChecked}
-          label={t("common.continue")}
-        />
+          style={boxChecked ? style.button : style.buttonDisabled}
+          accessibilityLabel={t("common.continue")}
+        >
+          <Text
+            style={boxChecked ? style.buttonText : style.buttonDisabledText}
+          >
+            {t("common.continue")}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   )
@@ -174,6 +188,20 @@ const style = StyleSheet.create({
     flex: 1,
     paddingLeft: Spacing.medium,
     fontSize: Typography.large,
+  },
+  button: {
+    ...Buttons.primary,
+    alignSelf: "center",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+  },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+    alignSelf: "center",
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
   },
 })
 

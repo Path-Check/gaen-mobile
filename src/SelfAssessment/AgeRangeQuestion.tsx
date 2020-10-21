@@ -1,11 +1,15 @@
 import React, { FunctionComponent, useState } from "react"
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native"
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { Icons } from "../assets"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 import { Colors, Forms, Iconography } from "../styles"
 import { SelfAssessmentStackScreens } from "../navigation"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
@@ -13,6 +17,7 @@ import { AgeRange } from "./selfAssessment"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Typography, Spacing, Buttons } from "../styles"
+import { Icons } from "../assets"
 
 const AgeRangeQuestion: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -36,13 +41,16 @@ const AgeRangeQuestion: FunctionComponent = () => {
   return (
     <SelfAssessmentLayout
       bottomActionsContent={
-        <Button
-          label={t("self_assessment.age_range.get_my_guidance")}
+        <TouchableOpacity
+          style={style.button}
           onPress={handleOnPressNext}
-          hasRightArrow
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
+          accessibilityLabel={t("self_assessment.age_range.get_my_guidance")}
+        >
+          <Text style={style.buttonText}>
+            {t("self_assessment.age_range.get_my_guidance")}
+          </Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        </TouchableOpacity>
       }
     >
       <Text style={style.headerText}>
@@ -117,11 +125,13 @@ const style = StyleSheet.create({
     ...Forms.radioOrCheckboxText,
   },
   button: {
+    ...Buttons.primary,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
   pressing: {
     opacity: 0.5,

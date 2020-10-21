@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react"
-import { SafeAreaView, View, StyleSheet } from "react-native"
+import { SafeAreaView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { Text, Button } from "./components"
+import { Text } from "./components"
 
-import { Colors, Spacing, Typography } from "./styles"
+import { Buttons, Colors, Spacing, Typography } from "./styles"
 
 interface ErrorScreenProps {
   error: Error | string
@@ -27,7 +27,13 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
           <Text style={style.error}>{parseError}</Text>
         </View>
         <View style={style.buttonContainer}>
-          <Button label={t("errors.reload")} onPress={resetError} />
+          <TouchableOpacity
+            onPress={resetError}
+            accessibilityLabel={t("errors.reload")}
+            style={style.button}
+          >
+            <Text style={style.buttonText}>{t("errors.reload")}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -37,7 +43,7 @@ export const ErrorScreen: FunctionComponent<ErrorScreenProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primary125,
+    backgroundColor: Colors.primaryLightBackground,
   },
   content: {
     flex: 1,
@@ -53,16 +59,20 @@ const style = StyleSheet.create({
   },
   title: {
     ...Typography.header1,
-    color: Colors.white,
     marginBottom: Spacing.small,
   },
   subtitle: {
     ...Typography.body1,
-    color: Colors.white,
     marginBottom: Spacing.xxSmall,
   },
   error: {
-    ...Typography.body1,
-    color: Colors.white,
+    ...Typography.error,
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    textAlign: "center",
   },
 })

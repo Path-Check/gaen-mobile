@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps*/
 import React, { useEffect, FunctionComponent } from "react"
 import { fireEvent, render, waitFor } from "@testing-library/react-native"
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 
 import {
   SelfAssessmentContext,
@@ -9,7 +9,6 @@ import {
   useSelfAssessmentContext,
 } from "./SelfAssessmentContext"
 import { factories } from "./factories"
-import { Button } from "./components"
 import {
   AgeRange,
   EmergencySymptom,
@@ -282,7 +281,9 @@ const RemoveUnderlyingCondition: FunctionComponent<{
       {underlyingConditions.map((s) => {
         return <Text key={s}>{UnderlyingCondition[s]}</Text>
       })}
-      <Button onPress={updateCondition} label="Update" />
+      <TouchableOpacity onPress={updateCondition}>
+        <Text>Update</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -315,7 +316,9 @@ const RemoveEmergencySymptom: FunctionComponent<{
       {emergencySymptoms.map((s) => {
         return <Text key={s}>{EmergencySymptom[s]}</Text>
       })}
-      <Button onPress={updateSymptom} label="Update" />
+      <TouchableOpacity onPress={updateSymptom}>
+        <Text>Update</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -386,7 +389,9 @@ const RemovePrimarySymptom: FunctionComponent<{
       {primarySymptoms.map((s) => {
         return <Text key={s}>{s}</Text>
       })}
-      <Button onPress={updateSymptom} label="Update" />
+      <TouchableOpacity onPress={updateSymptom}>
+        <Text>Update</Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Colors, Spacing, Typography } from "../styles"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -50,12 +50,14 @@ const SelfAssessmentIntro: FunctionComponent = () => {
           {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
         </Text>
       </View>
-      <Button
+      <TouchableOpacity
+        style={style.button}
         onPress={handleOnPressStartAssessment}
-        label={t("self_assessment.intro.agree_and_start_assessment")}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-      />
+      >
+        <Text style={style.buttonText}>
+          {t("self_assessment.intro.agree_and_start_assessment")}
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -92,10 +94,12 @@ const style = StyleSheet.create({
     color: Colors.danger100,
   },
   button: {
+    ...Buttons.primary,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 

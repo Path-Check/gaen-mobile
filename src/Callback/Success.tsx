@@ -1,19 +1,19 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import { ScrollView, StyleSheet, Image } from "react-native"
+import { ScrollView, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useCallbackFormContext } from "./CallbackFormContext"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
 } from "../configuration/authorityCopy"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Images } from "../assets"
-import { Typography, Spacing, Colors } from "../styles"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { Buttons, Typography, Spacing, Colors } from "../styles"
 
 const Success: FunctionComponent = () => {
   const {
@@ -53,12 +53,13 @@ const Success: FunctionComponent = () => {
       />
       <Text style={style.header}>{t("callback.success_header")}</Text>
       <Text style={style.body}>{successMessage}</Text>
-      <Button
-        label={t("callback.success_got_it")}
+      <TouchableOpacity
         onPress={handleOnPressGotIt}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-      />
+        style={style.button}
+        accessibilityLabel={t("callback.success_got_it")}
+      >
+        <Text style={style.buttonText}>{t("callback.success_got_it")}</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -83,10 +84,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
+    ...Buttons.primary,
     width: "100%",
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 

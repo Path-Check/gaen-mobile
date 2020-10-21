@@ -49,6 +49,12 @@ export const primary: ViewStyle = {
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
   maxWidth: Layout.screenWidth * 0.95,
+  backgroundColor: Colors.primary100,
+}
+
+export const primaryDisabled: ViewStyle = {
+  ...primary,
+  backgroundColor: Colors.neutral50,
 }
 
 export const secondary: ViewStyle = {

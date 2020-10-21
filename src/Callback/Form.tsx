@@ -9,16 +9,17 @@ import {
   View,
   ScrollView,
   Keyboard,
+  TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { Button, LoadingIndicator, Text } from "../components"
+import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
 import Logger from "../logger"
 
-import { Spacing, Forms, Colors, Typography } from "../styles"
+import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 
 const defaultErrorMessage = " "
 
@@ -156,12 +157,20 @@ const CallbackForm: FunctionComponent = () => {
             </View>
             <Text style={style.errorSubtitle}>{errorMessage}</Text>
           </View>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressSubmit}
-            label={t("common.submit")}
-            customButtonStyle={style.button}
             disabled={buttonDisabled}
-          />
+            style={buttonDisabled ? style.buttonDisabled : style.button}
+            accessibilityLabel={t("common.submit")}
+          >
+            <Text
+              style={
+                buttonDisabled ? style.buttonDisabledText : style.buttonText
+              }
+            >
+              {t("common.submit")}
+            </Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
@@ -206,7 +215,16 @@ const style = StyleSheet.create({
     ...Forms.textInput,
   },
   button: {
-    alignSelf: "flex-start",
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+  },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
   },
 })
 

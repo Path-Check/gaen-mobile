@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
 import { usePermissionsContext } from "../PermissionsContext"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -56,10 +56,15 @@ const NotificationsPermissions: FunctionComponent = () => {
           </Text>
         </View>
         <View style={style.buttonsContainer}>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressEnable}
-            label={t("label.launch_enable_notif")}
-          />
+            style={style.button}
+            accessibilityLabel={t("label.launch_enable_notif")}
+          >
+            <Text style={style.buttonText}>
+              {t("label.launch_enable_notif")}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
@@ -103,6 +108,12 @@ const style = StyleSheet.create({
   },
   buttonsContainer: {
     alignSelf: "flex-start",
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,
