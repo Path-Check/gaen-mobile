@@ -92,7 +92,6 @@ const ActivationStack: FunctionComponent = () => {
     screenName: ActivationStackScreens.ActivationSummary,
     component: ActivationSummary,
   }
-
   activationSteps.push(activationSummary)
 
   const CloseButton = () => {
