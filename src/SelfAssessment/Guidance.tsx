@@ -202,7 +202,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
       >
         <View style={style.topScrollViewBackground} />
         <View style={style.headerContainer}>
-          <Image source={Images.SelfAssessmentIntro} style={style.image} />
+          <Image source={Images.SelfAssessment} style={style.image} />
           <Text style={style.headerText}>
             {t("self_assessment.guidance.guidance")}
           </Text>
