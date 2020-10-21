@@ -34,6 +34,7 @@ import {
   PostKeysError,
   PostKeysNoOp,
   PostKeysFailure,
+  PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
@@ -73,20 +74,41 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     Logger.error(
       `IncompleteKeySumbission.${noOpResponse.reason}.${noOpResponse.message}`,
     )
-    Alert.alert(
-      t("export.publish_keys.no_op.title"),
-      t("export.publish_keys.no_op.no_token_for_existing_keys", {
-        newKeysInserted,
-      }),
-      [
-        {
-          onPress: () =>
-            navigation.navigate(
-              AffectedUserFlowStackScreens.AffectedUserComplete,
-            ),
-        },
-      ],
-    )
+
+    const { alertTitle, alertMessage } = noOpAlertContent(noOpResponse)
+
+    Alert.alert(alertTitle, alertMessage, [
+      {
+        onPress: () =>
+          navigation.navigate(
+            AffectedUserFlowStackScreens.AffectedUserComplete,
+          ),
+      },
+    ])
+  }
+
+  const noOpAlertContent = ({ reason, newKeysInserted }: PostKeysNoOp) => {
+    switch (reason) {
+      case PostKeysNoOpReason.NoTokenForExistingKeys: {
+        return {
+          alertTitle: t(
+            "export.publish_keys.no_op.no_token_for_existing_keys_title",
+          ),
+          alertMessage: t(
+            "export.publish_keys.no_op.no_token_for_existing_keys",
+            {
+              newKeysInserted,
+            },
+          ),
+        }
+      }
+      case PostKeysNoOpReason.EmptyExposureKeys: {
+        return {
+          alertTitle: t("export.publish_keys.no_op.empty_exposure_keys_title"),
+          alertMessage: t("export.publish_keys.no_op.empty_exposure_keys"),
+        }
+      }
+    }
   }
 
   const errorMessageTitle = (errorNature: PostKeysError) => {
