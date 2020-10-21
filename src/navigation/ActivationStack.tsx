@@ -9,19 +9,18 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { Text } from "../components"
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
 import { useSystemServicesContext } from "../SystemServicesContext"
-
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
+import ActivateBluetooth from "../Activation/ActivateBluetooth"
+import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
 import { Layout, Spacing, Colors, Typography } from "../styles"
-import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
-import { useConfigurationContext } from "../ConfigurationContext"
 
 type ActivationStackParams = {
   [key in ActivationStackScreen]: undefined
@@ -32,17 +31,12 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { locationPermissions } = useSystemServicesContext()
+  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
   const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {
     screenName: ActivationStackScreen
     component: FunctionComponent
-  }
-
-  const acceptTermsOfServiceStep: ActivationStep = {
-    screenName: ActivationStackScreens.AcceptTermsOfService,
-    component: AcceptTermsOfService,
   }
 
   const activateExposureNotifications: ActivationStep = {
@@ -60,9 +54,23 @@ const ActivationStack: FunctionComponent = () => {
     component: NotificationPermissions,
   }
 
-  const baseActivationSteps: ActivationStep[] = displayAcceptTermsOfService
-    ? [acceptTermsOfServiceStep, activateExposureNotifications]
-    : [activateExposureNotifications]
+  const baseActivationSteps: ActivationStep[] = [activateExposureNotifications]
+
+  if (displayAcceptTermsOfService) {
+    const acceptTermsOfService: ActivationStep = {
+      screenName: ActivationStackScreens.AcceptTermsOfService,
+      component: AcceptTermsOfService,
+    }
+    baseActivationSteps.unshift(acceptTermsOfService)
+  }
+
+  if (!isBluetoothOn) {
+    const activateBluetooth: ActivationStep = {
+      screenName: ActivationStackScreens.ActivateBluetooth,
+      component: ActivateBluetooth,
+    }
+    baseActivationSteps.push(activateBluetooth)
+  }
 
   const activationStepsIOS: ActivationStep[] = [
     ...baseActivationSteps,
@@ -79,6 +87,13 @@ const ActivationStack: FunctionComponent = () => {
     android: activationStepsAndroid,
     default: activationStepsIOS,
   })
+
+  const activationSummary: ActivationStep = {
+    screenName: ActivationStackScreens.ActivationSummary,
+    component: ActivationSummary,
+  }
+
+  activationSteps.push(activationSummary)
 
   const CloseButton = () => {
     const handleOnPressClose = () => {
@@ -106,25 +121,6 @@ const ActivationStack: FunctionComponent = () => {
     )
   }
 
-  interface HeaderRightWithStepsProps {
-    currentStep: number
-    totalSteps: number
-  }
-
-  const HeaderRightWithSteps: FunctionComponent<HeaderRightWithStepsProps> = ({
-    currentStep,
-    totalSteps,
-  }) => {
-    return (
-      <View style={style.headerRight}>
-        <Text style={style.headerRightText}>
-          {t("onboarding.step", { currentStep, totalSteps })}
-        </Text>
-        <CloseButton />
-      </View>
-    )
-  }
-
   const screenOptions: StackNavigationOptions = {
     headerShown: true,
     headerLeft: () => null,
@@ -140,30 +136,18 @@ const ActivationStack: FunctionComponent = () => {
       initialRouteName={ActivationStackScreens.AcceptTermsOfService}
       screenOptions={screenOptions}
     >
-      {activationSteps.map((step, idx) => {
-        const currentStep = idx + 1
+      {activationSteps.map((step) => {
         return (
           <Stack.Screen
             name={step.screenName}
             component={step.component}
             key={`activation-screen-${step.screenName}`}
             options={{
-              headerRight: () =>
-                HeaderRightWithSteps({
-                  currentStep,
-                  totalSteps: activationSteps.length,
-                }),
+              headerRight: () => HeaderRight({}),
             }}
           />
         )
       })}
-      <Stack.Screen
-        name={ActivationStackScreens.ActivationSummary}
-        component={ActivationSummary}
-        options={{
-          headerRight: () => HeaderRight({}),
-        }}
-      />
     </Stack.Navigator>
   )
 }
@@ -177,10 +161,6 @@ const style = StyleSheet.create({
   headerRight: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  headerRightText: {
-    ...Typography.body1,
-    color: Colors.neutral100,
   },
   closeIcon: {
     paddingHorizontal: Spacing.large,
