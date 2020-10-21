@@ -59,6 +59,7 @@
     "code_input_button_back": "Back",
     "code_input_button_cancel": "Cancel",
     "code_input_title_bluetooth": "Verify your diagnosis",
+    "code_input_placeholder": "Enter Code",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
@@ -71,7 +72,7 @@
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
       "invalid_code": "Try a different code",
-      "invalid_format": "Invalid format",
+      "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
