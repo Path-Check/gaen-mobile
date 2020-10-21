@@ -1,7 +1,4 @@
-import BoxCheckedIcon from "./boxCheckedIcon.png"
-import BoxUncheckedIcon from "./boxUncheckedIcon.png"
 import CheckInCircle from "./checkInCircle.png"
-import Doctors from "./doctors.png"
 import ExclamationInCircle from "./exclamationInCircle.png"
 import HowItWorksGetNotified from "./howItWorksGetNotified.png"
 import HowItWorksIntroduction from "./howItWorksIntroduction.png"
@@ -21,10 +18,7 @@ import SmileEmoji from "./smileEmoji.png"
 import WelcomeImage from "./welcomeImage.png"
 
 export const Images = {
-  BoxCheckedIcon,
-  BoxUncheckedIcon,
   CheckInCircle,
-  Doctors,
   ExclamationInCircle,
   HowItWorksGetNotified,
   HowItWorksIntroduction,
