@@ -16,19 +16,21 @@ export type NavigationProp = NavigationScreenProp<
 
 export type ActivationStackScreen =
   | "AcceptTermsOfService"
+  | "ActivateBluetooth"
   | "ActivateExposureNotifications"
   | "ActivateLocation"
-  | "NotificationPermissions"
   | "ActivationSummary"
+  | "NotificationPermissions"
 
 export const ActivationStackScreens: {
   [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
+  ActivateBluetooth: "ActivateBluetooth",
   ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
-  NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
+  NotificationPermissions: "NotificationPermissions",
 }
 
 export type HomeStackScreen =

@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import {
+  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -9,38 +10,60 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../PermissionsContext"
 import { Text, Button } from "../components"
+import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { nextScreenFromExposureNotifications } from "./activationStackController"
+import { openAppSettings } from "../gaen/nativeModule"
+import { nextScreenFromBluetooth } from "./activationStackController"
 
-import { Spacing, Typography, Buttons, Colors } from "../styles"
+import { Colors, Spacing, Typography, Buttons } from "../styles"
 
-const ActivateExposureNotifications: FunctionComponent = () => {
+const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-
-  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
+  const { applicationName } = useApplicationName()
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
-  const { exposureNotifications } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
     navigation.navigate(
-      nextScreenFromExposureNotifications({
+      nextScreenFromBluetooth({
         isLocationRequiredAndOff,
-        isBluetoothOn,
       }),
     )
   }
 
-  const handleOnPressActivateExposureNotifications = async () => {
-    await exposureNotifications.request()
+  useEffect(() => {
+    if (isBluetoothOn) {
+      navigateToNextScreen()
+    }
+  })
+
+  const handleOnPressMaybeLater = () => {
     navigateToNextScreen()
   }
 
-  const handleOnPressDontEnable = () => {
-    navigateToNextScreen()
+  const showBluetoothStatusAlert = () => {
+    Alert.alert(
+      t("onboarding.bluetooth_alert_header", { applicationName }),
+      t("onboarding.bluetooth_alert_body"),
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => {
+            openAppSettings()
+          },
+        },
+      ],
+    )
+  }
+
+  const handleOnPressChangeBluetoothStatus = () => {
+    showBluetoothStatusAlert()
   }
 
   return (
@@ -51,36 +74,23 @@ const ActivateExposureNotifications: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <Text style={style.header}>
-            {t("onboarding.proximity_tracing_header")}
-          </Text>
+          <Text style={style.header}>{t("onboarding.bluetooth_header")}</Text>
           <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader1")}
+            {t("onboarding.bluetooth_subheader")}
           </Text>
-          <Text style={style.body}>
-            {t("onboarding.proximity_tracing_body1")}
-          </Text>
-          <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader2")}
-          </Text>
-          <Text style={style.body}>
-            {t("onboarding.proximity_tracing_body2")}
-          </Text>
-          <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader3")}
-          </Text>
+          <Text style={style.body}>{t("onboarding.bluetooth_body")}</Text>
         </View>
         <View style={style.buttonsContainer}>
           <Button
-            onPress={handleOnPressActivateExposureNotifications}
-            label={t("onboarding.proximity_tracing_button")}
+            onPress={handleOnPressChangeBluetoothStatus}
+            label={t("common.settings")}
           />
           <TouchableOpacity
-            onPress={handleOnPressDontEnable}
+            onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
           >
             <Text style={style.secondaryButtonText}>
-              {t("common.no_thanks")}
+              {t("common.maybe_later")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -88,6 +98,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     </SafeAreaView>
   )
 }
+
 const style = StyleSheet.create({
   safeArea: {
     backgroundColor: Colors.primaryLightBackground,
@@ -126,4 +137,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ActivateExposureNotifications
+export default ActivateBluetooth
