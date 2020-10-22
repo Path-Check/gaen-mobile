@@ -9,11 +9,11 @@ import Legal from "../Settings/Legal"
 import ENDebugMenu from "../Settings/ENDebugMenu"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
+import DeleteConfirmation from "../Settings/DeleteConfirmation"
 import { SettingsStackScreens } from "./index"
+import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Headers } from "../styles"
-import DeleteConfirmation from "../Settings/DeleteConfirmation"
-import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 const Stack = createStackNavigator()
 
