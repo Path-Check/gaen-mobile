@@ -27,12 +27,12 @@ const ActivateLocation: FunctionComponent = () => {
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   const showLocationAccessAlert = () => {

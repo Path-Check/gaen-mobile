@@ -25,11 +25,11 @@ const NotificationsPermissions: FunctionComponent = () => {
       notification.request()
       resolve()
     })
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   return (
