@@ -38,18 +38,30 @@ const AgeRangeQuestion: FunctionComponent = () => {
     navigation.navigate(SelfAssessmentStackScreens.Guidance)
   }
 
+  const buttonDisabled = ageRange === null
+
   return (
     <SelfAssessmentLayout
       bottomActionsContent={
         <TouchableOpacity
-          style={style.button}
+          style={buttonDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressNext}
           accessibilityLabel={t("self_assessment.age_range.get_my_guidance")}
+          disabled={buttonDisabled}
         >
-          <Text style={style.buttonText}>
+          <Text
+            style={buttonDisabled ? style.buttonDisabledText : style.buttonText}
+          >
             {t("self_assessment.age_range.get_my_guidance")}
           </Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          <SvgXml
+            xml={Icons.Arrow}
+            fill={
+              buttonDisabled
+                ? Colors.primaryText
+                : Colors.primaryLightBackground
+            }
+          />
         </TouchableOpacity>
       }
     >
@@ -125,12 +137,21 @@ const style = StyleSheet.create({
     ...Forms.radioOrCheckboxText,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primaryThin,
+    alignSelf: "center",
+    width: "100%",
+  },
+  buttonDisabled: {
+    ...Buttons.primaryThinDisabled,
     alignSelf: "center",
     width: "100%",
   },
   buttonText: {
     ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
     marginRight: Spacing.small,
   },
   pressing: {

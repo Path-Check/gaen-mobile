@@ -105,7 +105,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primaryThin,
     alignSelf: "center",
     width: "100%",
   },

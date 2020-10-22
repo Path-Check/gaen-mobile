@@ -67,6 +67,11 @@ export const primaryDisabled: ViewStyle = {
   backgroundColor: Colors.neutral50,
 }
 
+export const primaryThinDisabled: ViewStyle = {
+  ...primaryThin,
+  backgroundColor: Colors.neutral50,
+}
+
 export const secondary: ViewStyle = {
   ...base,
   ...medium,

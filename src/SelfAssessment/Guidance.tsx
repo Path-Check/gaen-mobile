@@ -311,7 +311,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primaryThin,
+    width: "100%",
     alignSelf: "center",
   },
   buttonText: {
@@ -320,7 +321,7 @@ const style = StyleSheet.create({
   },
   doneButton: {
     ...Buttons.secondary,
-    marginTop: Spacing.large,
+    marginTop: Spacing.small,
     marginBottom: Spacing.small,
     alignSelf: "center",
   },
