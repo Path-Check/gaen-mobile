@@ -200,7 +200,6 @@ export const buttonPrimaryDisabled: TextStyle = {
 
 export const buttonFixedBottom: TextStyle = {
   ...buttonPrimary,
-  fontSize: large,
 }
 
 export const buttonSecondary: TextStyle = {

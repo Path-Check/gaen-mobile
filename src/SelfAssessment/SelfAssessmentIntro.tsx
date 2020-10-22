@@ -2,11 +2,13 @@ import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
+import { Icons } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
@@ -57,6 +59,7 @@ const SelfAssessmentIntro: FunctionComponent = () => {
         <Text style={style.buttonText}>
           {t("self_assessment.intro.agree_and_start_assessment")}
         </Text>
+        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
       </TouchableOpacity>
     </ScrollView>
   )
@@ -69,7 +72,7 @@ const style = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     alignItems: "flex-start",
-    paddingHorizontal: Spacing.xLarge,
+    paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
   },
   headerText: {
@@ -100,6 +103,7 @@ const style = StyleSheet.create({
   },
   buttonText: {
     ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

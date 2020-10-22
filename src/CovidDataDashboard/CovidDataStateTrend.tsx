@@ -74,7 +74,7 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
             <View style={style.trendArrowContainer}>{trendInfo.indicator}</View>
             <Text style={style.percentageText}>{trendPercentageValue}</Text>
           </View>
-          <View style={style.infoContainer}>
+          <View>
             <Text style={style.headerText}>{t("covid_data.new_cases")}</Text>
             <Text style={style.subHeaderText}>{trendInfo.text}</Text>
           </View>
@@ -98,6 +98,34 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  sectionHeaderText: {
+    ...Typography.header3,
+    marginBottom: Spacing.xxSmall,
+    color: Colors.black,
+  },
+  dataContainer: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  percentageContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: Outlines.baseBorderRadius,
+    backgroundColor: Colors.secondary50,
+    paddingHorizontal: Spacing.small,
+    paddingVertical: Spacing.xSmall,
+    marginRight: Spacing.small,
+  },
+  trendArrowContainer: {
+    paddingRight: Spacing.xxSmall,
+  },
+  percentageText: {
+    ...Typography.body1,
+    ...Typography.bold,
+    color: Colors.black,
+  },
   headerText: {
     ...Typography.header4,
     ...Typography.base,
@@ -105,39 +133,9 @@ const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.body3,
   },
-  percentageContainer: {
-    borderRadius: Outlines.baseBorderRadius,
-    borderWidth: 0,
-    backgroundColor: Colors.secondary50,
-    paddingHorizontal: Spacing.small,
-    paddingVertical: Spacing.xSmall,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  percentageText: {
-    ...Typography.body1,
-    ...Typography.bold,
-    color: Colors.black,
-  },
-  infoContainer: {
-    marginLeft: Spacing.small,
-  },
-  trendArrowContainer: {
-    paddingRight: Spacing.xxSmall,
-  },
   chevronContainer: {
     paddingTop: Spacing.xxxSmall,
     height: "100%",
-  },
-  sectionHeaderText: {
-    ...Typography.header3,
-    marginBottom: Spacing.xxSmall,
-    color: Colors.black,
-  },
-  dataContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
   },
 })
 

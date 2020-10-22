@@ -57,7 +57,7 @@ describe("SymptomHistory", () => {
       expect(getByText(expectedOneDayAgoText)).toBeDefined()
       expect(getAllByText("You felt well")).toHaveLength(1)
       expect(getByText(expectedTwoDaysAgoText)).toBeDefined()
-      expect(getAllByText("- Cough")).toHaveLength(1)
+      expect(getAllByText("• Cough")).toHaveLength(1)
     })
 
     it("allows the user to share their symptom history", () => {

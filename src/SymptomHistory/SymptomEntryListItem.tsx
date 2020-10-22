@@ -53,7 +53,7 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     const translatedSymptom = Symptom.toTranslation(t, symptom)
     return (
       <Text style={style.symptomText} key={translatedSymptom}>
-        {`- ${translatedSymptom}`}
+        {`• ${translatedSymptom}`}
       </Text>
     )
   }

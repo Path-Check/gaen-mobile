@@ -47,6 +47,12 @@ const transparent: ViewStyle = {
   backgroundColor: "transparent",
 }
 
+const outlined: ViewStyle = {
+  backgroundColor: Colors.transparent,
+  borderColor: Colors.primary100,
+  borderWidth: Outlines.hairline,
+}
+
 export const primary: ViewStyle = {
   ...base,
   ...large,
@@ -61,6 +67,17 @@ export const primary: ViewStyle = {
 export const primaryThin: ViewStyle = {
   ...primary,
   ...small,
+}
+
+export const primaryOutlined: ViewStyle = {
+  ...primary,
+  ...outlined,
+}
+
+export const primaryThinOutlined: ViewStyle = {
+  ...primary,
+  ...small,
+  ...outlined,
 }
 
 export const primaryDisabled: ViewStyle = {

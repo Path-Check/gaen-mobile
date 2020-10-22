@@ -23,7 +23,8 @@ type FlashMessageOptions = Omit<MessageOptions, "message">
 export const flashMessageOptions: FlashMessageOptions = {
   titleStyle: { ...Typography.header3, color: Colors.black },
   animationDuration: 100,
-  hideStatusBar: false,
+  floating: true,
+  position: { top: Spacing.huge },
 }
 
 export const successFlashMessageOptions: FlashMessageOptions = {
