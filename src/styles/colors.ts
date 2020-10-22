@@ -8,48 +8,86 @@ const applyOpacity = (hexColor: string, opacity: number): string => {
   return `rgba(${red}, ${green}, ${blue}, ${opacity})`
 }
 
-// Neutrals
-export const white = "#ffffff"
-export const neutral5 = "#edeef3"
-export const neutral10 = "#e9eaf0"
-export const neutral25 = "#d8d8de"
-export const neutral30 = "#d6d6da"
-export const neutral50 = "#c5c5c9"
-export const neutral75 = "#9ba0aa"
-export const neutral100 = "#3c475b"
-export const neutral110 = "#374357"
-export const neutral125 = "#252f42"
-export const neutral140 = "#1c2537"
-export const black = "#000000"
+type Neutral =
+  | "white"
+  | "shade5"
+  | "shade10"
+  | "shade25"
+  | "shade30"
+  | "shade50"
+  | "shade75"
+  | "shade100"
+  | "shade110"
+  | "shade125"
+  | "shade140"
+  | "black"
 
-// Primary
-export const primary100 = BrandColors.primary100
-export const primary110 = BrandColors.primary110
-export const primary125 = BrandColors.primary125
-export const primary150 = BrandColors.primary150
+export const neutral: Record<Neutral, string> = {
+  white: "#ffffff",
+  shade5: "#edeef3",
+  shade10: "#e9eaf0",
+  shade25: "#d8d8de",
+  shade30: "#d6d6da",
+  shade50: "#c5c5c9",
+  shade75: "#9ba0aa",
+  shade100: "#3c475b",
+  shade110: "#374357",
+  shade125: "#252f42",
+  shade140: "#1c2537",
+  black: "#000000",
+}
 
-// Secondary
-export const secondary10 = BrandColors.secondary10
-export const secondary50 = BrandColors.secondary50
-export const secondary75 = BrandColors.secondary75
-export const secondary100 = BrandColors.secondary100
+type Primary = "shade100" | "shade110" | "shade125" | "shade150"
 
-// Accents
-export const danger10 = "#fff0f0"
-export const danger25 = "#ffe0e0"
-export const danger75 = "#ff7d7d"
-export const danger100 = "#ff5656"
-export const success10 = "#f2fcf4"
-export const success25 = "#deffe4"
-export const success50 = "#5bd9a2"
-export const success100 = "#24a36c"
-export const warning25 = "#f9edcc"
-export const warning50 = "#ffdc6f"
-export const warning100 = "#ffc000"
+export const primary: Record<Primary, string> = {
+  shade100: BrandColors.primary100,
+  shade110: BrandColors.primary110,
+  shade125: BrandColors.primary125,
+  shade150: BrandColors.primary150,
+}
 
-// Backgrounds
-export const primaryLightBackground = white
-export const primaryDarkBackround = primary125
+type Secondary = "shade10" | "shade50" | "shade75" | "shade100"
+
+export const secondary: Record<Secondary, string> = {
+  shade10: BrandColors.secondary10,
+  shade50: BrandColors.secondary50,
+  shade75: BrandColors.secondary75,
+  shade100: BrandColors.secondary100,
+}
+
+type Accent =
+  | "danger10"
+  | "danger25"
+  | "danger75"
+  | "danger100"
+  | "success10"
+  | "success25"
+  | "success50"
+  | "success100"
+  | "warning25"
+  | "warning50"
+  | "warning100"
+
+export const accent: Record<Accent, string> = {
+  danger10: "fff0f0",
+  danger25: "#ffe0e0",
+  danger75: "#ff7d7d",
+  danger100: "#ff5656",
+  success10: "#f2fcf4",
+  success25: "#deffe4",
+  success50: "#5bd9a2",
+  success100: "#24a36c",
+  warning25: "#f9edcc",
+  warning50: "#ffdc6f",
+  warning100: "#ffc000",
+}
+
+type Background = "primaryLight" | "primaryDark"
+
+export const background: Record<Background, string> = {
+  primaryLight: neutrals.white,
+  primaryDark: primary.shade125,
+}
 
 // Transparent
 export const transparent = "rgba(0, 0, 0, 0)"
