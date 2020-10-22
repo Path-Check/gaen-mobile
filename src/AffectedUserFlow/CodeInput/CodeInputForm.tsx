@@ -153,16 +153,12 @@ const CodeInputForm: FunctionComponent = () => {
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
-  const keyboardAvoidingViewBehavior = Platform.select({
-    ios: "position" as const,
-    android: "height" as const,
-    default: "position" as const,
-  })
+  const isIOS = Platform.OS === "ios"
 
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
-      behavior={keyboardAvoidingViewBehavior}
+      behavior={isIOS ? "position" : "height"}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}

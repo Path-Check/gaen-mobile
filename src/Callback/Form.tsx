@@ -24,7 +24,7 @@ import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 const defaultErrorMessage = " "
 
 const CallbackForm: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const { t } = useTranslation()
   const { healthAuthorityName } = useConfigurationContext()
   const navigation = useNavigation()
@@ -96,13 +96,14 @@ const CallbackForm: FunctionComponent = () => {
 
   return (
     <>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
+      <KeyboardAvoidingView
+        contentContainerStyle={style.outerContentContainer}
+        behavior={isIOS ? "position" : "height"}
+        keyboardVerticalOffset={-100}
       >
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={Spacing.xSmall}
-          behavior={isIOS ? "position" : undefined}
+        <ScrollView
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
         >
           <View>
             <View style={style.headerContainer}>
@@ -171,14 +172,17 @@ const CallbackForm: FunctionComponent = () => {
               {t("common.submit")}
             </Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
       {isLoading && <LoadingIndicator />}
     </>
   )
 }
 
 const style = StyleSheet.create({
+  outerContentContainer: {
+    minHeight: "100%",
+  },
   container: {
     height: "100%",
     paddingHorizontal: Spacing.medium,
@@ -217,11 +221,11 @@ const style = StyleSheet.create({
   button: {
     ...Buttons.primary,
   },
-  buttonText: {
-    ...Typography.buttonPrimary,
-  },
   buttonDisabled: {
     ...Buttons.primaryDisabled,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   buttonDisabledText: {
     ...Typography.buttonPrimaryDisabled,

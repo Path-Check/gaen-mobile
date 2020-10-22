@@ -218,30 +218,30 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
             {introForSymptomGroup(symptomGroup)}
           </Text>
         </View>
-        <View style={style.bulletListContainer}>
+        <View style={style.bottomContainer}>
           {instructionsForSymptomGroup(symptomGroup)}
-        </View>
-        {displayFindATestCenter && (
+          {displayFindATestCenter && (
+            <TouchableOpacity
+              style={style.button}
+              onPress={handleOnPressFindTestCenter}
+              accessibilityLabel={t(
+                "self_assessment.guidance.find_a_test_center_nearby",
+              )}
+            >
+              <Text style={style.buttonText}>
+                {t("self_assessment.guidance.find_a_test_center_nearby")}
+              </Text>
+              <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
-            style={style.button}
-            onPress={handleOnPressFindTestCenter}
-            accessibilityLabel={t(
-              "self_assessment.guidance.find_a_test_center_nearby",
-            )}
+            style={style.doneButton}
+            onPress={handleOnPressDone}
+            accessibilityLabel={t("common.done")}
           >
-            <Text style={style.buttonText}>
-              {t("self_assessment.guidance.find_a_test_center_nearby")}
-            </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            <Text style={style.doneButtonText}>{t("common.done")}</Text>
           </TouchableOpacity>
-        )}
-        <TouchableOpacity
-          style={style.doneButton}
-          onPress={handleOnPressDone}
-          accessibilityLabel={t("common.done")}
-        >
-          <Text style={style.doneButtonText}>{t("common.done")}</Text>
-        </TouchableOpacity>
+        </View>
       </ScrollView>
     </>
   )
@@ -283,7 +283,7 @@ const style = StyleSheet.create({
     ...Typography.base,
     color: Colors.black,
   },
-  bulletListContainer: {
+  bottomContainer: {
     paddingHorizontal: Spacing.large,
     backgroundColor: Colors.primaryLightBackground,
     marginBottom: Spacing.xxLarge,
@@ -314,16 +314,17 @@ const style = StyleSheet.create({
     ...Buttons.primaryThin,
     width: "100%",
     alignSelf: "center",
+    marginTop: Spacing.medium,
   },
   buttonText: {
     ...Typography.buttonPrimary,
     marginRight: Spacing.small,
   },
   doneButton: {
-    ...Buttons.secondary,
-    marginTop: Spacing.small,
-    marginBottom: Spacing.small,
+    ...Buttons.primaryThinOutlined,
     alignSelf: "center",
+    marginTop: Spacing.small,
+    width: "100%",
   },
   doneButtonText: {
     ...Typography.buttonSecondary,

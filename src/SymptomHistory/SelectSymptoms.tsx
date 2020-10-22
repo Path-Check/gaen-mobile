@@ -87,15 +87,20 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
     }
   }
 
+  const showSuccessMessage = () => {
+    showMessage({
+      message: t("common.success"),
+      ...Affordances.successFlashMessageOptions,
+    })
+  }
+
   const completeOnPressSave = () => {
     if (hasEmergencySymptoms(selectedSymptoms)) {
       navigation.navigate(SymptomHistoryStackScreens.CallEmergencyServices)
+      showSuccessMessage()
     } else {
       navigation.goBack()
-      showMessage({
-        message: t("common.success"),
-        ...Affordances.successFlashMessageOptions,
-      })
+      showSuccessMessage()
     }
   }
 
