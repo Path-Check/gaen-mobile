@@ -140,10 +140,7 @@ const MainNavigator: FunctionComponent = () => {
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
         />
-        <Stack.Screen
-          name={ModalStackScreens.HowItWorksReviewFromSettings}
-          options={TransitionPresets.ModalTransition}
-        >
+        <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
           {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
         </Stack.Screen>
         <Stack.Screen

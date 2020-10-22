@@ -83,7 +83,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.primaryLightBackground,
   },
   headerContainer: {
-    marginTop: 40,
+    marginTop: Spacing.xSmall,
     width: "100%",
     flexDirection: "row",
     alignItems: "flex-end",
@@ -122,7 +122,7 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral10,
     backgroundColor: Colors.secondary10,
     paddingTop: Spacing.small,
-    paddingBottom: Spacing.xxHuge,
+    paddingBottom: Spacing.small,
     paddingHorizontal: Spacing.small,
   },
   buttonContainer: {
