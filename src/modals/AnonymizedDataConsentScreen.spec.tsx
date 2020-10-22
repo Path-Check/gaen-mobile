@@ -78,7 +78,6 @@ describe("AnonymizedDataConsentScreen", () => {
       )
 
       const buttonText = getByText("I Understand and Consent")
-
       const headerText = "Share Anonymized Data"
 
       expect(buttonText).toBeDefined()
