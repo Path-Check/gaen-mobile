@@ -143,7 +143,6 @@ const ActivationStack: FunctionComponent = () => {
       screenOptions={screenOptions}
     >
       {activationSteps.map((step) => {
-        console.log(step)
         return (
           <Stack.Screen
             name={step.screenName}
