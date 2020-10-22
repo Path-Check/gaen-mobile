@@ -12,14 +12,14 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
-import { Text, Button, LoadingIndicator } from "../../components"
+import { Text, LoadingIndicator } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
 } from "../../navigation"
 import { Icons } from "../../assets"
-import { Colors, Spacing, Iconography, Typography } from "../../styles"
+import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
 import Logger from "../../logger"
 import {
   postDiagnosisKeys,
@@ -180,12 +180,15 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           </Text>
           <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
         </View>
-
-        <Button
-          label={t("export.consent_button_title")}
+        <TouchableOpacity
+          style={style.button}
           onPress={handleOnPressConfirm}
-          customButtonStyle={style.button}
-        />
+          accessibilityLabel={t("export.consent_button_title")}
+        >
+          <Text style={style.buttonText}>
+            {t("export.consent_button_title")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
       <TouchableOpacity
         style={style.bottomButtonContainer}
@@ -236,7 +239,10 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.xxLarge,
     },
     button: {
-      alignSelf: "flex-start",
+      ...Buttons.primary,
+    },
+    buttonText: {
+      ...Typography.buttonPrimary,
     },
     bottomButtonContainer: {
       backgroundColor: Colors.secondary10,

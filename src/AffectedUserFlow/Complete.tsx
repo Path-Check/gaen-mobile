@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, Image, StyleSheet } from "react-native"
+import { ScrollView, Image, StyleSheet, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { StatusBar, Text, Button } from "../components"
+import { StatusBar, Text } from "../components"
 import { useStatusBarEffect, Stacks } from "../navigation"
 
 import { Images } from "../assets"
-import { Colors, Layout, Spacing, Typography } from "../styles"
+import { Buttons, Colors, Layout, Spacing, Typography } from "../styles"
 
 export const AffectedUserComplete: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -31,7 +31,13 @@ export const AffectedUserComplete: FunctionComponent = () => {
         <Text style={style.contentText}>
           {t("export.complete_body_bluetooth")}
         </Text>
-        <Button onPress={handleOnPressDone} label={t("common.done")} />
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressDone}
+          accessibilityLabel={t("common.done")}
+        >
+          <Text style={style.buttonText}>{t("common.done")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   )
@@ -64,6 +70,13 @@ const style = StyleSheet.create({
     ...Typography.body2,
     textAlign: "center",
     marginBottom: Spacing.xxxLarge,
+  },
+  button: {
+    ...Buttons.primary,
+    alignSelf: "center",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 

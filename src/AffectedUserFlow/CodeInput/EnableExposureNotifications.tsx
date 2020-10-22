@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, View, StyleSheet } from "react-native"
+import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { Text, Button, StatusBar } from "../../components"
+import { Text, StatusBar } from "../../components"
 import { useStatusBarEffect } from "../../navigation"
-import { Spacing, Colors, Typography } from "../../styles"
 import { openAppSettings } from "../../gaen/nativeModule"
+
+import { Spacing, Colors, Typography, Buttons } from "../../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -31,12 +32,13 @@ const EnableExposureNotifications: FunctionComponent = () => {
             {t("export.enable_exposure_notifications_body")}
           </Text>
         </View>
-        <View style={style.buttonContainer}>
-          <Button
-            onPress={handleOnPressOpenSettings}
-            label={t("common.settings")}
-          />
-        </View>
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressOpenSettings}
+          accessibilityLabel={t("common.settings")}
+        >
+          <Text style={style.buttonText}>{t("common.settings")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   )
@@ -60,8 +62,11 @@ const style = StyleSheet.create({
   subheader: {
     ...Typography.body2,
   },
-  buttonContainer: {
-    alignSelf: "flex-start",
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 
