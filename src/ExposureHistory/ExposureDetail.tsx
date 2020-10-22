@@ -40,7 +40,7 @@ const ExposureDetail: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView style={style.container}>
+    <ScrollView style={style.container} alwaysBounceVertical={false}>
       <View style={style.headerContainer}>
         <Text style={style.headerText}>
           {t("exposure_history.exposure_detail.header")}
@@ -68,7 +68,7 @@ const ExposureDetail: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.secondary10,
   },
   headerContainer: {
     backgroundColor: Colors.secondary10,

@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet, Linking } from "react-native"
+import { View, StyleSheet, Linking, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { ModalStackScreens } from "../../navigation"
-import { Text, Button } from "../../components"
+import { Text } from "../../components"
 import { useConnectionStatus } from "../../hooks/useConnectionStatus"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
@@ -73,27 +73,33 @@ const ExposureActions: FunctionComponent = () => {
           />
         </View>
         {displaySelfAssessment && (
-          <Button
+          <TouchableOpacity
+            style={style.button}
             onPress={handleOnPressPersonalizeMyGuidance}
-            label={t(
+            accessibilityLabel={t(
               "exposure_history.exposure_detail.personalize_my_guidance",
             )}
-            customButtonStyle={style.personalizeGuidanceButton}
-            customButtonInnerStyle={style.personalizeGuidanceButtonInner}
-            customTextStyle={style.personalizeGuidanceButtonText}
-            hasRightArrow
-            outlined
-          />
+          >
+            <Text style={style.buttonText}>
+              {t("exposure_history.exposure_detail.personalize_my_guidance")}
+            </Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          </TouchableOpacity>
         )}
         {displayNextStepsLink && (
-          <Button
+          <TouchableOpacity
+            style={style.button}
             onPress={handleOnPressNextStep}
-            label={t("exposure_history.exposure_detail.next_steps")}
+            accessibilityLabel={t(
+              "exposure_history.exposure_detail.next_steps",
+            )}
             disabled={!isInternetReachable}
-            customButtonStyle={style.button}
-            customButtonInnerStyle={style.buttonInner}
-            hasRightArrow
-          />
+          >
+            <Text style={style.buttonText}>
+              {t("exposure_history.exposure_detail.next_steps")}
+            </Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          </TouchableOpacity>
         )}
         {!isInternetReachable && (
           <Text style={style.connectivityWarningText}>
@@ -126,13 +132,18 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
           healthAuthorityName,
         })}
       </Text>
-      <Button
+      <TouchableOpacity
+        style={style.button}
         onPress={handleOnPressRequestCallback}
-        label={t("exposure_history.exposure_detail.speak_with_contact_tracer")}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-        hasRightArrow
-      />
+        accessibilityLabel={t(
+          "exposure_history.exposure_detail.speak_with_contact_tracer",
+        )}
+      >
+        <Text style={style.buttonText}>
+          {t("exposure_history.exposure_detail.speak_with_contact_tracer")}
+        </Text>
+        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+      </TouchableOpacity>
     </>
   )
 }
@@ -196,29 +207,13 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   button: {
+    ...Buttons.primaryThin,
+    width: "100%",
     marginBottom: Spacing.small,
-    width: "100%",
-    alignSelf: "center",
-    paddingVertical: Spacing.small,
   },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
-  },
-  personalizeGuidanceButton: {
-    marginBottom: Spacing.small,
-    width: "100%",
-    alignSelf: "center",
-    borderColor: Colors.secondary100,
-  },
-  personalizeGuidanceButtonText: {
+  buttonText: {
     ...Typography.buttonPrimary,
-    color: Colors.primary110,
-  },
-  personalizeGuidanceButtonInner: {
-    ...Buttons.medium,
-    width: "100%",
-    justifyContent: "space-between",
+    marginRight: Spacing.small,
   },
 })
 
