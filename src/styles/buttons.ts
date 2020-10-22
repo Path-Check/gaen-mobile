@@ -50,6 +50,7 @@ const transparent: ViewStyle = {
 export const primary: ViewStyle = {
   ...base,
   ...large,
+  ...Outlines.lightShadow,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
