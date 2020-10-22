@@ -40,7 +40,7 @@ const maxCornerRoundness: ViewStyle = {
 
 // Color
 const tertiaryBlue: ViewStyle = {
-  backgroundColor: Colors.secondary75,
+  backgroundColor: Colors.secondary.shade75,
 }
 
 const transparent: ViewStyle = {
@@ -48,8 +48,8 @@ const transparent: ViewStyle = {
 }
 
 const outlined: ViewStyle = {
-  backgroundColor: Colors.transparent,
-  borderColor: Colors.primary100,
+  backgroundColor: Colors.transparent.invisible,
+  borderColor: Colors.primary.shade100,
   borderWidth: Outlines.hairline,
 }
 
@@ -61,7 +61,7 @@ export const primary: ViewStyle = {
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
   maxWidth: Layout.screenWidth * 0.95,
-  backgroundColor: Colors.primary100,
+  backgroundColor: Colors.primary.shade100,
 }
 
 export const primaryThin: ViewStyle = {
@@ -82,14 +82,14 @@ export const primaryThinOutlined: ViewStyle = {
 
 export const primaryDisabled: ViewStyle = {
   ...primary,
-  backgroundColor: Colors.neutral50,
+  backgroundColor: Colors.neutral.shade50,
   shadowOpacity: 0,
   elevation: 0,
 }
 
 export const primaryThinDisabled: ViewStyle = {
   ...primaryThin,
-  backgroundColor: Colors.neutral50,
+  backgroundColor: Colors.neutral.shade50,
   shadowOpacity: 0,
   elevation: 0,
 }
@@ -112,6 +112,6 @@ export const fixedBottom: ViewStyle = {
   ...base,
   paddingTop: Spacing.medium,
   paddingBottom: Spacing.medium,
-  backgroundColor: Colors.primary100,
+  backgroundColor: Colors.primary.shade100,
   width: "100%",
 }

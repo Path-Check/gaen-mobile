@@ -81,10 +81,10 @@ const NotificationsPermissions: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     height: "100%",
   },
   contentContainer: {

@@ -17,7 +17,7 @@ const ExposureDetail: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("light-content", Colors.header.background)
   const { t } = useTranslation()
 
   const { exposureDatum } = route.params
@@ -50,7 +50,7 @@ const ExposureDetail: FunctionComponent = () => {
             xml={Icons.ExposureIcon}
             accessible
             accessibilityLabel={t("exposure_history.possible_exposure")}
-            fill={Colors.primary125}
+            fill={Colors.primary.shade125}
             width={Iconography.xxSmall}
             height={Iconography.xxSmall}
           />
@@ -68,10 +68,10 @@ const ExposureDetail: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
   },
   headerContainer: {
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
     paddingLeft: Spacing.medium,
     paddingRight: Spacing.massive,
     paddingTop: Spacing.large,
@@ -84,16 +84,16 @@ const style = StyleSheet.create({
   exposureWindowText: {
     ...Typography.header6,
     textTransform: "uppercase",
-    color: Colors.neutral110,
+    color: Colors.neutral.shade110,
     marginLeft: Spacing.xSmall,
   },
   headerText: {
     ...Typography.header2,
-    color: Colors.primary125,
+    color: Colors.primary.shade125,
     marginBottom: Spacing.medium,
   },
   bottomContainer: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     flex: 1,
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.medium,

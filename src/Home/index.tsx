@@ -48,7 +48,7 @@ const STATUS_ICON_SIZE = Iconography.small
 const IMAGE_HEIGHT = 170
 
 const Home: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
@@ -66,7 +66,7 @@ const Home: FunctionComponent = () => {
           xml={Icons.ChevronRight}
           width={Iconography.xxSmall}
           height={Iconography.xxSmall}
-          fill={Colors.neutral75}
+          fill={Colors.neutral.shade75}
         />
       </View>
     )
@@ -78,17 +78,17 @@ const Home: FunctionComponent = () => {
     }
 
     const statusBackgroundColor = exposureDetectionStatus
-      ? Colors.success10
-      : Colors.danger10
+      ? Colors.accent.success10
+      : Colors.accent.danger10
     const statusBorderColor = exposureDetectionStatus
-      ? Colors.success100
-      : Colors.danger100
+      ? Colors.accent.success100
+      : Colors.accent.danger100
     const statusIcon = exposureDetectionStatus
       ? Icons.CheckInCircle
       : Icons.XInCircle
     const statusIconFill = exposureDetectionStatus
-      ? Colors.success100
-      : Colors.danger100
+      ? Colors.accent.success100
+      : Colors.accent.danger100
     const statusText = exposureDetectionStatus
       ? t("home.bluetooth.tracing_on_header")
       : t("home.bluetooth.tracing_off_header")
@@ -128,7 +128,7 @@ const Home: FunctionComponent = () => {
           <Text style={style.statusActionText}>{actionText}</Text>
           <SvgXml
             xml={Icons.ChevronRight}
-            fill={Colors.black}
+            fill={Colors.neutral.black}
             width={Iconography.tiny}
             height={Iconography.tiny}
           />
@@ -234,7 +234,7 @@ const Home: FunctionComponent = () => {
       >
         <SvgXml
           xml={Icons.Phone}
-          fill={Colors.white}
+          fill={Colors.neutral.white}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
         />
@@ -249,7 +249,7 @@ const Home: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -269,13 +269,13 @@ const Home: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingTop: Spacing.medium,
     paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
     ...Typography.header1,
@@ -300,7 +300,7 @@ const style = StyleSheet.create({
   },
   statusText: {
     ...Typography.header3,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
   statusBottomContainer: {
     flexDirection: "row",
@@ -308,7 +308,7 @@ const style = StyleSheet.create({
   },
   statusActionText: {
     ...Typography.body2,
-    color: Colors.black,
+    color: Colors.neutral.black,
     marginRight: Spacing.xxxSmall,
     paddingBottom: 2,
   },
@@ -327,12 +327,12 @@ const style = StyleSheet.create({
   sectionHeaderText: {
     ...Typography.header3,
     marginBottom: Spacing.xxSmall,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
   sectionBodyText: {
     ...Typography.header4,
     ...Typography.base,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
     marginBottom: Spacing.small,
   },
   emergencyButtonContainer: {
@@ -343,7 +343,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     paddingHorizontal: Spacing.xLarge,
-    backgroundColor: Colors.danger100,
+    backgroundColor: Colors.accent.danger100,
   },
   emergencyButtonText: {
     ...Typography.buttonPrimary,
@@ -424,7 +424,7 @@ const ExpandingCircleAnimation: FunctionComponent = () => {
         alignSelf: "center",
         width: sizeAnimatedValue,
         height: sizeAnimatedValue,
-        borderColor: Colors.success100,
+        borderColor: Colors.accent.success100,
         borderWidth: Outlines.hairline,
         borderRadius: Outlines.borderRadiusMax,
         opacity: opacityAnimatedValue,

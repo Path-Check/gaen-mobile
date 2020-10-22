@@ -10,7 +10,7 @@ import { useStatusBarEffect } from "../navigation"
 import { Outlines, Colors, Spacing, Typography } from "../styles"
 
 const LanguageSelection: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const {
     i18n: { language },
   } = useTranslation()
@@ -65,7 +65,7 @@ const itemSeparatorComponent = () => {
   return (
     <View
       style={{
-        backgroundColor: Colors.neutral30,
+        backgroundColor: Colors.neutral.shade30,
         height: Outlines.hairline,
         width: "100%",
       }}
@@ -76,7 +76,7 @@ const itemSeparatorComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   languageButton: {
     paddingVertical: Spacing.medium,

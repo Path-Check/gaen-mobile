@@ -103,7 +103,7 @@ const ActivationStack: FunctionComponent = () => {
       <TouchableOpacity onPress={handleOnPressClose}>
         <SvgXml
           xml={Icons.Close}
-          fill={Colors.neutral140}
+          fill={Colors.neutral.shade140}
           style={style.closeIcon}
           accessible
           accessibilityLabel={t("common.close")}
@@ -154,7 +154,7 @@ const ActivationStack: FunctionComponent = () => {
 const style = StyleSheet.create({
   headerTitle: {
     ...Typography.header4,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
     maxWidth: Layout.halfWidth,
   },
   headerRight: {

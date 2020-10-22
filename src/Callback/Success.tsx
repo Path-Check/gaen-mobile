@@ -15,7 +15,7 @@ import { Images } from "../assets"
 import { Buttons, Typography, Spacing, Colors } from "../styles"
 
 const Success: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const {
     t,
     i18n: { language: localeCode },
@@ -60,12 +60,12 @@ const Success: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     justifyContent: "center",
   },
   header: {

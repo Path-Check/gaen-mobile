@@ -12,7 +12,7 @@ import { useConfigurationContext } from "../../ConfigurationContext"
 import { Colors } from "../../styles"
 
 const PublishConsentScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const [revisionToken, setRevisionToken] = useState("")
   const { storeRevisionToken, getRevisionToken } = useExposureContext()
   const navigation = useNavigation()
@@ -40,7 +40,7 @@ const PublishConsentScreen: FunctionComponent = () => {
   } else {
     return (
       <>
-        <StatusBar backgroundColor={Colors.primaryLightBackground} />
+        <StatusBar backgroundColor={Colors.background.primaryLight} />
         <View>
           <Text>Invalid State</Text>
           <Button

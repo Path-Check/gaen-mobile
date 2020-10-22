@@ -83,7 +83,9 @@ const GeneralSymptoms: FunctionComponent = () => {
           <SvgXml
             xml={Icons.Arrow}
             fill={
-              noSymptomsSelected ? Colors.black : Colors.primaryLightBackground
+              noSymptomsSelected
+                ? Colors.neutral.black
+                : Colors.background.primaryLight
             }
           />
         </TouchableOpacity>

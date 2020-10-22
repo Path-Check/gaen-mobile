@@ -31,7 +31,7 @@ import { Icons } from "../../assets"
 const defaultErrorMessage = ""
 
 const CodeInputForm: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
@@ -178,7 +178,7 @@ const CodeInputForm: FunctionComponent = () => {
           testID="code-input"
           value={code}
           placeholder={t("export.code_input_placeholder").toUpperCase()}
-          placeholderTextColor={Colors.placeholderText}
+          placeholderTextColor={Colors.text.placeholder}
           maxLength={codeLengthMax}
           style={codeInputStyle}
           returnKeyType="done"
@@ -202,7 +202,7 @@ const CodeInputForm: FunctionComponent = () => {
           </Text>
           <SvgXml
             xml={Icons.Arrow}
-            fill={isDisabled ? Colors.primaryText : Colors.white}
+            fill={isDisabled ? Colors.text.primary : Colors.neutral.white}
           />
         </TouchableOpacity>
       </ScrollView>
@@ -217,7 +217,7 @@ const style = StyleSheet.create({
   },
   contentContainer: {
     minHeight: "100%",
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingTop: Spacing.large,
     paddingBottom: Spacing.xxxHuge,
     paddingHorizontal: Spacing.medium,
@@ -235,7 +235,7 @@ const style = StyleSheet.create({
   },
   errorSubtitle: {
     ...Typography.error,
-    color: Colors.errorText,
+    color: Colors.text.error,
     marginTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
     minHeight: Spacing.xxxHuge,
@@ -250,7 +250,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {
-    borderColor: Colors.primary125,
+    borderColor: Colors.primary.shade125,
   },
   button: {
     ...Buttons.primary,

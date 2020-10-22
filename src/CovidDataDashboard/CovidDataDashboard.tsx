@@ -34,13 +34,13 @@ const CovidDataDashboard: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingTop: Spacing.medium,
     paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
 })
 

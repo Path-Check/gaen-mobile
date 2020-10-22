@@ -16,7 +16,7 @@ import { Images } from "../assets"
 import { useStatusBarEffect } from "../navigation"
 
 const ProtectPrivacy: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
 
@@ -65,7 +65,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     paddingVertical: Spacing.large,

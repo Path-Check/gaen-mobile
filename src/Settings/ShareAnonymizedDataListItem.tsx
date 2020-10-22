@@ -20,8 +20,8 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
   }
 
   const rightIconColor = userConsentedToAnalytics
-    ? Colors.success100
-    : Colors.danger75
+    ? Colors.accent.success100
+    : Colors.accent.danger75
   const rightIcon = userConsentedToAnalytics
     ? Icons.CheckInCircle
     : Icons.XInCircle
@@ -39,7 +39,7 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
       <View style={style.listItem}>
         <View style={style.leftContent}>
           <SvgXml
-            fill={Colors.primary100}
+            fill={Colors.primary.shade100}
             xml={Icons.BarGraph}
             width={Iconography.small}
             height={Iconography.small}

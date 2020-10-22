@@ -17,7 +17,7 @@ import { Spacing, Colors, Typography, Buttons } from "../styles"
 import { Icons, Images } from "../assets"
 
 export const ExportIntro: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -46,7 +46,7 @@ export const ExportIntro: FunctionComponent = () => {
         accessibilityLabel={t("common.start")}
       >
         <Text style={style.buttonText}>{t("common.start")}</Text>
-        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
     </ScrollView>
   )
@@ -54,7 +54,7 @@ export const ExportIntro: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
@@ -62,7 +62,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
     paddingTop: Spacing.huge,
     paddingBottom: Spacing.massive,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   image: {
     width: "100%",

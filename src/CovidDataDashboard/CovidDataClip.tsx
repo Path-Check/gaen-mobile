@@ -22,7 +22,7 @@ const LoadingIndicator = () => {
     <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
-        color={Colors.neutral100}
+        color={Colors.neutral.shade100}
         style={style.activityIndicator}
         testID={"loading-indicator"}
       />
@@ -84,7 +84,7 @@ const style = StyleSheet.create({
   },
   errorMessageText: {
     ...Typography.body1,
-    color: Colors.errorText,
+    color: Colors.text.error,
   },
 })
 

@@ -39,7 +39,7 @@ const CallEmergencyServices: FunctionComponent = () => {
       <View>
         <SvgXml
           xml={Icons.AsteriskInCircle}
-          fill={Colors.danger100}
+          fill={Colors.accent.danger100}
           width={Iconography.large}
           height={Iconography.large}
           style={style.icon}
@@ -72,7 +72,7 @@ const CallEmergencyServices: FunctionComponent = () => {
         </Text>
         <SvgXml
           xml={Icons.Arrow}
-          fill={Colors.white}
+          fill={Colors.neutral.white}
           width={Iconography.xSmall}
           height={Iconography.xSmall}
         />
@@ -84,7 +84,7 @@ const CallEmergencyServices: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
@@ -112,7 +112,7 @@ const style = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: Spacing.xLarge,
     borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.danger100,
+    backgroundColor: Colors.accent.danger100,
   },
   buttonText: {
     ...Typography.buttonPrimary,

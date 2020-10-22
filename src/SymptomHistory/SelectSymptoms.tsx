@@ -47,7 +47,7 @@ interface SelectSymptomsFormProps {
 export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   entry,
 }) => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -152,11 +152,11 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
   },
@@ -171,7 +171,7 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xSmall - 2,
     marginBottom: Spacing.xLarge,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.neutral50,
+    borderColor: Colors.neutral.shade50,
   },
   button: {
     ...Buttons.fixedBottom,

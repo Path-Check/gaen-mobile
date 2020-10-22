@@ -63,7 +63,7 @@ const HealthGuidelines: FunctionComponent = () => {
             </Text>
             <SvgXml
               xml={Icons.Arrow}
-              fill={Colors.primary125}
+              fill={Colors.primary.shade125}
               style={style.ctaArrow}
             />
           </TouchableOpacity>
@@ -103,7 +103,7 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
   return (
     <View style={style.listItem}>
       <View style={style.listItemIconContainer}>
-        <SvgXml xml={icon} fill={Colors.primary125} />
+        <SvgXml xml={icon} fill={Colors.primary.shade125} />
       </View>
       <Text style={style.listItemText}>{text}</Text>
     </View>
@@ -113,19 +113,19 @@ const HealthGuidelineItem: FunctionComponent<HealthGuidelineItemProps> = ({
 const style = StyleSheet.create({
   noExposureCard: {
     ...Affordances.floatingContainer,
-    backgroundColor: Colors.primary125,
-    borderColor: Colors.primary125,
+    backgroundColor: Colors.primary.shade125,
+    borderColor: Colors.primary.shade125,
     marginBottom: Spacing.small,
     marginHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header5,
     paddingBottom: Spacing.xxxSmall,
-    color: Colors.white,
+    color: Colors.neutral.white,
   },
   subheaderText: {
     ...Typography.body1,
-    color: Colors.secondary10,
+    color: Colors.secondary.shade10,
   },
   card: {
     ...Affordances.floatingContainer,
@@ -146,7 +146,7 @@ const style = StyleSheet.create({
   },
   learnMoreCta: {
     ...Typography.buttonSecondary,
-    color: Colors.primary125,
+    color: Colors.primary.shade125,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,

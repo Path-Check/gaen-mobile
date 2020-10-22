@@ -25,7 +25,7 @@ import {
 } from "../styles"
 
 const AcceptTermsOfService: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const configuration = useConfigurationContext()
   const [boxChecked, toggleCheckbox] = useState(false)
   const { t } = useTranslation()
@@ -74,7 +74,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
         >
           <SvgXml
             xml={checkboxIcon}
-            fill={Colors.primary100}
+            fill={Colors.primary.shade100}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -126,7 +126,7 @@ const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
       </View>
       <SvgXml
         xml={Icons.Arrow}
-        fill={Colors.primary100}
+        fill={Colors.primary.shade100}
         style={style.linkArrow}
       />
     </TouchableOpacity>
@@ -155,7 +155,7 @@ const style = StyleSheet.create({
     padding: Spacing.small,
     marginVertical: Spacing.large,
     borderRadius: Outlines.baseBorderRadius,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   linkTextContainer: {
     flexDirection: "row",
@@ -184,7 +184,7 @@ const style = StyleSheet.create({
   },
   checkboxText: {
     ...Typography.body1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     flex: 1,
     paddingLeft: Spacing.medium,
     fontSize: Typography.large,
