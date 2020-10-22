@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { StyleSheet } from "react-native"
+import { StyleSheet, TouchableOpacity } from "react-native"
+import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens } from "../navigation"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 import {
   OtherSymptom,
   PrimarySymptom,
@@ -14,7 +15,8 @@ import {
 import SymptomCheckbox from "./SymptomCheckbox"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
-import { Typography, Spacing, Buttons } from "../styles"
+import { Colors, Typography, Spacing, Buttons } from "../styles"
+import { Icons } from "../assets"
 
 const GeneralSymptoms: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -65,14 +67,26 @@ const GeneralSymptoms: FunctionComponent = () => {
   return (
     <SelfAssessmentLayout
       bottomActionsContent={
-        <Button
-          label={t("common.next")}
-          onPress={handleOnPressNext}
-          hasRightArrow
+        <TouchableOpacity
           disabled={noSymptomsSelected}
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
+          style={noSymptomsSelected ? style.buttonDisabled : style.button}
+          onPress={handleOnPressNext}
+          accessibilityLabel={t("common.next")}
+        >
+          <Text
+            style={
+              noSymptomsSelected ? style.buttonDisabledText : style.buttonText
+            }
+          >
+            {t("common.next")}
+          </Text>
+          <SvgXml
+            xml={Icons.Arrow}
+            fill={
+              noSymptomsSelected ? Colors.black : Colors.primaryLightBackground
+            }
+          />
+        </TouchableOpacity>
       }
     >
       <Text style={style.headerText}>
@@ -131,11 +145,22 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
+    ...Buttons.primaryThin,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    ...Buttons.medium,
+  buttonDisabled: {
+    ...Buttons.primaryThinDisabled,
+    alignSelf: "center",
     width: "100%",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
+    marginRight: Spacing.small,
   },
 })
 

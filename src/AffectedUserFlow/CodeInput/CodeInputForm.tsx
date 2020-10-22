@@ -8,11 +8,13 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
-import { Text, Button, LoadingIndicator } from "../../components"
+import { Text, LoadingIndicator } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -21,9 +23,10 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
 } from "../../navigation"
-
-import { Spacing, Forms, Colors, Typography } from "../../styles"
 import Logger from "../../logger"
+
+import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
+import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
@@ -190,13 +193,22 @@ const CodeInputForm: FunctionComponent = () => {
           blurOnSubmit={false}
         />
         <Text style={style.errorSubtitle}>{errorMessage}</Text>
-        <Button
+        <TouchableOpacity
+          style={isDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressSubmit}
-          label={t("common.next")}
+          accessibilityLabel={t("common.next")}
           disabled={isDisabled}
-          customButtonStyle={style.button}
-          hasRightArrow
-        />
+        >
+          <Text
+            style={isDisabled ? style.buttonDisabledText : style.buttonText}
+          >
+            {t("common.next")}
+          </Text>
+          <SvgXml
+            xml={Icons.Arrow}
+            fill={isDisabled ? Colors.primaryText : Colors.white}
+          />
+        </TouchableOpacity>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
@@ -245,7 +257,18 @@ const style = StyleSheet.create({
     borderColor: Colors.primary125,
   },
   button: {
-    alignSelf: "flex-start",
+    ...Buttons.primary,
+  },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
+    marginRight: Spacing.small,
   },
 })
 

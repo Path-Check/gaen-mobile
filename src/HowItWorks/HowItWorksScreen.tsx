@@ -12,10 +12,13 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
-import { Text, Button } from "../components"
-import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { SvgXml } from "react-native-svg"
 
-import { Outlines, Colors, Spacing, Typography } from "../styles"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { Text } from "../components"
+
+import { Outlines, Colors, Spacing, Typography, Buttons } from "../styles"
+import { Icons } from "../assets"
 
 type HowItWorksScreenContent = {
   screenNumber: number
@@ -45,6 +48,15 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
+  const {
+    screenNumber,
+    image,
+    imageLabel,
+    header,
+    primaryButtonLabel,
+    primaryButtonOnPress,
+  } = howItWorksScreenContent
+
   return (
     <>
       <ScrollView
@@ -53,28 +65,29 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
       >
         <View>
           <Image
-            source={howItWorksScreenContent.image}
-            accessibilityLabel={howItWorksScreenContent.imageLabel}
+            source={image}
+            accessibilityLabel={imageLabel}
             accessible
             style={style.image}
             resizeMode={"contain"}
           />
           <PositionDots
-            highlightedDotIdx={howItWorksScreenContent.screenNumber}
+            highlightedDotIdx={screenNumber}
             totalDotCount={totalScreenCount}
           />
-          <Text style={style.headerText}>{howItWorksScreenContent.header}</Text>
+          <Text style={style.headerText}>{header}</Text>
         </View>
       </ScrollView>
       <View style={style.bottomButtonContainer}>
         <>
-          <Button
-            customButtonStyle={style.nextButton}
-            customButtonInnerStyle={style.nextButtonGradient}
-            label={howItWorksScreenContent.primaryButtonLabel}
-            onPress={howItWorksScreenContent.primaryButtonOnPress}
-            hasRightArrow
-          />
+          <TouchableOpacity
+            style={style.button}
+            onPress={primaryButtonOnPress}
+            accessibilityLabel={primaryButtonLabel}
+          >
+            <Text style={style.buttonText}>{primaryButtonLabel}</Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
             <Text style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}
@@ -114,16 +127,15 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.xLarge,
       paddingHorizontal: Spacing.large,
     },
-    nextButton: {
-      width: "95%",
+    button: {
+      ...Buttons.primaryThin,
+      width: "100%",
       alignSelf: "center",
       marginBottom: Spacing.small,
     },
-    nextButtonGradient: {
-      paddingTop: Spacing.xSmall,
-      paddingBottom: Spacing.xSmall + 1,
-      width: "95%",
-      alignSelf: "center",
+    buttonText: {
+      ...Typography.buttonPrimary,
+      marginRight: Spacing.small,
     },
     bottomButtonContainer: {
       alignItems: "center",

@@ -149,6 +149,9 @@ const MainNavigator: FunctionComponent = () => {
         <Stack.Screen
           name={ModalStackScreens.AnonymizedDataConsent}
           component={AnonymizedDataConsentScreen}
+          options={{
+            headerShown: true,
+          }}
         />
         <Stack.Screen
           name={ModalStackScreens.SelfAssessmentFromExposureDetails}

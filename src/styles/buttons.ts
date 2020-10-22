@@ -18,6 +18,11 @@ const tiny: ViewStyle = {
   paddingBottom: Spacing.xxxSmall + 1,
 }
 
+const small: ViewStyle = {
+  paddingTop: Spacing.xSmall,
+  paddingBottom: Spacing.xSmall + 1,
+}
+
 export const medium: ViewStyle = {
   paddingTop: Spacing.small,
   paddingBottom: Spacing.small + 1,
@@ -45,10 +50,27 @@ const transparent: ViewStyle = {
 export const primary: ViewStyle = {
   ...base,
   ...large,
+  ...Outlines.lightShadow,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
   maxWidth: Layout.screenWidth * 0.95,
+  backgroundColor: Colors.primary100,
+}
+
+export const primaryThin: ViewStyle = {
+  ...primary,
+  ...small,
+}
+
+export const primaryDisabled: ViewStyle = {
+  ...primary,
+  backgroundColor: Colors.neutral50,
+}
+
+export const primaryThinDisabled: ViewStyle = {
+  ...primaryThin,
+  backgroundColor: Colors.neutral50,
 }
 
 export const secondary: ViewStyle = {

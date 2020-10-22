@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -81,10 +81,12 @@ const ActivateBluetooth: FunctionComponent = () => {
           <Text style={style.body}>{t("onboarding.bluetooth_body")}</Text>
         </View>
         <View style={style.buttonsContainer}>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressChangeBluetoothStatus}
-            label={t("common.settings")}
-          />
+            style={style.button}
+          >
+            <Text style={style.buttonText}>{t("common.settings")}</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
@@ -128,6 +130,12 @@ const style = StyleSheet.create({
   },
   buttonsContainer: {
     alignSelf: "flex-start",
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,

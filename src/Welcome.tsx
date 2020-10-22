@@ -8,8 +8,9 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
-import { StatusBar, Text, Button } from "./components"
+import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
@@ -18,8 +19,15 @@ import {
   authorityCopyTranslation,
 } from "./configuration/authorityCopy"
 
-import { Images } from "./assets"
-import { Spacing, Colors, Typography, Outlines, Layout } from "./styles"
+import { Images, Icons } from "./assets"
+import {
+  Spacing,
+  Colors,
+  Typography,
+  Outlines,
+  Layout,
+  Buttons,
+} from "./styles"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -69,11 +77,16 @@ const Welcome: FunctionComponent = () => {
             <Text style={style.welcomeToText}>{welcomeMessage}</Text>
             <Text style={style.nameText}>{applicationName}</Text>
           </View>
-          <Button
-            label={t("label.launch_get_started")}
+          <TouchableOpacity
+            style={style.button}
             onPress={handleOnPressGetStarted}
-            hasRightArrow
-          />
+            accessibilityLabel={t("label.launch_get_started")}
+          >
+            <Text style={style.buttonText}>
+              {t("label.launch_get_started")}
+            </Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </>
@@ -129,6 +142,14 @@ const style = StyleSheet.create({
     color: Colors.primaryText,
     textAlign: "center",
     marginBottom: Spacing.huge,
+  },
+  button: {
+    ...Buttons.primary,
+    alignSelf: "center",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

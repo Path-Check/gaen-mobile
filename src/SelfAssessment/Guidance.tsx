@@ -1,16 +1,24 @@
 import React, { FunctionComponent } from "react"
-import { Linking, Image, ScrollView, StyleSheet, View } from "react-native"
+import {
+  Linking,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
-import { Button, StatusBar, Text } from "../components"
+import { StatusBar, Text } from "../components"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks, useStatusBarEffect } from "../navigation"
 
 import { Buttons, Outlines, Colors, Spacing, Typography } from "../styles"
-import { Images } from "../assets"
+import { Images, Icons } from "../assets"
 
 interface GuidanceProps {
   destinationOnCancel?: Stack
@@ -214,22 +222,26 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
           {instructionsForSymptomGroup(symptomGroup)}
         </View>
         {displayFindATestCenter && (
-          <Button
-            label={t("self_assessment.guidance.find_a_test_center_nearby")}
+          <TouchableOpacity
+            style={style.button}
             onPress={handleOnPressFindTestCenter}
-            customButtonStyle={style.button}
-            customButtonInnerStyle={style.buttonInner}
-            hasRightArrow
-          />
+            accessibilityLabel={t(
+              "self_assessment.guidance.find_a_test_center_nearby",
+            )}
+          >
+            <Text style={style.buttonText}>
+              {t("self_assessment.guidance.find_a_test_center_nearby")}
+            </Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          </TouchableOpacity>
         )}
-        <Button
+        <TouchableOpacity
+          style={style.doneButton}
           onPress={handleOnPressDone}
-          label={t("common.done")}
-          customButtonStyle={style.doneButton}
-          customButtonInnerStyle={style.doneButtonInner}
-          customTextStyle={style.doneButtonText}
-          outlined
-        />
+          accessibilityLabel={t("common.done")}
+        >
+          <Text style={style.doneButtonText}>{t("common.done")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   )
@@ -299,25 +311,22 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   button: {
+    ...Buttons.primaryThin,
     width: "100%",
-    paddingHorizontal: Spacing.large,
+    alignSelf: "center",
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
   doneButton: {
-    marginTop: Spacing.large,
+    ...Buttons.secondary,
+    marginTop: Spacing.small,
     marginBottom: Spacing.small,
     alignSelf: "center",
-    borderColor: Colors.secondary100,
   },
   doneButtonText: {
-    ...Typography.buttonPrimary,
-    color: Colors.primary110,
-  },
-  doneButtonInner: {
-    ...Buttons.tinyRounded,
-    backgroundColor: Colors.white,
+    ...Typography.buttonSecondary,
   },
 })
 

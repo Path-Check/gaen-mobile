@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens } from "../navigation"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 import { UnderlyingCondition } from "./selfAssessment"
 import SymptomCheckbox from "./SymptomCheckbox"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
-import { Typography, Spacing, Buttons } from "../styles"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
 const UnderlyingConditions: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -72,13 +74,10 @@ const UnderlyingConditions: FunctionComponent = () => {
   return (
     <SelfAssessmentLayout
       bottomActionsContent={
-        <Button
-          label={t("common.next")}
-          onPress={handleOnPressNext}
-          hasRightArrow
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
+        <TouchableOpacity style={style.button} onPress={handleOnPressNext}>
+          <Text style={style.buttonText}>{t("common.next")}</Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        </TouchableOpacity>
       }
     >
       <Text style={style.headerText}>
@@ -162,11 +161,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
+    ...Buttons.primaryThin,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

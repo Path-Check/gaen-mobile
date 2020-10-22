@@ -1,13 +1,20 @@
 import React, { FunctionComponent } from "react"
-import { StyleSheet, View, Image, ScrollView } from "react-native"
+import {
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
-import { Text, Button } from "../components"
 import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
+import { Text } from "../components"
 
-import { Spacing, Colors, Typography } from "../styles"
-import { Images } from "../assets"
+import { Spacing, Colors, Typography, Buttons } from "../styles"
+import { Icons, Images } from "../assets"
 
 export const ExportIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.primaryLightBackground)
@@ -33,13 +40,14 @@ export const ExportIntro: FunctionComponent = () => {
         />
         <Text style={style.header}>{t("export.start_header_bluetooth")}</Text>
       </View>
-      <View style={style.buttonContainer}>
-        <Button
-          label={t("common.start")}
-          onPress={handleOnPressNext}
-          hasRightArrow
-        />
-      </View>
+      <TouchableOpacity
+        style={style.button}
+        onPress={handleOnPressNext}
+        accessibilityLabel={t("common.start")}
+      >
+        <Text style={style.buttonText}>{t("common.start")}</Text>
+        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+      </TouchableOpacity>
     </ScrollView>
   )
 }
@@ -66,8 +74,12 @@ const style = StyleSheet.create({
     ...Typography.header1,
     marginBottom: Spacing.xLarge,
   },
-  buttonContainer: {
-    alignSelf: "flex-start",
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

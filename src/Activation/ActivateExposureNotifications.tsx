@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
 
@@ -71,10 +71,14 @@ const ActivateExposureNotifications: FunctionComponent = () => {
           </Text>
         </View>
         <View style={style.buttonsContainer}>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressActivateExposureNotifications}
-            label={t("onboarding.proximity_tracing_button")}
-          />
+            style={style.button}
+          >
+            <Text style={style.buttonText}>
+              {t("onboarding.proximity_tracing_button")}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressDontEnable}
             style={style.secondaryButton}
@@ -117,6 +121,12 @@ const style = StyleSheet.create({
   },
   buttonsContainer: {
     alignSelf: "flex-start",
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,

@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 
 import { EmergencySymptom, SymptomGroup } from "./selfAssessment"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
@@ -12,6 +13,7 @@ import SymptomCheckbox from "./SymptomCheckbox"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
 
 const EmergencySymptomsQuestions: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary10)
@@ -56,13 +58,10 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
   return (
     <SelfAssessmentLayout
       bottomActionsContent={
-        <Button
-          label={t("common.next")}
-          onPress={handleOnPressNext}
-          hasRightArrow
-          customButtonStyle={style.button}
-          customButtonInnerStyle={style.buttonInner}
-        />
+        <TouchableOpacity style={style.button} onPress={handleOnPressNext}>
+          <Text style={style.buttonText}>{t("common.next")}</Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        </TouchableOpacity>
       }
     >
       <Text style={style.headerText}>
@@ -106,11 +105,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
+    ...Buttons.primaryThin,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    ...Buttons.medium,
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

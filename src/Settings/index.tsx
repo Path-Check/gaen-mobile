@@ -79,13 +79,11 @@ const Settings: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
-
   const deleteMyData: SettingsListItem = {
     label: t("settings.delete_my_data"),
     onPress: handleOnPressDeleteMyData,
     icon: Icons.Trash,
   }
-
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
