@@ -50,11 +50,15 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
     casesPercentageTrend > 0
       ? {
           text: t("covid_data.up_from_last_week"),
-          indicator: <SvgXml xml={Icons.ChevronUp} fill={Colors.black} />,
+          indicator: (
+            <SvgXml xml={Icons.ChevronUp} fill={Colors.neutral.black} />
+          ),
         }
       : {
           text: t("covid_data.down_from_last_week"),
-          indicator: <SvgXml xml={Icons.ChevronDown} fill={Colors.black} />,
+          indicator: (
+            <SvgXml xml={Icons.ChevronDown} fill={Colors.neutral.black} />
+          ),
         }
 
   return (
@@ -83,7 +87,7 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
       <View style={style.chevronContainer}>
         <SvgXml
           xml={Icons.ChevronRight}
-          fill={Colors.neutral75}
+          fill={Colors.neutral.shade75}
           width={Iconography.xxSmall}
           height={Iconography.xxSmall}
         />
@@ -101,7 +105,7 @@ const style = StyleSheet.create({
   sectionHeaderText: {
     ...Typography.header3,
     marginBottom: Spacing.xxSmall,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
   dataContainer: {
     flexWrap: "wrap",
@@ -113,7 +117,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     borderRadius: Outlines.baseBorderRadius,
-    backgroundColor: Colors.secondary50,
+    backgroundColor: Colors.secondary.shade50,
     paddingHorizontal: Spacing.small,
     paddingVertical: Spacing.xSmall,
     marginRight: Spacing.small,
@@ -124,7 +128,7 @@ const style = StyleSheet.create({
   percentageText: {
     ...Typography.body1,
     ...Typography.bold,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
   headerText: {
     ...Typography.header4,

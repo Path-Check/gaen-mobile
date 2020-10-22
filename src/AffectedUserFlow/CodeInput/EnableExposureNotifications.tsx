@@ -9,7 +9,7 @@ import { openAppSettings } from "../../gaen/nativeModule"
 import { Spacing, Colors, Typography, Buttons } from "../../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
 
   const handleOnPressOpenSettings = () => {
@@ -18,7 +18,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-enable-exposure-notifications-screen"}
@@ -50,7 +50,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.massive,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerContainer: {
     marginBottom: Spacing.huge,

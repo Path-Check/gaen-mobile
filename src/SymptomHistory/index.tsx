@@ -21,7 +21,7 @@ import SymptomHistoryFormatter from "./SymptomHistoryFormatter"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const SymptomHistory: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const { symptomHistory } = useSymptomHistoryContext()
 
@@ -39,7 +39,7 @@ const SymptomHistory: FunctionComponent = () => {
 
   return (
     <View style={style.outerContainer}>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -78,7 +78,7 @@ const style = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingVertical: Spacing.large,

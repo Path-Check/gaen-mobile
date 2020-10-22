@@ -76,7 +76,7 @@ const UnderlyingConditions: FunctionComponent = () => {
       bottomActionsContent={
         <TouchableOpacity style={style.button} onPress={handleOnPressNext}>
           <Text style={style.buttonText}>{t("common.next")}</Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
         </TouchableOpacity>
       }
     >

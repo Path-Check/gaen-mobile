@@ -53,7 +53,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: Outlines.hairline,
-    borderBottomColor: Colors.neutral30,
+    borderBottomColor: Colors.neutral.shade30,
   },
   headerText: {
     ...Typography.header4,

@@ -5,12 +5,12 @@ import * as Colors from "./colors"
 import * as Typography from "./typography"
 
 export const headerStyle: ViewStyle = {
-  backgroundColor: Colors.primary125,
+  backgroundColor: Colors.primary.shade125,
 }
 
 export const headerTitleStyle: TextStyle = {
   ...Typography.mediumBold,
-  color: Colors.headerText,
+  color: Colors.header.text,
   letterSpacing: Typography.mediumLetterSpacing,
   textTransform: "uppercase",
 }
@@ -23,12 +23,12 @@ export const headerScreenOptions: StackNavigationOptions = {
     ...headerTitleStyle,
   },
   headerBackTitleVisible: false,
-  headerTintColor: Colors.headerText,
+  headerTintColor: Colors.header.text,
   headerTitleAlign: "center",
 }
 
 export const headerMinimalOptions: StackNavigationOptions = {
   title: "",
   headerShown: true,
-  headerStyle: { shadowColor: Colors.transparent },
+  headerStyle: { shadowColor: Colors.transparent.invisible },
 }

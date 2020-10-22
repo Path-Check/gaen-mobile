@@ -13,7 +13,7 @@ const SelfAssessmentLayout: FunctionComponent<SelfAssessmentLayoutProps> = ({
   children,
   bottomActionsContent,
 }) => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
 
@@ -36,7 +36,7 @@ const createStyle = (insets: EdgeInsets) => {
     outerContainer: {
       justifyContent: "space-between",
       flex: 1,
-      backgroundColor: Colors.primaryLightBackground,
+      backgroundColor: Colors.background.primaryLight,
     },
     contentContainer: {
       justifyContent: "space-between",
@@ -48,7 +48,7 @@ const createStyle = (insets: EdgeInsets) => {
       alignItems: "center",
       paddingTop: Spacing.small,
       paddingBottom: insets.bottom + Spacing.small,
-      backgroundColor: Colors.secondary10,
+      backgroundColor: Colors.secondary.shade10,
       paddingHorizontal: Spacing.large,
     },
   })

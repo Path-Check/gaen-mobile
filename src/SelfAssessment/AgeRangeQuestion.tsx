@@ -58,8 +58,8 @@ const AgeRangeQuestion: FunctionComponent = () => {
             xml={Icons.Arrow}
             fill={
               buttonDisabled
-                ? Colors.primaryText
-                : Colors.primaryLightBackground
+                ? Colors.text.primary
+                : Colors.background.primaryLight
             }
           />
         </TouchableOpacity>
@@ -95,7 +95,9 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
   const [pressing, setPressing] = useState<boolean>(false)
 
   const radioIcon = isSelected ? Icons.RadioSelected : Icons.RadioUnselected
-  const radioColor = isSelected ? Colors.primary100 : Colors.neutral75
+  const radioColor = isSelected
+    ? Colors.primary.shade100
+    : Colors.neutral.shade75
 
   const handleOnPressIn = () => {
     setPressing(true)

@@ -12,7 +12,7 @@ import { Icons } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const {
@@ -59,7 +59,7 @@ const SelfAssessmentIntro: FunctionComponent = () => {
         <Text style={style.buttonText}>
           {t("self_assessment.intro.agree_and_start_assessment")}
         </Text>
-        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
     </ScrollView>
   )
@@ -67,7 +67,7 @@ const SelfAssessmentIntro: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
@@ -82,7 +82,7 @@ const style = StyleSheet.create({
   },
   subheaderText: {
     ...Typography.body1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     marginBottom: Spacing.xxxHuge,
   },
   bulletListContainer: {
@@ -93,8 +93,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   emergencyText: {
+    ...Typography.error,
     ...Typography.mediumBold,
-    color: Colors.danger100,
   },
   button: {
     ...Buttons.primary,

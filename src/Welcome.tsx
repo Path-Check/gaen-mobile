@@ -30,7 +30,7 @@ import {
 } from "./styles"
 
 const Welcome: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const {
     t,
@@ -55,7 +55,7 @@ const Welcome: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -85,7 +85,7 @@ const Welcome: FunctionComponent = () => {
             <Text style={style.buttonText}>
               {t("label.launch_get_started")}
             </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -95,11 +95,11 @@ const Welcome: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     flex: 1,
@@ -110,7 +110,7 @@ const style = StyleSheet.create({
   },
   languageButtonContainer: {
     marginTop: Spacing.medium,
-    backgroundColor: Colors.secondary50,
+    backgroundColor: Colors.secondary.shade50,
     borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.xLarge,
@@ -119,7 +119,7 @@ const style = StyleSheet.create({
   languageButtonText: {
     ...Typography.body3,
     letterSpacing: Typography.largeLetterSpacing,
-    color: Colors.primary125,
+    color: Colors.primary.shade125,
     textAlign: "center",
     textTransform: "uppercase",
   },
@@ -134,12 +134,12 @@ const style = StyleSheet.create({
   },
   welcomeToText: {
     ...Typography.header1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     textAlign: "center",
   },
   nameText: {
     ...Typography.header1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     textAlign: "center",
     marginBottom: Spacing.huge,
   },

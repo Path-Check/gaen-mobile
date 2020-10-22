@@ -35,7 +35,7 @@ type SettingsListItem = {
 }
 
 const Settings: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const {
     t,
     i18n: { language: localeCode },
@@ -108,7 +108,7 @@ const Settings: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.secondary.shade10} />
       <ScrollView style={style.container} alwaysBounceVertical={false}>
         <View style={style.section}>
           <ListItem
@@ -176,10 +176,10 @@ const Settings: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
   },
   section: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     marginBottom: Spacing.xxLarge,
   },
   bottomContainer: {
@@ -198,7 +198,7 @@ const style = StyleSheet.create({
   },
   infoRowLabel: {
     ...Typography.header5,
-    color: Colors.primary150,
+    color: Colors.primary.shade150,
     width: 100,
     marginTop: Spacing.small,
   },

@@ -13,7 +13,7 @@ import { Text } from "../components"
 import { Colors, Typography, Spacing, Buttons } from "../styles"
 
 const AnonymizedDataConsentScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const {
@@ -80,7 +80,7 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     paddingVertical: Spacing.large,

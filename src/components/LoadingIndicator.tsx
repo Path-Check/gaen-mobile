@@ -12,7 +12,7 @@ const LoadingIndicator: FunctionComponent = () => {
     <View style={style.activityIndicatorContainer}>
       <ActivityIndicator
         size={"large"}
-        color={Colors.neutral100}
+        color={Colors.neutral.shade100}
         style={style.activityIndicator}
         testID={"loading-indicator"}
       />
@@ -36,7 +36,7 @@ const createStyle = (headerHeight: number) => {
     activityIndicator: {
       width: indicatorWidth,
       height: indicatorWidth,
-      backgroundColor: Colors.transparentNeutral30,
+      backgroundColor: Colors.transparent.neutral30,
       borderRadius: Outlines.baseBorderRadius,
     },
   })

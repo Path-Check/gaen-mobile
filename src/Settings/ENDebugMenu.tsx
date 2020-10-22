@@ -24,7 +24,7 @@ type ENDebugMenuProps = {
 }
 
 const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("light-content", Colors.header.background)
   const [loading, setLoading] = useState(false)
   const { resetOnboarding } = useOnboardingContext()
   const { deleteAllEntries } = useSymptomHistoryContext()
@@ -182,18 +182,18 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
 const style = StyleSheet.create({
   section: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingHorizontal: Spacing.small,
     marginBottom: Spacing.medium,
     borderTopWidth: Outlines.hairline,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.secondary75,
+    borderColor: Colors.secondary.shade75,
   },
   listItem: {
     flex: 1,
     paddingVertical: Spacing.medium,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.secondary75,
+    borderColor: Colors.secondary.shade75,
   },
   listItemText: {
     ...Typography.body1,

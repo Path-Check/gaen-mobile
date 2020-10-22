@@ -46,7 +46,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 
   return (
     <TouchableHighlight
-      underlayColor={Colors.secondary50}
+      underlayColor={Colors.secondary.shade50}
       style={style.container}
       onPress={() =>
         navigation.navigate(ExposureHistoryStackScreens.ExposureDetail, {
@@ -69,7 +69,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
           accessibilityLabel={t("label.check")}
           width={Iconography.xxSmall}
           height={Iconography.xxSmall}
-          fill={Colors.primary100}
+          fill={Colors.primary.shade100}
         />
       </View>
     </TouchableHighlight>

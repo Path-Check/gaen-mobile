@@ -24,7 +24,7 @@ import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 const defaultErrorMessage = " "
 
 const CallbackForm: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const { healthAuthorityName } = useConfigurationContext()
   const navigation = useNavigation()
@@ -187,7 +187,7 @@ const style = StyleSheet.create({
     height: "100%",
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.large,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     justifyContent: "space-between",

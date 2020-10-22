@@ -44,8 +44,8 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   const { t } = useTranslation()
 
   const activeContent: Content = {
-    backgroundColor: Colors.success10,
-    borderColor: Colors.success100,
+    backgroundColor: Colors.accent.success10,
+    borderColor: Colors.accent.success100,
     bodyText: t("common.on"),
     statusIcon: Icons.CheckInCircle,
     actionText: t("exposure_scanning_status.learn_more"),
@@ -55,8 +55,8 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   }
 
   const inactiveContent: Content = {
-    backgroundColor: Colors.danger10,
-    borderColor: Colors.danger100,
+    backgroundColor: Colors.accent.danger10,
+    borderColor: Colors.accent.danger100,
     bodyText: t("common.off"),
     statusIcon: Icons.XInCircle,
     actionText: t("exposure_scanning_status.fix_this"),
@@ -115,7 +115,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
         <Text style={style.actionText}>{actionText}</Text>
         <SvgXml
           xml={chevron}
-          fill={Colors.black}
+          fill={Colors.neutral.black}
           width={Iconography.tiny}
           height={Iconography.tiny}
         />
@@ -137,11 +137,11 @@ const style = StyleSheet.create({
   },
   topTextContainer: {
     marginTop: Spacing.xxSmall,
-    borderColor: Colors.neutral10,
+    borderColor: Colors.neutral.shade10,
   },
   systemServiceText: {
     ...Typography.header3,
-    color: Colors.black,
+    color: Colors.neutral.black,
     lineHeight: Typography.smallLineHeight,
     marginBottom: Spacing.xSmall,
   },
@@ -154,7 +154,7 @@ const style = StyleSheet.create({
   statusText: {
     ...Typography.body2,
     ...Typography.bold,
-    color: Colors.white,
+    color: Colors.neutral.white,
     lineHeight: Typography.xSmallLineHeight,
   },
   bottomContainer: {
@@ -163,7 +163,7 @@ const style = StyleSheet.create({
   },
   actionText: {
     ...Typography.body1,
-    color: Colors.black,
+    color: Colors.neutral.black,
     marginRight: Spacing.xxSmall,
     paddingBottom: 2,
   },

@@ -29,7 +29,7 @@ const BluetoothInfo: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     paddingTop: Spacing.large,

@@ -10,7 +10,7 @@ export const iconBadge: ViewStyle = {
   position: "absolute",
   right: 22,
   top: 3,
-  backgroundColor: Colors.warning100,
+  backgroundColor: Colors.accent.warning100,
   borderRadius: 6,
   width: 12,
   height: 12,
@@ -21,7 +21,7 @@ export const iconBadge: ViewStyle = {
 type FlashMessageOptions = Omit<MessageOptions, "message">
 
 export const flashMessageOptions: FlashMessageOptions = {
-  titleStyle: { ...Typography.header3, color: Colors.black },
+  titleStyle: { ...Typography.header3, color: Colors.neutral.black },
   animationDuration: 100,
   floating: true,
   position: { top: Spacing.huge },
@@ -29,17 +29,17 @@ export const flashMessageOptions: FlashMessageOptions = {
 
 export const successFlashMessageOptions: FlashMessageOptions = {
   ...flashMessageOptions,
-  backgroundColor: Colors.success50,
+  backgroundColor: Colors.accent.success50,
 }
 
 export const errorFlashMessageOptions: FlashMessageOptions = {
   ...flashMessageOptions,
-  backgroundColor: Colors.danger75,
+  backgroundColor: Colors.accent.danger75,
 }
 
 export const floatingContainer: ViewStyle = {
   ...Outlines.lightShadow,
-  backgroundColor: Colors.primaryLightBackground,
+  backgroundColor: Colors.background.primaryLight,
   borderRadius: Outlines.borderRadiusLarge,
   paddingVertical: Spacing.medium,
   paddingHorizontal: Spacing.large,

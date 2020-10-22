@@ -170,7 +170,7 @@ const style = StyleSheet.create({
   },
   skipButtonText: {
     ...Typography.body2,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
   },
 })
 

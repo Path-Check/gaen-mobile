@@ -30,7 +30,7 @@ const History: FunctionComponent<HistoryProps> = ({
   exposures,
 }) => {
   useIsFocused()
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { checkForNewExposures } = useExposureContext()
@@ -64,7 +64,7 @@ const History: FunctionComponent<HistoryProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         style={style.container}
@@ -119,7 +119,7 @@ const style = StyleSheet.create({
   },
   container: {
     paddingBottom: Spacing.medium,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerRow: {
     flexDirection: "row",

@@ -27,7 +27,7 @@ const LocationInfo: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     paddingTop: Spacing.large,
@@ -40,7 +40,7 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.body1,
     ...Typography.mediumBold,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     marginBottom: Spacing.medium,
   },
   bodyText: {

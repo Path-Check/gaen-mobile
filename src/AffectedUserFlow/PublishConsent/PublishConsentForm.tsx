@@ -48,7 +48,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   appPackageName,
   regionCodes,
 }) => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -199,7 +199,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         </Text>
         <SvgXml
           xml={Icons.ChevronUp}
-          fill={Colors.primary150}
+          fill={Colors.primary.shade150}
           width={Iconography.xxxSmall}
           height={Iconography.xxxSmall}
         />
@@ -214,7 +214,7 @@ const createStyle = (insets: EdgeInsets) => {
   return StyleSheet.create({
     outerContainer: {
       flex: 1,
-      backgroundColor: Colors.primaryLightBackground,
+      backgroundColor: Colors.background.primaryLight,
     },
     contentContainer: {
       paddingTop: Spacing.medium,
@@ -231,7 +231,7 @@ const createStyle = (insets: EdgeInsets) => {
     subheaderText: {
       ...Typography.body1,
       ...Typography.mediumBold,
-      color: Colors.black,
+      color: Colors.neutral.black,
       marginBottom: Spacing.xxSmall,
     },
     bodyText: {
@@ -245,7 +245,7 @@ const createStyle = (insets: EdgeInsets) => {
       ...Typography.buttonPrimary,
     },
     bottomButtonContainer: {
-      backgroundColor: Colors.secondary10,
+      backgroundColor: Colors.secondary.shade10,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -254,7 +254,7 @@ const createStyle = (insets: EdgeInsets) => {
     },
     bottomButtonText: {
       ...Typography.header5,
-      color: Colors.primary100,
+      color: Colors.primary.shade100,
       marginRight: Spacing.xSmall,
     },
   })

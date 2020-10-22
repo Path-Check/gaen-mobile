@@ -19,7 +19,7 @@ import { useStatusBarEffect } from "../navigation"
 import { Colors, Spacing, Typography } from "../styles"
 
 const Legal: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("light-content", Colors.header.background)
   const {
     t,
     i18n: { language: localeCode },
@@ -63,14 +63,14 @@ const Legal: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingTop: Spacing.large,
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
     ...Typography.header2,
     marginBottom: Spacing.small,
-    color: Colors.primary150,
+    color: Colors.primary.shade150,
   },
   contentText: {
     ...Typography.body1,

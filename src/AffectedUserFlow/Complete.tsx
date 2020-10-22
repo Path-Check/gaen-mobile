@@ -10,7 +10,7 @@ import { Images } from "../assets"
 import { Buttons, Colors, Layout, Spacing, Typography } from "../styles"
 
 export const AffectedUserComplete: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -20,7 +20,7 @@ export const AffectedUserComplete: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -46,7 +46,7 @@ export const AffectedUserComplete: FunctionComponent = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     justifyContent: "center",

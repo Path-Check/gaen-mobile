@@ -35,11 +35,11 @@ export const baseShadow: ViewStyle = {
 export const lightShadow: ViewStyle = {
   ...baseShadow,
   shadowOpacity: 0.2,
-  shadowColor: Colors.neutral100,
+  shadowColor: Colors.neutral.shade100,
 }
 
 export const separatorLine: ViewStyle = {
   height: hairline,
-  backgroundColor: Colors.neutral10,
+  backgroundColor: Colors.neutral.shade10,
   marginHorizontal: Spacing.medium,
 }
