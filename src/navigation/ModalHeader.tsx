@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactNode } from "react"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { SvgXml } from "react-native-svg"
+import { useTranslation } from "react-i18next"
 
 import { Icons } from "../assets"
 import {
@@ -36,6 +37,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
   headerTitle,
   handleOnDismiss,
 }) => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
 
   const handleOnPressBack = () => {
@@ -54,6 +56,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
       <TouchableOpacity
         onPress={handleOnPressBack}
         hitSlop={{ top: 30, right: 30, bottom: 30, left: 30 }}
+        accessibilityLabel={t("common.close_screen")}
       >
         <SvgXml
           xml={Icons.XInCircle}
