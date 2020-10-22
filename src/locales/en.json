@@ -377,8 +377,8 @@
   },
   "settings": {
     "data_deleted": "Data deleted",
-    "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, we'll remove the data that the app has stored on your phone.",
-    "delete_data_disclosure2": "This button does not delete the Rotating Proximity Identifiers or Temporary Exposure Keys created or collected by your phone for Proximity Tracing.\n\nYou can delete additional data through your phone's Settings.",
+    "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, the app will delete the Symptom History data that is stored on your phone.",
+    "delete_data_disclosure2": "This button does not delete the data created or collected by your phone for Exposure Notifications.\n\nYou can delete additional data through your phone's Settings.\n\n> Settings\n> Exposure Notifications \n> Exposure Logging Status/Active \n> Delete Exposure Log",
     "delete_my_data": "Delete My Data",
     "errors": {
       "deleting_data": "Sorry, we could not delete your data"
