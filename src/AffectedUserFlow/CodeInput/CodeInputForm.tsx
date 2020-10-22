@@ -194,13 +194,20 @@ const CodeInputForm: FunctionComponent = () => {
         />
         <Text style={style.errorSubtitle}>{errorMessage}</Text>
         <TouchableOpacity
-          style={style.button}
+          style={isDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressSubmit}
           accessibilityLabel={t("common.next")}
           disabled={isDisabled}
         >
-          <Text style={style.buttonText}>{t("common.next")}</Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          <Text
+            style={isDisabled ? style.buttonDisabledText : style.buttonText}
+          >
+            {t("common.next")}
+          </Text>
+          <SvgXml
+            xml={Icons.Arrow}
+            fill={isDisabled ? Colors.primaryText : Colors.white}
+          />
         </TouchableOpacity>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
@@ -252,8 +259,15 @@ const style = StyleSheet.create({
   button: {
     ...Buttons.primary,
   },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+  },
   buttonText: {
     ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
     marginRight: Spacing.small,
   },
 })
