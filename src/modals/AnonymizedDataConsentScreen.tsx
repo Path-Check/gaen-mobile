@@ -23,14 +23,15 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
   } = useConfigurationContext()
   const { userConsentedToAnalytics, updateUserConsent } = useAnalyticsContext()
   const { isOnboardingComplete } = useOnboardingContext()
+  const inOnboardingFlow = !isOnboardingComplete
 
   const handleOnPressButton = async () => {
     const nextConsentState = !userConsentedToAnalytics
     updateUserConsent(nextConsentState)
-    if (isOnboardingComplete) {
-      navigation.goBack()
-    } else {
+    if (inOnboardingFlow) {
       navigation.navigate(ActivationStackScreens.ActivationSummary)
+    } else {
+      navigation.goBack()
     }
   }
 
@@ -47,12 +48,12 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
     : t("settings.share_anonymized_data")
 
   useEffect(() => {
-    if (isOnboardingComplete) {
+    if (!inOnboardingFlow) {
       navigation.setOptions({
         header: applyModalHeader(headerText),
       })
     }
-  }, [headerText, navigation, isOnboardingComplete])
+  }, [headerText, navigation, inOnboardingFlow])
 
   return (
     <ScrollView
@@ -60,7 +61,7 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
-      {!isOnboardingComplete && (
+      {inOnboardingFlow && (
         <Text style={style.headerText}>
           {t("settings.share_anonymized_data")}
         </Text>
@@ -84,7 +85,7 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
       >
         <Text style={style.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
-      {!isOnboardingComplete && (
+      {inOnboardingFlow && (
         <TouchableOpacity
           onPress={handleOnPressMaybeLater}
           style={style.secondaryButton}
