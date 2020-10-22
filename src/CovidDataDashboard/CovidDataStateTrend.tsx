@@ -127,7 +127,8 @@ const style = StyleSheet.create({
     paddingRight: Spacing.xxSmall,
   },
   chevronContainer: {
-    paddingLeft: Spacing.medium,
+    paddingTop: Spacing.xxxSmall,
+    height: "100%",
   },
   sectionHeaderText: {
     ...Typography.header3,

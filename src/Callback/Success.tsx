@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { ScrollView, StyleSheet, Image, TouchableOpacity } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
@@ -16,13 +15,12 @@ import { Images } from "../assets"
 import { Buttons, Typography, Spacing, Colors } from "../styles"
 
 const Success: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const { callBackRequestCompleted } = useCallbackFormContext()
-  const navigation = useNavigation()
-  useStatusBarEffect("light-content", Colors.headerBackground)
   const { healthAuthorityName } = useConfigurationContext()
 
   const successMessage = authorityCopyTranslation(
@@ -31,17 +29,13 @@ const Success: FunctionComponent = () => {
     t("callback.success_body", { healthAuthorityName }),
   )
 
-  navigation.setOptions({
-    headerLeft: null,
-    title: t("callback.success_requested"),
-  })
-
   const handleOnPressGotIt = () => {
     callBackRequestCompleted()
   }
 
   return (
     <ScrollView
+      style={style.container}
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
@@ -65,9 +59,13 @@ const Success: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primaryLightBackground,
+  },
   contentContainer: {
-    paddingHorizontal: Spacing.large,
     flexGrow: 1,
+    paddingHorizontal: Spacing.large,
+    backgroundColor: Colors.primaryLightBackground,
     justifyContent: "center",
   },
   header: {
