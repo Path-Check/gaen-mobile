@@ -13,8 +13,7 @@
     "request_a_call": "Request a call from a contact tracer",
     "success_body": "Our contact tracers are working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
-    "success_header": "You're in the queue",
-    "success_requested": "Call Back Requested"
+    "success_header": "You're in the queue"
   },
   "common": {
     "back": "Back",
@@ -220,6 +219,7 @@
     "location_subheader": "Why do I need to turn on my phone's location setting?",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
+    "notification_header": "Get notified if you may have been exposed",
     "notification_subheader1": "When will I get notified?",
     "notification_subheader2": "How does it work?",
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
@@ -262,12 +262,9 @@
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "callback": "Request call",
-    "debug": "Debug",
     "exposure_history": "Exposure History",
     "exposure_notifications": "Exposure Notifications",
     "exposure_scanning": "Exposure Detection",
-    "exposures": "Exposures",
     "home": "Dashboard",
     "how_the_app_works": "How the app works",
     "legal": "Legal",
