@@ -75,12 +75,11 @@ const style = StyleSheet.create({
     paddingLeft: Spacing.medium,
     paddingRight: Spacing.massive,
     paddingTop: Spacing.large,
-    paddingBottom: Spacing.medium,
+    paddingBottom: Spacing.small,
   },
   exposureWindowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: Spacing.xSmall,
   },
   exposureWindowText: {
     ...Typography.header6,

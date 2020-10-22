@@ -70,7 +70,7 @@ describe("ExposureDetail", () => {
           <ExposureDetail />
         </ConfigurationContext.Provider>,
       )
-      const nextStepsButton = getByLabelText("Next Steps")
+      const nextStepsButton = getByLabelText("Next steps")
       fireEvent.press(nextStepsButton)
 
       expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityAdviceUrl)
