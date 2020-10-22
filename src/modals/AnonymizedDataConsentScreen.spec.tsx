@@ -26,7 +26,9 @@ describe("AnonymizedDataConsentScreen", () => {
       )
 
       const buttonText = getByText("Stop Sharing Data")
+      const headerText = "You are sharing anonymized data"
 
+      expect(applyModalHeader).toHaveBeenCalledWith(headerText)
       expect(buttonText).toBeDefined()
     })
 
@@ -62,7 +64,7 @@ describe("AnonymizedDataConsentScreen", () => {
   })
 
   describe("when a user has not consented to data sharing", () => {
-    it("displays the correct button text", () => {
+    it("displays the correct text", () => {
       const context = factories.analyticsContext.build({
         userConsentedToAnalytics: false,
       })
