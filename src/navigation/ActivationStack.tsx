@@ -17,6 +17,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
+import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
@@ -88,6 +89,12 @@ const ActivationStack: FunctionComponent = () => {
     default: activationStepsIOS,
   })
 
+  const anonymizedDataConsent: ActivationStep = {
+    screenName: ActivationStackScreens.AnonymizedDataConsent,
+    component: AnonymizedDataConsentScreen,
+  }
+  activationSteps.push(anonymizedDataConsent)
+
   const activationSummary: ActivationStep = {
     screenName: ActivationStackScreens.ActivationSummary,
     component: ActivationSummary,
@@ -103,7 +110,7 @@ const ActivationStack: FunctionComponent = () => {
       <TouchableOpacity onPress={handleOnPressClose}>
         <SvgXml
           xml={Icons.Close}
-          fill={Colors.neutral140}
+          fill={Colors.neutral.shade140}
           style={style.closeIcon}
           accessible
           accessibilityLabel={t("common.close")}
@@ -154,7 +161,7 @@ const ActivationStack: FunctionComponent = () => {
 const style = StyleSheet.create({
   headerTitle: {
     ...Typography.header4,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
     maxWidth: Layout.halfWidth,
   },
   headerRight: {

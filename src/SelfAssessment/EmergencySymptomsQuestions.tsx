@@ -16,7 +16,7 @@ import { Buttons, Colors, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 const EmergencySymptomsQuestions: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const {
@@ -60,7 +60,7 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
       bottomActionsContent={
         <TouchableOpacity style={style.button} onPress={handleOnPressNext}>
           <Text style={style.buttonText}>{t("common.next")}</Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
         </TouchableOpacity>
       }
     >

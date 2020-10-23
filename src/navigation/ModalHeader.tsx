@@ -60,7 +60,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
       >
         <SvgXml
           xml={Icons.XInCircle}
-          fill={Colors.neutral50}
+          fill={Colors.neutral.shade50}
           width={Iconography.small}
           height={Iconography.small}
         />
@@ -78,13 +78,13 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.neutral10,
+    borderColor: Colors.neutral.shade10,
   },
   headerText: {
     ...Typography.header2,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     maxWidth: Layout.screenWidth * 0.75,
   },
 })

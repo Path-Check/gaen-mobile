@@ -78,13 +78,13 @@ describe("nextScreenFromExposureNotifications", () => {
       })
 
       describe("when location is not required or on", () => {
-        it("returns the activation summary screen", () => {
+        it("returns the anonymized data consent screen", () => {
           expect(
             nextScreenFromExposureNotifications({
               isLocationRequiredAndOff: false,
               isBluetoothOn: true,
             }),
-          ).toEqual(ActivationStackScreens.ActivationSummary)
+          ).toEqual(ActivationStackScreens.AnonymizedDataConsent)
         })
       })
     })
@@ -138,12 +138,12 @@ describe("nextScreenFromBluetooth", () => {
     })
 
     describe("when location is not required or on", () => {
-      it("returns the activation summary screen", () => {
+      it("returns the anonymized data consent screen", () => {
         expect(
           nextScreenFromBluetooth({
             isLocationRequiredAndOff: false,
           }),
-        ).toEqual(ActivationStackScreens.ActivationSummary)
+        ).toEqual(ActivationStackScreens.AnonymizedDataConsent)
       })
     })
   })

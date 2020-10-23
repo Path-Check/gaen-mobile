@@ -21,7 +21,9 @@ const SymptomCheckbox: FunctionComponent<SymptomCheckboxProps> = ({
   const [pressing, setPressing] = useState<boolean>(false)
 
   const checkboxIcon = checked ? Icons.CheckboxChecked : Icons.CheckboxUnchecked
-  const checkboxColor = checked ? Colors.primary100 : Colors.neutral75
+  const checkboxColor = checked
+    ? Colors.primary.shade100
+    : Colors.neutral.shade75
 
   const handleOnPressIn = () => {
     setPressing(true)

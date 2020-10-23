@@ -38,7 +38,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   howItWorksScreenContent,
   totalScreenCount,
 }) => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const insets = useSafeAreaInsets()
@@ -86,7 +86,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             accessibilityLabel={primaryButtonLabel}
           >
             <Text style={style.buttonText}>{primaryButtonLabel}</Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
             <Text style={style.bottomButtonText}>
@@ -115,7 +115,7 @@ const createStyle = (insets: EdgeInsets) => {
       justifyContent: "space-between",
       paddingTop: headerHeight + Spacing.medium,
       paddingBottom: Spacing.xxLarge,
-      backgroundColor: Colors.primaryLightBackground,
+      backgroundColor: Colors.background.primaryLight,
     },
     image: {
       width: "97%",
@@ -141,11 +141,11 @@ const createStyle = (insets: EdgeInsets) => {
       alignItems: "center",
       paddingTop: Spacing.small,
       paddingBottom: insets.bottom + Spacing.small,
-      backgroundColor: Colors.primaryLightBackground,
+      backgroundColor: Colors.background.primaryLight,
     },
     bottomButtonText: {
       ...Typography.header5,
-      color: Colors.primary100,
+      color: Colors.primary.shade100,
     },
   })
 }
@@ -187,13 +187,13 @@ const dotsStyle = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   dotHighlighted: {
-    backgroundColor: Colors.primary100,
+    backgroundColor: Colors.primary.shade100,
     width: 10,
     height: 10,
     borderRadius: Outlines.borderRadiusMax,
   },
   dot: {
-    backgroundColor: Colors.neutral30,
+    backgroundColor: Colors.neutral.shade30,
     width: 5,
     height: 5,
     borderRadius: Outlines.borderRadiusMax,

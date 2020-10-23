@@ -16,7 +16,7 @@ const HeaderLeftBackButton = () => {
 
   return (
     <HeaderBackButton
-      tintColor={Colors.primary150}
+      tintColor={Colors.primary.shade150}
       onPress={() => navigation.goBack()}
     />
   )

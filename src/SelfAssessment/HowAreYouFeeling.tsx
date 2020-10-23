@@ -87,7 +87,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   contentContainer: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.xLarge,
     flexGrow: 1,
@@ -102,7 +102,7 @@ const style = StyleSheet.create({
   feelingButtonContainer: {
     flex: 1,
     height: feelingButtonHeight,
-    borderColor: Colors.neutral10,
+    borderColor: Colors.neutral.shade10,
     borderWidth: Outlines.hairline,
     borderRadius: Outlines.borderRadiusLarge,
     justifyContent: "center",

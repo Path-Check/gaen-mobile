@@ -20,6 +20,7 @@ export type ActivationStackScreen =
   | "ActivateExposureNotifications"
   | "ActivateLocation"
   | "ActivationSummary"
+  | "AnonymizedDataConsent"
   | "NotificationPermissions"
 
 export const ActivationStackScreens: {
@@ -30,6 +31,7 @@ export const ActivationStackScreens: {
   ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
   ActivationSummary: "ActivationSummary",
+  AnonymizedDataConsent: "AnonymizedDataConsent",
   NotificationPermissions: "NotificationPermissions",
 }
 

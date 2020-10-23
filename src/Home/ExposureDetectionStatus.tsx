@@ -18,7 +18,7 @@ import { Text } from "../components"
 import { Colors, Spacing, Typography } from "../styles"
 
 const ExposureDetectionStatus: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
@@ -189,13 +189,13 @@ const ExposureDetectionStatus: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingTop: Spacing.medium,
     paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
     ...Typography.header1,

@@ -70,7 +70,7 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
         return {
           headerContent: t("symptom_history.no_entry"),
           symptoms: null,
-          circleColor: Colors.white,
+          circleColor: Colors.neutral.white,
         }
       }
       case "UserInput": {
@@ -78,13 +78,13 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
           return {
             headerContent: t("symptom_history.did_not_feel_well"),
             symptoms: entry.symptoms,
-            circleColor: Colors.danger25,
+            circleColor: Colors.accent.danger25,
           }
         } else {
           return {
             headerContent: t("symptom_history.felt_well"),
             symptoms: null,
-            circleColor: Colors.success25,
+            circleColor: Colors.accent.success25,
           }
         }
       }
@@ -105,7 +105,7 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
             xml={Icons.ChevronRight}
             width={Iconography.xxSmall}
             height={Iconography.xxSmall}
-            fill={Colors.neutral50}
+            fill={Colors.neutral.shade50}
           />
         </View>
         <View style={style.contentContainer}>
@@ -157,12 +157,12 @@ const style = StyleSheet.create({
   },
   dateTextContainer: {
     borderTopWidth: Outlines.hairline,
-    borderColor: Colors.neutral30,
+    borderColor: Colors.neutral.shade30,
     marginTop: Spacing.small,
   },
   dateText: {
     ...Typography.monospace,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
     paddingTop: Spacing.xxSmall,
   },
   circle: {

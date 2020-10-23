@@ -25,11 +25,11 @@ const NotificationsPermissions: FunctionComponent = () => {
       notification.request()
       resolve()
     })
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   return (
@@ -81,10 +81,10 @@ const NotificationsPermissions: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     height: "100%",
   },
   contentContainer: {

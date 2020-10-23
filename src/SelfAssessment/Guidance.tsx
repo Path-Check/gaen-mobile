@@ -27,7 +27,7 @@ interface GuidanceProps {
 const Guidance: FunctionComponent<GuidanceProps> = ({
   destinationOnCancel = Stacks.ExposureHistoryFlow,
 }) => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { symptomGroup } = useSelfAssessmentContext()
@@ -202,7 +202,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.secondary.shade10} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -231,7 +231,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
               <Text style={style.buttonText}>
                 {t("self_assessment.guidance.find_a_test_center_nearby")}
               </Text>
-              <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+              <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
             </TouchableOpacity>
           )}
           <TouchableOpacity
@@ -249,7 +249,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingBottom: Spacing.xxxHuge,
@@ -259,14 +259,14 @@ const style = StyleSheet.create({
     top: "-100%",
     left: 0,
     right: 0,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
     height: "100%",
   },
   headerContainer: {
     paddingVertical: Spacing.huge,
     paddingHorizontal: Spacing.large,
     marginBottom: Spacing.large,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
   },
   image: {
     width: 70,
@@ -281,22 +281,22 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.header4,
     ...Typography.base,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
   bottomContainer: {
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     marginBottom: Spacing.xxLarge,
   },
   bullet1: {
     ...Typography.header4,
-    color: Colors.primary100,
+    color: Colors.primary.shade100,
     marginBottom: Spacing.medium,
   },
   bullet2: {
     ...Typography.body1,
     ...Typography.mediumBold,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     marginBottom: Spacing.small,
   },
   bullet3Container: {
@@ -304,7 +304,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
     borderLeftWidth: Outlines.hairline,
-    borderLeftColor: Colors.neutral25,
+    borderLeftColor: Colors.neutral.shade25,
   },
   bullet3: {
     ...Typography.body1,

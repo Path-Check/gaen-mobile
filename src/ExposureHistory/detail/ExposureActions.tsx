@@ -83,7 +83,7 @@ const ExposureActions: FunctionComponent = () => {
             <Text style={style.buttonText}>
               {t("exposure_history.exposure_detail.personalize_my_guidance")}
             </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
         )}
         {displayNextStepsLink && (
@@ -98,7 +98,7 @@ const ExposureActions: FunctionComponent = () => {
             <Text style={style.buttonText}>
               {t("exposure_history.exposure_detail.next_steps")}
             </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
         )}
         {!isInternetReachable && (
@@ -142,7 +142,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
         <Text style={style.buttonText}>
           {t("exposure_history.exposure_detail.speak_with_contact_tracer")}
         </Text>
-        <SvgXml xml={Icons.Arrow} fill={Colors.primaryLightBackground} />
+        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
     </>
   )
@@ -161,7 +161,7 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
       <View style={style.recommendationBubbleCircle}>
         <SvgXml
           xml={icon}
-          fill={Colors.primary125}
+          fill={Colors.primary.shade125}
           width={Iconography.small}
           height={Iconography.small}
         />
@@ -178,7 +178,7 @@ const style = StyleSheet.create({
   },
   bottomSubheaderText: {
     ...Typography.body1,
-    color: Colors.neutral100,
+    color: Colors.neutral.shade100,
     marginBottom: Spacing.medium,
   },
   recommendations: {
@@ -195,7 +195,7 @@ const style = StyleSheet.create({
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
     borderRadius: 50,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
     padding: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
   },

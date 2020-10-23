@@ -45,7 +45,7 @@ const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.header6,
     textTransform: "uppercase",
-    color: Colors.neutral140,
+    color: Colors.neutral.shade140,
   },
   headerContainer: {
     flexDirection: "row",
