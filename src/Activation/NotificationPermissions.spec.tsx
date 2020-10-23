@@ -8,6 +8,7 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
+import { ActivationStackScreens } from "../navigation"
 import NotificationPermissions from "./NotificationPermissions"
 
 jest.mock("@react-navigation/native")
@@ -30,7 +31,7 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).toHaveBeenCalled()
     })
-    it("navigates to the activation summary", async () => {
+    it("navigates to the anonymized data consent screen", async () => {
       expect.assertions(1)
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
@@ -42,7 +43,9 @@ describe("NotificationPermissions", () => {
       fireEvent.press(getByLabelText("Enable Notifications"))
 
       await waitFor(() => {
-        expect(navigationSpy).toHaveBeenCalledWith("ActivationSummary")
+        expect(navigationSpy).toHaveBeenCalledWith(
+          ActivationStackScreens.AnonymizedDataConsent,
+        )
       })
     })
   })
@@ -63,7 +66,7 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).not.toHaveBeenCalled()
     })
-    it("navigates to the activation summary", () => {
+    it("navigates to the anonymized data consent screen", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
@@ -71,7 +74,9 @@ describe("NotificationPermissions", () => {
 
       fireEvent.press(getByText("Maybe later"))
 
-      expect(navigationSpy).toHaveBeenCalledWith("ActivationSummary")
+      expect(navigationSpy).toHaveBeenCalledWith(
+        ActivationStackScreens.AnonymizedDataConsent,
+      )
     })
   })
 })

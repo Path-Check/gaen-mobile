@@ -78,8 +78,8 @@ const Home: FunctionComponent = () => {
     }
 
     const statusBackgroundColor = exposureDetectionStatus
-      ? Colors.accent.success10
-      : Colors.accent.danger10
+      ? Colors.accent.success25
+      : Colors.accent.danger25
     const statusBorderColor = exposureDetectionStatus
       ? Colors.accent.success100
       : Colors.accent.danger100

@@ -57,7 +57,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     }
   }
   const handleOnPressSkip = handleOnNavigateOutOfStack
-  const handleOnPressNextOnValueProposition = handleOnNavigateOutOfStack
+  const handleOnPressNextOnGetNotified = handleOnNavigateOutOfStack
 
   const introduction: HowItWorksScreenDatum = {
     name: HowItWorksStackScreens.Introduction,
@@ -92,16 +92,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     imageLabel: t("onboarding.screen4_image_label"),
     header: t("onboarding.screen4_header"),
     primaryButtonLabel: t("onboarding.screen4_button"),
-    primaryButtonOnPress: () =>
-      navigation.navigate(HowItWorksStackScreens.ValueProposition),
-  }
-  const valueProposition: HowItWorksScreenDatum = {
-    name: HowItWorksStackScreens.ValueProposition,
-    image: Images.HowItWorksValueProposition,
-    imageLabel: t("onboarding.screen5_image_label"),
-    header: t("onboarding.screen5_header"),
-    primaryButtonLabel: t("onboarding.screen_5_button"),
-    primaryButtonOnPress: handleOnPressNextOnValueProposition,
+    primaryButtonOnPress: handleOnPressNextOnGetNotified,
   }
 
   const howItWorksScreenData: HowItWorksScreenDatum[] = [
@@ -109,7 +100,6 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     phoneRemembersDevices,
     personalPrivacy,
     getNotified,
-    valueProposition,
   ]
 
   const toStackScreen = (datum: HowItWorksScreenDatum, idx: number) => {

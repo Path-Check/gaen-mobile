@@ -17,6 +17,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
+import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
@@ -87,6 +88,12 @@ const ActivationStack: FunctionComponent = () => {
     android: activationStepsAndroid,
     default: activationStepsIOS,
   })
+
+  const anonymizedDataConsent: ActivationStep = {
+    screenName: ActivationStackScreens.AnonymizedDataConsent,
+    component: AnonymizedDataConsentScreen,
+  }
+  activationSteps.push(anonymizedDataConsent)
 
   const activationSummary: ActivationStep = {
     screenName: ActivationStackScreens.ActivationSummary,
