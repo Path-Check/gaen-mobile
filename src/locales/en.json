@@ -56,6 +56,7 @@
   },
   "export": {
     "code_input_body_bluetooth": "Enter your verification code",
+    "code_input_button_cancel": "Cancel",
     "code_input_placeholder": "Enter Code",
     "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
@@ -145,6 +146,7 @@
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
       "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
       "bluetooth_header": "Bluetooth",
@@ -155,6 +157,7 @@
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
       "tracing_off_header": "Exposure Detection Off",
+      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
     "call_emergency_services": "Call Emergency Services",

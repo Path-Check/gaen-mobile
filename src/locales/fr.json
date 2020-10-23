@@ -9,8 +9,7 @@
     "lastname": "Nom de famille",
     "phone_number_required": "Numéro de téléphone (obligatoire)",
     "success_got_it": "Compris",
-    "success_header": "Vous êtes dans la file d'attente",
-    "success_requested": "Rappel demandé"
+    "success_header": "Vous êtes dans la file d'attente"
   },
   "common": {
     "back": "Précédent",
@@ -30,7 +29,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "Entrez votre code de vérification",
-    "code_input_button_back": "Précédent",
     "code_input_button_cancel": "Annuler",
     "code_input_title_bluetooth": "Vérifiez votre diagnostic",
     "complete_body_bluetooth": "Vous contribuez à contenir la propagation du virus et à protéger les autres membres de votre communauté.",
@@ -107,17 +105,12 @@
     "screen4_button": "Et si je tombe malade ?",
     "screen4_header": "L'application vous informera si vous avez pu être exposé au COVID-19.",
     "screen4_image_label": "Une personne recevant une notification sur son téléphone",
-    "screen5_header": "Grâce à l'application, vous pouvez contribuer à ralentir la propagation de COVID-19, protéger les autres et obtenir directement de l'aide des experts de la santé.",
-    "screen5_image_label": "Une personne parlant à un expert de la santé virtuellement",
     "terms_header_title": "Conditions d’utilisation (en anglais)",
     "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau."
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "callback": "Demander un rappel",
-    "debug": "Debug",
     "exposure_history": "Historique des expositions",
-    "exposures": "Expositions",
     "home": "Accueil",
     "how_the_app_works": "Fonctionnement de l’application",
     "legal": "Juridique",
