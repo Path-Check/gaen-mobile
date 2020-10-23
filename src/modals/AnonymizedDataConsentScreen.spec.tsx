@@ -5,10 +5,12 @@ import { useNavigation } from "@react-navigation/native"
 import AnonymizedDataConsentScreen from "./AnonymizedDataConsentScreen"
 import { factories } from "../factories"
 import { AnalyticsContext } from "../AnalyticsContext"
+import { applyModalHeader } from "../navigation/ModalHeader"
 import { OnboardingContext } from "../OnboardingContext"
 import { ActivationStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
+jest.mock("../navigation/ModalHeader")
 
 describe("AnonymizedDataConsentScreen", () => {
   describe("when the user has completed onboarding", () => {
@@ -31,8 +33,10 @@ describe("AnonymizedDataConsentScreen", () => {
         )
 
         const buttonText = getByText("Stop Sharing Data")
+        const headerText = "You are sharing anonymized data"
 
         expect(buttonText).toBeDefined()
+        expect(applyModalHeader).toHaveBeenCalledWith(headerText)
       })
 
       describe("and they press to revoke consent", () => {
@@ -89,8 +93,10 @@ describe("AnonymizedDataConsentScreen", () => {
         )
 
         const buttonText = getByText("I Understand and Consent")
+        const headerText = "Share Anonymized Data"
 
         expect(buttonText).toBeDefined()
+        expect(applyModalHeader).toHaveBeenCalledWith(headerText)
       })
 
       describe("and they press to accept consent", () => {
