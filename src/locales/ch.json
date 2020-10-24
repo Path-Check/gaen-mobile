@@ -27,7 +27,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "Na halum i iyo-mu verification code",
-    "code_input_button_back": "Tatti",
     "code_input_button_cancel": "Na para",
     "code_input_title_bluetooth": "Na mana siguro i iyo-mu diagnosis",
     "complete_body_bluetooth": "Un ayuyuda muna para i virus yan un protehi i pumalu na taotao siha gi kommunidad-mu.",
@@ -56,7 +55,7 @@
       },
       "no_op": {
         "no_token_for_existing_keys": "I guaha na infotmasion mana hanao para i server. Kumekeilekna na sina ha esta ma chagi esti ginen esti na device lao otro na applikasion. Sina un sangani i magas ni munae hao ni verification code ni ma usa. Guaha  {{newKeysInserted}}nuebu siha na keys manmanadania.",
-        "title": "Chagi sumatmiti i mangaigi siha na keys"
+        "no_token_for_existing_keys_title": "Chagi sumatmiti i mangaigi siha na keys"
       }
     },
     "start_header_bluetooth": "Ayuda muna para i machalapun i virus yan protehi i pumalu siha gi kommunidad-mu"
@@ -183,7 +182,6 @@
     "proximity_tracing_subheader1": "Taimanu ma chochu?",
     "proximity_tracing_subheader2": "Kao siguro i iyo-ku data?",
     "proximity_tracing_subheader3": "Ti un prinitehi gi COVID 19 na chetnot ni esti na app.",
-    "screen_5_button": "Tutuhon",
     "screen1_button": "Taimanu ma chochu?",
     "screen1_header": "Hita sina muna dispasio i machalapun i COVID 19.",
     "screen1_image_label": "Dos taotao taghilo ni lala-niha",
@@ -196,17 +194,12 @@
     "screen4_button": "Hafa yanggen malangu yu?",
     "screen4_header": "I app para un sinagani  yanggen ma tanmi pat ninayi hao ni COVID 19.",
     "screen4_image_label": "I taotao ha risisibi notifikasion gi telefon-na",
-    "screen5_header": "I app, sina un ayuda muna dispasio i machalapun i COVID 19,  protehi i pumalu yan  sina un risibi directo na ayudo ginen i manfayi gi nilala yan hinemlu.",
-    "screen5_image_label": "I taotao kumekuentos yan i gumeftungo put linala 'virtually",
-    "step": "{{currentStep}} gi {{totalSteps}}  na iskalera",
     "terms_header_title": "Palabra ni ma u'usa",
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "debug": "Dibug",
     "exposure_history": "Historian i ninayi",
-    "exposures": "man ninayi  or mantinanmi",
     "home": "Guma",
     "legal": "Legat",
     "location": "Lokasion",

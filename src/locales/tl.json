@@ -27,7 +27,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "Itala ang iyong verification code",
-    "code_input_button_back": "Bumalik",
     "code_input_button_cancel": "Kanselahin",
     "code_input_title_bluetooth": "Beripikahin ang iyong diagnosis o pagsusuri",
     "complete_body_bluetooth": "Tumutulong kang agapan ang pagkalat ng virus at protektahan ang iba sa iyong komunidad.",
@@ -56,7 +55,7 @@
       },
       "no_op": {
         "no_token_for_existing_keys": "Ang kasalukuyang data ay ipinadala sa server. Karaniwan nang nangangahulugan ito na ang prosesong ito ay tinangka dati mula sa aparatong ito, ngunit sa ibang application. Maaari mo itong maiugnay sa awtoridad na nagbigay ng verification code na ginamit. Mayroong {{newKeysInserted}} bagong key na naidagdag.",
-        "title": "Subukang magsumite ng mayroon nang mga susi"
+        "no_token_for_existing_keys_title": "Subukang magsumite ng mayroon nang mga susi"
       }
     },
     "start_header_bluetooth": "Tumulung upang pigilan ang paglaganap ng virus at protektakan ang mamamayan sa iyong kumunidad."
@@ -183,7 +182,6 @@
     "proximity_tracing_subheader1": "Paano ito gumagana?",
     "proximity_tracing_subheader2": "Ligtas ba ang aking mga data?",
     "proximity_tracing_subheader3": "Hindi ka pinoprotektahan ng app ng ito mula sa impeksyon mula sa COVID-19.",
-    "screen_5_button": "Simulan",
     "screen1_button": "Paano ito gumagana?",
     "screen1_header": "Sama-sama, kaya nating mapabagal ang pagkalat ng COVID-19.",
     "screen1_image_label": "Dalawang taong nagha-high five",
@@ -196,17 +194,12 @@
     "screen4_button": "Paano kung magkasakit ako?",
     "screen4_header": "Aabisuhan ka ng app kung mayroon kang nakasalamuha na tao, gamit o lugar na mayroong COVID-19.",
     "screen4_image_label": "Tao na nakakakuha ng isang abiso sa kanilang cellphone o device",
-    "screen5_header": "Gamit ang app, makakatulong kang pabagalin ang pagkalat ng COVID-19, protektahan ang iba, at direktang makakuha ng tulong mula sa mga eksperto sa kalusugan.",
-    "screen5_image_label": "Tao na nakikipag-usap sa isang dalubhasang pangkalusugan sa pamamagitan ng virtual na pamamaraan",
-    "step": "Hakbang {{currentStep}} ng {{totalSteps}}",
     "terms_header_title": "Mga Tuntunin ng Paggamit",
     "welcome_image_label": "Isang ilustrasyon ng mga taong may suot na mask, nakakonekta tulad ng mga node sa isang network."
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "debug": "Pag-debug",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
-    "exposures": "Mga Pagkakalantad",
     "home": "Home o Umpisa",
     "legal": "Ligal",
     "location": "Lokasyon",

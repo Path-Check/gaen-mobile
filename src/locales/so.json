@@ -27,7 +27,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "Gali koodhkaaga xaqiijinta",
-    "code_input_button_back": "Noqo",
     "code_input_button_cancel": "Buri",
     "code_input_title_bluetooth": "Xaqiiji ogaanshaha xaaladdaada",
     "complete_body_bluetooth": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
@@ -56,7 +55,7 @@
       },
       "no_op": {
         "no_token_for_existing_keys": "Xogta taala ayaa waxaa loo diray sarfarka. Tan badanaa waxay ka dhigan tahay in nidaamkan horeyba telefoonkan la isku day,  laakiin ahaa barnaamij ka duwan. Tan waxaad kala xiriiri kartaa hey'adda bixisay lambarka xaqiijinta ee la adeegsaday. Waxay ahaayeen {{newKeysInserted}} furayaal cusub oo lagu daray.",
-        "title": "Isku day inaad gudbiso furayaasha jira"
+        "no_token_for_existing_keys_title": "Isku day inaad gudbiso furayaasha jira"
       }
     },
     "start_header_bluetooth": "Gacan ka geyso xakamaynta faafidda fayraska iyo inaad difaacdo dadka kale ee ka tirsan bulshadaada."
@@ -181,7 +180,6 @@
     "proximity_tracing_subheader1": "Sidee ayey u shaqeysaa?",
     "proximity_tracing_subheader2": "Xogtaydu ma xasilloon tahay?",
     "proximity_tracing_subheader3": "Aabkan kaama ilaalinayo doono caabuqa COVID-19.",
-    "screen_5_button": "Billow haddaba",
     "screen1_button": "Sidee ayey u shaqeysaa?",
     "screen1_header": "Wadajir ahaan, waxaan xakayn karnaa faafka COVID-19",
     "screen1_image_label": "Laba qof shan sare (high five) isku bogaadinaya.",
@@ -194,17 +192,12 @@
     "screen4_button": "Maxaa dhacaya haddaan bukoodo?",
     "screen4_header": "Aabka ayaa kula soo socodsiin doona adiga haddii aad ufeydsantay cudurka koronofayraska",
     "screen4_image_label": "Qof ogeysiin ku helaya telefoonkooda",
-    "screen5_header": "Adiga oo isticmaalaya barnaamijkan, waxaad ka caawin kartaa hoos u dhigidda faafitaanka COVID-19, ka dhowri kartaa dadka kale, oo aad si toosna caawinaad uga heli kartaa khubarada caafimaadka.",
-    "screen5_image_label": "Qofka kula hadlaya khabiir caafimaad aalad internet ahaan,",
-    "step": "Tallaabo {{currentStep}} ee {{totalSteps}}",
     "terms_header_title": "Shuruudaha adeegsiga",
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "debug": "Cillad ka saarka",
     "exposure_history": "Taariikhda Ufeydsanka",
-    "exposures": "Soo gaarista",
     "home": "Hoy",
     "legal": "Sharciyeedka",
     "location": "Goobta (Location)",

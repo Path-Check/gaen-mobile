@@ -27,7 +27,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "Ntaus koj tus naj npawb verification code",
-    "code_input_button_back": "Tom qab",
     "code_input_button_cancel": "Rho Tawm",
     "code_input_title_bluetooth": "Xyuas seb koj ntsuas tau li cas",
     "complete_body_bluetooth": "Koj yuav pab tswj tau tus kab mob no thiab tiv thaiv lwm tus nyob hauv koj zos.",
@@ -178,7 +177,6 @@
     "proximity_tracing_subheader1": "Nws ua haujlwm li cas?",
     "proximity_tracing_subheader2": "Kuv li ntaub ntawv puas ceev zoo cia?",
     "proximity_tracing_subheader3": "Lub app no yuav tsis tiv thaiv kom koj tsis txhob kis tus kab mob COVID-19.",
-    "screen_5_button": "Pib",
     "screen1_button": "Nws ua haujlwm li cas?",
     "screen1_header": "Yog peb sib koom tes, peb yuav pab cheem tswj tau tus kab mob COVID-19 kom txhob nthuav mus deb",
     "screen1_image_label": "Ob tus neeg zoo siab ntaus tes nrog ib leeg ib tug",
@@ -191,17 +189,12 @@
     "screen4_button": "Yuav ua li cas yog tias kuv mob lawm?",
     "screen4_header": "Lub app no yuav qhia koj yog tias koj tau mus raug nyob ze ib tus neeg twg uas mob tus kab mob khaus laus nas",
     "screen4_image_label": "Ib tus neeg txais xov xwm nyob hauv nws lub xov tooj",
-    "screen5_header": "Thaum siv lub app lawm, koj pab cheem kom tus kab mob COVID-19 tsis txhob kis mus deb, tiv thaiv lwm tus, thiab tau txais kev pab kiag los ntawm cov kws kho mob.",
-    "screen5_image_label": "Ib tus neeg siv twj nrog kws kho mob tham",
-    "step": "Kauj ruam {{currentStep}} ntawm {{totalSteps}}",
     "terms_header_title": "Kev cai siv",
     "welcome_image_label": "Daim duab qhia txog cov neeg looj lub npog ntsej muag, sib txuas sawvdaws nyob hauv ib pab pawg network."
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "debug": "Debug",
     "exposure_history": "Keeb Kwm Mus Raug",
-    "exposures": "Kev mus nyob ze raug mob",
     "home": "Home",
     "legal": "Kev Cai Lij Choj",
     "location": "Location",
