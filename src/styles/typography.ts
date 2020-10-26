@@ -1,6 +1,7 @@
 import { TextStyle } from "react-native"
 
 import * as Colors from "./colors"
+import * as Spacing from "./spacing"
 
 // Font Size
 export const xSmall = 13
@@ -206,6 +207,14 @@ export const buttonSecondary: TextStyle = {
   ...body1,
   ...semiBold,
   color: Colors.primary.shade100,
+}
+
+export const buttonCard: TextStyle = {
+  ...body2,
+  ...bold,
+  textTransform: "uppercase",
+  color: Colors.primary.shade110,
+  marginRight: Spacing.xSmall,
 }
 
 export const tappableListItem: TextStyle = {

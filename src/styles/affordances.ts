@@ -41,7 +41,7 @@ export const floatingContainer: ViewStyle = {
   ...Outlines.lightShadow,
   backgroundColor: Colors.background.primaryLight,
   borderRadius: Outlines.borderRadiusLarge,
-  paddingVertical: Spacing.medium,
+  paddingVertical: Spacing.large,
   paddingHorizontal: Spacing.large,
   marginBottom: Spacing.large,
 }

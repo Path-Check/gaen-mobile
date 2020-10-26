@@ -144,6 +144,9 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "request_call": "Request Call",
+    "report_result": "Report Result",
+    "take_assessment": "Take Assessment",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your log daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
@@ -163,7 +166,7 @@
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
     "did_you_test_positive": "Did you test positive for COVID-19?",
-    "feeling_sick": "Feeling sick?",
+    "not_feeling_well": "Not feeling well?",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test result code?",
@@ -179,7 +182,7 @@
       "unauthorized_error_message_ios": "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer."
+    "to_submit_your_test": "To submit your positive test result, you'll need to get your positive test result code from a contact tracer."
   },
   "label": {
     "check": "Checkmark",
