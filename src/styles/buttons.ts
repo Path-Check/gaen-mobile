@@ -98,6 +98,7 @@ export const secondary: ViewStyle = {
   ...base,
   ...medium,
   ...transparent,
+  width: "100%",
   paddingHorizontal: Spacing.huge,
 }
 

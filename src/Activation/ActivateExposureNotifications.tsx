@@ -70,24 +70,20 @@ const ActivateExposureNotifications: FunctionComponent = () => {
             {t("onboarding.proximity_tracing_subheader3")}
           </Text>
         </View>
-        <View style={style.buttonsContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressActivateExposureNotifications}
-            style={style.button}
-          >
-            <Text style={style.buttonText}>
-              {t("onboarding.proximity_tracing_button")}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleOnPressDontEnable}
-            style={style.secondaryButton}
-          >
-            <Text style={style.secondaryButtonText}>
-              {t("common.no_thanks")}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={handleOnPressActivateExposureNotifications}
+          style={style.button}
+        >
+          <Text style={style.buttonText}>
+            {t("onboarding.proximity_tracing_button")}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleOnPressDontEnable}
+          style={style.secondaryButton}
+        >
+          <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -118,9 +114,6 @@ const style = StyleSheet.create({
   body: {
     ...Typography.body1,
     marginBottom: Spacing.xxLarge,
-  },
-  buttonsContainer: {
-    alignSelf: "flex-start",
   },
   button: {
     ...Buttons.primary,

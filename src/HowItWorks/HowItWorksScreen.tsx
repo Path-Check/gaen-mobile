@@ -60,8 +60,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   return (
     <>
       <ScrollView
-        alwaysBounceVertical={false}
+        style={style.container}
         contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
       >
         <View>
           <Image
@@ -110,6 +111,9 @@ const createStyle = (insets: EdgeInsets) => {
 
   /* eslint-disable react-native/no-unused-styles */
   return StyleSheet.create({
+    container: {
+      backgroundColor: Colors.background.primaryLight,
+    },
     contentContainer: {
       flexGrow: 1,
       justifyContent: "space-between",
