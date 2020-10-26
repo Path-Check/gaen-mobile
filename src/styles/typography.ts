@@ -115,71 +115,71 @@ export const xxxLargeFont: TextStyle = {
 export const header1: TextStyle = {
   ...xxxLargeFont,
   ...semiBold,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const header2: TextStyle = {
   ...xxLargeFont,
   ...mediumBold,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const header3: TextStyle = {
   ...xLargeFont,
   ...mediumBold,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const header4: TextStyle = {
   ...largeFont,
   ...mediumBold,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const header5: TextStyle = {
   ...mediumFont,
   ...semiBold,
-  color: Colors.neutral100,
+  color: Colors.neutral.shade100,
 }
 
 export const header6: TextStyle = {
   ...smallFont,
   ...mediumBold,
   letterSpacing: mediumLetterSpacing,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 // Content
 export const body1: TextStyle = {
   ...mediumFont,
-  color: Colors.neutral100,
+  color: Colors.neutral.shade100,
 }
 
 export const body2: TextStyle = {
   ...smallFont,
-  color: Colors.neutral100,
+  color: Colors.neutral.shade100,
 }
 
 export const body3: TextStyle = {
   ...xSmallFont,
-  color: Colors.neutral100,
+  color: Colors.neutral.shade100,
 }
 
 // Forms
 export const formInputLabel: TextStyle = {
   ...smallFont,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const formInputText: TextStyle = {
   ...mediumFont,
-  color: Colors.primaryText,
+  color: Colors.text.primary,
 }
 
 export const error: TextStyle = {
   ...mediumFont,
   ...semiBold,
-  color: Colors.danger100,
+  color: Colors.accent.danger100,
 }
 
 // Tappables
@@ -190,23 +190,22 @@ const baseButtonText: TextStyle = {
 
 export const buttonPrimary: TextStyle = {
   ...baseButtonText,
-  color: Colors.white,
+  color: Colors.neutral.white,
 }
 
 export const buttonPrimaryDisabled: TextStyle = {
   ...baseButtonText,
-  color: Colors.neutral140,
+  color: Colors.neutral.shade140,
 }
 
 export const buttonFixedBottom: TextStyle = {
   ...buttonPrimary,
-  fontSize: large,
 }
 
 export const buttonSecondary: TextStyle = {
   ...body1,
   ...semiBold,
-  color: Colors.primary100,
+  color: Colors.primary.shade100,
 }
 
 export const tappableListItem: TextStyle = {
@@ -216,6 +215,6 @@ export const tappableListItem: TextStyle = {
 
 export const anchorLink: TextStyle = {
   ...body1,
-  color: Colors.anchorLinkText,
+  color: Colors.text.anchorLink,
   textDecorationLine: "underline",
 }

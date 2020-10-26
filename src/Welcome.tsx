@@ -8,8 +8,9 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
-import { StatusBar, Text, Button } from "./components"
+import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
@@ -18,11 +19,18 @@ import {
   authorityCopyTranslation,
 } from "./configuration/authorityCopy"
 
-import { Images } from "./assets"
-import { Spacing, Colors, Typography, Outlines, Layout } from "./styles"
+import { Images, Icons } from "./assets"
+import {
+  Spacing,
+  Colors,
+  Typography,
+  Outlines,
+  Layout,
+  Buttons,
+} from "./styles"
 
 const Welcome: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const {
     t,
@@ -47,7 +55,7 @@ const Welcome: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -69,11 +77,16 @@ const Welcome: FunctionComponent = () => {
             <Text style={style.welcomeToText}>{welcomeMessage}</Text>
             <Text style={style.nameText}>{applicationName}</Text>
           </View>
-          <Button
-            label={t("label.launch_get_started")}
+          <TouchableOpacity
+            style={style.button}
             onPress={handleOnPressGetStarted}
-            hasRightArrow
-          />
+            accessibilityLabel={t("label.launch_get_started")}
+          >
+            <Text style={style.buttonText}>
+              {t("label.launch_get_started")}
+            </Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </>
@@ -82,11 +95,11 @@ const Welcome: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   mainContentContainer: {
     flex: 1,
@@ -97,7 +110,7 @@ const style = StyleSheet.create({
   },
   languageButtonContainer: {
     marginTop: Spacing.medium,
-    backgroundColor: Colors.secondary50,
+    backgroundColor: Colors.secondary.shade50,
     borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.xLarge,
@@ -106,7 +119,7 @@ const style = StyleSheet.create({
   languageButtonText: {
     ...Typography.body3,
     letterSpacing: Typography.largeLetterSpacing,
-    color: Colors.primary125,
+    color: Colors.primary.shade125,
     textAlign: "center",
     textTransform: "uppercase",
   },
@@ -121,14 +134,22 @@ const style = StyleSheet.create({
   },
   welcomeToText: {
     ...Typography.header1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     textAlign: "center",
   },
   nameText: {
     ...Typography.header1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     textAlign: "center",
     marginBottom: Spacing.huge,
+  },
+  button: {
+    ...Buttons.primary,
+    alignSelf: "center",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

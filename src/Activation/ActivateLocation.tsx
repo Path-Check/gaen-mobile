@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { openAppSettings } from "../gaen/nativeModule"
@@ -27,12 +27,12 @@ const ActivateLocation: FunctionComponent = () => {
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
   }
 
   const showLocationAccessAlert = () => {
@@ -71,10 +71,12 @@ const ActivateLocation: FunctionComponent = () => {
           <Text style={style.body}>{t("onboarding.location_body")}</Text>
         </View>
         <View style={style.buttonsContainer}>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressAllowLocationAccess}
-            label={t("common.settings")}
-          />
+            style={style.button}
+          >
+            <Text style={style.buttonText}>{t("common.settings")}</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressMaybeLater}
             style={style.secondaryButton}
@@ -91,10 +93,10 @@ const ActivateLocation: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     height: "100%",
   },
   contentContainer: {
@@ -118,6 +120,12 @@ const style = StyleSheet.create({
   },
   buttonsContainer: {
     alignSelf: "flex-start",
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,

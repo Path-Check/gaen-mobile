@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import {
+  Alert,
   ScrollView,
   SafeAreaView,
   View,
@@ -9,27 +10,60 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { ActivationStackScreens } from "../navigation"
-import { usePermissionsContext } from "../PermissionsContext"
 import { Text } from "../components"
+import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useSystemServicesContext } from "../SystemServicesContext"
+import { openAppSettings } from "../gaen/nativeModule"
+import { nextScreenFromBluetooth } from "./activationStackController"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
-const NotificationsPermissions: FunctionComponent = () => {
+const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { notification } = usePermissionsContext()
   const navigation = useNavigation()
+  const { applicationName } = useApplicationName()
+  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
-  const handleOnPressEnable = async () => {
-    await new Promise((resolve) => {
-      notification.request()
-      resolve()
-    })
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+  const navigateToNextScreen = () => {
+    navigation.navigate(
+      nextScreenFromBluetooth({
+        isLocationRequiredAndOff,
+      }),
+    )
   }
 
+  useEffect(() => {
+    if (isBluetoothOn) {
+      navigateToNextScreen()
+    }
+  })
+
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    navigateToNextScreen()
+  }
+
+  const showBluetoothStatusAlert = () => {
+    Alert.alert(
+      t("onboarding.bluetooth_alert_header", { applicationName }),
+      t("onboarding.bluetooth_alert_body"),
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => {
+            openAppSettings()
+          },
+        },
+      ],
+    )
+  }
+
+  const handleOnPressChangeBluetoothStatus = () => {
+    showBluetoothStatusAlert()
   }
 
   return (
@@ -40,30 +74,18 @@ const NotificationsPermissions: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.content}>
-          <Text style={style.header}>
-            {t("onboarding.notification_header")}
-          </Text>
+          <Text style={style.header}>{t("onboarding.bluetooth_header")}</Text>
           <Text style={style.subheader}>
-            {t("onboarding.notification_subheader1")}
+            {t("onboarding.bluetooth_subheader")}
           </Text>
-          <Text style={style.body}>{t("onboarding.notification_body1")}</Text>
-          <Text style={style.subheader}>
-            {t("onboarding.notification_subheader2")}
-          </Text>
-          <Text style={style.body}>{t("onboarding.notification_body2")}</Text>
-          <Text style={style.subheader}>
-            {t("onboarding.notification_subheader3")}
-          </Text>
+          <Text style={style.body}>{t("onboarding.bluetooth_body")}</Text>
         </View>
         <View style={style.buttonsContainer}>
           <TouchableOpacity
-            onPress={handleOnPressEnable}
+            onPress={handleOnPressChangeBluetoothStatus}
             style={style.button}
-            accessibilityLabel={t("label.launch_enable_notif")}
           >
-            <Text style={style.buttonText}>
-              {t("label.launch_enable_notif")}
-            </Text>
+            <Text style={style.buttonText}>{t("common.settings")}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressMaybeLater}
@@ -123,4 +145,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default NotificationsPermissions
+export default ActivateBluetooth

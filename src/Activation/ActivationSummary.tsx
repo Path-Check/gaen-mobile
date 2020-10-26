@@ -14,7 +14,7 @@ import {
 } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { openAppSettings } from "../gaen/nativeModule"
 
@@ -46,12 +46,12 @@ const ActivationSummary: FunctionComponent = () => {
   const AppSetupIncompleteButtons: FunctionComponent = () => {
     return (
       <View>
-        <Button
-          label={t("common.settings")}
+        <TouchableOpacity
           onPress={handleOnPressOpenSettings}
-          customButtonStyle={style.primaryButton}
-          customButtonInnerStyle={style.primaryButtonGradient}
-        />
+          style={style.button}
+        >
+          <Text style={style.buttonText}>{t("common.settings")}</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={handleOnPressGoToHome}
           style={style.secondaryButton}
@@ -66,12 +66,9 @@ const ActivationSummary: FunctionComponent = () => {
 
   const AppSetupCompleteButton: FunctionComponent = () => {
     return (
-      <Button
-        label={t("label.go_to_home_view")}
-        onPress={handleOnPressGoToHome}
-        customButtonStyle={style.primaryButton}
-        customButtonInnerStyle={style.primaryButtonGradient}
-      />
+      <TouchableOpacity onPress={handleOnPressGoToHome} style={style.button}>
+        <Text style={style.buttonText}>{t("label.go_to_home_view")}</Text>
+      </TouchableOpacity>
     )
   }
 
@@ -120,7 +117,7 @@ const ActivationSummary: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
@@ -156,12 +153,13 @@ const style = StyleSheet.create({
     ...Typography.body1,
     textAlign: "center",
   },
-  primaryButton: {
-    width: "100%",
+  button: {
+    ...Buttons.primary,
     marginBottom: Spacing.xxSmall,
-  },
-  primaryButtonGradient: {
     width: "100%",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,

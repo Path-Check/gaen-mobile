@@ -50,11 +50,15 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
     casesPercentageTrend > 0
       ? {
           text: t("covid_data.up_from_last_week"),
-          indicator: <SvgXml xml={Icons.ChevronUp} fill={Colors.black} />,
+          indicator: (
+            <SvgXml xml={Icons.ChevronUp} fill={Colors.neutral.black} />
+          ),
         }
       : {
           text: t("covid_data.down_from_last_week"),
-          indicator: <SvgXml xml={Icons.ChevronDown} fill={Colors.black} />,
+          indicator: (
+            <SvgXml xml={Icons.ChevronDown} fill={Colors.neutral.black} />
+          ),
         }
 
   return (
@@ -74,7 +78,7 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
             <View style={style.trendArrowContainer}>{trendInfo.indicator}</View>
             <Text style={style.percentageText}>{trendPercentageValue}</Text>
           </View>
-          <View style={style.infoContainer}>
+          <View>
             <Text style={style.headerText}>{t("covid_data.new_cases")}</Text>
             <Text style={style.subHeaderText}>{trendInfo.text}</Text>
           </View>
@@ -83,7 +87,7 @@ const CovidDataStateTrend: FunctionComponent<CovidDataStateTrendProps> = ({
       <View style={style.chevronContainer}>
         <SvgXml
           xml={Icons.ChevronRight}
-          fill={Colors.neutral75}
+          fill={Colors.neutral.shade75}
           width={Iconography.xxSmall}
           height={Iconography.xxSmall}
         />
@@ -98,6 +102,34 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  sectionHeaderText: {
+    ...Typography.header3,
+    marginBottom: Spacing.xxSmall,
+    color: Colors.neutral.black,
+  },
+  dataContainer: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  percentageContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: Outlines.baseBorderRadius,
+    backgroundColor: Colors.secondary.shade50,
+    paddingHorizontal: Spacing.small,
+    paddingVertical: Spacing.xSmall,
+    marginRight: Spacing.small,
+  },
+  trendArrowContainer: {
+    paddingRight: Spacing.xxSmall,
+  },
+  percentageText: {
+    ...Typography.body1,
+    ...Typography.bold,
+    color: Colors.neutral.black,
+  },
   headerText: {
     ...Typography.header4,
     ...Typography.base,
@@ -105,38 +137,9 @@ const style = StyleSheet.create({
   subHeaderText: {
     ...Typography.body3,
   },
-  percentageContainer: {
-    borderRadius: Outlines.baseBorderRadius,
-    borderWidth: 0,
-    backgroundColor: Colors.secondary50,
-    paddingHorizontal: Spacing.small,
-    paddingVertical: Spacing.xSmall,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  percentageText: {
-    ...Typography.body1,
-    ...Typography.bold,
-    color: Colors.black,
-  },
-  infoContainer: {
-    marginLeft: Spacing.small,
-  },
-  trendArrowContainer: {
-    paddingRight: Spacing.xxSmall,
-  },
   chevronContainer: {
-    paddingLeft: Spacing.medium,
-  },
-  sectionHeaderText: {
-    ...Typography.header3,
-    marginBottom: Spacing.xxSmall,
-    color: Colors.black,
-  },
-  dataContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    paddingTop: Spacing.xxxSmall,
+    height: "100%",
   },
 })
 

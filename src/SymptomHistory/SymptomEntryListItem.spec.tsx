@@ -50,8 +50,8 @@ describe("SymptomEntryListItem", () => {
         }
         const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
-        expect(getByText("- Cough")).toBeDefined()
-        expect(getByText("- Fever")).toBeDefined()
+        expect(getByText("• Cough")).toBeDefined()
+        expect(getByText("• Fever")).toBeDefined()
       })
     })
   })

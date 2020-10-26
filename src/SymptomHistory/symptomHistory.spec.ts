@@ -1,11 +1,12 @@
 import { daysAgoFrom } from "../utils/dateTime"
 
-import { Symptom } from "./symptom"
+import { Symptom, emergencySymptoms, all } from "./symptom"
 import {
   SymptomHistory,
   RawEntry,
   toSymptomHistory,
   SymptomEntry,
+  hasEmergencySymptoms,
 } from "./symptomHistory"
 
 describe("toSymptomHistory", () => {
@@ -94,6 +95,35 @@ describe("toSymptomHistory", () => {
       }
 
       expect(entryIsEqual(result[0], expected)).toBeTruthy()
+    })
+  })
+
+  describe("hasEmergencySymptoms", () => {
+    describe("when the set of logged symptoms has emergency symptoms", () => {
+      it("returns true", () => {
+        emergencySymptoms.forEach((emergencySymptom) => {
+          const loggedSymptomsWithEmergency = new Set<Symptom>([
+            emergencySymptom,
+          ])
+
+          expect(hasEmergencySymptoms(loggedSymptomsWithEmergency)).toBeTruthy()
+        })
+      })
+    })
+
+    describe("when the set of logged symptoms has no emergency symptoms", () => {
+      it("returns false", () => {
+        const nonEmergencySymptoms = all.filter((symptom) => {
+          return !emergencySymptoms.includes(symptom)
+        })
+        nonEmergencySymptoms.forEach((emergencySymptom) => {
+          const loggedSymptomsWithEmergency = new Set<Symptom>([
+            emergencySymptom,
+          ])
+
+          expect(hasEmergencySymptoms(loggedSymptomsWithEmergency)).toBeFalsy()
+        })
+      })
     })
   })
 })

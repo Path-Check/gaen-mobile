@@ -12,28 +12,21 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
-import { Text, Button } from "../../components"
+import { Text, LoadingIndicator } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
-  Stacks,
 } from "../../navigation"
 import { Icons } from "../../assets"
-import {
-  Outlines,
-  Colors,
-  Spacing,
-  Iconography,
-  Typography,
-  Layout,
-} from "../../styles"
+import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
 import Logger from "../../logger"
 import {
   postDiagnosisKeys,
   PostKeysError,
   PostKeysNoOp,
   PostKeysFailure,
+  PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
@@ -55,7 +48,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   appPackageName,
   regionCodes,
 }) => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -73,20 +66,41 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     Logger.error(
       `IncompleteKeySumbission.${noOpResponse.reason}.${noOpResponse.message}`,
     )
-    Alert.alert(
-      t("export.publish_keys.no_op.title"),
-      t("export.publish_keys.no_op.no_token_for_existing_keys", {
-        newKeysInserted,
-      }),
-      [
-        {
-          onPress: () =>
-            navigation.navigate(
-              AffectedUserFlowStackScreens.AffectedUserComplete,
-            ),
-        },
-      ],
-    )
+
+    const { alertTitle, alertMessage } = noOpAlertContent(noOpResponse)
+
+    Alert.alert(alertTitle, alertMessage, [
+      {
+        onPress: () =>
+          navigation.navigate(
+            AffectedUserFlowStackScreens.AffectedUserComplete,
+          ),
+      },
+    ])
+  }
+
+  const noOpAlertContent = ({ reason, newKeysInserted }: PostKeysNoOp) => {
+    switch (reason) {
+      case PostKeysNoOpReason.NoTokenForExistingKeys: {
+        return {
+          alertTitle: t(
+            "export.publish_keys.no_op.no_token_for_existing_keys_title",
+          ),
+          alertMessage: t(
+            "export.publish_keys.no_op.no_token_for_existing_keys",
+            {
+              newKeysInserted,
+            },
+          ),
+        }
+      }
+      case PostKeysNoOpReason.EmptyExposureKeys: {
+        return {
+          alertTitle: t("export.publish_keys.no_op.empty_exposure_keys_title"),
+          alertMessage: t("export.publish_keys.no_op.empty_exposure_keys"),
+        }
+      }
+    }
   }
 
   const errorMessageTitle = (errorNature: PostKeysError) => {
@@ -141,52 +155,12 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     }
   }
 
-  const handleOnPressBack = () => {
-    navigation.goBack()
-  }
-
-  const handleOnPressCancel = () => {
-    navigation.navigate(Stacks.Home)
-  }
-
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (
     <View style={style.outerContainer}>
-      <View style={style.navButtonContainer}>
-        <TouchableOpacity
-          onPress={handleOnPressBack}
-          accessible
-          accessibilityLabel={t("export.code_input_button_back")}
-        >
-          <View style={style.backButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.ArrowLeft}
-              fill={Colors.black}
-              width={Iconography.xxSmall}
-              height={Iconography.xxSmall}
-            />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={handleOnPressCancel}
-          accessible
-          accessibilityLabel={t("export.code_input_button_cancel")}
-        >
-          <View style={style.cancelButtonInnerContainer}>
-            <SvgXml
-              xml={Icons.X}
-              fill={Colors.black}
-              width={Iconography.xxSmall}
-              height={Iconography.xxSmall}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID="publish-consent-form"
@@ -206,13 +180,15 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           </Text>
           <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
         </View>
-
-        <Button
-          loading={isLoading}
-          label={t("export.consent_button_title")}
+        <TouchableOpacity
+          style={style.button}
           onPress={handleOnPressConfirm}
-          customButtonStyle={style.button}
-        />
+          accessibilityLabel={t("export.consent_button_title")}
+        >
+          <Text style={style.buttonText}>
+            {t("export.consent_button_title")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
       <TouchableOpacity
         style={style.bottomButtonContainer}
@@ -223,11 +199,12 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         </Text>
         <SvgXml
           xml={Icons.ChevronUp}
-          fill={Colors.primary150}
+          fill={Colors.primary.shade150}
           width={Iconography.xxxSmall}
           height={Iconography.xxxSmall}
         />
       </TouchableOpacity>
+      {isLoading && <LoadingIndicator />}
     </View>
   )
 }
@@ -237,28 +214,11 @@ const createStyle = (insets: EdgeInsets) => {
   return StyleSheet.create({
     outerContainer: {
       flex: 1,
-      backgroundColor: Colors.primaryLightBackground,
-    },
-    navButtonContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      position: "absolute",
-      paddingTop: 25,
-      width: "100%",
-      borderBottomWidth: Outlines.hairline,
-      borderBottomColor: Colors.neutral10,
-      backgroundColor: Colors.primaryLightBackground,
-      zIndex: Layout.zLevel1,
-    },
-    backButtonInnerContainer: {
-      padding: Spacing.medium,
-    },
-    cancelButtonInnerContainer: {
-      padding: Spacing.medium,
+      backgroundColor: Colors.background.primaryLight,
     },
     contentContainer: {
+      paddingTop: Spacing.medium,
       paddingHorizontal: Spacing.large,
-      paddingTop: 105,
       paddingBottom: Spacing.huge,
     },
     content: {
@@ -271,7 +231,7 @@ const createStyle = (insets: EdgeInsets) => {
     subheaderText: {
       ...Typography.body1,
       ...Typography.mediumBold,
-      color: Colors.black,
+      color: Colors.neutral.black,
       marginBottom: Spacing.xxSmall,
     },
     bodyText: {
@@ -279,10 +239,13 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.xxLarge,
     },
     button: {
-      alignSelf: "flex-start",
+      ...Buttons.primary,
+    },
+    buttonText: {
+      ...Typography.buttonPrimary,
     },
     bottomButtonContainer: {
-      backgroundColor: Colors.secondary10,
+      backgroundColor: Colors.secondary.shade10,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -291,7 +254,7 @@ const createStyle = (insets: EdgeInsets) => {
     },
     bottomButtonText: {
       ...Typography.header5,
-      color: Colors.primary100,
+      color: Colors.primary.shade100,
       marginRight: Spacing.xSmall,
     },
   })

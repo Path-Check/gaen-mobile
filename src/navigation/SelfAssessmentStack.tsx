@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   HeaderStyleInterpolators,
   StackNavigationOptions,
+  TransitionPresets,
 } from "@react-navigation/stack"
 
 import { SelfAssessmentProvider } from "../SelfAssessmentContext"
@@ -11,7 +12,7 @@ import { SelfAssessmentStackScreens, Stack as AllStacks } from "./index"
 import SelfAssessmentIntro from "../SelfAssessment/SelfAssessmentIntro"
 import EmergencySymptomsQuestions from "../SelfAssessment/EmergencySymptomsQuestions"
 import HowAreYouFeeling from "../SelfAssessment/HowAreYouFeeling"
-import CallEmergencyServices from "../SelfAssessment/CallEmergencyServices"
+import CallEmergencyServices from "../CallEmergencyServices"
 import GeneralSymptoms from "../SelfAssessment/GeneralSymptoms"
 import UnderlyingConditions from "../SelfAssessment/UnderlyingConditions"
 import AgeRangeQuestion from "../SelfAssessment/AgeRangeQuestion"
@@ -19,6 +20,7 @@ import Guidance from "../SelfAssessment/Guidance"
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Headers } from "../styles"
+import { applyModalHeader } from "./ModalHeader"
 
 const Stack = createStackNavigator()
 
@@ -30,7 +32,6 @@ const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
   destinationOnCancel,
 }) => {
   const navigationBarOptions: StackNavigationOptions = {
-    headerShown: false,
     headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
   }
 
@@ -61,7 +62,11 @@ const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
         <Stack.Screen
           name={SelfAssessmentStackScreens.CallEmergencyServices}
           component={CallEmergencyServices}
-          options={defaultScreenOptions}
+          options={{
+            ...TransitionPresets.ModalTransition,
+            gestureEnabled: false,
+            header: applyModalHeader(""),
+          }}
         />
         <Stack.Screen
           name={SelfAssessmentStackScreens.GeneralSymptoms}
@@ -78,7 +83,10 @@ const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
           component={AgeRangeQuestion}
           options={defaultScreenOptions}
         />
-        <Stack.Screen name={SelfAssessmentStackScreens.Guidance}>
+        <Stack.Screen
+          name={SelfAssessmentStackScreens.Guidance}
+          options={{ headerShown: false }}
+        >
           {(props) => {
             return (
               <Guidance {...props} destinationOnCancel={destinationOnCancel} />

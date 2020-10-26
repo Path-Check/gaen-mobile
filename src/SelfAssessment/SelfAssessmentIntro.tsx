@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
-import { Button, Text } from "../components"
+import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Colors, Spacing, Typography } from "../styles"
+import { Icons } from "../assets"
+import { Buttons, Colors, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const {
@@ -50,24 +52,27 @@ const SelfAssessmentIntro: FunctionComponent = () => {
           {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
         </Text>
       </View>
-      <Button
+      <TouchableOpacity
+        style={style.button}
         onPress={handleOnPressStartAssessment}
-        label={t("self_assessment.intro.agree_and_start_assessment")}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-      />
+      >
+        <Text style={style.buttonText}>
+          {t("self_assessment.intro.agree_and_start_assessment")}
+        </Text>
+        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+      </TouchableOpacity>
     </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
     alignItems: "flex-start",
-    paddingHorizontal: Spacing.xLarge,
+    paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
   },
   headerText: {
@@ -77,7 +82,7 @@ const style = StyleSheet.create({
   },
   subheaderText: {
     ...Typography.body1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     marginBottom: Spacing.xxxHuge,
   },
   bulletListContainer: {
@@ -88,14 +93,17 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   emergencyText: {
+    ...Typography.error,
     ...Typography.mediumBold,
-    color: Colors.danger100,
   },
   button: {
+    ...Buttons.primary,
+    alignSelf: "center",
     width: "100%",
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
 })
 

@@ -29,14 +29,12 @@ interface CallbackInfo {
   firstname: string
   lastname: string
   phoneNumber: string
-  exposureDate: string | null
 }
 
 export const postCallbackInfo = async ({
   firstname,
   lastname,
   phoneNumber,
-  exposureDate,
 }: CallbackInfo): Promise<NetworkResponse<PostCallbackInfoError>> => {
   const postOAuth = async () => {
     const oauthBody = `grant_type=password&client_id=${callbackClientId}&client_secret=${callbackClientSecret}&username=${callbackUsername}&password=${callbackPassword}`
@@ -52,7 +50,6 @@ export const postCallbackInfo = async ({
     LA_First_Name__c: firstname,
     LA_Last_Name__c: lastname,
     LA_Mobile_Phone__c: phoneNumber,
-    LA_Exposure_Date__c: exposureDate,
   }
 
   try {

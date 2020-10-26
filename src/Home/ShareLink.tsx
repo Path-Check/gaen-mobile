@@ -57,7 +57,7 @@ const ShareLink: FunctionComponent = () => {
       </View>
       <SvgXml
         xml={Icons.ChevronRight}
-        fill={Colors.neutral75}
+        fill={Colors.neutral.shade75}
         width={Iconography.xxSmall}
         height={Iconography.xxSmall}
       />
@@ -71,7 +71,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.small,
     flexDirection: "row",
     alignItems: "center",
-    borderColor: Colors.primary100,
+    borderColor: Colors.primary.shade100,
     borderWidth: Outlines.thin,
   },
   shareImageContainer: {
@@ -89,7 +89,7 @@ const style = StyleSheet.create({
   shareText: {
     ...Typography.body1,
     ...Typography.mediumBold,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
   },
 })
 

@@ -1,20 +1,20 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect } from "react"
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
-import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useAnalyticsContext } from "../AnalyticsContext"
-import { Stacks, useStatusBarEffect } from "../navigation"
-
-import { Button, Text } from "../components"
-import { Colors, Typography, Spacing, Iconography } from "../styles"
-import { Icons } from "../assets"
+import { useOnboardingContext } from "../OnboardingContext"
+import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import ExternalLink from "../Settings/ExternalLink"
+import { applyModalHeader } from "../navigation/ModalHeader"
+
+import { Text } from "../components"
+import { Colors, Typography, Spacing, Buttons } from "../styles"
 
 const AnonymizedDataConsentScreen: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const {
@@ -22,90 +22,101 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
     healthAuthorityPrivacyPolicyUrl,
   } = useConfigurationContext()
   const { userConsentedToAnalytics, updateUserConsent } = useAnalyticsContext()
+  const { isOnboardingComplete } = useOnboardingContext()
+  const inOnboardingFlow = !isOnboardingComplete
 
   const handleOnPressButton = async () => {
     const nextConsentState = !userConsentedToAnalytics
     updateUserConsent(nextConsentState)
-    navigation.navigate(Stacks.Settings)
+    if (inOnboardingFlow) {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    } else {
+      navigation.goBack()
+    }
   }
 
-  const handleOnPressClose = () => {
-    navigation.goBack()
+  const handleOnPressMaybeLater = () => {
+    navigation.navigate(ActivationStackScreens.ActivationSummary)
   }
-
-  const headerText = userConsentedToAnalytics
-    ? t("settings.you_are_sharing_data")
-    : t("settings.share_anonymized_data")
 
   const buttonText = userConsentedToAnalytics
     ? t("settings.stop_sharing_data")
     : t("settings.i_understand_and_consent")
 
+  const headerText = userConsentedToAnalytics
+    ? t("settings.you_are_sharing_data")
+    : t("settings.share_anonymized_data")
+
+  useEffect(() => {
+    if (!inOnboardingFlow) {
+      navigation.setOptions({
+        header: applyModalHeader(headerText),
+      })
+    }
+  }, [headerText, navigation, inOnboardingFlow])
+
   return (
-    <View style={style.container}>
-      <View style={style.headerContainer}>
-        <Text style={style.headerText}>{headerText}</Text>
-        <TouchableOpacity
-          style={style.closeIconContainer}
-          onPress={handleOnPressClose}
-        >
-          <SvgXml
-            xml={Icons.XInCircle}
-            fill={Colors.neutral30}
-            width={Iconography.small}
-            height={Iconography.small}
-            testID="close-consent-screen"
-          />
-        </TouchableOpacity>
+    <ScrollView
+      style={style.container}
+      contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
+    >
+      {inOnboardingFlow && (
+        <Text style={style.headerText}>
+          {t("settings.share_anonymized_data")}
+        </Text>
+      )}
+      <Text style={style.paragraph}>
+        {t("settings.share_anonymized_data_para", { healthAuthorityName })}
+      </Text>
+      <View style={style.privacyPolicyContainer}>
+        <Text style={style.privacyPolicy}>
+          {t("settings.please_view_privacy_policy")}
+        </Text>
+        <ExternalLink
+          url={healthAuthorityPrivacyPolicyUrl}
+          label={t("settings.here")}
+        />
       </View>
-      <ScrollView contentContainerStyle={style.mainContentContainer}>
-        <Text style={style.paragraph}>
-          {t("settings.share_anonymized_data_para", { healthAuthorityName })}
-        </Text>
-        <View style={style.privacyPolicyContainer}>
-          <Text style={style.privacyPolicy}>
-            {t("settings.please_view_privacy_policy")}
+      <TouchableOpacity
+        style={style.button}
+        onPress={handleOnPressButton}
+        accessibilityLabel={buttonText}
+      >
+        <Text style={style.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
+      {inOnboardingFlow && (
+        <TouchableOpacity
+          onPress={handleOnPressMaybeLater}
+          style={style.secondaryButton}
+          accessibilityLabel={t("common.maybe_later")}
+        >
+          <Text style={style.secondaryButtonText}>
+            {t("common.maybe_later")}
           </Text>
-          <ExternalLink
-            url={healthAuthorityPrivacyPolicyUrl}
-            label={t("settings.here")}
-          />
-        </View>
-        <Button onPress={handleOnPressButton} label={buttonText} />
-        <Text style={style.disclaimer}>
-          {t("settings.share_anonymized_data_disclaimer", {
-            healthAuthorityName,
-          })}
-        </Text>
-      </ScrollView>
-    </View>
+        </TouchableOpacity>
+      )}
+      <Text style={style.disclaimer}>
+        {t("settings.share_anonymized_data_disclaimer", {
+          healthAuthorityName,
+        })}
+      </Text>
+    </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: Spacing.xSmall,
-    paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.secondary10,
-  },
-  headerText: {
-    flex: 4,
-    ...Typography.header2,
-    color: Colors.primary125,
-  },
-  closeIconContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  mainContentContainer: {
+  contentContainer: {
     paddingVertical: Spacing.large,
     paddingHorizontal: Spacing.large,
+  },
+  headerText: {
+    ...Typography.header1,
+    marginBottom: Spacing.large,
   },
   paragraph: {
     ...Typography.body1,
@@ -119,8 +130,20 @@ const style = StyleSheet.create({
     ...Typography.mediumBold,
     marginRight: Spacing.xxxSmall,
   },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+  },
+  secondaryButton: {
+    ...Buttons.secondary,
+  },
+  secondaryButtonText: {
+    ...Typography.buttonSecondary,
+  },
   disclaimer: {
-    marginTop: Spacing.small,
+    marginTop: Spacing.huge,
     ...Typography.body2,
   },
 })

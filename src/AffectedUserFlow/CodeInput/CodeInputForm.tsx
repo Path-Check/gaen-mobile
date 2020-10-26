@@ -1,17 +1,20 @@
 import React, { FunctionComponent, useState } from "react"
 import {
-  ActivityIndicator,
   Alert,
   StyleSheet,
   TextInput,
   View,
   Keyboard,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
-import { Text, Button, StatusBar } from "../../components"
+import { Text, LoadingIndicator } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
@@ -20,21 +23,15 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
 } from "../../navigation"
-
-import {
-  Spacing,
-  Layout,
-  Forms,
-  Colors,
-  Outlines,
-  Typography,
-} from "../../styles"
 import Logger from "../../logger"
+
+import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
+import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
 const CodeInputForm: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
@@ -48,16 +45,19 @@ const CodeInputForm: FunctionComponent = () => {
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  const codeLength = 8
-  const codeIsInvalidLength = code.length !== codeLength
-  const codeContainsNonDigitChars = (code: string) => !code.match(/^\d+$/)
+  const codeLengthMin = 6
+  const codeLengthMax = 16
+  const codeIsInvalidLength =
+    code.length < codeLengthMin || code.length > codeLengthMax
+  const codeContainsNonAlphanumericChars = (code: string) =>
+    !code.match(/^[a-zA-Z0-9]*$/)
 
   const handleOnChangeText = (newCode: string) => {
-    setErrorMessage("")
-    if (newCode && codeContainsNonDigitChars(newCode)) {
+    setCode(newCode)
+    if (newCode && codeContainsNonAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
     } else {
-      setCode(newCode)
+      setErrorMessage("")
     }
   }
 
@@ -147,17 +147,23 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled = codeIsInvalidLength || codeContainsNonDigitChars(code)
+  const isDisabled =
+    codeIsInvalidLength || codeContainsNonAlphanumericChars(code)
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
+  const isIOS = Platform.OS === "ios"
+
   return (
-    <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+    <KeyboardAvoidingView
+      contentContainerStyle={style.outerContentContainer}
+      behavior={isIOS ? "position" : "height"}
+    >
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-code-input-form"}
+        alwaysBounceVertical={false}
       >
         <View style={style.headerContainer}>
           <Text style={style.header}>
@@ -168,56 +174,54 @@ const CodeInputForm: FunctionComponent = () => {
             {t("export.code_input_body_bluetooth")}
           </Text>
         </View>
-        <View>
-          <TextInput
-            testID="code-input"
-            value={code}
-            placeholder="00000000"
-            placeholderTextColor={Colors.placeholderText}
-            maxLength={codeLength}
-            style={codeInputStyle}
-            keyboardType="number-pad"
-            returnKeyType="done"
-            onChangeText={handleOnChangeText}
-            onFocus={handleOnToggleFocus}
-            onBlur={handleOnToggleFocus}
-            onSubmitEditing={Keyboard.dismiss}
-            blurOnSubmit={false}
-          />
-        </View>
-        <Text style={style.errorSubtitle}>{errorMessage}</Text>
-        {isLoading ? <LoadingIndicator /> : null}
-        <Button
-          onPress={handleOnPressSubmit}
-          label={t("common.next")}
-          disabled={isDisabled}
-          customButtonStyle={style.button}
-          hasRightArrow
+        <TextInput
+          testID="code-input"
+          value={code}
+          placeholder={t("export.code_input_placeholder").toUpperCase()}
+          placeholderTextColor={Colors.text.placeholder}
+          maxLength={codeLengthMax}
+          style={codeInputStyle}
+          returnKeyType="done"
+          onChangeText={handleOnChangeText}
+          onFocus={handleOnToggleFocus}
+          onBlur={handleOnToggleFocus}
+          onSubmitEditing={Keyboard.dismiss}
+          blurOnSubmit={false}
         />
+        <Text style={style.errorSubtitle}>{errorMessage}</Text>
+        <TouchableOpacity
+          style={isDisabled ? style.buttonDisabled : style.button}
+          onPress={handleOnPressSubmit}
+          accessibilityLabel={t("common.next")}
+          disabled={isDisabled}
+        >
+          <Text
+            style={isDisabled ? style.buttonDisabledText : style.buttonText}
+          >
+            {t("common.next")}
+          </Text>
+          <SvgXml
+            xml={Icons.Arrow}
+            fill={isDisabled ? Colors.text.primary : Colors.neutral.white}
+          />
+        </TouchableOpacity>
       </ScrollView>
-    </>
+      {isLoading && <LoadingIndicator />}
+    </KeyboardAvoidingView>
   )
 }
 
-const LoadingIndicator = () => {
-  return (
-    <View style={style.activityIndicatorContainer}>
-      <ActivityIndicator
-        size={"large"}
-        color={Colors.neutral100}
-        style={style.activityIndicator}
-        testID={"loading-indicator"}
-      />
-    </View>
-  )
-}
-
-const indicatorWidth = 120
 const style = StyleSheet.create({
+  outerContentContainer: {
+    minHeight: "100%",
+  },
   contentContainer: {
-    backgroundColor: Colors.primaryLightBackground,
+    minHeight: "100%",
+    backgroundColor: Colors.background.primaryLight,
+    paddingTop: Spacing.large,
     paddingBottom: Spacing.xxxHuge,
     paddingHorizontal: Spacing.medium,
+    justifyContent: "center",
   },
   headerContainer: {
     marginBottom: Spacing.xxLarge,
@@ -231,9 +235,10 @@ const style = StyleSheet.create({
   },
   errorSubtitle: {
     ...Typography.error,
-    color: Colors.errorText,
-    marginTop: Spacing.xSmall,
+    color: Colors.text.error,
+    marginTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
+    minHeight: Spacing.xxxHuge,
   },
   codeInput: {
     ...Forms.textInput,
@@ -241,28 +246,25 @@ const style = StyleSheet.create({
     fontSize: Typography.xLarge,
     textAlignVertical: "center",
     textAlign: "center",
-    letterSpacing: 8,
+    letterSpacing: 4,
     paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {
-    borderColor: Colors.primary125,
+    borderColor: Colors.primary.shade125,
   },
   button: {
-    alignSelf: "flex-start",
+    ...Buttons.primary,
   },
-  activityIndicatorContainer: {
-    position: "absolute",
-    left: Layout.halfWidth,
-    top: Layout.halfHeight,
-    marginLeft: -(indicatorWidth / 2),
-    marginTop: -(indicatorWidth / 2),
-    zIndex: Layout.zLevel2,
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
   },
-  activityIndicator: {
-    width: indicatorWidth,
-    height: indicatorWidth,
-    backgroundColor: Colors.transparentNeutral30,
-    borderRadius: Outlines.baseBorderRadius,
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
+    marginRight: Spacing.small,
   },
 })
 

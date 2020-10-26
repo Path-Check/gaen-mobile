@@ -35,7 +35,7 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <SvgXml
         xml={icon}
-        fill={focused ? Colors.primary100 : Colors.neutral50}
+        fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
         accessible
         accessibilityLabel={label}
         width={size}
@@ -108,9 +108,9 @@ const MainTabNavigator: FunctionComponent = () => {
   const tabBarOptions = {
     showLabel: false,
     style: {
-      backgroundColor: Colors.primaryLightBackground,
+      backgroundColor: Colors.background.primaryLight,
       borderTopWidth: 1,
-      borderTopColor: Colors.neutral10,
+      borderTopColor: Colors.neutral.shade10,
       height: insets.bottom + 60,
     },
   }

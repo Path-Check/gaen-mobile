@@ -1,28 +1,26 @@
 import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
-import { ScrollView, StyleSheet, Image } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { ScrollView, StyleSheet, Image, TouchableOpacity } from "react-native"
 
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useCallbackFormContext } from "./CallbackFormContext"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
 } from "../configuration/authorityCopy"
-
-import { Images } from "../assets"
-import { Typography, Spacing, Colors } from "../styles"
 import { useConfigurationContext } from "../ConfigurationContext"
 
+import { Images } from "../assets"
+import { Buttons, Typography, Spacing, Colors } from "../styles"
+
 const Success: FunctionComponent = () => {
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const {
     t,
     i18n: { language: localeCode },
   } = useTranslation()
   const { callBackRequestCompleted } = useCallbackFormContext()
-  const navigation = useNavigation()
-  useStatusBarEffect("light-content", Colors.headerBackground)
   const { healthAuthorityName } = useConfigurationContext()
 
   const successMessage = authorityCopyTranslation(
@@ -31,17 +29,13 @@ const Success: FunctionComponent = () => {
     t("callback.success_body", { healthAuthorityName }),
   )
 
-  navigation.setOptions({
-    headerLeft: null,
-    title: t("callback.success_requested"),
-  })
-
   const handleOnPressGotIt = () => {
     callBackRequestCompleted()
   }
 
   return (
     <ScrollView
+      style={style.container}
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
@@ -53,20 +47,25 @@ const Success: FunctionComponent = () => {
       />
       <Text style={style.header}>{t("callback.success_header")}</Text>
       <Text style={style.body}>{successMessage}</Text>
-      <Button
-        label={t("callback.success_got_it")}
+      <TouchableOpacity
         onPress={handleOnPressGotIt}
-        customButtonStyle={style.button}
-        customButtonInnerStyle={style.buttonInner}
-      />
+        style={style.button}
+        accessibilityLabel={t("callback.success_got_it")}
+      >
+        <Text style={style.buttonText}>{t("callback.success_got_it")}</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.background.primaryLight,
+  },
   contentContainer: {
-    paddingHorizontal: Spacing.large,
     flexGrow: 1,
+    paddingHorizontal: Spacing.large,
+    backgroundColor: Colors.background.primaryLight,
     justifyContent: "center",
   },
   header: {
@@ -83,10 +82,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
+    ...Buttons.primary,
     width: "100%",
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 

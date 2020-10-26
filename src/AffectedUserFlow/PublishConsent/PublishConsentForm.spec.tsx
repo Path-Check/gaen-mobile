@@ -19,28 +19,6 @@ describe("PublishConsentForm", () => {
     jest.resetAllMocks()
   })
 
-  it("navigates to the home screen when user cancels", () => {
-    const navigateSpy = jest.fn()
-    ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-    const { getByLabelText } = render(
-      <ExposureContext.Provider value={factories.exposureContext.build()}>
-        <PublishConsentForm
-          hmacKey="hmacKey"
-          certificate="certificate"
-          exposureKeys={[]}
-          storeRevisionToken={jest.fn()}
-          revisionToken=""
-          appPackageName=""
-          regionCodes={[""]}
-        />
-      </ExposureContext.Provider>,
-    )
-
-    fireEvent.press(getByLabelText("Cancel"))
-
-    expect(navigateSpy).toHaveBeenCalledWith("Home")
-  })
-
   it("displays the consent title and body", () => {
     const { getByText } = render(
       <ExposureContext.Provider value={factories.exposureContext.build()}>
@@ -133,40 +111,90 @@ describe("PublishConsentForm", () => {
   })
 
   describe("on a no-op key submission", () => {
-    it("displays a message explaining the cause to the user", async () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
-      const newKeysInserted = 1
-      const noOpPostResponse = {
-        kind: "no-op" as const,
-        reason: ExposureAPI.PostKeysNoOpReason.NoTokenForExistingKeys,
-        newKeysInserted,
-        message: "no_token_for_existing_keys",
-      }
-      const postDiagnosisKeysSpy = jest.spyOn(ExposureAPI, "postDiagnosisKeys")
-      postDiagnosisKeysSpy.mockResolvedValueOnce(noOpPostResponse)
-      const alertSpy = jest.spyOn(Alert, "alert")
-
-      const { getByLabelText } = render(
-        <PublishConsentForm
-          hmacKey="hmacKey"
-          certificate="certificate"
-          exposureKeys={[]}
-          storeRevisionToken={jest.fn()}
-          revisionToken=""
-          appPackageName=""
-          regionCodes={[""]}
-        />,
-      )
-
-      fireEvent.press(getByLabelText("I Understand and Consent"))
-
-      await waitFor(() => {
-        expect(alertSpy).toHaveBeenCalledWith(
-          "Attempt to submit existing keys",
-          `Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were ${newKeysInserted} new keys added.`,
-          [{ onPress: expect.any(Function) }],
+    describe("when the error is related to the revision token", () => {
+      it("displays a message explaining the cause to the user", async () => {
+        const navigateSpy = jest.fn()
+        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+        const newKeysInserted = 1
+        const noOpPostResponse = {
+          kind: "no-op" as const,
+          reason: ExposureAPI.PostKeysNoOpReason.NoTokenForExistingKeys,
+          newKeysInserted,
+          message: "no_token_for_existing_keys",
+        }
+        const postDiagnosisKeysSpy = jest.spyOn(
+          ExposureAPI,
+          "postDiagnosisKeys",
         )
+        postDiagnosisKeysSpy.mockResolvedValueOnce(noOpPostResponse)
+        const alertSpy = jest.spyOn(Alert, "alert")
+
+        const { getByLabelText } = render(
+          <PublishConsentForm
+            hmacKey="hmacKey"
+            certificate="certificate"
+            exposureKeys={[]}
+            storeRevisionToken={jest.fn()}
+            revisionToken=""
+            appPackageName=""
+            regionCodes={[""]}
+          />,
+        )
+
+        fireEvent.press(getByLabelText("I Understand and Consent"))
+
+        await waitFor(() => {
+          expect(
+            alertSpy,
+          ).toHaveBeenCalledWith(
+            "Attempt to submit existing keys",
+            `Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were ${newKeysInserted} new keys added.`,
+            [{ onPress: expect.any(Function) }],
+          )
+        })
+      })
+    })
+
+    describe("when the error is related to an empty exposure history", () => {
+      it("displays a message explaining the cause to the user", async () => {
+        const navigateSpy = jest.fn()
+        ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+        const noOpPostResponse = {
+          kind: "no-op" as const,
+          reason: ExposureAPI.PostKeysNoOpReason.EmptyExposureKeys,
+          newKeysInserted: 0,
+          message: "message",
+        }
+        const postDiagnosisKeysSpy = jest.spyOn(
+          ExposureAPI,
+          "postDiagnosisKeys",
+        )
+        postDiagnosisKeysSpy.mockResolvedValueOnce(noOpPostResponse)
+        const alertSpy = jest.spyOn(Alert, "alert")
+
+        const { getByLabelText } = render(
+          <PublishConsentForm
+            hmacKey="hmacKey"
+            certificate="certificate"
+            exposureKeys={[]}
+            storeRevisionToken={jest.fn()}
+            revisionToken=""
+            appPackageName=""
+            regionCodes={[""]}
+          />,
+        )
+
+        fireEvent.press(getByLabelText("I Understand and Consent"))
+
+        await waitFor(() => {
+          expect(
+            alertSpy,
+          ).toHaveBeenCalledWith(
+            "No encounter logging data is available",
+            "It looks like you have no encounter logs on your device, please wait 24 hours to proceed if you recently reset your data. You may need to request a new verification code.",
+            [{ onPress: expect.any(Function) }],
+          )
+        })
       })
     })
   })

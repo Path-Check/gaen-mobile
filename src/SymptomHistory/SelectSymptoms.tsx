@@ -9,10 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
 import { useSymptomHistoryContext } from "./SymptomHistoryContext"
 import * as Symptom from "./symptom"
-import { SymptomEntry } from "./symptomHistory"
+import { hasEmergencySymptoms, SymptomEntry } from "./symptomHistory"
 import { showMessage } from "react-native-flash-message"
 import { posixToDayjs } from "../utils/dateTime"
 import Checkbox from "./Checkbox"
@@ -47,7 +47,7 @@ interface SelectSymptomsFormProps {
 export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   entry,
 }) => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
 
@@ -87,12 +87,21 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
     }
   }
 
-  const completeOnPressSave = () => {
-    navigation.goBack()
+  const showSuccessMessage = () => {
     showMessage({
       message: t("common.success"),
       ...Affordances.successFlashMessageOptions,
     })
+  }
+
+  const completeOnPressSave = () => {
+    if (hasEmergencySymptoms(selectedSymptoms)) {
+      navigation.navigate(SymptomHistoryStackScreens.CallEmergencyServices)
+      showSuccessMessage()
+    } else {
+      navigation.goBack()
+      showSuccessMessage()
+    }
   }
 
   const hasNoUserInputSelected = selectedSymptoms.size === 0
@@ -143,11 +152,11 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     flexGrow: 1,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
   },
@@ -162,7 +171,7 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xSmall - 2,
     marginBottom: Spacing.xLarge,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.neutral50,
+    borderColor: Colors.neutral.shade50,
   },
   button: {
     ...Buttons.fixedBottom,

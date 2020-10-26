@@ -1,16 +1,24 @@
 import React, { FunctionComponent } from "react"
-import { Linking, Image, ScrollView, StyleSheet, View } from "react-native"
+import {
+  Linking,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
+import { SvgXml } from "react-native-svg"
 
-import { Button, StatusBar, Text } from "../components"
+import { StatusBar, Text } from "../components"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks, useStatusBarEffect } from "../navigation"
 
 import { Buttons, Outlines, Colors, Spacing, Typography } from "../styles"
-import { Images } from "../assets"
+import { Images, Icons } from "../assets"
 
 interface GuidanceProps {
   destinationOnCancel?: Stack
@@ -19,7 +27,7 @@ interface GuidanceProps {
 const Guidance: FunctionComponent<GuidanceProps> = ({
   destinationOnCancel = Stacks.ExposureHistoryFlow,
 }) => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { symptomGroup } = useSelfAssessmentContext()
@@ -194,7 +202,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.secondary.shade10} />
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
@@ -202,7 +210,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
       >
         <View style={style.topScrollViewBackground} />
         <View style={style.headerContainer}>
-          <Image source={Images.SelfAssessmentIntro} style={style.image} />
+          <Image source={Images.SelfAssessment} style={style.image} />
           <Text style={style.headerText}>
             {t("self_assessment.guidance.guidance")}
           </Text>
@@ -210,26 +218,30 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
             {introForSymptomGroup(symptomGroup)}
           </Text>
         </View>
-        <View style={style.bulletListContainer}>
+        <View style={style.bottomContainer}>
           {instructionsForSymptomGroup(symptomGroup)}
+          {displayFindATestCenter && (
+            <TouchableOpacity
+              style={style.button}
+              onPress={handleOnPressFindTestCenter}
+              accessibilityLabel={t(
+                "self_assessment.guidance.find_a_test_center_nearby",
+              )}
+            >
+              <Text style={style.buttonText}>
+                {t("self_assessment.guidance.find_a_test_center_nearby")}
+              </Text>
+              <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={style.doneButton}
+            onPress={handleOnPressDone}
+            accessibilityLabel={t("common.done")}
+          >
+            <Text style={style.doneButtonText}>{t("common.done")}</Text>
+          </TouchableOpacity>
         </View>
-        {displayFindATestCenter && (
-          <Button
-            label={t("self_assessment.guidance.find_a_test_center_nearby")}
-            onPress={handleOnPressFindTestCenter}
-            customButtonStyle={style.button}
-            customButtonInnerStyle={style.buttonInner}
-            hasRightArrow
-          />
-        )}
-        <Button
-          onPress={handleOnPressDone}
-          label={t("common.done")}
-          customButtonStyle={style.doneButton}
-          customButtonInnerStyle={style.doneButtonInner}
-          customTextStyle={style.doneButtonText}
-          outlined
-        />
       </ScrollView>
     </>
   )
@@ -237,7 +249,7 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     paddingBottom: Spacing.xxxHuge,
@@ -247,14 +259,14 @@ const style = StyleSheet.create({
     top: "-100%",
     left: 0,
     right: 0,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
     height: "100%",
   },
   headerContainer: {
     paddingVertical: Spacing.huge,
     paddingHorizontal: Spacing.large,
     marginBottom: Spacing.large,
-    backgroundColor: Colors.secondary10,
+    backgroundColor: Colors.secondary.shade10,
   },
   image: {
     width: 70,
@@ -269,22 +281,22 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.header4,
     ...Typography.base,
-    color: Colors.black,
+    color: Colors.neutral.black,
   },
-  bulletListContainer: {
+  bottomContainer: {
     paddingHorizontal: Spacing.large,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     marginBottom: Spacing.xxLarge,
   },
   bullet1: {
     ...Typography.header4,
-    color: Colors.primary100,
+    color: Colors.primary.shade100,
     marginBottom: Spacing.medium,
   },
   bullet2: {
     ...Typography.body1,
     ...Typography.mediumBold,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     marginBottom: Spacing.small,
   },
   bullet3Container: {
@@ -292,32 +304,30 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
     borderLeftWidth: Outlines.hairline,
-    borderLeftColor: Colors.neutral25,
+    borderLeftColor: Colors.neutral.shade25,
   },
   bullet3: {
     ...Typography.body1,
     marginBottom: Spacing.xxSmall,
   },
   button: {
+    ...Buttons.primaryThin,
     width: "100%",
-    paddingHorizontal: Spacing.large,
+    alignSelf: "center",
+    marginTop: Spacing.medium,
   },
-  buttonInner: {
-    width: "100%",
+  buttonText: {
+    ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
   },
   doneButton: {
-    marginTop: Spacing.large,
-    marginBottom: Spacing.small,
+    ...Buttons.primaryThinOutlined,
     alignSelf: "center",
-    borderColor: Colors.secondary100,
+    marginTop: Spacing.small,
+    width: "100%",
   },
   doneButtonText: {
-    ...Typography.buttonPrimary,
-    color: Colors.primary110,
-  },
-  doneButtonInner: {
-    ...Buttons.tinyRounded,
-    backgroundColor: Colors.white,
+    ...Typography.buttonSecondary,
   },
 })
 

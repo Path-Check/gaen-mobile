@@ -13,8 +13,7 @@
     "request_a_call": "要求防疫人員回電",
     "success_body": "我們的追踪器正在努力確保您和您所在社區的安全。 {{healthAuthorityName}}已收到您的回電請求。會有專人在24小時內與您聯繫。",
     "success_got_it": "知道了",
-    "success_header": "您在隊列中",
-    "success_requested": "已要求回電"
+    "success_header": "您在隊列中"
   },
   "common": {
     "back": "返回",
@@ -54,7 +53,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "輸入您的驗證碼",
-    "code_input_button_back": "返回",
     "code_input_button_cancel": "取消",
     "code_input_title_bluetooth": "驗證您的診斷結果",
     "complete_body_bluetooth": "您正在協助遏止病毒的傳播並保護您社區的其他人。",
@@ -85,7 +83,7 @@
       },
       "no_op": {
         "no_token_for_existing_keys": "已將現有資料發送到服務器。這通常代表此程序曾在此設備上嘗試過，但使用的是不同的應用程式，您可以將此信息告知提供所使用驗證碼的機構。添加了{{newKeysInserted}}新密鑰。",
-        "title": "嘗試提交現有密鑰"
+        "no_token_for_existing_keys_title": "嘗試提交現有密鑰"
       }
     },
     "start_header_bluetooth": "幫助抑制病毒的傳播並保護社區中的其他人"
@@ -237,7 +235,6 @@
     "proximity_tracing_subheader1": "該應用程序的運作方式",
     "proximity_tracing_subheader2": "我的資料安全嗎？",
     "proximity_tracing_subheader3": "此應用程式不能使您免於COVID-19的感染。",
-    "screen_5_button": "開始",
     "screen1_button": "該應用程序的運作方式",
     "screen1_header": "只要我們同心協力，就可以減緩COVID-19的傳播。",
     "screen1_image_label": "擊掌的兩個人",
@@ -250,20 +247,14 @@
     "screen4_button": "如果我生病了怎麼辦？",
     "screen4_header": "如果您可能曾經接觸過COVID-19，該應用程式將通知您",
     "screen4_image_label": "在手機上收到通知的人",
-    "screen5_header": "您可以透過應用程式幫助減緩COVID-19的傳播、保護他人並直接從健康專家那裡獲得幫助。",
-    "screen5_image_label": "與健康專家線上交談的人",
-    "step": "{{totalSteps}}中的{{currentStep}}步驟",
     "terms_header_title": "使用條款",
     "welcome_image_label": "人們戴著口罩，像在網路中相互連結的插圖"
   },
   "screen_titles": {
     "bluetooth": "藍牙",
-    "callback": "回電要求",
-    "debug": "排除錯誤",
     "exposure_history": "接觸史",
     "exposure_notifications": "接觸提醒",
     "exposure_scanning": "接觸檢查",
-    "exposures": "接觸",
     "home": "工作介面",
     "how_the_app_works": "該應用程序的運作方式",
     "legal": "合法的",

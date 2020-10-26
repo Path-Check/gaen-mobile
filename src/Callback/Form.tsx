@@ -1,7 +1,6 @@
 import React, { useState, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
-  ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
   StyleSheet,
@@ -10,21 +9,22 @@ import {
   View,
   ScrollView,
   Keyboard,
+  TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { Button, Text } from "../components"
+import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
 import Logger from "../logger"
 
-import { Spacing, Layout, Forms, Colors, Outlines, Typography } from "../styles"
+import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 
 const defaultErrorMessage = " "
 
 const CallbackForm: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.headerBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const { healthAuthorityName } = useConfigurationContext()
   const navigation = useNavigation()
@@ -61,7 +61,6 @@ const CallbackForm: FunctionComponent = () => {
         firstname,
         lastname,
         phoneNumber,
-        exposureDate: null,
       })
 
       if (response.kind === "success") {
@@ -96,99 +95,99 @@ const CallbackForm: FunctionComponent = () => {
   }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-    >
+    <>
       <KeyboardAvoidingView
-        keyboardVerticalOffset={Spacing.xSmall}
-        behavior={isIOS ? "position" : undefined}
+        contentContainerStyle={style.outerContentContainer}
+        behavior={isIOS ? "position" : "height"}
+        keyboardVerticalOffset={-100}
       >
-        <View>
-          <View style={style.headerContainer}>
-            <Text style={style.header}>{t("callback.request_a_call")}</Text>
-            <Text style={style.subheader}>
-              {t("callback.fill_out_the_info", {
-                healthAuthorityName,
-              })}
+        <ScrollView
+          style={style.container}
+          contentContainerStyle={style.contentContainer}
+        >
+          <View>
+            <View style={style.headerContainer}>
+              <Text style={style.header}>{t("callback.request_a_call")}</Text>
+              <Text style={style.subheader}>
+                {t("callback.fill_out_the_info", {
+                  healthAuthorityName,
+                })}
+              </Text>
+            </View>
+            <View style={style.inputContainer}>
+              <Text style={style.inputLabel}>{t("callback.firstname")}</Text>
+              <TextInput
+                value={firstname}
+                style={style.textInput}
+                keyboardType={"default"}
+                returnKeyType={"done"}
+                onChangeText={handleOnChangeFirstname}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                autoCapitalize={"none"}
+              />
+            </View>
+            <View style={style.inputContainer}>
+              <Text style={style.inputLabel}>{t("callback.lastname")}</Text>
+              <TextInput
+                value={lastname}
+                style={style.textInput}
+                keyboardType={"default"}
+                returnKeyType={"done"}
+                onChangeText={handleOnChangeLastname}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                autoCapitalize={"none"}
+              />
+            </View>
+            <View style={style.inputContainer}>
+              <Text style={style.inputLabel}>
+                {t("callback.phone_number_required")}
+              </Text>
+              <TextInput
+                value={phoneNumber}
+                style={style.textInput}
+                keyboardType="phone-pad"
+                returnKeyType="done"
+                onChangeText={handleOnChangePhoneNumber}
+                blurOnSubmit={false}
+                onSubmitEditing={Keyboard.dismiss}
+                testID="phone-number-input"
+                multiline
+              />
+            </View>
+            <Text style={style.errorSubtitle}>{errorMessage}</Text>
+          </View>
+          <TouchableOpacity
+            onPress={handleOnPressSubmit}
+            disabled={buttonDisabled}
+            style={buttonDisabled ? style.buttonDisabled : style.button}
+            accessibilityLabel={t("common.submit")}
+          >
+            <Text
+              style={
+                buttonDisabled ? style.buttonDisabledText : style.buttonText
+              }
+            >
+              {t("common.submit")}
             </Text>
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.inputLabel}>{t("callback.firstname")}</Text>
-            <TextInput
-              value={firstname}
-              style={style.textInput}
-              keyboardType={"default"}
-              returnKeyType={"done"}
-              onChangeText={handleOnChangeFirstname}
-              blurOnSubmit={false}
-              onSubmitEditing={Keyboard.dismiss}
-              autoCapitalize={"none"}
-            />
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.inputLabel}>{t("callback.lastname")}</Text>
-            <TextInput
-              value={lastname}
-              style={style.textInput}
-              keyboardType={"default"}
-              returnKeyType={"done"}
-              onChangeText={handleOnChangeLastname}
-              blurOnSubmit={false}
-              onSubmitEditing={Keyboard.dismiss}
-              autoCapitalize={"none"}
-            />
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.inputLabel}>
-              {t("callback.phone_number_required")}
-            </Text>
-            <TextInput
-              value={phoneNumber}
-              style={style.textInput}
-              keyboardType="phone-pad"
-              returnKeyType="done"
-              onChangeText={handleOnChangePhoneNumber}
-              blurOnSubmit={false}
-              onSubmitEditing={Keyboard.dismiss}
-              testID="phone-number-input"
-              multiline
-            />
-          </View>
-          <Text style={style.errorSubtitle}>{errorMessage}</Text>
-        </View>
-        {isLoading ? <LoadingIndicator /> : null}
-        <Button
-          onPress={handleOnPressSubmit}
-          label={t("common.submit")}
-          loading={isLoading}
-          customButtonStyle={style.button}
-          disabled={buttonDisabled}
-        />
+          </TouchableOpacity>
+        </ScrollView>
       </KeyboardAvoidingView>
-    </ScrollView>
-  )
-}
-
-const LoadingIndicator = () => {
-  return (
-    <View style={style.activityIndicatorContainer}>
-      <ActivityIndicator
-        size={"large"}
-        color={Colors.neutral100}
-        style={style.activityIndicator}
-        testID={"loading-indicator"}
-      />
-    </View>
+      {isLoading && <LoadingIndicator />}
+    </>
   )
 }
 
 const style = StyleSheet.create({
+  outerContentContainer: {
+    minHeight: "100%",
+  },
   container: {
     height: "100%",
     paddingHorizontal: Spacing.medium,
     paddingTop: Spacing.large,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
     justifyContent: "space-between",
@@ -207,7 +206,7 @@ const style = StyleSheet.create({
   },
   errorSubtitle: {
     ...Typography.error,
-    paddingTop: Spacing.xxSmall,
+    height: Spacing.huge,
   },
   inputContainer: {
     marginBottom: Spacing.medium,
@@ -220,25 +219,16 @@ const style = StyleSheet.create({
     ...Forms.textInput,
   },
   button: {
-    alignSelf: "flex-start",
+    ...Buttons.primary,
   },
-  activityIndicatorContainer: {
-    position: "absolute",
-    zIndex: Layout.zLevel1,
-    alignItems: "center",
-    justifyContent: "center",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: "100%",
-    height: "100%",
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
   },
-  activityIndicator: {
-    width: 100,
-    height: 100,
-    backgroundColor: Colors.transparentNeutral30,
-    borderRadius: Outlines.baseBorderRadius,
+  buttonText: {
+    ...Typography.buttonPrimary,
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
   },
 })
 

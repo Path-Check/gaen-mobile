@@ -10,10 +10,9 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { ActivationStackScreens } from "../navigation"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { isPlatformiOS } from "../utils"
+import { nextScreenFromExposureNotifications } from "./activationStackController"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
@@ -21,19 +20,18 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const { locationPermissions } = useSystemServicesContext()
+  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const { exposureNotifications } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
-    if (isPlatformiOS()) {
-      navigation.navigate(ActivationStackScreens.NotificationPermissions)
-    } else {
-      isLocationRequiredAndOff
-        ? navigation.navigate(ActivationStackScreens.ActivateLocation)
-        : navigation.navigate(ActivationStackScreens.ActivationSummary)
-    }
+    navigation.navigate(
+      nextScreenFromExposureNotifications({
+        isLocationRequiredAndOff,
+        isBluetoothOn,
+      }),
+    )
   }
 
   const handleOnPressActivateExposureNotifications = async () => {
@@ -73,10 +71,14 @@ const ActivateExposureNotifications: FunctionComponent = () => {
           </Text>
         </View>
         <View style={style.buttonsContainer}>
-          <Button
+          <TouchableOpacity
             onPress={handleOnPressActivateExposureNotifications}
-            label={t("onboarding.proximity_tracing_button")}
-          />
+            style={style.button}
+          >
+            <Text style={style.buttonText}>
+              {t("onboarding.proximity_tracing_button")}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressDontEnable}
             style={style.secondaryButton}
@@ -92,10 +94,10 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 }
 const style = StyleSheet.create({
   safeArea: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   container: {
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
     height: "100%",
   },
   contentContainer: {
@@ -119,6 +121,12 @@ const style = StyleSheet.create({
   },
   buttonsContainer: {
     alignSelf: "flex-start",
+  },
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
   secondaryButton: {
     ...Buttons.secondary,

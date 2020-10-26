@@ -12,9 +12,8 @@ jest.mock("@react-navigation/native")
 describe("Success", () => {
   it("displays the title and body for the call back success", () => {
     const healthAuthorityName = "healthAuthorityName"
-    const setOptionsSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValueOnce({
-      setOptions: setOptionsSpy,
+      setOptions: jest.fn(),
     })
     const { getByText } = render(
       <ConfigurationContext.Provider
@@ -34,10 +33,6 @@ describe("Success", () => {
         `Our contact tracers are working hard to keep you and your community safe. The ${healthAuthorityName} has received your request for a call back. An expert will contact you within 24 hours.`,
       ),
     ).toBeDefined()
-    expect(setOptionsSpy).toHaveBeenCalledWith({
-      headerLeft: null,
-      title: "Call Back Requested",
-    })
   })
 
   it("invokes the completed request property from the context", () => {

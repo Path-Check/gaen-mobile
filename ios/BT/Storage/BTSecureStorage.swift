@@ -17,6 +17,26 @@ class BTSecureStorage: SafePathsSecureStorage {
     return realmConfig
   }()
 
+  private func realm() -> Realm {
+    do {
+      let realm = try Realm(configuration: realmConfig)
+      return realm
+    } catch {
+      resetRealm()
+      let realm = try! Realm(configuration: realmConfig)
+      return realm
+    }
+  }
+
+  private func resetRealm() {
+    guard let url = getRealmConfig()?.fileURL else { return }
+    do {
+      try FileManager.default.removeItem(at: url)
+    } catch {
+      assertionFailure("Failed to delete realm instance from file system")
+    }
+  }
+
   private let notificationCenter: NotificationCenter
 
   init(inMemory: Bool = false, notificationCenter: NotificationCenter = NotificationCenter.default) {
@@ -46,39 +66,36 @@ class BTSecureStorage: SafePathsSecureStorage {
   }
 
   var userState: UserState {
-    let realm = try! Realm(configuration: realmConfig)
-    return realm.object(ofType: UserState.self, forPrimaryKey: 0) ?? UserState()
+    let realmInstance = realm()
+    return realmInstance.object(ofType: UserState.self, forPrimaryKey: 0) ?? UserState()
   }
 
   var userStateExists: Bool {
-    let realm = try! Realm(configuration: realmConfig)
-    return realm.object(ofType: UserState.self, forPrimaryKey: 0) != nil
+    let realmInstance = realm()
+    return realmInstance.object(ofType: UserState.self, forPrimaryKey: 0) != nil
   }
 
   func setUserValue<Value: Codable>(value: Value, keyPath: String, notificationName: Notification.Name) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      realm.create(UserState.self, value: [keyPath: value], update: .modified)
+    let realmInstance = realm()
+    try! realmInstance.write {
+      realmInstance.create(UserState.self, value: [keyPath: value], update: .modified)
       let jsonString = value.jsonStringRepresentation()
       notificationCenter.post(name: notificationName, object: jsonString)
     }
   }
 
   func resetUserState(_ completion: ((UserState) -> Void)) {
-    guard let realmConfig = getRealmConfig() else {
-      return
-    }
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
+    let realmInstance = realm()
+    try! realmInstance.write {
       let userState = UserState()
-      realm.add(userState, update: .modified)
+      realmInstance.add(userState, update: .modified)
       completion(userState)
     }
   }
 
   func storeExposures(_ exposures: [Exposure]) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
+    let realmInstance = realm()
+    try! realmInstance.write {
       userState.exposures.append(objectsIn: exposures)
       let jsonString = userState.exposures.jsonStringRepresentation()
       notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
@@ -86,34 +103,34 @@ class BTSecureStorage: SafePathsSecureStorage {
   }
 
   func storeSymptomLogEntry(_ entry: SymptomLogEntry) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      realm.add(entry, update: .modified)
+    let realmInstance = realm()
+    try! realmInstance.write {
+      realmInstance.add(entry, update: .modified)
     }
   }
 
   func deleteSymptomLogEntry(_ id: String) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      if let target = realm.objects(SymptomLogEntry.self).filter("id = %@", id).first {
-        realm.delete(target)
+    let realmInstance = realm()
+    try! realmInstance.write {
+      if let target = realmInstance.objects(SymptomLogEntry.self).filter("id = %@", id).first {
+        realmInstance.delete(target)
       }
     }
   }
 
   func deleteSymptomLogsOlderThan(_ days: Int) {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      let staleObjects = realm.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(days))
-      realm.delete(staleObjects)
+    let realmInstance = realm()
+    try! realmInstance.write {
+      let staleObjects = realmInstance.objects(SymptomLogEntry.self).filter("date <= %@", Date.daysAgoInPosix(days))
+      realmInstance.delete(staleObjects)
     }
   }
 
   func deleteSymptomLogEntries() {
-    let realm = try! Realm(configuration: realmConfig)
-    try! realm.write {
-      let allObjects = realm.objects(SymptomLogEntry.self)
-      realm.delete(allObjects)
+    let realmInstance = realm()
+    try! realmInstance.write {
+      let allObjects = realmInstance.objects(SymptomLogEntry.self)
+      realmInstance.delete(allObjects)
     }
   }
 
@@ -151,7 +168,7 @@ class BTSecureStorage: SafePathsSecureStorage {
   var exposureDetectionErrorLocalizedDescription: String
 
   var symptomLogEntries: [SymptomLogEntry] {
-    let realm = try! Realm(configuration: realmConfig)
-    return Array(realm.objects(SymptomLogEntry.self))
+    let realmInstance = realm()
+    return Array(realmInstance.objects(SymptomLogEntry.self))
   }
 }

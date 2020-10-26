@@ -16,19 +16,23 @@ export type NavigationProp = NavigationScreenProp<
 
 export type ActivationStackScreen =
   | "AcceptTermsOfService"
+  | "ActivateBluetooth"
   | "ActivateExposureNotifications"
   | "ActivateLocation"
-  | "NotificationPermissions"
   | "ActivationSummary"
+  | "AnonymizedDataConsent"
+  | "NotificationPermissions"
 
 export const ActivationStackScreens: {
   [key in ActivationStackScreen]: ActivationStackScreen
 } = {
   AcceptTermsOfService: "AcceptTermsOfService",
+  ActivateBluetooth: "ActivateBluetooth",
   ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
-  NotificationPermissions: "NotificationPermissions",
   ActivationSummary: "ActivationSummary",
+  AnonymizedDataConsent: "AnonymizedDataConsent",
+  NotificationPermissions: "NotificationPermissions",
 }
 
 export type HomeStackScreen =
@@ -178,13 +182,17 @@ export const WelcomeStackScreens: {
   Welcome: "Welcome",
 }
 
-export type SympotomHistoryStackScreen = "SymptomHistory" | "SelectSymptoms"
+export type SymptomHistoryStackScreen =
+  | "SymptomHistory"
+  | "SelectSymptoms"
+  | "CallEmergencyServices"
 
 export const SymptomHistoryStackScreens: {
-  [key in SympotomHistoryStackScreen]: SympotomHistoryStackScreen
+  [key in SymptomHistoryStackScreen]: SymptomHistoryStackScreen
 } = {
   SymptomHistory: "SymptomHistory",
   SelectSymptoms: "SelectSymptoms",
+  CallEmergencyServices: "CallEmergencyServices",
 }
 
 export type SelfAssessmentStackScreen =

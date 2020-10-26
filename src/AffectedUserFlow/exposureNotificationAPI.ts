@@ -41,6 +41,7 @@ export type PostKeysSuccess = {
 
 export enum PostKeysNoOpReason {
   NoTokenForExistingKeys = "NoTokenForExistingKeys",
+  EmptyExposureKeys = "EmptyExposureKeys",
 }
 
 export type PostKeysNoOp = {
@@ -73,6 +74,8 @@ class PostDiagnosisKeysRequest {
   private static MAX_RETRIES = 3
   private static RETRY_STATUS_CODES = [429, 503]
   private static INTERNAL_ERROR = "internal_error"
+  private static EMPTY_EXPOSURE_KEYS =
+    "unable to validate diagnosis verification: calculating expect HMAC: cannont calculate hmac on empty exposure keys"
   private static EXISTING_KEYS_SENT_RESPONSE =
     "no revision token, but sent existing keys"
   private static TIMEOUT = 5000
@@ -141,6 +144,14 @@ class PostDiagnosisKeysRequest {
           kind: "no-op" as const,
           reason: PostKeysNoOpReason.NoTokenForExistingKeys,
           newKeysInserted: insertedExposures || 0,
+          message: error,
+        }
+      }
+      case PostDiagnosisKeysRequest.EMPTY_EXPOSURE_KEYS: {
+        return {
+          kind: "no-op" as const,
+          reason: PostKeysNoOpReason.EmptyExposureKeys,
+          newKeysInserted: 0,
           message: error,
         }
       }

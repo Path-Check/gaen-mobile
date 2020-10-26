@@ -22,7 +22,7 @@ import {
 } from "../styles"
 
 const DeleteConfirmation: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary10)
+  useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { resetOnboarding } = useOnboardingContext()
   const { deleteAllEntries } = useSymptomHistoryContext()
 
@@ -44,7 +44,7 @@ const DeleteConfirmation: FunctionComponent = () => {
   }
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary10} />
+      <StatusBar backgroundColor={Colors.secondary.shade10} />
       <View style={style.container}>
         <ScrollView>
           <View style={style.headerContainer}>
@@ -80,10 +80,10 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     height: "100%",
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerContainer: {
-    marginTop: 40,
+    marginTop: Spacing.xSmall,
     width: "100%",
     flexDirection: "row",
     alignItems: "flex-end",
@@ -95,7 +95,7 @@ const style = StyleSheet.create({
     ...Typography.header2,
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.xLarge,
-    color: Colors.primary150,
+    color: Colors.primary.shade150,
   },
   bodyContainer: {
     paddingHorizontal: Spacing.large,
@@ -119,10 +119,10 @@ const style = StyleSheet.create({
   bottomActionsContainer: {
     alignItems: "center",
     borderTopWidth: Outlines.hairline,
-    borderColor: Colors.neutral10,
-    backgroundColor: Colors.secondary10,
+    borderColor: Colors.neutral.shade10,
+    backgroundColor: Colors.secondary.shade10,
     paddingTop: Spacing.small,
-    paddingBottom: Spacing.xxHuge,
+    paddingBottom: Spacing.small,
     paddingHorizontal: Spacing.small,
   },
   buttonContainer: {
@@ -134,7 +134,7 @@ const style = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: Spacing.xLarge,
     borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.danger100,
+    backgroundColor: Colors.accent.danger100,
   },
   buttonText: {
     ...Typography.buttonPrimary,

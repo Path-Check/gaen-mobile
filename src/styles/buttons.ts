@@ -18,6 +18,11 @@ const tiny: ViewStyle = {
   paddingBottom: Spacing.xxxSmall + 1,
 }
 
+const small: ViewStyle = {
+  paddingTop: Spacing.xSmall,
+  paddingBottom: Spacing.xSmall + 1,
+}
+
 export const medium: ViewStyle = {
   paddingTop: Spacing.small,
   paddingBottom: Spacing.small + 1,
@@ -35,20 +40,58 @@ const maxCornerRoundness: ViewStyle = {
 
 // Color
 const tertiaryBlue: ViewStyle = {
-  backgroundColor: Colors.secondary75,
+  backgroundColor: Colors.secondary.shade75,
 }
 
 const transparent: ViewStyle = {
   backgroundColor: "transparent",
 }
 
+const outlined: ViewStyle = {
+  backgroundColor: Colors.transparent.invisible,
+  borderColor: Colors.primary.shade100,
+  borderWidth: Outlines.hairline,
+}
+
 export const primary: ViewStyle = {
   ...base,
   ...large,
+  ...Outlines.lightShadow,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
   minWidth: 180,
   maxWidth: Layout.screenWidth * 0.95,
+  backgroundColor: Colors.primary.shade100,
+}
+
+export const primaryThin: ViewStyle = {
+  ...primary,
+  ...small,
+}
+
+export const primaryOutlined: ViewStyle = {
+  ...primary,
+  ...outlined,
+}
+
+export const primaryThinOutlined: ViewStyle = {
+  ...primary,
+  ...small,
+  ...outlined,
+}
+
+export const primaryDisabled: ViewStyle = {
+  ...primary,
+  backgroundColor: Colors.neutral.shade50,
+  shadowOpacity: 0,
+  elevation: 0,
+}
+
+export const primaryThinDisabled: ViewStyle = {
+  ...primaryThin,
+  backgroundColor: Colors.neutral.shade50,
+  shadowOpacity: 0,
+  elevation: 0,
 }
 
 export const secondary: ViewStyle = {
@@ -69,6 +112,6 @@ export const fixedBottom: ViewStyle = {
   ...base,
   paddingTop: Spacing.medium,
   paddingBottom: Spacing.medium,
-  backgroundColor: Colors.primary100,
+  backgroundColor: Colors.primary.shade100,
   width: "100%",
 }

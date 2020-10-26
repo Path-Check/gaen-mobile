@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, View, StyleSheet } from "react-native"
+import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { Text, Button, StatusBar } from "../../components"
+import { Text, StatusBar } from "../../components"
 import { useStatusBarEffect } from "../../navigation"
-import { Spacing, Colors, Typography } from "../../styles"
 import { openAppSettings } from "../../gaen/nativeModule"
 
+import { Spacing, Colors, Typography, Buttons } from "../../styles"
+
 const EnableExposureNotifications: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
 
   const handleOnPressOpenSettings = () => {
@@ -17,7 +18,7 @@ const EnableExposureNotifications: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.primaryLightBackground} />
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
       <ScrollView
         contentContainerStyle={style.contentContainer}
         testID={"affected-user-enable-exposure-notifications-screen"}
@@ -31,12 +32,13 @@ const EnableExposureNotifications: FunctionComponent = () => {
             {t("export.enable_exposure_notifications_body")}
           </Text>
         </View>
-        <View style={style.buttonContainer}>
-          <Button
-            onPress={handleOnPressOpenSettings}
-            label={t("common.settings")}
-          />
-        </View>
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressOpenSettings}
+          accessibilityLabel={t("common.settings")}
+        >
+          <Text style={style.buttonText}>{t("common.settings")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   )
@@ -48,7 +50,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
     paddingBottom: Spacing.massive,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerContainer: {
     marginBottom: Spacing.huge,
@@ -60,8 +62,11 @@ const style = StyleSheet.create({
   subheader: {
     ...Typography.body2,
   },
-  buttonContainer: {
-    alignSelf: "flex-start",
+  button: {
+    ...Buttons.primary,
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
   },
 })
 

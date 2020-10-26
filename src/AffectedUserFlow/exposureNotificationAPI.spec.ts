@@ -112,6 +112,37 @@ describe("postDiagnosisKeys", () => {
         message,
       })
     })
+
+    it("returns a no-op EmptyExposureKeys response if the error corresponds", async () => {
+      const newKeysInserted = 0
+      const message =
+        "unable to validate diagnosis verification: calculating expect HMAC: cannont calculate hmac on empty exposure keys"
+      const jsonResponse = {
+        error: message,
+        insertedExposures: newKeysInserted,
+      }
+
+      ;(fetchWithTimeout as jest.Mock).mockResolvedValueOnce({
+        ok: false,
+        json: jest.fn().mockResolvedValueOnce(jsonResponse),
+      })
+
+      const result = await postDiagnosisKeys(
+        [],
+        [],
+        "certificate",
+        "hmacKey",
+        "appPackageName",
+        "revisionToken",
+      )
+
+      expect(result).toEqual({
+        kind: "no-op",
+        reason: PostKeysNoOpReason.EmptyExposureKeys,
+        newKeysInserted,
+        message,
+      })
+    })
   })
 
   describe("on a retry response", () => {

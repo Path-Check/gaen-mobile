@@ -27,7 +27,6 @@
   },
   "export": {
     "code_input_body_bluetooth": "確認コードを入力してください",
-    "code_input_button_back": "戻る",
     "code_input_button_cancel": "キャンセル",
     "code_input_title_bluetooth": "診断を確認する",
     "complete_body_bluetooth": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
@@ -56,7 +55,7 @@
       },
       "no_op": {
         "no_token_for_existing_keys": "既存のデータがサーバーに送信されました。これは通常、このプロセスが以前にこのデバイスから試みられたが、別のアプリケーションで試みられたことを意味します。これを、使用された検証コードを提供した機関に伝えることができます。{{newKeysInserted}} 新しいキーが追加されました。",
-        "title": "既存のキーを送信しようとしています"
+        "no_token_for_existing_keys_title": "既存のキーを送信しようとしています"
       }
     },
     "start_header_bluetooth": "ウイルスの蔓延を封じ込め、コミュニティ内の他のユーザーを保護する活動にご協力ください"
@@ -183,7 +182,6 @@
     "proximity_tracing_subheader1": "それはどのように機能しますか？",
     "proximity_tracing_subheader2": "データは安全ですか？",
     "proximity_tracing_subheader3": "このアプリはCOVID-19感染からあなたを守るものではありません。",
-    "screen_5_button": "始めましょう",
     "screen1_button": "それはどのように機能しますか？",
     "screen1_header": "一緒に、私たちはCOVID-19の感染をスピードを遅らせることができます。",
     "screen1_image_label": "ハイタッチしている二人",
@@ -196,17 +194,12 @@
     "screen4_button": "病気になった場合はどうなりますか？",
     "screen4_header": "アプリは、COVID-19に接触した可能性がある場合に通知します。",
     "screen4_image_label": "スマートフォンで通知を受け取る人",
-    "screen5_header": "このアプリを使用することで、COVID-19の拡散を遅らせ、他の人を保護し、医療専門家からの直接支援を受けることができます。",
-    "screen5_image_label": "健康の専門家とバーチャルで話している人",
-    "step": "ステップ {{currentStep}} の {{totalSteps}}",
     "terms_header_title": "利用規約",
     "welcome_image_label": "ネットワーク内のノードのように接続されたマスクを使用した人物のイラスト。"
   },
   "screen_titles": {
     "bluetooth": "ブルートゥース",
-    "debug": "デバッグ",
     "exposure_history": "接触履歴",
-    "exposures": "接触",
     "home": "ホーム",
     "legal": "リーガル",
     "location": "ロケーション",

@@ -11,14 +11,21 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
-import { Text, Button } from "../components"
+import { Text } from "../components"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Iconography, Colors, Spacing, Outlines, Typography } from "../styles"
+import {
+  Buttons,
+  Iconography,
+  Colors,
+  Spacing,
+  Outlines,
+  Typography,
+} from "../styles"
 
 const AcceptTermsOfService: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.primaryLightBackground)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const configuration = useConfigurationContext()
   const [boxChecked, toggleCheckbox] = useState(false)
   const { t } = useTranslation()
@@ -67,7 +74,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
         >
           <SvgXml
             xml={checkboxIcon}
-            fill={Colors.primary100}
+            fill={Colors.primary.shade100}
             width={Iconography.small}
             height={Iconography.small}
           />
@@ -75,11 +82,18 @@ const AcceptTermsOfService: FunctionComponent = () => {
             {t("onboarding.eula_agree_terms_of_use")}
           </Text>
         </TouchableOpacity>
-        <Button
+        <TouchableOpacity
           onPress={handleOnPressNext}
           disabled={!boxChecked}
-          label={t("common.continue")}
-        />
+          style={boxChecked ? style.button : style.buttonDisabled}
+          accessibilityLabel={t("common.continue")}
+        >
+          <Text
+            style={boxChecked ? style.buttonText : style.buttonDisabledText}
+          >
+            {t("common.continue")}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   )
@@ -112,7 +126,7 @@ const DocumentLink: FunctionComponent<DocumentLinkProps> = ({
       </View>
       <SvgXml
         xml={Icons.Arrow}
-        fill={Colors.primary100}
+        fill={Colors.primary.shade100}
         style={style.linkArrow}
       />
     </TouchableOpacity>
@@ -141,7 +155,7 @@ const style = StyleSheet.create({
     padding: Spacing.small,
     marginVertical: Spacing.large,
     borderRadius: Outlines.baseBorderRadius,
-    backgroundColor: Colors.primaryLightBackground,
+    backgroundColor: Colors.background.primaryLight,
   },
   linkTextContainer: {
     flexDirection: "row",
@@ -170,10 +184,24 @@ const style = StyleSheet.create({
   },
   checkboxText: {
     ...Typography.body1,
-    color: Colors.primaryText,
+    color: Colors.text.primary,
     flex: 1,
     paddingLeft: Spacing.medium,
     fontSize: Typography.large,
+  },
+  button: {
+    ...Buttons.primary,
+    alignSelf: "center",
+  },
+  buttonText: {
+    ...Typography.buttonPrimary,
+  },
+  buttonDisabled: {
+    ...Buttons.primaryDisabled,
+    alignSelf: "center",
+  },
+  buttonDisabledText: {
+    ...Typography.buttonPrimaryDisabled,
   },
 })
 
