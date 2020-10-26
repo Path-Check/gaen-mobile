@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -50,7 +51,24 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    navigation.navigate(Stacks.HowItWorks)
+    showVerifyAgeAlert()
+  }
+
+  const showVerifyAgeAlert = () => {
+    Alert.alert(
+      t("onboarding.may_only_be_used"),
+      t("onboarding.are_you_over_18", { applicationName }),
+      [
+        {
+          text: t("common.no"),
+          style: "cancel",
+        },
+        {
+          text: t("common.yes"),
+          onPress: () => navigation.navigate(Stacks.HowItWorks),
+        },
+      ],
+    )
   }
 
   return (
