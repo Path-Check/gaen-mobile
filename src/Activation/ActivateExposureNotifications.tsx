@@ -10,17 +10,20 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
+import { useAnalyticsContext } from "../AnalyticsContext"
 import { Text } from "../components"
 import { useSystemServicesContext } from "../SystemServicesContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
+import { event } from "../analytics"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
   const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
+  const { trackEvent } = useAnalyticsContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const { exposureNotifications } = usePermissionsContext()
@@ -36,6 +39,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressActivateExposureNotifications = async () => {
     await exposureNotifications.request()
+    trackEvent(event.enEnabled)
     navigateToNextScreen()
   }
 

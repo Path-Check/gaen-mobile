@@ -11,9 +11,11 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
+import { useAnalyticsContext } from "../AnalyticsContext"
 import { openAppSettings } from "../gaen/nativeModule"
 import ActivationStatusView from "./ActivationStatusView"
 import { Text } from "../components"
+import { event } from "../analytics"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -23,6 +25,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
   const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const { trackEvent } = useAnalyticsContext()
   const { exposureNotifications } = usePermissionsContext()
   const { applicationName } = useApplicationName()
 
@@ -103,6 +106,8 @@ const ExposureDetectionStatus: FunctionComponent = () => {
 
         if (status !== ENPermissionStatus.ENABLED) {
           showNotAuthorizedAlert()
+        } else {
+          trackEvent(event.enEnabled)
         }
       } catch {
         showNotAuthorizedAlert()

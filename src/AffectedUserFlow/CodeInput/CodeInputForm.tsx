@@ -19,6 +19,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
+import { useAnalyticsContext } from "../../AnalyticsContext"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -27,6 +28,7 @@ import Logger from "../../logger"
 
 import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
 import { Icons } from "../../assets"
+import { event } from "../../analytics"
 
 const defaultErrorMessage = ""
 
@@ -35,6 +37,7 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
+  const { trackEvent } = useAnalyticsContext()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
@@ -68,6 +71,7 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
+    trackEvent(event.codeSubmitted)
     try {
       const response = await API.postCode(code)
 

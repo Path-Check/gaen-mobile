@@ -9,6 +9,7 @@ import Matomo from "react-native-matomo-sdk"
 import { StorageUtils } from "./utils"
 import { actions } from "./analytics"
 import { useConfigurationContext } from "./ConfigurationContext"
+import { Event } from "./analytics/events"
 
 export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
@@ -16,7 +17,7 @@ export type AnalyticsContextState = {
 } & AnalyticsConfiguration
 
 type AnalyticsConfiguration = {
-  trackEvent: (event: string) => Promise<string | boolean>
+  trackEvent: (event: Event) => Promise<string | boolean>
   trackScreenView: (screen: string) => Promise<void>
 }
 
@@ -67,7 +68,8 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
         )
       }
     }
-    const trackEvent = async (event: string) => {
+
+    const trackEvent = async (event: Event) => {
       return actions.trackEvent(event)
     }
 

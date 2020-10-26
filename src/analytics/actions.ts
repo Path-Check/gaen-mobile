@@ -1,5 +1,8 @@
 import Matomo from "react-native-matomo-sdk"
-export const trackEvent = (event: string): Promise<string> => {
+
+import { Event } from "./events"
+
+export const trackEvent = (event: Event): Promise<Event> => {
   return Promise.resolve(event)
 }
 

@@ -13,11 +13,13 @@ import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
 import { Text, LoadingIndicator } from "../../components"
+import { event } from "../../analytics"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
 } from "../../navigation"
+import { useAnalyticsContext } from "../../AnalyticsContext"
 import { Icons } from "../../assets"
 import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
 import Logger from "../../logger"
@@ -51,6 +53,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const { trackEvent } = useAnalyticsContext()
   const [isLoading, setIsLoading] = useState(false)
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
@@ -147,6 +150,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     setIsLoading(false)
     if (response.kind === "success") {
       storeRevisionToken(response.revisionToken)
+      trackEvent(event.testResultShared)
       navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
       handleNoOpResponse(response)
