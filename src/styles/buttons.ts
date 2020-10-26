@@ -108,6 +108,17 @@ export const tinyRounded: ViewStyle = {
   ...tertiaryBlue,
 }
 
+export const card: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  alignSelf: "flex-start",
+  paddingVertical: Spacing.xxSmall,
+  paddingHorizontal: Spacing.medium,
+  borderRadius: Outlines.borderRadiusMax,
+  backgroundColor: Colors.neutral.shade10,
+}
+
 export const fixedBottom: ViewStyle = {
   ...base,
   paddingTop: Spacing.medium,
