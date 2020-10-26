@@ -8,7 +8,7 @@ import { Text } from "../components"
 import { Spacing, Typography, Colors } from "../styles"
 
 const MoreInfo: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.header.background)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
 
   return (
@@ -40,7 +40,7 @@ const MoreInfo: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: Colors.secondary.shade10,
+    backgroundColor: Colors.background.primaryLight,
     padding: Spacing.medium,
   },
   contentContainer: {

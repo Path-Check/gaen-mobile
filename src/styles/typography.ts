@@ -203,6 +203,10 @@ export const buttonFixedBottom: TextStyle = {
   ...buttonPrimary,
 }
 
+export const buttonFixedBottomDisabled: TextStyle = {
+  ...buttonPrimaryDisabled,
+}
+
 export const buttonSecondary: TextStyle = {
   ...body1,
   ...semiBold,

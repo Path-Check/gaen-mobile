@@ -44,7 +44,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   const { t } = useTranslation()
 
   const activeContent: Content = {
-    backgroundColor: Colors.accent.success10,
+    backgroundColor: Colors.accent.success25,
     borderColor: Colors.accent.success100,
     bodyText: t("common.on"),
     statusIcon: Icons.CheckInCircle,
@@ -55,7 +55,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   }
 
   const inactiveContent: Content = {
-    backgroundColor: Colors.accent.danger10,
+    backgroundColor: Colors.accent.danger25,
     borderColor: Colors.accent.danger100,
     bodyText: t("common.off"),
     statusIcon: Icons.XInCircle,

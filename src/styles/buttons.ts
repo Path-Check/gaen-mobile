@@ -59,7 +59,7 @@ export const primary: ViewStyle = {
   ...Outlines.lightShadow,
   borderRadius: Outlines.borderRadiusMax,
   paddingHorizontal: Spacing.xHuge,
-  minWidth: 180,
+  width: "100%",
   maxWidth: Layout.screenWidth * 0.95,
   backgroundColor: Colors.primary.shade100,
 }
@@ -121,8 +121,22 @@ export const card: ViewStyle = {
 
 export const fixedBottom: ViewStyle = {
   ...base,
-  paddingTop: Spacing.medium,
-  paddingBottom: Spacing.medium,
+  paddingVertical: Spacing.medium,
   backgroundColor: Colors.primary.shade100,
   width: "100%",
+}
+
+export const fixedBottomDisabled: ViewStyle = {
+  ...fixedBottom,
+  backgroundColor: Colors.neutral.shade50,
+}
+
+export const fixedBottomThin: ViewStyle = {
+  ...fixedBottom,
+  paddingVertical: Spacing.small,
+}
+
+export const fixedBottomThinDisabled: ViewStyle = {
+  ...fixedBottomThin,
+  backgroundColor: Colors.neutral.shade50,
 }

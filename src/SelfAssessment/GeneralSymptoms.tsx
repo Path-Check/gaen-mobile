@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { SelfAssessmentStackScreens } from "../navigation"
 import { useSelfAssessmentContext } from "../SelfAssessmentContext"
@@ -34,6 +35,9 @@ const GeneralSymptoms: FunctionComponent = () => {
     otherSymptoms,
     updateSymptoms,
   } = useSelfAssessmentContext()
+
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const symptomToString = (
     symptom: PrimarySymptom | SecondarySymptom | OtherSymptom,
@@ -136,34 +140,35 @@ const GeneralSymptoms: FunctionComponent = () => {
   )
 }
 
-const style = StyleSheet.create({
-  headerText: {
-    ...Typography.header1,
-    marginBottom: Spacing.medium,
-  },
-  subheaderText: {
-    ...Typography.header4,
-    ...Typography.base,
-    marginBottom: Spacing.huge,
-  },
-  button: {
-    ...Buttons.primaryThin,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonDisabled: {
-    ...Buttons.primaryThinDisabled,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonText: {
-    ...Typography.buttonPrimary,
-    marginRight: Spacing.small,
-  },
-  buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
-    marginRight: Spacing.small,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    headerText: {
+      ...Typography.header1,
+      marginBottom: Spacing.medium,
+    },
+    subheaderText: {
+      ...Typography.header4,
+      ...Typography.base,
+      marginBottom: Spacing.huge,
+    },
+    button: {
+      ...Buttons.fixedBottomThin,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonDisabled: {
+      ...Buttons.fixedBottomThinDisabled,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonText: {
+      ...Typography.buttonFixedBottom,
+      marginRight: Spacing.small,
+    },
+    buttonDisabledText: {
+      ...Typography.buttonFixedBottomDisabled,
+      marginRight: Spacing.small,
+    },
+  })
+}
 
 export default GeneralSymptoms
