@@ -146,6 +146,8 @@ const createStyle = (insets: EdgeInsets) => {
     bottomButtonText: {
       ...Typography.header5,
       color: Colors.primary.shade100,
+      paddingHorizontal: Spacing.large,
+      textAlign: "center",
     },
   })
 }
