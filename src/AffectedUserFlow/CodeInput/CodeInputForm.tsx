@@ -127,6 +127,9 @@ const CodeInputForm: FunctionComponent = () => {
       case "NetworkConnection": {
         return t("export.error.network_connection_error")
       }
+      case "Timeout": {
+        return t("export.error.timeout_error")
+      }
       default: {
         return t("export.error.unknown_code_verification_error")
       }
