@@ -51,16 +51,16 @@ const App: FunctionComponent = () => {
             >
               <PermissionsProvider>
                 <SystemServicesProvider>
-                  <ExposureProvider>
-                    <AnalyticsProvider>
+                  <AnalyticsProvider>
+                    <ExposureProvider>
                       <SymptomHistoryProvider>
                         <CovidDataContextProvider>
                           <MainNavigator />
                           <FlashMessage />
                         </CovidDataContextProvider>
                       </SymptomHistoryProvider>
-                    </AnalyticsProvider>
-                  </ExposureProvider>
+                    </ExposureProvider>
+                  </AnalyticsProvider>
                 </SystemServicesProvider>
               </PermissionsProvider>
             </OnboardingProvider>
