@@ -19,7 +19,7 @@ import { useStatusBarEffect } from "../navigation"
 import { Colors, Spacing, Typography } from "../styles"
 
 const Legal: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.header.background)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const {
     t,
     i18n: { language: localeCode },

@@ -1,20 +1,24 @@
 import React, { FunctionComponent } from "react"
+import {
+  TouchableOpacity,
+  StatusBar,
+  StyleSheet,
+  View,
+  ScrollView,
+} from "react-native"
 import { useTranslation } from "react-i18next"
-import { StatusBar, StyleSheet, View, ScrollView } from "react-native"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
-
 import { Text } from "../components"
-import { TouchableOpacity } from "react-native"
 import { useStatusBarEffect } from "../navigation"
 import { SUCCESS_RESPONSE } from "../OperationResponse"
 
 import { Spacing, Buttons, Typography, Colors, Affordances } from "../styles"
 
 const DeleteConfirmation: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary.shade10)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { resetOnboarding } = useOnboardingContext()
   const { deleteAllEntries } = useSymptomHistoryContext()
 
@@ -77,6 +81,7 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header2,
+    ...Typography.semiBold,
     marginBottom: Spacing.medium,
   },
   bodyText: {
