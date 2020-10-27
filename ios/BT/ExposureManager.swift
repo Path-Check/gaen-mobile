@@ -514,6 +514,25 @@ extension ExposureManager {
     }
   }
 
+  ///Notifies the user that an exposure has been detected
+  func notifyUserExposureDetected() {
+    let content = UNMutableNotificationContent()
+    content.title = String.newExposureNotificationTitle.localized
+    content.body = String.newExposureNotificationBody.localized
+    content.sound = .default
+    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
+    let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
+                                        content: content,
+                                        trigger: nil)
+    userNotificationCenter.add(request) { error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print("Error showing error user notification: \(error)")
+        }
+      }
+    }
+  }
+
 }
 
 // MARK: - Private
@@ -672,22 +691,4 @@ extension ExposureManager {
     }
   }
 
-  ///Notifies the user that an exposure has been detected
-  func notifyUserExposureDetected() {
-    let content = UNMutableNotificationContent()
-    content.title = String.newExposureNotificationTitle.localized
-    content.body = String.newExposureNotificationBody.localized
-    content.sound = .default
-    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
-    let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
-                                        content: content,
-                                        trigger: nil)
-    userNotificationCenter.add(request) { error in
-      DispatchQueue.main.async {
-        if let error = error {
-          print("Error showing error user notification: \(error)")
-        }
-      }
-    }
-  }
 }
