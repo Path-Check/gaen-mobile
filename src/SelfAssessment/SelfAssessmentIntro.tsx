@@ -113,9 +113,7 @@ const style = StyleSheet.create({
     ...Typography.mediumBold,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
-    width: "100%",
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,

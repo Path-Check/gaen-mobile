@@ -74,16 +74,16 @@ const ExposureActions: FunctionComponent = () => {
         </View>
         {displaySelfAssessment && (
           <TouchableOpacity
-            style={style.button}
+            style={style.buttonOutlined}
             onPress={handleOnPressPersonalizeMyGuidance}
             accessibilityLabel={t(
               "exposure_history.exposure_detail.personalize_my_guidance",
             )}
           >
-            <Text style={style.buttonText}>
+            <Text style={style.buttonOutlinedText}>
               {t("exposure_history.exposure_detail.personalize_my_guidance")}
             </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
           </TouchableOpacity>
         )}
         {displayNextStepsLink && (
@@ -207,12 +207,19 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   button: {
-    ...Buttons.primaryThin,
-    width: "100%",
+    ...Buttons.thin.base,
     marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.buttonPrimary,
+    marginRight: Spacing.small,
+  },
+  buttonOutlined: {
+    ...Buttons.outlined.thin,
+    marginBottom: Spacing.small,
+  },
+  buttonOutlinedText: {
+    ...Typography.buttonSecondary,
     marginRight: Spacing.small,
   },
 })

@@ -111,7 +111,7 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.huge,
     },
     button: {
-      ...Buttons.fixedBottomThin,
+      ...Buttons.fixedBottomThin.base,
       paddingBottom: insets.bottom + Spacing.small,
     },
     buttonText: {

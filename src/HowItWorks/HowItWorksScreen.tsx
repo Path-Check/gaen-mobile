@@ -132,9 +132,7 @@ const createStyle = (insets: EdgeInsets) => {
       paddingHorizontal: Spacing.large,
     },
     button: {
-      ...Buttons.primaryThin,
-      width: "100%",
-      alignSelf: "center",
+      ...Buttons.thin.base,
       marginBottom: Spacing.small,
     },
     buttonText: {

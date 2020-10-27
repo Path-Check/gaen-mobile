@@ -190,15 +190,13 @@ const style = StyleSheet.create({
     fontSize: Typography.large,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
-    alignSelf: "center",
+    ...Buttons.primary.disabled,
   },
   buttonDisabledText: {
     ...Typography.buttonPrimaryDisabled,

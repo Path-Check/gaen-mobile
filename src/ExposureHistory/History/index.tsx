@@ -16,7 +16,14 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors, Affordances } from "../../styles"
+import {
+  Buttons,
+  Spacing,
+  Typography,
+  Colors,
+  Affordances,
+  Outlines,
+} from "../../styles"
 
 type Posix = number
 
@@ -134,9 +141,12 @@ const style = StyleSheet.create({
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
-    ...Buttons.tinyRounded,
     height: Spacing.xxLarge,
     width: Spacing.xxLarge,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: Outlines.borderRadiusMax,
+    backgroundColor: Colors.secondary.shade50,
   },
   moreInfoButtonIcon: {
     minHeight: Spacing.xSmall,
@@ -151,7 +161,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   button: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
   },
   buttonText: {
     ...Typography.buttonFixedBottom,

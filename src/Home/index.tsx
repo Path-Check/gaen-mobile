@@ -341,7 +341,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   sectionButton: {
-    ...Buttons.card,
+    ...Buttons.card.base,
   },
   sectionButtonText: {
     ...Typography.buttonCard,
@@ -353,13 +353,8 @@ const style = StyleSheet.create({
     paddingTop: Spacing.large,
   },
   emergencyButtonContainer: {
-    ...Buttons.primary,
-    ...Buttons.medium,
+    ...Buttons.thin.base,
     borderRadius: Outlines.borderRadiusLarge,
-    width: "100%",
-    flexDirection: "row",
-    alignSelf: "center",
-    paddingHorizontal: Spacing.xLarge,
     backgroundColor: Colors.accent.danger100,
   },
   emergencyButtonText: {

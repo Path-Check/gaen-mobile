@@ -219,10 +219,10 @@ const style = StyleSheet.create({
     ...Forms.textInput,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
+    ...Buttons.primary.disabled,
   },
   buttonText: {
     ...Typography.buttonPrimary,

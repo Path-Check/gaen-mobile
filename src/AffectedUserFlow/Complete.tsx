@@ -72,8 +72,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxxLarge,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,

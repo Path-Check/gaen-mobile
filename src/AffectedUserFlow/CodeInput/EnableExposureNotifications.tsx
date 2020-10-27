@@ -63,7 +63,7 @@ const style = StyleSheet.create({
     ...Typography.body2,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,

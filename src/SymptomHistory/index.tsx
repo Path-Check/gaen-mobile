@@ -94,7 +94,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   shareButton: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
   },
   shareButtonText: {
     ...Typography.buttonFixedBottom,

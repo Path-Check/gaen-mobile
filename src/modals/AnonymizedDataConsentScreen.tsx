@@ -131,13 +131,13 @@ const style = StyleSheet.create({
     marginRight: Spacing.xxxSmall,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,
   },
   secondaryButton: {
-    ...Buttons.secondary,
+    ...Buttons.secondary.base,
   },
   secondaryButtonText: {
     ...Typography.buttonSecondary,

@@ -148,11 +148,11 @@ const createStyle = (insets: EdgeInsets) => {
       ...Forms.radioOrCheckboxText,
     },
     button: {
-      ...Buttons.fixedBottomThin,
+      ...Buttons.fixedBottomThin.base,
       paddingBottom: insets.bottom + Spacing.small,
     },
     buttonDisabled: {
-      ...Buttons.fixedBottomThinDisabled,
+      ...Buttons.fixedBottomThin.disabled,
       paddingBottom: insets.bottom + Spacing.small,
     },
     buttonText: {

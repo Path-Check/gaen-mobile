@@ -144,8 +144,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
     ...Typography.buttonPrimary,
