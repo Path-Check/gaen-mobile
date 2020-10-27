@@ -154,16 +154,14 @@ const style = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
     marginBottom: Spacing.xxSmall,
-    width: "100%",
   },
   buttonText: {
     ...Typography.buttonPrimary,
   },
   secondaryButton: {
-    ...Buttons.secondary,
-    alignSelf: "center",
+    ...Buttons.secondary.base,
   },
   secondaryButtonText: {
     ...Typography.buttonSecondary,

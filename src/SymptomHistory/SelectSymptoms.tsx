@@ -174,7 +174,7 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral.shade50,
   },
   button: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
   },
   buttonText: {
     ...Typography.buttonFixedBottom,

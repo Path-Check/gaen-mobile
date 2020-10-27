@@ -10,7 +10,6 @@ const base: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
   width: "100%",
-  maxWidth: Layout.screenWidth * 0.95,
 }
 
 type Primary = "base" | "disabled"
@@ -20,6 +19,7 @@ const primaryBase: ViewStyle = {
   paddingVertical: Spacing.large,
   borderRadius: Outlines.borderRadiusMax,
   backgroundColor: Colors.primary.shade100,
+  maxWidth: Layout.screenWidth * 0.95,
 }
 const primaryDisabled: ViewStyle = {
   ...primaryBase,

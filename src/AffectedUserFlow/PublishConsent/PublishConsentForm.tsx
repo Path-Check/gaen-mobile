@@ -239,7 +239,7 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.xxLarge,
     },
     button: {
-      ...Buttons.primary,
+      ...Buttons.primary.base,
     },
     buttonText: {
       ...Typography.buttonPrimary,

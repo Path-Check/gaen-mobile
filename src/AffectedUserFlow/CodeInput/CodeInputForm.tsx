@@ -256,10 +256,10 @@ const style = StyleSheet.create({
     borderColor: Colors.primary.shade125,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
+    ...Buttons.primary.disabled,
   },
   buttonText: {
     ...Typography.buttonPrimary,

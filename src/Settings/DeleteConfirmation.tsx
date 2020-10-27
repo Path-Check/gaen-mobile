@@ -93,7 +93,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   buttonContainer: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
     backgroundColor: Colors.accent.danger100,
   },
   buttonText: {

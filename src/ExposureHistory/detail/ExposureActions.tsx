@@ -207,8 +207,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   button: {
-    ...Buttons.primaryThin,
-    width: "100%",
+    ...Buttons.thin.base,
     marginBottom: Spacing.small,
   },
   buttonText: {
