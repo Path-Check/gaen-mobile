@@ -8,6 +8,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { Text } from "../components"
 import { Colors, Forms, Iconography } from "../styles"
@@ -16,14 +17,17 @@ import { useSelfAssessmentContext } from "../SelfAssessmentContext"
 import { AgeRange } from "./selfAssessment"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
-import { Typography, Spacing, Buttons } from "../styles"
 import { Icons } from "../assets"
+import { Typography, Spacing, Buttons } from "../styles"
 
 const AgeRangeQuestion: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { EIGHTEEN_TO_SIXTY_FOUR, SIXTY_FIVE_AND_OVER } = AgeRange
   const { ageRange, updateAgeRange } = useSelfAssessmentContext()
+
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const ageRangeToString = (range: AgeRange) => {
     switch (range) {
@@ -94,6 +98,9 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
 }) => {
   const [pressing, setPressing] = useState<boolean>(false)
 
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
+
   const radioIcon = isSelected ? Icons.RadioSelected : Icons.RadioUnselected
   const radioColor = isSelected
     ? Colors.primary.shade100
@@ -127,38 +134,39 @@ const RadioButton: FunctionComponent<RadioButtonProps> = ({
   )
 }
 
-const style = StyleSheet.create({
-  headerText: {
-    ...Typography.header1,
-    marginBottom: Spacing.medium,
-  },
-  radioContainer: {
-    ...Forms.radioOrCheckboxContainer,
-  },
-  radioText: {
-    ...Forms.radioOrCheckboxText,
-  },
-  button: {
-    ...Buttons.primaryThin,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonDisabled: {
-    ...Buttons.primaryThinDisabled,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonText: {
-    ...Typography.buttonPrimary,
-    marginRight: Spacing.small,
-  },
-  buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
-    marginRight: Spacing.small,
-  },
-  pressing: {
-    opacity: 0.5,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    headerText: {
+      ...Typography.header1,
+      marginBottom: Spacing.medium,
+    },
+    radioContainer: {
+      ...Forms.radioOrCheckboxContainer,
+    },
+    radioText: {
+      ...Forms.radioOrCheckboxText,
+    },
+    button: {
+      ...Buttons.fixedBottomThin,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonDisabled: {
+      ...Buttons.fixedBottomThinDisabled,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonText: {
+      ...Typography.buttonFixedBottom,
+      marginRight: Spacing.small,
+    },
+    buttonDisabledText: {
+      ...Typography.buttonFixedBottomDisabled,
+      marginRight: Spacing.small,
+    },
+    pressing: {
+      opacity: 0.5,
+    },
+  })
+}
 
 export default AgeRangeQuestion

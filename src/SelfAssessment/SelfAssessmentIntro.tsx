@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
@@ -8,8 +14,8 @@ import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
 
-import { Icons } from "../assets"
-import { Buttons, Colors, Spacing, Typography } from "../styles"
+import { Icons, Images } from "../assets"
+import { Buttons, Colors, Outlines, Spacing, Typography } from "../styles"
 
 const SelfAssessmentIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -30,6 +36,7 @@ const SelfAssessmentIntro: FunctionComponent = () => {
       contentContainerStyle={style.contentContainer}
       alwaysBounceVertical={false}
     >
+      <Image source={Images.SelfAssessment} style={style.image} />
       <Text style={style.headerText}>
         {t("self_assessment.intro.covid19_self_assessment")}
       </Text>
@@ -75,6 +82,12 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
     paddingVertical: Spacing.large,
   },
+  image: {
+    resizeMode: "contain",
+    width: Spacing.xxxMassive,
+    height: Spacing.xxxMassive,
+    marginBottom: Spacing.large,
+  },
   headerText: {
     ...Typography.header1,
     ...Typography.bold,
@@ -83,10 +96,13 @@ const style = StyleSheet.create({
   subheaderText: {
     ...Typography.body1,
     color: Colors.text.primary,
-    marginBottom: Spacing.xxxHuge,
+    marginBottom: Spacing.large,
   },
   bulletListContainer: {
-    marginBottom: Spacing.large,
+    paddingTop: Spacing.large,
+    marginBottom: Spacing.small,
+    borderTopColor: Colors.neutral.shade10,
+    borderTopWidth: Outlines.hairline,
   },
   bulletText: {
     ...Typography.body2,

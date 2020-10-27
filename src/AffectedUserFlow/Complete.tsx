@@ -67,7 +67,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   contentText: {
-    ...Typography.body2,
+    ...Typography.body1,
     textAlign: "center",
     marginBottom: Spacing.xxxLarge,
   },

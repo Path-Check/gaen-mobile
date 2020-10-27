@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
@@ -24,6 +25,9 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
     emergencySymptoms,
     updateSymptoms,
   } = useSelfAssessmentContext()
+
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const {
     CHEST_PAIN,
@@ -94,25 +98,27 @@ const EmergencySymptomsQuestions: FunctionComponent = () => {
   )
 }
 
-const style = StyleSheet.create({
-  headerText: {
-    ...Typography.header1,
-    marginBottom: Spacing.medium,
-  },
-  subheaderText: {
-    ...Typography.header4,
-    ...Typography.base,
-    marginBottom: Spacing.huge,
-  },
-  button: {
-    ...Buttons.primaryThin,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonText: {
-    ...Typography.buttonPrimary,
-    marginRight: Spacing.small,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    headerText: {
+      ...Typography.header1,
+      marginBottom: Spacing.medium,
+    },
+    subheaderText: {
+      ...Typography.header4,
+      ...Typography.base,
+      marginBottom: Spacing.huge,
+    },
+    button: {
+      ...Buttons.fixedBottomThin,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonText: {
+      ...Typography.buttonFixedBottom,
+      marginRight: Spacing.small,
+    },
+  })
+}
 
 export default EmergencySymptomsQuestions

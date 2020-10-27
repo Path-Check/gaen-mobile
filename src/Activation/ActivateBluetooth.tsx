@@ -80,22 +80,20 @@ const ActivateBluetooth: FunctionComponent = () => {
           </Text>
           <Text style={style.body}>{t("onboarding.bluetooth_body")}</Text>
         </View>
-        <View style={style.buttonsContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressChangeBluetoothStatus}
-            style={style.button}
-          >
-            <Text style={style.buttonText}>{t("common.settings")}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleOnPressMaybeLater}
-            style={style.secondaryButton}
-          >
-            <Text style={style.secondaryButtonText}>
-              {t("common.maybe_later")}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={handleOnPressChangeBluetoothStatus}
+          style={style.button}
+        >
+          <Text style={style.buttonText}>{t("common.settings")}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleOnPressMaybeLater}
+          style={style.secondaryButton}
+        >
+          <Text style={style.secondaryButtonText}>
+            {t("common.maybe_later")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -127,9 +125,6 @@ const style = StyleSheet.create({
   body: {
     ...Typography.body1,
     marginBottom: Spacing.xxLarge,
-  },
-  buttonsContainer: {
-    alignSelf: "flex-start",
   },
   button: {
     ...Buttons.primary,
