@@ -25,7 +25,7 @@ export interface Configuration {
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthoritySupportsAnalytics: boolean
   measurementSystem: MeasurementSystem
-  minimumAge: number
+  minimumAge: string
   regionCodes: string[]
   stateAbbreviation: string | null
 }
@@ -51,7 +51,7 @@ const initialState: Configuration = {
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthoritySupportsAnalytics: false,
   measurementSystem: "Imperial" as const,
-  minimumAge: 18,
+  minimumAge: "18",
   regionCodes: [],
   stateAbbreviation: "",
 }
@@ -81,7 +81,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
 
-  const minimumAge = parseInt(env.MINIMUM_AGE)
+  const minimumAge = env.MINIMUM_AGE
 
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null

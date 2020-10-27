@@ -14,6 +14,7 @@ import { SvgXml } from "react-native-svg"
 import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
+import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {
   loadAuthorityCopy,
@@ -39,6 +40,7 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
+  const { displayAgeVerification, minimumAge } = useConfigurationContext()
 
   const welcomeMessage = authorityCopyTranslation(
     loadAuthorityCopy("welcome_message"),
@@ -50,14 +52,22 @@ const Welcome: FunctionComponent = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
+  const navigateToNextScreen = () => {
+    navigation.navigate(Stacks.HowItWorks)
+  }
+
   const handleOnPressGetStarted = () => {
-    showVerifyAgeAlert()
+    if (displayAgeVerification) {
+      showVerifyAgeAlert()
+    } else {
+      navigateToNextScreen()
+    }
   }
 
   const showVerifyAgeAlert = () => {
     Alert.alert(
-      t("onboarding.may_only_be_used"),
-      t("onboarding.are_you_over_18", { applicationName }),
+      t("onboarding.verify_your_age"),
+      t("onboarding.are_you_over", { applicationName, minimumAge }),
       [
         {
           text: t("common.no"),
@@ -65,7 +75,7 @@ const Welcome: FunctionComponent = () => {
         },
         {
           text: t("common.yes"),
-          onPress: () => navigation.navigate(Stacks.HowItWorks),
+          onPress: navigateToNextScreen,
         },
       ],
     )
