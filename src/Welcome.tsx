@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -40,7 +39,7 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
-  const { displayAgeVerification, minimumAge } = useConfigurationContext()
+  const { displayAgeVerification } = useConfigurationContext()
 
   const welcomeMessage = authorityCopyTranslation(
     loadAuthorityCopy("welcome_message"),
@@ -52,33 +51,12 @@ const Welcome: FunctionComponent = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
   }
 
-  const navigateToNextScreen = () => {
-    navigation.navigate(Stacks.HowItWorks)
-  }
-
   const handleOnPressGetStarted = () => {
     if (displayAgeVerification) {
-      showVerifyAgeAlert()
+      navigation.navigate(ModalStackScreens.AgeVerification)
     } else {
-      navigateToNextScreen()
+      navigation.navigate(Stacks.HowItWorks)
     }
-  }
-
-  const showVerifyAgeAlert = () => {
-    Alert.alert(
-      t("onboarding.verify_your_age"),
-      t("onboarding.are_you_over", { applicationName, minimumAge }),
-      [
-        {
-          text: t("common.no"),
-          style: "cancel",
-        },
-        {
-          text: t("common.yes"),
-          onPress: navigateToNextScreen,
-        },
-      ],
-    )
   }
 
   return (
