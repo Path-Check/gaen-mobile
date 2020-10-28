@@ -21,6 +21,7 @@ import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import Welcome from "../Welcome"
+import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
@@ -102,6 +103,14 @@ const MainNavigator: FunctionComponent = () => {
             <Stack.Screen
               name={WelcomeStackScreens.Welcome}
               component={Welcome}
+            />
+            <Stack.Screen
+              name={ModalStackScreens.AgeVerification}
+              component={AgeVerification}
+              options={{
+                ...TransitionPresets.ModalTransition,
+                headerShown: false,
+              }}
             />
             <Stack.Screen name={Stacks.HowItWorks}>
               {(props) => (

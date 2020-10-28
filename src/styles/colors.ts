@@ -78,10 +78,11 @@ export const accent: Record<Accent, string> = {
   warning100: "#ffc000",
 }
 
-type Background = "primaryLight" | "primaryDark"
+type Background = "primaryLight" | "primaryDark" | "secondaryLight"
 export const background: Record<Background, string> = {
   primaryLight: neutral.white,
   primaryDark: primary.shade125,
+  secondaryLight: secondary.shade10,
 }
 
 type Transparent = "invisible" | "neutral30"

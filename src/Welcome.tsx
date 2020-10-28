@@ -13,6 +13,7 @@ import { SvgXml } from "react-native-svg"
 import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
 import { useApplicationName } from "./hooks/useApplicationInfo"
+import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {
   loadAuthorityCopy,
@@ -38,6 +39,7 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
+  const { displayAgeVerification } = useConfigurationContext()
 
   const welcomeMessage = authorityCopyTranslation(
     loadAuthorityCopy("welcome_message"),
@@ -50,7 +52,11 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    navigation.navigate(Stacks.HowItWorks)
+    if (displayAgeVerification) {
+      navigation.navigate(ModalStackScreens.AgeVerification)
+    } else {
+      navigation.navigate(Stacks.HowItWorks)
+    }
   }
 
   return (

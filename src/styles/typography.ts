@@ -121,7 +121,7 @@ export const header1: TextStyle = {
 
 export const header2: TextStyle = {
   ...xxLargeFont,
-  ...mediumBold,
+  ...semiBold,
   color: Colors.text.primary,
 }
 
@@ -187,6 +187,7 @@ export const error: TextStyle = {
 const baseButtonText: TextStyle = {
   ...mediumFont,
   ...semiBold,
+  textAlign: "center",
 }
 
 export const buttonPrimary: TextStyle = {
@@ -208,8 +209,7 @@ export const buttonFixedBottomDisabled: TextStyle = {
 }
 
 export const buttonSecondary: TextStyle = {
-  ...body1,
-  ...semiBold,
+  ...baseButtonText,
   color: Colors.primary.shade100,
 }
 

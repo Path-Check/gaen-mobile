@@ -19,6 +19,8 @@
     "back": "Back",
     "close": "Close",
     "close_screen": "Close screen",
+    "no": "No",
+    "yes": "Yes",
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
@@ -203,6 +205,10 @@
     "symptom_history": "Symptom Checker"
   },
   "onboarding": {
+    "i_am_over": "Yes, I am over {{minimumAge}}",
+    "no_take_me": "No, take me back",
+    "verify_your_age": "Verify Your Age",
+    "you_must_be": "You must be {{minimumAge}} or older to use {{applicationName}}. Are you over {{minimumAge}}?",
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",

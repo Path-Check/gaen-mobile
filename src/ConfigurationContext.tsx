@@ -12,6 +12,7 @@ export interface Configuration {
   displayCovidData: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
+  displayAgeVerification: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
@@ -24,6 +25,7 @@ export interface Configuration {
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthoritySupportsAnalytics: boolean
   measurementSystem: MeasurementSystem
+  minimumAge: string
   regionCodes: string[]
   stateAbbreviation: string | null
 }
@@ -36,6 +38,7 @@ const initialState: Configuration = {
   displayCovidData: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
+  displayAgeVerification: false,
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
@@ -48,6 +51,7 @@ const initialState: Configuration = {
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthoritySupportsAnalytics: false,
   measurementSystem: "Imperial" as const,
+  minimumAge: "18",
   regionCodes: [],
   stateAbbreviation: "",
 }
@@ -72,9 +76,12 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
+  const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
+
+  const minimumAge = env.MINIMUM_AGE
 
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
   const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
@@ -100,6 +107,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCovidData,
         displaySymptomHistory,
         displaySelfAssessment,
+        displayAgeVerification,
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
@@ -112,6 +120,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityPrivacyPolicyUrl,
         healthAuthoritySupportsAnalytics,
         measurementSystem,
+        minimumAge,
         regionCodes,
         stateAbbreviation,
       }}
