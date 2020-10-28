@@ -18,7 +18,7 @@ import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/AnalyticsContext"
 import { SymptomHistoryProvider } from "./src/SymptomHistory/SymptomHistoryContext"
-import { CovidDataContextProvider } from "./src/CovidDataContext"
+import { CovidDataContextProvider } from "./src/CovidData/Context"
 
 Logger.start()
 

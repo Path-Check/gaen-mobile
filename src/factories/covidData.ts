@@ -1,9 +1,22 @@
 import { Factory } from "fishery"
-import { CovidData } from "../CovidDataDashboard/covidDataAPI"
+import { CovidData, CovidDatum } from "../CovidData/covidData"
 
-export default Factory.define<CovidData>(() => ({
-  peopleDeathCt: 0,
-  peopleDeathNewCt: 0,
-  peoplePositiveCasesCt: 0,
-  peoplePositiveNewCasesCt: 0,
-}))
+export const covidDatum = Factory.define<CovidDatum>(() => {
+  return {
+    date: "2020-01-01",
+    deathsTotal: 0,
+    deathsNew: 0,
+    positiveCasesTotal: 0,
+    positiveCasesNew: 0,
+  }
+})
+
+export const covidData = Factory.define<CovidData>(() => [
+  {
+    date: "2020-01-01",
+    deathsTotal: 0,
+    deathsNew: 0,
+    positiveCasesTotal: 0,
+    positiveCasesNew: 0,
+  },
+])

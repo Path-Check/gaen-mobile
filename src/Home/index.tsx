@@ -28,8 +28,9 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
 
+import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
-import CovidDataClip from "../CovidDataDashboard/CovidDataClip"
+import CovidDataCard from "../CovidData/Card"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 
 import { Icons, Images } from "../assets"
@@ -58,24 +59,6 @@ const Home: FunctionComponent = () => {
     displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
-
-  interface SectionButtonProps {
-    text: string
-  }
-
-  const SectionButton: FunctionComponent<SectionButtonProps> = ({ text }) => {
-    return (
-      <View style={style.sectionButton}>
-        <Text style={style.sectionButtonText}>{text}</Text>
-        <SvgXml
-          xml={Icons.ChevronRight}
-          width={Iconography.xxxSmall}
-          height={Iconography.xxxSmall}
-          color={Colors.primary.shade110}
-        />
-      </View>
-    )
-  }
 
   const ExposureDetectionStatus: FunctionComponent = () => {
     const handleOnPressExposureDetectionStatus = () => {
@@ -266,7 +249,7 @@ const Home: FunctionComponent = () => {
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatus />
         <ShareLink />
-        {displayCovidData && <CovidDataClip />}
+        {displayCovidData && <CovidDataCard />}
         {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
         {displaySelfAssessment && <SelfAssessment />}
@@ -339,12 +322,6 @@ const style = StyleSheet.create({
     lineHeight: Typography.mediumLineHeight,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.xLarge,
-  },
-  sectionButton: {
-    ...Buttons.card.base,
-  },
-  sectionButtonText: {
-    ...Typography.buttonCard,
   },
   emergencyButtonOuterContainer: {
     borderTopWidth: Outlines.hairline,

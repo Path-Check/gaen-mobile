@@ -2,13 +2,13 @@ import React, { FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import { StyleSheet, View } from "react-native"
 
-import { Text } from "../components"
-import { CovidData } from "./covidDataAPI"
+import { Text } from "../../components"
+import { CovidDatum } from "../covidData"
 
-import { Typography, Colors, Outlines, Spacing } from "../styles"
+import { Typography, Colors, Outlines, Spacing } from "../../styles"
 
 type StateDataProps = {
-  todayCovidData: CovidData
+  todayCovidData: CovidDatum
   stateAbbreviation: string
 }
 
@@ -26,23 +26,19 @@ const StateData: FunctionComponent<StateDataProps> = ({
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.cases_today")}</Text>
-        <Text style={style.dataText}>
-          {todayCovidData.peoplePositiveNewCasesCt}
-        </Text>
+        <Text style={style.dataText}>{todayCovidData.positiveCasesNew}</Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.deaths_today")}</Text>
-        <Text style={style.dataText}>{todayCovidData.peopleDeathNewCt}</Text>
+        <Text style={style.dataText}>{todayCovidData.deathsNew}</Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.total_cases")}</Text>
-        <Text style={style.dataText}>
-          {todayCovidData.peoplePositiveCasesCt}
-        </Text>
+        <Text style={style.dataText}>{todayCovidData.positiveCasesTotal}</Text>
       </View>
       <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.total_deaths")}</Text>
-        <Text style={style.dataText}>{todayCovidData.peopleDeathCt}</Text>
+        <Text style={style.dataText}>{todayCovidData.deathsTotal}</Text>
       </View>
     </View>
   )
