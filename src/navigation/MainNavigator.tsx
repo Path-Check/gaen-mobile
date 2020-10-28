@@ -32,7 +32,7 @@ import BluetoothInfo from "../Home/BluetoothInfo"
 import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
 import LocationInfo from "../Home/LocationInfo"
 import CallbackStack from "./CallbackStack"
-import CovidDataDashboard from "../CovidDataDashboard/CovidDataDashboard"
+import CovidDataDashboard from "../CovidData/Dashboard"
 import { applyModalHeader } from "./ModalHeader"
 import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 

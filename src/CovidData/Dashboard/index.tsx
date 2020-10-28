@@ -1,33 +1,29 @@
 import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet } from "react-native"
 
-import {
-  CovidDataRequestStatus,
-  useCovidDataContext,
-} from "../CovidDataContext"
+import { useCovidDataContext } from "../Context"
 import StateData from "./StateData"
 
-import { Colors, Spacing } from "../styles"
+import { Colors, Spacing } from "../../styles"
 
 const CovidDataDashboard: FunctionComponent = () => {
   const {
-    stateAbbreviation,
-    covidDataRequest: { status, todayData },
+    locationName,
+    request: { status, data },
   } = useCovidDataContext()
 
-  if (status === CovidDataRequestStatus.MISSING_INFO) {
+  if (status === "MISSING_INFO") {
     return null
   }
+
+  const todayData = data[0]
 
   return (
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
     >
-      <StateData
-        todayCovidData={todayData}
-        stateAbbreviation={stateAbbreviation}
-      />
+      <StateData todayCovidData={todayData} stateAbbreviation={locationName} />
     </ScrollView>
   )
 }
