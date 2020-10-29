@@ -61,15 +61,12 @@ const CovidDataCard: FunctionComponent<CovidDataCardProps> = ({
     }
   }
 
-  const headerText = t("covid_data.covid_coverage")
-
   return (
     <TouchableOpacity
       accessibilityLabel={t("covid_data.see_more")}
       onPress={handleOnPressCard}
       style={style.container}
     >
-      <Text style={style.sectionHeaderText}>{headerText}</Text>
       <View style={style.contentContainer}>{determineContent()}</View>
       <SectionButton text={t("common.more")} />
     </TouchableOpacity>
@@ -102,15 +99,10 @@ const style = StyleSheet.create({
     ...Affordances.floatingContainer,
   },
   contentContainer: {
-    marginVertical: Spacing.medium,
+    marginBottom: Spacing.xSmall,
   },
   errorMessageText: {
     ...Typography.error,
-  },
-  sectionHeaderText: {
-    ...Typography.header5,
-    marginBottom: Spacing.xxSmall,
-    color: Colors.neutral.black,
   },
   activityIndicatorContainer: {
     flex: 1,
