@@ -71,7 +71,7 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
 
 const style = StyleSheet.create({
   headerText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
   dataContainer: {
     flexDirection: "row",
@@ -84,16 +84,16 @@ const style = StyleSheet.create({
     flex: 3,
   },
   legendText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
   trendText: {
-    ...Typography.header3,
-    ...Typography.semiBold,
-    lineHeight: Typography.mediumLineHeight,
+    ...Typography.header.x30,
+    ...Typography.style.semibold,
+    lineHeight: Typography.lineHeight.x40,
   },
   sourceText: {
-    ...Typography.body3,
-    ...Typography.xxSmallFont,
+    ...Typography.body.x30,
+    ...Typography.base.x10,
   },
 })
 

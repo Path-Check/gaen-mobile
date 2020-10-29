@@ -89,11 +89,11 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xLarge,
   },
   buttonContainer: {
@@ -103,7 +103,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.accent.danger100,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

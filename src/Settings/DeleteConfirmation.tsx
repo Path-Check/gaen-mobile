@@ -79,16 +79,16 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   headerText: {
-    ...Typography.header2,
-    ...Typography.semiBold,
+    ...Typography.header.x50,
+    ...Typography.style.semibold,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxxLarge,
   },
   subheaderText: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     marginBottom: Spacing.xxSmall,
   },
   buttonContainer: {
@@ -96,7 +96,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.accent.danger100,
   },
   buttonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

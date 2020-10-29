@@ -275,12 +275,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header4,
-    ...Typography.base,
+    ...Typography.header.x30,
+    ...Typography.style.normal,
     color: Colors.neutral.black,
   },
   bottomContainer: {
@@ -289,13 +289,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   bullet1: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     color: Colors.primary.shade100,
     marginBottom: Spacing.medium,
   },
   bullet2: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
+    ...Typography.body.x30,
+    ...Typography.style.medium,
     color: Colors.text.primary,
     marginBottom: Spacing.small,
   },
@@ -307,7 +307,7 @@ const style = StyleSheet.create({
     borderLeftColor: Colors.neutral.shade25,
   },
   bullet3: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
   },
   button: {
@@ -315,7 +315,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.medium,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
   doneButton: {
@@ -323,7 +323,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   doneButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

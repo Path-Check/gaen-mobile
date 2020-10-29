@@ -115,36 +115,36 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
   paragraph: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
   privacyPolicyContainer: {
     flexDirection: "row",
     marginVertical: Spacing.small,
   },
   privacyPolicy: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
+    ...Typography.body.x30,
+    ...Typography.style.medium,
     marginRight: Spacing.xxxSmall,
   },
   button: {
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
     ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
   disclaimer: {
     marginTop: Spacing.huge,
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
 })
 

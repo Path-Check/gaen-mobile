@@ -144,7 +144,7 @@ const style = StyleSheet.create({
     zIndex: Layout.zLevel1,
   },
   headerText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     paddingRight: Spacing.xLarge,
   },
   symptomsContainer: {
@@ -152,7 +152,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   symptomText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxxSmall,
   },
   dateTextContainer: {
@@ -161,7 +161,7 @@ const style = StyleSheet.create({
     marginTop: Spacing.small,
   },
   dateText: {
-    ...Typography.monospace,
+    ...Typography.style.monospace,
     color: Colors.neutral.shade100,
     paddingTop: Spacing.xxSmall,
   },

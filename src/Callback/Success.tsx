@@ -69,11 +69,11 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.medium,
   },
   body: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.large,
   },
   image: {
@@ -85,7 +85,7 @@ const style = StyleSheet.create({
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

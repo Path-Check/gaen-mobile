@@ -56,17 +56,17 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.small,
   },
   subheader: {
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
   button: {
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

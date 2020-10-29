@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
   },
   listItemText: {
-    ...Typography.tappableListItem,
+    ...Typography.button.listItem,
   },
   rightIcon: {
     paddingRight: Spacing.medium,

@@ -71,14 +71,14 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xLarge,
   },
   button: {
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
 })

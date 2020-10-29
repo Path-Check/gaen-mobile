@@ -52,8 +52,8 @@ const style = StyleSheet.create({
     borderBottomColor: Colors.neutral.shade30,
   },
   headerText: {
-    ...Typography.header4,
-    ...Typography.bold,
+    ...Typography.header.x30,
+    ...Typography.style.bold,
     paddingBottom: Spacing.xSmall,
   },
   labelAndDataContainer: {
@@ -62,7 +62,7 @@ const style = StyleSheet.create({
     paddingTop: Spacing.xxSmall,
   },
   dataText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
 })
 

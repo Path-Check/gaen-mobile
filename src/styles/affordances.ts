@@ -21,7 +21,7 @@ export const iconBadge: ViewStyle = {
 type FlashMessageOptions = Omit<MessageOptions, "message">
 
 export const flashMessageOptions: FlashMessageOptions = {
-  titleStyle: { ...Typography.header3, color: Colors.neutral.black },
+  titleStyle: { ...Typography.header.x40, color: Colors.neutral.black },
   animationDuration: 100,
   floating: true,
   position: { top: Spacing.huge },

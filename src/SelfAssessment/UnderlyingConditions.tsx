@@ -158,12 +158,12 @@ const createStyle = (insets: EdgeInsets) => {
   /* eslint-disable react-native/no-unused-styles */
   return StyleSheet.create({
     headerText: {
-      ...Typography.header1,
+      ...Typography.header.x60,
       marginBottom: Spacing.medium,
     },
     subheaderText: {
-      ...Typography.header4,
-      ...Typography.base,
+      ...Typography.header.x30,
+      ...Typography.style.normal,
       marginBottom: Spacing.huge,
     },
     button: {
@@ -171,7 +171,7 @@ const createStyle = (insets: EdgeInsets) => {
       paddingBottom: insets.bottom + Spacing.small,
     },
     buttonText: {
-      ...Typography.buttonFixedBottom,
+      ...Typography.button.fixedBottom,
       marginRight: Spacing.small,
     },
   })

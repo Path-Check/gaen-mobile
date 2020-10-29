@@ -91,28 +91,28 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },
   button: {
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
     ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

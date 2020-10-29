@@ -102,7 +102,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   errorMessageText: {
-    ...Typography.error,
+    ...Typography.utility.error,
   },
   activityIndicatorContainer: {
     flex: 1,

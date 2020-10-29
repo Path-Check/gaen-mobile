@@ -127,7 +127,7 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.medium,
     },
     headerText: {
-      ...Typography.header2,
+      ...Typography.header.x50,
       marginBottom: Spacing.xLarge,
       paddingHorizontal: Spacing.large,
     },
@@ -136,7 +136,7 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.small,
     },
     buttonText: {
-      ...Typography.buttonPrimary,
+      ...Typography.button.primary,
       marginRight: Spacing.small,
     },
     bottomButtonContainer: {
@@ -146,7 +146,7 @@ const createStyle = (insets: EdgeInsets) => {
       backgroundColor: Colors.background.primaryLight,
     },
     bottomButtonText: {
-      ...Typography.header5,
+      ...Typography.header.x20,
       color: Colors.primary.shade100,
       paddingHorizontal: Spacing.large,
       textAlign: "center",

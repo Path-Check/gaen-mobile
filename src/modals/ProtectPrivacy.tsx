@@ -108,11 +108,11 @@ const sectionStyle = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.medium,
   },
 })

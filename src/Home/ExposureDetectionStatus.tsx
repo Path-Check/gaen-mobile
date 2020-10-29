@@ -198,12 +198,12 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.xSmall,
   },
   subheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xLarge,
   },
 })

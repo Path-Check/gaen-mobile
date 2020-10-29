@@ -82,13 +82,13 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   exposureWindowText: {
-    ...Typography.header6,
+    ...Typography.header.x10,
     textTransform: "uppercase",
     color: Colors.neutral.shade110,
     marginLeft: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     color: Colors.primary.shade125,
     marginBottom: Spacing.medium,
   },

@@ -47,13 +47,13 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xLarge,
   },
   headerText: {
-    ...Typography.header5,
+    ...Typography.header.x20,
   },
   section: {
     paddingBottom: Spacing.xLarge,
   },
   contentText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     paddingTop: Spacing.small,
   },
   backIconContainer: {

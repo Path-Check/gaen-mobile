@@ -85,19 +85,19 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.xxxSmall,
   },
   subHeaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.large,
   },
   shareButton: {
     ...Buttons.fixedBottom.base,
   },
   shareButtonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

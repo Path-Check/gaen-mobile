@@ -161,7 +161,7 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   dateText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     marginBottom: Spacing.small,
   },
   symptomButtonsContainer: {
@@ -177,7 +177,7 @@ const style = StyleSheet.create({
     ...Buttons.fixedBottom.base,
   },
   buttonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

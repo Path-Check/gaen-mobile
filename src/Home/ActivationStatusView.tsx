@@ -140,9 +140,9 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral.shade10,
   },
   systemServiceText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     color: Colors.neutral.black,
-    lineHeight: Typography.smallLineHeight,
+    lineHeight: Typography.lineHeight.x30,
     marginBottom: Spacing.xSmall,
   },
   statusTextContainer: {
@@ -152,17 +152,17 @@ const style = StyleSheet.create({
     borderRadius: Outlines.baseBorderRadius,
   },
   statusText: {
-    ...Typography.body2,
-    ...Typography.bold,
+    ...Typography.body.x20,
+    ...Typography.style.bold,
     color: Colors.neutral.white,
-    lineHeight: Typography.xSmallLineHeight,
+    lineHeight: Typography.lineHeight.x20,
   },
   bottomContainer: {
     flexDirection: "row",
     alignItems: "center",
   },
   actionText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.neutral.black,
     marginRight: Spacing.xxSmall,
     paddingBottom: 2,
