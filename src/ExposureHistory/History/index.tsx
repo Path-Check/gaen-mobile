@@ -59,10 +59,21 @@ const History: FunctionComponent<HistoryProps> = ({
         ...Affordances.successFlashMessageOptions,
       })
     } else {
-      showMessage({
-        message: t("common.something_went_wrong"),
-        ...Affordances.errorFlashMessageOptions,
-      })
+      switch (checkResult.error) {
+        case "ExceededCheckRateLimit": {
+          showMessage({
+            message: t("common.success"),
+            ...Affordances.successFlashMessageOptions,
+          })
+          break
+        }
+        default: {
+          showMessage({
+            message: t("common.something_went_wrong"),
+            ...Affordances.errorFlashMessageOptions,
+          })
+        }
+      }
     }
     setCheckingForExposures(false)
   }

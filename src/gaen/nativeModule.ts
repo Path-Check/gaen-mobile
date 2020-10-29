@@ -124,8 +124,30 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
   }
 }
 
-export const checkForNewExposures = async (): Promise<void> => {
-  return await exposureHistoryModule.detectExposures()
+type NetworkResponse = NetworkSuccess | NetworkFailure
+
+interface NetworkSuccess {
+  kind: "success"
+}
+
+interface NetworkFailure {
+  kind: "failure"
+  error: GAENAPIError
+}
+
+type GAENAPIError = "ExceededCheckRateLimit" | "Unknown"
+
+export const checkForNewExposures = async (): Promise<NetworkResponse> => {
+  try {
+    await exposureHistoryModule.detectExposures()
+    return { kind: "success" }
+  } catch (e) {
+    if (e.message.includes("ENErrorDomain error 13.")) {
+      return { kind: "failure", error: "ExceededCheckRateLimit" }
+    } else {
+      return { kind: "failure", error: "Unknown" }
+    }
+  }
 }
 
 // Exposure Key Module

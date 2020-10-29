@@ -430,7 +430,6 @@ final class ExposureManager: NSObject {
       case let .failure(error):
         let exposureError = ExposureError.default(error.localizedDescription)
         btSecureStorage.exposureDetectionErrorLocalizedDescription = error.localizedDescription
-        postExposureDetectionErrorNotification(exposureError.errorDescription)
         completionHandler(.failure(exposureError))
       }
     }
