@@ -9,12 +9,10 @@ import {
 import { useNavigation } from "@react-navigation/native"
 
 import { HomeStackScreens } from "../../navigation"
-import PercentageChart from "../PercentageChart"
-import { CovidDataRequest } from "../Context"
-import * as CovidData from "../covidData"
-
-import SectionButton from "../../Home/SectionButton"
 import { Text } from "../../components"
+import SectionButton from "../../Home/SectionButton"
+import { CovidDataRequest } from "../Context"
+import CovidDataInfo from "./CovidDataInfo"
 
 import {
   Iconography,
@@ -56,22 +54,14 @@ const CovidDataCard: FunctionComponent<CovidDataCardProps> = ({
       case "LOADING":
         return <LoadingIndicator />
       case "SUCCESS": {
-        const percentage = CovidData.toNewCasesPercentage(dataRequest.data)
         return (
-          <View testID={"covid-data"}>
-            <PercentageChart
-              percentage={percentage}
-              label={t("covid_data.new_cases")}
-            />
-          </View>
+          <CovidDataInfo data={dataRequest.data} locationName={locationName} />
         )
       }
     }
   }
 
-  const headerText = t("covid_data.covid_stats_in", {
-    location: locationName.toUpperCase(),
-  })
+  const headerText = t("covid_data.covid_coverage")
 
   return (
     <TouchableOpacity
@@ -102,6 +92,7 @@ const LoadingIndicator = () => {
 interface ErrorMessageProps {
   message: string
 }
+
 const ErrorMessage: FunctionComponent<ErrorMessageProps> = ({ message }) => {
   return <Text style={style.errorMessageText}>{message}</Text>
 }
@@ -117,7 +108,7 @@ const style = StyleSheet.create({
     ...Typography.error,
   },
   sectionHeaderText: {
-    ...Typography.header3,
+    ...Typography.header5,
     marginBottom: Spacing.xxSmall,
     color: Colors.neutral.black,
   },
