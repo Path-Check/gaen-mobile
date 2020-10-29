@@ -13,7 +13,6 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
-import { SUCCESS_RESPONSE } from "../OperationResponse"
 
 import { Spacing, Buttons, Typography, Colors, Affordances } from "../styles"
 
@@ -25,7 +24,7 @@ const DeleteConfirmation: FunctionComponent = () => {
   const { t } = useTranslation()
   const handleOnPressDeleteAllData = async () => {
     const deleteLogEntriesResult = await deleteAllEntries()
-    if (deleteLogEntriesResult === SUCCESS_RESPONSE) {
+    if (deleteLogEntriesResult.kind === "success") {
       resetOnboarding()
       showMessage({
         message: t("settings.data_deleted"),

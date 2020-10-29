@@ -7,7 +7,7 @@ import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 import { ExposureContext } from "../../ExposureContext"
-import { failureResponse, SUCCESS_RESPONSE } from "../../OperationResponse"
+import { failureResponse } from "../../OperationResponse"
 
 import History from "./index"
 
@@ -33,7 +33,7 @@ describe("History", () => {
       const exposures: ExposureDatum[] = []
       const checkForNewExposuresSpy = jest
         .fn()
-        .mockResolvedValueOnce(SUCCESS_RESPONSE)
+        .mockResolvedValueOnce({ kind: "success" })
 
       const { getByTestId } = render(
         <ExposureContext.Provider
