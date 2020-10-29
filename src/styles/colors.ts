@@ -75,7 +75,7 @@ export const accent: Record<Accent, string> = {
   success100: "#24a36c",
   warning25: "#f9edcc",
   warning50: "#ffdc6f",
-  warning100: "#ffc000",
+  warning100: "#cf8321",
 }
 
 type Background = "primaryLight" | "primaryDark" | "secondaryLight"

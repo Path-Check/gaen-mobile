@@ -47,10 +47,14 @@
     "deaths_today": "Deaths today",
     "down_from_last_week": "Down from last week",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
+    "past_7_days": "Past 7 days",
     "new_cases": "New Cases",
     "see_more": "See more",
+    "source": "source: {{source}}",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths",
+    "trending_up": "Trending up",
+    "trending_down": "Trending down",
     "up_from_last_week": "Up from last week"
   },
   "errors": {

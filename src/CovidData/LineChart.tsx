@@ -26,21 +26,17 @@ const LineChart: FunctionComponent<LineChartProps> = ({
   // Scale Data
   const max = Math.max(...lineData)
   const min = Math.min(...lineData)
-  const shrinkPathBy = 2
-  const scaleFactor = height / (max - min) / shrinkPathBy
+  const shrinkYScaleBy = 1.25
+  const scaleFactor = height / (max - min) / shrinkYScaleBy
   const toScale = (datum: number) => {
     return (datum - min) * scaleFactor
   }
 
   // Fit Path
-  const offset = height / 3
   const xPadding = 10
-  const firstXPosition = xPadding / 2
   const pathWidth = width - xPadding
   const xStepWidth = pathWidth / (lineData.length - 1)
-  const toOffset = (datum: number) => {
-    return datum + offset
-  }
+  const firstXPosition = xPadding / 2
   const toCoordinate = (datum: number, idx: number): SvgPath.Coordinate => {
     const xCoordinate = idx === 0 ? firstXPosition : idx * xStepWidth
     return [xCoordinate, height - datum]
@@ -49,8 +45,7 @@ const LineChart: FunctionComponent<LineChartProps> = ({
   const viewBox = `0 0 ${width} ${height}`
 
   const scaledData = lineData.map(toScale)
-  const offsetData = scaledData.map(toOffset)
-  const coordinates = offsetData.map(toCoordinate)
+  const coordinates = scaledData.map(toCoordinate)
   const trendLinePath = SvgPath.toSmoothBezier(coordinates)
 
   return (
@@ -107,7 +102,8 @@ const HorizontalLines: FunctionComponent<HorizontalLinesProps> = ({
     )
   }
 
-  const lineColor = Colors.neutral.shade75
+  const lineColor = Colors.neutral.shade25
+  const baseLineColor = Colors.neutral.shade75
   const horizontalLinesStartingYPosition = 0
   const [baseLineY, ...lineCoords] = buildHorizontalLineYPositions(
     horizontalLinesStartingYPosition,
@@ -133,7 +129,7 @@ const HorizontalLines: FunctionComponent<HorizontalLinesProps> = ({
       <HorizontalLine
         start={baseLineStart}
         end={baseLineEnd}
-        color={lineColor}
+        color={baseLineColor}
         strokeWidth={2}
       />
     </>
