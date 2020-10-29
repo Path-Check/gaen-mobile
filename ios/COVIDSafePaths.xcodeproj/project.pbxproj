@@ -189,6 +189,7 @@
 		5D98D5DA5B77459FACDD673D /* IBMPlexSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Light.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Light.ttf"; sourceTree = "<group>"; };
 		668BDA050EF549C6B0759425 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release-bt.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release-bt.xcconfig"; sourceTree = "<group>"; };
+		6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug.xcconfig"; sourceTree = "<group>"; };
 		6BA94CE8425944B8990A49B3 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../app/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		6C8CF282C4264C88A4ED8ABF /* IBMPlexMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Medium.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Medium.ttf"; sourceTree = "<group>"; };
 		71F26FBF5BDA423184286546 /* IBMPlexMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -269,9 +270,11 @@
 		B5FC37E2248A82AE006474EB /* Exposure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exposure.swift; sourceTree = "<group>"; };
 		B5FC37F5248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENTemporaryExposureKey+Extensions.swift"; sourceTree = "<group>"; };
 		B7372C03D7AA19943931FCE4 /* libPods-BT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release.xcconfig"; sourceTree = "<group>"; };
 		BF6254720C1D4A3288ECE351 /* IBMPlexMono-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBold.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		BFBEC306069776E19FE33586 /* Pods-BT.debug-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug-gps.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug-gps.xcconfig"; sourceTree = "<group>"; };
 		C42F32AF52974EE8ADEE67B5 /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Medium.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
+		C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.release.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.release.xcconfig"; sourceTree = "<group>"; };
 		C504FDC1249D15260024219C /* BT-Production.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BT-Production.entitlements"; sourceTree = "<group>"; };
 		C504FDC4249D155D0024219C /* BT-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BT-Development.entitlements"; sourceTree = "<group>"; };
 		C53FD0C124719AD1006D3268 /* BT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,9 +294,9 @@
 		CF0DA9BBE69043D2BD80FF3B /* IBMPlexMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-LightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-LightItalic.ttf"; sourceTree = "<group>"; };
 		D04E298A8C92F0D267143C3A /* Pods-BTTests.staging-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.staging-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.staging-bt.xcconfig"; sourceTree = "<group>"; };
 		D4CB502824A66C5D00405D61 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
-		D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-BT.xcconfig"; sourceTree = "<group>"; };
-		D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-BT.xcconfig"; sourceTree = "<group>"; };
-		D4CB502C24A66C7500405D61 /* Staging-BT.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Staging-BT.xcconfig"; sourceTree = "<group>"; };
+		D4CB502A24A66C7500405D61 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D4CB502B24A66C7500405D61 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D4CB502C24A66C7500405D61 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		D5A05B8E61DC402E8753A057 /* IBMPlexMono-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLightItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		D5CD9AD3FED744E6B5F0CEF9 /* IBMPlexMono.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = file; name = IBMPlexMono.ttf; path = ../app/assets/fonts/IBMPlexMono.ttf; sourceTree = "<group>"; };
 		D5DFB90A472F4881A3C888C3 /* IBMPlexSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ThinItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -305,6 +308,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EE9A6AB45FE446E085003E35 /* IBMPlexMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Bold.ttf"; path = "../app/assets/fonts/IBMPlexMono-Bold.ttf"; sourceTree = "<group>"; };
+		F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F1B36261D95A4838A5939417 /* IBMPlexMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-MediumItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F2FF56A5536545E693AF41DC /* IBMPlexMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-LightItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-LightItalic.ttf"; sourceTree = "<group>"; };
 		F3267DEC44754D9BB6ABA49D /* IBMPlexSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-BoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -386,6 +390,10 @@
 				A74024E269FF63C56B1025EA /* Pods-BTTests.release-gps.xcconfig */,
 				D04E298A8C92F0D267143C3A /* Pods-BTTests.staging-bt.xcconfig */,
 				751F8AE184B9709A8C3817BF /* Pods-BTTests.staging-gps.xcconfig */,
+				6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */,
+				BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */,
+				F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */,
+				C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -693,9 +701,9 @@
 		D4CB502524A66C5D00405D61 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */,
-				D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */,
-				D4CB502C24A66C7500405D61 /* Staging-BT.xcconfig */,
+				D4CB502A24A66C7500405D61 /* Debug.xcconfig */,
+				D4CB502B24A66C7500405D61 /* Release.xcconfig */,
+				D4CB502C24A66C7500405D61 /* Staging.xcconfig */,
 				D4CB502824A66C5D00405D61 /* Version.xcconfig */,
 			);
 			path = Config;
@@ -948,12 +956,13 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-input-files.xcfilelist",
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources-${CONFIGURATION}-output-files.xcfilelist",
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1093,9 +1102,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		83CBBA201A601CBA00E9B192 /* Debug-BT */ = {
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug-BT.xcconfig */;
+			baseConfigurationReference = D4CB502A24A66C7500405D61 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1146,11 +1155,11 @@
 				SDKROOT = iphoneos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Debug-BT";
+			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Release-BT */ = {
+		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release-BT.xcconfig */;
+			baseConfigurationReference = D4CB502B24A66C7500405D61 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1194,21 +1203,21 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release-BT";
+			name = Release;
 		};
-		C53FD0BD24719AD1006D3268 /* Debug-BT */ = {
+		C53FD0BD24719AD1006D3268 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */;
+			baseConfigurationReference = 6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BT/BT-Development.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P3JAN5Z5HF;
 				INFOPLIST_FILE = BT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1216,19 +1225,19 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG -D FB_SONARKIT_ENABLED";
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
-			name = "Debug-BT";
+			name = Debug;
 		};
-		C53FD0BF24719AD1006D3268 /* Release-BT */ = {
+		C53FD0BF24719AD1006D3268 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */;
+			baseConfigurationReference = BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1253,11 +1262,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
-			name = "Release-BT";
+			name = Release;
 		};
-		C5AA24DD24768FFF00BA0A99 /* Debug-BT */ = {
+		C5AA24DD24768FFF00BA0A99 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 323E903F3DAB2E4C925FECBD /* Pods-BTTests.debug-bt.xcconfig */;
+			baseConfigurationReference = F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -1285,11 +1294,11 @@
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BT.app/BT";
 			};
-			name = "Debug-BT";
+			name = Debug;
 		};
-		C5AA24DF24768FFF00BA0A99 /* Release-BT */ = {
+		C5AA24DF24768FFF00BA0A99 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 141B3702EDB77175BCFE1BA2 /* Pods-BTTests.release-bt.xcconfig */;
+			baseConfigurationReference = C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -1313,7 +1322,7 @@
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BT.app/BT";
 			};
-			name = "Release-BT";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1321,29 +1330,29 @@
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "COVIDSafePaths" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83CBBA201A601CBA00E9B192 /* Debug-BT */,
-				83CBBA211A601CBA00E9B192 /* Release-BT */,
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release-BT";
+			defaultConfigurationName = Release;
 		};
 		C53FD0BC24719AD1006D3268 /* Build configuration list for PBXNativeTarget "BT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C53FD0BD24719AD1006D3268 /* Debug-BT */,
-				C53FD0BF24719AD1006D3268 /* Release-BT */,
+				C53FD0BD24719AD1006D3268 /* Debug */,
+				C53FD0BF24719AD1006D3268 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release-BT";
+			defaultConfigurationName = Release;
 		};
 		C5AA24DC24768FFF00BA0A99 /* Build configuration list for PBXNativeTarget "BTTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C5AA24DD24768FFF00BA0A99 /* Debug-BT */,
-				C5AA24DF24768FFF00BA0A99 /* Release-BT */,
+				C5AA24DD24768FFF00BA0A99 /* Debug */,
+				C5AA24DF24768FFF00BA0A99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release-BT";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

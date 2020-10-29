@@ -1,5 +1,5 @@
 //
-//  Release-BT.xcconfig
+//  Debug.xcconfig
 //  COVIDSafePaths
 //
 //  Created by Rob Visentin on 6/26/20.
@@ -11,7 +11,7 @@
 
 #include "Version.xcconfig"
 
-ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
-PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev
+PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt.dev
 
-ALLOW_INSECURE_HTTP = NO
+ALLOW_INSECURE_HTTP = YES

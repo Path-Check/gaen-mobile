@@ -6,6 +6,7 @@ import com.bugsnag.android.Bugsnag;
 import com.bugsnag.android.Configuration;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -55,7 +56,7 @@ public class MainApplication extends Application implements ReactApplication {
     AndroidThreeTen.init(this);
     SoLoader.init(this, /* native exopackage */ false);
     Realm.init(this);
-    initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());    
     initializeBugsnag();
   }
 
@@ -70,21 +71,25 @@ public class MainApplication extends Application implements ReactApplication {
     Bugsnag.start(this, config);
   }
 
-  /**
-   * Loads Flipper in React Native templates.
-   *
-   * @param context application context.
-   */
-  private static void initializeFlipper(Context context) {
+  private static void initializeFlipper(
+      Context context, ReactInstanceManager reactInstanceManager) {
     if (BuildConfig.DEBUG) {
       try {
         /*
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> flipperClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
-        flipperClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
-      } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        Class<?> className = Class.forName("org.pathcheck.covidsafepaths.ReactNativeFlipper");
+        className
+            .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
+            .invoke(null, context, reactInstanceManager);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
         e.printStackTrace();
       }
     }
