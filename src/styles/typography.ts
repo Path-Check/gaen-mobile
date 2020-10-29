@@ -4,6 +4,7 @@ import * as Colors from "./colors"
 import * as Spacing from "./spacing"
 
 // Font Size
+export const xxSmall = 10
 export const xSmall = 13
 export const small = 14
 export const medium = 16
@@ -13,6 +14,7 @@ export const xxLarge = 26
 export const xxxLarge = 30
 
 // Line Height
+export const xxSmallLineHeight = 18
 export const xSmallLineHeight = 20
 export const smallLineHeight = 20
 export const mediumLineHeight = 24
@@ -70,6 +72,12 @@ export const monospace: TextStyle = {
 }
 
 // Standard Font Types
+export const xxSmallFont: TextStyle = {
+  ...base,
+  fontSize: xxSmall,
+  lineHeight: xxSmallLineHeight,
+}
+
 export const xSmallFont: TextStyle = {
   ...base,
   fontSize: xSmall,

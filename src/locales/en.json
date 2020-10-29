@@ -41,8 +41,9 @@
   "covid_data": {
     "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "cases_today": "Cases today",
+    "covid_coverage": "Covid Coverage",
     "covid_data": "COVID Data",
-    "covid_stats_in": "COVID Stats in {{location}}",
+    "spread_of_the_virus_in": "Spread of the virus in {{locationName}}",
     "deaths_today": "Deaths today",
     "down_from_last_week": "Down from last week",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",

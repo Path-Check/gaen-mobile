@@ -39,3 +39,13 @@ const percentDifference = (a: number, b: number) => {
   const result = Math.round(((a - b) / b) * 100)
   return result
 }
+
+type TrendData = number[]
+
+export const toLineChartCasesNew = (data: CovidData): TrendData => {
+  return data.map(toCasesNew).slice(0, 7)
+}
+
+export const toCasesNew = (datum: CovidDatum): number => {
+  return datum.positiveCasesNew
+}
