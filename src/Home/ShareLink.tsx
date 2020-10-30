@@ -87,8 +87,8 @@ const style = StyleSheet.create({
     marginLeft: Spacing.medium,
   },
   shareText: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
+    ...Typography.body.x30,
+    ...Typography.style.medium,
     color: Colors.text.primary,
   },
 })

@@ -119,12 +119,12 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.medium,
   },
   headerText: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     paddingBottom: Spacing.xxxSmall,
     color: Colors.neutral.white,
   },
   subheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.secondary.shade10,
   },
   card: {
@@ -132,11 +132,11 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.medium,
   },
   cardHeaderText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     paddingBottom: Spacing.xSmall,
   },
   cardSubheaderText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
     paddingBottom: Spacing.large,
   },
   learnMoreCtaContainer: {
@@ -145,14 +145,14 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   learnMoreCta: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
     color: Colors.primary.shade125,
   },
   ctaArrow: {
     marginLeft: Spacing.xxSmall,
   },
   listHeading: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     paddingBottom: Spacing.medium,
   },
   listItem: {
@@ -165,7 +165,7 @@ const style = StyleSheet.create({
     width: Spacing.huge,
   },
   listItemText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
 })
 

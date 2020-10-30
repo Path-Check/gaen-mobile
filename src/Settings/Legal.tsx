@@ -68,12 +68,12 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.small,
     color: Colors.primary.shade150,
   },
   contentText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.medium,
   },
 })

@@ -159,7 +159,7 @@ const style = StyleSheet.create({
     padding: Spacing.xSmall,
   },
   skipButtonText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
     color: Colors.neutral.shade100,
   },
 })

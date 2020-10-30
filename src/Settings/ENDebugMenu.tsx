@@ -196,7 +196,7 @@ const style = StyleSheet.create({
     borderColor: Colors.secondary.shade75,
   },
   listItemText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
   lastListItem: {
     borderBottomWidth: 0,

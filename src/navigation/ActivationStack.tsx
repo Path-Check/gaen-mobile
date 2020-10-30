@@ -160,7 +160,7 @@ const ActivationStack: FunctionComponent = () => {
 
 const style = StyleSheet.create({
   headerTitle: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     color: Colors.neutral.shade100,
     maxWidth: Layout.halfWidth,
   },

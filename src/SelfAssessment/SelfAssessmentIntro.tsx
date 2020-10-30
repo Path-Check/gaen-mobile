@@ -89,12 +89,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.xSmall,
   },
   subheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.text.primary,
     marginBottom: Spacing.large,
   },
@@ -105,18 +105,18 @@ const style = StyleSheet.create({
     borderTopWidth: Outlines.hairline,
   },
   bulletText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
     marginBottom: Spacing.medium,
   },
   emergencyText: {
-    ...Typography.error,
-    ...Typography.mediumBold,
+    ...Typography.utility.error,
+    ...Typography.style.medium,
   },
   button: {
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
 })

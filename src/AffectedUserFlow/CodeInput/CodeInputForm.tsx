@@ -230,14 +230,14 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
   errorSubtitle: {
-    ...Typography.error,
+    ...Typography.utility.error,
     color: Colors.text.error,
     marginTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
@@ -245,8 +245,8 @@ const style = StyleSheet.create({
   },
   codeInput: {
     ...Forms.textInput,
-    ...Typography.mediumBold,
-    fontSize: Typography.xLarge,
+    ...Typography.style.medium,
+    fontSize: Typography.size.x60,
     textAlignVertical: "center",
     textAlign: "center",
     letterSpacing: 4,
@@ -262,11 +262,11 @@ const style = StyleSheet.create({
     ...Buttons.primary.disabled,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
   buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
+    ...Typography.button.primaryDisabled,
     marginRight: Spacing.small,
   },
 })

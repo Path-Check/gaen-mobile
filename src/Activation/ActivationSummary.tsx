@@ -145,12 +145,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     textAlign: "center",
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     textAlign: "center",
   },
   button: {
@@ -158,13 +158,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxSmall,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
     ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

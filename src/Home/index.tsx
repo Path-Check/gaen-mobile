@@ -270,8 +270,8 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.medium,
   },
   statusContainer: {
@@ -291,7 +291,7 @@ const style = StyleSheet.create({
     zIndex: Layout.zLevel1,
   },
   statusText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     color: Colors.neutral.black,
   },
   statusBottomContainer: {
@@ -299,7 +299,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   statusActionText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
     color: Colors.neutral.black,
     marginRight: Spacing.xxxSmall,
     paddingBottom: 2,
@@ -312,14 +312,14 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   sectionHeaderText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     color: Colors.neutral.black,
     marginBottom: Spacing.xSmall,
   },
   sectionBodyText: {
-    ...Typography.header5,
-    ...Typography.base,
-    lineHeight: Typography.mediumLineHeight,
+    ...Typography.header.x20,
+    ...Typography.style.normal,
+    lineHeight: Typography.lineHeight.x40,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.xLarge,
   },
@@ -335,7 +335,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.accent.danger100,
   },
   emergencyButtonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginLeft: Spacing.small,
   },
 })

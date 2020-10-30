@@ -83,7 +83,7 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral.shade10,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     color: Colors.text.primary,
     maxWidth: Layout.screenWidth * 0.75,
   },

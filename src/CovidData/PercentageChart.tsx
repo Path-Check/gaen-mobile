@@ -72,13 +72,13 @@ const style = StyleSheet.create({
     paddingRight: Spacing.xxSmall,
   },
   percentageText: {
-    ...Typography.body1,
-    ...Typography.bold,
+    ...Typography.body.x30,
+    ...Typography.style.bold,
     color: Colors.neutral.black,
   },
   headerText: {
-    ...Typography.header4,
-    ...Typography.base,
+    ...Typography.header.x30,
+    ...Typography.style.normal,
   },
 })
 

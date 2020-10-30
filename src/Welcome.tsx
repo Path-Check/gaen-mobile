@@ -123,8 +123,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.body3,
-    letterSpacing: Typography.largeLetterSpacing,
+    ...Typography.body.x10,
+    letterSpacing: Typography.letterSpacing.x30,
     color: Colors.primary.shade125,
     textAlign: "center",
     textTransform: "uppercase",
@@ -139,12 +139,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   welcomeToText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     color: Colors.text.primary,
     textAlign: "center",
   },
   nameText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     color: Colors.text.primary,
     textAlign: "center",
     marginBottom: Spacing.huge,
@@ -153,7 +153,7 @@ const style = StyleSheet.create({
     ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
 })

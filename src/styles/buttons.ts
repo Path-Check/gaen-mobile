@@ -124,6 +124,7 @@ export const fixedBottomThin: Record<FixedBottomThin, ViewStyle> = {
 type Card = "base"
 const cardBase: ViewStyle = {
   ...base,
+  width: "auto",
   alignSelf: "flex-start",
   paddingVertical: Spacing.xxSmall,
   paddingHorizontal: Spacing.medium,

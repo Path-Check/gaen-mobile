@@ -29,7 +29,7 @@ const style = StyleSheet.create({
     ...Buttons.card.base,
   },
   sectionButtonText: {
-    ...Typography.buttonCard,
+    ...Typography.button.card,
   },
 })
 

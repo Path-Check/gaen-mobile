@@ -147,8 +147,8 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.medium,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
@@ -175,7 +175,7 @@ const style = StyleSheet.create({
     ...Buttons.fixedBottom.base,
   },
   buttonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

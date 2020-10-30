@@ -62,12 +62,12 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     textAlign: "center",
     marginBottom: Spacing.medium,
   },
   subheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     textAlign: "center",
     marginBottom: Spacing.huge,
   },
@@ -76,13 +76,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   buttonSecondary: {
     ...Buttons.secondary.base,
   },
   buttonSecondaryText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

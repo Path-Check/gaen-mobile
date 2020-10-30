@@ -173,11 +173,11 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 
 const style = StyleSheet.create({
   bottomHeaderText: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.medium,
   },
@@ -200,10 +200,10 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   recommendationText: {
-    ...Typography.body3,
+    ...Typography.body.x10,
   },
   connectivityWarningText: {
-    ...Typography.error,
+    ...Typography.utility.error,
     marginTop: Spacing.small,
   },
   button: {
@@ -211,7 +211,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
   buttonOutlined: {
@@ -219,7 +219,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   buttonOutlinedText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
     marginRight: Spacing.small,
   },
 })

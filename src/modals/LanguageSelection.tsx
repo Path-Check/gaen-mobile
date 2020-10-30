@@ -83,10 +83,10 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.large,
   },
   languageButtonText: {
-    ...Typography.tappableListItem,
+    ...Typography.button.listItem,
   },
   languageButtonTextSelected: {
-    ...Typography.semiBold,
+    ...Typography.style.semibold,
   },
 })
 
