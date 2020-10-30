@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="exposure_notification_channel_description">Cảnh báo thông báo tiếp xúc.</string>
+  <string name="exposure_notification_channel_name">Thông Báo Tiếp Xúc</string>
+  <string name="exposure_notification_message">Một người đã ở gần bạn đã có xét nghiệm dương tính với COVID-19. Chạm vào để biết thêm thông tin.</string>
+  <string name="exposure_notification_title">Có thể có tiếp xúc với COVID-19</string>
+</resources>
