@@ -14,7 +14,7 @@ import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { openAppSettings } from "../gaen/nativeModule"
+import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 

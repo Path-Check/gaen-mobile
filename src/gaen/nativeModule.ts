@@ -283,9 +283,3 @@ export const resetExposures = async (): Promise<"success"> => {
   return debugModule.resetExposures()
 }
 
-// Utils Module
-const utilsModule = NativeModules.UtilsModule
-
-export const openAppSettings = (): void => {
-  utilsModule.openAppSettings()
-}

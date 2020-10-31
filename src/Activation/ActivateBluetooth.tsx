@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { useSystemServicesContext } from "../SystemServicesContext"
-import { openAppSettings } from "../gaen/nativeModule"
+import { openAppSettings } from "../Device"
 import { nextScreenFromBluetooth } from "./activationStackController"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"

@@ -1,7 +1,7 @@
 import React from "react"
-import { openAppSettings } from "../../gaen/nativeModule"
 import { render, fireEvent } from "@testing-library/react-native"
 
+import { openAppSettings } from "../../Device"
 import EnableExposureNotifications from "./EnableExposureNotifications"
 
 jest.mock("../../gaen/nativeModule")
