@@ -7,14 +7,15 @@ import {
   SelfAssessmentContext,
   SelfAssessmentProvider,
   useSelfAssessmentContext,
-} from "./SelfAssessmentContext"
-import { factories } from "./factories"
+} from "./Context"
+import { factories } from "../factories"
 import {
   AgeRange,
   EmergencySymptom,
   PrimarySymptom,
   UnderlyingCondition,
-} from "./SelfAssessment/selfAssessment"
+} from "./selfAssessment"
+
 describe("SelfAssessmentContext", () => {
   describe("emergency symptoms", () => {
     it("passes down the correct emergency symptoms to its children", () => {

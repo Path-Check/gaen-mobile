@@ -1,7 +1,8 @@
+import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import { fireEvent, render } from "@testing-library/react-native"
-import React from "react"
-import { SelfAssessmentContext } from "../SelfAssessmentContext"
+
+import { SelfAssessmentContext } from "./Context"
 import { SelfAssessmentStackScreens } from "../navigation"
 import HowAreYouFeeling from "./HowAreYouFeeling"
 import { factories } from "../factories"

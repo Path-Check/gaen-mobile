@@ -2,10 +2,7 @@ import React from "react"
 import { fireEvent, render } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import {
-  SelfAssessmentContext,
-  SelfAssessmentProvider,
-} from "../SelfAssessmentContext"
+import { SelfAssessmentContext, SelfAssessmentProvider } from "./Context"
 import { UnderlyingCondition } from "./selfAssessment"
 import { factories } from "../factories"
 import { SelfAssessmentStackScreens } from "../navigation"

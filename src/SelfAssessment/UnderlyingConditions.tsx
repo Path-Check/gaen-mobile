@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { SelfAssessmentStackScreens } from "../navigation"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 import { Text } from "../components"
 import { UnderlyingCondition } from "./selfAssessment"
 import SymptomCheckbox from "./SymptomCheckbox"

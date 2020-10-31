@@ -13,7 +13,7 @@ import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 import { Text } from "../components"
 import { Colors, Forms, Iconography } from "../styles"
 import { SelfAssessmentStackScreens } from "../navigation"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 import { AgeRange } from "./selfAssessment"
 import SelfAssessmentLayout from "./SelfAssessmentLayout"
 
