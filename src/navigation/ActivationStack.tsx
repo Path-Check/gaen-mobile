@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"

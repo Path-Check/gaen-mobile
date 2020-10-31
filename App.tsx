@@ -13,7 +13,7 @@ import {
 } from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/PermissionsContext"
-import { SystemServicesProvider } from "./src/SystemServicesContext"
+import { SystemServicesProvider } from "./src/Device/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/ProductAnalytics/Context"

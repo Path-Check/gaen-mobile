@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { Text } from "../components"
 import { useApplicationName } from "../hooks/useApplicationInfo"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { openAppSettings } from "../Device"
 import { nextScreenFromBluetooth } from "./activationStackController"
 

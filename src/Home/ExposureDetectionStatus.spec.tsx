@@ -13,7 +13,7 @@ import ExposureDetectionStatus from "./ExposureDetectionStatus"
 import { HomeStackScreens } from "../navigation"
 import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
 import { PermissionStatus } from "../permissionStatus"
-import { SystemServicesContext } from "../SystemServicesContext"
+import { SystemServicesContext } from "../Device/SystemServicesContext"
 
 jest.mock("@react-navigation/native")
 

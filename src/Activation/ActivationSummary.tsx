@@ -15,7 +15,7 @@ import {
 import { useOnboardingContext } from "../OnboardingContext"
 import { useApplicationName } from "../hooks/useApplicationInfo"
 import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { openAppSettings } from "../Device"
 
 import { Images } from "../assets"

@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"

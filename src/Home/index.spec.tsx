@@ -1,4 +1,5 @@
 import React from "react"
+import { Share } from "react-native"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
@@ -6,10 +7,9 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "./index"
 import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
-import { Share } from "react-native"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { ENPermissionStatus, PermissionsContext } from "../PermissionsContext"
-import { SystemServicesContext } from "../SystemServicesContext"
+import { SystemServicesContext } from "../Device/SystemServicesContext"
 import { PermissionStatus } from "../permissionStatus"
 
 jest.mock("@react-navigation/native")
