@@ -3,16 +3,16 @@ import { Alert, Platform, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
-import { useStatusBarEffect, HomeStackScreens } from "../navigation"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
+import { useExposureDetectionStatus } from "../Device/useExposureDetectionStatus"
 import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 import ActivationStatusView from "./ActivationStatusView"
+import { useStatusBarEffect, HomeStackScreens } from "../navigation"
 import { Text } from "../components"
 
 import { Colors, Spacing, Typography } from "../styles"

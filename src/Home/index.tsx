@@ -31,7 +31,7 @@ import { StatusBar, Text } from "../components"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
 import CovidDataCard from "../CovidData/Card"
-import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
+import { useExposureDetectionStatus } from "../Device/useExposureDetectionStatus"
 
 import { Icons, Images } from "../assets"
 import {
