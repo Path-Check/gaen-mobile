@@ -3,10 +3,10 @@ import { Platform } from "react-native"
 
 import useOnAppStateChange from "./useOnAppStateChange"
 import {
+  subscribeToLocationStatusEvents,
   isLocationEnabled,
   doesDeviceSupportLocationlessScanning,
-  subscribeToLocationStatusEvents,
-} from "../gaen/nativeModule"
+} from "../Device"
 
 export type LocationPermissions = "NotRequired" | "RequiredOff" | "RequiredOn"
 type LocationEnabledState = "Unknown" | "Off" | "On"

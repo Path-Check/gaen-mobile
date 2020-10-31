@@ -1,10 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 
 import useOnAppStateChange from "./useOnAppStateChange"
-import {
-  isBluetoothEnabled,
-  subscribeToBluetoothStatusEvents,
-} from "../gaen/nativeModule"
+import { isBluetoothEnabled, subscribeToBluetoothStatusEvents } from "../Device"
 
 const useIsBluetoothOn = (): boolean => {
   const [isBluetoothOn, setIsBluetoothOn] = useState(false)

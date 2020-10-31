@@ -45,34 +45,6 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-export const subscribeToBluetoothStatusEvents = (
-  cb: (enabled: boolean) => void,
-): EventSubscription => {
-  const ExposureEvents = new NativeEventEmitter(
-    NativeModules.ExposureEventEmitter,
-  )
-  return ExposureEvents.addListener(
-    "onBluetoothStatusUpdated",
-    (enabled: boolean) => {
-      cb(enabled)
-    },
-  )
-}
-
-export const subscribeToLocationStatusEvents = (
-  cb: (enabled: boolean) => void,
-): EventSubscription => {
-  const ExposureEvents = new NativeEventEmitter(
-    NativeModules.ExposureEventEmitter,
-  )
-  return ExposureEvents.addListener(
-    "onLocationStatusUpdated",
-    (enabled: boolean) => {
-      cb(enabled)
-    },
-  )
-}
-
 const toStatus = (data: string[]): RawENPermissionStatus => {
   const networkAuthorization = data[0]
   const networkEnablement = data[1]
@@ -211,36 +183,6 @@ export const getRevisionToken = async (): Promise<string> => {
   return exposureKeyModule.getRevisionToken()
 }
 
-// Device Info Module
-const deviceInfoModule = NativeModules.DeviceInfoModule
-
-export const getApplicationName = async (): Promise<string> => {
-  return deviceInfoModule.getApplicationName()
-}
-
-export const getBuildNumber = async (): Promise<string> => {
-  return deviceInfoModule.getBuildNumber()
-}
-
-export const getVersion = async (): Promise<string> => {
-  return deviceInfoModule.getVersion()
-}
-
-export const isBluetoothEnabled = async (): Promise<boolean> => {
-  const bluetoothStatus = await deviceInfoModule.isBluetoothEnabled()
-  return bluetoothStatus === true || bluetoothStatus === "true"
-}
-
-export const doesDeviceSupportLocationlessScanning = async (): Promise<
-  boolean
-> => {
-  return deviceInfoModule.deviceSupportsLocationlessScanning()
-}
-
-export const isLocationEnabled = async (): Promise<boolean> => {
-  return deviceInfoModule.isLocationEnabled()
-}
-
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
@@ -282,4 +224,3 @@ export const simulateExposureDetectionError = async (): Promise<"success"> => {
 export const resetExposures = async (): Promise<"success"> => {
   return debugModule.resetExposures()
 }
-

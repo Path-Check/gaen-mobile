@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react"
 
-import {
-  getVersion,
-  getBuildNumber,
-  getApplicationName,
-} from "../gaen/nativeModule"
+import { getVersion, getBuildNumber, getApplicationName } from "../Device"
 
 interface ApplicationInfo {
   applicationName: string

@@ -1,3 +1,23 @@
-import { openAppSettings } from "./nativeModule"
+import {
+  doesDeviceSupportLocationlessScanning,
+  getApplicationName,
+  getBuildNumber,
+  getVersion,
+  isBluetoothEnabled,
+  isLocationEnabled,
+  openAppSettings,
+  subscribeToBluetoothStatusEvents,
+  subscribeToLocationStatusEvents,
+} from "./nativeModule"
 
-export { openAppSettings }
+export {
+  doesDeviceSupportLocationlessScanning,
+  getApplicationName,
+  getBuildNumber,
+  getVersion,
+  isBluetoothEnabled,
+  isLocationEnabled,
+  openAppSettings,
+  subscribeToBluetoothStatusEvents,
+  subscribeToLocationStatusEvents,
+}
