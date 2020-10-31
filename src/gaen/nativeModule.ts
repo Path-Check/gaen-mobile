@@ -4,7 +4,7 @@ import {
   EventSubscription,
 } from "react-native"
 
-import { RawENPermissionStatus } from "../PermissionsContext"
+import { RawENPermissionStatus } from "../Device/PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"

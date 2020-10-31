@@ -9,10 +9,10 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../PermissionsContext"
-import { Text } from "../components"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
+import { Text } from "../components"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 

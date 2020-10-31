@@ -7,8 +7,8 @@ import { AffectedUserProvider } from "../AffectedUserContext"
 import {
   PermissionsContext,
   ENPermissionStatus,
-} from "../../PermissionsContext"
-import { PermissionStatus } from "../../permissionStatus"
+} from "../../Device/PermissionsContext"
+import { PermissionStatus } from "../../Device/permissionStatus"
 
 jest.mock("@react-navigation/native")
 

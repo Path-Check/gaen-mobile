@@ -13,8 +13,8 @@ import {
 } from "react-native-permissions"
 
 import { PermissionStatus, statusToEnum } from "./permissionStatus"
-import gaenStrategy from "./gaen"
-import { isPlatformiOS } from "./utils"
+import gaenStrategy from "../gaen"
+import { isPlatformiOS } from "../utils"
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`

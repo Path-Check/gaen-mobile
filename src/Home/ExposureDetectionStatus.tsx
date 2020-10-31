@@ -10,7 +10,7 @@ import { useApplicationName } from "../Device/useApplicationInfo"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../PermissionsContext"
+} from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 import ActivationStatusView from "./ActivationStatusView"
 import { Text } from "../components"

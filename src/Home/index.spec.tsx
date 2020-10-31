@@ -8,14 +8,17 @@ import Home from "./index"
 import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { ENPermissionStatus, PermissionsContext } from "../PermissionsContext"
+import {
+  ENPermissionStatus,
+  PermissionsContext,
+} from "../Device/PermissionsContext"
 import { SystemServicesContext } from "../Device/SystemServicesContext"
-import { PermissionStatus } from "../permissionStatus"
+import { PermissionStatus } from "../Device/permissionStatus"
 
 jest.mock("@react-navigation/native")
 
 const mockedApplicationName = "applicationName"
-jest.mock("../hooks/useApplicationInfo", () => {
+jest.mock("../Device/useApplicationInfo", () => {
   return {
     useApplicationName: () => {
       return {

@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../../PermissionsContext"
+} from "../../Device/PermissionsContext"
 import CodeInputForm from "./CodeInputForm"
 import EnableExposureNotifications from "./EnableExposureNotifications"
 

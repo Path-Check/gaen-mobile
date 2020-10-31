@@ -11,14 +11,17 @@ import "@testing-library/jest-native/extend-expect"
 
 import ExposureDetectionStatus from "./ExposureDetectionStatus"
 import { HomeStackScreens } from "../navigation"
-import { PermissionsContext, ENPermissionStatus } from "../PermissionsContext"
-import { PermissionStatus } from "../permissionStatus"
+import {
+  PermissionsContext,
+  ENPermissionStatus,
+} from "../Device/PermissionsContext"
+import { PermissionStatus } from "../Device/permissionStatus"
 import { SystemServicesContext } from "../Device/SystemServicesContext"
 
 jest.mock("@react-navigation/native")
 
 const mockedApplicationName = "applicationName"
-jest.mock("../hooks/useApplicationInfo", () => {
+jest.mock("../Device/useApplicationInfo", () => {
   return {
     useApplicationName: () => {
       return {

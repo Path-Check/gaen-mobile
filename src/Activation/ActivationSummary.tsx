@@ -11,12 +11,12 @@ import { useTranslation } from "react-i18next"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
+} from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
-import { Text } from "../components"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { openAppSettings } from "../Device"
+import { useSystemServicesContext } from "../Device/SystemServicesContext"
+import { useOnboardingContext } from "../OnboardingContext"
+import { Text } from "../components"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"

@@ -1,7 +1,7 @@
 import {
   ENPermissionStatus,
   usePermissionsContext,
-} from "../PermissionsContext"
+} from "../Device/PermissionsContext"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
 
 interface ExposureDetectionStatus {

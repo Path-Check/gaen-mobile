@@ -6,8 +6,8 @@ import {
   PermissionsContext,
   PermissionsContextState,
   ENPermissionStatus,
-} from "../PermissionsContext"
-import { PermissionStatus } from "../permissionStatus"
+} from "../Device/PermissionsContext"
+import { PermissionStatus } from "../Device/permissionStatus"
 import { ActivationStackScreens } from "../navigation"
 import NotificationPermissions from "./NotificationPermissions"
 
