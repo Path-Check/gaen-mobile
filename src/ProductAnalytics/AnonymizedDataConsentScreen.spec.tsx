@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import AnonymizedDataConsentScreen from "./AnonymizedDataConsentScreen"
 import { factories } from "../factories"
-import { AnalyticsContext } from "../AnalyticsContext"
+import { AnalyticsContext } from "./Context"
 import { applyModalHeader } from "../navigation/ModalHeader"
 import { OnboardingContext } from "../OnboardingContext"
 import { ActivationStackScreens } from "../navigation"

@@ -16,7 +16,7 @@ import { PermissionsProvider } from "./src/PermissionsContext"
 import { SystemServicesProvider } from "./src/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
-import { AnalyticsProvider } from "./src/AnalyticsContext"
+import { AnalyticsProvider } from "./src/ProductAnalytics/Context"
 import { SymptomHistoryProvider } from "./src/SymptomHistory/SymptomHistoryContext"
 import { CovidDataContextProvider } from "./src/CovidData/Context"
 

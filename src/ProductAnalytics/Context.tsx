@@ -6,9 +6,9 @@ import React, {
   useContext,
 } from "react"
 import Matomo from "react-native-matomo-sdk"
-import { StorageUtils } from "./utils"
-import { actions } from "./analytics"
-import { useConfigurationContext } from "./ConfigurationContext"
+import { StorageUtils } from "../utils"
+import { actions } from "./index"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
