@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native"
 import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
@@ -22,7 +22,7 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { locationPermissions } = useSystemServicesContext()
+  const { locationPermissions } = usePermissionsContext()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"

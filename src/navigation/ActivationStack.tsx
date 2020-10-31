@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
@@ -32,7 +32,7 @@ const Stack = createStackNavigator<ActivationStackParams>()
 const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
+  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
   const { displayAcceptTermsOfService } = useConfigurationContext()
 
   interface ActivationStep {

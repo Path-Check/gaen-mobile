@@ -1,27 +1,30 @@
 import { register } from "fishery"
+
 import analyticsContext from "./analyticsContext"
 import configurationContext from "./configurationContext"
+import covidDataContext from "./covidDataContext"
 import exposureContext from "./exposureContext"
 import exposureDatum from "./exposureDatum"
 import gaenStrategy from "./gaenStrategy"
-import symptomHistoryContext from "./symptomHistoryContext"
-import selfAssessmentContext from "./selfAssessmentContext"
-import selfAssessmentAnswers from "./selfAssessmentAnswers"
+import permissionsContext from "./permissionsContext"
 import rawExposure from "./rawExposure"
+import selfAssessmentAnswers from "./selfAssessmentAnswers"
+import selfAssessmentContext from "./selfAssessmentContext"
+import symptomHistoryContext from "./symptomHistoryContext"
 import { covidData, covidDatum } from "./covidData"
-import covidDataContext from "./covidDataContext"
 
 export const factories = register({
   analyticsContext,
   configurationContext,
   covidData,
-  covidDatum,
   covidDataContext,
+  covidDatum,
   exposureContext,
   exposureDatum,
   gaenStrategy,
-  symptomHistoryContext,
-  selfAssessmentContext,
-  selfAssessmentAnswers,
+  permissionsContext,
   rawExposure,
+  selfAssessmentAnswers,
+  selfAssessmentContext,
+  symptomHistoryContext,
 })

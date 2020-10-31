@@ -12,9 +12,38 @@ import {
   requestNotifications,
 } from "react-native-permissions"
 
-import { PermissionStatus, statusToEnum } from "./permissionStatus"
 import gaenStrategy from "../gaen"
 import { isPlatformiOS } from "../utils"
+import useIsBluetoothOn from "./useIsBluetoothOn"
+import useLocationPermissions, {
+  LocationPermissions,
+} from "./useLocationPermissions"
+
+export enum PermissionStatus {
+  UNKNOWN,
+  GRANTED,
+  DENIED,
+}
+
+export const statusToEnum = (status: string | void): PermissionStatus => {
+  switch (status) {
+    case "unknown": {
+      return PermissionStatus.UNKNOWN
+    }
+    case "denied": {
+      return PermissionStatus.DENIED
+    }
+    case "blocked": {
+      return PermissionStatus.DENIED
+    }
+    case "granted": {
+      return PermissionStatus.GRANTED
+    }
+    default: {
+      return PermissionStatus.UNKNOWN
+    }
+  }
+}
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`
@@ -52,6 +81,8 @@ const initialENStatus: ENPermissionStatus = toENPermissionStatusEnum(
 )
 
 export interface PermissionsContextState {
+  isBluetoothOn: boolean
+  locationPermissions: LocationPermissions
   notification: {
     status: PermissionStatus
     check: () => void
@@ -65,6 +96,8 @@ export interface PermissionsContextState {
 }
 
 const initialState = {
+  isBluetoothOn: false,
+  locationPermissions: "RequiredOff" as const,
   notification: {
     status: PermissionStatus.UNKNOWN,
     check: () => {},
@@ -88,6 +121,8 @@ export interface PermissionStrategy {
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
+  const isBluetoothOn = useIsBluetoothOn()
+  const locationPermissions = useLocationPermissions()
   const [
     exposureNotificationsPermissionStatus,
     setExposureNotificationsPermissionStatus,
@@ -156,6 +191,8 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   return (
     <PermissionsContext.Provider
       value={{
+        isBluetoothOn,
+        locationPermissions,
         notification: {
           status: notificationPermission,
           check: checkNotificationPermission,

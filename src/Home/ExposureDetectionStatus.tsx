@@ -3,7 +3,6 @@ import { Alert, Platform, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useExposureDetectionStatus } from "../Device/useExposureDetectionStatus"
 import {
@@ -22,8 +21,11 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const { exposureNotifications } = usePermissionsContext()
+  const {
+    exposureNotifications,
+    isBluetoothOn,
+    locationPermissions,
+  } = usePermissionsContext()
   const { applicationName } = useApplicationName()
 
   const BluetoothActivationStatus: FunctionComponent = () => {

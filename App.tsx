@@ -13,7 +13,6 @@ import {
 } from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/Device/PermissionsContext"
-import { SystemServicesProvider } from "./src/Device/SystemServicesContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
 import { AnalyticsProvider } from "./src/ProductAnalytics/Context"
@@ -50,18 +49,16 @@ const App: FunctionComponent = () => {
               userHasCompletedOnboarding={isOnboardingComplete}
             >
               <PermissionsProvider>
-                <SystemServicesProvider>
-                  <ExposureProvider>
-                    <AnalyticsProvider>
-                      <SymptomHistoryProvider>
-                        <CovidDataContextProvider>
-                          <MainNavigator />
-                          <FlashMessage />
-                        </CovidDataContextProvider>
-                      </SymptomHistoryProvider>
-                    </AnalyticsProvider>
-                  </ExposureProvider>
-                </SystemServicesProvider>
+                <ExposureProvider>
+                  <AnalyticsProvider>
+                    <SymptomHistoryProvider>
+                      <CovidDataContextProvider>
+                        <MainNavigator />
+                        <FlashMessage />
+                      </CovidDataContextProvider>
+                    </SymptomHistoryProvider>
+                  </AnalyticsProvider>
+                </ExposureProvider>
               </PermissionsProvider>
             </OnboardingProvider>
           </ConfigurationProvider>

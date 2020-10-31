@@ -14,9 +14,10 @@ import { HomeStackScreens } from "../navigation"
 import {
   PermissionsContext,
   ENPermissionStatus,
+  PermissionStatus,
 } from "../Device/PermissionsContext"
-import { PermissionStatus } from "../Device/permissionStatus"
-import { SystemServicesContext } from "../Device/SystemServicesContext"
+import { LocationPermissions } from "../Device/useLocationPermissions"
+import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
 
@@ -39,20 +40,18 @@ describe("ExposureDetectionStatus", () => {
   describe("When Bluetooth is off", () => {
     it("shows a disabled message for Bluetooth and a general disabled message", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
+      const isBluetoothOn = false
+      const locationPermissions = "NotRequired"
+
       const permissionProviderValue = createPermissionProviderValue(
+        isBluetoothOn,
+        locationPermissions,
         enPermissionStatus,
       )
 
       const { getByTestId, getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: false,
-              locationPermissions: "NotRequired",
-            }}
-          >
-            <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>
+          <ExposureDetectionStatus />
         </PermissionsContext.Provider>,
       )
 
@@ -72,20 +71,18 @@ describe("ExposureDetectionStatus", () => {
 
     it("allows the user to get info on enabling Bluetooth", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
+      const isBluetoothOn = false
+      const locationPermissions = "RequiredOn"
+
       const permissionProviderValue = createPermissionProviderValue(
+        isBluetoothOn,
+        locationPermissions,
         enPermissionStatus,
       )
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: false,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>
+          <ExposureDetectionStatus />
         </PermissionsContext.Provider>,
       )
 
@@ -109,20 +106,17 @@ describe("ExposureDetectionStatus", () => {
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
 
       const enPermissionStatus = ENPermissionStatus.ENABLED
+      const isBluetoothOn = true
+      const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
+        isBluetoothOn,
+        locationPermissions,
         enPermissionStatus,
       )
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>
+          <ExposureDetectionStatus />
         </PermissionsContext.Provider>,
       )
 
@@ -134,20 +128,17 @@ describe("ExposureDetectionStatus", () => {
   describe("When the app is not authorized", () => {
     it("shows a disabled message for Exposure Notifications and a general disabled message", () => {
       const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const isBluetoothOn = true
+      const locationPermissions = "NotRequired"
       const permissionProviderValue = createPermissionProviderValue(
+        isBluetoothOn,
+        locationPermissions,
         enPermissionStatus,
       )
 
       const { getByTestId, getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "NotRequired",
-            }}
-          >
-            <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>
+          <ExposureDetectionStatus />
         </PermissionsContext.Provider>,
       )
 
@@ -170,6 +161,8 @@ describe("ExposureDetectionStatus", () => {
       const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
+        true,
+        "RequiredOn",
         enPermissionStatus,
         requestSpy,
       )
@@ -205,6 +198,8 @@ describe("ExposureDetectionStatus", () => {
       const enPermissionStatus = ENPermissionStatus.DISABLED
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
+        true,
+        "RequiredOn",
         enPermissionStatus,
         requestSpy,
       )
@@ -229,6 +224,8 @@ describe("ExposureDetectionStatus", () => {
 
       const enPermissionStatus = ENPermissionStatus.ENABLED
       const permissionProviderValue = createPermissionProviderValue(
+        true,
+        "RequiredOn",
         enPermissionStatus,
       )
 
@@ -248,15 +245,15 @@ describe("ExposureDetectionStatus", () => {
   describe("When the device does not support locationless scanning", () => {
     describe("and location is on", () => {
       it("shows location as enabled", () => {
+        const permissionsState = factories.permissionsContext.build({
+          isBluetoothOn: true,
+          locationPermissions: "RequiredOn",
+        })
+
         const { getByTestId } = render(
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
+          <PermissionsContext.Provider value={permissionsState}>
             <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>,
+          </PermissionsContext.Provider>,
         )
 
         const locationStatusContainer = getByTestId("location-status-container")
@@ -267,16 +264,15 @@ describe("ExposureDetectionStatus", () => {
       it("allows the user to get more info about location services", () => {
         const navigateSpy = jest.fn()
         ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+        const permissionsState = factories.permissionsContext.build({
+          isBluetoothOn: true,
+          locationPermissions: "RequiredOn",
+        })
 
         const { getByTestId } = render(
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
+          <PermissionsContext.Provider value={permissionsState}>
             <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>,
+          </PermissionsContext.Provider>,
         )
 
         fireEvent.press(getByTestId("location-status-container"))
@@ -286,15 +282,14 @@ describe("ExposureDetectionStatus", () => {
 
     describe("and location is off", () => {
       it("shows a disabled message for location and a general disabled message", () => {
+        const permissionsState = factories.permissionsContext.build({
+          isBluetoothOn: true,
+          locationPermissions: "RequiredOff",
+        })
         const { getByTestId, getByText } = render(
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOff",
-            }}
-          >
+          <PermissionsContext.Provider value={permissionsState}>
             <ExposureDetectionStatus />
-          </SystemServicesContext.Provider>,
+          </PermissionsContext.Provider>,
         )
 
         const locationStatusContainer = getByTestId("location-status-container")
@@ -311,15 +306,15 @@ describe("ExposureDetectionStatus", () => {
 
   describe("When the device supports locationless scanning", () => {
     it("does not show the location status", () => {
+      const permissionsState = factories.permissionsContext.build({
+        isBluetoothOn: true,
+        locationPermissions: "NotRequired",
+      })
+
       const { queryByTestId } = render(
-        <SystemServicesContext.Provider
-          value={{
-            isBluetoothOn: true,
-            locationPermissions: "NotRequired",
-          }}
-        >
+        <PermissionsContext.Provider value={permissionsState}>
           <ExposureDetectionStatus />
-        </SystemServicesContext.Provider>,
+        </PermissionsContext.Provider>,
       )
 
       const locationStatusContainer = queryByTestId("location-status-container")
@@ -329,10 +324,14 @@ describe("ExposureDetectionStatus", () => {
 })
 
 const createPermissionProviderValue = (
+  isBluetoothOn = true,
+  locationPermissions: LocationPermissions = "RequiredOn",
   enPermissionStatus: ENPermissionStatus,
   requestPermission: () => Promise<void> = () => Promise.resolve(),
 ) => {
   return {
+    isBluetoothOn,
+    locationPermissions,
     notification: {
       status: PermissionStatus.UNKNOWN,
       check: () => {},

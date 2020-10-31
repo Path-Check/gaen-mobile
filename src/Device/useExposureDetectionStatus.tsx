@@ -2,15 +2,17 @@ import {
   ENPermissionStatus,
   usePermissionsContext,
 } from "../Device/PermissionsContext"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
 
 interface ExposureDetectionStatus {
   exposureDetectionStatus: boolean
 }
 
 export const useExposureDetectionStatus = (): ExposureDetectionStatus => {
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const { exposureNotifications } = usePermissionsContext()
+  const {
+    isBluetoothOn,
+    locationPermissions,
+    exposureNotifications,
+  } = usePermissionsContext()
 
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 

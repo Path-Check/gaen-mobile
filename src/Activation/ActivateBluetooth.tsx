@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 import { nextScreenFromBluetooth } from "./activationStackController"
 
@@ -22,7 +22,7 @@ const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
+  const { isBluetoothOn, locationPermissions } = usePermissionsContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const navigateToNextScreen = () => {

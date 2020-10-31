@@ -14,7 +14,6 @@ import {
 } from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
-import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { useOnboardingContext } from "../OnboardingContext"
 import { Text } from "../components"
 
@@ -25,14 +24,15 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
-
   const {
+    isBluetoothOn,
+    locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
+
   const isENEnabled = status === ENPermissionStatus.ENABLED
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()
