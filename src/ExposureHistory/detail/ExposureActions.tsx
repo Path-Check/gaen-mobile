@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg"
 
 import { ModalStackScreens } from "../../navigation"
 import { Text } from "../../components"
-import { useConnectionStatus } from "../../hooks/useConnectionStatus"
+import { useConnectionStatus } from "../../Device/useConnectionStatus"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"

@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
 import { useStatusBarEffect, HomeStackScreens } from "../navigation"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import {
   usePermissionsContext,
   ENPermissionStatus,

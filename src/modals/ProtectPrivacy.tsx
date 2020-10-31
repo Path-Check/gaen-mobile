@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { Text } from "../components"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 
 import { Typography, Spacing, Colors } from "../styles"
 import { Images } from "../assets"

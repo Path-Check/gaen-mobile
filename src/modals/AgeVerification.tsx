@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import { useApplicationInfo } from "../Device/useApplicationInfo"
 import { Stacks, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 

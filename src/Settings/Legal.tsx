@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "./ExternalLink"
 import {

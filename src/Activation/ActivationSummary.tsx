@@ -13,7 +13,7 @@ import {
   ENPermissionStatus,
 } from "../PermissionsContext"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { Text } from "../components"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { openAppSettings } from "../Device"

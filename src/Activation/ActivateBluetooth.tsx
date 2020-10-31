@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { Text } from "../components"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { useSystemServicesContext } from "../Device/SystemServicesContext"
 import { openAppSettings } from "../Device"
 import { nextScreenFromBluetooth } from "./activationStackController"
