@@ -2,11 +2,11 @@ import React from "react"
 import { showMessage } from "react-native-flash-message"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 
+import { factories } from "../../factories"
+import { SymptomEntry } from "../symptomHistory"
+import { Symptom } from "../symptom"
+import { SymptomHistoryContext } from "../SymptomHistoryContext"
 import { SelectSymptomsForm } from "./SelectSymptoms"
-import { SymptomEntry } from "./symptomHistory"
-import { Symptom } from "./symptom"
-import { SymptomHistoryContext } from "./SymptomHistoryContext"
-import { factories } from "../factories"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")

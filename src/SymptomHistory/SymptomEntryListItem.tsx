@@ -9,6 +9,7 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
+import { DATE_FORMAT } from "./index"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 
@@ -47,7 +48,7 @@ const SymptomEntryListItem: FunctionComponent<SymptomEntryListItemProps> = ({
     })
   }
 
-  const dateText = dayJsDate.local().format("MMM D, 'YY")
+  const dateText = dayJsDate.local().format(DATE_FORMAT)
 
   const toSymptomText = (symptom: Symptom.Symptom) => {
     const translatedSymptom = Symptom.toTranslation(t, symptom)

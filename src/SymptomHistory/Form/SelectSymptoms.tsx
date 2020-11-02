@@ -7,14 +7,18 @@ import {
   Text,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { showMessage } from "react-native-flash-message"
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import { useStatusBarEffect, SymptomHistoryStackScreens } from "../navigation"
-import { useSymptomHistoryContext } from "./SymptomHistoryContext"
-import * as Symptom from "./symptom"
-import { hasEmergencySymptoms, SymptomEntry } from "./symptomHistory"
-import { showMessage } from "react-native-flash-message"
-import { posixToDayjs } from "../utils/dateTime"
+import {
+  useStatusBarEffect,
+  SymptomHistoryStackScreens,
+} from "../../navigation"
+import { SymptomHistoryStackParams } from "../../navigation/SymptomHistoryStack"
+import { posixToDayjs } from "../../utils/dateTime"
+import { useSymptomHistoryContext } from "../SymptomHistoryContext"
+import * as Symptom from "../symptom"
+import { hasEmergencySymptoms, SymptomEntry } from "../symptomHistory"
 import Checkbox from "./Checkbox"
 
 import {
@@ -24,8 +28,7 @@ import {
   Outlines,
   Spacing,
   Typography,
-} from "../styles"
-import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
+} from "../../styles"
 
 const SelectSymptomsScreen: FunctionComponent = () => {
   const route = useRoute<

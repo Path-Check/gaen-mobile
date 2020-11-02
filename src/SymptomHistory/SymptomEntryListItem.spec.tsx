@@ -72,7 +72,7 @@ describe("SymptomEntryListItem", () => {
         <SymptomEntryListItem entry={symptomEntry} />,
       )
 
-      const editButton = getByLabelText("Edit - Jan 1, '20")
+      const editButton = getByLabelText("Edit - Wed Jan 1, 2020")
       fireEvent.press(editButton)
 
       const expectedScreen = SymptomHistoryStackScreens.SelectSymptoms

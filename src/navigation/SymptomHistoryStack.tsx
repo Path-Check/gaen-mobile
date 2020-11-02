@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import SymptomHistoryScreen from "../SymptomHistory/"
-import SelectSymptomsScreen from "../SymptomHistory/SelectSymptoms"
+import SelectSymptomsScreen from "../SymptomHistory/Form/SelectSymptoms"
 import CallEmergencyServices from "../CallEmergencyServices"
 import { Stacks, SymptomHistoryStackScreens } from "./index"
 import { applyModalHeader } from "./ModalHeader"

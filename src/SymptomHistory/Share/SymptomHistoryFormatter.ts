@@ -1,11 +1,12 @@
 import { TFunction } from "i18next"
 
-import { posixToDayjs } from "../utils/dateTime"
-import { SymptomHistory, SymptomEntry } from "./symptomHistory"
-import * as Symptom from "./symptom"
+import { posixToDayjs } from "../../utils/dateTime"
+import { DATE_FORMAT } from "../index"
+import { SymptomHistory, SymptomEntry } from "../symptomHistory"
+import * as Symptom from "../symptom"
 
 class SymptomHistoryFormatter {
-  private DATE_FORMAT = "MMM D, 'YY"
+  private DATE_FORMAT = DATE_FORMAT
   private t: TFunction
   private symptomHistory: SymptomHistory
 
