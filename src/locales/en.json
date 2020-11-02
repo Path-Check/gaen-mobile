@@ -421,20 +421,23 @@
     "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },
-  "symptoms": {
-    "body_aches": "Body aches",
-    "chest_pain_or_pressure": "Chest pain or pressure",
-    "chills": "Chills",
+  "symptom": {
+    "bluish_lips_or_face": "Bluish lips or face",
+    "congestion_or_runny_nose": "Congestion or runny nose",
     "cough": "Cough",
     "diarrhea": "Diarrhea",
-    "difficulty_breathing": "Difficulty breathing",
-    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
-    "fever": "Fever",
-    "lightheadedness": "Lightheadedness",
-    "loss_of_appetite": "Loss of appetite",
-    "loss_of_smell": "Loss of smell",
-    "loss_of_taste": "Loss of taste",
+    "fatigue": "Fatigue",
+    "fever_or_chills": "Fever or chills",
+    "headache": "Headache",
+    "inability_to_wake_or_stay_awake": "Inability to wake or stay awake",
+    "muscle_or_body_aches": "Muscle or body aches",
+    "nausea_or_vomiting": "Nausea or vomiting",
+    "new_confusion": "New confusion",
+    "new_loss_of_taste_or_smell": "New loss of taste or smell",
     "other": "Other",
-    "vomiting": "Vomiting"
+    "persistent_pain_or_pressure_in_the_chest": "Persistent pain or pressure in the chest",
+    "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
+    "sore_throat": "Sore throat",
+    "trouble_breathing": "Trouble breathing"
   }
 }

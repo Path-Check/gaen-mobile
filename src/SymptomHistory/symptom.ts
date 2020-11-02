@@ -1,86 +1,117 @@
 import { TFunction } from "i18next"
 
 export type Symptom =
-  | "chest_pain_or_pressure"
-  | "difficulty_breathing"
-  | "lightheadedness"
-  | "disorientation_or_unresponsiveness"
-  | "fever"
-  | "chills"
+  | "trouble_breathing"
+  | "persistent_pain_or_pressure_in_the_chest"
+  | "new_confusion"
+  | "inability_to_wake_or_stay_awake"
+  | "bluish_lips_or_face"
+  | "fever_or_chills"
   | "cough"
-  | "loss_of_smell"
-  | "loss_of_taste"
-  | "loss_of_appetite"
-  | "vomiting"
+  | "shortness_of_breath_or_difficulty_breathing"
+  | "fatigue"
+  | "muscle_or_body_aches"
+  | "headache"
+  | "new_loss_of_taste_or_smell"
+  | "sore_throat"
+  | "congestion_or_runny_nose"
+  | "nausea_or_vomiting"
   | "diarrhea"
-  | "body_aches"
   | "other"
 
 export const all: Symptom[] = [
+  "trouble_breathing",
+  "persistent_pain_or_pressure_in_the_chest",
+  "new_confusion",
+  "inability_to_wake_or_stay_awake",
+  "bluish_lips_or_face",
+  "fever_or_chills",
   "cough",
-  "fever",
-  "chest_pain_or_pressure",
-  "difficulty_breathing",
-  "lightheadedness",
-  "disorientation_or_unresponsiveness",
-  "chills",
-  "loss_of_smell",
-  "loss_of_taste",
-  "loss_of_appetite",
-  "vomiting",
+  "shortness_of_breath_or_difficulty_breathing",
+  "fatigue",
+  "muscle_or_body_aches",
+  "headache",
+  "new_loss_of_taste_or_smell",
+  "sore_throat",
+  "congestion_or_runny_nose",
+  "nausea_or_vomiting",
   "diarrhea",
-  "body_aches",
   "other",
 ]
 
+export const covidSymptoms: Symptom[] = [
+  "fever_or_chills",
+  "cough",
+  "shortness_of_breath_or_difficulty_breathing",
+  "fatigue",
+  "muscle_or_body_aches",
+  "headache",
+  "new_loss_of_taste_or_smell",
+  "sore_throat",
+  "congestion_or_runny_nose",
+  "nausea_or_vomiting",
+  "diarrhea",
+]
+
 export const emergencySymptoms: Symptom[] = [
-  "chest_pain_or_pressure",
-  "difficulty_breathing",
-  "lightheadedness",
-  "disorientation_or_unresponsiveness",
+  "trouble_breathing",
+  "persistent_pain_or_pressure_in_the_chest",
+  "new_confusion",
+  "inability_to_wake_or_stay_awake",
+  "bluish_lips_or_face",
 ]
 
 export const fromString = (rawSymptom: string): Symptom | null => {
   switch (rawSymptom) {
-    case "chest_pain_or_pressure": {
-      return "chest_pain_or_pressure"
+    case "trouble_breathing": {
+      return "trouble_breathing"
     }
-    case "difficulty_breathing": {
-      return "difficulty_breathing"
+    case "persistent_pain_or_pressure_in_the_chest": {
+      return "persistent_pain_or_pressure_in_the_chest"
     }
-    case "lightheadedness": {
-      return "lightheadedness"
+    case "new_confusion": {
+      return "new_confusion"
     }
-    case "disorientation_or_unresponsiveness": {
-      return "disorientation_or_unresponsiveness"
+    case "inability_to_wake_or_stay_awake": {
+      return "inability_to_wake_or_stay_awake"
     }
-    case "fever": {
-      return "fever"
+    case "bluish_lips_or_face": {
+      return "bluish_lips_or_face"
     }
-    case "chills": {
-      return "chills"
+    case "fever_or_chills": {
+      return "fever_or_chills"
     }
     case "cough": {
       return "cough"
     }
-    case "loss_of_smell": {
-      return "loss_of_smell"
+    case "shortness_of_breath_or_difficulty_breathing": {
+      return "shortness_of_breath_or_difficulty_breathing"
     }
-    case "loss_of_taste": {
-      return "loss_of_taste"
+    case "fatigue": {
+      return "fatigue"
     }
-    case "loss_of_appetite": {
-      return "loss_of_appetite"
+    case "muscle_or_body_aches": {
+      return "muscle_or_body_aches"
     }
-    case "vomiting": {
-      return "vomiting"
+    case "headache": {
+      return "headache"
+    }
+    case "new_loss_of_taste_or_smell": {
+      return "new_loss_of_taste_or_smell"
+    }
+    case "sore_throat": {
+      return "sore_throat"
+    }
+    case "congestion_or_runny_nose": {
+      return "congestion_or_runny_nose"
+    }
+    case "nausea_or_vomiting": {
+      return "nausea_or_vomiting"
     }
     case "diarrhea": {
       return "diarrhea"
     }
-    case "body_aches": {
-      return "body_aches"
-    }
+
     case "other": {
       return "other"
     }
@@ -92,44 +123,53 @@ export const fromString = (rawSymptom: string): Symptom | null => {
 
 export const toString = (symptom: Symptom): string => {
   switch (symptom) {
-    case "chest_pain_or_pressure": {
-      return "chest_pain_or_pressure"
+    case "trouble_breathing": {
+      return "trouble_breathing"
     }
-    case "difficulty_breathing": {
-      return "difficulty_breathing"
+    case "persistent_pain_or_pressure_in_the_chest": {
+      return "persistent_pain_or_pressure_in_the_chest"
     }
-    case "lightheadedness": {
-      return "lightheadedness"
+    case "new_confusion": {
+      return "new_confusion"
     }
-    case "disorientation_or_unresponsiveness": {
-      return "disorientation_or_unresponsiveness"
+    case "inability_to_wake_or_stay_awake": {
+      return "inability_to_wake_or_stay_awake"
     }
-    case "fever": {
-      return "fever"
+    case "bluish_lips_or_face": {
+      return "bluish_lips_or_face"
     }
-    case "chills": {
-      return "chills"
+    case "fever_or_chills": {
+      return "fever_or_chills"
     }
     case "cough": {
       return "cough"
     }
-    case "loss_of_smell": {
-      return "loss_of_smell"
+    case "shortness_of_breath_or_difficulty_breathing": {
+      return "shortness_of_breath_or_difficulty_breathing"
     }
-    case "loss_of_taste": {
-      return "loss_of_taste"
+    case "fatigue": {
+      return "fatigue"
     }
-    case "loss_of_appetite": {
-      return "loss_of_appetite"
+    case "muscle_or_body_aches": {
+      return "muscle_or_body_aches"
     }
-    case "vomiting": {
-      return "vomiting"
+    case "headache": {
+      return "headache"
+    }
+    case "new_loss_of_taste_or_smell": {
+      return "new_loss_of_taste_or_smell"
+    }
+    case "sore_throat": {
+      return "sore_throat"
+    }
+    case "congestion_or_runny_nose": {
+      return "congestion_or_runny_nose"
+    }
+    case "nausea_or_vomiting": {
+      return "nausea_or_vomiting"
     }
     case "diarrhea": {
       return "diarrhea"
-    }
-    case "body_aches": {
-      return "body_aches"
     }
     case "other": {
       return "other"
@@ -139,47 +179,56 @@ export const toString = (symptom: Symptom): string => {
 
 export const toTranslation = (t: TFunction, symptom: Symptom): string => {
   switch (symptom) {
-    case "chest_pain_or_pressure": {
-      return t("symptoms.chest_pain_or_pressure")
+    case "trouble_breathing": {
+      return t("symptom.trouble_breathing")
     }
-    case "difficulty_breathing": {
-      return t("symptoms.difficulty_breathing")
+    case "persistent_pain_or_pressure_in_the_chest": {
+      return t("symptom.persistent_pain_or_pressure_in_the_chest")
     }
-    case "lightheadedness": {
-      return t("symptoms.lightheadedness")
+    case "new_confusion": {
+      return t("symptom.new_confusion")
     }
-    case "disorientation_or_unresponsiveness": {
-      return t("symptoms.disorientation_or_unresponsiveness")
+    case "inability_to_wake_or_stay_awake": {
+      return t("symptom.inability_to_wake_or_stay_awake")
     }
-    case "fever": {
-      return t("symptoms.fever")
+    case "bluish_lips_or_face": {
+      return t("symptom.bluish_lips_or_face")
     }
-    case "chills": {
-      return t("symptoms.chills")
+    case "fever_or_chills": {
+      return t("symptom.fever_or_chills")
     }
     case "cough": {
-      return t("symptoms.cough")
+      return t("symptom.cough")
     }
-    case "loss_of_smell": {
-      return t("symptoms.loss_of_smell")
+    case "shortness_of_breath_or_difficulty_breathing": {
+      return t("symptom.shortness_of_breath_or_difficulty_breathing")
     }
-    case "loss_of_taste": {
-      return t("symptoms.loss_of_taste")
+    case "fatigue": {
+      return t("symptom.fatigue")
     }
-    case "loss_of_appetite": {
-      return t("symptoms.loss_of_appetite")
+    case "muscle_or_body_aches": {
+      return t("symptom.muscle_or_body_aches")
     }
-    case "vomiting": {
-      return t("symptoms.vomiting")
+    case "headache": {
+      return t("symptom.headache")
+    }
+    case "new_loss_of_taste_or_smell": {
+      return t("symptom.new_loss_of_taste_or_smell")
+    }
+    case "sore_throat": {
+      return t("symptom.sore_throat")
+    }
+    case "congestion_or_runny_nose": {
+      return t("symptom.congestion_or_runny_nose")
+    }
+    case "nausea_or_vomiting": {
+      return t("symptom.nausea_or_vomiting")
     }
     case "diarrhea": {
-      return t("symptoms.diarrhea")
-    }
-    case "body_aches": {
-      return t("symptoms.body_aches")
+      return t("symptom.diarrhea")
     }
     case "other": {
-      return t("symptoms.other")
+      return t("symptom.other")
     }
   }
 }
