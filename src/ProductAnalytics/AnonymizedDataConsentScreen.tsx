@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useAnalyticsContext } from "../AnalyticsContext"
+import { useAnalyticsContext } from "./Context"
 import { useOnboardingContext } from "../OnboardingContext"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import ExternalLink from "../Settings/ExternalLink"

@@ -12,7 +12,7 @@ import {
 
 import { Text } from "../components"
 import { SelfAssessmentStackScreens } from "../navigation"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 
 import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
 import { Images } from "../assets"

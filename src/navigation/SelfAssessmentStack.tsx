@@ -6,7 +6,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 
-import { SelfAssessmentProvider } from "../SelfAssessmentContext"
+import { SelfAssessmentProvider } from "../SelfAssessment/Context"
 import { SelfAssessmentStackScreens, Stack as AllStacks } from "./index"
 
 import SelfAssessmentIntro from "../SelfAssessment/SelfAssessmentIntro"

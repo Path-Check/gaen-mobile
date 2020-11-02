@@ -16,7 +16,7 @@ import {
   determineSymptomGroup,
   SelfAssessmentAnswers,
   GeneralSymptom,
-} from "./SelfAssessment/selfAssessment"
+} from "./selfAssessment"
 
 export type SelfAssessmentContextState = {
   emergencySymptoms: EmergencySymptom[]

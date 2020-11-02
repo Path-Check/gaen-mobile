@@ -2,14 +2,10 @@ import React, { FunctionComponent } from "react"
 import { Text } from "react-native"
 import { waitFor, render } from "@testing-library/react-native"
 
-import {
-  getVersion,
-  getBuildNumber,
-  getApplicationName,
-} from "../gaen/nativeModule"
+import { getVersion, getBuildNumber, getApplicationName } from "../Device"
 import { useApplicationName, useVersionInfo } from "./useApplicationInfo"
 
-jest.mock("../gaen/nativeModule")
+jest.mock("../Device/nativeModule")
 
 describe("useApplicationName", () => {
   it("fetches the application name from the module", async () => {

@@ -1,11 +1,12 @@
 import React, { useEffect, FunctionComponent, useContext } from "react"
 import { Text } from "react-native"
-import { AnalyticsContext, AnalyticsProvider } from "./AnalyticsContext"
 import { render, waitFor } from "@testing-library/react-native"
-import { actions } from "./analytics"
-import { StorageUtils } from "./utils"
-import { ConfigurationContext } from "./ConfigurationContext"
-import { factories } from "./factories"
+
+import { StorageUtils } from "../utils"
+import { ConfigurationContext } from "../ConfigurationContext"
+import { factories } from "../factories"
+import { actions } from "./index"
+import { AnalyticsContext, AnalyticsProvider } from "./Context"
 
 const SAMPLE_EVENT = "SAMPLE_EVENT"
 describe("AnalyticsContext", () => {

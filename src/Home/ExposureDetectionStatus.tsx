@@ -11,7 +11,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../PermissionsContext"
-import { openAppSettings } from "../gaen/nativeModule"
+import { openAppSettings } from "../Device"
 import ActivationStatusView from "./ActivationStatusView"
 import { Text } from "../components"
 

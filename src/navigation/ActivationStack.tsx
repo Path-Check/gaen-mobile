@@ -17,7 +17,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
-import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
+import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
