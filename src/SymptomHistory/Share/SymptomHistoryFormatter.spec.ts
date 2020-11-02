@@ -26,7 +26,7 @@ describe("SymptomHistoryFormatter::forSharing", () => {
           id: "b",
           kind: "UserInput",
           date: twoDaysAgo,
-          symptoms: new Set<Symptom>(["cough", "fever"]),
+          symptoms: new Set<Symptom>(["cough", "fever_or_chills"]),
         },
       ]
 
@@ -47,7 +47,7 @@ describe("SymptomHistoryFormatter::forSharing", () => {
         "symptom_history.sharing.headerFri Jan 3, 2020Wed Jan 1, 2020",
         "Fri Jan 3, 2020\nsymptom_history.sharing.no_symptoms_were_logged",
         "Thu Jan 2, 2020\nsymptom_history.sharing.you_felt_well",
-        "Wed Jan 1, 2020\nsymptom_history.sharing.you_did_not_feel_wellsymptoms.cough, symptoms.fever",
+        "Wed Jan 1, 2020\nsymptom_history.sharing.you_did_not_feel_wellsymptom.cough, symptom.fever_or_chills",
       ].join("\n\n")
 
       expect(result).toEqual(expected)

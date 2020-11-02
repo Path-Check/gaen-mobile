@@ -38,10 +38,10 @@ describe("SelectSymptomsForm", () => {
         </SymptomHistoryContext.Provider>,
       )
 
-      fireEvent.press(getByLabelText("Fever"))
+      fireEvent.press(getByLabelText("Fever or chills"))
       fireEvent.press(getByTestId("select-symptoms-save"))
 
-      const expectedSymptoms = new Set<Symptom>(["cough", "fever"])
+      const expectedSymptoms = new Set<Symptom>(["cough", "fever_or_chills"])
       await waitFor(() => {
         expect(updateEntrySpy).toHaveBeenCalledWith(entry, expectedSymptoms)
       })
@@ -68,7 +68,7 @@ describe("SelectSymptomsForm", () => {
         </SymptomHistoryContext.Provider>,
       )
 
-      fireEvent.press(getByLabelText("Fever"))
+      fireEvent.press(getByLabelText("Fever or chills"))
       fireEvent.press(getByTestId("select-symptoms-save"))
 
       await waitFor(() => {

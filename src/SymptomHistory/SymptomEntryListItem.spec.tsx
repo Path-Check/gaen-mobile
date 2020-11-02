@@ -46,12 +46,12 @@ describe("SymptomEntryListItem", () => {
           id: "asdf",
           kind: "UserInput",
           date,
-          symptoms: new Set<Symptom>(["cough", "fever"]),
+          symptoms: new Set<Symptom>(["cough", "fever_or_chills"]),
         }
         const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
         expect(getByText("• Cough")).toBeDefined()
-        expect(getByText("• Fever")).toBeDefined()
+        expect(getByText("• Fever or chills")).toBeDefined()
       })
     })
   })
