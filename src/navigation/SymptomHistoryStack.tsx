@@ -4,21 +4,24 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
 import SymptomHistoryScreen from "../SymptomHistory/"
-import SelectSymptomsScreen from "../SymptomHistory/Form/SelectSymptoms"
-import CallEmergencyServices from "../CallEmergencyServices"
+import SelectSymptomsForm from "../SymptomHistory/Form/SelectSymptoms"
 import { Stacks, SymptomHistoryStackScreens } from "./index"
 import { applyModalHeader } from "./ModalHeader"
 import { SymptomEntry } from "../SymptomHistory/symptomHistory"
+import CovidRecommendation from "../CovidRecommendation"
+import CallEmergencyServices from "../CallEmergencyServices"
 
 export type SymptomHistoryStackParams = {
   SymptomHistory: undefined
   AtRiskRecommendation: undefined
   SelectSymptoms: { symptomEntry: SymptomEntry }
-  CallEmergencyServices: undefined
+  EmergencyRecommendation: undefined
+  CovidRecommendation: undefined
 }
+
 const Stack = createStackNavigator<SymptomHistoryStackParams>()
 
 const SymptomHistoryStack: FunctionComponent = () => {
@@ -42,8 +45,21 @@ const SymptomHistoryStack: FunctionComponent = () => {
         }}
       />
       <Stack.Screen
-        name={SymptomHistoryStackScreens.CallEmergencyServices}
-        component={CallEmergencyServices}
+        name={SymptomHistoryStackScreens.EmergencyRecommendation}
+        component={EmergencyRecommendationScreen}
+        options={{
+          ...TransitionPresets.ModalTransition,
+          gestureEnabled: false,
+          header: applyModalHeader("", () => {
+            navigation.navigate(Stacks.SymptomHistory, {
+              screen: SymptomHistoryStackScreens.SymptomHistory,
+            })
+          }),
+        }}
+      />
+      <Stack.Screen
+        name={SymptomHistoryStackScreens.CovidRecommendation}
+        component={CovidRecommendationScreen}
         options={{
           ...TransitionPresets.ModalTransition,
           gestureEnabled: false,
@@ -55,6 +71,49 @@ const SymptomHistoryStack: FunctionComponent = () => {
         }}
       />
     </Stack.Navigator>
+  )
+}
+
+const SelectSymptomsScreen: FunctionComponent = () => {
+  const navigation = useNavigation()
+
+  const route = useRoute<
+    RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
+  >()
+
+  const entry = route.params?.symptomEntry || {
+    kind: "NoUserInput",
+    date: Date.now(),
+  }
+
+  return (
+    <SelectSymptomsForm
+      entry={entry}
+      showNoSymptoms
+      onSubmitEmergencySymptoms={() =>
+        navigation.navigate(SymptomHistoryStackScreens.EmergencyRecommendation)
+      }
+      onSubmitCovidSympotoms={() =>
+        navigation.navigate(SymptomHistoryStackScreens.CovidRecommendation)
+      }
+      onSubmitNoSymptoms={() => navigation.goBack()}
+    />
+  )
+}
+
+const EmergencyRecommendationScreen: FunctionComponent = () => {
+  return <CallEmergencyServices />
+}
+
+const CovidRecommendationScreen: FunctionComponent = () => {
+  const navigation = useNavigation()
+
+  return (
+    <CovidRecommendation
+      onDismiss={() =>
+        navigation.navigate(SymptomHistoryStackScreens.SymptomHistory)
+      }
+    />
   )
 }
 

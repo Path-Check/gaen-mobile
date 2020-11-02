@@ -172,6 +172,7 @@
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
     "did_you_test_positive": "Did you test positive for COVID-19?",
+    "enter_symptoms": "Enter symptoms",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test result code?",

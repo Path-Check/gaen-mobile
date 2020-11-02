@@ -8,17 +8,16 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { showMessage } from "react-native-flash-message"
-import { useNavigation, useRoute, RouteProp } from "@react-navigation/native"
 
-import {
-  useStatusBarEffect,
-  SymptomHistoryStackScreens,
-} from "../../navigation"
-import { SymptomHistoryStackParams } from "../../navigation/SymptomHistoryStack"
+import { useStatusBarEffect } from "../../navigation"
 import { posixToDayjs } from "../../utils/dateTime"
 import { useSymptomHistoryContext } from "../SymptomHistoryContext"
 import * as Symptom from "../symptom"
-import { hasEmergencySymptoms, SymptomEntry } from "../symptomHistory"
+import {
+  hasCovidSymptoms,
+  hasEmergencySymptoms,
+  SymptomEntry,
+} from "../symptomHistory"
 import Checkbox from "./Checkbox"
 
 import {
@@ -30,29 +29,23 @@ import {
   Typography,
 } from "../../styles"
 
-const SelectSymptomsScreen: FunctionComponent = () => {
-  const route = useRoute<
-    RouteProp<SymptomHistoryStackParams, "SelectSymptoms">
-  >()
-
-  const entry = route.params?.symptomEntry || {
-    kind: "NoUserInput",
-    date: Date.now(),
-  }
-
-  return <SelectSymptomsForm entry={entry} />
-}
-
 interface SelectSymptomsFormProps {
   entry: SymptomEntry
+  showNoSymptoms?: boolean
+  onSubmitEmergencySymptoms: () => void
+  onSubmitCovidSympotoms: () => void
+  onSubmitNoSymptoms: () => void
 }
 
-export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
+const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   entry,
+  showNoSymptoms = false,
+  onSubmitEmergencySymptoms,
+  onSubmitCovidSympotoms,
+  onSubmitNoSymptoms,
 }) => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
-  const navigation = useNavigation()
 
   const { updateEntry } = useSymptomHistoryContext()
 
@@ -99,10 +92,11 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 
   const completeOnPressSave = () => {
     if (hasEmergencySymptoms(selectedSymptoms)) {
-      navigation.navigate(SymptomHistoryStackScreens.CallEmergencyServices)
-      showSuccessMessage()
+      onSubmitEmergencySymptoms()
+    } else if (hasCovidSymptoms(selectedSymptoms)) {
+      onSubmitCovidSympotoms()
     } else {
-      navigation.goBack()
+      onSubmitNoSymptoms()
       showSuccessMessage()
     }
   }
@@ -120,14 +114,16 @@ export const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
       >
         <Text style={style.dateText}>{dateText}</Text>
         <View style={style.symptomButtonsContainer}>
-          <View style={style.noSymptomsCheckbox}>
-            <Checkbox
-              key={"no_symptoms"}
-              label={t("symptom_history.no_symptoms")}
-              onPress={handleOnPressNoSymptoms}
-              checked={hasNoUserInputSelected}
-            />
-          </View>
+          {showNoSymptoms ? (
+            <View style={style.noSymptomsCheckbox}>
+              <Checkbox
+                key={"no_symptoms"}
+                label={t("symptom_history.no_symptoms")}
+                onPress={handleOnPressNoSymptoms}
+                checked={hasNoUserInputSelected}
+              />
+            </View>
+          ) : null}
           {Symptom.all.map((symptom: Symptom.Symptom) => {
             const translation = Symptom.toTranslation(t, symptom)
             return (
@@ -184,4 +180,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SelectSymptomsScreen
+export default SelectSymptomsForm

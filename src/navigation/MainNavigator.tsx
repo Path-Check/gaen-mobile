@@ -28,7 +28,7 @@ import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
 import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
 import SelfAssessmentStack from "./SelfAssessmentStack"
-import ExposureDetectionStatus from "../Home/ExposureDetectionStatus"
+import ExposureDetectionStatusScreen from "../Home/ExposureDetectionStatus/Screen"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
 import LocationInfo from "../Home/LocationInfo"
@@ -185,7 +185,7 @@ const MainNavigator: FunctionComponent = () => {
         </Stack.Screen>
         <Stack.Screen
           name={HomeStackScreens.ExposureDetectionStatus}
-          component={ExposureDetectionStatus}
+          component={ExposureDetectionStatusScreen}
           options={{
             ...Headers.headerMinimalOptions,
             headerLeft: applyHeaderLeftBackButton(),
