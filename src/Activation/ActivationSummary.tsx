@@ -11,12 +11,11 @@ import { useTranslation } from "react-i18next"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../PermissionsContext"
-import { useOnboardingContext } from "../OnboardingContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
-import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
+} from "../Device/PermissionsContext"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
+import { useOnboardingContext } from "../OnboardingContext"
+import { Text } from "../components"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -25,14 +24,15 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
-
   const {
+    isBluetoothOn,
+    locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
+
   const isENEnabled = status === ENPermissionStatus.ENABLED
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()

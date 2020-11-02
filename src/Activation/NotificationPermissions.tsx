@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
-import { usePermissionsContext } from "../PermissionsContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { Text } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"

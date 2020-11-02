@@ -7,8 +7,8 @@ import { AffectedUserProvider } from "../AffectedUserContext"
 import {
   PermissionsContext,
   ENPermissionStatus,
-} from "../../PermissionsContext"
-import { PermissionStatus } from "../../permissionStatus"
+  PermissionStatus,
+} from "../../Device/PermissionsContext"
 
 jest.mock("@react-navigation/native")
 
@@ -62,6 +62,8 @@ const createPermissionProviderValue = (
   enPermissionStatus: ENPermissionStatus,
 ) => {
   return {
+    isBluetoothOn: true,
+    locationPermissions: "RequiredOn" as const,
     notification: {
       status: PermissionStatus.UNKNOWN,
       check: () => {},

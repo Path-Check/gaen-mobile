@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
-import { useApplicationName } from "./hooks/useApplicationInfo"
+import { useApplicationName } from "./Device/useApplicationInfo"
 import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {

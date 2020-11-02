@@ -9,21 +9,22 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../PermissionsContext"
-import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
+import { Text } from "../components"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const {
+    locationPermissions,
+    isBluetoothOn,
+    exposureNotifications,
+  } = usePermissionsContext()
 
-  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
-  const { exposureNotifications } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
     navigation.navigate(

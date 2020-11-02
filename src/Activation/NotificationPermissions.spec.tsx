@@ -6,8 +6,8 @@ import {
   PermissionsContext,
   PermissionsContextState,
   ENPermissionStatus,
-} from "../PermissionsContext"
-import { PermissionStatus } from "../permissionStatus"
+  PermissionStatus,
+} from "../Device/PermissionsContext"
 import { ActivationStackScreens } from "../navigation"
 import NotificationPermissions from "./NotificationPermissions"
 
@@ -85,6 +85,8 @@ const createPermissionProviderValue = (
   requestPermission: () => void = () => {},
 ): PermissionsContextState => {
   return {
+    isBluetoothOn: true,
+    locationPermissions: "RequiredOn" as const,
     notification: {
       status: PermissionStatus.UNKNOWN,
       check: () => {},

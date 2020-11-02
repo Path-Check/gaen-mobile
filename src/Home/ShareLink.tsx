@@ -5,7 +5,7 @@ import { SvgXml } from "react-native-svg"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Text } from "../components"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 
 import { Icons, Images } from "../assets"
 import {
