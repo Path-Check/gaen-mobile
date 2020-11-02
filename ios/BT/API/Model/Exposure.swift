@@ -14,7 +14,7 @@ class Exposure: Object, Codable {
     super.init()
   }
 
-  required init() {
+  required override init() {
     super.init()
   }
 
