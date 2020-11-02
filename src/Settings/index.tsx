@@ -13,7 +13,7 @@ import {
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
-import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import { useApplicationInfo } from "../Device/useApplicationInfo"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,

@@ -5,7 +5,7 @@ import { Linking } from "react-native"
 import { SettingsStackScreens } from "../navigation"
 import SettingsScreen from "./index"
 import { useNavigation } from "@react-navigation/native"
-import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import { useApplicationInfo } from "../Device/useApplicationInfo"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 import {
@@ -15,7 +15,7 @@ import {
 
 jest.mock("@react-navigation/native")
 jest.mock("../configuration/authorityLinks")
-jest.mock("../hooks/useApplicationInfo")
+jest.mock("../Device/useApplicationInfo")
 
 describe("Settings", () => {
   describe("when the user deletes their data", () => {
