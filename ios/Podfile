@@ -9,8 +9,8 @@ def shared_pods
   permissions_path = "../node_modules/react-native-permissions/ios"
   pod "Permission-Notifications", path: "#{permissions_path}/Notifications.podspec"
 
-  pod "Realm", modular_headers: true
-  pod "RealmSwift", modular_headers: true
+  pod "Realm", "~> 10.1.1", modular_headers: true
+  pod "RealmSwift","~> 10.1.1", modular_headers: true
   pod "Alamofire", "~> 4.9.1"
   pod "KeychainAccess", "~> 4.2.0"
   pod "ZIPFoundation", "~> 0.9.11"
