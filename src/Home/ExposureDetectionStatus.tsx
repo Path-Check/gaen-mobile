@@ -14,7 +14,6 @@ import { openAppSettings } from "../Device"
 import ActivationStatusView from "./ActivationStatusView"
 import { useStatusBarEffect, HomeStackScreens } from "../navigation"
 import { Text } from "../components"
-import { event } from "../ProductAnalytics"
 
 import { Colors, Spacing, Typography } from "../styles"
 
@@ -109,7 +108,11 @@ const ExposureDetectionStatus: FunctionComponent = () => {
         if (status !== ENPermissionStatus.ENABLED) {
           showNotAuthorizedAlert()
         } else {
-          trackEvent(event.enEnabled)
+          trackEvent(
+            "product_analytics",
+            "button_tap",
+            "exposure_notifications_enabled",
+          )
         }
       } catch {
         showNotAuthorizedAlert()

@@ -19,7 +19,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { useAnalyticsContext } from "../../AnalyticsContext"
+import { useAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -28,7 +28,6 @@ import Logger from "../../logger"
 
 import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
 import { Icons } from "../../assets"
-import { event } from "../../analytics"
 
 const defaultErrorMessage = ""
 
@@ -71,7 +70,7 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
-    trackEvent(event.codeSubmitted)
+    trackEvent("product_analytics", "button_tap", "verification_code_submitted")
     try {
       const response = await API.postCode(code)
 

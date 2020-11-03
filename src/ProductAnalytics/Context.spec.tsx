@@ -5,7 +5,6 @@ import { render, waitFor } from "@testing-library/react-native"
 import { StorageUtils } from "../utils"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
-import { actions } from "./index"
 import { AnalyticsContext, AnalyticsProvider } from "./Context"
 
 const SAMPLE_EVENT = "SAMPLE_EVENT"

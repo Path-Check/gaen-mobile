@@ -15,7 +15,6 @@ import { nextScreenFromExposureNotifications } from "./activationStackController
 import { Text } from "../components"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
-import { event } from "../ProductAnalytics"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -40,7 +39,11 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressActivateExposureNotifications = async () => {
     await exposureNotifications.request()
-    trackEvent(event.enEnabled)
+    trackEvent(
+      "product_analytics",
+      "button_tap",
+      "exposure_notifications_enabled",
+    )
     navigateToNextScreen()
   }
 
