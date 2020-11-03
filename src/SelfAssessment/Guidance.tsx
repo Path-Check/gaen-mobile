@@ -77,7 +77,6 @@ const Guidance: FunctionComponent<GuidanceProps> = ({
 
   const StayHomeExceptForMedicalCare: FunctionComponent = () => {
     const { t } = useTranslation()
-
     return (
       <>
         <Text style={style.bullet1}>
