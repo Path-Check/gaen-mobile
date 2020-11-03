@@ -7,9 +7,7 @@ import React, {
 } from "react"
 import Matomo from "react-native-matomo-sdk"
 import { StorageUtils } from "../utils"
-import { actions } from "./index"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { Event } from "../ProductAnalytics/events"
 
 export type AnalyticsContextState = {
   userConsentedToAnalytics: boolean
@@ -17,12 +15,16 @@ export type AnalyticsContextState = {
 } & AnalyticsConfiguration
 
 type AnalyticsConfiguration = {
-  trackEvent: (event: Event) => Promise<string | boolean>
+  trackEvent: (
+    category: EventCategory,
+    action: EventAction,
+    name: string,
+  ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
 }
 
 const initialAnalyticsConfiguration = {
-  trackEvent: () => Promise.resolve(""),
+  trackEvent: () => Promise.resolve(),
   trackScreenView: () => Promise.resolve(),
 }
 
@@ -31,6 +33,9 @@ const initialContext = {
   updateUserConsent: () => Promise.resolve(),
   ...initialAnalyticsConfiguration,
 }
+
+type EventCategory = "product_analytics" | "epi_analytics"
+type EventAction = "button_tap" | "event_emitted"
 
 const AnalyticsContext = createContext<AnalyticsContextState>(initialContext)
 const AnalyticsProvider: FunctionComponent = ({ children }) => {
@@ -69,12 +74,16 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
       }
     }
 
-    const trackEvent = async (event: Event) => {
-      return actions.trackEvent(event)
+    const trackEvent = async (
+      category: EventCategory,
+      action: EventAction,
+      name: string,
+    ): Promise<void> => {
+      Matomo.trackEvent(category, action, name)
     }
 
-    const trackScreenView = async (screen: string) => {
-      actions.trackScreenView(screen)
+    const trackScreenView = async (screen: string): Promise<void> => {
+      Matomo.trackView([screen])
     }
 
     if (supportAnalyticsTracking) {

@@ -16,6 +16,7 @@ import { Colors, Typography, Spacing, Buttons } from "../styles"
 const AnonymizedDataConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
+  const { trackEvent } = useAnalyticsContext()
   const navigation = useNavigation()
   const {
     healthAuthorityName,
@@ -29,8 +30,18 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
     const nextConsentState = !userConsentedToAnalytics
     updateUserConsent(nextConsentState)
     if (inOnboardingFlow) {
+      trackEvent(
+        "product_analytics",
+        "button_tap",
+        "onboarding_consented_to_analytics",
+      )
       navigation.navigate(ActivationStackScreens.ActivationSummary)
     } else {
+      trackEvent(
+        "product_analytics",
+        "button_tap",
+        "settings_consented_to_analytics",
+      )
       navigation.goBack()
     }
   }

@@ -1,11 +1,15 @@
-import Matomo from "react-native-matomo-sdk"
+// import Matomo from "react-native-matomo-sdk"
 
-import { Event } from "./events"
+// import { Event } from "../"
 
-export const trackEvent = async (event: Event): Promise<void> => {
-  Matomo.trackEvent("event", event)
-}
+// export const trackEvent = async ({
+//   category,
+//   action,
+//   name,
+// }: Event): Promise<void> => {
+//   Matomo.trackEvent(category, action, name)
+// }
 
-export const trackScreenView = async (screen: string): Promise<void> => {
-  Matomo.trackView([screen])
-}
+// export const trackScreenView = async (screen: string): Promise<void> => {
+//   Matomo.trackView([screen])
+// }
