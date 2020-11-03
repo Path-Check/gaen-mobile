@@ -229,24 +229,24 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.small,
     },
     header: {
-      ...Typography.header1,
+      ...Typography.header.x60,
       paddingBottom: Spacing.medium,
     },
     subheaderText: {
-      ...Typography.body1,
-      ...Typography.mediumBold,
+      ...Typography.body.x30,
+      ...Typography.style.medium,
       color: Colors.neutral.black,
       marginBottom: Spacing.xxSmall,
     },
     bodyText: {
-      ...Typography.body1,
+      ...Typography.body.x30,
       marginBottom: Spacing.xxLarge,
     },
     button: {
-      ...Buttons.primary,
+      ...Buttons.primary.base,
     },
     buttonText: {
-      ...Typography.buttonPrimary,
+      ...Typography.button.primary,
     },
     bottomButtonContainer: {
       backgroundColor: Colors.secondary.shade10,
@@ -257,7 +257,7 @@ const createStyle = (insets: EdgeInsets) => {
       paddingBottom: insets.bottom + Spacing.small,
     },
     bottomButtonText: {
-      ...Typography.header5,
+      ...Typography.header.x20,
       color: Colors.primary.shade100,
       marginRight: Spacing.xSmall,
     },

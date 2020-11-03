@@ -23,7 +23,9 @@
     "done": "Done",
     "edit": "Edit",
     "maybe_later": "Maybe later",
+    "more": "More",
     "next": "Next",
+    "no": "No",
     "no_thanks": "No thanks",
     "off": "OFF",
     "on": "ON",
@@ -33,20 +35,26 @@
     "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit",
-    "success": "Success"
+    "success": "Success",
+    "yes": "Yes"
   },
   "covid_data": {
     "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "cases_today": "Cases today",
+    "covid_coverage": "Covid Coverage",
     "covid_data": "COVID Data",
-    "covid_stats_in": "COVID Stats in {{location}}",
     "deaths_today": "Deaths today",
     "down_from_last_week": "Down from last week",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
     "new_cases": "New Cases",
+    "past_7_days": "Past 7 days",
     "see_more": "See more",
+    "source": "source: {{source}}",
+    "spread_of_the_virus_in": "Spread of the virus in {{locationName}}",
     "total_cases": "Total cases",
     "total_deaths": "Total deaths",
+    "trending_down": "Trending down",
+    "trending_up": "Trending up",
     "up_from_last_week": "Up from last week"
   },
   "errors": {
@@ -73,6 +81,7 @@
       "invalid_code": "Try a different code",
       "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
+      "timeout_error": "Request took too long",
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
@@ -163,13 +172,13 @@
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
     "did_you_test_positive": "Did you test positive for COVID-19?",
-    "feeling_sick": "Feeling sick?",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test result code?",
     "if_you_have_a_code": "Report your result to help keep your community safe.",
     "location_info_body_1": "The Exposure Notification technology uses Bluetooth scanning to understand what devices are near one another. On all phones running Android 6.0 and above, to use Bluetooth scanning, the device location setting needs to be turned on for all apps, not just apps built with the Exposure Notifications System.",
     "location_info_subheader_1": "Why do I need my location turned on?",
+    "not_feeling_well": "Not feeling well?",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
@@ -179,7 +188,10 @@
       "unauthorized_error_message_ios": "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to {{applicationName}}",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "to_submit_your_test": "To get your test result code, you'll need to speak with a contact tracer."
+    "report_result": "Report Result",
+    "request_call": "Request Call",
+    "take_assessment": "Take Assessment",
+    "to_submit_your_test": "To submit your positive test result, you'll need to get your positive test result code from a contact tracer."
   },
   "label": {
     "check": "Checkmark",
@@ -215,11 +227,13 @@
     "bluetooth_subheader": "Why do I need to turn on my phone's Bluetooth setting?",
     "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
+    "i_am_over": "Yes, I am over {{minimumAge}}",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
     "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_body": "To use Bluetooth scanning, the device location setting needs to be turned on. The app does not use your location data and your individual device cannot be tracked.",
     "location_header": "Activate Location",
     "location_subheader": "Why do I need to turn on my phone's location setting?",
+    "no_take_me": "No, take me back",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
     "notification_body2": "The app does this using Bluetooth Low Energy and secure random codes without knowing who you are or where you’ve been. You can turn this off at any time in settings.",
     "notification_header": "Get notified if you may have been exposed",
@@ -261,7 +275,9 @@
     "screen4_header": "The app will notify you if you may have been exposed to COVID 19",
     "screen4_image_label": "A person getting a notification on their phone",
     "terms_header_title": "Terms of use",
-    "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network."
+    "verify_your_age": "Verify Your Age",
+    "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network.",
+    "you_must_be": "You must be {{minimumAge}} or older to use {{applicationName}}. Are you over {{minimumAge}}?"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -370,7 +386,8 @@
   "settings": {
     "data_deleted": "Data deleted",
     "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, the app will delete the Symptom History data that is stored on your phone.",
-    "delete_data_disclosure2": "This button does not delete the data created or collected by your phone for Exposure Notifications.\n\nYou can delete additional data through your phone's Settings.\n\n> Settings\n> Exposure Notifications \n> Exposure Logging Status/Active \n> Delete Exposure Log",
+    "delete_data_disclosure2": "This does not delete the data created or collected by your phone for Exposure Notifications.\n\nYou can delete this additional data in your device Settings.",
+    "delete_data_note": "Note",
     "delete_my_data": "Delete My Data",
     "errors": {
       "deleting_data": "Sorry, we could not delete your data"
@@ -404,20 +421,23 @@
     "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },
-  "symptoms": {
-    "body_aches": "Body aches",
-    "chest_pain_or_pressure": "Chest pain or pressure",
-    "chills": "Chills",
+  "symptom": {
+    "bluish_lips_or_face": "Bluish lips or face",
+    "congestion_or_runny_nose": "Congestion or runny nose",
     "cough": "Cough",
     "diarrhea": "Diarrhea",
-    "difficulty_breathing": "Difficulty breathing",
-    "disorientation_or_unresponsiveness": "Disorientation or unresponsiveness",
-    "fever": "Fever",
-    "lightheadedness": "Lightheadedness",
-    "loss_of_appetite": "Loss of appetite",
-    "loss_of_smell": "Loss of smell",
-    "loss_of_taste": "Loss of taste",
+    "fatigue": "Fatigue",
+    "fever_or_chills": "Fever or chills",
+    "headache": "Headache",
+    "inability_to_wake_or_stay_awake": "Inability to wake or stay awake",
+    "muscle_or_body_aches": "Muscle or body aches",
+    "nausea_or_vomiting": "Nausea or vomiting",
+    "new_confusion": "New confusion",
+    "new_loss_of_taste_or_smell": "New loss of taste or smell",
     "other": "Other",
-    "vomiting": "Vomiting"
+    "persistent_pain_or_pressure_in_the_chest": "Persistent pain or pressure in the chest",
+    "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
+    "sore_throat": "Sore throat",
+    "trouble_breathing": "Trouble breathing"
   }
 }

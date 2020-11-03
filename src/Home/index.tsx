@@ -28,9 +28,10 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
 
+import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
-import CovidDataClip from "../CovidDataDashboard/CovidDataClip"
-import { useExposureDetectionStatus } from "./useExposureDetectionStatus"
+import CovidDataCard from "../CovidData/Card"
+import { useExposureDetectionStatus } from "../Device/useExposureDetectionStatus"
 
 import { Icons, Images } from "../assets"
 import {
@@ -58,19 +59,6 @@ const Home: FunctionComponent = () => {
     displayCallbackForm,
     emergencyPhoneNumber,
   } = useConfigurationContext()
-
-  const ChevronRightIcon = () => {
-    return (
-      <View style={style.chevronRightIcon}>
-        <SvgXml
-          xml={Icons.ChevronRight}
-          width={Iconography.xxSmall}
-          height={Iconography.xxSmall}
-          fill={Colors.neutral.shade75}
-        />
-      </View>
-    )
-  }
 
   const ExposureDetectionStatus: FunctionComponent = () => {
     const handleOnPressExposureDetectionStatus = () => {
@@ -146,7 +134,6 @@ const Home: FunctionComponent = () => {
         onPress={handleOnPressTalkToContactTracer}
         style={style.floatingContainer}
       >
-        <ChevronRightIcon />
         <Image
           source={Images.HowItWorksValueProposition}
           style={style.image}
@@ -159,6 +146,7 @@ const Home: FunctionComponent = () => {
         <Text style={style.sectionBodyText}>
           {t("home.to_submit_your_test")}
         </Text>
+        <SectionButton text={t("home.request_call")} />
       </TouchableOpacity>
     )
   }
@@ -173,7 +161,6 @@ const Home: FunctionComponent = () => {
         onPress={handleOnPressReportTestResult}
         style={style.floatingContainer}
       >
-        <ChevronRightIcon />
         <Image
           source={Images.ProtectPrivacySubmitKeys}
           style={style.image}
@@ -186,6 +173,7 @@ const Home: FunctionComponent = () => {
         <Text style={style.sectionBodyText}>
           {t("home.if_you_have_a_code")}
         </Text>
+        <SectionButton text={t("home.report_result")} />
       </TouchableOpacity>
     )
   }
@@ -200,17 +188,19 @@ const Home: FunctionComponent = () => {
         onPress={handleOnPressTakeSelfAssessment}
         style={style.floatingContainer}
       >
-        <ChevronRightIcon />
         <Image
           source={Images.SelfAssessment}
           style={style.image}
           width={150}
           height={IMAGE_HEIGHT}
         />
-        <Text style={style.sectionHeaderText}>{t("home.feeling_sick")}</Text>
+        <Text style={style.sectionHeaderText}>
+          {t("home.not_feeling_well")}
+        </Text>
         <Text style={style.sectionBodyText}>
           {t("home.check_if_your_symptoms")}
         </Text>
+        <SectionButton text={t("home.take_assessment")} />
       </TouchableOpacity>
     )
   }
@@ -221,29 +211,31 @@ const Home: FunctionComponent = () => {
     }
 
     return (
-      <TouchableOpacity
-        onPress={handleOnPressCallEmergencyServices}
-        accessibilityLabel={t(
-          "self_assessment.call_emergency_services.call_emergencies",
-          {
-            emergencyPhoneNumber,
-          },
-        )}
-        accessibilityRole="button"
-        style={style.emergencyButtonContainer}
-      >
-        <SvgXml
-          xml={Icons.Phone}
-          fill={Colors.neutral.white}
-          width={Iconography.xSmall}
-          height={Iconography.xSmall}
-        />
-        <Text style={style.emergencyButtonText}>
-          {t("home.call_emergency_services", {
-            emergencyPhoneNumber,
-          })}
-        </Text>
-      </TouchableOpacity>
+      <View style={style.emergencyButtonOuterContainer}>
+        <TouchableOpacity
+          onPress={handleOnPressCallEmergencyServices}
+          accessibilityLabel={t(
+            "self_assessment.call_emergency_services.call_emergencies",
+            {
+              emergencyPhoneNumber,
+            },
+          )}
+          accessibilityRole="button"
+          style={style.emergencyButtonContainer}
+        >
+          <SvgXml
+            xml={Icons.Phone}
+            fill={Colors.neutral.white}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
+          <Text style={style.emergencyButtonText}>
+            {t("home.call_emergency_services", {
+              emergencyPhoneNumber,
+            })}
+          </Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 
@@ -257,7 +249,7 @@ const Home: FunctionComponent = () => {
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatus />
         <ShareLink />
-        {displayCovidData && <CovidDataClip />}
+        {displayCovidData && <CovidDataCard />}
         {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
         {displaySelfAssessment && <SelfAssessment />}
@@ -278,8 +270,8 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.medium,
   },
   statusContainer: {
@@ -299,7 +291,7 @@ const style = StyleSheet.create({
     zIndex: Layout.zLevel1,
   },
   statusText: {
-    ...Typography.header3,
+    ...Typography.header.x40,
     color: Colors.neutral.black,
   },
   statusBottomContainer: {
@@ -307,7 +299,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   statusActionText: {
-    ...Typography.body2,
+    ...Typography.body.x20,
     color: Colors.neutral.black,
     marginRight: Spacing.xxxSmall,
     paddingBottom: 2,
@@ -315,38 +307,35 @@ const style = StyleSheet.create({
   floatingContainer: {
     ...Affordances.floatingContainer,
   },
-  chevronRightIcon: {
-    position: "absolute",
-    top: Spacing.large,
-    right: Spacing.large,
-  },
   image: {
     resizeMode: "contain",
-    marginBottom: Spacing.xSmall,
-  },
-  sectionHeaderText: {
-    ...Typography.header3,
-    marginBottom: Spacing.xxSmall,
-    color: Colors.neutral.black,
-  },
-  sectionBodyText: {
-    ...Typography.header4,
-    ...Typography.base,
-    color: Colors.neutral.shade100,
     marginBottom: Spacing.small,
   },
+  sectionHeaderText: {
+    ...Typography.header.x40,
+    color: Colors.neutral.black,
+    marginBottom: Spacing.xSmall,
+  },
+  sectionBodyText: {
+    ...Typography.header.x20,
+    ...Typography.style.normal,
+    lineHeight: Typography.lineHeight.x40,
+    color: Colors.neutral.shade100,
+    marginBottom: Spacing.xLarge,
+  },
+  emergencyButtonOuterContainer: {
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade25,
+
+    paddingTop: Spacing.large,
+  },
   emergencyButtonContainer: {
-    ...Buttons.primary,
-    ...Buttons.medium,
+    ...Buttons.thin.base,
     borderRadius: Outlines.borderRadiusLarge,
-    width: "100%",
-    flexDirection: "row",
-    alignSelf: "center",
-    paddingHorizontal: Spacing.xLarge,
     backgroundColor: Colors.accent.danger100,
   },
   emergencyButtonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginLeft: Spacing.small,
   },
 })

@@ -3,9 +3,10 @@ import { StyleSheet, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { SelfAssessmentStackScreens } from "../navigation"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 import { Text } from "../components"
 import { UnderlyingCondition } from "./selfAssessment"
 import SymptomCheckbox from "./SymptomCheckbox"
@@ -35,6 +36,9 @@ const UnderlyingConditions: FunctionComponent = () => {
     underlyingConditions,
     updateUnderlyingConditions,
   } = useSelfAssessmentContext()
+
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const underlyingConditionToString = (condition: UnderlyingCondition) => {
     switch (condition) {
@@ -150,25 +154,27 @@ const UnderlyingConditions: FunctionComponent = () => {
   )
 }
 
-const style = StyleSheet.create({
-  headerText: {
-    ...Typography.header1,
-    marginBottom: Spacing.medium,
-  },
-  subheaderText: {
-    ...Typography.header4,
-    ...Typography.base,
-    marginBottom: Spacing.huge,
-  },
-  button: {
-    ...Buttons.primaryThin,
-    alignSelf: "center",
-    width: "100%",
-  },
-  buttonText: {
-    ...Typography.buttonPrimary,
-    marginRight: Spacing.small,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    headerText: {
+      ...Typography.header.x60,
+      marginBottom: Spacing.medium,
+    },
+    subheaderText: {
+      ...Typography.header.x30,
+      ...Typography.style.normal,
+      marginBottom: Spacing.huge,
+    },
+    button: {
+      ...Buttons.fixedBottomThin.base,
+      paddingBottom: insets.bottom + Spacing.small,
+    },
+    buttonText: {
+      ...Typography.button.fixedBottom,
+      marginRight: Spacing.small,
+    },
+  })
+}
 
 export default UnderlyingConditions

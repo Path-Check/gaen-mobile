@@ -119,6 +119,7 @@ export type ModalStackScreen =
   | "SelfAssessmentFromExposureDetails"
   | "SelfAssessmentFromHome"
   | "CallbackStack"
+  | "AgeVerification"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
@@ -132,6 +133,7 @@ export const ModalStackScreens: {
   SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
   SelfAssessmentFromHome: "SelfAssessmentFromHome",
   CallbackStack: "CallbackStack",
+  AgeVerification: "AgeVerification",
 }
 
 export type SettingsStackScreen =

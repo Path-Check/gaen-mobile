@@ -8,11 +8,7 @@ import React, {
 } from "react"
 
 import gaenStrategy from "./gaen"
-import {
-  failureResponse,
-  OperationResponse,
-  SUCCESS_RESPONSE,
-} from "./OperationResponse"
+import { failureResponse, OperationResponse } from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { event } from "./analytics"
@@ -56,7 +52,7 @@ const initialState = {
   },
   refreshExposureInfo: () => {},
   checkForNewExposures: () => {
-    return Promise.resolve(SUCCESS_RESPONSE)
+    return Promise.resolve({ kind: "success" as const })
   },
 }
 
@@ -106,9 +102,12 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
 
   const checkForNewExposures = async (): Promise<OperationResponse> => {
     try {
-      await detectExposures()
+      const response = await detectExposures()
+      if (response.kind === "failure") {
+        throw new Error(response.error)
+      }
       await refreshExposureInfo()
-      return SUCCESS_RESPONSE
+      return { kind: "success" }
     } catch (e) {
       return failureResponse(e.message)
     }

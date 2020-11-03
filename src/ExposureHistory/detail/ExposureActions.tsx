@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg"
 
 import { ModalStackScreens } from "../../navigation"
 import { Text } from "../../components"
-import { useConnectionStatus } from "../../hooks/useConnectionStatus"
+import { useConnectionStatus } from "../../Device/useConnectionStatus"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
@@ -74,16 +74,16 @@ const ExposureActions: FunctionComponent = () => {
         </View>
         {displaySelfAssessment && (
           <TouchableOpacity
-            style={style.button}
+            style={style.buttonOutlined}
             onPress={handleOnPressPersonalizeMyGuidance}
             accessibilityLabel={t(
               "exposure_history.exposure_detail.personalize_my_guidance",
             )}
           >
-            <Text style={style.buttonText}>
+            <Text style={style.buttonOutlinedText}>
               {t("exposure_history.exposure_detail.personalize_my_guidance")}
             </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+            <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
           </TouchableOpacity>
         )}
         {displayNextStepsLink && (
@@ -173,11 +173,11 @@ const RecommendationBubble: FunctionComponent<RecommendationBubbleProps> = ({
 
 const style = StyleSheet.create({
   bottomHeaderText: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     marginBottom: Spacing.xxSmall,
   },
   bottomSubheaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.medium,
   },
@@ -200,19 +200,26 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   recommendationText: {
-    ...Typography.body3,
+    ...Typography.body.x10,
   },
   connectivityWarningText: {
-    ...Typography.error,
+    ...Typography.utility.error,
     marginTop: Spacing.small,
   },
   button: {
-    ...Buttons.primaryThin,
-    width: "100%",
+    ...Buttons.thin.base,
     marginBottom: Spacing.small,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
+    marginRight: Spacing.small,
+  },
+  buttonOutlined: {
+    ...Buttons.outlined.thin,
+    marginBottom: Spacing.small,
+  },
+  buttonOutlinedText: {
+    ...Typography.button.secondary,
     marginRight: Spacing.small,
   },
 })

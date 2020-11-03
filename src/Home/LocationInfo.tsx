@@ -38,13 +38,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   subheaderText: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
+    ...Typography.body.x30,
+    ...Typography.style.medium,
     color: Colors.text.primary,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },
 })

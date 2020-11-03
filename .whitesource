@@ -1,9 +1,9 @@
 {
   "scanSettings": {
-    "baseBranches": []
+    "baseBranches": ["develop"]
   },
   "checkRunSettings": {
-    "vulnerableCheckRunConclusionLevel": "failure"
+    "vulnerableCheckRunConclusionLevel": "success"
   },
   "issueSettings": {
     "minSeverityLevel": "LOW"

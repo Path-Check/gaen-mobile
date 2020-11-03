@@ -23,7 +23,7 @@ const ExternalLink: FunctionComponent<ExternalLinkProps> = ({ url, label }) => {
 
 const style = StyleSheet.create({
   externalLinkText: {
-    ...Typography.anchorLink,
+    ...Typography.button.anchorLink,
   },
 })
 

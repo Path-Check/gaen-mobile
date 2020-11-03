@@ -12,26 +12,29 @@ import {
 } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { ModalStackScreens, HomeStackScreens } from "./index"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useAnalyticsContext } from "../AnalyticsContext"
+import { useAnalyticsContext } from "../ProductAnalytics/Context"
+
+import { ModalStackScreens, HomeStackScreens } from "./index"
 import { WelcomeStackScreens, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
 import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
 import Welcome from "../Welcome"
+import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
-import AnonymizedDataConsentScreen from "../modals/AnonymizedDataConsentScreen"
+import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import ExposureDetectionStatus from "../Home/ExposureDetectionStatus"
 import BluetoothInfo from "../Home/BluetoothInfo"
 import ExposureNotificationsInfo from "../Home/ExposureNotificationsInfo"
 import LocationInfo from "../Home/LocationInfo"
 import CallbackStack from "./CallbackStack"
-import CovidDataDashboard from "../CovidDataDashboard/CovidDataDashboard"
+import CovidDataDashboard from "../CovidData/Dashboard"
+
 import { applyModalHeader } from "./ModalHeader"
 import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
@@ -102,6 +105,14 @@ const MainNavigator: FunctionComponent = () => {
             <Stack.Screen
               name={WelcomeStackScreens.Welcome}
               component={Welcome}
+            />
+            <Stack.Screen
+              name={ModalStackScreens.AgeVerification}
+              component={AgeVerification}
+              options={{
+                ...TransitionPresets.ModalTransition,
+                headerShown: false,
+              }}
             />
             <Stack.Screen name={Stacks.HowItWorks}>
               {(props) => (

@@ -1,4 +1,5 @@
 import React from "react"
+import { Share } from "react-native"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
@@ -6,16 +7,18 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "./index"
 import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
-import { Share } from "react-native"
 import { ConfigurationContext } from "../ConfigurationContext"
-import { ENPermissionStatus, PermissionsContext } from "../PermissionsContext"
-import { SystemServicesContext } from "../SystemServicesContext"
-import { PermissionStatus } from "../permissionStatus"
+import {
+  ENPermissionStatus,
+  PermissionsContext,
+  PermissionStatus,
+} from "../Device/PermissionsContext"
+import { LocationPermissions } from "../Device/useLocationPermissions"
 
 jest.mock("@react-navigation/native")
 
 const mockedApplicationName = "applicationName"
-jest.mock("../hooks/useApplicationInfo", () => {
+jest.mock("../Device/useApplicationInfo", () => {
   return {
     useApplicationName: () => {
       return {
@@ -61,20 +64,17 @@ describe("Home", () => {
   describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
     it("renders an on message", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
+      const isBluetoothOn = true
+      const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
+        isBluetoothOn,
+        locationPermissions,
       )
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
+          <Home />
         </PermissionsContext.Provider>,
       )
 
@@ -85,20 +85,17 @@ describe("Home", () => {
   describe("When bluetooth is off", () => {
     it("renders an off message", () => {
       const enPermissionStatus = ENPermissionStatus.ENABLED
+      const isBluetoothOn = false
+      const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
+        isBluetoothOn,
+        locationPermissions,
       )
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: false,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
+          <Home />
         </PermissionsContext.Provider>,
       )
 
@@ -110,20 +107,17 @@ describe("Home", () => {
     describe("and location is required", () => {
       it("renders an off message", () => {
         const enPermissionStatus = ENPermissionStatus.ENABLED
+        const isBluetoothOn = true
+        const locationPermissions = "RequiredOff"
         const permissionProviderValue = createPermissionProviderValue(
           enPermissionStatus,
+          isBluetoothOn,
+          locationPermissions,
         )
 
         const { getByText } = render(
           <PermissionsContext.Provider value={permissionProviderValue}>
-            <SystemServicesContext.Provider
-              value={{
-                isBluetoothOn: true,
-                locationPermissions: "RequiredOff",
-              }}
-            >
-              <Home />
-            </SystemServicesContext.Provider>
+            <Home />
           </PermissionsContext.Provider>,
         )
 
@@ -134,20 +128,17 @@ describe("Home", () => {
     describe("and location is not required", () => {
       it("renders an on message", () => {
         const enPermissionStatus = ENPermissionStatus.ENABLED
+        const isBluetoothOn = true
+        const locationPermissions = "NotRequired"
         const permissionProviderValue = createPermissionProviderValue(
           enPermissionStatus,
+          isBluetoothOn,
+          locationPermissions,
         )
 
         const { getByText } = render(
           <PermissionsContext.Provider value={permissionProviderValue}>
-            <SystemServicesContext.Provider
-              value={{
-                isBluetoothOn: true,
-                locationPermissions: "NotRequired",
-              }}
-            >
-              <Home />
-            </SystemServicesContext.Provider>
+            <Home />
           </PermissionsContext.Provider>,
         )
 
@@ -159,20 +150,17 @@ describe("Home", () => {
   describe("When exposure notifications are disabled", () => {
     it("renders an off message", () => {
       const enPermissionStatus = ENPermissionStatus.DISABLED
+      const isBluetoothOn = true
+      const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
+        isBluetoothOn,
+        locationPermissions,
       )
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
+          <Home />
         </PermissionsContext.Provider>,
       )
 
@@ -183,20 +171,17 @@ describe("Home", () => {
   describe("When exposure notifications are not authorized", () => {
     it("renders an off message", () => {
       const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const isBluetoothOn = true
+      const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
         enPermissionStatus,
+        isBluetoothOn,
+        locationPermissions,
       )
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <SystemServicesContext.Provider
-            value={{
-              isBluetoothOn: true,
-              locationPermissions: "RequiredOn",
-            }}
-          >
-            <Home />
-          </SystemServicesContext.Provider>
+          <Home />
         </PermissionsContext.Provider>,
       )
 
@@ -207,9 +192,13 @@ describe("Home", () => {
 
 const createPermissionProviderValue = (
   enPermissionStatus: ENPermissionStatus,
-  requestPermission: () => Promise<void> = () => Promise.resolve(),
+  isBluetoothOn: boolean,
+  locationPermissions: LocationPermissions,
 ) => {
+  const requestPermission: () => Promise<void> = () => Promise.resolve()
   return {
+    isBluetoothOn,
+    locationPermissions,
     notification: {
       status: PermissionStatus.UNKNOWN,
       check: () => {},

@@ -13,11 +13,7 @@ import {
 } from "./symptomHistory"
 import { Symptom } from "./symptom"
 import * as NativeModule from "./nativeModule"
-import {
-  failureResponse,
-  OperationResponse,
-  SUCCESS_RESPONSE,
-} from "../OperationResponse"
+import { failureResponse, OperationResponse } from "../OperationResponse"
 
 export type SymptomHistoryState = {
   symptomHistory: SymptomHistory
@@ -30,10 +26,10 @@ export type SymptomHistoryState = {
 const initialState: SymptomHistoryState = {
   symptomHistory: [],
   updateEntry: (_entry: SymptomEntry, _newUserInput: Set<Symptom>) => {
-    return Promise.resolve(SUCCESS_RESPONSE)
+    return Promise.resolve({ kind: "success" })
   },
   deleteAllEntries: () => {
-    return Promise.resolve(SUCCESS_RESPONSE)
+    return Promise.resolve({ kind: "success" })
   },
 }
 
@@ -66,27 +62,27 @@ export const SymptomHistoryProvider: FunctionComponent = ({ children }) => {
   const updateEntry = async (
     entry: SymptomEntry,
     newSymptoms: Set<Symptom>,
-  ) => {
+  ): Promise<OperationResponse> => {
     try {
       if (entry.kind === "UserInput") {
         await NativeModule.updateEntry(entry.id, entry.date, newSymptoms)
         await fetchEntries()
-        return SUCCESS_RESPONSE
+        return { kind: "success" }
       } else {
         await NativeModule.createEntry(entry.date, newSymptoms)
         await fetchEntries()
-        return SUCCESS_RESPONSE
+        return { kind: "success" }
       }
     } catch (e) {
       return failureResponse(e.message)
     }
   }
 
-  const deleteAllEntries = async () => {
+  const deleteAllEntries = async (): Promise<OperationResponse> => {
     try {
       await NativeModule.deleteAllEntries()
       await fetchEntries()
-      return SUCCESS_RESPONSE
+      return { kind: "success" }
     } catch (e) {
       return failureResponse(e.message)
     }

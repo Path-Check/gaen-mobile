@@ -12,7 +12,7 @@ export const textInputFormField: TextStyle = {
   borderColor: Colors.neutral.shade10,
   borderWidth: Outlines.hairline,
   justifyContent: "center",
-  fontSize: Typography.medium,
+  fontSize: Typography.size.x40,
   paddingTop: Spacing.small,
   paddingRight: Spacing.medium,
   paddingBottom: Spacing.small,
@@ -21,13 +21,13 @@ export const textInputFormField: TextStyle = {
 }
 
 export const required: TextStyle = {
-  fontSize: Typography.xSmall,
+  fontSize: Typography.size.x20,
   color: Colors.text.primary,
   marginTop: Spacing.xSmall,
 }
 
 export const textInput: TextStyle = {
-  ...Typography.formInputText,
+  ...Typography.form.inputText,
   borderRadius: Outlines.baseBorderRadius,
   borderColor: Colors.neutral.shade10,
   borderWidth: Outlines.hairline,
@@ -61,8 +61,8 @@ export const radioOrCheckboxContainer: ViewStyle = {
 }
 
 export const radioOrCheckboxText: TextStyle = {
-  ...Typography.body1,
-  ...Typography.largeFont,
+  ...Typography.body.x30,
+  ...Typography.base.x50,
   color: Colors.text.primary,
   width: "80%",
   marginLeft: Spacing.medium,

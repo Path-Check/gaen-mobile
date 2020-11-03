@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "../components"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks, useStatusBarEffect } from "../navigation"
@@ -275,12 +275,12 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xLarge,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
   },
   subheaderText: {
-    ...Typography.header4,
-    ...Typography.base,
+    ...Typography.header.x30,
+    ...Typography.style.normal,
     color: Colors.neutral.black,
   },
   bottomContainer: {
@@ -289,13 +289,13 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   bullet1: {
-    ...Typography.header4,
+    ...Typography.header.x30,
     color: Colors.primary.shade100,
     marginBottom: Spacing.medium,
   },
   bullet2: {
-    ...Typography.body1,
-    ...Typography.mediumBold,
+    ...Typography.body.x30,
+    ...Typography.style.medium,
     color: Colors.text.primary,
     marginBottom: Spacing.small,
   },
@@ -307,27 +307,23 @@ const style = StyleSheet.create({
     borderLeftColor: Colors.neutral.shade25,
   },
   bullet3: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
   },
   button: {
-    ...Buttons.primaryThin,
-    width: "100%",
-    alignSelf: "center",
+    ...Buttons.thin.base,
     marginTop: Spacing.medium,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
   doneButton: {
-    ...Buttons.primaryThinOutlined,
-    alignSelf: "center",
+    ...Buttons.outlined.thin,
     marginTop: Spacing.small,
-    width: "100%",
   },
   doneButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

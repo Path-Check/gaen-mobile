@@ -16,9 +16,11 @@ import { SymptomEntry } from "./symptomHistory"
 import { Text, StatusBar } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import SymptomEntryListItem from "./SymptomEntryListItem"
-import SymptomHistoryFormatter from "./SymptomHistoryFormatter"
+import SymptomHistoryFormatter from "./Share/SymptomHistoryFormatter"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
+
+export const DATE_FORMAT = "ddd MMM D, YYYY"
 
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -85,19 +87,19 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginBottom: Spacing.xxxSmall,
   },
   subHeaderText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.large,
   },
   shareButton: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
   },
   shareButtonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

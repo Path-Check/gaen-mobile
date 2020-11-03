@@ -12,14 +12,7 @@ import { SvgXml } from "react-native-svg"
 import { useConfigurationContext } from "./ConfigurationContext"
 import { Text } from "./components"
 
-import {
-  Buttons,
-  Colors,
-  Iconography,
-  Outlines,
-  Spacing,
-  Typography,
-} from "./styles"
+import { Buttons, Colors, Iconography, Spacing, Typography } from "./styles"
 import { Icons } from "./assets"
 
 const CallEmergencyServices: FunctionComponent = () => {
@@ -96,26 +89,21 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xLarge,
   },
   buttonContainer: {
-    ...Buttons.primary,
-    ...Buttons.medium,
-    width: "100%",
-    flexDirection: "row",
+    ...Buttons.thin.base,
     justifyContent: "space-between",
-    alignSelf: "center",
     paddingHorizontal: Spacing.xLarge,
-    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.accent.danger100,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

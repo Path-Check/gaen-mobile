@@ -2,7 +2,7 @@ import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { AnalyticsContext } from "../AnalyticsContext"
+import { AnalyticsContext } from "../ProductAnalytics/Context"
 import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 import { factories } from "../factories"
 import { ModalStackScreens } from "../navigation"

@@ -1,4 +1,4 @@
-import { PermissionStrategy } from "../PermissionsContext"
+import { PermissionStrategy } from "../Device/PermissionsContext"
 import { ExposureInfo } from "../exposure"
 import { ExposureKey } from "../exposureKey"
 import * as NativeModule from "./nativeModule"

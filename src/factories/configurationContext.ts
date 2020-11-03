@@ -9,6 +9,7 @@ export default Factory.define<Configuration>(() => ({
   displayCovidData: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
+  displayAgeVerification: false,
   emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
@@ -21,6 +22,7 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityAnalyticsUrl: null,
   healthAuthorityAnalyticsSiteId: null,
   measurementSystem: "Imperial",
+  minimumAge: "18",
   regionCodes: ["REGION"],
   stateAbbreviation: null,
 }))

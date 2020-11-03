@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 
 import { Text, StatusBar } from "../../components"
 import { useStatusBarEffect } from "../../navigation"
-import { openAppSettings } from "../../gaen/nativeModule"
+import { openAppSettings } from "../../Device"
 
 import { Spacing, Colors, Typography, Buttons } from "../../styles"
 
@@ -56,17 +56,17 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.small,
   },
   subheader: {
-    ...Typography.body2,
+    ...Typography.body.x20,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

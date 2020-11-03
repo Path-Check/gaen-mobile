@@ -82,7 +82,7 @@ describe("toSymptomHistory", () => {
       const today = Date.parse("2020-1-1")
       const rawEntries: RawEntry[] = [
         { id: "a", date: today, symptoms: ["cough"] },
-        { id: "b", date: today, symptoms: ["fever", "chills"] },
+        { id: "b", date: today, symptoms: ["fever_or_chills", "other"] },
       ]
 
       const result = toSymptomHistory(today, rawEntries)
@@ -91,7 +91,7 @@ describe("toSymptomHistory", () => {
         kind: "UserInput",
         id: "b",
         date: today,
-        symptoms: new Set<Symptom>(["cough", "fever", "chills"]),
+        symptoms: new Set<Symptom>(["cough", "fever_or_chills", "other"]),
       }
 
       expect(entryIsEqual(result[0], expected)).toBeTruthy()

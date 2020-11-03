@@ -17,7 +17,7 @@ const ExposureDetail: FunctionComponent = () => {
   const route = useRoute<
     RouteProp<ExposureHistoryStackParamList, "ExposureDetail">
   >()
-  useStatusBarEffect("light-content", Colors.header.background)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
 
   const { exposureDatum } = route.params
@@ -82,13 +82,13 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   exposureWindowText: {
-    ...Typography.header6,
+    ...Typography.header.x10,
     textTransform: "uppercase",
     color: Colors.neutral.shade110,
     marginLeft: Spacing.xSmall,
   },
   headerText: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     color: Colors.primary.shade125,
     marginBottom: Spacing.medium,
   },

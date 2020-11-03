@@ -142,7 +142,7 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xxxLarge,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
   },
   linksContainer: {
     marginBottom: Spacing.large,
@@ -164,13 +164,13 @@ const style = StyleSheet.create({
     flexWrap: "wrap",
   },
   linkText: {
-    ...Typography.body1,
-    fontSize: Typography.large,
+    ...Typography.body.x30,
+    fontSize: Typography.size.x50,
   },
   link: {
-    ...Typography.anchorLink,
+    ...Typography.button.anchorLink,
     flexWrap: "wrap",
-    fontSize: Typography.large,
+    fontSize: Typography.size.x50,
   },
   linkArrow: {
     flex: 1,
@@ -183,25 +183,23 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.xLarge,
   },
   checkboxText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     color: Colors.text.primary,
     flex: 1,
     paddingLeft: Spacing.medium,
-    fontSize: Typography.large,
+    fontSize: Typography.size.x50,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
-    alignSelf: "center",
+    ...Buttons.primary.disabled,
   },
   buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
+    ...Typography.button.primaryDisabled,
   },
 })
 

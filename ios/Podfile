@@ -1,11 +1,6 @@
 require_relative "../node_modules/react-native/scripts/react_native_pods"
 require_relative "../node_modules/@react-native-community/cli-platform-ios/native_modules"
-platform :ios, "10.0"
-
-project "COVIDSafePaths.xcodeproj",
-  "Debug-BT" => :debug,
-  "Release-BT" => :release,
-  "Staging-BT" => :release
+platform :ios, "13.5"
 
 def shared_pods
   config = use_native_modules!
@@ -14,13 +9,18 @@ def shared_pods
   permissions_path = "../node_modules/react-native-permissions/ios"
   pod "Permission-Notifications", path: "#{permissions_path}/Notifications.podspec"
 
-  pod "Realm", modular_headers: true
-  pod "RealmSwift", modular_headers: true
+  pod "Realm", "~> 10.1.1", modular_headers: true
+  pod "RealmSwift","~> 10.1.1", modular_headers: true
   pod "Alamofire", "~> 4.9.1"
   pod "KeychainAccess", "~> 4.2.0"
   pod "ZIPFoundation", "~> 0.9.11"
   pod "PromisesSwift", modular_headers: true
   pod "PromisesObjC", modular_headers: true
+
+  use_flipper!('Flipper' => '0.62.0') # should match the version of your Flipper client app
+  post_install do |installer|
+    flipper_post_install(installer)
+  end
 end
 
 target "BT" do

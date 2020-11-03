@@ -1,5 +1,7 @@
 import env from "react-native-config"
 
+import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
+
 const baseUrl = env.GAEN_VERIFY_URL
 const verifyUrl = `${baseUrl}/api/verify`
 const certificateUrl = `${baseUrl}/api/certificate`
@@ -32,6 +34,7 @@ export type CodeVerificationError =
   | "InvalidCode"
   | "VerificationCodeUsed"
   | "NetworkConnection"
+  | "Timeout"
   | "Unknown"
 
 type TestType = "confirmed" | "likely"
@@ -51,11 +54,11 @@ export const postCode = async (
   }
 
   try {
-    const response = await fetch(verifyUrl, {
+    const response = (await fetchWithTimeout(verifyUrl, {
       method: "POST",
       headers: defaultHeaders,
       body: JSON.stringify(data),
-    })
+    })) as Response
 
     const json = await response.json()
     if (response.ok) {
@@ -77,10 +80,13 @@ export const postCode = async (
       }
     }
   } catch (e) {
-    if (e.message === "Network request failed") {
-      return { kind: "failure", error: "NetworkConnection" }
-    } else {
-      return { kind: "failure", error: "Unknown" }
+    switch (e.message) {
+      case "Network request failed":
+        return { kind: "failure", error: "NetworkConnection" }
+      case TIMEOUT_ERROR:
+        return { kind: "failure", error: "Timeout" }
+      default:
+        return { kind: "failure", error: "Unknown" }
     }
   }
 }

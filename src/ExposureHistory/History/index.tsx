@@ -16,7 +16,14 @@ import NoExposures from "./NoExposures"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
-import { Buttons, Spacing, Typography, Colors, Affordances } from "../../styles"
+import {
+  Buttons,
+  Spacing,
+  Typography,
+  Colors,
+  Affordances,
+  Outlines,
+} from "../../styles"
 
 type Posix = number
 
@@ -52,10 +59,21 @@ const History: FunctionComponent<HistoryProps> = ({
         ...Affordances.successFlashMessageOptions,
       })
     } else {
-      showMessage({
-        message: t("common.something_went_wrong"),
-        ...Affordances.errorFlashMessageOptions,
-      })
+      switch (checkResult.error) {
+        case "ExceededCheckRateLimit": {
+          showMessage({
+            message: t("common.success"),
+            ...Affordances.successFlashMessageOptions,
+          })
+          break
+        }
+        default: {
+          showMessage({
+            message: t("common.something_went_wrong"),
+            ...Affordances.errorFlashMessageOptions,
+          })
+        }
+      }
     }
     setCheckingForExposures(false)
   }
@@ -129,14 +147,17 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.medium,
   },
   headerText: {
-    ...Typography.header1,
-    ...Typography.bold,
+    ...Typography.header.x60,
+    ...Typography.style.bold,
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
-    ...Buttons.tinyRounded,
     height: Spacing.xxLarge,
     width: Spacing.xxLarge,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: Outlines.borderRadiusMax,
+    backgroundColor: Colors.secondary.shade50,
   },
   moreInfoButtonIcon: {
     minHeight: Spacing.xSmall,
@@ -151,10 +172,10 @@ const style = StyleSheet.create({
     marginBottom: Spacing.large,
   },
   button: {
-    ...Buttons.fixedBottom,
+    ...Buttons.fixedBottom.base,
   },
   buttonText: {
-    ...Typography.buttonFixedBottom,
+    ...Typography.button.fixedBottom,
   },
 })
 

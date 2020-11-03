@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
-import { usePermissionsContext } from "../PermissionsContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { Text } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
@@ -55,25 +55,21 @@ const NotificationsPermissions: FunctionComponent = () => {
             {t("onboarding.notification_subheader3")}
           </Text>
         </View>
-        <View style={style.buttonsContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressEnable}
-            style={style.button}
-            accessibilityLabel={t("label.launch_enable_notif")}
-          >
-            <Text style={style.buttonText}>
-              {t("label.launch_enable_notif")}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleOnPressMaybeLater}
-            style={style.secondaryButton}
-          >
-            <Text style={style.secondaryButtonText}>
-              {t("common.maybe_later")}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={handleOnPressEnable}
+          style={style.button}
+          accessibilityLabel={t("label.launch_enable_notif")}
+        >
+          <Text style={style.buttonText}>{t("label.launch_enable_notif")}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleOnPressMaybeLater}
+          style={style.secondaryButton}
+        >
+          <Text style={style.secondaryButtonText}>
+            {t("common.maybe_later")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -95,31 +91,28 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },
-  buttonsContainer: {
-    alignSelf: "flex-start",
-  },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
-    ...Buttons.secondary,
+    ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

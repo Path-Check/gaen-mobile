@@ -131,6 +131,9 @@ const CodeInputForm: FunctionComponent = () => {
       case "NetworkConnection": {
         return t("export.error.network_connection_error")
       }
+      case "Timeout": {
+        return t("export.error.timeout_error")
+      }
       default: {
         return t("export.error.unknown_code_verification_error")
       }
@@ -231,14 +234,14 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
   errorSubtitle: {
-    ...Typography.error,
+    ...Typography.utility.error,
     color: Colors.text.error,
     marginTop: Spacing.xxSmall,
     marginBottom: Spacing.small,
@@ -246,8 +249,8 @@ const style = StyleSheet.create({
   },
   codeInput: {
     ...Forms.textInput,
-    ...Typography.mediumBold,
-    fontSize: Typography.xLarge,
+    ...Typography.style.medium,
+    fontSize: Typography.size.x60,
     textAlignVertical: "center",
     textAlign: "center",
     letterSpacing: 4,
@@ -257,17 +260,17 @@ const style = StyleSheet.create({
     borderColor: Colors.primary.shade125,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
+    ...Buttons.primary.disabled,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
   buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
+    ...Typography.button.primaryDisabled,
     marginRight: Spacing.small,
   },
 })

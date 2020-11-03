@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { AnalyticsContextState } from "../AnalyticsContext"
+import { AnalyticsContextState } from "../ProductAnalytics/Context"
 
 export default Factory.define<AnalyticsContextState>(() => ({
   userConsentedToAnalytics: false,

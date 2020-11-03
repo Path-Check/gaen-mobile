@@ -52,12 +52,12 @@ const style = StyleSheet.create({
     borderColor: Colors.neutral.shade75,
   },
   itemText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     padding: Spacing.xSmall,
     maxWidth: "90%",
   },
   noExposureText: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     padding: Spacing.medium,
   },
 })

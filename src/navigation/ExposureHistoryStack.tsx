@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
-import { useTranslation } from "react-i18next"
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from "@react-navigation/stack"
 
 import ExposureHistoryScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
@@ -9,6 +11,7 @@ import {
   ExposureHistoryStackScreens,
   ExposureHistoryStackScreen,
 } from "./index"
+import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Headers } from "../styles"
 
@@ -17,9 +20,13 @@ type ExposureHistoryStackParams = {
 }
 const Stack = createStackNavigator<ExposureHistoryStackParams>()
 
-const ExposureHistoryStack: FunctionComponent = () => {
-  const { t } = useTranslation()
+const defaultScreenOptions: StackNavigationOptions = {
+  ...Headers.headerMinimalOptions,
+  headerLeft: applyHeaderLeftBackButton(),
+  headerRight: () => null,
+}
 
+const ExposureHistoryStack: FunctionComponent = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -30,18 +37,12 @@ const ExposureHistoryStack: FunctionComponent = () => {
       <Stack.Screen
         name={ExposureHistoryStackScreens.MoreInfo}
         component={MoreInfo}
-        options={{
-          ...Headers.headerScreenOptions,
-          title: t("navigation.more_info"),
-        }}
+        options={defaultScreenOptions}
       />
       <Stack.Screen
         name={ExposureHistoryStackScreens.ExposureDetail}
         component={ExposureDetail}
-        options={{
-          ...Headers.headerScreenOptions,
-          title: t("navigation.exposure"),
-        }}
+        options={defaultScreenOptions}
       />
     </Stack.Navigator>
   )

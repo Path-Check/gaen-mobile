@@ -60,8 +60,9 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   return (
     <>
       <ScrollView
-        alwaysBounceVertical={false}
+        style={style.container}
         contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
       >
         <View>
           <Image
@@ -110,6 +111,9 @@ const createStyle = (insets: EdgeInsets) => {
 
   /* eslint-disable react-native/no-unused-styles */
   return StyleSheet.create({
+    container: {
+      backgroundColor: Colors.background.primaryLight,
+    },
     contentContainer: {
       flexGrow: 1,
       justifyContent: "space-between",
@@ -123,18 +127,16 @@ const createStyle = (insets: EdgeInsets) => {
       marginBottom: Spacing.medium,
     },
     headerText: {
-      ...Typography.header2,
+      ...Typography.header.x50,
       marginBottom: Spacing.xLarge,
       paddingHorizontal: Spacing.large,
     },
     button: {
-      ...Buttons.primaryThin,
-      width: "100%",
-      alignSelf: "center",
+      ...Buttons.thin.base,
       marginBottom: Spacing.small,
     },
     buttonText: {
-      ...Typography.buttonPrimary,
+      ...Typography.button.primary,
       marginRight: Spacing.small,
     },
     bottomButtonContainer: {
@@ -144,8 +146,10 @@ const createStyle = (insets: EdgeInsets) => {
       backgroundColor: Colors.background.primaryLight,
     },
     bottomButtonText: {
-      ...Typography.header5,
+      ...Typography.header.x20,
       color: Colors.primary.shade100,
+      paddingHorizontal: Spacing.large,
+      textAlign: "center",
     },
   })
 }

@@ -62,21 +62,20 @@ const style = StyleSheet.create({
     resizeMode: "cover",
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     textAlign: "center",
     marginBottom: Spacing.medium,
   },
   contentText: {
-    ...Typography.body2,
+    ...Typography.body.x30,
     textAlign: "center",
     marginBottom: Spacing.xxxLarge,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
 })
 

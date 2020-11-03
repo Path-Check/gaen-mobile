@@ -46,12 +46,12 @@ describe("SymptomEntryListItem", () => {
           id: "asdf",
           kind: "UserInput",
           date,
-          symptoms: new Set<Symptom>(["cough", "fever"]),
+          symptoms: new Set<Symptom>(["cough", "fever_or_chills"]),
         }
         const { getByText } = render(<SymptomEntryListItem entry={entry} />)
 
         expect(getByText("• Cough")).toBeDefined()
-        expect(getByText("• Fever")).toBeDefined()
+        expect(getByText("• Fever or chills")).toBeDefined()
       })
     })
   })
@@ -72,7 +72,7 @@ describe("SymptomEntryListItem", () => {
         <SymptomEntryListItem entry={symptomEntry} />,
       )
 
-      const editButton = getByLabelText("Edit - Jan 1, '20")
+      const editButton = getByLabelText("Edit - Wed Jan 1, 2020")
       fireEvent.press(editButton)
 
       const expectedScreen = SymptomHistoryStackScreens.SelectSymptoms

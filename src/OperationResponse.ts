@@ -1,9 +1,9 @@
 import Logger from "./logger"
 
-export type OperationResult = "success" | "failure"
-export type OperationResponse = { kind: OperationResult }
-export const SUCCESS_RESPONSE: OperationResponse = { kind: "success" }
+export type OperationResponse = OperationSuccess | OperationFailure
+export type OperationSuccess = { kind: "success" }
+export type OperationFailure = { kind: "failure"; error: string }
 export const failureResponse = (errorMessage: string): OperationResponse => {
   Logger.error(errorMessage)
-  return { kind: "failure" }
+  return { kind: "failure", error: errorMessage }
 }

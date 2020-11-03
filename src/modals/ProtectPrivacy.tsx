@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { Text } from "../components"
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 
 import { Typography, Spacing, Colors } from "../styles"
 import { Images } from "../assets"
@@ -108,11 +108,11 @@ const sectionStyle = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   subheaderText: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.medium,
   },
 })

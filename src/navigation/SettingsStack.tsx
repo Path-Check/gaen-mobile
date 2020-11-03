@@ -17,13 +17,13 @@ import { Headers } from "../styles"
 
 const Stack = createStackNavigator()
 
-const SettingsStack: FunctionComponent = () => {
-  const defaultScreenOptions: StackNavigationOptions = {
-    ...Headers.headerMinimalOptions,
-    headerLeft: applyHeaderLeftBackButton(),
-    headerRight: () => null,
-  }
+const defaultScreenOptions: StackNavigationOptions = {
+  ...Headers.headerMinimalOptions,
+  headerLeft: applyHeaderLeftBackButton(),
+  headerRight: () => null,
+}
 
+const SettingsStack: FunctionComponent = () => {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen

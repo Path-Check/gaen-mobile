@@ -136,6 +136,7 @@ describe("SymptomHistoryProvider", () => {
         await waitFor(() => {
           expect(resultSpy).toHaveBeenCalledWith({
             kind: "failure",
+            error: "error",
           })
           expect(loggerSpy).toHaveBeenCalledWith(errorMessage)
         })
