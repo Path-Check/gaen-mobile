@@ -9,7 +9,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../Device/PermissionsContext"
-import { useAnalyticsContext } from "src/ProductAnalytics/Context"
+import { useAnalyticsContext } from "../ProductAnalytics/Context"
 import { openAppSettings } from "../Device"
 import ActivationStatusView from "./ActivationStatusView"
 import { useStatusBarEffect, HomeStackScreens } from "../navigation"

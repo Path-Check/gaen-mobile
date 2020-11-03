@@ -5,9 +5,14 @@ import { render, waitFor } from "@testing-library/react-native"
 import { StorageUtils } from "../utils"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
-import { AnalyticsContext, AnalyticsProvider } from "./Context"
+import {
+  AnalyticsContext,
+  AnalyticsProvider,
+  EventAction,
+  EventCategory,
+} from "./Context"
+import * as analyticsClient from "../ProductAnalytics/analyticsClient"
 
-const SAMPLE_EVENT = "SAMPLE_EVENT"
 describe("AnalyticsContext", () => {
   describe("getting the current user consent status", () => {
     it("passes down the correct user consent status to its children", async () => {
@@ -61,18 +66,28 @@ describe("AnalyticsContext", () => {
           jest
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(true)
+          const expectedEvent: Event = {
+            category: "product_analytics",
+            action: "button_tap",
+            name: "event_name",
+          }
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
               <AnalyticsProvider>
-                <TrackEvent />
+                <TrackEvent event={expectedEvent} />
               </AnalyticsProvider>
             </ConfigurationContext.Provider>,
           )
 
-          const trackEventSpy = jest.spyOn(actions, "trackEvent")
+          const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
           await waitFor(() => {
-            expect(trackEventSpy).toHaveBeenCalledWith(SAMPLE_EVENT)
+            expect(trackEventSpy).toHaveBeenCalledWith(
+              expectedEvent.category,
+              expectedEvent.action,
+              expectedEvent.name,
+            )
           })
         })
       })
@@ -84,13 +99,19 @@ describe("AnalyticsContext", () => {
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValue(false)
 
+          const expectedEvent: Event = {
+            category: "product_analytics",
+            action: "button_tap",
+            name: "event_name",
+          }
+
+          const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
+
           render(
             <AnalyticsProvider>
-              <TrackEvent />
+              <TrackEvent event={expectedEvent} />
             </AnalyticsProvider>,
           )
-          const trackEventSpy = jest.spyOn(actions, "trackEvent")
-
           expect(trackEventSpy).not.toHaveBeenCalled()
         })
       })
@@ -105,15 +126,22 @@ describe("AnalyticsContext", () => {
         jest
           .spyOn(StorageUtils, "getAnalyticsConsent")
           .mockResolvedValueOnce(true)
+
+        const expectedEvent: Event = {
+          category: "product_analytics",
+          action: "button_tap",
+          name: "event_name",
+        }
+
         render(
           <ConfigurationContext.Provider value={configurationContext}>
             <AnalyticsProvider>
-              <TrackEvent />
+              <TrackEvent event={expectedEvent} />
             </AnalyticsProvider>
           </ConfigurationContext.Provider>,
         )
 
-        const trackEventSpy = jest.spyOn(actions, "trackEvent")
+        const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
         await waitFor(() => {
           expect(trackEventSpy).not.toHaveBeenCalled()
@@ -138,6 +166,7 @@ describe("AnalyticsContext", () => {
           jest
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(true)
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
               <AnalyticsProvider>
@@ -146,10 +175,13 @@ describe("AnalyticsContext", () => {
             </ConfigurationContext.Provider>,
           )
 
-          const trackScreenView = jest.spyOn(actions, "trackScreenView")
+          const trackScreenViewSpy = jest.spyOn(
+            analyticsClient,
+            "trackScreenView",
+          )
 
           await waitFor(() => {
-            expect(trackScreenView).toHaveBeenCalledWith("Home")
+            expect(trackScreenViewSpy).toHaveBeenCalledWith("Home")
           })
         })
       })
@@ -166,6 +198,7 @@ describe("AnalyticsContext", () => {
           jest
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(false)
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
               <AnalyticsProvider>
@@ -174,10 +207,10 @@ describe("AnalyticsContext", () => {
             </ConfigurationContext.Provider>,
           )
 
-          const trackScreenView = jest.spyOn(actions, "trackScreenView")
+          const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
           await waitFor(() => {
-            expect(trackScreenView).not.toHaveBeenCalled()
+            expect(trackEventSpy).not.toHaveBeenCalled()
           })
         })
       })
@@ -195,6 +228,7 @@ describe("AnalyticsContext", () => {
         jest
           .spyOn(StorageUtils, "getAnalyticsConsent")
           .mockResolvedValueOnce(false)
+
         render(
           <ConfigurationContext.Provider value={configurationContext}>
             <AnalyticsProvider>
@@ -203,10 +237,10 @@ describe("AnalyticsContext", () => {
           </ConfigurationContext.Provider>,
         )
 
-        const trackScreenView = jest.spyOn(actions, "trackScreenView")
+        const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
         await waitFor(() => {
-          expect(trackScreenView).not.toHaveBeenCalled()
+          expect(trackEventSpy).not.toHaveBeenCalled()
         })
       })
     })
@@ -228,11 +262,19 @@ const UpdateConsent: FunctionComponent = () => {
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }
 
-const TrackEvent: FunctionComponent = () => {
+type Event = {
+  category: EventCategory
+  action: EventAction
+  name: string
+}
+
+const TrackEvent: FunctionComponent<{
+  event: Event
+}> = ({ event: { category, action, name } }) => {
   const context = useContext(AnalyticsContext)
 
   useEffect(() => {
-    context.trackEvent(SAMPLE_EVENT)
+    context.trackEvent(category, action, name)
   }, [context])
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }
