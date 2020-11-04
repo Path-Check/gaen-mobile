@@ -1,4 +1,4 @@
-const TIMEOUT_ERROR = "timeout"
+const TIMEOUT_ERROR = "timeout" as const
 const DEFAULT_TIMEOUT = 5000
 
 const fetchWithTimeout = async (

@@ -36,7 +36,6 @@
   "covid_data": {
     "cases_today": "今日案例人數",
     "covid_data": "COVID數據",
-    "covid_stats_in": "{{location}}的COVID統計數字",
     "deaths_today": "今日死亡人數",
     "down_from_last_week": "較上週下降",
     "error_getting_data": "很抱歉，我們無法取得{{location}}最新的COVID案例數據。",
@@ -157,7 +156,6 @@
     "call_emergency_services": "致電緊急服務人員",
     "check_if_your_symptoms": "輸入您的症狀並立即獲得有關如何保持安全的建議。",
     "did_you_test_positive": "您是否對COVID-19檢測為陽性？",
-    "feeling_sick": "是否感到不適？",
     "fix": "透過{{technology}}解決問題",
     "get_more_info": "透過{{technology}}獲得更多資訊",
     "have_a_positive_test": "測試結果代碼是否為陽性？",

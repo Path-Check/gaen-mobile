@@ -12,7 +12,7 @@ import {
 
 import { Text } from "../components"
 import { SelfAssessmentStackScreens } from "../navigation"
-import { useSelfAssessmentContext } from "../SelfAssessmentContext"
+import { useSelfAssessmentContext } from "./Context"
 
 import { Typography, Spacing, Iconography, Colors, Outlines } from "../styles"
 import { Images } from "../assets"
@@ -83,7 +83,7 @@ const feelingButtonHeight = 120
 
 const style = StyleSheet.create({
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.medium,
   },
   contentContainer: {
@@ -109,8 +109,8 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   feelingButtonText: {
-    ...Typography.body1,
-    fontSize: Typography.large,
+    ...Typography.body.x30,
+    fontSize: Typography.size.x50,
   },
   feelingButtonImage: {
     resizeMode: "contain",

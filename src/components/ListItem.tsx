@@ -46,7 +46,7 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.large,
   },
   listItemText: {
-    ...Typography.tappableListItem,
+    ...Typography.button.listItem,
   },
 })
 

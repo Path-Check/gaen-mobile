@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { SelfAssessmentContextState } from "../SelfAssessmentContext"
+import { SelfAssessmentContextState } from "../SelfAssessment/Context"
 
 export default Factory.define<SelfAssessmentContextState>(() => ({
   emergencySymptoms: [],

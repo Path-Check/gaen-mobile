@@ -15,12 +15,17 @@
     "back": "Précédent",
     "done": "Terminé",
     "edit": "Modifier",
+    "more": "Plus",
     "next": "Suivant",
     "save": "Sauvegarder",
     "settings": "Ouvrir les paramètres",
     "something_went_wrong": "Un problème est survenu",
     "start": "Démarrer",
     "submit": "Envoyer"
+  },
+  "covid_data": {
+    "trending_down": "Tendance à la baisse",
+    "trending_up": "Tendance à la hausse"
   },
   "errors": {
     "description": "Une erreur s'est produite. Veuillez recharger l'application.",
@@ -106,7 +111,8 @@
     "screen4_header": "L'application vous informera si vous avez pu être exposé au COVID-19.",
     "screen4_image_label": "Une personne recevant une notification sur son téléphone",
     "terms_header_title": "Conditions d’utilisation (en anglais)",
-    "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau."
+    "welcome_image_label": "Une illustration de personnes portant des masques, connectées comme des nœuds dans un réseau.",
+    "you_must_be": "Vous devez avoir {{minimumAge}} ou plus pour utiliser {{applicationName}} . Avez-vous plus de {{minimumAge}} ?"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",

@@ -12,13 +12,12 @@ import {
   determineIsOnboardingComplete,
 } from "./src/OnboardingContext"
 import { ConfigurationProvider } from "./src/ConfigurationContext"
-import { PermissionsProvider } from "./src/PermissionsContext"
-import { SystemServicesProvider } from "./src/SystemServicesContext"
+import { PermissionsProvider } from "./src/Device/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
-import { AnalyticsProvider } from "./src/AnalyticsContext"
+import { AnalyticsProvider } from "./src/ProductAnalytics/Context"
 import { SymptomHistoryProvider } from "./src/SymptomHistory/SymptomHistoryContext"
-import { CovidDataContextProvider } from "./src/CovidDataContext"
+import { CovidDataContextProvider } from "./src/CovidData/Context"
 
 Logger.start()
 
@@ -50,18 +49,16 @@ const App: FunctionComponent = () => {
               userHasCompletedOnboarding={isOnboardingComplete}
             >
               <PermissionsProvider>
-                <SystemServicesProvider>
-                  <ExposureProvider>
-                    <AnalyticsProvider>
-                      <SymptomHistoryProvider>
-                        <CovidDataContextProvider>
-                          <MainNavigator />
-                          <FlashMessage />
-                        </CovidDataContextProvider>
-                      </SymptomHistoryProvider>
-                    </AnalyticsProvider>
-                  </ExposureProvider>
-                </SystemServicesProvider>
+                <ExposureProvider>
+                  <AnalyticsProvider>
+                    <SymptomHistoryProvider>
+                      <CovidDataContextProvider>
+                        <MainNavigator />
+                        <FlashMessage />
+                      </CovidDataContextProvider>
+                    </SymptomHistoryProvider>
+                  </AnalyticsProvider>
+                </ExposureProvider>
               </PermissionsProvider>
             </OnboardingProvider>
           </ConfigurationProvider>

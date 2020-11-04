@@ -45,7 +45,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
   },
 })
 export default BluetoothInfo

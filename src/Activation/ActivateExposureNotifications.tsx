@@ -9,21 +9,22 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../PermissionsContext"
-import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
+import { Text } from "../components"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const {
+    locationPermissions,
+    isBluetoothOn,
+    exposureNotifications,
+  } = usePermissionsContext()
 
-  const { locationPermissions, isBluetoothOn } = useSystemServicesContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
-  const { exposureNotifications } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
     navigation.navigate(
@@ -70,24 +71,20 @@ const ActivateExposureNotifications: FunctionComponent = () => {
             {t("onboarding.proximity_tracing_subheader3")}
           </Text>
         </View>
-        <View style={style.buttonsContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressActivateExposureNotifications}
-            style={style.button}
-          >
-            <Text style={style.buttonText}>
-              {t("onboarding.proximity_tracing_button")}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleOnPressDontEnable}
-            style={style.secondaryButton}
-          >
-            <Text style={style.secondaryButtonText}>
-              {t("common.no_thanks")}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={handleOnPressActivateExposureNotifications}
+          style={style.button}
+        >
+          <Text style={style.buttonText}>
+            {t("onboarding.proximity_tracing_button")}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleOnPressDontEnable}
+          style={style.secondaryButton}
+        >
+          <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -108,31 +105,28 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
   subheader: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     marginBottom: Spacing.xSmall,
   },
   body: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },
-  buttonsContainer: {
-    alignSelf: "flex-start",
-  },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
-    ...Buttons.secondary,
+    ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

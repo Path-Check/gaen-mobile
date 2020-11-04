@@ -12,7 +12,8 @@ import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "./components"
 import { getLocalNames } from "./locales/languages"
-import { useApplicationName } from "./hooks/useApplicationInfo"
+import { useApplicationName } from "./Device/useApplicationInfo"
+import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
 import {
   loadAuthorityCopy,
@@ -38,6 +39,7 @@ const Welcome: FunctionComponent = () => {
   } = useTranslation()
   const languageName = getLocalNames()[localeCode]
   const { applicationName } = useApplicationName()
+  const { displayAgeVerification } = useConfigurationContext()
 
   const welcomeMessage = authorityCopyTranslation(
     loadAuthorityCopy("welcome_message"),
@@ -50,7 +52,11 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    navigation.navigate(Stacks.HowItWorks)
+    if (displayAgeVerification) {
+      navigation.navigate(ModalStackScreens.AgeVerification)
+    } else {
+      navigation.navigate(Stacks.HowItWorks)
+    }
   }
 
   return (
@@ -117,8 +123,8 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
-    ...Typography.body3,
-    letterSpacing: Typography.largeLetterSpacing,
+    ...Typography.body.x10,
+    letterSpacing: Typography.letterSpacing.x30,
     color: Colors.primary.shade125,
     textAlign: "center",
     textTransform: "uppercase",
@@ -133,22 +139,21 @@ const style = StyleSheet.create({
     marginBottom: Spacing.huge,
   },
   welcomeToText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     color: Colors.text.primary,
     textAlign: "center",
   },
   nameText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     color: Colors.text.primary,
     textAlign: "center",
     marginBottom: Spacing.huge,
   },
   button: {
-    ...Buttons.primary,
-    alignSelf: "center",
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
 })

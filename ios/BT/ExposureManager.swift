@@ -430,7 +430,6 @@ final class ExposureManager: NSObject {
       case let .failure(error):
         let exposureError = ExposureError.default(error.localizedDescription)
         btSecureStorage.exposureDetectionErrorLocalizedDescription = error.localizedDescription
-        postExposureDetectionErrorNotification(exposureError.errorDescription)
         completionHandler(.failure(exposureError))
       }
     }
@@ -509,6 +508,25 @@ extension ExposureManager {
           fullfill(configuration)
         case .failure(_):
           fullfill(configuration)
+        }
+      }
+    }
+  }
+
+  ///Notifies the user that an exposure has been detected
+  func notifyUserExposureDetected() {
+    let content = UNMutableNotificationContent()
+    content.title = String.newExposureNotificationTitle.localized
+    content.body = String.newExposureNotificationBody.localized
+    content.sound = .default
+    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
+    let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
+                                        content: content,
+                                        trigger: nil)
+    userNotificationCenter.add(request) { error in
+      DispatchQueue.main.async {
+        if let error = error {
+          print("Error showing error user notification: \(error)")
         }
       }
     }
@@ -672,22 +690,4 @@ extension ExposureManager {
     }
   }
 
-  ///Notifies the user that an exposure has been detected
-  func notifyUserExposureDetected() {
-    let content = UNMutableNotificationContent()
-    content.title = String.newExposureNotificationTitle.localized
-    content.body = String.newExposureNotificationBody.localized
-    content.sound = .default
-    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)\(String.notificationUrlExposureHistoryPath)"]
-    let request = UNNotificationRequest(identifier: String.newExposureNotificationIdentifier,
-                                        content: content,
-                                        trigger: nil)
-    userNotificationCenter.add(request) { error in
-      DispatchQueue.main.async {
-        if let error = error {
-          print("Error showing error user notification: \(error)")
-        }
-      }
-    }
-  }
 }

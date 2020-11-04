@@ -58,21 +58,21 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.large,
   },
   title: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.small,
   },
   subtitle: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
   },
   error: {
-    ...Typography.error,
+    ...Typography.utility.error,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     textAlign: "center",
   },
 })

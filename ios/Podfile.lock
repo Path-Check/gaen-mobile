@@ -3,6 +3,8 @@ PODS:
   - boost-for-react-native (1.63.0)
   - BugsnagReactNative (7.3.5):
     - React
+  - CocoaAsyncSocket (7.6.4)
+  - CocoaLibEvent (1.0.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.2)
   - FBReactNativeSpec (0.63.2):
@@ -12,6 +14,52 @@ PODS:
     - React-Core (= 0.63.2)
     - React-jsi (= 0.63.2)
     - ReactCommon/turbomodule/core (= 0.63.2)
+  - Flipper (0.62.0):
+    - Flipper-Folly (~> 2.2)
+    - Flipper-RSocket (~> 1.1)
+  - Flipper-DoubleConversion (1.1.7)
+  - Flipper-Folly (2.3.0):
+    - boost-for-react-native
+    - CocoaLibEvent (~> 1.0)
+    - Flipper-DoubleConversion
+    - Flipper-Glog
+    - OpenSSL-Universal (= 1.0.2.20)
+  - Flipper-Glog (0.3.6)
+  - Flipper-PeerTalk (0.0.4)
+  - Flipper-RSocket (1.1.0):
+    - Flipper-Folly (~> 2.2)
+  - FlipperKit (0.62.0):
+    - FlipperKit/Core (= 0.62.0)
+  - FlipperKit/Core (0.62.0):
+    - Flipper (~> 0.62.0)
+    - FlipperKit/CppBridge
+    - FlipperKit/FBCxxFollyDynamicConvert
+    - FlipperKit/FBDefines
+    - FlipperKit/FKPortForwarding
+  - FlipperKit/CppBridge (0.62.0):
+    - Flipper (~> 0.62.0)
+  - FlipperKit/FBCxxFollyDynamicConvert (0.62.0):
+    - Flipper-Folly (~> 2.2)
+  - FlipperKit/FBDefines (0.62.0)
+  - FlipperKit/FKPortForwarding (0.62.0):
+    - CocoaAsyncSocket (~> 7.6)
+    - Flipper-PeerTalk (~> 0.0.4)
+  - FlipperKit/FlipperKitHighlightOverlay (0.62.0)
+  - FlipperKit/FlipperKitLayoutPlugin (0.62.0):
+    - FlipperKit/Core
+    - FlipperKit/FlipperKitHighlightOverlay
+    - FlipperKit/FlipperKitLayoutTextSearchable
+    - YogaKit (~> 1.18)
+  - FlipperKit/FlipperKitLayoutTextSearchable (0.62.0)
+  - FlipperKit/FlipperKitNetworkPlugin (0.62.0):
+    - FlipperKit/Core
+  - FlipperKit/FlipperKitReactPlugin (0.62.0):
+    - FlipperKit/Core
+  - FlipperKit/FlipperKitUserDefaultsPlugin (0.62.0):
+    - FlipperKit/Core
+  - FlipperKit/SKIOSNetworkPlugin (0.62.0):
+    - FlipperKit/Core
+    - FlipperKit/FlipperKitNetworkPlugin
   - Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -23,14 +71,17 @@ PODS:
     - glog
   - glog (0.3.5)
   - KeychainAccess (4.2.1)
-  - MatomoTracker (7.2.2):
-    - MatomoTracker/Core (= 7.2.2)
-  - MatomoTracker/Core (7.2.2)
+  - MatomoTracker (7.3):
+    - MatomoTracker/Core (= 7.3)
+  - MatomoTracker/Core (7.3)
+  - OpenSSL-Universal (1.0.2.20):
+    - OpenSSL-Universal/Static (= 1.0.2.20)
+  - OpenSSL-Universal/Static (1.0.2.20)
   - Permission-Notifications (2.1.4):
     - RNPermissions
-  - PromisesObjC (1.2.10)
-  - PromisesSwift (1.2.10):
-    - PromisesObjC (= 1.2.10)
+  - PromisesObjC (1.2.11)
+  - PromisesSwift (1.2.11):
+    - PromisesObjC (= 1.2.11)
   - RCTRequired (0.63.2)
   - RCTTypeSafety (0.63.2):
     - FBLazyVector (= 0.63.2)
@@ -272,11 +323,11 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
-  - Realm (5.4.7):
-    - Realm/Headers (= 5.4.7)
-  - Realm/Headers (5.4.7)
-  - RealmSwift (5.4.7):
-    - Realm (= 5.4.7)
+  - Realm (10.1.1):
+    - Realm/Headers (= 10.1.1)
+  - Realm/Headers (10.1.1)
+  - RealmSwift (10.1.1):
+    - Realm (= 10.1.1)
   - RNCAsyncStorage (1.10.0):
     - React
   - RNCMaskedView (0.1.10):
@@ -294,6 +345,8 @@ PODS:
   - RNSVG (12.1.0):
     - React
   - Yoga (1.14.0)
+  - YogaKit (1.18.1):
+    - Yoga (~> 1.14)
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
@@ -302,6 +355,25 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
+  - Flipper (= 0.62.0)
+  - Flipper-DoubleConversion (= 1.1.7)
+  - Flipper-Folly (~> 2.2)
+  - Flipper-Glog (= 0.3.6)
+  - Flipper-PeerTalk (~> 0.0.4)
+  - Flipper-RSocket (~> 1.1)
+  - FlipperKit (= 0.62.0)
+  - FlipperKit/Core (= 0.62.0)
+  - FlipperKit/CppBridge (= 0.62.0)
+  - FlipperKit/FBCxxFollyDynamicConvert (= 0.62.0)
+  - FlipperKit/FBDefines (= 0.62.0)
+  - FlipperKit/FKPortForwarding (= 0.62.0)
+  - FlipperKit/FlipperKitHighlightOverlay (= 0.62.0)
+  - FlipperKit/FlipperKitLayoutPlugin (= 0.62.0)
+  - FlipperKit/FlipperKitLayoutTextSearchable (= 0.62.0)
+  - FlipperKit/FlipperKitNetworkPlugin (= 0.62.0)
+  - FlipperKit/FlipperKitReactPlugin (= 0.62.0)
+  - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.62.0)
+  - FlipperKit/SKIOSNetworkPlugin (= 0.62.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - KeychainAccess (~> 4.2.0)
@@ -337,8 +409,8 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - Realm
-  - RealmSwift
+  - Realm (~> 10.1.1)
+  - RealmSwift (~> 10.1.1)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
@@ -354,12 +426,23 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - boost-for-react-native
+    - CocoaAsyncSocket
+    - CocoaLibEvent
+    - Flipper
+    - Flipper-DoubleConversion
+    - Flipper-Folly
+    - Flipper-Glog
+    - Flipper-PeerTalk
+    - Flipper-RSocket
+    - FlipperKit
     - KeychainAccess
     - MatomoTracker
+    - OpenSSL-Universal
     - PromisesObjC
     - PromisesSwift
     - Realm
     - RealmSwift
+    - YogaKit
     - ZIPFoundation
 
 EXTERNAL SOURCES:
@@ -454,16 +537,26 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BugsnagReactNative: fc7d6fb2127e53a8bfc79130b58263da363bb94b
+  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3ef4a7f62e7db01092f9d517d2ebc0d0677c4a37
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
+  Flipper: 8c34da52a467af6171044444c314dbeb8d5a6d35
+  Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
+  Flipper-Folly: e4493b013c02d9347d5e0cb4d128680239f6c78a
+  Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6
+  Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
+  Flipper-RSocket: 64e7431a55835eb953b0bf984ef3b90ae9fdddd7
+  FlipperKit: 59d616c8b88912d02114f0320fb4824fed54ab35
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   KeychainAccess: 9b07f665298d13c3a85881bd3171f6f49b8151c1
-  MatomoTracker: a59ec4da0f580be57bdc6baa708a71a86532a832
+  MatomoTracker: c51a9abb4df0b94959d2c1bf67833079cb90a18a
+  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   Permission-Notifications: d437cafc026900006d35981d35a2d694f883f44e
-  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  PromisesSwift: ce4c7602f91a6bfc8732039f1bc1a3fcded1a302
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  PromisesSwift: fed4eb6f7a29846a22624d1b86b77e1dedb88724
   RCTRequired: f13f25e7b12f925f1f6a6a8c69d929a03c0129fe
   RCTTypeSafety: 44982c5c8e43ff4141eb519a8ddc88059acd1f3a
   React: e1c65dd41cb9db13b99f24608e47dd595f28ca9a
@@ -491,8 +584,8 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  Realm: 4bfc08e376b2e30c84ec3200ebe715574da05cc0
-  RealmSwift: ed40f371b62e8677141939e05b44a0c1a0a2d965
+  Realm: 784ca1da1453e31a9c9adc14445421a81f316119
+  RealmSwift: cc52fe0dcea56387274dff36e19219e055a3bb84
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: dc1c0c6aa18a128df123598149f42e848d26a4ac
@@ -502,8 +595,9 @@ SPEC CHECKSUMS:
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
+  YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 2be6c77b9a12f93429e51dbecabcbb1f89c1719f
+PODFILE CHECKSUM: f3749e456c940a622016e5d54f5557980441e2e1
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

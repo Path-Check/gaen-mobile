@@ -37,18 +37,7 @@ extension ExposureManager: ExposureManagerDebuggable {
       let exposure = Exposure(id: UUID().uuidString,
                               date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000)
       btSecureStorage.storeExposures([exposure])
-      let content = UNMutableNotificationContent()
-      content.title = String.newExposureNotificationTitle.localized
-      content.body = String.newExposureNotificationBody.localized
-      content.sound = .default
-      let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: nil)
-      userNotificationCenter.add(request) { error in
-        DispatchQueue.main.async {
-          if let error = error {
-            print("Error showing error user notification: \(error)")
-          }
-        }
-      }
+      notifyUserExposureDetected()
       resolve("Exposures: \(btSecureStorage.userState.exposures)")
     case .fetchExposures:
       resolve(currentExposures)

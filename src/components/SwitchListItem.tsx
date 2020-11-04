@@ -40,7 +40,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   toggleText: {
-    ...Typography.tappableListItem,
+    ...Typography.button.listItem,
   },
 })
 

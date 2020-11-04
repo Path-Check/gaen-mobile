@@ -3,6 +3,8 @@ import { Posix, isSameDay } from "../utils/dateTime"
 
 import * as Symptom from "./symptom"
 
+export type SymptomEntry = NoUserInput | UserInput
+
 export interface NoUserInput {
   kind: "NoUserInput"
   date: Posix
@@ -14,8 +16,6 @@ export interface UserInput {
   date: Posix
   symptoms: Set<Symptom.Symptom>
 }
-
-export type SymptomEntry = NoUserInput | UserInput
 
 export type SymptomHistory = SymptomEntry[]
 
@@ -148,6 +148,16 @@ export const hasEmergencySymptoms = (
   return Boolean(
     Symptom.emergencySymptoms.find((emergencySymptom) => {
       return loggedSymptoms.has(emergencySymptom)
+    }),
+  )
+}
+
+export const hasCovidSymptoms = (
+  loggedSymptoms: Set<Symptom.Symptom>,
+): boolean => {
+  return Boolean(
+    Symptom.covidSymptoms.find((symptom) => {
+      return loggedSymptoms.has(symptom)
     }),
   )
 }

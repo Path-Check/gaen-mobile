@@ -88,7 +88,7 @@ const style = StyleSheet.create({
     borderColor: "#999999",
   },
   itemText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     padding: 10,
     maxWidth: "90%",
   },

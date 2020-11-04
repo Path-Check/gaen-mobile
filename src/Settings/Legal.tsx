@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { useApplicationName } from "../hooks/useApplicationInfo"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "./ExternalLink"
 import {
@@ -19,7 +19,7 @@ import { useStatusBarEffect } from "../navigation"
 import { Colors, Spacing, Typography } from "../styles"
 
 const Legal: FunctionComponent = () => {
-  useStatusBarEffect("light-content", Colors.header.background)
+  useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const {
     t,
     i18n: { language: localeCode },
@@ -68,12 +68,12 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.small,
   },
   headerContent: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.small,
     color: Colors.primary.shade150,
   },
   contentText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.medium,
   },
 })

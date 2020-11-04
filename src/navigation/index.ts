@@ -43,6 +43,9 @@ export type HomeStackScreen =
   | "ExposureNotificationsInfo"
   | "Home"
   | "LocationInfo"
+  | "EnterSymptoms"
+  | "EmergencyRecommendation"
+  | "CovidRecommendation"
 
 export const HomeStackScreens: {
   [key in HomeStackScreen]: HomeStackScreen
@@ -54,6 +57,9 @@ export const HomeStackScreens: {
   ExposureNotificationsInfo: "ExposureNotificationsInfo",
   Home: "Home",
   LocationInfo: "LocationInfo",
+  EnterSymptoms: "EnterSymptoms",
+  EmergencyRecommendation: "EmergencyRecommendation",
+  CovidRecommendation: "CovidRecommendation",
 }
 
 export type HowItWorksStackScreen =
@@ -119,6 +125,7 @@ export type ModalStackScreen =
   | "SelfAssessmentFromExposureDetails"
   | "SelfAssessmentFromHome"
   | "CallbackStack"
+  | "AgeVerification"
 
 export const ModalStackScreens: {
   [key in ModalStackScreen]: ModalStackScreen
@@ -132,6 +139,7 @@ export const ModalStackScreens: {
   SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
   SelfAssessmentFromHome: "SelfAssessmentFromHome",
   CallbackStack: "CallbackStack",
+  AgeVerification: "AgeVerification",
 }
 
 export type SettingsStackScreen =
@@ -185,14 +193,16 @@ export const WelcomeStackScreens: {
 export type SymptomHistoryStackScreen =
   | "SymptomHistory"
   | "SelectSymptoms"
-  | "CallEmergencyServices"
+  | "EmergencyRecommendation"
+  | "CovidRecommendation"
 
 export const SymptomHistoryStackScreens: {
   [key in SymptomHistoryStackScreen]: SymptomHistoryStackScreen
 } = {
   SymptomHistory: "SymptomHistory",
   SelectSymptoms: "SelectSymptoms",
-  CallEmergencyServices: "CallEmergencyServices",
+  EmergencyRecommendation: "EmergencyRecommendation",
+  CovidRecommendation: "CovidRecommendation",
 }
 
 export type SelfAssessmentStackScreen =

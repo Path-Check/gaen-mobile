@@ -67,18 +67,18 @@ const style = StyleSheet.create({
   image: {
     width: "100%",
     height: 300,
-    marginBottom: Spacing.small,
     resizeMode: "contain",
+    marginBottom: Spacing.small,
   },
   header: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     marginBottom: Spacing.xLarge,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
     marginRight: Spacing.small,
   },
 })

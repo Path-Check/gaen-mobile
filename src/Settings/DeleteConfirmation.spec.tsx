@@ -4,7 +4,6 @@ import { showMessage } from "react-native-flash-message"
 
 import { SymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { OnboardingProvider } from "../OnboardingContext"
-import { SUCCESS_RESPONSE } from "../OperationResponse"
 import DeleteConfirmation from "./DeleteConfirmation"
 import { factories } from "../factories"
 
@@ -14,7 +13,7 @@ jest.mock("@react-navigation/native")
 describe("DeleteConfirmation", () => {
   it("allows users to delete their data", async () => {
     const deleteAllEntriesSpy = jest.fn()
-    deleteAllEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
+    deleteAllEntriesSpy.mockResolvedValueOnce({ kind: "success" })
 
     const { getByLabelText } = render(
       <OnboardingProvider userHasCompletedOnboarding={false}>
@@ -38,7 +37,7 @@ describe("DeleteConfirmation", () => {
     it("presents a success message", async () => {
       const showMessageSpy = showMessage as jest.Mock
       const deleteAllEntriesSpy = jest.fn()
-      deleteAllEntriesSpy.mockResolvedValueOnce(SUCCESS_RESPONSE)
+      deleteAllEntriesSpy.mockResolvedValueOnce({ kind: "success" })
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding={false}>

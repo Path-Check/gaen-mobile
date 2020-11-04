@@ -11,12 +11,11 @@ import { useTranslation } from "react-i18next"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../PermissionsContext"
+} from "../Device/PermissionsContext"
+import { useApplicationName } from "../Device/useApplicationInfo"
+import { openAppSettings } from "../Device"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useApplicationName } from "../hooks/useApplicationInfo"
 import { Text } from "../components"
-import { useSystemServicesContext } from "../SystemServicesContext"
-import { openAppSettings } from "../gaen/nativeModule"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -25,14 +24,15 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { isBluetoothOn, locationPermissions } = useSystemServicesContext()
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
-
   const {
+    isBluetoothOn,
+    locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
+
   const isENEnabled = status === ENPermissionStatus.ENABLED
+  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
     completeOnboarding()
@@ -145,28 +145,26 @@ const style = StyleSheet.create({
     marginBottom: Spacing.xxLarge,
   },
   headerText: {
-    ...Typography.header1,
+    ...Typography.header.x60,
     textAlign: "center",
     marginBottom: Spacing.medium,
   },
   bodyText: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     textAlign: "center",
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
     marginBottom: Spacing.xxSmall,
-    width: "100%",
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   secondaryButton: {
-    ...Buttons.secondary,
-    alignSelf: "center",
+    ...Buttons.secondary.base,
   },
   secondaryButtonText: {
-    ...Typography.buttonSecondary,
+    ...Typography.button.secondary,
   },
 })
 

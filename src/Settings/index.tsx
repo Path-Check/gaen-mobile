@@ -13,7 +13,7 @@ import {
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
-import { useApplicationInfo } from "../hooks/useApplicationInfo"
+import { useApplicationInfo } from "../Device/useApplicationInfo"
 import {
   loadAuthorityCopy,
   authorityCopyTranslation,
@@ -186,8 +186,8 @@ const style = StyleSheet.create({
     paddingHorizontal: Spacing.medium,
   },
   aboutContent: {
-    ...Typography.body1,
-    fontSize: Typography.large,
+    ...Typography.body.x30,
+    fontSize: Typography.size.x50,
   },
   infoRowContainer: {
     marginTop: Spacing.small,
@@ -197,13 +197,13 @@ const style = StyleSheet.create({
     flexDirection: "row",
   },
   infoRowLabel: {
-    ...Typography.header5,
+    ...Typography.header.x20,
     color: Colors.primary.shade150,
     width: 100,
     marginTop: Spacing.small,
   },
   infoRowValue: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginTop: Spacing.small,
   },
 })

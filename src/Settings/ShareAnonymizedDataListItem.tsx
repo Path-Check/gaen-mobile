@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useAnalyticsContext } from "../AnalyticsContext"
+import { useAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 import { ModalStackScreens } from "../navigation"
 import { Icons } from "../assets"
@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
   },
   listItemText: {
-    ...Typography.tappableListItem,
+    ...Typography.button.listItem,
   },
   rightIcon: {
     paddingRight: Spacing.medium,

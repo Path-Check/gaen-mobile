@@ -197,38 +197,38 @@ const style = StyleSheet.create({
     marginBottom: Spacing.small,
   },
   header: {
-    ...Typography.header2,
+    ...Typography.header.x50,
     marginBottom: Spacing.xxSmall,
   },
   subheader: {
-    ...Typography.body1,
+    ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
   },
   errorSubtitle: {
-    ...Typography.error,
+    ...Typography.utility.error,
     height: Spacing.huge,
   },
   inputContainer: {
     marginBottom: Spacing.medium,
   },
   inputLabel: {
-    ...Typography.formInputLabel,
+    ...Typography.form.inputLabel,
     paddingBottom: Spacing.xxSmall,
   },
   textInput: {
     ...Forms.textInput,
   },
   button: {
-    ...Buttons.primary,
+    ...Buttons.primary.base,
   },
   buttonDisabled: {
-    ...Buttons.primaryDisabled,
+    ...Buttons.primary.disabled,
   },
   buttonText: {
-    ...Typography.buttonPrimary,
+    ...Typography.button.primary,
   },
   buttonDisabledText: {
-    ...Typography.buttonPrimaryDisabled,
+    ...Typography.button.primaryDisabled,
   },
 })
 
