@@ -148,7 +148,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.pathcheck.covidsafepaths.bt"
+        applicationId project.env.get("ANDROID_APPLICATION_ID")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
