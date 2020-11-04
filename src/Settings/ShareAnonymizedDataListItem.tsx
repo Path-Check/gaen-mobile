@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 import { ModalStackScreens } from "../navigation"
 import { Icons } from "../assets"
@@ -13,7 +13,7 @@ import { Colors, Iconography, Typography, Spacing } from "../styles"
 const ShareAnonymizedDataListItem: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { userConsentedToAnalytics } = useAnalyticsContext()
+  const { userConsentedToAnalytics } = useProductAnalyticsContext()
 
   const onPressShareAnonymizedData = () => {
     navigation.navigate(ModalStackScreens.AnonymizedDataConsent)

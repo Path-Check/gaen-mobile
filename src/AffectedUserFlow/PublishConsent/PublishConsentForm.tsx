@@ -18,6 +18,7 @@ import {
   AffectedUserFlowStackScreens,
   ModalStackScreens,
 } from "../../navigation"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { Icons } from "../../assets"
 import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
 import Logger from "../../logger"
@@ -51,6 +52,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const { trackEvent } = useProductAnalyticsContext()
   const [isLoading, setIsLoading] = useState(false)
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
@@ -147,6 +149,11 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     setIsLoading(false)
     if (response.kind === "success") {
       storeRevisionToken(response.revisionToken)
+      trackEvent(
+        "product_analytics",
+        "button_tap",
+        "key_submission_consented_to",
+      )
       navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
       handleNoOpResponse(response)

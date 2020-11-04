@@ -9,6 +9,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../../Device/PermissionsContext"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { openAppSettings } from "../../Device"
 import { useStatusBarEffect, HomeStackScreens } from "../../navigation"
 import { Text } from "../../components"
@@ -22,6 +23,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     exposureNotifications,
     isBluetoothOn,
@@ -106,6 +108,12 @@ const ExposureDetectionStatus: FunctionComponent = () => {
 
         if (status !== ENPermissionStatus.ENABLED) {
           showNotAuthorizedAlert()
+        } else {
+          trackEvent(
+            "product_analytics",
+            "button_tap",
+            "exposure_notifications_enabled",
+          )
         }
       } catch {
         showNotAuthorizedAlert()

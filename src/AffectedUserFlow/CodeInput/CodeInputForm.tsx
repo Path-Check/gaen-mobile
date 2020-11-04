@@ -19,6 +19,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -35,6 +36,7 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
@@ -68,6 +70,7 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
+    trackEvent("product_analytics", "button_tap", "verification_code_submitted")
     try {
       const response = await API.postCode(code)
 

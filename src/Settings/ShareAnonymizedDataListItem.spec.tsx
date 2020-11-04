@@ -2,7 +2,7 @@ import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { AnalyticsContext } from "../ProductAnalytics/Context"
+import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
 import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 import { factories } from "../factories"
 import { ModalStackScreens } from "../navigation"
@@ -11,14 +11,14 @@ jest.mock("@react-navigation/native")
 describe("ShareAnonymizedDataListItem", () => {
   describe("when a user has consented to analytics", () => {
     it("displays a check icon", () => {
-      const context = factories.analyticsContext.build({
+      const context = factories.productAnalyticsContext.build({
         userConsentedToAnalytics: true,
       })
 
       const { getByTestId } = render(
-        <AnalyticsContext.Provider value={context}>
+        <ProductAnalyticsContext.Provider value={context}>
           <ShareAnonymizedDataListItem />
-        </AnalyticsContext.Provider>,
+        </ProductAnalyticsContext.Provider>,
       )
 
       const activeStateIcon = getByTestId("sharing-data")
@@ -28,14 +28,14 @@ describe("ShareAnonymizedDataListItem", () => {
 
   describe("when a user has not consented to analytics", () => {
     it("displays an x icon", () => {
-      const context = factories.analyticsContext.build({
+      const context = factories.productAnalyticsContext.build({
         userConsentedToAnalytics: false,
       })
 
       const { getByTestId } = render(
-        <AnalyticsContext.Provider value={context}>
+        <ProductAnalyticsContext.Provider value={context}>
           <ShareAnonymizedDataListItem />
-        </AnalyticsContext.Provider>,
+        </ProductAnalyticsContext.Provider>,
       )
 
       const inactiveStateIcon = getByTestId("not-sharing-data")
@@ -47,14 +47,14 @@ describe("ShareAnonymizedDataListItem", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const context = factories.analyticsContext.build({
+    const context = factories.productAnalyticsContext.build({
       userConsentedToAnalytics: false,
     })
 
     const { getByText } = render(
-      <AnalyticsContext.Provider value={context}>
+      <ProductAnalyticsContext.Provider value={context}>
         <ShareAnonymizedDataListItem />
-      </AnalyticsContext.Provider>,
+      </ProductAnalyticsContext.Provider>,
     )
 
     const shareDataListItem = getByText("Share Anonymized Data")

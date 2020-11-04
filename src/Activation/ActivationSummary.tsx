@@ -15,6 +15,7 @@ import {
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
 import { useOnboardingContext } from "../OnboardingContext"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 
 import { Images } from "../assets"
@@ -24,6 +25,7 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     isBluetoothOn,
     locationPermissions,
@@ -35,6 +37,7 @@ const ActivationSummary: FunctionComponent = () => {
   const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
+    trackEvent("product_analytics", "button_tap", "onboarding_completed")
     completeOnboarding()
   }
 

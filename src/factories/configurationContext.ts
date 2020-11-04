@@ -19,8 +19,6 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityPrivacyPolicyUrl: "authorityPrivacyPolicyUrl",
   healthAuthorityLegalPrivacyPolicyUrl: "authorityLegalPrivacyPolicyUrl",
   healthAuthoritySupportsAnalytics: false,
-  healthAuthorityAnalyticsUrl: null,
-  healthAuthorityAnalyticsSiteId: null,
   measurementSystem: "Imperial",
   minimumAge: "18",
   regionCodes: ["REGION"],

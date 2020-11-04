@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useAnalyticsContext } from "./Context"
+import { useProductAnalyticsContext } from "./Context"
 import { useOnboardingContext } from "../OnboardingContext"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
 import ExternalLink from "../Settings/ExternalLink"
@@ -16,12 +16,16 @@ import { Colors, Typography, Spacing, Buttons } from "../styles"
 const AnonymizedDataConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
+  const { trackEvent } = useProductAnalyticsContext()
   const navigation = useNavigation()
   const {
     healthAuthorityName,
     healthAuthorityPrivacyPolicyUrl,
   } = useConfigurationContext()
-  const { userConsentedToAnalytics, updateUserConsent } = useAnalyticsContext()
+  const {
+    userConsentedToAnalytics,
+    updateUserConsent,
+  } = useProductAnalyticsContext()
   const { isOnboardingComplete } = useOnboardingContext()
   const inOnboardingFlow = !isOnboardingComplete
 
@@ -29,8 +33,18 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
     const nextConsentState = !userConsentedToAnalytics
     updateUserConsent(nextConsentState)
     if (inOnboardingFlow) {
+      trackEvent(
+        "product_analytics",
+        "button_tap",
+        "onboarding_consented_to_analytics",
+      )
       navigation.navigate(ActivationStackScreens.ActivationSummary)
     } else {
+      trackEvent(
+        "product_analytics",
+        "button_tap",
+        "settings_consented_to_analytics",
+      )
       navigation.goBack()
     }
   }

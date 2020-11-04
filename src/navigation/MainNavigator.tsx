@@ -13,7 +13,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 
 import { ModalStackScreens, HomeStackScreens } from "./index"
 import { WelcomeStackScreens, Stacks } from "./index"
@@ -64,7 +64,7 @@ const linking: LinkingOptions = {
 const MainNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { isOnboardingComplete } = useOnboardingContext()
-  const { trackScreenView } = useAnalyticsContext()
+  const { trackScreenView } = useProductAnalyticsContext()
   const navigationRef = useRef<NavigationContainerRef>(null)
   const routeNameRef = useRef<string>()
 

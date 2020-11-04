@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import AnonymizedDataConsentScreen from "./AnonymizedDataConsentScreen"
 import { factories } from "../factories"
-import { AnalyticsContext } from "./Context"
+import { ProductAnalyticsContext } from "./Context"
 import { applyModalHeader } from "../navigation/ModalHeader"
 import { OnboardingContext } from "../OnboardingContext"
 import { ActivationStackScreens } from "../navigation"
@@ -16,7 +16,7 @@ describe("AnonymizedDataConsentScreen", () => {
   describe("when the user has completed onboarding", () => {
     describe("and has consented to data sharing", () => {
       it("displays the correct status", () => {
-        const context = factories.analyticsContext.build({
+        const context = factories.productAnalyticsContext.build({
           userConsentedToAnalytics: true,
         })
         ;(useNavigation as jest.Mock).mockReturnValue({
@@ -26,9 +26,9 @@ describe("AnonymizedDataConsentScreen", () => {
           <OnboardingContext.Provider
             value={createOnboardingProviderValue(true)}
           >
-            <AnalyticsContext.Provider value={context}>
+            <ProductAnalyticsContext.Provider value={context}>
               <AnonymizedDataConsentScreen />
-            </AnalyticsContext.Provider>
+            </ProductAnalyticsContext.Provider>
           </OnboardingContext.Provider>,
         )
 
@@ -49,7 +49,7 @@ describe("AnonymizedDataConsentScreen", () => {
           })
 
           const updateUserConsent = jest.fn()
-          const context = factories.analyticsContext.build({
+          const context = factories.productAnalyticsContext.build({
             userConsentedToAnalytics: true,
             updateUserConsent,
           })
@@ -57,9 +57,9 @@ describe("AnonymizedDataConsentScreen", () => {
             <OnboardingContext.Provider
               value={createOnboardingProviderValue(true)}
             >
-              <AnalyticsContext.Provider value={context}>
+              <ProductAnalyticsContext.Provider value={context}>
                 <AnonymizedDataConsentScreen />
-              </AnalyticsContext.Provider>
+              </ProductAnalyticsContext.Provider>
             </OnboardingContext.Provider>,
           )
 
@@ -76,7 +76,7 @@ describe("AnonymizedDataConsentScreen", () => {
 
     describe("and has not consented to data sharing", () => {
       it("displays the correct button text", () => {
-        const context = factories.analyticsContext.build({
+        const context = factories.productAnalyticsContext.build({
           userConsentedToAnalytics: false,
         })
         ;(useNavigation as jest.Mock).mockReturnValue({
@@ -86,9 +86,9 @@ describe("AnonymizedDataConsentScreen", () => {
           <OnboardingContext.Provider
             value={createOnboardingProviderValue(true)}
           >
-            <AnalyticsContext.Provider value={context}>
+            <ProductAnalyticsContext.Provider value={context}>
               <AnonymizedDataConsentScreen />
-            </AnalyticsContext.Provider>
+            </ProductAnalyticsContext.Provider>
           </OnboardingContext.Provider>,
         )
 
@@ -108,7 +108,7 @@ describe("AnonymizedDataConsentScreen", () => {
           })
 
           const updateUserConsent = jest.fn()
-          const context = factories.analyticsContext.build({
+          const context = factories.productAnalyticsContext.build({
             userConsentedToAnalytics: false,
             updateUserConsent,
           })
@@ -116,9 +116,9 @@ describe("AnonymizedDataConsentScreen", () => {
             <OnboardingContext.Provider
               value={createOnboardingProviderValue(true)}
             >
-              <AnalyticsContext.Provider value={context}>
+              <ProductAnalyticsContext.Provider value={context}>
                 <AnonymizedDataConsentScreen />
-              </AnalyticsContext.Provider>
+              </ProductAnalyticsContext.Provider>
             </OnboardingContext.Provider>,
           )
 
@@ -143,7 +143,7 @@ describe("AnonymizedDataConsentScreen", () => {
         })
 
         const updateUserConsent = jest.fn()
-        const context = factories.analyticsContext.build({
+        const context = factories.productAnalyticsContext.build({
           userConsentedToAnalytics: false,
           updateUserConsent,
         })
@@ -152,9 +152,9 @@ describe("AnonymizedDataConsentScreen", () => {
           <OnboardingContext.Provider
             value={createOnboardingProviderValue(false)}
           >
-            <AnalyticsContext.Provider value={context}>
+            <ProductAnalyticsContext.Provider value={context}>
               <AnonymizedDataConsentScreen />
-            </AnalyticsContext.Provider>
+            </ProductAnalyticsContext.Provider>
           </OnboardingContext.Provider>,
         )
 
@@ -178,7 +178,7 @@ describe("AnonymizedDataConsentScreen", () => {
         })
 
         const updateUserConsent = jest.fn()
-        const context = factories.analyticsContext.build({
+        const context = factories.productAnalyticsContext.build({
           userConsentedToAnalytics: false,
           updateUserConsent,
         })
@@ -187,9 +187,9 @@ describe("AnonymizedDataConsentScreen", () => {
           <OnboardingContext.Provider
             value={createOnboardingProviderValue(false)}
           >
-            <AnalyticsContext.Provider value={context}>
+            <ProductAnalyticsContext.Provider value={context}>
               <AnonymizedDataConsentScreen />
-            </AnalyticsContext.Provider>
+            </ProductAnalyticsContext.Provider>
           </OnboardingContext.Provider>,
         )
 
