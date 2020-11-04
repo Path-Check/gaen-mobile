@@ -42,12 +42,17 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     trackEvent(
       "product_analytics",
       "button_tap",
-      "exposure_notifications_enabled",
+      "onboarding_en_permissions_accept",
     )
     navigateToNextScreen()
   }
 
   const handleOnPressDontEnable = () => {
+    trackEvent(
+      "product_analytics",
+      "button_tap",
+      "onboarding_en_permissions_denied",
+    )
     navigateToNextScreen()
   }
 
