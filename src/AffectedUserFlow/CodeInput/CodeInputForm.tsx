@@ -19,7 +19,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
-import { useAnalyticsContext } from "../../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -36,7 +36,7 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,

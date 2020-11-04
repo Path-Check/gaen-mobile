@@ -1,7 +1,7 @@
 import { Factory } from "fishery"
-import { AnalyticsContextState } from "../ProductAnalytics/Context"
+import { ProductAnalyticsContextState } from "../ProductAnalytics/Context"
 
-export default Factory.define<AnalyticsContextState>(() => ({
+export default Factory.define<ProductAnalyticsContextState>(() => ({
   userConsentedToAnalytics: false,
   updateUserConsent: () => Promise.resolve(),
   trackEvent: () => Promise.resolve(),

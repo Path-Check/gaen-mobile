@@ -12,7 +12,7 @@ import { failureResponse, OperationResponse } from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
-import { useAnalyticsContext } from "./ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
 
 type Posix = number
 const { exposureEventsStrategy } = gaenStrategy
@@ -62,7 +62,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     exposureInfoSubscription,
     getLastDetectionDate,
   } = exposureEventsStrategy
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
 
   const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
 

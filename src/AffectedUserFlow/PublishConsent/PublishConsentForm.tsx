@@ -18,7 +18,7 @@ import {
   AffectedUserFlowStackScreens,
   ModalStackScreens,
 } from "../../navigation"
-import { useAnalyticsContext } from "../../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { Icons } from "../../assets"
 import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
 import Logger from "../../logger"
@@ -52,7 +52,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const [isLoading, setIsLoading] = useState(false)
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)

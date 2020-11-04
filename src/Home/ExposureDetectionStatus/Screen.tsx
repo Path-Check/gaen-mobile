@@ -9,7 +9,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../../Device/PermissionsContext"
-import { useAnalyticsContext } from "../../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { openAppSettings } from "../../Device"
 import { useStatusBarEffect, HomeStackScreens } from "../../navigation"
 import { Text } from "../../components"
@@ -23,7 +23,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     exposureNotifications,
     isBluetoothOn,

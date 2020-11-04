@@ -11,7 +11,7 @@ import { StorageUtils } from "../utils"
 import { useConfigurationContext } from "../ConfigurationContext"
 import * as analyticsClient from "./analyticsClient"
 
-export type AnalyticsContextState = {
+export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
   updateUserConsent: (consent: boolean) => Promise<void>
 } & AnalyticsConfiguration
@@ -39,8 +39,10 @@ const initialContext = {
 export type EventCategory = "product_analytics" | "epi_analytics"
 export type EventAction = "button_tap" | "event_emitted"
 
-const AnalyticsContext = createContext<AnalyticsContextState>(initialContext)
-const AnalyticsProvider: FunctionComponent = ({ children }) => {
+const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
+  initialContext,
+)
+const ProductAnalyticsProvider: FunctionComponent = ({ children }) => {
   const {
     healthAuthoritySupportsAnalytics,
     healthAuthorityAnalyticsUrl,
@@ -109,7 +111,7 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
   }
 
   return (
-    <AnalyticsContext.Provider
+    <ProductAnalyticsContext.Provider
       value={{
         userConsentedToAnalytics,
         updateUserConsent,
@@ -117,17 +119,21 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
       }}
     >
       {children}
-    </AnalyticsContext.Provider>
+    </ProductAnalyticsContext.Provider>
   )
 }
 
-const useAnalyticsContext = (): AnalyticsContextState => {
-  const context = useContext(AnalyticsContext)
+const useProductAnalyticsContext = (): ProductAnalyticsContextState => {
+  const context = useContext(ProductAnalyticsContext)
   if (context === undefined) {
-    throw new Error("AnalyticsContext must be used with a provider")
+    throw new Error("ProductAnalyticsContext must be used with a provider")
   }
 
   return context
 }
 
-export { AnalyticsContext, AnalyticsProvider, useAnalyticsContext }
+export {
+  ProductAnalyticsContext,
+  ProductAnalyticsProvider,
+  useProductAnalyticsContext,
+}

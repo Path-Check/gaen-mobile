@@ -6,23 +6,23 @@ import { StorageUtils } from "../utils"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
 import {
-  AnalyticsContext,
-  AnalyticsProvider,
+  ProductAnalyticsContext,
+  ProductAnalyticsProvider,
   EventAction,
   EventCategory,
 } from "./Context"
 import * as analyticsClient from "../ProductAnalytics/analyticsClient"
 
-describe("AnalyticsContext", () => {
+describe("ProductAnalyticsContext", () => {
   describe("getting the current user consent status", () => {
     it("passes down the correct user consent status to its children", async () => {
       expect.assertions(1)
 
       jest.spyOn(StorageUtils, "getAnalyticsConsent").mockResolvedValue(true)
       const { getByText } = render(
-        <AnalyticsProvider>
+        <ProductAnalyticsProvider>
           <DisplayStatus />
-        </AnalyticsProvider>,
+        </ProductAnalyticsProvider>,
       )
 
       await waitFor(() => {
@@ -42,9 +42,9 @@ describe("AnalyticsContext", () => {
       jest.spyOn(StorageUtils, "setAnalyticsConsent")
 
       const { getByText } = render(
-        <AnalyticsProvider>
+        <ProductAnalyticsProvider>
           <UpdateConsent />
-        </AnalyticsProvider>,
+        </ProductAnalyticsProvider>,
       )
 
       await waitFor(() => {
@@ -74,9 +74,9 @@ describe("AnalyticsContext", () => {
 
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <AnalyticsProvider>
+              <ProductAnalyticsProvider>
                 <TrackEvent event={expectedEvent} />
-              </AnalyticsProvider>
+              </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
           )
 
@@ -108,9 +108,9 @@ describe("AnalyticsContext", () => {
           const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
           render(
-            <AnalyticsProvider>
+            <ProductAnalyticsProvider>
               <TrackEvent event={expectedEvent} />
-            </AnalyticsProvider>,
+            </ProductAnalyticsProvider>,
           )
           expect(trackEventSpy).not.toHaveBeenCalled()
         })
@@ -135,9 +135,9 @@ describe("AnalyticsContext", () => {
 
         render(
           <ConfigurationContext.Provider value={configurationContext}>
-            <AnalyticsProvider>
+            <ProductAnalyticsProvider>
               <TrackEvent event={expectedEvent} />
-            </AnalyticsProvider>
+            </ProductAnalyticsProvider>
           </ConfigurationContext.Provider>,
         )
 
@@ -169,9 +169,9 @@ describe("AnalyticsContext", () => {
 
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <AnalyticsProvider>
+              <ProductAnalyticsProvider>
                 <TrackScreenView />
-              </AnalyticsProvider>
+              </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
           )
 
@@ -201,9 +201,9 @@ describe("AnalyticsContext", () => {
 
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <AnalyticsProvider>
+              <ProductAnalyticsProvider>
                 <TrackScreenView />
-              </AnalyticsProvider>
+              </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
           )
 
@@ -231,9 +231,9 @@ describe("AnalyticsContext", () => {
 
         render(
           <ConfigurationContext.Provider value={configurationContext}>
-            <AnalyticsProvider>
+            <ProductAnalyticsProvider>
               <TrackScreenView />
-            </AnalyticsProvider>
+            </ProductAnalyticsProvider>
           </ConfigurationContext.Provider>,
         )
 
@@ -248,13 +248,13 @@ describe("AnalyticsContext", () => {
 })
 
 const DisplayStatus: FunctionComponent = () => {
-  const context = useContext(AnalyticsContext)
+  const context = useContext(ProductAnalyticsContext)
 
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }
 
 const UpdateConsent: FunctionComponent = () => {
-  const context = useContext(AnalyticsContext)
+  const context = useContext(ProductAnalyticsContext)
 
   useEffect(() => {
     context.updateUserConsent(true)
@@ -271,7 +271,7 @@ type Event = {
 const TrackEvent: FunctionComponent<{
   event: Event
 }> = ({ event: { category, action, name } }) => {
-  const context = useContext(AnalyticsContext)
+  const context = useContext(ProductAnalyticsContext)
 
   useEffect(() => {
     context.trackEvent(category, action, name)
@@ -280,7 +280,7 @@ const TrackEvent: FunctionComponent<{
 }
 
 const TrackScreenView: FunctionComponent = () => {
-  const context = useContext(AnalyticsContext)
+  const context = useContext(ProductAnalyticsContext)
 
   useEffect(() => {
     context.trackScreenView("Home")

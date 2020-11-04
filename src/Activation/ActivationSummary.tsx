@@ -15,7 +15,7 @@ import {
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
 import { useOnboardingContext } from "../OnboardingContext"
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 
 import { Images } from "../assets"
@@ -25,7 +25,7 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { completeOnboarding } = useOnboardingContext()
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     isBluetoothOn,
     locationPermissions,

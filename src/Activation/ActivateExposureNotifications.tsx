@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
 import { Text } from "../components"
 
@@ -25,7 +25,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     exposureNotifications,
   } = usePermissionsContext()
 
-  const { trackEvent } = useAnalyticsContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
   const navigateToNextScreen = () => {
