@@ -6,7 +6,7 @@ import { factories } from "../../factories"
 import { SymptomEntry } from "../symptomHistory"
 import { Symptom } from "../symptom"
 import { SymptomHistoryContext } from "../SymptomHistoryContext"
-import { SelectSymptomsForm } from "./SelectSymptoms"
+import SelectSymptomsForm from "./SelectSymptoms"
 
 jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
@@ -34,7 +34,12 @@ describe("SelectSymptomsForm", () => {
             updateEntry: updateEntrySpy,
           })}
         >
-          <SelectSymptomsForm entry={entry} />
+          <SelectSymptomsForm
+            entry={entry}
+            onSubmitEmergencySymptoms={() => {}}
+            onSubmitCovidSympotoms={() => {}}
+            onSubmitNoSymptoms={() => {}}
+          />
         </SymptomHistoryContext.Provider>,
       )
 
@@ -64,7 +69,12 @@ describe("SelectSymptomsForm", () => {
             updateEntry: updateEntrySpy,
           })}
         >
-          <SelectSymptomsForm entry={entry} />
+          <SelectSymptomsForm
+            entry={entry}
+            onSubmitEmergencySymptoms={() => {}}
+            onSubmitCovidSympotoms={() => {}}
+            onSubmitNoSymptoms={() => {}}
+          />
         </SymptomHistoryContext.Provider>,
       )
 

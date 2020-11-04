@@ -9,20 +9,21 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import "@testing-library/jest-native/extend-expect"
 
-import ExposureDetectionStatus from "./ExposureDetectionStatus"
-import { HomeStackScreens } from "../navigation"
+import { HomeStackScreens } from "../../navigation"
 import {
   PermissionsContext,
   ENPermissionStatus,
   PermissionStatus,
-} from "../Device/PermissionsContext"
-import { LocationPermissions } from "../Device/useLocationPermissions"
-import { factories } from "../factories"
+} from "../../Device/PermissionsContext"
+import { LocationPermissions } from "../../Device/useLocationPermissions"
+import { factories } from "../../factories"
+
+import ExposureDetectionStatusScreen from "./Screen"
 
 jest.mock("@react-navigation/native")
 
 const mockedApplicationName = "applicationName"
-jest.mock("../Device/useApplicationInfo", () => {
+jest.mock("../../Device/useApplicationInfo", () => {
   return {
     useApplicationName: () => {
       return {
@@ -32,7 +33,7 @@ jest.mock("../Device/useApplicationInfo", () => {
   }
 })
 
-describe("ExposureDetectionStatus", () => {
+describe("ExposureDetectionStatusScreen", () => {
   beforeEach(() => {
     jest.resetAllMocks()
   })
@@ -51,7 +52,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId, getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -82,7 +83,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -116,7 +117,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -138,7 +139,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId, getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -169,7 +170,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -206,7 +207,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -231,7 +232,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { getByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 
@@ -252,7 +253,7 @@ describe("ExposureDetectionStatus", () => {
 
         const { getByTestId } = render(
           <PermissionsContext.Provider value={permissionsState}>
-            <ExposureDetectionStatus />
+            <ExposureDetectionStatusScreen />
           </PermissionsContext.Provider>,
         )
 
@@ -271,7 +272,7 @@ describe("ExposureDetectionStatus", () => {
 
         const { getByTestId } = render(
           <PermissionsContext.Provider value={permissionsState}>
-            <ExposureDetectionStatus />
+            <ExposureDetectionStatusScreen />
           </PermissionsContext.Provider>,
         )
 
@@ -288,7 +289,7 @@ describe("ExposureDetectionStatus", () => {
         })
         const { getByTestId, getByText } = render(
           <PermissionsContext.Provider value={permissionsState}>
-            <ExposureDetectionStatus />
+            <ExposureDetectionStatusScreen />
           </PermissionsContext.Provider>,
         )
 
@@ -313,7 +314,7 @@ describe("ExposureDetectionStatus", () => {
 
       const { queryByTestId } = render(
         <PermissionsContext.Provider value={permissionsState}>
-          <ExposureDetectionStatus />
+          <ExposureDetectionStatusScreen />
         </PermissionsContext.Provider>,
       )
 

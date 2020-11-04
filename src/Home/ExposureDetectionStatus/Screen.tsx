@@ -3,19 +3,20 @@ import { Alert, Platform, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { useApplicationName } from "../Device/useApplicationInfo"
-import { useExposureDetectionStatus } from "../Device/useExposureDetectionStatus"
+import { useApplicationName } from "../../Device/useApplicationInfo"
+import { useExposureDetectionStatus } from "../../Device/useExposureDetectionStatus"
 import {
   usePermissionsContext,
   ENPermissionStatus,
-} from "../Device/PermissionsContext"
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
-import { openAppSettings } from "../Device"
-import ActivationStatusView from "./ActivationStatusView"
-import { useStatusBarEffect, HomeStackScreens } from "../navigation"
-import { Text } from "../components"
+} from "../../Device/PermissionsContext"
+import { useAnalyticsContext } from "../../ProductAnalytics/Context"
+import { openAppSettings } from "../../Device"
+import { useStatusBarEffect, HomeStackScreens } from "../../navigation"
+import { Text } from "../../components"
 
-import { Colors, Spacing, Typography } from "../styles"
+import ActivationStatusView from "../ActivationStatusView"
+
+import { Colors, Spacing, Typography } from "../../styles"
 
 const ExposureDetectionStatus: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
