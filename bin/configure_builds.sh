@@ -153,27 +153,15 @@ def update_ios_bundle_identifier(bundle_id)
   )
 end
 
-def update_android_application_id(application_id)
-  puts "Updating android applicationId to #{application_id}"
-  replace_string_in_file(
-    file_path: './android/app/build.gradle',
-    regex: /applicationId (.+)/,
-    value: "applicationId \"#{application_id}\""
-  )
-end
-
 IOS_BUNDLE_IDENTIFIER_KEY = "IOS_BUNDLE_ID"
-ANDROID_APPLICATION_ID_KEY = "ANDROID_APPLICATION_ID"
 def update_bundle_identifiers
   environment = Dotenv.parse(File.open(ENV_FILE))
   ios_bundle_identifier = environment.fetch(IOS_BUNDLE_IDENTIFIER_KEY, false)
-  android_application_id = environment.fetch(ANDROID_APPLICATION_ID_KEY, false)
 
-  if ios_bundle_identifier && android_application_id
+  if ios_bundle_identifier
     update_ios_bundle_identifier(ios_bundle_identifier)
-    update_android_application_id(android_application_id)
   else
-    failure_message "Both ios bundle identifier and android id are required"
+    failure_message "ios bundle identifier is required"
     exit 1
   end
 end
