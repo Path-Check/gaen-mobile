@@ -8,7 +8,6 @@ import { factories } from "../factories"
 import {
   ProductAnalyticsContext,
   ProductAnalyticsProvider,
-  EventAction,
   EventCategory,
   ProductAnalyticsClient,
 } from "./Context"
@@ -70,8 +69,9 @@ describe("ProductAnalyticsContext", () => {
             .mockResolvedValueOnce(true)
           const expectedEvent: Event = {
             category: "product_analytics",
-            action: "button_tap",
+            action: "event_action",
             name: "event_name",
+            value: "event_value",
           }
 
           const analyticsClient = testAnalyticsClient()
@@ -93,6 +93,7 @@ describe("ProductAnalyticsContext", () => {
               expectedEvent.category,
               expectedEvent.action,
               expectedEvent.name,
+              expectedEvent.value,
             )
           })
         })
@@ -107,8 +108,9 @@ describe("ProductAnalyticsContext", () => {
 
           const expectedEvent: Event = {
             category: "product_analytics",
-            action: "button_tap",
+            action: "event_action",
             name: "event_name",
+            value: "event_value",
           }
 
           const analyticsClient = testAnalyticsClient()
@@ -137,8 +139,9 @@ describe("ProductAnalyticsContext", () => {
 
         const expectedEvent: Event = {
           category: "product_analytics",
-          action: "button_tap",
+          action: "event_action",
           name: "event_name",
+          value: "event_value",
         }
 
         const analyticsClient = testAnalyticsClient()
@@ -285,17 +288,18 @@ const UpdateConsent: FunctionComponent = () => {
 
 type Event = {
   category: EventCategory
-  action: EventAction
-  name: string
+  action: string
+  name?: string
+  value?: string
 }
 
 const TrackEvent: FunctionComponent<{
   event: Event
-}> = ({ event: { category, action, name } }) => {
+}> = ({ event: { category, action, name, value } }) => {
   const context = useContext(ProductAnalyticsContext)
 
   useEffect(() => {
-    context.trackEvent(category, action, name)
+    context.trackEvent(category, action, name, value)
   }, [context])
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }

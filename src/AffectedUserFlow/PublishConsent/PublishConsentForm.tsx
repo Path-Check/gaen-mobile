@@ -18,6 +18,7 @@ import {
   AffectedUserFlowStackScreens,
   ModalStackScreens,
 } from "../../navigation"
+import { useExposureContext } from "../../ExposureContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { Icons } from "../../assets"
 import { Colors, Spacing, Iconography, Typography, Buttons } from "../../styles"
@@ -53,6 +54,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
+  const { getCurrentExposures } = useExposureContext()
   const [isLoading, setIsLoading] = useState(false)
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
@@ -79,6 +81,16 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
           ),
       },
     ])
+  }
+
+  const trackEvents = async () => {
+    const currentExposures = await getCurrentExposures()
+    trackEvent("product_analytics", "key_submission_consented_to")
+    trackEvent(
+      "epi_analytics",
+      "ens_preceding_positive_diagnosis_count",
+      currentExposures.length.toString(),
+    )
   }
 
   const noOpAlertContent = ({ reason, newKeysInserted }: PostKeysNoOp) => {
@@ -149,11 +161,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     setIsLoading(false)
     if (response.kind === "success") {
       storeRevisionToken(response.revisionToken)
-      trackEvent(
-        "product_analytics",
-        "button_tap",
-        "key_submission_consented_to",
-      )
+      trackEvents()
       navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
       handleNoOpResponse(response)
