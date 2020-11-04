@@ -79,7 +79,7 @@
     "enable_exposure_notifications_title": "Ενεργοποιήστε τις ειδοποιήσεις έκθεσης για να συνεχίσετε",
     "error": {
       "invalid_code": "Δοκιμάστε έναν διαφορετικό κωδικό",
-      "invalid_format": "Μη έγκυρη μορφή",
+      "invalid_format": "Οι κωδικοί μπορούν να περιέχουν μόνο αριθμούς και γράμματα",
       "network_connection_error": "Δεν υπάρχει σύνδεση στο Διαδίκτυο",
       "timeout_error": "Το αίτημα πήρε πολύ χρόνο",
       "unknown_code_verification_error": "Δοκιμάστε έναν διαφορετικό κωδικό",
@@ -421,20 +421,23 @@
     "symptom_history": "Ιστορικό συμπτωμάτων",
     "to_protect_your_privacy": "Για την προστασία του απορρήτου σας, οι καταχωρήσεις αποθηκεύονται στη συσκευή σας και διαγράφονται αυτόματα μετά από {{days}} ημέρες."
   },
-  "symptoms": {
-    "body_aches": "Σωματικοί πόνοι",
-    "chest_pain_or_pressure": "Πόνος στο στήθος ή πίεση",
-    "chills": "Ρίγη",
+  "symptom": {
+    "bluish_lips_or_face": "Μπλε χείλη ή πρόσωπο",
+    "congestion_or_runny_nose": "Συμφόρηση ή ρινική καταρροή",
     "cough": "Βήχας",
     "diarrhea": "Διάρροια",
-    "difficulty_breathing": "Δυσκολία στην αναπνοή",
-    "disorientation_or_unresponsiveness": "Αποπροσανατολισμός ή έλλειψη ανταπόκρισης",
-    "fever": "Πυρετός",
-    "lightheadedness": "Ζαλάδα",
-    "loss_of_appetite": "Απώλεια όρεξης",
-    "loss_of_smell": "Απώλεια όσφρησης",
-    "loss_of_taste": "Απώλεια γεύσης",
+    "fatigue": "Κόπωση",
+    "fever_or_chills": "Πυρετός ή ρίγη",
+    "headache": "Πονοκέφαλος",
+    "inability_to_wake_or_stay_awake": "Αδυναμία να ξυπνήσετε ή να μείνετε ξύπνιοι",
+    "muscle_or_body_aches": "Μυϊκοί πόνοι ή πόνοι στο σώμα",
+    "nausea_or_vomiting": "Ναυτία ή έμετος",
+    "new_confusion": "Νέα σύγχυση",
+    "new_loss_of_taste_or_smell": "Νέα απώλεια γεύσης ή οσμής",
     "other": "Άλλο",
-    "vomiting": "Έμετος"
+    "persistent_pain_or_pressure_in_the_chest": "Επίμονος πόνος ή πίεση στο στήθος",
+    "shortness_of_breath_or_difficulty_breathing": "Δύσπνοια ή δυσκολία στην αναπνοή",
+    "sore_throat": "Πονόλαιμος",
+    "trouble_breathing": "Δυσκολία στην αναπνοή"
   }
 }

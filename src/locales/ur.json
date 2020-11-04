@@ -1,0 +1,25 @@
+{
+  "_display_name": "انگریزی",
+  "about": {
+    "operating_system_abbr": "آپریٹنگ سسٹم"
+  },
+  "symptom": {
+    "bluish_lips_or_face": "غھھیم وم  پم غھھیم عت ",
+    "congestion_or_runny_nose": "شہمٹب غممک پم غممک شمغر ہجغم ",
+    "cough": "کہمغوب ",
+    "diarrhea": "حمٹ عم رمدر ہجغم ",
+    "fatigue": "ٹہمکممغ ",
+    "fever_or_chills": "شتکہمد ",
+    "headache": "وبد رمدر ",
+    "inability_to_wake_or_stay_awake": "وج کم تٹہ غم ومکغم پم امملٹم دھہغم ",
+    "muscle_or_body_aches": "عموحمےہبپم پم ابومع کھ ربکمٹ",
+    "nausea_or_vomiting": "تیٹب ممغم پم ٹہمکمغ ہجغم ",
+    "new_confusion": "کتےہ غمہب ےجغنتوبجغ ",
+    "new_loss_of_taste_or_smell": "کہتوشجج پم عتمہ کم ٹموٹھ غم ہجغم ",
+    "other": "جد کتےہ ",
+    "persistent_pain_or_pressure_in_the_chest": "رمدر ہجغم پم ےہمٹب عم رمدر ",
+    "shortness_of_breath_or_difficulty_breathing": "وممو غم ممغھ پم وممو یھغم عم ربکمٹ ہجغم ",
+    "sore_throat": "لمیم عم رمدر ",
+    "trouble_breathing": "وممو عم ربکمٹ "
+  }
+}

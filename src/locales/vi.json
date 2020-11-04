@@ -23,7 +23,9 @@
     "done": "Hoàn tất",
     "edit": "Sửa",
     "maybe_later": "Có thể là lúc khác",
+    "more": "Bổ sung",
     "next": "Kế tiếp",
+    "no": "Không",
     "no_thanks": "Không, cám ơn",
     "off": "TẮT",
     "on": "BẬT",
@@ -33,19 +35,26 @@
     "something_went_wrong": "Đã có vấn đề",
     "start": "Bắt đầu",
     "submit": "Gửi",
-    "success": "Thành công"
+    "success": "Thành công",
+    "yes": "Có"
   },
   "covid_data": {
     "apologies_data_unavailable": "Rất tiếc, dữ liệu COVID không khả dụng.",
     "cases_today": "Số ca hôm nay",
+    "covid_coverage": "Phạm Vi Ảnh Hưởng của Covid",
     "covid_data": "Dữ Liệu COVID",
     "deaths_today": "Số ca tử vong hôm nay",
     "down_from_last_week": "Từ tuần vừa qua",
     "error_getting_data": "Rất tiếc, chúng tôi không thể truy xuất dữ liệu về các ca COVID mới nhất đối với {{location}}.",
     "new_cases": "Các Ca Mới",
+    "past_7_days": "7 ngày qua",
     "see_more": "Xem thêm",
+    "source": "Nguồn: {{source}}",
+    "spread_of_the_virus_in": "Sự lây lan của virut ở {{locationName}}",
     "total_cases": "Tổng số ca",
     "total_deaths": "Tổng số ca tử vong",
+    "trending_down": "Xu hướng giảm",
+    "trending_up": "Xu hướng tăng",
     "up_from_last_week": "Đến tuần vừa qua"
   },
   "errors": {
@@ -72,6 +81,7 @@
       "invalid_code": "Thử sử dụng một mã khác",
       "invalid_format": "Các mã số chỉ có thể chứa các con số và chữ cái",
       "network_connection_error": "Không có kết nối internet.",
+      "timeout_error": "Yêu cầu mất quá nhiều thời gian",
       "unknown_code_verification_error": "Thử sử dụng một mã khác",
       "verification_code_used": "Mã xác minh đã được sử dụng"
     },
@@ -168,6 +178,7 @@
     "if_you_have_a_code": "Báo cáo kết quả của bạn để giúp đảm bảo an toàn cho cộng đồng của bạn.",
     "location_info_body_1": "Công nghệ Thông Báo Tiếp Xúc sử dụng chức năng quét Bluetooth để biết được các thiết bị nào đang ở gần nhau. Trên tất cả các điện thoại chạy Android 6.0 trở lên, để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập định vị thiết bị đối với tất cả các ứng dụng, không chỉ các ứng dụng được thiết kế với Hệ Thống Thông Báo Tiếp Xúc.",
     "location_info_subheader_1": "Tại sao tôi cần phải bật định vị?",
+    "not_feeling_well": "Bạn cảm thấy không khỏe?",
     "proximity_tracing_info_body_1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật Bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
     "proximity_tracing_info_subheader_1": "Thông Báo Tiếp Xúc hoạt động như thế nào?",
@@ -177,6 +188,9 @@
       "unauthorized_error_message_ios": "Để bật Thông Báo Tiếp Xúc, vào phần Thông Báo Tiếp Xúc trong Thiết Lập và Chia Sẻ Thông Tin Tiếp Xúc và cài đặt Khu Vực Có Hiệu Lực thành {{applicationName}}",
       "unauthorized_error_title": "Bật Thông Báo Tiếp Xúc"
     },
+    "report_result": "Báo Cáo Kết Quả",
+    "request_call": "Yêu Cầu Gọi",
+    "take_assessment": "Tiến Hành Đánh Giá",
     "to_submit_your_test": "Để nhận mã kết quả xét nghiệm, bạn sẽ cần phải nói chuyện với một người truy dấu vết tiếp xúc."
   },
   "label": {
@@ -213,11 +227,13 @@
     "bluetooth_subheader": "Tại sao tôi cần phải bật thiết lập Bluetooth của điện thoại của tôi?",
     "eula": "Thỏa Thuận Pháp Lý Người Dùng Cuối",
     "eula_agree_terms_of_use": "Tôi đồng ý rằng tôi đã đọc và chấp nhận các điều khoản sử dụng",
+    "i_am_over": "Có, tôi trên {{minimumAge}}",
     "location_alert_body": "Để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập định vị thiết bị.",
     "location_alert_header": "Cho phép truy cập Định Vị từ \"{{applicationName}}\"",
     "location_body": "Để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập định vị thiết bị. Ứng dụng này không sử dụng dữ liệu định vị của bạn và thiết bị cá nhân của bạn không thể bị theo dõi.",
     "location_header": "Kích Hoạt Định Vị",
     "location_subheader": "Tại sao tôi cần phải bật thiết lập định vị của điện thoại của tôi?",
+    "no_take_me": "Không, đưa tôi trở lại",
     "notification_body1": "Bạn sẽ nhận được thông báo khi bạn có thể đã gặp một người đã báo cáo dương tính với COVID-19.",
     "notification_body2": "Ứng dụng này thực hiện quy trình này dùng Bluetooth Low Energy (Bluetooth Tiêu Thụ Ít Năng Lượng) và các mã ngẫu nhiên bảo mật mà không biết bạn là ai hoặc bạn đã ở đâu. Bạn có thể tắt tính năng này vào bất kỳ lúc nào trong thiết lập.",
     "notification_header": "Nhận thông báo nếu bạn đã có tiếp xúc",
@@ -259,7 +275,9 @@
     "screen4_header": "Ứng dụng này sẽ thông báo cho bạn nếu bạn có thể đã tiếp xúc với COVID 19",
     "screen4_image_label": "Một người đang nhận thông báo trên điện thoại của họ",
     "terms_header_title": "Điều khoản sử dụng",
-    "welcome_image_label": "Hình minh họa những người đeo khẩu trang, được kết nối như những nút (node) trong một mạng."
+    "verify_your_age": "Xác Minh Tuổi Của Bạn",
+    "welcome_image_label": "Hình minh họa những người đeo khẩu trang, được kết nối như những nút (node) trong một mạng.",
+    "you_must_be": "Bạn phải được {{minimumAge}} tuổi trở lên để sử dụng {{applicationName}}. Bạn trên {{minimumAge}}"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -369,6 +387,7 @@
     "data_deleted": "Đã xóa dữ liệu",
     "delete_data_disclosure1": "Khi bạn chạm vào nút \"Xóa Dữ Liệu Của Tôi\" ở bên dưới, ứng dụng sẽ xóa dữ liệu Lịch Sử Triệu Chứng được lưu trên điện thoại của bạn.",
     "delete_data_disclosure2": "Nút này không xóa dữ liệu được tạo hoặc thu thập bởi điện thoại của bạn cho Thông Báo Tiếp Xúc.\n\nBạn có thể xóa dữ liệu khác thông qua Thiết Lập của điện thoại.\n\n> Thiết Lập\n> Thông Báo Tiếp Xúc \n> Trạng Thái Ghi Nhật Ký Tiếp Xúc/Có Hiệu Lực \n> Xóa Nhật Ký Tiếp Xúc",
+    "delete_data_note": "Ghi chú",
     "delete_my_data": "Xóa Dữ Liệu Của Tôi",
     "errors": {
       "deleting_data": "Rất tiếc, chúng tôi không thể xóa dữ liệu của bạn"
@@ -402,20 +421,9 @@
     "symptom_history": "Lịch Sử Triệu Chứng",
     "to_protect_your_privacy": "Để bảo vệ quyền riêng tư của bạn, dữ liệu nhập được lưu trên điện thoại của bạn và được xóa tự động sau {{days}} ngày."
   },
-  "symptoms": {
-    "body_aches": "Đau nhức cơ thể",
-    "chest_pain_or_pressure": "Đau ngực hoặc tức ngực",
-    "chills": "Rét run",
+  "symptom": {
     "cough": "Ho",
     "diarrhea": "Tiêu chảy",
-    "difficulty_breathing": "Khó thở",
-    "disorientation_or_unresponsiveness": "Mất phương hướng hoặc không đáp ứng",
-    "fever": "Sốt",
-    "lightheadedness": "Choáng váng",
-    "loss_of_appetite": "Ăn không ngon",
-    "loss_of_smell": "Mất khứu giác",
-    "loss_of_taste": "Mất vị giác",
-    "other": "Khác",
-    "vomiting": "Ói mửa"
+    "other": "Khác"
   }
 }

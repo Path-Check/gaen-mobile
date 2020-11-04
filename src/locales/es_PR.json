@@ -41,7 +41,7 @@
   "covid_data": {
     "apologies_data_unavailable": "Lo sentimos, los datos de COVID no están disponibles.",
     "cases_today": "Casos de hoy",
-    "covid_coverage": "Cobertura de Covid",
+    "covid_coverage": "Alcance del Covid",
     "covid_data": "Datos de COVID",
     "deaths_today": "Muertes de hoy",
     "down_from_last_week": "Abajo la semana pasada",
@@ -421,20 +421,9 @@
     "symptom_history": "Historial de síntomas",
     "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
   },
-  "symptoms": {
-    "body_aches": "Dolor de cuerpo",
-    "chest_pain_or_pressure": "Dolor o presión en el pecho",
-    "chills": "Escalofríos",
+  "symptom": {
     "cough": "Tos",
     "diarrhea": "Diarrea",
-    "difficulty_breathing": "Dificultad para respirar",
-    "disorientation_or_unresponsiveness": "Desorientación o falta de respuesta",
-    "fever": "Fiebre",
-    "lightheadedness": "Mareos",
-    "loss_of_appetite": "Pérdida de apetito",
-    "loss_of_smell": "Pérdida del olfato",
-    "loss_of_taste": "Pérdida del gusto",
-    "other": "Otros",
-    "vomiting": "Vómitos"
+    "other": "Otros"
   }
 }

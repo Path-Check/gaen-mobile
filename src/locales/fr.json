@@ -150,20 +150,10 @@
       "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
     }
   },
-  "symptoms": {
-    "body_aches": "Courbatures",
-    "chest_pain_or_pressure": "Douleurs ou pressions à la poitrine",
-    "chills": "Frissons",
+  "symptom": {
     "cough": "Toux",
     "diarrhea": "Diarrhée",
-    "difficulty_breathing": "Difficulté à respirer",
-    "disorientation_or_unresponsiveness": "Désorientation ou manque de réactivité",
-    "fever": "Fièvre",
-    "lightheadedness": "Étourdissements",
-    "loss_of_appetite": "Perte d'appétit",
-    "loss_of_smell": "Perte d’odorat",
-    "loss_of_taste": "Perte du goût",
     "other": "Autres",
-    "vomiting": "Vomissements"
+    "trouble_breathing": "Difficulté à respirer"
   }
 }
