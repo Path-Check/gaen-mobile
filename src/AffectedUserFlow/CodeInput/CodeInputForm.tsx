@@ -70,7 +70,7 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
-    trackEvent("product_analytics", "button_tap", "verification_code_submitted")
+    trackEvent("product_analytics", "verification_code_submitted")
     try {
       const response = await API.postCode(code)
 

@@ -88,7 +88,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   useEffect(() => {
     const subscription = exposureInfoSubscription(
       (exposureInfo: ExposureInfo) => {
-        trackEvent("epi_analytics", "event_emitted", "en_notification_received")
+        trackEvent("epi_analytics", "en_notification_received")
         setExposureInfo(exposureInfo)
         getLastExposureDetectionDate()
       },
