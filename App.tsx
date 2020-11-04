@@ -44,6 +44,17 @@ const App: FunctionComponent = () => {
       })
   }, [])
 
+  const initializeMatomo = () => {
+    const displayAnalytics = env.DISPLAY_ANALYTICS
+    const matomoUrl = env.MATOMO_URL
+    const matomoSiteId = parseInt(env.MATOMO_SITE_ID)
+    if (displayAnalytics) {
+      Matomo.initialize(matomoUrl, matomoSiteId)
+    }
+  }
+
+  initializeMatomo()
+
   const productAnalyticsClient: ProductAnalyticsClient = {
     trackEvent: Matomo.trackEvent,
     trackView: Matomo.trackView,

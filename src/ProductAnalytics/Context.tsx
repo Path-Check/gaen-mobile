@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useContext,
 } from "react"
-import Matomo from "react-native-matomo-sdk"
 
 import { StorageUtils } from "../utils"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -13,9 +12,6 @@ import { useConfigurationContext } from "../ConfigurationContext"
 export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
   updateUserConsent: (consent: boolean) => Promise<void>
-} & AnalyticsConfiguration
-
-type AnalyticsConfiguration = {
   trackEvent: (
     category: EventCategory,
     action: EventAction,
@@ -24,15 +20,11 @@ type AnalyticsConfiguration = {
   trackScreenView: (screen: string) => Promise<void>
 }
 
-const initialAnalyticsConfiguration = {
-  trackEvent: () => Promise.resolve(),
-  trackScreenView: () => Promise.resolve(),
-}
-
 const initialContext = {
   userConsentedToAnalytics: false,
   updateUserConsent: () => Promise.resolve(),
-  ...initialAnalyticsConfiguration,
+  trackEvent: () => Promise.resolve(),
+  trackScreenView: () => Promise.resolve(),
 }
 
 export type EventCategory = "product_analytics" | "epi_analytics"
@@ -52,18 +44,10 @@ const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
 const ProductAnalyticsProvider: FunctionComponent<{
   productAnalyticsClient: ProductAnalyticsClient
 }> = ({ productAnalyticsClient, children }) => {
-  const {
-    healthAuthoritySupportsAnalytics,
-    healthAuthorityAnalyticsUrl,
-    healthAuthorityAnalyticsSiteId,
-  } = useConfigurationContext()
+  const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
   const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
     boolean
   >(false)
-
-  const [analyticsConfiguration, setAnalyticsConfiguration] = useState<
-    AnalyticsConfiguration
-  >(initialAnalyticsConfiguration)
 
   useEffect(() => {
     const checkAnalyticsConsent = async () => {
@@ -74,46 +58,24 @@ const ProductAnalyticsProvider: FunctionComponent<{
     checkAnalyticsConsent()
   }, [userConsentedToAnalytics])
 
-  useEffect(() => {
-    const supportAnalyticsTracking =
-      healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+  const supportAnalyticsTracking =
+    healthAuthoritySupportsAnalytics && userConsentedToAnalytics
 
-    const initializeAnalyticsTracking = () => {
-      if (healthAuthorityAnalyticsUrl && healthAuthorityAnalyticsSiteId) {
-        Matomo.initialize(
-          healthAuthorityAnalyticsUrl,
-          healthAuthorityAnalyticsSiteId,
-        )
-      }
-    }
-
-    const trackEvent = async (
-      category: EventCategory,
-      action: EventAction,
-      name: string,
-    ): Promise<void> => {
-      if (supportAnalyticsTracking) {
-        productAnalyticsClient.trackEvent(category, action, name)
-      }
-    }
-
-    const trackScreenView = async (screen: string): Promise<void> => {
-      if (supportAnalyticsTracking) {
-        productAnalyticsClient.trackView([screen])
-      }
-    }
-
+  const trackEvent = async (
+    category: EventCategory,
+    action: EventAction,
+    name: string,
+  ): Promise<void> => {
     if (supportAnalyticsTracking) {
-      initializeAnalyticsTracking()
-      setAnalyticsConfiguration({ trackEvent, trackScreenView })
+      productAnalyticsClient.trackEvent(category, action, name)
     }
-  }, [
-    healthAuthoritySupportsAnalytics,
-    userConsentedToAnalytics,
-    healthAuthorityAnalyticsSiteId,
-    healthAuthorityAnalyticsUrl,
-  ])
+  }
 
+  const trackScreenView = async (screen: string): Promise<void> => {
+    if (supportAnalyticsTracking) {
+      productAnalyticsClient.trackView([screen])
+    }
+  }
   const updateUserConsent = async (consent: boolean) => {
     await StorageUtils.setAnalyticsConsent(consent)
     setUserConsentedToAnalytics(consent)
@@ -124,7 +86,8 @@ const ProductAnalyticsProvider: FunctionComponent<{
       value={{
         userConsentedToAnalytics,
         updateUserConsent,
-        ...analyticsConfiguration,
+        trackEvent,
+        trackScreenView,
       }}
     >
       {children}

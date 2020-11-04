@@ -169,8 +169,6 @@ describe("ProductAnalyticsContext", () => {
           expect.assertions(1)
           const configurationContext = factories.configurationContext.build({
             healthAuthoritySupportsAnalytics: true,
-            healthAuthorityAnalyticsUrl: "http://example.com",
-            healthAuthorityAnalyticsSiteId: 12,
           })
 
           jest
@@ -202,8 +200,6 @@ describe("ProductAnalyticsContext", () => {
           expect.assertions(1)
           const configurationContext = factories.configurationContext.build({
             healthAuthoritySupportsAnalytics: true,
-            healthAuthorityAnalyticsUrl: "http://example.com",
-            healthAuthorityAnalyticsSiteId: 12,
           })
 
           jest
@@ -236,8 +232,6 @@ describe("ProductAnalyticsContext", () => {
         expect.assertions(1)
         const configurationContext = factories.configurationContext.build({
           healthAuthoritySupportsAnalytics: false,
-          healthAuthorityAnalyticsUrl: null,
-          healthAuthorityAnalyticsSiteId: null,
         })
 
         jest

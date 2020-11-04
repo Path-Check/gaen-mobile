@@ -16,8 +16,6 @@ export interface Configuration {
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
-  healthAuthorityAnalyticsSiteId: number | null
-  healthAuthorityAnalyticsUrl: string | null
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
@@ -42,8 +40,6 @@ const initialState: Configuration = {
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
-  healthAuthorityAnalyticsSiteId: null,
-  healthAuthorityAnalyticsUrl: null,
   healthAuthorityEulaUrl: null,
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
@@ -84,8 +80,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const minimumAge = env.MINIMUM_AGE
 
   const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
-  const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
-  const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
 
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
@@ -111,8 +105,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
-        healthAuthorityAnalyticsSiteId,
-        healthAuthorityAnalyticsUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
