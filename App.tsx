@@ -3,6 +3,7 @@ import "array-flat-polyfill"
 import env from "react-native-config"
 import SplashScreen from "react-native-splash-screen"
 import FlashMessage from "react-native-flash-message"
+import Matomo from "react-native-matomo-sdk"
 
 import MainNavigator from "./src/navigation/MainNavigator"
 import { ErrorBoundary } from "./src/ErrorBoundaries"
@@ -15,7 +16,10 @@ import { ConfigurationProvider } from "./src/ConfigurationContext"
 import { PermissionsProvider } from "./src/Device/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"
-import { ProductAnalyticsProvider } from "./src/ProductAnalytics/Context"
+import {
+  ProductAnalyticsClient,
+  ProductAnalyticsProvider,
+} from "./src/ProductAnalytics/Context"
 import { SymptomHistoryProvider } from "./src/SymptomHistory/SymptomHistoryContext"
 import { CovidDataContextProvider } from "./src/CovidData/Context"
 
@@ -40,6 +44,11 @@ const App: FunctionComponent = () => {
       })
   }, [])
 
+  const productAnalyticsClient: ProductAnalyticsClient = {
+    trackEvent: Matomo.trackEvent,
+    trackView: Matomo.trackView,
+  }
+
   return (
     <>
       {!isLoading ? (
@@ -49,7 +58,9 @@ const App: FunctionComponent = () => {
               userHasCompletedOnboarding={isOnboardingComplete}
             >
               <PermissionsProvider>
-                <ProductAnalyticsProvider>
+                <ProductAnalyticsProvider
+                  productAnalyticsClient={productAnalyticsClient}
+                >
                   <ExposureProvider>
                     <SymptomHistoryProvider>
                       <CovidDataContextProvider>

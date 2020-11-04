@@ -9,7 +9,6 @@ import Matomo from "react-native-matomo-sdk"
 
 import { StorageUtils } from "../utils"
 import { useConfigurationContext } from "../ConfigurationContext"
-import * as analyticsClient from "./analyticsClient"
 
 export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
@@ -38,11 +37,21 @@ const initialContext = {
 
 export type EventCategory = "product_analytics" | "epi_analytics"
 export type EventAction = "button_tap" | "event_emitted"
+export type ProductAnalyticsClient = {
+  trackEvent: (
+    category: EventCategory,
+    action: EventAction,
+    name: string,
+  ) => Promise<void>
+  trackView: (route: string[]) => Promise<void>
+}
 
 const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
   initialContext,
 )
-const ProductAnalyticsProvider: FunctionComponent = ({ children }) => {
+const ProductAnalyticsProvider: FunctionComponent<{
+  productAnalyticsClient: ProductAnalyticsClient
+}> = ({ productAnalyticsClient, children }) => {
   const {
     healthAuthoritySupportsAnalytics,
     healthAuthorityAnalyticsUrl,
@@ -84,13 +93,13 @@ const ProductAnalyticsProvider: FunctionComponent = ({ children }) => {
       name: string,
     ): Promise<void> => {
       if (supportAnalyticsTracking) {
-        analyticsClient.trackEvent(category, action, name)
+        productAnalyticsClient.trackEvent(category, action, name)
       }
     }
 
     const trackScreenView = async (screen: string): Promise<void> => {
       if (supportAnalyticsTracking) {
-        analyticsClient.trackScreenView(screen)
+        productAnalyticsClient.trackView([screen])
       }
     }
 

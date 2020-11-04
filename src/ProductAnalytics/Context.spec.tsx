@@ -10,17 +10,17 @@ import {
   ProductAnalyticsProvider,
   EventAction,
   EventCategory,
+  ProductAnalyticsClient,
 } from "./Context"
-import * as analyticsClient from "../ProductAnalytics/analyticsClient"
 
 describe("ProductAnalyticsContext", () => {
   describe("getting the current user consent status", () => {
     it("passes down the correct user consent status to its children", async () => {
       expect.assertions(1)
-
       jest.spyOn(StorageUtils, "getAnalyticsConsent").mockResolvedValue(true)
+      const analyticsClient = testAnalyticsClient()
       const { getByText } = render(
-        <ProductAnalyticsProvider>
+        <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
           <DisplayStatus />
         </ProductAnalyticsProvider>,
       )
@@ -41,8 +41,10 @@ describe("ProductAnalyticsContext", () => {
 
       jest.spyOn(StorageUtils, "setAnalyticsConsent")
 
+      const analyticsClient = testAnalyticsClient()
+
       const { getByText } = render(
-        <ProductAnalyticsProvider>
+        <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
           <UpdateConsent />
         </ProductAnalyticsProvider>,
       )
@@ -72,9 +74,13 @@ describe("ProductAnalyticsContext", () => {
             name: "event_name",
           }
 
+          const analyticsClient = testAnalyticsClient()
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider>
+              <ProductAnalyticsProvider
+                productAnalyticsClient={analyticsClient}
+              >
                 <TrackEvent event={expectedEvent} />
               </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
@@ -105,10 +111,12 @@ describe("ProductAnalyticsContext", () => {
             name: "event_name",
           }
 
+          const analyticsClient = testAnalyticsClient()
+
           const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
 
           render(
-            <ProductAnalyticsProvider>
+            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
               <TrackEvent event={expectedEvent} />
             </ProductAnalyticsProvider>,
           )
@@ -133,9 +141,11 @@ describe("ProductAnalyticsContext", () => {
           name: "event_name",
         }
 
+        const analyticsClient = testAnalyticsClient()
+
         render(
           <ConfigurationContext.Provider value={configurationContext}>
-            <ProductAnalyticsProvider>
+            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
               <TrackEvent event={expectedEvent} />
             </ProductAnalyticsProvider>
           </ConfigurationContext.Provider>,
@@ -167,21 +177,22 @@ describe("ProductAnalyticsContext", () => {
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(true)
 
+          const analyticsClient = testAnalyticsClient()
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider>
+              <ProductAnalyticsProvider
+                productAnalyticsClient={analyticsClient}
+              >
                 <TrackScreenView />
               </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
           )
 
-          const trackScreenViewSpy = jest.spyOn(
-            analyticsClient,
-            "trackScreenView",
-          )
+          const trackScreenViewSpy = jest.spyOn(analyticsClient, "trackView")
 
           await waitFor(() => {
-            expect(trackScreenViewSpy).toHaveBeenCalledWith("Home")
+            expect(trackScreenViewSpy).toHaveBeenCalledWith(["Home"])
           })
         })
       })
@@ -199,9 +210,13 @@ describe("ProductAnalyticsContext", () => {
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(false)
 
+          const analyticsClient = testAnalyticsClient()
+
           render(
             <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider>
+              <ProductAnalyticsProvider
+                productAnalyticsClient={analyticsClient}
+              >
                 <TrackScreenView />
               </ProductAnalyticsProvider>
             </ConfigurationContext.Provider>,
@@ -229,9 +244,11 @@ describe("ProductAnalyticsContext", () => {
           .spyOn(StorageUtils, "getAnalyticsConsent")
           .mockResolvedValueOnce(false)
 
+        const analyticsClient = testAnalyticsClient()
+
         render(
           <ConfigurationContext.Provider value={configurationContext}>
-            <ProductAnalyticsProvider>
+            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
               <TrackScreenView />
             </ProductAnalyticsProvider>
           </ConfigurationContext.Provider>,
@@ -246,6 +263,16 @@ describe("ProductAnalyticsContext", () => {
     })
   })
 })
+
+const testAnalyticsClient = (
+  trackView = () => Promise.resolve(),
+  trackEvent = () => Promise.resolve(),
+): ProductAnalyticsClient => {
+  return {
+    trackView,
+    trackEvent,
+  }
+}
 
 const DisplayStatus: FunctionComponent = () => {
   const context = useContext(ProductAnalyticsContext)
