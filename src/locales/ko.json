@@ -266,20 +266,9 @@
     "share_anonymized_data_disclaimer": "계속 진행하면 {{healthAuthorityName}}의 검사 질의에 익명의 답변을 공유하는데 동의합니다.",
     "share_anonymized_data_para": "귀하의 익명 데이터는 {{healthAuthorityName}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{healthAuthorityName}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다."
   },
-  "symptoms": {
-    "body_aches": "몸살",
-    "chest_pain_or_pressure": "가슴 통증 또는 압박",
-    "chills": "오한",
+  "symptom": {
     "cough": "기침",
     "diarrhea": "설사",
-    "difficulty_breathing": "호흡 곤란",
-    "disorientation_or_unresponsiveness": "방향 감각 상실 또는 무반응",
-    "fever": "발열",
-    "lightheadedness": "현기증",
-    "loss_of_appetite": "식욕 부진",
-    "loss_of_smell": "후각 상실",
-    "loss_of_taste": "미각 상실",
-    "other": "그 외 증상",
-    "vomiting": "구토"
+    "other": "그 외 증상"
   }
 }

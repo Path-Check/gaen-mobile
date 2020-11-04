@@ -369,20 +369,9 @@
       "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
     }
   },
-  "symptoms": {
-    "body_aches": "身體酸痛",
-    "chest_pain_or_pressure": "胸痛或壓力過高",
-    "chills": "寒意",
+  "symptom": {
     "cough": "咳嗽",
     "diarrhea": "腹瀉",
-    "difficulty_breathing": "呼吸困難",
-    "disorientation_or_unresponsiveness": "迷失方向或反應遲鈍",
-    "fever": "發燒",
-    "lightheadedness": "頭昏眼花",
-    "loss_of_appetite": "食慾不振",
-    "loss_of_smell": "失去嗅覺",
-    "loss_of_taste": "失去味覺",
-    "other": "其他",
-    "vomiting": "嘔吐"
+    "other": "其他"
   }
 }
