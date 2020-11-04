@@ -29,16 +29,8 @@ const StateData: FunctionComponent<StateDataProps> = ({
         <Text style={style.dataText}>{todayCovidData.positiveCasesNew}</Text>
       </View>
       <View style={style.labelAndDataContainer}>
-        <Text style={style.dataText}>{t("covid_data.deaths_today")}</Text>
-        <Text style={style.dataText}>{todayCovidData.deathsNew}</Text>
-      </View>
-      <View style={style.labelAndDataContainer}>
         <Text style={style.dataText}>{t("covid_data.total_cases")}</Text>
         <Text style={style.dataText}>{todayCovidData.positiveCasesTotal}</Text>
-      </View>
-      <View style={style.labelAndDataContainer}>
-        <Text style={style.dataText}>{t("covid_data.total_deaths")}</Text>
-        <Text style={style.dataText}>{todayCovidData.deathsTotal}</Text>
       </View>
     </View>
   )

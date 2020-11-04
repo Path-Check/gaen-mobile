@@ -1,6 +1,5 @@
-import Logger from "../logger"
-
-import { CovidData, CovidDatum } from "./covidData"
+import Logger from "../../logger"
+import { CovidData, CovidDatum } from "../covidData"
 
 const COVID_DATA_ENDPOINT =
   "https://localcoviddata.com/covid19/v1/cases/covidTracking?state="
@@ -65,16 +64,12 @@ export const toCovidData = (networkModel: NetworkModel): CovidData => {
       date,
       peoplePositiveNewCasesCt: positiveCasesNew,
       peoplePositiveCasesCt: positiveCasesTotal,
-      peopleDeathCt: deathsTotal,
-      peopleDeathNewCt: deathsNew,
     } = networkDatum
 
     return {
       date,
       positiveCasesNew,
       positiveCasesTotal,
-      deathsTotal,
-      deathsNew,
     }
   }
 

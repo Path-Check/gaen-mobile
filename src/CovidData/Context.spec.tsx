@@ -5,9 +5,9 @@ import { render, waitFor } from "@testing-library/react-native"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { useCovidDataContext, CovidDataContextProvider } from "./Context"
-import { fetchCovidDataForState } from "./covidDataAPI"
+import { fetchStateTimeseries } from "./API/covidActNow"
 
-jest.mock("./covidDataAPI.ts")
+jest.mock("./API/covidActNow.ts")
 describe("CovidDataContextProvider", () => {
   it("doesn't start the request if it should not be requested", async () => {
     const configurationContext = factories.configurationContext.build({
@@ -55,7 +55,7 @@ describe("CovidDataContextProvider", () => {
 
     const data = factories.covidData.build()
 
-    ;(fetchCovidDataForState as jest.Mock).mockResolvedValueOnce({
+    ;(fetchStateTimeseries as jest.Mock).mockResolvedValueOnce({
       kind: "success",
       data,
     })
@@ -82,7 +82,7 @@ describe("CovidDataContextProvider", () => {
       stateAbbreviation: "state",
     })
 
-    ;(fetchCovidDataForState as jest.Mock).mockResolvedValueOnce({
+    ;(fetchStateTimeseries as jest.Mock).mockResolvedValueOnce({
       kind: "failure",
     })
 

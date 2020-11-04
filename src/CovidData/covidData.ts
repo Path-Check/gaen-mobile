@@ -4,8 +4,6 @@ export const empty: CovidDatum = {
   date: "2020-01-01",
   positiveCasesTotal: 0,
   positiveCasesNew: 0,
-  deathsTotal: 0,
-  deathsNew: 0,
 }
 
 type Date = string
@@ -14,8 +12,6 @@ export type CovidDatum = {
   date: Date
   positiveCasesTotal: number
   positiveCasesNew: number
-  deathsTotal: number
-  deathsNew: number
 }
 
 export const toNewCasesPercentage = (data: CovidData): number | null => {

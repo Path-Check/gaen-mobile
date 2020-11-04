@@ -38,7 +38,7 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
   const trendColor =
     trend > 0 ? Colors.accent.warning100 : Colors.accent.success100
 
-  const source = "localcoviddata.com"
+  const source = "covidactnow.org"
   const sourceText = t("covid_data.source", { source })
   const labelText = t("covid_data.new_cases")
 
