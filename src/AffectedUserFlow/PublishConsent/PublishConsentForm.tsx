@@ -89,7 +89,8 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     trackEvent(
       "epi_analytics",
       "ens_preceding_positive_diagnosis_count",
-      currentExposures.length.toString(),
+      undefined,
+      currentExposures.length,
     )
   }
 

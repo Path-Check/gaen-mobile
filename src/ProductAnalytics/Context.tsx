@@ -16,7 +16,7 @@ export type ProductAnalyticsContextState = {
     category: EventCategory,
     action: string,
     name?: string,
-    value?: string,
+    value?: number,
   ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
 }
@@ -34,7 +34,7 @@ export type ProductAnalyticsClient = {
     category: EventCategory,
     action: string,
     name?: string,
-    value?: string,
+    value?: number,
   ) => Promise<void>
   trackView: (route: string[]) => Promise<void>
 }
@@ -66,7 +66,7 @@ const ProductAnalyticsProvider: FunctionComponent<{
     category: EventCategory,
     action: string,
     name?: string,
-    value?: string,
+    value?: number,
   ): Promise<void> => {
     if (supportAnalyticsTracking) {
       productAnalyticsClient.trackEvent(category, action, name, value)

@@ -71,7 +71,7 @@ describe("ProductAnalyticsContext", () => {
             category: "product_analytics",
             action: "event_action",
             name: "event_name",
-            value: "event_value",
+            value: 1,
           }
 
           const analyticsClient = testAnalyticsClient()
@@ -110,7 +110,7 @@ describe("ProductAnalyticsContext", () => {
             category: "product_analytics",
             action: "event_action",
             name: "event_name",
-            value: "event_value",
+            value: 1,
           }
 
           const analyticsClient = testAnalyticsClient()
@@ -141,7 +141,7 @@ describe("ProductAnalyticsContext", () => {
           category: "product_analytics",
           action: "event_action",
           name: "event_name",
-          value: "event_value",
+          value: 1,
         }
 
         const analyticsClient = testAnalyticsClient()
@@ -290,7 +290,7 @@ type Event = {
   category: EventCategory
   action: string
   name?: string
-  value?: string
+  value?: number
 }
 
 const TrackEvent: FunctionComponent<{
