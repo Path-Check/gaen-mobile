@@ -57,9 +57,53 @@ type ActualsTimeseries = Array<ActualsDatum | null>
 type StateCovidData = {
   fips: string
   country: string
+  state: string
+  population: number
+  metrics: Metrics
+  riskLevels: RiskLevels
   actuals: Actuals
   actualsTimeseries: ActualsTimeseries
 }
+
+type Metrics = {
+  testPositivityRatio: number
+  caseDensity: number
+  contactTracerCapacityRatio: number
+  infectionRate: number
+  icuHeadroomRatio: number
+}
+
+type RiskLevels = {
+  overall: number
+  testPositivityRatio: number
+  caseDensity: number
+  contactTracerCapacityRatio: number
+  infectionRate: number
+  icuHeadroomRatio: number
+}
+
+const MetricsDecoder = JsonDecoder.object<Metrics>(
+  {
+    testPositivityRatio: JsonDecoder.number,
+    caseDensity: JsonDecoder.number,
+    contactTracerCapacityRatio: JsonDecoder.number,
+    infectionRate: JsonDecoder.number,
+    icuHeadroomRatio: JsonDecoder.number,
+  },
+  "Metrics",
+)
+
+const RiskLevelsDecoder = JsonDecoder.object<RiskLevels>(
+  {
+    overall: JsonDecoder.number,
+    testPositivityRatio: JsonDecoder.number,
+    caseDensity: JsonDecoder.number,
+    contactTracerCapacityRatio: JsonDecoder.number,
+    infectionRate: JsonDecoder.number,
+    icuHeadroomRatio: JsonDecoder.number,
+  },
+  "RiskLevels",
+)
 
 const ActualsDecoder = JsonDecoder.object<Actuals>(
   {
@@ -77,7 +121,7 @@ const DateDecoder = JsonDecoder.object<WithDate>(
   {
     date: JsonDecoder.string,
   },
-  "WithData",
+  "WithDate",
 )
 
 const ActualsDatumDecoder = JsonDecoder.combine(ActualsDecoder, DateDecoder)
@@ -86,6 +130,10 @@ const StateTimeseriesDecoder = JsonDecoder.object<StateCovidData>(
   {
     fips: JsonDecoder.string,
     country: JsonDecoder.string,
+    state: JsonDecoder.string,
+    population: JsonDecoder.number,
+    metrics: MetricsDecoder,
+    riskLevels: RiskLevelsDecoder,
     actuals: ActualsDecoder,
     actualsTimeseries: JsonDecoder.array(
       JsonDecoder.failover(null, ActualsDatumDecoder),
@@ -96,7 +144,15 @@ const StateTimeseriesDecoder = JsonDecoder.object<StateCovidData>(
 )
 
 const toCovidData = (stateData: StateCovidData): CovidData => {
-  const timeseries = stateData.actualsTimeseries
+  const {
+    fips,
+    country,
+    state,
+    population,
+    actualsTimeseries,
+    metrics,
+    riskLevels,
+  } = stateData
 
   const compact = <T>(arr: Array<T | null>): T[] => {
     return arr.reduce<T[]>((acc: T[], el: T | null) => {
@@ -116,7 +172,18 @@ const toCovidData = (stateData: StateCovidData): CovidData => {
     }
   }
 
-  return compact(timeseries).map(toCovidDatum)
+  const timeseries = compact(actualsTimeseries).map(toCovidDatum)
+
+  return {
+    source: "covidactnow.org",
+    fips,
+    country,
+    state,
+    population,
+    metrics,
+    riskLevels,
+    timeseries,
+  }
 }
 
 export const fetchStateTimeseries = async (

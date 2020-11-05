@@ -8,7 +8,6 @@ import { Colors, Spacing } from "../../styles"
 
 const CovidDataDashboard: FunctionComponent = () => {
   const {
-    locationName,
     request: { status, data },
   } = useCovidDataContext()
 
@@ -16,14 +15,12 @@ const CovidDataDashboard: FunctionComponent = () => {
     return null
   }
 
-  const todayData = data[0]
-
   return (
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
     >
-      <StateData todayCovidData={todayData} stateAbbreviation={locationName} />
+      <StateData data={data} />
     </ScrollView>
   )
 }
