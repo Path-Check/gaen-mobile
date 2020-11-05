@@ -117,7 +117,8 @@
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
       "speak_with_contact_tracer": "Speak with a contact tracer",
       "wash_your_hands": "Wash your hands",
-      "wear_a_mask": "Wear a mask"
+      "wear_a_mask": "Wear a mask",
+      "quarantine": "Quarantine"
     },
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
