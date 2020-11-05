@@ -57,7 +57,7 @@ const ExposureActions: FunctionComponent = () => {
         <View style={style.recommendations}>
           <RecommendationBubble
             icon={Icons.IsolateBubbles}
-            text={t("exposure_history.exposure_detail.isolate")}
+            text={t("exposure_history.exposure_detail.quarantine")}
           />
           <RecommendationBubble
             icon={Icons.Mask}
