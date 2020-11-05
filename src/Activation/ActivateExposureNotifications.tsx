@@ -39,20 +39,12 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressActivateExposureNotifications = async () => {
     await exposureNotifications.request()
-    trackEvent(
-      "product_analytics",
-      "button_tap",
-      "onboarding_en_permissions_accept",
-    )
+    trackEvent("product_analytics", "onboarding_en_permissions_accept")
     navigateToNextScreen()
   }
 
   const handleOnPressDontEnable = () => {
-    trackEvent(
-      "product_analytics",
-      "button_tap",
-      "onboarding_en_permissions_denied",
-    )
+    trackEvent("product_analytics", "onboarding_en_permissions_denied")
     navigateToNextScreen()
   }
 

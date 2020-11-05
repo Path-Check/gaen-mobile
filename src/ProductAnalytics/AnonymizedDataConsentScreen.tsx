@@ -33,18 +33,10 @@ const AnonymizedDataConsentScreen: FunctionComponent = () => {
     const nextConsentState = !userConsentedToAnalytics
     updateUserConsent(nextConsentState)
     if (inOnboardingFlow) {
-      trackEvent(
-        "product_analytics",
-        "button_tap",
-        "onboarding_consented_to_analytics",
-      )
+      trackEvent("product_analytics", "onboarding_consented_to_analytics")
       navigation.navigate(ActivationStackScreens.ActivationSummary)
     } else {
-      trackEvent(
-        "product_analytics",
-        "button_tap",
-        "settings_consented_to_analytics",
-      )
+      trackEvent("product_analytics", "settings_consented_to_analytics")
       navigation.goBack()
     }
   }

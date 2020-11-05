@@ -37,7 +37,7 @@ const ActivationSummary: FunctionComponent = () => {
   const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
-    trackEvent("product_analytics", "button_tap", "onboarding_completed")
+    trackEvent("product_analytics", "onboarding_completed")
     completeOnboarding()
   }
 

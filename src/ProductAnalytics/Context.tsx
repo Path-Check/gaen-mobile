@@ -14,8 +14,9 @@ export type ProductAnalyticsContextState = {
   updateUserConsent: (consent: boolean) => Promise<void>
   trackEvent: (
     category: EventCategory,
-    action: EventAction,
-    name: string,
+    action: string,
+    name?: string,
+    value?: number,
   ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
 }
@@ -28,12 +29,12 @@ const initialContext = {
 }
 
 export type EventCategory = "product_analytics" | "epi_analytics"
-export type EventAction = "button_tap" | "event_emitted"
 export type ProductAnalyticsClient = {
   trackEvent: (
     category: EventCategory,
-    action: EventAction,
-    name: string,
+    action: string,
+    name?: string,
+    value?: number,
   ) => Promise<void>
   trackView: (route: string[]) => Promise<void>
 }
@@ -63,11 +64,12 @@ const ProductAnalyticsProvider: FunctionComponent<{
 
   const trackEvent = async (
     category: EventCategory,
-    action: EventAction,
-    name: string,
+    action: string,
+    name?: string,
+    value?: number,
   ): Promise<void> => {
     if (supportAnalyticsTracking) {
-      productAnalyticsClient.trackEvent(category, action, name)
+      productAnalyticsClient.trackEvent(category, action, name, value)
     }
   }
 
