@@ -1,5 +1,5 @@
 import Logger from "../../logger"
-import { CovidData, CovidDatum } from "../covidData"
+import * as CovidData from "../covidData"
 
 const COVID_DATA_ENDPOINT =
   "https://localcoviddata.com/covid19/v1/cases/covidTracking?state="
@@ -14,7 +14,7 @@ export type NetworkResponse = RequestSuccess | RequestFailure
 
 export interface RequestSuccess {
   kind: "success"
-  data: CovidData
+  data: CovidData.CovidData
 }
 
 type NetworkError =
@@ -58,8 +58,12 @@ interface NetworkDatum {
   peopleIntubatedCumulativeCt: number
 }
 
-export const toCovidData = (networkModel: NetworkModel): CovidData => {
-  const toCovidDataDatum = (networkDatum: NetworkDatum): CovidDatum => {
+export const toCovidData = (
+  networkModel: NetworkModel,
+): CovidData.CovidData => {
+  const toCovidDataDatum = (
+    networkDatum: NetworkDatum,
+  ): CovidData.CovidDatum => {
     const {
       date,
       peoplePositiveNewCasesCt: positiveCasesNew,
@@ -74,8 +78,18 @@ export const toCovidData = (networkModel: NetworkModel): CovidData => {
   }
 
   const networkData = networkModel.historicData
+  const timeseries = networkData.map(toCovidDataDatum)
 
-  return networkData.map(toCovidDataDatum)
+  return {
+    source: "localcoviddata.org",
+    fips: "",
+    country: "",
+    state: "",
+    population: 0,
+    metrics: CovidData.emptyMetrics,
+    riskLevels: CovidData.emptyRiskLevels,
+    timeseries,
+  }
 }
 
 export const fetchCovidDataForState = async (

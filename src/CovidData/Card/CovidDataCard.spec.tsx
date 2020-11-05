@@ -3,6 +3,7 @@ import { render } from "@testing-library/react-native"
 
 import { factories } from "../../factories"
 import { CovidDataRequest } from "../Context"
+import * as CovidData from "../covidData"
 
 import CovidDataCard from "./CovidDataCard"
 
@@ -12,7 +13,7 @@ describe("CovidDataCard", () => {
     it("shows an error with that info", () => {
       const dataRequest: CovidDataRequest = {
         status: "MISSING_INFO",
-        data: [],
+        data: CovidData.empty,
       }
       const locationName = "locationName"
 
@@ -28,7 +29,7 @@ describe("CovidDataCard", () => {
     it("displays a loading spinner", () => {
       const dataRequest: CovidDataRequest = {
         status: "LOADING",
-        data: [],
+        data: CovidData.empty,
       }
       const locationName = "locationName"
 
@@ -44,7 +45,7 @@ describe("CovidDataCard", () => {
     it("displays an error message", () => {
       const dataRequest: CovidDataRequest = {
         status: "ERROR",
-        data: [],
+        data: CovidData.empty,
       }
       const locationName = "locationName"
 
