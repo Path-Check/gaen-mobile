@@ -42,7 +42,6 @@
   "covid_data": {
     "apologies_data_unavailable": "Apologies, COVID data is unavailable.",
     "cases_today": "Cases today",
-    "per_100k": "per 100k",
     "covid_coverage": "Covid Coverage",
     "covid_data": "COVID Data",
     "daily_new_cases": "Daily new cases",
@@ -52,6 +51,7 @@
     "infection_rate": "Infection rate",
     "new_cases": "New Cases",
     "past_7_days": "Past 7 days",
+    "per_100k": "per 100k",
     "positive_test_rate": "Positive test rate",
     "see_more": "See more",
     "source": "source: {{source}}",
@@ -118,11 +118,11 @@
       "header": "Someone you were nearby has since tested positive for COVID-19.",
       "next_steps": "Next steps",
       "personalize_my_guidance": "Personalize my guidance",
+      "quarantine": "Quarantine",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
       "speak_with_contact_tracer": "Speak with a contact tracer",
       "wash_your_hands": "Wash your hands",
-      "wear_a_mask": "Wear a mask",
-      "quarantine": "Quarantine"
+      "wear_a_mask": "Wear a mask"
     },
     "exposure_window": {
       "four_to_six_days_ago": "4 to 6 days ago",
