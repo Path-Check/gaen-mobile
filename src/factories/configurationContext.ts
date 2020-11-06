@@ -13,6 +13,7 @@ export default Factory.define<Configuration>(() => ({
   emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",
   healthAuthorityAdviceUrl: "authorityAdviceUrl",
+  healthAuthorityCovidDataUrl: "authorityCovidDataUrl",
   healthAuthorityLearnMoreUrl: "authorityLearnMoreUrl",
   healthAuthorityEulaUrl: "healthAuthorityEulaUrl",
   healthAuthorityName: "authorityName",

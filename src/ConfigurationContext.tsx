@@ -16,6 +16,7 @@ export interface Configuration {
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
+  healthAuthorityCovidDataUrl: string | null
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
@@ -40,6 +41,7 @@ const initialState: Configuration = {
   emergencyPhoneNumber: "",
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
+  healthAuthorityCovidDataUrl: null,
   healthAuthorityEulaUrl: null,
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
@@ -57,6 +59,7 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
+    AUTHORITY_COVID_DATA_URL: healthAuthorityCovidDataUrl,
     EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
     FIND_A_TEST_CENTER_URL: findATestCenterUrl,
@@ -105,6 +108,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
+        healthAuthorityCovidDataUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
