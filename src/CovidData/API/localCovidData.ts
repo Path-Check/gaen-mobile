@@ -60,7 +60,7 @@ type StateDatum = {
   peopleIntubatedCumulativeCt: number
 }
 
-const NetworkDatumDecoder = JsonDecoder.object<StateDatum>(
+const StateDatumDecoder = JsonDecoder.object<StateDatum>(
   {
     date: JsonDecoder.string,
     peoplePositiveCasesCt: JsonDecoder.number,
