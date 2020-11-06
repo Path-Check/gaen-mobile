@@ -1,3 +1,5 @@
+import { JsonDecoder } from "ts-data-json"
+
 import Logger from "../../logger"
 import * as CovidData from "../covidData"
 
@@ -29,17 +31,17 @@ export interface RequestFailure {
   error: NetworkError
 }
 
-interface NetworkModel {
+type StateData = {
   stateName: string
   stateCode: string
   historicData: NetworkData
 }
 
-type NetworkData = NetworkDatum[]
+type NetworkData = StateDatum[]
 
 type Date = string
 
-interface NetworkDatum {
+type StateDatum = {
   date: Date
   peoplePositiveCasesCt: number
   peoplePositiveNewCasesCt: number
@@ -58,17 +60,44 @@ interface NetworkDatum {
   peopleIntubatedCumulativeCt: number
 }
 
-export const toCovidData = (
-  networkModel: NetworkModel,
-): CovidData.CovidData => {
-  const toCovidDataDatum = (
-    networkDatum: NetworkDatum,
-  ): CovidData.CovidDatum => {
+const StateDatumDecoder = JsonDecoder.object<StateDatum>(
+  {
+    date: JsonDecoder.string,
+    peoplePositiveCasesCt: JsonDecoder.number,
+    peoplePositiveNewCasesCt: JsonDecoder.number,
+    peopleNegativeCasesCt: JsonDecoder.number,
+    peopleNegativeNewCt: JsonDecoder.number,
+    peoplePendingCasesCt: JsonDecoder.number,
+    peopleRecoveredCt: JsonDecoder.number,
+    peopleDeathCt: JsonDecoder.number,
+    peopleDeathNewCt: JsonDecoder.number,
+    peopleHospCurrentlyCt: JsonDecoder.number,
+    peopleHospNewCt: JsonDecoder.number,
+    peopleHospCumlCt: JsonDecoder.number,
+    peopleInIntnsvCareCurrCt: JsonDecoder.number,
+    peopleInIntnsvCareCumlCt: JsonDecoder.number,
+    peopleIntubatedCurrentlyCt: JsonDecoder.number,
+    peopleIntubatedCumulativeCt: JsonDecoder.number,
+  },
+  "NetworkDatumDecoder",
+)
+
+const StateDataDecoder = JsonDecoder.object<StateData>(
+  {
+    stateName: JsonDecoder.string,
+    stateCode: JsonDecoder.string,
+    historicData: JsonDecoder.array(StateDatumDecoder, "ActualsTimeseries"),
+  },
+  "ResponseDecoder",
+)
+
+export const toCovidData = (stateData: StateData): CovidData.CovidData => {
+  const toCovidDataDatum = (stateDatum: StateDatum): CovidData.CovidDatum => {
     const {
       date,
       peoplePositiveNewCasesCt: positiveCasesNew,
       peoplePositiveCasesCt: positiveCasesTotal,
-    } = networkDatum
+    } = stateDatum
 
     return {
       date,
@@ -77,7 +106,7 @@ export const toCovidData = (
     }
   }
 
-  const networkData = networkModel.historicData
+  const networkData = stateData.historicData
   const timeseries = networkData.map(toCovidDataDatum)
 
   return {
@@ -105,13 +134,17 @@ export const fetchCovidDataForState = async (
 
     const json = await response.json()
 
-    const networkModel = parseResponseData(json, endpointURL)
+    const stateData = await StateDataDecoder.decodePromise(json)
 
     return {
       kind: "success",
-      data: toCovidData(networkModel),
+      data: toCovidData(stateData),
     }
   } catch (e) {
+    if (e.contains("decoder failed")) {
+      Logger.error("Failed to desieralize covid api data", { url: endpointURL })
+      return { kind: "failure", error: "JsonDeserialization" }
+    }
     switch (e.message) {
       case "Network request failed": {
         return { kind: "failure", error: "NetworkConnection" }
@@ -123,74 +156,5 @@ export const fetchCovidDataForState = async (
         return { kind: "failure", error: "Unknown" }
       }
     }
-  }
-}
-
-/*eslint @typescript-eslint/no-explicit-any: 0*/
-const parseResponseData = (json: any, endpointUrl: string): NetworkModel => {
-  const parseNetworkDatum = (datum: any): NetworkDatum => {
-    const date = datum["date"]
-    const peoplePositiveCasesCt = parseInt(datum["peoplePositiveCasesCt"])
-    const peoplePositiveNewCasesCt = parseInt(datum["peoplePositiveNewCasesCt"])
-    const peopleNegativeCasesCt = parseInt(datum["peopleNegativeCasesCt"])
-    const peopleNegativeNewCt = parseInt(datum["peopleNegativeNewCt"])
-    const peoplePendingCasesCt = parseInt(datum["peoplePendingCasesCt"])
-    const peopleRecoveredCt = parseInt(datum["peopleRecoveredCt"])
-    const peopleDeathCt = parseInt(datum["peopleDeathCt"])
-    const peopleDeathNewCt = parseInt(datum["peopleDeathNewCt"])
-    const peopleHospCurrentlyCt = parseInt(datum["peopleHospCurrentlyCt"])
-    const peopleHospNewCt = parseInt(datum["peopleHospNewCt"])
-    const peopleHospCumlCt = parseInt(datum["peopleHospCumlCt"])
-    const peopleInIntnsvCareCurrCt = parseInt(datum["peopleInIntnsvCareCurrCt"])
-    const peopleInIntnsvCareCumlCt = parseInt(datum["peopleInIntnsvCareCumlCt"])
-    const peopleIntubatedCurrentlyCt = parseInt(
-      datum["peopleIntubatedCurrentlyCt"],
-    )
-    const peopleIntubatedCumulativeCt = parseInt(
-      datum["peopleIntubatedCumulativeCt"],
-    )
-
-    if (!date) {
-      Logger.error("Invalid response for covid data api", {
-        url: endpointUrl,
-        json,
-      })
-      throw new Error("JsonDeserialization")
-    }
-
-    return {
-      date,
-      peoplePositiveCasesCt,
-      peoplePositiveNewCasesCt,
-      peopleNegativeCasesCt,
-      peopleNegativeNewCt,
-      peoplePendingCasesCt,
-      peopleRecoveredCt,
-      peopleDeathCt,
-      peopleDeathNewCt,
-      peopleHospCurrentlyCt,
-      peopleHospNewCt,
-      peopleHospCumlCt,
-      peopleInIntnsvCareCurrCt,
-      peopleInIntnsvCareCumlCt,
-      peopleIntubatedCurrentlyCt,
-      peopleIntubatedCumulativeCt,
-    }
-  }
-
-  const historicData = json["historicData"].map(parseNetworkDatum)
-
-  if (!historicData) {
-    Logger.error("Invalid response for covid data api", {
-      url: endpointUrl,
-      json,
-    })
-    throw new Error("JsonDeserialization")
-  }
-
-  return {
-    stateName: json["stateName"],
-    stateCode: json["stateCode"],
-    historicData,
   }
 }
