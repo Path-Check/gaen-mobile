@@ -134,7 +134,7 @@ export const fetchCovidDataForState = async (
 
     const json = await response.json()
 
-    const stateData = await ResponseDecoder.decodePromise(json)
+    const stateData = await StateDataDecoder.decodePromise(json)
 
     return {
       kind: "success",
