@@ -111,7 +111,6 @@
       "general_guidance": "Orientación general",
       "ha_guidance_header": "¿Qué debo hacer?",
       "header": "Es posible que haya estado expuesto al virus COVID-19.",
-      "isolate": "Debe aislarse",
       "next_steps": "Próximos pasos",
       "personalize_my_guidance": "Personalizar mi orientación",
       "schedule_callback": "Programe una llamada para recibir ayuda de un rastreador de contactos de {{healthAuthorityName}}",
@@ -172,6 +171,7 @@
     "call_emergency_services": "Llamar a Servicios de Emergencia",
     "check_if_your_symptoms": "Escribir síntomas y obtener una recomendación instantánea sobre cómo estar a salvo.",
     "did_you_test_positive": "¿Dio positivo en la prueba de COVID-19?",
+    "enter_symptoms": "Ingrese síntomas",
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
@@ -422,8 +422,22 @@
     "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
   },
   "symptom": {
+    "bluish_lips_or_face": "Labios o cara azulados",
+    "congestion_or_runny_nose": "Congestión o secreción nasal.",
     "cough": "Tos",
     "diarrhea": "Diarrea",
-    "other": "Otros"
+    "fatigue": "Fatiga",
+    "fever_or_chills": "Fiebre o escalofríos",
+    "headache": "Dolor de cabeza",
+    "inability_to_wake_or_stay_awake": "Incapacidad para despertar o permanecer despierto",
+    "muscle_or_body_aches": "Dolores musculares o corporales",
+    "nausea_or_vomiting": "Náuseas o vómitos",
+    "new_confusion": "Nueva confusión",
+    "new_loss_of_taste_or_smell": "Nueva pérdida del gusto u olfato",
+    "other": "Otros",
+    "persistent_pain_or_pressure_in_the_chest": "Dolor persistente o presión en el pecho",
+    "shortness_of_breath_or_difficulty_breathing": "Dificultad para respirar",
+    "sore_throat": "Dolor de garganta",
+    "trouble_breathing": "Dificultad para respirar"
   }
 }
