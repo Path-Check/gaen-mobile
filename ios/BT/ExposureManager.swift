@@ -601,7 +601,9 @@ private extension ExposureManager {
           case .success (let package):
             downloadedPackages.append(package)
           case .failure(let error):
-            reject(error)
+            if (error as? GenericError != GenericError.notFound) {
+              reject(error)
+            }
           }
           dispatchGroup.leave()
         }
