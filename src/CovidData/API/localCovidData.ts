@@ -82,7 +82,7 @@ const StateDatumDecoder = JsonDecoder.object<StateDatum>(
   "NetworkDatumDecoder",
 )
 
-const ResponseDecoder = JsonDecoder.object<StateData>(
+const StateDataDecoder = JsonDecoder.object<StateData>(
   {
     stateName: JsonDecoder.string,
     stateCode: JsonDecoder.string,
