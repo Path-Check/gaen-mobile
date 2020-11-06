@@ -91,13 +91,13 @@ const ResponseDecoder = JsonDecoder.object<StateData>(
   "ResponseDecoder",
 )
 
-export const toCovidData = (networkModel: StateData): CovidData.CovidData => {
-  const toCovidDataDatum = (networkDatum: StateDatum): CovidData.CovidDatum => {
+export const toCovidData = (stateData: StateData): CovidData.CovidData => {
+  const toCovidDataDatum = (stateDatum: StateDatum): CovidData.CovidDatum => {
     const {
       date,
       peoplePositiveNewCasesCt: positiveCasesNew,
       peoplePositiveCasesCt: positiveCasesTotal,
-    } = networkDatum
+    } = stateDatum
 
     return {
       date,
@@ -106,7 +106,7 @@ export const toCovidData = (networkModel: StateData): CovidData.CovidData => {
     }
   }
 
-  const networkData = networkModel.historicData
+  const networkData = stateData.historicData
   const timeseries = networkData.map(toCovidDataDatum)
 
   return {
