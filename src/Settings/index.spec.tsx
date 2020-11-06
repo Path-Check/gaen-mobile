@@ -85,7 +85,9 @@ describe("Settings", () => {
     )
 
     expect(
-      getByText(/The applicationName app is made available by authorityName/),
+      getByText(
+        /The applicationName app is made available by the authorityName/,
+      ),
     ).toBeDefined()
   })
 
