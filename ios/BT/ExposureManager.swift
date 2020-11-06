@@ -601,6 +601,10 @@ private extension ExposureManager {
           case .success (let package):
             downloadedPackages.append(package)
           case .failure(let error):
+            // The index file may list key archive URLs that have been deleted
+            // from the key server. These will return 404's. Instead of aborting
+            // the entire operation, we continue and download the key archives that
+            // are present on the server
             if (error as? GenericError != GenericError.notFound) {
               reject(error)
             }
