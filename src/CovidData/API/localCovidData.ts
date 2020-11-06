@@ -86,7 +86,7 @@ const StateDataDecoder = JsonDecoder.object<StateData>(
   {
     stateName: JsonDecoder.string,
     stateCode: JsonDecoder.string,
-    historicData: JsonDecoder.array(NetworkDatumDecoder, "ActualsTimeseries"),
+    historicData: JsonDecoder.array(StateDatumDecoder, "ActualsTimeseries"),
   },
   "ResponseDecoder",
 )
