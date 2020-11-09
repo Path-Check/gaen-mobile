@@ -238,7 +238,7 @@ dependencies {
     // Annotation processing
     kapt 'com.google.auto.value:auto-value:1.7.3'
     // Libraries
-    implementation 'androidx.work:work-runtime:2.4.0'
+    implementation 'androidx.work:work-runtime:2.5.0-beta01'
     implementation 'androidx.concurrent:concurrent-futures:1.1.0'
     implementation 'com.google.android.gms:play-services-base:17.4.0'
     implementation 'com.google.android.gms:play-services-basement:17.4.0'

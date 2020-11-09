@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ForegroundInfo;
 import androidx.work.ListenableWorker;
 import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
@@ -35,6 +36,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.TimeUnit;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
 import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKeys;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
@@ -83,6 +85,9 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
         .transformAsync((isEnabled) -> {
           // Only continue if it is enabled.
           if (isEnabled) {
+            // Show notification to reduce the chance of failing into the RARE bucket
+            // Documentation: https://developers.google.com/android/exposure-notifications/implementation-guide#workmanager
+            setForegroundAsync(createForegroundInfo());
             // Download diagnosis keys from Safe Paths servers
             return diagnosisKeys.download();
           } else {
@@ -106,6 +111,12 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
           return Result.failure();
         }, AppExecutors.getBackgroundExecutor());
     // TODO: consider a retry strategy
+  }
+
+  @NonNull
+  private ForegroundInfo createForegroundInfo() {
+    Context context = getApplicationContext();
+    return NotificationHelper.createWorkerNotification(context);
   }
 
   /**
