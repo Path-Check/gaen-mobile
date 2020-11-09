@@ -87,7 +87,8 @@ class BTAPIClient: APIClient {
       if let file = T.ResponseType.create(from: data) {
         completion(.success(file))
       } else {
-        completion(.failure(GenericError.unknown))
+        let error = GenericError(statusCode: response.response?.statusCode ?? 0)
+        completion(.failure(error))
       }
     }
   }
