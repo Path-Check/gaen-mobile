@@ -1,5 +1,12 @@
-import React, { FunctionComponent } from "react"
-import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native"
+import React, { FunctionComponent, useEffect, useRef } from "react"
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  findNodeHandle,
+  AccessibilityInfo,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -22,7 +29,15 @@ const LanguageSelection: FunctionComponent = () => {
     value: string
   }
 
-  const renderItem = ({ item }: { item: ListItem }) => {
+  interface LanguageListItemProps {
+    item: ListItem
+    index: number
+  }
+
+  const LanguageListItem: FunctionComponent<LanguageListItemProps> = ({
+    item,
+    index,
+  }) => {
     const handleOnSelectLanguage = () => {
       setUserLocaleOverride(item.value)
       navigation.goBack()
@@ -37,14 +52,60 @@ const LanguageSelection: FunctionComponent = () => {
       ...languageButtonTextStyle,
     }
 
-    return (
-      <TouchableOpacity
-        style={style.languageButton}
-        onPress={handleOnSelectLanguage}
-      >
-        <Text style={languageButtonTextStyles}>{item.label}</Text>
-      </TouchableOpacity>
-    )
+    const LanguageButtonText = () => {
+      return <Text style={languageButtonTextStyles}>{item.label}</Text>
+    }
+
+    const firstLanguageButton = useRef(null)
+
+    const LanguageButton = () => {
+      return (
+        <TouchableOpacity
+          style={style.languageButton}
+          onPress={handleOnSelectLanguage}
+        >
+          <LanguageButtonText />
+        </TouchableOpacity>
+      )
+    }
+
+    const LanguageButtonWithRef = () => {
+      return (
+        <TouchableOpacity
+          style={style.languageButton}
+          onPress={handleOnSelectLanguage}
+          ref={firstLanguageButton}
+        >
+          <LanguageButtonText />
+        </TouchableOpacity>
+      )
+    }
+
+    useEffect(() => {
+      if (firstLanguageButton && firstLanguageButton.current) {
+        const reactTag = findNodeHandle(firstLanguageButton.current)
+        if (reactTag) {
+          /* Accessibility focus is only set if this function is called three
+           times in a row. See issue:
+           https://github.com/facebook/react-native/issues/30097 */
+          AccessibilityInfo.setAccessibilityFocus(reactTag)
+          AccessibilityInfo.setAccessibilityFocus(reactTag)
+          AccessibilityInfo.setAccessibilityFocus(reactTag)
+        }
+      }
+    }, [])
+
+    const isFirstLanguageButton = index === 0
+
+    if (isFirstLanguageButton) {
+      return <LanguageButtonWithRef />
+    } else {
+      return <LanguageButton />
+    }
+  }
+
+  const renderItem = ({ item, index }: { item: ListItem; index: number }) => {
+    return <LanguageListItem item={item} index={index} />
   }
 
   return (

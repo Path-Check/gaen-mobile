@@ -8,17 +8,19 @@ import { Iconography, Spacing, Typography, Colors } from "../styles"
 
 interface ListItemProps {
   label: string
+  accessibilityLabel: string
   onPress: () => void
   icon: string
 }
 
 const ListItem: FunctionComponent<ListItemProps> = ({
   label,
+  accessibilityLabel,
   onPress,
   icon,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
+    <TouchableOpacity onPress={onPress} accessibilityLabel={accessibilityLabel}>
       <View style={style.listItem}>
         <SvgXml
           fill={Colors.primary.shade100}
@@ -26,8 +28,6 @@ const ListItem: FunctionComponent<ListItemProps> = ({
           width={Iconography.small}
           height={Iconography.small}
           style={style.icon}
-          accessible
-          accessibilityLabel={label}
         />
         <Text style={style.listItemText}>{label}</Text>
       </View>

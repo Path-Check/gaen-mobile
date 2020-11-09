@@ -143,7 +143,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    marginTop: Spacing.xSmall,
+    marginTop: Spacing.xxSmall,
     marginHorizontal: Spacing.medium,
   },
   headerText: {

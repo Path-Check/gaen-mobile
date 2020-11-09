@@ -161,6 +161,8 @@ const CodeInputForm: FunctionComponent = () => {
 
   const isIOS = Platform.OS === "ios"
 
+  const shouldBeAccessible = errorMessage !== ""
+
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
@@ -194,7 +196,12 @@ const CodeInputForm: FunctionComponent = () => {
           onSubmitEditing={Keyboard.dismiss}
           blurOnSubmit={false}
         />
-        <Text style={style.errorSubtitle}>{errorMessage}</Text>
+        <View
+          accessibilityElementsHidden={!shouldBeAccessible}
+          accessible={shouldBeAccessible}
+        >
+          <Text style={style.errorSubtitle}>{errorMessage}</Text>
+        </View>
         <TouchableOpacity
           style={isDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressSubmit}

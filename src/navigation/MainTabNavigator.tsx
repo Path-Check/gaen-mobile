@@ -23,21 +23,17 @@ const MainTabNavigator: FunctionComponent = () => {
 
   interface TabIconProps extends TabBarIconProps {
     icon: string
-    label: string
   }
 
   const TabIcon: FunctionComponent<TabIconProps> = ({
     focused,
     size,
     icon,
-    label,
   }) => {
     return (
       <SvgXml
         xml={icon}
         fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
-        accessible
-        accessibilityLabel={label}
         width={size}
         height={size}
       />
@@ -50,14 +46,7 @@ const MainTabNavigator: FunctionComponent = () => {
   }
 
   const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
-    return (
-      <TabIcon
-        icon={TabBarIcons.House}
-        label={t("navigation.home")}
-        focused={focused}
-        size={size}
-      />
-    )
+    return <TabIcon icon={TabBarIcons.House} focused={focused} size={size} />
   }
 
   const ExposureHistoryIcon: FunctionComponent<TabBarIconProps> = ({
@@ -65,12 +54,7 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     const tabIcon = (
-      <TabIcon
-        icon={TabBarIcons.Exposure}
-        label={t("navigation.exposure_history")}
-        focused={focused}
-        size={size}
-      />
+      <TabIcon icon={TabBarIcons.Exposure} focused={focused} size={size} />
     )
     return tabIcon
   }
@@ -80,12 +64,7 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     const tabIcon = (
-      <TabIcon
-        icon={TabBarIcons.Heartbeat}
-        label={t("navigation.symptom_history")}
-        focused={focused}
-        size={size}
-      />
+      <TabIcon icon={TabBarIcons.Heartbeat} focused={focused} size={size} />
     )
     return tabIcon
   }
@@ -95,12 +74,7 @@ const MainTabNavigator: FunctionComponent = () => {
     size,
   }) => {
     const tabIcon = (
-      <TabIcon
-        icon={TabBarIcons.Gear}
-        label={t("navigation.settings")}
-        focused={focused}
-        size={size}
-      />
+      <TabIcon icon={TabBarIcons.Gear} focused={focused} size={size} />
     )
     return tabIcon
   }
@@ -144,10 +118,10 @@ const MainTabNavigator: FunctionComponent = () => {
         />
       )}
       <Tab.Screen
-        name={Stacks.Connect}
+        name={Stacks.Settings}
         component={SettingsStack}
         options={{
-          tabBarLabel: t("navigation.connect"),
+          tabBarLabel: t("navigation.settings"),
           tabBarIcon: SettingsIcon,
         }}
       />

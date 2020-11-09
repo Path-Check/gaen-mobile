@@ -6,7 +6,6 @@ import {
   View,
   ScrollView,
   ImageSourcePropType,
-  ViewStyle,
   TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
@@ -17,11 +16,10 @@ import { SvgXml } from "react-native-svg"
 import { ModalStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 
-import { Outlines, Colors, Spacing, Typography, Buttons } from "../styles"
+import { Colors, Spacing, Typography, Buttons } from "../styles"
 import { Icons } from "../assets"
 
 type HowItWorksScreenContent = {
-  screenNumber: number
   image: ImageSourcePropType
   imageLabel: string
   header: string
@@ -31,12 +29,10 @@ type HowItWorksScreenContent = {
 
 interface HowItWorksScreenProps {
   howItWorksScreenContent: HowItWorksScreenContent
-  totalScreenCount: number
 }
 
 const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   howItWorksScreenContent,
-  totalScreenCount,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
@@ -49,7 +45,6 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
   }
 
   const {
-    screenNumber,
     image,
     imageLabel,
     header,
@@ -72,10 +67,6 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             style={style.image}
             resizeMode={"contain"}
           />
-          <PositionDots
-            highlightedDotIdx={screenNumber}
-            totalDotCount={totalScreenCount}
-          />
           <Text style={style.headerText}>{header}</Text>
         </View>
       </ScrollView>
@@ -89,7 +80,10 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             <Text style={style.buttonText}>{primaryButtonLabel}</Text>
             <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleOnPressProtectPrivacy}>
+          <TouchableOpacity
+            onPress={handleOnPressProtectPrivacy}
+            accessibilityRole="button"
+          >
             <Text style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}
             </Text>
@@ -153,56 +147,6 @@ const createStyle = (insets: EdgeInsets) => {
     },
   })
 }
-
-interface PositionDotsProps {
-  highlightedDotIdx: number
-  totalDotCount: number
-}
-
-const PositionDots: FunctionComponent<PositionDotsProps> = ({
-  highlightedDotIdx,
-  totalDotCount,
-}) => {
-  const determineDotStyle = (dotPosition: number): ViewStyle => {
-    if (dotPosition === highlightedDotIdx) {
-      return dotsStyle.dotHighlighted
-    } else {
-      return dotsStyle.dot
-    }
-  }
-
-  const screens = Array.from(Array(totalDotCount), (i) => i + 1)
-
-  return (
-    <View style={dotsStyle.dotsContainer}>
-      {screens.map((_, idx) => {
-        return <View style={determineDotStyle(idx + 1)} key={idx} />
-      })}
-    </View>
-  )
-}
-const dotsStyle = StyleSheet.create({
-  dotsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 150,
-    justifyContent: "space-between",
-    marginBottom: Spacing.medium,
-    paddingHorizontal: Spacing.large,
-  },
-  dotHighlighted: {
-    backgroundColor: Colors.primary.shade100,
-    width: 10,
-    height: 10,
-    borderRadius: Outlines.borderRadiusMax,
-  },
-  dot: {
-    backgroundColor: Colors.neutral.shade30,
-    width: 5,
-    height: 5,
-    borderRadius: Outlines.borderRadiusMax,
-  },
-})
 
 const MemoizedHowItWorksScreen = React.memo(HowItWorksScreen)
 

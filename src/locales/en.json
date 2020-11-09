@@ -16,6 +16,7 @@
     "success_header": "You're in the queue"
   },
   "common": {
+    "select_language": "Select language",
     "back": "Back",
     "close": "Close",
     "close_screen": "Close screen",
@@ -211,13 +212,12 @@
     "unchecked_checkbox": "Unchecked checkbox"
   },
   "navigation": {
-    "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_history": "Symptom Checker"
+    "symptom_history": "Symptom History"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
