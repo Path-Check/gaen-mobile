@@ -27,7 +27,7 @@ describe("DeleteConfirmation", () => {
       </OnboardingProvider>,
     )
 
-    fireEvent.press(getByLabelText("Delete My Data"))
+    fireEvent.press(getByLabelText("Delete my data"))
     await waitFor(() => {
       expect(deleteAllEntriesSpy).toHaveBeenCalled()
     })
@@ -51,7 +51,7 @@ describe("DeleteConfirmation", () => {
         </OnboardingProvider>,
       )
 
-      fireEvent.press(getByLabelText("Delete My Data"))
+      fireEvent.press(getByLabelText("Delete my data"))
       await waitFor(() => {
         expect(showMessageSpy).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -80,7 +80,7 @@ describe("DeleteConfirmation", () => {
         </OnboardingProvider>,
       )
 
-      fireEvent.press(getByLabelText("Delete My Data"))
+      fireEvent.press(getByLabelText("Delete my data"))
       await waitFor(() => {
         expect(showMessageSpy).toHaveBeenCalledWith(
           expect.objectContaining({

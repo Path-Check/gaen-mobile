@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
-import { ModalStackScreens } from "../navigation"
+import { SettingsStackScreens } from "../navigation"
 import { Icons } from "../assets"
 import { Colors, Iconography, Typography, Spacing } from "../styles"
 
@@ -16,19 +16,29 @@ const ShareAnonymizedDataListItem: FunctionComponent = () => {
   const { userConsentedToAnalytics } = useProductAnalyticsContext()
 
   const onPressShareAnonymizedData = () => {
-    navigation.navigate(ModalStackScreens.AnonymizedDataConsent)
+    navigation.navigate(SettingsStackScreens.ProductAnalyticsConsent)
   }
 
-  const rightIconColor = userConsentedToAnalytics
-    ? Colors.accent.success100
-    : Colors.accent.danger75
-  const rightIcon = userConsentedToAnalytics
-    ? Icons.CheckInCircle
-    : Icons.XInCircle
-  const testID = userConsentedToAnalytics ? "sharing-data" : "not-sharing-data"
-  const accessibilityLabel = userConsentedToAnalytics
-    ? t("settings.sharing_anonymized_data")
-    : t("settings.not_sharing_anonymized_data")
+  const consentingConfig = {
+    rightIconColor: Colors.accent.success100,
+    rightIcon: Icons.CheckInCircle,
+    testID: "sharing-data",
+    accessibilityLabel: t("settings.sharing_anonymized_data"),
+  }
+
+  const notConsentingConfig = {
+    rightIconColor: Colors.accent.danger75,
+    rightIcon: Icons.XInCircle,
+    testID: "not-sharing-data",
+    accessibilityLabel: t("settings.not_sharing_anonymized_data"),
+  }
+
+  const {
+    rightIconColor,
+    rightIcon,
+    testID,
+    accessibilityLabel,
+  } = userConsentedToAnalytics ? consentingConfig : notConsentingConfig
 
   return (
     <TouchableOpacity

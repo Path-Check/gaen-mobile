@@ -31,7 +31,7 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).toHaveBeenCalled()
     })
-    it("navigates to the anonymized data consent screen", async () => {
+    it("navigates to the next screen", async () => {
       expect.assertions(1)
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({
@@ -44,7 +44,7 @@ describe("NotificationPermissions", () => {
 
       await waitFor(() => {
         expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.AnonymizedDataConsent,
+          ActivationStackScreens.ActivationSummary,
         )
       })
     })
@@ -66,7 +66,7 @@ describe("NotificationPermissions", () => {
 
       expect(notificationRequestSpy).not.toHaveBeenCalled()
     })
-    it("navigates to the anonymized data consent screen", () => {
+    it("navigates to the next screen", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
@@ -75,7 +75,7 @@ describe("NotificationPermissions", () => {
       fireEvent.press(getByText("Maybe later"))
 
       expect(navigationSpy).toHaveBeenCalledWith(
-        ActivationStackScreens.AnonymizedDataConsent,
+        ActivationStackScreens.ActivationSummary,
       )
     })
   })

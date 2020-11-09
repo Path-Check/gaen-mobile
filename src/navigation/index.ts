@@ -150,6 +150,7 @@ export type SettingsStackScreen =
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
+  | "ProductAnalyticsConsent"
 
 export const SettingsStackScreens: {
   [key in SettingsStackScreen]: SettingsStackScreen
@@ -161,6 +162,7 @@ export const SettingsStackScreens: {
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
+  ProductAnalyticsConsent: "ProductAnalyticsConsent",
 }
 
 export type AffectedUserFlowStackScreen =

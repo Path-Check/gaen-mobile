@@ -10,6 +10,7 @@ import ENDebugMenu from "../Settings/ENDebugMenu"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import DeleteConfirmation from "../Settings/DeleteConfirmation"
+import ProductAnalyticsConsentScreen from "../Settings/AnonymizedDataConsentScreen"
 import { SettingsStackScreens } from "./index"
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
@@ -55,6 +56,10 @@ const SettingsStack: FunctionComponent = () => {
         name={SettingsStackScreens.ENLocalDiagnosisKey}
         component={ENLocalDiagnosisKey}
         options={defaultScreenOptions}
+      />
+      <Stack.Screen
+        name={SettingsStackScreens.ProductAnalyticsConsent}
+        component={ProductAnalyticsConsentScreen}
       />
     </Stack.Navigator>
   )

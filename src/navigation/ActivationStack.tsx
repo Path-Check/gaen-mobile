@@ -17,7 +17,7 @@ import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
-import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
+import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Icons } from "../assets"
@@ -33,7 +33,10 @@ const ActivationStack: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { locationPermissions, isBluetoothOn } = usePermissionsContext()
-  const { displayAcceptTermsOfService } = useConfigurationContext()
+  const {
+    displayAcceptTermsOfService,
+    enableProductAnalytics,
+  } = useConfigurationContext()
 
   interface ActivationStep {
     screenName: ActivationStackScreen
@@ -89,11 +92,13 @@ const ActivationStack: FunctionComponent = () => {
     default: activationStepsIOS,
   })
 
-  const anonymizedDataConsent: ActivationStep = {
-    screenName: ActivationStackScreens.AnonymizedDataConsent,
-    component: AnonymizedDataConsentScreen,
+  if (enableProductAnalytics) {
+    const anonymizedDataConsent: ActivationStep = {
+      screenName: ActivationStackScreens.AnonymizedDataConsent,
+      component: ProductAnalyticsConsentForm,
+    }
+    activationSteps.push(anonymizedDataConsent)
   }
-  activationSteps.push(anonymizedDataConsent)
 
   const activationSummary: ActivationStep = {
     screenName: ActivationStackScreens.ActivationSummary,

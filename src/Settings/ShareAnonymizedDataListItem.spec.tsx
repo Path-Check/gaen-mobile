@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
 import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 import { factories } from "../factories"
-import { ModalStackScreens } from "../navigation"
+import { SettingsStackScreens } from "../navigation"
 
 jest.mock("@react-navigation/native")
 describe("ShareAnonymizedDataListItem", () => {
@@ -57,10 +57,10 @@ describe("ShareAnonymizedDataListItem", () => {
       </ProductAnalyticsContext.Provider>,
     )
 
-    const shareDataListItem = getByText("Share Anonymized Data")
+    const shareDataListItem = getByText("Share anonymized data")
     fireEvent.press(shareDataListItem)
     expect(navigationSpy).toHaveBeenCalledWith(
-      ModalStackScreens.AnonymizedDataConsent,
+      SettingsStackScreens.ProductAnalyticsConsent,
     )
   })
 })

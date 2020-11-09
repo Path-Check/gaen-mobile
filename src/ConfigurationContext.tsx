@@ -13,6 +13,7 @@ export interface Configuration {
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   displayAgeVerification: boolean
+  enableProductAnalytics: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
@@ -22,7 +23,6 @@ export interface Configuration {
   healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
-  healthAuthoritySupportsAnalytics: boolean
   measurementSystem: MeasurementSystem
   minimumAge: string
   regionCodes: string[]
@@ -39,6 +39,7 @@ const initialState: Configuration = {
   displaySelfAssessment: false,
   displayAgeVerification: false,
   emergencyPhoneNumber: "",
+  enableProductAnalytics: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityCovidDataUrl: null,
@@ -47,7 +48,6 @@ const initialState: Configuration = {
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
-  healthAuthoritySupportsAnalytics: false,
   measurementSystem: "Imperial" as const,
   minimumAge: "18",
   regionCodes: [],
@@ -76,13 +76,12 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
+  const enableProductAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
 
   const minimumAge = env.MINIMUM_AGE
-
-  const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
 
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
@@ -105,6 +104,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displaySymptomHistory,
         displaySelfAssessment,
         displayAgeVerification,
+        enableProductAnalytics,
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
@@ -114,7 +114,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
         healthAuthorityName,
         healthAuthorityPrivacyPolicyUrl,
-        healthAuthoritySupportsAnalytics,
         measurementSystem,
         minimumAge,
         regionCodes,

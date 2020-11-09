@@ -3,8 +3,6 @@ import { Text } from "react-native"
 import { render, waitFor } from "@testing-library/react-native"
 
 import { StorageUtils } from "../utils"
-import { ConfigurationContext } from "../ConfigurationContext"
-import { factories } from "../factories"
 import {
   ProductAnalyticsContext,
   ProductAnalyticsProvider,
@@ -13,93 +11,68 @@ import {
 } from "./Context"
 
 describe("ProductAnalyticsContext", () => {
-  describe("getting the current user consent status", () => {
-    it("passes down the correct user consent status to its children", async () => {
-      expect.assertions(1)
-      jest.spyOn(StorageUtils, "getAnalyticsConsent").mockResolvedValue(true)
-      const analyticsClient = testAnalyticsClient()
-      const { getByText } = render(
-        <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
-          <DisplayStatus />
-        </ProductAnalyticsProvider>,
-      )
+  afterEach(() => jest.resetAllMocks())
+  describe("When the user has consented to analytics", () => {
+    describe("and trackEvent is called", () => {
+      it("tracks the event", async () => {
+        expect.assertions(1)
+        jest
+          .spyOn(StorageUtils, "getAnalyticsConsent")
+          .mockResolvedValueOnce(true)
+        const expectedEvent: Event = {
+          category: "product_analytics",
+          action: "event_action",
+          name: "event_name",
+          value: 1,
+        }
 
-      await waitFor(() => {
-        expect(getByText(/User consent status:/)).toHaveTextContent("true")
+        const analyticsClient = testAnalyticsClient()
+
+        render(
+          <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
+            <TrackEvent event={expectedEvent} />
+          </ProductAnalyticsProvider>,
+        )
+
+        const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
+
+        await waitFor(() => {
+          expect(trackEventSpy).toHaveBeenCalledWith(
+            expectedEvent.category,
+            expectedEvent.action,
+            expectedEvent.name,
+            expectedEvent.value,
+          )
+        })
       })
-    })
-  })
 
-  describe("updating the user consent status", () => {
-    it("passes down the new consent status to its children", async () => {
-      expect.assertions(1)
-      jest
-        .spyOn(StorageUtils, "getAnalyticsConsent")
-        .mockResolvedValueOnce(false)
-        .mockResolvedValueOnce(true)
-
-      jest.spyOn(StorageUtils, "setAnalyticsConsent")
-
-      const analyticsClient = testAnalyticsClient()
-
-      const { getByText } = render(
-        <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
-          <UpdateConsent />
-        </ProductAnalyticsProvider>,
-      )
-
-      await waitFor(() => {
-        expect(getByText(/User consent status:/)).toHaveTextContent("true")
-      })
-    })
-  })
-
-  describe("tracking events", () => {
-    afterEach(() => jest.resetAllMocks())
-
-    describe("when a health authority supports analytics tracking", () => {
-      describe("and the user has consented to analytics", () => {
-        it("tracks the event", async () => {
+      describe("and a screen has been viewed", () => {
+        it("tracks the screen view", async () => {
           expect.assertions(1)
-          const configurationContext = factories.configurationContext.build({
-            healthAuthoritySupportsAnalytics: true,
-          })
+
           jest
             .spyOn(StorageUtils, "getAnalyticsConsent")
             .mockResolvedValueOnce(true)
-          const expectedEvent: Event = {
-            category: "product_analytics",
-            action: "event_action",
-            name: "event_name",
-            value: 1,
-          }
 
           const analyticsClient = testAnalyticsClient()
 
           render(
-            <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider
-                productAnalyticsClient={analyticsClient}
-              >
-                <TrackEvent event={expectedEvent} />
-              </ProductAnalyticsProvider>
-            </ConfigurationContext.Provider>,
+            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
+              <TrackScreenView />
+            </ProductAnalyticsProvider>,
           )
 
-          const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
+          const trackScreenViewSpy = jest.spyOn(analyticsClient, "trackView")
 
           await waitFor(() => {
-            expect(trackEventSpy).toHaveBeenCalledWith(
-              expectedEvent.category,
-              expectedEvent.action,
-              expectedEvent.name,
-              expectedEvent.value,
-            )
+            expect(trackScreenViewSpy).toHaveBeenCalledWith(["Home"])
           })
         })
       })
+    })
 
-      describe("and the user has not consented to analytics", () => {
+    describe("and the user has not consented to analytics", () => {
+      describe("and trackEvent is called", () => {
         it("does not track the event", () => {
           expect.assertions(1)
           jest
@@ -127,115 +100,9 @@ describe("ProductAnalyticsContext", () => {
       })
     })
 
-    describe("when a health authority does not support analytics tracking", () => {
-      it("does not tracks the event", async () => {
-        expect.assertions(1)
-        const configurationContext = factories.configurationContext.build({
-          healthAuthoritySupportsAnalytics: false,
-        })
-        jest
-          .spyOn(StorageUtils, "getAnalyticsConsent")
-          .mockResolvedValueOnce(true)
-
-        const expectedEvent: Event = {
-          category: "product_analytics",
-          action: "event_action",
-          name: "event_name",
-          value: 1,
-        }
-
-        const analyticsClient = testAnalyticsClient()
-
-        render(
-          <ConfigurationContext.Provider value={configurationContext}>
-            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
-              <TrackEvent event={expectedEvent} />
-            </ProductAnalyticsProvider>
-          </ConfigurationContext.Provider>,
-        )
-
-        const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
-
-        await waitFor(() => {
-          expect(trackEventSpy).not.toHaveBeenCalled()
-        })
-      })
-    })
-  })
-
-  describe("tracking screen views", () => {
-    afterEach(() => jest.resetAllMocks())
-
-    describe("when the health authority supports analytics tracking", () => {
-      describe("and the user has consented to anonymized data sharing", () => {
-        it("tracks the screen view", async () => {
-          expect.assertions(1)
-          const configurationContext = factories.configurationContext.build({
-            healthAuthoritySupportsAnalytics: true,
-          })
-
-          jest
-            .spyOn(StorageUtils, "getAnalyticsConsent")
-            .mockResolvedValueOnce(true)
-
-          const analyticsClient = testAnalyticsClient()
-
-          render(
-            <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider
-                productAnalyticsClient={analyticsClient}
-              >
-                <TrackScreenView />
-              </ProductAnalyticsProvider>
-            </ConfigurationContext.Provider>,
-          )
-
-          const trackScreenViewSpy = jest.spyOn(analyticsClient, "trackView")
-
-          await waitFor(() => {
-            expect(trackScreenViewSpy).toHaveBeenCalledWith(["Home"])
-          })
-        })
-      })
-
-      describe("and the user has not consented to anonymized data sharing", () => {
-        it("does not track the screen view", async () => {
-          expect.assertions(1)
-          const configurationContext = factories.configurationContext.build({
-            healthAuthoritySupportsAnalytics: true,
-          })
-
-          jest
-            .spyOn(StorageUtils, "getAnalyticsConsent")
-            .mockResolvedValueOnce(false)
-
-          const analyticsClient = testAnalyticsClient()
-
-          render(
-            <ConfigurationContext.Provider value={configurationContext}>
-              <ProductAnalyticsProvider
-                productAnalyticsClient={analyticsClient}
-              >
-                <TrackScreenView />
-              </ProductAnalyticsProvider>
-            </ConfigurationContext.Provider>,
-          )
-
-          const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
-
-          await waitFor(() => {
-            expect(trackEventSpy).not.toHaveBeenCalled()
-          })
-        })
-      })
-    })
-
-    describe("when the health authority does not support analytics tracking", () => {
+    describe("and a screen has been viewed", () => {
       it("does not track the screen view", async () => {
         expect.assertions(1)
-        const configurationContext = factories.configurationContext.build({
-          healthAuthoritySupportsAnalytics: false,
-        })
 
         jest
           .spyOn(StorageUtils, "getAnalyticsConsent")
@@ -244,11 +111,9 @@ describe("ProductAnalyticsContext", () => {
         const analyticsClient = testAnalyticsClient()
 
         render(
-          <ConfigurationContext.Provider value={configurationContext}>
-            <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
-              <TrackScreenView />
-            </ProductAnalyticsProvider>
-          </ConfigurationContext.Provider>,
+          <ProductAnalyticsProvider productAnalyticsClient={analyticsClient}>
+            <TrackScreenView />
+          </ProductAnalyticsProvider>,
         )
 
         const trackEventSpy = jest.spyOn(analyticsClient, "trackEvent")
@@ -271,21 +136,6 @@ const testAnalyticsClient = (
   }
 }
 
-const DisplayStatus: FunctionComponent = () => {
-  const context = useContext(ProductAnalyticsContext)
-
-  return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
-}
-
-const UpdateConsent: FunctionComponent = () => {
-  const context = useContext(ProductAnalyticsContext)
-
-  useEffect(() => {
-    context.updateUserConsent(true)
-  }, [context])
-  return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
-}
-
 type Event = {
   category: EventCategory
   action: string
@@ -300,7 +150,8 @@ const TrackEvent: FunctionComponent<{
 
   useEffect(() => {
     context.trackEvent(category, action, name, value)
-  }, [context])
+  }, [context, category, action, name, value])
+
   return <Text> User consent status: {context.userConsentedToAnalytics}</Text>
 }
 

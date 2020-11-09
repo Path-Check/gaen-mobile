@@ -14,6 +14,7 @@ import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
@@ -23,16 +24,25 @@ const ActivateLocation: FunctionComponent = () => {
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
+  const { enableProductAnalytics } = useConfigurationContext()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+      navigateToNextScreen()
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    navigateToNextScreen()
+  }
+
+  const navigateToNextScreen = () => {
+    if (enableProductAnalytics) {
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    } else {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    }
   }
 
   const showLocationAccessAlert = () => {
