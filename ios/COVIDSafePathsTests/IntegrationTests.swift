@@ -89,7 +89,7 @@ class IntegrationTests: XCTestCase {
     BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = ""
     BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
     let exposureManager = try XCTUnwrap(ExposureManager.shared)
-    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
 
     XCTAssertEqual(paths.first!, "mn/1593432000-1593446400-00001.zip")
     XCTAssertEqual(paths.last!, "mn/1593432000-1593446400-00015.zip")
@@ -102,10 +102,29 @@ class IntegrationTests: XCTestCase {
     BTSecureStorage.shared.remainingDailyFileProcessingCapacity = Constants.dailyFileProcessingCapacity
     let exposureManager = try XCTUnwrap(ExposureManager.shared)
 
-    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
 
     XCTAssertEqual(paths.first!, "mn/1593432000-1593446400-00016.zip")
     XCTAssertEqual(paths.last!, "mn/1593446400-1593460800-00007.zip")
+  }
+
+  func testUrlPathsToProcessRemainingFileCapacity() throws {
+
+    // Setup
+    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593432000-1593446400-00015.zip"
+    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = 4
+    let exposureManager = try XCTUnwrap(ExposureManager.shared)
+
+    let v1Paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
+    let v2Paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V2)
+
+    XCTAssertEqual(v1Paths.first!, "mn/1593432000-1593446400-00016.zip")
+    XCTAssertEqual(v1Paths.last!, "mn/1593432000-1593446400-00019.zip")
+    XCTAssertEqual(v1Paths.count, 4)
+
+    XCTAssertEqual(v2Paths.first!, "mn/1593432000-1593446400-00016.zip")
+    XCTAssertEqual(v2Paths.last!, "mn/1593460800-1593475200-00022.zip")
+    XCTAssertEqual(v2Paths.count, 53)
   }
 
   func testUrlPathsToProcessAfterReadingAllButOneFile() throws {
@@ -114,7 +133,7 @@ class IntegrationTests: XCTestCase {
     BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00021.zip"
     let exposureManager = try XCTUnwrap(ExposureManager.shared)
 
-    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
 
     XCTAssertEqual(paths.count, 1)
   }
@@ -124,7 +143,7 @@ class IntegrationTests: XCTestCase {
     // Setup
     BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593460800-1593475200-00022.zip"
     let exposureManager = try XCTUnwrap(ExposureManager.shared)
-    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths)
+    let paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
 
     XCTAssertEqual(paths.count, 0)
   }
@@ -177,14 +196,14 @@ class IntegrationTests: XCTestCase {
     exposureManager.finish(.success([]),
                                   processedFileCount: 4,
                                   lastProcessedUrlPath: "mn/1593460800-1593475200-00022.zip",
-                                  progress: Progress()) { _ in }
+                                  progress: Progress(), apiVersion: .V1) { _ in }
 
     // remainingDailyFileProcessingCapacity decreases, urlOfMostRecentlyDetectedKeyFile is stored
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
     XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 11)
 
     // ----------------
-    exposureManager.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress()) { _ in }
+    exposureManager.finish(.success([]), processedFileCount: 8, lastProcessedUrlPath: "mn/1593460800-1593475200-00023.zip", progress: Progress(), apiVersion: .V1) { _ in }
 
     // remainingDailyFileProcessingCapacity decreases, urlOfMostRecentlyDetectedKeyFile is stored
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
@@ -195,7 +214,7 @@ class IntegrationTests: XCTestCase {
     exposureManager.finish(.success([]),
                                   processedFileCount: 0,
                                   lastProcessedUrlPath: .default,
-                                  progress: Progress()) { _ in }
+                                  progress: Progress(), apiVersion: .V1) { _ in }
 
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00023.zip")
     XCTAssertEqual(BTSecureStorage.shared.userState.remainingDailyFileProcessingCapacity, 3)
@@ -211,7 +230,7 @@ class IntegrationTests: XCTestCase {
     exposureManager.finish(.failure(GenericError.unknown),
                                   processedFileCount: 4,
                                   lastProcessedUrlPath: "invalid",
-                                  progress: Progress()) { _ in }
+                                  progress: Progress(), apiVersion: .V1) { _ in }
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
@@ -229,7 +248,7 @@ class IntegrationTests: XCTestCase {
 
     exposureManager.finish(.failure(GenericError.unknown), processedFileCount: 4,
                                   lastProcessedUrlPath: "invalid",
-                                  progress: progress) { _ in }
+                                  progress: progress, apiVersion: .V1) { _ in }
 
     // remainingDailyFileProcessingCapacity does not decrease, urlOfMostRecentlyDetectedKeyFile is not stored
     XCTAssertEqual(BTSecureStorage.shared.userState.urlOfMostRecentlyDetectedKeyFile, "mn/1593460800-1593475200-00022.zip")
@@ -249,7 +268,7 @@ class IntegrationTests: XCTestCase {
     exposureManager.finish(.success([exposure]),
                            processedFileCount: 4,
                            lastProcessedUrlPath: .default,
-                           progress: Progress()) { _ in }
+                           progress: Progress(), apiVersion: .V1) { _ in }
     XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 1)
   }
 
