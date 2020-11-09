@@ -75,7 +75,6 @@ const LanguageSelection: FunctionComponent = () => {
           style={style.languageButton}
           onPress={handleOnSelectLanguage}
           ref={firstLanguageButton}
-          accessible
         >
           <LanguageButtonText />
         </TouchableOpacity>
