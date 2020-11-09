@@ -19,7 +19,6 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   onPress,
   icon,
 }) => {
-  console.log(accessibilityLabel)
   return (
     <TouchableOpacity onPress={onPress} accessibilityLabel={accessibilityLabel}>
       <View style={style.listItem}>
