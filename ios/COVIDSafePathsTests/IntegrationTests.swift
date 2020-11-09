@@ -108,6 +108,25 @@ class IntegrationTests: XCTestCase {
     XCTAssertEqual(paths.last!, "mn/1593446400-1593460800-00007.zip")
   }
 
+  func testUrlPathsToProcessRemainingFileCapacity() throws {
+
+    // Setup
+    BTSecureStorage.shared.urlOfMostRecentlyDetectedKeyFile = "mn/1593432000-1593446400-00015.zip"
+    BTSecureStorage.shared.remainingDailyFileProcessingCapacity = 4
+    let exposureManager = try XCTUnwrap(ExposureManager.shared)
+
+    let v1Paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V1)
+    let v2Paths = exposureManager.urlPathsToProcess(indexTxt.gaenFilePaths, apiVersion: .V2)
+
+    XCTAssertEqual(v1Paths.first!, "mn/1593432000-1593446400-00016.zip")
+    XCTAssertEqual(v1Paths.last!, "mn/1593432000-1593446400-00019.zip")
+    XCTAssertEqual(v1Paths.count, 4)
+
+    XCTAssertEqual(v2Paths.first!, "mn/1593432000-1593446400-00016.zip")
+    XCTAssertEqual(v2Paths.last!, "mn/1593460800-1593475200-00022.zip")
+    XCTAssertEqual(v2Paths.count, 53)
+  }
+
   func testUrlPathsToProcessAfterReadingAllButOneFile() throws {
 
     // Setup
