@@ -88,7 +88,7 @@ const LanguageSelection: FunctionComponent = () => {
         if (reactTag) {
           /* Accessibility focus is only set if this function is called three
            times in a row. See issue:
-           https://github.com/facebook/react-native/issues/30097*/
+           https://github.com/facebook/react-native/issues/30097 */
           AccessibilityInfo.setAccessibilityFocus(reactTag)
           AccessibilityInfo.setAccessibilityFocus(reactTag)
           AccessibilityInfo.setAccessibilityFocus(reactTag)
