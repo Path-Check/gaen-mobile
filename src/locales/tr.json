@@ -1,0 +1,307 @@
+{
+  "_display_name": "İngilizce",
+  "about": {
+    "description": "{{applicationName}}uygulaması {{healthAuthorityName}}tarafından sunulmaktadır",
+    "operating_system_abbr": "İŞLETİM SİSTEMİ:",
+    "version": "Sürüm:"
+  },
+  "callback": {
+    "fill_out_the_info": "Aşağıya bilgileri girin ve {{healthAuthorityName}}dan bir temas takipçisi sizinle temasa geçecektir.",
+    "firstname": "İsim",
+    "lastname": "Soyadı",
+    "phone_number_required": "Telefon numarası (gerekli)",
+    "request_a_call": "Bir temas takipçisinden arama talep edin",
+    "success_got_it": "Anladım",
+    "success_header": "Sıradasınız"
+  },
+  "common": {
+    "back": "Geri",
+    "close": "Kapat",
+    "continue": "Devam et",
+    "done": "Tamamlandı",
+    "edit": "Düzenle",
+    "maybe_later": "Belki daha sonra",
+    "next": "Sonraki",
+    "no_thanks": "Hayır, teşekkürler",
+    "off": "KAPALI",
+    "on": "AÇIK",
+    "save": "Kaydet",
+    "settings": "Ayarları Aç",
+    "skip": "Geç",
+    "something_went_wrong": "Bir terslik yaşandı",
+    "start": "Başla",
+    "submit": "Gönder"
+  },
+  "covid_data": {
+    "cases_today": "Bugünkü vakalar",
+    "covid_data": "COVID Verileri",
+    "deaths_today": "Bugünkü ölümler",
+    "total_cases": "Toplam vaka",
+    "total_deaths": "Toplam ölüm sayısı"
+  },
+  "errors": {
+    "title": "Bilinmeyen hata"
+  },
+  "export": {
+    "code_input_body_bluetooth": "Doğrulama kodunuzu girin",
+    "code_input_button_cancel": "İptal et",
+    "code_input_title_bluetooth": "Teşhisinizi doğrulayın",
+    "complete_body_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsunuz",
+    "complete_title": "Toplumun güvenliğini sağlamaya yardımcı olduğunuz için teşekkürler",
+    "consent_body_0": "Pozitif olduğunuzu paylaşıp paylaşmamak isteğe bağlıdır ve ancak siz kabul ederseniz yapılabilir",
+    "consent_body_1": "Bunu paylaşmaya karar verirseniz toplumun diğer mensuplarının kendi sağlıklarıyla ilgili bilgiye dayalı kararlar almalarına yardımcı olur, virüsün kontrol altına alınmasında üzerinize düşeni yapmış olursunuz.",
+    "consent_body_2": "Paylaşılacak tek bilgi, telefonunuzun son 14 gün içinde yakınlarda bulunmuş olan diğer telefonlarla Bluetooth aracılığıyla paylaştığı rastgele sayılar dizisi ile belirtilerinizin ne zaman geliştiğine dair ağırlıklı risk puanlarıdır.",
+    "consent_button_title": "Anlıyorum ve Onaylıyorum",
+    "consent_subheader_1": "Neden paylaşmalıyım?",
+    "consent_subheader_2": "Nasıl çalışır?",
+    "error": {
+      "invalid_code": "Farklı bir kod deneyin",
+      "invalid_format": "Kodlar rakam ve harf içerebilir",
+      "network_connection_error": "İnternet bağlantısı yok",
+      "unknown_code_verification_error": "Farklı bir kod deneyin",
+      "verification_code_used": "Onay kodu kullanılmıştı"
+    },
+    "person_and_health_expert": "Bir kişi sağlık uzmanıyla konuşuyor",
+    "publish_keys": {
+      "errors": {
+        "internal_server_error": "Sunucu sorun yaşıyor. Lütfen daha sonra tekrar deneyin",
+        "timeout": "İsteğin tamamlanması çok uzun sürdü",
+        "unknown": "Maruziyet verileri gönderilemedi"
+      },
+      "no_op": {
+        "no_token_for_existing_keys": "Mevcut veriler sunucuya gönderildi. Bu da genellikle söz konusu işlemin farklı bir uygulamadan bu cihaz aracılığıyla denenmiş olduğu anlamına gelir. Bunu kullanılmış olan onay kodunu veren makama iletebilrsin. Yeni {{newKeysInserted}} anahtarlar eklendi."
+      }
+    },
+    "start_header_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı olun"
+  },
+  "exposure_history": {
+    "check_for_exposures": "Maruz kalma kontrolü yap",
+    "exposure_detail": {
+      "2m_apart": "2 metre uzaklıkta",
+      "6ft_apart": "6 ayak uzaklıkta",
+      "general_guidance": "Genel Kılavuz",
+      "ha_guidance_header": "Ne yapmalıyım?",
+      "personalize_my_guidance": "Yönlendimeyi kişiselleştir",
+      "schedule_callback": "{{healthAuthorityName}}dan bir temas takipçisinden destek alabilmek için bir görüşme ayarlayın",
+      "speak_with_contact_tracer": "Bir temas takipçisiyle konuşun",
+      "wear_a_mask": "Maske takın"
+    },
+    "exposure_window": {
+      "four_to_six_days_ago": "4-6 gün önce",
+      "seven_to_fourteen_days_ago": "7-14 gün önce",
+      "today_to_three_days_ago": "son 3 gün içinde"
+    },
+    "health_guidelines": {
+      "six_feet_apart": "6 ayak uzaklıkta kalın",
+      "stay_home": "Hastaysanız evde kalın",
+      "title": "Sağlık Rehberi",
+      "two_meters_apart": "2 metre uzaklıkta kalın",
+      "wash_your_hands": "Ellerinizi sık sık yıkayın",
+      "wear_a_mask": "Maske takın"
+    },
+    "how_does_this_work": "Nasıl çalışır?",
+    "no_connectivity_message": "İnternete bağlı değilsiniz",
+    "no_exposure_reports": "Maruziyet bildirimi bulunmamakta",
+    "no_exposure_reports_over_past": "Son 14 gün içinde herhangi bir maruziyet bildirimi almadınız",
+    "possible_exposure": "Olası COVID-19 maruziyeti",
+    "updated": "Güncellendi",
+    "why_did_i_get_an_en_para": "Yakın temasta bulunmuş olduğunuz bir kişi ileride COVID-19 pozitif çıkarsa ve başka insanlara bunu bildirmeyi seçerse, bir maruziyet bildirimi alacaksınız."
+  },
+  "exposure_scanning_status": {
+    "fix_this": "Bunu düzelt",
+    "learn_more": "Daha fazla bilgi edin",
+    "your_device_is_not": "Cihazınız maruz kalma için tarama yapmıyor.  Maruz Kalma Tespitini etkinleştirmek için aşağıdaki sorunları düzeltin.",
+    "your_device_is_scanning": "Cihazınız maruz kalma taraması yapıyor ve uygulamayı kapatsanız bile taramaya devam edecek."
+  },
+  "home": {
+    "bluetooth_info_body": "Telefonunuz, Bluetooth Düşük Enerji kullanarak yakınında vakit geçirdiğiniz başka telefonları tespit eder. Bu da, uygulama cihazınızda kapalı olsa bile uygulamanın günlük karşılaşmalarınızı anonim olarak kaydetmesine olanak tanır. ",
+    "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} uygulama kapatıldıktan sonra etkin kalır",
+      "bluetooth_disabled_error_message": "Bu hatayı düzeltmek için Ayarlar uygulamasına gidin ve Bluetooth'u etkinleştirin",
+      "bluetooth_disabled_error_title": "Ayarlar'da Bluetooth'u etkinleştirin",
+      "bluetooth_header": "Bluetooth",
+      "location_disabled_error_message": "Maruziyet Bildirimi teknolojisini etkinleştirmek için Ayarlar uygulamasından konum erişimini açın",
+      "location_disabled_error_title": "Ayarlardan izin verin",
+      "location_header": "Konum",
+      "proximity_tracing_header": "Maruziyet b-Bildirimleri",
+      "share_message": " COVID-10'u kontrol altına almada bizlere yardımcı olabilecek 1:applicationName uygulamasına bir bakın! 2:appDownloadLink",
+      "tracing_off_header": "Maruziyet Tespiti Kapalı",
+      "tracing_off_subheader": "Olası maruziyetlerle ilgili bilgi alabilmek amacıyla Bluetooth ve Yakınlık İzlemeyi etkinleştirin"
+    },
+    "call_emergency_services": "Acil Servisleri Ara",
+    "check_if_your_symptoms": "Belirtilerinizi girin ve nasıl güvende kalacağınıza dair anında öneri alın.",
+    "did_you_test_positive": "COVID-19 testiniz pozitif mi çıktı?",
+    "fix": "{{technology}}ile ilgili sorunları gider",
+    "get_more_info": "{{technology}}ile ilgili daha fazla bilgi edin",
+    "have_a_positive_test": "Pozitif test sonucu kodunuz var mı?",
+    "if_you_have_a_code": "Toplumun güvende olmasını sağlamak için sonucunuzu bildirin",
+    "location_info_body_1": "Maruz Kalma Bildirimi teknolojisi yakınlarda bulunan cihazları tespit edebilmek için Bluetooth taramasını kullanır. Android 6.0 ve sonraki sürümleri kullanan tüm telefonlarda Bluetooth taramasını kullanmak için cihaz konum ayarlarının yalnızca Maruziyet Bildirimleri Sistemi için geliştirilen uygulamalar için değil tüm uygulamalar için açık olması gerekir",
+    "location_info_subheader_1": "Neden konumum açık olmalı?",
+    "proximity_tracing_info_body_1": "Uygulamanın yüklü olduğu akıllı telefonlar açıksa, Bluetooth özelliği etkinse ve birbirleri ile belli bir süre birbirlerine yakın mesafede bulunuyorlarsa, cihazınız bu karşlılaşmayı kaydeder.",
+    "proximity_tracing_info_body_2": "Bir karşılaşma durumunda verileriniz ve bilgileriniz anonim kalır. Uygulama herhangi bir kişisel veri saklamaz. Yalnızca rastgele kimlik değiştirilir. Bunlar 14 gün içinde silinir.",
+    "proximity_tracing_info_subheader_1": "Maruziyet Bildirimleri nasıl çalışır?",
+    "proximity_tracing_info_subheader_2": "Verilerim güvende mi",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "Maruz Kalma Bildirimlerini etkinleştirebilmek için Ayarlar uygulamasınızın COVID-19 Maruz Kalma Bildirimleri'ne gidin ve 'Maruz Kalma Bildirimlerini Kullan'ı etkinleştirin.",
+      "unauthorized_error_message_ios": "Maruz Kalma Bildirimlerini etkinleştirmek için Ayarlar'daki Maruz Kalma Bildirimi bölümüne gidin ve  Maruz Kalma Bilgisini Paylaşın ve Aktif Bölgeyi .{{applicationName}} olarak ayarlayın.",
+      "unauthorized_error_title": "Maruz Kalma Bildirimlerini Açın"
+    },
+    "to_submit_your_test": "Pozitif olan test sonucunuzu gönderebilmek için bir temas takipçisinden pozitif test sonucu kodunuzu almanız gerekiyor."
+  },
+  "label": {
+    "go_to_home_view": "Ana sayfaya gidin",
+    "launch_enable_notif": "Bildirimleri Açın",
+    "launch_get_started": "Başla",
+    "launch_screen1_header": "Hoşgeldiniz",
+    "privacy_policy": "Gizlilik Politikası",
+    "question_icon": "Soru işareti simgesi"
+  },
+  "navigation": {
+    "connect": "Bağlan",
+    "exposure": "Maruz Kalma",
+    "exposure_history": "Maruziyet geçmişi",
+    "more_info": "Daha fazla bilgi"
+  },
+  "onboarding": {
+    "activation_header_title": "Uygulama kurulumu",
+    "app_setup_complete_body": "{{applicationName}} etkin. Enfeksiyon zincirinin kırılmasına yardımcı olduğunuz için teşekkür ederiz.",
+    "app_setup_complete_header": "Uygulama Kurulumu Tamamlandı!",
+    "app_setup_incomplete_body": "{{applicationName}} ne zaman ve nerede COVID-19'a maruz kalmış olduğunuzu bilebilmesi için Maruziyet Bildirimleri ile Bluetooth izinleri gereklidir. Ayarlardan buna yetki verebilirsiniz.",
+    "app_setup_incomplete_header": "Uygulama Kurulumu Tamamlanmadı",
+    "app_setup_incomplete_location_body": "{{applicationName}}'nın COVID 19'a ne zaman ve nerede maruz kaldığınızı bilebilmesi için Maruz Kalma Bildirimi, Bluetooth ve Konum izinleri gerekmektedir. Buna Ayarlar'dan izin verebilirsiniz.",
+    "eula": "Hukuki Kullanıcı Sözleşmesine Son Ver",
+    "eula_agree_terms_of_use": "Kullanım şartlarını okudum ve kabul ettim",
+    "location_alert_body": "Bluetooth taramayı kullanabilmek için cihaz konum ayarlarının açık olması gerekmekte. ",
+    "location_alert_header": " {{applicationName}}'dan Konum erişimine izin verin",
+    "location_body": "Bluetooth taramayı kullanabilmek için cihaz konum ayarlarının açık olması gerekmekte. Uygulama sizin konum verilerinizi kullanmaz ve cihazınızı izlemek mümkün değildir.",
+    "location_header": "Konumu Aç",
+    "location_subheader": "Telefonumun konum ayarını neden açmam gerekiyor?",
+    "notification_body1": "COVID-19 pozitif olduğunu bildiren birisiyle yollarınızın kesişmesi halinde bildirim alacaksınız",
+    "notification_body2": "Uygulama Bluetooth Düşük Enerji'yi kullnarak  bunu yapar ve  kim  veya nerede olduğunuzu bilmedem rastgele kodların güvenliğini sağlar. Ne zaman isterseniz bunu ayarlardan kapatabilirsiniz",
+    "notification_header": "Maruz kalmış olmanız halinde bilgilendirilin",
+    "notification_subheader1": "Ne zaman bildirim alacağım?",
+    "notification_subheader2": "Nasıl çalışır?",
+    "notification_subheader3": "Bu uygulama sizi COVID-19 enfkesiyonuna karşı korumaz",
+    "please_read_the": "Lütfen okuyunuz",
+    "privacy_policy": "Gizlilik Politikası",
+    "protect_privacy_button": "Gizliliğinizi nasıl koruyoruz?",
+    "protect_privacy": {
+      "body_1": "Bu ID'ler herhangi bir kişisel veri içermezler ve kimliğinizi korumak için her 10-20 dakikada bir değişirler.",
+      "body_2": "Telefonlar Bluetooth Düşük Enerji kullanarak diğer cihazlarla rastgele kimlikleri değiştirirler. Bu da, cihazınızda açmasanız bile  anonim olarak günlük karşılaşmalarınızın {{applicationName}} tarafından takip edilmesini sağlar.",
+      "body_3": "COVID-19 testi pozitif çıktıktan sonra kullanıcılar teşhislerini doğrulamak amacıyla {{applicationName}} ile bir şifre paylaşırlar.  Telefonlarının yakın zamandaki rastgele kimlikleri işeratlenir ve güvenli bir biçimde sunucuya yüklenir. Bu doğrulama süreci yanlış pozitif bildirimleri önlemeye yardımcı olur.",
+      "body_4": "Eğer işaretlenmiş bir kimlik telefonunuzda saklı bir kimlikle eşleşirse, bu sizin COVID-19 testi pozitif olan birisiyle karşılaşmış olabileceğiniz anlamına gelir. Bu şekilde {{applicationName}} virüse maruz kalıp kalmadığınızı belirleyebilir.",
+      "body_5": "Bir eşleşme varsa {{applicationName}} size bildirir ve  sağlık hizmetlerinden yol gösterici bilgi sağlar. \n{{applicationName}} kim olduğunuzu ya da nerede olduğunuzu bilmeden bu şekilde sağlığınızla ilgili kararlar almanıza ve toplumunuzun güvende kalmasını sağlamada yardımcı olur.",
+      "subheader_1": "Maruziyet Bildirimlerini açtığınız zaman telefonunuz sık sık değişen rastgele kimliklerle etiketlenir.",
+      "subheader_2": "Maruziyet Bildirimleri açık olan telefonlar karşılaştıkları başka cihazlarla kimlik değiştirirler.",
+      "subheader_3": "Bir kullanıcının testi pozitif çıkarsa anonim olarak sağlık durumlarını paylaşmayı seçebilirler.",
+      "subheader_4": "Her telefon periyodik olarak",
+      "subheader_5": "{{applicationName}}işaretlenmiş kimlikli bir pozitif bulması halinde bilgilendirileceksiniz."
+    },
+    "proximity_tracing_body1": "Uygulamanın yüklü  olduğu akıllı telefonlar açıksa, bluetooth özelliği etkinse ve bunlar bir süre birbirlerine  yakınsa  cihazınız bir karşılaşma kaydeder.",
+    "proximity_tracing_body2": "Bir karşılaşma durumunda, verileriniz ve bilgileriniz anonim kalır. Uygulama hiçbir kişisel veriyi saklamaz. Yalnızca rastgele kimlikler?? değiş tokuş edilir. Bunlar 14 gün içinde silinir.",
+    "proximity_tracing_button": "Maruziyet bildirimi uyarıları",
+    "proximity_tracing_subheader1": "Nasıl çalışır?",
+    "proximity_tracing_subheader2": "Verilerim güvenmde mi?",
+    "proximity_tracing_subheader3": "Bu uygulama sizi COVID-19 enfkesiyonuna karşı korumaz",
+    "screen1_button": "Nasıl çalışır?",
+    "screen1_header": "COVID-19'un yayılmasını birlikte yavaşlatabiliriz",
+    "screen1_image_label": "iki kişi ",
+    "screen2_button": "Gizliliğim korunuyor mu?",
+    "screen2_header": "Telefonunuz karşılaştığı diğer cihazları hatırlar. Ancak sizi kimseye tanıtmaz.",
+    "screen2_image_label": "iki kişi telefonda",
+    "screen3_button": "Ya maruz kalmışsam?",
+    "screen3_header": "Hiçbir kişisel bilgi telefonunuzdan çıkış yapmaz.",
+    "screen3_image_label": "Kilitli bir telefonun önündeki bir kişi",
+    "screen4_button": "Başla",
+    "screen4_header": " COVID 19'a maruz kalmanız durumunda uygulama sizi bilgilendirecek",
+    "screen4_image_label": "Bir kişi telefonu aracılığıyla bildirim alır",
+    "terms_header_title": "Kullanım Koşulları",
+    "welcome_image_label": " Bir ağdaki düğümler gibir birbirine bağlanmış maske takan insanların bir ilüstrasyonu"
+  },
+  "screen_titles": {
+    "exposure_history": "Maruziyet Geçmişi",
+    "exposure_scanning": "Maruz Kalma Tespiti",
+    "how_the_app_works": "Uygulama nasıl çalışır?"
+  },
+  "self_assessment": {
+    "age_range": {
+      "eighteen_to_sixty_four": "18-64",
+      "how_old_are_you": "Kaç yaşındasınız?",
+      "sixty_five_and_over": "65 ve üzeri"
+    },
+    "call_emergency_services": {
+      "call_emergencies": "{{emergencyPhoneNumber}} numaralı telefonu arayın",
+      "seek_medical_attention": "Derhal tıbbi yardım isteyin",
+      "urgent_medical_attention_needed": "Acil tıbbi müdahale gerekebilir. Lütfen {{emergencyPhoneNumber}} numaralı telefonu arayın veya Acil Servis'e gidin"
+    },
+    "emergency_symptoms": {
+      "are_you_experiencing": "Bu acil durum semptomlarından herhangi birini yaşıyor musunuz?",
+      "chest_pain": "Şiddetli, sürekli göğüs ağrısı veya basıncı",
+      "difficulty_breathing": "Nefes almada aşırı zorluk",
+      "disorientation": "Ciddi yönelim bozukluğu veya tepkisizlik",
+      "lightheadedness": "Şiddetli, sürekli sersemlik",
+      "select_any": "Uygun olanların tümünü (veya hiçbirini) seçin."
+    },
+    "general_symptoms": {
+      "aching": "Tüm vücutta ağrı",
+      "are_you_experiencing": "Bu belirtilerden herhangi birini yaşıyor musunuz?",
+      "difficulty_breathing": "Nefes almada hafif veya orta derece zorluk",
+      "fever_or_chills": "Ateş veya titreme",
+      "loss_of_smell_taste_appetite": "Sürekli koku, tat veya iştah kaybı",
+      "other": "Diğer",
+      "select_any": "Uygun olanların tümünü seçin.",
+      "vomiting_or_diarrhea": "Kusma veya ishal"
+    },
+    "guidance": {
+      "call_your_healthcare_provider": "24 saat içinde sağlık hizmeti sağlayıcınızı, klinisyen danışma hattını veya teletıp sağlayıcısını arayın.",
+      "clean_hands": "Ellerinizi sık sık temizleyin.",
+      "cover_coughs": "Öksürük ve hapşırıklarınızı kapatın.",
+      "dont_go_to_work": "İşe, okula veya halka açık alanlara gitmeyin.",
+      "dont_use_public_transport": "Toplu taşıma kullanmayın veya araç paylaşmayın.",
+      "drink_water": "Sıvı kaybını (dehidrasyon) önlemek için bol su ve diğer berrak sıvıları için.",
+      "feeling_fine": "İyi hissediyor olduğunuzu duymak güzel. Belirtilerinizi izlemeli ve evde kalmalısınız.",
+      "find_telehealth": "Tele sağlık hizmetleri bulun",
+      "follow_cdc_guidance": "Belirtileriniz ortaya çıkarsa, CDC rehberine uyun.",
+      "guidance": "Tavsiyeleriniz",
+      "if_symptoms_develop": "Herhangi bir COVID-19 belirtisi yaşarsanız veya daha kötü hissetmeye başlarsanız, sağlık hizmeti sağlayıcınızı, klinisyen danışma hattını veya teletıp sağlayıcısını arayın. ",
+      "may_help_you_feel_better": "Daha iyi hissetmenize yardımcı olabilecek bazı adımlar şunlardır:",
+      "monitor_your_symptoms": "Kendini kötü hissettiğiniz için üzgünüz. Evde kalın ve semptomlarınızı izleyin. Daha kötü belirtiler ortaya çıkarsa  sağlayıcınızı arayın, evde kalın.",
+      "practice_social_distancing": "Sosyal mesafe kuralını uygulayın.",
+      "protect_others": "Başkalarının hastalanmasını önlemek için bu adımları atın.",
+      "rest": "Evde kalın ve dinlenin.",
+      "seek_medical_care": "Acil bir durum olduğunu düşünüyorsanız veya kendinizi daha kötü hissediyorsanız, tıbbi yardım alın.",
+      "stay_6_feet_away": "Başkalarından en az 6 ayak uzakta kalın ve kalabalık yerlerden uzak durun.",
+      "stay_at_home": "Tıbbi bakım almak dışında evde kalın.",
+      "stay_away_from_higher_risk_people": "Mümkünse, COVID-19'dan dolayı çok hasta olma riski yüksek olan insanlardan uzak durun.",
+      "stay_home_14_days": "14 gün evde kalın.",
+      "take_care_of_yourself": "Kendinize veya hasta olan birine nasıl bakacağınızı öğrenin.",
+      "take_temperature": "Günde iki kez ateşinizi ölçün ve COVID-19 belirtilerine dikkat edin.",
+      "watch_for_covid_symptoms": "COVID-19 belirtilerine dikkat edin.",
+      "you_have_underlying_conditions": "Kendinizi iyi hissetmediğiniz için üzgünüz. Belirtileriniz COVID-19'la ilgili olabilir. Ayrıca sizi daha ciddi hasta olma riskine sokabilecek sağlık durumunuz var.",
+      "your_symptoms_might_be_related": "Kendinizi iyi hissetmediğiniz için üzgünüz. Belirtileriniz COVID-19'la ilgili olabilir. "
+    },
+    "how_are_you_feeling": {
+      "good": "İyi",
+      "not_well": "İyi değil",
+      "title": "Nasıl hissediyorsunuz?"
+    },
+    "intro": {
+      "agree_and_start_assessment": "Kabul edin ve değerlendirmeye başlayın",
+      "covid19_self_assessment": "COVID-19 Öz Değerlendirmesi",
+      "find_out_how_to_care": "COVID-19 pozitif biriyle yakın temasta bulunduktan sonra kendinize ve başkalarına nasıl bakacağınızı öğrenin",
+      "if_this_is": "Bu acil bir durumsa, lütfen {{emergencyPhoneNumber}} numaralı telefonu arayın."
+    }
+  },
+  "settings": {
+    "here": "Burada",
+    "i_understand_and_consent": "Anlıyorum ve Onaylıyorum",
+    "not_sharing_anonymized_data": "Anonimleştirilmiş veri paylaşılmıyor",
+    "please_view_privacy_policy": "Lütfen gizlilik politikasına bakın",
+    "share_anonymized_data": "Verileri anonim olarak paylaş",
+    "share_anonymized_data_disclaimer": "Devam ederek tarama sorularına verilen anonimleştirilmiş yanıtları {{healthAuthorityName}} ile paylaşmayı kabul etmiş olursunuz",
+    "share_anonymized_data_para": "Anonim verileriniz {{healthAuthorityName}} Komisyonunun COVID-19’un yayılmasını analiz etmesine, takip etmesine ve kontrol altına almasına yardımcı olur. Sizin verileriniz, veri paylaşımı yapmayı seçen diğer kullanıcıların verileriyle toplanır. Verilerinizde anket yanıtlarınızı ve posta kodunuzu içerir. Ancak, ek ya da kişisel belirleyici bilgiler içermez.  {{healthAuthorityName}} anonim verilerinizi belli bir süre boyunca saklar.",
+    "sharing_anonymized_data": "Anonimleştirilmiş veri paylaşılıyor",
+    "stop_sharing_data": "Veri paylaşımını durdur",
+    "you_are_sharing_data": "Anonimleştirilmiş veri paylaşıyorsunuz"
+  }
+}
