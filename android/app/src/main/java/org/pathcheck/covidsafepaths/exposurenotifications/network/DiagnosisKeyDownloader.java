@@ -131,7 +131,7 @@ class DiagnosisKeyDownloader {
     for (KeyFileBatch b : batches) {
       batchFiles.addAll(handleBatch(b, dir));
     }
-    return Futures.allAsList(batchFiles);
+    return Futures.successfulAsList(batchFiles);
   }
 
   /**
@@ -175,6 +175,12 @@ class DiagnosisKeyDownloader {
     // Collect the downloaded files per KeyFileBatch
     Map<KeyFileBatch, List<File>> collector = new HashMap<>();
     for (BatchFile bf : batchFiles) {
+      if (bf == null) {
+        // File will be null if it failed to download
+        Log.d(TAG, "File failed to download");
+        continue;
+      }
+
       if (!collector.containsKey(bf.batch)) {
         collector.put(bf.batch, new ArrayList<>());
       }
