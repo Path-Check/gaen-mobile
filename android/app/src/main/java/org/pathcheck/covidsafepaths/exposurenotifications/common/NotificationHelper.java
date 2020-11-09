@@ -10,6 +10,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.work.ForegroundInfo;
 import java.util.Objects;
 import org.pathcheck.covidsafepaths.MainActivity;
 import org.pathcheck.covidsafepaths.R;
@@ -20,6 +21,9 @@ import org.pathcheck.covidsafepaths.R;
 public final class NotificationHelper {
 
   private static final String EXPOSURE_NOTIFICATION_CHANNEL_ID = "EXPOSURE_NOTIFICATION_CHANNEL_ID";
+
+  private static final Integer EXPOSURE_NOTIFICATION_ID = 0;
+  private static final Integer BACKGROUND_WORKER_NOTIFICATION_ID = 1;
 
   /**
    * Shows a notification, notifying of a possible exposure.
@@ -47,7 +51,21 @@ public final class NotificationHelper {
             .setVisibility(NotificationCompat.VISIBILITY_SECRET);
     NotificationManagerCompat notificationManager = NotificationManagerCompat
         .from(context);
-    notificationManager.notify(0, builder.build());
+    notificationManager.notify(EXPOSURE_NOTIFICATION_ID, builder.build());
+  }
+
+  /**
+   * Create notification that will be shown while we are checking exposures.
+   */
+  public static ForegroundInfo createWorkerNotification(Context context) {
+    createNotificationChannel(context);
+    NotificationCompat.Builder builder =
+        new Builder(context, EXPOSURE_NOTIFICATION_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
+            .setContentTitle(context.getString(R.string.background_worker_notification_title))
+            .setOngoing(true);
+    return new ForegroundInfo(BACKGROUND_WORKER_NOTIFICATION_ID, builder.build());
   }
 
   /**
