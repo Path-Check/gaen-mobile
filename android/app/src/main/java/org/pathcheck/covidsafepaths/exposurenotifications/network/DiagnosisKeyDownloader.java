@@ -89,8 +89,7 @@ class DiagnosisKeyDownloader {
    *
    * <p>TODO: Apply the timeout individually to each file instead.
    *
-   * <p>Currently all files in a given batch fail or succeed as a group. This is also not ideal; it
-   * would be better to support retrying only the failed downloads.
+   * <p>It would be better to support retrying only failed downloads.
    */
   ListenableFuture<ImmutableList<KeyFileBatch>> download() {
     String dir = randDirname();
