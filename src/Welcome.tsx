@@ -71,6 +71,7 @@ const Welcome: FunctionComponent = () => {
           <TouchableOpacity
             onPress={handleOnPressSelectLanguage}
             accessibilityLabel={t("common.select_language")}
+            accessibilityRole="button"
           >
             <View style={style.languageButtonContainer}>
               <Text style={style.languageButtonText}>{languageName}</Text>
