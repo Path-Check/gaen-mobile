@@ -102,24 +102,11 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
     getNotified,
   ]
 
-  const toStackScreen = (datum: HowItWorksScreenDatum, idx: number) => {
-    const screenNumber = idx + 1
-    const howItWorksScreenDisplayDatum = {
-      screenNumber,
-      ...datum,
-    }
-
+  const toStackScreen = (datum: HowItWorksScreenDatum) => {
     return (
-      <Stack.Screen
-        key={howItWorksScreenDisplayDatum.header}
-        name={howItWorksScreenDisplayDatum.name}
-      >
+      <Stack.Screen key={datum.header} name={datum.name}>
         {(props) => (
-          <HowItWorksScreen
-            {...props}
-            howItWorksScreenContent={howItWorksScreenDisplayDatum}
-            totalScreenCount={howItWorksScreenData.length}
-          />
+          <HowItWorksScreen {...props} howItWorksScreenContent={datum} />
         )}
       </Stack.Screen>
     )
@@ -146,7 +133,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
         headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
       }}
     >
-      {howItWorksScreenData.map((data, idx) => toStackScreen(data, idx))}
+      {howItWorksScreenData.map(toStackScreen)}
     </Stack.Navigator>
   )
 }

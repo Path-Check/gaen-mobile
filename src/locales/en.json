@@ -16,6 +16,7 @@
     "success_header": "You're in the queue"
   },
   "common": {
+    "select_language": "Select language",
     "back": "Back",
     "close": "Close",
     "close_screen": "Close screen",
@@ -217,7 +218,7 @@
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_history": "Symptom Checker"
+    "symptom_log": "Symptom Log"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
