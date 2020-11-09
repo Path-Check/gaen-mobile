@@ -18,7 +18,7 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   icon,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} accessible accessibilityLabel={label}>
+    <TouchableOpacity onPress={onPress} accessibilityLabel={label}>
       <View style={style.listItem}>
         <SvgXml
           fill={Colors.primary.shade100}
@@ -26,8 +26,6 @@ const ListItem: FunctionComponent<ListItemProps> = ({
           width={Iconography.small}
           height={Iconography.small}
           style={style.icon}
-          accessible
-          accessibilityLabel={label}
         />
         <Text style={style.listItemText}>{label}</Text>
       </View>

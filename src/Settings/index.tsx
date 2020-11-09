@@ -65,7 +65,7 @@ const Settings: FunctionComponent = () => {
   }
 
   const selectLanguage: SettingsListItem = {
-    label: languageName,
+    label: t("common.select_language"),
     onPress: handleOnPressSelectLanguage,
     icon: Icons.LanguagesIcon,
   }
