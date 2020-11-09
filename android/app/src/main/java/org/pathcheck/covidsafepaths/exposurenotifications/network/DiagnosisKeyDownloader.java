@@ -89,8 +89,7 @@ class DiagnosisKeyDownloader {
    *
    * <p>TODO: Apply the timeout individually to each file instead.
    *
-   * <p>Currently all files in a given batch fail or succeed as a group. This is also not ideal; it
-   * would be better to support retrying only the failed downloads.
+   * <p>It would be better to support retrying only failed downloads.
    */
   ListenableFuture<ImmutableList<KeyFileBatch>> download() {
     String dir = randDirname();
@@ -131,7 +130,7 @@ class DiagnosisKeyDownloader {
     for (KeyFileBatch b : batches) {
       batchFiles.addAll(handleBatch(b, dir));
     }
-    return Futures.allAsList(batchFiles);
+    return Futures.successfulAsList(batchFiles);
   }
 
   /**
@@ -175,6 +174,12 @@ class DiagnosisKeyDownloader {
     // Collect the downloaded files per KeyFileBatch
     Map<KeyFileBatch, List<File>> collector = new HashMap<>();
     for (BatchFile bf : batchFiles) {
+      if (bf == null) {
+        // File will be null if it failed to download
+        Log.d(TAG, "File failed to download");
+        continue;
+      }
+
       if (!collector.containsKey(bf.batch)) {
         collector.put(bf.batch, new ArrayList<>());
       }

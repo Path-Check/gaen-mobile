@@ -88,6 +88,9 @@ public class DiagnosisKeyFileSubmitter {
         + "] key file batches into a single submission to provideDiagnosisKeys().");
     List<File> files = new ArrayList<>();
     for (KeyFileBatch b : batches) {
+      Log.d(TAG, "Adding batch with "
+          + b.files().size()
+          + " files");
       files.addAll(b.files());
       logBatch(b);
     }
