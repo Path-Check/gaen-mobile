@@ -112,7 +112,7 @@ const MainTabNavigator: FunctionComponent = () => {
           name={Stacks.SymptomHistory}
           component={SymptomHistoryStack}
           options={{
-            tabBarLabel: t("navigation.symptom_log"),
+            tabBarLabel: t("navigation.symptom_history"),
             tabBarIcon: HeartbeatIcon,
           }}
         />

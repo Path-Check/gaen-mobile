@@ -212,13 +212,12 @@
     "unchecked_checkbox": "Unchecked checkbox"
   },
   "navigation": {
-    "connect": "Connect",
     "exposure": "Exposure",
     "exposure_history": "Exposure History",
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_log": "Symptom Log"
+    "symptom_history": "Symptom History"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
