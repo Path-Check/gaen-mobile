@@ -21,7 +21,7 @@ export const useFlashMessageOptions = (): FlashMessageVariants => {
     titleStyle: { ...Typography.header.x40, color: Colors.neutral.black },
     animationDuration: 100,
     floating: true,
-    position: { top: insets.top + Spacing.small },
+    position: { top: insets.top },
   }
 
   const successFlashMessageOptions: FlashMessageOptions = {
