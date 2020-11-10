@@ -6,6 +6,7 @@ export default Factory.define<Configuration>(() => ({
   appPackageName: "appPackageName",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
+  displayCallEmergencyServices: false,
   displayCovidData: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,

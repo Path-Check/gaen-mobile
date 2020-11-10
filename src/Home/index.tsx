@@ -32,9 +32,10 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const {
-    displaySelfAssessment,
-    displayCovidData,
     displayCallbackForm,
+    displayCallEmergencyServices,
+    displayCovidData,
+    displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
   } = useConfigurationContext()
@@ -54,9 +55,11 @@ const Home: FunctionComponent = () => {
         <ShareLink />
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
-        <View style={style.callEmergencyServicesContainer}>
-          <CallEmergencyServices phoneNumber={emergencyPhoneNumber} />
-        </View>
+        {displayCallEmergencyServices && (
+          <View style={style.callEmergencyServicesContainer}>
+            <CallEmergencyServices phoneNumber={emergencyPhoneNumber} />
+          </View>
+        )}
       </ScrollView>
     </>
   )
