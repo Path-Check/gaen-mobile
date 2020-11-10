@@ -9,6 +9,7 @@ export interface Configuration {
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
+  displayCallEmergencyServices: boolean
   displayCovidData: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
@@ -34,6 +35,7 @@ const initialState: Configuration = {
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
+  displayCallEmergencyServices: false,
   displayCovidData: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
@@ -72,6 +74,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
+  const displayCallEmergencyServices =
+    env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
@@ -101,6 +105,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appPackageName,
         displayAcceptTermsOfService,
         displayCallbackForm,
+        displayCallEmergencyServices,
         displayCovidData,
         displaySymptomHistory,
         displaySelfAssessment,
