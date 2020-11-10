@@ -191,9 +191,8 @@ const style = StyleSheet.create({
   headerText: {
     ...Typography.header.x60,
     ...Typography.style.bold,
-    marginTop: Spacing.medium,
+    marginVertical: Spacing.medium,
     marginHorizontal: Spacing.medium,
-    marginBottom: Spacing.medium,
   },
   section: {
     backgroundColor: Colors.background.primaryLight,
