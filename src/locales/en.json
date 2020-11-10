@@ -184,7 +184,7 @@
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test result code?",
     "if_you_have_a_code": "Report your result to help keep your community safe.",
-    "location_info_body": "{{applicationName}} requires Exposure Notifications, Bluetooth, and Location permissions to know when and where you have been exposed to COVID-19. You can authorize this in Settings.",
+    "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
     "location_info_subheader": "{{applicationName}} never accesses your location data and your device is never tracked.",
     "not_feeling_well": "Not feeling well?",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
