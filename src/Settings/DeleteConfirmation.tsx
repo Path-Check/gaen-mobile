@@ -20,6 +20,10 @@ const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { resetOnboarding } = useOnboardingContext()
   const { deleteAllEntries } = useSymptomHistoryContext()
+  const {
+    successFlashMessageOptions,
+    errorFlashMessageOptions,
+  } = Affordances.useFlashMessageOptions()
 
   const { t } = useTranslation()
   const handleOnPressDeleteAllData = async () => {
@@ -28,12 +32,12 @@ const DeleteConfirmation: FunctionComponent = () => {
       resetOnboarding()
       showMessage({
         message: t("settings.data_deleted"),
-        ...Affordances.successFlashMessageOptions,
+        ...successFlashMessageOptions,
       })
     } else {
       showMessage({
         message: t("settings.errors.deleting_data"),
-        ...Affordances.errorFlashMessageOptions,
+        ...errorFlashMessageOptions,
       })
     }
   }

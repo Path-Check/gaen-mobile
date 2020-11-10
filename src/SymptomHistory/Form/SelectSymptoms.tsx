@@ -46,6 +46,7 @@ const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
 }) => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
+  const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
 
   const { updateEntry } = useSymptomHistoryContext()
 
@@ -78,7 +79,7 @@ const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
     } else {
       showMessage({
         message: t("symptom_history.errors.updating_symptoms"),
-        ...Affordances.successFlashMessageOptions,
+        ...successFlashMessageOptions,
       })
     }
   }
@@ -86,7 +87,7 @@ const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
   const showSuccessMessage = () => {
     showMessage({
       message: t("common.success"),
-      ...Affordances.successFlashMessageOptions,
+      ...successFlashMessageOptions,
     })
   }
 

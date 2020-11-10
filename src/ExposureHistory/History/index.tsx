@@ -41,6 +41,10 @@ const History: FunctionComponent<HistoryProps> = ({
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { checkForNewExposures } = useExposureContext()
+  const {
+    successFlashMessageOptions,
+    errorFlashMessageOptions,
+  } = Affordances.useFlashMessageOptions()
 
   const [checkingForExposures, setCheckingForExposures] = useState<boolean>(
     false,
@@ -56,21 +60,21 @@ const History: FunctionComponent<HistoryProps> = ({
     if (checkResult.kind === "success") {
       showMessage({
         message: t("common.success"),
-        ...Affordances.successFlashMessageOptions,
+        ...successFlashMessageOptions,
       })
     } else {
       switch (checkResult.error) {
         case "ExceededCheckRateLimit": {
           showMessage({
             message: t("common.success"),
-            ...Affordances.successFlashMessageOptions,
+            ...successFlashMessageOptions,
           })
           break
         }
         default: {
           showMessage({
             message: t("common.something_went_wrong"),
-            ...Affordances.errorFlashMessageOptions,
+            ...errorFlashMessageOptions,
           })
         }
       }
