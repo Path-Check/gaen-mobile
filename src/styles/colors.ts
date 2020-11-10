@@ -57,6 +57,7 @@ type Accent =
   | "danger25"
   | "danger75"
   | "danger100"
+  | "danger150"
   | "success10"
   | "success25"
   | "success50"
@@ -69,6 +70,7 @@ export const accent: Record<Accent, string> = {
   danger25: "#ffe0e0",
   danger75: "#ff7d7d",
   danger100: "#ff5656",
+  danger150: "#c23838",
   success10: "#f2fcf4",
   success25: "#deffe4",
   success50: "#5bd9a2",

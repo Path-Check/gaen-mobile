@@ -48,10 +48,6 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
     actionText: t("exposure_scanning_status.fix_this"),
   }
 
-  const determineConfig = () => {
-    return exposureDetectionStatus ? enabledConfig : disabledConfig
-  }
-
   const {
     statusBackgroundColor,
     statusBorderColor,
@@ -59,7 +55,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
     statusIconFill,
     statusText,
     actionText,
-  } = determineConfig()
+  } = exposureDetectionStatus ? enabledConfig : disabledConfig
 
   const statusContainerStyle = {
     ...style.statusContainer,

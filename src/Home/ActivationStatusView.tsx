@@ -28,6 +28,7 @@ type Content = {
 
 interface ActivationStatusProps {
   headerText: string
+  subheaderText?: string
   isActive: boolean
   infoAction: () => void
   fixAction: () => void
@@ -36,6 +37,7 @@ interface ActivationStatusProps {
 
 const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
   headerText,
+  subheaderText,
   isActive,
   infoAction,
   fixAction,
@@ -65,8 +67,6 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     chevron: Icons.ChevronRight,
   }
 
-  const content = isActive ? activeContent : inactiveContent
-
   const {
     backgroundColor,
     borderColor,
@@ -76,7 +76,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     onPress,
     accessibilityLabel,
     chevron,
-  } = content
+  } = isActive ? activeContent : inactiveContent
 
   const outerContainerStyle = {
     ...style.outerContainer,
@@ -99,7 +99,10 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     >
       <View style={style.topContainer}>
         <View style={style.topTextContainer}>
-          <Text style={style.systemServiceText}>{headerText}</Text>
+          <Text style={style.headerText}>{headerText}</Text>
+          {subheaderText && (
+            <Text style={style.subheaderText}>{subheaderText}</Text>
+          )}
           <View style={statusTextContainerStyle}>
             <Text style={style.statusText}>{bodyText}</Text>
           </View>
@@ -137,13 +140,18 @@ const style = StyleSheet.create({
   },
   topTextContainer: {
     marginTop: Spacing.xxSmall,
-    borderColor: Colors.neutral.shade10,
+    maxWidth: 240,
   },
-  systemServiceText: {
+  headerText: {
     ...Typography.header.x40,
     color: Colors.neutral.black,
     lineHeight: Typography.lineHeight.x30,
     marginBottom: Spacing.xSmall,
+  },
+  subheaderText: {
+    ...Typography.header.x10,
+    color: Colors.neutral.black,
+    marginBottom: Spacing.small,
   },
   statusTextContainer: {
     alignSelf: "flex-start",
