@@ -297,7 +297,8 @@
     "location": "Location",
     "protect_privacy": "How we protect your privacy",
     "select_language": "Select Language",
-    "select_symptoms": "Select Symptoms"
+    "select_symptoms": "Select Symptoms",
+    "settings": "Settings"
   },
   "self_assessment": {
     "age_range": {

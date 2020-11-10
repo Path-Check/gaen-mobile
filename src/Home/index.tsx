@@ -151,6 +151,7 @@ const SymptomHistory: FunctionComponent = () => {
   const { t } = useTranslation()
 
   const handleOnPressSymptomHistory = () => {
+    ;<Text style={style.headerText}>{t("screen_titles.home")}</Text>
     navigation.navigate(HomeStackScreens.EnterSymptoms)
   }
 
