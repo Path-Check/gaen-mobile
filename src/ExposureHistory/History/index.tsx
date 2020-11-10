@@ -120,6 +120,7 @@ const History: FunctionComponent<HistoryProps> = ({
       <TouchableOpacity
         onPress={handleOnPressCheckForExposures}
         style={style.button}
+        disabled={checkingForExposures}
         testID="check-for-exposures-button"
       >
         <Text style={style.buttonText}>
