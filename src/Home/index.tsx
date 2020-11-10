@@ -48,10 +48,10 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatusCard />
-        <ShareLink />
         {displayCovidData && <CovidDataCard />}
         {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
+        <ShareLink />
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
         <View style={style.callEmergencyServicesContainer}>
