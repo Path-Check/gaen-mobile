@@ -45,20 +45,42 @@ const App: FunctionComponent = () => {
   }, [])
 
   const initializeMatomo = () => {
-    const displayAnalytics = env.DISPLAY_ANALYTICS
     const matomoUrl = env.MATOMO_URL
     const matomoSiteId = parseInt(env.MATOMO_SITE_ID)
-    if (displayAnalytics) {
+
+    const isValid = (siteUrl: string, siteId: number) => {
+      return siteUrl && !isNaN(siteId)
+    }
+
+    if (isValid(matomoUrl, matomoSiteId)) {
       Matomo.initialize(matomoUrl, matomoSiteId)
+
+      return Matomo
+    } else {
+      throw new Error("Must provide valid url and site id for Matomo SDK")
     }
   }
 
-  initializeMatomo()
+  const initializeProductAnalytics = () => {
+    const displayAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
-  const productAnalyticsClient: ProductAnalyticsClient = {
-    trackEvent: Matomo.trackEvent,
-    trackView: Matomo.trackView,
+    const nullClient = {
+      trackEvent: async (_category: string, _action: string) => {},
+      trackView: async (_routes: string[]) => {},
+    }
+
+    if (displayAnalytics) {
+      const client = initializeMatomo()
+      return {
+        trackEvent: client.trackEvent,
+        trackView: client.trackView,
+      }
+    } else {
+      return nullClient
+    }
   }
+
+  const productAnalyticsClient: ProductAnalyticsClient = initializeProductAnalytics()
 
   return (
     <>
@@ -68,20 +90,20 @@ const App: FunctionComponent = () => {
             <OnboardingProvider
               userHasCompletedOnboarding={isOnboardingComplete}
             >
-              <PermissionsProvider>
-                <ProductAnalyticsProvider
-                  productAnalyticsClient={productAnalyticsClient}
-                >
-                  <ExposureProvider>
+              <ProductAnalyticsProvider
+                productAnalyticsClient={productAnalyticsClient}
+              >
+                <ExposureProvider>
+                  <PermissionsProvider>
                     <SymptomHistoryProvider>
                       <CovidDataContextProvider>
                         <MainNavigator />
                         <FlashMessage />
                       </CovidDataContextProvider>
                     </SymptomHistoryProvider>
-                  </ExposureProvider>
-                </ProductAnalyticsProvider>
-              </PermissionsProvider>
+                  </PermissionsProvider>
+                </ExposureProvider>
+              </ProductAnalyticsProvider>
             </OnboardingProvider>
           </ConfigurationProvider>
         </ErrorBoundary>

@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreens } from "../navigation"
 import { usePermissionsContext } from "../Device/PermissionsContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 import { Text } from "../components"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
@@ -18,6 +19,7 @@ import { Colors, Spacing, Typography, Buttons } from "../styles"
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
+  const { enableProductAnalytics } = useConfigurationContext()
   const navigation = useNavigation()
 
   const handleOnPressEnable = async () => {
@@ -25,11 +27,19 @@ const NotificationsPermissions: FunctionComponent = () => {
       notification.request()
       resolve()
     })
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    if (enableProductAnalytics) {
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    } else {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    }
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    if (enableProductAnalytics) {
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    } else {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    }
   }
 
   return (

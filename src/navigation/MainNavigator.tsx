@@ -26,7 +26,6 @@ import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "../AffectedUserFlow/"
-import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import ExposureDetectionStatusScreen from "../Home/ExposureDetectionStatus/Screen"
 import BluetoothInfo from "../Home/BluetoothInfo"
@@ -154,13 +153,6 @@ const MainNavigator: FunctionComponent = () => {
         <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
           {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
         </Stack.Screen>
-        <Stack.Screen
-          name={ModalStackScreens.AnonymizedDataConsent}
-          component={AnonymizedDataConsentScreen}
-          options={{
-            headerShown: true,
-          }}
-        />
         <Stack.Screen
           name={ModalStackScreens.SelfAssessmentFromExposureDetails}
         >

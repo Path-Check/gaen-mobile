@@ -45,7 +45,7 @@ const Settings: FunctionComponent = () => {
   const { applicationName, versionInfo } = useApplicationInfo()
   const {
     healthAuthorityName,
-    healthAuthoritySupportsAnalytics,
+    enableProductAnalytics,
   } = useConfigurationContext()
 
   const languageName = getLocalNames()[localeCode]
@@ -124,12 +124,6 @@ const Settings: FunctionComponent = () => {
             onPress={selectLanguage.onPress}
             icon={selectLanguage.icon}
           />
-          {healthAuthoritySupportsAnalytics && (
-            <>
-              <ListItemSeparator />
-              <ShareAnonymizedDataListItem />
-            </>
-          )}
         </View>
         <View style={style.section}>
           {middleListItems.map((params, idx) => {
@@ -149,6 +143,12 @@ const Settings: FunctionComponent = () => {
             onPress={deleteMyData.onPress}
             icon={deleteMyData.icon}
           />
+          {enableProductAnalytics && (
+            <>
+              <ListItemSeparator />
+              <ShareAnonymizedDataListItem />
+            </>
+          )}
         </View>
         {showDebugMenu && (
           <View style={style.section}>

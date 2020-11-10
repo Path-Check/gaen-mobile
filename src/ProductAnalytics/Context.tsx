@@ -7,7 +7,6 @@ import React, {
 } from "react"
 
 import { StorageUtils } from "../utils"
-import { useConfigurationContext } from "../ConfigurationContext"
 
 export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
@@ -45,7 +44,6 @@ const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
 const ProductAnalyticsProvider: FunctionComponent<{
   productAnalyticsClient: ProductAnalyticsClient
 }> = ({ productAnalyticsClient, children }) => {
-  const { healthAuthoritySupportsAnalytics } = useConfigurationContext()
   const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
     boolean
   >(false)
@@ -57,10 +55,7 @@ const ProductAnalyticsProvider: FunctionComponent<{
     }
 
     checkAnalyticsConsent()
-  }, [userConsentedToAnalytics])
-
-  const supportAnalyticsTracking =
-    healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+  }, [])
 
   const trackEvent = async (
     category: EventCategory,
@@ -68,13 +63,13 @@ const ProductAnalyticsProvider: FunctionComponent<{
     name?: string,
     value?: number,
   ): Promise<void> => {
-    if (supportAnalyticsTracking) {
+    if (userConsentedToAnalytics) {
       productAnalyticsClient.trackEvent(category, action, name, value)
     }
   }
 
   const trackScreenView = async (screen: string): Promise<void> => {
-    if (supportAnalyticsTracking) {
+    if (userConsentedToAnalytics) {
       productAnalyticsClient.trackView([screen])
     }
   }
