@@ -187,13 +187,6 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
             {t("export.publish_consent_title_bluetooth")}
           </Text>
           <Text style={style.bodyText}>{t("export.consent_body_0")}</Text>
-          <Text style={style.subheaderText}>
-            {t("export.consent_subheader_1")}
-          </Text>
-          <Text style={style.bodyText}>{t("export.consent_body_1")}</Text>
-          <Text style={style.subheaderText}>
-            {t("export.consent_subheader_2")}
-          </Text>
           <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
         </View>
         <TouchableOpacity
@@ -243,12 +236,6 @@ const createStyle = (insets: EdgeInsets) => {
     header: {
       ...Typography.header.x60,
       paddingBottom: Spacing.medium,
-    },
-    subheaderText: {
-      ...Typography.body.x30,
-      ...Typography.style.medium,
-      color: Colors.neutral.black,
-      marginBottom: Spacing.xxSmall,
     },
     bodyText: {
       ...Typography.body.x30,
