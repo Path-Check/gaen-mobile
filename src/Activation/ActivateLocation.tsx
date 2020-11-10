@@ -9,6 +9,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
 import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
@@ -16,7 +17,8 @@ import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 
-import { Colors, Spacing, Typography, Buttons } from "../styles"
+import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
+import { Icons } from "../assets"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -24,12 +26,12 @@ const ActivateLocation: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
 
-  useEffect(() => {
-    const isLocationOn = locationPermissions === "RequiredOn"
-    if (isLocationOn) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-    }
-  })
+  // useEffect(() => {
+  //   const isLocationOn = locationPermissions === "RequiredOn"
+  //   if (isLocationOn) {
+  //     navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+  //   }
+  // })
 
   const handleOnPressMaybeLater = () => {
     navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
@@ -65,10 +67,15 @@ const ActivateLocation: FunctionComponent = () => {
       >
         <View style={style.content}>
           <Text style={style.header}>{t("onboarding.location_header")}</Text>
-          <Text style={style.subheader}>
-            {t("onboarding.location_subheader")}
+          <View style={style.subheaderContainer}>
+            <SvgXml xml={Icons.AlertCircle} fill={Colors.accent.danger150} />
+            <Text style={style.subheaderText}>
+              {t("onboarding.location_subheader", { applicationName })}
+            </Text>
+          </View>
+          <Text style={style.body}>
+            {t("onboarding.location_body", { applicationName })}
           </Text>
-          <Text style={style.body}>{t("onboarding.location_body")}</Text>
         </View>
         <TouchableOpacity
           onPress={handleOnPressAllowLocationAccess}
@@ -108,9 +115,21 @@ const style = StyleSheet.create({
     ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
-  subheader: {
-    ...Typography.header.x20,
+  subheaderContainer: {
+    paddingVertical: Spacing.small,
+    paddingHorizontal: Spacing.large,
+    borderRadius: Outlines.baseBorderRadius,
+    borderColor: Colors.accent.danger150,
+    borderWidth: Outlines.thin,
     marginBottom: Spacing.xSmall,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  subheaderText: {
+    ...Typography.header.x20,
+    color: Colors.accent.danger150,
+    paddingLeft: Spacing.medium,
+    paddingRight: Spacing.large,
   },
   body: {
     ...Typography.body.x30,

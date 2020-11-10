@@ -16,7 +16,7 @@ export const nextScreenFromBluetooth = ({
   if (Platform.OS === "ios") {
     return ActivationStackScreens.NotificationPermissions
   } else {
-    return isLocationRequiredAndOff
+    return isLocationRequiredAndOff || true
       ? ActivationStackScreens.ActivateLocation
       : ActivationStackScreens.AnonymizedDataConsent
   }
