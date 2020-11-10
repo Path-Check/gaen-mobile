@@ -116,6 +116,7 @@ const Settings: FunctionComponent = () => {
     <>
       <StatusBar backgroundColor={Colors.secondary.shade10} />
       <ScrollView style={style.container} alwaysBounceVertical={false}>
+        <Text style={style.headerText}>{t("screen_titles.settings")}</Text>
         <View style={style.section}>
           <ListItem
             label={selectLanguage.label}
@@ -186,6 +187,12 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.secondary.shade10,
+  },
+  headerText: {
+    ...Typography.header.x60,
+    ...Typography.style.bold,
+    marginVertical: Spacing.medium,
+    marginHorizontal: Spacing.medium,
   },
   section: {
     backgroundColor: Colors.background.primaryLight,
