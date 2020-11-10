@@ -26,12 +26,12 @@ const ActivateLocation: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
 
-  // useEffect(() => {
-  //   const isLocationOn = locationPermissions === "RequiredOn"
-  //   if (isLocationOn) {
-  //     navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-  //   }
-  // })
+  useEffect(() => {
+    const isLocationOn = locationPermissions === "RequiredOn"
+    if (isLocationOn) {
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    }
+  })
 
   const handleOnPressMaybeLater = () => {
     navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
@@ -73,7 +73,7 @@ const ActivateLocation: FunctionComponent = () => {
               {t("onboarding.location_subheader", { applicationName })}
             </Text>
           </View>
-          <Text style={style.body}>
+          <Text style={style.bodyText}>
             {t("onboarding.location_body", { applicationName })}
           </Text>
         </View>
@@ -121,7 +121,7 @@ const style = StyleSheet.create({
     borderRadius: Outlines.baseBorderRadius,
     borderColor: Colors.accent.danger150,
     borderWidth: Outlines.thin,
-    marginBottom: Spacing.xSmall,
+    marginBottom: Spacing.small,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -131,7 +131,7 @@ const style = StyleSheet.create({
     paddingLeft: Spacing.medium,
     paddingRight: Spacing.large,
   },
-  body: {
+  bodyText: {
     ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },
