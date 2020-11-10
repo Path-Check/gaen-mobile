@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
+import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { Icons } from "../assets"
 import {
@@ -39,6 +40,8 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const insets = useSafeAreaInsets()
+  const style = createStyle(insets)
 
   const handleOnPressBack = () => {
     if (handleOnDismiss) {
@@ -69,22 +72,25 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
   )
 }
 
-const style = StyleSheet.create({
-  container: {
-    width: "100%",
-    paddingHorizontal: Spacing.large,
-    paddingTop: Spacing.massive,
-    paddingBottom: Spacing.small,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: Colors.secondary.shade10,
-    borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.neutral.shade10,
-  },
-  headerText: {
-    ...Typography.header.x50,
-    color: Colors.text.primary,
-    maxWidth: Layout.screenWidth * 0.75,
-  },
-})
+const createStyle = (insets: EdgeInsets) => {
+  /* eslint-disable react-native/no-unused-styles */
+  return StyleSheet.create({
+    container: {
+      width: "100%",
+      paddingHorizontal: Spacing.large,
+      paddingTop: insets.top + Spacing.large,
+      paddingBottom: Spacing.small,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: Colors.secondary.shade10,
+      borderBottomWidth: Outlines.hairline,
+      borderColor: Colors.neutral.shade10,
+    },
+    headerText: {
+      ...Typography.header.x50,
+      color: Colors.text.primary,
+      maxWidth: Layout.screenWidth * 0.75,
+    },
+  })
+}
