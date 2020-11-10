@@ -61,6 +61,8 @@ export const thin: Record<Thin, ViewStyle> = {
 type Outlined = "base" | "thin"
 const outlinedBase: ViewStyle = {
   ...primaryBase,
+  elevation: 0,
+  shadowOpacity: 0,
   backgroundColor: Colors.transparent.invisible,
   borderColor: Colors.primary.shade100,
   borderWidth: Outlines.hairline,
