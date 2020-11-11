@@ -54,7 +54,7 @@ class MockENExposureInfo: ENExposureInfo {
 class MockENExposureDaySummary: ENExposureDaySummary {
   
   override var date: Date {
-    return halloween
+    return XCTestCase.halloween
   }
   
   var daySummaryHandler: (() -> ENExposureSummaryItem)?
@@ -288,7 +288,7 @@ class UNUserNotificationCenterMock: UserNotificationCenter {
 
 // MARK: == UNIT TESTS ==
 
-class ExposureManagerTests: XCTestCase {
+class ExposureManagerUnitTests: XCTestCase {
   
   func testCreatesSharedInstance() {
     ExposureManager.createSharedInstance()
@@ -634,51 +634,6 @@ class ExposureManagerTests: XCTestCase {
     }
   }
   
-  func testRemainingFileCapacityReset() {
-    let expectation = self.expectation(description: "remainingFileCapacity is updated")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .success:
-        XCTAssertEqual(exposureManager.btSecureStorage.remainingDailyFileProcessingCapacity, 14)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
-  func testUpdateLastExposureDetectionDateV1() {
-    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
-    
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    
-    XCTAssertNil(exposureManager.btSecureStorage.lastExposureCheckDate)
-    exposureManager.detectExposuresV1 { _ in
-      XCTAssertNotNil(exposureManager.btSecureStorage.lastExposureCheckDate)
-      expectation.fulfill()
-    }
-    wait(for: [expectation], timeout: 50)
-  }
-  
-  func testRemainingFileCapacityNoResetForDetectionError() {
-    let expectation = self.expectation(description: "remainingFileCapacity is not updated")
-    
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1,
-                                                 forceExposureDetectionError: true)
-    
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .failure:
-        XCTAssertEqual(exposureManager.btSecureStorage.userState.remainingDailyFileProcessingCapacity, Constants.dailyFileProcessingCapacity)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
   func testDebugFetchDiagnosisKeys() {
     let debugAction = DebugAction.fetchDiagnosisKeys
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
@@ -778,51 +733,6 @@ class ExposureManagerTests: XCTestCase {
     wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
   }
   
-  func testDetectExposuresKeysDownloadingError() {
-    let expectation = self.expectation(description: "the exposure detection call returns an error")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1,
-                                                 forceDownloadKeyError: true)
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .failure(let error):
-        XCTAssertEqual(error.localizedDescription, GenericError.unknown.localizedDescription)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
-  func testDetectExposuresUnpackagingError() {
-    let expectation = self.expectation(description: "the exposure detection call returns an error")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1,
-                                                 forceKeyUnpackingError: true)
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .failure(let error):
-        XCTAssertEqual(error.localizedDescription, GenericError.unknown.localizedDescription)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    
-    wait(for: [expectation], timeout: 5)
-  }
-  
-  func testDetectExposuresGetExposureInfoError() {
-    let expectation = self.expectation(description: "the exposure detection call returns an error")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1, forceGetExposureInfoError: true)
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .failure(let error):
-        XCTAssertEqual(error.localizedDescription, GenericError.unknown.localizedDescription)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
   func testExposureSummaryScoringMatchedKey0() {
     let enExposureSummary = MockENExposureDetectionSummary()
     enExposureSummary.matchedKeyCountHandler = {
@@ -891,34 +801,6 @@ class ExposureManagerTests: XCTestCase {
     XCTAssertTrue(enExposureSummary.isAboveScoreThreshold(with: configuration))
   }
   
-  func testDetectExposuresSuccessScoreBelow() {
-    let storeExposureExpectation = self.expectation(description: "The exposure does not get stored")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .success(let files):
-        XCTAssertEqual(files, 1)
-        storeExposureExpectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [storeExposureExpectation], timeout:1)
-  }
-  
-  func testDetectExposuresSuccessScoreAbove() {
-    let expectation = self.expectation(description: "1 exposure is detected")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    exposureManager.detectExposuresV1 { (result) in
-      switch result {
-      case .success(let files):
-        XCTAssertEqual(files, 1)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
   func testRegisterBackgroundTask() {
     let registerExpectation = self.expectation(description: "A background task with the given identifier is registered")
     let bgSchedulerMock = BGTaskSchedulerMock()
@@ -959,170 +841,5 @@ class ExposureManagerTests: XCTestCase {
     }
     wait(for: [expectation], timeout: 5)
   }
-  
-  // MARK: == DETECTION EXPOSURE V2 TESTS ==
-  
-  @available(iOS 13.7, *)
-  func testDetectExposuresV2AggregateDetectError() {
-    let expectation = self.expectation(description: "the exposure detection call returns an error")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2,
-                                                 forceExposureDetectionError: true)
-    exposureManager.detectExposuresV2 { (result) in
-      switch result {
-      case .failure(let error):
-        XCTAssertEqual(error.localizedDescription, GenericError.unknown.localizedDescription)
-        expectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testUpdateLastExposureDetectionDateV2() {
-    let expectation = self.expectation(description: "lastExposureCheckDate is updated")
-    
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2)
-    
-    XCTAssertNil(exposureManager.btSecureStorage.lastExposureCheckDate)
-    
-    exposureManager.detectExposuresV2 { _ in
-      XCTAssertNotNil(exposureManager.btSecureStorage.lastExposureCheckDate)
-      expectation.fulfill()
-    }
-    wait(for: [expectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testDetectExposuresSuccessPreexistingSavedExposureForDate() {
-    let storeExposureExpectation = self.expectation(description: "The exposure does not get stored")
-    
-    let userState = UserState()
-    userState.exposures.append(Exposure(id: "3",
-                                        date: halloween.posixRepresentation))
-    
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
-    
-    (exposureManager.btSecureStorage as! BTSecureStorageMock).storeExposuresHandler = { exposures in
-      XCTAssertEqual(exposures.count, 0)
-      storeExposureExpectation.fulfill()
-    }
-    
-    exposureManager.detectExposuresV2 { _ in }
-    
-    wait(for: [storeExposureExpectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testDetectExposuresSuccessNoPreexistingSavedExposureForDate() {
-    let storeExposureExpectation = self.expectation(description: "The exposure is stored")
-    let userState = UserState()
-    userState.exposures.append(Exposure(id: "3",
-                                        date: Date().posixRepresentation))
-    
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
-    (exposureManager.btSecureStorage as! BTSecureStorageMock).storeExposuresHandler = { exposures in
-      XCTAssertEqual(exposures.count, 1)
-      storeExposureExpectation.fulfill()
-    }
-    
-    exposureManager.detectExposuresV2 { _ in }
-    
-    wait(for: [storeExposureExpectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testValidDailySummariesConfiguration() {
-    let dict: [String: Any] = ["DailySummariesConfig": ["attenuationDurationThresholds": [40,53,60],
-                                                        "attenuationBucketWeights": [1,1,0.5,0],
-                                                        "reportTypeWeights": [1,0,0,0],
-                                                        "reportTypeWhenMissing": 1,
-                                                        "infectiousnessWeights": [1,1],
-                                                        "infectiousnessWhenDaysSinceOnsetMissing": 1,
-                                                        "daysSinceOnsetToInfectiousness": [[-2,1],
-                                                                                           [-1,1],
-                                                                                           [0,1],
-                                                                                           [1,1],
-                                                                                           [2,1],
-                                                                                           [3,1],
-                                                                                           [4,1],
-                                                                                           [5,1],
-                                                                                           [6,1],
-                                                                                           [7,1],
-                                                                                           [8,1],
-                                                                                           [9,1],
-                                                                                           [10,1],
-                                                                                           [11,1],
-                                                                                           [12,1],
-                                                                                           [13,1],
-                                                                                           [14,1]]],
-                               "triggerThresholdWeightedDuration": 15]
-    let jsonData = try! JSONSerialization.data(withJSONObject: dict)
-    let config = DailySummariesConfiguration.create(from: jsonData)!
-    XCTAssertEqual(config.daysSinceOnsetToInfectiousness[NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown)], 1)
-  }
-  
-  @available(iOS 13.7, *)
-  func testDetectExposuresV2SuccessScoreBelow() {
-    let storeExposureExpectation = self.expectation(description: "The exposure does not gets stored")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2,
-                                                 forceRiskScore: .belowThreshold)
-    exposureManager.detectExposuresV2 { (result) in
-      switch result {
-      case .success(let files):
-        XCTAssertEqual(files, 1)
-        storeExposureExpectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [storeExposureExpectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testDetectExposuresV2SuccessScoreAbove() {
-    let storeExposureExpectation = self.expectation(description: "The exposure gets stored")
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2,
-                                                 forceRiskScore: .aboveThreshold)
-    exposureManager.detectExposuresV2 { (result) in
-      switch result {
-      case .success(let files):
-        XCTAssertEqual(files, 1)
-        storeExposureExpectation.fulfill()
-      default: XCTFail()
-      }
-    }
-    wait(for: [storeExposureExpectation], timeout: 5)
-  }
-  
-  @available(iOS 13.7, *)
-  func testGetExposureConfigurationV2FallbackToDefault() {
-    let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
-    }
-    apiClientMock.downloadRequestHander = { (request, requestType) in
-      return Result<DailySummariesConfiguration>.failure(GenericError.unknown)
-    }
-    let exposureManager = defaultExposureManager(enAPIVersion: .v2,
-                                                 forceDownloadConfigurationError: true)
-    do {
-      let config = try await(exposureManager.getExposureConfigurationV2())
-      XCTAssertEqual(config, DailySummariesConfiguration.placeholder)
-    } catch {
-      XCTFail()
-    }
-  }
-}
 
-var halloween: Date {
-  var components = DateComponents()
-  components.year = 2019
-  components.month = 10
-  components.day = 31
-  let date = Calendar.current.date(from: components)
-  return date!
 }
-
-var startOfDay: Date {
-  return Calendar.current.startOfDay(for: Date())
-}
-
