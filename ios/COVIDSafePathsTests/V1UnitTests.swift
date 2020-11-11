@@ -9,6 +9,9 @@ import XCTest
 
 class V1UnitTests: XCTestCase {
 
+  // When `detectExposuresV1` is called
+  // and the operation completes successfuly
+  // remainingFileCapacity is updated
   func testRemainingFileCapacityReset() {
     let expectation = self.expectation(description: "remainingFileCapacity is updated")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
@@ -24,6 +27,9 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 5)
   }
 
+  // When `detectExposuresV1` is called
+  // and the operation completes successfuly
+  // lastExposureCheckDate is updated
   func testUpdateLastExposureDetectionDateV1() {
     let expectation = self.expectation(description: "lastExposureCheckDate is updated")
 
@@ -37,6 +43,9 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 50)
   }
 
+  // When `detectExposuresV1` is called
+  // and the operation does not complete successfuly
+  // lastExposureCheckDate IS NOT updated
   func testRemainingFileCapacityNoResetForDetectionError() {
     let expectation = self.expectation(description: "remainingFileCapacity is not updated")
 
@@ -54,6 +63,9 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 5)
   }
 
+  // When `detectExposuresV1` is called
+  // and the request to download the key server's index file fails
+  // the operation returns an error
   func testDetectExposuresKeysDownloadingError() {
     let expectation = self.expectation(description: "the exposure detection call returns an error")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1,
@@ -69,6 +81,9 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 5)
   }
 
+  // When `detectExposuresV1` is called
+  // and an error occurs attempting to unpack key archives
+  // the operation returns an error
   func testDetectExposuresUnpackagingError() {
     let expectation = self.expectation(description: "the exposure detection call returns an error")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1,
@@ -85,6 +100,9 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 5)
   }
 
+  // When `detectExposuresV1` is called
+  // and the call to getExposureInfo returns an error
+  // the operation returns an error
   func testDetectExposuresGetExposureInfoError() {
     let expectation = self.expectation(description: "the exposure detection call returns an error")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1, forceGetExposureInfoError: true)
@@ -99,6 +117,10 @@ class V1UnitTests: XCTestCase {
     wait(for: [expectation], timeout: 5)
   }
 
+  // When `detectExposuresV1` is called
+  // and an exposure is detected
+  // and the new exposure does not meet the scoring threshold
+  // the new exposure is NOT stored
   func testDetectExposuresSuccessScoreBelow() {
     let storeExposureExpectation = self.expectation(description: "The exposure does not get stored")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
@@ -113,6 +135,10 @@ class V1UnitTests: XCTestCase {
     wait(for: [storeExposureExpectation], timeout:1)
   }
 
+  // When `detectExposuresV1` is called
+  // and an exposure is detected
+  // and the new exposure meets the scoring threshold
+  // the new exposure is stored
   func testDetectExposuresSuccessScoreAbove() {
     let expectation = self.expectation(description: "1 exposure is detected")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
