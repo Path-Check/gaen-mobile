@@ -179,7 +179,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       [
         { text: t("common.cancel"), style: "cancel" },
         {
-          text: t("common.continue"),
+          text: t("common.confirm"),
           onPress: () => navigation.navigate(HomeStackScreens.Home),
           style: "destructive",
         },
