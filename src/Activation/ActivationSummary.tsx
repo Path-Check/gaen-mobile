@@ -103,6 +103,7 @@ const ActivationSummary: FunctionComponent = () => {
     <ScrollView
       style={style.container}
       contentContainerStyle={style.contentContainer}
+      alwaysBounceVertical={false}
     >
       <View style={style.innerContainer}>
         <View style={style.topContainer}>
