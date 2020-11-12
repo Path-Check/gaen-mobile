@@ -16,7 +16,6 @@
     "success_header": "You're in the queue"
   },
   "common": {
-    "select_language": "Select language",
     "back": "Back",
     "cancel": "Cancel",
     "close": "Close",
@@ -34,6 +33,7 @@
     "off": "OFF",
     "on": "ON",
     "save": "Save",
+    "select_language": "Select language",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -291,6 +291,18 @@
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network.",
     "you_must_be": "You must be {{minimumAge}} or older to use {{applicationName}}. Are you over {{minimumAge}}?"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "I Understand and Consent",
+    "not_sharing_anonymized_data": "Not sharing anonymized data",
+    "privacy_policy": "Privacy Policy",
+    "share_anonymized_data": "Share Anonymized Data",
+    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening questions with the {{healthAuthorityName}}",
+    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
+    "share_data_para_2": "This data contains no personally-identifying information.",
+    "sharing_anonymized_data": "Sharing anonymized data",
+    "stop_sharing_data": "Stop Sharing Data",
+    "you_are_sharing_data": "You are sharing anonymized data"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Exposure History",
@@ -396,18 +408,6 @@
       "weakened_immune_system": "Weakened immune system or taking medications that may cause immune suppression"
     }
   },
-  "product_analytics": {
-    "not_sharing_anonymized_data": "Not sharing anonymized data",
-    "share_anonymized_data": "Share Anonymized Data",
-    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening questions with the {{healthAuthorityName}}",
-    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
-    "share_data_para_2": "This data contains no personally-identifying information.",
-    "sharing_anonymized_data": "Sharing anonymized data",
-    "privacy_policy": "Privacy Policy",
-    "stop_sharing_data": "Stop Sharing Data",
-    "you_are_sharing_data": "You are sharing anonymized data",
-    "i_understand_and_consent": "I Understand and Consent"
-  },
   "settings": {
     "data_deleted": "Data deleted",
     "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, the app will delete the Symptom History data that is stored on your phone.",
@@ -417,9 +417,9 @@
     "errors": {
       "deleting_data": "Sorry, we could not delete your data"
     },
+    "not_sharing_anonymized_data": "Not sharing anonymized data",
     "share_anonymized_data": "Share anonymized data",
-    "sharing_anonymized_data": "Sharing anonymized data",
-    "not_sharing_anonymized_data": "Not sharing anonymized data"
+    "sharing_anonymized_data": "Sharing anonymized data"
   },
   "symptom_history": {
     "did_not_feel_well": "You did not feel well",

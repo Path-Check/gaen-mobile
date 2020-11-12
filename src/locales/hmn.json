@@ -14,6 +14,7 @@
     "more": "Ntxiv",
     "next": "Tom ntej",
     "no_thanks": "Kav liam",
+    "select_language": "Xaiv Koj Yam Lus",
     "settings": "Qhib Mus Kho",
     "skip": "Hla",
     "something_went_wrong": "Dabtsi puas lawm",
@@ -114,8 +115,6 @@
     "call_emergency_services": "Hu mus rau Kev Pab Cuam Xwm Ceev",
     "fix": "Mus kho teeb meem nrog {{technology}}",
     "get_more_info": "Xa paub ntxiv txog {{technology}}",
-    "location_info_body_1": "Qhov qhia tawm thaum mus raug neeg mob siv Bluetooth los mus ntsuas seb lwm lub twj puas nyob sib ze. Txhua lub xov tooj uas lub hlwb khiav Andriod 6.0 thiab siab dua, yog xav siv Bluetooth los ntsuas, ces lub twj li location yuav tsum muab taws rau txhua lub app, tsis yog lub app uas muaj qhov qhia xov xwm thaum mus raug neeg mob xwb.",
-    "location_info_subheader_1": "Vim li cas kuv yuav tsum taws kuv li location?",
     "proximity_tracing_info_body_1": "Yog tias cov xov tooj uas muaj lub app nyob hauv thiab muab taws, muaj Bluetooth, thiab nyob sib ze rau ib lub sijhawm twg, ces yuav cuv cia tias tau mus raug nyob rau hauv koj lub xov tooj.",
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_info_subheader_1": "Proximity Tracing ua haujlwm li cas?",
@@ -192,6 +191,10 @@
     "terms_header_title": "Kev cai siv",
     "welcome_image_label": "Daim duab qhia txog cov neeg looj lub npog ntsej muag, sib txuas sawvdaws nyob hauv ib pab pawg network."
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Kuv nkag siab thiab tso cai",
+    "privacy_policy": "Kev Cai Txog Kev Ceev Ntiag Tug"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Keeb Kwm Mus Raug",
@@ -200,8 +203,5 @@
     "location": "Location",
     "protect_privacy": "Peb tiv thaiv koj ntaub ntawv li cas",
     "select_language": "Xaiv Koj Yam Lus"
-  },
-  "settings": {
-    "i_understand_and_consent": "Kuv nkag siab thiab tso cai"
   }
 }

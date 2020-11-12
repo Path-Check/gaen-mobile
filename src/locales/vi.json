@@ -177,8 +177,6 @@
     "get_more_info": "Nhận thêm thông tin về {{technology}}",
     "have_a_positive_test": "Bạn có mã kết quả xét nghiệm dương tính?",
     "if_you_have_a_code": "Báo cáo kết quả của bạn để giúp đảm bảo an toàn cho cộng đồng của bạn.",
-    "location_info_body_1": "Công nghệ Thông Báo Tiếp Xúc sử dụng chức năng quét Bluetooth để biết được các thiết bị nào đang ở gần nhau. Trên tất cả các điện thoại chạy Android 6.0 trở lên, để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập định vị thiết bị đối với tất cả các ứng dụng, không chỉ các ứng dụng được thiết kế với Hệ Thống Thông Báo Tiếp Xúc.",
-    "location_info_subheader_1": "Tại sao tôi cần phải bật định vị?",
     "not_feeling_well": "Bạn cảm thấy không khỏe?",
     "proximity_tracing_info_body_1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật Bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
@@ -206,7 +204,6 @@
     "unchecked_checkbox": "Hộp kiểm đã bỏ chọn"
   },
   "navigation": {
-    "connect": "Kết nối",
     "exposure": "Tiếp xúc",
     "exposure_history": "Lịch Sử Tiếp Xúc",
     "home": "Bảng điều khiển",
@@ -280,6 +277,16 @@
     "welcome_image_label": "Hình minh họa những người đeo khẩu trang, được kết nối như những nút (node) trong một mạng.",
     "you_must_be": "Bạn phải được {{minimumAge}} tuổi trở lên để sử dụng {{applicationName}}. Bạn trên {{minimumAge}}"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Tôi Hiểu và Đồng Ý",
+    "not_sharing_anonymized_data": "Không chia sẻ dữ liệu ẩn danh",
+    "privacy_policy": "Chính Sách về Quyền Riêng Tư",
+    "share_anonymized_data": "Chia Sẻ Dữ Liệu Ẩn Danh",
+    "share_anonymized_data_disclaimer": "Bằng việc tiếp tục, bạn đồng ý chia sẻ các câu trả lời ẩn danh đối với các câu hỏi tầm soát với {{healthAuthorityName}}",
+    "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh",
+    "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu",
+    "you_are_sharing_data": "Bạn đang chia sẻ dữ liệu ẩn danh"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Lịch Sử Tiếp Xúc",
@@ -291,7 +298,8 @@
     "location": "Định vị",
     "protect_privacy": "Chúng tôi bảo vệ quyền riêng tư của bạn như thế nào",
     "select_language": "Chọn Ngôn Ngữ",
-    "select_symptoms": "Chọn Các Triệu Chứng"
+    "select_symptoms": "Chọn Các Triệu Chứng",
+    "settings": "Thiết lập"
   },
   "self_assessment": {
     "age_range": {
@@ -393,16 +401,9 @@
     "errors": {
       "deleting_data": "Rất tiếc, chúng tôi không thể xóa dữ liệu của bạn"
     },
-    "here": "ở đây",
-    "i_understand_and_consent": "Tôi Hiểu và Đồng Ý",
     "not_sharing_anonymized_data": "Không chia sẻ dữ liệu ẩn danh",
-    "please_view_privacy_policy": "Vui lòng xem chính sách về quyền riêng tư của họ",
     "share_anonymized_data": "Chia Sẻ Dữ Liệu Ẩn Danh",
-    "share_anonymized_data_disclaimer": "Bằng việc tiếp tục, bạn đồng ý chia sẻ các câu trả lời ẩn danh đối với các câu hỏi tầm soát với {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Dữ liệu ẩn danh của bạn giúp Ủy Ban {{healthAuthorityName}} phân tích, theo dõi, và kiềm chế sự lây lan của COVID-19. Dữ liệu của bạn sẽ được tổng hợp với dữ liệu của những người dùng khác khi họ chọn chia sẻ.\n\n Dữ liệu của bạn chứa các câu trả lời khảo sát và mã zip của bạn, nhưng không chứa thông tin bổ sung hay thông tin nhận dạng cá nhân.\n\n {{healthAuthorityName}} sẽ lưu giữ dữ liệu ẩn danh của bạn trong một khoảng thời gian cụ thể.",
-    "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh",
-    "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu",
-    "you_are_sharing_data": "Bạn đang chia sẻ dữ liệu ẩn danh"
+    "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh"
   },
   "symptom_history": {
     "did_not_feel_well": "Bạn cảm thấy không khỏe",

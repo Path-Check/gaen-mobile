@@ -10,10 +10,12 @@
     "close": "閉じる",
     "continue": "継続する",
     "done": "完成です",
+    "learn_more": "学ぶ",
     "maybe_later": "あとで",
     "more": "もっと",
     "next": "次へ進む",
     "no_thanks": "結構です",
+    "select_language": "言語を選択する",
     "settings": "設定を開く",
     "skip": "スキップ",
     "something_went_wrong": "問題が発生しました",
@@ -29,6 +31,7 @@
   "export": {
     "code_input_body_bluetooth": "確認コードを入力してください",
     "code_input_button_cancel": "キャンセル",
+    "code_input_placeholder": "タイプコード",
     "code_input_title_bluetooth": "診断を確認する",
     "complete_body_bluetooth": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
     "complete_title": "コミュニティを安全に守るためへのご協力ありがとう！",
@@ -62,6 +65,7 @@
     "start_header_bluetooth": "ウイルスの蔓延を封じ込め、コミュニティ内の他のユーザーを保護する活動にご協力ください"
   },
   "exposure_history": {
+    "check_for_exposures": " 実行",
     "exposure_detail": {
       "6ft_apart": "6フィート間隔を取る",
       "ha_guidance_header": "私は何をすべきか？",
@@ -97,6 +101,9 @@
     "why_did_i_get_an_en": "接触通知を受け取ったのはなぜですか？",
     "why_did_i_get_an_en_para": "近くにいた誰かが後でCOVID-19の陽性テストを受け取り、他の人に通知することを選択すると、接触の通知を受け取ります。"
   },
+  "exposure_scanning_status": {
+    "learn_more": "学ぶ"
+  },
   "home": {
     "bluetooth_info_body": "お使いの携帯電話は、Bluetooth低エネルギーを使用して近接して時間を過ごす他の携帯電話を検出します。これにより、アプリをデバイスで開いていなくても、アプリは毎日のログインを匿名で記録できます。",
     "bluetooth": {
@@ -117,12 +124,13 @@
     "call_emergency_services": "緊急サービスに電話する",
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
-    "location_info_body_1": "露出通知テクノロジーはBluetoothスキャンを使用して、どのデバイスが互いに近くにあるかを判断します。 Android 6.0以降を実行しているすべてのスマートフォンでBluetoothスキャンを使用するには、露出通知システムで構築されたアプリだけでなく、すべてのアプリでデバイスの場所の設定をオンにする必要があります。",
-    "location_info_subheader_1": "位置情報を有効にする必要があるのはなぜですか?",
+    "have_a_positive_test": "陽性のテスト結果コードがありますか？",
+    "if_you_have_a_code": "コミュニティを安全に保つためにテストを送信してください。",
     "proximity_tracing_info_body_1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
-    "proximity_tracing_info_subheader_2": "データは安全ですか?"
+    "proximity_tracing_info_subheader_2": "データは安全ですか?",
+    "report_result": "結果を送信する"
   },
   "label": {
     "check": "チェックマーク",
@@ -198,16 +206,18 @@
     "terms_header_title": "利用規約",
     "welcome_image_label": "ネットワーク内のノードのように接続されたマスクを使用した人物のイラスト。"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "私は理解して同意します",
+    "privacy_policy": "個人情報保護方針"
+  },
   "screen_titles": {
     "bluetooth": "ブルートゥース",
     "exposure_history": "接触履歴",
     "home": "ホーム",
+    "how_the_app_works": "アプリの仕組み",
     "legal": "リーガル",
     "location": "ロケーション",
     "protect_privacy": "プライバシーを保護する方法",
     "select_language": "言語を選択する"
-  },
-  "settings": {
-    "i_understand_and_consent": "私は理解して同意します"
   }
 }

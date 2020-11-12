@@ -24,6 +24,9 @@
   "onboarding": {
     "privacy_policy": "Política de privacidad"
   },
+  "product_analytics": {
+    "privacy_policy": "Política de privacidad"
+  },
   "screen_titles": {
     "home": "Inicio",
     "legal": "Legal"
