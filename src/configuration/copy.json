@@ -1,14 +1,14 @@
 {
   "welcome_message": {
-    "en": "",
-    "es_PR": ""
+    "en": ""
   },
   "about": {
-    "en": "",
-    "es_PR": ""
+    "en": ""
   },
   "legal": {
-    "en": "",
-    "es_PR": ""
+    "en": ""
+  },
+  "callback_success": {
+    "en": ""
   }
 }
