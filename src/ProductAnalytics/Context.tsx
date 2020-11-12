@@ -10,7 +10,7 @@ import { StorageUtils } from "../utils"
 
 export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
-  updateUserConsent: (consent: boolean) => Promise<void>
+  updateUserConsent: (userConsented: boolean) => Promise<void>
   trackEvent: (
     category: EventCategory,
     action: string,
@@ -73,9 +73,21 @@ const ProductAnalyticsProvider: FunctionComponent<{
       productAnalyticsClient.trackView([screen])
     }
   }
-  const updateUserConsent = async (consent: boolean) => {
-    await StorageUtils.setAnalyticsConsent(consent)
-    setUserConsentedToAnalytics(consent)
+
+  const updateUserConsent = async (userConsented: boolean) => {
+    const trackConsented = async () => {
+      const isOnboardingComplete = await StorageUtils.getIsOnboardingComplete()
+      const eventName = isOnboardingComplete
+        ? "settings_consented_to_analytics"
+        : "onboarding_consented_to_analytics"
+      if (userConsented) {
+        productAnalyticsClient.trackEvent("product_analytics", eventName)
+      }
+    }
+
+    trackConsented()
+    StorageUtils.setAnalyticsConsent(userConsented)
+    setUserConsentedToAnalytics(userConsented)
   }
 
   return (
