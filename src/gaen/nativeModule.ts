@@ -19,6 +19,7 @@ export const subscribeToExposureEvents = (
   const ExposureEvents = new NativeEventEmitter(
     NativeModules.ExposureEventEmitter,
   )
+
   return ExposureEvents.addListener(
     "onExposureRecordUpdated",
     (rawExposure: string) => {
