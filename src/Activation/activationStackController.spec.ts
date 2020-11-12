@@ -18,8 +18,8 @@ describe("nextScreenFromExposureNotifications", () => {
       jest.resetModules()
     })
 
-    describe("when the bluetooth is off", () => {
-      it("returns the bluetooth screen", () => {
+    describe("when Bluetooth is off", () => {
+      it("returns the Bluetooth screen", () => {
         expect(
           nextScreenFromExposureNotifications({
             isLocationRequiredAndOff: true,
@@ -54,8 +54,8 @@ describe("nextScreenFromExposureNotifications", () => {
       jest.resetModules()
     })
 
-    describe("when the bluetooth is off", () => {
-      it("returns the bluetooth screen", () => {
+    describe("when Bluetooth is off", () => {
+      it("returns Bluetooth screen", () => {
         expect(
           nextScreenFromExposureNotifications({
             isLocationRequiredAndOff: true,
@@ -65,7 +65,7 @@ describe("nextScreenFromExposureNotifications", () => {
       })
     })
 
-    describe("when the bluetooth is on", () => {
+    describe("when Bluetooth is on", () => {
       describe("when the location is required and off", () => {
         it("returns the activate location screen", () => {
           expect(
@@ -78,13 +78,13 @@ describe("nextScreenFromExposureNotifications", () => {
       })
 
       describe("when location is not required or on", () => {
-        it("returns the anonymized data consent screen", () => {
+        it("returns the activation summary", () => {
           expect(
             nextScreenFromExposureNotifications({
               isLocationRequiredAndOff: false,
               isBluetoothOn: true,
             }),
-          ).toEqual(ActivationStackScreens.AnonymizedDataConsent)
+          ).toEqual(ActivationStackScreens.ActivationSummary)
         })
       })
     })
@@ -138,12 +138,12 @@ describe("nextScreenFromBluetooth", () => {
     })
 
     describe("when location is not required or on", () => {
-      it("returns the anonymized data consent screen", () => {
+      it("returns the activation summary screen", () => {
         expect(
           nextScreenFromBluetooth({
             isLocationRequiredAndOff: false,
           }),
-        ).toEqual(ActivationStackScreens.AnonymizedDataConsent)
+        ).toEqual(ActivationStackScreens.ActivationSummary)
       })
     })
   })

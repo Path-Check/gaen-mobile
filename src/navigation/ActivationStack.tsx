@@ -67,7 +67,7 @@ const ActivationStack: FunctionComponent = () => {
     }
     baseActivationSteps.unshift(acceptTermsOfService)
   }
-
+  ActivationSummary
   if (!isBluetoothOn) {
     const activateBluetooth: ActivationStep = {
       screenName: ActivationStackScreens.ActivateBluetooth,
@@ -92,12 +92,12 @@ const ActivationStack: FunctionComponent = () => {
     default: activationStepsIOS,
   })
 
-  if (enableProductAnalytics) {
+  if (enableProductAnalytics || true) {
     const anonymizedDataConsent: ActivationStep = {
       screenName: ActivationStackScreens.AnonymizedDataConsent,
       component: ProductAnalyticsConsentForm,
     }
-    activationSteps.push(anonymizedDataConsent)
+    activationSteps.unshift(anonymizedDataConsent)
   }
 
   const activationSummary: ActivationStep = {
