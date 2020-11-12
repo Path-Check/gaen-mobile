@@ -32,7 +32,7 @@
 		B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */; };
 		B584BED8255C7CE700990F1B /* V2UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BED7255C7CE700990F1B /* V2UnitTests.swift */; };
 		B584BEDB255C7CEA00990F1B /* V1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BED3255C7CD300990F1B /* V1UnitTests.swift */; };
-		B584BF2B255C903200990F1B /* ExposureConfigurationUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BF2A255C903200990F1B /* ExposureConfigurationUnitTests.swift */; };
+		B584BF2B255C903200990F1B /* DailySummariesConfigurationUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */; };
 		B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */; };
 		B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */; };
 		B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B596C0712488127D00943B79 /* ENPermissionsModule.m */; };
@@ -240,7 +240,7 @@
 		B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		B584BED3255C7CD300990F1B /* V1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V1UnitTests.swift; sourceTree = "<group>"; };
 		B584BED7255C7CE700990F1B /* V2UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2UnitTests.swift; sourceTree = "<group>"; };
-		B584BF2A255C903200990F1B /* ExposureConfigurationUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureConfigurationUnitTests.swift; sourceTree = "<group>"; };
+		B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummariesConfigurationUnitTests.swift; sourceTree = "<group>"; };
 		B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomLogEntry.swift; sourceTree = "<group>"; };
 		B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymptomLogEntryModule.m; sourceTree = "<group>"; };
 		B596C0712488127D00943B79 /* ENPermissionsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ENPermissionsModule.m; sourceTree = "<group>"; };
@@ -577,7 +577,7 @@
 		B584BF27255C88CF00990F1B /* Exposure Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				B584BF2A255C903200990F1B /* ExposureConfigurationUnitTests.swift */,
+				B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */,
 			);
 			name = "Exposure Configuration";
 			sourceTree = "<group>";
@@ -1073,7 +1073,7 @@
 				B584BEDB255C7CEA00990F1B /* V1UnitTests.swift in Sources */,
 				B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */,
 				A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */,
-				B584BF2B255C903200990F1B /* ExposureConfigurationUnitTests.swift in Sources */,
+				B584BF2B255C903200990F1B /* DailySummariesConfigurationUnitTests.swift in Sources */,
 				A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */,
 				B54FAEFF2536102100F09344 /* XCTestCase+Extensions.swift in Sources */,
 				B584BED8255C7CE700990F1B /* V2UnitTests.swift in Sources */,
