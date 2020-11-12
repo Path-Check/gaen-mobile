@@ -102,6 +102,8 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <Text
         allowFontScaling={false}
+        numberOfLines={1}
+        ellipsizeMode="middle"
         style={{
           ...Typography.style.normal,
           fontSize: Typography.size.x15,
