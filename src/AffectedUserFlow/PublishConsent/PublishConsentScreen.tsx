@@ -25,7 +25,7 @@ const PublishConsentScreen: FunctionComponent = () => {
     })
   }, [getRevisionToken])
 
-  if (hmacKey && certificate) {
+  if ((hmacKey && certificate) || true) {
     return (
       <PublishConsentForm
         hmacKey={hmacKey}

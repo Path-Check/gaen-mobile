@@ -25,7 +25,7 @@ const primaryBase: ViewStyle = {
   ...base,
   ...heightBase,
   ...Outlines.lightShadow,
-  borderRadius: Outlines.borderRadiusMax,
+  borderRadius: Outlines.borderRadiusLarge,
   backgroundColor: Colors.primary.shade100,
   maxWidth: Layout.screenWidth * 0.95,
 }
