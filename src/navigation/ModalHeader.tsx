@@ -53,7 +53,11 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
 
   return (
     <View style={style.container}>
-      <Text numberOfLines={10} style={style.headerText}>
+      <Text
+        numberOfLines={10}
+        style={style.headerText}
+        accessible={headerTitle !== ""}
+      >
         {headerTitle}
       </Text>
       <TouchableOpacity
