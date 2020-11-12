@@ -7,10 +7,10 @@ import XCTest
 
 @testable import BT
 
+@available(iOS 13.7, *)
 class DailySummariesConfigurationUnitTests: XCTestCase {
 
   // JSON can be deserialized into a DailySummariesConfiguration
-  @available(iOS 13.7, *)
   func testValidDailySummariesConfiguration() {
     let dict: [String: Any] = ["DailySummariesConfig": ["attenuationDurationThresholds": [40,53,60],
                                                         "attenuationBucketWeights": [1,1,0.5,0],
