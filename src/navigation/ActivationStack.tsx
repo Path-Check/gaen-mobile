@@ -58,7 +58,7 @@ const ActivationStack: FunctionComponent = () => {
     }
     baseActivationSteps.unshift(acceptTermsOfService)
   }
-  ActivationSummary
+
   if (!isBluetoothOn) {
     const activateBluetooth: ActivationStep = {
       screenName: ActivationStackScreens.ActivateBluetooth,
