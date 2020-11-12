@@ -97,7 +97,7 @@
       "verification_code_used": "Verification code has already been used"
     },
     "person_and_health_expert": "A person talking to a health expert",
-    "publish_consent_title_bluetooth": "Anonymously share your positive diagnosis",
+    "publish_consent_title_bluetooth": "Notify others in your community",
     "publish_keys": {
       "errors": {
         "description": "The operation could not be completed. {{message}}",
