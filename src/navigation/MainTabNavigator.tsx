@@ -102,13 +102,14 @@ const MainTabNavigator: FunctionComponent = () => {
     return (
       <Text
         allowFontScaling={false}
-        numberOfLines={1}
+        numberOfLines={2}
         ellipsizeMode="middle"
         style={{
           ...Typography.style.normal,
           fontSize: Typography.size.x15,
           color: color,
           textAlign: "center",
+          lineHeight: Typography.lineHeight.x5,
         }}
       >
         {label}
@@ -143,16 +144,17 @@ const MainTabNavigator: FunctionComponent = () => {
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      {displaySymptomHistory && (
-        <Tab.Screen
-          name={Stacks.SymptomHistory}
-          component={SymptomHistoryStack}
-          options={{
-            tabBarLabel: applyTabBarLabel(t("navigation.symptom_history")),
-            tabBarIcon: HeartbeatIcon,
-          }}
-        />
-      )}
+      {displaySymptomHistory ||
+        (true && (
+          <Tab.Screen
+            name={Stacks.SymptomHistory}
+            component={SymptomHistoryStack}
+            options={{
+              tabBarLabel: applyTabBarLabel(t("navigation.symptom_history")),
+              tabBarIcon: HeartbeatIcon,
+            }}
+          />
+        ))}
       <Tab.Screen
         name={Stacks.Settings}
         component={SettingsStack}

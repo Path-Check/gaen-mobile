@@ -214,11 +214,11 @@
   },
   "navigation": {
     "exposure": "Exposure",
-    "exposure_history": "Exposures",
+    "exposure_history": "Exposure History",
     "home": "Dashboard",
     "more_info": "More Info",
     "settings": "Settings",
-    "symptom_history": "My Symptoms"
+    "symptom_history": "Symptom History"
   },
   "onboarding": {
     "activation_header_title": "App Setup",
@@ -288,7 +288,7 @@
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
-    "exposure_history": "Exposures",
+    "exposure_history": "Exposure History",
     "exposure_notifications": "Exposure Notifications",
     "exposure_scanning": "Exposure Detection",
     "home": "Dashboard",
@@ -431,7 +431,7 @@
       "you_did_not_feel_well": "You did not feel well, symptoms included: {{symptomList}}",
       "you_felt_well": "You felt well"
     },
-    "symptom_history": "My Symptoms",
+    "symptom_history": "Symptom History",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
   },
   "symptom": {
