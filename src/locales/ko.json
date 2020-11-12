@@ -10,6 +10,7 @@
     "firstname": "이름",
     "lastname": "성",
     "phone_number_required": "전화 번호 (필수)",
+    "request_a_call": "이동경로 조사 담당자로부터 전화 요청",
     "success_body": "이동경로 추적 담당자들은 귀하와 지역사회를 안전하게 지키기 위해 열심히 노력하고 있습니다. {{healthAuthorityName}}가 귀하의 전화 회신 요청을 받았습니다. 전문가가 24시간 이내에 귀하에게 연락을 드릴 것입니다.",
     "success_got_it": "알겠습니다.",
     "success_header": "귀하는 대기중입니다."
@@ -17,25 +18,49 @@
   "common": {
     "back": "뒤로 가기",
     "close": "닫기",
+    "close_screen": "화면 닫기",
     "continue": "계속",
     "done": "완료",
+    "edit": "수정",
+    "learn_more": "배우다",
     "maybe_later": "나중에",
     "more": "더 많은",
     "next": "다음",
+    "no": "아니요",
     "no_thanks": "아니오 괜찮습니다.",
+    "off": "꺼짐",
+    "on": "켜짐",
     "save": "저장",
+    "select_language": "언어 선택",
     "settings": "설정 열기",
     "skip": "건너 뛰기",
     "something_went_wrong": "문제가 발생했습니다.",
     "start": "시작",
     "submit": "제출",
-    "success": "성공"
+    "success": "성공",
+    "yes": "예"
   },
   "covid_data": {
+    "apologies_data_unavailable": "죄송합니다. 코로나 데이터를 사용할 수 없습니다.",
+    "cases_today": "오늘 확진자 수",
+    "covid_coverage": "코로나 커버리지",
+    "covid_data": "코로나 데이터",
+    "daily_new_cases": "신규 확진자",
+    "deaths_today": "오늘 사망자 수",
     "down_from_last_week": "지난 주 대비 감소",
     "error_getting_data": "죄송합니다. {{location}} 대한 신규 확진자 데이터를 가져올 수 없습니다.",
+    "infection_rate": "감염률",
     "new_cases": "신규 확진자",
+    "past_7_days": "지난 7일",
+    "per_100k": "10만 당",
+    "positive_test_rate": "양성 결과 비율",
     "see_more": "더 보기",
+    "source": "출처: {{source}}",
+    "spread_of_the_virus_in": "{{locationName}}에서 바이러스 확산",
+    "total_cases": "총 확진자 수",
+    "total_deaths": "총 사망자 수",
+    "trending_down": "하락세",
+    "trending_up": "추세 분석",
     "up_from_last_week": "지난 주 대비 증가"
   },
   "errors": {
@@ -46,6 +71,7 @@
   "export": {
     "code_input_body_bluetooth": "인증 코드를 입력하십시오.",
     "code_input_button_cancel": "취소",
+    "code_input_placeholder": "유형 코드",
     "code_input_title_bluetooth": "진단을 확인하십시오.",
     "complete_body_bluetooth": "귀하는 코로나19 확산을 방지하고, 지역사회를 보호하는데 도움이됩니다.",
     "complete_title": "지역사회를 안전하게 지켜주셔서 감사합니다!",
@@ -61,6 +87,7 @@
       "invalid_code": "다른 코드로 시도하십시오.",
       "invalid_format": "잘못된 형식",
       "network_connection_error": "인터넷에 연결되지 않았습니다.",
+      "timeout_error": "요청에 오랜 시간이 걸렸습니다.",
       "unknown_code_verification_error": "다른 코드로 시도하십시오.",
       "verification_code_used": "인증 코드가 이미 사용되었습니다."
     },
@@ -74,6 +101,8 @@
         "unknown": "노출 데이터를 제출하지 못했습니다."
       },
       "no_op": {
+        "empty_exposure_keys": "휴대 전화에 발생 로그가 없습니다. 최근 데이터를 재설정 한 경우 24시간 동안 기다려주십시오. 새 인증 코드를 요청해야합니다.",
+        "empty_exposure_keys_title": "죄송합니다. 사용 가능한 로그 기록 데이터가 없습니다.",
         "no_token_for_existing_keys": "기존 데이터가 서버로 전송되었습니다. 이는 일반적으로 본 프로세스가 이 장치에서 이전에 시도되었지만 다른 애플리케이션에서 시도되었음을 의미합니다. 사용 된 인증 코드를 제공한 기관에 이를 전달할 수 있습니다. {{newKeysInserted}} 새 키가 추가되었습니다.",
         "no_token_for_existing_keys_title": "기존 키 제출 시도"
       }
@@ -81,11 +110,16 @@
     "start_header_bluetooth": "바이러스 확산을 방지하고 지역 사회를 보호하는데 도움이됩니다."
   },
   "exposure_history": {
+    "check_for_exposures": "최신 정보",
     "exposure_detail": {
+      "2m_apart": "2미터 간격",
       "6ft_apart": "6피트 간격",
+      "general_guidance": "일반 지침",
       "ha_guidance_header": "본인은 어떻게 해야합니까?",
       "header": "코로나19 확진자와 동선이 겹쳤을 수 있습니다.",
       "next_steps": "다음 단계",
+      "personalize_my_guidance": "본인 지침을 개인화하십시오.",
+      "quarantine": "격리하려면",
       "schedule_callback": "{{healthAuthorityName}} 에서 이동경로 조사 담당자의 지원을 받으려면 전화를 예약하십시오.",
       "speak_with_contact_tracer": "이동경로 조사 담당자와 대화하기",
       "wash_your_hands": "손을 씻으십시오.",
@@ -100,6 +134,7 @@
       "six_feet_apart": "6 피트 간격 유지",
       "stay_home": "아프면 집에 머무르십시오.",
       "title": "보건 지침",
+      "two_meters_apart": "2미터 간격 유지",
       "wash_your_hands": "손을 자주 씻으십시오.",
       "wear_a_mask": "마스크를 착용하십시오."
     },
@@ -117,6 +152,12 @@
     "why_did_i_get_an_en": "노출 알림을 받는 이유는 무엇입니까?",
     "why_did_i_get_an_en_para": "귀하의 주변에 코로나19 감염 확진자가 발생했을 경우, 해당 확진자가 다른사람에게 알리기를 선택하면 노출 알림을 받게 됩니다."
   },
+  "exposure_scanning_status": {
+    "fix_this": "이 문제를 해결합니다.",
+    "learn_more": "배우다",
+    "your_device_is_not": "기기에서 노출을 스캔하지 않습니다. 노출 감지를 활성화하려면 아래 문제를 해결하십시오.",
+    "your_device_is_scanning": "기기에서 노출을 스캔하고 있으며 앱을 닫더라도 계속 스캔할 수 있습니다."
+  },
   "home": {
     "bluetooth_info_body": "휴대 전화는 블루투스 저 에너지를 사용하여 가까이에 있는 다른 휴대 전화를 감지합니다. 이 경우, 휴대 전화에서 앱을 열지 않아도 앱이 매일 로그를 익명으로 기록 할 수 있습니다.",
     "bluetooth": {
@@ -127,22 +168,38 @@
       "location_disabled_error_message": "노출 알림 기술을 활성화하려면 설정 앱에서 위치 액세스를 승인하십시오.",
       "location_disabled_error_title": "설정에서 권한 부여",
       "location_header": "위치",
+      "location_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
       "proximity_tracing_header": "근접 추적",
-      "share": "앱을 공유하고 귀하와 다른 사람을 보호하십시오.",
+      "share": "{{applicationName}} 공유",
       "share_message": "본 앱 {{applicationName}}을 확인하세요, 코로나19 확산을 방지하는데 도움이 될 수 있습니다! {{appDownloadLink}}",
       "tracing_off_header": "비활성",
       "tracing_off_subheader": "블루투스 및 근접 추적을 활성화하여 노출에 대한 정보를 얻을 수 있습니다.",
       "tracing_on_header": "활성"
     },
     "call_emergency_services": "응급 서비스 호출",
+    "check_if_your_symptoms": "증상을 입력하고 건강을 유지하는 방법에 대한 권장 상황을 확인하십시오.",
+    "did_you_test_positive": "코로나19 양성 확진 판정을 받으셨습니까?",
+    "enter_symptoms": "증상 입력",
     "fix": "{{technology}}로 문제 해결",
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
-    "location_info_body_1": "노출 알림 기술은 블루투스 스캔을 사용하여 서로 가까이있는 장치를 파악합니다.  블루투스 스캔을 사용하려면 안드로이드 6.0 이상을 실행하는 모든 휴대폰은 노출 알림 시스템이 내장된 앱뿐만 아니라 모든 앱에 위치 설정을 켜야합니다.",
-    "location_info_subheader_1": "내 위치를 켜야하는 이유는 무엇입니까?",
+    "have_a_positive_test": "테스트 결과 코드가 양성입니까",
+    "if_you_have_a_code": "지역 사회를 안전하게 지키기 위해 테스트를보고하십시오",
+    "location_info_body": "Google은 Android 10 이하를 실행하는 장치에 노출 탐지 기능을 사용할 수 있도록 위치 서비스를 설정해야 합니다. 하지만 {{applicationName}}은 사용자의 위치를 추적하거나 보관하지 않습니다.",
+    "location_info_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
+    "not_feeling_well": "귀하의 컨디션이 좋지 않습니까?",
     "proximity_tracing_info_body_1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_info_subheader_1": "근접 추적은 어떻게 작동됩니까?",
-    "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?"
+    "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?",
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "노출 알림을 활성화하려면 설정 앱의 코로나19 노출 알림으로 이동하십시오.",
+      "unauthorized_error_message_ios": "노출 알림을 활성화하려면 설정 및 공유 노출 정보의 노출 알림 섹션으로 이동하여 활성 영역을 {{applicationName}}으로 설정합니다.",
+      "unauthorized_error_title": "노출 알림 활성화"
+    },
+    "report_result": "진단 보내기",
+    "request_call": "전화 요청",
+    "take_assessment": "평가 하기",
+    "to_submit_your_test": "양성 테스트 결과를 앱에 제출하려면 이동경로 조사 담당자로부터 양성 테스트 결과 코드를 받아야합니다."
   },
   "label": {
     "check": "체크 표시",
@@ -156,11 +213,12 @@
     "unchecked_checkbox": "체크되지 않은 확인란"
   },
   "navigation": {
-    "connect": "연결",
     "exposure": "노출",
     "exposure_history": "노출 이력",
     "home": "집",
-    "more_info": "더 많은 정보"
+    "more_info": "더 많은 정보",
+    "settings": "설정",
+    "symptom_history": "증상 기록"
   },
   "onboarding": {
     "activation_header_title": "앱 설정",
@@ -169,13 +227,20 @@
     "app_setup_incomplete_body": "{{applicationName}}은 코로나19에 노출 된시기와 장소를 알기 위해 근접 추적 및 블루투스 권한이 필요합니다. 설정에서 이를 승인 할 수 있습니다.",
     "app_setup_incomplete_header": "앱 설정 미완료",
     "app_setup_incomplete_location_body": "{{applicationName}}은 코로나19에 노출 된시기와 장소를 알기 위해 근접 추적, 블루투스 및 위치 권한이 필요합니다. 설정에서 이를 승인 할 수 있습니다.",
+    "bluetooth_alert_body": "블루투스 스캐닝을 사용하려면 휴대전화에 블루투스 설정이 켜져 있어야합니다.",
+    "bluetooth_alert_header": "블루투스 활성화",
+    "bluetooth_body": "블루투스 스캐닝을 사용하려면 휴대전화에 블루투스 설정이 켜져 있어야합니다.",
+    "bluetooth_header": "블루투스 활성화",
+    "bluetooth_subheader": "휴대전화의 블루투스 설정을 켜야 하는 이유는 무엇입니까?",
     "eula": "최종 사용자 법적 계약",
     "eula_agree_terms_of_use": "이용 약관을 읽고 수락했음을 동의합니다.",
+    "i_am_over": "예, 본인은 {{minimumAge}} 이상입니다.",
     "location_alert_body": "블루투스 스캔을 사용하려면 기기 위치 설정을 켜야합니다.",
     "location_alert_header": "\"{{applicationName}}\"에서 위치 액세스 활성화",
-    "location_body": "블루투스 스캔을 사용하려면 기기 위치 설정을 켜야합니다. 앱은 귀하의 위치 데이터를 사용하지 않으며, 귀하의 휴대 전화를 추적 할 수 없습니다.",
+    "location_body": "Google은 Android 10 이하를 실행하는 장치에 노출 탐지 기능을 사용할 수 있도록 위치 서비스를 설정해야 합니다. 하지만 {{applicationName}}은 사용자의 위치를 추적하거나 보관하지 않습니다.",
     "location_header": "위치 활성화",
-    "location_subheader": "휴대 전화의 위치 설정을 켜야하는 이유는 무엇입니까?",
+    "location_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
+    "no_take_me": "아니요, 이전 페이지로 돌아가겠습니다.",
     "notification_body1": "코로나19 확진자와 동선이 겹쳤을 때 알림을 받게됩니다.",
     "notification_body2": "본 앱은 블루투스 저 에너지를 사용하여이 운영되며, 사용자가 누구인지 또는 어디에 있었는지에 대한 정보를 알지 못하고 임의 코드를 보호합니다. 언제든지 설정에서 이 기능을 끌 수 있습니다.",
     "notification_header": "귀하가 코로나19에 노출되었을 수 있는 경우 알림을 받으십시오.",
@@ -217,39 +282,120 @@
     "screen4_header": "귀하가 코로나19에 노출되었을 가능성이 있는 경우 앱에서 알림을 줄 것입니다.",
     "screen4_image_label": "휴대 전화로 알림을 받는 사람",
     "terms_header_title": "이용 약관",
-    "welcome_image_label": "네트워크의 연결된 노드처럼 마스크를 착용한 사람들의 그림."
+    "verify_your_age": "나이 확인",
+    "welcome_image_label": "네트워크의 연결된 노드처럼 마스크를 착용한 사람들의 그림.",
+    "you_must_be": "{{applicationName}}을 사용하려면 {{minimumAge}} 이상이어야 합니다. {{minimumAge}} 이상이십나까?"
+  },
+  "product_analytics": {
+    "i_understand_and_consent": "본인은 이해했으며, 동의합니다.",
+    "not_sharing_anonymized_data": "익명화된 데이터를 공유하지 않음",
+    "privacy_policy": "개인정보 정책",
+    "share_anonymized_data": "익명화된 데이터 공유",
+    "share_anonymized_data_disclaimer": "진행을 통해 선별 질문에 대한 익명화된 답변을 {{healthAuthorityName}}와 공유하는데 동의합니다.",
+    "share_data_para_1": "커뮤니티가 이 앱을 사용하는 방법에 대한 익명의 집계된 데이터는 {{healthAuthorityName}}가 코로나19의 확산을  분석, 이해 및 방지하는 데 도움이됩니다.",
+    "share_data_para_2": "이 데이터에는 개인 식별 정보가 포함되어 있지 않습니다.",
+    "sharing_anonymized_data": "익명화된 데이터 공유",
+    "stop_sharing_data": "데이터 공유 중지",
+    "you_are_sharing_data": "익명화된 데이터를 공유하고 있습니다."
   },
   "screen_titles": {
     "bluetooth": "블루투스",
     "exposure_history": "노출 이력",
+    "exposure_notifications": "노출 알림",
+    "exposure_scanning": "노출 감지",
     "home": "집",
     "how_the_app_works": "어떻게 앱이 작동하나요?",
     "legal": "법률",
     "location": "위치",
     "protect_privacy": "개인 정보를 보호하는 방법",
-    "select_language": "언어 선택"
+    "select_language": "언어 선택",
+    "select_symptoms": "증상 선택",
+    "settings": "설정"
   },
   "self_assessment": {
+    "age_range": {
+      "eighteen_to_sixty_four": "18 - 64세",
+      "get_my_guidance": "본인 지침 받기",
+      "how_old_are_you": "귀하의 나이는 어떻게 되십니까?",
+      "sixty_five_and_over": "65세 이상"
+    },
+    "call_emergency_services": {
+      "call_emergencies": "{{emergencyPhoneNumber}}로 전화걸기",
+      "seek_medical_attention": "즉시 의사의 진료를 받으십시오.",
+      "urgent_medical_attention_needed": "긴급한 치료가 필요할 수 있습니다. {{emergencyPhoneNumber}}로 연락하거나 응급실로 이동하십시오."
+    },
+    "emergency_symptoms": {
+      "are_you_experiencing": "이러한 응급 증상이 있습니까?",
+      "chest_pain": "심각하고 지속적인 흉통 또는 압박",
+      "difficulty_breathing": "극한의 호흡 곤란",
+      "disorientation": "심각한 방향 감각 상실 또는 무 반응",
+      "lightheadedness": "심각하고 지속적인 현기증",
+      "select_any": "해당하는 항목을 모두 선택하십시오 (또는 없음)."
+    },
     "general_symptoms": {
-      "other": "그 외 증상"
+      "aching": "몸 전체에 통증",
+      "are_you_experiencing": "이러한 증상이 있으십니까?",
+      "cough": "새로이 나타나거나 악화된 기침 증상",
+      "difficulty_breathing": "경미한 호흡 곤란",
+      "fever_or_chills": "발열 또는 오한",
+      "loss_of_smell_taste_appetite": "지속적인 후각, 미각 또는 식욕 상실",
+      "other": "그 외 증상",
+      "select_any": "해당되는 모든 것을 고르십시요.",
+      "vomiting_or_diarrhea": "구토 또는 설사"
     },
     "guidance": {
-      "find_a_test_center_nearby": "인근 코로나19 검사소 찾기"
+      "call_your_healthcare_provider": "24시간 이내에 의료진, 임상 상담 전화 또는 원격 의료진에게 전화하십시오.",
+      "clean_hands": "손을 자주 씻으십시오.",
+      "cover_coughs": "기침과 재채기 시 입을 가리십시오.",
+      "dont_go_to_work": "직장, 학교 또는 공공 장소에 가지 마십시오.",
+      "dont_use_public_transport": "대중교통을 이용하거나 승차를 공유하지 마십시오.",
+      "drink_water": "수분 손실(탈수)을 방지하기 위해 물과 기타 투명한 음료를 많이 마시십시오.",
+      "feeling_fine": "귀하의 컨디션이 좋으시다니  다행입니다. 증상을 모니터링하고 집에 머물러야합니다.",
+      "find_a_test_center_nearby": "인근 코로나19 검사소 찾기",
+      "find_telehealth": "원격 의료 서비스 찾기",
+      "follow_cdc_guidance": "코로나19 감염 증상이 나타나면 CDC 지침을 따르십시오.",
+      "guidance": "지침사항",
+      "if_symptoms_develop": "코로나19 감염 증상이 발생하거나 컨디션이 나빠지기 시작하면 의료진, 임상 상담 전화 또는 원격 의료진에게 전화하십시오.",
+      "may_help_you_feel_better": "컨디션이 나아지는 데 도움이 되는 단계는 다음과 같습니다.",
+      "monitor_your_symptoms": "귀하의 컨디션이 좋지 않으시면 집에 머물면서 증상을 모니터링하십시오. 증상이 악화되면 의료진에게 연락한 후 집에 머무르십시오.",
+      "practice_social_distancing": "사회적 거리두기를 실천하십시오.",
+      "protect_others": "다른 사람이 아프지 않도록 보호하기 위해 다음 단계를 따르십시오.",
+      "rest": "집에 머물면서 휴식을 취하십시오.",
+      "seek_medical_care": "응급 상황이라고 판단되거나 컨디션이 나빠지면 의료 서비스를 받으십시오.",
+      "stay_6_feet_away": "다른 사람으로부터 최소 6 피트(약 2미터) 거리를 유지하고 혼잡 한 장소를 피하십시오.",
+      "stay_at_home": "의료 서비스 받는 것을 제외하고는 집에 머무르십시오.",
+      "stay_away_from_higher_risk_people": "가능하면 코로나19로 인해 중병에 걸릴 위험이 높은 사람들을 멀리하십시오.",
+      "stay_home_14_days": "14일 동안 집에 머무르십시오.",
+      "take_care_of_yourself": "자신 또는 아픈 사람을 돌보는 방법을 알아보십시오.",
+      "take_temperature": "하루에 두 번 체온을 측정하고 코로나19 증상을 관찰하십시오.",
+      "watch_for_covid_symptoms": "코로나19 증상을 살펴보십시오.",
+      "you_have_underlying_conditions": "귀하의 컨디션이 좋지 않으시다니 걱정입니다. 귀하의 증상은 코로나19와 관련이 있을 수 있습니다. 혹은 더 심각한 질병에 걸렸을 가능성이 있습니다.",
+      "your_symptoms_might_be_related": "귀하의 컨디션이 좋지 않으시다니 걱정입니다. 귀하의 증상은 코로나19와 관련이 없습니다."
     },
     "how_are_you_feeling": {
       "good": "좋습니다.",
-      "not_well": "좋지 않습니다."
+      "not_well": "좋지 않습니다.",
+      "title": "오늘은 컨디션이 어떻습니까?"
     },
     "intro": {
-      "if_this_is": "긴급상황인 경우 {{emergencyPhoneNumber}}로 전화하십시오."
+      "agree_and_start_assessment": "평가에 동의하고 시작",
+      "covid19_self_assessment": "코로나19 자체 평가",
+      "find_out_how_to_care": "코로나19 확진자와 밀접한 접촉 후 본인(또는 타인)을 돌보는 방법을 알아보십시오.",
+      "if_this_is": "긴급상황인 경우 {{emergencyPhoneNumber}}로 전화하십시오.",
+      "this_is_based_on": "이것은 CDC의 최신 지침을 기반으로 바이러스가 어떻게 확산되며, 해당 바이러스가 일으키는 질병에 대해 업데이트되는 대로 점차적으로 업데이트 될 예정입니다.",
+      "this_is_not_intended": "이것은 진단 또는 치료를 위한 것이 아닙니다.",
+      "you_are_a_resident": "귀하는 {{healthAuthorityName}}에서 지원하는 지역 거주자입니다."
     },
     "underlying_conditions": {
+      "blood_disorder": "겸상 세포 질환이나 탈라세미아 등의 혈액 장애",
+      "cerebrovascular_disease": "뇌졸중 또는 치매와 같은 뇌 혈관 질환 또는 신경학적 상태",
       "diabetes": "당뇨병",
       "do_you_have": "다음과 같은 증상이 있습니까?",
       "heart_condition": "심부전, 관상 동맥 질환 또는 심근 병증과 같은 심각한 (심장) 증상",
       "high_blood_pressure": "고혈압",
       "kidney_disease": "만성 신장 질환",
       "liver_disease": "간 질환",
+      "lung_disease": "천식, COPD, 낭포성 섬유증 또는 폐섬유화증과 같은 만성 폐질환",
       "obesity": "비만",
       "pregnancy": "임신",
       "select_all_or_none": "해당하는 항목 모두 선택 (또는 해당하는 항목 없음)",
@@ -258,16 +404,53 @@
     }
   },
   "settings": {
-    "here": "여기",
-    "i_understand_and_consent": "본인은 이해했으며, 동의합니다.",
-    "please_view_privacy_policy": "개인 정보 보호 정책을 확인하십시오.",
+    "data_deleted": "데이터가 삭제되었습니다.",
+    "delete_data_disclosure1": "아래의 \"내 데이터 삭제\" 버튼을 누르면 앱에서 휴대전화에 저장된 증상 기록 데이터가 삭제됩니다.",
+    "delete_data_disclosure2": "노출 알림을 위해 휴대전화에서 생성하거나 수집 한 데이터는 삭제되지 않습니다.\n\n기기설정에서 추가 데이터를 삭제할 수 있습니다.",
+    "delete_data_note": "참고",
+    "delete_my_data": "내 데이터 삭제",
+    "errors": {
+      "deleting_data": "죄송합니다. 귀하의 데이터를 삭제할 수 없습니다."
+    },
+    "not_sharing_anonymized_data": "익명화 된 데이터를 공유하지 않음",
     "share_anonymized_data": "익명화된 데이터 공유",
-    "share_anonymized_data_disclaimer": "계속 진행하면 {{healthAuthorityName}}의 검사 질의에 익명의 답변을 공유하는데 동의합니다.",
-    "share_anonymized_data_para": "귀하의 익명 데이터는 {{healthAuthorityName}}이 코로나19의 확산을 분석, 추적 및 방지하는데 도움이 됩니다. 데이터 공유에 동의한 다른 사용자로부터 당신의 데이터가 공개될 것입니다.\n\n데이터는 설문 조사 응답과 우편 번호를 포함하지만 추가 정보나 개인 식별 정보는 포함하지 않습니다.\n\n{{healthAuthorityName}}은 일정 기간 동안 당신의 익명 데이터를 보관할 것입니다."
+    "sharing_anonymized_data": "익명화 된 데이터 공유"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다.",
+    "errors": {
+      "updating_symptoms": "죄송합니다. 귀하의 증상을 업데이트 할 수 없습니다."
+    },
+    "felt_well": "귀하의 컨디션이 좋았습니다.",
+    "no_entry": "항목 없음",
+    "no_symptoms": "증상 없음",
+    "share_history": "증상 이력 공유",
+    "sharing": {
+      "header": "{{startDate}}에서 {{endDate}}까지의 증상 이력",
+      "no_symptoms_were_logged": "증상이 기록되지 않았습니다.",
+      "you_did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다. 다음과 같은 증상을 보였습니다: {{symptomList}}",
+      "you_felt_well": "귀하의 컨디션이 좋았습니다."
+    },
+    "symptom_history": "증상 기록",
+    "to_protect_your_privacy": "개인 정보를 보호하기 위해 항목은 장치에 저장되고 {{days}}일 후에 자동으로 삭제됩니다."
   },
   "symptom": {
+    "bluish_lips_or_face": "푸른 입술이나 얼굴",
+    "congestion_or_runny_nose": "충혈 또는 콧물",
     "cough": "기침",
     "diarrhea": "설사",
-    "other": "그 외 증상"
+    "fatigue": "피로",
+    "fever_or_chills": "발열 또는 오한",
+    "headache": "두통",
+    "inability_to_wake_or_stay_awake": "깨어 있거나 깨어있을 수 없음",
+    "muscle_or_body_aches": "근육통 또는 신체 통증",
+    "nausea_or_vomiting": "메스꺼움 또는 구토",
+    "new_confusion": "새로운 혼란증상",
+    "new_loss_of_taste_or_smell": "미각 또는 후각 상실",
+    "other": "그 외 증상",
+    "persistent_pain_or_pressure_in_the_chest": "가슴의 지속적인 통증 또는 압박",
+    "shortness_of_breath_or_difficulty_breathing": "숨가쁨 또는 호흡 곤란",
+    "sore_throat": "인후통",
+    "trouble_breathing": "호흡 곤란"
   }
 }

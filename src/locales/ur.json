@@ -134,6 +134,10 @@
     "screen4_header": "ایپ آپ کو مطلع کرے گی اگر آپ کو کوویڈ 19 کا سامنا کرنا پڑا ہے",
     "screen4_image_label": "ایک شخص اپنے فون پر اطلاع موصول کررہا ہے"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "میں سمجھتا ہوں اور رضامند ہوں",
+    "privacy_policy": "رازداری کی پالیسی"
+  },
   "screen_titles": {
     "exposure_history": "ایکسپوژر کی تاریخ",
     "legal": "قانونی"

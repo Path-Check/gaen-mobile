@@ -176,8 +176,6 @@
     "get_more_info": "الحصول على مزيد من المعلومات حول {{technology}}",
     "have_a_positive_test": "هل لديك رمز نتيجة اختبار إيجابي؟",
     "if_you_have_a_code": "أبلغ عن نتيجتك للمساعدة في الحفاظ على أمان مجتمعك.",
-    "location_info_body_1": "تستخدم تقنية اخطار التعرض مسح البلوتوث لفهم الأجهزة القريبة من بعضها البعض. على جميع الهواتف التي تعمل بنظام Android 6.0 والإصدارات الأحدث ، لاستخدام مسح البلوتوث ، يجب تشغيل إعداد موقع الجهاز لجميع التطبيقات ، وليس فقط التطبيقات التي تم إنشاؤها باستخدام نظام إشعارات التعريض.",
-    "location_info_subheader_1": "لماذا أحتاج إلى تشغيل الموقع؟",
     "not_feeling_well": "لا تشعر بخير؟",
     "proximity_tracing_info_body_1": "إذا كانت الهواتف الذكية التي تم تثبيت التطبيق عليها قيد التشغيل ، وتم تمكين البلوتوث عليها ، وكانت قريبة من بعضها البعض لفترة من الوقت ، فسيتم تسجيل لقاء على جهازك.",
     "proximity_tracing_info_body_2": "في حالة حدوث لقاء ، تظل بياناتك ومعلوماتك مجهولة. لا يخزن التطبيق أي بيانات شخصية. يتم تبادل المعرفات العشوائية فقط. يتم حذفها في غضون 14 يومًا.",
@@ -205,7 +203,6 @@
     "unchecked_checkbox": "خانة اختيار غير محددة"
   },
   "navigation": {
-    "connect": "الاتصال",
     "exposure": "التعرض",
     "exposure_history": "سجلات التعرض",
     "home": "لوحة القيادة",
@@ -277,6 +274,16 @@
     "welcome_image_label": "رسم توضيحي للأشخاص الذين يرتدون أقنعة ، ومتصلين مثل العقد في الشبكة الاتصال",
     "you_must_be": "يجب أن {{minimumAge}} أو أكبر لاستخدام {{applicationName}} . هل أنت فوق {{minimumAge}} ؟"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "أنا أفهم وأوافق",
+    "not_sharing_anonymized_data": "عدم مشاركة بيانات مجهولة المصدر",
+    "privacy_policy": "سياسة الخصوصية",
+    "share_anonymized_data": "مشاركة البيانات مجهولة المصدر",
+    "share_anonymized_data_disclaimer": "من خلال المتابعة، فإنك توافق على مشاركة إجابات مجهولة المصدر على أسئلة الفحص مع {{healthAuthorityName}}",
+    "sharing_anonymized_data": "مشاركة البيانات مجهولة المصدر",
+    "stop_sharing_data": "توقف عن مشاركة البيانات",
+    "you_are_sharing_data": "أنت تشارك بيانات مجهولة المصدر"
+  },
   "screen_titles": {
     "bluetooth": "بلوتوث",
     "exposure_history": "سجلات التعرض",
@@ -288,7 +295,8 @@
     "location": "موقع",
     "protect_privacy": "كيف نحمي خصوصيتك",
     "select_language": "اختر اللغة",
-    "select_symptoms": "حدد الأعراض"
+    "select_symptoms": "حدد الأعراض",
+    "settings": "إعدادات"
   },
   "self_assessment": {
     "age_range": {
@@ -387,16 +395,9 @@
     "errors": {
       "deleting_data": "عذرا، لم نتمكن من حذف البيانات الخاصة بك"
     },
-    "here": "هنا",
-    "i_understand_and_consent": "أنا أفهم وأوافق",
     "not_sharing_anonymized_data": "عدم مشاركة بيانات مجهولة المصدر",
-    "please_view_privacy_policy": "يرجى الاطلاع على سياسة الخصوصية الخاصة بهم",
     "share_anonymized_data": "مشاركة البيانات مجهولة المصدر",
-    "share_anonymized_data_disclaimer": "من خلال المتابعة، فإنك توافق على مشاركة إجابات مجهولة المصدر على أسئلة الفحص مع {{healthAuthorityName}}",
-    "share_anonymized_data_para": "تساعد بياناتك المجهولة لجنة {{healthAuthorityName}} تحليل وتتبع واحتواء انتشار COVID-19. سيتم تجميع بياناتك مع بيانات من مستخدمين آخرين يختارون المشاركة.\n\n تحتوي بياناتك على إجابات الاستبيان والرمز البريدي ، ولكن لا تحتوي على معلومات إضافية أو معلومات تعريف شخصية.\n\n سيحتفظ {{healthAuthorityName}} المجهولة لفترة زمنية محددة.",
-    "sharing_anonymized_data": "مشاركة البيانات مجهولة المصدر",
-    "stop_sharing_data": "توقف عن مشاركة البيانات",
-    "you_are_sharing_data": "أنت تشارك بيانات مجهولة المصدر"
+    "sharing_anonymized_data": "مشاركة البيانات مجهولة المصدر"
   },
   "symptom_history": {
     "did_not_feel_well": "لم تكن على ما يرام",

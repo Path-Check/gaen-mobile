@@ -21,6 +21,7 @@
     "next": "Kontinye",
     "no_thanks": "Non mèsi",
     "save": "Anrejistre",
+    "select_language": "Chwazi lang",
     "settings": "Louvri tablodbò",
     "skip": "Sote",
     "something_went_wrong": "Yon bagay mal pase",
@@ -111,7 +112,6 @@
     "call_emergency_services": "Sèvis Ijans yo",
     "fix": "Ranje pwoblèm ak {{technology}}",
     "get_more_info": "Jwenn plis enfòmasyon sou {{technology}}",
-    "location_info_subheader_1": "Poukisa mwen bezwen louvri lokalizasyon mwen an?",
     "proximity_tracing_info_subheader_1": "Kijan Trasaj Pwoksimite mache?",
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
@@ -125,7 +125,6 @@
     "question_icon": "Imaj pwen entèwogasyon"
   },
   "navigation": {
-    "connect": "Konekte",
     "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
     "home": "Lakay",
@@ -164,6 +163,11 @@
     "terms_header_title": "Règleman itilizasyon",
     "welcome_image_label": "Yon ilistrasyon moun ki gen mask, ki konekte tankou ne nan yon rezo."
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Mwen konprann e mwen dakò",
+    "privacy_policy": "Règleman sou enfòmasyon prive",
+    "share_anonymized_data": "Pataje Done Anonim"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Lis ekspozisyon",
@@ -187,12 +191,7 @@
     }
   },
   "settings": {
-    "here": "isit la",
-    "i_understand_and_consent": "Mwen konprann e mwen dakò",
-    "please_view_privacy_policy": "Tanpri gade politik vi prive yo",
-    "share_anonymized_data": "Pataje Done Anonim",
-    "share_anonymized_data_disclaimer": "Pa pwosedi sa, ou dakò yo pataje repons anonim pou kesyon tès depistaj ak {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Done anonim ou yo ede Otorite Swen Sante Ayiti yo analize, swiv, epi evite COVID-19 pwopaje. Done ou yo pral lye ak lòt itilizatè Chase Kowona ki chwazi pataje pa yo tou. \n\nDone ou gen repons sondaj ou yo ak kòd postal, men pa gen okenn enfòmasyon adisyonèl oswa pèsonèlman idantifyab. \n\n{{healthAuthorityName}} pral kenbe done anonim ou pou yon peryòd tan espesifik."
+    "share_anonymized_data": "Pataje Done Anonim"
   },
   "symptom": {
     "cough": "Tous",

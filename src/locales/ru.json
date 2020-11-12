@@ -24,8 +24,7 @@
     "bluetooth": {
       "all_services_on_subheader": "Уведомления об опасности включены",
       "tracing_off_header": "Уведомления об опасности отключены",
-      "tracing_off_subheader": "Включить уведомления об опасности, чтобы получать информацию о нахождении в опасных зонах",
-      "tracing_on_header": "Maruziyet Tespiti Açık"
+      "tracing_off_subheader": "Включить уведомления об опасности, чтобы получать информацию о нахождении в опасных зонах"
     },
     "call_emergency_services": "Скорая помощь"
   },
@@ -42,6 +41,9 @@
     "notification_header": "Хотите получать уведомления, если окажетесь поблизости с носителем вируса?",
     "privacy_policy": "Политика конфиденциальности",
     "terms_header_title": "Условия использования"
+  },
+  "product_analytics": {
+    "privacy_policy": "Политика конфиденциальности"
   },
   "screen_titles": {
     "home": "Главная страница",
