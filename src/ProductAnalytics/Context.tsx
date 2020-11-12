@@ -18,6 +18,7 @@ export type ProductAnalyticsContextState = {
     value?: number,
   ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
+  resetUserConsent: () => Promise<void>
 }
 
 const initialContext = {
@@ -25,6 +26,7 @@ const initialContext = {
   updateUserConsent: () => Promise.resolve(),
   trackEvent: () => Promise.resolve(),
   trackScreenView: () => Promise.resolve(),
+  resetUserConsent: () => Promise.resolve(),
 }
 
 export type EventCategory = "product_analytics" | "epi_analytics"
@@ -90,6 +92,11 @@ const ProductAnalyticsProvider: FunctionComponent<{
     setUserConsentedToAnalytics(userConsented)
   }
 
+  const resetUserConsent = async (): Promise<void> => {
+    StorageUtils.removeAnalyticsConsent()
+    setUserConsentedToAnalytics(false)
+  }
+
   return (
     <ProductAnalyticsContext.Provider
       value={{
@@ -97,6 +104,7 @@ const ProductAnalyticsProvider: FunctionComponent<{
         updateUserConsent,
         trackEvent,
         trackScreenView,
+        resetUserConsent,
       }}
     >
       {children}

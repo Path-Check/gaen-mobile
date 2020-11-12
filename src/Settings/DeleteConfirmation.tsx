@@ -10,15 +10,18 @@ import { useTranslation } from "react-i18next"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
+import * as Storage from "../utils/storage"
 
 import { Spacing, Buttons, Typography, Colors, Affordances } from "../styles"
 
 const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { resetOnboarding } = useOnboardingContext()
+  const { resetUserConsent } = useProductAnalyticsContext()
   const { deleteAllEntries } = useSymptomHistoryContext()
   const {
     successFlashMessageOptions,
@@ -30,6 +33,8 @@ const DeleteConfirmation: FunctionComponent = () => {
     const deleteLogEntriesResult = await deleteAllEntries()
     if (deleteLogEntriesResult.kind === "success") {
       resetOnboarding()
+      resetUserConsent()
+      Storage.removeAll()
       showMessage({
         message: t("settings.data_deleted"),
         ...successFlashMessageOptions,
