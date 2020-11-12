@@ -9,10 +9,11 @@ import HomeStack from "./HomeStack"
 import SymptomHistoryStack from "./SymptomHistoryStack"
 import SettingsStack from "./SettingsStack"
 import { useConfigurationContext } from "../ConfigurationContext"
-
 import { Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
-import { Colors } from "../styles"
+import { Text } from "../components"
+
+import { Colors, Typography } from "../styles"
 
 const Tab = createBottomTabNavigator()
 
@@ -79,8 +80,41 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
+  interface TabBarLabelProps {
+    focused: boolean
+    color: string
+    label: string
+  }
+
+  const applyTabBarLabel = (label: string) => {
+    const tabLabel = function (props: { focused: boolean; color: string }) {
+      return <TabBarLabel {...props} label={label} />
+    }
+    return tabLabel
+  }
+
+  const TabBarLabel: FunctionComponent<TabBarLabelProps> = ({
+    focused,
+    label,
+  }) => {
+    const color = focused ? Colors.primary.shade100 : Colors.neutral.shade100
+
+    return (
+      <Text
+        allowFontScaling={false}
+        style={{
+          ...Typography.style.normal,
+          fontSize: Typography.size.x15,
+          color: color,
+          textAlign: "center",
+        }}
+      >
+        {label}
+      </Text>
+    )
+  }
+
   const tabBarOptions = {
-    showLabel: false,
     style: {
       backgroundColor: Colors.background.primaryLight,
       borderTopWidth: 1,
@@ -95,7 +129,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.Home}
         component={HomeStack}
         options={{
-          tabBarLabel: t("navigation.home"),
+          tabBarLabel: applyTabBarLabel(t("navigation.home")),
           tabBarIcon: HomeIcon,
         }}
       />
@@ -103,7 +137,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
-          tabBarLabel: t("navigation.exposure_history"),
+          tabBarLabel: applyTabBarLabel(t("navigation.exposure_history")),
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
@@ -112,7 +146,7 @@ const MainTabNavigator: FunctionComponent = () => {
           name={Stacks.SymptomHistory}
           component={SymptomHistoryStack}
           options={{
-            tabBarLabel: t("navigation.symptom_history"),
+            tabBarLabel: applyTabBarLabel(t("navigation.symptom_history")),
             tabBarIcon: HeartbeatIcon,
           }}
         />
@@ -121,7 +155,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.Settings}
         component={SettingsStack}
         options={{
-          tabBarLabel: t("navigation.settings"),
+          tabBarLabel: applyTabBarLabel(t("navigation.settings")),
           tabBarIcon: SettingsIcon,
         }}
       />

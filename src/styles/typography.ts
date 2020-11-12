@@ -3,9 +3,19 @@ import { TextStyle } from "react-native"
 import * as Colors from "./colors"
 import * as Spacing from "./spacing"
 
-type Size = "x10" | "x20" | "x30" | "x40" | "x50" | "x60" | "x70" | "x80"
+type Size =
+  | "x10"
+  | "x15"
+  | "x20"
+  | "x30"
+  | "x40"
+  | "x50"
+  | "x60"
+  | "x70"
+  | "x80"
 export const size: Record<Size, number> = {
   x10: 10,
+  x15: 12,
   x20: 13,
   x30: 14,
   x40: 16,

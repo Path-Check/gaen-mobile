@@ -7,6 +7,7 @@ interface TextProps {
   style?: TextStyle
   testID?: string
   onPress?: () => void
+  allowFontScaling?: boolean
   children: ReactNode | string
 }
 
@@ -15,6 +16,7 @@ const Text: FunctionComponent<TextProps> = ({
   testID,
   children,
   onPress,
+  allowFontScaling = true,
 }: TextProps) => {
   const writingDirection = useLanguageDirection()
 
@@ -23,6 +25,7 @@ const Text: FunctionComponent<TextProps> = ({
       onPress={onPress}
       style={[{ writingDirection }, style]}
       testID={testID}
+      allowFontScaling={allowFontScaling}
     >
       {children}
     </RNText>
