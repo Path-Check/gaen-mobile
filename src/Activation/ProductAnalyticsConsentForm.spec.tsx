@@ -36,7 +36,7 @@ describe("ProductAnalyticsConsentForm", () => {
       await waitFor(() => {
         expect(updateUserConsent).toHaveBeenCalledWith(true)
         expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivationSummary,
+          ActivationStackScreens.ActivateExposureNotifications,
         )
       })
     })
@@ -68,7 +68,7 @@ describe("ProductAnalyticsConsentForm", () => {
       await waitFor(() => {
         expect(updateUserConsent).not.toHaveBeenCalled()
         expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivationSummary,
+          ActivationStackScreens.ActivateExposureNotifications,
         )
       })
     })

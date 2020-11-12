@@ -26,13 +26,13 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
   } = useConfigurationContext()
   const { updateUserConsent } = useProductAnalyticsContext()
 
-  const handleOnPressButton = async () => {
+  const handleOnPressYes = async () => {
     updateUserConsent(true)
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivationSummary)
+    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
   }
 
   const handleOnPressPrivacyPolicy = () => {
@@ -78,7 +78,7 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
       <View style={style.buttonsContainer}>
         <TouchableOpacity
           style={style.button}
-          onPress={handleOnPressButton}
+          onPress={handleOnPressYes}
           accessibilityLabel={buttonText}
         >
           <Text style={style.buttonText}>{buttonText}</Text>

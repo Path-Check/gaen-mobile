@@ -18,7 +18,7 @@ export const nextScreenFromBluetooth = ({
   } else {
     return isLocationRequiredAndOff
       ? ActivationStackScreens.ActivateLocation
-      : ActivationStackScreens.AnonymizedDataConsent
+      : ActivationStackScreens.ActivationSummary
   }
 }
 

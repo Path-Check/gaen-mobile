@@ -1,15 +1,8 @@
 import React, { FunctionComponent } from "react"
-import { Platform, TouchableOpacity, StyleSheet, View } from "react-native"
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-  StackNavigationOptions,
-} from "@react-navigation/stack"
-import { SvgXml } from "react-native-svg"
-import { useNavigation } from "@react-navigation/native"
-import { useTranslation } from "react-i18next"
+import { Platform } from "react-native"
+import { createStackNavigator } from "@react-navigation/stack"
 
-import { Stacks, ActivationStackScreen, ActivationStackScreens } from "./index"
+import { ActivationStackScreen, ActivationStackScreens } from "./index"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
 import ActivateLocation from "../Activation/ActivateLocation"
@@ -19,9 +12,9 @@ import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
 import { useConfigurationContext } from "../ConfigurationContext"
+import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
-import { Icons } from "../assets"
-import { Layout, Spacing, Colors, Typography } from "../styles"
+import { Headers } from "../styles"
 
 type ActivationStackParams = {
   [key in ActivationStackScreen]: undefined
@@ -30,8 +23,6 @@ type ActivationStackParams = {
 const Stack = createStackNavigator<ActivationStackParams>()
 
 const ActivationStack: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const navigation = useNavigation()
   const { locationPermissions, isBluetoothOn } = usePermissionsContext()
   const {
     displayAcceptTermsOfService,
@@ -97,7 +88,7 @@ const ActivationStack: FunctionComponent = () => {
       screenName: ActivationStackScreens.AnonymizedDataConsent,
       component: ProductAnalyticsConsentForm,
     }
-    activationSteps.push(anonymizedDataConsent)
+    activationSteps.unshift(anonymizedDataConsent)
   }
 
   const activationSummary: ActivationStep = {
@@ -106,46 +97,14 @@ const ActivationStack: FunctionComponent = () => {
   }
   activationSteps.push(activationSummary)
 
-  const CloseButton = () => {
-    const handleOnPressClose = () => {
-      navigation.navigate(Stacks.HowItWorks)
-    }
-
-    return (
-      <TouchableOpacity onPress={handleOnPressClose}>
-        <SvgXml
-          xml={Icons.Close}
-          fill={Colors.neutral.shade140}
-          style={style.closeIcon}
-          accessible
-          accessibilityLabel={t("common.close")}
-        />
-      </TouchableOpacity>
-    )
-  }
-
-  const HeaderRight: FunctionComponent = () => {
-    return (
-      <View style={style.headerRight}>
-        <CloseButton />
-      </View>
-    )
-  }
-
-  const screenOptions: StackNavigationOptions = {
-    headerShown: true,
-    headerLeft: () => null,
-    headerTitleAlign: "left",
-    headerTitle: t("onboarding.activation_header_title"),
-    headerTitleStyle: style.headerTitle,
-    gestureEnabled: false,
-    headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
-  }
-
   return (
     <Stack.Navigator
       initialRouteName={ActivationStackScreens.AcceptTermsOfService}
-      screenOptions={screenOptions}
+      screenOptions={{
+        ...Headers.headerMinimalOptions,
+        headerLeft: applyHeaderLeftBackButton(),
+        headerTitle: () => null,
+      }}
     >
       {activationSteps.map((step) => {
         return (
@@ -153,29 +112,11 @@ const ActivationStack: FunctionComponent = () => {
             name={step.screenName}
             component={step.component}
             key={`activation-screen-${step.screenName}`}
-            options={{
-              headerRight: () => HeaderRight({}),
-            }}
           />
         )
       })}
     </Stack.Navigator>
   )
 }
-
-const style = StyleSheet.create({
-  headerTitle: {
-    ...Typography.header.x30,
-    color: Colors.neutral.shade100,
-    maxWidth: Layout.halfWidth,
-  },
-  headerRight: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  closeIcon: {
-    paddingHorizontal: Spacing.large,
-  },
-})
 
 export default ActivationStack
