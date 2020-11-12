@@ -12,11 +12,12 @@ import { useNavigation } from "@react-navigation/native"
 import { useSafeAreaInsets, EdgeInsets } from "react-native-safe-area-context"
 
 import { ExposureKey } from "../../exposureKey"
-import { Text, LoadingIndicator } from "../../components"
+import { StatusBar, Text, LoadingIndicator } from "../../components"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
+  HomeStackScreens,
 } from "../../navigation"
 import { useExposureContext } from "../../ExposureContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
@@ -171,50 +172,79 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     }
   }
 
+  const handleOnPressNeverMind = () => {
+    Alert.alert(
+      t("export.consent_warning_title"),
+      t("export.consent_warning_message"),
+      [
+        { text: t("common.cancel"), style: "cancel" },
+        {
+          text: t("common.confirm"),
+          onPress: () => navigation.navigate(HomeStackScreens.Home),
+          style: "destructive",
+        },
+      ],
+    )
+  }
+
   const handleOnPressProtectPrivacy = () => {
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
   return (
-    <View style={style.outerContainer}>
-      <ScrollView
-        contentContainerStyle={style.contentContainer}
-        testID="publish-consent-form"
-        alwaysBounceVertical={false}
-      >
-        <View style={style.content}>
-          <Text style={style.header}>
-            {t("export.publish_consent_title_bluetooth")}
-          </Text>
-          <Text style={style.bodyText}>{t("export.consent_body_0")}</Text>
-          <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
-        </View>
-        <TouchableOpacity
-          style={style.button}
-          onPress={handleOnPressConfirm}
-          accessibilityLabel={t("export.consent_button_title")}
+    <>
+      <StatusBar backgroundColor={Colors.background.primaryLight} />
+      <View style={style.outerContainer}>
+        <ScrollView
+          contentContainerStyle={style.contentContainer}
+          testID="publish-consent-form"
+          alwaysBounceVertical={false}
         >
-          <Text style={style.buttonText}>
-            {t("export.consent_button_title")}
+          <View style={style.content}>
+            <Text style={style.header}>
+              {t("export.publish_consent_title_bluetooth")}
+            </Text>
+            <Text style={style.bodyText}>{t("export.consent_body_0")}</Text>
+            <Text style={style.bodyText}>{t("export.consent_body_2")}</Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              style={style.button}
+              onPress={handleOnPressConfirm}
+              accessibilityLabel={t("export.consent_button_title")}
+            >
+              <Text style={style.buttonText}>
+                {t("export.consent_button_title")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={style.buttonSecondary}
+              onPress={handleOnPressNeverMind}
+              accessibilityLabel={t("export.never_mind_button_title")}
+            >
+              <Text style={style.buttonSecondaryText}>
+                {t("export.never_mind_button_title")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+        <TouchableOpacity
+          style={style.bottomButtonContainer}
+          onPress={handleOnPressProtectPrivacy}
+        >
+          <Text style={style.bottomButtonText}>
+            {t("onboarding.protect_privacy_button")}
           </Text>
+          <SvgXml
+            xml={Icons.ChevronUp}
+            fill={Colors.primary.shade150}
+            width={Iconography.xxxSmall}
+            height={Iconography.xxxSmall}
+          />
         </TouchableOpacity>
-      </ScrollView>
-      <TouchableOpacity
-        style={style.bottomButtonContainer}
-        onPress={handleOnPressProtectPrivacy}
-      >
-        <Text style={style.bottomButtonText}>
-          {t("onboarding.protect_privacy_button")}
-        </Text>
-        <SvgXml
-          xml={Icons.ChevronUp}
-          fill={Colors.primary.shade150}
-          width={Iconography.xxxSmall}
-          height={Iconography.xxxSmall}
-        />
-      </TouchableOpacity>
-      {isLoading && <LoadingIndicator />}
-    </View>
+        {isLoading && <LoadingIndicator />}
+      </View>
+    </>
   )
 }
 
@@ -226,12 +256,15 @@ const createStyle = (insets: EdgeInsets) => {
       backgroundColor: Colors.background.primaryLight,
     },
     contentContainer: {
+      flexGrow: 1,
+      justifyContent: "space-between",
       paddingTop: Spacing.medium,
       paddingHorizontal: Spacing.large,
-      paddingBottom: Spacing.huge,
+      paddingBottom: Spacing.small,
     },
     content: {
       marginBottom: Spacing.small,
+      justifyContent: "center",
     },
     header: {
       ...Typography.header.x60,
@@ -246,6 +279,12 @@ const createStyle = (insets: EdgeInsets) => {
     },
     buttonText: {
       ...Typography.button.primary,
+    },
+    buttonSecondary: {
+      ...Buttons.secondary.base,
+    },
+    buttonSecondaryText: {
+      ...Typography.button.secondary,
     },
     bottomButtonContainer: {
       backgroundColor: Colors.secondary.shade10,

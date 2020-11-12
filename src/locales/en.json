@@ -18,8 +18,10 @@
   "common": {
     "select_language": "Select language",
     "back": "Back",
+    "cancel": "Cancel",
     "close": "Close",
     "close_screen": "Close screen",
+    "confirm": "Confirm",
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
@@ -79,8 +81,11 @@
     "consent_body_1": "If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
     "consent_body_2": "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
     "consent_button_title": "I Understand and Consent",
+    "never_mind_button_title": "Never mind",
     "consent_subheader_1": "Why should I share?",
     "consent_subheader_2": "How does it work?",
+    "consent_warning_title": "Warning!",
+    "consent_warning_message": "Continuing will void your positive test result code. If you would like to share your positive diagnosis in the future, you will first need to get a new positive test result code.",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {

@@ -57,6 +57,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
         numberOfLines={10}
         style={style.headerText}
         accessible={headerTitle !== ""}
+        allowFontScaling={false}
       >
         {headerTitle}
       </Text>
