@@ -20,7 +20,9 @@ const Stack = createStackNavigator<AffectedUserFlowStackParams>()
 const AffectedUserStack: FunctionComponent = () => {
   return (
     <AffectedUserProvider>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false, gestureEnabled: false }}
+      >
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserStart}
           component={Start}

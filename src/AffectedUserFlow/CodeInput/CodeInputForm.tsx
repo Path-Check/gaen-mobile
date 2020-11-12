@@ -68,7 +68,6 @@ const CodeInputForm: FunctionComponent = () => {
   }
 
   const handleOnPressSubmit = async () => {
-    navigation.navigate(AffectedUserFlowStackScreens.AffectedUserPublishConsent)
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     trackEvent("product_analytics", "verification_code_submitted")

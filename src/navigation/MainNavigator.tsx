@@ -149,6 +149,7 @@ const MainNavigator: FunctionComponent = () => {
         <Stack.Screen
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
+          options={{ gestureEnabled: false }}
         />
         <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
           {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
