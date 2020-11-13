@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
-import { getLocalNames } from "../locales/languages"
+import { useLocaleInfo } from "../locales/languages"
 import {
   useStatusBarEffect,
   ModalStackScreens,
@@ -48,7 +48,7 @@ const Settings: FunctionComponent = () => {
     enableProductAnalytics,
   } = useConfigurationContext()
 
-  const languageName = getLocalNames()[localeCode]
+  const { languageName } = useLocaleInfo()
   const showDebugMenu = env.STAGING === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {

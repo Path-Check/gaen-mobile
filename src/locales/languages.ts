@@ -1,10 +1,11 @@
-import "./all-dayjs-locales"
-
-import dayjs from "dayjs"
-import i18next, { Resource } from "i18next"
-import { initReactI18next, useTranslation } from "react-i18next"
 import { NativeModules, Platform } from "react-native"
+import env from "react-native-config"
+import i18next, { ResourceLanguage } from "i18next"
+import { useTranslation, initReactI18next } from "react-i18next"
+import dayjs from "dayjs"
 
+import "./dayjs-locales"
+import * as Locale from "./locale"
 import { StorageUtils } from "../utils"
 
 import ar from "./ar.json"
@@ -45,40 +46,15 @@ import zh_Hant from "./zh_Hant.json"
 //    see app/locales/pull.sh instructions
 // 3. import xy from `./xy.json` and add the language to the language block
 
-type Locale = string
-
-function toIETFLanguageTag(locale: Locale): Locale {
-  return locale.replace("_", "-").toLowerCase()
-}
-
-function getLanguageFromLocale(locale: Locale): Locale {
-  const [languageCode] = toIETFLanguageTag(locale).split("-")
-  return languageCode
-}
-
-async function setLocale(locale: Locale) {
-  dayjs.locale(toIETFLanguageTag(locale))
-  return await i18next.changeLanguage(locale)
-}
-
-type TextDirection = "ltr" | "rtl"
-
-export function useLanguageDirection(): TextDirection {
-  const { i18n } = useTranslation()
-  return i18n.dir()
-}
-
-export async function setUserLocaleOverride(locale: Locale): Promise<void> {
-  await setLocale(locale)
-  await StorageUtils.setUserLocaleOverride(locale)
-}
+type Resource = Record<Locale.Locale, ResourceLanguage>
 
 /* eslint-disable no-underscore-dangle */
-const AVAILABLE_TRANSLATIONS: Resource = {
+const LANGUAGE_RESOURCES: Resource = {
   ar: { label: ar._display_name, translation: ar },
   ch: { label: ch._display_name, translation: ch },
   da: { label: da._display_name, translation: da },
   el: { label: el._display_name, translation: el },
+  en: { label: en._display_name, translation: en },
   es: { label: es._display_name, translation: es },
   es_PR: { label: es_PR._display_name, translation: es_PR },
   es_419: { label: es_419._display_name, translation: es_419 },
@@ -104,101 +80,100 @@ const AVAILABLE_TRANSLATIONS: Resource = {
   zh_Hant: { label: zh_Hant._display_name, translation: zh_Hant },
 }
 
-/** The known locale list */
-export const getLocaleList = (): Array<{
-  value: Locale
-  label: string
-}> => {
-  const resources = i18next.options.resources
-  if (!resources) {
-    return []
-  }
-  return Object.entries(resources)
-    .map(([langCode, lang]) => ({
-      value: langCode,
-      label: lang.label as string,
-    }))
-    .sort((a, b) => (a.value > b.value ? -1 : 1))
-}
-
-/** A map of locale code to name. */
-export const getLocalNames = (): Record<Locale, string> => {
-  const resources = i18next.options.resources
-  if (!resources) {
-    return {}
-  }
-  return Object.entries(resources).reduce(
-    (output: Record<Locale, string>, [langCode, lang]) => {
-      output[langCode] = lang.label as string
-      return output
-    },
-    {},
-  )
-}
-
-/** Get the device locale e.g. en_US */
-function getDeviceLocale(): Locale {
-  return Platform.OS === "ios"
-    ? NativeModules.SettingsManager.settings.AppleLocale || // iOS < 13
-        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier // Android
-}
-
-/**
- * Find compatible supported i18n language
- *
- * e.g. device locale `en_AU` would find `en`
- *      device locale `pt_BR` would find `pt-BR`
- */
-export function supportedDeviceLanguageOrEnglish(): Locale {
-  const locale = getDeviceLocale() // en_US
-  const langCode = getLanguageFromLocale(locale) // en
-  const localeNames = getLocalNames()
-  const found = Object.keys(localeNames).find(
-    (l) => l === langCode || toIETFLanguageTag(l) === toIETFLanguageTag(locale),
-  )
-  return found || "en"
-}
-
-const FALLBACK_TRANSLATION_RESOURCES = {
-  en: { label: en._display_name, translation: en },
-}
-
-const languageResources = (withLocales: Locale[]): Resource => {
-  const requestedTranslationResources = Object.keys(AVAILABLE_TRANSLATIONS)
-    .filter((key) => withLocales.includes(key))
-    .reduce((obj: Resource, key: Locale) => {
-      obj[key] = AVAILABLE_TRANSLATIONS[key]
-      return obj
-    }, {})
-
-  return { ...requestedTranslationResources, ...FALLBACK_TRANSLATION_RESOURCES }
-}
-
-export const initializei18next = (withLocales: Locale[]): void => {
+export const initializei18next = (): void => {
   const config = {
     interpolation: {
-      // React already does escaping
       escapeValue: false,
     },
-    lng: "en", // this is for initialization purposes only
+    lng: "en",
     fallbackLng: "en",
     returnEmptyString: false,
-    resources: {
-      ...languageResources(withLocales),
-    },
+    resources: LANGUAGE_RESOURCES,
   }
 
   i18next.use(initReactI18next).init(config)
 }
 
+// Required translations keys for `yarn i18n:extract`
+i18next.t("_display_name")
+
+// Locale Storage
 export const loadUserLocale = async (): Promise<void> => {
-  StorageUtils.getUserLocaleOverride().then((locale) => {
-    setLocale(locale || supportedDeviceLanguageOrEnglish())
+  const userLocale = await StorageUtils.getUserLocaleOverride()
+
+  if (userLocale) {
+    const locale = Locale.fromString(userLocale)
+    setLocale(locale)
+  } else {
+    const deviceLocale = supportedDeviceLanguageOrEnglish()
+    setLocale(deviceLocale)
+  }
+}
+
+export async function setUserLocaleOverride(
+  locale: Locale.Locale,
+): Promise<void> {
+  await setLocale(locale)
+  await StorageUtils.setUserLocaleOverride(locale)
+}
+
+async function setLocale(locale: Locale.Locale) {
+  const iETFLanguageTag = Locale.toIETFLanguageTag(locale)
+  dayjs.locale(iETFLanguageTag)
+
+  return await i18next.changeLanguage(locale)
+}
+
+// Device Locale
+export function supportedDeviceLanguageOrEnglish(): Locale.Locale {
+  const l = deviceLocale()
+  const languageCode = l.replace("-", "_")
+  const locale = Locale.fromString(languageCode)
+
+  const envLocales = env.SUPPORTED_LOCALES
+  const enabledLocales = parseEnvLocales(envLocales)
+  const result = enabledLocales.includes(locale) ? locale : "en"
+  return result
+}
+
+const deviceLocale = (): string => {
+  return Platform.OS === "ios"
+    ? NativeModules.SettingsManager.settings.AppleLanguages[0]
+    : NativeModules.I18nManager.localeIdentifier
+}
+
+// View Helpers
+export const enabledLocales = (): Array<{
+  value: Locale.Locale
+  label: string
+}> => {
+  const envLocales = env.SUPPORTED_LOCALES
+  const locales = parseEnvLocales(envLocales)
+  return locales.map((locale) => {
+    return {
+      value: locale,
+      label: LANGUAGE_RESOURCES[locale].label as string,
+    }
   })
 }
 
-export default i18next
+const parseEnvLocales = (envLocales = ""): Locale.Locale[] => {
+  const localeStrings = envLocales.split(",")
+  return localeStrings.map(Locale.fromString)
+}
 
-// do not remove, this will force the yarn i18n:extract to export this key
-i18next.t("_display_name")
+interface LocaleInfo {
+  localeCode: string
+  languageName: string
+}
+
+export const useLocaleInfo = (): LocaleInfo => {
+  const {
+    i18n: { language: localeCode },
+  } = useTranslation()
+  const locale = Locale.fromString(localeCode)
+  const languageName = LANGUAGE_RESOURCES[locale].label as string
+  return { localeCode, languageName }
+}
+
+export default i18next

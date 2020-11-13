@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react"
+import { useTranslation } from "react-i18next"
 
 import { HeaderBackButton } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
@@ -12,10 +13,12 @@ export const applyHeaderLeftBackButton = () => {
 }
 
 const HeaderLeftBackButton = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
 
   return (
     <HeaderBackButton
+      label={t("common.back")}
       tintColor={Colors.primary.shade150}
       onPress={() => navigation.goBack()}
     />

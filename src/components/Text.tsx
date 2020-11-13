@@ -1,7 +1,6 @@
 import React, { ReactNode, FunctionComponent } from "react"
+import { useTranslation } from "react-i18next"
 import { Text as RNText, TextStyle } from "react-native"
-
-import { useLanguageDirection } from "../locales/languages"
 
 interface TextProps {
   style?: TextStyle
@@ -36,6 +35,12 @@ const Text: FunctionComponent<TextProps> = ({
       {children}
     </RNText>
   )
+}
+
+type TextDirection = "ltr" | "rtl"
+export function useLanguageDirection(): TextDirection {
+  const { i18n } = useTranslation()
+  return i18n.dir()
 }
 
 export default Text

@@ -259,7 +259,7 @@ const style = StyleSheet.create({
     fontSize: Typography.size.x60,
     textAlignVertical: "center",
     textAlign: "center",
-    letterSpacing: 4,
+    letterSpacing: 3,
     paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {
