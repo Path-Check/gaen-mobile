@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Pressable, View } from "react-native"
+import { Pressable, View, StyleSheet } from "react-native"
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
@@ -76,13 +76,8 @@ const TabBar: FunctionComponent<TabBarProps> = ({
   return (
     <View
       style={{
-        flexDirection: "row",
-        justifyContent: "center",
+        ...style.tabBarContainer,
         paddingBottom: insets.bottom + Spacing.xxSmall,
-        paddingTop: Spacing.xxSmall,
-        backgroundColor: Colors.background.primaryLight,
-        borderTopWidth: Outlines.hairline,
-        borderColor: Colors.neutral.shade10,
       }}
     >
       {tabs.map((tab, index: number) => {
@@ -141,7 +136,7 @@ const TabBar: FunctionComponent<TabBarProps> = ({
           <Pressable
             onPress={handleOnPress}
             style={{
-              alignItems: "center",
+              ...style.tabButton,
               width: Layout.screenWidth / tabs.length,
             }}
             accessibilityRole="button"
@@ -153,14 +148,7 @@ const TabBar: FunctionComponent<TabBarProps> = ({
               allowFontScaling={false}
               numberOfLines={2}
               ellipsizeMode="middle"
-              style={{
-                ...Typography.style.normal,
-                fontSize: Typography.size.x15,
-                color: textColor,
-                textAlign: "center",
-                lineHeight: Typography.lineHeight.x5,
-                maxWidth: Spacing.xxxMassive,
-              }}
+              style={{ ...style.tabLabelText, color: textColor }}
             >
               {label}
             </Text>
@@ -180,7 +168,7 @@ const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
   const iconSize = 22
 
   return (
-    <View style={{ marginBottom: Spacing.xxSmall }}>
+    <View style={style.tabIconContainer}>
       <SvgXml
         xml={icon}
         fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
@@ -190,5 +178,29 @@ const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
     </View>
   )
 }
+
+const style = StyleSheet.create({
+  tabBarContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingTop: Spacing.xxSmall,
+    backgroundColor: Colors.background.primaryLight,
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade10,
+  },
+  tabButton: {
+    alignItems: "center",
+  },
+  tabIconContainer: {
+    marginBottom: Spacing.xxSmall,
+  },
+  tabLabelText: {
+    ...Typography.style.normal,
+    fontSize: Typography.size.x15,
+    textAlign: "center",
+    lineHeight: Typography.lineHeight.x5,
+    maxWidth: Spacing.xxxMassive,
+  },
+})
 
 export default MainTabNavigator
