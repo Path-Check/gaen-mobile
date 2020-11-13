@@ -6,4 +6,5 @@ export default Factory.define<ProductAnalyticsContextState>(() => ({
   updateUserConsent: () => Promise.resolve(),
   trackEvent: () => Promise.resolve(),
   trackScreenView: () => Promise.resolve(),
+  resetUserConsent: () => Promise.resolve(),
 }))

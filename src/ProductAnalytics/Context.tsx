@@ -10,7 +10,7 @@ import { StorageUtils } from "../utils"
 
 export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
-  updateUserConsent: (consent: boolean) => Promise<void>
+  updateUserConsent: (userConsented: boolean) => Promise<void>
   trackEvent: (
     category: EventCategory,
     action: string,
@@ -18,6 +18,7 @@ export type ProductAnalyticsContextState = {
     value?: number,
   ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
+  resetUserConsent: () => Promise<void>
 }
 
 const initialContext = {
@@ -25,6 +26,7 @@ const initialContext = {
   updateUserConsent: () => Promise.resolve(),
   trackEvent: () => Promise.resolve(),
   trackScreenView: () => Promise.resolve(),
+  resetUserConsent: () => Promise.resolve(),
 }
 
 export type EventCategory = "product_analytics" | "epi_analytics"
@@ -73,9 +75,26 @@ const ProductAnalyticsProvider: FunctionComponent<{
       productAnalyticsClient.trackView([screen])
     }
   }
-  const updateUserConsent = async (consent: boolean) => {
-    await StorageUtils.setAnalyticsConsent(consent)
-    setUserConsentedToAnalytics(consent)
+
+  const updateUserConsent = async (userConsented: boolean) => {
+    const trackConsented = async () => {
+      const isOnboardingComplete = await StorageUtils.getIsOnboardingComplete()
+      const eventName = isOnboardingComplete
+        ? "settings_consented_to_analytics"
+        : "onboarding_consented_to_analytics"
+      if (userConsented) {
+        productAnalyticsClient.trackEvent("product_analytics", eventName)
+      }
+    }
+
+    trackConsented()
+    StorageUtils.setAnalyticsConsent(userConsented)
+    setUserConsentedToAnalytics(userConsented)
+  }
+
+  const resetUserConsent = async (): Promise<void> => {
+    StorageUtils.removeAnalyticsConsent()
+    setUserConsentedToAnalytics(false)
   }
 
   return (
@@ -85,6 +104,7 @@ const ProductAnalyticsProvider: FunctionComponent<{
         updateUserConsent,
         trackEvent,
         trackScreenView,
+        resetUserConsent,
       }}
     >
       {children}

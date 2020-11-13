@@ -10,10 +10,12 @@
     "close": "Isara",
     "continue": "Ituloy",
     "done": "Tapos",
+    "learn_more": "Alamin",
     "maybe_later": "Baka Mamaya",
     "more": "Higit pa",
     "next": "Sa susunod",
     "no_thanks": "Salamat nalang",
+    "select_language": "Piliin ang wika",
     "settings": "Buksan ang Settings",
     "skip": "I-Skip o Laktawan",
     "something_went_wrong": "May maling nangyari",
@@ -62,6 +64,7 @@
     "start_header_bluetooth": "Tumulung upang pigilan ang paglaganap ng virus at protektakan ang mamamayan sa iyong kumunidad."
   },
   "exposure_history": {
+    "check_for_exposures": "Ipasa",
     "exposure_detail": {
       "6ft_apart": "6 na talampakan ang layo",
       "ha_guidance_header": "Anong dapat kong gawin?",
@@ -96,6 +99,9 @@
     "why_did_i_get_an_en": "Bakit ako nakatanggap ng exposure notification?",
     "why_did_i_get_an_en_para": "Makakatanggap ka ng isang abiso sa pagkakalantad sa posibleng pagkalanit o exposure notification kapag ang isang tao na tumawid sa iyong landas na kalaunan ay nakatanggap ng isang nakumpirmado, dyagnosis o positibong pagsusuri para sa COVID-19 at pinipiling abisuhan ang iba."
   },
+  "exposure_scanning_status": {
+    "learn_more": "Alamin"
+  },
   "home": {
     "bluetooth_info_body": "Natutuklasan ng iyong cellphone o device na mayroon kang malapitang nakakasalamuha na gumagamit ng Bluetooth Low Energy.  Pinapayagan nito ang app na anonimong itala ang iyong pangaraw-araw na pagkatagpo, hahit hindi nakabukas ang app sa iyong cellphone o device.",
     "bluetooth": {
@@ -116,12 +122,14 @@
     "call_emergency_services": "Tumawag sa Serbisyong Pang-emergency o Emergency Services",
     "fix": "Ayusin ang mga isyu sa {{technology}}",
     "get_more_info": "Kumuha ng karagdagang impormasyon sa {{technology}}",
-    "location_info_body_1": "Gumagamit ang Teknolohiya ng Abiso sa Exposure ng pag-scan ng Bluetooth upang maunawaan kung anong mga aparato ang malapit sa isa't isa. Sa lahat ng mga teleponong nagpapatakbo ng Android 6.0 at mas bago, upang magamit ang pag-scan sa Bluetooth, kailangang i-on ang setting ng lokasyon ng aparato para sa lahat ng mga app, hindi lamang mga app na binuo gamit ang Exposure Notification System.",
-    "location_info_subheader_1": "Bakit ko kailangang i-on ang setting ng lokasyon ng aking telepono o device?",
+    "have_a_positive_test": "Mayroon ka bang isang code?",
+    "if_you_have_a_code": "Ipadala ang iyong pagsubok upang makatulong na mapanatiling ligtas ang iyong komunidad.",
     "proximity_tracing_info_body_1": "Kung ang mga smartphone na naka-install ang app ay naka-on o pinagagana, naka-enable ang Bluetooth, at malapit sa isa't isa sa loob ng takdang panahon, irirehistro ang engkwentrong ito sa iyong aparato.",
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
-    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?"
+    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?",
+    "report_result": "Magpadala ng Mga Resulta",
+    "to_submit_your_test": "Upang isumite ang iyong positibong resulta sa pagsubok, kakailanganin mong makuha ang iyong positibong code ng resulta ng pagsubok mula sa isang opisyal sa kalusugan."
   },
   "label": {
     "check": "Checkmark",
@@ -197,6 +205,10 @@
     "terms_header_title": "Mga Tuntunin ng Paggamit",
     "welcome_image_label": "Isang ilustrasyon ng mga taong may suot na mask, nakakonekta tulad ng mga node sa isang network."
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako",
+    "privacy_policy": "Patakaran sa Pagkapribado"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
@@ -205,8 +217,5 @@
     "location": "Lokasyon",
     "protect_privacy": "Paano namin protektahan ang iyong privacy",
     "select_language": "Piliin ang Wika"
-  },
-  "settings": {
-    "i_understand_and_consent": "Naiintindihan ko at Sumasangayon ako"
   }
 }

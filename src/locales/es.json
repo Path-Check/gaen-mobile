@@ -37,6 +37,9 @@
     "privacy_policy": "Política de privacidad",
     "terms_header_title": "Condiciones de uso"
   },
+  "product_analytics": {
+    "privacy_policy": "Política de privacidad"
+  },
   "screen_titles": {
     "home": "Inicio",
     "legal": "Aviso legal"

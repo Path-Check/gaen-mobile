@@ -31,6 +31,7 @@
     "off": "DESACTIVADA",
     "on": "ACTIVADA",
     "save": "Guardar",
+    "select_language": "Seleccionar idioma",
     "settings": "Abrir Configuración",
     "skip": "Omitir",
     "something_went_wrong": "Algo salió mal",
@@ -182,8 +183,6 @@
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
     "if_you_have_a_code": "Reporte su resultado para ayudar a mantener a su comunidad segura.",
-    "location_info_body_1": "La tecnología de avisos de exposición usa el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos con Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el Sistema de Notificaciones de Exposición.",
-    "location_info_subheader_1": "¿Por qué necesito que mi localización esté activada?",
     "not_feeling_well": "¿No te sientes bien?",
     "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
@@ -211,7 +210,6 @@
     "unchecked_checkbox": "Casilla de verificación no marcada"
   },
   "navigation": {
-    "connect": "Conectar",
     "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Panel",
@@ -285,6 +283,16 @@
     "welcome_image_label": "Una ilustración de personas con mascarillas, conectadas como nodos en una red.",
     "you_must_be": "Debe ser {{minimumAge}} o anterior para usar {{applicationName}}. ¿Estás por encima de {{minimumAge}}?"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Entiendo y doy mi consentimiento",
+    "not_sharing_anonymized_data": "No compartir datos anónimos",
+    "privacy_policy": "Política de privacidad",
+    "share_anonymized_data": "Comparta datos anónimos",
+    "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
+    "sharing_anonymized_data": "Compartir datos anónimos",
+    "stop_sharing_data": "Dejar de compartir datos",
+    "you_are_sharing_data": "Está compartiendo datos anónimos"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Historial de exposición",
@@ -296,7 +304,8 @@
     "location": "Localización",
     "protect_privacy": "Cómo protegemos su privacidad",
     "select_language": "Seleccionar idioma",
-    "select_symptoms": "Seleccionar síntomas"
+    "select_symptoms": "Seleccionar síntomas",
+    "settings": "Configuración"
   },
   "self_assessment": {
     "age_range": {
@@ -398,16 +407,9 @@
     "errors": {
       "deleting_data": "Lo sentimos, no pudimos eliminar los datos"
     },
-    "here": "aquí",
-    "i_understand_and_consent": "Entiendo y doy mi consentimiento",
     "not_sharing_anonymized_data": "No compartir datos anónimos",
-    "please_view_privacy_policy": "Consulte la política de privacidad",
     "share_anonymized_data": "Comparta datos anónimos",
-    "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Sus datos anónimos ayudan al {{healthAuthorityName}} a analizar, rastrear y contener la propagación del COVID-19. Sus datos serán añadidos a los de otros usuarios que elijan compartir.\n\nSus datos contienen sus respuestas a la encuesta y el código postal, pero ninguna información adicional o de identificación personal.\n\n El {{healthAuthorityName}} retendrá sus datos anónimos por un período de tiempo específico.",
-    "sharing_anonymized_data": "Compartir datos anónimos",
-    "stop_sharing_data": "Dejar de compartir datos",
-    "you_are_sharing_data": "Está compartiendo datos anónimos"
+    "sharing_anonymized_data": "Compartir datos anónimos"
   },
   "symptom_history": {
     "did_not_feel_well": "No se sentía bien.",

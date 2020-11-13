@@ -16,10 +16,11 @@
     "success_header": "You're in the queue"
   },
   "common": {
-    "select_language": "Select language",
     "back": "Back",
+    "cancel": "Cancel",
     "close": "Close",
     "close_screen": "Close screen",
+    "confirm": "Confirm",
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
@@ -32,6 +33,7 @@
     "off": "OFF",
     "on": "ON",
     "save": "Save",
+    "select_language": "Select language",
     "settings": "Open Settings",
     "skip": "Skip",
     "something_went_wrong": "Something went wrong",
@@ -79,8 +81,11 @@
     "consent_body_1": "If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
     "consent_body_2": "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
     "consent_button_title": "I Understand and Consent",
+    "never_mind_button_title": "Never mind",
     "consent_subheader_1": "Why should I share?",
     "consent_subheader_2": "How does it work?",
+    "consent_warning_title": "Warning!",
+    "consent_warning_message": "Continuing will void your positive test result code. If you would like to share your positive diagnosis in the future, you will first need to get a new positive test result code.",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
@@ -184,8 +189,8 @@
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test result code?",
     "if_you_have_a_code": "Report your result to help keep your community safe.",
-    "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
-    "location_info_subheader": "{{applicationName}} never accesses your location data and your device is never tracked.",
+    "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. {{applicationName}} does NOT track or keep a record of your location.",
+    "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
     "not_feeling_well": "Not feeling well?",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
@@ -285,6 +290,18 @@
     "verify_your_age": "Verify Your Age",
     "welcome_image_label": "An illustration of people with masks on, connected like nodes in a network.",
     "you_must_be": "You must be {{minimumAge}} or older to use {{applicationName}}. Are you over {{minimumAge}}?"
+  },
+  "product_analytics": {
+    "i_understand_and_consent": "I Understand and Consent",
+    "not_sharing_anonymized_data": "Not sharing anonymized data",
+    "privacy_policy": "Privacy Policy",
+    "share_anonymized_data": "Share Anonymized Data",
+    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening questions with the {{healthAuthorityName}}",
+    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
+    "share_data_para_2": "This data contains no personally-identifying information.",
+    "sharing_anonymized_data": "Sharing anonymized data",
+    "stop_sharing_data": "Stop Sharing Data",
+    "you_are_sharing_data": "You are sharing anonymized data"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -391,18 +408,6 @@
       "weakened_immune_system": "Weakened immune system or taking medications that may cause immune suppression"
     }
   },
-  "product_analytics": {
-    "not_sharing_anonymized_data": "Not sharing anonymized data",
-    "share_anonymized_data": "Share Anonymized Data",
-    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening questions with the {{healthAuthorityName}}",
-    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
-    "share_data_para_2": "This data contains no personally-identifying information.",
-    "sharing_anonymized_data": "Sharing anonymized data",
-    "privacy_policy": "Privacy Policy",
-    "stop_sharing_data": "Stop Sharing Data",
-    "you_are_sharing_data": "You are sharing anonymized data",
-    "i_understand_and_consent": "I Understand and Consent"
-  },
   "settings": {
     "data_deleted": "Data deleted",
     "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, the app will delete the Symptom History data that is stored on your phone.",
@@ -412,9 +417,9 @@
     "errors": {
       "deleting_data": "Sorry, we could not delete your data"
     },
+    "not_sharing_anonymized_data": "Not sharing anonymized data",
     "share_anonymized_data": "Share anonymized data",
-    "sharing_anonymized_data": "Sharing anonymized data",
-    "not_sharing_anonymized_data": "Not sharing anonymized data"
+    "sharing_anonymized_data": "Sharing anonymized data"
   },
   "symptom_history": {
     "did_not_feel_well": "You did not feel well",
