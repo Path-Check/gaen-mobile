@@ -54,12 +54,14 @@ const MainTabNavigator: FunctionComponent = () => {
   }
 
   const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
+    const iconSize = 22
+
     return (
       <SvgXml
         xml={icon}
         fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
-        width={22}
-        height={22}
+        width={iconSize}
+        height={iconSize}
       />
     )
   }
