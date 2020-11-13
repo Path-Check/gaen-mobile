@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from "react"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
@@ -13,7 +16,9 @@ import { Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Text } from "../components"
 
-import { Colors, Typography } from "../styles"
+import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import { View } from "react-native"
 
 const Tab = createBottomTabNavigator()
 
@@ -26,57 +31,39 @@ const MainTabNavigator: FunctionComponent = () => {
     icon: string
   }
 
-  const TabIcon: FunctionComponent<TabIconProps> = ({
-    focused,
-    size,
-    icon,
-  }) => {
+  const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
     return (
       <SvgXml
         xml={icon}
         fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
-        width={size}
-        height={size}
+        width={22}
+        height={22}
       />
     )
   }
 
   interface TabBarIconProps {
     focused: boolean
-    size: number
   }
 
-  const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
-    return <TabIcon icon={TabBarIcons.House} focused={focused} size={size} />
+  const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused }) => {
+    return <TabIcon icon={TabBarIcons.House} focused={focused} />
   }
 
   const ExposureHistoryIcon: FunctionComponent<TabBarIconProps> = ({
     focused,
-    size,
   }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Exposure} focused={focused} size={size} />
-    )
+    const tabIcon = <TabIcon icon={TabBarIcons.Exposure} focused={focused} />
     return tabIcon
   }
 
-  const HeartbeatIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Heartbeat} focused={focused} size={size} />
-    )
+  const HeartbeatIcon: FunctionComponent<TabBarIconProps> = ({ focused }) => {
+    const tabIcon = <TabIcon icon={TabBarIcons.Heartbeat} focused={focused} />
     return tabIcon
   }
 
-  const SettingsIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Gear} focused={focused} size={size} />
-    )
+  const SettingsIcon: FunctionComponent<TabBarIconProps> = ({ focused }) => {
+    const tabIcon = <TabIcon icon={TabBarIcons.Gear} focused={focused} />
     return tabIcon
   }
 
@@ -84,13 +71,6 @@ const MainTabNavigator: FunctionComponent = () => {
     focused: boolean
     color: string
     label: string
-  }
-
-  const applyTabBarLabel = (label: string) => {
-    const tabLabel = function (props: { focused: boolean; color: string }) {
-      return <TabBarLabel {...props} label={label} />
-    }
-    return tabLabel
   }
 
   const TabBarLabel: FunctionComponent<TabBarLabelProps> = ({
@@ -126,13 +106,92 @@ const MainTabNavigator: FunctionComponent = () => {
     },
   }
 
+  const TabBar: FunctionComponent<BottomTabBarProps> = ({
+    state,
+    descriptors,
+    navigation,
+  }) => {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingHorizontal: Spacing.large,
+          paddingBottom: insets.bottom,
+          paddingTop: Spacing.xxSmall,
+          backgroundColor: Colors.background.primaryLight,
+          borderTopWidth: Outlines.hairline,
+          borderColor: Colors.neutral.shade10,
+        }}
+      >
+        {state.routes.map((route, index: number) => {
+          const { options } = descriptors[route.key]
+
+          const label = options.tabBarLabel
+          const icon = options.tabBarIcon
+          const focused = state.index === index
+
+          const handleOnPress = () => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            })
+            if (!focused && !event.defaultPrevented) {
+              navigation.navigate(route.name)
+            }
+          }
+
+          const textColor = focused
+            ? Colors.primary.shade100
+            : Colors.neutral.shade100
+
+          if (icon === undefined) {
+            return
+          }
+
+          return (
+            <TouchableOpacity
+              onPress={handleOnPress}
+              style={{ alignItems: "center" }}
+              accessibilityRole="button"
+              key={index}
+            >
+              <View style={{ marginBottom: Spacing.xxSmall }}>
+                {icon({ focused, color: "", size: 0 })}
+              </View>
+              <Text
+                allowFontScaling={false}
+                numberOfLines={2}
+                ellipsizeMode="middle"
+                style={{
+                  ...Typography.style.normal,
+                  fontSize: Typography.size.x15,
+                  color: textColor,
+                  textAlign: "center",
+                  lineHeight: Typography.lineHeight.x5,
+                  maxWidth: Spacing.xxxMassive,
+                }}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          )
+        })}
+      </View>
+    )
+  }
+
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
+    <Tab.Navigator
+      tabBar={(props) => <TabBar {...props} />}
+      tabBarOptions={tabBarOptions}
+    >
       <Tab.Screen
         name={Stacks.Home}
         component={HomeStack}
         options={{
-          tabBarLabel: applyTabBarLabel(t("navigation.home")),
+          tabBarLabel: t("navigation.home"),
           tabBarIcon: HomeIcon,
         }}
       />
@@ -140,7 +199,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
-          tabBarLabel: applyTabBarLabel(t("navigation.exposure_history")),
+          tabBarLabel: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
@@ -150,7 +209,7 @@ const MainTabNavigator: FunctionComponent = () => {
             name={Stacks.SymptomHistory}
             component={SymptomHistoryStack}
             options={{
-              tabBarLabel: applyTabBarLabel(t("navigation.symptom_history")),
+              tabBarLabel: t("navigation.symptom_history"),
               tabBarIcon: HeartbeatIcon,
             }}
           />
@@ -159,7 +218,7 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.Settings}
         component={SettingsStack}
         options={{
-          tabBarLabel: applyTabBarLabel(t("navigation.settings")),
+          tabBarLabel: t("navigation.settings"),
           tabBarIcon: SettingsIcon,
         }}
       />
