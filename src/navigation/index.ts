@@ -251,6 +251,19 @@ export const Stacks: { [key in Stack]: Stack } = {
   SymptomHistory: "SymptomHistory",
 }
 
+export type TabRoute =
+  | "Home"
+  | "ExposureHistory"
+  | "SymptomHistory"
+  | "Settings"
+
+export const TabRoutes: { [key in TabRoute]: TabRoute } = {
+  Home: "Home",
+  ExposureHistory: "ExposureHistory",
+  SymptomHistory: "SymptomHistory",
+  Settings: "Settings",
+}
+
 export const useStatusBarEffect = (
   statusBarStyle: StatusBarStyle,
   backgroundColor: string,
