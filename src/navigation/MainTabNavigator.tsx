@@ -66,8 +66,8 @@ const MainTabNavigator: FunctionComponent = () => {
     )
   }
 
-  type Tab = "home" | "exposureHistory" | "settings" | "symptomHistory"
-  const tabs: Tab[] = ["home", "exposureHistory", "settings"]
+  type Tab_ = "home" | "exposureHistory" | "settings" | "symptomHistory"
+  const tabs: Tab_[] = ["home", "exposureHistory", "settings"]
   if (displaySymptomHistory) {
     tabs.push("symptomHistory")
   }
