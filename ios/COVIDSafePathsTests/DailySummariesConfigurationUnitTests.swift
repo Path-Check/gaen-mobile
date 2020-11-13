@@ -55,4 +55,56 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
     XCTAssertEqual(config.daysSinceOnsetToInfectiousness, dictDaysSinceOnsetToInfectiousness)
   }
 
+  // When dailySummary weightedDurationSum is below the exposure configuration's triggerThresholdWeightedDuration
+  // the scoring threshold is not met
+  func testDailySummaryBelowScoringThreshold() {
+    let config = DailySummariesConfiguration.placeholder
+    let daySummary = MockENExposureDaySummary()
+    let daySummaryItem = MockENExposureSummaryItem()
+    daySummary.daySummaryHandler = {
+      return daySummaryItem
+    }
+    daySummaryItem.weightedDurationSumHandler = {
+      return TimeInterval(config.triggerThresholdWeightedDuration - 1)
+    }
+    let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
+    
+    XCTAssertFalse(isAboveThreshold)
+  }
+
+  // When dailySummary weightedDurationSum is equal to the exposure configuration's triggerThresholdWeightedDuration
+  // the scoring threshold is met
+  func testDailySummaryEqualToScoringThreshold() {
+    let config = DailySummariesConfiguration.placeholder
+    let daySummary = MockENExposureDaySummary()
+    let daySummaryItem = MockENExposureSummaryItem()
+    daySummary.daySummaryHandler = {
+      return daySummaryItem
+    }
+    daySummaryItem.weightedDurationSumHandler = {
+      return TimeInterval(config.triggerThresholdWeightedDuration)
+    }
+    let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
+
+    XCTAssertTrue(isAboveThreshold)
+  }
+
+  // When dailySummary weightedDurationSum is above the exposure configuration's triggerThresholdWeightedDuration
+  // the scoring threshold is met
+  func testDailySummaryAboveScoringThreshold() {
+    let config = DailySummariesConfiguration.placeholder
+    let daySummary = MockENExposureDaySummary()
+    let daySummaryItem = MockENExposureSummaryItem()
+    daySummary.daySummaryHandler = {
+      return daySummaryItem
+    }
+    daySummaryItem.weightedDurationSumHandler = {
+      return TimeInterval(config.triggerThresholdWeightedDuration + 1)
+    }
+    let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
+
+    XCTAssertTrue(isAboveThreshold)
+  }
+
+
 }
