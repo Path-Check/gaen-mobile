@@ -85,46 +85,29 @@ const TabBar: FunctionComponent<TabBarProps> = ({
         borderColor: Colors.neutral.shade10,
       }}
     >
-      {state.routes.map((route, index: number) => {
-        const handleOnPress = () => {
-          !isFocused && navigation.navigate(route.name)
+      {tabs.map((tab, index: number) => {
+        const isFocused = (tab: Tab) => {
+          const focusedRouteName = state.routeNames[state.index]
+          return tab.name === focusedRouteName
         }
 
-        const isFocused = state.index === index
+        const focused = isFocused(tab)
 
-        const textColor = isFocused
+        const handleOnPress = () => {
+          !focused && navigation.navigate(tab.name)
+        }
+
+        const textColor = focused
           ? Colors.primary.shade100
           : Colors.neutral.shade100
-
-        const routeStringToTab = (route: string): TabRoute => {
-          switch (route) {
-            case "Home": {
-              return "Home"
-            }
-            case "ExposureHistory": {
-              return "ExposureHistory"
-            }
-            case "SymptomHistory": {
-              return "SymptomHistory"
-            }
-            case "Settings": {
-              return "Settings"
-            }
-            default: {
-              return "Home"
-            }
-          }
-        }
-
-        const currentTab = routeStringToTab(route.name)
 
         type TabButtonConfig = {
           label: string
           icon: string
         }
 
-        const determineConfig = (): TabButtonConfig => {
-          switch (currentTab) {
+        const determineConfig = (tab: Tab): TabButtonConfig => {
+          switch (tab.name) {
             case "Home": {
               return {
                 label: t("navigation.home"),
@@ -152,7 +135,7 @@ const TabBar: FunctionComponent<TabBarProps> = ({
           }
         }
 
-        const { label, icon } = determineConfig()
+        const { label, icon } = determineConfig(tab)
 
         return (
           <Pressable
@@ -162,10 +145,10 @@ const TabBar: FunctionComponent<TabBarProps> = ({
               width: Layout.screenWidth / tabs.length,
             }}
             accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityState={focused ? { selected: true } : {}}
             key={index}
           >
-            <TabIcon focused={isFocused} icon={icon} />
+            <TabIcon focused={focused} icon={icon} />
             <Text
               allowFontScaling={false}
               numberOfLines={2}
