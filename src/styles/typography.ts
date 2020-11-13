@@ -36,7 +36,7 @@ type LineHeight =
   | "x70"
   | "x80"
 export const lineHeight: Record<LineHeight, number> = {
-  x5: 12,
+  x5: 14,
   x10: 18,
   x20: 20,
   x30: 20,

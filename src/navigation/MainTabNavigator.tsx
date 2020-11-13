@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react"
+import { Pressable, View } from "react-native"
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
@@ -16,31 +17,12 @@ import { Stacks } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
 import { Text } from "../components"
 
-import { Colors, Iconography, Outlines, Spacing, Typography } from "../styles"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { View } from "react-native"
-
-const Tab = createBottomTabNavigator()
+import { Colors, Layout, Outlines, Spacing, Typography } from "../styles"
 
 const MainTabNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const { displaySymptomHistory } = useConfigurationContext()
-
-  interface TabIconProps extends TabBarIconProps {
-    icon: string
-  }
-
-  const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
-    return (
-      <SvgXml
-        xml={icon}
-        fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
-        width={22}
-        height={22}
-      />
-    )
-  }
 
   interface TabBarIconProps {
     focused: boolean
@@ -67,43 +49,24 @@ const MainTabNavigator: FunctionComponent = () => {
     return tabIcon
   }
 
-  interface TabBarLabelProps {
-    focused: boolean
-    color: string
-    label: string
+  interface TabIconProps extends TabBarIconProps {
+    icon: string
   }
 
-  const TabBarLabel: FunctionComponent<TabBarLabelProps> = ({
-    focused,
-    label,
-  }) => {
-    const color = focused ? Colors.primary.shade100 : Colors.neutral.shade100
-
+  const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
     return (
-      <Text
-        allowFontScaling={false}
-        numberOfLines={2}
-        ellipsizeMode="middle"
-        style={{
-          ...Typography.style.normal,
-          fontSize: Typography.size.x15,
-          color: color,
-          textAlign: "center",
-          lineHeight: Typography.lineHeight.x5,
-        }}
-      >
-        {label}
-      </Text>
+      <SvgXml
+        xml={icon}
+        fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
+        width={22}
+        height={22}
+      />
     )
   }
 
-  const tabBarOptions = {
-    style: {
-      backgroundColor: Colors.background.primaryLight,
-      borderTopWidth: 1,
-      borderTopColor: Colors.neutral.shade10,
-      height: insets.bottom + 60,
-    },
+  const tabs = ["home", "exposureHistory", "settings"]
+  if (displaySymptomHistory) {
+    tabs.push("symptomHistory")
   }
 
   const TabBar: FunctionComponent<BottomTabBarProps> = ({
@@ -115,9 +78,8 @@ const MainTabNavigator: FunctionComponent = () => {
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-between",
-          paddingHorizontal: Spacing.large,
-          paddingBottom: insets.bottom,
+          justifyContent: "center",
+          paddingBottom: insets.bottom + Spacing.xxSmall,
           paddingTop: Spacing.xxSmall,
           backgroundColor: Colors.background.primaryLight,
           borderTopWidth: Outlines.hairline,
@@ -127,22 +89,15 @@ const MainTabNavigator: FunctionComponent = () => {
         {state.routes.map((route, index: number) => {
           const { options } = descriptors[route.key]
 
-          const label = options.tabBarLabel
+          const label = options.title
           const icon = options.tabBarIcon
-          const focused = state.index === index
+          const isFocused = state.index === index
 
           const handleOnPress = () => {
-            const event = navigation.emit({
-              type: "tabPress",
-              target: route.key,
-              canPreventDefault: true,
-            })
-            if (!focused && !event.defaultPrevented) {
-              navigation.navigate(route.name)
-            }
+            !isFocused && navigation.navigate(route.name)
           }
 
-          const textColor = focused
+          const textColor = isFocused
             ? Colors.primary.shade100
             : Colors.neutral.shade100
 
@@ -151,14 +106,18 @@ const MainTabNavigator: FunctionComponent = () => {
           }
 
           return (
-            <TouchableOpacity
+            <Pressable
               onPress={handleOnPress}
-              style={{ alignItems: "center" }}
+              style={{
+                alignItems: "center",
+                width: Layout.screenWidth / tabs.length,
+              }}
               accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
               key={index}
             >
               <View style={{ marginBottom: Spacing.xxSmall }}>
-                {icon({ focused, color: "", size: 0 })}
+                {icon({ focused: isFocused, color: "", size: 0 })}
               </View>
               <Text
                 allowFontScaling={false}
@@ -175,23 +134,22 @@ const MainTabNavigator: FunctionComponent = () => {
               >
                 {label}
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           )
         })}
       </View>
     )
   }
 
+  const Tab = createBottomTabNavigator()
+
   return (
-    <Tab.Navigator
-      tabBar={(props) => <TabBar {...props} />}
-      tabBarOptions={tabBarOptions}
-    >
+    <Tab.Navigator tabBar={TabBar}>
       <Tab.Screen
         name={Stacks.Home}
         component={HomeStack}
         options={{
-          tabBarLabel: t("navigation.home"),
+          title: t("navigation.home"),
           tabBarIcon: HomeIcon,
         }}
       />
@@ -199,26 +157,25 @@ const MainTabNavigator: FunctionComponent = () => {
         name={Stacks.ExposureHistoryFlow}
         component={ExposureHistoryStack}
         options={{
-          tabBarLabel: t("navigation.exposure_history"),
+          title: t("navigation.exposure_history"),
           tabBarIcon: ExposureHistoryIcon,
         }}
       />
-      {displaySymptomHistory ||
-        (true && (
-          <Tab.Screen
-            name={Stacks.SymptomHistory}
-            component={SymptomHistoryStack}
-            options={{
-              tabBarLabel: t("navigation.symptom_history"),
-              tabBarIcon: HeartbeatIcon,
-            }}
-          />
-        ))}
+      {displaySymptomHistory && (
+        <Tab.Screen
+          name={Stacks.SymptomHistory}
+          component={SymptomHistoryStack}
+          options={{
+            title: t("navigation.symptom_history"),
+            tabBarIcon: HeartbeatIcon,
+          }}
+        />
+      )}
       <Tab.Screen
         name={Stacks.Settings}
         component={SettingsStack}
         options={{
-          tabBarLabel: t("navigation.settings"),
+          title: t("navigation.settings"),
           tabBarIcon: SettingsIcon,
         }}
       />
