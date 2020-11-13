@@ -528,7 +528,9 @@ class ExposureManagerUnitTests: XCTestCase {
     exposureManager.scheduleBackgroundTaskIfNeeded()
     wait(for: [submitExpectation], timeout: 0)
   }
-  
+
+  // When the request to download the exposure configuration fails
+  // the placeholder configuration is used
   func testGetExposureConfigurationV1FallbackToDefault() {
     let expectation = self.expectation(description: "it falls back to the placeholder exposure configuration")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1, forceDownloadConfigurationError: true)
@@ -540,6 +542,24 @@ class ExposureManagerUnitTests: XCTestCase {
       XCTFail()
     }
     wait(for: [expectation], timeout: 5)
+  }
+
+  // When the request to download the exposure configuration fails
+  // the placeholder configuration is used
+  @available(iOS 13.7, *)
+  func testGetExposureConfigurationV2FallbackToDefault() {
+
+    let expectation = self.expectation(description: "it falls back to the placeholder exposure configuration")
+    let exposureManager = defaultExposureManager(enAPIVersion: .v2, forceDownloadConfigurationError: true)
+    do {
+      let config = try await(exposureManager.getExposureConfigurationV2())
+      XCTAssertEqual(config, DailySummariesConfiguration.placeholder)
+      expectation.fulfill()
+    } catch {
+      XCTFail()
+    }
+    wait(for: [expectation], timeout: 5)
+
   }
 
   func testEnabledtatus() {
@@ -555,6 +575,7 @@ class ExposureManagerUnitTests: XCTestCase {
       return false
     }
     XCTAssertEqual(exposureManager.enabledState, ExposureManager.EnabledState.disabled)
+
   }
 
   func testRecentExposures() {
