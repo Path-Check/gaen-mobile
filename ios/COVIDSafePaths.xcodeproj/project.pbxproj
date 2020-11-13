@@ -363,10 +363,10 @@
 		00E356EF1AD99517003FC87E /* COVIDSafePathsTests */ = {
 			isa = PBXGroup;
 			children = (
+				B57529B7255ED5C000D6212A /* Exposure Manager */,
 				B5224FD4255DDA2600070C72 /* Debug Menu */,
 				B584BF27255C88CF00990F1B /* Exposure Configuration */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
-				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
 				B584BECD255C7C4300990F1B /* Exposure Detection */,
 				B54FAEFD2536102100F09344 /* XCTestCase+Extensions.swift */,
 				A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */,
@@ -594,11 +594,35 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		B584BECD255C7C4300990F1B /* Exposure Detection */ = {
+		B57529B7255ED5C000D6212A /* Exposure Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
+			);
+			name = "Exposure Manager";
+			sourceTree = "<group>";
+		};
+		B57529B8255ED5DA00D6212A /* V1 */ = {
 			isa = PBXGroup;
 			children = (
 				B584BED3255C7CD300990F1B /* V1UnitTests.swift */,
+			);
+			name = V1;
+			sourceTree = "<group>";
+		};
+		B57529B9255ED5E400D6212A /* V2 */ = {
+			isa = PBXGroup;
+			children = (
 				B584BED7255C7CE700990F1B /* V2UnitTests.swift */,
+			);
+			name = V2;
+			sourceTree = "<group>";
+		};
+		B584BECD255C7C4300990F1B /* Exposure Detection */ = {
+			isa = PBXGroup;
+			children = (
+				B57529B8255ED5DA00D6212A /* V1 */,
+				B57529B9255ED5E400D6212A /* V2 */,
 			);
 			name = "Exposure Detection";
 			sourceTree = "<group>";
