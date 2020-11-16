@@ -67,12 +67,12 @@ const permissionsModule = NativeModules.ENPermissionsModule
 export const requestAuthorization = async (): Promise<void> => {
   return permissionsModule
     .requestExposureNotificationAuthorization()
-    .catch((code, message, error) => {
-      console.log(code, message, error)
+    .catch((error) => {
       Logger.error("Failed to request ExposureNotification API Authorization", {
         error,
       })
-      if (error.includes("App restricted")) {
+      if (error.code.includes("ENErrorDomain error 14.")) {
+        console.log("!!!!")
       }
       throw new Error(error)
     })
@@ -120,7 +120,7 @@ export const checkForNewExposures = async (): Promise<NetworkResponse> => {
     await exposureHistoryModule.detectExposures()
     return { kind: "success" }
   } catch (e) {
-    if (e.message.includes("ENErrorDomain error 13.")) {
+    if (e.underlyError.includes("ENErrorDomain error 13.")) {
       return { kind: "failure", error: "ExceededCheckRateLimit" }
     } else {
       return { kind: "failure", error: "Unknown" }
