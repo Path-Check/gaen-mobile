@@ -112,6 +112,7 @@ final class ExposureManager: NSObject {
   enum AuthorizationState: String {
     case authorized = "AUTHORIZED"
     case unauthorized = "UNAUTHORIZED"
+    case restricted = "RESTRICTED"
   }
 
   /// Wrapps ENManager enabled state to a enabled/disabled state
@@ -119,9 +120,16 @@ final class ExposureManager: NSObject {
     return manager.exposureNotificationEnabled ? .enabled : .disabled
   }
 
-  /// Wrapps ENManager authorization state to a authorized/unauthorized state
+  /// Wraps ENManager authorization state to a authorized/unauthorized state
   var authorizationState: AuthorizationState {
-    return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
+    switch manager.authorizationStatus() {
+    case .authorized:
+      return .authorized
+    case .restricted:
+      return .restricted
+    default:
+      return .unauthorized
+    }
   }
 
   /// Wrapps ENManager state and determines if bluetooth is on or off
