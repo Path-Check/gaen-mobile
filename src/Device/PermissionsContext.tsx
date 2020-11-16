@@ -46,7 +46,7 @@ export const statusToEnum = (status: string | void): PermissionStatus => {
 }
 
 type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
-type ENEnablementStatus = `DISABLED` | `ENABLED`
+type ENEnablementStatus = `DISABLED` | `ENABLED` | `RESTRICTED`
 export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
 const initialENPermissionStatus: RawENPermissionStatus = [
   "UNAUTHORIZED",
