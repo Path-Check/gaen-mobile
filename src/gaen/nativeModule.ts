@@ -67,10 +67,13 @@ const permissionsModule = NativeModules.ENPermissionsModule
 export const requestAuthorization = async (): Promise<void> => {
   return permissionsModule
     .requestExposureNotificationAuthorization()
-    .catch((error: string) => {
+    .catch((code, message, error) => {
+      console.log(code, message, error)
       Logger.error("Failed to request ExposureNotification API Authorization", {
         error,
       })
+      if (error.includes("App restricted")) {
+      }
       throw new Error(error)
     })
 }
