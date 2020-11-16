@@ -104,14 +104,16 @@ const ExposureDetectionStatus: FunctionComponent = () => {
 
     const handleOnPressFix = async () => {
       try {
-        await exposureNotifications.request()
-
-        if (status !== ENPermissionStatus.ENABLED) {
-          showNotAuthorizedAlert()
+        const response = await exposureNotifications.request()
+        if (response.kind === "success") {
+          if (response.status !== ENPermissionStatus.ENABLED) {
+            showNotAuthorizedAlert()
+          }
         } else {
-          trackEvent("product_analytics", "exposure_notifications_enabled")
+          showNotAuthorizedAlert()
         }
-      } catch {
+        trackEvent("product_analytics", "exposure_notifications_enabled")
+      } catch (e) {
         showNotAuthorizedAlert()
       }
     }

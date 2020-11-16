@@ -51,7 +51,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     FutureCallback<Void> callback = new FutureCallback<Void>() {
       @Override
       public void onSuccess(Void result) {
-        promise.resolve(CallbackMessages.GENERIC_SUCCESS);
+        promise.resolve((Util.getEnStatusWritableArray(true)));
       }
 
       @Override

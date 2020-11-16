@@ -14,6 +14,7 @@ import {
   PermissionStatus,
 } from "../Device/PermissionsContext"
 import { LocationPermissions } from "../Device/useLocationPermissions"
+import { RequestAuthorizationResponse } from "src/gaen/nativeModule"
 
 jest.mock("@react-navigation/native")
 
@@ -195,7 +196,8 @@ const createPermissionProviderValue = (
   isBluetoothOn: boolean,
   locationPermissions: LocationPermissions,
 ) => {
-  const requestPermission: () => Promise<void> = () => Promise.resolve()
+  const requestPermission: () => Promise<RequestAuthorizationResponse> = () =>
+    Promise.resolve({ kind: "failure" as const, error: "Unknown" as const })
   return {
     isBluetoothOn,
     locationPermissions,

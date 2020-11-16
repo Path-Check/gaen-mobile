@@ -13,14 +13,7 @@ RCT_EXPORT_MODULE();
 RCT_REMAP_METHOD(requestExposureNotificationAuthorization,
                  requestExposureNotificationAuthorizationWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject) {
-  [[ExposureManager shared] requestExposureNotificationAuthorizationWithEnabled:YES
-                                                                       callback:^(ExposureManagerError * _Nullable error) {
-    if (error) {
-      reject(error.errorCode, error.localizedMessage, error.underlyingError);
-    } else {
-      resolve(@[GENERIC_SUCCESS]);
-    }
-  }];
+  [[ExposureManager shared] requestExposureNotificationAuthorizationWithResolve:resolve reject:reject];
 }
 
 RCT_REMAP_METHOD(getCurrentENPermissionsStatus,

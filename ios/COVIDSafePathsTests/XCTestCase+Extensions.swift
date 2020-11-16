@@ -103,10 +103,6 @@ extension XCTestCase {
       return Progress()
     }
     
-    enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      completionHandler(nil)
-    }
-    
     enManagerMock.getExposureInfoHandler = { summary, useExplanation, completionHandler in
       guard !forceGetExposureInfoError else {
         completionHandler(nil, GenericError.unknown)
@@ -137,10 +133,6 @@ extension XCTestCase {
     
     mockDaySummariesENExposureDetectionSummary.daySummariesHandler = {
       return [enExposureDaySummaryMock]
-    }
-    
-    enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      completionHandler(nil)
     }
     
     enManagerMock.enDetectExposuresHandler = { configuration, diagnosisKeys, completionHandler in
