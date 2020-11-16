@@ -16,7 +16,7 @@ RCT_REMAP_METHOD(requestExposureNotificationAuthorization,
   [[ExposureManager shared] requestExposureNotificationAuthorizationWithEnabled:YES
                                                                        callback:^(ExposureManagerError * _Nullable error) {
     if (error) {
-      reject(error.errorCode, error.localizedMessage, error.underlyingError);
+      reject(error.localizedMessage, error.errorCode, error.underlyingError);
     } else {
       resolve(@[GENERIC_SUCCESS]);
     }

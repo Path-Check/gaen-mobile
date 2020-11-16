@@ -154,7 +154,7 @@ final class ExposureManager: NSObject {
     manager.setExposureNotificationEnabled(enabled) { error in
       if let underlyingError = error {
         let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
-                             localizedMessage: String.cannotEnableNotifications.localized,
+                                           localizedMessage: error?.localizedDescription ?? String.cannotEnableNotifications.localized,
                              underlyingError: underlyingError)
         callback(emError)
       } else {
