@@ -191,13 +191,13 @@ const style = StyleSheet.create({
   recommendations: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
     marginBottom: Spacing.xxxLarge,
   },
   recommendation: {
     display: "flex",
     marginBottom: Spacing.xxSmall,
-    maxWidth: 120,
+    marginRight: Spacing.small,
+    maxWidth: 100,
   },
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
