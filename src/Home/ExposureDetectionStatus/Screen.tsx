@@ -105,7 +105,6 @@ const ExposureDetectionStatus: FunctionComponent = () => {
     const handleOnPressFix = async () => {
       try {
         await exposureNotifications.request()
-
         if (status !== ENPermissionStatus.ENABLED) {
           showNotAuthorizedAlert()
         } else {
