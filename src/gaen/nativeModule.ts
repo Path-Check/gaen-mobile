@@ -62,20 +62,46 @@ const toStatus = (data: string[]): RawENPermissionStatus => {
 }
 
 // Permissions Module
+
+type GAENAPIError = "ExceededCheckRateLimit" | "Unknown" | "AppRestricted"
+
 const permissionsModule = NativeModules.ENPermissionsModule
 
-export const requestAuthorization = async (): Promise<void> => {
-  return permissionsModule
-    .requestExposureNotificationAuthorization()
-    .catch((error) => {
-      Logger.error("Failed to request ExposureNotification API Authorization", {
-        error,
-      })
-      if (error.code.includes("ENErrorDomain error 14.")) {
-        console.log("!!!!")
-      }
-      throw new Error(error)
+export type RequestAuthorizationResponse =
+  | RequestAuthorizationSuccess
+  | RequestAuthorizationFailure
+
+export type RequestAuthorizationSuccess = {
+  kind: "success"
+}
+
+export type RequestAuthorizationFailure = {
+  kind: "failure"
+  error: GAENAPIError
+}
+
+export const requestAuthorization = async (): Promise<
+  RequestAuthorizationResponse
+> => {
+  try {
+    await permissionsModule.requestExposureNotificationAuthorization()
+    return { kind: "success" }
+  } catch (e) {
+    Logger.error("Failed to request ExposureNotification API Authorization", {
+      e,
     })
+    if (e.code.includes("ENErrorDomain error 14.")) {
+      return {
+        kind: "failure",
+        error: "AppRestricted",
+      }
+    } else {
+      return {
+        kind: "failure",
+        error: "Unknown",
+      }
+    }
+  }
 }
 
 export const getCurrentENPermissionsStatus = async (
@@ -112,8 +138,6 @@ interface NetworkFailure {
   kind: "failure"
   error: GAENAPIError
 }
-
-type GAENAPIError = "ExceededCheckRateLimit" | "Unknown"
 
 export const checkForNewExposures = async (): Promise<NetworkResponse> => {
   try {

@@ -1,15 +1,23 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useCallback } from "react"
 import {
   ScrollView,
   SafeAreaView,
   View,
   StyleSheet,
   TouchableOpacity,
+  Platform,
+  Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
-import { usePermissionsContext } from "../Device/PermissionsContext"
+import { RequestAuthorizationResponse } from "../gaen/nativeModule"
+import {
+  ENPermissionStatus,
+  usePermissionsContext,
+} from "../Device/PermissionsContext"
+import { openAppSettings } from "../Device"
+import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { nextScreenFromExposureNotifications } from "./activationStackController"
 import { Text } from "../components"
@@ -24,23 +32,67 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     isBluetoothOn,
     exposureNotifications,
   } = usePermissionsContext()
-
+  const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
+
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
-  const navigateToNextScreen = () => {
+  const navigateToNextScreen = useCallback(() => {
     navigation.navigate(
       nextScreenFromExposureNotifications({
         isLocationRequiredAndOff,
         isBluetoothOn,
       }),
     )
+  }, [isBluetoothOn, isLocationRequiredAndOff, navigation])
+
+  useFocusEffect(
+    useCallback(() => {
+      if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
+        navigateToNextScreen()
+      }
+    }, [exposureNotifications.status, navigateToNextScreen]),
+  )
+
+  const showNotAuthorizedAlert = () => {
+    const errorMessage = Platform.select({
+      ios: t("home.proximity_tracing.unauthorized_error_message_ios", {
+        applicationName,
+      }),
+      android: t("home.proximity_tracing.unauthorized_error_message_android", {
+        applicationName,
+      }),
+    })
+
+    Alert.alert(
+      t("home.proximity_tracing.unauthorized_error_title"),
+      errorMessage,
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => openAppSettings(),
+        },
+      ],
+    )
   }
 
-  const handleOnPressActivateExposureNotifications = async () => {
-    await exposureNotifications.request()
-    trackEvent("product_analytics", "onboarding_en_permissions_accept")
-    navigateToNextScreen()
+  const handleOnPressEnable = async () => {
+    exposureNotifications
+      .request()
+      .then((response: RequestAuthorizationResponse) => {
+        if (response.kind === "failure") {
+          if (response.error === "AppRestricted") {
+            showNotAuthorizedAlert()
+          }
+        } else {
+          trackEvent("product_analytics", "onboarding_en_permissions_accept")
+          navigateToNextScreen()
+        }
+      })
   }
 
   const handleOnPressDontEnable = () => {
@@ -75,10 +127,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
             {t("onboarding.proximity_tracing_subheader3")}
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={handleOnPressActivateExposureNotifications}
-          style={style.button}
-        >
+        <TouchableOpacity onPress={handleOnPressEnable} style={style.button}>
           <Text style={style.buttonText}>
             {t("onboarding.proximity_tracing_button")}
           </Text>

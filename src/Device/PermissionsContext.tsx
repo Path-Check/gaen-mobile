@@ -13,6 +13,7 @@ import {
 } from "react-native-permissions"
 
 import gaenStrategy from "../gaen"
+import { RequestAuthorizationResponse } from "../gaen/nativeModule"
 import { isPlatformiOS } from "../utils"
 import useIsBluetoothOn from "./useIsBluetoothOn"
 import useLocationPermissions, {
@@ -45,7 +46,7 @@ export const statusToEnum = (status: string | void): PermissionStatus => {
   }
 }
 
-type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED` | `RESTRICTED`
+type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
 type ENEnablementStatus = `DISABLED` | `ENABLED`
 export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
 const initialENPermissionStatus: RawENPermissionStatus = [
@@ -54,7 +55,6 @@ const initialENPermissionStatus: RawENPermissionStatus = [
 ]
 
 export enum ENPermissionStatus {
-  RESTRICTED,
   NOT_AUTHORIZED,
   DISABLED,
   ENABLED,
@@ -64,14 +64,11 @@ const toENPermissionStatusEnum = (
   enPermissionStatus: RawENPermissionStatus,
 ): ENPermissionStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
-  const isRestricted = enPermissionStatus[0] === "RESTRICTED"
   const isEnabled = enPermissionStatus[1] === "ENABLED"
 
   if (!isAuthorized) {
     if (isPlatformiOS()) {
-      return isRestricted
-        ? ENPermissionStatus.RESTRICTED
-        : ENPermissionStatus.NOT_AUTHORIZED
+      return ENPermissionStatus.NOT_AUTHORIZED
     } else {
       return ENPermissionStatus.DISABLED
     }
@@ -97,7 +94,7 @@ export interface PermissionsContextState {
   exposureNotifications: {
     status: ENPermissionStatus
     check: () => void
-    request: () => Promise<void>
+    request: () => Promise<RequestAuthorizationResponse>
   }
 }
 
@@ -112,7 +109,8 @@ const initialState = {
   exposureNotifications: {
     status: initialENStatus,
     check: () => {},
-    request: () => Promise.resolve(),
+    request: () =>
+      Promise.resolve({ kind: "failure" as const, error: "Unknown" as const }),
   },
 }
 
@@ -123,7 +121,7 @@ export interface PermissionStrategy {
     cb: (status: RawENPermissionStatus) => void,
   ) => { remove: () => void }
   check: (cb: (status: RawENPermissionStatus) => void) => void
-  request: () => Promise<void>
+  request: () => Promise<RequestAuthorizationResponse>
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
