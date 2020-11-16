@@ -291,6 +291,18 @@ final class ExposureManager: NSObject {
     }
   }
 
+  @objc func requestExposureNotificationAuthorization(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    manager.setExposureNotificationEnabled(true) { error in
+      if let error = error {
+        reject(error.localizedDescription, error.localizedDescription, error)
+      } else {
+        self.broadcastCurrentEnabledStatus()
+        resolve([self.authorizationState, self.enabledState])
+      }
+    }
+  }
+
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
     if #available(iOS 13.7, *) {
       return detectExposuresV2(completionHandler: completionHandler)
