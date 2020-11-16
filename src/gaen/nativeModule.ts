@@ -4,7 +4,11 @@ import {
   EventSubscription,
 } from "react-native"
 
-import { RawENPermissionStatus } from "../Device/PermissionsContext"
+import {
+  RawENPermissionStatus,
+  ENPermissionStatus,
+  toENPermissionStatusEnum,
+} from "../Device/PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
@@ -52,8 +56,6 @@ const toStatus = (data: string[]): RawENPermissionStatus => {
   const result: RawENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
   if (networkAuthorization === "AUTHORIZED") {
     result[0] = "AUTHORIZED"
-  } else if (networkAuthorization === "RESTRICTED") {
-    result[0] = "RESTRICTED"
   }
   if (networkEnablement === "ENABLED") {
     result[1] = "ENABLED"
@@ -73,6 +75,7 @@ export type RequestAuthorizationResponse =
 
 export type RequestAuthorizationSuccess = {
   kind: "success"
+  status: ENPermissionStatus
 }
 
 export type RequestAuthorizationFailure = {
@@ -84,8 +87,14 @@ export const requestAuthorization = async (): Promise<
   RequestAuthorizationResponse
 > => {
   try {
-    await permissionsModule.requestExposureNotificationAuthorization()
-    return { kind: "success" }
+    const status = await permissionsModule.requestExposureNotificationAuthorization()
+    console.log({ status })
+    const enStatus = toENPermissionStatusEnum(status)
+    console.log({ enStatus })
+    return {
+      kind: "success",
+      status: enStatus,
+    }
   } catch (e) {
     Logger.error("Failed to request ExposureNotification API Authorization", {
       e,

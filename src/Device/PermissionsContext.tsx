@@ -60,7 +60,7 @@ export enum ENPermissionStatus {
   ENABLED,
 }
 
-const toENPermissionStatusEnum = (
+export const toENPermissionStatusEnum = (
   enPermissionStatus: RawENPermissionStatus,
 ): ENPermissionStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
