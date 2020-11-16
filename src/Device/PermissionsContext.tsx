@@ -45,8 +45,8 @@ export const statusToEnum = (status: string | void): PermissionStatus => {
   }
 }
 
-type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
-type ENEnablementStatus = `DISABLED` | `ENABLED` | `RESTRICTED`
+type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED` | `RESTRICTED`
+type ENEnablementStatus = `DISABLED` | `ENABLED`
 export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
 const initialENPermissionStatus: RawENPermissionStatus = [
   "UNAUTHORIZED",
@@ -54,6 +54,7 @@ const initialENPermissionStatus: RawENPermissionStatus = [
 ]
 
 export enum ENPermissionStatus {
+  RESTRICTED,
   NOT_AUTHORIZED,
   DISABLED,
   ENABLED,
@@ -63,12 +64,17 @@ const toENPermissionStatusEnum = (
   enPermissionStatus: RawENPermissionStatus,
 ): ENPermissionStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
+  const isRestricted = enPermissionStatus[0] === "RESTRICTED"
   const isEnabled = enPermissionStatus[1] === "ENABLED"
 
   if (!isAuthorized) {
-    return isPlatformiOS()
-      ? ENPermissionStatus.NOT_AUTHORIZED
-      : ENPermissionStatus.DISABLED
+    if (isPlatformiOS()) {
+      return isRestricted
+        ? ENPermissionStatus.RESTRICTED
+        : ENPermissionStatus.NOT_AUTHORIZED
+    } else {
+      return ENPermissionStatus.DISABLED
+    }
   } else if (!isEnabled) {
     return ENPermissionStatus.DISABLED
   } else {

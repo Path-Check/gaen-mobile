@@ -52,11 +52,11 @@ const toStatus = (data: string[]): RawENPermissionStatus => {
   const result: RawENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
   if (networkAuthorization === "AUTHORIZED") {
     result[0] = "AUTHORIZED"
+  } else if (networkAuthorization === "RESTRICTED") {
+    result[0] = "RESTRICTED"
   }
   if (networkEnablement === "ENABLED") {
     result[1] = "ENABLED"
-  } else if (networkEnablement === "RESTRICTED") {
-    result[1] = "RESTRICTED"
   }
   return result
 }
