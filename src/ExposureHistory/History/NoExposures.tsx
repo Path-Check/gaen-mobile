@@ -4,9 +4,11 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
+import { useConfigurationContext } from "../../ConfigurationContext"
+import { useCustomCopy } from "../../configuration/useCustomCopy"
+
 import { Colors, Typography, Spacing, Affordances } from "../../styles"
 import { Icons } from "../../assets"
-import { useConfigurationContext } from "../../ConfigurationContext"
 
 const NoExposures: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -28,10 +30,10 @@ const NoExposures: FunctionComponent = () => {
 const HealthGuidelines: FunctionComponent = () => {
   const { t } = useTranslation()
   const {
-    healthAuthorityName,
     healthAuthorityLearnMoreUrl,
     measurementSystem,
   } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
 
   const handleOnPressHALink = () => {
     Linking.openURL(healthAuthorityLearnMoreUrl)

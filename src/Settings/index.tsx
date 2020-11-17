@@ -14,11 +14,8 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
-import {
-  loadAuthorityCopy,
-  authorityCopyTranslation,
-} from "../configuration/authorityCopy"
 import ExternalLink from "../Settings/ExternalLink"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import {
   loadAuthorityLinks,
   applyTranslations,
@@ -43,10 +40,8 @@ const Settings: FunctionComponent = () => {
   } = useTranslation()
   const navigation = useNavigation()
   const { applicationName, versionInfo } = useApplicationInfo()
-  const {
-    healthAuthorityName,
-    enableProductAnalytics,
-  } = useConfigurationContext()
+  const { enableProductAnalytics } = useConfigurationContext()
+  const { healthAuthorityName, about: customAboutCopy } = useCustomCopy()
 
   const { languageName } = useLocaleInfo()
   const showDebugMenu = env.STAGING === "true" || __DEV__
@@ -102,14 +97,14 @@ const Settings: FunctionComponent = () => {
     loadAuthorityLinks("about"),
     localeCode,
   )
-  const aboutContent = authorityCopyTranslation(
-    loadAuthorityCopy("about"),
-    localeCode,
+
+  const aboutContent =
+    customAboutCopy ||
     t("about.description", {
       applicationName,
       healthAuthorityName,
-    }),
-  )
+    })
+
   const osInfo = `${Platform.OS} v${Platform.Version}`
 
   return (

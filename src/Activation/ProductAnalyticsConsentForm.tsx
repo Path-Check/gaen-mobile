@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
 import { Colors, Typography, Spacing, Buttons } from "../styles"
@@ -20,10 +21,8 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const {
-    healthAuthorityName,
-    healthAuthorityPrivacyPolicyUrl,
-  } = useConfigurationContext()
+  const { healthAuthorityPrivacyPolicyUrl } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
   const { updateUserConsent } = useProductAnalyticsContext()
 
   const handleOnPressYes = async () => {

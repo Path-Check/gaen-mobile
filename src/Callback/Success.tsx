@@ -5,29 +5,18 @@ import { ScrollView, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useCallbackFormContext } from "./CallbackFormContext"
-import {
-  loadAuthorityCopy,
-  authorityCopyTranslation,
-} from "../configuration/authorityCopy"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 
 import { Images } from "../assets"
 import { Buttons, Typography, Spacing, Colors } from "../styles"
 
 const Success: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
-  const {
-    t,
-    i18n: { language: localeCode },
-  } = useTranslation()
+  const { t } = useTranslation()
   const { callBackRequestCompleted } = useCallbackFormContext()
-  const { healthAuthorityName } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
 
-  const successMessage = authorityCopyTranslation(
-    loadAuthorityCopy("callback_success"),
-    localeCode,
-    t("callback.success_body", { healthAuthorityName }),
-  )
+  const successMessage = t("callback.success_body", { healthAuthorityName })
 
   const handleOnPressGotIt = () => {
     callBackRequestCompleted()

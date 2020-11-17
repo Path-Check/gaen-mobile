@@ -14,7 +14,7 @@ import {
 import { useNavigation } from "@react-navigation/native"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
 import Logger from "../logger"
@@ -26,7 +26,7 @@ const defaultErrorMessage = " "
 const CallbackForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
-  const { healthAuthorityName } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
   const navigation = useNavigation()
 
   const [firstname, setFirstname] = useState("")

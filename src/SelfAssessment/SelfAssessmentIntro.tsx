@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -21,10 +22,8 @@ const SelfAssessmentIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const {
-    emergencyPhoneNumber,
-    healthAuthorityName,
-  } = useConfigurationContext()
+  const { emergencyPhoneNumber } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
 
   const handleOnPressStartAssessment = () => {
     navigation.navigate(SelfAssessmentStackScreens.HowAreYouFeeling)
