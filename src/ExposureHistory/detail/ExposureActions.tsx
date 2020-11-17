@@ -8,7 +8,14 @@ import { ModalStackScreens } from "../../navigation"
 import { Text } from "../../components"
 import { useConnectionStatus } from "../../Device/useConnectionStatus"
 
-import { Buttons, Colors, Iconography, Spacing, Typography } from "../../styles"
+import {
+  Buttons,
+  Colors,
+  Iconography,
+  Outlines,
+  Spacing,
+  Typography,
+} from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
@@ -49,7 +56,7 @@ const ExposureActions: FunctionComponent = () => {
         {displayCallbackForm && (
           <RequestCallBackActions healthAuthorityName={healthAuthorityName} />
         )}
-        <Text style={style.bottomHeaderText}>
+        <Text style={style.bottomSubheaderText}>
           {t("exposure_history.exposure_detail.general_guidance", {
             healthAuthorityName,
           })}
@@ -184,17 +191,17 @@ const style = StyleSheet.create({
   recommendations: {
     flexDirection: "row",
     flexWrap: "wrap",
-    display: "flex",
-    justifyContent: "space-between",
     marginBottom: Spacing.xxxLarge,
   },
   recommendation: {
     display: "flex",
-    alignItems: "center",
+    marginBottom: Spacing.xxSmall,
+    marginRight: Spacing.small,
+    maxWidth: 100,
   },
   recommendationBubbleCircle: {
     ...Iconography.smallIcon,
-    borderRadius: 50,
+    borderRadius: Outlines.borderRadiusMax,
     backgroundColor: Colors.secondary.shade10,
     padding: Spacing.xLarge,
     marginBottom: Spacing.xSmall,
