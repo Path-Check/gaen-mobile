@@ -64,10 +64,6 @@ const DeleteConfirmation: FunctionComponent = () => {
     )
   }
 
-  const handleOnPressDeleteAllData = () => {
-    showAlert()
-  }
-
   const handleOnPressConfirmDeleteData = async () => {
     const result = await deleteAllData()
     if (result.kind === "success") {
@@ -81,6 +77,10 @@ const DeleteConfirmation: FunctionComponent = () => {
         ...errorFlashMessageOptions,
       })
     }
+  }
+
+  const handleOnPressDeleteAllData = () => {
+    showAlert()
   }
 
   return (
