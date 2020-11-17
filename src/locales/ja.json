@@ -7,6 +7,7 @@
   },
   "common": {
     "back": "戻る",
+    "cancel": "キャンセル",
     "close": "閉じる",
     "continue": "継続する",
     "done": "完成です",
@@ -122,6 +123,7 @@
       "tracing_on_header": "アクティブ"
     },
     "call_emergency_services": "緊急サービスに電話する",
+    "check_if_your_symptoms": "症状を入力して、安全に過ごす方法についてすぐにアドバイスをもらいましょう。",
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
     "have_a_positive_test": "陽性のテスト結果コードがありますか？",
@@ -130,7 +132,13 @@
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
     "proximity_tracing_info_subheader_2": "データは安全ですか?",
-    "report_result": "結果を送信する"
+    "proximity_tracing": {
+      "unauthorized_error_message_android": "感染リスク通知を有効にするには、設定アプリのCOVID-19感染リスク通知に移動し、「感染リスク通知を使用する」を有効にします。",
+      "unauthorized_error_message_ios": "感染リスク通知を有効にするには、[設定] および [感染リスク情報の共有] の [感染リスク通知] セクションに移動し、[アクティブ領域] を [%1$s:アプリケーション名] に設定します。",
+      "unauthorized_error_title": "感染リスク通知を有効にする"
+    },
+    "report_result": "結果を送信する",
+    "to_submit_your_test": "陽性のテスト結果を提出するには、コンタクトトレーサから陽性のテスト結果コードを取得する必要があります。"
   },
   "label": {
     "check": "チェックマーク",
@@ -147,7 +155,8 @@
     "exposure": "接触",
     "exposure_history": "感染リスクの履歴",
     "home": "ホーム",
-    "more_info": "より詳しい情報"
+    "more_info": "より詳しい情報",
+    "symptom_history": "症状の履歴"
   },
   "onboarding": {
     "activation_header_title": "アプリの設定",
@@ -219,5 +228,23 @@
     "location": "ロケーション",
     "protect_privacy": "プライバシーを保護する方法",
     "select_language": "言語を選択する"
+  },
+  "self_assessment": {
+    "guidance": {
+      "feeling_fine": "体調が改善したようでよかったです。続けて症状を監視し、家にいる必要があります。"
+    },
+    "intro": {
+      "this_is_based_on": "これはCDCからの最新のガイダンスに基づいており、ウイルスがどのように広がるか、およびウイルスが引き起こす病気について詳しく知るにつれて、時間の経過とともに更新される可能性があります。"
+    },
+    "underlying_conditions": {
+      "cerebrovascular_disease": "脳卒中や認知症などの脳血管疾患または神経学的状態",
+      "lung_disease": "中等度から重度の喘息、COPD、嚢胞性線維症、肺線維症などの慢性肺疾患"
+    }
+  },
+  "settings": {
+    "delete_data_disclosure1": "下の「マイデータを削除」ボタンをクリックすると、アプリは、携帯電話に保存されている症状の履歴データを削除します。",
+    "delete_data_disclosure2": "これにより、露出通知のために携帯電話によって作成または収集されたデータは削除されません。\n\nこの追加データは、デバイスの設定で削除できます。",
+    "delete_my_data": "データを削除する",
+    "share_anonymized_data": "匿名化されたデータを共有する"
   }
 }

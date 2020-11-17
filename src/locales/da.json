@@ -5,6 +5,7 @@
     "version": "Version:"
   },
   "common": {
+    "cancel": "Annullér",
     "continue": "Fortsæt",
     "done": "Udført",
     "more": "Mere",

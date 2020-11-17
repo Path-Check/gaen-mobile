@@ -17,6 +17,7 @@
   },
   "common": {
     "back": "Précédent",
+    "cancel": "Annuler",
     "close": "Fermer",
     "close_screen": "Fermer l'écran",
     "continue": "Continuer",
