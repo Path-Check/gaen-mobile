@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from "react"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { Pressable, View, StyleSheet } from "react-native"
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { SvgXml } from "react-native-svg"
@@ -9,124 +13,194 @@ import HomeStack from "./HomeStack"
 import SymptomHistoryStack from "./SymptomHistoryStack"
 import SettingsStack from "./SettingsStack"
 import { useConfigurationContext } from "../ConfigurationContext"
-
-import { Stacks } from "./index"
+import { TabRoute, TabRoutes } from "./index"
 import { TabBarIcons } from "../assets/svgs/TabBarNav"
-import { Colors } from "../styles"
+import { Text } from "../components"
 
-const Tab = createBottomTabNavigator()
+import { Colors, Layout, Outlines, Spacing, Typography } from "../styles"
+
+type Tab = {
+  name: TabRoute
+  component: FunctionComponent
+}
 
 const MainTabNavigator: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const insets = useSafeAreaInsets()
   const { displaySymptomHistory } = useConfigurationContext()
 
-  interface TabIconProps extends TabBarIconProps {
-    icon: string
+  const homeTab = {
+    name: TabRoutes.Home,
+    component: HomeStack,
+  }
+  const exposureHistoryTab = {
+    name: TabRoutes.ExposureHistory,
+    component: ExposureHistoryStack,
+  }
+  const symptomHistoryTab = {
+    name: TabRoutes.SymptomHistory,
+    component: SymptomHistoryStack,
+  }
+  const settingsTab = {
+    name: TabRoutes.Settings,
+    component: SettingsStack,
   }
 
-  const TabIcon: FunctionComponent<TabIconProps> = ({
-    focused,
-    size,
-    icon,
-  }) => {
-    return (
+  const tabs: Tab[] = displaySymptomHistory
+    ? [homeTab, exposureHistoryTab, symptomHistoryTab, settingsTab]
+    : [homeTab, exposureHistoryTab, settingsTab]
+
+  const TabNavigator = createBottomTabNavigator()
+
+  return (
+    <TabNavigator.Navigator
+      tabBar={(props) => <TabBar {...props} tabs={tabs} />}
+    >
+      {tabs.map(({ name, component }) => {
+        return (
+          <TabNavigator.Screen name={name} component={component} key={name} />
+        )
+      })}
+    </TabNavigator.Navigator>
+  )
+}
+
+type TabBarProps = BottomTabBarProps & { tabs: Tab[] }
+
+const TabBar: FunctionComponent<TabBarProps> = ({
+  state,
+  navigation,
+  tabs,
+}) => {
+  const { t } = useTranslation()
+  const insets = useSafeAreaInsets()
+
+  return (
+    <View
+      style={{
+        ...style.tabBarContainer,
+        paddingBottom: insets.bottom + Spacing.xxSmall,
+      }}
+    >
+      {tabs.map((tab, index: number) => {
+        const isFocused = (tab: Tab) => {
+          const focusedRouteName = state.routeNames[state.index]
+          return tab.name === focusedRouteName
+        }
+
+        const focused = isFocused(tab)
+
+        const handleOnPress = () => {
+          !focused && navigation.navigate(tab.name)
+        }
+
+        const textColor = focused
+          ? Colors.primary.shade100
+          : Colors.neutral.shade100
+
+        type TabButtonConfig = {
+          label: string
+          icon: string
+        }
+
+        const determineConfig = (tab: Tab): TabButtonConfig => {
+          switch (tab.name) {
+            case "Home": {
+              return {
+                label: t("navigation.home"),
+                icon: TabBarIcons.House,
+              }
+            }
+            case "ExposureHistory": {
+              return {
+                label: t("navigation.exposure_history"),
+                icon: TabBarIcons.Exposure,
+              }
+            }
+            case "SymptomHistory": {
+              return {
+                label: t("navigation.symptom_history"),
+                icon: TabBarIcons.Heartbeat,
+              }
+            }
+            case "Settings": {
+              return {
+                label: t("navigation.settings"),
+                icon: TabBarIcons.Gear,
+              }
+            }
+          }
+        }
+
+        const { label, icon } = determineConfig(tab)
+
+        return (
+          <Pressable
+            onPress={handleOnPress}
+            style={{
+              ...style.tabButton,
+              width: Layout.screenWidth / tabs.length,
+            }}
+            accessibilityRole="button"
+            accessibilityState={focused ? { selected: true } : {}}
+            key={index}
+          >
+            <TabIcon focused={focused} icon={icon} />
+            <Text
+              allowFontScaling={false}
+              numberOfLines={2}
+              ellipsizeMode="middle"
+              style={{ ...style.tabLabelText, color: textColor }}
+            >
+              {label}
+            </Text>
+          </Pressable>
+        )
+      })}
+    </View>
+  )
+}
+
+interface TabIconProps {
+  focused: boolean
+  icon: string
+}
+
+const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
+  const iconSize = 22
+
+  return (
+    <View style={style.tabIconContainer}>
       <SvgXml
         xml={icon}
         fill={focused ? Colors.primary.shade100 : Colors.neutral.shade50}
-        width={size}
-        height={size}
+        width={iconSize}
+        height={iconSize}
       />
-    )
-  }
-
-  interface TabBarIconProps {
-    focused: boolean
-    size: number
-  }
-
-  const HomeIcon: FunctionComponent<TabBarIconProps> = ({ focused, size }) => {
-    return <TabIcon icon={TabBarIcons.House} focused={focused} size={size} />
-  }
-
-  const ExposureHistoryIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Exposure} focused={focused} size={size} />
-    )
-    return tabIcon
-  }
-
-  const HeartbeatIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Heartbeat} focused={focused} size={size} />
-    )
-    return tabIcon
-  }
-
-  const SettingsIcon: FunctionComponent<TabBarIconProps> = ({
-    focused,
-    size,
-  }) => {
-    const tabIcon = (
-      <TabIcon icon={TabBarIcons.Gear} focused={focused} size={size} />
-    )
-    return tabIcon
-  }
-
-  const tabBarOptions = {
-    showLabel: false,
-    style: {
-      backgroundColor: Colors.background.primaryLight,
-      borderTopWidth: 1,
-      borderTopColor: Colors.neutral.shade10,
-      height: insets.bottom + 60,
-    },
-  }
-
-  return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
-      <Tab.Screen
-        name={Stacks.Home}
-        component={HomeStack}
-        options={{
-          tabBarLabel: t("navigation.home"),
-          tabBarIcon: HomeIcon,
-        }}
-      />
-      <Tab.Screen
-        name={Stacks.ExposureHistoryFlow}
-        component={ExposureHistoryStack}
-        options={{
-          tabBarLabel: t("navigation.exposure_history"),
-          tabBarIcon: ExposureHistoryIcon,
-        }}
-      />
-      {displaySymptomHistory && (
-        <Tab.Screen
-          name={Stacks.SymptomHistory}
-          component={SymptomHistoryStack}
-          options={{
-            tabBarLabel: t("navigation.symptom_history"),
-            tabBarIcon: HeartbeatIcon,
-          }}
-        />
-      )}
-      <Tab.Screen
-        name={Stacks.Settings}
-        component={SettingsStack}
-        options={{
-          tabBarLabel: t("navigation.settings"),
-          tabBarIcon: SettingsIcon,
-        }}
-      />
-    </Tab.Navigator>
+    </View>
   )
 }
+
+const style = StyleSheet.create({
+  tabBarContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingTop: Spacing.xxSmall,
+    backgroundColor: Colors.background.primaryLight,
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade10,
+  },
+  tabButton: {
+    alignItems: "center",
+  },
+  tabIconContainer: {
+    marginBottom: Spacing.xxSmall,
+  },
+  tabLabelText: {
+    ...Typography.style.normal,
+    fontSize: Typography.size.x15,
+    textAlign: "center",
+    lineHeight: Typography.lineHeight.x5,
+    maxWidth: Spacing.xxxMassive,
+  },
+})
 
 export default MainTabNavigator
