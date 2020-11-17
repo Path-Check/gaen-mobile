@@ -72,7 +72,46 @@ class MiscelaneousUnitTests: XCTestCase {
         return .post
       }
     }
-    let postAPIRequest = POSTAPIRequest()
-    let typeOfPost = type(of: postAPIRequest.encoding)
   }
+
+  func testFetchExposureKeysSuccess() {
+    let expectation = self.expectation(description: "a call is made to get the diagnosis keys")
+    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
+    exposureManager.fetchExposureKeys { (keys, error) in
+      XCTAssertNil(error)
+      XCTAssertEqual(keys?.count, 1)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout: 0)
+  }
+
+  func testFetchExposureKeysError() {
+    let expectation = self.expectation(description: "a call is made to get the diagnosis keys")
+    let exposureManager = defaultExposureManager(withKeys: false, enAPIVersion: .v1)
+    exposureManager.fetchExposureKeys { (keys, error) in
+      XCTAssertEqual(error?.errorCode, ExposureManagerErrorCode.noExposureKeysFound.rawValue)
+      XCTAssertNotNil(error?.underlyingError)
+      expectation.fulfill()
+    }
+    wait(for: [expectation], timeout: 0)
+  }
+
+  func testFetchLastDetectionDate() {
+    let userState = UserState()
+    let exposureManager = defaultExposureManager(enAPIVersion: .v1, userState: userState)
+
+    // Last detection date should initially be nil
+    exposureManager.fetchLastDetectionDate { (posixDate, error) in
+      XCTAssertNil(posixDate)
+      XCTAssertEqual(error?.errorCode, ExposureManagerErrorCode.detectionNeverPerformed.rawValue)
+    }
+
+    let date = Date()
+    userState.lastExposureCheckDate = date
+    exposureManager.fetchLastDetectionDate { (posixDate, error) in
+      XCTAssertNil(error)
+      XCTAssertEqual(posixDate, NSNumber(value: date.posixRepresentation))
+    }
+  }
+
 }
