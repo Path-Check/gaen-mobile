@@ -44,11 +44,6 @@ extension ExposureManager: ExposureManagerDebuggable {
     case .resetExposures:
       btSecureStorage.exposures = List<Exposure>()
       resolve("Exposures: \(btSecureStorage.exposures.count)")
-    case .toggleENAuthorization:
-      let enabled = manager.exposureNotificationEnabled ? false : true
-      requestExposureNotificationAuthorization(enabled: enabled) { result in
-        resolve("EN Enabled: \(self.manager.exposureNotificationEnabled)")
-      }
     case .showLastProcessedFilePath:
       let path = btSecureStorage.userState.urlOfMostRecentlyDetectedKeyFile
       resolve(path)

@@ -135,27 +135,6 @@ final class ExposureManager: NSObject {
     callback(authorizationState.rawValue, enabledState.rawValue)
   }
 
-  ///Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status, if not, it returns and error
-  @objc func requestExposureNotificationAuthorization(enabled: Bool,
-                                                      callback: @escaping (ExposureManagerError?) -> Void) {
-    // Ensure exposure notifications are enabled if the app is authorized. The app
-    // could get into a state where it is authorized, but exposure
-    // notifications are not enabled,  if the user initially denied Exposure Notifications
-    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
-    // in Settings.
-    manager.setExposureNotificationEnabled(enabled) { error in
-      if let underlyingError = error {
-        let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
-                                           localizedMessage: error?.localizedDescription ?? String.cannotEnableNotifications.localized,
-                             underlyingError: underlyingError)
-        callback(emError)
-      } else {
-        self.broadcastCurrentEnabledStatus()
-        callback(nil)
-      }
-    }
-  }
-
   /// Returns the current exposures as a json string representation
   @objc var currentExposures: String {
     return btSecureStorage.userState.recentExposures.jsonStringRepresentation()
@@ -283,8 +262,14 @@ final class ExposureManager: NSObject {
     }
   }
 
+  /// Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status
   @objc func requestExposureNotificationAuthorization(resolve: @escaping RCTPromiseResolveBlock,
                              reject: @escaping RCTPromiseRejectBlock) {
+    // Ensure exposure notifications are enabled if the app is authorized. The app
+    // could get into a state where it is authorized, but exposure
+    // notifications are not enabled,  if the user initially denied Exposure Notifications
+    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
+    // in Settings.
     manager.setExposureNotificationEnabled(true) { error in
       if let error = error {
         reject(error.localizedDescription, error.localizedDescription, error)

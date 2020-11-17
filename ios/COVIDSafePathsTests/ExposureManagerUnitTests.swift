@@ -326,13 +326,11 @@ class ExposureManagerTests: XCTestCase {
       invalidateExpectation.fulfill()
     }
     
-    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      if enabled {
-        setExposureNotificationEnabledTrueExpectation.fulfill()
-      }
-      completionHandler(nil)
+    mockENManager.setExposureNotificationEnabledHandler = { _, completion in
+      setExposureNotificationEnabledTrueExpectation.fulfill()
+      completion(nil)
     }
-    
+
     _ = ExposureManager(exposureNotificationManager: mockENManager,
                         notificationCenter: notificationCenterMock)
     wait(for: [activateExpectation,
@@ -473,39 +471,39 @@ class ExposureManagerTests: XCTestCase {
   }
   
   func testEnableNotificationsSuccess() {
-    let setEnabled = true
-    let setExposureNotificationEnabledExpectation = self.expectation(description: "Request the change of state to the underlying manager")
-    let mockENManager = ENManagerMock()
-    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      if enabled == setEnabled {
-        setExposureNotificationEnabledExpectation.fulfill()
-      }
-      completionHandler(nil)
-    }
+    let resolveExpectation = self.expectation(description: "resolve is called")
+    let rejectExpectation = self.expectation(description: "reject is not called")
     let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
+    rejectExpectation.isInverted = true
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
       if notification.name == .AuthorizationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
+    let mockENManager = ENManagerMock()
+    mockENManager.setExposureNotificationEnabledHandler = { _, completion in
+      resolveExpectation.fulfill()
+      completion(nil)
+    }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(enabled: setEnabled) { (error) in
-      XCTAssertNil(error, "There should be no error")
-    }
-    wait(for: [setExposureNotificationEnabledExpectation,
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    wait(for: [resolveExpectation,
+               rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)
   }
   
   func testEnableNotificationsError() {
-    let setExposureNotificationEnabledExpectation = self.expectation(description: "Request the change of state to the underlying manager")
-    let mockENManager = ENManagerMock()
-    mockENManager.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      setExposureNotificationEnabledExpectation.fulfill()
-      completionHandler(ENError(ENError.Code.unknown))
-    }
+    let resolveExpectation = self.expectation(description: "resolve is not called")
+    let rejectExpectation = self.expectation(description: "reject is called")
+    resolveExpectation.isInverted = true
     let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
+
+    let mockENManager = ENManagerMock()
+    mockENManager.setExposureNotificationEnabledHandler = { _, _ in
+      rejectExpectation.fulfill()
+    }
     broadcastAuthorizationStateExpectation.isInverted = true
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
@@ -515,10 +513,9 @@ class ExposureManagerTests: XCTestCase {
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(enabled: false) { (error) in
-      XCTAssertNotNil(error, "There should be an error")
-    }
-    wait(for: [setExposureNotificationEnabledExpectation,
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    wait(for: [resolveExpectation,
+               rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)
   }
   
@@ -738,20 +735,6 @@ class ExposureManagerTests: XCTestCase {
   
   func testDebugResetExposures() {
     let debugAction = DebugAction.resetExposures
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    let successExpetactionResolve = self.expectation(description: "resolve is called")
-    let successExpectationReject = self.expectation(description: "reject is not called")
-    successExpectationReject.isInverted = true
-    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-      successExpetactionResolve.fulfill()
-    }) { (_, _, _) in
-      successExpectationReject.fulfill()
-    }
-    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
-  }
-  
-  func testDebugToggleENAuthorization() {
-    let debugAction = DebugAction.toggleENAuthorization
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
     let successExpetactionResolve = self.expectation(description: "resolve is called")
     let successExpectationReject = self.expectation(description: "reject is not called")
