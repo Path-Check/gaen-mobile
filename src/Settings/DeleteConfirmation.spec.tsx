@@ -11,7 +11,7 @@ jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
 
 describe("DeleteConfirmation", () => {
-  it("allows a user to delete their data", () => {
+  it("shows a confirmation alert if the user presses delete my data", () => {
     const alertSpy = jest.spyOn(Alert, "alert")
 
     const { getByLabelText } = render(
