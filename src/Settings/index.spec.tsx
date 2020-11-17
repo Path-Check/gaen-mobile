@@ -6,8 +6,6 @@ import { SettingsStackScreens } from "../navigation"
 import SettingsScreen from "./index"
 import { useNavigation } from "@react-navigation/native"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
-import { ConfigurationContext } from "../ConfigurationContext"
-import { factories } from "../factories"
 import {
   loadAuthorityLinks,
   applyTranslations,
@@ -65,30 +63,6 @@ describe("Settings", () => {
     const { getByText } = render(<SettingsScreen />)
 
     expect(getByText(`${mockOsName} v${mockOsVersion}`)).toBeDefined()
-  })
-
-  it("shows the screen description with the app name and the authority", () => {
-    const healthAuthorityName = "authorityName"
-    const applicationName = "applicationName"
-
-    ;(useApplicationInfo as jest.Mock).mockReturnValueOnce({
-      applicationName,
-      versionInfo: "versionInfo",
-    })
-
-    const { getByText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({ healthAuthorityName })}
-      >
-        <SettingsScreen />
-      </ConfigurationContext.Provider>,
-    )
-
-    expect(
-      getByText(
-        /The applicationName app is made available by the authorityName/,
-      ),
-    ).toBeDefined()
   })
 
   it("navigates to the authority links when clicked", async () => {

@@ -95,12 +95,10 @@ describe("ExposureDetail", () => {
 
   describe("when the health authority does not have a callback form", () => {
     it("only shows the guidance information", () => {
-      const healthAuthorityName = "healthAuthorityName"
       const { getByText, queryByLabelText } = render(
         <ConfigurationContext.Provider
           value={factories.configurationContext.build({
             displayCallbackForm: false,
-            healthAuthorityName,
           })}
         >
           <ExposureDetail />
@@ -114,12 +112,10 @@ describe("ExposureDetail", () => {
 
   describe("when the health authority has a callback form", () => {
     it("shows info about what to do next and general guidance", () => {
-      const healthAuthorityName = "healthAuthorityName"
-      const { getByText, queryByText } = render(
+      const { queryByText } = render(
         <ConfigurationContext.Provider
           value={factories.configurationContext.build({
             displayCallbackForm: true,
-            healthAuthorityName,
           })}
         >
           <ExposureDetail />
@@ -127,8 +123,8 @@ describe("ExposureDetail", () => {
       )
 
       expect(
-        getByText(
-          `Schedule a call to get support from a contact tracer from the ${healthAuthorityName}.`,
+        queryByText(
+          `Schedule a call to get support from a contact tracer from the`,
         ),
       ).toBeDefined()
       expect(queryByText("General Guidance")).not.toBeNull()

@@ -7,6 +7,7 @@ import { SvgXml } from "react-native-svg"
 import { ModalStackScreens } from "../../navigation"
 import { Text } from "../../components"
 import { useConnectionStatus } from "../../Device/useConnectionStatus"
+import { useCustomCopy } from "../../configuration/useCustomCopy"
 
 import {
   Buttons,
@@ -26,10 +27,10 @@ const ExposureActions: FunctionComponent = () => {
   const {
     displayCallbackForm,
     displaySelfAssessment,
-    healthAuthorityName,
     healthAuthorityAdviceUrl,
     measurementSystem,
   } = useConfigurationContext()
+  const { healthAuthorityName } = useCustomCopy()
 
   const handleOnPressNextStep = () => {
     Linking.openURL(healthAuthorityAdviceUrl)

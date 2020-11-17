@@ -15,10 +15,7 @@ import { useLocaleInfo } from "./locales/languages"
 import { useApplicationName } from "./Device/useApplicationInfo"
 import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
-import {
-  loadAuthorityCopy,
-  authorityCopyTranslation,
-} from "./configuration/authorityCopy"
+import { useCustomCopy } from "./configuration/useCustomCopy"
 
 import { Images, Icons } from "./assets"
 import {
@@ -34,15 +31,13 @@ const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { languageName, localeCode } = useLocaleInfo()
+  const { languageName } = useLocaleInfo()
   const { applicationName } = useApplicationName()
   const { displayAgeVerification } = useConfigurationContext()
 
-  const welcomeMessage = authorityCopyTranslation(
-    loadAuthorityCopy("welcome_message"),
-    localeCode,
-    t("label.launch_screen1_header"),
-  )
+  const { welcomeMessage: customWelcomeMessage } = useCustomCopy()
+  const welcomeMessage =
+    customWelcomeMessage || t("label.launch_screen1_header")
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)

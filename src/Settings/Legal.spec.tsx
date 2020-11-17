@@ -35,24 +35,6 @@ describe("Legal", () => {
     })
   })
 
-  it("shows the authority name of the application", () => {
-    const healthAuthorityName = "authority name"
-
-    ;(useApplicationName as jest.Mock).mockReturnValueOnce({
-      applicationName: "applicationName",
-    })
-
-    const { getByText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({ healthAuthorityName })}
-      >
-        <Legal />
-      </ConfigurationContext.Provider>,
-    )
-
-    expect(getByText(healthAuthorityName)).toBeDefined()
-  })
-
   describe("authority legal privacy policy url", () => {
     it("displays the link and can navigate to it if present", async () => {
       const healthAuthorityLegalPrivacyPolicyUrl = "authorityPrivacyPolicyUrl"

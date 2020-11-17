@@ -5,10 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useConfigurationContext } from "../ConfigurationContext"
 import ExternalLink from "./ExternalLink"
-import {
-  loadAuthorityCopy,
-  authorityCopyTranslation,
-} from "../configuration/authorityCopy"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import {
   loadAuthorityLinks,
   applyTranslations,
@@ -25,16 +22,10 @@ const Legal: FunctionComponent = () => {
     i18n: { language: localeCode },
   } = useTranslation()
   const { applicationName } = useApplicationName()
-  const {
-    healthAuthorityName,
-    healthAuthorityLegalPrivacyPolicyUrl,
-  } = useConfigurationContext()
+  const { healthAuthorityLegalPrivacyPolicyUrl } = useConfigurationContext()
+  const { healthAuthorityName, legal: customLegalCopy } = useCustomCopy()
 
-  const legalContent = authorityCopyTranslation(
-    loadAuthorityCopy("legal"),
-    localeCode,
-    healthAuthorityName,
-  )
+  const legalContent = customLegalCopy || healthAuthorityName
 
   const authorityLinks = applyTranslations(
     loadAuthorityLinks("legal"),

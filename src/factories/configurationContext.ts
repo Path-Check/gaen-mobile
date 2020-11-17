@@ -18,7 +18,6 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityCovidDataUrl: "authorityCovidDataUrl",
   healthAuthorityLearnMoreUrl: "authorityLearnMoreUrl",
   healthAuthorityEulaUrl: "healthAuthorityEulaUrl",
-  healthAuthorityName: "authorityName",
   healthAuthorityPrivacyPolicyUrl: "authorityPrivacyPolicyUrl",
   healthAuthorityLegalPrivacyPolicyUrl: "authorityLegalPrivacyPolicyUrl",
   measurementSystem: "Imperial",

@@ -1,14 +1,12 @@
 {
-  "welcome_message": {
-    "en": ""
+  "en": {
+    "welcomeMessage": "Welcome To",
+    "about": "The PathCheck GAEN Mobile application is brought to you by PathCheck (this copy is customizable)",
+    "legal": "PathCheck GAEN Mobile Legal Policies: (this copy is customizable)",
+    "healthAuthorityName": "Health Authority"
   },
-  "about": {
-    "en": ""
-  },
-  "legal": {
-    "en": ""
-  },
-  "callback_success": {
-    "en": ""
+  "es_PR": {
+    "welcomeMessage": "Bienvenido a",
+    "healthAuthorityName": "Autoridad sanitaria"
   }
 }
