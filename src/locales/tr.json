@@ -17,6 +17,7 @@
   },
   "common": {
     "back": "Geri",
+    "cancel": "İptal et",
     "close": "Kapat",
     "close_screen": "Ekranı kapat",
     "continue": "Devam et",
@@ -69,12 +70,12 @@
     "title": "Bilinmeyen hata"
   },
   "export": {
-    "code_input_body_bluetooth": "Doğrulama kodunuzu girin",
+    "code_input_body_bluetooth": "Doğrulama kodunuzu gir",
     "code_input_button_cancel": "İptal et",
     "code_input_placeholder": "Kodu gir",
-    "code_input_title_bluetooth": "Teşhisinizi doğrulayın",
-    "complete_body_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsunuz",
-    "complete_title": "Toplumun güvenliğini sağlamaya yardımcı olduğunuz için teşekkürler",
+    "code_input_title_bluetooth": "Tanıyı doğrula",
+    "complete_body_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsun",
+    "complete_title": "Toplumun güvenliğini sağlamaya yardımcı olduğun için teşekkürler",
     "consent_body_0": "Pozitif olduğunu paylaşıp paylaşmamak isteğe bağlıdır ve ancak sen kabul edersen yapılabilir.",
     "consent_body_1": "Bu bilgiyi paylaşmaya karar verirsen toplumun diğer mensuplarının kendi sağlıklarıyla ilgili bilgiye dayalı kararlar almalarına yardımcı olur, virüsün kontrol altına alınmasında üzerinize düşeni yapmış olursun.",
     "consent_body_2": "Paylaşılacak tek bilgi, telefonunun son 14 gün içinde yakınlarda bulunmuş olan diğer telefonlarla Bluetooth aracılığıyla paylaştığı rastgele sayı dizisi ile belirtilerinin ne zaman geliştiğine dair ağırlıklı risk puanlarıdır.",
@@ -155,7 +156,7 @@
   "exposure_scanning_status": {
     "fix_this": "Bunu düzelt",
     "learn_more": "Daha fazla bilgi edin",
-    "your_device_is_not": "Cihazın maruz kalma için tarama yapmıyor.  Maruziyet Tespitini etkinleştirmek için aşağıdaki sorunları gider.",
+    "your_device_is_not": "Cihazın maruziyet için tarama yapmıyor.  Maruziyet Tespitini etkinleştirmek için aşağıdaki sorunları gider.",
     "your_device_is_scanning": "Cihazın maruz kalma taraması yapıyor ve uygulamayı kapatsan bile taramaya devam edecek."
   },
   "home": {
@@ -172,7 +173,7 @@
       "share": "{{applicationName}} paylaş",
       "share_message": " COVID-19'u kontrol altına almada bizlere yardımcı olabilecek {{applicationName}} uygulamasına bir bak! {{appDownloadLink}}",
       "tracing_off_header": "Maruziyet Tespiti Kapalı",
-      "tracing_off_subheader": "Olası maruziyetlerle ilgili bilgi alabilmek amacıyla Bluetooth ve Yakınlık İzlemeyi etkinleştirin",
+      "tracing_off_subheader": "Olası maruziyetlerle ilgili bilgi alabilmek amacıyla Bluetooth ve Yakınlık İzlemeyi etkinleştir",
       "tracing_on_header": "Maruziyet Tespiti Açık"
     },
     "call_emergency_services": "Acil Servisleri Ara",
@@ -199,11 +200,12 @@
     "to_submit_your_test": "Pozitif olan test sonucunu gönderebilmek için bir temas takipçisinden pozitif test sonucu kodunu alman gerekiyor."
   },
   "label": {
+    "check": "Onay işareti",
     "checked_checkbox": "İşratelenmiş",
     "go_to_home_view": "Ana sayfaya git",
-    "launch_enable_notif": "Bildirimleri Açın",
+    "launch_enable_notif": "Bildirimleri Aç",
     "launch_get_started": "Başla",
-    "launch_screen1_header": "Hoşgeldiniz",
+    "launch_screen1_header": "Hoşgeldin",
     "privacy_policy": "Gizlilik Politikası",
     "question_icon": "Soru işareti simgesi",
     "unchecked_checkbox": "İşaretlenmemiş"
@@ -211,6 +213,7 @@
   "navigation": {
     "exposure": "Maruz Kalma",
     "exposure_history": "Maruz Kalma Geçmişi",
+    "home": "Ana ekran",
     "more_info": "Daha fazla bilgi",
     "settings": "Ayarlar",
     "symptom_history": "Belirti Geçmişi"
@@ -238,7 +241,7 @@
     "no_take_me": "Hayır, beni geri götür",
     "notification_body1": "COVID-19 pozitif olduğunu bildiren birisiyle yolunun kesişmiş olabilmesi halinde bildirim alacaksın",
     "notification_body2": "Uygulama Bluetooth Düşük Enerji'yi kullanarak  bunu yapar ve  kim  veya nerede olduğunu bilmeden rastgele kodlar kaydeder. Ne zaman istersen bunu ayarlardan kapatabilirsin.",
-    "notification_header": "Maruz kalmış olmanız halinde bilgilendirilin",
+    "notification_header": "Maruz kalmış olman halinde bilgilendirme al",
     "notification_subheader1": "Ne zaman bildirim alacağım?",
     "notification_subheader2": "Nasıl çalışıyor?",
     "notification_subheader3": "Bu uygulama seni COVID-19 enfkesiyonuna karşı korumaz",
@@ -269,7 +272,7 @@
     "screen1_image_label": "İki kişi beşlik çakıyor",
     "screen2_button": "Gizliliğim korunuyor mu?",
     "screen2_header": "Telefonun karşılaştığı diğer cihazları hatırlar. Ancak seni kimseye tanıtmaz.",
-    "screen2_image_label": "İki kişi telefonda",
+    "screen2_image_label": "İki kişi telefonlarını kullanıyor",
     "screen3_button": "Ya maruz kalmışsam?",
     "screen3_header": "Hiçbir kişisel tanımlayıcı bilgi telefonundan çıkış yapmaz.",
     "screen3_image_label": "Kilitli bir telefonun önündeki bir kişi",
@@ -296,6 +299,7 @@
     "exposure_history": "Maruz Kalma Geçmişi",
     "exposure_notifications": "Maruz Kalma Bildirimleri",
     "exposure_scanning": "Maruziyet Tespiti",
+    "home": "Ana ekran",
     "how_the_app_works": "Uygulama nasıl çalışıyor?",
     "legal": "Hukuki",
     "location": "Konum",
@@ -374,7 +378,7 @@
       "covid19_self_assessment": "COVID-19 Öz Değerlendirmesi",
       "find_out_how_to_care": "COVID-19 pozitif biriyle yakın temasta bulunduktan sonra kendine ve başkalarına nasıl bakacağını öğren",
       "if_this_is": "Bu acil bir durumsa, lütfen {{emergencyPhoneNumber}} numaralı telefonu ara.",
-      "this_is_based_on": "Bu, CDC'nin en güncel kılavuzuna dayanmaktadır ve virüsün nasıl yayıldığı ve neden olduğu hastalık hakkında daha fazla şey öğrendikçe zamanla güncellenebilir.",
+      "this_is_based_on": "Bu, CDC'nin en güncel kılavuzuna dayanmaktadır ve virüsün nasıl yayıldığı ve neden olduğu hastalık hakkında daha fazla şey öğrendikçe güncellenebilir.",
       "this_is_not_intended": "Bu tanı veya tedavi amaçlı değildir",
       "you_are_a_resident": "{{HealthAuthorityName}} tarafından desteklenen toplumun bir sakinisin."
     },

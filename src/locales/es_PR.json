@@ -17,8 +17,10 @@
   },
   "common": {
     "back": "Regresar",
+    "cancel": "Cancelar",
     "close": "Cerrar",
     "close_screen": "Cerrar pantalla",
+    "confirm": "Confirmar",
     "continue": "Continuar",
     "done": "Finalizado",
     "edit": "Editar",
@@ -81,6 +83,8 @@
     "consent_button_title": "Entiendo y doy mi consentimiento",
     "consent_subheader_1": "¿Por qué debería compartir?",
     "consent_subheader_2": "¿Cómo funciona?",
+    "consent_warning_message": "Continuar anulará su código. Si desea compartir su diagnóstico positivo en el futuro, primero deberá obtener un nuevo código de resultado positivo de la prueba.",
+    "consent_warning_title": "¡Advertencia!",
     "enable_exposure_notifications_body": "Debe activar los avisos de exposición para informar de un resultado positivo.",
     "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
     "error": {
@@ -91,6 +95,7 @@
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue usado"
     },
+    "never_mind_button_title": "No importa",
     "person_and_health_expert": "Una persona hablando con personal médico",
     "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
     "publish_keys": {
@@ -168,6 +173,7 @@
       "location_disabled_error_message": "Para activar la tecnología de Avisos de Exposición, autorice el acceso a su localización que está en la Configuración de la aplicación",
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
+      "location_subheader": "{{applicationName}} nunca accede a sus datos de ubicación y su dispositivo nunca es rastreado.",
       "proximity_tracing_header": "Avisos de exposición",
       "share": "Compartir {{applicationName}}",
       "share_message": "Pruebe esta aplicación {{applicationName}}, que puede ayudarnos a contener el COVID-19. {{appDownloadLink}}",
@@ -183,6 +189,8 @@
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
     "if_you_have_a_code": "Reporte su resultado para ayudar a mantener a su comunidad segura.",
+    "location_info_body": "Google requiere que los dispositivos con Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar la Detección de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
+    "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
     "not_feeling_well": "¿No te sientes bien?",
     "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
@@ -289,6 +297,8 @@
     "privacy_policy": "Política de privacidad",
     "share_anonymized_data": "Comparta datos anónimos",
     "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
+    "share_data_para_1": "Los datos anónimos y agregados sobre cómo las comunidades están utilizando esta aplicación ayudan al {{healthAuthorityName}} a analizar, comprender y contener la propagación de COVID-19.",
+    "share_data_para_2": "Estos datos no contienen información de identificación personal.",
     "sharing_anonymized_data": "Compartir datos anónimos",
     "stop_sharing_data": "Dejar de compartir datos",
     "you_are_sharing_data": "Está compartiendo datos anónimos"

@@ -17,8 +17,10 @@
   },
   "common": {
     "back": "뒤로 가기",
+    "cancel": "취소",
     "close": "닫기",
     "close_screen": "화면 닫기",
+    "confirm": "확인",
     "continue": "계속",
     "done": "완료",
     "edit": "수정",
@@ -81,6 +83,7 @@
     "consent_button_title": "본인은 이해했으며, 동의합니다.",
     "consent_subheader_1": "왜 공유해야 하나요?",
     "consent_subheader_2": "어떻게 작동하나요?",
+    "consent_warning_title": "경고!",
     "enable_exposure_notifications_body": "확진 결과를 보고하려면 노출 알림을 활성화해야 합니다.",
     "enable_exposure_notifications_title": "계속하려면 노출 알림 설정",
     "error": {

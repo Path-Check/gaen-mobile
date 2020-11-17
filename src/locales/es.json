@@ -5,6 +5,7 @@
     "version": "Versión:"
   },
   "common": {
+    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Hecho",
     "more": "Más",

@@ -5,6 +5,7 @@
     "version": "Verzia:"
   },
   "common": {
+    "cancel": "Ukončiť",
     "continue": "Pokračovať",
     "done": "Hotovo",
     "more": "Viac",
