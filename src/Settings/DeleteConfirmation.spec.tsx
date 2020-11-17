@@ -7,7 +7,6 @@ import { OnboardingProvider } from "../OnboardingContext"
 import DeleteConfirmation from "./DeleteConfirmation"
 import { factories } from "../factories"
 
-jest.mock("react-native-flash-message")
 jest.mock("@react-navigation/native")
 
 describe("DeleteConfirmation", () => {

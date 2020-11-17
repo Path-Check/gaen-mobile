@@ -412,7 +412,7 @@
     "data_deleted": "Data deleted",
     "delete_data_are_you_sure": "Are you sure?",
     "delete_data_disclosure1": "When you press \"Delete My Data\", all data stored by {{applicationName}} will be deleted:",
-    "delete_data_disclosure2": "This does not delete the data created or collected by your phone for Exposure Notifications.\n\nYou can delete this additional data in your device Settings.",
+    "delete_data_disclosure2": "This does not delete the data created or collected by your device for Exposure Notifications.\n\nYou can delete this additional data in your device Settings.",
     "delete_data_language_token": "A token stored on your device that saves your language preference",
     "delete_data_note": "Note",
     "delete_data_onboarding_token": "A token stored on your device that saves whether you have completed the app onboarding",
