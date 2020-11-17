@@ -298,7 +298,7 @@ final class ExposureManager: NSObject {
         reject(error.localizedDescription, error.localizedDescription, error)
       } else {
         self.broadcastCurrentEnabledStatus()
-        resolve([self.authorizationState, self.enabledState])
+        resolve([self.authorizationState.rawValue, self.enabledState.rawValue])
       }
     }
   }

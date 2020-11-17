@@ -88,9 +88,7 @@ export const requestAuthorization = async (): Promise<
 > => {
   try {
     const status = await permissionsModule.requestExposureNotificationAuthorization()
-    console.log({ status })
     const enStatus = toENPermissionStatusEnum(status)
-    console.log({ enStatus })
     return {
       kind: "success",
       status: enStatus,
