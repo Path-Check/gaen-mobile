@@ -10,7 +10,8 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
-import { getLocaleList, setUserLocaleOverride } from "../locales/languages"
+import { enabledLocales, setUserLocaleOverride } from "../locales/languages"
+import { Locale } from "../locales/locale"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 
@@ -22,11 +23,11 @@ const LanguageSelection: FunctionComponent = () => {
     i18n: { language },
   } = useTranslation()
   const navigation = useNavigation()
-  const localeList = getLocaleList()
+  const localeList = enabledLocales()
 
   type ListItem = {
     label: string
-    value: string
+    value: Locale
   }
 
   interface LanguageListItemProps {

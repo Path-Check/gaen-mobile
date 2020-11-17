@@ -30,8 +30,7 @@ const App: FunctionComponent = () => {
   const [isOnboardingComplete, setIsOnboardingComplete] = useState(true)
 
   useEffect(() => {
-    const locales = env.SUPPORTED_LOCALES?.split(",") || []
-    initializei18next(locales)
+    initializei18next()
     loadUserLocale()
 
     determineIsOnboardingComplete()
