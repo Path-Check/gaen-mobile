@@ -11,7 +11,6 @@ import {
 import { useTranslation } from "react-i18next"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
-import { RequestAuthorizationResponse } from "../gaen/nativeModule"
 import {
   ENPermissionStatus,
   usePermissionsContext,
@@ -81,18 +80,15 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressEnable = async () => {
-    exposureNotifications
-      .request()
-      .then((response: RequestAuthorizationResponse) => {
-        if (response.kind === "failure") {
-          if (response.error === "AppRestricted") {
-            showNotAuthorizedAlert()
-          }
-        } else {
-          trackEvent("product_analytics", "onboarding_en_permissions_accept")
-          navigateToNextScreen()
-        }
-      })
+    const response = await exposureNotifications.request()
+    if (response.kind === "failure") {
+      if (response.error === "AppRestricted") {
+        showNotAuthorizedAlert()
+      }
+    } else {
+      trackEvent("product_analytics", "onboarding_en_permissions_accept")
+      navigateToNextScreen()
+    }
   }
 
   const handleOnPressDontEnable = () => {
