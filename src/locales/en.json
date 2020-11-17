@@ -410,9 +410,15 @@
   },
   "settings": {
     "data_deleted": "Data deleted",
-    "delete_data_disclosure1": "When you tap the \"Delete My Data\" button below, the app will delete the Symptom History data that is stored on your phone.",
+    "delete_data_are_you_sure": "Are you sure?",
+    "delete_data_disclosure1": "When you press \"Delete My Data\", all data stored by {{applicationName}} will be deleted:",
     "delete_data_disclosure2": "This does not delete the data created or collected by your phone for Exposure Notifications.\n\nYou can delete this additional data in your device Settings.",
+    "delete_data_language_token": "A token stored on your device that saves your language preference",
     "delete_data_note": "Note",
+    "delete_data_onboarding_token": "A token stored on your device that saves whether you have completed the app onboarding",
+    "delete_data_product_analytics": "A token stored on your device that saves whether you have consented to sharing product analytics data",
+    "delete_data_symptom_history": "Any symptom logs stored on your device",
+    "delete_data_this_action": "This action will delete all data stored by {{applicationName}}.",
     "delete_my_data": "Delete my data",
     "errors": {
       "deleting_data": "Sorry, we could not delete your data"
