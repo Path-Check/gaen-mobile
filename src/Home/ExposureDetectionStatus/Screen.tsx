@@ -109,6 +109,8 @@ const ExposureDetectionStatus: FunctionComponent = () => {
           if (response.status !== ENPermissionStatus.ENABLED) {
             showNotAuthorizedAlert()
           }
+        } else {
+          showNotAuthorizedAlert()
         }
         trackEvent("product_analytics", "exposure_notifications_enabled")
       } catch (e) {

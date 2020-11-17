@@ -80,14 +80,18 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressEnable = async () => {
-    const response = await exposureNotifications.request()
-    if (response.kind === "failure") {
-      if (response.error === "AppRestricted") {
+    try {
+      const response = await exposureNotifications.request()
+      if (response.kind === "success") {
+        if (response.status !== ENPermissionStatus.ENABLED) {
+          showNotAuthorizedAlert()
+        }
+      } else {
         showNotAuthorizedAlert()
       }
-    } else {
       trackEvent("product_analytics", "onboarding_en_permissions_accept")
-      navigateToNextScreen()
+    } catch (e) {
+      showNotAuthorizedAlert()
     }
   }
 
