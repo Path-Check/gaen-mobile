@@ -63,7 +63,10 @@ const SelfAssessmentIntro: FunctionComponent = () => {
         <Text style={style.bulletText}>
           • {t("self_assessment.intro.this_is_based_on")}
         </Text>
-        <TouchableOpacity onPress={handleOnPressCDCLink}>
+        <TouchableOpacity
+          onPress={handleOnPressCDCLink}
+          accessibilityRole="link"
+        >
           <Text style={{ ...style.bulletText, ...style.linkText }}>
             • {t("self_assessment.intro.learn_more")}
           </Text>
