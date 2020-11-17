@@ -151,7 +151,7 @@ export const checkForNewExposures = async (): Promise<NetworkResponse> => {
     await exposureHistoryModule.detectExposures()
     return { kind: "success" }
   } catch (e) {
-    if (e.underlyError.includes("ENErrorDomain error 13.")) {
+    if (e.underlyingError.includes("ENErrorDomain error 13.")) {
       return { kind: "failure", error: "ExceededCheckRateLimit" }
     } else {
       return { kind: "failure", error: "Unknown" }
