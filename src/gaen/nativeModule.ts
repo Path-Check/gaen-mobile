@@ -250,10 +250,6 @@ export const resetExposure = async (): Promise<"success"> => {
   return debugModule.resetExposure()
 }
 
-export const toggleExposureNotifications = async (): Promise<"success"> => {
-  return debugModule.toggleExposureNotifications()
-}
-
 export const simulateExposureDetectionError = async (): Promise<"success"> => {
   return debugModule.simulateExposureDetectionError()
 }
