@@ -242,7 +242,7 @@
     "i_am_over": "Yes, I am over {{minimumAge}}",
     "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
     "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
-    "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
+    "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Bluetooth scanning for Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
     "location_header": "Activate Location",
     "location_subheader": "{{applicationName}} never accesses your location data and your device is never tracked.",
     "no_take_me": "No, take me back",
