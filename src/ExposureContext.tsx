@@ -7,21 +7,14 @@ import React, {
   useContext,
 } from "react"
 
-import gaenStrategy from "./gaen"
 import { failureResponse, OperationResponse } from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
 import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
+import * as NativeModule from "./gaen/nativeModule"
 
 type Posix = number
-const { exposureEventsStrategy } = gaenStrategy
-const {
-  getExposureKeys,
-  storeRevisionToken,
-  getRevisionToken,
-  getCurrentExposures,
-} = exposureEventsStrategy
 
 export interface ExposureState {
   exposureInfo: ExposureInfo
@@ -59,10 +52,6 @@ export const ExposureContext = createContext<ExposureState>(initialState)
 
 const ExposureProvider: FunctionComponent = ({ children }) => {
   const { trackEvent } = useProductAnalyticsContext()
-  const {
-    exposureInfoSubscription,
-    getLastDetectionDate,
-  } = exposureEventsStrategy
 
   const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
 
@@ -72,21 +61,21 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   ] = useState<Posix | null>(null)
 
   const getLastExposureDetectionDate = useCallback(() => {
-    getLastDetectionDate().then((detectionDate) => {
+    NativeModule.fetchLastExposureDetectionDate().then((detectionDate) => {
       setLastExposureDetectionDate(detectionDate)
     })
-  }, [getLastDetectionDate])
+  }, [])
 
   const refreshExposureInfo = async () => {
-    const exposureInfo = await getCurrentExposures()
+    const exposureInfo = await NativeModule.getCurrentExposures()
     setExposureInfo(exposureInfo)
 
-    const detectionDate = await getLastDetectionDate()
+    const detectionDate = await NativeModule.fetchLastExposureDetectionDate()
     setLastExposureDetectionDate(detectionDate)
   }
 
   useEffect(() => {
-    const subscription = exposureInfoSubscription(
+    const subscription = NativeModule.subscribeToExposureEvents(
       (exposureInfo: ExposureInfo) => {
         setExposureInfo(exposureInfo)
         getLastExposureDetectionDate()
@@ -97,17 +86,17 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     return () => {
       subscription.remove()
     }
-  }, [exposureInfoSubscription, getLastExposureDetectionDate])
+  }, [getLastExposureDetectionDate])
 
   useEffect(() => {
-    const subscription = exposureInfoSubscription(() => {
+    const subscription = NativeModule.subscribeToExposureEvents(() => {
       trackEvent("epi_analytics", "en_notification_received")
     })
 
     return () => {
       subscription.remove()
     }
-  }, [exposureInfoSubscription, trackEvent])
+  }, [trackEvent])
 
   const checkForNewExposures = async (): Promise<OperationResponse> => {
     try {
@@ -126,13 +115,13 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     <ExposureContext.Provider
       value={{
         exposureInfo,
-        getCurrentExposures,
-        getExposureKeys,
-        getRevisionToken,
         lastExposureDetectionDate,
-        storeRevisionToken,
         refreshExposureInfo,
         checkForNewExposures,
+        getCurrentExposures: NativeModule.getCurrentExposures,
+        getExposureKeys: NativeModule.getExposureKeys,
+        getRevisionToken: NativeModule.getRevisionToken,
+        storeRevisionToken: NativeModule.storeRevisionToken,
       }}
     >
       {children}
