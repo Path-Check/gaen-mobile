@@ -14,7 +14,6 @@ module.exports = {
     "react",
     "react-hooks",
     "react-native",
-    "detox",
   ],
   settings: {
     "import/parsers": {
@@ -39,7 +38,6 @@ module.exports = {
     "react-native/react-native": true,
     commonjs: true,
     es6: true,
-    "detox/detox": true,
     node: true,
     jest: true,
     "jest/globals": true,
