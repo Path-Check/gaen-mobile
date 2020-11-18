@@ -6,94 +6,60 @@ import React, {
   useContext,
   useCallback,
 } from "react"
-import { Platform, AppState } from "react-native"
+import { Platform } from "react-native"
 import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
 
-import * as NativeModule from "../gaen/nativeModule"
-import { isPlatformiOS } from "../utils"
-import useIsBluetoothOn from "./useIsBluetoothOn"
+import * as GaenNativeModule from "../gaen/nativeModule"
+import * as DeviceNativeModule from "./nativeModule"
+import useOnAppStateChange from "./useOnAppStateChange"
 import useLocationPermissions, {
   LocationPermissions,
 } from "./useLocationPermissions"
 
-export enum PermissionStatus {
-  UNKNOWN,
-  GRANTED,
-  DENIED,
-}
+export type NotificationPermissionStatus = "Unknown" | "Granted" | "Denied"
 
-export const statusToEnum = (status: string | void): PermissionStatus => {
+export const notificationPermissionStatusFromString = (
+  status: string | void,
+): NotificationPermissionStatus => {
   switch (status) {
     case "unknown": {
-      return PermissionStatus.UNKNOWN
+      return "Unknown"
     }
     case "denied": {
-      return PermissionStatus.DENIED
+      return "Denied"
     }
     case "blocked": {
-      return PermissionStatus.DENIED
+      return "Denied"
     }
     case "granted": {
-      return PermissionStatus.GRANTED
+      return "Granted"
     }
     default: {
-      return PermissionStatus.UNKNOWN
+      return "Unknown"
     }
   }
 }
 
-type ENAuthorizationStatus = `UNAUTHORIZED` | `AUTHORIZED`
-type ENEnablementStatus = `DISABLED` | `ENABLED`
-export type RawENPermissionStatus = [ENAuthorizationStatus, ENEnablementStatus]
-const initialENPermissionStatus: RawENPermissionStatus = [
-  "UNAUTHORIZED",
-  "DISABLED",
-]
-
-export enum ENPermissionStatus {
-  NOT_AUTHORIZED,
-  DISABLED,
-  ENABLED,
-}
-
-export const toENPermissionStatusEnum = (
-  enPermissionStatus: RawENPermissionStatus,
-): ENPermissionStatus => {
-  const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
-  const isEnabled = enPermissionStatus[1] === "ENABLED"
-
-  if (!isAuthorized) {
-    if (isPlatformiOS()) {
-      return ENPermissionStatus.NOT_AUTHORIZED
-    } else {
-      return ENPermissionStatus.DISABLED
-    }
-  } else if (!isEnabled) {
-    return ENPermissionStatus.DISABLED
-  } else {
-    return ENPermissionStatus.ENABLED
-  }
-}
-
-const initialENStatus: ENPermissionStatus = toENPermissionStatusEnum(
-  initialENPermissionStatus,
-)
+export type ENPermissionStatus =
+  | "Unknown"
+  | "NotAuthorized"
+  | "Disabled"
+  | "Enabled"
 
 export interface PermissionsContextState {
   isBluetoothOn: boolean
   locationPermissions: LocationPermissions
   notification: {
-    status: PermissionStatus
+    status: NotificationPermissionStatus
     check: () => void
     request: () => void
   }
   exposureNotifications: {
     status: ENPermissionStatus
-    check: () => void
-    request: () => Promise<NativeModule.RequestAuthorizationResponse>
+    request: () => Promise<GaenNativeModule.RequestAuthorizationResponse>
   }
 }
 
@@ -101,13 +67,12 @@ const initialState = {
   isBluetoothOn: false,
   locationPermissions: "RequiredOff" as const,
   notification: {
-    status: PermissionStatus.UNKNOWN,
+    status: "Unknown" as const,
     check: () => {},
     request: () => {},
   },
   exposureNotifications: {
-    status: initialENStatus,
-    check: () => {},
+    status: "Unknown" as const,
     request: () =>
       Promise.resolve({ kind: "failure" as const, error: "Unknown" as const }),
   },
@@ -118,68 +83,12 @@ const PermissionsContext = createContext<PermissionsContextState>(initialState)
 const PermissionsProvider: FunctionComponent = ({ children }) => {
   const isBluetoothOn = useIsBluetoothOn()
   const locationPermissions = useLocationPermissions()
-  const [
-    exposureNotificationsPermissionStatus,
-    setExposureNotificationsPermissionStatus,
-  ] = useState<RawENPermissionStatus>(initialENPermissionStatus)
-
-  const [notificationPermission, setNotificationPermission] = useState(
-    PermissionStatus.UNKNOWN,
-  )
-
-  const checkENPermission = useCallback(() => {
-    const handleNativeResponse = (status: RawENPermissionStatus) => {
-      setExposureNotificationsPermissionStatus(status)
-    }
-    NativeModule.getCurrentENPermissionsStatus(handleNativeResponse)
-  }, [])
-
-  useEffect(() => {
-    const handleAppStateChange = () => {
-      checkENPermission()
-    }
-
-    AppState.addEventListener("change", handleAppStateChange)
-    const subscription = NativeModule.subscribeToEnabledStatusEvents(
-      (status: RawENPermissionStatus) => {
-        setExposureNotificationsPermissionStatus(status)
-      },
-    )
-
-    const checkAllPermissions = async () => {
-      const isiOS = Platform.OS === "ios"
-      await Promise.all([
-        isiOS ? checkNotificationPermission() : null,
-        checkENPermission(),
-      ])
-    }
-
-    checkAllPermissions()
-
-    return () => {
-      subscription?.remove()
-      AppState.removeEventListener("change", handleAppStateChange)
-    }
-  }, [checkENPermission])
-
-  const checkNotificationPermission = async () => {
-    const { status } = await checkNotifications()
-    setNotificationPermission(statusToEnum(status))
-  }
-
-  const requestENPermission = async () => {
-    return NativeModule.requestAuthorization()
-  }
-
-  const requestNotificationPermission = async () => {
-    const { status } = await requestNotifications(["alert", "sound"])
-    setNotificationPermission(statusToEnum(status))
-    return status
-  }
-
-  const enPermission: ENPermissionStatus = toENPermissionStatusEnum(
-    exposureNotificationsPermissionStatus,
-  )
+  const { enPermission, requestENPermission } = useENPermissions()
+  const {
+    notificationPermission,
+    checkNotificationPermission,
+    requestNotificationPermission,
+  } = useNotificationPermissions()
 
   return (
     <PermissionsContext.Provider
@@ -193,7 +102,6 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
         },
         exposureNotifications: {
           status: enPermission,
-          check: checkENPermission,
           request: requestENPermission,
         },
       }}
@@ -201,6 +109,105 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
       {children}
     </PermissionsContext.Provider>
   )
+}
+
+const useNotificationPermissions = () => {
+  const [notificationPermission, setNotificationPermission] = useState<
+    NotificationPermissionStatus
+  >("Unknown")
+
+  useEffect(() => {
+    if (Platform.OS === "ios") {
+      checkNotificationPermission()
+    }
+  }, [])
+
+  const checkNotificationPermission = async () => {
+    const { status } = await checkNotifications()
+    setNotificationPermission(notificationPermissionStatusFromString(status))
+  }
+
+  const requestNotificationPermission = async () => {
+    const { status } = await requestNotifications(["alert", "sound"])
+    setNotificationPermission(notificationPermissionStatusFromString(status))
+    return status
+  }
+
+  return {
+    notificationPermission,
+    checkNotificationPermission,
+    requestNotificationPermission,
+  }
+}
+
+const useENPermissions = () => {
+  const [enPermissionStatus, setEnPermissionStatus] = useState<
+    ENPermissionStatus
+  >("Unknown")
+
+  const checkENPermission = () => {
+    const handleNativeResponse = (status: ENPermissionStatus) => {
+      setEnPermissionStatus(status)
+    }
+    GaenNativeModule.getCurrentENPermissionsStatus(handleNativeResponse)
+  }
+
+  useEffect(() => {
+    checkENPermission()
+  }, [])
+
+  useOnAppStateChange(checkENPermission)
+
+  useEffect(() => {
+    const subscription = GaenNativeModule.subscribeToEnabledStatusEvents(
+      (status: ENPermissionStatus) => {
+        setEnPermissionStatus(status)
+      },
+    )
+
+    return () => {
+      subscription?.remove()
+    }
+  }, [])
+
+  const requestENPermission = async () => {
+    return GaenNativeModule.requestAuthorization()
+  }
+
+  return {
+    enPermission: enPermissionStatus,
+    requestENPermission,
+  }
+}
+
+const useIsBluetoothOn = (): boolean => {
+  const [isBluetoothOn, setIsBluetoothOn] = useState(false)
+
+  const determineIsBluetoothOn = useCallback(async () => {
+    DeviceNativeModule.isBluetoothEnabled().then((result) =>
+      setIsBluetoothOn(result),
+    )
+  }, [])
+
+  useEffect(() => {
+    determineIsBluetoothOn()
+  }, [determineIsBluetoothOn])
+
+  useEffect(() => {
+    const subscription = DeviceNativeModule.subscribeToBluetoothStatusEvents(
+      (enabled: boolean) => {
+        setIsBluetoothOn(enabled)
+      },
+    )
+
+    return () => {
+      subscription.remove()
+    }
+  }, [])
+
+  useOnAppStateChange(determineIsBluetoothOn)
+
+  return isBluetoothOn
 }
 
 const usePermissionsContext = (): PermissionsContextState => {

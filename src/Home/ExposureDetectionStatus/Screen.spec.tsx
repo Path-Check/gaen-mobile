@@ -13,7 +13,6 @@ import { HomeStackScreens } from "../../navigation"
 import {
   PermissionsContext,
   ENPermissionStatus,
-  PermissionStatus,
 } from "../../Device/PermissionsContext"
 import { LocationPermissions } from "../../Device/useLocationPermissions"
 import { factories } from "../../factories"
@@ -40,7 +39,7 @@ describe("ExposureDetectionStatusScreen", () => {
 
   describe("When Bluetooth is off", () => {
     it("shows a disabled message for Bluetooth and a general disabled message", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const isBluetoothOn = false
       const locationPermissions = "NotRequired"
 
@@ -71,7 +70,7 @@ describe("ExposureDetectionStatusScreen", () => {
     })
 
     it("allows the user to get info on enabling Bluetooth", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const isBluetoothOn = false
       const locationPermissions = "RequiredOn"
 
@@ -106,7 +105,7 @@ describe("ExposureDetectionStatusScreen", () => {
       const navigateSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
 
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -128,7 +127,7 @@ describe("ExposureDetectionStatusScreen", () => {
 
   describe("When the app is not authorized", () => {
     it("shows a disabled message for Exposure Notifications and a general disabled message", () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const enPermissionStatus = "NotAuthorized"
       const isBluetoothOn = true
       const locationPermissions = "NotRequired"
       const permissionProviderValue = createPermissionProviderValue(
@@ -159,7 +158,7 @@ describe("ExposureDetectionStatusScreen", () => {
     })
 
     it("allows the user to get info on how to fix exposure notifications and shows a not authorized alert", async () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const enPermissionStatus = "NotAuthorized"
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
         true,
@@ -196,7 +195,7 @@ describe("ExposureDetectionStatusScreen", () => {
 
   describe("When the app is not enabled", () => {
     it("allows the user to request exposure notification permissions", () => {
-      const enPermissionStatus = ENPermissionStatus.DISABLED
+      const enPermissionStatus = "Disabled"
       const requestSpy = jest.fn()
       const permissionProviderValue = createPermissionProviderValue(
         true,
@@ -223,7 +222,7 @@ describe("ExposureDetectionStatusScreen", () => {
         navigate: navigateSpy,
       })
 
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const permissionProviderValue = createPermissionProviderValue(
         true,
         "RequiredOn",
@@ -335,7 +334,7 @@ const createPermissionProviderValue = (
     isBluetoothOn,
     locationPermissions,
     notification: {
-      status: PermissionStatus.UNKNOWN,
+      status: "Unknown" as const,
       check: () => {},
       request: () => {},
     },

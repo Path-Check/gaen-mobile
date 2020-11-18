@@ -4,15 +4,12 @@ import {
   EventSubscription,
 } from "react-native"
 
-import {
-  RawENPermissionStatus,
-  ENPermissionStatus,
-  toENPermissionStatusEnum,
-} from "../Device/PermissionsContext"
+import { ENPermissionStatus } from "../Device/PermissionsContext"
 import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
 import Logger from "../logger"
+import { isPlatformiOS } from "../utils"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
@@ -34,7 +31,7 @@ export const subscribeToExposureEvents = (
 }
 
 export const subscribeToEnabledStatusEvents = (
-  cb: (status: RawENPermissionStatus) => void,
+  cb: (status: ENPermissionStatus) => void,
 ): EventSubscription => {
   const ExposureEvents = new NativeEventEmitter(
     NativeModules.ExposureEventEmitter,
@@ -50,17 +47,23 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-const toStatus = (data: string[]): RawENPermissionStatus => {
+const toStatus = (data: string[]): ENPermissionStatus => {
   const networkAuthorization = data[0]
   const networkEnablement = data[1]
-  const result: RawENPermissionStatus = ["UNAUTHORIZED", "DISABLED"]
-  if (networkAuthorization === "AUTHORIZED") {
-    result[0] = "AUTHORIZED"
+
+  const isAuthorized = networkAuthorization === "AUTHORIZED"
+  const isEnabled = networkEnablement === "ENABLED"
+  if (!isAuthorized) {
+    if (isPlatformiOS()) {
+      return "NotAuthorized"
+    } else {
+      return "Disabled"
+    }
+  } else if (!isEnabled) {
+    return "Disabled"
+  } else {
+    return "Enabled"
   }
-  if (networkEnablement === "ENABLED") {
-    result[1] = "ENABLED"
-  }
-  return result
 }
 
 // Permissions Module
@@ -88,7 +91,7 @@ export const requestAuthorization = async (): Promise<
 > => {
   try {
     const status = await permissionsModule.requestExposureNotificationAuthorization()
-    const enStatus = toENPermissionStatusEnum(status)
+    const enStatus = toStatus(status)
     return {
       kind: "success",
       status: enStatus,
@@ -112,7 +115,7 @@ export const requestAuthorization = async (): Promise<
 }
 
 export const getCurrentENPermissionsStatus = async (
-  cb: (status: RawENPermissionStatus) => void,
+  cb: (status: ENPermissionStatus) => void,
 ): Promise<void> => {
   const response = await permissionsModule.getCurrentENPermissionsStatus()
   cb(toStatus(response))
