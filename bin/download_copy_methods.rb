@@ -2,7 +2,7 @@
 require_relative "./helpers"
 
 COPY_FILE_NAME = "copy.json"
-COPY_FILE_PATH = "src/configuration"
+COPY_FILE_PATH = "config"
 
 def download_copy_file(ha_label, access_token)
   copy_file_url = "https://#{access_token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{mobile_resources_commit}/copy/#{HA_LABEL}/#{COPY_FILE_NAME}"
