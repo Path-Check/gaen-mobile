@@ -95,7 +95,11 @@ const createPermissionProviderValue = (
     exposureNotifications: {
       status: ENPermissionStatus.ENABLED,
       check: () => {},
-      request: () => Promise.resolve(),
+      request: () =>
+        Promise.resolve({
+          kind: "failure" as const,
+          error: "Unknown" as const,
+        }),
     },
   }
 }

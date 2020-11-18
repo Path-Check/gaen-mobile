@@ -119,7 +119,7 @@ final class ExposureManager: NSObject {
     return manager.exposureNotificationEnabled ? .enabled : .disabled
   }
 
-  /// Wrapps ENManager authorization state to a authorized/unauthorized state
+  /// Wraps ENManager authorization state to a authorized/unauthorized state
   var authorizationState: AuthorizationState {
     return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
   }
@@ -133,27 +133,6 @@ final class ExposureManager: NSObject {
   ///Returns both the current authorizationState and enabledState as Strings
   @objc func getCurrentENPermissionsStatus(callback: @escaping (String, String) -> Void) {
     callback(authorizationState.rawValue, enabledState.rawValue)
-  }
-
-  ///Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status, if not, it returns and error
-  @objc func requestExposureNotificationAuthorization(enabled: Bool,
-                                                      callback: @escaping (ExposureManagerError?) -> Void) {
-    // Ensure exposure notifications are enabled if the app is authorized. The app
-    // could get into a state where it is authorized, but exposure
-    // notifications are not enabled,  if the user initially denied Exposure Notifications
-    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
-    // in Settings.
-    manager.setExposureNotificationEnabled(enabled) { error in
-      if let underlyingError = error {
-        let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
-                             localizedMessage: String.cannotEnableNotifications.localized,
-                             underlyingError: underlyingError)
-        callback(emError)
-      } else {
-        self.broadcastCurrentEnabledStatus()
-        callback(nil)
-      }
-    }
   }
 
   /// Returns the current exposures as a json string representation
@@ -279,6 +258,24 @@ final class ExposureManager: NSObject {
         resolve(String.genericSuccess)
       case .failure(let exposureError):
         reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      }
+    }
+  }
+
+  /// Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status
+  @objc func requestExposureNotificationAuthorization(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    // Ensure exposure notifications are enabled if the app is authorized. The app
+    // could get into a state where it is authorized, but exposure
+    // notifications are not enabled,  if the user initially denied Exposure Notifications
+    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
+    // in Settings.
+    manager.setExposureNotificationEnabled(true) { error in
+      if let error = error {
+        reject(error.localizedDescription, error.localizedDescription, error)
+      } else {
+        self.broadcastCurrentEnabledStatus()
+        resolve([self.authorizationState.rawValue, self.enabledState.rawValue])
       }
     }
   }

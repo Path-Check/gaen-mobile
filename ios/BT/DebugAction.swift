@@ -4,6 +4,5 @@
   simulateExposure,
   fetchExposures,
   resetExposures,
-  toggleENAuthorization,
   showLastProcessedFilePath
 }

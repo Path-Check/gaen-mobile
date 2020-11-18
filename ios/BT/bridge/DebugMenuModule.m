@@ -44,13 +44,6 @@ RCT_REMAP_METHOD(fetchExposures,
   [[ExposureManager shared] handleDebugAction:DebugActionSimulateExposure resolve:resolve reject:reject];
 }
 
-RCT_REMAP_METHOD(toggleExposureNotifications,
-                 toggleExposureNotificationsWithResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-  [[ExposureManager shared] handleDebugAction:DebugActionToggleENAuthorization resolve:resolve reject:reject];
-}
-
 RCT_REMAP_METHOD(resetExposures,
                  resetExposuresWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)

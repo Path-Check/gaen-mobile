@@ -13,6 +13,7 @@ import {
 } from "react-native-permissions"
 
 import gaenStrategy from "../gaen"
+import { RequestAuthorizationResponse } from "../gaen/nativeModule"
 import { isPlatformiOS } from "../utils"
 import useIsBluetoothOn from "./useIsBluetoothOn"
 import useLocationPermissions, {
@@ -59,16 +60,18 @@ export enum ENPermissionStatus {
   ENABLED,
 }
 
-const toENPermissionStatusEnum = (
+export const toENPermissionStatusEnum = (
   enPermissionStatus: RawENPermissionStatus,
 ): ENPermissionStatus => {
   const isAuthorized = enPermissionStatus[0] === "AUTHORIZED"
   const isEnabled = enPermissionStatus[1] === "ENABLED"
 
   if (!isAuthorized) {
-    return isPlatformiOS()
-      ? ENPermissionStatus.NOT_AUTHORIZED
-      : ENPermissionStatus.DISABLED
+    if (isPlatformiOS()) {
+      return ENPermissionStatus.NOT_AUTHORIZED
+    } else {
+      return ENPermissionStatus.DISABLED
+    }
   } else if (!isEnabled) {
     return ENPermissionStatus.DISABLED
   } else {
@@ -91,7 +94,7 @@ export interface PermissionsContextState {
   exposureNotifications: {
     status: ENPermissionStatus
     check: () => void
-    request: () => Promise<void>
+    request: () => Promise<RequestAuthorizationResponse>
   }
 }
 
@@ -106,7 +109,8 @@ const initialState = {
   exposureNotifications: {
     status: initialENStatus,
     check: () => {},
-    request: () => Promise.resolve(),
+    request: () =>
+      Promise.resolve({ kind: "failure" as const, error: "Unknown" as const }),
   },
 }
 
@@ -117,7 +121,7 @@ export interface PermissionStrategy {
     cb: (status: RawENPermissionStatus) => void,
   ) => { remove: () => void }
   check: (cb: (status: RawENPermissionStatus) => void) => void
-  request: () => Promise<void>
+  request: () => Promise<RequestAuthorizationResponse>
 }
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {

@@ -80,20 +80,6 @@ class DebugMenuUnitTests: XCTestCase {
     wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
   }
 
-  func testDebugToggleENAuthorization() {
-    let debugAction = DebugAction.toggleENAuthorization
-    let exposureManager = defaultExposureManager(enAPIVersion: .v1)
-    let successExpetactionResolve = self.expectation(description: "resolve is called")
-    let successExpectationReject = self.expectation(description: "reject is not called")
-    successExpectationReject.isInverted = true
-    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
-      successExpetactionResolve.fulfill()
-    }) { (_, _, _) in
-      successExpectationReject.fulfill()
-    }
-    wait(for: [successExpetactionResolve, successExpectationReject], timeout: 0)
-  }
-
   func testDebugShowLastProcessedFilePath() {
     let debugAction = DebugAction.showLastProcessedFilePath
     let exposureManager = defaultExposureManager(enAPIVersion: .v1)
