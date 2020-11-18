@@ -1,6 +1,6 @@
 import { loadAuthorityLinks, applyTranslations } from "./authorityLinks"
 
-jest.mock("./links.json", () => {
+jest.mock("../../config/links.json", () => {
   return {
     legal: [
       {

@@ -2,7 +2,7 @@
 require_relative "./helpers"
 
 LINKS_FILE_NAME = "links.json"
-LINKS_FILE_PATH = "src/configuration"
+LINKS_FILE_PATH = "config"
 
 def download_links_file(ha_label, access_token)
   copy_file_url = "https://#{access_token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/#{mobile_resources_commit}/links/#{HA_LABEL}/#{LINKS_FILE_NAME}"

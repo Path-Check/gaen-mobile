@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import * as Locale from "../locales/locale"
-import copy from "./copy.json"
+import copy from "../../config/copy.json"
 
 const DEFAULT_LOCALE = "en"
 
