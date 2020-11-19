@@ -6,32 +6,32 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
+import { useActivationContext } from "./ActivationContext"
 
 import { Colors, Typography, Spacing, Buttons } from "../styles"
 
 const ProductAnalyticsConsentForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { healthAuthorityPrivacyPolicyUrl } = useConfigurationContext()
   const { healthAuthorityName } = useCustomCopy()
   const { updateUserConsent } = useProductAnalyticsContext()
+  const { goToNextScreen } = useActivationContext()
 
   const handleOnPressYes = async () => {
     updateUserConsent(true)
-    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
+    goToNextScreen()
   }
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
+    goToNextScreen()
   }
 
   const handleOnPressPrivacyPolicy = () => {

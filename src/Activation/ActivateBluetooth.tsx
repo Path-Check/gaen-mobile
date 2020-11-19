@@ -8,39 +8,29 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
-import { ActivationStackScreens } from "../navigation"
-import { isPlatformiOS } from "../utils"
+import { useActivationContext } from "./ActivationContext"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
 const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { isBluetoothOn } = usePermissionsContext()
-
-  const navigateToNextScreen = () => {
-    if (isPlatformiOS()) {
-      navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
-    } else {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
-    }
-  }
+  const { goToNextScreen } = useActivationContext()
 
   useEffect(() => {
     if (isBluetoothOn) {
-      navigateToNextScreen()
+      goToNextScreen()
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigateToNextScreen()
+    goToNextScreen()
   }
 
   const showBluetoothStatusAlert = () => {

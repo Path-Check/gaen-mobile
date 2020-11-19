@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
@@ -19,33 +18,23 @@ import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
 import { Icons } from "../assets"
+import { useActivationContext } from "./ActivationContext"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
+  const { locationPermissions } = usePermissionsContext()
+  const { goToNextScreen } = useActivationContext()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigateToNextScreen()
+      goToNextScreen()
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigateToNextScreen()
-  }
-
-  const navigateToNextScreen = () => {
-    const nextScreen = () => {
-      if (!isBluetoothOn) {
-        return ActivationStackScreens.ActivateBluetooth
-      } else {
-        return ActivationStackScreens.ActivateExposureNotifications
-      }
-    }
-    navigation.navigate(nextScreen())
+    goToNextScreen()
   }
 
   const showLocationAccessAlert = () => {

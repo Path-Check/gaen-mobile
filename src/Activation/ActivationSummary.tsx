@@ -14,9 +14,9 @@ import {
 } from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
-import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
+import { useActivationContext } from "./ActivationContext"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -24,13 +24,13 @@ import { Buttons, Colors, Spacing, Typography } from "../styles"
 const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const { completeOnboarding } = useOnboardingContext()
   const { trackEvent } = useProductAnalyticsContext()
   const {
     isBluetoothOn,
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
+  const { goToNextScreen } = useActivationContext()
 
   const isENEnabled = status === ENPermissionStatus.ENABLED
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
@@ -38,12 +38,12 @@ const ActivationSummary: FunctionComponent = () => {
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
-    completeOnboarding()
+    goToNextScreen()
   }
 
   const handleOnPressOpenSettings = async () => {
     openAppSettings()
-    completeOnboarding()
+    goToNextScreen()
   }
 
   const AppSetupIncompleteButtons: FunctionComponent = () => {

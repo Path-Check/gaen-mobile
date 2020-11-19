@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   SafeAreaView,
@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useFocusEffect, useNavigation } from "@react-navigation/native"
+import { useFocusEffect } from "@react-navigation/native"
 
 import {
   ENPermissionStatus,
@@ -19,36 +19,22 @@ import { openAppSettings } from "../Device"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
-import { ActivationStackScreens } from "../navigation"
-import { isPlatformiOS } from "../utils"
+import { useActivationContext } from "./ActivationContext"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { exposureNotifications, isBluetoothOn } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
+  const { goToNextScreen } = useActivationContext()
 
-  const navigateToNextScreen = useCallback(() => {
-    const nextScreen = () => {
-      if (isPlatformiOS()) {
-        return ActivationStackScreens.NotificationPermissions
-      } else {
-        return ActivationStackScreens.ActivationSummary
-      }
+  useFocusEffect(() => {
+    if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
+      goToNextScreen()
     }
-    navigation.navigate(nextScreen())
-  }, [navigation])
-
-  useFocusEffect(
-    useCallback(() => {
-      if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
-        navigateToNextScreen()
-      }
-    }, [exposureNotifications.status, navigateToNextScreen]),
-  )
+  })
 
   const showNotAuthorizedAlert = () => {
     const errorMessage = Platform.select({
