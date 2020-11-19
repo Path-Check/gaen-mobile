@@ -16,8 +16,7 @@ struct DailySummariesConfiguration: ExposureConfiguration {
   var daysSinceOnsetToInfectiousness: [NSNumber:NSNumber]
 
   static var placeholder: DailySummariesConfiguration = {
-    let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber] = [NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown): infectiousnessValueUnknownDaysSinceOnsetOfSymptoms,
-                                                               -2:1,
+    let daysSinceOnsetToInfectiousness: [NSNumber:NSNumber] = [-2:1,
                                                                -1:1,
                                                                0:1,
                                                                1:1,
@@ -76,7 +75,6 @@ extension DailySummariesConfiguration: DownloadableFile {
     var dailySummariesConfiguration: DailySummariesConfiguration
     do {
       dailySummariesConfiguration = try parse(data: data)
-      dailySummariesConfiguration.daysSinceOnsetToInfectiousness[NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown)] = infectiousnessValueUnknownDaysSinceOnsetOfSymptoms
       try data.write(to: saveLocalPath)
     } catch {
       do {
