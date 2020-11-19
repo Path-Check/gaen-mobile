@@ -13,6 +13,7 @@ import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
+import { LocationPermissions } from "../Device/useLocationPermissions"
 
 import { Headers } from "../styles"
 
@@ -20,33 +21,46 @@ type ActivationStackParams = {
   [key in ActivationStackScreen]: undefined
 }
 
-const Stack = createStackNavigator<ActivationStackParams>()
+type ActivationStep = {
+  screenName: ActivationStackScreen
+  component: FunctionComponent
+}
 
-const ActivationStack: FunctionComponent = () => {
-  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
-  const {
-    displayAcceptTermsOfService,
-    enableProductAnalytics,
-  } = useConfigurationContext()
+type EnvironmentData = {
+  locationPermissions: LocationPermissions
+  isBluetoothOn: boolean
+  displayAcceptTermsOfService: boolean
+  enableProductAnalytics: boolean
+}
 
-  interface ActivationStep {
-    screenName: ActivationStackScreen
-    component: FunctionComponent
-  }
+const determineActivationSteps = ({
+  displayAcceptTermsOfService,
+  enableProductAnalytics,
+  locationPermissions,
+  isBluetoothOn,
+}: EnvironmentData): ActivationStep[] => {
+  const activationSteps: (ActivationStep | null)[] = []
 
   const activateExposureNotifications: ActivationStep = {
     screenName: ActivationStackScreens.ActivateExposureNotifications,
     component: ActivateExposureNotifications,
   }
+  activationSteps.push(activateExposureNotifications)
 
-  const activationSteps: ActivationStep[] = [activateExposureNotifications]
-
-  if (!isBluetoothOn) {
-    const activateBluetooth: ActivationStep = {
-      screenName: ActivationStackScreens.ActivateBluetooth,
-      component: ActivateBluetooth,
+  if (displayAcceptTermsOfService) {
+    const acceptTermsOfService: ActivationStep = {
+      screenName: ActivationStackScreens.AcceptTermsOfService,
+      component: AcceptTermsOfService,
     }
-    activationSteps.unshift(activateBluetooth)
+    activationSteps.push(acceptTermsOfService)
+  }
+
+  if (enableProductAnalytics) {
+    const anonymizedDataConsent: ActivationStep = {
+      screenName: ActivationStackScreens.AnonymizedDataConsent,
+      component: ProductAnalyticsConsentForm,
+    }
+    activationSteps.push(anonymizedDataConsent)
   }
 
   const isLocationRequired = locationPermissions !== "NotRequired"
@@ -55,23 +69,15 @@ const ActivationStack: FunctionComponent = () => {
       screenName: ActivationStackScreens.ActivateLocation,
       component: ActivateLocation,
     }
-    activationSteps.unshift(activateLocation)
+    activationSteps.push(activateLocation)
   }
 
-  if (enableProductAnalytics) {
-    const anonymizedDataConsent: ActivationStep = {
-      screenName: ActivationStackScreens.AnonymizedDataConsent,
-      component: ProductAnalyticsConsentForm,
+  if (!isBluetoothOn) {
+    const activateBluetooth: ActivationStep = {
+      screenName: ActivationStackScreens.ActivateBluetooth,
+      component: ActivateBluetooth,
     }
-    activationSteps.unshift(anonymizedDataConsent)
-  }
-
-  if (displayAcceptTermsOfService) {
-    const acceptTermsOfService: ActivationStep = {
-      screenName: ActivationStackScreens.AcceptTermsOfService,
-      component: AcceptTermsOfService,
-    }
-    activationSteps.unshift(acceptTermsOfService)
+    activationSteps.push(activateBluetooth)
   }
 
   if (Platform.OS === "ios") {
@@ -87,6 +93,27 @@ const ActivationStack: FunctionComponent = () => {
     component: ActivationSummary,
   }
   activationSteps.push(activationSummary)
+
+  return activationSteps as ActivationStep[]
+}
+
+const Stack = createStackNavigator<ActivationStackParams>()
+
+const ActivationStack: FunctionComponent = () => {
+  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
+  const {
+    displayAcceptTermsOfService,
+    enableProductAnalytics,
+  } = useConfigurationContext()
+
+  const environmentData = {
+    locationPermissions,
+    isBluetoothOn,
+    displayAcceptTermsOfService,
+    enableProductAnalytics,
+  }
+
+  const activationSteps = determineActivationSteps(environmentData)
 
   return (
     <Stack.Navigator
