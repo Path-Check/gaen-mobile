@@ -105,7 +105,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressDontEnable = () => {
     trackEvent("product_analytics", "onboarding_en_permissions_denied")
-    navigateToNextScreen()
+    goToNextScreen()
   }
 
   return (

@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
+import React, { FunctionComponent, ReactNode } from "react"
+import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import { ActivationStackScreen, ActivationStackScreens } from "./index"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
@@ -9,10 +10,12 @@ import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
-import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
-import { ActivationProvider } from "../Activation/ActivationContext"
+import {
+  ActivationProvider,
+  useActivationContext,
+} from "../Activation/ActivationContext"
 
-import { Headers } from "../styles"
+import { Colors, Headers } from "../styles"
 
 type ActivationStackParams = {
   [key in ActivationStackScreen]: undefined
@@ -86,6 +89,25 @@ const ActivationStack: FunctionComponent = () => {
         })}
       </Stack.Navigator>
     </ActivationProvider>
+  )
+}
+
+export const applyHeaderLeftBackButton = () => {
+  return function modalHeader(): ReactNode {
+    return <HeaderLeftBackButton />
+  }
+}
+
+const HeaderLeftBackButton = () => {
+  const { t } = useTranslation()
+  const { goToPreviousScreen } = useActivationContext()
+
+  return (
+    <HeaderBackButton
+      label={t("common.back")}
+      tintColor={Colors.primary.shade150}
+      onPress={goToPreviousScreen}
+    />
   )
 }
 
