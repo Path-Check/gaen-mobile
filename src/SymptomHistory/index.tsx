@@ -83,7 +83,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
-    paddingVertical: Spacing.large,
+    paddingVertical: Spacing.medium,
     paddingHorizontal: Spacing.medium,
   },
   headerText: {

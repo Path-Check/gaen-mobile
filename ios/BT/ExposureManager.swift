@@ -32,6 +32,8 @@ final class ExposureManagerError: NSObject, LocalizedError {
   }
 }
 
+enum ENAPIVersion { case V1, V2 }
+
 @objc(ExposureManager)
 /**
  This class wrapps [ENManager](https://developer.apple.com/documentation/exposurenotification/enmanager) and acts like a controller and entry point of the different flows
@@ -117,7 +119,7 @@ final class ExposureManager: NSObject {
     return manager.exposureNotificationEnabled ? .enabled : .disabled
   }
 
-  /// Wrapps ENManager authorization state to a authorized/unauthorized state
+  /// Wraps ENManager authorization state to a authorized/unauthorized state
   var authorizationState: AuthorizationState {
     return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
   }
@@ -131,27 +133,6 @@ final class ExposureManager: NSObject {
   ///Returns both the current authorizationState and enabledState as Strings
   @objc func getCurrentENPermissionsStatus(callback: @escaping (String, String) -> Void) {
     callback(authorizationState.rawValue, enabledState.rawValue)
-  }
-
-  ///Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status, if not, it returns and error
-  @objc func requestExposureNotificationAuthorization(enabled: Bool,
-                                                      callback: @escaping (ExposureManagerError?) -> Void) {
-    // Ensure exposure notifications are enabled if the app is authorized. The app
-    // could get into a state where it is authorized, but exposure
-    // notifications are not enabled,  if the user initially denied Exposure Notifications
-    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
-    // in Settings.
-    manager.setExposureNotificationEnabled(enabled) { error in
-      if let underlyingError = error {
-        let emError = ExposureManagerError(errorCode: .cannotEnableNotifications,
-                             localizedMessage: String.cannotEnableNotifications.localized,
-                             underlyingError: underlyingError)
-        callback(emError)
-      } else {
-        self.broadcastCurrentEnabledStatus()
-        callback(nil)
-      }
-    }
   }
 
   /// Returns the current exposures as a json string representation
@@ -281,6 +262,24 @@ final class ExposureManager: NSObject {
     }
   }
 
+  /// Requests enabling Exposure Notifications to the underlying manager, if success, it broadcasts the new status
+  @objc func requestExposureNotificationAuthorization(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    // Ensure exposure notifications are enabled if the app is authorized. The app
+    // could get into a state where it is authorized, but exposure
+    // notifications are not enabled,  if the user initially denied Exposure Notifications
+    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
+    // in Settings.
+    manager.setExposureNotificationEnabled(true) { error in
+      if let error = error {
+        reject(error.localizedDescription, error.localizedDescription, error)
+      } else {
+        self.broadcastCurrentEnabledStatus()
+        resolve([self.authorizationState.rawValue, self.enabledState.rawValue])
+      }
+    }
+  }
+
   @discardableResult func detectExposures(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
     if #available(iOS 13.7, *) {
       return detectExposuresV2(completionHandler: completionHandler)
@@ -314,7 +313,7 @@ final class ExposureManager: NSObject {
       }
       let indexFileString = try await(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
-      let targetUrls = self.urlPathsToProcess(remoteURLs)
+      let targetUrls = self.urlPathsToProcess(remoteURLs, apiVersion: .V1)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
@@ -332,12 +331,14 @@ final class ExposureManager: NSObject {
                   processedFileCount: processedFileCount,
                   lastProcessedUrlPath: lastProcessedUrlPath,
                   progress: progress,
+                  apiVersion: .V1,
                   completionHandler: completionHandler)
     }.catch { error in
       self.finish(.failure(error),
                   processedFileCount: processedFileCount,
                   lastProcessedUrlPath: lastProcessedUrlPath,
                   progress: progress,
+                  apiVersion: .V1,
                   completionHandler: completionHandler)
     }.always {
       unpackedArchiveURLs.cleanup()
@@ -363,7 +364,7 @@ final class ExposureManager: NSObject {
       self.isDetectingExposures = true
       let indexFileString = try await(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
-      let targetUrls = self.urlPathsToProcess(remoteURLs)
+      let targetUrls = self.urlPathsToProcess(remoteURLs, apiVersion: .V2)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
       let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
@@ -391,12 +392,14 @@ final class ExposureManager: NSObject {
                   processedFileCount: processedFileCount,
                   lastProcessedUrlPath: lastProcessedUrlPath,
                   progress: progress,
+                  apiVersion: .V2,
                   completionHandler: completionHandler)
     }.catch { error in
       self.finish(.failure(error),
                   processedFileCount: processedFileCount,
                   lastProcessedUrlPath: lastProcessedUrlPath,
                   progress: progress,
+                  apiVersion: .V2,
                   completionHandler: completionHandler)
     }.always {
       unpackedArchiveURLs.cleanup()
@@ -409,6 +412,7 @@ final class ExposureManager: NSObject {
               processedFileCount: Int,
               lastProcessedUrlPath: String,
               progress: Progress,
+              apiVersion: ENAPIVersion,
               completionHandler: ((ExposureResult) -> Void)) {
 
     // Update last exposure check date for representation in the UI
@@ -421,7 +425,9 @@ final class ExposureManager: NSObject {
       switch result {
       case let .success(newExposures):
         btSecureStorage.exposureDetectionErrorLocalizedDescription = .default
-        btSecureStorage.remainingDailyFileProcessingCapacity -= processedFileCount
+        if apiVersion == .V1 {
+          btSecureStorage.remainingDailyFileProcessingCapacity -= processedFileCount
+        }
         if lastProcessedUrlPath != .default {
           btSecureStorage.urlOfMostRecentlyDetectedKeyFile = lastProcessedUrlPath
         }
@@ -467,9 +473,9 @@ extension ExposureManager {
     return 0
   }
 
-  func urlPathsToProcess(_ urlPaths: [String]) -> [String] {
+  func urlPathsToProcess(_ urlPaths: [String], apiVersion: ENAPIVersion) -> [String] {
     let startIdx = startIndex(for: urlPaths)
-    let endIdx = min(startIdx + btSecureStorage.userState.remainingDailyFileProcessingCapacity, urlPaths.count)
+    let endIdx = apiVersion == .V2 ? urlPaths.count : min(startIdx + btSecureStorage.userState.remainingDailyFileProcessingCapacity, urlPaths.count)
     return Array(urlPaths[startIdx..<endIdx])
   }
 
@@ -601,7 +607,13 @@ private extension ExposureManager {
           case .success (let package):
             downloadedPackages.append(package)
           case .failure(let error):
-            reject(error)
+            // The index file may list key archive URLs that have been deleted
+            // from the key server. These will return 404's. Instead of aborting
+            // the entire operation, we continue and download the key archives that
+            // are present on the server
+            if (error as? GenericError != GenericError.notFound) {
+              reject(error)
+            }
           }
           dispatchGroup.leave()
         }

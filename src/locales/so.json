@@ -7,6 +7,7 @@
   },
   "common": {
     "back": "Noqo",
+    "cancel": "Buri",
     "close": "Xir",
     "continue": "Sii wado",
     "done": "Dhammaad",
@@ -14,6 +15,7 @@
     "more": "In kale",
     "next": "Ka xiga",
     "no_thanks": "Maya waad mahadsantahay",
+    "select_language": "Xulo Luqadda",
     "settings": "Fur Dejinta",
     "skip": "Dhaaf",
     "something_went_wrong": "Waxbaa qaldamay",
@@ -66,7 +68,6 @@
       "6ft_apart": "6ft kala fogaan",
       "ha_guidance_header": "Maxaan sameeyaa?",
       "header": "Waxa suuragal ah inaad meel uun kula kulanaty dad qaba fayraska COVID-19.",
-      "isolate": "Go'doon gal",
       "next_steps": "Tallaabooyinka xiga",
       "wash_your_hands": "Gacmaha iska dhaq",
       "wear_a_mask": "Gasho maaskaro"
@@ -117,8 +118,6 @@
     "call_emergency_services": "Wac adeegyada Xaaladaha Degdegga Ah (Imerjansiga)",
     "fix": "Ku hagaaji cilladaha {{technology}}",
     "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
-    "location_info_body_1": "Tikniyoolajiyadda Ogeysiiska Soo-gaarista waxay isticmaashaa iskaanka Bluetooth ka si loo fahmo aaladaha midba midka kale u dhow. Dhammaan taleefannada gacanta ee isticmaala Android 6.0 iyo wixii ka sareeya, si loogu adeegsado iskaanka Bluetooth ka, waxaa loo baahan yahay in qaybta dejinta (location setting) ee barnaamijka la shido dhammaan barnaamijyada, ma ahan oo keliya barnaamijyada ku yimid Nidaamka Ogeysiisyada Soo-gaarsinta.",
-    "location_info_subheader_1": "Maxaan ugu baahanahay in goobtaydu shidan tahay?",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
@@ -196,6 +195,10 @@
     "terms_header_title": "Shuruudaha adeegsiga",
     "welcome_image_label": "Ku sharraxaad sawir oo tusaya dad maaskarooyin xidhan, oo ah nudo la isku xidhay shabakad."
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Waan fahmay oo waan oggolahay",
+    "privacy_policy": "Xeerka Asurnaanta"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Taariikhda Ufeydsanka",
@@ -204,8 +207,5 @@
     "location": "Goobta (Location)",
     "protect_privacy": "Sidaan u ilaalinno asturnaantaada",
     "select_language": "Xulo Luqadda"
-  },
-  "settings": {
-    "i_understand_and_consent": "Waan fahmay oo waan oggolahay"
   }
 }

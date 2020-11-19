@@ -9,7 +9,7 @@ import React, {
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import * as CovidData from "./covidData"
-import { fetchCovidDataForState, NetworkResponse } from "./covidDataAPI"
+import { fetchStateTimeseries, NetworkResponse } from "./API/covidActNow"
 
 export type RequestStatus = "SUCCESS" | "LOADING" | "ERROR" | "MISSING_INFO"
 
@@ -26,7 +26,7 @@ export type CovidDataContextState = {
 
 const initialRequest: CovidDataRequest = {
   status: "MISSING_INFO",
-  data: [],
+  data: CovidData.empty,
 }
 
 const initialState: CovidDataContextState = {
@@ -43,7 +43,7 @@ export const CovidDataContextProvider: FunctionComponent = ({ children }) => {
 
   const fetchCovidData = useCallback((): Promise<NetworkResponse> => {
     if (stateAbbreviation && displayCovidData) {
-      return fetchCovidDataForState(stateAbbreviation)
+      return fetchStateTimeseries(stateAbbreviation)
     } else {
       return Promise.resolve({ kind: "failure", error: "BadRequest" })
     }

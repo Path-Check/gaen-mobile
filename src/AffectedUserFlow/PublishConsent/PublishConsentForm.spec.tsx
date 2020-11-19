@@ -42,11 +42,6 @@ describe("PublishConsentForm", () => {
     ).toBeDefined()
     expect(
       getByText(
-        /If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus./,
-      ),
-    ).toBeDefined()
-    expect(
-      getByText(
         /The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed./,
       ),
     ).toBeDefined()

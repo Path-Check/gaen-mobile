@@ -7,6 +7,7 @@
   },
   "common": {
     "back": "Tatti",
+    "cancel": "Na para",
     "close": "Huchum",
     "continue": "Kontinua",
     "done": "Munhayan",
@@ -14,6 +15,7 @@
     "more": "Mas",
     "next": "I otro",
     "no_thanks": "Para hafa, si yu'us ma'asi",
+    "select_language": "Achig i lenguahi",
     "settings": "Baba i Settings",
     "skip": "Upus",
     "something_went_wrong": "Guaha problema",
@@ -66,7 +68,6 @@
       "6ft_apart": "Sipara 6 pi'e",
       "ha_guidance_header": "Hafa bai hu chogui?",
       "header": "Sina ha umafakcha hao yan  i COVID 19 virus.",
-      "isolate": "Suhayi, na suha",
       "next_steps": "Otro mona para ma chogui",
       "wash_your_hands": "Fagasi i kannai-mu",
       "wear_a_mask": "Usa mask"
@@ -117,8 +118,6 @@
     "call_emergency_services": "Agang i Emergency na setbisio",
     "fix": "Famauleg i problema ni {{technology}}",
     "get_more_info": "Chuli mas infotmasion put {{technology}}",
-    "location_info_body_1": "I Exposure Notification technology ha u'usa Bluetooth scanning  para u komprendi hafa siha na devices man hihot. Gi todo siha i telefon ni manmalalagu gi Android 6.0 pat mas taghilo para u usa Bluetooth scanning , nesisita i device location setting man 'on' para todo i apps , ahe ti para eyu ha i apps ni guaha Exposure Notifications System.",
-    "location_info_subheader_1": "Hafa na hu nesisita muna 'on' i iyoku location?",
     "proximity_tracing_info_body_1": "Yanggen man mana 'on' i smartphones  ni man gaieyu app,  kalalamten i Bluetooth ya manhihot kon tiempo i encounter ma register gi iyo-mu device.",
     "proximity_tracing_info_body_2": "Put sienkasu guaha un susedi, todu infotmasion put hagu man manana.I app ti sina ha goti ni hafafa' na petsonat na infotmasion. I kosequat ha siha na IDs sina man ma usa.Man ma na suha est siha gi duranten i 14 dias.",
     "proximity_tracing_info_subheader_1": "Hafa bidada-na i Proximity Tracing?",
@@ -198,6 +197,10 @@
     "terms_header_title": "Palabra ni ma u'usa",
     "welcome_image_label": "Litraton taotao siha ni maan man u'usa masks ya man ayetun kulan nodes gi network."
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Hu Komprendi yan hu Konsienti",
+    "privacy_policy": "Areglu put privacy"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Historian i ninayi",
@@ -206,8 +209,5 @@
     "location": "Lokasion",
     "protect_privacy": "Taimanu in protehi i iyo-mu privacy",
     "select_language": "Achig i lenguahi"
-  },
-  "settings": {
-    "i_understand_and_consent": "Hu Komprendi yan hu Konsienti"
   }
 }

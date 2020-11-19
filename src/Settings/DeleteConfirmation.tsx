@@ -5,50 +5,114 @@ import {
   StyleSheet,
   View,
   ScrollView,
+  Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { showMessage } from "react-native-flash-message"
 
 import { useOnboardingContext } from "../OnboardingContext"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
+import * as Storage from "../utils/storage"
+import { useConfigurationContext } from "../ConfigurationContext"
+import { OperationResponse } from "../OperationResponse"
+import { useApplicationName } from "../Device/useApplicationInfo"
 
 import { Spacing, Buttons, Typography, Colors, Affordances } from "../styles"
 
 const DeleteConfirmation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
-  const { resetOnboarding } = useOnboardingContext()
-  const { deleteAllEntries } = useSymptomHistoryContext()
-
   const { t } = useTranslation()
-  const handleOnPressDeleteAllData = async () => {
-    const deleteLogEntriesResult = await deleteAllEntries()
-    if (deleteLogEntriesResult.kind === "success") {
-      resetOnboarding()
+  const { resetOnboarding } = useOnboardingContext()
+  const { resetUserConsent } = useProductAnalyticsContext()
+  const { deleteAllEntries } = useSymptomHistoryContext()
+  const { applicationName } = useApplicationName()
+  const {
+    displaySymptomHistory,
+    enableProductAnalytics,
+  } = useConfigurationContext()
+  const {
+    successFlashMessageOptions,
+    errorFlashMessageOptions,
+  } = Affordances.useFlashMessageOptions()
+
+  const deleteAllData = async (): Promise<OperationResponse> => {
+    resetOnboarding()
+    resetUserConsent()
+    Storage.removeAll()
+    const deleteAllEntriesResult = await deleteAllEntries()
+    return deleteAllEntriesResult
+  }
+
+  const showAlert = () => {
+    Alert.alert(
+      t("settings.delete_data_are_you_sure"),
+      t("settings.delete_data_this_action", { applicationName }),
+      [
+        {
+          text: t("common.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("common.confirm"),
+          onPress: () => handleOnPressConfirmDeleteData(),
+          style: "destructive",
+        },
+      ],
+    )
+  }
+
+  const handleOnPressConfirmDeleteData = async () => {
+    const result = await deleteAllData()
+    if (result.kind === "success") {
       showMessage({
         message: t("settings.data_deleted"),
-        ...Affordances.successFlashMessageOptions,
+        ...successFlashMessageOptions,
       })
     } else {
       showMessage({
         message: t("settings.errors.deleting_data"),
-        ...Affordances.errorFlashMessageOptions,
+        ...errorFlashMessageOptions,
       })
     }
   }
+
+  const handleOnPressDeleteAllData = () => {
+    showAlert()
+  }
+
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary.shade10} />
       <View style={style.container}>
         <ScrollView
-          style={style.scrollContentContainer}
+          contentContainerStyle={style.contentContainer}
           alwaysBounceVertical={false}
         >
           <Text style={style.headerText}>{t("settings.delete_my_data")}</Text>
           <Text style={style.bodyText}>
-            {t("settings.delete_data_disclosure1")}
+            {t("settings.delete_data_disclosure1", { applicationName })}
           </Text>
+          <View style={style.bulletsContainer}>
+            <Text style={style.bulletText}>
+              • {t("settings.delete_data_language_token")}
+            </Text>
+            <Text style={style.bulletText}>
+              • {t("settings.delete_data_onboarding_token")}
+            </Text>
+            {enableProductAnalytics && (
+              <Text style={style.bulletText}>
+                • {t("settings.delete_data_product_analytics")}
+              </Text>
+            )}
+            {displaySymptomHistory && (
+              <Text style={style.bulletText}>
+                • {t("settings.delete_data_symptom_history")}
+              </Text>
+            )}
+          </View>
           <Text style={style.subheaderText}>
             {`${t("settings.delete_data_note")}:`}
           </Text>
@@ -74,9 +138,10 @@ const style = StyleSheet.create({
     height: "100%",
     backgroundColor: Colors.background.primaryLight,
   },
-  scrollContentContainer: {
+  contentContainer: {
     paddingTop: Spacing.small,
-    paddingHorizontal: Spacing.large,
+    paddingBottom: Spacing.medium,
+    paddingHorizontal: Spacing.medium,
   },
   headerText: {
     ...Typography.header.x50,
@@ -85,7 +150,14 @@ const style = StyleSheet.create({
   },
   bodyText: {
     ...Typography.body.x30,
-    marginBottom: Spacing.xxxLarge,
+    marginBottom: Spacing.small,
+  },
+  bulletsContainer: {
+    marginBottom: Spacing.small,
+  },
+  bulletText: {
+    ...Typography.body.x30,
+    marginBottom: Spacing.xSmall,
   },
   subheaderText: {
     ...Typography.header.x30,

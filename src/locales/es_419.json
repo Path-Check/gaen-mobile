@@ -1,6 +1,7 @@
 {
   "_display_name": "Español (LA)",
   "common": {
+    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Hecho",
     "more": "Más",
@@ -22,6 +23,9 @@
     "home": "Inicio"
   },
   "onboarding": {
+    "privacy_policy": "Política de privacidad"
+  },
+  "product_analytics": {
     "privacy_policy": "Política de privacidad"
   },
   "screen_titles": {

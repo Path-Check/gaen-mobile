@@ -1,11 +1,10 @@
 import { register } from "fishery"
 
-import analyticsContext from "./analyticsContext"
+import productAnalyticsContext from "./productAnalyticsContext"
 import configurationContext from "./configurationContext"
 import covidDataContext from "./covidDataContext"
 import exposureContext from "./exposureContext"
 import exposureDatum from "./exposureDatum"
-import gaenStrategy from "./gaenStrategy"
 import permissionsContext from "./permissionsContext"
 import rawExposure from "./rawExposure"
 import selfAssessmentAnswers from "./selfAssessmentAnswers"
@@ -14,14 +13,13 @@ import symptomHistoryContext from "./symptomHistoryContext"
 import { covidData, covidDatum } from "./covidData"
 
 export const factories = register({
-  analyticsContext,
+  productAnalyticsContext,
   configurationContext,
   covidData,
   covidDataContext,
   covidDatum,
   exposureContext,
   exposureDatum,
-  gaenStrategy,
   permissionsContext,
   rawExposure,
   selfAssessmentAnswers,

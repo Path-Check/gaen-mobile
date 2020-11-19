@@ -9,21 +9,20 @@ export interface Configuration {
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayCallbackForm: boolean
+  displayCallEmergencyServices: boolean
   displayCovidData: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   displayAgeVerification: boolean
+  enableProductAnalytics: boolean
   emergencyPhoneNumber: string
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
-  healthAuthorityAnalyticsSiteId: number | null
-  healthAuthorityAnalyticsUrl: string | null
+  healthAuthorityCovidDataUrl: string | null
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
-  healthAuthorityName: string
   healthAuthorityPrivacyPolicyUrl: string
-  healthAuthoritySupportsAnalytics: boolean
   measurementSystem: MeasurementSystem
   minimumAge: string
   regionCodes: string[]
@@ -35,21 +34,20 @@ const initialState: Configuration = {
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayCallbackForm: false,
+  displayCallEmergencyServices: false,
   displayCovidData: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
   displayAgeVerification: false,
   emergencyPhoneNumber: "",
+  enableProductAnalytics: false,
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
-  healthAuthorityAnalyticsSiteId: null,
-  healthAuthorityAnalyticsUrl: null,
+  healthAuthorityCovidDataUrl: null,
   healthAuthorityEulaUrl: null,
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
-  healthAuthorityName: "",
   healthAuthorityPrivacyPolicyUrl: "",
-  healthAuthoritySupportsAnalytics: false,
   measurementSystem: "Imperial" as const,
   minimumAge: "18",
   regionCodes: [],
@@ -61,10 +59,10 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
+    AUTHORITY_COVID_DATA_URL: healthAuthorityCovidDataUrl,
     EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
     EULA_URL: eulaUrl,
     FIND_A_TEST_CENTER_URL: findATestCenterUrl,
-    GAEN_AUTHORITY_NAME: healthAuthorityName,
     LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
     LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
@@ -73,19 +71,18 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
+  const displayCallEmergencyServices =
+    env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
+  const enableProductAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
 
   const minimumAge = env.MINIMUM_AGE
-
-  const healthAuthoritySupportsAnalytics = Boolean(env.MATOMO_URL)
-  const healthAuthorityAnalyticsUrl = env.MATOMO_URL || null
-  const healthAuthorityAnalyticsSiteId = parseInt(env.MATOMO_SITE_ID) || null
 
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
@@ -104,21 +101,20 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appPackageName,
         displayAcceptTermsOfService,
         displayCallbackForm,
+        displayCallEmergencyServices,
         displayCovidData,
         displaySymptomHistory,
         displaySelfAssessment,
         displayAgeVerification,
+        enableProductAnalytics,
         emergencyPhoneNumber,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
-        healthAuthorityAnalyticsSiteId,
-        healthAuthorityAnalyticsUrl,
+        healthAuthorityCovidDataUrl,
         healthAuthorityEulaUrl: eulaUrl || null,
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
-        healthAuthorityName,
         healthAuthorityPrivacyPolicyUrl,
-        healthAuthoritySupportsAnalytics,
         measurementSystem,
         minimumAge,
         regionCodes,

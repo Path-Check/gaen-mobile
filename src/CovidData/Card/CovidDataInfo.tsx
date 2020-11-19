@@ -20,7 +20,7 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
 }) => {
   const { t } = useTranslation()
 
-  const newCasesData = CovidData.toLineChartCasesNew(data)
+  const newCasesData = CovidData.toLineChartCasesNew(data.timeseries)
 
   const toPoint = (newCaseDatum: number, idx: number): [number, number] => {
     return [idx, newCaseDatum]
@@ -38,7 +38,7 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
   const trendColor =
     trend > 0 ? Colors.accent.warning100 : Colors.accent.success100
 
-  const source = "localcoviddata.com"
+  const source = data.source
   const sourceText = t("covid_data.source", { source })
   const labelText = t("covid_data.new_cases")
 

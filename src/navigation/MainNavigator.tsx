@@ -13,7 +13,7 @@ import {
 import { useTranslation } from "react-i18next"
 
 import { useOnboardingContext } from "../OnboardingContext"
-import { useAnalyticsContext } from "../ProductAnalytics/Context"
+import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 
 import { ModalStackScreens, HomeStackScreens } from "./index"
 import { WelcomeStackScreens, Stacks } from "./index"
@@ -25,8 +25,7 @@ import Welcome from "../Welcome"
 import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
-import AffectedUserStack from "../AffectedUserFlow/"
-import AnonymizedDataConsentScreen from "../ProductAnalytics/AnonymizedDataConsentScreen"
+import AffectedUserStack from "./AffectedUserFlowStack"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import ExposureDetectionStatusScreen from "../Home/ExposureDetectionStatus/Screen"
 import BluetoothInfo from "../Home/BluetoothInfo"
@@ -64,7 +63,7 @@ const linking: LinkingOptions = {
 const MainNavigator: FunctionComponent = () => {
   const { t } = useTranslation()
   const { isOnboardingComplete } = useOnboardingContext()
-  const { trackScreenView } = useAnalyticsContext()
+  const { trackScreenView } = useProductAnalyticsContext()
   const navigationRef = useRef<NavigationContainerRef>(null)
   const routeNameRef = useRef<string>()
 
@@ -150,17 +149,11 @@ const MainNavigator: FunctionComponent = () => {
         <Stack.Screen
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
+          options={{ gestureEnabled: false }}
         />
         <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>
           {(props) => <HowItWorksStack {...props} mountLocation="Settings" />}
         </Stack.Screen>
-        <Stack.Screen
-          name={ModalStackScreens.AnonymizedDataConsent}
-          component={AnonymizedDataConsentScreen}
-          options={{
-            headerShown: true,
-          }}
-        />
         <Stack.Screen
           name={ModalStackScreens.SelfAssessmentFromExposureDetails}
         >

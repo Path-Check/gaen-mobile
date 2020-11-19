@@ -25,7 +25,7 @@ const primaryBase: ViewStyle = {
   ...base,
   ...heightBase,
   ...Outlines.lightShadow,
-  borderRadius: Outlines.borderRadiusMax,
+  borderRadius: Outlines.borderRadiusLarge,
   backgroundColor: Colors.primary.shade100,
   maxWidth: Layout.screenWidth * 0.95,
 }
@@ -61,6 +61,8 @@ export const thin: Record<Thin, ViewStyle> = {
 type Outlined = "base" | "thin"
 const outlinedBase: ViewStyle = {
   ...primaryBase,
+  elevation: 0,
+  shadowOpacity: 0,
   backgroundColor: Colors.transparent.invisible,
   borderColor: Colors.primary.shade100,
   borderWidth: Outlines.hairline,

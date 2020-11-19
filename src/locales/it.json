@@ -5,6 +5,7 @@
     "version": "Versione:"
   },
   "common": {
+    "cancel": "Annulla",
     "continue": "Continua",
     "done": "Fatto",
     "more": "Altro",
@@ -49,6 +50,9 @@
     "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",
     "privacy_policy": "Informativa sulla privacy",
     "terms_header_title": "Termini per l'utilizzo"
+  },
+  "product_analytics": {
+    "privacy_policy": "Informativa sulla privacy"
   },
   "screen_titles": {
     "exposure_history": "Cronologia delle esposizioni",

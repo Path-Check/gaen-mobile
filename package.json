@@ -4,7 +4,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "clean": "rm -rf node_modules && yarn",
     "start": "yarn && react-native start",
     "tsc": "tsc --noEmit",
     "prettier": "prettier \"src/**/*.+(js|jsx|ts|tsx|json)\"",
@@ -14,10 +13,11 @@
     "run-android": "react-native run-android --variant=debug --appId=org.pathcheck.covidsafepaths.bt",
     "run-ios": "yarn install:pod && react-native run-ios --scheme \"BT_Development\" --configuration \"Debug-BT\" --simulator \"iPhone 11 (13.5)\"",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('You must use Yarn to install, not NPM')\"",
+    "postinstall": "npx react-native-jetifier && ./bin/postinstall.sh",
     "install:pod": "cd ios && bundle install --quiet && bundle exec pod install --silent",
-    "reset": "yarn cache clean && watchman watch-del-all && rm -rf node_modules && yarn && ./android/gradlew -p ./android clean && rm ios/Podfile.lock && yarn install:pod",
-    "postinstall": "npx react-native-jetifier",
-    "detox-setup": "detox clean-framework-cache && detox build-framework-cache",
+    "clean": "rm -rf node_modules && yarn cache clean && watchman watch-del-all && rm -rf /tmp/metro-bundler-cache-* && rm -rf /tmp/haste-map-react-native-packager-*",
+    "clean-all": "yarn clean && ./android/gradlew -p ./android clean && rm ios/Podfile.lock",
+    "reset": "yarn clean-all && yarn && yarn install:pod",
     "i18n:check": "./src/locales/check.sh",
     "i18n:extract": "i18next",
     "i18n:pull": "./src/locales/pull.sh",
@@ -67,7 +67,8 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.0.3",
     "reanimated-bottom-sheet": "^1.0.0-alpha.19",
-    "regression": "^2.0.1"
+    "regression": "^2.0.1",
+    "ts.data.json": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

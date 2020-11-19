@@ -11,14 +11,11 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "./components"
-import { getLocalNames } from "./locales/languages"
+import { useLocaleInfo } from "./locales/languages"
 import { useApplicationName } from "./Device/useApplicationInfo"
 import { useConfigurationContext } from "./ConfigurationContext"
 import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
-import {
-  loadAuthorityCopy,
-  authorityCopyTranslation,
-} from "./configuration/authorityCopy"
+import { useCustomCopy } from "./configuration/useCustomCopy"
 
 import { Images, Icons } from "./assets"
 import {
@@ -33,19 +30,14 @@ import {
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
-  const {
-    t,
-    i18n: { language: localeCode },
-  } = useTranslation()
-  const languageName = getLocalNames()[localeCode]
+  const { t } = useTranslation()
+  const { languageName } = useLocaleInfo()
   const { applicationName } = useApplicationName()
   const { displayAgeVerification } = useConfigurationContext()
 
-  const welcomeMessage = authorityCopyTranslation(
-    loadAuthorityCopy("welcome_message"),
-    localeCode,
-    t("label.launch_screen1_header"),
-  )
+  const { welcomeMessage: customWelcomeMessage } = useCustomCopy()
+  const welcomeMessage =
+    customWelcomeMessage || t("label.launch_screen1_header")
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
@@ -68,7 +60,11 @@ const Welcome: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.mainContentContainer}>
-          <TouchableOpacity onPress={handleOnPressSelectLanguage}>
+          <TouchableOpacity
+            onPress={handleOnPressSelectLanguage}
+            accessibilityLabel={t("common.select_language")}
+            accessibilityRole="button"
+          >
             <View style={style.languageButtonContainer}>
               <Text style={style.languageButtonText}>{languageName}</Text>
             </View>

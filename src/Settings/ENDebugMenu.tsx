@@ -13,7 +13,7 @@ import {
 import { Text } from "../components"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
-import { NativeModule } from "../gaen"
+import * as NativeModule from "../gaen/nativeModule"
 import { NavigationProp, SettingsStackScreens } from "../navigation"
 import { useStatusBarEffect } from "../navigation/index"
 
@@ -152,12 +152,6 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
                   SettingsStackScreens.ExposureListDebugScreen,
                 )
               }}
-            />
-            <DebugMenuListItem
-              label="Toggle Exposure Notifications"
-              onPress={handleOnPressSimulationButton(
-                NativeModule.toggleExposureNotifications,
-              )}
             />
             <DebugMenuListItem
               label="Reset Exposures"

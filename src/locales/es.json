@@ -5,6 +5,7 @@
     "version": "Versión:"
   },
   "common": {
+    "cancel": "Cancelar",
     "continue": "Continuar",
     "done": "Hecho",
     "more": "Más",
@@ -36,6 +37,9 @@
     "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?",
     "privacy_policy": "Política de privacidad",
     "terms_header_title": "Condiciones de uso"
+  },
+  "product_analytics": {
+    "privacy_policy": "Política de privacidad"
   },
   "screen_titles": {
     "home": "Inicio",

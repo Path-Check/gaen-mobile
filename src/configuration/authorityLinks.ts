@@ -1,4 +1,4 @@
-import links from "./links.json"
+import links from "../../config/links.json"
 
 type TranslationValue = Record<string, string>
 type LinkData = {

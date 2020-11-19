@@ -9,6 +9,7 @@ import {
   usePermissionsContext,
   ENPermissionStatus,
 } from "../../Device/PermissionsContext"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { openAppSettings } from "../../Device"
 import { useStatusBarEffect, HomeStackScreens } from "../../navigation"
 import { Text } from "../../components"
@@ -22,6 +23,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     exposureNotifications,
     isBluetoothOn,
@@ -102,12 +104,16 @@ const ExposureDetectionStatus: FunctionComponent = () => {
 
     const handleOnPressFix = async () => {
       try {
-        await exposureNotifications.request()
-
-        if (status !== ENPermissionStatus.ENABLED) {
+        const response = await exposureNotifications.request()
+        if (response.kind === "success") {
+          if (response.status !== ENPermissionStatus.ENABLED) {
+            showNotAuthorizedAlert()
+          }
+        } else {
           showNotAuthorizedAlert()
         }
-      } catch {
+        trackEvent("product_analytics", "exposure_notifications_enabled")
+      } catch (e) {
         showNotAuthorizedAlert()
       }
     }
@@ -160,6 +166,9 @@ const ExposureDetectionStatus: FunctionComponent = () => {
     return (
       <ActivationStatusView
         headerText={t("home.bluetooth.location_header")}
+        subheaderText={t("home.bluetooth.location_subheader", {
+          applicationName,
+        })}
         isActive={isLocationOn}
         infoAction={handleOnPressShowInfo}
         fixAction={handleOnPressFix}

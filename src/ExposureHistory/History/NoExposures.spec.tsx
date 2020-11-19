@@ -29,23 +29,19 @@ describe("NoExposures", () => {
       it("prompts the user to see HA guidance", () => {
         expect.assertions(2)
         const healthAuthorityLearnMoreUrl = "https://www.example.com/"
-        const healthAuthorityName = "healthAuthorityName"
         const openURLSpy = jest.spyOn(Linking, "openURL")
 
         const { queryByText, getByText } = render(
           <ConfigurationContext.Provider
             value={factories.configurationContext.build({
               healthAuthorityLearnMoreUrl,
-              healthAuthorityName,
             })}
           >
             <NoExposures />
           </ConfigurationContext.Provider>,
         )
 
-        expect(
-          queryByText(`Review guidance from ${healthAuthorityName}`),
-        ).not.toBeNull()
+        expect(queryByText(`Review guidance from`)).toBeDefined()
         fireEvent.press(getByText("Learn More"))
         expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityLearnMoreUrl)
       })
@@ -56,14 +52,12 @@ describe("NoExposures", () => {
         expect.assertions(1)
         const healthAuthorityAdviceUrl = ""
         const healthAuthorityLearnMoreUrl = ""
-        const healthAuthorityName = "healthAuthorityName"
 
         const { queryByText } = render(
           <ConfigurationContext.Provider
             value={factories.configurationContext.build({
               healthAuthorityAdviceUrl,
               healthAuthorityLearnMoreUrl,
-              healthAuthorityName,
             })}
           >
             <NoExposures />

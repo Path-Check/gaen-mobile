@@ -1,16 +1,31 @@
 import ExposureNotification
 import Foundation
+import XCTest
 
 @testable import BT
 
-extension ExposureManagerTests {
+extension XCTestCase {
+
+  static var halloween: Date {
+    var components = DateComponents()
+    components.year = 2019
+    components.month = 10
+    components.day = 31
+    let date = Calendar.current.date(from: components)
+    return date!
+  }
+
+  static var startOfDay: Date {
+    return Calendar.current.startOfDay(for: Date())
+  }
+
   
   func defaultStorage() -> BTSecureStorageMock {
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: startOfDay.posixRepresentation))
+                                          date: XCTestCase.startOfDay.posixRepresentation))
       return userState
     }
     return btSecureStorageMock
@@ -88,10 +103,6 @@ extension ExposureManagerTests {
       return Progress()
     }
     
-    enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      completionHandler(nil)
-    }
-    
     enManagerMock.getExposureInfoHandler = { summary, useExplanation, completionHandler in
       guard !forceGetExposureInfoError else {
         completionHandler(nil, GenericError.unknown)
@@ -122,10 +133,6 @@ extension ExposureManagerTests {
     
     mockDaySummariesENExposureDetectionSummary.daySummariesHandler = {
       return [enExposureDaySummaryMock]
-    }
-    
-    enManagerMock.setExposureNotificationEnabledHandler = { enabled, completionHandler in
-      completionHandler(nil)
     }
     
     enManagerMock.enDetectExposuresHandler = { configuration, diagnosisKeys, completionHandler in

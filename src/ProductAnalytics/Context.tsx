@@ -5,46 +5,50 @@ import React, {
   useEffect,
   useContext,
 } from "react"
-import Matomo from "react-native-matomo-sdk"
+
 import { StorageUtils } from "../utils"
-import { actions } from "./index"
-import { useConfigurationContext } from "../ConfigurationContext"
 
-export type AnalyticsContextState = {
+export type ProductAnalyticsContextState = {
   userConsentedToAnalytics: boolean
-  updateUserConsent: (consent: boolean) => Promise<void>
-} & AnalyticsConfiguration
-
-type AnalyticsConfiguration = {
-  trackEvent: (event: string) => Promise<string | boolean>
+  updateUserConsent: (userConsented: boolean) => Promise<void>
+  trackEvent: (
+    category: EventCategory,
+    action: string,
+    name?: string,
+    value?: number,
+  ) => Promise<void>
   trackScreenView: (screen: string) => Promise<void>
-}
-
-const initialAnalyticsConfiguration = {
-  trackEvent: () => Promise.resolve(""),
-  trackScreenView: () => Promise.resolve(),
+  resetUserConsent: () => Promise<void>
 }
 
 const initialContext = {
   userConsentedToAnalytics: false,
   updateUserConsent: () => Promise.resolve(),
-  ...initialAnalyticsConfiguration,
+  trackEvent: () => Promise.resolve(),
+  trackScreenView: () => Promise.resolve(),
+  resetUserConsent: () => Promise.resolve(),
 }
 
-const AnalyticsContext = createContext<AnalyticsContextState>(initialContext)
-const AnalyticsProvider: FunctionComponent = ({ children }) => {
-  const {
-    healthAuthoritySupportsAnalytics,
-    healthAuthorityAnalyticsUrl,
-    healthAuthorityAnalyticsSiteId,
-  } = useConfigurationContext()
+export type EventCategory = "product_analytics" | "epi_analytics"
+export type ProductAnalyticsClient = {
+  trackEvent: (
+    category: EventCategory,
+    action: string,
+    name?: string,
+    value?: number,
+  ) => Promise<void>
+  trackView: (route: string[]) => Promise<void>
+}
+
+const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
+  initialContext,
+)
+const ProductAnalyticsProvider: FunctionComponent<{
+  productAnalyticsClient: ProductAnalyticsClient
+}> = ({ productAnalyticsClient, children }) => {
   const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
     boolean
   >(false)
-
-  const [analyticsConfiguration, setAnalyticsConfiguration] = useState<
-    AnalyticsConfiguration
-  >(initialAnalyticsConfiguration)
 
   useEffect(() => {
     const checkAnalyticsConsent = async () => {
@@ -53,64 +57,72 @@ const AnalyticsProvider: FunctionComponent = ({ children }) => {
     }
 
     checkAnalyticsConsent()
-  }, [userConsentedToAnalytics])
+  }, [])
 
-  useEffect(() => {
-    const supportAnalyticsTracking =
-      healthAuthoritySupportsAnalytics && userConsentedToAnalytics
+  const trackEvent = async (
+    category: EventCategory,
+    action: string,
+    name?: string,
+    value?: number,
+  ): Promise<void> => {
+    if (userConsentedToAnalytics) {
+      productAnalyticsClient.trackEvent(category, action, name, value)
+    }
+  }
 
-    const initializeAnalyticsTracking = () => {
-      if (healthAuthorityAnalyticsUrl && healthAuthorityAnalyticsSiteId) {
-        Matomo.initialize(
-          healthAuthorityAnalyticsUrl,
-          healthAuthorityAnalyticsSiteId,
-        )
+  const trackScreenView = async (screen: string): Promise<void> => {
+    if (userConsentedToAnalytics) {
+      productAnalyticsClient.trackView([screen])
+    }
+  }
+
+  const updateUserConsent = async (userConsented: boolean) => {
+    const trackConsented = async () => {
+      const isOnboardingComplete = await StorageUtils.getIsOnboardingComplete()
+      const eventName = isOnboardingComplete
+        ? "settings_consented_to_analytics"
+        : "onboarding_consented_to_analytics"
+      if (userConsented) {
+        productAnalyticsClient.trackEvent("product_analytics", eventName)
       }
     }
-    const trackEvent = async (event: string) => {
-      return actions.trackEvent(event)
-    }
 
-    const trackScreenView = async (screen: string) => {
-      actions.trackScreenView(screen)
-    }
+    trackConsented()
+    StorageUtils.setAnalyticsConsent(userConsented)
+    setUserConsentedToAnalytics(userConsented)
+  }
 
-    if (supportAnalyticsTracking) {
-      initializeAnalyticsTracking()
-      setAnalyticsConfiguration({ trackEvent, trackScreenView })
-    }
-  }, [
-    healthAuthoritySupportsAnalytics,
-    userConsentedToAnalytics,
-    healthAuthorityAnalyticsSiteId,
-    healthAuthorityAnalyticsUrl,
-  ])
-
-  const updateUserConsent = async (consent: boolean) => {
-    await StorageUtils.setAnalyticsConsent(consent)
-    setUserConsentedToAnalytics(consent)
+  const resetUserConsent = async (): Promise<void> => {
+    StorageUtils.removeAnalyticsConsent()
+    setUserConsentedToAnalytics(false)
   }
 
   return (
-    <AnalyticsContext.Provider
+    <ProductAnalyticsContext.Provider
       value={{
         userConsentedToAnalytics,
         updateUserConsent,
-        ...analyticsConfiguration,
+        trackEvent,
+        trackScreenView,
+        resetUserConsent,
       }}
     >
       {children}
-    </AnalyticsContext.Provider>
+    </ProductAnalyticsContext.Provider>
   )
 }
 
-const useAnalyticsContext = (): AnalyticsContextState => {
-  const context = useContext(AnalyticsContext)
+const useProductAnalyticsContext = (): ProductAnalyticsContextState => {
+  const context = useContext(ProductAnalyticsContext)
   if (context === undefined) {
-    throw new Error("AnalyticsContext must be used with a provider")
+    throw new Error("ProductAnalyticsContext must be used with a provider")
   }
 
   return context
 }
 
-export { AnalyticsContext, AnalyticsProvider, useAnalyticsContext }
+export {
+  ProductAnalyticsContext,
+  ProductAnalyticsProvider,
+  useProductAnalyticsContext,
+}

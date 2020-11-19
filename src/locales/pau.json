@@ -1,4 +1,7 @@
 {
+  "common": {
+    "cancel": "Kotouar"
+  },
   "navigation": {
     "more_info": "Komakai lomesodel"
   }

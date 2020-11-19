@@ -23,14 +23,18 @@
 		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
 		B51D8D2724E43AE4001C28E1 /* KeySubmissionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */; };
-		B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */; };
+		B5224FD6255DDA4800070C72 /* DebugMenuUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5224FD5255DDA4800070C72 /* DebugMenuUnitTests.swift */; };
+		B5224FDE255DE27000070C72 /* ExposureConfigurationV1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5224FDD255DE27000070C72 /* ExposureConfigurationV1UnitTests.swift */; };
 		B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */; };
 		B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CBF31249A738500218477 /* IndexFileRequests.swift */; };
-		B54FAEFF2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */; };
+		B54FAEFF2536102100F09344 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FAEFD2536102100F09344 /* XCTestCase+Extensions.swift */; };
 		B5525E5D2512B3D90093614A /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5525E5C2512B3D90093614A /* Int+Extensions.swift */; };
 		B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5582D43249943DE001458A9 /* ExposureEventEmitter.m */; };
 		B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */; };
 		B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */; };
+		B584BED8255C7CE700990F1B /* V2UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BED7255C7CE700990F1B /* V2UnitTests.swift */; };
+		B584BEDB255C7CEA00990F1B /* V1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BED3255C7CD300990F1B /* V1UnitTests.swift */; };
+		B584BF2B255C903200990F1B /* DailySummariesConfigurationUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */; };
 		B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */; };
 		B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */; };
 		B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B596C0712488127D00943B79 /* ENPermissionsModule.m */; };
@@ -107,7 +111,6 @@
 		C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C550A66524B7906F002CA7F2 /* ExposureKeyModule.m */; };
 		C58463E42486C51100BCB842 /* ExposureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58463E32486C51100BCB842 /* ExposureManager.swift */; };
 		C5850A64247D5A41007A596B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5850A63247D5A41007A596B /* Images.xcassets */; };
-		C5AA24D824768FFF00BA0A99 /* COVIDSafePathsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */; };
 		C5C850C7248014F700A494CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C850C6248014F700A494CA /* main.m */; };
 		C5C850CA2480156200A494CA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C850C92480156200A494CA /* AppDelegate.m */; };
 /* End PBXBuildFile section */
@@ -139,7 +142,6 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COVIDSafePathsTests.m; sourceTree = "<group>"; };
 		08445F4324283A2F008754AC /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = "GoogleMaps-3.8.0/Base/Frameworks/GoogleMapsBase.framework"; sourceTree = "<group>"; };
 		08445F4524283A40008754AC /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = "GoogleMaps-3.8.0/Maps/Frameworks/GoogleMaps.framework"; sourceTree = "<group>"; };
 		08445F4724283A46008754AC /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = "GoogleMaps-3.8.0/Maps/Frameworks/GoogleMapsCore.framework"; sourceTree = "<group>"; };
@@ -169,7 +171,6 @@
 		167DF82F84E242A39CBEB042 /* IBMPlexMono-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		20E5EE8E6065465F9558DCDB /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		210E5F50B07048118538B796 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Italic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
-		271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePathsSecureStorage.swift; sourceTree = "<group>"; };
 		2E9077612439A903005C98DE /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		3053DF05D78949A09366B85D /* IBMPlexMono-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLight.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ExtraLight.ttf"; sourceTree = "<group>"; };
 		323E903F3DAB2E4C925FECBD /* Pods-BTTests.debug-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug-bt.xcconfig"; sourceTree = "<group>"; };
@@ -232,13 +233,18 @@
 		B508170524EC7647000C5449 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B5081E4924D9B8E300121884 /* DeviceInfoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModule.m; sourceTree = "<group>"; };
 		B51D8D2624E43AE4001C28E1 /* KeySubmissionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySubmissionResponse.swift; sourceTree = "<group>"; };
+		B5224FD5255DDA4800070C72 /* DebugMenuUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuUnitTests.swift; sourceTree = "<group>"; };
+		B5224FDD255DE27000070C72 /* ExposureConfigurationV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureConfigurationV1UnitTests.swift; sourceTree = "<group>"; };
 		B52D88C3248F10FD0071ED51 /* BTSecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSecureStorage.swift; sourceTree = "<group>"; };
 		B54CBF31249A738500218477 /* IndexFileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexFileRequests.swift; sourceTree = "<group>"; };
-		B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExposureManagerUnitTests+Extensions.swift"; sourceTree = "<group>"; };
+		B54FAEFD2536102100F09344 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		B5525E5C2512B3D90093614A /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		B5582D43249943DE001458A9 /* ExposureEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExposureEventEmitter.m; sourceTree = "<group>"; };
 		B576CC3D24993F4C00CDD9D9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B576CC4024993F4C00CDD9D9 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
+		B584BED3255C7CD300990F1B /* V1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V1UnitTests.swift; sourceTree = "<group>"; };
+		B584BED7255C7CE700990F1B /* V2UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2UnitTests.swift; sourceTree = "<group>"; };
+		B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummariesConfigurationUnitTests.swift; sourceTree = "<group>"; };
 		B5926908251BCEF5008F2C86 /* SymptomLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomLogEntry.swift; sourceTree = "<group>"; };
 		B592690C251BD037008F2C86 /* SymptomLogEntryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymptomLogEntryModule.m; sourceTree = "<group>"; };
 		B596C0712488127D00943B79 /* ENPermissionsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ENPermissionsModule.m; sourceTree = "<group>"; };
@@ -357,10 +363,12 @@
 		00E356EF1AD99517003FC87E /* COVIDSafePathsTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* COVIDSafePathsTests.m */,
+				B57529B7255ED5C000D6212A /* Exposure Manager */,
+				B5224FD4255DDA2600070C72 /* Debug Menu */,
+				B584BF27255C88CF00990F1B /* Exposure Configuration */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
-				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
-				B54FAEFD2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift */,
+				B584BECD255C7C4300990F1B /* Exposure Detection */,
+				B54FAEFD2536102100F09344 /* XCTestCase+Extensions.swift */,
 				A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */,
 				A5CE5FC425005BE40045251A /* MiscUnitTests.swift */,
 			);
@@ -464,7 +472,6 @@
 		13B07FAE1A68108700A75B9A /* COVIDSafePaths */ = {
 			isa = PBXGroup;
 			children = (
-				271881BF2461AF76001DE067 /* SafePathsSecureStorage.swift */,
 				C53FD0C324719C25006D3268 /* BT */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -555,12 +562,78 @@
 			path = UserNotifications;
 			sourceTree = "<group>";
 		};
+		B5224FD4255DDA2600070C72 /* Debug Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B5224FD5255DDA4800070C72 /* DebugMenuUnitTests.swift */,
+			);
+			name = "Debug Menu";
+			sourceTree = "<group>";
+		};
+		B5224FDB255DE23C00070C72 /* V1 */ = {
+			isa = PBXGroup;
+			children = (
+				B5224FDD255DE27000070C72 /* ExposureConfigurationV1UnitTests.swift */,
+			);
+			name = V1;
+			sourceTree = "<group>";
+		};
+		B5224FDC255DE24200070C72 /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+				B584BF2A255C903200990F1B /* DailySummariesConfigurationUnitTests.swift */,
+			);
+			name = V2;
+			sourceTree = "<group>";
+		};
 		B562F041249A64400006647B /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				B5C490A72498F84000588A5F /* Region.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B57529B7255ED5C000D6212A /* Exposure Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */,
+			);
+			name = "Exposure Manager";
+			sourceTree = "<group>";
+		};
+		B57529B8255ED5DA00D6212A /* V1 */ = {
+			isa = PBXGroup;
+			children = (
+				B584BED3255C7CD300990F1B /* V1UnitTests.swift */,
+			);
+			name = V1;
+			sourceTree = "<group>";
+		};
+		B57529B9255ED5E400D6212A /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+				B584BED7255C7CE700990F1B /* V2UnitTests.swift */,
+			);
+			name = V2;
+			sourceTree = "<group>";
+		};
+		B584BECD255C7C4300990F1B /* Exposure Detection */ = {
+			isa = PBXGroup;
+			children = (
+				B57529B8255ED5DA00D6212A /* V1 */,
+				B57529B9255ED5E400D6212A /* V2 */,
+			);
+			name = "Exposure Detection";
+			sourceTree = "<group>";
+		};
+		B584BF27255C88CF00990F1B /* Exposure Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				B5224FDB255DE23C00070C72 /* V1 */,
+				B5224FDC255DE24200070C72 /* V2 */,
+			);
+			name = "Exposure Configuration";
 			sourceTree = "<group>";
 		};
 		B5E29D4A249E3A7D00E686DC /* Foundation */ = {
@@ -1017,7 +1090,6 @@
 				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
 				B5BD2BC02507E81A00B2F62E /* UtilsModule.swift in Sources */,
 				B576CC4324993F5200CDD9D9 /* Date+Extensions.swift in Sources */,
-				B52D88C0248F0FC00071ED51 /* SafePathsSecureStorage.swift in Sources */,
 				B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */,
 				B5582D47249943E5001458A9 /* ExposureEventEmitter.m in Sources */,
 				C5C850C7248014F700A494CA /* main.m in Sources */,
@@ -1052,11 +1124,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B584BEDB255C7CEA00990F1B /* V1UnitTests.swift in Sources */,
 				B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */,
+				B5224FD6255DDA4800070C72 /* DebugMenuUnitTests.swift in Sources */,
 				A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */,
-				C5AA24D824768FFF00BA0A99 /* COVIDSafePathsTests.m in Sources */,
+				B584BF2B255C903200990F1B /* DailySummariesConfigurationUnitTests.swift in Sources */,
 				A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */,
-				B54FAEFF2536102100F09344 /* ExposureManagerUnitTests+Extensions.swift in Sources */,
+				B54FAEFF2536102100F09344 /* XCTestCase+Extensions.swift in Sources */,
+				B584BED8255C7CE700990F1B /* V2UnitTests.swift in Sources */,
+				B5224FDE255DE27000070C72 /* ExposureConfigurationV1UnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

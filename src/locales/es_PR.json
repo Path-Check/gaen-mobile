@@ -17,37 +17,45 @@
   },
   "common": {
     "back": "Regresar",
+    "cancel": "Cancelar",
     "close": "Cerrar",
     "close_screen": "Cerrar pantalla",
+    "confirm": "Confirmar",
     "continue": "Continuar",
     "done": "Finalizado",
     "edit": "Editar",
+    "learn_more": "Más información",
     "maybe_later": "Quizás más tarde",
     "more": "Más",
-    "next": "Próximo",
+    "next": "Siguiente",
     "no": "No",
     "no_thanks": "No, gracias",
     "off": "DESACTIVADA",
     "on": "ACTIVADA",
     "save": "Guardar",
+    "select_language": "Seleccionar idioma",
     "settings": "Abrir Configuración",
     "skip": "Omitir",
     "something_went_wrong": "Algo salió mal",
     "start": "Empezar",
     "submit": "Enviar",
-    "success": "Correcto",
+    "success": "Éxito",
     "yes": "Sí"
   },
   "covid_data": {
     "apologies_data_unavailable": "Lo sentimos, los datos de COVID no están disponibles.",
     "cases_today": "Casos de hoy",
-    "covid_coverage": "Cobertura de Covid",
+    "covid_coverage": "Alcance del Covid",
     "covid_data": "Datos de COVID",
+    "daily_new_cases": "Nuevos casos diarios",
     "deaths_today": "Muertes de hoy",
     "down_from_last_week": "Abajo la semana pasada",
     "error_getting_data": "Lo sentimos, no pudimos encontrar los datos de los últimos casos de COVID en {{location}}.",
+    "infection_rate": "Tasa de infección",
     "new_cases": "Casos nuevos",
     "past_7_days": "Últimos 7 días",
+    "per_100k": "por 100k",
+    "positive_test_rate": "Tasa de prueba positiva",
     "see_more": "Ver más",
     "source": "fuente: {{source}}",
     "spread_of_the_virus_in": "Propagación del virus en {{locationName}}",
@@ -65,7 +73,7 @@
   "export": {
     "code_input_body_bluetooth": "Ingrese su código de verificación",
     "code_input_button_cancel": "Cancelar",
-    "code_input_placeholder": "Escribir el código",
+    "code_input_placeholder": "Introducir código",
     "code_input_title_bluetooth": "Verifique su diagnóstico",
     "complete_body_bluetooth": "Está ayudando a contener la propagación del virus y a proteger a otros en tu comunidad.",
     "complete_title": "¡Gracias por mantener segura a su comunidad!",
@@ -75,6 +83,8 @@
     "consent_button_title": "Entiendo y doy mi consentimiento",
     "consent_subheader_1": "¿Por qué debería compartir?",
     "consent_subheader_2": "¿Cómo funciona?",
+    "consent_warning_message": "Continuar anulará su código. Si desea compartir su diagnóstico positivo en el futuro, primero deberá obtener un nuevo código de resultado positivo de la prueba.",
+    "consent_warning_title": "¡Advertencia!",
     "enable_exposure_notifications_body": "Debe activar los avisos de exposición para informar de un resultado positivo.",
     "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
     "error": {
@@ -85,6 +95,7 @@
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue usado"
     },
+    "never_mind_button_title": "No importa",
     "person_and_health_expert": "Una persona hablando con personal médico",
     "publish_consent_title_bluetooth": "Notifique a otros en su comunidad",
     "publish_keys": {
@@ -111,9 +122,9 @@
       "general_guidance": "Orientación general",
       "ha_guidance_header": "¿Qué debo hacer?",
       "header": "Es posible que haya estado expuesto al virus COVID-19.",
-      "isolate": "Debe aislarse",
       "next_steps": "Próximos pasos",
       "personalize_my_guidance": "Personalizar mi orientación",
+      "quarantine": "Cuarentena",
       "schedule_callback": "Programe una llamada para recibir ayuda de un rastreador de contactos de {{healthAuthorityName}}",
       "speak_with_contact_tracer": "Hable con un rastreador de contactos",
       "wash_your_hands": "Lávese las manos",
@@ -162,6 +173,7 @@
       "location_disabled_error_message": "Para activar la tecnología de Avisos de Exposición, autorice el acceso a su localización que está en la Configuración de la aplicación",
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
+      "location_subheader": "{{applicationName}} nunca accede a sus datos de ubicación y su dispositivo nunca es rastreado.",
       "proximity_tracing_header": "Avisos de exposición",
       "share": "Compartir {{applicationName}}",
       "share_message": "Pruebe esta aplicación {{applicationName}}, que puede ayudarnos a contener el COVID-19. {{appDownloadLink}}",
@@ -169,15 +181,16 @@
       "tracing_off_subheader": "Habilite Bluetooth, rastreo de proximidad y localización para obtener información sobre posibles exposiciones",
       "tracing_on_header": "Detección de exposición activada"
     },
-    "call_emergency_services": "Llamar a Servicios de Emergencia",
+    "call_emergency_services": "Llamar Servicios de Emergencia",
     "check_if_your_symptoms": "Escribir síntomas y obtener una recomendación instantánea sobre cómo estar a salvo.",
     "did_you_test_positive": "¿Dio positivo en la prueba de COVID-19?",
+    "enter_symptoms": "Ingrese síntomas",
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
     "if_you_have_a_code": "Reporte su resultado para ayudar a mantener a su comunidad segura.",
-    "location_info_body_1": "La tecnología de avisos de exposición usa el escaneo Bluetooth para comprender qué dispositivos están cerca uno del otro. En todos los teléfonos con Android 6.0 y superior, para usar el escaneo Bluetooth, la configuración de ubicación del dispositivo debe estar activada para todas las aplicaciones, no solo para las aplicaciones creadas con el Sistema de Notificaciones de Exposición.",
-    "location_info_subheader_1": "¿Por qué necesito que mi localización esté activada?",
+    "location_info_body": "Google requiere que los dispositivos con Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar la Detección de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
+    "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
     "not_feeling_well": "¿No te sientes bien?",
     "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
@@ -205,7 +218,6 @@
     "unchecked_checkbox": "Casilla de verificación no marcada"
   },
   "navigation": {
-    "connect": "Conectar",
     "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Panel",
@@ -235,7 +247,7 @@
     "location_subheader": "¿Por qué necesito activar los servicios de ubicación de mi teléfono?",
     "no_take_me": "No, llévame de vuelta.",
     "notification_body1": "Recibirá notificaciones cuando se haya cruzado con alguien que haya informado es positivo a COVID-19.",
-    "notification_body2": "La aplicación hace esto usando Bluetooth Low Energy y códigos aleatorios seguros sin conocer quién es usted o dónde ha estado. Puede desactivar esto en cualquier momento en la configuración.",
+    "notification_body2": "La aplicación hace esto usando Bluetooth de baja energía y códigos aleatorios seguros sin conocer quién es usted o dónde ha estado. Puede desactivar esto en cualquier momento en la configuración.",
     "notification_header": "Recibir aviso si pudiera haber sido expuesto",
     "notification_subheader1": "¿Cuándo recibiré un aviso?",
     "notification_subheader2": "¿Cómo funciona?",
@@ -266,7 +278,7 @@
     "screen1_header": "Juntos, podemos disminuir la propagación de COVID-19",
     "screen1_image_label": "Dos personas chocando los cinco",
     "screen2_button": "¿Está protegida mi privacidad?",
-    "screen2_header": "Su teléfono recuerda otros dispositivos que encuentra, pero no le identificará ante nadie",
+    "screen2_header": "Su teléfono recuerda otros dispositivos de personas con las que ha tenido contacto, pero no le identificará",
     "screen2_image_label": "Dos personas usando sus teléfonos",
     "screen3_button": "¿Qué pasa si estoy expuesto?",
     "screen3_header": "Ninguna información de identificación personal sale de su teléfono",
@@ -279,6 +291,18 @@
     "welcome_image_label": "Una ilustración de personas con mascarillas, conectadas como nodos en una red.",
     "you_must_be": "Debe ser {{minimumAge}} o anterior para usar {{applicationName}}. ¿Estás por encima de {{minimumAge}}?"
   },
+  "product_analytics": {
+    "i_understand_and_consent": "Entiendo y doy mi consentimiento",
+    "not_sharing_anonymized_data": "No compartir datos anónimos",
+    "privacy_policy": "Política de privacidad",
+    "share_anonymized_data": "Comparta datos anónimos",
+    "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
+    "share_data_para_1": "Los datos anónimos y agregados sobre cómo las comunidades están utilizando esta aplicación ayudan al {{healthAuthorityName}} a analizar, comprender y contener la propagación de COVID-19.",
+    "share_data_para_2": "Estos datos no contienen información de identificación personal.",
+    "sharing_anonymized_data": "Compartir datos anónimos",
+    "stop_sharing_data": "Dejar de compartir datos",
+    "you_are_sharing_data": "Está compartiendo datos anónimos"
+  },
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Historial de exposición",
@@ -290,7 +314,8 @@
     "location": "Localización",
     "protect_privacy": "Cómo protegemos su privacidad",
     "select_language": "Seleccionar idioma",
-    "select_symptoms": "Seleccionar síntomas"
+    "select_symptoms": "Seleccionar síntomas",
+    "settings": "Configuración"
   },
   "self_assessment": {
     "age_range": {
@@ -392,16 +417,9 @@
     "errors": {
       "deleting_data": "Lo sentimos, no pudimos eliminar los datos"
     },
-    "here": "aquí",
-    "i_understand_and_consent": "Entiendo y doy mi consentimiento",
     "not_sharing_anonymized_data": "No compartir datos anónimos",
-    "please_view_privacy_policy": "Consulte la política de privacidad",
     "share_anonymized_data": "Comparta datos anónimos",
-    "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
-    "share_anonymized_data_para": "Sus datos anónimos ayudan al {{healthAuthorityName}} a analizar, rastrear y contener la propagación del COVID-19. Sus datos serán añadidos a los de otros usuarios que elijan compartir.\n\nSus datos contienen sus respuestas a la encuesta y el código postal, pero ninguna información adicional o de identificación personal.\n\n El {{healthAuthorityName}} retendrá sus datos anónimos por un período de tiempo específico.",
-    "sharing_anonymized_data": "Compartir datos anónimos",
-    "stop_sharing_data": "Dejar de compartir datos",
-    "you_are_sharing_data": "Está compartiendo datos anónimos"
+    "sharing_anonymized_data": "Compartir datos anónimos"
   },
   "symptom_history": {
     "did_not_feel_well": "No se sentía bien.",
@@ -421,20 +439,23 @@
     "symptom_history": "Historial de síntomas",
     "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
   },
-  "symptoms": {
-    "body_aches": "Dolor de cuerpo",
-    "chest_pain_or_pressure": "Dolor o presión en el pecho",
-    "chills": "Escalofríos",
+  "symptom": {
+    "bluish_lips_or_face": "Labios o cara azulados",
+    "congestion_or_runny_nose": "Congestión o secreción nasal.",
     "cough": "Tos",
     "diarrhea": "Diarrea",
-    "difficulty_breathing": "Dificultad para respirar",
-    "disorientation_or_unresponsiveness": "Desorientación o falta de respuesta",
-    "fever": "Fiebre",
-    "lightheadedness": "Mareos",
-    "loss_of_appetite": "Pérdida de apetito",
-    "loss_of_smell": "Pérdida del olfato",
-    "loss_of_taste": "Pérdida del gusto",
+    "fatigue": "Fatiga",
+    "fever_or_chills": "Fiebre o escalofríos",
+    "headache": "Dolor de cabeza",
+    "inability_to_wake_or_stay_awake": "Incapacidad para despertar o permanecer despierto",
+    "muscle_or_body_aches": "Dolores musculares o corporales",
+    "nausea_or_vomiting": "Náuseas o vómitos",
+    "new_confusion": "Nueva confusión",
+    "new_loss_of_taste_or_smell": "Nueva pérdida del gusto u olfato",
     "other": "Otros",
-    "vomiting": "Vómitos"
+    "persistent_pain_or_pressure_in_the_chest": "Dolor persistente o presión en el pecho",
+    "shortness_of_breath_or_difficulty_breathing": "Dificultad para respirar",
+    "sore_throat": "Dolor de garganta",
+    "trouble_breathing": "Dificultad para respirar"
   }
 }

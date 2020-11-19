@@ -17,7 +17,7 @@ import {
 } from "../../Device/PermissionsContext"
 import { LocationPermissions } from "../../Device/useLocationPermissions"
 import { factories } from "../../factories"
-
+import { RequestAuthorizationResponse } from "../../gaen/nativeModule"
 import ExposureDetectionStatusScreen from "./Screen"
 
 jest.mock("@react-navigation/native")
@@ -177,7 +177,7 @@ describe("ExposureDetectionStatusScreen", () => {
       const alertSpy = jest.spyOn(Alert, "alert")
 
       const expectedMessage =
-        "To enable Exposure Notifications, go to the Exposure Notification section in Settings and Share Exposure Information and set the Active Region to applicationName"
+        "Open Settings, then navigate to the Exposure Notifications settings for this app. Ensure Share Exposure Information is turned on, then press 'Set As Active Region'."
 
       fireEvent.press(getByTestId("exposure-notifications-status-container"))
       expect(requestSpy).toHaveBeenCalled()
@@ -328,7 +328,8 @@ const createPermissionProviderValue = (
   isBluetoothOn = true,
   locationPermissions: LocationPermissions = "RequiredOn",
   enPermissionStatus: ENPermissionStatus,
-  requestPermission: () => Promise<void> = () => Promise.resolve(),
+  requestPermission: () => Promise<RequestAuthorizationResponse> = () =>
+    Promise.resolve({ kind: "failure" as const, error: "Unknown" as const }),
 ) => {
   return {
     isBluetoothOn,

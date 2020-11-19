@@ -5,6 +5,7 @@
     "version": "പതിപ്പ്:"
   },
   "common": {
+    "cancel": "റദ്ദാക്കുക",
     "continue": "തുടരുക",
     "done": "ചെയ്‌തു",
     "next": "ചെയ്‌തു"
@@ -17,6 +18,9 @@
   "onboarding": {
     "privacy_policy": "സ്വകാര്യതാ നയം",
     "terms_header_title": "നിബന്ധനകൾ"
+  },
+  "product_analytics": {
+    "privacy_policy": "സ്വകാര്യതാ നയം"
   },
   "screen_titles": {
     "legal": "നിയമപരമായ വിവരങ്ങൾ"

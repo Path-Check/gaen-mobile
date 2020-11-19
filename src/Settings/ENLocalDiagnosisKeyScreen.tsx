@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react"
 import { Alert, BackHandler, ScrollView, StyleSheet, View } from "react-native"
 
 import { NavigationProp } from "../navigation"
-import { NativeModule } from "../gaen"
+import * as NativeModule from "../gaen/nativeModule"
 import { Text } from "../components"
 
 import { Typography } from "../styles"

@@ -19,6 +19,7 @@ import { useAffectedUserContext } from "../AffectedUserContext"
 import * as API from "../verificationAPI"
 import { calculateHmac } from "../hmac"
 import { useExposureContext } from "../../ExposureContext"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
@@ -35,6 +36,7 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
+  const { trackEvent } = useProductAnalyticsContext()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
@@ -68,6 +70,7 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
+    trackEvent("product_analytics", "verification_code_submitted")
     try {
       const response = await API.postCode(code)
 
@@ -158,6 +161,8 @@ const CodeInputForm: FunctionComponent = () => {
 
   const isIOS = Platform.OS === "ios"
 
+  const shouldBeAccessible = errorMessage !== ""
+
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
@@ -191,7 +196,12 @@ const CodeInputForm: FunctionComponent = () => {
           onSubmitEditing={Keyboard.dismiss}
           blurOnSubmit={false}
         />
-        <Text style={style.errorSubtitle}>{errorMessage}</Text>
+        <View
+          accessibilityElementsHidden={!shouldBeAccessible}
+          accessible={shouldBeAccessible}
+        >
+          <Text style={style.errorSubtitle}>{errorMessage}</Text>
+        </View>
         <TouchableOpacity
           style={isDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressSubmit}
@@ -249,7 +259,7 @@ const style = StyleSheet.create({
     fontSize: Typography.size.x60,
     textAlignVertical: "center",
     textAlign: "center",
-    letterSpacing: 4,
+    letterSpacing: 3,
     paddingTop: Spacing.small + 2,
   },
   codeInputFocused: {

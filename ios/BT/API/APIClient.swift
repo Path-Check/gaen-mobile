@@ -87,7 +87,8 @@ class BTAPIClient: APIClient {
       if let file = T.ResponseType.create(from: data) {
         completion(.success(file))
       } else {
-        completion(.failure(GenericError.unknown))
+        let error = GenericError(statusCode: response.response?.statusCode ?? 0)
+        completion(.failure(error))
       }
     }
   }
@@ -152,7 +153,7 @@ private extension BTAPIClient {
   func downloadRequest<T: APIRequest>(for request: T,
                                       requestType: RequestType) -> DataRequest {
     let baseUrl = baseUrlFor(requestType)
-    let r = sessionManager.request(baseUrl.appendingPathComponent(request.path))
+    let r = request.path.isEmpty ? sessionManager.request(baseUrl) : sessionManager.request(baseUrl.appendingPathComponent(request.path))
     debugPrint(r)
     return r
   }

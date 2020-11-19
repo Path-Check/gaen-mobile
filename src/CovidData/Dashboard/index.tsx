@@ -1,34 +1,63 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet } from "react-native"
+import {
+  View,
+  Linking,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native"
+import { useTranslation } from "react-i18next"
 
+import { useConfigurationContext } from "../../ConfigurationContext"
+import { Text } from "../../components"
 import { useCovidDataContext } from "../Context"
 import StateData from "./StateData"
 
-import { Colors, Spacing } from "../../styles"
+import { Typography, Buttons, Colors, Spacing } from "../../styles"
 
 const CovidDataDashboard: FunctionComponent = () => {
+  const { t } = useTranslation()
+
   const {
-    locationName,
     request: { status, data },
   } = useCovidDataContext()
+  const { healthAuthorityCovidDataUrl } = useConfigurationContext()
 
   if (status === "MISSING_INFO") {
     return null
   }
 
-  const todayData = data[0]
+  const handleOnPressLearnMore = () => {
+    if (healthAuthorityCovidDataUrl) {
+      Linking.openURL(healthAuthorityCovidDataUrl)
+    }
+  }
 
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-    >
-      <StateData todayCovidData={todayData} stateAbbreviation={locationName} />
-    </ScrollView>
+    <View style={style.outerContainer}>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+      >
+        <StateData data={data} />
+      </ScrollView>
+      {healthAuthorityCovidDataUrl ? (
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressLearnMore}
+          testID="shareButton"
+        >
+          <Text style={style.buttonText}>{t("common.learn_more")}</Text>
+        </TouchableOpacity>
+      ) : null}
+    </View>
   )
 }
 
 const style = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+  },
   container: {
     backgroundColor: Colors.background.primaryLight,
   },
@@ -37,6 +66,13 @@ const style = StyleSheet.create({
     paddingBottom: Spacing.xxxLarge,
     paddingHorizontal: Spacing.medium,
     backgroundColor: Colors.background.primaryLight,
+  },
+  button: {
+    ...Buttons.fixedBottom.base,
+    paddingBottom: Spacing.xLarge,
+  },
+  buttonText: {
+    ...Typography.button.fixedBottom,
   },
 })
 

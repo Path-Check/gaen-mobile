@@ -5,6 +5,7 @@
     "version": "Verzia:"
   },
   "common": {
+    "cancel": "Ukončiť",
     "continue": "Pokračovať",
     "done": "Hotovo",
     "more": "Viac",
@@ -28,6 +29,9 @@
   "onboarding": {
     "privacy_policy": "Ochrana osobných údajov",
     "terms_header_title": "Podmienky používania"
+  },
+  "product_analytics": {
+    "privacy_policy": "Ochrana osobných údajov"
   },
   "screen_titles": {
     "home": "Domov",

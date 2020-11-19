@@ -9,30 +9,42 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
 import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
+import { useConfigurationContext } from "../ConfigurationContext"
 import { openAppSettings } from "../Device"
 
-import { Colors, Spacing, Typography, Buttons } from "../styles"
+import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
+import { Icons } from "../assets"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
+  const { enableProductAnalytics } = useConfigurationContext()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+      navigateToNextScreen()
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    navigateToNextScreen()
+  }
+
+  const navigateToNextScreen = () => {
+    if (enableProductAnalytics) {
+      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
+    } else {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    }
   }
 
   const showLocationAccessAlert = () => {
@@ -65,10 +77,15 @@ const ActivateLocation: FunctionComponent = () => {
       >
         <View style={style.content}>
           <Text style={style.header}>{t("onboarding.location_header")}</Text>
-          <Text style={style.subheader}>
-            {t("onboarding.location_subheader")}
+          <View style={style.subheaderContainer}>
+            <SvgXml xml={Icons.AlertCircle} fill={Colors.accent.danger150} />
+            <Text style={style.subheaderText}>
+              {t("onboarding.location_subheader", { applicationName })}
+            </Text>
+          </View>
+          <Text style={style.bodyText}>
+            {t("onboarding.location_body", { applicationName })}
           </Text>
-          <Text style={style.body}>{t("onboarding.location_body")}</Text>
         </View>
         <TouchableOpacity
           onPress={handleOnPressAllowLocationAccess}
@@ -108,11 +125,23 @@ const style = StyleSheet.create({
     ...Typography.header.x60,
     marginBottom: Spacing.large,
   },
-  subheader: {
-    ...Typography.header.x20,
-    marginBottom: Spacing.xSmall,
+  subheaderContainer: {
+    paddingVertical: Spacing.small,
+    paddingHorizontal: Spacing.large,
+    borderRadius: Outlines.baseBorderRadius,
+    borderColor: Colors.accent.danger150,
+    borderWidth: Outlines.thin,
+    marginBottom: Spacing.small,
+    flexDirection: "row",
+    alignItems: "center",
   },
-  body: {
+  subheaderText: {
+    ...Typography.header.x20,
+    color: Colors.accent.danger150,
+    paddingLeft: Spacing.medium,
+    paddingRight: Spacing.large,
+  },
+  bodyText: {
     ...Typography.body.x30,
     marginBottom: Spacing.xxLarge,
   },

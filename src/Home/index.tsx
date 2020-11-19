@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from "react"
 import {
+  View,
   ScrollView,
-  Linking,
   TouchableOpacity,
   StyleSheet,
-  View,
   Image,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
-import { SvgXml } from "react-native-svg"
 
 import {
   HomeStackScreens,
@@ -19,21 +17,14 @@ import {
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
 
+import CovidDataCard from "../CovidData/Card"
 import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
-import CovidDataCard from "../CovidData/Card"
+import CallEmergencyServices from "./CallEmergencyServices"
 
-import { Icons, Images } from "../assets"
-import {
-  Spacing,
-  Colors,
-  Typography,
-  Outlines,
-  Iconography,
-  Buttons,
-  Affordances,
-} from "../styles"
+import { Images } from "../assets"
+import { Outlines, Spacing, Colors, Typography, Affordances } from "../styles"
 
 const IMAGE_HEIGHT = 170
 
@@ -41,9 +32,10 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const {
-    displaySelfAssessment,
-    displayCovidData,
     displayCallbackForm,
+    displayCallEmergencyServices,
+    displayCovidData,
+    displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
   } = useConfigurationContext()
@@ -57,13 +49,17 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatusCard />
-        <ShareLink />
         {displayCovidData && <CovidDataCard />}
         {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
+        <ShareLink />
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
-        <CallEmergencyServices phoneNumber={emergencyPhoneNumber} />
+        {displayCallEmergencyServices && (
+          <View style={style.callEmergencyServicesContainer}>
+            <CallEmergencyServices phoneNumber={emergencyPhoneNumber} />
+          </View>
+        )}
       </ScrollView>
     </>
   )
@@ -181,45 +177,6 @@ const SymptomHistory: FunctionComponent = () => {
   )
 }
 
-interface CallEmergencyServicesProps {
-  phoneNumber: string
-}
-
-const CallEmergencyServices: FunctionComponent<CallEmergencyServicesProps> = ({
-  phoneNumber,
-}) => {
-  const { t } = useTranslation()
-  const handleOnPressCallEmergencyServices = () => {
-    Linking.openURL(`tel:${phoneNumber}`)
-  }
-
-  return (
-    <View style={style.emergencyButtonOuterContainer}>
-      <TouchableOpacity
-        onPress={handleOnPressCallEmergencyServices}
-        accessibilityLabel={t(
-          "self_assessment.call_emergency_services.call_emergencies",
-          {
-            phoneNumber,
-          },
-        )}
-        accessibilityRole="button"
-        style={style.emergencyButtonContainer}
-      >
-        <SvgXml
-          xml={Icons.Phone}
-          fill={Colors.neutral.white}
-          width={Iconography.xSmall}
-          height={Iconography.xSmall}
-        />
-        <Text style={style.emergencyButtonText}>
-          {t("home.call_emergency_services", { phoneNumber })}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  )
-}
-
 const style = StyleSheet.create({
   container: {
     backgroundColor: Colors.background.primaryLight,
@@ -254,19 +211,10 @@ const style = StyleSheet.create({
     color: Colors.neutral.shade100,
     marginBottom: Spacing.xLarge,
   },
-  emergencyButtonOuterContainer: {
+  callEmergencyServicesContainer: {
     borderTopWidth: Outlines.hairline,
     borderColor: Colors.neutral.shade25,
     paddingTop: Spacing.large,
-  },
-  emergencyButtonContainer: {
-    ...Buttons.thin.base,
-    borderRadius: Outlines.borderRadiusLarge,
-    backgroundColor: Colors.accent.danger100,
-  },
-  emergencyButtonText: {
-    ...Typography.button.primary,
-    marginLeft: Spacing.small,
   },
 })
 

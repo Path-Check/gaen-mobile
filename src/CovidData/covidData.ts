@@ -1,12 +1,15 @@
-export type CovidData = CovidDatum[]
-
-export const empty: CovidDatum = {
-  date: "2020-01-01",
-  positiveCasesTotal: 0,
-  positiveCasesNew: 0,
-  deathsTotal: 0,
-  deathsNew: 0,
+export type CovidData = {
+  source: string
+  fips: string
+  country: string
+  state: string
+  population: number
+  metrics: Metrics
+  riskLevels: RiskLevels
+  timeseries: Timeseries
 }
+
+type Timeseries = CovidDatum[]
 
 type Date = string
 
@@ -14,11 +17,60 @@ export type CovidDatum = {
   date: Date
   positiveCasesTotal: number
   positiveCasesNew: number
-  deathsTotal: number
-  deathsNew: number
 }
 
-export const toNewCasesPercentage = (data: CovidData): number | null => {
+type Metrics = {
+  testPositivityRatio: number
+  caseDensity: number
+  contactTracerCapacityRatio: number
+  infectionRate: number
+  icuHeadroomRatio: number
+}
+
+type RiskLevels = {
+  overall: number
+  testPositivityRatio: number
+  caseDensity: number
+  contactTracerCapacityRatio: number
+  infectionRate: number
+  icuHeadroomRatio: number
+}
+
+export const emptyMetrics = {
+  testPositivityRatio: 0,
+  caseDensity: 0,
+  contactTracerCapacityRatio: 0,
+  infectionRate: 0,
+  icuHeadroomRatio: 0,
+}
+
+export const emptyRiskLevels = {
+  overall: 0,
+  testPositivityRatio: 0,
+  caseDensity: 0,
+  contactTracerCapacityRatio: 0,
+  infectionRate: 0,
+  icuHeadroomRatio: 0,
+}
+
+export const empty: CovidData = {
+  source: "",
+  fips: "",
+  country: "",
+  state: "",
+  population: 0,
+  metrics: emptyMetrics,
+  riskLevels: emptyRiskLevels,
+  timeseries: [],
+}
+
+export const emptyDatum: CovidDatum = {
+  date: "2020-01-01",
+  positiveCasesTotal: 0,
+  positiveCasesNew: 0,
+}
+
+export const toNewCasesPercentage = (data: Timeseries): number | null => {
   if (!(data.length > 1)) {
     return null
   }
@@ -42,7 +94,7 @@ const percentDifference = (a: number, b: number) => {
 
 type TrendData = number[]
 
-export const toLineChartCasesNew = (data: CovidData): TrendData => {
+export const toLineChartCasesNew = (data: Timeseries): TrendData => {
   return data.map(toCasesNew).slice(0, 7)
 }
 

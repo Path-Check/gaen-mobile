@@ -150,6 +150,7 @@ export type SettingsStackScreen =
   | "ENSubmitDebugForm"
   | "ExposureListDebugScreen"
   | "ENLocalDiagnosisKey"
+  | "ProductAnalyticsConsent"
 
 export const SettingsStackScreens: {
   [key in SettingsStackScreen]: SettingsStackScreen
@@ -161,6 +162,7 @@ export const SettingsStackScreens: {
   ENSubmitDebugForm: "ENSubmitDebugForm",
   ENLocalDiagnosisKey: "ENLocalDiagnosisKey",
   ExposureListDebugScreen: "ExposureListDebugScreen",
+  ProductAnalyticsConsent: "ProductAnalyticsConsent",
 }
 
 export type AffectedUserFlowStackScreen =
@@ -247,6 +249,19 @@ export const Stacks: { [key in Stack]: Stack } = {
   Settings: "Settings",
   Home: "Home",
   SymptomHistory: "SymptomHistory",
+}
+
+export type TabRoute =
+  | "Home"
+  | "ExposureHistory"
+  | "SymptomHistory"
+  | "Settings"
+
+export const TabRoutes: { [key in TabRoute]: TabRoute } = {
+  Home: "Home",
+  ExposureHistory: "ExposureHistory",
+  SymptomHistory: "SymptomHistory",
+  Settings: "Settings",
 }
 
 export const useStatusBarEffect = (
