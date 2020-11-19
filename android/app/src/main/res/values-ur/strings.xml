@@ -2,4 +2,5 @@
 <resources>
   <string name="exposure_notification_channel_description">ایکسپوژر کی اطلاع</string>
   <string name="exposure_notification_channel_name">ایکسپوژر کی اطلاع</string>
+  <string name="exposure_notification_message">کوئی آپ کے قریب تھا CoVID-19 مثبت ٹیسٹ کریں۔ مزید تفصیلات کے لئے تھپتھپائیں۔ </string>
 </resources>

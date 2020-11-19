@@ -36,5 +36,8 @@
   "screen_titles": {
     "home": "Domov",
     "legal": "Právne oznámenie"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Si si istý/á?"
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <string name="exposure_notification_channel_description">تنبيهات إخطارات التعرض.</string>
+  <string name="exposure_notification_channel_description">تنبيهات الإخطار التعرض.</string>
   <string name="exposure_notification_channel_name">إخطار التعرض</string>
-  <string name="exposure_notification_message">  تم تشخيص شخص كان قريبًا منك بالاصابة بمرض COVID-19 </string>
+  <string name="exposure_notification_message">تم تشخيص شخص كان قريبًا منك بالاصابة بمرض COVID-19</string>
   <string name="exposure_notification_title">التعرض المحتمل لـ COVID-19</string>
 </resources>
