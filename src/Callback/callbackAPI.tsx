@@ -3,10 +3,10 @@ import env from "react-native-config"
 const {
   CALLBACK_FORM_URL: callbackFormUrl,
   CALLBACK_OAUTH_URL: callbackOAuthUrl,
-  CALLBACK_USERNAME: callbackUsername,
-  CALLBACK_PASSWORD: callbackPassword,
+  CALLBACK_PUBLIC_USERNAME: publicUsername,
+  CALLBACK_PUBLIC_USERKEY: publicUserkey,
   CALLBACK_CLIENT_ID: callbackClientId,
-  CALLBACK_CLIENT_SECRET: callbackClientSecret,
+  CALLBACK_CLIENT_PUBLIC_KEY: callbackClientPublicKey,
 } = env
 
 interface NetworkSuccess {
@@ -37,7 +37,7 @@ export const postCallbackInfo = async ({
   phoneNumber,
 }: CallbackInfo): Promise<NetworkResponse<PostCallbackInfoError>> => {
   const postOAuth = async () => {
-    const oauthBody = `grant_type=password&client_id=${callbackClientId}&client_secret=${callbackClientSecret}&username=${callbackUsername}&password=${callbackPassword}`
+    const oauthBody = `grant_type=password&client_id=${callbackClientId}&client_secret=${callbackClientPublicKey}&username=${publicUsername}&password=${publicUserkey}`
 
     return fetch(callbackOAuthUrl, {
       method: "POST",

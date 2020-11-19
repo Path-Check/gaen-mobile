@@ -1,15 +1,14 @@
 ## Data Dictionary
 
-This file is an list of all of the data which could theoretically leave the
+This file lists all of the data which could theoretically leave the
 device.
 
 
 ### General Notes
 
 - Many application features are configurable and optionally enabled on a per
-build basis, so not every listed here is necessarily included in a public
-release of the app via the App Store or the Play Store. If a build does not
-require an optional feature, it is not included.
+  build basis, so not every listed here is necessarily included in a public
+  release of the app via the App Store or the Play Store.
 
 - All network communication is encrypted with standard SSL security protections.
 
@@ -29,7 +28,7 @@ the user to be shared.
 `src/AffectedUserFlow/exposureNotificationAPI.ts`
 
 All builds of the app have a feature for users to submit their device's local
-exposure keys to their region's exposure notification server. This includes two
+exposure keys to their region's exposure notification server; this includes two
 requests that leave the device with a data payload:
 
 1. submission of a verification token to a verification server.
@@ -51,30 +50,30 @@ Reference:
 `src/logger.ts`
 
 Builds that have error reporting enabled send crash and error information to an
-error reporting service. Currently we support
-[Bugsnag](https://docs.bugsnag.com/) only, which creates generated random Ids,
-which are referred to as 'Device Ids' by bugsnag, but are not associated to
-device UUIDs.
+error reporting service. Currently, we only support
+[Bugsnag](https://docs.bugsnag.com/). Bugsnag generates random Ids, referred to
+as 'Device Ids' by Bugsnag, but are not associated with device UUIDs.
 
 
 #### Contact Tracer Callback Form (Optional)
 
 `src/Callback/callbackAPI.tsx`
 
-Builds that include this have a form in which users can submit their phone
-numbers and optionally their names to be put on a queue to be called back by a
-contact tracer. If the user chooses to submit their phone number and name this
-will be sent to a backend service configured at on a per build basis.
+Builds that include the Callback form feature have a form in which users can
+submit their phone numbers and optionally their names to be put on a queue to be
+called back by a contact tracer. If the user chooses to submit their phone
+number and name, the application sends the phone number and name to a back-end
+service configured on a per build basis.
 
 #### Product Analytics (Optional)
 
 `src/ProductAnalytics/Context.tsx`
 
-Builds that include this feature have a prompt during onboarding and a toggle
-to update if a user has opted into sharing product analytics info. If a user
-opts in to sharing product analytics, certain user actions are sent as events to
-an aggregating server. No event has personally identifying info. An exhaustive
-list of all events can be found here: [Product Analtyics
+Builds that include this feature have a prompt during onboarding and a toggle to
+update if a user has opted into sharing product analytics info. If a user opts
+to share product analytics, the application sends specific user actions as
+events to an aggregating server. No event has personally-identifying
+information. Readers can find a list of all events here: [Product Analytics
 Events](PRODUCT_ANALYTICS_EVENTS.md)
 
 #### Share Symptom History (Optional)
@@ -84,5 +83,5 @@ Events](PRODUCT_ANALYTICS_EVENTS.md)
 Builds that include the symptom history feature allow users to construct a
 history of symptoms over the past 14 days to assist contact tracing efforts.
 Users have the option to 'share' this history. If a user chooses to share the
-history, the symptom history will be pasted to the users device clipboard as
-text to be shared further.
+history, the application will paste the symptom history to the user's device
+clipboard as text.
