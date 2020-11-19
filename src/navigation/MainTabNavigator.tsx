@@ -137,7 +137,7 @@ const TabBar: FunctionComponent<TabBarProps> = ({
             onPress={handleOnPress}
             style={{
               ...style.tabButton,
-              width: Layout.screenWidth / tabs.length,
+              width: (Layout.screenWidth / tabs.length) * 0.9,
             }}
             accessibilityRole="button"
             accessibilityState={focused ? { selected: true } : {}}
@@ -182,8 +182,9 @@ const TabIcon: FunctionComponent<TabIconProps> = ({ focused, icon }) => {
 const style = StyleSheet.create({
   tabBarContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     paddingTop: Spacing.xxSmall,
+    paddingHorizontal: Spacing.xSmall,
     backgroundColor: Colors.background.primaryLight,
     borderTopWidth: Outlines.hairline,
     borderColor: Colors.neutral.shade10,
