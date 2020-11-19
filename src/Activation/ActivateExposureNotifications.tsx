@@ -18,32 +18,29 @@ import {
 import { openAppSettings } from "../Device"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { nextScreenFromExposureNotifications } from "./activationStackController"
 import { Text } from "../components"
+import { ActivationStackScreens } from "../navigation"
+import { isPlatformiOS } from "../utils"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const {
-    locationPermissions,
-    isBluetoothOn,
-    exposureNotifications,
-  } = usePermissionsContext()
+  const { exposureNotifications, isBluetoothOn } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
 
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
   const navigateToNextScreen = useCallback(() => {
-    navigation.navigate(
-      nextScreenFromExposureNotifications({
-        isLocationRequiredAndOff,
-        isBluetoothOn,
-      }),
-    )
-  }, [isBluetoothOn, isLocationRequiredAndOff, navigation])
+    const nextScreen = () => {
+      if (isPlatformiOS()) {
+        return ActivationStackScreens.NotificationPermissions
+      } else {
+        return ActivationStackScreens.ActivationSummary
+      }
+    }
+    navigation.navigate(nextScreen())
+  }, [navigation])
 
   useFocusEffect(
     useCallback(() => {
@@ -79,19 +76,44 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     )
   }
 
+  const showEnableBluetoothAlert = () => {
+    Alert.alert(
+      t("onboarding.activate_exposure_notifications.bluetooth_header", {
+        applicationName,
+      }),
+      t("onboarding.activate_exposure_notifications.bluetooth_body"),
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => {
+            openAppSettings()
+          },
+        },
+      ],
+    )
+  }
+
   const handleOnPressEnable = async () => {
-    try {
-      const response = await exposureNotifications.request()
-      if (response.kind === "success") {
-        if (response.status !== ENPermissionStatus.ENABLED) {
+    if (!isBluetoothOn) {
+      showEnableBluetoothAlert()
+    } else {
+      try {
+        const response = await exposureNotifications.request()
+        if (response.kind === "success") {
+          if (response.status !== ENPermissionStatus.ENABLED) {
+            showNotAuthorizedAlert()
+          }
+        } else {
           showNotAuthorizedAlert()
         }
-      } else {
+        trackEvent("product_analytics", "onboarding_en_permissions_accept")
+      } catch (e) {
         showNotAuthorizedAlert()
       }
-      trackEvent("product_analytics", "onboarding_en_permissions_accept")
-    } catch (e) {
-      showNotAuthorizedAlert()
     }
   }
 

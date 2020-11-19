@@ -14,7 +14,8 @@ import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
-import { nextScreenFromBluetooth } from "./activationStackController"
+import { ActivationStackScreens } from "../navigation"
+import { isPlatformiOS } from "../utils"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -22,15 +23,14 @@ const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { isBluetoothOn, locationPermissions } = usePermissionsContext()
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
+  const { isBluetoothOn } = usePermissionsContext()
 
   const navigateToNextScreen = () => {
-    navigation.navigate(
-      nextScreenFromBluetooth({
-        isLocationRequiredAndOff,
-      }),
-    )
+    if (isPlatformiOS()) {
+      navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
+    } else {
+      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    }
   }
 
   useEffect(() => {

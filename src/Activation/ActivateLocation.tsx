@@ -15,7 +15,6 @@ import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import { useConfigurationContext } from "../ConfigurationContext"
 import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
@@ -25,8 +24,7 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
-  const { locationPermissions } = usePermissionsContext()
-  const { enableProductAnalytics } = useConfigurationContext()
+  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
@@ -40,11 +38,14 @@ const ActivateLocation: FunctionComponent = () => {
   }
 
   const navigateToNextScreen = () => {
-    if (enableProductAnalytics) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-    } else {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
+    const nextScreen = () => {
+      if (!isBluetoothOn) {
+        return ActivationStackScreens.ActivateBluetooth
+      } else {
+        return ActivationStackScreens.ActivateExposureNotifications
+      }
     }
+    navigation.navigate(nextScreen())
   }
 
   const showLocationAccessAlert = () => {

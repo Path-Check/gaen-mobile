@@ -39,49 +39,24 @@ const ActivationStack: FunctionComponent = () => {
     component: ActivateExposureNotifications,
   }
 
-  const activateLocation: ActivationStep = {
-    screenName: ActivationStackScreens.ActivateLocation,
-    component: ActivateLocation,
-  }
-
-  const notificationPermissions: ActivationStep = {
-    screenName: ActivationStackScreens.NotificationPermissions,
-    component: NotificationPermissions,
-  }
-
-  const baseActivationSteps: ActivationStep[] = [activateExposureNotifications]
-
-  if (displayAcceptTermsOfService) {
-    const acceptTermsOfService: ActivationStep = {
-      screenName: ActivationStackScreens.AcceptTermsOfService,
-      component: AcceptTermsOfService,
-    }
-    baseActivationSteps.unshift(acceptTermsOfService)
-  }
+  const activationSteps: ActivationStep[] = [activateExposureNotifications]
 
   if (!isBluetoothOn) {
     const activateBluetooth: ActivationStep = {
       screenName: ActivationStackScreens.ActivateBluetooth,
       component: ActivateBluetooth,
     }
-    baseActivationSteps.push(activateBluetooth)
+    activationSteps.unshift(activateBluetooth)
   }
 
-  const activationStepsIOS: ActivationStep[] = [
-    ...baseActivationSteps,
-    notificationPermissions,
-  ]
-
   const isLocationRequired = locationPermissions !== "NotRequired"
-  const activationStepsAndroid: ActivationStep[] = isLocationRequired
-    ? [...baseActivationSteps, activateLocation]
-    : baseActivationSteps
-
-  const activationSteps = Platform.select({
-    ios: activationStepsIOS,
-    android: activationStepsAndroid,
-    default: activationStepsIOS,
-  })
+  if (isLocationRequired) {
+    const activateLocation: ActivationStep = {
+      screenName: ActivationStackScreens.ActivateLocation,
+      component: ActivateLocation,
+    }
+    activationSteps.unshift(activateLocation)
+  }
 
   if (enableProductAnalytics) {
     const anonymizedDataConsent: ActivationStep = {
@@ -89,6 +64,22 @@ const ActivationStack: FunctionComponent = () => {
       component: ProductAnalyticsConsentForm,
     }
     activationSteps.unshift(anonymizedDataConsent)
+  }
+
+  if (displayAcceptTermsOfService) {
+    const acceptTermsOfService: ActivationStep = {
+      screenName: ActivationStackScreens.AcceptTermsOfService,
+      component: AcceptTermsOfService,
+    }
+    activationSteps.unshift(acceptTermsOfService)
+  }
+
+  if (Platform.OS === "ios") {
+    const notificationPermissions: ActivationStep = {
+      screenName: ActivationStackScreens.NotificationPermissions,
+      component: NotificationPermissions,
+    }
+    activationSteps.push(notificationPermissions)
   }
 
   const activationSummary: ActivationStep = {

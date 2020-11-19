@@ -102,19 +102,44 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       )
     }
 
+    const showEnableBluetoothAlert = () => {
+      Alert.alert(
+        t("onboarding.activate_exposure_notifications.bluetooth_header", {
+          applicationName,
+        }),
+        t("onboarding.activate_exposure_notifications.bluetooth_body"),
+        [
+          {
+            text: t("common.back"),
+            style: "cancel",
+          },
+          {
+            text: t("common.settings"),
+            onPress: () => {
+              openAppSettings()
+            },
+          },
+        ],
+      )
+    }
+
     const handleOnPressFix = async () => {
-      try {
-        const response = await exposureNotifications.request()
-        if (response.kind === "success") {
-          if (response.status !== ENPermissionStatus.ENABLED) {
+      if (!isBluetoothOn) {
+        showEnableBluetoothAlert()
+      } else {
+        try {
+          const response = await exposureNotifications.request()
+          if (response.kind === "success") {
+            if (response.status !== ENPermissionStatus.ENABLED) {
+              showNotAuthorizedAlert()
+            }
+          } else {
             showNotAuthorizedAlert()
           }
-        } else {
+          trackEvent("product_analytics", "exposure_notifications_enabled")
+        } catch (e) {
           showNotAuthorizedAlert()
         }
-        trackEvent("product_analytics", "exposure_notifications_enabled")
-      } catch (e) {
-        showNotAuthorizedAlert()
       }
     }
 
