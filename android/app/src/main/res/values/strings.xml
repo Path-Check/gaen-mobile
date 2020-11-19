@@ -6,5 +6,4 @@
   <string name="exposure_notification_channel_name">Exposure Notification</string>
   <string name="exposure_notification_message">Someone you were near has tested positive for COVID-19. Tap for more info.</string>
   <string name="exposure_notification_title">Possible COVID-19 exposure</string>
-  <string name="background_worker_notification_title">Checking exposures…</string>
 </resources>
