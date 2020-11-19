@@ -9,9 +9,8 @@ import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
 import {
-  ENPermissionStatus,
   PermissionsContext,
-  PermissionStatus,
+  ENPermissionStatus,
 } from "../Device/PermissionsContext"
 import { LocationPermissions } from "../Device/useLocationPermissions"
 import { RequestAuthorizationResponse } from "src/gaen/nativeModule"
@@ -64,7 +63,7 @@ describe("Home", () => {
 
   describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
     it("renders an on message", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -85,7 +84,7 @@ describe("Home", () => {
 
   describe("When bluetooth is off", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
+      const enPermissionStatus = "Enabled"
       const isBluetoothOn = false
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -107,7 +106,7 @@ describe("Home", () => {
   describe("When location is off", () => {
     describe("and location is required", () => {
       it("renders an off message", () => {
-        const enPermissionStatus = ENPermissionStatus.ENABLED
+        const enPermissionStatus = "Enabled"
         const isBluetoothOn = true
         const locationPermissions = "RequiredOff"
         const permissionProviderValue = createPermissionProviderValue(
@@ -128,7 +127,7 @@ describe("Home", () => {
 
     describe("and location is not required", () => {
       it("renders an on message", () => {
-        const enPermissionStatus = ENPermissionStatus.ENABLED
+        const enPermissionStatus = "Enabled"
         const isBluetoothOn = true
         const locationPermissions = "NotRequired"
         const permissionProviderValue = createPermissionProviderValue(
@@ -150,7 +149,7 @@ describe("Home", () => {
 
   describe("When exposure notifications are disabled", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.DISABLED
+      const enPermissionStatus = "Disabled"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -171,7 +170,7 @@ describe("Home", () => {
 
   describe("When exposure notifications are not authorized", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
+      const enPermissionStatus = "NotAuthorized"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -202,7 +201,7 @@ const createPermissionProviderValue = (
     isBluetoothOn,
     locationPermissions,
     notification: {
-      status: PermissionStatus.UNKNOWN,
+      status: "Unknown" as const,
       check: () => {},
       request: () => {},
     },

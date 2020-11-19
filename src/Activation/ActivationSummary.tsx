@@ -8,10 +8,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../Device/PermissionsContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
 import { useOnboardingContext } from "../OnboardingContext"
@@ -32,7 +29,7 @@ const ActivationSummary: FunctionComponent = () => {
     exposureNotifications: { status },
   } = usePermissionsContext()
 
-  const isENEnabled = status === ENPermissionStatus.ENABLED
+  const isENEnabled = status === "Enabled"
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
   const isLocationRequired = locationPermissions !== "NotRequired"
 
