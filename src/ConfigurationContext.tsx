@@ -85,7 +85,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
 
   const minimumAge = env.MINIMUM_AGE
-  const minimumPhoneDigits = parseInt(env.MINIMUM_PHONE_DIGITS)
+  const minimumPhoneDigits = parseInt(env.MINIMUM_PHONE_DIGITS) || 0
 
   const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
