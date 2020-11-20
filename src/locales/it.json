@@ -58,5 +58,8 @@
     "exposure_history": "Cronologia delle esposizioni",
     "home": "Home",
     "legal": "Legale"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Sei sicuro?"
   }
 }

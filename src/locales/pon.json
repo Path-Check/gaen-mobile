@@ -2,5 +2,8 @@
   "common": {
     "cancel": "Kihsang",
     "success": "Pweida"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Ke mehmehlel"
   }
 }

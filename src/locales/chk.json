@@ -9,5 +9,8 @@
   },
   "screen_titles": {
     "home": "Nepoputan"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Fokun pun ina?"
   }
 }
