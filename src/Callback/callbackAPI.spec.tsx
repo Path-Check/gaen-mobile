@@ -16,7 +16,7 @@ describe("postCallbackInfo", () => {
       const firstname = "firstname"
       const lastname = "lastname"
       const phoneNumber = "phoneNumber"
-      const body = `grant_type=password&client_id=CALLBACK_CLIENT_ID&client_secret=CALLBACK_CLIENT_SECRET&username=CALLBACK_USERNAME&password=CALLBACK_PASSWORD`
+      const body = `grant_type=password&client_id=CALLBACK_CLIENT_ID&client_secret=CALLBACK_CLIENT_PUBLIC_KEY&username=CALLBACK_PUBLIC_USERNAME&password=CALLBACK_PUBLIC_USERKEY`
 
       const result = await postCallbackInfo({
         firstname,

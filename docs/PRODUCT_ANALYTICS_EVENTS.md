@@ -1,13 +1,14 @@
 ### Product Analytics Events
 
-This file is an list of all events that could be recorded if a user opts into
-sharing product analytics information. If a user does not explicitly opt into
-sharing product analytics events, no events will be recorded
+This file lists all events recorded if a user opts to
+share product analytics information. If a user does not explicitly opt into
+sharing product analytics events, the application will not record events.
 
-When events occur they are recorded to a analytics server configured to the
-build.
+The application posts analytics events to a remote server defined in the
+application config.
 
-Note that this is an optionally enabled feature and not every build includes it.
+Note that this is an optionally enabled feature, and not every build includes
+it.
 
 
 #### Events:

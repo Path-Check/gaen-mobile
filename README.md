@@ -42,6 +42,8 @@ the app may submit to external services during use.
 
 We welcome public health authorities and other organizations implementing digital contact tracing strategies to create custom builds for their specific needs, incorporate PathCheck features into their applications, or create downstream projects that stay linked to the PathCheck project. If intending to fork the repository and develop off of it, be aware that this comes "at your own risk" for continued maintenance.
 
+Certain [customizations](config/README) are available out of the box.
+
 ## Broad Non-Developer Community
 
 One of the important aspects of the PathCheck open source project is that it's supported by a large community of volunteers in addition to the open source developer community. Spanning as diverse domains as product management, user research, cryptography, security, compliance, design, and videography more than 1,400 Path Check volunteers are working together to support the project and help drive adoption around the world.
