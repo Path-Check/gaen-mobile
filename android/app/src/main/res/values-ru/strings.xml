@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="exposure_notification_channel_description">Уведомление об экспозиции.</string>
+  <string name="exposure_notification_channel_name">Уведомление об экспозиции</string>
+  <string name="exposure_notification_message">Кто-то, с кем вы были рядом, получил положительный результат на КОВИД-19. Нажмите для получения дополнительной информации.</string>
+  <string name="exposure_notification_title">Возможная экспозиция COVID-19</string>
+</resources>

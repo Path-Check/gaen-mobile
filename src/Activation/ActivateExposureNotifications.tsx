@@ -11,10 +11,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { useFocusEffect } from "@react-navigation/native"
 
-import {
-  ENPermissionStatus,
-  usePermissionsContext,
-} from "../Device/PermissionsContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
@@ -31,7 +28,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   const { goToNextScreenFrom } = useActivationNavigation()
 
   useFocusEffect(() => {
-    if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
+    if (exposureNotifications.status === "Enabled") {
       goToNextScreenFrom("ActivateExposureNotifications")
     }
   })
@@ -90,7 +87,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
       try {
         const response = await exposureNotifications.request()
         if (response.kind === "success") {
-          if (response.status !== ENPermissionStatus.ENABLED) {
+          if (response.status !== "Enabled") {
             showNotAuthorizedAlert()
           }
         } else {

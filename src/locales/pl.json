@@ -55,5 +55,8 @@
     "exposure_history": "Historia Ekspozycji",
     "home": "Strona główna",
     "legal": "Informacje prawne"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Jesteś pewien?"
   }
 }

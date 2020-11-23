@@ -218,5 +218,8 @@
     "location": "Lokasyon",
     "protect_privacy": "Paano namin protektahan ang iyong privacy",
     "select_language": "Piliin ang Wika"
+  },
+  "settings": {
+    "delete_data_are_you_sure": "Sigurado ka ba?"
   }
 }

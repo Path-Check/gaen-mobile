@@ -81,11 +81,10 @@
     "consent_body_1": "If you choose to do so, you’re helping others in your community make informed decisions about their health and playing your part to contain the spread of the virus.",
     "consent_body_2": "The only information shared will be the random set of numbers your phone exchanged over Bluetooth with other phones that were nearby during the past 14 days, along with a weighted risk score based on when your symptoms developed.",
     "consent_button_title": "I Understand and Consent",
-    "never_mind_button_title": "Never mind",
     "consent_subheader_1": "Why should I share?",
     "consent_subheader_2": "How does it work?",
-    "consent_warning_title": "Warning!",
     "consent_warning_message": "Continuing will void your verification code. If you would like to share your positive diagnosis in the future, you will first need to get a new verification code.",
+    "consent_warning_title": "Warning!",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "error": {
@@ -96,6 +95,7 @@
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
+    "never_mind_button_title": "Never mind",
     "person_and_health_expert": "A person talking to a health expert",
     "publish_consent_title_bluetooth": "Notify others in your community",
     "publish_keys": {
@@ -387,11 +387,11 @@
       "title": "How are you feeling?"
     },
     "intro": {
-      "learn_more": "Learn more about the CDC Coronavirus Self-Checker this Self Assessment is based on",
       "agree_and_start_assessment": "Agree and start assessment",
       "covid19_self_assessment": "COVID-19 Self Assessment",
       "find_out_how_to_care": "Find out how to care for yourself and others after close contact with someone positive for COVID-19",
       "if_this_is": "If this is an emergency, please call {{emergencyPhoneNumber}}",
+      "learn_more": "Learn more about the CDC Coronavirus Self-Checker this Self Assessment is based on",
       "this_is_based_on": "This is based on the latest guidance from the CDC and may be updated over time as we learn more about how the virus spreads and the illness it causes",
       "this_is_not_intended": "This is not intended for diagnosis or treatment",
       "you_are_a_resident": "You are a resident of the community supported by {{ healthAuthorityName }}"

@@ -9,6 +9,16 @@ An invalid `json` will not be loaded into the application, resulting in no links
 being shown.
 [here]: https://jsonlint.com/
 
+### Environment Flags
+
+The app uses build flags to determine many of the optional features in the app.
+
+The application will read environment variables from the `.env.bt`,
+`.env.bt.staging`, and `.env.bt.release` files at build time to determine which
+features are enabled.
+
+See [example.env.bt](./example.env.bt) for a reference of available features.
+
 ### Custom Copy:
 
 `config/copy.json`

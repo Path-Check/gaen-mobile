@@ -7,7 +7,6 @@ import { AffectedUserProvider } from "../AffectedUserContext"
 import {
   PermissionsContext,
   ENPermissionStatus,
-  PermissionStatus,
 } from "../../Device/PermissionsContext"
 
 jest.mock("@react-navigation/native")
@@ -15,7 +14,7 @@ jest.mock("@react-navigation/native")
 describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
-      const isENAuthorizedAndEnabled = ENPermissionStatus.ENABLED
+      const isENAuthorizedAndEnabled = "Enabled"
       const permissionProviderValue = createPermissionProviderValue(
         isENAuthorizedAndEnabled,
       )
@@ -37,7 +36,7 @@ describe("CodeInputScreen", () => {
 
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
-      const isEnAuthorizedAndEnabled = ENPermissionStatus.DISABLED
+      const isEnAuthorizedAndEnabled = "Disabled"
       const permissionProviderValue = createPermissionProviderValue(
         isEnAuthorizedAndEnabled,
       )
@@ -65,7 +64,7 @@ const createPermissionProviderValue = (
     isBluetoothOn: true,
     locationPermissions: "RequiredOn" as const,
     notification: {
-      status: PermissionStatus.UNKNOWN,
+      status: "Unknown" as const,
       check: () => {},
       request: () => {},
     },

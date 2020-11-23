@@ -410,9 +410,15 @@
   },
   "settings": {
     "data_deleted": "Datos eliminados",
+    "delete_data_are_you_sure": "¿Estás seguro?",
     "delete_data_disclosure1": "Al tocar el botón “Eliminar mis datos” abajo, la aplicación eliminará los datos del historial de síntomas que se almacenan en su teléfono.",
     "delete_data_disclosure2": "Este botón no elimina los datos creados o recopilados por su teléfono para los avisos de exposición.\n\nPuede eliminar datos adicionales a través de la configuración de su teléfono.\n\n> Configuración\n> Avisos de exposición \n> Estado de registro de exposición/Activo \n> Eliminar registro de exposición",
+    "delete_data_language_token": "Un token almacenado en su dispositivo que guarda su preferencia de idioma",
     "delete_data_note": "Nota",
+    "delete_data_onboarding_token": "Un token almacenado en su dispositivo que guarda si ha completado la incorporación de la aplicación",
+    "delete_data_product_analytics": "Un token almacenado en su dispositivo que guarda si ha dado su consentimiento para compartir datos de análisis de productos",
+    "delete_data_symptom_history": "Todos los registros de síntomas almacenados en su dispositivo",
+    "delete_data_this_action": "Esta acción eliminará todos los datos almacenados por {{applicationName}}",
     "delete_my_data": "Eliminar mis datos",
     "errors": {
       "deleting_data": "Lo sentimos, no pudimos eliminar los datos"
