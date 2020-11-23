@@ -167,8 +167,8 @@
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
-      "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
-      "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
+      "bluetooth_disabled_error_message": "Turn on Bluetooth in your device settings.",
+      "bluetooth_disabled_error_title": "Enable Bluetooth",
       "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
