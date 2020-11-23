@@ -41,10 +41,6 @@ const ActivationStack: FunctionComponent = () => {
     screenName: ActivationStackScreens.ActivateLocation,
     component: ActivateLocation,
   }
-  const activateBluetooth: ActivationStep = {
-    screenName: ActivationStackScreens.ActivateBluetooth,
-    component: ActivateBluetooth,
-  }
   const activateExposureNotifications: ActivationStep = {
     screenName: ActivationStackScreens.ActivateExposureNotifications,
     component: ActivateExposureNotifications,
@@ -62,7 +58,6 @@ const ActivationStack: FunctionComponent = () => {
     acceptTermsOfService,
     ProductAnalyticsConsent,
     activateLocation,
-    activateBluetooth,
     activateExposureNotifications,
     notificationPermissions,
     activationSummary,
