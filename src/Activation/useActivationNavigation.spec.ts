@@ -3,9 +3,9 @@ import {
   Environment,
 } from "./useActivationNavigation"
 
-describe("useActivationNavigation", () => {
-  describe("when location is required and off, bluetooth is off, display accept terms of service is true, and product analytics are turned on", () => {
-    it("returns the correct set of activation steps", () => {
+describe("determineActivationSteps", () => {
+  describe("when location is required and off", () => {
+    it("the activate location step is included", () => {
       const environment: Environment = {
         locationPermissions: "RequiredOff",
         isBluetoothOn: false,
@@ -15,37 +15,49 @@ describe("useActivationNavigation", () => {
 
       const activationSteps = determineActivationSteps(environment)
 
-      const expectedActivationSteps = [
-        "AcceptTermsOfService",
-        "AnonymizedDataConsent",
-        "ActivateLocation",
-        "ActivateBluetooth",
-        "ActivateExposureNotifications",
-        "NotificationPermissions",
-        "ActivationSummary",
-      ]
-
-      expect(activationSteps).toEqual(expectedActivationSteps)
+      expect(activationSteps).toContain("ActivateLocation")
     })
   })
-  describe("when location is not required, bluetooth is on, display accept terms of service is false, and product analytics are turned off", () => {
-    it("returns the correct set of activation steps", () => {
+  describe("when Bluetooth is off", () => {
+    it("the activate Bluetooth step is included", () => {
       const environment: Environment = {
-        locationPermissions: "NotRequired",
-        isBluetoothOn: true,
-        displayAcceptTermsOfService: false,
-        enableProductAnalytics: false,
+        locationPermissions: "RequiredOff",
+        isBluetoothOn: false,
+        displayAcceptTermsOfService: true,
+        enableProductAnalytics: true,
       }
 
       const activationSteps = determineActivationSteps(environment)
 
-      const expectedActivationSteps = [
-        "ActivateExposureNotifications",
-        "NotificationPermissions",
-        "ActivationSummary",
-      ]
+      expect(activationSteps).toContain("ActivateBluetooth")
+    })
+  })
+  describe("when display accept terms of service is true", () => {
+    it("the accept terms of service step is included", () => {
+      const environment: Environment = {
+        locationPermissions: "RequiredOff",
+        isBluetoothOn: false,
+        displayAcceptTermsOfService: true,
+        enableProductAnalytics: true,
+      }
 
-      expect(activationSteps).toEqual(expectedActivationSteps)
+      const activationSteps = determineActivationSteps(environment)
+
+      expect(activationSteps).toContain("AcceptTermsOfService")
+    })
+  })
+  describe("when product analytics are on", () => {
+    it("the product analytics consent step is included", () => {
+      const environment: Environment = {
+        locationPermissions: "RequiredOff",
+        isBluetoothOn: false,
+        displayAcceptTermsOfService: true,
+        enableProductAnalytics: true,
+      }
+
+      const activationSteps = determineActivationSteps(environment)
+
+      expect(activationSteps).toContain("AnonymizedDataConsent")
     })
   })
 })
