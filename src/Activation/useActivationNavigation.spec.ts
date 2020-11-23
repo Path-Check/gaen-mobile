@@ -4,7 +4,7 @@ import {
 } from "./useActivationNavigation"
 
 describe("useActivationNavigation", () => {
-  describe("when location is required and off, bluetooth is off, display accept terms of service is true, product analytics are turned on", () => {
+  describe("when location is required and off, bluetooth is off, display accept terms of service is true, and product analytics are turned on", () => {
     it("returns the correct set of activation steps", () => {
       const environment: Environment = {
         locationPermissions: "RequiredOff",
