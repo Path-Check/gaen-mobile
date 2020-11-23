@@ -11,6 +11,10 @@ import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
+import {
+  useNextActivationScreen,
+  toScreen,
+} from "../Activation/useNextActivationScreen"
 
 import { Colors, Headers } from "../styles"
 
@@ -65,9 +69,12 @@ const ActivationStack: FunctionComponent = () => {
     activationSummary,
   ]
 
+  const { activationSteps: inUseActivationSteps } = useNextActivationScreen()
+  const initialRouteName = toScreen(inUseActivationSteps[0])
+
   return (
     <Stack.Navigator
-      initialRouteName={ActivationStackScreens.AcceptTermsOfService}
+      initialRouteName={initialRouteName}
       screenOptions={{
         ...Headers.headerMinimalOptions,
         headerLeft: applyHeaderLeftBackButton(),

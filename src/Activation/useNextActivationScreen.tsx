@@ -1,20 +1,10 @@
-import React, {
-  useState,
-  useContext,
-  FunctionComponent,
-  useEffect,
-} from "react"
 import { Platform } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { LocationPermissions } from "../Device/useLocationPermissions"
-import {
-  ActivationStackScreen,
-  ActivationStackScreens,
-  Stacks,
-} from "../navigation"
+import { ActivationStackScreen, ActivationStackScreens } from "../navigation"
 import { useOnboardingContext } from "../OnboardingContext"
 
 type ActivationStep =
@@ -26,7 +16,7 @@ type ActivationStep =
   | "NotificationPermissions"
   | "ActivationSummary"
 
-const toScreen = (step: ActivationStep): ActivationStackScreen => {
+export const toScreen = (step: ActivationStep): ActivationStackScreen => {
   switch (step) {
     case "AcceptTermsOfService":
       return ActivationStackScreens.AcceptTermsOfService
@@ -46,6 +36,7 @@ const toScreen = (step: ActivationStep): ActivationStackScreen => {
 }
 
 type ActivationNavigation = {
+  activationSteps: ActivationStep[]
   goToNextScreen: (currentStep: ActivationStep) => void
 }
 
@@ -81,7 +72,7 @@ export const useNextActivationScreen = (): ActivationNavigation => {
     }
   }
 
-  return { goToNextScreen }
+  return { activationSteps, goToNextScreen }
 }
 
 type Environment = {
