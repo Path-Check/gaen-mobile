@@ -28,11 +28,11 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   const { exposureNotifications, isBluetoothOn } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   useFocusEffect(() => {
     if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
-      goToNextScreen("ActivateExposureNotifications")
+      goToNextScreenFrom("ActivateExposureNotifications")
     }
   })
 
@@ -105,7 +105,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressDontEnable = () => {
     trackEvent("product_analytics", "onboarding_en_permissions_denied")
-    goToNextScreen("ActivateExposureNotifications")
+    goToNextScreenFrom("ActivateExposureNotifications")
   }
 
   return (

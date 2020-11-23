@@ -23,17 +23,17 @@ const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      goToNextScreen("ActivateLocation")
+      goToNextScreenFrom("ActivateLocation")
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen("ActivateLocation")
+    goToNextScreenFrom("ActivateLocation")
   }
 
   const showLocationAccessAlert = () => {

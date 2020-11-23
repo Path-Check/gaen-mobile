@@ -1,7 +1,5 @@
-import React, { FunctionComponent, ReactNode } from "react"
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
-import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
+import React, { FunctionComponent } from "react"
+import { createStackNavigator } from "@react-navigation/stack"
 
 import { ActivationStackScreen, ActivationStackScreens } from "./index"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
@@ -15,8 +13,9 @@ import {
   useActivationNavigation,
   toScreen,
 } from "../Activation/useActivationNavigation"
+import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
-import { Colors, Headers } from "../styles"
+import { Headers } from "../styles"
 
 type ActivationStackParams = {
   [key in ActivationStackScreen]: undefined
@@ -91,25 +90,6 @@ const ActivationStack: FunctionComponent = () => {
         )
       })}
     </Stack.Navigator>
-  )
-}
-
-export const applyHeaderLeftBackButton = () => {
-  return function modalHeader(): ReactNode {
-    return <HeaderLeftBackButton />
-  }
-}
-
-const HeaderLeftBackButton = () => {
-  const { t } = useTranslation()
-  const navigation = useNavigation()
-
-  return (
-    <HeaderBackButton
-      label={t("common.back")}
-      tintColor={Colors.primary.shade150}
-      onPress={navigation.goBack}
-    />
   )
 }
 

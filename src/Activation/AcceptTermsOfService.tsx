@@ -28,12 +28,12 @@ const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const configuration = useConfigurationContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const [boxChecked, toggleCheckbox] = useState(false)
 
   const handleOnPressNext = () => {
-    goToNextScreen("AcceptTermsOfService")
+    goToNextScreenFrom("AcceptTermsOfService")
   }
 
   const checkboxIcon = boxChecked

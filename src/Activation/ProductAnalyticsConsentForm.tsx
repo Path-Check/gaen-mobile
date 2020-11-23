@@ -23,15 +23,15 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
   const { healthAuthorityPrivacyPolicyUrl } = useConfigurationContext()
   const { healthAuthorityName } = useCustomCopy()
   const { updateUserConsent } = useProductAnalyticsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const handleOnPressYes = async () => {
     updateUserConsent(true)
-    goToNextScreen("AnonymizedDataConsent")
+    goToNextScreenFrom("AnonymizedDataConsent")
   }
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen("AnonymizedDataConsent")
+    goToNextScreenFrom("AnonymizedDataConsent")
   }
 
   const handleOnPressPrivacyPolicy = () => {

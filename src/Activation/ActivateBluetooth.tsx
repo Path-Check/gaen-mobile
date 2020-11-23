@@ -21,16 +21,16 @@ const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { isBluetoothOn } = usePermissionsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   useEffect(() => {
     if (isBluetoothOn) {
-      goToNextScreen("ActivateBluetooth")
+      goToNextScreenFrom("ActivateBluetooth")
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen("ActivateBluetooth")
+    goToNextScreenFrom("ActivateBluetooth")
   }
 
   const showBluetoothStatusAlert = () => {

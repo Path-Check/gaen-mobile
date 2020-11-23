@@ -17,18 +17,18 @@ import { Colors, Spacing, Typography, Buttons } from "../styles"
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const handleOnPressEnable = async () => {
     await new Promise((resolve) => {
       notification.request()
       resolve()
     })
-    goToNextScreen("NotificationPermissions")
+    goToNextScreenFrom("NotificationPermissions")
   }
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen("NotificationPermissions")
+    goToNextScreenFrom("NotificationPermissions")
   }
 
   return (

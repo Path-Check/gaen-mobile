@@ -30,7 +30,7 @@ const ActivationSummary: FunctionComponent = () => {
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
-  const { goToNextScreen } = useActivationNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const isENEnabled = status === ENPermissionStatus.ENABLED
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
@@ -38,12 +38,12 @@ const ActivationSummary: FunctionComponent = () => {
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
-    goToNextScreen("ActivationSummary")
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const handleOnPressOpenSettings = async () => {
     openAppSettings()
-    goToNextScreen("ActivationSummary")
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const AppSetupIncompleteButtons: FunctionComponent = () => {
