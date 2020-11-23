@@ -6,6 +6,7 @@ import { Linking } from "react-native"
 import AcceptTermsOfService from "./AcceptTermsOfService"
 import { ConfigurationContext } from "../ConfigurationContext"
 import { factories } from "../factories"
+import { OnboardingProvider } from "../OnboardingContext"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
@@ -15,7 +16,11 @@ describe("AcceptTermsOfService", () => {
     const navigationSpy = jest.fn()
     ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-    const { getByLabelText, getByTestId } = render(<AcceptTermsOfService />)
+    const { getByLabelText, getByTestId } = render(
+      <OnboardingProvider userHasCompletedOnboarding>
+        <AcceptTermsOfService />
+      </OnboardingProvider>,
+    )
 
     const continueButton = getByLabelText("Continue")
     fireEvent.press(continueButton)
@@ -28,15 +33,17 @@ describe("AcceptTermsOfService", () => {
 
     await waitFor(() => {
       expect(getByLabelText("Checked checkbox")).toBeDefined()
-      expect(navigationSpy).toHaveBeenCalledWith(
-        "ActivateExposureNotifications",
-      )
+      expect(navigationSpy).toHaveBeenCalledWith("ActivateLocation")
     })
   })
 
   it("links out to the privacy policy", async () => {
     const linkSpy = jest.spyOn(Linking, "openURL")
-    const { getByText } = render(<AcceptTermsOfService />)
+    const { getByText } = render(
+      <OnboardingProvider userHasCompletedOnboarding>
+        <AcceptTermsOfService />
+      </OnboardingProvider>,
+    )
 
     fireEvent.press(getByText(/Privacy Policy/))
 
@@ -49,11 +56,15 @@ describe("AcceptTermsOfService", () => {
     const healthAuthorityEulaUrl = "healthAuthorityEulaUrl"
     const linkSpy = jest.spyOn(Linking, "openURL")
     const { getByText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
-      >
-        <AcceptTermsOfService />
-      </ConfigurationContext.Provider>,
+      <OnboardingProvider userHasCompletedOnboarding>
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityEulaUrl,
+          })}
+        >
+          <AcceptTermsOfService />
+        </ConfigurationContext.Provider>
+      </OnboardingProvider>,
     )
 
     fireEvent.press(getByText(/End User Legal Agreement/))
@@ -66,11 +77,15 @@ describe("AcceptTermsOfService", () => {
   it("does not show the eula link if the url is null", () => {
     const healthAuthorityEulaUrl = null
     const { queryByText } = render(
-      <ConfigurationContext.Provider
-        value={factories.configurationContext.build({ healthAuthorityEulaUrl })}
-      >
-        <AcceptTermsOfService />
-      </ConfigurationContext.Provider>,
+      <OnboardingProvider userHasCompletedOnboarding>
+        <ConfigurationContext.Provider
+          value={factories.configurationContext.build({
+            healthAuthorityEulaUrl,
+          })}
+        >
+          <AcceptTermsOfService />
+        </ConfigurationContext.Provider>
+      </OnboardingProvider>,
     )
 
     expect(queryByText(/End User Legal Agreement/)).toBeNull()
