@@ -35,8 +35,10 @@ The PathCheck Google Apple Exposure Notification (GAEN) solution is a full open 
 
 What’s truly special about PathCheck is our strong commitment to preserving the privacy of individual users. We're building an application that can help contain outbreaks of COVID-19 without forcing users to sacrifice their personal privacy.
 
-See the [Data Dictionary](doc/DATA_DICTIONARY) for a reference of all data that
+See the [Non-Local Data Dictionary](doc/NON_LOCAL_DATA_DICTIONARY.md) for a reference of all data that
 the app may submit to external services during use.
+See the [Local Data Dictionary](doc/LOCAL_DATA_DICTIONARY.md) for a reference of all data that
+the app stores locally during use.
 
 ## Custom Builds
 

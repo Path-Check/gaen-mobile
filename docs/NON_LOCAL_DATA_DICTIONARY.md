@@ -1,26 +1,25 @@
-## Data Dictionary
+## Non-Local Data Dictionary
 
 This file lists all of the data which could theoretically leave the
 device.
 
-
 ### General Notes
 
 - Many application features are configurable and optionally enabled on a per
-  build basis, so not every listed here is necessarily included in a public
-  release of the app via the App Store or the Play Store.
+  build basis, so not every item listed here is necessarily included in a public
+  release of the app via the App Store or the Play Store. If a build does not
+  require an optional feature, it is not included.
 
 - All network communication is encrypted with standard SSL security protections.
 
 - No network communication includes personally-identifying information such as a
-device id or IP address.
+  device id or IP address.
 
 - No extra data is shared that is not essential to the proper functioning of
-the application.
+  the application.
 
 - All data that leaves the device must be explicitly agreed to be sent by
-the user to be shared.
-
+  the user to be shared.
 
 #### GAEN Exposure Notification Related Data
 
@@ -37,13 +36,11 @@ requests that leave the device with a data payload:
 Users must explicitly agree to share these keys before they can be
 sent.
 
-
 Reference:
 
 [wiki/Exposure_Notification](https://en.wikipedia.org/wiki/Exposure_Notification)
 
 [Verification Flow Diagram](https://developers.google.com/android/exposure-notifications/verification-system#flow-diagram)
-
 
 #### Error Reporting (Optional)
 
@@ -53,7 +50,6 @@ Builds that have error reporting enabled send crash and error information to an
 error reporting service. Currently, we only support
 [Bugsnag](https://docs.bugsnag.com/). Bugsnag generates random Ids, referred to
 as 'Device Ids' by Bugsnag, but are not associated with device UUIDs.
-
 
 #### Contact Tracer Callback Form (Optional)
 
