@@ -14,7 +14,7 @@
 <div style="float:left" align="center" >
   <h1>The PathCheck GAEN Solution</h1>
 
-<b>**https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/**</b>
+<p>https://pathcheck.org/en/technology/google-apple-exposure-notification-solution/</p>
 
   </div>
   </td>
@@ -25,44 +25,63 @@
 
 # Project Overview
 
-Help us stop COVID-19.
+This project is a mobile application designed to support contact tracing and
+provide a digital pandemic response; it is sponsored by the PathCheck
+Foundation, a nonprofit dedicated to stopping COVID-19.
 
-COVID PathCheck is a mobile app for digital contract tracing (DCT) sponsored by Path Check a nonprofit and developed by a growing global community of engineers, designers, and contributors. PathCheck is based on research originally conducted at the MIT Media Lab.
+This project is open-source; a global community of engineers, designers, and
+volunteers have contributed to making this project a reality.
 
-The PathCheck Google Apple Exposure Notification (GAEN) solution is a full open source system for deploying the GAEN API. PathCheck GAEN includes a customizable mobile app and a production-ready exposure notification server based on the Google open source project.
+This project uses the Google Apple Exposure Notification
+[(GAEN)](https://en.wikipedia.org/wiki/Exposure_Notification) protocol to
+facilitate digital contact tracing.
 
-## Privacy Preserving
 
-What’s truly special about PathCheck is our strong commitment to preserving the privacy of individual users. We're building an application that can help contain outbreaks of COVID-19 without forcing users to sacrifice their personal privacy.
+## Privacy Preserving And Secure 🔒
 
-See the [Non-Local Data Dictionary](doc/NON_LOCAL_DATA_DICTIONARY.md) for a reference of all data that
+The PathCheck Foundation has a strong commitment to privacy and security. We're
+building an application that can help contain outbreaks of COVID-19 while
+maintaining the highest standards for protecting user privacy.
+
+- See the [Privacy and Security Repo](https://github.com/Path-Check/privacy-security-GAEN)
+- See the [Non-Local Data Dictionary](doc/NON_LOCAL_DATA_DICTIONARY.md) for a reference of all data that
 the app may submit to external services during use.
-See the [Local Data Dictionary](doc/LOCAL_DATA_DICTIONARY.md) for a reference of all data that
+- See the [Local Data Dictionary](doc/LOCAL_DATA_DICTIONARY.md) for a reference of all data that
 the app stores locally during use.
 
-## Custom Builds
+## Broad Volunteer Community 💪
 
-We welcome public health authorities and other organizations implementing digital contact tracing strategies to create custom builds for their specific needs, incorporate PathCheck features into their applications, or create downstream projects that stay linked to the PathCheck project. If intending to fork the repository and develop off of it, be aware that this comes "at your own risk" for continued maintenance.
+One of the essential aspects of the PathCheck open source project is support by
+a large community of volunteers. We are a diverse group of product managers,
+user researchers, cryptography experts, security and compliance experts,
+designers, and marketers. More than 2,200 Path Check volunteers are working
+together to support the project and help drive adoption worldwide.
 
-Certain [customizations](config/README) are available out of the box.
+Join the Slack organization [PathCheck Slack organization](https://covidsafepaths.slack.com) to get involved.
 
-## Broad Non-Developer Community
+## Custom Builds 🔧
 
-One of the important aspects of the PathCheck open source project is that it's supported by a large community of volunteers in addition to the open source developer community. Spanning as diverse domains as product management, user research, cryptography, security, compliance, design, and videography more than 1,400 Path Check volunteers are working together to support the project and help drive adoption around the world.
+We welcome public health authorities and other organizations implementing
+digital contact tracing strategies to create custom builds for their specific
+needs, incorporate PathCheck features into their applications, or create
+downstream projects that stay linked to the PathCheck project. If intending to
+fork the repository, be aware that this comes "at your own risk" for continued
+maintenance.
 
-## International
+Certain [customizations](config/README.md) are available out of the box.
 
-This project is internationalized and can be used in most world communities.
+## Localization 🌐
 
-Both imperial and metric unit systems are supported.
+This project is localized and can be used by communities worldwide.
+
+Imperial and metric unit systems are supported.
 
 The following [locales](src/locales/locale.ts) are supported.
 
-New locales can be supported if translations are provided.
+This project is using [Lokalise](https://lokalise.com/) for translations.
 
-This project is using [Lokalise](https://lokalise.com/) for translations
 
-## Learn More
+## Learn More 📚
 
 [COVID PathCheck Website](https://covidsafepaths.org/)
 
@@ -73,15 +92,13 @@ This project is using [Lokalise](https://lokalise.com/) for translations
 
 # Development Overview
 
-_PathCheck_ is built on [React Native](https://reactnative.dev/docs/getting-started)
-
-## Contributing
+## Contributing 👏
 
 Read the [contribution guidelines](CONTRIBUTING.md).
 
-## Development Setup
+## Development Setup 💻
 
-Read the [developer setup guide](docs/DEVELOPER_SETUP.md)
+Read the [developer setup guide](docs/DEVELOPER_SETUP.md).
 
 # License
 
