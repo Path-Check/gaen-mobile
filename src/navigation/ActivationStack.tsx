@@ -33,8 +33,8 @@ const ActivationStack: FunctionComponent = () => {
     screenName: ActivationStackScreens.AcceptTermsOfService,
     component: AcceptTermsOfService,
   }
-  const anonymizedDataConsent: ActivationStep = {
-    screenName: ActivationStackScreens.AnonymizedDataConsent,
+  const ProductAnalyticsConsent: ActivationStep = {
+    screenName: ActivationStackScreens.ProductAnalyticsConsent,
     component: ProductAnalyticsConsentForm,
   }
   const activateLocation: ActivationStep = {
@@ -60,7 +60,7 @@ const ActivationStack: FunctionComponent = () => {
 
   const activationSteps = [
     acceptTermsOfService,
-    anonymizedDataConsent,
+    ProductAnalyticsConsent,
     activateLocation,
     activateBluetooth,
     activateExposureNotifications,

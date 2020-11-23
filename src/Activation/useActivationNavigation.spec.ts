@@ -57,7 +57,7 @@ describe("determineActivationSteps", () => {
 
       const activationSteps = determineActivationSteps(environment)
 
-      expect(activationSteps).toContain("AnonymizedDataConsent")
+      expect(activationSteps).toContain("ProductAnalyticsConsent")
     })
   })
 })

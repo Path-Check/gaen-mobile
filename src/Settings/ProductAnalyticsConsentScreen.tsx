@@ -17,7 +17,7 @@ import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 import { Colors, Typography, Spacing, Buttons } from "../styles"
 
-const AnonymizedDataConsentScreen: FunctionComponent = () => {
+const ProductAnalyticsConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -138,4 +138,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default AnonymizedDataConsentScreen
+export default ProductAnalyticsConsentScreen

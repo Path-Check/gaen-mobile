@@ -27,11 +27,11 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
 
   const handleOnPressYes = async () => {
     updateUserConsent(true)
-    goToNextScreenFrom("AnonymizedDataConsent")
+    goToNextScreenFrom("ProductAnalyticsConsent")
   }
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreenFrom("AnonymizedDataConsent")
+    goToNextScreenFrom("ProductAnalyticsConsent")
   }
 
   const handleOnPressPrivacyPolicy = () => {

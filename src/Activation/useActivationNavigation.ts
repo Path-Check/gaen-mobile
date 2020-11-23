@@ -9,7 +9,7 @@ import { useOnboardingContext } from "../OnboardingContext"
 
 type ActivationStep =
   | "AcceptTermsOfService"
-  | "AnonymizedDataConsent"
+  | "ProductAnalyticsConsent"
   | "ActivateLocation"
   | "ActivateBluetooth"
   | "ActivateExposureNotifications"
@@ -20,8 +20,8 @@ export const toScreen = (step: ActivationStep): ActivationStackScreen => {
   switch (step) {
     case "AcceptTermsOfService":
       return ActivationStackScreens.AcceptTermsOfService
-    case "AnonymizedDataConsent":
-      return ActivationStackScreens.AnonymizedDataConsent
+    case "ProductAnalyticsConsent":
+      return ActivationStackScreens.ProductAnalyticsConsent
     case "ActivateLocation":
       return ActivationStackScreens.ActivateLocation
     case "ActivateBluetooth":
@@ -93,7 +93,7 @@ export const determineActivationSteps = ({
   const activationSteps: ActivationStep[] = []
 
   displayAcceptTermsOfService && activationSteps.push("AcceptTermsOfService")
-  enableProductAnalytics && activationSteps.push("AnonymizedDataConsent")
+  enableProductAnalytics && activationSteps.push("ProductAnalyticsConsent")
   isLocationRequiredAndOff && activationSteps.push("ActivateLocation")
   !isBluetoothOn && activationSteps.push("ActivateBluetooth")
   activationSteps.push("ActivateExposureNotifications")
