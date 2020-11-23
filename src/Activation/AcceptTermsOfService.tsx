@@ -13,7 +13,7 @@ import { Icons } from "../assets"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useActivationContext } from "./ActivationContext"
+import { useNextActivationScreen } from "./useNextActivationScreen"
 
 import {
   Buttons,
@@ -28,12 +28,12 @@ const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const configuration = useConfigurationContext()
-  const { goToNextScreen } = useActivationContext()
+  const { goToNextScreen } = useNextActivationScreen()
 
   const [boxChecked, toggleCheckbox] = useState(false)
 
   const handleOnPressNext = () => {
-    goToNextScreen()
+    goToNextScreen("AcceptTermsOfService")
   }
 
   const checkboxIcon = boxChecked

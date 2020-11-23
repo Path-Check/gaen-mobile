@@ -70,8 +70,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
 
-  const displayAcceptTermsOfService = true
-  // env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
+  const displayAcceptTermsOfService =
+    env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayCallEmergencyServices =
     env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
@@ -79,8 +79,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
-  const enableProductAnalytics = true
-  // env.ENABLE_PRODUCT_ANALYTICS === "true"
+  const enableProductAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"

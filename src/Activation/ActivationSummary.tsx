@@ -16,7 +16,7 @@ import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
-import { useActivationContext } from "./ActivationContext"
+import { useNextActivationScreen } from "./useNextActivationScreen"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -30,7 +30,7 @@ const ActivationSummary: FunctionComponent = () => {
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
-  const { goToNextScreen } = useActivationContext()
+  const { goToNextScreen } = useNextActivationScreen()
 
   const isENEnabled = status === ENPermissionStatus.ENABLED
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
@@ -38,12 +38,12 @@ const ActivationSummary: FunctionComponent = () => {
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
-    goToNextScreen()
+    goToNextScreen("ActivationSummary")
   }
 
   const handleOnPressOpenSettings = async () => {
     openAppSettings()
-    goToNextScreen()
+    goToNextScreen("ActivationSummary")
   }
 
   const AppSetupIncompleteButtons: FunctionComponent = () => {

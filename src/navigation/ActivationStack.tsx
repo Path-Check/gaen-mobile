@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react"
 import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 
 import { ActivationStackScreen, ActivationStackScreens } from "./index"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
@@ -10,10 +11,6 @@ import ActivationSummary from "../Activation/ActivationSummary"
 import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
-import {
-  ActivationProvider,
-  useActivationContext,
-} from "../Activation/ActivationContext"
 
 import { Colors, Headers } from "../styles"
 
@@ -69,26 +66,24 @@ const ActivationStack: FunctionComponent = () => {
   ]
 
   return (
-    <ActivationProvider>
-      <Stack.Navigator
-        initialRouteName={ActivationStackScreens.AcceptTermsOfService}
-        screenOptions={{
-          ...Headers.headerMinimalOptions,
-          headerLeft: applyHeaderLeftBackButton(),
-          headerTitle: () => null,
-        }}
-      >
-        {activationSteps.map((step) => {
-          return (
-            <Stack.Screen
-              name={step.screenName}
-              component={step.component}
-              key={`activation-screen-${step.screenName}`}
-            />
-          )
-        })}
-      </Stack.Navigator>
-    </ActivationProvider>
+    <Stack.Navigator
+      initialRouteName={ActivationStackScreens.AcceptTermsOfService}
+      screenOptions={{
+        ...Headers.headerMinimalOptions,
+        headerLeft: applyHeaderLeftBackButton(),
+        headerTitle: () => null,
+      }}
+    >
+      {activationSteps.map((step) => {
+        return (
+          <Stack.Screen
+            name={step.screenName}
+            component={step.component}
+            key={`activation-screen-${step.screenName}`}
+          />
+        )
+      })}
+    </Stack.Navigator>
   )
 }
 
@@ -100,13 +95,13 @@ export const applyHeaderLeftBackButton = () => {
 
 const HeaderLeftBackButton = () => {
   const { t } = useTranslation()
-  const { goToPreviousScreen } = useActivationContext()
+  const navigation = useNavigation()
 
   return (
     <HeaderBackButton
       label={t("common.back")}
       tintColor={Colors.primary.shade150}
-      onPress={goToPreviousScreen}
+      onPress={navigation.goBack}
     />
   )
 }

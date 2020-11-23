@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Text } from "../components"
@@ -18,23 +17,23 @@ import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
 import { Icons } from "../assets"
-import { useActivationContext } from "./ActivationContext"
+import { useNextActivationScreen } from "./useNextActivationScreen"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
-  const { goToNextScreen } = useActivationContext()
+  const { goToNextScreen } = useNextActivationScreen()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      goToNextScreen()
+      goToNextScreen("ActivateLocation")
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen()
+    goToNextScreen("ActivateLocation")
   }
 
   const showLocationAccessAlert = () => {

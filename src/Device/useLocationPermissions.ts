@@ -69,8 +69,7 @@ const useLocationPermissions = (): LocationPermissions => {
     locationEnabledState,
   )
 
-  // return locationPermissions
-  return "RequiredOff"
+  return locationPermissions
 }
 
 export default useLocationPermissions

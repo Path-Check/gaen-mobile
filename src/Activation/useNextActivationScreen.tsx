@@ -1,5 +1,4 @@
 import React, {
-  createContext,
   useState,
   useContext,
   FunctionComponent,
@@ -46,17 +45,11 @@ const toScreen = (step: ActivationStep): ActivationStackScreen => {
   }
 }
 
-export const ActivationContext = createContext<
-  ActivationContextState | undefined
->(undefined)
-
-export interface ActivationContextState {
-  activationSteps: ActivationStep[]
-  goToNextScreen: () => void
-  goToPreviousScreen: () => void
+type ActivationNavigation = {
+  goToNextScreen: (currentStep: ActivationStep) => void
 }
 
-export const ActivationProvider: FunctionComponent = ({ children }) => {
+export const useNextActivationScreen = (): ActivationNavigation => {
   const {
     displayAcceptTermsOfService,
     enableProductAnalytics,
@@ -65,32 +58,22 @@ export const ActivationProvider: FunctionComponent = ({ children }) => {
   const { locationPermissions, isBluetoothOn } = usePermissionsContext()
   const { completeOnboarding } = useOnboardingContext()
 
-  const [activationSteps, setActivationSteps] = useState<ActivationStep[]>([])
-  const [currentStep, setCurrentStep] = useState(0)
-
-  useEffect(() => {
-    const environment = {
-      displayAcceptTermsOfService,
-      enableProductAnalytics,
-      locationPermissions,
-      isBluetoothOn,
-    }
-
-    setActivationSteps(determineActivationSteps(environment))
-  }, [
+  const environment = {
     displayAcceptTermsOfService,
     enableProductAnalytics,
     locationPermissions,
     isBluetoothOn,
-  ])
+  }
 
-  const goToNextScreen = () => {
-    console.log({ currentStep })
-    const nextStepIndex = currentStep + 1
+  const activationSteps = determineActivationSteps(environment)
+
+  const goToNextScreen = (currentStep: ActivationStep) => {
+    const currentStepIndex: number | undefined = activationSteps.findIndex(
+      (step) => step === currentStep,
+    )
+    const nextStepIndex = currentStepIndex + 1
     if (nextStepIndex < activationSteps.length) {
-      setCurrentStep(nextStepIndex)
       const nextStepName = activationSteps[nextStepIndex]
-      console.log({ nextStepName })
       const nextScreen = toScreen(nextStepName)
       navigation.navigate(nextScreen)
     } else {
@@ -98,37 +81,7 @@ export const ActivationProvider: FunctionComponent = ({ children }) => {
     }
   }
 
-  const goToPreviousScreen = () => {
-    const previousStepIndex = currentStep - 1
-    if (previousStepIndex < 0) {
-      navigation.navigate(Stacks.HowItWorks)
-    } else {
-      setCurrentStep(previousStepIndex)
-      const previousStepName = activationSteps[previousStepIndex]
-      const previousScreen = toScreen(previousStepName)
-      navigation.navigate(previousScreen)
-    }
-  }
-
-  return (
-    <ActivationContext.Provider
-      value={{
-        activationSteps,
-        goToNextScreen,
-        goToPreviousScreen,
-      }}
-    >
-      {children}
-    </ActivationContext.Provider>
-  )
-}
-
-export const useActivationContext = (): ActivationContextState => {
-  const context = useContext(ActivationContext)
-  if (context === undefined) {
-    throw new Error("ActivationContext must be used with a provider")
-  }
-  return context
+  return { goToNextScreen }
 }
 
 type Environment = {

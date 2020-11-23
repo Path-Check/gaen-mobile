@@ -13,7 +13,7 @@ import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useStatusBarEffect } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
-import { useActivationContext } from "./ActivationContext"
+import { useNextActivationScreen } from "./useNextActivationScreen"
 
 import { Colors, Typography, Spacing, Buttons } from "../styles"
 
@@ -23,15 +23,15 @@ const ProductAnalyticsConsentForm: FunctionComponent = () => {
   const { healthAuthorityPrivacyPolicyUrl } = useConfigurationContext()
   const { healthAuthorityName } = useCustomCopy()
   const { updateUserConsent } = useProductAnalyticsContext()
-  const { goToNextScreen } = useActivationContext()
+  const { goToNextScreen } = useNextActivationScreen()
 
   const handleOnPressYes = async () => {
     updateUserConsent(true)
-    goToNextScreen()
+    goToNextScreen("AnonymizedDataConsent")
   }
 
   const handleOnPressMaybeLater = () => {
-    goToNextScreen()
+    goToNextScreen("AnonymizedDataConsent")
   }
 
   const handleOnPressPrivacyPolicy = () => {
