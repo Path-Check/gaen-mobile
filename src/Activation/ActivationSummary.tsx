@@ -16,7 +16,7 @@ import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -30,7 +30,7 @@ const ActivationSummary: FunctionComponent = () => {
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   const isENEnabled = status === ENPermissionStatus.ENABLED
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"

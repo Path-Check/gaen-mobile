@@ -13,7 +13,7 @@ import { Icons } from "../assets"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import {
   Buttons,
@@ -28,7 +28,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const configuration = useConfigurationContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   const [boxChecked, toggleCheckbox] = useState(false)
 

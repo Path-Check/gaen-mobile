@@ -13,7 +13,7 @@ import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
@@ -21,7 +21,7 @@ const ActivateBluetooth: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { isBluetoothOn } = usePermissionsContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   useEffect(() => {
     if (isBluetoothOn) {

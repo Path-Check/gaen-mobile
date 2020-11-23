@@ -19,7 +19,7 @@ import { openAppSettings } from "../Device"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
@@ -28,7 +28,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   const { exposureNotifications, isBluetoothOn } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   useFocusEffect(() => {
     if (exposureNotifications.status === ENPermissionStatus.ENABLED) {

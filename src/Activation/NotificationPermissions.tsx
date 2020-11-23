@@ -10,14 +10,14 @@ import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { Text } from "../components"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   const handleOnPressEnable = async () => {
     await new Promise((resolve) => {

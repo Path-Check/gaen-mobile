@@ -17,13 +17,13 @@ import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
 import { Icons } from "../assets"
-import { useNextActivationScreen } from "./useNextActivationScreen"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
-  const { goToNextScreen } = useNextActivationScreen()
+  const { goToNextScreen } = useActivationNavigation()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
