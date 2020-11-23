@@ -96,7 +96,6 @@ const createPermissionProviderValue = (
   requestPermission: () => void = () => {},
 ): PermissionsContextState => {
   return {
-    isBluetoothOn: true,
     locationPermissions: "RequiredOn" as const,
     notification: {
       status: "Unknown" as const,
@@ -104,7 +103,7 @@ const createPermissionProviderValue = (
       request: requestPermission,
     },
     exposureNotifications: {
-      status: "Enabled",
+      status: "Active",
       request: () =>
         Promise.resolve({
           kind: "failure" as const,

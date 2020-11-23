@@ -61,9 +61,9 @@ describe("Home", () => {
     })
   })
 
-  describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
+  describe("When the exposure notification permissions are active, the app is authorized, Bluetooth is on, and Location is on", () => {
     it("renders an on message", () => {
-      const enPermissionStatus = "Enabled"
+      const enPermissionStatus = "Active"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(
@@ -82,31 +82,10 @@ describe("Home", () => {
     })
   })
 
-  describe("When bluetooth is off", () => {
-    it("renders an off message", () => {
-      const enPermissionStatus = "Enabled"
-      const isBluetoothOn = false
-      const locationPermissions = "RequiredOn"
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        isBluetoothOn,
-        locationPermissions,
-      )
-
-      const { getByText } = render(
-        <PermissionsContext.Provider value={permissionProviderValue}>
-          <Home />
-        </PermissionsContext.Provider>,
-      )
-
-      expect(getByText("Exposure Detection Off")).toBeDefined()
-    })
-  })
-
   describe("When location is off", () => {
     describe("and location is required", () => {
       it("renders an off message", () => {
-        const enPermissionStatus = "Enabled"
+        const enPermissionStatus = "Active"
         const isBluetoothOn = true
         const locationPermissions = "RequiredOff"
         const permissionProviderValue = createPermissionProviderValue(
@@ -127,7 +106,7 @@ describe("Home", () => {
 
     describe("and location is not required", () => {
       it("renders an on message", () => {
-        const enPermissionStatus = "Enabled"
+        const enPermissionStatus = "Active"
         const isBluetoothOn = true
         const locationPermissions = "NotRequired"
         const permissionProviderValue = createPermissionProviderValue(
@@ -168,9 +147,9 @@ describe("Home", () => {
     })
   })
 
-  describe("When exposure notifications are not authorized", () => {
+  describe("When exposure notifications are unauthorized", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = "NotAuthorized"
+      const enPermissionStatus = "Unauthorized"
       const isBluetoothOn = true
       const locationPermissions = "RequiredOn"
       const permissionProviderValue = createPermissionProviderValue(

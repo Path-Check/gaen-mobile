@@ -14,10 +14,7 @@ jest.mock("@react-navigation/native")
 describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
-      const isENAuthorizedAndEnabled = "Enabled"
-      const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
-      )
+      const permissionProviderValue = createPermissionProviderValue("Active")
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -36,10 +33,7 @@ describe("CodeInputScreen", () => {
 
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
-      const isEnAuthorizedAndEnabled = "Disabled"
-      const permissionProviderValue = createPermissionProviderValue(
-        isEnAuthorizedAndEnabled,
-      )
+      const permissionProviderValue = createPermissionProviderValue("Disabled")
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -61,7 +55,6 @@ const createPermissionProviderValue = (
   enPermissionStatus: ENPermissionStatus,
 ) => {
   return {
-    isBluetoothOn: true,
     locationPermissions: "RequiredOn" as const,
     notification: {
       status: "Unknown" as const,

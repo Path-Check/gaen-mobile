@@ -8,7 +8,6 @@ describe("determineActivationSteps", () => {
     it("the activate location step is included", () => {
       const environment: Environment = {
         locationPermissions: "RequiredOff",
-        isBluetoothOn: false,
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }
@@ -18,25 +17,10 @@ describe("determineActivationSteps", () => {
       expect(activationSteps).toContain("ActivateLocation")
     })
   })
-  describe("when Bluetooth is off", () => {
-    it("the activate Bluetooth step is included", () => {
-      const environment: Environment = {
-        locationPermissions: "RequiredOff",
-        isBluetoothOn: false,
-        displayAcceptTermsOfService: true,
-        enableProductAnalytics: true,
-      }
-
-      const activationSteps = determineActivationSteps(environment)
-
-      expect(activationSteps).toContain("ActivateBluetooth")
-    })
-  })
   describe("when display accept terms of service is true", () => {
     it("the accept terms of service step is included", () => {
       const environment: Environment = {
         locationPermissions: "RequiredOff",
-        isBluetoothOn: false,
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }
@@ -50,7 +34,6 @@ describe("determineActivationSteps", () => {
     it("the product analytics consent step is included", () => {
       const environment: Environment = {
         locationPermissions: "RequiredOff",
-        isBluetoothOn: false,
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }

@@ -22,13 +22,13 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { exposureNotifications, isBluetoothOn } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
   const { goToNextScreenFrom } = useActivationNavigation()
 
   useFocusEffect(() => {
-    if (exposureNotifications.status === "Enabled") {
+    if (exposureNotifications.status === "Active") {
       goToNextScreenFrom("ActivateExposureNotifications")
     }
   })
@@ -81,28 +81,20 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   }
 
   const handleOnPressEnable = async () => {
-    if (!isBluetoothOn) {
-      showEnableBluetoothAlert()
-    } else {
-      try {
-        const response = await exposureNotifications.request()
-        if (response.kind === "success") {
-          console.log(response.status)
-          if (response.status !== "Enabled") {
-            console.log(isBluetoothOn)
-            if (!isBluetoothOn) {
-              showEnableBluetoothAlert()
-            } else {
-              showNotAuthorizedAlert()
-            }
-          }
+    try {
+      const response = await exposureNotifications.request()
+      if (response.kind === "success") {
+        if (response.status === "BluetoothOff") {
+          showEnableBluetoothAlert()
         } else {
           showNotAuthorizedAlert()
         }
-        trackEvent("product_analytics", "onboarding_en_permissions_accept")
-      } catch (e) {
+      } else {
         showNotAuthorizedAlert()
       }
+      trackEvent("product_analytics", "onboarding_en_permissions_accept")
+    } catch (e) {
+      showNotAuthorizedAlert()
     }
   }
 

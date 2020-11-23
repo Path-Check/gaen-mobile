@@ -23,13 +23,12 @@ const ActivationSummary: FunctionComponent = () => {
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
   const {
-    isBluetoothOn,
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
   const { goToNextScreenFrom } = useActivationNavigation()
 
-  const isENEnabled = status === "Enabled"
+  const isENActive = status === "Active"
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
   const isLocationRequired = locationPermissions !== "NotRequired"
 
@@ -88,8 +87,7 @@ const ActivationSummary: FunctionComponent = () => {
     buttons: AppSetupIncompleteButtons,
   }
 
-  const isAppSetupComplete =
-    isENEnabled && isBluetoothOn && !isLocationRequiredAndOff
+  const isAppSetupComplete = isENActive && !isLocationRequiredAndOff
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent

@@ -6,7 +6,6 @@ import ActivateExposureNotifications from "../Activation/ActivateExposureNotific
 import ActivateLocation from "../Activation/ActivateLocation"
 import NotificationPermissions from "../Activation/NotificationPermissions"
 import ActivationSummary from "../Activation/ActivationSummary"
-import ActivateBluetooth from "../Activation/ActivateBluetooth"
 import AcceptTermsOfService from "../Activation/AcceptTermsOfService"
 import ProductAnalyticsConsentForm from "../Activation/ProductAnalyticsConsentForm"
 import {

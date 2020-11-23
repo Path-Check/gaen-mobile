@@ -46,14 +46,13 @@ export const useActivationNavigation = (): ActivationNavigation => {
     enableProductAnalytics,
   } = useConfigurationContext()
   const navigation = useNavigation()
-  const { locationPermissions, isBluetoothOn } = usePermissionsContext()
+  const { locationPermissions } = usePermissionsContext()
   const { completeOnboarding } = useOnboardingContext()
 
   const environment = {
     displayAcceptTermsOfService,
     enableProductAnalytics,
     locationPermissions,
-    isBluetoothOn,
   }
 
   const activationSteps = determineActivationSteps(environment)
@@ -77,7 +76,6 @@ export const useActivationNavigation = (): ActivationNavigation => {
 
 export type Environment = {
   locationPermissions: LocationPermissions
-  isBluetoothOn: boolean
   displayAcceptTermsOfService: boolean
   enableProductAnalytics: boolean
 }

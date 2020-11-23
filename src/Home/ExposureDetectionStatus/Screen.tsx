@@ -21,49 +21,8 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { exposureDetectionStatus } = useExposureDetectionStatus()
   const { trackEvent } = useProductAnalyticsContext()
-  const {
-    exposureNotifications,
-    isBluetoothOn,
-    locationPermissions,
-  } = usePermissionsContext()
+  const { exposureNotifications, locationPermissions } = usePermissionsContext()
   const { applicationName } = useApplicationName()
-
-  const BluetoothActivationStatus: FunctionComponent = () => {
-    const handleOnPressFix = () => {
-      showFixBluetoothAlert()
-    }
-
-    const handleOnPressShowInfo = () => {
-      navigation.navigate(HomeStackScreens.BluetoothInfo)
-    }
-
-    const showFixBluetoothAlert = () => {
-      Alert.alert(
-        t("home.bluetooth.bluetooth_disabled_error_title"),
-        t("home.bluetooth.bluetooth_disabled_error_message"),
-        [
-          {
-            text: t("common.back"),
-            style: "cancel",
-          },
-          {
-            text: t("common.settings"),
-            onPress: () => openAppSettings(),
-          },
-        ],
-      )
-    }
-
-    return (
-      <ActivationStatusView
-        headerText={t("home.bluetooth.bluetooth_header")}
-        isActive={isBluetoothOn}
-        infoAction={handleOnPressShowInfo}
-        fixAction={handleOnPressFix}
-        testID={"bluetooth-status-container"}
-      />
-    )
-  }
 
   const ExposureNotificationsActivationStatus: FunctionComponent = () => {
     const navigation = useNavigation()
@@ -121,22 +80,20 @@ const ExposureDetectionStatus: FunctionComponent = () => {
     }
 
     const handleOnPressFix = async () => {
-      if (!isBluetoothOn) {
-        showEnableBluetoothAlert()
-      } else {
-        try {
-          const response = await exposureNotifications.request()
-          if (response.kind === "success") {
-            if (response.status !== "Enabled") {
-              showNotAuthorizedAlert()
-            }
+      try {
+        const response = await exposureNotifications.request()
+        if (response.kind === "success") {
+          if (response.status === "BluetoothOff") {
+            showEnableBluetoothAlert()
           } else {
             showNotAuthorizedAlert()
           }
-          trackEvent("product_analytics", "exposure_notifications_enabled")
-        } catch (e) {
+        } else {
           showNotAuthorizedAlert()
         }
+        trackEvent("product_analytics", "onboarding_en_permissions_accept")
+      } catch (e) {
+        showNotAuthorizedAlert()
       }
     }
 
@@ -144,12 +101,10 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       navigation.navigate(HomeStackScreens.ExposureNotificationsInfo)
     }
 
-    const isENEnabled = status === "Enabled"
-
     return (
       <ActivationStatusView
         headerText={t("home.bluetooth.proximity_tracing_header")}
-        isActive={isENEnabled}
+        isActive={status === "Active"}
         infoAction={handleOnPressShowInfo}
         fixAction={handleOnPressFix}
         testID={"exposure-notifications-status-container"}
@@ -214,7 +169,6 @@ const ExposureDetectionStatus: FunctionComponent = () => {
         {t("screen_titles.exposure_scanning")}
       </Text>
       <Text style={style.subheaderText}>{subheaderText}</Text>
-      <BluetoothActivationStatus />
       <ExposureNotificationsActivationStatus />
       {locationIsRequired && <LocationActivationStatus />}
     </ScrollView>
