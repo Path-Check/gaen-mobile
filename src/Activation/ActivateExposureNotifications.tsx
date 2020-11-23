@@ -87,8 +87,14 @@ const ActivateExposureNotifications: FunctionComponent = () => {
       try {
         const response = await exposureNotifications.request()
         if (response.kind === "success") {
+          console.log(response.status)
           if (response.status !== "Enabled") {
-            showNotAuthorizedAlert()
+            console.log(isBluetoothOn)
+            if (!isBluetoothOn) {
+              showEnableBluetoothAlert()
+            } else {
+              showNotAuthorizedAlert()
+            }
           }
         } else {
           showNotAuthorizedAlert()

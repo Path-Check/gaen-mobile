@@ -46,6 +46,7 @@ export const notificationPermissionStatusFromString = (
 export type ENPermissionStatus =
   | "Unknown"
   | "NotAuthorized"
+  | "BluetoothOff"
   | "Disabled"
   | "Enabled"
 

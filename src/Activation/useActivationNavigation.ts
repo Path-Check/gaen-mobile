@@ -86,7 +86,6 @@ export const determineActivationSteps = ({
   displayAcceptTermsOfService,
   enableProductAnalytics,
   locationPermissions,
-  isBluetoothOn,
 }: Environment): ActivationStep[] => {
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
@@ -95,7 +94,6 @@ export const determineActivationSteps = ({
   displayAcceptTermsOfService && activationSteps.push("AcceptTermsOfService")
   enableProductAnalytics && activationSteps.push("ProductAnalyticsConsent")
   isLocationRequiredAndOff && activationSteps.push("ActivateLocation")
-  !isBluetoothOn && activationSteps.push("ActivateBluetooth")
   activationSteps.push("ActivateExposureNotifications")
   Platform.OS === "ios" && activationSteps.push("NotificationPermissions")
   activationSteps.push("ActivationSummary")
