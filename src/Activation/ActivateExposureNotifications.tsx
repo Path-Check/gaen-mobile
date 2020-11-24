@@ -23,12 +23,9 @@ import { Spacing, Typography, Buttons, Colors, Iconography } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const {
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
-  // const isENActive = status === "Active"
-  const isENActive = true
+  const isENActive = exposureNotifications.status === "Active"
 
   return (
     <SafeAreaView style={style.safeArea}>
@@ -239,12 +236,10 @@ const style = StyleSheet.create({
   alreadyActiveIconContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
   alreadyActiveTextContainer: {
-    flex: 4,
+    flex: 8,
     justifyContent: "center",
-    alignItems: "center",
   },
   alreadyActiveText: {
     ...Typography.body.x30,
