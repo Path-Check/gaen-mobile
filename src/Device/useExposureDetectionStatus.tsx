@@ -5,18 +5,14 @@ interface ExposureDetectionStatus {
 }
 
 export const useExposureDetectionStatus = (): ExposureDetectionStatus => {
-  const {
-    isBluetoothOn,
-    locationPermissions,
-    exposureNotifications,
-  } = usePermissionsContext()
+  const { locationPermissions, exposureNotifications } = usePermissionsContext()
 
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
-  const isExposureNotificationsOn = exposureNotifications.status === "Enabled"
+  const isExposureNotificationsOn = exposureNotifications.status === "Active"
 
   const exposureDetectionStatus =
-    isExposureNotificationsOn && isBluetoothOn && !isLocationRequiredAndOff
+    isExposureNotificationsOn && !isLocationRequiredAndOff
 
   return { exposureDetectionStatus }
 }

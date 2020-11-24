@@ -8,6 +8,7 @@ import {
 } from "../Device/PermissionsContext"
 import { ActivationStackScreens } from "../navigation"
 import NotificationPermissions from "./NotificationPermissions"
+import { OnboardingProvider } from "../OnboardingContext"
 
 jest.mock("@react-navigation/native")
 
@@ -20,9 +21,11 @@ describe("NotificationPermissions", () => {
       )
 
       const { getByLabelText } = render(
-        <PermissionsContext.Provider value={permissionsProviderValue}>
-          <NotificationPermissions />
-        </PermissionsContext.Provider>,
+        <OnboardingProvider userHasCompletedOnboarding>
+          <PermissionsContext.Provider value={permissionsProviderValue}>
+            <NotificationPermissions />
+          </PermissionsContext.Provider>
+        </OnboardingProvider>,
       )
 
       fireEvent.press(getByLabelText("Enable Notifications"))
@@ -36,7 +39,11 @@ describe("NotificationPermissions", () => {
         navigate: navigationSpy,
       })
 
-      const { getByLabelText } = render(<NotificationPermissions />)
+      const { getByLabelText } = render(
+        <OnboardingProvider userHasCompletedOnboarding>
+          <NotificationPermissions />
+        </OnboardingProvider>,
+      )
 
       fireEvent.press(getByLabelText("Enable Notifications"))
 
@@ -55,9 +62,11 @@ describe("NotificationPermissions", () => {
       )
 
       const { getByText } = render(
-        <PermissionsContext.Provider value={permissionsProviderValue}>
-          <NotificationPermissions />
-        </PermissionsContext.Provider>,
+        <OnboardingProvider userHasCompletedOnboarding>
+          <PermissionsContext.Provider value={permissionsProviderValue}>
+            <NotificationPermissions />
+          </PermissionsContext.Provider>
+        </OnboardingProvider>,
       )
 
       fireEvent.press(getByText("Maybe later"))
@@ -68,7 +77,11 @@ describe("NotificationPermissions", () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigationSpy })
 
-      const { getByText } = render(<NotificationPermissions />)
+      const { getByText } = render(
+        <OnboardingProvider userHasCompletedOnboarding>
+          <NotificationPermissions />
+        </OnboardingProvider>,
+      )
 
       fireEvent.press(getByText("Maybe later"))
 
@@ -83,7 +96,6 @@ const createPermissionProviderValue = (
   requestPermission: () => void = () => {},
 ): PermissionsContextState => {
   return {
-    isBluetoothOn: true,
     locationPermissions: "RequiredOn" as const,
     notification: {
       status: "Unknown" as const,
@@ -91,7 +103,7 @@ const createPermissionProviderValue = (
       request: requestPermission,
     },
     exposureNotifications: {
-      status: "Enabled",
+      status: "Active",
       request: () =>
         Promise.resolve({
           kind: "failure" as const,

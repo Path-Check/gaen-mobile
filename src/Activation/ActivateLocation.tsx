@@ -8,43 +8,32 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { ActivationStackScreens } from "../navigation"
 import { Text } from "../components"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import { useConfigurationContext } from "../ConfigurationContext"
 import { openAppSettings } from "../Device"
 
 import { Colors, Spacing, Typography, Buttons, Outlines } from "../styles"
 import { Icons } from "../assets"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { locationPermissions } = usePermissionsContext()
-  const { enableProductAnalytics } = useConfigurationContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   useEffect(() => {
     const isLocationOn = locationPermissions === "RequiredOn"
     if (isLocationOn) {
-      navigateToNextScreen()
+      goToNextScreenFrom("ActivateLocation")
     }
   })
 
   const handleOnPressMaybeLater = () => {
-    navigateToNextScreen()
-  }
-
-  const navigateToNextScreen = () => {
-    if (enableProductAnalytics) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-    } else {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
-    }
+    goToNextScreenFrom("ActivateLocation")
   }
 
   const showLocationAccessAlert = () => {

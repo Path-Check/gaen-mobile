@@ -19,9 +19,8 @@ RCT_REMAP_METHOD(requestExposureNotificationAuthorization,
 RCT_REMAP_METHOD(getCurrentENPermissionsStatus,
                  getCurrentENPermissionsStatusWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
-  [[ExposureManager shared] getCurrentENPermissionsStatusWithCallback:^(NSString * _Nonnull authorizationState,
-                                                                        NSString * _Nonnull enabledState) {
-    resolve(@[authorizationState, enabledState]);
+  [[ExposureManager shared] getCurrentENPermissionsStatusWithCallback:^(NSString * _Nonnull exposureNotificationStatus) {
+    resolve(exposureNotificationStatus);
   }];
 }
 

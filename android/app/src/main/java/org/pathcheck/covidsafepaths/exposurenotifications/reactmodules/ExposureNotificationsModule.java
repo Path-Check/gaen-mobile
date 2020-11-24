@@ -51,7 +51,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     FutureCallback<Void> callback = new FutureCallback<Void>() {
       @Override
       public void onSuccess(Void result) {
-        promise.resolve((Util.getEnStatusWritableArray(true)));
+        promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
       }
 
       @Override
@@ -70,7 +70,13 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   public void getCurrentENPermissionsStatus(final Promise promise) {
     ExposureNotificationClientWrapper.get(getReactApplicationContext())
         .isEnabled()
-        .addOnSuccessListener(enabled -> promise.resolve(Util.getEnStatusWritableArray(enabled)))
+        .addOnSuccessListener(enabled -> {
+          if (enabled) {
+            promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
+          } else {
+            promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
+          }
+        })
         .addOnFailureListener(
             exception -> {
               if (!(exception instanceof ApiException)) {

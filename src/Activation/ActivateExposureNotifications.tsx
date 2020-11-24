@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   SafeAreaView,
@@ -9,46 +9,29 @@ import {
   Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useFocusEffect, useNavigation } from "@react-navigation/native"
+import { useFocusEffect } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { nextScreenFromExposureNotifications } from "./activationStackController"
 import { Text } from "../components"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
-  const {
-    locationPermissions,
-    isBluetoothOn,
-    exposureNotifications,
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
-  const navigateToNextScreen = useCallback(() => {
-    navigation.navigate(
-      nextScreenFromExposureNotifications({
-        isLocationRequiredAndOff,
-        isBluetoothOn,
-      }),
-    )
-  }, [isBluetoothOn, isLocationRequiredAndOff, navigation])
-
-  useFocusEffect(
-    useCallback(() => {
-      if (exposureNotifications.status === "Enabled") {
-        navigateToNextScreen()
-      }
-    }, [exposureNotifications.status, navigateToNextScreen]),
-  )
+  useFocusEffect(() => {
+    if (exposureNotifications.status === "Active") {
+      goToNextScreenFrom("ActivateExposureNotifications")
+    }
+  })
 
   const showNotAuthorizedAlert = () => {
     const errorMessage = Platform.select({
@@ -76,11 +59,34 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     )
   }
 
+  const showEnableBluetoothAlert = () => {
+    Alert.alert(
+      t("onboarding.activate_exposure_notifications.bluetooth_header", {
+        applicationName,
+      }),
+      t("onboarding.activate_exposure_notifications.bluetooth_body"),
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t("common.settings"),
+          onPress: () => {
+            openAppSettings()
+          },
+        },
+      ],
+    )
+  }
+
   const handleOnPressEnable = async () => {
     try {
       const response = await exposureNotifications.request()
       if (response.kind === "success") {
-        if (response.status !== "Enabled") {
+        if (response.status === "BluetoothOff") {
+          showEnableBluetoothAlert()
+        } else {
           showNotAuthorizedAlert()
         }
       } else {
@@ -94,7 +100,7 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 
   const handleOnPressDontEnable = () => {
     trackEvent("product_analytics", "onboarding_en_permissions_denied")
-    navigateToNextScreen()
+    goToNextScreenFrom("ActivateExposureNotifications")
   }
 
   return (

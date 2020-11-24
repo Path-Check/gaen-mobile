@@ -21,4 +21,6 @@ public final class CallbackMessages {
   public static final String EN_ENABLEMENT_DISABLED = "DISABLED";
   public static final String EN_AUTHORIZATION_AUTHORIZED = "AUTHORIZED";
   public static final String EN_AUTHORIZATION_UNAUTHORIZED = "UNAUTHORIZED";
+  public static final String EN_STATUS_ACTIVE = "Active";
+  public static final String EN_STATUS_DISABLED = "Disabled";
 }

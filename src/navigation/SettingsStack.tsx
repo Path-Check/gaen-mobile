@@ -10,7 +10,7 @@ import ENDebugMenu from "../Settings/ENDebugMenu"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
 import DeleteConfirmation from "../Settings/DeleteConfirmation"
-import ProductAnalyticsConsentScreen from "../Settings/AnonymizedDataConsentScreen"
+import ProductAnalyticsConsentScreen from "../Settings/ProductAnalyticsConsentScreen"
 import { SettingsStackScreens } from "./index"
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 

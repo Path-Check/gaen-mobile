@@ -11,9 +11,9 @@ import { useTranslation } from "react-i18next"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
-import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -21,26 +21,25 @@ import { Buttons, Colors, Spacing, Typography } from "../styles"
 const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const { completeOnboarding } = useOnboardingContext()
   const { trackEvent } = useProductAnalyticsContext()
   const {
-    isBluetoothOn,
     locationPermissions,
     exposureNotifications: { status },
   } = usePermissionsContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
-  const isENEnabled = status === "Enabled"
+  const isENActive = status === "Active"
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
   const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
-    completeOnboarding()
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const handleOnPressOpenSettings = async () => {
     openAppSettings()
-    completeOnboarding()
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const AppSetupIncompleteButtons: FunctionComponent = () => {
@@ -88,8 +87,7 @@ const ActivationSummary: FunctionComponent = () => {
     buttons: AppSetupIncompleteButtons,
   }
 
-  const isAppSetupComplete =
-    isENEnabled && isBluetoothOn && !isLocationRequiredAndOff
+  const isAppSetupComplete = isENActive && !isLocationRequiredAndOff
 
   const screenContent = isAppSetupComplete
     ? appSetupCompleteContent

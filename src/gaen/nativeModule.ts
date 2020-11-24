@@ -9,7 +9,6 @@ import { ExposureInfo, Posix } from "../exposure"
 import { ENDiagnosisKey } from "../Settings/ENLocalDiagnosisKeyScreen"
 import { ExposureKey } from "../exposureKey"
 import Logger from "../logger"
-import { isPlatformiOS } from "../utils"
 
 import { toExposureInfo, RawExposure } from "./dataConverters"
 
@@ -38,7 +37,7 @@ export const subscribeToEnabledStatusEvents = (
   )
   return ExposureEvents.addListener(
     "onEnabledStatusUpdated",
-    (data: string[] | null) => {
+    (data: string | null) => {
       if (data) {
         const status = toStatus(data)
         cb(status)
@@ -47,22 +46,22 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-const toStatus = (data: string[]): ENPermissionStatus => {
-  const networkAuthorization = data[0]
-  const networkEnablement = data[1]
-
-  const isAuthorized = networkAuthorization === "AUTHORIZED"
-  const isEnabled = networkEnablement === "ENABLED"
-  if (!isAuthorized) {
-    if (isPlatformiOS()) {
-      return "NotAuthorized"
-    } else {
+const toStatus = (data: string): ENPermissionStatus => {
+  switch (data) {
+    case "Unknown":
+      return "Unknown"
+    case "Active":
+      return "Active"
+    case "Disabled":
       return "Disabled"
-    }
-  } else if (!isEnabled) {
-    return "Disabled"
-  } else {
-    return "Enabled"
+    case "BluetoothOff":
+      return "BluetoothOff"
+    case "Restricted":
+      return "Restricted"
+    case "Unauthorized":
+      return "Unauthorized"
+    default:
+      return "Unknown"
   }
 }
 

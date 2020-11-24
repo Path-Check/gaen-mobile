@@ -2,13 +2,13 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import AnonymizedDataConsentScreen from "./AnonymizedDataConsentScreen"
+import ProductAnalyticsConsentScreen from "./ProductAnalyticsConsentScreen"
 import { factories } from "../factories"
 import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
 
 jest.mock("@react-navigation/native")
 
-describe("AnonymizedDataConsentScreen", () => {
+describe("ProductAnalyticsConsentScreen", () => {
   describe("when the user has consented to data sharing", () => {
     it("displays the correct status", () => {
       const context = factories.productAnalyticsContext.build({
@@ -19,7 +19,7 @@ describe("AnonymizedDataConsentScreen", () => {
       })
       const { getByText } = render(
         <ProductAnalyticsContext.Provider value={context}>
-          <AnonymizedDataConsentScreen />
+          <ProductAnalyticsConsentScreen />
         </ProductAnalyticsContext.Provider>,
       )
 
@@ -44,7 +44,7 @@ describe("AnonymizedDataConsentScreen", () => {
         })
         const { getByLabelText } = render(
           <ProductAnalyticsContext.Provider value={context}>
-            <AnonymizedDataConsentScreen />
+            <ProductAnalyticsConsentScreen />
           </ProductAnalyticsContext.Provider>,
         )
 
@@ -69,7 +69,7 @@ describe("AnonymizedDataConsentScreen", () => {
       })
       const { getByText } = render(
         <ProductAnalyticsContext.Provider value={context}>
-          <AnonymizedDataConsentScreen />
+          <ProductAnalyticsConsentScreen />
         </ProductAnalyticsContext.Provider>,
       )
 
@@ -93,7 +93,7 @@ describe("AnonymizedDataConsentScreen", () => {
         })
         const { getByLabelText } = render(
           <ProductAnalyticsContext.Provider value={context}>
-            <AnonymizedDataConsentScreen />
+            <ProductAnalyticsConsentScreen />
           </ProductAnalyticsContext.Provider>,
         )
 

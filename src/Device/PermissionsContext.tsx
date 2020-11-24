@@ -4,7 +4,6 @@ import React, {
   useState,
   useEffect,
   useContext,
-  useCallback,
 } from "react"
 import { Platform } from "react-native"
 import {
@@ -13,7 +12,6 @@ import {
 } from "react-native-permissions"
 
 import * as GaenNativeModule from "../gaen/nativeModule"
-import * as DeviceNativeModule from "./nativeModule"
 import useOnAppStateChange from "./useOnAppStateChange"
 import useLocationPermissions, {
   LocationPermissions,
@@ -45,12 +43,14 @@ export const notificationPermissionStatusFromString = (
 
 export type ENPermissionStatus =
   | "Unknown"
-  | "NotAuthorized"
+  | "Active"
   | "Disabled"
-  | "Enabled"
+  | "BluetoothOff"
+  | "Restricted"
+  | "Paused"
+  | "Unauthorized"
 
 export interface PermissionsContextState {
-  isBluetoothOn: boolean
   locationPermissions: LocationPermissions
   notification: {
     status: NotificationPermissionStatus
@@ -64,7 +64,6 @@ export interface PermissionsContextState {
 }
 
 const initialState = {
-  isBluetoothOn: false,
   locationPermissions: "RequiredOff" as const,
   notification: {
     status: "Unknown" as const,
@@ -81,7 +80,6 @@ const initialState = {
 const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
-  const isBluetoothOn = useIsBluetoothOn()
   const locationPermissions = useLocationPermissions()
   const { enPermission, requestENPermission } = useENPermissions()
   const {
@@ -93,7 +91,6 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   return (
     <PermissionsContext.Provider
       value={{
-        isBluetoothOn,
         locationPermissions,
         notification: {
           status: notificationPermission,
@@ -178,36 +175,6 @@ const useENPermissions = () => {
     enPermission: enPermissionStatus,
     requestENPermission,
   }
-}
-
-const useIsBluetoothOn = (): boolean => {
-  const [isBluetoothOn, setIsBluetoothOn] = useState(false)
-
-  const determineIsBluetoothOn = useCallback(async () => {
-    DeviceNativeModule.isBluetoothEnabled().then((result) =>
-      setIsBluetoothOn(result),
-    )
-  }, [])
-
-  useEffect(() => {
-    determineIsBluetoothOn()
-  }, [determineIsBluetoothOn])
-
-  useEffect(() => {
-    const subscription = DeviceNativeModule.subscribeToBluetoothStatusEvents(
-      (enabled: boolean) => {
-        setIsBluetoothOn(enabled)
-      },
-    )
-
-    return () => {
-      subscription.remove()
-    }
-  }, [])
-
-  useOnAppStateChange(determineIsBluetoothOn)
-
-  return isBluetoothOn
 }
 
 const usePermissionsContext = (): PermissionsContextState => {

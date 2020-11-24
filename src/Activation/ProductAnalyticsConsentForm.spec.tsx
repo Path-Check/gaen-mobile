@@ -6,6 +6,7 @@ import ProductAnalyticsConsentForm from "./ProductAnalyticsConsentForm"
 import { factories } from "../factories"
 import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { ActivationStackScreens } from "../navigation"
+import { OnboardingProvider } from "../OnboardingContext"
 
 jest.mock("@react-navigation/native")
 
@@ -25,9 +26,11 @@ describe("ProductAnalyticsConsentForm", () => {
       })
 
       const { getByLabelText } = render(
-        <ProductAnalyticsContext.Provider value={context}>
-          <ProductAnalyticsConsentForm />
-        </ProductAnalyticsContext.Provider>,
+        <OnboardingProvider userHasCompletedOnboarding>
+          <ProductAnalyticsContext.Provider value={context}>
+            <ProductAnalyticsConsentForm />
+          </ProductAnalyticsContext.Provider>
+        </OnboardingProvider>,
       )
 
       const consentButton = getByLabelText("I Understand and Consent")
@@ -36,7 +39,7 @@ describe("ProductAnalyticsConsentForm", () => {
       await waitFor(() => {
         expect(updateUserConsent).toHaveBeenCalledWith(true)
         expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivateExposureNotifications,
+          ActivationStackScreens.ActivateLocation,
         )
       })
     })
@@ -57,9 +60,11 @@ describe("ProductAnalyticsConsentForm", () => {
       })
 
       const { getByLabelText } = render(
-        <ProductAnalyticsContext.Provider value={context}>
-          <ProductAnalyticsConsentForm />
-        </ProductAnalyticsContext.Provider>,
+        <OnboardingProvider userHasCompletedOnboarding>
+          <ProductAnalyticsContext.Provider value={context}>
+            <ProductAnalyticsConsentForm />
+          </ProductAnalyticsContext.Provider>
+        </OnboardingProvider>,
       )
 
       const maybeLaterButton = getByLabelText("Maybe later")
@@ -68,7 +73,7 @@ describe("ProductAnalyticsConsentForm", () => {
       await waitFor(() => {
         expect(updateUserConsent).not.toHaveBeenCalled()
         expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivateExposureNotifications,
+          ActivationStackScreens.ActivateLocation,
         )
       })
     })

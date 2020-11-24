@@ -167,8 +167,8 @@
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
-      "bluetooth_disabled_error_message": "Go to the Settings app and enable Bluetooth to fix this error",
-      "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
+      "bluetooth_disabled_error_message": "Turn on Bluetooth in your device settings.",
+      "bluetooth_disabled_error_title": "Enable Bluetooth",
       "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
@@ -226,6 +226,10 @@
     "symptom_history": "Symptoms"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Enable Bluetooth",
+      "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your device settings."
+    },
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",
@@ -234,7 +238,7 @@
     "app_setup_incomplete_location_body": "{{applicationName}} requires Exposure Notifications, Bluetooth, and Location permissions to know when and where you have been exposed to COVID-19. You can authorize this in Settings.",
     "bluetooth_alert_body": "To use Bluetooth scanning, the device Bluetooth setting needs to be turned on.",
     "bluetooth_alert_header": "Activate Bluetooth",
-    "bluetooth_body": "To use Bluetooth scanning, the device Bluetooth setting needs to be turned on.",
+    "bluetooth_body": "To use Bluetooth scanning, the device Bluetooth setting must be turned on.",
     "bluetooth_header": "Activate Bluetooth",
     "bluetooth_subheader": "Why do I need to turn on my phone's Bluetooth setting?",
     "eula": "End User Legal Agreement",

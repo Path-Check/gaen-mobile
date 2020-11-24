@@ -104,24 +104,35 @@ final class ExposureManager: NSObject {
 
   // MARK: == State ==
 
-  enum EnabledState: String {
-    case enabled = "ENABLED"
-    case disabled = "DISABLED"
+  enum ExposureNoticationStatus: String {
+    case unknown = "Unknown"
+    case active = "Active"
+    case disabled = "Disabled"
+    case bluetoothOff = "BluetoothOff"
+    case restricted = "Restricted"
+    case paused = "Paused"
+    case unauthorized = "Unauthorized"
   }
 
-  enum AuthorizationState: String {
-    case authorized = "AUTHORIZED"
-    case unauthorized = "UNAUTHORIZED"
-  }
-
-  /// Wrapps ENManager enabled state to a enabled/disabled state
-  var enabledState: EnabledState {
-    return manager.exposureNotificationEnabled ? .enabled : .disabled
-  }
-
-  /// Wraps ENManager authorization state to a authorized/unauthorized state
-  var authorizationState: AuthorizationState {
-    return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
+  var exposureNotificationStatus: ExposureNoticationStatus {
+    switch manager.exposureNotificationStatus {
+    case .unknown:
+      return .unknown
+    case .active:
+      return .active
+    case .disabled:
+      return .disabled
+    case .bluetoothOff:
+      return .bluetoothOff
+    case .restricted:
+      return .restricted
+    case .paused:
+      return .paused
+    case .unauthorized:
+      return .unauthorized
+    default:
+      return .unknown
+    }
   }
 
   /// Wrapps ENManager state and determines if bluetooth is on or off
@@ -131,8 +142,8 @@ final class ExposureManager: NSObject {
   }
 
   ///Returns both the current authorizationState and enabledState as Strings
-  @objc func getCurrentENPermissionsStatus(callback: @escaping (String, String) -> Void) {
-    callback(authorizationState.rawValue, enabledState.rawValue)
+  @objc func getCurrentENPermissionsStatus(callback: @escaping (String) -> Void) {
+    callback(exposureNotificationStatus.rawValue)
   }
 
   /// Returns the current exposures as a json string representation
@@ -173,7 +184,7 @@ final class ExposureManager: NSObject {
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
     // Bluetooth must be enabled in order for the device to exchange keys with other devices
-    if manager.authorizationStatus() == .authorized && manager.exposureNotificationStatus == .bluetoothOff {
+    if manager.exposureNotificationStatus == .bluetoothOff {
       let content = UNMutableNotificationContent()
       content.title = String.bluetoothNotificationTitle.localized
       content.body = String.bluetoothNotificationBody.localized
@@ -238,7 +249,7 @@ final class ExposureManager: NSObject {
   }
 
   @objc func scheduleBackgroundTaskIfNeeded() {
-    guard manager.authorizationStatus() == .authorized else { return }
+    guard manager.exposureNotificationStatus == .active else { return }
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.backgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
     do {
@@ -275,7 +286,7 @@ final class ExposureManager: NSObject {
         reject(error.localizedDescription, error.localizedDescription, error)
       } else {
         self.broadcastCurrentEnabledStatus()
-        resolve([self.authorizationState.rawValue, self.enabledState.rawValue])
+        resolve(self.exposureNotificationStatus.rawValue)
       }
     }
   }
@@ -546,12 +557,12 @@ private extension ExposureManager {
 
   func activateSuccess() {
     awake()
-    // Ensure exposure notifications are enabled if the app is authorized. The app
+    // Ensure exposure notifications are enabled. The app
     // could get into a state where it is authorized, but exposure
     // notifications are not enabled,  if the user initially denied Exposure Notifications
     // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
     // in Settings.
-    if authorizationState == .authorized && enabledState == .disabled {
+    if exposureNotificationStatus == .disabled {
       self.manager.setExposureNotificationEnabled(true) { _ in
         // No error handling for attempts to enable on launch
       }
@@ -561,7 +572,7 @@ private extension ExposureManager {
   func broadcastCurrentEnabledStatus() {
     notificationCenter.post(Notification(
       name: .AuthorizationStatusDidChange,
-      object: [self.authorizationState.rawValue, self.enabledState.rawValue]
+      object: self.exposureNotificationStatus.rawValue
     ))
   }
 
