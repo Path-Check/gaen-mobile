@@ -70,7 +70,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
   public void getCurrentENPermissionsStatus(final Promise promise) {
     ExposureNotificationClientWrapper.get(getReactApplicationContext())
         .isEnabled()
-        .addOnSuccessListener(enabled -> promise.resolve("Active"))
+        .addOnSuccessListener(enabled -> promise.resolve(enabled ? CallbackMessages.EN_STATUS_ACTIVE : CallbackMessages.EN_STATUS_DISABLED))
         .addOnFailureListener(
             exception -> {
               if (!(exception instanceof ApiException)) {
