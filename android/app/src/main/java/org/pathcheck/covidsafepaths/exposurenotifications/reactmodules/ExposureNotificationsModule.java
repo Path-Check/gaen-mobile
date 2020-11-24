@@ -51,7 +51,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     FutureCallback<Void> callback = new FutureCallback<Void>() {
       @Override
       public void onSuccess(Void result) {
-        promise.resolve("Active");
+        promise.resolve(enabled ? CallbackMessages.EN_STATUS_ACTIVE : CallbackMessages.EN_STATUS_DISABLED);
       }
 
       @Override

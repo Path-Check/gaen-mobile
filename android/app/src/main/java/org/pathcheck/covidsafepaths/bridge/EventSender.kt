@@ -12,7 +12,7 @@ object EventSender {
     fun sendExposureNotificationStatusChanged(reactContext: ReactContext?, enabled: Boolean) {
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
-            ?.emit(EN_STATUS_CHANGED_EVENT, Util.getEnStatusWritableArray(enabled))
+            ?.emit(EN_STATUS_CHANGED_EVENT, enabled ? CallbackMessages.EN_STATUS_ACTIVE : CallbackMessages.EN_STATUS_DISABLED)
     }
 
     fun sendBluetoothStatusChangedEvent(reactContext: ReactContext?, enabled: Boolean) {
