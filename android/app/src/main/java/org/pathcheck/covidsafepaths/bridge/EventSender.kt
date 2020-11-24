@@ -3,7 +3,6 @@ package org.pathcheck.covidsafepaths.bridge
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
 
 object EventSender {
     private const val EN_STATUS_CHANGED_EVENT = "onEnabledStatusUpdated"
