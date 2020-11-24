@@ -8,6 +8,7 @@ import {
   Platform,
   Alert,
 } from "react-native"
+import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
@@ -17,7 +18,8 @@ import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 import { useActivationNavigation } from "./useActivationNavigation"
 
-import { Spacing, Typography, Buttons, Colors } from "../styles"
+import { Icons } from "../assets"
+import { Spacing, Typography, Buttons, Colors, Iconography } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -25,7 +27,8 @@ const ActivateExposureNotifications: FunctionComponent = () => {
     exposureNotifications: { status },
   } = usePermissionsContext()
 
-  const isENActive = status === "Active"
+  // const isENActive = status === "Active"
+  const isENActive = true
 
   return (
     <SafeAreaView style={style.safeArea}>
@@ -164,9 +167,21 @@ const ENAlreadyEnabledButtons: FunctionComponent = () => {
 
   return (
     <View style={style.alreadyActiveContainer}>
-      <Text style={style.body}>
-        {t("onboarding.proximity_tracing_already_active")}
-      </Text>
+      <View style={style.alreadyActiveInfoContainer}>
+        <View style={style.alreadyActiveIconContainer}>
+          <SvgXml
+            xml={Icons.CheckInCircle}
+            fill={Colors.accent.success100}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
+        </View>
+        <View style={style.alreadyActiveTextContainer}>
+          <Text style={style.alreadyActiveText}>
+            {t("onboarding.proximity_tracing_already_active")}
+          </Text>
+        </View>
+      </View>
       <TouchableOpacity onPress={handleOnPressContinue} style={style.button}>
         <Text style={style.buttonText}>{t("common.continue")}</Text>
       </TouchableOpacity>
@@ -216,7 +231,23 @@ const style = StyleSheet.create({
   alreadyActiveContainer: {
     borderTopWidth: 1,
     borderTopColor: Colors.neutral.shade50,
-    paddingTop: Spacing.medium,
+  },
+  alreadyActiveInfoContainer: {
+    flexDirection: "row",
+    paddingVertical: Spacing.large,
+  },
+  alreadyActiveIconContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  alreadyActiveTextContainer: {
+    flex: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  alreadyActiveText: {
+    ...Typography.body.x30,
   },
 })
 
