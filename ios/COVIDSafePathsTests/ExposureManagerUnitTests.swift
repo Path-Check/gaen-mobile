@@ -205,24 +205,14 @@ class ENManagerMock: ExposureNotificationManager {
   var activateHandler: ((_ completionHandler: @escaping ENErrorHandler) -> Void)?
   var invalidateHandler: (() -> Void)?
   var setExposureNotificationEnabledHandler: ((_ enabled: Bool, _ completionHandler: @escaping ENErrorHandler) -> Void)?
-  var exposureNotificationEnabledHandler: (() -> Bool)?
   var exposureNotificationStatusHandler: (() -> ENStatus)?
-  var authorizationStatusHandler: (() -> ENAuthorizationStatus)?
   var getDiagnosisKeysHandler: ((ENGetDiagnosisKeysHandler) -> ())?
   var enDetectExposuresHandler: ((_ configuration: ENExposureConfiguration, _ diagnosisKeyURLs: [URL], _ completionHandler: @escaping ENDetectExposuresHandler) -> Progress)?
   var getExposureInfoHandler: ((_ summary: ENExposureDetectionSummary, _ userExplanation: String, _ completionHandler: @escaping ENGetExposureInfoHandler) -> Progress)?
   var dispatchQueue: DispatchQueue = DispatchQueue.main
   
   var invalidationHandler: (() -> Void)?
-  
-  func authorizationStatus() -> ENAuthorizationStatus {
-    return authorizationStatusHandler?() ?? .unknown
-  }
-  
-  var exposureNotificationEnabled: Bool {
-    return exposureNotificationEnabledHandler?() ?? false
-  }
-  
+
   func detectExposures(configuration: ENExposureConfiguration, diagnosisKeyURLs: [URL], completionHandler: @escaping ENDetectExposuresHandler) -> Progress {
     return enDetectExposuresHandler?(configuration, diagnosisKeyURLs, completionHandler) ?? Progress()
   }
@@ -302,7 +292,7 @@ class ExposureManagerUnitTests: XCTestCase {
     
     let registerNotificationExpectation = self.expectation(description: "Registers for authorization changes")
     
-    let setExposureNotificationEnabledTrueExpectation = self.expectation(description: "When activated, if authorized and disabled, request to enable exposure notifications")
+    let setExposureNotificationEnabledTrueExpectation = self.expectation(description: "When activated, if disabled, request to enable exposure notifications")
     
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.addObserverHandler = { (_, _, name, _) in
@@ -312,9 +302,6 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     
     mockENManager.activateHandler = { completionHandler in
-      mockENManager.authorizationStatusHandler = {
-        return .authorized
-      }
       mockENManager.exposureNotificationStatusHandler = {
         return .disabled
       }
@@ -458,9 +445,7 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     
     let mockENManager = ENManagerMock()
-    mockENManager.authorizationStatusHandler = {
-      return .authorized
-    }
+
     mockENManager.exposureNotificationStatusHandler = {
       return .bluetoothOff
     }
@@ -511,8 +496,8 @@ class ExposureManagerUnitTests: XCTestCase {
   
   func testSubmitBackgroundTask() {
     let mockEnManager = ENManagerMock()
-    mockEnManager.authorizationStatusHandler = {
-      return .authorized
+    mockEnManager.exposureNotificationStatusHandler = {
+      return .active
     }
     let submitExpectation = self.expectation(description: "A background task request is submitted")
     let bgSchedulerMock = BGTaskSchedulerMock()
@@ -558,22 +543,6 @@ class ExposureManagerUnitTests: XCTestCase {
 
   }
 
-  func testEnabledtatus() {
-
-    let mockENManager = ENManagerMock()
-    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
-
-    mockENManager.exposureNotificationEnabledHandler = {
-      return true
-    }
-    XCTAssertEqual(exposureManager.enabledState, ExposureManager.EnabledState.enabled)
-    mockENManager.exposureNotificationEnabledHandler = {
-      return false
-    }
-    XCTAssertEqual(exposureManager.enabledState, ExposureManager.EnabledState.disabled)
-
-  }
-
   func testRecentExposures() {
     let withExposures = defaultStorage()
     XCTAssertEqual(withExposures.userState.recentExposures.count, 1)
@@ -584,26 +553,41 @@ class ExposureManagerUnitTests: XCTestCase {
     let mockENManager = ENManagerMock()
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
 
-    mockENManager.authorizationStatusHandler = {
-      return .authorized
-    }
-    XCTAssertEqual(exposureManager.authorizationState,
-                   ExposureManager.AuthorizationState.authorized)
-    mockENManager.authorizationStatusHandler = {
-      return .notAuthorized
-    }
-    XCTAssertEqual(exposureManager.authorizationState,
-                   ExposureManager.AuthorizationState.unauthorized)
-    mockENManager.authorizationStatusHandler = {
-      return .restricted
-    }
-    XCTAssertEqual(exposureManager.authorizationState,
-                   ExposureManager.AuthorizationState.unauthorized)
-    mockENManager.authorizationStatusHandler = {
+    mockENManager.exposureNotificationStatusHandler = {
       return .unknown
     }
-    XCTAssertEqual(exposureManager.authorizationState,
-                   ExposureManager.AuthorizationState.unauthorized)
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.unknown)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .active
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.active)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .disabled
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.disabled)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .bluetoothOff
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.bluetoothOff)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .restricted
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.restricted)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .paused
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.paused)
+    mockENManager.exposureNotificationStatusHandler = {
+      return .unauthorized
+    }
+    XCTAssertEqual(exposureManager.exposureNotificationStatus,
+                   ExposureManager.ExposureNoticationStatus.unauthorized)
   }
 
   func testBluetoothStatus() {
@@ -639,16 +623,12 @@ class ExposureManagerUnitTests: XCTestCase {
 
   func testGetCurrentENPermissionsStatus() {
     let mockENManager = ENManagerMock()
-    mockENManager.authorizationStatusHandler = {
-      return .authorized
-    }
-    mockENManager.exposureNotificationEnabledHandler = {
-      return true
+    mockENManager.exposureNotificationStatusHandler = {
+      return .active
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
-    exposureManager.getCurrentENPermissionsStatus { (authorized, enabled) in
-      XCTAssertEqual(authorized, ExposureManager.AuthorizationState.authorized.rawValue)
-      XCTAssertEqual(enabled, ExposureManager.EnabledState.enabled.rawValue)
+    exposureManager.getCurrentENPermissionsStatus { status in
+      XCTAssertEqual(status, ExposureManager.ExposureNoticationStatus.active.rawValue)
     }
   }
 

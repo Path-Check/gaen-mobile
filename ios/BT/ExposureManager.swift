@@ -184,7 +184,7 @@ final class ExposureManager: NSObject {
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
     // Bluetooth must be enabled in order for the device to exchange keys with other devices
-    if manager.authorizationStatus() == .authorized && manager.exposureNotificationStatus == .bluetoothOff {
+    if manager.exposureNotificationStatus == .bluetoothOff {
       let content = UNMutableNotificationContent()
       content.title = String.bluetoothNotificationTitle.localized
       content.body = String.bluetoothNotificationBody.localized
@@ -249,7 +249,7 @@ final class ExposureManager: NSObject {
   }
 
   @objc func scheduleBackgroundTaskIfNeeded() {
-    guard manager.authorizationStatus() == .authorized else { return }
+    guard manager.exposureNotificationStatus == .active else { return }
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.backgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
     do {
@@ -557,6 +557,16 @@ private extension ExposureManager {
 
   func activateSuccess() {
     awake()
+    // Ensure exposure notifications are enabled. The app
+    // could get into a state where it is authorized, but exposure
+    // notifications are not enabled,  if the user initially denied Exposure Notifications
+    // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
+    // in Settings.
+    if exposureNotificationStatus == .disabled {
+      self.manager.setExposureNotificationEnabled(true) { _ in
+        // No error handling for attempts to enable on launch
+      }
+    }
   }
 
   func broadcastCurrentEnabledStatus() {

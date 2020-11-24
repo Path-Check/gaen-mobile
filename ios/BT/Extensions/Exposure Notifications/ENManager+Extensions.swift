@@ -8,9 +8,6 @@ protocol ExposureNotificationManager {
   func activate(completionHandler: @escaping ENErrorHandler)
   func invalidate()
 
-  func authorizationStatus() -> ENAuthorizationStatus
-
-  var exposureNotificationEnabled: Bool { get }
   func setExposureNotificationEnabled(_ enabled: Bool, completionHandler: @escaping ENErrorHandler)
   @discardableResult func detectExposures(configuration: ENExposureConfiguration,
                                           diagnosisKeyURLs: [URL],
