@@ -9,7 +9,6 @@ import {
   Alert,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useFocusEffect } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { openAppSettings } from "../Device"
@@ -22,16 +21,51 @@ import { Spacing, Typography, Buttons, Colors } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { exposureNotifications } = usePermissionsContext()
-  const { applicationName } = useApplicationName()
-  const { trackEvent } = useProductAnalyticsContext()
-  const { goToNextScreenFrom } = useActivationNavigation()
+  const {
+    exposureNotifications: { status },
+  } = usePermissionsContext()
 
-  useFocusEffect(() => {
-    if (exposureNotifications.status === "Active") {
-      goToNextScreenFrom("ActivateExposureNotifications")
-    }
-  })
+  const isENActive = status === "Active"
+
+  return (
+    <SafeAreaView style={style.safeArea}>
+      <ScrollView
+        style={style.container}
+        contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
+      >
+        <View style={style.content}>
+          <Text style={style.header}>
+            {t("onboarding.proximity_tracing_header")}
+          </Text>
+          <Text style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader1")}
+          </Text>
+          <Text style={style.body}>
+            {t("onboarding.proximity_tracing_body1")}
+          </Text>
+          <Text style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader2")}
+          </Text>
+          <Text style={style.body}>
+            {t("onboarding.proximity_tracing_body2")}
+          </Text>
+          <Text style={style.subheader}>
+            {t("onboarding.proximity_tracing_subheader3")}
+          </Text>
+        </View>
+        {!isENActive ? <EnableENButtons /> : <ENAlreadyEnabledButtons />}
+      </ScrollView>
+    </SafeAreaView>
+  )
+}
+
+const EnableENButtons: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const { trackEvent } = useProductAnalyticsContext()
+  const { exposureNotifications } = usePermissionsContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
+  const { applicationName } = useApplicationName()
 
   const showNotAuthorizedAlert = () => {
     const errorMessage = Platform.select({
@@ -104,47 +138,42 @@ const ActivateExposureNotifications: FunctionComponent = () => {
   }
 
   return (
-    <SafeAreaView style={style.safeArea}>
-      <ScrollView
-        style={style.container}
-        contentContainerStyle={style.contentContainer}
-        alwaysBounceVertical={false}
+    <View>
+      <TouchableOpacity onPress={handleOnPressEnable} style={style.button}>
+        <Text style={style.buttonText}>
+          {t("onboarding.proximity_tracing_button")}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={handleOnPressDontEnable}
+        style={style.secondaryButton}
       >
-        <View style={style.content}>
-          <Text style={style.header}>
-            {t("onboarding.proximity_tracing_header")}
-          </Text>
-          <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader1")}
-          </Text>
-          <Text style={style.body}>
-            {t("onboarding.proximity_tracing_body1")}
-          </Text>
-          <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader2")}
-          </Text>
-          <Text style={style.body}>
-            {t("onboarding.proximity_tracing_body2")}
-          </Text>
-          <Text style={style.subheader}>
-            {t("onboarding.proximity_tracing_subheader3")}
-          </Text>
-        </View>
-        <TouchableOpacity onPress={handleOnPressEnable} style={style.button}>
-          <Text style={style.buttonText}>
-            {t("onboarding.proximity_tracing_button")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleOnPressDontEnable}
-          style={style.secondaryButton}
-        >
-          <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+        <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
+
+const ENAlreadyEnabledButtons: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const { goToNextScreenFrom } = useActivationNavigation()
+
+  const handleOnPressContinue = () => {
+    goToNextScreenFrom("ActivateExposureNotifications")
+  }
+
+  return (
+    <View style={style.alreadyActiveContainer}>
+      <Text style={style.body}>
+        {t("onboarding.proximity_tracing_already_active")}
+      </Text>
+      <TouchableOpacity onPress={handleOnPressContinue} style={style.button}>
+        <Text style={style.buttonText}>{t("common.continue")}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
 const style = StyleSheet.create({
   safeArea: {
     backgroundColor: Colors.background.primaryLight,
@@ -183,6 +212,11 @@ const style = StyleSheet.create({
   },
   secondaryButtonText: {
     ...Typography.button.secondary,
+  },
+  alreadyActiveContainer: {
+    borderTopWidth: 1,
+    borderTopColor: Colors.neutral.shade50,
+    paddingTop: Spacing.medium,
   },
 })
 
