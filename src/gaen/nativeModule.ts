@@ -48,17 +48,17 @@ export const subscribeToEnabledStatusEvents = (
 
 const toStatus = (data: string): ENPermissionStatus => {
   switch (data) {
-    case "UNKNOWN":
+    case "Unknown":
       return "Unknown"
-    case "ACTIVE":
+    case "Active":
       return "Active"
-    case "DISABLED":
+    case "Disabled":
       return "Disabled"
-    case "BLUETOOTHOFF":
+    case "BluetoothOff":
       return "BluetoothOff"
-    case "RESTRICTED":
+    case "Restricted":
       return "Restricted"
-    case "UNAUTHORIZED":
+    case "Unauthorized":
       return "Unauthorized"
     default:
       return "Unknown"

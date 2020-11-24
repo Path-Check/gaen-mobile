@@ -105,13 +105,13 @@ final class ExposureManager: NSObject {
   // MARK: == State ==
 
   enum ExposureNoticationStatus: String {
-    case unknown = "UNKNOWN"
-    case active = "ACTIVE"
-    case disabled = "DISABLED"
-    case bluetoothOff = "BLUETOOTHOFF"
-    case restricted = "RESTRICTED"
-    case paused = "PAUSED"
-    case unauthorized = "UNAUTHORIZED"
+    case unknown = "Unknown"
+    case active = "Active"
+    case disabled = "Disabled"
+    case bluetoothOff = "BluetoothOff"
+    case restricted = "Restricted"
+    case paused = "Paused"
+    case unauthorized = "Unauthorized"
   }
 
   var exposureNotificationStatus: ExposureNoticationStatus {
