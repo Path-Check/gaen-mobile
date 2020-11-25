@@ -33,7 +33,6 @@ import {
   Typography,
   Buttons,
   Iconography,
-  Layout,
 } from "../../styles"
 import { Icons } from "../../assets"
 
