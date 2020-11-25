@@ -126,6 +126,7 @@
     "submit_code": "Submit Code"
   },
   "exposure_history": {
+    "more_info": "Learn more about Exposure Notifications",
     "check_for_exposures": "Check for exposures",
     "exposure_detail": {
       "2m_apart": "2m apart",
@@ -175,6 +176,9 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "verification_code_card": {
+      "more_info": "What is a verification code?"
+    },
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",

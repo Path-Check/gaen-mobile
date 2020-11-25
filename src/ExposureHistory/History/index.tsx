@@ -101,11 +101,11 @@ const History: FunctionComponent<HistoryProps> = ({
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}
+              accessibilityRole="button"
+              accessibilityLabel={t("exposure_history.more_info")}
             >
               <SvgXml
                 xml={Icons.QuestionMark}
-                accessible
-                accessibilityLabel={t("label.question_icon")}
                 fill={Colors.primary.shade125}
                 width={Iconography.xxxSmall}
                 height={Iconography.xxxSmall}
