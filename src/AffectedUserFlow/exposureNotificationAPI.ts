@@ -75,7 +75,7 @@ class PostDiagnosisKeysRequest {
   private static RETRY_STATUS_CODES = [429, 503]
   private static INTERNAL_ERROR = "internal_error"
   private static EMPTY_EXPOSURE_KEYS =
-    "unable to validate diagnosis verification: calculating expect HMAC: cannont calculate hmac on empty exposure keys"
+    "unable to validate diagnosis verification: calculating expected HMAC: cannot calculate hmac on empty exposure keys"
   private static EXISTING_KEYS_SENT_RESPONSE =
     "no revision token, but sent existing keys"
   private static TIMEOUT = 5000
