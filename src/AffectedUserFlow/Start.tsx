@@ -14,7 +14,7 @@ import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
-import { Spacing, Colors, Typography, Buttons } from "../styles"
+import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
 export const AffectedUserFlowIntro: FunctionComponent = () => {
@@ -23,9 +23,11 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
   const navigation = useNavigation()
   const { healthAuthorityName } = useCustomCopy()
 
-  const handleOnPressNext = () => {
+  const handleOnPressContinue = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
   }
+
+  const handleOnPressSecondaryButton = () => {}
 
   return (
     <ScrollView
@@ -48,14 +50,36 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
           {t("export.intro.body2", { healthAuthorityName })}
         </Text>
       </View>
-      <TouchableOpacity
-        style={style.button}
-        onPress={handleOnPressNext}
-        accessibilityLabel={t("common.start")}
-      >
-        <Text style={style.buttonText}>{t("common.continue")}</Text>
-        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressContinue}
+          accessibilityLabel={t("common.start")}
+        >
+          <Text style={style.buttonText}>{t("common.continue")}</Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.secondaryButton}
+          onPress={handleOnPressSecondaryButton}
+          accessibilityLabel={t("common.start")}
+        >
+          <SvgXml
+            xml={Icons.QuestionMarkInCircle}
+            fill={Colors.primary.shade100}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
+          {/* <Text style={style.secondaryButtonText}>
+             {t("export.intro.what_is_a")}
+           </Text> */}
+          <Text style={style.secondaryButtonText}>
+            "what if this is super long becauset he user has their text size set
+            to something big"
+          </Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   )
 }
@@ -71,7 +95,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
     paddingTop: Spacing.huge,
-    paddingBottom: Spacing.massive,
+    paddingBottom: Spacing.xxLarge,
     backgroundColor: Colors.background.primaryLight,
   },
   image: {
@@ -94,6 +118,16 @@ const style = StyleSheet.create({
   buttonText: {
     ...Typography.button.primary,
     marginRight: Spacing.small,
+  },
+  secondaryButton: {
+    ...Buttons.secondary.base,
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  secondaryButtonText: {
+    ...Typography.button.secondary,
+    flex: 2,
+    textAlign: "left",
   },
 })
 

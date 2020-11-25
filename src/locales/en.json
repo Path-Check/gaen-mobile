@@ -96,6 +96,7 @@
       "verification_code_used": "Verification code has already been used"
     },
     "intro": {
+      "what_is_a": "What is a verification code?",
       "header": "Do you have your verification code?",
       "body1": "If you have recieved a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
       "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing."

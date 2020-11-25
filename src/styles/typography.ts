@@ -226,6 +226,7 @@ type Button =
   | "primaryDisabled"
   | "fixedBottom"
   | "fixedBottomDisabled"
+  | "outlined"
   | "secondary"
   | "card"
   | "listItem"
@@ -246,6 +247,10 @@ export const button: Record<Button, TextStyle> = {
   fixedBottomDisabled: {
     ...baseButtonText,
     color: Colors.neutral.shade140,
+  },
+  outlined: {
+    ...baseButtonText,
+    color: Colors.primary.shade100,
   },
   secondary: {
     ...baseButtonText,
