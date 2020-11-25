@@ -14,7 +14,14 @@ import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
-import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
+import {
+  Spacing,
+  Colors,
+  Typography,
+  Buttons,
+  Iconography,
+  Layout,
+} from "../styles"
 import { Icons, Images } from "../assets"
 
 export const AffectedUserFlowIntro: FunctionComponent = () => {
@@ -27,7 +34,9 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
   }
 
-  const handleOnPressSecondaryButton = () => {}
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
+  }
 
   return (
     <ScrollView
@@ -70,14 +79,9 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
             width={Iconography.xSmall}
             height={Iconography.xSmall}
           />
-          {/* <Text style={style.secondaryButtonText}>
-             {t("export.intro.what_is_a")}
-           </Text> */}
           <Text style={style.secondaryButtonText}>
-            "what if this is super long becauset he user has their text size set
-            to something big"
+            {t("export.intro.what_is_a")}
           </Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -114,6 +118,7 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.primary.base,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -121,13 +126,14 @@ const style = StyleSheet.create({
   },
   secondaryButton: {
     ...Buttons.secondary.base,
-    flex: 1,
+    maxWidth: Layout.screenWidth * 0.65,
+    alignSelf: "center",
     justifyContent: "space-between",
   },
   secondaryButtonText: {
     ...Typography.button.secondary,
-    flex: 2,
     textAlign: "left",
+    maxWidth: "90%",
   },
 })
 

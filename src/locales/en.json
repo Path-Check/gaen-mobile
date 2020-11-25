@@ -71,6 +71,10 @@
     "title": "Unknown Error"
   },
   "export": {
+    "verification_code_info_header": "Verification Code Info",
+    "verification_code_info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result. It is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf the verification code you have cannot be submitted, you will need to get a new one from your health authority.",
+    "how_do_i_get_header": "How do I get a verification code?",
+    "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
     "code_input_body_bluetooth": "Enter your verification code",
     "code_input_button_cancel": "Cancel",
     "code_input_placeholder": "Enter Code",

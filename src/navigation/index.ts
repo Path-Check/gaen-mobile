@@ -167,6 +167,7 @@ export const SettingsStackScreens: {
 
 export type AffectedUserFlowStackScreen =
   | "AffectedUserStart"
+  | "VerificationCodeInfo"
   | "AffectedUserCodeInput"
   | "AffectedUserPublishConsent"
   | "AffectedUserConfirmUpload"
@@ -177,6 +178,7 @@ export const AffectedUserFlowStackScreens: {
   [key in AffectedUserFlowStackScreen]: AffectedUserFlowStackScreen
 } = {
   AffectedUserStart: "AffectedUserStart",
+  VerificationCodeInfo: "VerificationCodeInfo",
   AffectedUserCodeInput: "AffectedUserCodeInput",
   AffectedUserPublishConsent: "AffectedUserPublishConsent",
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",

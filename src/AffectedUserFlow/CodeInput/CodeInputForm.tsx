@@ -26,7 +26,15 @@ import {
 } from "../../navigation"
 import Logger from "../../logger"
 
-import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
+import {
+  Spacing,
+  Forms,
+  Colors,
+  Typography,
+  Buttons,
+  Iconography,
+  Layout,
+} from "../../styles"
 import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
@@ -65,6 +73,10 @@ const CodeInputForm: FunctionComponent = () => {
 
   const handleOnToggleFocus = () => {
     setIsFocused(!isFocused)
+  }
+
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
   }
 
   const handleOnPressSubmit = async () => {
@@ -218,6 +230,21 @@ const CodeInputForm: FunctionComponent = () => {
             fill={isDisabled ? Colors.text.primary : Colors.neutral.white}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={style.secondaryButton}
+          onPress={handleOnPressSecondaryButton}
+          accessibilityLabel={t("common.start")}
+        >
+          <SvgXml
+            xml={Icons.QuestionMarkInCircle}
+            fill={Colors.primary.shade100}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
+          <Text style={style.secondaryButtonText}>
+            {t("export.intro.what_is_a")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
@@ -267,9 +294,11 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.primary.base,
+    marginBottom: Spacing.small,
   },
   buttonDisabled: {
     ...Buttons.primary.disabled,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -278,6 +307,17 @@ const style = StyleSheet.create({
   buttonDisabledText: {
     ...Typography.button.primaryDisabled,
     marginRight: Spacing.small,
+  },
+  secondaryButton: {
+    ...Buttons.secondary.base,
+    maxWidth: Layout.screenWidth * 0.65,
+    alignSelf: "center",
+    justifyContent: "space-between",
+  },
+  secondaryButtonText: {
+    ...Typography.button.secondary,
+    textAlign: "left",
+    maxWidth: "90%",
   },
 })
 
