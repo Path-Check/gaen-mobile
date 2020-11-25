@@ -29,10 +29,12 @@ const MoreInfo: FunctionComponent = () => {
 
   const verificationCodeInfoText =
     verificationCodeInfo ||
-    t("export.verification_code_info_body", { healthAuthorityName })
+    t("export.verification_code_info.info_body", { healthAuthorityName })
   const verificationCodeHowDoIGetText =
     verificationCodeHowDoIGet ||
-    t("export.how_do_i_get_body", { healthAuthorityName })
+    t("export.verification_code_info.how_do_i_get_body", {
+      healthAuthorityName,
+    })
 
   const handleOnPressLink = () => {
     const url = healthAuthorityVerificationCodeInfoUrl
@@ -49,22 +51,30 @@ const MoreInfo: FunctionComponent = () => {
       >
         <View style={style.section}>
           <Text style={style.headerText}>
-            {t("export.verification_code_info_header")}
+            {t("export.verification_code_info.info_header")}
           </Text>
           <Text style={style.contentText}>{verificationCodeInfoText}</Text>
         </View>
         <View style={style.section}>
           <Text style={style.headerText}>
-            {t("export.how_do_i_get_header")}
+            {t("export.verification_code_info.how_do_i_get_header")}
           </Text>
           <Text style={style.contentText}>{verificationCodeHowDoIGetText}</Text>
+          {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
+            <TouchableOpacity style={style.button} onPress={handleOnPressLink}>
+              <Text style={style.buttonText}>{t("common.learn_more")}</Text>
+              <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
+            </TouchableOpacity>
+          )}
         </View>
-        {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
-          <TouchableOpacity style={style.button} onPress={handleOnPressLink}>
-            <Text style={style.buttonText}>{t("common.learn_more")}</Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
-          </TouchableOpacity>
-        )}
+        <View style={style.section}>
+          <Text style={style.headerText}>
+            {t("export.verification_code_info.what_happens_header")}
+          </Text>
+          <Text style={style.contentText}>
+            {t("export.verification_code_info.what_happens_body")}
+          </Text>
+        </View>
       </ScrollView>
     </>
   )

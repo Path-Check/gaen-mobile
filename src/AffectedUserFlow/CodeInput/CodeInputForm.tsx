@@ -186,17 +186,13 @@ const CodeInputForm: FunctionComponent = () => {
       >
         <View style={style.headerContainer}>
           <Text style={style.header}>
-            {t("export.code_input_title_bluetooth")}
-          </Text>
-
-          <Text style={style.subheader}>
-            {t("export.code_input_body_bluetooth")}
+            {t("export.enter_verification_code")}
           </Text>
         </View>
         <TextInput
           testID="code-input"
           value={code}
-          placeholder={t("export.code_input_placeholder").toUpperCase()}
+          placeholder={t("export.code").toUpperCase()}
           placeholderTextColor={Colors.text.placeholder}
           maxLength={codeLengthMax}
           style={codeInputStyle}
@@ -265,14 +261,10 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   headerContainer: {
-    marginBottom: Spacing.xxLarge,
+    marginBottom: Spacing.medium,
   },
   header: {
     ...Typography.header.x60,
-    marginBottom: Spacing.xxSmall,
-  },
-  subheader: {
-    ...Typography.body.x30,
   },
   errorSubtitle: {
     ...Typography.utility.error,
