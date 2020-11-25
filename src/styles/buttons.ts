@@ -136,3 +136,17 @@ const cardBase: ViewStyle = {
 export const card: Record<Card, ViewStyle> = {
   base: cardBase,
 }
+
+// Circle
+const circleBase: ViewStyle = {
+  height: Spacing.xxLarge,
+  width: Spacing.xxLarge,
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: Outlines.borderRadiusMax,
+  backgroundColor: Colors.secondary.shade50,
+}
+type Circle = "base"
+export const circle: Record<Circle, ViewStyle> = {
+  base: circleBase,
+}

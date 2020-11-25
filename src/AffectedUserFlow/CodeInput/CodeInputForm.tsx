@@ -235,12 +235,14 @@ const CodeInputForm: FunctionComponent = () => {
           onPress={handleOnPressSecondaryButton}
           accessibilityLabel={t("common.start")}
         >
-          <SvgXml
-            xml={Icons.QuestionMarkInCircle}
-            fill={Colors.primary.shade100}
-            width={Iconography.xSmall}
-            height={Iconography.xSmall}
-          />
+          <View style={style.secondaryButtonIconContainer}>
+            <SvgXml
+              xml={Icons.QuestionMark}
+              fill={Colors.primary.shade125}
+              width={Iconography.xxxSmall}
+              height={Iconography.xxxSmall}
+            />
+          </View>
           <Text style={style.secondaryButtonText}>
             {t("export.intro.what_is_a")}
           </Text>
@@ -313,6 +315,9 @@ const style = StyleSheet.create({
     maxWidth: Layout.screenWidth * 0.65,
     alignSelf: "center",
     justifyContent: "space-between",
+  },
+  secondaryButtonIconContainer: {
+    ...Buttons.circle.base,
   },
   secondaryButtonText: {
     ...Typography.button.secondary,
