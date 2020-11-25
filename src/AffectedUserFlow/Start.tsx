@@ -56,7 +56,7 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
         <TouchableOpacity
           style={style.button}
           onPress={handleOnPressContinue}
-          accessibilityLabel={t("common.start")}
+          accessibilityLabel={t("common.continue")}
         >
           <Text style={style.buttonText}>{t("common.continue")}</Text>
           <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
@@ -64,7 +64,7 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
         <TouchableOpacity
           style={style.secondaryButton}
           onPress={handleOnPressSecondaryButton}
-          accessibilityLabel={t("common.start")}
+          accessibilityLabel={t("export.intro.what_is_a")}
         >
           <View style={style.secondaryButtonIconContainer}>
             <SvgXml
