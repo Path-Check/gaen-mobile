@@ -11,15 +11,17 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
 import { Spacing, Colors, Typography, Buttons } from "../styles"
 import { Icons, Images } from "../assets"
 
-export const ExportIntro: FunctionComponent = () => {
+export const AffectedUserFlowIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { healthAuthorityName } = useCustomCopy()
 
   const handleOnPressNext = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
@@ -38,19 +40,27 @@ export const ExportIntro: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("export.person_and_health_expert")}
         />
-        <Text style={style.header}>{t("export.start_header_bluetooth")}</Text>
+        <Text style={style.headerText}>{t("export.intro.header")}</Text>
+        <Text style={style.bodyText}>
+          {t("export.intro.body1", { healthAuthorityName })}
+        </Text>
+        <Text style={style.bodyText}>
+          {t("export.intro.body2", { healthAuthorityName })}
+        </Text>
       </View>
       <TouchableOpacity
         style={style.button}
         onPress={handleOnPressNext}
         accessibilityLabel={t("common.start")}
       >
-        <Text style={style.buttonText}>{t("common.start")}</Text>
+        <Text style={style.buttonText}>{t("common.continue")}</Text>
         <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
     </ScrollView>
   )
 }
+
+const imageSize = 150
 
 const style = StyleSheet.create({
   container: {
@@ -65,14 +75,18 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   image: {
-    width: "100%",
-    height: 300,
     resizeMode: "contain",
+    width: imageSize,
+    height: imageSize,
     marginBottom: Spacing.small,
   },
-  header: {
+  headerText: {
     ...Typography.header.x60,
     marginBottom: Spacing.xLarge,
+  },
+  bodyText: {
+    ...Typography.body.x20,
+    marginBottom: Spacing.medium,
   },
   button: {
     ...Buttons.primary.base,
@@ -83,4 +97,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ExportIntro
+export default AffectedUserFlowIntro

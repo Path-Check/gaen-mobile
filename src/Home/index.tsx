@@ -116,7 +116,7 @@ const ReportTestResult: FunctionComponent = () => {
         {t("home.have_a_positive_test")}
       </Text>
       <Text style={style.sectionBodyText}>{t("home.if_you_have_a_code")}</Text>
-      <SectionButton text={t("home.report_result")} />
+      <SectionButton text={t("home.submit_code")} />
     </TouchableOpacity>
   )
 }
