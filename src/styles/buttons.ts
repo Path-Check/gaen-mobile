@@ -78,14 +78,21 @@ export const outlined: Record<Outlined, ViewStyle> = {
 
 // Secondary
 
-type Secondary = "base"
+type Secondary = "base" | "leftIcon"
 const secondaryBase: ViewStyle = {
   ...base,
   ...heightThin,
   backgroundColor: Colors.transparent.invisible,
 }
+const secondaryLeftIcon: ViewStyle = {
+  ...secondaryBase,
+  maxWidth: 260,
+  alignSelf: "center",
+  justifyContent: "space-between",
+}
 export const secondary: Record<Secondary, ViewStyle> = {
   base: secondaryBase,
+  leftIcon: secondaryLeftIcon,
 }
 
 // Fixed Bottom
@@ -135,4 +142,18 @@ const cardBase: ViewStyle = {
 }
 export const card: Record<Card, ViewStyle> = {
   base: cardBase,
+}
+
+// Circle
+const circleBase: ViewStyle = {
+  height: Spacing.xxLarge,
+  width: Spacing.xxLarge,
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: Outlines.borderRadiusMax,
+  backgroundColor: Colors.secondary.shade50,
+}
+type Circle = "base"
+export const circle: Record<Circle, ViewStyle> = {
+  base: circleBase,
 }

@@ -23,6 +23,7 @@ export interface Configuration {
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthorityPrivacyPolicyUrl: string
+  healthAuthorityVerificationCodeInfoUrl: string | null
   measurementSystem: MeasurementSystem
   minimumAge: string
   minimumPhoneDigits: number
@@ -49,6 +50,7 @@ const initialState: Configuration = {
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityPrivacyPolicyUrl: "",
+  healthAuthorityVerificationCodeInfoUrl: null,
   measurementSystem: "Imperial" as const,
   minimumAge: "18",
   minimumPhoneDigits: 0,
@@ -61,14 +63,18 @@ const ConfigurationContext = createContext<Configuration>(initialState)
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
     AUTHORITY_ADVICE_URL: healthAuthorityAdviceUrl,
-    AUTHORITY_COVID_DATA_URL: healthAuthorityCovidDataUrl,
     EMERGENCY_PHONE_NUMBER: emergencyPhoneNumber,
-    EULA_URL: eulaUrl,
     FIND_A_TEST_CENTER_URL: findATestCenterUrl,
     LEARN_MORE_URL: healthAuthorityLearnMoreUrl,
-    LEGAL_PRIVACY_POLICY_URL: legalPrivacyPolicyUrl,
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
+
+  const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
+  const healthAuthorityEulaUrl = env.EULA_URL || null
+  const healthAuthorityLegalPrivacyPolicyUrl =
+    env.LEGAL_PRIVACY_POLICY_URL || null
+  const healthAuthorityVerificationCodeInfoUrl =
+    env.VERIFICATION_CODE_INFO_URL || null
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
@@ -114,10 +120,11 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityCovidDataUrl,
-        healthAuthorityEulaUrl: eulaUrl || null,
+        healthAuthorityEulaUrl,
         healthAuthorityLearnMoreUrl,
-        healthAuthorityLegalPrivacyPolicyUrl: legalPrivacyPolicyUrl || null,
+        healthAuthorityLegalPrivacyPolicyUrl,
         healthAuthorityPrivacyPolicyUrl,
+        healthAuthorityVerificationCodeInfoUrl,
         measurementSystem,
         minimumAge,
         minimumPhoneDigits,

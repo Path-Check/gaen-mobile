@@ -6,6 +6,7 @@ import Start from "../AffectedUserFlow/Start"
 import CodeInput from "../AffectedUserFlow/CodeInput/CodeInputScreen"
 import Complete from "../AffectedUserFlow/Complete"
 import PublishConsent from "../AffectedUserFlow/PublishConsent/PublishConsentScreen"
+import VerificationCodeInfo from "../AffectedUserFlow/VerificationCodeInfo"
 import { AffectedUserFlowStackScreen, AffectedUserFlowStackScreens } from "."
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
@@ -26,6 +27,14 @@ const AffectedUserStack: FunctionComponent = () => {
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserStart}
           component={Start}
+          options={{
+            ...Headers.headerMinimalOptions,
+            headerLeft: applyHeaderLeftBackButton(),
+          }}
+        />
+        <Stack.Screen
+          name={AffectedUserFlowStackScreens.VerificationCodeInfo}
+          component={VerificationCodeInfo}
           options={{
             ...Headers.headerMinimalOptions,
             headerLeft: applyHeaderLeftBackButton(),

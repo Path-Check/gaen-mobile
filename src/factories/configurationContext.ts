@@ -20,6 +20,7 @@ export default Factory.define<Configuration>(() => ({
   healthAuthorityEulaUrl: "healthAuthorityEulaUrl",
   healthAuthorityPrivacyPolicyUrl: "authorityPrivacyPolicyUrl",
   healthAuthorityLegalPrivacyPolicyUrl: "authorityLegalPrivacyPolicyUrl",
+  healthAuthorityVerificationCodeInfoUrl: "authorityVerificationCodeInfoUrl",
   measurementSystem: "Imperial",
   minimumAge: "18",
   minimumPhoneDigits: 0,

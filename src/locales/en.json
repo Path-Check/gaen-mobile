@@ -71,6 +71,10 @@
     "title": "Unknown Error"
   },
   "export": {
+    "verification_code_info_header": "Verification Code Info",
+    "verification_code_info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result. It is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf the verification code you have cannot be submitted, you will need to get a new one from your health authority.",
+    "how_do_i_get_header": "How do I get a verification code?",
+    "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
     "code_input_body_bluetooth": "Enter your verification code",
     "code_input_button_cancel": "Cancel",
     "code_input_placeholder": "Enter Code",
@@ -95,6 +99,12 @@
       "unknown_code_verification_error": "Try a different code",
       "verification_code_used": "Verification code has already been used"
     },
+    "intro": {
+      "what_is_a": "What is a verification code?",
+      "header": "Do you have your verification code?",
+      "body1": "If you have recieved a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
+      "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing."
+    },
     "never_mind_button_title": "Never mind",
     "person_and_health_expert": "A person talking to a health expert",
     "publish_consent_title_bluetooth": "Notify others in your community",
@@ -112,9 +122,11 @@
         "no_token_for_existing_keys_title": "Attempt to submit existing keys"
       }
     },
-    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community"
+    "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
+    "submit_code": "Submit Code"
   },
   "exposure_history": {
+    "more_info": "Learn more about Exposure Notifications",
     "check_for_exposures": "Check for exposures",
     "exposure_detail": {
       "2m_apart": "2m apart",
@@ -164,6 +176,9 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "verification_code_card": {
+      "more_info": "What is a verification code?"
+    },
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
@@ -187,8 +202,8 @@
     "enter_symptoms": "Enter symptoms",
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
-    "have_a_positive_test": "Have a verification code?",
-    "if_you_have_a_code": "Report your result to help keep your community safe.",
+    "have_a_positive_test": "Have a positive test?",
+    "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
     "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. {{applicationName}} does NOT track or keep a record of your location.",
     "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
     "not_feeling_well": "Not feeling well?",
@@ -201,7 +216,7 @@
       "unauthorized_error_message_ios": "Open Settings, then navigate to the Exposure Notifications settings for this app. Ensure Share Exposure Information is turned on, then press 'Set As Active Region'.",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "report_result": "Report Result",
+    "submit_code": "Submit code",
     "request_call": "Request Call",
     "take_assessment": "Take Assessment",
     "to_submit_your_test": "To submit your positive test result, you'll need to get your verification code from a contact tracer."

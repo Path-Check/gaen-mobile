@@ -22,7 +22,7 @@ import {
   Typography,
   Colors,
   Affordances,
-  Outlines,
+  Iconography,
 } from "../../styles"
 
 type Posix = number
@@ -100,12 +100,14 @@ const History: FunctionComponent<HistoryProps> = ({
             <TouchableOpacity
               onPress={handleOnPressMoreInfo}
               style={style.moreInfoButton}
+              accessibilityRole="button"
+              accessibilityLabel={t("exposure_history.more_info")}
             >
               <SvgXml
                 xml={Icons.QuestionMark}
-                accessible
-                accessibilityLabel={t("label.question_icon")}
-                style={style.moreInfoButtonIcon}
+                fill={Colors.primary.shade125}
+                width={Iconography.xxxSmall}
+                height={Iconography.xxxSmall}
               />
             </TouchableOpacity>
           </View>
@@ -157,16 +159,7 @@ const style = StyleSheet.create({
     marginRight: Spacing.medium,
   },
   moreInfoButton: {
-    height: Spacing.xxLarge,
-    width: Spacing.xxLarge,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: Outlines.borderRadiusMax,
-    backgroundColor: Colors.secondary.shade50,
-  },
-  moreInfoButtonIcon: {
-    minHeight: Spacing.xSmall,
-    minWidth: Spacing.xSmall,
+    ...Buttons.circle.base,
   },
   subheaderRow: {
     marginTop: Spacing.xxxSmall,

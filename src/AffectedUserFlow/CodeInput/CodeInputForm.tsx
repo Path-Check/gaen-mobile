@@ -26,7 +26,14 @@ import {
 } from "../../navigation"
 import Logger from "../../logger"
 
-import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
+import {
+  Spacing,
+  Forms,
+  Colors,
+  Typography,
+  Buttons,
+  Iconography,
+} from "../../styles"
 import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
@@ -65,6 +72,10 @@ const CodeInputForm: FunctionComponent = () => {
 
   const handleOnToggleFocus = () => {
     setIsFocused(!isFocused)
+  }
+
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
   }
 
   const handleOnPressSubmit = async () => {
@@ -218,6 +229,23 @@ const CodeInputForm: FunctionComponent = () => {
             fill={isDisabled ? Colors.text.primary : Colors.neutral.white}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={style.secondaryButton}
+          onPress={handleOnPressSecondaryButton}
+          accessibilityLabel={t("common.start")}
+        >
+          <View style={style.secondaryButtonIconContainer}>
+            <SvgXml
+              xml={Icons.QuestionMark}
+              fill={Colors.primary.shade125}
+              width={Iconography.xxxSmall}
+              height={Iconography.xxxSmall}
+            />
+          </View>
+          <Text style={style.secondaryButtonText}>
+            {t("export.intro.what_is_a")}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
@@ -267,9 +295,11 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.primary.base,
+    marginBottom: Spacing.small,
   },
   buttonDisabled: {
     ...Buttons.primary.disabled,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -278,6 +308,15 @@ const style = StyleSheet.create({
   buttonDisabledText: {
     ...Typography.button.primaryDisabled,
     marginRight: Spacing.small,
+  },
+  secondaryButton: {
+    ...Buttons.secondary.leftIcon,
+  },
+  secondaryButtonIconContainer: {
+    ...Buttons.circle.base,
+  },
+  secondaryButtonText: {
+    ...Typography.button.secondaryLeftIcon,
   },
 })
 

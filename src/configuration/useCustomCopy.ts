@@ -12,6 +12,8 @@ interface CustomCopy {
   about?: string
   legal?: string
   healthAuthorityName: string
+  verificationCodeInfo?: string
+  verificationCodeHowDoIGet?: string
 }
 
 const customCopyByLocale = copy as Resource
