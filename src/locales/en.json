@@ -71,14 +71,17 @@
     "title": "Unknown Error"
   },
   "export": {
-    "verification_code_info_header": "Verification Code Info",
-    "verification_code_info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result. It is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf the verification code you have cannot be submitted, you will need to get a new one from your health authority.",
-    "how_do_i_get_header": "How do I get a verification code?",
-    "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
-    "code_input_body_bluetooth": "Enter your verification code",
+    "verification_code_info": {
+      "info_header": "What is a verification code?",
+      "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
+      "how_do_i_get_header": "How do I get a verification code?",
+      "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
+      "what_happens_header": "What happens when I submit my code?",
+      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared."
+    },
+    "enter_verification_code": "Enter verification code",
     "code_input_button_cancel": "Cancel",
-    "code_input_placeholder": "Enter Code",
-    "code_input_title_bluetooth": "Verify your diagnosis",
+    "code": "Code",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
