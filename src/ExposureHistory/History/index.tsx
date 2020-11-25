@@ -22,7 +22,6 @@ import {
   Typography,
   Colors,
   Affordances,
-  Outlines,
   Iconography,
 } from "../../styles"
 

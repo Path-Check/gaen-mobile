@@ -12,6 +12,7 @@ import { useCustomCopy } from "../configuration/useCustomCopy"
 import { SvgXml } from "react-native-svg"
 
 import { Text } from "../components"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Spacing, Typography, Colors, Buttons } from "../styles"
 import { Icons } from "../assets"
@@ -20,6 +21,7 @@ const MoreInfo: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const { healthAuthorityName, verificationCode } = useCustomCopy()
+  const { healthAuthorityVerificationCodeInfoUrl } = useConfigurationContext()
 
   const infoText =
     verificationCode?.info ||
@@ -29,7 +31,10 @@ const MoreInfo: FunctionComponent = () => {
     t("export.how_do_i_get_body", { healthAuthorityName })
 
   const handleOnPressLink = () => {
-    Linking.openUrl("")
+    const url = healthAuthorityVerificationCodeInfoUrl
+    if (url) {
+      Linking.openURL(url)
+    }
   }
 
   return (
@@ -50,10 +55,12 @@ const MoreInfo: FunctionComponent = () => {
           </Text>
           <Text style={style.contentText}>{howDoIGetText}</Text>
         </View>
-        <TouchableOpacity style={style.button} onPress={handleOnPressLink}>
-          <Text style={style.buttonText}>{t("common.learn_more")}</Text>
-          <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
-        </TouchableOpacity>
+        {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
+          <TouchableOpacity style={style.button} onPress={handleOnPressLink}>
+            <Text style={style.buttonText}>{t("common.learn_more")}</Text>
+            <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </>
   )

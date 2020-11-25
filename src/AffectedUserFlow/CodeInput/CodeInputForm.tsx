@@ -311,18 +311,13 @@ const style = StyleSheet.create({
     marginRight: Spacing.small,
   },
   secondaryButton: {
-    ...Buttons.secondary.base,
-    maxWidth: Layout.screenWidth * 0.65,
-    alignSelf: "center",
-    justifyContent: "space-between",
+    ...Buttons.secondary.leftIcon,
   },
   secondaryButtonIconContainer: {
     ...Buttons.circle.base,
   },
   secondaryButtonText: {
-    ...Typography.button.secondary,
-    textAlign: "left",
-    maxWidth: "90%",
+    ...Typography.button.secondaryLeftIcon,
   },
 })
 

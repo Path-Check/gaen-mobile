@@ -228,6 +228,7 @@ type Button =
   | "fixedBottomDisabled"
   | "outlined"
   | "secondary"
+  | "secondaryLeftIcon"
   | "card"
   | "listItem"
   | "anchorLink"
@@ -255,6 +256,12 @@ export const button: Record<Button, TextStyle> = {
   secondary: {
     ...baseButtonText,
     color: Colors.primary.shade100,
+  },
+  secondaryLeftIcon: {
+    ...baseButtonText,
+    color: Colors.primary.shade100,
+    textAlign: "left",
+    maxWidth: "90%",
   },
   card: {
     ...body.x20,

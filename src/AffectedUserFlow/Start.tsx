@@ -14,14 +14,7 @@ import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
-import {
-  Spacing,
-  Colors,
-  Typography,
-  Buttons,
-  Iconography,
-  Layout,
-} from "../styles"
+import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
 export const AffectedUserFlowIntro: FunctionComponent = () => {
@@ -90,7 +83,7 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
   )
 }
 
-const imageSize = 150
+const imageSize = 140
 
 const style = StyleSheet.create({
   container: {
@@ -100,7 +93,6 @@ const style = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
-    paddingTop: Spacing.huge,
     paddingBottom: Spacing.xxLarge,
     backgroundColor: Colors.background.primaryLight,
   },
@@ -108,11 +100,11 @@ const style = StyleSheet.create({
     resizeMode: "contain",
     width: imageSize,
     height: imageSize,
-    marginBottom: Spacing.small,
+    marginBottom: Spacing.xSmall,
   },
   headerText: {
     ...Typography.header.x60,
-    marginBottom: Spacing.xLarge,
+    marginBottom: Spacing.small,
   },
   bodyText: {
     ...Typography.body.x30,
@@ -127,18 +119,13 @@ const style = StyleSheet.create({
     marginRight: Spacing.small,
   },
   secondaryButton: {
-    ...Buttons.secondary.base,
-    maxWidth: Layout.screenWidth * 0.65,
-    alignSelf: "center",
-    justifyContent: "space-between",
+    ...Buttons.secondary.leftIcon,
   },
   secondaryButtonIconContainer: {
     ...Buttons.circle.base,
   },
   secondaryButtonText: {
-    ...Typography.button.secondary,
-    textAlign: "left",
-    maxWidth: "90%",
+    ...Typography.button.secondaryLeftIcon,
   },
 })
 
