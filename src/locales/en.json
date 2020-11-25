@@ -271,6 +271,8 @@
       "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
+    "location_services_already_active": "Location services are active",
+    "proximity_tracing_already_active": "Exposure notifications are active",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted after 14 days.",
     "proximity_tracing_button": "Activate Exposure Notifications",
