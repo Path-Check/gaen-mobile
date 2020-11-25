@@ -20,14 +20,18 @@ import { Icons } from "../assets"
 const MoreInfo: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
-  const { healthAuthorityName, verificationCode } = useCustomCopy()
+  const {
+    healthAuthorityName,
+    verificationCodeInfo,
+    verificationCodeHowDoIGet,
+  } = useCustomCopy()
   const { healthAuthorityVerificationCodeInfoUrl } = useConfigurationContext()
 
-  const infoText =
-    verificationCode?.info ||
+  const verificationCodeInfoText =
+    verificationCodeInfo ||
     t("export.verification_code_info_body", { healthAuthorityName })
-  const howDoIGetText =
-    verificationCode?.howDoIGet ||
+  const verificationCodeHowDoIGetText =
+    verificationCodeHowDoIGet ||
     t("export.how_do_i_get_body", { healthAuthorityName })
 
   const handleOnPressLink = () => {
@@ -47,13 +51,13 @@ const MoreInfo: FunctionComponent = () => {
           <Text style={style.headerText}>
             {t("export.verification_code_info_header")}
           </Text>
-          <Text style={style.contentText}>{infoText}</Text>
+          <Text style={style.contentText}>{verificationCodeInfoText}</Text>
         </View>
         <View style={style.section}>
           <Text style={style.headerText}>
             {t("export.how_do_i_get_header")}
           </Text>
-          <Text style={style.contentText}>{howDoIGetText}</Text>
+          <Text style={style.contentText}>{verificationCodeHowDoIGetText}</Text>
         </View>
         {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
           <TouchableOpacity style={style.button} onPress={handleOnPressLink}>

@@ -31,6 +31,12 @@ The supported values are:
   `The app_name app is developed by the health_authority_name.`
 - `legal`: The app will display this copy on the main body of text for the legal screen,
   by default, the app will display the store name of the application.
+- `verificationCodeInfo`: The app will display this copy in the first section of
+  the verification code info screen. It should contain general information about
+  the verification code. The app provides a default value.
+- `verificationCodeHowDoIGet`: The app will display this copy in the second section of
+  the verification code info screen. It should contain information about how the
+  user can get a verification code. The app provides a default value.
 
 The `json` structure is:
 
@@ -42,6 +48,8 @@ interface CustomCopy {
   about?: string
   legal?: string
   healthAuthorityName: string
+  verificationCodeInfo?: string
+  verificationCodeHowDoIGet?: string
 }
 ```
 
@@ -51,13 +59,15 @@ interface CustomCopy {
     "healthAuthorityName": "Health Authority",
     "welcome_message": "",
     "about": "",
-    "legal":,
+    "legal": "",
+    "verificationCodeInfo": "",
+    "verificationCodeHowDoIGet": ""
   },
   "es_PR": {
     "healthAuthorityName": "Autoridad sanitaria",
     "welcome_message": "",
     "about": "",
-    "legal": "",
+    "legal": ""
   }
 }
 ```
@@ -67,14 +77,12 @@ The application will follow the following steps to determine the correct copy:
 1. If the locale and the key for the custom copy exist, use that value.
 
 2. If the locale exists, but the key for that locale does not default to
-the 'en' custom copy key value.
+   the 'en' custom copy key value.
 
 3. If the en custom copy exits, but the key does not exist, return
-undefined. (The custom copy translation function expects callers to provide either a default value or to provide null handling in this case)
+   undefined. (The custom copy translation function expects callers to provide either a default value or to provide null handling in this case)
 
 4. If the en custom copy does not exist at all, return undefined. (The custom copy translation function expects callers to provide either a default value or to provide null handling in this case)
-
-
 
 ### Custom Links
 
@@ -84,7 +92,6 @@ the languages supported, defined by the `SUPPORTED_LOCALES` environment
 variable.
 
 The app will display each link in the same order that the links are in the config file. If config provides no value for the user's current locale, the app will not display the link.
-
 
 The supported screens for links are:
 
@@ -131,7 +138,6 @@ The `JSON` structure should be:
 
 An empty `""` value on a particular locale will result in the link not being
 displayed when that language is the active one.
-
 
 ### Brand Colors
 
