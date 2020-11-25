@@ -1,8 +1,21 @@
 ## Developer Setup Guide
 
-First, run `yarn install` in the root of the project. Then run the appropriate setup script for your system. This will install relevant packages, walk through Android Studio configuration, etc.
+This project is built using [React Native](https://reactnative.dev/).
+
+If this is your first React Native project, visit the React Native team's
+[Getting Started Docs](https://reactnative.dev/docs/getting-started) for
+instructions on how to get set up. Note that we are not using Expo, so you
+should review docs relevant to using [React Native
+Cli](https://reactnative.dev/docs/environment-setup) only.
+
+
+### Getting Started
+
+First, run `yarn install` in the root of the project.
 
 **Note:** You will still need to [configure an Android Virtual Device (AVD)](https://developer.android.com/studio/run/managing-avds#createavd) after running the script.
+
+Second, run the setup script for your developer environment:
 
 #### Linux/MacOS
 
