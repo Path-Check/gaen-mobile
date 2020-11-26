@@ -55,7 +55,7 @@ const linking: LinkingOptions = {
   prefixes: ["pathcheck://"],
   config: {
     screens: {
-      ExposureHistoryFlow: "exposureHistory",
+      ExposureHistory: "exposureHistory",
     },
   },
 }
