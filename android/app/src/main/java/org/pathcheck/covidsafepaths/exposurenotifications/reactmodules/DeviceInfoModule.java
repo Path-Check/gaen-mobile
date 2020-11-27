@@ -61,11 +61,6 @@ public class DeviceInfoModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void isBluetoothEnabled(final Promise promise) {
-    promise.resolve(BluetoothHelper.Companion.isBluetoothEnabled());
-  }
-
-  @ReactMethod
   public void isLocationEnabled(final Promise promise) {
     promise.resolve(LocationHelper.Companion.isLocationEnabled(getReactApplicationContext()));
   }
