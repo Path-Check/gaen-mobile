@@ -14,7 +14,7 @@ RCT_REMAP_METHOD(getApplicationName,
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)@"CFBundleDisplayName"];
-  return resolve(applicationName);
+  resolve(applicationName);
 }
 
 RCT_REMAP_METHOD(getBuildNumber,
@@ -22,7 +22,7 @@ RCT_REMAP_METHOD(getBuildNumber,
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSString *buildNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
-  return resolve(buildNumber);
+  resolve(buildNumber);
 }
 
 RCT_REMAP_METHOD(getVersion,
@@ -30,18 +30,7 @@ RCT_REMAP_METHOD(getVersion,
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-  return resolve(version);
-}
-
-RCT_REMAP_METHOD(isBluetoothEnabled,
-                 isBluetoothEnabledWithResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-  if ([[ExposureManager shared] isBluetoothEnabled]) {
-    return resolve(@"true");
-  } else {
-    return resolve(@"false");
-  }
+  resolve(version);
 }
 
 @end

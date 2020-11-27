@@ -590,37 +590,6 @@ class ExposureManagerUnitTests: XCTestCase {
                    ExposureManager.ExposureNoticationStatus.unauthorized)
   }
 
-  func testBluetoothStatus() {
-
-    let mockENManager = ENManagerMock()
-    let exposureManager = ExposureManager(exposureNotificationManager: mockENManager)
-
-    mockENManager.exposureNotificationStatusHandler = {
-      return .bluetoothOff
-    }
-    XCTAssertFalse(exposureManager.isBluetoothEnabled)
-    mockENManager.exposureNotificationStatusHandler = {
-      return .active
-    }
-    XCTAssertTrue(exposureManager.isBluetoothEnabled)
-    mockENManager.exposureNotificationStatusHandler = {
-      return .disabled
-    }
-    XCTAssertTrue(exposureManager.isBluetoothEnabled)
-    mockENManager.exposureNotificationStatusHandler = {
-      return .paused
-    }
-    XCTAssertTrue(exposureManager.isBluetoothEnabled)
-    mockENManager.exposureNotificationStatusHandler = {
-      return .restricted
-    }
-    XCTAssertTrue(exposureManager.isBluetoothEnabled)
-    mockENManager.exposureNotificationStatusHandler = {
-      return .unknown
-    }
-    XCTAssertTrue(exposureManager.isBluetoothEnabled)
-  }
-
   func testGetCurrentENPermissionsStatus() {
     let mockENManager = ENManagerMock()
     mockENManager.exposureNotificationStatusHandler = {

@@ -99,19 +99,25 @@ class MiscelaneousUnitTests: XCTestCase {
   func testFetchLastDetectionDate() {
     let userState = UserState()
     let exposureManager = defaultExposureManager(enAPIVersion: .v1, userState: userState)
+    let rejectExpectation = self.expectation(description: "reject is called")
+    let resolveExpectation = self.expectation(description: "resolve is called")
 
-    // Last detection date should initially be nil
-    exposureManager.fetchLastDetectionDate { (posixDate, error) in
-      XCTAssertNil(posixDate)
-      XCTAssertEqual(error?.errorCode, ExposureManagerErrorCode.detectionNeverPerformed.rawValue)
-    }
+    exposureManager.fetchLastDetectionDate(resolve: {(posixDate) in
+      XCTFail()
+    }, reject: {(_, _, error) in
+      rejectExpectation.fulfill()
+    })
 
     let date = Date()
     userState.lastExposureCheckDate = date
-    exposureManager.fetchLastDetectionDate { (posixDate, error) in
-      XCTAssertNil(error)
-      XCTAssertEqual(posixDate, NSNumber(value: date.posixRepresentation))
-    }
+
+    exposureManager.fetchLastDetectionDate(resolve: {(_) in
+      resolveExpectation.fulfill()
+    }, reject: {(_, _, _) in
+      XCTFail()
+    })
+
+    wait(for: [rejectExpectation, resolveExpectation], timeout: 0)
   }
 
 }

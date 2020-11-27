@@ -4,8 +4,6 @@
 // Notification/Event Names
 NSString *const onEnabledStatusUpdated = @"onEnabledStatusUpdated";
 NSString *const onExposuresChanged = @"onExposureRecordUpdated";
-NSString *const onBluetoothStatusUpdated = @"onBluetoothStatusUpdated";
-NSString *const onLocationStatusUpdated = @"onLocationStatusUpdated";
 
 @interface ExposureEventEmitter : RCTEventEmitter <RCTBridgeModule>
 @end
@@ -33,8 +31,6 @@ RCT_EXPORT_MODULE();
   return @[
     onExposuresChanged,
     onEnabledStatusUpdated,
-    onBluetoothStatusUpdated,
-    onLocationStatusUpdated
   ];
 }
 
