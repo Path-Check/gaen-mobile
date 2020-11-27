@@ -73,7 +73,6 @@
   "export": {
     "code_input_body_bluetooth": "Ntaus koj tus zauv verification code",
     "code_input_button_cancel": "Rho Tawm",
-    "code_input_placeholder": "Ntaus tus zauv code",
     "code_input_title_bluetooth": "Xyuas seb koj ntsuas tau li cas",
     "complete_body_bluetooth": "Koj yuav pab tswj tau tus kab mob no thiab tiv thaiv lwm tus nyob hauv koj zos.",
     "complete_title": "Ua tsaug koj pab koom tes kom koj lub zos nyob nyab xeeb!",
@@ -201,7 +200,6 @@
       "unauthorized_error_message_ios": "Yog xav taws Kev Ceeb Toom Raug Mob, mus rau ntu Kev Ceeb Toom Raug Mob nyob rau qhov Settings thiab Share Exposure Information thiab tso tias yog Active Region nyob rau {{applicationName}}",
       "unauthorized_error_title": "Taws Kev Ceeb Toom Raug Mob"
     },
-    "report_result": "Qhia tawm koj kuaj tau li cas",
     "request_call": "Thov kom lawv hu tuaj rau koj",
     "take_assessment": "Mus teb ib co lus nug ntsuas",
     "to_submit_your_test": "Yog xav qhia tawm koj li kev kuaj mob positive, tus neeg soj qab cov neeg mus kis mob yuav tsum muab ib tus zauv code rau koj."

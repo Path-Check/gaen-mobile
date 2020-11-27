@@ -18,6 +18,9 @@
     "privacy_policy": "Política de Privacidade"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Habilite o Bluetooth"
+    },
     "privacy_policy": "Política de Privacidade",
     "terms_header_title": "Termos de uso"
   },

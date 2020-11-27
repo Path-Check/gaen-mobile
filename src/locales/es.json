@@ -34,6 +34,9 @@
     "home": "Inicio"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Habilitar Bluetooth"
+    },
     "notification_header": "¿Desea recibir notificaciones cuando pueda haberse cruzado con el virus?",
     "privacy_policy": "Política de privacidad",
     "terms_header_title": "Condiciones de uso"

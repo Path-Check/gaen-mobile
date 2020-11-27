@@ -27,6 +27,9 @@
     "more_info": "Viac informácií"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Povoliť Bluetooth"
+    },
     "privacy_policy": "Ochrana osobných údajov",
     "terms_header_title": "Podmienky používania"
   },

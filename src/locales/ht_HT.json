@@ -132,6 +132,9 @@
     "more_info": "Plis enfòmasyon"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Aktive Bluetooth"
+    },
     "activation_header_title": "Enstalasyon Aplikasyon",
     "app_setup_complete_body": "{{applicationName}} aktif. Mèsi pou ede kraze chèn enfeksyon an.",
     "app_setup_complete_header": "Enstalasyon Aplikasyon Enkonplè",

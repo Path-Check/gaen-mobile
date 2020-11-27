@@ -73,7 +73,6 @@
   "export": {
     "code_input_body_bluetooth": "Ingrese su código de verificación",
     "code_input_button_cancel": "Cancelar",
-    "code_input_placeholder": "Introducir código",
     "code_input_title_bluetooth": "Verifique su diagnóstico",
     "complete_body_bluetooth": "Está ayudando a contener la propagación del virus y a proteger a otros en tu comunidad.",
     "complete_title": "¡Gracias por mantener segura a su comunidad!",
@@ -201,7 +200,6 @@
       "unauthorized_error_message_ios": "Para habilitar los avisos de exposición vaya a la sección de Avisos de exposición, Configuración y Compartir Información de Exposición y establezca la Región Activa en {{applicationName}}",
       "unauthorized_error_title": "Habilitar Avisos de Exposición"
     },
-    "report_result": "Informar Resultado",
     "request_call": "Solicitar llamada",
     "take_assessment": "Tomar evaluación",
     "to_submit_your_test": "Para obtener el código de resultado de la prueba, deberá hablar con un rastreador de contactos."
@@ -226,6 +224,9 @@
     "symptom_history": "Comprobador de síntomas"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Habilitar el Bluetooth"
+    },
     "activation_header_title": "Configuración de la aplicación",
     "app_setup_complete_body": "{{applicationName}} está activo. Gracias por ayudar a romper la cadena de contagios.",
     "app_setup_complete_header": "¡Configuración de la aplicación completada!",
@@ -387,6 +388,7 @@
       "covid19_self_assessment": "Autoevaluación de COVID-19",
       "find_out_how_to_care": "Averigüe cómo cuidar de usted mismo y de los demás después de un contacto cercano con alguien positivo para COVID-19",
       "if_this_is": "Si se trata de una emergencia, llame al {{emergencyPhoneNumber}}",
+      "learn_more": "Obtenga más información sobre el autoverificador de coronavirus de los Centros para el control y la prevención de enfermedades (CDC) en el que se basa esta autoevaluación",
       "this_is_based_on": "Esto se basa en la guía más reciente del CDC y puede actualizarse con el tiempo a medida que aprendamos sobre cómo se propaga el virus y la enfermedad que causa.",
       "this_is_not_intended": "No es un diagnóstico ni un tratamiento oficial",
       "you_are_a_resident": "Usted es residente de la comunidad apoyado por {{ healthAuthorityName }}"

@@ -72,7 +72,6 @@
   "export": {
     "code_input_body_bluetooth": "Doğrulama kodunuzu gir",
     "code_input_button_cancel": "İptal et",
-    "code_input_placeholder": "Kodu gir",
     "code_input_title_bluetooth": "Tanıyı doğrula",
     "complete_body_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsun",
     "complete_title": "Toplumun güvenliğini sağlamaya yardımcı olduğun için teşekkürler",
@@ -194,7 +193,6 @@
       "unauthorized_error_message_ios": "Maruz Kalma Bildirimlerini etkinleştirmek için Ayarlar'daki Maruz Kalma Bildirimi bölümüne git ve Maruz Kalma Bilgisini Paylaş ve Aktif Bölgeyi {{applicationName}} olarak ayarla.",
       "unauthorized_error_title": "Maruz Kalma Bildirimlerini Aç"
     },
-    "report_result": "Sonucu Bildir",
     "request_call": "Arama Talep Et",
     "take_assessment": "Değerlendirme Al",
     "to_submit_your_test": "Pozitif olan test sonucunu gönderebilmek için bir temas takipçisinden pozitif test sonucu kodunu alman gerekiyor."

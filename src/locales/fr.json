@@ -65,7 +65,6 @@
   "export": {
     "code_input_body_bluetooth": "Entrez votre code de vérification",
     "code_input_button_cancel": "Annuler",
-    "code_input_placeholder": "Entrez le code",
     "code_input_title_bluetooth": "Vérifiez votre diagnostic",
     "complete_body_bluetooth": "Vous contribuez à contenir la propagation du virus et à protéger les autres membres de votre communauté.",
     "complete_title": "Merci de protéger votre communauté!",
@@ -186,7 +185,6 @@
       "unauthorized_error_message_ios": "Pour activer les notifications d’exposition, accédez à la section Notification d’exposition dans Paramètres et partagez les informations d’exposition et définissez la région active sur {{applicationName}}",
       "unauthorized_error_title": "Activer les notifications d'exposition"
     },
-    "report_result": "Résultat du rapport",
     "request_call": "Demander un appel",
     "take_assessment": "Passer une évaluation",
     "to_submit_your_test": "Pour soumettre votre résultat de test positif, vous devrez obtenir votre code de résultat de test positif à partir d'un traceur de contact."

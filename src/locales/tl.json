@@ -129,7 +129,6 @@
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
     "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?",
-    "report_result": "Magpadala ng Mga Resulta",
     "to_submit_your_test": "Upang isumite ang iyong positibong resulta sa pagsubok, kakailanganin mong makuha ang iyong positibong code ng resulta ng pagsubok mula sa isang opisyal sa kalusugan."
   },
   "label": {
@@ -150,6 +149,9 @@
     "more_info": "Karagdagang Impormasyon"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Paganahin Ang Bluetooth"
+    },
     "activation_header_title": "Setup ng App",
     "app_setup_complete_body": "{{applicationName}} ay aktibo. Salamat sa iyong pagtulong na supilin ang paglaganap ng impeksyon.",
     "app_setup_complete_header": "Kumpleto ang Pag-setup ng App!",

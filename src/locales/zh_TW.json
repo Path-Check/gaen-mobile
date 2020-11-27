@@ -72,7 +72,6 @@
   "export": {
     "code_input_body_bluetooth": "輸入您的驗證碼",
     "code_input_button_cancel": "取消",
-    "code_input_placeholder": "輸入驗證碼",
     "code_input_title_bluetooth": "驗證您的診斷結果",
     "complete_body_bluetooth": "您正在協助遏止病毒的傳播並保護您社區的其他人。",
     "complete_title": "感謝您保護社區安全！",
@@ -197,7 +196,6 @@
       "unauthorized_error_message_ios": "若要啟用接近追蹤和接觸通知，請到“接觸通知設定”中的“接觸通知”部分，並將“啟動區域”設置為{{applicationName}}",
       "unauthorized_error_title": "啟用接近追蹤"
     },
-    "report_result": "報告結果",
     "request_call": "要求回電",
     "take_assessment": "進行檢測",
     "to_submit_your_test": "與防疫電話客服人員通話，以取得您的檢驗結果代碼。"

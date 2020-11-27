@@ -32,7 +32,6 @@
   "export": {
     "code_input_body_bluetooth": "確認コードを入力してください",
     "code_input_button_cancel": "キャンセル",
-    "code_input_placeholder": "タイプコード",
     "code_input_title_bluetooth": "診断を確認する",
     "complete_body_bluetooth": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
     "complete_title": "コミュニティを安全に守るためへのご協力ありがとう！",
@@ -137,7 +136,6 @@
       "unauthorized_error_message_ios": "感染リスク通知を有効にするには、[設定] および [感染リスク情報の共有] の [感染リスク通知] セクションに移動し、[アクティブ領域] を [%1$s:アプリケーション名] に設定します。",
       "unauthorized_error_title": "感染リスク通知を有効にする"
     },
-    "report_result": "結果を送信する",
     "to_submit_your_test": "陽性のテスト結果を提出するには、コンタクトトレーサから陽性のテスト結果コードを取得する必要があります。"
   },
   "label": {
