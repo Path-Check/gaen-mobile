@@ -45,6 +45,9 @@
     "more_info": "Więcej informacji"
   },
   "onboarding": {
+    "activate_exposure_notifications": {
+      "bluetooth_header": "Włącz Bluetooth"
+    },
     "privacy_policy": "Polityka prywatności",
     "terms_header_title": "Warunki korzystania"
   },

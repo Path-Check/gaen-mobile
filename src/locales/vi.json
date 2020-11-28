@@ -20,6 +20,7 @@
     "cancel": "Hủy",
     "close": "Đóng",
     "close_screen": "Tắt màn hình",
+    "confirm": "Xác nhận",
     "continue": "Tiếp tục",
     "done": "Hoàn tất",
     "edit": "Sửa",
@@ -32,6 +33,7 @@
     "off": "TẮT",
     "on": "BẬT",
     "save": "Lưu",
+    "select_language": "Chọn ngôn ngữ",
     "settings": "Mở Thiết Lập",
     "skip": "Bỏ qua",
     "something_went_wrong": "Đã có vấn đề",
@@ -45,11 +47,15 @@
     "cases_today": "Số ca hôm nay",
     "covid_coverage": "Phạm Vi Ảnh Hưởng của Covid",
     "covid_data": "Dữ Liệu COVID",
+    "daily_new_cases": "Ca mới hàng ngày",
     "deaths_today": "Số ca tử vong hôm nay",
     "down_from_last_week": "Từ tuần vừa qua",
     "error_getting_data": "Rất tiếc, chúng tôi không thể truy xuất dữ liệu về các ca COVID mới nhất đối với {{location}}.",
+    "infection_rate": "Tỉ lệ nhiễm bệnh",
     "new_cases": "Các Ca Mới",
     "past_7_days": "7 ngày qua",
+    "per_100k": "mỗi 100k",
+    "positive_test_rate": "Tỉ lệ xét nghiệm dương tính",
     "see_more": "Xem thêm",
     "source": "Nguồn: {{source}}",
     "spread_of_the_virus_in": "Sự lây lan của virut ở {{locationName}}",
@@ -67,7 +73,6 @@
   "export": {
     "code_input_body_bluetooth": "Nhập mã xác minh của bạn",
     "code_input_button_cancel": "Hủy",
-    "code_input_placeholder": "Nhập Mã",
     "code_input_title_bluetooth": "Xác minh chẩn đoán của bạn",
     "complete_body_bluetooth": "Bạn đang giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình.",
     "complete_title": "Cảm ơn bạn đã giúp bảo vệ cộng đồng của bạn!",
@@ -77,6 +82,8 @@
     "consent_button_title": "Tôi Hiểu và Đồng Ý",
     "consent_subheader_1": "Tại sao tôi nên chia sẻ?",
     "consent_subheader_2": "Cách hoạt động của nó?",
+    "consent_warning_message": "Tiếp tục sẽ vô hiệu mã xác minh của bạn. Nếu bạn muốn chia sẻ chẩn đoán dương tính của bạn trong tương lai, trước tiên bạn sẽ cần phải nhận một mã xác minh mới.",
+    "consent_warning_title": "Cảnh báo!",
     "enable_exposure_notifications_body": "Bạn phải cho phép thông báo tiếp xúc để báo cáo về một kết quả xét nghiệm dương tính.",
     "enable_exposure_notifications_title": "Cho phép thông báo tiếp xúc để tiếp tục",
     "error": {
@@ -87,6 +94,7 @@
       "unknown_code_verification_error": "Thử sử dụng một mã khác",
       "verification_code_used": "Mã xác minh đã được sử dụng"
     },
+    "never_mind_button_title": "Không sao",
     "person_and_health_expert": "Một người đang nói chuyện với một chuyên gia y tế",
     "publish_consent_title_bluetooth": "Thông báo cho những người khác trong cộng cồng của bạn",
     "publish_keys": {
@@ -164,6 +172,7 @@
       "location_disabled_error_message": "Để kích hoạt công nghệ Thông Báo Tiếp Xúc, hãy cho phép truy cập Định Vị trong ứng dụng Thiết Lập",
       "location_disabled_error_title": "Cho phép trong Thiết Lập",
       "location_header": "Định vị",
+      "location_subheader": "{{applicationName}} không bao giờ truy cập dữ liệu định vị của bạn và thiết bị của bạn không bao giờ bị theo dõi.",
       "proximity_tracing_header": "Thông Báo Tiếp Xúc",
       "share": "Chia sẻ {{applicationName}}",
       "share_message": "Tham khảo ứng dụng này {{applicationName}}, có có thể giúp chúng ta kiềm chế COVID-19! {{appDownloadLink}}",
@@ -174,10 +183,13 @@
     "call_emergency_services": "Gọi Dịch Vụ Cấp Cứu",
     "check_if_your_symptoms": "Nhập các triệu chứng của bạn và nhận khuyến cáo tức thời về cách đảm bảo an toàn.",
     "did_you_test_positive": "Bạn đã có xét nghiệm dương tính với COVID-19?",
+    "enter_symptoms": "Nhập triệu chứng",
     "fix": "Khắc phục vấn đề với {{technology}}",
     "get_more_info": "Nhận thêm thông tin về {{technology}}",
     "have_a_positive_test": "Bạn có mã kết quả xét nghiệm dương tính?",
     "if_you_have_a_code": "Báo cáo kết quả của bạn để giúp đảm bảo an toàn cho cộng đồng của bạn.",
+    "location_info_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
+    "location_info_subheader": "{{applicationName}} không theo dõi hay lưu hồ sơ về địa điểm của bạn",
     "not_feeling_well": "Bạn cảm thấy không khỏe?",
     "proximity_tracing_info_body_1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật Bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
@@ -188,7 +200,6 @@
       "unauthorized_error_message_ios": "Để bật Thông Báo Tiếp Xúc, vào phần Thông Báo Tiếp Xúc trong Thiết Lập và Chia Sẻ Thông Tin Tiếp Xúc và cài đặt Khu Vực Có Hiệu Lực thành {{applicationName}}",
       "unauthorized_error_title": "Bật Thông Báo Tiếp Xúc"
     },
-    "report_result": "Báo Cáo Kết Quả",
     "request_call": "Yêu Cầu Gọi",
     "take_assessment": "Tiến Hành Đánh Giá",
     "to_submit_your_test": "Để nhận mã kết quả xét nghiệm, bạn sẽ cần phải nói chuyện với một người truy dấu vết tiếp xúc."
@@ -284,6 +295,8 @@
     "privacy_policy": "Chính Sách về Quyền Riêng Tư",
     "share_anonymized_data": "Chia Sẻ Dữ Liệu Ẩn Danh",
     "share_anonymized_data_disclaimer": "Bằng việc tiếp tục, bạn đồng ý chia sẻ các câu trả lời ẩn danh đối với các câu hỏi tầm soát với {{healthAuthorityName}}",
+    "share_data_para_1": "Dữ liệu ẩn danh và tổng hợp về việc các cộng đồng đang sử dụng ứng dụng này như thế nào giúp Ủy Ban {{healthAuthorityName}} phân tích, hiểu và kiềm chế sự lây lan của COVID-19.",
+    "share_data_para_2": "Dữ liệu này không chứa thông tin nhận dạng cá nhân.",
     "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh",
     "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu",
     "you_are_sharing_data": "Bạn đang chia sẻ dữ liệu ẩn danh"
@@ -372,6 +385,7 @@
       "covid19_self_assessment": "Tự Đánh Giá COVID-19",
       "find_out_how_to_care": "Tìm hiểu cách tự chăm sóc và chăm sóc người khác sau khi tiếp xúc gần với một người dương tính với COVID-19",
       "if_this_is": "Nếu là trường hợp cấp cứu, hãy gọi số {{emergencyPhoneNumber}}",
+      "learn_more": "Tìm hiểu thêm về Công Cụ Tự Kiểm Tra Coronavirus của CDC làm cơ sở cho bản Tự Đánh Giá này",
       "this_is_based_on": "Thông tin này là dựa trên hướng dẫn mới nhất của CDC và có thể được cập nhật theo thời gian khi chúng tôi biết thêm thông tin về cách lây lan của virut và bệnh mà nó gây ra",
       "this_is_not_intended": "Thông tin này không nhằm mục đích chẩn đoán hay điều trị",
       "you_are_a_resident": "Bạn là một cư dân của cộng đồng được hỗ trợ bởi {{ healthAuthorityName }}"
@@ -395,9 +409,15 @@
   },
   "settings": {
     "data_deleted": "Đã xóa dữ liệu",
+    "delete_data_are_you_sure": "Bạn có chắc không?",
     "delete_data_disclosure1": "Khi bạn chạm vào nút \"Xóa Dữ Liệu Của Tôi\" ở bên dưới, ứng dụng sẽ xóa dữ liệu Lịch Sử Triệu Chứng được lưu trên điện thoại của bạn.",
     "delete_data_disclosure2": "Nút này không xóa dữ liệu được tạo hoặc thu thập bởi điện thoại của bạn cho Thông Báo Tiếp Xúc.\n\nBạn có thể xóa dữ liệu khác thông qua Thiết Lập của điện thoại.\n\n> Thiết Lập\n> Thông Báo Tiếp Xúc \n> Trạng Thái Ghi Nhật Ký Tiếp Xúc/Có Hiệu Lực \n> Xóa Nhật Ký Tiếp Xúc",
+    "delete_data_language_token": "Một mã token lưu trên thiết bị của bạn sẽ lưu ưu tiên ngôn ngữ của bạn",
     "delete_data_note": "Ghi chú",
+    "delete_data_onboarding_token": "Một mã token lưu trên thiết bị của bạn sẽ lưu thông tin về việc bạn đã hoàn thành quy trình làm quen với ứng dụng hay chưa",
+    "delete_data_product_analytics": "Một mã token lưu trên thiết bị của bạn sẽ lưu thông tin về việc bạn đã đồng ý chia sẻ dữ liệu phân tích sản phẩm hay chưa",
+    "delete_data_symptom_history": "Bất kỳ nhật ký triệu chứng nào đã lưu trên thiết bị của bạn",
+    "delete_data_this_action": "Thao tác này sẽ xóa tất cả dữ liệu được lưu bởi {{applicationName}}.",
     "delete_my_data": "Xóa Dữ Liệu Của Tôi",
     "errors": {
       "deleting_data": "Rất tiếc, chúng tôi không thể xóa dữ liệu của bạn"
@@ -425,8 +445,22 @@
     "to_protect_your_privacy": "Để bảo vệ quyền riêng tư của bạn, dữ liệu nhập được lưu trên điện thoại của bạn và được xóa tự động sau {{days}} ngày."
   },
   "symptom": {
+    "bluish_lips_or_face": "Môi hoặc mặt xanh xao",
+    "congestion_or_runny_nose": "Nghẹt mũi hoặc xổ mũi",
     "cough": "Ho",
     "diarrhea": "Tiêu chảy",
-    "other": "Khác"
+    "fatigue": "Mệt mỏi",
+    "fever_or_chills": "Sốt hoặc rét run",
+    "headache": "Nhức đầu",
+    "inability_to_wake_or_stay_awake": "Không thức dậy được hay tỉnh táo",
+    "muscle_or_body_aches": "Đau nhức cơ hoặc cơ thể",
+    "nausea_or_vomiting": "Buồn nôn hoặc ói mửa",
+    "new_confusion": "Cơn lú lẫn mới",
+    "new_loss_of_taste_or_smell": "Mất vị giác hoặc khứu giác",
+    "other": "Khác",
+    "persistent_pain_or_pressure_in_the_chest": "Đau hoặc tức ngực dai dẳng",
+    "shortness_of_breath_or_difficulty_breathing": "Hụt hơi hoặc khó thở",
+    "sore_throat": "Đau họng",
+    "trouble_breathing": "Khó thở"
   }
 }

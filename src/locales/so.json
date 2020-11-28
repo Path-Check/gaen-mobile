@@ -73,7 +73,6 @@
   "export": {
     "code_input_body_bluetooth": "Gali koodhkaaga xaqiijinta",
     "code_input_button_cancel": "Buri",
-    "code_input_placeholder": "Geli Koodhka",
     "code_input_title_bluetooth": "Xaqiiji ogaanshaha xaaladdaada",
     "complete_body_bluetooth": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
     "complete_title": "Waad ku mahadsantahay badbaadinta bulshadaada!",
@@ -201,7 +200,6 @@
       "unauthorized_error_message_ios": "Si aad u furato Ogaysiiska Ufeydsanaanta, gal qaybta Ogaysiiska Ufeydsanaanta ee Settings-ka aaladaada kadiba Wadaag Xogta Qaadista Caabuqa kadibna qaybta furan ku xir {{applicationName}}",
       "unauthorized_error_title": "Furo Ogaysiiska Ufeydsanaanta"
     },
-    "report_result": "Ka Warbixi Natiijada",
     "request_call": "Codo Wicitaan",
     "take_assessment": "Samee Qiimayn",
     "to_submit_your_test": "Si aad u gudbiso natiijada baaritaanka caabuqa lagaaga helay, waa inaad heshaa koodhka natiijada caabuqa lagaaga helay oo uu ku siinaayo raadraacaha."

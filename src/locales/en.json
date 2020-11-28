@@ -71,17 +71,10 @@
     "title": "Unknown Error"
   },
   "export": {
-    "verification_code_info": {
-      "info_header": "What is a verification code?",
-      "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
-      "how_do_i_get_header": "How do I get a verification code?",
-      "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
-      "what_happens_header": "What happens when I submit my code?",
-      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared."
-    },
-    "enter_verification_code": "Enter verification code",
-    "code_input_button_cancel": "Cancel",
     "code": "Code",
+    "code_input_body_bluetooth": "Enter your verification code",
+    "code_input_button_cancel": "Cancel",
+    "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
@@ -94,6 +87,7 @@
     "consent_warning_title": "Warning!",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
+    "enter_verification_code": "Enter verification code",
     "error": {
       "invalid_code": "Try a different code",
       "invalid_format": "Codes may only contain numbers and letters",
@@ -103,10 +97,10 @@
       "verification_code_used": "Verification code has already been used"
     },
     "intro": {
-      "what_is_a": "What is a verification code?",
-      "header": "Do you have your verification code?",
       "body1": "If you have recieved a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
-      "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing."
+      "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing.",
+      "header": "Do you have your verification code?",
+      "what_is_a": "What is a verification code?"
     },
     "never_mind_button_title": "Never mind",
     "person_and_health_expert": "A person talking to a health expert",
@@ -126,10 +120,17 @@
       }
     },
     "start_header_bluetooth": "Help contain the spread of the virus and protect others in your community",
-    "submit_code": "Submit Code"
+    "submit_code": "Submit Code",
+    "verification_code_info": {
+      "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
+      "how_do_i_get_header": "How do I get a verification code?",
+      "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
+      "info_header": "What is a verification code?",
+      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared.",
+      "what_happens_header": "What happens when I submit my code?"
+    }
   },
   "exposure_history": {
-    "more_info": "Learn more about Exposure Notifications",
     "check_for_exposures": "Check for exposures",
     "exposure_detail": {
       "2m_apart": "2m apart",
@@ -162,6 +163,7 @@
     "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth to swap and save random number strings (called random IDs) from any phones it is in close proximity to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "learn_more": "Learn More",
+    "more_info": "Learn more about Exposure Notifications",
     "no_connectivity_message": "You are not connected to the internet!",
     "no_exposure_reports": "No Exposure Reports",
     "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
@@ -179,9 +181,6 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
-    "verification_code_card": {
-      "more_info": "What is a verification code?"
-    },
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
@@ -219,10 +218,13 @@
       "unauthorized_error_message_ios": "Open Settings, then navigate to the Exposure Notifications settings for this app. Ensure Share Exposure Information is turned on, then press 'Set As Active Region'.",
       "unauthorized_error_title": "Enable Exposure Notifications"
     },
-    "submit_code": "Submit code",
     "request_call": "Request Call",
+    "submit_code": "Submit code",
     "take_assessment": "Take Assessment",
-    "to_submit_your_test": "To submit your positive test result, you'll need to get your verification code from a contact tracer."
+    "to_submit_your_test": "To submit your positive test result, you'll need to get your verification code from a contact tracer.",
+    "verification_code_card": {
+      "more_info": "What is a verification code?"
+    }
   },
   "label": {
     "check": "Checkmark",
@@ -245,8 +247,8 @@
   },
   "onboarding": {
     "activate_exposure_notifications": {
-      "bluetooth_header": "Enable Bluetooth",
-      "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your device settings."
+      "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your device settings.",
+      "bluetooth_header": "Enable Bluetooth"
     },
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
@@ -266,6 +268,7 @@
     "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Bluetooth scanning for Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
     "location_header": "Activate Location",
+    "location_services_already_active": "Location services are active",
     "location_subheader": "{{applicationName}} never accesses your location data and your device is never tracked.",
     "no_take_me": "No, take me back",
     "notification_body1": "You’ll receive notifications when you may have crossed paths with someone who has reported positive for COVID-19.",
@@ -289,7 +292,6 @@
       "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
-    "location_services_already_active": "Location services are active",
     "proximity_tracing_already_active": "Exposure notifications are active",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted after 14 days.",

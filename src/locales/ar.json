@@ -67,7 +67,6 @@
   "export": {
     "code_input_body_bluetooth": "أدخل رمز التحقق الخاص بك",
     "code_input_button_cancel": "إلغاء",
-    "code_input_placeholder": "ادخل الرمز",
     "code_input_title_bluetooth": "تحقق من تشخيصك",
     "complete_body_bluetooth": "أنت تساعد في احتواء انتشار الفيروس وحماية الآخرين في مجتمعك.",
     "complete_title": "شكرا للحفاظ على مجتمعك آمن!",
@@ -187,7 +186,6 @@
       "unauthorized_error_message_ios": "لتمكين إعلامات التعرض ، انتقل إلى قسم إعلام التعرض في الإعدادات ومشاركة معلومات التعرض وقم بتعيين المنطقة النشطة على {{applicationName}}",
       "unauthorized_error_title": "تمكين إشعارات التعرض"
     },
-    "report_result": "نتيجة التقرير",
     "request_call": "طلب مكالمة",
     "take_assessment": "أخذ التقييم",
     "to_submit_your_test": "لإرسال نتيجة الاختبار الإيجابية الخاصة بك ، ستحتاج إلى الحصول على رمز نتيجة الاختبار الإيجابي من أداة تتبع جهات الاتصال."
