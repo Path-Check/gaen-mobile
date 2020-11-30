@@ -42,7 +42,6 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const {
-    displayCallbackForm,
     displayCallEmergencyServices,
     displayCovidData,
     displaySelfAssessment,
@@ -60,7 +59,6 @@ const Home: FunctionComponent = () => {
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
-        {displayCallbackForm && <TalkToContactTracer />}
         <ReportTestResult />
         <ShareLink />
         {displaySelfAssessment && <SelfAssessment />}
@@ -72,34 +70,6 @@ const Home: FunctionComponent = () => {
         )}
       </ScrollView>
     </>
-  )
-}
-
-const TalkToContactTracer: FunctionComponent = () => {
-  const navigation = useNavigation()
-  const { t } = useTranslation()
-
-  const handleOnPressTalkToContactTracer = () => {
-    navigation.navigate(ModalStackScreens.CallbackStack)
-  }
-
-  return (
-    <TouchableOpacity
-      onPress={handleOnPressTalkToContactTracer}
-      style={style.floatingContainer}
-    >
-      <Image
-        source={Images.HowItWorksValueProposition}
-        style={style.image}
-        width={200}
-        height={IMAGE_HEIGHT}
-      />
-      <Text style={style.sectionHeaderText}>
-        {t("home.did_you_test_positive")}
-      </Text>
-      <Text style={style.sectionBodyText}>{t("home.to_submit_your_test")}</Text>
-      <SectionButton text={t("home.request_call")} />
-    </TouchableOpacity>
   )
 }
 
