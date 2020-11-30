@@ -5,8 +5,9 @@ type Loggable = Record<string, unknown>
 
 class Logger {
   static start(): void {
-    const isStagingEnv = !__DEV__ && env.STAGING === "true"
-    if (isStagingEnv) {
+    const enableErrorReporting =
+      !__DEV__ && env.ENABLE_ERROR_REPORTING === "true"
+    if (enableErrorReporting) {
       Bugsnag.start()
     }
   }
@@ -14,7 +15,7 @@ class Logger {
   static error(message: string, data?: Loggable): void {
     if (__DEV__) {
       console.warn(message, data)
-    } else if (env.STAGING === "true") {
+    } else if (env.ENABLE_ERROR_REPORTING === "true") {
       if (data) {
         Bugsnag.addMetadata("data", data)
       }
@@ -25,7 +26,7 @@ class Logger {
   static event(message: string, data?: Loggable): void {
     if (__DEV__) {
       console.warn(message, data)
-    } else if (env.STAGING === "true") {
+    } else if (env.ENABLE_ERROR_REPORTING === "true") {
       Bugsnag.leaveBreadcrumb(message, data)
     }
   }
@@ -33,7 +34,7 @@ class Logger {
   static addMetadata(section: string, data: Loggable): void {
     if (__DEV__) {
       console.log(`Adding to the metadata: ${section}`, data)
-    } else if (env.STAGING === "true") {
+    } else if (env.ENABLE_ERROR_REPORTING === "true") {
       Bugsnag.addMetadata(section, data)
     }
   }
