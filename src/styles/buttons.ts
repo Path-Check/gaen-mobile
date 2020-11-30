@@ -11,9 +11,6 @@ const base: ViewStyle = {
   alignItems: "center",
   width: "100%",
 }
-const heightBase: ViewStyle = {
-  paddingVertical: Spacing.medium,
-}
 const heightThin: ViewStyle = {
   paddingVertical: Spacing.xSmall,
 }
@@ -23,8 +20,8 @@ const heightThin: ViewStyle = {
 type Primary = "base" | "disabled"
 const primaryBase: ViewStyle = {
   ...base,
-  ...heightBase,
   ...Outlines.lightShadow,
+  padding: Spacing.medium,
   borderRadius: Outlines.borderRadiusLarge,
   backgroundColor: Colors.primary.shade100,
   maxWidth: Layout.screenWidth * 0.95,
