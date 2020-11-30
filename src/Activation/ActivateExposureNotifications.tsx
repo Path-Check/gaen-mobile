@@ -5,18 +5,15 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Platform,
-  Alert,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import { openAppSettings } from "../Device"
-import { useApplicationName } from "../Device/useApplicationInfo"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
 import { useActivationNavigation } from "./useActivationNavigation"
+import { useRequestExposureNotifications } from "../useRequestExposureNotifications"
 
 import { Icons } from "../assets"
 import { Spacing, Typography, Buttons, Colors, Iconography } from "../styles"
@@ -63,78 +60,17 @@ const ActivateExposureNotifications: FunctionComponent = () => {
 const EnableENButtons: FunctionComponent = () => {
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
-  const { exposureNotifications } = usePermissionsContext()
   const { goToNextScreenFrom } = useActivationNavigation()
-  const { applicationName } = useApplicationName()
-
-  const showNotAuthorizedAlert = () => {
-    const errorMessage = Platform.select({
-      ios: t("home.proximity_tracing.unauthorized_error_message_ios", {
-        applicationName,
-      }),
-      android: t("home.proximity_tracing.unauthorized_error_message_android", {
-        applicationName,
-      }),
-    })
-
-    Alert.alert(
-      t("home.proximity_tracing.unauthorized_error_title"),
-      errorMessage,
-      [
-        {
-          text: t("common.back"),
-          style: "cancel",
-        },
-        {
-          text: t("common.settings"),
-          onPress: () => openAppSettings(),
-        },
-      ],
-    )
-  }
-
-  const showEnableBluetoothAlert = () => {
-    Alert.alert(
-      t("onboarding.activate_exposure_notifications.bluetooth_header", {
-        applicationName,
-      }),
-      t("onboarding.activate_exposure_notifications.bluetooth_body"),
-      [
-        {
-          text: t("common.back"),
-          style: "cancel",
-        },
-        {
-          text: t("common.settings"),
-          onPress: () => {
-            openAppSettings()
-          },
-        },
-      ],
-    )
-  }
-
-  const handleOnPressEnable = async () => {
-    try {
-      const response = await exposureNotifications.request()
-      if (response.kind === "success") {
-        if (response.status === "BluetoothOff") {
-          showEnableBluetoothAlert()
-        } else {
-          showNotAuthorizedAlert()
-        }
-      } else {
-        showNotAuthorizedAlert()
-      }
-      trackEvent("product_analytics", "onboarding_en_permissions_accept")
-    } catch (e) {
-      showNotAuthorizedAlert()
-    }
-  }
+  const requestExposureNotifications = useRequestExposureNotifications()
 
   const handleOnPressDontEnable = () => {
     trackEvent("product_analytics", "onboarding_en_permissions_denied")
     goToNextScreenFrom("ActivateExposureNotifications")
+  }
+
+  const handleOnPressEnable = () => {
+    trackEvent("product_analytics", "onboarding_en_permissions_accept")
+    requestExposureNotifications()
   }
 
   return (

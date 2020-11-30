@@ -277,7 +277,8 @@ final class ExposureManager: NSObject {
     // in Settings.
     manager.setExposureNotificationEnabled(true) { error in
       if let error = error {
-        reject(error.localizedDescription, error.localizedDescription, error)
+        let errorString = error._code.enErrorString
+        reject(errorString, error.localizedDescription, error)
       } else {
         self.broadcastCurrentEnabledStatus()
         resolve(self.exposureNotificationStatus.rawValue)

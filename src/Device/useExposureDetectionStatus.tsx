@@ -1,18 +1,17 @@
 import { usePermissionsContext } from "../Device/PermissionsContext"
 
-interface ExposureDetectionStatus {
-  exposureDetectionStatus: boolean
-}
+type ExposureDetectionStatus = "On" | "Off"
 
 export const useExposureDetectionStatus = (): ExposureDetectionStatus => {
   const { locationPermissions, exposureNotifications } = usePermissionsContext()
 
   const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
 
-  const isExposureNotificationsOn = exposureNotifications.status === "Active"
+  const isExposureNotificationsActive =
+    exposureNotifications.status === "Active"
 
   const exposureDetectionStatus =
-    isExposureNotificationsOn && !isLocationRequiredAndOff
+    isExposureNotificationsActive && !isLocationRequiredAndOff ? "On" : "Off"
 
-  return { exposureDetectionStatus }
+  return exposureDetectionStatus
 }

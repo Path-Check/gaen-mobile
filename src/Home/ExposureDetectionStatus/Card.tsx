@@ -24,7 +24,7 @@ import {
 const ExposureDetectionStatusCard: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const { exposureDetectionStatus } = useExposureDetectionStatus()
+  const exposureDetectionStatus = useExposureDetectionStatus()
 
   const handleOnPressExposureDetectionStatus = () => {
     navigation.navigate(HomeStackScreens.ExposureDetectionStatus)
@@ -55,7 +55,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
     statusIconFill,
     statusText,
     actionText,
-  } = exposureDetectionStatus ? enabledConfig : disabledConfig
+  } = exposureDetectionStatus === "On" ? enabledConfig : disabledConfig
 
   const statusContainerStyle = {
     ...style.statusContainer,
@@ -86,7 +86,9 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
             fill={statusIconFill}
             style={style.statusIcon}
           />
-          {exposureDetectionStatus && <AnimatedCircle iconSize={iconSize} />}
+          {exposureDetectionStatus === "On" && (
+            <AnimatedCircle iconSize={iconSize} />
+          )}
         </View>
       </View>
       <View style={style.statusBottomContainer}>
