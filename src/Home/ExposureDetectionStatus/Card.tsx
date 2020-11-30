@@ -105,7 +105,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
 const style = StyleSheet.create({
   statusContainer: {
     ...Affordances.floatingContainer,
-    padding: Spacing.small,
+    paddingVertical: Spacing.medium,
     elevation: 0,
     borderWidth: Outlines.thin,
     overflow: "hidden",
