@@ -44,7 +44,7 @@ const Settings: FunctionComponent = () => {
   const { healthAuthorityName, about: customAboutCopy } = useCustomCopy()
 
   const { languageName } = useLocaleInfo()
-  const showDebugMenu = env.STAGING === "true" || __DEV__
+  const showDebugMenu = env.DISPLAY_DEBUG_MENU === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)

@@ -62,7 +62,7 @@
 #if DEBUG
   [Bugsnag start];
 #else
-  if ([[ReactNativeConfig envFor:@"STAGING"]  isEqual: @"true"]) {
+  if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
     [Bugsnag start];
   }
 #endif
