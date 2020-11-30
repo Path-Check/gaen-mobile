@@ -28,11 +28,8 @@ const useLocationPermissions = (): LocationPermissions => {
   const determineLocationEnabledState = useCallback(async () => {
     if (isLocationRequired) {
       isLocationEnabled().then((result) => {
-        if (result) {
-          setLocationEnabledState("On")
-        } else {
-          setLocationEnabledState("Off")
-        }
+        const enabledState = result ? "On" : "Off"
+        setLocationEnabledState(enabledState)
       })
     }
   }, [isLocationRequired])
@@ -46,11 +43,8 @@ const useLocationPermissions = (): LocationPermissions => {
     if (Platform.OS === "android") {
       const subscription = subscribeToLocationStatusEvents(
         (enabled: boolean) => {
-          if (enabled) {
-            setLocationEnabledState("On")
-          } else {
-            setLocationEnabledState("Off")
-          }
+          const enabledState = enabled ? "On" : "Off"
+          setLocationEnabledState(enabledState)
         },
       )
 
