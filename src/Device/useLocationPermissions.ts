@@ -42,17 +42,21 @@ const useLocationPermissions = (): LocationPermissions => {
     determineLocationEnabledState()
   }, [determineIsLocationRequired, determineLocationEnabledState])
 
-  useEffect(() => {
-    const subscription = subscribeToLocationStatusEvents((enabled: boolean) => {
-      if (enabled) {
-        setLocationEnabledState("On")
-      } else {
-        setLocationEnabledState("Off")
-      }
-    })
+  useEffect((): (() => void) | void => {
+    if (Platform.OS === "android") {
+      const subscription = subscribeToLocationStatusEvents(
+        (enabled: boolean) => {
+          if (enabled) {
+            setLocationEnabledState("On")
+          } else {
+            setLocationEnabledState("Off")
+          }
+        },
+      )
 
-    return () => {
-      subscription.remove()
+      return () => {
+        subscription.remove()
+      }
     }
   }, [])
 
