@@ -20,13 +20,7 @@ RCT_REMAP_METHOD(fetchLastDetectionDate,
                  fetchLastDetectionDateWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[ExposureManager shared] fetchLastDetectionDateWithCallback:^(NSNumber * _Nullable posixRepresentation, ExposureManagerError * _Nullable error) {
-    if (error) {
-      reject(error.errorCode, error.localizedMessage, error.underlyingError);
-    } else {
-      resolve(posixRepresentation);
-    }
-  }];
+  [[ExposureManager shared] fetchLastDetectionDateWithResolve:resolve reject:reject];
 }
 
 RCT_REMAP_METHOD(detectExposures,

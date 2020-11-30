@@ -135,12 +135,6 @@ final class ExposureManager: NSObject {
     }
   }
 
-  /// Wrapps ENManager state and determines if bluetooth is on or off
-  /// (bluetoothOff)[https://developer.apple.com/documentation/exposurenotification/enstatus/bluetoothoff]
-  @objc var isBluetoothEnabled: Bool {
-    manager.exposureNotificationStatus != .bluetoothOff
-  }
-
   ///Returns both the current authorizationState and enabledState as Strings
   @objc func getCurrentENPermissionsStatus(callback: @escaping (String) -> Void) {
     callback(exposureNotificationStatus.rawValue)
@@ -504,14 +498,16 @@ extension ExposureManager {
     }
   }
 
-  @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
-    let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
-                                       localizedMessage: String.noLastResetDateAvailable.localized)
-    return callback(nil, emError)
+  @objc func fetchLastDetectionDate(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
+      let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
+                                         localizedMessage: String.noLastResetDateAvailable.localized)
+      reject(emError.errorCode, emError.localizedMessage, emError.underlyingError);
+      return
     }
     let posixRepresentation = NSNumber(value: lastDetectionDate.posixRepresentation)
-    return callback(posixRepresentation, nil)
+    resolve(posixRepresentation)
   }
 
   func getExposureConfigurationV1() -> Promise<ExposureConfigurationV1> {

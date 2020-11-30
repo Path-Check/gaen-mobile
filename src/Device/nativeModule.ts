@@ -54,11 +54,6 @@ export const getVersion = async (): Promise<string> => {
   return deviceInfoModule.getVersion()
 }
 
-export const isBluetoothEnabled = async (): Promise<boolean> => {
-  const bluetoothStatus = await deviceInfoModule.isBluetoothEnabled()
-  return bluetoothStatus === true || bluetoothStatus === "true"
-}
-
 export const doesDeviceSupportLocationlessScanning = async (): Promise<
   boolean
 > => {
