@@ -213,11 +213,6 @@
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Is my data secure?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "To enable Exposure Notifications, go to the COVID-19 Exposure Notifications screen of your Settings app and enable 'Use Exposure Notifications'",
-      "unauthorized_error_message_ios": "Open Settings, then navigate to the Exposure Notifications settings for this app. Ensure Share Exposure Information is turned on, then press 'Set As Active Region'.",
-      "unauthorized_error_title": "Enable Exposure Notifications"
-    },
     "request_call": "Request Call",
     "submit_code": "Submit code",
     "take_assessment": "Take Assessment",
@@ -246,10 +241,6 @@
     "symptom_history": "Symptoms"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your device settings.",
-      "bluetooth_header": "Enable Bluetooth"
-    },
     "activation_header_title": "App Setup",
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",
@@ -490,5 +481,15 @@
     "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
     "sore_throat": "Sore throat",
     "trouble_breathing": "Trouble breathing"
+  },
+  "exposure_notification_alerts": {
+    "use_exposure_notifications_android_title": "Enable Exposure Notifications",
+    "use_exposure_notifications_android_body": "To enable Exposure Notifications, go to the COVID-19 Exposure Notifications screen of your Settings app and enable 'Use Exposure Notifications'.",
+    "share_exposure_information_ios_title": "Share Exposure Information",
+    "share_exposure_information_ios_body": "Open the Settings app, then navigate to the Exposure Notifications settings for this app. Ensure 'Share Exposure Information' is turned on, then press 'Set As Active Region'.",
+    "set_active_region_ios_title": "Set Active Region",
+    "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
+    "bluetooth_title": "Enable Bluetooth",
+    "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app."
   }
 }

@@ -67,8 +67,6 @@ const toStatus = (data: string): ENPermissionStatus => {
 
 // Permissions Module
 
-type GAENAPIError = "ExceededCheckRateLimit" | "Unknown" | "AppRestricted"
-
 const permissionsModule = NativeModules.ENPermissionsModule
 
 export type RequestAuthorizationResponse =
@@ -80,35 +78,85 @@ export type RequestAuthorizationSuccess = {
   status: ENPermissionStatus
 }
 
+export type RequestAuthorizationError =
+  | "IOSUnknown"
+  | "BadParameter"
+  | "NotEntitled"
+  | "NotAuthorized"
+  | "Unsupported"
+  | "Invalidated"
+  | "BluetoothOff"
+  | "InsufficientStorage"
+  | "NotEnabled"
+  | "APIMisuse"
+  | "Internal"
+  | "InsufficientMemory"
+  | "RateLimited"
+  | "Restricted"
+  | "BadFormat"
+  | "DataInaccessible"
+  | "TravelStatusNotAvailable"
+  | "Unknown"
+
 export type RequestAuthorizationFailure = {
   kind: "failure"
-  error: GAENAPIError
+  error: RequestAuthorizationError
+}
+
+const toRequestAuthorizationError = (e: string): RequestAuthorizationError => {
+  switch (e) {
+    case "IOSUnknown":
+      return "IOSUnknown"
+    case "BadParameter":
+      return "BadParameter"
+    case "NotEntitled":
+      return "NotEntitled"
+    case "NotAuthorized":
+      return "NotAuthorized"
+    case "Unsupported":
+      return "Unsupported"
+    case "Invalidated":
+      return "Invalidated"
+    case "BluetoothOff":
+      return "BluetoothOff"
+    case "InsufficientStorage":
+      return "InsufficientStorage"
+    case "NotEnabled":
+      return "NotEnabled"
+    case "APIMisuse":
+      return "APIMisuse"
+    case "Internal":
+      return "Internal"
+    case "InsufficientMemory":
+      return "InsufficientMemory"
+    case "RateLimited":
+      return "RateLimited"
+    case "Restricted":
+      return "Restricted"
+    case "BadFormat":
+      return "BadFormat"
+    case "DataInaccessible":
+      return "DataInaccessible"
+    case "TravelStatusNotAvailable":
+      return "TravelStatusNotAvailable"
+    default:
+      return "Unknown"
+  }
 }
 
 export const requestAuthorization = async (): Promise<
   RequestAuthorizationResponse
 > => {
   try {
-    const status = await permissionsModule.requestExposureNotificationAuthorization()
-    const enStatus = toStatus(status)
+    const enStatus = await permissionsModule.requestExposureNotificationAuthorization()
     return {
       kind: "success",
-      status: enStatus,
+      status: toStatus(enStatus),
     }
   } catch (e) {
-    Logger.error("Failed to request ExposureNotification API Authorization", {
-      e,
-    })
-    if (e.code.includes("ENErrorDomain error 14.")) {
-      return {
-        kind: "failure",
-        error: "AppRestricted",
-      }
-    } else {
-      return {
-        kind: "failure",
-        error: "Unknown",
-      }
+    return {
+      kind: "failure",
+      error: toRequestAuthorizationError(e.code),
     }
   }
 }
@@ -145,7 +193,7 @@ interface NetworkSuccess {
 
 interface NetworkFailure {
   kind: "failure"
-  error: GAENAPIError
+  error: RequestAuthorizationError
 }
 
 export const checkForNewExposures = async (): Promise<NetworkResponse> => {
@@ -154,7 +202,7 @@ export const checkForNewExposures = async (): Promise<NetworkResponse> => {
     return { kind: "success" }
   } catch (e) {
     if (e.underlyingError.includes("ENErrorDomain error 13.")) {
-      return { kind: "failure", error: "ExceededCheckRateLimit" }
+      return { kind: "success" }
     } else {
       return { kind: "failure", error: "Unknown" }
     }

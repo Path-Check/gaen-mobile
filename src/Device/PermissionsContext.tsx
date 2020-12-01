@@ -59,7 +59,6 @@ export interface PermissionsContextState {
   }
   exposureNotifications: {
     status: ENPermissionStatus
-    request: () => Promise<GaenNativeModule.RequestAuthorizationResponse>
   }
 }
 
@@ -72,8 +71,6 @@ const initialState = {
   },
   exposureNotifications: {
     status: "Unknown" as const,
-    request: () =>
-      Promise.resolve({ kind: "failure" as const, error: "Unknown" as const }),
   },
 }
 
@@ -81,7 +78,7 @@ const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
   const locationPermissions = useLocationPermissions()
-  const { enPermission, requestENPermission } = useENPermissions()
+  const { enPermission } = useENPermissions()
   const {
     notificationPermission,
     checkNotificationPermission,
@@ -99,7 +96,6 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
         },
         exposureNotifications: {
           status: enPermission,
-          request: requestENPermission,
         },
       }}
     >
@@ -167,13 +163,8 @@ const useENPermissions = () => {
     }
   }, [])
 
-  const requestENPermission = async () => {
-    return GaenNativeModule.requestAuthorization()
-  }
-
   return {
     enPermission: enPermissionStatus,
-    requestENPermission,
   }
 }
 

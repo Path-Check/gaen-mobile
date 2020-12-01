@@ -8,11 +8,10 @@ import { showMessage } from "react-native-flash-message"
 import { ExposureDatum } from "../../exposure"
 import { LoadingIndicator, StatusBar, Text } from "../../components"
 import { useStatusBarEffect } from "../../navigation/index"
-import { useExposureContext } from "../../ExposureContext"
-
 import DateInfoHeader from "./DateInfoHeader"
 import ExposureList from "./ExposureList"
 import NoExposures from "./NoExposures"
+import { useExposureContext } from "../../ExposureContext"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
@@ -54,7 +53,7 @@ const History: FunctionComponent<HistoryProps> = ({
     navigation.navigate(ExposureHistoryStackScreens.MoreInfo)
   }
 
-  const handleOnPressCheckForExposures = async () => {
+  const checkForExposures = async () => {
     setCheckingForExposures(true)
     const checkResult = await checkForNewExposures()
     if (checkResult.kind === "success") {
@@ -63,23 +62,16 @@ const History: FunctionComponent<HistoryProps> = ({
         ...successFlashMessageOptions,
       })
     } else {
-      switch (checkResult.error) {
-        case "ExceededCheckRateLimit": {
-          showMessage({
-            message: t("common.success"),
-            ...successFlashMessageOptions,
-          })
-          break
-        }
-        default: {
-          showMessage({
-            message: t("common.something_went_wrong"),
-            ...errorFlashMessageOptions,
-          })
-        }
-      }
+      showMessage({
+        message: t("common.something_went_wrong"),
+        ...errorFlashMessageOptions,
+      })
     }
     setCheckingForExposures(false)
+  }
+
+  const handleOnPressCheckForExposures = async () => {
+    await checkForExposures()
   }
 
   const showExposureHistory = exposures.length > 0

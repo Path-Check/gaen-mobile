@@ -104,11 +104,6 @@ const createPermissionProviderValue = (
     },
     exposureNotifications: {
       status: "Active",
-      request: () =>
-        Promise.resolve({
-          kind: "failure" as const,
-          error: "Unknown" as const,
-        }),
     },
   }
 }
