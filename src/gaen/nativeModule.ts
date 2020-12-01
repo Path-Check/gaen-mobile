@@ -113,7 +113,7 @@ export const requestAuthorization = async (): Promise<
       status: toStatus(enStatus),
     }
   } catch (e) {
-    switch (e) {
+    switch (e.code) {
       case "NotEntitled":
         return { kind: "failure", error: "NotEntitled" }
       case "NotAuthorized":

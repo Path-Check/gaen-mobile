@@ -24,6 +24,7 @@
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
+    "enable": "Enable",
     "learn_more": "Learn more",
     "maybe_later": "Maybe later",
     "more": "More",
@@ -505,6 +506,9 @@
     "timeout_title": "Submission Took Too Long",
     "timeout_body": "It took to long to submit the verificaiton code. Please try again later.",
     "unknown_title": "Something Went Wrong",
-    "unknown_body": "An unexpected error occured. Please try again."
+    "unknown_body": "An unexpected error occured. Please try again.",
+    "cant_check_for_exposures_title": "Can't Check for Exposures",
+    "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
+    "cant_check_for_exposures_button": "Tell Me How"
   }
 }
