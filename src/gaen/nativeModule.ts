@@ -103,47 +103,6 @@ export type RequestAuthorizationFailure = {
   error: RequestAuthorizationError
 }
 
-const toRequestAuthorizationError = (e: string): RequestAuthorizationError => {
-  switch (e) {
-    case "IOSUnknown":
-      return "IOSUnknown"
-    case "BadParameter":
-      return "BadParameter"
-    case "NotEntitled":
-      return "NotEntitled"
-    case "NotAuthorized":
-      return "NotAuthorized"
-    case "Unsupported":
-      return "Unsupported"
-    case "Invalidated":
-      return "Invalidated"
-    case "BluetoothOff":
-      return "BluetoothOff"
-    case "InsufficientStorage":
-      return "InsufficientStorage"
-    case "NotEnabled":
-      return "NotEnabled"
-    case "APIMisuse":
-      return "APIMisuse"
-    case "Internal":
-      return "Internal"
-    case "InsufficientMemory":
-      return "InsufficientMemory"
-    case "RateLimited":
-      return "RateLimited"
-    case "Restricted":
-      return "Restricted"
-    case "BadFormat":
-      return "BadFormat"
-    case "DataInaccessible":
-      return "DataInaccessible"
-    case "TravelStatusNotAvailable":
-      return "TravelStatusNotAvailable"
-    default:
-      return "Unknown"
-  }
-}
-
 export const requestAuthorization = async (): Promise<
   RequestAuthorizationResponse
 > => {
@@ -154,9 +113,24 @@ export const requestAuthorization = async (): Promise<
       status: toStatus(enStatus),
     }
   } catch (e) {
-    return {
-      kind: "failure",
-      error: toRequestAuthorizationError(e.code),
+    switch (e) {
+      case "NotEntitled":
+        return { kind: "failure", error: "NotEntitled" }
+      case "NotAuthorized":
+        return { kind: "failure", error: "NotAuthorized" }
+      case "Unsupported":
+        return { kind: "failure", error: "Unsupported" }
+      case "Invalidated":
+        return { kind: "failure", error: "Invalidated" }
+      case "BluetoothOff":
+        return { kind: "failure", error: "BluetoothOff" }
+      case "NotEnabled":
+        return { kind: "failure", error: "NotEnabled" }
+      case "Restricted":
+        return { kind: "failure", error: "Restricted" }
+      default:
+        Logger.error("Unhandled Error in requestAuthorization", { e })
+        return { kind: "failure", error: "Unknown" }
     }
   }
 }
@@ -185,26 +159,32 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
   }
 }
 
-type NetworkResponse = NetworkSuccess | NetworkFailure
+type DetectExposuresError = "RateLimited" | "Unknown"
 
-interface NetworkSuccess {
+export type DetectExposuresResponse =
+  | DetectExposuresResponseSuccess
+  | DetectExposuresResponseFailure
+
+interface DetectExposuresResponseSuccess {
   kind: "success"
 }
 
-interface NetworkFailure {
+interface DetectExposuresResponseFailure {
   kind: "failure"
-  error: RequestAuthorizationError
+  error: DetectExposuresError
 }
 
-export const checkForNewExposures = async (): Promise<NetworkResponse> => {
+export const detectExposures = async (): Promise<DetectExposuresResponse> => {
   try {
     await exposureHistoryModule.detectExposures()
     return { kind: "success" }
   } catch (e) {
-    if (e.underlyingError.includes("ENErrorDomain error 13.")) {
-      return { kind: "success" }
-    } else {
-      return { kind: "failure", error: "Unknown" }
+    switch (e.code) {
+      case "RateLimited":
+        return { kind: "failure", error: "RateLimited" }
+      default:
+        Logger.error("Unhandled Error in detectExposures", { e })
+        return { kind: "failure", error: "Unknown" }
     }
   }
 }

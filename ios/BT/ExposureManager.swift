@@ -261,8 +261,9 @@ final class ExposureManager: NSObject {
       switch result {
       case .success:
         resolve(String.genericSuccess)
-      case .failure(let exposureError):
-        reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      case .failure(let error):
+        let errorString = error._code.enErrorString
+        reject(errorString, error.localizedDescription, error)
       }
     }
   }
