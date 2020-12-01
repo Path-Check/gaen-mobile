@@ -1,5 +1,11 @@
 import React, { FunctionComponent, useState } from "react"
-import { StyleSheet, TouchableOpacity, View, ScrollView } from "react-native"
+import {
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation, useIsFocused } from "@react-navigation/native"
@@ -39,11 +45,8 @@ const History: FunctionComponent<HistoryProps> = ({
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { checkForNewExposures } = useExposureContext()
-  const {
-    successFlashMessageOptions,
-    errorFlashMessageOptions,
-  } = Affordances.useFlashMessageOptions()
+  const { detectExposures } = useExposureContext()
+  const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
 
   const [checkingForExposures, setCheckingForExposures] = useState<boolean>(
     false,
@@ -55,19 +58,46 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const checkForExposures = async () => {
     setCheckingForExposures(true)
-    const checkResult = await checkForNewExposures()
-    if (checkResult.kind === "success") {
+    const result = await detectExposures()
+    if (result.kind === "success") {
       showMessage({
         message: t("common.success"),
         ...successFlashMessageOptions,
       })
-    } else {
-      showMessage({
-        message: t("common.something_went_wrong"),
-        ...errorFlashMessageOptions,
-      })
+    } else if (result.kind === "failure") {
+      switch (result.error) {
+        case "RateLimited":
+          showMessage({
+            message: t("common.success"),
+            ...successFlashMessageOptions,
+          })
+          break
+        case "NotAuthorized":
+          showAlert(
+            t(
+              "exposure_notification_alerts.share_exposure_information_ios_title",
+            ),
+            t(
+              "exposure_notification_alerts.share_exposure_information_ios_body",
+            ),
+          )
+          break
+        default:
+          showAlert(
+            t("exposure_notification_alerts.unhandled_error_title"),
+            t("exposure_notification_alerts.unhandled_error_body"),
+          )
+      }
     }
     setCheckingForExposures(false)
+  }
+
+  const showAlert = (title: string, body: string) => {
+    Alert.alert(title, body, [
+      {
+        text: t("common.okay"),
+      },
+    ])
   }
 
   const handleOnPressCheckForExposures = async () => {

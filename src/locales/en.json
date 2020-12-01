@@ -32,6 +32,7 @@
     "no_thanks": "No thanks",
     "off": "OFF",
     "on": "ON",
+    "okay": "Okay",
     "save": "Save",
     "select_language": "Select language",
     "settings": "Open Settings",
@@ -490,6 +491,8 @@
     "set_active_region_ios_title": "Set Active Region",
     "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
     "bluetooth_title": "Enable Bluetooth",
-    "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app."
+    "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
+    "unhandled_error_body": "Something unexpected happened. Please close and reopen the app and try again.",
+    "unhandled_error_title": "Something Went Wrong"
   }
 }

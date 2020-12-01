@@ -261,8 +261,9 @@ final class ExposureManager: NSObject {
       switch result {
       case .success:
         resolve(String.genericSuccess)
-      case .failure(let exposureError):
-        reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      case .failure(let error):
+        let errorString = error._code.enErrorString
+        reject(errorString, error.localizedDescription, error)
       }
     }
   }
@@ -440,9 +441,8 @@ final class ExposureManager: NSObject {
         btSecureStorage.storeExposures(newExposures)
         completionHandler(.success(processedFileCount))
       case let .failure(error):
-        let exposureError = ExposureError.default(error.localizedDescription)
         btSecureStorage.exposureDetectionErrorLocalizedDescription = error.localizedDescription
-        completionHandler(.failure(exposureError))
+        completionHandler(.failure(error))
       }
     }
   }
