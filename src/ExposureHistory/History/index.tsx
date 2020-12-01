@@ -64,13 +64,23 @@ const History: FunctionComponent<HistoryProps> = ({
         message: t("common.success"),
         ...successFlashMessageOptions,
       })
-    } else {
+    } else if (result.kind === "failure") {
       switch (result.error) {
         case "RateLimited":
           showMessage({
             message: t("common.success"),
             ...successFlashMessageOptions,
           })
+          break
+        case "NotAuthorized":
+          showAlert(
+            t(
+              "exposure_notification_alerts.share_exposure_information_ios_title",
+            ),
+            t(
+              "exposure_notification_alerts.share_exposure_information_ios_body",
+            ),
+          )
           break
         default:
           showAlert(
