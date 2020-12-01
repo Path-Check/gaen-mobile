@@ -11,7 +11,5 @@ export default Factory.define<PermissionsContextState>(() => ({
   },
   exposureNotifications: {
     status: "Active",
-    check: jest.fn(),
-    request: jest.fn(),
   },
 }))
