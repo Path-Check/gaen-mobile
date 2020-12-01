@@ -159,7 +159,11 @@ export const fetchLastExposureDetectionDate = async (): Promise<Posix | null> =>
   }
 }
 
-type DetectExposuresError = "RateLimited" | "Unknown"
+type DetectExposuresError =
+  | "RateLimited"
+  | "Unknown"
+  | "NotEnabled"
+  | "NotAuthorized"
 
 export type DetectExposuresResponse =
   | DetectExposuresResponseSuccess
@@ -182,6 +186,10 @@ export const detectExposures = async (): Promise<DetectExposuresResponse> => {
     switch (e.code) {
       case "RateLimited":
         return { kind: "failure", error: "RateLimited" }
+      case "NotEnabled":
+        return { kind: "failure", error: "NotEnabled" }
+      case "NotAuthorized":
+        return { kind: "failure", error: "NotAuthorized" }
       default:
         Logger.error("Unhandled Error in detectExposures", { e })
         return { kind: "failure", error: "Unknown" }

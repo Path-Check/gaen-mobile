@@ -10,7 +10,7 @@ public enum Result<T> {
 public enum ExposureResult {
 
   case success(Int)
-  case failure(ExposureError)
+  case failure(Error)
 
 }
 

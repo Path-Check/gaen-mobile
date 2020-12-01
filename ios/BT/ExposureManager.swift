@@ -441,9 +441,8 @@ final class ExposureManager: NSObject {
         btSecureStorage.storeExposures(newExposures)
         completionHandler(.success(processedFileCount))
       case let .failure(error):
-        let exposureError = ExposureError.default(error.localizedDescription)
         btSecureStorage.exposureDetectionErrorLocalizedDescription = error.localizedDescription
-        completionHandler(.failure(exposureError))
+        completionHandler(.failure(error))
       }
     }
   }
