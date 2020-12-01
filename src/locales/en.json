@@ -494,5 +494,17 @@
     "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
     "unhandled_error_body": "Something unexpected happened. Please close and reopen the app and try again.",
     "unhandled_error_title": "Something Went Wrong"
+  },
+  "verification_code_alerts": {
+    "invalid_code_title": "Invalid Code",
+    "invalid_code_body": "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
+    "code_used_title": "Verification Code Already Used",
+    "code_used_body": "The verification code provided has already been used.",
+    "network_connection_title": "No Internet Connection",
+    "network_connection_body": "You need to be connected to WiFi to submit a verification code.",
+    "timeout_title": "Submission Took Too Long",
+    "timeout_body": "It took to long to submit the verificaiton code. Please try again later.",
+    "unknown_title": "Something Went Wrong",
+    "unknown_body": "An unexpected error occured. Please try again."
   }
 }

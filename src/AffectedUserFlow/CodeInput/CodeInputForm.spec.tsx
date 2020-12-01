@@ -1,4 +1,5 @@
 import React from "react"
+import { Alert } from "react-native"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
@@ -132,8 +133,10 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
+      const { getByTestId, getByLabelText } = render(
         <AffectedUserProvider>
           <CodeInputForm />
         </AffectedUserProvider>,
@@ -142,7 +145,11 @@ describe("CodeInputForm", () => {
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(getByText("Try a different code")).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Invalid Code",
+          "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
+          [{ text: "Okay" }],
+        )
       })
     })
 
@@ -153,8 +160,10 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
+      const { getByTestId, getByLabelText } = render(
         <AffectedUserProvider>
           <CodeInputForm />
         </AffectedUserProvider>,
@@ -163,9 +172,11 @@ describe("CodeInputForm", () => {
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(
-          getByText("Verification code has already been used"),
-        ).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Verification Code Already Used",
+          "The verification code provided has already been used.",
+          [{ text: "Okay" }],
+        )
       })
     })
 
@@ -176,8 +187,10 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
+      const { getByTestId, getByLabelText } = render(
         <AffectedUserProvider>
           <CodeInputForm />
         </AffectedUserProvider>,
@@ -186,7 +199,11 @@ describe("CodeInputForm", () => {
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(getByText("Try a different code")).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Something Went Wrong",
+          "An unexpected error occured. Please try again.",
+          [{ text: "Okay" }],
+        )
       })
     })
 

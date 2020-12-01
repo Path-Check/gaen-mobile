@@ -114,14 +114,8 @@ const CodeInputForm: FunctionComponent = () => {
           )
           setErrorMessage(errorMessage)
         }
-      } else {
-        const errorMessage = showError(response.error)
-        if (response.message) {
-          Logger.error(
-            `FailedCodeValidation${errorMessage}, ${response.message}`,
-          )
-        }
-        setErrorMessage(errorMessage)
+      } else if (response.kind === "failure") {
+        showError(response.error)
       }
       setIsLoading(false)
     } catch (e) {
@@ -130,22 +124,50 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const showError = (error: API.CodeVerificationError): string => {
+  const showError = (error: API.CodeVerificationError): void => {
     switch (error) {
-      case "InvalidCode": {
-        return t("export.error.invalid_code")
-      }
-      case "VerificationCodeUsed": {
-        return t("export.error.verification_code_used")
-      }
-      case "NetworkConnection": {
-        return t("export.error.network_connection_error")
-      }
-      case "Timeout": {
-        return t("export.error.timeout_error")
-      }
+      case "InvalidCode":
+        {
+          Alert.alert(
+            t("verification_code_alerts.invalid_code_title"),
+            t("verification_code_alerts.invalid_code_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "VerificationCodeUsed":
+        {
+          Alert.alert(
+            t("verification_code_alerts.code_used_title"),
+            t("verification_code_alerts.code_used_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "NetworkConnection":
+        {
+          Alert.alert(
+            t("verification_code_alerts.network_connection_title"),
+            t("verification_code_alerts.network_connection_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "Timeout":
+        {
+          Alert.alert(
+            t("verification_code_alerts.invalid_code_title"),
+            t("verification_code_alerts.invalid_code_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
       default: {
-        return t("export.error.unknown_code_verification_error")
+        Alert.alert(
+          t("verification_code_alerts.unknown_title"),
+          t("verification_code_alerts.unknown_body"),
+          [{ text: t("common.okay") }],
+        )
       }
     }
   }
