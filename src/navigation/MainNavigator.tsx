@@ -5,6 +5,7 @@ import {
   HeaderStyleInterpolators,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
+import env from "react-native-config"
 import {
   LinkingOptions,
   NavigationContainer,
@@ -50,12 +51,20 @@ const settingsStackTransitionPreset = Platform.select({
   ios: TransitionPresets.SlideFromRightIOS,
   android: TransitionPresets.DefaultTransition,
 })
+// Import and use configurable link prefixes array
+const linkPrefixes = JSON.parse(env.DEEP_LINK_PREFIXES)
 
 const linking: LinkingOptions = {
-  prefixes: ["pathcheck://"],
+  prefixes: linkPrefixes,
   config: {
     screens: {
       ExposureHistory: "exposureHistory",
+      // Navigate to Code Input from linkPrefix/v?c=[longcode]
+      AffectedUserStack: {
+        screens: {
+          AffectedUserCodeInput: "v",
+        },
+      },
     },
   },
 }
