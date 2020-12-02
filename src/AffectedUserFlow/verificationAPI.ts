@@ -1,6 +1,7 @@
 import env from "react-native-config"
 
 import { fetchWithTimeout, TIMEOUT_ERROR } from "./fetchWithTimeout"
+import Logger from "../logger"
 
 const baseUrl = env.GAEN_VERIFY_URL
 const verifyUrl = `${baseUrl}/api/verify`
@@ -71,11 +72,14 @@ export const postCode = async (
       return { kind: "success", body }
     } else {
       switch (json.error) {
-        case "internal server error":
+        case "verification code invalid":
           return { kind: "failure", error: "InvalidCode" }
         case "verification code used":
           return { kind: "failure", error: "VerificationCodeUsed" }
         default:
+          Logger.error("Unhandled Verification Code Submission Error", {
+            error: json.error,
+          })
           return { kind: "failure", error: "Unknown", message: json.error }
       }
     }
@@ -86,6 +90,9 @@ export const postCode = async (
       case TIMEOUT_ERROR:
         return { kind: "failure", error: "Timeout" }
       default:
+        Logger.error("Unhandled Verification Code Submission Error", {
+          errorMessage: e.message,
+        })
         return { kind: "failure", error: "Unknown" }
     }
   }

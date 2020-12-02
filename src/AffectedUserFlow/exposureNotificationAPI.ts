@@ -163,6 +163,7 @@ class PostDiagnosisKeysRequest {
         }
       }
       default: {
+        Logger.error("Unhandled Post DiagnosisKeys Error", { error })
         return {
           kind: "failure" as const,
           nature: PostKeysError.Unknown,
