@@ -509,6 +509,6 @@
     "unknown_body": "An unexpected error occured. Please try again.",
     "cant_check_for_exposures_title": "Can't Check for Exposures",
     "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
-    "cant_check_for_exposures_button": "Tell Me How"
+    "cant_check_for_exposures_button": "Enable Exposure Notifications"
   }
 }
