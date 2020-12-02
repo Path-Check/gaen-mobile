@@ -477,7 +477,7 @@
     "cant_check_for_exposures_title": "Can't Check for Exposures",
     "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
     "cant_check_for_exposures_button": "Enable Exposure Notifications",
-    "location_title": "Activate Location",
+    "location_title": "Enable Location Services",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Notifications. {{applicationName}} does NOT track or keep a record of your location."
   },
   "verification_code_alerts": {
