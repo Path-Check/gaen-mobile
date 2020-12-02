@@ -494,7 +494,10 @@
     "bluetooth_title": "Enable Bluetooth",
     "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
     "unhandled_error_body": "Something unexpected happened. Please close and reopen the app and try again.",
-    "unhandled_error_title": "Something Went Wrong"
+    "unhandled_error_title": "Something Went Wrong",
+    "cant_check_for_exposures_title": "Can't Check for Exposures",
+    "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
+    "cant_check_for_exposures_button": "Enable Exposure Notifications"
   },
   "verification_code_alerts": {
     "invalid_code_title": "Invalid Code",
@@ -506,9 +509,6 @@
     "timeout_title": "Submission Took Too Long",
     "timeout_body": "It took to long to submit the verificaiton code. Please try again later.",
     "unknown_title": "Something Went Wrong",
-    "unknown_body": "An unexpected error occured. Please try again.",
-    "cant_check_for_exposures_title": "Can't Check for Exposures",
-    "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
-    "cant_check_for_exposures_button": "Enable Exposure Notifications"
+    "unknown_body": "An unexpected error occured. Please try again."
   }
 }
