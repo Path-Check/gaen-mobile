@@ -257,8 +257,8 @@
     "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "i_am_over": "Yes, I am over {{minimumAge}}",
-    "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
-    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
+    "location_alert_body": "To use Exposure Notifications, Location Services must be enabled",
+    "location_alert_header": "Enable Location Services",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Bluetooth scanning for Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
     "location_header": "Activate Location",
     "location_services_already_active": "Location services are active",
@@ -497,7 +497,9 @@
     "unhandled_error_title": "Something Went Wrong",
     "cant_check_for_exposures_title": "Can't Check for Exposures",
     "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
-    "cant_check_for_exposures_button": "Enable Exposure Notifications"
+    "cant_check_for_exposures_button": "Enable Exposure Notifications",
+    "location_title": "Activate Location",
+    "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Notifications. {{applicationName}} does NOT track or keep a record of your location."
   },
   "verification_code_alerts": {
     "invalid_code_title": "Invalid Code",

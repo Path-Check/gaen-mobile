@@ -46,6 +46,7 @@ export type ENPermissionStatus =
   | "Active"
   | "Disabled"
   | "BluetoothOff"
+  | "LocationOff"
   | "Restricted"
   | "Paused"
   | "Unauthorized"

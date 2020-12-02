@@ -56,6 +56,8 @@ const toStatus = (data: string): ENPermissionStatus => {
       return "Disabled"
     case "BluetoothOff":
       return "BluetoothOff"
+    case "LocationOff":
+      return "LocationOff"
     case "Restricted":
       return "Restricted"
     case "Unauthorized":
