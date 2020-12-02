@@ -13,6 +13,7 @@ export const useRequestExposureNotifications = (): (() => void) => {
 
   const requestExposureNotifications = async () => {
     const response = await NativeModule.requestAuthorization()
+
     if (response.kind === "success") {
       handleENRequestSuccess(response.status)
     } else {
@@ -26,6 +27,9 @@ export const useRequestExposureNotifications = (): (() => void) => {
         break
       case "BluetoothOff":
         showEnableBluetoothAlert()
+        break
+      case "LocationOff":
+        showEnableLocationAlert()
         break
       default:
         showBaseExposureNotificationsAlert()
@@ -48,14 +52,6 @@ export const useRequestExposureNotifications = (): (() => void) => {
     }
   }
 
-  const showBaseExposureNotificationsAlert = () => {
-    if (Platform.OS === "ios") {
-      showShareExposureInformationAlert()
-    } else {
-      showUseExposureNotificationsAlert()
-    }
-  }
-
   const showAlert = (title: string, body: string) => {
     Alert.alert(title, body, [
       {
@@ -67,6 +63,14 @@ export const useRequestExposureNotifications = (): (() => void) => {
         onPress: () => openAppSettings(),
       },
     ])
+  }
+
+  const showBaseExposureNotificationsAlert = () => {
+    if (Platform.OS === "ios") {
+      showShareExposureInformationAlert()
+    } else {
+      showUseExposureNotificationsAlert()
+    }
   }
 
   const showUseExposureNotificationsAlert = () => {
@@ -98,6 +102,15 @@ export const useRequestExposureNotifications = (): (() => void) => {
         applicationName,
       }),
       t("exposure_notification_alerts.bluetooth_body"),
+    )
+  }
+
+  const showEnableLocationAlert = () => {
+    showAlert(
+      t("exposure_notification_alerts.location_title", {
+        applicationName,
+      }),
+      t("exposure_notification_alerts.location_body", { applicationName }),
     )
   }
 
