@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Alert, Platform } from "react-native"
 
-import { ENPermissionStatus } from "./Device/PermissionsContext"
-import { RequestAuthorizationError } from "./gaen/nativeModule"
 import { useApplicationName } from "./Device/useApplicationInfo"
 import { openAppSettings } from "./Device/nativeModule"
 import * as NativeModule from "./gaen/nativeModule"
@@ -27,7 +25,7 @@ export const useRequestExposureNotifications = (): (() => void) => {
         default:
           showBaseExposureNotificationsAlert()
       }
-    } else {
+    } else if (response.kind === "failure") {
       switch (response.error) {
         case "Restricted":
           showSetToActiveRegionAlert()
