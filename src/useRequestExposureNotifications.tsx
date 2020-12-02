@@ -15,40 +15,32 @@ export const useRequestExposureNotifications = (): (() => void) => {
     const response = await NativeModule.requestAuthorization()
 
     if (response.kind === "success") {
-      handleENRequestSuccess(response.status)
+      switch (response.status) {
+        case "Active":
+          break
+        case "BluetoothOff":
+          showEnableBluetoothAlert()
+          break
+        case "LocationOff":
+          showEnableLocationAlert()
+          break
+        default:
+          showBaseExposureNotificationsAlert()
+      }
     } else {
-      handleENRequestFailure(response.error)
-    }
-  }
-
-  const handleENRequestSuccess = (status: ENPermissionStatus) => {
-    switch (status) {
-      case "Active":
-        break
-      case "BluetoothOff":
-        showEnableBluetoothAlert()
-        break
-      case "LocationOff":
-        showEnableLocationAlert()
-        break
-      default:
-        showBaseExposureNotificationsAlert()
-    }
-  }
-
-  const handleENRequestFailure = (error: RequestAuthorizationError) => {
-    switch (error) {
-      case "Restricted":
-        showSetToActiveRegionAlert()
-        break
-      case "NotAuthorized":
-        showBaseExposureNotificationsAlert()
-        break
-      case "Unknown":
-        showBaseExposureNotificationsAlert()
-        break
-      default:
-        showBaseExposureNotificationsAlert()
+      switch (response.error) {
+        case "Restricted":
+          showSetToActiveRegionAlert()
+          break
+        case "NotAuthorized":
+          showBaseExposureNotificationsAlert()
+          break
+        case "Unknown":
+          showBaseExposureNotificationsAlert()
+          break
+        default:
+          showBaseExposureNotificationsAlert()
+      }
     }
   }
 
