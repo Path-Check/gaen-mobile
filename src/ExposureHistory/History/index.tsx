@@ -29,6 +29,8 @@ import {
   Affordances,
   Iconography,
 } from "../../styles"
+import { usePermissionsContext } from "../../Device/PermissionsContext"
+import { useRequestExposureNotifications } from "../../useRequestExposureNotifications"
 
 type Posix = number
 
@@ -47,6 +49,10 @@ const History: FunctionComponent<HistoryProps> = ({
   const navigation = useNavigation()
   const { detectExposures } = useExposureContext()
   const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
+  const {
+    exposureNotifications: { status },
+  } = usePermissionsContext()
+  const requestExposureNotifications = useRequestExposureNotifications()
 
   const [checkingForExposures, setCheckingForExposures] = useState<boolean>(
     false,
@@ -54,6 +60,25 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const handleOnPressMoreInfo = () => {
     navigation.navigate(ExposureHistoryStackScreens.MoreInfo)
+  }
+
+  const showEnableExposureNotificationsAlert = () => {
+    Alert.alert(
+      t("exposure_notification_alerts.cant_check_for_exposures_title"),
+      t("exposure_notification_alerts.cant_check_for_exposures_body"),
+      [
+        {
+          text: t("common.back"),
+          style: "cancel",
+        },
+        {
+          text: t(
+            "exposure_notification_alerts.cant_check_for_exposures_button",
+          ),
+          onPress: () => requestExposureNotifications(),
+        },
+      ],
+    )
   }
 
   const checkForExposures = async () => {
@@ -101,7 +126,11 @@ const History: FunctionComponent<HistoryProps> = ({
   }
 
   const handleOnPressCheckForExposures = async () => {
-    await checkForExposures()
+    if (status !== "Active") {
+      showEnableExposureNotificationsAlert()
+    } else {
+      await checkForExposures()
+    }
   }
 
   const showExposureHistory = exposures.length > 0
