@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import {
   Alert,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
@@ -42,6 +42,7 @@ const CodeInputForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const route = useRoute()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
   const {
@@ -77,6 +78,14 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnPressSecondaryButton = () => {
     navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
   }
+  
+  useEffect(() => {
+    // Check for code in query string and set the code.
+    if (route.params && "c" in route.params) {
+      setCode(route.params.c)
+    }
+    // Prevent user from changing the code.
+  }, [code, route.params])
 
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
