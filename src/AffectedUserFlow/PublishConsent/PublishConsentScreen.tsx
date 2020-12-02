@@ -16,7 +16,7 @@ const PublishConsentScreen: FunctionComponent = () => {
   const [revisionToken, setRevisionToken] = useState("")
   const { storeRevisionToken, getRevisionToken } = useExposureContext()
   const navigation = useNavigation()
-  const { certificate, hmacKey, exposureKeys } = useAffectedUserContext()
+  const { certificate, hmacKey, exposureKeys, toHome } = useAffectedUserContext()
   const { appPackageName, regionCodes } = useConfigurationContext()
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const PublishConsentScreen: FunctionComponent = () => {
         revisionToken={revisionToken}
         appPackageName={appPackageName}
         regionCodes={regionCodes}
+        toHome={toHome}
       />
     )
   } else {

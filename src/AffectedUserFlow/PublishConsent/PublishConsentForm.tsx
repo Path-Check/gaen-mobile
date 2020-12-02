@@ -40,6 +40,7 @@ interface PublishConsentFormProps {
   storeRevisionToken: (revisionToken: string) => Promise<void>
   appPackageName: string
   regionCodes: string[]
+  toHome: (homeKeyName: string, navigation: Readonly<any>) => void
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
@@ -50,6 +51,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   storeRevisionToken,
   appPackageName,
   regionCodes,
+  toHome,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
@@ -180,7 +182,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("common.confirm"),
-          onPress: () => navigation.navigate(HomeStackScreens.Home),
+          onPress: () => toHome(HomeStackScreens.Home, navigation),
           style: "destructive",
         },
       ],
