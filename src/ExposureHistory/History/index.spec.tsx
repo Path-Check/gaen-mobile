@@ -65,7 +65,9 @@ describe("History", () => {
             "You must enable Exposure Notifications to check for exposures.",
             [
               expect.objectContaining({ text: "Back" }),
-              expect.objectContaining({ text: "Tell Me How" }),
+              expect.objectContaining({
+                text: "Enable Exposure Notifications",
+              }),
             ],
           )
         })
