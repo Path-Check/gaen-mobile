@@ -7,7 +7,7 @@ import React, {
 import { CommonActions, useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
-import { Stacks, WelcomeStackScreens } from "../navigation"
+import { WelcomeStackScreens } from "../navigation"
 
 type Token = string
 type Key = string
