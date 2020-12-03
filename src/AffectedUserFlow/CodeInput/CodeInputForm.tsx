@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   Alert,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
@@ -23,8 +23,11 @@ import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
+  HomeStackScreens,
 } from "../../navigation"
 import Logger from "../../logger"
+import { AffectedUserFlowStackParamList } from "../../navigation/AffectedUserFlowStack"
+import { applyHeaderLeftBackButton } from "../../navigation/HeaderLeftBackButton"
 
 import {
   Spacing,
@@ -38,10 +41,16 @@ import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
+type CodeInputFormRouteProp = RouteProp<
+  AffectedUserFlowStackParamList,
+  "AffectedUserCodeInput"
+>
+
 const CodeInputForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const route = useRoute<CodeInputFormRouteProp>()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
   const {
@@ -54,16 +63,21 @@ const CodeInputForm: FunctionComponent = () => {
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  const codeLengthMin = 6
-  const codeLengthMax = 16
-  const codeIsInvalidLength =
-    code.length < codeLengthMin || code.length > codeLengthMax
-  const codeContainsNonAlphanumericChars = (code: string) =>
-    !code.match(/^[a-zA-Z0-9]*$/)
+  const linkCode: string | undefined = route?.params?.c || route?.params?.code
+  useEffect(() => {
+    if (linkCode) {
+      setCode(linkCode)
+      navigation.setOptions({
+        headerLeft: applyHeaderLeftBackButton(() =>
+          navigation.navigate(HomeStackScreens.Home),
+        ),
+      })
+    }
+  }, [linkCode, navigation])
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
-    if (newCode && codeContainsNonAlphanumericChars(newCode)) {
+    if (newCode && !codeContainsOnlyAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
     } else {
       setErrorMessage("")
@@ -186,20 +200,34 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled =
-    codeIsInvalidLength || codeContainsNonAlphanumericChars(code)
+  const codeLengthMin = 6
+  const codeLengthMax = 16
+  const codeContainsOnlyAlphanumericChars = (code: string) => {
+    const alphanumericRegex = /^[a-zA-Z0-9]*$/
+    return Boolean(code.match(alphanumericRegex))
+  }
+
+  const codeIsValid = (code: string): boolean => {
+    return (
+      code.length >= codeLengthMin &&
+      code.length <= codeLengthMax &&
+      codeContainsOnlyAlphanumericChars(code)
+    )
+  }
+
+  const isDisabled = !codeIsValid(code)
+  const isEditable = !linkCode
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
-  const isIOS = Platform.OS === "ios"
-
-  const shouldBeAccessible = errorMessage !== ""
+  const keyboardBehavior = Platform.OS === "ios" ? "position" : "height"
+  const errorMessageShouldBeAccessible = errorMessage !== ""
 
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
-      behavior={isIOS ? "position" : "height"}
+      behavior={keyboardBehavior}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
@@ -212,6 +240,7 @@ const CodeInputForm: FunctionComponent = () => {
           </Text>
         </View>
         <TextInput
+          editable={isEditable}
           testID="code-input"
           value={code}
           placeholder={t("export.code").toUpperCase()}
@@ -226,8 +255,8 @@ const CodeInputForm: FunctionComponent = () => {
           blurOnSubmit={false}
         />
         <View
-          accessibilityElementsHidden={!shouldBeAccessible}
-          accessible={shouldBeAccessible}
+          accessibilityElementsHidden={!errorMessageShouldBeAccessible}
+          accessible={errorMessageShouldBeAccessible}
         >
           <Text style={style.errorSubtitle}>{errorMessage}</Text>
         </View>

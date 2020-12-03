@@ -17,7 +17,7 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
-  HomeStackScreens,
+  Stacks,
 } from "../../navigation"
 import { useExposureContext } from "../../ExposureContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
@@ -180,7 +180,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("common.confirm"),
-          onPress: () => navigation.navigate(HomeStackScreens.Home),
+          onPress: () => navigation.navigate(Stacks.Home),
           style: "destructive",
         },
       ],
