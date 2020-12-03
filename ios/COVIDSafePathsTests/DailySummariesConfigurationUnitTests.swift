@@ -76,7 +76,7 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
       return daySummaryItem
     }
     daySummaryItem.weightedDurationSumHandler = {
-      return TimeInterval(config.triggerThresholdWeightedDuration)
+      return TimeInterval(config.triggerThresholdWeightedDuration * 60) // 15 minutes
     }
     let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
 
@@ -93,7 +93,7 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
       return daySummaryItem
     }
     daySummaryItem.weightedDurationSumHandler = {
-      return TimeInterval(config.triggerThresholdWeightedDuration + 1)
+      return TimeInterval(config.triggerThresholdWeightedDuration * 60) + 1 // 15:01
     }
     let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
 
