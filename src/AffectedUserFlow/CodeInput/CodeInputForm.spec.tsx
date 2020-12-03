@@ -18,7 +18,7 @@ jest.mock("@react-navigation/native")
 describe("CodeInputForm", () => {
   it("initializes with an empty code form", () => {
     const { getByTestId } = render(
-      <AffectedUserProvider>
+      <AffectedUserProvider isOnboardingComplete>
         <CodeInputForm />
       </AffectedUserProvider>,
     )
@@ -65,7 +65,7 @@ describe("CodeInputForm", () => {
 
       const { getByTestId, getByLabelText } = render(
         <ExposureContext.Provider value={exposureContext}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputForm />
           </AffectedUserProvider>
         </ExposureContext.Provider>,
@@ -110,7 +110,7 @@ describe("CodeInputForm", () => {
 
       const { getByTestId, getByLabelText, getByText } = render(
         <ExposureContext.Provider value={factories.exposureContext.build()}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputForm />
           </AffectedUserProvider>
         </ExposureContext.Provider>,
@@ -137,7 +137,7 @@ describe("CodeInputForm", () => {
       Alert.alert = alertSpy
 
       const { getByTestId, getByLabelText } = render(
-        <AffectedUserProvider>
+        <AffectedUserProvider isOnboardingComplete>
           <CodeInputForm />
         </AffectedUserProvider>,
       )
@@ -164,7 +164,7 @@ describe("CodeInputForm", () => {
       Alert.alert = alertSpy
 
       const { getByTestId, getByLabelText } = render(
-        <AffectedUserProvider>
+        <AffectedUserProvider isOnboardingComplete>
           <CodeInputForm />
         </AffectedUserProvider>,
       )
@@ -191,7 +191,7 @@ describe("CodeInputForm", () => {
       Alert.alert = alertSpy
 
       const { getByTestId, getByLabelText } = render(
-        <AffectedUserProvider>
+        <AffectedUserProvider isOnboardingComplete>
           <CodeInputForm />
         </AffectedUserProvider>,
       )
@@ -209,7 +209,7 @@ describe("CodeInputForm", () => {
 
     it("informs of a formatting error", async () => {
       const { getByTestId, getByLabelText, getByText, queryByText } = render(
-        <AffectedUserProvider>
+        <AffectedUserProvider isOnboardingComplete>
           <CodeInputForm />
         </AffectedUserProvider>,
       )

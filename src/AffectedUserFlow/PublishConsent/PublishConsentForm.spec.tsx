@@ -30,6 +30,7 @@ describe("PublishConsentForm", () => {
           revisionToken=""
           appPackageName=""
           regionCodes={[""]}
+          navigateOutOfStack={() => {}}
         />
       </ExposureContext.Provider>,
     )
@@ -83,6 +84,7 @@ describe("PublishConsentForm", () => {
           revisionToken={revisionToken}
           appPackageName={appPackageName}
           regionCodes={regionCodes}
+          navigateOutOfStack={() => {}}
         />,
       )
 
@@ -301,6 +303,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 
@@ -343,6 +346,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 

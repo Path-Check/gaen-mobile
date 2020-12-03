@@ -7,7 +7,6 @@ import React, {
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
-import { useOnboardingContext } from "../OnboardingContext"
 import { Stacks, WelcomeStackScreens } from "../navigation"
 
 type Token = string
@@ -22,12 +21,18 @@ interface AffectedUserContextState {
   navigateOutOfStack: () => void
 }
 
+interface AffectedUserProviderProps {
+  isOnboardingComplete: boolean
+}
+
 export const AffectedUserContext = createContext<
   AffectedUserContextState | undefined
 >(undefined)
 
-export const AffectedUserProvider: FunctionComponent = ({ children }) => {
-  const { isOnboardingComplete } = useOnboardingContext()
+export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> = ({
+  children,
+  isOnboardingComplete,
+}) => {
   const navigation = useNavigation()
 
   const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])

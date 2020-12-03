@@ -38,6 +38,7 @@ const PublishConsentScreen: FunctionComponent = () => {
         revisionToken={revisionToken}
         appPackageName={appPackageName}
         regionCodes={regionCodes}
+        navigateOutOfStack={navigateOutOfStack}
       />
     )
   } else {

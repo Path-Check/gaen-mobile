@@ -40,6 +40,7 @@ interface PublishConsentFormProps {
   storeRevisionToken: (revisionToken: string) => Promise<void>
   appPackageName: string
   regionCodes: string[]
+  navigateOutOfStack: () => void
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
@@ -50,13 +51,13 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   storeRevisionToken,
   appPackageName,
   regionCodes,
+  navigateOutOfStack,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
   const { getCurrentExposures } = useExposureContext()
-  const { navigateOutOfStack } = useAffectedUserContext()
 
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)

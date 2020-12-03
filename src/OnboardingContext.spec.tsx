@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from "react"
-import { render } from "@testing-library/react-native"
+import { render, waitFor } from "@testing-library/react-native"
 
 import { OnboardingProvider, useOnboardingContext } from "./OnboardingContext"
 import { StorageUtils } from "./utils"
@@ -21,7 +21,7 @@ describe("OnboardingContext", () => {
   })
 
   describe("completing onboarding", () => {
-    it("sets onboarding complete in storage and context", () => {
+    it("sets onboarding complete in storage and context", async () => {
       expect.assertions(2)
       const storageSpy = jest.spyOn(StorageUtils, "setIsOnboardingComplete")
       const { getByText } = render(
@@ -30,8 +30,10 @@ describe("OnboardingContext", () => {
         </OnboardingProvider>,
       )
 
-      expect(storageSpy).toHaveBeenCalled()
-      expect(getByText(/onboarding complete/)).toHaveTextContent("true")
+      await waitFor(() => {
+        expect(storageSpy).toHaveBeenCalled()
+        expect(getByText(/onboarding complete/)).toHaveTextContent("true")
+      })
     })
   })
 

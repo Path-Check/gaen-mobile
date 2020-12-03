@@ -9,6 +9,7 @@ import PublishConsent from "../AffectedUserFlow/PublishConsent/PublishConsentScr
 import VerificationCodeInfo from "../AffectedUserFlow/VerificationCodeInfo"
 import { AffectedUserFlowStackScreens } from "."
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
+import { useOnboardingContext } from "../OnboardingContext"
 
 import { Headers } from "../styles"
 
@@ -25,8 +26,10 @@ export type AffectedUserFlowStackParamList = {
 const Stack = createStackNavigator<AffectedUserFlowStackParamList>()
 
 const AffectedUserStack: FunctionComponent = () => {
+  const { isOnboardingComplete } = useOnboardingContext()
+
   return (
-    <AffectedUserProvider>
+    <AffectedUserProvider isOnboardingComplete={isOnboardingComplete}>
       <Stack.Navigator
         screenOptions={{ headerShown: false, gestureEnabled: false }}
       >
