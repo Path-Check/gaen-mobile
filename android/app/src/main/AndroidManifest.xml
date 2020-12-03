@@ -41,18 +41,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter >
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "https://app.associateddomain.org/” -->
-                <!-- Change android:host field to a registered domain -->
-                <data 
-                    android:scheme="https"
-                    android:host="app.associateddomain.org"
-                    android:pathPrefix="/" 
-                  />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
