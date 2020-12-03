@@ -23,7 +23,6 @@ import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
-  Stacks,
 } from "../../navigation"
 import Logger from "../../logger"
 import { AffectedUserFlowStackParamList } from "../../navigation/AffectedUserFlowStack"
