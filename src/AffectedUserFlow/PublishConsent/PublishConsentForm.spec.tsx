@@ -135,6 +135,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 
@@ -178,6 +179,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 
@@ -221,6 +223,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 
@@ -262,6 +265,7 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
           />,
         )
 

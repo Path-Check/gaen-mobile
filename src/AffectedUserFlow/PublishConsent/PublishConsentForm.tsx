@@ -30,7 +30,6 @@ import {
   PostKeysFailure,
   PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
-import { useAffectedUserContext } from "../AffectedUserContext"
 
 interface PublishConsentFormProps {
   hmacKey: string
