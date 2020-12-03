@@ -48,21 +48,13 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   }
 
   const navigateOutOfStack = () => {
-    if (isOnboardingComplete) {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "App" }],
-        }),
-      )
-    } else {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: WelcomeStackScreens.Welcome }],
-        }),
-      )
-    }
+    const route = isOnboardingComplete ? "App" : WelcomeStackScreens.Welcome
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: route }],
+      }),
+    )
   }
 
   return (
