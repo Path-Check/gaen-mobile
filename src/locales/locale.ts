@@ -24,6 +24,7 @@ export type Locale =
   | "sk"
   | "so"
   | "tl"
+  | "tr"
   | "ur"
   | "vi"
   | "zh_Hant"
@@ -139,6 +140,9 @@ export const fromString = (l: string): Locale => {
     case "tl-ph":
     case "tl": {
       return "tl"
+    }
+    case "tr": {
+      return "tr"
     }
     case "ur": {
       return "ur"
