@@ -33,10 +33,9 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
     userHasCompletedOnboarding,
   )
 
-  const completeOnboarding = () => {
-    StorageUtils.setIsOnboardingComplete()
+  const completeOnboarding = async () => {
+    await StorageUtils.setIsOnboardingComplete()
     setIsOnboardingComplete(true)
-    return Promise.resolve()
   }
 
   const resetOnboarding = () => {

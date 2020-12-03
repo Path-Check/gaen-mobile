@@ -61,7 +61,7 @@ export const useActivationNavigation = (): ActivationNavigation => {
 
   const activationSteps = determineActivationSteps(environment)
 
-  const goToNextScreenFrom = (currentStep: ActivationStep) => {
+  const goToNextScreenFrom = async (currentStep: ActivationStep) => {
     const currentStepIndex: number | undefined = activationSteps.findIndex(
       (step) => step === currentStep,
     )
@@ -71,9 +71,8 @@ export const useActivationNavigation = (): ActivationNavigation => {
       const nextScreen = toScreen(nextStepName)
       navigation.navigate(nextScreen)
     } else {
-      completeOnboarding().then(() => {
-        navigation.navigate("App", { screen: Stacks.Home })
-      })
+      await completeOnboarding()
+      navigation.navigate("App", { screen: Stacks.Home })
     }
   }
 
