@@ -78,7 +78,9 @@ const ReportTestResult: FunctionComponent = () => {
   const { t } = useTranslation()
 
   const handleOnPressReportTestResult = () => {
-    navigation.navigate(HomeStackScreens.AffectedUserStack)
+    navigation.navigate(HomeStackScreens.AffectedUserStack, {
+      screen: AffectedUserFlowStackScreens.AffectedUserStart,
+    })
   }
 
   const handleOnPressMoreInfo = () => {

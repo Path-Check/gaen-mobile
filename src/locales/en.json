@@ -89,6 +89,7 @@
     "consent_warning_title": "Warning!",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
+    "enable_exposure_notifications_button": "Enable Exposure Notifications",
     "enter_verification_code": "Enter verification code",
     "error": {
       "invalid_code": "Try a different code",
