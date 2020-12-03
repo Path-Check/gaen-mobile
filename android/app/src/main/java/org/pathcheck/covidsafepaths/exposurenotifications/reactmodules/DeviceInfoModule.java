@@ -9,7 +9,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 import javax.annotation.Nonnull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
-import org.pathcheck.covidsafepaths.helpers.BluetoothHelper;
 import org.pathcheck.covidsafepaths.helpers.LocationHelper;
 
 @SuppressWarnings("unused")
