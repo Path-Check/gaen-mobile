@@ -226,6 +226,7 @@ const CodeInputForm: FunctionComponent = () => {
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
       behavior={keyboardBehavior}
+      keyboardVerticalOffset={-140}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
