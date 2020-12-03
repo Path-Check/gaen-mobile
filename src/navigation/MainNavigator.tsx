@@ -101,7 +101,13 @@ const MainNavigator: FunctionComponent = () => {
       <Stack.Navigator headerMode="screen" screenOptions={defaultScreenOptions}>
         {isOnboardingComplete ? (
           <>
-            <Stack.Screen name={"App"} component={MainTabNavigator} />
+            <Stack.Screen
+              name={"App"}
+              component={MainTabNavigator}
+              options={{
+                gestureEnabled: false,
+              }}
+            />
             <Stack.Screen
               name={Stacks.Settings}
               component={SettingsStack}
@@ -113,6 +119,9 @@ const MainNavigator: FunctionComponent = () => {
             <Stack.Screen
               name={WelcomeStackScreens.Welcome}
               component={Welcome}
+              options={{
+                gestureEnabled: false,
+              }}
             />
             <Stack.Screen
               name={ModalStackScreens.AgeVerification}

@@ -4,7 +4,7 @@ import React, {
   useState,
   useContext,
 } from "react"
-import { useNavigation } from "@react-navigation/native"
+import { CommonActions, useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
 import { Stacks, WelcomeStackScreens } from "../navigation"
@@ -49,9 +49,19 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
 
   const navigateOutOfStack = () => {
     if (isOnboardingComplete) {
-      navigation.navigate("App", { screen: Stacks.Home })
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "App" }],
+        }),
+      )
     } else {
-      navigation.navigate(WelcomeStackScreens.Welcome)
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: WelcomeStackScreens.Welcome }],
+        }),
+      )
     }
   }
 
