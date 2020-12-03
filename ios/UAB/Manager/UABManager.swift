@@ -23,7 +23,8 @@ class UABManager: NSObject {
     }
   }
 
-  @objc func submitDiagnosisKeys(_ verificationCode: String, date: Date, completionHandler: @escaping (Error?) -> Void) {
+  @objc func submitDiagnosisKeys(_ verificationCode: String, date: Int, completionHandler: @escaping (Error?) -> Void) {
+    let date = date.fromPosixRepresentation
     getCodableKeysWithRiskLevel { result in
       switch result {
       case .success(let keys):

@@ -30,7 +30,7 @@ RCT_REMAP_METHOD(submitPhoneNumber,
 
 RCT_REMAP_METHOD(submitDiagnosisKeys,
                  verificationCode: (NSString *)verificationCode
-                 date: (NSDate *)date
+                 date: (NSInteger)date
                  submitDiagnosisKeysWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
