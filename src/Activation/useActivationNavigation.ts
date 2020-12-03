@@ -4,7 +4,11 @@ import { useNavigation } from "@react-navigation/native"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 import { LocationPermissions } from "../Device/useLocationPermissions"
-import { ActivationStackScreen, ActivationStackScreens } from "../navigation"
+import {
+  ActivationStackScreen,
+  ActivationStackScreens,
+  Stacks,
+} from "../navigation"
 import { useOnboardingContext } from "../OnboardingContext"
 
 type ActivationStep =
@@ -67,7 +71,9 @@ export const useActivationNavigation = (): ActivationNavigation => {
       const nextScreen = toScreen(nextStepName)
       navigation.navigate(nextScreen)
     } else {
-      completeOnboarding()
+      completeOnboarding().then(() => {
+        navigation.navigate("App", { screen: Stacks.Home })
+      })
     }
   }
 

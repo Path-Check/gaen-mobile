@@ -31,6 +31,7 @@ import {
   PostKeysFailure,
   PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
+import { useAffectedUserContext } from "../AffectedUserContext"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -56,9 +57,12 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
   const { getCurrentExposures } = useExposureContext()
-  const [isLoading, setIsLoading] = useState(false)
+  const { navigateOutOfStack } = useAffectedUserContext()
+
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
     const newKeysInserted = noOpResponse.newKeysInserted
@@ -180,7 +184,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("common.confirm"),
-          onPress: () => navigation.navigate(Stacks.Home),
+          onPress: navigateOutOfStack,
           style: "destructive",
         },
       ],

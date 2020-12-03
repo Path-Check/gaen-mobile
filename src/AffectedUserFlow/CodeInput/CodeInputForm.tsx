@@ -23,7 +23,7 @@ import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
-  HomeStackScreens,
+  Stacks,
 } from "../../navigation"
 import Logger from "../../logger"
 import { AffectedUserFlowStackParamList } from "../../navigation/AffectedUserFlowStack"
@@ -56,6 +56,7 @@ const CodeInputForm: FunctionComponent = () => {
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
+    navigateOutOfStack,
   } = useAffectedUserContext()
 
   const [code, setCode] = useState("")
@@ -68,12 +69,10 @@ const CodeInputForm: FunctionComponent = () => {
     if (linkCode) {
       setCode(linkCode)
       navigation.setOptions({
-        headerLeft: applyHeaderLeftBackButton(() =>
-          navigation.navigate(HomeStackScreens.Home),
-        ),
+        headerLeft: applyHeaderLeftBackButton(navigateOutOfStack),
       })
     }
-  }, [linkCode, navigation])
+  }, [navigateOutOfStack, linkCode, navigation])
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)

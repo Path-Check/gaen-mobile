@@ -4,8 +4,11 @@ import React, {
   useState,
   useContext,
 } from "react"
+import { useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
+import { useOnboardingContext } from "../OnboardingContext"
+import { Stacks, WelcomeStackScreens } from "../navigation"
 
 type Token = string
 type Key = string
@@ -16,6 +19,7 @@ interface AffectedUserContextState {
   exposureKeys: ExposureKey[]
   setExposureKeys: (keys: ExposureKey[]) => void
   setExposureSubmissionCredentials: (certificate: Token, hmacKey: Key) => void
+  navigateOutOfStack: () => void
 }
 
 export const AffectedUserContext = createContext<
@@ -23,6 +27,9 @@ export const AffectedUserContext = createContext<
 >(undefined)
 
 export const AffectedUserProvider: FunctionComponent = ({ children }) => {
+  const { isOnboardingComplete } = useOnboardingContext()
+  const navigation = useNavigation()
+
   const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
@@ -35,6 +42,14 @@ export const AffectedUserProvider: FunctionComponent = ({ children }) => {
     setHmacKey(hmacKey)
   }
 
+  const navigateOutOfStack = () => {
+    if (isOnboardingComplete) {
+      navigation.navigate("App", { screen: Stacks.Home })
+    } else {
+      navigation.navigate(WelcomeStackScreens.Welcome)
+    }
+  }
+
   return (
     <AffectedUserContext.Provider
       value={{
@@ -43,6 +58,7 @@ export const AffectedUserProvider: FunctionComponent = ({ children }) => {
         exposureKeys,
         setExposureKeys,
         setExposureSubmissionCredentials,
+        navigateOutOfStack,
       }}
     >
       {children}
