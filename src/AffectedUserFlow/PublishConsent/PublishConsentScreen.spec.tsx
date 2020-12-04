@@ -14,21 +14,13 @@ describe("PublishConsentScreen", () => {
   describe("when the context contains hmacKey and certificate", () => {
     it("renders the PublishConsentForm", () => {
       const { queryByText, getByTestId } = render(
-        <OnboardingContext.Provider
-          value={{
-            isOnboardingComplete: true,
-            completeOnboarding: async () => {},
-            resetOnboarding: () => {},
-          }}
-        >
-          <ExposureContext.Provider value={factories.exposureContext.build()}>
-            <AffectedUserContext.Provider
-              value={factories.affectedUserFlowContext.build()}
-            >
-              <PublishConsentScreen />
-            </AffectedUserContext.Provider>
-          </ExposureContext.Provider>
-        </OnboardingContext.Provider>,
+        <ExposureContext.Provider value={factories.exposureContext.build()}>
+          <AffectedUserContext.Provider
+            value={factories.affectedUserFlowContext.build()}
+          >
+            <PublishConsentScreen />
+          </AffectedUserContext.Provider>
+        </ExposureContext.Provider>,
       )
 
       expect(queryByText("Invalid State")).toBeNull()
@@ -40,21 +32,15 @@ describe("PublishConsentScreen", () => {
     it("displays warning and prompts user to go back to home screen", async () => {
       const navigateOutOfStackSpy = jest.fn()
       const { getByText } = render(
-        <OnboardingContext.Provider
-          value={{
-            isOnboardingComplete: true,
-            completeOnboarding: async () => {},
-            resetOnboarding: () => {},
-          }}
+        <AffectedUserContext.Provider
+          value={factories.affectedUserFlowContext.build({
+            hmacKey: null,
+            certificate: null,
+            navigateOutOfStack: navigateOutOfStackSpy,
+          })}
         >
-          <AffectedUserContext.Provider
-            value={factories.affectedUserFlowContext.build({
-              navigateOutOfStack: navigateOutOfStackSpy,
-            })}
-          >
-            <PublishConsentScreen />
-          </AffectedUserContext.Provider>
-        </OnboardingContext.Provider>,
+          <PublishConsentScreen />
+        </AffectedUserContext.Provider>,
       )
 
       expect(getByText("Invalid State")).toBeDefined()
