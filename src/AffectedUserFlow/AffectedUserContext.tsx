@@ -7,18 +7,20 @@ import React, {
 import { CommonActions, useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
-import { WelcomeStackScreens } from "../navigation"
+import { Stacks, WelcomeStackScreens } from "../navigation"
 
 type Token = string
 type Key = string
 
-interface AffectedUserContextState {
+export interface AffectedUserContextState {
   certificate: Token | null
   hmacKey: Key | null
   exposureKeys: ExposureKey[]
   setExposureKeys: (keys: ExposureKey[]) => void
   setExposureSubmissionCredentials: (certificate: Token, hmacKey: Key) => void
   navigateOutOfStack: () => void
+  linkCode: string | undefined
+  setLinkCode: (linkCode: string | undefined) => void
 }
 
 interface AffectedUserProviderProps {
@@ -38,6 +40,7 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
+  const [linkCode, setLinkCode] = useState<string | undefined>(undefined)
 
   const setExposureSubmissionCredentials = (
     certificate: Token,
@@ -48,13 +51,17 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   }
 
   const navigateOutOfStack = () => {
-    const route = isOnboardingComplete ? "App" : WelcomeStackScreens.Welcome
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: route }],
-      }),
-    )
+    if (linkCode) {
+      const route = isOnboardingComplete ? "App" : WelcomeStackScreens.Welcome
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: route }],
+        }),
+      )
+    } else {
+      navigation.navigate(Stacks.Home)
+    }
   }
 
   return (
@@ -66,6 +73,8 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
         setExposureKeys,
         setExposureSubmissionCredentials,
         navigateOutOfStack,
+        linkCode,
+        setLinkCode,
       }}
     >
       {children}

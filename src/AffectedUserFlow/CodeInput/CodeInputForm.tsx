@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react"
+import React, { FunctionComponent, useState } from "react"
 import {
   Alert,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native"
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
@@ -25,8 +25,6 @@ import {
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 import Logger from "../../logger"
-import { AffectedUserFlowStackParamList } from "../../navigation/AffectedUserFlowStack"
-import { applyHeaderLeftBackButton } from "../../navigation/HeaderLeftBackButton"
 
 import {
   Spacing,
@@ -40,38 +38,25 @@ import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
-type CodeInputFormRouteProp = RouteProp<
-  AffectedUserFlowStackParamList,
-  "AffectedUserCodeInput"
->
+interface CodeInputFormProps {
+  linkCode: string | undefined
+}
 
-const CodeInputForm: FunctionComponent = () => {
+const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute<CodeInputFormRouteProp>()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
-    navigateOutOfStack,
   } = useAffectedUserContext()
 
-  const [code, setCode] = useState("")
+  const [code, setCode] = useState(linkCode || "")
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
-
-  const linkCode: string | undefined = route?.params?.c || route?.params?.code
-  useEffect(() => {
-    if (linkCode) {
-      setCode(linkCode)
-      navigation.setOptions({
-        headerLeft: applyHeaderLeftBackButton(navigateOutOfStack),
-      })
-    }
-  }, [navigateOutOfStack, linkCode, navigation])
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)

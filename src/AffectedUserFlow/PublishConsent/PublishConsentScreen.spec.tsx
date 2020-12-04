@@ -23,14 +23,7 @@ describe("PublishConsentScreen", () => {
         >
           <ExposureContext.Provider value={factories.exposureContext.build()}>
             <AffectedUserContext.Provider
-              value={{
-                hmacKey: "hmacKey",
-                certificate: "certificate",
-                setExposureSubmissionCredentials: jest.fn(),
-                setExposureKeys: jest.fn(),
-                exposureKeys: [],
-                navigateOutOfStack: () => {},
-              }}
+              value={factories.affectedUserFlowContext.build()}
             >
               <PublishConsentScreen />
             </AffectedUserContext.Provider>
@@ -55,14 +48,9 @@ describe("PublishConsentScreen", () => {
           }}
         >
           <AffectedUserContext.Provider
-            value={{
-              hmacKey: null,
-              certificate: null,
-              setExposureSubmissionCredentials: jest.fn(),
-              setExposureKeys: jest.fn(),
-              exposureKeys: [],
+            value={factories.affectedUserFlowContext.build({
               navigateOutOfStack: navigateOutOfStackSpy,
-            }}
+            })}
           >
             <PublishConsentScreen />
           </AffectedUserContext.Provider>
