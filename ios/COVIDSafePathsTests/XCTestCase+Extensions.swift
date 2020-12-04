@@ -123,7 +123,7 @@ extension XCTestCase {
     
     let enExposureSummaryItemMock = MockENExposureSummaryItem()
     enExposureSummaryItemMock.weightedDurationSumHandler = {
-      return forceRiskScore == .aboveThreshold ? 20 : 0
+      return forceRiskScore == .aboveThreshold ? 1200 : 0 // 20 minutes : 0 minutes
     }
     
     let enExposureDaySummaryMock = MockENExposureDaySummary()
