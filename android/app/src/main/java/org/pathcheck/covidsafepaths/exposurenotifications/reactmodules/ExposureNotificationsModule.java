@@ -12,6 +12,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
+import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import javax.annotation.Nonnull;
@@ -57,6 +58,17 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
       @Override
       public void onFailure(@NotNull Throwable exception) {
+        if (!LocationHelper.Companion.isLocationEnabled(reactContext)) {
+          promise.resolve(CallbackMessages.EN_ERROR_LOCATION_OFF);
+          return;
+        }
+
+        if (exception instanceof ApiException) {
+          ApiException apiException = (ApiException) exception;
+          promise.resolve(transformApiExceptionToJSString(apiException));
+          return;
+        }
+
         promise.reject(exception);
       }
     };
@@ -65,6 +77,31 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
         client.requestPermissionToStartTracing(reactContext),
         callback,
         AppExecutors.getLightweightExecutor());
+  }
+
+  private String transformApiExceptionToJSString(ApiException exception) {
+    switch (exception.getStatusCode()) {
+      case ExposureNotificationStatusCodes.FAILED_ALREADY_STARTED:
+        return CallbackMessages.EN_ERROR_ALREADY_STARTED;
+      case ExposureNotificationStatusCodes.FAILED_BLUETOOTH_DISABLED:
+        return CallbackMessages.EN_ERROR_BLUETOOTH_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_DISK_IO:
+        return CallbackMessages.EN_ERROR_FAILED_DISK_IO;
+      case ExposureNotificationStatusCodes.FAILED_NOT_SUPPORTED:
+        return CallbackMessages.EN_ERROR_NOT_SUPPORTED;
+      case ExposureNotificationStatusCodes.FAILED_RATE_LIMITED:
+        return CallbackMessages.EN_ERROR_RATE_LIMITED;
+      case ExposureNotificationStatusCodes.FAILED_REJECTED_OPT_IN:
+        return CallbackMessages.EN_ERROR_REJECTED_OPT_IN;
+      case ExposureNotificationStatusCodes.FAILED_SERVICE_DISABLED:
+        return CallbackMessages.EN_ERROR_SERVICE_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_TEMPORARILY_DISABLED:
+        return CallbackMessages.EN_ERROR_TEMPORARILY_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_UNAUTHORIZED:
+        return CallbackMessages.EN_ERROR_UNAUTHORIZED;
+    }
+
+    return CallbackMessages.EN_ERROR_UNKNOWN;
   }
 
   @ReactMethod
