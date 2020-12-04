@@ -296,7 +296,7 @@ class ExposureManagerUnitTests: XCTestCase {
     
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.addObserverHandler = { (_, _, name, _) in
-      if name == Notification.Name.AuthorizationStatusDidChange {
+      if name == Notification.Name.ExposureNotificationStatusDidChange {
         registerNotificationExpectation.fulfill()
       }
     }
@@ -335,7 +335,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
@@ -380,7 +380,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let notificationCenterMock = NotificationCenterMock()
 
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
@@ -414,7 +414,7 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
