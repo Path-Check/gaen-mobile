@@ -20,7 +20,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+import org.pathcheck.covidsafepaths.helpers.BluetoothHelper;
+import org.pathcheck.covidsafepaths.helpers.LocationHelper;
 
 @SuppressWarnings("unused")
 @ReactModule(name = MODULE_NAME)
@@ -71,11 +72,22 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     ExposureNotificationClientWrapper.get(getReactApplicationContext())
         .isEnabled()
         .addOnSuccessListener(enabled -> {
-          if (enabled) {
-            promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
-          } else {
+          if (!enabled) {
             promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
+            return;
           }
+
+          if (!BluetoothHelper.Companion.isBluetoothEnabled()) {
+            promise.resolve(CallbackMessages.EN_STATUS_BLUETOOTH_OFF);
+            return;
+          }
+
+          if (!LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
+            promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
+            return;
+          }
+
+          promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
         })
         .addOnFailureListener(
             exception -> {

@@ -23,4 +23,6 @@ public final class CallbackMessages {
   public static final String EN_AUTHORIZATION_UNAUTHORIZED = "UNAUTHORIZED";
   public static final String EN_STATUS_ACTIVE = "Active";
   public static final String EN_STATUS_DISABLED = "Disabled";
+  public static final String EN_STATUS_BLUETOOTH_OFF = "BluetoothOff";
+  public static final String EN_STATUS_LOCATION_OFF = "LocationOff";
 }
