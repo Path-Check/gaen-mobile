@@ -3,7 +3,6 @@ import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
 
 import { AffectedUserContext } from "../AffectedUserContext"
-import { OnboardingContext } from "../../OnboardingContext"
 import { ExposureContext } from "../../ExposureContext"
 import PublishConsentScreen from "./PublishConsentScreen"
 import { factories } from "../../factories"
