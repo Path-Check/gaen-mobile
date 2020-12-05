@@ -38,7 +38,11 @@ import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
-const CodeInputForm: FunctionComponent = () => {
+interface CodeInputFormProps {
+  linkCode: string | undefined
+}
+
+const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -49,21 +53,14 @@ const CodeInputForm: FunctionComponent = () => {
     setExposureKeys,
   } = useAffectedUserContext()
 
-  const [code, setCode] = useState("")
+  const [code, setCode] = useState(linkCode || "")
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  const codeLengthMin = 6
-  const codeLengthMax = 16
-  const codeIsInvalidLength =
-    code.length < codeLengthMin || code.length > codeLengthMax
-  const codeContainsNonAlphanumericChars = (code: string) =>
-    !code.match(/^[a-zA-Z0-9]*$/)
-
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
-    if (newCode && codeContainsNonAlphanumericChars(newCode)) {
+    if (newCode && !codeContainsOnlyAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
     } else {
       setErrorMessage("")
@@ -186,20 +183,35 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled =
-    codeIsInvalidLength || codeContainsNonAlphanumericChars(code)
+  const codeLengthMin = 6
+  const codeLengthMax = 16
+  const codeContainsOnlyAlphanumericChars = (code: string) => {
+    const alphanumericRegex = /^[a-zA-Z0-9]*$/
+    return Boolean(code.match(alphanumericRegex))
+  }
+
+  const codeIsValid = (code: string): boolean => {
+    return (
+      code.length >= codeLengthMin &&
+      code.length <= codeLengthMax &&
+      codeContainsOnlyAlphanumericChars(code)
+    )
+  }
+
+  const isDisabled = !codeIsValid(code)
+  const isEditable = !linkCode
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
-  const isIOS = Platform.OS === "ios"
-
-  const shouldBeAccessible = errorMessage !== ""
+  const keyboardBehavior = Platform.OS === "ios" ? "position" : "height"
+  const errorMessageShouldBeAccessible = errorMessage !== ""
 
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
-      behavior={isIOS ? "position" : "height"}
+      behavior={keyboardBehavior}
+      keyboardVerticalOffset={-140}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
@@ -212,6 +224,7 @@ const CodeInputForm: FunctionComponent = () => {
           </Text>
         </View>
         <TextInput
+          editable={isEditable}
           testID="code-input"
           value={code}
           placeholder={t("export.code").toUpperCase()}
@@ -226,8 +239,8 @@ const CodeInputForm: FunctionComponent = () => {
           blurOnSubmit={false}
         />
         <View
-          accessibilityElementsHidden={!shouldBeAccessible}
-          accessible={shouldBeAccessible}
+          accessibilityElementsHidden={!errorMessageShouldBeAccessible}
+          accessible={errorMessageShouldBeAccessible}
         >
           <Text style={style.errorSubtitle}>{errorMessage}</Text>
         </View>

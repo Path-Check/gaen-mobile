@@ -18,7 +18,7 @@ describe("CodeInputScreen", () => {
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputScreen />
           </AffectedUserProvider>
         </PermissionsContext.Provider>,
@@ -37,7 +37,7 @@ describe("CodeInputScreen", () => {
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputScreen />
           </AffectedUserProvider>
         </PermissionsContext.Provider>,

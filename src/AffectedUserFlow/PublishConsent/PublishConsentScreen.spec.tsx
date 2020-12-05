@@ -1,7 +1,6 @@
 jest.mock("../../logger.ts")
 import React from "react"
 import { render, fireEvent } from "@testing-library/react-native"
-import { useNavigation } from "@react-navigation/native"
 
 import { AffectedUserContext } from "../AffectedUserContext"
 import { ExposureContext } from "../../ExposureContext"
@@ -16,13 +15,7 @@ describe("PublishConsentScreen", () => {
       const { queryByText, getByTestId } = render(
         <ExposureContext.Provider value={factories.exposureContext.build()}>
           <AffectedUserContext.Provider
-            value={{
-              hmacKey: "hmacKey",
-              certificate: "certificate",
-              setExposureSubmissionCredentials: jest.fn(),
-              setExposureKeys: jest.fn(),
-              exposureKeys: [],
-            }}
+            value={factories.affectedUserFlowContext.build()}
           >
             <PublishConsentScreen />
           </AffectedUserContext.Provider>
@@ -35,18 +28,15 @@ describe("PublishConsentScreen", () => {
   })
 
   describe("when the context is missing hmacKey and certificate", () => {
-    it("displays warning and prompts user to go back to home screen", () => {
-      const navigateSpy = jest.fn()
-      ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
+    it("displays warning and prompts user to go back to home screen", async () => {
+      const navigateOutOfStackSpy = jest.fn()
       const { getByText } = render(
         <AffectedUserContext.Provider
-          value={{
+          value={factories.affectedUserFlowContext.build({
             hmacKey: null,
             certificate: null,
-            setExposureSubmissionCredentials: jest.fn(),
-            setExposureKeys: jest.fn(),
-            exposureKeys: [],
-          }}
+            navigateOutOfStack: navigateOutOfStackSpy,
+          })}
         >
           <PublishConsentScreen />
         </AffectedUserContext.Provider>,
@@ -55,7 +45,7 @@ describe("PublishConsentScreen", () => {
       expect(getByText("Invalid State")).toBeDefined()
       fireEvent.press(getByText("Go Back"))
 
-      expect(navigateSpy).toHaveBeenCalledWith("Home")
+      expect(navigateOutOfStackSpy).toHaveBeenCalled()
     })
   })
 })

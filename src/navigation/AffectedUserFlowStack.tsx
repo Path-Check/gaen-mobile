@@ -7,20 +7,29 @@ import CodeInput from "../AffectedUserFlow/CodeInput/CodeInputScreen"
 import Complete from "../AffectedUserFlow/Complete"
 import PublishConsent from "../AffectedUserFlow/PublishConsent/PublishConsentScreen"
 import VerificationCodeInfo from "../AffectedUserFlow/VerificationCodeInfo"
-import { AffectedUserFlowStackScreen, AffectedUserFlowStackScreens } from "."
+import { AffectedUserFlowStackScreens } from "."
 import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
+import { useOnboardingContext } from "../OnboardingContext"
 
 import { Headers } from "../styles"
 
-type AffectedUserFlowStackParams = {
-  [key in AffectedUserFlowStackScreen]: undefined
+export type AffectedUserFlowStackParamList = {
+  AffectedUserStart: undefined
+  VerificationCodeInfo: undefined
+  AffectedUserCodeInput: { code?: string; c?: string }
+  AffectedUserPublishConsent: undefined
+  AffectedUserConfirmUpload: undefined
+  AffectedUserExportDone: undefined
+  AffectedUserComplete: undefined
 }
 
-const Stack = createStackNavigator<AffectedUserFlowStackParams>()
+const Stack = createStackNavigator<AffectedUserFlowStackParamList>()
 
 const AffectedUserStack: FunctionComponent = () => {
+  const { isOnboardingComplete } = useOnboardingContext()
+
   return (
-    <AffectedUserProvider>
+    <AffectedUserProvider isOnboardingComplete={isOnboardingComplete}>
       <Stack.Navigator
         screenOptions={{ headerShown: false, gestureEnabled: false }}
       >
