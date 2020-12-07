@@ -5,17 +5,11 @@ import React, {
   useContext,
 } from "react"
 
-import { ExposureKey } from "../exposureKey"
-
-type Token = string
-type Key = string
+type Posix = number
 
 export interface EscrowVerificationContextState {
-  certificate: Token | null
-  hmacKey: Key | null
-  exposureKeys: ExposureKey[]
-  setExposureKeys: (keys: ExposureKey[]) => void
-  setExposureSubmissionCredentials: (certificate: Token, hmacKey: Key) => void
+  testDate: Posix
+  setTestDate: (testDate: Posix) => void
 }
 
 export const EscrowVerificationContext = createContext<
@@ -23,26 +17,13 @@ export const EscrowVerificationContext = createContext<
 >(undefined)
 
 export const EscrowVerificationProvider: FunctionComponent = ({ children }) => {
-  const [exposureKeys, setExposureKeys] = useState<ExposureKey[]>([])
-  const [hmacKey, setHmacKey] = useState<Key | null>(null)
-  const [certificate, setCertificate] = useState<Token | null>(null)
-
-  const setExposureSubmissionCredentials = (
-    certificate: Token,
-    hmacKey: Key,
-  ) => {
-    setCertificate(certificate)
-    setHmacKey(hmacKey)
-  }
+  const [testDate, setTestDate] = useState(Date.now)
 
   return (
     <EscrowVerificationContext.Provider
       value={{
-        hmacKey,
-        certificate,
-        exposureKeys,
-        setExposureKeys,
-        setExposureSubmissionCredentials,
+        testDate,
+        setTestDate,
       }}
     >
       {children}

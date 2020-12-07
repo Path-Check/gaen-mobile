@@ -21,7 +21,11 @@ export const Start: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const handleOnPressContinue = () => {}
+  const handleOnPressContinue = () => {
+    navigation.navigate(
+      EscrowVerificationRoutes.EscrowVerificationUserDetailsForm,
+    )
+  }
 
   const handleOnPressSecondaryButton = () => {
     navigation.navigate(EscrowVerificationRoutes.EscrowVerificationMoreInfo)
