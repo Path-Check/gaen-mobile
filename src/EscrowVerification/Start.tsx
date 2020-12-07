@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, EscrowVerificationRoutes } from "../navigation"
 import { Text } from "../components"
 
 import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
@@ -18,10 +19,13 @@ import { Icons, Images } from "../assets"
 export const Start: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const handleOnPressContinue = () => {}
 
-  const handleOnPressSecondaryButton = () => {}
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(EscrowVerificationRoutes.EscrowVerificationMoreInfo)
+  }
 
   return (
     <ScrollView
