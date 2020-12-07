@@ -44,6 +44,13 @@
 		B5BD2BC02507E81A00B2F62E /* UtilsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */; };
 		B5BD2BC22507E84D00B2F62E /* UtilsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BC12507E84D00B2F62E /* UtilsModule.m */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
+		B5CEBF6E25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CEBF6D25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m */; };
+		B5CEBF7125780D8200BFFFF2 /* EscrowVerificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D98A2925780B1E00955A6F /* EscrowVerificationClient.swift */; };
+		B5CEC004257810D200BFFFF2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC002257810D200BFFFF2 /* APIClient.swift */; };
+		B5CEC00B257811CD00BFFFF2 /* DiagnosisSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC00A257811CD00BFFFF2 /* DiagnosisSubmission.swift */; };
+		B5CEC015257814B500BFFFF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC014257814B500BFFFF2 /* Extensions.swift */; };
+		B5CEC01E257815F200BFFFF2 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC01D257815F200BFFFF2 /* DataStore.swift */; };
+		B5CEC06A25781D6900BFFFF2 /* EscrowVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC06925781D6900BFFFF2 /* EscrowVerificationManager.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
 		B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */; };
@@ -52,10 +59,9 @@
 		B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D224916B3600433980 /* String+Extensions.swift */; };
 		B5FBB0D524916D8900433980 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D424916D8900433980 /* UserState.swift */; };
 		B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D624916DE100433980 /* Notification+Extensions.swift */; };
-		B5FC37C12489B075006474EB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37C02489B075006474EB /* APIClient.swift */; };
 		B5FC37C62489B1B3006474EB /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37C52489B1B3006474EB /* APIRequest.swift */; };
 		B5FC37CA2489B1C1006474EB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37C92489B1C1006474EB /* JSON.swift */; };
-		B5FC37CC2489B251006474EB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CB2489B251006474EB /* Result.swift */; };
+		B5FC37CC2489B251006474EB /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CB2489B251006474EB /* GenericResult.swift */; };
 		B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CD2489B359006474EB /* TypeAliases.swift */; };
 		B5FC37D02489B3DE006474EB /* StructuredError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CF2489B3DE006474EB /* StructuredError.swift */; };
 		B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */; };
@@ -255,6 +261,13 @@
 		B5BD2BC12507E84D00B2F62E /* UtilsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilsModule.m; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		B5C9722F24B8A909007F4C0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B5CEBF6D25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EscrowVerificationKeySubmissionModule.m; sourceTree = "<group>"; };
+		B5CEC002257810D200BFFFF2 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B5CEC00A257811CD00BFFFF2 /* DiagnosisSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisSubmission.swift; sourceTree = "<group>"; };
+		B5CEC014257814B500BFFFF2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B5CEC01D257815F200BFFFF2 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		B5CEC06925781D6900BFFFF2 /* EscrowVerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscrowVerificationManager.swift; sourceTree = "<group>"; };
+		B5D98A2925780B1E00955A6F /* EscrowVerificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscrowVerificationClient.swift; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugMenuModule.m; sourceTree = "<group>"; };
 		B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyUrlRequests.swift; sourceTree = "<group>"; };
@@ -266,7 +279,7 @@
 		B5FC37C02489B075006474EB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B5FC37C52489B1B3006474EB /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		B5FC37C92489B1C1006474EB /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
-		B5FC37CB2489B251006474EB /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B5FC37CB2489B251006474EB /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResult.swift; sourceTree = "<group>"; };
 		B5FC37CD2489B359006474EB /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		B5FC37CF2489B3DE006474EB /* StructuredError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredError.swift; sourceTree = "<group>"; };
 		B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyRequests.swift; sourceTree = "<group>"; };
@@ -473,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				C53FD0C324719C25006D3268 /* BT */,
+				B5D98A2625780B1E00955A6F /* EscrowVerification */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -590,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				B5C490A72498F84000588A5F /* Region.swift */,
+				B5FC37C02489B075006474EB /* APIClient.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -636,6 +651,67 @@
 			name = "Exposure Configuration";
 			sourceTree = "<group>";
 		};
+		B5CEBF6525780B6B00BFFFF2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B5D98A2925780B1E00955A6F /* EscrowVerificationClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B5CEBF6A25780BA500BFFFF2 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEBF6D25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m */,
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
+		B5CEC009257811BB00BFFFF2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEC00A257811CD00BFFFF2 /* DiagnosisSubmission.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B5CEC0132578149600BFFFF2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEC014257814B500BFFFF2 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B5CEC01C257815E500BFFFF2 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEC01D257815F200BFFFF2 /* DataStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		B5CEC06825781D5300BFFFF2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEC06925781D6900BFFFF2 /* EscrowVerificationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B5D98A2625780B1E00955A6F /* EscrowVerification */ = {
+			isa = PBXGroup;
+			children = (
+				B5CEC06825781D5300BFFFF2 /* Manager */,
+				B5CEC01C257815E500BFFFF2 /* Store */,
+				B5CEC0132578149600BFFFF2 /* Extensions */,
+				B5CEC009257811BB00BFFFF2 /* Model */,
+				B5CEBF6A25780BA500BFFFF2 /* Bridge */,
+				B5CEBF6525780B6B00BFFFF2 /* API */,
+			);
+			path = EscrowVerification;
+			sourceTree = "<group>";
+		};
 		B5E29D4A249E3A7D00E686DC /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,11 +741,11 @@
 			children = (
 				B5FC37DB248A78C3006474EB /* Model */,
 				B5FC37D12489C25D006474EB /* Requests */,
-				B5FC37C02489B075006474EB /* APIClient.swift */,
 				B5FC37CF2489B3DE006474EB /* StructuredError.swift */,
-				B5FC37CB2489B251006474EB /* Result.swift */,
+				B5FC37CB2489B251006474EB /* GenericResult.swift */,
 				B5FC37CD2489B359006474EB /* TypeAliases.swift */,
 				B5FC37C52489B1B3006474EB /* APIRequest.swift */,
+				B5CEC002257810D200BFFFF2 /* APIClient.swift */,
 				B5FC37C92489B1C1006474EB /* JSON.swift */,
 			);
 			path = API;
@@ -1072,9 +1148,10 @@
 				B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */,
 				C550A66624B7906F002CA7F2 /* ExposureKeyModule.m in Sources */,
 				B54CBF32249A738500218477 /* IndexFileRequests.swift in Sources */,
+				B5CEBF6E25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m in Sources */,
 				B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
-				B5FC37CC2489B251006474EB /* Result.swift in Sources */,
+				B5FC37CC2489B251006474EB /* GenericResult.swift in Sources */,
 				A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */,
 				A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */,
 				B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */,
@@ -1085,6 +1162,7 @@
 				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
 				A53F7B8C24FB3ADC00C5E30A /* Scoring.swift in Sources */,
+				B5CEC015257814B500BFFFF2 /* Extensions.swift in Sources */,
 				B5FC37E3248A82AE006474EB /* Exposure.swift in Sources */,
 				A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */,
 				B508170624EC7647000C5449 /* KeychainService.swift in Sources */,
@@ -1095,6 +1173,7 @@
 				C5C850C7248014F700A494CA /* main.m in Sources */,
 				A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */,
 				B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */,
+				B5CEC06A25781D6900BFFFF2 /* EscrowVerificationManager.swift in Sources */,
 				B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */,
 				A575A3F8250B719300AA742C /* DailySummariesConfiguration.swift in Sources */,
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
@@ -1104,13 +1183,16 @@
 				A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */,
 				B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */,
 				B5FC37F6248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift in Sources */,
-				B5FC37C12489B075006474EB /* APIClient.swift in Sources */,
 				B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */,
+				B5CEC00B257811CD00BFFFF2 /* DiagnosisSubmission.swift in Sources */,
 				B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */,
+				B5CEC004257810D200BFFFF2 /* APIClient.swift in Sources */,
 				B5FBB0CF24916A4C00433980 /* DebugAction.swift in Sources */,
 				B5FC37E1248A7EED006474EB /* ExposureConfigurationRequests.swift in Sources */,
 				B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */,
 				B5FC37DF248A78FC006474EB /* ExposureConfiguration.swift in Sources */,
+				B5CEBF7125780D8200BFFFF2 /* EscrowVerificationClient.swift in Sources */,
+				B5CEC01E257815F200BFFFF2 /* DataStore.swift in Sources */,
 				B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */,
 				B5FC37CA2489B1C1006474EB /* JSON.swift in Sources */,
 				B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */,

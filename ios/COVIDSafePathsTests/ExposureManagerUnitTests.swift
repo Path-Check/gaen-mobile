@@ -139,27 +139,27 @@ class APIClientMock: APIClient {
     return nil
   }
   
-  func downloadRequest<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : DownloadableFile {
-    completion(downloadRequestHander!(request, requestType) as! Result<T.ResponseType>)
+  func downloadRequest<T>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : DownloadableFile {
+    completion(downloadRequestHander!(request, requestType) as! GenericResult<T.ResponseType>)
   }
   
   func request<T>(_ request: T, requestType: RequestType, completion: @escaping GenericCompletion) where T : APIRequest, T.ResponseType == Void {
     
   }
   
-  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
+  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<JSONObject>) -> Void) where T : APIRequest, T.ResponseType == JSONObject {
   }
   
-  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
-    completion(requestHander(request, requestType) as! Result<T.ResponseType>)
+  func request<T>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType : Decodable {
+    completion(requestHander(request, requestType) as! GenericResult<T.ResponseType>)
   }
   
-  func requestList<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T : APIRequest, T.ResponseType : Collection, T.ResponseType.Element : Decodable {
+  func requestList<T>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<[T.ResponseType.Element]>) -> Void) where T : APIRequest, T.ResponseType : Collection, T.ResponseType.Element : Decodable {
     
   }
   
-  func requestString<T>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType == String {
-    completion(requestHander(request, requestType) as! Result<T.ResponseType>)
+  func requestString<T>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T : APIRequest, T.ResponseType == String {
+    completion(requestHander(request, requestType) as! GenericResult<T.ResponseType>)
   }
   
   func cancelAllRequests() {
@@ -350,7 +350,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let enManagerMock = ENManagerMock()
 
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success(String.default) as AnyObject
+      return GenericResult<String>.success(String.default) as AnyObject
     }
     
     let btSecureStorageMock = BTSecureStorageMock(notificationCenter: NotificationCenter())
