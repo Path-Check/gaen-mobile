@@ -4,10 +4,10 @@
 #import "BT-Swift.h"
 #import "ENBridgeConstants.h"
 
-@interface UABKeySubmissionModule: NSObject <RCTBridgeModule>
+@interface EscrowVerificationKeySubmissionModule: NSObject <RCTBridgeModule>
 @end
 
-@implementation UABKeySubmissionModule
+@implementation EscrowVerificationKeySubmissionModule
 
 RCT_EXPORT_MODULE();
 
@@ -16,7 +16,7 @@ RCT_REMAP_METHOD(submitPhoneNumber,
                  submitPhoneNumberWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[UABManager shared] submitPhoneNumberWithPhoneNumber:phoneNumber
+  [[EscrowVerificationManager shared] submitPhoneNumberWithPhoneNumber:phoneNumber
                                       completionHandler:^(NSError * _Nullable error) {
     if (error) {
       reject(error.domain,
@@ -34,7 +34,7 @@ RCT_REMAP_METHOD(submitDiagnosisKeys,
                  submitDiagnosisKeysWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[UABManager shared] submitDiagnosisKeys:verificationCode date:date completionHandler:^(NSError * _Nullable error) {
+  [[EscrowVerificationManager shared] submitDiagnosisKeys:verificationCode date:date completionHandler:^(NSError * _Nullable error) {
     if (error) {
       reject(error.domain,
              error.localizedDescription,

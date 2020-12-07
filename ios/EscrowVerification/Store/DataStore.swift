@@ -3,19 +3,19 @@ import Foundation
 class DataStore {
   static let shared = DataStore()
   
-  @UABPersisted(userDefaultsKey: "authToken", notificationName: .init("StoredAuthTokenDidChange"), defaultValue: nil)
+  @EscrowVerificationPersisted(userDefaultsKey: "authToken", notificationName: .init("StoredAuthTokenDidChange"), defaultValue: nil)
   var authToken: String?
   
-  @UABPersisted(userDefaultsKey: "refreshToken", notificationName: .init("StoredRefreshTokenDidChange"), defaultValue: nil)
+  @EscrowVerificationPersisted(userDefaultsKey: "refreshToken", notificationName: .init("StoredRefreshTokenDidChange"), defaultValue: nil)
   var refreshToken: String?
   
-  @UABPersisted(userDefaultsKey: "tokenExpiration", notificationName: .init("StoredTokenExpirationDidChange"), defaultValue: nil)
+  @EscrowVerificationPersisted(userDefaultsKey: "tokenExpiration", notificationName: .init("StoredTokenExpirationDidChange"), defaultValue: nil)
   var tokenExpiration: Date?
   
 }
 
 @propertyWrapper
-class UABPersisted<Value: Codable> {
+class EscrowVerificationPersisted<Value: Codable> {
   
   init(userDefaultsKey: String, notificationName: Notification.Name, defaultValue: Value) {
     self.userDefaultsKey = userDefaultsKey
@@ -41,7 +41,7 @@ class UABPersisted<Value: Codable> {
     }
   }
   
-  var projectedValue: UABPersisted<Value> { self }
+  var projectedValue: EscrowVerificationPersisted<Value> { self }
   
   func addObserver(using block: @escaping () -> Void) -> NSObjectProtocol {
     return NotificationCenter.default.addObserver(forName: notificationName, object: nil, queue: nil) { _ in

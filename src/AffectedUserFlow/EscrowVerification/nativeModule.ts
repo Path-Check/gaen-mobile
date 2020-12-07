@@ -3,15 +3,19 @@ import { NativeModules } from "react-native"
 import { Posix } from "../../exposure"
 
 // Key Submission Module
-const uabKeySubmissionModule = NativeModules.UABKeySubmissionModule
+const escrowVerificationKeySubmissionModule =
+  NativeModules.EscrowVerificationKeySubmissionModule
 
 export const submitPhoneNumber = async (phoneNumber: string): Promise<void> => {
-  return uabKeySubmissionModule.submitPhoneNumber(phoneNumber)
+  return escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
 }
 
 export const submitDiagnosisKeys = async (
   verificationCode: string,
   date: Posix,
 ): Promise<void> => {
-  return uabKeySubmissionModule.submitDiagnosisKeys(verificationCode, date)
+  return escrowVerificationKeySubmissionModule.submitDiagnosisKeys(
+    verificationCode,
+    date,
+  )
 }

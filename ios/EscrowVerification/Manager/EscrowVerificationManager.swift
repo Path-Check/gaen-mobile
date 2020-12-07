@@ -1,9 +1,9 @@
 import Foundation
 import ExposureNotification
 
-@objc(UABManager)
-class UABManager: NSObject {
-  @objc static let shared = UABManager()
+@objc(EscrowVerificationManager)
+class EscrowVerificationManager: NSObject {
+  @objc static let shared = EscrowVerificationManager()
 
   @objc func submitPhoneNumber(phoneNumber: String, completionHandler: @escaping(Error?) -> Void) {
     getCodableKeysWithRiskLevel { result in
@@ -62,7 +62,7 @@ class UABManager: NSObject {
   }
 }
 
-private extension UABManager {
+private extension EscrowVerificationManager {
 
   func getCodableKeysWithRiskLevel(_ completionHandler: @escaping(Result<[CodableDiagnosisKey], Error>) -> Void) {
     ExposureManager.shared?.manager.getDiagnosisKeys { keys, error in

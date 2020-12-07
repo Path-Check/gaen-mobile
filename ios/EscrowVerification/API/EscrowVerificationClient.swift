@@ -38,7 +38,7 @@ enum TokenRequestType {
   case request, refresh
 }
 
-let BASE_URL = URL(string: ReactNativeConfig.env(for: "UAB_BASE_URL"))!
+let BASE_URL = URL(string: ReactNativeConfig.env(for: "ESCROW_VERIFICATION_BASE_URL"))!
 
 class NetworkServiceController: NSObject, FileManagerDelegate {
   static let shared = NetworkServiceController()
