@@ -88,6 +88,7 @@ export type RequestAuthorizationError =
   | "Unsupported"
   | "Invalidated"
   | "BluetoothOff"
+  | "LocationOff"
   | "InsufficientStorage"
   | "NotEnabled"
   | "APIMisuse"
