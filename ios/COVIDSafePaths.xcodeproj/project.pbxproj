@@ -61,7 +61,7 @@
 		B5FBB0D724916DE100433980 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D624916DE100433980 /* Notification+Extensions.swift */; };
 		B5FC37C62489B1B3006474EB /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37C52489B1B3006474EB /* APIRequest.swift */; };
 		B5FC37CA2489B1C1006474EB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37C92489B1C1006474EB /* JSON.swift */; };
-		B5FC37CC2489B251006474EB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CB2489B251006474EB /* Result.swift */; };
+		B5FC37CC2489B251006474EB /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CB2489B251006474EB /* GenericResult.swift */; };
 		B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CD2489B359006474EB /* TypeAliases.swift */; };
 		B5FC37D02489B3DE006474EB /* StructuredError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CF2489B3DE006474EB /* StructuredError.swift */; };
 		B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */; };
@@ -279,7 +279,7 @@
 		B5FC37C02489B075006474EB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B5FC37C52489B1B3006474EB /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		B5FC37C92489B1C1006474EB /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
-		B5FC37CB2489B251006474EB /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B5FC37CB2489B251006474EB /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResult.swift; sourceTree = "<group>"; };
 		B5FC37CD2489B359006474EB /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		B5FC37CF2489B3DE006474EB /* StructuredError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredError.swift; sourceTree = "<group>"; };
 		B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyRequests.swift; sourceTree = "<group>"; };
@@ -742,7 +742,7 @@
 				B5FC37DB248A78C3006474EB /* Model */,
 				B5FC37D12489C25D006474EB /* Requests */,
 				B5FC37CF2489B3DE006474EB /* StructuredError.swift */,
-				B5FC37CB2489B251006474EB /* Result.swift */,
+				B5FC37CB2489B251006474EB /* GenericResult.swift */,
 				B5FC37CD2489B359006474EB /* TypeAliases.swift */,
 				B5FC37C52489B1B3006474EB /* APIRequest.swift */,
 				B5CEC002257810D200BFFFF2 /* APIClient.swift */,
@@ -1151,7 +1151,7 @@
 				B5CEBF6E25780C2900BFFFF2 /* EscrowVerificationKeySubmissionModule.m in Sources */,
 				B5926909251BCEF5008F2C86 /* SymptomLogEntry.swift in Sources */,
 				B52D88C4248F10FD0071ED51 /* BTSecureStorage.swift in Sources */,
-				B5FC37CC2489B251006474EB /* Result.swift in Sources */,
+				B5FC37CC2489B251006474EB /* GenericResult.swift in Sources */,
 				A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */,
 				A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */,
 				B592690D251BD037008F2C86 /* SymptomLogEntryModule.m in Sources */,

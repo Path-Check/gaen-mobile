@@ -151,7 +151,7 @@ extension XCTestCase {
                    forceKeyUnpackingError: Bool,
                    forceDownloadConfigurationError: Bool) -> APIClientMock {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       guard !forceKeyUnpackingError else {
@@ -162,9 +162,9 @@ extension XCTestCase {
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
-        return forceDownloadKeyError ? .failure(GenericError.unknown) : Result<DownloadedPackage>.success(mockDownloadedPackage)
+        return forceDownloadKeyError ? .failure(GenericError.unknown) : GenericResult<DownloadedPackage>.success(mockDownloadedPackage)
       default:
-        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : Result<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder)
+        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : GenericResult<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder)
       }
     }
     return apiClientMock
@@ -175,7 +175,7 @@ extension XCTestCase {
                    forceKeyUnpackingError: Bool,
                    forceDownloadConfigurationError: Bool) -> APIClientMock {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       guard !forceKeyUnpackingError else {
@@ -187,9 +187,9 @@ extension XCTestCase {
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
-        return forceDownloadKeyError ? .failure(GenericError.unknown) : Result<DownloadedPackage>.success(mockDownloadedPackage)
+        return forceDownloadKeyError ? .failure(GenericError.unknown) : GenericResult<DownloadedPackage>.success(mockDownloadedPackage)
       default:
-        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : Result<DailySummariesConfiguration>.success(DailySummariesConfiguration.placeholder)
+        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : GenericResult<DailySummariesConfiguration>.success(DailySummariesConfiguration.placeholder)
       }
     }
     return apiClientMock
