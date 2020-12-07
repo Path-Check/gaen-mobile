@@ -248,8 +248,10 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
-  - react-native-config (1.2.1):
-    - React
+  - react-native-config (1.4.1):
+    - react-native-config/App (= 1.4.1)
+  - react-native-config/App (1.4.1):
+    - React-Core
   - react-native-matomo-sdk (0.4.0):
     - MatomoTracker (~> 7)
     - React (~> 0.60)
@@ -567,7 +569,7 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-config: ae9ef3bdbf539f2d14ebaf4ebeba508f766e066a
+  react-native-config: d8b45133fd13d4f23bd2064b72f6e2c08b2763ed
   react-native-matomo-sdk: 03b35acda42463614f10ac61d013f7ae7dc8beed
   react-native-netinfo: 250dc0ca126512f618a8a2ca6a936577e1f66586
   react-native-safe-area-context: e768fca90207ee68924b3d0877633f2ce9cc9d68
