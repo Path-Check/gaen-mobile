@@ -78,6 +78,10 @@
       "header": "Report a positive test",
       "body": "If you have tested positive for COVID-19 (not through an antibody test), you can anonymously report the test.\n\nReporting your test will help others in your community contain the spread of the virus.",
       "what_is_a_verification_code": "What is a verification code?"
+    },
+    "user_details_form": {
+      "test_details": "Test Details",
+      "phone_number": "Phone number"
     }
   },
   "export": {
