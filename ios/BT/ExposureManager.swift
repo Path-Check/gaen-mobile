@@ -88,7 +88,7 @@ final class ExposureManager: NSObject {
     notificationCenter.addObserver(
       self,
       selector: #selector(scheduleBackgroundTaskIfNeeded),
-      name: .AuthorizationStatusDidChange,
+      name: .ExposureNotificationStatusDidChange,
       object: nil
     )
   }
@@ -99,7 +99,7 @@ final class ExposureManager: NSObject {
 
   /// Broadcast EN Status
   @objc func awake() {
-    broadcastCurrentEnabledStatus()
+    broadcastCurrentExposureNotificationStatus()
   }
 
   // MARK: == State ==
@@ -280,8 +280,24 @@ final class ExposureManager: NSObject {
       if let error = error {
         let errorString = error._code.enErrorString
         reject(errorString, error.localizedDescription, error)
+      } else if (self.exposureNotificationStatus != .active) {
+        let error = GenericError.unknown
+        var errorString = 0.enErrorString
+        switch self.exposureNotificationStatus {
+        case .bluetoothOff:
+          errorString = 7.enErrorString
+        case .disabled:
+          errorString = 9.enErrorString
+        case .restricted:
+          errorString = 14.enErrorString
+        case .unauthorized:
+          errorString = 4.enErrorString
+        default:
+          errorString = 1.enErrorString
+        }
+        reject(errorString, error.localizedDescription, error)
       } else {
-        self.broadcastCurrentEnabledStatus()
+        self.broadcastCurrentExposureNotificationStatus()
         resolve(self.exposureNotificationStatus.rawValue)
       }
     }
@@ -566,9 +582,9 @@ private extension ExposureManager {
     }
   }
 
-  func broadcastCurrentEnabledStatus() {
+  func broadcastCurrentExposureNotificationStatus() {
     notificationCenter.post(Notification(
-      name: .AuthorizationStatusDidChange,
+      name: .ExposureNotificationStatusDidChange,
       object: self.exposureNotificationStatus.rawValue
     ))
   }

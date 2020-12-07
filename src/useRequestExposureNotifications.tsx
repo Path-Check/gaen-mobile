@@ -16,17 +16,17 @@ export const useRequestExposureNotifications = (): (() => void) => {
       switch (response.status) {
         case "Active":
           break
+        default:
+          showBaseExposureNotificationsAlert()
+      }
+    } else if (response.kind === "failure") {
+      switch (response.error) {
         case "BluetoothOff":
           showEnableBluetoothAlert()
           break
         case "LocationOff":
           showEnableLocationAlert()
           break
-        default:
-          showBaseExposureNotificationsAlert()
-      }
-    } else if (response.kind === "failure") {
-      switch (response.error) {
         case "Restricted":
           showSetToActiveRegionAlert()
           break
