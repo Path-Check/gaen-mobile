@@ -24,7 +24,6 @@ class DiagnosisSubmission: Encodable {
     case deviceVerificationPayload
     case temporaryExposureKeys
     case verificationCode  = "verification_code"
-    //    case phoneNumber
     case testDate = "test_date"
   }
 }
