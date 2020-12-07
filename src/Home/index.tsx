@@ -47,6 +47,7 @@ const Home: FunctionComponent = () => {
     displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
+    verificationStrategy,
   } = useConfigurationContext()
 
   return (
@@ -59,7 +60,11 @@ const Home: FunctionComponent = () => {
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
-        <ReportTestResult />
+        {verificationStrategy === "Simple" ? (
+          <SimpleVerificationFlowButton />
+        ) : (
+          <EscrowVerificationFlowButton />
+        )}
         <ShareLink />
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
@@ -73,9 +78,9 @@ const Home: FunctionComponent = () => {
   )
 }
 
-const ReportTestResult: FunctionComponent = () => {
-  const navigation = useNavigation()
+const SimpleVerificationFlowButton: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const handleOnPressReportTestResult = () => {
     navigation.navigate(HomeStackScreens.AffectedUserStack)
@@ -87,9 +92,57 @@ const ReportTestResult: FunctionComponent = () => {
     })
   }
 
+  const descriptionText = t("home.verification_code_card.if_you_have_a_code")
+  const buttonLabelText = t("home.verification_code_card.submit_code")
+
+  return (
+    <VerificationFlowButton
+      onPressReportTestResult={handleOnPressReportTestResult}
+      onPressMoreInfo={handleOnPressMoreInfo}
+      descriptionText={descriptionText}
+      buttonLabelText={buttonLabelText}
+    />
+  )
+}
+
+const EscrowVerificationFlowButton: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const handleOnPressReportTestResult = () => {}
+
+  const handleOnPressMoreInfo = () => {}
+  const descriptionText = t(
+    "home.verification_code_card.if_you_have_a_positive_test",
+  )
+  const buttonLabelText = t("home.verification_code_card.report_positive_test")
+
+  return (
+    <VerificationFlowButton
+      onPressReportTestResult={handleOnPressReportTestResult}
+      onPressMoreInfo={handleOnPressMoreInfo}
+      descriptionText={descriptionText}
+      buttonLabelText={buttonLabelText}
+    />
+  )
+}
+
+interface VerificationFlowButtonProps {
+  onPressReportTestResult: () => void
+  onPressMoreInfo: () => void
+  descriptionText: string
+  buttonLabelText: string
+}
+
+const VerificationFlowButton: FunctionComponent<VerificationFlowButtonProps> = ({
+  onPressReportTestResult,
+  onPressMoreInfo,
+  descriptionText,
+  buttonLabelText,
+}) => {
+  const { t } = useTranslation()
+
   return (
     <TouchableOpacity
-      onPress={handleOnPressReportTestResult}
+      onPress={onPressReportTestResult}
       style={style.floatingContainer}
     >
       <View style={style.cardTopContainer}>
@@ -100,7 +153,7 @@ const ReportTestResult: FunctionComponent = () => {
           height={IMAGE_HEIGHT}
         />
         <TouchableOpacity
-          onPress={handleOnPressMoreInfo}
+          onPress={onPressMoreInfo}
           style={style.moreInfoButton}
           accessibilityRole="button"
           accessibilityLabel={t("home.verification_code_card.more_info")}
@@ -116,8 +169,8 @@ const ReportTestResult: FunctionComponent = () => {
       <Text style={style.sectionHeaderText}>
         {t("home.have_a_positive_test")}
       </Text>
-      <Text style={style.sectionBodyText}>{t("home.if_you_have_a_code")}</Text>
-      <SectionButton text={t("home.submit_code")} />
+      <Text style={style.sectionBodyText}>{descriptionText}</Text>
+      <SectionButton text={buttonLabelText} />
     </TouchableOpacity>
   )
 }

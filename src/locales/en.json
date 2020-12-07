@@ -208,7 +208,6 @@
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test?",
-    "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
     "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. {{applicationName}} does NOT track or keep a record of your location.",
     "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
     "not_feeling_well": "Not feeling well?",
@@ -217,11 +216,14 @@
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Is my data secure?",
     "request_call": "Request Call",
-    "submit_code": "Submit code",
     "take_assessment": "Take Assessment",
     "to_submit_your_test": "To submit your positive test result, you'll need to get your verification code from a contact tracer.",
     "verification_code_card": {
-      "more_info": "What is a verification code?"
+      "more_info": "What is a verification code?",
+      "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
+      "if_you_have_a_positive_test": "If you have tested positive for COVID-19, you can anonymously report the test to help keep your community safe.",
+      "report_positive_test": "Report Positive Test",
+      "submit_code": "Submit code"
     }
   },
   "label": {
