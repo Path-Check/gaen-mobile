@@ -39,6 +39,7 @@ export type HomeStackScreen =
   | "AffectedUserStack"
   | "BluetoothInfo"
   | "CovidDataDashboard"
+  | "EscrowVerificationStack"
   | "ExposureDetectionStatus"
   | "ExposureNotificationsInfo"
   | "Home"
@@ -47,12 +48,11 @@ export type HomeStackScreen =
   | "EmergencyRecommendation"
   | "CovidRecommendation"
 
-export const HomeStackScreens: {
-  [key in HomeStackScreen]: HomeStackScreen
-} = {
+export const HomeStackScreens: Record<HomeStackScreen, HomeStackScreen> = {
   AffectedUserStack: "AffectedUserStack",
   BluetoothInfo: "BluetoothInfo",
   CovidDataDashboard: "CovidDataDashboard",
+  EscrowVerificationStack: "EscrowVerificationStack",
   ExposureDetectionStatus: "ExposureDetectionStatus",
   ExposureNotificationsInfo: "ExposureNotificationsInfo",
   Home: "Home",
@@ -186,6 +186,15 @@ export const AffectedUserFlowStackScreens: {
   AffectedUserComplete: "AffectedUserComplete",
 }
 
+export type EscrowVerificationRoute = "EscrowVerificationStart"
+
+export const EscrowVerificationRoutes: Record<
+  EscrowVerificationRoute,
+  EscrowVerificationRoute
+> = {
+  EscrowVerificationStart: "EscrowVerificationStart",
+}
+
 export type WelcomeStackScreen = "Welcome"
 
 export const WelcomeStackScreens: {
@@ -236,17 +245,19 @@ export type Stack =
   | "Activation"
   | "AffectedUserStack"
   | "Connect"
+  | "EscrowVerificationStack"
   | "ExposureHistoryFlow"
   | "HowItWorks"
   | "Settings"
   | "Home"
   | "SymptomHistory"
 
-export const Stacks: { [key in Stack]: Stack } = {
+export const Stacks: Record<Stack, Stack> = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
+  EscrowVerificationStack: "EscrowVerificationStack",
   HowItWorks: "HowItWorks",
   Settings: "Settings",
   Home: "Home",

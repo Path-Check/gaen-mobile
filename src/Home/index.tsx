@@ -107,7 +107,11 @@ const SimpleVerificationFlowButton: FunctionComponent = () => {
 
 const EscrowVerificationFlowButton: FunctionComponent = () => {
   const { t } = useTranslation()
-  const handleOnPressReportTestResult = () => {}
+  const navigation = useNavigation()
+
+  const handleOnPressReportTestResult = () => {
+    navigation.navigate(HomeStackScreens.EscrowVerificationStack)
+  }
 
   const handleOnPressMoreInfo = () => {}
   const descriptionText = t(
