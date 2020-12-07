@@ -72,6 +72,14 @@
     "reload": "Reload",
     "title": "Unknown Error"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "A person talking to a health expert",
+    "start": {
+      "header": "Report a positive test",
+      "body": "If you have tested positive for COVID-19 (not through an antibody test), you can anonymously report the test.\n\nReporting your test will help others in your community contain the spread of the virus.",
+      "what_is_a_verification_code": "What is a verification code?"
+    }
+  },
   "export": {
     "code": "Code",
     "code_input_body_bluetooth": "Enter your verification code",
