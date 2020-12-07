@@ -11,9 +11,10 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import {
-  AffectedUserFlowStackScreens,
   HomeStackScreens,
   ModalStackScreens,
+  AffectedUserFlowStackScreens,
+  EscrowVerificationRoutes,
   useStatusBarEffect,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -113,7 +114,12 @@ const EscrowVerificationFlowButton: FunctionComponent = () => {
     navigation.navigate(HomeStackScreens.EscrowVerificationStack)
   }
 
-  const handleOnPressMoreInfo = () => {}
+  const handleOnPressMoreInfo = () => {
+    navigation.navigate(HomeStackScreens.EscrowVerificationStack, {
+      screen: EscrowVerificationRoutes.EscrowVerificationMoreInfo,
+    })
+  }
+
   const descriptionText = t(
     "home.verification_code_card.if_you_have_a_positive_test",
   )

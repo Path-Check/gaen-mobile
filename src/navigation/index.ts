@@ -186,13 +186,16 @@ export const AffectedUserFlowStackScreens: {
   AffectedUserComplete: "AffectedUserComplete",
 }
 
-export type EscrowVerificationRoute = "EscrowVerificationStart"
+export type EscrowVerificationRoute =
+  | "EscrowVerificationStart"
+  | "EscrowVerificationMoreInfo"
 
 export const EscrowVerificationRoutes: Record<
   EscrowVerificationRoute,
   EscrowVerificationRoute
 > = {
   EscrowVerificationStart: "EscrowVerificationStart",
+  EscrowVerificationMoreInfo: "EscrowVerificationMoreInfo",
 }
 
 export type WelcomeStackScreen = "Welcome"
