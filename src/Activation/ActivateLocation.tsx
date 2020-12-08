@@ -50,7 +50,7 @@ const ActivateLocation: FunctionComponent = () => {
             {t("onboarding.location_body", { applicationName })}
           </Text>
         </View>
-        {exposureNotifications.status !== "LocationOff" ? (
+        {exposureNotifications.status === "LocationOff" ? (
           <EnableLocationButtons />
         ) : (
           <LocationAlreadyEnabledButtons />
