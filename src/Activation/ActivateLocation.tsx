@@ -29,9 +29,7 @@ import { useActivationNavigation } from "./useActivationNavigation"
 const ActivateLocation: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const {
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
   return (
     <SafeAreaView style={style.safeArea}>
@@ -52,7 +50,7 @@ const ActivateLocation: FunctionComponent = () => {
             {t("onboarding.location_body", { applicationName })}
           </Text>
         </View>
-        {status !== "LocationOff" ? (
+        {exposureNotifications.status !== "LocationOff" ? (
           <EnableLocationButtons />
         ) : (
           <LocationAlreadyEnabledButtons />
