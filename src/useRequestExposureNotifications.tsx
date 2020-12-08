@@ -12,7 +12,7 @@ export const useRequestExposureNotifications = (): (() => void) => {
   const { exposureNotifications } = usePermissionsContext()
 
   const requestExposureNotifications = async () => {
-    if (exposureNotifications.status === "LocationOff") {
+    if (exposureNotifications.status === "LocationOffAndRequired") {
       showEnableLocationAlert()
     } else if (exposureNotifications.status === "BluetoothOff") {
       showEnableBluetoothAlert()
@@ -31,7 +31,7 @@ export const useRequestExposureNotifications = (): (() => void) => {
           case "BluetoothOff":
             showEnableBluetoothAlert()
             break
-          case "LocationOff":
+          case "LocationOffAndRequired":
             showEnableLocationAlert()
             break
           case "Restricted":

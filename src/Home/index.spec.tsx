@@ -75,7 +75,7 @@ describe("Home", () => {
   describe("When the exposure notifications status is not active because location is off", () => {
     it("renders an off message", () => {
       const permissionProviderValue = factories.permissionsContext.build({
-        exposureNotifications: { status: "LocationOff" },
+        exposureNotifications: { status: "LocationOffAndRequired" },
       })
 
       const { getByText } = render(
