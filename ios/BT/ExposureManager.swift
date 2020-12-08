@@ -415,7 +415,7 @@ final class ExposureManager: NSObject {
     return progress
   }
 
-  func finish(_ result: Result<[Exposure]>,
+  func finish(_ result: GenericResult<[Exposure]>,
               processedFileCount: Int,
               lastProcessedUrlPath: String,
               progress: Progress,

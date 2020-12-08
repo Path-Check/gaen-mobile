@@ -26,4 +26,5 @@ export default Factory.define<Configuration>(() => ({
   minimumPhoneDigits: 0,
   regionCodes: ["REGION"],
   stateAbbreviation: null,
+  verificationStrategy: "Simple",
 }))

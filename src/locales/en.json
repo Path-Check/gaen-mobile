@@ -72,6 +72,18 @@
     "reload": "Reload",
     "title": "Unknown Error"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "A person talking to a health expert",
+    "start": {
+      "header": "Report a positive test",
+      "body": "If you have tested positive for COVID-19 (not through an antibody test), you can anonymously report the test.\n\nReporting your test will help others in your community contain the spread of the virus.",
+      "what_is_a_verification_code": "What is a verification code?"
+    },
+    "user_details_form": {
+      "test_details": "Test Details",
+      "phone_number": "Phone number"
+    }
+  },
   "export": {
     "code": "Code",
     "code_input_body_bluetooth": "Enter your verification code",
@@ -89,6 +101,7 @@
     "consent_warning_title": "Warning!",
     "enable_exposure_notifications_body": "You must enable exposure notifications to report a positive test result.",
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
+    "enable_exposure_notifications_button": "Enable Exposure Notifications",
     "enter_verification_code": "Enter verification code",
     "error": {
       "invalid_code": "Try a different code",
@@ -207,7 +220,6 @@
     "fix": "Fix issues with {{technology}}",
     "get_more_info": "Get more info on {{technology}}",
     "have_a_positive_test": "Have a positive test?",
-    "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
     "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. {{applicationName}} does NOT track or keep a record of your location.",
     "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
     "not_feeling_well": "Not feeling well?",
@@ -216,11 +228,14 @@
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Is my data secure?",
     "request_call": "Request Call",
-    "submit_code": "Submit code",
     "take_assessment": "Take Assessment",
     "to_submit_your_test": "To submit your positive test result, you'll need to get your verification code from a contact tracer.",
     "verification_code_card": {
-      "more_info": "What is a verification code?"
+      "more_info": "What is a verification code?",
+      "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
+      "if_you_have_a_positive_test": "If you have tested positive for COVID-19, you can anonymously report the test to help keep your community safe.",
+      "report_positive_test": "Report Positive Test",
+      "submit_code": "Submit code"
     }
   },
   "label": {

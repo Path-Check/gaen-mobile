@@ -1,10 +1,10 @@
 import React from "react"
-import { render, fireEvent } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 
-import { openAppSettings } from "../../Device"
 import EnableExposureNotifications from "./EnableExposureNotifications"
 
 jest.mock("../../Device/nativeModule")
+jest.mock("../../useRequestExposureNotifications")
 jest.mock("@react-navigation/native")
 
 describe("EnableExposureNotifications", () => {
@@ -18,10 +18,8 @@ describe("EnableExposureNotifications", () => {
     expect(getByText("Enable exposure notifications to continue")).toBeDefined()
   })
 
-  it("takes user to system settings if decide to activate notifications", () => {
+  it("provides a button to enable exposure notifications", async () => {
     const { getByLabelText } = render(<EnableExposureNotifications />)
-
-    fireEvent.press(getByLabelText("Open Settings"))
-    expect(openAppSettings).toHaveBeenCalled()
+    expect(getByLabelText("Enable Exposure Notifications")).not.toBeNull()
   })
 })

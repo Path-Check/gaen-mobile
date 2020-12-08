@@ -1,6 +1,6 @@
 import Alamofire
 
-public enum Result<T> {
+public enum GenericResult<T> {
 
   case success(T)
   case failure(Error)

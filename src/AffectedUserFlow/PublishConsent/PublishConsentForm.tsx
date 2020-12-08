@@ -17,7 +17,6 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
-  HomeStackScreens,
 } from "../../navigation"
 import { useExposureContext } from "../../ExposureContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
@@ -40,6 +39,7 @@ interface PublishConsentFormProps {
   storeRevisionToken: (revisionToken: string) => Promise<void>
   appPackageName: string
   regionCodes: string[]
+  navigateOutOfStack: () => void
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
@@ -50,15 +50,18 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   storeRevisionToken,
   appPackageName,
   regionCodes,
+  navigateOutOfStack,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
   const { getCurrentExposures } = useExposureContext()
-  const [isLoading, setIsLoading] = useState(false)
+
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
     const newKeysInserted = noOpResponse.newKeysInserted
@@ -180,7 +183,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("common.confirm"),
-          onPress: () => navigation.navigate(HomeStackScreens.Home),
+          onPress: navigateOutOfStack,
           style: "destructive",
         },
       ],

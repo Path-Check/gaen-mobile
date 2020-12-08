@@ -1,20 +1,22 @@
 import React, { FunctionComponent } from "react"
 import { ScrollView, Image, StyleSheet, TouchableOpacity } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
 import { StatusBar, Text } from "../components"
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, Stacks } from "../navigation"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Layout, Spacing, Typography } from "../styles"
-import { useAffectedUserContext } from "./AffectedUserContext"
 
-export const AffectedUserComplete: FunctionComponent = () => {
+export const Complete: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
+  const navigation = useNavigation()
   const { t } = useTranslation()
-  const { navigateOutOfStack } = useAffectedUserContext()
 
-  const handleOnPressDone = navigateOutOfStack
+  const handleOnPressDone = () => {
+    navigation.navigate("App", { screen: Stacks.Home })
+  }
 
   return (
     <>
@@ -77,4 +79,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default AffectedUserComplete
+export default Complete
