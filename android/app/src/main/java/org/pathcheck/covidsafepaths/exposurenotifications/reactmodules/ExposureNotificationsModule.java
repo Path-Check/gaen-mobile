@@ -109,8 +109,9 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     ExposureNotificationClientWrapper.get(getReactApplicationContext())
         .isEnabled()
         .addOnSuccessListener(enabled -> {
-          if (!enabled) {
-            promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
+
+          if (!LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
+            promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
             return;
           }
 
@@ -118,11 +119,12 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
             promise.resolve(CallbackMessages.EN_STATUS_BLUETOOTH_OFF);
             return;
           }
-
-          if (!LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
-            promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
+          
+          if (!enabled) {
+            promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
             return;
           }
+
 
           promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
         })
