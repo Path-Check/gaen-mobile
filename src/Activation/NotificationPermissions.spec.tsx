@@ -2,13 +2,11 @@ import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import {
-  PermissionsContext,
-  PermissionsContextState,
-} from "../Device/PermissionsContext"
+import { PermissionsContext } from "../Device/PermissionsContext"
 import { ActivationStackScreens } from "../navigation"
 import NotificationPermissions from "./NotificationPermissions"
 import { OnboardingProvider } from "../OnboardingContext"
+import { factories } from "../factories"
 
 jest.mock("@react-navigation/native")
 
@@ -16,9 +14,9 @@ describe("NotificationPermissions", () => {
   describe("when a user enables notifications,", () => {
     it("requests permissions", () => {
       const notificationRequestSpy = jest.fn()
-      const permissionsProviderValue = createPermissionProviderValue(
-        notificationRequestSpy,
-      )
+      const permissionsProviderValue = factories.permissionsContext.build({
+        notification: { request: notificationRequestSpy },
+      })
 
       const { getByLabelText } = render(
         <OnboardingProvider userHasCompletedOnboarding>
@@ -57,9 +55,9 @@ describe("NotificationPermissions", () => {
   describe("when a user does not enable notifications", () => {
     it("does not request permissions", () => {
       const notificationRequestSpy = jest.fn()
-      const permissionsProviderValue = createPermissionProviderValue(
-        notificationRequestSpy,
-      )
+      const permissionsProviderValue = factories.permissionsContext.build({
+        notification: { request: notificationRequestSpy },
+      })
 
       const { getByText } = render(
         <OnboardingProvider userHasCompletedOnboarding>
@@ -91,19 +89,3 @@ describe("NotificationPermissions", () => {
     })
   })
 })
-
-const createPermissionProviderValue = (
-  requestPermission: () => void = () => {},
-): PermissionsContextState => {
-  return {
-    locationPermissions: "RequiredOn" as const,
-    notification: {
-      status: "Unknown" as const,
-      check: () => {},
-      request: requestPermission,
-    },
-    exposureNotifications: {
-      status: "Active",
-    },
-  }
-}

@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react"
-import { ScrollView, StyleSheet } from "react-native"
+import { Platform, ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
 import { useApplicationName } from "../../Device/useApplicationInfo"
-import { useExposureDetectionStatus } from "../../Device/useExposureDetectionStatus"
 import { usePermissionsContext } from "../../Device/PermissionsContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 import { useStatusBarEffect, HomeStackScreens } from "../../navigation"
@@ -18,13 +17,10 @@ import { Colors, Spacing, Typography } from "../../styles"
 const ExposureDetectionStatus: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
-  const exposureDetectionStatus = useExposureDetectionStatus()
-  const {
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
   const subheaderText =
-    exposureDetectionStatus === "On"
+    exposureNotifications.status === "Active"
       ? t("exposure_scanning_status.your_device_is_scanning")
       : t("exposure_scanning_status.your_device_is_not")
 
@@ -38,7 +34,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       </Text>
       <Text style={style.subheaderText}>{subheaderText}</Text>
       <ExposureNotificationsActivationStatus />
-      {locationIsRequired && <LocationActivationStatus />}
+      {Platform.OS === "android" && <LocationActivationStatus />}
     </ScrollView>
   )
 }
@@ -76,7 +72,7 @@ const LocationActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { applicationName } = useApplicationName()
   const { showFixLocationAlert } = useDeviceAlert()
-  const { locationPermissions } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressFix = () => {
     showFixLocationAlert()
@@ -86,7 +82,7 @@ const LocationActivationStatus: FunctionComponent = () => {
     navigation.navigate(HomeStackScreens.LocationInfo)
   }
 
-  const isLocationOn = locationPermissions === "RequiredOn"
+  const isLocationOn = exposureNotifications.status !== "LocationOff"
 
   return (
     <ActivationStatusView
