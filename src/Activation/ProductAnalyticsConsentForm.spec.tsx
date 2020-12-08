@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native"
 import ProductAnalyticsConsentForm from "./ProductAnalyticsConsentForm"
 import { factories } from "../factories"
 import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { ActivationStackScreens } from "../navigation"
 import { OnboardingProvider } from "../OnboardingContext"
 
 jest.mock("@react-navigation/native")
