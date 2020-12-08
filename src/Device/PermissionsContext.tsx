@@ -175,6 +175,10 @@ const useENPermissions = () => {
 }
 
 const useLocationRequirement = (): LocationRequirement => {
+  if (Platform.OS === "ios") {
+    return "NotRequired"
+  }
+
   /* const isDeviceBelowAPI30 = await DeviceInfoModule.isDeviceBelowAPI30() */
   const isDeviceBelowAPI30 = true
 
