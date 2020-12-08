@@ -19,14 +19,14 @@ const ExposureDetectionStatus: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const exposureDetectionStatus = useExposureDetectionStatus()
-  const { locationPermissions } = usePermissionsContext()
+  const {
+    exposureNotifications: { status },
+  } = usePermissionsContext()
 
   const subheaderText =
     exposureDetectionStatus === "On"
       ? t("exposure_scanning_status.your_device_is_scanning")
       : t("exposure_scanning_status.your_device_is_not")
-
-  const locationIsRequired = locationPermissions !== "NotRequired"
 
   return (
     <ScrollView
