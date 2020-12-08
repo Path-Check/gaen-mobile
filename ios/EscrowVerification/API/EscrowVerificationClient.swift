@@ -50,7 +50,7 @@ class NetworkServiceController: NSObject, FileManagerDelegate {
       case .failure(let error):
         completion(.failure(error))
       case .success(let token):
-        let url = URL(string: "\(BASE_URL)verification/postVerificationCode")!
+        let url = URL(string: "\(BASE_URL)/verification/postVerificationCode")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -108,13 +108,11 @@ class NetworkServiceController: NSObject, FileManagerDelegate {
     generateDeviceToken{ result in
       switch result {
       case .failure(let error):
-        //        print(error.localizedDescription)
         completionHandler(.failure(error))
         return
       case .success(let data):
         let deviceCode = data.base64EncodedString()
-        //        print("deviceCode: \(deviceCode)")
-        let url = URL(string: "\(BASE_URL)authtracking/token")!
+        let url = URL(string: "\(BASE_URL)/authtracking/token")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -182,7 +180,7 @@ class NetworkServiceController: NSObject, FileManagerDelegate {
       case let .failure(error):
         completionHandler(.failure(error))
       case let .success(token):
-        let url = URL(string: "\(BASE_URL)verification/postMetaInfo")!
+        let url = URL(string: "\(BASE_URL)/verification/postMetaInfo")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -236,9 +234,7 @@ class NetworkServiceController: NSObject, FileManagerDelegate {
     let device = DCDevice.current
     
     guard device.isSupported else {
-      //print("device check not supported")
       completion(.failure(NetworkServiceControllerError.deviceTokenUnsupportedError))
-      //      completionHandler(nil, DeviceTokenError.unsupported)
       return
     }
     
