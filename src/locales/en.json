@@ -73,6 +73,9 @@
     "title": "Unknown Error"
   },
   "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "Phone number must be 10 digits"
+    },
     "person_and_health_expert": "A person talking to a health expert",
     "start": {
       "header": "Report a positive test",
@@ -80,7 +83,9 @@
       "what_is_a_verification_code": "What is a verification code?"
     },
     "user_details_form": {
+      "subheader": "Please provide the date of your test and phone number.",
       "test_details": "Test Details",
+      "test_date": "Test date",
       "phone_number": "Phone number"
     }
   },
