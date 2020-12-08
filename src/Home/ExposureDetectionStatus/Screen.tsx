@@ -82,7 +82,7 @@ const LocationActivationStatus: FunctionComponent = () => {
     navigation.navigate(HomeStackScreens.LocationInfo)
   }
 
-  const isLocationOn = exposureNotifications.status !== "LocationOff"
+  const isLocationOn = exposureNotifications.status !== "LocationOffAndRequired"
 
   return (
     <ActivationStatusView
