@@ -170,6 +170,7 @@ describe("ExposureDetectionStatusScreen", () => {
       it("shows a disabled message for location and a general disabled message", () => {
         const permissionsState = factories.permissionsContext.build({
           exposureNotifications: { status: "LocationOffAndRequired" },
+          locationRequirement: "Required",
         })
         const { getByTestId, getByText } = render(
           <PermissionsContext.Provider value={permissionsState}>
