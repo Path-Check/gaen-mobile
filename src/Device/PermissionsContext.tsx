@@ -12,9 +12,6 @@ import {
 
 import * as GaenNativeModule from "../gaen/nativeModule"
 import useOnAppStateChange from "./useOnAppStateChange"
-import useLocationPermissions, {
-  LocationPermissions,
-} from "./useLocationPermissions"
 
 export type NotificationPermissionStatus =
   | "Unavailable"
@@ -56,7 +53,6 @@ export type ENPermissionStatus =
   | "Unauthorized"
 
 export interface PermissionsContextState {
-  locationPermissions: LocationPermissions
   notification: {
     status: NotificationPermissionStatus
     check: () => void
@@ -68,7 +64,6 @@ export interface PermissionsContextState {
 }
 
 const initialState = {
-  locationPermissions: "RequiredOff" as const,
   notification: {
     status: "Unknown" as const,
     check: () => {},
@@ -82,7 +77,6 @@ const initialState = {
 const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
-  const locationPermissions = useLocationPermissions()
   const { enPermission } = useENPermissions()
   const {
     notificationPermission,
@@ -93,7 +87,6 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
   return (
     <PermissionsContext.Provider
       value={{
-        locationPermissions,
         notification: {
           status: notificationPermission,
           check: checkNotificationPermission,
