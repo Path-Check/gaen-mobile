@@ -113,10 +113,10 @@ class V2UnitTests: XCTestCase {
   // the fallback exposure configuration is used
   func testGetExposureConfigurationV2FallbackToDefault() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     apiClientMock.downloadRequestHander = { (request, requestType) in
-      return Result<DailySummariesConfiguration>.failure(GenericError.unknown)
+      return GenericResult<DailySummariesConfiguration>.failure(GenericError.unknown)
     }
     let exposureManager = defaultExposureManager(enAPIVersion: .v2,
                                                  forceDownloadConfigurationError: true)

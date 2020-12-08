@@ -17,7 +17,7 @@ export const OnboardingContext = createContext<
 
 export interface OnboardingContextState {
   isOnboardingComplete: boolean
-  completeOnboarding: () => void
+  completeOnboarding: () => Promise<void>
   resetOnboarding: () => void
 }
 
@@ -33,8 +33,8 @@ export const OnboardingProvider: FunctionComponent<OnboardingProviderProps> = ({
     userHasCompletedOnboarding,
   )
 
-  const completeOnboarding = () => {
-    StorageUtils.setIsOnboardingComplete()
+  const completeOnboarding = async () => {
+    await StorageUtils.setIsOnboardingComplete()
     setIsOnboardingComplete(true)
   }
 

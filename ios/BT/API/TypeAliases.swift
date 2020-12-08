@@ -1,4 +1,3 @@
 
-public typealias GenericResult = Result<Void>
-public typealias GenericCompletion = (GenericResult) -> Void
+public typealias GenericCompletion = (GenericResult<Void>) -> Void
 typealias RegionCode = String

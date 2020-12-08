@@ -5,6 +5,7 @@ import {
   HeaderStyleInterpolators,
 } from "@react-navigation/stack"
 import { Platform } from "react-native"
+import env from "react-native-config"
 import {
   LinkingOptions,
   NavigationContainer,
@@ -26,6 +27,7 @@ import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
 import AffectedUserStack from "./AffectedUserFlowStack"
+import EscrowVerificationStack from "./EscrowVerification"
 import SelfAssessmentStack from "./SelfAssessmentStack"
 import ExposureDetectionStatusScreen from "../Home/ExposureDetectionStatus/Screen"
 import BluetoothInfo from "../Home/BluetoothInfo"
@@ -51,11 +53,19 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
+const customPrefixes = env.DEEP_LINK_PREFIXES?.split(",") || []
+const allPrefixes = ["pathcheck://", "https://*.en.express/", ...customPrefixes]
+
 const linking: LinkingOptions = {
-  prefixes: ["pathcheck://"],
+  prefixes: allPrefixes,
   config: {
     screens: {
       ExposureHistory: "exposureHistory",
+      AffectedUserStack: {
+        screens: {
+          AffectedUserCodeInput: "v",
+        },
+      },
     },
   },
 }
@@ -92,7 +102,13 @@ const MainNavigator: FunctionComponent = () => {
       <Stack.Navigator headerMode="screen" screenOptions={defaultScreenOptions}>
         {isOnboardingComplete ? (
           <>
-            <Stack.Screen name={"App"} component={MainTabNavigator} />
+            <Stack.Screen
+              name={"App"}
+              component={MainTabNavigator}
+              options={{
+                gestureEnabled: false,
+              }}
+            />
             <Stack.Screen
               name={Stacks.Settings}
               component={SettingsStack}
@@ -104,6 +120,9 @@ const MainNavigator: FunctionComponent = () => {
             <Stack.Screen
               name={WelcomeStackScreens.Welcome}
               component={Welcome}
+              options={{
+                gestureEnabled: false,
+              }}
             />
             <Stack.Screen
               name={ModalStackScreens.AgeVerification}
@@ -149,6 +168,11 @@ const MainNavigator: FunctionComponent = () => {
         <Stack.Screen
           name={Stacks.AffectedUserStack}
           component={AffectedUserStack}
+          options={{ gestureEnabled: false }}
+        />
+        <Stack.Screen
+          name={Stacks.EscrowVerificationStack}
+          component={EscrowVerificationStack}
           options={{ gestureEnabled: false }}
         />
         <Stack.Screen name={ModalStackScreens.HowItWorksReviewFromSettings}>

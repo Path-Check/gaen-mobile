@@ -33,6 +33,7 @@ import ru from "./ru.json"
 import sk from "./sk.json"
 import so from "./so.json"
 import tl from "./tl.json"
+import tr from "./tr.json"
 import ur from "./ur.json"
 import vi from "./vi.json"
 import zh_Hant from "./zh_Hant.json"
@@ -75,6 +76,7 @@ const LANGUAGE_RESOURCES: Resource = {
   sk: { label: sk._display_name, translation: sk },
   so: { label: so._display_name, translation: so },
   tl: { label: tl._display_name, translation: tl },
+  tr: { label: tr._display_name, translation: tr },
   ur: { label: ur._display_name, translation: ur },
   vi: { label: vi._display_name, translation: vi },
   zh_Hant: { label: zh_Hant._display_name, translation: zh_Hant },
