@@ -9,14 +9,12 @@ import { usePermissionsContext } from "./Device/PermissionsContext"
 export const useRequestExposureNotifications = (): (() => void) => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const {
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
   const requestExposureNotifications = async () => {
-    if (status === "LocationOff") {
+    if (exposureNotifications.status === "LocationOff") {
       showEnableLocationAlert()
-    } else if (status === "BluetoothOff") {
+    } else if (exposureNotifications.status === "BluetoothOff") {
       showEnableBluetoothAlert()
     } else {
       const response = await NativeModule.requestAuthorization()
