@@ -52,15 +52,13 @@ export const useActivationNavigation = (): ActivationNavigation => {
     enableProductAnalytics,
   } = useConfigurationContext()
   const navigation = useNavigation()
-  const {
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications } = usePermissionsContext()
   const { completeOnboarding } = useOnboardingContext()
 
   const environment = {
     displayAcceptTermsOfService,
     enableProductAnalytics,
-    status,
+    exposureNotificationsStatus: exposureNotifications.status,
   }
 
   const activationSteps = determineActivationSteps(environment)
@@ -84,7 +82,7 @@ export const useActivationNavigation = (): ActivationNavigation => {
 }
 
 export type Environment = {
-  status: ENPermissionStatus
+  exposureNotificationsStatus: ENPermissionStatus
   displayAcceptTermsOfService: boolean
   enableProductAnalytics: boolean
 }
@@ -92,15 +90,14 @@ export type Environment = {
 export const determineActivationSteps = ({
   displayAcceptTermsOfService,
   enableProductAnalytics,
-  status,
+  exposureNotificationsStatus,
 }: Environment): ActivationStep[] => {
   const activationSteps: ActivationStep[] = []
 
-  console.log({ status })
-
   displayAcceptTermsOfService && activationSteps.push("AcceptTermsOfService")
   enableProductAnalytics && activationSteps.push("ProductAnalyticsConsent")
-  status === "LocationOff" && activationSteps.push("ActivateLocation")
+  exposureNotificationsStatus === "LocationOff" &&
+    activationSteps.push("ActivateLocation")
   activationSteps.push("ActivateExposureNotifications")
   Platform.OS === "ios" && activationSteps.push("NotificationPermissions")
   activationSteps.push("ActivationSummary")

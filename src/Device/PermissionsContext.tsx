@@ -48,6 +48,8 @@ export type ENPermissionStatus =
   | "Paused"
   | "Unauthorized"
 
+export type LocationRequirement = "Required" | "NotRequired" | "Unknown"
+
 export interface PermissionsContextState {
   notification: {
     status: NotificationPermissionStatus
@@ -57,6 +59,7 @@ export interface PermissionsContextState {
   exposureNotifications: {
     status: ENPermissionStatus
   }
+  locationRequirement: LocationRequirement
 }
 
 const initialState = {
@@ -68,6 +71,7 @@ const initialState = {
   exposureNotifications: {
     status: "Unknown" as const,
   },
+  locationRequirement: "Unknown" as const,
 }
 
 const PermissionsContext = createContext<PermissionsContextState>(initialState)
@@ -79,6 +83,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
     checkNotificationPermission,
     requestNotificationPermission,
   } = useNotificationPermissions()
+  const locationRequirement = useLocationRequirement()
 
   return (
     <PermissionsContext.Provider
@@ -91,6 +96,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
         exposureNotifications: {
           status: enPermission,
         },
+        locationRequirement,
       }}
     >
       {children}
@@ -160,6 +166,15 @@ const useENPermissions = () => {
   return {
     enPermission: enPermissionStatus,
   }
+}
+
+const useLocationRequirement = (): LocationRequirement => {
+  /* const isDeviceBelowAPI30 = await DeviceInfoModule.isDeviceBelowAPI30() */
+  const isDeviceBelowAPI30 = true
+
+  const locationRequirement = isDeviceBelowAPI30 ? "Required" : "NotRequired"
+
+  return locationRequirement
 }
 
 const usePermissionsContext = (): PermissionsContextState => {
