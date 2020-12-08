@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { Platform, ScrollView, StyleSheet } from "react-native"
+import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
@@ -17,7 +17,7 @@ import { Colors, Spacing, Typography } from "../../styles"
 const ExposureDetectionStatus: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
-  const { exposureNotifications } = usePermissionsContext()
+  const { exposureNotifications, locationRequirement } = usePermissionsContext()
 
   const subheaderText =
     exposureNotifications.status === "Active"
@@ -34,7 +34,7 @@ const ExposureDetectionStatus: FunctionComponent = () => {
       </Text>
       <Text style={style.subheaderText}>{subheaderText}</Text>
       <ExposureNotificationsActivationStatus />
-      {Platform.OS === "android" && <LocationActivationStatus />}
+      {locationRequirement === "Required" && <LocationActivationStatus />}
     </ScrollView>
   )
 }
