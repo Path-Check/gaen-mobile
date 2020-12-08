@@ -4,11 +4,10 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { useExposureDetectionStatus } from "../../Device/useExposureDetectionStatus"
 import AnimatedCircle from "./AnimatedCircle"
-
 import { HomeStackScreens } from "../../navigation"
 import { Text } from "../../components"
+import { usePermissionsContext } from "../../Device/PermissionsContext"
 
 import { Icons } from "../../assets"
 import {
@@ -24,7 +23,7 @@ import {
 const ExposureDetectionStatusCard: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
-  const exposureDetectionStatus = useExposureDetectionStatus()
+  const { exposureNotifications } = usePermissionsContext()
 
   const handleOnPressExposureDetectionStatus = () => {
     navigation.navigate(HomeStackScreens.ExposureDetectionStatus)
@@ -55,7 +54,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
     statusIconFill,
     statusText,
     actionText,
-  } = exposureDetectionStatus === "On" ? enabledConfig : disabledConfig
+  } = exposureNotifications.status === "Active" ? enabledConfig : disabledConfig
 
   const statusContainerStyle = {
     ...style.statusContainer,
@@ -86,7 +85,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
             fill={statusIconFill}
             style={style.statusIcon}
           />
-          {exposureDetectionStatus === "On" && (
+          {exposureNotifications.status === "Active" && (
             <AnimatedCircle iconSize={iconSize} />
           )}
         </View>

@@ -11,4 +11,5 @@ export default Factory.define<PermissionsContextState>(() => ({
   exposureNotifications: {
     status: "Active",
   },
+  locationRequirement: "NotRequired",
 }))
