@@ -2,8 +2,10 @@ import { Platform } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { usePermissionsContext } from "../Device/PermissionsContext"
-import { LocationPermissions } from "../Device/useLocationPermissions"
+import {
+  ENPermissionStatus,
+  usePermissionsContext,
+} from "../Device/PermissionsContext"
 import {
   ActivationStackScreen,
   ActivationStackScreens,
@@ -50,13 +52,15 @@ export const useActivationNavigation = (): ActivationNavigation => {
     enableProductAnalytics,
   } = useConfigurationContext()
   const navigation = useNavigation()
-  const { locationPermissions } = usePermissionsContext()
+  const {
+    exposureNotifications: { status },
+  } = usePermissionsContext()
   const { completeOnboarding } = useOnboardingContext()
 
   const environment = {
     displayAcceptTermsOfService,
     enableProductAnalytics,
-    locationPermissions,
+    status,
   }
 
   const activationSteps = determineActivationSteps(environment)
@@ -80,7 +84,7 @@ export const useActivationNavigation = (): ActivationNavigation => {
 }
 
 export type Environment = {
-  locationPermissions: LocationPermissions
+  status: ENPermissionStatus
   displayAcceptTermsOfService: boolean
   enableProductAnalytics: boolean
 }
@@ -88,15 +92,15 @@ export type Environment = {
 export const determineActivationSteps = ({
   displayAcceptTermsOfService,
   enableProductAnalytics,
-  locationPermissions,
+  status,
 }: Environment): ActivationStep[] => {
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
   const activationSteps: ActivationStep[] = []
+
+  console.log({ status })
 
   displayAcceptTermsOfService && activationSteps.push("AcceptTermsOfService")
   enableProductAnalytics && activationSteps.push("ProductAnalyticsConsent")
-  isLocationRequiredAndOff && activationSteps.push("ActivateLocation")
+  status === "LocationOff" && activationSteps.push("ActivateLocation")
   activationSteps.push("ActivateExposureNotifications")
   Platform.OS === "ios" && activationSteps.push("NotificationPermissions")
   activationSteps.push("ActivationSummary")

@@ -4,40 +4,50 @@ import { Alert, Platform } from "react-native"
 import { useApplicationName } from "./Device/useApplicationInfo"
 import { openAppSettings } from "./Device/nativeModule"
 import * as NativeModule from "./gaen/nativeModule"
+import { usePermissionsContext } from "./Device/PermissionsContext"
 
 export const useRequestExposureNotifications = (): (() => void) => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
+  const {
+    exposureNotifications: { status },
+  } = usePermissionsContext()
 
   const requestExposureNotifications = async () => {
-    const response = await NativeModule.requestAuthorization()
+    if (status === "LocationOff") {
+      showEnableLocationAlert()
+    } else if (status === "BluetoothOff") {
+      showEnableBluetoothAlert()
+    } else {
+      const response = await NativeModule.requestAuthorization()
 
-    if (response.kind === "success") {
-      switch (response.status) {
-        case "Active":
-          break
-        default:
-          showBaseExposureNotificationsAlert()
-      }
-    } else if (response.kind === "failure") {
-      switch (response.error) {
-        case "BluetoothOff":
-          showEnableBluetoothAlert()
-          break
-        case "LocationOff":
-          showEnableLocationAlert()
-          break
-        case "Restricted":
-          showSetToActiveRegionAlert()
-          break
-        case "NotAuthorized":
-          showBaseExposureNotificationsAlert()
-          break
-        case "Unknown":
-          showBaseExposureNotificationsAlert()
-          break
-        default:
-          showBaseExposureNotificationsAlert()
+      if (response.kind === "success") {
+        switch (response.status) {
+          case "Active":
+            break
+          default:
+            showBaseExposureNotificationsAlert()
+        }
+      } else if (response.kind === "failure") {
+        switch (response.error) {
+          case "BluetoothOff":
+            showEnableBluetoothAlert()
+            break
+          case "LocationOff":
+            showEnableLocationAlert()
+            break
+          case "Restricted":
+            showSetToActiveRegionAlert()
+            break
+          case "NotAuthorized":
+            showBaseExposureNotificationsAlert()
+            break
+          case "Unknown":
+            showBaseExposureNotificationsAlert()
+            break
+          default:
+            showBaseExposureNotificationsAlert()
+        }
       }
     }
   }
