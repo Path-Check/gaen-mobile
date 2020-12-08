@@ -7,7 +7,7 @@ describe("determineActivationSteps", () => {
   describe("when location is required and off", () => {
     it("the activate location step is included", () => {
       const environment: Environment = {
-        exposureNotificationsStatus: "LocationOff",
+        exposureNotificationsStatus: "LocationOffAndRequired",
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }

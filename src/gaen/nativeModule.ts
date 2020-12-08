@@ -57,7 +57,7 @@ const toStatus = (data: string): ENPermissionStatus => {
     case "BluetoothOff":
       return "BluetoothOff"
     case "LocationOff":
-      return "LocationOff"
+      return "LocationOffAndRequired"
     case "Restricted":
       return "Restricted"
     case "Unauthorized":
@@ -88,7 +88,7 @@ export type RequestAuthorizationError =
   | "Unsupported"
   | "Invalidated"
   | "BluetoothOff"
-  | "LocationOff"
+  | "LocationOffAndRequired"
   | "InsufficientStorage"
   | "NotEnabled"
   | "APIMisuse"

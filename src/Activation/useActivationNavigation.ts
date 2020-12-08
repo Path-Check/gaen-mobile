@@ -96,7 +96,7 @@ export const determineActivationSteps = ({
 
   displayAcceptTermsOfService && activationSteps.push("AcceptTermsOfService")
   enableProductAnalytics && activationSteps.push("ProductAnalyticsConsent")
-  exposureNotificationsStatus === "LocationOff" &&
+  exposureNotificationsStatus === "LocationOffAndRequired" &&
     activationSteps.push("ActivateLocation")
   activationSteps.push("ActivateExposureNotifications")
   Platform.OS === "ios" && activationSteps.push("NotificationPermissions")
