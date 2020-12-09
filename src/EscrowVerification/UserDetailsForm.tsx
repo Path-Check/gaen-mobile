@@ -58,7 +58,7 @@ const UserDetailsForm: FunctionComponent = () => {
   const { testDate, setTestDate } = useEscrowVerificationContext()
   const [phoneNumber, setPhoneNumber] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [isFocused, setIsFocused] = useState(false)
+  const [isPhoneInputFocused, setIsPhoneInputFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
 
@@ -73,6 +73,15 @@ const UserDetailsForm: FunctionComponent = () => {
   const handleOnChangePhoneNumber = (phoneNumber: string) => {
     setErrorMessage("")
     setPhoneNumber(phoneNumber)
+  }
+
+  const handleOnPressShadowPhoneInput = () => {
+    setIsPhoneInputFocused(true)
+    phoneInputRef?.current?.focus()
+  }
+
+  const handleOnBlurHiddenPhoneInput = () => {
+    setIsPhoneInputFocused(false)
   }
 
   const handleOnPressDateInput = () => {
@@ -127,9 +136,11 @@ const UserDetailsForm: FunctionComponent = () => {
 
   const phoneInputRef = useRef<TextInput>(null)
 
-  const textInputStyle = isFocused
-    ? style.focusedTextInput
-    : style.unfocusedTextInput
+  const shadowPhoneInputStyle = isPhoneInputFocused
+    ? style.focusedShadowPhoneInput
+    : style.unfocusedShadowPhoneInput
+
+  const formattedTestDate = dayjs(testDate).format("MMMM DD, YYYY")
 
   const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
@@ -153,22 +164,15 @@ const UserDetailsForm: FunctionComponent = () => {
           <Text style={style.inputLabel}>
             {t("escrow_verification.user_details_form.phone_number")}
           </Text>
-          <Pressable
-            onPress={() => {
-              setIsFocused(true)
-              phoneInputRef?.current?.focus()
-            }}
-          >
-            <Text style={textInputStyle}>
+          <Pressable onPress={handleOnPressShadowPhoneInput}>
+            <Text style={shadowPhoneInputStyle}>
               {phoneToFormattedString(phoneNumber)}
             </Text>
           </Pressable>
           <TextInput
             ref={phoneInputRef}
-            onBlur={() => {
-              setIsFocused(false)
-            }}
-            style={{ height: 0, width: 0, opacity: 0, position: "absolute" }}
+            onBlur={handleOnBlurHiddenPhoneInput}
+            style={style.hiddenPhoneTextInput}
             keyboardType="phone-pad"
             maxLength={10}
             returnKeyType="done"
@@ -185,9 +189,7 @@ const UserDetailsForm: FunctionComponent = () => {
           </Text>
           {Platform.OS === "android" && (
             <Pressable onPress={handleOnPressDateInput} style={style.dateInput}>
-              <Text style={style.dateInputText}>
-                {dayjs(testDate).format("MMMM DD, YYYY")}
-              </Text>
+              <Text style={style.dateInputText}>{formattedTestDate}</Text>
             </Pressable>
           )}
           {showDatePicker && (
@@ -221,6 +223,7 @@ const UserDetailsForm: FunctionComponent = () => {
           />
         </Pressable>
       </View>
+
       {isLoading && <LoadingIndicator />}
     </KeyboardAwareScrollView>
   )
@@ -287,14 +290,20 @@ const style = StyleSheet.create({
   dateInputText: {
     ...Typography.body.x30,
   },
-  unfocusedTextInput: {
+  unfocusedShadowPhoneInput: {
     ...Forms.textInput,
     ...Typography.style.monospace,
   },
-  focusedTextInput: {
+  focusedShadowPhoneInput: {
     ...Forms.textInput,
     ...Typography.style.monospace,
     borderColor: Colors.primary.shade100,
+  },
+  hiddenPhoneTextInput: {
+    height: 0,
+    width: 0,
+    opacity: 0,
+    position: "absolute",
   },
   button: {
     ...Buttons.primary.base,
