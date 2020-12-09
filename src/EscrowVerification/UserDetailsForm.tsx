@@ -28,6 +28,7 @@ import {
   Spacing,
   Buttons,
   Typography,
+  Outlines,
 } from "../styles"
 import { Icons } from "../assets"
 
@@ -127,10 +128,10 @@ const UserDetailsForm: FunctionComponent = () => {
     >
       <View>
         <View style={style.headerContainer}>
-          <Text style={style.header}>
+          <Text style={style.headerText}>
             {t("escrow_verification.user_details_form.test_details")}
           </Text>
-          <Text style={style.subheader}>
+          <Text style={style.subheaderText}>
             {t("escrow_verification.user_details_form.subheader")}
           </Text>
         </View>
@@ -139,6 +140,8 @@ const UserDetailsForm: FunctionComponent = () => {
             {t("escrow_verification.user_details_form.test_date")}
           </Text>
           <DateTimePicker
+            mode="date"
+            display="inline"
             value={dayjs(testDate).toDate()}
             minimumDate={dayjs().subtract(4, "week").toDate()}
             maximumDate={dayjs().toDate()}
@@ -215,13 +218,16 @@ const style = StyleSheet.create({
   },
   headerContainer: {
     marginBottom: Spacing.small,
+    paddingBottom: Spacing.small,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade25,
   },
-  header: {
-    ...Typography.header.x50,
+  headerText: {
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
   },
-  subheader: {
-    ...Typography.header.x20,
+  subheaderText: {
+    ...Typography.body.x30,
   },
   errorSubtitle: {
     ...Typography.utility.error,
