@@ -11,6 +11,8 @@ import {
 } from "react-native-permissions"
 
 import * as GaenNativeModule from "../gaen/nativeModule"
+import * as DeviceInfoModule from "../Device/nativeModule"
+
 import useOnAppStateChange from "./useOnAppStateChange"
 
 export type NotificationPermissionStatus =
@@ -175,16 +177,21 @@ const useENPermissions = () => {
 }
 
 const useLocationRequirement = (): LocationRequirement => {
-  /* const isDeviceBelowAPI30 = await DeviceInfoModule.isDeviceBelowAPI30() */
-  const isDeviceBelowAPI30 = true
-
-  if (Platform.OS === "ios") {
-    return "NotRequired"
-  } else if (isDeviceBelowAPI30) {
-    return "Required"
-  } else {
-    return "NotRequired"
+  const doesDeviceSupportLocationlessScanning = async () => {
+    return await DeviceInfoModule.doesDeviceSupportLocationlessScanning()
   }
+
+  const determineLocationRequirement = () => {
+    if (Platform.OS === "ios") {
+      return "NotRequired"
+    } else if (doesDeviceSupportLocationlessScanning()) {
+      return "NotRequired"
+    } else {
+      return "Required"
+    }
+  }
+
+  return determineLocationRequirement()
 }
 
 const usePermissionsContext = (): PermissionsContextState => {
