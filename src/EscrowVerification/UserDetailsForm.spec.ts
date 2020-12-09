@@ -2,7 +2,7 @@ import { phoneToFormattedString } from "./UserDetailsForm"
 
 describe("phoneToFormattedString", () => {
   describe("when given a phonenumber", () => {
-    it("adds parenteses and a dash, and pads missing digits with underscores", () => {
+    it("adds parenteses and a dash, and pads missing digits with asterisks", () => {
       const number1 = ""
       const number2 = "1"
       const number3 = "123"
@@ -17,10 +17,10 @@ describe("phoneToFormattedString", () => {
       const result5 = phoneToFormattedString(number5)
       const result6 = phoneToFormattedString(number6)
 
-      const expected1 = "(___) ___-____"
-      const expected2 = "(1__) ___-____"
-      const expected3 = "(123) ___-____"
-      const expected4 = "(123) 456-____"
+      const expected1 = "(***) ***-****"
+      const expected2 = "(1**) ***-****"
+      const expected3 = "(123) ***-****"
+      const expected4 = "(123) 456-****"
       const expected5 = "(123) 456-7890"
       const expected6 = "(123) 456-7890"
 
