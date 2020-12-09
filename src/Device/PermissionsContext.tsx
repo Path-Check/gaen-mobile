@@ -115,6 +115,12 @@ const useNotificationPermissions = () => {
     }
   }, [])
 
+  useOnAppStateChange(() => {
+    if (Platform.OS === "ios") {
+      checkNotificationPermission()
+    }
+  })
+
   const checkNotificationPermission = async () => {
     const { status } = await checkNotifications()
     setNotificationPermission(notificationPermissionStatusFromString(status))

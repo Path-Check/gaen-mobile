@@ -216,6 +216,7 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "notifications_off": "Turn on notifications to get notified if you receive an exposure.",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
