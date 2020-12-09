@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   Pressable,
+  Platform,
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -35,7 +36,7 @@ import { Icons } from "../assets"
 const defaultErrorMessage = " "
 
 export const phoneToFormattedString = (phonenumber: string): string => {
-  const underscores = new Array(10).fill("_")
+  const underscores = new Array(10).fill("*")
   const digits = phonenumber.split("")
   const characters = [...digits, ...underscores]
 
@@ -46,6 +47,8 @@ export const phoneToFormattedString = (phonenumber: string): string => {
   return `(${areaCode}) ${firstPart}-${secondPart}`
 }
 
+type Posix = number
+
 const UserDetailsForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
@@ -53,19 +56,27 @@ const UserDetailsForm: FunctionComponent = () => {
   const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
 
   const { testDate, setTestDate } = useEscrowVerificationContext()
-
   const [phoneNumber, setPhoneNumber] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
+  const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
 
-  const handleOnChangeTestDate = (testDate: Date | undefined) => {
+  const handleOnChangeTestDate = (
+    _event: Event,
+    testDate: Date | undefined,
+  ) => {
+    setShowDatePickerAndroid(false)
     testDate && setTestDate(dayjs(testDate).valueOf())
   }
 
   const handleOnChangePhoneNumber = (phoneNumber: string) => {
     setErrorMessage("")
     setPhoneNumber(phoneNumber)
+  }
+
+  const handleOnPressDateInput = () => {
+    setShowDatePickerAndroid(true)
   }
 
   const handleOnPressSubmit = async () => {
@@ -120,6 +131,8 @@ const UserDetailsForm: FunctionComponent = () => {
     ? style.focusedTextInput
     : style.unfocusedTextInput
 
+  const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
+
   return (
     <KeyboardAwareScrollView
       style={style.container}
@@ -134,21 +147,6 @@ const UserDetailsForm: FunctionComponent = () => {
           <Text style={style.subheaderText}>
             {t("escrow_verification.user_details_form.subheader")}
           </Text>
-        </View>
-        <View style={style.inputContainer}>
-          <Text style={style.inputLabel}>
-            {t("escrow_verification.user_details_form.test_date")}
-          </Text>
-          <DateTimePicker
-            mode="date"
-            display="inline"
-            value={dayjs(testDate).toDate()}
-            minimumDate={dayjs().subtract(4, "week").toDate()}
-            maximumDate={dayjs().toDate()}
-            onChange={(_event: Event, date?: Date) =>
-              handleOnChangeTestDate(date)
-            }
-          />
         </View>
 
         <View style={style.inputContainer}>
@@ -167,10 +165,10 @@ const UserDetailsForm: FunctionComponent = () => {
           </Pressable>
           <TextInput
             ref={phoneInputRef}
-            onBlur={() => setIsFocused(false)}
-            style={{ display: "none" }}
-            placeholder={"(123) 123-4567"}
-            placeholderTextColor={Colors.text.placeholder}
+            onBlur={() => {
+              setIsFocused(false)
+            }}
+            style={{ height: 0, width: 0, opacity: 0, position: "absolute" }}
             keyboardType="phone-pad"
             maxLength={10}
             returnKeyType="done"
@@ -178,9 +176,28 @@ const UserDetailsForm: FunctionComponent = () => {
             blurOnSubmit={false}
             onSubmitEditing={Keyboard.dismiss}
             testID="phone-number-input"
-            multiline
           />
         </View>
+
+        <View style={style.inputContainer}>
+          <Text style={style.inputLabel}>
+            {t("escrow_verification.user_details_form.test_date")}
+          </Text>
+          {Platform.OS === "android" && (
+            <Pressable onPress={handleOnPressDateInput} style={style.dateInput}>
+              <Text style={style.dateInputText}>
+                {dayjs(testDate).format("MMMM DD, YYYY")}
+              </Text>
+            </Pressable>
+          )}
+          {showDatePicker && (
+            <DatePicker
+              testDate={testDate}
+              handleOnChangeTestDate={handleOnChangeTestDate}
+            />
+          )}
+        </View>
+
         <View
           accessibilityElementsHidden={!errorMessageShouldBeAccessible}
           accessible={errorMessageShouldBeAccessible}
@@ -209,18 +226,41 @@ const UserDetailsForm: FunctionComponent = () => {
   )
 }
 
+interface DatePickerProps {
+  testDate: Posix
+  handleOnChangeTestDate: (_event: Event, date: Date | undefined) => void
+}
+
+const DatePicker: FunctionComponent<DatePickerProps> = ({
+  testDate,
+  handleOnChangeTestDate,
+}) => {
+  return (
+    <DateTimePicker
+      mode="date"
+      display={Platform.OS === "ios" ? "compact" : "calendar"}
+      value={dayjs(testDate).toDate()}
+      minimumDate={dayjs().subtract(4, "week").toDate()}
+      maximumDate={dayjs().toDate()}
+      onChange={handleOnChangeTestDate}
+    />
+  )
+}
+
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
+    flexGrow: 1,
     padding: Spacing.medium,
   },
   headerContainer: {
     marginBottom: Spacing.small,
     paddingBottom: Spacing.small,
     borderBottomWidth: Outlines.hairline,
-    borderColor: Colors.neutral.shade25,
+    borderColor: Colors.neutral.shade10,
   },
   headerText: {
     ...Typography.header.x60,
@@ -231,7 +271,8 @@ const style = StyleSheet.create({
   },
   errorSubtitle: {
     ...Typography.utility.error,
-    height: Spacing.huge,
+    height: Spacing.large,
+    marginBottom: Spacing.small,
   },
   inputContainer: {
     marginBottom: Spacing.medium,
@@ -239,6 +280,12 @@ const style = StyleSheet.create({
   inputLabel: {
     ...Typography.form.inputLabel,
     paddingBottom: Spacing.xxSmall,
+  },
+  dateInput: {
+    ...Forms.textInput,
+  },
+  dateInputText: {
+    ...Typography.body.x30,
   },
   unfocusedTextInput: {
     ...Forms.textInput,
