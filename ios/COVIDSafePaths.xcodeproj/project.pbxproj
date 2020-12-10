@@ -41,6 +41,8 @@
 		B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */; };
 		B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F4C3624BE0658007B09D5 /* List+Extensions.swift */; };
 		B5A6FD6E24BC9E69007D328C /* ExposureManagerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */; };
+		B5BBC8182582C0D7005CEE7D /* DiagnosisKeyRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBC8162582C0D7005CEE7D /* DiagnosisKeyRequests.swift */; };
+		B5BBC85F2582C1D4005CEE7D /* KeyArchiveRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBC85E2582C1D4005CEE7D /* KeyArchiveRequests.swift */; };
 		B5BD2BC02507E81A00B2F62E /* UtilsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */; };
 		B5BD2BC22507E84D00B2F62E /* UtilsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BD2BC12507E84D00B2F62E /* UtilsModule.m */; };
 		B5C9723024B8A909007F4C0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9722F24B8A909007F4C0B /* Constants.swift */; };
@@ -53,7 +55,6 @@
 		B5CEC06A25781D6900BFFFF2 /* EscrowVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CEC06925781D6900BFFFF2 /* EscrowVerificationManager.swift */; };
 		B5E79437249E666B00BD8596 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E79436249E666B00BD8596 /* Array+Extensions.swift */; };
 		B5FB3B43248BD61A001DB1D5 /* DebugMenuModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */; };
-		B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */; };
 		B5FBB0CF24916A4C00433980 /* DebugAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0CE24916A4C00433980 /* DebugAction.swift */; };
 		B5FBB0D124916A7200433980 /* Persisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D024916A7200433980 /* Persisted.swift */; };
 		B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBB0D224916B3600433980 /* String+Extensions.swift */; };
@@ -64,7 +65,6 @@
 		B5FC37CC2489B251006474EB /* GenericResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CB2489B251006474EB /* GenericResult.swift */; };
 		B5FC37CE2489B359006474EB /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CD2489B359006474EB /* TypeAliases.swift */; };
 		B5FC37D02489B3DE006474EB /* StructuredError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37CF2489B3DE006474EB /* StructuredError.swift */; };
-		B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */; };
 		B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37DC248A78D2006474EB /* ExposureKey.swift */; };
 		B5FC37DF248A78FC006474EB /* ExposureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */; };
 		B5FC37E1248A7EED006474EB /* ExposureConfigurationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */; };
@@ -257,6 +257,8 @@
 		B59F4C3424BDF879007B09D5 /* ExposureHistoryModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExposureHistoryModule.m; sourceTree = "<group>"; };
 		B59F4C3624BE0658007B09D5 /* List+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extensions.swift"; sourceTree = "<group>"; };
 		B5A6FD6A24BC9E54007D328C /* ExposureManagerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureManagerUnitTests.swift; sourceTree = "<group>"; };
+		B5BBC8162582C0D7005CEE7D /* DiagnosisKeyRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyRequests.swift; sourceTree = "<group>"; };
+		B5BBC85E2582C1D4005CEE7D /* KeyArchiveRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyArchiveRequests.swift; sourceTree = "<group>"; };
 		B5BD2BBF2507E81A00B2F62E /* UtilsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsModule.swift; sourceTree = "<group>"; };
 		B5BD2BC12507E84D00B2F62E /* UtilsModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilsModule.m; sourceTree = "<group>"; };
 		B5C490A72498F84000588A5F /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
@@ -270,7 +272,6 @@
 		B5D98A2925780B1E00955A6F /* EscrowVerificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscrowVerificationClient.swift; sourceTree = "<group>"; };
 		B5E79436249E666B00BD8596 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		B5FB3B42248BD61A001DB1D5 /* DebugMenuModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugMenuModule.m; sourceTree = "<group>"; };
-		B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyUrlRequests.swift; sourceTree = "<group>"; };
 		B5FBB0CE24916A4C00433980 /* DebugAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAction.swift; sourceTree = "<group>"; };
 		B5FBB0D024916A7200433980 /* Persisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persisted.swift; sourceTree = "<group>"; };
 		B5FBB0D224916B3600433980 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -282,7 +283,6 @@
 		B5FC37CB2489B251006474EB /* GenericResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResult.swift; sourceTree = "<group>"; };
 		B5FC37CD2489B359006474EB /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		B5FC37CF2489B3DE006474EB /* StructuredError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredError.swift; sourceTree = "<group>"; };
-		B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisKeyRequests.swift; sourceTree = "<group>"; };
 		B5FC37DC248A78D2006474EB /* ExposureKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureKey.swift; sourceTree = "<group>"; };
 		B5FC37DE248A78FC006474EB /* ExposureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureConfiguration.swift; sourceTree = "<group>"; };
 		B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureConfigurationRequests.swift; sourceTree = "<group>"; };
@@ -754,9 +754,9 @@
 		B5FC37D12489C25D006474EB /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				B5FC37D7248A784F006474EB /* DiagnosisKeyRequests.swift */,
 				A575A3F9250B7BA400AA742C /* DailySummariesConfigurationRequests.swift */,
-				B5FBB0BC2490339900433980 /* DiagnosisKeyUrlRequests.swift */,
+				B5BBC8162582C0D7005CEE7D /* DiagnosisKeyRequests.swift */,
+				B5BBC85E2582C1D4005CEE7D /* KeyArchiveRequests.swift */,
 				B54CBF31249A738500218477 /* IndexFileRequests.swift */,
 				B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */,
 			);
@@ -1159,7 +1159,6 @@
 				C58463E42486C51100BCB842 /* ExposureManager.swift in Sources */,
 				B5FC37C62489B1B3006474EB /* APIRequest.swift in Sources */,
 				B5FBB0D124916A7200433980 /* Persisted.swift in Sources */,
-				B5FBB0BD2490339900433980 /* DiagnosisKeyUrlRequests.swift in Sources */,
 				C5C850CA2480156200A494CA /* AppDelegate.m in Sources */,
 				A53F7B8C24FB3ADC00C5E30A /* Scoring.swift in Sources */,
 				B5CEC015257814B500BFFFF2 /* Extensions.swift in Sources */,
@@ -1174,10 +1173,10 @@
 				A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */,
 				B59F4C3524BDF879007B09D5 /* ExposureHistoryModule.m in Sources */,
 				B5CEC06A25781D6900BFFFF2 /* EscrowVerificationManager.swift in Sources */,
+				B5BBC8182582C0D7005CEE7D /* DiagnosisKeyRequests.swift in Sources */,
 				B596C0722488127D00943B79 /* ENPermissionsModule.m in Sources */,
 				A575A3F8250B719300AA742C /* DailySummariesConfiguration.swift in Sources */,
 				A58AB54424EF467E00F393B4 /* UNUserNotificationCenter+Extensions.swift in Sources */,
-				B5FC37D8248A784F006474EB /* DiagnosisKeyRequests.swift in Sources */,
 				B59F4C3724BE0658007B09D5 /* List+Extensions.swift in Sources */,
 				B5FBB0D324916B3600433980 /* String+Extensions.swift in Sources */,
 				A575A3FA250B7BA400AA742C /* DailySummariesConfigurationRequests.swift in Sources */,
@@ -1188,6 +1187,7 @@
 				B576CC4424993F5200CDD9D9 /* Encodable+Extensions.swift in Sources */,
 				B5CEC004257810D200BFFFF2 /* APIClient.swift in Sources */,
 				B5FBB0CF24916A4C00433980 /* DebugAction.swift in Sources */,
+				B5BBC85F2582C1D4005CEE7D /* KeyArchiveRequests.swift in Sources */,
 				B5FC37E1248A7EED006474EB /* ExposureConfigurationRequests.swift in Sources */,
 				B5FC37DD248A78D2006474EB /* ExposureKey.swift in Sources */,
 				B5FC37DF248A78FC006474EB /* ExposureConfiguration.swift in Sources */,

@@ -1,8 +1,7 @@
 import Alamofire
 
 enum RequestType {
-  case postKeys,
-  downloadKeys,
+  case downloadKeys,
   exposureConfiguration
 }
 
@@ -31,7 +30,6 @@ protocol APIClient {
 
 class BTAPIClient: APIClient {
   
-  let postKeysUrl: URL
   let downloadBaseUrl: URL
   let exposureConfigurationUrl: URL
   static let shared: BTAPIClient = {
@@ -40,7 +38,6 @@ class BTAPIClient: APIClient {
       exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV6))!
     }
     return BTAPIClient(
-      postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
       downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
       exposureConfigurationUrl: exposureConfigurationUrl
     )
@@ -48,10 +45,8 @@ class BTAPIClient: APIClient {
   
   private let sessionManager: SessionManager
 
-  init(postKeysUrl: URL,
-       downloadBaseUrl: URL,
+  init(downloadBaseUrl: URL,
        exposureConfigurationUrl: URL) {
-    self.postKeysUrl = postKeysUrl
     self.downloadBaseUrl = downloadBaseUrl
     self.exposureConfigurationUrl = exposureConfigurationUrl
     
@@ -222,8 +217,6 @@ private extension BTAPIClient {
   func baseUrlFor(_ requestType: RequestType) -> URL {
     var baseUrl: URL!
     switch requestType {
-    case .postKeys:
-      baseUrl = postKeysUrl
     case .downloadKeys:
       baseUrl = downloadBaseUrl
     case .exposureConfiguration:
