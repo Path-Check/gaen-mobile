@@ -100,7 +100,7 @@
       "verification_code_used": "Verification code has already been used"
     },
     "intro": {
-      "body1": "If you have recieved a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
+      "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
       "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing.",
       "header": "Do you have your verification code?",
       "what_is_a": "What is a verification code?"
@@ -421,7 +421,7 @@
       "high_blood_pressure": "High blood pressure",
       "kidney_disease": "Chronic kidney disease",
       "liver_disease": "Liver disease",
-      "lung_disease": "Chronic lung disease, such as moderate to sever asthma, COPD, cystic fibrosis, or pulmonary fibrosis",
+      "lung_disease": "Chronic lung disease, such as moderate to severe asthma, COPD, cystic fibrosis, or pulmonary fibrosis",
       "obesity": "Obesity",
       "pregnancy": "Pregnancy",
       "select_all_or_none": "Select all that apply (or none)",
@@ -508,8 +508,8 @@
     "network_connection_title": "No Internet Connection",
     "network_connection_body": "You need to be connected to WiFi to submit a verification code.",
     "timeout_title": "Submission Took Too Long",
-    "timeout_body": "It took to long to submit the verificaiton code. Please try again later.",
+    "timeout_body": "It took too long to submit the verification code. Please try again later.",
     "unknown_title": "Something Went Wrong",
-    "unknown_body": "An unexpected error occured. Please try again."
+    "unknown_body": "An unexpected error occurred. Please try again."
   }
 }

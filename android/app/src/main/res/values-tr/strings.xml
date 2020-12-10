@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">Maruziyet kontrolü yapılıyor</string>
   <string name="exposure_notification_channel_description">Maruz kalma bildirimi uyarıları</string>
   <string name="exposure_notification_channel_name">Maruz Kalma Bildirimi</string>
   <string name="exposure_notification_message">Yakınında bulunmuş olduğun birinin COVID-19 testi daha sonra pozitif çıktı. Daha fazla bilgi için tıkla.</string>

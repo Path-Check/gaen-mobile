@@ -8,6 +8,7 @@
     "cancel": "Annulla",
     "continue": "Continua",
     "done": "Fatto",
+    "enable": "Attiva",
     "more": "Altro",
     "next": "Fatto",
     "something_went_wrong": "Si è verificato un errore",
@@ -19,6 +20,7 @@
     "complete_body_bluetooth": "Scegliendo di condividere il tuo stato e avvisare anonimamente gli altri, stai aiutando a contenere la diffusione del virus e proteggere gli altri nella tua comunità.",
     "complete_title": "Grazie per aver tenuto al sicuro la tua comunità!",
     "consent_button_title": "Capisco e acconsento",
+    "enable_exposure_notifications_button": "Attiva le notifiche di esposizione",
     "publish_consent_title_bluetooth": "Avvisare gli altri nella tua comunità"
   },
   "exposure_history": {
@@ -26,6 +28,11 @@
     "last_days": "Ultimi 21 giorni",
     "why_did_i_get_an_en": "Perché ho ricevuto una notifica di esposizione?",
     "why_did_i_get_an_en_para": "Riceverai una notifica di esposizione quando qualcuno che hai incrociato riceverà in seguito una diagnosi o un test confermati e positivi per COVID-19 e sceglie d'informare gli altri"
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Attivare il Bluetooth",
+    "cant_check_for_exposures_button": "Attiva le notifiche di esposizione",
+    "use_exposure_notifications_android_title": "Attiva le notifiche di esposizione"
   },
   "home": {
     "bluetooth": {
@@ -47,9 +54,6 @@
     "more_info": "Ulteriori informazioni"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Attivare il Bluetooth"
-    },
     "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",
     "privacy_policy": "Informativa sulla privacy",
     "terms_header_title": "Termini per l'utilizzo"

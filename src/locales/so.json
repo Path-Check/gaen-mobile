@@ -31,6 +31,7 @@
     "no": "Maya",
     "no_thanks": "Maya waad mahadsantahay",
     "off": "DANSAN",
+    "okay": "Haye",
     "on": "DAARAN",
     "save": "Kaydi",
     "select_language": "Xulo Luqadda",
@@ -70,6 +71,9 @@
     "reload": "Dibu cabbee",
     "title": "Khald aan la aqoon"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "Qof la hadlaya khabiir caafimaad"
+  },
   "export": {
     "code_input_body_bluetooth": "Gali koodhkaaga xaqiijinta",
     "code_input_button_cancel": "Buri",
@@ -85,6 +89,7 @@
     "consent_warning_message": "Inaad sii wado waxay baabi'inaysaa koodhkaaga baaritaanka lagaaga helay caabuqa. Haddii aad doonayso inaad nala wadaagto xogta baaritaanka caabuqa lagaaga helay mustaqbalka danbe, waxaad marka koobaad u baahan doontaa inaad hesho koodh cusub oo muujinaaya in caabuqa lagaa helay.",
     "consent_warning_title": "Digniin!",
     "enable_exposure_notifications_body": "Waa inaad fasaxdaa ogaysimaha ufeydsanka si aad uga warbixiso natiijada ka tijaabinta toganaha (positive) ah.",
+    "enable_exposure_notifications_button": "Furo Ogaysiiska Ufeydsanaanta",
     "enable_exposure_notifications_title": "Oggolow ogaysimaha ufeydsanku inay sii jirto",
     "error": {
       "invalid_code": "Ku day koodh ka duwan",
@@ -156,6 +161,11 @@
     "why_did_i_get_an_en": "Maxaan u helay ogeysiin ufeydsanaan?",
     "why_did_i_get_an_en_para": "Waxaad heli doontaa ogeysiinta ufeydsanaanta marka qofka aad si lama filaan u kulanteeni hadhow si xaqiiq ah, looga helo cudrka, ama laga tijaabiyo oo COVID-19 oo u xusho inuu u wargaliyo dadka kale."
   },
+  "exposure_notification_alerts": {
+    "cant_check_for_exposures_button": "Furo Ogaysiiska Ufeydsanaanta",
+    "share_exposure_information_ios_title": "La wadaag Macluumaadka Soo-gaarista",
+    "use_exposure_notifications_android_title": "Furo Ogaysiiska Ufeydsanaanta"
+  },
   "exposure_scanning_status": {
     "fix_this": "Xalli tan",
     "learn_more": "Xog badan ka baro",
@@ -187,7 +197,6 @@
     "fix": "Ku hagaaji cilladaha {{technology}}",
     "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
     "have_a_positive_test": "Ma haysataa koodhka baaritaanka caabuqa lagaaga helay?",
-    "if_you_have_a_code": "Soo sheeg natiijadaada si aad gacan uga gaysato badbaadinta bulshadaada.",
     "location_info_body": "Google ayaa waajib ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Helitaanka  U Feydsanaanta {{applicationName}} MA raadraaco ama ma kaydiyo goobtaada.",
     "location_info_subheader": "{{applicationName}} ma raadraaco ama ma kaydiyo goobtaada.",
     "not_feeling_well": "Xanuun miyaa ku haya?",
@@ -195,11 +204,6 @@
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
     "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "Si aad u furato Ogaysiiska Ufeydsanaanta , gal qaybta Ogaysiiska Ufeydsanaanta COVID-19 ee Settings (Dejimaha) Abkaaga kadibna furo 'Use Exposure Notifications ( Isticmaal Ogaysiiska Ufeydsanaanta)'",
-      "unauthorized_error_message_ios": "Si aad u furato Ogaysiiska Ufeydsanaanta, gal qaybta Ogaysiiska Ufeydsanaanta ee Settings-ka aaladaada kadiba Wadaag Xogta Qaadista Caabuqa kadibna qaybta furan ku xir {{applicationName}}",
-      "unauthorized_error_title": "Furo Ogaysiiska Ufeydsanaanta"
-    },
     "request_call": "Codo Wicitaan",
     "take_assessment": "Samee Qiimayn",
     "to_submit_your_test": "Si aad u gudbiso natiijada baaritaanka caabuqa lagaaga helay, waa inaad heshaa koodhka natiijada caabuqa lagaaga helay oo uu ku siinaayo raadraacaha."
