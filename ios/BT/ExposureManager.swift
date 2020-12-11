@@ -609,7 +609,7 @@ private extension ExposureManager {
       let dispatchGroup = DispatchGroup()
       for remoteURL in targetUrls {
         dispatchGroup.enter()
-        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+        self.apiClient.downloadRequest(KeyArchiveRequest.get(remoteURL),
                                        requestType: .downloadKeys) { result in
           switch result {
           case .success (let package):
