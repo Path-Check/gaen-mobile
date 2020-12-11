@@ -22,7 +22,7 @@ export const submitPhoneNumber = async (
   phoneNumber: string,
 ): Promise<PhoneNumberResponse> => {
   try {
-    escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
+    await escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
     return { kind: "success" }
   } catch (e) {
     switch (e.message) {
@@ -49,7 +49,7 @@ export const submitDiagnosisKeys = async (
   date: Posix,
 ): Promise<SubmitKeysResponse> => {
   try {
-    escrowVerificationKeySubmissionModule.submitDiagnosisKeys(
+    await escrowVerificationKeySubmissionModule.submitDiagnosisKeys(
       verificationCode,
       date,
     )

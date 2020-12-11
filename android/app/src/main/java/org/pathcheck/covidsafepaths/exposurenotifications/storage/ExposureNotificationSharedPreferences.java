@@ -23,13 +23,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * Key value storage for ExposureNotification.
- *
- * <p>Partners should implement a daily TTL/expiry, for on-device storage of this data, and must
- * ensure compliance with all applicable laws and requirements with respect to encryption, storage,
- * and retention polices for end user data.
  */
 public class ExposureNotificationSharedPreferences {
 
@@ -62,6 +59,12 @@ public class ExposureNotificationSharedPreferences {
 
   private static final String REPORT_TYPE_WHEN_MISSING =
       "ExposureNotificationSharedPreferences.REPORT_TYPE_WHEN_MISSING";
+
+  private static final String ESCROW_VERIFICATION_ACCESS_TOKEN =
+      "ExposureNotificationSharedPreferences.ESCROW_VERIFICATION_ACCESS_TOKEN";
+
+  private static final String ESCROW_VERIFICATION_REFRESH_TOKEN =
+      "ExposureNotificationSharedPreferences.ESCROW_VERIFICATION_REFRESH_TOKEN";
 
   private final SharedPreferences sharedPreferences;
 
@@ -157,5 +160,20 @@ public class ExposureNotificationSharedPreferences {
 
   public Integer getReportTypeWhenMissing(Integer defaultValue) {
     return sharedPreferences.getInt(REPORT_TYPE_WHEN_MISSING, defaultValue);
+  }
+
+  public void setEscrowVerificationTokens(@Nullable String accessToken, @Nullable String refreshToken) {
+    sharedPreferences.edit()
+        .putString(ESCROW_VERIFICATION_ACCESS_TOKEN, accessToken)
+        .putString(ESCROW_VERIFICATION_REFRESH_TOKEN, refreshToken)
+        .commit();
+  }
+
+  public String getEscrowVerificationAccessToken(String defaultValue) {
+    return sharedPreferences.getString(ESCROW_VERIFICATION_ACCESS_TOKEN, defaultValue);
+  }
+
+  public String getEscrowVerificationRefreshToken(String defaultValue) {
+    return sharedPreferences.getString(ESCROW_VERIFICATION_REFRESH_TOKEN, defaultValue);
   }
 }
