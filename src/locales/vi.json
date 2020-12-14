@@ -24,6 +24,7 @@
     "continue": "Tiếp tục",
     "done": "Hoàn tất",
     "edit": "Sửa",
+    "enable": "Kích hoạt",
     "learn_more": "Tìm hiểu thêm",
     "maybe_later": "Có thể là lúc khác",
     "more": "Bổ sung",
@@ -31,6 +32,7 @@
     "no": "Không",
     "no_thanks": "Không, cám ơn",
     "off": "TẮT",
+    "okay": "Được chứ",
     "on": "BẬT",
     "save": "Lưu",
     "select_language": "Chọn ngôn ngữ",
@@ -70,7 +72,25 @@
     "reload": "Tải lại",
     "title": "Lỗi Chưa Xác Định"
   },
+  "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "Số điện thoại phải có 10 chữ số"
+    },
+    "person_and_health_expert": "Một người đang nói chuyện với một chuyên gia y tế",
+    "start": {
+      "body": "Nếu bạn đã có kết quả xét nghiệm dương tính với COVID-19 (không thông qua xét nghiệm kháng thể), bạn có thể báo cáo xét nghiệm ẩn danh.\n\nBáo cáo thử nghiệm của bạn sẽ giúp những người khác trong cộng đồng của bạn ngăn chặn sự lây lan của vi rút.",
+      "header": "Báo cáo thử nghiệm dương tính",
+      "what_is_a_verification_code": "Mã xác minh là gì?"
+    },
+    "user_details_form": {
+      "phone_number": "Số điện thoại",
+      "subheader": "Vui lòng cung cấp ngày kiểm tra và số điện thoại của bạn.",
+      "test_date": "Ngày kiểm tra",
+      "test_details": "Chi tiết kiểm tra"
+    }
+  },
   "export": {
+    "code": "Mật mã",
     "code_input_body_bluetooth": "Nhập mã xác minh của bạn",
     "code_input_button_cancel": "Hủy",
     "code_input_title_bluetooth": "Xác minh chẩn đoán của bạn",
@@ -85,7 +105,9 @@
     "consent_warning_message": "Tiếp tục sẽ vô hiệu mã xác minh của bạn. Nếu bạn muốn chia sẻ chẩn đoán dương tính của bạn trong tương lai, trước tiên bạn sẽ cần phải nhận một mã xác minh mới.",
     "consent_warning_title": "Cảnh báo!",
     "enable_exposure_notifications_body": "Bạn phải cho phép thông báo tiếp xúc để báo cáo về một kết quả xét nghiệm dương tính.",
+    "enable_exposure_notifications_button": "Bật Thông Báo Tiếp Xúc",
     "enable_exposure_notifications_title": "Cho phép thông báo tiếp xúc để tiếp tục",
+    "enter_verification_code": "Nhập mã xác nhận",
     "error": {
       "invalid_code": "Thử sử dụng một mã khác",
       "invalid_format": "Các mã số chỉ có thể chứa các con số và chữ cái",
@@ -93,6 +115,12 @@
       "timeout_error": "Yêu cầu mất quá nhiều thời gian",
       "unknown_code_verification_error": "Thử sử dụng một mã khác",
       "verification_code_used": "Mã xác minh đã được sử dụng"
+    },
+    "intro": {
+      "body1": "Nếu bạn đã nhận được mã xác minh từ  {{healthAuthorityName}} cho kết quả xét nghiệm COVID-19 dương tính, bạn có thể gửi mã xác minh trên màn hình sau.",
+      "body2": "Nếu bạn không có mã, nhưng bạn có kết quả xét nghiệm dương tính, bạn sẽ cần lấy mã xác minh từ {{healthAuthorityName}} trước khi tiếp tục.",
+      "header": "Bạn có mã xác minh của mình không?",
+      "what_is_a": "Mã xác minh là gì?"
     },
     "never_mind_button_title": "Không sao",
     "person_and_health_expert": "Một người đang nói chuyện với một chuyên gia y tế",
@@ -111,7 +139,16 @@
         "no_token_for_existing_keys_title": "Cố gửi các mã hiện hữu"
       }
     },
-    "start_header_bluetooth": "Giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình"
+    "start_header_bluetooth": "Giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình",
+    "submit_code": "Gửi mã",
+    "verification_code_info": {
+      "how_do_i_get_body": "Liên cơ quan y tế của bạn, {{healthAuthorityName}}",
+      "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
+      "info_body": "Mã xác minh là mã do cơ quan y tế của bạn cung cấp cho bạn, {{healthAuthorityName}} , nếu bạn nhận được kết quả xét nghiệm dương tính.\n\nMã xác minh được sử dụng để xác minh rằng kết quả xét nghiệm dương tính của bạn là xác thực.\n\nMỗi mã xác minh sẽ hết hạn sau một thời gian ngắn để đảm bảo rằng kết quả kiểm tra cũ không được gửi.\n\nNếu bạn gặp lỗi khi gửi mã xác minh, bạn phải lấy mã mới từ cơ quan y tế trước khi gửi lại.",
+      "info_header": "Mã xác minh là gì?",
+      "what_happens_body": "Khi bạn gửi mã xác minh, ứng dụng sẽ yêu cầu bạn chia sẻ các khóa hiển thị ẩn danh ngẫu nhiên từ các thiết bị khác mà bạn đã kết nối.\n\nNếu bạn cấp quyền, ứng dụng sẽ gửi các khóa này đến máy chủ thông báo phơi sáng. Máy chủ thông báo sẽ thông báo cho các thiết bị bạn đã kết nối về kết quả xét nghiệm dương tính.\n\nỨng dụng không bao giờ thu thập hoặc lưu trữ thông tin cá nhân. Chỉ những khóa ẩn danh ngẫu nhiên được lưu trữ trên thiết bị của bạn mới được chia sẻ.",
+      "what_happens_header": "Điều gì xảy ra khi tôi gửi mã của mình?"
+    }
   },
   "exposure_history": {
     "check_for_exposures": "Kiểm tra các trường hợp tiếp xúc",
@@ -146,6 +183,7 @@
     "how_does_this_work_para": "Khi Thông Báo Tiếp Xúc được bật, điện thoại của bạn sử dụng Bluetooth để hoán đổi và lưu các chuỗi số ngẫu nhiên (được gọi là các ID ngẫu nhiên) từ bất kỳ điện thoại nào nó có tiếp xúc gần với điện thoại cũng đã bật Thông Báo Tiếp Xúc. Các ID ngẫu nhiên sẽ không nhận dạng cá nhân bạn cho người dùng khác biết và thay đổi nhiều lần mỗi ngày để bảo vệ quyền riêng tư của bạn.",
     "last_days": "14 ngày vừa qua",
     "learn_more": "Tìm Hiểu Thêm",
+    "more_info": "Tìm hiểu thêm về Thông báo phơi sáng",
     "no_connectivity_message": "Bạn chưa kết nối với internet!",
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
     "no_exposure_reports_over_past": "Bạn chưa nhận được bất kỳ báo cáo tiếp xúc nào trong 14 ngày vừa qua.",
@@ -155,6 +193,21 @@
     "updated": "Đã cập nhật",
     "why_did_i_get_an_en": "Tại sao tôi nhận được thông báo tiếp xúc?",
     "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác."
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_body": "Để kích hoạt Thông báo phơi sáng, trước tiên bạn phải bật Bluetooth trong Cài đặt của mình.",
+    "bluetooth_title": "Enable Bluetooth",
+    "cant_check_for_exposures_body": "Bạn phải bật Thông báo phơi sáng để kiểm tra độ phơi sáng.",
+    "cant_check_for_exposures_button": "Bật Thông Báo Tiếp Xúc",
+    "cant_check_for_exposures_title": "Không thể tìm thấy độ phơi sáng",
+    "set_active_region_ios_body": "Mở ứng dụng Cài đặt, điều hướng đến cài đặt Thông báo phơi sáng cho ứng dụng này, sau đó nhấn 'Đặt làm khu vực hoạt động'.",
+    "set_active_region_ios_title": "Set Active Region",
+    "share_exposure_information_ios_body": "Mở ứng dụng Cài đặt, sau đó điều hướng đến cài đặt Thông báo phơi sáng cho ứng dụng này. Đảm bảo 'Chia sẻ thông tin phơi sáng' được bật, sau đó nhấn 'Đặt làm khu vực hoạt động'.",
+    "share_exposure_information_ios_title": "Chia sẻ thông tin phơi nhiễm",
+    "unhandled_error_body": "Một điều gì đó bất ngờ đã xảy ra. Vui lòng đóng và mở lại ứng dụng và thử lại.",
+    "unhandled_error_title": "Có gì đó sai",
+    "use_exposure_notifications_android_body": "Để bật Thông báo phơi sáng, hãy chuyển đến màn hình Thông báo phơi sáng COVID-19 của ứng dụng Cài đặt và bật 'Sử dụng Thông báo phơi sáng'.",
+    "use_exposure_notifications_android_title": "Bật Thông Báo Tiếp Xúc"
   },
   "exposure_scanning_status": {
     "fix_this": "Sửa lỗi này",
@@ -187,7 +240,6 @@
     "fix": "Khắc phục vấn đề với {{technology}}",
     "get_more_info": "Nhận thêm thông tin về {{technology}}",
     "have_a_positive_test": "Bạn có mã kết quả xét nghiệm dương tính?",
-    "if_you_have_a_code": "Báo cáo kết quả của bạn để giúp đảm bảo an toàn cho cộng đồng của bạn.",
     "location_info_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
     "location_info_subheader": "{{applicationName}} không theo dõi hay lưu hồ sơ về địa điểm của bạn",
     "not_feeling_well": "Bạn cảm thấy không khỏe?",
@@ -195,14 +247,16 @@
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
     "proximity_tracing_info_subheader_1": "Thông Báo Tiếp Xúc hoạt động như thế nào?",
     "proximity_tracing_info_subheader_2": "Dữ liệu của tôi có được bảo mật không?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "Để bật Thông Báo Tiếp Xúc, vào Thông Báo Tiếp Xúc COVID-19 của Ứng Dụng Thiết Lập của bạn và bật 'Sử Dụng Thông Báo Tiếp Xúc'",
-      "unauthorized_error_message_ios": "Để bật Thông Báo Tiếp Xúc, vào phần Thông Báo Tiếp Xúc trong Thiết Lập và Chia Sẻ Thông Tin Tiếp Xúc và cài đặt Khu Vực Có Hiệu Lực thành {{applicationName}}",
-      "unauthorized_error_title": "Bật Thông Báo Tiếp Xúc"
-    },
     "request_call": "Yêu Cầu Gọi",
     "take_assessment": "Tiến Hành Đánh Giá",
-    "to_submit_your_test": "Để nhận mã kết quả xét nghiệm, bạn sẽ cần phải nói chuyện với một người truy dấu vết tiếp xúc."
+    "to_submit_your_test": "Để nhận mã kết quả xét nghiệm, bạn sẽ cần phải nói chuyện với một người truy dấu vết tiếp xúc.",
+    "verification_code_card": {
+      "if_you_have_a_code": "Gửi mã xác minh của bạn để giúp giữ an toàn cho cộng đồng của bạn.",
+      "if_you_have_a_positive_test": "Nếu bạn đã có kết quả xét nghiệm dương tính với COVID-19, bạn có thể báo cáo xét nghiệm một cách ẩn danh để giúp giữ an toàn cho cộng đồng của bạn.",
+      "more_info": "Mã xác minh là gì?",
+      "report_positive_test": "Báo cáo kiểm tra dương tính",
+      "submit_code": "Nhập mã"
+    }
   },
   "label": {
     "check": "Dấu kiểm",
@@ -242,6 +296,7 @@
     "location_alert_header": "Cho phép truy cập Định Vị từ \"{{applicationName}}\"",
     "location_body": "Để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập định vị thiết bị. Ứng dụng này không sử dụng dữ liệu định vị của bạn và thiết bị cá nhân của bạn không thể bị theo dõi.",
     "location_header": "Kích Hoạt Định Vị",
+    "location_services_already_active": "Dịch vụ định vị đang hoạt động",
     "location_subheader": "Tại sao tôi cần phải bật thiết lập định vị của điện thoại của tôi?",
     "no_take_me": "Không, đưa tôi trở lại",
     "notification_body1": "Bạn sẽ nhận được thông báo khi bạn có thể đã gặp một người đã báo cáo dương tính với COVID-19.",
@@ -265,6 +320,7 @@
       "subheader_4": "Mỗi chiếc điện thoại định kỳ ping máy chủ để lấy danh sách các ID được gắn cờ và tìm kiếm kết quả khớp",
       "subheader_5": "Bạn sẽ được thông báo nếu {{applicationName}} tìm được một kết quả dương tính khớp với một ID đã gắn cờ"
     },
+    "proximity_tracing_already_active": "Thông báo phơi sáng đang hoạt động",
     "proximity_tracing_body1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_body2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
     "proximity_tracing_button": "Kích Hoạt Thông Báo Tiếp Xúc",
@@ -462,5 +518,17 @@
     "shortness_of_breath_or_difficulty_breathing": "Hụt hơi hoặc khó thở",
     "sore_throat": "Đau họng",
     "trouble_breathing": "Khó thở"
+  },
+  "verification_code_alerts": {
+    "code_used_body": "Mã xác minh được cung cấp đã được sử dụng.",
+    "code_used_title": "Mã xác minh đã được sử dụng",
+    "invalid_code_body": "Mã xác minh bạn đã gửi không hợp lệ.\n\nMã phải là mã xác minh hợp lệ do cơ quan y tế của bạn cung cấp cho bạn.\n\nCũng có thể mã của bạn đã hết hạn. Nếu vậy, bạn sẽ cần yêu cầu mã mới từ cơ quan y tế của mình.",
+    "invalid_code_title": "Mã không hợp lệ",
+    "network_connection_body": "Bạn cần kết nối với WiFi để gửi mã xác minh.",
+    "network_connection_title": "Không có kết nối Internet",
+    "timeout_body": "It took to long to submit the verification code. Please try again later.\n",
+    "timeout_title": "Quá trình gửi quá lâu",
+    "unknown_body": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
+    "unknown_title": "Có gì đó sai"
   }
 }

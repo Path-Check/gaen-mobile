@@ -69,6 +69,9 @@
     "reload": "重新加載",
     "title": "未知錯誤"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "與健康專家交談的人"
+  },
   "export": {
     "code_input_body_bluetooth": "輸入您的驗證碼",
     "code_input_button_cancel": "取消",
@@ -183,7 +186,6 @@
     "fix": "透過{{technology}}解決問題",
     "get_more_info": "透過{{technology}}獲得更多資訊",
     "have_a_positive_test": "測試結果代碼是否為陽性？",
-    "if_you_have_a_code": "回報您的結果，確保社區安全。",
     "location_info_body": "Google要求運行Android 10或更低版本的設備必須啟用位置服務才能使用“接觸檢測”。但是， {{applicationName}}不會追蹤或保留您的定位記錄。",
     "location_info_subheader": "{{applicationName}}永遠不會擷取您的定位數據，也永遠不會追蹤您的設備。",
     "not_feeling_well": "身體不舒服嗎？",
@@ -191,11 +193,6 @@
     "proximity_tracing_info_body_2": "如果接觸到他人，您的數據和訊息將保持匿名。應用程式不存儲任何資料，僅交換隨機ID，而這些資訊將在14天內刪除。",
     "proximity_tracing_info_subheader_1": "接觸提醒如何運作？",
     "proximity_tracing_info_subheader_2": "我的資料安全嗎？",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "若要啟動接近追蹤和接處通知，請至\"COVID-19接觸通知設計\"，並開啟\"使用接觸通知\"",
-      "unauthorized_error_message_ios": "若要啟用接近追蹤和接觸通知，請到“接觸通知設定”中的“接觸通知”部分，並將“啟動區域”設置為{{applicationName}}",
-      "unauthorized_error_title": "啟用接近追蹤"
-    },
     "request_call": "要求回電",
     "take_assessment": "進行檢測",
     "to_submit_your_test": "與防疫電話客服人員通話，以取得您的檢驗結果代碼。"

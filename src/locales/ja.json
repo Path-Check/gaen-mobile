@@ -11,11 +11,13 @@
     "close": "閉じる",
     "continue": "継続する",
     "done": "完成です",
+    "enable": "有効にする",
     "learn_more": "学ぶ",
     "maybe_later": "あとで",
     "more": "もっと",
     "next": "次へ進む",
     "no_thanks": "結構です",
+    "okay": "オーケー",
     "select_language": "言語を選択する",
     "settings": "設定を開く",
     "skip": "スキップ",
@@ -42,6 +44,7 @@
     "consent_subheader_1": "なぜ共有する必要があるのですか？",
     "consent_subheader_2": "それはどのように機能しますか？",
     "enable_exposure_notifications_body": "陽性の検査結果を報告するには、接触通知を有効にする必要があります。",
+    "enable_exposure_notifications_button": "感染リスク通知を有効にする",
     "enable_exposure_notifications_title": "続行するには接触通知を有効にしてください",
     "error": {
       "invalid_code": "別のコードを試す",
@@ -101,6 +104,11 @@
     "why_did_i_get_an_en": "接触通知を受け取ったのはなぜですか？",
     "why_did_i_get_an_en_para": "近くにいた誰かが後でCOVID-19の陽性テストを受け取り、他の人に通知することを選択すると、接触の通知を受け取ります。"
   },
+  "exposure_notification_alerts": {
+    "cant_check_for_exposures_button": "感染リスク通知を有効にする",
+    "share_exposure_information_ios_title": "接触情報を共有する",
+    "use_exposure_notifications_android_title": "感染リスク通知を有効にする"
+  },
   "exposure_scanning_status": {
     "learn_more": "学ぶ"
   },
@@ -126,16 +134,10 @@
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
     "have_a_positive_test": "陽性のテスト結果コードがありますか？",
-    "if_you_have_a_code": "コミュニティを安全に保つためにテストを送信してください。",
     "proximity_tracing_info_body_1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
     "proximity_tracing_info_subheader_2": "データは安全ですか?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "感染リスク通知を有効にするには、設定アプリのCOVID-19感染リスク通知に移動し、「感染リスク通知を使用する」を有効にします。",
-      "unauthorized_error_message_ios": "感染リスク通知を有効にするには、[設定] および [感染リスク情報の共有] の [感染リスク通知] セクションに移動し、[アクティブ領域] を [%1$s:アプリケーション名] に設定します。",
-      "unauthorized_error_title": "感染リスク通知を有効にする"
-    },
     "to_submit_your_test": "陽性のテスト結果を提出するには、コンタクトトレーサから陽性のテスト結果コードを取得する必要があります。"
   },
   "label": {

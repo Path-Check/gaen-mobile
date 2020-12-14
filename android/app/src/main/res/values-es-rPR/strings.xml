@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">Verificando la exposición...</string>
   <string name="exposure_notification_channel_description">Alertas de avisos de exposición.</string>
   <string name="exposure_notification_channel_name">Aviso de exposición</string>
   <string name="exposure_notification_message">Has estado cerca de alguien que arrojó positivo a COVID-19. Pulse para obtener más información.</string>

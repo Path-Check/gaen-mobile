@@ -11,15 +11,15 @@
     "more": "Mere",
     "next": "Udført"
   },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Aktivér Bluetooth"
+  },
   "label": {
     "launch_enable_notif": "Aktivér notifikationer",
     "launch_get_started": "Lad os komme i gang",
     "privacy_policy": "Privatlivspolitik"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Aktivér Bluetooth"
-    },
     "privacy_policy": "Privatlivspolitik",
     "terms_header_title": "Vilkår for brug"
   },
