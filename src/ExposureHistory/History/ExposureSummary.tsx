@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 import dayjs from "dayjs"
+import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
 import * as Exposure from "../../exposure"
 
-import { Spacing, Colors, Typography } from "../../styles"
+import { Spacing, Typography } from "../../styles"
 
 type Posix = number
 
@@ -32,32 +33,41 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
   exposure,
   quarantineLength,
 }) => {
+  const { t } = useTranslation()
+
   const daysOfQuarantineLeft = determineRemainingQuarantine(
     quarantineLength,
     Date.now(),
     exposure.date,
   )
 
+  const startDate = Exposure.toStartDateString(exposure)
+  const endDate = Exposure.toEndDateString(exposure)
+
   return (
     <View style={style.container}>
-      <Text style={style.headerText}>Exposure Summary</Text>
-      <Text>{Exposure.toDateRangeString(exposure)}</Text>
-      <Text>{daysOfQuarantineLeft}</Text>
+      <Text style={style.summaryText}>
+        {t("exposure_history.exposure_summary", { startDate, endDate })}
+      </Text>
+      <Text style={style.daysRemainingText}>{`${t(
+        "exposure_history.days_remaining",
+      )}: ${daysOfQuarantineLeft}`}</Text>
     </View>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: Spacing.medium,
-    paddingBottom: Spacing.small,
-    marginHorizontal: Spacing.small,
+    marginHorizontal: Spacing.medium,
     marginBottom: Spacing.xxLarge,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.neutral.shade10,
   },
-  headerText: Typography.header.x20,
+  summaryText: {
+    ...Typography.body.x20,
+    marginBottom: Spacing.small,
+  },
+  daysRemainingText: {
+    ...Typography.body.x20,
+  },
 })
 
 export default ExposureSummary

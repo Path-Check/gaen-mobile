@@ -219,7 +219,7 @@ const style = StyleSheet.create({
     marginHorizontal: Spacing.medium,
   },
   listContainer: {
-    marginTop: Spacing.xxLarge,
+    marginTop: Spacing.medium,
     marginBottom: Spacing.large,
   },
   button: {
