@@ -17,7 +17,11 @@ import useLocationPermissions, {
   LocationPermissions,
 } from "./useLocationPermissions"
 
-export type NotificationPermissionStatus = "Unknown" | "Granted" | "Denied"
+export type NotificationPermissionStatus =
+  | "Unknown"
+  | "Granted"
+  | "Denied"
+  | "Blocked"
 
 export const notificationPermissionStatusFromString = (
   status: string | void,
@@ -30,7 +34,7 @@ export const notificationPermissionStatusFromString = (
       return "Denied"
     }
     case "blocked": {
-      return "Denied"
+      return "Blocked"
     }
     case "granted": {
       return "Granted"

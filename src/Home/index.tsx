@@ -92,9 +92,9 @@ const NotificationsOff = () => {
 
   const handleOnPressNotificationsOff = () => {
     if (notification.status === "Denied") {
-      openAppSettings()
-    } else if (notification.status === "Unknown") {
       notification.request()
+    } else if (notification.status === "Blocked") {
+      openAppSettings()
     }
   }
 
