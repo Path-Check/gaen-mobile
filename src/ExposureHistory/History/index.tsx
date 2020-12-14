@@ -135,6 +135,8 @@ const History: FunctionComponent<HistoryProps> = ({
 
   const showExposureHistory = exposures.length > 0
 
+  console.log({ exposures })
+
   return (
     <>
       <StatusBar backgroundColor={Colors.background.primaryLight} />
