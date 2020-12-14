@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { Text } from "../../components"
-import { ExposureDatum, exposureWindowBucket } from "../../exposure"
+import * as Exposure from "../../exposure"
 
 import { Icons } from "../../assets"
 import { ExposureHistoryStackScreens } from "../../navigation"
@@ -16,9 +16,8 @@ import {
   Typography,
   Affordances,
 } from "../../styles"
-
 interface ExposureListItemProps {
-  exposureDatum: ExposureDatum
+  exposureDatum: Exposure.ExposureDatum
 }
 
 const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
@@ -26,23 +25,6 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
-
-  const exposureWindowBucketInWords = (
-    exposureDatum: ExposureDatum,
-  ): string => {
-    const bucket = exposureWindowBucket(exposureDatum)
-    switch (bucket) {
-      case "TodayToThreeDaysAgo": {
-        return t("exposure_history.exposure_window.today_to_three_days_ago")
-      }
-      case "FourToSixDaysAgo": {
-        return t("exposure_history.exposure_window.four_to_six_days_ago")
-      }
-      case "SevenToFourteenDaysAgo": {
-        return t("exposure_history.exposure_window.seven_to_fourteen_days_ago")
-      }
-    }
-  }
 
   return (
     <TouchableHighlight
@@ -60,7 +42,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
             {t("exposure_history.possible_exposure")}
           </Text>
           <Text style={style.secondaryText}>
-            {exposureWindowBucketInWords(exposureDatum)}
+            {Exposure.toDateRangeString(exposureDatum)}
           </Text>
         </View>
         <SvgXml
@@ -92,7 +74,6 @@ const style = StyleSheet.create({
   },
   secondaryText: {
     ...Typography.body.x10,
-    textTransform: "uppercase",
     marginTop: Spacing.xxSmall,
     letterSpacing: Typography.letterSpacing.x20,
   },
