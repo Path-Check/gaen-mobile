@@ -7,8 +7,9 @@ import { ExposureDatum } from "../../exposure"
 import ExposureListItem from "./ExposureListItem"
 import ExposureSummary from "./ExposureSummary"
 import { Text } from "../../components"
+import ExposureActions from "../detail/ExposureActions"
 
-import { Spacing, Typography } from "../../styles"
+import { Colors, Outlines, Spacing, Typography } from "../../styles"
 
 interface ExposureListProps {
   exposures: ExposureDatum[]
@@ -28,16 +29,31 @@ const ExposureList: FunctionComponent<ExposureListProps> = ({ exposures }) => {
   const mostRecentExposure = exposures[0]
 
   return (
-    <View>
-      <Text style={style.subheaderText}>{t("exposure_history.summary")}</Text>
-      <ExposureSummary
-        exposure={mostRecentExposure}
-        quarantineLength={quarantineLength}
-      />
-      <Text style={style.subheaderText}>
-        {t("exposure_history.all_exposures")}
-      </Text>
-      <ExposureListTemp exposures={exposures} />
+    <View style={style.container}>
+      <View style={style.sectionContainer}>
+        <Text style={style.subheaderText}>{t("exposure_history.summary")}</Text>
+        <ExposureSummary
+          exposure={mostRecentExposure}
+          quarantineLength={quarantineLength}
+        />
+      </View>
+
+      <View style={style.sectionContainer}>
+        <Text style={style.subheaderText}>
+          {t("exposure_history.next_steps")}
+        </Text>
+        <ExposureActions />
+      </View>
+
+      <View style={style.sectionContainer}>
+        <Text style={style.subheaderText}>
+          {t("exposure_history.possible_exposures")}
+        </Text>
+        <Text style={style.bodyText}>
+          {t("exposure_history.your_device_exchanged")}
+        </Text>
+        <ExposureListTemp exposures={exposures} />
+      </View>
     </View>
   )
 }
@@ -59,10 +75,22 @@ const ExposureListTemp: FunctionComponent<ExposureListTempProps> = ({
 }
 
 const style = StyleSheet.create({
+  container: {
+    paddingHorizontal: Spacing.medium,
+  },
+  sectionContainer: {
+    marginBottom: Spacing.medium,
+    paddingBottom: Spacing.medium,
+    borderColor: Colors.neutral.shade10,
+    borderBottomWidth: Outlines.hairline,
+  },
   subheaderText: {
-    ...Typography.header.x10,
-    marginHorizontal: Spacing.medium,
+    ...Typography.header.x20,
     marginBottom: Spacing.xSmall,
+  },
+  bodyText: {
+    ...Typography.body.x20,
+    marginBottom: Spacing.medium,
   },
 })
 export default ExposureList

@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
-import { useTranslation } from "react-i18next"
+import { StyleSheet } from "react-native"
 
 import { Text } from "../../components"
 import * as Exposure from "../../exposure"
@@ -13,34 +12,18 @@ interface ExposureListItemProps {
 const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   exposureDatum,
 }) => {
-  const { t } = useTranslation()
-
   return (
-    <View style={style.container}>
-      <View>
-        <Text style={style.primaryText}>
-          {t("exposure_history.possible_exposure")}
-        </Text>
-        <Text style={style.secondaryText}>
-          {Exposure.toDateRangeString(exposureDatum)}
-        </Text>
-      </View>
-    </View>
+    <Text style={style.secondaryText}>
+      - {Exposure.toDateRangeString(exposureDatum)}
+    </Text>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
-    marginBottom: Spacing.medium,
-    marginHorizontal: Spacing.medium,
-  },
-  primaryText: {
-    ...Typography.header.x10,
-  },
   secondaryText: {
     ...Typography.body.x10,
-    marginTop: Spacing.xxSmall,
     letterSpacing: Typography.letterSpacing.x20,
+    marginBottom: Spacing.xxSmall,
   },
 })
 

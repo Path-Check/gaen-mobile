@@ -46,23 +46,18 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
   const endDate = Exposure.toEndDateString(exposure)
 
   return (
-    <View style={style.container}>
+    <View>
       <Text style={style.summaryText}>
         {t("exposure_history.exposure_summary", { startDate, endDate })}
       </Text>
       <Text style={style.daysRemainingText}>{`${t(
         "exposure_history.days_remaining",
       )}: ${daysOfQuarantineLeft}`}</Text>
-      <ExposureActions />
     </View>
   )
 }
 
 const style = StyleSheet.create({
-  container: {
-    marginHorizontal: Spacing.medium,
-    marginBottom: Spacing.xxLarge,
-  },
   summaryText: {
     ...Typography.body.x20,
     marginBottom: Spacing.small,

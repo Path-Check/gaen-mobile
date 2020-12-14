@@ -125,7 +125,6 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.thin.base,
-    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -133,6 +132,7 @@ const style = StyleSheet.create({
   },
   buttonOutlined: {
     ...Buttons.outlined.thin,
+    marginTop: Spacing.small,
     marginBottom: Spacing.small,
   },
   buttonOutlinedText: {
