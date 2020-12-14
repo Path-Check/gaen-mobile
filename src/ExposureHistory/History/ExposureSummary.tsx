@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
 import * as Exposure from "../../exposure"
+import ExposureActions from "../detail/ExposureActions"
 
 import { Spacing, Typography } from "../../styles"
 
@@ -52,6 +53,7 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
       <Text style={style.daysRemainingText}>{`${t(
         "exposure_history.days_remaining",
       )}: ${daysOfQuarantineLeft}`}</Text>
+      <ExposureActions />
     </View>
   )
 }
