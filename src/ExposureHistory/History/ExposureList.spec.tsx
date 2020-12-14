@@ -38,10 +38,7 @@ describe("ExposureList", () => {
       )
 
       expect(queryByText("No Exposure Reports")).toBeNull()
-      expect(getAllByText("Possible COVID-19 exposure").length).toEqual(3)
-      expect(getByText("Within the last 3 days")).toBeDefined()
-      expect(getByText("4 to 6 days ago")).toBeDefined()
-      expect(getByText("7 to 14 days ago")).toBeDefined()
+      expect(getAllByText("Possible Exposure").length).toEqual(3)
     })
   })
 })
