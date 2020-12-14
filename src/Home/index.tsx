@@ -21,7 +21,6 @@ import {
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
 import { StatusBar, Text } from "../components"
-import { openAppSettings } from "../Device/nativeModule"
 
 import CovidDataCard from "../CovidData/Card"
 import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
