@@ -7,7 +7,7 @@ import { SvgXml } from "react-native-svg"
 import { ExposureHistoryStackParamList } from "../navigation"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
-import { ExposureDatum, exposureWindowBucket } from "../exposure"
+import * as Exposure from "../exposure"
 
 import { Colors, Iconography, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -21,23 +21,6 @@ const ExposureDetail: FunctionComponent = () => {
   const { t } = useTranslation()
 
   const { exposureDatum } = route.params
-
-  const exposureWindowBucketInWords = (
-    exposureDatum: ExposureDatum,
-  ): string => {
-    const bucket = exposureWindowBucket(exposureDatum)
-    switch (bucket) {
-      case "TodayToThreeDaysAgo": {
-        return t("exposure_history.exposure_window.today_to_three_days_ago")
-      }
-      case "FourToSixDaysAgo": {
-        return t("exposure_history.exposure_window.four_to_six_days_ago")
-      }
-      case "SevenToFourteenDaysAgo": {
-        return t("exposure_history.exposure_window.seven_to_fourteen_days_ago")
-      }
-    }
-  }
 
   return (
     <ScrollView style={style.container} alwaysBounceVertical={false}>
@@ -55,7 +38,7 @@ const ExposureDetail: FunctionComponent = () => {
             height={Iconography.xxSmall}
           />
           <Text style={style.exposureWindowText}>
-            {exposureWindowBucketInWords(exposureDatum)}
+            {Exposure.toDateRangeString(exposureDatum)}
           </Text>
         </View>
       </View>
@@ -83,7 +66,6 @@ const style = StyleSheet.create({
   },
   exposureWindowText: {
     ...Typography.header.x10,
-    textTransform: "uppercase",
     color: Colors.neutral.shade110,
     marginLeft: Spacing.xSmall,
   },
