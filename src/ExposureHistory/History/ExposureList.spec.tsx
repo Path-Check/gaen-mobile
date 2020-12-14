@@ -33,7 +33,7 @@ describe("ExposureList", () => {
 
       const exposures = [datum1, datum2, datum3]
 
-      const { getAllByText, queryByText, getByText } = render(
+      const { getAllByText, queryByText } = render(
         <ExposureList exposures={exposures} />,
       )
 
