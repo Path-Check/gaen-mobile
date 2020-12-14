@@ -24,6 +24,7 @@
     "continue": "Txuas Ntxiv",
     "done": "Ua Tiav Lawm",
     "edit": "Kho",
+    "enable": "Taws",
     "learn_more": "Kawm ntxiv",
     "maybe_later": "Tej zaum lwm zaus tso",
     "more": "Ntxiv",
@@ -31,6 +32,7 @@
     "no": "Tsis yog",
     "no_thanks": "Kav liam",
     "off": "TAWS",
+    "okay": "Okay",
     "on": "TUA",
     "save": "Muab save",
     "select_language": "Xaiv Koj Yam Lus",
@@ -70,7 +72,25 @@
     "reload": "Rov Qhib",
     "title": "Unknown Error"
   },
+  "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "Tus xov tooj yuav tsum yog 10 tug naj npawb"
+    },
+    "person_and_health_expert": "Ib tus neeg tham lus nrog ib tus kws kho mob",
+    "start": {
+      "body": "Yog tias koj kuaj yog mob positive rau COVID-19 (tsis yog qhov kuaj antibody uas tsuas kuaj seb puas tau kis mob dua xwb), koj xa tawm qhov lawv kuaj koj ntawd tuaj rau hauv lub app.\n\nQhov koj pab xa tawm koj li kev kuaj no yuav pab lwm tus hauv koj lub zej lub zog nyob nyab xeeb thiab tswj kom tus kab mob tsis txhob sib kis mus.",
+      "header": "Xa Tawm Kev Kuaj Mob Positive",
+      "what_is_a_verification_code": "Tus zauv verification code yog dabtsi?"
+    },
+    "user_details_form": {
+      "phone_number": "Xov tooj",
+      "subheader": "Thov sau hnub tim koj mus kuaj thiab koj tus xov tooj.",
+      "test_date": "Hnub tim mus kuaj",
+      "test_details": "Kev Kuaj Mob Yog Li Cas"
+    }
+  },
   "export": {
+    "code": "Tus zauv",
     "code_input_body_bluetooth": "Ntaus koj tus zauv verification code",
     "code_input_button_cancel": "Rho Tawm",
     "code_input_title_bluetooth": "Xyuas seb koj ntsuas tau li cas",
@@ -85,7 +105,9 @@
     "consent_warning_message": "Yog koj txuas mus ntxiv yuav ua rau koj tus zauv code rau kev kuaj mob positive tsis ua haujlwm lawm.Yog tias koj xav qhia tawm koj li kev kuaj mob rau yav tom ntej, koj yuav tau mus muab ib tug zauv code tshiab.",
     "consent_warning_title": "Ceeb toom!",
     "enable_exposure_notifications_body": "Koj yuav tsum taws qhov exposure notification (xov xwm qhia tawm qhov koj mus raug) es thiaj li qhia tau tias koj kuaj tau yog positive uas raug tus mob lawm.",
+    "enable_exposure_notifications_button": "Taws Kev Ceeb Toom Raug Mob",
     "enable_exposure_notifications_title": "Tso cai siv Kev Ceeb Toom Raug Mob thiaj li txuas ntxiv mus tau",
+    "enter_verification_code": "Ntaus tus verification code",
     "error": {
       "invalid_code": "Sim ntaus ib tus zauv code tshiab",
       "invalid_format": "Cov code tsuas muaj naj npawb thiab tsiaj ntawv xwb",
@@ -93,6 +115,12 @@
       "timeout_error": "Qhov thov siv sijhawm ntev dhau lawm",
       "unknown_code_verification_error": "Sim ntaus ib tus zauv code tshiab",
       "verification_code_used": "Tus zauv verification no twb muab siv lawm"
+    },
+    "intro": {
+      "body1": "Yog tias koj tau tus zauv verification code los ntawm {{healthAuthorityName}} txog kev kuaj koj mob positive rau COVID-19, koj ntaus tau tus zauv verification code rau phab tom ntej no.",
+      "body2": "Yog tias koj tsis muaj ib tug zauv, tiamsis koj kuaj tau mob positive, koj yuav tsum mus muab ib tug zauv verification code los ntawm {{healthAuthorityName}} ua ntej koj txuas mus ntxiv.",
+      "header": "Koj puas muaj koj tus zauv verification code?",
+      "what_is_a": "Tus zauv verification code yog dabtsi?"
     },
     "never_mind_button_title": "Tsis xav ua lawm",
     "person_and_health_expert": "Ib tus neeg tham lus nrog ib tus kws kho mob",
@@ -111,7 +139,16 @@
         "no_token_for_existing_keys_title": "Sim seb cov zauv puas tseem ua haujlwm"
       }
     },
-    "start_header_bluetooth": "Pab tswj tus kab mob kis mus deb thiab tiv thaiv lwm tus nyob hauv koj zej zog yog."
+    "start_header_bluetooth": "Pab tswj tus kab mob kis mus deb thiab tiv thaiv lwm tus nyob hauv koj zej zog yog.",
+    "submit_code": "Xa Tawm Tus Zauv",
+    "verification_code_info": {
+      "how_do_i_get_body": "Mus tiv tauj koj lub chaw tswj kev mob nkeeg, {{healthAuthorityName}}.",
+      "how_do_i_get_header": "Kuv mus muab ib tug verification code li cas?",
+      "info_body": "Tus verification code yog ib tug zauv uas lub koom haum tswj kev mob nkeeg, {{healthAuthorityName}}, xa tuaj rau koj yog tias koj mob positive rau tus kab mob.\n\nYuav tsum siv tus verification code no thiaj li nias meej tias koj yeej mob tiag.\n\nTxhua tus verification code yuav tag sijhawm siv tau sai heev kom tej kev kuaj mob tsis yog thiaj li tsis muab xa tawm tau.\n\nYog tias koj ntsib teeb meem thaum xa tawm koj tus verification code, koj yuav tsum mus muab ib tug verification code tshiab tom koj lub chaw tswj kev mob nkeeg ua ntej koj txuas mus ntxiv.",
+      "info_header": "Tus verification code yog dabtsi?",
+      "what_happens_body": "Thaum koj xa tawm koj tus verification code, lub app yuav nug seb koj puas xav sib txuas lus nrog lwm tus lub twj thiab, kom thiaj li sib qhia tau yog ib leeg ib tug twg tau mus kis kab mob nyob sib ze.\n\nYog tias koj tso cai, lub app mam li xa tej zauv no mus rau kev xa xov xwm ceeb toom sib kis kab mob.Nws mam li ceeb toom lwm tus lub twj uas koj txuas nrog yog tias muaj ib tug twg mob positive.\n\nLub app yeej tsis khaws tseg koj tej ntaub ntawv ntiag tug hlo li.Tsuas yog cov naj npawb uas nws tsim nws los (random anonymous keys) thiaj li muab tso rau hauv koj lub twj xwb.",
+      "what_happens_header": "Yuav muaj dabtsi tshwm sim tom qab kuv xa tus zauv tawm?"
+    }
   },
   "exposure_history": {
     "check_for_exposures": "Xyuas seb puas tau mus kis raub mob qhov twg",
@@ -146,6 +183,7 @@
     "how_does_this_work_para": "Thaum koj taws qhov Kev Ceeb Toom Raug Mob, koj lub xov tooj yuav siv qhov Bluetooth mus txuam nrog thiab ceev tseg cov naj npawb uas nws tsim nws los (hu ua random ID) los ntawm tej xov tooj nyob sib ze uas kuj taws lawv li Kev Ceeb Toom Raug Mob thiab. Qhov Random ID yuav tsis qhia koj tawm rau lwm tus thiab tus naj npawb no yuav hloov ntaus zaus kom thiaj li tiv thaiv tau koj ntiag tug.",
     "last_days": "14 hnub dhau los",
     "learn_more": "Kawm Ntxiv",
+    "more_info": "Kawm paub ntxiv txog kev ceeb toom Xov Xwm Mus Raug Mob",
     "no_connectivity_message": "Koj tsis txuas nrog Is taws nej!",
     "no_exposure_reports": "Tsis Muaj Xov Xwm Qhia Txog Mus Raug Mob",
     "no_exposure_reports_over_past": "Koj tsis tau muaj xov xwm qhia txog kev mus raug kis mob li 14 hnub dhau los",
@@ -155,6 +193,21 @@
     "updated": "Kho Tshiab Lawm",
     "why_did_i_get_an_en": "Vim li cas koj thiaj tau qhov exposure notification?",
     "why_did_i_get_an_en_para": "Koj yuav txais xov xwm Kev Ceeb Toom Raug Mob qhia txog thaum koj mus nyob ze raug ib tus neeg twg uas mus kuaj mob COVID-19 thiab nws xav qhia kom lwm tus paub thiab."
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_body": "Yuav kom taws tau Exposure Notifications, koj yuav tsum xub taws Bluetooth hauv Settings tso.",
+    "bluetooth_title": "Taws Bluetooth",
+    "cant_check_for_exposures_body": "Koj yuav tsum taws kev ceeb toom kev mus kis kab mob Exposure Notifications es thiaj li mus kuaj tau.",
+    "cant_check_for_exposures_button": "Taws Kev Ceeb Toom Raug Mob",
+    "cant_check_for_exposures_title": "Kuaj Tsis Tau Kev Mus Kis Kab Mob",
+    "set_active_region_ios_body": "Qhib qhov Settings hauv lub app, ces mus kho Exposure Notifications rau lub app, ces nias 'Set As Active Region'.",
+    "set_active_region_ios_title": "Set Active Region",
+    "share_exposure_information_ios_body": "Qhib qhov Settings hauv lub app, ces mus kho Exposure Notifications rau lub app no.Ua tib zoo taws 'Share Exposure Information', ces mam li nias lub 'Set As Active Region'.",
+    "share_exposure_information_ios_title": "Pab Qhia Tawm Kev Mus Raug",
+    "unhandled_error_body": "Muaj teeb meem tshwm sim.Thov muab kaw thiab rov qhib lub app dua.",
+    "unhandled_error_title": "Muaj Teeb Meem Lawm",
+    "use_exposure_notifications_android_body": "Yuav kom taws tau qhov Enable Notifications, mus rau phab COVID-19 Exposure Notifications hauv qhov Settings hauv lub app thiab taws 'Use Exposure Notifications'.",
+    "use_exposure_notifications_android_title": "Taws Kev Ceeb Toom Raug Mob"
   },
   "exposure_scanning_status": {
     "fix_this": "Kho qhov no",
@@ -187,7 +240,6 @@
     "fix": "Mus kho teeb meem nrog {{technology}}",
     "get_more_info": "Xa paub ntxiv txog {{technology}}",
     "have_a_positive_test": "Muaj ib tus code tso rau kev kuaj mob uas yog positive los?",
-    "if_you_have_a_code": "Qhia tawm koj kev kuaj seb yog li cas thiaj li pab koom tes kom nyab xeeb rau sawvdaws.",
     "location_info_body": "Google xav kom cov xov tooj uas lub hlwb khiav Android 10 rov hauv taws qhov location es thiaj li siv tau Kev Cim Mus Nyob Ze Mob.  {{applicationName}} TSIS khaws tseg tej chaw koj tau mus ncig.",
     "location_info_subheader": "{{applicationName}} tsis khaws tseg tej chaw koj tau mus ncig.",
     "not_feeling_well": "Puas yog mloog tau li mob lo?",
@@ -195,14 +247,16 @@
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_info_subheader_1": "Kev Ceeb Toom Raug Mob ua haujlwm li cas?",
     "proximity_tracing_info_subheader_2": "Kuv li ntaub ntawv puas ceev zoo cia?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "Yuav kom taws tau Kev Ceeb Toom Raug Mob, mus rau lub COVID-19 Kev Ceeb Toom Raug Mob ntawm lub app li Setting thiab taws ' Siv Kev Ceeb Toom Raug Mob'",
-      "unauthorized_error_message_ios": "Yog xav taws Kev Ceeb Toom Raug Mob, mus rau ntu Kev Ceeb Toom Raug Mob nyob rau qhov Settings thiab Share Exposure Information thiab tso tias yog Active Region nyob rau {{applicationName}}",
-      "unauthorized_error_title": "Taws Kev Ceeb Toom Raug Mob"
-    },
     "request_call": "Thov kom lawv hu tuaj rau koj",
     "take_assessment": "Mus teb ib co lus nug ntsuas",
-    "to_submit_your_test": "Yog xav qhia tawm koj li kev kuaj mob positive, tus neeg soj qab cov neeg mus kis mob yuav tsum muab ib tus zauv code rau koj."
+    "to_submit_your_test": "Yog xav qhia tawm koj li kev kuaj mob positive, tus neeg soj qab cov neeg mus kis mob yuav tsum muab ib tus zauv code rau koj.",
+    "verification_code_card": {
+      "if_you_have_a_code": "Xa tawm koj tus verification code thiaj li pab tau koj lub zej lub zog nyob nyab xeeb.",
+      "if_you_have_a_positive_test": "Yog tias koj tau mus kuaj yog mob positive rau COVID-19, koj qhia tau qhov lawv kuaj tuaj yam tsis qhia koj npe, ua li no thiaj li pab tibneeg zej zog nyob nyab xeeb. ",
+      "more_info": "Tus verification code yog dabtsi?",
+      "report_positive_test": "Xa Tawm Kev Kuaj Mob Positive",
+      "submit_code": "Xa Tawm Tus Zauv"
+    }
   },
   "label": {
     "check": "Cim tseg",
@@ -242,6 +296,7 @@
     "location_alert_header": "Mus taws location ntawm \"{{applicationName}}\"",
     "location_body": "Google xav kom cov xov tooj uas lub hlwb khiav Android 10 rov hauv taws qhov location es thiaj li siv tau Kev Cim Mus Nyob Ze Mob. Tiamsis, {{applicationName}} TSIS khaws tseg tej chaw koj tau mus ncig.",
     "location_header": "Taws Location",
+    "location_services_already_active": "Kev xyuas seb koj nyob qhov chaw twg tseem ua haujlwm",
     "location_subheader": "{{applicationName}} yuav tsis nkag mus xyuas seb koj tau mus ncig txhua qhov twg thiab yuav tsis raws koj lub xov tooj.",
     "no_take_me": "Tsis yog, thov rov qab",
     "notification_body1": "Koj yuav txais xov xwm qhia hauv xov tooj thaum koj mus raug ib tus neeg uas tau qhia tawm tias nws mob COVID-19 lawm.",
@@ -265,6 +320,7 @@
       "subheader_4": "Txhua lub xov tooj yuav ntsuam xyuas lub server seb cov naj npawb ID twg muaj mob thiab yuav nrhiav tas li",
       "subheader_5": "Mam li qhia rau koj paub yog tias {{applicationName}} nrhiav tau ib tus uas mob thiab muaj tus naj npawb ID uas qhia tias mob lawm"
     },
+    "proximity_tracing_already_active": "Kev xyuas seb koj puas tau mus nyob ze kis kab mob tseem ua haujlwm",
     "proximity_tracing_body1": "Yog tias cov xov tooj uas muaj lub app nyob hauv thiab muab taws, muaj Bluetooth, thiab nyob sib ze rau ib lub sijhawm twg, ces yuav cuv cia tias tau mus raug nyob rau hauv koj lub xov tooj.",
     "proximity_tracing_body2": "Nyob rau lub sijhawm koj mus raug mob, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_button": "Taws Kev Ceeb Toom Raug Mob",
@@ -385,6 +441,7 @@
       "covid19_self_assessment": "Tus Kheej Ntsuam Xyuas Kab Mob COVID-19",
       "find_out_how_to_care": "Mus xyuas seb yuav tu koj tus kheej li cas thiab lwm tus tom qab mus nyob ze raub ib tus neeg mob positive rau COVID-19",
       "if_this_is": "Yog tias qhov no yog ib yam xwm ceev, thov hu rau {{emergencyPhoneNumber}}",
+      "learn_more": "Kawm ntxiv txog lub CDC Coronavirus Self-Checker (kuaj xyuas tus kheej li tsos mob khaus lauv nam tsim los ntawm lub CDC), qhov Ntsuam Xyuas Tus Kheej no yog raws",
       "this_is_based_on": "Qhov no yog raws li tej txheem lus tawm tshiab los ntawm lub CDC thiab kuj yuav muab kho ntxiv tom ntej yog peb kawm tau yam tshiab paub txog tus kab mob no sib kis mus li cas thiab ua tau muaj yam mob nkeeg li cas",
       "this_is_not_intended": "Qhov no tsis yog los ntsuam xyuas lossis kho mob",
       "you_are_a_resident": "Koj yog pej xeem ntawm lub zos tau kev txhawb nqa los ntawm {{ healthAuthorityName }}"
@@ -408,9 +465,15 @@
   },
   "settings": {
     "data_deleted": "Ntaub ntawv lwv tag lawm",
+    "delete_data_are_you_sure": "Koj puas paub tseeb?",
     "delete_data_disclosure1": "Thaum koj nias lub \"Delete My Data\" hauv qab no, lub app yuav lwv tawm koj tej Keeb Kwm Tsos Mob uas nyob hauv koj lub xov tooj.",
     "delete_data_disclosure2": "Qhov no tsis lwv tawm tej ntaub ntawv uas tau muab tsim lossis khaws tseg los ntawm koj lub xov tooj rau kev ceeb toom mus nyob ze neeg mob Exposure Notification.\n\nKoj mus lwv tau qhov no ntxiv nyob hauv Settings.",
+    "delete_data_language_token": "Ib lub cim teev tseg yam lus uas koj hais.",
     "delete_data_note": "Nco tseg",
+    "delete_data_onboarding_token": "Ib lub cim teev tseg seb koj puas tau ua tiav tej ntaub ntawv hauv lub app ua ntej mus kuaj ruam tom ntej tau",
+    "delete_data_product_analytics": "Ib lub cim teev tseg seb koj puas tau tso cai txaus siab koom tes nrog kev sib qhia ntaub ntawv ",
+    "delete_data_symptom_history": "Txhua yam tsos mob muab teev tseg hauv koj lub twj",
+    "delete_data_this_action": "Qhov koj ua li no yuav muab tagnrho koj tej ntaub ntawv teev tseg lwv tawm {{applicationName}}.",
     "delete_my_data": "Delete my data",
     "errors": {
       "deleting_data": "Thov txim, peb lwv tsis tau koj li ntaub ntawv"
@@ -455,5 +518,17 @@
     "shortness_of_breath_or_difficulty_breathing": "Txog siav lossis ua pa nyuaj",
     "sore_throat": "Mob qa",
     "trouble_breathing": "Ua pa nyuaj"
+  },
+  "verification_code_alerts": {
+    "code_used_body": "Tus verification code uas koj ntaus twb muab siv lawm.",
+    "code_used_title": "Tus Verification Code Twb Muab Siv Lawm",
+    "invalid_code_body": "Tus verification code koj ntaus tsis siv tau.\n\nTus zauv yuav tsum yog ib tug verification code uas koj lub chaw haujlwm tswj kev mob nkeeg muab rau koj.\n\nLossis tej zaum koj tus zauv twb tag sijhawm siv tau lawm.Yog tias muaj tseeb li no, koj yuav tsum hais kom lub chaw haujlwm tswj kev mob nkeeg xa ib tug tshiab rau koj.",
+    "invalid_code_title": "Tus zauv siv tsis tau",
+    "network_connection_body": "Koj yuav tsum txuas nrog is taws nej WiFi thiaj li ntaus tau tus verification code.",
+    "network_connection_title": "Tsis Txuas Nrog Is Taws Nej",
+    "timeout_body": "Nws siv sijhawm ntev dhau los xa tawm tus verification code.Thov rov sim ua dua lwm zaus.",
+    "timeout_title": "Kev Xa Tawm Siv Sijhawm Ntev Dhau",
+    "unknown_body": "Ntsib teeb meem yam tsis paub yog li cas tiag.Thov rov sim ua dua.",
+    "unknown_title": "Muaj Teeb Meem Lawm"
   }
 }

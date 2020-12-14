@@ -20,9 +20,11 @@
     "cancel": "Annuler",
     "close": "Fermer",
     "close_screen": "Fermer l'écran",
+    "confirm": "Confirmer",
     "continue": "Continuer",
     "done": "Terminé",
     "edit": "Modifier",
+    "enable": "Activer",
     "learn_more": "En savoir plus",
     "maybe_later": "Peut-être plus tard",
     "more": "Plus",
@@ -30,8 +32,10 @@
     "no": "Non",
     "no_thanks": "Non merci",
     "off": "Désactivation",
+    "okay": "Ok",
     "on": "Activation",
     "save": "Sauvegarder",
+    "select_language": "Sélectionnez une langue",
     "settings": "Ouvrir les paramètres",
     "skip": "Sauter",
     "something_went_wrong": "Un problème est survenu",
@@ -45,22 +49,45 @@
     "cases_today": "Cas aujourd'hui",
     "covid_coverage": "Couverture Covid",
     "covid_data": "Données COVID",
+    "daily_new_cases": "De nouveaux cas quotidiens",
     "deaths_today": "Décès aujourd'hui",
+    "down_from_last_week": "En baisse par rapport à la semaine dernière",
     "error_getting_data": "Désolé, nous n'avons pas pu récupérer les dernières données de cas COVID pour {{location}} .",
+    "infection_rate": "Taux d'infection",
     "new_cases": "Nouveaux cas",
     "past_7_days": "Les 7 derniers jours",
+    "per_100k": "par 100 000",
+    "positive_test_rate": "Taux de tests positifs",
     "see_more": "Voir plus",
     "source": "source: {{source}}",
     "spread_of_the_virus_in": "Propagation du virus dans {{locationName}}",
     "total_cases": "Total des cas",
     "total_deaths": "Total des décès",
     "trending_down": "Tendance à la baisse",
-    "trending_up": "Tendance à la hausse"
+    "trending_up": "Tendance à la hausse",
+    "up_from_last_week": "En hausse par rapport à la semaine dernière"
   },
   "errors": {
     "description": "Une erreur s'est produite. Veuillez recharger l'application.",
     "reload": "Recharger",
     "title": "Erreur inconnue"
+  },
+  "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "Le numéro de téléphone doit comporter 10 chiffres"
+    },
+    "person_and_health_expert": "Une personne qui parle à un expert de la santé",
+    "start": {
+      "body": "Si vous avez été testé positif au COVID-19 (pas par un test d'anticorps), vous pouvez le signaler anonymement.\n\nEn signalant votre test, vous aiderez les autres membres de votre communauté à endiguer la propagation du virus.",
+      "header": "Signaler un test positif",
+      "what_is_a_verification_code": "Qu'est-ce qu'un code de vérification ?"
+    },
+    "user_details_form": {
+      "phone_number": "Numéro de téléphone",
+      "subheader": "Veuillez indiquer votre numéro de téléphone et la date du test et nous vous enverrons votre code de vérification par SMS.",
+      "test_date": "Date du test",
+      "test_details": "Détails du test"
+    }
   },
   "export": {
     "code_input_body_bluetooth": "Entrez votre code de vérification",
@@ -74,7 +101,10 @@
     "consent_button_title": "Je comprends et j'accepte",
     "consent_subheader_1": "Pourquoi devrais-je partager?",
     "consent_subheader_2": "Comment ça marche?",
+    "consent_warning_message": "Si vous continuez, votre code de vérification sera annulé. Si vous souhaitez partager votre diagnostic positif à l'avenir, vous devrez d'abord obtenir un nouveau code de vérification.",
+    "consent_warning_title": "Attention !",
     "enable_exposure_notifications_body": "Vous devez activer les notifications d'exposition pour signaler un résultat de test positif.",
+    "enable_exposure_notifications_button": "Activer les notifications d'exposition",
     "enable_exposure_notifications_title": "Activer les notifications d'exposition pour continuer",
     "error": {
       "invalid_code": "Essayez un autre code",
@@ -84,6 +114,7 @@
       "unknown_code_verification_error": "Essayez un autre code",
       "verification_code_used": "Le code de vérification a déjà été utilisé"
     },
+    "never_mind_button_title": "Peu importe",
     "person_and_health_expert": "Une personne qui parle à un expert de la santé",
     "publish_consent_title_bluetooth": "Avertissez les autres membres de votre communauté",
     "publish_keys": {
@@ -109,6 +140,7 @@
       "6ft_apart": "6 pieds de distance",
       "general_guidance": "Conseils généraux",
       "ha_guidance_header": "Que devrais-je faire?",
+      "header": "Une personne à proximité a depuis été testée positive au COVID-19.",
       "next_steps": "Prochaines étapes",
       "personalize_my_guidance": "Personnalisez mes conseils",
       "quarantine": "Quarantaine",
@@ -144,6 +176,17 @@
     "why_did_i_get_an_en": "Pourquoi ai-je reçu une notification d'exposition ?",
     "why_did_i_get_an_en_para": "Vous recevrez une notification d'exposition lorsqu'une personne avec qui vous avez été à proximité plus tard reçoit un test positif au COVID-19 et choisit d'en informer les autres."
   },
+  "exposure_notification_alerts": {
+    "bluetooth_body": "Pour activer les notifications d'exposition, vous devez d'abord activer Bluetooth dans votre application Paramètres.",
+    "bluetooth_title": "Activer Bluetooth",
+    "cant_check_for_exposures_body": "Vous devez activer les notifications d'exposition pour vérifier les expositions.",
+    "cant_check_for_exposures_button": "Activer les notifications d'exposition",
+    "cant_check_for_exposures_title": "Impossible de vérifier les expositions",
+    "set_active_region_ios_body": "Ouvrez l'application Paramètres, accédez aux paramètres de notifications d'exposition pour cette application, puis appuyez sur \" Définir comme région active \"",
+    "unhandled_error_body": "Quelque chose d'inattendu s'est produit. Veuillez fermer et rouvrir l'application et réessayer.",
+    "unhandled_error_title": "Quelque chose s'est mal passé",
+    "use_exposure_notifications_android_title": "Activer les notifications d'exposition"
+  },
   "exposure_scanning_status": {
     "fix_this": "Répare ça",
     "learn_more": "En savoir plus",
@@ -174,20 +217,20 @@
     "fix": "Résoudre les problèmes avec {{technology}}",
     "get_more_info": "Obtenez plus d'informations sur {{technology}}",
     "have_a_positive_test": "Vous avez un code de résultat de test positif?",
-    "if_you_have_a_code": "Signalez votre résultat pour assurer la sécurité de votre communauté.",
     "not_feeling_well": "Vous ne vous sentez pas bien ?",
     "proximity_tracing_info_body_1": "Si les smartphones avec l'application installée sont allumés avec le Bluetooth allumé et ils sont proches les uns des autres pendant un certain temps, une rencontre est enregistrée sur votre appareil.",
     "proximity_tracing_info_body_2": "En cas de rencontre, vos données et informations restent anonymes. L'application ne stocke aucune donnée personnelle. Seuls les identifiants aléatoires sont échangés. Ceux-ci sont supprimés dans les 14 jours.",
     "proximity_tracing_info_subheader_1": "Comment fonctionnent les notifications d'exposition?",
     "proximity_tracing_info_subheader_2": "Mes données sont-elles sécurisées?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "Pour activer les notifications d'exposition, accédez aux notifications d'exposition COVID-19 de votre application Paramètres et activez `` Utiliser les notifications d'exposition ''",
-      "unauthorized_error_message_ios": "Pour activer les notifications d’exposition, accédez à la section Notification d’exposition dans Paramètres et partagez les informations d’exposition et définissez la région active sur {{applicationName}}",
-      "unauthorized_error_title": "Activer les notifications d'exposition"
-    },
     "request_call": "Demander un appel",
     "take_assessment": "Passer une évaluation",
-    "to_submit_your_test": "Pour soumettre votre résultat de test positif, vous devrez obtenir votre code de résultat de test positif à partir d'un traceur de contact."
+    "to_submit_your_test": "Pour soumettre votre résultat de test positif, vous devrez obtenir votre code de résultat de test positif à partir d'un traceur de contact.",
+    "verification_code_card": {
+      "if_you_have_a_code": "Soumettez votre code de vérification pour contribuer à la sécurité de votre communauté.",
+      "if_you_have_a_positive_test": "Si vous avez été testé positif au COVID-19, vous pouvez signaler le test de façon anonyme pour aider à assurer la sécurité de votre communauté.",
+      "report_positive_test": "Signaler un test positif",
+      "submit_code": "Soumettre le code"
+    }
   },
   "label": {
     "check": "Coche",
@@ -280,6 +323,7 @@
     "privacy_policy": "Politique de confidentialité",
     "share_anonymized_data": "Partager les données anonymes",
     "share_anonymized_data_disclaimer": "En continuant, vous acceptez de partager des réponses anonymes aux questions de sélection avec le {{healthAuthorityName}}",
+    "share_data_para_2": "Ces données ne contiennent aucune information permettant d'identifier une personne.",
     "sharing_anonymized_data": "Partage de données anonymisées",
     "stop_sharing_data": "Arrêter de partager des données",
     "you_are_sharing_data": "Vous partagez des données anonymisées"
@@ -391,8 +435,10 @@
   },
   "settings": {
     "data_deleted": "Données supprimées",
+    "delete_data_are_you_sure": "Êtes-vous sûr?",
     "delete_data_disclosure1": "Lorsque vous appuyez sur le bouton «Supprimer mes données» ci-dessous, l'application supprimera les données de l'historique des symptômes stockées sur votre téléphone.",
     "delete_data_disclosure2": "Cela ne supprime pas les données créées ou collectées par votre téléphone pour les notifications d'exposition.\n\n Vous pouvez supprimer ces données supplémentaires dans les paramètres de votre appareil.",
+    "delete_data_language_token": "Un jeton stocké sur votre appareil qui enregistre votre préférence linguistique",
     "delete_data_note": "Remarque",
     "delete_my_data": "Supprimer mes données",
     "errors": {
@@ -438,5 +484,17 @@
     "shortness_of_breath_or_difficulty_breathing": "Essoufflement ou difficulté à respirer",
     "sore_throat": "Mal de gorge",
     "trouble_breathing": "Difficulté à respirer"
+  },
+  "verification_code_alerts": {
+    "code_used_body": "Le code de vérification fourni a déjà été utilisé.",
+    "code_used_title": "Code de vérification déjà utilisé",
+    "invalid_code_body": "Le code de vérification que vous avez soumis n'est pas valide. \n\n Le code doit être un code de vérification valide qui vous a été fourni par votre autorité sanitaire. \n\n Il est également possible que votre code ait expiré. Si tel est le cas, vous devrez demander un nouveau code à votre autorité sanitaire.",
+    "invalid_code_title": "Code invalide",
+    "network_connection_body": "Vous devez être connecté au WiFi pour soumettre un code de vérification.",
+    "network_connection_title": "Pas de connexion Internet",
+    "timeout_body": "Il a fallu trop de temps pour soumettre le code de vérification. Veuillez réessayer plus tard.",
+    "timeout_title": "La soumission a pris trop de temps",
+    "unknown_body": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+    "unknown_title": "Quelque chose s'est mal passé"
   }
 }
