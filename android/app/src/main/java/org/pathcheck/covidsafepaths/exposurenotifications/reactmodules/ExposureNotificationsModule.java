@@ -110,8 +110,8 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     client
         .isEnabled()
         .addOnSuccessListener(enabled -> {
-          if (!client.deviceSupportsLocationlessScanning() &&
-              !LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
+          if (!client.deviceSupportsLocationlessScanning()
+            && !LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
             promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
             return;
           }
