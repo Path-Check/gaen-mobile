@@ -58,7 +58,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
       @Override
       public void onFailure(@NotNull Throwable exception) {
-        if (!LocationHelper.Companion.isLocationEnabled(reactContext)) {
+        if (!client.deviceSupportsLocationlessScanning() && !LocationHelper.Companion.isLocationEnabled(reactContext)) {
           promise.resolve(CallbackMessages.EN_ERROR_LOCATION_OFF);
           return;
         }
@@ -106,11 +106,12 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getCurrentENPermissionsStatus(final Promise promise) {
-    ExposureNotificationClientWrapper.get(getReactApplicationContext())
+    ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+    client
         .isEnabled()
         .addOnSuccessListener(enabled -> {
-
-          if (!LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
+          if (!client.deviceSupportsLocationlessScanning() &&
+              !LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
             promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
             return;
           }
@@ -119,7 +120,7 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
             promise.resolve(CallbackMessages.EN_STATUS_BLUETOOTH_OFF);
             return;
           }
-          
+
           if (!enabled) {
             promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
             return;
