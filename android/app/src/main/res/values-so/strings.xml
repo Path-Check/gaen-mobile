@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">Hubinta dadka caabuqa qaba ee aad la joogtay...</string>
   <string name="exposure_notification_channel_description">Digniino ogeysiis soogaaritaanno</string>
   <string name="exposure_notification_channel_name">Ogeysiinta Ufeydsanku</string>
   <string name="exposure_notification_message">Qof adiga kaa ogdhowaa ayaa laga helay COVID-19. Taabo si aad u hesho faahfaahin dheeraad ah.</string>

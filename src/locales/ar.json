@@ -64,6 +64,9 @@
     "reload": "إعادة تحميل",
     "title": "خطأ غير معروف"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "شخص يتحدث إلى خبير صحي"
+  },
   "export": {
     "code_input_body_bluetooth": "أدخل رمز التحقق الخاص بك",
     "code_input_button_cancel": "إلغاء",
@@ -77,6 +80,7 @@
     "consent_subheader_1": "لماذا يجب علي المشاركة؟",
     "consent_subheader_2": "كيف يعمل هذا؟",
     "enable_exposure_notifications_body": "يجب عليك تفعيل إشعارات التعرض للإبلاغ عن نتيجة اختبار إيجابية.",
+    "enable_exposure_notifications_button": "تمكين إشعارات التعرض",
     "enable_exposure_notifications_title": "تفعيل إشعارات التعرض للمتابعة",
     "error": {
       "invalid_code": "حاول رمز مختلف",
@@ -145,6 +149,10 @@
     "why_did_i_get_an_en": "لماذا تلقيت إشعار التعرض؟",
     "why_did_i_get_an_en_para": "ستتلقى إشعارًا بالتعرض عندما يتلقى شخص ما كنت على مقربة منه لاحقًا اختبارًا إيجابيًا لـ COVID-19 ويختار إخطار الآخرين."
   },
+  "exposure_notification_alerts": {
+    "cant_check_for_exposures_button": "تمكين إشعارات التعرض",
+    "use_exposure_notifications_android_title": "تمكين إشعارات التعرض"
+  },
   "exposure_scanning_status": {
     "fix_this": "اصلح هذا",
     "learn_more": "التعرف على المزيد",
@@ -175,17 +183,11 @@
     "fix": "إصلاح المشاكل مع {{technology}}",
     "get_more_info": "الحصول على مزيد من المعلومات حول {{technology}}",
     "have_a_positive_test": "هل لديك رمز نتيجة اختبار إيجابي؟",
-    "if_you_have_a_code": "أبلغ عن نتيجتك للمساعدة في الحفاظ على أمان مجتمعك.",
     "not_feeling_well": "لا تشعر بخير؟",
     "proximity_tracing_info_body_1": "إذا كانت الهواتف الذكية التي تم تثبيت التطبيق عليها قيد التشغيل ، وتم تمكين البلوتوث عليها ، وكانت قريبة من بعضها البعض لفترة من الوقت ، فسيتم تسجيل لقاء على جهازك.",
     "proximity_tracing_info_body_2": "في حالة حدوث لقاء ، تظل بياناتك ومعلوماتك مجهولة. لا يخزن التطبيق أي بيانات شخصية. يتم تبادل المعرفات العشوائية فقط. يتم حذفها في غضون 14 يومًا.",
     "proximity_tracing_info_subheader_1": "كيف تعمل إشعارات التعرض؟",
     "proximity_tracing_info_subheader_2": "هل بياناتي آمنة؟",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "لتمكين إشعارات التعرض ، انتقل إلى إشعارات التعرض لـ COVID-19 في تطبيق الإعدادات الخاص بك وقم بتمكين \"استخدام إشعارات التعرض\"",
-      "unauthorized_error_message_ios": "لتمكين إعلامات التعرض ، انتقل إلى قسم إعلام التعرض في الإعدادات ومشاركة معلومات التعرض وقم بتعيين المنطقة النشطة على {{applicationName}}",
-      "unauthorized_error_title": "تمكين إشعارات التعرض"
-    },
     "request_call": "طلب مكالمة",
     "take_assessment": "أخذ التقييم",
     "to_submit_your_test": "لإرسال نتيجة الاختبار الإيجابية الخاصة بك ، ستحتاج إلى الحصول على رمز نتيجة الاختبار الإيجابي من أداة تتبع جهات الاتصال."

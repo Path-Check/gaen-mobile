@@ -24,6 +24,7 @@
     "continue": "계속",
     "done": "완료",
     "edit": "수정",
+    "enable": "활성화",
     "learn_more": "배우다",
     "maybe_later": "나중에",
     "more": "더 많은",
@@ -31,6 +32,7 @@
     "no": "아니요",
     "no_thanks": "아니오 괜찮습니다.",
     "off": "꺼짐",
+    "okay": "확인",
     "on": "켜짐",
     "save": "저장",
     "select_language": "언어 선택",
@@ -70,6 +72,9 @@
     "reload": "새로 고침",
     "title": "알수없는 오류"
   },
+  "escrow_verification": {
+    "person_and_health_expert": "의료 전문가와 이야기하는 사람"
+  },
   "export": {
     "code_input_body_bluetooth": "인증 코드를 입력하십시오.",
     "code_input_button_cancel": "취소",
@@ -84,6 +89,7 @@
     "consent_subheader_2": "어떻게 작동하나요?",
     "consent_warning_title": "경고!",
     "enable_exposure_notifications_body": "확진 결과를 보고하려면 노출 알림을 활성화해야 합니다.",
+    "enable_exposure_notifications_button": "노출 알림 활성화",
     "enable_exposure_notifications_title": "계속하려면 노출 알림 설정",
     "error": {
       "invalid_code": "다른 코드로 시도하십시오.",
@@ -154,6 +160,11 @@
     "why_did_i_get_an_en": "노출 알림을 받는 이유는 무엇입니까?",
     "why_did_i_get_an_en_para": "귀하의 주변에 코로나19 감염 확진자가 발생했을 경우, 해당 확진자가 다른사람에게 알리기를 선택하면 노출 알림을 받게 됩니다."
   },
+  "exposure_notification_alerts": {
+    "cant_check_for_exposures_button": "노출 알림 활성화",
+    "share_exposure_information_ios_title": "노출 정보 공유",
+    "use_exposure_notifications_android_title": "노출 알림 활성화"
+  },
   "exposure_scanning_status": {
     "fix_this": "이 문제를 해결합니다.",
     "learn_more": "배우다",
@@ -185,7 +196,6 @@
     "fix": "{{technology}}로 문제 해결",
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
     "have_a_positive_test": "테스트 결과 코드가 양성입니까",
-    "if_you_have_a_code": "지역 사회를 안전하게 지키기 위해 테스트를보고하십시오",
     "location_info_body": "Google은 Android 10 이하를 실행하는 장치에 노출 탐지 기능을 사용할 수 있도록 위치 서비스를 설정해야 합니다. 하지만 {{applicationName}}은 사용자의 위치를 추적하거나 보관하지 않습니다.",
     "location_info_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
     "not_feeling_well": "귀하의 컨디션이 좋지 않습니까?",
@@ -193,11 +203,6 @@
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_info_subheader_1": "근접 추적은 어떻게 작동됩니까?",
     "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "노출 알림을 활성화하려면 설정 앱의 코로나19 노출 알림으로 이동하십시오.",
-      "unauthorized_error_message_ios": "노출 알림을 활성화하려면 설정 및 공유 노출 정보의 노출 알림 섹션으로 이동하여 활성 영역을 {{applicationName}}으로 설정합니다.",
-      "unauthorized_error_title": "노출 알림 활성화"
-    },
     "request_call": "전화 요청",
     "take_assessment": "평가 하기",
     "to_submit_your_test": "양성 테스트 결과를 앱에 제출하려면 이동경로 조사 담당자로부터 양성 테스트 결과 코드를 받아야합니다."

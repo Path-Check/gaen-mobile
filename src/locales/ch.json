@@ -11,10 +11,12 @@
     "close": "Huchum",
     "continue": "Kontinua",
     "done": "Munhayan",
+    "enable": "Na lala or na kalamten",
     "maybe_later": "Polu esta i dispues",
     "more": "Mas",
     "next": "I otro",
     "no_thanks": "Para hafa, si yu'us ma'asi",
+    "okay": "OK",
     "select_language": "Achig i lenguahi",
     "settings": "Baba i Settings",
     "skip": "Upus",
@@ -97,6 +99,9 @@
     "updated": "Nuebu or Updated",
     "why_did_i_get_an_en": "Hafa na mana'i yu notifikasion put exposure?",
     "why_did_i_get_an_en_para": "Para un ma notifika yanggen guaha taotao ni un fioni ma test positive para COVID 19 dispues ya ha sangani i otro taotao siha."
+  },
+  "exposure_notification_alerts": {
+    "share_exposure_information_ios_title": "Fan ana'i ni Exposure Information"
   },
   "home": {
     "bluetooth_info_body": "I telefon-mu ha sesienti otro siha telefon ni man hihot gi fion-mu ni umu'usa Bluetooth Low Energy. Ha nana'i esti lugat i app para u log i iyo-mu daily encounters sin taya tumungo achuk ha ti un bababa i app gi iyo-mu device.",

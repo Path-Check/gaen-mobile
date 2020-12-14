@@ -11,11 +11,13 @@
     "close": "Isara",
     "continue": "Ituloy",
     "done": "Tapos",
+    "enable": "Paganahin",
     "learn_more": "Alamin",
     "maybe_later": "Baka Mamaya",
     "more": "Higit pa",
     "next": "Sa susunod",
     "no_thanks": "Salamat nalang",
+    "okay": "Okay",
     "select_language": "Piliin ang wika",
     "settings": "Buksan ang Settings",
     "skip": "I-Skip o Laktawan",
@@ -42,6 +44,7 @@
     "consent_subheader_1": "Bakit ako dapag magbahagi?",
     "consent_subheader_2": "Paano ito gumagana?",
     "enable_exposure_notifications_body": "Dapat mong paganahin ang mga abiso sa pagkakalantad o exposure notifications upang mag-ulat ng positibong resulta.",
+    "enable_exposure_notifications_button": "Payagan ang Exposure Notifications",
     "enable_exposure_notifications_title": "Paganahin ang mga abiso sa pagkakalantad o exposure notifications upang makapagpatuloy",
     "error": {
       "invalid_code": "Subukan ang ibang code",
@@ -100,6 +103,11 @@
     "why_did_i_get_an_en": "Bakit ako nakatanggap ng exposure notification?",
     "why_did_i_get_an_en_para": "Makakatanggap ka ng isang abiso sa pagkakalantad sa posibleng pagkalanit o exposure notification kapag ang isang tao na tumawid sa iyong landas na kalaunan ay nakatanggap ng isang nakumpirmado, dyagnosis o positibong pagsusuri para sa COVID-19 at pinipiling abisuhan ang iba."
   },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Paganahin Ang Bluetooth",
+    "cant_check_for_exposures_button": "Payagan ang Exposure Notifications",
+    "use_exposure_notifications_android_title": "Payagan ang Exposure Notifications"
+  },
   "exposure_scanning_status": {
     "learn_more": "Alamin"
   },
@@ -124,7 +132,6 @@
     "fix": "Ayusin ang mga isyu sa {{technology}}",
     "get_more_info": "Kumuha ng karagdagang impormasyon sa {{technology}}",
     "have_a_positive_test": "Mayroon ka bang isang code?",
-    "if_you_have_a_code": "Ipadala ang iyong pagsubok upang makatulong na mapanatiling ligtas ang iyong komunidad.",
     "proximity_tracing_info_body_1": "Kung ang mga smartphone na naka-install ang app ay naka-on o pinagagana, naka-enable ang Bluetooth, at malapit sa isa't isa sa loob ng takdang panahon, irirehistro ang engkwentrong ito sa iyong aparato.",
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
@@ -149,9 +156,6 @@
     "more_info": "Karagdagang Impormasyon"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Paganahin Ang Bluetooth"
-    },
     "activation_header_title": "Setup ng App",
     "app_setup_complete_body": "{{applicationName}} ay aktibo. Salamat sa iyong pagtulong na supilin ang paglaganap ng impeksyon.",
     "app_setup_complete_header": "Kumpleto ang Pag-setup ng App!",

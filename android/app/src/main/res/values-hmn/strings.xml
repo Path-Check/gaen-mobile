@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">Mus nyob ze raug tus kab mob...</string>
   <string name="exposure_notification_channel_description">Kev ceeb toom mus raug mob </string>
   <string name="exposure_notification_channel_name">Kev Ceeb Toom Raug Mob</string>
   <string name="exposure_notification_message">Koj tau mus ze ib tus neeg mob COVID-19.Nias kom thiaj li qhia ntxiv.</string>

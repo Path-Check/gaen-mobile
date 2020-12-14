@@ -24,6 +24,7 @@
     "continue": "Continuar",
     "done": "Finalizado",
     "edit": "Editar",
+    "enable": "Habilitar",
     "learn_more": "Más información",
     "maybe_later": "Quizás más tarde",
     "more": "Más",
@@ -31,6 +32,7 @@
     "no": "No",
     "no_thanks": "No, gracias",
     "off": "DESACTIVADA",
+    "okay": "Sí",
     "on": "ACTIVADA",
     "save": "Guardar",
     "select_language": "Seleccionar idioma",
@@ -70,7 +72,25 @@
     "reload": "Recargar",
     "title": "Error desconocido"
   },
+  "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "El número de teléfono debe tener 10 dígitos"
+    },
+    "person_and_health_expert": "Una persona hablando con personal médico",
+    "start": {
+      "body": "Si el resultado de su prueba para COVID-19 fue positivo (no a través de una prueba de anticuerpos), puede informar sobre la prueba de forma anónima.\n\nInformar sobre su prueba ayudará a otros en su comunidad a contener la propagación del virus.",
+      "header": "Informar sobre una prueba positiva",
+      "what_is_a_verification_code": "¿Qué es el código de verificación?"
+    },
+    "user_details_form": {
+      "phone_number": "Número de teléfono",
+      "subheader": "Indique la fecha de su prueba y su número de teléfono.",
+      "test_date": "Fecha de la prueba",
+      "test_details": "Detalles de la prueba"
+    }
+  },
   "export": {
+    "code": "Código",
     "code_input_body_bluetooth": "Ingrese su código de verificación",
     "code_input_button_cancel": "Cancelar",
     "code_input_title_bluetooth": "Verifique su diagnóstico",
@@ -85,7 +105,9 @@
     "consent_warning_message": "Continuar anulará su código. Si desea compartir su diagnóstico positivo en el futuro, primero deberá obtener un nuevo código de resultado positivo de la prueba.",
     "consent_warning_title": "¡Advertencia!",
     "enable_exposure_notifications_body": "Debe activar los avisos de exposición para informar de un resultado positivo.",
+    "enable_exposure_notifications_button": "Habilitar Avisos de Exposición",
     "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
+    "enter_verification_code": "Introduzca el código de verificación",
     "error": {
       "invalid_code": "Intentar con otro código",
       "invalid_format": "Los códigos pueden contener solo números y letras",
@@ -93,6 +115,12 @@
       "timeout_error": "La solicitud tomó demasiado tiempo",
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue usado"
+    },
+    "intro": {
+      "body1": "Si ha recibido un código de verificación de {{healthAuthorityName}} por un resultado positivo a la prueba de COVID-19, envíe este código en la pantalla siguiente.",
+      "body2": "Si no tiene código, pero tiene un resultado positivo a la prueba, tendrá que obtener un código de {{healthAuthorityName}} antes de continuar.",
+      "header": "¿Tiene el código de verificación?",
+      "what_is_a": "¿Qué es el código de verificación?"
     },
     "never_mind_button_title": "No importa",
     "person_and_health_expert": "Una persona hablando con personal médico",
@@ -111,7 +139,16 @@
         "no_token_for_existing_keys_title": "Intentar enviar claves que ya existen"
       }
     },
-    "start_header_bluetooth": "Ayude a contener la propagación del virus y proteja a otros en su comunidad"
+    "start_header_bluetooth": "Ayude a contener la propagación del virus y proteja a otros en su comunidad",
+    "submit_code": "Envíe el código",
+    "verification_code_info": {
+      "how_do_i_get_body": "Póngase en contacto con su autoridad de salud, {{healthAuthorityName}}",
+      "how_do_i_get_header": "¿Cómo obtengo el código de verificación?",
+      "info_body": "Un código de verificación es un código que le entrega su autoridad de salud {{healthAuthorityName}} cuando obtiene un resultado positivo a la prueba.\n\nEste código se utiliza para verificar que los resultados positivos de su prueba sean auténticos.\n\nCada código de verificación caduca después de un corto período de tiempo para asegurarnos de que no se presenten resultados de pruebas ya vencidos.\n\nSi encuentra un error al enviar su código de verificación, deberá obtener uno nuevo de la autoridad de salud antes de enviarlo otra vez.",
+      "info_header": "¿Qué es el código de verificación?",
+      "what_happens_body": "Cuando envía su código de verificación, la aplicación le pedirá que comparta claves aleatorias de exposición de otros dispositivos con los cuales se haya conectado.\n\nSi usted otorga el permiso, la aplicación enviará estas claves a un servidor de notificaciones de exposición. El servidor de notificaciones notificará los resultados positivos de su prueba a los dispositivos con los que se haya conectado. \n\nLa aplicación nunca guarda su información personal. Solamente se comparten claves aleatorias anónimas en su dispositivo.",
+      "what_happens_header": "¿Qué sucede cuando envío mi código?"
+    }
   },
   "exposure_history": {
     "check_for_exposures": "Comprobar si hay exposiciones",
@@ -146,6 +183,7 @@
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, su teléfono usará Bluetooth para intercambiar y guardar cadenas de carácteres aleatorios (llamadas identificaciones aleatorias) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorios no le identificarán personalmente a los otros usuarios y varían muchas veces al día para proteger su privacidad. La fecha y duración de los encuentros serán grabados así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
     "last_days": "Los últimos 14 días",
     "learn_more": "Más información",
+    "more_info": "Conozca más acerca de las Notificaciones de Exposición",
     "no_connectivity_message": "¡No estás conectado a Internet!",
     "no_exposure_reports": "Ningún informe de exposición",
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
@@ -155,6 +193,21 @@
     "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí un aviso de exposición?",
     "why_did_i_get_an_en_para": "Usted recibirá un aviso de exposición cuando haya estado cerca de alguien que luego reciba un resultado positivo a COVID-19 y que haya decidido notificarlo."
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_body": "Para activar las Notificaciones de Exposición, primero debe activar Bluetooth en su aplicación de Configuraciones.",
+    "bluetooth_title": "Habilitar el Bluetooth",
+    "cant_check_for_exposures_body": "Debe activar las Notificaciones de Exposición para buscar exposiciones.",
+    "cant_check_for_exposures_button": "Habilitar Avisos de Exposición",
+    "cant_check_for_exposures_title": "No pueden buscarse las Exposiciones.",
+    "set_active_region_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación y presione ‘Fijar como región activa’.",
+    "set_active_region_ios_title": "Fijar región activa",
+    "share_exposure_information_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación. Asegúrese de activar ’Compartir Información de Exposición', presione 'Fijar como región activa'.",
+    "share_exposure_information_ios_title": "Compartir información de exposición",
+    "unhandled_error_body": "Sucedió algo inesperado. Por favor, cierre la aplicación, ábrala de nuevo y vuelva a intentarlo.",
+    "unhandled_error_title": "Algo salió mal",
+    "use_exposure_notifications_android_body": "Para activar las Notificaciones de Exposición, vaya a la pantalla de Notificaciones de Exposición al COVID-19 en la aplicación de Configuraciones y active ‘Usar Notificaciones de Exposición'.",
+    "use_exposure_notifications_android_title": "Habilitar Avisos de Exposición"
   },
   "exposure_scanning_status": {
     "fix_this": "Solucionar esto",
@@ -187,7 +240,6 @@
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
-    "if_you_have_a_code": "Reporte su resultado para ayudar a mantener a su comunidad segura.",
     "location_info_body": "Google requiere que los dispositivos con Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar la Detección de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
     "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
     "not_feeling_well": "¿No te sientes bien?",
@@ -195,14 +247,16 @@
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_subheader_1": "¿Cómo funcionan los Avisos de Exposición?",
     "proximity_tracing_info_subheader_2": "¿Están mis datos seguros?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "Para activar los Avisos de exposición, vaya a la configuración de la aplicación Avisos de Exposición al COVID-19 y active la opción “Usar avisos de exposición”.",
-      "unauthorized_error_message_ios": "Para habilitar los avisos de exposición vaya a la sección de Avisos de exposición, Configuración y Compartir Información de Exposición y establezca la Región Activa en {{applicationName}}",
-      "unauthorized_error_title": "Habilitar Avisos de Exposición"
-    },
     "request_call": "Solicitar llamada",
     "take_assessment": "Tomar evaluación",
-    "to_submit_your_test": "Para obtener el código de resultado de la prueba, deberá hablar con un rastreador de contactos."
+    "to_submit_your_test": "Para obtener el código de resultado de la prueba, deberá hablar con un rastreador de contactos.",
+    "verification_code_card": {
+      "if_you_have_a_code": "Envíe su código de verificación para ayudar a mantener segura a su comunidad.",
+      "if_you_have_a_positive_test": "Si el resultado de su prueba para COVID-19 fue positivo, puede informar sobre la prueba de forma anónima para ayudar a mantener segura a su comunidad.",
+      "more_info": "¿Qué es el código de verificación?",
+      "report_positive_test": "Informar sobre prueba positiva",
+      "submit_code": "Introduzca el código"
+    }
   },
   "label": {
     "check": "Marca de verificación",
@@ -224,9 +278,6 @@
     "symptom_history": "Comprobador de síntomas"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Habilitar el Bluetooth"
-    },
     "activation_header_title": "Configuración de la aplicación",
     "app_setup_complete_body": "{{applicationName}} está activo. Gracias por ayudar a romper la cadena de contagios.",
     "app_setup_complete_header": "¡Configuración de la aplicación completada!",
@@ -245,6 +296,7 @@
     "location_alert_header": "Habilite el acceso a su localización desde “{{applicationName}}”",
     "location_body": "Para usar la búsqueda de Bluetooth, la configuración de ubicación del dispositivo debe estar activada. La aplicación no usa sus datos de localización y no se puede rastrear su dispositivo individual.",
     "location_header": "Activar Localización",
+    "location_services_already_active": "Los servicios de ubicación están activos",
     "location_subheader": "¿Por qué necesito activar los servicios de ubicación de mi teléfono?",
     "no_take_me": "No, llévame de vuelta.",
     "notification_body1": "Recibirá notificaciones cuando se haya cruzado con alguien que haya informado es positivo a COVID-19.",
@@ -268,6 +320,7 @@
       "subheader_4": "Cada teléfono llama periódicamente al servidor para obtener la lista de identificaciones marcadas y buscar coincidencias.",
       "subheader_5": "Se le avisará si {{applicationName}} encuentra una coincidencia positiva con un ID marcado"
     },
+    "proximity_tracing_already_active": "Las notificaciones de exposición están activas",
     "proximity_tracing_body1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_button": "Activar Avisos de Exposición",
@@ -465,5 +518,17 @@
     "shortness_of_breath_or_difficulty_breathing": "Dificultad para respirar",
     "sore_throat": "Dolor de garganta",
     "trouble_breathing": "Dificultad para respirar"
+  },
+  "verification_code_alerts": {
+    "code_used_body": "El código de verificación introducido ya fue utilizado.",
+    "code_used_title": "Este código de verificación ya fue utilizado",
+    "invalid_code_body": "El código de verificación que envió es inválido.\n\nEl código de verificación debe ser un código válido emitido por su autoridad de salud.\n\nTambién es posible que el código haya caducado. De ser así, tendrá que solicitar un nuevo código a su autoridad de salud.",
+    "invalid_code_title": "Código inválido",
+    "network_connection_body": "Para enviar el código de verficación debe estar conectado a WiFi.",
+    "network_connection_title": "No hay conexión a internet",
+    "timeout_body": "Tomó demasiado tiempo enviar el código de verificación. Por favor, intente más tarde.",
+    "timeout_title": "El envío tardó demasiado",
+    "unknown_body": "Ocurrió un error inesperado. Por favor, intente de nuevo.",
+    "unknown_title": "Algo salió mal"
   }
 }
