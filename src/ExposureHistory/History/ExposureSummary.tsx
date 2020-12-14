@@ -19,8 +19,10 @@ export const determineRemainingQuarantine = (
   today: Posix,
   date: Posix,
 ): number => {
-  const daysSinceExposure = dayjs(today).diff(dayjs(date).add(1, "day"), "day")
+  const dayOfExposure = dayjs(date).add(1, "day")
+  const daysSinceExposure = dayjs(today).diff(dayOfExposure, "day")
   const daysRemaining = quarantineLength - daysSinceExposure
+
   const maxDays = Math.min(quarantineLength, daysRemaining)
   const result = Math.max(0, maxDays)
   return result
@@ -31,12 +33,10 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
   quarantineLength,
 }) => {
   const daysOfQuarantineLeft = determineRemainingQuarantine(
-    exposure.date,
     quarantineLength,
     Date.now(),
+    exposure.date,
   )
-
-  console.log({ daysOfQuarantineLeft, exposure, quarantineLength })
 
   return (
     <View style={style.container}>
