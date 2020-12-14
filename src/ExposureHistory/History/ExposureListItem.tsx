@@ -13,7 +13,7 @@ const ExposureListItem: FunctionComponent<ExposureListItemProps> = ({
   exposureDatum,
 }) => {
   return (
-    <Text style={style.secondaryText}>
+    <Text style={style.secondaryText} testID="exposure-list-item">
       - {Exposure.toDateRangeString(exposureDatum)}
     </Text>
   )

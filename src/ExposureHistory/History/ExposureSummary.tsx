@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
 import * as Exposure from "../../exposure"
-import ExposureActions from "../detail/ExposureActions"
 
 import { Colors, Outlines, Spacing, Typography } from "../../styles"
 
