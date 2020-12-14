@@ -2,7 +2,7 @@ import { determineRemainingQuarantine } from "./ExposureSummary"
 
 describe("determineRemainingQuarantine", () => {
   describe("when given an exposure date, todays date, and a length of quarantine", () => {
-    it("returns the number of days remaining in the quarantine with a days padding to the exposure date", () => {
+    it("returns the number of days remaining in the quarantine period with an extra day of padding", () => {
       const today = new Date("2020-12-15").valueOf()
       const quarantineLength = 14
 
