@@ -7,7 +7,7 @@ import { Text } from "../../components"
 import * as Exposure from "../../exposure"
 import ExposureActions from "../detail/ExposureActions"
 
-import { Spacing, Typography } from "../../styles"
+import { Colors, Outlines, Spacing, Typography } from "../../styles"
 
 type Posix = number
 
@@ -50,9 +50,11 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
       <Text style={style.summaryText}>
         {t("exposure_history.exposure_summary", { startDate, endDate })}
       </Text>
-      <Text style={style.daysRemainingText}>{`${t(
-        "exposure_history.days_remaining",
-      )}: ${daysOfQuarantineLeft}`}</Text>
+      <View style={style.daysRemainingTextContainer}>
+        <Text style={style.daysRemainingText}>
+          {t("exposure_history.days_remaining", { daysOfQuarantineLeft })}
+        </Text>
+      </View>
     </View>
   )
 }
@@ -62,8 +64,15 @@ const style = StyleSheet.create({
     ...Typography.body.x20,
     marginBottom: Spacing.small,
   },
+  daysRemainingTextContainer: {
+    backgroundColor: Colors.neutral.shade10,
+    borderRadius: Outlines.baseBorderRadius,
+    paddingVertical: Spacing.xxSmall,
+    paddingHorizontal: Spacing.xSmall,
+  },
   daysRemainingText: {
     ...Typography.body.x20,
+    color: Colors.neutral.black,
   },
 })
 

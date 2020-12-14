@@ -11,13 +11,13 @@ import ExposureActions from "../detail/ExposureActions"
 
 import { Colors, Outlines, Spacing, Typography } from "../../styles"
 
-interface ExposureListProps {
+interface HasExposuresProps {
   exposures: ExposureDatum[]
 }
 
 const DEFAULT_QUARANTINE_LENGTH = 10
 
-const ExposureList: FunctionComponent<ExposureListProps> = ({ exposures }) => {
+const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
   const { t } = useTranslation()
 
   const envQuarantineLength = Number(env.QUARANTINE_LENGTH)
@@ -52,19 +52,17 @@ const ExposureList: FunctionComponent<ExposureListProps> = ({ exposures }) => {
         <Text style={style.bodyText}>
           {t("exposure_history.your_device_exchanged")}
         </Text>
-        <ExposureListTemp exposures={exposures} />
+        <ExposureList exposures={exposures} />
       </View>
     </View>
   )
 }
 
-interface ExposureListTempProps {
+interface ExposureListProps {
   exposures: ExposureDatum[]
 }
 
-const ExposureListTemp: FunctionComponent<ExposureListTempProps> = ({
-  exposures,
-}) => {
+const ExposureList: FunctionComponent<ExposureListProps> = ({ exposures }) => {
   return (
     <View testID={"exposure-list"}>
       {exposures.map((exposure) => {
@@ -85,7 +83,7 @@ const style = StyleSheet.create({
     borderBottomWidth: Outlines.hairline,
   },
   subheaderText: {
-    ...Typography.header.x20,
+    ...Typography.header.x30,
     marginBottom: Spacing.xSmall,
   },
   bodyText: {
@@ -93,4 +91,5 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
 })
-export default ExposureList
+
+export default HasExposures

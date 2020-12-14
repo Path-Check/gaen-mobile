@@ -130,7 +130,7 @@
   "exposure_history": {
     "exposure_summary": "Someone you were near between {{startDate}} and {{endDate}} tested positive for COVID-19.",
     "check_for_exposures": "Check for exposures",
-    "days_remaining": "Days remaining in quarantine",
+    "days_remaining": "There are {{daysOfQuarantineLeft}} days left in your recommended quarantine period.",
     "summary": "Summary",
     "possible_exposures": "Possible Exposures",
     "your_device_exchanged": "Within each date range below, your device exchanged keys with another device that later received a verified positive test result.",
@@ -141,7 +141,7 @@
       "general_guidance": "General Guidance",
       "ha_guidance_header": "What should I do?",
       "header": "Someone you were nearby has since tested positive for COVID-19.",
-      "next_steps": "Health guidelines",
+      "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
       "quarantine": "Quarantine",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
