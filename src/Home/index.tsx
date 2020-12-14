@@ -86,10 +86,6 @@ const NotificationsOff = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
 
-  if (notification.status === "Granted") {
-    return null
-  }
-
   const handleOnPressNotificationsOff = () => {
     if (notification.status === "Denied") {
       notification.request()
@@ -98,7 +94,9 @@ const NotificationsOff = () => {
     }
   }
 
-  return (
+  const showNotificationsOff = notification.status !== "Granted"
+
+  return showNotificationsOff ? (
     <Pressable
       style={style.notificationsOffContainer}
       onPress={handleOnPressNotificationsOff}
@@ -115,7 +113,7 @@ const NotificationsOff = () => {
         {t("home.notifications_off")}
       </Text>
     </Pressable>
-  )
+  ) : null
 }
 
 const SimpleVerificationFlowButton: FunctionComponent = () => {
