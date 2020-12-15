@@ -82,7 +82,6 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
     : AffectedUserFlowStackScreens.AffectedUserPublishConsent
 
   const handleOnPressSubmit = async () => {
-    navigation.navigate(AffectedUserFlowStackScreens.SymptomOnsetDate)
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     trackEvent("product_analytics", "verification_code_submitted")
