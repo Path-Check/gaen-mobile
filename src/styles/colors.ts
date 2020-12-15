@@ -106,3 +106,13 @@ export const text: Record<Text, string> = {
   error: accent.danger100,
   placeholder: neutral.shade75,
 }
+
+type RiskLevel = "low" | "medium" | "high" | "critical" | "unknown" | "extreme"
+export const riskLevel: Record<RiskLevel, string> = {
+  low: "#1ea652",
+  medium: "#a6882d",
+  high: "#d16615",
+  critical: "#ce0022",
+  unknown: neutral.black,
+  extreme: "#640014",
+}
