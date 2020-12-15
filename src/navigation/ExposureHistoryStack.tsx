@@ -6,7 +6,6 @@ import {
 
 import ExposureHistoryScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
-import ExposureDetail from "../ExposureHistory/ExposureDetail"
 import {
   ExposureHistoryStackScreens,
   ExposureHistoryStackScreen,
@@ -37,11 +36,6 @@ const ExposureHistoryStack: FunctionComponent = () => {
       <Stack.Screen
         name={ExposureHistoryStackScreens.MoreInfo}
         component={MoreInfo}
-        options={defaultScreenOptions}
-      />
-      <Stack.Screen
-        name={ExposureHistoryStackScreens.ExposureDetail}
-        component={ExposureDetail}
         options={defaultScreenOptions}
       />
     </Stack.Navigator>
