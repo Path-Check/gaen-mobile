@@ -22,15 +22,8 @@ const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
   const { trackEvent } = useProductAnalyticsContext()
-  const {
-    locationPermissions,
-    exposureNotifications: { status },
-  } = usePermissionsContext()
+  const { exposureNotifications, locationRequirement } = usePermissionsContext()
   const { goToNextScreenFrom } = useActivationNavigation()
-
-  const isENActive = status === "Active"
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
@@ -81,17 +74,19 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationRequired
-      ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
-      : t("onboarding.app_setup_incomplete_body", { applicationName }),
+    bodyText:
+      locationRequirement === "Required"
+        ? t("onboarding.app_setup_incomplete_location_body", {
+            applicationName,
+          })
+        : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
   }
 
-  const isAppSetupComplete = isENActive && !isLocationRequiredAndOff
-
-  const screenContent = isAppSetupComplete
-    ? appSetupCompleteContent
-    : appSetupIncompleteContent
+  const screenContent =
+    exposureNotifications.status === "Active"
+      ? appSetupCompleteContent
+      : appSetupIncompleteContent
   const Buttons = screenContent.buttons
 
   return (

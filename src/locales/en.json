@@ -181,21 +181,6 @@
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others."
   },
-  "exposure_notification_alerts": {
-    "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
-    "bluetooth_title": "Enable Bluetooth",
-    "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
-    "cant_check_for_exposures_button": "Enable Exposure Notifications",
-    "cant_check_for_exposures_title": "Can't Check for Exposures",
-    "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
-    "set_active_region_ios_title": "Set Active Region",
-    "share_exposure_information_ios_body": "Open the Settings app, then navigate to the Exposure Notifications settings for this app. Ensure 'Share Exposure Information' is turned on, then press 'Set As Active Region'.",
-    "share_exposure_information_ios_title": "Share Exposure Information",
-    "unhandled_error_body": "Something unexpected happened. Please close and reopen the app and try again.",
-    "unhandled_error_title": "Something Went Wrong",
-    "use_exposure_notifications_android_body": "To enable Exposure Notifications, go to the COVID-19 Exposure Notifications screen of your Settings app and enable 'Use Exposure Notifications'.",
-    "use_exposure_notifications_android_title": "Enable Exposure Notifications"
-  },
   "exposure_scanning_status": {
     "fix_this": "Fix this",
     "learn_more": "Learn more",
@@ -263,8 +248,8 @@
     "eula": "End User Legal Agreement",
     "eula_agree_terms_of_use": "I agree that I have read and accepted the terms of use",
     "i_am_over": "Yes, I am over {{minimumAge}}",
-    "location_alert_body": "To use Bluetooth scanning, the device location setting needs to be turned on.",
-    "location_alert_header": "Enable Location access from \"{{applicationName}}\"",
+    "location_alert_body": "To use Exposure Notifications, Location Services must be enabled",
+    "location_alert_header": "Enable Location Services",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Bluetooth scanning for Exposure Detection. However, {{applicationName}} does NOT track or keep a record of your location.",
     "location_header": "Activate Location",
     "location_services_already_active": "Location services are active",
@@ -486,6 +471,23 @@
     "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
     "sore_throat": "Sore throat",
     "trouble_breathing": "Trouble breathing"
+  },
+  "exposure_notification_alerts": {
+    "use_exposure_notifications_android_title": "Enable Exposure Notifications",
+    "use_exposure_notifications_android_body": "To enable Exposure Notifications, go to the COVID-19 Exposure Notifications screen of your Settings app and enable 'Use Exposure Notifications'.",
+    "share_exposure_information_ios_title": "Share Exposure Information",
+    "share_exposure_information_ios_body": "Open the Settings app, then navigate to the Exposure Notifications settings for this app. Ensure 'Share Exposure Information' is turned on, then press 'Set As Active Region'.",
+    "set_active_region_ios_title": "Set Active Region",
+    "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
+    "bluetooth_title": "Enable Bluetooth",
+    "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
+    "unhandled_error_body": "Something unexpected happened. Please close and reopen the app and try again.",
+    "unhandled_error_title": "Something Went Wrong",
+    "cant_check_for_exposures_title": "Can't Check for Exposures",
+    "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
+    "cant_check_for_exposures_button": "Enable Exposure Notifications",
+    "location_title": "Enable Location Services",
+    "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Notifications. {{applicationName}} does NOT track or keep a record of your location."
   },
   "verification_code_alerts": {
     "code_used_body": "The verification code provided has already been used.",

@@ -33,7 +33,7 @@ describe("AcceptTermsOfService", () => {
 
     await waitFor(() => {
       expect(getByLabelText("Checked checkbox")).toBeDefined()
-      expect(navigationSpy).toHaveBeenCalledWith("ActivateLocation")
+      expect(navigationSpy).toHaveBeenCalled()
     })
   })
 

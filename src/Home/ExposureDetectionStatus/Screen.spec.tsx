@@ -126,11 +126,12 @@ describe("ExposureDetectionStatusScreen", () => {
     })
   })
 
-  describe("When the device does not support locationless scanning", () => {
+  describe("When the device needs location to be on", () => {
     describe("and location is on", () => {
       it("shows location as enabled", () => {
         const permissionsState = factories.permissionsContext.build({
-          locationPermissions: "RequiredOn",
+          exposureNotifications: { status: "Active" },
+          locationRequirement: "Required",
         })
 
         const { getByTestId } = render(
@@ -148,7 +149,10 @@ describe("ExposureDetectionStatusScreen", () => {
         const navigateSpy = jest.fn()
         ;(useNavigation as jest.Mock).mockReturnValue({ navigate: navigateSpy })
         const permissionsState = factories.permissionsContext.build({
-          locationPermissions: "RequiredOn",
+          exposureNotifications: {
+            status: "Active",
+          },
+          locationRequirement: "Required",
         })
 
         const { getByTestId } = render(
@@ -165,7 +169,8 @@ describe("ExposureDetectionStatusScreen", () => {
     describe("and location is off", () => {
       it("shows a disabled message for location and a general disabled message", () => {
         const permissionsState = factories.permissionsContext.build({
-          locationPermissions: "RequiredOff",
+          exposureNotifications: { status: "LocationOffAndRequired" },
+          locationRequirement: "Required",
         })
         const { getByTestId, getByText } = render(
           <PermissionsContext.Provider value={permissionsState}>
@@ -185,10 +190,10 @@ describe("ExposureDetectionStatusScreen", () => {
     })
   })
 
-  describe("When the device supports locationless scanning", () => {
+  describe("When the device does not require location to be on", () => {
     it("does not show the location status", () => {
       const permissionsState = factories.permissionsContext.build({
-        locationPermissions: "NotRequired",
+        locationRequirement: "NotRequired",
       })
 
       const { queryByTestId } = render(
