@@ -128,14 +128,20 @@
     }
   },
   "exposure_history": {
+    "exposure_summary": "Someone you were near between {{startDate}} and {{endDate}} tested positive for COVID-19.",
     "check_for_exposures": "Check for exposures",
+    "days_remaining": "There are {{daysOfQuarantineLeft}} days left in your recommended quarantine period.",
+    "summary": "Summary",
+    "possible_exposures": "Possible Exposures",
+    "your_device_exchanged": "Within each date range below, your device exchanged keys with another device that later received a verified positive test result.",
+    "next_steps": "Next Steps",
     "exposure_detail": {
       "2m_apart": "2m apart",
       "6ft_apart": "6ft apart",
       "general_guidance": "General Guidance",
       "ha_guidance_header": "What should I do?",
-      "header": "Someone you were nearby has since tested positive for COVID-19.",
-      "next_steps": "Next steps",
+      "next_steps": "Review health guidelines",
+      "header": "Someone you were near has since tested positive for COVID-19.",
       "personalize_my_guidance": "Personalize my guidance",
       "quarantine": "Quarantine",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
@@ -173,6 +179,7 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "notifications_off": "Turn on notifications to get notified if you receive an exposure",
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",

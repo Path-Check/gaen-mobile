@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Pressable,
+  Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
@@ -25,6 +27,7 @@ import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
 import CallEmergencyServices from "./CallEmergencyServices"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 
 import { Icons, Images } from "../assets"
 import {
@@ -50,7 +53,6 @@ const Home: FunctionComponent = () => {
     emergencyPhoneNumber,
     verificationStrategy,
   } = useConfigurationContext()
-
   return (
     <>
       <StatusBar backgroundColor={Colors.background.primaryLight} />
@@ -59,6 +61,7 @@ const Home: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
+        <NotificationsOff />
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (
@@ -77,6 +80,40 @@ const Home: FunctionComponent = () => {
       </ScrollView>
     </>
   )
+}
+
+const NotificationsOff = () => {
+  const { t } = useTranslation()
+  const { notification } = usePermissionsContext()
+
+  const handleOnPressNotificationsOff = () => {
+    if (notification.status === "Denied") {
+      notification.request()
+    } else if (notification.status === "Blocked") {
+      Linking.openSettings()
+    }
+  }
+
+  const showNotificationsOff = notification.status !== "Granted"
+
+  return showNotificationsOff ? (
+    <Pressable
+      style={style.notificationsOffContainer}
+      onPress={handleOnPressNotificationsOff}
+    >
+      <View style={style.notificationsOffBellIconContainer}>
+        <SvgXml
+          xml={Icons.Bell}
+          fill={Colors.neutral.shade100}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+        />
+      </View>
+      <Text style={style.notificationsOffText}>
+        {t("home.notifications_off")}
+      </Text>
+    </Pressable>
+  ) : null
 }
 
 const SimpleVerificationFlowButton: FunctionComponent = () => {
@@ -281,6 +318,27 @@ const style = StyleSheet.create({
     lineHeight: Typography.lineHeight.x40,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.xLarge,
+  },
+  notificationsOffContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: Spacing.xSmall,
+    paddingHorizontal: Spacing.small,
+    marginBottom: Spacing.small,
+    borderWidth: Outlines.thin,
+    borderColor: Colors.neutral.shade75,
+    backgroundColor: Colors.neutral.shade5,
+    borderRadius: Outlines.borderRadiusLarge,
+  },
+  notificationsOffBellIconContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
+  notificationsOffText: {
+    flex: 9,
+    ...Typography.body.x20,
+    color: Colors.neutral.black,
   },
   callEmergencyServicesContainer: {
     borderTopWidth: Outlines.hairline,

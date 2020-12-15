@@ -10,8 +10,28 @@ export interface ExposureDatum {
 
 export type ExposureInfo = ExposureDatum[]
 
+type ExposureDateRangeStrings = {
+  start: string
+  end: string
+}
+
+const toExposureDateRangeStrings = (date: Posix): ExposureDateRangeStrings => {
+  return {
+    start: dayjs.utc(date).subtract(1, "day").format("dddd, MMM Do"),
+    end: dayjs.utc(date).add(1, "day").format("dddd, MMM Do"),
+  }
+}
+
 export const toDateRangeString = ({ date }: ExposureDatum): string => {
-  const previousDay = dayjs.utc(date).subtract(1, "day").format("dddd, MMM Do")
-  const nextDay = dayjs.utc(date).add(1, "day").format("dddd, MMM Do")
-  return `${previousDay} - ${nextDay}`
+  const { start, end } = toExposureDateRangeStrings(date)
+
+  return `${start} - ${end}`
+}
+
+export const toStartDateString = ({ date }: ExposureDatum): string => {
+  return toExposureDateRangeStrings(date).start
+}
+
+export const toEndDateString = ({ date }: ExposureDatum): string => {
+  return toExposureDateRangeStrings(date).end
 }

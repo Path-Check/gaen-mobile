@@ -64,13 +64,13 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [])
 
-  const refreshExposureInfo = async () => {
+  const refreshExposureInfo = useCallback(async () => {
     const exposureInfo = await NativeModule.getCurrentExposures()
     setExposureInfo(exposureInfo)
 
     const detectionDate = await NativeModule.fetchLastExposureDetectionDate()
     setLastExposureDetectionDate(detectionDate)
-  }
+  }, [])
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(
