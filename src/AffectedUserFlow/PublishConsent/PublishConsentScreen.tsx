@@ -19,6 +19,7 @@ const PublishConsentScreen: FunctionComponent = () => {
     hmacKey,
     exposureKeys,
     navigateOutOfStack,
+    symptomOnsetDate,
   } = useAffectedUserContext()
   const { appPackageName, regionCodes } = useConfigurationContext()
 
@@ -39,6 +40,7 @@ const PublishConsentScreen: FunctionComponent = () => {
         appPackageName={appPackageName}
         regionCodes={regionCodes}
         navigateOutOfStack={navigateOutOfStack}
+        symptomOnsetDate={symptomOnsetDate}
       />
     )
   } else {
