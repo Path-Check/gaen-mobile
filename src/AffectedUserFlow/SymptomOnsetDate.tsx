@@ -18,14 +18,7 @@ import { AffectedUserFlowStackScreens, useStatusBarEffect } from "../navigation"
 import { useAffectedUserContext } from "./AffectedUserContext"
 import Checkbox from "../components/Checkbox"
 
-import {
-  Buttons,
-  Colors,
-  Forms,
-  Outlines,
-  Spacing,
-  Typography,
-} from "../styles"
+import { Buttons, Colors, Forms, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
 
 type Posix = number
@@ -38,6 +31,10 @@ const SymptomOnsetDate: FunctionComponent = () => {
   const { symptomOnsetDate, setSymptomOnsetDate } = useAffectedUserContext()
 
   const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
+
+  const handleOnPressHasSymptoms = () => {
+    setSymptomOnsetDate(Date.now())
+  }
 
   const handleOnPressNoSymptoms = () => {
     setSymptomOnsetDate(null)
@@ -65,48 +62,60 @@ const SymptomOnsetDate: FunctionComponent = () => {
 
   const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
-  const noSymptomsContainerStyle = symptomOnsetDate
-    ? { ...style.noSymptomsContainer, opacity: 0.5 }
-    : style.noSymptomsContainer
+  const hasSymptomsContainerStyle = symptomOnsetDate ? {} : { opacity: 0.5 }
 
-  const dateInputStyle = symptomOnsetDate ? {} : { opacity: 0.5 }
+  const noSymptomsContainerStyle = symptomOnsetDate ? { opacity: 0.5 } : {}
 
   return (
     <View style={style.container}>
       <View>
         <Text style={style.headerText}>
-          {t("export.symptom_onset.when_did_your")}
+          {t("export.symptom_onset.symptoms")}
         </Text>
 
-        <View style={style.inputContainer}>
-          <Text style={style.inputLabel}>
-            {t("export.symptom_onset.symptom_onset_date")}
+        <View style={style.radioButtonsContainer}>
+          <Text style={style.subheaderText}>
+            {t("export.symptom_onset.did_you_have_symptoms")}
           </Text>
-          <View style={dateInputStyle}>
-            {Platform.OS === "android" && (
-              <Pressable
-                onPress={handleOnPressDateInput}
-                style={style.dateInput}
-              >
-                <Text style={style.dateInputText}>{formattedDate}</Text>
-              </Pressable>
-            )}
-            {showDatePicker && (
-              <DatePicker
-                date={symptomOnsetDate}
-                handleOnChangeTestDate={handleOnChangeTestDate}
-              />
-            )}
+          <View style={noSymptomsContainerStyle}>
+            <Checkbox
+              label={t("export.symptom_onset.no_i_didnt_have")}
+              onPress={handleOnPressNoSymptoms}
+              checked={Boolean(!symptomOnsetDate)}
+            />
+          </View>
+          <View style={hasSymptomsContainerStyle}>
+            <Checkbox
+              label={t("export.symptom_onset.yes_i_did_have")}
+              onPress={handleOnPressHasSymptoms}
+              checked={Boolean(symptomOnsetDate)}
+            />
           </View>
         </View>
 
-        <View style={noSymptomsContainerStyle}>
-          <Checkbox
-            label={t("export.symptom_onset.i_didnt_have")}
-            onPress={handleOnPressNoSymptoms}
-            checked={Boolean(!symptomOnsetDate)}
-          />
-        </View>
+        {symptomOnsetDate ? (
+          <View>
+            <Text style={style.subheaderText}>
+              {t("export.symptom_onset.when_did_your_symptoms")}
+            </Text>
+            <View style={style.inputContainer}>
+              {Platform.OS === "android" && (
+                <Pressable
+                  onPress={handleOnPressDateInput}
+                  style={style.dateInput}
+                >
+                  <Text style={style.dateInputText}>{formattedDate}</Text>
+                </Pressable>
+              )}
+              {showDatePicker && (
+                <DatePicker
+                  date={symptomOnsetDate}
+                  handleOnChangeTestDate={handleOnChangeTestDate}
+                />
+              )}
+            </View>
+          </View>
+        ) : null}
       </View>
 
       <TouchableOpacity
@@ -135,7 +144,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
       mode="date"
       display={Platform.OS === "ios" ? "compact" : "calendar"}
       value={date ? dayjs(date).toDate() : dayjs().toDate()}
-      minimumDate={dayjs().subtract(4, "week").toDate()}
+      minimumDate={dayjs().subtract(2, "month").toDate()}
       maximumDate={dayjs().toDate()}
       onChange={handleOnChangeTestDate}
     />
@@ -153,26 +162,23 @@ const style = StyleSheet.create({
   },
   headerText: {
     ...Typography.header.x60,
-    marginBottom: Spacing.xxLarge,
+    marginBottom: Spacing.medium,
+  },
+  subheaderText: {
+    ...Typography.header.x30,
+    marginBottom: Spacing.small,
+  },
+  radioButtonsContainer: {
+    marginBottom: Spacing.small,
   },
   inputContainer: {
     marginBottom: Spacing.large,
-    paddingBottom: Spacing.large,
-    borderColor: Colors.neutral.shade10,
-    borderBottomWidth: Outlines.hairline,
-  },
-  inputLabel: {
-    ...Typography.form.inputLabel,
-    paddingBottom: Spacing.xxSmall,
   },
   dateInput: {
     ...Forms.textInput,
   },
   dateInputText: {
     ...Typography.body.x30,
-  },
-  noSymptomsContainer: {
-    marginBottom: Spacing.xSmall,
   },
   button: {
     ...Buttons.primary.base,
