@@ -385,13 +385,19 @@ class ExposureManagerUnitTests: XCTestCase {
       }
     }
     let mockENManager = ENManagerMock()
+    mockENManager.exposureNotificationStatusHandler = {
+      .active
+    }
     mockENManager.setExposureNotificationEnabledHandler = { _, completion in
-      resolveExpectation.fulfill()
       completion(nil)
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in
+      resolveExpectation.fulfill()
+    }) { (_, _, _) in
+      rejectExpectation.fulfill()
+    }
     wait(for: [resolveExpectation,
                rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)
@@ -409,8 +415,8 @@ class ExposureManagerUnitTests: XCTestCase {
     resolveExpectation.isInverted = true
 
     let mockENManager = ENManagerMock()
-    mockENManager.setExposureNotificationEnabledHandler = { _, _ in
-      rejectExpectation.fulfill()
+    mockENManager.setExposureNotificationEnabledHandler = { _, completion in
+      completion(nil)
     }
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
@@ -420,7 +426,11 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in
+      resolveExpectation.fulfill()
+    }) { (_, _, _) in
+      rejectExpectation.fulfill()
+    }
     wait(for: [resolveExpectation,
                rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)
