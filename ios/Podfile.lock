@@ -323,11 +323,11 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
-  - Realm (10.1.1):
-    - Realm/Headers (= 10.1.1)
-  - Realm/Headers (10.1.1)
-  - RealmSwift (10.1.1):
-    - Realm (= 10.1.1)
+  - Realm (10.1.2):
+    - Realm/Headers (= 10.1.2)
+  - Realm/Headers (10.1.2)
+  - RealmSwift (10.1.2):
+    - Realm (= 10.1.2)
   - RNCAsyncStorage (1.10.0):
     - React
   - RNCMaskedView (0.1.10):
@@ -584,8 +584,8 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  Realm: 784ca1da1453e31a9c9adc14445421a81f316119
-  RealmSwift: cc52fe0dcea56387274dff36e19219e055a3bb84
+  Realm: 031fdd4be7094d01b43af1a5e49766ab644bb800
+  RealmSwift: 43cf2e114baa9d17d34eb81e7d0def31f21cd444
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: dc1c0c6aa18a128df123598149f42e848d26a4ac

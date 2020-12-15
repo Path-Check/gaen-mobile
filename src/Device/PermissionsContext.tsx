@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useContext,
 } from "react"
-import { Platform } from "react-native"
 import {
   checkNotifications,
   requestNotifications,
@@ -17,20 +16,25 @@ import useLocationPermissions, {
   LocationPermissions,
 } from "./useLocationPermissions"
 
-export type NotificationPermissionStatus = "Unknown" | "Granted" | "Denied"
+export type NotificationPermissionStatus =
+  | "Unavailable"
+  | "Denied"
+  | "Blocked"
+  | "Granted"
+  | "Unknown"
 
 export const notificationPermissionStatusFromString = (
   status: string | void,
 ): NotificationPermissionStatus => {
   switch (status) {
-    case "unknown": {
-      return "Unknown"
+    case "unavailable": {
+      return "Unavailable"
     }
     case "denied": {
       return "Denied"
     }
     case "blocked": {
-      return "Denied"
+      return "Blocked"
     }
     case "granted": {
       return "Granted"
@@ -110,10 +114,12 @@ const useNotificationPermissions = () => {
   >("Unknown")
 
   useEffect(() => {
-    if (Platform.OS === "ios") {
-      checkNotificationPermission()
-    }
+    checkNotificationPermission()
   }, [])
+
+  useOnAppStateChange(() => {
+    checkNotificationPermission()
+  })
 
   const checkNotificationPermission = async () => {
     const { status } = await checkNotifications()
