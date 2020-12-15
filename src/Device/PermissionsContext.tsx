@@ -99,7 +99,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
           request: requestNotificationPermission,
         },
         exposureNotifications: {
-          status: enPermission,
+          status: "Active",
         },
       }}
     >

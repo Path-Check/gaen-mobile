@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState } from "react"
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import { Text } from "../../components"
+import { Text } from "."
 
-import { Colors, Iconography, Forms } from "../../styles"
-import { Icons } from "../../assets"
+import { Colors, Iconography, Forms } from "../styles"
+import { Icons } from "../assets"
 
 interface CheckboxProps {
   label: string

@@ -76,6 +76,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   }
 
   const handleOnPressSubmit = async () => {
+    navigation.navigate(AffectedUserFlowStackScreens.SymptomOnsetDate)
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
     trackEvent("product_analytics", "verification_code_submitted")
@@ -101,9 +102,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
           setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(
-            AffectedUserFlowStackScreens.AffectedUserPublishConsent,
-          )
+          navigation.navigate(AffectedUserFlowStackScreens.SymptomOnsetDate)
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(

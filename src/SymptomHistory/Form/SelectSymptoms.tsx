@@ -18,7 +18,7 @@ import {
   hasEmergencySymptoms,
   SymptomEntry,
 } from "../symptomHistory"
-import Checkbox from "./Checkbox"
+import Checkbox from "../../components/Checkbox"
 
 import {
   Affordances,
