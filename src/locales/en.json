@@ -97,7 +97,9 @@
     },
     "symptom_onset": {
       "when_did_your": "When did your symptoms start?",
-      "i_didnt_have": "I didn't have any symptoms"
+      "i_didnt_have": "I didn't have any symptoms",
+      "symptom_onset_date": "Symptom Onset Date",
+      "select_date": "Select Date"
     },
     "intro": {
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",

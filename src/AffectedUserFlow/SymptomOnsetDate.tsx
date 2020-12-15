@@ -1,75 +1,128 @@
 import React, { FunctionComponent, useState } from "react"
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
 import DateTimePicker from "@react-native-community/datetimepicker"
+import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
+import StaticSafeAreaInsets from "react-native-static-safe-area-insets"
 
-import { useStatusBarEffect } from "../navigation"
+import { AffectedUserFlowStackScreens, useStatusBarEffect } from "../navigation"
+import { useAffectedUserContext } from "./AffectedUserContext"
 import Checkbox from "../components/Checkbox"
 
-import { Colors, Forms, Outlines, Spacing, Typography } from "../styles"
+import {
+  Buttons,
+  Colors,
+  Forms,
+  Outlines,
+  Spacing,
+  Typography,
+} from "../styles"
+import { Icons } from "../assets"
 
 type Posix = number
 
 const SymptomOnsetDate: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
-  const [hasNoSymptoms, setHasNoSymptoms] = useState<boolean>(false)
-  const [date, setDate] = useState<Posix>(Date.now())
+  const { symptomOnsetDate, setSymptomOnsetDate } = useAffectedUserContext()
+
   const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
 
   const handleOnPressNoSymptoms = () => {
-    setHasNoSymptoms(!hasNoSymptoms)
+    setSymptomOnsetDate(null)
   }
 
   const handleOnPressDateInput = () => {
     setShowDatePickerAndroid(true)
   }
 
-  const handleOnChangeTestDate = (_event: Event, date: Date | undefined) => {
+  const handleOnChangeTestDate = (
+    _event: Event,
+    symptomOnsetDate: Date | undefined,
+  ) => {
     setShowDatePickerAndroid(false)
-    date && setDate(dayjs(date).valueOf())
+    symptomOnsetDate && setSymptomOnsetDate(dayjs(symptomOnsetDate).valueOf())
   }
 
-  const formattedDate = dayjs(date).format("MMMM DD, YYYY")
+  const handleOnPressContinue = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.AffectedUserPublishConsent)
+  }
+
+  const formattedDate = symptomOnsetDate
+    ? dayjs(symptomOnsetDate).format("MMMM DD, YYYY")
+    : t("export.symptom_onset.select_date")
 
   const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
+  const noSymptomsContainerStyle = symptomOnsetDate
+    ? { ...style.noSymptomsContainer, opacity: 0.5 }
+    : style.noSymptomsContainer
+
+  const dateInputStyle = symptomOnsetDate ? {} : { opacity: 0.5 }
+
   return (
     <View style={style.container}>
-      <Text style={style.headerText}>
-        {t("export.symptom_onset.when_did_your")}
-      </Text>
-      <View style={style.noSymptomsContainer}>
-        <Checkbox
-          label={t("export.symptom_onset.i_didnt_have")}
-          onPress={handleOnPressNoSymptoms}
-          checked={hasNoSymptoms}
-        />
-      </View>
-      <View style={style.inputContainer}>
-        <Text style={style.inputLabel}>
-          {t("escrow_verification.user_details_form.test_date")}
+      <View>
+        <Text style={style.headerText}>
+          {t("export.symptom_onset.when_did_your")}
         </Text>
-        {Platform.OS === "android" && (
-          <Pressable onPress={handleOnPressDateInput} style={style.dateInput}>
-            <Text style={style.dateInputText}>{formattedDate}</Text>
-          </Pressable>
-        )}
-        {showDatePicker && (
-          <DatePicker
-            date={date}
-            handleOnChangeTestDate={handleOnChangeTestDate}
+
+        <View style={style.inputContainer}>
+          <Text style={style.inputLabel}>
+            {t("export.symptom_onset.symptom_onset_date")}
+          </Text>
+          <View style={dateInputStyle}>
+            {Platform.OS === "android" && (
+              <Pressable
+                onPress={handleOnPressDateInput}
+                style={style.dateInput}
+              >
+                <Text style={style.dateInputText}>{formattedDate}</Text>
+              </Pressable>
+            )}
+            {showDatePicker && (
+              <DatePicker
+                date={symptomOnsetDate}
+                handleOnChangeTestDate={handleOnChangeTestDate}
+              />
+            )}
+          </View>
+        </View>
+
+        <View style={noSymptomsContainerStyle}>
+          <Checkbox
+            label={t("export.symptom_onset.i_didnt_have")}
+            onPress={handleOnPressNoSymptoms}
+            checked={Boolean(!symptomOnsetDate)}
           />
-        )}
+        </View>
       </View>
+
+      <TouchableOpacity
+        style={style.button}
+        onPress={handleOnPressContinue}
+        accessibilityLabel={t("common.continue")}
+      >
+        <Text style={style.buttonText}>{t("common.continue")}</Text>
+        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+      </TouchableOpacity>
     </View>
   )
 }
 
 interface DatePickerProps {
-  date: Posix
+  date: Posix | null
   handleOnChangeTestDate: (_event: Event, date: Date | undefined) => void
 }
 
@@ -81,7 +134,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
     <DateTimePicker
       mode="date"
       display={Platform.OS === "ios" ? "compact" : "calendar"}
-      value={dayjs(date).toDate()}
+      value={date ? dayjs(date).toDate() : dayjs().toDate()}
       minimumDate={dayjs().subtract(4, "week").toDate()}
       maximumDate={dayjs().toDate()}
       onChange={handleOnChangeTestDate}
@@ -92,21 +145,21 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background.primaryLight,
+    justifyContent: "space-between",
+    paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
+    paddingBottom: StaticSafeAreaInsets.safeAreaInsetsBottom + Spacing.small,
+    backgroundColor: Colors.background.primaryLight,
   },
   headerText: {
     ...Typography.header.x60,
     marginBottom: Spacing.xxLarge,
   },
-  noSymptomsContainer: {
-    paddingBottom: Spacing.xSmall,
-    marginBottom: Spacing.xSmall,
+  inputContainer: {
+    marginBottom: Spacing.large,
+    paddingBottom: Spacing.large,
     borderColor: Colors.neutral.shade10,
     borderBottomWidth: Outlines.hairline,
-  },
-  inputContainer: {
-    marginBottom: Spacing.medium,
   },
   inputLabel: {
     ...Typography.form.inputLabel,
@@ -117,6 +170,17 @@ const style = StyleSheet.create({
   },
   dateInputText: {
     ...Typography.body.x30,
+  },
+  noSymptomsContainer: {
+    marginBottom: Spacing.xSmall,
+  },
+  button: {
+    ...Buttons.primary.base,
+    marginBottom: Spacing.small,
+  },
+  buttonText: {
+    ...Typography.button.primary,
+    marginRight: Spacing.small,
   },
 })
 
