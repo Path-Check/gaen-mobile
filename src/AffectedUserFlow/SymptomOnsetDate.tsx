@@ -29,7 +29,6 @@ const SymptomOnsetDate: FunctionComponent = () => {
   const navigation = useNavigation()
 
   const { symptomOnsetDate, setSymptomOnsetDate } = useAffectedUserContext()
-
   const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
 
   const handleOnPressHasSymptoms = () => {
@@ -58,7 +57,7 @@ const SymptomOnsetDate: FunctionComponent = () => {
 
   const formattedDate = symptomOnsetDate
     ? dayjs(symptomOnsetDate).format("MMMM DD, YYYY")
-    : t("export.symptom_onset.select_date")
+    : ""
 
   const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
