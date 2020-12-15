@@ -9,6 +9,7 @@ import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
+import { Platform } from "react-native"
 
 import * as GaenNativeModule from "../gaen/nativeModule"
 import * as DeviceInfoModule from "../Device/nativeModule"
