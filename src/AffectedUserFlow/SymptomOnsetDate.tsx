@@ -48,7 +48,11 @@ const SymptomOnsetDate: FunctionComponent = () => {
     symptomOnsetDate: Date | undefined,
   ) => {
     setShowDatePickerAndroid(false)
-    symptomOnsetDate && setSymptomOnsetDate(dayjs(symptomOnsetDate).valueOf())
+
+    if (symptomOnsetDate) {
+      const posix = dayjs(symptomOnsetDate).valueOf()
+      setSymptomOnsetDate(posix)
+    }
   }
 
   const handleOnPressContinue = () => {
