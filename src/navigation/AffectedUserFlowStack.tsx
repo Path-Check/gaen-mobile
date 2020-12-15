@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { AffectedUserProvider } from "../AffectedUserFlow/AffectedUserContext"
 import Start from "../AffectedUserFlow/Start"
 import CodeInput from "../AffectedUserFlow/CodeInput/CodeInputScreen"
+import SymptomOnsetDate from "../AffectedUserFlow/SymptomOnsetDate"
 import Complete from "../AffectedUserFlow/Complete"
 import PublishConsent from "../AffectedUserFlow/PublishConsent/PublishConsentScreen"
 import VerificationCodeInfo from "../AffectedUserFlow/VerificationCodeInfo"
@@ -17,6 +18,7 @@ export type AffectedUserFlowStackParamList = {
   AffectedUserStart: undefined
   VerificationCodeInfo: undefined
   AffectedUserCodeInput: { code?: string; c?: string }
+  SymptomOnsetDate: undefined
   AffectedUserPublishConsent: undefined
   AffectedUserConfirmUpload: undefined
   AffectedUserExportDone: undefined
@@ -52,6 +54,14 @@ const AffectedUserStack: FunctionComponent = () => {
         <Stack.Screen
           name={AffectedUserFlowStackScreens.AffectedUserCodeInput}
           component={CodeInput}
+          options={{
+            ...Headers.headerMinimalOptions,
+            headerLeft: applyHeaderLeftBackButton(),
+          }}
+        />
+        <Stack.Screen
+          name={AffectedUserFlowStackScreens.SymptomOnsetDate}
+          component={SymptomOnsetDate}
           options={{
             ...Headers.headerMinimalOptions,
             headerLeft: applyHeaderLeftBackButton(),

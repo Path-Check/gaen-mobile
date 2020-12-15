@@ -95,6 +95,15 @@
       "network_connection_error": "There is no internet connection",
       "unknown_code_verification_error": "Try a different code"
     },
+    "symptom_onset": {
+      "symptoms": "Symptoms",
+      "no_i_didnt_have": "No, I didn't have any symptoms",
+      "yes_i_did_have": "Yes, I did have symptoms",
+      "symptom_onset_date": "Symptom Onset Date",
+      "select_date": "Select Date",
+      "did_you_have_symptoms": "Did you have any symptoms?",
+      "when_did_your_symptoms": "When did your symptoms begin?"
+    },
     "intro": {
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
       "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing.",

@@ -11,6 +11,7 @@ import { Stacks, WelcomeStackScreens } from "../navigation"
 
 type Token = string
 type Key = string
+type Posix = number
 
 export interface AffectedUserContextState {
   certificate: Token | null
@@ -21,6 +22,8 @@ export interface AffectedUserContextState {
   navigateOutOfStack: () => void
   linkCode: string | undefined
   setLinkCode: (linkCode: string | undefined) => void
+  symptomOnsetDate: Posix | null
+  setSymptomOnsetDate: (symptomOnsetDate: Posix | null) => void
 }
 
 interface AffectedUserProviderProps {
@@ -41,6 +44,9 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
   const [linkCode, setLinkCode] = useState<string | undefined>(undefined)
+  const [symptomOnsetDate, setSymptomOnsetDate] = useState<Posix | null>(
+    Date.now(),
+  )
 
   const setExposureSubmissionCredentials = (
     certificate: Token,
@@ -75,6 +81,8 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
         navigateOutOfStack,
         linkCode,
         setLinkCode,
+        symptomOnsetDate,
+        setSymptomOnsetDate,
       }}
     >
       {children}

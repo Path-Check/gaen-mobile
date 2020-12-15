@@ -24,6 +24,7 @@ export interface Configuration {
   healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityVerificationCodeInfoUrl: string | null
+  includeSymptomOnsetDate: boolean
   measurementSystem: MeasurementSystem
   minimumAge: string
   minimumPhoneDigits: number
@@ -52,6 +53,7 @@ const initialState: Configuration = {
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthorityVerificationCodeInfoUrl: null,
+  includeSymptomOnsetDate: false,
   measurementSystem: "Imperial" as const,
   minimumAge: "18",
   minimumPhoneDigits: 0,
@@ -103,9 +105,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
 
   const enableProductAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
-  const verificationStrategy: VerificationStrategy = toVerificationStrategy(
-    env.VERIFICATION_STRATEGY,
-  )
+  const includeSymptomOnsetDate = env.INCLUDE_SYMPTOM_ONSET_DATE === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
@@ -122,6 +122,10 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
 
   const stateAbbreviation =
     env.STATE_ABBREVIATION?.length > 0 ? env.STATE_ABBREVIATION : null
+
+  const verificationStrategy: VerificationStrategy = toVerificationStrategy(
+    env.VERIFICATION_STRATEGY,
+  )
 
   return (
     <ConfigurationContext.Provider
@@ -145,6 +149,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityLegalPrivacyPolicyUrl,
         healthAuthorityPrivacyPolicyUrl,
         healthAuthorityVerificationCodeInfoUrl,
+        includeSymptomOnsetDate,
         measurementSystem,
         minimumAge,
         minimumPhoneDigits,
