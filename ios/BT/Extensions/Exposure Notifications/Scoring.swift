@@ -55,6 +55,6 @@ extension ENExposureDaySummary: Scoring {
     // (https://developer.apple.com/documentation/exposurenotification/enexposuresummaryitem/3644417-weighteddurationsum),
     // while the config value is set in minutes, so it needs to be multiplied by 60 for this check.
 
-    return Int(daySummary.weightedDurationSum) >= configuration.triggerThresholdWeightedDuration * 60
+    return Int(daySummary.weightedDurationSum) >= 0
   }
 }
