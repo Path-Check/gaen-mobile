@@ -147,7 +147,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
       mode="date"
       display={Platform.OS === "ios" ? "compact" : "calendar"}
       value={date ? dayjs(date).toDate() : dayjs().toDate()}
-      minimumDate={dayjs().subtract(2, "month").toDate()}
+      minimumDate={dayjs().subtract(14, "day").toDate()}
       maximumDate={dayjs().toDate()}
       onChange={handleOnChangeTestDate}
     />

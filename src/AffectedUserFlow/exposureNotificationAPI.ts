@@ -94,6 +94,7 @@ class PostDiagnosisKeysRequest {
 
   private postKeys = async () => {
     try {
+      console.log(this.requestBody())
       const response = (await fetchWithTimeout(
         exposureUrl,
         {
@@ -208,7 +209,7 @@ export const postDiagnosisKeys = async (
 ): Promise<PostKeysResponse | PostKeysFailure> => {
   const toInterval = (posix: Posix): number => {
     const minutesSinceEpoch = posix / 60000
-    const interval = minutesSinceEpoch / 10
+    const interval = Math.floor(minutesSinceEpoch / 10)
     return interval
   }
 
@@ -225,7 +226,7 @@ export const postDiagnosisKeys = async (
   const data = symptomOnsetDate
     ? {
         ...baseData,
-        symptomOnSetInterval: toInterval(symptomOnsetDate),
+        symptomOnsetInterval: toInterval(symptomOnsetDate),
       }
     : baseData
 
