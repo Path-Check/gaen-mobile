@@ -81,8 +81,8 @@ end
 
 def replace_string_in_file(file_path:, regex:, value:)
   file_contents = File.read(file_path)
-  new_contents = file_contents.gsub(regex, value)
-  if new_contents.match(value)
+  if file_contents.match(regex)
+    new_contents = file_contents.gsub(regex, value)
     File.open(file_path, 'w') { |f| f.write new_contents }
   else
     failure_message "Couldn't match anything with #{regex} on #{file_path}"
@@ -178,6 +178,26 @@ def update_bundle_identifiers
   end
 end
 
+def update_android_app_links(domain)
+  puts "Adding android app link with domain #{domain}"
+  replace_string_in_file(
+    file_path: './android/app/build.gradle',
+    regex: /manifestPlaceholders (.+)/,
+    value: "manifestPlaceholders = [enxDomain: \"#{domain}\"]"
+  )
+end
+
+APP_LINKS_DOMAIN = "ENX_APPLINKS_DOMAIN"
+def update_app_links
+  environment = Dotenv.parse(File.open(ENV_FILE))
+  app_links_domain = environment.fetch(APP_LINKS_DOMAIN, false)
+
+  if app_links_domain
+    update_android_app_links(app_links_domain)
+    update_ios_applinks_domain(app_links_domain)
+  end
+end
+
 ################################# iOS Specific Configuration ##########################################
 
 def get_current_ios_en_api_version
@@ -218,7 +238,7 @@ def update_ios_en_region(new_en_region)
   exit 1
 end
 
-def update_enx_applinks_domain(domain)
+def update_ios_applinks_domain(domain)
   puts "Updating applinks domain to #{domain}"
   replace_string_in_file(
     file_path: './ios/COVIDSafePaths.xcodeproj/project.pbxproj',
@@ -229,13 +249,11 @@ end
 
 IOS_EN_REGION_KEY = "EN_DEVELOPER_REGION"
 IOS_EN_API_VERSION_KEY = "EN_API_VERSION"
-ENX_APPLINKS_DOMAIN = "ENX_APPLINKS_DOMAIN"
 
 def update_ios_configuration
   environment = Dotenv.parse(File.open(ENV_FILE))
   ios_en_region = environment.fetch(IOS_EN_REGION_KEY, false)
   ios_en_version = environment.fetch(IOS_EN_API_VERSION_KEY, 1)
-  enx_applinks_domain = environment.fetch(ENX_APPLINKS_DOMAIN, false)
 
   update_ios_en_api_version(ios_en_version)
 
@@ -244,10 +262,6 @@ def update_ios_configuration
   else
     failure_message "EN region is required"
     exit 1
-  end
-
-  if enx_applinks_domain
-    update_enx_applinks_domain(enx_applinks_domain)
   end
 end
 
@@ -264,6 +278,9 @@ if File.exist?(ENV_FILE)
   puts ""
   puts "🛠 Updating iOS Configuration:"
   update_ios_configuration
+  puts "✅ Done"
+  puts "🛠 Updating App Links:"
+  update_app_links
   puts "✅ Done"
   puts ""
 else

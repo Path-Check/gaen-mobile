@@ -162,6 +162,9 @@ android {
 
         //Fix problem in bt where .env.bt is not recognized
         resValue "string", "build_config_package", "org.pathcheck.covidsafepaths"
+
+        // Handle EN Express deep links
+        manifestPlaceholders = [enxDomain: project.env.get("ENX_APPLINKS_DOMAIN") ?: "*.en.express"]
     }
     splits {
         abi {
