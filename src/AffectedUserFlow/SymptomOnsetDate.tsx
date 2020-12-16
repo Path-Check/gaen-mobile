@@ -28,15 +28,21 @@ const SymptomOnsetDate: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
 
-  const { symptomOnsetDate, setSymptomOnsetDate } = useAffectedUserContext()
+  const {
+    setSymptomOnsetDate: setContextSymptomOnsetDate,
+  } = useAffectedUserContext()
   const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
+  const [
+    localSymptomOnsetDate,
+    setLocalSymptomOnsetDate,
+  ] = useState<Posix | null>(null)
 
   const handleOnPressHasSymptoms = () => {
-    setSymptomOnsetDate(Date.now())
+    setLocalSymptomOnsetDate(Date.now())
   }
 
   const handleOnPressNoSymptoms = () => {
-    setSymptomOnsetDate(null)
+    setLocalSymptomOnsetDate(null)
   }
 
   const handleOnPressDateInput = () => {
@@ -45,29 +51,32 @@ const SymptomOnsetDate: FunctionComponent = () => {
 
   const handleOnChangeTestDate = (
     _event: Event,
-    symptomOnsetDate: Date | undefined,
+    localSymptomOnsetDate: Date | undefined,
   ) => {
     setShowDatePickerAndroid(false)
 
-    if (symptomOnsetDate) {
-      const posix = dayjs(symptomOnsetDate).valueOf()
-      setSymptomOnsetDate(posix)
+    if (localSymptomOnsetDate) {
+      const posix = dayjs(localSymptomOnsetDate).valueOf()
+      setLocalSymptomOnsetDate(posix)
     }
   }
 
   const handleOnPressContinue = () => {
+    setContextSymptomOnsetDate(localSymptomOnsetDate)
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserPublishConsent)
   }
 
-  const formattedDate = symptomOnsetDate
-    ? dayjs(symptomOnsetDate).format("MMMM DD, YYYY")
+  const formattedDate = localSymptomOnsetDate
+    ? dayjs(localSymptomOnsetDate).format("MMMM DD, YYYY")
     : ""
 
   const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
-  const hasSymptomsContainerStyle = symptomOnsetDate ? {} : { opacity: 0.5 }
+  const hasSymptomsContainerStyle = localSymptomOnsetDate
+    ? {}
+    : { opacity: 0.5 }
 
-  const noSymptomsContainerStyle = symptomOnsetDate ? { opacity: 0.5 } : {}
+  const noSymptomsContainerStyle = localSymptomOnsetDate ? { opacity: 0.5 } : {}
 
   return (
     <View style={style.container}>
@@ -84,19 +93,19 @@ const SymptomOnsetDate: FunctionComponent = () => {
             <Checkbox
               label={t("export.symptom_onset.no_i_didnt_have")}
               onPress={handleOnPressNoSymptoms}
-              checked={Boolean(!symptomOnsetDate)}
+              checked={Boolean(!localSymptomOnsetDate)}
             />
           </View>
           <View style={hasSymptomsContainerStyle}>
             <Checkbox
               label={t("export.symptom_onset.yes_i_did_have")}
               onPress={handleOnPressHasSymptoms}
-              checked={Boolean(symptomOnsetDate)}
+              checked={Boolean(localSymptomOnsetDate)}
             />
           </View>
         </View>
 
-        {symptomOnsetDate ? (
+        {localSymptomOnsetDate ? (
           <View>
             <Text style={style.subheaderText}>
               {t("export.symptom_onset.when_did_your_symptoms")}
@@ -112,7 +121,7 @@ const SymptomOnsetDate: FunctionComponent = () => {
               )}
               {showDatePicker && (
                 <DatePicker
-                  date={symptomOnsetDate}
+                  date={localSymptomOnsetDate}
                   handleOnChangeTestDate={handleOnChangeTestDate}
                 />
               )}
@@ -147,7 +156,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
       mode="date"
       display={Platform.OS === "ios" ? "compact" : "calendar"}
       value={date ? dayjs(date).toDate() : dayjs().toDate()}
-      minimumDate={dayjs().subtract(2, "month").toDate()}
+      minimumDate={dayjs().subtract(14, "day").toDate()}
       maximumDate={dayjs().toDate()}
       onChange={handleOnChangeTestDate}
     />

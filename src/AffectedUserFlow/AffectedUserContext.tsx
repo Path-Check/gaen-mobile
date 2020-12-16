@@ -44,9 +44,8 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   const [hmacKey, setHmacKey] = useState<Key | null>(null)
   const [certificate, setCertificate] = useState<Token | null>(null)
   const [linkCode, setLinkCode] = useState<string | undefined>(undefined)
-  const [symptomOnsetDate, setSymptomOnsetDate] = useState<Posix | null>(
-    Date.now(),
-  )
+
+  const [symptomOnsetDate, setSymptomOnsetDate] = useState<Posix | null>(null)
 
   const setExposureSubmissionCredentials = (
     certificate: Token,

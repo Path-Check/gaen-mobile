@@ -31,6 +31,7 @@ describe("PublishConsentForm", () => {
           appPackageName=""
           regionCodes={[""]}
           navigateOutOfStack={() => {}}
+          symptomOnsetDate={null}
         />
       </ExposureContext.Provider>,
     )
@@ -85,6 +86,7 @@ describe("PublishConsentForm", () => {
           appPackageName={appPackageName}
           regionCodes={regionCodes}
           navigateOutOfStack={() => {}}
+          symptomOnsetDate={null}
         />,
       )
 
@@ -98,6 +100,7 @@ describe("PublishConsentForm", () => {
           hmacKey,
           appPackageName,
           revisionToken,
+          null,
         )
         expect(storeRevisionTokenSpy).toHaveBeenCalledWith(newRevisionToken)
         expect(navigateSpy).toHaveBeenCalledWith(
@@ -136,6 +139,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -180,6 +184,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -224,6 +229,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -266,6 +272,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -308,6 +315,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -351,6 +359,7 @@ describe("PublishConsentForm", () => {
             appPackageName=""
             regionCodes={[""]}
             navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 

@@ -31,6 +31,8 @@ import {
   PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
 
+type Posix = number
+
 interface PublishConsentFormProps {
   hmacKey: string
   certificate: string
@@ -40,6 +42,7 @@ interface PublishConsentFormProps {
   appPackageName: string
   regionCodes: string[]
   navigateOutOfStack: () => void
+  symptomOnsetDate: Posix | null
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
@@ -51,6 +54,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   appPackageName,
   regionCodes,
   navigateOutOfStack,
+  symptomOnsetDate,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
@@ -162,6 +166,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       hmacKey,
       appPackageName,
       revisionToken,
+      symptomOnsetDate,
     )
     setIsLoading(false)
     if (response.kind === "success") {
