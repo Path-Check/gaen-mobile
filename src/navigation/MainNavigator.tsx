@@ -54,7 +54,7 @@ const settingsStackTransitionPreset = Platform.select({
 })
 
 const customPrefixes = env.DEEP_LINK_PREFIXES?.split(",") || []
-const allPrefixes = ["pathcheck://", "https://*.en.express/", ...customPrefixes]
+const allPrefixes = ["pathcheck://", "https://*.en.express", ...customPrefixes]
 
 const linking: LinkingOptions = {
   prefixes: allPrefixes,
