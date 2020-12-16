@@ -94,7 +94,6 @@ class PostDiagnosisKeysRequest {
 
   private postKeys = async () => {
     try {
-      console.log(this.requestBody())
       const response = (await fetchWithTimeout(
         exposureUrl,
         {

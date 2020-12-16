@@ -35,7 +35,7 @@ const CodeInputScreen: FunctionComponent = () => {
 
   return (
     <View style={style.container}>
-      {true ? (
+      {isENActive ? (
         <CodeInputForm linkCode={linkCode} />
       ) : (
         <EnableExposureNotifications />

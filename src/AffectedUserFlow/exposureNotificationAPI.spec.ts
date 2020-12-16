@@ -21,6 +21,7 @@ describe("postDiagnosisKeys", () => {
     const hmacKey = "hmacKey"
     const appPackageName = "appPackageName"
     const revisionToken = "revisionToken"
+    const symptomOnsetDate = null
 
     const fetchWithTimeoutSpy = fetchWithTimeout as jest.Mock
     fetchWithTimeoutSpy.mockRejectedValueOnce("error")
@@ -32,6 +33,7 @@ describe("postDiagnosisKeys", () => {
       hmacKey,
       appPackageName,
       revisionToken,
+      symptomOnsetDate,
     )
 
     // The constants are taken from "__mocks__/react-native-config.js"
@@ -73,6 +75,7 @@ describe("postDiagnosisKeys", () => {
         "hmacKey",
         "appPackageName",
         "revisionToken",
+        null,
       )
 
       expect(result).toEqual({
@@ -103,6 +106,7 @@ describe("postDiagnosisKeys", () => {
         "hmacKey",
         "appPackageName",
         "revisionToken",
+        null,
       )
 
       expect(result).toEqual({
@@ -134,6 +138,7 @@ describe("postDiagnosisKeys", () => {
         "hmacKey",
         "appPackageName",
         "revisionToken",
+        null,
       )
 
       expect(result).toEqual({
@@ -171,6 +176,7 @@ describe("postDiagnosisKeys", () => {
         "hmacKey",
         "appPackageName",
         "revisionToken",
+        null,
       )
 
       expect(result).toEqual({
@@ -209,6 +215,7 @@ describe("postDiagnosisKeys", () => {
         "hmacKey",
         "appPackageName",
         "revisionToken",
+        null,
       )
 
       expect(result).toEqual({
@@ -235,6 +242,7 @@ describe("postDiagnosisKeys", () => {
           "hmacKey",
           "appPackageName",
           "revisionToken",
+          null,
         )
 
         expect(result).toEqual({
@@ -257,6 +265,7 @@ describe("postDiagnosisKeys", () => {
           "hmacKey",
           "appPackageName",
           "revisionToken",
+          null,
         )
 
         expect(result).toEqual({
@@ -283,6 +292,7 @@ describe("postDiagnosisKeys", () => {
           "hmacKey",
           "appPackageName",
           "revisionToken",
+          null,
         )
 
         expect(result).toEqual({
