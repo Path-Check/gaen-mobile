@@ -57,6 +57,8 @@ type RegionCode = string
 
 const DEFAULT_PADDING = ""
 
+type Posix = number
+
 type PostDiagnosisKeysRequestData = {
   temporaryExposureKeys: ExposureKey[]
   regions: RegionCode[]
@@ -65,6 +67,7 @@ type PostDiagnosisKeysRequestData = {
   padding: string
   appPackageName: string
   revisionToken: string
+  symptomOnsetInterval?: Posix
 }
 
 class PostDiagnosisKeysRequest {
@@ -201,8 +204,15 @@ export const postDiagnosisKeys = async (
   hmacKey: string,
   appPackageName: string,
   revisionToken: string,
+  symptomOnsetDate: Posix | null,
 ): Promise<PostKeysResponse | PostKeysFailure> => {
-  return await PostDiagnosisKeysRequest.perform({
+  const toInterval = (posix: Posix): number => {
+    const minutesSinceEpoch = posix / 60000
+    const interval = Math.floor(minutesSinceEpoch / 10)
+    return interval
+  }
+
+  const baseData = {
     temporaryExposureKeys: exposureKeys,
     regions: regionCodes,
     appPackageName,
@@ -210,5 +220,14 @@ export const postDiagnosisKeys = async (
     hmackey: hmacKey,
     padding: DEFAULT_PADDING,
     revisionToken,
-  })
+  }
+
+  const data = symptomOnsetDate
+    ? {
+        ...baseData,
+        symptomOnsetInterval: toInterval(symptomOnsetDate),
+      }
+    : baseData
+
+  return await PostDiagnosisKeysRequest.perform(data)
 }

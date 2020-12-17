@@ -1,58 +1,52 @@
 import { useTranslation } from "react-i18next"
 import { Alert, Platform } from "react-native"
 
-import { ENPermissionStatus } from "./Device/PermissionsContext"
-import { RequestAuthorizationError } from "./gaen/nativeModule"
 import { useApplicationName } from "./Device/useApplicationInfo"
 import { openAppSettings } from "./Device/nativeModule"
 import * as NativeModule from "./gaen/nativeModule"
+import { usePermissionsContext } from "./Device/PermissionsContext"
 
 export const useRequestExposureNotifications = (): (() => void) => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
+  const { exposureNotifications } = usePermissionsContext()
 
   const requestExposureNotifications = async () => {
-    const response = await NativeModule.requestAuthorization()
-    if (response.kind === "success") {
-      handleENRequestSuccess(response.status)
+    if (exposureNotifications.status === "LocationOffAndRequired") {
+      showEnableLocationAlert()
+    } else if (exposureNotifications.status === "BluetoothOff") {
+      showEnableBluetoothAlert()
     } else {
-      handleENRequestFailure(response.error)
-    }
-  }
+      const response = await NativeModule.requestAuthorization()
 
-  const handleENRequestSuccess = (status: ENPermissionStatus) => {
-    switch (status) {
-      case "Active":
-        break
-      case "BluetoothOff":
-        showEnableBluetoothAlert()
-        break
-      default:
-        showBaseExposureNotificationsAlert()
-    }
-  }
-
-  const handleENRequestFailure = (error: RequestAuthorizationError) => {
-    switch (error) {
-      case "Restricted":
-        showSetToActiveRegionAlert()
-        break
-      case "NotAuthorized":
-        showBaseExposureNotificationsAlert()
-        break
-      case "Unknown":
-        showBaseExposureNotificationsAlert()
-        break
-      default:
-        showBaseExposureNotificationsAlert()
-    }
-  }
-
-  const showBaseExposureNotificationsAlert = () => {
-    if (Platform.OS === "ios") {
-      showShareExposureInformationAlert()
-    } else {
-      showUseExposureNotificationsAlert()
+      if (response.kind === "success") {
+        switch (response.status) {
+          case "Active":
+            break
+          default:
+            showBaseExposureNotificationsAlert()
+        }
+      } else if (response.kind === "failure") {
+        switch (response.error) {
+          case "BluetoothOff":
+            showEnableBluetoothAlert()
+            break
+          case "LocationOffAndRequired":
+            showEnableLocationAlert()
+            break
+          case "Restricted":
+            showSetToActiveRegionAlert()
+            break
+          case "NotAuthorized":
+            showBaseExposureNotificationsAlert()
+            break
+          case "Unknown":
+            showBaseExposureNotificationsAlert()
+            break
+          default:
+            showBaseExposureNotificationsAlert()
+        }
+      }
     }
   }
 
@@ -67,6 +61,14 @@ export const useRequestExposureNotifications = (): (() => void) => {
         onPress: () => openAppSettings(),
       },
     ])
+  }
+
+  const showBaseExposureNotificationsAlert = () => {
+    if (Platform.OS === "ios") {
+      showShareExposureInformationAlert()
+    } else {
+      showUseExposureNotificationsAlert()
+    }
   }
 
   const showUseExposureNotificationsAlert = () => {
@@ -98,6 +100,15 @@ export const useRequestExposureNotifications = (): (() => void) => {
         applicationName,
       }),
       t("exposure_notification_alerts.bluetooth_body"),
+    )
+  }
+
+  const showEnableLocationAlert = () => {
+    showAlert(
+      t("exposure_notification_alerts.location_title", {
+        applicationName,
+      }),
+      t("exposure_notification_alerts.location_body", { applicationName }),
     )
   }
 

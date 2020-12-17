@@ -25,6 +25,7 @@ import {
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 import Logger from "../../logger"
+import { useConfigurationContext } from "../../ConfigurationContext"
 
 import {
   Spacing,
@@ -52,6 +53,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
     setExposureSubmissionCredentials,
     setExposureKeys,
   } = useAffectedUserContext()
+  const { includeSymptomOnsetDate } = useConfigurationContext()
 
   const [code, setCode] = useState(linkCode || "")
   const [isLoading, setIsLoading] = useState(false)
@@ -74,6 +76,10 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const handleOnPressSecondaryButton = () => {
     navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
   }
+
+  const nextScreen = includeSymptomOnsetDate
+    ? AffectedUserFlowStackScreens.SymptomOnsetDate
+    : AffectedUserFlowStackScreens.AffectedUserPublishConsent
 
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
@@ -101,9 +107,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
           setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(
-            AffectedUserFlowStackScreens.AffectedUserPublishConsent,
-          )
+          navigation.navigate(nextScreen)
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(

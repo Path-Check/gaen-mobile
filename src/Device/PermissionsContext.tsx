@@ -9,12 +9,12 @@ import {
   checkNotifications,
   requestNotifications,
 } from "react-native-permissions"
+import { Platform } from "react-native"
 
 import * as GaenNativeModule from "../gaen/nativeModule"
+import * as DeviceInfoModule from "../Device/nativeModule"
+
 import useOnAppStateChange from "./useOnAppStateChange"
-import useLocationPermissions, {
-  LocationPermissions,
-} from "./useLocationPermissions"
 
 export type NotificationPermissionStatus =
   | "Unavailable"
@@ -50,12 +50,14 @@ export type ENPermissionStatus =
   | "Active"
   | "Disabled"
   | "BluetoothOff"
+  | "LocationOffAndRequired"
   | "Restricted"
   | "Paused"
   | "Unauthorized"
 
+export type LocationRequirement = "Required" | "NotRequired" | "Unknown"
+
 export interface PermissionsContextState {
-  locationPermissions: LocationPermissions
   notification: {
     status: NotificationPermissionStatus
     check: () => void
@@ -64,10 +66,10 @@ export interface PermissionsContextState {
   exposureNotifications: {
     status: ENPermissionStatus
   }
+  locationRequirement: LocationRequirement
 }
 
 const initialState = {
-  locationPermissions: "RequiredOff" as const,
   notification: {
     status: "Unknown" as const,
     check: () => {},
@@ -76,23 +78,23 @@ const initialState = {
   exposureNotifications: {
     status: "Unknown" as const,
   },
+  locationRequirement: "Unknown" as const,
 }
 
 const PermissionsContext = createContext<PermissionsContextState>(initialState)
 
 const PermissionsProvider: FunctionComponent = ({ children }) => {
-  const locationPermissions = useLocationPermissions()
   const { enPermission } = useENPermissions()
   const {
     notificationPermission,
     checkNotificationPermission,
     requestNotificationPermission,
   } = useNotificationPermissions()
+  const locationRequirement = useLocationRequirement()
 
   return (
     <PermissionsContext.Provider
       value={{
-        locationPermissions,
         notification: {
           status: notificationPermission,
           check: checkNotificationPermission,
@@ -101,6 +103,7 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
         exposureNotifications: {
           status: enPermission,
         },
+        locationRequirement,
       }}
     >
       {children}
@@ -172,6 +175,24 @@ const useENPermissions = () => {
   return {
     enPermission: enPermissionStatus,
   }
+}
+
+const useLocationRequirement = (): LocationRequirement => {
+  const doesDeviceSupportLocationlessScanning = async () => {
+    return await DeviceInfoModule.doesDeviceSupportLocationlessScanning()
+  }
+
+  const determineLocationRequirement = () => {
+    if (Platform.OS === "ios") {
+      return "NotRequired"
+    } else if (doesDeviceSupportLocationlessScanning()) {
+      return "NotRequired"
+    } else {
+      return "Required"
+    }
+  }
+
+  return determineLocationRequirement()
 }
 
 const usePermissionsContext = (): PermissionsContextState => {

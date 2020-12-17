@@ -76,11 +76,7 @@ const AnimatedCircle: FunctionComponent<AnimatedCircleProps> = ({
     })
   }, [])
 
-  if (isReduceMotionEnabled) {
-    return null
-  }
-
-  return (
+  return !isReduceMotionEnabled ? (
     <Animated.View
       style={{
         position: "absolute",
@@ -94,7 +90,7 @@ const AnimatedCircle: FunctionComponent<AnimatedCircleProps> = ({
         opacity: opacityAnimatedValue,
       }}
     />
-  )
+  ) : null
 }
 
 export default AnimatedCircle

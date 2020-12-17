@@ -23,4 +23,18 @@ public final class CallbackMessages {
   public static final String EN_AUTHORIZATION_UNAUTHORIZED = "UNAUTHORIZED";
   public static final String EN_STATUS_ACTIVE = "Active";
   public static final String EN_STATUS_DISABLED = "Disabled";
+  public static final String EN_STATUS_BLUETOOTH_OFF = "BluetoothOff";
+  public static final String EN_STATUS_LOCATION_OFF = "LocationOff";
+
+  public static final String EN_ERROR_ALREADY_STARTED = "AlreadyStarted";
+  public static final String EN_ERROR_NOT_SUPPORTED = "NotSupported";
+  public static final String EN_ERROR_REJECTED_OPT_IN = "RejectedOptIn";
+  public static final String EN_ERROR_SERVICE_DISABLED = "ServiceDisabled";
+  public static final String EN_ERROR_BLUETOOTH_DISABLED = "BluetoothDisabled";
+  public static final String EN_ERROR_TEMPORARILY_DISABLED = "TemporarilyDisabled";
+  public static final String EN_ERROR_FAILED_DISK_IO = "FailedDiskIO";
+  public static final String EN_ERROR_UNAUTHORIZED = "Unauthorized";
+  public static final String EN_ERROR_RATE_LIMITED = "RateLimited";
+  public static final String EN_ERROR_LOCATION_OFF = "LocationDisabled";
+  public static final String EN_ERROR_UNKNOWN = "Unknown";
 }
