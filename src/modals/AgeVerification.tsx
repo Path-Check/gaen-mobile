@@ -5,8 +5,9 @@ import { useTranslation } from "react-i18next"
 
 import { useConfigurationContext } from "../ConfigurationContext"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
-import { Stacks, useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
+import { useOnboardingNavigation } from "../Onboarding/useOnboardingNavigation"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
@@ -16,9 +17,10 @@ const AgeVerification: FunctionComponent = () => {
   const navigation = useNavigation()
   const { applicationName } = useApplicationInfo()
   const { minimumAge } = useConfigurationContext()
+  const { goToNextScreenFrom } = useOnboardingNavigation()
 
   const handleOnPressConfirm = () => {
-    navigation.navigate(Stacks.HowItWorks)
+    goToNextScreenFrom("AgeVerification")
   }
 
   const handleOnPressNo = () => {

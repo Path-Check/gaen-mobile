@@ -7,7 +7,7 @@ import React, {
 import { CommonActions, useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
-import { Stacks, WelcomeStackScreens } from "../navigation"
+import { Stacks, OnboardingRoutes } from "../navigation"
 
 type Token = string
 type Key = string
@@ -57,7 +57,7 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
 
   const navigateOutOfStack = () => {
     if (linkCode) {
-      const route = isOnboardingComplete ? "App" : WelcomeStackScreens.Welcome
+      const route = isOnboardingComplete ? "App" : OnboardingRoutes.Welcome
       navigation.dispatch(
         CommonActions.reset({
           index: 0,

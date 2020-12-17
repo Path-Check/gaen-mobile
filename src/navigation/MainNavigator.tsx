@@ -17,12 +17,13 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 
 import { ModalStackScreens, HomeStackScreens } from "./index"
-import { WelcomeStackScreens, Stacks } from "./index"
+import { OnboardingRoutes, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
 import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
-import Welcome from "../Welcome"
+import Welcome from "../Onboarding/Welcome"
+import AppTransition from "../Onboarding/AppTransition"
 import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
@@ -118,9 +119,18 @@ const MainNavigator: FunctionComponent = () => {
         ) : (
           <>
             <Stack.Screen
-              name={WelcomeStackScreens.Welcome}
+              name={OnboardingRoutes.Welcome}
               component={Welcome}
               options={{
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name={OnboardingRoutes.AppTransition}
+              component={AppTransition}
+              options={{
+                ...Headers.headerMinimalOptions,
+                headerLeft: applyHeaderLeftBackButton(),
                 gestureEnabled: false,
               }}
             />
