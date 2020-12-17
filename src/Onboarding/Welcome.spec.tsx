@@ -2,9 +2,9 @@ import React from "react"
 import { render } from "@testing-library/react-native"
 
 import Welcome from "./Welcome"
-import { useLocaleInfo, enabledLocales } from "./locales/languages"
+import { useLocaleInfo, enabledLocales } from "../locales/languages"
 
-jest.mock("./locales/languages.ts")
+jest.mock("../locales/languages.ts")
 jest.mock("@react-navigation/native")
 ;(useLocaleInfo as jest.Mock).mockReturnValue({
   localeCode: "en",

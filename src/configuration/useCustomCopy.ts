@@ -14,6 +14,11 @@ interface CustomCopy {
   healthAuthorityName: string
   verificationCodeInfo?: string
   verificationCodeHowDoIGet?: string
+  appTransition?: {
+    header: string
+    body1: string
+    body2: string
+  }
 }
 
 const customCopyByLocale = copy as Resource

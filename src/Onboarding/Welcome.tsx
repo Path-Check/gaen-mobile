@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { StatusBar, Text } from "./components"
-import { useLocaleInfo, enabledLocales } from "./locales/languages"
-import { useApplicationName } from "./Device/useApplicationInfo"
-import { useConfigurationContext } from "./ConfigurationContext"
-import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
-import { useCustomCopy } from "./configuration/useCustomCopy"
+import { StatusBar, Text } from "../components"
+import { useLocaleInfo, enabledLocales } from "../locales/languages"
+import { useApplicationName } from "../Device/useApplicationInfo"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 
-import { Images, Icons } from "./assets"
+import { Images, Icons } from "../assets"
 import {
   Spacing,
   Colors,
@@ -19,7 +18,8 @@ import {
   Outlines,
   Layout,
   Buttons,
-} from "./styles"
+} from "../styles"
+import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -27,7 +27,7 @@ const Welcome: FunctionComponent = () => {
   const { t } = useTranslation()
   const { languageName } = useLocaleInfo()
   const { applicationName } = useApplicationName()
-  const { displayAgeVerification } = useConfigurationContext()
+  const { goToNextScreenFrom } = useOnboardingNavigation()
 
   const { welcomeMessage: customWelcomeMessage } = useCustomCopy()
   const welcomeMessage =
@@ -38,11 +38,7 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    if (displayAgeVerification) {
-      navigation.navigate(ModalStackScreens.AgeVerification)
-    } else {
-      navigation.navigate(Stacks.HowItWorks)
-    }
+    goToNextScreenFrom("Welcome")
   }
 
   const showLanguagePicker = enabledLocales().length > 1
