@@ -42,9 +42,8 @@ type OnboardingNavigation = {
 export const useOnboardingNavigation = (): OnboardingNavigation => {
   const {
     displayAgeVerification,
-    // displayAppTransition,
+    displayAppTransition,
   } = useConfigurationContext()
-  const displayAppTransition = true
   const navigation = useNavigation()
 
   const environment = {

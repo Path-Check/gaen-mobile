@@ -8,6 +8,7 @@ export interface Configuration {
   appDownloadLink: string
   appPackageName: string
   displayAcceptTermsOfService: boolean
+  displayAppTransition: false
   displayCallbackForm: boolean
   displayCallEmergencyServices: boolean
   displayCovidData: boolean
@@ -37,6 +38,7 @@ const initialState: Configuration = {
   appDownloadLink: "",
   appPackageName: "",
   displayAcceptTermsOfService: false,
+  displayAppTransition: false,
   displayCallbackForm: false,
   displayCallEmergencyServices: false,
   displayCovidData: false,
@@ -95,6 +97,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
+  const displayAppTransition = env.DISPLAY_APP_TRANSITION === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayCallEmergencyServices =
     env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
@@ -133,6 +136,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         appDownloadLink,
         appPackageName,
         displayAcceptTermsOfService,
+        displayAppTransition,
         displayCallbackForm,
         displayCallEmergencyServices,
         displayCovidData,
