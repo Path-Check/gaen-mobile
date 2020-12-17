@@ -5,6 +5,7 @@ import { SvgXml } from "react-native-svg"
 
 import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 
 import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
@@ -15,6 +16,11 @@ const AppTransition: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const { goToNextScreenFrom } = useOnboardingNavigation()
+  const { appTransition } = useCustomCopy()
+
+  const headerText = appTransition?.header || "[ No header found ]"
+  const body1Text = appTransition?.body1 || "[ No body1 found ]"
+  const body2Text = appTransition?.body2 || "[ No body2 found ]"
 
   const handleOnPressContinue = () => {
     goToNextScreenFrom("AppTransition")
@@ -33,15 +39,9 @@ const AppTransition: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("export.person_and_health_expert")}
         />
-        <Text style={style.headerText}>
-          {t("onboarding.app_transition.welcome_to")}
-        </Text>
-        <Text style={style.bodyText}>
-          {t("onboarding.app_transition.welcome_to")}
-        </Text>
-        <Text style={style.bodyText}>
-          {t("onboarding.app_transition.welcome_to")}
-        </Text>
+        <Text style={style.headerText}>{headerText}</Text>
+        <Text style={style.bodyText}>{body1Text}</Text>
+        <Text style={style.bodyText}>{body2Text}</Text>
       </View>
       <View>
         <Pressable

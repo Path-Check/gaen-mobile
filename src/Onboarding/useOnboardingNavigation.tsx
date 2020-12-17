@@ -15,9 +15,9 @@ type OnboardingScreen =
   | "AgeVerification"
   | "HowItWorks"
 const OnboardingScreens: { [key in OnboardingScreen]: OnboardingScreen } = {
-  Welcome: OnboardingRoutes.Welcome as OnboardingStep,
-  AppTransition: OnboardingRoutes.AppTransition as OnboardingStep,
-  AgeVerification: ModalStackScreens.AgeVerification as OnboardingStep,
+  Welcome: OnboardingRoutes.Welcome as OnboardingScreen,
+  AppTransition: OnboardingRoutes.AppTransition as OnboardingScreen,
+  AgeVerification: ModalStackScreens.AgeVerification as OnboardingScreen,
   HowItWorks: Stacks.HowItWorks as OnboardingScreen,
 }
 
@@ -81,8 +81,8 @@ export const determineOnboardingSteps = ({
 }: Environment): OnboardingStep[] => {
   const onboardingSteps: OnboardingStep[] = []
 
-  displayAppTransition && onboardingSteps.push("AppTransition")
-  displayAgeVerification && onboardingSteps.push("AgeVerification")
+  true && onboardingSteps.push("AppTransition")
+  true && onboardingSteps.push("AgeVerification")
 
   return onboardingSteps
 }
