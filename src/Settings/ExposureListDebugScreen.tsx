@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from "react"
+import React, { FunctionComponent, useCallback, useEffect } from "react"
 import { FlatList, StyleSheet, View } from "react-native"
 
 import { Text } from "../components"
@@ -7,7 +7,6 @@ import dayjs from "dayjs"
 
 import { Typography, Spacing, Outlines, Colors } from "../styles"
 import { useExposureContext } from "../ExposureContext"
-import { useFocusEffect } from "@react-navigation/native"
 
 const ExposureListDebugScreen: FunctionComponent = () => {
   const { exposureInfo, refreshExposureInfo } = useExposureContext()
@@ -20,7 +19,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
   })
   const showExposures = exposures.length > 0
 
-  useFocusEffect(
+  useEffect(
     useCallback(() => {
       refreshExposureInfo()
     }, [refreshExposureInfo]),
