@@ -357,7 +357,8 @@ class ExposureManagerUnitTests: XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: Date().posixRepresentation))
+                                          date: Date().posixRepresentation,
+                                          weightedDurationSum: 2000))
       return userState
     }
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,

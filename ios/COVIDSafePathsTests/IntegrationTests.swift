@@ -264,7 +264,8 @@ class IntegrationTests: XCTestCase {
     XCTAssertEqual(BTSecureStorage.shared.userState.exposures.count, 0)
 
     let exposure = Exposure(id: UUID().uuidString,
-                            date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000)
+                            date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000,
+                            weightedDurationSum: 2000)
     exposureManager.finish(.success([exposure]),
                            processedFileCount: 4,
                            lastProcessedUrlPath: .default,
