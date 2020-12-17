@@ -21,6 +21,6 @@ const toExposureDatum = (r: RawExposure): ExposureDatum => {
   return {
     id: r.id,
     date: DateTimeUtils.beginningOfDay(r.date),
-    weightedDurationSum: r.weightedDurationSum,
+    duration: r.weightedDurationSum,
   }
 }

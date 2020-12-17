@@ -15,7 +15,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
     return {
       id: e.id,
       date: dayjs(e.date).toString(),
-      duration: e.weightedDurationSum,
+      duration: e.duration,
     }
   })
   const showExposures = exposures.length > 0
