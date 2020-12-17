@@ -64,6 +64,11 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
 
   const iconSize = Iconography.small
 
+  const animatedCircleContainerStyle = {
+    ...style.animatedCircleContainer,
+    right: iconSize / 2,
+  }
+
   return (
     <TouchableOpacity
       style={statusContainerStyle}
@@ -86,7 +91,9 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
             style={style.statusIcon}
           />
           {exposureNotifications.status === "Active" && (
-            <AnimatedCircle iconSize={iconSize} />
+            <View style={animatedCircleContainerStyle}>
+              <AnimatedCircle iconSize={iconSize} />
+            </View>
           )}
         </View>
       </View>
@@ -124,6 +131,9 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-end",
+  },
+  animatedCircleContainer: {
+    position: "absolute",
   },
   statusIcon: {
     zIndex: Layout.zLevel1,
