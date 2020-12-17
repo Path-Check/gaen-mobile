@@ -3,12 +3,7 @@
     "welcomeMessage": "Welcome To",
     "about": "The PathCheck GAEN Mobile application is brought to you by PathCheck (this copy is customizable)",
     "legal": "PathCheck GAEN Mobile Legal Policies: (this copy is customizable)",
-    "healthAuthorityName": "Health Authority",
-    "appTransition": {
-      "header": "GuideSafe has a new look and feel",
-      "body1": "If you used GuideSafe prior to January 2021, this app will look and feel new to you.",
-      "body2": "Don't worry: any exposure information on your device has not been affected. We hope you enjoy this new version of GuideSafe."
-    }
+    "healthAuthorityName": "Health Authority"
   },
   "es_PR": {
     "welcomeMessage": "Bienvenido a",
