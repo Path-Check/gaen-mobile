@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next"
 import { ExposureDatum } from "../../exposure"
 import ExposureListItem from "./ExposureListItem"
 import ExposureSummary from "./ExposureSummary"
+import NextSteps from "./NextSteps"
 import { Text } from "../../components"
-import ExposureActions from "../detail/ExposureActions"
 
 import { Colors, Outlines, Spacing, Typography } from "../../styles"
 
@@ -31,21 +31,16 @@ const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
   return (
     <View style={style.container}>
       <View style={style.sectionContainer}>
-        <Text style={style.subheaderText}>{t("exposure_history.summary")}</Text>
+        <Text style={style.subheaderText}>
+          {t("exposure_history.exposure_report")}
+        </Text>
         <ExposureSummary
           exposure={mostRecentExposure}
           quarantineLength={quarantineLength}
         />
       </View>
 
-      <View style={style.sectionContainer}>
-        <Text style={style.subheaderText}>
-          {t("exposure_history.next_steps")}
-        </Text>
-        <ExposureActions />
-      </View>
-
-      <View style={style.sectionContainer}>
+      <View style={{ ...style.sectionContainer, paddingBottom: Spacing.small }}>
         <Text style={style.subheaderText}>
           {t("exposure_history.possible_exposures")}
         </Text>
@@ -53,6 +48,15 @@ const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
           {t("exposure_history.your_device_exchanged")}
         </Text>
         <ExposureList exposures={exposures} />
+      </View>
+
+      <View
+        style={{ ...style.sectionContainer, paddingBottom: Spacing.xSmall }}
+      >
+        <Text style={style.subheaderText}>
+          {t("exposure_history.next_steps")}
+        </Text>
+        <NextSteps />
       </View>
     </View>
   )
@@ -78,12 +82,13 @@ const style = StyleSheet.create({
   },
   sectionContainer: {
     marginBottom: Spacing.medium,
-    paddingBottom: Spacing.medium,
+    paddingBottom: Spacing.xLarge,
     borderColor: Colors.neutral.shade10,
     borderBottomWidth: Outlines.hairline,
   },
   subheaderText: {
     ...Typography.header.x30,
+    ...Typography.style.semibold,
     marginBottom: Spacing.xSmall,
   },
   bodyText: {
