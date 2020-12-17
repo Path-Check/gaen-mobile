@@ -20,6 +20,7 @@ import {
   Layout,
   Buttons,
 } from "./styles"
+import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -27,7 +28,7 @@ const Welcome: FunctionComponent = () => {
   const { t } = useTranslation()
   const { languageName } = useLocaleInfo()
   const { applicationName } = useApplicationName()
-  const { displayAgeVerification } = useConfigurationContext()
+  const { goToNextScreenFrom } = useOnboardingNavigation()
 
   const { welcomeMessage: customWelcomeMessage } = useCustomCopy()
   const welcomeMessage =
@@ -38,11 +39,7 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    if (displayAgeVerification) {
-      navigation.navigate(ModalStackScreens.AgeVerification)
-    } else {
-      navigation.navigate(Stacks.HowItWorks)
-    }
+    goToNextScreenFrom("Welcome")
   }
 
   const showLanguagePicker = enabledLocales().length > 1
