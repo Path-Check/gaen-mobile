@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
-import regression from "regression"
 
 import * as CovidData from "../covidData"
 import LineChart from "../LineChart"
 import { Text } from "../../components"
+import RiskLevelBadge from "../RiskLevelBadge"
 
 import { Layout, Typography, Spacing, Colors } from "../../styles"
 
@@ -22,48 +22,40 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
 
   const newCasesData = CovidData.toLineChartCasesNew(data.timeseries)
 
-  const toPoint = (newCaseDatum: number, idx: number): [number, number] => {
-    return [idx, newCaseDatum]
-  }
-  const newCasesPoints = newCasesData.map(toPoint)
-  const result = regression.linear(newCasesPoints)
-  const trend = result.equation[0]
+  const riskLevel = CovidData.toRiskLevel(data.riskLevels.overall)
 
   const lineChartWidth =
-    0.5 * (Layout.screenWidth - 2 * Spacing.medium - 2 * Spacing.medium)
+    Layout.screenWidth - 2 * Spacing.medium - 2 * Spacing.medium
   const lineChartHeight = 80
-
-  const trendText =
-    trend > 0 ? t("covid_data.trending_up") : t("covid_data.trending_down")
-  const trendColor =
-    trend > 0 ? Colors.accent.warning100 : Colors.accent.success100
 
   const source = data.source
   const sourceText = t("covid_data.source", { source })
-  const labelText = t("covid_data.new_cases")
+
+  const color = CovidData.toRiskLevelColor(riskLevel)
 
   return (
     <View testID={"covid-data"}>
-      <Text style={style.headerText}>
-        {t("covid_data.spread_of_the_virus_in", { locationName })}
-      </Text>
-      <View style={style.dataContainer}>
-        <View style={style.trendContainer}>
-          <Text style={{ ...style.trendText, color: trendColor }}>
-            {trendText}
+      <View style={style.headerContainer}>
+        <View style={style.headerTextContainer}>
+          <Text style={style.headerText}>
+            {t("covid_data.overall_risk_level_in", { locationName })}
           </Text>
-          <Text style={style.sourceText}>{t("covid_data.past_7_days")}</Text>
-          <Text style={style.legendText}>{labelText}</Text>
         </View>
-        <View style={style.chartContainer}>
-          <LineChart
-            lineData={newCasesData}
-            width={lineChartWidth}
-            height={lineChartHeight}
-            color={trendColor}
-          />
+        <View style={style.riskLevelBadgeContainer}>
+          <RiskLevelBadge riskLevel={riskLevel} />
         </View>
       </View>
+      <View style={style.chartContainer}>
+        <LineChart
+          lineData={newCasesData}
+          width={lineChartWidth}
+          height={lineChartHeight}
+          color={color}
+        />
+      </View>
+      <Text style={style.legendText}>
+        {t("covid_data.past_days", { days: CovidData.numberOfDaysInTrend })}
+      </Text>
       <Text style={style.sourceText}>{sourceText}</Text>
     </View>
   )
@@ -72,24 +64,27 @@ const CovidDataInfo: FunctionComponent<CovidDataInfoProps> = ({
 const style = StyleSheet.create({
   headerText: {
     ...Typography.body.x20,
+    marginBottom: Spacing.xSmall,
   },
-  dataContainer: {
+  headerContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: Spacing.small,
   },
-  trendContainer: {
-    flex: 4,
-    justifyContent: "center",
+  headerTextContainer: {
+    flex: 3,
+  },
+  riskLevelBadgeContainer: {
+    flex: 2,
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   chartContainer: {
-    flex: 3,
+    marginBottom: Spacing.xxSmall,
   },
   legendText: {
     ...Typography.body.x20,
-  },
-  trendText: {
-    ...Typography.header.x30,
-    ...Typography.style.semibold,
-    lineHeight: Typography.lineHeight.x40,
+    color: Colors.neutral.black,
   },
   sourceText: {
     ...Typography.body.x30,

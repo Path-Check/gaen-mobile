@@ -2,7 +2,7 @@ import { JsonDecoder } from "ts-data-json"
 import env from "react-native-config"
 
 import Logger from "../../logger"
-import { CovidData, CovidDatum } from "../covidData"
+import * as CovidData from "../covidData"
 
 const API_KEY = env.COVID_ACT_NOW_API_KEY
 
@@ -22,7 +22,7 @@ export type NetworkResponse = RequestSuccess | RequestFailure
 
 export interface RequestSuccess {
   kind: "success"
-  data: CovidData
+  data: CovidData.CovidData
 }
 
 type NetworkError =
@@ -60,21 +60,12 @@ type StateCovidData = {
   state: string
   population: number
   metrics: Metrics
-  riskLevels: RiskLevels
+  riskLevels: CovidData.RiskLevels
   actuals: Actuals
   actualsTimeseries: ActualsTimeseries
 }
 
 type Metrics = {
-  testPositivityRatio: number
-  caseDensity: number
-  contactTracerCapacityRatio: number
-  infectionRate: number
-  icuHeadroomRatio: number
-}
-
-type RiskLevels = {
-  overall: number
   testPositivityRatio: number
   caseDensity: number
   contactTracerCapacityRatio: number
@@ -93,7 +84,7 @@ const MetricsDecoder = JsonDecoder.object<Metrics>(
   "Metrics",
 )
 
-const RiskLevelsDecoder = JsonDecoder.object<RiskLevels>(
+const RiskLevelsDecoder = JsonDecoder.object<CovidData.RiskLevels>(
   {
     overall: JsonDecoder.number,
     testPositivityRatio: JsonDecoder.number,
@@ -143,7 +134,7 @@ const StateTimeseriesDecoder = JsonDecoder.object<StateCovidData>(
   "StateTimeseriesDecoder",
 )
 
-const toCovidData = (stateData: StateCovidData): CovidData => {
+const toCovidData = (stateData: StateCovidData): CovidData.CovidData => {
   const {
     fips,
     country,
@@ -164,7 +155,7 @@ const toCovidData = (stateData: StateCovidData): CovidData => {
     }, [])
   }
 
-  const toCovidDatum = (actualsDatum: ActualsDatum): CovidDatum => {
+  const toCovidDatum = (actualsDatum: ActualsDatum): CovidData.CovidDatum => {
     return {
       date: actualsDatum.date,
       positiveCasesNew: actualsDatum.newCases,

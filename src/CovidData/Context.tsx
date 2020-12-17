@@ -26,7 +26,7 @@ export type CovidDataContextState = {
 
 const initialRequest: CovidDataRequest = {
   status: "MISSING_INFO",
-  data: CovidData.empty,
+  data: CovidData.initial,
 }
 
 const initialState: CovidDataContextState = {
