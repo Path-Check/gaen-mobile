@@ -25,7 +25,9 @@ const LineChart: FunctionComponent<LineChartProps> = ({
 
   // Scale Data
   const max = Math.max(...lineData)
-  const min = Math.min(...lineData)
+  const minDataValue = Math.min(...lineData)
+  const difference = max - minDataValue
+  const min = minDataValue - difference * 0.2
   const shrinkYScaleBy = 1.25
   const scaleFactor = height / (max - min) / shrinkYScaleBy
   const toScale = (datum: number) => {
@@ -55,7 +57,7 @@ const LineChart: FunctionComponent<LineChartProps> = ({
         d={trendLinePath}
         fill="none"
         stroke={color}
-        strokeWidth="3"
+        strokeWidth="2"
         strokeLinecap="round"
       />
     </Svg>

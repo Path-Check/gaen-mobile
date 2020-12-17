@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import StaticSafeAreaInsets from "react-native-static-safe-area-insets"
 
 import { useConfigurationContext } from "../../ConfigurationContext"
 import { Text } from "../../components"
@@ -38,9 +39,11 @@ const CovidDataDashboard: FunctionComponent = () => {
       <ScrollView
         style={style.container}
         contentContainerStyle={style.contentContainer}
+        alwaysBounceVertical={false}
       >
         <StateData data={data} />
       </ScrollView>
+
       {healthAuthorityCovidDataUrl ? (
         <TouchableOpacity
           style={style.button}
@@ -69,7 +72,7 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.fixedBottom.base,
-    paddingBottom: Spacing.xLarge,
+    paddingBottom: StaticSafeAreaInsets.safeAreaInsetsBottom + Spacing.xSmall,
   },
   buttonText: {
     ...Typography.button.fixedBottom,

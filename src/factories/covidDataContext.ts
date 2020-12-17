@@ -7,6 +7,6 @@ export default Factory.define<CovidDataContextState>(() => ({
   locationName: "state",
   request: {
     status: "MISSING_INFO",
-    data: CovidData.empty,
+    data: CovidData.initial,
   },
 }))
