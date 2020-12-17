@@ -6,7 +6,6 @@ import { SvgXml } from "react-native-svg"
 import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 import { useCustomCopy } from "../configuration/useCustomCopy"
-
 import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
 import { Spacing, Colors, Typography, Buttons } from "../styles"

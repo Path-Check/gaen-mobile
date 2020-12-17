@@ -1,7 +1,14 @@
 import { useNavigation } from "@react-navigation/native"
 
 import { useConfigurationContext } from "../ConfigurationContext"
-import { OnboardingRoutes, Stacks, ModalStackScreens } from "../navigation"
+import {
+  OnboardingRoutes,
+  Stacks,
+  ModalStackScreens,
+  Stack,
+  ModalStackScreen,
+  OnboardingRoute,
+} from "../navigation"
 
 type OnboardingStep =
   | "Welcome"
@@ -9,16 +16,13 @@ type OnboardingStep =
   | "AgeVerification"
   | "HowItWorks"
 
-type OnboardingScreen =
-  | "Welcome"
-  | "AppTransition"
-  | "AgeVerification"
-  | "HowItWorks"
-const OnboardingScreens: { [key in OnboardingScreen]: OnboardingScreen } = {
-  Welcome: OnboardingRoutes.Welcome as OnboardingScreen,
-  AppTransition: OnboardingRoutes.AppTransition as OnboardingScreen,
-  AgeVerification: ModalStackScreens.AgeVerification as OnboardingScreen,
-  HowItWorks: Stacks.HowItWorks as OnboardingScreen,
+type OnboardingScreen = OnboardingRoute | ModalStackScreen | Stack
+
+const OnboardingScreens = {
+  Welcome: OnboardingRoutes.Welcome,
+  AppTransition: OnboardingRoutes.AppTransition,
+  AgeVerification: ModalStackScreens.AgeVerification,
+  HowItWorks: Stacks.HowItWorks,
 }
 
 export const toScreen = (step: OnboardingStep): OnboardingScreen => {
