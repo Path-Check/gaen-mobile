@@ -241,6 +241,9 @@
     "symptom_history": "Symptoms"
   },
   "onboarding": {
+    "app_transition": {
+      "welcome_to": "Welcome to the new app"
+    },
     "app_setup_complete_body": "{{applicationName}} is active. Thank you for helping break the chain of infection.",
     "app_setup_complete_header": "App Setup Complete!",
     "app_setup_incomplete_body": "{{applicationName}} requires Exposure Notifications and Bluetooth permissions to know when you have been exposed to COVID-19. You can authorize this in Settings.",

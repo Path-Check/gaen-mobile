@@ -131,6 +131,7 @@ const MainNavigator: FunctionComponent = () => {
               options={{
                 ...Headers.headerMinimalOptions,
                 headerLeft: applyHeaderLeftBackButton(),
+                gestureEnabled: false,
               }}
             />
             <Stack.Screen
