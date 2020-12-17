@@ -7,7 +7,7 @@ import { useConfigurationContext } from "../ConfigurationContext"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
 import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
-import { useOnboardingNavigation } from "../useOnboardingNavigation"
+import { useOnboardingNavigation } from "../Onboarding/useOnboardingNavigation"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 

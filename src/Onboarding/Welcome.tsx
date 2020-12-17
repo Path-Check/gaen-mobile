@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { StatusBar, Text } from "./components"
-import { useLocaleInfo, enabledLocales } from "./locales/languages"
-import { useApplicationName } from "./Device/useApplicationInfo"
-import { useConfigurationContext } from "./ConfigurationContext"
-import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
-import { useCustomCopy } from "./configuration/useCustomCopy"
+import { StatusBar, Text } from "../components"
+import { useLocaleInfo, enabledLocales } from "../locales/languages"
+import { useApplicationName } from "../Device/useApplicationInfo"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 
-import { Images, Icons } from "./assets"
+import { Images, Icons } from "../assets"
 import {
   Spacing,
   Colors,
@@ -19,7 +18,7 @@ import {
   Outlines,
   Layout,
   Buttons,
-} from "./styles"
+} from "../styles"
 import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
 const Welcome: FunctionComponent = () => {

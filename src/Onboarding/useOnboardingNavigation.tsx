@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 
-import { useConfigurationContext } from "./ConfigurationContext"
-import { OnboardingRoutes, Stacks, ModalStackScreens } from "./navigation"
+import { useConfigurationContext } from "../ConfigurationContext"
+import { OnboardingRoutes, Stacks, ModalStackScreens } from "../navigation"
 
 type OnboardingStep =
   | "Welcome"
@@ -41,11 +41,10 @@ type OnboardingNavigation = {
 
 export const useOnboardingNavigation = (): OnboardingNavigation => {
   const {
-    // displayAgeVerification,
+    displayAgeVerification,
     // displayAppTransition,
   } = useConfigurationContext()
   const displayAppTransition = true
-  const displayAgeVerification = true
   const navigation = useNavigation()
 
   const environment = {
@@ -53,7 +52,7 @@ export const useOnboardingNavigation = (): OnboardingNavigation => {
     displayAppTransition,
   }
 
-  const onboardingSteps = determineActivationSteps(environment)
+  const onboardingSteps = determineOnboardingSteps(environment)
 
   const goToNextScreenFrom = (currentStep: OnboardingStep) => {
     const currentStepIndex: number | undefined = onboardingSteps.findIndex(
@@ -77,7 +76,7 @@ export type Environment = {
   displayAppTransition: boolean
 }
 
-export const determineActivationSteps = ({
+export const determineOnboardingSteps = ({
   displayAgeVerification,
   displayAppTransition,
 }: Environment): OnboardingStep[] => {
