@@ -66,7 +66,7 @@ interface CustomCopy {
     "about": "",
     "legal": "",
     "verificationCodeInfo": "",
-    "verificationCodeHowDoIGet": ""
+    "verificationCodeHowDoIGet": "",
     "appTransition": {
       "header": "",
       "body1": "",
