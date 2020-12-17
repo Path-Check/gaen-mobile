@@ -8,7 +8,7 @@ export interface Configuration {
   appDownloadLink: string
   appPackageName: string
   displayAcceptTermsOfService: boolean
-  displayAppTransition: false
+  displayAppTransition: boolean
   displayCallbackForm: boolean
   displayCallEmergencyServices: boolean
   displayCovidData: boolean

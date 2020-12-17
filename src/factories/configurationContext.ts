@@ -5,6 +5,7 @@ export default Factory.define<Configuration>(() => ({
   appDownloadLink: "appDownloadLink",
   appPackageName: "appPackageName",
   displayAcceptTermsOfService: false,
+  displayAppTransition: false,
   displayCallbackForm: false,
   displayCallEmergencyServices: false,
   displayCovidData: false,

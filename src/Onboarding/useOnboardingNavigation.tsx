@@ -81,8 +81,8 @@ export const determineOnboardingSteps = ({
 }: Environment): OnboardingStep[] => {
   const onboardingSteps: OnboardingStep[] = []
 
-  true && onboardingSteps.push("AppTransition")
-  true && onboardingSteps.push("AgeVerification")
+  displayAppTransition && onboardingSteps.push("AppTransition")
+  displayAgeVerification && onboardingSteps.push("AgeVerification")
 
   return onboardingSteps
 }
