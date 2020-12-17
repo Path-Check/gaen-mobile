@@ -13,7 +13,7 @@ import { Buttons, Colors, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
-const ExposureActions: FunctionComponent = () => {
+const NextSteps: FunctionComponent = () => {
   const { t } = useTranslation()
   const isInternetReachable = useConnectionStatus()
   const navigation = useNavigation()
@@ -115,8 +115,7 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
 
 const style = StyleSheet.create({
   bottomSubheaderText: {
-    ...Typography.body.x30,
-    color: Colors.neutral.shade100,
+    ...Typography.body.x20,
     marginBottom: Spacing.medium,
   },
   connectivityWarningText: {
@@ -125,6 +124,7 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.thin.base,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -132,7 +132,6 @@ const style = StyleSheet.create({
   },
   buttonOutlined: {
     ...Buttons.outlined.thin,
-    marginTop: Spacing.small,
     marginBottom: Spacing.small,
   },
   buttonOutlinedText: {
@@ -141,4 +140,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ExposureActions
+export default NextSteps
