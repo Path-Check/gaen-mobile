@@ -35,7 +35,7 @@ class BTAPIClient: APIClient {
   static let shared: BTAPIClient = {
     var exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV1))!
     if #available(iOS 13.7, *) {
-      exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV6))!
+      exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV2))!
     }
     return BTAPIClient(
       downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
