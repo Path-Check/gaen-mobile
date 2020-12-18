@@ -23,11 +23,13 @@ describe("toExposureInfo", () => {
         {
           id: "ABCD-EFGH",
           date: twoDaysAgo,
+          weightedDurationSum: 2000,
         },
       ]
       const expected: ExposureDatum = {
         date: DateTimeUtils.beginningOfDay(twoDaysAgo),
         id: "ABCD-EFGH",
+        duration: 2000,
       }
 
       const result = toExposureInfo(rawExposures)
