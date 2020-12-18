@@ -26,8 +26,8 @@ extension String {
   // .env
   static let postKeysUrl = "POST_DIAGNOSIS_KEYS_URL"
   static let downloadBaseUrl = "DOWNLOAD_BASE_URL"
-  static let exposureConfigurationUrlV1 = "EXPOSURE_CONFIGURATION_JSON_RESOURCE_V1"
-  static let exposureConfigurationUrlV6 = "EXPOSURE_CONFIGURATION_JSON_RESOURCE_V6"
+  static let exposureConfigurationUrlV1 = "APPLE_EN_CONFIG_URL_V1"
+  static let exposureConfigurationUrlV2 = "APPLE_EN_CONFIG_URL_V2"
   static let downloadPath = "DOWNLOAD_PATH"
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
