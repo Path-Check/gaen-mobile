@@ -40,6 +40,7 @@ describe("Home", () => {
 
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
+    Share.share = jest.fn()
 
     const shareSpy = jest.spyOn(Share, "share")
 
@@ -52,7 +53,7 @@ describe("Home", () => {
     fireEvent.press(getByLabelText(`Share ${mockedApplicationName}`))
 
     expect(shareSpy).toHaveBeenCalledWith({
-      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadLink}`,
+      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadUrl}`,
     })
   })
 

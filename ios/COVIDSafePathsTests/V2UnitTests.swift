@@ -35,7 +35,8 @@ class V2UnitTests: XCTestCase {
 
     let userState = UserState()
     userState.exposures.append(Exposure(id: "3",
-                                        date: XCTestCase.halloween.posixRepresentation))
+                                        date: XCTestCase.halloween.posixRepresentation,
+                                        weightedDurationSum: 2000))
 
     let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
 
@@ -57,7 +58,8 @@ class V2UnitTests: XCTestCase {
     let storeExposureExpectation = self.expectation(description: "The exposure is stored")
     let userState = UserState()
     userState.exposures.append(Exposure(id: "3",
-                                        date: Date().posixRepresentation))
+                                        date: Date().posixRepresentation,
+                                        weightedDurationSum: 2000))
 
     let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
     (exposureManager.btSecureStorage as! BTSecureStorageMock).storeExposuresHandler = { exposures in

@@ -25,7 +25,8 @@ extension XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: XCTestCase.startOfDay.posixRepresentation))
+                                          date: XCTestCase.startOfDay.posixRepresentation,
+                                          weightedDurationSum: 2000))
       return userState
     }
     return btSecureStorageMock

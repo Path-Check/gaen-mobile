@@ -1,18 +1,16 @@
 import React, { FunctionComponent } from "react"
 import {
+  Linking,
   Alert,
   TouchableOpacity,
   Image,
   View,
-  Share,
   StyleSheet,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { Text } from "../components"
-import { useApplicationName } from "../Device/useApplicationInfo"
-import Logger from "../logger"
 
 import { Icons, Images } from "../assets"
 import {
@@ -24,44 +22,36 @@ import {
   Affordances,
 } from "../styles"
 
-interface ShareLinkProps {
-  appDownloadUrl: string
+interface HealthCheckLinkProps {
+  healthCheckUrl: string
 }
 
-const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
-  const { applicationName } = useApplicationName()
+const HealthCheckLink: FunctionComponent<HealthCheckLinkProps> = ({
+  healthCheckUrl,
+}) => {
   const { t } = useTranslation()
 
-  const handleOnPressShare = async () => {
-    try {
-      await Share.share({
-        message: t("home.bluetooth.share_message", {
-          applicationName,
-          appDownloadUrl,
-        }),
-      })
-    } catch (error) {
-      Logger.error("Dashboard: Share link did not work", {
-        appDownloadUrl,
-        error: error.message,
-      })
-      Alert.alert(t("home.error.share_link_failed"))
+  const handleOnPress = async () => {
+    const supported = await Linking.canOpenURL(healthCheckUrl)
+
+    if (supported) {
+      await Linking.openURL(healthCheckUrl)
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${healthCheckUrl}`)
     }
   }
 
   return (
     <TouchableOpacity
       style={style.shareContainer}
-      onPress={handleOnPressShare}
-      accessibilityLabel={t("home.bluetooth.share", { applicationName })}
+      onPress={handleOnPress}
+      accessibilityLabel={t("home.open_healthcheck")}
     >
-      <View style={style.shareImageContainer}>
-        <Image source={Images.HugEmoji} style={style.shareImage} />
+      <View style={style.imageContainer}>
+        <Image source={Images.HealthCheck} style={style.image} />
       </View>
-      <View style={style.shareTextContainer}>
-        <Text style={style.shareText}>
-          {t("home.bluetooth.share", { applicationName })}
-        </Text>
+      <View style={style.textContainer}>
+        <Text style={style.shareText}>{t("home.open_healthcheck")}</Text>
       </View>
       <SvgXml
         xml={Icons.ChevronRight}
@@ -82,15 +72,15 @@ const style = StyleSheet.create({
     borderColor: Colors.primary.shade100,
     borderWidth: Outlines.thin,
   },
-  shareImageContainer: {
+  imageContainer: {
     alignItems: "center",
     justifyContent: "center",
   },
-  shareImage: {
+  image: {
     width: Iconography.small,
     height: Iconography.small,
   },
-  shareTextContainer: {
+  textContainer: {
     flex: 1,
     marginLeft: Spacing.medium,
   },
@@ -101,4 +91,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ShareLink
+export default HealthCheckLink

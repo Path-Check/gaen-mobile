@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent } from "react"
+import React, { FunctionComponent, useCallback, useEffect } from "react"
 import { FlatList, StyleSheet, View } from "react-native"
 
 import { Text } from "../components"
@@ -9,15 +9,21 @@ import { Typography, Spacing, Outlines, Colors } from "../styles"
 import { useExposureContext } from "../ExposureContext"
 
 const ExposureListDebugScreen: FunctionComponent = () => {
-  const { exposureInfo, getCurrentExposures } = useExposureContext()
+  const { exposureInfo, refreshExposureInfo } = useExposureContext()
   const exposures = exposureInfo.map((e) => {
-    return { id: e.id, date: dayjs(e.date).toString() }
+    return {
+      id: e.id,
+      date: dayjs(e.date).toString(),
+      duration: e.duration,
+    }
   })
   const showExposures = exposures.length > 0
 
-  useEffect(() => {
-    getCurrentExposures()
-  }, [getCurrentExposures])
+  useEffect(
+    useCallback(() => {
+      refreshExposureInfo()
+    }, [refreshExposureInfo]),
+  )
 
   return (
     <>
@@ -25,12 +31,15 @@ const ExposureListDebugScreen: FunctionComponent = () => {
         <FlatList
           data={exposures}
           keyExtractor={(item) => item.id}
-          renderItem={(item) => (
+          renderItem={({ item }) => (
             <View
               testID={"exposure-list-debug-item"}
               style={style.flatlistRowView}
             >
-              <Text style={style.itemText}>Date: {item.item.date}</Text>
+              <Text style={style.itemText}>Date: {item.date}</Text>
+              <Text style={style.itemText}>
+                Duration (seconds): {item.duration}
+              </Text>
             </View>
           )}
         />
@@ -42,9 +51,7 @@ const ExposureListDebugScreen: FunctionComponent = () => {
 }
 
 const style = StyleSheet.create({
-  // eslint-disable-next-line react-native/no-color-literals
   flatlistRowView: {
-    flexDirection: "row",
     justifyContent: "space-between",
     paddingTop: Spacing.xxxSmall,
     paddingBottom: Spacing.xxxSmall,
