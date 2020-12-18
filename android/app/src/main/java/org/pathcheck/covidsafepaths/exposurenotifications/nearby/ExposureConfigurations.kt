@@ -37,7 +37,9 @@ class ExposureConfigurations(context: Context) {
         private val DEFAULT_INFECTIOUSNESS_WEIGHT = listOf(0.3, 1.0)
         private const val DEFAULT_INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING = 1
         private val DEFAULT_DAYS_SINCE_ONSET_TO_INFECTIOUSNESS = mapOf(
-            -14 to 0, -13 to 0,-12 to 0,-11 to 0,-10 to 0,-9 to 0,-8 to 0,-7 to 0,-6 to 0,-5 to 0,-4 to 0,-3 to 1, -2 to 2, -1 to 2, 0 to 2, 1 to 2, 2 to 2, 3 to 2, 4 to 1, 5 to 0, 6 to 0,
+            -14 to 0, -13 to 0, -12 to 0, -11 to 0, -10 to 0, -9 to 0 ,-8 to 0,
+            -7 to 0, -6 to 0, -5 to 0, -4 to 0, -3 to 1, -2 to 2, -1 to 2,
+            0 to 2, 1 to 2, 2 to 2, 3 to 2, 4 to 1, 5 to 0, 6 to 0,
             7 to 0, 8 to 0, 9 to 0, 10 to 0, 11 to 0, 12 to 0, 13 to 0, 14 to 0
         )
         private const val DEFAULT_REPORT_TYPE_WHEN_MISSING = 1
