@@ -1,5 +1,6 @@
 import CheckInCircle from "./checkInCircle.png"
 import ExclamationInCircle from "./exclamationInCircle.png"
+import HealthCheck from "./healthCheck.png"
 import HowItWorksGetNotified from "./howItWorksGetNotified.png"
 import HowItWorksIntroduction from "./howItWorksIntroduction.png"
 import HowItWorksPersonalPrivacy from "./howItWorksPersonalPrivacy.png"
@@ -19,6 +20,7 @@ import WelcomeImage from "./welcomeImage.png"
 export const Images = {
   CheckInCircle,
   ExclamationInCircle,
+  HealthCheck,
   HowItWorksGetNotified,
   HowItWorksIntroduction,
   HowItWorksPersonalPrivacy,

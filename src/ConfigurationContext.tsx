@@ -5,7 +5,7 @@ import env from "react-native-config"
 type MeasurementSystem = "Imperial" | "Metric"
 
 export interface Configuration {
-  appDownloadLink: string
+  appDownloadUrl: string | null
   appPackageName: string
   displayAcceptTermsOfService: boolean
   displayAppTransition: boolean
@@ -23,6 +23,7 @@ export interface Configuration {
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
+  healthAuthorityHealthCheckUrl: string | null
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityVerificationCodeInfoUrl: string | null
   includeSymptomOnsetDate: boolean
@@ -35,7 +36,7 @@ export interface Configuration {
 }
 
 const initialState: Configuration = {
-  appDownloadLink: "",
+  appDownloadUrl: null,
   appPackageName: "",
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
@@ -51,6 +52,7 @@ const initialState: Configuration = {
   healthAuthorityAdviceUrl: "",
   healthAuthorityCovidDataUrl: null,
   healthAuthorityEulaUrl: null,
+  healthAuthorityHealthCheckUrl: null,
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityPrivacyPolicyUrl: "",
@@ -88,8 +90,10 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
 
+  const appDownloadUrl = env.SHARE_APP_LINK || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
+  const healthAuthorityHealthCheckUrl = env.HEALTHCHECK_URL || null
   const healthAuthorityLegalPrivacyPolicyUrl =
     env.LEGAL_PRIVACY_POLICY_URL || null
   const healthAuthorityVerificationCodeInfoUrl =
@@ -116,7 +120,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const minimumAge = env.MINIMUM_AGE
   const minimumPhoneDigits = parseInt(env.MINIMUM_PHONE_DIGITS) || 0
 
-  const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
     android: env.ANDROID_APPLICATION_ID,
@@ -133,7 +136,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   return (
     <ConfigurationContext.Provider
       value={{
-        appDownloadLink,
+        appDownloadUrl,
         appPackageName,
         displayAcceptTermsOfService,
         displayAppTransition,
@@ -149,6 +152,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityAdviceUrl,
         healthAuthorityCovidDataUrl,
         healthAuthorityEulaUrl,
+        healthAuthorityHealthCheckUrl,
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl,
         healthAuthorityPrivacyPolicyUrl,

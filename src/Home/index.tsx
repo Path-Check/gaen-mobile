@@ -26,6 +26,7 @@ import CovidDataCard from "../CovidData/Card"
 import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
+import HealthCheckLink from "./HealthCheckLink"
 import CallEmergencyServices from "./CallEmergencyServices"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 
@@ -46,13 +47,16 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const {
+    appDownloadUrl,
     displayCallEmergencyServices,
     displayCovidData,
     displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
+    healthAuthorityHealthCheckUrl,
     verificationStrategy,
   } = useConfigurationContext()
+
   return (
     <>
       <StatusBar backgroundColor={Colors.background.primaryLight} />
@@ -69,7 +73,10 @@ const Home: FunctionComponent = () => {
         ) : (
           <EscrowVerificationFlowButton />
         )}
-        <ShareLink />
+        {healthAuthorityHealthCheckUrl && (
+          <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
+        )}
+        {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
         {displayCallEmergencyServices && (
