@@ -8,7 +8,6 @@
     "cancel": "Annulla",
     "continue": "Continua",
     "done": "Fatto",
-    "enable": "Attiva",
     "more": "Altro",
     "next": "Fatto",
     "something_went_wrong": "Si è verificato un errore",
@@ -50,8 +49,7 @@
   },
   "navigation": {
     "exposure_history": "Cronologia delle esposizioni",
-    "home": "Home",
-    "more_info": "Ulteriori informazioni"
+    "home": "Home"
   },
   "onboarding": {
     "notification_header": "Desideri ricevere notifiche quando potresti aver incrociato percorsi con il virus?",

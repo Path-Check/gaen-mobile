@@ -1,19 +1,127 @@
 {
   "_display_name": "Indonesia",
+  "about": {
+    "description": "Aplikasi {{applicationName}} disediakan oleh {{healthAuthorityName}} .",
+    "operating_system_abbr": "OS:",
+    "version": "Versi:"
+  },
+  "callback": {
+    "fill_out_the_info": "Isi informasi di bawah ini dan kontak dari {{healthAuthorityName}} akan menghubungi.",
+    "firstname": "Nama depan",
+    "lastname": "Nama keluarga",
+    "phone_number_required": "Nomor telepon (wajib)"
+  },
   "common": {
     "cancel": "Batal",
     "more": "Lebih",
     "next": "Selanjutnya"
+  },
+  "errors": {
+    "description": "Ada kesalahan yang tidak terduga. Silahkan coba lagi."
+  },
+  "escrow_verification": {
+    "user_details_form": {
+      "subheader": "Silahkan masukan nomer telepon dan tanggal test anda dan kami akan mengirimkan kode verifikasi anda."
+    }
+  },
+  "export": {
+    "complete_body_bluetooth": "Anda membantu menekan penyebaran virus dan melindungi orang lain di komunitas Anda.",
+    "consent_button_title": "Saya paham dan menyetujui",
+    "consent_warning_message": "Melanjutkan akan membatalkan kode verifikasi anda. Jika anda ingin membagikan hasil diagnosa anda di masa mendatang, anda harus terlebih dahulu mendapatkan kode verifikasi baru.",
+    "enable_exposure_notifications_body": "Anda harus mengaktifkan pemberitahuan keterpaparan/\"Exposure Notifications\" untuk melaporkan hasil tes positif.",
+    "error": {
+      "invalid_format": "Kode hanya boleh berisi angka dan huruf"
+    },
+    "intro": {
+      "body1": "Jika anda telah menerima kode verifikasi dari {{healthAuthorityName}} untuk test COVID-19 positif, anda bisa masukan kode verifikasi di layar berikut."
+    },
+    "publish_consent_title_bluetooth": "Beri tahu orang lain di komunitas Anda",
+    "symptom_onset": {
+      "symptoms": "Gejala"
+    }
+  },
+  "exposure_history": {
+    "exposure_detail": {
+      "header": "Seseorang yang berada di dekat Anda sejak itu dinyatakan positif COVID-19.",
+      "next_steps": "Langkah selanjutnya"
+    },
+    "health_guidelines": {
+      "six_feet_apart": "Jaga jarak 6 kaki"
+    },
+    "last_days": "14 hari terakhir",
+    "no_exposure_reports_over_past": "Anda belum menerima laporan eksposure selama 14 hari terakhir",
+    "possible_exposure": "Kemungkinan Eksposur",
+    "why_did_i_get_an_en_para": "Anda akan menerima pemberitahuan eksposur ketika seseorang yang telah berada di dekat anda kemudian menerima tes positif untuk COVID-19 dan memilih untuk memberi tahu orang lain."
+  },
+  "home": {
+    "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} akan tetap aktif setelah aplikasi ditutup",
+      "share": "Bagikan {{applicationName}}",
+      "tracing_off_header": "Deteksi Eksposur Mati",
+      "tracing_off_subheader": "Aktifkan Bluetooth dan \"Proximity Tracing\" untuk mendapatkan info tentang kemungkinan eksposur",
+      "tracing_on_header": "Pemberitahuan Eksposur Aktif"
+    },
+    "check_if_your_symptoms": "Masukkan gejala Anda dan dapatkan rekomendasi tentang panduan aman.",
+    "have_a_positive_test": "Memiliki tes positif?",
+    "location_info_body": "Google mengharuskan perangkat yang menggunakan Android 10 atau lebih rendah mengaktifkan layanan lokasi untuk mendeteksi eksposur. {{applicationName}} TIDAK melacak ataupun menyiman lokasi anda.",
+    "location_info_subheader": "{{applicationName}} tidak melacak ataupun menyimpan lokasi anda"
   },
   "label": {
     "launch_enable_notif": "Aktifkan Notifikasi",
     "launch_get_started": "Mulai",
     "launch_screen1_header": "Selamat datang di "
   },
+  "navigation": {
+    "home": "Dashboard",
+    "symptom_history": "Gejala"
+  },
   "onboarding": {
+    "app_setup_complete_body": "{{applicationName}} aktif. Terima kasih telah membantu memutus rantai infeksi.",
+    "app_setup_complete_header": "Penyiapan Aplikasi Selesai!",
+    "app_setup_incomplete_body": "{{applicationName}} membutuhkan Pemberitahuan Eksposur dan pengaktifan Bluetooth untuk mengetahui kapan Anda terekspos COVID-19. Anda dapat mengotorisasi ini di Pengaturan.",
+    "app_setup_incomplete_header": "Penyiapan Aplikasi Belum Selesai",
+    "app_setup_incomplete_location_body": "{{applicationName}} membutuhkan Pemberitahuan Eksposur, Bluetooth, dan izin Lokasi untuk mengetahui kapan Anda terpapar COVID-19. Anda dapat mengotorisasi ini di Pengaturan.",
+    "eula": "Perjanjian Hukum Pengguna Aplikasi",
+    "eula_agree_terms_of_use": "Saya setuju bahwa saya telah membaca dan menerima ketentuan penggunaan",
+    "i_am_over": "Ya, saya diatas {{minimumAge}}",
+    "location_alert_body": "Untuk menggunakan Pemberitahuan Eksposur, Layanan Lokasi harus diaktifkan",
+    "location_alert_header": "Aktifkan servis lokasi",
+    "notification_header": "Dapatkan notifikasi jika anda mungkin telah terekspos",
+    "protect_privacy": {
+      "subheader_1": "Saat Anda mengaktifkan Pemberitahuan Eksposur, telepon anda ditandai dengan ID acak yang sering berubah"
+    },
+    "proximity_tracing_body2": "Jika suatu pertemuan, data, dan informasi anda tetap anonim. Aplikasi tidak menyimpan data pribadi apa pun. Hanya ID acak yang dipertukarkan. Ini dihapus setelah 14 hari.",
+    "proximity_tracing_button": "Aktifkan Pemberitahuan Eksposur",
+    "proximity_tracing_header": "Aktifkan Pemberitahuan Eksposur",
+    "proximity_tracing_subheader1": "Bagaimana cara kerjanya?",
+    "screen1_header": "Bersama-sama, kita bisa memperlambat penyebaran COVID-19.",
+    "screen2_button": "Apakah privasi saya dilindungi?",
+    "screen2_header": "Ponsel anda mengingat perangkat lain yang ditemuinya, tetapi tidak akan mengidentifikasi anda kepada siapa pun.",
+    "screen3_button": "Bagaimana jika saya terekspos?",
+    "screen3_header": "Informasi pribadi Anda tidak pernah meninggalkan ponsel anda.",
+    "screen4_button": "Mulai",
     "terms_header_title": "Syarat Penggunaan"
   },
   "screen_titles": {
+    "exposure_history": "Eksposur",
+    "home": "Dashboard",
     "legal": "Hukum"
+  },
+  "self_assessment": {
+    "underlying_conditions": {
+      "lung_disease": "Penyakit paru-paru kronis, seperti asma sedang hingga berat, COPD, \"cystic fibrosis\", atau \"pulmonary fibrosis\""
+    }
+  },
+  "settings": {
+    "delete_data_disclosure1": "Ketika anda menekan \"Hapus Data Saya\", semua data yang telah disimpan oleh {{applicationName}} akan dihapus:",
+    "delete_data_disclosure2": "Perihal ini tidak akan menghapus data yang dibuat atau dikoleksi oleh perangkat anda untuk Pemberitahuan Eksposur.\n\nAnda dapat menghapus data tambahan ini di perangkat pengaturan.",
+    "delete_my_data": "Hapus data saya",
+    "share_anonymized_data": "Bagikan data yang dianonimkan"
+  },
+  "symptom_history": {
+    "symptom_history": "Gejala"
+  },
+  "verification_code_alerts": {
+    "unknown_body": "Terjadi kesalahan yang tidak terduga. Silahkan coba lagi."
   }
 }

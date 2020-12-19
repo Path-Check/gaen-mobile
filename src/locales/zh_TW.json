@@ -18,7 +18,6 @@
   "common": {
     "back": "返回",
     "cancel": "取消",
-    "close": "關閉",
     "close_screen": "關閉畫面",
     "continue": "繼續",
     "done": "完成",
@@ -27,7 +26,6 @@
     "maybe_later": "也許以後",
     "more": "更多資訊",
     "next": "下一個",
-    "no": "不",
     "no_thanks": "不用了，謝謝",
     "off": "關",
     "on": "開",
@@ -38,31 +36,20 @@
     "something_went_wrong": "有什麼出現了問題",
     "start": "開始",
     "submit": "提交",
-    "success": "成功",
-    "yes": "是的"
+    "success": "成功"
   },
   "covid_data": {
     "apologies_data_unavailable": "很抱歉， 新冠肺炎（COVID-19）數據不可用。",
-    "cases_today": "今日案例人數",
-    "covid_coverage": "新冠肺炎（COVID-19）病毒覆蓋",
-    "covid_data": "COVID數據",
     "daily_new_cases": "每日新增案例",
-    "deaths_today": "今日死亡人數",
-    "down_from_last_week": "較上週下降",
     "error_getting_data": "很抱歉，我們無法取得{{location}}最新的COVID案例數據。",
     "infection_rate": "感染率",
     "new_cases": "新增案例",
-    "past_7_days": "過去7天內",
     "per_100k": "每10萬",
     "positive_test_rate": "確診率",
     "see_more": "查看更多",
     "source": "來源： {{source}}",
-    "spread_of_the_virus_in": "病毒在{{locationName}}傳播",
-    "total_cases": "案例總數",
-    "total_deaths": "死亡總數",
     "trending_down": "下降趨勢",
-    "trending_up": "上升趨勢",
-    "up_from_last_week": "較上週上升"
+    "trending_up": "上升趨勢"
   },
   "errors": {
     "description": "發生了錯誤。請重新加載應用程式。",
@@ -79,18 +66,14 @@
     "complete_body_bluetooth": "您正在協助遏止病毒的傳播並保護您社區的其他人。",
     "complete_title": "感謝您保護社區安全！",
     "consent_body_0": "分享陽性診斷結果並非強制，只有在您同意的情況下才能進行。",
-    "consent_body_1": "如果您選擇這樣做，則是在幫助社區中的其他人做出有關他們的健康狀況的明智決定，並協助遏制病毒的傳播。",
     "consent_body_2": "唯一共享的訊息為您的手機於過去14天透過藍牙，與附近手機交換之隨機數字組合，以及基於您的症狀發作時間之加權風險評估。",
     "consent_button_title": "我了解並同意",
-    "consent_subheader_1": "為什麼我要分享？",
-    "consent_subheader_2": "該應用程序的運作方式",
     "enable_exposure_notifications_body": "您必須開啟接觸提醒以紀錄陽性反應結果。",
     "enable_exposure_notifications_title": "開啟接觸提醒以繼續",
     "error": {
       "invalid_code": "嘗試其他代碼",
       "invalid_format": "無效的格式",
       "network_connection_error": "沒有網路",
-      "timeout_error": "請求處理時間過長",
       "unknown_code_verification_error": "嘗試其他代碼",
       "verification_code_used": "驗證碼已被使用"
     },
@@ -109,8 +92,7 @@
         "no_token_for_existing_keys": "已將現有資料發送到服務器。這通常代表此程序曾在此設備上嘗試過，但使用的是不同的應用程式，您可以將此信息告知提供所使用驗證碼的機構。添加了{{newKeysInserted}}新密鑰。",
         "no_token_for_existing_keys_title": "嘗試提交現有密鑰"
       }
-    },
-    "start_header_bluetooth": "幫助抑制病毒的傳播並保護社區中的其他人"
+    }
   },
   "exposure_history": {
     "check_for_exposures": "檢測暴露情況。",
@@ -128,11 +110,6 @@
       "wash_your_hands": "洗手",
       "wear_a_mask": "戴口罩"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4到6天以前",
-      "seven_to_fourteen_days_ago": "7到14天以前",
-      "today_to_three_days_ago": "最近3天內"
-    },
     "health_guidelines": {
       "six_feet_apart": "保持6英尺距離",
       "stay_home": "生病時請待在家",
@@ -144,7 +121,7 @@
     "how_does_this_work": "該功能如何運作？",
     "how_does_this_work_para": "當接觸通知開啟時，您的手機會使用藍牙與鄰近任何開啟接觸提醒的手機交換並儲存隨機ID，隨機ID並不會將您的個人訊息告知其他用戶，並在一日內多次更換以保護您的隱私。",
     "last_days": "最近14天",
-    "learn_more": "了解更多",
+    "next_steps": "下一步",
     "no_connectivity_message": "您沒有連接到網路！",
     "no_exposure_reports": "無接觸紀錄",
     "no_exposure_reports_over_past": "您在過去14天內並未收到任何接觸報紀錄",
@@ -165,9 +142,6 @@
     "bluetooth_info_body": "您的手機以低功耗藍牙偵測到與您相鄰一段時間的其他手機。這允許應用程式匿名紀錄您的每日接觸者，即使您裝置上的應用程式並未開啟。",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}在應用程式關閉後仍會保持運作",
-      "bluetooth_disabled_error_message": "到設定中打開藍芽來修正錯誤",
-      "bluetooth_disabled_error_title": "在設定中開啟藍芽",
-      "bluetooth_header": "藍牙",
       "location_disabled_error_message": "要開始接觸通知，請在設定中授權定位",
       "location_disabled_error_title": "在設定中授權",
       "location_header": "定位",
@@ -181,7 +155,6 @@
     },
     "call_emergency_services": "致電緊急服務人員",
     "check_if_your_symptoms": "輸入您的症狀並立即獲得有關如何保持安全的建議。",
-    "did_you_test_positive": "您是否對COVID-19檢測為陽性？",
     "enter_symptoms": "輸入症狀",
     "fix": "透過{{technology}}解決問題",
     "get_more_info": "透過{{technology}}獲得更多資訊",
@@ -193,9 +166,7 @@
     "proximity_tracing_info_body_2": "如果接觸到他人，您的數據和訊息將保持匿名。應用程式不存儲任何資料，僅交換隨機ID，而這些資訊將在14天內刪除。",
     "proximity_tracing_info_subheader_1": "接觸提醒如何運作？",
     "proximity_tracing_info_subheader_2": "我的資料安全嗎？",
-    "request_call": "要求回電",
-    "take_assessment": "進行檢測",
-    "to_submit_your_test": "與防疫電話客服人員通話，以取得您的檢驗結果代碼。"
+    "take_assessment": "進行檢測"
   },
   "label": {
     "check": "複選標記",
@@ -209,25 +180,17 @@
     "unchecked_checkbox": "未選取的選項"
   },
   "navigation": {
-    "exposure": "接觸",
     "exposure_history": "接觸史",
     "home": "工作介面",
-    "more_info": "更多資訊",
     "settings": "設定",
     "symptom_history": "症狀紀錄"
   },
   "onboarding": {
-    "activation_header_title": "應用程式設定",
     "app_setup_complete_body": "{{applicationName}}已開啟。感謝您一同幫助打擊病毒。",
     "app_setup_complete_header": "應用程式設置完成！",
     "app_setup_incomplete_body": "{{applicationName}}需要“接處追蹤”和Bluetooth權限才能得知您於何時何地接觸到COVID-19病毒。您可以在“設置”中對此進行授權。",
     "app_setup_incomplete_header": "應用程式設定不完整",
     "app_setup_incomplete_location_body": "{{applicationName}}需要“接處追蹤”和Bluetooth權限才能得知您於何時何地接觸到COVID-19病毒。您可以在“設置”中對此進行授權。",
-    "bluetooth_alert_body": "若要使用藍牙掃描，需要打開設備的定位設置。",
-    "bluetooth_alert_header": "啟動藍芽",
-    "bluetooth_body": "若要使用藍牙掃描，需要打開設備的定位設置。",
-    "bluetooth_header": "啟動藍芽",
-    "bluetooth_subheader": "為什麼需要打開手機的藍牙設置？",
     "eula": "最終用戶法律協議",
     "eula_agree_terms_of_use": "我同意我已閱讀並接受使用條款",
     "i_am_over": "是的，我已經超過{{minimumAge}}",
@@ -284,15 +247,12 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "我了解並同意",
-    "not_sharing_anonymized_data": "不分享匿名數據",
     "privacy_policy": "隱私政策",
     "share_anonymized_data": "分享匿名資料",
     "share_anonymized_data_disclaimer": "若要繼續進行，您同意與{{healthAuthorityName}}分享篩查問題的匿名答案",
     "share_data_para_1": "有關社區如何使用此應用程序的匿名彙整數據可幫助{{healthAuthorityName}}委員會，來分析並理解和停止新冠肺炎（COVID-19）的傳播。",
     "share_data_para_2": "該數據不包含任何個人識別信息。",
-    "sharing_anonymized_data": "分享匿名數據",
-    "stop_sharing_data": "停止分享數據",
-    "you_are_sharing_data": "您正在分享匿名數據"
+    "stop_sharing_data": "停止分享數據"
   },
   "screen_titles": {
     "bluetooth": "藍牙",

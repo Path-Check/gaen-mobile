@@ -18,7 +18,6 @@
   "common": {
     "back": "عودة",
     "cancel": "إلغاء",
-    "close": "اغلاق",
     "close_screen": "إغلاق الشاشة",
     "continue": "استمر",
     "done": "تم",
@@ -27,7 +26,6 @@
     "maybe_later": "ربما في وقت لاحق",
     "more": "ألمزيد",
     "next": "التالى",
-    "no": "لا",
     "no_thanks": "لا شكرا",
     "off": "إيقاف",
     "on": "تشغيل",
@@ -37,27 +35,16 @@
     "something_went_wrong": "هناك خطأ ما",
     "start": "ابدأ",
     "submit": "إرسال",
-    "success": "نجاح",
-    "yes": "نعم"
+    "success": "نجاح"
   },
   "covid_data": {
     "apologies_data_unavailable": "معذرة ، بيانات COVID غير متوفرة.",
-    "cases_today": "الحالات اليوم",
-    "covid_coverage": "تغطية كوفيد",
-    "covid_data": "بيانات COVID",
-    "deaths_today": "الوفيات اليوم",
-    "down_from_last_week": "بانخفاض عن الأسبوع الماضي",
     "error_getting_data": "عذرًا ، لم نتمكن من جلب أحدث بيانات حالات COVID لـ {{location}} .",
     "new_cases": "حالات جديدة",
-    "past_7_days": "الأيام السبعة الماضية",
     "see_more": "شاهد المزيد",
     "source": "المصدر: {{source}}",
-    "spread_of_the_virus_in": "انتشار الفيروس في {{locationName}}",
-    "total_cases": "إجمالي الحالات",
-    "total_deaths": "إجمالي الوفيات",
     "trending_down": "تتجه إلى أسفل",
-    "trending_up": "تتجه صعودا",
-    "up_from_last_week": "حتى من الأسبوع الماضي"
+    "trending_up": "تتجه صعودا"
   },
   "errors": {
     "description": "حدث خطأ. يرجى إعادة تحميل التطبيق.",
@@ -74,11 +61,8 @@
     "complete_body_bluetooth": "أنت تساعد في احتواء انتشار الفيروس وحماية الآخرين في مجتمعك.",
     "complete_title": "شكرا للحفاظ على مجتمعك آمن!",
     "consent_body_0": "تعد مشاركة التشخيص الإيجابي أمرًا اختياريًا ولا يمكن القيام به إلا بموافقتك.",
-    "consent_body_1": "إذا اخترت القيام بذلك ، فأنت تساعد الآخرين في مجتمعك على اتخاذ قرارات مستنيرة بشأن صحتهم وتلعب دورك لاحتواء انتشار الفيروس.",
     "consent_body_2": "ستكون المعلومات الوحيدة التي تتم مشاركتها هي المجموعة العشوائية من الأرقام التي تبادلها هاتفك عبر البلوتوث مع الهواتف الأخرى التي كانت قريبة خلال الـ 14 يومًا الماضية ، إلى جانب درجة المخاطرة الموزونة بناءً على وقت ظهور الأعراض.",
     "consent_button_title": "أنا أتفهم وأوافق",
-    "consent_subheader_1": "لماذا يجب علي المشاركة؟",
-    "consent_subheader_2": "كيف يعمل هذا؟",
     "enable_exposure_notifications_body": "يجب عليك تفعيل إشعارات التعرض للإبلاغ عن نتيجة اختبار إيجابية.",
     "enable_exposure_notifications_button": "تمكين إشعارات التعرض",
     "enable_exposure_notifications_title": "تفعيل إشعارات التعرض للمتابعة",
@@ -104,8 +88,7 @@
         "no_token_for_existing_keys": "تم إرسال البيانات الموجودة إلى الخادم. يعني هذا عادةً أنه تمت محاولة هذه العملية مسبقًا من هذا الجهاز ، ولكن من تطبيق مختلف. يمكنك إبلاغ السلطة التي قدمت رمز التحقق الذي تم استخدامه. تمت إضافة {{newKeysInserted}} مفاتيح جديدة.",
         "no_token_for_existing_keys_title": "محاولة إرسال المفاتيح الموجودة"
       }
-    },
-    "start_header_bluetooth": "ساعد في احتواء انتشار الفيروس وحماية الآخرين في مجتمعك"
+    }
   },
   "exposure_history": {
     "check_for_exposures": "تحقق من التعرض",
@@ -122,11 +105,6 @@
       "wash_your_hands": "اغسل يديك",
       "wear_a_mask": "البس قناعا"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4 إلى 6 أيام مضت",
-      "seven_to_fourteen_days_ago": "7 إلى 14 يوما مضت",
-      "today_to_three_days_ago": "خلال آخر 3 أيام"
-    },
     "health_guidelines": {
       "six_feet_apart": "ابق على بعد 6 أقدام",
       "stay_home": "ابق في المنزل عند المرض",
@@ -138,7 +116,6 @@
     "how_does_this_work": "كيف يعمل هذا؟",
     "how_does_this_work_para": "عند تشغيل إشعارات التعريض ، يستخدم هاتفك البلوتوث للتبديل وحفظ سلاسل الأرقام العشوائية (تسمى المعرفات العشوائية) من أي هواتف قريبة جدًا من تلك الهواتف التي تم تمكين إشعارات التعرض لها أيضًا. المعرفات العشوائية لن تحدد هويتك الشخصية للمستخدمين الآخرين وستتغير عدة مرات في اليوم لحماية خصوصيتك",
     "last_days": "آخر 14 يومًا",
-    "learn_more": "التعرف على المزيد",
     "no_connectivity_message": "أنت غير متصل بالإنترنت!",
     "no_exposure_reports": "لا توجد تقارير التعرض",
     "no_exposure_reports_over_past": "لم تتلق أي تقارير تعرض خلال الـ 14 يومًا الماضية",
@@ -163,9 +140,6 @@
     "bluetooth_info_body": "تقوم الهواتف بتبادل المعرفات العشوائية مع الأجهزة الأخرى باستخدام Bluetooth Low Energy. يسمح هذا لـ {{applicationName}} بتتبع لقاءاتك اليومية بشكل مجهول ، حتى عندما لا يكون لديك مفتوح على جهازك.",
     "bluetooth": {
       "all_services_on_subheader": "سيظل {{applicationName}} نشطًا بعد إغلاق التطبيق",
-      "bluetooth_disabled_error_message": "انتقل إلى تطبيق الإعدادات وقم بتمكين  البلوتوث لإصلاح هذا الخطأ",
-      "bluetooth_disabled_error_title": "قم بتمكين البلوتوث في الإعدادات",
-      "bluetooth_header": "بلوتوث",
       "location_disabled_error_message": "لتنشيط تقنية \"إخطار التعرض\"، قم بتخويل الوصول إلى الموقع في تطبيق الإعدادات",
       "location_disabled_error_title": "تخويل في الإعدادات",
       "location_header": "موقع",
@@ -178,7 +152,6 @@
     },
     "call_emergency_services": "اتصل بخدمات الطوارئ",
     "check_if_your_symptoms": "أدخل الأعراض الخاصة بك واحصل على توصية فورية حول كيفية الحفاظ على سلامتك.",
-    "did_you_test_positive": "هل كانت نتيجة اختبار COVID-19 إيجابية؟",
     "enter_symptoms": "أدخل الأعراض",
     "fix": "إصلاح المشاكل مع {{technology}}",
     "get_more_info": "الحصول على مزيد من المعلومات حول {{technology}}",
@@ -188,9 +161,7 @@
     "proximity_tracing_info_body_2": "في حالة حدوث لقاء ، تظل بياناتك ومعلوماتك مجهولة. لا يخزن التطبيق أي بيانات شخصية. يتم تبادل المعرفات العشوائية فقط. يتم حذفها في غضون 14 يومًا.",
     "proximity_tracing_info_subheader_1": "كيف تعمل إشعارات التعرض؟",
     "proximity_tracing_info_subheader_2": "هل بياناتي آمنة؟",
-    "request_call": "طلب مكالمة",
-    "take_assessment": "أخذ التقييم",
-    "to_submit_your_test": "لإرسال نتيجة الاختبار الإيجابية الخاصة بك ، ستحتاج إلى الحصول على رمز نتيجة الاختبار الإيجابي من أداة تتبع جهات الاتصال."
+    "take_assessment": "أخذ التقييم"
   },
   "label": {
     "check": "علامة الاختيار",
@@ -204,25 +175,17 @@
     "unchecked_checkbox": "خانة اختيار غير محددة"
   },
   "navigation": {
-    "exposure": "التعرض",
     "exposure_history": "سجلات التعرض",
     "home": "لوحة القيادة",
-    "more_info": "مزيد من المعلومات",
     "settings": "إعدادات",
     "symptom_history": "مدقق الأعراض"
   },
   "onboarding": {
-    "activation_header_title": "إعداد التطبيق",
     "app_setup_complete_body": "{{applicationName}} نشط. شكرا لك للمساعدة في كسر سلسلة العدوى.",
     "app_setup_complete_header": "اكتمل إعداد التطبيق!",
     "app_setup_incomplete_body": "يتطلب {{applicationName}} إشعارات التعرض وأذونات Bluetooth لمعرفة متى وأين تعرضت لـ COVID 19. يمكنك تفويض ذلك في الإعدادات.",
     "app_setup_incomplete_header": "إعداد التطبيق غير مكتمل",
     "app_setup_incomplete_location_body": "يتطلب {{applicationName}} إشعارات التعرض وأذونات Bluetooth والموقع لمعرفة متى وأين تعرضت لـ COVID 19. يمكنك تفويض ذلك في الإعدادات.",
-    "bluetooth_alert_body": "لاستخدام مسح البلوتوث ، يجب تشغيل إعداد البلوتوث للجهاز.",
-    "bluetooth_alert_header": "قم بتنشيط البلوتوث",
-    "bluetooth_body": "لاستخدام مسح البلوتوث ، يجب تشغيل البلوتوث للجهاز.",
-    "bluetooth_header": "تنشيط البلوتوث",
-    "bluetooth_subheader": "لماذا أحتاج إلى تشغيل إعداد البلوتوث الخاص بهاتفي؟",
     "eula": "الاتفاقية القانونية للمستخدم النهائي",
     "eula_agree_terms_of_use": "أوافق على أنني قرأت وقبلت شروط الاستخدام",
     "i_am_over": "نعم ، لقد تجاوزت {{minimumAge}}",
@@ -279,13 +242,10 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "أنا أفهم وأوافق",
-    "not_sharing_anonymized_data": "عدم مشاركة بيانات مجهولة المصدر",
     "privacy_policy": "سياسة الخصوصية",
     "share_anonymized_data": "مشاركة البيانات مجهولة المصدر",
     "share_anonymized_data_disclaimer": "من خلال المتابعة، فإنك توافق على مشاركة إجابات مجهولة المصدر على أسئلة الفحص مع {{healthAuthorityName}}",
-    "sharing_anonymized_data": "مشاركة البيانات مجهولة المصدر",
-    "stop_sharing_data": "توقف عن مشاركة البيانات",
-    "you_are_sharing_data": "أنت تشارك بيانات مجهولة المصدر"
+    "stop_sharing_data": "توقف عن مشاركة البيانات"
   },
   "screen_titles": {
     "bluetooth": "بلوتوث",

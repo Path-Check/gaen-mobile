@@ -18,18 +18,15 @@
   "common": {
     "back": "Noqo",
     "cancel": "Buri",
-    "close": "Xir",
     "close_screen": "Xir shaashadda",
     "confirm": "Xaqiiji",
     "continue": "Sii wado",
     "done": "Dhammaad",
     "edit": "Wax ka badal",
-    "enable": "Fur",
     "learn_more": "Xog ka sii badan ka baro",
     "maybe_later": "Laga yaabee hadhow",
     "more": "In kale",
     "next": "Ka xiga",
-    "no": "Maya",
     "no_thanks": "Maya waad mahadsantahay",
     "off": "DANSAN",
     "okay": "Haye",
@@ -41,31 +38,23 @@
     "something_went_wrong": "Waxbaa qaldamay",
     "start": "Billow",
     "submit": "Gudbi",
-    "success": "Guul",
-    "yes": "Haa"
+    "success": "Guul"
   },
   "covid_data": {
     "apologies_data_unavailable": "Raali ahow, xogta COVID lama heli karo.",
-    "cases_today": "Kiisaska maanta",
-    "covid_coverage": "Caymiska Covid",
-    "covid_data": "Xogta COVID",
+    "covid_stats": "COVID-19 Xogta",
     "daily_new_cases": "Kiisas cusub maalin kasta",
-    "deaths_today": "Tirada dhimashada maanta",
-    "down_from_last_week": "Hoos u dhacay laga soo bilaabo asbuucii lasoo dhaafay",
     "error_getting_data": "Waan ka xunahay, kuuma heli karno xogtii ugu danbaysay ee COVID ee {{location}}.",
     "infection_rate": "Heerka saamiga caabuqu maraayo",
     "new_cases": "Kiisas cusub",
-    "past_7_days": "7dii maalmood ee lasoo dhaafay",
+    "overall_risk_level_in": "Heerka Halista Guud ee {{locationName}}",
+    "past_days": "Kiisas cusub maalintii, {{days}} maalmood ee la soo dhaafay",
     "per_100k": "100kii kunba",
     "positive_test_rate": "Saamiga caabuqa laga helaymarkii laga baaray",
     "see_more": "Arag xog dheeraad ah",
     "source": "Isha xogta: {{source}}",
-    "spread_of_the_virus_in": "Ku faafidda caabuqa gudaha {{locationName}}",
-    "total_cases": "Kiisaska guud",
-    "total_deaths": "Tirada guud ee dhimashada",
     "trending_down": "Hoos u socda",
-    "trending_up": "Kor u socda",
-    "up_from_last_week": "Sii kordhay laga soo bilaabo asbuucii lasoo dhaafay"
+    "trending_up": "Kor u socda"
   },
   "errors": {
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
@@ -97,11 +86,8 @@
     "complete_body_bluetooth": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
     "complete_title": "Waad ku mahadsantahay badbaadinta bulshadaada!",
     "consent_body_0": "Wadaagista ka helitaankaaga toganaha ahi waa ikhtiyaari oo waxa kaliya ee lagu samayn karaa oggolaanshahaaga.",
-    "consent_body_1": "Haddii aad doorbiddo inaad sidaas samayso, waxaad wax taraysaa dadka kale ee bulshadaadu inay gaaraan go'aanno warqab ah oo ku saabsan caafimaadkooda oo aad kaalin ka qaatadato in la xakameeyo faafidda fayraska.",
     "consent_body_2": "Macluumaadka kaliya ee la wadaagi doono ayaa noqonaya koox tirooyin bakhtiyaanasiibaka ah ee telefankaagu kala kala beddehsay Bluetooth-ka telefoonka kale ee ka ag dhawaa 14kii maalmood ee la soo dhaafay, oo ay weheliso dhibco halis la misaamay oo ku saleysan goorta ay astaamahaagu ay soo baxeen.",
     "consent_button_title": "Waan fahmay oo waan oggolahay",
-    "consent_subheader_1": "Maxay tahay sababta aan ula wadaagayo?",
-    "consent_subheader_2": "Sidee ayey u shaqeysaa?",
     "consent_warning_message": "Inaad sii wado waxay baabi'inaysaa koodhkaaga baaritaanka lagaaga helay caabuqa. Haddii aad doonayso inaad nala wadaagto xogta baaritaanka caabuqa lagaaga helay mustaqbalka danbe, waxaad marka koobaad u baahan doontaa inaad hesho koodh cusub oo muujinaaya in caabuqa lagaa helay.",
     "consent_warning_title": "Digniin!",
     "enable_exposure_notifications_body": "Waa inaad fasaxdaa ogaysimaha ufeydsanka si aad uga warbixiso natiijada ka tijaabinta toganaha (positive) ah.",
@@ -112,7 +98,6 @@
       "invalid_code": "Ku day koodh ka duwan",
       "invalid_format": "Qaab aan sax ahayn",
       "network_connection_error": "Khadka interneetku ma shaqaynaayo",
-      "timeout_error": "Codsiga ayaa muddo dheer qaatay",
       "unknown_code_verification_error": "Ku day koodh ka duwan",
       "verification_code_used": "Koodhka qarsoon ee xaqiijinta ayaa horay loo adeegsaday"
     },
@@ -139,8 +124,15 @@
         "no_token_for_existing_keys_title": "Isku day inaad gudbiso furayaasha jira"
       }
     },
-    "start_header_bluetooth": "Gacan ka geyso xakamaynta faafidda fayraska iyo inaad difaacdo dadka kale ee ka tirsan bulshadaada.",
-    "submit_code": "Gudbi koodhka",
+    "symptom_onset": {
+      "did_you_have_symptoms": "Ma qabtaa wax astaamo ah?",
+      "no_i_didnt_have": "Maya, ma aanan qabin wax astaamo ah",
+      "select_date": "Dooro Taariikh",
+      "symptom_onset_date": "Taariikhda Astaamuhu Kugu Billoowdeen",
+      "symptoms": "Taariikhda Astaamaha ",
+      "when_did_your_symptoms": "Goorma ayay astaamahaagu biloowdeen?",
+      "yes_i_did_have": "Haa, waan lahaa astaamaha xanuunka"
+    },
     "verification_code_info": {
       "how_do_i_get_body": "La xariir maamulkaaga caafimaadka, {{healthAuthorityName}}.",
       "how_do_i_get_header": "Sidee ayaan kuhelayaa koodhka xaqiijinta?",
@@ -152,6 +144,7 @@
   },
   "exposure_history": {
     "check_for_exposures": "Fiiri ufeydsanaan",
+    "days_remaining": "Waxaa ka haray {{daysOfQuarantineLeft}} maalmood muddadii lagugula taliyay inaad karantiil ku jirto.",
     "exposure_detail": {
       "2m_apart": "2 mitie kala fogaan ",
       "6ft_apart": "6ft kala fogaan",
@@ -166,11 +159,8 @@
       "wash_your_hands": "Gacmaha iska dhaq",
       "wear_a_mask": "Gasho maaskaro"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4 illaa 6 maalmood kahor",
-      "seven_to_fourteen_days_ago": "7 illaa 14 maalmood kahor",
-      "today_to_three_days_ago": "Gudaheeda 3dii saacadood ee la soo dhaafay"
-    },
+    "exposure_report": "Warbixinta gaadhista",
+    "exposure_summary": "Qof aad u dhawayd intii u dhaxaysay {{startDate}} iyo {{endDate}} ayaa laga helay caabuqa COVID-19.",
     "health_guidelines": {
       "six_feet_apart": "Isku kala jira lix fiit",
       "stay_home": "Guriga joog markaad bukto",
@@ -182,17 +172,20 @@
     "how_does_this_work": "Sidee ayay tani u shaqeysaa?",
     "how_does_this_work_para": "Markay Ogeysiinta Ufeydsanku daaran tahay, telefoonkaaga ayaa isticmaala Bluetooth ayaa u kala doorsHa iyo kaydiYA tirada taxanaha bakhtiyaanasiibka ah (loo yaqaan Aqoonsiga bakhtiyaanasiibka ah) telefoon kasta kasta oo u la kulmo oo sidoo kale leh Kartiyaynta Ogeysiimaha Ufeydsanka. Aqoonsiyada bakhtiyaanasiibka ah ayaan qof ahaan garanayn ugama isticmaaleyaasha oo beddelma maanitiiba marar badan si asturnaantaada loo daafo.",
     "last_days": "14kii maalmood ee ugu dambeysay",
-    "learn_more": "Ogow Waxyaabo Dheeraad Ah",
     "more_info": "Xog badan ka ogoow Ogaysiiska U dhawaanshaha Qofka caabuqa qaba",
+    "next_steps": "Tallaabooyinka xiga",
     "no_connectivity_message": "Kuma xirnid interneetka!",
     "no_exposure_reports": "Ma Jiraan Warbixinno Ufeydsani",
     "no_exposure_reports_over_past": "Ma aadan helin innaba warbixinno ufeydsanaan 14kii-maalmood ee la soo dhaafay.",
     "possible_exposure": "Ufeydsanaan COVID-19 suurtagal ah",
+    "possible_exposures": "Suuragalnimada u Feydsannada Caabuqa",
     "protect_yourself_and_others": "Ilaali laftaada iyo dadka kale kale ka tirsan bulshadaadaba",
     "review_guidance_from_ha": "Fiiri tilmaamaha ka yimid {{healthAuthorityName}}",
+    "review_health_guidance": "Dib u eegida Hanuuninta Caafimaadka",
     "updated": "La cusboonaysiiyay",
     "why_did_i_get_an_en": "Maxaan u helay ogeysiin ufeydsanaan?",
-    "why_did_i_get_an_en_para": "Waxaad heli doontaa ogeysiinta ufeydsanaanta marka qofka aad si lama filaan u kulanteeni hadhow si xaqiiq ah, looga helo cudrka, ama laga tijaabiyo oo COVID-19 oo u xusho inuu u wargaliyo dadka kale."
+    "why_did_i_get_an_en_para": "Waxaad heli doontaa ogeysiinta ufeydsanaanta marka qofka aad si lama filaan u kulanteeni hadhow si xaqiiq ah, looga helo cudrka, ama laga tijaabiyo oo COVID-19 oo u xusho inuu u wargaliyo dadka kale.",
+    "your_device_exchanged": "In isku kala jir kasta taariikheed ee hoos ku qoran, aaladdaada ayaaa furayaal isdhaafsadeen aalad kale taasoo mar danbe qofkii watay laga helay caabuqa."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "Si aad u furto Ogaysiiska U dhawaanshaha Qofka caabuqa qaba, waa inaad marka koobaad furtaa aalada Bluetoothka ood ka furayso Settings-ka abkaaga.",
@@ -200,6 +193,8 @@
     "cant_check_for_exposures_body": "Waxaa qasab ah inaad furataa Ogaysiiska U dhawaanshaha Qofka caabuqa qaba si aad u hubiso dadka qaba ee kula joogay.",
     "cant_check_for_exposures_button": "Furo Ogaysiiska Ufeydsanaanta",
     "cant_check_for_exposures_title": "Lama hubin karo Dadka caabuqa qaba ee aad La joogtay",
+    "location_body": "Google ayaa qasab ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Ogaysiiska U Feydsanka. {{applicationName}} MA raad-raaco ama ma kaydiyo goobtaada.",
+    "location_title": "Furo Adeegyada Goobta",
     "set_active_region_ios_body": "Fur qaybta Settings abka, gal settings-ka Exposure Notifications (Ogaysiiska La joogista Qofka Caabuqa Qaba) abkaan, kadibna ku xir 'Set As Active Region'.",
     "set_active_region_ios_title": "Kuxir Active Region",
     "share_exposure_information_ios_body": "Fur qaybta Settings abka, kadibna gal settings-ka Exposure Notifications (Ogaysiiska La joogista Qofka Caabuqa Qaba) abkaan. Xaqiiji in qaybta 'Share Exposure Information (La wadaag xogta Qaadista Caabuqa)' ay daaran tahay, kadibna riix 'Set As Active Region (Ka dhig Aag Furan)'.",
@@ -219,9 +214,6 @@
     "bluetooth_info_body": "Telefoonkaagu wuxuu ogaadaa taleefanada kale ee aad waqtiga ugu dhow ku qaadato iyadoo la isticmaalayo Bluetooth Tamar Hooseeysa. Tan waxay barnaamijka aabka u oggolaaneysaa inuu ku soo galo soogaliddada maalin walba si qarsoodi ah, xitaa marka aanu furnayn barnaamijka telfoonkaaga.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} ayaa shaqayn doonta marka aabka(app) la xiro.",
-      "bluetooth_disabled_error_message": "Karti ugu yeel Bluetooth-ka Dejimaha aabka (app)",
-      "bluetooth_disabled_error_title": "Karti ugu yeel Bluetooth-ka goobta Dejimaha (setting)",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Si aad u shiddo tikniyoolajiyadda Ogeysiiska Soo-gaarista, u oggolow in la ogaado Goobta (Location) ee ku yaala (Settings) aabka",
       "location_disabled_error_title": "Uga Oggolow gudaha Dejimaha",
       "location_header": "Goobta (Location)",
@@ -235,21 +227,23 @@
     },
     "call_emergency_services": "Wac adeegyada Xaaladaha Degdegga Ah (Imerjansiga)",
     "check_if_your_symptoms": "Geli calaamadahaaga kadibna hel talo degdeg ah oo ku aaddan sida aad guriga u joogayso.",
-    "did_you_test_positive": "Ma lagaa helay cudurka COVID-19?",
     "enter_symptoms": "Geli astaamaha",
+    "error": {
+      "share_link_failed": "Ku guuldareystay inuu furo xiriiriye si aad ula wadaagto"
+    },
     "fix": "Ku hagaaji cilladaha {{technology}}",
     "get_more_info": "Faahfaahin dheeri ah ka hel {{technology}}",
     "have_a_positive_test": "Ma haysataa koodhka baaritaanka caabuqa lagaaga helay?",
     "location_info_body": "Google ayaa waajib ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Helitaanka  U Feydsanaanta {{applicationName}} MA raadraaco ama ma kaydiyo goobtaada.",
     "location_info_subheader": "{{applicationName}} ma raadraaco ama ma kaydiyo goobtaada.",
     "not_feeling_well": "Xanuun miyaa ku haya?",
+    "notifications_off": "Furo ogaysiisyada si laguu ogaysiiyo haddii aad u feydsantay caabuqa",
+    "open_healthcheck": "Furan HealthCheck",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
     "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?",
-    "request_call": "Codo Wicitaan",
     "take_assessment": "Samee Qiimayn",
-    "to_submit_your_test": "Si aad u gudbiso natiijada baaritaanka caabuqa lagaaga helay, waa inaad heshaa koodhka natiijada caabuqa lagaaga helay oo uu ku siinaayo raadraacaha.",
     "verification_code_card": {
       "if_you_have_a_code": "Soo gudbi koodhkaaga xaqiijinta si aad gacan uga gaysato badbaadinta bulshadaada.",
       "if_you_have_a_positive_test": "Haddii lagaa helay cudurka COVID-19, waxaad si qarsoodi ah u sheegi kartaa natiijada si aad gacan uga gaysato badbaadinta bulshadaada.",
@@ -270,25 +264,17 @@
     "unchecked_checkbox": "Sanduuqa aan saxda lahayn"
   },
   "navigation": {
-    "exposure": "Ufeydsanka",
     "exposure_history": "Taariikhda ufeydsanka",
     "home": "Hoy",
-    "more_info": "Xog dheeraad ah",
     "settings": "Dejimaha",
     "symptom_history": "Taariikhda Astaamaha xanuunka"
   },
   "onboarding": {
-    "activation_header_title": "Rakibaadda Aabka (App)",
     "app_setup_complete_body": "{{applicationName}} waa shidan yahay. Waad ku mahadsantahay gacanta aad ka geysanayso joojinta silsiladda caabuqa.",
     "app_setup_complete_header": "Samaynta Aabka waa Dhammeystiran yahay!",
     "app_setup_incomplete_body": "{{applicationName}} wuxuu ubaahanyahay Raadinta Dhawaanshaha (Proximity Tracing) iyo oggolaanshaha Bluetooth ka si loo ogaado goorta iyo meesha aad bay’la ugu noqotay COVID 19. Waxaad tan ku fasaxi kartaa qaybta Setting (Dejinta).",
     "app_setup_incomplete_header": "Samaynta Aabka ma Dhameystirna!",
     "app_setup_incomplete_location_body": "{{applicationName}} wuxuu ubaahanyahay Raadinta Dhawaanshaha (Proximity Tracing), oggolaanshaha Bluetooth ka, iyo Goobta si loo ogaado goorta iyo meesha aad ugu feydsantay COVID 19. Waxaad tan ku fasaxi kartaa Setting (Dejinta).",
-    "bluetooth_alert_body": "Si aad u adeegsato iskaan garaynta Bluetooth, waa inaad daartaa sitinka aalada.",
-    "bluetooth_alert_header": "Kici Bluetooth-ka",
-    "bluetooth_body": "Si aad u adeegsato iskaan garaynta Bluetooth, waa inaad daartaa dejinta aaladda.",
-    "bluetooth_header": "Fur aalada Bluetooth ka",
-    "bluetooth_subheader": "Maxaan uga baahanahay daarista dejinata (setting) Bluetooth ka taleefankayga?",
     "eula": "Heshiiska Sharciga Isticmaalaha Dambe",
     "eula_agree_terms_of_use": "Waan oggolahay inaan aqriyay oo aan aqbalay shuruudaha isticmaalka",
     "i_am_over": "Haa, waan ka waynahay {{minimumAge}}",
@@ -347,15 +333,12 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "Waan fahmay oo waan oggolahay",
-    "not_sharing_anonymized_data": "Lama wadaagaayo xogta qarsoodiga ah",
     "privacy_policy": "Xeerka Asurnaanta",
     "share_anonymized_data": "La wadaag Xogta Qarsoodiga ah",
     "share_anonymized_data_disclaimer": "Haddaad ku sii socoto, waxaad aqbalaysaa inaad nala wadaagto jawaabaha sirta ah ee su'aalaha baaritaanka ee {{healthAuthorityName}}",
     "share_data_para_1": "Xogta sirta ah ee isku dhafan ee ku saabsan sida bulshooyinku u isticmaalayaan aaladdan ayaa ka caawinaysa {{healthAuthorityName}} Maamulidda, qiimaynta, fahanka, iyo xakamaynta faafidda caabuqa COVID-19.",
     "share_data_para_2": "Xogtan waxa ku jira xog shaqsiyan qofka aan la garan karin..",
-    "sharing_anonymized_data": "Wadaagista xogta qarsoodiga ah",
-    "stop_sharing_data": "Joojin Cid kale la Wadaagida Xogta",
-    "you_are_sharing_data": "Waxaad cid kale la wadaagaysaa xog sir ah"
+    "stop_sharing_data": "Joojin Cid kale la Wadaagida Xogta"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -526,8 +509,6 @@
     "invalid_code_title": "Koodhka khaldan",
     "network_connection_body": "Waa inaad ku xirantaa WiFi si aad u gudbiso koodhka xaqiijinta.",
     "network_connection_title": "Malahan Khadka Interneetka",
-    "timeout_body": "Muddo dheer ayay qaadatay in la gudbiyo koodhka xaqiijinta. Fadlan markale iskuday hadhoow.",
-    "timeout_title": "Codsiga ayaa Muddo Dheer Qaatay",
     "unknown_body": "Cilad aan la filayn ayaa dhacday. Fadlan markale iskuday.",
     "unknown_title": "Wax ayaa khaldan"
   }
