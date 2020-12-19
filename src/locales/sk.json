@@ -8,7 +8,6 @@
     "cancel": "Ukončiť",
     "continue": "Pokračovať",
     "done": "Hotovo",
-    "enable": "Povoliť",
     "more": "Viac",
     "next": "Hotovo"
   },
@@ -32,8 +31,7 @@
     "launch_get_started": "Začať"
   },
   "navigation": {
-    "exposure_history": "História vystavenia sa riziku",
-    "more_info": "Viac informácií"
+    "exposure_history": "História vystavenia sa riziku"
   },
   "onboarding": {
     "privacy_policy": "Ochrana osobných údajov",

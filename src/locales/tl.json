@@ -8,10 +8,8 @@
   "common": {
     "back": "Bumalik",
     "cancel": "Kanselahin",
-    "close": "Isara",
     "continue": "Ituloy",
     "done": "Tapos",
-    "enable": "Paganahin",
     "learn_more": "Alamin",
     "maybe_later": "Baka Mamaya",
     "more": "Higit pa",
@@ -38,11 +36,8 @@
     "complete_body_bluetooth": "Tumutulong kang agapan ang pagkalat ng virus at protektahan ang iba sa iyong komunidad.",
     "complete_title": "Salamat sa iyong pagpapanatili na ligtas ang iyong komunidad!",
     "consent_body_0": "Ang pagbabahagi ng iyong positibong pagsusuri ay opsyonal at magagawa lamang ito kasama ang iyong pahintulot.",
-    "consent_body_1": "Kung pipiliin mong gawin ito, tinutulungan mo ang iba sa iyong komunidad na gumawa ng mga may kaalamang pagpapasya tungkol sa kanilang kalusugan at ginagampanan mo ang iyong bahagi na sugpuin ang pagkalat ng virus.",
     "consent_body_2": "Ang ibabahaging impormasyon lamang ay ang random na hanay ng mga numero na ipinagpalit ng iyong telepono sa pamamagitan ng Bluetooth sa iba pang mga telepono na malapit sa nakaraang 14 araw, kasama ang isang timbang na marka ng peligro batay sa kung kailang nauna mong naranasan ang iyong mga sintomas.",
     "consent_button_title": "Naiintindihan ko at Sumasangayon ako",
-    "consent_subheader_1": "Bakit ako dapag magbahagi?",
-    "consent_subheader_2": "Paano ito gumagana?",
     "enable_exposure_notifications_body": "Dapat mong paganahin ang mga abiso sa pagkakalantad o exposure notifications upang mag-ulat ng positibong resulta.",
     "enable_exposure_notifications_button": "Payagan ang Exposure Notifications",
     "enable_exposure_notifications_title": "Paganahin ang mga abiso sa pagkakalantad o exposure notifications upang makapagpatuloy",
@@ -64,8 +59,7 @@
         "no_token_for_existing_keys": "Ang kasalukuyang data ay ipinadala sa server. Karaniwan nang nangangahulugan ito na ang prosesong ito ay tinangka dati mula sa aparatong ito, ngunit sa ibang application. Maaari mo itong maiugnay sa awtoridad na nagbigay ng verification code na ginamit. Mayroong {{newKeysInserted}} bagong key na naidagdag.",
         "no_token_for_existing_keys_title": "Subukang magsumite ng mayroon nang mga susi"
       }
-    },
-    "start_header_bluetooth": "Tumulung upang pigilan ang paglaganap ng virus at protektakan ang mamamayan sa iyong kumunidad."
+    }
   },
   "exposure_history": {
     "check_for_exposures": "Ipasa",
@@ -77,11 +71,6 @@
       "wash_your_hands": "Hugasan ang iyong mga kamay",
       "wear_a_mask": "Magsuot ng maskara"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4 hanggang 6 araw na ang nakakaraan",
-      "seven_to_fourteen_days_ago": "7 hanggang 14 araw na nakalilipas",
-      "today_to_three_days_ago": "Sa loob ng huling 3 araw"
-    },
     "health_guidelines": {
       "six_feet_apart": "Manatiling 6 na talampakan ang layo",
       "stay_home": "Manatili sa bahay kapag may sakit",
@@ -92,7 +81,7 @@
     "how_does_this_work": "Paano ito gumagana?",
     "how_does_this_work_para": "Kapag ang Mga Abiso ng Pagkakalantad sa Posibleng Pagkalanit o Exposure Notifications ay nakabukas o pinagagana, ang iyong cellphone o device ay gumagamit ng Bluetooth upang makipagpalitan at i-save ang mga random string ng mga numero (na tinatawag na random ID) mula sa anumang mga cellphone o device na nakatagpo nito na mayroon ding pinaganang Mga Abiso ng Pagkakalantad sa Posibleng Pagkalanit o Exposure Notifications. Ang mga Random na ID ay hindi magpapakilala sa iyo nang personal sa ibang mga gumagamit at magbabago nang maraming beses sa isang araw upang maprotektahan ang iyong privacy.",
     "last_days": "Huling 14 na araw",
-    "learn_more": "Matuto Nang Higit Pa",
+    "next_steps": "Mga Susunod na Hakbang",
     "no_connectivity_message": "Hindi ka nakakonekta sa internet!",
     "no_exposure_reports": "Walang mga exposure report o posibleng pagkahawa",
     "no_exposure_reports_over_past": "Wala kang natanggap na anumang mga ulat sa pagkakalantad o posibleng exposure at pagkahawa sa nakaraang 14-araw",
@@ -115,9 +104,6 @@
     "bluetooth_info_body": "Natutuklasan ng iyong cellphone o device na mayroon kang malapitang nakakasalamuha na gumagamit ng Bluetooth Low Energy.  Pinapayagan nito ang app na anonimong itala ang iyong pangaraw-araw na pagkatagpo, hahit hindi nakabukas ang app sa iyong cellphone o device.",
     "bluetooth": {
       "all_services_on_subheader": "Mananatiling aktibo ang {{applicationName}} kahit ang app ay isinara",
-      "bluetooth_disabled_error_message": "Pumunta sa app na Mga Setting at paganahin ang Bluetooth upang ayusin ang error na ito",
-      "bluetooth_disabled_error_title": "Paganahin ang Bluetooth sa Settings",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Upang i-activate ang teknolohiya ng Abiso sa Exposure, pahintulutan ang pag-access sa Lokasyon sa app na Mga Setting",
       "location_disabled_error_title": "Pahintulutan sa Mga Setting",
       "location_header": "Lokasyon",
@@ -135,8 +121,7 @@
     "proximity_tracing_info_body_1": "Kung ang mga smartphone na naka-install ang app ay naka-on o pinagagana, naka-enable ang Bluetooth, at malapit sa isa't isa sa loob ng takdang panahon, irirehistro ang engkwentrong ito sa iyong aparato.",
     "proximity_tracing_info_body_2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
     "proximity_tracing_info_subheader_1": "Paano gumagana ang Proximity Tracing?",
-    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?",
-    "to_submit_your_test": "Upang isumite ang iyong positibong resulta sa pagsubok, kakailanganin mong makuha ang iyong positibong code ng resulta ng pagsubok mula sa isang opisyal sa kalusugan."
+    "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?"
   },
   "label": {
     "check": "Checkmark",
@@ -150,13 +135,10 @@
     "unchecked_checkbox": "Hindi naka-check na checkbox"
   },
   "navigation": {
-    "exposure": "Pagkakalantad",
     "exposure_history": "Exposure History o Kasaysayan ng Pagkalantad sa Posibleng Pagkahawa",
-    "home": "Home o Umpisa",
-    "more_info": "Karagdagang Impormasyon"
+    "home": "Home o Umpisa"
   },
   "onboarding": {
-    "activation_header_title": "Setup ng App",
     "app_setup_complete_body": "{{applicationName}} ay aktibo. Salamat sa iyong pagtulong na supilin ang paglaganap ng impeksyon.",
     "app_setup_complete_header": "Kumpleto ang Pag-setup ng App!",
     "app_setup_incomplete_body": "Kinakailangan ng {{applicationName}} pahintulot sa Proximity Tracing, Bluetooth, at Location upang malaman kung kailan at saan ka posibleng nahawa o nakasalamuha ng tao o gamit na may COVID 19. Maaari mong mag-awtorisa ito sa Mga Setting.",

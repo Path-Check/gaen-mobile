@@ -8,7 +8,6 @@
     "cancel": "Anuluj",
     "continue": "Dalej",
     "done": "Gotowe",
-    "enable": "Włącz",
     "more": "Więcej",
     "next": "Dalej",
     "something_went_wrong": "Coś poszło nie tak",
@@ -48,8 +47,7 @@
     "privacy_policy": "Polityka prywatności"
   },
   "navigation": {
-    "exposure_history": "Historia Ekspozycji",
-    "more_info": "Więcej informacji"
+    "exposure_history": "Historia Ekspozycji"
   },
   "onboarding": {
     "privacy_policy": "Polityka prywatności",

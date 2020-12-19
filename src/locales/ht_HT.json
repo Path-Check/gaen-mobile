@@ -14,10 +14,8 @@
   "common": {
     "back": "Retounen",
     "cancel": "Anile",
-    "close": "Fèmen",
     "continue": "Kontinye",
     "done": "Fini",
-    "enable": "Aktive",
     "maybe_later": "Petèt pita",
     "more": "Plis",
     "next": "Kontinye",
@@ -47,8 +45,6 @@
     "complete_body_bluetooth": "Lè w chwazi pou pataje estati ou ak notifye lòt moun anoniman, ou ap ede evite pwopagasyon viris la ak pwoteje lòt moun nan kominote ou.",
     "complete_title": "Mèsi pou kenbe kominote ou an sekirite!",
     "consent_button_title": "Mwen konprann epi mwen konsanti",
-    "consent_subheader_1": "Poukisa mwen ta dwe pataje?",
-    "consent_subheader_2": "kijan sa mache?",
     "enable_exposure_notifications_body": "Ou dwe pèmèt notifcations ekspoze pou ou rapòte yon rezilta tès pozitif.",
     "enable_exposure_notifications_button": "Aktive Notifikasyon Ekspozisyon yo",
     "error": {
@@ -72,7 +68,9 @@
         "no_token_for_existing_keys_title": "Eseye soumèt kle ki egziste deja"
       }
     },
-    "start_header_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w "
+    "symptom_onset": {
+      "symptoms": "Sentòm yo"
+    }
   },
   "exposure_history": {
     "exposure_detail": {
@@ -84,11 +82,6 @@
       "wash_your_hands": "Lave men w",
       "wear_a_mask": "Mete yon mas"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4 a 6 jou de sa",
-      "seven_to_fourteen_days_ago": "7 a 14 jou de sa",
-      "today_to_three_days_ago": "Nan 3 dènye jou yo"
-    },
     "health_guidelines": {
       "six_feet_apart": "Rete 6 pye apa",
       "stay_home": "Rete lakay ou lè ou malad",
@@ -99,6 +92,7 @@
     "how_does_this_work": "Kouman travay sa a fèt?",
     "how_does_this_work_para": "Lè Notifikasyon Ekspozisyon yo aktive, telefòn ou itilize Bluetooth pou echanje e anrejistre nimewo o aza (yo rele sa idantifikasyon o aza) apati nenpot ki telefòn li rankontre ki gen Notifikasyon Ekspozisyon aktive tou. Idantifikasyon o aza pa pral idantifye ou pèsonèlman kote lòt itilizatè yo ni fè echanj plizyè fwa nan yon jounen pou pwoteje vi prive ou. Dat ak dire rankont lan anrejistre daprè estimasyon distans de telefòn yo te ye yonn pa rapò ak lòt. Lè yon moun rapòte yon dyagnostik pozitif, dènye idantifikasyon o aza telefòn nan siyale lòt moun yo pa notifikasyon anonim. Pa gen lokalizasyon oswa enfòmasyon pèsonèl ki pataje.",
     "last_days": "21 jou pase yo",
+    "next_steps": "Pwochen etap yo",
     "no_connectivity_message": "Ou pa konekte sou entènèt!",
     "protect_yourself_and_others": "Pwoteje tèt ou ak lòt moun nan kominote w ",
     "updated": "Mete ajou",
@@ -114,9 +108,6 @@
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
-      "bluetooth_disabled_error_message": "Aktive Bluetooth nan tablodbò aplikasyon an",
-      "bluetooth_disabled_error_title": "Aktive Bluetooth nan tablodbò ",
-      "bluetooth_header": "Bluetooth",
       "proximity_tracing_header": "Trasaj Pwoksimite ",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
@@ -138,13 +129,10 @@
     "question_icon": "Imaj pwen entèwogasyon"
   },
   "navigation": {
-    "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
-    "home": "Lakay",
-    "more_info": "Plis enfòmasyon"
+    "home": "Lakay"
   },
   "onboarding": {
-    "activation_header_title": "Enstalasyon Aplikasyon",
     "app_setup_complete_body": "{{applicationName}} aktif. Mèsi pou ede kraze chèn enfeksyon an.",
     "app_setup_complete_header": "Enstalasyon Aplikasyon Enkonplè",
     "app_setup_incomplete_body": "{{applicationName}} mande otorizasyon pou Pwoksimite Trasaj ak Bluetooth, pou konnen ki lè ak ki kote ou te ekspoze a COVID 19. Ou ka otorize sa a nan tablodbò.",
