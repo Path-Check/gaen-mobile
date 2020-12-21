@@ -9,7 +9,6 @@ import { SymptomHistoryStackParams } from "../navigation/SymptomHistoryStack"
 import { SymptomHistoryStackScreens } from "../navigation"
 import { Text } from "../components"
 import { posixToDayjs } from "../utils/dateTime"
-import { DATE_FORMAT } from "./index"
 import * as Symptom from "./symptom"
 import { SymptomEntry } from "./symptomHistory"
 
@@ -23,6 +22,8 @@ import {
   Iconography,
   Layout,
 } from "../styles"
+
+export const DATE_FORMAT = "ddd MMM D, YYYY"
 
 type SymptomEntryListItemProps = {
   entry: SymptomEntry
