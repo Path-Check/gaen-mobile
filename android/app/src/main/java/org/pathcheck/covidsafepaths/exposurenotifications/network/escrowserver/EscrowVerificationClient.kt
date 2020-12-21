@@ -13,6 +13,8 @@ import kotlin.math.floor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.pathcheck.covidsafepaths.BuildConfig
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Error
@@ -27,14 +29,26 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import java.util.concurrent.TimeUnit
 
 object EscrowVerificationClient {
     private const val TAG: String = "BackendService"
 
     private val retrofit: Retrofit by lazy {
+        val okHttpClient = OkHttpClient.Builder()
+            .also {
+                val loggingInterceptor = HttpLoggingInterceptor { message ->
+                    Log.d(TAG, message)
+                }
+                loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+                it.addInterceptor(loggingInterceptor)
+            }
+            .build()
+
         Retrofit.Builder()
             .baseUrl(BuildConfig.ESCROW_VERIFICATION_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
             .build()
     }
     private val service: IBackendService by lazy {
@@ -79,7 +93,7 @@ object EscrowVerificationClient {
 
                     val deviceID = DeviceIDHelper.getDeviceID(nonce, context)
 
-                    val resp = service.auth(cookie, deviceID).execute()
+                    val resp = service.auth(cookie, deviceCode = deviceID).execute()
 
                     if (resp.isSuccessful) {
                         getSharedPrefs(context).setEscrowVerificationTokens(
@@ -351,9 +365,9 @@ interface IBackendService {
     @POST("authtracking/token")
     fun auth(
         @Header("Cookie") cookie: String,
-        @Field("device_code") deviceCode: String,
         @Field("grant_type") grantType: String = "device_code",
-        @Field("device_type") deviceType: String = "Android"
+        @Field("device_type") deviceType: String = "Android",
+        @Field("device_code") deviceCode: String
     ): Call<AuthResponse>
 
     @FormUrlEncoded
