@@ -20,8 +20,6 @@ import SymptomHistoryFormatter from "./Share/SymptomHistoryFormatter"
 
 import { Buttons, Colors, Spacing, Typography } from "../styles"
 
-export const DATE_FORMAT = "ddd MMM D, YYYY"
-
 const SymptomHistory: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
