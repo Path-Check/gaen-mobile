@@ -42,7 +42,7 @@ end
 ########################## FILE MANIPULATION AND RESCUE START #################
 
 def unzip_to_working_directory
-  puts "Fetching configuration from pathcheck-mobile-resources commit #{mobile_resources_commit}"
+  print "."
 
   base_url = "https://#{ACCESS_TOKEN}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/"
   zip_name = "app-assets.zip"
@@ -147,10 +147,11 @@ end
 ########################## FILE MANIPULATION AND RESCUE END #################
 
 def download_assets
+  puts "🛠 Fetching Assets:"
+
   validate_token!(ACCESS_TOKEN)
   validate_ha_label!(HA_LABEL, "download_assets")
 
-  puts "...fetching assets for #{HA_LABEL}"
 
   if unzip_to_working_directory && copy_assets_to_destinations
     puts "assets downloaded and copied for #{HA_LABEL}, please verify before submitting"
@@ -159,6 +160,9 @@ def download_assets
     abort
     puts "Failed to download and copy assets"
   end
+
+  puts "✅ Done"
+  puts ""
 rescue => error
   abort
   puts "Something went wrong #{error.message}"

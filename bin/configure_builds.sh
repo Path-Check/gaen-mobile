@@ -30,7 +30,7 @@ PLIST_PATH = "./ios/BT/Info.plist"
 ANDROID_STRINGS_PATH="./android/app/src/main/res/values/strings.xml"
 SEPARATOR = "##################################################################"
 
-def failure_message(message:)
+def failure_message(message)
   puts SEPARATOR
   puts "🚫 #{message}"
   puts SEPARATOR
@@ -82,7 +82,7 @@ end
 def replace_string_in_file(file_path:, regex:, value:)
   file_contents = File.read(file_path)
   new_contents = file_contents.gsub(regex, value)
-  if new_contents.match(value).size > 0
+  if new_contents.match(value)
     File.open(file_path, 'w') { |f| f.write new_contents }
   else
     failure_message "Couldn't match anything with #{regex} on #{file_path}"
@@ -218,31 +218,54 @@ def update_ios_en_region(new_en_region)
   exit 1
 end
 
+def update_enx_applinks_domain(domain)
+  puts "Updating applinks domain to #{domain}"
+  replace_string_in_file(
+    file_path: './ios/COVIDSafePaths.xcodeproj/project.pbxproj',
+    regex: /ENX_APPLINKS_DOMAIN = \"xx-xx.en.express\"/,
+    value: "ENX_APPLINKS_DOMAIN = \"#{domain}\""
+  )
+end
+
 IOS_EN_REGION_KEY = "EN_DEVELOPER_REGION"
 IOS_EN_API_VERSION_KEY = "EN_API_VERSION"
+ENX_APPLINKS_DOMAIN = "ENX_APPLINKS_DOMAIN"
 
 def update_ios_configuration
   environment = Dotenv.parse(File.open(ENV_FILE))
   ios_en_region = environment.fetch(IOS_EN_REGION_KEY, false)
   ios_en_version = environment.fetch(IOS_EN_API_VERSION_KEY, 1)
+  enx_applinks_domain = environment.fetch(ENX_APPLINKS_DOMAIN, false)
 
   update_ios_en_api_version(ios_en_version)
+
   if ios_en_region
     update_ios_en_region(ios_en_region)
   else
     failure_message "EN region is required"
     exit 1
   end
+
+  if enx_applinks_domain
+    update_enx_applinks_domain(enx_applinks_domain)
+  end
 end
 
 
 if File.exist?(ENV_FILE)
+  puts ""
+  puts "🛠 Updating Display Name:"
   update_application_display_name
-  puts "✅ Display Names Updated"
+  puts "✅ Done"
+  puts ""
+  puts "🛠 Updating Bundle Identifiers:"
   update_bundle_identifiers
-  puts "✅ Bundle Identifiers Updated"
+  puts "✅ Done"
+  puts ""
+  puts "🛠 Updating iOS Configuration:"
   update_ios_configuration
-  puts "✅ iOS Configuration Updated"
+  puts "✅ Done"
+  puts ""
 else
   failure_message "#{ENV_FILE} not found on the root folder, environment file is needed"
   exit 1

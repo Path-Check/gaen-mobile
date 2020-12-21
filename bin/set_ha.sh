@@ -28,7 +28,14 @@ Dotenv.load
 HA_LABEL = ARGV[0]
 ACCESS_TOKEN = ARGV[1] || ENV.fetch("ACCESS_TOKEN")
 
+
 if (ACCESS_TOKEN) then
+  puts "Setting HA Configuration and Settings:"
+  puts "--------------------------------------"
+  puts "Health Authority:      #{HA_LABEL}"
+  puts "Resources Commit Hash: #{mobile_resources_commit}"
+  puts ""
+
   fetching_env_succeeded = system("./bin/fetch_ha_env.sh #{HA_LABEL} #{ACCESS_TOKEN}")
 else
   raise "Empty github access token"

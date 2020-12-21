@@ -54,8 +54,8 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
-const customPrefixes = env.DEEP_LINK_PREFIXES?.split(",") || []
-const allPrefixes = ["pathcheck://", "https://*.en.express", ...customPrefixes]
+const enxApplinksDomain = `https://${env.ENX_APPLINKS_DOMAIN}`
+const allPrefixes = ["pathcheck://", "https://*.en.express", enxApplinksDomain]
 
 const linking: LinkingOptions = {
   prefixes: allPrefixes,
