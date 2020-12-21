@@ -8,10 +8,8 @@
   "common": {
     "back": "Tatti",
     "cancel": "Na para",
-    "close": "Huchum",
     "continue": "Kontinua",
     "done": "Munhayan",
-    "enable": "Na lala or na kalamten",
     "maybe_later": "Polu esta i dispues",
     "more": "Mas",
     "next": "I otro",
@@ -37,11 +35,8 @@
     "complete_body_bluetooth": "Un ayuyuda muna para i virus yan un protehi i pumalu na taotao siha gi kommunidad-mu.",
     "complete_title": "Si yu'us ma'asi na un na sasafu i kommunidad-mu!",
     "consent_body_0": "Para uma tungo put i positive na iyo-mu diagnosis , taya sina sumangan sin i malago-mu.",
-    "consent_body_1": "Yanggen un disidi mona, un ayuyuda i pumalu siha gi kommunidad-mu  para fanmamatinas desision put i nilala-niha yan un chochogui lokkue i patte-mu para umana para i machalapun i virus.",
     "consent_body_2": "Ayu ha na infotmasion para umana fan huyong i numeros siha ni man manasetbe gi Bluetooth  yan otro siha telefon ni man ma usa duranten i 14 dias ni man maloffan, yan i makatkula siha na risk score ginen i hafa siha un padesi.",
     "consent_button_title": "Hu Komprendi yan hu Konsienti",
-    "consent_subheader_1": "Sa put hafa na bai ena'i?",
-    "consent_subheader_2": "Taimanu ma chochu?",
     "enable_exposure_notifications_body": "Nesisita un na kalamten i exposure notification para un repot i resuttan i test.",
     "enable_exposure_notifications_title": "Polu ha ya ulalala i exposure notification",
     "error": {
@@ -62,8 +57,7 @@
         "no_token_for_existing_keys": "I guaha na infotmasion mana hanao para i server. Kumekeilekna na sina ha esta ma chagi esti ginen esti na device lao otro na applikasion. Sina un sangani i magas ni munae hao ni verification code ni ma usa. Guaha  {{newKeysInserted}}nuebu siha na keys manmanadania.",
         "no_token_for_existing_keys_title": "Chagi sumatmiti i mangaigi siha na keys"
       }
-    },
-    "start_header_bluetooth": "Ayuda muna para i machalapun i virus yan protehi i pumalu siha gi kommunidad-mu"
+    }
   },
   "exposure_history": {
     "exposure_detail": {
@@ -73,11 +67,6 @@
       "next_steps": "Otro mona para ma chogui",
       "wash_your_hands": "Fagasi i kannai-mu",
       "wear_a_mask": "Usa mask"
-    },
-    "exposure_window": {
-      "four_to_six_days_ago": "Kuatro esta sais dias",
-      "seven_to_fourteen_days_ago": "Siette esta katotsi dias",
-      "today_to_three_days_ago": "Gi maloffan na tres dias"
     },
     "health_guidelines": {
       "six_feet_apart": "Suhay 6 pi'e",
@@ -89,7 +78,7 @@
     "how_does_this_work": "Taimanu esti ma chochu?",
     "how_does_this_work_para": "Yanggen man 'on' i Notifikasion Exposures, i telefon-mu ha u'usa i Bluetooth para u fanuli yan u goti i random number strings siha(mafanana'an random IDs) gi maseha hafa na telefon ni mangaigi gi fion-na ni gai eyu  Exposure Notification ni mana kalalamten. I random IDs ti un inaidentifika perosnat yan otro siha users ya ha tulalaika gui sessu gi dia para u protehi i iyo-mu privacy.",
     "last_days": "I man mapos 14 dias",
-    "learn_more": "Tungo Mas",
+    "next_steps": "Otro mona para ma chogui",
     "no_connectivity_message": "Ti ma konenek hao gi internet!",
     "no_exposure_reports": "Taya ripot tinanmi pat ninayi",
     "no_exposure_reports_over_past": "Taya ripot un risibi  put kao guaha ninayi pat tinanmi gi maloffan 14 dias.",
@@ -107,9 +96,6 @@
     "bluetooth_info_body": "I telefon-mu ha sesienti otro siha telefon ni man hihot gi fion-mu ni umu'usa Bluetooth Low Energy. Ha nana'i esti lugat i app para u log i iyo-mu daily encounters sin taya tumungo achuk ha ti un bababa i app gi iyo-mu device.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} para u lalala ha maseha ma huchum i app",
-      "bluetooth_disabled_error_message": "Falak i Settings app ya un na kalamten i Bluetooth para u famauleg i lachi",
-      "bluetooth_disabled_error_title": "Na kalamten i Bluetooth gi Settings",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Para un na kalamten i Exposure Notification technology, autorisa i Location access gi Settings app",
       "location_disabled_error_title": "Ma autorisa gi Settings",
       "location_header": "Lokasion",
@@ -140,13 +126,10 @@
     "unchecked_checkbox": "Ti macheck na checkbox"
   },
   "navigation": {
-    "exposure": "Tinanmi or Ninayi",
     "exposure_history": "Historian i ninayi (chetnot)",
-    "home": "Guma",
-    "more_info": "Mas infotmasion"
+    "home": "Guma"
   },
   "onboarding": {
-    "activation_header_title": "App Setup",
     "app_setup_complete_body": "Kalalamten i {{applicationName}}. Si yu'us ma'asi ni ayudu-mu para umautut esti i kadenan i chetnot.",
     "app_setup_complete_header": "Kumpledo i App Setup",
     "app_setup_incomplete_body": "{{applicationName}} ha nesisita petmisu para Proximity Tracing and Bluetooth para umatungo ngaian yan manu na ma tanmi hao ni COVID 19. Sina un autorisa esti gi Settings.",

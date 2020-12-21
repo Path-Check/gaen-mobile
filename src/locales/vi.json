@@ -18,18 +18,15 @@
   "common": {
     "back": "Trở lại",
     "cancel": "Hủy",
-    "close": "Đóng",
     "close_screen": "Tắt màn hình",
     "confirm": "Xác nhận",
     "continue": "Tiếp tục",
     "done": "Hoàn tất",
     "edit": "Sửa",
-    "enable": "Kích hoạt",
     "learn_more": "Tìm hiểu thêm",
     "maybe_later": "Có thể là lúc khác",
     "more": "Bổ sung",
     "next": "Kế tiếp",
-    "no": "Không",
     "no_thanks": "Không, cám ơn",
     "off": "TẮT",
     "okay": "Được chứ",
@@ -41,31 +38,20 @@
     "something_went_wrong": "Đã có vấn đề",
     "start": "Bắt đầu",
     "submit": "Gửi",
-    "success": "Thành công",
-    "yes": "Có"
+    "success": "Thành công"
   },
   "covid_data": {
     "apologies_data_unavailable": "Rất tiếc, dữ liệu COVID không khả dụng.",
-    "cases_today": "Số ca hôm nay",
-    "covid_coverage": "Phạm Vi Ảnh Hưởng của Covid",
-    "covid_data": "Dữ Liệu COVID",
     "daily_new_cases": "Ca mới hàng ngày",
-    "deaths_today": "Số ca tử vong hôm nay",
-    "down_from_last_week": "Từ tuần vừa qua",
     "error_getting_data": "Rất tiếc, chúng tôi không thể truy xuất dữ liệu về các ca COVID mới nhất đối với {{location}}.",
     "infection_rate": "Tỉ lệ nhiễm bệnh",
     "new_cases": "Các Ca Mới",
-    "past_7_days": "7 ngày qua",
     "per_100k": "mỗi 100k",
     "positive_test_rate": "Tỉ lệ xét nghiệm dương tính",
     "see_more": "Xem thêm",
     "source": "Nguồn: {{source}}",
-    "spread_of_the_virus_in": "Sự lây lan của virut ở {{locationName}}",
-    "total_cases": "Tổng số ca",
-    "total_deaths": "Tổng số ca tử vong",
     "trending_down": "Xu hướng giảm",
-    "trending_up": "Xu hướng tăng",
-    "up_from_last_week": "Đến tuần vừa qua"
+    "trending_up": "Xu hướng tăng"
   },
   "errors": {
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
@@ -97,11 +83,8 @@
     "complete_body_bluetooth": "Bạn đang giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình.",
     "complete_title": "Cảm ơn bạn đã giúp bảo vệ cộng đồng của bạn!",
     "consent_body_0": "Việc chia sẻ thông tin chẩn đoán dương tính của bạn là không bắt buộc và chỉ có thể được thực hiện khi có sự đồng ý của bạn.",
-    "consent_body_1": "Nếu bạn chọn như thế, bạn đang giúp những người khác trong cộng đồng của mình đưa ra quyết định sáng suốt: về sức khỏe của họ và góp phần mình kiềm chế sự lây lan của virut.",
     "consent_body_2": "Thông tin duy nhất được chia sẻ sẽ là tập hợp các số ngẫu nhiên mà điện thoại của bạn đã trao đổi qua Bluetooth với các điện thoại khác đã ở gần trong 14 ngày vừa qua, cùng với một điểm rủi ro bình quân dựa trên thời điểm xuất hiện các triệu chứng của bạn.",
     "consent_button_title": "Tôi Hiểu và Đồng Ý",
-    "consent_subheader_1": "Tại sao tôi nên chia sẻ?",
-    "consent_subheader_2": "Cách hoạt động của nó?",
     "consent_warning_message": "Tiếp tục sẽ vô hiệu mã xác minh của bạn. Nếu bạn muốn chia sẻ chẩn đoán dương tính của bạn trong tương lai, trước tiên bạn sẽ cần phải nhận một mã xác minh mới.",
     "consent_warning_title": "Cảnh báo!",
     "enable_exposure_notifications_body": "Bạn phải cho phép thông báo tiếp xúc để báo cáo về một kết quả xét nghiệm dương tính.",
@@ -112,7 +95,6 @@
       "invalid_code": "Thử sử dụng một mã khác",
       "invalid_format": "Các mã số chỉ có thể chứa các con số và chữ cái",
       "network_connection_error": "Không có kết nối internet.",
-      "timeout_error": "Yêu cầu mất quá nhiều thời gian",
       "unknown_code_verification_error": "Thử sử dụng một mã khác",
       "verification_code_used": "Mã xác minh đã được sử dụng"
     },
@@ -139,8 +121,6 @@
         "no_token_for_existing_keys_title": "Cố gửi các mã hiện hữu"
       }
     },
-    "start_header_bluetooth": "Giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình",
-    "submit_code": "Gửi mã",
     "verification_code_info": {
       "how_do_i_get_body": "Liên cơ quan y tế của bạn, {{healthAuthorityName}}",
       "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
@@ -166,11 +146,6 @@
       "wash_your_hands": "Rửa tay",
       "wear_a_mask": "Đeo khẩu trang"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "Cách đây 4 đến 6 ngày",
-      "seven_to_fourteen_days_ago": "Cách đây 7 đến 14 ngày",
-      "today_to_three_days_ago": "Trong vòng 3 ngày vừa qua"
-    },
     "health_guidelines": {
       "six_feet_apart": "Giữ khoảng cách 6 feet. ",
       "stay_home": "Ở nhà khi bị bệnh",
@@ -182,7 +157,6 @@
     "how_does_this_work": "Cách hoạt động của quy trình này?",
     "how_does_this_work_para": "Khi Thông Báo Tiếp Xúc được bật, điện thoại của bạn sử dụng Bluetooth để hoán đổi và lưu các chuỗi số ngẫu nhiên (được gọi là các ID ngẫu nhiên) từ bất kỳ điện thoại nào nó có tiếp xúc gần với điện thoại cũng đã bật Thông Báo Tiếp Xúc. Các ID ngẫu nhiên sẽ không nhận dạng cá nhân bạn cho người dùng khác biết và thay đổi nhiều lần mỗi ngày để bảo vệ quyền riêng tư của bạn.",
     "last_days": "14 ngày vừa qua",
-    "learn_more": "Tìm Hiểu Thêm",
     "more_info": "Tìm hiểu thêm về Thông báo phơi sáng",
     "no_connectivity_message": "Bạn chưa kết nối với internet!",
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
@@ -219,9 +193,6 @@
     "bluetooth_info_body": "Điện thoại của bạn phát hiện những chiếc điện thoại khác mà bạn đã ở gần, dùng Bluetooth Low Energy. Điều này cho phép ứng dụng ghi nhận ẩn danh các tình huống tiếp xúc hàng ngày của bạn, ngay cả khi bạn không mở ứng dụng trên thiết bị của bạn.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} sẽ vẫn hoạt động sau khi đã đóng ứng dụng",
-      "bluetooth_disabled_error_message": "Vào ứng dụng Thiết Lập và bật Bluetooth để sửa lỗi này",
-      "bluetooth_disabled_error_title": "Bật Bluetooth trong Thiết Lập",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Để kích hoạt công nghệ Thông Báo Tiếp Xúc, hãy cho phép truy cập Định Vị trong ứng dụng Thiết Lập",
       "location_disabled_error_title": "Cho phép trong Thiết Lập",
       "location_header": "Định vị",
@@ -235,7 +206,6 @@
     },
     "call_emergency_services": "Gọi Dịch Vụ Cấp Cứu",
     "check_if_your_symptoms": "Nhập các triệu chứng của bạn và nhận khuyến cáo tức thời về cách đảm bảo an toàn.",
-    "did_you_test_positive": "Bạn đã có xét nghiệm dương tính với COVID-19?",
     "enter_symptoms": "Nhập triệu chứng",
     "fix": "Khắc phục vấn đề với {{technology}}",
     "get_more_info": "Nhận thêm thông tin về {{technology}}",
@@ -247,9 +217,7 @@
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
     "proximity_tracing_info_subheader_1": "Thông Báo Tiếp Xúc hoạt động như thế nào?",
     "proximity_tracing_info_subheader_2": "Dữ liệu của tôi có được bảo mật không?",
-    "request_call": "Yêu Cầu Gọi",
     "take_assessment": "Tiến Hành Đánh Giá",
-    "to_submit_your_test": "Để nhận mã kết quả xét nghiệm, bạn sẽ cần phải nói chuyện với một người truy dấu vết tiếp xúc.",
     "verification_code_card": {
       "if_you_have_a_code": "Gửi mã xác minh của bạn để giúp giữ an toàn cho cộng đồng của bạn.",
       "if_you_have_a_positive_test": "Nếu bạn đã có kết quả xét nghiệm dương tính với COVID-19, bạn có thể báo cáo xét nghiệm một cách ẩn danh để giúp giữ an toàn cho cộng đồng của bạn.",
@@ -270,25 +238,17 @@
     "unchecked_checkbox": "Hộp kiểm đã bỏ chọn"
   },
   "navigation": {
-    "exposure": "Tiếp xúc",
     "exposure_history": "Lịch Sử Tiếp Xúc",
     "home": "Bảng điều khiển",
-    "more_info": "Thông Tin Bổ Sung",
     "settings": "Thiết lập",
     "symptom_history": "Công Cụ Kiểm Tra Triệu Chứng"
   },
   "onboarding": {
-    "activation_header_title": "Cài Đặt Ứng Dụng",
     "app_setup_complete_body": "{{applicationName}} có hiệu lực. Cảm ơn bạn đã giúp phá vỡ dây chuyền lây nhiễm.",
     "app_setup_complete_header": "Cài Đặt Ứng Dụng Hoàn Tất!",
     "app_setup_incomplete_body": "{{applicationName}} yêu cầu quyền truy cập Thông Báo Tiếp Xúc và Bluetooth để biết bạn đã tiếp xúc với COVID 19 vào lúc nào và ở đâu. Bạn có thể cho phép quyền này trong Thiết Lập.",
     "app_setup_incomplete_header": "Cài Đặt Ứng Dụng Không Hoàn Chỉnh",
     "app_setup_incomplete_location_body": "{{applicationName}} yêu cầu quyền truy cập Thông Báo Tiếp Xúc, Bluetooth, và Định Vị để biết bạn đã tiếp xúc với COVID 19 vào lúc nào và ở đâu. Bạn có thể cho phép quyền này trong Thiết Lập.",
-    "bluetooth_alert_body": "Để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập Bluetooth của thiết bị.",
-    "bluetooth_alert_header": "Kích Hoạt Bluetooth",
-    "bluetooth_body": "Để sử dụng chức năng quét Bluetooth, cần phải bật thiết lập Bluetooth của thiết bị.",
-    "bluetooth_header": "Kích Hoạt Bluetooth",
-    "bluetooth_subheader": "Tại sao tôi cần phải bật thiết lập Bluetooth của điện thoại của tôi?",
     "eula": "Thỏa Thuận Pháp Lý Người Dùng Cuối",
     "eula_agree_terms_of_use": "Tôi đồng ý rằng tôi đã đọc và chấp nhận các điều khoản sử dụng",
     "i_am_over": "Có, tôi trên {{minimumAge}}",
@@ -347,15 +307,12 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "Tôi Hiểu và Đồng Ý",
-    "not_sharing_anonymized_data": "Không chia sẻ dữ liệu ẩn danh",
     "privacy_policy": "Chính Sách về Quyền Riêng Tư",
     "share_anonymized_data": "Chia Sẻ Dữ Liệu Ẩn Danh",
     "share_anonymized_data_disclaimer": "Bằng việc tiếp tục, bạn đồng ý chia sẻ các câu trả lời ẩn danh đối với các câu hỏi tầm soát với {{healthAuthorityName}}",
     "share_data_para_1": "Dữ liệu ẩn danh và tổng hợp về việc các cộng đồng đang sử dụng ứng dụng này như thế nào giúp Ủy Ban {{healthAuthorityName}} phân tích, hiểu và kiềm chế sự lây lan của COVID-19.",
     "share_data_para_2": "Dữ liệu này không chứa thông tin nhận dạng cá nhân.",
-    "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh",
-    "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu",
-    "you_are_sharing_data": "Bạn đang chia sẻ dữ liệu ẩn danh"
+    "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -526,8 +483,6 @@
     "invalid_code_title": "Mã không hợp lệ",
     "network_connection_body": "Bạn cần kết nối với WiFi để gửi mã xác minh.",
     "network_connection_title": "Không có kết nối Internet",
-    "timeout_body": "It took to long to submit the verification code. Please try again later.\n",
-    "timeout_title": "Quá trình gửi quá lâu",
     "unknown_body": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
     "unknown_title": "Có gì đó sai"
   }

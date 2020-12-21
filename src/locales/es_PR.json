@@ -18,18 +18,15 @@
   "common": {
     "back": "Regresar",
     "cancel": "Cancelar",
-    "close": "Cerrar",
     "close_screen": "Cerrar pantalla",
     "confirm": "Confirmar",
     "continue": "Continuar",
     "done": "Finalizado",
     "edit": "Editar",
-    "enable": "Habilitar",
     "learn_more": "Más información",
     "maybe_later": "Quizás más tarde",
     "more": "Más",
     "next": "Siguiente",
-    "no": "No",
     "no_thanks": "No, gracias",
     "off": "DESACTIVADA",
     "okay": "Sí",
@@ -41,31 +38,23 @@
     "something_went_wrong": "Algo salió mal",
     "start": "Empezar",
     "submit": "Enviar",
-    "success": "Éxito",
-    "yes": "Sí"
+    "success": "Éxito"
   },
   "covid_data": {
     "apologies_data_unavailable": "Lo sentimos, los datos de COVID no están disponibles.",
-    "cases_today": "Casos de hoy",
-    "covid_coverage": "Alcance del Covid",
-    "covid_data": "Datos de COVID",
+    "covid_stats": "Estadísticas de COVID-19",
     "daily_new_cases": "Nuevos casos diarios",
-    "deaths_today": "Muertes de hoy",
-    "down_from_last_week": "Abajo la semana pasada",
     "error_getting_data": "Lo sentimos, no pudimos encontrar los datos de los últimos casos de COVID en {{location}}.",
     "infection_rate": "Tasa de infección",
     "new_cases": "Casos nuevos",
-    "past_7_days": "Últimos 7 días",
+    "overall_risk_level_in": "Nivel de riesgo general en {{locationName}}",
+    "past_days": "Nuevos casos por día, últimos {{days}} días",
     "per_100k": "por 100k",
     "positive_test_rate": "Tasa de prueba positiva",
     "see_more": "Ver más",
     "source": "fuente: {{source}}",
-    "spread_of_the_virus_in": "Propagación del virus en {{locationName}}",
-    "total_cases": "Total de casos",
-    "total_deaths": "Total de muertes",
     "trending_down": "Tendencias a la baja",
-    "trending_up": "Tendencias al alza",
-    "up_from_last_week": "Arriba la semana pasada"
+    "trending_up": "Tendencias al alza"
   },
   "errors": {
     "description": "Se ha producido un error. Vuelva a cargar la aplicación.",
@@ -97,11 +86,8 @@
     "complete_body_bluetooth": "Está ayudando a contener la propagación del virus y a proteger a otros en tu comunidad.",
     "complete_title": "¡Gracias por mantener segura a su comunidad!",
     "consent_body_0": "Compartir su diagnóstico positivo es opcional y solo se puede hacer con su consentimiento.",
-    "consent_body_1": "Si elige hacerlo, está ayudando a otros en su comunidad a tomar decisiones informadas sobre su salud y está desempeñando su papel para contener la propagación del virus.",
     "consent_body_2": "La única información compartida será el conjunto aleatorio de números que su teléfono intercambió a través de Bluetooth con otros teléfonos que estuvieron cerca durante los últimos 14 días, junto con una puntuación de riesgo ponderada basada en cuándo se desarrollaron sus síntomas.",
     "consent_button_title": "Entiendo y doy mi consentimiento",
-    "consent_subheader_1": "¿Por qué debería compartir?",
-    "consent_subheader_2": "¿Cómo funciona?",
     "consent_warning_message": "Continuar anulará su código. Si desea compartir su diagnóstico positivo en el futuro, primero deberá obtener un nuevo código de resultado positivo de la prueba.",
     "consent_warning_title": "¡Advertencia!",
     "enable_exposure_notifications_body": "Debe activar los avisos de exposición para informar de un resultado positivo.",
@@ -112,7 +98,6 @@
       "invalid_code": "Intentar con otro código",
       "invalid_format": "Los códigos pueden contener solo números y letras",
       "network_connection_error": "No hay conexión a internet",
-      "timeout_error": "La solicitud tomó demasiado tiempo",
       "unknown_code_verification_error": "Intentar con otro código",
       "verification_code_used": "El código de verificación ya fue usado"
     },
@@ -139,8 +124,15 @@
         "no_token_for_existing_keys_title": "Intentar enviar claves que ya existen"
       }
     },
-    "start_header_bluetooth": "Ayude a contener la propagación del virus y proteja a otros en su comunidad",
-    "submit_code": "Envíe el código",
+    "symptom_onset": {
+      "did_you_have_symptoms": "¿Tuvo algún síntoma?",
+      "no_i_didnt_have": "No, no tuve ningún síntoma",
+      "select_date": "Seleccione fecha",
+      "symptom_onset_date": "Fecha de inicio de síntomas",
+      "symptoms": "Síntomas",
+      "when_did_your_symptoms": "¿Cuándo se iniciaron sus síntomas?",
+      "yes_i_did_have": "Sí, si tuve síntomas"
+    },
     "verification_code_info": {
       "how_do_i_get_body": "Póngase en contacto con su autoridad de salud, {{healthAuthorityName}}",
       "how_do_i_get_header": "¿Cómo obtengo el código de verificación?",
@@ -152,6 +144,7 @@
   },
   "exposure_history": {
     "check_for_exposures": "Comprobar si hay exposiciones",
+    "days_remaining": "Quedan {{daysOfQuarantineLeft}} días de su período de cuarentena recomendado.",
     "exposure_detail": {
       "2m_apart": "2 m (6 pies) de distancia",
       "6ft_apart": "6 pies de distancia",
@@ -166,11 +159,8 @@
       "wash_your_hands": "Lávese las manos",
       "wear_a_mask": "Use mascarilla"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "Hace 4 a 6 días",
-      "seven_to_fourteen_days_ago": "Hace entre 7 y 14 días",
-      "today_to_three_days_ago": "En los últimos 3 días"
-    },
+    "exposure_report": "Informe de exposición",
+    "exposure_summary": "Alguien del que usted estuvo cerca entre el {{startDate}} y el {{endDate}} ha dado positivo para COVID-19.",
     "health_guidelines": {
       "six_feet_apart": "Manténgase a seis pies de distancia",
       "stay_home": "Quédese en casa cuando esté enfermo",
@@ -182,17 +172,20 @@
     "how_does_this_work": "¿Como funciona esto?",
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, su teléfono usará Bluetooth para intercambiar y guardar cadenas de carácteres aleatorios (llamadas identificaciones aleatorias) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorios no le identificarán personalmente a los otros usuarios y varían muchas veces al día para proteger su privacidad. La fecha y duración de los encuentros serán grabados así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
     "last_days": "Los últimos 14 días",
-    "learn_more": "Más información",
     "more_info": "Conozca más acerca de las Notificaciones de Exposición",
+    "next_steps": "Próximos pasos",
     "no_connectivity_message": "¡No estás conectado a Internet!",
     "no_exposure_reports": "Ningún informe de exposición",
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
     "possible_exposure": "Posible exposición al COVID-19",
+    "possible_exposures": "Posibles exposiciones",
     "protect_yourself_and_others": "Protéjase a sí mismo y a los integrantes de su comunidad",
     "review_guidance_from_ha": "Revise las recomendaciones del {{healthAuthorityName}}",
+    "review_health_guidance": "Revisar la guía de salud",
     "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí un aviso de exposición?",
-    "why_did_i_get_an_en_para": "Usted recibirá un aviso de exposición cuando haya estado cerca de alguien que luego reciba un resultado positivo a COVID-19 y que haya decidido notificarlo."
+    "why_did_i_get_an_en_para": "Usted recibirá un aviso de exposición cuando haya estado cerca de alguien que luego reciba un resultado positivo a COVID-19 y que haya decidido notificarlo.",
+    "your_device_exchanged": "Dentro de cada rango de fechas a continuación, su dispositivo intercambió claves con otro dispositivo que luego recibió un resultado positivo verificado de la prueba."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "Para activar las Notificaciones de Exposición, primero debe activar Bluetooth en su aplicación de Configuraciones.",
@@ -200,6 +193,8 @@
     "cant_check_for_exposures_body": "Debe activar las Notificaciones de Exposición para buscar exposiciones.",
     "cant_check_for_exposures_button": "Habilitar Avisos de Exposición",
     "cant_check_for_exposures_title": "No pueden buscarse las Exposiciones.",
+    "location_body": "Google requiere que los dispositivos que ejecutan Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar las notificaciones de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
+    "location_title": "Active el servicio de localización",
     "set_active_region_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación y presione ‘Fijar como región activa’.",
     "set_active_region_ios_title": "Fijar región activa",
     "share_exposure_information_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación. Asegúrese de activar ’Compartir Información de Exposición', presione 'Fijar como región activa'.",
@@ -219,9 +214,6 @@
     "bluetooth_info_body": "Su teléfono detecta otros teléfonos con los que pasa tiempo cerca mediante el uso de Bluetooth de baja energía. Esto permite que la aplicación registre sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación abierta en su dispositivo.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} permanecerá activo después de que la aplicación se haya cerrado",
-      "bluetooth_disabled_error_message": "Vaya a la aplicación Configuración y habilite Bluetooth para corregir este error",
-      "bluetooth_disabled_error_title": "Habilitar Bluetooth en Configuración",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Para activar la tecnología de Avisos de Exposición, autorice el acceso a su localización que está en la Configuración de la aplicación",
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
@@ -235,21 +227,23 @@
     },
     "call_emergency_services": "Llamar Servicios de Emergencia",
     "check_if_your_symptoms": "Escribir síntomas y obtener una recomendación instantánea sobre cómo estar a salvo.",
-    "did_you_test_positive": "¿Dio positivo en la prueba de COVID-19?",
     "enter_symptoms": "Ingrese síntomas",
+    "error": {
+      "share_link_failed": "No se pudo abrir el enlace para compartir"
+    },
     "fix": "Solucionar problemas con {{technology}}",
     "get_more_info": "Obtener más información sobre {{technology}}",
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
     "location_info_body": "Google requiere que los dispositivos con Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar la Detección de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
     "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
     "not_feeling_well": "¿No te sientes bien?",
+    "notifications_off": "Active las notificaciones para ser notificado si ha estado expuesto",
+    "open_healthcheck": "Abrir Healthcheck",
     "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_subheader_1": "¿Cómo funcionan los Avisos de Exposición?",
     "proximity_tracing_info_subheader_2": "¿Están mis datos seguros?",
-    "request_call": "Solicitar llamada",
     "take_assessment": "Tomar evaluación",
-    "to_submit_your_test": "Para obtener el código de resultado de la prueba, deberá hablar con un rastreador de contactos.",
     "verification_code_card": {
       "if_you_have_a_code": "Envíe su código de verificación para ayudar a mantener segura a su comunidad.",
       "if_you_have_a_positive_test": "Si el resultado de su prueba para COVID-19 fue positivo, puede informar sobre la prueba de forma anónima para ayudar a mantener segura a su comunidad.",
@@ -270,25 +264,17 @@
     "unchecked_checkbox": "Casilla de verificación no marcada"
   },
   "navigation": {
-    "exposure": "Exposición",
     "exposure_history": "Historial de exposición",
     "home": "Panel",
-    "more_info": "Más información",
     "settings": "Configuración",
     "symptom_history": "Comprobador de síntomas"
   },
   "onboarding": {
-    "activation_header_title": "Configuración de la aplicación",
     "app_setup_complete_body": "{{applicationName}} está activo. Gracias por ayudar a romper la cadena de contagios.",
     "app_setup_complete_header": "¡Configuración de la aplicación completada!",
     "app_setup_incomplete_body": "{{applicationName}} requiere avisos de exposición, Bluetooth y localización para saber cuándo y dónde usted ha estado expuesto a COVID 19. Puede autorizar esto en la Configuración.",
     "app_setup_incomplete_header": "Configuración de aplicación incompleta",
     "app_setup_incomplete_location_body": "{{applicationName}} requiere permisos de rastreo de proximidad, Bluetooth y localización para saber cuándo y dónde usted ha estado expuesto a COVID 19. Puede autorizar esto en la Configuración.",
-    "bluetooth_alert_body": "Para usar la exploración Bluetooth, la configuración de Bluetooth del dispositivo debe estar activada.",
-    "bluetooth_alert_header": "Activar Bluetooth",
-    "bluetooth_body": "Para usar la exploración Bluetooth, la configuración de Bluetooth del dispositivo debe estar activada.",
-    "bluetooth_header": "Activar Bluetooth",
-    "bluetooth_subheader": "¿Por qué necesito activar la configuración Bluetooth de mi teléfono?",
     "eula": "Acuerdo legal del usuario final",
     "eula_agree_terms_of_use": "Estoy de acuerdo en que he leído y aceptado los términos de uso",
     "i_am_over": "Sí, tengo más de {{minimumAge}}",
@@ -347,15 +333,12 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "Entiendo y doy mi consentimiento",
-    "not_sharing_anonymized_data": "No compartir datos anónimos",
     "privacy_policy": "Política de privacidad",
     "share_anonymized_data": "Comparta datos anónimos",
     "share_anonymized_data_disclaimer": "Al continuar, acepta compartir respuestas anónimas a las preguntas de detección con {{healthAuthorityName}}",
     "share_data_para_1": "Los datos anónimos y agregados sobre cómo las comunidades están utilizando esta aplicación ayudan al {{healthAuthorityName}} a analizar, comprender y contener la propagación de COVID-19.",
     "share_data_para_2": "Estos datos no contienen información de identificación personal.",
-    "sharing_anonymized_data": "Compartir datos anónimos",
-    "stop_sharing_data": "Dejar de compartir datos",
-    "you_are_sharing_data": "Está compartiendo datos anónimos"
+    "stop_sharing_data": "Dejar de compartir datos"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
@@ -526,8 +509,6 @@
     "invalid_code_title": "Código inválido",
     "network_connection_body": "Para enviar el código de verficación debe estar conectado a WiFi.",
     "network_connection_title": "No hay conexión a internet",
-    "timeout_body": "Tomó demasiado tiempo enviar el código de verificación. Por favor, intente más tarde.",
-    "timeout_title": "El envío tardó demasiado",
     "unknown_body": "Ocurrió un error inesperado. Por favor, intente de nuevo.",
     "unknown_title": "Algo salió mal"
   }

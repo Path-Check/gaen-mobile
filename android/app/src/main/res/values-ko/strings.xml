@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">노출 확인 중…</string>
   <string name="exposure_notification_channel_description">노출 알림 경고</string>
   <string name="exposure_notification_channel_name">노출 알림</string>
   <string name="exposure_notification_message">귀하의 주변에서 코로나19 감염 확진자가 발생했습니다. 자세한 정보를 보려면 해당 버튼을 누릅십시오.</string>

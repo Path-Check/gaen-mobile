@@ -18,7 +18,6 @@
   "common": {
     "back": "Geri",
     "cancel": "İptal et",
-    "close": "Kapat",
     "close_screen": "Ekranı kapat",
     "confirm": "Onayla",
     "continue": "Devam et",
@@ -28,7 +27,6 @@
     "maybe_later": "Belki daha sonra",
     "more": "Daha fazla",
     "next": "Sonraki",
-    "no": "Hayır",
     "no_thanks": "Hayır, teşekkürler",
     "off": "KAPALI",
     "okay": "Tamam",
@@ -40,31 +38,20 @@
     "something_went_wrong": "Bir terslik yaşandı",
     "start": "Başla",
     "submit": "Gönder",
-    "success": "Başarılı",
-    "yes": "Evet"
+    "success": "Başarılı"
   },
   "covid_data": {
     "apologies_data_unavailable": "Özür dileriz, COVID verileri mevcut değil.",
-    "cases_today": "Bugünkü vakalar",
-    "covid_coverage": "Covid Kapsamı",
-    "covid_data": "COVID Verileri",
     "daily_new_cases": "Günlük yeni vakalar",
-    "deaths_today": "Bugünkü ölümler",
-    "down_from_last_week": "Geçen haftaya göre düşük",
     "error_getting_data": "Maalesef {{location}} için en son COVID vakası verilerini alamadık.",
     "infection_rate": "Enfeksiyon oranı",
     "new_cases": "Yeni Vakalar",
-    "past_7_days": "Son 7 gün",
     "per_100k": "Her 100 binde",
     "positive_test_rate": "Pozitif test oranı",
     "see_more": "Daha fazlasını gör",
     "source": "kaynak: {{source}}",
-    "spread_of_the_virus_in": "Virüsün {{locationName}} içinde yayılması",
-    "total_cases": "Toplam vaka",
-    "total_deaths": "Toplam ölüm ",
     "trending_down": "Azalıyor",
-    "trending_up": "Yükseliyor",
-    "up_from_last_week": "Geçen haftaya göre daha yüksek"
+    "trending_up": "Yükseliyor"
   },
   "errors": {
     "description": "Bir hata oluştu. Lütfen uygulamayı tekrar yükle.",
@@ -85,11 +72,8 @@
     "complete_body_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsun",
     "complete_title": "Toplumun güvenliğini sağlamaya yardımcı olduğun için teşekkürler",
     "consent_body_0": "Pozitif olduğuna dair tanıyı paylaşıp paylaşmamak isteğe bağlıdır ve ancak sen kabul edersen yapılabilir.",
-    "consent_body_1": "Bu bilgiyi paylaşmaya karar verirsen toplumun diğer mensuplarının kendi sağlıklarıyla ilgili bilgiye dayalı kararlar almalarına yardımcı olur, virüsün kontrol altına alınmasında üzerine düşeni yapmış olursun.",
     "consent_body_2": "Paylaşılacak tek bilgi, telefonunun son 14 gün içinde yakınlarda bulunmuş olan diğer telefonlarla Bluetooth aracılığıyla paylaştığı rastgele sayı dizisi ile belirtilerinin ne zaman geliştiğine dair ağırlıklı risk puanlarıdır.",
     "consent_button_title": "Anlıyorum ve Onaylıyorum",
-    "consent_subheader_1": "Neden paylaşmalıyım?",
-    "consent_subheader_2": "Nasıl çalışıyor?",
     "consent_warning_message": "Devam edersen doğrulama kodun geçersiz olacak. Gelecekte pozitif tanını paylaşmak istersen yeni bir doğrulama  kodu alman gerekecek.",
     "consent_warning_title": "Uyarı!",
     "enable_exposure_notifications_body": "Pozitif test sonucu bildirmek için maruz kalma bildirimlerini etkinleştirmelisin.",
@@ -100,7 +84,6 @@
       "invalid_code": "Farklı bir kod dene",
       "invalid_format": "Kodlar yalnızca rakam ve harf içerebilir",
       "network_connection_error": "İnternet bağlantısı yok",
-      "timeout_error": "İstek çok uzun sürdü",
       "unknown_code_verification_error": "Farklı bir kod dene",
       "verification_code_used": "Doğrulama kodu zaten kullanılmıştı"
     },
@@ -127,8 +110,9 @@
         "no_token_for_existing_keys_title": "Varolan anahtarları gönderme girişimi"
       }
     },
-    "start_header_bluetooth": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı ol.",
-    "submit_code": "Kodu Gönder",
+    "symptom_onset": {
+      "symptoms": "Belirtiler"
+    },
     "verification_code_info": {
       "how_do_i_get_body": "{{healthAuthorityName}} sağlık otoritenle temasa geç.",
       "how_do_i_get_header": "Bir doğrulama kodunu nasıl alabilirim?",
@@ -154,11 +138,6 @@
       "wash_your_hands": "Ellerini yıka",
       "wear_a_mask": "Maske tak"
     },
-    "exposure_window": {
-      "four_to_six_days_ago": "4-6 gün önce",
-      "seven_to_fourteen_days_ago": "7-14 gün önce",
-      "today_to_three_days_ago": "son 3 gün içinde"
-    },
     "health_guidelines": {
       "six_feet_apart": "6 ayak uzaklıkta kal",
       "stay_home": "Hastaysan evde kal",
@@ -170,7 +149,6 @@
     "how_does_this_work": "Bu nasıl çalışıyor?",
     "how_does_this_work_para": "Maruz Kalma Bildirimleri açık olduğunda telefonun, yakınında bulunan ve maruz kalma bildirimleri açık olan diğer telefonlardan Bluetooth aracılığıyla rastgele rakam dizileri (rastgele ID diye adlandırılır) takas eder ve kaydeder. Rastgele ID'ler senin kim olduğunu diğer kullanıcılara bildirmez ve senin gizliliğini korumak amacıyla gün içinde birçok kez değişirler.",
     "last_days": "Son 14 gün",
-    "learn_more": "Daha fazla bilgi edin",
     "more_info": "Maruz Kalma Bildirimleri hakkında daha fazla bilgi edin",
     "no_connectivity_message": "İnternete bağlı değilsin!",
     "no_exposure_reports": "Maruz kalma bildirimi yok",
@@ -205,9 +183,6 @@
     "bluetooth_info_body": "Telefonun, Bluetooth Düşük Enerji kullanarak yakınında vakit geçirdiğin başka telefonları tespit eder. Bu da, cihazındaki uygulama kapalı olsa bile uygulamanın günlük karşılaşmalarını anonim olarak kaydetmesine olanak tanır. ",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} uygulama kapatıldıktan sonra etkin kalır",
-      "bluetooth_disabled_error_message": "Cihazının ayarlarından Bluetooth'u aç.",
-      "bluetooth_disabled_error_title": "Bluetooth'u etkinleştir",
-      "bluetooth_header": "Bluetooth",
       "location_disabled_error_message": "Maruz Kalma Bildirimi teknolojisini etkinleştirmek için Ayarlar uygulamasından Konum erişimini aç.",
       "location_disabled_error_title": "Ayarlar'dan izin ver",
       "location_header": "Konum",
@@ -221,7 +196,6 @@
     },
     "call_emergency_services": "Acil Servisleri Ara",
     "check_if_your_symptoms": "Belirtilerini gir ve nasıl güvende kalacağına dair anında öneri al.",
-    "did_you_test_positive": "COVID-19 testin pozitif mi çıktı?",
     "enter_symptoms": "Belirtileri gir",
     "fix": "{{technology}} ile ilgili sorunları gider",
     "get_more_info": "{{technology}} ile ilgili daha fazla bilgi edin",
@@ -233,9 +207,7 @@
     "proximity_tracing_info_body_2": "Bir karşılaşma durumunda verilerin ve bilgilerin anonim kalır. Uygulama herhangi bir kişisel veri saklamaz. Yalnızca rastgele ID'ler değiştirilir. Bunlar 14 gün içinde silinir.",
     "proximity_tracing_info_subheader_1": "Maruz Kalma Bildirimleri nasıl çalışır?",
     "proximity_tracing_info_subheader_2": "Verilerim güvende mi",
-    "request_call": "Arama Talep Et",
     "take_assessment": "Değerlendirme Al",
-    "to_submit_your_test": "Pozitif olan test sonucunu gönderebilmek için bir temas takipçisinden doğrulama kodu alman gerekir",
     "verification_code_card": {
       "if_you_have_a_code": "Çevrendekilerin güvende olmasını sağlamak için doğrulama kodunu  gönder.",
       "more_info": "Doğrulama kodu nedir?",
@@ -254,25 +226,17 @@
     "unchecked_checkbox": "İşaretlenmemiş"
   },
   "navigation": {
-    "exposure": "Maruz Kalma",
     "exposure_history": "Maruz Kalma Geçmişi",
     "home": "Ana ekran",
-    "more_info": "Daha fazla bilgi",
     "settings": "Ayarlar",
     "symptom_history": "Belirtiler"
   },
   "onboarding": {
-    "activation_header_title": "Uygulama Kurulumu",
     "app_setup_complete_body": "{{applicationName}} etkin. Enfeksiyon zincirinin kırılmasına yardımcı olduğun için teşekkürler.",
     "app_setup_complete_header": "Uygulama Kurulumu Tamamlandı!",
     "app_setup_incomplete_body": "{{applicationName}} ne zaman ve nerede COVID-19'a maruz kalmış olduğunu bilebilmesi için Maruz Kalma Bildirimleri ile Bluetooth izinleri gereklidir. Bunlara Ayarlar'dan izin verebilirsin.",
     "app_setup_incomplete_header": "Uygulama Kurulumu Tamamlanmadı",
     "app_setup_incomplete_location_body": "{{applicationName}}'nın COVID 19'a ne zaman ve nerede maruz kaldığını bilebilmesi için Maruz Kalma Bildirimleri, Bluetooth ve Konum izinleri gerekmektedir. Bunlara Ayarlar'dan izin verebilirsin.",
-    "bluetooth_alert_body": "Bluetooth taramasını kullanabilmek için cihazın Bluetooth ayarının açık olması gerekmekte. ",
-    "bluetooth_alert_header": "Bluetooth'u etkinleştir",
-    "bluetooth_body": "Bluetooth taramasını kullanabilmek için cihazın Bluetooth ayarının açık olması gerekmekte. ",
-    "bluetooth_header": "Bluetooth'u etkinleştir",
-    "bluetooth_subheader": "Telefonumun Bluetooth ayarını neden açmam gerekiyor?",
     "eula": "Nihai Kullanıcı Hukuki Sözleşmesi",
     "eula_agree_terms_of_use": "Kullanım şartlarını okudum ve kabul ettim",
     "i_am_over": "Evet yaşım {{minimumAge}} üzerinde",
@@ -331,15 +295,12 @@
   },
   "product_analytics": {
     "i_understand_and_consent": "Anlıyorum ve Onaylıyorum",
-    "not_sharing_anonymized_data": "Anonimleştirilmiş veri paylaşılmıyor",
     "privacy_policy": "Gizlilik Politikası",
     "share_anonymized_data": "Anonim hale getirilmiş verileri paylaş",
     "share_anonymized_data_disclaimer": "Devam ederek tarama sorularına verilen anonimleştirilmiş yanıtları {{healthAuthorityName}} ile paylaşmayı kabul etmiş olursun.",
     "share_data_para_1": "İnsanların bu uygulamayı ne şekilde kullandıklarına dair toplu anonim veriler {{healthAuthorityName}} Komisyonu'na COVID-19'un yayılmasını analiz etme, anlama ve kontrol altına almada yardımcı olur.",
     "share_data_para_2": "Bu veriler herhangi bir kişisel tanımlayıcı bilgi içermez.",
-    "sharing_anonymized_data": "Anonimleştirilmiş veri paylaşılıyor",
-    "stop_sharing_data": "Veri paylaşımını durdur",
-    "you_are_sharing_data": "Anonimleştirilmiş veri paylaşıyorsun"
+    "stop_sharing_data": "Veri paylaşımını durdur"
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
