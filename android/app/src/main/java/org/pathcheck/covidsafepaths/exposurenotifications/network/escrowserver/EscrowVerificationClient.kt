@@ -29,7 +29,6 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import java.util.concurrent.TimeUnit
 
 object EscrowVerificationClient {
     private const val TAG: String = "BackendService"
