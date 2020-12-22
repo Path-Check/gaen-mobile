@@ -28,6 +28,7 @@ export default Factory.define<Configuration>(() => ({
   minimumAge: "18",
   minimumPhoneDigits: 0,
   regionCodes: ["REGION"],
+  remoteContentUrl: null,
   stateAbbreviation: null,
   verificationStrategy: "Simple",
 }))

@@ -161,6 +161,7 @@ const Settings: FunctionComponent = () => {
         )}
         <View style={style.bottomContainer}>
           <Text style={style.aboutContent}>{aboutContent}</Text>
+
           {authorityLinks?.map(({ url, label }) => {
             return <ExternalLink key={label} url={url} label={label} />
           })}
