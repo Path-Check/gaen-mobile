@@ -8,12 +8,19 @@ import { ModalStackScreens } from "../../navigation"
 import { Text } from "../../components"
 import { useConnectionStatus } from "../../Device/useConnectionStatus"
 import { useCustomCopy } from "../../configuration/useCustomCopy"
+import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 
 import { Buttons, Colors, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
 import { useConfigurationContext } from "../../ConfigurationContext"
 
-const NextSteps: FunctionComponent = () => {
+type Posix = number
+
+interface NextStepsProps {
+  exposureDate: Posix
+}
+
+const NextSteps: FunctionComponent<NextStepsProps> = ({ exposureDate }) => {
   const { t } = useTranslation()
   const isInternetReachable = useConnectionStatus()
   const navigation = useNavigation()
@@ -23,8 +30,15 @@ const NextSteps: FunctionComponent = () => {
     healthAuthorityAdviceUrl,
   } = useConfigurationContext()
   const { healthAuthorityName } = useCustomCopy()
+  const { trackEvent } = useProductAnalyticsContext()
 
   const handleOnPressNextStep = () => {
+    trackEvent(
+      "product_analytics",
+      "tapped_next_steps_button",
+      "next_steps",
+      exposureDate,
+    )
     Linking.openURL(healthAuthorityAdviceUrl)
   }
 
