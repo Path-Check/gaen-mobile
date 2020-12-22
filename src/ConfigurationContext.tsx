@@ -31,6 +31,7 @@ export interface Configuration {
   minimumAge: string
   minimumPhoneDigits: number
   regionCodes: string[]
+  remoteContentUrl: string | null
   stateAbbreviation: string | null
   verificationStrategy: VerificationStrategy
 }
@@ -62,6 +63,7 @@ const initialState: Configuration = {
   minimumAge: "18",
   minimumPhoneDigits: 0,
   regionCodes: [],
+  remoteContentUrl: null,
   stateAbbreviation: "",
   verificationStrategy: "Simple",
 }
@@ -98,6 +100,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.LEGAL_PRIVACY_POLICY_URL || null
   const healthAuthorityVerificationCodeInfoUrl =
     env.VERIFICATION_CODE_INFO_URL || null
+  const remoteContentUrl = env.REMOTE_CONTENT_URL || null
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
@@ -162,6 +165,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         minimumAge,
         minimumPhoneDigits,
         regionCodes,
+        remoteContentUrl,
         stateAbbreviation,
         verificationStrategy,
       }}
