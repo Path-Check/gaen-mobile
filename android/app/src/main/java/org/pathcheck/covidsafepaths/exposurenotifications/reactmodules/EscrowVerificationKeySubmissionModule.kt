@@ -20,6 +20,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.E
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.ExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.PositiveSubmission
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @ReactModule(name = ExposureKeyModule.MODULE_NAME)
 class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) : ReactContextBaseJavaModule(context) {
@@ -65,7 +67,7 @@ class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) :
     }
 
     @ReactMethod
-    fun submitDiagnosisKeys(verificationCode: String, date: String, promise: Promise) {
+    fun submitDiagnosisKeys(verificationCode: String, date: Double, promise: Promise) {
         val future = ExposureNotificationClientWrapper.get(reactApplicationContext)
             .requestPermissionToGetExposureKeys(reactApplicationContext)
 
@@ -85,12 +87,13 @@ class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) :
                             ) else null
                         }
 
+                        val testDate = Date(date.toLong())
                         val result = EscrowVerificationClient.postPositiveSubmission(
                             reactApplicationContext,
                             PositiveSubmission(
                                 _keys = sendingKeys,
                                 _verifyCode = verificationCode,
-                                _verifyDate = date
+                                _verifyDate = SimpleDateFormat("MM/dd/yyyy", Locale.US).format(testDate)
                             )
                         )
 
