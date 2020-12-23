@@ -335,7 +335,7 @@
     "i_understand_and_consent": "I Understand and Consent",
     "privacy_policy": "Privacy Policy",
     "share_anonymized_data": "Share Anonymized Data",
-    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized answers to screening questions with the {{healthAuthorityName}}",
+    "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized event data with the {{healthAuthorityName}}",
     "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
     "share_data_para_2": "This data contains no personally-identifying information.",
     "stop_sharing_data": "Stop Sharing Data"
