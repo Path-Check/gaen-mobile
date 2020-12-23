@@ -87,6 +87,7 @@ export const determineOnboardingSteps = ({
 
   displayAppTransition && onboardingSteps.push("AppTransition")
   displayAgeVerification && onboardingSteps.push("AgeVerification")
+  onboardingSteps.push("HowItWorks")
 
   return onboardingSteps
 }
