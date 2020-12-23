@@ -95,7 +95,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const appDownloadUrl = env.SHARE_APP_LINK || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
-  const healthAuthorityHealthCheckUrl = env.HEALTHCHECK_URL || null
+  const healthAuthorityHealthCheckUrl = env.HEALTH_CHECK_URL || null
   const healthAuthorityLegalPrivacyPolicyUrl =
     env.LEGAL_PRIVACY_POLICY_URL || null
   const healthAuthorityVerificationCodeInfoUrl =
