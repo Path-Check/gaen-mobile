@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect } from "react"
+import React, { FunctionComponent } from "react"
 import { FlatList, StyleSheet, View } from "react-native"
 
 import { Text } from "../components"
@@ -9,7 +9,7 @@ import { Typography, Spacing, Outlines, Colors } from "../styles"
 import { useExposureContext } from "../ExposureContext"
 
 const ExposureListDebugScreen: FunctionComponent = () => {
-  const { exposureInfo, refreshExposureInfo } = useExposureContext()
+  const { exposureInfo } = useExposureContext()
   const exposures = exposureInfo.map((e) => {
     return {
       id: e.id,
@@ -18,12 +18,6 @@ const ExposureListDebugScreen: FunctionComponent = () => {
     }
   })
   const showExposures = exposures.length > 0
-
-  useEffect(
-    useCallback(() => {
-      refreshExposureInfo()
-    }, [refreshExposureInfo]),
-  )
 
   return (
     <>
