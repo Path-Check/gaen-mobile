@@ -9,7 +9,9 @@ import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import kotlin.math.floor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -20,8 +22,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.E
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.ExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.PositiveSubmission
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @ReactModule(name = ExposureKeyModule.MODULE_NAME)
 class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) : ReactContextBaseJavaModule(context) {
