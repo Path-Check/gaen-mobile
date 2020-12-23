@@ -161,7 +161,8 @@ object EscrowVerificationClient {
 
                 if (nonce == null || cookie == null) {
                     Log.w(TAG, "Post nonce failed nonce:$nonce, cookie:$cookie")
-                    return@withContext Result.Failure(Error(NULL_NONCE_CODE, "Empty nonce or cookie"))
+                    // Return success even if the nonce call failed
+                    return@withContext Result.Success(Unit)
                 }
 
                 // Get Device code from SafetyNet
@@ -180,8 +181,9 @@ object EscrowVerificationClient {
                 submission.keys?.forEach { key -> Log.w(TAG, "Key:${key.keyData}") }
                 try {
                     if (submission.keys!!.isEmpty()) {
-                        Log.w(TAG, "No keys")
-                        return@withContext Result.Failure(Error(NULL_NONCE_CODE, "There are no keys"))
+                        Log.w(TAG, "There are no keys")
+                        // Backend is not called, return a success
+                        return@withContext Result.Success(Unit)
                     }
                 } catch (e: KotlinNullPointerException) {
                     Log.e(TAG, "Keys are null")
