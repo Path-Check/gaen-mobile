@@ -27,13 +27,12 @@ def fetch_env
   validate_token!(token)
   validate_ha_label!(HA_LABEL, "fetch_ha_env")
 
-  puts "...fetching .env for #{HA_LABEL}"
+  puts "🛠 Updating.env fils:"
 
   dev_env_source = ".env.bt"
   staging_env_source = ".env.bt.staging"
   release_env_source = ".env.bt.release"
 
-  puts "Fetching configuration from pathcheck-mobile-resources commit #{mobile_resources_commit}"
 
   base_url = "https://#{token}@raw.githubusercontent.com/Path-Check/pathcheck-mobile-resources/"
 
@@ -49,8 +48,9 @@ def fetch_env
   fetch_and_write_file(dev_env_source, dev_env_url)
   fetch_and_write_file(staging_env_source, staging_env_url)
   fetch_and_write_file(release_env_source, release_env_url)
-
-  puts "finished fetching .env for #{HA_LABEL}"
+  
+  puts ""
+  puts "✅ Done"
 end
 
 def fetch_and_write_file(filename, remote_url)

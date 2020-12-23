@@ -56,7 +56,7 @@ const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
         <Text style={style.subheaderText}>
           {t("exposure_history.next_steps")}
         </Text>
-        <NextSteps />
+        <NextSteps exposureDate={mostRecentExposure.date} />
       </View>
     </View>
   )
