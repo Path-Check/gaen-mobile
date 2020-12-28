@@ -55,7 +55,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-i18next": "^11.4.0",
-    "react-native": "0.63.2",
+    "react-native": "0.63.4",
     "react-native-config": "^1.2.1",
     "react-native-flash-message": "^0.1.16",
     "react-native-gesture-handler": "^1.6.1",
