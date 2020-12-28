@@ -32,7 +32,7 @@ jobs:
   unit-test-ios:
     runs-on: macOS-latest
     needs: unit-test
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@master
 
