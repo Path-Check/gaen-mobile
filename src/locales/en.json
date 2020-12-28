@@ -227,6 +227,7 @@
     },
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
+    "could_not_open_link": "Could not open link: {{url}}. Please try to open the url in your phone's browser.",
     "enter_symptoms": "Enter symptoms",
     "error": {
       "share_link_failed": "Failed to open link to share"
