@@ -2966,8 +2966,9 @@ dayjs@^1.8.15:
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.26.tgz#c6d62ccdf058ca72a8d14bb93a23501058db9f1e"
 
 dayjs@^1.8.24:
-  version "1.8.36"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.36.tgz#be36e248467afabf8f5a86bae0de0cdceecced50"
+  version "1.9.8"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.9.8.tgz#9a65fbdca037e3d5835f98672da6e796f757cd58"
+  integrity sha512-F42qBtJRa30FKF7XDnOQyNUTsaxDkuaZRj/i7BejSHC34LlLfPoIU4aeopvWfM+m1dJ6/DHKAWLg2ur+pLgq1w==
 
 de-indent@^1.0.2:
   version "1.0.2"
