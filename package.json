@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@bugsnag/react-native": "^7.3.4",
-    "@react-native-community/async-storage": "^1.8.1",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.0.8",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^5.9.4",
@@ -73,8 +73,8 @@
     "ts.data.json": "^1.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "@babel/runtime": "^7.8.6",
+    "@babel/core": "^7.12.10",
+    "@babel/runtime": "^7.10.2",
     "@jumpn/react-native-jetifier": "^0.1.4",
     "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^3.3.0",
