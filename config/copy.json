@@ -3,7 +3,13 @@
     "welcomeMessage": "Welcome To",
     "about": "The PathCheck GAEN Mobile application is brought to you by PathCheck (this copy is customizable)",
     "legal": "PathCheck GAEN Mobile Legal Policies: (this copy is customizable)",
-    "healthAuthorityName": "Health Authority"
+    "healthAuthorityName": "Health Authority",
+    "verificationCodeHowDoIGet": "Contact your health authority to receive a verification code. (this copy is customizable)",
+    "appTransition": {
+      "header": "PathCheck App",
+      "body1": "Thank you for updating to the PathCheck App (this copy is customizable)",
+      "body2": "With this update you will receive.. (this copy is customizable)"
+    }
   },
   "es_PR": {
     "welcomeMessage": "Bienvenido a",
