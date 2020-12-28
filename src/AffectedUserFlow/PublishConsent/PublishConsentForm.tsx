@@ -138,7 +138,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         return t("export.publish_keys.errors.unknown")
       }
       case PostKeysError.RequestFailed: {
-        return t("common.something_went_wrong")
+        return t("errors.something_went_wrong")
       }
     }
   }

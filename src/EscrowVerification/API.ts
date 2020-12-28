@@ -16,7 +16,7 @@ interface PhoneNumberFailure {
   error: PhoneNumberError
 }
 
-export type PhoneNumberError = "Unknown"
+export type PhoneNumberError = "RateLimit" | "Unknown"
 
 export const submitPhoneNumber = async (
   phoneNumber: string,
@@ -25,7 +25,9 @@ export const submitPhoneNumber = async (
     await escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
     return { kind: "success" }
   } catch (e) {
-    switch (e.message) {
+    switch (e.code) {
+      case "403":
+        return { kind: "failure", error: "RateLimit" }
       default:
         return { kind: "failure", error: "Unknown" }
     }

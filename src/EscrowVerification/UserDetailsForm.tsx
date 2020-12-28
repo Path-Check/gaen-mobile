@@ -114,21 +114,33 @@ const UserDetailsForm: FunctionComponent = () => {
         })
         navigation.navigate(EscrowVerificationRoutes.EscrowVerificationCodeForm)
       } else {
-        Alert.alert(showError(response.error))
+        Alert.alert(
+          errorDialogTitle(response.error),
+          errorDialogMessage(response.error),
+        )
       }
     } catch (e) {
       Logger.error(`escrow verification error`, e.message)
-      Alert.alert(showError("Unknown"), e.message)
+      Alert.alert(errorDialogTitle("Unknown"), e.message)
     }
     setIsLoading(false)
   }
 
   const buttonDisabled = phoneNumber.length < 1
 
-  const showError = (error: API.PhoneNumberError): string => {
+  const errorDialogTitle = (error: API.PhoneNumberError): string => {
     switch (error) {
-      case "Unknown":
-        return t("common.something_went_wrong")
+      default:
+        return t("errors.something_went_wrong")
+    }
+  }
+
+  const errorDialogMessage = (error: API.PhoneNumberError): string => {
+    switch (error) {
+      case "RateLimit":
+        return t("escrow_verification.error.rate_limit")
+      default:
+        return t("errors.try_again_later")
     }
   }
 

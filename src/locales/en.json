@@ -35,7 +35,6 @@
     "select_language": "Select language",
     "settings": "Open Settings",
     "skip": "Skip",
-    "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit",
     "success": "Success"
@@ -59,11 +58,14 @@
   "errors": {
     "description": "An error has occurred. Please reload the app.",
     "reload": "Reload",
-    "title": "Unknown Error"
+    "title": "Unknown Error",
+    "something_went_wrong": "Something went wrong",
+    "try_again_later": "Try again later"
   },
   "escrow_verification": {
     "error": {
-      "invalid_phone_number": "Phone number must be 10 digits"
+      "invalid_phone_number": "Phone number must be 10 digits",
+      "rate_limit": "You've reach the daily submission limit. Please try again in 24 hours."
     },
     "person_and_health_expert": "A person talking to a health expert",
     "start": {

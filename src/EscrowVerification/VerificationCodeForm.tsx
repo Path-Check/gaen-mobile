@@ -82,7 +82,7 @@ const VerificationCodeForm: FunctionComponent = () => {
       setIsLoading(false)
     } catch (e) {
       Logger.error("Unhandled error on submit code to escrow")
-      Alert.alert(t("common.something_went_wrong"), e.message)
+      Alert.alert(t("errors.something_went_wrong"), e.message)
       setIsLoading(false)
     }
   }
