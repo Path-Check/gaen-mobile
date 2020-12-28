@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
 import { Text } from "../components"
+import Logger from "../logger"
 
 import { Icons, Images } from "../assets"
 import {
@@ -32,12 +33,14 @@ const HealthCheckLink: FunctionComponent<HealthCheckLinkProps> = ({
   const { t } = useTranslation()
 
   const handleOnPress = async () => {
-    const supported = await Linking.canOpenURL(healthCheckUrl)
-
-    if (supported) {
+    try {
       await Linking.openURL(healthCheckUrl)
-    } else {
-      Alert.alert(`Don't know how to open this URL: ${healthCheckUrl}`)
+    } catch (e) {
+      Logger.error("Failed to open healthCheckUrl: ", { healthCheckUrl })
+      const alertMessage = t("home.could_not_open_link", {
+        url: healthCheckUrl,
+      })
+      Alert.alert(alertMessage)
     }
   }
 
