@@ -46,9 +46,10 @@ const ProductAnalyticsContext = createContext<ProductAnalyticsContextState>(
 const ProductAnalyticsProvider: FunctionComponent<{
   productAnalyticsClient: ProductAnalyticsClient
 }> = ({ productAnalyticsClient, children }) => {
-  const [userConsentedToAnalytics, setUserConsentedToAnalytics] = useState<
-    boolean
-  >(false)
+  const [
+    userConsentedToAnalytics,
+    setUserConsentedToAnalytics,
+  ] = useState<boolean>(false)
 
   useEffect(() => {
     const checkAnalyticsConsent = async () => {

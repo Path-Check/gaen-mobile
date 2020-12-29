@@ -96,9 +96,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     }
   }, [trackEvent])
 
-  const detectExposures = async (): Promise<
-    NativeModule.DetectExposuresResponse
-  > => {
+  const detectExposures = async (): Promise<NativeModule.DetectExposuresResponse> => {
     const response = await NativeModule.detectExposures()
     if (response.kind === "success") {
       await refreshExposureInfo()
