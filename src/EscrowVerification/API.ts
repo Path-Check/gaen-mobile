@@ -1,5 +1,7 @@
 import { NativeModules } from "react-native"
 
+import Logger from "../logger"
+
 type Posix = number
 
 // Key Submission Module
@@ -25,6 +27,7 @@ export const submitPhoneNumber = async (
     await escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
     return { kind: "success" }
   } catch (e) {
+    Logger.error(`failed to submit phone number`, e)
     switch (e.code) {
       case "403":
         return { kind: "failure", error: "RateLimit" }
