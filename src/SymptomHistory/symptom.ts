@@ -8,7 +8,6 @@ export type Symptom =
   | "bluish_lips_or_face"
   | "fever_or_chills"
   | "cough"
-  | "shortness_of_breath_or_difficulty_breathing"
   | "fatigue"
   | "muscle_or_body_aches"
   | "headache"
@@ -27,7 +26,6 @@ export const all: Symptom[] = [
   "bluish_lips_or_face",
   "fever_or_chills",
   "cough",
-  "shortness_of_breath_or_difficulty_breathing",
   "fatigue",
   "muscle_or_body_aches",
   "headache",
@@ -42,7 +40,6 @@ export const all: Symptom[] = [
 export const covidSymptoms: Symptom[] = [
   "fever_or_chills",
   "cough",
-  "shortness_of_breath_or_difficulty_breathing",
   "fatigue",
   "muscle_or_body_aches",
   "headache",
@@ -83,9 +80,6 @@ export const fromString = (rawSymptom: string): Symptom | null => {
     }
     case "cough": {
       return "cough"
-    }
-    case "shortness_of_breath_or_difficulty_breathing": {
-      return "shortness_of_breath_or_difficulty_breathing"
     }
     case "fatigue": {
       return "fatigue"
@@ -144,9 +138,6 @@ export const toString = (symptom: Symptom): string => {
     case "cough": {
       return "cough"
     }
-    case "shortness_of_breath_or_difficulty_breathing": {
-      return "shortness_of_breath_or_difficulty_breathing"
-    }
     case "fatigue": {
       return "fatigue"
     }
@@ -180,7 +171,7 @@ export const toString = (symptom: Symptom): string => {
 export const toTranslation = (t: TFunction, symptom: Symptom): string => {
   switch (symptom) {
     case "trouble_breathing": {
-      return t("symptom.trouble_breathing")
+      return t("symptom.shortness_of_breath_or_difficulty_breathing")
     }
     case "persistent_pain_or_pressure_in_the_chest": {
       return t("symptom.persistent_pain_or_pressure_in_the_chest")
@@ -199,9 +190,6 @@ export const toTranslation = (t: TFunction, symptom: Symptom): string => {
     }
     case "cough": {
       return t("symptom.cough")
-    }
-    case "shortness_of_breath_or_difficulty_breathing": {
-      return t("symptom.shortness_of_breath_or_difficulty_breathing")
     }
     case "fatigue": {
       return t("symptom.fatigue")
