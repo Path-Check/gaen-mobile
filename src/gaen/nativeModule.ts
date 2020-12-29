@@ -106,9 +106,7 @@ export type RequestAuthorizationFailure = {
   error: RequestAuthorizationError
 }
 
-export const requestAuthorization = async (): Promise<
-  RequestAuthorizationResponse
-> => {
+export const requestAuthorization = async (): Promise<RequestAuthorizationResponse> => {
   try {
     const enStatus = await permissionsModule.requestExposureNotificationAuthorization()
     return {

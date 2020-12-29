@@ -112,9 +112,10 @@ const PermissionsProvider: FunctionComponent = ({ children }) => {
 }
 
 const useNotificationPermissions = () => {
-  const [notificationPermission, setNotificationPermission] = useState<
-    NotificationPermissionStatus
-  >("Unknown")
+  const [
+    notificationPermission,
+    setNotificationPermission,
+  ] = useState<NotificationPermissionStatus>("Unknown")
 
   useEffect(() => {
     checkNotificationPermission()
@@ -143,9 +144,10 @@ const useNotificationPermissions = () => {
 }
 
 const useENPermissions = () => {
-  const [enPermissionStatus, setEnPermissionStatus] = useState<
-    ENPermissionStatus
-  >("Unknown")
+  const [
+    enPermissionStatus,
+    setEnPermissionStatus,
+  ] = useState<ENPermissionStatus>("Unknown")
 
   const checkENPermission = () => {
     const handleNativeResponse = (status: ENPermissionStatus) => {

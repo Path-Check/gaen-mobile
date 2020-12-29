@@ -54,9 +54,7 @@ export const getVersion = async (): Promise<string> => {
   return deviceInfoModule.getVersion()
 }
 
-export const doesDeviceSupportLocationlessScanning = async (): Promise<
-  boolean
-> => {
+export const doesDeviceSupportLocationlessScanning = async (): Promise<boolean> => {
   return deviceInfoModule.deviceSupportsLocationlessScanning()
 }
 
