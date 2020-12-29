@@ -81,7 +81,7 @@ const CallbackForm: FunctionComponent = () => {
       setIsLoading(false)
     } catch (e) {
       Logger.error(`FailureToRequestCallback.exception.${e.message}`)
-      Alert.alert(t("common.something_went_wrong"), e.message)
+      Alert.alert(t("errors.something_went_wrong"), e.message)
       setIsLoading(false)
     }
   }
@@ -91,7 +91,7 @@ const CallbackForm: FunctionComponent = () => {
   const showError = (error: string): string => {
     switch (error) {
       default: {
-        return t("common.something_went_wrong")
+        return t("errors.something_went_wrong")
       }
     }
   }
