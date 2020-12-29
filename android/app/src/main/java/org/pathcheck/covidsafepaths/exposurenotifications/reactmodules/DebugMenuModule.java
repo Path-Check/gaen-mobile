@@ -39,11 +39,6 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void forceAppCrash(Promise promise) throws Exception {
-    throw new Exception("Force crash");
-  }
-
-  @ReactMethod
   public void fetchDiagnosisKeys(Promise promise) {
     ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
     ReactContext reactContext = getReactApplicationContext();
