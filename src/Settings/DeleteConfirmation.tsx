@@ -13,12 +13,14 @@ import { showMessage } from "react-native-flash-message"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
-import { Text } from "../components"
-import { useStatusBarEffect } from "../navigation"
-import * as Storage from "../utils/storage"
 import { useConfigurationContext } from "../ConfigurationContext"
-import { OperationResponse } from "../OperationResponse"
 import { useApplicationName } from "../Device/useApplicationInfo"
+import { resetUserLocale } from "../locales/languages"
+
+import { OperationResponse } from "../OperationResponse"
+import * as Storage from "../utils/storage"
+import { useStatusBarEffect } from "../navigation"
+import { Text } from "../components"
 
 import { Spacing, Buttons, Typography, Colors, Affordances } from "../styles"
 
@@ -41,6 +43,7 @@ const DeleteConfirmation: FunctionComponent = () => {
   const deleteAllData = async (): Promise<OperationResponse> => {
     resetOnboarding()
     resetUserConsent()
+    resetUserLocale()
     Storage.removeAll()
     const deleteAllEntriesResult = await deleteAllEntries()
     return deleteAllEntriesResult

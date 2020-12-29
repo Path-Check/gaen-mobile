@@ -119,6 +119,10 @@ export async function setUserLocaleOverride(
   await StorageUtils.setUserLocaleOverride(locale)
 }
 
+export const resetUserLocale = async (): Promise<void> => {
+  await setLocale("en")
+}
+
 async function setLocale(locale: Locale.Locale) {
   const iETFLanguageTag = Locale.toIETFLanguageTag(locale)
   dayjs.locale(iETFLanguageTag)
