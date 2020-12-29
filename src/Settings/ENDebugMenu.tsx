@@ -127,12 +127,6 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
               }}
             />
             <DebugMenuListItem
-              label="Force App Crash"
-              onPress={() => {
-                NativeModule.forceAppCrash()
-              }}
-            />
-            <DebugMenuListItem
               label="Restart Onboarding"
               onPress={handleOnPressRestartOnboarding}
             />

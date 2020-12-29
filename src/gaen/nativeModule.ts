@@ -264,10 +264,6 @@ export const getRevisionToken = async (): Promise<string> => {
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
 
-export const forceAppCrash = async (): Promise<void> => {
-  return debugModule.forceAppCrash()
-}
-
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()
 }
