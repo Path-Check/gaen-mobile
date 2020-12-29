@@ -47,7 +47,7 @@ extension ENExposureDetectionSummary: Scoring {
 }
 
 @available(iOS 13.7, *)
-extension ENExposureDaySummary: Scoring {
+extension ENExposureDaySummary {
   typealias T = DailySummariesConfiguration
 
   func isAboveScoreThreshold(with configuration: DailySummariesConfiguration) -> Bool {
