@@ -46,15 +46,11 @@
     "daily_new_cases": "Daily new cases per 100k",
     "error_getting_data": "Sorry, we could not fetch the latest COVID cases data for {{location}}.",
     "infection_rate": "Infection rate",
-    "new_cases": "New Cases",
     "overall_risk_level_in": "Overall Risk Level in {{locationName}}",
     "past_days": "New cases per day, past {{days}} days",
-    "per_100k": "per 100k",
     "positive_test_rate": "Positive test rate",
     "see_more": "See more",
-    "source": "source: {{source}}",
-    "trending_down": "Trending down",
-    "trending_up": "Trending up"
+    "source": "source: {{source}}"
   },
   "errors": {
     "description": "An error has occurred. Please reload the app.",
@@ -80,9 +76,6 @@
   },
   "export": {
     "code": "Code",
-    "code_input_body_bluetooth": "Enter your verification code",
-    "code_input_button_cancel": "Cancel",
-    "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
@@ -95,11 +88,9 @@
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "enter_verification_code": "Enter verification code",
     "error": {
-      "invalid_code": "Try a different code",
       "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
-      "unknown_code_verification_error": "Try a different code",
-      "verification_code_used": "Verification code has already been used"
+      "unknown_code_verification_error": "Try a different code"
     },
     "intro": {
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
@@ -127,8 +118,6 @@
     "symptom_onset": {
       "did_you_have_symptoms": "Did you have any symptoms?",
       "no_i_didnt_have": "No, I didn't have any symptoms",
-      "select_date": "Select Date",
-      "symptom_onset_date": "Symptom Onset Date",
       "symptoms": "Symptoms",
       "when_did_your_symptoms": "When did your symptoms begin?",
       "yes_i_did_have": "Yes, I did have symptoms"
@@ -146,18 +135,10 @@
     "check_for_exposures": "Check for exposures",
     "days_remaining": "There are {{daysOfQuarantineLeft}} days left in your recommended quarantine period.",
     "exposure_detail": {
-      "2m_apart": "2m apart",
-      "6ft_apart": "6ft apart",
-      "general_guidance": "General Guidance",
-      "ha_guidance_header": "What should I do?",
-      "header": "Someone you were near has since tested positive for COVID-19.",
       "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
-      "quarantine": "Quarantine",
       "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "Speak with a contact tracer",
-      "wash_your_hands": "Wash your hands",
-      "wear_a_mask": "Wear a mask"
+      "speak_with_contact_tracer": "Speak with a contact tracer"
     },
     "exposure_report": "Exposure Report",
     "exposure_summary": "Someone you were near between {{startDate}} and {{endDate}} tested positive for COVID-19.",
@@ -177,10 +158,7 @@
     "no_connectivity_message": "You are not connected to the internet!",
     "no_exposure_reports": "No Exposure Reports",
     "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
-    "possible_exposure": "Possible Exposure",
     "possible_exposures": "Possible Exposures",
-    "protect_yourself_and_others": "Protect yourself and others in your community",
-    "review_guidance_from_ha": "Review guidance from {{healthAuthorityName}}",
     "review_health_guidance": "Review Health Guidance",
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
@@ -213,7 +191,6 @@
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
-      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
       "location_header": "Location",
@@ -222,7 +199,6 @@
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadUrl}}",
       "tracing_off_header": "Exposure Detection Off",
-      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
     "call_emergency_services": "Call Emergency Services",
@@ -254,14 +230,12 @@
     }
   },
   "label": {
-    "check": "Checkmark",
     "checked_checkbox": "Checked checkbox",
     "go_to_home_view": "Go to Home view",
     "launch_enable_notif": "Enable Notifications",
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
     "privacy_policy": "Privacy Policy",
-    "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
   "navigation": {
@@ -500,8 +474,7 @@
     "other": "Other",
     "persistent_pain_or_pressure_in_the_chest": "Persistent pain or pressure in the chest",
     "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
-    "sore_throat": "Sore throat",
-    "trouble_breathing": "Trouble breathing"
+    "sore_throat": "Sore throat"
   },
   "verification_code_alerts": {
     "code_used_body": "The verification code provided has already been used.",
