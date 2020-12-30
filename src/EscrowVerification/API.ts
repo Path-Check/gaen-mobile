@@ -61,9 +61,6 @@ export const submitDiagnosisKeys = async (
     return { kind: "success" }
   } catch (e) {
     Logger.error(`failed to submit verification code: `, e.toString())
-    switch (e.mssage) {
-      default:
-        return { kind: "failure", error: "Unknown" }
-    }
+    return { kind: "failure", error: "Unknown" }
   }
 }
