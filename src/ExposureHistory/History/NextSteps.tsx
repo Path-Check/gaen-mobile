@@ -115,11 +115,11 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
         style={style.button}
         onPress={handleOnPressRequestCallback}
         accessibilityLabel={t(
-          "exposure_history.exposure_detail.call_covid_support",
+          "exposure_history.exposure_detail.speak_with_covid_support",
         )}
       >
         <Text style={style.buttonText}>
-          {t("exposure_history.exposure_detail.call_covid_support")}
+          {t("exposure_history.exposure_detail.speak_with_covid_support")}
         </Text>
         <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
