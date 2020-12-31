@@ -127,9 +127,9 @@
     "verification_code_info": {
       "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
       "how_do_i_get_header": "How do I get a verification code?",
-      "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that stale test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
+      "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that out of date test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
       "info_header": "What is a verification code?",
-      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared.",
+      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will anonymously notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared.",
       "what_happens_header": "What happens when I submit my code?"
     }
   },
@@ -139,8 +139,9 @@
     "exposure_detail": {
       "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
-      "schedule_callback": "Schedule a call to get support from a contact tracer from the {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "Speak with a contact tracer"
+      "schedule_callback": "Schedule a call with the {{healthAuthorityName}} to get help with testing and a successful quarantine.",
+      "speak_with_contact_tracer": "Speak with a contact tracer",
+      "call_covid_support": "Call for COVID Support"
     },
     "exposure_report": "Exposure Report",
     "exposure_summary": "Someone you were near between {{startDate}} and {{endDate}} tested positive for COVID-19.",
