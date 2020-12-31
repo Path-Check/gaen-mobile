@@ -27,7 +27,7 @@ export const submitPhoneNumber = async (
     await escrowVerificationKeySubmissionModule.submitPhoneNumber(phoneNumber)
     return { kind: "success" }
   } catch (e) {
-    Logger.error(`failed to submit phone number: `, e.toString())
+    Logger.error(`failed to submit phone number: `, { ...e })
     switch (e.code) {
       case "403":
         return { kind: "failure", error: "RateLimit" }
@@ -60,7 +60,7 @@ export const submitDiagnosisKeys = async (
     )
     return { kind: "success" }
   } catch (e) {
-    Logger.error(`failed to submit verification code: `, e.toString())
+    Logger.error(`failed to submit verification code: `, { ...e })
     return { kind: "failure", error: "Unknown" }
   }
 }
