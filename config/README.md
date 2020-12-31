@@ -38,6 +38,15 @@ The supported values are:
   the verification code info screen. It should contain information about how the
   user can get a verification code. The app provides a default value.
 
+#### App Transition Copy (Optional)
+
+This is a new onboarding screen if you are transition your current app to PathCheck.
+
+- `appTransition`: This is an object that contains the copy for the app transition screen.
+-  `header`: This text generally contains the App Name or a short title.
+- `body1`: This is the first section for details about the update and transition.
+- `body2`: This is the second section for details about the update and transition.
+
 The `json` structure is:
 
 ```typescript
