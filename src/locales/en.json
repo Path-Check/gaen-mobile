@@ -154,7 +154,7 @@
       "wear_a_mask": "Wear a mask"
     },
     "how_does_this_work": "How does this work?",
-    "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth to swap and save random number strings (called random IDs) from any phones it is in close proximity to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
+    "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth Low Energy to swap and save random number strings (called random IDs) from any phones it is in close contact to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "more_info": "Learn more about Exposure Notifications",
     "next_steps": "Next Steps",
@@ -165,7 +165,7 @@
     "review_health_guidance": "Review Health Guidance",
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
-    "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close proximity with later receives a positive test for COVID-19 and chooses to notify others.",
+    "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in clsoe contact with later uses the app to report a positive COVID-19 test.",
     "your_device_exchanged": "Within each date range below, your device exchanged keys with another device that later received a verified positive test result."
   },
   "exposure_notification_alerts": {
@@ -192,7 +192,7 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
-    "bluetooth_info_body": "Your phone detects other phones you spend time in close proximity with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
+    "bluetooth_info_body": "Your phone detects other phones you spend time in close contact with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
@@ -219,10 +219,11 @@
     "not_feeling_well": "Not feeling well?",
     "notifications_off": "Turn on notifications to get notified if you receive an exposure",
     "open_healthcheck": "Open Healthcheck",
-    "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
+    "complete_healthcheck": "Complete Healthcheck",
+    "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an anonymous encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
-    "proximity_tracing_info_subheader_2": "Is my data secure?",
+    "proximity_tracing_info_subheader_2": "Are my data secure?",
     "take_assessment": "Take Assessment",
     "verification_code_card": {
       "if_you_have_a_code": "Submit your verification code to help keep your community safe.",
@@ -281,7 +282,7 @@
       "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random IDs",
       "subheader_2": "Phones with Exposure Notifications enabled swap IDs with other devices they encounter",
       "subheader_3": "When a user tests positive, they can choose to anonymously share their health status",
-      "subheader_4": "Each phone periodically pings the server for the list of flagged IDs and looks for matches",
+      "subheader_4": "Each phone periodically communicates with the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
     "proximity_tracing_already_active": "Exposure notifications are active",
@@ -314,8 +315,8 @@
     "privacy_policy": "Privacy Policy",
     "share_anonymized_data": "Share Anonymized Data",
     "share_anonymized_data_disclaimer": "By proceeding, you agree to share anonymized event data with the {{healthAuthorityName}}",
-    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} Commission, analyze, understand, and contain the spread of COVID-19.",
-    "share_data_para_2": "This data contains no personally-identifying information.",
+    "share_data_para_1": "Anonymous and aggregated data about how communities are using this app helps the {{healthAuthorityName}} analyze, understand, and contain the spread of COVID-19.",
+    "share_data_para_2": "The data contains no personally-identifying information.",
     "stop_sharing_data": "Stop Sharing Data"
   },
   "screen_titles": {
