@@ -77,15 +77,15 @@ export const postCallbackInfo = async ({
   const endpoint = formUrl
 
   try {
-    const oauthResonse = await postGetNewAccessToken()
+    const oauthResponse = await postGetNewAccessToken()
 
-    if (oauthResonse.kind === "failure") {
-      return oauthResonse
+    if (oauthResponse.kind === "failure") {
+      return oauthResponse
     }
 
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${oauthResonse.body}`,
+      Authorization: `Bearer ${oauthResponse.body}`,
     }
 
     const response = await fetch(endpoint, {
