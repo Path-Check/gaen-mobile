@@ -16,7 +16,6 @@ describe("postCallbackInfo", () => {
       const firstname = "firstname"
       const lastname = "lastname"
       const phoneNumber = "phoneNumber"
-      const body = `grant_type=password&client_id=CALLBACK_CLIENT_ID&client_secret=CALLBACK_CLIENT_PUBLIC_KEY&username=CALLBACK_PUBLIC_USERNAME&password=CALLBACK_PUBLIC_USERKEY`
 
       const result = await postCallbackInfo({
         firstname,
@@ -24,15 +23,17 @@ describe("postCallbackInfo", () => {
         phoneNumber,
       })
 
-      expect(fetchSpy).toHaveBeenCalledWith("CALLBACK_OAUTH_URL", {
+      const oauthUrl = `CALLBACK_OAUTH_URLtoken?refresh_token=CALLBACK_REFRESH_TOKEN&grant_type=refresh_token&client_id=CALLBACK_CLIENT_ID&client_secret=CALLBACK_CLIENT_PUBLIC_KEY&redirect_uri=CALLBACK_REDIRECT_URI`
+      const formUrl = "CALLBACK_FORM_URL"
+
+      expect(fetchSpy).toHaveBeenCalledWith(oauthUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body,
+        headers: { "Content-Type": "application/json" },
       })
-      expect(fetchSpy).toHaveBeenCalledWith("CALLBACK_FORM_URL", {
+      expect(fetchSpy).toHaveBeenCalledWith(formUrl, {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
           Authorization: "Bearer " + accessToken,
         },
         body: JSON.stringify({
@@ -51,7 +52,11 @@ describe("postCallbackInfo", () => {
             .fn()
             .mockResolvedValueOnce({ access_token: "accessToken" }),
         }
-        const requestCallBackResponse = { ok: false }
+        const requestCallBackResponse = {
+          ok: false,
+          status: 999,
+          statusText: "statusText",
+        }
         const fetchSpy = jest.fn()
         ;(fetch as jest.Mock) = fetchSpy
         fetchSpy
@@ -64,7 +69,11 @@ describe("postCallbackInfo", () => {
           phoneNumber: "phoneNumber",
         })
 
-        expect(result).toEqual({ kind: "failure", error: "Unknown" })
+        expect(result).toEqual({
+          kind: "failure",
+          error: "InvalidRequest",
+          message: "InvalidRequest: 999 statusText",
+        })
       })
     })
 
@@ -131,7 +140,7 @@ describe("postCallbackInfo", () => {
 
       expect(result).toEqual({
         kind: "failure",
-        error: "InvalidRequest",
+        error: "Unknown",
         message: errorMessage,
       })
     })
