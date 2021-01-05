@@ -140,7 +140,6 @@
       "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
       "schedule_callback": "Schedule a call with the {{healthAuthorityName}} to get help with testing and a successful quarantine.",
-      "speak_with_contact_tracer": "Speak with a contact tracer",
       "speak_with_covid_support": "Speak with COVID Support"
     },
     "exposure_report": "Exposure Report",
@@ -218,7 +217,6 @@
     "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
     "not_feeling_well": "Not feeling well?",
     "notifications_off": "Turn on notifications to get notified if you receive an exposure",
-    "open_healthcheck": "Open Healthcheck",
     "complete_healthcheck": "Complete Healthcheck",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an anonymous encounter is registered on your device.",
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
