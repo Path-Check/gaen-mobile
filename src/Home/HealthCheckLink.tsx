@@ -48,13 +48,13 @@ const HealthCheckLink: FunctionComponent<HealthCheckLinkProps> = ({
     <TouchableOpacity
       style={style.shareContainer}
       onPress={handleOnPress}
-      accessibilityLabel={t("home.open_healthcheck")}
+      accessibilityLabel={t("home.complete_healthcheck")}
     >
       <View style={style.imageContainer}>
         <Image source={Images.HealthCheck} style={style.image} />
       </View>
       <View style={style.textContainer}>
-        <Text style={style.shareText}>{t("home.open_healthcheck")}</Text>
+        <Text style={style.shareText}>{t("home.complete_healthcheck")}</Text>
       </View>
       <SvgXml
         xml={Icons.ChevronRight}
