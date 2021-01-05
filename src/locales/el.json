@@ -46,19 +46,16 @@
     "daily_new_cases": "Νέες διαγνώσεις καθημερινά",
     "error_getting_data": "Λυπούμαστε, δεν ήταν δυνατή η λήψη των πιο πρόσφατων δεδομένων από περιστατικά COVID για {{location}}.",
     "infection_rate": "Ποσοστό μόλυνσης",
-    "new_cases": "Νέα περιστατικά",
     "overall_risk_level_in": "Συνολικό επίπεδο κινδύνου σε {{locationName}}",
     "past_days": "Νέες περιπτώσεις ανά ημέρα, τελευταίες {{days}} ημέρες",
-    "per_100k": "ανά 100.000",
     "positive_test_rate": "Ποσοστό θετικών διαγνώσεων",
     "see_more": "Δείτε περισσότερα",
-    "source": "προέλευση: {{source}}",
-    "trending_down": "Τάση προς τα κάτω",
-    "trending_up": "Τάση προς τα πάνω"
+    "source": "προέλευση: {{source}}"
   },
   "errors": {
     "description": "Προέκυψε σφάλμα. Φορτώστε ξανά την εφαρμογή.",
     "reload": "Φόρτωση εκ νέου",
+    "something_went_wrong": "Κάτι πήγε στραβά",
     "title": "Άγνωστο σφάλμα"
   },
   "escrow_verification": {
@@ -127,8 +124,6 @@
     "symptom_onset": {
       "did_you_have_symptoms": "Είχατε συμπτώματα;",
       "no_i_didnt_have": "Όχι, δεν είχα κανένα σύμπτωμα.",
-      "select_date": "Επιλέξτε Ημερομηνία",
-      "symptom_onset_date": "Ημερομηνία έναρξης συμπτωμάτων",
       "symptoms": "Συμπτώματα",
       "when_did_your_symptoms": "Πότε ξεκίνησαν τα συμπτώματά σας;",
       "yes_i_did_have": "Ναι, είχα συμπτώματα"
@@ -146,18 +141,9 @@
     "check_for_exposures": "Ελέγξτε για εκθέσεις",
     "days_remaining": "Απομένουν {{daysOfQuarantineLeft}} ημέρες στην προτεινόμενη περίοδο καραντίνας.",
     "exposure_detail": {
-      "2m_apart": "2 μέτρα μακριά",
-      "6ft_apart": "2 μέτρα μακρυά",
-      "general_guidance": "Γενική καθοδήγηση",
-      "ha_guidance_header": "Τι πρέπει να κάνω;",
-      "header": "Κάποιος που βρέθηκε κοντά σας διαγνώστηκε θετικά με COVID-19.",
       "next_steps": "Επόμενα βήματα",
       "personalize_my_guidance": "Εξατομίκευση της καθοδήγησής μου",
-      "quarantine": "Καραντίνα",
-      "schedule_callback": "Προγραμματίστε μια κλήση για να λάβετε υποστήριξη από έναν ιχνηλάτη επαφών από το {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "Μιλήστε με έναν ανιχνευτή επαφών",
-      "wash_your_hands": "Πλύνετε τα χέρια σας",
-      "wear_a_mask": "Φορέστε μάσκα"
+      "schedule_callback": "Προγραμματίστε μια κλήση για να λάβετε υποστήριξη από έναν ιχνηλάτη επαφών από το {{healthAuthorityName}}."
     },
     "health_guidelines": {
       "six_feet_apart": "Κρατάτε απόσταση 2 μέτρων",
@@ -175,10 +161,7 @@
     "no_connectivity_message": "Δεν είστε συνδεδεμένοι στο Διαδίκτυο!",
     "no_exposure_reports": "Δεν υπάρχουν αναφορές έκθεσης",
     "no_exposure_reports_over_past": "Δεν έχετε λάβει αναφορές έκθεσης τις τελευταίες 14 ημέρες",
-    "possible_exposure": "Πιθανή έκθεση στον COVID-19",
     "possible_exposures": "Πιθανές εκθέσεις",
-    "protect_yourself_and_others": "Προστατέψτε τον εαυτό σας και τους άλλους στην κοινότητά σας",
-    "review_guidance_from_ha": "Δείτε οδηγίες από την Αρχή {{healthAuthorityName}}.",
     "updated": "Έγινε ενημέρωση",
     "why_did_i_get_an_en": "Γιατί έλαβα ειδοποίηση έκθεσης στον ιό;",
     "why_did_i_get_an_en_para": "Θα λάβετε μια ειδοποίηση έκθεσης εάν έχετε βρεθεί κοντά σε κάποιον που εκ των υστέρων διαγνώστηκε θετικά με COVID-19 και επέλεξε να το κοινοποιήσει."
@@ -243,7 +226,6 @@
     }
   },
   "label": {
-    "check": "Σημάδι ελέγχου",
     "checked_checkbox": "Επιλεγμένο πλαίσιο",
     "go_to_home_view": "Μετάβαση στην Αρχική Σελίδα",
     "launch_enable_notif": "Ενεργοποίηση Ειδοποιήσεων",
@@ -489,8 +471,7 @@
     "other": "Άλλο",
     "persistent_pain_or_pressure_in_the_chest": "Επίμονος πόνος ή πίεση στο στήθος",
     "shortness_of_breath_or_difficulty_breathing": "Δύσπνοια ή δυσκολία στην αναπνοή",
-    "sore_throat": "Πονόλαιμος",
-    "trouble_breathing": "Δυσκολία στην αναπνοή"
+    "sore_throat": "Πονόλαιμος"
   },
   "verification_code_alerts": {
     "code_used_body": "Ο κωδικός επαλήθευσης έχει ήδη χρησιμοποιηθεί",

@@ -40,15 +40,13 @@
   "covid_data": {
     "apologies_data_unavailable": "معذرة ، بيانات COVID غير متوفرة.",
     "error_getting_data": "عذرًا ، لم نتمكن من جلب أحدث بيانات حالات COVID لـ {{location}} .",
-    "new_cases": "حالات جديدة",
     "see_more": "شاهد المزيد",
-    "source": "المصدر: {{source}}",
-    "trending_down": "تتجه إلى أسفل",
-    "trending_up": "تتجه صعودا"
+    "source": "المصدر: {{source}}"
   },
   "errors": {
     "description": "حدث خطأ. يرجى إعادة تحميل التطبيق.",
     "reload": "إعادة تحميل",
+    "something_went_wrong": "هناك خطأ ما",
     "title": "خطأ غير معروف"
   },
   "escrow_verification": {
@@ -93,17 +91,9 @@
   "exposure_history": {
     "check_for_exposures": "تحقق من التعرض",
     "exposure_detail": {
-      "2m_apart": "على بعد 2 متر.",
-      "6ft_apart": "ابق على بعد 6 أقدام",
-      "general_guidance": "التوجيه العام",
-      "ha_guidance_header": "ما الذي ينبغي علي فعله؟",
-      "header": "تم تشخيص شخص كان قريبًا منك بالاصابة بمرض COVID-19",
       "next_steps": "الخطوات التالية",
       "personalize_my_guidance": "إضفاء الطابع الشخصي على توجيهاتي",
-      "schedule_callback": "جدولة مكالمة للحصول على دعم من متتبع جهة اتصال من {{HealthAuthorityName}}.",
-      "speak_with_contact_tracer": "تحدث مع متتبع الاتصال",
-      "wash_your_hands": "اغسل يديك",
-      "wear_a_mask": "البس قناعا"
+      "schedule_callback": "جدولة مكالمة للحصول على دعم من متتبع جهة اتصال من {{HealthAuthorityName}}."
     },
     "health_guidelines": {
       "six_feet_apart": "ابق على بعد 6 أقدام",
@@ -119,9 +109,6 @@
     "no_connectivity_message": "أنت غير متصل بالإنترنت!",
     "no_exposure_reports": "لا توجد تقارير التعرض",
     "no_exposure_reports_over_past": "لم تتلق أي تقارير تعرض خلال الـ 14 يومًا الماضية",
-    "possible_exposure": "التعرض المحتمل لـ COVID-19",
-    "protect_yourself_and_others": "احم نفسك والآخرين في مجتمعك",
-    "review_guidance_from_ha": "مراجعة الإرشادات من {{healthAuthorityName}}",
     "updated": "محدث",
     "why_did_i_get_an_en": "لماذا تلقيت إشعار التعرض؟",
     "why_did_i_get_an_en_para": "ستتلقى إشعارًا بالتعرض عندما يتلقى شخص ما كنت على مقربة منه لاحقًا اختبارًا إيجابيًا لـ COVID-19 ويختار إخطار الآخرين."
@@ -164,7 +151,6 @@
     "take_assessment": "أخذ التقييم"
   },
   "label": {
-    "check": "علامة الاختيار",
     "checked_checkbox": "خانة اختيار مُحَدَّّدَة",
     "go_to_home_view": "انتقل إلى عرض الصفحة الرئيسية",
     "launch_enable_notif": "فعل الإشعارات",
@@ -396,7 +382,6 @@
     "other": "آخرى",
     "persistent_pain_or_pressure_in_the_chest": "ألم أو ضغط مستمر في الصدر",
     "shortness_of_breath_or_difficulty_breathing": "ضيق التنفس أو صعوبة التنفس",
-    "sore_throat": "إلتهاب الحلق",
-    "trouble_breathing": "صعوبة في التنفس"
+    "sore_throat": "إلتهاب الحلق"
   }
 }

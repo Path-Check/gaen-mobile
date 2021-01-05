@@ -46,19 +46,16 @@
     "daily_new_cases": "Kiisas cusub maalin kasta",
     "error_getting_data": "Waan ka xunahay, kuuma heli karno xogtii ugu danbaysay ee COVID ee {{location}}.",
     "infection_rate": "Heerka saamiga caabuqu maraayo",
-    "new_cases": "Kiisas cusub",
     "overall_risk_level_in": "Heerka Halista Guud ee {{locationName}}",
     "past_days": "Kiisas cusub maalintii, {{days}} maalmood ee la soo dhaafay",
-    "per_100k": "100kii kunba",
     "positive_test_rate": "Saamiga caabuqa laga helaymarkii laga baaray",
     "see_more": "Arag xog dheeraad ah",
-    "source": "Isha xogta: {{source}}",
-    "trending_down": "Hoos u socda",
-    "trending_up": "Kor u socda"
+    "source": "Isha xogta: {{source}}"
   },
   "errors": {
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
     "reload": "Dibu cabbee",
+    "something_went_wrong": "Waxbaa qaldamay",
     "title": "Khald aan la aqoon"
   },
   "escrow_verification": {
@@ -127,8 +124,6 @@
     "symptom_onset": {
       "did_you_have_symptoms": "Ma qabtaa wax astaamo ah?",
       "no_i_didnt_have": "Maya, ma aanan qabin wax astaamo ah",
-      "select_date": "Dooro Taariikh",
-      "symptom_onset_date": "Taariikhda Astaamuhu Kugu Billoowdeen",
       "symptoms": "Taariikhda Astaamaha ",
       "when_did_your_symptoms": "Goorma ayay astaamahaagu biloowdeen?",
       "yes_i_did_have": "Haa, waan lahaa astaamaha xanuunka"
@@ -146,18 +141,9 @@
     "check_for_exposures": "Fiiri ufeydsanaan",
     "days_remaining": "Waxaa ka haray {{daysOfQuarantineLeft}} maalmood muddadii lagugula taliyay inaad karantiil ku jirto.",
     "exposure_detail": {
-      "2m_apart": "2 mitie kala fogaan ",
-      "6ft_apart": "6ft kala fogaan",
-      "general_guidance": "Tilmaanta Guud",
-      "ha_guidance_header": "Maxaan sameeyaa?",
-      "header": "Waxa suuragal ah inaad meel uun kula kulanaty dad qaba fayraska COVID-19.",
       "next_steps": "Tallaabooyinka xiga",
       "personalize_my_guidance": "Tilmaantayda ka dhig mid gaar ah",
-      "quarantine": "Karantiil",
-      "schedule_callback": "Muddayso wicitaan si aad taageero uga hesho raadraacaha dadka la joogay qofka caabuqa laga helo ee ka soo jeeda {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "La hadal raadraacaha qofka la joogay dadka caabuqa laga helo",
-      "wash_your_hands": "Gacmaha iska dhaq",
-      "wear_a_mask": "Gasho maaskaro"
+      "schedule_callback": "Muddayso wicitaan si aad taageero uga hesho raadraacaha dadka la joogay qofka caabuqa laga helo ee ka soo jeeda {{healthAuthorityName}}."
     },
     "exposure_report": "Warbixinta gaadhista",
     "exposure_summary": "Qof aad u dhawayd intii u dhaxaysay {{startDate}} iyo {{endDate}} ayaa laga helay caabuqa COVID-19.",
@@ -177,10 +163,7 @@
     "no_connectivity_message": "Kuma xirnid interneetka!",
     "no_exposure_reports": "Ma Jiraan Warbixinno Ufeydsani",
     "no_exposure_reports_over_past": "Ma aadan helin innaba warbixinno ufeydsanaan 14kii-maalmood ee la soo dhaafay.",
-    "possible_exposure": "Ufeydsanaan COVID-19 suurtagal ah",
     "possible_exposures": "Suuragalnimada u Feydsannada Caabuqa",
-    "protect_yourself_and_others": "Ilaali laftaada iyo dadka kale kale ka tirsan bulshadaadaba",
-    "review_guidance_from_ha": "Fiiri tilmaamaha ka yimid {{healthAuthorityName}}",
     "review_health_guidance": "Dib u eegida Hanuuninta Caafimaadka",
     "updated": "La cusboonaysiiyay",
     "why_did_i_get_an_en": "Maxaan u helay ogeysiin ufeydsanaan?",
@@ -238,7 +221,6 @@
     "location_info_subheader": "{{applicationName}} ma raadraaco ama ma kaydiyo goobtaada.",
     "not_feeling_well": "Xanuun miyaa ku haya?",
     "notifications_off": "Furo ogaysiisyada si laguu ogaysiiyo haddii aad u feydsantay caabuqa",
-    "open_healthcheck": "Furan HealthCheck",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
@@ -253,7 +235,6 @@
     }
   },
   "label": {
-    "check": "Sax ku samaynta",
     "checked_checkbox": "Sanduuqa saxda lagu sameey",
     "go_to_home_view": "Tag muuqaalka Home (Kadinka)",
     "launch_enable_notif": "Karti u Yeel Ogeysiimaha",
@@ -499,8 +480,7 @@
     "other": "Wax kale",
     "persistent_pain_or_pressure_in_the_chest": "Dhibaato kaa haysata neefsiga ama cadaadis kaa fuula xabadka",
     "shortness_of_breath_or_difficulty_breathing": "Neefta oo ku yaraata ama dhibaato dhanka neefsiga ah",
-    "sore_throat": "Dhuun xanuun",
-    "trouble_breathing": "Neefta oo kugu adkaata"
+    "sore_throat": "Dhuun xanuun"
   },
   "verification_code_alerts": {
     "code_used_body": "Koodhka xaqiijinta ee aad bixisay horay ayaa loo isticmaalay.",

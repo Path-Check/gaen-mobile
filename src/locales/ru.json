@@ -44,17 +44,14 @@
     "daily_new_cases": "Ежедневные новые случаи",
     "error_getting_data": "К сожалению, нам не удалось получить последние данные о случаях COVID для {{location}} .",
     "infection_rate": "Уровень заражения",
-    "new_cases": "Новые случаи",
-    "per_100k": "за 100к",
     "positive_test_rate": "Положительный тестовый рейтинг",
     "see_more": "Узнать больше",
-    "source": "источник: {{source}}",
-    "trending_down": "Тенденция вниз",
-    "trending_up": "Тенденция вверх"
+    "source": "источник: {{source}}"
   },
   "errors": {
     "description": "Произошла ошибка. Пожалуйста, перезагрузите приложение.",
     "reload": "Перезагрузить",
+    "something_went_wrong": "Что-то пошло не так",
     "title": "Неизвестная ошибка"
   },
   "escrow_verification": {
@@ -102,18 +99,9 @@
   "exposure_history": {
     "check_for_exposures": "Проверка экспозиций",
     "exposure_detail": {
-      "2m_apart": "на расстоянии 2 метров друг от друга",
-      "6ft_apart": "6 футов друг от друга",
-      "general_guidance": "Общее руководство",
-      "ha_guidance_header": "Что я должен делать?",
-      "header": "Тот, кто был поблизости, с тех пор получил положительный результат на КОВИД-19.",
       "next_steps": "Следующие шаги",
       "personalize_my_guidance": "Персонализируйте мое руководство",
-      "quarantine": "Карантин",
-      "schedule_callback": "Запланируйте звонок, чтобы получить поддержку от средства {{healthAuthorityName}} контактов из {{healthAuthorityName}} .",
-      "speak_with_contact_tracer": "Поговорите с трассировщиком контактов",
-      "wash_your_hands": "Мойте руки",
-      "wear_a_mask": "Носить маску"
+      "schedule_callback": "Запланируйте звонок, чтобы получить поддержку от средства {{healthAuthorityName}} контактов из {{healthAuthorityName}} ."
     },
     "health_guidelines": {
       "six_feet_apart": "Держитесь на расстоянии 6 футов",
@@ -129,9 +117,6 @@
     "no_connectivity_message": "Вы не подключены к Интернету!",
     "no_exposure_reports": "Отчеты об экспозиции отсутствуют",
     "no_exposure_reports_over_past": "Вы не получали никаких отчетов об экспозиции за последние 14 дней",
-    "possible_exposure": "Возможная экспозиция COVID-19",
-    "protect_yourself_and_others": "Защитите себя и других членов вашего сообщества",
-    "review_guidance_from_ha": "Ознакомьтесь с руководством {{healthAuthorityName}}",
     "updated": "Обновлено",
     "why_did_i_get_an_en": "Почему я получил уведомление об экспозиции?",
     "why_did_i_get_an_en_para": "Вы получите уведомление об экспозиции, когда кто-то, с кем вы были в непосредственной близости, позже получит положительный тест на COVID-19 и решит уведомить других."
@@ -178,7 +163,6 @@
     "take_assessment": "Провести оценку"
   },
   "label": {
-    "check": "Галочка",
     "checked_checkbox": "Установлен флажок",
     "go_to_home_view": "Перейти на главный экран",
     "launch_enable_notif": "Включить уведомления",
@@ -421,7 +405,6 @@
     "other": "Другое",
     "persistent_pain_or_pressure_in_the_chest": "Постоянная боль или давление в груди",
     "shortness_of_breath_or_difficulty_breathing": "Одышка или затрудненное дыхание",
-    "sore_throat": "Боль в горле",
-    "trouble_breathing": "Затрудненное дыхание"
+    "sore_throat": "Боль в горле"
   }
 }

@@ -11,9 +11,9 @@
     "lastname": "Apellido",
     "phone_number_required": "Número de teléfono (requerido)",
     "request_a_call": "Pedir una llamada de un rastreador de contactos",
-    "success_body": "Nuestros rastreadores de contactos están trabajando arduamente para que usted y su comunidad estén seguros. {{healthAuthorityName}} ha recibido su solicitud de llamada. Un experto se pondrá en contacto con usted dentro de las 24 horas.",
+    "success_body": "Nuestros rastreadores de contactos están trabajando arduamente para que usted y su comunidad estén seguros. {{healthAuthorityName}} Ha recibido su solicitud de llamada. Un experto se pondrá en contacto con usted dentro de las 24 horas.",
     "success_got_it": "Entendido",
-    "success_header": "Usted está en fila"
+    "success_header": "Usted está en la fila"
   },
   "common": {
     "back": "Regresar",
@@ -36,7 +36,7 @@
     "settings": "Abrir Configuración",
     "skip": "Omitir",
     "something_went_wrong": "Algo salió mal",
-    "start": "Empezar",
+    "start": "Comenzar",
     "submit": "Enviar",
     "success": "Éxito"
   },
@@ -46,24 +46,23 @@
     "daily_new_cases": "Nuevos casos diarios",
     "error_getting_data": "Lo sentimos, no pudimos encontrar los datos de los últimos casos de COVID en {{location}}.",
     "infection_rate": "Tasa de infección",
-    "new_cases": "Casos nuevos",
     "overall_risk_level_in": "Nivel de riesgo general en {{locationName}}",
     "past_days": "Nuevos casos por día, últimos {{days}} días",
-    "per_100k": "por 100k",
     "positive_test_rate": "Tasa de prueba positiva",
     "see_more": "Ver más",
-    "source": "fuente: {{source}}",
-    "trending_down": "Tendencias a la baja",
-    "trending_up": "Tendencias al alza"
+    "source": "fuente: {{source}}"
   },
   "errors": {
     "description": "Se ha producido un error. Vuelva a cargar la aplicación.",
     "reload": "Recargar",
-    "title": "Error desconocido"
+    "something_went_wrong": "Algo salió mal",
+    "title": "Error desconocido",
+    "try_again_later": "Intentar más tarde"
   },
   "escrow_verification": {
     "error": {
-      "invalid_phone_number": "El número de teléfono debe tener 10 dígitos"
+      "invalid_phone_number": "El número de teléfono debe tener 10 dígitos",
+      "rate_limit": "Has alcanzado el límite de envíos diarios. Vuelva a intentarlo en 24 horas."
     },
     "person_and_health_expert": "Una persona hablando con personal médico",
     "start": {
@@ -90,8 +89,8 @@
     "consent_button_title": "Entiendo y doy mi consentimiento",
     "consent_warning_message": "Continuar anulará su código. Si desea compartir su diagnóstico positivo en el futuro, primero deberá obtener un nuevo código de resultado positivo de la prueba.",
     "consent_warning_title": "¡Advertencia!",
-    "enable_exposure_notifications_body": "Debe activar los avisos de exposición para informar de un resultado positivo.",
-    "enable_exposure_notifications_button": "Habilitar Avisos de Exposición",
+    "enable_exposure_notifications_body": "Debe activar las notificaciones de exposición para informar de un resultado positivo.",
+    "enable_exposure_notifications_button": "Habilitar Notificaciones de Exposición",
     "enable_exposure_notifications_title": "Active las notificaciones de exposición para continuar",
     "enter_verification_code": "Introduzca el código de verificación",
     "error": {
@@ -127,8 +126,6 @@
     "symptom_onset": {
       "did_you_have_symptoms": "¿Tuvo algún síntoma?",
       "no_i_didnt_have": "No, no tuve ningún síntoma",
-      "select_date": "Seleccione fecha",
-      "symptom_onset_date": "Fecha de inicio de síntomas",
       "symptoms": "Síntomas",
       "when_did_your_symptoms": "¿Cuándo se iniciaron sus síntomas?",
       "yes_i_did_have": "Sí, si tuve síntomas"
@@ -146,18 +143,10 @@
     "check_for_exposures": "Comprobar si hay exposiciones",
     "days_remaining": "Quedan {{daysOfQuarantineLeft}} días de su período de cuarentena recomendado.",
     "exposure_detail": {
-      "2m_apart": "2 m (6 pies) de distancia",
-      "6ft_apart": "6 pies de distancia",
-      "general_guidance": "Orientación general",
-      "ha_guidance_header": "¿Qué debo hacer?",
-      "header": "Es posible que haya estado expuesto al virus COVID-19.",
       "next_steps": "Próximos pasos",
       "personalize_my_guidance": "Personalizar mi orientación",
-      "quarantine": "Cuarentena",
       "schedule_callback": "Programe una llamada para recibir ayuda de un rastreador de contactos de {{healthAuthorityName}}",
-      "speak_with_contact_tracer": "Hable con un rastreador de contactos",
-      "wash_your_hands": "Lávese las manos",
-      "wear_a_mask": "Use mascarilla"
+      "speak_with_covid_support": "Habla con el soporte de COVID"
     },
     "exposure_report": "Informe de exposición",
     "exposure_summary": "Alguien del que usted estuvo cerca entre el {{startDate}} y el {{endDate}} ha dado positivo para COVID-19.",
@@ -173,14 +162,11 @@
     "how_does_this_work_para": "Cuando las Notificaciones de Exposición están activadas, su teléfono usará Bluetooth para intercambiar y guardar cadenas de carácteres aleatorios (llamadas identificaciones aleatorias) de aquellos teléfonos que tengan también las Notificaciones de Exposición activadas. Estas cadenas de caracteres aleatorios no le identificarán personalmente a los otros usuarios y varían muchas veces al día para proteger su privacidad. La fecha y duración de los encuentros serán grabados así como la distancia entre los dos teléfonos. Cuando una persona reporta un diagnóstico positivo, la cadena aleatoria de caracteres o random ID de su teléfono es marcada para anónimamente notificar al resto de usuarios. No se compartirá la información sobre su localización ni ninguna información personal.",
     "last_days": "Los últimos 14 días",
     "more_info": "Conozca más acerca de las Notificaciones de Exposición",
-    "next_steps": "Próximos pasos",
+    "next_steps": "Siguientes pasos",
     "no_connectivity_message": "¡No estás conectado a Internet!",
     "no_exposure_reports": "Ningún informe de exposición",
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
-    "possible_exposure": "Posible exposición al COVID-19",
     "possible_exposures": "Posibles exposiciones",
-    "protect_yourself_and_others": "Protéjase a sí mismo y a los integrantes de su comunidad",
-    "review_guidance_from_ha": "Revise las recomendaciones del {{healthAuthorityName}}",
     "review_health_guidance": "Revisar la guía de salud",
     "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí un aviso de exposición?",
@@ -191,7 +177,7 @@
     "bluetooth_body": "Para activar las Notificaciones de Exposición, primero debe activar Bluetooth en su aplicación de Configuraciones.",
     "bluetooth_title": "Habilitar el Bluetooth",
     "cant_check_for_exposures_body": "Debe activar las Notificaciones de Exposición para buscar exposiciones.",
-    "cant_check_for_exposures_button": "Habilitar Avisos de Exposición",
+    "cant_check_for_exposures_button": "Habilitar Notificaciones de Exposición",
     "cant_check_for_exposures_title": "No pueden buscarse las Exposiciones.",
     "location_body": "Google requiere que los dispositivos que ejecutan Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar las notificaciones de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
     "location_title": "Active el servicio de localización",
@@ -202,7 +188,7 @@
     "unhandled_error_body": "Sucedió algo inesperado. Por favor, cierre la aplicación, ábrala de nuevo y vuelva a intentarlo.",
     "unhandled_error_title": "Algo salió mal",
     "use_exposure_notifications_android_body": "Para activar las Notificaciones de Exposición, vaya a la pantalla de Notificaciones de Exposición al COVID-19 en la aplicación de Configuraciones y active ‘Usar Notificaciones de Exposición'.",
-    "use_exposure_notifications_android_title": "Habilitar Avisos de Exposición"
+    "use_exposure_notifications_android_title": "Habilitar Notificaciones de Exposición"
   },
   "exposure_scanning_status": {
     "fix_this": "Solucionar esto",
@@ -214,11 +200,11 @@
     "bluetooth_info_body": "Su teléfono detecta otros teléfonos con los que pasa tiempo cerca mediante el uso de Bluetooth de baja energía. Esto permite que la aplicación registre sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación abierta en su dispositivo.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} permanecerá activo después de que la aplicación se haya cerrado",
-      "location_disabled_error_message": "Para activar la tecnología de Avisos de Exposición, autorice el acceso a su localización que está en la Configuración de la aplicación",
+      "location_disabled_error_message": "Para activar la tecnología de Notificaciones de Exposición, autorice el acceso a su localización que está en la Configuración de la aplicación",
       "location_disabled_error_title": "Autorizar en la configuración del sistema",
       "location_header": "Localización",
       "location_subheader": "{{applicationName}} nunca accede a sus datos de ubicación y su dispositivo nunca es rastreado.",
-      "proximity_tracing_header": "Avisos de exposición",
+      "proximity_tracing_header": "Notificaciones de Exposición",
       "share": "Compartir {{applicationName}}",
       "share_message": "Pruebe esta aplicación {{applicationName}}, que puede ayudarnos a contener el COVID-19. {{appDownloadLink}}",
       "tracing_off_header": "Detección de exposición apagada",
@@ -226,7 +212,8 @@
       "tracing_on_header": "Detección de exposición activada"
     },
     "call_emergency_services": "Llamar Servicios de Emergencia",
-    "check_if_your_symptoms": "Escribir síntomas y obtener una recomendación instantánea sobre cómo estar a salvo.",
+    "check_if_your_symptoms": "Ingresar síntomas y obtener una recomendación instántanea sobre cómo estar a salvo.",
+    "could_not_open_link": "No se pudo abrir el vínculo: {{url}} . Intente abrir la URL en el navegador de su teléfono.",
     "enter_symptoms": "Ingrese síntomas",
     "error": {
       "share_link_failed": "No se pudo abrir el enlace para compartir"
@@ -238,10 +225,9 @@
     "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
     "not_feeling_well": "¿No te sientes bien?",
     "notifications_off": "Active las notificaciones para ser notificado si ha estado expuesto",
-    "open_healthcheck": "Abrir Healthcheck",
-    "proximity_tracing_info_body_1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
+    "proximity_tracing_info_body_1": "Si los teléfonos celulares con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
-    "proximity_tracing_info_subheader_1": "¿Cómo funcionan los Avisos de Exposición?",
+    "proximity_tracing_info_subheader_1": "¿Cómo funcionan las Notificaciones de Exposición?",
     "proximity_tracing_info_subheader_2": "¿Están mis datos seguros?",
     "take_assessment": "Tomar evaluación",
     "verification_code_card": {
@@ -253,11 +239,10 @@
     }
   },
   "label": {
-    "check": "Marca de verificación",
     "checked_checkbox": "Casilla de verificación marcada",
     "go_to_home_view": "Ir a la vista de Inicio",
     "launch_enable_notif": "Permitir notificaciones",
-    "launch_get_started": "Empezar",
+    "launch_get_started": "Comenzar",
     "launch_screen1_header": "Bienvenido a ",
     "privacy_policy": "Política de privacidad",
     "question_icon": "Icono de signo de pregunta",
@@ -272,23 +257,23 @@
   "onboarding": {
     "app_setup_complete_body": "{{applicationName}} está activo. Gracias por ayudar a romper la cadena de contagios.",
     "app_setup_complete_header": "¡Configuración de la aplicación completada!",
-    "app_setup_incomplete_body": "{{applicationName}} requiere avisos de exposición, Bluetooth y localización para saber cuándo y dónde usted ha estado expuesto a COVID 19. Puede autorizar esto en la Configuración.",
+    "app_setup_incomplete_body": "{{applicationName}} requiere notificaciones de exposición, y permisos de Bluetooth para saber cuándo usted ha estado expuesto a COVID-19. Puede autorizar esto en la Configuración.",
     "app_setup_incomplete_header": "Configuración de aplicación incompleta",
-    "app_setup_incomplete_location_body": "{{applicationName}} requiere permisos de rastreo de proximidad, Bluetooth y localización para saber cuándo y dónde usted ha estado expuesto a COVID 19. Puede autorizar esto en la Configuración.",
+    "app_setup_incomplete_location_body": "{{applicationName}} requiere notificaciones de exposición, Bluetooth y permisos de ubicación para saber cuándo usted ha estado expuesto a COVID-19. Puede autorizar esto en la Configuración.",
     "eula": "Acuerdo legal del usuario final",
     "eula_agree_terms_of_use": "Estoy de acuerdo en que he leído y aceptado los términos de uso",
-    "i_am_over": "Sí, tengo más de {{minimumAge}}",
-    "location_alert_body": "Para usar la búsqueda de Bluetooth, la configuración de localización del dispositivo debe estar activada.",
+    "i_am_over": "Sí, soy mayor de {{minimumAge}}",
+    "location_alert_body": "Para usar las notificaciones de exposición, la configuración de ubicación del dispositivo debe estar activada.",
     "location_alert_header": "Habilite el acceso a su localización desde “{{applicationName}}”",
     "location_body": "Para usar la búsqueda de Bluetooth, la configuración de ubicación del dispositivo debe estar activada. La aplicación no usa sus datos de localización y no se puede rastrear su dispositivo individual.",
     "location_header": "Activar Localización",
     "location_services_already_active": "Los servicios de ubicación están activos",
     "location_subheader": "¿Por qué necesito activar los servicios de ubicación de mi teléfono?",
-    "no_take_me": "No, llévame de vuelta.",
+    "no_take_me": "No, regresar a pantalla anterior",
     "notification_body1": "Recibirá notificaciones cuando se haya cruzado con alguien que haya informado es positivo a COVID-19.",
     "notification_body2": "La aplicación hace esto usando Bluetooth de baja energía y códigos aleatorios seguros sin conocer quién es usted o dónde ha estado. Puede desactivar esto en cualquier momento en la configuración.",
-    "notification_header": "Recibir aviso si pudiera haber sido expuesto",
-    "notification_subheader1": "¿Cuándo recibiré un aviso?",
+    "notification_header": "Recibir notificación en caso de haber sido expuesto",
+    "notification_subheader1": "¿Cuándo recibiré una notificación?",
     "notification_subheader2": "¿Cómo funciona?",
     "notification_subheader3": "Esta aplicación no lo protege del contagio de COVID-19.",
     "please_read_the": "Lea la",
@@ -300,17 +285,17 @@
       "body_3": "Después de dar positivo por COVID-19, los usuarios pueden compartir una contraseña con {{applicationName}} para verificar su diagnóstico. Las identificaciones aleatorias recientes de su teléfono se marcan y se cargan de forma segura en el servidor. Este proceso de verificación ayuda a evitar informes de falsos positivos.",
       "body_4": "Si una identificación marcada coincide con una identificación almacenada en su teléfono, esto indica que usted puede haberse encontrado a alguien que dio positivo de COVID-19. Así es como {{applicationName}} puede determinar si usted puede haber estado expuesto al virus.",
       "body_5": "Si hay una coincidencia, {{applicationName}} se le avisará y recibirá orientación adicional de su departamento de salud.\n\nAsí {{applicationName}} puede obtener información para tomar decisiones sobre su salud y mantener a su comunidad a salvo, todo sin saber quién es usted o dónde ha estado.",
-      "subheader_1": "Cuando usted activa los Avisos de exposición, su teléfono es etiquetado con identificaciones aleatorias que cambian con frecuencia",
-      "subheader_2": "Los teléfonos con Avisos de exposición activado intercambian ID con otros dispositivos que encuentran",
+      "subheader_1": "Cuando usted activa los Notificaciones de Exposición, su teléfono es etiquetado con identificaciones aleatorias que cambian con frecuencia",
+      "subheader_2": "Los teléfonos con Notificaciones de Exposición activado intercambian ID con otros dispositivos que encuentran",
       "subheader_3": "Cuando un usuario da positivo, puede optar por compartir su estado médico de forma anónima",
       "subheader_4": "Cada teléfono llama periódicamente al servidor para obtener la lista de identificaciones marcadas y buscar coincidencias.",
       "subheader_5": "Se le avisará si {{applicationName}} encuentra una coincidencia positiva con un ID marcado"
     },
     "proximity_tracing_already_active": "Las notificaciones de exposición están activas",
-    "proximity_tracing_body1": "Si los teléfonos inteligentes con la aplicación instalada están encendidos, tienen bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
+    "proximity_tracing_body1": "Si los teléfonos celulares con la aplicación instalada están encendidos, tienen bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
-    "proximity_tracing_button": "Activar Avisos de Exposición",
-    "proximity_tracing_header": "Activar Avisos de Exposición",
+    "proximity_tracing_button": "Activar Notificaciones de Exposición",
+    "proximity_tracing_header": "Activar Notificaciones de Exposición",
     "proximity_tracing_subheader1": "¿Cómo funciona?",
     "proximity_tracing_subheader2": "¿Están mis datos seguros?",
     "proximity_tracing_subheader3": "Esta aplicación no lo protege del contagio de COVID-19.",
@@ -323,8 +308,8 @@
     "screen3_button": "¿Qué pasa si estoy expuesto?",
     "screen3_header": "Ninguna información de identificación personal sale de su teléfono",
     "screen3_image_label": "Una persona frente a un teléfono bloqueado",
-    "screen4_button": "Empezar",
-    "screen4_header": "La aplicación le avisará si pudo haber estado expuesto al COVID-19.",
+    "screen4_button": "Comenzar",
+    "screen4_header": "La aplicación le notificará en caso de haber estado expuesto al COVID-19",
     "screen4_image_label": "Una persona recibe un aviso en su teléfono",
     "terms_header_title": "Condiciones de uso",
     "verify_your_age": "Verifique su edad",
@@ -343,7 +328,7 @@
   "screen_titles": {
     "bluetooth": "Bluetooth",
     "exposure_history": "Historial de exposición",
-    "exposure_notifications": "Avisos de exposición",
+    "exposure_notifications": "Notificaciones de Exposición",
     "exposure_scanning": "Detección de exposición",
     "home": "Panel",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
@@ -450,7 +435,7 @@
     "data_deleted": "Datos eliminados",
     "delete_data_are_you_sure": "¿Estás seguro?",
     "delete_data_disclosure1": "Al tocar el botón “Eliminar mis datos” abajo, la aplicación eliminará los datos del historial de síntomas que se almacenan en su teléfono.",
-    "delete_data_disclosure2": "Este botón no elimina los datos creados o recopilados por su teléfono para los avisos de exposición.\n\nPuede eliminar datos adicionales a través de la configuración de su teléfono.\n\n> Configuración\n> Avisos de exposición \n> Estado de registro de exposición/Activo \n> Eliminar registro de exposición",
+    "delete_data_disclosure2": "Este botón no elimina los datos creados o recopilados por su teléfono para las notificaciones de exposición.\n\nPuede eliminar datos adicionales a través de la configuración de su teléfono.\n\n> Configuración\n> Notificaciones de exposición\n> Estado de registro de exposición/Activo \n> Eliminar registro de exposición",
     "delete_data_language_token": "Un token almacenado en su dispositivo que guarda su preferencia de idioma",
     "delete_data_note": "Nota",
     "delete_data_onboarding_token": "Un token almacenado en su dispositivo que guarda si ha completado la incorporación de la aplicación",
@@ -484,14 +469,14 @@
     "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
   },
   "symptom": {
-    "bluish_lips_or_face": "Labios o cara azulados",
+    "bluish_lips_or_face": "Labios o cara violáceos",
     "congestion_or_runny_nose": "Congestión o secreción nasal.",
     "cough": "Tos",
     "diarrhea": "Diarrea",
     "fatigue": "Fatiga",
     "fever_or_chills": "Fiebre o escalofríos",
     "headache": "Dolor de cabeza",
-    "inability_to_wake_or_stay_awake": "Incapacidad para despertar o permanecer despierto",
+    "inability_to_wake_or_stay_awake": "Dificultad para despertarse o permanecer alerta",
     "muscle_or_body_aches": "Dolores musculares o corporales",
     "nausea_or_vomiting": "Náuseas o vómitos",
     "new_confusion": "Nueva confusión",
@@ -499,15 +484,14 @@
     "other": "Otros",
     "persistent_pain_or_pressure_in_the_chest": "Dolor persistente o presión en el pecho",
     "shortness_of_breath_or_difficulty_breathing": "Dificultad para respirar",
-    "sore_throat": "Dolor de garganta",
-    "trouble_breathing": "Dificultad para respirar"
+    "sore_throat": "Dolor de garganta"
   },
   "verification_code_alerts": {
     "code_used_body": "El código de verificación introducido ya fue utilizado.",
     "code_used_title": "Este código de verificación ya fue utilizado",
     "invalid_code_body": "El código de verificación que envió es inválido.\n\nEl código de verificación debe ser un código válido emitido por su autoridad de salud.\n\nTambién es posible que el código haya caducado. De ser así, tendrá que solicitar un nuevo código a su autoridad de salud.",
     "invalid_code_title": "Código inválido",
-    "network_connection_body": "Para enviar el código de verficación debe estar conectado a WiFi.",
+    "network_connection_body": "Para enviar el código de verificación debe estar conectado a WiFi.",
     "network_connection_title": "No hay conexión a internet",
     "unknown_body": "Ocurrió un error inesperado. Por favor, intente de nuevo.",
     "unknown_title": "Algo salió mal"

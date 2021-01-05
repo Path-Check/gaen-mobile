@@ -13,6 +13,9 @@
     "something_went_wrong": "Si è verificato un errore",
     "start": "Inizio"
   },
+  "errors": {
+    "something_went_wrong": "Si è verificato un errore"
+  },
   "export": {
     "code_input_body_bluetooth": "Digita il codice di verifica fornito da {{name}} con il risultato del test per verificare la diagnosi.",
     "code_input_title_bluetooth": "Verifica la tua diagnosi",
