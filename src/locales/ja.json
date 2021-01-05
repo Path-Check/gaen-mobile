@@ -27,6 +27,7 @@
   "errors": {
     "description": "エラーが発生しました。アプリを再読み込みしてください。",
     "reload": "リロード",
+    "something_went_wrong": "問題が発生しました",
     "title": "不明なエラー"
   },
   "export": {
@@ -64,13 +65,7 @@
   "exposure_history": {
     "check_for_exposures": " 実行",
     "exposure_detail": {
-      "6ft_apart": "6フィート間隔を取る",
-      "ha_guidance_header": "私は何をすべきか？",
-      "header": "新型コロナウイルス感染者と遭遇していた可能性があります。",
-      "next_steps": "次へ進む",
-      "quarantine": "隔離する",
-      "wash_your_hands": "手洗い",
-      "wear_a_mask": "マスクを着用する"
+      "next_steps": "次へ進む"
     },
     "health_guidelines": {
       "six_feet_apart": "6フィート間隔を取る",
@@ -86,9 +81,6 @@
     "no_connectivity_message": "インターネットに接続されていません！",
     "no_exposure_reports": "接触のリポートはありません",
     "no_exposure_reports_over_past": "過去14日間、接触のレポートを受け取っていません",
-    "possible_exposure": "COVID-19への接触の可能性",
-    "protect_yourself_and_others": "自分とコミュニティの他の人を守る",
-    "review_guidance_from_ha": "からのガイダンスを確認する {{healthAuthorityName}}",
     "updated": "更新",
     "why_did_i_get_an_en": "接触通知を受け取ったのはなぜですか？",
     "why_did_i_get_an_en_para": "近くにいた誰かが後でCOVID-19の陽性テストを受け取り、他の人に通知することを選択すると、接触の通知を受け取ります。"
@@ -126,7 +118,6 @@
     "proximity_tracing_info_subheader_2": "データは安全ですか?"
   },
   "label": {
-    "check": "チェックマーク",
     "checked_checkbox": "チェックされたチェックボックス",
     "go_to_home_view": "ホーム ビューに移動する",
     "launch_enable_notif": "お知らせを有効にする",

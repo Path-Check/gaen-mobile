@@ -27,6 +27,7 @@
   "errors": {
     "description": "May naganap na error. Mangyaring i-reload ang app.",
     "reload": "Reload",
+    "something_went_wrong": "May maling nangyari",
     "title": "Hindi Kilalang Error"
   },
   "export": {
@@ -64,12 +65,7 @@
   "exposure_history": {
     "check_for_exposures": "Ipasa",
     "exposure_detail": {
-      "6ft_apart": "6 na talampakan ang layo",
-      "ha_guidance_header": "Anong dapat kong gawin?",
-      "header": "Mayroon kang posibleng nakapagungnayan o nakasalamuha na pasyente na may COVID-19 virus.",
-      "next_steps": "Mga Susunod na Hakbang",
-      "wash_your_hands": "Hugasan ang iyong mga kamay",
-      "wear_a_mask": "Magsuot ng maskara"
+      "next_steps": "Mga Susunod na Hakbang"
     },
     "health_guidelines": {
       "six_feet_apart": "Manatiling 6 na talampakan ang layo",
@@ -85,9 +81,6 @@
     "no_connectivity_message": "Hindi ka nakakonekta sa internet!",
     "no_exposure_reports": "Walang mga exposure report o posibleng pagkahawa",
     "no_exposure_reports_over_past": "Wala kang natanggap na anumang mga ulat sa pagkakalantad o posibleng exposure at pagkahawa sa nakaraang 14-araw",
-    "possible_exposure": "May posibleng exposure o pagkahawa sa COVID-19",
-    "protect_yourself_and_others": "Protektahan ang iyong sarili at ang iba pa sa iyong komunidad",
-    "review_guidance_from_ha": "Suriin ang patnubay mula sa {{healthAuthorityName}}",
     "updated": "Na-update",
     "why_did_i_get_an_en": "Bakit ako nakatanggap ng exposure notification?",
     "why_did_i_get_an_en_para": "Makakatanggap ka ng isang abiso sa pagkakalantad sa posibleng pagkalanit o exposure notification kapag ang isang tao na tumawid sa iyong landas na kalaunan ay nakatanggap ng isang nakumpirmado, dyagnosis o positibong pagsusuri para sa COVID-19 at pinipiling abisuhan ang iba."
@@ -124,7 +117,6 @@
     "proximity_tracing_info_subheader_2": "Ligtas ba ang aking mga data?"
   },
   "label": {
-    "check": "Checkmark",
     "checked_checkbox": "Na-check na checkbox",
     "go_to_home_view": "Pumunta sa Home view",
     "launch_enable_notif": "Paganahin ang mga Abiso o Notifications",

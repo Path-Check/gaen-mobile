@@ -26,6 +26,7 @@
   "errors": {
     "description": "Guaha lachi ma susedi. Potfabot na 'on' talo i app.",
     "reload": "Load talu",
+    "something_went_wrong": "Guaha problema",
     "title": "Ti tungo-un i lachi"
   },
   "export": {
@@ -61,12 +62,7 @@
   },
   "exposure_history": {
     "exposure_detail": {
-      "6ft_apart": "Sipara 6 pi'e",
-      "ha_guidance_header": "Hafa bai hu chogui?",
-      "header": "Sina ha umafakcha hao yan  i COVID 19 virus.",
-      "next_steps": "Otro mona para ma chogui",
-      "wash_your_hands": "Fagasi i kannai-mu",
-      "wear_a_mask": "Usa mask"
+      "next_steps": "Otro mona para ma chogui"
     },
     "health_guidelines": {
       "six_feet_apart": "Suhay 6 pi'e",
@@ -82,9 +78,6 @@
     "no_connectivity_message": "Ti ma konenek hao gi internet!",
     "no_exposure_reports": "Taya ripot tinanmi pat ninayi",
     "no_exposure_reports_over_past": "Taya ripot un risibi  put kao guaha ninayi pat tinanmi gi maloffan 14 dias.",
-    "possible_exposure": "Posibbli tinanmi COVID 19",
-    "protect_yourself_and_others": "Protehi hao yan i pumalu siha gi kommunidad-mu",
-    "review_guidance_from_ha": "Atan talo i guidance ginen i {{healthAuthorityName}}",
     "updated": "Nuebu or Updated",
     "why_did_i_get_an_en": "Hafa na mana'i yu notifikasion put exposure?",
     "why_did_i_get_an_en_para": "Para un ma notifika yanggen guaha taotao ni un fioni ma test positive para COVID 19 dispues ya ha sangani i otro taotao siha."
@@ -115,7 +108,6 @@
     "proximity_tracing_info_subheader_2": "Kao siguro i iyo-ku infotmasion?"
   },
   "label": {
-    "check": "Checkmark",
     "checked_checkbox": "Ma check na checkbox",
     "go_to_home_view": "Hanao para i Home view",
     "launch_enable_notif": "Na kalamten para i Notifikasion",

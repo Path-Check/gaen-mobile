@@ -46,19 +46,16 @@
     "daily_new_cases": "Txhua hnub sib kis mob li cas",
     "error_getting_data": "Thov txim, peb mus cuag tsis tas seb muaj pes tsawg leej mob COVID-19 tam sim no rau {{location}}.",
     "infection_rate": "Kis mos npaum cas",
-    "new_cases": "Muaj neeg mob ntxiv",
     "overall_risk_level_in": "Tshaj Tag Nrho Qhov Kev Nyab Xeeb Feem Cuam Tshuam hau {{locationName}}v ",
     "past_days": "Cov teeb meem tshiab hauv ib hnub, dhau los {{days}} hnub",
-    "per_100k": "txhua 100k",
     "positive_test_rate": "Kis mob positive npaum cas",
     "see_more": "Mus saib ntxiv",
-    "source": "source: {{source}}",
-    "trending_down": "Mus qis",
-    "trending_up": "Nce siab"
+    "source": "source: {{source}}"
   },
   "errors": {
     "description": "Tau tshwm sim ib qho teeb meem. Thov muab kaw mam rov qhib lub app dua.",
     "reload": "Rov Qhib",
+    "something_went_wrong": "Dabtsi puas lawm",
     "title": "Tsis Paub Dabtsi Puas"
   },
   "escrow_verification": {
@@ -127,8 +124,6 @@
     "symptom_onset": {
       "did_you_have_symptoms": "Koj puas pom muaj tej tsos mob?",
       "no_i_didnt_have": "Tsis yog, kuv tsis pom muaj tej tsos mob",
-      "select_date": "Xaiv Hnub Tim",
-      "symptom_onset_date": "Hnub Tim Pib Muaj Tej Tsos Mob",
       "symptoms": "Keeb Kwm Tsos Mob",
       "when_did_your_symptoms": "Thaum twg koj pib muaj tej tsos mob?",
       "yes_i_did_have": "Yog, kuv pom muaj tej tsos mob"
@@ -146,18 +141,9 @@
     "check_for_exposures": "Xyuas seb puas tau mus kis raub mob qhov twg",
     "days_remaining": "Muaj {{daysOfQuarantineLeft}} hnub rau koj los cais nyob hauv tsev.",
     "exposure_detail": {
-      "2m_apart": "Nyob deb li 2 dag",
-      "6ft_apart": "Sib cais deb 2 dag (6 ft)",
-      "general_guidance": "Lus Qhia",
-      "ha_guidance_header": "Kuv yuav ua li cas?",
-      "header": "Tej zaum koj tau mus raug tus kab mob COVID-19 lawm.",
       "next_steps": "Kauj Ruam Tom Ntej",
       "personalize_my_guidance": "Kho kuv lus kev qhia",
-      "quarantine": "Cais nyob tsev",
-      "schedule_callback": "Hu mus teem ib lub sijhawm tham txog kev pab los ntawm ib tus soj qab cov neeg mus raug kis mob los ntawm {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "Nrog ib tug soj qab cov neeg mus kis mob tham",
-      "wash_your_hands": "Ntxuav koj cov tes",
-      "wear_a_mask": "Looj lub npog ntsej muag"
+      "schedule_callback": "Hu mus teem ib lub sijhawm tham txog kev pab los ntawm ib tus soj qab cov neeg mus raug kis mob los ntawm {{healthAuthorityName}}."
     },
     "exposure_report": "Ntsig Txog Kev Tshaj Tawm",
     "exposure_summary": "Ib tug neeg uas koj mus nyob ze rau thaum {{startDate}} thiab {{endDate}} tau kuaj tias mob positive rau COVID-19.",
@@ -177,10 +163,7 @@
     "no_connectivity_message": "Koj tsis txuas nrog Is taws nej!",
     "no_exposure_reports": "Tsis Muaj Xov Xwm Qhia Txog Mus Raug Mob",
     "no_exposure_reports_over_past": "Koj tsis tau muaj xov xwm qhia txog kev mus raug kis mob li 14 hnub dhau los",
-    "possible_exposure": "Tej zaum tau mus kis raug COVID-19 lawm",
     "possible_exposures": "Tej Zaum Tau Mus Nyob Ze",
-    "protect_yourself_and_others": "Tiv thaiv koj tus kheej thiab lwm tus nyob hauv koj zos",
-    "review_guidance_from_ha": "Mus nyeem cov lus taw qhia los ntawm {{healthAuthorityName}}",
     "review_health_guidance": "Tshuaj Xyuas Kev Noj Qab Haus Huv Cov Lus Qhia",
     "updated": "Kho Tshiab Lawm",
     "why_did_i_get_an_en": "Vim li cas koj thiaj tau qhov exposure notification?",
@@ -238,7 +221,6 @@
     "location_info_subheader": "{{applicationName}} tsis khaws tseg tej chaw koj tau mus ncig.",
     "not_feeling_well": "Puas yog mloog tau li mob lo?",
     "notifications_off": "Muab kev ceeb toom taws thiaj li paub thaum tau mus nyob ze ib tug neeg mob",
-    "open_healthcheck": "Abra HealthCheck",
     "proximity_tracing_info_body_1": "Yog tias cov xov tooj uas muaj lub app nyob hauv thiab muab taws, muaj Bluetooth, thiab nyob sib ze rau ib lub sijhawm twg, ces yuav cuv cia tias tau mus raug nyob rau hauv koj lub xov tooj.",
     "proximity_tracing_info_body_2": "Nyob rau lub sijhawm koj mus raug nws, koj tej ntaub ntawv yuav tsis qhia tawm rau nws paub. Lub app no tsis ceev tseg koj ntaub ntawv ntiag tug. Tsuas yog cov naj npawb hloov mus hloov los random ID xwb. Tej no yuav muab lwv tawm li ntawm 14 hnub.",
     "proximity_tracing_info_subheader_1": "Kev Ceeb Toom Raug Mob ua haujlwm li cas?",
@@ -253,7 +235,6 @@
     }
   },
   "label": {
-    "check": "Cim tseg",
     "checked_checkbox": "Lub npov uas kos lawm",
     "go_to_home_view": "Mus rau Home",
     "launch_enable_notif": "Taws Qhov Qhia Xov Xwm",
@@ -499,8 +480,7 @@
     "other": "Lwm yam",
     "persistent_pain_or_pressure_in_the_chest": "Mob hauv siab tas li",
     "shortness_of_breath_or_difficulty_breathing": "Txog siav lossis ua pa nyuaj",
-    "sore_throat": "Mob qa",
-    "trouble_breathing": "Ua pa nyuaj"
+    "sore_throat": "Mob qa"
   },
   "verification_code_alerts": {
     "code_used_body": "Tus verification code uas koj ntaus twb muab siv lawm.",

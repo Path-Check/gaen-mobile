@@ -45,17 +45,14 @@
     "daily_new_cases": "Günlük yeni vakalar",
     "error_getting_data": "Maalesef {{location}} için en son COVID vakası verilerini alamadık.",
     "infection_rate": "Enfeksiyon oranı",
-    "new_cases": "Yeni Vakalar",
-    "per_100k": "Her 100 binde",
     "positive_test_rate": "Pozitif test oranı",
     "see_more": "Daha fazlasını gör",
-    "source": "kaynak: {{source}}",
-    "trending_down": "Azalıyor",
-    "trending_up": "Yükseliyor"
+    "source": "kaynak: {{source}}"
   },
   "errors": {
     "description": "Bir hata oluştu. Lütfen uygulamayı tekrar yükle.",
     "reload": "Tekrar yükle",
+    "something_went_wrong": "Bir terslik yaşandı",
     "title": "Bilinmeyen hata"
   },
   "escrow_verification": {
@@ -125,18 +122,9 @@
   "exposure_history": {
     "check_for_exposures": "Maruziyet kontrolü yap",
     "exposure_detail": {
-      "2m_apart": "2 metre uzaklıkta",
-      "6ft_apart": "6 ayak uzaklıkta",
-      "general_guidance": "Genel Kılavuz",
-      "ha_guidance_header": "Ne yapmalıyım?",
-      "header": "Yakınında bulunmuş olduğun birinin COVID-19 testi daha sonra pozitif çıktı.",
       "next_steps": "Sonraki adımlar",
       "personalize_my_guidance": "Bana özel tavsiye sağla",
-      "quarantine": "Karantina",
-      "schedule_callback": "Bir {{healthAuthorityName}} temas takipçisinden destek alabilmek için telefon görüşmesi ayarla.",
-      "speak_with_contact_tracer": "Bir temas takipçisiyle konuş",
-      "wash_your_hands": "Ellerini yıka",
-      "wear_a_mask": "Maske tak"
+      "schedule_callback": "Bir {{healthAuthorityName}} temas takipçisinden destek alabilmek için telefon görüşmesi ayarla."
     },
     "health_guidelines": {
       "six_feet_apart": "6 ayak uzaklıkta kal",
@@ -153,9 +141,6 @@
     "no_connectivity_message": "İnternete bağlı değilsin!",
     "no_exposure_reports": "Maruz kalma bildirimi yok",
     "no_exposure_reports_over_past": "Son 14 gün içinde herhangi bir maruz kalma bildirimi almadın",
-    "possible_exposure": "Olası COVID-19 maruziyeti",
-    "protect_yourself_and_others": "Kendini ve toplumundaki diğer insanları koru.",
-    "review_guidance_from_ha": "{{healthAuthorityName}} kılavuzunu gözden geçir.",
     "updated": "Güncellendi",
     "why_did_i_get_an_en": "Neden maruz kalma bildirimi aldım?",
     "why_did_i_get_an_en_para": "Yakın temasta bulunmuş olduğun bir kişi ileride COVID-19 pozitif çıkarsa ve başka insanlara bunu bildirmeyi seçerse, bir maruz kalma bildirimi alacaksın."
@@ -215,7 +200,6 @@
     }
   },
   "label": {
-    "check": "Onay işareti",
     "checked_checkbox": "İşratelenmiş",
     "go_to_home_view": "Ana sayfaya git",
     "launch_enable_notif": "Bildirimleri Aç",
@@ -461,8 +445,7 @@
     "other": "Diğer",
     "persistent_pain_or_pressure_in_the_chest": "Göğüste sürekli ağrı veya basınç",
     "shortness_of_breath_or_difficulty_breathing": "Nefes darlığı veya nefes almada zorluk",
-    "sore_throat": "Boğaz ağrısı",
-    "trouble_breathing": "Nefes almada güçlük"
+    "sore_throat": "Boğaz ağrısı"
   },
   "verification_code_alerts": {
     "unknown_title": "Bir terslik yaşandı"

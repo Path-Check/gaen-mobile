@@ -33,6 +33,7 @@
   "errors": {
     "description": "Yon erè fèt. Tanpri relanse aplikasyon an.",
     "reload": "Relanse",
+    "something_went_wrong": "Yon bagay mal pase",
     "title": "Erè enkoni"
   },
   "escrow_verification": {
@@ -74,13 +75,8 @@
   },
   "exposure_history": {
     "exposure_detail": {
-      "6ft_apart": "6 pye apa",
-      "ha_guidance_header": "Kisa mwen ta dwe fè?",
       "next_steps": "Pwochen etap yo",
-      "schedule_callback": "Orè yon apèl pou jwenn sipò nan men yon traseur kontak ki soti nan {{healthAuthorityName}} .",
-      "speak_with_contact_tracer": "Pale avèk yon trasè kontak",
-      "wash_your_hands": "Lave men w",
-      "wear_a_mask": "Mete yon mas"
+      "schedule_callback": "Orè yon apèl pou jwenn sipò nan men yon traseur kontak ki soti nan {{healthAuthorityName}} ."
     },
     "health_guidelines": {
       "six_feet_apart": "Rete 6 pye apa",
@@ -94,7 +90,6 @@
     "last_days": "21 jou pase yo",
     "next_steps": "Pwochen etap yo",
     "no_connectivity_message": "Ou pa konekte sou entènèt!",
-    "protect_yourself_and_others": "Pwoteje tèt ou ak lòt moun nan kominote w ",
     "updated": "Mete ajou",
     "why_did_i_get_an_en": "Poukisa mwen te resevwa yon notifikasyon ekspozisyon?",
     "why_did_i_get_an_en_para": "Ou pral resevwa yon notifikasyon ekspozisyon lè yon moun ou kwaze chemen ak li resevwa yon dyagnostik pozitif oswa tès pou COVID-19 aprè ou te kwaze li e chwazi notifye lòt moun."
@@ -120,7 +115,6 @@
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
   "label": {
-    "check": "Kwochè ",
     "go_to_home_view": "Ale nan Akèy",
     "launch_enable_notif": "Aktive notifikasyon",
     "launch_get_started": "Kòmanse",

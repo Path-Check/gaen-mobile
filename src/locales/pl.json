@@ -13,6 +13,9 @@
     "something_went_wrong": "Coś poszło nie tak",
     "start": "Start"
   },
+  "errors": {
+    "something_went_wrong": "Coś poszło nie tak"
+  },
   "export": {
     "code_input_title_bluetooth": "Zweryfikuj swoją diagnozę",
     "complete_body_bluetooth": "Wybierając opcję dzielenia się swoim statusem i anonimowego powiadamiania innych, pomagasz powstrzymać rozprzestrzenianie się wirusa i chronić innych w swojej społeczności.",

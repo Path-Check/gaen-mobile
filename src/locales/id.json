@@ -42,7 +42,6 @@
   },
   "exposure_history": {
     "exposure_detail": {
-      "header": "Seseorang yang berada di dekat Anda sejak itu dinyatakan positif COVID-19.",
       "next_steps": "Langkah selanjutnya"
     },
     "health_guidelines": {
@@ -50,7 +49,6 @@
     },
     "last_days": "14 hari terakhir",
     "no_exposure_reports_over_past": "Anda belum menerima laporan eksposure selama 14 hari terakhir",
-    "possible_exposure": "Kemungkinan Eksposur",
     "why_did_i_get_an_en_para": "Anda akan menerima pemberitahuan eksposur ketika seseorang yang telah berada di dekat anda kemudian menerima tes positif untuk COVID-19 dan memilih untuk memberi tahu orang lain."
   },
   "home": {

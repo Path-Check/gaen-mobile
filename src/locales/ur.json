@@ -20,6 +20,7 @@
   "errors": {
     "description": "ایک خرابی آگئی ہے. براہ کرم ایپ کو دوبارہ لوڈ کریں۔",
     "reload": "دوبارہ لوڈ کریں",
+    "something_went_wrong": "کچھ غلط ہو گیا",
     "title": "نامعلوم خامی"
   },
   "export": {
@@ -41,12 +42,6 @@
     "publish_consent_title_bluetooth": "اپنی کمیونٹی میں دوسروں کو مطلع کریں"
   },
   "exposure_history": {
-    "exposure_detail": {
-      "6ft_apart": "6 فٹ کے فاصلے پر رہو",
-      "ha_guidance_header": "میں کیا کروں؟",
-      "header": "آپ کے قریب موجود کسی شخص کا COVID-19 مثبت آیا ہے",
-      "wear_a_mask": "ماسک پہن لو"
-    },
     "health_guidelines": {
       "six_feet_apart": "6 فٹ کے فاصلے پر رہو",
       "stay_home": "بیمار ہونے پر گھر ہی رہیں",
@@ -59,9 +54,6 @@
     "last_days": "آخری 14 دن",
     "no_exposure_reports": "ایکسپوژر کی کوئی اطلاع نہیں ہے",
     "no_exposure_reports_over_past": "آپ کو پچھلے 14 دنوں میں کوئینمائش کا اطلاع نہیں ملا ہے ",
-    "possible_exposure": "ممکنہ CoVID-19 ایکسپوژر",
-    "protect_yourself_and_others": "اپنی اور اپنی برادری کے دوسروں کی حفاظت کریں",
-    "review_guidance_from_ha": "رہنمائی کا جائزہ لیں [ healthAuthorityName]",
     "updated": "تازہ کاری",
     "why_did_i_get_an_en": "مجھے ایکسپور کی اطلاع کہاںسے ملی؟ ",
     "why_did_i_get_an_en_para": "آپ کو ایکسپورور نوٹیفیکیشن موصول ہوگا جب آپ کے بعد قریب سے کسی کے پاس رہتے ہوئے COVID-19 کے لئے مثبت امتحان موصول ہوتا ہے اور دوسروں کو مطلع کرنے کا انتخاب کرتے ہیں۔"
@@ -83,7 +75,6 @@
     "proximity_tracing_info_subheader_2": "کیا میرا ڈیٹا محفوظ ہے؟"
   },
   "label": {
-    "check": "چیک مارک",
     "checked_checkbox": "چیک شدہ چیک باکس",
     "launch_enable_notif": "نوٹیفکیشنز اہل بنائیں",
     "launch_get_started": "شروع کریں",
@@ -162,7 +153,6 @@
     "other": "جد کتےہ ",
     "persistent_pain_or_pressure_in_the_chest": "رمدر ہجغم پم ےہمٹب عم رمدر ",
     "shortness_of_breath_or_difficulty_breathing": "وممو غم ممغھ پم وممو یھغم عم ربکمٹ ہجغم ",
-    "sore_throat": "لمیم عم رمدر ",
-    "trouble_breathing": "وممو عم ربکمٹ "
+    "sore_throat": "لمیم عم رمدر "
   }
 }

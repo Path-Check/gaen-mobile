@@ -45,17 +45,14 @@
     "daily_new_cases": "De nouveaux cas quotidiens",
     "error_getting_data": "Désolé, nous n'avons pas pu récupérer les dernières données de cas COVID pour {{location}} .",
     "infection_rate": "Taux d'infection",
-    "new_cases": "Nouveaux cas",
-    "per_100k": "par 100 000",
     "positive_test_rate": "Taux de tests positifs",
     "see_more": "Voir plus",
-    "source": "source: {{source}}",
-    "trending_down": "Tendance à la baisse",
-    "trending_up": "Tendance à la hausse"
+    "source": "source: {{source}}"
   },
   "errors": {
     "description": "Une erreur s'est produite. Veuillez recharger l'application.",
     "reload": "Recharger",
+    "something_went_wrong": "Un problème est survenu",
     "title": "Erreur inconnue"
   },
   "escrow_verification": {
@@ -120,18 +117,9 @@
   "exposure_history": {
     "check_for_exposures": "Vérifiez les expositions",
     "exposure_detail": {
-      "2m_apart": "2m de distance",
-      "6ft_apart": "6 pieds de distance",
-      "general_guidance": "Conseils généraux",
-      "ha_guidance_header": "Que devrais-je faire?",
-      "header": "Une personne à proximité a depuis été testée positive au COVID-19.",
       "next_steps": "Prochaines étapes",
       "personalize_my_guidance": "Personnalisez mes conseils",
-      "quarantine": "Quarantaine",
-      "schedule_callback": "Planifiez un appel pour obtenir de l'aide d'un traceur de contacts de {{healthAuthorityName}} .",
-      "speak_with_contact_tracer": "Parlez avec un traceur de contacts",
-      "wash_your_hands": "Lavez-vous les mains",
-      "wear_a_mask": "Porter un masque"
+      "schedule_callback": "Planifiez un appel pour obtenir de l'aide d'un traceur de contacts de {{healthAuthorityName}} ."
     },
     "health_guidelines": {
       "six_feet_apart": "Restez à 6 pieds de distance",
@@ -147,9 +135,6 @@
     "no_connectivity_message": "Vous n'êtes pas connecté à Internet!",
     "no_exposure_reports": "Aucun rapport d'exposition",
     "no_exposure_reports_over_past": "Vous n'avez reçu aucun rapport d'exposition au cours des 14 derniers jours",
-    "possible_exposure": "Exposition possible à la COVID-19",
-    "protect_yourself_and_others": "Protéger vous-même et les autres membres de votre communauté",
-    "review_guidance_from_ha": "Consulter les conseils de {{healthAuthorityName}}",
     "updated": "Mise à jour",
     "why_did_i_get_an_en": "Pourquoi ai-je reçu une notification d'exposition ?",
     "why_did_i_get_an_en_para": "Vous recevrez une notification d'exposition lorsqu'une personne avec qui vous avez été à proximité plus tard reçoit un test positif au COVID-19 et choisit d'en informer les autres."
@@ -205,7 +190,6 @@
     }
   },
   "label": {
-    "check": "Coche",
     "checked_checkbox": "Case cochée",
     "go_to_home_view": "Afficher l’accueil",
     "launch_enable_notif": "Activer les notifications",
@@ -443,8 +427,7 @@
     "other": "Autre",
     "persistent_pain_or_pressure_in_the_chest": "Douleur ou pression persistante dans la poitrine",
     "shortness_of_breath_or_difficulty_breathing": "Essoufflement ou difficulté à respirer",
-    "sore_throat": "Mal de gorge",
-    "trouble_breathing": "Difficulté à respirer"
+    "sore_throat": "Mal de gorge"
   },
   "verification_code_alerts": {
     "code_used_body": "Le code de vérification fourni a déjà été utilisé.",

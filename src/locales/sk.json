@@ -11,6 +11,9 @@
     "more": "Viac",
     "next": "Hotovo"
   },
+  "errors": {
+    "something_went_wrong": "Niečo sa pokazilo"
+  },
   "export": {
     "enable_exposure_notifications_button": "Povoliť upozornenia o vystavení sa riziku"
   },

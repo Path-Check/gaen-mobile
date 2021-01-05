@@ -42,25 +42,27 @@
   },
   "covid_data": {
     "apologies_data_unavailable": "Rất tiếc, dữ liệu COVID không khả dụng.",
+    "covid_stats": "COVID-19 Thống kê",
     "daily_new_cases": "Ca mới hàng ngày",
     "error_getting_data": "Rất tiếc, chúng tôi không thể truy xuất dữ liệu về các ca COVID mới nhất đối với {{location}}.",
     "infection_rate": "Tỉ lệ nhiễm bệnh",
-    "new_cases": "Các Ca Mới",
-    "per_100k": "mỗi 100k",
+    "overall_risk_level_in": "Mức độ rủi ro tổng thể trong {{locationName}}",
+    "past_days": "Các trường hợp mới mỗi ngày, {{days}} ngày qua",
     "positive_test_rate": "Tỉ lệ xét nghiệm dương tính",
     "see_more": "Xem thêm",
-    "source": "Nguồn: {{source}}",
-    "trending_down": "Xu hướng giảm",
-    "trending_up": "Xu hướng tăng"
+    "source": "Nguồn: {{source}}"
   },
   "errors": {
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
     "reload": "Tải lại",
-    "title": "Lỗi Chưa Xác Định"
+    "something_went_wrong": "Đã có vấn đề",
+    "title": "Lỗi Chưa Xác Định",
+    "try_again_later": "Cố gắng sau"
   },
   "escrow_verification": {
     "error": {
-      "invalid_phone_number": "Số điện thoại phải có 10 chữ số"
+      "invalid_phone_number": "Số điện thoại phải có 10 chữ số",
+      "rate_limit": "Bạn đã đạt đến giới hạn gửi hàng ngày. Vui lòng thử lại sau 24 giờ."
     },
     "person_and_health_expert": "Một người đang nói chuyện với một chuyên gia y tế",
     "start": {
@@ -121,6 +123,13 @@
         "no_token_for_existing_keys_title": "Cố gửi các mã hiện hữu"
       }
     },
+    "symptom_onset": {
+      "did_you_have_symptoms": "Bạn có bất kỳ triệu chứng nào không?",
+      "no_i_didnt_have": "Không có triệu chứng",
+      "symptoms": "Các triệu chứng",
+      "when_did_your_symptoms": "Các triệu chứng của bạn bắt đầu khi nào?",
+      "yes_i_did_have": "Có, tôi đã có triệu chứng"
+    },
     "verification_code_info": {
       "how_do_i_get_body": "Liên cơ quan y tế của bạn, {{healthAuthorityName}}",
       "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
@@ -132,20 +141,15 @@
   },
   "exposure_history": {
     "check_for_exposures": "Kiểm tra các trường hợp tiếp xúc",
+    "days_remaining": "Còn {{daysOfQuarantineLeft}} ngày trong khoảng thời gian cách ly được đề xuất của bạn.",
     "exposure_detail": {
-      "2m_apart": "Giữ khoảng cách 2 m",
-      "6ft_apart": "Giữ khoảng cách 6 feet",
-      "general_guidance": "Hướng Dẫn Chung",
-      "ha_guidance_header": "Tôi phải làm gì?",
-      "header": "Một người đã ở gần bạn đã có xét nghiệm dương tính với COVID-19.",
       "next_steps": "Các bước tiếp theo",
       "personalize_my_guidance": "Cá nhân hóa hướng dẫn của tôi",
-      "quarantine": "Cách ly",
       "schedule_callback": "Xếp lịch gọi để nhận được sự hỗ trợ của một người truy dấu vết tiếp xúc từ {{healthAuthorityName}}.",
-      "speak_with_contact_tracer": "Nói chuyện với một người truy dấu vết tiếp xúc",
-      "wash_your_hands": "Rửa tay",
-      "wear_a_mask": "Đeo khẩu trang"
+      "speak_with_covid_support": "Nói chuyện với hỗ trợ COVID"
     },
+    "exposure_report": "Lịch Sử Tiếp Xúc",
+    "exposure_summary": "Một người nào đó mà bạn ở gần trong khoảng thời gian từ tháng {{startDate}} đến tháng {{endDate}} đã xét nghiệm dương tính với COVID-19.",
     "health_guidelines": {
       "six_feet_apart": "Giữ khoảng cách 6 feet. ",
       "stay_home": "Ở nhà khi bị bệnh",
@@ -158,15 +162,16 @@
     "how_does_this_work_para": "Khi Thông Báo Tiếp Xúc được bật, điện thoại của bạn sử dụng Bluetooth để hoán đổi và lưu các chuỗi số ngẫu nhiên (được gọi là các ID ngẫu nhiên) từ bất kỳ điện thoại nào nó có tiếp xúc gần với điện thoại cũng đã bật Thông Báo Tiếp Xúc. Các ID ngẫu nhiên sẽ không nhận dạng cá nhân bạn cho người dùng khác biết và thay đổi nhiều lần mỗi ngày để bảo vệ quyền riêng tư của bạn.",
     "last_days": "14 ngày vừa qua",
     "more_info": "Tìm hiểu thêm về Thông báo phơi sáng",
+    "next_steps": "Các bước tiếp theo",
     "no_connectivity_message": "Bạn chưa kết nối với internet!",
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
     "no_exposure_reports_over_past": "Bạn chưa nhận được bất kỳ báo cáo tiếp xúc nào trong 14 ngày vừa qua.",
-    "possible_exposure": "Có thể có tiếp xúc với COVID-19",
-    "protect_yourself_and_others": "Bảo vệ bản thân và người khác trong cộng đồng của bạn",
-    "review_guidance_from_ha": "Xem lại hướng dẫn của {{healthAuthorityName}}",
+    "possible_exposures": "Có thể có tiếp xúc với COVID-19",
+    "review_health_guidance": "Hướng Dẫn Chung",
     "updated": "Đã cập nhật",
     "why_did_i_get_an_en": "Tại sao tôi nhận được thông báo tiếp xúc?",
-    "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác."
+    "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác.",
+    "your_device_exchanged": "Trong mỗi phạm vi ngày bên dưới, thiết bị của bạn đã trao đổi khóa với một thiết bị khác mà sau đó nhận được kết quả xét nghiệm dương tính đã được xác minh."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "Để kích hoạt Thông báo phơi sáng, trước tiên bạn phải bật Bluetooth trong Cài đặt của mình.",
@@ -174,6 +179,8 @@
     "cant_check_for_exposures_body": "Bạn phải bật Thông báo phơi sáng để kiểm tra độ phơi sáng.",
     "cant_check_for_exposures_button": "Bật Thông Báo Tiếp Xúc",
     "cant_check_for_exposures_title": "Không thể tìm thấy độ phơi sáng",
+    "location_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
+    "location_title": "Cho phép truy cập vị trí",
     "set_active_region_ios_body": "Mở ứng dụng Cài đặt, điều hướng đến cài đặt Thông báo phơi sáng cho ứng dụng này, sau đó nhấn 'Đặt làm khu vực hoạt động'.",
     "set_active_region_ios_title": "Set Active Region",
     "share_exposure_information_ios_body": "Mở ứng dụng Cài đặt, sau đó điều hướng đến cài đặt Thông báo phơi sáng cho ứng dụng này. Đảm bảo 'Chia sẻ thông tin phơi sáng' được bật, sau đó nhấn 'Đặt làm khu vực hoạt động'.",
@@ -206,13 +213,18 @@
     },
     "call_emergency_services": "Gọi Dịch Vụ Cấp Cứu",
     "check_if_your_symptoms": "Nhập các triệu chứng của bạn và nhận khuyến cáo tức thời về cách đảm bảo an toàn.",
+    "could_not_open_link": "Không thể mở liên kết: {{url}} . Vui lòng thử mở url trong trình duyệt trên điện thoại của bạn.",
     "enter_symptoms": "Nhập triệu chứng",
+    "error": {
+      "share_link_failed": "Không mở được liên kết để chia sẻ"
+    },
     "fix": "Khắc phục vấn đề với {{technology}}",
     "get_more_info": "Nhận thêm thông tin về {{technology}}",
     "have_a_positive_test": "Bạn có mã kết quả xét nghiệm dương tính?",
     "location_info_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
     "location_info_subheader": "{{applicationName}} không theo dõi hay lưu hồ sơ về địa điểm của bạn",
     "not_feeling_well": "Bạn cảm thấy không khỏe?",
+    "notifications_off": "Bật thông báo để nhận thông báo nếu bạn nhận được thông báo",
     "proximity_tracing_info_body_1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật Bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_info_body_2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
     "proximity_tracing_info_subheader_1": "Thông Báo Tiếp Xúc hoạt động như thế nào?",
@@ -227,7 +239,6 @@
     }
   },
   "label": {
-    "check": "Dấu kiểm",
     "checked_checkbox": "Hộp kiểm đã chọn",
     "go_to_home_view": "Đến giao diện Trang Chủ",
     "launch_enable_notif": "Cho Phép Thông Báo",
@@ -473,8 +484,7 @@
     "other": "Khác",
     "persistent_pain_or_pressure_in_the_chest": "Đau hoặc tức ngực dai dẳng",
     "shortness_of_breath_or_difficulty_breathing": "Hụt hơi hoặc khó thở",
-    "sore_throat": "Đau họng",
-    "trouble_breathing": "Khó thở"
+    "sore_throat": "Đau họng"
   },
   "verification_code_alerts": {
     "code_used_body": "Mã xác minh được cung cấp đã được sử dụng.",
