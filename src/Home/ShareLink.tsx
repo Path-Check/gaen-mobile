@@ -49,6 +49,8 @@ const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
     }
   }
 
+  const imageSource = Images.ShareImage
+
   return (
     <TouchableOpacity
       style={style.shareContainer}
@@ -56,7 +58,7 @@ const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
       accessibilityLabel={t("home.bluetooth.share", { applicationName })}
     >
       <View style={style.shareImageContainer}>
-        <Image source={Images.HugEmoji} style={style.shareImage} />
+        <Image source={imageSource} style={style.shareImage} />
       </View>
       <View style={style.shareTextContainer}>
         <Text style={style.shareText}>
