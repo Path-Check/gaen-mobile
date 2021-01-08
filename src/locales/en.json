@@ -75,6 +75,11 @@
       "subheader": "Please provide your phone number and test date and we'll text you your verification code.",
       "test_date": "Test date",
       "test_details": "Test Details"
+    },
+    "complete_healthcheck": "Complete HealthCheck",
+    "complete": {
+      "body": "You’re helping contain the spread of the virus and protect others in your community.",
+      "title": "Thanks for keeping your community safe!"
     }
   },
   "export": {
