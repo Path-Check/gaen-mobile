@@ -21,7 +21,6 @@ const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
   const { t } = useTranslation()
 
   const envQuarantineLength = Number(env.QUARANTINE_LENGTH)
-
   const quarantineLength = isNaN(envQuarantineLength)
     ? DEFAULT_QUARANTINE_LENGTH
     : envQuarantineLength

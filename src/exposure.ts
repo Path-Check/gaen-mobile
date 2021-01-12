@@ -11,28 +11,10 @@ export interface ExposureDatum {
 
 export type ExposureInfo = ExposureDatum[]
 
-type ExposureDateRangeStrings = {
-  start: string
-  end: string
-}
+type ExposureRange = [Posix, Posix]
 
-const toExposureDateRangeStrings = (date: Posix): ExposureDateRangeStrings => {
-  return {
-    start: dayjs.utc(date).subtract(1, "day").format("dddd, MMM Do"),
-    end: dayjs.utc(date).add(1, "day").format("dddd, MMM Do"),
-  }
-}
-
-export const toDateRangeString = ({ date }: ExposureDatum): string => {
-  const { start, end } = toExposureDateRangeStrings(date)
-
-  return `${start} - ${end}`
-}
-
-export const toStartDateString = ({ date }: ExposureDatum): string => {
-  return toExposureDateRangeStrings(date).start
-}
-
-export const toEndDateString = ({ date }: ExposureDatum): string => {
-  return toExposureDateRangeStrings(date).end
+export const toExposureRange = ({ date }: ExposureDatum): ExposureRange => {
+  const start = dayjs.utc(date).subtract(1, "day").valueOf()
+  const end = dayjs.utc(date).add(1, "day").valueOf()
+  return [start, end]
 }
