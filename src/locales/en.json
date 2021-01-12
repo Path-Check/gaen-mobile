@@ -146,7 +146,7 @@
   },
   "exposure_history": {
     "check_for_exposures": "Check for exposures",
-    "days_remaining": "There are {{daysOfQuarantineLeft}} days left in your recommended quarantine period.",
+    "days_remaining": "Days remaining in your recommended quarantine period:",
     "exposure_detail": {
       "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
@@ -173,6 +173,7 @@
     "no_exposure_reports_over_past": "You haven't received any exposure reports over the past 14-days",
     "possible_exposures": "Possible Exposures",
     "review_health_guidance": "Review Health Guidance",
+    "stay_quarantined_through": "Stay quarantined through:",
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close contact with later uses the app to report a positive COVID-19 test.",

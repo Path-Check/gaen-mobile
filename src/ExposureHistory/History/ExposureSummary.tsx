@@ -35,24 +35,54 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
 }) => {
   const { t } = useTranslation()
 
+  const formatDate = (posix: Posix) => {
+    return dayjs(posix).format("dddd, MMM Do")
+  }
+
+  const [exposureStartDate, exposureEndDate] = Exposure.toExposureRange(
+    exposure,
+  )
+  const exposureStartDateText = formatDate(exposureStartDate)
+  const exposureEndDateText = formatDate(exposureEndDate)
+
   const daysOfQuarantineLeft = determineRemainingQuarantine(
     quarantineLength,
     Date.now(),
     exposure.date,
   )
-
-  const startDate = Exposure.toStartDateString(exposure)
-  const endDate = Exposure.toEndDateString(exposure)
+  const quarantineEndDate = dayjs(exposureEndDate)
+    .add(daysOfQuarantineLeft, "day")
+    .valueOf()
+  const quarantineEndDateText = formatDate(quarantineEndDate)
 
   return (
     <View>
       <Text style={style.summaryText}>
-        {t("exposure_history.exposure_summary", { startDate, endDate })}
+        {t("exposure_history.exposure_summary", {
+          startDate: exposureStartDateText,
+          endDate: exposureEndDateText,
+        })}
       </Text>
-      <View style={style.daysRemainingTextContainer}>
-        <Text style={style.daysRemainingText}>
-          {t("exposure_history.days_remaining", { daysOfQuarantineLeft })}
-        </Text>
+      <View style={style.recommendationContainer}>
+        <View style={style.daysRemainingContainer}>
+          <View style={style.daysRemainingTextContainer}>
+            <Text style={style.labelText}>
+              {t("exposure_history.days_remaining")}
+            </Text>
+          </View>
+          <View style={style.dayNumberContainer}>
+            <Text style={style.dayNumberText}>{daysOfQuarantineLeft}</Text>
+          </View>
+        </View>
+
+        <View style={style.quarantineEndDateContainer}>
+          <Text style={style.labelText}>
+            {t("exposure_history.stay_quarantined_through")}
+          </Text>
+          <Text style={style.quarantineEndDateText}>
+            {quarantineEndDateText}
+          </Text>
+        </View>
       </View>
     </View>
   )
@@ -63,15 +93,45 @@ const style = StyleSheet.create({
     ...Typography.body.x20,
     marginBottom: Spacing.small,
   },
-  daysRemainingTextContainer: {
+  recommendationContainer: {
     backgroundColor: Colors.neutral.shade10,
     borderRadius: Outlines.baseBorderRadius,
-    paddingVertical: Spacing.xxSmall,
+    paddingVertical: Spacing.xSmall,
     paddingHorizontal: Spacing.xSmall,
   },
-  daysRemainingText: {
+  labelText: {
     ...Typography.body.x20,
     color: Colors.neutral.black,
+  },
+  quarantineEndDateText: {
+    ...Typography.body.x20,
+    letterSpacing: Typography.letterSpacing.x20,
+  },
+  daysRemainingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  quarantineEndDateContainer: {
+    marginTop: Spacing.xSmall,
+    paddingTop: Spacing.xxSmall,
+    borderTopWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade30,
+  },
+  daysRemainingTextContainer: {
+    flex: 3,
+  },
+  dayNumberContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.neutral.white,
+    paddingVertical: Spacing.xSmall,
+    paddingHorizontal: Spacing.medium,
+    borderRadius: Outlines.baseBorderRadius,
+    marginLeft: Spacing.xSmall,
+  },
+  dayNumberText: {
+    ...Typography.base.x50,
+    ...Typography.style.bold,
   },
 })
 
