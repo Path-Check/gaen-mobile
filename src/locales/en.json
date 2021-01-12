@@ -75,10 +75,10 @@
       "test_date": "Test date",
       "test_details": "Test Details"
     },
-    "complete_healthcheck": "Complete HealthCheck",
+    "complete_healthcheck": "Complete Healthcheck",
     "complete": {
-      "body": "You’re helping contain the spread of the virus and protect others in your community.",
-      "title": "Thanks for keeping your community safe!"
+      "body": "You’re helping contain the spread of the virus and protect others in your community and beyond.",
+      "title": "Thanks for keeping everyone safe!"
     }
   },
   "export": {
@@ -149,7 +149,7 @@
     "exposure_detail": {
       "next_steps": "Review health guidelines",
       "personalize_my_guidance": "Personalize my guidance",
-      "schedule_callback": "Schedule a call with the {{healthAuthorityName}} to get help with testing and a successful quarantine.",
+      "schedule_callback": "Schedule a call with the {{healthAuthorityName}} to get help to successfully quarantine.",
       "speak_with_covid_support": "Speak with COVID Support"
     },
     "exposure_report": "Exposure Report",
