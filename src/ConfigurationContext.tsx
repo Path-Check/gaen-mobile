@@ -33,6 +33,7 @@ export interface Configuration {
   regionCodes: string[]
   remoteContentUrl: string | null
   stateAbbreviation: string | null
+  supportPhoneNumber: string | null
   verificationStrategy: VerificationStrategy
 }
 
@@ -65,6 +66,7 @@ const initialState: Configuration = {
   regionCodes: [],
   remoteContentUrl: null,
   stateAbbreviation: "",
+  supportPhoneNumber: null,
   verificationStrategy: "Simple",
 }
 
@@ -101,6 +103,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const healthAuthorityVerificationCodeInfoUrl =
     env.VERIFICATION_CODE_INFO_URL || null
   const remoteContentUrl = env.REMOTE_CONTENT_URL || null
+  const supportPhoneNumber = env.SUPPORT_PHONE_NUMBER || null
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
@@ -167,6 +170,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         regionCodes,
         remoteContentUrl,
         stateAbbreviation,
+        supportPhoneNumber,
         verificationStrategy,
       }}
     >

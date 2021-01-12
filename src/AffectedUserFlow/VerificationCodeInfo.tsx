@@ -1,11 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-} from "react-native"
+import { View, ScrollView, Pressable, StyleSheet, Linking } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useStatusBarEffect } from "../navigation/index"
 import { useCustomCopy } from "../configuration/useCustomCopy"
@@ -25,7 +19,10 @@ const MoreInfo: FunctionComponent = () => {
     verificationCodeInfo,
     verificationCodeHowDoIGet,
   } = useCustomCopy()
-  const { healthAuthorityVerificationCodeInfoUrl } = useConfigurationContext()
+  const {
+    healthAuthorityVerificationCodeInfoUrl,
+    supportPhoneNumber,
+  } = useConfigurationContext()
 
   const verificationCodeInfoText =
     verificationCodeInfo ||
@@ -41,6 +38,10 @@ const MoreInfo: FunctionComponent = () => {
     if (url) {
       Linking.openURL(url)
     }
+  }
+
+  const handleOnPressSupportNumber = () => {
+    Linking.openURL(`tel:${supportPhoneNumber}`)
   }
 
   return (
@@ -60,11 +61,29 @@ const MoreInfo: FunctionComponent = () => {
             {t("export.verification_code_info.how_do_i_get_header")}
           </Text>
           <Text style={style.contentText}>{verificationCodeHowDoIGetText}</Text>
+          {Boolean(supportPhoneNumber) && (
+            <View style={style.supportNumberContainer}>
+              <Text style={style.contentText}>
+                {t("export.verification_code_info.contact_at", {
+                  healthAuthorityName,
+                })}
+              </Text>
+
+              <Pressable
+                onPress={handleOnPressSupportNumber}
+                style={style.supportNumberButton}
+              >
+                <Text style={style.supportNumberButtonText}>
+                  {supportPhoneNumber}
+                </Text>
+              </Pressable>
+            </View>
+          )}
           {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
-            <TouchableOpacity style={style.button} onPress={handleOnPressLink}>
+            <Pressable style={style.button} onPress={handleOnPressLink}>
               <Text style={style.buttonText}>{t("common.learn_more")}</Text>
               <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
         <View style={style.section}>
@@ -96,11 +115,23 @@ const style = StyleSheet.create({
   },
   contentText: {
     ...Typography.body.x30,
-    paddingTop: Spacing.small,
+  },
+  supportNumberContainer: {
+    width: "100%",
+    marginTop: Spacing.xSmall,
+  },
+  supportNumberText: {
+    ...Typography.body.x30,
+  },
+  supportNumberButton: {
+    paddingVertical: Spacing.tiny,
+  },
+  supportNumberButtonText: {
+    ...Typography.button.anchorLink,
   },
   button: {
     ...Buttons.outlined.base,
-    marginBottom: Spacing.small,
+    marginVertical: Spacing.small,
   },
   buttonText: {
     ...Typography.button.outlined,

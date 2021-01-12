@@ -7,6 +7,7 @@
   },
   "callback": {
     "firstname": "First name",
+    "if_you_prefer": "If you prefer; call directly at",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
     "request_a_call": "Request a call from our support team",
@@ -135,6 +136,7 @@
       "yes_i_did_have": "Yes, I did have symptoms"
     },
     "verification_code_info": {
+      "contact_at": "Contact the {{healthAuthorityName}} at",
       "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
       "how_do_i_get_header": "How do I get a verification code?",
       "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that out of date test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
