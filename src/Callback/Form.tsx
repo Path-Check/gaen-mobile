@@ -28,7 +28,7 @@ const CallbackForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { healthAuthorityName } = useCustomCopy()
+  const { callbackFormInstruction } = useCustomCopy()
   const { minimumPhoneDigits } = useConfigurationContext()
 
   const [firstname, setFirstname] = useState("")
@@ -110,11 +110,7 @@ const CallbackForm: FunctionComponent = () => {
           <View>
             <View style={style.headerContainer}>
               <Text style={style.header}>{t("callback.request_a_call")}</Text>
-              <Text style={style.subheader}>
-                {t("callback.fill_out_the_info", {
-                  healthAuthorityName,
-                })}
-              </Text>
+              <Text style={style.subheader}>{callbackFormInstruction}</Text>
             </View>
             <View style={style.inputContainer}>
               <Text style={style.inputLabel}>{t("callback.firstname")}</Text>

@@ -9,7 +9,8 @@
       "header": "PathCheck App",
       "body1": "Thank you for updating to the PathCheck App (this copy is customizable)",
       "body2": "With this update you will receive.. (this copy is customizable)"
-    }
+    },
+    "callbackFormInstruction": "Fill out the information below and a support member will get in touch."
   },
   "es_PR": {
     "welcomeMessage": "Bienvenido a",

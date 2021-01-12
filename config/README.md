@@ -37,6 +37,7 @@ The supported values are:
 - `verificationCodeHowDoIGet`: The app will display this copy in the second section of
   the verification code info screen. It should contain information about how the
   user can get a verification code. The app provides a default value.
+- `callbackFormInstruction`: This is the copy that is shown at the top of the callback form
 
 #### App Transition Copy (Optional)
 
@@ -64,6 +65,7 @@ interface CustomCopy {
     body1: string
     body2: string
   }
+  callbackFormInstruction?: string
 }
 ```
 
@@ -80,7 +82,8 @@ interface CustomCopy {
       "header": "",
       "body1": "",
       "body2": ""
-    }
+    },
+    "callbackFormInstruction": ""
   },
   "es_PR": {
     "healthAuthorityName": "Autoridad sanitaria",
