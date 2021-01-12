@@ -2,6 +2,8 @@ import React, { useState, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Alert,
+  Pressable,
+  Linking,
   KeyboardAvoidingView,
   StyleSheet,
   Platform,
@@ -29,7 +31,7 @@ const CallbackForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { callbackFormInstruction } = useCustomCopy()
-  const { minimumPhoneDigits } = useConfigurationContext()
+  const { minimumPhoneDigits, supportPhoneNumber } = useConfigurationContext()
 
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
@@ -96,6 +98,10 @@ const CallbackForm: FunctionComponent = () => {
     }
   }
 
+  const handleOnPressSupportNumber = () => {
+    Linking.openURL(`tel:${supportPhoneNumber}`)
+  }
+
   return (
     <>
       <KeyboardAvoidingView
@@ -111,6 +117,21 @@ const CallbackForm: FunctionComponent = () => {
             <View style={style.headerContainer}>
               <Text style={style.header}>{t("callback.request_a_call")}</Text>
               <Text style={style.subheader}>{callbackFormInstruction}</Text>
+              {Boolean(supportPhoneNumber) && (
+                <View style={style.supportNumberContainer}>
+                  <Text style={style.supportNumberText}>
+                    {t("callback.if_you_prefer")}
+                  </Text>
+                  <Pressable
+                    onPress={handleOnPressSupportNumber}
+                    style={style.supportNumberButton}
+                  >
+                    <Text style={style.supportNumberButtonText}>
+                      {supportPhoneNumber}
+                    </Text>
+                  </Pressable>
+                </View>
+              )}
             </View>
             <View style={style.inputContainer}>
               <Text style={style.inputLabel}>{t("callback.firstname")}</Text>
@@ -201,6 +222,20 @@ const style = StyleSheet.create({
   subheader: {
     ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
+  },
+  supportNumberContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  supportNumberText: {
+    ...Typography.body.x30,
+  },
+  supportNumberButton: {
+    paddingHorizontal: Spacing.xxSmall,
+    paddingVertical: Spacing.xSmall,
+  },
+  supportNumberButtonText: {
+    ...Typography.button.anchorLink,
   },
   errorSubtitle: {
     ...Typography.utility.error,

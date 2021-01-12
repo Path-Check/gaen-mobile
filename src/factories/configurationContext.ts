@@ -30,5 +30,6 @@ export default Factory.define<Configuration>(() => ({
   regionCodes: ["REGION"],
   remoteContentUrl: null,
   stateAbbreviation: null,
+  supportPhoneNumber: null,
   verificationStrategy: "Simple",
 }))
