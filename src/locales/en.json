@@ -6,7 +6,6 @@
     "version": "Version:"
   },
   "callback": {
-    "fill_out_the_info": "Fill out the information below and a support member from the {{healthAuthorityName}} will get in touch.",
     "firstname": "First name",
     "lastname": "Last name",
     "phone_number_required": "Phone number (required)",
