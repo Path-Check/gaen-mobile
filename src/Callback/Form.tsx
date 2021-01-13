@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from "react"
+import React, { useRef, useState, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next"
 import {
   Alert,
@@ -26,6 +26,18 @@ import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 
 const defaultErrorMessage = " "
 
+export const phoneToFormattedString = (phonenumber: string): string => {
+  const underscores = new Array(10).fill("*")
+  const digits = phonenumber.split("")
+  const characters = [...digits, ...underscores]
+
+  const areaCode = characters.slice(0, 3).join("")
+  const firstPart = characters.slice(3, 6).join("")
+  const secondPart = characters.slice(6, 10).join("")
+
+  return `(${areaCode}) ${firstPart}-${secondPart}`
+}
+
 const CallbackForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
@@ -36,6 +48,7 @@ const CallbackForm: FunctionComponent = () => {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [isPhoneInputFocused, setIsPhoneInputFocused] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
@@ -102,6 +115,20 @@ const CallbackForm: FunctionComponent = () => {
     Linking.openURL(`tel:${supportPhoneNumber}`)
   }
 
+  const handleOnPressShadowPhoneInput = () => {
+    setIsPhoneInputFocused(true)
+    phoneInputRef?.current?.focus()
+  }
+
+  const handleOnBlurHiddenPhoneInput = () => {
+    setIsPhoneInputFocused(false)
+  }
+  const phoneInputRef = useRef<TextInput>(null)
+
+  const shadowPhoneInputStyle = isPhoneInputFocused
+    ? style.focusedShadowPhoneInput
+    : style.unfocusedShadowPhoneInput
+
   return (
     <>
       <KeyboardAvoidingView
@@ -163,16 +190,23 @@ const CallbackForm: FunctionComponent = () => {
               <Text style={style.inputLabel}>
                 {t("callback.phone_number_required")}
               </Text>
+              <Pressable onPress={handleOnPressShadowPhoneInput}>
+                <Text style={shadowPhoneInputStyle}>
+                  {phoneToFormattedString(phoneNumber)}
+                </Text>
+              </Pressable>
+
               <TextInput
-                value={phoneNumber}
-                style={style.textInput}
+                ref={phoneInputRef}
+                onBlur={handleOnBlurHiddenPhoneInput}
+                style={style.hiddenPhoneTextInput}
                 keyboardType="phone-pad"
+                maxLength={10}
                 returnKeyType="done"
                 onChangeText={handleOnChangePhoneNumber}
                 blurOnSubmit={false}
                 onSubmitEditing={Keyboard.dismiss}
                 testID="phone-number-input"
-                multiline
               />
             </View>
             <Text style={style.errorSubtitle}>{errorMessage}</Text>
@@ -262,6 +296,21 @@ const style = StyleSheet.create({
   },
   buttonDisabledText: {
     ...Typography.button.primaryDisabled,
+  },
+  unfocusedShadowPhoneInput: {
+    ...Forms.textInput,
+    ...Typography.style.monospace,
+  },
+  focusedShadowPhoneInput: {
+    ...Forms.textInput,
+    ...Typography.style.monospace,
+    borderColor: Colors.primary.shade100,
+  },
+  hiddenPhoneTextInput: {
+    height: 0,
+    width: 0,
+    opacity: 0,
+    position: "absolute",
   },
 })
 
