@@ -6,9 +6,9 @@
     "version": "Version:"
   },
   "callback": {
-    "firstname": "First name",
+    "firstname": "First name (optional)",
     "if_you_prefer": "If you prefer; call directly at",
-    "lastname": "Last name",
+    "lastname": "Last name (optional)",
     "phone_number_required": "Phone number (required)",
     "request_a_call": "Request a call from our support team",
     "success_body": "Our support team is working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
