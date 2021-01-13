@@ -4,6 +4,7 @@ import { Configuration } from "../ConfigurationContext"
 export default Factory.define<Configuration>(() => ({
   appDownloadUrl: "appDownloadUrl",
   appPackageName: "appPackageName",
+  cdcGuidanceUrl: "cdcGuidanceUrl",
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
   displayCallbackForm: false,
@@ -27,6 +28,7 @@ export default Factory.define<Configuration>(() => ({
   measurementSystem: "Imperial",
   minimumAge: "18",
   minimumPhoneDigits: 0,
+  quarantineLength: 14,
   regionCodes: ["REGION"],
   remoteContentUrl: null,
   stateAbbreviation: null,

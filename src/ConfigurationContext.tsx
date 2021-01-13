@@ -7,6 +7,7 @@ type MeasurementSystem = "Imperial" | "Metric"
 export interface Configuration {
   appDownloadUrl: string | null
   appPackageName: string
+  cdcGuidanceUrl: string | null
   displayAcceptTermsOfService: boolean
   displayAppTransition: boolean
   displayCallbackForm: boolean
@@ -30,6 +31,7 @@ export interface Configuration {
   measurementSystem: MeasurementSystem
   minimumAge: string
   minimumPhoneDigits: number
+  quarantineLength: number
   regionCodes: string[]
   remoteContentUrl: string | null
   stateAbbreviation: string | null
@@ -40,6 +42,7 @@ export interface Configuration {
 const initialState: Configuration = {
   appDownloadUrl: null,
   appPackageName: "",
+  cdcGuidanceUrl: null,
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
   displayCallbackForm: false,
@@ -65,6 +68,7 @@ const initialState: Configuration = {
   minimumPhoneDigits: 0,
   regionCodes: [],
   remoteContentUrl: null,
+  quarantineLength: 14,
   stateAbbreviation: "",
   supportPhoneNumber: null,
   verificationStrategy: "Simple",
@@ -83,6 +87,8 @@ const toVerificationStrategy = (strategy: string): VerificationStrategy => {
   }
 }
 
+const DEFAULT_QUARANTINE_LENGTH = 14
+
 const ConfigurationContext = createContext<Configuration>(initialState)
 
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
@@ -95,6 +101,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   } = env
 
   const appDownloadUrl = env.SHARE_APP_LINK || null
+  const cdcGuidanceUrl = env.CDC_GUIDANCE_LINK || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
   const healthAuthorityHealthCheckUrl = env.HEALTH_CHECK_URL || null
@@ -139,10 +146,16 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.VERIFICATION_STRATEGY,
   )
 
+  const envQuarantineLength = Number(env.QUARANTINE_LENGTH)
+  const quarantineLength = isNaN(envQuarantineLength)
+    ? DEFAULT_QUARANTINE_LENGTH
+    : envQuarantineLength
+
   return (
     <ConfigurationContext.Provider
       value={{
         appDownloadUrl,
+        cdcGuidanceUrl,
         appPackageName,
         displayAcceptTermsOfService,
         displayAppTransition,
@@ -167,6 +180,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         measurementSystem,
         minimumAge,
         minimumPhoneDigits,
+        quarantineLength,
         regionCodes,
         remoteContentUrl,
         stateAbbreviation,
