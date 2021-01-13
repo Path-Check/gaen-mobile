@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { StyleSheet, View } from "react-native"
-import env from "react-native-config"
 import { useTranslation } from "react-i18next"
 
+import { useConfigurationContext } from "../../ConfigurationContext"
 import { ExposureDatum } from "../../exposure"
 import ExposureListItem from "./ExposureListItem"
 import ExposureSummary from "./ExposureSummary"
@@ -15,15 +15,9 @@ interface HasExposuresProps {
   exposures: ExposureDatum[]
 }
 
-const DEFAULT_QUARANTINE_LENGTH = 10
-
 const HasExposures: FunctionComponent<HasExposuresProps> = ({ exposures }) => {
   const { t } = useTranslation()
-
-  const envQuarantineLength = Number(env.QUARANTINE_LENGTH)
-  const quarantineLength = isNaN(envQuarantineLength)
-    ? DEFAULT_QUARANTINE_LENGTH
-    : envQuarantineLength
+  const { quarantineLength } = useConfigurationContext()
 
   const mostRecentExposure = exposures[0]
 
