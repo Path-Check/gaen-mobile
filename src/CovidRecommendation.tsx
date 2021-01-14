@@ -18,46 +18,26 @@ import { useConfigurationContext } from "./ConfigurationContext"
 import { Buttons, Colors, Spacing, Typography } from "./styles"
 import { Images, Icons } from "./assets"
 
-interface CovidRecommendationProps {
-  onDismiss: () => void
-}
-
-const CovidRecommendation: FunctionComponent<CovidRecommendationProps> = ({
-  onDismiss,
-}) => {
+const CovidRecommendation: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.secondary.shade10)
   const { t } = useTranslation()
-  const { findATestCenterUrl, cdcGuidanceUrl } = useConfigurationContext()
-
-  const handleOnPressDone = () => {
-    onDismiss()
-  }
+  const {
+    findATestCenterUrl,
+    cdcGuidanceUrl,
+    cdcSymptomsUrl,
+  } = useConfigurationContext()
 
   const RecommendationContent: FunctionComponent = () => {
-    const handleOnPressCDCGuidanceUrl = () => {
-      if (cdcGuidanceUrl) {
-        Linking.openURL(cdcGuidanceUrl)
-      }
-    }
-
-    const symptomQuarantineLength = 10
-
     return (
       <View>
+        <View>
+          <Text style={style.contentText}>
+            {t("covid_recommendation.to_prevent_the_spread")}
+          </Text>
+        </View>
         <View style={style.contentContainer}>
           <Text style={style.boldText}>
-            {t("covid_recommendation.stay_home")}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.at_least_x_days", {
-              quarantineLength: symptomQuarantineLength,
-            })}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.you_have_not_had_a")}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.and_other_covid")}
+            {t("covid_recommendation.stay_home_except_to_get_medical_care")}
           </Text>
         </View>
 
@@ -87,19 +67,9 @@ const CovidRecommendation: FunctionComponent<CovidRecommendationProps> = ({
         </View>
 
         <View style={style.contentContainer}>
-          <Text>
-            <Text style={style.contentText}>
-              {t("covid_recommendation.get_rest_and_stay")}
-            </Text>
+          <Text style={style.contentText}>
+            {t("covid_recommendation.get_rest_and_stay")}
           </Text>
-          <Pressable
-            onPress={handleOnPressCDCGuidanceUrl}
-            style={style.cdcGuidanceLinkContainer}
-          >
-            <Text style={style.cdcGuidanceLinkText}>
-              {t("covid_recommendation.cdc_guidance")}
-            </Text>
-          </Pressable>
         </View>
       </View>
     )
@@ -113,12 +83,20 @@ const CovidRecommendation: FunctionComponent<CovidRecommendationProps> = ({
     }
   }
 
+  const handleOnPressCovidSymptoms = () => {
+    if (cdcSymptomsUrl) {
+      Linking.openURL(cdcSymptomsUrl)
+    }
+  }
+
+  const handleOnPressCDCGuidanceUrl = () => {
+    if (cdcGuidanceUrl) {
+      Linking.openURL(cdcGuidanceUrl)
+    }
+  }
+
   return (
-    <ScrollView
-      style={style.container}
-      contentContainerStyle={style.contentContainer}
-      alwaysBounceVertical={false}
-    >
+    <ScrollView style={style.container} alwaysBounceVertical={false}>
       <View style={style.topScrollViewBackground} />
       <View style={style.headerContainer}>
         <Image source={Images.SelfAssessment} style={style.image} />
@@ -132,26 +110,56 @@ const CovidRecommendation: FunctionComponent<CovidRecommendationProps> = ({
       <View style={style.bottomContainer}>
         <RecommendationContent />
         {displayFindATestCenter && (
-          <TouchableOpacity
-            style={style.button}
-            onPress={handleOnPressFindTestCenter}
-            accessibilityLabel={t(
-              "self_assessment.guidance.find_a_test_center_nearby",
-            )}
-          >
-            <Text style={style.buttonText}>
-              {t("self_assessment.guidance.find_a_test_center_nearby")}
-            </Text>
-            <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
-          </TouchableOpacity>
+          <View style={style.ctaContainer}>
+            <View style={style.contentContainer}>
+              <Text style={style.boldText}>
+                {t("covid_recommendation.get_a_covid_test")}
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={style.button}
+              onPress={handleOnPressFindTestCenter}
+              accessibilityLabel={t("covid_recommendation.find_a_test_center")}
+            >
+              <Text style={style.buttonText}>
+                {t("covid_recommendation.find_a_test_center")}
+              </Text>
+              <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+            </TouchableOpacity>
+          </View>
         )}
-        <TouchableOpacity
-          style={style.doneButton}
-          onPress={handleOnPressDone}
-          accessibilityLabel={t("common.done")}
-        >
-          <Text style={style.doneButtonText}>{t("common.done")}</Text>
-        </TouchableOpacity>
+
+        <View style={style.ctaContainer}>
+          <View style={style.contentContainer}>
+            <Text style={style.boldText}>
+              {t("covid_recommendation.monitor_for_fever")}
+            </Text>
+          </View>
+          <Pressable
+            onPress={handleOnPressCovidSymptoms}
+            style={style.doneButton}
+          >
+            <Text style={style.doneButtonText}>
+              {t("covid_recommendation.review_symptoms")}
+            </Text>
+          </Pressable>
+        </View>
+
+        <View style={style.ctaContainer}>
+          <View style={style.contentContainer}>
+            <Text style={style.contentText}>
+              {t("covid_recommendation.for_more_information")}
+            </Text>
+          </View>
+          <Pressable
+            onPress={handleOnPressCDCGuidanceUrl}
+            style={style.doneButton}
+          >
+            <Text style={style.doneButtonText}>
+              {t("covid_recommendation.review_cdc_guidance")}
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </ScrollView>
   )
@@ -162,7 +170,10 @@ const style = StyleSheet.create({
     backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
-    paddingBottom: Spacing.medium,
+    paddingVertical: Spacing.xxSmall,
+  },
+  ctaContainer: {
+    paddingBottom: Spacing.xSmall,
   },
   topScrollViewBackground: {
     position: "absolute",
@@ -198,13 +209,7 @@ const style = StyleSheet.create({
   },
   boldText: {
     ...Typography.body.x30,
-    ...Typography.style.bold,
-  },
-  cdcGuidanceLinkContainer: {
-    paddingVertical: Spacing.xxSmall,
-  },
-  cdcGuidanceLinkText: {
-    ...Typography.button.anchorLink,
+    ...Typography.style.semibold,
   },
   bottomContainer: {
     paddingHorizontal: Spacing.large,
@@ -213,7 +218,6 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.thin.base,
-    marginTop: Spacing.medium,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -221,7 +225,6 @@ const style = StyleSheet.create({
   },
   doneButton: {
     ...Buttons.outlined.thin,
-    marginTop: Spacing.small,
   },
   doneButtonText: {
     ...Typography.button.secondary,
