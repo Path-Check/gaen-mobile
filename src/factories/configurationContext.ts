@@ -5,6 +5,7 @@ export default Factory.define<Configuration>(() => ({
   appDownloadUrl: "appDownloadUrl",
   appPackageName: "appPackageName",
   cdcGuidanceUrl: "cdcGuidanceUrl",
+  cdcSymptomsUrl: "cdcSymptomsUrl",
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
   displayCallbackForm: false,
