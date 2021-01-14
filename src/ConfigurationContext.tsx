@@ -8,6 +8,7 @@ export interface Configuration {
   appDownloadUrl: string | null
   appPackageName: string
   cdcGuidanceUrl: string | null
+  cdcSymptomsUrl: string | null
   displayAcceptTermsOfService: boolean
   displayAppTransition: boolean
   displayCallbackForm: boolean
@@ -43,6 +44,7 @@ const initialState: Configuration = {
   appDownloadUrl: null,
   appPackageName: "",
   cdcGuidanceUrl: null,
+  cdcSymptomsUrl: null,
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
   displayCallbackForm: false,
@@ -102,6 +104,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
 
   const appDownloadUrl = env.SHARE_APP_LINK || null
   const cdcGuidanceUrl = env.CDC_GUIDANCE_LINK || null
+  const cdcSymptomsUrl = env.CDC_SYMPTOMS_URL || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
   const healthAuthorityHealthCheckUrl = env.HEALTH_CHECK_URL || null
@@ -156,6 +159,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
       value={{
         appDownloadUrl,
         cdcGuidanceUrl,
+        cdcSymptomsUrl,
         appPackageName,
         displayAcceptTermsOfService,
         displayAppTransition,

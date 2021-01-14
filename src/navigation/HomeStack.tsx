@@ -89,13 +89,7 @@ const EmergencyRecommendationScreen: FunctionComponent = () => {
 }
 
 const CovidRecommendationScreen: FunctionComponent = () => {
-  const navigation = useNavigation()
-
-  return (
-    <CovidRecommendation
-      onDismiss={() => navigation.navigate(HomeStackScreens.Home)}
-    />
-  )
+  return <CovidRecommendation />
 }
 
 export default HomeStack
