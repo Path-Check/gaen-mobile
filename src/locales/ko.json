@@ -6,8 +6,8 @@
     "version": "버전:"
   },
   "callback": {
-    "fill_out_the_info": "아래 정보를 입력하고 {{healthAuthorityName}}를 통해 이동경로 조사 담당자에게 연락 받으십시오. ",
     "firstname": "이름",
+    "if_you_prefer": "직접 연락하려고 하는 경우:",
     "lastname": "성",
     "phone_number_required": "전화 번호 (필수)",
     "request_a_call": "이동경로 조사 담당자로부터 전화 요청",
@@ -43,7 +43,7 @@
   "covid_data": {
     "apologies_data_unavailable": "죄송합니다. 코로나 데이터를 사용할 수 없습니다.",
     "covid_stats": "코로나19 통계",
-    "daily_new_cases": "신규 확진자",
+    "daily_new_cases": "10만명당 일일 신규 확진자",
     "error_getting_data": "죄송합니다. {{location}} 대한 신규 확진자 데이터를 가져올 수 없습니다.",
     "infection_rate": "감염률",
     "overall_risk_level_in": "{{locationName}}에 전반적인 위험 수준",
@@ -51,6 +51,9 @@
     "positive_test_rate": "양성 결과 비율",
     "see_more": "더 보기",
     "source": "출처: {{source}}"
+  },
+  "covid_recommendation": {
+    "find_a_test_center": "코로나19 검사소 찾기"
   },
   "errors": {
     "description": "오류가 발생했습니다. 앱을 새로 고침하세요.",
@@ -60,8 +63,14 @@
     "try_again_later": "나중에 다시 시도하십시오"
   },
   "escrow_verification": {
+    "complete_healthcheck": "건강검사 완성",
+    "complete": {
+      "body": "귀하는 코로나19 확산을 방지하고, 지역사회를 보호하는데 도움이됩니다.",
+      "title": "지역사회의 안전을 지켜주셔서 감사합니다!"
+    },
     "error": {
-      "invalid_phone_number": "전화 번호는 10자리여야 합니다."
+      "invalid_phone_number": "전화 번호는 10자리여야 합니다.",
+      "rate_limit": "일일 제출 한도에 초과했습니다. 24시간 후에 다시 시도하십시오."
     },
     "person_and_health_expert": "의료 전문가와 이야기하는 사람",
     "start": {
@@ -85,6 +94,7 @@
     "consent_body_0": "코로나19 양성 확진 결과를 공유하는 것은 선택사항이며, 귀하의 동의가 있어야만 수행 할 수 있습니다.",
     "consent_body_2": "공유 되는 유일한 정보는 휴대 전화가 지난 14일 동안 근처에 있던 다른 휴대 전화와 블루투스를 통해 교환 된 무작위 숫자 세트와 증상이 발생한 시기를 기반으로 한 가중 위험 점수입니다.",
     "consent_button_title": "본인은 이해했으며, 동의합니다.",
+    "consent_warning_message": "계속하면 인증 번호가 무효화됩니다. 향후 환진 진단을 공유하려면 먼저 새 인증 번호를 받아야합니다.",
     "consent_warning_title": "경고!",
     "enable_exposure_notifications_body": "확진 결과를 보고하려면 노출 알림을 활성화해야 합니다.",
     "enable_exposure_notifications_button": "노출 알림 활성화",
@@ -128,6 +138,7 @@
       "yes_i_did_have": "네, 증상이 있었습니다"
     },
     "verification_code_info": {
+      "contact_at": "{{healthAuthorityName}} 연락하기",
       "how_do_i_get_body": "보건 당국인 {{healthAuthorityName}} 문의하십시오.",
       "how_do_i_get_header": "인증 번호는 어떻게 받나요?",
       "info_header": "인증 번호는 무엇입니까?",
@@ -136,9 +147,9 @@
   },
   "exposure_history": {
     "check_for_exposures": "최신 정보",
-    "days_remaining": "권장 격리 기간이 {{daysOfQuarantineLeft}}일 남았습니다.",
+    "days_remaining": "권장 격리 기간에 남은 일수:",
     "exposure_detail": {
-      "next_steps": "다음 단계",
+      "next_steps": "보건 지침 보기",
       "personalize_my_guidance": "지침을 개인화하기",
       "schedule_callback": "{{healthAuthorityName}} 에서 이동경로 조사 담당자의 지원을 받으려면 전화를 예약하십시오."
     },
@@ -162,6 +173,7 @@
     "no_exposure_reports_over_past": "지난 14일 동안 노출 보고서를 받지 못했습니다.",
     "possible_exposures": "코로나19 노출 가능성",
     "review_health_guidance": "보건 지침 검토",
+    "stay_quarantined_through": "아래 날짜까지 격리 상태 유지 하십시오:",
     "updated": "업데이트",
     "why_did_i_get_an_en": "노출 알림을 받는 이유는 무엇입니까?",
     "why_did_i_get_an_en_para": "귀하의 주변에 코로나19 감염 확진자가 발생했을 경우, 해당 확진자가 다른사람에게 알리기를 선택하면 노출 알림을 받게 됩니다."
@@ -177,6 +189,7 @@
     "set_active_region_ios_title": "활성 지역 설정",
     "share_exposure_information_ios_body": "설정 앱을 연 다음 이 앱의 노출 알림 설정으로 이동합니다. '노출 정보 공유'가 켜져 있는지 확인한 다음 '활성화된 지역으로 설정'을 누릅니다.",
     "share_exposure_information_ios_title": "노출 정보 공유",
+    "unhandled_error_body": "오류가 발생했습니다. 앱을 닫고 다시 시도하십시오.",
     "unhandled_error_title": "오류가 발생했습니다",
     "use_exposure_notifications_android_body": "노출 알림을 활성화하려면 설정 앱의 코로나19 노출 알림 화면으로 이동하여 '노출 알림 사용'을 선택하십시오.",
     "use_exposure_notifications_android_title": "노출 알림 활성화"
@@ -195,15 +208,16 @@
       "location_disabled_error_title": "설정에서 권한 부여",
       "location_header": "위치",
       "location_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
-      "proximity_tracing_header": "근접 추적",
+      "proximity_tracing_header": "노출 알림",
       "share": "{{applicationName}} 공유",
       "share_message": "본 앱 {{applicationName}}을 확인하세요, 코로나19 확산을 방지하는데 도움이 될 수 있습니다! {{appDownloadLink}}",
-      "tracing_off_header": "비활성",
+      "tracing_off_header": "노출 알림 끔",
       "tracing_off_subheader": "블루투스 및 근접 추적을 활성화하여 노출에 대한 정보를 얻을 수 있습니다.",
       "tracing_on_header": "노출 알림 켬"
     },
     "call_emergency_services": "응급 서비스 호출",
     "check_if_your_symptoms": "증상을 입력하고 건강을 유지하는 방법에 대한 권장 상황을 확인하십시오.",
+    "complete_healthcheck": "건강검사 완성",
     "enter_symptoms": "증상 입력",
     "error": {
       "share_link_failed": "공유 할 링크를 열지 못했습니다."
@@ -212,13 +226,13 @@
     "get_more_info": "{{technology}}에 대한 자세한 정보 보기",
     "have_a_positive_test": "양성 결과를 받으쎴나요?",
     "location_info_body": "Google은 Android 10 이하를 실행하는 장치에 노출 탐지 기능을 사용할 수 있도록 위치 서비스를 설정해야 합니다. 하지만 {{applicationName}}은 사용자의 위치를 추적하거나 보관하지 않습니다.",
-    "location_info_subheader": "{{applicationName}}는 위치 데이터에 접근하지 않으며, 귀하의 기기는 추적되지 않습니다.",
+    "location_info_subheader": "{{applicationName}}는 사용자의 위치를 추적하거나 기록하지 않십느다.",
     "not_feeling_well": "귀하의 컨디션이 좋지 않습니까?",
     "notifications_off": "노출을 받으면 알림을 받으려면 알림을 사용 설정하세요.",
     "proximity_tracing_info_body_1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_info_body_2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
     "proximity_tracing_info_subheader_1": "근접 추적은 어떻게 작동되나요?",
-    "proximity_tracing_info_subheader_2": "본인의 데이터는 안전합니까?",
+    "proximity_tracing_info_subheader_2": "나의 데이터는 안전하나요?",
     "take_assessment": "평가 하기",
     "verification_code_card": {
       "if_you_have_a_code": "커뮤니티의 안전을 지키기 위해 인증 번호를 제출해 주세요.",
@@ -242,7 +256,7 @@
     "exposure_history": "노출 이력",
     "home": "홈",
     "settings": "설정",
-    "symptom_history": "증상 기록"
+    "symptom_history": "증상"
   },
   "onboarding": {
     "app_setup_complete_body": "{{applicationName}}이 활성화되었습니다. 코로나19 확산 방지에 도움을 주셔서 감사합니다.",
@@ -253,7 +267,7 @@
     "eula": "최종 사용자 법적 계약",
     "eula_agree_terms_of_use": "이용 약관을 읽고 수락했음을 동의합니다.",
     "i_am_over": "예, 본인은 {{minimumAge}}세 이상입니다.",
-    "location_alert_body": "블루투스 스캔을 사용하려면 기기 위치 설정을 켜야합니다.",
+    "location_alert_body": "노출 알림을 사용하려면 위치 설정을 켜야합니다.",
     "location_alert_header": "위치 서비스 활성화",
     "location_body": "Google은 Android 10 이하를 실행하는 장치에 노출 탐지 기능을 사용할 수 있도록 위치 서비스를 설정해야 합니다. 하지만 {{applicationName}}은 사용자의 위치를 추적하거나 보관하지 않습니다.",
     "location_header": "위치 활성화",
@@ -266,7 +280,7 @@
     "notification_subheader1": "언제 알림을 받습니까?",
     "notification_subheader2": "어떻게 작동하나요?",
     "notification_subheader3": "본 앱은 코로나19 감염 예방을 위한 것이며 반드시 감염을 방지하는 것은 아닙니다.",
-    "please_read_the": "읽어 주십시오.",
+    "please_read_the": "읽어 주십시오",
     "privacy_policy": "개인정보 정책",
     "protect_privacy_button": "개인 정보를 보호하는 방법",
     "protect_privacy": {
@@ -284,8 +298,8 @@
     "proximity_tracing_already_active": "노출 알림 켬",
     "proximity_tracing_body1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_body2": "누군가와 만날 경우 데이터와 정보는 익명으로 남지만 본 앱은 개인 정보는 저장하지 않습니다. 임의 ID만 교환되며, 해당 데이터는 14일 이내에 삭제됩니다.",
-    "proximity_tracing_button": "근접 추적 활성화",
-    "proximity_tracing_header": "근접 추적 활성화",
+    "proximity_tracing_button": "노출 알림 활성화",
+    "proximity_tracing_header": "노출 알림 활성화",
     "proximity_tracing_subheader1": "어떻게 작동하나요?",
     "proximity_tracing_subheader2": "본인의 데이터는 안전합니까?",
     "proximity_tracing_subheader3": "본 앱은 코로나19 감염 예방을 위한 것이며 반드시 감염을 방지하는 것은 아닙니다.",
@@ -298,7 +312,7 @@
     "screen3_button": "코로나19로 부터 노출되면 어떻게 해야 하나요?",
     "screen3_header": "개인 식별 정보는 휴대 전화에서 지워지지 않습니다.",
     "screen3_image_label": "잠금 설정된 전화기 앞에 있는 사람",
-    "screen4_button": "아프면 어떻게 해야 하나요?",
+    "screen4_button": "시작하기",
     "screen4_header": "귀하가 코로나19에 노출되었을 가능성이 있는 경우 앱에서 알림을 줄 것입니다.",
     "screen4_image_label": "휴대 전화로 알림을 받는 사람",
     "terms_header_title": "이용 약관",
@@ -310,7 +324,7 @@
     "i_understand_and_consent": "본인은 이해했으며, 동의합니다.",
     "privacy_policy": "개인정보 정책",
     "share_anonymized_data": "익명화된 데이터 공유",
-    "share_anonymized_data_disclaimer": "진행을 통해 선별 질문에 대한 익명화된 답변을 {{healthAuthorityName}}와 공유하는데 동의합니다.",
+    "share_anonymized_data_disclaimer": "진행을 통해 익명화된 데이터을 {{healthAuthorityName}}와 공유하는 데 동의합니다.",
     "share_data_para_1": "커뮤니티가 이 앱을 사용하는 방법에 대한 익명의 집계된 데이터는 {{healthAuthorityName}}가 코로나19의 확산을  분석, 이해 및 방지하는 데 도움이됩니다.",
     "share_data_para_2": "이 데이터에는 개인 식별 정보가 포함되어 있지 않습니다.",
     "stop_sharing_data": "데이터 공유 중지"
@@ -423,9 +437,12 @@
   "settings": {
     "data_deleted": "데이터가 삭제되었습니다.",
     "delete_data_are_you_sure": "확실합니까?",
-    "delete_data_disclosure1": "아래의 \"내 데이터 삭제\" 버튼을 누르면 앱에서 휴대전화에 저장된 증상 기록 데이터가 삭제됩니다.",
+    "delete_data_disclosure1": "아래의 \"내 데이터 삭제\" 버튼을 누르면 {{applicationName}}에 저장된 데이터가 모두 삭제됩니다.",
     "delete_data_disclosure2": "노출 알림을 위해 휴대전화에서 생성하거나 수집 한 데이터는 삭제되지 않습니다.\n\n기기설정에서 추가 데이터를 삭제할 수 있습니다.",
+    "delete_data_language_token": "언어 설정을 저장하는 기기에 저장된 토큰",
     "delete_data_note": "참고",
+    "delete_data_onboarding_token": "앱 온보딩 완료했는지 여부를 저장하는 기기에 저장된 토큰",
+    "delete_data_product_analytics": "제품 분석 데이터를 공유에 동의했는지 여부를 저장하는 기기에 저장된 토큰",
     "delete_data_symptom_history": "기기에 저장된 모든 증상 로그",
     "delete_data_this_action": "이 작업은 {{applicationName}}에 저장된 모든 데이터를 삭제합니다.",
     "delete_my_data": "내 데이터 삭제",
@@ -451,7 +468,7 @@
       "you_did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다. 다음과 같은 증상을 보였습니다: {{symptomList}}",
       "you_felt_well": "귀하의 컨디션이 좋았습니다."
     },
-    "symptom_history": "증상 기록",
+    "symptom_history": "증상",
     "to_protect_your_privacy": "개인 정보를 보호하기 위해 항목은 장치에 저장되고 {{days}}일 후에 자동으로 삭제됩니다."
   },
   "symptom": {

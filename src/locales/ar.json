@@ -6,7 +6,6 @@
     "version": "الإصدار:"
   },
   "callback": {
-    "fill_out_the_info": "املأ المعلومات أدناه {{healthAuthorityName}} متتبع جهة اتصال من {{healthAuthorityName}} .",
     "firstname": "الاسم الأول",
     "lastname": "الكنية",
     "phone_number_required": "رقم الهاتف (مطلوب)",
@@ -50,6 +49,10 @@
     "title": "خطأ غير معروف"
   },
   "escrow_verification": {
+    "complete": {
+      "body": "أنت تساعد في احتواء انتشار الفيروس وحماية الآخرين في مجتمعك.",
+      "title": "شكرا للحفاظ على مجتمعك آمن!"
+    },
     "person_and_health_expert": "شخص يتحدث إلى خبير صحي"
   },
   "export": {

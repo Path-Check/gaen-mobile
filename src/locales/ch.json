@@ -29,6 +29,12 @@
     "something_went_wrong": "Guaha problema",
     "title": "Ti tungo-un i lachi"
   },
+  "escrow_verification": {
+    "complete": {
+      "body": "Un ayuyuda muna para i virus yan un protehi i pumalu na taotao siha gi kommunidad-mu.",
+      "title": "si yu'us ma'asi ni un adadahi i kommunidad-mu"
+    }
+  },
   "export": {
     "code_input_body_bluetooth": "Na halum i iyo-mu verification code",
     "code_input_button_cancel": "Na para",

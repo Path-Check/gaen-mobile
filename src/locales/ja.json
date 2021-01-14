@@ -30,6 +30,12 @@
     "something_went_wrong": "問題が発生しました",
     "title": "不明なエラー"
   },
+  "escrow_verification": {
+    "complete": {
+      "body": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
+      "title": "コミュニティを安全に守るためへのご協力ありがとう！"
+    }
+  },
   "export": {
     "code_input_body_bluetooth": "確認コードを入力してください",
     "code_input_button_cancel": "キャンセル",

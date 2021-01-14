@@ -23,6 +23,12 @@
     "something_went_wrong": "کچھ غلط ہو گیا",
     "title": "نامعلوم خامی"
   },
+  "escrow_verification": {
+    "complete": {
+      "body": "آپ وائرس کے پھیلاؤ پر قابو پانے اور اپنی برادری کے دوسروں کی حفاظت میں مدد کررہے ہیں۔",
+      "title": "اپنی برادری کو سلامت رکھنے کا شکریہ!"
+    }
+  },
   "export": {
     "code_input_body_bluetooth": "تصدیق کوڈ درج کریں",
     "code_input_button_cancel": "منسوخ کریں",

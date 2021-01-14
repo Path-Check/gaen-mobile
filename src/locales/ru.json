@@ -6,7 +6,6 @@
     "version": "Версия:"
   },
   "callback": {
-    "fill_out_the_info": "Заполните приведенную ниже информацию, и специалист по {{healthAuthorityName}} контактов из {{healthAuthorityName}} свяжется {{healthAuthorityName}} .",
     "firstname": "Имя",
     "lastname": "Фамилия",
     "phone_number_required": "Номер телефона (обязательно)",
@@ -55,6 +54,9 @@
     "title": "Неизвестная ошибка"
   },
   "escrow_verification": {
+    "complete": {
+      "title": "Спасибо, что заботитесь о безопасности окружающих!"
+    },
     "person_and_health_expert": "Человек разговаривает со специалистом по здоровью"
   },
   "export": {

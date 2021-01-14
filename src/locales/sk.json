@@ -14,6 +14,11 @@
   "errors": {
     "something_went_wrong": "Niečo sa pokazilo"
   },
+  "escrow_verification": {
+    "complete": {
+      "title": "Vďaka za udržanie tvojej komunity v bezpečí!"
+    }
+  },
   "export": {
     "enable_exposure_notifications_button": "Povoliť upozornenia o vystavení sa riziku"
   },
