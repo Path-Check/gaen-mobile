@@ -89,12 +89,20 @@ const VerificationCodeForm: FunctionComponent = () => {
 
   const showError = (error: API.SubmitKeysError): void => {
     switch (error) {
+      case "NoKeysOnDevice":
+        Alert.alert(
+          t("verification_code_alerts.no_keys_on_device_title"),
+          t("verification_code_alerts.no_keys_on_device_body"),
+          [{ text: t("common.okay") }],
+        )
+        break
       case "Unknown":
         Alert.alert(
           t("verification_code_alerts.unknown_title"),
           t("verification_code_alerts.unknown_body"),
           [{ text: t("common.okay") }],
         )
+        break
     }
   }
 

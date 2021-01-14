@@ -121,7 +121,7 @@ const UserDetailsForm: FunctionComponent = () => {
       }
     } catch (e) {
       Logger.error(`escrow verification error`, e.message)
-      Alert.alert(showErrorDialogTitle("Unknown"), e.message)
+      Alert.alert(showErrorDialogTitle(e), e.message)
     }
     setIsLoading(false)
   }
@@ -130,6 +130,8 @@ const UserDetailsForm: FunctionComponent = () => {
 
   const showErrorDialogTitle = (error: API.PhoneNumberError): string => {
     switch (error) {
+      case "NoKeysOnDevice":
+        return t("verification_code_alerts.no_keys_on_device_title")
       default:
         return t("errors.something_went_wrong")
     }
@@ -137,6 +139,8 @@ const UserDetailsForm: FunctionComponent = () => {
 
   const showErrorDialogMessage = (error: API.PhoneNumberError): string => {
     switch (error) {
+      case "NoKeysOnDevice":
+        return t("verification_code_alerts.no_keys_on_device_body")
       case "RateLimit":
         return t("escrow_verification.error.rate_limit")
       default:

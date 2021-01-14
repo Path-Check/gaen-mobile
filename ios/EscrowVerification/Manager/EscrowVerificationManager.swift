@@ -9,6 +9,14 @@ class EscrowVerificationManager: NSObject {
     getCodableKeysWithRiskLevel { result in
       switch result {
       case .success(let keys):
+
+        guard !keys.isEmpty else {
+          completionHandler(NSError(domain: "\(SubmissionError.noKeysOnDevice.errorCode)",
+                                    code: SubmissionError.noKeysOnDevice.errorCode,
+                                    userInfo: [:]))
+          return
+        }
+
         NetworkServiceController.shared.postKeysAndPhone(keyData: keys, phone: phoneNumber) { result in
           switch result {
           case let .failure(error):
@@ -28,6 +36,14 @@ class EscrowVerificationManager: NSObject {
     getCodableKeysWithRiskLevel { result in
       switch result {
       case .success(let keys):
+
+        guard !keys.isEmpty else {
+          completionHandler(NSError(domain: "\(SubmissionError.noKeysOnDevice.errorCode)",
+                                    code: SubmissionError.noKeysOnDevice.errorCode,
+                                    userInfo: [:]))
+          return
+        }
+
         NetworkServiceController.shared.generateDeviceToken { result in
           let token: Data
           switch result {
