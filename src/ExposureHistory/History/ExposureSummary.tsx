@@ -50,10 +50,10 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
     Date.now(),
     exposure.date,
   )
-  const quarantineEndDate = dayjs(exposureEndDate)
-    .add(daysOfQuarantineLeft, "day")
-    .valueOf()
+  const quarantineEndDate = dayjs().add(daysOfQuarantineLeft, "day").valueOf()
   const quarantineEndDateText = formatDate(quarantineEndDate)
+
+  const quarantineInEffect = daysOfQuarantineLeft > 0
 
   return (
     <View>
@@ -63,27 +63,35 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
           endDate: exposureEndDateText,
         })}
       </Text>
-      <View style={style.recommendationContainer}>
-        <View style={style.daysRemainingContainer}>
-          <View style={style.daysRemainingTextContainer}>
-            <Text style={style.labelText}>
-              {t("exposure_history.days_remaining")}
+      {quarantineInEffect ? (
+        <View style={style.recommendationContainer}>
+          <View style={style.daysRemainingContainer}>
+            <View style={style.daysRemainingTextContainer}>
+              <Text style={style.recommendationText}>
+                {t("exposure_history.days_remaining")}
+              </Text>
+            </View>
+            <View style={style.dayNumberContainer}>
+              <Text style={style.dayNumberText}>{daysOfQuarantineLeft}</Text>
+            </View>
+          </View>
+
+          <View style={style.quarantineEndDateContainer}>
+            <Text style={style.recommendationText}>
+              {t("exposure_history.stay_quarantined_through")}
+            </Text>
+            <Text style={style.recommendationText}>
+              {quarantineEndDateText}
             </Text>
           </View>
-          <View style={style.dayNumberContainer}>
-            <Text style={style.dayNumberText}>{daysOfQuarantineLeft}</Text>
-          </View>
         </View>
-
-        <View style={style.quarantineEndDateContainer}>
-          <Text style={style.labelText}>
-            {t("exposure_history.stay_quarantined_through")}
-          </Text>
-          <Text style={style.quarantineEndDateText}>
-            {quarantineEndDateText}
+      ) : (
+        <View style={style.recommendationContainer}>
+          <Text style={style.recommendationText}>
+            {t("exposure_history.your_recommended_quarantine_is_over")}
           </Text>
         </View>
-      </View>
+      )}
     </View>
   )
 }
@@ -99,13 +107,9 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.xSmall,
     paddingHorizontal: Spacing.xSmall,
   },
-  labelText: {
+  recommendationText: {
     ...Typography.body.x20,
     color: Colors.neutral.black,
-  },
-  quarantineEndDateText: {
-    ...Typography.body.x20,
-    letterSpacing: Typography.letterSpacing.x20,
   },
   daysRemainingContainer: {
     flexDirection: "row",
