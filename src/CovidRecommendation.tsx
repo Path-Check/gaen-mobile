@@ -40,24 +40,16 @@ const CovidRecommendation: FunctionComponent<CovidRecommendationProps> = ({
       }
     }
 
-    const symptomQuarantineLength = 10
-
     return (
       <View>
         <View style={style.contentContainer}>
+          <Text style={style.contentText}>
+            {t("covid_recommendation.to_prevent_the_spread")}
+          </Text>
+        </View>
+        <View style={style.contentContainer}>
           <Text style={style.boldText}>
-            {t("covid_recommendation.stay_home")}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.at_least_x_days", {
-              quarantineLength: symptomQuarantineLength,
-            })}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.you_have_not_had_a")}
-          </Text>
-          <Text style={style.contentText}>
-            {t("covid_recommendation.and_other_covid")}
+            {t("covid_recommendation.stay_home_except_to_get_medical_care")}
           </Text>
         </View>
 

@@ -53,6 +53,8 @@
   },
   "covid_recommendation": {
     "and_other_covid": "- And other other COVID-19 symptoms have improved.",
+    "to_prevent_the_spread": "To prevent the spread of COVID-19 if you are sick you should:",
+    "stay_home_except_to_get_medical_care": "Stay home except to get medical care.",
     "at_least_x_days": "- At least {{quarantineLength}} days after your symptoms began,",
     "cdc_guidance": "CDC guidance",
     "from_others_at": "from others at all times and ",
