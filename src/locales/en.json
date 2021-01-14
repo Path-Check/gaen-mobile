@@ -149,12 +149,12 @@
       "yes_i_did_have": "Yes, I did have symptoms"
     },
     "verification_code_info": {
-      "contact_at": "Contact the {{healthAuthorityName}} at",
+      "contact_at": "You may also call the {{healthAuthorityName}} at",
       "how_do_i_get_body": "Contact your health authority, {{healthAuthorityName}}.",
       "how_do_i_get_header": "How do I get a verification code?",
       "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that out of date test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
       "info_header": "What is a verification code?",
-      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will anonymously notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared.",
+      "what_happens_body": "When you submit your verification code, you will be asked to confirm you would like to let the app anonymously share with others that they may have been exposed.\n\nIf you give permission, your device will send random exposure codes out to anonymously alert others that they were near someone who tested positive for COVID-19. This allows exposed individuals to act more quickly to find a testing center and also protect those around them.",
       "what_happens_header": "What happens when I submit my code?"
     }
   },
@@ -510,8 +510,8 @@
     "code_used_title": "Verification Code Already Used",
     "invalid_code_body": "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
     "invalid_code_title": "Invalid Code",
-    "no_keys_on_device_body": "You must wait to submit your verification code until your device has generated its first keys. Please try again in a few hours.",
-    "no_keys_on_device_title": "No keys on device",
+    "no_keys_on_device_body": "You do not have any exposures to submit. Please continue to isolate.",
+    "no_keys_on_device_title": "No exposures on device",
     "network_connection_body": "You need to be connected to WiFi to submit a verification code.",
     "network_connection_title": "No Internet Connection",
     "unknown_body": "An unexpected error occurred. Please try again.",
