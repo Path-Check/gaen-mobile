@@ -148,7 +148,7 @@
       "how_do_i_get_header": "How do I get a verification code?",
       "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that out of date test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
       "info_header": "What is a verification code?",
-      "what_happens_body": "When you submit your verification code, the app will ask you to share the random anonymous exposure keys from other devices to which you have connected.\n\nIf you give permission, the app will send these keys to an exposure notification server. The notification server will anonymously notify the devices you have connected to of the positive test result.\n\nThe app never collects or stores personal information. Only the random anonymous keys stored on your device are shared.",
+      "what_happens_body": "When you submit your verification code, the app will ask you to confirm you would like to share the anonymous exposure keys for others that you may have exposed.\n\nIf you give permission, these keys will be sent to an exposure notification server and then anonymously shared to alert others that they were near someone who tested positive for COVID-19. This allows exposed individuals to act more quickly to find a testing center and also protect those around them.",
       "what_happens_header": "What happens when I submit my code?"
     }
   },
