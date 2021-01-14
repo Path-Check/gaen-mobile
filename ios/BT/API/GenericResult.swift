@@ -56,4 +56,29 @@ public enum APIError: LocalizedError {
   }
 }
 
+
+public enum SubmissionError: CustomNSError {
+  case `default`(message: String?)
+  case noKeysOnDevice
+
+  public var errorDescription: String? {
+    switch self {
+    case .noKeysOnDevice:
+      return String.noKeysOnDevice
+    case .default(message: let message):
+      return message  ?? String.emptyMessageError
+    }
+  }
+
+  public var errorCode: Int {
+    switch self {
+    case .noKeysOnDevice:
+      return 999
+    default:
+      return 0
+    }
+  }
+
+}
+
 public let GenericSuccess = GenericResult.success(())

@@ -18,7 +18,7 @@ interface PhoneNumberFailure {
   error: PhoneNumberError
 }
 
-export type PhoneNumberError = "RateLimit" | "Unknown"
+export type PhoneNumberError = "RateLimit" | "Unknown" | "NoKeysOnDevice"
 
 export const submitPhoneNumber = async (
   phoneNumber: string,
@@ -31,6 +31,8 @@ export const submitPhoneNumber = async (
     switch (e.code) {
       case "403":
         return { kind: "failure", error: "RateLimit" }
+      case "999":
+        return { kind: "failure", error: "NoKeysOnDevice" }
       default:
         return { kind: "failure", error: "Unknown" }
     }
@@ -47,7 +49,7 @@ interface SubmitKeysFailure {
   error: SubmitKeysError
 }
 
-export type SubmitKeysError = "Unknown"
+export type SubmitKeysError = "Unknown" | "NoKeysOnDevice"
 
 export const submitDiagnosisKeys = async (
   verificationCode: string,
@@ -61,6 +63,11 @@ export const submitDiagnosisKeys = async (
     return { kind: "success" }
   } catch (e) {
     Logger.error(`failed to submit verification code: `, { ...e })
-    return { kind: "failure", error: "Unknown" }
+    switch (e.code) {
+      case "999":
+        return { kind: "failure", error: "NoKeysOnDevice" }
+      default:
+        return { kind: "failure", error: "Unknown" }
+    }
   }
 }

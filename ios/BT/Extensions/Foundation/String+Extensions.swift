@@ -57,7 +57,8 @@ extension String {
   static let emptyMessageError = ""
   static let dailyFileProcessingLimitExceeded = "Daily exposure detection file processing limit exceeded"
   static let exposureDetectionCanceled = "Exposure Detection Cancelled"
-  
+  static let noKeysOnDevice = "No keys on device"
+
   // Computed Properties
   var gaenFilePaths: [String] {
     split(separator: "\n").map { String($0) }

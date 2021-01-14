@@ -510,6 +510,8 @@
     "code_used_title": "Verification Code Already Used",
     "invalid_code_body": "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
     "invalid_code_title": "Invalid Code",
+    "no_keys_on_device_body": "You must wait to submit your verification code until your device has generated its first keys. Please try again in a few hours.",
+    "no_keys_on_device_title": "No keys on device",
     "network_connection_body": "You need to be connected to WiFi to submit a verification code.",
     "network_connection_title": "No Internet Connection",
     "unknown_body": "An unexpected error occurred. Please try again.",

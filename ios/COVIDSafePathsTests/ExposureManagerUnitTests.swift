@@ -26,7 +26,6 @@ class MockENExposureDetectionSummary: ENExposureDetectionSummary {
     return 0
   }
   
-  @available(iOS 13.7, *)
   override var daySummaries: [ENExposureDaySummary] {
     let enExposureSummary = ENExposureDaySummary()
     return [enExposureSummary]
