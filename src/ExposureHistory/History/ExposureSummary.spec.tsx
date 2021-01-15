@@ -46,9 +46,9 @@ describe("determineRemainingQuarantine", () => {
 
       expect(result1).toEqual(0)
       expect(result2).toEqual(0)
-      expect(result3).toEqual(1)
-      expect(result4).toEqual(4)
-      expect(result5).toEqual(14)
+      expect(result3).toEqual(0)
+      expect(result4).toEqual(3)
+      expect(result5).toEqual(13)
       expect(result6).toEqual(14)
     })
   })
