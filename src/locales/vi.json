@@ -157,7 +157,7 @@
       "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
       "info_body": "Mã xác minh là mã do cơ quan y tế của bạn cung cấp cho bạn, {{healthAuthorityName}} , nếu bạn nhận được kết quả xét nghiệm dương tính.\n\nMã xác minh được sử dụng để xác minh rằng kết quả xét nghiệm dương tính của bạn là xác thực.\n\nMỗi mã xác minh sẽ hết hạn sau một thời gian ngắn để đảm bảo rằng kết quả kiểm tra cũ không được gửi.\n\nNếu bạn gặp lỗi khi gửi mã xác minh, bạn phải lấy mã mới từ cơ quan y tế trước khi gửi lại.",
       "info_header": "Mã xác minh là gì?",
-      "what_happens_body": "Khi bạn gửi mã xác minh, ứng dụng sẽ yêu cầu bạn chia sẻ các khóa hiển thị ẩn danh ngẫu nhiên từ các thiết bị khác mà bạn đã kết nối.\n\nNếu bạn cấp quyền, ứng dụng sẽ gửi các khóa này đến máy chủ thông báo phơi sáng. Máy chủ thông báo sẽ thông báo cho các thiết bị bạn đã kết nối về kết quả xét nghiệm dương tính.\n\nỨng dụng không bao giờ thu thập hoặc lưu trữ thông tin cá nhân. Chỉ những khóa ẩn danh ngẫu nhiên được lưu trữ trên thiết bị của bạn mới được chia sẻ.",
+      "what_happens_body": "Khi bạn gửi mã xác minh của mình, bạn sẽ được yêu cầu xác nhận rằng ứng dụng có thể chia sẻ ẩn danh với những người khác mà họ có thể đã bị lộ.\n\nNếu bạn cho phép, thiết bị của bạn sẽ gửi mã phơi nhiễm ngẫu nhiên ra ngoài để cảnh báo ẩn danh cho người khác rằng họ đang ở gần người có kết quả xét nghiệm dương tính với COVID-19. Điều này cho phép các cá nhân bị phơi nhiễm hành động nhanh hơn để tìm trung tâm kiểm tra và cũng bảo vệ những người xung quanh họ.",
       "what_happens_header": "Điều gì xảy ra khi tôi gửi mã của mình?"
     }
   },
