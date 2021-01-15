@@ -6,7 +6,6 @@
     "version": "Version:"
   },
   "callback": {
-    "fill_out_the_info": "Remplissez les informations ci-dessous et un traceur de contact de {{healthAuthorityName}} vous contactera.",
     "firstname": "Prénom",
     "lastname": "Nom de famille",
     "phone_number_required": "Numéro de téléphone (obligatoire)",
@@ -49,6 +48,9 @@
     "see_more": "Voir plus",
     "source": "source: {{source}}"
   },
+  "covid_recommendation": {
+    "find_a_test_center": "Trouver un centre de test"
+  },
   "errors": {
     "description": "Une erreur s'est produite. Veuillez recharger l'application.",
     "reload": "Recharger",
@@ -56,6 +58,10 @@
     "title": "Erreur inconnue"
   },
   "escrow_verification": {
+    "complete": {
+      "body": "Vous contribuez à contenir la propagation du virus et à protéger les autres membres de votre communauté.",
+      "title": "Merci de protéger votre communauté!"
+    },
     "error": {
       "invalid_phone_number": "Le numéro de téléphone doit comporter 10 chiffres"
     },

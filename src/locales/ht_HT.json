@@ -30,6 +30,9 @@
     "submit": "Soumèt",
     "success": "Siksè"
   },
+  "covid_recommendation": {
+    "find_a_test_center": "Jwenn yon sant tès"
+  },
   "errors": {
     "description": "Yon erè fèt. Tanpri relanse aplikasyon an.",
     "reload": "Relanse",
@@ -37,6 +40,9 @@
     "title": "Erè enkoni"
   },
   "escrow_verification": {
+    "complete": {
+      "title": "Mèsi pou kenbe kominote ou an sekirite!"
+    },
     "person_and_health_expert": "Yon moun kap pale ak yon ekspè nan sante"
   },
   "export": {

@@ -30,6 +30,12 @@
     "something_went_wrong": "May maling nangyari",
     "title": "Hindi Kilalang Error"
   },
+  "escrow_verification": {
+    "complete": {
+      "body": "Tumutulong kang agapan ang pagkalat ng virus at protektahan ang iba sa iyong komunidad.",
+      "title": "Salamat sa pagpapanatiling ligtas ang iyong komunidad!"
+    }
+  },
   "export": {
     "code_input_body_bluetooth": "Itala ang iyong verification code",
     "code_input_button_cancel": "Kanselahin",

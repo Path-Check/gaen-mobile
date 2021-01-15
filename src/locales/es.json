@@ -11,6 +11,11 @@
     "more": "Más",
     "next": "Siguiente"
   },
+  "escrow_verification": {
+    "complete": {
+      "title": "¡Todo listo!"
+    }
+  },
   "export": {
     "code_input_body_bluetooth": "Escriba el código de verificación proporcionado por {{name}} con el resultado de su prueba para verificar su diagnóstico.",
     "code_input_title_bluetooth": "Verifique su diagnóstico",

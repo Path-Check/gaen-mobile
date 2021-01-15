@@ -6,7 +6,6 @@
     "version": "版本："
   },
   "callback": {
-    "fill_out_the_info": "請填寫以下信息，將位有一位{{healthAuthorityName}}追蹤接觸者的人員與您聯繫。",
     "firstname": "名字",
     "lastname": "姓氏",
     "phone_number_required": "電話號碼（必填）",
@@ -47,6 +46,9 @@
     "see_more": "查看更多",
     "source": "來源： {{source}}"
   },
+  "covid_recommendation": {
+    "find_a_test_center": "尋找檢疫中心"
+  },
   "errors": {
     "description": "發生了錯誤。請重新加載應用程式。",
     "reload": "重新加載",
@@ -54,6 +56,10 @@
     "title": "未知錯誤"
   },
   "escrow_verification": {
+    "complete": {
+      "body": "您正在協助遏止病毒的傳播並保護您社區的其他人。",
+      "title": "感謝您保護社區安全！"
+    },
     "person_and_health_expert": "與健康專家交談的人"
   },
   "export": {

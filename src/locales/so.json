@@ -6,7 +6,6 @@
     "version": "Nooca:"
   },
   "callback": {
-    "fill_out_the_info": "Ku buuxi xogta hoosta kadibna raadraace ka socda {{healthAuthorityName}} ayaa kula soo xariiri doona.",
     "firstname": "Magaca kowaad",
     "lastname": "Magaca ugu danbeeya",
     "phone_number_required": "Nambarka taleefanka (waa loo bahanyahay)",
@@ -59,6 +58,10 @@
     "title": "Khald aan la aqoon"
   },
   "escrow_verification": {
+    "complete": {
+      "body": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
+      "title": "Waad ku mahadsantahay badbaadinta bulshadaada!"
+    },
     "error": {
       "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god"
     },

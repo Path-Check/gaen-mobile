@@ -6,8 +6,8 @@
     "version": "Phiên bản:"
   },
   "callback": {
-    "fill_out_the_info": "Điền thông tin bên dưới và một người truy dấu vết tiếp xúc từ {{healthAuthorityName}} sẽ liên hệ với bạn.",
     "firstname": "Tên",
+    "if_you_prefer": "Hoặc bạn có thể gọi trực tiếp đến số",
     "lastname": "Họ",
     "phone_number_required": "Số điện thoại (bắt buộc)",
     "request_a_call": "Yêu cầu một người truy dấu vết tiếp xúc gọi điện",
@@ -52,6 +52,25 @@
     "see_more": "Xem thêm",
     "source": "Nguồn: {{source}}"
   },
+  "covid_recommendation": {
+    "and_other_covid": "- Và các triệu chứng COVID-19 khác đã được cải thiện.",
+    "find_a_test_center": "Tìm một trung tâm xét nghiệm",
+    "for_more_information": "Để biết thêm thông tin về cách ngăn ngừa lây bệnh cho người khác, hãy tham khảo hướng dẫn của CDC về những việc cần làm khi mắc bệnh.",
+    "from_others_at": "người khác và ",
+    "get_a_covid_test": "Nhận bài kiểm tra COVID-19:",
+    "get_rest_and_stay": "Nghỉ ngơi và uống nhiều nước. Để biết thêm thông tin về cách ngăn ngừa lây bệnh cho người khác, hãy tham khảo hướng dẫn của CDC (liên kết) về những việc cần làm khi mắc bệnh.",
+    "includeing_people": "kể cả những người thân trong gia đình bạn.",
+    "maintain_at_least": "Luôn giữ khoảng cách ít nhất 2 mét",
+    "monitor_for_fever": "Theo dõi sốt, ho hoặc các triệu chứng COVID-19 khác:",
+    "physically_separate": "Tự cách ly với những người khác,",
+    "review_cdc_guidance": "Xem lại hướng dẫn CDC",
+    "review_symptoms": "Xem lại các triệu chứng CDC",
+    "stay_home": "Ở nhà và tự cách ly, cho đến khi:",
+    "stay_home_except_to_get_medical_care": "Ở nhà ngoại trừ để được chăm sóc y tế.",
+    "to_prevent_the_spread": "Để ngăn chặn sự lây lan của COVID-19 nếu bạn bị bệnh, bạn nên:",
+    "wear_a_face_covering": "đeo khẩu trang.",
+    "you_have_not_had_a": "- Bạn không bị sốt trong vòng ít nhất 24 giờ,"
+  },
   "errors": {
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
     "reload": "Tải lại",
@@ -60,6 +79,11 @@
     "try_again_later": "Cố gắng sau"
   },
   "escrow_verification": {
+    "complete_healthcheck": "Hoàn thành Healthcheck",
+    "complete": {
+      "body": "Bạn đang giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình.",
+      "title": "Cảm ơn bạn đã giúp bảo vệ cộng đồng của bạn!"
+    },
     "error": {
       "invalid_phone_number": "Số điện thoại phải có 10 chữ số",
       "rate_limit": "Bạn đã đạt đến giới hạn gửi hàng ngày. Vui lòng thử lại sau 24 giờ."
@@ -131,6 +155,7 @@
       "yes_i_did_have": "Có, tôi đã có triệu chứng"
     },
     "verification_code_info": {
+      "contact_at": "Bạn cũng có thể gọi cho {{healthAuthorityName}} theo",
       "how_do_i_get_body": "Liên cơ quan y tế của bạn, {{healthAuthorityName}}",
       "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
       "info_body": "Mã xác minh là mã do cơ quan y tế của bạn cung cấp cho bạn, {{healthAuthorityName}} , nếu bạn nhận được kết quả xét nghiệm dương tính.\n\nMã xác minh được sử dụng để xác minh rằng kết quả xét nghiệm dương tính của bạn là xác thực.\n\nMỗi mã xác minh sẽ hết hạn sau một thời gian ngắn để đảm bảo rằng kết quả kiểm tra cũ không được gửi.\n\nNếu bạn gặp lỗi khi gửi mã xác minh, bạn phải lấy mã mới từ cơ quan y tế trước khi gửi lại.",
@@ -168,10 +193,12 @@
     "no_exposure_reports_over_past": "Bạn chưa nhận được bất kỳ báo cáo tiếp xúc nào trong 14 ngày vừa qua.",
     "possible_exposures": "Có thể có tiếp xúc với COVID-19",
     "review_health_guidance": "Hướng Dẫn Chung",
+    "stay_quarantined_through": "Giữ cách ly thông qua:",
     "updated": "Đã cập nhật",
     "why_did_i_get_an_en": "Tại sao tôi nhận được thông báo tiếp xúc?",
     "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác.",
-    "your_device_exchanged": "Trong mỗi phạm vi ngày bên dưới, thiết bị của bạn đã trao đổi khóa với một thiết bị khác mà sau đó nhận được kết quả xét nghiệm dương tính đã được xác minh."
+    "your_device_exchanged": "Trong mỗi phạm vi ngày bên dưới, thiết bị của bạn đã trao đổi khóa với một thiết bị khác mà sau đó nhận được kết quả xét nghiệm dương tính đã được xác minh.",
+    "your_recommended_quarantine_is_over": "Vùng cách ly được đề xuất của bạn đã kết thúc. Vui lòng tiếp tục làm theo các hướng dẫn về sức khỏe."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "Để kích hoạt Thông báo phơi sáng, trước tiên bạn phải bật Bluetooth trong Cài đặt của mình.",
@@ -213,6 +240,7 @@
     },
     "call_emergency_services": "Gọi Dịch Vụ Cấp Cứu",
     "check_if_your_symptoms": "Nhập các triệu chứng của bạn và nhận khuyến cáo tức thời về cách đảm bảo an toàn.",
+    "complete_healthcheck": "Hoàn thành Healthcheck",
     "could_not_open_link": "Không thể mở liên kết: {{url}} . Vui lòng thử mở url trong trình duyệt trên điện thoại của bạn.",
     "enter_symptoms": "Nhập triệu chứng",
     "error": {
