@@ -53,7 +53,6 @@
     "source": "fuente: {{source}}"
   },
   "covid_recommendation": {
-    "and_other_covid": "- Y otros síntomas de COVID-19 han mejorado.",
     "find_a_test_center": "Encuentre un centro de pruebas",
     "for_more_information": "Para obtener más información sobre cómo prevenir la transmisión de la enfermedad a otras personas, consulte la guía de los CDC sobre qué hacer cuando está enfermo:",
     "from_others_at": "de los demás en todo momento y",
@@ -65,11 +64,9 @@
     "physically_separate": "Separarse físicamente de los demás,",
     "review_cdc_guidance": "Orientación de los CDC",
     "review_symptoms": "Revise los síntomas de los CDC",
-    "stay_home": "Quédese en casa y aísle hasta que:",
     "stay_home_except_to_get_medical_care": "Quédese en casa excepto para recibir atención médica.",
     "to_prevent_the_spread": "Para prevenir la propagación de COVID-19 si está enfermo, debe:",
-    "wear_a_face_covering": "use una cubierta facial.",
-    "you_have_not_had_a": "- No ha tenido fiebre durante al menos 24 horas,"
+    "wear_a_face_covering": "use una cubierta facial."
   },
   "errors": {
     "description": "Se ha producido un error. Vuelva a cargar la aplicación.",
@@ -192,6 +189,7 @@
     "no_exposure_reports": "Ningún informe de exposición",
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
     "possible_exposures": "Posibles exposiciones",
+    "recommended_quarantine": "Cuarentena Recomendada",
     "review_health_guidance": "Revisar la guía de salud",
     "stay_quarantined_through": "Manténgase en cuarentena durante:",
     "updated": "Actualizado",

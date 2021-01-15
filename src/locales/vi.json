@@ -53,7 +53,6 @@
     "source": "Nguồn: {{source}}"
   },
   "covid_recommendation": {
-    "and_other_covid": "- Và các triệu chứng COVID-19 khác đã được cải thiện.",
     "find_a_test_center": "Tìm một trung tâm xét nghiệm",
     "for_more_information": "Để biết thêm thông tin về cách ngăn ngừa lây bệnh cho người khác, hãy tham khảo hướng dẫn của CDC về những việc cần làm khi mắc bệnh.",
     "from_others_at": "người khác và ",
@@ -65,11 +64,9 @@
     "physically_separate": "Tự cách ly với những người khác,",
     "review_cdc_guidance": "Xem lại hướng dẫn CDC",
     "review_symptoms": "Xem lại các triệu chứng CDC",
-    "stay_home": "Ở nhà và tự cách ly, cho đến khi:",
     "stay_home_except_to_get_medical_care": "Ở nhà ngoại trừ để được chăm sóc y tế.",
     "to_prevent_the_spread": "Để ngăn chặn sự lây lan của COVID-19 nếu bạn bị bệnh, bạn nên:",
-    "wear_a_face_covering": "đeo khẩu trang.",
-    "you_have_not_had_a": "- Bạn không bị sốt trong vòng ít nhất 24 giờ,"
+    "wear_a_face_covering": "đeo khẩu trang."
   },
   "errors": {
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
@@ -192,6 +189,7 @@
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
     "no_exposure_reports_over_past": "Bạn chưa nhận được bất kỳ báo cáo tiếp xúc nào trong 14 ngày vừa qua.",
     "possible_exposures": "Có thể có tiếp xúc với COVID-19",
+    "recommended_quarantine": "Cách ly được đề xuất",
     "review_health_guidance": "Hướng Dẫn Chung",
     "stay_quarantined_through": "Giữ cách ly thông qua:",
     "updated": "Đã cập nhật",
@@ -521,6 +519,8 @@
     "invalid_code_title": "Mã không hợp lệ",
     "network_connection_body": "Bạn cần kết nối với WiFi để gửi mã xác minh.",
     "network_connection_title": "Không có kết nối Internet",
+    "no_keys_on_device_body": "Bạn không có bất kỳ sự phơi bày nào để gửi. Hãy tiếp tục cách ly.",
+    "no_keys_on_device_title": "Không bị phơi sáng trên thiết bị",
     "unknown_body": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
     "unknown_title": "Có gì đó sai"
   }

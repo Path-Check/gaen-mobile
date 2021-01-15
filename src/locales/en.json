@@ -35,6 +35,7 @@
     "select_language": "Select language",
     "settings": "Open Settings",
     "skip": "Skip",
+    "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit",
     "success": "Success"
@@ -99,6 +100,9 @@
   },
   "export": {
     "code": "Code",
+    "code_input_body_bluetooth": "Enter your verification code",
+    "code_input_button_cancel": "Cancel",
+    "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
@@ -111,9 +115,11 @@
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "enter_verification_code": "Enter verification code",
     "error": {
+      "invalid_code": "Try a different code",
       "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
-      "unknown_code_verification_error": "Try a different code"
+      "unknown_code_verification_error": "Try a different code",
+      "verification_code_used": "Verification code has already been used"
     },
     "intro": {
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
@@ -151,7 +157,7 @@
       "how_do_i_get_header": "How do I get a verification code?",
       "info_body": "A verification code is a code provided to you by your health authority, {{healthAuthorityName}}, if you receive a positive test result.\n\nThe verification code is used to verify that your positive test result is authentic.\n\nEach verification code will expire after a short period to ensure that out of date test results are not submitted.\n\nIf you encounter an error when submitting your verification code, you must get a new code from your health authority before submitting again.",
       "info_header": "What is a verification code?",
-      "what_happens_body": "When you submit your verification code, you will be asked to confirm you would like to let the app anonymously share with others that they may have been exposed.\n\nIf you give permission, your device will send random exposure codes out to anonymously alert others that they were near someone who tested positive for COVID-19. This allows exposed individuals to act more quickly to find a testing center and also protect those around them.",
+      "what_happens_body": "When you submit your verification code, you will be asked to confirm that the app can anonymously share with others that they may have been exposed.\n\nIf you give permission, your device will send random exposure codes out to anonymously alert others that they were near someone who tested positive for COVID-19. This allows exposed individuals to act more quickly to find a testing center and also protect those around them.",
       "what_happens_header": "What happens when I submit my code?"
     }
   },
@@ -218,6 +224,7 @@
   "home": {
     "bluetooth_info_body": "Your phone detects other phones you spend time in close contact with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
       "location_header": "Location",
@@ -226,6 +233,7 @@
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadUrl}}",
       "tracing_off_header": "Exposure Detection Off",
+      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
     "call_emergency_services": "Call Emergency Services",
@@ -263,6 +271,7 @@
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
     "privacy_policy": "Privacy Policy",
+    "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
   "navigation": {
