@@ -145,7 +145,7 @@ const CallbackForm: FunctionComponent = () => {
               <Text style={style.header}>{t("callback.request_a_call")}</Text>
               <Text style={style.subheader}>{callbackFormInstruction}</Text>
               {Boolean(supportPhoneNumber) && (
-                <View style={style.supportNumberContainer}>
+                <View>
                   <Text style={style.supportNumberText}>
                     {t("callback.if_you_prefer")}
                   </Text>
@@ -257,16 +257,11 @@ const style = StyleSheet.create({
     ...Typography.body.x30,
     marginBottom: Spacing.xxSmall,
   },
-  supportNumberContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   supportNumberText: {
     ...Typography.body.x30,
   },
   supportNumberButton: {
-    paddingHorizontal: Spacing.xxSmall,
-    paddingVertical: Spacing.xSmall,
+    marginBottom: Spacing.small,
   },
   supportNumberButtonText: {
     ...Typography.button.anchorLink,
