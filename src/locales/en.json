@@ -7,7 +7,7 @@
   },
   "callback": {
     "firstname": "First name (optional)",
-    "if_you_prefer": "If you prefer; call directly at",
+    "if_you_prefer": "If you prefer; call directly at:",
     "lastname": "Last name (optional)",
     "phone_number_required": "Phone number (required)",
     "request_a_call": "Request a call from our support team",
