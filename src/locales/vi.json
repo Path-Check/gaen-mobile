@@ -163,7 +163,7 @@
   },
   "exposure_history": {
     "check_for_exposures": "Kiểm tra các trường hợp tiếp xúc",
-    "days_remaining": "Còn {{daysOfQuarantineLeft}} ngày trong khoảng thời gian cách ly được đề xuất của bạn.",
+    "days_remaining": "Những ngày còn lai:",
     "exposure_detail": {
       "next_steps": "Các bước tiếp theo",
       "personalize_my_guidance": "Cá nhân hóa hướng dẫn của tôi",
@@ -191,7 +191,7 @@
     "possible_exposures": "Có thể có tiếp xúc với COVID-19",
     "recommended_quarantine": "Cách ly được đề xuất",
     "review_health_guidance": "Hướng Dẫn Chung",
-    "stay_quarantined_through": "Giữ cách ly thông qua:",
+    "stay_quarantined_through": "Ngày cuối:",
     "updated": "Đã cập nhật",
     "why_did_i_get_an_en": "Tại sao tôi nhận được thông báo tiếp xúc?",
     "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác.",
