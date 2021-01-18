@@ -53,7 +53,6 @@
     "source": "fuente: {{source}}"
   },
   "covid_recommendation": {
-    "and_other_covid": "- Y otros síntomas de COVID-19 han mejorado.",
     "find_a_test_center": "Encuentre un centro de pruebas",
     "for_more_information": "Para obtener más información sobre cómo prevenir la transmisión de la enfermedad a otras personas, consulte la guía de los CDC sobre qué hacer cuando está enfermo:",
     "from_others_at": "de los demás en todo momento y",
@@ -65,11 +64,9 @@
     "physically_separate": "Separarse físicamente de los demás,",
     "review_cdc_guidance": "Orientación de los CDC",
     "review_symptoms": "Revise los síntomas de los CDC",
-    "stay_home": "Quédese en casa y aísle hasta que:",
     "stay_home_except_to_get_medical_care": "Quédese en casa excepto para recibir atención médica.",
     "to_prevent_the_spread": "Para prevenir la propagación de COVID-19 si está enfermo, debe:",
-    "wear_a_face_covering": "use una cubierta facial.",
-    "you_have_not_had_a": "- No ha tenido fiebre durante al menos 24 horas,"
+    "wear_a_face_covering": "use una cubierta facial."
   },
   "errors": {
     "description": "Se ha producido un error. Vuelva a cargar la aplicación.",
@@ -160,13 +157,13 @@
       "how_do_i_get_header": "¿Cómo obtengo el código de verificación?",
       "info_body": "Un código de verificación es un código que le entrega su autoridad de salud {{healthAuthorityName}} cuando obtiene un resultado positivo a la prueba.\n\nEste código se utiliza para verificar que los resultados positivos de su prueba sean auténticos.\n\nCada código de verificación caduca después de un corto período de tiempo para asegurarnos de que no se presenten resultados de pruebas ya vencidos.\n\nSi encuentra un error al enviar su código de verificación, deberá obtener uno nuevo de la autoridad de salud antes de enviarlo otra vez.",
       "info_header": "¿Qué es el código de verificación?",
-      "what_happens_body": "Cuando envía su código de verificación, la aplicación le pedirá que comparta claves aleatorias de exposición de otros dispositivos con los cuales se haya conectado.\n\nSi usted otorga el permiso, la aplicación enviará estas claves a un servidor de notificaciones de exposición. El servidor de notificaciones notificará los resultados positivos de su prueba a los dispositivos con los que se haya conectado. \n\nLa aplicación nunca guarda su información personal. Solamente se comparten claves aleatorias anónimas en su dispositivo.",
+      "what_happens_body": "Cuando envíe su código de verificación, se le pedirá que confirme que la aplicación puede compartir de forma anónima con otras personas que pueden haber estado expuestas.\n\nSi da permiso, su dispositivo enviará códigos de exposición aleatorios para alertar de forma anónima a otros que estaban cerca de alguien que dio positivo por COVID-19. Esto permite que las personas expuestas actúen más rápidamente para encontrar un centro de pruebas y también proteger a quienes las rodean.",
       "what_happens_header": "¿Qué sucede cuando envío mi código?"
     }
   },
   "exposure_history": {
     "check_for_exposures": "Comprobar si hay exposiciones",
-    "days_remaining": "Quedan {{daysOfQuarantineLeft}} días de su período de cuarentena recomendado.",
+    "days_remaining": "Días restantes:",
     "exposure_detail": {
       "next_steps": "Revisar la guía de salud",
       "personalize_my_guidance": "Personalizar mi orientación",
@@ -192,8 +189,9 @@
     "no_exposure_reports": "Ningún informe de exposición",
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
     "possible_exposures": "Posibles exposiciones",
+    "recommended_quarantine": "Cuarentena Recomendada",
     "review_health_guidance": "Revisar la guía de salud",
-    "stay_quarantined_through": "Manténgase en cuarentena durante:",
+    "stay_quarantined_through": "Último día:",
     "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí un aviso de exposición?",
     "why_did_i_get_an_en_para": "Usted recibirá un aviso de exposición cuando haya estado cerca de alguien que luego reciba un resultado positivo a COVID-19 y que haya decidido notificarlo.",
@@ -207,7 +205,7 @@
     "cant_check_for_exposures_button": "Habilitar Notificaciones de Exposición",
     "cant_check_for_exposures_title": "No pueden buscarse las Exposiciones.",
     "location_body": "Google requiere que los dispositivos que ejecutan Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar las notificaciones de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
-    "location_title": "Active el servicio de localización",
+    "location_title": "Active el servicio de ubicación",
     "set_active_region_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación y presione ‘Fijar como región activa’.",
     "set_active_region_ios_title": "Fijar región activa",
     "share_exposure_information_ios_body": "Abra la aplicación de Configuraciones y navegue hasta las configuraciones de Notificaciones de Exposición para esta aplicación. Asegúrese de activar ’Compartir Información de Exposición', presione 'Fijar como región activa'.",
@@ -361,7 +359,7 @@
     "home": "Panel",
     "how_the_app_works": "¿Cómo funciona la aplicación?",
     "legal": "Legal",
-    "location": "Localización",
+    "location": "Ubicación",
     "protect_privacy": "Cómo protegemos su privacidad",
     "select_language": "Seleccionar idioma",
     "select_symptoms": "Seleccionar síntomas",

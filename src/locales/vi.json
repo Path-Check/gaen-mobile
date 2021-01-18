@@ -53,7 +53,6 @@
     "source": "Nguồn: {{source}}"
   },
   "covid_recommendation": {
-    "and_other_covid": "- Và các triệu chứng COVID-19 khác đã được cải thiện.",
     "find_a_test_center": "Tìm một trung tâm xét nghiệm",
     "for_more_information": "Để biết thêm thông tin về cách ngăn ngừa lây bệnh cho người khác, hãy tham khảo hướng dẫn của CDC về những việc cần làm khi mắc bệnh.",
     "from_others_at": "người khác và ",
@@ -65,11 +64,9 @@
     "physically_separate": "Tự cách ly với những người khác,",
     "review_cdc_guidance": "Xem lại hướng dẫn CDC",
     "review_symptoms": "Xem lại các triệu chứng CDC",
-    "stay_home": "Ở nhà và tự cách ly, cho đến khi:",
     "stay_home_except_to_get_medical_care": "Ở nhà ngoại trừ để được chăm sóc y tế.",
     "to_prevent_the_spread": "Để ngăn chặn sự lây lan của COVID-19 nếu bạn bị bệnh, bạn nên:",
-    "wear_a_face_covering": "đeo khẩu trang.",
-    "you_have_not_had_a": "- Bạn không bị sốt trong vòng ít nhất 24 giờ,"
+    "wear_a_face_covering": "đeo khẩu trang."
   },
   "errors": {
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
@@ -160,13 +157,13 @@
       "how_do_i_get_header": "Làm cách nào để lấy mã xác minh?",
       "info_body": "Mã xác minh là mã do cơ quan y tế của bạn cung cấp cho bạn, {{healthAuthorityName}} , nếu bạn nhận được kết quả xét nghiệm dương tính.\n\nMã xác minh được sử dụng để xác minh rằng kết quả xét nghiệm dương tính của bạn là xác thực.\n\nMỗi mã xác minh sẽ hết hạn sau một thời gian ngắn để đảm bảo rằng kết quả kiểm tra cũ không được gửi.\n\nNếu bạn gặp lỗi khi gửi mã xác minh, bạn phải lấy mã mới từ cơ quan y tế trước khi gửi lại.",
       "info_header": "Mã xác minh là gì?",
-      "what_happens_body": "Khi bạn gửi mã xác minh, ứng dụng sẽ yêu cầu bạn chia sẻ các khóa hiển thị ẩn danh ngẫu nhiên từ các thiết bị khác mà bạn đã kết nối.\n\nNếu bạn cấp quyền, ứng dụng sẽ gửi các khóa này đến máy chủ thông báo phơi sáng. Máy chủ thông báo sẽ thông báo cho các thiết bị bạn đã kết nối về kết quả xét nghiệm dương tính.\n\nỨng dụng không bao giờ thu thập hoặc lưu trữ thông tin cá nhân. Chỉ những khóa ẩn danh ngẫu nhiên được lưu trữ trên thiết bị của bạn mới được chia sẻ.",
+      "what_happens_body": "Khi bạn gửi mã xác minh của mình, bạn sẽ được yêu cầu xác nhận rằng ứng dụng có thể chia sẻ ẩn danh với những người khác mà họ có thể đã bị lộ.\n\nNếu bạn cho phép, thiết bị của bạn sẽ gửi mã phơi nhiễm ngẫu nhiên ra ngoài để cảnh báo ẩn danh cho người khác rằng họ đang ở gần người có kết quả xét nghiệm dương tính với COVID-19. Điều này cho phép các cá nhân bị phơi nhiễm hành động nhanh hơn để tìm trung tâm kiểm tra và cũng bảo vệ những người xung quanh họ.",
       "what_happens_header": "Điều gì xảy ra khi tôi gửi mã của mình?"
     }
   },
   "exposure_history": {
     "check_for_exposures": "Kiểm tra các trường hợp tiếp xúc",
-    "days_remaining": "Còn {{daysOfQuarantineLeft}} ngày trong khoảng thời gian cách ly được đề xuất của bạn.",
+    "days_remaining": "Những ngày còn lai:",
     "exposure_detail": {
       "next_steps": "Các bước tiếp theo",
       "personalize_my_guidance": "Cá nhân hóa hướng dẫn của tôi",
@@ -192,8 +189,9 @@
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
     "no_exposure_reports_over_past": "Bạn chưa nhận được bất kỳ báo cáo tiếp xúc nào trong 14 ngày vừa qua.",
     "possible_exposures": "Có thể có tiếp xúc với COVID-19",
+    "recommended_quarantine": "Cách ly được đề xuất",
     "review_health_guidance": "Hướng Dẫn Chung",
-    "stay_quarantined_through": "Giữ cách ly thông qua:",
+    "stay_quarantined_through": "Ngày cuối:",
     "updated": "Đã cập nhật",
     "why_did_i_get_an_en": "Tại sao tôi nhận được thông báo tiếp xúc?",
     "why_did_i_get_an_en_para": "Bạn sẽ nhận được thông báo tiếp xúc khi một người bạn đã ở gần sau đó nhận được kết quả xét nghiệm dương tính với COVID-19 và chọn cách thông báo cho những người khác.",
@@ -521,6 +519,8 @@
     "invalid_code_title": "Mã không hợp lệ",
     "network_connection_body": "Bạn cần kết nối với WiFi để gửi mã xác minh.",
     "network_connection_title": "Không có kết nối Internet",
+    "no_keys_on_device_body": "Bạn không có bất kỳ sự phơi bày nào để gửi. Hãy tiếp tục cách ly.",
+    "no_keys_on_device_title": "Không bị phơi sáng trên thiết bị",
     "unknown_body": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
     "unknown_title": "Có gì đó sai"
   }

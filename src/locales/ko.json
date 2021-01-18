@@ -53,7 +53,20 @@
     "source": "출처: {{source}}"
   },
   "covid_recommendation": {
-    "find_a_test_center": "코로나19 검사소 찾기"
+    "find_a_test_center": "코로나19 검사소 찾기",
+    "for_more_information": "다른 사람에게 질병이 퍼지는 것을 방지하는 방법에 대한 자세한 내용은 아플 때에 해야 할 일에 대한 CDC 지침을 참조하십시오:",
+    "from_others_at": "유지하며 ",
+    "get_a_covid_test": "코로나19 검사 받기:",
+    "get_rest_and_stay": "휴식을 취하고 수분을 유지하십시오.",
+    "includeing_people": "다른 사람과의 신체 접촉을 피하십시오.",
+    "maintain_at_least": "다른 사람과 최소 6 피트 거리를 ",
+    "monitor_for_fever": "발열, 기침 또는 기타 코로나19 증상 관찰:",
+    "physically_separate": "귀하의 가족 구성원을 포함한",
+    "review_cdc_guidance": "CDC 지침 검토",
+    "review_symptoms": "CDC 증상 검토",
+    "stay_home_except_to_get_medical_care": "치료를 받는 것을 제외하고는 집에 머물러 두십시오.",
+    "to_prevent_the_spread": "아픈 경우 COVID-19의 확산을 방지하려면 다음을 수행해야합니다.",
+    "wear_a_face_covering": "마스크를 착용하십시오."
   },
   "errors": {
     "description": "오류가 발생했습니다. 앱을 새로 고침하세요.",
@@ -172,11 +185,14 @@
     "no_exposure_reports": "노출 보고서 없음",
     "no_exposure_reports_over_past": "지난 14일 동안 노출 보고서를 받지 못했습니다.",
     "possible_exposures": "코로나19 노출 가능성",
+    "recommended_quarantine": "권장 격리 기간",
     "review_health_guidance": "보건 지침 검토",
     "stay_quarantined_through": "아래 날짜까지 격리 상태 유지 하십시오:",
     "updated": "업데이트",
     "why_did_i_get_an_en": "노출 알림을 받는 이유는 무엇입니까?",
-    "why_did_i_get_an_en_para": "귀하의 주변에 코로나19 감염 확진자가 발생했을 경우, 해당 확진자가 다른사람에게 알리기를 선택하면 노출 알림을 받게 됩니다."
+    "why_did_i_get_an_en_para": "귀하의 주변에 코로나19 감염 확진자가 발생했을 경우, 해당 확진자가 다른사람에게 알리기를 선택하면 노출 알림을 받게 됩니다.",
+    "your_device_exchanged": "아래의 각 날짜 범위 내에서 귀하의 기기는 확진 결과를 받은 다른 사용자의 기기와 키를 교환했습니다.",
+    "your_recommended_quarantine_is_over": "권장 격리 기간이 종료되었습니다. 건강 지침을 계속 지켜주십시오."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "노출 알림을 활성화하려면 설정 앱에서 블루투스를 켜야 합니다.",
@@ -184,6 +200,7 @@
     "cant_check_for_exposures_body": "노출 여부를 확인하려면 노출 알림을 활성화해야 합니다.",
     "cant_check_for_exposures_button": "노출 알림 활성화",
     "cant_check_for_exposures_title": "노출 여부를 확인할 수 없음",
+    "location_body": "Google은 Android 10 이하를 실행하는 기기에서 노출 알림을 사용하려면 위치 서비스를 활성화해야 합니다. {{applicationName}}는 사용자의 위치를 추적하거나 기록하지 않습니다.",
     "location_title": "위치 서비스 활성화",
     "set_active_region_ios_body": "설정 앱을 열고 이 앱의 노출 알림 설정으로 이동 한 다음 '활성화된 지역으로 설정'을 누릅니다.",
     "set_active_region_ios_title": "활성 지역 설정",
@@ -218,6 +235,7 @@
     "call_emergency_services": "응급 서비스 호출",
     "check_if_your_symptoms": "증상을 입력하고 건강을 유지하는 방법에 대한 권장 상황을 확인하십시오.",
     "complete_healthcheck": "건강검사 완성",
+    "could_not_open_link": "링크를 열 수 없습니다 : {{url}}. 브라우저에서 열어보세요.",
     "enter_symptoms": "증상 입력",
     "error": {
       "share_link_failed": "공유 할 링크를 열지 못했습니다."
@@ -413,6 +431,7 @@
       "covid19_self_assessment": "코로나19 자체 평가",
       "find_out_how_to_care": "코로나19 확진자와 밀접한 접촉 후 본인(또는 타인)을 돌보는 방법을 알아보십시오.",
       "if_this_is": "긴급상황인 경우 {{emergencyPhoneNumber}}로 전화하십시오.",
+      "learn_more": "이 자체 검사의 기반이되는 CDC의 코로나 자체 검사에 대해 자세히 알아보십시오",
       "this_is_based_on": "이것은 CDC의 최신 지침을 기반으로 바이러스가 어떻게 확산되며, 해당 바이러스가 일으키는 질병에 대해 업데이트되는 대로 점차적으로 업데이트 될 예정입니다.",
       "this_is_not_intended": "이것은 진단 또는 치료를 위한 것이 아닙니다.",
       "you_are_a_resident": "귀하는 {{healthAuthorityName}}에서 지원하는 지역 거주자입니다."
@@ -495,6 +514,8 @@
     "invalid_code_title": "무효 인증 번호",
     "network_connection_body": "인증 본호를 제출하려면 WiFi에 연결되어 있어야 합니다.",
     "network_connection_title": "인터넷에 연결되지 않음",
+    "no_keys_on_device_body": "제출할 노출 기록이 없습니다. 계속 격리하십시오.",
+    "no_keys_on_device_title": "기기에 노출 기록 없음",
     "unknown_body": "오류가 발생했습니다. 다시 시도하십시오.",
     "unknown_title": "오류가 발생했습니다."
   }
