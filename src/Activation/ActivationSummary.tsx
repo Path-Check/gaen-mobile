@@ -132,7 +132,7 @@ const style = StyleSheet.create({
   headerImage: {
     resizeMode: "cover",
     width: 230,
-    height: 150,
+    height: 230,
     marginBottom: Spacing.medium,
   },
   textContainer: {
