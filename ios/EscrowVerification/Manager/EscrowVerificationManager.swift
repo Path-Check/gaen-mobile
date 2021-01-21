@@ -25,8 +25,8 @@ class EscrowVerificationManager: NSObject {
             completionHandler(nil)
           }
         }
-      default:
-        break
+      case let .failure(error):
+        completionHandler(error)
       }
     }
   }
@@ -71,8 +71,8 @@ class EscrowVerificationManager: NSObject {
             }
           }
         }
-      default:
-        break
+      case let .failure(error):
+        completionHandler(error)
       }
     }
   }
