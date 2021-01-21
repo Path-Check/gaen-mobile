@@ -84,11 +84,20 @@ const VerificationCodeForm: FunctionComponent = () => {
       Logger.error("Unhandled error on submit code to escrow")
       Alert.alert(t("errors.something_went_wrong"), e.message)
       setIsLoading(false)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const showError = (error: API.SubmitKeysError): void => {
     switch (error) {
+      case "NotAuthorized":
+        Alert.alert(
+          t("verification_code_alerts.not_authorized_title"),
+          t("verification_code_alerts.not_authorized_body"),
+          [{ text: t("common.okay") }],
+        )
+        break
       case "NoKeysOnDevice":
         Alert.alert(
           t("verification_code_alerts.no_keys_on_device_title"),
