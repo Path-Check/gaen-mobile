@@ -195,10 +195,7 @@ const VerificationFlowButton: FunctionComponent<VerificationFlowButtonProps> = (
   const { t } = useTranslation()
 
   return (
-    <TouchableOpacity
-      onPress={onPressReportTestResult}
-      style={style.floatingContainer}
-    >
+    <View style={style.floatingContainer}>
       <View style={style.cardTopContainer}>
         <Image
           source={Images.ProtectPrivacySubmitKeys}
@@ -224,8 +221,14 @@ const VerificationFlowButton: FunctionComponent<VerificationFlowButtonProps> = (
         {t("home.have_a_positive_test")}
       </Text>
       <Text style={style.sectionBodyText}>{descriptionText}</Text>
-      <SectionButton text={buttonLabelText} />
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={onPressReportTestResult}
+        accessibilityRole="button"
+        accessibilityLabel={buttonLabelText}
+      >
+        <SectionButton text={buttonLabelText} />
+      </TouchableOpacity>
+    </View>
   )
 }
 

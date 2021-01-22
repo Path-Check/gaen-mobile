@@ -44,7 +44,6 @@ const ExposureNotificationsActivationStatus: FunctionComponent = () => {
   const navigation = useNavigation()
   const { trackEvent } = useProductAnalyticsContext()
   const { exposureNotifications } = usePermissionsContext()
-  const { status } = exposureNotifications
   const requestExposureNotifications = useRequestExposureNotifications()
 
   const handleOnPressFix = async () => {
@@ -56,10 +55,12 @@ const ExposureNotificationsActivationStatus: FunctionComponent = () => {
     navigation.navigate(HomeStackScreens.ExposureNotificationsInfo)
   }
 
+  const isActive = exposureNotifications.status === "Active"
+
   return (
     <ActivationStatusView
       headerText={t("home.bluetooth.proximity_tracing_header")}
-      isActive={status === "Active"}
+      isActive={isActive}
       infoAction={handleOnPressShowInfo}
       fixAction={handleOnPressFix}
       testID={"exposure-notifications-status-container"}
