@@ -16,6 +16,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.pathcheck.covidsafepaths.BuildConfig
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.EscrowVerificationKeySubmissionModule.Companion.NO_KEYS_ERROR_CODE
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Error
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
@@ -183,7 +184,7 @@ object EscrowVerificationClient {
                     if (submission.keys!!.isEmpty()) {
                         Log.w(TAG, "There are no keys")
                         // Backend is not called, return a success
-                        return@withContext Result.Success(Unit)
+                        return@withContext Result.Failure(Error(NO_KEYS_ERROR_CODE, "NoKeysOnDevice"))
                     }
                 } catch (e: KotlinNullPointerException) {
                     Log.e(TAG, "Keys are null")
