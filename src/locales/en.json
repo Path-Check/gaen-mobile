@@ -521,6 +521,8 @@
     "network_connection_title": "No Internet Connection",
     "no_keys_on_device_body": "You have not had the app long enough to share exposures. Please continue to isolate.",
     "no_keys_on_device_title": "No exposures to share from device",
+    "not_authorized_body": "You did not authorize the app to share your Random IDs.",
+    "not_authorized_title": "Did not authorize",
     "unknown_body": "An unexpected error occurred. Please try again.",
     "unknown_title": "Something Went Wrong"
   }
