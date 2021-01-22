@@ -237,6 +237,7 @@
       "tracing_on_header": "Exposure Detection On"
     },
     "call_emergency_services": "Call Emergency Services",
+    "covid_data": "Covid Data",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
     "complete_healthcheck": "Complete Healthcheck",
     "could_not_open_link": "Could not open link: {{url}}. Please try to open the url in your phone's browser.",
@@ -353,6 +354,7 @@
   },
   "screen_titles": {
     "bluetooth": "Bluetooth",
+    "covid_data_webview": "Covid Data",
     "exposure_history": "Exposures",
     "exposure_notifications": "Exposure Notifications",
     "exposure_scanning": "Exposure Detection",

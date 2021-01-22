@@ -1,12 +1,5 @@
 import React, { FunctionComponent } from "react"
-import {
-  Alert,
-  TouchableOpacity,
-  Image,
-  View,
-  Share,
-  StyleSheet,
-} from "react-native"
+import { Alert, Pressable, Image, View, Share, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
@@ -52,7 +45,7 @@ const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
   const imageSource = Images.ShareImage
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={style.shareContainer}
       onPress={handleOnPressShare}
       accessibilityLabel={t("home.bluetooth.share", { applicationName })}
@@ -71,7 +64,7 @@ const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
         width={Iconography.xxSmall}
         height={Iconography.xxSmall}
       />
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 

@@ -27,6 +27,7 @@ import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
 import HealthCheckLink from "./HealthCheckLink"
+import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 
@@ -50,6 +51,7 @@ const Home: FunctionComponent = () => {
     appDownloadUrl,
     displayCallEmergencyServices,
     displayCovidData,
+    displayCovidDataWebView,
     displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
@@ -76,6 +78,7 @@ const Home: FunctionComponent = () => {
         {healthAuthorityHealthCheckUrl && (
           <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
         )}
+        {displayCovidDataWebView && <CovidDataWebViewLink />}
         {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
