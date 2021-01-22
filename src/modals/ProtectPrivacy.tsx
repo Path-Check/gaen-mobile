@@ -27,11 +27,13 @@ const ProtectPrivacy: FunctionComponent = () => {
           image={Images.ProtectPrivacyTop}
           subheaderText={t("onboarding.protect_privacy.subheader_1")}
           bodyText={t("onboarding.protect_privacy.body_1")}
+          accessibilityLabel={t("onboarding.protect_privacy.image_label_1")}
         />
         <Section
           image={Images.ProtectPrivacyExchangeKeys}
           subheaderText={t("onboarding.protect_privacy.subheader_2")}
           bodyText={t("onboarding.protect_privacy.body_2", { applicationName })}
+          accessibilityLabel={t("onboarding.protect_privacy.image_label_2")}
         />
         <Section
           image={Images.ProtectPrivacySubmitKeys}
@@ -39,6 +41,7 @@ const ProtectPrivacy: FunctionComponent = () => {
           bodyText={t("onboarding.protect_privacy.body_3", {
             applicationName,
           })}
+          accessibilityLabel={t("onboarding.protect_privacy.image_label_3")}
         />
         <Section
           image={Images.ProtectPrivacyReceiveKeys}
@@ -46,6 +49,7 @@ const ProtectPrivacy: FunctionComponent = () => {
           bodyText={t("onboarding.protect_privacy.body_4", {
             applicationName,
           })}
+          accessibilityLabel={t("onboarding.protect_privacy.image_label_4")}
         />
         <Section
           image={Images.ProtectPrivacyReceiveNotification}
@@ -55,6 +59,7 @@ const ProtectPrivacy: FunctionComponent = () => {
           bodyText={t("onboarding.protect_privacy.body_5", {
             applicationName,
           })}
+          accessibilityLabel={t("onboarding.protect_privacy.image_label_5")}
         />
       </ScrollView>
     </View>
@@ -78,16 +83,23 @@ interface SectionProps {
   image: ImageSourcePropType
   subheaderText: string
   bodyText: string
+  accessibilityLabel: string
 }
 
 const Section: FunctionComponent<SectionProps> = ({
   image,
   subheaderText,
   bodyText,
+  accessibilityLabel,
 }) => {
   return (
     <View>
-      <Image source={image} style={sectionStyle.image} />
+      <Image
+        source={image}
+        style={sectionStyle.image}
+        accessible
+        accessibilityLabel={accessibilityLabel}
+      />
       <View style={sectionStyle.textContainer}>
         <Text style={sectionStyle.subheaderText}>{subheaderText}</Text>
         <Text style={sectionStyle.bodyText}>{bodyText}</Text>

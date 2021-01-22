@@ -69,7 +69,7 @@ export const accent: Record<Accent, string> = {
   danger10: "fff0f0",
   danger25: "#ffe0e0",
   danger75: "#ff7d7d",
-  danger100: "#ff5656",
+  danger100: "#ee1919",
   danger150: "#c23838",
   success10: "#f2fcf4",
   success25: "#deffe4",
