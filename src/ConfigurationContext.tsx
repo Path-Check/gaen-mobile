@@ -14,6 +14,7 @@ export interface Configuration {
   displayCallbackForm: boolean
   displayCallEmergencyServices: boolean
   displayCovidData: boolean
+  displayCovidDataWebView: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   displayAgeVerification: boolean
@@ -22,6 +23,7 @@ export interface Configuration {
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityCovidDataUrl: string | null
+  healthAuthorityCovidDataWebViewUrl: string | null
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
@@ -50,6 +52,7 @@ const initialState: Configuration = {
   displayCallbackForm: false,
   displayCallEmergencyServices: false,
   displayCovidData: false,
+  displayCovidDataWebView: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
   displayAgeVerification: false,
@@ -58,6 +61,7 @@ const initialState: Configuration = {
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityCovidDataUrl: null,
+  healthAuthorityCovidDataWebViewUrl: null,
   healthAuthorityEulaUrl: null,
   healthAuthorityHealthCheckUrl: null,
   healthAuthorityLearnMoreUrl: "",
@@ -106,6 +110,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const cdcGuidanceUrl = env.CDC_GUIDANCE_LINK || null
   const cdcSymptomsUrl = env.CDC_SYMPTOMS_URL || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
+  const healthAuthorityCovidDataWebViewUrl =
+    env.AUTHORITY_COVID_DATA_WEBVIEW_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
   const healthAuthorityHealthCheckUrl = env.HEALTH_CHECK_URL || null
   const healthAuthorityLegalPrivacyPolicyUrl =
@@ -122,6 +128,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayCallEmergencyServices =
     env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
+  const displayCovidDataWebView = env.DISPLAY_COVID_DATA_WEBVIEW === "true"
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
@@ -166,6 +173,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallbackForm,
         displayCallEmergencyServices,
         displayCovidData,
+        displayCovidDataWebView,
         displaySymptomHistory,
         displaySelfAssessment,
         displayAgeVerification,
@@ -174,6 +182,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityCovidDataUrl,
+        healthAuthorityCovidDataWebViewUrl,
         healthAuthorityEulaUrl,
         healthAuthorityHealthCheckUrl,
         healthAuthorityLearnMoreUrl,

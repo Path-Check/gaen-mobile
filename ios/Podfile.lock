@@ -263,6 +263,8 @@ PODS:
     - React
   - react-native-splash-screen (3.2.0):
     - React
+  - react-native-webview (11.2.0):
+    - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -401,6 +403,7 @@ DEPENDENCIES:
   - "react-native-segmented-control (from `../node_modules/@react-native-community/segmented-control`)"
   - react-native-simple-crypto (from `../node_modules/react-native-simple-crypto`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -497,6 +500,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-simple-crypto"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -579,6 +584,7 @@ SPEC CHECKSUMS:
   react-native-segmented-control: 65df6cd0619b780b3843d574a72d4c7cec396097
   react-native-simple-crypto: 499ddd9f317932677e50393e58e7a72bca2a86e1
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
+  react-native-webview: 944b6b607b3e362437dfdaf3ba979e47f4e1c939
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0

@@ -114,6 +114,7 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
+  | "CovidDataWebView"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "ProductAnalyticsConsent"
@@ -128,6 +129,7 @@ export const ModalStackScreens: {
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
+  CovidDataWebView: "CovidDataWebView",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   ProductAnalyticsConsent: "ProductAnalyticsConsent",

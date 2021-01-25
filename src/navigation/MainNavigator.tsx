@@ -27,6 +27,7 @@ import AppTransition from "../Onboarding/AppTransition"
 import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
+import CovidDataWebView from "../modals/CovidDataWebView"
 import AffectedUserStack from "./AffectedUserFlowStack"
 import EscrowVerificationStack from "./EscrowVerification"
 import SelfAssessmentStack from "./SelfAssessmentStack"
@@ -173,6 +174,15 @@ const MainNavigator: FunctionComponent = () => {
             ...TransitionPresets.ModalTransition,
             headerShown: true,
             header: applyModalHeader(t("screen_titles.protect_privacy")),
+          }}
+        />
+        <Stack.Screen
+          name={ModalStackScreens.CovidDataWebView}
+          component={CovidDataWebView}
+          options={{
+            ...TransitionPresets.ModalTransition,
+            headerShown: true,
+            header: applyModalHeader(t("screen_titles.covid_data_webview")),
           }}
         />
         <Stack.Screen
