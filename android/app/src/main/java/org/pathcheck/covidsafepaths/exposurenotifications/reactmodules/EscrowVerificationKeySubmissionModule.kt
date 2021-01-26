@@ -8,7 +8,6 @@ import com.facebook.react.module.annotations.ReactModule
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -27,6 +26,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
 class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) : ReactContextBaseJavaModule(context) {
     companion object {
         const val MODULE_NAME = "EscrowVerificationKeySubmissionModule"
+        const val NO_KEYS_ERROR_CODE = 999
     }
 
     override fun getName(): String {
@@ -104,7 +104,7 @@ class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) :
                         return@launch
                     }
 
-                    promise.reject(Exception("No exposure keys"))
+                    promise.reject(NO_KEYS_ERROR_CODE.toString(), "NoKeysOnDevice")
                 }
             }
 
