@@ -19,6 +19,7 @@ export interface CustomCopy {
   legal?: string
   verificationCodeInfo?: string
   verificationCodeHowDoIGet?: string
+  verificationCodeOnSubmitInfo?: string
   appTransition?: {
     header: string
     body1: string
@@ -44,6 +45,7 @@ const CustomCopyDecoder = JsonDecoder.object<CustomCopy>(
     legal: JsonDecoder.optional(JsonDecoder.string),
     verificationCodeInfo: JsonDecoder.optional(JsonDecoder.string),
     verificationCodeHowDoIGet: JsonDecoder.optional(JsonDecoder.string),
+    verificationCodeOnSubmitInfo: JsonDecoder.optional(JsonDecoder.string),
     appTransition: JsonDecoder.optional(AppTransitionCopyDecoder),
     callbackFormInstruction: JsonDecoder.optional(JsonDecoder.string),
   },

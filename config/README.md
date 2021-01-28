@@ -60,6 +60,7 @@ interface CustomCopy {
   healthAuthorityName: string
   verificationCodeInfo?: string
   verificationCodeHowDoIGet?: string
+  verificationCodeOnSubmitInfo?: string
   appTransition: {
     header: string
     body1: string
@@ -78,6 +79,7 @@ interface CustomCopy {
     "legal": "",
     "verificationCodeInfo": "",
     "verificationCodeHowDoIGet": "",
+    "verificationCodeOnSubmitInfo": "",
     "appTransition": {
       "header": "",
       "body1": "",
