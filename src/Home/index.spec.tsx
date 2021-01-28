@@ -8,13 +8,7 @@ import Home from "./index"
 import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
 import { ConfigurationContext } from "../ConfigurationContext"
-import {
-  ENPermissionStatus,
-  PermissionsContext,
-  PermissionStatus,
-} from "../Device/PermissionsContext"
-import { LocationPermissions } from "../Device/useLocationPermissions"
-import { RequestAuthorizationResponse } from "src/gaen/nativeModule"
+import { PermissionsContext } from "../Device/PermissionsContext"
 
 jest.mock("@react-navigation/native")
 
@@ -46,6 +40,7 @@ describe("Home", () => {
 
   it("allows users to share the application", () => {
     const configuration = factories.configurationContext.build()
+    Share.share = jest.fn()
 
     const shareSpy = jest.spyOn(Share, "share")
 
@@ -58,20 +53,15 @@ describe("Home", () => {
     fireEvent.press(getByLabelText(`Share ${mockedApplicationName}`))
 
     expect(shareSpy).toHaveBeenCalledWith({
-      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadLink}`,
+      message: `Check out this app ${mockedApplicationName}, which can help us contain COVID-19! ${configuration.appDownloadUrl}`,
     })
   })
 
-  describe("When the exposure notification permissions are enabled, the app is authorized, Bluetooth is on, and Location is on", () => {
+  describe("When the exposure notification status is active", () => {
     it("renders an on message", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
-      const isBluetoothOn = true
-      const locationPermissions = "RequiredOn"
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        isBluetoothOn,
-        locationPermissions,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "Active" },
+      })
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -83,16 +73,11 @@ describe("Home", () => {
     })
   })
 
-  describe("When bluetooth is off", () => {
+  describe("When the exposure notifications status is not active because location is off", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.ENABLED
-      const isBluetoothOn = false
-      const locationPermissions = "RequiredOn"
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        isBluetoothOn,
-        locationPermissions,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "LocationOffAndRequired" },
+      })
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -101,63 +86,14 @@ describe("Home", () => {
       )
 
       expect(getByText("Exposure Detection Off")).toBeDefined()
-    })
-  })
-
-  describe("When location is off", () => {
-    describe("and location is required", () => {
-      it("renders an off message", () => {
-        const enPermissionStatus = ENPermissionStatus.ENABLED
-        const isBluetoothOn = true
-        const locationPermissions = "RequiredOff"
-        const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
-          isBluetoothOn,
-          locationPermissions,
-        )
-
-        const { getByText } = render(
-          <PermissionsContext.Provider value={permissionProviderValue}>
-            <Home />
-          </PermissionsContext.Provider>,
-        )
-
-        expect(getByText("Exposure Detection Off")).toBeDefined()
-      })
-    })
-
-    describe("and location is not required", () => {
-      it("renders an on message", () => {
-        const enPermissionStatus = ENPermissionStatus.ENABLED
-        const isBluetoothOn = true
-        const locationPermissions = "NotRequired"
-        const permissionProviderValue = createPermissionProviderValue(
-          enPermissionStatus,
-          isBluetoothOn,
-          locationPermissions,
-        )
-
-        const { getByText } = render(
-          <PermissionsContext.Provider value={permissionProviderValue}>
-            <Home />
-          </PermissionsContext.Provider>,
-        )
-
-        expect(getByText("Exposure Detection On")).toBeDefined()
-      })
     })
   })
 
   describe("When exposure notifications are disabled", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.DISABLED
-      const isBluetoothOn = true
-      const locationPermissions = "RequiredOn"
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        isBluetoothOn,
-        locationPermissions,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "Disabled" },
+      })
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -169,16 +105,11 @@ describe("Home", () => {
     })
   })
 
-  describe("When exposure notifications are not authorized", () => {
+  describe("When exposure notifications are unauthorized", () => {
     it("renders an off message", () => {
-      const enPermissionStatus = ENPermissionStatus.NOT_AUTHORIZED
-      const isBluetoothOn = true
-      const locationPermissions = "RequiredOn"
-      const permissionProviderValue = createPermissionProviderValue(
-        enPermissionStatus,
-        isBluetoothOn,
-        locationPermissions,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "Unauthorized" },
+      })
 
       const { getByText } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
@@ -190,26 +121,3 @@ describe("Home", () => {
     })
   })
 })
-
-const createPermissionProviderValue = (
-  enPermissionStatus: ENPermissionStatus,
-  isBluetoothOn: boolean,
-  locationPermissions: LocationPermissions,
-) => {
-  const requestPermission: () => Promise<RequestAuthorizationResponse> = () =>
-    Promise.resolve({ kind: "failure" as const, error: "Unknown" as const })
-  return {
-    isBluetoothOn,
-    locationPermissions,
-    notification: {
-      status: PermissionStatus.UNKNOWN,
-      check: () => {},
-      request: () => {},
-    },
-    exposureNotifications: {
-      status: enPermissionStatus,
-      check: () => {},
-      request: requestPermission,
-    },
-  }
-}

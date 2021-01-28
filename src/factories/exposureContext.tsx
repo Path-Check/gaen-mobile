@@ -9,5 +9,5 @@ export default Factory.define<ExposureState>(() => ({
   storeRevisionToken: (_revisionToken: string) => Promise.resolve(),
   getRevisionToken: () => Promise.resolve(""),
   refreshExposureInfo: () => {},
-  checkForNewExposures: () => Promise.resolve({ kind: "success" }),
+  detectExposures: () => Promise.resolve({ kind: "success" }),
 }))

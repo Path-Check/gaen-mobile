@@ -11,6 +11,9 @@
     "more": "Mais",
     "next": "Feito"
   },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Habilite o Bluetooth"
+  },
   "label": {
     "launch_enable_notif": "Permitir Notificações",
     "launch_get_started": "Começar",

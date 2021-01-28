@@ -11,18 +11,24 @@ import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
-import { Spacing, Colors, Typography, Buttons } from "../styles"
+import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
 
-export const ExportIntro: FunctionComponent = () => {
+export const AffectedUserFlowIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { healthAuthorityName } = useCustomCopy()
 
-  const handleOnPressNext = () => {
+  const handleOnPressContinue = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
+  }
+
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
   }
 
   return (
@@ -38,19 +44,46 @@ export const ExportIntro: FunctionComponent = () => {
           accessible
           accessibilityLabel={t("export.person_and_health_expert")}
         />
-        <Text style={style.header}>{t("export.start_header_bluetooth")}</Text>
+        <Text style={style.headerText}>{t("export.intro.header")}</Text>
+        <Text style={style.bodyText}>
+          {t("export.intro.body1", { healthAuthorityName })}
+        </Text>
+        <Text style={style.bodyText}>
+          {t("export.intro.body2", { healthAuthorityName })}
+        </Text>
       </View>
-      <TouchableOpacity
-        style={style.button}
-        onPress={handleOnPressNext}
-        accessibilityLabel={t("common.start")}
-      >
-        <Text style={style.buttonText}>{t("common.start")}</Text>
-        <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          style={style.button}
+          onPress={handleOnPressContinue}
+          accessibilityLabel={t("common.continue")}
+        >
+          <Text style={style.buttonText}>{t("common.continue")}</Text>
+          <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.secondaryButton}
+          onPress={handleOnPressSecondaryButton}
+          accessibilityLabel={t("export.intro.what_is_a")}
+        >
+          <View style={style.secondaryButtonIconContainer}>
+            <SvgXml
+              xml={Icons.QuestionMark}
+              fill={Colors.primary.shade125}
+              width={Iconography.xxxSmall}
+              height={Iconography.xxxSmall}
+            />
+          </View>
+          <Text style={style.secondaryButtonText}>
+            {t("export.intro.what_is_a")}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   )
 }
+
+const imageSize = 140
 
 const style = StyleSheet.create({
   container: {
@@ -60,27 +93,40 @@ const style = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "space-between",
     paddingHorizontal: Spacing.large,
-    paddingTop: Spacing.huge,
-    paddingBottom: Spacing.massive,
+    paddingBottom: Spacing.xxLarge,
     backgroundColor: Colors.background.primaryLight,
   },
   image: {
-    width: "100%",
-    height: 300,
     resizeMode: "contain",
+    width: imageSize,
+    height: imageSize,
+    marginBottom: Spacing.xSmall,
+  },
+  headerText: {
+    ...Typography.header.x60,
     marginBottom: Spacing.small,
   },
-  header: {
-    ...Typography.header.x60,
-    marginBottom: Spacing.xLarge,
+  bodyText: {
+    ...Typography.body.x30,
+    marginBottom: Spacing.medium,
   },
   button: {
     ...Buttons.primary.base,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
     marginRight: Spacing.small,
   },
+  secondaryButton: {
+    ...Buttons.secondary.leftIcon,
+  },
+  secondaryButtonIconContainer: {
+    ...Buttons.circle.base,
+  },
+  secondaryButtonText: {
+    ...Typography.button.secondaryLeftIcon,
+  },
 })
 
-export default ExportIntro
+export default AffectedUserFlowIntro

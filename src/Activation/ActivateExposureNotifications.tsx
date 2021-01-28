@@ -1,104 +1,28 @@
-import React, { FunctionComponent, useCallback } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   SafeAreaView,
   View,
   StyleSheet,
   TouchableOpacity,
-  Platform,
-  Alert,
 } from "react-native"
+import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
-import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
-import {
-  ENPermissionStatus,
-  usePermissionsContext,
-} from "../Device/PermissionsContext"
-import { openAppSettings } from "../Device"
-import { useApplicationName } from "../Device/useApplicationInfo"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { nextScreenFromExposureNotifications } from "./activationStackController"
 import { Text } from "../components"
+import { useActivationNavigation } from "./useActivationNavigation"
+import { useRequestExposureNotifications } from "../useRequestExposureNotifications"
 
-import { Spacing, Typography, Buttons, Colors } from "../styles"
+import { Icons } from "../assets"
+import { Spacing, Typography, Buttons, Colors, Iconography } from "../styles"
 
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
-  const navigation = useNavigation()
-  const {
-    locationPermissions,
-    isBluetoothOn,
-    exposureNotifications,
-  } = usePermissionsContext()
-  const { applicationName } = useApplicationName()
-  const { trackEvent } = useProductAnalyticsContext()
+  const { exposureNotifications } = usePermissionsContext()
 
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-
-  const navigateToNextScreen = useCallback(() => {
-    navigation.navigate(
-      nextScreenFromExposureNotifications({
-        isLocationRequiredAndOff,
-        isBluetoothOn,
-      }),
-    )
-  }, [isBluetoothOn, isLocationRequiredAndOff, navigation])
-
-  useFocusEffect(
-    useCallback(() => {
-      if (exposureNotifications.status === ENPermissionStatus.ENABLED) {
-        navigateToNextScreen()
-      }
-    }, [exposureNotifications.status, navigateToNextScreen]),
-  )
-
-  const showNotAuthorizedAlert = () => {
-    const errorMessage = Platform.select({
-      ios: t("home.proximity_tracing.unauthorized_error_message_ios", {
-        applicationName,
-      }),
-      android: t("home.proximity_tracing.unauthorized_error_message_android", {
-        applicationName,
-      }),
-    })
-
-    Alert.alert(
-      t("home.proximity_tracing.unauthorized_error_title"),
-      errorMessage,
-      [
-        {
-          text: t("common.back"),
-          style: "cancel",
-        },
-        {
-          text: t("common.settings"),
-          onPress: () => openAppSettings(),
-        },
-      ],
-    )
-  }
-
-  const handleOnPressEnable = async () => {
-    try {
-      const response = await exposureNotifications.request()
-      if (response.kind === "success") {
-        if (response.status !== ENPermissionStatus.ENABLED) {
-          showNotAuthorizedAlert()
-        }
-      } else {
-        showNotAuthorizedAlert()
-      }
-      trackEvent("product_analytics", "onboarding_en_permissions_accept")
-    } catch (e) {
-      showNotAuthorizedAlert()
-    }
-  }
-
-  const handleOnPressDontEnable = () => {
-    trackEvent("product_analytics", "onboarding_en_permissions_denied")
-    navigateToNextScreen()
-  }
+  const isENActive = exposureNotifications.status === "Active"
 
   return (
     <SafeAreaView style={style.safeArea}>
@@ -127,21 +51,77 @@ const ActivateExposureNotifications: FunctionComponent = () => {
             {t("onboarding.proximity_tracing_subheader3")}
           </Text>
         </View>
-        <TouchableOpacity onPress={handleOnPressEnable} style={style.button}>
-          <Text style={style.buttonText}>
-            {t("onboarding.proximity_tracing_button")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleOnPressDontEnable}
-          style={style.secondaryButton}
-        >
-          <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
-        </TouchableOpacity>
+        {!isENActive ? <EnableENButtons /> : <ENAlreadyEnabledButtons />}
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+const EnableENButtons: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const { trackEvent } = useProductAnalyticsContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
+  const requestExposureNotifications = useRequestExposureNotifications()
+
+  const handleOnPressDontEnable = () => {
+    trackEvent("product_analytics", "onboarding_en_permissions_denied")
+    goToNextScreenFrom("ActivateExposureNotifications")
+  }
+
+  const handleOnPressEnable = () => {
+    trackEvent("product_analytics", "onboarding_en_permissions_accept")
+    requestExposureNotifications()
+  }
+
+  return (
+    <View>
+      <TouchableOpacity onPress={handleOnPressEnable} style={style.button}>
+        <Text style={style.buttonText}>
+          {t("onboarding.proximity_tracing_button")}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={handleOnPressDontEnable}
+        style={style.secondaryButton}
+      >
+        <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
+const ENAlreadyEnabledButtons: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const { goToNextScreenFrom } = useActivationNavigation()
+
+  const handleOnPressContinue = () => {
+    goToNextScreenFrom("ActivateExposureNotifications")
+  }
+
+  return (
+    <View style={style.alreadyActiveContainer}>
+      <View style={style.alreadyActiveInfoContainer}>
+        <View style={style.alreadyActiveIconContainer}>
+          <SvgXml
+            xml={Icons.CheckInCircle}
+            fill={Colors.accent.success100}
+            width={Iconography.xSmall}
+            height={Iconography.xSmall}
+          />
+        </View>
+        <View style={style.alreadyActiveTextContainer}>
+          <Text style={style.alreadyActiveText}>
+            {t("onboarding.proximity_tracing_already_active")}
+          </Text>
+        </View>
+      </View>
+      <TouchableOpacity onPress={handleOnPressContinue} style={style.button}>
+        <Text style={style.buttonText}>{t("common.continue")}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
 const style = StyleSheet.create({
   safeArea: {
     backgroundColor: Colors.background.primaryLight,
@@ -180,6 +160,25 @@ const style = StyleSheet.create({
   },
   secondaryButtonText: {
     ...Typography.button.secondary,
+  },
+  alreadyActiveContainer: {
+    borderTopWidth: 1,
+    borderTopColor: Colors.neutral.shade50,
+  },
+  alreadyActiveInfoContainer: {
+    flexDirection: "row",
+    paddingVertical: Spacing.large,
+  },
+  alreadyActiveIconContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  alreadyActiveTextContainer: {
+    flex: 8,
+    justifyContent: "center",
+  },
+  alreadyActiveText: {
+    ...Typography.body.x30,
   },
 })
 

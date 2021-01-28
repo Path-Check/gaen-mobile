@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="background_worker_notification_title">Memeriksa eksposur…</string>
+  <string name="exposure_notification_channel_description">Sinyal pemberitahuan eksposur.</string>
+  <string name="exposure_notification_channel_name">Pemberitahuan Eksposur</string>
+  <string name="exposure_notification_message">Seseorang yang dekat dengan Anda dinyatakan positif COVID-19. Klik untuk info lebih lanjut.</string>
+  <string name="exposure_notification_title">Kemungkinan terekspos COVID-19</string>
+</resources>

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import {
   Image,
+  Linking,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -29,6 +30,12 @@ const SelfAssessmentIntro: FunctionComponent = () => {
     navigation.navigate(SelfAssessmentStackScreens.HowAreYouFeeling)
   }
 
+  const handleOnPressCDCLink = () => {
+    const cdcSelfCheckerURL =
+      "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/coronavirus-self-checker.html"
+    Linking.openURL(cdcSelfCheckerURL)
+  }
+
   return (
     <ScrollView
       style={style.container}
@@ -44,16 +51,25 @@ const SelfAssessmentIntro: FunctionComponent = () => {
       </Text>
       <View style={style.bulletListContainer}>
         <Text style={style.bulletText}>
-          {t("self_assessment.intro.this_is_not_intended")}
+          • {t("self_assessment.intro.this_is_not_intended")}
         </Text>
         <Text style={style.bulletText}>
+          •{" "}
           {t("self_assessment.intro.you_are_a_resident", {
             healthAuthorityName,
           })}
         </Text>
         <Text style={style.bulletText}>
-          {t("self_assessment.intro.this_is_based_on")}
+          • {t("self_assessment.intro.this_is_based_on")}
         </Text>
+        <TouchableOpacity
+          onPress={handleOnPressCDCLink}
+          accessibilityRole="link"
+        >
+          <Text style={{ ...style.bulletText, ...style.linkText }}>
+            • {t("self_assessment.intro.learn_more")}
+          </Text>
+        </TouchableOpacity>
         <Text style={{ ...style.bulletText, ...style.emergencyText }}>
           {t("self_assessment.intro.if_this_is", { emergencyPhoneNumber })}
         </Text>
@@ -105,11 +121,16 @@ const style = StyleSheet.create({
   },
   bulletText: {
     ...Typography.body.x20,
-    marginBottom: Spacing.medium,
+    marginBottom: Spacing.xxSmall,
+  },
+  linkText: {
+    color: Colors.text.anchorLink,
+    textDecorationLine: "underline",
   },
   emergencyText: {
     ...Typography.utility.error,
     ...Typography.style.medium,
+    marginTop: Spacing.small,
   },
   button: {
     ...Buttons.primary.base,

@@ -12,6 +12,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient;
+import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import javax.annotation.Nonnull;
@@ -20,7 +21,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+import org.pathcheck.covidsafepaths.helpers.BluetoothHelper;
+import org.pathcheck.covidsafepaths.helpers.LocationHelper;
 
 @SuppressWarnings("unused")
 @ReactModule(name = MODULE_NAME)
@@ -51,11 +53,22 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
     FutureCallback<Void> callback = new FutureCallback<Void>() {
       @Override
       public void onSuccess(Void result) {
-        promise.resolve((Util.getEnStatusWritableArray(true)));
+        promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
       }
 
       @Override
       public void onFailure(@NotNull Throwable exception) {
+        if (!client.deviceSupportsLocationlessScanning() && !LocationHelper.Companion.isLocationEnabled(reactContext)) {
+          promise.resolve(CallbackMessages.EN_ERROR_LOCATION_OFF);
+          return;
+        }
+
+        if (exception instanceof ApiException) {
+          ApiException apiException = (ApiException) exception;
+          promise.resolve(transformApiExceptionToJSString(apiException));
+          return;
+        }
+
         promise.reject(exception);
       }
     };
@@ -66,11 +79,56 @@ public class ExposureNotificationsModule extends ReactContextBaseJavaModule {
         AppExecutors.getLightweightExecutor());
   }
 
+  private String transformApiExceptionToJSString(ApiException exception) {
+    switch (exception.getStatusCode()) {
+      case ExposureNotificationStatusCodes.FAILED_ALREADY_STARTED:
+        return CallbackMessages.EN_ERROR_ALREADY_STARTED;
+      case ExposureNotificationStatusCodes.FAILED_BLUETOOTH_DISABLED:
+        return CallbackMessages.EN_ERROR_BLUETOOTH_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_DISK_IO:
+        return CallbackMessages.EN_ERROR_FAILED_DISK_IO;
+      case ExposureNotificationStatusCodes.FAILED_NOT_SUPPORTED:
+        return CallbackMessages.EN_ERROR_NOT_SUPPORTED;
+      case ExposureNotificationStatusCodes.FAILED_RATE_LIMITED:
+        return CallbackMessages.EN_ERROR_RATE_LIMITED;
+      case ExposureNotificationStatusCodes.FAILED_REJECTED_OPT_IN:
+        return CallbackMessages.EN_ERROR_REJECTED_OPT_IN;
+      case ExposureNotificationStatusCodes.FAILED_SERVICE_DISABLED:
+        return CallbackMessages.EN_ERROR_SERVICE_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_TEMPORARILY_DISABLED:
+        return CallbackMessages.EN_ERROR_TEMPORARILY_DISABLED;
+      case ExposureNotificationStatusCodes.FAILED_UNAUTHORIZED:
+        return CallbackMessages.EN_ERROR_UNAUTHORIZED;
+    }
+
+    return CallbackMessages.EN_ERROR_UNKNOWN;
+  }
+
   @ReactMethod
   public void getCurrentENPermissionsStatus(final Promise promise) {
-    ExposureNotificationClientWrapper.get(getReactApplicationContext())
+    ExposureNotificationClientWrapper client = ExposureNotificationClientWrapper.get(getReactApplicationContext());
+    client
         .isEnabled()
-        .addOnSuccessListener(enabled -> promise.resolve(Util.getEnStatusWritableArray(enabled)))
+        .addOnSuccessListener(enabled -> {
+          if (!client.deviceSupportsLocationlessScanning()
+              && !LocationHelper.Companion.isLocationEnabled(getReactApplicationContext())) {
+            promise.resolve(CallbackMessages.EN_STATUS_LOCATION_OFF);
+            return;
+          }
+
+          if (!BluetoothHelper.Companion.isBluetoothEnabled()) {
+            promise.resolve(CallbackMessages.EN_STATUS_BLUETOOTH_OFF);
+            return;
+          }
+
+          if (!enabled) {
+            promise.resolve(CallbackMessages.EN_STATUS_DISABLED);
+            return;
+          }
+
+
+          promise.resolve(CallbackMessages.EN_STATUS_ACTIVE);
+        })
         .addOnFailureListener(
             exception -> {
               if (!(exception instanceof ApiException)) {

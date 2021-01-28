@@ -25,7 +25,8 @@ extension XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: XCTestCase.startOfDay.posixRepresentation))
+                                          date: XCTestCase.startOfDay.posixRepresentation,
+                                          weightedDurationSum: 2000))
       return userState
     }
     return btSecureStorageMock
@@ -123,7 +124,7 @@ extension XCTestCase {
     
     let enExposureSummaryItemMock = MockENExposureSummaryItem()
     enExposureSummaryItemMock.weightedDurationSumHandler = {
-      return forceRiskScore == .aboveThreshold ? 20 : 0
+      return forceRiskScore == .aboveThreshold ? 1200 : 0 // 20 minutes : 0 minutes
     }
     
     let enExposureDaySummaryMock = MockENExposureDaySummary()
@@ -151,7 +152,7 @@ extension XCTestCase {
                    forceKeyUnpackingError: Bool,
                    forceDownloadConfigurationError: Bool) -> APIClientMock {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       guard !forceKeyUnpackingError else {
@@ -162,9 +163,9 @@ extension XCTestCase {
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
-        return forceDownloadKeyError ? .failure(GenericError.unknown) : Result<DownloadedPackage>.success(mockDownloadedPackage)
+        return forceDownloadKeyError ? .failure(GenericError.unknown) : GenericResult<DownloadedPackage>.success(mockDownloadedPackage)
       default:
-        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : Result<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder)
+        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : GenericResult<ExposureConfigurationV1>.success(ExposureConfigurationV1.placeholder)
       }
     }
     return apiClientMock
@@ -175,7 +176,7 @@ extension XCTestCase {
                    forceKeyUnpackingError: Bool,
                    forceDownloadConfigurationError: Bool) -> APIClientMock {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     let mockDownloadedPackage = MockDownloadedPackage { () -> URL in
       guard !forceKeyUnpackingError else {
@@ -187,9 +188,9 @@ extension XCTestCase {
     apiClientMock.downloadRequestHander = { (request, requestType) in
       switch requestType {
       case .downloadKeys:
-        return forceDownloadKeyError ? .failure(GenericError.unknown) : Result<DownloadedPackage>.success(mockDownloadedPackage)
+        return forceDownloadKeyError ? .failure(GenericError.unknown) : GenericResult<DownloadedPackage>.success(mockDownloadedPackage)
       default:
-        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : Result<DailySummariesConfiguration>.success(DailySummariesConfiguration.placeholder)
+        return forceDownloadConfigurationError ? .failure(GenericError.unknown) : GenericResult<DailySummariesConfiguration>.success(DailySummariesConfiguration.placeholder)
       }
     }
     return apiClientMock

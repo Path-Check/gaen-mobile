@@ -14,7 +14,6 @@ module.exports = {
     "react",
     "react-hooks",
     "react-native",
-    "detox",
   ],
   settings: {
     "import/parsers": {
@@ -39,7 +38,6 @@ module.exports = {
     "react-native/react-native": true,
     commonjs: true,
     es6: true,
-    "detox/detox": true,
     node: true,
     jest: true,
     "jest/globals": true,
@@ -54,6 +52,7 @@ module.exports = {
     "no-dupe-keys": 2, // Disallow Duplicate Keys
     "no-empty": 2, // Disallow Empty Block Statements
     "no-extra-boolean-cast": 2, // Disallow Extra Boolean Casts
+    "no-extra-semi": 0,
     "no-prototype-builtins": 2, // Disallow use of Object.prototypes builtins directly
     "no-undef": 2, // Disallow Undeclared Variables
     "no-underscore-dangle": 2, // Disallow dangling underscores in identifiers
@@ -84,6 +83,7 @@ module.exports = {
     "react/prefer-stateless-function": 2, // Use functional components vs classes
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-empty-function": [2, { allow: ["arrowFunctions"] }],
+    "@typescript-eslint/no-extra-semi": 0,
     "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],
     "@typescript-eslint/explicit-module-boundary-types": 0,
   },

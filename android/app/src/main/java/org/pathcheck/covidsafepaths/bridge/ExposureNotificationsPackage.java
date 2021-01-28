@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DebugMenuModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.DeviceInfoModule;
+import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.EscrowVerificationKeySubmissionModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureHistoryModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureKeyModule;
 import org.pathcheck.covidsafepaths.exposurenotifications.reactmodules.ExposureNotificationsModule;
@@ -28,6 +29,7 @@ public class ExposureNotificationsPackage implements ReactPackage {
     modules.add(new ExposureHistoryModule(reactContext));
     modules.add(new UtilsModule(reactContext));
     modules.add(new SymptomLogEntryModule(reactContext));
+    modules.add(new EscrowVerificationKeySubmissionModule(reactContext));
 
     return modules;
   }

@@ -39,11 +39,6 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
     let jsonData = try! JSONSerialization.data(withJSONObject: dict)
     let config = DailySummariesConfiguration.create(from: jsonData)!
     let dictConfig = dict["DailySummariesConfig"] as! [String: Any]
-    let dictDaysSinceOnsetToInfectiousness: [NSNumber: NSNumber] = (dictConfig["daysSinceOnsetToInfectiousness"] as! [[NSNumber]]).reduce([NSNumber(value: ENDaysSinceOnsetOfSymptomsUnknown): 1], {(result, next) in
-      var copy = result
-      copy[next[0]] = next[1]
-      return copy
-    })
 
     XCTAssertEqual(config.triggerThresholdWeightedDuration, dict["triggerThresholdWeightedDuration"] as! Int)
     XCTAssertEqual(config.attenuationDurationThresholds, dictConfig["attenuationDurationThresholds"] as! [NSNumber])
@@ -52,7 +47,6 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
     XCTAssertEqual(config.reportTypeWhenMissing, dictConfig["reportTypeWhenMissing"] as! Int)
     XCTAssertEqual(config.infectiousnessWeights, dictConfig["infectiousnessWeights"] as! [Double])
     XCTAssertEqual(config.infectiousnessWhenDaysSinceOnsetMissing, dictConfig["infectiousnessWhenDaysSinceOnsetMissing"] as! Int)
-    XCTAssertEqual(config.daysSinceOnsetToInfectiousness, dictDaysSinceOnsetToInfectiousness)
   }
 
   // When dailySummary weightedDurationSum is below the exposure configuration's triggerThresholdWeightedDuration
@@ -82,7 +76,7 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
       return daySummaryItem
     }
     daySummaryItem.weightedDurationSumHandler = {
-      return TimeInterval(config.triggerThresholdWeightedDuration)
+      return TimeInterval(config.triggerThresholdWeightedDuration * 60) // 15 minutes
     }
     let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
 
@@ -99,7 +93,7 @@ class DailySummariesConfigurationUnitTests: XCTestCase {
       return daySummaryItem
     }
     daySummaryItem.weightedDurationSumHandler = {
-      return TimeInterval(config.triggerThresholdWeightedDuration + 1)
+      return TimeInterval(config.triggerThresholdWeightedDuration * 60) + 1 // 15:01
     }
     let isAboveThreshold = daySummary.isAboveScoreThreshold(with: config)
 

@@ -57,6 +57,8 @@ type RegionCode = string
 
 const DEFAULT_PADDING = ""
 
+type Posix = number
+
 type PostDiagnosisKeysRequestData = {
   temporaryExposureKeys: ExposureKey[]
   regions: RegionCode[]
@@ -65,6 +67,7 @@ type PostDiagnosisKeysRequestData = {
   padding: string
   appPackageName: string
   revisionToken: string
+  symptomOnsetInterval?: Posix
 }
 
 class PostDiagnosisKeysRequest {
@@ -75,7 +78,7 @@ class PostDiagnosisKeysRequest {
   private static RETRY_STATUS_CODES = [429, 503]
   private static INTERNAL_ERROR = "internal_error"
   private static EMPTY_EXPOSURE_KEYS =
-    "unable to validate diagnosis verification: calculating expect HMAC: cannont calculate hmac on empty exposure keys"
+    "unable to validate diagnosis verification: calculating expected HMAC: cannot calculate hmac on empty exposure keys"
   private static EXISTING_KEYS_SENT_RESPONSE =
     "no revision token, but sent existing keys"
   private static TIMEOUT = 5000
@@ -163,6 +166,7 @@ class PostDiagnosisKeysRequest {
         }
       }
       default: {
+        Logger.error("Unhandled Post DiagnosisKeys Error", { error })
         return {
           kind: "failure" as const,
           nature: PostKeysError.Unknown,
@@ -200,8 +204,15 @@ export const postDiagnosisKeys = async (
   hmacKey: string,
   appPackageName: string,
   revisionToken: string,
+  symptomOnsetDate: Posix | null,
 ): Promise<PostKeysResponse | PostKeysFailure> => {
-  return await PostDiagnosisKeysRequest.perform({
+  const toInterval = (posix: Posix): number => {
+    const minutesSinceEpoch = posix / 60000
+    const interval = Math.floor(minutesSinceEpoch / 10)
+    return interval
+  }
+
+  const baseData = {
     temporaryExposureKeys: exposureKeys,
     regions: regionCodes,
     appPackageName,
@@ -209,5 +220,14 @@ export const postDiagnosisKeys = async (
     hmackey: hmacKey,
     padding: DEFAULT_PADDING,
     revisionToken,
-  })
+  }
+
+  const data = symptomOnsetDate
+    ? {
+        ...baseData,
+        symptomOnsetInterval: toInterval(symptomOnsetDate),
+      }
+    : baseData
+
+  return await PostDiagnosisKeysRequest.perform(data)
 }

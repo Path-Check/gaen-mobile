@@ -4,16 +4,17 @@ import { useTranslation } from "react-i18next"
 
 import { Text, StatusBar } from "../../components"
 import { useStatusBarEffect } from "../../navigation"
-import { openAppSettings } from "../../Device"
+import { useRequestExposureNotifications } from "../../useRequestExposureNotifications"
 
 import { Spacing, Colors, Typography, Buttons } from "../../styles"
 
 const EnableExposureNotifications: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
+  const requestExposureNotifications = useRequestExposureNotifications()
 
-  const handleOnPressOpenSettings = () => {
-    openAppSettings()
+  const handleOnPressEnableExposureNotifications = () => {
+    requestExposureNotifications()
   }
 
   return (
@@ -34,10 +35,12 @@ const EnableExposureNotifications: FunctionComponent = () => {
         </View>
         <TouchableOpacity
           style={style.button}
-          onPress={handleOnPressOpenSettings}
-          accessibilityLabel={t("common.settings")}
+          onPress={handleOnPressEnableExposureNotifications}
+          accessibilityLabel={t("export.enable_exposure_notifications_button")}
         >
-          <Text style={style.buttonText}>{t("common.settings")}</Text>
+          <Text style={style.buttonText}>
+            {t("export.enable_exposure_notifications_button")}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </>

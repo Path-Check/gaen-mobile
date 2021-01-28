@@ -25,13 +25,25 @@ import {
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 import Logger from "../../logger"
+import { useConfigurationContext } from "../../ConfigurationContext"
 
-import { Spacing, Forms, Colors, Typography, Buttons } from "../../styles"
+import {
+  Spacing,
+  Forms,
+  Colors,
+  Typography,
+  Buttons,
+  Iconography,
+} from "../../styles"
 import { Icons } from "../../assets"
 
 const defaultErrorMessage = ""
 
-const CodeInputForm: FunctionComponent = () => {
+interface CodeInputFormProps {
+  linkCode: string | undefined
+}
+
+const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -41,22 +53,16 @@ const CodeInputForm: FunctionComponent = () => {
     setExposureSubmissionCredentials,
     setExposureKeys,
   } = useAffectedUserContext()
+  const { includeSymptomOnsetDate } = useConfigurationContext()
 
-  const [code, setCode] = useState("")
+  const [code, setCode] = useState(linkCode || "")
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  const codeLengthMin = 6
-  const codeLengthMax = 16
-  const codeIsInvalidLength =
-    code.length < codeLengthMin || code.length > codeLengthMax
-  const codeContainsNonAlphanumericChars = (code: string) =>
-    !code.match(/^[a-zA-Z0-9]*$/)
-
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
-    if (newCode && codeContainsNonAlphanumericChars(newCode)) {
+    if (newCode && !codeContainsOnlyAlphanumericChars(newCode)) {
       setErrorMessage(t("export.error.invalid_format"))
     } else {
       setErrorMessage("")
@@ -66,6 +72,14 @@ const CodeInputForm: FunctionComponent = () => {
   const handleOnToggleFocus = () => {
     setIsFocused(!isFocused)
   }
+
+  const handleOnPressSecondaryButton = () => {
+    navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
+  }
+
+  const nextScreen = includeSymptomOnsetDate
+    ? AffectedUserFlowStackScreens.SymptomOnsetDate
+    : AffectedUserFlowStackScreens.AffectedUserPublishConsent
 
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
@@ -93,9 +107,7 @@ const CodeInputForm: FunctionComponent = () => {
           setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
-          navigation.navigate(
-            AffectedUserFlowStackScreens.AffectedUserPublishConsent,
-          )
+          navigation.navigate(nextScreen)
         } else {
           const errorMessage = showCertificateError(certResponse.error)
           Logger.error(
@@ -103,38 +115,60 @@ const CodeInputForm: FunctionComponent = () => {
           )
           setErrorMessage(errorMessage)
         }
-      } else {
-        const errorMessage = showError(response.error)
-        if (response.message) {
-          Logger.error(
-            `FailedCodeValidation${errorMessage}, ${response.message}`,
-          )
-        }
-        setErrorMessage(errorMessage)
+      } else if (response.kind === "failure") {
+        showError(response.error)
       }
       setIsLoading(false)
     } catch (e) {
-      Alert.alert(t("common.something_went_wrong"), e.message)
+      Alert.alert(t("errors.something_went_wrong"), e.message)
       setIsLoading(false)
     }
   }
 
-  const showError = (error: API.CodeVerificationError): string => {
+  const showError = (error: API.CodeVerificationError): void => {
     switch (error) {
-      case "InvalidCode": {
-        return t("export.error.invalid_code")
-      }
-      case "VerificationCodeUsed": {
-        return t("export.error.verification_code_used")
-      }
-      case "NetworkConnection": {
-        return t("export.error.network_connection_error")
-      }
-      case "Timeout": {
-        return t("export.error.timeout_error")
-      }
+      case "InvalidCode":
+        {
+          Alert.alert(
+            t("verification_code_alerts.invalid_code_title"),
+            t("verification_code_alerts.invalid_code_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "VerificationCodeUsed":
+        {
+          Alert.alert(
+            t("verification_code_alerts.code_used_title"),
+            t("verification_code_alerts.code_used_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "NetworkConnection":
+        {
+          Alert.alert(
+            t("verification_code_alerts.network_connection_title"),
+            t("verification_code_alerts.network_connection_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
+      case "Timeout":
+        {
+          Alert.alert(
+            t("verification_code_alerts.invalid_code_title"),
+            t("verification_code_alerts.invalid_code_body"),
+            [{ text: t("common.okay") }],
+          )
+        }
+        break
       default: {
-        return t("export.error.unknown_code_verification_error")
+        Alert.alert(
+          t("verification_code_alerts.unknown_title"),
+          t("verification_code_alerts.unknown_body"),
+          [{ text: t("common.okay") }],
+        )
       }
     }
   }
@@ -153,20 +187,35 @@ const CodeInputForm: FunctionComponent = () => {
     }
   }
 
-  const isDisabled =
-    codeIsInvalidLength || codeContainsNonAlphanumericChars(code)
+  const codeLengthMin = 6
+  const codeLengthMax = 16
+  const codeContainsOnlyAlphanumericChars = (code: string) => {
+    const alphanumericRegex = /^[a-zA-Z0-9]*$/
+    return Boolean(code.match(alphanumericRegex))
+  }
+
+  const codeIsValid = (code: string): boolean => {
+    return (
+      code.length >= codeLengthMin &&
+      code.length <= codeLengthMax &&
+      codeContainsOnlyAlphanumericChars(code)
+    )
+  }
+
+  const isDisabled = !codeIsValid(code)
+  const isEditable = !linkCode
 
   const codeInputFocusedStyle = isFocused && { ...style.codeInputFocused }
   const codeInputStyle = { ...style.codeInput, ...codeInputFocusedStyle }
 
-  const isIOS = Platform.OS === "ios"
-
-  const shouldBeAccessible = errorMessage !== ""
+  const keyboardBehavior = Platform.OS === "ios" ? "position" : "height"
+  const errorMessageShouldBeAccessible = errorMessage !== ""
 
   return (
     <KeyboardAvoidingView
       contentContainerStyle={style.outerContentContainer}
-      behavior={isIOS ? "position" : "height"}
+      behavior={keyboardBehavior}
+      keyboardVerticalOffset={-140}
     >
       <ScrollView
         contentContainerStyle={style.contentContainer}
@@ -175,17 +224,14 @@ const CodeInputForm: FunctionComponent = () => {
       >
         <View style={style.headerContainer}>
           <Text style={style.header}>
-            {t("export.code_input_title_bluetooth")}
-          </Text>
-
-          <Text style={style.subheader}>
-            {t("export.code_input_body_bluetooth")}
+            {t("export.enter_verification_code")}
           </Text>
         </View>
         <TextInput
+          editable={isEditable}
           testID="code-input"
           value={code}
-          placeholder={t("export.code_input_placeholder").toUpperCase()}
+          placeholder={t("export.code").toUpperCase()}
           placeholderTextColor={Colors.text.placeholder}
           maxLength={codeLengthMax}
           style={codeInputStyle}
@@ -197,8 +243,8 @@ const CodeInputForm: FunctionComponent = () => {
           blurOnSubmit={false}
         />
         <View
-          accessibilityElementsHidden={!shouldBeAccessible}
-          accessible={shouldBeAccessible}
+          accessibilityElementsHidden={!errorMessageShouldBeAccessible}
+          accessible={errorMessageShouldBeAccessible}
         >
           <Text style={style.errorSubtitle}>{errorMessage}</Text>
         </View>
@@ -217,6 +263,23 @@ const CodeInputForm: FunctionComponent = () => {
             xml={Icons.Arrow}
             fill={isDisabled ? Colors.text.primary : Colors.neutral.white}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.secondaryButton}
+          onPress={handleOnPressSecondaryButton}
+          accessibilityLabel={t("export.intro.what_is_a")}
+        >
+          <View style={style.secondaryButtonIconContainer}>
+            <SvgXml
+              xml={Icons.QuestionMark}
+              fill={Colors.primary.shade125}
+              width={Iconography.xxxSmall}
+              height={Iconography.xxxSmall}
+            />
+          </View>
+          <Text style={style.secondaryButtonText}>
+            {t("export.intro.what_is_a")}
+          </Text>
         </TouchableOpacity>
       </ScrollView>
       {isLoading && <LoadingIndicator />}
@@ -237,14 +300,10 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   headerContainer: {
-    marginBottom: Spacing.xxLarge,
+    marginBottom: Spacing.medium,
   },
   header: {
     ...Typography.header.x60,
-    marginBottom: Spacing.xxSmall,
-  },
-  subheader: {
-    ...Typography.body.x30,
   },
   errorSubtitle: {
     ...Typography.utility.error,
@@ -267,9 +326,11 @@ const style = StyleSheet.create({
   },
   button: {
     ...Buttons.primary.base,
+    marginBottom: Spacing.small,
   },
   buttonDisabled: {
     ...Buttons.primary.disabled,
+    marginBottom: Spacing.small,
   },
   buttonText: {
     ...Typography.button.primary,
@@ -278,6 +339,15 @@ const style = StyleSheet.create({
   buttonDisabledText: {
     ...Typography.button.primaryDisabled,
     marginRight: Spacing.small,
+  },
+  secondaryButton: {
+    ...Buttons.secondary.leftIcon,
+  },
+  secondaryButtonIconContainer: {
+    ...Buttons.circle.base,
+  },
+  secondaryButtonText: {
+    ...Typography.button.secondaryLeftIcon,
   },
 })
 

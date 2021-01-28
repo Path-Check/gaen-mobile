@@ -17,7 +17,6 @@ import {
   useStatusBarEffect,
   AffectedUserFlowStackScreens,
   ModalStackScreens,
-  HomeStackScreens,
 } from "../../navigation"
 import { useExposureContext } from "../../ExposureContext"
 import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
@@ -32,6 +31,8 @@ import {
   PostKeysNoOpReason,
 } from "../exposureNotificationAPI"
 
+type Posix = number
+
 interface PublishConsentFormProps {
   hmacKey: string
   certificate: string
@@ -40,6 +41,8 @@ interface PublishConsentFormProps {
   storeRevisionToken: (revisionToken: string) => Promise<void>
   appPackageName: string
   regionCodes: string[]
+  navigateOutOfStack: () => void
+  symptomOnsetDate: Posix | null
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
@@ -50,15 +53,19 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   storeRevisionToken,
   appPackageName,
   regionCodes,
+  navigateOutOfStack,
+  symptomOnsetDate,
 }) => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const navigation = useNavigation()
   const { t } = useTranslation()
   const { trackEvent } = useProductAnalyticsContext()
   const { getCurrentExposures } = useExposureContext()
-  const [isLoading, setIsLoading] = useState(false)
+
   const insets = useSafeAreaInsets()
   const style = createStyle(insets)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleNoOpResponse = (noOpResponse: PostKeysNoOp) => {
     const newKeysInserted = noOpResponse.newKeysInserted
@@ -131,7 +138,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         return t("export.publish_keys.errors.unknown")
       }
       case PostKeysError.RequestFailed: {
-        return t("common.something_went_wrong")
+        return t("errors.something_went_wrong")
       }
     }
   }
@@ -159,6 +166,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       hmacKey,
       appPackageName,
       revisionToken,
+      symptomOnsetDate,
     )
     setIsLoading(false)
     if (response.kind === "success") {
@@ -180,7 +188,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
         { text: t("common.cancel"), style: "cancel" },
         {
           text: t("common.confirm"),
-          onPress: () => navigation.navigate(HomeStackScreens.Home),
+          onPress: navigateOutOfStack,
           style: "destructive",
         },
       ],
@@ -292,6 +300,7 @@ const createStyle = (insets: EdgeInsets) => {
       alignItems: "center",
       justifyContent: "center",
       paddingTop: Spacing.small,
+      paddingHorizontal: Spacing.medium,
       paddingBottom: insets.bottom + Spacing.small,
     },
     bottomButtonText: {

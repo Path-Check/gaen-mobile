@@ -35,7 +35,8 @@ extension ExposureManager: ExposureManagerDebuggable {
       resolve(String.genericSuccess)
     case .simulateExposure:
       let exposure = Exposure(id: UUID().uuidString,
-                              date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000)
+                              date: Date().posixRepresentation - Int(TimeInterval.random(in: 0...13)) * 24 * 60 * 60 * 1000,
+                              weightedDurationSum: 2000.0)
       btSecureStorage.storeExposures([exposure])
       notifyUserExposureDetected()
       resolve("Exposures: \(btSecureStorage.userState.exposures)")

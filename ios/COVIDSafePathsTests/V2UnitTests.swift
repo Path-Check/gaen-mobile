@@ -35,7 +35,8 @@ class V2UnitTests: XCTestCase {
 
     let userState = UserState()
     userState.exposures.append(Exposure(id: "3",
-                                        date: XCTestCase.halloween.posixRepresentation))
+                                        date: XCTestCase.halloween.posixRepresentation,
+                                        weightedDurationSum: 2000))
 
     let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
 
@@ -57,7 +58,8 @@ class V2UnitTests: XCTestCase {
     let storeExposureExpectation = self.expectation(description: "The exposure is stored")
     let userState = UserState()
     userState.exposures.append(Exposure(id: "3",
-                                        date: Date().posixRepresentation))
+                                        date: Date().posixRepresentation,
+                                        weightedDurationSum: 2000))
 
     let exposureManager = defaultExposureManager(enAPIVersion: .v2, userState: userState)
     (exposureManager.btSecureStorage as! BTSecureStorageMock).storeExposuresHandler = { exposures in
@@ -113,10 +115,10 @@ class V2UnitTests: XCTestCase {
   // the fallback exposure configuration is used
   func testGetExposureConfigurationV2FallbackToDefault() {
     let apiClientMock = APIClientMock { (request, requestType) -> (AnyObject) in
-      return Result<String>.success("indexFilePath") as AnyObject
+      return GenericResult<String>.success("indexFilePath") as AnyObject
     }
     apiClientMock.downloadRequestHander = { (request, requestType) in
-      return Result<DailySummariesConfiguration>.failure(GenericError.unknown)
+      return GenericResult<DailySummariesConfiguration>.failure(GenericError.unknown)
     }
     let exposureManager = defaultExposureManager(enAPIVersion: .v2,
                                                  forceDownloadConfigurationError: true)

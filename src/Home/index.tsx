@@ -5,13 +5,18 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Pressable,
+  Linking,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import { SvgXml } from "react-native-svg"
 
 import {
   HomeStackScreens,
   ModalStackScreens,
+  AffectedUserFlowStackScreens,
+  EscrowVerificationRoutes,
   useStatusBarEffect,
 } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -21,10 +26,21 @@ import CovidDataCard from "../CovidData/Card"
 import ExposureDetectionStatusCard from "./ExposureDetectionStatus/Card"
 import SectionButton from "./SectionButton"
 import ShareLink from "./ShareLink"
+import HealthCheckLink from "./HealthCheckLink"
+import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 
-import { Images } from "../assets"
-import { Outlines, Spacing, Colors, Typography, Affordances } from "../styles"
+import { Icons, Images } from "../assets"
+import {
+  Outlines,
+  Spacing,
+  Colors,
+  Typography,
+  Affordances,
+  Iconography,
+  Buttons,
+} from "../styles"
 
 const IMAGE_HEIGHT = 170
 
@@ -32,12 +48,15 @@ const Home: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const {
-    displayCallbackForm,
+    appDownloadUrl,
     displayCallEmergencyServices,
     displayCovidData,
+    displayCovidDataWebView,
     displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
+    healthAuthorityHealthCheckUrl,
+    verificationStrategy,
   } = useConfigurationContext()
 
   return (
@@ -48,11 +67,19 @@ const Home: FunctionComponent = () => {
         contentContainerStyle={style.contentContainer}
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
+        <NotificationsOff />
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
-        {displayCallbackForm && <TalkToContactTracer />}
-        <ReportTestResult />
-        <ShareLink />
+        {verificationStrategy === "Simple" ? (
+          <SimpleVerificationFlowButton />
+        ) : (
+          <EscrowVerificationFlowButton />
+        )}
+        {healthAuthorityHealthCheckUrl && (
+          <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
+        )}
+        {displayCovidDataWebView && <CovidDataWebViewLink />}
+        {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
         {displayCallEmergencyServices && (
@@ -65,59 +92,146 @@ const Home: FunctionComponent = () => {
   )
 }
 
-const TalkToContactTracer: FunctionComponent = () => {
-  const navigation = useNavigation()
+const NotificationsOff = () => {
   const { t } = useTranslation()
+  const { notification } = usePermissionsContext()
 
-  const handleOnPressTalkToContactTracer = () => {
-    navigation.navigate(ModalStackScreens.CallbackStack)
+  const handleOnPressNotificationsOff = () => {
+    if (notification.status === "Denied") {
+      notification.request()
+    } else if (notification.status === "Blocked") {
+      Linking.openSettings()
+    }
   }
 
-  return (
-    <TouchableOpacity
-      onPress={handleOnPressTalkToContactTracer}
-      style={style.floatingContainer}
+  const showNotificationsOff = notification.status !== "Granted"
+
+  return showNotificationsOff ? (
+    <Pressable
+      style={style.notificationsOffContainer}
+      onPress={handleOnPressNotificationsOff}
     >
-      <Image
-        source={Images.HowItWorksValueProposition}
-        style={style.image}
-        width={200}
-        height={IMAGE_HEIGHT}
-      />
-      <Text style={style.sectionHeaderText}>
-        {t("home.did_you_test_positive")}
+      <View style={style.notificationsOffBellIconContainer}>
+        <SvgXml
+          xml={Icons.Bell}
+          fill={Colors.neutral.shade100}
+          width={Iconography.xxSmall}
+          height={Iconography.xxSmall}
+        />
+      </View>
+      <Text style={style.notificationsOffText}>
+        {t("home.notifications_off")}
       </Text>
-      <Text style={style.sectionBodyText}>{t("home.to_submit_your_test")}</Text>
-      <SectionButton text={t("home.request_call")} />
-    </TouchableOpacity>
-  )
+    </Pressable>
+  ) : null
 }
 
-const ReportTestResult: FunctionComponent = () => {
-  const navigation = useNavigation()
+const SimpleVerificationFlowButton: FunctionComponent = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation()
 
   const handleOnPressReportTestResult = () => {
     navigation.navigate(HomeStackScreens.AffectedUserStack)
   }
 
+  const handleOnPressMoreInfo = () => {
+    navigation.navigate(HomeStackScreens.AffectedUserStack, {
+      screen: AffectedUserFlowStackScreens.VerificationCodeInfo,
+    })
+  }
+
+  const descriptionText = t("home.verification_code_card.if_you_have_a_code")
+  const buttonLabelText = t("home.verification_code_card.submit_code")
+
   return (
-    <TouchableOpacity
-      onPress={handleOnPressReportTestResult}
-      style={style.floatingContainer}
-    >
-      <Image
-        source={Images.ProtectPrivacySubmitKeys}
-        style={style.image}
-        width={130}
-        height={IMAGE_HEIGHT}
-      />
+    <VerificationFlowButton
+      onPressReportTestResult={handleOnPressReportTestResult}
+      onPressMoreInfo={handleOnPressMoreInfo}
+      descriptionText={descriptionText}
+      buttonLabelText={buttonLabelText}
+    />
+  )
+}
+
+const EscrowVerificationFlowButton: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const navigation = useNavigation()
+
+  const handleOnPressReportTestResult = () => {
+    navigation.navigate(HomeStackScreens.EscrowVerificationStack)
+  }
+
+  const handleOnPressMoreInfo = () => {
+    navigation.navigate(HomeStackScreens.EscrowVerificationStack, {
+      screen: EscrowVerificationRoutes.EscrowVerificationMoreInfo,
+    })
+  }
+
+  const descriptionText = t(
+    "home.verification_code_card.if_you_have_a_positive_test",
+  )
+  const buttonLabelText = t("home.verification_code_card.report_positive_test")
+
+  return (
+    <VerificationFlowButton
+      onPressReportTestResult={handleOnPressReportTestResult}
+      onPressMoreInfo={handleOnPressMoreInfo}
+      descriptionText={descriptionText}
+      buttonLabelText={buttonLabelText}
+    />
+  )
+}
+
+interface VerificationFlowButtonProps {
+  onPressReportTestResult: () => void
+  onPressMoreInfo: () => void
+  descriptionText: string
+  buttonLabelText: string
+}
+
+const VerificationFlowButton: FunctionComponent<VerificationFlowButtonProps> = ({
+  onPressReportTestResult,
+  onPressMoreInfo,
+  descriptionText,
+  buttonLabelText,
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <View style={style.floatingContainer}>
+      <View style={style.cardTopContainer}>
+        <Image
+          source={Images.ProtectPrivacySubmitKeys}
+          style={style.image}
+          width={130}
+          height={IMAGE_HEIGHT}
+        />
+        <TouchableOpacity
+          onPress={onPressMoreInfo}
+          style={style.moreInfoButton}
+          accessibilityRole="button"
+          accessibilityLabel={t("home.verification_code_card.more_info")}
+        >
+          <SvgXml
+            xml={Icons.QuestionMark}
+            fill={Colors.primary.shade125}
+            width={Iconography.xxxSmall}
+            height={Iconography.xxxSmall}
+          />
+        </TouchableOpacity>
+      </View>
       <Text style={style.sectionHeaderText}>
         {t("home.have_a_positive_test")}
       </Text>
-      <Text style={style.sectionBodyText}>{t("home.if_you_have_a_code")}</Text>
-      <SectionButton text={t("home.report_result")} />
-    </TouchableOpacity>
+      <Text style={style.sectionBodyText}>{descriptionText}</Text>
+      <TouchableOpacity
+        onPress={onPressReportTestResult}
+        accessibilityRole="button"
+        accessibilityLabel={buttonLabelText}
+      >
+        <SectionButton text={buttonLabelText} />
+      </TouchableOpacity>
+    </View>
   )
 }
 
@@ -195,9 +309,16 @@ const style = StyleSheet.create({
   floatingContainer: {
     ...Affordances.floatingContainer,
   },
+  cardTopContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   image: {
     resizeMode: "contain",
     marginBottom: Spacing.small,
+  },
+  moreInfoButton: {
+    ...Buttons.circle.base,
   },
   sectionHeaderText: {
     ...Typography.header.x40,
@@ -210,6 +331,27 @@ const style = StyleSheet.create({
     lineHeight: Typography.lineHeight.x40,
     color: Colors.neutral.shade100,
     marginBottom: Spacing.xLarge,
+  },
+  notificationsOffContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: Spacing.xSmall,
+    paddingHorizontal: Spacing.small,
+    marginBottom: Spacing.small,
+    borderWidth: Outlines.thin,
+    borderColor: Colors.neutral.shade75,
+    backgroundColor: Colors.neutral.shade5,
+    borderRadius: Outlines.borderRadiusLarge,
+  },
+  notificationsOffBellIconContainer: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
+  notificationsOffText: {
+    flex: 9,
+    ...Typography.body.x20,
+    color: Colors.neutral.black,
   },
   callEmergencyServicesContainer: {
     borderTopWidth: Outlines.hairline,

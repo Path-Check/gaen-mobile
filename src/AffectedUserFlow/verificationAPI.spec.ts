@@ -1,10 +1,14 @@
 import { postCode, postTokenAndHmac } from "./verificationAPI"
 
 describe("postCode", () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   it("executes requests with default headers and serialized data", async () => {
     const fetchSpy = jest.fn()
     ;(fetch as jest.Mock) = fetchSpy
-    fetchSpy.mockRejectedValueOnce("error")
+    fetchSpy.mockRejectedValueOnce({ message: "Network request failed" })
     const code = "code"
 
     await postCode(code)
@@ -49,19 +53,9 @@ describe("postCode", () => {
   })
 
   describe("on a request that fails", () => {
-    it("returns an unknown failure if the request errors", async () => {
-      const fetchSpy = jest.fn()
-      ;(fetch as jest.Mock) = fetchSpy
-      fetchSpy.mockRejectedValueOnce("error")
-
-      const result = await postCode("code")
-
-      expect(result).toEqual({ kind: "failure", error: "Unknown" })
-    })
-
-    it("returns InvalidCode error on an internal server error", async () => {
+    it("returns InvalidCode error on an verification code invalide response ", async () => {
       const jsonResponse = {
-        error: "internal server error",
+        error: "verification code invalid",
       }
       ;(fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
@@ -90,25 +84,6 @@ describe("postCode", () => {
       expect(result).toEqual({
         kind: "failure",
         error: "VerificationCodeUsed",
-      })
-    })
-
-    it("returns Unknown error for other errors", async () => {
-      const errorMessage = "unknown"
-      const jsonResponse = {
-        error: errorMessage,
-      }
-      ;(fetch as jest.Mock).mockResolvedValueOnce({
-        ok: false,
-        json: jest.fn().mockResolvedValueOnce(jsonResponse),
-      })
-
-      const result = await postCode("code")
-
-      expect(result).toEqual({
-        kind: "failure",
-        error: "Unknown",
-        message: errorMessage,
       })
     })
   })

@@ -62,7 +62,7 @@
 #if DEBUG
   [Bugsnag start];
 #else
-  if ([[ReactNativeConfig envFor:@"STAGING"]  isEqual: @"true"]) {
+  if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
     [Bugsnag start];
   }
 #endif
@@ -157,6 +157,13 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
   return [RCTLinkingManager application:application openURL:url options:options];
+}
+- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
+ restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+{
+ return [RCTLinkingManager application:application
+                  continueUserActivity:userActivity
+                    restorationHandler:restorationHandler];
 }
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response

@@ -30,6 +30,8 @@ describe("PublishConsentForm", () => {
           revisionToken=""
           appPackageName=""
           regionCodes={[""]}
+          navigateOutOfStack={() => {}}
+          symptomOnsetDate={null}
         />
       </ExposureContext.Provider>,
     )
@@ -83,6 +85,8 @@ describe("PublishConsentForm", () => {
           revisionToken={revisionToken}
           appPackageName={appPackageName}
           regionCodes={regionCodes}
+          navigateOutOfStack={() => {}}
+          symptomOnsetDate={null}
         />,
       )
 
@@ -96,6 +100,7 @@ describe("PublishConsentForm", () => {
           hmacKey,
           appPackageName,
           revisionToken,
+          null,
         )
         expect(storeRevisionTokenSpy).toHaveBeenCalledWith(newRevisionToken)
         expect(navigateSpy).toHaveBeenCalledWith(
@@ -133,6 +138,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -176,6 +183,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -219,6 +228,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -260,6 +271,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -301,6 +314,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 
@@ -343,6 +358,8 @@ describe("PublishConsentForm", () => {
             revisionToken=""
             appPackageName=""
             regionCodes={[""]}
+            navigateOutOfStack={() => {}}
+            symptomOnsetDate={null}
           />,
         )
 

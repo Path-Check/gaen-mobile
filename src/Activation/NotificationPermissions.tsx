@@ -7,39 +7,28 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 
-import { ActivationStackScreens } from "../navigation"
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import { useConfigurationContext } from "../ConfigurationContext"
 import { Text } from "../components"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Colors, Spacing, Typography, Buttons } from "../styles"
 
 const NotificationsPermissions: FunctionComponent = () => {
   const { t } = useTranslation()
   const { notification } = usePermissionsContext()
-  const { enableProductAnalytics } = useConfigurationContext()
-  const navigation = useNavigation()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const handleOnPressEnable = async () => {
     await new Promise((resolve) => {
       notification.request()
       resolve()
     })
-    if (enableProductAnalytics) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-    } else {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
-    }
+    goToNextScreenFrom("NotificationPermissions")
   }
 
   const handleOnPressMaybeLater = () => {
-    if (enableProductAnalytics) {
-      navigation.navigate(ActivationStackScreens.AnonymizedDataConsent)
-    } else {
-      navigation.navigate(ActivationStackScreens.ActivationSummary)
-    }
+    goToNextScreenFrom("NotificationPermissions")
   }
 
   return (

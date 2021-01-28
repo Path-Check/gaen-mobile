@@ -7,13 +7,13 @@ import {
   ScrollView,
 } from "react-native"
 import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
 import { Icons } from "../assets"
 import { Text } from "../components"
-import { ActivationStackScreens, useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect } from "../navigation"
 import { useConfigurationContext } from "../ConfigurationContext"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import {
   Buttons,
@@ -26,13 +26,14 @@ import {
 
 const AcceptTermsOfService: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
-  const configuration = useConfigurationContext()
-  const [boxChecked, toggleCheckbox] = useState(false)
   const { t } = useTranslation()
-  const navigation = useNavigation()
+  const configuration = useConfigurationContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
+
+  const [boxChecked, toggleCheckbox] = useState(false)
 
   const handleOnPressNext = () => {
-    navigation.navigate(ActivationStackScreens.ActivateExposureNotifications)
+    goToNextScreenFrom("AcceptTermsOfService")
   }
 
   const checkboxIcon = boxChecked

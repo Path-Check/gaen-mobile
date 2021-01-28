@@ -1,4 +1,5 @@
 import React from "react"
+import { Alert } from "react-native"
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 import { useNavigation } from "@react-navigation/native"
@@ -17,8 +18,8 @@ jest.mock("@react-navigation/native")
 describe("CodeInputForm", () => {
   it("initializes with an empty code form", () => {
     const { getByTestId } = render(
-      <AffectedUserProvider>
-        <CodeInputForm />
+      <AffectedUserProvider isOnboardingComplete>
+        <CodeInputForm linkCode="linkCode" />
       </AffectedUserProvider>,
     )
 
@@ -64,8 +65,8 @@ describe("CodeInputForm", () => {
 
       const { getByTestId, getByLabelText } = render(
         <ExposureContext.Provider value={exposureContext}>
-          <AffectedUserProvider>
-            <CodeInputForm />
+          <AffectedUserProvider isOnboardingComplete>
+            <CodeInputForm linkCode="linkCode" />
           </AffectedUserProvider>
         </ExposureContext.Provider>,
       )
@@ -109,8 +110,8 @@ describe("CodeInputForm", () => {
 
       const { getByTestId, getByLabelText, getByText } = render(
         <ExposureContext.Provider value={factories.exposureContext.build()}>
-          <AffectedUserProvider>
-            <CodeInputForm />
+          <AffectedUserProvider isOnboardingComplete>
+            <CodeInputForm linkCode="linkCode" />
           </AffectedUserProvider>
         </ExposureContext.Provider>,
       )
@@ -132,17 +133,23 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
+      const { getByTestId, getByLabelText } = render(
+        <AffectedUserProvider isOnboardingComplete>
+          <CodeInputForm linkCode="linkCode" />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(getByText("Try a different code")).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Invalid Code",
+          "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
+          [{ text: "Okay" }],
+        )
       })
     })
 
@@ -153,19 +160,23 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
+      const { getByTestId, getByLabelText } = render(
+        <AffectedUserProvider isOnboardingComplete>
+          <CodeInputForm linkCode="linkCode" />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(
-          getByText("Verification code has already been used"),
-        ).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Verification Code Already Used",
+          "The verification code provided has already been used.",
+          [{ text: "Okay" }],
+        )
       })
     })
 
@@ -176,24 +187,30 @@ describe("CodeInputForm", () => {
         error,
       }
       jest.spyOn(API, "postCode").mockResolvedValueOnce(wrongTokenResponse)
+      const alertSpy = jest.fn()
+      Alert.alert = alertSpy
 
-      const { getByTestId, getByLabelText, getByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
+      const { getByTestId, getByLabelText } = render(
+        <AffectedUserProvider isOnboardingComplete>
+          <CodeInputForm linkCode="linkCode" />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "12345678")
       fireEvent.press(getByLabelText("Next"))
 
       await waitFor(() => {
-        expect(getByText("Try a different code")).toBeDefined()
+        expect(alertSpy).toHaveBeenCalledWith(
+          "Something Went Wrong",
+          "An unexpected error occurred. Please try again.",
+          [{ text: "Okay" }],
+        )
       })
     })
 
     it("informs of a formatting error", async () => {
       const { getByTestId, getByLabelText, getByText, queryByText } = render(
-        <AffectedUserProvider>
-          <CodeInputForm />
+        <AffectedUserProvider isOnboardingComplete>
+          <CodeInputForm linkCode="linkCode" />
         </AffectedUserProvider>,
       )
       fireEvent.changeText(getByTestId("code-input"), "$A12345")

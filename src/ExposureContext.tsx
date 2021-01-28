@@ -7,10 +7,8 @@ import React, {
   useContext,
 } from "react"
 
-import { failureResponse, OperationResponse } from "./OperationResponse"
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
-import { checkForNewExposures as detectExposures } from "./gaen/nativeModule"
 import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
 import * as NativeModule from "./gaen/nativeModule"
 
@@ -24,7 +22,7 @@ export interface ExposureState {
   lastExposureDetectionDate: Posix | null
   storeRevisionToken: (revisionToken: string) => Promise<void>
   refreshExposureInfo: () => void
-  checkForNewExposures: () => Promise<OperationResponse>
+  detectExposures: () => Promise<NativeModule.DetectExposuresResponse>
 }
 
 const initialState = {
@@ -43,7 +41,7 @@ const initialState = {
     return Promise.resolve()
   },
   refreshExposureInfo: () => {},
-  checkForNewExposures: () => {
+  detectExposures: () => {
     return Promise.resolve({ kind: "success" as const })
   },
 }
@@ -66,13 +64,13 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [])
 
-  const refreshExposureInfo = async () => {
+  const refreshExposureInfo = useCallback(async () => {
     const exposureInfo = await NativeModule.getCurrentExposures()
     setExposureInfo(exposureInfo)
 
     const detectionDate = await NativeModule.fetchLastExposureDetectionDate()
     setLastExposureDetectionDate(detectionDate)
-  }
+  }, [])
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(
@@ -98,17 +96,12 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     }
   }, [trackEvent])
 
-  const checkForNewExposures = async (): Promise<OperationResponse> => {
-    try {
-      const response = await detectExposures()
-      if (response.kind === "failure") {
-        throw new Error(response.error)
-      }
+  const detectExposures = async (): Promise<NativeModule.DetectExposuresResponse> => {
+    const response = await NativeModule.detectExposures()
+    if (response.kind === "success") {
       await refreshExposureInfo()
-      return { kind: "success" }
-    } catch (e) {
-      return failureResponse(e.message)
     }
+    return response
   }
 
   return (
@@ -117,7 +110,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
         exposureInfo,
         lastExposureDetectionDate,
         refreshExposureInfo,
-        checkForNewExposures,
+        detectExposures,
         getCurrentExposures: NativeModule.getCurrentExposures,
         getExposureKeys: NativeModule.getExposureKeys,
         getRevisionToken: NativeModule.getRevisionToken,

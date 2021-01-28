@@ -27,6 +27,4 @@ ACCESS_TOKEN = ARGV[1] || ENV.fetch("ACCESS_TOKEN")
 validate_token!(ACCESS_TOKEN)
 validate_ha_label!(HA_LABEL, "download_brand_colors")
 
-puts "...fetching brand colors for #{HA_LABEL}"
-
 download_brand_colors_file(HA_LABEL, ACCESS_TOKEN)

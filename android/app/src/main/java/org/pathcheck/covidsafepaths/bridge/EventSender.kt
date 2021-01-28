@@ -2,7 +2,7 @@ package org.pathcheck.covidsafepaths.bridge
 
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
+import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages
 
 object EventSender {
     private const val EN_STATUS_CHANGED_EVENT = "onEnabledStatusUpdated"
@@ -10,9 +10,13 @@ object EventSender {
     private const val LOCATION_STATUS_CHANGED_EVENT = "onLocationStatusUpdated"
 
     fun sendExposureNotificationStatusChanged(reactContext: ReactContext?, enabled: Boolean) {
+        var status = CallbackMessages.EN_STATUS_ACTIVE
+        if (!enabled) {
+            status = CallbackMessages.EN_STATUS_DISABLED
+        }
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
-            ?.emit(EN_STATUS_CHANGED_EVENT, Util.getEnStatusWritableArray(enabled))
+            ?.emit(EN_STATUS_CHANGED_EVENT, status)
     }
 
     fun sendBluetoothStatusChangedEvent(reactContext: ReactContext?, enabled: Boolean) {

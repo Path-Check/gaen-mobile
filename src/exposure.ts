@@ -1,4 +1,4 @@
-import { DateTimeUtils } from "./utils"
+import dayjs from "dayjs"
 
 export type Posix = number
 type UUID = string
@@ -6,27 +6,15 @@ type UUID = string
 export interface ExposureDatum {
   id: UUID
   date: Posix
+  duration: number
 }
 
 export type ExposureInfo = ExposureDatum[]
 
-export type ExposureWindowBucket =
-  | "TodayToThreeDaysAgo"
-  | "FourToSixDaysAgo"
-  | "SevenToFourteenDaysAgo"
+type ExposureRange = [Posix, Posix]
 
-export const exposureWindowBucket = (
-  exposureDatum: ExposureDatum,
-): ExposureWindowBucket => {
-  const date = exposureDatum.date
-  const threeDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(3))
-  const sevenDaysAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(7))
-
-  if (date >= threeDaysAgo) {
-    return "TodayToThreeDaysAgo"
-  } else if (date > sevenDaysAgo) {
-    return "FourToSixDaysAgo"
-  } else {
-    return "SevenToFourteenDaysAgo"
-  }
+export const toExposureRange = ({ date }: ExposureDatum): ExposureRange => {
+  const start = dayjs.utc(date).subtract(1, "day").valueOf()
+  const end = dayjs.utc(date).add(1, "day").valueOf()
+  return [start, end]
 }

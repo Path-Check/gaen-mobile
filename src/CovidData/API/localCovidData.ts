@@ -115,8 +115,8 @@ export const toCovidData = (stateData: StateData): CovidData.CovidData => {
     country: "",
     state: "",
     population: 0,
-    metrics: CovidData.emptyMetrics,
-    riskLevels: CovidData.emptyRiskLevels,
+    metrics: CovidData.initialMetrics,
+    riskLevels: CovidData.initialRiskLevels,
     timeseries,
   }
 }

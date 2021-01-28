@@ -1,7 +1,7 @@
 import { TFunction } from "i18next"
 
 import { posixToDayjs } from "../../utils/dateTime"
-import { DATE_FORMAT } from "../index"
+import { DATE_FORMAT } from "../SymptomEntryListItem"
 import { SymptomHistory, SymptomEntry } from "../symptomHistory"
 import * as Symptom from "../symptom"
 

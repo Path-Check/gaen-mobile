@@ -9,5 +9,6 @@ export default Factory.define<RawExposure>(() => {
     id: "raw-exposure",
     date: defaultDate,
     totalRiskScore: 4,
+    weightedDurationSum: 2000,
   }
 })

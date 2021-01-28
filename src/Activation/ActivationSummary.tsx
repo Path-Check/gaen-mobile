@@ -8,15 +8,12 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import {
-  usePermissionsContext,
-  ENPermissionStatus,
-} from "../Device/PermissionsContext"
+import { usePermissionsContext } from "../Device/PermissionsContext"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { openAppSettings } from "../Device"
-import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { Text } from "../components"
+import { useActivationNavigation } from "./useActivationNavigation"
 
 import { Images } from "../assets"
 import { Buttons, Colors, Spacing, Typography } from "../styles"
@@ -24,26 +21,18 @@ import { Buttons, Colors, Spacing, Typography } from "../styles"
 const ActivationSummary: FunctionComponent = () => {
   const { t } = useTranslation()
   const { applicationName } = useApplicationName()
-  const { completeOnboarding } = useOnboardingContext()
   const { trackEvent } = useProductAnalyticsContext()
-  const {
-    isBluetoothOn,
-    locationPermissions,
-    exposureNotifications: { status },
-  } = usePermissionsContext()
-
-  const isENEnabled = status === ENPermissionStatus.ENABLED
-  const isLocationRequiredAndOff = locationPermissions === "RequiredOff"
-  const isLocationRequired = locationPermissions !== "NotRequired"
+  const { exposureNotifications, locationRequirement } = usePermissionsContext()
+  const { goToNextScreenFrom } = useActivationNavigation()
 
   const handleOnPressGoToHome = () => {
     trackEvent("product_analytics", "onboarding_completed")
-    completeOnboarding()
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const handleOnPressOpenSettings = async () => {
     openAppSettings()
-    completeOnboarding()
+    goToNextScreenFrom("ActivationSummary")
   }
 
   const AppSetupIncompleteButtons: FunctionComponent = () => {
@@ -85,18 +74,19 @@ const ActivationSummary: FunctionComponent = () => {
   const appSetupIncompleteContent = {
     headerImage: Images.ExclamationInCircle,
     headerText: t("onboarding.app_setup_incomplete_header"),
-    bodyText: isLocationRequired
-      ? t("onboarding.app_setup_incomplete_location_body", { applicationName })
-      : t("onboarding.app_setup_incomplete_body", { applicationName }),
+    bodyText:
+      locationRequirement === "Required"
+        ? t("onboarding.app_setup_incomplete_location_body", {
+            applicationName,
+          })
+        : t("onboarding.app_setup_incomplete_body", { applicationName }),
     buttons: AppSetupIncompleteButtons,
   }
 
-  const isAppSetupComplete =
-    isENEnabled && isBluetoothOn && !isLocationRequiredAndOff
-
-  const screenContent = isAppSetupComplete
-    ? appSetupCompleteContent
-    : appSetupIncompleteContent
+  const screenContent =
+    exposureNotifications.status === "Active"
+      ? appSetupCompleteContent
+      : appSetupIncompleteContent
   const Buttons = screenContent.buttons
 
   return (
@@ -142,7 +132,7 @@ const style = StyleSheet.create({
   headerImage: {
     resizeMode: "cover",
     width: 230,
-    height: 150,
+    height: 230,
     marginBottom: Spacing.medium,
   },
   textContainer: {

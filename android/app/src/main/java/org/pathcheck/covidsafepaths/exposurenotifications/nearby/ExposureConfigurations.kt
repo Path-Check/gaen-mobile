@@ -28,17 +28,19 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotifi
 class ExposureConfigurations(context: Context) {
     companion object {
         private const val TAG = "ExposureConfigurations"
-        private val configurationUri = Uri.parse(BuildConfig.EXPOSURE_CONFIGURATION_JSON_RESOURCE_V6)
+        private val configurationUri = Uri.parse(BuildConfig.ANDROID_EN_CONFIG_URL_V1_6)
 
         private const val DEFAULT_TRIGGER_THRESHOLD_WEIGHTED_DURATION = 15
-        private val DEFAULT_ATTENUATION_DURATION_THRESHOLDS = listOf(40, 53, 60)
-        private val DEFAULT_ATTENUATION_BUCKET_WEIGHTS = listOf(1.0, 1.0, 0.5, 0.0)
+        private val DEFAULT_ATTENUATION_DURATION_THRESHOLDS = listOf(55, 63, 70)
+        private val DEFAULT_ATTENUATION_BUCKET_WEIGHTS = listOf(1.5, 1.0, 0.4, 0.0)
         private val DEFAULT_REPORT_TYPE_WEIGHTS = listOf(1.0, 0.0, 0.0, 0.0)
-        private val DEFAULT_INFECTIOUSNESS_WEIGHT = listOf(1.0, 1.0)
+        private val DEFAULT_INFECTIOUSNESS_WEIGHT = listOf(0.3, 1.0)
         private const val DEFAULT_INFECTIOUSNESS_WHEN_DAY_SINCE_ONSET_MISSING = 1
         private val DEFAULT_DAYS_SINCE_ONSET_TO_INFECTIOUSNESS = mapOf(
-            -2 to 1, -1 to 1, 0 to 1, 1 to 1, 2 to 1, 3 to 1, 4 to 1, 5 to 1, 6 to 1,
-            7 to 1, 8 to 1, 9 to 1, 10 to 1, 11 to 1, 12 to 1, 13 to 1, 14 to 1
+            -14 to 0, -13 to 0, -12 to 0, -11 to 0, -10 to 0, -9 to 0, -8 to 0,
+            -7 to 0, -6 to 0, -5 to 0, -4 to 0, -3 to 1, -2 to 2, -1 to 2,
+            0 to 2, 1 to 2, 2 to 2, 3 to 2, 4 to 1, 5 to 0, 6 to 0,
+            7 to 0, 8 to 0, 9 to 0, 10 to 0, 11 to 0, 12 to 0, 13 to 0, 14 to 0
         )
         private const val DEFAULT_REPORT_TYPE_WHEN_MISSING = 1
     }

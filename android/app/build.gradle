@@ -162,6 +162,9 @@ android {
 
         //Fix problem in bt where .env.bt is not recognized
         resValue "string", "build_config_package", "org.pathcheck.covidsafepaths"
+
+        // Handle EN Express deep links
+        manifestPlaceholders = [enxDomain: project.env.get("ENX_APPLINKS_DOMAIN") ?: "*.en.express"]
     }
     splits {
         abi {
@@ -238,7 +241,7 @@ dependencies {
     // Annotation processing
     kapt 'com.google.auto.value:auto-value:1.7.3'
     // Libraries
-    implementation 'androidx.work:work-runtime:2.5.0-beta01'
+    implementation 'androidx.work:work-runtime:2.5.0-beta02'
     implementation 'androidx.concurrent:concurrent-futures:1.1.0'
     implementation 'com.google.android.gms:play-services-base:17.4.0'
     implementation 'com.google.android.gms:play-services-basement:17.4.0'
@@ -249,6 +252,12 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'commons-io:commons-io:2.6'
     implementation "androidx.constraintlayout:constraintlayout:2.0.1"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:3.14.9"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+
+    implementation "com.google.android.gms:play-services-safetynet:17.0.0"
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/"
@@ -260,7 +269,6 @@ dependencies {
     }
 
     //noinspection GradleDynamicVersion
-    androidTestImplementation('com.wix:detox:+') // detox: e2e testing
     implementation "androidx.core:core-ktx:1.3.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 

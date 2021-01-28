@@ -1,22 +1,15 @@
 import { Factory } from "fishery"
 
-import {
-  PermissionStatus,
-  ENPermissionStatus,
-  PermissionsContextState,
-} from "../Device/PermissionsContext"
+import { PermissionsContextState } from "../Device/PermissionsContext"
 
 export default Factory.define<PermissionsContextState>(() => ({
-  isBluetoothOn: true,
-  locationPermissions: "RequiredOn",
   notification: {
-    status: PermissionStatus.GRANTED,
+    status: "Granted" as const,
     check: jest.fn(),
     request: jest.fn(),
   },
   exposureNotifications: {
-    status: ENPermissionStatus.ENABLED,
-    check: jest.fn(),
-    request: jest.fn(),
+    status: "Active",
   },
+  locationRequirement: "NotRequired",
 }))

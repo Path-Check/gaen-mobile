@@ -20,7 +20,7 @@ export type ActivationStackScreen =
   | "ActivateExposureNotifications"
   | "ActivateLocation"
   | "ActivationSummary"
-  | "AnonymizedDataConsent"
+  | "ProductAnalyticsConsent"
   | "NotificationPermissions"
 
 export const ActivationStackScreens: {
@@ -31,7 +31,7 @@ export const ActivationStackScreens: {
   ActivateExposureNotifications: "ActivateExposureNotifications",
   ActivateLocation: "ActivateLocation",
   ActivationSummary: "ActivationSummary",
-  AnonymizedDataConsent: "AnonymizedDataConsent",
+  ProductAnalyticsConsent: "ProductAnalyticsConsent",
   NotificationPermissions: "NotificationPermissions",
 }
 
@@ -39,6 +39,7 @@ export type HomeStackScreen =
   | "AffectedUserStack"
   | "BluetoothInfo"
   | "CovidDataDashboard"
+  | "EscrowVerificationStack"
   | "ExposureDetectionStatus"
   | "ExposureNotificationsInfo"
   | "Home"
@@ -47,12 +48,11 @@ export type HomeStackScreen =
   | "EmergencyRecommendation"
   | "CovidRecommendation"
 
-export const HomeStackScreens: {
-  [key in HomeStackScreen]: HomeStackScreen
-} = {
+export const HomeStackScreens: Record<HomeStackScreen, HomeStackScreen> = {
   AffectedUserStack: "AffectedUserStack",
   BluetoothInfo: "BluetoothInfo",
   CovidDataDashboard: "CovidDataDashboard",
+  EscrowVerificationStack: "EscrowVerificationStack",
   ExposureDetectionStatus: "ExposureDetectionStatus",
   ExposureNotificationsInfo: "ExposureNotificationsInfo",
   Home: "Home",
@@ -79,16 +79,12 @@ export const HowItWorksStackScreens: {
   ValueProposition: "ValueProposition",
 }
 
-export type ExposureHistoryStackScreen =
-  | "ExposureHistory"
-  | "ExposureDetail"
-  | "MoreInfo"
+export type ExposureHistoryStackScreen = "ExposureHistory" | "MoreInfo"
 
 export const ExposureHistoryStackScreens: {
   [key in ExposureHistoryStackScreen]: ExposureHistoryStackScreen
 } = {
   ExposureHistory: "ExposureHistory",
-  ExposureDetail: "ExposureDetail",
   MoreInfo: "MoreInfo",
 }
 
@@ -118,9 +114,10 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
+  | "CovidDataWebView"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
-  | "AnonymizedDataConsent"
+  | "ProductAnalyticsConsent"
   | "AtRiskRecommendation"
   | "SelfAssessmentFromExposureDetails"
   | "SelfAssessmentFromHome"
@@ -132,9 +129,10 @@ export const ModalStackScreens: {
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
+  CovidDataWebView: "CovidDataWebView",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
-  AnonymizedDataConsent: "AnonymizedDataConsent",
+  ProductAnalyticsConsent: "ProductAnalyticsConsent",
   AtRiskRecommendation: "AtRiskRecommendation",
   SelfAssessmentFromExposureDetails: "SelfAssessmentFromExposureDetails",
   SelfAssessmentFromHome: "SelfAssessmentFromHome",
@@ -167,7 +165,9 @@ export const SettingsStackScreens: {
 
 export type AffectedUserFlowStackScreen =
   | "AffectedUserStart"
+  | "VerificationCodeInfo"
   | "AffectedUserCodeInput"
+  | "SymptomOnsetDate"
   | "AffectedUserPublishConsent"
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
@@ -177,19 +177,40 @@ export const AffectedUserFlowStackScreens: {
   [key in AffectedUserFlowStackScreen]: AffectedUserFlowStackScreen
 } = {
   AffectedUserStart: "AffectedUserStart",
+  VerificationCodeInfo: "VerificationCodeInfo",
   AffectedUserCodeInput: "AffectedUserCodeInput",
+  SymptomOnsetDate: "SymptomOnsetDate",
   AffectedUserPublishConsent: "AffectedUserPublishConsent",
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
   AffectedUserComplete: "AffectedUserComplete",
 }
 
-export type WelcomeStackScreen = "Welcome"
+export type EscrowVerificationRoute =
+  | "EscrowVerificationStart"
+  | "EscrowVerificationMoreInfo"
+  | "EscrowVerificationUserDetailsForm"
+  | "EscrowVerificationCodeForm"
+  | "EscrowVerificationComplete"
 
-export const WelcomeStackScreens: {
-  [key in WelcomeStackScreen]: WelcomeStackScreen
+export const EscrowVerificationRoutes: Record<
+  EscrowVerificationRoute,
+  EscrowVerificationRoute
+> = {
+  EscrowVerificationStart: "EscrowVerificationStart",
+  EscrowVerificationMoreInfo: "EscrowVerificationMoreInfo",
+  EscrowVerificationUserDetailsForm: "EscrowVerificationUserDetailsForm",
+  EscrowVerificationCodeForm: "EscrowVerificationCodeForm",
+  EscrowVerificationComplete: "EscrowVerificationComplete",
+}
+
+export type OnboardingRoute = "Welcome" | "AppTransition"
+
+export const OnboardingRoutes: {
+  [key in OnboardingRoute]: OnboardingRoute
 } = {
   Welcome: "Welcome",
+  AppTransition: "AppTransition",
 }
 
 export type SymptomHistoryStackScreen =
@@ -234,17 +255,19 @@ export type Stack =
   | "Activation"
   | "AffectedUserStack"
   | "Connect"
+  | "EscrowVerificationStack"
   | "ExposureHistoryFlow"
   | "HowItWorks"
   | "Settings"
   | "Home"
   | "SymptomHistory"
 
-export const Stacks: { [key in Stack]: Stack } = {
+export const Stacks: Record<Stack, Stack> = {
   Activation: "Activation",
   AffectedUserStack: "AffectedUserStack",
   Connect: "Connect",
   ExposureHistoryFlow: "ExposureHistoryFlow",
+  EscrowVerificationStack: "EscrowVerificationStack",
   HowItWorks: "HowItWorks",
   Settings: "Settings",
   Home: "Home",

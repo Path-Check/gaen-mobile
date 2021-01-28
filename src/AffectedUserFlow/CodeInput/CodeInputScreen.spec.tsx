@@ -4,25 +4,21 @@ import "@testing-library/jest-native/extend-expect"
 
 import CodeInputScreen from "./CodeInputScreen"
 import { AffectedUserProvider } from "../AffectedUserContext"
-import {
-  PermissionsContext,
-  ENPermissionStatus,
-  PermissionStatus,
-} from "../../Device/PermissionsContext"
+import { PermissionsContext } from "../../Device/PermissionsContext"
+import { factories } from "../../factories"
 
 jest.mock("@react-navigation/native")
 
 describe("CodeInputScreen", () => {
   describe("when the user has exposure notifications enabled", () => {
     it("shows the CodeInputForm", () => {
-      const isENAuthorizedAndEnabled = ENPermissionStatus.ENABLED
-      const permissionProviderValue = createPermissionProviderValue(
-        isENAuthorizedAndEnabled,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "Active" },
+      })
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputScreen />
           </AffectedUserProvider>
         </PermissionsContext.Provider>,
@@ -37,14 +33,13 @@ describe("CodeInputScreen", () => {
 
   describe("when the user does not have exposure notifications enabled", () => {
     it("shows the EnableExposureNotifications screen", () => {
-      const isEnAuthorizedAndEnabled = ENPermissionStatus.DISABLED
-      const permissionProviderValue = createPermissionProviderValue(
-        isEnAuthorizedAndEnabled,
-      )
+      const permissionProviderValue = factories.permissionsContext.build({
+        exposureNotifications: { status: "Disabled" },
+      })
 
       const { getByTestId, queryByTestId } = render(
         <PermissionsContext.Provider value={permissionProviderValue}>
-          <AffectedUserProvider>
+          <AffectedUserProvider isOnboardingComplete>
             <CodeInputScreen />
           </AffectedUserProvider>
         </PermissionsContext.Provider>,
@@ -57,26 +52,3 @@ describe("CodeInputScreen", () => {
     })
   })
 })
-
-const createPermissionProviderValue = (
-  enPermissionStatus: ENPermissionStatus,
-) => {
-  return {
-    isBluetoothOn: true,
-    locationPermissions: "RequiredOn" as const,
-    notification: {
-      status: PermissionStatus.UNKNOWN,
-      check: () => {},
-      request: () => {},
-    },
-    exposureNotifications: {
-      status: enPermissionStatus,
-      check: () => {},
-      request: () =>
-        Promise.resolve({
-          kind: "failure" as const,
-          error: "Unknown" as const,
-        }),
-    },
-  }
-}

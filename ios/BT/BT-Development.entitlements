@@ -4,6 +4,11 @@
 <dict>
 	<key>aps-environment</key>
 	<string>Development</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:*.en.express</string>
+		<string>applinks:$(ENX_APPLINKS_DOMAIN)</string>
+	</array>
 	<key>com.apple.developer.exposure-notification</key>
 	<true/>
 </dict>

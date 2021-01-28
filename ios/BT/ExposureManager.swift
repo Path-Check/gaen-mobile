@@ -88,7 +88,7 @@ final class ExposureManager: NSObject {
     notificationCenter.addObserver(
       self,
       selector: #selector(scheduleBackgroundTaskIfNeeded),
-      name: .AuthorizationStatusDidChange,
+      name: .ExposureNotificationStatusDidChange,
       object: nil
     )
   }
@@ -99,40 +99,45 @@ final class ExposureManager: NSObject {
 
   /// Broadcast EN Status
   @objc func awake() {
-    broadcastCurrentEnabledStatus()
+    broadcastCurrentExposureNotificationStatus()
   }
 
   // MARK: == State ==
 
-  enum EnabledState: String {
-    case enabled = "ENABLED"
-    case disabled = "DISABLED"
+  enum ExposureNoticationStatus: String {
+    case unknown = "Unknown"
+    case active = "Active"
+    case disabled = "Disabled"
+    case bluetoothOff = "BluetoothOff"
+    case restricted = "Restricted"
+    case paused = "Paused"
+    case unauthorized = "Unauthorized"
   }
 
-  enum AuthorizationState: String {
-    case authorized = "AUTHORIZED"
-    case unauthorized = "UNAUTHORIZED"
-  }
-
-  /// Wrapps ENManager enabled state to a enabled/disabled state
-  var enabledState: EnabledState {
-    return manager.exposureNotificationEnabled ? .enabled : .disabled
-  }
-
-  /// Wraps ENManager authorization state to a authorized/unauthorized state
-  var authorizationState: AuthorizationState {
-    return (manager.authorizationStatus() == .authorized) ? .authorized : .unauthorized
-  }
-
-  /// Wrapps ENManager state and determines if bluetooth is on or off
-  /// (bluetoothOff)[https://developer.apple.com/documentation/exposurenotification/enstatus/bluetoothoff]
-  @objc var isBluetoothEnabled: Bool {
-    manager.exposureNotificationStatus != .bluetoothOff
+  var exposureNotificationStatus: ExposureNoticationStatus {
+    switch manager.exposureNotificationStatus {
+    case .unknown:
+      return .unknown
+    case .active:
+      return .active
+    case .disabled:
+      return .disabled
+    case .bluetoothOff:
+      return .bluetoothOff
+    case .restricted:
+      return .restricted
+    case .paused:
+      return .paused
+    case .unauthorized:
+      return .unauthorized
+    default:
+      return .unknown
+    }
   }
 
   ///Returns both the current authorizationState and enabledState as Strings
-  @objc func getCurrentENPermissionsStatus(callback: @escaping (String, String) -> Void) {
-    callback(authorizationState.rawValue, enabledState.rawValue)
+  @objc func getCurrentENPermissionsStatus(callback: @escaping (String) -> Void) {
+    callback(exposureNotificationStatus.rawValue)
   }
 
   /// Returns the current exposures as a json string representation
@@ -173,7 +178,7 @@ final class ExposureManager: NSObject {
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
     // Bluetooth must be enabled in order for the device to exchange keys with other devices
-    if manager.authorizationStatus() == .authorized && manager.exposureNotificationStatus == .bluetoothOff {
+    if manager.exposureNotificationStatus == .bluetoothOff {
       let content = UNMutableNotificationContent()
       content.title = String.bluetoothNotificationTitle.localized
       content.body = String.bluetoothNotificationBody.localized
@@ -238,7 +243,7 @@ final class ExposureManager: NSObject {
   }
 
   @objc func scheduleBackgroundTaskIfNeeded() {
-    guard manager.authorizationStatus() == .authorized else { return }
+    guard manager.exposureNotificationStatus == .active else { return }
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.backgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
     do {
@@ -256,8 +261,9 @@ final class ExposureManager: NSObject {
       switch result {
       case .success:
         resolve(String.genericSuccess)
-      case .failure(let exposureError):
-        reject(exposureError.localizedDescription, exposureError.errorDescription, exposureError)
+      case .failure(let error):
+        let errorString = error._code.enErrorString
+        reject(errorString, error.localizedDescription, error)
       }
     }
   }
@@ -272,10 +278,27 @@ final class ExposureManager: NSObject {
     // in Settings.
     manager.setExposureNotificationEnabled(true) { error in
       if let error = error {
-        reject(error.localizedDescription, error.localizedDescription, error)
+        let errorString = error._code.enErrorString
+        reject(errorString, error.localizedDescription, error)
+      } else if (self.exposureNotificationStatus != .active) {
+        let error = GenericError.unknown
+        var errorString = 0.enErrorString
+        switch self.exposureNotificationStatus {
+        case .bluetoothOff:
+          errorString = 7.enErrorString
+        case .disabled:
+          errorString = 9.enErrorString
+        case .restricted:
+          errorString = 14.enErrorString
+        case .unauthorized:
+          errorString = 4.enErrorString
+        default:
+          errorString = 1.enErrorString
+        }
+        reject(errorString, error.localizedDescription, error)
       } else {
-        self.broadcastCurrentEnabledStatus()
-        resolve([self.authorizationState.rawValue, self.enabledState.rawValue])
+        self.broadcastCurrentExposureNotificationStatus()
+        resolve(self.exposureNotificationStatus.rawValue)
       }
     }
   }
@@ -378,7 +401,8 @@ final class ExposureManager: NSObject {
           if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
               self.btSecureStorage.canStoreExposure(for: daySummary.date) {
             let exposure = Exposure(id: UUID().uuidString,
-                                    date: daySummary.date.posixRepresentation)
+                                    date: daySummary.date.posixRepresentation,
+                                    weightedDurationSum: daySummary.daySummary.weightedDurationSum)
             newExposures.append(exposure)
           }
         }
@@ -408,7 +432,7 @@ final class ExposureManager: NSObject {
     return progress
   }
 
-  func finish(_ result: Result<[Exposure]>,
+  func finish(_ result: GenericResult<[Exposure]>,
               processedFileCount: Int,
               lastProcessedUrlPath: String,
               progress: Progress,
@@ -434,9 +458,8 @@ final class ExposureManager: NSObject {
         btSecureStorage.storeExposures(newExposures)
         completionHandler(.success(processedFileCount))
       case let .failure(error):
-        let exposureError = ExposureError.default(error.localizedDescription)
         btSecureStorage.exposureDetectionErrorLocalizedDescription = error.localizedDescription
-        completionHandler(.failure(exposureError))
+        completionHandler(.failure(error))
       }
     }
   }
@@ -493,14 +516,16 @@ extension ExposureManager {
     }
   }
 
-  @objc func fetchLastDetectionDate(callback: (NSNumber?, ExposureManagerError?) -> Void)  {
-   guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
-    let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
-                                       localizedMessage: String.noLastResetDateAvailable.localized)
-    return callback(nil, emError)
+  @objc func fetchLastDetectionDate(resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) {
+    guard let lastDetectionDate = btSecureStorage.userState.lastExposureCheckDate else {
+      let emError = ExposureManagerError(errorCode: .detectionNeverPerformed,
+                                         localizedMessage: String.noLastResetDateAvailable.localized)
+      reject(emError.errorCode, emError.localizedMessage, emError.underlyingError);
+      return
     }
     let posixRepresentation = NSNumber(value: lastDetectionDate.posixRepresentation)
-    return callback(posixRepresentation, nil)
+    resolve(posixRepresentation)
   }
 
   func getExposureConfigurationV1() -> Promise<ExposureConfigurationV1> {
@@ -546,22 +571,22 @@ private extension ExposureManager {
 
   func activateSuccess() {
     awake()
-    // Ensure exposure notifications are enabled if the app is authorized. The app
+    // Ensure exposure notifications are enabled. The app
     // could get into a state where it is authorized, but exposure
     // notifications are not enabled,  if the user initially denied Exposure Notifications
     // during onboarding, but then flipped on the "COVID-19 Exposure Notifications" switch
     // in Settings.
-    if authorizationState == .authorized && enabledState == .disabled {
+    if exposureNotificationStatus == .disabled {
       self.manager.setExposureNotificationEnabled(true) { _ in
         // No error handling for attempts to enable on launch
       }
     }
   }
 
-  func broadcastCurrentEnabledStatus() {
+  func broadcastCurrentExposureNotificationStatus() {
     notificationCenter.post(Notification(
-      name: .AuthorizationStatusDidChange,
-      object: [self.authorizationState.rawValue, self.enabledState.rawValue]
+      name: .ExposureNotificationStatusDidChange,
+      object: self.exposureNotificationStatus.rawValue
     ))
   }
 
@@ -601,7 +626,7 @@ private extension ExposureManager {
       let dispatchGroup = DispatchGroup()
       for remoteURL in targetUrls {
         dispatchGroup.enter()
-        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+        self.apiClient.downloadRequest(KeyArchiveRequest.get(remoteURL),
                                        requestType: .downloadKeys) { result in
           switch result {
           case .success (let package):
@@ -660,7 +685,8 @@ private extension ExposureManager {
         } else {
           let newExposures = (exposures ?? []).map { exposure in
             Exposure(id: UUID().uuidString,
-                     date: exposure.date.posixRepresentation)
+                     date: exposure.date.posixRepresentation,
+                     weightedDurationSum: exposure.duration)
           }
           fullfill(newExposures)
         }

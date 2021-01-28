@@ -1,8 +1,7 @@
 import Alamofire
 
 enum RequestType {
-  case postKeys,
-  downloadKeys,
+  case downloadKeys,
   exposureConfiguration
 }
 
@@ -13,34 +12,32 @@ protocol APIClient {
                               completion: @escaping GenericCompletion) where T.ResponseType == Void
   func downloadRequest<T: APIRequest>(_ request: T,
                                       requestType: RequestType,
-                                      completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile
+                                      completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile
   func request<T: APIRequest>(_ request: T,
                               requestType: RequestType,
-                              completion: @escaping (Result<JSONObject>) -> Void) where T.ResponseType == JSONObject
+                              completion: @escaping (GenericResult<JSONObject>) -> Void) where T.ResponseType == JSONObject
   func request<T: APIRequest>(_ request: T,
                               requestType: RequestType,
-                              completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: Decodable
+                              completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType: Decodable
   func requestList<T: APIRequest>(_ request: T,
                                   requestType: RequestType,
-                                  completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable
+                                  completion: @escaping (GenericResult<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable
   func requestString<T: APIRequest>(_ request: T,
                                     requestType: RequestType,
-                                    completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType == String
+                                    completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType == String
   func cancelAllRequests()
 }
 
 class BTAPIClient: APIClient {
   
-  let postKeysUrl: URL
   let downloadBaseUrl: URL
   let exposureConfigurationUrl: URL
   static let shared: BTAPIClient = {
     var exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV1))!
     if #available(iOS 13.7, *) {
-      exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV6))!
+      exposureConfigurationUrl = URL(string: ReactNativeConfig.env(for: .exposureConfigurationUrlV2))!
     }
     return BTAPIClient(
-      postKeysUrl: URL(string: ReactNativeConfig.env(for: .postKeysUrl))!,
       downloadBaseUrl: URL(string: ReactNativeConfig.env(for: .downloadBaseUrl))!,
       exposureConfigurationUrl: exposureConfigurationUrl
     )
@@ -48,10 +45,8 @@ class BTAPIClient: APIClient {
   
   private let sessionManager: SessionManager
 
-  init(postKeysUrl: URL,
-       downloadBaseUrl: URL,
+  init(downloadBaseUrl: URL,
        exposureConfigurationUrl: URL) {
-    self.postKeysUrl = postKeysUrl
     self.downloadBaseUrl = downloadBaseUrl
     self.exposureConfigurationUrl = exposureConfigurationUrl
     
@@ -78,7 +73,7 @@ class BTAPIClient: APIClient {
     }
   }
   
-  func downloadRequest<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile {
+  func downloadRequest<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType: DownloadableFile {
     downloadRequest(for: request, requestType: requestType).responseData { response in
       guard let data = response.result.value else {
         completion(.failure(GenericError.unknown))
@@ -93,7 +88,7 @@ class BTAPIClient: APIClient {
     }
   }
   
-  func request<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<JSONObject>) -> Void) where T.ResponseType == JSONObject {
+  func request<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<JSONObject>) -> Void) where T.ResponseType == JSONObject {
     dataRequest(for: request, requestType: requestType)
       .validate(validate)
       .responseJSON { response in
@@ -106,15 +101,15 @@ class BTAPIClient: APIClient {
     }
   }
   
-  func request<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: Decodable {
+  func request<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType: Decodable {
     requestDecodable(request, requestType: requestType, completion: completion)
   }
   
-  func requestList<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable {
+  func requestList<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable {
     requestDecodables(request, requestType: requestType, completion: completion)
   }
   
-  func requestString<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType == String {
+  func requestString<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType == String {
     dataRequest(for: request, requestType: requestType)
       .validate(validate)
       .responseData { response in
@@ -189,7 +184,7 @@ private extension BTAPIClient {
     return .failure(GenericError(statusCode: response.statusCode))
   }
   
-  func requestDecodable<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<T.ResponseType>) -> Void) where T.ResponseType: Decodable {
+  func requestDecodable<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<T.ResponseType>) -> Void) where T.ResponseType: Decodable {
     dataRequest(for: request, requestType: requestType)
       .validate(validate)
       .responseData { response in
@@ -208,7 +203,7 @@ private extension BTAPIClient {
     }
   }
   
-  func requestDecodables<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (Result<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable {
+  func requestDecodables<T: APIRequest>(_ request: T, requestType: RequestType, completion: @escaping (GenericResult<[T.ResponseType.Element]>) -> Void) where T.ResponseType: Collection, T.ResponseType.Element: Decodable {
     requestDecodable(CollectionAPIRequest(request: request), requestType: requestType) { result in
       switch result {
       case .success(let value):
@@ -222,8 +217,6 @@ private extension BTAPIClient {
   func baseUrlFor(_ requestType: RequestType) -> URL {
     var baseUrl: URL!
     switch requestType {
-    case .postKeys:
-      baseUrl = postKeysUrl
     case .downloadKeys:
       baseUrl = downloadBaseUrl
     case .exposureConfiguration:

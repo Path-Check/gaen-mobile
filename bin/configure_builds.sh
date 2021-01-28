@@ -30,7 +30,7 @@ PLIST_PATH = "./ios/BT/Info.plist"
 ANDROID_STRINGS_PATH="./android/app/src/main/res/values/strings.xml"
 SEPARATOR = "##################################################################"
 
-def failure_message(message:)
+def failure_message(message)
   puts SEPARATOR
   puts "🚫 #{message}"
   puts SEPARATOR
@@ -81,8 +81,8 @@ end
 
 def replace_string_in_file(file_path:, regex:, value:)
   file_contents = File.read(file_path)
-  new_contents = file_contents.gsub(regex, value)
-  if new_contents.match(value).size > 0
+  if file_contents.match(regex)
+    new_contents = file_contents.gsub(regex, value)
     File.open(file_path, 'w') { |f| f.write new_contents }
   else
     failure_message "Couldn't match anything with #{regex} on #{file_path}"
@@ -178,6 +178,26 @@ def update_bundle_identifiers
   end
 end
 
+def update_android_app_links(domain)
+  puts "Adding android app link with domain #{domain}"
+  replace_string_in_file(
+    file_path: './android/app/build.gradle',
+    regex: /manifestPlaceholders (.+)/,
+    value: "manifestPlaceholders = [enxDomain: \"#{domain}\"]"
+  )
+end
+
+APP_LINKS_DOMAIN = "ENX_APPLINKS_DOMAIN"
+def update_app_links
+  environment = Dotenv.parse(File.open(ENV_FILE))
+  app_links_domain = environment.fetch(APP_LINKS_DOMAIN, false)
+
+  if app_links_domain
+    update_android_app_links(app_links_domain)
+    update_ios_applinks_domain(app_links_domain)
+  end
+end
+
 ################################# iOS Specific Configuration ##########################################
 
 def get_current_ios_en_api_version
@@ -218,6 +238,15 @@ def update_ios_en_region(new_en_region)
   exit 1
 end
 
+def update_ios_applinks_domain(domain)
+  puts "Updating applinks domain to #{domain}"
+  replace_string_in_file(
+    file_path: './ios/COVIDSafePaths.xcodeproj/project.pbxproj',
+    regex: /ENX_APPLINKS_DOMAIN = \"xx-xx.en.express\"/,
+    value: "ENX_APPLINKS_DOMAIN = \"#{domain}\""
+  )
+end
+
 IOS_EN_REGION_KEY = "EN_DEVELOPER_REGION"
 IOS_EN_API_VERSION_KEY = "EN_API_VERSION"
 
@@ -227,6 +256,7 @@ def update_ios_configuration
   ios_en_version = environment.fetch(IOS_EN_API_VERSION_KEY, 1)
 
   update_ios_en_api_version(ios_en_version)
+
   if ios_en_region
     update_ios_en_region(ios_en_region)
   else
@@ -237,12 +267,22 @@ end
 
 
 if File.exist?(ENV_FILE)
+  puts ""
+  puts "🛠 Updating Display Name:"
   update_application_display_name
-  puts "✅ Display Names Updated"
+  puts "✅ Done"
+  puts ""
+  puts "🛠 Updating Bundle Identifiers:"
   update_bundle_identifiers
-  puts "✅ Bundle Identifiers Updated"
+  puts "✅ Done"
+  puts ""
+  puts "🛠 Updating iOS Configuration:"
   update_ios_configuration
-  puts "✅ iOS Configuration Updated"
+  puts "✅ Done"
+  puts "🛠 Updating App Links:"
+  update_app_links
+  puts "✅ Done"
+  puts ""
 else
   failure_message "#{ENV_FILE} not found on the root folder, environment file is needed"
   exit 1

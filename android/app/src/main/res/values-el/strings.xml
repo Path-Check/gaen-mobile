@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_notification_title">Έλεγχος για εκθέσεις...</string>
   <string name="exposure_notification_channel_description">Ειδοποιήσεις έκθεσης</string>
   <string name="exposure_notification_channel_name">Ειδοποίηση έκθεσης</string>
   <string name="exposure_notification_message">Βρεθήκατε κοντά σε κάποιον που έχει διαγνωστεί θετικά με COVID-19. Πατήστε για περισσότερες πληροφορίες.</string>

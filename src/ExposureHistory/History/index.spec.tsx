@@ -1,4 +1,5 @@
 import React from "react"
+import { Alert } from "react-native"
 import {
   cleanup,
   fireEvent,
@@ -12,7 +13,8 @@ import { ExposureDatum } from "../../exposure"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 import { ExposureContext } from "../../ExposureContext"
-import { failureResponse } from "../../OperationResponse"
+import * as NativeModule from "../../gaen/nativeModule"
+import { PermissionsContext } from "../../Device/PermissionsContext"
 
 import History from "./index"
 
@@ -21,7 +23,12 @@ jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
 
 afterEach(cleanup)
+
 describe("History", () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   describe("when there are no exposures", () => {
     it("shows a no exposure reports message", () => {
       const exposures: ExposureDatum[] = []
@@ -34,111 +41,181 @@ describe("History", () => {
     })
   })
 
-  describe("when the refresh button is tapped", () => {
-    it("checks for new exposures", async () => {
-      const exposures: ExposureDatum[] = []
-      const checkForNewExposuresSpy = jest
-        .fn()
-        .mockResolvedValueOnce({ kind: "success" })
-
-      const { getByTestId } = render(
-        <ExposureContext.Provider
-          value={factories.exposureContext.build({
-            checkForNewExposures: checkForNewExposuresSpy,
-          })}
-        >
-          <History exposures={exposures} lastDetectionDate={null} />
-        </ExposureContext.Provider>,
-      )
-
-      fireEvent.press(getByTestId("check-for-exposures-button"))
-
-      await waitFor(() => {
-        expect(checkForNewExposuresSpy).toHaveBeenCalled()
-      })
-    })
-
-    describe("when exposure check returns rate limiting error", () => {
-      it("displays a success message", async () => {
-        const showMessageSpy = showMessage as jest.Mock
-        const checkForNewExposuresSpy = jest.fn().mockResolvedValueOnce({
-          kind: "failure",
-          error: "ExceededCheckRateLimit",
-        })
+  describe("when the check for exposures button is tapped", () => {
+    describe("and exposure notifications are not active", () => {
+      it("displays a can't check for exposures message", async () => {
+        const alertSpy = jest.fn()
+        Alert.alert = alertSpy
 
         const { getByTestId } = render(
-          <ExposureContext.Provider
-            value={factories.exposureContext.build({
-              checkForNewExposures: checkForNewExposuresSpy,
+          <PermissionsContext.Provider
+            value={factories.permissionsContext.build({
+              exposureNotifications: { status: "Disabled" },
             })}
           >
             <History exposures={[]} lastDetectionDate={null} />
-          </ExposureContext.Provider>,
+          </PermissionsContext.Provider>,
         )
 
         fireEvent.press(getByTestId("check-for-exposures-button"))
 
         await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Success",
-            }),
+          expect(alertSpy).toHaveBeenCalledWith(
+            "Can't Check for Exposures",
+            "You must enable Exposure Notifications to check for exposures.",
+            [
+              expect.objectContaining({ text: "Back" }),
+              expect.objectContaining({
+                text: "Enable Exposure Notifications",
+              }),
+            ],
           )
         })
       })
     })
 
-    describe("when exposure check is successful", () => {
-      it("displays a success message", async () => {
-        const checkForNewExposuresSpy = jest.fn()
-        const showMessageSpy = showMessage as jest.Mock
+    describe("and exposure notifications are active", () => {
+      it("checks for new exposures", async () => {
+        const exposures: ExposureDatum[] = []
+        const checkForNewExposuresSpy = jest
+          .fn()
+          .mockResolvedValueOnce({ kind: "success" })
 
         const { getByTestId } = render(
-          <ExposureContext.Provider
-            value={factories.exposureContext.build({
-              checkForNewExposures: checkForNewExposuresSpy,
+          <PermissionsContext.Provider
+            value={factories.permissionsContext.build({
+              exposureNotifications: { status: "Active" },
             })}
           >
-            <History exposures={[]} lastDetectionDate={null} />
-          </ExposureContext.Provider>,
+            <ExposureContext.Provider
+              value={factories.exposureContext.build({
+                detectExposures: checkForNewExposuresSpy,
+              })}
+            >
+              <History exposures={exposures} lastDetectionDate={null} />
+            </ExposureContext.Provider>
+          </PermissionsContext.Provider>,
         )
 
         fireEvent.press(getByTestId("check-for-exposures-button"))
 
         await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Success",
-            }),
-          )
+          expect(checkForNewExposuresSpy).toHaveBeenCalled()
         })
       })
-    })
 
-    describe("when exposure check is not successful", () => {
-      it("displays a failure message", async () => {
-        const checkForNewExposuresSpy = jest.fn()
-        checkForNewExposuresSpy.mockResolvedValueOnce(failureResponse)
-        const showMessageSpy = showMessage as jest.Mock
+      describe("when exposure check returns rate limiting error", () => {
+        it("displays a success message", async () => {
+          const showMessageSpy = showMessage as jest.Mock
+          const response: NativeModule.DetectExposuresResponse = {
+            kind: "failure",
+            error: "RateLimited",
+          }
+          const checkForNewExposuresSpy = jest
+            .fn()
+            .mockResolvedValueOnce(response)
 
-        const { getByTestId } = render(
-          <ExposureContext.Provider
-            value={factories.exposureContext.build({
-              checkForNewExposures: checkForNewExposuresSpy,
-            })}
-          >
-            <History exposures={[]} lastDetectionDate={null} />
-          </ExposureContext.Provider>,
-        )
-
-        fireEvent.press(getByTestId("check-for-exposures-button"))
-
-        await waitFor(() => {
-          expect(showMessageSpy).toHaveBeenCalledWith(
-            expect.objectContaining({
-              message: "Something went wrong",
-            }),
+          const { getByTestId } = render(
+            <PermissionsContext.Provider
+              value={factories.permissionsContext.build({
+                exposureNotifications: { status: "Active" },
+              })}
+            >
+              <ExposureContext.Provider
+                value={factories.exposureContext.build({
+                  detectExposures: checkForNewExposuresSpy,
+                })}
+              >
+                <History exposures={[]} lastDetectionDate={null} />
+              </ExposureContext.Provider>
+            </PermissionsContext.Provider>,
           )
+
+          fireEvent.press(getByTestId("check-for-exposures-button"))
+
+          await waitFor(() => {
+            expect(showMessageSpy).toHaveBeenCalledWith(
+              expect.objectContaining({
+                message: "Success",
+              }),
+            )
+          })
+        })
+      })
+
+      describe("when exposure check is successful", () => {
+        it("displays a success message", async () => {
+          const checkForNewExposuresSpy = jest.fn()
+          const showMessageSpy = showMessage as jest.Mock
+          const response: NativeModule.DetectExposuresResponse = {
+            kind: "success",
+          }
+          checkForNewExposuresSpy.mockResolvedValueOnce(response)
+
+          const { getByTestId } = render(
+            <PermissionsContext.Provider
+              value={factories.permissionsContext.build({
+                exposureNotifications: { status: "Active" },
+              })}
+            >
+              <ExposureContext.Provider
+                value={factories.exposureContext.build({
+                  detectExposures: checkForNewExposuresSpy,
+                })}
+              >
+                <History exposures={[]} lastDetectionDate={null} />
+              </ExposureContext.Provider>
+            </PermissionsContext.Provider>,
+          )
+
+          fireEvent.press(getByTestId("check-for-exposures-button"))
+
+          await waitFor(() => {
+            expect(showMessageSpy).toHaveBeenCalledWith(
+              expect.objectContaining({
+                message: "Success",
+              }),
+            )
+          })
+        })
+      })
+
+      describe("when exposure check is not successful", () => {
+        it("displays a failure message", async () => {
+          const checkForNewExposuresSpy = jest.fn()
+          const response: NativeModule.DetectExposuresResponse = {
+            kind: "failure",
+            error: "Unknown",
+          }
+          checkForNewExposuresSpy.mockResolvedValueOnce(response)
+          const alertSpy = jest.fn()
+          Alert.alert = alertSpy
+
+          const { getByTestId } = render(
+            <PermissionsContext.Provider
+              value={factories.permissionsContext.build({
+                exposureNotifications: { status: "Active" },
+              })}
+            >
+              <ExposureContext.Provider
+                value={factories.exposureContext.build({
+                  detectExposures: checkForNewExposuresSpy,
+                })}
+              >
+                <History exposures={[]} lastDetectionDate={null} />
+              </ExposureContext.Provider>
+            </PermissionsContext.Provider>,
+          )
+
+          fireEvent.press(getByTestId("check-for-exposures-button"))
+
+          await waitFor(() => {
+            expect(alertSpy).toHaveBeenCalledWith(
+              "Something Went Wrong",
+              "Something unexpected happened. Please close and reopen the app and try again.",
+              [{ text: "Okay" }],
+            )
+          })
         })
       })
     })
