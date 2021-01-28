@@ -16,7 +16,7 @@ import { SvgXml } from "react-native-svg"
 import { ModalStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 
-import { Colors, Spacing, Typography, Buttons } from "../styles"
+import { Colors, Spacing, Typography, Buttons, Layout } from "../styles"
 import { Icons } from "../assets"
 
 type HowItWorksScreenContent = {
@@ -97,7 +97,7 @@ const createStyle = (insets: EdgeInsets) => {
   const androidPaddingTop = 90
   const headerHeight = Platform.select({
     ios: iosPaddingTop,
-    android: androidPaddingTop,
+    android: Layout.screenHeight > 650 ? androidPaddingTop : 0,
     default: iosPaddingTop,
   })
 

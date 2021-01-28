@@ -27,6 +27,7 @@ const AffectedUserStack: FunctionComponent = () => {
   return (
     <EscrowVerificationProvider>
       <Stack.Navigator
+        initialRouteName={EscrowVerificationRoutes.EscrowVerificationStart}
         screenOptions={{ headerShown: false, gestureEnabled: false }}
       >
         <Stack.Screen

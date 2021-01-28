@@ -7,6 +7,7 @@ type Posix = number
 export interface RawExposure {
   id: UUID
   date: Posix
+  weightedDurationSum: number
 }
 
 export const toExposureInfo = (
@@ -20,5 +21,6 @@ const toExposureDatum = (r: RawExposure): ExposureDatum => {
   return {
     id: r.id,
     date: DateTimeUtils.beginningOfDay(r.date),
+    duration: r.weightedDurationSum,
   }
 }

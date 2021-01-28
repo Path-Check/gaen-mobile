@@ -8,6 +8,11 @@
     "next": "Siguiente",
     "start": "Inicio"
   },
+  "escrow_verification": {
+    "complete": {
+      "title": "¡Todo listo!"
+    }
+  },
   "home": {
     "bluetooth": {
       "tracing_off_header": "Notificaciones desactivadas"

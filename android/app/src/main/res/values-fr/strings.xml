@@ -2,5 +2,6 @@
 <resources>
   <string name="exposure_notification_channel_description">Alertes de notification d\'exposition.</string>
   <string name="exposure_notification_channel_name">Notification d\'exposition</string>
+  <string name="exposure_notification_message">Une personne dont vous étiez proche a été testée positive au COVID-19. Appuyez pour plus d\'informations.</string>
   <string name="exposure_notification_title">Exposition possible à la COVID-19</string>
 </resources>

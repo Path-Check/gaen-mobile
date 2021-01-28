@@ -1,19 +1,201 @@
 {
   "_display_name": "Indonesia",
+  "about": {
+    "description": "Aplikasi {{applicationName}} disediakan oleh {{healthAuthorityName}} .",
+    "operating_system_abbr": "OS:",
+    "version": "Versi:"
+  },
+  "callback": {
+    "firstname": "Nama depan",
+    "lastname": "Nama keluarga",
+    "phone_number_required": "Nomor telepon (wajib)"
+  },
   "common": {
     "cancel": "Batal",
+    "continue": "Lanjutkan",
+    "done": "Selesai",
+    "maybe_later": "Mungkin nanti",
     "more": "Lebih",
-    "next": "Selanjutnya"
+    "next": "Selanjutnya",
+    "no_thanks": "Tidak, terima kasih",
+    "settings": "Buka Pengaturan",
+    "skip": "Melewatkan",
+    "something_went_wrong": "Ada yang tidak beres",
+    "start": "Mulai",
+    "submit": "Kirim"
+  },
+  "errors": {
+    "description": "Ada kesalahan yang tidak terduga. Silahkan coba lagi.",
+    "reload": "Muat ulang",
+    "title": "Kesalahan yang tidak diketahui"
+  },
+  "escrow_verification": {
+    "complete": {
+      "body": "Anda membantu menekan penyebaran virus dan melindungi orang lain di komunitas Anda."
+    },
+    "user_details_form": {
+      "subheader": "Silahkan masukan nomer telepon dan tanggal test anda dan kami akan mengirimkan kode verifikasi anda."
+    }
+  },
+  "export": {
+    "code_input_body_bluetooth": "Masukkan kode verifikasi Anda",
+    "code_input_button_cancel": "Batal",
+    "code_input_title_bluetooth": "Verifikasi diagnosis Anda",
+    "complete_body_bluetooth": "Anda membantu menekan penyebaran virus dan melindungi orang lain di komunitas Anda.",
+    "complete_title": "Terima kasih telah melindungi komunitas Anda!",
+    "consent_button_title": "Saya paham dan menyetujui",
+    "consent_warning_message": "Melanjutkan akan membatalkan kode verifikasi anda. Jika anda ingin membagikan hasil diagnosa anda di masa mendatang, anda harus terlebih dahulu mendapatkan kode verifikasi baru.",
+    "enable_exposure_notifications_body": "Anda harus mengaktifkan pemberitahuan keterpaparan/\"Exposure Notifications\" untuk melaporkan hasil tes positif.",
+    "enable_exposure_notifications_title": "Aktifkan pemberitahuan eksposur untuk melanjutkan",
+    "error": {
+      "invalid_code": "Coba kode lain",
+      "invalid_format": "Kode hanya boleh berisi angka dan huruf",
+      "unknown_code_verification_error": "Coba kode lain",
+      "verification_code_used": "Kode verifikasi telah digunakan"
+    },
+    "intro": {
+      "body1": "Jika anda telah menerima kode verifikasi dari {{healthAuthorityName}} untuk test COVID-19 positif, anda bisa masukan kode verifikasi di layar berikut."
+    },
+    "publish_consent_title_bluetooth": "Beri tahu orang lain di komunitas Anda",
+    "symptom_onset": {
+      "symptoms": "Gejala"
+    }
+  },
+  "exposure_history": {
+    "exposure_detail": {
+      "next_steps": "Langkah selanjutnya"
+    },
+    "health_guidelines": {
+      "six_feet_apart": "Jaga jarak 6 kaki",
+      "stay_home": "Tetap di rumah saat sakit",
+      "title": "Pedoman Kesehatan",
+      "wash_your_hands": "Cuci tangan Anda sesering mungkin",
+      "wear_a_mask": "Kenakan masker"
+    },
+    "how_does_this_work": "Bagaimana cara kerjanya?",
+    "how_does_this_work_para": "Saat Pemberitahuan Eksposur aktif, ponsel Anda menggunakan Bluetooth Hemat Energi untuk menukar dan menyimpan string nomor acak (ID acak) dari telepon mana pun yang berada di dekatnya yang juga mengaktifkan Pemberitahuan Eksposur. ID acak ini tidak dapat mengidentifikasi Anda secara pribadi oleh pengguna lain dan berubah berkali-kali dalam sehari untuk melindungi privasi Anda.",
+    "last_days": "14 hari terakhir",
+    "no_exposure_reports": "Tidak Ada Laporan Eksposur",
+    "no_exposure_reports_over_past": "Anda belum menerima laporan eksposure selama 14 hari terakhir",
+    "updated": "Diperbarui",
+    "why_did_i_get_an_en": "Mengapa saya mendapatkan pemberitahuan eksposur?",
+    "why_did_i_get_an_en_para": "Anda akan menerima pemberitahuan eksposur ketika seseorang yang telah berada di dekat anda kemudian menerima tes positif untuk COVID-19 dan memilih untuk memberi tahu orang lain."
+  },
+  "home": {
+    "bluetooth_info_body": "Ponsel Anda mendeteksi ponsel lain yang dalam jangkauan menggunakan \"Bluetooth Low Energy\" . Ini memungkinkan aplikasi untuk mencatat pertemuan harian Anda secara anonim, bahkan saat Anda tidak membuka aplikasi di perangkat Anda.",
+    "bluetooth": {
+      "all_services_on_subheader": "{{applicationName}} akan tetap aktif setelah aplikasi ditutup",
+      "proximity_tracing_header": "Pemberitahuan Eksposur",
+      "share": "Bagikan {{applicationName}}",
+      "share_message": "Lihat aplikasi ini {{applicationName}} , yang dapat membantu kami mengatasi COVID-19! {{appDownloadUrl}}",
+      "tracing_off_header": "Deteksi Eksposur Mati",
+      "tracing_off_subheader": "Aktifkan Bluetooth dan \"Proximity Tracing\" untuk mendapatkan info tentang kemungkinan eksposur",
+      "tracing_on_header": "Pemberitahuan Eksposur Aktif"
+    },
+    "check_if_your_symptoms": "Masukkan gejala Anda dan dapatkan rekomendasi tentang panduan aman.",
+    "have_a_positive_test": "Memiliki tes positif?",
+    "location_info_body": "Google mengharuskan perangkat yang menggunakan Android 10 atau lebih rendah mengaktifkan layanan lokasi untuk mendeteksi eksposur. {{applicationName}} TIDAK melacak ataupun menyiman lokasi anda.",
+    "location_info_subheader": "{{applicationName}} tidak melacak ataupun menyimpan lokasi anda",
+    "proximity_tracing_info_subheader_1": "Bagaimana cara kerja Pemberitahuan Eksposur?",
+    "proximity_tracing_info_subheader_2": "Apakah data saya aman?"
   },
   "label": {
+    "checked_checkbox": "Kotak centang yang dicentang",
     "launch_enable_notif": "Aktifkan Notifikasi",
     "launch_get_started": "Mulai",
-    "launch_screen1_header": "Selamat datang di "
+    "launch_screen1_header": "Selamat datang di ",
+    "privacy_policy": "Kebijakan Privasi",
+    "question_icon": "Ikon tanda tanya",
+    "unchecked_checkbox": "Kotak centang tidak dicentang"
+  },
+  "navigation": {
+    "exposure_history": "Eksposur",
+    "home": "Dashboard",
+    "symptom_history": "Gejala"
   },
   "onboarding": {
-    "terms_header_title": "Syarat Penggunaan"
+    "app_setup_complete_body": "{{applicationName}} aktif. Terima kasih telah membantu memutus rantai infeksi.",
+    "app_setup_complete_header": "Penyiapan Aplikasi Selesai!",
+    "app_setup_incomplete_body": "{{applicationName}} membutuhkan Pemberitahuan Eksposur dan pengaktifan Bluetooth untuk mengetahui kapan Anda terekspos COVID-19. Anda dapat mengotorisasi ini di Pengaturan.",
+    "app_setup_incomplete_header": "Penyiapan Aplikasi Belum Selesai",
+    "app_setup_incomplete_location_body": "{{applicationName}} membutuhkan Pemberitahuan Eksposur, Bluetooth, dan izin Lokasi untuk mengetahui kapan Anda terpapar COVID-19. Anda dapat mengotorisasi ini di Pengaturan.",
+    "eula": "Perjanjian Hukum Pengguna Aplikasi",
+    "eula_agree_terms_of_use": "Saya setuju bahwa saya telah membaca dan menerima ketentuan penggunaan",
+    "i_am_over": "Ya, saya diatas {{minimumAge}}",
+    "location_alert_body": "Untuk menggunakan Pemberitahuan Eksposur, Layanan Lokasi harus diaktifkan",
+    "location_alert_header": "Aktifkan servis lokasi",
+    "location_body": "Google mengharuskan perangkat yang menggunakan Android 10 atau lebih rendah memiliki layanan lokasi yang diaktifkan untuk menggunakan pemindaian Bluetooth untuk Deteksi Eksposur. Namun, {{applicationName}} TIDAK melacak ataupun menyimpan lokasi Anda.",
+    "location_header": "Aktifkan Lokasi",
+    "location_services_already_active": "Layanan lokasi aktif",
+    "location_subheader": "{{applicationName}} tidak pernah mengakses data lokasi Anda dan perangkat Anda tidak pernah dilacak.",
+    "no_take_me": "Tidak, bawa aku kembali",
+    "notification_body1": "Anda akan menerima notifikasi ketika Anda mungkin telah berpapasan dengan seseorang yang telah dilaporkan positif COVID-19.",
+    "notification_body2": "Cara kerja aplikasi ini menggunakan Bluetooth Low Energy dan kode acak yang aman tanpa mengetahui siapa Anda atau di manapun Anda telah berada. Anda dapat menonaktifkan ini kapan saja di pengaturan.",
+    "notification_header": "Dapatkan notifikasi jika anda mungkin telah terekspos",
+    "notification_subheader1": "Kapan saya akan mendapatkan notifikasi?",
+    "notification_subheader2": "Bagaimana cara kerjanya?",
+    "notification_subheader3": "Aplikasi ini tidak melindungi Anda dari infeksi COVID-19.",
+    "please_read_the": "Silakan baca",
+    "privacy_policy": "Kebijakan pribadi",
+    "protect_privacy_button": "Bagaimana kami melindungi privasi Anda",
+    "protect_privacy": {
+      "body_1": "ID ini tidak mengandung informasi pribadi apa pun dan berubah setiap 10-20 menit untuk melindungi identitas Anda.",
+      "body_2": "Ponsel menukar ID acak dengan perangkat lain menggunakan Bluetooth Low Energy. Ini memungkinkan {{applicationName}} untuk melacak pertemuan harian Anda secara anonim, bahkan saat Anda tidak membukanya di perangkat Anda.",
+      "body_3": "Setelah dinyatakan positif COVID-19, pengguna dapat membagikan kode verifikasi dengan {{applicationName}} untuk memverifikasi diagnosis mereka. ID acak terbaru ponsel mereka ditandai dan diunggah dengan aman ke server. Proses verifikasi ini membantu mencegah laporan positif palsu.",
+      "body_4": "Jika ID yang ditandai cocok dengan ID yang disimpan di ponsel Anda, ini menunjukkan Anda mungkin telah bertemu seseorang yang dites positif COVID-19. Beginilah cara {{applicationName}} menentukan apakah Anda mungkin telah terpapar virus.",
+      "body_5": "Jika ada kecocokan, {{applicationName}} akan memberi tahu Anda dan memberikan panduan lebih lanjut dari departemen kesehatan Anda. \n\n Inilah cara {{applicationName}} dapat memberdayakan Anda untuk membuat keputusan tentang kesehatan Anda, dan menjaga keamanan komunitas Anda, semuanya tanpa mengetahui siapa Anda atau di mana Anda telah berada.",
+      "subheader_1": "Saat Anda mengaktifkan Pemberitahuan Eksposur, telepon anda ditandai dengan ID acak yang sering berubah",
+      "subheader_2": "Ponsel dengan Exposure Notifications yang diaktifkan bertukar ID dengan perangkat lain yang mereka temui",
+      "subheader_3": "Saat pengguna dinyatakan positif, mereka dapat memilih untuk membagikan status kesehatan mereka secara anonim",
+      "subheader_4": "Setiap telepon secara berkala berkomunikasi dengan server untuk mendapatkan daftar ID yang ditandai dan mencari kecocokan",
+      "subheader_5": "Anda akan diberi tahu jika {{applicationName}} menemukan kecocokan positif dengan ID yang ditandai"
+    },
+    "proximity_tracing_already_active": "Eksposur notifikasi aktif",
+    "proximity_tracing_body1": "Jika ponsel cerdas dengan aplikasi terinstal dihidupkan, bluetooth diaktifkan, dan berdekatan selama jangka waktu tertentu, perjumpaan terdaftar pada perangkat Anda.",
+    "proximity_tracing_body2": "Jika suatu pertemuan, data, dan informasi anda tetap anonim. Aplikasi tidak menyimpan data pribadi apa pun. Hanya ID acak yang dipertukarkan. Ini dihapus setelah 14 hari.",
+    "proximity_tracing_button": "Aktifkan Pemberitahuan Eksposur",
+    "proximity_tracing_header": "Aktifkan Pemberitahuan Eksposur",
+    "proximity_tracing_subheader1": "Bagaimana cara kerjanya?",
+    "proximity_tracing_subheader2": "Apakah data saya aman?",
+    "proximity_tracing_subheader3": "Aplikasi ini tidak melindungi Anda dari infeksi COVID-19.",
+    "screen1_button": "Bagaimana cara kerjanya?",
+    "screen1_header": "Bersama-sama, kita bisa memperlambat penyebaran COVID-19.",
+    "screen1_image_label": "Dua orang tos satu sama lain",
+    "screen2_button": "Apakah privasi saya dilindungi?",
+    "screen2_header": "Ponsel anda mengingat perangkat lain yang ditemuinya, tetapi tidak akan mengidentifikasi anda kepada siapa pun.",
+    "screen2_image_label": "Dua orang di ponsel mereka",
+    "screen3_button": "Bagaimana jika saya terekspos?",
+    "screen3_header": "Informasi pribadi Anda tidak pernah meninggalkan ponsel anda.",
+    "screen3_image_label": "Seseorang berhadapan dengan telepon yang terkunci",
+    "screen4_button": "Mulai",
+    "screen4_header": "Aplikasi akan memberi tahu Anda jika Anda mungkin telah terekspos COVID-19",
+    "screen4_image_label": "Seseorang mendapatkan notifikasi di ponselnya",
+    "terms_header_title": "Syarat Penggunaan",
+    "verify_your_age": "Verifikasi Umur Anda",
+    "welcome_image_label": "Ilustrasi orang memakai masker, terhubung seperti node dalam jaringan.",
+    "you_must_be": "Anda harus berusia {{minimumAge}} atau lebih untuk menggunakan {{applicationName}} . Apakah Anda lebih dari {{minimumAge}} ?"
   },
   "screen_titles": {
+    "exposure_history": "Eksposur",
+    "home": "Dashboard",
     "legal": "Hukum"
+  },
+  "self_assessment": {
+    "underlying_conditions": {
+      "lung_disease": "Penyakit paru-paru kronis, seperti asma sedang hingga berat, COPD, \"cystic fibrosis\", atau \"pulmonary fibrosis\""
+    }
+  },
+  "settings": {
+    "delete_data_disclosure1": "Ketika anda menekan \"Hapus Data Saya\", semua data yang telah disimpan oleh {{applicationName}} akan dihapus:",
+    "delete_data_disclosure2": "Perihal ini tidak akan menghapus data yang dibuat atau dikoleksi oleh perangkat anda untuk Pemberitahuan Eksposur.\n\nAnda dapat menghapus data tambahan ini di perangkat pengaturan.",
+    "delete_data_onboarding_token": "Token yang disimpan di perangkat Anda menyimpan apakah Anda telah menyelesaikan proses onboarding",
+    "delete_my_data": "Hapus data saya",
+    "share_anonymized_data": "Bagikan data yang dianonimkan"
+  },
+  "symptom_history": {
+    "symptom_history": "Gejala"
+  },
+  "verification_code_alerts": {
+    "unknown_body": "Terjadi kesalahan yang tidak terduga. Silahkan coba lagi."
   }
 }

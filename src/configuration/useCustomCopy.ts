@@ -1,29 +1,43 @@
+import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
 import * as Locale from "../locales/locale"
 import copy from "../../config/copy.json"
+import { useConfigurationContext } from "../ConfigurationContext"
+import * as API from "./remoteContentAPI"
 
 const DEFAULT_LOCALE = "en"
 
-type Resource = Partial<Record<Locale.Locale, CustomCopy>> & { en: CustomCopy }
+const fallbackCopyByLocale = copy as API.Resource
 
-interface CustomCopy {
-  welcomeMessage?: string
-  about?: string
-  legal?: string
-  healthAuthorityName: string
-  verificationCodeInfo?: string
-  verificationCodeHowDoIGet?: string
-}
-
-const customCopyByLocale = copy as Resource
-
-export const useCustomCopy = (): CustomCopy => {
+export const useCustomCopy = (): API.CustomCopy => {
+  const { remoteContentUrl } = useConfigurationContext()
   const {
     i18n: { language: localeCode },
   } = useTranslation()
+  const [remoteCustomCopy, setRemoteCustomCopy] = useState<API.Resource | null>(
+    null,
+  )
 
   const locale = Locale.fromString(localeCode)
 
-  return customCopyByLocale[locale] || customCopyByLocale[DEFAULT_LOCALE] || {}
+  useEffect(() => {
+    const fetchCopy = async () => {
+      if (remoteContentUrl) {
+        const response = await API.fetchCustomCopy(remoteContentUrl)
+
+        if (response.kind === "success") {
+          const { data } = response
+          setRemoteCustomCopy(data)
+        }
+      }
+    }
+
+    fetchCopy()
+  }, [remoteContentUrl])
+
+  const copyByLocale = remoteCustomCopy || fallbackCopyByLocale
+  const customCopy = copyByLocale[locale] || copyByLocale[DEFAULT_LOCALE] || {}
+
+  return customCopy
 }

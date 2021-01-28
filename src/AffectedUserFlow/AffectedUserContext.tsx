@@ -7,10 +7,11 @@ import React, {
 import { CommonActions, useNavigation } from "@react-navigation/native"
 
 import { ExposureKey } from "../exposureKey"
-import { Stacks, WelcomeStackScreens } from "../navigation"
+import { Stacks, OnboardingRoutes } from "../navigation"
 
 type Token = string
 type Key = string
+type Posix = number
 
 export interface AffectedUserContextState {
   certificate: Token | null
@@ -21,6 +22,8 @@ export interface AffectedUserContextState {
   navigateOutOfStack: () => void
   linkCode: string | undefined
   setLinkCode: (linkCode: string | undefined) => void
+  symptomOnsetDate: Posix | null
+  setSymptomOnsetDate: (symptomOnsetDate: Posix | null) => void
 }
 
 interface AffectedUserProviderProps {
@@ -42,6 +45,8 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
   const [certificate, setCertificate] = useState<Token | null>(null)
   const [linkCode, setLinkCode] = useState<string | undefined>(undefined)
 
+  const [symptomOnsetDate, setSymptomOnsetDate] = useState<Posix | null>(null)
+
   const setExposureSubmissionCredentials = (
     certificate: Token,
     hmacKey: Key,
@@ -52,7 +57,7 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
 
   const navigateOutOfStack = () => {
     if (linkCode) {
-      const route = isOnboardingComplete ? "App" : WelcomeStackScreens.Welcome
+      const route = isOnboardingComplete ? "App" : OnboardingRoutes.Welcome
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
@@ -75,6 +80,8 @@ export const AffectedUserProvider: FunctionComponent<AffectedUserProviderProps> 
         navigateOutOfStack,
         linkCode,
         setLinkCode,
+        symptomOnsetDate,
+        setSymptomOnsetDate,
       }}
     >
       {children}

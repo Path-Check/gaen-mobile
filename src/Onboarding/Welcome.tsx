@@ -1,23 +1,16 @@
 import React, { FunctionComponent } from "react"
-import {
-  Image,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native"
+import { Image, StyleSheet, View, Pressable, ScrollView } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
 
-import { StatusBar, Text } from "./components"
-import { useLocaleInfo } from "./locales/languages"
-import { useApplicationName } from "./Device/useApplicationInfo"
-import { useConfigurationContext } from "./ConfigurationContext"
-import { ModalStackScreens, useStatusBarEffect, Stacks } from "./navigation"
-import { useCustomCopy } from "./configuration/useCustomCopy"
+import { StatusBar, Text } from "../components"
+import { useLocaleInfo, enabledLocales } from "../locales/languages"
+import { useApplicationName } from "../Device/useApplicationInfo"
+import { ModalStackScreens, useStatusBarEffect } from "../navigation"
+import { useCustomCopy } from "../configuration/useCustomCopy"
 
-import { Images, Icons } from "./assets"
+import { Images, Icons } from "../assets"
 import {
   Spacing,
   Colors,
@@ -25,7 +18,8 @@ import {
   Outlines,
   Layout,
   Buttons,
-} from "./styles"
+} from "../styles"
+import { useOnboardingNavigation } from "./useOnboardingNavigation"
 
 const Welcome: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -33,7 +27,7 @@ const Welcome: FunctionComponent = () => {
   const { t } = useTranslation()
   const { languageName } = useLocaleInfo()
   const { applicationName } = useApplicationName()
-  const { displayAgeVerification } = useConfigurationContext()
+  const { goToNextScreenFrom } = useOnboardingNavigation()
 
   const { welcomeMessage: customWelcomeMessage } = useCustomCopy()
   const welcomeMessage =
@@ -44,12 +38,10 @@ const Welcome: FunctionComponent = () => {
   }
 
   const handleOnPressGetStarted = () => {
-    if (displayAgeVerification) {
-      navigation.navigate(ModalStackScreens.AgeVerification)
-    } else {
-      navigation.navigate(Stacks.HowItWorks)
-    }
+    goToNextScreenFrom("Welcome")
   }
+
+  const showLanguagePicker = enabledLocales().length > 1
 
   return (
     <>
@@ -60,15 +52,20 @@ const Welcome: FunctionComponent = () => {
         alwaysBounceVertical={false}
       >
         <View style={style.mainContentContainer}>
-          <TouchableOpacity
-            onPress={handleOnPressSelectLanguage}
-            accessibilityLabel={t("common.select_language")}
-            accessibilityRole="button"
-          >
-            <View style={style.languageButtonContainer}>
-              <Text style={style.languageButtonText}>{languageName}</Text>
-            </View>
-          </TouchableOpacity>
+          <View style={style.headerContainer}>
+            {showLanguagePicker && (
+              <Pressable
+                onPress={handleOnPressSelectLanguage}
+                accessibilityLabel={t("common.select_language")}
+                accessibilityRole="button"
+                testID={"welcome-language-button"}
+              >
+                <View style={style.languageButton}>
+                  <Text style={style.languageButtonText}>{languageName}</Text>
+                </View>
+              </Pressable>
+            )}
+          </View>
           <View style={style.imageAndText}>
             <Image
               source={Images.WelcomeImage}
@@ -79,7 +76,7 @@ const Welcome: FunctionComponent = () => {
             <Text style={style.welcomeToText}>{welcomeMessage}</Text>
             <Text style={style.nameText}>{applicationName}</Text>
           </View>
-          <TouchableOpacity
+          <Pressable
             style={style.button}
             onPress={handleOnPressGetStarted}
             accessibilityLabel={t("label.launch_get_started")}
@@ -88,7 +85,7 @@ const Welcome: FunctionComponent = () => {
               {t("label.launch_get_started")}
             </Text>
             <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </>
@@ -110,13 +107,15 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  languageButtonContainer: {
+  headerContainer: {
     marginTop: Spacing.medium,
+    marginBottom: Spacing.xSmall,
+  },
+  languageButton: {
     backgroundColor: Colors.secondary.shade50,
     borderRadius: Outlines.borderRadiusMax,
     paddingVertical: Spacing.xxSmall,
     paddingHorizontal: Spacing.xLarge,
-    marginBottom: Spacing.xSmall,
   },
   languageButtonText: {
     ...Typography.body.x10,

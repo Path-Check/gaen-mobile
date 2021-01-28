@@ -79,16 +79,12 @@ export const HowItWorksStackScreens: {
   ValueProposition: "ValueProposition",
 }
 
-export type ExposureHistoryStackScreen =
-  | "ExposureHistory"
-  | "ExposureDetail"
-  | "MoreInfo"
+export type ExposureHistoryStackScreen = "ExposureHistory" | "MoreInfo"
 
 export const ExposureHistoryStackScreens: {
   [key in ExposureHistoryStackScreen]: ExposureHistoryStackScreen
 } = {
   ExposureHistory: "ExposureHistory",
-  ExposureDetail: "ExposureDetail",
   MoreInfo: "MoreInfo",
 }
 
@@ -118,6 +114,7 @@ export const ConnectStackScreens: {
 export type ModalStackScreen =
   | "LanguageSelection"
   | "ProtectPrivacy"
+  | "CovidDataWebView"
   | "HowItWorksReviewFromSettings"
   | "HowItWorksReviewFromConnect"
   | "ProductAnalyticsConsent"
@@ -132,6 +129,7 @@ export const ModalStackScreens: {
 } = {
   LanguageSelection: "LanguageSelection",
   ProtectPrivacy: "ProtectPrivacy",
+  CovidDataWebView: "CovidDataWebView",
   HowItWorksReviewFromSettings: "HowItWorksReviewFromSettings",
   HowItWorksReviewFromConnect: "HowItWorksReviewFromConnect",
   ProductAnalyticsConsent: "ProductAnalyticsConsent",
@@ -169,6 +167,7 @@ export type AffectedUserFlowStackScreen =
   | "AffectedUserStart"
   | "VerificationCodeInfo"
   | "AffectedUserCodeInput"
+  | "SymptomOnsetDate"
   | "AffectedUserPublishConsent"
   | "AffectedUserConfirmUpload"
   | "AffectedUserExportDone"
@@ -180,6 +179,7 @@ export const AffectedUserFlowStackScreens: {
   AffectedUserStart: "AffectedUserStart",
   VerificationCodeInfo: "VerificationCodeInfo",
   AffectedUserCodeInput: "AffectedUserCodeInput",
+  SymptomOnsetDate: "SymptomOnsetDate",
   AffectedUserPublishConsent: "AffectedUserPublishConsent",
   AffectedUserConfirmUpload: "AffectedUserConfirmUpload",
   AffectedUserExportDone: "AffectedUserExportDone",
@@ -204,12 +204,13 @@ export const EscrowVerificationRoutes: Record<
   EscrowVerificationComplete: "EscrowVerificationComplete",
 }
 
-export type WelcomeStackScreen = "Welcome"
+export type OnboardingRoute = "Welcome" | "AppTransition"
 
-export const WelcomeStackScreens: {
-  [key in WelcomeStackScreen]: WelcomeStackScreen
+export const OnboardingRoutes: {
+  [key in OnboardingRoute]: OnboardingRoute
 } = {
   Welcome: "Welcome",
+  AppTransition: "AppTransition",
 }
 
 export type SymptomHistoryStackScreen =

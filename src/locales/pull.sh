@@ -13,6 +13,8 @@ function found_exe() {
   hash "$1" 2>/dev/null
 }
 
+# Check if lokalise2 is in Path and install if not
+# note the executable must be accessible from $PATH
 if ! found_exe lokalise2; then
   if [[ "$OSTYPE" == "darwin"* ]]; then
 

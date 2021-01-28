@@ -17,15 +17,17 @@ import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 
 import { ModalStackScreens, HomeStackScreens } from "./index"
-import { WelcomeStackScreens, Stacks } from "./index"
+import { OnboardingRoutes, Stacks } from "./index"
 import MainTabNavigator from "./MainTabNavigator"
 import HowItWorksStack from "./HowItWorksStack"
 import ActivationStack from "./ActivationStack"
 import SettingsStack from "./SettingsStack"
-import Welcome from "../Welcome"
+import Welcome from "../Onboarding/Welcome"
+import AppTransition from "../Onboarding/AppTransition"
 import AgeVerification from "../modals/AgeVerification"
 import LanguageSelection from "../modals/LanguageSelection"
 import ProtectPrivacy from "../modals/ProtectPrivacy"
+import CovidDataWebView from "../modals/CovidDataWebView"
 import AffectedUserStack from "./AffectedUserFlowStack"
 import EscrowVerificationStack from "./EscrowVerification"
 import SelfAssessmentStack from "./SelfAssessmentStack"
@@ -53,8 +55,8 @@ const settingsStackTransitionPreset = Platform.select({
   android: TransitionPresets.DefaultTransition,
 })
 
-const customPrefixes = env.DEEP_LINK_PREFIXES?.split(",") || []
-const allPrefixes = ["pathcheck://", "https://*.en.express/", ...customPrefixes]
+const enxApplinksDomain = `https://${env.ENX_APPLINKS_DOMAIN}`
+const allPrefixes = ["pathcheck://", "https://*.en.express", enxApplinksDomain]
 
 const linking: LinkingOptions = {
   prefixes: allPrefixes,
@@ -118,9 +120,18 @@ const MainNavigator: FunctionComponent = () => {
         ) : (
           <>
             <Stack.Screen
-              name={WelcomeStackScreens.Welcome}
+              name={OnboardingRoutes.Welcome}
               component={Welcome}
               options={{
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name={OnboardingRoutes.AppTransition}
+              component={AppTransition}
+              options={{
+                ...Headers.headerMinimalOptions,
+                headerLeft: applyHeaderLeftBackButton(),
                 gestureEnabled: false,
               }}
             />
@@ -163,6 +174,15 @@ const MainNavigator: FunctionComponent = () => {
             ...TransitionPresets.ModalTransition,
             headerShown: true,
             header: applyModalHeader(t("screen_titles.protect_privacy")),
+          }}
+        />
+        <Stack.Screen
+          name={ModalStackScreens.CovidDataWebView}
+          component={CovidDataWebView}
+          options={{
+            ...TransitionPresets.ModalTransition,
+            headerShown: true,
+            header: applyModalHeader(t("screen_titles.covid_data_webview")),
           }}
         />
         <Stack.Screen

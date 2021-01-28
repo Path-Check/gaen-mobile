@@ -11,9 +11,25 @@
     "more": "Viac",
     "next": "Hotovo"
   },
+  "errors": {
+    "something_went_wrong": "Niečo sa pokazilo"
+  },
+  "escrow_verification": {
+    "complete": {
+      "title": "Vďaka za udržanie tvojej komunity v bezpečí!"
+    }
+  },
+  "export": {
+    "enable_exposure_notifications_button": "Povoliť upozornenia o vystavení sa riziku"
+  },
   "exposure_history": {
     "how_does_this_work_para": "Keď je zapnutá funkcia oznámení týkajúcich vystavenia sa riziku, tvoj telefón používa Bluetooth na výmenu a ukladanie reťazcov náhodných čísel (nazývaných náhodné ID) zo všetkých telefónov, s ktorými sa stretne a ktoré majú tiež povolenú túto funkciu. Náhodné ID ťa osobne neidentifikuje s ostatnými používateľmi a kvôli ochrane tvojho súkromia sa mnohokrát mení. Dátum a trvanie stretnutia sa zaznamenávajú spolu s odhadom toho, ako blízko boli oba telefóny. Keď osoba nahlási pozitívnu diagnózu, posledné náhodné identifikačné čísla telefónu sú označené, aby anonymne informovali ostatných. Nezdieľajú sa žiadne miesta ani osobné informácie.",
     "why_did_i_get_an_en_para": "Dostaneš notifikáciu o vystavení sa riziku keď niekomu, s kým si sa stretol/a resp. sa ti skrížili cesty, bude diagnostikovaný COVID-19 a budeš mať možnosť informovať ostatných."
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Povoliť Bluetooth",
+    "cant_check_for_exposures_button": "Povoliť upozornenia o vystavení sa riziku",
+    "use_exposure_notifications_android_title": "Povoliť upozornenia o vystavení sa riziku"
   },
   "home": {
     "call_emergency_services": "Zavolaj pohotovostnú službu"
@@ -23,13 +39,9 @@
     "launch_get_started": "Začať"
   },
   "navigation": {
-    "exposure_history": "História vystavenia sa riziku",
-    "more_info": "Viac informácií"
+    "exposure_history": "História vystavenia sa riziku"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Povoliť Bluetooth"
-    },
     "privacy_policy": "Ochrana osobných údajov",
     "terms_header_title": "Podmienky používania"
   },

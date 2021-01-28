@@ -11,6 +11,9 @@
     "more": "Mais",
     "next": "Feito"
   },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Habilite o Bluetooth"
+  },
   "label": {
     "launch_enable_notif": "Permitir Notificações",
     "launch_get_started": "Começar",
@@ -18,9 +21,6 @@
     "privacy_policy": "Política de Privacidade"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Habilite o Bluetooth"
-    },
     "privacy_policy": "Política de Privacidade",
     "terms_header_title": "Termos de uso"
   },

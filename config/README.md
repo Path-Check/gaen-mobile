@@ -37,6 +37,16 @@ The supported values are:
 - `verificationCodeHowDoIGet`: The app will display this copy in the second section of
   the verification code info screen. It should contain information about how the
   user can get a verification code. The app provides a default value.
+- `callbackFormInstruction`: This is the copy that is shown at the top of the callback form
+
+#### App Transition Copy (Optional)
+
+This is a new onboarding screen if you are transition your current app to PathCheck.
+
+- `appTransition`: This is an object that contains the copy for the app transition screen.
+-  `header`: This text generally contains the App Name or a short title.
+- `body1`: This is the first section for details about the update and transition.
+- `body2`: This is the second section for details about the update and transition.
 
 The `json` structure is:
 
@@ -50,6 +60,12 @@ interface CustomCopy {
   healthAuthorityName: string
   verificationCodeInfo?: string
   verificationCodeHowDoIGet?: string
+  appTransition: {
+    header: string
+    body1: string
+    body2: string
+  }
+  callbackFormInstruction?: string
 }
 ```
 
@@ -61,7 +77,13 @@ interface CustomCopy {
     "about": "",
     "legal": "",
     "verificationCodeInfo": "",
-    "verificationCodeHowDoIGet": ""
+    "verificationCodeHowDoIGet": "",
+    "appTransition": {
+      "header": "",
+      "body1": "",
+      "body2": ""
+    },
+    "callbackFormInstruction": ""
   },
   "es_PR": {
     "healthAuthorityName": "Autoridad sanitaria",

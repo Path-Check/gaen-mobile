@@ -26,7 +26,6 @@ class MockENExposureDetectionSummary: ENExposureDetectionSummary {
     return 0
   }
   
-  @available(iOS 13.7, *)
   override var daySummaries: [ENExposureDaySummary] {
     let enExposureSummary = ENExposureDaySummary()
     return [enExposureSummary]
@@ -296,7 +295,7 @@ class ExposureManagerUnitTests: XCTestCase {
     
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.addObserverHandler = { (_, _, name, _) in
-      if name == Notification.Name.AuthorizationStatusDidChange {
+      if name == Notification.Name.ExposureNotificationStatusDidChange {
         registerNotificationExpectation.fulfill()
       }
     }
@@ -335,7 +334,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let broadcastAuthorizationStateExpectation = self.expectation(description: "A notification is post with the current authorization and enabled stated")
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
@@ -357,7 +356,8 @@ class ExposureManagerUnitTests: XCTestCase {
     btSecureStorageMock.userStateHandler = {
       let userState = UserState()
       userState.exposures.append(Exposure(id: "1",
-                                          date: Date().posixRepresentation))
+                                          date: Date().posixRepresentation,
+                                          weightedDurationSum: 2000))
       return userState
     }
     let exposureManager = ExposureManager(exposureNotificationManager: enManagerMock,
@@ -380,18 +380,24 @@ class ExposureManagerUnitTests: XCTestCase {
     let notificationCenterMock = NotificationCenterMock()
 
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
     let mockENManager = ENManagerMock()
+    mockENManager.exposureNotificationStatusHandler = {
+      .active
+    }
     mockENManager.setExposureNotificationEnabledHandler = { _, completion in
-      resolveExpectation.fulfill()
       completion(nil)
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in
+      resolveExpectation.fulfill()
+    }) { (_, _, _) in
+      rejectExpectation.fulfill()
+    }
     wait(for: [resolveExpectation,
                rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)
@@ -409,18 +415,22 @@ class ExposureManagerUnitTests: XCTestCase {
     resolveExpectation.isInverted = true
 
     let mockENManager = ENManagerMock()
-    mockENManager.setExposureNotificationEnabledHandler = { _, _ in
-      rejectExpectation.fulfill()
+    mockENManager.setExposureNotificationEnabledHandler = { _, completion in
+      completion(nil)
     }
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.postHandler = { notification in
-      if notification.name == .AuthorizationStatusDidChange {
+      if notification.name == .ExposureNotificationStatusDidChange {
         broadcastAuthorizationStateExpectation.fulfill()
       }
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockENManager,
                                           notificationCenter: notificationCenterMock)
-    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in }) { (_, _, _) in }
+    exposureManager.requestExposureNotificationAuthorization(resolve: { _ in
+      resolveExpectation.fulfill()
+    }) { (_, _, _) in
+      rejectExpectation.fulfill()
+    }
     wait(for: [resolveExpectation,
                rejectExpectation,
                broadcastAuthorizationStateExpectation], timeout: 0)

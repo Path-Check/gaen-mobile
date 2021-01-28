@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react-native"
 import { Share } from "react-native"
 import dayjs from "dayjs"
 
-import { DATE_FORMAT } from "./index"
+import { DATE_FORMAT } from "./SymptomEntryListItem"
 import { SymptomHistoryContext } from "./SymptomHistoryContext"
 import { SymptomHistory } from "./symptomHistory"
 import { Symptom } from "./symptom"

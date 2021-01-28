@@ -1,5 +1,3 @@
-import { register } from "fishery"
-
 import affectedUserFlowContext from "./affectedUserFlowContext"
 import configurationContext from "./configurationContext"
 import covidDataContext from "./covidDataContext"
@@ -13,7 +11,7 @@ import selfAssessmentContext from "./selfAssessmentContext"
 import symptomHistoryContext from "./symptomHistoryContext"
 import { covidData, covidDatum } from "./covidData"
 
-export const factories = register({
+export const factories = {
   affectedUserFlowContext,
   configurationContext,
   covidData,
@@ -27,4 +25,4 @@ export const factories = register({
   selfAssessmentAnswers,
   selfAssessmentContext,
   symptomHistoryContext,
-})
+}

@@ -7,7 +7,7 @@ describe("determineActivationSteps", () => {
   describe("when location is required and off", () => {
     it("the activate location step is included", () => {
       const environment: Environment = {
-        locationPermissions: "RequiredOff",
+        exposureNotificationsStatus: "LocationOffAndRequired",
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }
@@ -20,7 +20,7 @@ describe("determineActivationSteps", () => {
   describe("when display accept terms of service is true", () => {
     it("the accept terms of service step is included", () => {
       const environment: Environment = {
-        locationPermissions: "RequiredOff",
+        exposureNotificationsStatus: "Active",
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }
@@ -33,7 +33,7 @@ describe("determineActivationSteps", () => {
   describe("when product analytics are on", () => {
     it("the product analytics consent step is included", () => {
       const environment: Environment = {
-        locationPermissions: "RequiredOff",
+        exposureNotificationsStatus: "Active",
         displayAcceptTermsOfService: true,
         enableProductAnalytics: true,
       }

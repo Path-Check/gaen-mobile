@@ -8,7 +8,6 @@
   "common": {
     "back": "戻る",
     "cancel": "キャンセル",
-    "close": "閉じる",
     "continue": "継続する",
     "done": "完成です",
     "learn_more": "学ぶ",
@@ -16,6 +15,7 @@
     "more": "もっと",
     "next": "次へ進む",
     "no_thanks": "結構です",
+    "okay": "オーケー",
     "select_language": "言語を選択する",
     "settings": "設定を開く",
     "skip": "スキップ",
@@ -27,7 +27,14 @@
   "errors": {
     "description": "エラーが発生しました。アプリを再読み込みしてください。",
     "reload": "リロード",
+    "something_went_wrong": "問題が発生しました",
     "title": "不明なエラー"
+  },
+  "escrow_verification": {
+    "complete": {
+      "body": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
+      "title": "コミュニティを安全に守るためへのご協力ありがとう！"
+    }
   },
   "export": {
     "code_input_body_bluetooth": "確認コードを入力してください",
@@ -36,12 +43,10 @@
     "complete_body_bluetooth": "あなたはウイルスの蔓延を封じ込め、あなたのコミュニティの他の人々を保護するのを手伝っています。",
     "complete_title": "コミュニティを安全に守るためへのご協力ありがとう！",
     "consent_body_0": "あなたの陽性診断を共有することは任意であり、あなたの同意によってのみ行うことができます。",
-    "consent_body_1": "これを選択した場合は、コミュニティの他のユーザーが自分の健康に関する情報に基づいた意思決定を行い、ウイルスの蔓延を封じ込めるために自分の役割を果たすことを支援しています。",
     "consent_body_2": "共有される唯一の情報は、あなたの電話が過去14日間に近くにあった他の電話とBluetooth経由で交換したランダムな数のセットと、症状が発生したときの加重リスクスコアのみです。",
     "consent_button_title": "私は理解し、同意します",
-    "consent_subheader_1": "なぜ共有する必要があるのですか？",
-    "consent_subheader_2": "それはどのように機能しますか？",
     "enable_exposure_notifications_body": "陽性の検査結果を報告するには、接触通知を有効にする必要があります。",
+    "enable_exposure_notifications_button": "感染リスク通知を有効にする",
     "enable_exposure_notifications_title": "続行するには接触通知を有効にしてください",
     "error": {
       "invalid_code": "別のコードを試す",
@@ -61,24 +66,12 @@
         "no_token_for_existing_keys": "既存のデータがサーバーに送信されました。これは通常、このプロセスが以前にこのデバイスから試みられたが、別のアプリケーションで試みられたことを意味します。これを、使用された検証コードを提供した機関に伝えることができます。{{newKeysInserted}} 新しいキーが追加されました。",
         "no_token_for_existing_keys_title": "既存のキーを送信しようとしています"
       }
-    },
-    "start_header_bluetooth": "ウイルスの蔓延を封じ込め、コミュニティ内の他のユーザーを保護する活動にご協力ください"
+    }
   },
   "exposure_history": {
     "check_for_exposures": " 実行",
     "exposure_detail": {
-      "6ft_apart": "6フィート間隔を取る",
-      "ha_guidance_header": "私は何をすべきか？",
-      "header": "新型コロナウイルス感染者と遭遇していた可能性があります。",
-      "next_steps": "次へ進む",
-      "quarantine": "隔離する",
-      "wash_your_hands": "手洗い",
-      "wear_a_mask": "マスクを着用する"
-    },
-    "exposure_window": {
-      "four_to_six_days_ago": "4~6日前",
-      "seven_to_fourteen_days_ago": "7~14日前",
-      "today_to_three_days_ago": "過去 3 日以内"
+      "next_steps": "次へ進む"
     },
     "health_guidelines": {
       "six_feet_apart": "6フィート間隔を取る",
@@ -90,16 +83,18 @@
     "how_does_this_work": "これはどのように機能しますか?",
     "how_does_this_work_para": "接触通知がオンの場合、携帯電話はBluetoothを使用して、接触通知が有効になっている携帯電話から乱数列（ランダムIDと呼ばれます）を交換して保存します。ランダムIDは、他のユーザーに対して個人を特定することはなく、プライバシーを保護するために1日に何度も変更されます。",
     "last_days": "過去14日間",
-    "learn_more": "詳細情報",
+    "next_steps": "次へ進む",
     "no_connectivity_message": "インターネットに接続されていません！",
     "no_exposure_reports": "接触のリポートはありません",
     "no_exposure_reports_over_past": "過去14日間、接触のレポートを受け取っていません",
-    "possible_exposure": "COVID-19への接触の可能性",
-    "protect_yourself_and_others": "自分とコミュニティの他の人を守る",
-    "review_guidance_from_ha": "からのガイダンスを確認する {{healthAuthorityName}}",
     "updated": "更新",
     "why_did_i_get_an_en": "接触通知を受け取ったのはなぜですか？",
     "why_did_i_get_an_en_para": "近くにいた誰かが後でCOVID-19の陽性テストを受け取り、他の人に通知することを選択すると、接触の通知を受け取ります。"
+  },
+  "exposure_notification_alerts": {
+    "cant_check_for_exposures_button": "感染リスク通知を有効にする",
+    "share_exposure_information_ios_title": "接触情報を共有する",
+    "use_exposure_notifications_android_title": "感染リスク通知を有効にする"
   },
   "exposure_scanning_status": {
     "learn_more": "学ぶ"
@@ -108,9 +103,6 @@
     "bluetooth_info_body": "お使いの携帯電話は、Bluetooth低エネルギーを使用して近接して時間を過ごす他の携帯電話を検出します。これにより、アプリをデバイスで開いていなくても、アプリは毎日のログインを匿名で記録できます。",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}は、アプリが閉じられた後もアクティブのままになります",
-      "bluetooth_disabled_error_message": "アプリ設定に移動し、Bluetoothを有効にしてこのエラーを修正してください",
-      "bluetooth_disabled_error_title": "設定でブルートゥースを有効にする",
-      "bluetooth_header": "ブルートゥース",
       "location_disabled_error_message": "露出通知テクノロジーを有効にするには、設定アプリで位置情報へのアクセスを許可してください",
       "location_disabled_error_title": "設定での承認",
       "location_header": "ロケーション",
@@ -126,20 +118,12 @@
     "fix": "{{technology}} の問題を修正する",
     "get_more_info": "{{technology}}に関する詳細情報",
     "have_a_positive_test": "陽性のテスト結果コードがありますか？",
-    "if_you_have_a_code": "コミュニティを安全に保つためにテストを送信してください。",
     "proximity_tracing_info_body_1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_info_body_2": "遭遇した場合、データと情報は匿名のままです。アプリは個人データを保存しません。ランダムな ID のみが交換されます。これらは 14 日以内に削除されます。",
     "proximity_tracing_info_subheader_1": "近接トレースはどのように機能しますか？",
-    "proximity_tracing_info_subheader_2": "データは安全ですか?",
-    "proximity_tracing": {
-      "unauthorized_error_message_android": "感染リスク通知を有効にするには、設定アプリのCOVID-19感染リスク通知に移動し、「感染リスク通知を使用する」を有効にします。",
-      "unauthorized_error_message_ios": "感染リスク通知を有効にするには、[設定] および [感染リスク情報の共有] の [感染リスク通知] セクションに移動し、[アクティブ領域] を [%1$s:アプリケーション名] に設定します。",
-      "unauthorized_error_title": "感染リスク通知を有効にする"
-    },
-    "to_submit_your_test": "陽性のテスト結果を提出するには、コンタクトトレーサから陽性のテスト結果コードを取得する必要があります。"
+    "proximity_tracing_info_subheader_2": "データは安全ですか?"
   },
   "label": {
-    "check": "チェックマーク",
     "checked_checkbox": "チェックされたチェックボックス",
     "go_to_home_view": "ホーム ビューに移動する",
     "launch_enable_notif": "お知らせを有効にする",
@@ -150,14 +134,11 @@
     "unchecked_checkbox": "未チェックのチェックボックス"
   },
   "navigation": {
-    "exposure": "接触",
     "exposure_history": "感染リスクの履歴",
     "home": "ホーム",
-    "more_info": "より詳しい情報",
     "symptom_history": "症状の履歴"
   },
   "onboarding": {
-    "activation_header_title": "アプリの設定",
     "app_setup_complete_body": "{{applicationName}}はアクティブです。感染の連鎖をくい止める活動にご協力いただきありがとうございます。",
     "app_setup_complete_header": "アプリのセットアップが完了しました！",
     "app_setup_incomplete_body": "{{applicationName}}は、いつ、どこでCOVID 19に接触したかを知るために、近接トレースおよびBluetoothへの権限が必要です。これは[設定]で承認できます。",

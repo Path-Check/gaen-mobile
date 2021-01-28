@@ -56,6 +56,8 @@ const toStatus = (data: string): ENPermissionStatus => {
       return "Disabled"
     case "BluetoothOff":
       return "BluetoothOff"
+    case "LocationOff":
+      return "LocationOffAndRequired"
     case "Restricted":
       return "Restricted"
     case "Unauthorized":
@@ -86,6 +88,7 @@ export type RequestAuthorizationError =
   | "Unsupported"
   | "Invalidated"
   | "BluetoothOff"
+  | "LocationOffAndRequired"
   | "InsufficientStorage"
   | "NotEnabled"
   | "APIMisuse"
@@ -103,9 +106,7 @@ export type RequestAuthorizationFailure = {
   error: RequestAuthorizationError
 }
 
-export const requestAuthorization = async (): Promise<
-  RequestAuthorizationResponse
-> => {
+export const requestAuthorization = async (): Promise<RequestAuthorizationResponse> => {
   try {
     const enStatus = await permissionsModule.requestExposureNotificationAuthorization()
     return {
@@ -260,10 +261,6 @@ export const getRevisionToken = async (): Promise<string> => {
 
 // Debug Module
 const debugModule = NativeModules.DebugMenuModule
-
-export const forceAppCrash = async (): Promise<void> => {
-  return debugModule.forceAppCrash()
-}
 
 export const fetchDiagnosisKeys = async (): Promise<ENDiagnosisKey[]> => {
   return debugModule.fetchDiagnosisKeys()

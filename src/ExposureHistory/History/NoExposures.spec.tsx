@@ -18,12 +18,6 @@ describe("NoExposures", () => {
     ).not.toBeNull()
   })
 
-  it("displays generic health guidance", () => {
-    expect.assertions(1)
-    const { queryByText } = render(<NoExposures />)
-    expect(queryByText("Wash your hands often")).not.toBeNull()
-  })
-
   describe("clicking the Learn more link", () => {
     describe("when the health authority has provided a learn more url", () => {
       it("prompts the user to see HA guidance", () => {
@@ -42,7 +36,7 @@ describe("NoExposures", () => {
         )
 
         expect(queryByText(`Review guidance from`)).toBeDefined()
-        fireEvent.press(getByText("Learn More"))
+        fireEvent.press(getByText("Review Health Guidance"))
         expect(openURLSpy).toHaveBeenCalledWith(healthAuthorityLearnMoreUrl)
       })
     })

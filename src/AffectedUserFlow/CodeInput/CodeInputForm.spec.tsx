@@ -201,7 +201,7 @@ describe("CodeInputForm", () => {
       await waitFor(() => {
         expect(alertSpy).toHaveBeenCalledWith(
           "Something Went Wrong",
-          "An unexpected error occured. Please try again.",
+          "An unexpected error occurred. Please try again.",
           [{ text: "Okay" }],
         )
       })

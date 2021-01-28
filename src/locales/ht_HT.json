@@ -14,13 +14,13 @@
   "common": {
     "back": "Retounen",
     "cancel": "Anile",
-    "close": "Fèmen",
     "continue": "Kontinye",
     "done": "Fini",
     "maybe_later": "Petèt pita",
     "more": "Plis",
     "next": "Kontinye",
     "no_thanks": "Non mèsi",
+    "okay": "Oke",
     "save": "Anrejistre",
     "select_language": "Chwazi lang",
     "settings": "Louvri tablodbò",
@@ -30,10 +30,20 @@
     "submit": "Soumèt",
     "success": "Siksè"
   },
+  "covid_recommendation": {
+    "find_a_test_center": "Jwenn yon sant tès"
+  },
   "errors": {
     "description": "Yon erè fèt. Tanpri relanse aplikasyon an.",
     "reload": "Relanse",
+    "something_went_wrong": "Yon bagay mal pase",
     "title": "Erè enkoni"
+  },
+  "escrow_verification": {
+    "complete": {
+      "title": "Mèsi pou kenbe kominote ou an sekirite!"
+    },
+    "person_and_health_expert": "Yon moun kap pale ak yon ekspè nan sante"
   },
   "export": {
     "code_input_body_bluetooth": "Tape kòd verifikasyon {{name}} ki bay rezilta tès la pou verifye dyagnostik ou.",
@@ -42,9 +52,8 @@
     "complete_body_bluetooth": "Lè w chwazi pou pataje estati ou ak notifye lòt moun anoniman, ou ap ede evite pwopagasyon viris la ak pwoteje lòt moun nan kominote ou.",
     "complete_title": "Mèsi pou kenbe kominote ou an sekirite!",
     "consent_button_title": "Mwen konprann epi mwen konsanti",
-    "consent_subheader_1": "Poukisa mwen ta dwe pataje?",
-    "consent_subheader_2": "kijan sa mache?",
     "enable_exposure_notifications_body": "Ou dwe pèmèt notifcations ekspoze pou ou rapòte yon rezilta tès pozitif.",
+    "enable_exposure_notifications_button": "Aktive Notifikasyon Ekspozisyon yo",
     "error": {
       "invalid_code": "Eseye yon kòd diferan",
       "invalid_format": "Fòma envalid",
@@ -66,22 +75,14 @@
         "no_token_for_existing_keys_title": "Eseye soumèt kle ki egziste deja"
       }
     },
-    "start_header_bluetooth": "Ede evite pwopagasyon viris la epi pwoteje lòt moun nan kominote w "
+    "symptom_onset": {
+      "symptoms": "Sentòm yo"
+    }
   },
   "exposure_history": {
     "exposure_detail": {
-      "6ft_apart": "6 pye apa",
-      "ha_guidance_header": "Kisa mwen ta dwe fè?",
       "next_steps": "Pwochen etap yo",
-      "schedule_callback": "Orè yon apèl pou jwenn sipò nan men yon traseur kontak ki soti nan {{healthAuthorityName}} .",
-      "speak_with_contact_tracer": "Pale avèk yon trasè kontak",
-      "wash_your_hands": "Lave men w",
-      "wear_a_mask": "Mete yon mas"
-    },
-    "exposure_window": {
-      "four_to_six_days_ago": "4 a 6 jou de sa",
-      "seven_to_fourteen_days_ago": "7 a 14 jou de sa",
-      "today_to_three_days_ago": "Nan 3 dènye jou yo"
+      "schedule_callback": "Orè yon apèl pou jwenn sipò nan men yon traseur kontak ki soti nan {{healthAuthorityName}} ."
     },
     "health_guidelines": {
       "six_feet_apart": "Rete 6 pye apa",
@@ -93,18 +94,21 @@
     "how_does_this_work": "Kouman travay sa a fèt?",
     "how_does_this_work_para": "Lè Notifikasyon Ekspozisyon yo aktive, telefòn ou itilize Bluetooth pou echanje e anrejistre nimewo o aza (yo rele sa idantifikasyon o aza) apati nenpot ki telefòn li rankontre ki gen Notifikasyon Ekspozisyon aktive tou. Idantifikasyon o aza pa pral idantifye ou pèsonèlman kote lòt itilizatè yo ni fè echanj plizyè fwa nan yon jounen pou pwoteje vi prive ou. Dat ak dire rankont lan anrejistre daprè estimasyon distans de telefòn yo te ye yonn pa rapò ak lòt. Lè yon moun rapòte yon dyagnostik pozitif, dènye idantifikasyon o aza telefòn nan siyale lòt moun yo pa notifikasyon anonim. Pa gen lokalizasyon oswa enfòmasyon pèsonèl ki pataje.",
     "last_days": "21 jou pase yo",
+    "next_steps": "Pwochen etap yo",
     "no_connectivity_message": "Ou pa konekte sou entènèt!",
-    "protect_yourself_and_others": "Pwoteje tèt ou ak lòt moun nan kominote w ",
     "updated": "Mete ajou",
     "why_did_i_get_an_en": "Poukisa mwen te resevwa yon notifikasyon ekspozisyon?",
     "why_did_i_get_an_en_para": "Ou pral resevwa yon notifikasyon ekspozisyon lè yon moun ou kwaze chemen ak li resevwa yon dyagnostik pozitif oswa tès pou COVID-19 aprè ou te kwaze li e chwazi notifye lòt moun."
   },
+  "exposure_notification_alerts": {
+    "bluetooth_title": "Aktive Bluetooth",
+    "cant_check_for_exposures_button": "Aktive Notifikasyon Ekspozisyon yo",
+    "share_exposure_information_ios_title": "Pataje Enfòmasyon sou Ekspozisyon",
+    "use_exposure_notifications_android_title": "Aktive Notifikasyon Ekspozisyon yo"
+  },
   "home": {
     "bluetooth": {
       "all_services_on_subheader": "Notifikasyon ekspozisyon aktif",
-      "bluetooth_disabled_error_message": "Aktive Bluetooth nan tablodbò aplikasyon an",
-      "bluetooth_disabled_error_title": "Aktive Bluetooth nan tablodbò ",
-      "bluetooth_header": "Bluetooth",
       "proximity_tracing_header": "Trasaj Pwoksimite ",
       "tracing_off_header": "Notifikasyon ekspozisyon dezaktive",
       "tracing_off_subheader": "Aktive Notifikasyon Ekspozisyon pou resevwa enfòmasyon sou ekspozisyon posib yo",
@@ -117,7 +121,6 @@
     "proximity_tracing_info_subheader_2": "Èske done mwen yo an sekirite?"
   },
   "label": {
-    "check": "Kwochè ",
     "go_to_home_view": "Ale nan Akèy",
     "launch_enable_notif": "Aktive notifikasyon",
     "launch_get_started": "Kòmanse",
@@ -126,16 +129,10 @@
     "question_icon": "Imaj pwen entèwogasyon"
   },
   "navigation": {
-    "exposure": "Ekspozisyon",
     "exposure_history": "Lis ekspozisyon",
-    "home": "Lakay",
-    "more_info": "Plis enfòmasyon"
+    "home": "Lakay"
   },
   "onboarding": {
-    "activate_exposure_notifications": {
-      "bluetooth_header": "Aktive Bluetooth"
-    },
-    "activation_header_title": "Enstalasyon Aplikasyon",
     "app_setup_complete_body": "{{applicationName}} aktif. Mèsi pou ede kraze chèn enfeksyon an.",
     "app_setup_complete_header": "Enstalasyon Aplikasyon Enkonplè",
     "app_setup_incomplete_body": "{{applicationName}} mande otorizasyon pou Pwoksimite Trasaj ak Bluetooth, pou konnen ki lè ak ki kote ou te ekspoze a COVID 19. Ou ka otorize sa a nan tablodbò.",

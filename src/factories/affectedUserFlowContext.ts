@@ -11,4 +11,6 @@ export default Factory.define<AffectedUserContextState>(() => ({
   navigateOutOfStack: () => {},
   linkCode: undefined,
   setLinkCode: () => {},
+  symptomOnsetDate: 0,
+  setSymptomOnsetDate: () => {},
 }))

@@ -1,11 +1,12 @@
-import React, { useState, FunctionComponent } from "react"
+import React, { useState, FunctionComponent, useRef } from "react"
 import {
   Keyboard,
   TextInput,
   Alert,
   View,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
+  Platform,
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import DateTimePicker from "@react-native-community/datetimepicker"
@@ -15,7 +16,6 @@ import { showMessage } from "react-native-flash-message"
 import { useNavigation } from "@react-navigation/native"
 import dayjs from "dayjs"
 
-import { useConfigurationContext } from "../ConfigurationContext"
 import { useEscrowVerificationContext } from "./EscrowVerificationContext"
 import { LoadingIndicator, Text } from "../components"
 import { useStatusBarEffect, EscrowVerificationRoutes } from "../navigation"
@@ -29,25 +29,44 @@ import {
   Spacing,
   Buttons,
   Typography,
+  Outlines,
 } from "../styles"
 import { Icons } from "../assets"
 
 const defaultErrorMessage = " "
 
+export const phoneToFormattedString = (phonenumber: string): string => {
+  const underscores = new Array(10).fill("*")
+  const digits = phonenumber.split("")
+  const characters = [...digits, ...underscores]
+
+  const areaCode = characters.slice(0, 3).join("")
+  const firstPart = characters.slice(3, 6).join("")
+  const secondPart = characters.slice(6, 10).join("")
+
+  return `(${areaCode}) ${firstPart}-${secondPart}`
+}
+
+type Posix = number
+
 const UserDetailsForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { minimumPhoneDigits } = useConfigurationContext()
   const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
 
   const { testDate, setTestDate } = useEscrowVerificationContext()
-
   const [phoneNumber, setPhoneNumber] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isPhoneInputFocused, setIsPhoneInputFocused] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
+  const [showDatePickerAndroid, setShowDatePickerAndroid] = useState(false)
 
-  const handleOnChangeTestDate = (testDate: Date | undefined) => {
+  const handleOnChangeTestDate = (
+    _event: Event,
+    testDate: Date | undefined,
+  ) => {
+    setShowDatePickerAndroid(false)
     testDate && setTestDate(dayjs(testDate).valueOf())
   }
 
@@ -56,13 +75,38 @@ const UserDetailsForm: FunctionComponent = () => {
     setPhoneNumber(phoneNumber)
   }
 
+  const handleOnPressShadowPhoneInput = () => {
+    setIsPhoneInputFocused(true)
+    phoneInputRef?.current?.focus()
+  }
+
+  const handleOnBlurHiddenPhoneInput = () => {
+    setIsPhoneInputFocused(false)
+  }
+
+  const handleOnPressDateInput = () => {
+    setShowDatePickerAndroid(true)
+  }
+
   const handleOnPressSubmit = async () => {
-    setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
 
+    if (phoneNumberIsValid(phoneNumber)) {
+      await submitPhoneNumber(phoneNumber)
+    } else {
+      setErrorMessage(t("escrow_verification.error.invalid_phone_number"))
+    }
+  }
+
+  const phoneNumberIsValid = (number: string): boolean => {
+    const requiredLength = 10
+    return number.length === requiredLength
+  }
+
+  const submitPhoneNumber = async (phoneNumber: string): Promise<void> => {
+    setIsLoading(true)
     try {
       const response = await API.submitPhoneNumber(phoneNumber)
-
       if (response.kind === "success") {
         showMessage({
           message: t("common.success"),
@@ -70,26 +114,56 @@ const UserDetailsForm: FunctionComponent = () => {
         })
         navigation.navigate(EscrowVerificationRoutes.EscrowVerificationCodeForm)
       } else {
-        Alert.alert(showError(response.error))
+        Alert.alert(
+          showErrorDialogTitle(response.error),
+          showErrorDialogMessage(response.error),
+        )
       }
-      setIsLoading(false)
     } catch (e) {
       Logger.error(`escrow verification error`, e.message)
-      Alert.alert(showError("Unknown"), e.message)
+      Alert.alert(showErrorDialogTitle(e), e.message)
+    } finally {
       setIsLoading(false)
     }
   }
 
-  const buttonDisabled = phoneNumber.length < minimumPhoneDigits
+  const buttonDisabled = phoneNumber.length < 1
 
-  const showError = (error: API.PhoneNumberError): string => {
+  const showErrorDialogTitle = (error: API.PhoneNumberError): string => {
     switch (error) {
-      case "Unknown":
-        return t("common.something_went_wrong")
+      case "NotAuthorized":
+        return t("verification_code_alerts.not_authorized_title")
+      case "NoKeysOnDevice":
+        return t("verification_code_alerts.no_keys_on_device_title")
+      default:
+        return t("errors.something_went_wrong")
+    }
+  }
+
+  const showErrorDialogMessage = (error: API.PhoneNumberError): string => {
+    switch (error) {
+      case "NotAuthorized":
+        return t("verification_code_alerts.not_authorized_body")
+      case "NoKeysOnDevice":
+        return t("verification_code_alerts.no_keys_on_device_body")
+      case "RateLimit":
+        return t("escrow_verification.error.rate_limit")
+      default:
+        return t("errors.try_again_later")
     }
   }
 
   const errorMessageShouldBeAccessible = errorMessage !== ""
+
+  const phoneInputRef = useRef<TextInput>(null)
+
+  const shadowPhoneInputStyle = isPhoneInputFocused
+    ? style.focusedShadowPhoneInput
+    : style.unfocusedShadowPhoneInput
+
+  const formattedTestDate = dayjs(testDate).format("MMMM DD, YYYY")
+
+  const showDatePicker = showDatePickerAndroid || Platform.OS === "ios"
 
   return (
     <KeyboardAwareScrollView
@@ -99,41 +173,61 @@ const UserDetailsForm: FunctionComponent = () => {
     >
       <View>
         <View style={style.headerContainer}>
-          <Text style={style.header}>
+          <Text style={style.headerText}>
             {t("escrow_verification.user_details_form.test_details")}
           </Text>
+          <Text style={style.subheaderText}>
+            {t("escrow_verification.user_details_form.subheader")}
+          </Text>
         </View>
+
         <View style={style.inputContainer}>
           <Text style={style.inputLabel}>
             {t("escrow_verification.user_details_form.phone_number")}
           </Text>
+          <Pressable onPress={handleOnPressShadowPhoneInput}>
+            <Text style={shadowPhoneInputStyle}>
+              {phoneToFormattedString(phoneNumber)}
+            </Text>
+          </Pressable>
           <TextInput
-            value={phoneNumber}
-            style={style.textInput}
+            ref={phoneInputRef}
+            onBlur={handleOnBlurHiddenPhoneInput}
+            style={style.hiddenPhoneTextInput}
             keyboardType="phone-pad"
+            maxLength={10}
             returnKeyType="done"
             onChangeText={handleOnChangePhoneNumber}
             blurOnSubmit={false}
             onSubmitEditing={Keyboard.dismiss}
             testID="phone-number-input"
-            multiline
           />
         </View>
-        <DateTimePicker
-          value={dayjs(testDate).toDate()}
-          minimumDate={dayjs().subtract(4, "week").toDate()}
-          maximumDate={dayjs().toDate()}
-          onChange={(_event: Event, date?: Date) =>
-            handleOnChangeTestDate(date)
-          }
-        />
+
+        <View style={style.inputContainer}>
+          <Text style={style.inputLabel}>
+            {t("escrow_verification.user_details_form.test_date")}
+          </Text>
+          {Platform.OS === "android" && (
+            <Pressable onPress={handleOnPressDateInput} style={style.dateInput}>
+              <Text style={style.dateInputText}>{formattedTestDate}</Text>
+            </Pressable>
+          )}
+          {showDatePicker && (
+            <DatePicker
+              testDate={testDate}
+              handleOnChangeTestDate={handleOnChangeTestDate}
+            />
+          )}
+        </View>
+
         <View
           accessibilityElementsHidden={!errorMessageShouldBeAccessible}
           accessible={errorMessageShouldBeAccessible}
         >
           <Text style={style.errorSubtitle}>{errorMessage}</Text>
         </View>
-        <TouchableOpacity
+        <Pressable
           style={buttonDisabled ? style.buttonDisabled : style.button}
           onPress={handleOnPressSubmit}
           accessibilityLabel={t("common.submit")}
@@ -148,30 +242,61 @@ const UserDetailsForm: FunctionComponent = () => {
             xml={Icons.Arrow}
             fill={buttonDisabled ? Colors.text.primary : Colors.neutral.white}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
+
       {isLoading && <LoadingIndicator />}
     </KeyboardAwareScrollView>
   )
 }
 
+interface DatePickerProps {
+  testDate: Posix
+  handleOnChangeTestDate: (_event: Event, date: Date | undefined) => void
+}
+
+const DatePicker: FunctionComponent<DatePickerProps> = ({
+  testDate,
+  handleOnChangeTestDate,
+}) => {
+  return (
+    <DateTimePicker
+      mode="date"
+      display={Platform.OS === "ios" ? "compact" : "calendar"}
+      value={dayjs(testDate).toDate()}
+      minimumDate={dayjs().subtract(4, "week").toDate()}
+      maximumDate={dayjs().toDate()}
+      onChange={handleOnChangeTestDate}
+    />
+  )
+}
+
 const style = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.background.primaryLight,
   },
   contentContainer: {
+    flexGrow: 1,
     padding: Spacing.medium,
   },
   headerContainer: {
     marginBottom: Spacing.small,
+    paddingBottom: Spacing.small,
+    borderBottomWidth: Outlines.hairline,
+    borderColor: Colors.neutral.shade10,
   },
-  header: {
-    ...Typography.header.x50,
+  headerText: {
+    ...Typography.header.x60,
     marginBottom: Spacing.xxSmall,
+  },
+  subheaderText: {
+    ...Typography.body.x30,
   },
   errorSubtitle: {
     ...Typography.utility.error,
-    height: Spacing.huge,
+    height: Spacing.large,
+    marginBottom: Spacing.small,
   },
   inputContainer: {
     marginBottom: Spacing.medium,
@@ -180,8 +305,26 @@ const style = StyleSheet.create({
     ...Typography.form.inputLabel,
     paddingBottom: Spacing.xxSmall,
   },
-  textInput: {
+  dateInput: {
     ...Forms.textInput,
+  },
+  dateInputText: {
+    ...Typography.body.x30,
+  },
+  unfocusedShadowPhoneInput: {
+    ...Forms.textInput,
+    ...Typography.style.monospace,
+  },
+  focusedShadowPhoneInput: {
+    ...Forms.textInput,
+    ...Typography.style.monospace,
+    borderColor: Colors.primary.shade100,
+  },
+  hiddenPhoneTextInput: {
+    height: 0,
+    width: 0,
+    opacity: 0,
+    position: "absolute",
   },
   button: {
     ...Buttons.primary.base,

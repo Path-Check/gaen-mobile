@@ -5,12 +5,16 @@ import env from "react-native-config"
 type MeasurementSystem = "Imperial" | "Metric"
 
 export interface Configuration {
-  appDownloadLink: string
+  appDownloadUrl: string | null
   appPackageName: string
+  cdcGuidanceUrl: string | null
+  cdcSymptomsUrl: string | null
   displayAcceptTermsOfService: boolean
+  displayAppTransition: boolean
   displayCallbackForm: boolean
   displayCallEmergencyServices: boolean
   displayCovidData: boolean
+  displayCovidDataWebView: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   displayAgeVerification: boolean
@@ -19,26 +23,36 @@ export interface Configuration {
   findATestCenterUrl: string | null
   healthAuthorityAdviceUrl: string
   healthAuthorityCovidDataUrl: string | null
+  healthAuthorityCovidDataWebViewUrl: string | null
   healthAuthorityEulaUrl: string | null
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
+  healthAuthorityHealthCheckUrl: string | null
   healthAuthorityPrivacyPolicyUrl: string
   healthAuthorityVerificationCodeInfoUrl: string | null
+  includeSymptomOnsetDate: boolean
   measurementSystem: MeasurementSystem
   minimumAge: string
   minimumPhoneDigits: number
+  quarantineLength: number
   regionCodes: string[]
+  remoteContentUrl: string | null
   stateAbbreviation: string | null
+  supportPhoneNumber: string | null
   verificationStrategy: VerificationStrategy
 }
 
 const initialState: Configuration = {
-  appDownloadLink: "",
+  appDownloadUrl: null,
   appPackageName: "",
+  cdcGuidanceUrl: null,
+  cdcSymptomsUrl: null,
   displayAcceptTermsOfService: false,
+  displayAppTransition: false,
   displayCallbackForm: false,
   displayCallEmergencyServices: false,
   displayCovidData: false,
+  displayCovidDataWebView: false,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
   displayAgeVerification: false,
@@ -47,16 +61,22 @@ const initialState: Configuration = {
   findATestCenterUrl: null,
   healthAuthorityAdviceUrl: "",
   healthAuthorityCovidDataUrl: null,
+  healthAuthorityCovidDataWebViewUrl: null,
   healthAuthorityEulaUrl: null,
+  healthAuthorityHealthCheckUrl: null,
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityPrivacyPolicyUrl: "",
   healthAuthorityVerificationCodeInfoUrl: null,
+  includeSymptomOnsetDate: false,
   measurementSystem: "Imperial" as const,
   minimumAge: "18",
   minimumPhoneDigits: 0,
   regionCodes: [],
+  remoteContentUrl: null,
+  quarantineLength: 14,
   stateAbbreviation: "",
+  supportPhoneNumber: null,
   verificationStrategy: "Simple",
 }
 
@@ -73,6 +93,8 @@ const toVerificationStrategy = (strategy: string): VerificationStrategy => {
   }
 }
 
+const DEFAULT_QUARANTINE_LENGTH = 14
+
 const ConfigurationContext = createContext<Configuration>(initialState)
 
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
@@ -84,28 +106,36 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     PRIVACY_POLICY_URL: healthAuthorityPrivacyPolicyUrl,
   } = env
 
+  const appDownloadUrl = env.SHARE_APP_LINK || null
+  const cdcGuidanceUrl = env.CDC_GUIDANCE_LINK || null
+  const cdcSymptomsUrl = env.CDC_SYMPTOMS_URL || null
   const healthAuthorityCovidDataUrl = env.AUTHORITY_COVID_DATA_URL || null
+  const healthAuthorityCovidDataWebViewUrl =
+    env.AUTHORITY_COVID_DATA_WEBVIEW_URL || null
   const healthAuthorityEulaUrl = env.EULA_URL || null
+  const healthAuthorityHealthCheckUrl = env.HEALTH_CHECK_URL || null
   const healthAuthorityLegalPrivacyPolicyUrl =
     env.LEGAL_PRIVACY_POLICY_URL || null
   const healthAuthorityVerificationCodeInfoUrl =
     env.VERIFICATION_CODE_INFO_URL || null
+  const remoteContentUrl = env.REMOTE_CONTENT_URL || null
+  const supportPhoneNumber = env.SUPPORT_PHONE_NUMBER || null
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
+  const displayAppTransition = env.DISPLAY_APP_TRANSITION === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
   const displayCallEmergencyServices =
     env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
+  const displayCovidDataWebView = env.DISPLAY_COVID_DATA_WEBVIEW === "true"
   const displaySymptomHistory = env.DISPLAY_SYMPTOM_HISTORY === "true"
   const displaySelfAssessment = env.DISPLAY_SELF_ASSESSMENT === "true"
   const displayAgeVerification = env.DISPLAY_AGE_VERIFICATION === "true"
 
   const enableProductAnalytics = env.ENABLE_PRODUCT_ANALYTICS === "true"
 
-  const verificationStrategy: VerificationStrategy = toVerificationStrategy(
-    env.VERIFICATION_STRATEGY,
-  )
+  const includeSymptomOnsetDate = env.INCLUDE_SYMPTOM_ONSET_DATE === "true"
 
   const measurementSystem =
     env.MEASUREMENT_SYSTEM === "metric" ? "Metric" : "Imperial"
@@ -113,7 +143,6 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const minimumAge = env.MINIMUM_AGE
   const minimumPhoneDigits = parseInt(env.MINIMUM_PHONE_DIGITS) || 0
 
-  const appDownloadLink = env.SHARE_APP_LINK
   const appPackageName = Platform.select({
     ios: env.IOS_BUNDLE_ID,
     android: env.ANDROID_APPLICATION_ID,
@@ -123,15 +152,28 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const stateAbbreviation =
     env.STATE_ABBREVIATION?.length > 0 ? env.STATE_ABBREVIATION : null
 
+  const verificationStrategy: VerificationStrategy = toVerificationStrategy(
+    env.VERIFICATION_STRATEGY,
+  )
+
+  const envQuarantineLength = Number(env.QUARANTINE_LENGTH)
+  const quarantineLength = isNaN(envQuarantineLength)
+    ? DEFAULT_QUARANTINE_LENGTH
+    : envQuarantineLength
+
   return (
     <ConfigurationContext.Provider
       value={{
-        appDownloadLink,
+        appDownloadUrl,
+        cdcGuidanceUrl,
+        cdcSymptomsUrl,
         appPackageName,
         displayAcceptTermsOfService,
+        displayAppTransition,
         displayCallbackForm,
         displayCallEmergencyServices,
         displayCovidData,
+        displayCovidDataWebView,
         displaySymptomHistory,
         displaySelfAssessment,
         displayAgeVerification,
@@ -140,16 +182,22 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityCovidDataUrl,
+        healthAuthorityCovidDataWebViewUrl,
         healthAuthorityEulaUrl,
+        healthAuthorityHealthCheckUrl,
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl,
         healthAuthorityPrivacyPolicyUrl,
         healthAuthorityVerificationCodeInfoUrl,
+        includeSymptomOnsetDate,
         measurementSystem,
         minimumAge,
         minimumPhoneDigits,
+        quarantineLength,
         regionCodes,
+        remoteContentUrl,
         stateAbbreviation,
+        supportPhoneNumber,
         verificationStrategy,
       }}
     >

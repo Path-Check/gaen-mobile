@@ -13,7 +13,7 @@ describe("CovidDataCard", () => {
     it("shows an error with that info", () => {
       const dataRequest: CovidDataRequest = {
         status: "MISSING_INFO",
-        data: CovidData.empty,
+        data: CovidData.initial,
       }
       const locationName = "locationName"
 
@@ -29,7 +29,7 @@ describe("CovidDataCard", () => {
     it("displays a loading spinner", () => {
       const dataRequest: CovidDataRequest = {
         status: "LOADING",
-        data: CovidData.empty,
+        data: CovidData.initial,
       }
       const locationName = "locationName"
 
@@ -45,7 +45,7 @@ describe("CovidDataCard", () => {
     it("displays an error message", () => {
       const dataRequest: CovidDataRequest = {
         status: "ERROR",
-        data: CovidData.empty,
+        data: CovidData.initial,
       }
       const locationName = "locationName"
 

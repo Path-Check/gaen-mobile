@@ -88,7 +88,7 @@ final class ExposureManager: NSObject {
     notificationCenter.addObserver(
       self,
       selector: #selector(scheduleBackgroundTaskIfNeeded),
-      name: .AuthorizationStatusDidChange,
+      name: .ExposureNotificationStatusDidChange,
       object: nil
     )
   }
@@ -99,7 +99,7 @@ final class ExposureManager: NSObject {
 
   /// Broadcast EN Status
   @objc func awake() {
-    broadcastCurrentEnabledStatus()
+    broadcastCurrentExposureNotificationStatus()
   }
 
   // MARK: == State ==
@@ -280,8 +280,24 @@ final class ExposureManager: NSObject {
       if let error = error {
         let errorString = error._code.enErrorString
         reject(errorString, error.localizedDescription, error)
+      } else if (self.exposureNotificationStatus != .active) {
+        let error = GenericError.unknown
+        var errorString = 0.enErrorString
+        switch self.exposureNotificationStatus {
+        case .bluetoothOff:
+          errorString = 7.enErrorString
+        case .disabled:
+          errorString = 9.enErrorString
+        case .restricted:
+          errorString = 14.enErrorString
+        case .unauthorized:
+          errorString = 4.enErrorString
+        default:
+          errorString = 1.enErrorString
+        }
+        reject(errorString, error.localizedDescription, error)
       } else {
-        self.broadcastCurrentEnabledStatus()
+        self.broadcastCurrentExposureNotificationStatus()
         resolve(self.exposureNotificationStatus.rawValue)
       }
     }
@@ -385,7 +401,8 @@ final class ExposureManager: NSObject {
           if daySummary.isAboveScoreThreshold(with: exposureConfiguraton) &&
               self.btSecureStorage.canStoreExposure(for: daySummary.date) {
             let exposure = Exposure(id: UUID().uuidString,
-                                    date: daySummary.date.posixRepresentation)
+                                    date: daySummary.date.posixRepresentation,
+                                    weightedDurationSum: daySummary.daySummary.weightedDurationSum)
             newExposures.append(exposure)
           }
         }
@@ -566,9 +583,9 @@ private extension ExposureManager {
     }
   }
 
-  func broadcastCurrentEnabledStatus() {
+  func broadcastCurrentExposureNotificationStatus() {
     notificationCenter.post(Notification(
-      name: .AuthorizationStatusDidChange,
+      name: .ExposureNotificationStatusDidChange,
       object: self.exposureNotificationStatus.rawValue
     ))
   }
@@ -609,7 +626,7 @@ private extension ExposureManager {
       let dispatchGroup = DispatchGroup()
       for remoteURL in targetUrls {
         dispatchGroup.enter()
-        self.apiClient.downloadRequest(DiagnosisKeyUrlRequest.get(remoteURL),
+        self.apiClient.downloadRequest(KeyArchiveRequest.get(remoteURL),
                                        requestType: .downloadKeys) { result in
           switch result {
           case .success (let package):
@@ -668,7 +685,8 @@ private extension ExposureManager {
         } else {
           let newExposures = (exposures ?? []).map { exposure in
             Exposure(id: UUID().uuidString,
-                     date: exposure.date.posixRepresentation)
+                     date: exposure.date.posixRepresentation,
+                     weightedDurationSum: exposure.duration)
           }
           fullfill(newExposures)
         }

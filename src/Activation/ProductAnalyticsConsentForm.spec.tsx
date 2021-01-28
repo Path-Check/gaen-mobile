@@ -5,14 +5,13 @@ import { useNavigation } from "@react-navigation/native"
 import ProductAnalyticsConsentForm from "./ProductAnalyticsConsentForm"
 import { factories } from "../factories"
 import { ProductAnalyticsContext } from "../ProductAnalytics/Context"
-import { ActivationStackScreens } from "../navigation"
 import { OnboardingProvider } from "../OnboardingContext"
 
 jest.mock("@react-navigation/native")
 
 describe("ProductAnalyticsConsentForm", () => {
   describe("When the user presses accept consent", () => {
-    it("updates their consent status and navigates to the activation summary", async () => {
+    it("updates their consent status and navigates to the next activation screen", async () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValueOnce({
         navigate: navigationSpy,
@@ -38,15 +37,13 @@ describe("ProductAnalyticsConsentForm", () => {
 
       await waitFor(() => {
         expect(updateUserConsent).toHaveBeenCalledWith(true)
-        expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivateLocation,
-        )
+        expect(navigationSpy).toHaveBeenCalled()
       })
     })
   })
 
   describe("when the user presses maybe later", () => {
-    it("does not update their consent status and navigates to the activation summary", async () => {
+    it("does not update their consent status and navigates to the next activation screen", async () => {
       const navigationSpy = jest.fn()
       ;(useNavigation as jest.Mock).mockReturnValueOnce({
         navigate: navigationSpy,
@@ -72,9 +69,7 @@ describe("ProductAnalyticsConsentForm", () => {
 
       await waitFor(() => {
         expect(updateUserConsent).not.toHaveBeenCalled()
-        expect(navigationSpy).toHaveBeenCalledWith(
-          ActivationStackScreens.ActivateLocation,
-        )
+        expect(navigationSpy).toHaveBeenCalled()
       })
     })
   })

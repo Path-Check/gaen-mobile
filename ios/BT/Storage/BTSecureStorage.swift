@@ -118,12 +118,12 @@ class BTSecureStorage {
   func getRealmConfig() -> Realm.Configuration? {
     if let key = getEncryptionKey() {
       if (inMemory) {
-        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 11,
+        return Realm.Configuration(inMemoryIdentifier: identifier, encryptionKey: key as Data, schemaVersion: 12,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
                                                                               SymptomLogEntry.self])
       } else {
-        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 11,
+        return Realm.Configuration(encryptionKey: key as Data, schemaVersion: 12,
                                    migrationBlock: { _, _ in }, objectTypes: [UserState.self,
                                                                               Exposure.self,
                                                                               SymptomLogEntry.self])

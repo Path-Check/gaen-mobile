@@ -63,6 +63,9 @@ def copy_images_to_project_folder
 end
 
 def fetch_configurable_images(ha_label, access_token)
+  puts ""
+  puts "🛠 FetchingConfigurable Images:"
+
   zip_file_url = "#{resources_base_url(access_token)}/assets/#{ha_label}/#{ZIP_FILE_NAME}"
 
   unless url_exists?(zip_file_url)
@@ -72,7 +75,12 @@ def fetch_configurable_images(ha_label, access_token)
   Dir.mkdir(WORKING_DIRECTORY)
 
   download_zip_file_to_working_directory(zip_file_url)
+  print "."
   unzip_to_working_directory
+  print "."
   copy_images_to_project_folder
-  puts "Completed downloading assets for #{ha_label}"
+  print "."
+
+  puts ""
+  puts "✅ Done"
 end

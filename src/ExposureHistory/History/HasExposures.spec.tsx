@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { DateTimeUtils } from "../../utils"
 import { factories } from "../../factories"
 
-import ExposureList from "./ExposureList"
+import HasExposures from "./HasExposures"
 
 jest.mock("@react-navigation/native")
 ;(useNavigation as jest.Mock).mockReturnValue({ navigate: jest.fn() })
@@ -33,15 +33,12 @@ describe("ExposureList", () => {
 
       const exposures = [datum1, datum2, datum3]
 
-      const { getAllByText, queryByText, getByText } = render(
-        <ExposureList exposures={exposures} />,
+      const { getAllByTestId, queryByText } = render(
+        <HasExposures exposures={exposures} />,
       )
 
       expect(queryByText("No Exposure Reports")).toBeNull()
-      expect(getAllByText("Possible COVID-19 exposure").length).toEqual(3)
-      expect(getByText("Within the last 3 days")).toBeDefined()
-      expect(getByText("4 to 6 days ago")).toBeDefined()
-      expect(getByText("7 to 14 days ago")).toBeDefined()
+      expect(getAllByTestId("exposure-list-item").length).toEqual(3)
     })
   })
 })
