@@ -21,6 +21,7 @@ import org.pathcheck.covidsafepaths.R;
 public final class NotificationHelper {
 
   private static final String EXPOSURE_NOTIFICATION_CHANNEL_ID = "EXPOSURE_NOTIFICATION_CHANNEL_ID";
+  private static final String BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID = "EXPOSURE_CHECK_NOTIFICATION_CHANNEL_ID";
 
   private static final Integer EXPOSURE_NOTIFICATION_ID = 0;
   private static final Integer BACKGROUND_WORKER_NOTIFICATION_ID = 1;
@@ -58,9 +59,9 @@ public final class NotificationHelper {
    * Create notification that will be shown while we are checking exposures.
    */
   public static ForegroundInfo createWorkerNotification(Context context) {
-    createNotificationChannel(context);
+    createBackgroundWorkerNotificationChannel(context);
     NotificationCompat.Builder builder =
-        new Builder(context, EXPOSURE_NOTIFICATION_CHANNEL_ID)
+        new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
             .setContentTitle(context.getString(R.string.background_worker_notification_title))
@@ -78,6 +79,21 @@ public final class NotificationHelper {
               context.getString(R.string.exposure_notification_channel_name),
               NotificationManager.IMPORTANCE_HIGH);
       channel.setDescription(context.getString(R.string.exposure_notification_channel_description));
+      NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+      Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
+    }
+  }
+
+  /**
+   * Creates the notification channel to show notifications when the device is checking exposures in background.
+   */
+  private static void createBackgroundWorkerNotificationChannel(Context context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      NotificationChannel channel =
+          new NotificationChannel(BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID,
+              context.getString(R.string.background_worker_channel_name),
+              NotificationManager.IMPORTANCE_HIGH);
+      channel.setDescription(context.getString(R.string.background_worker_channel_description));
       NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
       Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
     }

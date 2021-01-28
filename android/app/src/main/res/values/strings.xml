@@ -2,6 +2,8 @@
 <resources>
   <!-- Shown on app info, app switcher, etc -->
   <string name="app_name" translatable="false">PathCheck BT</string>
+  <string name="background_worker_channel_description">Indicates your device is checking for possible COVID-19 exposure.</string>
+  <string name="background_worker_channel_name">Exposure Check</string>
   <string name="background_worker_notification_title">Checking exposures…</string>
   <string name="exposure_notification_channel_description">Exposure notification alerts.</string>
   <string name="exposure_notification_channel_name">Exposure Notification</string>
