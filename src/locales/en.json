@@ -530,6 +530,8 @@
     "no_keys_on_device_title": "No exposures to share from device",
     "not_authorized_body": "You did not authorize the app to share your Random IDs.",
     "not_authorized_title": "Did not authorize",
+    "rate_limit_body": "You've reach the daily submission limit. Please try again in 24 hours.",
+    "rate_limit_title": "Max submissions reached",
     "unknown_body": "An unexpected error occurred. Please try again.",
     "unknown_title": "Something Went Wrong"
   }
