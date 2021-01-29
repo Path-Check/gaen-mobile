@@ -24,6 +24,7 @@ const MoreInfo: FunctionComponent = () => {
     healthAuthorityName,
     verificationCodeInfo,
     verificationCodeHowDoIGet,
+    verificationCodeOnSubmitInfo,
   } = useCustomCopy()
   const { healthAuthorityVerificationCodeInfoUrl } = useConfigurationContext()
 
@@ -35,6 +36,9 @@ const MoreInfo: FunctionComponent = () => {
     t("export.verification_code_info.how_do_i_get_body", {
       healthAuthorityName,
     })
+  const verificationCodeOnSubmitInfoText =
+    verificationCodeOnSubmitInfo ||
+    t("export.verification_code_info.what_happens_body")
 
   const handleOnPressLink = () => {
     const url = healthAuthorityVerificationCodeInfoUrl
@@ -72,7 +76,7 @@ const MoreInfo: FunctionComponent = () => {
             {t("export.verification_code_info.what_happens_header")}
           </Text>
           <Text style={style.contentText}>
-            {t("export.verification_code_info.what_happens_body")}
+            {verificationCodeOnSubmitInfoText}
           </Text>
         </View>
       </ScrollView>
