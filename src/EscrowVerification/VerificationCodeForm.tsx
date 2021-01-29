@@ -105,6 +105,13 @@ const VerificationCodeForm: FunctionComponent = () => {
           [{ text: t("common.okay") }],
         )
         break
+      case "RateLimit":
+        Alert.alert(
+          t("verification_code_alerts.rate_limit_title"),
+          t("verification_code_alerts.rate_limit_body"),
+          [{ text: t("common.okay") }],
+        )
+        break
       case "Unknown":
         Alert.alert(
           t("verification_code_alerts.unknown_title"),

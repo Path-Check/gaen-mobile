@@ -19,10 +19,11 @@ interface PhoneNumberFailure {
 }
 
 export type PhoneNumberError =
-  | "RateLimit"
-  | "Unknown"
   | "NoKeysOnDevice"
   | "NotAuthorized"
+  | "Forbidden"
+  | "RateLimit"
+  | "Unknown"
 
 export const submitPhoneNumber = async (
   phoneNumber: string,
@@ -79,7 +80,10 @@ const handlePhoneNetworkError = (error: any): PhoneNumberError => {
 
     switch (error.code) {
       case "403":
-        Logger.error("Hit rate limit")
+        Logger.error("Escrow server returned 403: Forbidden")
+        return "Forbidden"
+      case "429":
+        Logger.error("Escrow server returned 429: Hit rate limit")
         return "RateLimit"
       case "999":
         return "NoKeysOnDevice"
@@ -109,7 +113,12 @@ interface SubmitKeysFailure {
   error: SubmitKeysError
 }
 
-export type SubmitKeysError = "Unknown" | "NoKeysOnDevice" | "NotAuthorized"
+export type SubmitKeysError =
+  | "NoKeysOnDevice"
+  | "NotAuthorized"
+  | "RateLimit"
+  | "Forbidden"
+  | "Unknown"
 
 export const submitDiagnosisKeys = async (
   verificationCode: string,
@@ -172,6 +181,12 @@ const handleKeysNetworkError = (error: any): SubmitKeysError => {
     switch (error.code) {
       case "999":
         return "NoKeysOnDevice"
+      case "403":
+        Logger.error("Escrow server returned 403: Forbidden")
+        return "Forbidden"
+      case "429":
+        Logger.error("Escrow server returned 429: Hit rate limit")
+        return "RateLimit"
       default:
         Logger.error(`Unhandled error code in handleKeysNetworkError:`, {
           code: error.code,
