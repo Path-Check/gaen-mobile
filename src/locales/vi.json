@@ -523,6 +523,7 @@
     "network_connection_title": "Không Có Kết Nối Internet",
     "no_keys_on_device_body": "Bạn không có bất kỳ sự phơi bày nào để gửi. Hãy tiếp tục cách ly.",
     "no_keys_on_device_title": "Không bị phơi sáng trên thiết bị",
+    "rate_limit_body": "Bạn đã đạt đến giới hạn gửi hàng ngày. Vui lòng thử lại sau 24 giờ.",
     "unknown_body": "Đã có lỗi bất ngờ. Vui lòng thử lại.",
     "unknown_title": "Có Vấn Đề"
   }

@@ -89,18 +89,18 @@
     "start": {
       "body": "코로나19 양성 결과를 받은 경우에 (항체 검사 제외) 익명으로 신고 할 수 있습니다. \n\n검사 결과를 신고해 주시면 커뮤니티 안에 다른 사람들이 바이러스의 확산을 막는 일에 도움이 됩니다.",
       "header": "양성 결과를 신고하기",
-      "what_is_a_verification_code": "인증 번호는 무엇인가요?"
+      "what_is_a_verification_code": "인증 코드는 무엇인가요?"
     },
     "user_details_form": {
       "phone_number": "전화 번호",
-      "subheader": "전화 번호와 시험 날짜를 입력하시면 인증 번호를 문자로 보내드립니다.",
+      "subheader": "전화 번호와 시험 날짜를 입력하시면 인증 코드를 문자로 보내드립니다.",
       "test_date": "검사 날짜",
       "test_details": "검사 세부 정보"
     }
   },
   "export": {
-    "code": "인증 번호",
-    "code_input_body_bluetooth": "인증 번호를 입력하십시오.",
+    "code": "인증 코드",
+    "code_input_body_bluetooth": "인증 코드를 입력하십시오.",
     "code_input_button_cancel": "취소",
     "code_input_title_bluetooth": "진단을 확인하십시오.",
     "complete_body_bluetooth": "귀하는 코로나19 확산을 방지하고, 지역사회를 보호하는데 도움이됩니다.",
@@ -108,24 +108,24 @@
     "consent_body_0": "코로나19 양성 결과를 공유하는 것은 선택사항이며, 귀하의 동의가 있어야만 수행 할 수 있습니다.",
     "consent_body_2": "공유 되는 유일한 정보는 휴대 전화가 지난 14일 동안 근처에 있던 다른 휴대 전화와 블루투스를 통해 교환 된 무작위 숫자 세트와 증상이 발생한 시기를 기반으로 한 가중 위험 점수입니다.",
     "consent_button_title": "본인은 이해했으며, 동의합니다.",
-    "consent_warning_message": "계속하면 인증 번호가 무효화됩니다. 향후 환진 진단을 공유하려면 먼저 새 인증 번호를 받아야합니다.",
+    "consent_warning_message": "계속하면 인증 코드가 무효화됩니다. 향후 양성 결과를 공유하려면 먼저 새로운 인증 코드를 받아야합니다.",
     "consent_warning_title": "경고!",
     "enable_exposure_notifications_body": "양성 검사 결과를 보고하려면 노출 알림을 활성화해야 합니다.",
     "enable_exposure_notifications_button": "노출 알림 활성화",
     "enable_exposure_notifications_title": "계속하려면 노출 알림 설정",
-    "enter_verification_code": "인증 번호를 입력하십시오.",
+    "enter_verification_code": "인증 코드를 입력하십시오.",
     "error": {
-      "invalid_code": "다른 인증 번호로 시도하십시오.",
-      "invalid_format": "인증 번호는 숫자와 영문 글자만 포함할 수 있습니다.",
+      "invalid_code": "다른 인증 코드로 시도하십시오.",
+      "invalid_format": "인증 코드는 숫자와 영문 글자만 포함할 수 있습니다.",
       "network_connection_error": "인터넷에 연결되지 않았습니다.",
-      "unknown_code_verification_error": "다른 인증 번호로 시도하십시오.",
-      "verification_code_used": "인증 번호가 이미 사용되었습니다."
+      "unknown_code_verification_error": "다른 인증 코드로 시도하십시오.",
+      "verification_code_used": "인증 코드가 이미 사용되었습니다."
     },
     "intro": {
-      "body1": "코로나19 검사 양성 괄과에 대해 {{healthAuthorityName}}한테서 인증 번호를 받은 경우에 다음 화면에서 인증 번호를 제출할 수 있습니다.",
-      "body2": "인증 번호가 없지만 양성 결과를 받은 경우에 {{healthAuthorityName}}한테서 인증 번호를 받고 나서 계속할 수 있습니다.",
-      "header": "인증 번호를 갖고 계십니까?",
-      "what_is_a": "인증 번호는 무엇입니까?"
+      "body1": "코로나19 검사 양성 괄과에 대해 {{healthAuthorityName}}한테서 인증 코드를 받은 경우에 다음 화면에서 인증 코드를 제출할 수 있습니다.",
+      "body2": "인증 코드가 없지만 양성 결과를 받은 경우 {{healthAuthorityName}}한테서 인증 코드를 받고 나서 계속할 수 있습니다.",
+      "header": "인증 코드를 갖고 계십니까?",
+      "what_is_a": "인증 코드는 무엇인가요?"
     },
     "never_mind_button_title": "동의하지 않습니다 (취소)",
     "person_and_health_expert": "의료 전문가와 이야기하는 사람",
@@ -138,9 +138,9 @@
         "unknown": "노출 데이터를 제출하지 못했습니다."
       },
       "no_op": {
-        "empty_exposure_keys": "휴대 전화에 발생 로그가 없습니다. 최근 데이터를 재설정 한 경우 24시간 동안 기다려주십시오. 새로운 인증 번호를 요청해야 합니다.",
+        "empty_exposure_keys": "휴대 전화에 발생 로그가 없습니다. 최근 데이터를 재설정 한 경우 24시간 동안 기다려주십시오. 새로운 인증 코드를 요청해야 합니다.",
         "empty_exposure_keys_title": "죄송합니다. 사용 가능한 로그 기록 데이터가 없습니다.",
-        "no_token_for_existing_keys": "기존 데이터가 서버로 전송되었습니다. 이는 일반적으로 본 프로세스가 이 장치에서 이전에 시도되었지만 다른 애플리케이션에서 시도되었음을 의미합니다. 사용된 인증 번호를 제공한 기관에 이를 전달할 수 있습니다. 새로운 키가 {{newKeysInserted}}개 추가되었습니다.",
+        "no_token_for_existing_keys": "기존 데이터가 서버로 전송되었습니다. 이는 일반적으로 본 프로세스가 이 장치에서 이전에 시도되었지만 다른 애플리케이션에서 시도되었음을 의미합니다. 사용된 인증 코드를 제공한 기관에 이를 전달할 수 있습니다. 새로운 키가 {{newKeysInserted}}개 추가되었습니다.",
         "no_token_for_existing_keys_title": "기존 키 제출 시도"
       }
     },
@@ -154,11 +154,11 @@
     "verification_code_info": {
       "contact_at": "{{healthAuthorityName}} 연락하기",
       "how_do_i_get_body": "보건 당국인 {{healthAuthorityName}} 문의하십시오.",
-      "how_do_i_get_header": "인증 번호는 어떻게 받나요?",
-      "info_body": "인증 번호는 검사 결과가 양성인 경우 보건 당국 {{healthAuthorityName}}에서 제공 한 번호입니다.\n\n인증 번호는 귀하의 양성 결과가 인증된 결과인지 확인하는 데 사용됩니다.\n\n만료된 검사 결과가 제출되지 않도록 각 인증 번호는 짧은 기간 이내에 만료됩니다. \n\n인증 번호를 제출할 때 오류가 발생할 경우 다시 제출하려면 보건 당국으로부터 새로운 인증 번호를 받아야 합니다.",
-      "info_header": "인증 번호는 무엇입니까?",
-      "what_happens_body": "인증 번호를 제출하면 노출된 가능성이 있다는 사실을 다른 사람과 익명으로 공유 할 수 있는지 확인하라는 메시지가 표시됩니다.\n\n허용하면 기기가 임의 노출 코드를 전송하여 코로나19 확진자의 근처에 있음을 익명으로 다른 사람에게 알립니다. 이를 통해 노출 된 사람은 테스트 센터를 찾고 주변 사람들을 보호하기 위해 더 빨리 행동 할 수 있습니다.",
-      "what_happens_header": "인증 번호를 제출하면 어떻게 되나요?"
+      "how_do_i_get_header": "인증 코드는 어떻게 받나요?",
+      "info_body": "인증 코드는 검사 결과가 양성인 경우 보건 당국 {{healthAuthorityName}}에서 제공한 코드입니다.\n\n인증 코드는 귀하의 양성 결과가 인증된 결과인지 확인하는 데 사용됩니다.\n\n만료된 검사 결과가 제출되지 않도록 각 인증 코드는 짧은 기간 이내에 만료됩니다. \n\n인증 코드를 제출할 때 오류가 발생할 경우 다시 제출하려면 보건 당국으로부터 새로운 인증 코드를 받아야 합니다.",
+      "info_header": "인증 코드는 무엇인가요?",
+      "what_happens_body": "인증 코드를 제출하면 노출된 가능성이 있다는 사실을 다른 사람과 익명으로 공유 할 수 있는지 확인하라는 메시지가 표시됩니다.\n\n허용하면 기기가 임의 노출 코드를 전송하여 코로나19 확진자의 근처에 있음을 익명으로 다른 사람에게 알립니다. 이를 통해 노출 된 사람은 테스트 센터를 찾고 주변 사람들을 보호하기 위해 더 빨리 행동 할 수 있습니다.",
+      "what_happens_header": "인증 코드를 제출하면 어떻게 되나요?"
     }
   },
   "exposure_history": {
@@ -258,11 +258,11 @@
     "proximity_tracing_info_subheader_2": "나의 데이터는 안전하나요?",
     "take_assessment": "평가 하기",
     "verification_code_card": {
-      "if_you_have_a_code": "커뮤니티의 안전을 지키기 위해 인증 번호를 제출해 주세요.",
+      "if_you_have_a_code": "커뮤니티의 안전을 지키기 위해 인증 코드를 제출해 주세요.",
       "if_you_have_a_positive_test": "코로나19 양성 결과를 받을 경우에 익명으로 그 결과를 신고하여 당신의 커뮤니티의 안전을 지킬 수 있습니다.",
-      "more_info": "인증 번호는 무엇입니까?",
+      "more_info": "인증 코드는 무엇인가요?",
       "report_positive_test": "양성 결과를 신고하기",
-      "submit_code": "인증 번호를 제출하기"
+      "submit_code": "인증 코드를 제출하기"
     }
   },
   "label": {
@@ -309,13 +309,13 @@
     "protect_privacy": {
       "body_1": "이러한 ID에는 개인 정보가 포함되어 있지 않으며, 신분 보호를 위해 10-20 분마다 변경됩니다.",
       "body_2": "휴대 전화는 블루투스 저에너지를 사용하여 다른 휴대 전화와 임의ID를 교환합니다. 이렇게하면 휴대 전화를 켜지 않은 경우에도 {{applicationName}} 앱을 통해 익명으로 일상적인 만남을 추적 할 수 있습니다.",
-      "body_3": "코로나19 감염 확진 후 사용자는 {{applicationName}} 앱과 인증 번호를 공유하여 진단을 확인할 수 있습니다. 휴대 전화의 최근 임의ID는 플래그가 부착되어 안전하게 서버에 업로드됩니다. 해당 확인 프로세스는 잘못된 코로나19 양성 판단 보고를 방지하는 데 도움이됩니다.",
+      "body_3": "코로나19 감염 확진 후 사용자는 {{applicationName}} 앱과 인증 코드를 공유하여 진단을 확인할 수 있습니다. 휴대 전화의 최근 임의ID는 플래그가 부착되어 안전하게 서버에 업로드됩니다. 해당 확인 프로세스는 잘못된 코로나19 양성 판단 보고를 방지하는 데 도움이됩니다.",
       "body_4": "플래그가 부착된 ID가 휴대 전화에 저장된 ID와 일치할 경우, 코로나19 확진자와 만난 사실이 있음을 나타낸다. 이는 {{applicationName}} 앱이 사용자가 바이러스에 노출되었는지 확인하는 방법입니다.",
       "body_5": "만약 일치하는 경우 {{applicationName}} 앱은 귀하에게 해당 내용을 알리고, 보건부의 추가 지침을 제공합니다.\n\n이것은 {{applicationName}} 앱이 귀하가 누구이며, 어디에 있었는지에 대한 정보 없이 건강에 대한 결정을 내리고 지역사회를 안전하게 유지할 수 있는 방법입니다.",
       "image_label_1": "근처에 임의 ID 문자열이 있는 휴대 전화를 들고 있는 남자의 이미지",
       "image_label_2": "임의의 ID를 교환하는 두 대의 스마트폰 이미지",
-      "image_label_3": "익명의 인증 번호를 입력하는 남성의 이미지입니다",
-      "image_label_4": "여러 개의 임의 ID와 근처에 인증 번호가 있는 스마트폰 이미지",
+      "image_label_3": "익명의 인증 코드를 입력하는 남성의 이미지입니다",
+      "image_label_4": "여러 개의 임의 ID와 근처에 인증 코드가 있는 스마트폰 이미지",
       "image_label_5": "전화를 사용하는 여자의 이미지",
       "subheader_1": "노출 알림을 켜면 휴대폰에 자주 변경되는 임의의 ID 태그가 지정됩니다.",
       "subheader_2": "노출 알림이 활성화 된 휴대폰은 마주 치는 다른 기기와 ID를 교환합니다.",
@@ -520,16 +520,17 @@
     "sore_throat": "인후통"
   },
   "verification_code_alerts": {
-    "code_used_body": "입력하신 인증 번호가 이미 사용되었습니다.",
-    "code_used_title": "이미 사용 된 인증 번호",
-    "invalid_code_body": "제출하신 인증 번호가 잘못되었습니다.\n\n인증 번호는 보건 당국에서 제공 한 유효한 번호여야 합니다.\n\n인증 번호가 만료되었을 수도 있습니다. 그렇다면 보건 당국로부터 새로운 인증 번호를 요청해야 합니다.",
-    "invalid_code_title": "무효 인증 번호",
-    "network_connection_body": "인증 본호를 제출하려면 WiFi에 연결되어 있어야 합니다.",
+    "code_used_body": "입력하신 인증 코드가 이미 사용되었습니다.",
+    "code_used_title": "이미 사용 된 인증 코드",
+    "invalid_code_body": "제출하신 인증 코드가 잘못되었습니다.\n\n인증 코드는 보건 당국에서 제공한 유효한 코드여야 합니다.\n\n인증 코드가 만료되었을 수도 있습니다. 그렇다면 보건 당국로부터 새로운 인증 코드를 요청해야 합니다.",
+    "invalid_code_title": "잘못된 인증 코드",
+    "network_connection_body": "인증 코드를 제출하려면 WiFi에 연결되어 있어야 합니다.",
     "network_connection_title": "인터넷에 연결되지 않음",
     "no_keys_on_device_body": "노출 기록을 공유할 만큼 오랫동안 앱을 사용하지 않았습니다. 계속 격리하십시오.",
     "no_keys_on_device_title": "기기에서 공유 할 노출 기록 없음",
     "not_authorized_body": "임의 ID를 공유하도록 앱을 승인하지 않았습니다.",
     "not_authorized_title": "승인하지 않음",
+    "rate_limit_body": "일일 제출 한도에 초과했습니다. 24시간 후에 다시 시도하십시오.",
     "unknown_body": "오류가 발생했습니다. 다시 시도하십시오.",
     "unknown_title": "오류가 발생했습니다."
   }
