@@ -140,8 +140,8 @@
       "no_op": {
         "empty_exposure_keys": "It looks like you have no encounter logs on your device, please wait 24 hours to proceed if you recently reset your data. You may need to request a new verification code.",
         "empty_exposure_keys_title": "No encounter logging data is available",
-        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added.",
-        "no_token_for_existing_keys_title": "Attempt to submit existing keys"
+        "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new exposure codes added.",
+        "no_token_for_existing_keys_title": "Attempt to submit existing exposure codes"
       }
     },
     "symptom_onset": {
@@ -181,7 +181,7 @@
       "wear_a_mask": "Wear a mask"
     },
     "how_does_this_work": "How does this work?",
-    "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth Low Energy to swap and save random number strings (called random IDs) from any phones it is in close contact to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
+    "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth Low Energy to swap and save random number strings (called random codes) from any phones it is in close contact to that also have Exposure Notifications enabled. Random codes won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "more_info": "Learn more about Exposure Notifications",
     "next_steps": "Next Steps",
@@ -195,7 +195,7 @@
     "updated": "Updated",
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close contact with later uses the app to report a positive COVID-19 test.",
-    "your_device_exchanged": "Within each date range below, your device exchanged keys with another device that later received a verified positive test result.",
+    "your_device_exchanged": "Within each date range below, your device exchanged exposure codes with another device that later received a verified positive test result.",
     "your_recommended_quarantine_is_over": "Your recommended quarantine is over. Please continue to follow the health guidelines."
   },
   "exposure_notification_alerts": {
@@ -253,7 +253,7 @@
     "not_feeling_well": "Not feeling well?",
     "notifications_off": "Turn on notifications to get notified if you receive an exposure",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an anonymous encounter is registered on your device.",
-    "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
+    "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random codes are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Are my data secure?",
     "take_assessment": "Take Assessment",
@@ -307,25 +307,25 @@
     "privacy_policy": "Privacy Policy",
     "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
-      "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
-      "body_2": "Phones swap random IDs with other devices using Bluetooth Low Energy. This allows {{applicationName}} to keep track of your daily encounters anonymously, even when you don’t have it open on your device.",
-      "body_3": "After testing positive for COVID-19, users can share a verification code with {{applicationName}} to verify their diagnosis. Their phone’s recent random IDs are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
-      "body_4": "If a flagged ID matches with an ID stored on your phone, this indicates you may have encountered someone who has tested positive for COVID-19. This is how {{applicationName}} can determine if you may have been exposed to the virus.",
+      "body_1": "These codes do not contain any personal information and change every 10-20 minutes to protect your identity.",
+      "body_2": "Phones swap random codes with other devices using Bluetooth Low Energy. This allows {{applicationName}} to keep track of your daily encounters anonymously, even when you don’t have it open on your device.",
+      "body_3": "After testing positive for COVID-19, users can share a verification code with {{applicationName}} to verify their diagnosis. Their phone’s recent random codes are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
+      "body_4": "If a flagged code matches with a code stored on your phone, this indicates you may have encountered someone who has tested positive for COVID-19. This is how {{applicationName}} can determine if you may have been exposed to the virus.",
       "body_5": "If there’s a match, {{applicationName}} will notify you and provide further guidance from your health department.\n\nThis is how {{applicationName}} can empower you to make decisions about your health, and keep your community safe, all without knowing who you are or where you’ve been.",
-      "image_label_1": "An image of a man holding his phone with a nearby random ID character string.",
-      "image_label_2": "An image of two smartphones exchanging random IDs.",
+      "image_label_1": "An image of a man holding his phone with a nearby random code character string.",
+      "image_label_2": "An image of two smartphones exchanging random codes.",
       "image_label_3": "An image of a man entering an anonymous verification code.",
-      "image_label_4": "An image of a smartphone with several Random IDs and a verification code nearby.",
+      "image_label_4": "An image of a smartphone with several random codes and a verification code nearby.",
       "image_label_5": "An image of a woman using her phone.",
-      "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random IDs",
-      "subheader_2": "Phones with Exposure Notifications enabled swap IDs with other devices they encounter",
+      "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random codes",
+      "subheader_2": "Phones with Exposure Notifications enabled swap codes with other devices they encounter",
       "subheader_3": "When a user tests positive, they can choose to anonymously share their health status",
-      "subheader_4": "Each phone periodically communicates with the server for the list of flagged IDs and looks for matches",
-      "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
+      "subheader_4": "Each phone periodically communicates with the server for the list of flagged codes and looks for matches",
+      "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged code"
     },
     "proximity_tracing_already_active": "Exposure notifications are active",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
-    "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted after 14 days.",
+    "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random codes are exchanged. These are deleted after 14 days.",
     "proximity_tracing_button": "Activate Exposure Notifications",
     "proximity_tracing_header": "Activate Exposure Notifications",
     "proximity_tracing_subheader1": "How does it work?",
@@ -528,9 +528,9 @@
     "network_connection_title": "No Internet Connection",
     "no_keys_on_device_body": "You have not had the app long enough to share exposures. Please continue to isolate.",
     "no_keys_on_device_title": "No exposures to share from device",
-    "not_authorized_body": "You did not authorize the app to share your Random IDs.",
+    "not_authorized_body": "You did not authorize the app to share your random codes.",
     "not_authorized_title": "Did not authorize",
-    "rate_limit_body": "You've reach the daily submission limit. Please try again in 24 hours.",
+    "rate_limit_body": "You've reached the daily submission limit. Please try again in 24 hours.",
     "rate_limit_title": "Max submissions reached",
     "unknown_body": "An unexpected error occurred. Please try again.",
     "unknown_title": "Something Went Wrong"
