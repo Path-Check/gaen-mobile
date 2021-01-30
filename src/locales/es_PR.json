@@ -165,7 +165,7 @@
     "check_for_exposures": "Comprobar si hay exposiciones",
     "days_remaining": "Días restantes:",
     "exposure_detail": {
-      "next_steps": "Revisar la guía de salud",
+      "next_steps": "Revisar directrices de salud",
       "personalize_my_guidance": "Personalizar mi orientación",
       "schedule_callback": "Programe una llamada para recibir ayuda de un rastreador de contactos de {{healthAuthorityName}}",
       "speak_with_covid_support": "Habla con el soporte de COVID"
@@ -190,7 +190,7 @@
     "no_exposure_reports_over_past": "Usted no ha recibido ningún informe de exposición en los pasados 14 días",
     "possible_exposures": "Posibles exposiciones",
     "recommended_quarantine": "Cuarentena Recomendada",
-    "review_health_guidance": "Revisar la guía de salud",
+    "review_health_guidance": "Revisar directrices de salud",
     "stay_quarantined_through": "Último día:",
     "updated": "Actualizado",
     "why_did_i_get_an_en": "¿Por qué recibí un aviso de exposición?",
@@ -312,6 +312,11 @@
       "body_3": "Después de dar positivo por COVID-19, los usuarios pueden compartir una contraseña con {{applicationName}} para verificar su diagnóstico. Las identificaciones aleatorias recientes de su teléfono se marcan y se cargan de forma segura en el servidor. Este proceso de verificación ayuda a evitar informes de falsos positivos.",
       "body_4": "Si una identificación marcada coincide con una identificación almacenada en su teléfono, esto indica que usted puede haberse encontrado a alguien que dio positivo de COVID-19. Así es como {{applicationName}} puede determinar si usted puede haber estado expuesto al virus.",
       "body_5": "Si hay una coincidencia, {{applicationName}} se le avisará y recibirá orientación adicional de su departamento de salud.\n\nAsí {{applicationName}} puede obtener información para tomar decisiones sobre su salud y mantener a su comunidad a salvo, todo sin saber quién es usted o dónde ha estado.",
+      "image_label_1": "Una imagen de un hombre sosteniendo su teléfono con una cadena de carácter de identificación aleatoria cercana.",
+      "image_label_2": "Una imagen de dos teléfonos inteligentes intercambiando identificaciones aleatorias.",
+      "image_label_3": "Una imagen de un hombre ingresando un código de verificación anónimo.",
+      "image_label_4": "Una imagen de un smartphone con varios IDs aleatorios y un código de verificación cerca.",
+      "image_label_5": "Una imagen de una mujer usando su teléfono.",
       "subheader_1": "Cuando usted activa los Notificaciones de Exposición, su teléfono es etiquetado con identificaciones aleatorias que cambian con frecuencia",
       "subheader_2": "Los teléfonos con Notificaciones de Exposición activado intercambian ID con otros dispositivos que encuentran",
       "subheader_3": "Cuando un usuario da positivo, puede optar por compartir su estado médico de forma anónima",
@@ -523,6 +528,10 @@
     "network_connection_title": "No hay conexión a internet",
     "no_keys_on_device_body": "No tiene ninguna exposición que enviar. Continúe aislando.",
     "no_keys_on_device_title": "Sin exposiciones en el dispositivo",
+    "not_authorized_body": "No autorizó a la aplicación a compartir sus ID aleatorios.",
+    "not_authorized_title": "No autorizó",
+    "rate_limit_body": "Has alcanzado el límite de envíos diarios. Vuelva a intentarlo en 24 horas.",
+    "rate_limit_title": "Máximo envíos alcanzados",
     "unknown_body": "Se produjo un error inesperado. Inténtelo de nuevo.",
     "unknown_title": "Algo salió mal"
   }

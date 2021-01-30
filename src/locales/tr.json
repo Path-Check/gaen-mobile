@@ -498,6 +498,7 @@
     "invalid_code_title": "Geçersiz kod",
     "network_connection_body": "Bir doğrulama kodu gönderebilmek için WiFi'ye bağlı olman gerekir.",
     "network_connection_title": "İnternet bağlantısı yok",
+    "rate_limit_body": "Günlük gönderim sınırına ulaştın. Lütfen 24 saat içinde tekrar dene.",
     "unknown_body": "Beklenmeyen bir hata oluştu. Lütfen tekrar dene.",
     "unknown_title": "Bir terslik yaşandı"
   }
