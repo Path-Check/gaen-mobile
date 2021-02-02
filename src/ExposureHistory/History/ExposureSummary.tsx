@@ -127,6 +127,8 @@ const style = StyleSheet.create({
     borderRadius: Outlines.baseBorderRadius,
     paddingVertical: Spacing.xSmall,
     paddingHorizontal: Spacing.xSmall,
+    borderColor: Colors.primary.shade100,
+    borderWidth: Outlines.thin,
   },
   headerContainer: {
     paddingBottom: Spacing.xxSmall,
