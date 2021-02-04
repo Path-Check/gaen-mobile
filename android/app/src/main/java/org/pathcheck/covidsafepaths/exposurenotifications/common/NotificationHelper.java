@@ -56,15 +56,29 @@ public final class NotificationHelper {
   }
 
   /**
-   * Create notification that will be shown while we are checking exposures.
+   * Create notification that will be shown when exposure check has completed successfully
    */
-  public static ForegroundInfo createWorkerNotification(Context context) {
+  public static ForegroundInfo createSuccessWorkerNotification(Context context) {
     createBackgroundWorkerNotificationChannel(context);
     NotificationCompat.Builder builder =
         new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
-            .setContentTitle(context.getString(R.string.background_worker_notification_title))
+            .setContentTitle(context.getString(R.string.background_worker_notification_title_success))
+            .setOngoing(true);
+    return new ForegroundInfo(BACKGROUND_WORKER_NOTIFICATION_ID, builder.build());
+  }
+
+  /**
+   * Create notification that will be shown when exposure check has completed unsuccessfully
+   */
+  public static ForegroundInfo createFailureWorkerNotification(Context context) {
+    createBackgroundWorkerNotificationChannel(context);
+    NotificationCompat.Builder builder =
+        new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
+            .setContentTitle(context.getString(R.string.background_worker_notification_title_failure))
             .setOngoing(true);
     return new ForegroundInfo(BACKGROUND_WORKER_NOTIFICATION_ID, builder.build());
   }

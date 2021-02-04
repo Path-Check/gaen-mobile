@@ -87,7 +87,6 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
           if (isEnabled) {
             // Show notification to reduce the chance of failing into the RARE bucket
             // Documentation: https://developers.google.com/android/exposure-notifications/implementation-guide#workmanager
-            setForegroundAsync(createForegroundInfo());
             // Download diagnosis keys from Safe Paths servers
             return diagnosisKeys.download();
           } else {
@@ -100,23 +99,32 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
         .transform(done -> {
           // Keep track of the last date when the process did run
           prefs.setLastDetectionProcessDate(Instant.now().toEpochMilli());
+          setForegroundAsync(createSuccessForegroundInfo());
           return Result.success();
         }, AppExecutors.getLightweightExecutor())
         .catching(NotEnabledException.class, x -> {
           // Not enabled. Return as success.
+          setForegroundAsync(createSuccessForegroundInfo());
           return Result.success();
         }, AppExecutors.getBackgroundExecutor())
         .catching(Exception.class, x -> {
           Log.e(TAG, "Failure to provide diagnosis keys", x);
+          setForegroundAsync(createForegroundFailureInfo());
           return Result.failure();
         }, AppExecutors.getBackgroundExecutor());
     // TODO: consider a retry strategy
   }
 
   @NonNull
-  private ForegroundInfo createForegroundInfo() {
+  private ForegroundInfo createSuccessForegroundInfo() {
     Context context = getApplicationContext();
-    return NotificationHelper.createWorkerNotification(context);
+    return NotificationHelper.createSuccessWorkerNotification(context);
+  }
+
+  @NonNull
+  private ForegroundInfo createForegroundFailureInfo() {
+    Context context = getApplicationContext();
+    return NotificationHelper.createFailureWorkerNotification(context);
   }
 
   /**
