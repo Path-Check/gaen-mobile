@@ -56,7 +56,7 @@ public final class NotificationHelper {
   }
 
   /**
-   * Create notification that will be shown when exposure check has completed successfully
+   * Create notification that will be shown when exposure check has completed successfully.
    */
   public static ForegroundInfo createSuccessWorkerNotification(Context context) {
     createBackgroundWorkerNotificationChannel(context);
@@ -70,7 +70,7 @@ public final class NotificationHelper {
   }
 
   /**
-   * Create notification that will be shown when exposure check has completed unsuccessfully
+   * Create notification that will be shown when exposure check has completed unsuccessfully.
    */
   public static ForegroundInfo createFailureWorkerNotification(Context context) {
     createBackgroundWorkerNotificationChannel(context);
