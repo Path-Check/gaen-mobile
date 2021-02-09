@@ -29,7 +29,7 @@ export const required: TextStyle = {
 export const textInput: TextStyle = {
   ...Typography.form.inputText,
   borderRadius: Outlines.baseBorderRadius,
-  borderColor: Colors.neutral.shade10,
+  borderColor: Colors.neutral.shade100,
   borderWidth: Outlines.hairline,
   paddingTop: Spacing.small - 1,
   paddingBottom: Spacing.small,
