@@ -1,4 +1,4 @@
-import React, { createRef, FunctionComponent, useEffect, useState } from "react"
+import React, { useRef, FunctionComponent, useEffect, useState } from "react"
 import {
   Alert,
   StyleSheet,
@@ -51,7 +51,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const navigation = useNavigation()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
-  const codeInputRef = createRef<TextInput>()
+  const codeInputRef = useRef<TextInput>()
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
@@ -65,10 +65,12 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      codeInputRef.current?.focus()
-      const reactTag = findNodeHandle(codeInputRef.current)
-      if (reactTag) {
-        AccessibilityInfo.setAccessibilityFocus(reactTag)
+      if (codeInputRef.current) {
+        codeInputRef.current?.focus()
+        const reactTag = findNodeHandle(codeInputRef.current)
+        if (reactTag) {
+          AccessibilityInfo.setAccessibilityFocus(reactTag)
+        }
       }
     }, 200)
   }, [])
