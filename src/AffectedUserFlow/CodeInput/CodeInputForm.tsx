@@ -1,9 +1,4 @@
-import React, {
-  createRef,
-  FunctionComponent,
-  useCallback,
-  useState,
-} from "react"
+import React, { createRef, FunctionComponent, useEffect, useState } from "react"
 import {
   Alert,
   StyleSheet,
@@ -20,7 +15,6 @@ import {
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
-import { useFocusEffect } from "@react-navigation/native"
 
 import { Text, LoadingIndicator } from "../../components"
 import { useAffectedUserContext } from "../AffectedUserContext"
@@ -69,15 +63,15 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
 
-  useFocusEffect(
-    useCallback(() => {
+  useEffect(() => {
+    setTimeout(() => {
       codeInputRef.current?.focus()
       const reactTag = findNodeHandle(codeInputRef.current)
       if (reactTag) {
         AccessibilityInfo.setAccessibilityFocus(reactTag)
       }
-    }, [isFocused]),
-  )
+    }, 200)
+  }, [])
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
@@ -249,6 +243,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
         <TextInput
           editable={isEditable}
           ref={codeInputRef}
+          accessible
           testID="code-input"
           value={code}
           placeholder={t("export.code").toUpperCase()}
