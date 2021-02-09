@@ -51,7 +51,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const navigation = useNavigation()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
-  const codeInputRef = useRef<TextInput>()
+  const codeInputRef = useRef<TextInput>(null)
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
