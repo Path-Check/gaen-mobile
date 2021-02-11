@@ -104,7 +104,7 @@ export const text: Record<Text, string> = {
   primary: neutral.shade140,
   anchorLink: primary.shade100,
   error: accent.danger100,
-  placeholder: neutral.shade75,
+  placeholder: neutral.shade100,
 }
 
 type RiskLevel = "low" | "medium" | "high" | "critical" | "unknown" | "extreme"
