@@ -166,7 +166,9 @@ class BTSecureStorage {
     try! realmInstance.write {
       userState.exposures.append(objectsIn: exposures)
       let jsonString = userState.exposures.jsonStringRepresentation()
-      notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
+      if !exposures.isEmpty {
+        notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
+      }
     }
   }
 
