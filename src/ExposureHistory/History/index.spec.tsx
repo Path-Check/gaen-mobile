@@ -6,7 +6,6 @@ import {
   render,
   waitFor,
 } from "@testing-library/react-native"
-import { showMessage } from "react-native-flash-message"
 import { useNavigation } from "@react-navigation/native"
 
 import { ExposureDatum } from "../../exposure"
@@ -106,7 +105,8 @@ describe("History", () => {
 
       describe("when exposure check returns rate limiting error", () => {
         it("displays a success message", async () => {
-          const showMessageSpy = showMessage as jest.Mock
+          const alertSpy = jest.fn()
+          Alert.alert = alertSpy
           const response: NativeModule.DetectExposuresResponse = {
             kind: "failure",
             error: "RateLimited",
@@ -134,10 +134,10 @@ describe("History", () => {
           fireEvent.press(getByTestId("check-for-exposures-button"))
 
           await waitFor(() => {
-            expect(showMessageSpy).toHaveBeenCalledWith(
-              expect.objectContaining({
-                message: "Success",
-              }),
+            expect(alertSpy).toHaveBeenCalledWith(
+              "Exposure check complete",
+              "",
+              [{ text: "Ok" }],
             )
           })
         })
@@ -146,11 +146,12 @@ describe("History", () => {
       describe("when exposure check is successful", () => {
         it("displays a success message", async () => {
           const checkForNewExposuresSpy = jest.fn()
-          const showMessageSpy = showMessage as jest.Mock
           const response: NativeModule.DetectExposuresResponse = {
             kind: "success",
           }
           checkForNewExposuresSpy.mockResolvedValueOnce(response)
+          const alertSpy = jest.fn()
+          Alert.alert = alertSpy
 
           const { getByTestId } = render(
             <PermissionsContext.Provider
@@ -171,10 +172,10 @@ describe("History", () => {
           fireEvent.press(getByTestId("check-for-exposures-button"))
 
           await waitFor(() => {
-            expect(showMessageSpy).toHaveBeenCalledWith(
-              expect.objectContaining({
-                message: "Success",
-              }),
+            expect(alertSpy).toHaveBeenCalledWith(
+              "Exposure check complete",
+              "",
+              [{ text: "Ok" }],
             )
           })
         })
@@ -213,7 +214,7 @@ describe("History", () => {
             expect(alertSpy).toHaveBeenCalledWith(
               "Something Went Wrong",
               "Something unexpected happened. Please close and reopen the app and try again.",
-              [{ text: "Okay" }],
+              [{ text: "Ok" }],
             )
           })
         })
