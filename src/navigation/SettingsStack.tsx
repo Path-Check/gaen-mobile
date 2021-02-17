@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import Settings from "../Settings/"
 import Legal from "../Settings/Legal"
@@ -25,6 +26,8 @@ const defaultScreenOptions: StackNavigationOptions = {
 }
 
 const SettingsStack: FunctionComponent = () => {
+  const { t } = useTranslation()
+
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
       <Stack.Screen
@@ -35,12 +38,18 @@ const SettingsStack: FunctionComponent = () => {
       <Stack.Screen
         name={SettingsStackScreens.Legal}
         component={Legal}
-        options={defaultScreenOptions}
+        options={{
+          ...defaultScreenOptions,
+          title: t("screen_titles.legal"),
+        }}
       />
       <Stack.Screen
         name={SettingsStackScreens.DeleteConfirmation}
         component={DeleteConfirmation}
-        options={defaultScreenOptions}
+        options={{
+          ...defaultScreenOptions,
+          title: t("screen_titles.my_data"),
+        }}
       />
       <Stack.Screen
         name={SettingsStackScreens.ENDebugMenu}

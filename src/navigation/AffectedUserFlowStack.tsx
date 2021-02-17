@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import { AffectedUserProvider } from "../AffectedUserFlow/AffectedUserContext"
 import Start from "../AffectedUserFlow/Start"
@@ -29,6 +30,7 @@ const Stack = createStackNavigator<AffectedUserFlowStackParamList>()
 
 const AffectedUserStack: FunctionComponent = () => {
   const { isOnboardingComplete } = useOnboardingContext()
+  const { t } = useTranslation()
 
   return (
     <AffectedUserProvider isOnboardingComplete={isOnboardingComplete}>
@@ -40,6 +42,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={Start}
           options={{
             ...Headers.headerMinimalOptions,
+            title: t("export.intro.title"),
             headerLeft: applyHeaderLeftBackButton(),
           }}
         />
@@ -48,6 +51,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={VerificationCodeInfo}
           options={{
             ...Headers.headerMinimalOptions,
+            title: t("export.intro.title"),
             headerLeft: applyHeaderLeftBackButton(),
           }}
         />
@@ -56,6 +60,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={CodeInput}
           options={{
             ...Headers.headerMinimalOptions,
+            title: t("export.enter_verification_code"),
             headerLeft: applyHeaderLeftBackButton(),
           }}
         />
@@ -64,6 +69,7 @@ const AffectedUserStack: FunctionComponent = () => {
           component={SymptomOnsetDate}
           options={{
             ...Headers.headerMinimalOptions,
+            title: t("export.symptom_onset.symptoms"),
             headerLeft: applyHeaderLeftBackButton(),
           }}
         />

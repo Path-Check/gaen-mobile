@@ -127,7 +127,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   return (
     <Stack.Navigator
       screenOptions={{
-        title: "",
+        title: t("screen_titles.welcome"),
         headerLeft: applyHeaderLeftBackButton(),
         headerRight: headerRight,
         headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,

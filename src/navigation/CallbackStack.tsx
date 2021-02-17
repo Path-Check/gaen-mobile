@@ -29,6 +29,7 @@ const CallbackStack: FunctionComponent = () => {
       <Stack.Navigator
         screenOptions={{
           ...Headers.headerMinimalOptions,
+          title: "screen_titles.request_callback",
           headerLeft: applyHeaderLeftBackButton(),
         }}
       >

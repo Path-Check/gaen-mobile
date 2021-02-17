@@ -21,6 +21,7 @@ import { applyHeaderLeftBackButton } from "./HeaderLeftBackButton"
 
 import { Headers } from "../styles"
 import { applyModalHeader } from "./ModalHeader"
+import { useTranslation } from "react-i18next"
 
 const Stack = createStackNavigator()
 
@@ -31,6 +32,7 @@ type SelfAssessmentStackProps = {
 const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
   destinationOnCancel,
 }) => {
+  const { t } = useTranslation()
   const navigationBarOptions: StackNavigationOptions = {
     headerStyleInterpolator: HeaderStyleInterpolators.forNoAnimation,
   }
@@ -38,6 +40,7 @@ const SelfAssessmentStack: FunctionComponent<SelfAssessmentStackProps> = ({
   const defaultScreenOptions = {
     ...Headers.headerMinimalOptions,
     headerLeft: applyHeaderLeftBackButton(),
+    title: t("screen_titles.self_assessment"),
     headerRight: () => null,
   }
 

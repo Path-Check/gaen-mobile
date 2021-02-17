@@ -52,11 +52,11 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
   }
 
   return (
-    <View style={style.container}>
+    <View accessibilityLabel={"header"} style={style.container}>
       <Text
         numberOfLines={10}
         style={style.headerText}
-        accessible={headerTitle !== ""}
+        accessible
         allowFontScaling={false}
       >
         {headerTitle}

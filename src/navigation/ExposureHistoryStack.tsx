@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import ExposureHistoryScreen from "../ExposureHistory/index"
 import MoreInfo from "../ExposureHistory/MoreInfo"
@@ -26,6 +27,8 @@ const defaultScreenOptions: StackNavigationOptions = {
 }
 
 const ExposureHistoryStack: FunctionComponent = () => {
+  const { t } = useTranslation()
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -36,7 +39,10 @@ const ExposureHistoryStack: FunctionComponent = () => {
       <Stack.Screen
         name={ExposureHistoryStackScreens.MoreInfo}
         component={MoreInfo}
-        options={defaultScreenOptions}
+        options={{
+          ...defaultScreenOptions,
+          title: t("exposure_history.more_info_header"),
+        }}
       />
     </Stack.Navigator>
   )
