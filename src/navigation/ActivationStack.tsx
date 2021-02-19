@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
+import { useTranslation } from "react-i18next"
 
 import { ActivationStackScreen, ActivationStackScreens } from "./index"
 import ActivateExposureNotifications from "../Activation/ActivateExposureNotifications"
@@ -52,6 +53,7 @@ const ActivationStack: FunctionComponent = () => {
     screenName: ActivationStackScreens.ActivationSummary,
     component: ActivationSummary,
   }
+  const { t } = useTranslation()
 
   const activationSteps = [
     acceptTermsOfService,
@@ -71,7 +73,7 @@ const ActivationStack: FunctionComponent = () => {
       screenOptions={{
         ...Headers.headerMinimalOptions,
         headerLeft: applyHeaderLeftBackButton(),
-        headerTitle: () => null,
+        title: t("screen_titles.activation"),
       }}
     >
       {activationSteps.map((step) => {
