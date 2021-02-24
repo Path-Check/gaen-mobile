@@ -48,6 +48,7 @@ maintaining the highest standards for protecting user privacy.
 the app may submit to external services during use.
 - See the [Local Data Dictionary](doc/LOCAL_DATA_DICTIONARY.md) for a reference of all data that
 the app stores locally during use.
+- See the [Responsible Disclosure Policy](#responsible-disclosure-policy) for our policy on reporting security vulnerabilities.
 
 ## Broad Volunteer Community 💪
 
@@ -99,6 +100,16 @@ Read the [contribution guidelines](CONTRIBUTING.md).
 ## Development Setup 💻
 
 Read the [developer setup guide](docs/DEVELOPER_SETUP.md).
+
+
+# Responsible Disclosure Policy
+
+PathCheck Foundation is dedicated to the security of this open source and privacy centric mobile application to help contain COVID-19. We appreciate and ask the community to report detailed and verifiable security issues to <security@pathcheck.org>.
+
+Please do not publicly disclose a vulnerability before it is fixed, others could act on it with malicious purposes.
+
+If you are the first to report a verifiable security issue, we'll thank you directly in our pull requests if agreed on.
+
 
 # License
 
