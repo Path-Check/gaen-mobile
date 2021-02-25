@@ -37,6 +37,5 @@ lokalise2 file upload \
   --detect-icu-plurals \
   --apply-tm \
   --convert-placeholders \
-  --poll \
   --config .lokalise.yml \
   --token=$LOKALISE_READ_WRITE_TOKEN
