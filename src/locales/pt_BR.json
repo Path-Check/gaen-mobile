@@ -9,7 +9,8 @@
     "continue": "Continuar",
     "done": "Feito",
     "more": "Mais",
-    "next": "Feito"
+    "next": "Feito",
+    "ok": "Ok"
   },
   "exposure_notification_alerts": {
     "bluetooth_title": "Habilite o Bluetooth"

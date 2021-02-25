@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_channel_description">기기가 코로나19 노출 가능성을 확인하고 있음을 나타냅니다.</string>
+  <string name="background_worker_channel_name">노출 여부 확인</string>
   <string name="background_worker_notification_title">노출 확인 중…</string>
   <string name="exposure_notification_channel_description">노출 알림 경고</string>
   <string name="exposure_notification_channel_name">노출 알림</string>

@@ -5,6 +5,9 @@
   "errors": {
     "something_went_wrong": "Ng mlar ngii a dilubch el mlo mekngit"
   },
+  "exposure_history": {
+    "more_info_header": "Komakai lomesodel"
+  },
   "settings": {
     "delete_data_are_you_sure": "Ke kmal mla mo sure?"
   }

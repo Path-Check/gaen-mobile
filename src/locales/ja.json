@@ -83,6 +83,7 @@
     "how_does_this_work": "これはどのように機能しますか?",
     "how_does_this_work_para": "接触通知がオンの場合、携帯電話はBluetoothを使用して、接触通知が有効になっている携帯電話から乱数列（ランダムIDと呼ばれます）を交換して保存します。ランダムIDは、他のユーザーに対して個人を特定することはなく、プライバシーを保護するために1日に何度も変更されます。",
     "last_days": "過去14日間",
+    "more_info_header": "より詳しい情報",
     "next_steps": "次へ進む",
     "no_connectivity_message": "インターネットに接続されていません！",
     "no_exposure_reports": "接触のリポートはありません",
@@ -206,7 +207,8 @@
     "legal": "リーガル",
     "location": "ロケーション",
     "protect_privacy": "プライバシーを保護する方法",
-    "select_language": "言語を選択する"
+    "select_language": "言語を選択する",
+    "self_assessment": "自己評価"
   },
   "self_assessment": {
     "guidance": {

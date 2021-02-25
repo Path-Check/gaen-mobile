@@ -80,6 +80,7 @@
     "how_does_this_work": "Taimanu esti ma chochu?",
     "how_does_this_work_para": "Yanggen man 'on' i Notifikasion Exposures, i telefon-mu ha u'usa i Bluetooth para u fanuli yan u goti i random number strings siha(mafanana'an random IDs) gi maseha hafa na telefon ni mangaigi gi fion-na ni gai eyu  Exposure Notification ni mana kalalamten. I random IDs ti un inaidentifika perosnat yan otro siha users ya ha tulalaika gui sessu gi dia para u protehi i iyo-mu privacy.",
     "last_days": "I man mapos 14 dias",
+    "more_info_header": "Mas infotmasion",
     "next_steps": "Otro mona para ma chogui",
     "no_connectivity_message": "Ti ma konenek hao gi internet!",
     "no_exposure_reports": "Taya ripot tinanmi pat ninayi",
@@ -194,6 +195,7 @@
     "legal": "Legat",
     "location": "Lokasion",
     "protect_privacy": "Taimanu in protehi i iyo-mu privacy",
-    "select_language": "Achig i lenguahi"
+    "select_language": "Achig i lenguahi",
+    "self_assessment": "Assessment mismo"
   }
 }

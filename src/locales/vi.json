@@ -29,6 +29,7 @@
     "next": "Kế tiếp",
     "no_thanks": "Không, cám ơn",
     "off": "TẮT",
+    "ok": "Đồng ý",
     "okay": "Ok",
     "on": "BẬT",
     "save": "Lưu",
@@ -125,6 +126,7 @@
       "body1": "Nếu bạn đã nhận được mã xác minh từ  {{healthAuthorityName}} đối với một trường hợp có xét nghiệm dương tính với COVID-19, bạn có thể gửi mã xác minh trên màn hình sau đây.",
       "body2": "Nếu bạn không có mã, nhưng bạn có kết quả xét nghiệm dương tính, bạn sẽ cần nhận một mã xác minh từ {{healthAuthorityName}} trước khi tiếp tục.",
       "header": "Bạn có mã xác minh không?",
+      "title": "Mã xác nhận",
       "what_is_a": "Mã xác minh là gì?"
     },
     "never_mind_button_title": "Không sao",
@@ -184,6 +186,7 @@
     "how_does_this_work_para": "Khi Thông Báo Tiếp Xúc được bật, điện thoại của bạn sử dụng Bluetooth để hoán đổi và lưu các chuỗi số ngẫu nhiên (được gọi là các ID ngẫu nhiên) từ bất kỳ điện thoại nào nó có tiếp xúc gần với điện thoại cũng đã bật Thông Báo Tiếp Xúc. Các ID ngẫu nhiên sẽ không nhận dạng cá nhân bạn cho người dùng khác biết và thay đổi nhiều lần mỗi ngày để bảo vệ quyền riêng tư của bạn.",
     "last_days": "14 ngày vừa qua",
     "more_info": "Tìm hiểu thêm về Thông Báo Tiếp Xúc",
+    "more_info_header": "Thông Tin Bổ Sung",
     "next_steps": "Các bước tiếp theo",
     "no_connectivity_message": "Bạn chưa kết nối với internet!",
     "no_exposure_reports": "Không Có Báo Cáo Tiếp Xúc",
@@ -204,6 +207,7 @@
     "cant_check_for_exposures_body": "Bạn phải cho phép Thông Báo Tiếp Xúc để kiểm tra các trường hợp tiếp xúc.",
     "cant_check_for_exposures_button": "Bật Thông Báo Tiếp Xúc",
     "cant_check_for_exposures_title": "Không Thể Kiểm Tra Các Trường Hợp Tiếp Xúc",
+    "exposure_check_complete": "Đã hoàn tất phát hiện phơi sáng",
     "location_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
     "location_title": "Cho phép truy cập vị trí",
     "set_active_region_ios_body": "Mở ứng dụng Thiết Lập, tìm đến thiết lập Thông Báo Tiếp Xúc cho ứng dụng này, sau đó nhấn 'Cài Đặt Thành Khu Vực Có Hiệu Lực'.",
@@ -312,6 +316,11 @@
       "body_3": "Sau khi có kết quả xét nghiệm dương tính với COVID-19, người dùng có thể chia sẻ một mật mã với {{applicationName}} để xác minh chẩn đoán của họ. Các ID ngẫu nhiên gần đây của điện thoại của họ được gắn cờ và được tải lên máy chủ theo cách bảo mật. Quy trình xác minh này giúp tránh các báo cáo dương tính giả.",
       "body_4": "Nếu một ID đã gắn cờ khớp với một ID được lưu trên điện thoại của bạn, điều này cho thấy rằng bạn có thể đã gặp một người có kết quả xét nghiệm dương tính với COVID-19. Đây là cách {{applicationName}} có thể xác định liệu bạn có thể đã tiếp xúc với virut hay không.",
       "body_5": "Nếu có kết quả khớp, {{applicationName}} sẽ thông báo cho bạn và cung cấp thêm hướng dẫn của sở y tế của bạn.\n\nĐây là cách {{applicationName}} có thể khuyến khích bạn đưa ra các quyết định về sức khỏe của bạn, và bảo vệ cộng đồng của bạn, mà không biết bạn là ai hay bạn đã ở đâu.",
+      "image_label_1": "Hình ảnh một người đàn ông cầm điện thoại với chuỗi ký tự ID ngẫu nhiên gần đó.",
+      "image_label_2": "Hình ảnh hai điện thoại thông minh trao đổi ID ngẫu nhiên.",
+      "image_label_3": "Hình ảnh một người đàn ông nhập mã xác minh ẩn danh.",
+      "image_label_4": "Hình ảnh điện thoại thông minh có một số ID ngẫu nhiên và mã xác minh gần đó.",
+      "image_label_5": "Hình ảnh một người phụ nữ đang sử dụng điện thoại của mình.",
       "subheader_1": "Khi bạn bật Thông Báo Tiếp Xúc, điện thoại của bạn được gắn các ID ngẫu nhiên, liên tục thay đổi",
       "subheader_2": "Các điện thoại đã bật Thông Báo Email sẽ hoán đổi ID với các thiết bị khác mà chúng gặp",
       "subheader_3": "Khi một người dùng có kết quả xét nghiệm dương tính, họ có thể chọn chia sẻ tình trạng sức khỏe của mình theo cách ẩn danh",
@@ -353,6 +362,7 @@
     "stop_sharing_data": "Dừng Chia Sẻ Dữ Liệu"
   },
   "screen_titles": {
+    "activation": "Kích hoạt",
     "bluetooth": "Bluetooth",
     "covid_data_webview": "Dữ Liệu COVID",
     "exposure_history": "Lịch Sử Tiếp Xúc",
@@ -362,10 +372,14 @@
     "how_the_app_works": "Cách hoạt động của ứng dụng",
     "legal": "Pháp lý",
     "location": "Định vị",
+    "my_data": "Dữ liệu của tôi",
     "protect_privacy": "Chúng tôi bảo vệ quyền riêng tư của bạn như thế nào",
+    "request_callback": "Yêu Cầu Gọi",
     "select_language": "Chọn Ngôn Ngữ",
     "select_symptoms": "Chọn Các Triệu Chứng",
-    "settings": "Thiết lập"
+    "self_assessment": "Tự Đánh Giá COVID-19",
+    "settings": "Thiết lập",
+    "welcome": "Chào mừng"
   },
   "self_assessment": {
     "age_range": {
@@ -523,7 +537,10 @@
     "network_connection_title": "Không Có Kết Nối Internet",
     "no_keys_on_device_body": "Bạn không có bất kỳ sự phơi bày nào để gửi. Hãy tiếp tục cách ly.",
     "no_keys_on_device_title": "Không bị phơi sáng trên thiết bị",
+    "not_authorized_body": "Bạn đã không cho phép ứng dụng chia sẻ ID ngẫu nhiên của mình.",
+    "not_authorized_title": "Không cho phép",
     "rate_limit_body": "Bạn đã đạt đến giới hạn gửi hàng ngày. Vui lòng thử lại sau 24 giờ.",
+    "rate_limit_title": "Đã đạt được số lần gửi tối đa",
     "unknown_body": "Đã có lỗi bất ngờ. Vui lòng thử lại.",
     "unknown_title": "Có Vấn Đề"
   }
