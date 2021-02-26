@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_channel_description">Cho biết thiết bị của bạn đang kiểm tra khả năng tiếp xúc COVID-19.</string>
+  <string name="background_worker_channel_name">Phát Hiện Tiếp Xúc</string>
   <string name="background_worker_notification_title">Đang kiểm tra các trường hợp tiếp xúc...</string>
   <string name="exposure_notification_channel_description">Cảnh báo thông báo tiếp xúc.</string>
   <string name="exposure_notification_channel_name">Thông Báo Tiếp Xúc</string>

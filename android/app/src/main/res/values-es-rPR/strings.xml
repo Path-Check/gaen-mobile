@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_channel_description">Indica que su dispositivo está comprobando una posible exposición a COVID-19.</string>
+  <string name="background_worker_channel_name">Comprobación de exposición</string>
   <string name="background_worker_notification_title">Comprobando si hay exposiciones...</string>
   <string name="exposure_notification_channel_description">Alertas de Notificaciones de Exposición.</string>
   <string name="exposure_notification_channel_name">Aviso de exposición</string>
