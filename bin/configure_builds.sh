@@ -38,9 +38,9 @@ end
 
 ########################## HELPERS START #######################################
 
-def update_value_on_plist(file_path:, key:, value:)
+def update_value_on_plist(file_path:, keys:, value:)
   _output, error, status = Open3.capture3(
-    "/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file_path}\""
+    "/usr/libexec/PlistBuddy -c \"Set :#{keys.join(':')} #{value}\" \"#{file_path}\""
   )
   return true if status.success?
   failure_message "Could not update #{key} to #{value} on plist file #{file_path} with error: #{error}"
@@ -104,7 +104,7 @@ def update_ios_display_name(new_name)
   puts "Updating ios display name from #{get_current_ios_name} to #{new_name}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'CFBundleDisplayName',
+    keys: ['CFBundleDisplayName'],
     value: new_name
   )
   exit 1
@@ -163,16 +163,17 @@ def update_android_application_id(application_id)
 end
 
 def update_android_bugsnag_apikey(apikey)
-  puts "Updating android applicationId to #{application_id}"
+  puts "Updating android bugsnag apikey to #{apikey}"
   replace_string_in_file(
     file_path: './android/app/src/main/AndroidManifest.xml',
-    regex: /<meta-data android:name="com.bugsnag.android.API_KEY" android:value="" />/,
-    value: "<meta-data android:name="com.bugsnag.android.API_KEY" android:value="#{apikey}" />
+    regex: 'API_KEY" android:value=""',
+    value: "API_KEY\" android:value=\"#{apikey}\""
   )
 end
 
 IOS_BUNDLE_IDENTIFIER_KEY = "IOS_BUNDLE_ID"
 ANDROID_APPLICATION_ID_KEY = "ANDROID_APPLICATION_ID"
+BUGSNAG_APIKEY_KEY = "BUGSNAG_APIKEY"
 def update_bundle_identifiers
   environment = Dotenv.parse(File.open(ENV_FILE))
   ios_bundle_identifier = environment.fetch(IOS_BUNDLE_IDENTIFIER_KEY, false)
@@ -189,7 +190,7 @@ end
 
 def update_bugsnag_apikeys
   environment = Dotenv.parse(File.open(ENV_FILE))
-  apikey = environment.fetch(BUGSNAG_API_KEY, false)
+  apikey = environment.fetch(BUGSNAG_APIKEY_KEY, false)
 
   if apikey
     update_android_bugsnag_apikey(apikey)
@@ -235,21 +236,18 @@ def update_ios_en_api_version(new_en_api_version)
   puts "Updating ios en api version from #{get_current_ios_en_api_version} to #{new_en_api_version}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'ENAPIVersion',
+    keys: ['ENAPIVersion'],
     value: new_en_api_version
   )
   exit 1
 end
 
-def update_ios_bugsnag_apikey(new_en_abugsnag_apikeypi_version)
-  puts "Updating ios en api version from #{get_current_ios_en_api_version} to #{new_en_api_version}"
+def update_ios_bugsnag_apikey(apikey)
+  puts "Updating ios bugsnag apikey to #{apikey}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'bugsnag',
-    value: "<dict>
-		<key>apiKey</key>
-		  <string>#{bugsnag_apikey}</string>
-	  </dict>"
+    keys: ['bugsnag', 'apiKey'],
+    value: "#{apikey}"
   )
   exit 1
 end
@@ -267,7 +265,7 @@ def update_ios_en_region(new_en_region)
   puts "Updating ios en region from #{get_current_ios_en_region} to #{new_en_region}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'ENDeveloperRegion',
+    keys: ['ENDeveloperRegion'],
     value: new_en_region
   )
   exit 1
