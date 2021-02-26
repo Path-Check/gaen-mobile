@@ -162,6 +162,15 @@ def update_android_application_id(application_id)
   )
 end
 
+def update_android_bugsnag_apikey(apikey)
+  puts "Updating android applicationId to #{application_id}"
+  replace_string_in_file(
+    file_path: './android/app/src/main/AndroidManifest.xml',
+    regex: /<meta-data android:name="com.bugsnag.android.API_KEY" android:value="" />/,
+    value: "<meta-data android:name="com.bugsnag.android.API_KEY" android:value="#{apikey}" />
+  )
+end
+
 IOS_BUNDLE_IDENTIFIER_KEY = "IOS_BUNDLE_ID"
 ANDROID_APPLICATION_ID_KEY = "ANDROID_APPLICATION_ID"
 def update_bundle_identifiers
@@ -174,6 +183,19 @@ def update_bundle_identifiers
     update_android_application_id(android_application_id)
   else
     failure_message "Both ios bundle identifier and android id are required"
+    exit 1
+  end
+end
+
+def update_bugsnag_apikeys
+  environment = Dotenv.parse(File.open(ENV_FILE))
+  apikey = environment.fetch(BUGSNAG_API_KEY, false)
+
+  if apikey
+    update_android_bugsnag_apikey(apikey)
+    update_ios_bugsnag_apikey(apikey)
+  else
+    failure_message "Bugsnag apikey is required"
     exit 1
   end
 end
@@ -215,6 +237,19 @@ def update_ios_en_api_version(new_en_api_version)
     file_path: PLIST_PATH,
     key: 'ENAPIVersion',
     value: new_en_api_version
+  )
+  exit 1
+end
+
+def update_ios_bugsnag_apikey(new_en_abugsnag_apikeypi_version)
+  puts "Updating ios en api version from #{get_current_ios_en_api_version} to #{new_en_api_version}"
+  return if update_value_on_plist(
+    file_path: PLIST_PATH,
+    key: 'bugsnag',
+    value: "<dict>
+		<key>apiKey</key>
+		  <string>#{bugsnag_apikey}</string>
+	  </dict>"
   )
   exit 1
 end
@@ -274,6 +309,9 @@ if File.exist?(ENV_FILE)
   puts ""
   puts "🛠 Updating Bundle Identifiers:"
   update_bundle_identifiers
+  puts "✅ Done"
+  puts "🛠 Updating Bugsnag Apikey:"
+  update_bugsnag_apikeys
   puts "✅ Done"
   puts ""
   puts "🛠 Updating iOS Configuration:"
