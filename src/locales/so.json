@@ -7,6 +7,7 @@
   },
   "callback": {
     "firstname": "Magaca kowaad",
+    "if_you_prefer": "Haddii aad doonayso, toos u wac:",
     "lastname": "Magaca ugu danbeeya",
     "phone_number_required": "Nambarka taleefanka (waa loo bahanyahay)",
     "request_a_call": "Weyddiiso inuu ku soo waco raadraace",
@@ -28,6 +29,7 @@
     "next": "Ka xiga",
     "no_thanks": "Maya waad mahadsantahay",
     "off": "DANSAN",
+    "ok": "Waayahay",
     "okay": "Haye",
     "on": "DAARAN",
     "save": "Kaydi",
@@ -51,19 +53,38 @@
     "see_more": "Arag xog dheeraad ah",
     "source": "Isha xogta: {{source}}"
   },
+  "covid_recommendation": {
+    "find_a_test_center": "Raadsataa xarunta baaritaanka",
+    "for_more_information": "Wixii macluumaad dheeraad ah oo ku subaasan sida looga hortago in xanuunka lagu faafiyo dadka kale, eeg tilmaamaha CDC ee ku saabsan waxa aad samaynayso markaad jiran tahay: ",
+    "from_others_at": "dadka kale mar kasta iyo ",
+    "get_a_covid_test": "Martaa baaritaanka COVID-19:",
+    "get_rest_and_stay": "Naso oo biyo badan cab.",
+    "includeing_people": "oo sy ku jiraan dadka gurigaaga ku nool.",
+    "maintain_at_least": "Ka fogoow ugu yaraan 6 fiid ",
+    "monitor_for_fever": "Iska fiiri qandho, qufac ama astaamaha kale ee COVID-19:",
+    "physically_separate": "Jir ahaan ka fogoow dadka kale, ",
+    "review_cdc_guidance": "Dib u eegtaa tilmaamaha CDC",
+    "review_symptoms": "Dib u eegtaa astaamaha CDC",
+    "stay_home_except_to_get_medical_care": "Guriga joogtaa marka laga reebo inaad raadsato daryeel caafimaad.",
+    "to_prevent_the_spread": "Si looga hortago faafida COVID-19 haddii aad jiran tahay, waa inaad:",
+    "wear_a_face_covering": "xiro gafuur xir."
+  },
   "errors": {
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
     "reload": "Dibu cabbee",
     "something_went_wrong": "Waxbaa qaldamay",
-    "title": "Khald aan la aqoon"
+    "title": "Khald aan la aqoon",
+    "try_again_later": "Markale iskuday hadhoow"
   },
   "escrow_verification": {
+    "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
     "complete": {
       "body": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
       "title": "Waad ku mahadsantahay badbaadinta bulshadaada!"
     },
     "error": {
-      "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god"
+      "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god",
+      "rate_limit": "Waxaad gaartay xadiga gudbinta ee maalinlaha ah. Fadlan markale iskuday muddo 24 saac ah."
     },
     "person_and_health_expert": "Qof la hadlaya khabiir caafimaad",
     "start": {
@@ -105,6 +126,7 @@
       "body1": "Haddii aad haysato koodhka xaqiijinta oo kasoo baxay {{healthAuthorityName}} muujinaaya in laga helay cabauqa COVID-19, Waxaad ku gudbin kartaa koodhka xaqiijinta shaashada soo socota.",
       "body2": "Haddii aadan haysan koodh, laakiin aad qabto caabuqa, waxaad koodhka xaqiijinta ka helaysaa {{healthAuthorityName}} kahor intaadan shaqada sii wadin.",
       "header": "Ma haysataa koodhkaaga xaqiijinta?",
+      "title": "Macluumaadka Nidaamka Xaqiijinta",
       "what_is_a": "Waa maxay koodhka xaqiijintu?"
     },
     "never_mind_button_title": "Iska dhaaf",
@@ -132,6 +154,7 @@
       "yes_i_did_have": "Haa, waan lahaa astaamaha xanuunka"
     },
     "verification_code_info": {
+      "contact_at": "Waxaad sidoo kale wici kartaa {{healthAuthorityName}} adigoo ka wacaya",
       "how_do_i_get_body": "La xariir maamulkaaga caafimaadka, {{healthAuthorityName}}.",
       "how_do_i_get_header": "Sidee ayaan kuhelayaa koodhka xaqiijinta?",
       "info_body": "Koodhka xaqiijintu waa koodh ay ku siinayaan maamulka caafimaadku, {{healthAuthorityName}}, haddii aad hesho natiijada caabuqa lagaaga helay.\n\nKoodhka xaqiijinta waxaa loo adeegsadaa xaqiijinta in natiijada baarista caabuqa lagaaga helay ay sax tahay.\n\nKoodh kasta oo xaqiijin wuxuu dhacayaa kadib muddo kooban si loo xaqiijiyo inaan la gudbin baaritaano been ah.\n\nHaddii aad waajahdo cilad markaad gudbinayso koodhkaaga xaqiijinta, waxaa qasab ah inaad koodh cusub ka hesho maamulka caafimaadka kahor intaadan gudbin markale.",
@@ -146,7 +169,8 @@
     "exposure_detail": {
       "next_steps": "Tallaabooyinka xiga",
       "personalize_my_guidance": "Tilmaantayda ka dhig mid gaar ah",
-      "schedule_callback": "Muddayso wicitaan si aad taageero uga hesho raadraacaha dadka la joogay qofka caabuqa laga helo ee ka soo jeeda {{healthAuthorityName}}."
+      "schedule_callback": "Muddayso wicitaan si aad taageero uga hesho raadraacaha dadka la joogay qofka caabuqa laga helo ee ka soo jeeda {{healthAuthorityName}}.",
+      "speak_with_covid_support": "La hadal Taageerada COVID"
     },
     "exposure_report": "Warbixinta gaadhista",
     "exposure_summary": "Qof aad u dhawayd intii u dhaxaysay {{startDate}} iyo {{endDate}} ayaa laga helay caabuqa COVID-19.",
@@ -162,16 +186,20 @@
     "how_does_this_work_para": "Markay Ogeysiinta Ufeydsanku daaran tahay, telefoonkaaga ayaa isticmaala Bluetooth ayaa u kala doorsHa iyo kaydiYA tirada taxanaha bakhtiyaanasiibka ah (loo yaqaan Aqoonsiga bakhtiyaanasiibka ah) telefoon kasta kasta oo u la kulmo oo sidoo kale leh Kartiyaynta Ogeysiimaha Ufeydsanka. Aqoonsiyada bakhtiyaanasiibka ah ayaan qof ahaan garanayn ugama isticmaaleyaasha oo beddelma maanitiiba marar badan si asturnaantaada loo daafo.",
     "last_days": "14kii maalmood ee ugu dambeysay",
     "more_info": "Xog badan ka ogoow Ogaysiiska U dhawaanshaha Qofka caabuqa qaba",
+    "more_info_header": "Xog dheeraad ah",
     "next_steps": "Tallaabooyinka xiga",
     "no_connectivity_message": "Kuma xirnid interneetka!",
     "no_exposure_reports": "Ma Jiraan Warbixinno Ufeydsani",
     "no_exposure_reports_over_past": "Ma aadan helin innaba warbixinno ufeydsanaan 14kii-maalmood ee la soo dhaafay.",
     "possible_exposures": "Suuragalnimada u Feydsannada Caabuqa",
+    "recommended_quarantine": "Karantiilka Lagu Taliyey",
     "review_health_guidance": "Dib u eegida Hanuuninta Caafimaadka",
+    "stay_quarantined_through": "Maalinta ugu dambaysa:",
     "updated": "La cusboonaysiiyay",
     "why_did_i_get_an_en": "Maxaan u helay ogeysiin ufeydsanaan?",
     "why_did_i_get_an_en_para": "Waxaad heli doontaa ogeysiinta ufeydsanaanta marka qofka aad si lama filaan u kulanteeni hadhow si xaqiiq ah, looga helo cudrka, ama laga tijaabiyo oo COVID-19 oo u xusho inuu u wargaliyo dadka kale.",
-    "your_device_exchanged": "In isku kala jir kasta taariikheed ee hoos ku qoran, aaladdaada ayaaa furayaal isdhaafsadeen aalad kale taasoo mar danbe qofkii watay laga helay caabuqa."
+    "your_device_exchanged": "In isku kala jir kasta taariikheed ee hoos ku qoran, aaladdaada ayaaa furayaal isdhaafsadeen aalad kale taasoo mar danbe qofkii watay laga helay caabuqa.",
+    "your_recommended_quarantine_is_over": "Karantiilka lagaa doonaayay waa dhamaaday. Fadlan sii wad inaad raacdo tilmaamaha caafimaadka."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "Si aad u furto Ogaysiiska U dhawaanshaha Qofka caabuqa qaba, waa inaad marka koobaad furtaa aalada Bluetoothka ood ka furayso Settings-ka abkaaga.",
@@ -179,6 +207,7 @@
     "cant_check_for_exposures_body": "Waxaa qasab ah inaad furataa Ogaysiiska U dhawaanshaha Qofka caabuqa qaba si aad u hubiso dadka qaba ee kula joogay.",
     "cant_check_for_exposures_button": "Furo Ogaysiiska Ufeydsanaanta",
     "cant_check_for_exposures_title": "Lama hubin karo Dadka caabuqa qaba ee aad La joogtay",
+    "exposure_check_complete": "Ogaanshaha Soo-gaadhista waa dhammaatay",
     "location_body": "Google ayaa qasab ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Ogaysiiska U Feydsanka. {{applicationName}} MA raad-raaco ama ma kaydiyo goobtaada.",
     "location_title": "Furo Adeegyada Goobta",
     "set_active_region_ios_body": "Fur qaybta Settings abka, gal settings-ka Exposure Notifications (Ogaysiiska La joogista Qofka Caabuqa Qaba) abkaan, kadibna ku xir 'Set As Active Region'.",
@@ -206,13 +235,16 @@
       "location_subheader": "{{applicationName}} marnaba marin uma helayos xogtaa goobta aad joogto oo aaladdadana lama raadraacayo.",
       "proximity_tracing_header": "Raadraaca Isku Dhawaanshaha",
       "share": "Aabka wadaag oo adiga iyo dadka kaleba iska caawiya in aad iska isdifaacdaan {{applicationName}}",
-      "share_message": "Check out this app {{applicationName}}, oo naga caawin kara xakamaynta cudurka COVID-19! {{appDownloadLink}}",
+      "share_message": "Isku day codsigan {{applicationName}}, oo naga caawin kara xakamaynta cudurka COVID-19! {{appDownloadUrl}}",
       "tracing_off_header": "Ma shaqaynayo",
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
       "tracing_on_header": "Wuu shaqaynayaa"
     },
     "call_emergency_services": "Wac adeegyada Xaaladaha Degdegga Ah (Imerjansiga)",
     "check_if_your_symptoms": "Geli calaamadahaaga kadibna hel talo degdeg ah oo ku aaddan sida aad guriga u joogayso.",
+    "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
+    "could_not_open_link": "Ma furi karo lifaaqa: {{url}}. Fadlan iskuday inaad url-ka ku furto baroowsarka taleefankaaga.",
+    "covid_data": "Xogta COVID",
     "enter_symptoms": "Geli astaamaha",
     "error": {
       "share_link_failed": "Ku guuldareystay inuu furo xiriiriye si aad ula wadaagto"
@@ -284,6 +316,11 @@
       "body_3": "Kaddib marka la noqdo togane ka ijaabinta COVID-19, isticmaaleyaasha ayaa la wadaagi kare koodh fure ah {{applicationName}} si loo xaqiijiyo ka helkooda cudurka. Hadday taa sameeyaan, koodhadhkooda dhawaanta ahaa ee telefoonnadooda ayaa loo haadin doonaa oo si xasilan kor loogu rari doonaa serferka. Nidaamkan xaqiijintu waxay waxtar u leedahay kahortagga warbixinnada toganaha khaladka ah (false positive report).",
       "body_4": "Haddii aqoonsi la calaamadeeyay ay iswaafaqaan aqoonsi ku keydsan taleefankaaga, tani waxay muujineysaa inaad la kulantay qof laga helay cudurka COVID-19. Tan waa sida {{applicationName}} go'aamin kara haddii adiga ay dhici karto in fayraska aad u feydsantay",
       "body_5": "Haddii uu jiro iswaafaqsanaan, {{applicationName}} ayaa ku ogeysiin doona oo ku siin doona hagitaan dheeraad ah oo ka socda waaxdaada caafimaadka.\n\nTani waa sida {{applicationName}} uu awood uu kuu siin karo inaad go'aan ka gaarto waxyaabo ku saabsan caafimaadkaaga, oo aad ammaanka bulshadaada ku ilaaliso, dhammaantood iyadoon la ogeyn cidda aad tahay iyo halka aad joogtay.",
+      "image_label_1": "Sawirka nin haysta taleefanka oo uu ku yaalo qoraalka aqoonsi isbadbadalaaya.",
+      "image_label_2": "Sawir muujinaya labo taleefan oo casri ah oo isdhaafsanaaya Aqoonsiyo isbadbadalaaya.",
+      "image_label_3": "Sawir muujinaya nin gelinaaya koodhka xaqiijinta qarsoon.",
+      "image_label_4": "Sawir muujinaya taleefan leh Aqoonsiga kaladuwan iyo koodhka xaqiijinta oo u dhaw.",
+      "image_label_5": "Sawirka haweeneey isticmaalaysa taleefankeeda.",
       "subheader_1": "Markaad daarto Raadinta U dhowaanshaha (Proximity Tracing) taleefankaaga waxaa lagu calaamadeeyaa si isdaba-joog ah oo is beddelaya, aqoonsiyo qori-tuur ah",
       "subheader_2": "Telefoonnada raadraacidda u dhawaanshaha kartida loo siisay koodhadh ku kala beddelashada aaladaha kale ee ay la kulmaan",
       "subheader_3": "Markuu adeegsade baaritaanka laga helo, waxay dooran karaan inay si qarsoodi ah ula wadaagaan xaaladdooda caafimaad",
@@ -325,7 +362,9 @@
     "stop_sharing_data": "Joojin Cid kale la Wadaagida Xogta"
   },
   "screen_titles": {
+    "activation": "Firfircoonida",
     "bluetooth": "Bluetooth",
+    "covid_data_webview": "Xogta COVID",
     "exposure_history": "Taariikhda Ufeydsanka",
     "exposure_notifications": "Ogaysiisyada Ufeydsanaanta",
     "exposure_scanning": "Helitaanka Dadka kuu dhaw ee Qaba caabuqa",
@@ -333,10 +372,14 @@
     "how_the_app_works": "Sida aabku u shaqeeyo",
     "legal": "Sharciyeedka",
     "location": "Goobta (Location)",
+    "my_data": "Xogtayda",
     "protect_privacy": "Sidaan u ilaalinno asturnaantaada",
+    "request_callback": "Codo Wicitaan",
     "select_language": "Xulo Luqadda",
     "select_symptoms": "Dooro Astaamaha",
-    "settings": "Dejimaha"
+    "self_assessment": "Is-qiimaynta Xaaladdaada",
+    "settings": "Dejimaha",
+    "welcome": "Soo dhawow"
   },
   "self_assessment": {
     "age_range": {
@@ -492,6 +535,12 @@
     "invalid_code_title": "Koodhka khaldan",
     "network_connection_body": "Waa inaad ku xirantaa WiFi si aad u gudbiso koodhka xaqiijinta.",
     "network_connection_title": "Malahan Khadka Interneetka",
+    "no_keys_on_device_body": "Ma aadan haysan ablikeeshinka muddo kugu filan si uu kuugu sheego dadka aad la joogtay. Fadlan sii wad inaad go'doonka ku sii jirto.",
+    "no_keys_on_device_title": "Ma jiraan dad caabuqa qaba oo aad la joogtay oo aaladu sheegi karto",
+    "not_authorized_body": "Uma aadan ogolaan abka inuu dadka kale la wadaago aqoonsiyadaada Isdhaafka ah.",
+    "not_authorized_title": "Uma ogolaan",
+    "rate_limit_body": "Waxaad gaadhay xadka gudbinta maalinlaha ah. Fadlan iskuday markale 24 saac.",
+    "rate_limit_title": "Soo gudbinta ugu badan ayaa la gaarey",
     "unknown_body": "Cilad aan la filayn ayaa dhacday. Fadlan markale iskuday.",
     "unknown_title": "Wax ayaa khaldan"
   }

@@ -10,6 +10,7 @@
     "done": "Fatto",
     "more": "Altro",
     "next": "Fatto",
+    "ok": "Ok",
     "something_went_wrong": "Si è verificato un errore",
     "start": "Inizio"
   },
@@ -33,6 +34,7 @@
   "exposure_history": {
     "how_does_this_work": "Come funziona?",
     "last_days": "Ultimi 21 giorni",
+    "more_info_header": "Ulteriori informazioni",
     "why_did_i_get_an_en": "Perché ho ricevuto una notifica di esposizione?",
     "why_did_i_get_an_en_para": "Riceverai una notifica di esposizione quando qualcuno che hai incrociato riceverà in seguito una diagnosi o un test confermati e positivi per COVID-19 e sceglie d'informare gli altri"
   },
