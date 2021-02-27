@@ -38,9 +38,9 @@ end
 
 ########################## HELPERS START #######################################
 
-def update_value_on_plist(file_path:, key:, value:)
+def update_value_on_plist(file_path:, keys:, value:)
   _output, error, status = Open3.capture3(
-    "/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file_path}\""
+    "/usr/libexec/PlistBuddy -c \"Set :#{keys.join(':')} #{value}\" \"#{file_path}\""
   )
   return true if status.success?
   failure_message "Could not update #{key} to #{value} on plist file #{file_path} with error: #{error}"
@@ -104,7 +104,7 @@ def update_ios_display_name(new_name)
   puts "Updating ios display name from #{get_current_ios_name} to #{new_name}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'CFBundleDisplayName',
+    keys: ['CFBundleDisplayName'],
     value: new_name
   )
   exit 1
@@ -162,8 +162,18 @@ def update_android_application_id(application_id)
   )
 end
 
+def update_android_bugsnag_apikey(apikey)
+  puts "Updating android bugsnag apikey to #{apikey}"
+  replace_string_in_file(
+    file_path: './android/app/src/main/AndroidManifest.xml',
+    regex: 'API_KEY" android:value=""',
+    value: "API_KEY\" android:value=\"#{apikey}\""
+  )
+end
+
 IOS_BUNDLE_IDENTIFIER_KEY = "IOS_BUNDLE_ID"
 ANDROID_APPLICATION_ID_KEY = "ANDROID_APPLICATION_ID"
+BUGSNAG_APIKEY_KEY = "BUGSNAG_APIKEY"
 def update_bundle_identifiers
   environment = Dotenv.parse(File.open(ENV_FILE))
   ios_bundle_identifier = environment.fetch(IOS_BUNDLE_IDENTIFIER_KEY, false)
@@ -174,6 +184,19 @@ def update_bundle_identifiers
     update_android_application_id(android_application_id)
   else
     failure_message "Both ios bundle identifier and android id are required"
+    exit 1
+  end
+end
+
+def update_bugsnag_apikeys
+  environment = Dotenv.parse(File.open(ENV_FILE))
+  apikey = environment.fetch(BUGSNAG_APIKEY_KEY, false)
+
+  if apikey
+    update_android_bugsnag_apikey(apikey)
+    update_ios_bugsnag_apikey(apikey)
+  else
+    failure_message "Bugsnag apikey is required"
     exit 1
   end
 end
@@ -213,8 +236,18 @@ def update_ios_en_api_version(new_en_api_version)
   puts "Updating ios en api version from #{get_current_ios_en_api_version} to #{new_en_api_version}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'ENAPIVersion',
+    keys: ['ENAPIVersion'],
     value: new_en_api_version
+  )
+  exit 1
+end
+
+def update_ios_bugsnag_apikey(apikey)
+  puts "Updating ios bugsnag apikey to #{apikey}"
+  return if update_value_on_plist(
+    file_path: PLIST_PATH,
+    keys: ['bugsnag', 'apiKey'],
+    value: "#{apikey}"
   )
   exit 1
 end
@@ -232,7 +265,7 @@ def update_ios_en_region(new_en_region)
   puts "Updating ios en region from #{get_current_ios_en_region} to #{new_en_region}"
   return if update_value_on_plist(
     file_path: PLIST_PATH,
-    key: 'ENDeveloperRegion',
+    keys: ['ENDeveloperRegion'],
     value: new_en_region
   )
   exit 1
@@ -274,6 +307,9 @@ if File.exist?(ENV_FILE)
   puts ""
   puts "🛠 Updating Bundle Identifiers:"
   update_bundle_identifiers
+  puts "✅ Done"
+  puts "🛠 Updating Bugsnag Apikey:"
+  update_bugsnag_apikeys
   puts "✅ Done"
   puts ""
   puts "🛠 Updating iOS Configuration:"

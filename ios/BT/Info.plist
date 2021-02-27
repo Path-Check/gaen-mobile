@@ -5,7 +5,7 @@
 	<key>bugsnag</key>
 	<dict>
 		<key>apiKey</key>
-		<string>3950fbb2e58f6b77c75ac53b8559aad8</string>
+		<string></string>
 	</dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
