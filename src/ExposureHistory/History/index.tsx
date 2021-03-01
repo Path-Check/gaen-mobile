@@ -95,6 +95,16 @@ const History: FunctionComponent<HistoryProps> = ({
             ),
           )
           break
+          case "DataInaccessible":
+          showAlert(
+            t(
+              "exposure_notification_alerts.requires_network_title",
+            ),
+            t(
+              "exposure_notification_alerts.requires_network_body",
+            ),
+          )
+          break
         default:
           showAlert(
             t("exposure_notification_alerts.unhandled_error_title"),
