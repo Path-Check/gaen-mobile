@@ -149,8 +149,8 @@ describe("PublishConsentForm", () => {
           expect(
             alertSpy,
           ).toHaveBeenCalledWith(
-            "Attempt to submit existing keys",
-            `Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were ${newKeysInserted} new keys added.`,
+            "Attempt to submit existing exposure codes",
+            `Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were ${newKeysInserted} new exposure codes added.`,
             [{ onPress: expect.any(Function) }],
           )
         })
