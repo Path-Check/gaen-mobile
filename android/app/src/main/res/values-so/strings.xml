@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+  <string name="background_worker_channel_description">Waxay muujineysaa in qalabkaagu uu hubinayo suurtogalnimada soo-gaadhista COVID-19.</string>
+  <string name="background_worker_channel_name">Helitaanka Dadka kuu dhaw ee Qaba caabuqa</string>
   <string name="background_worker_notification_title">Hubinta dadka caabuqa qaba ee aad la joogtay...</string>
   <string name="exposure_notification_channel_description">Digniino ogeysiis soogaaritaanno</string>
   <string name="exposure_notification_channel_name">Ogeysiinta Ufeydsanku</string>

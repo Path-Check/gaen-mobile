@@ -9,7 +9,8 @@
     "continue": "Fortsæt",
     "done": "Udført",
     "more": "Mere",
-    "next": "Udført"
+    "next": "Udført",
+    "ok": "Ok"
   },
   "exposure_notification_alerts": {
     "bluetooth_title": "Aktivér Bluetooth"

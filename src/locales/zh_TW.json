@@ -115,6 +115,7 @@
     "how_does_this_work": "該功能如何運作？",
     "how_does_this_work_para": "當接觸通知開啟時，您的手機會使用藍牙與鄰近任何開啟接觸提醒的手機交換並儲存隨機ID，隨機ID並不會將您的個人訊息告知其他用戶，並在一日內多次更換以保護您的隱私。",
     "last_days": "最近14天",
+    "more_info_header": "更多資訊",
     "next_steps": "下一步",
     "no_connectivity_message": "您沒有連接到網路！",
     "no_exposure_reports": "無接觸紀錄",

@@ -11,7 +11,7 @@
     "lastname": "성 (선택)",
     "phone_number_required": "전화 번호 (필수)",
     "request_a_call": "지원팀에 전화 요청",
-    "success_body": "지원팀은 귀하와 지역사회를 안전하게 지키기 위해 열심히 노력하고 있습니다. {{healthAuthorityName}}가 귀하의 전화 회신 요청을 받았습니다. 전문가가 24시간 이내에 귀하에게 연락을 드릴 것입니다.",
+    "success_body": "지원팀은 귀하와 지역사회를 안전하게 지키기 위해 열심히 노력하고 있습니다. {{healthAuthorityName}}가 귀하의 회신 전화 요청을 받았습니다. 전문가가 24시간 이내에 귀하에게 연락을 드릴 것입니다.",
     "success_got_it": "알겠습니다.",
     "success_header": "귀하는 대기중입니다."
   },
@@ -29,6 +29,7 @@
     "next": "다음",
     "no_thanks": "아니오 괜찮습니다.",
     "off": "꺼짐",
+    "ok": "확인",
     "okay": "확인",
     "on": "켜짐",
     "save": "저장",
@@ -44,7 +45,7 @@
     "apologies_data_unavailable": "죄송합니다. 코로나 데이터를 사용할 수 없습니다.",
     "covid_stats": "코로나19 통계",
     "daily_new_cases": "10만명당 일일 신규 확진자",
-    "error_getting_data": "죄송합니다. {{location}} 대한 신규 확진자 데이터를 가져올 수 없습니다.",
+    "error_getting_data": "죄송합니다. {{location}}에 대한 신규 확진자 데이터를 가져올 수 없습니다.",
     "infection_rate": "감염률",
     "overall_risk_level_in": "{{locationName}}에 전반적인 위험 수준",
     "past_days": "지난 {{days}}일 동안 일간 신규 확진자",
@@ -61,7 +62,7 @@
     "includeing_people": "다른 사람과의 신체 접촉을 피하십시오.",
     "maintain_at_least": "다른 사람과 최소 6 피트 거리를 ",
     "monitor_for_fever": "발열, 기침 또는 기타 코로나19 증상 관찰:",
-    "physically_separate": "귀하의 가족 구성원을 포함한",
+    "physically_separate": "귀하의 가족 구성원을 포함한 ",
     "review_cdc_guidance": "CDC 지침 검토",
     "review_symptoms": "CDC 증상 검토",
     "stay_home_except_to_get_medical_care": "치료를 받는 것을 제외하고는 집에 머물러 두십시오.",
@@ -125,6 +126,7 @@
       "body1": "코로나19 검사 양성 괄과에 대해 {{healthAuthorityName}}한테서 인증 코드를 받은 경우에 다음 화면에서 인증 코드를 제출할 수 있습니다.",
       "body2": "인증 코드가 없지만 양성 결과를 받은 경우 {{healthAuthorityName}}한테서 인증 코드를 받고 나서 계속할 수 있습니다.",
       "header": "인증 코드를 갖고 계십니까?",
+      "title": "인증 코드 정보",
       "what_is_a": "인증 코드는 무엇인가요?"
     },
     "never_mind_button_title": "동의하지 않습니다 (취소)",
@@ -184,6 +186,7 @@
     "how_does_this_work_para": "노출 알림이 켜져 있는 경우 휴대폰은 블루투스 저에너지를 사용하여 노출 알림이 활성화 된 휴대폰과 가깝게 접촉하는 모든 휴대폰에서 임의 ID라고 하는 임의의 숫자 문자열을 교환합니다. 임의 ID는 다른 사용자에게 귀하를 개인적으로 식별하지 않으며 귀하의 개인 정보를 보호하기 위해 하루에 여러 번 변경됩니다.",
     "last_days": "지난 14일간",
     "more_info": "노출 알림에 대해 자세히 알아보기",
+    "more_info_header": "더 많은 정보",
     "next_steps": "다음 단계",
     "no_connectivity_message": "인터넷에 연결되어 있지 않습니다!",
     "no_exposure_reports": "노출 신고서 없음",
@@ -204,6 +207,7 @@
     "cant_check_for_exposures_body": "노출 여부를 확인하려면 노출 알림을 활성화해야 합니다.",
     "cant_check_for_exposures_button": "노출 알림 활성화",
     "cant_check_for_exposures_title": "노출 여부를 확인할 수 없음",
+    "exposure_check_complete": "노출 여부 확인 완료",
     "location_body": "Google은 Android 10 이하를 실행하는 기기에서 노출 알림을 사용하려면 위치 서비스를 활성화해야 합니다. {{applicationName}} 앱은 사용자의 위치를 추적하거나 기록하지 않습니다.",
     "location_title": "위치 서비스 활성화",
     "set_active_region_ios_body": "설정 앱을 열고 이 앱의 노출 알림 설정으로 이동 한 다음 '활성화된 지역으로 설정'을 누릅니다.",
@@ -303,7 +307,7 @@
     "notification_subheader1": "언제 알림을 받습니까?",
     "notification_subheader2": "어떻게 작동하나요?",
     "notification_subheader3": "이 앱은 코로나19 감염으로부터 당신을 보호하지 않습니다.",
-    "please_read_the": "읽어 주십시오",
+    "please_read_the": "읽어 주십시오 ",
     "privacy_policy": "개인정보 정책",
     "protect_privacy_button": "개인 정보를 보호하는 방법",
     "protect_privacy": {
@@ -358,6 +362,7 @@
     "stop_sharing_data": "데이터 공유 중지"
   },
   "screen_titles": {
+    "activation": "활성화",
     "bluetooth": "블루투스",
     "covid_data_webview": "코로나 데이터",
     "exposure_history": "노출 이력",
@@ -367,10 +372,14 @@
     "how_the_app_works": "앱은 어떻게 작동하나요?",
     "legal": "법률",
     "location": "위치",
+    "my_data": "나의 데이터",
     "protect_privacy": "개인 정보를 보호하는 방법",
+    "request_callback": "회신 전화 요청",
     "select_language": "언어 선택",
     "select_symptoms": "증상 선택",
-    "settings": "설정"
+    "self_assessment": "자체 평가",
+    "settings": "설정",
+    "welcome": "환영합니다"
   },
   "self_assessment": {
     "age_range": {
@@ -531,6 +540,7 @@
     "not_authorized_body": "임의 ID를 공유하도록 앱을 승인하지 않았습니다.",
     "not_authorized_title": "승인하지 않음",
     "rate_limit_body": "일일 제출 한도에 초과했습니다. 24시간 후에 다시 시도하십시오.",
+    "rate_limit_title": "제출 제한 초과",
     "unknown_body": "오류가 발생했습니다. 다시 시도하십시오.",
     "unknown_title": "오류가 발생했습니다."
   }

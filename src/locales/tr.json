@@ -166,6 +166,7 @@
     "how_does_this_work_para": "Maruz Kalma Bildirimleri açık olduğunda telefonun, yakınında bulunan ve maruz kalma bildirimleri açık olan diğer telefonlardan Bluetooth Düşük Enerji aracılığıyla rastgele rakam dizileri (rastgele ID diye adlandırılır) takas eder ve kaydeder. Rastgele ID'ler senin kim olduğunu diğer kullanıcılara bildirmez ve senin gizliliğini korumak amacıyla gün içinde birçok kez değişirler.",
     "last_days": "Son 14 gün",
     "more_info": "Maruz Kalma Bildirimleri hakkında daha fazla bilgi edin",
+    "more_info_header": "Daha fazla bilgi",
     "next_steps": "Sonraki adımlar",
     "no_connectivity_message": "İnternete bağlı değilsin!",
     "no_exposure_reports": "Maruz kalma bildirimi yok",

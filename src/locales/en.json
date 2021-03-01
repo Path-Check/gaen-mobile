@@ -186,6 +186,7 @@
     "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth Low Energy to swap and save random number strings (called random IDs) from any phones it is in close contact to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "more_info": "Learn more about Exposure Notifications",
+    "more_info_header": "More Info",
     "next_steps": "Next Steps",
     "no_connectivity_message": "You are not connected to the internet!",
     "no_exposure_reports": "No Exposure Reports",
@@ -198,8 +199,7 @@
     "why_did_i_get_an_en": "Why did I get an exposure notification?",
     "why_did_i_get_an_en_para": "You will receive an exposure notification when someone you have been in close contact with later uses the app to report a positive COVID-19 test.",
     "your_device_exchanged": "Within each date range below, your device exchanged keys with another device that later received a verified positive test result.",
-    "your_recommended_quarantine_is_over": "Your recommended quarantine is over. Please continue to follow the health guidelines.",
-    "more_info_header": "More Info"
+    "your_recommended_quarantine_is_over": "Your recommended quarantine is over. Please continue to follow the health guidelines."
   },
   "exposure_notification_alerts": {
     "bluetooth_body": "To activate Exposure Notifications, you must first turn on Bluetooth in your Settings app.",
@@ -364,6 +364,7 @@
     "stop_sharing_data": "Stop Sharing Data"
   },
   "screen_titles": {
+    "activation": "Activation",
     "bluetooth": "Bluetooth",
     "covid_data_webview": "Covid Data",
     "exposure_history": "Exposures",
@@ -373,15 +374,14 @@
     "how_the_app_works": "How the app works",
     "legal": "Legal",
     "location": "Location",
+    "my_data": "My Data",
     "protect_privacy": "How we protect your privacy",
+    "request_callback": "Request Callback",
     "select_language": "Select Language",
     "select_symptoms": "Select Symptoms",
+    "self_assessment": "Self Assessment",
     "settings": "Settings",
-    "my_data": "My Data",
-    "request_callback": "Request Callback",
-    "welcome": "Welcome",
-    "activation": "Activation",
-    "self_assessment": "Self Assessment"
+    "welcome": "Welcome"
   },
   "self_assessment": {
     "age_range": {

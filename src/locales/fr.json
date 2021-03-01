@@ -138,6 +138,7 @@
     "how_does_this_work": "Comment cela marche-t-il?",
     "how_does_this_work_para": "Lorsque les notifications d'exposition sont activées, votre téléphone utilise Bluetooth pour échanger et enregistrer des chaînes de nombres aléatoires (appelées ID aléatoires) à partir de tous les téléphones proches desquels les notifications d'exposition sont également activées. Les identifiants aléatoires ne vous identifieront pas personnellement auprès des autres utilisateurs et changeront plusieurs fois par jour pour protéger votre vie privée.",
     "last_days": "Les 14 derniers jours",
+    "more_info_header": "Plus d'informations",
     "no_connectivity_message": "Vous n'êtes pas connecté à Internet!",
     "no_exposure_reports": "Aucun rapport d'exposition",
     "no_exposure_reports_over_past": "Vous n'avez reçu aucun rapport d'exposition au cours des 14 derniers jours",

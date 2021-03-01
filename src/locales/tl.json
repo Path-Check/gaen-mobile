@@ -15,6 +15,7 @@
     "more": "Higit pa",
     "next": "Sa susunod",
     "no_thanks": "Salamat nalang",
+    "ok": "Ok",
     "okay": "Okay",
     "select_language": "Piliin ang wika",
     "settings": "Buksan ang Settings",
@@ -83,6 +84,7 @@
     "how_does_this_work": "Paano ito gumagana?",
     "how_does_this_work_para": "Kapag ang Mga Abiso ng Pagkakalantad sa Posibleng Pagkalanit o Exposure Notifications ay nakabukas o pinagagana, ang iyong cellphone o device ay gumagamit ng Bluetooth upang makipagpalitan at i-save ang mga random string ng mga numero (na tinatawag na random ID) mula sa anumang mga cellphone o device na nakatagpo nito na mayroon ding pinaganang Mga Abiso ng Pagkakalantad sa Posibleng Pagkalanit o Exposure Notifications. Ang mga Random na ID ay hindi magpapakilala sa iyo nang personal sa ibang mga gumagamit at magbabago nang maraming beses sa isang araw upang maprotektahan ang iyong privacy.",
     "last_days": "Huling 14 na araw",
+    "more_info_header": "Karagdagang Impormasyon",
     "next_steps": "Mga Susunod na Hakbang",
     "no_connectivity_message": "Hindi ka nakakonekta sa internet!",
     "no_exposure_reports": "Walang mga exposure report o posibleng pagkahawa",
@@ -203,7 +205,8 @@
     "legal": "Ligal",
     "location": "Lokasyon",
     "protect_privacy": "Paano namin protektahan ang iyong privacy",
-    "select_language": "Piliin ang Wika"
+    "select_language": "Piliin ang Wika",
+    "self_assessment": "Pagsusuri sa Sarili"
   },
   "settings": {
     "delete_data_are_you_sure": "Sigurado ka ba?"
