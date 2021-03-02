@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { useNavigation } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
 import { CallbackStackScreens, CallbackStackScreen } from "./index"
 import CallbackScreen from "../Callback/Form"
@@ -17,6 +18,7 @@ const Stack = createStackNavigator<CallbackStackParams>()
 
 const CallbackStack: FunctionComponent = () => {
   const navigation = useNavigation()
+  const { t } = useTranslation()
 
   return (
     <CallbackFormContext.Provider
@@ -29,7 +31,7 @@ const CallbackStack: FunctionComponent = () => {
       <Stack.Navigator
         screenOptions={{
           ...Headers.headerMinimalOptions,
-          title: "screen_titles.request_callback",
+          title: t("screen_titles.request_callback"),
           headerLeft: applyHeaderLeftBackButton(),
         }}
       >
