@@ -78,6 +78,7 @@ const Home: FunctionComponent = () => {
         {healthAuthorityHealthCheckUrl && (
           <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
         )}
+
         {displayCovidDataWebView && <CovidDataWebViewLink />}
         {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {displaySelfAssessment && <SelfAssessment />}
