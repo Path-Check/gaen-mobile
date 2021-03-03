@@ -11,17 +11,15 @@ import { applyHeaderLeftBackButton } from "../navigation/HeaderLeftBackButton"
 
 import { Headers } from "../styles"
 
-type CallbackStackParams = {
-  [key in CallbackStackScreen]: undefined
+export type CallbackStackParams = {
+  [key in CallbackStackScreen]:
+    | {
+        fromScreen: CallbackFormFromScreen
+      }
+    | undefined
 }
 
 export type CallbackFormFromScreen = "ExposureHistory" | "VerificationCode"
-
-export type CallbackStacParams = {
-  Form: {
-    fromScreen: CallbackFormFromScreen
-  }
-}
 
 const Stack = createStackNavigator<CallbackStackParams>()
 
@@ -29,7 +27,7 @@ const CallbackStack: FunctionComponent = () => {
   const navigation = useNavigation()
   const { t } = useTranslation()
 
-  const route = useRoute<RouteProp<CallbackStacParams, "Form">>()
+  const route = useRoute<RouteProp<CallbackStackParams, "Form">>()
 
   return (
     <CallbackFormContext.Provider

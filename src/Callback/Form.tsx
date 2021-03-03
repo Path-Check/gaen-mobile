@@ -15,11 +15,7 @@ import {
 } from "react-native"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 
-import {
-  useStatusBarEffect,
-  CallbackStackScreens,
-  ModalStackScreens,
-} from "../navigation"
+import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
@@ -29,7 +25,7 @@ import { useConfigurationContext } from "../ConfigurationContext"
 import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 import {
   CallbackFormFromScreen,
-  CallbackStacParams,
+  CallbackStackParams,
 } from "src/navigation/CallbackStack"
 
 const defaultErrorMessage = " "
@@ -63,10 +59,10 @@ const CallbackForm: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
-  const route = useRoute<RouteProp<CallbackStacParams, "Form">>()
+  const route = useRoute<RouteProp<CallbackStackParams, "Form">>()
 
-
-  const fromScreen: CallbackFormFromScreen = route.params.fromScreen
+  const fromScreen: CallbackFormFromScreen | undefined =
+    route.params?.fromScreen
 
   const isIOS = Platform.OS === "ios"
 
