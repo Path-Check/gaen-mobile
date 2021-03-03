@@ -165,6 +165,7 @@ type DetectExposuresError =
   | "Unknown"
   | "NotEnabled"
   | "NotAuthorized"
+  | "DataInaccessible"
 
 export type DetectExposuresResponse =
   | DetectExposuresResponseSuccess
@@ -191,6 +192,8 @@ export const detectExposures = async (): Promise<DetectExposuresResponse> => {
         return { kind: "failure", error: "NotEnabled" }
       case "NotAuthorized":
         return { kind: "failure", error: "NotAuthorized" }
+      case "Unknown":
+        return { kind: "failure", error: "DataInaccessible" }
       default:
         Logger.error("Unhandled Error in detectExposures", { e })
         return { kind: "failure", error: "Unknown" }
