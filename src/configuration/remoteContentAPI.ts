@@ -26,6 +26,7 @@ export interface CustomCopy {
     body2: string
   }
   callbackFormInstruction?: string
+  verificationCodeCallbackFormInstruction?: string
 }
 
 const AppTransitionCopyDecoder = JsonDecoder.object(
@@ -48,6 +49,9 @@ const CustomCopyDecoder = JsonDecoder.object<CustomCopy>(
     verificationCodeOnSubmitInfo: JsonDecoder.optional(JsonDecoder.string),
     appTransition: JsonDecoder.optional(AppTransitionCopyDecoder),
     callbackFormInstruction: JsonDecoder.optional(JsonDecoder.string),
+    verificationCodeCallbackFormInstruction: JsonDecoder.optional(
+      JsonDecoder.string,
+    ),
   },
   "CustomCopy",
 )

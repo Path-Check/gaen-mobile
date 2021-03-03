@@ -101,7 +101,9 @@ const RequestCallBackActions: FunctionComponent<RequestCallBackActionsProps> = (
   const { t } = useTranslation()
 
   const handleOnPressRequestCallback = () => {
-    navigation.navigate(ModalStackScreens.CallbackStack)
+    navigation.navigate(ModalStackScreens.CallbackStack, {
+      fromScreen: "ExposureHistory",
+    })
   }
 
   return (

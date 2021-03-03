@@ -13,9 +13,13 @@ import {
   Keyboard,
   TouchableOpacity,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 
-import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
+import {
+  useStatusBarEffect,
+  CallbackStackScreens,
+  ModalStackScreens,
+} from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
@@ -23,6 +27,10 @@ import Logger from "../logger"
 import { useConfigurationContext } from "../ConfigurationContext"
 
 import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
+import {
+  CallbackFormFromScreen,
+  CallbackStacParams,
+} from "src/navigation/CallbackStack"
 
 const defaultErrorMessage = " "
 
@@ -42,7 +50,10 @@ const CallbackForm: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const { callbackFormInstruction } = useCustomCopy()
+  const {
+    callbackFormInstruction,
+    verificationCodeCallbackFormInstruction,
+  } = useCustomCopy()
   const { minimumPhoneDigits, supportPhoneNumber } = useConfigurationContext()
 
   const [firstname, setFirstname] = useState("")
@@ -52,12 +63,22 @@ const CallbackForm: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
 
+  const route = useRoute<RouteProp<CallbackStacParams, "Form">>()
+
+
+  const fromScreen: CallbackFormFromScreen = route.params.fromScreen
+
   const isIOS = Platform.OS === "ios"
 
   const handleOnChangeFirstname = (name: string) => {
     setErrorMessage("")
     setFirstname(name)
   }
+
+  const instruction =
+    fromScreen === "ExposureHistory"
+      ? callbackFormInstruction
+      : verificationCodeCallbackFormInstruction
 
   const handleOnChangeLastname = (name: string) => {
     setErrorMessage("")
@@ -73,6 +94,43 @@ const CallbackForm: FunctionComponent = () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
 
+    if (fromScreen === "ExposureHistory") {
+      submitExposureHistoryCallbackForm()
+    } else {
+      submitVerificationCodeCallbackForm()
+    }
+  }
+
+  const submitVerificationCodeCallbackForm = async () => {
+    try {
+      const response = await API.postCallbackInfo({
+        firstname,
+        lastname,
+        phoneNumber,
+      })
+
+      if (response.kind === "success") {
+        navigation.navigate(CallbackStackScreens.Success)
+      } else {
+        Logger.addMetadata("requestCallbackError", {
+          errorMessage: response.message,
+        })
+        Logger.error(
+          `FailureToRequestCallback.${response.error}.${
+            response.message || "failure_handled_response"
+          }`,
+        )
+        setErrorMessage(showError(response.error))
+      }
+      setIsLoading(false)
+    } catch (e) {
+      Logger.error(`FailureToRequestCallback.exception.${e.message}`)
+      Alert.alert(t("errors.something_went_wrong"), e.message)
+      setIsLoading(false)
+    }
+  }
+
+  const submitExposureHistoryCallbackForm = async () => {
     try {
       const response = await API.postCallbackInfo({
         firstname,
@@ -143,7 +201,7 @@ const CallbackForm: FunctionComponent = () => {
           <View>
             <View style={style.headerContainer}>
               <Text style={style.header}>{t("callback.request_a_call")}</Text>
-              <Text style={style.subheader}>{callbackFormInstruction}</Text>
+              <Text style={style.subheader}>{instruction}</Text>
               {Boolean(supportPhoneNumber) && (
                 <View>
                   <Text style={style.supportNumberText}>

@@ -9,8 +9,13 @@ import {
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
+import { useConfigurationContext } from "../ConfigurationContext"
 
-import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
+import {
+  useStatusBarEffect,
+  AffectedUserFlowStackScreens,
+  ModalStackScreens,
+} from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { Text } from "../components"
 
@@ -22,13 +27,20 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { healthAuthorityName } = useCustomCopy()
+  const { displayCallbackForm } = useConfigurationContext()
 
   const handleOnPressContinue = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
   }
 
-  const handleOnPressSecondaryButton = () => {
+  const handleOnPressVerificationCodeInfoButton = () => {
     navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
+  }
+
+  const handleOnPressVerificationCodeCallbackFormButton = () => {
+    navigation.navigate(ModalStackScreens.CallbackStack, {
+      fromScreen: "VerificationCode",
+    })
   }
 
   return (
@@ -61,9 +73,22 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
           <Text style={style.buttonText}>{t("common.continue")}</Text>
           <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
         </TouchableOpacity>
+        {displayCallbackForm && (
+          <TouchableOpacity
+            style={style.secondaryButton}
+            onPress={handleOnPressVerificationCodeCallbackFormButton}
+            accessibilityLabel={t(
+              "export.intro.do_you_have_a_verification_code",
+            )}
+          >
+            <Text style={style.secondaryButtonText}>
+              {t("export.intro.do_you_have_a_verification_code")}
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
-          style={style.secondaryButton}
-          onPress={handleOnPressSecondaryButton}
+          style={style.secondaryButtonLeftIcon}
+          onPress={handleOnPressVerificationCodeInfoButton}
           accessibilityLabel={t("export.intro.what_is_a")}
         >
           <View style={style.secondaryButtonIconContainer}>
@@ -119,6 +144,10 @@ const style = StyleSheet.create({
     marginRight: Spacing.small,
   },
   secondaryButton: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  secondaryButtonLeftIcon: {
     ...Buttons.secondary.leftIcon,
   },
   secondaryButtonIconContainer: {
@@ -126,6 +155,7 @@ const style = StyleSheet.create({
   },
   secondaryButtonText: {
     ...Typography.button.secondaryLeftIcon,
+    textAlign: "center",
   },
 })
 

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
-import { useNavigation } from "@react-navigation/native"
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
+import { useTranslation } from "react-i18next"
 
 import { CallbackStackScreens, CallbackStackScreen } from "./index"
 import CallbackScreen from "../Callback/Form"
@@ -13,10 +14,22 @@ import { Headers } from "../styles"
 type CallbackStackParams = {
   [key in CallbackStackScreen]: undefined
 }
+
+export type CallbackFormFromScreen = "ExposureHistory" | "VerificationCode"
+
+export type CallbackStacParams = {
+  Form: {
+    fromScreen: CallbackFormFromScreen
+  }
+}
+
 const Stack = createStackNavigator<CallbackStackParams>()
 
 const CallbackStack: FunctionComponent = () => {
   const navigation = useNavigation()
+  const { t } = useTranslation()
+
+  const route = useRoute<RouteProp<CallbackStacParams, "Form">>()
 
   return (
     <CallbackFormContext.Provider
@@ -29,13 +42,14 @@ const CallbackStack: FunctionComponent = () => {
       <Stack.Navigator
         screenOptions={{
           ...Headers.headerMinimalOptions,
-          title: "screen_titles.request_callback",
+          title: t("screen_titles.request_callback"),
           headerLeft: applyHeaderLeftBackButton(),
         }}
       >
         <Stack.Screen
           name={CallbackStackScreens.Form}
           component={CallbackScreen}
+          initialParams={route.params}
         />
         <Stack.Screen
           name={CallbackStackScreens.Success}
