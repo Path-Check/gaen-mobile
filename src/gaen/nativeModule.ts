@@ -193,7 +193,7 @@ export const detectExposures = async (): Promise<DetectExposuresResponse> => {
       case "NotAuthorized":
         return { kind: "failure", error: "NotAuthorized" }
       case "Unknown":
-        return { kind: "failure", error: "DataInaccessible"}
+        return { kind: "failure", error: "DataInaccessible" }
       default:
         Logger.error("Unhandled Error in detectExposures", { e })
         return { kind: "failure", error: "Unknown" }
