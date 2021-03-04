@@ -62,7 +62,7 @@ const CallbackForm: FunctionComponent = () => {
   const route = useRoute<RouteProp<CallbackStackParams, "Form">>()
 
   const fromScreen: CallbackFormFromScreen | undefined =
-    route.params?.fromScreen
+    route?.params?.fromScreen
 
   const isIOS = Platform.OS === "ios"
 
