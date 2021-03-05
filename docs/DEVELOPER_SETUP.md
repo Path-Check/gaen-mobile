@@ -8,6 +8,7 @@ instructions on how to get set up. Note that we are not using Expo, so you
 should review docs relevant to using [React Native
 Cli](https://reactnative.dev/docs/environment-setup) only.
 
+**Requires XCode 12.4+ to build the iOS Application.**
 
 ### Getting Started
 
