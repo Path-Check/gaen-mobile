@@ -81,6 +81,14 @@ The following [locales](src/locales/locale.ts) are supported.
 
 This project is using [Lokalise](https://lokalise.com/) for translations.
 
+## Optional Integrations
+
+This project allows the following optional integrations through sections in the [configuration](example.env.bt).
+
+- Matomo Analytics Server (Product Analytics)
+- BugSnag Error Reporting (Error Reporting)
+- Embeddable Data Visualization with a Tableau link. (Links)
+- Data Analytics with Covid ActNow (Covid Data)
 
 ## Learn More 📚
 
