@@ -210,7 +210,7 @@
     "exposure_check_complete": "Exposure check complete",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Notifications. {{applicationName}} does NOT track or keep a record of your location.",
     "location_title": "Enable Location Services",
-    "requires_network_body": "Please make sure airplane mode is disabled and mobile data or WiFi are available.",
+    "requires_network_body": "Please make sure Airplane Mode is disabled and internet access is available through mobile data or WiFi.",
     "requires_network_title": "Can't Connect To Network",
     "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
     "set_active_region_ios_title": "Set Active Region",
