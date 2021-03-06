@@ -81,5 +81,5 @@ jobs:
       - run: |
           xcodebuild test -workspace COVIDSafePaths.xcworkspace \
             -scheme BT_Development \
-            -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.1' \
+            -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.4' \
         working-directory: ./ios
