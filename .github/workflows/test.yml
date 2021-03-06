@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Set XCode Version
-        run: sudo xcode-select -s /Applications/Xcode_12.3.app
+        run: sudo xcode-select -s /Applications/Xcode_12.4.app
 
       - name: Cache node_modules/
         uses: actions/cache@v1
@@ -81,5 +81,5 @@ jobs:
       - run: |
           xcodebuild test -workspace COVIDSafePaths.xcworkspace \
             -scheme BT_Development \
-            -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.4' \
+            -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4' \
         working-directory: ./ios
