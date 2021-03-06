@@ -60,7 +60,7 @@
   
   // Read dev environment variable
 #if DEBUG
-  [Bugsnag start];
+//  [Bugsnag start];
 #else
   if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
     [Bugsnag start];
