@@ -62,7 +62,7 @@
 #if DEBUG
   NSDictionary *infoPlistDict = [[NSBundle mainBundle] infoDictionary];
   NSString *bugsnagApiKey = infoPlistDict[@"bugsnag"][@"apiKey"];
-  if (bugsnagApiKey != nil) {
+  if ([bugsnagApiKey length] > 0) {
     [Bugsnag start];
   }
 #else
