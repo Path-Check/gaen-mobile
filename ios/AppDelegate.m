@@ -60,7 +60,11 @@
   
   // Read dev environment variable
 #if DEBUG
-  [Bugsnag start];
+  NSDictionary *infoPlistDict = [[NSBundle mainBundle] infoDictionary];
+  NSString *bugsnagApiKey = infoPlistDict[@"bugsnag"][@"apiKey"];
+  if ([bugsnagApiKey length] > 0) {
+    [Bugsnag start];
+  }
 #else
   if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
     [Bugsnag start];
