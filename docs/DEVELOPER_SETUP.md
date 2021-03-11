@@ -8,6 +8,7 @@ instructions on how to get set up. Note that we are not using Expo, so you
 should review docs relevant to using [React Native
 Cli](https://reactnative.dev/docs/environment-setup) only.
 
+Note, you should have at least Xcode 12.4 in order to run the project on Mac.
 
 ### Getting Started
 
@@ -118,6 +119,7 @@ yarn i18n:push     // pushes new entries to lokalise, requires an API key
 
 Valid translations are required to pass CI, use the following scrips to keep the
 local translation file valid:
+
 ```
 yarn i18n:check    // checks if all translations have an entry
 yarn i18n:extract  // updates en.json to match current entries
@@ -226,5 +228,3 @@ Once a new HA is created we need to add some secrets:
 - Encoded keystore file (`openssl base64 -A -in key.jks`)
 - Keystore password
 - Key password
-
-

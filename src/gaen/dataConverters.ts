@@ -14,7 +14,11 @@ export const toExposureInfo = (
   rawExposures: RawExposure[],
 ): ExposureDatum[] => {
   const groupedExposures = rawExposures.map(toExposureDatum)
-  return Object.values(groupedExposures).sort((a, b) => b.date - a.date)
+  const twoWeeksAgo = DateTimeUtils.beginningOfDay(DateTimeUtils.daysAgo(14))
+  const recentExposures = Object.values(groupedExposures)
+    .filter((exposure) => exposure.date > twoWeeksAgo)
+    .sort((a, b) => b.date - a.date)
+  return recentExposures
 }
 
 const toExposureDatum = (r: RawExposure): ExposureDatum => {

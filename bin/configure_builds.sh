@@ -195,9 +195,6 @@ def update_bugsnag_apikeys
   if apikey
     update_android_bugsnag_apikey(apikey)
     update_ios_bugsnag_apikey(apikey)
-  else
-    failure_message "Bugsnag apikey is required"
-    exit 1
   end
 end
 
