@@ -23,7 +23,7 @@
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
-    "hascode": "Already have a code? ",
+    "hascode": "Already have a code?",
     "learn_more": "Learn more",
     "maybe_later": "Maybe later",
     "more": "More",
@@ -72,6 +72,7 @@
   },
   "errors": {
     "description": "An error has occurred. Please reload the app.",
+    "maxed_submission_requests": "You have reached the max number of submissions, please wait 15 minutes to resubmit.",
     "reload": "Reload",
     "something_went_wrong": "Something went wrong",
     "title": "Unknown Error",

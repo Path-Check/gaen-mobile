@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import AsyncStorage from "@react-native-community/async-storage"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
@@ -74,31 +75,94 @@ const CallbackForm: FunctionComponent = () => {
     setErrorMessage(defaultErrorMessage)
 
     try {
-      const response = await API.postCallbackInfo({
-        firstname,
-        lastname,
-        phoneNumber,
-      })
+      /* Check to see if the user has submitted a phone number twice in a row. */
+      const hasSubmittedTwice = await hasReachedMaxSubmissions()
 
-      if (response.kind === "success") {
-        navigation.navigate(CallbackStackScreens.Success)
+      if (!hasSubmittedTwice) {
+        const response = await API.postCallbackInfo({
+          firstname,
+          lastname,
+          phoneNumber,
+        })
+
+        if (response.kind === "success") {
+          await setCount()
+          navigation.navigate(CallbackStackScreens.Success)
+        } else {
+          Logger.addMetadata("requestCallbackError", {
+            errorMessage: response.message,
+          })
+          Logger.error(
+            `FailureToRequestCallback.${response.error}.${
+              response.message || "failure_handled_response"
+            }`,
+          )
+          setErrorMessage(showError(response.error))
+        }
+        setIsLoading(false)
       } else {
+        const em = t("errors.maxed_submission_requests")
         Logger.addMetadata("requestCallbackError", {
-          errorMessage: response.message,
+          errorMessage: em,
         })
         Logger.error(
-          `FailureToRequestCallback.${response.error}.${
-            response.message || "failure_handled_response"
+          `FailureToRequestCallback.Unknown.${
+            em || "failure_handled_response"
           }`,
         )
-        setErrorMessage(showError(response.error))
+        setErrorMessage(showError(em))
+        Alert.alert(
+          t("errors.something_went_wrong"),
+          t("errors.maxed_submission_requests"),
+        )
+        setIsLoading(false)
       }
-      setIsLoading(false)
     } catch (e) {
       Logger.error(`FailureToRequestCallback.exception.${e.message}`)
       Alert.alert(t("errors.something_went_wrong"), e.message)
       setIsLoading(false)
     }
+  }
+
+  /* Wait for 15 minutes to pass before submitting another phonenumber after two have been submitted. */
+  const setCount = async () => {
+    const now = new Date()
+    const nowStr = now.getTime().toString()
+    const countStr = await AsyncStorage.getItem("Submissions")
+    if (countStr) {
+      const count = parseInt(countStr, 10) + 1
+      const str = count.toString()
+      await AsyncStorage.setItem("Submissions", str)
+    } else {
+      await AsyncStorage.setItem("Submissions", "1")
+    }
+    await AsyncStorage.setItem("LastSubmision", nowStr)
+    return true
+  }
+
+  /* Check if the user has submitted two phonensumebers in the past 15 minutes. */
+  const hasReachedMaxSubmissions = async () => {
+    const countStr = await AsyncStorage.getItem("Submissions")
+    if (countStr) {
+      const count = parseInt(countStr, 10)
+
+      // Optionally, check the time since the phoneNumber was last submitted.
+      // If 15 minutes have passed, they may input the phoneNumber again.
+      const lastTimestamp = await AsyncStorage.getItem("LastSubmission")
+      if (lastTimestamp) {
+        const parsedTimestamp = parseInt(lastTimestamp, 10)
+        const fifteenMinutes = 1000 * 60 * 15
+        const hasBeenFifteenMinutes =
+          new Date().getTime() - parsedTimestamp < fifteenMinutes ? false : true
+        if (hasBeenFifteenMinutes) {
+          await AsyncStorage.setItem("Submissions", "0")
+          return false
+        }
+      }
+
+      return count > 1 ? true : false
+    }
+    return true
   }
 
   const buttonDisabled = phoneNumber.length < minimumPhoneDigits

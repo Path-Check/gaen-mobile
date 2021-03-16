@@ -1,4 +1,4 @@
-import React, { FunctionComponent, RefObject, useEffect, useRef } from "react"
+import React, { FunctionComponent } from "react"
 import {
   ScrollView,
   SafeAreaView,
@@ -21,18 +21,12 @@ import { Spacing, Typography, Buttons, Colors, Iconography } from "../styles"
 const ActivateExposureNotifications: FunctionComponent = () => {
   const { t } = useTranslation()
   const { exposureNotifications } = usePermissionsContext()
-  const scrollViewRef = useRef<ScrollView>() as RefObject<ScrollView>
 
   const isENActive = exposureNotifications.status === "Active"
-
-  useEffect(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: false })
-  }, [])
 
   return (
     <SafeAreaView style={style.safeArea}>
       <ScrollView
-        ref={scrollViewRef}
         style={style.container}
         contentContainerStyle={style.contentContainer}
         alwaysBounceVertical={false}
