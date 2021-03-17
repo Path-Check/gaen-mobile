@@ -120,7 +120,7 @@ describe("postDiagnosisKeys", () => {
     it("returns a no-op EmptyExposureKeys response if the error corresponds", async () => {
       const newKeysInserted = 0
       const message =
-        "unable to validate diagnosis verification: calculating expected HMAC: cannot calculate hmac on empty exposure keys"
+        "Looks like you have no exposure keys, this means that your device hasn't generated any yet. Please wait an hour for them to be generated."
       const jsonResponse = {
         error: message,
         insertedExposures: newKeysInserted,
