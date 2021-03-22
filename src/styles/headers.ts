@@ -31,4 +31,8 @@ export const headerMinimalOptions: StackNavigationOptions = {
   title: "",
   headerShown: true,
   headerStyle: { shadowColor: Colors.transparent.invisible },
+  headerTitleContainerStyle: {
+    width: "60%",
+    alignItems: "center",
+  },
 }
