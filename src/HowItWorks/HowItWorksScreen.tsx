@@ -76,7 +76,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             onPress={primaryButtonOnPress}
             accessibilityLabel={primaryButtonLabel}
             accessibilityRole="button"
-            accessibilityHint={t("accessibility.navigates_to_new_screen")}
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.buttonText}>{primaryButtonLabel}</Text>
             <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
@@ -85,7 +85,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             onPress={handleOnPressProtectPrivacy}
             accessibilityLabel={t("onboarding.protect_privacy_button")}
             accessibilityRole="button"
-            accessibilityHint={t("accessibility.navigates_to_new_screen")}
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}

@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "checks for new COVID-19 exposures",
+      "closes_current_screen": "closes current screen",
+      "deletes_data": "deletes data and navigages to app setup",
+      "navigates_to_external_website": "navigates to external website",
+      "navigates_to_home_screen": "navigates to home screen",
+      "navigates_to_new_screen": "navigates to new screen",
+      "navigates_to_next_screen_without_enabling": "navigates to next screen without enabling Exposure Detection",
+      "opens_share_sheet": "opens share sheet"
+    }
+  },
   "callback": {
     "firstname": "First name (optional)",
     "if_you_prefer": "If you prefer; call directly at:",
@@ -14,16 +26,6 @@
     "success_body": "Our support team is working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
     "success_header": "You're in the queue"
-  },
-  "accessibility": {
-    "navigates_to_next_screen_without_enabling": "navigates to next screen without enabling Exposure Detection",
-    "navigates_to_new_screen": "navigates to new screen",
-    "navigates_to_home_screen": "navigates to home screen",
-    "navigates_to_external_website": "navigates to external website",
-    "checks_for_new_exposures": "checks for new COVID-19 exposures",
-    "opens_share_sheet": "opens share sheet",
-    "closes_current_screen": "closes current screen",
-    "deletes_data": "deletes data and navigages to app setup"
   },
   "common": {
     "back": "Back",

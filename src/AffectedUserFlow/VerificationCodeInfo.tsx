@@ -86,7 +86,7 @@ const MoreInfo: FunctionComponent = () => {
           {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
             <Pressable
               accessibilityHint={t(
-                "accessibility.navigates_to_external_website",
+                "accessibility.hint.navigates_to_external_website",
               )}
               accessibilityRole="button"
               style={style.button}

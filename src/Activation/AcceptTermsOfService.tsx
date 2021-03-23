@@ -88,7 +88,7 @@ const AcceptTermsOfService: FunctionComponent = () => {
           disabled={!boxChecked}
           style={boxChecked ? style.button : style.buttonDisabled}
           accessibilityLabel={t("common.continue")}
-          accessibilityHint={t("accessibility.navigates_to_new_screen")}
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           accessibilityRole="button"
         >
           <Text

@@ -118,7 +118,7 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
       <TouchableOpacity
         accessibilityRole="button"
         accessibilityLabel={t("common.skip")}
-        accessibilityHint={t("accessibility.navigates_to_new_screen")}
+        accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
         onPress={handleOnPressSkip}
         style={style.skipButtonContainer}
       >

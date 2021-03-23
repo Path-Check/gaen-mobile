@@ -65,7 +65,9 @@ const NoExposures: FunctionComponent = () => {
           </Text>
 
           <TouchableOpacity
-            accessibilityHint={t("accessibility.navigates_to_external_website")}
+            accessibilityHint={t(
+              "accessibility.hint.navigates_to_external_website",
+            )}
             accessibilityRole="button"
             accessibilityLabel={t("exposure_history.review_health_guidance")}
             onPress={handleOnPressHALink}

@@ -67,7 +67,7 @@ export const Start: FunctionComponent = () => {
           style={style.secondaryButton}
           onPress={handleOnPressSecondaryButton}
           accessibilityRole="button"
-          accessibilityHint={t("accessibility.navigates_to_new_screen")}
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           accessibilityLabel={t("export.intro.what_is_a")}
         >
           <View style={style.secondaryButtonIconContainer}>
