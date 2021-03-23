@@ -9,6 +9,7 @@ import { Iconography, Spacing, Typography, Colors } from "../styles"
 interface ListItemProps {
   label: string
   accessibilityLabel: string
+  accessibilityHint: string
   onPress: () => void
   icon: string
 }
@@ -16,11 +17,17 @@ interface ListItemProps {
 const ListItem: FunctionComponent<ListItemProps> = ({
   label,
   accessibilityLabel,
+  accessibilityHint,
   onPress,
   icon,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} accessibilityLabel={accessibilityLabel}>
+    <TouchableOpacity
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityHint={accessibilityHint}
+      accessibilityLabel={accessibilityLabel}
+    >
       <View style={style.listItem}>
         <SvgXml
           fill={Colors.primary.shade100}

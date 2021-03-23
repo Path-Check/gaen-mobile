@@ -46,6 +46,8 @@ const AppTransition: FunctionComponent = () => {
         <Pressable
           style={style.button}
           onPress={handleOnPressContinue}
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+          accessibilityRole="button"
           accessibilityLabel={t("common.continue")}
         >
           <Text style={style.buttonText}>{t("common.continue")}</Text>

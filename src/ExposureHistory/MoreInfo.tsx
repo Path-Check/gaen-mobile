@@ -25,7 +25,11 @@ const MoreInfo: FunctionComponent = () => {
             {t("exposure_history.why_did_i_get_an_en_para")}
           </Text>
         </View>
-        <View style={style.section}>
+        <View
+          style={style.section}
+          accessibilityHint={t("exposure_history.how_does_this_work")}
+          accessibilityRole="header"
+        >
           <Text style={style.headerText}>
             {t("exposure_history.how_does_this_work")}
           </Text>

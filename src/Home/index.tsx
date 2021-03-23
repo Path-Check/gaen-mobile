@@ -227,6 +227,7 @@ const VerificationFlowButton: FunctionComponent<VerificationFlowButtonProps> = (
       <TouchableOpacity
         onPress={onPressReportTestResult}
         accessibilityRole="button"
+        accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
         accessibilityLabel={buttonLabelText}
       >
         <SectionButton text={buttonLabelText} />

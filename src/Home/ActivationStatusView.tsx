@@ -23,6 +23,7 @@ type Content = {
   actionText: string
   onPress: () => void
   accessibilityLabel: string
+  accessibilityHint: string
   chevron: string
 }
 
@@ -53,6 +54,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.learn_more"),
     onPress: infoAction,
     accessibilityLabel: t("home.get_more_info", { technology: headerText }),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     chevron: Icons.ChevronUp,
   }
 
@@ -64,6 +66,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.fix_this"),
     onPress: fixAction,
     accessibilityLabel: t("home.fix", { technology: headerText }),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     chevron: Icons.ChevronRight,
   }
 
@@ -75,6 +78,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText,
     onPress,
     accessibilityLabel,
+    accessibilityHint,
     chevron,
   } = isActive ? activeContent : inactiveContent
 
@@ -95,6 +99,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
       style={outerContainerStyle}
       accessible
       accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
       testID={testID}
     >
       <View style={style.topContainer}>

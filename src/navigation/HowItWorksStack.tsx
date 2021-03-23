@@ -116,6 +116,9 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
   const HeaderRight = () => {
     return (
       <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel={t("common.skip")}
+        accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
         onPress={handleOnPressSkip}
         style={style.skipButtonContainer}
       >

@@ -80,6 +80,8 @@ const Welcome: FunctionComponent = () => {
             style={style.button}
             onPress={handleOnPressGetStarted}
             accessibilityLabel={t("label.launch_get_started")}
+            accessibilityRole="button"
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.buttonText}>
               {t("label.launch_get_started")}
