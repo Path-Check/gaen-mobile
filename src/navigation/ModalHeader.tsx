@@ -64,7 +64,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
       <TouchableOpacity
         onPress={handleOnPressBack}
         hitSlop={{ top: 30, right: 30, bottom: 30, left: 30 }}
-        accessibilityHint={t("accessibility.hint.closes_current_screen")}
+        accessibilityHint={t("accessibility.closes_current_screen")}
         accessibilityLabel={t("common.close_screen")}
       >
         <SvgXml

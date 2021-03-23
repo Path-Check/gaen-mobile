@@ -48,7 +48,7 @@ const ShareLink: FunctionComponent<ShareLinkProps> = ({ appDownloadUrl }) => {
     <Pressable
       style={style.shareContainer}
       onPress={handleOnPressShare}
-      accessibilityHint={t("accessibility.hint.opens_share_sheet")}
+      accessibilityHint={t("accessibility.opens_share_sheet")}
       accessibilityRole="button"
       accessibilityLabel={t("home.bluetooth.share", { applicationName })}
     >

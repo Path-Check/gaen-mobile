@@ -91,7 +91,7 @@ const EnableENButtons: FunctionComponent = () => {
         style={style.secondaryButton}
         accessibilityRole="button"
         accessibilityLabel={t(
-          "accessibility.hint.navigates_to_next_screen_without_enabling",
+          "accessibility.navigates_to_next_screen_without_enabling",
         )}
       >
         <Text style={style.secondaryButtonText}>{t("common.no_thanks")}</Text>
@@ -127,7 +127,7 @@ const ENAlreadyEnabledButtons: FunctionComponent = () => {
       </View>
       <TouchableOpacity
         accessibilityLabel={t("common.continue")}
-        accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+        accessibilityHint={t("accessibility.navigates_to_new_screen")}
         accessibilityRole="button"
         onPress={handleOnPressContinue}
         style={style.button}

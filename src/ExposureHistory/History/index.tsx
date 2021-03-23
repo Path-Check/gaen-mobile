@@ -173,7 +173,7 @@ const History: FunctionComponent<HistoryProps> = ({
         style={style.button}
         disabled={checkingForExposures}
         testID="check-for-exposures-button"
-        accessibilityHint={t("accessibility.hint.checks_for_new_exposures")}
+        accessibilityHint={t("accessibility.checks_for_new_exposures")}
         accessibilityRole="button"
         accessibilityLabel={t("exposure_history.check_for_exposures")}
       >

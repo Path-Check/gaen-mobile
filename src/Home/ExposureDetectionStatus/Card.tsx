@@ -74,7 +74,7 @@ const ExposureDetectionStatusCard: FunctionComponent = () => {
       style={statusContainerStyle}
       accessibilityLabel={statusText}
       accessibilityRole="button"
-      accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+      accessibilityHint={t("accessibility.navigates_to_new_screen")}
       testID={"exposure-scanning-status-button"}
       onPress={handleOnPressExposureDetectionStatus}
     >

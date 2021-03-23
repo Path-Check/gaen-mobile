@@ -70,28 +70,28 @@ const Settings: FunctionComponent = () => {
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
     accessibilityLabel: t("screen_titles.legal"),
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     onPress: () => navigation.navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
   }
   const howTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
     accessibilityLabel: t("screen_titles.how_the_app_works"),
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
   const deleteMyData: SettingsListItem = {
     label: t("settings.delete_my_data"),
     accessibilityLabel: t("settings.delete_my_data"),
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     onPress: handleOnPressDeleteMyData,
     icon: Icons.Trash,
   }
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
     accessibilityLabel: "EN Debug Menu",
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }

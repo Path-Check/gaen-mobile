@@ -54,7 +54,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.learn_more"),
     onPress: infoAction,
     accessibilityLabel: t("home.get_more_info", { technology: headerText }),
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     chevron: Icons.ChevronUp,
   }
 
@@ -66,7 +66,7 @@ const ActivationStatusView: FunctionComponent<ActivationStatusProps> = ({
     actionText: t("exposure_scanning_status.fix_this"),
     onPress: fixAction,
     accessibilityLabel: t("home.fix", { technology: headerText }),
-    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
+    accessibilityHint: t("accessibility.navigates_to_new_screen"),
     chevron: Icons.ChevronRight,
   }
 
