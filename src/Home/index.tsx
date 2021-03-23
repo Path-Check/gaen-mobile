@@ -8,6 +8,7 @@ import {
   Pressable,
   Linking,
 } from "react-native"
+import env from "react-native-config"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
@@ -29,6 +30,7 @@ import ShareLink from "./ShareLink"
 import HealthCheckLink from "./HealthCheckLink"
 import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
+import FaqButton from "./FaqButton"
 import { usePermissionsContext } from "../Device/PermissionsContext"
 
 import { Icons, Images } from "../assets"
@@ -80,6 +82,7 @@ const Home: FunctionComponent = () => {
         )}
         {displayCovidDataWebView && <CovidDataWebViewLink />}
         {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
+        {env.VERIFICATION_CODE_INFO_URL && <FaqButton />}
         {displaySelfAssessment && <SelfAssessment />}
         {displaySymptomHistory && <SymptomHistory />}
         {displayCallEmergencyServices && (
