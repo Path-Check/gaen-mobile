@@ -56,6 +56,8 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
         <TouchableOpacity
           style={style.button}
           onPress={handleOnPressContinue}
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+          accessibilityRole="button"
           accessibilityLabel={t("common.continue")}
         >
           <Text style={style.buttonText}>{t("common.continue")}</Text>
@@ -64,6 +66,7 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
         <TouchableOpacity
           style={style.secondaryButton}
           onPress={handleOnPressSecondaryButton}
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           accessibilityLabel={t("export.intro.what_is_a")}
         >
           <View style={style.secondaryButtonIconContainer}>

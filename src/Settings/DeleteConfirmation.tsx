@@ -126,6 +126,7 @@ const DeleteConfirmation: FunctionComponent = () => {
         <TouchableOpacity
           onPress={handleOnPressDeleteAllData}
           accessibilityLabel={t("settings.delete_my_data")}
+          accessibilityHint={t("accessibility.hint.deletes_data")}
           accessibilityRole="button"
           style={style.buttonContainer}
         >

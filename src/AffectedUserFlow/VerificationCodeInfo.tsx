@@ -84,7 +84,14 @@ const MoreInfo: FunctionComponent = () => {
             </View>
           )}
           {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
-            <Pressable style={style.button} onPress={handleOnPressLink}>
+            <Pressable
+              accessibilityHint={t(
+                "accessibility.hint.navigates_to_external_website",
+              )}
+              accessibilityRole="button"
+              style={style.button}
+              onPress={handleOnPressLink}
+            >
               <Text style={style.buttonText}>{t("common.learn_more")}</Text>
               <SvgXml xml={Icons.Arrow} fill={Colors.primary.shade100} />
             </Pressable>

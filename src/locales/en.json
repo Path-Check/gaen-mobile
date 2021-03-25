@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "checks for new COVID-19 exposures",
+      "closes_current_screen": "closes current screen",
+      "deletes_data": "deletes data and navigages to app setup",
+      "navigates_to_external_website": "navigates to external website",
+      "navigates_to_home_screen": "navigates to home screen",
+      "navigates_to_new_screen": "navigates to new screen",
+      "navigates_to_next_screen_without_enabling": "navigates to next screen without enabling Exposure Detection",
+      "opens_share_sheet": "opens share sheet"
+    }
+  },
   "callback": {
     "firstname": "First name (optional)",
     "if_you_prefer": "If you prefer; call directly at:",
@@ -319,11 +331,11 @@
       "body_3": "After testing positive for COVID-19, users can share a verification code with {{applicationName}} to verify their diagnosis. Their phone’s recent random IDs are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
       "body_4": "If a flagged ID matches with an ID stored on your phone, this indicates you may have encountered someone who has tested positive for COVID-19. This is how {{applicationName}} can determine if you may have been exposed to the virus.",
       "body_5": "If there’s a match, {{applicationName}} will notify you and provide further guidance from your health department.\n\nThis is how {{applicationName}} can empower you to make decisions about your health, and keep your community safe, all without knowing who you are or where you’ve been.",
-      "image_label_1": "An image of a man holding his phone with a nearby random ID character string.",
-      "image_label_2": "An image of two smartphones exchanging random IDs.",
-      "image_label_3": "An image of a man entering an anonymous verification code.",
-      "image_label_4": "An image of a smartphone with several Random IDs and a verification code nearby.",
-      "image_label_5": "An image of a woman using her phone.",
+      "image_label_1": "image of a man holding his phone with a nearby random ID character string.",
+      "image_label_2": "image of two smartphones exchanging random IDs.",
+      "image_label_3": "image of a man entering an anonymous verification code.",
+      "image_label_4": "image of a smartphone with several Random IDs and a verification code nearby.",
+      "image_label_5": "image of a woman using her phone.",
       "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random IDs",
       "subheader_2": "Phones with Exposure Notifications enabled swap IDs with other devices they encounter",
       "subheader_3": "When a user tests positive, they can choose to anonymously share their health status",

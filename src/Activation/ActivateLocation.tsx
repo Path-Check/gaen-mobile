@@ -133,7 +133,13 @@ const LocationAlreadyEnabledButtons: FunctionComponent = () => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity onPress={handleOnPressContinue} style={style.button}>
+      <TouchableOpacity
+        accessibilityLabel={t("common.continue")}
+        accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+        accessibilityRole="button"
+        onPress={handleOnPressContinue}
+        style={style.button}
+      >
         <Text style={style.buttonText}>{t("common.continue")}</Text>
       </TouchableOpacity>
     </View>

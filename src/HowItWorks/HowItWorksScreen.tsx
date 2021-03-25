@@ -62,6 +62,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             source={image}
             accessibilityLabel={imageLabel}
             accessible
+            accessibilityRole="image"
             style={style.image}
             resizeMode={"contain"}
           />
@@ -74,13 +75,17 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             style={style.button}
             onPress={primaryButtonOnPress}
             accessibilityLabel={primaryButtonLabel}
+            accessibilityRole="button"
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.buttonText}>{primaryButtonLabel}</Text>
             <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressProtectPrivacy}
+            accessibilityLabel={t("onboarding.protect_privacy_button")}
             accessibilityRole="button"
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}

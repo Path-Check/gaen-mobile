@@ -47,6 +47,9 @@ const ActivationSummary: FunctionComponent = () => {
         <TouchableOpacity
           onPress={handleOnPressGoToHome}
           style={style.secondaryButton}
+          accessibilityHint={t("accessibility.hint.navigates_to_home_screen")}
+          accessibilityRole="button"
+          accessibilityLabel={t("label.go_to_home_view")}
         >
           <Text style={style.secondaryButtonText}>
             {t("label.go_to_home_view")}
@@ -58,7 +61,13 @@ const ActivationSummary: FunctionComponent = () => {
 
   const AppSetupCompleteButton: FunctionComponent = () => {
     return (
-      <TouchableOpacity onPress={handleOnPressGoToHome} style={style.button}>
+      <TouchableOpacity
+        onPress={handleOnPressGoToHome}
+        style={style.button}
+        accessibilityHint={t("accessibility.hint.navigates_to_home_screen")}
+        accessibilityRole="button"
+        accessibilityLabel={t("label.go_to_home_view")}
+      >
         <Text style={style.buttonText}>{t("label.go_to_home_view")}</Text>
       </TouchableOpacity>
     )
