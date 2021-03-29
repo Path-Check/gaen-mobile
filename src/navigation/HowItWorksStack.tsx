@@ -122,7 +122,9 @@ const HowItWorksStack: FunctionComponent<HowItWorksStackProps> = ({
         onPress={handleOnPressSkip}
         style={style.skipButtonContainer}
       >
-        <Text style={style.skipButtonText}>{t("common.skip")}</Text>
+        <Text maxFontSizeMultiplier={1.3} style={style.skipButtonText}>
+          {t("common.skip")}
+        </Text>
       </TouchableOpacity>
     )
   }
