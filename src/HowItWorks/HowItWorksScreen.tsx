@@ -7,6 +7,7 @@ import {
   ScrollView,
   ImageSourcePropType,
   TouchableOpacity,
+  PixelRatio,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -50,6 +51,17 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
+  const imageHeight: () => number = () => {
+    const size = PixelRatio.getPixelSizeForLayoutSize(10)
+    if (size < 30) {
+      return 220
+    } else if (size < 32) {
+      return 180
+    } else {
+      return 100
+    }
+  }
+
   return (
     <>
       <ScrollView
@@ -63,7 +75,7 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             accessibilityLabel={imageLabel}
             accessible
             accessibilityRole="image"
-            style={style.image}
+            style={[style.image, { height: imageHeight() }]}
             resizeMode={"contain"}
           />
           <Text style={style.headerText}>{header}</Text>
@@ -120,7 +132,6 @@ const createStyle = (insets: EdgeInsets) => {
     },
     image: {
       width: "97%",
-      height: 220,
       marginBottom: Spacing.medium,
     },
     headerText: {
