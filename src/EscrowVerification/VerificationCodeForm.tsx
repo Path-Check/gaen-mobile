@@ -30,6 +30,7 @@ import {
   Iconography,
 } from "../styles"
 import { Icons } from "../assets"
+import { useExposureContext } from "../ExposureContext"
 
 const defaultErrorMessage = ""
 
@@ -38,6 +39,7 @@ const VerificationCodeForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { trackEvent } = useProductAnalyticsContext()
+  const { getCurrentExposures } = useExposureContext()
   const { successFlashMessageOptions } = Affordances.useFlashMessageOptions()
 
   const { testDate } = useEscrowVerificationContext()
@@ -63,10 +65,22 @@ const VerificationCodeForm: FunctionComponent = () => {
     navigation.navigate(EscrowVerificationRoutes.EscrowVerificationMoreInfo)
   }
 
+  const trackEvents = async () => {
+    const currentExposures = await getCurrentExposures()
+    trackEvent("product_analytics", "verification_code_submitted")
+    trackEvent("product_analytics", "key_submission_consented_to")
+    trackEvent(
+      "epi_analytics",
+      "ens_preceding_positive_diagnosis_count",
+      undefined,
+      currentExposures.length,
+    )
+  }
+
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
-    trackEvent("product_analytics", "verification_code_submitted")
+    trackEvents()
     try {
       const response = await API.submitDiagnosisKeys(code, testDate)
 
