@@ -113,6 +113,7 @@ export type TokenVerificationError =
 export const postTokenAndHmac = async (
   token: Token,
   hmacDigest: string,
+  chaff = false,
 ): Promise<
   NetworkResponse<TokenVerificationSuccess, TokenVerificationError>
 > => {
@@ -120,11 +121,14 @@ export const postTokenAndHmac = async (
     token,
     ekeyhmac: hmacDigest,
   }
+  const headers = chaff
+    ? { ...defaultHeaders, "X-Chaff": "any" }
+    : defaultHeaders
 
   try {
     const response = await fetch(certificateUrl, {
       method: "POST",
-      headers: defaultHeaders,
+      headers,
       body: JSON.stringify(data),
     })
 
