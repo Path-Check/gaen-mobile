@@ -215,7 +215,7 @@ final class ExposureManager: NSObject {
     }, callback: callback)
   }
 
-  @objc func fetchChaffExposureKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
+  @objc func fetchChaffKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
       (keys ?? []).map { $0.chaffRepresentation }
     }, callback: callback)
@@ -636,7 +636,7 @@ private extension ExposureManager {
   }
 
   func performChaffRequest() {
-    fetchChaffExposureKeys { [weak self] (keyArray, error) in
+    fetchChaffKeys { [weak self] (keyArray, error) in
       if error != nil {
         print("error: \(error.debugDescription)")
       }
