@@ -67,14 +67,20 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const sendChaffRequest = async () => {
-    const token = "inwoeif"
-    const exposureKeys = await NativeModule.fetchChaffKeys()
-    const [hmacDigest] = await calculateHmac(exposureKeys)
+    const response = await API.postCode(code, true)
 
-    const certResponse = await API.postTokenAndHmac(token, hmacDigest)
+    if (response.kind === "success") {
+      const token = response.body.token
+      const exposureKeys = await NativeModule.fetchChaffKeys()
+      const [hmacDigest] = await calculateHmac(exposureKeys)
 
-    if (certResponse.kind === "success") {
-      trackEvent("epi_analytics", "chaff_request_sent")
+      const certResponse = await API.postTokenAndHmac(token, hmacDigest, true)
+
+      if (certResponse.kind === "success") {
+        trackEvent("epi_analytics", "chaff_request_sent")
+      } else {
+        trackEvent("epi_analytics", "chaff_request_failed")
+      }
     } else {
       trackEvent("epi_analytics", "chaff_request_failed")
     }

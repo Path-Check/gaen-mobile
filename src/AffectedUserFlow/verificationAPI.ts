@@ -49,15 +49,20 @@ interface VerifiedCodeResponse {
 
 export const postCode = async (
   code: string,
+  isChaffRequest = false,
 ): Promise<NetworkResponse<CodeVerificationSuccess, CodeVerificationError>> => {
   const data = {
     code,
   }
 
+  const headers = isChaffRequest
+    ? { ...defaultHeaders, "x-chaff": "1" }
+    : defaultHeaders
+
   try {
     const response = (await fetchWithTimeout(verifyUrl, {
       method: "POST",
-      headers: defaultHeaders,
+      headers: headers,
       body: JSON.stringify(data),
     })) as Response
 
@@ -113,7 +118,7 @@ export type TokenVerificationError =
 export const postTokenAndHmac = async (
   token: Token,
   hmacDigest: string,
-  chaff = false,
+  isChaffRequest = false,
 ): Promise<
   NetworkResponse<TokenVerificationSuccess, TokenVerificationError>
 > => {
@@ -121,8 +126,8 @@ export const postTokenAndHmac = async (
     token,
     ekeyhmac: hmacDigest,
   }
-  const headers = chaff
-    ? { ...defaultHeaders, "X-Chaff": "any" }
+  const headers = isChaffRequest
+    ? { ...defaultHeaders, "x-Chaff": "1" }
     : defaultHeaders
 
   try {
