@@ -289,14 +289,18 @@ class ExposureManagerUnitTests: XCTestCase {
     let activateExpectation = self.expectation(description: "Activate gets called")
     let invalidateExpectation = self.expectation(description: "Invalidate gets called")
     
-    let registerNotificationExpectation = self.expectation(description: "Registers for authorization changes")
-    
+    let registerExposureNotificationsStatusNotificationExpectation = self.expectation(description: "Registers for authorization changes")
+    let registerChaffRequestNotificationExpectation = self.expectation(description: "Registers for chaff request notifications")
+
     let setExposureNotificationEnabledTrueExpectation = self.expectation(description: "When activated, if disabled, request to enable exposure notifications")
     
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.addObserverHandler = { (_, _, name, _) in
       if name == Notification.Name.ExposureNotificationStatusDidChange {
-        registerNotificationExpectation.fulfill()
+        registerExposureNotificationsStatusNotificationExpectation.fulfill()
+      }
+      if name == Notification.Name.ChaffRequestTriggered {
+        registerChaffRequestNotificationExpectation.fulfill()
       }
     }
     
@@ -323,7 +327,8 @@ class ExposureManagerUnitTests: XCTestCase {
                         notificationCenter: notificationCenterMock)
     wait(for: [activateExpectation,
                invalidateExpectation,
-               registerNotificationExpectation,
+               registerExposureNotificationsStatusNotificationExpectation,
+               registerChaffRequestNotificationExpectation,
                setExposureNotificationEnabledTrueExpectation], timeout: 1)
   }
 

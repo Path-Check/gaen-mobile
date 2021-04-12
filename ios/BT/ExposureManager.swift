@@ -96,7 +96,7 @@ final class ExposureManager: NSObject {
     notificationCenter.addObserver(
       self,
       selector: #selector(scheduleChaffBackgroundTaskIfNeeded),
-      name: .ExposureNotificationStatusDidChange,
+      name: .ChaffRequestTriggered,
       object: nil
     )
   }
