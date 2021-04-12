@@ -66,7 +66,8 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [])
 
-  const sendChaffRequest = async () => {
+  const sendChaffRequest = useCallback(async () => {
+    const code = Math.random().toString().substring(2, 10)
     const response = await API.postCode(code, true)
 
     if (response.kind === "success") {
@@ -84,7 +85,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     } else {
       trackEvent("epi_analytics", "chaff_request_failed")
     }
-  }
+  }, [trackEvent])
 
   const refreshExposureInfo = useCallback(async () => {
     const exposureInfo = await NativeModule.getCurrentExposures()
@@ -105,18 +106,16 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     getLastExposureDetectionDate()
 
     // Chaff subscription
-    const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(
-      (exposureInfo: ExposureInfo) => {
-        sendChaffRequest()
-      },
-    )
+    const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(() => {
+      sendChaffRequest()
+    })
     sendChaffRequest()
 
     return () => {
       exposuresSubscription.remove()
       chaffSubscription.remove()
     }
-  }, [getLastExposureDetectionDate])
+  }, [getLastExposureDetectionDate, sendChaffRequest])
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(() => {
