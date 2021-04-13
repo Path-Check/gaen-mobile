@@ -8,7 +8,8 @@ interface ExposureException {
     val errorCode: ErrorCode
 }
 
-data class ShareExposureKeysException(private val wrappedThrowable: Throwable? = null): Exception(), ExposureException {
+data class ShareExposureKeysException(private val wrappedThrowable: Throwable? = null) :
+    Exception(), ExposureException {
     override val cause: Throwable? = wrappedThrowable
     override val message: String = "Cancelled Sharing By User"
     override val errorCode: ErrorCode = ErrorCode.SHARE_EXPOSURE_KEYS_DENIED
