@@ -27,8 +27,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.exceptions.ShareExposu
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
-import org.threeten.bp.Duration;
-
+import org.threeten.bp.Duration; 
+ 
 /**
  * Wrapper around {@link com.google.android.gms.nearby.Nearby} APIs.
  */
