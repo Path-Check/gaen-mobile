@@ -150,6 +150,8 @@ const UserDetailsForm: FunctionComponent = () => {
         return t("verification_code_alerts.no_keys_on_device_body")
       case "RateLimit":
         return t("verification_code_alerts.rate_limit_body")
+      case "NoSharableKeys":
+        return t("export.consent_warning_message")
       default:
         return t("errors.try_again_later")
     }

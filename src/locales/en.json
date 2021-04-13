@@ -547,6 +547,7 @@
   "verification_code_alerts": {
     "code_used_body": "The verification code provided has already been used.",
     "code_used_title": "Verification Code Already Used",
+    "decided_to_not_share": "Your keys will not be shared.",
     "invalid_code_body": "The verification code you submitted is invalid.\n\nThe code must be a valid verification code provided to you by your health authority.\n\nIt is also possible that your code has expired. If so, you will need to request a new code from your health authority.",
     "invalid_code_title": "Invalid Code",
     "network_connection_body": "You need to be connected to WiFi to submit a verification code.",
