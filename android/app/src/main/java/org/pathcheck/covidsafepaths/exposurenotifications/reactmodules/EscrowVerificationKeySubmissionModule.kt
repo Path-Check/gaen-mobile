@@ -25,7 +25,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
 
 @ReactModule(name = ExposureKeyModule.MODULE_NAME)
 class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) : ReactContextBaseJavaModule(context) {
-    companion object { 
+    companion object {
         const val MODULE_NAME = "EscrowVerificationKeySubmissionModule"
         const val NO_KEYS_ERROR_CODE = 999
     }

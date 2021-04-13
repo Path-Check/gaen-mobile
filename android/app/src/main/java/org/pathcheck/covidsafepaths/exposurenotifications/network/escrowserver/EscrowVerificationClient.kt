@@ -21,7 +21,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotifi
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Error
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Result
 import retrofit2.Call
-import retrofit2.Response 
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
