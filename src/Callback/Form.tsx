@@ -76,9 +76,9 @@ const CallbackForm: FunctionComponent = () => {
 
     try {
       /* Check to see if the user has submitted a phone number twice in a row. */
-      const hasSubmittedTwice = await hasReachedMaxSubmissions()
+      const cannotSubmit = await hasReachedMaxSubmissions()
 
-      if (!hasSubmittedTwice) {
+      if (!cannotSubmit) {
         const response = await API.postCallbackInfo({
           firstname,
           lastname,
@@ -86,7 +86,7 @@ const CallbackForm: FunctionComponent = () => {
         })
 
         if (response.kind === "success") {
-          await setCount()
+          await setTimestamp()
           navigation.navigate(CallbackStackScreens.Success)
         } else {
           Logger.addMetadata("requestCallbackError", {
@@ -97,78 +97,61 @@ const CallbackForm: FunctionComponent = () => {
               response.message || "failure_handled_response"
             }`,
           )
+          // We show the red error message here on a failed request to our callback api.
           setErrorMessage(showError(response.error))
         }
         setIsLoading(false)
       } else {
-        const em = t("errors.maxed_submission_requests")
-        Logger.addMetadata("requestCallbackError", {
-          errorMessage: em,
+        // These calls need to be swapped out to something more specific.
+        const errm = t("errors.maxed_submission_requests")
+        Logger.addMetadata("requestCallbackTooManySubmissions", {
+          errorMessage: errm,
         })
-        Logger.error(
-          `FailureToRequestCallback.Unknown.${
-            em || "failure_handled_response"
-          }`,
-        )
-        setErrorMessage(showError(em))
-        Alert.alert(
-          t("errors.something_went_wrong"),
-          t("errors.maxed_submission_requests"),
-        )
+        // We show the red error message here when the maximum number of submissions has been called.
+        setErrorMessage(showError(errm))
         setIsLoading(false)
+        throw { message: errm, type: "MaximumSubmissions" }
       }
     } catch (e) {
-      Logger.error(`FailureToRequestCallback.exception.${e.message}`)
-      Alert.alert(t("errors.something_went_wrong"), e.message)
-      setIsLoading(false)
-    }
-  }
-
-  /* Wait for 15 minutes to pass before submitting another phonenumber after two have been submitted. */
-  const setCount = async () => {
-    const now = new Date()
-    const nowStr = now.getTime().toString()
-    const countStr = await AsyncStorage.getItem("Submissions")
-    if (countStr) {
-      const count = parseInt(countStr, 10) + 1
-      const str = count.toString()
-      await AsyncStorage.setItem("Submissions", str)
-    } else {
-      await AsyncStorage.setItem("Submissions", "1")
-    }
-    await AsyncStorage.setItem("LastSubmision", nowStr)
-    return true
-  }
-
-  /* Check if the user has submitted two phonensumebers in the past 15 minutes. */
-  const hasReachedMaxSubmissions = async () => {
-    const countStr = await AsyncStorage.getItem("Submissions")
-    if (countStr) {
-      const count = parseInt(countStr, 10)
-
-      // Optionally, check the time since the phoneNumber was last submitted.
-      // If 15 minutes have passed, they may input the phoneNumber again.
-      const lastTimestamp = await AsyncStorage.getItem("LastSubmission")
-      if (lastTimestamp) {
-        const parsedTimestamp = parseInt(lastTimestamp, 10)
-        const fifteenMinutes = 1000 * 60 * 15
-        const hasBeenFifteenMinutes =
-          new Date().getTime() - parsedTimestamp < fifteenMinutes ? false : true
-        if (hasBeenFifteenMinutes) {
-          await AsyncStorage.setItem("Submissions", "0")
-          return false
-        }
+      if (e.type && e.type === "MaximumSubmissions") {
+        Logger.error(`FailureToRequestCallback.Unknown.errorMessage`)
+        Alert.alert(t("errors.maxed_submission_header"), e.message)
+      } else {
+        Logger.error(`FailureToRequestCallback.exception.${e.message}`)
+        Alert.alert(t("errors.something_went_wrong"), e.message)
       }
-
-      return count > 1 ? true : false
     }
+  }
+
+  const setTimestamp = async () => {
+    const now = new Date().getTime().toString()
+    await AsyncStorage.setItem("LastSubmission", now)
     return true
+  }
+
+  const hasReachedMaxSubmissions = async () => {
+    const lastTimestamp = await AsyncStorage.getItem("LastSubmission")
+    if (lastTimestamp) {
+      const parsedTimestamp = parseInt(lastTimestamp, 10)
+      const fiveMinutes = 1000 * 60 * 5
+      const hasBeenFiveMinutes =
+        new Date().getTime() - parsedTimestamp < fiveMinutes ? false : true
+      return !hasBeenFiveMinutes
+    }
+    return false
   }
 
   const buttonDisabled = phoneNumber.length < minimumPhoneDigits
 
+  /* Display some human-friendly text at the bottom of the screen telling them what's wrong. */
   const showError = (error: string): string => {
     switch (error) {
+      case t("errors.maxed_submission_requests"):
+        return t("errors.maxed_submission_header")
+      case "AuthorizationFailed":
+        return t("errors.authorization_failure")
+      case "InvalidRequest":
+        return t("errors.invalid_phone_number")
       default: {
         return t("errors.something_went_wrong")
       }
