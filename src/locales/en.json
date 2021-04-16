@@ -35,7 +35,7 @@
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
-    "hascode": "Already have a code? ",
+    "hascode": "Already have a code?",
     "learn_more": "Learn more",
     "maybe_later": "Maybe later",
     "more": "More",
@@ -83,7 +83,11 @@
     "wear_a_face_covering": "wear a face covering."
   },
   "errors": {
+    "authorization_failure": "You are not authorized to perform this action.",
     "description": "An error has occurred. Please reload the app.",
+    "invalid_phone_number": "Phone number must be 10 digits",
+    "maxed_submission_header": "Maximum submissions reached.",
+    "maxed_submission_requests": "You have reached the max number of submissions, please wait 5 minutes to resubmit.",
     "reload": "Reload",
     "something_went_wrong": "Something went wrong",
     "title": "Unknown Error",

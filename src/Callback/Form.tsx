@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import AsyncStorage from "@react-native-community/async-storage"
 
 import { useStatusBarEffect, CallbackStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
@@ -74,37 +75,83 @@ const CallbackForm: FunctionComponent = () => {
     setErrorMessage(defaultErrorMessage)
 
     try {
-      const response = await API.postCallbackInfo({
-        firstname,
-        lastname,
-        phoneNumber,
-      })
+      /* Check to see if the user has submitted a phone number twice in a row. */
+      const cannotSubmit = await hasReachedMaxSubmissions()
 
-      if (response.kind === "success") {
-        navigation.navigate(CallbackStackScreens.Success)
-      } else {
-        Logger.addMetadata("requestCallbackError", {
-          errorMessage: response.message,
+      if (!cannotSubmit) {
+        const response = await API.postCallbackInfo({
+          firstname,
+          lastname,
+          phoneNumber,
         })
-        Logger.error(
-          `FailureToRequestCallback.${response.error}.${
-            response.message || "failure_handled_response"
-          }`,
-        )
-        setErrorMessage(showError(response.error))
+
+        if (response.kind === "success") {
+          await setTimestamp()
+          navigation.navigate(CallbackStackScreens.Success)
+        } else {
+          Logger.addMetadata("requestCallbackError", {
+            errorMessage: response.message,
+          })
+          Logger.error(
+            `FailureToRequestCallback.${response.error}.${
+              response.message || "failure_handled_response"
+            }`,
+          )
+          // We show the red error message here on a failed request to our callback api.
+          setErrorMessage(showError(response.error))
+        }
+        setIsLoading(false)
+      } else {
+        // These calls need to be swapped out to something more specific.
+        const errm = t("errors.maxed_submission_requests")
+        Logger.addMetadata("requestCallbackTooManySubmissions", {
+          errorMessage: errm,
+        })
+        // We show the red error message here when the maximum number of submissions has been called.
+        setErrorMessage(showError(errm))
+        setIsLoading(false)
+        throw { message: errm, type: "MaximumSubmissions" }
       }
-      setIsLoading(false)
     } catch (e) {
-      Logger.error(`FailureToRequestCallback.exception.${e.message}`)
-      Alert.alert(t("errors.something_went_wrong"), e.message)
-      setIsLoading(false)
+      if (e.type && e.type === "MaximumSubmissions") {
+        Logger.error(`FailureToRequestCallback.Unknown.errorMessage`)
+        Alert.alert(t("errors.maxed_submission_header"), e.message)
+      } else {
+        Logger.error(`FailureToRequestCallback.exception.${e.message}`)
+        Alert.alert(t("errors.something_went_wrong"), e.message)
+      }
     }
+  }
+
+  const setTimestamp = async () => {
+    const now = new Date().getTime().toString()
+    await AsyncStorage.setItem("LastSubmission", now)
+    return true
+  }
+
+  const hasReachedMaxSubmissions = async () => {
+    const lastTimestamp = await AsyncStorage.getItem("LastSubmission")
+    if (lastTimestamp) {
+      const parsedTimestamp = parseInt(lastTimestamp, 10)
+      const fiveMinutes = 1000 * 60 * 5
+      const hasBeenFiveMinutes =
+        new Date().getTime() - parsedTimestamp < fiveMinutes ? false : true
+      return !hasBeenFiveMinutes
+    }
+    return false
   }
 
   const buttonDisabled = phoneNumber.length < minimumPhoneDigits
 
+  /* Display some human-friendly text at the bottom of the screen telling them what's wrong. */
   const showError = (error: string): string => {
     switch (error) {
+      case t("errors.maxed_submission_requests"):
+        return t("errors.maxed_submission_header")
+      case "AuthorizationFailed":
+        return t("errors.authorization_failure")
+      case "InvalidRequest":
+        return t("errors.invalid_phone_number")
       default: {
         return t("errors.something_went_wrong")
       }
