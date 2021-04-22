@@ -54,7 +54,8 @@
   center.delegate = self;
   
   [ExposureManager createSharedInstance];
-  [[ExposureManager shared] registerBackgroundTask];
+  [[ExposureManager shared] registerExposureDetectionBackgroundTask];
+  [[ExposureManager shared] registerChaffBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   
