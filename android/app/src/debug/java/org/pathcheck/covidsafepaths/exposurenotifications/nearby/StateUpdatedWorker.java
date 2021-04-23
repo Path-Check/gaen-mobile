@@ -20,19 +20,15 @@ package org.pathcheck.covidsafepaths.exposurenotifications.nearby;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.work.Data;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkerParameters;
-
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
-
 import org.pathcheck.covidsafepaths.MainApplication;
 import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
@@ -47,69 +43,66 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureSto
  * broadcast from exposure notification API.
  */
 public class StateUpdatedWorker extends ListenableWorker {
-    private static final String TAG = "StateUpdatedWorker";
+  private static final String TAG = "StateUpdatedWorker";
+  public static final String IS_SIMULATING = "isSimulating";
 
-    private final Context context;
-    private boolean isSimulating = false;
+  private final Context context;
+  private final boolean isSimulating;
 
-    public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-        super(context, workerParams);
-        this.context = context;
-        isSimulating = workerParams.getInputData().getBoolean(IS_SIMULATING, false);
-    }
+  public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    super(context, workerParams);
+    this.context = context;
+    isSimulating = workerParams.getInputData().getBoolean(IS_SIMULATING, false);
+  }
 
-    @NonNull
-    @Override
-    public ListenableFuture<Result> startWork() {
-        Log.d(TAG, "Starting worker to get exposure windows, "
-                + "compare them with the exposures stored in the local database "
-                + "and show a notification if there is a new one");
-        return FluentFuture.from(ExposureNotificationClientWrapper.get(context).getDailySummaries())
-                .transform(RealmSecureStorageBte.INSTANCE::refreshWithDailySummaries, AppExecutors.getBackgroundExecutor())
-                .transform( exposureResult -> {
-                    /*
-                        The DebugMenuModule can simulate exposures.
-                        This class is now contained in a debug and release package
-                            in order to separate debug code from release code
-                     */
-                    if (isSimulating || exposureResult.getNewExposureAdded()) {
-                        Log.d(TAG, "New exposures found, showing a notification");
-                        NotificationHelper.showPossibleExposureNotification(context);
+  @NonNull
+  @Override
+  public ListenableFuture<Result> startWork() {
+    Log.d(TAG, "Starting worker to get exposure windows, "
+        + "compare them with the exposures stored in the local database "
+        + "and show a notification if there is a new one");
+    return FluentFuture.from(ExposureNotificationClientWrapper.get(context).getDailySummaries())
+        .transform(RealmSecureStorageBte.INSTANCE::refreshWithDailySummaries, AppExecutors.getBackgroundExecutor())
+        .transform(exposureResult -> {
+          /*
+            The DebugMenuModule can simulate exposures.
+            This class is now contained in a debug and release package
+            in order to separate debug code from release code
+          */
+          if (isSimulating || exposureResult.getNewExposureAdded()) {
+            Log.d(TAG, "New exposures found, showing a notification");
+            NotificationHelper.showPossibleExposureNotification(context);
 
-                        MainApplication app = (MainApplication) getApplicationContext();
-                        ReactContext reactContext = app.getReactNativeHost()
-                                .getReactInstanceManager()
-                                .getCurrentReactContext();
+            MainApplication app = (MainApplication) getApplicationContext();
+            ReactContext reactContext = app.getReactNativeHost()
+                .getReactInstanceManager()
+                .getCurrentReactContext();
 
-                        if (reactContext != null) {
-                            EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
-                        }
+            if (reactContext != null) {
+              EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
+            }
 
-                    } else {
-                        Log.d(TAG, "No new exposures found");
-                    }
-                    return Result.success();
-                }, AppExecutors.getLightweightExecutor())
-                .catching(
-                        Exception.class,
-                        x -> {
-                            Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
-                            return Result.failure();
-                        },
-                        AppExecutors.getLightweightExecutor()
-                );
-    }
+          } else {
+            Log.d(TAG, "No new exposures found");
+          }
+          return Result.success();
+        }, AppExecutors.getLightweightExecutor())
+        .catching(Exception.class, exception -> {
+              Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", exception);
+              return Result.failure();
+              },
+            AppExecutors.getLightweightExecutor()
+        );
+  }
 
-    static void runOnce(Context context, Intent intent) {
-        Data data = new Data.Builder()
-                .putBoolean(IS_SIMULATING, intent.getBooleanExtra(IS_SIMULATING, false))
-                .build();
+  static void runOnce(Context context, Intent intent) {
+    Data data = new Data.Builder()
+        .putBoolean(IS_SIMULATING, intent.getBooleanExtra(IS_SIMULATING, false))
+        .build();
 
-        WorkManager.getInstance(context).enqueue(
-                new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
-                        .setInputData(data)
-                        .build());
-    }
-
-    public static String IS_SIMULATING = "isSimulating";
+    WorkManager.getInstance(context).enqueue(
+        new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
+            .setInputData(data)
+            .build());
+  }
 }
