@@ -18,9 +18,11 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.nearby;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -48,10 +50,12 @@ public class StateUpdatedWorker extends ListenableWorker {
     private static final String TAG = "StateUpdatedWorker";
 
     private final Context context;
+    private boolean isSimulating = false;
 
     public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         this.context = context;
+        isSimulating = workerParams.getInputData().getBoolean(IS_SIMULATING, false);
     }
 
     @NonNull
@@ -68,19 +72,21 @@ public class StateUpdatedWorker extends ListenableWorker {
                         This class is now contained in a debug and release package
                             in order to separate debug code from release code
                      */
-                    Log.d(TAG, "New exposures found, showing a notification");
-                    NotificationHelper.showPossibleExposureNotification(context);
+                    if (isSimulating || exposureResult.getNewExposureAdded()) {
+                        Log.d(TAG, "New exposures found, showing a notification");
+                        NotificationHelper.showPossibleExposureNotification(context);
 
-                    MainApplication app = (MainApplication) getApplicationContext();
-                    ReactContext reactContext = app.getReactNativeHost()
-                            .getReactInstanceManager()
-                            .getCurrentReactContext();
+                        MainApplication app = (MainApplication) getApplicationContext();
+                        ReactContext reactContext = app.getReactNativeHost()
+                                .getReactInstanceManager()
+                                .getCurrentReactContext();
 
-                    if (reactContext != null) {
-                        DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
-                        if (eventEmitter != null) {
+                        if (reactContext != null) {
                             EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
                         }
+
+                    } else {
+                        Log.d(TAG, "No new exposures found");
                     }
                     return Result.success();
                 }, AppExecutors.getLightweightExecutor())
@@ -94,9 +100,16 @@ public class StateUpdatedWorker extends ListenableWorker {
                 );
     }
 
-    static void runOnce(Context context) {
+    static void runOnce(Context context, Intent intent) {
+        Data data = new Data.Builder()
+                .putBoolean(IS_SIMULATING, intent.getBooleanExtra(IS_SIMULATING, false))
+                .build();
+
         WorkManager.getInstance(context).enqueue(
                 new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
+                        .setInputData(data)
                         .build());
     }
+
+    public static String IS_SIMULATING = "isSimulating";
 }

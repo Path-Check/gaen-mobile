@@ -27,6 +27,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.Exposu
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Instant;
 
+import static org.pathcheck.covidsafepaths.exposurenotifications.nearby.StateUpdatedWorker.IS_SIMULATING;
+
 @SuppressWarnings("unused")
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
@@ -76,6 +78,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void simulateExposure(Promise promise) {
     Intent exposureIntent = new Intent(getReactApplicationContext(), ExposureNotificationBroadcastReceiver.class);
     exposureIntent.setAction("com.google.android.gms.exposurenotification.ACTION_EXPOSURE_STATE_UPDATED");
+    exposureIntent.putExtra(IS_SIMULATING, true);
     getReactApplicationContext().sendBroadcast(exposureIntent);
     promise.resolve(null);
   }

@@ -63,9 +63,7 @@ public class StateUpdatedWorker extends ListenableWorker {
         return FluentFuture.from(ExposureNotificationClientWrapper.get(context).getDailySummaries())
                 .transform(RealmSecureStorageBte.INSTANCE::refreshWithDailySummaries, AppExecutors.getBackgroundExecutor())
                 .transform( exposureResult -> {
-                    /*
-                        The DebugMenuModule can simulate exposures.
-                     */
+
                     if (exposureResult.getNewExposureAdded()) {
                         Log.d(TAG, "New exposures found, showing a notification");
                         NotificationHelper.showPossibleExposureNotification(context);
@@ -76,10 +74,7 @@ public class StateUpdatedWorker extends ListenableWorker {
                                 .getCurrentReactContext();
 
                         if (reactContext != null) {
-                            DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter = reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
-                            if (eventEmitter != null) {
-                                EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
-                            }
+                            EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
                         }
 
                     } else {
@@ -97,7 +92,7 @@ public class StateUpdatedWorker extends ListenableWorker {
                 );
     }
 
-    static void runOnce(Context context) {
+    static void runOnce(Context context, Intent intent) {
         WorkManager.getInstance(context).enqueue(
                 new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
                         .build());
