@@ -313,7 +313,6 @@ final class ExposureManager: NSObject {
       print("Unable to schedule background task: \(error)")
     }
   }
-  
 
   func scheduleDeleteOldExposuresBackgroundTaskIfNeeded() {
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.deleteOldExposuresBackgroundTaskIdentifier)
