@@ -1,5 +1,8 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
+import android.content.ComponentName;
+import android.content.Intent;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -18,6 +21,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationCl
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
+import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
@@ -70,10 +74,9 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void simulateExposure(Promise promise) {
-    RealmSecureStorageBte.INSTANCE.insertExposure(
-        ExposureEntity.create(getRandomExposureDate(), Instant.now().toEpochMilli())
-    );
-    NotificationHelper.showPossibleExposureNotification(getReactApplicationContext());
+    Intent exposureIntent = new Intent(getReactApplicationContext(), ExposureNotificationBroadcastReceiver.class);
+    exposureIntent.setAction("com.google.android.gms.exposurenotification.ACTION_EXPOSURE_STATE_UPDATED");
+    getReactApplicationContext().sendBroadcast(exposureIntent);
     promise.resolve(null);
   }
 
