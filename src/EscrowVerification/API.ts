@@ -22,6 +22,7 @@ export type PhoneNumberError =
   | "NoKeysOnDevice"
   | "NotAuthorized"
   | "Forbidden"
+  | "NoSharableKeys"
   | "RateLimit"
   | "Unknown"
 
@@ -87,6 +88,8 @@ const handlePhoneNetworkError = (error: any): PhoneNumberError => {
         return "RateLimit"
       case "999":
         return "NoKeysOnDevice"
+      case "998":
+        return "NoSharableKeys"
       default:
         Logger.error(`Unhandled error code in handlePhoneNetworkError:`, {
           code: error.code,

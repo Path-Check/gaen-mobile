@@ -17,6 +17,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors
+import org.pathcheck.covidsafepaths.exposurenotifications.exceptions.ExposureException
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.EscrowVerificationClient
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.ExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.network.escrowserver.PositiveSubmission
@@ -60,7 +61,11 @@ class EscrowVerificationKeySubmissionModule(context: ReactApplicationContext?) :
             }
 
             override fun onFailure(exception: Throwable) {
-                promise.reject(exception)
+                if (exception is ExposureException) {
+                    promise.reject(exception.errorCode.code.toString(), exception.message)
+                } else {
+                    promise.reject(exception)
+                }
             }
         }
         Futures.addCallback(future, callback, AppExecutors.getLightweightExecutor())
