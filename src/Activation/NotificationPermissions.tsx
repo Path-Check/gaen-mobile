@@ -22,7 +22,7 @@ const NotificationsPermissions: FunctionComponent = () => {
   const handleOnPressEnable = async () => {
     await new Promise((resolve) => {
       notification.request()
-      resolve()
+      resolve(null)
     })
     goToNextScreenFrom("NotificationPermissions")
   }
