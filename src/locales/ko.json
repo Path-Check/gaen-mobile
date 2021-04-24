@@ -23,6 +23,7 @@
     "continue": "계속",
     "done": "완료",
     "edit": "수정",
+    "hascode": "코드가 이미 받으셨습니까? ",
     "learn_more": "더 알아보기",
     "maybe_later": "나중에",
     "more": "더 보기",
@@ -71,6 +72,7 @@
   },
   "errors": {
     "description": "오류가 발생했습니다. 앱을 새로 고침하세요.",
+    "invalid_phone_number": "전화 번호는 10자리여야 합니다.",
     "reload": "새로 고침",
     "something_went_wrong": "문제가 발생했습니다.",
     "title": "알 수 없는 오류",
@@ -164,7 +166,7 @@
     }
   },
   "exposure_history": {
-    "check_for_exposures": "최신 정보",
+    "check_for_exposures": "노출 여부 확인",
     "days_remaining": "권장 격리 기간에 남은 일수:",
     "exposure_detail": {
       "next_steps": "보건 지침 보기",
@@ -210,6 +212,8 @@
     "exposure_check_complete": "노출 여부 확인 완료",
     "location_body": "Google은 Android 10 이하를 실행하는 기기에서 노출 알림을 사용하려면 위치 서비스를 활성화해야 합니다. {{applicationName}} 앱은 사용자의 위치를 추적하거나 기록하지 않습니다.",
     "location_title": "위치 서비스 활성화",
+    "requires_network_body": "비행기 모드가 비활성화되어 있고 모바일 데이터 또는 WiFi를 통해 인터넷에 연결될 수 있는지 확인하십시오.",
+    "requires_network_title": "네트워크에 연결할 수 없습니다",
     "set_active_region_ios_body": "설정 앱을 열고 이 앱의 노출 알림 설정으로 이동 한 다음 '활성화된 지역으로 설정'을 누릅니다.",
     "set_active_region_ios_title": "활성 지역 설정",
     "share_exposure_information_ios_body": "설정 앱을 연 다음 이 앱의 노출 알림 설정으로 이동합니다. '노출 정보 공유'가 켜져 있는지 확인한 다음 '활성화된 지역으로 설정'을 누릅니다.",

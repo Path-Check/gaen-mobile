@@ -1,16 +1,479 @@
 {
+  "_display_name": "Chuukese",
+  "about": {
+    "description": "Ewe {{applicationName}}  app akawor me ren ewe {healthAuthorityName}}.",
+    "operating_system_abbr": "OS:",
+    "version": "Sokun:"
+  },
+  "callback": {
+    "firstname": "Itom",
+    "lastname": "Iten seman semom",
+    "phone_number_required": "Nampan fon (mi aucheaepwe kawor)",
+    "request_a_call": "Katonong faniten an emon contact tracer epwe kokoruk",
+    "success_body": "Nouch kei contact tracers ra men fokkun angang weires faniten en me neniom epwe tumunuoch Ewe {{healthAuthorityName}} a angei omw katonong faniten ew koko sefan. Emon ekewe mi sinenap non ei pekin ina epwe koruk non ei 24 awa.",
+    "success_got_it": "Angei",
+    "success_header": "Ka nomw non line"
+  },
   "common": {
+    "back": "Murin ",
     "cancel": "Ina chok",
+    "close_screen": "Screen mi kapwung",
+    "confirm": "Aneta",
+    "continue": "Sopweno",
+    "done": "Wes",
+    "edit": "Ekesiwini",
+    "learn_more": "Anepano kaeo",
+    "maybe_later": "Ina epwe murin",
     "more": "Pwan eoch",
+    "next": "Pwan ew",
+    "no_thanks": "Ina mwo kinisou",
+    "off": "OFF",
+    "okay": "Okay",
+    "on": "ON",
+    "save": "Tumun",
+    "select_language": "Finata meni fos",
+    "settings": "Neni mi wawano",
+    "skip": "Mwet seni",
+    "something_went_wrong": "Och mettoch a mwanino",
+    "start": "Pwopwuta",
+    "submit": "Uwanong",
     "success": "Tawefich"
   },
+  "covid_data": {
+    "apologies_data_unavailable": "Amusomus, COVID-data ese mwo wor  ",
+    "daily_new_cases": "Minafon cases iteiten ran",
+    "error_getting_data": "Amusano, sise tongeni feino angei aniwinato ewe saingonon COVID cases data ren {{location}}.",
+    "positive_test_rate": "Aukukun positive test",
+    "see_more": "Katon chomong",
+    "source": "Ia afeito epwe porous me ia: {{source}}"
+  },
+  "errors": {
+    "description": "Mi wor met mi mwan Kose mochen kopwe amosowa sefani ena app",
+    "invalid_phone_number": "Nampan fon epwe 10 nampa ",
+    "reload": "Amosowa sefani",
+    "title": "Och mwan ese fat pwopwun"
+  },
+  "escrow_verification": {
+    "error": {
+      "invalid_phone_number": "Nampan fon epwe 10 nampa "
+    },
+    "person_and_health_expert": "Emon aramas e fos ngeni emon mei angeoch non tumunun pechekunen inis",
+    "start": {
+      "body": "Ika pwe mi positive om na tesin COVID-19(nge esap seni ew ekewe antibody test), ka tongeni asineto porousan ena test nge kosapw pwan pwarano ika en io\n\nOmw asinesin faniten pwungun omw tet atongeni anisi non neniom an esap awatenoi chou fetanen ei virus",
+      "header": "Asinesin faniten ew tes mi positive",
+      "what_is_a_verification_code": "Met verification code (kapas ika nampa e anetata ika io en)?"
+    },
+    "user_details_form": {
+      "phone_number": "Nampan fon",
+      "subheader": "Kose mochen kopwe awora nampan noum fon me pwinin maramen omw angei tes iwe aipwe text ngonuk noum nampan pwarata",
+      "test_date": "Pwinin maramen tes",
+      "test_details": "Tichikin porousan ewe tes"
+    }
+  },
+  "export": {
+    "code": "Nampa",
+    "complete_body_bluetooth": "En ka anisi ren an esap chou fetan ewe menun semwen me pwan tumunu an esap tori ekoch me non neniom",
+    "complete_title": "Kinisou ren omw tumun ngeni aramasen non neniom",
+    "consent_body_0": "Pwarano met tumunun semwen ngonuk pwisin om finata iwe epwe fis chok ika ke mutata.",
+    "consent_body_2": "Met chok poraus epwe pwano ren ekoch ese nifinifin nampan noum fon mi afou ngeni on Bluetooth me ekoch fon me nom arum non ekewe 14 ran a no, fiti fengen me weighted risk score anongongong on inet esisinen semwen e poputa omw.",
+    "consent_button_title": "Ngang mi weweiti me mutata",
+    "consent_warning_message": "Soposopono epwe amorano noum we kapas is nampan anetata. Ika pw eke mochen pwarano met fofor mi eoch ren tumunun semwen mi fis ngonuk mwach kan, iwe kopwe akom angei ew minefon kapas ika nampa ren epwe anetata.",
+    "consent_warning_title": "Tumunu fichi!",
+    "enable_exposure_notifications_body": "Kopwe akom onei exposure notification (Esinesin ren Pwa Ngeni) ren om kopwe repotini pwe a uruk semwen.",
+    "enable_exposure_notifications_button": "Onei ika pwa ngeni (Exposure Notifications)",
+    "enable_exposure_notifications_title": "Onei exposure notifications (Esinesin ren Pwa Ngeni) mwen soposopono",
+    "enter_verification_code": "Uwanong ewe nampa ika mak ren epwe aneta",
+    "error": {
+      "invalid_format": "Ekewe code atongeni chok wor nampa me mak non",
+      "network_connection_error": "Ese kan wor internet",
+      "unknown_code_verification_error": "Sotuni pwan ew code mi sokono"
+    },
+    "intro": {
+      "body1": "Ika pwe mi or noum kapas ika nampa ren epwe anetata en io seni {{healthAuthorityName}}  ren an a uruk COVID-19, en mi tongeni tinanong ewe kapa sika nampa on ei screen fan.",
+      "body2": "Ika pwe ese or noum kapas ika nampa ren epwe anetata en io, ngen ese uruk semwen, mi eoch kopwe angei ew code seni {{healthAuthorityName}} mwen soposopono.",
+      "header": "Mei wor noum kapas ika nampa epwe pwarata en io?",
+      "what_is_a": "Met verification code (kapas ika nampa e anetata ika io en)?"
+    },
+    "never_mind_button_title": "Ina chok",
+    "person_and_health_expert": "Emon aramas e fos ngeni emon mei angeoch non tumunun pechekunen inis",
+    "publish_consent_title_bluetooth": "Esinensin ngeni ekoch aramasan non neniom",
+    "publish_keys": {
+      "errors": {
+        "description": "Ei fofor ese tongeni an epwe wesino. {{message}}",
+        "internal_server_error": "Ewe nenien iseisen poraus on internet a osukosuk, kose mochen sotuni sefani ekiseno",
+        "timeout": "Ewe tungor e fansoun nangatam ese wes",
+        "unknown": "Kose uwanong poraus ren Pwa Ngeni"
+      },
+      "no_op": {
+        "empty_exposure_keys": "Usun ese wor noum maken fansoun chufengen on noum fon, kose mochen witi 24 awa ren soposopono ika ke keran chok fori sefani poraus ika porausom. Kopwe tungor sefan ew minefon kapas ika nampa ren an epwe anetata en io.",
+        "empty_exposure_keys_title": "Esor maken ika porausen om chungeni",
+        "no_token_for_existing_keys": "Met poraus mei wor a no ngeni ewe nenien isoisenapen poraus  Wewen ei pwe ei mokutukut mi fen keran sosot seni ei fon, ngen on pwan ew sokun appilication ika program on phone. En mi tongeni poraus ngeni iokewe ra tutumunu uwouwen me katoun verification code emon e eaea. Mi wor {{newKeysInserted}} minafon key mi pwan kawor",
+        "no_token_for_existing_keys_title": "Sotuni ne uwanong ekewe key mi wor"
+      }
+    },
+    "symptom_onset": {
+      "did_you_have_symptoms": "Met mi wor reom ekewe sainen semwen?",
+      "no_i_didnt_have": "Apw, ese wor rei ekewe sainen semwen",
+      "symptoms": "Esisinen semwen",
+      "when_did_your_symptoms": "Inet e pwopwun omw kewe sainen semwen?",
+      "yes_i_did_have": "Ewer, mi wor rei ekewe sainen semwen"
+    },
+    "verification_code_info": {
+      "how_do_i_get_body": "Kokori omw we nenien pekin tumunun inis, {{healthAuthorityName}}.",
+      "how_do_i_get_header": "Ifa usun ai upwe angei ewe code ren an epwe anetata?",
+      "info_body": "Ew verification code ika kapas ika nampa ew code ewe pekin a tutumunu epetin semwenin inisum, {{healthAuthorityName}}, ika pwe a pwarata pwe a uruk semwen.\n\nEwe verification code e eaea ren an epwe pwarata pwe om chekin semwen mi pung oh mi enet.\n\nEw me ew verification code epwe tano manemanin non ekis fansoun ren an epwe pwarata pwe met pungun chekin semwen minen nom resap chuen pwan katonong.\n\nIka pwe e osukosuk nupwen om tinanong noum verification code (nampa ika kapas), kopwe angeni ew minefon code seni ewe pekin ra tutumunu pekin semwen mwen kopwe pwan pwan tini sefaninong.",
+      "info_header": "Met verification code (kapas ika nampa e anetata ika io en)?",
+      "what_happens_body": "Nupwen om tinanong noum verification code (kapas ika nampa), ew app epwe aisinuk ren om kopwe pwarano ekewe esenifinifin exposure keys ese fat seni io seni ekoch fon en mi pwan kochu ngeni.\n\nIka pwe ke mutata, ewe app epwe tini ekei keys ngeni ewe nenien isoisen poraus ren katoun esinesin ren Pwa Ngeni. Ewe nenien katoun esinesin epwe esinesin ngeni ekew fon en mi chu ngeni ren an uruk semwen.\n\nEwe app ese angei ika iseni porousom  Ekewe chok key ese fat ran nomw non noum we device ra no ngeni emon me emon",
+      "what_happens_header": "Met a fis nupwen ua uwanong ai we code?"
+    }
+  },
   "exposure_history": {
-    "more_info_header": "Pwan ekoch porous"
+    "check_for_exposures": "Chek ren faniten omw pwangeni",
+    "days_remaining": "A wor {{daysOfQuarantineLeft}} ran a chok nomw non ekewe ran mi afat pwe kopwe nomwotiw non imw",
+    "exposure_detail": {
+      "next_steps": "Aneani ewe kapasen emwen seni ewe pekin tumunun inis",
+      "personalize_my_guidance": "Eureur ren pwisin inisi",
+      "schedule_callback": "Fori ew fansoun omw kopwe fos ngeni emon ekewe contact tracer seni ewe {{healthAuthorityName}} faniten omw kopwe angei aninis  "
+    },
+    "exposure_report": "Repot ren Pwa Ngeni",
+    "exposure_summary": "Emon en mi nomw arun nefinen {{startDate}} me {{endDate}} tes mi positive ren COVID-19",
+    "health_guidelines": {
+      "six_feet_apart": "Towau fesen non ukukun 6 feet",
+      "stay_home": "Nomw non imw ika ka semwen",
+      "title": "An pekin tumunun inis porousen emwen",
+      "two_meters_apart": "Towau fesen non ukukun 2 meter",
+      "wash_your_hands": "Tenu poum iteiten fansoun",
+      "wear_a_mask": "Masamas mask"
+    },
+    "how_does_this_work": "Ifa usun ei fofori?",
+    "how_does_this_work_para": "Nupwen esinesin ren pwa ngeni a on,noum fon a eaea Bluetooth ren an epwe ekesiwini ika seifin sokopaten tetenin nampa (iten random IDS) seni sokopaten fon mi nom arum mi pwan won nour Esinesin ren Pwa ngeni Sokopaten IDs esap pwari en io ngeni ekoch aramas me mi pwan siwin fan chomong iteitan ran ren an epwe amonomonano poraus ren fan itom.",
+    "last_days": "Ekewe 14 ran a wesino",
+    "more_info": "Anepano kaeo ngeni usun Exposure ika Esinesin ren Pwa Ngeni",
+    "more_info_header": "Pwan ekoch porous",
+    "next_steps": "Met epwe fis murin",
+    "no_connectivity_message": "Kese tota on internet",
+    "no_exposure_reports": "Ese wor repotun ika porausan om Pwa Ngeni",
+    "no_exposure_reports_over_past": "Ese mo toruk repoten om Pwa Ngeni non ekewe 14 ran a no",
+    "possible_exposures": "Usun ka fen Pwa Ngeni",
+    "review_health_guidance": "Nengeni echou eurour ren tumunun pechekunen inis",
+    "updated": "Pacheta",
+    "why_did_i_get_an_en": "Pwata uwa angei repotun ika uwa Pwa Ngeni?",
+    "why_did_i_get_an_en_para": "Kopwe angei ew reoptun Pwa Ngeni ika emon ke pin nom arun a pwata murin pwe a semwenin COVID-19 iwe ka finata pwe kopwene esinesin ngeni ekoch.",
+    "your_device_exchanged": "Ren ekei punin maram fan, noum fon ekesiwinin key ngeni pwan ew phone mi pwarata murin pwe a uri met we e test ren fan iten."
+  },
+  "exposure_notification_alerts": {
+    "bluetooth_body": "Ren om kopwe tiki onei ew Pwa Ngeni (Exposure Notification), kopwe akom onei Bluetooth non ewe setting on noum we app.",
+    "bluetooth_title": "Onei Bluetooth",
+    "cant_check_for_exposures_body": "Kopwe onei Exposure Notification ika Pwa Ngeni ren om kopwe kuna ekoch ra Pwa Ngeni (Exposure).",
+    "cant_check_for_exposures_button": "Onei ika pwa ngeni (Exposure Notifications)",
+    "cant_check_for_exposures_title": "Use tongeni cheki ren Pwa Ngeni",
+    "location_body": "Google a mochen pwe fon mine mi eaea Android 10 ika kukun seni epwe suki ka on ia ke nom ie ren om kopwe tongeni eaea Exposure Notification (Esinesin ren Pwa Ngeni). {{applicationName}} ESE atapwok ika ese iseis porous ren ian ke nomw ie",
+    "location_title": "Wonei aninisin ian ke nomw ie",
+    "set_active_region_ios_body": "Suki ewe Setting app, ka noa ngeni Esinesin ren Pwa Ngeni (Exposure Notification) ren ei app, iwe ka tiki ‘Set As Active Region’.",
+    "set_active_region_ios_title": "Fori pwe epwe Active Region",
+    "share_exposure_information_ios_body": "Open ewe Settings app, ka no ngeni Exposure Notification (Esinesin ren Pwa Ngeni) ren ei app. Tumunu pwe ‘Share Exposure Information’ epwe on, iwe ka tiki ‘Set As Active Region’.",
+    "share_exposure_information_ios_title": "Pwaralo usun porausen Pwa Ngeni ",
+    "unhandled_error_body": "Met e fis sise sinei me mwan. Kose mochen esipano ka pwan suki sefani ewe app ka pwan sotuni sefani.",
+    "unhandled_error_title": "Och mettoch a mwanino",
+    "use_exposure_notifications_android_body": "Ren om kopwe onei Esinesin ren Pwa Ngeni (Exposure Notification), no ngeni COVID-19 Esinesin ren Pwa Ngeni ika Exposure Notification screen non noum Setting app iwe ka onei ‘Use Exposure Notification’.",
+    "use_exposure_notifications_android_title": "Onei ika pwa ngeni (Exposure Notifications)"
+  },
+  "exposure_scanning_status": {
+    "fix_this": "Fori ei",
+    "learn_more": "Anepano kaeo",
+    "your_device_is_not": "Noum phone ese kuta ia epwe affou ngeni pwe epwe pwano. Fori met e fis fan pwe epwe anisi pwanon (Exposure Detection).",
+    "your_device_is_scanning": "Noum fon a kuta ia epwe afou ngeni pwe epwe pwano iwe epwe soposopono inamo ika ka esipano ewe app."
+  },
+  "home": {
+    "bluetooth_info_body": "Noum phone me mefi ekoch phone en mi kan ngeni ren an eaea Bluetooth Low Energy (Bluetooth e eaea kukunun power). Ei e mutata pwe ewe app epwe maketiw fansoun atun chufengen nge esap pwarata en io, inamo ika ewe app ese sukuta on nom phone.",
+    "bluetooth": {
+      "location_disabled_error_message": "Ren an epwe sukuta ika on Esinesinen Pwangeni on phone ika Bluetooth (Exposure Notification Technology), mutata ika onei ia ke nom ia me non Setting non ewe app",
+      "location_disabled_error_title": "Mwutata me non ekewe neni",
+      "location_header": "Ian ke nomw ie",
+      "location_subheader": "{{applicationName}} kosap tongeni nen tonong non om location data (porausen ia ke no ia) me noum fon ese or e atepwa.",
+      "proximity_tracing_header": "Esinesin ren om pwa ngeni",
+      "share": "Ngeni emon me emon {{applicationName}}",
+      "share_message": "Katonoch ei app {{applicationName}}, pwe an tongeni anisi kich ren tumunun COVID-19! {{appDownloadUrl}}",
+      "tracing_off_header": "Mefi pwe ka pwa ngeni Off",
+      "tracing_on_header": "Mefi pwe ka pwa ngeni On"
+    },
+    "call_emergency_services": "Kokori ewe pekin aninis ren osukosuk atapwanapwan",
+    "error": {
+      "share_link_failed": "Mwan ne suki ewe link ren omw kopwe ngeni emon me emon"
+    },
+    "fix": "Fori ewe osukosuk ren {{technology}}",
+    "get_more_info": "Angei pwan ekoch porous won {{technology}}",
+    "have_a_positive_test": "Ani ew tes mi positive?",
+    "location_info_body": "Google a mochen pwe phone meinisin mi eaea Android 10 ika kis seni repwe onei ia re nom ia fan iten eaean epwe pwarata ika en mi Pwa Ngeni (Exposure Detection). {{applicationName}} ESE atapwok ika ese iseis porous ren ian ke nomw ie",
+    "location_info_subheader": "{{applicationName}} ese atapwok ika ese iseis porous ren ian ke nomw ie",
+    "notifications_off": "Wonei nenien porousen esinesin ren ar repwe asinesin ngonuk ika pwe en mi pwa ngeni",
+    "proximity_tracing_info_body_1": "Ika pwe smartphones me app mi nom on remi sukuta ika on, pwan Bluetooth mi on, iwe ir me ikan fengen non ekis fansoun, iwe ei atun chufengen epwe nomola ka pwarata on noum phone.",
+    "proximity_tracing_info_body_2": "Ika pwe oua chufengen, porousom mi maketiw, me porous auchea fanitom epwe chok nomw ne mwonomwon  Ewe app ese iseis porousen auchea faniten emon Ekewe chok ID ese nifinifin ra tongeni ekesiwin. Ekei repwe kamworono murin 14 ran",
+    "proximity_tracing_info_subheader_1": "Ifa usun foforun ewe angangen pwa ngeni? ",
+    "proximity_tracing_info_subheader_2": "Met poraus mi maketiw fan itei mi tumun?",
+    "verification_code_card": {
+      "if_you_have_a_code": "Tinanong omw na nampan anetata pwe epwe anisi tumunun neniom",
+      "if_you_have_a_positive_test": "Ika pwe a uruk semwenin COVID-19, en mi tongeni pwarata nge esap pwano en io pun meinisin aramas mi nom ia ke nom ia repwe sinei me monota.",
+      "more_info": "Met verification code (kapas ika nampa e anetata ika io en)?",
+      "report_positive_test": "Uwanong porousen ewe tes mi positive",
+      "submit_code": "Tinanong ewe nampa ika mak"
+    }
+  },
+  "label": {
+    "checked_checkbox": "Cheki checkbox",
+    "go_to_home_view": "No ngeni ewe nenien katon",
+    "launch_enable_notif": "Wonei",
+    "launch_get_started": "Kone poputa",
+    "launch_screen1_header": "Kinisou ren om toto ",
+    "privacy_policy": "Annukun tumunun porausen emon",
+    "unchecked_checkbox": "Kosapw cheki checkbox"
+  },
+  "navigation": {
+    "exposure_history": "Pwa ngeni",
+    "home": "Nenien pachetan me affaten poraus",
+    "settings": "Ekewe neni",
+    "symptom_history": "Esisinen semwen"
+  },
+  "onboarding": {
+    "app_setup_complete_body": "{{applicationName}} mi chok mwokutukut Kinisou ren omw aninis ne aukatiw chounon semwen",
+    "app_setup_complete_header": "Foforun kochu fengenin ewe app a wesino",
+    "app_setup_incomplete_body": "{{applicationName}} epwe chok or Esisinen Pwa Ngeni me mumutan eaea Bluetooth ren epwe fat inet ka pwa ngeni emon mi uri semwenin COVID-19. En mi tongeni mutata ei me non Settings.",
+    "app_setup_incomplete_header": "Foforun kochu fengenin ewe app ese wesino",
+    "app_setup_incomplete_location_body": "{{applicationName}} epwe chok or Esinesinen Pwa Ngeni, Bluetooth, me mumutan ia ke nom ia ren epwe fat inet ka pwa ngeni emon mi COVID-19 En mi tongeni mutata ei me non Settings.",
+    "eula": "Nesopwonon an ewe chon eaea taropwen tipeew fan anuk",
+    "eula_agree_terms_of_use": "Ua tipeew ngeni pwe ngang mi aneani me etiwa aurouren eaean",
+    "i_am_over": "Ewer, ngang ua nuseni {{minimumAge}}",
+    "location_alert_body": "Ren om kopwe eaea Exposure Notification Esinesin ren Pwa Ngeni), epwe pwarata ia ke nom ia.",
+    "location_alert_header": "Wonei aninisin ian ke nomw ie",
+    "location_body": "Google e mochen pwe meni phone e eaea Android 10 ika kis seni epwe fori pwe epwe pwarata ia e nom ia pun Bluetooth scanning epwe pwarata ika ka pwa ngeni. Iwe nge, {{applicationName}} ese atapwok ika ese iseis porous ren ian ke nomw ie",
+    "location_header": "Neni mi wor mwokutukut non",
+    "location_services_already_active": "Ekewe aninis ren ian ke nomw ir mi chok mwokutukut",
+    "location_subheader": "{{applicationName}} kosap tongeni nen tonong non om location data (porausen ia ke no ia) me noum fon ese or e atepwa.",
+    "no_take_me": "Apw, angei sefaniei",
+    "notification_body1": "Epwe or esinesin ngonuk ika pwe en mi kan non fansoun nangatam, ngeni io mi pwarata pwe mi uri semwenin COVID-19.",
+    "notification_body2": "Ewe app e fori ei ren an eaea Bluetooth mi kukun pechekunen iwe tumunu sokopaten kinikinin poraus nge esap pwarata en io ika ke no ia. Ika tongeni ofei inet chok ka mochen me non ewe neni ",
+    "notification_header": "Repwe asinengonuk ika pwe en mi nomw ia me wor ie ewe semwen",
+    "notification_subheader1": "Inet upwe angei kapasen asinesin",
+    "notification_subheader2": "Ifa usun foforun?",
+    "notification_subheader3": "Ei app ese epetuk seni ei semwenin COVID-19’",
+    "please_read_the": "Kese mochen aneani ewe  ",
+    "privacy_policy": "Annukun tumunun porausen emon",
+    "protect_privacy_button": "Ifa usun ach tumun poraus auchea ren fan itom",
+    "protect_privacy": {
+      "body_1": "Ekei IDs ese anomu poraus fan itan emon me siwini iteitan 10-20 minich ren an esap pwano ngang io.",
+      "body_2": "Phone ekan ekisiwini sokopaten IDs ngeni ekoch phone ren an eaea Bluetooth ese kon eaea waten power. Ei a mutata {{applicationName}} ren an epwe nengeni fichi met ke churi iteitan nge esap pwata pwe en io, inamo ika ese sukuta on on nei phone.",
+      "body_3": "Murin an pwata pwe ka semwenin COVID-19, emon ewe a tongeni pwarata noun we pisekin annet {{applicationName}} ren an epwe checki fichi met sokkun tumunun semwen epwe fis ngonuk. Met sokun ID e keran fis on noum phone a esisin iwe a katonong non nenienapen iseison poraus. Ei foforun anet ren met ika io we e anisi ne epeti repot mi mwaken.",
+      "body_4": "Ika pwe ew ID mi esisin a mes ngeni ew ID mi nom non noum phone, ei a pwarata pwe menip en mei pwa ngeni emon mi uri semwenin COVID-19. Iei usun {{applicationName}} ach sipwe sinei pwe en mei pwa ngeni ewe monun semwen.",
+      "body_5": "Ika pwe a mes ngeni ew, {{applicationName}} iwe epwe esinesin ngonuk iwe kopwe pwan angei eururen poraus seni ewe putaen tumunun pechekunen inis.\n\nIei usun {{applicationName}} an ngonuk ewe pechokunen pwisin ekieki ren pechekunen inisum, tumunun om community, ekei meinisn epwe fis nge ese pwarata en io ika ia ke no ia.",
+      "subheader_1": "Ika pwe ka onei ewe Esinesinen Pwa Ngeni, noum phone a chok pach ngeni iteiten-ekesiwini, ID ese nifinifin.",
+      "subheader_2": "Phone mi wor me on Esinesinen Pwa Ngeni mi mutata epwe ekesiwin ID ngeni ekoch phone ir mei churi.",
+      "subheader_3": "Ika pwe emon kewe chon eaea a ponueta, iwe ra tongeni fini ika repwe pwarta usun tumunun semwenin inisir nge esap pwata ir io.",
+      "subheader_4": "Ew phone mei chok iteitan tini esisin ngeni ewe nenien a anomu unesenapen poraus ren ekoch ID mi esisin iwe a kuta meni epwe mes ngeni",
+      "subheader_5": "Epwe or esinesin ngonuk ika {{applicationName}} a pwano pwe mi mes ngeni ew ika ekoch me mi pwan esisin ewe ID"
+    },
+    "proximity_tracing_already_active": "Esinesin ren pwa ngeni epwe on",
+    "proximity_tracing_body1": "Ika pwe smartphones me app mi nom on remi sukuta ika on, pwan Bluetooth mi on, iwe ir me ikan fengen non ekis fansoun, iwe ei atun chufengen epwe nomola ka pwarata on noum phone.",
+    "proximity_tracing_body2": "Ika pwe oua chufengen, porousom mi maketiw, me porous auchea fanitom epwe chok nomw ne mwonomwon  Ewe app ese iseis porousen auchea faniten emon Ekewe chok ID ese nifinifin ra tongeni ekesiwin. Ekei repwe kamworono murin 14 ran",
+    "proximity_tracing_button": "Fori Esinesin ren Pwa Ngeni",
+    "proximity_tracing_header": "Fori Esinesin ren Pwa Ngeni ",
+    "proximity_tracing_subheader1": "Ifa usun foforun?",
+    "proximity_tracing_subheader2": "Met poraus mi maketiw fan itei mi tumun?",
+    "proximity_tracing_subheader3": "Ei app ese epetuk seni ei semwenin COVID-19’",
+    "screen1_button": "Ifa usun foforun?",
+    "screen1_header": "Chufengen kich meinisin, kich mi tongeni ne ekisano chounon semwenin COVID-19",
+    "screen1_image_label": "Ruomen aramas ra etekiatai pour oh pisiri fengeni",
+    "screen2_button": "Met tumununun porausen inisi mi tumun?",
+    "screen2_header": "Noum phone mi chechemeni ekoch phone mi pach ngeni ika churi, nge esap chok pwarukata pwe en ngeni ekkoch.",
+    "screen2_image_label": "Ruemon aramas on nour phone",
+    "screen3_button": "Epwe me ika uwa pwa ngeni?",
+    "screen3_header": "Met poraus e pwarata pwe en esap tongeni tou seni noum phone.",
+    "screen3_image_label": "Emon aramas e nounou ew phone mi nokuno.",
+    "screen4_button": "Kone poputa",
+    "screen4_header": "Ewe app epwe esinesin ngonuk ika pwe kopwe pwa ngeni io mi tori semwenin COVID-19",
+    "screen4_image_label": "Emon aramas epwe tori esinesin on noun phone",
+    "terms_header_title": "Ifa usun me met eaean",
+    "verify_your_age": "Affata ierum",
+    "welcome_image_label": "Sasingan aramas ir mi eaea mesemes, ir mi akeke fengen usun metochun noun ew nenien akeke ir mi chok pachefengen.",
+    "you_must_be": "Kopwe {{minimumAge}} ika wate seni ren om kopwe eaea {{applicationName}}. En mi wate seni {{minimumAge}}?"
+  },
+  "product_analytics": {
+    "i_understand_and_consent": "Ngang mi weweiti me mutata",
+    "privacy_policy": "Annukun tumunun porausen emon",
+    "share_anonymized_data": "Eaea fengen poraus ese pwa ngeni emon",
+    "share_anonymized_data_disclaimer": "Ren sopwosopwono, ka tipeew ngeni omw kopwe uwau porous mi mwonomwonono ngeni ewe {{healthAuthorityName}}",
+    "share_data_para_1": "Monomonon me maken poraus ika nampa ren ifa usun an ew mwichichen aramas eaea ei app e anisi ewe {{healthAuthorityName}} Commission, ekieki usun, weweiti, me tumunun chounon ewe COVID-19.",
+    "share_data_para_2": "Ei maken poraus ika nampa ese or en-ika ion porausan.",
+    "stop_sharing_data": "Kosap ea fengen maken poraus me nampa"
   },
   "screen_titles": {
-    "home": "Nepoputan"
+    "bluetooth": "Bluetooth",
+    "exposure_history": "Pwa ngeni ",
+    "exposure_notifications": "Esinesin ren om pwa ngeni",
+    "exposure_scanning": "Mefi pwe ka pwa ngeni",
+    "home": "Nepoputan",
+    "how_the_app_works": "Ifa usun an app angang",
+    "legal": "Annuk",
+    "location": "Ian ke nomw ie",
+    "protect_privacy": "Ifa usun ach tumun poraus auchea ren fan itom",
+    "select_language": "Finata meni fos",
+    "select_symptoms": "Finata met sokon esisinen semwen",
+    "settings": "Ekewe neni"
+  },
+  "self_assessment": {
+    "age_range": {
+      "eighteen_to_sixty_four": "18-64",
+      "get_my_guidance": "Tungor eureur seni ei",
+      "how_old_are_you": "Fite ierum?",
+      "sixty_five_and_over": "65+"
+    },
+    "call_emergency_services": {
+      "call_emergencies": "Kokori {{emergencyPhoneNumber}}",
+      "seek_medical_attention": "Kuta tumunun semwen ika pioing ren fansoun mi atepwanepwan",
+      "urgent_medical_attention_needed": "Aneanei waten tumunun semwen me aninis seni pioing  Kese mochen kori {{emergencyPhoneNumber}} ika no ngeni nenien Emergency."
+    },
+    "emergency_symptoms": {
+      "are_you_experiencing": "Met en mi mefi ekoch ekei esisinen waten semwen?",
+      "chest_pain": "Waten, metekin fan mwar ika weires",
+      "difficulty_breathing": "Waten weires ne ngasangas",
+      "disorientation": "Waten fatengawen ekiek ika mang ne fori",
+      "lightheadedness": "Waten, ika mi chok fifis mokunukun",
+      "select_any": "Finata met mi weneiti (ika esor)."
+    },
+    "general_symptoms": {
+      "aching": "Metekitekin non inis ekis meinisin",
+      "are_you_experiencing": "Met en mi mefi ekoch ekkei esisinen semwen?",
+      "cough": "Minefon ika waten naw",
+      "difficulty_breathing": "Ekis ika nonoeoch ren weiresin ngansengas",
+      "fever_or_chills": "Kar me fou",
+      "loss_of_smell_taste_appetite": "Nangatamen ese or ach tini ponan, neni, me mochen mongo",
+      "other": "Ekoch",
+      "select_any": "Finata met weneiti.",
+      "vomiting_or_diarrhea": "Mwus ika feiseni"
+    },
+    "guidance": {
+      "call_your_healthcare_provider": "Kokori noum doctor me pioing, pekin aninisin poraus on me aninisin safei on phone non 24 awa.",
+      "clean_hands": "Tenu poum iteitan.",
+      "cover_coughs": "Ponueno awom me potum ika kopwe naw ika mwasei.",
+      "dont_go_to_work": "Kesap no angang, sukun, ika nenien aramas esenifinifin.",
+      "dont_use_public_transport": "Kesap fiti bus ika taxi.",
+      "drink_water": "Un wate konik me ekoch minen un mi faat ren epwe epeti om kopwe kaka.",
+      "feeling_fine": "Mi eoch ach rong pwe ka mefi pechekun. Kopwe nenengeni esisinen semwen epwe toruk me nomotiw chok non imw.",
+      "find_a_test_center_nearby": "Met epwe fis murin",
+      "find_telehealth": "Kuta aninis ren pekin aninisin tumunun inis ",
+      "follow_cdc_guidance": "Ika pwe awateno sainen semwen reom, kopwe fiti met mi tou seni CDC an epwe emwenuk",
+      "guidance": "Met mi emwenuk",
+      "if_symptoms_develop": "Ika pwe ka mefi watenon sainen semwenin COVID-19 ika pwe ka mefi nge a wate seni me mwan, kokori noum kewe chon aninis ren tumunun pekin inis, ekewe fon ren pekin aninis ren semwen, ika ekewe ir ra wisen aninis ren pekin safei ",
+      "may_help_you_feel_better": "Ikei met kopwe fori pwe kopwe pechokununo:",
+      "monitor_your_symptoms": "Amusano ika ka apwangapwangono ika semwen. Nom neimw nge operi met kan asisinen emwen epwe toruk. Kokori noum doctor ika pioing ika esisinen semwen e wateno, noumitiw chok neimw.",
+      "practice_social_distancing": "Epwenueta awawai nefinom me ekoch aramas.",
+      "protect_others": "Fori ekei ren an epwe epeti ekoch pwe rete semwen.",
+      "rest": "Nom chok neimw nge akasoso.",
+      "seek_medical_care": "Ika pwe ka ekieki nge a or om osukosuk semwen ika ka fen mefi apwangapwangono, kuta aninis me chuno non pioing.",
+      "stay_6_feet_away": "Enefina esap kis seni 6 fit seni ekoch aramas me kosap nom non neni mei mwicheich aramas.",
+      "stay_at_home": "Nomotiw chok neimw chinon chok ika kopwe kutan aninis ren om semwen.",
+      "stay_away_from_higher_risk_people": "Ika mi tufich, kesap nom arun aramas mine mi mecheres ngenir ar repwe waten semwen ren COVID-19.",
+      "stay_home_14_days": "Nomoitiw neimw non ukukun 14 ran.",
+      "take_care_of_yourself": "Kaeo ngeni pwisin tumunu inisum ika emon mi uri semwen.",
+      "take_temperature": "Auku pwichikaren inisum fan ruu non ew ren me nengeni ika epwe or esisinen semwenin COVID-19.",
+      "watch_for_covid_symptoms": "Tumunu ren esisinen semwenin COVID-19.",
+      "you_have_underlying_conditions": "Amusano ika pwe kese mefi pechekun. Om esisinen semwen usun epwe esisinen semwenin COVID-19. Mei pwan or om osukosuken semwen mi efisata om kopwe wesewesen semwenino.",
+      "your_symptoms_might_be_related": "Amusano ika pwe kese mefi pechekun. Om esisinen semwen usun epwe esisinen semwenin COVID-19."
+    },
+    "how_are_you_feeling": {
+      "good": "Och",
+      "not_well": "Ese pochokun",
+      "title": "Ifa usum?"
+    },
+    "intro": {
+      "agree_and_start_assessment": "Tipeew me pwopwuta ne fori angangan",
+      "covid19_self_assessment": "Chekin inis ren COVID-19",
+      "find_out_how_to_care": "Kopwe kuta ifa usun omw kopwe tumunu inisum me ekoch aramas murin omw arap ngeni emon mi positive ren COVID-19",
+      "if_this_is": "Ika pwe iei ew osukosuk atapwanapwan, kose mochen kopwe kokori {{emergencyPhoneNumber}}",
+      "learn_more": "Anapano keao ren porausen CDC Coronavirus Self-Checker iei pwisin cheki inisum anongonong on",
+      "this_is_based_on": "Ei mi anongonong on minefon emwen seni CDC iwe mi tongeni an epwe siwin mwach kan ika sa kon sineifichi ifa usun an ewe monun semwen watteno me met sokun semwen e efisata",
+      "this_is_not_intended": "Iei esapw faniten eaean ren safean ika tumunun  ",
+      "you_are_a_resident": "En chon ei community e aninis seni pekin {{ healthAuthorityName }}"
+    },
+    "underlying_conditions": {
+      "blood_disorder": "Semwenin non chaa, mi efisata semwenin unekinich ren sickle cell disease me thalassemia.",
+      "cerebrovascular_disease": "Semwenin waa me aninisin chaa ngeni tupwen mokur ika semwenin wa, ren stroke me dementia.",
+      "diabetes": "Semwenin suke",
+      "do_you_have": "Met mi toruk ekei sokun semwen?",
+      "heart_condition": "Semwenin ngasangas, ren kounon ngasangas, semwen wan ewe foun angasangas, ika semwenin mwasenin ewe foun ngasangas",
+      "high_blood_pressure": "Feita cha",
+      "kidney_disease": "Semwenin kidney",
+      "liver_disease": "Semwenin afan ika aan",
+      "lung_disease": "Iteitan semwenin non ",
+      "obesity": "kitinupw",
+      "pregnancy": "Pwopwo",
+      "select_all_or_none": "Fini meinisin mi weneiti (ika ese wor)",
+      "smoking": "Un supwa",
+      "weakened_immune_system": "Apwangapwanganon epetin semwen non inis ika angei safei mine epwe afisata apwangapwanganon epetin semwen non inis"
+    }
   },
   "settings": {
-    "delete_data_are_you_sure": "Fokun pun ina?"
+    "data_deleted": "Poraus me nampa mi maketiw a kamworono",
+    "delete_data_are_you_sure": "Fokun pun ina?",
+    "delete_data_disclosure1": "Nupwen kopwe iteni “ Amworano Ai We Porous,” meinisin ekewe porous mi nomw ren {{applicationName}} epwe kamworono:",
+    "delete_data_disclosure2": "Ei ese amworano ewe porous ka forata ika ioni won noum na device ren epwe pwano ewe esinesin \n\nKa tongeni amworano ei sopwosopwun porous ke anomwu won noum na device",
+    "delete_data_language_token": "Ew siwinin mettoch mi auchea anom won noum na device ren a epwe tumunu ewe fos ka mochen eaea",
+    "delete_data_note": "Och kukun porous mi mak",
+    "delete_data_onboarding_token": "Ew siwinin mettoch mi auchea anom won noum na device a tumunu ina mwo ika ka awesi ewe app anomw won",
+    "delete_data_product_analytics": " Ew siwinin mettoch mi auchea anom won noum na device a tumunu ina mwo ika ka tipeew ngeni eaea fengenin porausen mettoch mi awewe",
+    "delete_data_symptom_history": "Sainen semwen mine mi tonong nomw won noum na device",
+    "delete_data_this_action": "Ei fofor epwe amworano meinisin porous mi nomw ren {{applicationName}}.",
+    "delete_my_data": "Amworano ai we porous",
+    "errors": {
+      "deleting_data": "Amusano, sise tongeni amworano omw we porous"
+    },
+    "not_sharing_anonymized_data": "Esap ngeni emon ew porous ese fat",
+    "share_anonymized_data": "Eaea fengen poraus ese pwa ngeni emon",
+    "sharing_anonymized_data": "Eaea fengen iei porausen mettoch mi awewe"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Kose mwo mefi pochokun",
+    "errors": {
+      "updating_symptoms": "Amusano, sise tongeni uwau minafon porous won omw kewe sainen semwen"
+    },
+    "felt_well": "Ka mefi pochokun ",
+    "no_entry": "Ese wor tonong",
+    "no_symptoms": "Ese wor sainen ewe semwen",
+    "share_history": "Ngeni emon porousan sainen ewe semwen",
+    "sharing": {
+      "header": "Porousan sainen ewe semwen seni {{startDate}} ngeni {{endDate}}",
+      "no_symptoms_were_logged": "Ese wor sainen ewe semwen mi tonong",
+      "you_did_not_feel_well": "En kese mefi pochokun, sainen ewe semwen mi pachenong: {{symptomList}}",
+      "you_felt_well": "Ka mefi pochokun"
+    },
+    "symptom_history": "Esisinen semwen",
+    "to_protect_your_privacy": "Ren omw kopwe tumunuochu porousom, met mi katonong fanitom mi nom won noum na device iwe ina epwe chok pusin kamorono non ekan ran epwe {{days}} eto"
+  },
+  "symptom": {
+    "bluish_lips_or_face": "Tunau me won mas mi anu araw, mi sokono seni pusin anuwan me akomw",
+    "congestion_or_runny_nose": "Iamwor ika mwongupwot",
+    "cough": "Nau",
+    "diarrhea": "Feiseni",
+    "fatigue": "Mwanien",
+    "fever_or_chills": "Kar ika fou",
+    "headache": "Metek mokur",
+    "inability_to_wake_or_stay_awake": "Ese tongeni neno ika neneno",
+    "muscle_or_body_aches": "Metekin non fituk ika non inis",
+    "nausea_or_vomiting": "Eningaw ika mwus",
+    "new_confusion": "Minafo rokoruk",
+    "new_loss_of_taste_or_smell": "Minafo ese wor nenen mongo ika ese wor tini pwopwonen mettoch",
+    "other": "Ekoch",
+    "persistent_pain_or_pressure_in_the_chest": "Metekitek mi chok fis iteiten, ika weiresin fanimwar",
+    "shortness_of_breath_or_difficulty_breathing": "Riafou ne ngasangas ika weires ne ngasangas",
+    "sore_throat": "Metek non choir"
+  },
+  "verification_code_alerts": {
+    "code_used_body": "Ewe nampa ren an epwe anetata mi kawor a pin eaea",
+    "code_used_title": "Nampa ren an epwe anetata awor chon eaea",
+    "invalid_code_body": "Ewe Verification code ke uwanong ese pwung\n\nEwe code epwe ew verification code mi pwung mi kawor ngonuk seni omw we nenien tumunun epetin semwen\n\nMi tufich an omw we nampa epwe much manemanen Ika pwe ina, iwe kopwe uwanong omw katong faniten ewe minafon code seni omw we nenien tumunun epetin semwen",
+    "invalid_code_title": "Nampa Ese Pwung",
+    "network_connection_body": "Ke need epwe wor omw WIFI pwe kopwe tongeni uwanong ew nampa ren an epwe anetata",
+    "network_connection_title": "Ese wor Internet",
+    "unknown_body": "Och mwan mi chok fis sise monota ngeni Kose mochen pwan sotuni sefani",
+    "unknown_title": "Och mettoch a mwanino"
   }
 }

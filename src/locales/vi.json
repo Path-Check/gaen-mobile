@@ -5,6 +5,18 @@
     "operating_system_abbr": "Hệ Điều Hành:",
     "version": "Phiên bản:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "kiểm tra độ phơi sáng COVID-19 mới",
+      "closes_current_screen": "đóng màn hình hiện tại",
+      "deletes_data": "xóa dữ liệu và điều hướng đến thiết lập ứng dụng",
+      "navigates_to_external_website": "điều hướng đến trang web bên ngoài",
+      "navigates_to_home_screen": "điều hướng đến màn hình chính",
+      "navigates_to_new_screen": "điều hướng đến màn hình mới",
+      "navigates_to_next_screen_without_enabling": "điều hướng đến màn hình tiếp theo mà không bật tính năng Phát hiện phơi sáng",
+      "opens_share_sheet": "mở bảng chia sẻ"
+    }
+  },
   "callback": {
     "firstname": "Tên",
     "if_you_prefer": "Hoặc bạn có thể gọi trực tiếp đến số",
@@ -23,6 +35,7 @@
     "continue": "Tiếp tục",
     "done": "Hoàn tất",
     "edit": "Sửa",
+    "hascode": "Đã có một mã?",
     "learn_more": "Tìm hiểu thêm",
     "maybe_later": "Có thể là lúc khác",
     "more": "Bổ sung",
@@ -70,7 +83,11 @@
     "wear_a_face_covering": "đeo khẩu trang."
   },
   "errors": {
+    "authorization_failure": "Bạn không được phép thực hiện hành động này.",
     "description": "Có lỗi xuất hiện. Vui lòng tải lại ứng dụng.",
+    "invalid_phone_number": "Số điện thoại phải có 10 chữ số",
+    "maxed_submission_header": "Đã đạt được số lần gửi tối đa.",
+    "maxed_submission_requests": "Bạn đã đạt đến số lần gửi tối đa, vui lòng đợi 5 phút để gửi lại.",
     "reload": "Tải lại",
     "something_went_wrong": "Có Vấn Đề",
     "title": "Lỗi Chưa Xác Định",
@@ -210,6 +227,8 @@
     "exposure_check_complete": "Đã hoàn tất phát hiện phơi sáng",
     "location_body": "Google yêu cầu các thiết bị chạy Android 10 trở xuống có bật dịch vụ định vị để sử dụng tính năng Phát Hiện Tiếp Xúc. {{applicationName}} KHÔNG theo dõi hay lưu hồ sơ về địa điểm của bạn.",
     "location_title": "Cho phép truy cập vị trí",
+    "requires_network_body": "Hãy đảm bảo rằng Chế độ trên máy bay đã được tắt và có thể truy cập Internet thông qua dữ liệu di động hoặc WiFi.",
+    "requires_network_title": "Không thể kết nối với mạng",
     "set_active_region_ios_body": "Mở ứng dụng Thiết Lập, tìm đến thiết lập Thông Báo Tiếp Xúc cho ứng dụng này, sau đó nhấn 'Cài Đặt Thành Khu Vực Có Hiệu Lực'.",
     "set_active_region_ios_title": "Cài Đặt Khu Vực Có Hiệu Lực",
     "share_exposure_information_ios_body": "Mở ứng dụng Thiết Lập, sau đó tìm đến thiết lập Thông Báo Tiếp Xúc cho ứng dụng này. Đảm bảo tùy chọn 'Chia Sẻ Thông Tin Tiếp Xúc' được bật, sau đó nhấn 'Cài Đặt Thành Khu Vực Có Hiệu Lực'.",
@@ -267,7 +286,8 @@
       "more_info": "Mã xác minh là gì?",
       "report_positive_test": "Báo cáo kiểm tra dương tính",
       "submit_code": "Gửi mã"
-    }
+    },
+    "view_faq": "Xem câu hỏi thường gặp"
   },
   "label": {
     "checked_checkbox": "Hộp kiểm đã chọn",

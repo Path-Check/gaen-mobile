@@ -53,6 +53,7 @@
   },
   "errors": {
     "description": "Une erreur s'est produite. Veuillez recharger l'application.",
+    "invalid_phone_number": "Le numéro de téléphone doit comporter 10 chiffres",
     "reload": "Recharger",
     "something_went_wrong": "Un problème est survenu",
     "title": "Erreur inconnue"
