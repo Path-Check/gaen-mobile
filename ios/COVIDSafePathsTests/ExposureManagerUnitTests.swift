@@ -553,6 +553,31 @@ class ExposureManagerUnitTests: XCTestCase {
     wait(for: [submitExpectation], timeout: 0)
   }
 
+  func testRegisterDeleteOldExposuresBackgroundTask() {
+    let registerExpectation = self.expectation(description: "A background task with the given identifier is registered")
+    let bgSchedulerMock = BGTaskSchedulerMock()
+    bgSchedulerMock.registerHandler = { identifier, launchHanlder in
+      registerExpectation.fulfill()
+      return true
+    }
+    let exposureManager = ExposureManager(backgroundTaskScheduler: bgSchedulerMock)
+    exposureManager.registerDeleteOldExposuresBackgroundTask()
+    wait(for: [registerExpectation], timeout: 0)
+  }
+
+  func testSubmitDeleteOldExposuresBackgroundTask() {
+    let mockEnManager = ENManagerMock()
+    let submitExpectation = self.expectation(description: "A background task request is submitted")
+    let bgSchedulerMock = BGTaskSchedulerMock()
+    bgSchedulerMock.submitHandler = { taskRequest in
+      submitExpectation.fulfill()
+    }
+    let exposureManager = ExposureManager(exposureNotificationManager: mockEnManager,
+                                          backgroundTaskScheduler: bgSchedulerMock)
+    exposureManager.scheduleDeleteOldExposuresBackgroundTaskIfNeeded()
+    wait(for: [submitExpectation], timeout: 0)
+  }
+
   // When the request to download the exposure configuration fails
   // the placeholder configuration is used
   func testGetExposureConfigurationV1FallbackToDefault() {

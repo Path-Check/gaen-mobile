@@ -204,6 +204,14 @@ class BTSecureStorage {
     }
   }
 
+  func deleteExposuresOlderThan(_ days: Int) {
+    let realmInstance = realm()
+    try! realmInstance.write {
+      let staleObjects = realmInstance.objects(Exposure.self).filter("date <= %@", Date.daysAgoInPosix(days))
+      realmInstance.delete(staleObjects)
+    }
+  }
+
   func canStoreExposure(for date: Date) -> Bool {
     return !userState.exposures.map { $0.date }.contains(date.posixRepresentation)
   }
