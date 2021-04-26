@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Nooca:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "hubinta bandhigyada cusub ee COVID-19",
+      "closes_current_screen": "xirayaa shaashadda hadda",
+      "deletes_data": "waxay tirtirtaa xogta iyo hagitaanka barnaamijka dejinta",
+      "navigates_to_external_website": "wuxuu marayaa bogga dibedda",
+      "navigates_to_home_screen": "maraya shaashadda guriga",
+      "navigates_to_new_screen": "maraya shaashad cusub",
+      "navigates_to_next_screen_without_enabling": "maraya shaashadda soo socota iyada oo aan awood u helin Baadhista Shisheeyaha",
+      "opens_share_sheet": "wuxuu furayaa xaashida saamiga"
+    }
+  },
   "callback": {
     "firstname": "Magaca kowaad",
     "if_you_prefer": "Haddii aad doonayso, toos u wac:",
@@ -23,6 +35,7 @@
     "continue": "Sii wado",
     "done": "Dhammaad",
     "edit": "Wax ka badal",
+    "hascode": "Miyaad leedahay koodh?",
     "learn_more": "Xog ka sii badan ka baro",
     "maybe_later": "Laga yaabee hadhow",
     "more": "In kale",
@@ -70,7 +83,11 @@
     "wear_a_face_covering": "xiro gafuur xir."
   },
   "errors": {
+    "authorization_failure": "Adigu awood uma lihid inaad sameyso ficilkan.",
     "description": "Khalad ayaa dhacay. Fadlan dibu cabbe aabka (app).",
+    "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god",
+    "maxed_submission_header": "Soo gudbinta ugu badan ayaa la gaarey",
+    "maxed_submission_requests": "Waxaad gaadhay tirada ugu badan ee soo gudbinta, fadlan sug 5 daqiiqo inaad dib u gudbiso.",
     "reload": "Dibu cabbee",
     "something_went_wrong": "Waxbaa qaldamay",
     "title": "Khald aan la aqoon",
@@ -84,7 +101,7 @@
     },
     "error": {
       "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god",
-      "rate_limit": "Waxaad gaartay xadiga gudbinta ee maalinlaha ah. Fadlan markale iskuday muddo 24 saac ah."
+      "rate_limit": "Waxaad gaadhay xadka gudbinta maalinlaha ah. Fadlan iskuday markale 24 saac."
     },
     "person_and_health_expert": "Qof la hadlaya khabiir caafimaad",
     "start": {
@@ -210,6 +227,8 @@
     "exposure_check_complete": "Ogaanshaha Soo-gaadhista waa dhammaatay",
     "location_body": "Google ayaa qasab ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Ogaysiiska U Feydsanka. {{applicationName}} MA raad-raaco ama ma kaydiyo goobtaada.",
     "location_title": "Furo Adeegyada Goobta",
+    "requires_network_body": "Fadlan hubi in Diyaaradda Habka ay naafo tahay oo marin-ka-helidda internet-ka laga heli karo xogta moobiilka ama WiFi.",
+    "requires_network_title": "Kuma Xidhmi Karo Shabakad",
     "set_active_region_ios_body": "Fur qaybta Settings abka, gal settings-ka Exposure Notifications (Ogaysiiska La joogista Qofka Caabuqa Qaba) abkaan, kadibna ku xir 'Set As Active Region'.",
     "set_active_region_ios_title": "Kuxir Active Region",
     "share_exposure_information_ios_body": "Fur qaybta Settings abka, kadibna gal settings-ka Exposure Notifications (Ogaysiiska La joogista Qofka Caabuqa Qaba) abkaan. Xaqiiji in qaybta 'Share Exposure Information (La wadaag xogta Qaadista Caabuqa)' ay daaran tahay, kadibna riix 'Set As Active Region (Ka dhig Aag Furan)'.",
@@ -267,7 +286,8 @@
       "more_info": "Waa maxay koodhka xaqiijintu?",
       "report_positive_test": "Soo sheeg Caabuqa Lagaa Helay",
       "submit_code": "Gudbi koodhka"
-    }
+    },
+    "view_faq": "Fiiri Su'aalaha"
   },
   "label": {
     "checked_checkbox": "Sanduuqa saxda lagu sameey",

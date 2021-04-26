@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "kuaj cov khoom tshiab COVID-19 yam tsis raug",
+      "closes_current_screen": "Kaw",
+      "deletes_data": "deletes cov ntaub ntawv thiab cov navigages rau app teeb",
+      "navigates_to_external_website": "taw kev rau lub vev xaib sab nraud",
+      "navigates_to_home_screen": "taw kev tshuaj ntsuam lub tsev",
+      "navigates_to_new_screen": "taw kev mus rau lub vijtsam tshiab",
+      "navigates_to_next_screen_without_enabling": "navigates mus rau lub vijtsam tom ntej yam tsis muaj kev Pom Kom Raug Kev Raug Txom Nyem",
+      "opens_share_sheet": "qhib daim ntawv qhia tawm"
+    }
+  },
   "callback": {
     "firstname": "Npe",
     "if_you_prefer": "Yog tias xav ua, hu kiag tuaj rau ntawm:",
@@ -23,6 +35,7 @@
     "continue": "Txuas Ntxiv",
     "done": "Ua Tiav Lawm",
     "edit": "Kho",
+    "hascode": "Twb muaj ib txoj cai?",
     "learn_more": "Kawm ntxiv",
     "maybe_later": "Tej zaum lwm zaus tso",
     "more": "Ntxiv",
@@ -70,7 +83,11 @@
     "wear_a_face_covering": "looj lub npog qhov ncauj."
   },
   "errors": {
+    "authorization_failure": "Koj tsis raug tso cai ua qhov haujlwm no.",
     "description": "Tau tshwm sim ib qho teeb meem. Thov muab kaw mam rov qhib lub app dua.",
+    "invalid_phone_number": "Tus xov tooj yuav tsum yog 10 tug naj npawb",
+    "maxed_submission_header": "Kev xa tawm ntau tshaj plaws.",
+    "maxed_submission_requests": "Koj tau txog tus naj npawb kawg ntawm kev xa tawm, thov tos 5 feeb rov pib dua.",
     "reload": "Rov Qhib",
     "something_went_wrong": "Dabtsi puas lawm",
     "title": "Tsis Paub Qhov Tsis Raug",
@@ -210,6 +227,8 @@
     "exposure_check_complete": "Raug Txiaj Ntsig Ua tiav",
     "location_body": "Google xav kom siv hom xov tooj Android 10 los sis qis dua rau ntawm lub chaw pab cuam txhawm rau siv Ceeb Toom Kev Nphav Tus Kab Mob.{{applicationName}} TSIS raug soj qab xyuas los sis khaws cia cov ntaub ntawv teev tseg uas ntsig txog rau koj lub chaw.",
     "location_title": "Cov Kev Pab Cuam Ntawm Lub Chaw",
+    "requires_network_body": "Thov nco ntsoov tias Airplane hom yog neeg xiam oob khab thiab nkag mus siv tau hauv internet los ntawm cov ntaub ntawv mobile lossis WiFi.",
+    "requires_network_title": "Tsis Txuas Txuas Network",
     "set_active_region_ios_body": "Qhib qhov Settings hauv lub app, ces mus kho Exposure Notifications rau lub app, ces nias 'Set As Active Region'.",
     "set_active_region_ios_title": "Teeb Ib Cheeb Tsam Tseem Siv Tau",
     "share_exposure_information_ios_body": "Qhib qhov Settings hauv lub app, ces mus kho Exposure Notifications rau lub app no.Ua tib zoo taws 'Share Exposure Information', ces mam li nias lub 'Set As Active Region'.",
@@ -267,7 +286,8 @@
       "more_info": "Tus verification code yog dabtsi?",
       "report_positive_test": "Xa Tawm Kev Kuaj Mob Positive",
       "submit_code": "Xa Tawm Tus Zauv"
-    }
+    },
+    "view_faq": "Saib Cov Lus Nug"
   },
   "label": {
     "checked_checkbox": "Lub npov uas kos lawm",
