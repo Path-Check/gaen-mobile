@@ -10,6 +10,7 @@ import io.realm.RealmConfiguration
 import io.realm.RealmResults
 import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
+import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.KeyValues.Companion.LAST_PROCESSED_FILE_NAME_KEY
@@ -52,21 +53,35 @@ object RealmSecureStorageBte {
     private fun getEncryptionKey(): ByteArray {
         val vault: SharedPreferenceVault =
             SharedPreferenceVaultFactory.getAppKeyedCompatAes256Vault(
-                MainApplication.getContext(), MANUALLY_KEYED_PREF_FILE_NAME,
+                MainApplication.getContext(),
+                MANUALLY_KEYED_PREF_FILE_NAME,
                 MANUALLY_KEYED_KEY_FILE_NAME,
-                MANUALLY_KEYED_KEY_ALIAS, MANUALLY_KEYED_KEY_INDEX,
+                MANUALLY_KEYED_KEY_ALIAS,
+                MANUALLY_KEYED_KEY_INDEX,
                 MANUALLY_KEYED_PRESHARED_SECRET
             )
 
-        val existingKeyString = vault.getString(KEY_REALM_ENCRYPTION_KEY, null)
+        val existingKeyString = vault.getString(
+            KEY_REALM_ENCRYPTION_KEY,
+            null
+        )
 
         return if (existingKeyString != null) {
-            Base64.decode(existingKeyString, Base64.DEFAULT)
+            Base64.decode(
+                existingKeyString,
+                Base64.DEFAULT
+            )
         } else {
             val newKey = ByteArray(64)
             SecureRandom().nextBytes(newKey)
-            val newKeyString = Base64.encodeToString(newKey, Base64.DEFAULT)
-            vault.edit().putString(KEY_REALM_ENCRYPTION_KEY, newKeyString).apply()
+            val newKeyString = Base64.encodeToString(
+                newKey,
+                Base64.DEFAULT
+            )
+            vault.edit().putString(
+                KEY_REALM_ENCRYPTION_KEY,
+                newKeyString
+            ).apply()
             newKey
         }
     }
@@ -74,33 +89,50 @@ object RealmSecureStorageBte {
     fun upsertLastProcessedKeyZipFileName(name: String) {
         getRealmInstance().use {
             it.executeTransaction { db ->
-                db.insertOrUpdate(KeyValues(LAST_PROCESSED_FILE_NAME_KEY, name))
+                db.insertOrUpdate(
+                    KeyValues(
+                        LAST_PROCESSED_FILE_NAME_KEY,
+                        name
+                    )
+                )
             }
         }
     }
 
     fun getLastProcessedKeyZipFileName(): String? {
         return getRealmInstance().use {
-            it.where(KeyValues::class.java).equalTo("id", LAST_PROCESSED_FILE_NAME_KEY).findFirst()?.value
+            it.where(KeyValues::class.java).equalTo(
+                "id",
+                LAST_PROCESSED_FILE_NAME_KEY
+            ).findFirst()?.value
         }
     }
 
     fun upsertRevisionToken(revisionToken: String) {
         getRealmInstance().use {
             it.executeTransaction { db ->
-                db.insertOrUpdate(KeyValues(REVISION_TOKEN_KEY, revisionToken))
+                db.insertOrUpdate(
+                    KeyValues(
+                        REVISION_TOKEN_KEY,
+                        revisionToken
+                    )
+                )
             }
         }
     }
 
     fun getRevisionToken(): String? {
         return getRealmInstance().use {
-            it.where(KeyValues::class.java).equalTo("id", REVISION_TOKEN_KEY).findFirst()?.value
+            it.where(KeyValues::class.java).equalTo(
+                "id",
+                REVISION_TOKEN_KEY
+            ).findFirst()?.value
         }
     }
 
-    fun refreshWithDailySummaries(dailySummaries: List<DailySummary>): Boolean {
+    fun refreshWithDailySummaries(dailySummaries: List<DailySummary>): ExposureResult {
         var somethingAdded = false
+        val exposures = mutableListOf<RNExposureInformation>()
         getRealmInstance().use {
             it.executeTransaction { db ->
                 // Keep track of the exposures already handled to avoid showing the same notification multiple times.
@@ -121,13 +153,15 @@ object RealmSecureStorageBte {
                         // No existing ExposureEntity with the given date, must add an entity for this summary.
                         somethingAdded = true
                         db.insert(
-                            ExposureEntity.create(dateMillisSinceEpoch, System.currentTimeMillis())
+                            ExposureEntity.create(dateMillisSinceEpoch, System.currentTimeMillis()).also {
+                                exposures.add(RNExposureInformation(dateMillisSinceEpoch))
+                            }
                         )
                     }
                 }
             }
         }
-        return somethingAdded
+        return ExposureResult(somethingAdded, exposures)
     }
 
     fun insertExposure(exposure: ExposureEntity) {
@@ -149,7 +183,10 @@ object RealmSecureStorageBte {
             it.executeTransaction { db ->
                 db.delete(ExposureEntity::class.java)
                 db.where(KeyValues::class.java)
-                    .equalTo("id", LAST_PROCESSED_FILE_NAME_KEY)
+                    .equalTo(
+                        "id",
+                        LAST_PROCESSED_FILE_NAME_KEY
+                    )
                     .findFirst()
                     ?.deleteFromRealm()
             }
@@ -168,7 +205,10 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.where(SymptomLogEntry::class.java)
-                    .equalTo("id", id)
+                    .equalTo(
+                        "id",
+                        id
+                    )
                     .findFirst()
                     ?.deleteFromRealm()
             }
@@ -187,7 +227,10 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.where(SymptomLogEntry::class.java)
-                    .lessThan("date", daysAgo(days))
+                    .lessThan(
+                        "date",
+                        daysAgo(days)
+                    )
                     .findAll()
                     ?.deleteAllFromRealm()
             }
@@ -206,6 +249,14 @@ object RealmSecureStorageBte {
     }
 
     private fun daysAgo(days: Long): Long {
-        return Instant.now().plus(-1 * days, ChronoUnit.DAYS).toEpochMilli()
+        return Instant.now().plus(
+            -1 * days,
+            ChronoUnit.DAYS
+        ).toEpochMilli()
     }
+
+    data class ExposureResult(
+        val newExposureAdded: Boolean,
+        val exposures: List<RNExposureInformation>
+    )
 }

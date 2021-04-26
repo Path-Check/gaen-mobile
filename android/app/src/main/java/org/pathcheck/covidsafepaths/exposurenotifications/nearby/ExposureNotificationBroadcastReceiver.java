@@ -23,7 +23,7 @@ public class ExposureNotificationBroadcastReceiver extends BroadcastReceiver {
     Log.d(TAG, "Broadcast receiver invoked with action: " + action);
     if (ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED.equals(action)
         || ExposureNotificationClient.ACTION_EXPOSURE_NOT_FOUND.equals(action)) {
-      StateUpdatedWorker.runOnce(context);
+      StateUpdatedWorker.runOnce(context, intent);
     }
   }
 }
