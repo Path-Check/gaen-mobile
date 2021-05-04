@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
+import org.pathcheck.covidsafepaths.exposurenotifications.worker.ChaffRequestWorker;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -58,6 +59,8 @@ public class MainApplication extends Application implements ReactApplication {
     Realm.init(this);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());    
     initializeBugsnag();
+
+    ChaffRequestWorker.scheduleWork(this);
   }
 
   @SuppressWarnings("ConstantConditions")

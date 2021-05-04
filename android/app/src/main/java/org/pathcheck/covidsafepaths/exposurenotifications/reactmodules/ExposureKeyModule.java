@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey;
-import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -21,12 +20,12 @@ import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
+import org.pathcheck.covidsafepaths.helpers.DiagnosisKeyEncoding;
 
 @SuppressWarnings("unused")
 @ReactModule(name = ExposureKeyModule.MODULE_NAME)
 public class ExposureKeyModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "ExposureKeyModule";
-  private static final BaseEncoding BASE64 = BaseEncoding.base64();
 
   public ExposureKeyModule(ReactApplicationContext context) {
     super(context);
@@ -47,20 +46,8 @@ public class ExposureKeyModule extends ReactContextBaseJavaModule {
     FutureCallback<List<TemporaryExposureKey>> callback = new FutureCallback<List<TemporaryExposureKey>>() {
       @Override
       public void onSuccess(List<TemporaryExposureKey> result) {
-        final List<RNExposureKey> exposureKeys = new ArrayList<>();
-
-        List<DiagnosisKey> diagnosisKeys = toDiagnosisKeysWithTransmissionRisk(result);
-        for (DiagnosisKey k : diagnosisKeys) {
-          final String key = BASE64.encode(k.getKeyBytes());
-
-          exposureKeys.add(new RNExposureKey(
-              key,
-              k.getRollingPeriod(),
-              k.getIntervalNumber(),
-              k.getTransmissionRisk()
-          ));
-        }
-
+        List<RNExposureKey> exposureKeys =
+            DiagnosisKeyEncoding.INSTANCE.encodeDiagnosisKeys(result, false);
         promise.resolve(Util.convertListToWritableArray(exposureKeys));
       }
 
@@ -70,27 +57,6 @@ public class ExposureKeyModule extends ReactContextBaseJavaModule {
       }
     };
     Futures.addCallback(future, callback, AppExecutors.getLightweightExecutor());
-  }
-
-  /**
-   * Transforms from EN API's TEK object to our network package's expression of it, applying a
-   * default transmission risk. This default TR is temporary, while we determine that part of the EN
-   * API's contract.
-   */
-  private List<DiagnosisKey> toDiagnosisKeysWithTransmissionRisk(
-      List<TemporaryExposureKey> recentKeys) {
-    ImmutableList.Builder<DiagnosisKey> builder = new ImmutableList.Builder<>();
-    for (TemporaryExposureKey k : recentKeys) {
-      builder.add(
-          DiagnosisKey.newBuilder()
-              .setKeyBytes(k.getKeyData())
-              .setIntervalNumber(k.getRollingStartIntervalNumber())
-              .setRollingPeriod(k.getRollingPeriod())
-              // Accepting the default transmission risk for now, which the DiagnosisKey.Builder
-              // comes with pre-set.
-              .build());
-    }
-    return builder.build();
   }
 
   @ReactMethod

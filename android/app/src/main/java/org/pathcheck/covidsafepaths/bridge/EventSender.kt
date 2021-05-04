@@ -1,6 +1,7 @@
 package org.pathcheck.covidsafepaths.bridge
 
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.bridge.WritableArray
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.google.gson.Gson
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation
@@ -11,6 +12,7 @@ object EventSender {
     private const val BLUETOOTH_STATUS_CHANGED_EVENT = "onBluetoothStatusUpdated"
     private const val LOCATION_STATUS_CHANGED_EVENT = "onLocationStatusUpdated"
     private const val EN_EXPOSURE_RECORD_UPDATED_CHANGED_EVENT = "onExposureRecordUpdated"
+    private const val CHAFF_REQUEST_TRIGGERED = "onChaffRequestTriggered"
 
     fun sendExposureNotificationStatusChanged(
         reactContext: ReactContext?,
@@ -61,5 +63,14 @@ object EventSender {
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
             ?.emit(EN_EXPOSURE_RECORD_UPDATED_CHANGED_EVENT, exposureJson)
+    }
+
+    fun sendChaffRequest(
+        reactContext: ReactContext?,
+        exposureKeys: WritableArray
+    ) {
+        reactContext
+            ?.getJSModule(RCTDeviceEventEmitter::class.java)
+            ?.emit(CHAFF_REQUEST_TRIGGERED, exposureKeys)
     }
 }
