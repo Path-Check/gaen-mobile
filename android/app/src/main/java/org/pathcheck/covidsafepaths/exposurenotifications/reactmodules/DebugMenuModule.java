@@ -1,7 +1,5 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
-import static org.pathcheck.covidsafepaths.exposurenotifications.nearby.StateUpdatedWorker.IS_SIMULATING;
-
 import android.content.Intent;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -19,6 +17,7 @@ import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
@@ -74,7 +73,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void simulateExposure(Promise promise) {
     Intent exposureIntent = new Intent(getReactApplicationContext(), ExposureNotificationBroadcastReceiver.class);
     exposureIntent.setAction("com.google.android.gms.exposurenotification.ACTION_EXPOSURE_STATE_UPDATED");
-    exposureIntent.putExtra(IS_SIMULATING, true);
+    exposureIntent.putExtra(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, true);
     getReactApplicationContext().sendBroadcast(exposureIntent);
     promise.resolve(null);
   }

@@ -33,6 +33,7 @@ import org.pathcheck.covidsafepaths.MainApplication;
 import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
@@ -44,7 +45,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureSto
  */
 public class StateUpdatedWorker extends ListenableWorker {
   private static final String TAG = "StateUpdatedWorker";
-  public static final String IS_SIMULATING = "isSimulating";
 
   private final Context context;
   private final boolean isSimulating;
@@ -52,7 +52,7 @@ public class StateUpdatedWorker extends ListenableWorker {
   public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
     super(context, workerParams);
     this.context = context;
-    isSimulating = workerParams.getInputData().getBoolean(IS_SIMULATING, false);
+    isSimulating = workerParams.getInputData().getBoolean(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, false);
   }
 
   @NonNull
@@ -97,7 +97,8 @@ public class StateUpdatedWorker extends ListenableWorker {
 
   static void runOnce(Context context, Intent intent) {
     Data data = new Data.Builder()
-        .putBoolean(IS_SIMULATING, intent.getBooleanExtra(IS_SIMULATING, false))
+        .putBoolean(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED,
+            intent.getBooleanExtra(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, false))
         .build();
 
     WorkManager.getInstance(context).enqueue(
