@@ -242,26 +242,7 @@ final class ExposureManager: NSObject {
       self?.scheduleExposureDetectionBackgroundTaskIfNeeded()
     }
   }
-  /**
-   Registers the background task of sending chaff requests
-   All launch handlers must be registered before application finishes launching
-   */
-  @objc func registerChaffBackgroundTask() {
-    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.chaffBackgroundTaskIdentifier,
-                             using: .main) { [weak self] task in
-
-      // Perform the chaff request
-      let currentHour = Calendar.current.dateComponents([.hour], from: Date()).hour ?? 0
-
-      if (currentHour > 8 && currentHour < 19) {
-        self?.performChaffRequest()
-      }
-
-      // Schedule the next background task
-      self?.scheduleChaffBackgroundTaskIfNeeded()
-    }
-  }
-
+  
   /**
    Registers the background task of deleting exposures > 14 days old
    from the local database
