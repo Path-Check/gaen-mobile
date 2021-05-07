@@ -289,18 +289,14 @@ class ExposureManagerUnitTests: XCTestCase {
     let activateExpectation = self.expectation(description: "Activate gets called")
     let invalidateExpectation = self.expectation(description: "Invalidate gets called")
     
-    let registerExposureNotificationsStatusNotificationExpectation = self.expectation(description: "Registers for authorization changes")
-    let registerChaffRequestNotificationExpectation = self.expectation(description: "Registers for chaff request notifications")
-
+    let registerNotificationExpectation = self.expectation(description: "Registers for authorization changes")
+    
     let setExposureNotificationEnabledTrueExpectation = self.expectation(description: "When activated, if disabled, request to enable exposure notifications")
     
     let notificationCenterMock = NotificationCenterMock()
     notificationCenterMock.addObserverHandler = { (_, _, name, _) in
       if name == Notification.Name.ExposureNotificationStatusDidChange {
-        registerExposureNotificationsStatusNotificationExpectation.fulfill()
-      }
-      if name == Notification.Name.ChaffRequestTriggered {
-        registerChaffRequestNotificationExpectation.fulfill()
+        registerNotificationExpectation.fulfill()
       }
     }
     
@@ -327,8 +323,7 @@ class ExposureManagerUnitTests: XCTestCase {
                         notificationCenter: notificationCenterMock)
     wait(for: [activateExpectation,
                invalidateExpectation,
-               registerExposureNotificationsStatusNotificationExpectation,
-               registerChaffRequestNotificationExpectation,
+               registerNotificationExpectation,
                setExposureNotificationEnabledTrueExpectation], timeout: 1)
   }
 
@@ -497,7 +492,7 @@ class ExposureManagerUnitTests: XCTestCase {
     wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
   }
   
-  func testRegisterExposureDetectionBackgroundTask() {
+  func testRegisterBackgroundTask() {
     let registerExpectation = self.expectation(description: "A background task with the given identifier is registered")
     let bgSchedulerMock = BGTaskSchedulerMock()
     bgSchedulerMock.registerHandler = { identifier, launchHanlder in
@@ -505,11 +500,11 @@ class ExposureManagerUnitTests: XCTestCase {
       return true
     }
     let exposureManager = ExposureManager(backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.registerExposureDetectionBackgroundTask()
+    exposureManager.registerBackgroundTask()
     wait(for: [registerExpectation], timeout: 0)
   }
   
-  func testSubmitExposureDetectionBackgroundTask() {
+  func testSubmitBackgroundTask() {
     let mockEnManager = ENManagerMock()
     mockEnManager.exposureNotificationStatusHandler = {
       return .active
@@ -521,35 +516,7 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockEnManager,
                                           backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.scheduleExposureDetectionBackgroundTaskIfNeeded()
-    wait(for: [submitExpectation], timeout: 0)
-  }
-
-  func testRegisterChaffBackgroundTask() {
-    let registerExpectation = self.expectation(description: "A background task with the given identifier is registered")
-    let bgSchedulerMock = BGTaskSchedulerMock()
-    bgSchedulerMock.registerHandler = { identifier, launchHanlder in
-      registerExpectation.fulfill()
-      return true
-    }
-    let exposureManager = ExposureManager(backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.registerChaffBackgroundTask()
-    wait(for: [registerExpectation], timeout: 0)
-  }
-
-  func testSubmitChaffBackgroundTask() {
-    let mockEnManager = ENManagerMock()
-    mockEnManager.exposureNotificationStatusHandler = {
-      return .active
-    }
-    let submitExpectation = self.expectation(description: "A background task request is submitted")
-    let bgSchedulerMock = BGTaskSchedulerMock()
-    bgSchedulerMock.submitHandler = { taskRequest in
-      submitExpectation.fulfill()
-    }
-    let exposureManager = ExposureManager(exposureNotificationManager: mockEnManager,
-                                          backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.scheduleChaffBackgroundTaskIfNeeded()
+    exposureManager.scheduleBackgroundTaskIfNeeded()
     wait(for: [submitExpectation], timeout: 0)
   }
 

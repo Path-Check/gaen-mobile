@@ -42,7 +42,6 @@ enum ENAPIVersion { case V1, V2 }
 final class ExposureManager: NSObject {
 
   private static let backgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
-  private static let chaffBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).chaff"
   private static let deleteOldExposuresBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).delete-old-exposures"
 
   @objc private(set) static var shared: ExposureManager?
@@ -86,18 +85,11 @@ final class ExposureManager: NSObject {
         self?.activateSuccess()
       }
     }
-    // Schedule background tasks if needed whenever EN authorization status changes
+    // Schedule background task if needed whenever EN authorization status changes
     notificationCenter.addObserver(
       self,
-      selector: #selector(scheduleExposureDetectionBackgroundTaskIfNeeded),
+      selector: #selector(scheduleBackgroundTaskIfNeeded),
       name: .ExposureNotificationStatusDidChange,
-      object: nil
-    )
-
-    notificationCenter.addObserver(
-      self,
-      selector: #selector(scheduleChaffBackgroundTaskIfNeeded),
-      name: .ChaffRequestTriggered,
       object: nil
     )
   }
@@ -216,12 +208,6 @@ final class ExposureManager: NSObject {
     }, callback: callback)
   }
 
-  @objc func fetchChaffKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
-    getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
-      (keys ?? []).map { $0.chaffRepresentation }
-    }, callback: callback)
-  }
-
 
   // MARK: == Exposure Detection ==
 
@@ -229,7 +215,7 @@ final class ExposureManager: NSObject {
    Registers the background task of detecting exposures
     All launch handlers must be registered before application finishes launching
    */
-  @objc func registerExposureDetectionBackgroundTask() {
+  @objc func registerBackgroundTask() {
     bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
                              using: .main) { [weak self] task in
       guard let strongSelf = self else { return }
@@ -253,10 +239,9 @@ final class ExposureManager: NSObject {
       }
 
       // Schedule the next background task
-      self?.scheduleExposureDetectionBackgroundTaskIfNeeded()
+      self?.scheduleBackgroundTaskIfNeeded()
     }
   }
-
   /**
    Registers the background task of sending chaff requests
    All launch handlers must be registered before application finishes launching
@@ -295,17 +280,6 @@ final class ExposureManager: NSObject {
   @objc func scheduleExposureDetectionBackgroundTaskIfNeeded() {
     guard manager.exposureNotificationStatus == .active else { return }
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.backgroundTaskIdentifier)
-    taskRequest.requiresNetworkConnectivity = true
-    do {
-      try bgTaskScheduler.submit(taskRequest)
-    } catch {
-      print("Unable to schedule background task: \(error)")
-    }
-  }
-
-  @objc func scheduleChaffBackgroundTaskIfNeeded() {
-    guard manager.exposureNotificationStatus == .active else { return }
-    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.chaffBackgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
     do {
       try bgTaskScheduler.submit(taskRequest)
@@ -659,18 +633,6 @@ private extension ExposureManager {
       name: .ExposureNotificationStatusDidChange,
       object: self.exposureNotificationStatus.rawValue
     ))
-  }
-
-  func performChaffRequest() {
-    fetchChaffKeys { [weak self] (keyArray, error) in
-      if error != nil {
-        print("error: \(error.debugDescription)")
-      }
-      self?.notificationCenter.post(Notification(
-        name: .ChaffRequestTriggered,
-        object: keyArray
-      ))
-    }
   }
 
   func getDiagnosisKeys<T>(transform: @escaping ([ENTemporaryExposureKey]?) -> T,

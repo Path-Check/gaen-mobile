@@ -46,18 +46,6 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-export const subscribeToChaffRequestEvents = (
-  cb: () => void,
-): EventSubscription => {
-  const ExposureEvents = new NativeEventEmitter(
-    NativeModules.ExposureEventEmitter,
-  )
-
-  return ExposureEvents.addListener("onChaffRequestTriggered", () => {
-    cb()
-  })
-}
-
 const toStatus = (data: string): ENPermissionStatus => {
   switch (data) {
     case "Unknown":
@@ -231,17 +219,6 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
   } else {
     Logger.error("Invalid expousre keys from native layer", { rawKeys })
     throw new Error("Invalid exposure keys from native layer")
-  }
-}
-
-export const fetchChaffKeys = async (): Promise<ExposureKey[]> => {
-  const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchChaffKeys()
-  if (rawKeys.every(validRawExposureKey)) {
-    const exposureKeys = rawKeys.map(toExposureKey)
-    return exposureKeys
-  } else {
-    Logger.error("Invalid chaff keys from native layer", { rawKeys })
-    throw new Error("Invalid chaff keys from native layer")
   }
 }
 

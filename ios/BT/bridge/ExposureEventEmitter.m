@@ -2,7 +2,6 @@
 #import <React/RCTEventEmitter.h>
 
 // Notification/Event Names
-NSString *const onChaffRequestTriggered = @"onChaffRequestTriggered";
 NSString *const onEnabledStatusUpdated = @"onEnabledStatusUpdated";
 NSString *const onExposuresChanged = @"onExposureRecordUpdated";
 
@@ -32,7 +31,6 @@ RCT_EXPORT_MODULE();
   return @[
     onExposuresChanged,
     onEnabledStatusUpdated,
-    onChaffRequestTriggered
   ];
 }
 

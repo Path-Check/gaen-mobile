@@ -19,15 +19,6 @@ extension ENTemporaryExposureKey {
     ]
   }
 
-  var chaffRepresentation : [String: Any] {
-    return [
-      "key": keyData.base64EncodedString().shuffled(),
-      "rollingPeriod": rollingPeriod,
-      "rollingStartNumber": rollingStartNumber,
-      "transmissionRisk": transmissionRiskLevel
-    ]
-  }
-
   static func rollingStartNumber(_ date: Date) -> UInt32 {
     UInt32(Int(date.timeIntervalSince1970 / (24 * 60 * 60)) * Constants.intervalsPerRollingPeriod)
   }
