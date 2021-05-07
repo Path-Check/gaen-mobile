@@ -492,7 +492,7 @@ class ExposureManagerUnitTests: XCTestCase {
     wait(for: [addNotificatiionRequestExpectation, removeNotificationsExpectation], timeout: 0)
   }
   
-  func testRegisterBackgroundTask() {
+  func testregisterExposureDetectionBackgroundTask() {
     let registerExpectation = self.expectation(description: "A background task with the given identifier is registered")
     let bgSchedulerMock = BGTaskSchedulerMock()
     bgSchedulerMock.registerHandler = { identifier, launchHanlder in
@@ -500,7 +500,7 @@ class ExposureManagerUnitTests: XCTestCase {
       return true
     }
     let exposureManager = ExposureManager(backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.registerBackgroundTask()
+    exposureManager.registerExposureDetectionBackgroundTask()
     wait(for: [registerExpectation], timeout: 0)
   }
   
@@ -516,7 +516,7 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockEnManager,
                                           backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.scheduleBackgroundTaskIfNeeded()
+    exposureManager.scheduleExposureDetectionBackgroundTaskIfNeeded()
     wait(for: [submitExpectation], timeout: 0)
   }
 
