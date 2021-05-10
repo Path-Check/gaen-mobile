@@ -92,7 +92,7 @@ This project allows the following optional integrations through sections in the 
 
 ## Learn More 📚
 
-[COVID PathCheck Website](https://covidsafepaths.org/)
+[COVID PathCheck Website](https://www.pathcheck.org/)
 
 [Apps Gone Rogue: Maintaining Personal Privacy in an Epidemic](https://drive.google.com/file/d/1nwOR4drE3YdkCkyy_HBd6giQPPhLEkRc/view?usp=sharing) - The orginal white paper.
 
