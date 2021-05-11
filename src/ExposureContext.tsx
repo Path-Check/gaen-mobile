@@ -11,8 +11,6 @@ import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
 import * as NativeModule from "./gaen/nativeModule"
-import { calculateHmac } from "./AffectedUserFlow/hmac"
-import * as API from "./AffectedUserFlow/verificationAPI"
 
 type Posix = number
 
@@ -66,27 +64,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [])
 
-  const sendChaffRequest = useCallback(async () => {
-    const code = Math.random().toString().substring(2, 10)
-    const response = await API.postCode(code, true)
-
-    if (response.kind === "success") {
-      const token = response.body.token
-      const exposureKeys = await NativeModule.fetchChaffKeys()
-      const [hmacDigest] = await calculateHmac(exposureKeys)
-
-      const certResponse = await API.postTokenAndHmac(token, hmacDigest, true)
-
-      if (certResponse.kind === "success") {
-        trackEvent("epi_analytics", "chaff_request_sent")
-      } else {
-        trackEvent("epi_analytics", "chaff_request_failed")
-      }
-    } else {
-      trackEvent("epi_analytics", "chaff_request_failed")
-    }
-  }, [trackEvent])
-
   const refreshExposureInfo = useCallback(async () => {
     const exposureInfo = await NativeModule.getCurrentExposures()
     setExposureInfo(exposureInfo)
@@ -96,8 +73,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    // Exposures subscription
-    const exposuresSubscription = NativeModule.subscribeToExposureEvents(
+    const subscription = NativeModule.subscribeToExposureEvents(
       (exposureInfo: ExposureInfo) => {
         setExposureInfo(exposureInfo)
         getLastExposureDetectionDate()
@@ -105,17 +81,10 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     )
     getLastExposureDetectionDate()
 
-    // Chaff subscription
-    const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(() => {
-      sendChaffRequest()
-    })
-    sendChaffRequest()
-
     return () => {
-      exposuresSubscription.remove()
-      chaffSubscription.remove()
+      subscription.remove()
     }
-  }, [getLastExposureDetectionDate, sendChaffRequest])
+  }, [getLastExposureDetectionDate])
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(() => {
