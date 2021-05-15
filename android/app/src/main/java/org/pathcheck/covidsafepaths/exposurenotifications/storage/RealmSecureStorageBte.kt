@@ -8,7 +8,6 @@ import com.google.android.gms.nearby.exposurenotification.DailySummary
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
-import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
@@ -19,6 +18,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.Sympto
 import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.temporal.ChronoUnit
+import java.security.SecureRandom
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
@@ -33,21 +33,24 @@ object RealmSecureStorageBte {
     private const val MANUALLY_KEYED_KEY_INDEX = 2
     private const val MANUALLY_KEYED_PRESHARED_SECRET = "" // This will not be used as we do not support < 18
     private const val KEY_REALM_ENCRYPTION_KEY = "KEY_REALM_ENCRYPTION_KEY"
+    private const val EXPOSURE_KEY_LIFESPAN: Long = 14
 
     private val realmConfig: RealmConfiguration
 
     init {
         val encryptionKey = getEncryptionKey()
 
-        val builder = RealmConfiguration.Builder()
+        RealmConfiguration.Builder()
             .encryptionKey(encryptionKey)
             .addModule(SafePathsBteRealmModule())
             .schemaVersion(SCHEMA_VERSION)
             .migration(Migration())
+            .name("safepathsbte.realm")
+            .apply {
+                realmConfig = build()
+            }
 
-        builder.name("safepathsbte.realm")
-
-        realmConfig = builder.build()
+        deleteSymptomLogsOlderThan(EXPOSURE_KEY_LIFESPAN)
     }
 
     private fun getEncryptionKey(): ByteArray {
