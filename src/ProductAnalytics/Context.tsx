@@ -51,6 +51,7 @@ const ProductAnalyticsProvider: FunctionComponent<{
     setUserConsentedToAnalytics,
   ] = useState<boolean>(false)
 
+  // Check if the user consented to Matomo analytics, save the answer to state.
   useEffect(() => {
     const checkAnalyticsConsent = async () => {
       const userConsented = await StorageUtils.getAnalyticsConsent()

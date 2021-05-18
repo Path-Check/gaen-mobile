@@ -91,7 +91,9 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     ])
   }
 
+  /* After saving diagnostic keys, save the exposures to Matomo. */
   const trackEvents = async () => {
+    console.log("Tracking events.")
     const currentExposures = await getCurrentExposures()
     trackEvent("product_analytics", "key_submission_consented_to")
     trackEvent(
@@ -159,6 +161,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
 
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
+    console.log("handle on press")
     const response = await postDiagnosisKeys(
       exposureKeys,
       regionCodes,
@@ -168,14 +171,18 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       revisionToken,
       symptomOnsetDate,
     )
+    console.log("got response")
     setIsLoading(false)
     if (response.kind === "success") {
+      console.log("success")
       storeRevisionToken(response.revisionToken)
       trackEvents()
       navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
+      console.log("no op")
       handleNoOpResponse(response)
     } else {
+      console.log("failed")
       handleFailureResponse(response)
     }
   }
