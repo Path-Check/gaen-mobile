@@ -75,12 +75,13 @@ const VerificationCodeForm: FunctionComponent = () => {
       undefined,
       currentExposures.length,
     )
+    return
   }
 
   const handleOnPressSubmit = async () => {
     setIsLoading(true)
     setErrorMessage(defaultErrorMessage)
-    trackEvents()
+    await trackEvents()
     try {
       const response = await API.submitDiagnosisKeys(code, testDate)
 
