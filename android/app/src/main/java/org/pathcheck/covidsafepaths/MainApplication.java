@@ -17,9 +17,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
 public class MainApplication extends Application implements ReactApplication {
 
+  private static final long EXPOSURE_KEY_LIFESPAN = 14L;
   private static Context context;
 
   private final ReactNativeHost reactNativeHost =
@@ -55,9 +57,17 @@ public class MainApplication extends Application implements ReactApplication {
     MainApplication.context = getApplicationContext();
     AndroidThreeTen.init(this);
     SoLoader.init(this, /* native exopackage */ false);
-    Realm.init(this);
+    initializeRealm();
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());    
     initializeBugsnag();
+  }
+
+  /**
+   * Sets up the realm database and prunes off exposures that are beyond the 14 day expiration date.
+   */
+  private void initializeRealm() {
+    Realm.init(this);
+    RealmSecureStorageBte.INSTANCE.deleteExposureEntityOlderThan(EXPOSURE_KEY_LIFESPAN);
   }
 
   @SuppressWarnings("ConstantConditions")

@@ -33,7 +33,6 @@ object RealmSecureStorageBte {
     private const val MANUALLY_KEYED_KEY_INDEX = 2
     private const val MANUALLY_KEYED_PRESHARED_SECRET = "" // This will not be used as we do not support < 18
     private const val KEY_REALM_ENCRYPTION_KEY = "KEY_REALM_ENCRYPTION_KEY"
-    private const val EXPOSURE_KEY_LIFESPAN: Long = 14
 
     private val realmConfig: RealmConfiguration
 
@@ -49,8 +48,6 @@ object RealmSecureStorageBte {
             .apply {
                 realmConfig = build()
             }
-
-        deleteSymptomLogsOlderThan(EXPOSURE_KEY_LIFESPAN)
     }
 
     private fun getEncryptionKey(): ByteArray {
@@ -171,6 +168,20 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.insert(exposure)
+            }
+        }
+    }
+
+    fun deleteExposureEntityOlderThan(days: Long) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.where(ExposureEntity::class.java)
+                    .lessThan(
+                        "dateMillisSinceEpoch",
+                        daysAgo(days)
+                    )
+                    .findAll()
+                    ?.deleteAllFromRealm()
             }
         }
     }

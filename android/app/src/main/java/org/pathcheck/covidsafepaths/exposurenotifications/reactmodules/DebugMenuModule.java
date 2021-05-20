@@ -13,6 +13,8 @@ import com.google.common.util.concurrent.Futures;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
@@ -21,6 +23,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Instant;
 
@@ -28,6 +31,7 @@ import org.threeten.bp.Instant;
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
   static final String MODULE_NAME = "DebugMenuModule";
+  static final long EXPOSURE_KEY_LIFESPAN = 14;
 
   public DebugMenuModule(ReactApplicationContext context) {
     super(context);
@@ -136,5 +140,12 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void showLastProcessedFilePath(Promise promise) {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
+  }
+
+  @ReactMethod
+  public void addOldExposure(Promise promise) {
+    long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
+    RealmSecureStorageBte.INSTANCE.insertExposure(ExposureEntity.create(expiredDate, expiredDate));
+    promise.resolve(null);
   }
 }
