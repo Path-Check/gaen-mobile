@@ -56,7 +56,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
           RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
           diagnosisKeys.add(diagnosisKey);
         }
-
+ 
         promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
       }
 
@@ -127,7 +127,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                 promise.reject(exception);
               }
             };
-
+ 
             Futures.addCallback(
                 exposureNotificationsClient.requestPermissionToStartTracing(reactContext),
                 callback,
