@@ -14,7 +14,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
@@ -142,6 +141,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
   }
 
+  
   @ReactMethod
   public void addOldExposure(Promise promise) {
     long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
