@@ -39,15 +39,15 @@ object RealmSecureStorageBte {
     init {
         val encryptionKey = getEncryptionKey()
 
-        val builder = RealmConfiguration.Builder()
+        RealmConfiguration.Builder()
             .encryptionKey(encryptionKey)
             .addModule(SafePathsBteRealmModule())
             .schemaVersion(SCHEMA_VERSION)
             .migration(Migration())
-
-        builder.name("safepathsbte.realm")
-
-        realmConfig = builder.build()
+            .name("safepathsbte.realm")
+            .apply {
+                realmConfig = build()
+            }
     }
 
     private fun getEncryptionKey(): ByteArray {
@@ -168,6 +168,20 @@ object RealmSecureStorageBte {
         getRealmInstance().use {
             it.executeTransaction { db ->
                 db.insert(exposure)
+            }
+        }
+    }
+
+    fun deleteExposureEntityOlderThan(days: Long) {
+        getRealmInstance().use {
+            it.executeTransaction { db ->
+                db.where(ExposureEntity::class.java)
+                    .lessThan(
+                        "dateMillisSinceEpoch",
+                        daysAgo(days)
+                    )
+                    .findAll()
+                    ?.deleteAllFromRealm()
             }
         }
     }

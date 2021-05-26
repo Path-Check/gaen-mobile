@@ -53,4 +53,11 @@ RCT_REMAP_METHOD(showLastProcessedFilePath,
   [[ExposureManager shared] handleDebugAction:DebugActionShowLastProcessedFilePath resolve:resolve reject:reject];
 }
 
+RCT_REMAP_METHOD(addOldExposure,
+                 addOldExposureResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] handleDebugAction:DebugActionAddOldExposure resolve:resolve reject:reject];
+}
+
 @end

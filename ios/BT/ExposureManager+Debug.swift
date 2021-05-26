@@ -11,12 +11,12 @@ import RealmSwift
 
 protocol ExposureManagerDebuggable {
   func handleDebugAction(_ action: DebugAction,
-                               resolve: @escaping RCTPromiseResolveBlock,
-                               reject: @escaping RCTPromiseRejectBlock)
+                         resolve: @escaping RCTPromiseResolveBlock,
+                         reject: @escaping RCTPromiseRejectBlock)
 }
 
 extension ExposureManager: ExposureManagerDebuggable {
-
+  
   @objc func handleDebugAction(_ action: DebugAction,
                                resolve: @escaping RCTPromiseResolveBlock,
                                reject: @escaping RCTPromiseRejectBlock) {
@@ -48,6 +48,17 @@ extension ExposureManager: ExposureManagerDebuggable {
     case .showLastProcessedFilePath:
       let path = btSecureStorage.userState.urlOfMostRecentlyDetectedKeyFile
       resolve(path)
+    case .addOldExposure:
+      // Store an old exposure in the phone's local storage to use later.
+      let oldExposure = Exposure(id: UUID().uuidString,
+                                 date: Date().posixRepresentation - 14 * 24 * 60 * 60 * 1000, weightedDurationSum: 2000.0)
+      // Append an old exposure to our list of exposures
+      btSecureStorage.exposures.append(oldExposure)
+      
+      // OR we can just store the exposure and forget the rest
+      //      btSecureStorage.storeExposures([oldExposure])s
+      notifyUserExposureDetected()
+      resolve("Exposures: \(btSecureStorage.userState.exposures)")
     }
   }
 }
