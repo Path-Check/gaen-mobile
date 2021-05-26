@@ -223,19 +223,6 @@ android {
         pickFirst "lib/x86/libc++_shared.so"
         pickFirst "lib/x86_64/libc++_shared.so"
     }
-
-    sourceSets {
-        debug {
-            java {
-                srcDirs = ['src/debug/java', 'src/debug/debugonly/java']
-            }
-        }
-        staging {
-            java {
-                srcDirs = ['src/debug/java']
-            }
-        }
-    }
 }
 
 ktlint {
