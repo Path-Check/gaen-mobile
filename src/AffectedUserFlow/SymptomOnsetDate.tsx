@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from "react"
 import {
   Platform,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -79,7 +80,7 @@ const SymptomOnsetDate: FunctionComponent = () => {
   const noSymptomsContainerStyle = localSymptomOnsetDate ? { opacity: 0.5 } : {}
 
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container}>
       <View>
         <Text style={style.headerText}>
           {t("export.symptom_onset.symptoms")}
@@ -138,7 +139,7 @@ const SymptomOnsetDate: FunctionComponent = () => {
         <Text style={style.buttonText}>{t("common.continue")}</Text>
         <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   )
 }
 
