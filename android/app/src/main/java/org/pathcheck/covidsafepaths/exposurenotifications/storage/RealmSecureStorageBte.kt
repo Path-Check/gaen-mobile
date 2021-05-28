@@ -8,7 +8,6 @@ import com.google.android.gms.nearby.exposurenotification.DailySummary
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmResults
-import java.security.SecureRandom
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity
@@ -19,6 +18,7 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.Sympto
 import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.temporal.ChronoUnit
+import java.security.SecureRandom
 
 /**
  * Modified from GPS target to support Exposure Notification on-device data
