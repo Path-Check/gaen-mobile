@@ -80,7 +80,7 @@ const SymptomOnsetDate: FunctionComponent = () => {
   const noSymptomsContainerStyle = localSymptomOnsetDate ? { opacity: 0.5 } : {}
 
   return (
-    <ScrollView style={style.container}>
+    <ScrollView contentContainerStyle={style.container}>
       <View>
         <Text style={style.headerText}>
           {t("export.symptom_onset.symptoms")}
