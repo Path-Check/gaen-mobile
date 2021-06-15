@@ -25,7 +25,7 @@ NativeModules.ExposureEventEmitter = NativeModules.ExposureEventEmitter || {
 jest.mock("react-native-linear-gradient")
 
 // Silence YellowBox useNativeDriver warning
-jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper")
+jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper")
 
 jest.mock("@react-native-community/async-storage", () => mockAsyncStorage)
 jest.mock("@react-native-community/netinfo", () => mockRNCNetInfo)
