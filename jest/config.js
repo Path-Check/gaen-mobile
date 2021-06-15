@@ -18,7 +18,7 @@ module.exports = {
     },
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(@react-native-community|react-native|react-native-linear-gradient|react-native-simple-crypto|react-native-flash-message|react-native-iphone-x-helper)/)",
+    "node_modules/(?!(@react-native-community|@react-native|react-native|react-native-linear-gradient|react-native-simple-crypto|react-native-flash-message|react-native-iphone-x-helper)/)",
   ],
   rootDir: "../",
   testPathIgnorePatterns: [
