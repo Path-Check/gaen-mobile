@@ -299,6 +299,10 @@
     "question_icon": "Icono de signo de pregunta",
     "unchecked_checkbox": "Casilla de verificación no marcada"
   },
+  "links": {
+    "health_authority_advice_url": "",
+    "health_authority_learn_more_url": ""
+  },
   "navigation": {
     "exposure_history": "Exposiciones",
     "home": "Panel",

@@ -39,7 +39,10 @@ const NextSteps: FunctionComponent<NextStepsProps> = ({ exposureDate }) => {
       "next_steps",
       exposureDate,
     )
-    Linking.openURL(healthAuthorityAdviceUrl)
+
+    // TODO: Does this break our model.
+    const url = t("links.health_authority_advice_url")
+    Linking.openURL(url)
   }
 
   const handleOnPressPersonalizeMyGuidance = () => {

@@ -17,7 +17,9 @@ const NoExposures: FunctionComponent = () => {
   } = useConfigurationContext()
 
   const handleOnPressHALink = () => {
-    Linking.openURL(healthAuthorityLearnMoreUrl)
+    const url = t("links.health_authority_learn_more_url")
+    // Linking.openURL(healthAuthorityLearnMoreUrl)
+    Linking.openURL(url)
   }
 
   const stayApartRecommendationText =

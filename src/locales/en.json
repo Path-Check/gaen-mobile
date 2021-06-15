@@ -299,6 +299,10 @@
     "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
+  "links": {
+    "health_authority_advice_url": "",
+    "health_authority_learn_more_url": ""
+  },
   "navigation": {
     "exposure_history": "Exposures",
     "home": "Dashboard",
