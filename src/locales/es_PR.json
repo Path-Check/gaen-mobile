@@ -555,7 +555,7 @@
     "invalid_code_title": "Código no válido",
     "network_connection_body": "Necesita estar conectado a WiFi para enviar un código de verificación.",
     "network_connection_title": "No hay conexión a internet",
-    "no_keys_on_device_body": "No ha tenido la aplicación el tiempo suficiente para compartir exposiciones. Continúe aislándose.",
+    "no_keys_on_device_body": "La aplicación no ha tenido el tiempo suficiente para compartir exposiciones. Continúe aislándose.",
     "no_keys_on_device_title": "Sin exposiciones en el dispositivo",
     "not_authorized_body": "No autorizó a la aplicación para que comparta sus ID aleatorios.",
     "not_authorized_title": "No autorizó",
