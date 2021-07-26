@@ -82,6 +82,7 @@ final class ExposureManager: NSObject {
     super.init()
     self.manager.activate { [weak self] error in
       if error == nil {
+        print("SUCCESS")
         self?.activateSuccess()
       }
     }
@@ -264,16 +265,36 @@ final class ExposureManager: NSObject {
     bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.chaffBackgroundTaskIdentifier,
                              using: .main) { [weak self] task in
 
-      // Perform the chaff request
       let currentHour = Calendar.current.dateComponents([.hour], from: Date()).hour ?? 0
 
       if (currentHour > 8 && currentHour < 19) {
-        self?.performChaffRequest()
+
+      // We want to throttle chaff to at the most, every 24 hours then perform a randomness flip.
+      // Perform the chaff request, the following code works as follows:
+      // Get a random value, if the value is between 8 and 19 and it has been 24 hours since the
+      // last successful request, perform a new request.
+        let defaults = UserDefaults.standard
+        let randomNum = Int.random(in: 0..<20)
+        let lastChaffTimestamp = defaults.double(forKey: "lastChaffTimestamp")
+        // self?.performChaffRequest()
+        
+        if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmittedChaff: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
+          self?.performChaffRequest()
+        }
       }
 
       // Schedule the next background task
       self?.scheduleChaffBackgroundTaskIfNeeded()
     }
+  }
+  
+  /**
+      Checks to see if it has been twenty four hours since the last chaff submission.
+   */
+  func hasBeenTwentyFourHours(lastSubmittedChaff: Double) -> Bool {
+    let timeComparison = Date.init(timeIntervalSinceNow: lastSubmittedChaff)
+    let twentyFourHoursAgo = Date.init(timeIntervalSinceNow: -3600 * 24)
+    return timeComparison >= twentyFourHoursAgo
   }
 
   @objc func scheduleExposureDetectionBackgroundTaskIfNeeded() {
