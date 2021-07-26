@@ -1,14 +1,17 @@
 import React, { FunctionComponent } from "react"
 import {
-  StyleSheet,
-  View,
   Image,
+  Linking,
+  Pressable,
   ScrollView,
+  StyleSheet,
   TouchableOpacity,
+  View,
 } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { SvgXml } from "react-native-svg"
+import env from "react-native-config"
 
 import { useStatusBarEffect, AffectedUserFlowStackScreens } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"
@@ -16,12 +19,24 @@ import { Text } from "../components"
 
 import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
+import { useConfigurationContext } from "../ConfigurationContext"
 
 export const AffectedUserFlowIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
   const { t } = useTranslation()
+  const {
+    displayRequestCallbackUrl,
+    supportPhoneNumber,
+  } = useConfigurationContext()
   const navigation = useNavigation()
   const { healthAuthorityName } = useCustomCopy()
+
+  const handleOnPressCallback = () => {
+    const url = env.CALLBACK_REQUEST_FORM_URL
+    if (url) {
+      Linking.openURL(url)
+    }
+  }
 
   const handleOnPressContinue = () => {
     navigation.navigate(AffectedUserFlowStackScreens.AffectedUserCodeInput)
@@ -29,6 +44,20 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
 
   const handleOnPressSecondaryButton = () => {
     navigation.navigate(AffectedUserFlowStackScreens.VerificationCodeInfo)
+  }
+
+  const renderText = () => {
+    if (displayRequestCallbackUrl) {
+      return t("callback_request.verification_code_warning", {
+        healthAuthorityName,
+      })
+    } else {
+      return t("export.intro.body2", { healthAuthorityName })
+    }
+  }
+
+  const handleOnPressSupportNumber = () => {
+    Linking.openURL(`tel:${supportPhoneNumber}`)
   }
 
   return (
@@ -49,10 +78,36 @@ export const AffectedUserFlowIntro: FunctionComponent = () => {
           {t("export.intro.body1", { healthAuthorityName })}
         </Text>
         <Text style={style.bodyText}>
-          {t("export.intro.body2", { healthAuthorityName })}
+          {renderText()}
+          {displayRequestCallbackUrl && (
+            <Pressable
+              onPress={handleOnPressSupportNumber}
+              style={style.supportNumberButton}
+            >
+              <Text style={style.supportNumberButtonText}>
+                {supportPhoneNumber}
+              </Text>
+            </Pressable>
+          )}
+          {displayRequestCallbackUrl && (
+            <Text style={style.bodyText}>
+              {t("callback_request.verification_code_warning2")}
+            </Text>
+          )}
         </Text>
       </View>
       <View>
+        {displayRequestCallbackUrl && (
+          <TouchableOpacity
+            style={style.button}
+            onPress={handleOnPressCallback}
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
+            accessibilityRole="button"
+            accessibilityLabel={t("common.request_callback")}
+          >
+            <Text style={style.buttonText}>{t("common.request_callback")}</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={style.button}
           onPress={handleOnPressContinue}
@@ -129,6 +184,13 @@ const style = StyleSheet.create({
   },
   secondaryButtonText: {
     ...Typography.button.secondaryLeftIcon,
+  },
+  supportNumberButton: {
+    marginTop: -5,
+    paddingVertical: Spacing.tiny,
+  },
+  supportNumberButtonText: {
+    ...Typography.button.anchorLink,
   },
 })
 

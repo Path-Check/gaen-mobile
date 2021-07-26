@@ -36,7 +36,8 @@ const ProductAnalyticsConsentScreen: FunctionComponent = () => {
   }
 
   const handleOnPressPrivacyPolicy = () => {
-    Linking.openURL(healthAuthorityPrivacyPolicyUrl)
+    const url = healthAuthorityPrivacyPolicyUrl
+    if (url) Linking.openURL(url)
   }
   const privacyPolicyLinkText = t("product_analytics.privacy_policy")
 

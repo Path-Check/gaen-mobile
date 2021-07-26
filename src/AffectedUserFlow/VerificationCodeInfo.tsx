@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react"
-import { View, ScrollView, Pressable, StyleSheet, Linking } from "react-native"
+import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 import { useStatusBarEffect } from "../navigation/index"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { SvgXml } from "react-native-svg"
+import env from "react-native-config"
 
 import { Text } from "../components"
 import { useConfigurationContext } from "../ConfigurationContext"
@@ -21,6 +22,8 @@ const MoreInfo: FunctionComponent = () => {
     verificationCodeOnSubmitInfo,
   } = useCustomCopy()
   const {
+    displayRequestCallbackUrl,
+    healthAuthorityRequestCallbackNumber,
     healthAuthorityVerificationCodeInfoUrl,
     supportPhoneNumber,
   } = useConfigurationContext()
@@ -37,6 +40,13 @@ const MoreInfo: FunctionComponent = () => {
     verificationCodeOnSubmitInfo ||
     t("export.verification_code_info.what_happens_body")
 
+  const handleOnPressCallback = () => {
+    const url = env.CALLBACK_REQUEST_FORM_URL
+    if (url) {
+      Linking.openURL(url)
+    }
+  }
+
   const handleOnPressLink = () => {
     const url = healthAuthorityVerificationCodeInfoUrl
     if (url) {
@@ -46,6 +56,19 @@ const MoreInfo: FunctionComponent = () => {
 
   const handleOnPressSupportNumber = () => {
     Linking.openURL(`tel:${supportPhoneNumber}`)
+  }
+
+  const renderText = () => {
+    if (displayRequestCallbackUrl) {
+      return t("callback_request.phonenumber_display_text", {
+        healthAuthorityName,
+        healthAuthorityRequestCallbackNumber,
+      })
+    } else {
+      return t("export.verification_code_info.contact_at", {
+        healthAuthorityName,
+      })
+    }
   }
 
   return (
@@ -68,21 +91,39 @@ const MoreInfo: FunctionComponent = () => {
           {Boolean(supportPhoneNumber) && (
             <View style={style.supportNumberContainer}>
               <Text style={style.contentText}>
-                {t("export.verification_code_info.contact_at", {
-                  healthAuthorityName,
-                })}
+                {renderText()}
+                <Pressable
+                  onPress={handleOnPressSupportNumber}
+                  style={style.supportNumberButton}
+                >
+                  <Text style={style.supportNumberButtonText}>
+                    {supportPhoneNumber}
+                  </Text>
+                </Pressable>
+                {displayRequestCallbackUrl && (
+                  <Text style={style.contentText}>
+                    {t("callback_request.phonenumber_display_text2")}
+                  </Text>
+                )}
               </Text>
-
-              <Pressable
-                onPress={handleOnPressSupportNumber}
-                style={style.supportNumberButton}
-              >
-                <Text style={style.supportNumberButtonText}>
-                  {supportPhoneNumber}
-                </Text>
-              </Pressable>
             </View>
           )}
+
+          {Boolean(displayRequestCallbackUrl) && (
+            <Pressable
+              accessibilityHint={t(
+                "accessibility.hint.navigates_to_external_website",
+              )}
+              accessibilityRole="button"
+              style={style.callbackButton}
+              onPress={handleOnPressCallback}
+            >
+              <Text style={style.callbackButtonText}>
+                {t("common.request_callback")}
+              </Text>
+            </Pressable>
+          )}
+
           {Boolean(healthAuthorityVerificationCodeInfoUrl) && (
             <Pressable
               accessibilityHint={t(
@@ -135,6 +176,7 @@ const style = StyleSheet.create({
     ...Typography.body.x30,
   },
   supportNumberButton: {
+    marginTop: -5,
     paddingVertical: Spacing.tiny,
   },
   supportNumberButtonText: {
@@ -147,6 +189,13 @@ const style = StyleSheet.create({
   buttonText: {
     ...Typography.button.outlined,
     marginRight: Spacing.small,
+  },
+  callbackButton: {
+    ...Buttons.primary.base,
+    marginVertical: Spacing.small,
+  },
+  callbackButtonText: {
+    ...Typography.button.primary,
   },
 })
 
