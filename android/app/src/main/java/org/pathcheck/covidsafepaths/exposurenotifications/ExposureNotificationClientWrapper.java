@@ -23,11 +23,12 @@ import java.util.concurrent.TimeUnit;
 import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
+import org.pathcheck.covidsafepaths.exposurenotifications.exceptions.ShareExposureKeysException;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureConfigurations;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.RequestCodes;
-import org.threeten.bp.Duration;
-
+import org.threeten.bp.Duration; 
+ 
 /**
  * Wrapper around {@link com.google.android.gms.nearby.Nearby} APIs.
  */
@@ -152,7 +153,7 @@ public class ExposureNotificationClientWrapper {
         requestPermissionToGetExposureKeys(context);
       } else {
         if (getKeysCompleter != null) {
-          getKeysCompleter.setException(new Exception("Cancelled by user"));
+          getKeysCompleter.setException(new ShareExposureKeysException());
           getKeysCompleter = null;
         }
       }

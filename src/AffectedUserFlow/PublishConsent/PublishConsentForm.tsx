@@ -100,6 +100,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
       undefined,
       currentExposures.length,
     )
+    return
   }
 
   const noOpAlertContent = ({ reason, newKeysInserted }: PostKeysNoOp) => {
@@ -171,7 +172,7 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
     setIsLoading(false)
     if (response.kind === "success") {
       storeRevisionToken(response.revisionToken)
-      trackEvents()
+      await trackEvents()
       navigation.navigate(AffectedUserFlowStackScreens.AffectedUserComplete)
     } else if (response.kind === "no-op") {
       handleNoOpResponse(response)

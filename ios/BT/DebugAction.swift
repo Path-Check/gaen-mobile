@@ -4,5 +4,6 @@
   simulateExposure,
   fetchExposures,
   resetExposures,
-  showLastProcessedFilePath
+  showLastProcessedFilePath,
+  addOldExposure
 }

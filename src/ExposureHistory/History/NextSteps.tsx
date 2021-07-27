@@ -33,21 +33,13 @@ const NextSteps: FunctionComponent<NextStepsProps> = ({ exposureDate }) => {
   const { trackEvent } = useProductAnalyticsContext()
 
   const handleOnPressNextStep = () => {
-    const daysSince = calculateDaysSince(exposureDate)
     trackEvent(
       "product_analytics",
       "tapped_next_steps_button",
       "next_steps",
-      daysSince,
+      exposureDate,
     )
     Linking.openURL(healthAuthorityAdviceUrl)
-  }
-
-  const calculateDaysSince = (exposureDate: number) => {
-    const n = new Date()
-    const diffInTime = n.getTime() - exposureDate
-    const diffInDays = diffInTime / (1000 * 3600 * 24)
-    return diffInDays
   }
 
   const handleOnPressPersonalizeMyGuidance = () => {

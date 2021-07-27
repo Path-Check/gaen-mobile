@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Versión:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "verificaciones de nuevas exposiciones a COVID-19",
+      "closes_current_screen": "cierra la pantalla actual",
+      "deletes_data": "elimina datos y navega a la configuración de la aplicación",
+      "navigates_to_external_website": "navega a un sitio web externo",
+      "navigates_to_home_screen": "navega a la pantalla de inicio",
+      "navigates_to_new_screen": "navega a una nueva pantalla",
+      "navigates_to_next_screen_without_enabling": "navega a la siguiente pantalla sin habilitar la detección de exposición",
+      "opens_share_sheet": "abre compartir hoja"
+    }
+  },
   "callback": {
     "firstname": "Nombre",
     "if_you_prefer": "Si lo prefiere; llame directamente al",
@@ -23,6 +35,7 @@
     "continue": "Continuar",
     "done": "Finalizado",
     "edit": "Editar",
+    "hascode": "¿Ya tienes un código?",
     "learn_more": "Más información",
     "maybe_later": "Quizás más tarde",
     "more": "Más",
@@ -70,7 +83,11 @@
     "wear_a_face_covering": "use una cubierta facial."
   },
   "errors": {
+    "authorization_failure": "No está autorizado para realizar esta acción.",
     "description": "Se ha producido un error. Vuelva a cargar la aplicación.",
+    "invalid_phone_number": "El número de teléfono debe tener 10 dígitos",
+    "maxed_submission_header": "Máximo envíos alcanzados",
+    "maxed_submission_requests": "Has alcanzado el número máximo de envíos, espera 5 minutos para volver a enviarlos.",
     "reload": "Volver a cargar",
     "something_went_wrong": "Algo salió mal",
     "title": "Error desconocido",
@@ -126,7 +143,7 @@
       "body1": "Si recibió un código de verificación de {{healthAuthorityName}} para una prueba positiva del COVID-19, puede enviar el código de verificación en la siguiente pantalla.",
       "body2": "Si no tiene un código, pero tiene una prueba positiva, necesitará obtener un código de verificación de {{healthAuthorityName}} antes de continuar.",
       "header": "¿Tiene su código de verificación?",
-      "title": "Información del código de verificación",
+      "title": "Información del código",
       "what_is_a": "¿Qué es un código de verificación?"
     },
     "never_mind_button_title": "No importa",
@@ -210,6 +227,8 @@
     "exposure_check_complete": "Comprobación de exposición completa",
     "location_body": "Google requiere que los dispositivos que ejecutan Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar las notificaciones de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
     "location_title": "Active el servicio de ubicación",
+    "requires_network_body": "Asegúrese de que el modo avión esté desactivado y que el acceso a Internet esté disponible a través de datos móviles o WiFi.",
+    "requires_network_title": "Incapaz de conectarse a Internet",
     "set_active_region_ios_body": "Abra la aplicación Configuración, navegue hasta la configuración de Notificaciones de exposición para esta aplicación, luego presione “Establecer como región activa”.",
     "set_active_region_ios_title": "Establecer región activa",
     "share_exposure_information_ios_body": "Abra la aplicación Configuración, luego navegue hasta la configuración de Notificaciones de exposición para esta aplicación. Asegúrese de que “Compartir información de exposición” esté activada, luego presione “Establecer como región activa”.",
@@ -267,7 +286,8 @@
       "more_info": "¿Qué es un código de verificación?",
       "report_positive_test": "Informar sobre prueba positiva",
       "submit_code": "Enviar código"
-    }
+    },
+    "view_faq": "Ver preguntas frecuentes"
   },
   "label": {
     "checked_checkbox": "Casilla de verificación marcada",
@@ -535,7 +555,7 @@
     "invalid_code_title": "Código no válido",
     "network_connection_body": "Necesita estar conectado a WiFi para enviar un código de verificación.",
     "network_connection_title": "No hay conexión a internet",
-    "no_keys_on_device_body": "No ha tenido la aplicación el tiempo suficiente para compartir exposiciones. Continúe aislándose.",
+    "no_keys_on_device_body": "La aplicación no ha tenido el tiempo suficiente para compartir exposiciones. Continúe aislándose.",
     "no_keys_on_device_title": "Sin exposiciones en el dispositivo",
     "not_authorized_body": "No autorizó a la aplicación para que comparta sus ID aleatorios.",
     "not_authorized_title": "No autorizó",

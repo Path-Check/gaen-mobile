@@ -53,6 +53,7 @@
   },
   "errors": {
     "description": "Bir hata oluştu. Lütfen uygulamayı tekrar yükle.",
+    "invalid_phone_number": "Telefon numarası 10 haneli olmalı",
     "reload": "Tekrar yükle",
     "something_went_wrong": "Bir terslik yaşandı",
     "title": "Bilinmeyen hata",

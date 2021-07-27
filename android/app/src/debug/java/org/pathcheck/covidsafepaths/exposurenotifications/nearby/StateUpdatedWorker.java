@@ -18,18 +18,25 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.nearby;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.ListenableWorker;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkerParameters;
+import com.facebook.react.bridge.ReactContext;
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.ListenableFuture;
+import org.pathcheck.covidsafepaths.MainApplication;
+import org.pathcheck.covidsafepaths.bridge.EventSender;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+
 
 /**
  * Performs work for
@@ -40,10 +47,12 @@ public class StateUpdatedWorker extends ListenableWorker {
   private static final String TAG = "StateUpdatedWorker";
 
   private final Context context;
+  private final boolean isSimulating;
 
   public StateUpdatedWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
     super(context, workerParams);
     this.context = context;
+    isSimulating = workerParams.getInputData().getBoolean(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, false);
   }
 
   @NonNull
@@ -54,27 +63,47 @@ public class StateUpdatedWorker extends ListenableWorker {
         + "and show a notification if there is a new one");
     return FluentFuture.from(ExposureNotificationClientWrapper.get(context).getDailySummaries())
         .transform(RealmSecureStorageBte.INSTANCE::refreshWithDailySummaries, AppExecutors.getBackgroundExecutor())
-        .transform((exposuresAdded) -> {
-          if (exposuresAdded) {
+        .transform(exposureResult -> {
+          /*
+            The DebugMenuModule can simulate exposures.
+            This class is now contained in a debug and release package
+            in order to separate debug code from release code
+          */
+          if (isSimulating || exposureResult.getNewExposureAdded()) {
             Log.d(TAG, "New exposures found, showing a notification");
             NotificationHelper.showPossibleExposureNotification(context);
+
+            MainApplication app = (MainApplication) getApplicationContext();
+            ReactContext reactContext = app.getReactNativeHost()
+                .getReactInstanceManager()
+                .getCurrentReactContext();
+
+            if (reactContext != null) {
+              EventSender.INSTANCE.sendExposureRecordUpdatedChangedEvent(reactContext, exposureResult.getExposures());
+            }
+
           } else {
             Log.d(TAG, "No new exposures found");
           }
           return Result.success();
         }, AppExecutors.getLightweightExecutor())
-        .catching(
-            Exception.class,
-            x -> {
-              Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", x);
+        .catching(Exception.class, exception -> {
+              Log.e(TAG, "Failure to update app state (tokens, etc) from exposure summary.", exception);
               return Result.failure();
-            },
+              },
             AppExecutors.getLightweightExecutor()
         );
   }
 
-  static void runOnce(Context context) {
+  static void runOnce(Context context, Intent intent) {
+    Data data = new Data.Builder()
+        .putBoolean(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED,
+            intent.getBooleanExtra(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, false))
+        .build();
+
     WorkManager.getInstance(context).enqueue(
-        new OneTimeWorkRequest.Builder(StateUpdatedWorker.class).build());
+        new OneTimeWorkRequest.Builder(StateUpdatedWorker.class)
+            .setInputData(data)
+            .build());
   }
 }

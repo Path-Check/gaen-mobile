@@ -149,7 +149,6 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             />
             <DebugMenuListItem
               label="Reset Exposures"
-              itemStyle={style.lastListItem}
               onPress={handleOnPressSimulationButton(
                 NativeModule.resetExposures,
               )}
@@ -158,6 +157,13 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
               label="Simulate Exposure Detection Error"
               onPress={handleOnPressSimulationButton(
                 NativeModule.simulateExposureDetectionError,
+              )}
+            />
+            <DebugMenuListItem
+              label="Add Old Exposure"
+              itemStyle={style.lastListItem}
+              onPress={handleOnPressSimulationButton(
+                NativeModule.addOldExposure,
               )}
             />
           </View>

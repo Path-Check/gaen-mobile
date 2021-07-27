@@ -36,13 +36,14 @@ enum ENAPIVersion { case V1, V2 }
 
 @objc(ExposureManager)
 /**
- This class wrapps [ENManager](https://developer.apple.com/documentation/exposurenotification/enmanager) and acts like a controller and entry point of the different flows
+ This class wraps [ENManager](https://developer.apple.com/documentation/exposurenotification/enmanager) and acts like a controller and entry point of the different flows
  */
 
 final class ExposureManager: NSObject {
 
-  private static let backgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
   private static let chaffBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).chaff"
+  private static let exposureDetectionBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
+  private static let deleteOldExposuresBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).delete-old-exposures"
 
   @objc private(set) static var shared: ExposureManager?
 
@@ -230,7 +231,7 @@ final class ExposureManager: NSObject {
     All launch handlers must be registered before application finishes launching
    */
   @objc func registerExposureDetectionBackgroundTask() {
-    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.backgroundTaskIdentifier,
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.exposureDetectionBackgroundTaskIdentifier,
                              using: .main) { [weak self] task in
       guard let strongSelf = self else { return }
       // Notify the user if bluetooth is off
@@ -285,6 +286,20 @@ final class ExposureManager: NSObject {
 
       // Schedule the next background task
       self?.scheduleChaffBackgroundTaskIfNeeded()
+                             }
+  }
+  /**
+   Registers the background task of deleting exposures > 14 days old
+   from the local database
+   */
+  @objc func registerDeleteOldExposuresBackgroundTask() {
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.deleteOldExposuresBackgroundTaskIdentifier,
+                             using: .main) { [weak self] task in
+
+      self?.btSecureStorage.deleteExposuresOlderThan(14)
+
+      // Schedule the next background task
+      self?.scheduleDeleteOldExposuresBackgroundTaskIfNeeded()
     }
   }
   
@@ -299,7 +314,7 @@ final class ExposureManager: NSObject {
 
   @objc func scheduleExposureDetectionBackgroundTaskIfNeeded() {
     guard manager.exposureNotificationStatus == .active else { return }
-    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.backgroundTaskIdentifier)
+    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.exposureDetectionBackgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
     do {
       try bgTaskScheduler.submit(taskRequest)
@@ -312,6 +327,16 @@ final class ExposureManager: NSObject {
     guard manager.exposureNotificationStatus == .active else { return }
     let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.chaffBackgroundTaskIdentifier)
     taskRequest.requiresNetworkConnectivity = true
+    do {
+      try bgTaskScheduler.submit(taskRequest)
+    } catch {
+      print("Unable to schedule background task: \(error)")
+    }
+  }
+  
+  func scheduleDeleteOldExposuresBackgroundTaskIfNeeded() {
+    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.deleteOldExposuresBackgroundTaskIdentifier)
+    taskRequest.requiresNetworkConnectivity = false
     do {
       try bgTaskScheduler.submit(taskRequest)
     } catch {
