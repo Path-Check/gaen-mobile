@@ -78,12 +78,12 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
       const certResponse = await API.postTokenAndHmac(token, hmacDigest, true)
 
       if (certResponse.kind === "success") {
-        trackEvent("epi_analytics", "chaff_request_sent")
+        await trackEvent("epi_analytics", "chaff_request_sent")
       } else {
-        trackEvent("epi_analytics", "chaff_request_failed")
+        await trackEvent("epi_analytics", "chaff_request_failed")
       }
     } else {
-      trackEvent("epi_analytics", "chaff_request_failed")
+      await trackEvent("epi_analytics", "chaff_request_failed")
     }
   }, [trackEvent])
 

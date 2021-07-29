@@ -549,7 +549,7 @@ class ExposureManagerUnitTests: XCTestCase {
     }
     let exposureManager = ExposureManager(exposureNotificationManager: mockEnManager,
                                           backgroundTaskScheduler: bgSchedulerMock)
-    exposureManager.scheduleChaffBackgroundTaskIfNeeded()
+    exposureManager.scheduleExposureDetectionBackgroundTaskIfNeeded()
     wait(for: [submitExpectation], timeout: 0)
   }
 

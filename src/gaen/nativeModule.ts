@@ -318,3 +318,7 @@ export const simulateExposureDetectionError = async (): Promise<"success"> => {
 export const resetExposures = async (): Promise<"success"> => {
   return debugModule.resetExposures()
 }
+
+export const addOldExposure = async (): Promise<"success"> => {
+  return debugModule.addOldExposure()
+}

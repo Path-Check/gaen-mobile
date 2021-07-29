@@ -1,7 +1,5 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
-import static org.pathcheck.covidsafepaths.exposurenotifications.nearby.StateUpdatedWorker.IS_SIMULATING;
-
 import android.content.Intent;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -15,13 +13,16 @@ import com.google.common.util.concurrent.Futures;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
+import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ExposureNotificationBroadcastReceiver;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Instant;
 
@@ -29,6 +30,7 @@ import org.threeten.bp.Instant;
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
 public class DebugMenuModule extends ReactContextBaseJavaModule {
   static final String MODULE_NAME = "DebugMenuModule";
+  static final long EXPOSURE_KEY_LIFESPAN = 14;
 
   public DebugMenuModule(ReactApplicationContext context) {
     super(context);
@@ -53,7 +55,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
           RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
           diagnosisKeys.add(diagnosisKey);
         }
-
+ 
         promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
       }
 
@@ -74,7 +76,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void simulateExposure(Promise promise) {
     Intent exposureIntent = new Intent(getReactApplicationContext(), ExposureNotificationBroadcastReceiver.class);
     exposureIntent.setAction("com.google.android.gms.exposurenotification.ACTION_EXPOSURE_STATE_UPDATED");
-    exposureIntent.putExtra(IS_SIMULATING, true);
+    exposureIntent.putExtra(DebugConstants.IS_SIMULATING_EXPOSURE_STATE_UPDATED, true);
     getReactApplicationContext().sendBroadcast(exposureIntent);
     promise.resolve(null);
   }
@@ -124,7 +126,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                 promise.reject(exception);
               }
             };
-
+ 
             Futures.addCallback(
                 exposureNotificationsClient.requestPermissionToStartTracing(reactContext),
                 callback,
@@ -137,5 +139,13 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void showLastProcessedFilePath(Promise promise) {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
+  }
+
+  
+  @ReactMethod
+  public void addOldExposure(Promise promise) {
+    long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
+    RealmSecureStorageBte.INSTANCE.insertExposure(ExposureEntity.create(expiredDate, expiredDate));
+    promise.resolve(null);
   }
 }
