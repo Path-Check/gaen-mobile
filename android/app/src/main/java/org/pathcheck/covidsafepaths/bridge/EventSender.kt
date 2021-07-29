@@ -1,7 +1,6 @@
 package org.pathcheck.covidsafepaths.bridge
 
 import com.facebook.react.bridge.ReactContext
-import com.facebook.react.bridge.WritableArray
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.google.gson.Gson
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation
@@ -65,12 +64,9 @@ object EventSender {
             ?.emit(EN_EXPOSURE_RECORD_UPDATED_CHANGED_EVENT, exposureJson)
     }
 
-    fun sendChaffRequest(
-        reactContext: ReactContext?,
-        exposureKeys: WritableArray
-    ) {
+    fun sendChaffRequest(reactContext: ReactContext?) {
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
-            ?.emit(CHAFF_REQUEST_TRIGGERED, exposureKeys)
+            ?.emit(CHAFF_REQUEST_TRIGGERED, null)
     }
 }

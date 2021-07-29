@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
-import org.pathcheck.covidsafepaths.exposurenotifications.worker.ChaffRequestWorker;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker;
 
 public class MainApplication extends Application implements ReactApplication {
 

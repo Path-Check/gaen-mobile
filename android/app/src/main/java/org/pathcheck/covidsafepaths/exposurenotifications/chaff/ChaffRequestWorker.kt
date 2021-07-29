@@ -1,4 +1,4 @@
-package org.pathcheck.covidsafepaths.exposurenotifications.worker
+package org.pathcheck.covidsafepaths.exposurenotifications.chaff
 
 import android.content.Context
 import android.util.Log
@@ -10,17 +10,17 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.facebook.react.bridge.WritableArray
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey
 import com.google.common.util.concurrent.FluentFuture
+import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.TimeUnit
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.bridge.EventSender
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors
-import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
-import org.pathcheck.covidsafepaths.helpers.DiagnosisKeyEncoding.encodeDiagnosisKeys
+import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey
+import org.pathcheck.covidsafepaths.helpers.DiagnosisKeyEncoding
 
 class ChaffRequestWorker(
     context: Context,
@@ -28,7 +28,7 @@ class ChaffRequestWorker(
 ) : ListenableWorker(context, workerParams) {
 
     companion object {
-        private const val REPEAT_INTERVAL = 6L
+        private const val REPEAT_INTERVAL = 4L
         private const val TAG = "ChaffRequests"
 
         @JvmStatic
@@ -43,22 +43,27 @@ class ChaffRequestWorker(
                 .build()
 
             WorkManager.getInstance(context)
-                .enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.KEEP, request)
+                .enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.REPLACE, request)
         }
     }
 
     private val app = context.applicationContext as? MainApplication
     private val reactContext = app?.reactNativeHost?.reactInstanceManager?.currentReactContext
+    private val chaffManager = ChaffManager.getInstance(context)
 
     override fun startWork(): ListenableFuture<Result> {
         val wrapper = ExposureNotificationClientWrapper.get(reactContext)
 
+        if (!chaffManager.shouldFire()) {
+            return Futures.immediateFuture(Result.success())
+        }
+
         return FluentFuture.from(wrapper.requestPermissionToGetExposureKeys(reactContext))
-            .transform(this::encodeKeys, AppExecutors.getBackgroundExecutor())
             .transform(
-                { encodedKeyArray ->
-                    if (encodedKeyArray != null) {
-                        EventSender.sendChaffRequest(reactContext, encodedKeyArray)
+                { exposureKeys ->
+                    if (exposureKeys != null) {
+                        chaffManager.save(encodeKeys(exposureKeys))
+                        EventSender.sendChaffRequest(reactContext)
                         Result.success()
                     } else {
                         Result.failure()
@@ -79,11 +84,9 @@ class ChaffRequestWorker(
             )
     }
 
-    private fun encodeKeys(exposureKeys: List<TemporaryExposureKey>?): WritableArray? {
+    private fun encodeKeys(exposureKeys: List<TemporaryExposureKey>?): List<RNExposureKey>? {
         return exposureKeys?.run {
-            encodeDiagnosisKeys(exposureKeys, true).run {
-                Util.convertListToWritableArray(this)
-            }
+            DiagnosisKeyEncoding.encodeDiagnosisKeys(exposureKeys, true)
         }
     }
 }

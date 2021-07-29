@@ -1,5 +1,6 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
+import android.content.Context;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -15,6 +16,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey;
 import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKey;
@@ -68,5 +70,12 @@ public class ExposureKeyModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getRevisionToken(final Promise promise) {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getRevisionToken());
+  }
+
+  @ReactMethod
+  public void fetchChaffKeys(final Promise promise) {
+    Context context = getReactApplicationContext().getApplicationContext();
+    ChaffManager chaffManager = ChaffManager.getInstance(context);
+    promise.resolve(chaffManager.getChaffKeys());
   }
 }
