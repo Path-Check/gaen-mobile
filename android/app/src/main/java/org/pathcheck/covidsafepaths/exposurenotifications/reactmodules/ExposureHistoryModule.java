@@ -1,7 +1,9 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import androidx.annotation.NonNull;
+import androidx.work.CoroutineWorker;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.Operation;
 import androidx.work.WorkManager;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -13,11 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
+import org.pathcheck.covidsafepaths.exposurenotifications.nearby.DiagnosisKeyProviderWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.CallbackMessages;
+
+import kotlinx.coroutines.CoroutineScope;
 
 @SuppressWarnings("unused")
 @ReactModule(name = ExposureHistoryModule.MODULE_NAME)
@@ -69,10 +74,21 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
         .addOnSuccessListener(enabled -> {
           if (enabled) {
             WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
-            workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
+            Operation operation = null;
+            try {
+              workManager.enqueue(
+                      new OneTimeWorkRequest.Builder(DiagnosisKeyProviderWorker.class).build()).wait();
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+
+            if(operation.getResult().isDone()) {
+              promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
+            } else {
+              promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
+            }
             // We are not waiting until the job is completed.
             // Is there any way to pass the promise through all the workers?
-            promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
           } else {
             promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
           }

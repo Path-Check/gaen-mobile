@@ -21,6 +21,8 @@ import android.content.Context;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * A facade to network operations to download all known Diagnosis Keys.
  *
@@ -39,5 +41,9 @@ public class DiagnosisKeys {
 
   public ListenableFuture<ImmutableList<KeyFileBatch>> download() {
     return diagnosisKeyDownloader.download();
+  }
+
+  public ImmutableList<KeyFileBatch> downloadBatchFiles() throws ExecutionException, InterruptedException {
+    return diagnosisKeyDownloader.downloadBatchFiles();
   }
 }
