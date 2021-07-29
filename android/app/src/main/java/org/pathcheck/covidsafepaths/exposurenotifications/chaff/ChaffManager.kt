@@ -28,8 +28,7 @@ class ChaffManager private constructor(
         }
 
     fun shouldFire(): Boolean {
-        val z = secureRandom.nextDouble()
-        return z < EXECUTION_PROBABILITY && hasBeen24Hours()
+        return secureRandom.nextDouble() < EXECUTION_PROBABILITY && hasBeen24Hours()
     }
 
     fun save(chaffKeys: List<RNExposureKey>?) {
@@ -53,7 +52,7 @@ class ChaffManager private constructor(
             }
             val gson = Gson()
             val listType = TypeToken.getParameterized(List::class.java, RNExposureKey::class.java).type
-            gson.fromJson<List<RNExposureKey>>(json, listType)
+            gson.fromJson(json, listType)
         }
     }
 
