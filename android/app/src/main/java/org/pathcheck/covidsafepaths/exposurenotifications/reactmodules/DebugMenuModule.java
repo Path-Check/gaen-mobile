@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
@@ -25,6 +26,8 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureSto
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Instant;
+
+import static org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager.Config.FIFTEEN_MINUTES;
 
 @SuppressWarnings("unused")
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
@@ -140,12 +143,18 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void showLastProcessedFilePath(Promise promise) {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
   }
-
   
   @ReactMethod
   public void addOldExposure(Promise promise) {
     long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
     RealmSecureStorageBte.INSTANCE.insertExposure(ExposureEntity.create(expiredDate, expiredDate));
     promise.resolve(null);
+  }
+
+  @ReactMethod
+  public void configureFasterChaffForTesting() {
+    ChaffManager manager =
+            ChaffManager.getInstance(getReactApplicationContext().getCurrentActivity().getApplication());
+    manager.setConfiguration(new ChaffManager.Config(FIFTEEN_MINUTES, true));
   }
 }

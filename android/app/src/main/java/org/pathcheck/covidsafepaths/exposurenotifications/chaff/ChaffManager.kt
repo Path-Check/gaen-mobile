@@ -27,7 +27,17 @@ class ChaffManager private constructor(
             return TimeUnit.MILLISECONDS.toHours(previousFiredTime)
         }
 
+    private var config: Config = Config()
+
+    fun setConfiguration(config: Config) {
+        this.config = config
+    }
+
     fun shouldFire(): Boolean {
+        if (config.makeProbability100Percent) {
+            return true
+        }
+
         return secureRandom.nextDouble() < EXECUTION_PROBABILITY && hasBeen24Hours()
     }
 
@@ -54,6 +64,10 @@ class ChaffManager private constructor(
             val listType = TypeToken.getParameterized(List::class.java, RNExposureKey::class.java).type
             gson.fromJson(json, listType)
         }
+    }
+
+    fun getRepeatWorkerIntervalInMinutes(): Long {
+        return config.repeatIntervalInMinutes
     }
 
     private fun convertTemporaryKeysToJson(rnExposureKeys: List<RNExposureKey>?): String {
@@ -96,6 +110,22 @@ class ChaffManager private constructor(
             return chaffManager ?: ChaffManager(context, timeProvider, secureRandom).also {
                 chaffManager = it
             }
+        }
+
+        @JvmStatic
+        @VisibleForTesting
+        fun createChaffManager(context: Context,
+                               timeProvider: TimeProvider,
+                               secureRandom: SecureRandom) = ChaffManager(context, timeProvider, secureRandom)
+    }
+
+    data class Config(
+        val repeatIntervalInMinutes: Long = FOUR_HOURS_IN_MINUTES,
+        val makeProbability100Percent: Boolean = false) {
+
+        companion object {
+            const val FIFTEEN_MINUTES = 15L
+            const val FOUR_HOURS_IN_MINUTES = 240L
         }
     }
 }

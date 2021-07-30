@@ -2,42 +2,39 @@ package org.pathcheck.covidsafepaths.exposurenotifications.chaff
 
 import android.content.Context
 import android.util.Log
-import androidx.work.BackoffPolicy
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.ListenableWorker
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
+import androidx.work.*
 import com.google.android.gms.nearby.exposurenotification.TemporaryExposureKey
 import com.google.common.util.concurrent.FluentFuture
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import java.util.concurrent.TimeUnit
 import org.pathcheck.covidsafepaths.MainApplication
 import org.pathcheck.covidsafepaths.bridge.EventSender
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey
 import org.pathcheck.covidsafepaths.helpers.DiagnosisKeyEncoding
+import java.util.concurrent.TimeUnit
 
 class ChaffRequestWorker(
-    context: Context,
+    application: Context,
     workerParams: WorkerParameters
-) : ListenableWorker(context, workerParams) {
+) : ListenableWorker(application, workerParams) {
 
     companion object {
-        private const val REPEAT_INTERVAL = 4L
         private const val TAG = "ChaffRequests"
 
         @JvmStatic
         fun scheduleWork(context: Context) {
+            val chaffManager = ChaffManager.getInstance(context)
+
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-            val request = PeriodicWorkRequest.Builder(ChaffRequestWorker::class.java, REPEAT_INTERVAL, TimeUnit.HOURS)
+            val request = PeriodicWorkRequest.Builder(
+                    ChaffRequestWorker::class.java,
+                    chaffManager.getRepeatWorkerIntervalInMinutes(),
+                    TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .setBackoffCriteria(BackoffPolicy.LINEAR, PeriodicWorkRequest.MIN_BACKOFF_MILLIS, TimeUnit.MILLISECONDS)
                 .build()
@@ -47,12 +44,12 @@ class ChaffRequestWorker(
         }
     }
 
-    private val app = context.applicationContext as? MainApplication
+    private val app = application as? MainApplication
     private val reactContext = app?.reactNativeHost?.reactInstanceManager?.currentReactContext
-    private val chaffManager = ChaffManager.getInstance(context)
+    private val chaffManager = ChaffManager.getInstance(application)
 
     override fun startWork(): ListenableFuture<Result> {
-        val wrapper = ExposureNotificationClientWrapper.get(reactContext)
+        val wrapper = ExposureNotificationClientWrapper.get(app)
 
         if (!chaffManager.shouldFire()) {
             return Futures.immediateFuture(Result.success())

@@ -20,7 +20,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProvider
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
 
-
 internal class ChaffManagerTest {
 
     private val requestFiredSlot = slot<Long>()
@@ -57,14 +56,30 @@ internal class ChaffManagerTest {
         }.returns(sharedPreferences)
     }
 
-    private val secureRandomMock: SecureRandom = mockk()
+    private var mockDouble = 0.0
+    private val secureRandomMock: SecureRandom = mockk {
+        every {
+            nextDouble()
+        }.answers {
+            mockDouble
+        }
+    }
 
-    private val timeProviderMock: TimeProvider = mockk()
+    private var mockTime = 1627009456526L
+    private val timeProviderMock: TimeProvider = mockk {
+        every {
+            currentTimeInMillis
+        }.answers {
+            mockTime
+        }
+    }
 
-    private val chaffManager = ChaffManager.getInstance(context, timeProviderMock, secureRandomMock)
+    private lateinit var chaffManager: ChaffManager
 
     @BeforeEach
     fun setUp() {
+        chaffManager = ChaffManager.createChaffManager(context, timeProviderMock, secureRandomMock)
+
         mockkStatic(Log::class)
         mockkStatic(SystemClock::class)
 
@@ -92,19 +107,11 @@ internal class ChaffManagerTest {
             RNExposureKey("This is the key", 1, 2, 3)
         )
 
-        every {
-            secureRandomMock.nextDouble()
-        }.returns(.04)
-
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L)
+        mockDouble = .04
 
         chaffManager.save(rnExposureKeys)
 
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L + TimeUnit.HOURS.toMillis(24))
+        mockTime += TimeUnit.HOURS.toMillis(24)
 
         chaffManager.shouldFire().shouldBeTrue()
     }
@@ -115,19 +122,11 @@ internal class ChaffManagerTest {
             RNExposureKey("This is the key", 1, 2, 3)
         )
 
-        every {
-            secureRandomMock.nextDouble()
-        }.returns(.05)
-
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L)
+        mockDouble  = .05
 
         chaffManager.save(rnExposureKeys)
 
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L + TimeUnit.HOURS.toMillis(24))
+        mockTime += TimeUnit.HOURS.toMillis(20)
 
         chaffManager.shouldFire().shouldBeFalse()
     }
@@ -138,19 +137,11 @@ internal class ChaffManagerTest {
             RNExposureKey("This is the key", 1, 2, 3)
         )
 
-        every {
-            secureRandomMock.nextDouble()
-        }.returns(.09)
-
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L)
+        mockDouble = .09
 
         chaffManager.save(rnExposureKeys)
 
-        every {
-            timeProviderMock.currentTimeInMillis
-        }.returns(1627009456526L + TimeUnit.HOURS.toMillis(24))
+        mockTime += TimeUnit.HOURS.toMillis(24)
 
         chaffManager.shouldFire().shouldBeFalse()
     }
