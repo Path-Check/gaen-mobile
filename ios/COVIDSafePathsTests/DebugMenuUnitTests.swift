@@ -86,7 +86,7 @@ class DebugMenuUnitTests: XCTestCase {
     let successExpetactionResolve = self.expectation(description: "resolve is called")
     let successExpectationReject = self.expectation(description: "reject is not called")
     successExpectationReject.isInverted = true
-    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
+    exposureManager.handleDebugAction(debugActionf, resolve: { (success) in
       successExpetactionResolve.fulfill()
     }) { (_, _, _) in
       successExpectationReject.fulfill()
@@ -107,6 +107,13 @@ class DebugMenuUnitTests: XCTestCase {
       successExpectationReject.fulfill()
     }
     wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
+  }
+
+  // Test for if a chaff request will ping our server. 
+  func configureFasterChaffForTesting() {
+    // Perform a quick chaff request/attempt 
+    // TODO: Write a test to test chaff works appropriately.
+    
   }
   
   

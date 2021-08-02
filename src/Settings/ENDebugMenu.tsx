@@ -161,9 +161,15 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
             />
             <DebugMenuListItem
               label="Add Old Exposure"
-              itemStyle={style.lastListItem}
               onPress={handleOnPressSimulationButton(
                 NativeModule.addOldExposure,
+              )}
+            />
+            <DebugMenuListItem
+              label="Perform Chaff Request"
+              itemStyle={style.lastListItem}
+              onPress={handleOnPressSimulationButton(
+                NativeModule.configureFasterChaffForTesting,
               )}
             />
           </View>

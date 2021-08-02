@@ -5,5 +5,6 @@
   fetchExposures,
   resetExposures,
   showLastProcessedFilePath,
-  addOldExposure
+  addOldExposure,
+  configureFasterChaffForTesting
 }

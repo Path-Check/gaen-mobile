@@ -322,3 +322,7 @@ export const resetExposures = async (): Promise<"success"> => {
 export const addOldExposure = async (): Promise<"success"> => {
   return debugModule.addOldExposure()
 }
+
+export const configureFasterChaffForTesting = async (): Promise<"success"> => {
+  return debugModule.configureFasterChaffForTesting()
+}
