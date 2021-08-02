@@ -8,6 +8,7 @@ import {
   BackHandler,
   ScrollView,
   ActivityIndicator,
+  Platform,
 } from "react-native"
 
 import { Text } from "../components"
@@ -165,13 +166,15 @@ const ENDebugMenu: FunctionComponent<ENDebugMenuProps> = ({ navigation }) => {
                 NativeModule.addOldExposure,
               )}
             />
-            <DebugMenuListItem
-              label="Perform Chaff Request"
-              itemStyle={style.lastListItem}
-              onPress={handleOnPressSimulationButton(
-                NativeModule.configureFasterChaffForTesting,
-              )}
-            />
+            {Platform.OS === "android" && (
+              <DebugMenuListItem
+                label="Perform Chaff Request"
+                itemStyle={style.lastListItem}
+                onPress={handleOnPressSimulationButton(
+                  NativeModule.configureFasterChaffForTesting,
+                )}
+              />
+            )}
           </View>
         </ScrollView>
       )}
