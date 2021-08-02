@@ -28,8 +28,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import androidx.work.ListenableWorker;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.BaseEncoding;
 import com.google.common.util.concurrent.FluentFuture;
@@ -43,6 +41,7 @@ import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter;
+import org.reactivestreams.Subscriber;
 import org.threeten.bp.Duration;
 
 import java.io.File;
@@ -51,6 +50,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +58,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A class to download all the files in a given batch of Diagnosis Key files.
@@ -131,12 +139,9 @@ class DiagnosisKeyDownloader {
         return batchesDownloaded;
     }
 
-    ImmutableList<KeyFileBatch> downloadBatchFiles() throws ExecutionException, InterruptedException {
-        return Futures.transform(
-                download(),
-                (x) -> x,
-                AppExecutors.getBackgroundExecutor()
-        ).get();
+    Observable<ImmutableList<KeyFileBatch>> downloadBatchFiles() {
+        return Observable.fromFuture(download())
+                .subscribeOn(Schedulers.io());
     }
 
     private ListenableFuture<List<BatchFile>> initiateDownloads(

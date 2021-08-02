@@ -23,6 +23,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
 
+import io.reactivex.rxjava3.core.Observable;
+
 /**
  * A facade to network operations to download all known Diagnosis Keys.
  *
@@ -43,7 +45,7 @@ public class DiagnosisKeys {
     return diagnosisKeyDownloader.download();
   }
 
-  public ImmutableList<KeyFileBatch> downloadBatchFiles() throws ExecutionException, InterruptedException {
+  public Observable<ImmutableList<KeyFileBatch>> downloadBatchFiles() {
     return diagnosisKeyDownloader.downloadBatchFiles();
   }
 }
