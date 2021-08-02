@@ -147,6 +147,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
         applicationId project.env.get("ANDROID_APPLICATION_ID")
         minSdkVersion rootProject.ext.minSdkVersion
@@ -297,6 +301,11 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.1"
+    testImplementation "io.mockk:mockk:1.12.0"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.amshove.kluent:kluent-android:1.61'
 }
 
 // Run this once to be able to run the application with BUCK
