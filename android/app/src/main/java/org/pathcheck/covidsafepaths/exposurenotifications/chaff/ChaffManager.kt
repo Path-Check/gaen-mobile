@@ -6,17 +6,18 @@ import androidx.annotation.VisibleForTesting
 import com.facebook.react.bridge.WritableArray
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.security.SecureRandom
+import java.util.concurrent.TimeUnit
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProvider
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProviderImpl
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
-import java.security.SecureRandom
-import java.util.concurrent.TimeUnit
 
 class ChaffManager private constructor(
     context: Context,
     private val timeProvider: TimeProvider,
-    private val secureRandom: SecureRandom) {
+    private val secureRandom: SecureRandom
+) {
 
     private val sharedPreferences = context.getSharedPreferences(CHAFF_SHARED_PREF, Context.MODE_PRIVATE)
     private val currentTimeMillis get() = timeProvider.currentTimeInMillis
@@ -104,9 +105,11 @@ class ChaffManager private constructor(
 
         @JvmStatic
         @JvmOverloads
-        fun getInstance(context: Context,
-                        timeProvider: TimeProvider = TimeProviderImpl,
-                        secureRandom: SecureRandom = SecureRandom()): ChaffManager {
+        fun getInstance(
+            context: Context,
+            timeProvider: TimeProvider = TimeProviderImpl,
+            secureRandom: SecureRandom = SecureRandom()
+        ): ChaffManager {
             return chaffManager ?: ChaffManager(context, timeProvider, secureRandom).also {
                 chaffManager = it
             }
@@ -114,14 +117,17 @@ class ChaffManager private constructor(
 
         @JvmStatic
         @VisibleForTesting
-        fun createChaffManager(context: Context,
-                               timeProvider: TimeProvider,
-                               secureRandom: SecureRandom) = ChaffManager(context, timeProvider, secureRandom)
+        fun createChaffManager(
+            context: Context,
+            timeProvider: TimeProvider,
+            secureRandom: SecureRandom
+        ) = ChaffManager(context, timeProvider, secureRandom)
     }
 
     data class Config(
         val repeatIntervalInMinutes: Long = FOUR_HOURS_IN_MINUTES,
-        val makeProbability100Percent: Boolean = false) {
+        val makeProbability100Percent: Boolean = false
+    ) {
 
         companion object {
             const val FIFTEEN_MINUTES = 15L

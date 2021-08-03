@@ -9,6 +9,8 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.slot
 import io.mockk.unmockkStatic
+import java.security.SecureRandom
+import java.util.concurrent.TimeUnit
 import org.amshove.kluent.shouldBeFalse
 import org.amshove.kluent.shouldBeTrue
 import org.amshove.kluent.shouldHaveSize
@@ -17,8 +19,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProvider
-import java.security.SecureRandom
-import java.util.concurrent.TimeUnit
 
 internal class ChaffManagerTest {
 
@@ -122,7 +122,7 @@ internal class ChaffManagerTest {
             RNExposureKey("This is the key", 1, 2, 3)
         )
 
-        mockDouble  = .05
+        mockDouble = .05
 
         chaffManager.save(rnExposureKeys)
 
