@@ -12,14 +12,14 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
-import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker;
-import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
+import io.realm.Realm;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import io.realm.Realm;
+import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker;
+import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
 public class MainApplication extends Application implements ReactApplication {
 
