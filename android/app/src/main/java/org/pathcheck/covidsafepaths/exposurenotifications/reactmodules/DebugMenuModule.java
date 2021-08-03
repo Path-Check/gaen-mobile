@@ -58,7 +58,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
           RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
           diagnosisKeys.add(diagnosisKey);
         }
- 
+
         promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
       }
 
@@ -86,6 +86,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   /**
    * Get a random date between the last 14 days and now.
+   *
    * @return random exposure date
    */
   private Long getRandomExposureDate() {
@@ -129,7 +130,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                 promise.reject(exception);
               }
             };
- 
+
             Futures.addCallback(
                 exposureNotificationsClient.requestPermissionToStartTracing(reactContext),
                 callback,
@@ -143,7 +144,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   public void showLastProcessedFilePath(Promise promise) {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
   }
-  
+
   @ReactMethod
   public void addOldExposure(Promise promise) {
     long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
@@ -154,7 +155,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void configureFasterChaffForTesting() {
     ChaffManager manager =
-            ChaffManager.getInstance(getReactApplicationContext().getCurrentActivity().getApplication());
+        ChaffManager.getInstance(getReactApplicationContext().getCurrentActivity().getApplication());
     manager.setConfiguration(new ChaffManager.Config(FIFTEEN_MINUTES, true));
   }
 }
