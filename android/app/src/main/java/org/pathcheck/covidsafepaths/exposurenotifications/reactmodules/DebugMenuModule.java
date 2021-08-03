@@ -1,5 +1,7 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
+import static org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager.Config.FIFTEEN_MINUTES;
+
 import android.content.Intent;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -26,8 +28,6 @@ import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureSto
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util;
 import org.threeten.bp.Instant;
-
-import static org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager.Config.FIFTEEN_MINUTES;
 
 @SuppressWarnings("unused")
 @ReactModule(name = DebugMenuModule.MODULE_NAME)
