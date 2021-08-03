@@ -2,7 +2,6 @@ package org.pathcheck.covidsafepaths;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.bugsnag.android.Bugsnag;
 import com.bugsnag.android.Configuration;
 import com.facebook.react.PackageList;
@@ -13,16 +12,13 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
-
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
 import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import io.realm.Realm;
 
 public class MainApplication extends Application implements ReactApplication {
