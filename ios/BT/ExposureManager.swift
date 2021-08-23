@@ -83,7 +83,6 @@ final class ExposureManager: NSObject {
     super.init()
     self.manager.activate { [weak self] error in
       if error == nil {
-        print("SUCCESS")
         self?.activateSuccess()
       }
     }
