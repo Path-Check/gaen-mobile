@@ -86,7 +86,7 @@ class DebugMenuUnitTests: XCTestCase {
     let successExpetactionResolve = self.expectation(description: "resolve is called")
     let successExpectationReject = self.expectation(description: "reject is not called")
     successExpectationReject.isInverted = true
-    exposureManager.handleDebugAction(debugActionf, resolve: { (success) in
+    exposureManager.handleDebugAction(debugAction, resolve: { (success) in
       successExpetactionResolve.fulfill()
     }) { (_, _, _) in
       successExpectationReject.fulfill()
