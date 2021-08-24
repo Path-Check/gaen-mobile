@@ -113,7 +113,8 @@ class DebugMenuUnitTests: XCTestCase {
   func configureFasterChaffForTesting() {
     // Perform a quick chaff request/attempt 
     // TODO: Write a test to test chaff works appropriately.
-    
+    let debugAction = DebugAction.configureFasterChaffForTesting
+    return true
   }
   
   
