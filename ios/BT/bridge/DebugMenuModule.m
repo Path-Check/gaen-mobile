@@ -60,4 +60,11 @@ RCT_REMAP_METHOD(addOldExposure,
   [[ExposureManager shared] handleDebugAction:DebugActionAddOldExposure resolve:resolve reject:reject];
 }
 
+RCT_REMAP_METHOD(configureFasterChaffForTesting,
+                 configureFasterChaffForTestingResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] handleDebugAction:DebugActionConfigureFasterChaffForTesting resolve:resolve reject:reject];
+}
+
 @end

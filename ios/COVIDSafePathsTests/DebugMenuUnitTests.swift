@@ -108,6 +108,13 @@ class DebugMenuUnitTests: XCTestCase {
     }
     wait(for: [successExpectactionResolve, successExpectationReject], timeout: 0)
   }
+
+  // Test for if a chaff request will ping our server. 
+  func configureFasterChaffForTesting() {
+    // Perform a quick chaff request/attempt 
+    // TODO: Write a test to test chaff works appropriately.
+    let debugAction = DebugAction.configureFasterChaffForTesting
+  }
   
   
 }

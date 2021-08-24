@@ -1,5 +1,7 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
+import static org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager.Config.FIFTEEN_MINUTES;
+
 import android.content.Intent;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffManager;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors;
 import org.pathcheck.covidsafepaths.exposurenotifications.common.DebugConstants;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNDiagnosisKey;
@@ -55,7 +58,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
           RNDiagnosisKey diagnosisKey = new RNDiagnosisKey(key.getRollingStartIntervalNumber());
           diagnosisKeys.add(diagnosisKey);
         }
- 
+
         promise.resolve(Util.convertListToWritableArray(diagnosisKeys));
       }
 
@@ -83,6 +86,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
 
   /**
    * Get a random date between the last 14 days and now.
+   *
    * @return random exposure date
    */
   private Long getRandomExposureDate() {
@@ -126,7 +130,7 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
                 promise.reject(exception);
               }
             };
- 
+
             Futures.addCallback(
                 exposureNotificationsClient.requestPermissionToStartTracing(reactContext),
                 callback,
@@ -141,11 +145,17 @@ public class DebugMenuModule extends ReactContextBaseJavaModule {
     promise.resolve(RealmSecureStorageBte.INSTANCE.getLastProcessedKeyZipFileName());
   }
 
-  
   @ReactMethod
   public void addOldExposure(Promise promise) {
     long expiredDate = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(EXPOSURE_KEY_LIFESPAN);
     RealmSecureStorageBte.INSTANCE.insertExposure(ExposureEntity.create(expiredDate, expiredDate));
     promise.resolve(null);
+  }
+
+  @ReactMethod
+  public void configureFasterChaffForTesting() {
+    ChaffManager manager =
+        ChaffManager.getInstance(getReactApplicationContext().getCurrentActivity().getApplication());
+    manager.setConfiguration(new ChaffManager.Config(FIFTEEN_MINUTES, true));
   }
 }
