@@ -59,9 +59,12 @@ extension ExposureManager: ExposureManagerDebuggable {
       //      btSecureStorage.storeExposures([oldExposure])s
       notifyUserExposureDetected()
       resolve("Exposures: \(btSecureStorage.userState.exposures)")
-    // case .configureFasterChaffForTesting:
+    case .configureFasterChaffForTesting:
       // Perform a chaff request immediately.
       // TOOD: build function
+      resolve()
+    default:
+      resolve()
     }
   }
 }
