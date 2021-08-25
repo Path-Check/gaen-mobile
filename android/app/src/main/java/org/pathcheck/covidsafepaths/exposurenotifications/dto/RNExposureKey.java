@@ -1,8 +1,11 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.dto;
 
+import androidx.annotation.VisibleForTesting;
+
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class RNExposureKey {
-  private String key;
+  @VisibleForTesting
+  public String key;
   private int rollingPeriod;
   private int rollingStartNumber;
   private int transmissionRisk;

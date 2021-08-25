@@ -55,6 +55,7 @@
   
   [ExposureManager createSharedInstance];
   [[ExposureManager shared] registerExposureDetectionBackgroundTask];
+  [[ExposureManager shared] registerChaffBackgroundTask];
   [[ExposureManager shared] registerDeleteOldExposuresBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];

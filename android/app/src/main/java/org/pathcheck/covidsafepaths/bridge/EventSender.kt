@@ -11,6 +11,7 @@ object EventSender {
     private const val BLUETOOTH_STATUS_CHANGED_EVENT = "onBluetoothStatusUpdated"
     private const val LOCATION_STATUS_CHANGED_EVENT = "onLocationStatusUpdated"
     private const val EN_EXPOSURE_RECORD_UPDATED_CHANGED_EVENT = "onExposureRecordUpdated"
+    private const val CHAFF_REQUEST_TRIGGERED = "onChaffRequestTriggered"
 
     fun sendExposureNotificationStatusChanged(
         reactContext: ReactContext?,
@@ -61,5 +62,11 @@ object EventSender {
         reactContext
             ?.getJSModule(RCTDeviceEventEmitter::class.java)
             ?.emit(EN_EXPOSURE_RECORD_UPDATED_CHANGED_EVENT, exposureJson)
+    }
+
+    fun sendChaffRequest(reactContext: ReactContext?) {
+        reactContext
+            ?.getJSModule(RCTDeviceEventEmitter::class.java)
+            ?.emit(CHAFF_REQUEST_TRIGGERED, null)
     }
 }

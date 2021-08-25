@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7372C03D7AA19943931FCE4 /* libPods-BT.a */; };
+		6C5D4B1A86B6B36E470A8A8C /* libPods-BT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FC95AED482A053CC54D0A4 /* libPods-BT.a */; };
 		A53F7B2224F21C3000C5E30A /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */; };
 		A53F7B2524F3BA7B00C5E30A /* BGTaskScheduler+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2324F3B91800C5E30A /* BGTaskScheduler+Extensions.swift */; };
 		A53F7B2924F43F6E00C5E30A /* ExposureManager+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F7B2824F43F6E00C5E30A /* ExposureManager+Debug.swift */; };
@@ -18,7 +18,7 @@
 		A5A3043824E4B81B00C3157A /* ENManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */; };
 		A5A3043B24E565F900C3157A /* ENBridgeConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A5A3043A24E565F900C3157A /* ENBridgeConstants.h */; };
 		A5CE5FC525005BE40045251A /* MiscUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CE5FC425005BE40045251A /* MiscUnitTests.swift */; };
-		B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74339326986C2F8EE1F59BA /* libPods-BTTests.a */; };
+		AABE3F886F529CAC3E2DFFA2 /* libPods-BTTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFC67092884BF5BBFF3A6C8 /* libPods-BTTests.a */; };
 		B507A9EE24A197FF00E039D5 /* DownloadedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507A9ED24A197FF00E039D5 /* DownloadedPackage.swift */; };
 		B508170624EC7647000C5449 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508170524EC7647000C5449 /* KeychainService.swift */; };
 		B5081E4A24D9B8E300121884 /* DeviceInfoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B5081E4924D9B8E300121884 /* DeviceInfoModule.m */; };
@@ -170,16 +170,15 @@
 		08F2A97BB10A459D962AB877 /* IBMPlexMono.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = IBMPlexMono.ttf; path = ../shared/assets/fonts/IBMPlexMono.ttf; sourceTree = "<group>"; };
 		0AB0A08F38494307BF6F0EBC /* IBMPlexMono-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ThinItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-ThinItalic.ttf"; sourceTree = "<group>"; };
 		0DD29292C60B45029B7823D6 /* IBMPlexSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ExtraLight.ttf"; path = "../app/assets/fonts/IBMPlexSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		0E7693C43E2C06EFE47131DD /* Pods-BT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release.xcconfig"; sourceTree = "<group>"; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		141B3702EDB77175BCFE1BA2 /* Pods-BTTests.release-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.release-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.release-bt.xcconfig"; sourceTree = "<group>"; };
 		1423A22FF9E04F88BEEE42D6 /* IBMPlexSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Thin.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Thin.ttf"; sourceTree = "<group>"; };
 		167DF82F84E242A39CBEB042 /* IBMPlexMono-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		20E5EE8E6065465F9558DCDB /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		210E5F50B07048118538B796 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Italic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
 		2E9077612439A903005C98DE /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		3053DF05D78949A09366B85D /* IBMPlexMono-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLight.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ExtraLight.ttf"; sourceTree = "<group>"; };
-		323E903F3DAB2E4C925FECBD /* Pods-BTTests.debug-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug-bt.xcconfig"; sourceTree = "<group>"; };
 		36B22BAB357B44949D2E168C /* IBMPlexSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ExtraLight.ttf"; path = "../shared/assets/fonts/IBMPlexSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		3918820E06534ED8B0C3323C /* IBMPlexMono-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ThinItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-ThinItalic.ttf"; sourceTree = "<group>"; };
 		3A582C62ABAC478BBD976037 /* IBMPlexSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ExtraLightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -187,6 +186,7 @@
 		425FC7942F9E4A7282551030 /* IBMPlexMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-BoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		450B58D199444B7D8DEE6A0A /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Italic.ttf"; path = "../app/assets/fonts/IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
 		4904B061CC24439783E20928 /* IBMPlexSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-SemiBold.ttf"; path = "../shared/assets/fonts/IBMPlexSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		4DFC67092884BF5BBFF3A6C8 /* libPods-BTTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BTTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A0C1C57CED4660822FE560 /* IBMPlexMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Medium.ttf"; path = "../app/assets/fonts/IBMPlexMono-Medium.ttf"; sourceTree = "<group>"; };
 		542F7FB7FF534DC2A7D428AE /* IBMPlexSans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = file; name = IBMPlexSans.ttf; path = ../app/assets/fonts/IBMPlexSans.ttf; sourceTree = "<group>"; };
 		556FEC0379104674A3837885 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-MediumItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -194,18 +194,15 @@
 		56E8CDA04E244E24A9781CA8 /* IBMPlexSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		5D1446DDD4674BFAA520C0E8 /* IBMPlexMono-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLight.ttf"; path = "../app/assets/fonts/IBMPlexMono-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5D98D5DA5B77459FACDD673D /* IBMPlexSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Light.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Light.ttf"; sourceTree = "<group>"; };
+		60A3B6F7E32CD64CD96F46B7 /* Pods-BTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		668BDA050EF549C6B0759425 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
-		67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release-bt.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release-bt.xcconfig"; sourceTree = "<group>"; };
-		6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug.xcconfig"; sourceTree = "<group>"; };
 		6BA94CE8425944B8990A49B3 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Bold.ttf"; path = "../app/assets/fonts/IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		6C8CF282C4264C88A4ED8ABF /* IBMPlexMono-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Medium.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Medium.ttf"; sourceTree = "<group>"; };
 		71F26FBF5BDA423184286546 /* IBMPlexMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-MediumItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-MediumItalic.ttf"; sourceTree = "<group>"; };
 		747AA5DBBC684319A8273F2C /* IBMPlexSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-SemiBoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		751F8AE184B9709A8C3817BF /* Pods-BTTests.staging-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.staging-gps.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.staging-gps.xcconfig"; sourceTree = "<group>"; };
-		844C843F62B5585C2F2346EA /* Pods-BT.staging-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.staging-bt.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.staging-bt.xcconfig"; sourceTree = "<group>"; };
+		79FC95AED482A053CC54D0A4 /* libPods-BT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89D241005D9647C4B0586127 /* IBMPlexSans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = IBMPlexSans.ttf; path = ../shared/assets/fonts/IBMPlexSans.ttf; sourceTree = "<group>"; };
 		8CA5CB7E2A134220AB62370B /* IBMPlexMono-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Italic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Italic.ttf"; sourceTree = "<group>"; };
-		93396F628DA498595B93956B /* Pods-BTTests.debug-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug-gps.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug-gps.xcconfig"; sourceTree = "<group>"; };
 		997AE6137471448A99893BC8 /* IBMPlexMono-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		9B4A262ECA724F9CAB9A2C70 /* IBMPlexMono-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-BoldItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		A53F7B2124F21C3000C5E30A /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
@@ -218,9 +215,7 @@
 		A58AB54224EF45CE00F393B4 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043724E4B81A00C3157A /* ENManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENManager+Extensions.swift"; sourceTree = "<group>"; };
 		A5A3043A24E565F900C3157A /* ENBridgeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ENBridgeConstants.h; sourceTree = "<group>"; };
-		A5B812656CA17568F2153FC2 /* Pods-BT.release-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release-gps.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release-gps.xcconfig"; sourceTree = "<group>"; };
 		A5CE5FC425005BE40045251A /* MiscUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscUnitTests.swift; sourceTree = "<group>"; };
-		A74024E269FF63C56B1025EA /* Pods-BTTests.release-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.release-gps.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.release-gps.xcconfig"; sourceTree = "<group>"; };
 		AE25A1CE9ED048DC83FAE7B0 /* IBMPlexMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Bold.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Bold.ttf"; sourceTree = "<group>"; };
 		B27E26E7076641EFB4386943 /* IBMPlexSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ExtraLightItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		B2A58213244CE76C000F39A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -288,12 +283,8 @@
 		B5FC37E0248A7EED006474EB /* ExposureConfigurationRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureConfigurationRequests.swift; sourceTree = "<group>"; };
 		B5FC37E2248A82AE006474EB /* Exposure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exposure.swift; sourceTree = "<group>"; };
 		B5FC37F5248A9968006474EB /* ENTemporaryExposureKey+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ENTemporaryExposureKey+Extensions.swift"; sourceTree = "<group>"; };
-		B7372C03D7AA19943931FCE4 /* libPods-BT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BT.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.release.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.release.xcconfig"; sourceTree = "<group>"; };
 		BF6254720C1D4A3288ECE351 /* IBMPlexMono-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBold.ttf"; path = "../shared/assets/fonts/IBMPlexMono-SemiBold.ttf"; sourceTree = "<group>"; };
-		BFBEC306069776E19FE33586 /* Pods-BT.debug-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug-gps.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug-gps.xcconfig"; sourceTree = "<group>"; };
 		C42F32AF52974EE8ADEE67B5 /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Medium.ttf"; path = "../shared/assets/fonts/IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
-		C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.release.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.release.xcconfig"; sourceTree = "<group>"; };
 		C504FDC1249D15260024219C /* BT-Production.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BT-Production.entitlements"; sourceTree = "<group>"; };
 		C504FDC4249D155D0024219C /* BT-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BT-Development.entitlements"; sourceTree = "<group>"; };
 		C53FD0C124719AD1006D3268 /* BT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,7 +302,6 @@
 		C98841A50F7B43E5987C2D4A /* IBMPlexSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-LightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		CC1EBAC6486247BFA5EF04EB /* IBMPlexSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-SemiBold.ttf"; path = "../app/assets/fonts/IBMPlexSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		CF0DA9BBE69043D2BD80FF3B /* IBMPlexMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-LightItalic.ttf"; path = "../shared/assets/fonts/IBMPlexMono-LightItalic.ttf"; sourceTree = "<group>"; };
-		D04E298A8C92F0D267143C3A /* Pods-BTTests.staging-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.staging-bt.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.staging-bt.xcconfig"; sourceTree = "<group>"; };
 		D4CB502824A66C5D00405D61 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		D4CB502A24A66C7500405D61 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D4CB502B24A66C7500405D61 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -319,21 +309,19 @@
 		D5A05B8E61DC402E8753A057 /* IBMPlexMono-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-ExtraLightItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		D5CD9AD3FED744E6B5F0CEF9 /* IBMPlexMono.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = file; name = IBMPlexMono.ttf; path = ../app/assets/fonts/IBMPlexMono.ttf; sourceTree = "<group>"; };
 		D5DFB90A472F4881A3C888C3 /* IBMPlexSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ThinItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-ThinItalic.ttf"; sourceTree = "<group>"; };
-		D74339326986C2F8EE1F59BA /* libPods-BTTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BTTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D623CF9DBAEB707C750F28BA /* Pods-BT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug.xcconfig"; sourceTree = "<group>"; };
 		DF7DA7FE28F84E9EA7A6E4D4 /* IBMPlexMono-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Thin.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Thin.ttf"; sourceTree = "<group>"; };
 		E5C8EDCCEFCE4874A747E404 /* IBMPlexMono-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Light.ttf"; path = "../shared/assets/fonts/IBMPlexMono-Light.ttf"; sourceTree = "<group>"; };
 		E872D3374DDA4AA29E3D8511 /* IBMPlexSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-Thin.ttf"; path = "../app/assets/fonts/IBMPlexSans-Thin.ttf"; sourceTree = "<group>"; };
-		EB49F7B51E4014329A4AA36D /* Pods-BT.staging-gps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.staging-gps.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.staging-gps.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EE9A6AB45FE446E085003E35 /* IBMPlexMono-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Bold.ttf"; path = "../app/assets/fonts/IBMPlexMono-Bold.ttf"; sourceTree = "<group>"; };
-		F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.debug.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F1B36261D95A4838A5939417 /* IBMPlexMono-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-MediumItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-MediumItalic.ttf"; sourceTree = "<group>"; };
 		F2FF56A5536545E693AF41DC /* IBMPlexMono-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-LightItalic.ttf"; path = "../app/assets/fonts/IBMPlexMono-LightItalic.ttf"; sourceTree = "<group>"; };
 		F3267DEC44754D9BB6ABA49D /* IBMPlexSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-BoldItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		F690C28C97ED20A9CDA73D52 /* Pods-BTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTTests.release.xcconfig"; path = "Target Support Files/Pods-BTTests/Pods-BTTests.release.xcconfig"; sourceTree = "<group>"; };
 		F9ABA426412C489ABAE6E56B /* IBMPlexSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-LightItalic.ttf"; path = "../app/assets/fonts/IBMPlexSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		FAA9C6E73C124FF5AF424D48 /* IBMPlexMono-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-Thin.ttf"; path = "../app/assets/fonts/IBMPlexMono-Thin.ttf"; sourceTree = "<group>"; };
-		FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BT.debug-bt.xcconfig"; path = "Target Support Files/Pods-BT/Pods-BT.debug-bt.xcconfig"; sourceTree = "<group>"; };
 		FCF549913C514FDC98379A78 /* IBMPlexMono-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexMono-SemiBold.ttf"; path = "../app/assets/fonts/IBMPlexMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		FF7D8132928346A2904ED363 /* IBMPlexSans-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IBMPlexSans-ThinItalic.ttf"; path = "../shared/assets/fonts/IBMPlexSans-ThinItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -358,7 +346,7 @@
 				C53FD09724719AD1006D3268 /* CoreGraphics.framework in Frameworks */,
 				C53FD09824719AD1006D3268 /* CoreData.framework in Frameworks */,
 				C53FD09924719AD1006D3268 /* Accelerate.framework in Frameworks */,
-				49C5264730115D459DEB65DA /* libPods-BT.a in Frameworks */,
+				6C5D4B1A86B6B36E470A8A8C /* libPods-BT.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B01CF5299E2C4108F39C1232 /* libPods-BTTests.a in Frameworks */,
+				AABE3F886F529CAC3E2DFFA2 /* libPods-BTTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,22 +387,10 @@
 		08CFC7C2232A41A8F8E9E0B0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FB93AEF93E757536F638DE58 /* Pods-BT.debug-bt.xcconfig */,
-				BFBEC306069776E19FE33586 /* Pods-BT.debug-gps.xcconfig */,
-				67DC43BDE1EF8997F26F2108 /* Pods-BT.release-bt.xcconfig */,
-				A5B812656CA17568F2153FC2 /* Pods-BT.release-gps.xcconfig */,
-				844C843F62B5585C2F2346EA /* Pods-BT.staging-bt.xcconfig */,
-				EB49F7B51E4014329A4AA36D /* Pods-BT.staging-gps.xcconfig */,
-				323E903F3DAB2E4C925FECBD /* Pods-BTTests.debug-bt.xcconfig */,
-				93396F628DA498595B93956B /* Pods-BTTests.debug-gps.xcconfig */,
-				141B3702EDB77175BCFE1BA2 /* Pods-BTTests.release-bt.xcconfig */,
-				A74024E269FF63C56B1025EA /* Pods-BTTests.release-gps.xcconfig */,
-				D04E298A8C92F0D267143C3A /* Pods-BTTests.staging-bt.xcconfig */,
-				751F8AE184B9709A8C3817BF /* Pods-BTTests.staging-gps.xcconfig */,
-				6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */,
-				BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */,
-				F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */,
-				C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */,
+				D623CF9DBAEB707C750F28BA /* Pods-BT.debug.xcconfig */,
+				0E7693C43E2C06EFE47131DD /* Pods-BT.release.xcconfig */,
+				60A3B6F7E32CD64CD96F46B7 /* Pods-BTTests.debug.xcconfig */,
+				F690C28C97ED20A9CDA73D52 /* Pods-BTTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -515,8 +491,8 @@
 				08445F4B24283AFF008754AC /* Accelerate.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				B7372C03D7AA19943931FCE4 /* libPods-BT.a */,
-				D74339326986C2F8EE1F59BA /* libPods-BTTests.a */,
+				79FC95AED482A053CC54D0A4 /* libPods-BT.a */,
+				4DFC67092884BF5BBFF3A6C8 /* libPods-BTTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -865,15 +841,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C53FD0BC24719AD1006D3268 /* Build configuration list for PBXNativeTarget "BT" */;
 			buildPhases = (
-				B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */,
+				985894EE54EF2BD490593B28 /* [CP] Check Pods Manifest.lock */,
 				C53FD07F24719AD1006D3268 /* Start Packager */,
 				C53FD08024719AD1006D3268 /* Sources */,
 				C53FD08A24719AD1006D3268 /* Frameworks */,
 				C53FD09B24719AD1006D3268 /* Resources */,
 				D447FDBA24BF332B00250621 /* Configure ATS */,
 				C53FD0BB24719AD1006D3268 /* Bundle React Native code and images */,
-				CA7A0CD328168F07F79863AA /* [CP] Copy Pods Resources */,
-				E7A3D3BE2D47F4E7E759AD09 /* [CP] Embed Pods Frameworks */,
+				ED5A72953D5A654D867DFE32 /* [CP] Embed Pods Frameworks */,
+				28544EACE2B3BCCD7D2C6812 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -888,7 +864,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5AA24DC24768FFF00BA0A99 /* Build configuration list for PBXNativeTarget "BTTests" */;
 			buildPhases = (
-				C7E79764B7E41310387F475F /* [CP] Check Pods Manifest.lock */,
+				9294F391AC93CA8A5D911E90 /* [CP] Check Pods Manifest.lock */,
 				C5AA24D524768FFF00BA0A99 /* Sources */,
 				C5AA24D924768FFF00BA0A99 /* Frameworks */,
 				C5AA24DB24768FFF00BA0A99 /* Resources */,
@@ -1024,7 +1000,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B8B3F66D67BD3E6B2C9A66F0 /* [CP] Check Pods Manifest.lock */ = {
+		28544EACE2B3BCCD7D2C6812 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9294F391AC93CA8A5D911E90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BTTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		985894EE54EF2BD490593B28 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1079,46 +1095,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		C7E79764B7E41310387F475F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BTTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CA7A0CD328168F07F79863AA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BT/Pods-BT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D447FDBA24BF332B00250621 /* Configure ATS */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1137,7 +1113,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/libexec/PlistBuddy -c \"Set :NSAppTransportSecurity:NSAllowsArbitraryLoads ${ALLOW_INSECURE_HTTP}\" ${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\n";
 		};
-		E7A3D3BE2D47F4E7E759AD09 /* [CP] Embed Pods Frameworks */ = {
+		ED5A72953D5A654D867DFE32 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1384,7 +1360,7 @@
 		};
 		C53FD0BD24719AD1006D3268 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AE3B639DFDF6E41FD542E20 /* Pods-BT.debug.xcconfig */;
+			baseConfigurationReference = D623CF9DBAEB707C750F28BA /* Pods-BT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1404,9 +1380,9 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG -D FB_SONARKIT_ENABLED";
-				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
+				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.guam.bt;
 				PRODUCT_NAME = BT;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "GUAM Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1415,7 +1391,7 @@
 		};
 		C53FD0BF24719AD1006D3268 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE28EBCA58D98D36963E7A04 /* Pods-BT.release.xcconfig */;
+			baseConfigurationReference = 0E7693C43E2C06EFE47131DD /* Pods-BT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1435,7 +1411,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\"";
-				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
+				PRODUCT_BUNDLE_IDENTIFIER = gov.adph.exposurenotifications;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
@@ -1445,7 +1421,7 @@
 		};
 		C5AA24DD24768FFF00BA0A99 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F09E2289EC86E604D976A1CB /* Pods-BTTests.debug.xcconfig */;
+			baseConfigurationReference = 60A3B6F7E32CD64CD96F46B7 /* Pods-BTTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -1477,7 +1453,7 @@
 		};
 		C5AA24DF24768FFF00BA0A99 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4EC281E70775580A535E3C0 /* Pods-BTTests.release.xcconfig */;
+			baseConfigurationReference = F690C28C97ED20A9CDA73D52 /* Pods-BTTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;

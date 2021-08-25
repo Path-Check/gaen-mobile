@@ -46,6 +46,18 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
+export const subscribeToChaffRequestEvents = (
+  cb: () => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+
+  return ExposureEvents.addListener("onChaffRequestTriggered", () => {
+    cb()
+  })
+}
+
 const toStatus = (data: string): ENPermissionStatus => {
   switch (data) {
     case "Unknown":
@@ -222,6 +234,17 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
   }
 }
 
+export const fetchChaffKeys = async (): Promise<ExposureKey[]> => {
+  const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchChaffKeys()
+  if (rawKeys.every(validRawExposureKey)) {
+    const exposureKeys = rawKeys.map(toExposureKey)
+    return exposureKeys
+  } else {
+    Logger.error("Invalid chaff keys from native layer", { rawKeys })
+    throw new Error("Invalid chaff keys from native layer")
+  }
+}
+
 const validRawExposureKey = (rawKey: RawExposureKey): boolean => {
   const { key, rollingPeriod, rollingStartNumber, transmissionRisk } = rawKey
   if (typeof key !== "string" || key.length === 0) {
@@ -298,4 +321,8 @@ export const resetExposures = async (): Promise<"success"> => {
 
 export const addOldExposure = async (): Promise<"success"> => {
   return debugModule.addOldExposure()
+}
+
+export const configureFasterChaffForTesting = async (): Promise<"success"> => {
+  return debugModule.configureFasterChaffForTesting()
 }

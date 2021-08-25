@@ -9,6 +9,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.soloader.SoLoader;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import io.realm.Realm;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.pathcheck.covidsafepaths.bridge.ExposureNotificationsPackage;
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -36,7 +38,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           packages.add(new ExposureNotificationsPackage());
 
-
           return packages;
         }
 
@@ -44,6 +45,8 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
+
       };
 
   @Override
@@ -58,8 +61,18 @@ public class MainApplication extends Application implements ReactApplication {
     AndroidThreeTen.init(this);
     SoLoader.init(this, /* native exopackage */ false);
     initializeRealm();
-    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());    
+    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     initializeBugsnag();
+
+    Context application = this;
+
+    getReactNativeHost().getReactInstanceManager()
+        .addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
+          @Override
+          public void onReactContextInitialized(ReactContext context) {
+            ChaffRequestWorker.scheduleWork(application);
+          }
+        });
   }
 
   /**
