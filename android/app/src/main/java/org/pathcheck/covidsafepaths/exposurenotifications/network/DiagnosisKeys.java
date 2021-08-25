@@ -20,9 +20,6 @@ package org.pathcheck.covidsafepaths.exposurenotifications.network;
 import android.content.Context;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import java.util.concurrent.ExecutionException;
-
 import io.reactivex.rxjava3.core.Observable;
 
 /**
