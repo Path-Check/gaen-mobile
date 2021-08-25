@@ -1,8 +1,6 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.reactmodules;
 
 import androidx.annotation.NonNull;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper;
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureInformation;
-import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeysWorker;
+import org.pathcheck.covidsafepaths.exposurenotifications.nearby.ProvideDiagnosisKeyService;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.RealmSecureStorageBte;
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.objects.ExposureEntity;
@@ -68,15 +66,36 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
         .isEnabled()
         .addOnSuccessListener(enabled -> {
           if (enabled) {
-            WorkManager workManager = WorkManager.getInstance(getReactApplicationContext());
-            workManager.enqueue(new OneTimeWorkRequest.Builder(ProvideDiagnosisKeysWorker.class).build());
-            // We are not waiting until the job is completed.
-            // Is there any way to pass the promise through all the workers?
-            promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
+            ProvideDiagnosisKeyService service =
+                ProvideDiagnosisKeyService.getInstance(getReactApplicationContext().getApplicationContext());
+            service.downloadKeys(new DetectExposureCallback(promise, service));
           } else {
             promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
           }
         })
         .addOnFailureListener(promise::reject);
+  }
+
+  private final class DetectExposureCallback implements ProvideDiagnosisKeyService.DownloadDiagnosisKeyListener {
+
+    private final Promise promise;
+    private final ProvideDiagnosisKeyService service;
+
+    public DetectExposureCallback(Promise promise, ProvideDiagnosisKeyService service) {
+      this.promise = promise;
+      this.service = service;
+    }
+
+    @Override
+    public void onSuccess() {
+      promise.resolve(CallbackMessages.DEBUG_DETECT_EXPOSURES_SUCCESS);
+      service.cleanUp();
+    }
+
+    @Override
+    public void onError() {
+      promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
+      service.cleanUp();
+    }
   }
 }

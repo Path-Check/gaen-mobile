@@ -58,7 +58,7 @@ public final class NotificationHelper {
   /**
    * Create notification that will be shown while we are checking exposures.
    */
-  public static ForegroundInfo createWorkerNotification(Context context) {
+  public static void triggerCheckingNotification(Context context) {
     createBackgroundWorkerNotificationChannel(context);
     NotificationCompat.Builder builder =
         new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
@@ -66,6 +66,19 @@ public final class NotificationHelper {
             .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
             .setContentTitle(context.getString(R.string.background_worker_notification_title))
             .setOngoing(true);
+    NotificationManagerCompat notificationManager = NotificationManagerCompat
+            .from(context);
+    notificationManager.notify(BACKGROUND_WORKER_NOTIFICATION_ID, builder.build());
+  }
+
+  public static ForegroundInfo createWorkerNotification(Context context) {
+    createBackgroundWorkerNotificationChannel(context);
+    NotificationCompat.Builder builder =
+            new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
+                    .setContentTitle(context.getString(R.string.background_worker_notification_title))
+                    .setOngoing(true);
     return new ForegroundInfo(BACKGROUND_WORKER_NOTIFICATION_ID, builder.build());
   }
 

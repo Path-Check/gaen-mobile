@@ -53,7 +53,7 @@ public class ProvideDiagnosisKeysWorker extends ListenableWorker {
 
   private static final String TAG = "ProvideDiagnosisKeysWkr";
 
-  private static final Duration IS_ENABLED_TIMEOUT = Duration.ofSeconds(10);
+  public static final Duration IS_ENABLED_TIMEOUT = Duration.ofSeconds(10);
   public static final Duration JOB_INTERVAL = Duration.ofHours(12);
   public static final Duration JOB_FLEX_INTERVAL = Duration.ofHours(3);
   public static final String WORKER_NAME = "ProvideDiagnosisKeysWorker";

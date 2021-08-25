@@ -34,6 +34,8 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -122,6 +124,11 @@ class DiagnosisKeyDownloader {
         AppExecutors.getLightweightExecutor());
 
     return batchesDownloaded;
+  }
+
+  Observable<ImmutableList<KeyFileBatch>> downloadBatchFiles() {
+    return Observable.fromFuture(download())
+        .subscribeOn(Schedulers.io());
   }
 
   private ListenableFuture<List<BatchFile>> initiateDownloads(

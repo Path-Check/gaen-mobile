@@ -20,6 +20,7 @@ package org.pathcheck.covidsafepaths.exposurenotifications.network;
 import android.content.Context;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * A facade to network operations to download all known Diagnosis Keys.
@@ -39,5 +40,9 @@ public class DiagnosisKeys {
 
   public ListenableFuture<ImmutableList<KeyFileBatch>> download() {
     return diagnosisKeyDownloader.download();
+  }
+
+  public Observable<ImmutableList<KeyFileBatch>> downloadBatchFiles() {
+    return diagnosisKeyDownloader.downloadBatchFiles();
   }
 }
