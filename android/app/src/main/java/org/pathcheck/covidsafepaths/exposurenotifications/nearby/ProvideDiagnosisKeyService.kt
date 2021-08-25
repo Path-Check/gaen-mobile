@@ -1,25 +1,17 @@
 package org.pathcheck.covidsafepaths.exposurenotifications.nearby
 
 import android.content.Context
-import android.util.Log
-import androidx.work.ListenableWorker
-import com.google.common.collect.ImmutableList
-import com.google.common.util.concurrent.FluentFuture
-import com.google.common.util.concurrent.Futures
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.lang.ref.WeakReference
 import org.pathcheck.covidsafepaths.exposurenotifications.ExposureNotificationClientWrapper
-import org.pathcheck.covidsafepaths.exposurenotifications.common.AppExecutors
 import org.pathcheck.covidsafepaths.exposurenotifications.common.NotificationHelper
-import org.pathcheck.covidsafepaths.exposurenotifications.common.TaskToFutureAdapter
 import org.pathcheck.covidsafepaths.exposurenotifications.network.DiagnosisKeys
 import org.pathcheck.covidsafepaths.exposurenotifications.network.KeyFileBatch
 import org.pathcheck.covidsafepaths.exposurenotifications.storage.ExposureNotificationSharedPreferences
 import org.threeten.bp.Instant
-import java.lang.ref.WeakReference
-import java.util.concurrent.TimeUnit
 
 class ProvideDiagnosisKeyService private constructor(context: Context) {
     private val diagnosisKeys = DiagnosisKeys(context)
