@@ -12,6 +12,7 @@ export interface Configuration {
   displayAcceptTermsOfService: boolean
   displayAppTransition: boolean
   displayCallbackForm: boolean
+  displayRequestCallbackUrl: boolean
   displayCallEmergencyServices: boolean
   displayCovidData: boolean
   displayCovidDataWebView: boolean
@@ -28,7 +29,8 @@ export interface Configuration {
   healthAuthorityLearnMoreUrl: string
   healthAuthorityLegalPrivacyPolicyUrl: string | null
   healthAuthorityHealthCheckUrl: string | null
-  healthAuthorityPrivacyPolicyUrl: string
+  healthAuthorityPrivacyPolicyUrl: string | null
+  healthAuthorityRequestCallbackNumber: string | null
   healthAuthorityVerificationCodeInfoUrl: string | null
   includeSymptomOnsetDate: boolean
   measurementSystem: MeasurementSystem
@@ -50,6 +52,7 @@ const initialState: Configuration = {
   displayAcceptTermsOfService: false,
   displayAppTransition: false,
   displayCallbackForm: false,
+  displayRequestCallbackUrl: false,
   displayCallEmergencyServices: false,
   displayCovidData: false,
   displayCovidDataWebView: false,
@@ -67,6 +70,7 @@ const initialState: Configuration = {
   healthAuthorityLearnMoreUrl: "",
   healthAuthorityLegalPrivacyPolicyUrl: "",
   healthAuthorityPrivacyPolicyUrl: "",
+  healthAuthorityRequestCallbackNumber: "",
   healthAuthorityVerificationCodeInfoUrl: null,
   includeSymptomOnsetDate: false,
   measurementSystem: "Imperial" as const,
@@ -119,12 +123,15 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const healthAuthorityVerificationCodeInfoUrl =
     env.VERIFICATION_CODE_INFO_URL || null
   const remoteContentUrl = env.REMOTE_CONTENT_URL || null
+  const healthAuthorityRequestCallbackNumber =
+    env.HEALTH_AUTHORITY_REQUEST_CALLBACK_NUMBER || null
   const supportPhoneNumber = env.SUPPORT_PHONE_NUMBER || null
 
   const displayAcceptTermsOfService =
     env.DISPLAY_ACCEPT_TERMS_OF_SERVICE === "true"
   const displayAppTransition = env.DISPLAY_APP_TRANSITION === "true"
   const displayCallbackForm = env.DISPLAY_CALLBACK_FORM === "true"
+  const displayRequestCallbackUrl = env.DISPLAY_REQUEST_CALLBACK_URL === "true"
   const displayCallEmergencyServices =
     env.DISPLAY_CALL_EMERGENCY_SERVICES === "true"
   const displayCovidData = env.DISPLAY_COVID_DATA === "true"
@@ -171,6 +178,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayAcceptTermsOfService,
         displayAppTransition,
         displayCallbackForm,
+        displayRequestCallbackUrl,
         displayCallEmergencyServices,
         displayCovidData,
         displayCovidDataWebView,
@@ -188,6 +196,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         healthAuthorityLearnMoreUrl,
         healthAuthorityLegalPrivacyPolicyUrl,
         healthAuthorityPrivacyPolicyUrl,
+        healthAuthorityRequestCallbackNumber,
         healthAuthorityVerificationCodeInfoUrl,
         includeSymptomOnsetDate,
         measurementSystem,

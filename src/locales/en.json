@@ -27,6 +27,13 @@
     "success_got_it": "Got it",
     "success_header": "You're in the queue"
   },
+  "callback_request": {
+    "callback_button_text": "Request Callback",
+    "phonenumber_display_text": "You may also call the {{healthAuthorityName}} at ",
+    "phonenumber_display_text2": " or you can request a callback by clicking the \"Request Callback\" button below.",
+    "verification_code_warning": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} to request your code at ",
+    "verification_code_warning2": "or you can request a callback by clicking the \" Request Callback\" button below."
+  },
   "common": {
     "back": "Back",
     "cancel": "Cancel",
@@ -45,6 +52,7 @@
     "ok": "Ok",
     "okay": "Okay",
     "on": "ON",
+    "request_callback": "Request Callback",
     "save": "Save",
     "select_language": "Select language",
     "settings": "Open Settings",
