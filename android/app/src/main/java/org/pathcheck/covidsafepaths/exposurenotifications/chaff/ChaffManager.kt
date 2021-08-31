@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.facebook.react.bridge.WritableArray
+import com.facebook.react.bridge.WritableNativeArray
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.security.SecureRandom
@@ -52,7 +53,8 @@ class ChaffManager private constructor(
         }
     }
 
-    fun getChaffKeys(): WritableArray? = convertToWriteableArray(getSavedRNExposureKeys())
+    fun getChaffKeys(): WritableArray = convertToWriteableArray(getSavedRNExposureKeys())
+        ?: WritableNativeArray()
 
     @VisibleForTesting
     fun getSavedRNExposureKeys(): List<RNExposureKey>? {
@@ -91,7 +93,9 @@ class ChaffManager private constructor(
     }
 
     private fun convertToWriteableArray(exposureKeys: List<RNExposureKey>?): WritableArray? {
-        return Util.convertListToWritableArray(exposureKeys)
+        return exposureKeys?.run {
+            Util.convertListToWritableArray(exposureKeys)
+        }
     }
 
     companion object {
