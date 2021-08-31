@@ -1380,7 +1380,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\" -D DEBUG -D FB_SONARKIT_ENABLED";
-				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.guam.bt;
+				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "GUAM Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
@@ -1411,7 +1411,7 @@
 				);
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.modulemap\" -Xcc -fmodule-map-file=\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.modulemap\" -Xcc -fmodule-map-file=\"${PODS_ROOT}/Headers/Private/Realm/Realm.modulemap\"";
-				PRODUCT_BUNDLE_IDENTIFIER = gov.adph.exposurenotifications;
+				PRODUCT_BUNDLE_IDENTIFIER = org.pathcheck.bt;
 				PRODUCT_NAME = BT;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BT/BT-Bridging-Header.h";
