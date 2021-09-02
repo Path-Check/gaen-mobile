@@ -81,7 +81,6 @@ class ProvideDiagnosisKeyService private constructor(context: Context) {
         }
     }
 
-    // ToDo Make sure the notification displays
     private fun sendNotification() {
         Observable.fromCallable {
             weakContext.get()?.run weakContext@{
