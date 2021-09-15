@@ -27,6 +27,22 @@ RCT_REMAP_METHOD(fetchExposureKeys,
   }];
 }
 
+RCT_REMAP_METHOD(fetchChaffKeys,
+fetchChaffKeysWithResolver:(RCTPromiseResolveBlock)resolve
+rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [[ExposureManager shared] fetchChaffKeysWithCallback:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable keys,
+                                                            ExposureManagerError * _Nullable error) {
+    if (error) {
+      reject(error.errorCode,
+             error.localizedMessage,
+             error.underlyingError);
+    } else {
+      resolve(keys);
+    }
+  }];
+}
+
 RCT_REMAP_METHOD(storeRevisionToken,
                  revisionToken: (NSString *)revisionToken
                  resolver:(RCTPromiseResolveBlock)resolve
