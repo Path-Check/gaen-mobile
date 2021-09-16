@@ -68,21 +68,12 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
           if (enabled) {
             ProvideDiagnosisKeyService service =
                 ProvideDiagnosisKeyService.getInstance(getReactApplicationContext().getApplicationContext());
-            addServiceSetupTime();
             service.downloadKeys(new DetectExposureCallback(promise, service));
           } else {
             promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
           }
         })
         .addOnFailureListener(promise::reject);
-  }
-
-  private void addServiceSetupTime() {
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException ie) {
-      Thread.currentThread().interrupt();
-    }
   }
 
   private final class DetectExposureCallback implements ProvideDiagnosisKeyService.DownloadDiagnosisKeyListener {
@@ -102,8 +93,9 @@ public class ExposureHistoryModule extends ReactContextBaseJavaModule {
     }
 
     @Override
-    public void onError() {
-      promise.reject(new Exception(CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED));
+    public void onError(@NonNull Throwable error) {
+      promise.reject(new Exception(
+          CallbackMessages.DEBUG_DETECT_EXPOSURES_ERROR_EN_NOT_ENABLED + "Throwable: " + error.getMessage()));
       service.cleanUp();
     }
   }
