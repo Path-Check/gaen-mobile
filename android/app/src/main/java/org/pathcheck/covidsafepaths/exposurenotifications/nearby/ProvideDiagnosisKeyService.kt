@@ -3,6 +3,7 @@ package org.pathcheck.covidsafepaths.exposurenotifications.nearby
 import android.content.Context
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.lang.ref.WeakReference
@@ -39,19 +40,26 @@ class ProvideDiagnosisKeyService private constructor(context: Context) {
 
     interface DownloadDiagnosisKeyListener {
         fun onSuccess()
-        fun onError()
+        fun onError(error: Throwable)
     }
 
     fun downloadKeys(listener: DownloadDiagnosisKeyListener) {
         this.listener = listener
 
-        Observable.fromCallable {
-            wrapper.isEnabled
-        }
-            .subscribeOn(Schedulers.io())
+        Observable.create(
+            ObservableOnSubscribe<Boolean> { emitter ->
+                wrapper.isEnabled
+                    .addOnSuccessListener {
+                        emitter.onNext(it)
+                        emitter.onComplete()
+                    }.addOnFailureListener {
+                        emitter.onError(it)
+                    }
+            }
+        ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .flatMap {
-                if (it.result) {
+            .flatMap { result ->
+                if (result) {
                     sendNotification()
                     getDiagnosisKeys()
                 } else {
@@ -104,7 +112,7 @@ class ProvideDiagnosisKeyService private constructor(context: Context) {
         if (throwable is NotEnabledException) {
             listener?.onSuccess()
         } else {
-            listener?.onError()
+            listener?.onError(throwable)
         }
     }
 }

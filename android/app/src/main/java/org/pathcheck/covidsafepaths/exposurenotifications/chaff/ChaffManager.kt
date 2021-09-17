@@ -9,13 +9,14 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
+import org.pathcheck.covidsafepaths.exposurenotifications.chaff.ChaffRequestWorker.Companion.scheduleWork
 import org.pathcheck.covidsafepaths.exposurenotifications.dto.RNExposureKey
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProvider
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.TimeProviderImpl
 import org.pathcheck.covidsafepaths.exposurenotifications.utils.Util
 
 class ChaffManager private constructor(
-    context: Context,
+    private val context: Context,
     private val timeProvider: TimeProvider,
     private val secureRandom: SecureRandom
 ) {
@@ -33,6 +34,7 @@ class ChaffManager private constructor(
 
     fun setConfiguration(config: Config) {
         this.config = config
+        scheduleWork(context)
     }
 
     fun shouldFire(): Boolean {
