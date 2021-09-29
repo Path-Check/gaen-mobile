@@ -218,7 +218,7 @@ final class ExposureManager: NSObject {
 
   @objc func fetchChaffKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
-      (keys ?? []).map { $0.chaffRepresentation }
+      (keys ?? []).map { $0.asDictionary }
     }, callback: callback)
   }
 
@@ -276,7 +276,6 @@ final class ExposureManager: NSObject {
         let defaults = UserDefaults.standard
         let randomNum = Int.random(in: 0..<20)
         let lastChaffTimestamp = defaults.double(forKey: "lastChaffTimestamp")
-        // self?.performChaffRequest()
         
         if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmittedChaff: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
           self?.performChaffRequest()
