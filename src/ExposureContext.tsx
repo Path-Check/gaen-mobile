@@ -80,7 +80,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
       if (certResponse.kind === "success") {
         await trackEvent("epi_analytics", "chaff_request_sent")
       } else {
-        await trackEvent("epi_analytics", "chaff_request_failed")
+        await trackEvent("epi_analytics", "chaff_request_hmac_failed")
       }
     } else {
       await trackEvent("epi_analytics", "chaff_request_failed")

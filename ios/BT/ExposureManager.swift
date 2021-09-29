@@ -217,8 +217,9 @@ final class ExposureManager: NSObject {
   }
 
   @objc func fetchChaffKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
+    print("James, fetch chaff keys called")
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
-      (keys ?? []).map { $0.chaffRepresentation }
+      (keys ?? []).map { $0.asDictionary }
     }, callback: callback)
   }
 
@@ -276,7 +277,6 @@ final class ExposureManager: NSObject {
         let defaults = UserDefaults.standard
         let randomNum = Int.random(in: 0..<20)
         let lastChaffTimestamp = defaults.double(forKey: "lastChaffTimestamp")
-        // self?.performChaffRequest()
         
         if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmittedChaff: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
           self?.performChaffRequest()
@@ -681,7 +681,9 @@ private extension ExposureManager {
   }
 
   func performChaffRequest() {
+    print("James performing chaff request")
     fetchChaffKeys { [weak self] (keyArray, error) in
+      print("keyArray James \(String(describing: keyArray))")
       if error != nil {
         print("error: \(error.debugDescription)")
       }
@@ -701,6 +703,7 @@ private extension ExposureManager {
                                            underlyingError: underlyingError)
         callback(nil, emError)
       } else {
+        print("keys james \(String(describing: keys))")
         callback(transform(keys), nil)
       }
     }
