@@ -92,21 +92,28 @@ const SymptomOnsetDate: FunctionComponent = () => {
         <Text style={style.sectionBodyText}>
           {t("export.symptom_onset.symptoms_include")}
         </Text>
-        <FlatList style={style.list}
+        <FlatList
+          style={style.list}
           data={[
-            {key: t("export.symptom_onset.symptoms_list.fever")},
-            {key: t("export.symptom_onset.symptoms_list.cough")},
-            {key: t("export.symptom_onset.symptoms_list.shortness_of_breath")},
-            {key: t("export.symptom_onset.symptoms_list.fatigue")},
-            {key: t("export.symptom_onset.symptoms_list.muscle_aches")},
-            {key: t("export.symptom_onset.symptoms_list.headaches")},
-            {key: t("export.symptom_onset.symptoms_list.loss_of_taste_smell")},
-            {key: t("export.symptom_onset.symptoms_list.sore_throat")},
-            {key: t("export.symptom_onset.symptoms_list.congestion")},
-            {key: t("export.symptom_onset.symptoms_list.nausea")},
-            {key: t("export.symptom_onset.symptoms_list.diarrhea")}
+            { key: t("export.symptom_onset.symptoms_list.fever") },
+            { key: t("export.symptom_onset.symptoms_list.cough") },
+            {
+              key: t("export.symptom_onset.symptoms_list.shortness_of_breath"),
+            },
+            { key: t("export.symptom_onset.symptoms_list.fatigue") },
+            { key: t("export.symptom_onset.symptoms_list.muscle_aches") },
+            { key: t("export.symptom_onset.symptoms_list.headaches") },
+            {
+              key: t("export.symptom_onset.symptoms_list.loss_of_taste_smell"),
+            },
+            { key: t("export.symptom_onset.symptoms_list.sore_throat") },
+            { key: t("export.symptom_onset.symptoms_list.congestion") },
+            { key: t("export.symptom_onset.symptoms_list.nausea") },
+            { key: t("export.symptom_onset.symptoms_list.diarrhea") },
           ]}
-          renderItem={({item}) => <Text style={style.listItem}>{item.key}</Text>}
+          renderItem={({ item }) => (
+            <Text style={style.listItem}>{item.key}</Text>
+          )}
         />
         <View style={style.radioButtonsContainer}>
           <Text style={style.subheaderText}>
@@ -236,7 +243,7 @@ const style = StyleSheet.create({
   listItem: {
     ...Typography.header.x20,
     ...Typography.style.normal,
-  }
+  },
 })
 
 export default SymptomOnsetDate

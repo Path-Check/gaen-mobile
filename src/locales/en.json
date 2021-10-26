@@ -170,7 +170,7 @@
         "no_token_for_existing_keys": "Existing data was sent to the server. This usually means that this process was attempted previously from this device, but on a different application. You can communicate this to the authority that provided the verification code that was used. There were {{newKeysInserted}} new keys added.",
         "no_token_for_existing_keys_title": "Attempt to submit existing keys"
       }
-    },  
+    },
     "symptom_onset": {
       "did_you_have_symptoms": "Did you have any symptoms?",
       "knowing_symptoms": "Knowing if you’ve had COVID-19 symptoms, and when they started, can help identify the days when you were infectious (including days before your symptoms started).",
