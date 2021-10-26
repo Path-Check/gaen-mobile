@@ -92,53 +92,41 @@ const SymptomOnsetDate: FunctionComponent = () => {
         <Text style={style.sectionBodyText}>
           {`${t("export.symptom_onset.symptoms_include")}:`}
         </Text>
-        <FlatList
-          style={style.list}
-          data={[
-            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.fever")}` },
-            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.cough")}` },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.shortness_of_breath",
-              )}`,
-            },
-            {
-              key: `\u2022 ${t("export.symptom_onset.symptoms_list.fatigue")}`,
-            },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.muscle_aches",
-              )}`,
-            },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.headaches",
-              )}`,
-            },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.loss_of_taste_smell",
-              )}`,
-            },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.sore_throat",
-              )}`,
-            },
-            {
-              key: `\u2022 ${t(
-                "export.symptom_onset.symptoms_list.congestion",
-              )}`,
-            },
-            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.nausea")}` },
-            {
-              key: `\u2022 ${t("export.symptom_onset.symptoms_list.diarrhea")}`,
-            },
-          ]}
-          renderItem={({ item }) => (
-            <Text style={style.listItem}>{item.key}</Text>
-          )}
-        />
+        <View style={style.list}>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.fever",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.cough",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.shortness_of_breath",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.fatigue",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.muscle_aches",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.headaches",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.loss_of_taste_smell",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.sore_throat",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.congestion",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.nausea",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.diarrhea",
+          )}`}</Text>
+        </View>
         <View style={style.radioButtonsContainer}>
           <Text style={style.subheaderText}>
             {t("export.symptom_onset.did_you_have_symptoms")}
