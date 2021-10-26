@@ -174,23 +174,23 @@
     "symptom_onset": {
       "did_you_have_symptoms": "Did you have any symptoms?",
       "knowing_symptoms": "Knowing if you’ve had COVID-19 symptoms, and when they started, can help identify the days when you were infectious (including days before your symptoms started).",
-      "symptoms_include": "Symptoms include:",
+      "symptoms_include": "Symptoms include",
       "no_i_didnt_have": "No, I didn't have any symptoms",
       "symptoms": "Symptoms",
       "when_did_your_symptoms": "When did your symptoms begin?",
       "yes_i_did_have": "Yes, I did have symptoms",
       "symptoms_list": {
-        "fever": "\u2022 Fever or chills",
-        "cough": "\u2022 Cough",
-        "shortness_of_breath": "\u2022 Shortness of breath or difficulty breathing",
-        "fatigue": "\u2022 Fatigue",
-        "muscle_aches": "\u2022 Muscle or body aches",
-        "headaches": "\u2022 Headache",
-        "loss_of_taste_smell": "\u2022 New loss of taste or smell",
-        "sore_throat": "\u2022 Sore throat",
-        "congestion": "\u2022 Congestion or runny nose",
-        "nausea": "\u2022 Nausea or vomiting",
-        "diarrhea": "\u2022 Diarrhea"
+        "fever": "Fever or chills",
+        "cough": "Cough",
+        "shortness_of_breath": "Shortness of breath or difficulty breathing",
+        "fatigue": "Fatigue",
+        "muscle_aches": "Muscle or body aches",
+        "headaches": "Headache",
+        "loss_of_taste_smell": "New loss of taste or smell",
+        "sore_throat": "Sore throat",
+        "congestion": "Congestion or runny nose",
+        "nausea": "Nausea or vomiting",
+        "diarrhea": "Diarrhea"
       }
     },
     "verification_code_info": {

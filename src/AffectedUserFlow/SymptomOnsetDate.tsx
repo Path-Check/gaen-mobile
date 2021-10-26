@@ -90,26 +90,50 @@ const SymptomOnsetDate: FunctionComponent = () => {
           {t("export.symptom_onset.knowing_symptoms")}
         </Text>
         <Text style={style.sectionBodyText}>
-          {t("export.symptom_onset.symptoms_include")}
+          {`${t("export.symptom_onset.symptoms_include")}:`}
         </Text>
         <FlatList
           style={style.list}
           data={[
-            { key: t("export.symptom_onset.symptoms_list.fever") },
-            { key: t("export.symptom_onset.symptoms_list.cough") },
+            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.fever")}` },
+            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.cough")}` },
             {
-              key: t("export.symptom_onset.symptoms_list.shortness_of_breath"),
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.shortness_of_breath",
+              )}`,
             },
-            { key: t("export.symptom_onset.symptoms_list.fatigue") },
-            { key: t("export.symptom_onset.symptoms_list.muscle_aches") },
-            { key: t("export.symptom_onset.symptoms_list.headaches") },
             {
-              key: t("export.symptom_onset.symptoms_list.loss_of_taste_smell"),
+              key: `\u2022 ${t("export.symptom_onset.symptoms_list.fatigue")}`,
             },
-            { key: t("export.symptom_onset.symptoms_list.sore_throat") },
-            { key: t("export.symptom_onset.symptoms_list.congestion") },
-            { key: t("export.symptom_onset.symptoms_list.nausea") },
-            { key: t("export.symptom_onset.symptoms_list.diarrhea") },
+            {
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.muscle_aches",
+              )}`,
+            },
+            {
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.headaches",
+              )}`,
+            },
+            {
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.loss_of_taste_smell",
+              )}`,
+            },
+            {
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.sore_throat",
+              )}`,
+            },
+            {
+              key: `\u2022 ${t(
+                "export.symptom_onset.symptoms_list.congestion",
+              )}`,
+            },
+            { key: `\u2022 ${t("export.symptom_onset.symptoms_list.nausea")}` },
+            {
+              key: `\u2022 ${t("export.symptom_onset.symptoms_list.diarrhea")}`,
+            },
           ]}
           renderItem={({ item }) => (
             <Text style={style.listItem}>{item.key}</Text>
