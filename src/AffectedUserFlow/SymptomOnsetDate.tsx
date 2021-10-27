@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState } from "react"
 import {
-  FlatList,
   Platform,
   Pressable,
   ScrollView,
@@ -207,7 +206,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "space-between",
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
