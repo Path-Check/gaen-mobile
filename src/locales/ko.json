@@ -15,6 +15,9 @@
     "success_got_it": "알겠습니다.",
     "success_header": "귀하는 대기중입니다."
   },
+  "callback_request": {
+    "callback_button_text": "회신 전화 요청"
+  },
   "common": {
     "back": "뒤로 가기",
     "cancel": "취소",
@@ -33,6 +36,7 @@
     "ok": "확인",
     "okay": "확인",
     "on": "켜짐",
+    "request_callback": "회신 전화 요청",
     "save": "저장",
     "select_language": "언어 선택",
     "settings": "설정 열기",
@@ -79,11 +83,11 @@
     "try_again_later": "나중에 다시 시도하십시오"
   },
   "escrow_verification": {
-    "complete_healthcheck": "건강검사 완성",
     "complete": {
       "body": "귀하는 코로나19 확산을 방지하고, 지역사회를 보호하는데 도움이됩니다.",
       "title": "지역사회의 안전을 지켜주셔서 감사합니다!"
     },
+    "complete_healthcheck": "건강검사 완성",
     "error": {
       "invalid_phone_number": "전화 번호는 10자리여야 합니다.",
       "rate_limit": "일일 제출 한도에 초과했습니다. 24시간 후에 다시 시도하십시오."
@@ -152,6 +156,19 @@
       "did_you_have_symptoms": "증상이 있었습니까?",
       "no_i_didnt_have": "아니오, 증상이 없었습니다",
       "symptoms": "증상",
+      "symptoms_list": {
+        "congestion": "충혈 또는 콧물",
+        "cough": "기침",
+        "diarrhea": "설사",
+        "fatigue": "피로",
+        "fever": "발열 또는 오한",
+        "headaches ": "두통",
+        "loss_of_taste_smell": "미각 또는 후각 상실",
+        "muscle_aches": "근육통 또는 신체 통증",
+        "nausea": "메스꺼움 또는 구토",
+        "shortness_of_breath": "숨가쁨 또는 호흡 곤란",
+        "sore_throat": "인후통"
+      },
       "when_did_your_symptoms": "증상이 언제 시작 되었습니까?",
       "yes_i_did_have": "네, 증상이 있었습니다"
     },
@@ -230,7 +247,6 @@
     "your_device_is_scanning": "기기에서 노출을 스캔하고 있으며 앱을 닫더라도 계속 스캔할 수 있습니다."
   },
   "home": {
-    "bluetooth_info_body": "휴대 전화는 블루투스 저에너지를 사용하여 가까이에 있는 다른 휴대 전화를 감지합니다. 이 경우, 휴대 전화에서 앱을 열지 않아도 앱이 매일 로그를 익명으로 기록 할 수 있습니다.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} 앱이 종료 된 후에도 활성 상태로 유지됩니다.",
       "location_disabled_error_message": "노출 알림 기술을 활성화하려면 설정 앱에서 위치 액세스를 승인하십시오.",
@@ -244,6 +260,7 @@
       "tracing_off_subheader": "블루투스 및 근접 추적을 활성화하여 노출에 대한 정보를 얻을 수 있습니다.",
       "tracing_on_header": "노출 알림 켜짐"
     },
+    "bluetooth_info_body": "휴대 전화는 블루투스 저에너지를 사용하여 가까이에 있는 다른 휴대 전화를 감지합니다. 이 경우, 휴대 전화에서 앱을 열지 않아도 앱이 매일 로그를 익명으로 기록 할 수 있습니다.",
     "call_emergency_services": "응급 서비스 호출",
     "check_if_your_symptoms": "증상을 입력하고 건강을 유지하는 방법에 대한 권장 상황을 확인하십시오.",
     "complete_healthcheck": "건강검사 완성",
@@ -313,7 +330,6 @@
     "notification_subheader3": "이 앱은 코로나19 감염으로부터 당신을 보호하지 않습니다.",
     "please_read_the": "읽어 주십시오 ",
     "privacy_policy": "개인정보 정책",
-    "protect_privacy_button": "개인 정보를 보호하는 방법",
     "protect_privacy": {
       "body_1": "이러한 ID에는 개인 정보가 포함되어 있지 않으며, 신분 보호를 위해 10-20 분마다 변경됩니다.",
       "body_2": "휴대 전화는 블루투스 저에너지를 사용하여 다른 휴대 전화와 임의ID를 교환합니다. 이렇게하면 휴대 전화를 켜지 않은 경우에도 {{applicationName}} 앱을 통해 익명으로 일상적인 만남을 추적 할 수 있습니다.",
@@ -331,6 +347,7 @@
       "subheader_4": "각 전화기는 주기적으로 플래그가 지정된 ID 목록을 다운받고 일치하는 항목을 찾습니다.",
       "subheader_5": "만약 {{applicationName}} 앱이 플래그가 부착된 ID와 긍정적인 일치를 찾으면 알림을 받습니다."
     },
+    "protect_privacy_button": "개인 정보를 보호하는 방법",
     "proximity_tracing_already_active": "노출 알림 켜짐",
     "proximity_tracing_body1": "본 앱이 설치된 스마트폰이 켜진 상태로 블루투스가 활성화되어 있고, 일정 시간 동안 서로 가까이 있으면 앱에 만남이 등록됩니다.",
     "proximity_tracing_body2": "만남이 발생하는 경우 귀하의 데이터 및 정보는 익명으로 유지됩니다. 이 앱은 개인 데이터를 저장하지 않습니다. 임의 ID만 교환됩니다. 임의 ID는 14일 후에 삭제됩니다.",
@@ -496,24 +513,6 @@
     "share_anonymized_data": "익명화된 데이터 공유",
     "sharing_anonymized_data": "익명화 된 데이터 공유"
   },
-  "symptom_history": {
-    "did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다.",
-    "errors": {
-      "updating_symptoms": "죄송합니다. 귀하의 증상을 업데이트 할 수 없습니다."
-    },
-    "felt_well": "귀하의 컨디션이 좋았습니다.",
-    "no_entry": "항목 없음",
-    "no_symptoms": "증상 없음",
-    "share_history": "증상 이력 공유",
-    "sharing": {
-      "header": "{{startDate}}에서 {{endDate}}까지의 증상 이력",
-      "no_symptoms_were_logged": "증상이 기록되지 않았습니다.",
-      "you_did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다. 다음과 같은 증상을 보였습니다: {{symptomList}}",
-      "you_felt_well": "귀하의 컨디션이 좋았습니다."
-    },
-    "symptom_history": "증상",
-    "to_protect_your_privacy": "개인 정보를 보호하기 위해 항목은 장치에 저장되고 {{days}}일 후에 자동으로 삭제됩니다."
-  },
   "symptom": {
     "bluish_lips_or_face": "푸른 입술이나 얼굴",
     "congestion_or_runny_nose": "충혈 또는 콧물",
@@ -531,6 +530,24 @@
     "persistent_pain_or_pressure_in_the_chest": "가슴의 지속적인 통증 또는 압박",
     "shortness_of_breath_or_difficulty_breathing": "숨가쁨 또는 호흡 곤란",
     "sore_throat": "인후통"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다.",
+    "errors": {
+      "updating_symptoms": "죄송합니다. 귀하의 증상을 업데이트 할 수 없습니다."
+    },
+    "felt_well": "귀하의 컨디션이 좋았습니다.",
+    "no_entry": "항목 없음",
+    "no_symptoms": "증상 없음",
+    "share_history": "증상 이력 공유",
+    "sharing": {
+      "header": "{{startDate}}에서 {{endDate}}까지의 증상 이력",
+      "no_symptoms_were_logged": "증상이 기록되지 않았습니다.",
+      "you_did_not_feel_well": "귀하의 컨디션이 좋지 않았습니다. 다음과 같은 증상을 보였습니다: {{symptomList}}",
+      "you_felt_well": "귀하의 컨디션이 좋았습니다."
+    },
+    "symptom_history": "증상",
+    "to_protect_your_privacy": "개인 정보를 보호하기 위해 항목은 장치에 저장되고 {{days}}일 후에 자동으로 삭제됩니다."
   },
   "verification_code_alerts": {
     "code_used_body": "입력하신 인증 코드가 이미 사용되었습니다.",

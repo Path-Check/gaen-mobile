@@ -27,6 +27,9 @@
     "success_got_it": "Hiểu rồi",
     "success_header": "Bạn đang ở trong danh sách chờ"
   },
+  "callback_request": {
+    "callback_button_text": "Yêu Cầu Gọi"
+  },
   "common": {
     "back": "Trở lại",
     "cancel": "Hủy",
@@ -45,6 +48,7 @@
     "ok": "Đồng ý",
     "okay": "Ok",
     "on": "BẬT",
+    "request_callback": "Yêu Cầu Gọi",
     "save": "Lưu",
     "select_language": "Chọn ngôn ngữ",
     "settings": "Mở Thiết Lập",
@@ -94,11 +98,11 @@
     "try_again_later": "Cố gắng sau"
   },
   "escrow_verification": {
-    "complete_healthcheck": "Hoàn thành Healthcheck",
     "complete": {
       "body": "Bạn đang giúp kiềm chế sự lây lan của virut và bảo vệ những người khác trong cộng đồng của mình.",
       "title": "Cảm ơn bạn đã giúp bảo vệ cộng đồng của bạn!"
     },
+    "complete_healthcheck": "Hoàn thành Healthcheck",
     "error": {
       "invalid_phone_number": "Số điện thoại phải có 10 chữ số",
       "rate_limit": "Bạn đã đạt đến giới hạn gửi hàng ngày. Vui lòng thử lại sau 24 giờ."
@@ -167,6 +171,19 @@
       "did_you_have_symptoms": "Bạn có bất kỳ triệu chứng nào không?",
       "no_i_didnt_have": "Không có triệu chứng",
       "symptoms": "Các triệu chứng",
+      "symptoms_list": {
+        "congestion": "Nghẹt mũi hoặc xổ mũi",
+        "cough": "Ho",
+        "diarrhea": "Tiêu chảy",
+        "fatigue": "Mệt mỏi",
+        "fever": "Sốt hoặc rét run",
+        "headaches ": "Nhức đầu",
+        "loss_of_taste_smell": "Mất vị giác hoặc khứu giác",
+        "muscle_aches": "Đau nhức cơ hoặc cơ thể",
+        "nausea": "Buồn nôn hoặc ói mửa",
+        "shortness_of_breath": "Hụt hơi hoặc khó thở",
+        "sore_throat": "Đau họng"
+      },
       "when_did_your_symptoms": "Các triệu chứng của bạn bắt đầu khi nào?",
       "yes_i_did_have": "Có, tôi đã có triệu chứng"
     },
@@ -245,7 +262,6 @@
     "your_device_is_scanning": "Thiết bị của bạn đang quét tìm các trường hợp tiếp xúc và sẽ tiếp tục như thế ngay cả khi bạn tắt ứng dụng."
   },
   "home": {
-    "bluetooth_info_body": "Điện thoại của bạn phát hiện những chiếc điện thoại khác mà bạn đã ở gần, dùng Bluetooth Low Energy. Điều này cho phép ứng dụng ghi nhận ẩn danh các tình huống tiếp xúc hàng ngày của bạn, ngay cả khi bạn không mở ứng dụng trên thiết bị của bạn.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} sẽ vẫn hoạt động sau khi đã đóng ứng dụng",
       "location_disabled_error_message": "Để kích hoạt công nghệ Thông Báo Tiếp Xúc, hãy cho phép truy cập Định Vị trong ứng dụng Thiết Lập",
@@ -259,6 +275,7 @@
       "tracing_off_subheader": "Bật Bluetooth và Truy Vết Tiếp Xúc Gần để nhận thông tin về các trường hợp có thể đã tiếp xúc",
       "tracing_on_header": "Bật Phát Hiện Tiếp Xúc"
     },
+    "bluetooth_info_body": "Điện thoại của bạn phát hiện những chiếc điện thoại khác mà bạn đã ở gần, dùng Bluetooth Low Energy. Điều này cho phép ứng dụng ghi nhận ẩn danh các tình huống tiếp xúc hàng ngày của bạn, ngay cả khi bạn không mở ứng dụng trên thiết bị của bạn.",
     "call_emergency_services": "Gọi Dịch Vụ Cấp Cứu",
     "check_if_your_symptoms": "Nhập các triệu chứng của bạn và nhận khuyến cáo tức thời về cách đảm bảo an toàn.",
     "complete_healthcheck": "Hoàn thành Healthcheck",
@@ -329,7 +346,6 @@
     "notification_subheader3": "Ứng dụng này không giúp bạn tránh nhiễm COVID-19.",
     "please_read_the": "Vui lòng đọc",
     "privacy_policy": "Chính Sách về Quyền Riêng Tư",
-    "protect_privacy_button": "Chúng tôi bảo vệ quyền riêng tư của bạn như thế nào",
     "protect_privacy": {
       "body_1": "Các ID này không chứa bất kỳ thông tin cá nhân nào và thay đổi mỗi 10-20 phút để bảo vệ danh tính của bạn.",
       "body_2": "Các điện thoại hoán đổi các ID ngẫu nhiên với các thiết bị khác dùng Bluetooth Low Energy. Điều này cho phép {{applicationName}} theo dõi ẩn danh các tình huống tiếp xúc hàng ngày của bạn, ngay cả khi bạn không mở nó trên thiết bị của bạn.",
@@ -347,6 +363,7 @@
       "subheader_4": "Mỗi chiếc điện thoại định kỳ ping máy chủ để lấy danh sách các ID được gắn cờ và tìm kiếm kết quả khớp",
       "subheader_5": "Bạn sẽ được thông báo nếu {{applicationName}} tìm được một kết quả dương tính khớp với một ID đã gắn cờ"
     },
+    "protect_privacy_button": "Chúng tôi bảo vệ quyền riêng tư của bạn như thế nào",
     "proximity_tracing_already_active": "Thông báo tiếp xúc có hiệu lực",
     "proximity_tracing_body1": "Nếu các điện thoại thông minh có cài đặt ứng dụng này được bật, đã bật bluetooth, và ở gần nhau trong một khoảng thời gian, một trường hợp tiếp xúc được đăng ký trên thiết bị của bạn.",
     "proximity_tracing_body2": "Trong trường hợp có tiếp xúc, dữ liệu, và thông tin của bạn vẫn được ẩn danh. Ứng dụng này không lưu bất kỳ dữ liệu cá nhân nào. Chỉ có các ID ngẫu nhiên được trao đổi. Những ID này sẽ được xóa trong vòng 14 ngày.",
@@ -512,24 +529,6 @@
     "share_anonymized_data": "Chia Sẻ Dữ Liệu Ẩn Danh",
     "sharing_anonymized_data": "Chia sẻ dữ liệu ẩn danh"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Bạn cảm thấy không khỏe",
-    "errors": {
-      "updating_symptoms": "Rất tiếc, chúng tôi không thể cập nhật các triệu chứng của bạn"
-    },
-    "felt_well": "Bạn cảm thấy khỏe",
-    "no_entry": "Không nhập",
-    "no_symptoms": "Không có triệu chứng",
-    "share_history": "Chia sẻ lịch sử triệu chứng",
-    "sharing": {
-      "header": "Lịch sử triệu chứng từ {{startDate}} đến {{endDate}}",
-      "no_symptoms_were_logged": "Không có triệu chứng nào được ghi nhận",
-      "you_did_not_feel_well": "Bạn cảm thấy không khỏe, các triệu chứng gồm có: {{symptomList}}",
-      "you_felt_well": "Bạn cảm thấy khỏe"
-    },
-    "symptom_history": "Lịch Sử Triệu Chứng",
-    "to_protect_your_privacy": "Để bảo vệ quyền riêng tư của bạn, dữ liệu nhập được lưu trên điện thoại của bạn và được xóa tự động sau {{days}} ngày."
-  },
   "symptom": {
     "bluish_lips_or_face": "Môi hoặc mặt xanh xao",
     "congestion_or_runny_nose": "Nghẹt mũi hoặc xổ mũi",
@@ -547,6 +546,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Đau hoặc tức ngực dai dẳng",
     "shortness_of_breath_or_difficulty_breathing": "Hụt hơi hoặc khó thở",
     "sore_throat": "Đau họng"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Bạn cảm thấy không khỏe",
+    "errors": {
+      "updating_symptoms": "Rất tiếc, chúng tôi không thể cập nhật các triệu chứng của bạn"
+    },
+    "felt_well": "Bạn cảm thấy khỏe",
+    "no_entry": "Không nhập",
+    "no_symptoms": "Không có triệu chứng",
+    "share_history": "Chia sẻ lịch sử triệu chứng",
+    "sharing": {
+      "header": "Lịch sử triệu chứng từ {{startDate}} đến {{endDate}}",
+      "no_symptoms_were_logged": "Không có triệu chứng nào được ghi nhận",
+      "you_did_not_feel_well": "Bạn cảm thấy không khỏe, các triệu chứng gồm có: {{symptomList}}",
+      "you_felt_well": "Bạn cảm thấy khỏe"
+    },
+    "symptom_history": "Lịch Sử Triệu Chứng",
+    "to_protect_your_privacy": "Để bảo vệ quyền riêng tư của bạn, dữ liệu nhập được lưu trên điện thoại của bạn và được xóa tự động sau {{days}} ngày."
   },
   "verification_code_alerts": {
     "code_used_body": "Mã xác minh được cung cấp đã được sử dụng.",

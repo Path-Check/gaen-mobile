@@ -15,6 +15,9 @@
     "success_got_it": "Ahaaw",
     "success_header": "Bijiinag apii ji-ganoonigooyan"
   },
+  "callback_request": {
+    "callback_button_text": "Andotan ji-azheganoonigooyan"
+  },
   "common": {
     "back": "Azhetaan",
     "cancel": "Ishkwaataan",
@@ -33,6 +36,7 @@
     "ok": "Ahaaw",
     "okay": "Ahaaw",
     "on": "BAAKISIN",
+    "request_callback": "Andotan ji-azheganoonigooyan",
     "save": "Ishkonan",
     "select_language": "Inwewin onaabandan",
     "settings": "Baakinan Onaabandamowinan",
@@ -78,11 +82,11 @@
     "try_again_later": "Baanimaa miinawaa gojitoon"
   },
   "escrow_verification": {
-    "complete_healthcheck": "Dibaabandan enamanji’oyan",
     "complete": {
       "body": "Giwiidookaage GOOBID-19 ji-gibitinigaadeg miinawaa giwiidookawaag gakina awiya ji-minomaji’owaad. ",
       "title": "Gimiigwechiwi’igoo ganawenimadwaa gakina awiya!"
     },
+    "complete_healthcheck": "Dibaabandan enamanji’oyan",
     "error": {
       "invalid_phone_number": "Memwech igo da-midaachinoon asigibii’iganan imaa ezhibii’igaadeg gigiigidowin",
       "rate_limit": "Gaawiin geyaabi gegoo gidaa-maajinizha’anziin noongom gaa-giizhigak. 24 daso-diba’igan baabiitoon jibwaa-gojitooyan miinawaa."
@@ -149,8 +153,23 @@
     },
     "symptom_onset": {
       "did_you_have_symptoms": "Mii na GOOBID-19 gii-inamanji’oyan?",
+      "knowing_symptoms": "Gikendaman GOOBID-19 inamanji’oyan miinawaa gaye apii gaa-maadamanji’oyan, nawaj da-wenipanad gikendaman apii mizhikaageyan inaapineyan, giishpin gaye mashi maadamanji’osiwan.",
       "no_i_didnt_have": "Gaawiin GOOBID-19 ingii-inamanji’osii.",
       "symptoms": "GOOBID-19 inamanji’owinan",
+      "symptoms_include": "Daabishkoo go onow",
+      "symptoms_list": {
+        "congestion": "Ginoondenaam maagizhaa gaye gibangigaawijaane",
+        "cough": "Gidoozosodam",
+        "diarrhea": "Gizhaabokaawiz",
+        "fatigue": "Gidayekoz",
+        "fever": "Gigizhiz maagizhaa gaye gininingaj",
+        "headaches ": "Gidewikwe",
+        "loss_of_taste_smell": "Mii bijiinag bwaanawitooyan ji-biijipijigeyan maagizhaa gaye ji-biijimaanjigeyan",
+        "muscle_aches": "Gidewiz",
+        "nausea": "Gidaakoshkode maagizhaa gaye gizhishigagowe",
+        "shortness_of_breath": "Gidayekonaam maagizhaa gaye gizanaganaam",
+        "sore_throat": "Gigaagiidagwandashkwe"
+      },
       "when_did_your_symptoms": "Aaniin apii GOOBID-19 gaa-maadamanji’oyan?",
       "yes_i_did_have": "Eya’, GOOBID-19 ingii-inamanji’"
     },
@@ -229,7 +248,6 @@
     "your_device_is_scanning": "Geyaabi nandawaabanjigemagad gigiigidowin giishpin gibaakosing owe app."
   },
   "home": {
-    "bluetooth_info_body": "Mii owe ge-izhi-gikendaman apii nakweshkawad awiiya. Bluetooth Low Energy aabadad imaa gigiigidowining owe ji-izhichigaadeg. Gaawiin dash giga-gikendaagozisii.",
     "bluetooth": {
       "all_services_on_subheader": "Da-aabijibide {{applicationName}} giishpin gibitinigaadeg owe app",
       "location_disabled_error_message": "Baakinan Waasamoo-gwayakosijigan imaa Onaabandamowinan app giishpin Wiindamaagewinan Gaa-odisigoyan wii-baakinaman",
@@ -243,6 +261,7 @@
       "tracing_off_subheader": "Baakinan Ozhaawashkwaabid miinawaa Beshwajiwin ji-gikendaman giishpin odisigoyan",
       "tracing_on_header": "Baakisin Gaa-odisigoyan Mikaajigaadeg "
     },
+    "bluetooth_info_body": "Mii owe ge-izhi-gikendaman apii nakweshkawad awiiya. Bluetooth Low Energy aabadad imaa gigiigidowining owe ji-izhichigaadeg. Gaawiin dash giga-gikendaagozisii.",
     "call_emergency_services": "Ganoozh Mashkikiiwi-naadamaagewin",
     "check_if_your_symptoms": "Bakitebii’an enamanji’oyan zezikaa ji-gikendaman ge-izhi-ganawenindizoyan.",
     "complete_healthcheck": "Dibaabandan enamanji’oyan",
@@ -313,7 +332,6 @@
     "notification_subheader3": "Gaawiin giganawenimigosii owe app GOOBID-19 ji-inaapineyan.",
     "please_read_the": "Daga agindan owe",
     "privacy_policy": "Epiichi-gikendaagoziyan Inaakonigewinan",
-    "protect_privacy_button": "Aaniin ezhichigeyaang geyaabi ji-gikendaagozisiwan",
     "protect_privacy": {
       "body_1": "Gaawiin ganage dagonigaadesinoon iwe gikenjigewin ji-gikendaagoziyan onow IDs, miinawaa gaye moozhag aanjibii’igaadewan.",
       "body_2": "Gimaada’ookii bagwana asigibii’iganan ji-gikenjigaadeg apii nakweshkawad awiya endaso-giizhig, Ozhaawashkwaabid aabadak owe ji-izhichigaadeg. Aabijibide {{applicationName}} geyaabi giishpin giba’aman.",
@@ -331,6 +349,7 @@
       "subheader_4": "Aayaapii go nandawaabanjigaademagadoon giigidowinan imaa ogimaa-mazinaabikiwebiniganing naasaab ID imaa ji-ateg",
       "subheader_5": "Giga-wiindamaagoo giishpin mikaajigaadeg naasaab ID {{applicationName}} aabajitooyan"
     },
+    "protect_privacy_button": "Aaniin ezhichigeyaang geyaabi ji-gikendaagozisiwan",
     "proximity_tracing_already_active": "Baakisin Wiindamaagewinan Gaa-odisigoyan",
     "proximity_tracing_body1": "Giishpin niizh giigidowinan baakising, Ozhaawashkwaabid gaye baakising, besho ayaamagadoon, mii iw apii nakweshkodaadiwin ge-ozhibii’idaageg imaa gigiigidowining.",
     "proximity_tracing_body2": "Giishpin awiya nakweshkawad, gaawiin geaabi giga-gikendaagozisii awenesh ayaawiyan. Gaawiin gegoo giin gidibaginjigewin da-ozhibii’igaadesinoon. Random IDs eta go aabadadoon. Da-gaasibii’igaadewan onow apii 14 dasogon gaa-izhiseg.",
@@ -496,24 +515,6 @@
     "share_anonymized_data": "Maada’ookiin gidibaginjigewin gikendaagozisiwan",
     "sharing_anonymized_data": "Gimaada’ookii gidibaginjigewin gikendaagozisiwan"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Gaawiin gigii-minomanji’osii",
-    "errors": {
-      "updating_symptoms": "Gaawiin ingii-gashkitoosiimin enamanji’oyan ji-aanjibii’amaang"
-    },
-    "felt_well": "Gigii-minomanji’",
-    "no_entry": "Gaawiin gegoo omaa gii-biijibii’igaadesinoon",
-    "no_symptoms": "Gaawiin gegoo inamanji’owin",
-    "share_history": "Maada’ookiin gaa-inamanji’oyan",
-    "sharing": {
-      "header": "{{startDate}} biinish igo {{endDate}} gaa-inamanji’oyan ",
-      "no_symptoms_were_logged": "Gaawiin gegoo inamanji’owin ozhibii’igaadesinoon",
-      "you_did_not_feel_well": "Gaawiin gigii-minomanji’osii, daabishkoo go onow: {{symptomList}}",
-      "you_felt_well": "Gigii-minomanji’"
-    },
-    "symptom_history": "Inamanji’owinan",
-    "to_protect_your_privacy": "Baamaa {{days}} dasogon da-gaasibii’igaadewan iniw gaa-biijibii’aman geyaabi ji-ganawendaagozisiwan."
-  },
   "symptom": {
     "bluish_lips_or_face": "Gidoozhaawashkodoone maagizhaa gaye gidoozhaawashkiingwe",
     "congestion_or_runny_nose": "Ginoondenaam maagizhaa gaye gibangigaawijaane",
@@ -531,6 +532,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Gidewaakigane",
     "shortness_of_breath_or_difficulty_breathing": "Gidayekonaam maagizhaa gaye gizanaganaam",
     "sore_throat": "Gigaagiidagwandashkwe"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Gaawiin gigii-minomanji’osii",
+    "errors": {
+      "updating_symptoms": "Gaawiin ingii-gashkitoosiimin enamanji’oyan ji-aanjibii’amaang"
+    },
+    "felt_well": "Gigii-minomanji’",
+    "no_entry": "Gaawiin gegoo omaa gii-biijibii’igaadesinoon",
+    "no_symptoms": "Gaawiin gegoo inamanji’owin",
+    "share_history": "Maada’ookiin gaa-inamanji’oyan",
+    "sharing": {
+      "header": "{{startDate}} biinish igo {{endDate}} gaa-inamanji’oyan ",
+      "no_symptoms_were_logged": "Gaawiin gegoo inamanji’owin ozhibii’igaadesinoon",
+      "you_did_not_feel_well": "Gaawiin gigii-minomanji’osii, daabishkoo go onow: {{symptomList}}",
+      "you_felt_well": "Gigii-minomanji’"
+    },
+    "symptom_history": "Inamanji’owinan",
+    "to_protect_your_privacy": "Baamaa {{days}} dasogon da-gaasibii’igaadewan iniw gaa-biijibii’aman geyaabi ji-ganawendaagozisiwan."
   },
   "verification_code_alerts": {
     "code_used_body": "Aazha gii-aabadad iwe agindaasobii’igan gaa-maajinizha’aman.",

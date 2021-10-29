@@ -89,6 +89,21 @@
         "no_token_for_existing_keys": "تم إرسال البيانات الموجودة إلى الخادم. يعني هذا عادةً أنه تمت محاولة هذه العملية مسبقًا من هذا الجهاز ، ولكن من تطبيق مختلف. يمكنك إبلاغ السلطة التي قدمت رمز التحقق الذي تم استخدامه. تمت إضافة {{newKeysInserted}} مفاتيح جديدة.",
         "no_token_for_existing_keys_title": "محاولة إرسال المفاتيح الموجودة"
       }
+    },
+    "symptom_onset": {
+      "symptoms_list": {
+        "congestion": "احتقان أو سيلان الأنف",
+        "cough": "السعال",
+        "diarrhea": "الاسهال",
+        "fatigue": "إعياء",
+        "fever": "حمى أو قشعريرة",
+        "headaches ": "الصداع",
+        "loss_of_taste_smell": "فقدان جديد في حاسة التذوق أو الشم",
+        "muscle_aches": "آلام في العضلات أو الجسم",
+        "nausea": "الغثيان أو القيء",
+        "shortness_of_breath": "ضيق التنفس أو صعوبة التنفس",
+        "sore_throat": "إلتهاب الحلق"
+      }
     }
   },
   "exposure_history": {
@@ -128,7 +143,6 @@
     "your_device_is_scanning": "يقوم جهازك بالمسح بحثًا عن التعرضات وسيستمر في القيام بذلك حتى إذا أغلقت التطبيق."
   },
   "home": {
-    "bluetooth_info_body": "تقوم الهواتف بتبادل المعرفات العشوائية مع الأجهزة الأخرى باستخدام Bluetooth Low Energy. يسمح هذا لـ {{applicationName}} بتتبع لقاءاتك اليومية بشكل مجهول ، حتى عندما لا يكون لديك مفتوح على جهازك.",
     "bluetooth": {
       "all_services_on_subheader": "سيظل {{applicationName}} نشطًا بعد إغلاق التطبيق",
       "location_disabled_error_message": "لتنشيط تقنية \"إخطار التعرض\"، قم بتخويل الوصول إلى الموقع في تطبيق الإعدادات",
@@ -141,6 +155,7 @@
       "tracing_off_subheader": "فعل البلوتوث والتتبع عن قرب للحصول على معلومات حول التعرضات المحتملة ",
       "tracing_on_header": "كشف التعرض قيد التشغيل"
     },
+    "bluetooth_info_body": "تقوم الهواتف بتبادل المعرفات العشوائية مع الأجهزة الأخرى باستخدام Bluetooth Low Energy. يسمح هذا لـ {{applicationName}} بتتبع لقاءاتك اليومية بشكل مجهول ، حتى عندما لا يكون لديك مفتوح على جهازك.",
     "call_emergency_services": "اتصل بخدمات الطوارئ",
     "check_if_your_symptoms": "أدخل الأعراض الخاصة بك واحصل على توصية فورية حول كيفية الحفاظ على سلامتك.",
     "enter_symptoms": "أدخل الأعراض",
@@ -193,7 +208,6 @@
     "notification_subheader3": "هذا التطبيق لا يحميك من عدوى COVID-19.",
     "please_read_the": "يرجى قراءة ال",
     "privacy_policy": "سياسة الخصوصية",
-    "protect_privacy_button": "كيف نحمي خصوصيتك",
     "protect_privacy": {
       "body_1": "لا تحتوي هذه المعرفات على أي معلومات شخصية ويتم تغييرها كل 10-20 دقيقة لحماية هويتك.",
       "body_2": "تقوم الهواتف بتبادل المعرفات العشوائية مع الأجهزة الأخرى باستخدام Bluetooth Low Energy. يسمح هذا لـ {{applicationName}} بتتبع لقاءاتك اليومية بشكل مجهول ، حتى عندما لا يكون لديك مفتوح على جهازك.",
@@ -206,6 +220,7 @@
       "subheader_4": "يقوم كل هاتف بشكل دوري باختبار اتصال الخادم للحصول على قائمة المعرفات التي تم وضع علامة عليها ويبحث عن التطابقات",
       "subheader_5": "سيتم إعلامك إذا وجد {{applicationName}} تطابقًا إيجابيًا مع معرف تم وضع علامة عليه"
     },
+    "protect_privacy_button": "كيف نحمي خصوصيتك",
     "proximity_tracing_body1": "إذا كانت الهواتف الذكية التي تم تثبيت التطبيق عليها قيد التشغيل ، وتم تمكين البلوتوث عليها ، وكانت قريبة من بعضها البعض لفترة من الوقت ، فسيتم تسجيل لقاء على جهازك.",
     "proximity_tracing_body2": "في حالة حدوث لقاء ، تظل بياناتك ومعلوماتك مجهولة. لا يخزن التطبيق أي بيانات شخصية. يتم تبادل المعرفات العشوائية فقط. يتم حذفها في غضون 14 يومًا.",
     "proximity_tracing_button": "تنشيط إشعارات التعرض",
@@ -352,24 +367,6 @@
     "share_anonymized_data": "مشاركة البيانات مجهولة المصدر",
     "sharing_anonymized_data": "مشاركة البيانات مجهولة المصدر"
   },
-  "symptom_history": {
-    "did_not_feel_well": "لم تكن على ما يرام",
-    "errors": {
-      "updating_symptoms": "آسف ، لم نتمكن من تحديث الأعراض الخاصة بك"
-    },
-    "felt_well": "شعرت بتحسن",
-    "no_entry": "ممنوع الدخول",
-    "no_symptoms": "لا توجد أعراض",
-    "share_history": "مشاركة تاريخ الأعراض",
-    "sharing": {
-      "header": "سجل الأعراض من {{startDate}} إلى {{endDate}}",
-      "no_symptoms_were_logged": "لم يتم تسجيل أية أعراض",
-      "you_did_not_feel_well": "لم تشعر جيدا، وشملت الأعراض: {{symptomsList}}",
-      "you_felt_well": "شعرت بتحسن"
-    },
-    "symptom_history": "سجلات التعرض",
-    "to_protect_your_privacy": "لحماية خصوصيتك ، يتم تخزين الإدخالات على جهازك وحذفها تلقائيًا بعد {{days}} يوم."
-  },
   "symptom": {
     "bluish_lips_or_face": "زرقة الشفاه أو الوجه",
     "congestion_or_runny_nose": "احتقان أو سيلان الأنف",
@@ -387,5 +384,23 @@
     "persistent_pain_or_pressure_in_the_chest": "ألم أو ضغط مستمر في الصدر",
     "shortness_of_breath_or_difficulty_breathing": "ضيق التنفس أو صعوبة التنفس",
     "sore_throat": "إلتهاب الحلق"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "لم تكن على ما يرام",
+    "errors": {
+      "updating_symptoms": "آسف ، لم نتمكن من تحديث الأعراض الخاصة بك"
+    },
+    "felt_well": "شعرت بتحسن",
+    "no_entry": "ممنوع الدخول",
+    "no_symptoms": "لا توجد أعراض",
+    "share_history": "مشاركة تاريخ الأعراض",
+    "sharing": {
+      "header": "سجل الأعراض من {{startDate}} إلى {{endDate}}",
+      "no_symptoms_were_logged": "لم يتم تسجيل أية أعراض",
+      "you_did_not_feel_well": "لم تشعر جيدا، وشملت الأعراض: {{symptomsList}}",
+      "you_felt_well": "شعرت بتحسن"
+    },
+    "symptom_history": "سجلات التعرض",
+    "to_protect_your_privacy": "لحماية خصوصيتك ، يتم تخزين الإدخالات على جهازك وحذفها تلقائيًا بعد {{days}} يوم."
   }
 }

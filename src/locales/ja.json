@@ -101,7 +101,6 @@
     "learn_more": "学ぶ"
   },
   "home": {
-    "bluetooth_info_body": "お使いの携帯電話は、Bluetooth低エネルギーを使用して近接して時間を過ごす他の携帯電話を検出します。これにより、アプリをデバイスで開いていなくても、アプリは毎日のログインを匿名で記録できます。",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}は、アプリが閉じられた後もアクティブのままになります",
       "location_disabled_error_message": "露出通知テクノロジーを有効にするには、設定アプリで位置情報へのアクセスを許可してください",
@@ -114,6 +113,7 @@
       "tracing_off_subheader": "Bluetoothおよび近接トレースを有効にして、可能性のある接触に関する情報を取得します",
       "tracing_on_header": "アクティブ"
     },
+    "bluetooth_info_body": "お使いの携帯電話は、Bluetooth低エネルギーを使用して近接して時間を過ごす他の携帯電話を検出します。これにより、アプリをデバイスで開いていなくても、アプリは毎日のログインを匿名で記録できます。",
     "call_emergency_services": "緊急サービスに電話する",
     "check_if_your_symptoms": "症状を入力して、安全に過ごす方法についてすぐにアドバイスをもらいましょう。",
     "fix": "{{technology}} の問題を修正する",
@@ -160,7 +160,6 @@
     "notification_subheader3": "このアプリはCOVID-19感染からあなたを守るものではありません。",
     "please_read_the": "をお読みください",
     "privacy_policy": "個人情報保護方針",
-    "protect_privacy_button": "プライバシーを保護する方法",
     "protect_privacy": {
       "body_1": "これらの ID には個人情報は含まれておらず、10 分から 20 分ごとに変更されて身元を保護します。",
       "body_2": "電話は、ブルートゥース低エネルギーを使用して他のデバイスとランダムなIDを交換します。これにより、{{applicationName}}は、デバイスで開かれていない場合でも、毎日の接触を匿名で追跡することができます。",
@@ -173,6 +172,7 @@
       "subheader_4": "各電話は、フラグが設定されたIDのリストを定期的にサーバーにピングし、一致するものを探します",
       "subheader_5": "{{applicationName}} がフラグ付き ID との一致を検出した場合は通知されます"
     },
+    "protect_privacy_button": "プライバシーを保護する方法",
     "proximity_tracing_body1": "アプリがインストールされているスマートフォンがオンになっている場合、Bluetoothが有効になっていて、一定期間お互いの近くにある場合は、デバイスにエンカウンターが登録されます。",
     "proximity_tracing_body2": "接触した場合、あなたのデータと情報は匿名のままです。アプリは個人データを保存しません。ランダムIDのみが交換されます。これらは14日以内に削除されます。",
     "proximity_tracing_button": "近接トレースを有効にする",

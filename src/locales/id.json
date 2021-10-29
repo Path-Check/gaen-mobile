@@ -82,7 +82,6 @@
     "why_did_i_get_an_en_para": "Anda akan menerima pemberitahuan eksposur ketika seseorang yang telah berada di dekat anda kemudian menerima tes positif untuk COVID-19 dan memilih untuk memberi tahu orang lain."
   },
   "home": {
-    "bluetooth_info_body": "Ponsel Anda mendeteksi ponsel lain yang dalam jangkauan menggunakan \"Bluetooth Low Energy\" . Ini memungkinkan aplikasi untuk mencatat pertemuan harian Anda secara anonim, bahkan saat Anda tidak membuka aplikasi di perangkat Anda.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} akan tetap aktif setelah aplikasi ditutup",
       "proximity_tracing_header": "Pemberitahuan Eksposur",
@@ -92,6 +91,7 @@
       "tracing_off_subheader": "Aktifkan Bluetooth dan \"Proximity Tracing\" untuk mendapatkan info tentang kemungkinan eksposur",
       "tracing_on_header": "Pemberitahuan Eksposur Aktif"
     },
+    "bluetooth_info_body": "Ponsel Anda mendeteksi ponsel lain yang dalam jangkauan menggunakan \"Bluetooth Low Energy\" . Ini memungkinkan aplikasi untuk mencatat pertemuan harian Anda secara anonim, bahkan saat Anda tidak membuka aplikasi di perangkat Anda.",
     "check_if_your_symptoms": "Masukkan gejala Anda dan dapatkan rekomendasi tentang panduan aman.",
     "have_a_positive_test": "Memiliki tes positif?",
     "location_info_body": "Google mengharuskan perangkat yang menggunakan Android 10 atau lebih rendah mengaktifkan layanan lokasi untuk mendeteksi eksposur. {{applicationName}} TIDAK melacak ataupun menyiman lokasi anda.",
@@ -137,7 +137,6 @@
     "notification_subheader3": "Aplikasi ini tidak melindungi Anda dari infeksi COVID-19.",
     "please_read_the": "Silakan baca",
     "privacy_policy": "Kebijakan pribadi",
-    "protect_privacy_button": "Bagaimana kami melindungi privasi Anda",
     "protect_privacy": {
       "body_1": "ID ini tidak mengandung informasi pribadi apa pun dan berubah setiap 10-20 menit untuk melindungi identitas Anda.",
       "body_2": "Ponsel menukar ID acak dengan perangkat lain menggunakan Bluetooth Low Energy. Ini memungkinkan {{applicationName}} untuk melacak pertemuan harian Anda secara anonim, bahkan saat Anda tidak membukanya di perangkat Anda.",
@@ -150,6 +149,7 @@
       "subheader_4": "Setiap telepon secara berkala berkomunikasi dengan server untuk mendapatkan daftar ID yang ditandai dan mencari kecocokan",
       "subheader_5": "Anda akan diberi tahu jika {{applicationName}} menemukan kecocokan positif dengan ID yang ditandai"
     },
+    "protect_privacy_button": "Bagaimana kami melindungi privasi Anda",
     "proximity_tracing_already_active": "Eksposur notifikasi aktif",
     "proximity_tracing_body1": "Jika ponsel cerdas dengan aplikasi terinstal dihidupkan, bluetooth diaktifkan, dan berdekatan selama jangka waktu tertentu, perjumpaan terdaftar pada perangkat Anda.",
     "proximity_tracing_body2": "Jika suatu pertemuan, data, dan informasi anda tetap anonim. Aplikasi tidak menyimpan data pribadi apa pun. Hanya ID acak yang dipertukarkan. Ini dihapus setelah 14 hari.",

@@ -85,7 +85,47 @@ const SymptomOnsetDate: FunctionComponent = () => {
         <Text style={style.headerText}>
           {t("export.symptom_onset.symptoms")}
         </Text>
-
+        <Text style={style.subheaderText}>
+          {t("export.symptom_onset.knowing_symptoms")}
+        </Text>
+        <Text style={style.sectionBodyText}>
+          {`${t("export.symptom_onset.symptoms_include")}:`}
+        </Text>
+        <View style={style.list}>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.fever",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.cough",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.shortness_of_breath",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.fatigue",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.muscle_aches",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.headaches",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.loss_of_taste_smell",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.sore_throat",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.congestion",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.nausea",
+          )}`}</Text>
+          <Text style={style.listItem}>{`\u2022 ${t(
+            "export.symptom_onset.symptoms_list.diarrhea",
+          )}`}</Text>
+        </View>
         <View style={style.radioButtonsContainer}>
           <Text style={style.subheaderText}>
             {t("export.symptom_onset.did_you_have_symptoms")}
@@ -166,7 +206,7 @@ const DatePicker: FunctionComponent<DatePickerProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "space-between",
     paddingTop: Spacing.medium,
     paddingHorizontal: Spacing.large,
@@ -200,6 +240,20 @@ const style = StyleSheet.create({
   buttonText: {
     ...Typography.button.primary,
     marginRight: Spacing.small,
+  },
+  sectionBodyText: {
+    ...Typography.header.x20,
+    ...Typography.style.normal,
+    lineHeight: Typography.lineHeight.x40,
+    color: Colors.neutral.shade100,
+    marginBottom: Spacing.xLarge,
+  },
+  list: {
+    marginBottom: Spacing.xLarge,
+  },
+  listItem: {
+    ...Typography.header.x20,
+    ...Typography.style.normal,
   },
 })
 

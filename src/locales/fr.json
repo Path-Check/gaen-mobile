@@ -118,7 +118,20 @@
       }
     },
     "symptom_onset": {
-      "symptoms": "Symptômes"
+      "symptoms": "Symptômes",
+      "symptoms_list": {
+        "congestion": "Congestion ou écoulement nasal",
+        "cough": "Toux",
+        "diarrhea": "Diarrhée",
+        "fatigue": "Fatigue",
+        "fever": "Fièvre ou frissons",
+        "headaches ": "Mal à la tête",
+        "loss_of_taste_smell": "Nouvelle perte de goût ou d'odeur",
+        "muscle_aches": "Douleurs musculaires ou corporelles",
+        "nausea": "Nausées ou vomissements",
+        "shortness_of_breath": "Essoufflement ou difficulté à respirer",
+        "sore_throat": "Mal de gorge"
+      }
     }
   },
   "exposure_history": {
@@ -165,7 +178,6 @@
     "your_device_is_scanning": "Votre appareil recherche les expositions et continuera de le faire même si vous fermez l'application."
   },
   "home": {
-    "bluetooth_info_body": "Votre téléphone détecte d'autres téléphones avec lesquels vous passez du temps à proximité à l'aide de Bluetooth Low Energy. Cela permet à l'application d'enregistrer vos rencontres quotidiennes de manière anonyme, même lorsque l'application n'est pas ouverte sur votre appareil.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} restera actif après la fermeture de l'application",
       "location_disabled_error_message": "Pour activer la technologie de notification d'exposition, autorisez l'accès à la localisation dans les paramètres de l'application",
@@ -178,6 +190,7 @@
       "tracing_off_subheader": "Activer le Bluetooth et la recherche de proximité pour obtenir des informations sur les expositions possibles",
       "tracing_on_header": "Détection d'exposition activée"
     },
+    "bluetooth_info_body": "Votre téléphone détecte d'autres téléphones avec lesquels vous passez du temps à proximité à l'aide de Bluetooth Low Energy. Cela permet à l'application d'enregistrer vos rencontres quotidiennes de manière anonyme, même lorsque l'application n'est pas ouverte sur votre appareil.",
     "call_emergency_services": "Appeler les services d'urgence",
     "check_if_your_symptoms": "Entrez vos symptômes et obtenez une recommandation instantanée sur la façon de rester en sécurité.",
     "enter_symptoms": "Entrez les symptômes",
@@ -236,7 +249,6 @@
     "notification_subheader3": "Cette application ne vous protège pas de l'infection COVID-19.",
     "please_read_the": "Veuillez lire le",
     "privacy_policy": "Politique de confidentialité",
-    "protect_privacy_button": "Comment nous protégeons votre vie privée",
     "protect_privacy": {
       "body_1": "Ces identifiants ne contiennent aucune information personnelle et changent toutes les 10 à 20 minutes pour protéger votre identité.",
       "body_2": "Les téléphones échangent des identifiants aléatoires avec d'autres appareils utilisant Bluetooth Low Energy. Cela permet à {{applicationName}} de garder une trace de vos rencontres quotidiennes de manière anonyme, même si vous ne l'avez pas ouvert sur votre appareil.",
@@ -249,6 +261,7 @@
       "subheader_4": "Chaque téléphone interroge périodiquement le serveur pour obtenir la liste des identifiants marqués et recherche les correspondances",
       "subheader_5": "Vous serez averti si {{applicationName}} trouve une correspondance positive avec un identifiant signalé"
     },
+    "protect_privacy_button": "Comment nous protégeons votre vie privée",
     "proximity_tracing_body1": "Si les smartphones avec l'application installée sont allumés, avec le Bluetooth allumé et ils sont proches les uns des autres pendant un certain temps, une rencontre est enregistrée sur votre appareil.",
     "proximity_tracing_body2": "En cas de rencontre, vos données et informations restent anonymes. L'application ne stocke aucune donnée personnelle. Seuls les identifiants aléatoires sont échangés. Ceux-ci sont supprimés dans les 14 jours.",
     "proximity_tracing_button": "Activer les notifications d'exposition",
@@ -401,24 +414,6 @@
     "share_anonymized_data": "Partager les données anonymes",
     "sharing_anonymized_data": "Partage de données anonymisées"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Tu ne te sentais pas bien",
-    "errors": {
-      "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
-    },
-    "felt_well": "Vous vous êtes senti bien",
-    "no_entry": "Pas d'entrée",
-    "no_symptoms": "Aucun symptôme",
-    "share_history": "Partager l'historique des symptômes",
-    "sharing": {
-      "header": "Historique des symptômes du {{startDate}} au {{endDate}}",
-      "no_symptoms_were_logged": "Aucun symptôme n'a été enregistré",
-      "you_did_not_feel_well": "Vous ne vous sentiez pas bien, les symptômes comprenaient: {{symptomList}}",
-      "you_felt_well": "Vous vous êtes senti bien"
-    },
-    "symptom_history": "Historique des symptômes",
-    "to_protect_your_privacy": "Pour protéger votre confidentialité, les entrées sont stockées sur votre appareil et supprimées automatiquement après {{days}} jours."
-  },
   "symptom": {
     "bluish_lips_or_face": "Lèvres ou visage bleuâtres",
     "congestion_or_runny_nose": "Congestion ou écoulement nasal",
@@ -436,6 +431,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Douleur ou pression persistante dans la poitrine",
     "shortness_of_breath_or_difficulty_breathing": "Essoufflement ou difficulté à respirer",
     "sore_throat": "Mal de gorge"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Tu ne te sentais pas bien",
+    "errors": {
+      "updating_symptoms": "Désolé, nous n'avons pas pu mettre à jour vos symptômes"
+    },
+    "felt_well": "Vous vous êtes senti bien",
+    "no_entry": "Pas d'entrée",
+    "no_symptoms": "Aucun symptôme",
+    "share_history": "Partager l'historique des symptômes",
+    "sharing": {
+      "header": "Historique des symptômes du {{startDate}} au {{endDate}}",
+      "no_symptoms_were_logged": "Aucun symptôme n'a été enregistré",
+      "you_did_not_feel_well": "Vous ne vous sentiez pas bien, les symptômes comprenaient: {{symptomList}}",
+      "you_felt_well": "Vous vous êtes senti bien"
+    },
+    "symptom_history": "Historique des symptômes",
+    "to_protect_your_privacy": "Pour protéger votre confidentialité, les entrées sont stockées sur votre appareil et supprimées automatiquement après {{days}} jours."
   },
   "verification_code_alerts": {
     "code_used_body": "Le code de vérification fourni a déjà été utilisé.",

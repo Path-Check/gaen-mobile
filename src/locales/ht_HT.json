@@ -77,7 +77,11 @@
       }
     },
     "symptom_onset": {
-      "symptoms": "Sentòm yo"
+      "symptoms": "Sentòm yo",
+      "symptoms_list": {
+        "cough": "Tous",
+        "diarrhea": "Dyare"
+      }
     }
   },
   "exposure_history": {

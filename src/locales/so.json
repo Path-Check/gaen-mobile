@@ -27,6 +27,9 @@
     "success_got_it": "Waan fahmay",
     "success_header": "Waxaad ku jirtaa laynka sugitaanka"
   },
+  "callback_request": {
+    "callback_button_text": "Codo Wicitaan"
+  },
   "common": {
     "back": "Noqo",
     "cancel": "Buri",
@@ -45,6 +48,7 @@
     "ok": "Waayahay",
     "okay": "Haye",
     "on": "DAARAN",
+    "request_callback": "Codo Wicitaan",
     "save": "Kaydi",
     "select_language": "Xulo Luqadda",
     "settings": "Fur Dejinta",
@@ -94,11 +98,11 @@
     "try_again_later": "Markale iskuday hadhoow"
   },
   "escrow_verification": {
-    "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
     "complete": {
       "body": "Ayaad markaa gacan ka geysaneysaa xakameynta faafitaanka fayraska iyo inaad badbaadiso dadka kale ee bulshadaada ka tirsan.",
       "title": "Waad ku mahadsantahay badbaadinta bulshadaada!"
     },
+    "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
     "error": {
       "invalid_phone_number": "Nambarka Taleefanku waa inuu noqdaa 10 god",
       "rate_limit": "Waxaad gaadhay xadka gudbinta maalinlaha ah. Fadlan iskuday markale 24 saac."
@@ -165,8 +169,23 @@
     },
     "symptom_onset": {
       "did_you_have_symptoms": "Ma qabtaa wax astaamo ah?",
+      "knowing_symptoms": "Ogaanshaha haddii aad leedahay calaamadaha COVID-19, iyo goorta ay bilowdeen, waxay kaa caawin kartaa in la aqoonsado maalmihii aad faafisay (oo ay ku jiraan maalmo ka hor intaanay calaamaduhu bilaabmin).",
       "no_i_didnt_have": "Maya, ma aanan qabin wax astaamo ah",
       "symptoms": "Taariikhda Astaamaha ",
+      "symptoms_include": "Calaamadaha waxaa ka mid ah",
+      "symptoms_list": {
+        "congestion": "Cabnbur ama sanka  oo dareera",
+        "cough": "Qufac",
+        "diarrhea": "Shuban",
+        "fatigue": "Daal",
+        "fever": "Qandho ama qarqaryo",
+        "headaches ": "Madax xanuun",
+        "loss_of_taste_smell": "Luminta dhadhanka ama urka oo cusub",
+        "muscle_aches": "Murqo xanuun ama jir xanuun",
+        "nausea": "Lallabo ama matag",
+        "shortness_of_breath": "Neefta oo ku yaraata ama dhibaato dhanka neefsiga ah",
+        "sore_throat": "Dhuun xanuun"
+      },
       "when_did_your_symptoms": "Goorma ayay astaamahaagu biloowdeen?",
       "yes_i_did_have": "Haa, waan lahaa astaamaha xanuunka"
     },
@@ -245,7 +264,6 @@
     "your_device_is_scanning": "Aaladdaadu waxay raadinaysaa ufeydsanaanta waxayna sii wadaysaa shaqadaan xataa haddii aad xirto aabka."
   },
   "home": {
-    "bluetooth_info_body": "Telefoonkaagu wuxuu ogaadaa taleefanada kale ee aad waqtiga ugu dhow ku qaadato iyadoo la isticmaalayo Bluetooth Tamar Hooseeysa. Tan waxay barnaamijka aabka u oggolaaneysaa inuu ku soo galo soogaliddada maalin walba si qarsoodi ah, xitaa marka aanu furnayn barnaamijka telfoonkaaga.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} ayaa shaqayn doonta marka aabka(app) la xiro.",
       "location_disabled_error_message": "Si aad u shiddo tikniyoolajiyadda Ogeysiiska Soo-gaarista, u oggolow in la ogaado Goobta (Location) ee ku yaala (Settings) aabka",
@@ -259,6 +277,7 @@
       "tracing_off_subheader": "Karti u yeel Bluetoothka iyo Raadraaca Isku-Dhowaanshaha si aad u hesho macluumaad ku saabsan ufeydsanka suurtagalka ah",
       "tracing_on_header": "Wuu shaqaynayaa"
     },
+    "bluetooth_info_body": "Telefoonkaagu wuxuu ogaadaa taleefanada kale ee aad waqtiga ugu dhow ku qaadato iyadoo la isticmaalayo Bluetooth Tamar Hooseeysa. Tan waxay barnaamijka aabka u oggolaaneysaa inuu ku soo galo soogaliddada maalin walba si qarsoodi ah, xitaa marka aanu furnayn barnaamijka telfoonkaaga.",
     "call_emergency_services": "Wac adeegyada Xaaladaha Degdegga Ah (Imerjansiga)",
     "check_if_your_symptoms": "Geli calaamadahaaga kadibna hel talo degdeg ah oo ku aaddan sida aad guriga u joogayso.",
     "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
@@ -329,7 +348,6 @@
     "notification_subheader3": "Aabkan kaama ilaalin doono caabuqa COVID-19.",
     "please_read_the": "Fadlan akhri",
     "privacy_policy": "Xeerka Asurnaanta",
-    "protect_privacy_button": "Sidaan u ilaalinno asturnaantaada",
     "protect_privacy": {
       "body_1": "Koodhadhka kuma jiraan wax macluumaad shaqsiyeed ah waxayna beddelaan 10-20 daqiiqo kasta si loo ilaaliyo aqoonsigaaga.",
       "body_2": "Telefoonnada ayay isweydaarsadaan koodhadhka aaladaha kale istcimaalya Tamar Hoose Bluetooth. Taasi waxay u oggolaanaysaa {{applicationName}} inuu raadraaco kulannadaada maalinlaha ah si aan adigu qof aad la garanayn, xitaa marka aanay ka gurnayn aaladdaada.",
@@ -347,6 +365,7 @@
       "subheader_4": "Telefoon kasta wuxuu marba sarfarka ugu baaqaa liiska aqoonsiyada la calaamadeeyay wuxuu raadiyaa mid waafaqa",
       "subheader_5": "Waa lagugu soo wargelin doonaa haddii {{applicationName}} helo qof laga helay oo togane ah aqoonsi la calaamadeeyay"
     },
+    "protect_privacy_button": "Sidaan u ilaalinno asturnaantaada",
     "proximity_tracing_already_active": "Ogaysiiska U dhawaanshaha Qofka caabuqa qaba ayaa furan",
     "proximity_tracing_body1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_body2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
@@ -512,24 +531,6 @@
     "share_anonymized_data": "La wadaag xogta qarsoodiga ah",
     "sharing_anonymized_data": "Wadaagista xogta qarsoodiga ah"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Si fiican ma aqdan dareemaynin",
-    "errors": {
-      "updating_symptoms": "Waan ka xunnahay, waan cusboonaysiin kari waynay astaamahaaga"
-    },
-    "felt_well": "Si fiican ayaad dareemaysay",
-    "no_entry": "Wax xog ah maad gelin",
-    "no_symptoms": "Ma jiraan wax astaamo ah",
-    "share_history": "La wadaag taariikhda astaamaha",
-    "sharing": {
-      "header": "Taariikhda Astaamaha xanuunka laga soo bilaabo {{startDate}} ilaa {{endDate}}",
-      "no_symptoms_were_logged": "Ma jiraan wax astaamo ah oo la qoray",
-      "you_did_not_feel_well": "Si fiican ma aadan dareemayn, astaamaha waxaa ku jiray: {{symptomList}}",
-      "you_felt_well": "Si fiican ayaad dareemaysay"
-    },
-    "symptom_history": "Taariikhda Astaamaha ",
-    "to_protect_your_privacy": "Si loo difaaco sirtaada, xogta aad geliso ayaa lagu kaydiyaa aaladdaada oo si ootomaatig ah ayaana loo tiraa {{days}} maalmood kadib."
-  },
   "symptom": {
     "bluish_lips_or_face": "Bishimaha  ama wajiga oo midka buluugga oo kale noqda ",
     "congestion_or_runny_nose": "Cabnbur ama sanka  oo dareera",
@@ -547,6 +548,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Dhibaato kaa haysata neefsiga ama cadaadis kaa fuula xabadka",
     "shortness_of_breath_or_difficulty_breathing": "Neefta oo ku yaraata ama dhibaato dhanka neefsiga ah",
     "sore_throat": "Dhuun xanuun"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Si fiican ma aqdan dareemaynin",
+    "errors": {
+      "updating_symptoms": "Waan ka xunnahay, waan cusboonaysiin kari waynay astaamahaaga"
+    },
+    "felt_well": "Si fiican ayaad dareemaysay",
+    "no_entry": "Wax xog ah maad gelin",
+    "no_symptoms": "Ma jiraan wax astaamo ah",
+    "share_history": "La wadaag taariikhda astaamaha",
+    "sharing": {
+      "header": "Taariikhda Astaamaha xanuunka laga soo bilaabo {{startDate}} ilaa {{endDate}}",
+      "no_symptoms_were_logged": "Ma jiraan wax astaamo ah oo la qoray",
+      "you_did_not_feel_well": "Si fiican ma aadan dareemayn, astaamaha waxaa ku jiray: {{symptomList}}",
+      "you_felt_well": "Si fiican ayaad dareemaysay"
+    },
+    "symptom_history": "Taariikhda Astaamaha ",
+    "to_protect_your_privacy": "Si loo difaaco sirtaada, xogta aad geliso ayaa lagu kaydiyaa aaladdaada oo si ootomaatig ah ayaana loo tiraa {{days}} maalmood kadib."
   },
   "verification_code_alerts": {
     "code_used_body": "Koodhka xaqiijinta ee aad bixisay horay ayaa loo isticmaalay.",

@@ -115,6 +115,19 @@
       "did_you_have_symptoms": "Met mi wor reom ekewe sainen semwen?",
       "no_i_didnt_have": "Apw, ese wor rei ekewe sainen semwen",
       "symptoms": "Esisinen semwen",
+      "symptoms_list": {
+        "congestion": "Iamwor ika mwongupwot",
+        "cough": "Nau",
+        "diarrhea": "Feiseni",
+        "fatigue": "Mwanien",
+        "fever": "Kar ika fou",
+        "headaches ": "Metek mokur",
+        "loss_of_taste_smell": "Minafo ese wor nenen mongo ika ese wor tini pwopwonen mettoch",
+        "muscle_aches": "Metekin non fituk ika non inis",
+        "nausea": "Eningaw ika mwus",
+        "shortness_of_breath": "Riafou ne ngasangas ika weires ne ngasangas",
+        "sore_throat": "Metek non choir"
+      },
       "when_did_your_symptoms": "Inet e pwopwun omw kewe sainen semwen?",
       "yes_i_did_have": "Ewer, mi wor rei ekewe sainen semwen"
     },
@@ -185,7 +198,6 @@
     "your_device_is_scanning": "Noum fon a kuta ia epwe afou ngeni pwe epwe pwano iwe epwe soposopono inamo ika ka esipano ewe app."
   },
   "home": {
-    "bluetooth_info_body": "Noum phone me mefi ekoch phone en mi kan ngeni ren an eaea Bluetooth Low Energy (Bluetooth e eaea kukunun power). Ei e mutata pwe ewe app epwe maketiw fansoun atun chufengen nge esap pwarata en io, inamo ika ewe app ese sukuta on nom phone.",
     "bluetooth": {
       "location_disabled_error_message": "Ren an epwe sukuta ika on Esinesinen Pwangeni on phone ika Bluetooth (Exposure Notification Technology), mutata ika onei ia ke nom ia me non Setting non ewe app",
       "location_disabled_error_title": "Mwutata me non ekewe neni",
@@ -197,6 +209,7 @@
       "tracing_off_header": "Mefi pwe ka pwa ngeni Off",
       "tracing_on_header": "Mefi pwe ka pwa ngeni On"
     },
+    "bluetooth_info_body": "Noum phone me mefi ekoch phone en mi kan ngeni ren an eaea Bluetooth Low Energy (Bluetooth e eaea kukunun power). Ei e mutata pwe ewe app epwe maketiw fansoun atun chufengen nge esap pwarata en io, inamo ika ewe app ese sukuta on nom phone.",
     "call_emergency_services": "Kokori ewe pekin aninis ren osukosuk atapwanapwan",
     "error": {
       "share_link_failed": "Mwan ne suki ewe link ren omw kopwe ngeni emon me emon"
@@ -258,7 +271,6 @@
     "notification_subheader3": "Ei app ese epetuk seni ei semwenin COVID-19’",
     "please_read_the": "Kese mochen aneani ewe  ",
     "privacy_policy": "Annukun tumunun porausen emon",
-    "protect_privacy_button": "Ifa usun ach tumun poraus auchea ren fan itom",
     "protect_privacy": {
       "body_1": "Ekei IDs ese anomu poraus fan itan emon me siwini iteitan 10-20 minich ren an esap pwano ngang io.",
       "body_2": "Phone ekan ekisiwini sokopaten IDs ngeni ekoch phone ren an eaea Bluetooth ese kon eaea waten power. Ei a mutata {{applicationName}} ren an epwe nengeni fichi met ke churi iteitan nge esap pwata pwe en io, inamo ika ese sukuta on on nei phone.",
@@ -271,6 +283,7 @@
       "subheader_4": "Ew phone mei chok iteitan tini esisin ngeni ewe nenien a anomu unesenapen poraus ren ekoch ID mi esisin iwe a kuta meni epwe mes ngeni",
       "subheader_5": "Epwe or esinesin ngonuk ika {{applicationName}} a pwano pwe mi mes ngeni ew ika ekoch me mi pwan esisin ewe ID"
     },
+    "protect_privacy_button": "Ifa usun ach tumun poraus auchea ren fan itom",
     "proximity_tracing_already_active": "Esinesin ren pwa ngeni epwe on",
     "proximity_tracing_body1": "Ika pwe smartphones me app mi nom on remi sukuta ika on, pwan Bluetooth mi on, iwe ir me ikan fengen non ekis fansoun, iwe ei atun chufengen epwe nomola ka pwarata on noum phone.",
     "proximity_tracing_body2": "Ika pwe oua chufengen, porousom mi maketiw, me porous auchea fanitom epwe chok nomw ne mwonomwon  Ewe app ese iseis porousen auchea faniten emon Ekewe chok ID ese nifinifin ra tongeni ekesiwin. Ekei repwe kamworono murin 14 ran",
@@ -430,24 +443,6 @@
     "share_anonymized_data": "Eaea fengen poraus ese pwa ngeni emon",
     "sharing_anonymized_data": "Eaea fengen iei porausen mettoch mi awewe"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Kose mwo mefi pochokun",
-    "errors": {
-      "updating_symptoms": "Amusano, sise tongeni uwau minafon porous won omw kewe sainen semwen"
-    },
-    "felt_well": "Ka mefi pochokun ",
-    "no_entry": "Ese wor tonong",
-    "no_symptoms": "Ese wor sainen ewe semwen",
-    "share_history": "Ngeni emon porousan sainen ewe semwen",
-    "sharing": {
-      "header": "Porousan sainen ewe semwen seni {{startDate}} ngeni {{endDate}}",
-      "no_symptoms_were_logged": "Ese wor sainen ewe semwen mi tonong",
-      "you_did_not_feel_well": "En kese mefi pochokun, sainen ewe semwen mi pachenong: {{symptomList}}",
-      "you_felt_well": "Ka mefi pochokun"
-    },
-    "symptom_history": "Esisinen semwen",
-    "to_protect_your_privacy": "Ren omw kopwe tumunuochu porousom, met mi katonong fanitom mi nom won noum na device iwe ina epwe chok pusin kamorono non ekan ran epwe {{days}} eto"
-  },
   "symptom": {
     "bluish_lips_or_face": "Tunau me won mas mi anu araw, mi sokono seni pusin anuwan me akomw",
     "congestion_or_runny_nose": "Iamwor ika mwongupwot",
@@ -465,6 +460,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Metekitek mi chok fis iteiten, ika weiresin fanimwar",
     "shortness_of_breath_or_difficulty_breathing": "Riafou ne ngasangas ika weires ne ngasangas",
     "sore_throat": "Metek non choir"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Kose mwo mefi pochokun",
+    "errors": {
+      "updating_symptoms": "Amusano, sise tongeni uwau minafon porous won omw kewe sainen semwen"
+    },
+    "felt_well": "Ka mefi pochokun ",
+    "no_entry": "Ese wor tonong",
+    "no_symptoms": "Ese wor sainen ewe semwen",
+    "share_history": "Ngeni emon porousan sainen ewe semwen",
+    "sharing": {
+      "header": "Porousan sainen ewe semwen seni {{startDate}} ngeni {{endDate}}",
+      "no_symptoms_were_logged": "Ese wor sainen ewe semwen mi tonong",
+      "you_did_not_feel_well": "En kese mefi pochokun, sainen ewe semwen mi pachenong: {{symptomList}}",
+      "you_felt_well": "Ka mefi pochokun"
+    },
+    "symptom_history": "Esisinen semwen",
+    "to_protect_your_privacy": "Ren omw kopwe tumunuochu porousom, met mi katonong fanitom mi nom won noum na device iwe ina epwe chok pusin kamorono non ekan ran epwe {{days}} eto"
   },
   "verification_code_alerts": {
     "code_used_body": "Ewe nampa ren an epwe anetata mi kawor a pin eaea",
