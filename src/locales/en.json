@@ -17,6 +17,12 @@
       "opens_share_sheet": "opens share sheet"
     }
   },
+  "callback_request": {
+    "phonenumber_display_text": "You may also call the {{healthAuthorityName}} at ",
+    "phonenumber_display_text2": " or you can request a callback by clicking the \"Request Callback\" button below.",
+    "verification_code_warning": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} to request your code at ",
+    "verification_code_warning2": "or you can request a callback by clicking the \" Request Callback\" button below."
+  },
   "callback": {
     "firstname": "First name (optional)",
     "if_you_prefer": "If you prefer; call directly at:",
@@ -26,13 +32,6 @@
     "success_body": "Our support team is working hard to keep you and your community safe. The {{healthAuthorityName}} has received your request for a call back. An expert will contact you within 24 hours.",
     "success_got_it": "Got it",
     "success_header": "You're in the queue"
-  },
-  "callback_request": {
-    "callback_button_text": "Request Callback",
-    "phonenumber_display_text": "You may also call the {{healthAuthorityName}} at ",
-    "phonenumber_display_text2": " or you can request a callback by clicking the \"Request Callback\" button below.",
-    "verification_code_warning": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} to request your code at ",
-    "verification_code_warning2": "or you can request a callback by clicking the \" Request Callback\" button below."
   },
   "common": {
     "back": "Back",
@@ -57,7 +56,6 @@
     "select_language": "Select language",
     "settings": "Open Settings",
     "skip": "Skip",
-    "something_went_wrong": "Something went wrong",
     "start": "Start",
     "submit": "Submit",
     "success": "Success"
@@ -102,14 +100,13 @@
     "try_again_later": "Try again later"
   },
   "escrow_verification": {
+    "complete_healthcheck": "Complete Healthcheck",
     "complete": {
       "body": "You’re helping contain the spread of the virus and protect others in your community and beyond.",
       "title": "Thanks for keeping everyone safe!"
     },
-    "complete_healthcheck": "Complete Healthcheck",
     "error": {
-      "invalid_phone_number": "Phone number must be 10 digits",
-      "rate_limit": "You've reach the daily submission limit. Please try again in 24 hours."
+      "invalid_phone_number": "Phone number must be 10 digits"
     },
     "person_and_health_expert": "A person talking to a health expert",
     "start": {
@@ -126,9 +123,6 @@
   },
   "export": {
     "code": "Code",
-    "code_input_body_bluetooth": "Enter your verification code",
-    "code_input_button_cancel": "Cancel",
-    "code_input_title_bluetooth": "Verify your diagnosis",
     "complete_body_bluetooth": "You’re helping contain the spread of the virus and protect others in your community.",
     "complete_title": "Thanks for keeping your community safe!",
     "consent_body_0": "Sharing your positive diagnosis is optional and can only be done with your consent.",
@@ -141,11 +135,9 @@
     "enable_exposure_notifications_title": "Enable exposure notifications to continue",
     "enter_verification_code": "Enter verification code",
     "error": {
-      "invalid_code": "Try a different code",
       "invalid_format": "Codes may only contain numbers and letters",
       "network_connection_error": "There is no internet connection",
-      "unknown_code_verification_error": "Try a different code",
-      "verification_code_used": "Verification code has already been used"
+      "unknown_code_verification_error": "Try a different code"
     },
     "intro": {
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
@@ -183,7 +175,7 @@
         "diarrhea": "Diarrhea",
         "fatigue": "Fatigue",
         "fever": "Fever or chills",
-        "headaches ": "Headache",
+        "headaches": "Headaches",
         "loss_of_taste_smell": "New loss of taste or smell",
         "muscle_aches": "Muscle or body aches",
         "nausea": "Nausea or vomiting",
@@ -268,8 +260,8 @@
     "your_device_is_scanning": "Your device is scanning for exposures and will continue to do so even if you close the app."
   },
   "home": {
+    "bluetooth_info_body": "Your phone detects other phones you spend time in close contact with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "bluetooth": {
-      "all_services_on_subheader": "{{applicationName}} will remain active after the app has been closed",
       "location_disabled_error_message": "To activate the Exposure Notification technology, authorize Location access in the Settings app",
       "location_disabled_error_title": "Authorize in Settings",
       "location_header": "Location",
@@ -278,10 +270,8 @@
       "share": "Share {{applicationName}}",
       "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadUrl}}",
       "tracing_off_header": "Exposure Detection Off",
-      "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "tracing_on_header": "Exposure Detection On"
     },
-    "bluetooth_info_body": "Your phone detects other phones you spend time in close contact with using Bluetooth Low Energy. This allows the app to log your daily encounters anonymously, even when you don’t have the app open on your device.",
     "call_emergency_services": "Call Emergency Services",
     "check_if_your_symptoms": "Enter your symptoms and get an instant recommendation on how to stay safe.",
     "complete_healthcheck": "Complete Healthcheck",
@@ -319,7 +309,6 @@
     "launch_get_started": "Get Started",
     "launch_screen1_header": "Welcome to ",
     "privacy_policy": "Privacy Policy",
-    "question_icon": "Question mark icon",
     "unchecked_checkbox": "Unchecked checkbox"
   },
   "navigation": {
@@ -352,6 +341,7 @@
     "notification_subheader3": "This app does not protect you from COVID-19 infection.",
     "please_read_the": "Please read the ",
     "privacy_policy": "Privacy Policy",
+    "protect_privacy_button": "How we protect your privacy",
     "protect_privacy": {
       "body_1": "These IDs do not contain any personal information and change every 10-20 minutes to protect your identity.",
       "body_2": "Phones swap random IDs with other devices using Bluetooth Low Energy. This allows {{applicationName}} to keep track of your daily encounters anonymously, even when you don’t have it open on your device.",
@@ -369,7 +359,6 @@
       "subheader_4": "Each phone periodically communicates with the server for the list of flagged IDs and looks for matches",
       "subheader_5": "You will be notified if {{applicationName}} finds a positive match with a flagged ID"
     },
-    "protect_privacy_button": "How we protect your privacy",
     "proximity_tracing_already_active": "Exposure notifications are active",
     "proximity_tracing_body1": "If smartphones with the app installed are turned on, have bluetooth enabled, and are near each other for a period of time, an encounter is registered on your device.",
     "proximity_tracing_body2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted after 14 days.",
@@ -535,24 +524,6 @@
     "share_anonymized_data": "Share anonymized data",
     "sharing_anonymized_data": "Sharing anonymized data"
   },
-  "symptom": {
-    "bluish_lips_or_face": "Bluish lips or face",
-    "congestion_or_runny_nose": "Congestion or runny nose",
-    "cough": "Cough",
-    "diarrhea": "Diarrhea",
-    "fatigue": "Fatigue",
-    "fever_or_chills": "Fever or chills",
-    "headache": "Headache",
-    "inability_to_wake_or_stay_awake": "Inability to wake or stay awake",
-    "muscle_or_body_aches": "Muscle or body aches",
-    "nausea_or_vomiting": "Nausea or vomiting",
-    "new_confusion": "New confusion",
-    "new_loss_of_taste_or_smell": "New loss of taste or smell",
-    "other": "Other",
-    "persistent_pain_or_pressure_in_the_chest": "Persistent pain or pressure in the chest",
-    "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
-    "sore_throat": "Sore throat"
-  },
   "symptom_history": {
     "did_not_feel_well": "You did not feel well",
     "errors": {
@@ -570,6 +541,24 @@
     },
     "symptom_history": "Symptoms",
     "to_protect_your_privacy": "To protect your privacy, entries are stored on your device and deleted automatically after {{days}} days."
+  },
+  "symptom": {
+    "bluish_lips_or_face": "Bluish lips or face",
+    "congestion_or_runny_nose": "Congestion or runny nose",
+    "cough": "Cough",
+    "diarrhea": "Diarrhea",
+    "fatigue": "Fatigue",
+    "fever_or_chills": "Fever or chills",
+    "headache": "Headache",
+    "inability_to_wake_or_stay_awake": "Inability to wake or stay awake",
+    "muscle_or_body_aches": "Muscle or body aches",
+    "nausea_or_vomiting": "Nausea or vomiting",
+    "new_confusion": "New confusion",
+    "new_loss_of_taste_or_smell": "New loss of taste or smell",
+    "other": "Other",
+    "persistent_pain_or_pressure_in_the_chest": "Persistent pain or pressure in the chest",
+    "shortness_of_breath_or_difficulty_breathing": "Shortness of breath or difficulty breathing",
+    "sore_throat": "Sore throat"
   },
   "verification_code_alerts": {
     "code_used_body": "The verification code provided has already been used.",
