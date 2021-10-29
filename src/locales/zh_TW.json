@@ -95,6 +95,21 @@
         "no_token_for_existing_keys": "已將現有資料發送到服務器。這通常代表此程序曾在此設備上嘗試過，但使用的是不同的應用程式，您可以將此信息告知提供所使用驗證碼的機構。添加了{{newKeysInserted}}新密鑰。",
         "no_token_for_existing_keys_title": "嘗試提交現有密鑰"
       }
+    },
+    "symptom_onset": {
+      "symptoms_list": {
+        "congestion": "鼻塞或流鼻涕",
+        "cough": "咳嗽",
+        "diarrhea": "腹瀉",
+        "fatigue": "疲勞",
+        "fever": "發燒或發冷",
+        "headaches ": "頭痛",
+        "loss_of_taste_smell": "新的味道或氣味功能喪失",
+        "muscle_aches": "肌肉或身體酸痛",
+        "nausea": "噁心或嘔吐",
+        "shortness_of_breath": "呼吸急促或呼吸困難",
+        "sore_throat": "喉嚨痛"
+      }
     }
   },
   "exposure_history": {
@@ -131,7 +146,6 @@
     "your_device_is_scanning": "您的裝置正在搜尋接觸狀況，並在您關閉app以後仍會持續運作。"
   },
   "home": {
-    "bluetooth_info_body": "您的手機以低功耗藍牙偵測到與您相鄰一段時間的其他手機。這允許應用程式匿名紀錄您的每日接觸者，即使您裝置上的應用程式並未開啟。",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}}在應用程式關閉後仍會保持運作",
       "location_disabled_error_message": "要開始接觸通知，請在設定中授權定位",
@@ -145,6 +159,7 @@
       "tracing_off_subheader": "開啟藍牙與鄰近位置追蹤以獲得可能的接觸資訊",
       "tracing_on_header": "啟動"
     },
+    "bluetooth_info_body": "您的手機以低功耗藍牙偵測到與您相鄰一段時間的其他手機。這允許應用程式匿名紀錄您的每日接觸者，即使您裝置上的應用程式並未開啟。",
     "call_emergency_services": "致電緊急服務人員",
     "check_if_your_symptoms": "輸入您的症狀並立即獲得有關如何保持安全的建議。",
     "enter_symptoms": "輸入症狀",
@@ -199,7 +214,6 @@
     "notification_subheader3": "此應用程式不能使您免於COVID-19的感染。",
     "please_read_the": "請閱讀",
     "privacy_policy": "隱私政策",
-    "protect_privacy_button": "我們如何保護您的隱私",
     "protect_privacy": {
       "body_1": "這些ID不包含任何個人信息，且每10到20分鐘更改一次，以保護您的身份。",
       "body_2": "與其他設備交換隨機ID的功能使用的是低藍芽功效。即使您的手機沒有將此功能開啟，這使{{applicationName}}可以匿名追蹤您生活中接觸的對象。",
@@ -212,6 +226,7 @@
       "subheader_4": "每部電話會定期發送訊號給伺服器以獲取被標記的ID列表，並查找配對對象",
       "subheader_5": "如果{{applicationName}}發現帶有被標記的ID的配對，將會通知您"
     },
+    "protect_privacy_button": "我們如何保護您的隱私",
     "proximity_tracing_body1": "如果安裝了該應用程式的智能手機是開啟的狀態、已啟用藍牙並在彼此附近待了一段時間，則會在您的設備上紀錄一個接觸案例。",
     "proximity_tracing_body2": "如果接觸到他人，您的數據和訊息將保持匿名。該應用程式不存儲任何個人資料。僅交換隨機ID，而這些資訊將在14天內刪除。",
     "proximity_tracing_button": "啟用接觸追蹤",
@@ -363,24 +378,6 @@
     "share_anonymized_data": "分享匿名資料",
     "sharing_anonymized_data": "分享匿名數據"
   },
-  "symptom_history": {
-    "did_not_feel_well": "您感到不舒服",
-    "errors": {
-      "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
-    },
-    "felt_well": "您沒有不舒服",
-    "no_entry": "禁止進入",
-    "no_symptoms": "無症狀",
-    "share_history": "分享症狀紀錄",
-    "sharing": {
-      "header": "從{{startDate}}到{{endDate}}的症狀歷史記錄",
-      "no_symptoms_were_logged": "沒有記錄任何症狀",
-      "you_did_not_feel_well": "您感覺不舒服，症狀包括： {{symptomList}}",
-      "you_felt_well": "您沒有不舒服"
-    },
-    "symptom_history": "症狀紀錄",
-    "to_protect_your_privacy": "為保護您的隱私，登入超過一日將自動取消"
-  },
   "symptom": {
     "bluish_lips_or_face": "嘴唇或臉發紫",
     "congestion_or_runny_nose": "鼻塞或流鼻涕",
@@ -398,5 +395,23 @@
     "persistent_pain_or_pressure_in_the_chest": "持續的胸部疼痛或壓力",
     "shortness_of_breath_or_difficulty_breathing": "呼吸急促或呼吸困難",
     "sore_throat": "喉嚨痛"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "您感到不舒服",
+    "errors": {
+      "updating_symptoms": "抱歉，我們無法更新您的症狀紀錄"
+    },
+    "felt_well": "您沒有不舒服",
+    "no_entry": "禁止進入",
+    "no_symptoms": "無症狀",
+    "share_history": "分享症狀紀錄",
+    "sharing": {
+      "header": "從{{startDate}}到{{endDate}}的症狀歷史記錄",
+      "no_symptoms_were_logged": "沒有記錄任何症狀",
+      "you_did_not_feel_well": "您感覺不舒服，症狀包括： {{symptomList}}",
+      "you_felt_well": "您沒有不舒服"
+    },
+    "symptom_history": "症狀紀錄",
+    "to_protect_your_privacy": "為保護您的隱私，登入超過一日將自動取消"
   }
 }

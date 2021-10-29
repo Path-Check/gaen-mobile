@@ -60,11 +60,11 @@
     "try_again_later": "Daha sonra tekrar dene"
   },
   "escrow_verification": {
-    "complete_healthcheck": "Sağlık Kontrolünü Tamamla",
     "complete": {
       "body": "Virüsün yayılmasını kontrol altına almaya ve toplumun diğer bireylerinin korunmasına yardımcı oluyorsun",
       "title": "Toplumun güvenliğini sağlamaya yardımcı olduğun için teşekkürler"
     },
+    "complete_healthcheck": "Sağlık Kontrolünü Tamamla",
     "error": {
       "invalid_phone_number": "Telefon numarası 10 haneli olmalı",
       "rate_limit": "Günlük gönderim sınırına ulaştın. Lütfen 24 saat içinde tekrar dene."
@@ -132,6 +132,19 @@
       "did_you_have_symptoms": "Herhangi bir belirtin var mıydı?",
       "no_i_didnt_have": "Hayır, herhangi bir belirtim yok",
       "symptoms": "Belirtiler",
+      "symptoms_list": {
+        "congestion": "Tıkanıklık veya burun akıntısı",
+        "cough": "Öksürük",
+        "diarrhea": "İshal",
+        "fatigue": "Yorgunluk",
+        "fever": "Ateş veya titreme",
+        "headaches ": "Baş ağrısı",
+        "loss_of_taste_smell": "Yeni tat veya koku kaybı",
+        "muscle_aches": "Kas veya vücut ağrısı",
+        "nausea": "Mide bulantısı ya da kusma",
+        "shortness_of_breath": "Nefes darlığı veya nefes almada zorluk",
+        "sore_throat": "Boğaz ağrısı"
+      },
       "when_did_your_symptoms": "Belirtilerin ne zaman başladı?",
       "yes_i_did_have": "Evet, belirtilerim vardı"
     },
@@ -203,7 +216,6 @@
     "your_device_is_scanning": "Cihazın maruziyet taraması yapıyor ve uygulamayı kapatsan bile taramaya devam edecek."
   },
   "home": {
-    "bluetooth_info_body": "Telefonun, Bluetooth Düşük Enerji kullanarak yakınında vakit geçirdiğin başka telefonları tespit eder. Bu da, cihazındaki uygulama kapalı olsa bile uygulamanın günlük karşılaşmalarını anonim olarak kaydetmesine olanak tanır. ",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} uygulama kapatıldıktan sonra etkin kalır",
       "location_disabled_error_message": "Maruz Kalma Bildirimi teknolojisini etkinleştirmek için Ayarlar uygulamasından Konum erişimini aç.",
@@ -217,6 +229,7 @@
       "tracing_off_subheader": "Olası maruziyetlerle ilgili bilgi alabilmek amacıyla Bluetooth ve Yakınlık Takibini etkinleştir",
       "tracing_on_header": "Maruziyet Tespiti Açık"
     },
+    "bluetooth_info_body": "Telefonun, Bluetooth Düşük Enerji kullanarak yakınında vakit geçirdiğin başka telefonları tespit eder. Bu da, cihazındaki uygulama kapalı olsa bile uygulamanın günlük karşılaşmalarını anonim olarak kaydetmesine olanak tanır. ",
     "call_emergency_services": "Acil Servisleri Ara",
     "check_if_your_symptoms": "Belirtilerini gir ve nasıl güvende kalacağına dair anında öneri al.",
     "complete_healthcheck": "Sağlık Kontrolünü Tamamla",
@@ -285,7 +298,6 @@
     "notification_subheader3": "Bu uygulama seni COVID-19 enfkesiyonuna karşı korumaz",
     "please_read_the": "Lütfen oku",
     "privacy_policy": "Gizlilik Politikası",
-    "protect_privacy_button": "Gizliliğini nasıl koruyoruz?",
     "protect_privacy": {
       "body_1": "Bu ID'ler herhangi bir kişisel veri içermez ve senin kimliğini korumak için her 10-20 dakikada bir değişirler.",
       "body_2": "Telefonlar Bluetooth Düşük Enerji kullanarak diğer cihazlarla rastgele ID değiştirirler. Bu da, uygulamayı açmasan bile anonim olarak günlük karşılaşmalarının {{applicationName}} tarafından takip edilmesini sağlar.",
@@ -298,6 +310,7 @@
       "subheader_4": "Her telefon periyodik olarak sunucudan işaretlenmiş ID listesi sorgular ve eşleşme arar.",
       "subheader_5": "{{applicationName}} işaretlenmiş ID ile bir eşleşme bulması halinde bilgilendirileceksin."
     },
+    "protect_privacy_button": "Gizliliğini nasıl koruyoruz?",
     "proximity_tracing_already_active": "Maruz kalma bildirimleri aktif",
     "proximity_tracing_body1": "Uygulamanın yüklü olduğu akıllı telefonlar açıksa, bluetooth özelliği etkinse ve bunlar bir süre birbirlerine yakın bir noktada bulunurlarsa cihazın bir karşılaşma kaydeder.",
     "proximity_tracing_body2": "Bir karşılaşma durumunda, verilerin ve bilgilerin anonim kalır. Uygulama hiçbir kişisel veriyi saklamaz. Yalnızca rastgele kimlikler değiştirilir. Bunlar 14 gün içinde silinir.",
@@ -457,24 +470,6 @@
     "share_anonymized_data": "Anonim hale getirilmiş verileri paylaş",
     "sharing_anonymized_data": "Anonimleştirilmiş veriler paylaşılıyor"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Kendini iyi hissetmiyordun.",
-    "errors": {
-      "updating_symptoms": "Üzgünüz, belirtilerini güncelleyemedik"
-    },
-    "felt_well": "Kendini iyi hissediyordun.",
-    "no_entry": "Veri girişi yok",
-    "no_symptoms": "Belirti yok",
-    "share_history": "Belirti geçmişini paylaş",
-    "sharing": {
-      "header": "{{startDate}} tarihinden {{endDate}} tarihine kadar olan belirti geçmişi",
-      "no_symptoms_were_logged": "Hiçbir belirti kaydedilmedi",
-      "you_did_not_feel_well": "Kendini iyi hissetmiyordun. Belirtiler şunlardı: {{symptomList}}",
-      "you_felt_well": "Kendini iyi hissediyordun."
-    },
-    "symptom_history": "Belirtiler",
-    "to_protect_your_privacy": "Gizliliğini korumak için, veri girişleri cihazında saklanır ve {{days}} gün sonra otomatik olarak silinirler."
-  },
   "symptom": {
     "bluish_lips_or_face": "Mavimsi dudaklar veya yüz",
     "congestion_or_runny_nose": "Tıkanıklık veya burun akıntısı",
@@ -492,6 +487,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Göğüste sürekli ağrı veya basınç",
     "shortness_of_breath_or_difficulty_breathing": "Nefes darlığı veya nefes almada zorluk",
     "sore_throat": "Boğaz ağrısı"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Kendini iyi hissetmiyordun.",
+    "errors": {
+      "updating_symptoms": "Üzgünüz, belirtilerini güncelleyemedik"
+    },
+    "felt_well": "Kendini iyi hissediyordun.",
+    "no_entry": "Veri girişi yok",
+    "no_symptoms": "Belirti yok",
+    "share_history": "Belirti geçmişini paylaş",
+    "sharing": {
+      "header": "{{startDate}} tarihinden {{endDate}} tarihine kadar olan belirti geçmişi",
+      "no_symptoms_were_logged": "Hiçbir belirti kaydedilmedi",
+      "you_did_not_feel_well": "Kendini iyi hissetmiyordun. Belirtiler şunlardı: {{symptomList}}",
+      "you_felt_well": "Kendini iyi hissediyordun."
+    },
+    "symptom_history": "Belirtiler",
+    "to_protect_your_privacy": "Gizliliğini korumak için, veri girişleri cihazında saklanır ve {{days}} gün sonra otomatik olarak silinirler."
   },
   "verification_code_alerts": {
     "code_used_body": "Sağlanan doğrulama kodu zaten kullanılmış.",

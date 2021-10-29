@@ -126,6 +126,19 @@
       "did_you_have_symptoms": "Nagkaroon ka ba ng anumang sintomas?",
       "no_i_didnt_have": "Hindi, hindi ako nagkaroon ng anumang sintomas",
       "symptoms": "Mga Sintomas",
+      "symptoms_list": {
+        "congestion": "Barado o nagtutubig na ilong",
+        "cough": "Ubo",
+        "diarrhea": "Pagtatae",
+        "fatigue": "Pagkapagod",
+        "fever": "Lagnat o panginginig",
+        "headaches ": "Pananakit ng Ulo",
+        "loss_of_taste_smell": "Bagong pagkawala ng panlasa o pang-amoy",
+        "muscle_aches": "Mga pananakit ng kalamnan o katawan",
+        "nausea": "Pagduruwal o pagsusuka",
+        "shortness_of_breath": "Igsi ng paghinga o hirap sa paghinga",
+        "sore_throat": "Pananakit ng lalamunan"
+      },
       "when_did_your_symptoms": "Kailan nagsimula ang iyong mga sintomas?",
       "yes_i_did_have": "Oo, nagkaroon ako ng mga sintomas"
     },
@@ -196,7 +209,6 @@
     "your_device_is_scanning": "Ang iyong device ay nag-iiscan para sa mga pagkakalantad at magpapatuloy ito kahit isara mo ang app."
   },
   "home": {
-    "bluetooth_info_body": "Natutuklasan ng iyong cellphone o device na mayroon kang malapitang nakakasalamuha na gumagamit ng Bluetooth Low Energy.  Pinapayagan nito ang app na anonimong itala ang iyong pangaraw-araw na pagkatagpo, hahit hindi nakabukas ang app sa iyong cellphone o device.",
     "bluetooth": {
       "all_services_on_subheader": "Mananatiling aktibo ang {{applicationName}} kahit ang app ay isinara",
       "location_disabled_error_message": "Upang i-activate ang teknolohiya ng Abiso sa Exposure, pahintulutan ang pag-access sa Lokasyon sa app na Mga Setting",
@@ -210,6 +222,7 @@
       "tracing_off_subheader": "Paganahin ang Bluetooth at Proximity Tracing upang makakuha ng impormasyon tungkol sa mga posibleng pagkakalantad",
       "tracing_on_header": "Aktibo"
     },
+    "bluetooth_info_body": "Natutuklasan ng iyong cellphone o device na mayroon kang malapitang nakakasalamuha na gumagamit ng Bluetooth Low Energy.  Pinapayagan nito ang app na anonimong itala ang iyong pangaraw-araw na pagkatagpo, hahit hindi nakabukas ang app sa iyong cellphone o device.",
     "call_emergency_services": "Tumawag sa Serbisyong Pang-emergency o Emergency Services",
     "error": {
       "share_link_failed": "Nabigong buksan ang link upang magbahagi"
@@ -272,7 +285,6 @@
     "notification_subheader3": "Hindi ka pinoprotektahan ng app ng ito mula sa impeksyon mula sa COVID-19.",
     "please_read_the": "Mangyaring basahin ang",
     "privacy_policy": "Patakaran sa Pagkapribado",
-    "protect_privacy_button": "Paano namin protektahan ang iyong privacy",
     "protect_privacy": {
       "body_1": "Ang mga ID na ito ay hindi naglalaman ng anumang personal na impormasyon at binabago tuwing 10-20 minuto upang maprotektahan ang iyong pagkakakilanlan.",
       "body_2": "Ipinagpalit ng mga cellphone o device ang mga random na ID sa iba pang mga aparato gamit ang Bluetooth Low Energy. Pinapayagan nito ang {{applicationName}} na subaybayan ang iyong pang-araw-araw na pakikipagtagpo nang hindi nagpapakilala, kahit na hindi mo ito binubuksan sa iyong aparato.",
@@ -285,6 +297,7 @@
       "subheader_4": "Ang bawat ng cellphone o device ay panay na nag-pi-ping o kumukunekta sa server para sa listahan ng mga naka-flag na mga ID at humahanap ng mga katugma",
       "subheader_5": "Aabisuhan ka kung ang {{applicationName}} ay makakahanap ng positibong katugma sa isang naka-flag na ID"
     },
+    "protect_privacy_button": "Paano namin protektahan ang iyong privacy",
     "proximity_tracing_already_active": "Aktibo ang Mga Exposure Notification",
     "proximity_tracing_body1": "Kung ang mga smartphone na naka-install ang app ay naka-on, naka-on ang Bluetooth, at malapit sa bawat isa sa isang tagal ng panahon, nakarehistro ang isang engkwentro sa iyong aparato.",
     "proximity_tracing_body2": "Sa kaganapan ng isang pagtatagpo, ang iyong data at impormasyon ay mananatiling anonimo. Hindi nag-iimbak ang app ng anumang personal na data.  Mga random ID lamang ang ipinagpapalit.  Tatanggalin ang mga ito sa loob ng 14 na araw.",
@@ -445,24 +458,6 @@
     "share_anonymized_data": "Ibahagi ang hindi pinangalanan na datos",
     "sharing_anonymized_data": "Ibinabahagi ang hindi pinangalanan na datos"
   },
-  "symptom_history": {
-    "did_not_feel_well": "Hindi naging maganda ang iyong pakiramdam",
-    "errors": {
-      "updating_symptoms": "Paumanhin, hindi namin ma-update ang iyong mga sintomas"
-    },
-    "felt_well": "Gumanda ang iyong pakiramdam",
-    "no_entry": "Walang entry",
-    "no_symptoms": "Walang sintomas",
-    "share_history": "Ibahagi ang kasaysayan ng iyong sintomas",
-    "sharing": {
-      "header": "Kasaysayan ng sintomas mula {{startDate}} hanggang {{endDate}}",
-      "no_symptoms_were_logged": "Walang nai-log na sintomas",
-      "you_did_not_feel_well": "Hindi maganda ang iyong pakiramdam, kasama sa mga sintomas ang: {{symptomList}}",
-      "you_felt_well": "Gumanda ang iyong pakiramdam"
-    },
-    "symptom_history": "Mga Sintomas",
-    "to_protect_your_privacy": "Upang maprotektahan ang iyong pagkapribado, ang mga entry ay nakaimbak sa iyong device at awtomatikong tinatanggal pagkalipas ng {{days}} araw."
-  },
   "symptom": {
     "bluish_lips_or_face": "Mala-bughaw na labi o mukha",
     "congestion_or_runny_nose": "Barado o nagtutubig na ilong",
@@ -480,6 +475,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Patuloy na pananakit o presyon sa dibdib",
     "shortness_of_breath_or_difficulty_breathing": "Igsi ng paghinga o hirap sa paghinga",
     "sore_throat": "Pananakit ng lalamunan"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "Hindi naging maganda ang iyong pakiramdam",
+    "errors": {
+      "updating_symptoms": "Paumanhin, hindi namin ma-update ang iyong mga sintomas"
+    },
+    "felt_well": "Gumanda ang iyong pakiramdam",
+    "no_entry": "Walang entry",
+    "no_symptoms": "Walang sintomas",
+    "share_history": "Ibahagi ang kasaysayan ng iyong sintomas",
+    "sharing": {
+      "header": "Kasaysayan ng sintomas mula {{startDate}} hanggang {{endDate}}",
+      "no_symptoms_were_logged": "Walang nai-log na sintomas",
+      "you_did_not_feel_well": "Hindi maganda ang iyong pakiramdam, kasama sa mga sintomas ang: {{symptomList}}",
+      "you_felt_well": "Gumanda ang iyong pakiramdam"
+    },
+    "symptom_history": "Mga Sintomas",
+    "to_protect_your_privacy": "Upang maprotektahan ang iyong pagkapribado, ang mga entry ay nakaimbak sa iyong device at awtomatikong tinatanggal pagkalipas ng {{days}} araw."
   },
   "verification_code_alerts": {
     "code_used_body": "Nagamit na ang ibinigay na verification code.",

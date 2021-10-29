@@ -27,6 +27,9 @@
     "success_got_it": "Entendido",
     "success_header": "Usted está en la fila"
   },
+  "callback_request": {
+    "callback_button_text": "Solicitar llamada"
+  },
   "common": {
     "back": "Regresar",
     "cancel": "Cancelar",
@@ -45,6 +48,7 @@
     "ok": "Ok",
     "okay": "Sí",
     "on": "ACTIVADA",
+    "request_callback": "Solicitar llamada",
     "save": "Guardar",
     "select_language": "Seleccionar idioma",
     "settings": "Abrir Configuración",
@@ -94,11 +98,11 @@
     "try_again_later": "Intentar más tarde"
   },
   "escrow_verification": {
-    "complete_healthcheck": "Completar Healthcheck",
     "complete": {
       "body": "Está ayudando a contener la propagación del virus y a proteger a otros en tu comunidad.",
       "title": "¡Gracias por mantener segura a su comunidad!"
     },
+    "complete_healthcheck": "Completar Healthcheck",
     "error": {
       "invalid_phone_number": "El número de teléfono debe tener 10 dígitos",
       "rate_limit": "Has alcanzado el límite de envíos diarios. Vuelva a intentarlo en 24 horas."
@@ -165,8 +169,23 @@
     },
     "symptom_onset": {
       "did_you_have_symptoms": "¿Tuvo algún síntoma?",
+      "knowing_symptoms": "Saber si ha tenido síntomas de COVID-19 y cuándo comenzaron puede ayudar a identificar los días en que era infeccioso (incluidos los días antes de que comenzaran los síntomas).",
       "no_i_didnt_have": "No, no tuve ningún síntoma",
       "symptoms": "Síntomas",
+      "symptoms_include": "Los síntomas incluyen",
+      "symptoms_list": {
+        "congestion": "Congestión o secreción nasal.",
+        "cough": "Tos",
+        "diarrhea": "Diarrea",
+        "fatigue": "Fatiga",
+        "fever": "Fiebre o escalofríos",
+        "headaches ": "Dolor de cabeza",
+        "loss_of_taste_smell": "Nueva pérdida del gusto u olfato",
+        "muscle_aches": "Dolores musculares o corporales",
+        "nausea": "Náuseas o vómitos",
+        "shortness_of_breath": "Dificultad para respirar",
+        "sore_throat": "Dolor de garganta"
+      },
       "when_did_your_symptoms": "¿Cuándo se iniciaron sus síntomas?",
       "yes_i_did_have": "Sí, si tuve síntomas"
     },
@@ -245,7 +264,6 @@
     "your_device_is_scanning": "Su dispositivo está buscando exposiciones y continuará haciéndolo incluso si cierra la aplicación."
   },
   "home": {
-    "bluetooth_info_body": "Su teléfono detecta otros teléfonos con los que pasa tiempo cerca mediante el uso de Bluetooth de baja energía. Esto permite que la aplicación registre sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación abierta en su dispositivo.",
     "bluetooth": {
       "all_services_on_subheader": "{{applicationName}} permanecerá activo después de que la aplicación se haya cerrado",
       "location_disabled_error_message": "Para activar la tecnología de Notificaciones de Exposición, autorice el acceso a su ubicación que está en la Configuración de la aplicación",
@@ -259,6 +277,7 @@
       "tracing_off_subheader": "Habilite Bluetooth, rastreo de proximidad y ubicación para obtener información sobre posibles exposiciones",
       "tracing_on_header": "Detección de exposición activada"
     },
+    "bluetooth_info_body": "Su teléfono detecta otros teléfonos con los que pasa tiempo cerca mediante el uso de Bluetooth de baja energía. Esto permite que la aplicación registre sus encuentros diarios de forma anónima, incluso cuando no tenga la aplicación abierta en su dispositivo.",
     "call_emergency_services": "Llamar Servicios de Emergencia",
     "check_if_your_symptoms": "Ingresar síntomas y obtener una recomendación instantánea sobre cómo estar a salvo.",
     "complete_healthcheck": "Completar Healthcheck",
@@ -329,7 +348,6 @@
     "notification_subheader3": "Esta aplicación no lo protege del contagio de COVID-19.",
     "please_read_the": "Lea la",
     "privacy_policy": "Política de privacidad",
-    "protect_privacy_button": "Cómo protegemos su privacidad",
     "protect_privacy": {
       "body_1": "Estas identificaciones no contienen información personal y cambian cada 10 a 20 minutos para proteger su identidad.",
       "body_2": "Los teléfonos intercambian identificaciones aleatorias con otros dispositivos que usan Bluetooth de bajo consumo. Esto permite a {{applicationName}} llevar un registro de sus encuentros diarios de forma anónima, incluso cuando la aplicación no está abierta en su dispositivo.",
@@ -347,6 +365,7 @@
       "subheader_4": "Cada teléfono llama periódicamente al servidor para obtener la lista de identificaciones marcadas y buscar coincidencias.",
       "subheader_5": "Se le avisará si {{applicationName}} encuentra una coincidencia positiva con un ID marcado"
     },
+    "protect_privacy_button": "Cómo protegemos su privacidad",
     "proximity_tracing_already_active": "Las notificaciones de exposición están activas",
     "proximity_tracing_body1": "Si los teléfonos celulares con la aplicación instalada están encendidos, tienen bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_body2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
@@ -512,24 +531,6 @@
     "share_anonymized_data": "Comparta datos anónimos",
     "sharing_anonymized_data": "Compartir datos anónimos"
   },
-  "symptom_history": {
-    "did_not_feel_well": "No se sentía bien.",
-    "errors": {
-      "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
-    },
-    "felt_well": "Se sentía bien",
-    "no_entry": "Sin entrada",
-    "no_symptoms": "Sin síntomas",
-    "share_history": "Compartir historial de síntomas",
-    "sharing": {
-      "header": "Historial de síntomas de {{startDate}} a {{endDate}}",
-      "no_symptoms_were_logged": "No se registraron síntomas",
-      "you_did_not_feel_well": "No se sentía bien, los síntomas incluyen: {{symptomList}}",
-      "you_felt_well": "Se sentía bien"
-    },
-    "symptom_history": "Historial de síntomas",
-    "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
-  },
   "symptom": {
     "bluish_lips_or_face": "Labios o cara violáceos",
     "congestion_or_runny_nose": "Congestión o secreción nasal.",
@@ -547,6 +548,24 @@
     "persistent_pain_or_pressure_in_the_chest": "Dolor persistente o presión en el pecho",
     "shortness_of_breath_or_difficulty_breathing": "Dificultad para respirar",
     "sore_throat": "Dolor de garganta"
+  },
+  "symptom_history": {
+    "did_not_feel_well": "No se sentía bien.",
+    "errors": {
+      "updating_symptoms": "Lo sentimos, no pudimos actualizar sus síntomas"
+    },
+    "felt_well": "Se sentía bien",
+    "no_entry": "Sin entrada",
+    "no_symptoms": "Sin síntomas",
+    "share_history": "Compartir historial de síntomas",
+    "sharing": {
+      "header": "Historial de síntomas de {{startDate}} a {{endDate}}",
+      "no_symptoms_were_logged": "No se registraron síntomas",
+      "you_did_not_feel_well": "No se sentía bien, los síntomas incluyen: {{symptomList}}",
+      "you_felt_well": "Se sentía bien"
+    },
+    "symptom_history": "Historial de síntomas",
+    "to_protect_your_privacy": "Para proteger su privacidad, las entradas se almacenan en su dispositivo y se eliminan automáticamente después de {{days}} días."
   },
   "verification_code_alerts": {
     "code_used_body": "El código de verificación dado ya se usó.",
