@@ -252,7 +252,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.annotation:annotation:1.1.0"
     implementation 'com.bottlerocketstudios:vault:1.4.2'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     // Imports to support Exposure Notifications implementation based on Google sample
     // Annotation processing
