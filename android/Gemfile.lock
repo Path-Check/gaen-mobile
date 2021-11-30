@@ -176,16 +176,17 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-19
+  x86_64-darwin-20
 
 DEPENDENCIES
-  bundler (= 2.2.1)
+  bundler (~> 2.2.1)
   fastlane (= 2.170.0)
   fastlane-plugin-appcenter
   fastlane-plugin-increment_version_code
   fastlane-plugin-load_json
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 2.6.8p205
 
 BUNDLED WITH
    2.2.1
