@@ -44,4 +44,4 @@ const style = StyleSheet.create({
   },
 })
 
-export { SwitchListItem };
+export { SwitchListItem }

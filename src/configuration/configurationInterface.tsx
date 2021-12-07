@@ -43,4 +43,4 @@ export interface Configuration {
   stateAbbreviation: string | null
   supportPhoneNumber: string | null
   verificationStrategy: VerificationStrategy
-};
+}

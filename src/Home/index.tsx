@@ -85,8 +85,22 @@ const Home: FunctionComponent = () => {
           <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
         )}
         {displayCovidDataWebView && <CovidDataWebViewLink />}
-        {externalCovidDataLink && <ExternalLink icon={Icons.QuestionMark} label={t("home.covid_data_specific", {label: externalCovidDataLabel})} link={externalCovidDataLink}/>}
-        {externalTravelGuidanceLink && <ExternalLink icon={Icons.QuestionMark} label={t("home.safe_travel_guidence")} link={externalTravelGuidanceLink} />}
+        {externalCovidDataLink && (
+          <ExternalLink
+            icon={Icons.QuestionMark}
+            label={t("home.covid_data_specific", {
+              label: externalCovidDataLabel,
+            })}
+            link={externalCovidDataLink}
+          />
+        )}
+        {externalTravelGuidanceLink && (
+          <ExternalLink
+            icon={Icons.QuestionMark}
+            label={t("home.safe_travel_guidence")}
+            link={externalTravelGuidanceLink}
+          />
+        )}
         {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {env.VERIFICATION_CODE_INFO_URL && <FaqButton />}
         {displaySelfAssessment && <SelfAssessment />}

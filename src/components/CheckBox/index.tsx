@@ -66,4 +66,4 @@ const style = StyleSheet.create({
   },
 })
 
-export { CheckBox };
+export { CheckBox }

@@ -42,4 +42,4 @@ const createStyle = (headerHeight: number) => {
   })
 }
 
-export { LoadingIndicator };
+export { LoadingIndicator }

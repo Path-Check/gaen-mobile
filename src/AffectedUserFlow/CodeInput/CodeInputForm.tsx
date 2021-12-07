@@ -27,7 +27,7 @@ import {
   AffectedUserFlowStackScreens,
 } from "../../navigation"
 import Logger from "../../logger"
-import { useConfigurationContext } from "../../configuration";
+import { useConfigurationContext } from "../../configuration"
 
 import {
   Spacing,

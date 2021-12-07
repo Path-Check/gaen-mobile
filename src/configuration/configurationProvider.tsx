@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
-import { VerificationStrategy } from "./configurationInterface";
-import { ConfigurationContext } from "./configurationContext";
-
-
+import { VerificationStrategy } from "./configurationInterface"
+import { ConfigurationContext } from "./configurationContext"
 
 const toVerificationStrategy = (strategy: string): VerificationStrategy => {
   switch (strategy) {
@@ -15,11 +13,9 @@ const toVerificationStrategy = (strategy: string): VerificationStrategy => {
     default:
       return "Simple"
   }
-};
+}
 
 const DEFAULT_QUARANTINE_LENGTH = 14
-
-
 
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
@@ -89,9 +85,10 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     : envQuarantineLength
 
   //Added for LA
-  const externalCovidDataLink = env.EXTERNAL_COVID_DATA_LINK || null;
-  const externalCovidDataLabel = env.EXTERNAL_COVID_DATA_LABEL || "home.covid_data";
-  const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDENCE_LINK || null;
+  const externalCovidDataLink = env.EXTERNAL_COVID_DATA_LINK || null
+  const externalCovidDataLabel =
+    env.EXTERNAL_COVID_DATA_LABEL || "home.covid_data"
+  const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDENCE_LINK || null
 
   return (
     <ConfigurationContext.Provider
@@ -142,6 +139,5 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     </ConfigurationContext.Provider>
   )
 }
-
 
 export { ConfigurationProvider }
