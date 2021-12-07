@@ -88,7 +88,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const externalCovidDataLink = env.EXTERNAL_COVID_DATA_LINK || null
   const externalCovidDataLabel =
     env.EXTERNAL_COVID_DATA_LABEL || "home.covid_data"
-  const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDENCE_LINK || null
+  const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDANCE_LINK || null
 
   return (
     <ConfigurationContext.Provider
