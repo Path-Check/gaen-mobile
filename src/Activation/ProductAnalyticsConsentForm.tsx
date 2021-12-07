@@ -8,7 +8,7 @@ import {
 } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useStatusBarEffect } from "../navigation"
 import { useCustomCopy } from "../configuration/useCustomCopy"

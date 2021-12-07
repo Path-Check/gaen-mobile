@@ -6,7 +6,7 @@ import { useStatusBarEffect } from "../../navigation"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import PublishConsentForm from "./PublishConsentForm"
 import { useExposureContext } from "../../ExposureContext"
-import { useConfigurationContext } from "../../ConfigurationContext"
+import { useConfigurationContext } from "../../configuration"
 
 import { Colors } from "../../styles"
 

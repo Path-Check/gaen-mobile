@@ -19,7 +19,7 @@ import { Text } from "../components"
 
 import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 
 export const AffectedUserFlowIntro: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)

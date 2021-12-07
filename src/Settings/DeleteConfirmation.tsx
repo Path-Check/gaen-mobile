@@ -13,7 +13,7 @@ import { showMessage } from "react-native-flash-message"
 import { useOnboardingContext } from "../OnboardingContext"
 import { useProductAnalyticsContext } from "../ProductAnalytics/Context"
 import { useSymptomHistoryContext } from "../SymptomHistory/SymptomHistoryContext"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { useApplicationName } from "../Device/useApplicationInfo"
 import { resetUserLocale } from "../locales/languages"
 

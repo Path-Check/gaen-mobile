@@ -14,7 +14,7 @@ import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "../components"
 import { useStatusBarEffect, Stacks } from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import Logger from "../logger"
 
 import { Images, Icons } from "../assets"

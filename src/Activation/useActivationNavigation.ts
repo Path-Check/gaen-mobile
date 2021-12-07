@@ -1,7 +1,7 @@
 import { Platform } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import {
   ENPermissionStatus,
   usePermissionsContext,

@@ -6,7 +6,7 @@ import "@testing-library/jest-native/extend-expect"
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
 import { useApplicationName } from "../Device/useApplicationInfo"
-import { ConfigurationContext } from "../ConfigurationContext"
+import { ConfigurationContext } from "../configuration"
 import { factories } from "../factories"
 import {
   loadAuthorityLinks,

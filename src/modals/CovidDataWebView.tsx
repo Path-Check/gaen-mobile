@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 import WebView from "react-native-webview"
 
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
 

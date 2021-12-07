@@ -7,7 +7,7 @@ import { SvgXml } from "react-native-svg"
 import env from "react-native-config"
 
 import { Text } from "../components"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 
 import { Spacing, Typography, Colors, Buttons } from "../styles"
 import { Icons } from "../assets"

@@ -12,7 +12,7 @@ import {
   OnboardingProvider,
   determineIsOnboardingComplete,
 } from "./src/OnboardingContext"
-import { ConfigurationProvider } from "./src/ConfigurationContext"
+import { ConfigurationProvider } from "./src/configuration/configurationProvider";
 import { PermissionsProvider } from "./src/Device/PermissionsContext"
 import { initializei18next, loadUserLocale } from "./src/locales/languages"
 import Logger from "./src/logger"

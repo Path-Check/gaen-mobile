@@ -12,7 +12,7 @@ import { useProductAnalyticsContext } from "../../ProductAnalytics/Context"
 
 import { Buttons, Colors, Spacing, Typography } from "../../styles"
 import { Icons } from "../../assets"
-import { useConfigurationContext } from "../../ConfigurationContext"
+import { useConfigurationContext } from "../../configuration"
 
 type Posix = number
 

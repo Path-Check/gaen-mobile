@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { ActivityIndicator, StyleSheet, View } from "react-native"
 import { useHeaderHeight } from "@react-navigation/stack"
 
-import { Colors, Layout, Outlines } from "../styles"
+import { Colors, Layout, Outlines } from "../../styles"
 
 const LoadingIndicator: FunctionComponent = () => {
   const headerHeight = useHeaderHeight()
@@ -42,4 +42,4 @@ const createStyle = (headerHeight: number) => {
   })
 }
 
-export default LoadingIndicator
+export { LoadingIndicator };

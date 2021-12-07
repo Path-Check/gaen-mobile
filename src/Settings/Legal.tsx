@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from "react-native"
 import { useTranslation } from "react-i18next"
 
 import { useApplicationName } from "../Device/useApplicationInfo"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import ExternalLink from "./ExternalLink"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import {

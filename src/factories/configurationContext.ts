@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { Configuration } from "../ConfigurationContext"
+import { Configuration } from "../configuration"
 
 export default Factory.define<Configuration>(() => ({
   appDownloadUrl: "appDownloadUrl",

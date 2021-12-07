@@ -20,7 +20,7 @@ import {
   EscrowVerificationRoutes,
   useStatusBarEffect,
 } from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { StatusBar, Text } from "../components"
 
 import CovidDataCard from "../CovidData/Card"
@@ -43,6 +43,7 @@ import {
   Iconography,
   Buttons,
 } from "../styles"
+import { ExternalLink } from "../components/ExternalLink"
 
 const IMAGE_HEIGHT = 170
 
@@ -57,6 +58,9 @@ const Home: FunctionComponent = () => {
     displaySelfAssessment,
     displaySymptomHistory,
     emergencyPhoneNumber,
+    externalCovidDataLink,
+    externalCovidDataLabel,
+    externalTravelGuidanceLink,
     healthAuthorityHealthCheckUrl,
     verificationStrategy,
   } = useConfigurationContext()
@@ -81,6 +85,8 @@ const Home: FunctionComponent = () => {
           <HealthCheckLink healthCheckUrl={healthAuthorityHealthCheckUrl} />
         )}
         {displayCovidDataWebView && <CovidDataWebViewLink />}
+        {externalCovidDataLink && <ExternalLink icon={Icons.QuestionMark} label={t("home.covid_data_specific", {label: externalCovidDataLabel})} link={externalCovidDataLink}/>}
+        {externalTravelGuidanceLink && <ExternalLink icon={Icons.QuestionMark} label={t("home.safe_travel_guidence")} link={externalTravelGuidanceLink} />}
         {appDownloadUrl && <ShareLink appDownloadUrl={appDownloadUrl} />}
         {env.VERIFICATION_CODE_INFO_URL && <FaqButton />}
         {displaySelfAssessment && <SelfAssessment />}

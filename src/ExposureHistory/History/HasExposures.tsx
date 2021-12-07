@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { StyleSheet, View } from "react-native"
 import { useTranslation } from "react-i18next"
 
-import { useConfigurationContext } from "../../ConfigurationContext"
+import { useConfigurationContext } from "../../configuration"
 import { ExposureDatum } from "../../exposure"
 import ExposureListItem from "./ExposureListItem"
 import ExposureSummary from "./ExposureSummary"
