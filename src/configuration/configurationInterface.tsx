@@ -1,8 +1,8 @@
 type MeasurementSystem = "Imperial" | "Metric"
 
-export type VerificationStrategy = "Simple" | "Escrow"
+type VerificationStrategy = "Simple" | "Escrow"
 
-export interface Configuration {
+interface Configuration {
   appDownloadUrl: string | null
   appPackageName: string
   cdcGuidanceUrl: string | null
@@ -44,3 +44,5 @@ export interface Configuration {
   supportPhoneNumber: string | null
   verificationStrategy: VerificationStrategy
 }
+
+export type { Configuration, VerificationStrategy }

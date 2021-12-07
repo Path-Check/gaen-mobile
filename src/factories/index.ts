@@ -1,5 +1,5 @@
 import affectedUserFlowContext from "./affectedUserFlowContext"
-import configurationContext from "./configuration"
+import configurationContext from "./configurationContext"
 import covidDataContext from "./covidDataContext"
 import exposureContext from "./exposureContext"
 import exposureDatum from "./exposureDatum"
