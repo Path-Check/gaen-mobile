@@ -14,7 +14,7 @@ import { SvgXml } from "react-native-svg"
 import { useCustomCopy } from "../configuration/useCustomCopy"
 import { SelfAssessmentStackScreens, useStatusBarEffect } from "../navigation"
 import { Text } from "../components"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 
 import { Icons, Images } from "../assets"
 import { Buttons, Colors, Outlines, Spacing, Typography } from "../styles"

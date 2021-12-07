@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 
 import { Text } from "../../components"
-import { useConfigurationContext } from "../../ConfigurationContext"
+import { useConfigurationContext } from "../../configuration"
 
 import { Outlines, Colors, Typography, Spacing, Buttons } from "../../styles"
 import { Icons } from "../../assets"

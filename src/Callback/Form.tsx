@@ -21,7 +21,7 @@ import { useCustomCopy } from "../configuration/useCustomCopy"
 import { LoadingIndicator, Text } from "../components"
 import * as API from "./callbackAPI"
 import Logger from "../logger"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 
 import { Spacing, Forms, Colors, Typography, Buttons } from "../styles"
 

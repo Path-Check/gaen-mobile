@@ -12,7 +12,7 @@ import {
   SettingsStackScreens,
   HowItWorksStackScreens,
 } from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
 import ExternalLink from "../Settings/ExternalLink"

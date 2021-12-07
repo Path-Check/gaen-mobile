@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 
 import * as Locale from "../locales/locale"
 import copy from "../../config/copy.json"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import * as API from "./remoteContentAPI"
 
 const DEFAULT_LOCALE = "en"

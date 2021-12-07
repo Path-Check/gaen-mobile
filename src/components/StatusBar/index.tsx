@@ -32,4 +32,4 @@ const createStyle = ({ insets, backgroundColor }: StyleProps) => {
   })
 }
 
-export default StatusBar
+export { StatusBar }

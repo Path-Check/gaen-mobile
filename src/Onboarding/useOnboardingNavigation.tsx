@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native"
 
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import {
   OnboardingRoutes,
   Stacks,

@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState } from "react"
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import { Text } from "."
+import { Text } from "../Text"
 
-import { Colors, Iconography, Forms } from "../styles"
-import { Icons } from "../assets"
+import { Colors, Iconography, Forms } from "../../styles"
+import { Icons } from "../../assets"
 
 interface CheckboxProps {
   label: string
@@ -13,7 +13,7 @@ interface CheckboxProps {
   checked: boolean
 }
 
-const Checkbox: FunctionComponent<CheckboxProps> = ({
+const CheckBox: FunctionComponent<CheckboxProps> = ({
   label,
   onPress,
   checked,
@@ -66,4 +66,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default Checkbox
+export { CheckBox }

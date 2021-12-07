@@ -7,7 +7,7 @@ import "@testing-library/jest-native/extend-expect"
 import Home from "./index"
 import { HomeStackScreens } from "../navigation"
 import { factories } from "../factories"
-import { ConfigurationContext } from "../ConfigurationContext"
+import { ConfigurationContext } from "../configuration"
 import { PermissionsContext } from "../Device/PermissionsContext"
 
 jest.mock("@react-navigation/native")

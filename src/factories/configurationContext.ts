@@ -1,5 +1,5 @@
 import { Factory } from "fishery"
-import { Configuration } from "../ConfigurationContext"
+import { Configuration } from "../configuration/configurationInterface"
 
 export default Factory.define<Configuration>(() => ({
   appDownloadUrl: "appDownloadUrl",
@@ -17,6 +17,9 @@ export default Factory.define<Configuration>(() => ({
   displaySelfAssessment: false,
   displayAgeVerification: false,
   enableProductAnalytics: false,
+  externalCovidDataLabel: "home.covid_data",
+  externalCovidDataLink: null,
+  externalTravelGuidanceLink: null,
   emergencyPhoneNumber: "emergencyPhoneNumber",
   findATestCenterUrl: "findATestCenterUrl",
   healthAuthorityAdviceUrl: "authorityAdviceUrl",

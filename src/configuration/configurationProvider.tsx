@@ -1,90 +1,8 @@
-import React, { FunctionComponent, createContext, useContext } from "react"
+import React, { FunctionComponent } from "react"
 import { Platform } from "react-native"
 import env from "react-native-config"
-
-type MeasurementSystem = "Imperial" | "Metric"
-
-export interface Configuration {
-  appDownloadUrl: string | null
-  appPackageName: string
-  cdcGuidanceUrl: string | null
-  cdcSymptomsUrl: string | null
-  displayAcceptTermsOfService: boolean
-  displayAppTransition: boolean
-  displayCallbackForm: boolean
-  displayRequestCallbackUrl: boolean
-  displayCallEmergencyServices: boolean
-  displayCovidData: boolean
-  displayCovidDataWebView: boolean
-  displaySymptomHistory: boolean
-  displaySelfAssessment: boolean
-  displayAgeVerification: boolean
-  enableProductAnalytics: boolean
-  emergencyPhoneNumber: string
-  findATestCenterUrl: string | null
-  healthAuthorityAdviceUrl: string
-  healthAuthorityCovidDataUrl: string | null
-  healthAuthorityCovidDataWebViewUrl: string | null
-  healthAuthorityEulaUrl: string | null
-  healthAuthorityLearnMoreUrl: string
-  healthAuthorityLegalPrivacyPolicyUrl: string | null
-  healthAuthorityHealthCheckUrl: string | null
-  healthAuthorityPrivacyPolicyUrl: string | null
-  healthAuthorityRequestCallbackNumber: string | null
-  healthAuthorityVerificationCodeInfoUrl: string | null
-  includeSymptomOnsetDate: boolean
-  measurementSystem: MeasurementSystem
-  minimumAge: string
-  minimumPhoneDigits: number
-  quarantineLength: number
-  regionCodes: string[]
-  remoteContentUrl: string | null
-  stateAbbreviation: string | null
-  supportPhoneNumber: string | null
-  verificationStrategy: VerificationStrategy
-}
-
-const initialState: Configuration = {
-  appDownloadUrl: null,
-  appPackageName: "",
-  cdcGuidanceUrl: null,
-  cdcSymptomsUrl: null,
-  displayAcceptTermsOfService: false,
-  displayAppTransition: false,
-  displayCallbackForm: false,
-  displayRequestCallbackUrl: false,
-  displayCallEmergencyServices: false,
-  displayCovidData: false,
-  displayCovidDataWebView: false,
-  displaySymptomHistory: false,
-  displaySelfAssessment: false,
-  displayAgeVerification: false,
-  emergencyPhoneNumber: "",
-  enableProductAnalytics: false,
-  findATestCenterUrl: null,
-  healthAuthorityAdviceUrl: "",
-  healthAuthorityCovidDataUrl: null,
-  healthAuthorityCovidDataWebViewUrl: null,
-  healthAuthorityEulaUrl: null,
-  healthAuthorityHealthCheckUrl: null,
-  healthAuthorityLearnMoreUrl: "",
-  healthAuthorityLegalPrivacyPolicyUrl: "",
-  healthAuthorityPrivacyPolicyUrl: "",
-  healthAuthorityRequestCallbackNumber: "",
-  healthAuthorityVerificationCodeInfoUrl: null,
-  includeSymptomOnsetDate: false,
-  measurementSystem: "Imperial" as const,
-  minimumAge: "18",
-  minimumPhoneDigits: 0,
-  regionCodes: [],
-  remoteContentUrl: null,
-  quarantineLength: 14,
-  stateAbbreviation: "",
-  supportPhoneNumber: null,
-  verificationStrategy: "Simple",
-}
-
-type VerificationStrategy = "Simple" | "Escrow"
+import { VerificationStrategy } from "./configurationInterface"
+import { ConfigurationContext } from "./configurationContext"
 
 const toVerificationStrategy = (strategy: string): VerificationStrategy => {
   switch (strategy) {
@@ -98,8 +16,6 @@ const toVerificationStrategy = (strategy: string): VerificationStrategy => {
 }
 
 const DEFAULT_QUARANTINE_LENGTH = 14
-
-const ConfigurationContext = createContext<Configuration>(initialState)
 
 const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const {
@@ -168,6 +84,12 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     ? DEFAULT_QUARANTINE_LENGTH
     : envQuarantineLength
 
+  //Added for LA
+  const externalCovidDataLink = env.EXTERNAL_COVID_DATA_LINK || null
+  const externalCovidDataLabel =
+    env.EXTERNAL_COVID_DATA_LABEL || "home.covid_data"
+  const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDENCE_LINK || null
+
   return (
     <ConfigurationContext.Provider
       value={{
@@ -187,6 +109,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayAgeVerification,
         enableProductAnalytics,
         emergencyPhoneNumber,
+        externalCovidDataLabel,
+        externalCovidDataLink,
+        externalTravelGuidanceLink,
         findATestCenterUrl,
         healthAuthorityAdviceUrl,
         healthAuthorityCovidDataUrl,
@@ -215,12 +140,4 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   )
 }
 
-const useConfigurationContext = (): Configuration => {
-  const context = useContext(ConfigurationContext)
-  if (context === undefined) {
-    throw new Error("ConfigurationContext must be used with a provider")
-  }
-  return context
-}
-
-export { ConfigurationContext, ConfigurationProvider, useConfigurationContext }
+export { ConfigurationProvider }

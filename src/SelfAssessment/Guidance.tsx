@@ -13,7 +13,7 @@ import { SvgXml } from "react-native-svg"
 
 import { StatusBar, Text } from "../components"
 import { useSelfAssessmentContext } from "./Context"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { SymptomGroup } from "./selfAssessment"
 import { Stack, Stacks, useStatusBarEffect } from "../navigation"
 

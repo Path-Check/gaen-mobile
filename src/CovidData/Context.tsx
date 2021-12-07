@@ -6,7 +6,7 @@ import React, {
   useCallback,
   useContext,
 } from "react"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 
 import * as CovidData from "./covidData"
 import { fetchStateTimeseries, NetworkResponse } from "./API/covidActNow"

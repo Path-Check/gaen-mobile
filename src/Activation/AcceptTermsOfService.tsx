@@ -12,7 +12,7 @@ import { SvgXml } from "react-native-svg"
 import { Icons } from "../assets"
 import { Text } from "../components"
 import { useStatusBarEffect } from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { useActivationNavigation } from "./useActivationNavigation"
 
 import {

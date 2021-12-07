@@ -3,7 +3,7 @@ import { TouchableOpacity, ScrollView, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
 
-import { useConfigurationContext } from "../ConfigurationContext"
+import { useConfigurationContext } from "../configuration"
 import { useApplicationInfo } from "../Device/useApplicationInfo"
 import { useStatusBarEffect } from "../navigation"
 import { Text } from "../components"

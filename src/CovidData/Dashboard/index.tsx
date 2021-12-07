@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 import StaticSafeAreaInsets from "react-native-static-safe-area-insets"
 
-import { useConfigurationContext } from "../../ConfigurationContext"
+import { useConfigurationContext } from "../../configuration"
 import { Text } from "../../components"
 import { useCovidDataContext } from "../Context"
 import StateData from "./StateData"

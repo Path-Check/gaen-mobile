@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { View, Text, Switch, StyleSheet } from "react-native"
-import { Colors, Spacing, Typography } from "../styles"
+import { Colors, Spacing, Typography } from "../../styles"
 
 type SwitchListItemProps = {
   label: string
@@ -44,4 +44,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default SwitchListItem
+export { SwitchListItem }

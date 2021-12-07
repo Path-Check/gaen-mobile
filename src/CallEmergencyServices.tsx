@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 
-import { useConfigurationContext } from "./ConfigurationContext"
+import { useConfigurationContext } from "./configuration"
 import { Text } from "./components"
 
 import { Buttons, Colors, Iconography, Spacing, Typography } from "./styles"

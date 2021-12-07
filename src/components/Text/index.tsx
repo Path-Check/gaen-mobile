@@ -43,4 +43,4 @@ export function useLanguageDirection(): TextDirection {
   return i18n.dir()
 }
 
-export default Text
+export { Text }

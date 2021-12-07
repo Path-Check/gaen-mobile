@@ -17,7 +17,7 @@ import StaticSafeAreaInsets from "react-native-static-safe-area-insets"
 
 import { AffectedUserFlowStackScreens, useStatusBarEffect } from "../navigation"
 import { useAffectedUserContext } from "./AffectedUserContext"
-import Checkbox from "../components/Checkbox"
+import { CheckBox } from "../components"
 
 import { Buttons, Colors, Forms, Spacing, Typography } from "../styles"
 import { Icons } from "../assets"
@@ -131,14 +131,14 @@ const SymptomOnsetDate: FunctionComponent = () => {
             {t("export.symptom_onset.did_you_have_symptoms")}
           </Text>
           <View style={noSymptomsContainerStyle}>
-            <Checkbox
+            <CheckBox
               label={t("export.symptom_onset.no_i_didnt_have")}
               onPress={handleOnPressNoSymptoms}
               checked={Boolean(!localSymptomOnsetDate)}
             />
           </View>
           <View style={hasSymptomsContainerStyle}>
-            <Checkbox
+            <CheckBox
               label={t("export.symptom_onset.yes_i_did_have")}
               onPress={handleOnPressHasSymptoms}
               checked={Boolean(localSymptomOnsetDate)}

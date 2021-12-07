@@ -18,7 +18,7 @@ import {
   hasEmergencySymptoms,
   SymptomEntry,
 } from "../symptomHistory"
-import Checkbox from "../../components/Checkbox"
+import { CheckBox } from "../../components"
 
 import {
   Affordances,
@@ -117,7 +117,7 @@ const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
         <View style={style.symptomButtonsContainer}>
           {showNoSymptoms ? (
             <View style={style.noSymptomsCheckbox}>
-              <Checkbox
+              <CheckBox
                 key={"no_symptoms"}
                 label={t("symptom_history.no_symptoms")}
                 onPress={handleOnPressNoSymptoms}
@@ -128,7 +128,7 @@ const SelectSymptomsForm: FunctionComponent<SelectSymptomsFormProps> = ({
           {Symptom.all.map((symptom: Symptom.Symptom) => {
             const translation = Symptom.toTranslation(t, symptom)
             return (
-              <Checkbox
+              <CheckBox
                 key={symptom}
                 label={translation}
                 onPress={() => handleOnPressSymptom(symptom)}

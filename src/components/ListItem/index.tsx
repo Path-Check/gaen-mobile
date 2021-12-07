@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 import { SvgXml } from "react-native-svg"
 
-import Text from "./Text"
+import { Text } from "../Text"
 
-import { Iconography, Spacing, Typography, Colors } from "../styles"
+import { Iconography, Spacing, Typography, Colors } from "../../styles"
 
 interface ListItemProps {
   label: string
@@ -57,4 +57,4 @@ const style = StyleSheet.create({
   },
 })
 
-export default ListItem
+export { ListItem }

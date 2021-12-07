@@ -13,7 +13,7 @@ import { SvgXml } from "react-native-svg"
 
 import { useStatusBarEffect } from "./navigation"
 import { Text } from "./components"
-import { useConfigurationContext } from "./ConfigurationContext"
+import { useConfigurationContext } from "./configuration"
 
 import { Buttons, Colors, Spacing, Typography } from "./styles"
 import { Images, Icons } from "./assets"

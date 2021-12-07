@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { Linking } from "react-native"
 
 import AcceptTermsOfService from "./AcceptTermsOfService"
-import { ConfigurationContext } from "../ConfigurationContext"
+import { ConfigurationContext } from "../configuration"
 import { factories } from "../factories"
 import { OnboardingProvider } from "../OnboardingContext"
 

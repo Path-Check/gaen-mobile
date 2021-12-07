@@ -3,7 +3,7 @@ import { Text } from "react-native"
 import { render, waitFor } from "@testing-library/react-native"
 
 import { factories } from "../factories"
-import { ConfigurationContext } from "../ConfigurationContext"
+import { ConfigurationContext } from "../configuration"
 import { useCovidDataContext, CovidDataContextProvider } from "./Context"
 import { fetchStateTimeseries } from "./API/covidActNow"
 

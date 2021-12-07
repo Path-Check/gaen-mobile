@@ -2,7 +2,7 @@ import React from "react"
 import { render, cleanup, fireEvent } from "@testing-library/react-native"
 import NoExposures from "./NoExposures"
 import { Linking } from "react-native"
-import { ConfigurationContext } from "../../ConfigurationContext"
+import { ConfigurationContext } from "../../configuration"
 import { factories } from "../../factories"
 
 afterEach(cleanup)
