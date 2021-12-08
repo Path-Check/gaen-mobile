@@ -288,7 +288,7 @@
     "could_not_open_link": "Could not open link: {{url}}. Please try to open the url in your phone's browser.",
     "covid_data": "Covid Data",
     "covid_data_specific": "{{label}} COVID Data",
-    "safe_travel_guidence": "Safe Travel Guidence",
+    "safe_travel_guidance": "Safe Travel Guidance",
     "enter_symptoms": "Enter symptoms",
     "error": {
       "share_link_failed": "Failed to open link to share"

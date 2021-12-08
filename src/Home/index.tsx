@@ -87,7 +87,7 @@ const Home: FunctionComponent = () => {
         {displayCovidDataWebView && <CovidDataWebViewLink />}
         {externalCovidDataLink && (
           <ExternalLink
-            icon={Icons.QuestionMark}
+            icon={Icons.BarGraph}
             label={t("home.covid_data_specific", {
               label: externalCovidDataLabel,
             })}
@@ -96,8 +96,8 @@ const Home: FunctionComponent = () => {
         )}
         {externalTravelGuidanceLink && (
           <ExternalLink
-            icon={Icons.QuestionMark}
-            label={t("home.safe_travel_guidence")}
+            icon={Icons.LocationPin}
+            label={t("home.safe_travel_guidance")}
             link={externalTravelGuidanceLink}
           />
         )}
