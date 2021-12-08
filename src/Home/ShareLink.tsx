@@ -84,8 +84,8 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   shareImage: {
-    width: Iconography.small,
-    height: Iconography.small,
+    width: Iconography.xxSmall,
+    height: Iconography.xxSmall,
   },
   shareTextContainer: {
     flex: 1,
