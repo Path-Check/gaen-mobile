@@ -37,9 +37,9 @@ const ExternalLink: FunctionComponent<Props> = (props) => {
     >
       <SvgXml
         xml={icon}
-        fill={Colors.primary.shade125}
-        width={Iconography.xxxSmall}
-        height={Iconography.xxxSmall}
+        fill={Colors.neutral.shade75}
+        width={Iconography.xxSmall}
+        height={Iconography.xxSmall}
       />
 
       <View style={style.textContainer}>
