@@ -20,6 +20,7 @@ def shared_pods
   use_flipper!('Flipper' => '0.86.0', 'Flipper-Folly' => '2.5.3')
   post_install do |installer|
     flipper_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
 
