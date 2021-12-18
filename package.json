@@ -25,7 +25,8 @@
     "test": "jest --config=./jest/config.js",
     "test:watch": "jest --config=./jest/config.js --watch",
     "assemble-android-debug": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && ./android/gradlew -p android assembleDebug",
-    "lint:android": "./android/gradlew -p android app:lintDebug app:ktlintCheck app:checkstyle"
+    "lint:android": "./android/gradlew -p android app:lintDebug app:ktlintCheck app:checkstyle",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -98,7 +99,7 @@
     "eslint-plugin-react": "^7.21.0",
     "eslint-plugin-react-hooks": "^4.0.3",
     "fishery": "^1.0.1",
-    "husky": "^4.2.3",
+    "husky": "^7.0.0",
     "i18next-parser": "2.1.1",
     "jest": "^26.6.3",
     "lint-diff": "^1.2.1",
