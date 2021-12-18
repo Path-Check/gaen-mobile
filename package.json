@@ -38,7 +38,7 @@
     ]
   },
   "dependencies": {
-    "@bugsnag/react-native": "^7.3.4",
+    "@bugsnag/react-native": "^7.14.1",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.0.8",
     "@react-native-community/masked-view": "^0.1.10",
@@ -55,7 +55,7 @@
     "react": "17.0.2",
     "react-i18next": "^11.4.0",
     "react-native": "0.66.2",
-    "react-native-config": "^1.2.1",
+    "react-native-config": "^1.4.5",
     "react-native-flash-message": "^0.1.16",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
