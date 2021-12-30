@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react"
 import { View, StyleSheet } from "react-native"
 import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
+import { useConfigurationContext } from "../../configuration"
 
 import { Text } from "../../components"
 import * as Exposure from "../../exposure"
@@ -34,6 +35,9 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
   quarantineLength,
 }) => {
   const { t } = useTranslation()
+  const {
+    displayQuarantineRecommendation
+  } = useConfigurationContext()
 
   const formatDate = (posix: Posix) => {
     return dayjs(posix).format("dddd, MMM Do")
@@ -71,7 +75,7 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
           endDate: exposureEndDateText,
         })}
       </Text>
-      <View style={style.recommendationContainer}>
+      {displayQuarantineRecommendation && (<View style={style.recommendationContainer}>
         <View style={style.headerContainer}>
           <Text style={style.headerText}>
             {t("exposure_history.recommended_quarantine")}
@@ -112,7 +116,7 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
             </Text>
           )}
         </View>
-      </View>
+      </View>)}
     </View>
   )
 }

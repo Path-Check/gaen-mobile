@@ -14,6 +14,7 @@ const initialState: Configuration = {
   displayCallEmergencyServices: false,
   displayCovidData: false,
   displayCovidDataWebView: false,
+  displayQuarantineRecommendation: true,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
   displayAgeVerification: false,

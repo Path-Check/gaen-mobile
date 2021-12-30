@@ -90,6 +90,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     env.EXTERNAL_COVID_DATA_LABEL || "home.covid_data"
   const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDANCE_LINK || null
 
+  //Added for MN
+  const displayQuarantineRecommendation = env.DISPLAY_QUARANTINE_RECOMMENDATION === "true"
+
   return (
     <ConfigurationContext.Provider
       value={{
@@ -104,6 +107,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displayCallEmergencyServices,
         displayCovidData,
         displayCovidDataWebView,
+        displayQuarantineRecommendation,
         displaySymptomHistory,
         displaySelfAssessment,
         displayAgeVerification,
