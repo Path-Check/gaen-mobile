@@ -91,7 +91,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const externalTravelGuidanceLink = env.EXTERNAL_TRAVEL_GUIDANCE_LINK || null
 
   //Added for MN
-  const displayQuarantineRecommendation = env.DISPLAY_QUARANTINE_RECOMMENDATION === "true"
+  const displayQuarantineRecommendation =
+    env.DISPLAY_QUARANTINE_RECOMMENDATION === "true"
 
   return (
     <ConfigurationContext.Provider

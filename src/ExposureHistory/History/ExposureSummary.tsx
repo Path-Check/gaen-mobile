@@ -35,9 +35,7 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
   quarantineLength,
 }) => {
   const { t } = useTranslation()
-  const {
-    displayQuarantineRecommendation
-  } = useConfigurationContext()
+  const { displayQuarantineRecommendation } = useConfigurationContext()
 
   const formatDate = (posix: Posix) => {
     return dayjs(posix).format("dddd, MMM Do")
@@ -75,48 +73,50 @@ const ExposureSummary: FunctionComponent<ExposureSummaryProps> = ({
           endDate: exposureEndDateText,
         })}
       </Text>
-      {displayQuarantineRecommendation && (<View style={style.recommendationContainer}>
-        <View style={style.headerContainer}>
-          <Text style={style.headerText}>
-            {t("exposure_history.recommended_quarantine")}
-          </Text>
-        </View>
-        <View style={style.recommendationContentContainer}>
-          {quarantineInEffect ? (
-            <View>
-              <View style={style.daysRemainingContainer}>
-                <View style={style.recommendationLabelContainer}>
-                  <Text style={style.recommendationLabelText}>
-                    {t("exposure_history.days_remaining")}
-                  </Text>
-                </View>
-                <View style={style.recommendationValueContainer}>
-                  <Text style={style.recommendationText}>
-                    {daysOfQuarantineLeft}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={style.daysRemainingContainer}>
-                <View style={style.recommendationLabelContainer}>
-                  <Text style={style.recommendationLabelText}>
-                    {t("exposure_history.stay_quarantined_through")}
-                  </Text>
-                </View>
-                <View style={style.recommendationValueContainer}>
-                  <Text style={style.recommendationText}>
-                    {quarantineEndDateText}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          ) : (
-            <Text style={style.recommendationLabelText}>
-              {t("exposure_history.your_recommended_quarantine_is_over")}
+      {displayQuarantineRecommendation && (
+        <View style={style.recommendationContainer}>
+          <View style={style.headerContainer}>
+            <Text style={style.headerText}>
+              {t("exposure_history.recommended_quarantine")}
             </Text>
-          )}
+          </View>
+          <View style={style.recommendationContentContainer}>
+            {quarantineInEffect ? (
+              <View>
+                <View style={style.daysRemainingContainer}>
+                  <View style={style.recommendationLabelContainer}>
+                    <Text style={style.recommendationLabelText}>
+                      {t("exposure_history.days_remaining")}
+                    </Text>
+                  </View>
+                  <View style={style.recommendationValueContainer}>
+                    <Text style={style.recommendationText}>
+                      {daysOfQuarantineLeft}
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={style.daysRemainingContainer}>
+                  <View style={style.recommendationLabelContainer}>
+                    <Text style={style.recommendationLabelText}>
+                      {t("exposure_history.stay_quarantined_through")}
+                    </Text>
+                  </View>
+                  <View style={style.recommendationValueContainer}>
+                    <Text style={style.recommendationText}>
+                      {quarantineEndDateText}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            ) : (
+              <Text style={style.recommendationLabelText}>
+                {t("exposure_history.your_recommended_quarantine_is_over")}
+              </Text>
+            )}
+          </View>
         </View>
-      </View>)}
+      )}
     </View>
   )
 }
