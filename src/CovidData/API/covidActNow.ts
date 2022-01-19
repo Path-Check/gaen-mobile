@@ -70,7 +70,7 @@ type Metrics = {
   caseDensity: number
   contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio: number
+  icuHeadroomRatio?: number
 }
 
 const MetricsDecoder = JsonDecoder.object<Metrics>(
@@ -79,7 +79,7 @@ const MetricsDecoder = JsonDecoder.object<Metrics>(
     caseDensity: JsonDecoder.number,
     contactTracerCapacityRatio: JsonDecoder.number,
     infectionRate: JsonDecoder.number,
-    icuHeadroomRatio: JsonDecoder.number,
+    icuHeadroomRatio: JsonDecoder.isUndefined(undefined),
   },
   "Metrics",
 )
@@ -91,7 +91,7 @@ const RiskLevelsDecoder = JsonDecoder.object<CovidData.RiskLevels>(
     caseDensity: JsonDecoder.number,
     contactTracerCapacityRatio: JsonDecoder.number,
     infectionRate: JsonDecoder.number,
-    icuHeadroomRatio: JsonDecoder.number,
+    icuHeadroomRatio: JsonDecoder.isUndefined(undefined),
   },
   "RiskLevels",
 )
@@ -190,22 +190,21 @@ export const fetchStateTimeseries = async (
     const json = await response.json()
 
     const stateData = await StateTimeseriesDecoder.decodePromise(json)
-
-    return {
+    return Promise.resolve({
       kind: "success",
       data: toCovidData(stateData),
-    }
+    })
   } catch (e) {
     if (e.contains("decoder failed")) {
       Logger.error("Failed to desieralize covid api data", { url: endpointUrl })
-      return { kind: "failure", error: "JsonDeserialization" }
+      return Promise.resolve({ kind: "failure", error: "JsonDeserialization" })
     }
     switch (e.message) {
       case "Network request failed": {
-        return { kind: "failure", error: "NetworkConnection" }
+        return Promise.resolve({ kind: "failure", error: "NetworkConnection" })
       }
       default: {
-        return { kind: "failure", error: "Unknown" }
+        return Promise.resolve({ kind: "failure", error: "Unknown" })
       }
     }
   }
