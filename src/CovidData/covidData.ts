@@ -26,7 +26,7 @@ type Metrics = {
   caseDensity: number
   contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio: number
+  icuHeadroomRatio?: number
 }
 
 export type RiskLevels = {
@@ -35,7 +35,7 @@ export type RiskLevels = {
   caseDensity: number
   contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio: number
+  icuHeadroomRatio?: number
 }
 
 export type RiskLevel =
