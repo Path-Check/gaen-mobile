@@ -40,7 +40,7 @@ jobs:
       - name: Set up Ruby 2.6
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.8
+          ruby-version: 2.6.5
 
       - name: Install bundler for ruby package management
         run: gem install bundler -v "$(grep -A 1 "BUNDLED WITH" ./Gemfile.lock | tail -n 1)"
