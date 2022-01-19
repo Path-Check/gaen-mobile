@@ -87,6 +87,10 @@ yarn lint:android
 
 ### iOS (macOS only)
 
+1. Ensure you have Xcode installed [Link](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+2. You will need to run xcode at least once 
+3. Once open go to Xcode in the menu bar and got to Open Developer Tool -> Simulator to start an IOS simulator.
+
 First, install the pod files:
 
 ```

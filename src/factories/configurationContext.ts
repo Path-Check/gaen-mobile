@@ -13,6 +13,7 @@ export default Factory.define<Configuration>(() => ({
   displayCovidData: false,
   displayCovidDataWebView: false,
   displayRequestCallbackUrl: false,
+  displayQuarantineRecommendation: true,
   displaySymptomHistory: false,
   displaySelfAssessment: false,
   displayAgeVerification: false,

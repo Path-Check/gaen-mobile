@@ -14,6 +14,7 @@ interface Configuration {
   displayCallEmergencyServices: boolean
   displayCovidData: boolean
   displayCovidDataWebView: boolean
+  displayQuarantineRecommendation: boolean
   displaySymptomHistory: boolean
   displaySelfAssessment: boolean
   displayAgeVerification: boolean
