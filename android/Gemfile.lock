@@ -178,7 +178,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
-  bundler (= 2.2.1)
+  bundler (~> 2.2.1)
   fastlane (= 2.170.0)
   fastlane-plugin-appcenter
   fastlane-plugin-increment_version_code
