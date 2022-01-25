@@ -208,7 +208,7 @@ export const detectExposures = async (): Promise<DetectExposuresResponse> => {
       case "Unknown":
         return { kind: "failure", error: "DataInaccessible" }
       case "EUNSPECIFIED":
-       return { kind: "failure", error: "Unknown" } 
+        return { kind: "failure", error: "Unknown" }
       default:
         Logger.error("Unhandled Error in detectExposures", { e })
         return { kind: "failure", error: "Unknown" }
