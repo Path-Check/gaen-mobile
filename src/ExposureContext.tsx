@@ -105,6 +105,8 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     )
     getLastExposureDetectionDate()
 
+    detectExposures()
+
     // Chaff subscription
     const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(() => {
       sendChaffRequest()

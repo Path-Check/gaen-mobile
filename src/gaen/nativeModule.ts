@@ -178,6 +178,7 @@ type DetectExposuresError =
   | "NotEnabled"
   | "NotAuthorized"
   | "DataInaccessible"
+  | "EUNSPECIFIED"
 
 export type DetectExposuresResponse =
   | DetectExposuresResponseSuccess
@@ -206,6 +207,8 @@ export const detectExposures = async (): Promise<DetectExposuresResponse> => {
         return { kind: "failure", error: "NotAuthorized" }
       case "Unknown":
         return { kind: "failure", error: "DataInaccessible" }
+      case "EUNSPECIFIED":
+       return { kind: "failure", error: "Unknown" } 
       default:
         Logger.error("Unhandled Error in detectExposures", { e })
         return { kind: "failure", error: "Unknown" }
@@ -229,7 +232,7 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
     const exposureKeys = rawKeys.map(toExposureKey)
     return exposureKeys
   } else {
-    Logger.error("Invalid expousre keys from native layer", { rawKeys })
+    Logger.error("Invalid exposure keys from native layer", { rawKeys })
     throw new Error("Invalid exposure keys from native layer")
   }
 }
