@@ -46,7 +46,7 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
-export const subscribeToChaffRequestEvents = (
+/*export const subscribeToChaffRequestEvents = (
   cb: () => void,
 ): EventSubscription => {
   const ExposureEvents = new NativeEventEmitter(
@@ -56,7 +56,7 @@ export const subscribeToChaffRequestEvents = (
   return ExposureEvents.addListener("onChaffRequestTriggered", () => {
     cb()
   })
-}
+}*/
 
 const toStatus = (data: string): ENPermissionStatus => {
   switch (data) {
@@ -230,6 +230,7 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
   const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
   if (rawKeys.every(validRawExposureKey)) {
     const exposureKeys = rawKeys.map(toExposureKey)
+    console.log("getExposureKeys", exposureKeys)
     return exposureKeys
   } else {
     Logger.error("Invalid exposure keys from native layer", { rawKeys })
@@ -237,7 +238,7 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
   }
 }
 
-export const fetchChaffKeys = async (): Promise<ExposureKey[]> => {
+/*export const fetchChaffKeys = async (): Promise<ExposureKey[]> => {
   const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchChaffKeys()
   if (rawKeys.every(validRawExposureKey)) {
     const exposureKeys = rawKeys.map(toExposureKey)
@@ -246,7 +247,7 @@ export const fetchChaffKeys = async (): Promise<ExposureKey[]> => {
     Logger.error("Invalid chaff keys from native layer", { rawKeys })
     throw new Error("Invalid chaff keys from native layer")
   }
-}
+}*/
 
 const validRawExposureKey = (rawKey: RawExposureKey): boolean => {
   const { key, rollingPeriod, rollingStartNumber, transmissionRisk } = rawKey
@@ -326,6 +327,6 @@ export const addOldExposure = async (): Promise<"success"> => {
   return debugModule.addOldExposure()
 }
 
-export const configureFasterChaffForTesting = async (): Promise<"success"> => {
+/*export const configureFasterChaffForTesting = async (): Promise<"success"> => {
   return debugModule.configureFasterChaffForTesting()
-}
+}*/

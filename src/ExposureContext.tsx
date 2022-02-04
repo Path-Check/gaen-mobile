@@ -11,8 +11,8 @@ import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
 import * as NativeModule from "./gaen/nativeModule"
-import { calculateHmac } from "./AffectedUserFlow/hmac"
-import * as API from "./AffectedUserFlow/verificationAPI"
+//import { calculateHmac } from "./AffectedUserFlow/hmac"
+//import * as API from "./AffectedUserFlow/verificationAPI"
 
 type Posix = number
 
@@ -66,7 +66,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     })
   }, [])
 
-  const sendChaffRequest = useCallback(async () => {
+  /*const sendChaffRequest = useCallback(async () => {
     const code = Math.random().toString().substring(2, 10)
     const response = await API.postCode(code, true)
 
@@ -85,7 +85,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     } else {
       await trackEvent("epi_analytics", "chaff_request_failed")
     }
-  }, [trackEvent])
+  }, [trackEvent])*/
 
   const refreshExposureInfo = useCallback(async () => {
     const exposureInfo = await NativeModule.getCurrentExposures()
@@ -105,17 +105,20 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     )
     getLastExposureDetectionDate()
 
+    detectExposures()
+    /*
     // Chaff subscription
     const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(() => {
       sendChaffRequest()
     })
     sendChaffRequest()
-
+    */
     return () => {
       exposuresSubscription.remove()
-      chaffSubscription.remove()
+      //chaffSubscription.remove()
     }
-  }, [getLastExposureDetectionDate, sendChaffRequest])
+  //}, [getLastExposureDetectionDate, sendChaffRequest])
+  }, [getLastExposureDetectionDate])
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(() => {
