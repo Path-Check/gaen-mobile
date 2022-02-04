@@ -230,7 +230,6 @@ export const getExposureKeys = async (): Promise<ExposureKey[]> => {
   const rawKeys: RawExposureKey[] = await exposureKeyModule.fetchExposureKeys()
   if (rawKeys.every(validRawExposureKey)) {
     const exposureKeys = rawKeys.map(toExposureKey)
-    console.log("getExposureKeys", exposureKeys)
     return exposureKeys
   } else {
     Logger.error("Invalid exposure keys from native layer", { rawKeys })
