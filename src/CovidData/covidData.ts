@@ -24,18 +24,14 @@ export type CovidDatum = {
 type Metrics = {
   testPositivityRatio: number
   caseDensity: number
-  contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio?: number
 }
 
 export type RiskLevels = {
   overall: number
   testPositivityRatio: number
   caseDensity: number
-  contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio?: number
 }
 
 export type RiskLevel =
@@ -106,18 +102,14 @@ export const toRiskLevelColor = (riskLevel: RiskLevel): string => {
 export const initialMetrics = {
   testPositivityRatio: 0,
   caseDensity: 0,
-  contactTracerCapacityRatio: 0,
   infectionRate: 0,
-  icuHeadroomRatio: 0,
 }
 
 export const initialRiskLevels = {
   overall: 0,
   testPositivityRatio: 0,
   caseDensity: 0,
-  contactTracerCapacityRatio: 0,
   infectionRate: 0,
-  icuHeadroomRatio: 0,
 }
 
 export const initial: CovidData = {

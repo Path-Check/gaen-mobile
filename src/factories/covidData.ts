@@ -21,17 +21,13 @@ export const covidData = Factory.define<CovidData>(() => {
     metrics: {
       testPositivityRatio: 0,
       caseDensity: 0,
-      contactTracerCapacityRatio: 0,
       infectionRate: 0,
-      icuHeadroomRatio: 0,
     },
     riskLevels: {
       overall: 0,
       testPositivityRatio: 0,
       caseDensity: 0,
-      contactTracerCapacityRatio: 0,
       infectionRate: 0,
-      icuHeadroomRatio: 0,
     },
     timeseries: [
       {

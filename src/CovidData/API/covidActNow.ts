@@ -68,18 +68,14 @@ type StateCovidData = {
 type Metrics = {
   testPositivityRatio: number
   caseDensity: number
-  contactTracerCapacityRatio: number
   infectionRate: number
-  icuHeadroomRatio?: number
 }
 
 const MetricsDecoder = JsonDecoder.object<Metrics>(
   {
     testPositivityRatio: JsonDecoder.number,
     caseDensity: JsonDecoder.number,
-    contactTracerCapacityRatio: JsonDecoder.number,
     infectionRate: JsonDecoder.number,
-    icuHeadroomRatio: JsonDecoder.isUndefined(undefined),
   },
   "Metrics",
 )
@@ -89,9 +85,7 @@ const RiskLevelsDecoder = JsonDecoder.object<CovidData.RiskLevels>(
     overall: JsonDecoder.number,
     testPositivityRatio: JsonDecoder.number,
     caseDensity: JsonDecoder.number,
-    contactTracerCapacityRatio: JsonDecoder.number,
     infectionRate: JsonDecoder.number,
-    icuHeadroomRatio: JsonDecoder.isUndefined(undefined),
   },
   "RiskLevels",
 )
