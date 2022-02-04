@@ -117,7 +117,7 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
       exposuresSubscription.remove()
       //chaffSubscription.remove()
     }
-  //}, [getLastExposureDetectionDate, sendChaffRequest])
+    //}, [getLastExposureDetectionDate, sendChaffRequest])
   }, [getLastExposureDetectionDate])
 
   useEffect(() => {
