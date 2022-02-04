@@ -95,6 +95,14 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     setLastExposureDetectionDate(detectionDate)
   }, [])
 
+  const detectExposures = async (): Promise<NativeModule.DetectExposuresResponse> => {
+    const response = await NativeModule.detectExposures()
+    if (response.kind === "success") {
+      await refreshExposureInfo()
+    }
+    return response
+  }
+
   useEffect(() => {
     // Exposures subscription
     const exposuresSubscription = NativeModule.subscribeToExposureEvents(
@@ -129,14 +137,6 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
       subscription.remove()
     }
   }, [trackEvent])
-
-  const detectExposures = async (): Promise<NativeModule.DetectExposuresResponse> => {
-    const response = await NativeModule.detectExposures()
-    if (response.kind === "success") {
-      await refreshExposureInfo()
-    }
-    return response
-  }
 
   return (
     <ExposureContext.Provider
