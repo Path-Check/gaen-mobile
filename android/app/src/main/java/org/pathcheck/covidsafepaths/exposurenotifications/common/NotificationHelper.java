@@ -63,6 +63,7 @@ public final class NotificationHelper {
     NotificationCompat.Builder builder =
         new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
+            .setTimeoutAfter(10000)
             .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
             .setContentTitle(context.getString(R.string.background_worker_notification_title));
     NotificationManagerCompat notificationManager = NotificationManagerCompat
@@ -75,6 +76,7 @@ public final class NotificationHelper {
     NotificationCompat.Builder builder =
             new Builder(context, BACKGROUND_WORKER_NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notification)
+                    .setTimeoutAfter(10000)
                     .setColor(context.getResources().getColor(R.color.colorPrimary, context.getTheme()))
                     .setContentTitle(context.getString(R.string.background_worker_notification_title))
                     .setOngoing(true);
