@@ -209,7 +209,7 @@ final class ExposureManager: NSObject {
 
   typealias ExposureKeysDictionaryArray = [[String: Any]]
 
-  /// Requests the temporary exposure keys used by this device to share with a server. Returns an array of the exposures keys as dictionary or and error if the underlying API fails
+  /// Requests the temporary exposure keys used by this device to share with a server. Returns an array of the exposures keys as dictionary or an error if the underlying API fails
   @objc func fetchExposureKeys(callback: @escaping (ExposureKeysDictionaryArray?, ExposureManagerError?) -> Void) {
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
       (keys ?? []).map { $0.asDictionary }
