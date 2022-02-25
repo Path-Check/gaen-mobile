@@ -17,10 +17,10 @@ import * as NativeModule from "./gaen/nativeModule"
 type Posix = number
 
 export interface ExposureState {
-  exposureKeyDate: Date,
-  exposureKeyCheckCount: number,
-  exposureInfo: ExposureInfo,
-  exposureKeys: ExposureKey[],
+  exposureKeyDate: Date
+  exposureKeyCheckCount: number
+  exposureInfo: ExposureInfo
+  exposureKeys: ExposureKey[]
   getCurrentExposures: () => Promise<ExposureInfo>
   getExposureKeys: () => Promise<ExposureKey[]>
   getRevisionToken: () => Promise<string>
@@ -57,7 +57,7 @@ const initialState = {
 export const ExposureContext = createContext<ExposureState>(initialState)
 
 const ExposureProvider: FunctionComponent = ({ children }) => {
-  console.log("exposurePRovider start");
+  console.log("exposurePRovider start")
   const { trackEvent } = useProductAnalyticsContext()
 
   const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
@@ -106,10 +106,10 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
   }, [])
 
   const getExposureKeys = useCallback(async (): Promise<ExposureKey[]> => {
-    const newDate = new Date();
-    // reset if date bad 
+    const newDate = new Date()
+    // reset if date bad
     if (exposureKeyDate.getUTCDate() != newDate.getUTCDate()) {
-      console.log("resetting keys date");
+      console.log("resetting keys date")
       setExposureKeyCheckCount(0)
     }
 
@@ -120,22 +120,22 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     if (exposureKeyCheckCount < 3) {
       console.log("getting new keys")
       // increment key check count
-      setExposureKeyCheckCount(exposureKeyCheckCount+1)
+      setExposureKeyCheckCount(exposureKeyCheckCount + 1)
 
       //get keys
       const keys = await NativeModule.getExposureKeys()
 
       //set keys
-      setExposureKeys(keys);
+      setExposureKeys(keys)
 
-      return keys || [];
+      return keys || []
     }
 
     console.log("returning cached keys")
 
     // fall through return keys in state
-    return exposureKeys || [];
-  }, []);
+    return exposureKeys || []
+  }, [])
 
   const detectExposures = async (): Promise<NativeModule.DetectExposuresResponse> => {
     const response = await NativeModule.detectExposures()
