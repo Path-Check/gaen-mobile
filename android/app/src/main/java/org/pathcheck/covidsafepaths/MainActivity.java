@@ -21,7 +21,7 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this, R.style.SplashTheme);
+    SplashScreen.show(this);
     super.onCreate(savedInstanceState);
 
     bluetoothHelper = new BluetoothHelper(new BluetoothHelper.BluetoothCallback() {
