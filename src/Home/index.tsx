@@ -32,6 +32,7 @@ import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
 import FaqButton from "./FaqButton"
 import { usePermissionsContext } from "../Device/PermissionsContext"
+import EnxMigrationInfo from "./EnxMigrationInfo";
 
 import { Icons, Images } from "../assets"
 import {
@@ -74,6 +75,7 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <NotificationsOff />
+        <EnxMigrationInfo />
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (

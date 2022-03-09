@@ -183,6 +183,28 @@ final class ExposureManager: NSObject {
     return btSecureStorage.deleteSymptomLogEntries()
   }
 
+  //Notifies the user they need to migrate
+  func notifyUserEnxIfNeeded() {
+    let identifier = String.enxMigrationIdentifier
+
+    let content = UNMutableNotificationContent()
+    content.title = String.enxMigrationNotificationTitle.localized
+    content.body = String.enxMigrationNotificationContent.localized
+    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+    content.sound = .default
+    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+    userNotificationCenter.add(request) { error in
+      DispatchQueue.main.async {
+          if let error = error {
+            print("Error showing error user notification: \(error)")
+          }
+        }
+      }
+    } else {
+      userNotificationCenter.removeDeliveredNotifications(withIdentifiers: [identifier])
+    }
+  }
+
   ///Notifies the user to enable bluetooth to be able to exchange keys
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
@@ -220,6 +242,17 @@ final class ExposureManager: NSObject {
     getDiagnosisKeys(transform: { (keys) -> ExposureKeysDictionaryArray in
       (keys ?? []).map { $0.asDictionary }
     }, callback: callback)
+  }
+
+  @objc func registerEnxMigrationBackgroundTask() {
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.enxMigrationIdentifier,
+                             using: .main) { [weak self] task in
+      let state = UIApplication.shared.applicationState
+      if state == .background || state == .inactive {
+        // background
+        notifyUserEnxIfNeeded()
+      } 
+
   }
 
 

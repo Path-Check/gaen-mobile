@@ -46,6 +46,9 @@ extension String {
   static let notificationUrlKey = "url"
   static let notificationUrlBasePath = "pathcheck://"
   static let notificationUrlExposureHistoryPath = "exposureHistory"
+  static let enxMigrationIdentifier = "enx-migration-notification"
+  static let enxMigrationNotificationTitle = "Action needed"
+  static let enxMigrationNotificationContent = "Apple is migrating to a new exposure system. Open the App to migrate to the new system."
 
   // JS Layer
   static let genericSuccess = "success"
