@@ -32,7 +32,7 @@ import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
 import FaqButton from "./FaqButton"
 import { usePermissionsContext } from "../Device/PermissionsContext"
-import EnxMigrationInfo from "./EnxMigrationInfo";
+import EnxMigrationInfo from "./EnxMigrationInfo"
 
 import { Icons, Images } from "../assets"
 import {
