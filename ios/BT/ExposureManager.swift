@@ -195,13 +195,10 @@ final class ExposureManager: NSObject {
     let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
     userNotificationCenter.add(request) { error in
       DispatchQueue.main.async {
-          if let error = error {
-            print("Error showing error user notification: \(error)")
-          }
+        if let error = error {
+          print("Error showing error user notification: \(error)")
         }
       }
-    } else {
-      userNotificationCenter.removeDeliveredNotifications(withIdentifiers: [identifier])
     }
   }
 
