@@ -249,7 +249,7 @@ final class ExposureManager: NSObject {
         // background
         notifyUserEnxIfNeeded()
       } 
-
+    }
   }
 
 
