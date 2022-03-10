@@ -248,7 +248,7 @@ final class ExposureManager: NSObject {
       let state = UIApplication.shared.applicationState
       if state == .background || state == .inactive {
         // background
-        notifyUserEnxIfNeeded()
+        self?.notifyUserEnxIfNeeded()
       } 
     }
   }
