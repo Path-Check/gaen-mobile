@@ -44,6 +44,7 @@ final class ExposureManager: NSObject {
   private static let chaffBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).chaff"
   private static let exposureDetectionBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
   private static let deleteOldExposuresBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).delete-old-exposures"
+  private static let enxMigrationBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).enx-migration"
 
   @objc private(set) static var shared: ExposureManager?
 
@@ -242,7 +243,7 @@ final class ExposureManager: NSObject {
   }
 
   @objc func registerEnxMigrationBackgroundTask() {
-    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.enxMigrationIdentifier,
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.enxMigrationBackgroundTaskIdentifier,
                              using: .main) { [weak self] task in
       let state = UIApplication.shared.applicationState
       if state == .background || state == .inactive {
