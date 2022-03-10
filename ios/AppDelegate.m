@@ -57,7 +57,7 @@
   [[ExposureManager shared] registerExposureDetectionBackgroundTask];
   [[ExposureManager shared] registerChaffBackgroundTask];
   [[ExposureManager shared] registerDeleteOldExposuresBackgroundTask];
-  [[ExposureManager shared] registerENXMigrationBackgroundTask];
+  [[ExposureManager shared] registerEnxMigrationBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   
