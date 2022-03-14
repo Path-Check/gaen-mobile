@@ -104,7 +104,7 @@ final class ExposureManager: NSObject {
 
     notificationCenter.addObserver(
       self,
-      selector: #selector(scheduleEnxBackgroundTaskIfNeeded)
+      selector: #selector(scheduleEnxBackgroundTaskIfNeeded),
       name: .EnxNotificationTriggered,
       object: nil
     )
