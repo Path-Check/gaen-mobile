@@ -101,6 +101,13 @@ final class ExposureManager: NSObject {
       name: .ChaffRequestTriggered,
       object: nil
     )
+
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(scheduleEnxBackgroundTaskIfNeeded)
+      name: .EnxNotificationTriggered,
+      object: nil
+    )
   }
 
   deinit {
@@ -248,7 +255,7 @@ final class ExposureManager: NSObject {
       let state = UIApplication.shared.applicationState
       if state == .background || state == .inactive {
         // background
-        self?.notifyUserEnxIfNeeded()
+        self?.scheduleEnxBackgroundTaskIfNeeded()
       } 
     }
   }
@@ -339,6 +346,17 @@ final class ExposureManager: NSObject {
     let timeComparison = Date.init(timeIntervalSinceNow: lastSubmittedChaff)
     let twentyFourHoursAgo = Date.init(timeIntervalSinceNow: -3600 * 24)
     return timeComparison >= twentyFourHoursAgo
+  }
+
+  @objc func scheduleEnxBackgroundTaskIfNeeded() {
+    guard manager.exposureNotificationStatus == .active else { return }
+    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.enxMigrationBackgroundTaskIdentifier)
+    taskRequest.requiresNetworkConnectivity = false
+    do {
+      try bgTaskScheduler.submit(taskRequest)
+    } catch {
+      print("Unable to schedule background task: \(error)")
+    }
   }
 
   @objc func scheduleExposureDetectionBackgroundTaskIfNeeded() {
