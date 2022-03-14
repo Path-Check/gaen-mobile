@@ -252,11 +252,11 @@ final class ExposureManager: NSObject {
   @objc func registerEnxMigrationBackgroundTask() {
     bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.enxMigrationBackgroundTaskIdentifier,
                              using: .main) { [weak self] task in
-      let state = UIApplication.shared.applicationState
-      if state == .background || state == .inactive {
-        // background
-        self?.scheduleEnxBackgroundTaskIfNeeded()
-      } 
+      //let state = UIApplication.shared.applicationState
+      //if state == .background || state == .inactive {
+      // background
+      self?.scheduleEnxBackgroundTaskIfNeeded()
+      //} 
     }
   }
 
