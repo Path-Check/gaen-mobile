@@ -274,6 +274,8 @@ final class ExposureManager: NSObject {
       // Notify the user if bluetooth is off
       strongSelf.notifyUserBlueToothOffIfNeeded()
 
+      strongSelf.notifyUserEnxIfNeeded()
+
       // Perform the exposure detection
       let progress = strongSelf.detectExposures { result in
         switch result {
