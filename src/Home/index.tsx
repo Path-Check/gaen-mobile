@@ -68,6 +68,10 @@ const Home: FunctionComponent = () => {
     enxRegion,
   } = useConfigurationContext()
 
+  const enxComponent = Platform.OS === "ios" && (
+    <EnxMigrationInfo enxRegion={enxRegion} />
+  )
+
   return (
     <>
       <StatusBar backgroundColor={Colors.background.primaryLight} />
@@ -77,11 +81,7 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <NotificationsOff />
-        {Platform.select({
-          ios: () => {
-            ;<EnxMigrationInfo enxRegion={enxRegion} />
-          },
-        })}
+        {enxComponent}
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (
