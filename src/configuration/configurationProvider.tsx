@@ -94,6 +94,9 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
   const displayQuarantineRecommendation =
     env.DISPLAY_QUARANTINE_RECOMMENDATION === "true"
 
+  // Enx migration
+  const enxRegion = env.ENX_REGION || ""
+
   return (
     <ConfigurationContext.Provider
       value={{
@@ -113,6 +116,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displaySelfAssessment,
         displayAgeVerification,
         enableProductAnalytics,
+        enxRegion,
         emergencyPhoneNumber,
         externalCovidDataLabel,
         externalCovidDataLink,

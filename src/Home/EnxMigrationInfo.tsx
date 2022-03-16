@@ -21,9 +21,15 @@ import {
 import { Icons, Images } from "../assets"
 import { SvgXml } from "react-native-svg"
 
-const EnxMigrationInfo: FunctionComponent = () => {
+interface EnxMigrationInfoProps {
+  enxRegion: string
+}
+
+const EnxMigrationInfo: FunctionComponent<EnxMigrationInfoProps> = ({
+  enxRegion,
+}) => {
   const { t } = useTranslation()
-  const onboardingUrl = "ens://onboarding?r=US-XX"
+  const onboardingUrl = `ens://onboarding?r=${enxRegion}`
 
   const handleOnPress = async () => {
     try {
@@ -65,8 +71,9 @@ const style = StyleSheet.create({
     paddingVertical: Spacing.small,
     flexDirection: "row",
     alignItems: "center",
-    borderColor: Colors.primary.shade100,
+    borderColor: Colors.accent.danger100,
     borderWidth: Outlines.thin,
+    backgroundColor: Colors.accent.danger25,
   },
   imageContainer: {
     alignItems: "center",

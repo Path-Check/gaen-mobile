@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Linking,
+  Platform,
 } from "react-native"
 import env from "react-native-config"
 import { useTranslation } from "react-i18next"
@@ -64,6 +65,7 @@ const Home: FunctionComponent = () => {
     externalTravelGuidanceLink,
     healthAuthorityHealthCheckUrl,
     verificationStrategy,
+    enxRegion,
   } = useConfigurationContext()
 
   return (
@@ -75,7 +77,11 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <NotificationsOff />
-        <EnxMigrationInfo />
+        {Platform.select({
+          ios: () => {
+            ;<EnxMigrationInfo enxRegion={enxRegion} />
+          },
+        })}
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (
