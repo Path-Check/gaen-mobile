@@ -193,29 +193,28 @@ final class ExposureManager: NSObject {
 
   //Notifies the user they need to migrate
   func notifyUserEnxIfNeeded() {
-      let defaults = UserDefaults.standard
-      let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
-      let enxCount = defaults.double(forKey: "enxCount")
-      
-      if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil)) && (enxCount < 3)) {
-        enxCount += 1 
-        let newDate = Date.init();
-        defaults.set(enxCount, forKey: "enxCount");
-        defaults.set(newDate, forKey: "lastEnxTimestamp"); 
+    let defaults = UserDefaults.standard
+    let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
+    let enxCount = defaults.double(forKey: "enxCount")
+    
+    if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil)) && (enxCount < 3)) {
+      enxCount += 1 
+      let newDate = Date.init();
+      defaults.set(enxCount, forKey: "enxCount");
+      defaults.set(newDate, forKey: "lastEnxTimestamp"); 
 
-        let identifier = String.enxMigrationIdentifier
-        let content = UNMutableNotificationContent()
-        content.title = String.enxMigrationNotificationTitle.localized
-        content.body = String.enxMigrationNotificationContent.localized
-        content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
-        content.sound = .default
-        
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-        userNotificationCenter.add(request) { error in
-          DispatchQueue.main.async {
-            if let error = error {
-              print("Error showing error user notification: \(error)")
-            }
+      let identifier = String.enxMigrationIdentifier
+      let content = UNMutableNotificationContent()
+      content.title = String.enxMigrationNotificationTitle.localized
+      content.body = String.enxMigrationNotificationContent.localized
+      content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+      content.sound = .default
+
+      let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+      userNotificationCenter.add(request) { error in
+        DispatchQueue.main.async {
+          if let error = error {
+            print("Error showing error user notification: \(error)")
           }
         }
       }
