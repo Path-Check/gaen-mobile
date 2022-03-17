@@ -198,7 +198,6 @@ final class ExposureManager: NSObject {
     let enxCount = defaults.double(forKey: "enxCount")
     
     if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil)) && (enxCount < 3)) {
-      enxCount += 1 
       let newDate = Date.init();
       defaults.set(enxCount + 1, forKey: "enxCount");
       defaults.set(newDate, forKey: "lastEnxTimestamp"); 
