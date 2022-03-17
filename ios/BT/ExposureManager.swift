@@ -193,18 +193,30 @@ final class ExposureManager: NSObject {
 
   //Notifies the user they need to migrate
   func notifyUserEnxIfNeeded() {
-    let identifier = String.enxMigrationIdentifier
+      let defaults = UserDefaults.standard
+      let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
+      let enxCount = defaults.double(forKey: "enxCount")
+      
+      if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil)) && (enxCount < 3)) {
+        enxCount += 1 
+        let newDate = Date.init();
+        defaults.set(enxCount, forKey: "enxCount");
+        defaults.set(newDate, forKey: "lastEnxTimestamp"); 
 
-    let content = UNMutableNotificationContent()
-    content.title = String.enxMigrationNotificationTitle.localized
-    content.body = String.enxMigrationNotificationContent.localized
-    content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
-    content.sound = .default
-    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-    userNotificationCenter.add(request) { error in
-      DispatchQueue.main.async {
-        if let error = error {
-          print("Error showing error user notification: \(error)")
+        let identifier = String.enxMigrationIdentifier
+        let content = UNMutableNotificationContent()
+        content.title = String.enxMigrationNotificationTitle.localized
+        content.body = String.enxMigrationNotificationContent.localized
+        content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+        content.sound = .default
+        
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+        userNotificationCenter.add(request) { error in
+          DispatchQueue.main.async {
+            if let error = error {
+              print("Error showing error user notification: \(error)")
+            }
+          }
         }
       }
     }
@@ -317,7 +329,7 @@ final class ExposureManager: NSObject {
         let randomNum = Int.random(in: 0..<20)
         let lastChaffTimestamp = defaults.double(forKey: "lastChaffTimestamp")
         
-        if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmittedChaff: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
+        if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
           self?.performChaffRequest()
         }
       }
@@ -344,8 +356,8 @@ final class ExposureManager: NSObject {
   /**
       Checks to see if it has been twenty four hours since the last chaff submission.
    */
-  func hasBeenTwentyFourHours(lastSubmittedChaff: Double) -> Bool {
-    let timeComparison = Date.init(timeIntervalSinceNow: lastSubmittedChaff)
+  func hasBeenTwentyFourHours(lastSubmitted: Double) -> Bool {
+    let timeComparison = Date.init(timeIntervalSinceNow: lastSubmitted)
     let twentyFourHoursAgo = Date.init(timeIntervalSinceNow: -3600 * 24)
     return timeComparison >= twentyFourHoursAgo
   }
