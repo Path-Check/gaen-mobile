@@ -197,23 +197,25 @@ final class ExposureManager: NSObject {
     let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
     let enxCount = defaults.double(forKey: "enxCount")
     
-    if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil)) && (enxCount < 3)) {
-      let newDate = Date.init();
-      defaults.set(enxCount + 1, forKey: "enxCount");
-      defaults.set(newDate, forKey: "lastEnxTimestamp"); 
+    if ((lastEnxTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)) != nil))) {
+      if (enxCount < 3) {
+        let newDate = Date.init();
+        defaults.set(enxCount + 1, forKey: "enxCount");
+        defaults.set(newDate, forKey: "lastEnxTimestamp"); 
 
-      let identifier = String.enxMigrationIdentifier
-      let content = UNMutableNotificationContent()
-      content.title = String.enxMigrationNotificationTitle.localized
-      content.body = String.enxMigrationNotificationContent.localized
-      content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
-      content.sound = .default
+        let identifier = String.enxMigrationIdentifier
+        let content = UNMutableNotificationContent()
+        content.title = String.enxMigrationNotificationTitle.localized
+        content.body = String.enxMigrationNotificationContent.localized
+        content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+        content.sound = .default
 
-      let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-      userNotificationCenter.add(request) { error in
-        DispatchQueue.main.async {
-          if let error = error {
-            print("Error showing error user notification: \(error)")
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+        userNotificationCenter.add(request) { error in
+          DispatchQueue.main.async {
+            if let error = error {
+              print("Error showing error user notification: \(error)")
+            }
           }
         }
       }
