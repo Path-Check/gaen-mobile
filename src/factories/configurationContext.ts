@@ -18,6 +18,7 @@ export default Factory.define<Configuration>(() => ({
   displaySelfAssessment: false,
   displayAgeVerification: false,
   enableProductAnalytics: false,
+  enxRegion: "",
   externalCovidDataLabel: "home.covid_data",
   externalCovidDataLink: null,
   externalTravelGuidanceLink: null,

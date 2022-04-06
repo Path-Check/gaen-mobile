@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Linking,
+  Platform,
 } from "react-native"
 import env from "react-native-config"
 import { useTranslation } from "react-i18next"
@@ -32,6 +33,7 @@ import CovidDataWebViewLink from "./CovidDataWebViewLink"
 import CallEmergencyServices from "./CallEmergencyServices"
 import FaqButton from "./FaqButton"
 import { usePermissionsContext } from "../Device/PermissionsContext"
+import EnxMigrationInfo from "./EnxMigrationInfo"
 
 import { Icons, Images } from "../assets"
 import {
@@ -63,7 +65,12 @@ const Home: FunctionComponent = () => {
     externalTravelGuidanceLink,
     healthAuthorityHealthCheckUrl,
     verificationStrategy,
+    enxRegion,
   } = useConfigurationContext()
+
+  const enxComponent = Platform.OS === "ios" && (
+    <EnxMigrationInfo enxRegion={enxRegion} />
+  )
 
   return (
     <>
@@ -74,6 +81,7 @@ const Home: FunctionComponent = () => {
       >
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <NotificationsOff />
+        {enxComponent}
         <ExposureDetectionStatusCard />
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (

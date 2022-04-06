@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { View, StyleSheet } from "react-native"
+import { Linking, View, StyleSheet } from "react-native"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../../Device/PermissionsContext"
@@ -8,6 +8,8 @@ import EnableExposureNotifications from "./EnableExposureNotifications"
 import { applyHeaderLeftBackButton } from "../../navigation/HeaderLeftBackButton"
 import { useAffectedUserContext } from "../AffectedUserContext"
 import { AffectedUserFlowStackParamList } from "../../navigation/AffectedUserFlowStack"
+import { useConfigurationContext } from "../../configuration"
+import * as NativeModule from "../../gaen/nativeModule"
 
 import { Colors } from "../../styles"
 
@@ -21,11 +23,22 @@ const CodeInputScreen: FunctionComponent = () => {
   const route = useRoute<CodeInputScreenRouteProp>()
   const { navigateOutOfStack, setLinkCode } = useAffectedUserContext()
   const { exposureNotifications } = usePermissionsContext()
+  const { enxRegion } = useConfigurationContext()
+  const requestExposureNotifications = async () => {
+    if (linkCode) {
+      const response = await NativeModule.requestAuthorization()
+
+      if (response.kind === "failure" && response.error === "Restricted") {
+        Linking.openURL(`ens://v?c=${linkCode}&r=${enxRegion}`)
+      }
+    }
+  }
 
   const linkCode: string | undefined = route?.params?.c || route?.params?.code
 
   if (linkCode) {
     setLinkCode(linkCode)
+    requestExposureNotifications()
     navigation.setOptions({
       headerLeft: applyHeaderLeftBackButton(navigateOutOfStack),
     })

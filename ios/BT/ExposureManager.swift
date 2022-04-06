@@ -44,6 +44,7 @@ final class ExposureManager: NSObject {
   private static let chaffBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).chaff"
   private static let exposureDetectionBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).exposure-notification"
   private static let deleteOldExposuresBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).delete-old-exposures"
+  private static let enxMigrationBackgroundTaskIdentifier = "\(Bundle.main.bundleIdentifier!).enx-migration"
 
   @objc private(set) static var shared: ExposureManager?
 
@@ -98,6 +99,13 @@ final class ExposureManager: NSObject {
       self,
       selector: #selector(scheduleChaffBackgroundTaskIfNeeded),
       name: .ChaffRequestTriggered,
+      object: nil
+    )
+
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(scheduleEnxBackgroundTaskIfNeeded),
+      name: .EnxNotificationTriggered,
       object: nil
     )
   }
@@ -183,6 +191,38 @@ final class ExposureManager: NSObject {
     return btSecureStorage.deleteSymptomLogEntries()
   }
 
+  //Notifies the user they need to migrate
+  func notifyUserEnxIfNeeded() {
+    let defaults = UserDefaults.standard
+    let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
+    let enxCount = defaults.double(forKey: "enxCount")
+    let sameDay = self.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)
+    
+    if (lastEnxTimestamp == 0 || sameDay != nil) {
+      if (enxCount <= 3) {
+        let newDate = Date.init();
+        defaults.set(enxCount + 1, forKey: "enxCount");
+        defaults.set(newDate, forKey: "lastEnxTimestamp"); 
+
+        let identifier = String.enxMigrationIdentifier
+        let content = UNMutableNotificationContent()
+        content.title = String.enxMigrationNotificationTitle.localized
+        content.body = String.enxMigrationNotificationContent.localized
+        content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+        content.sound = .default
+
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+        userNotificationCenter.add(request) { error in
+          DispatchQueue.main.async {
+            if let error = error {
+              print("Error showing error user notification: \(error)")
+            }
+          }
+        }
+      }
+    }
+  }
+
   ///Notifies the user to enable bluetooth to be able to exchange keys
   func notifyUserBlueToothOffIfNeeded() {
     let identifier = String.bluetoothNotificationIdentifier
@@ -222,6 +262,17 @@ final class ExposureManager: NSObject {
     }, callback: callback)
   }
 
+  @objc func registerEnxMigrationBackgroundTask() {
+    bgTaskScheduler.register(forTaskWithIdentifier: ExposureManager.enxMigrationBackgroundTaskIdentifier,
+                             using: .main) { [weak self] task in
+      //let state = UIApplication.shared.applicationState
+      //if state == .background || state == .inactive {
+      // background
+      self?.scheduleEnxBackgroundTaskIfNeeded()
+      //} 
+    }
+  }
+
 
   // MARK: == Exposure Detection ==
 
@@ -235,6 +286,8 @@ final class ExposureManager: NSObject {
       guard let strongSelf = self else { return }
       // Notify the user if bluetooth is off
       strongSelf.notifyUserBlueToothOffIfNeeded()
+
+      strongSelf.notifyUserEnxIfNeeded()
 
       // Perform the exposure detection
       let progress = strongSelf.detectExposures { result in
@@ -277,7 +330,7 @@ final class ExposureManager: NSObject {
         let randomNum = Int.random(in: 0..<20)
         let lastChaffTimestamp = defaults.double(forKey: "lastChaffTimestamp")
         
-        if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmittedChaff: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
+        if ((lastChaffTimestamp == 0 || ((self?.hasBeenTwentyFourHours(lastSubmitted: lastChaffTimestamp)) != nil)) && (randomNum > 8 && randomNum < 19 )) {
           self?.performChaffRequest()
         }
       }
@@ -304,10 +357,21 @@ final class ExposureManager: NSObject {
   /**
       Checks to see if it has been twenty four hours since the last chaff submission.
    */
-  func hasBeenTwentyFourHours(lastSubmittedChaff: Double) -> Bool {
-    let timeComparison = Date.init(timeIntervalSinceNow: lastSubmittedChaff)
+  func hasBeenTwentyFourHours(lastSubmitted: Double) -> Bool {
+    let timeComparison = Date.init(timeIntervalSinceNow: lastSubmitted)
     let twentyFourHoursAgo = Date.init(timeIntervalSinceNow: -3600 * 24)
     return timeComparison >= twentyFourHoursAgo
+  }
+
+  @objc func scheduleEnxBackgroundTaskIfNeeded() {
+    guard manager.exposureNotificationStatus == .active else { return }
+    let taskRequest = BGProcessingTaskRequest(identifier: ExposureManager.enxMigrationBackgroundTaskIdentifier)
+    taskRequest.requiresNetworkConnectivity = false
+    do {
+      try bgTaskScheduler.submit(taskRequest)
+    } catch {
+      print("Unable to schedule background task: \(error)")
+    }
   }
 
   @objc func scheduleExposureDetectionBackgroundTaskIfNeeded() {

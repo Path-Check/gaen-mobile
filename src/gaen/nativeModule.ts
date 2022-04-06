@@ -46,6 +46,18 @@ export const subscribeToEnabledStatusEvents = (
   )
 }
 
+export const subscribeToEnxMigrationEvents = (
+  cb: () => void,
+): EventSubscription => {
+  const ExposureEvents = new NativeEventEmitter(
+    NativeModules.ExposureEventEmitter,
+  )
+
+  return ExposureEvents.addListener("onEnxNotificationTriggered", () => {
+    cb()
+  })
+}
+
 /*export const subscribeToChaffRequestEvents = (
   cb: () => void,
 ): EventSubscription => {

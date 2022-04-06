@@ -5,6 +5,7 @@
 NSString *const onChaffRequestTriggered = @"onChaffRequestTriggered";
 NSString *const onEnabledStatusUpdated = @"onEnabledStatusUpdated";
 NSString *const onExposuresChanged = @"onExposureRecordUpdated";
+NSString *const onEnxNotificationTriggered = @"onEnxNotificationTriggered";
 
 @interface ExposureEventEmitter : RCTEventEmitter <RCTBridgeModule>
 @end
@@ -32,7 +33,8 @@ RCT_EXPORT_MODULE();
   return @[
     onExposuresChanged,
     onEnabledStatusUpdated,
-    onChaffRequestTriggered
+    onChaffRequestTriggered,
+    onEnxNotificationTriggered
   ];
 }
 

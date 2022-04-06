@@ -20,6 +20,7 @@ const initialState: Configuration = {
   displayAgeVerification: false,
   emergencyPhoneNumber: "",
   enableProductAnalytics: false,
+  enxRegion: "",
   externalCovidDataLabel: "home.covid_data",
   externalCovidDataLink: null,
   externalTravelGuidanceLink: null,

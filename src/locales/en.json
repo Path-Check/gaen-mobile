@@ -298,6 +298,7 @@
     "have_a_positive_test": "Have a positive test?",
     "location_info_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Detection. {{applicationName}} does NOT track or keep a record of your location.",
     "location_info_subheader": "{{applicationName}} does not track or keep a record of your location",
+    "migrate_enx": "Click here to enable the new Exposure Notifications. In order to stay protected from COVID-19, you need to take this step. After that, this app can be safely deleted.",
     "not_feeling_well": "Not feeling well?",
     "notifications_off": "Turn on notifications to get notified if you receive an exposure",
     "proximity_tracing_info_body_1": "If smartphones with the app installed are turned on, have Bluetooth enabled, and are near each other for a period of time, an anonymous encounter is registered on your device.",

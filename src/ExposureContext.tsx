@@ -156,6 +156,9 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
     getLastExposureDetectionDate()
 
     detectExposures()
+
+    //Enx migration subscription
+    //const EnxMigrationInfo = NativeModule.subscribeToEnxMigrationEvents()
     /*
     // Chaff subscription
     const chaffSubscription = NativeModule.subscribeToChaffRequestEvents(() => {
