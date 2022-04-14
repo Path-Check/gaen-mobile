@@ -207,7 +207,8 @@ final class ExposureManager: NSObject {
         let identifier = String.enxMigrationIdentifier
         let content = UNMutableNotificationContent()
         content.title = String.enxMigrationNotificationTitle.localized
-        content.body = String.enxMigrationNotificationContent.localized
+        content.body = String(string: ReactNativeConfig.env(for: .enxNotificationText))
+        //content.body = String.enxMigrationNotificationContent.localized
         content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
         content.sound = .default
 
