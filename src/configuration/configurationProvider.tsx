@@ -96,6 +96,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
 
   // Enx migration
   const enxRegion = env.ENX_REGION || ""
+  const enxNotificationText = env.ENX_NOTIFICATION_TEXT || "Click here to enable the new Exposure Notifications. In order to stay protected from COVID-19, you need to take this step. After that, this app can be safely deleted."
 
   return (
     <ConfigurationContext.Provider
@@ -116,6 +117,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         displaySelfAssessment,
         displayAgeVerification,
         enableProductAnalytics,
+        enxNotificationText,
         enxRegion,
         emergencyPhoneNumber,
         externalCovidDataLabel,

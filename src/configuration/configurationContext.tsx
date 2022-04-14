@@ -21,6 +21,7 @@ const initialState: Configuration = {
   emergencyPhoneNumber: "",
   enableProductAnalytics: false,
   enxRegion: "",
+  enxNotificationText: "Click here to enable the new Exposure Notifications. In order to stay protected from COVID-19, you need to take this step. After that, this app can be safely deleted.",
   externalCovidDataLabel: "home.covid_data",
   externalCovidDataLink: null,
   externalTravelGuidanceLink: null,
