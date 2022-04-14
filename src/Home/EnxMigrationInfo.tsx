@@ -20,6 +20,7 @@ import {
 } from "../styles"
 import { Icons, Images } from "../assets"
 import { SvgXml } from "react-native-svg"
+import { useConfigurationContext } from "../configuration"
 
 interface EnxMigrationInfoProps {
   enxRegion: string
@@ -29,6 +30,7 @@ const EnxMigrationInfo: FunctionComponent<EnxMigrationInfoProps> = ({
   enxRegion,
 }) => {
   const { t } = useTranslation()
+  const { enxNotificationText } = useConfigurationContext()
   const onboardingUrl = `ens://onboarding?r=${enxRegion}`
 
   const handleOnPress = async () => {
@@ -47,13 +49,13 @@ const EnxMigrationInfo: FunctionComponent<EnxMigrationInfoProps> = ({
     <TouchableOpacity
       style={style.shareContainer}
       onPress={handleOnPress}
-      accessibilityLabel={t("home.migrate_enx")}
+      accessibilityLabel={enxNotificationText}
     >
       <View style={style.imageContainer}>
         <Image source={Images.ExclamationInCircle} style={style.image} />
       </View>
       <View style={style.textContainer}>
-        <Text style={style.shareText}>{t("home.migrate_enx")}</Text>
+        <Text style={style.shareText}>{enxNotificationText}</Text>
       </View>
       <SvgXml
         xml={Icons.ChevronRight}
