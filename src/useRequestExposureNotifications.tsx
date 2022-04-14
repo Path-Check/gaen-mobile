@@ -5,7 +5,6 @@ import { useApplicationName } from "./Device/useApplicationInfo"
 import { openAppSettings } from "./Device/nativeModule"
 import * as NativeModule from "./gaen/nativeModule"
 import { usePermissionsContext } from "./Device/PermissionsContext"
-import { useConfigurationContext } from "./configuration"
 
 export const useRequestExposureNotifications = (): (() => void) => {
   const { t } = useTranslation()
@@ -89,14 +88,10 @@ export const useRequestExposureNotifications = (): (() => void) => {
   }
 
   const showSetToActiveRegionAlert = () => {
-    const { enxRegion } = useConfigurationContext()
-    console.log("enxRegion", enxRegion)
-    if (enxRegion != "") {
-      showAlert(
-        t("exposure_notification_alerts.set_active_region_ios_title"),
-        t("exposure_notification_alerts.set_active_region_ios_body"),
-      )
-    }
+    showAlert(
+      t("exposure_notification_alerts.set_active_region_ios_title"),
+      t("exposure_notification_alerts.set_active_region_ios_body"),
+    )
   }
 
   const showEnableBluetoothAlert = () => {
