@@ -21,6 +21,7 @@ interface Configuration {
   enableProductAnalytics: boolean
   emergencyPhoneNumber: string
   enxRegion: string
+  enxNotificationText: string
   externalCovidDataLink: string | null // link to show external covid data link on main page
   externalCovidDataLabel: string // custom label for external covid data, will default to "Covid Data"
   externalTravelGuidanceLink: string | null // link to external travel guidence link on main page

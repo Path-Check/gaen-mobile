@@ -32,6 +32,7 @@ extension String {
   static let hmackey = "HMAC_KEY"
   static let regionCodes = "REGION_CODES"
   static let dev = "DEV"
+  static let enxNotificationText = "ENX_NOTIFICATION_TEXT"
 
   // Notifications
   static let bluetoothNotificationTitle = "Bluetooth Off"
