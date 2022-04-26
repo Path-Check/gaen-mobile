@@ -8,6 +8,8 @@ import {
   StyleSheet,
 } from "react-native"
 import { useTranslation } from "react-i18next"
+import { useApplicationName } from "../Device/useApplicationInfo"
+import { useConfigurationContext } from "../configuration"
 import { Text } from "../components"
 import Logger from "../logger"
 import {
@@ -20,7 +22,6 @@ import {
 } from "../styles"
 import { Icons, Images } from "../assets"
 import { SvgXml } from "react-native-svg"
-import { useConfigurationContext } from "../configuration"
 
 interface EnxMigrationInfoProps {
   enxRegion: string
@@ -30,7 +31,9 @@ const EnxMigrationInfo: FunctionComponent<EnxMigrationInfoProps> = ({
   enxRegion,
 }) => {
   const { t } = useTranslation()
-  const { enxNotificationText } = useConfigurationContext()
+  const { applicationName } = useApplicationName()
+  const { appDownloadUrl: SHARE_APP_LINK } = useConfigurationContext()
+
   const onboardingUrl = `ens://onboarding?r=${enxRegion}`
 
   const handleOnPress = async () => {
@@ -49,13 +52,18 @@ const EnxMigrationInfo: FunctionComponent<EnxMigrationInfoProps> = ({
     <TouchableOpacity
       style={style.shareContainer}
       onPress={handleOnPress}
-      accessibilityLabel={enxNotificationText}
+      accessibilityLabel={t("home.migrate_enx", {
+        applicationName,
+        SHARE_APP_LINK,
+      })}
     >
       <View style={style.imageContainer}>
         <Image source={Images.ExclamationInCircle} style={style.image} />
       </View>
       <View style={style.textContainer}>
-        <Text style={style.shareText}>{enxNotificationText}</Text>
+        <Text style={style.shareText}>
+          {t("home.migrate_enx", { applicationName, SHARE_APP_LINK })}
+        </Text>
       </View>
       <SvgXml
         xml={Icons.ChevronRight}
