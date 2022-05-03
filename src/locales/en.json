@@ -288,7 +288,6 @@
     "could_not_open_link": "Could not open link: {{url}}. Please try to open the url in your phone's browser.",
     "covid_data": "Covid Data",
     "covid_data_specific": "{{label}} COVID Data",
-    "safe_travel_guidance": "Safe Travel Guidance",
     "enter_symptoms": "Enter symptoms",
     "error": {
       "share_link_failed": "Failed to open link to share"
@@ -305,6 +304,7 @@
     "proximity_tracing_info_body_2": "In the event of an encounter, your data, and information remain anonymous. The app doesn’t store any personal data. Only random IDs are exchanged. These are deleted within 14 days.",
     "proximity_tracing_info_subheader_1": "How does Exposure Notifications work?",
     "proximity_tracing_info_subheader_2": "Are my data secure?",
+    "safe_travel_guidance": "Safe Travel Guidance",
     "take_assessment": "Take Assessment",
     "verification_code_card": {
       "if_you_have_a_code": "Submit your verification code to help keep your community safe.",

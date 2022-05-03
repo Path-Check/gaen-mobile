@@ -28,7 +28,11 @@
     "success_header": "Waxaad ku jirtaa laynka sugitaanka"
   },
   "callback_request": {
-    "callback_button_text": "Codo Wicitaan"
+    "callback_button_text": "Codo Wicitaan",
+    "phonenumber_display_text": "Waxaad sidoo kale wici kartaa {{healthAuthorityName}} barta ",
+    "phonenumber_display_text2": " ama waxaad codsan kartaa dib u soo wacitaan adigoo gujinaya badhanka hoose ee \"Request Callback\".",
+    "verification_code_warning": "Haddii aanad aysan koodh, balse lagaa helay, waxaad u baahan doontaa inaad ka hesho koodhka xaqiijinta {{healthAuthorityName}} si aad u codsato koodhka ",
+    "verification_code_warning2": "ama waxaad codsan kartaa dib u soo wacitaan adigoo gujinaya badhanka hoose ee \"Request Callback\"."
   },
   "common": {
     "back": "Noqo",
@@ -283,6 +287,7 @@
     "complete_healthcheck": "Dhamaystir Baaritaanka Caafimaadka",
     "could_not_open_link": "Ma furi karo lifaaqa: {{url}}. Fadlan iskuday inaad url-ka ku furto baroowsarka taleefankaaga.",
     "covid_data": "Xogta COVID",
+    "covid_data_specific": "{{label}} Xogta COVID",
     "enter_symptoms": "Geli astaamaha",
     "error": {
       "share_link_failed": "Ku guuldareystay inuu furo xiriiriye si aad ula wadaagto"
@@ -292,12 +297,14 @@
     "have_a_positive_test": "Ma haysataa koodhka baaritaanka caabuqa lagaaga helay?",
     "location_info_body": "Google ayaa waajib ka dhigaysa in aaladaha ku shaqeeya Android 10 ama kasii hooseeya loo furo adeegyada goobta si loogu adeegsado Helitaanka  U Feydsanaanta {{applicationName}} MA raadraaco ama ma kaydiyo goobtaada.",
     "location_info_subheader": "{{applicationName}} ma raadraaco ama ma kaydiyo goobtaada.",
+    "migrate_enx": "{{applicationName}} hadda waxa uu qayb ka yahay Ogeysiiska U baylah noqoshada ee ku dhex dhisan taleefankaaga. Riix halkan si aad beddel u samayso Booqo {{SHARE_APP_LINK}} haddii aad su'aalo qabto",
     "not_feeling_well": "Xanuun miyaa ku haya?",
     "notifications_off": "Furo ogaysiisyada si laguu ogaysiiyo haddii aad u feydsantay caabuqa",
     "proximity_tracing_info_body_1": "Haddii telefoonnada casriga ah (smartphones) ee lagu rakibay aabku ay daaran yihiin, oo Bluetoot-kooda karti loo yeelay, oo ay isku dhowaadaan in muddo ah, kulan ayaa loo diiwaangeliyaa aaladdaada.",
     "proximity_tracing_info_body_2": "Haddii ay dhacdo la kulan, xogtaada, iyo macluumaadkaagu ayaa wali la garan doonin magacaaga iyo qofaad tahay. Aabku ma kaydin doono marnaba xog shaqsiyadeed. Kaliya tirooyin aqoonsiyo bakhtiyaanasiib ayaa la isweydaarsadaa. Kuwaani waxa lagu tirtiraa 14 maalmood gudahood.",
     "proximity_tracing_info_subheader_1": "Sidee ayuu Raadraaca Isku Dhawaanshahu u shaqeeyaa?",
     "proximity_tracing_info_subheader_2": "Xogtaydu ma xasilloon tahay?",
+    "safe_travel_guidance": "Tilmaanta Safarka Badbaadada leh",
     "take_assessment": "Samee Qiimayn",
     "verification_code_card": {
       "if_you_have_a_code": "Soo gudbi koodhkaaga xaqiijinta si aad gacan uga gaysato badbaadinta bulshadaada.",
