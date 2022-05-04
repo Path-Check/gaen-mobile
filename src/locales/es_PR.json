@@ -28,7 +28,11 @@
     "success_header": "Usted está en la fila"
   },
   "callback_request": {
-    "callback_button_text": "Solicitar llamada"
+    "callback_button_text": "Solicitar llamada",
+    "phonenumber_display_text": "También puede llamar a {{healthAuthorityName}} al ",
+    "phonenumber_display_text2": " o solicitar que alguien le regrese la llamada haciendo clic en el botón de “Solicitar una devolución de llamada” (Request Callback) a continuación.",
+    "verification_code_warning": "Si no tiene un código, pero tiene una prueba positiva, deberá obtener un código de verificación de {{healthAuthorityName}} para solicitar su código en ",
+    "verification_code_warning2": "o puede solicitar que alguien le llame haciendo clic en el botón de “Solicitar una devolución de llamada” (Request Callback) a continuación."
   },
   "common": {
     "back": "Regresar",
@@ -283,6 +287,7 @@
     "complete_healthcheck": "Completar Healthcheck",
     "could_not_open_link": "No se pudo abrir el vínculo: {{url}} . Intente abrir la URL en el navegador de su teléfono.",
     "covid_data": "Datos de COVID",
+    "covid_data_specific": "{{label}} Datos de COVID",
     "enter_symptoms": "Ingrese síntomas",
     "error": {
       "share_link_failed": "No se pudo abrir el enlace para compartir"
@@ -292,12 +297,14 @@
     "have_a_positive_test": "¿Tiene un código de resultado de prueba positivo?",
     "location_info_body": "Google requiere que los dispositivos con Android 10 o versiones anteriores tengan habilitados los servicios de ubicación para usar la Detección de exposición. {{applicationName}} NO rastrea ni mantiene un registro de su ubicación.",
     "location_info_subheader": "{{applicationName}} no rastrea ni mantiene un registro de su ubicación",
+    "migrate_enx": "{{applicationName}} ahora es parte de las Notificaciones de Exposición incorporadas en su teléfono. Haga clic aquí para realizar el cambio. Visite {{SHARE_APP_LINK}} si tiene preguntas.",
     "not_feeling_well": "¿No te sientes bien?",
     "notifications_off": "Active las notificaciones para ser notificado si ha estado expuesto",
     "proximity_tracing_info_body_1": "Si los teléfonos celulares con la aplicación instalada están encendidos, tienen Bluetooth habilitado y están cerca uno del otro durante un período de tiempo, se registra un encuentro en su dispositivo.",
     "proximity_tracing_info_body_2": "En caso de un encuentro, sus datos e información permanecen anónimos. La aplicación no almacena ningún dato personal. Solo se intercambian identificaciones aleatorias. Estos se borran en un plazo de 14 días.",
     "proximity_tracing_info_subheader_1": "¿Cómo funcionan las Notificaciones de Exposición?",
     "proximity_tracing_info_subheader_2": "¿Están mis datos seguros?",
+    "safe_travel_guidance": "Guía para viajar de forma segura",
     "take_assessment": "Tomar evaluación",
     "verification_code_card": {
       "if_you_have_a_code": "Envíe su código de verificación para ayudar a mantener segura a su comunidad.",
