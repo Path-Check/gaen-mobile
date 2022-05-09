@@ -17,7 +17,7 @@ def shared_pods
   pod "PromisesSwift", modular_headers: true
   pod "PromisesObjC", modular_headers: true
 
-  use_flipper!('Flipper' => '0.86.0', 'Flipper-Folly' => '2.5.3')
+  # use_flipper!('Flipper' => '0.86.0', 'Flipper-Folly' => '2.5.3')
   post_install do |installer|
     flipper_post_install(installer)
   end
