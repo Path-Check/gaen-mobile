@@ -20,6 +20,11 @@ def shared_pods
   use_flipper!('Flipper' => '0.86.0', 'Flipper-Folly' => '2.5.3')
   post_install do |installer|
     flipper_post_install(installer)
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+     end
   end
 end
 
