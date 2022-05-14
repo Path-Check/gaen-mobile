@@ -468,11 +468,11 @@ final class ExposureManager: NSObject {
   @discardableResult func detectExposuresV1(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
 
     let progress = Progress()
-    //var lastProcessedUrlPath: String = .default
-    //var processedFileCount: Int = 0
-    //var unpackedArchiveURLs: [URL] = []
+    var lastProcessedUrlPath: String = .default
+    var processedFileCount: Int = 0
+    var unpackedArchiveURLs: [URL] = []
 
-    /*Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
         // Disallow concurrent exposure detection,
         // because if allowed we might try to detect the same diagnosis keys more than once
@@ -488,19 +488,19 @@ final class ExposureManager: NSObject {
         // Abort because daily file capacity is exceeded
         return []
       }
-      let indexFileString = try await(self.fetchIndexFile())
+      let indexFileString = try awaitPromise(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
       let targetUrls = self.urlPathsToProcess(remoteURLs, apiVersion: .V1)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
-      let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
-      unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
-      let exposureConfiguration = try await(self.getExposureConfigurationV1())
-      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguration.asENExposureConfiguration,
+      let downloadedKeyArchives = try awaitPromise(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try awaitPromise(self.unpackKeyArchives(packages: downloadedKeyArchives))
+      let exposureConfiguration = try awaitPromise(self.getExposureConfigurationV1())
+      let exposureSummary = try awaitPromise(self.callDetectExposures(configuration: exposureConfiguration.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary, summary.isAboveScoreThreshold(with: exposureConfiguration) {
-        newExposures = try await(self.getExposureInfoAndNotifyUser(summary: summary))
+        newExposures = try awaitPromise(self.getExposureInfoAndNotifyUser(summary: summary))
       }
       return newExposures
     }.then { result in
@@ -520,7 +520,7 @@ final class ExposureManager: NSObject {
     }.always {
       unpackedArchiveURLs.cleanup()
       self.isDetectingExposures = false
-    }*/
+    }
     return progress
   }
 
@@ -528,28 +528,26 @@ final class ExposureManager: NSObject {
   @discardableResult func detectExposuresV2(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
 
     let progress = Progress()
-    //var lastProcessedUrlPath: String = .default
-    //var processedFileCount: Int = 0
-    //var unpackedArchiveURLs: [URL] = []
-    
-    
+    var lastProcessedUrlPath: String = .default
+    var processedFileCount: Int = 0
+    var unpackedArchiveURLs: [URL] = []
 
-    /*Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
         // Disallow concurrent exposure detection,
         // because if allowed we might try to detect the same diagnosis keys more than once
         throw ExposureError.default("Detection Already in Progress")
       }
       self.isDetectingExposures = true
-      let indexFileString = try await(self.fetchIndexFile())
+      let indexFileString = try awaitPromise(self.fetchIndexFile())
       let remoteURLs = indexFileString.gaenFilePaths
       let targetUrls = self.urlPathsToProcess(remoteURLs, apiVersion: .V2)
       lastProcessedUrlPath = targetUrls.last ?? .default
       processedFileCount = targetUrls.count
-      let downloadedKeyArchives = try await(self.downloadKeyArchives(targetUrls: targetUrls))
-      unpackedArchiveURLs = try await(self.unpackKeyArchives(packages: downloadedKeyArchives))
-      let exposureConfiguraton = try await(self.getExposureConfigurationV2())
-      let exposureSummary = try await(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
+      let downloadedKeyArchives = try awaitPromise(self.downloadKeyArchives(targetUrls: targetUrls))
+      unpackedArchiveURLs = try awaitPromise(self.unpackKeyArchives(packages: downloadedKeyArchives))
+      let exposureConfiguraton = try awaitPromise(self.getExposureConfigurationV2())
+      let exposureSummary = try awaitPromise(self.callDetectExposures(configuration: exposureConfiguraton.asENExposureConfiguration,
                                                                diagnosisKeyURLs: unpackedArchiveURLs))
       var newExposures: [Exposure] = []
       if let summary = exposureSummary {
@@ -584,7 +582,7 @@ final class ExposureManager: NSObject {
     }.always {
       unpackedArchiveURLs.cleanup()
       self.isDetectingExposures = false
-    }*/
+    }
     return progress
   }
 

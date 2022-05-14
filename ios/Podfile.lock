@@ -79,9 +79,9 @@ PODS:
   - OpenSSL-Universal (1.1.180)
   - Permission-Notifications (2.2.2):
     - RNPermissions
-  - PromisesObjC (1.2.12)
-  - PromisesSwift (1.2.12):
-    - PromisesObjC (= 1.2.12)
+  - PromisesObjC (2.0.0)
+  - PromisesSwift (2.0.0):
+    - PromisesObjC (= 2.0.0)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
