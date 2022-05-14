@@ -468,11 +468,11 @@ final class ExposureManager: NSObject {
   @discardableResult func detectExposuresV1(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
 
     let progress = Progress()
-    var lastProcessedUrlPath: String = .default
-    var processedFileCount: Int = 0
-    var unpackedArchiveURLs: [URL] = []
+    //var lastProcessedUrlPath: String = .default
+    //var processedFileCount: Int = 0
+    //var unpackedArchiveURLs: [URL] = []
 
-    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+    /*Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
         // Disallow concurrent exposure detection,
         // because if allowed we might try to detect the same diagnosis keys more than once
@@ -520,7 +520,7 @@ final class ExposureManager: NSObject {
     }.always {
       unpackedArchiveURLs.cleanup()
       self.isDetectingExposures = false
-    }
+    }*/
     return progress
   }
 
@@ -528,11 +528,13 @@ final class ExposureManager: NSObject {
   @discardableResult func detectExposuresV2(completionHandler: @escaping ((ExposureResult) -> Void)) -> Progress {
 
     let progress = Progress()
-    var lastProcessedUrlPath: String = .default
-    var processedFileCount: Int = 0
-    var unpackedArchiveURLs: [URL] = []
+    //var lastProcessedUrlPath: String = .default
+    //var processedFileCount: Int = 0
+    //var unpackedArchiveURLs: [URL] = []
+    
+    
 
-    Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
+    /*Promise<[Exposure]>(on: .global()) { () -> [Exposure] in
       if self.isDetectingExposures {
         // Disallow concurrent exposure detection,
         // because if allowed we might try to detect the same diagnosis keys more than once
@@ -582,7 +584,7 @@ final class ExposureManager: NSObject {
     }.always {
       unpackedArchiveURLs.cleanup()
       self.isDetectingExposures = false
-    }
+    }*/
     return progress
   }
 
