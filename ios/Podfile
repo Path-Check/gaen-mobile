@@ -22,7 +22,9 @@ def shared_pods
     flipper_post_install(installer)
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
-       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        if Gem::Version.new('8.0') > Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+        end
       end
      end
   end
