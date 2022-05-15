@@ -123,7 +123,7 @@ class V2UnitTests: XCTestCase {
     let exposureManager = defaultExposureManager(enAPIVersion: .v2,
                                                  forceDownloadConfigurationError: true)
     do {
-      let config = try await(exposureManager.getExposureConfigurationV2())
+      let config = try awaitPromise(exposureManager.getExposureConfigurationV2())
       XCTAssertEqual(config, DailySummariesConfiguration.placeholder)
     } catch {
       XCTFail()
