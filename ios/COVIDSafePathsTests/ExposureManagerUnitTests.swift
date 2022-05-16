@@ -584,7 +584,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let expectation = self.expectation(description: "it falls back to the placeholder exposure configuration")
     let exposureManager = defaultExposureManager(enAPIVersion: .v1, forceDownloadConfigurationError: true)
     do {
-      let config = try await(exposureManager.getExposureConfigurationV1())
+      let config = try awaitPromise(exposureManager.getExposureConfigurationV1())
       XCTAssertEqual(config, ExposureConfigurationV1.placeholder)
       expectation.fulfill()
     } catch {
@@ -601,7 +601,7 @@ class ExposureManagerUnitTests: XCTestCase {
     let expectation = self.expectation(description: "it falls back to the placeholder exposure configuration")
     let exposureManager = defaultExposureManager(enAPIVersion: .v2, forceDownloadConfigurationError: true)
     do {
-      let config = try await(exposureManager.getExposureConfigurationV2())
+      let config = try awaitPromise(exposureManager.getExposureConfigurationV2())
       XCTAssertEqual(config, DailySummariesConfiguration.placeholder)
       expectation.fulfill()
     } catch {
