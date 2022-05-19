@@ -200,7 +200,7 @@ final class ExposureManager: NSObject {
     
     if (lastEnxTimestamp == 0 || sameDay != nil) {
       if (enxCount <= 3) {
-        let newDate = Date.init();
+        let newDate = Date.init().timeIntervalSince1970;
         defaults.set(enxCount + 1, forKey: "enxCount");
         defaults.set(newDate, forKey: "lastEnxTimestamp"); 
 
