@@ -196,28 +196,29 @@ final class ExposureManager: NSObject {
     let defaults = UserDefaults.standard
     let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
     let enxCount = defaults.double(forKey: "enxCount")
-    let sameDay = self.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)
+    var sameDay = self.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)
     
-    if (sameDay == false) {
-      if (enxCount <= 3) {
-        let newDate = Date.init().timeIntervalSince1970;
-        defaults.set(enxCount + 1, forKey: "enxCount");
-        defaults.set(newDate, forKey: "lastEnxTimestamp"); 
+    if (lastEnxTimestamp == 0) {
+      sameDay = false;
+    }
+    if (enxCount <= 3 && sameDay == false) {
+      let newDate = Date.init().timeIntervalSince1970;
+      defaults.set(enxCount + 1, forKey: "enxCount");
+      defaults.set(newDate, forKey: "lastEnxTimestamp");
 
-        let identifier = String.enxMigrationIdentifier
-        let content = UNMutableNotificationContent()
-        content.title = String.enxMigrationNotificationTitle.localized
-        content.body = String(ReactNativeConfig.env(for: .enxNotificationText))
-        //content.body = String.enxMigrationNotificationContent.localized
-        content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
-        content.sound = .default
+      let identifier = String.enxMigrationIdentifier
+      let content = UNMutableNotificationContent()
+      content.title = String.enxMigrationNotificationTitle.localized
+      content.body = String(ReactNativeConfig.env(for: .enxNotificationText))
+      //content.body = String.enxMigrationNotificationContent.localized
+      content.userInfo = [String.notificationUrlKey: "\(String.notificationUrlBasePath)"]
+      content.sound = .default
 
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-        userNotificationCenter.add(request) { error in
-          DispatchQueue.main.async {
-            if let error = error {
-              print("Error showing error user notification: \(error)")
-            }
+      let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+      userNotificationCenter.add(request) { error in
+        DispatchQueue.main.async {
+          if let error = error {
+            print("Error showing error user notification: \(error)")
           }
         }
       }
