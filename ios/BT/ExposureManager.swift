@@ -198,7 +198,7 @@ final class ExposureManager: NSObject {
     let enxCount = defaults.double(forKey: "enxCount")
     let sameDay = self.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)
     
-    if (lastEnxTimestamp == 0 || sameDay != nil) {
+    if (sameDay == false) {
       if (enxCount <= 3) {
         let newDate = Date.init().timeIntervalSince1970;
         defaults.set(enxCount + 1, forKey: "enxCount");
