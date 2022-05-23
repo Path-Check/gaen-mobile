@@ -194,17 +194,20 @@ final class ExposureManager: NSObject {
   //Notifies the user they need to migrate
   func notifyUserEnxIfNeeded() {
     let defaults = UserDefaults.standard
-    let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp")
-    let enxCount = defaults.double(forKey: "enxCount")
-    var sameDay = self.hasBeenTwentyFourHours(lastSubmitted: lastEnxTimestamp)
+    let lastEnxTimestamp = defaults.double(forKey: "lastEnxTimestamp") // defaults to 0 if it does not exist https://developer.apple.com/documentation/foundation/userdefaults/1416581-double
+    var enxCount = defaults.double(forKey: "enxCount") // defaults to 0 if it does not exist https://developer.apple.com/documentation/foundation/userdefaults/1416581-double
+    let newDate = Date.init();
     
-    if (lastEnxTimestamp == 0) {
-      sameDay = false;
+    var sameDay = false; // default to false in case lastEnxTimestamp has not been created yet
+    
+    if (lastEnxTimestamp != 0) {
+      sameDay = Calendar.current.isDate(newDate, inSameDayAs: Date(timeIntervalSince1970: lastEnxTimestamp))
     }
-    if (enxCount <= 3 && sameDay == false) {
-      let newDate = Date.init().timeIntervalSince1970;
-      defaults.set(enxCount + 1, forKey: "enxCount");
-      defaults.set(newDate, forKey: "lastEnxTimestamp");
+
+    if (enxCount < 3 && sameDay == false) {
+      enxCount += 1
+      defaults.set(enxCount, forKey: "enxCount");
+      defaults.set(newDate.timeIntervalSince1970, forKey: "lastEnxTimestamp");
 
       let identifier = String.enxMigrationIdentifier
       let content = UNMutableNotificationContent()
