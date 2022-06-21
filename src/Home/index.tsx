@@ -68,7 +68,7 @@ const Home: FunctionComponent = () => {
     enxRegion,
   } = useConfigurationContext()
 
-  const shouldEnxMigrationshow = Platform.OS === "ios" && enxRegion !== "";
+  const shouldEnxMigrationshow = Platform.OS === "ios" && enxRegion !== ""
 
   const enxComponent = shouldEnxMigrationshow && (
     <EnxMigrationInfo enxRegion={enxRegion} />
