@@ -68,9 +68,9 @@ const Home: FunctionComponent = () => {
     enxRegion,
   } = useConfigurationContext()
 
-  const shouldEnxMigrationshow = Platform.OS === "ios" && enxRegion !== ""
+  const shouldEnxMigrationShow = Platform.OS === "ios" && enxRegion !== ""
 
-  const enxComponent = shouldEnxMigrationshow && (
+  const enxComponent = shouldEnxMigrationShow && (
     <EnxMigrationInfo enxRegion={enxRegion} />
   )
 
@@ -84,7 +84,7 @@ const Home: FunctionComponent = () => {
         <Text style={style.headerText}>{t("screen_titles.home")}</Text>
         <NotificationsOff />
         {enxComponent}
-        <ExposureDetectionStatusCard />
+        {!shouldEnxMigrationShow && <ExposureDetectionStatusCard />}
         {displayCovidData && <CovidDataCard />}
         {verificationStrategy === "Simple" ? (
           <SimpleVerificationFlowButton />
