@@ -112,6 +112,11 @@
     "typescript": "^4.0.3"
   },
   "resolutions": {
-    "@jest/create-cache-key-function": "^27.0.1"
+    "@jest/create-cache-key-function": "^27.0.1",
+    "react-native/cli-platform-ios/cli-tools/shell-quote": "1.7.3",
+    "react-native/react-devtools-core/shell-quote": "1.7.3",
+    "react-native/@react-native-community/cli/@react-native-community/cli-tools/shell-quote": "1.7.3",
+    "react-native/cli/metro/jest-haste-map/walker/makeerror/tmpl": "1.0.5",
+    "react-native/cli/metro/async": "2.6.4"
   }
 }
