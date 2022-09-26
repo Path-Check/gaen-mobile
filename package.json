@@ -112,6 +112,20 @@
     "typescript": "^4.0.3"
   },
   "resolutions": {
-    "@jest/create-cache-key-function": "^27.0.1"
+    "@jest/create-cache-key-function": "^27.0.1",
+    "react-native/cli-platform-ios/cli-tools/shell-quote": "1.7.3",
+    "react-native/react-devtools-core/shell-quote": "1.7.3",
+    "react-native/@react-native-community/cli/@react-native-community/cli-tools/shell-quote": "1.7.3",
+    "react-native/cli/metro/jest-haste-map/walker/makeerror/tmpl": "1.0.5",
+    "react-native/cli/metro/async": "2.6.4",
+    "react-native/cli-platform-ios/plist": "3.0.4",
+    "react-native/shelljs": "0.8.5",
+    "react-native/cli/strip-ansi/ansi-regex": "4.1.1",
+    "react-native/pretty-format/ansi-regex": "5.0.1",
+    "react-native-svg/css-select/nth-check": "2.0.1",
+    "react-native-svg/css-select/css-what": "5.0.1",
+    "stack/color/color-string": "1.5.5",
+    "react-native/metro-react-native-babel-transformer/core/resolve/path-parse": "1.0.7",
+    "eact-native-gesture-handler/fbjs/ua-parser-js": "0.7.24"
   }
 }
