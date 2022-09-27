@@ -126,6 +126,7 @@
     "react-native-svg/css-select/css-what": "5.0.1",
     "stack/color/color-string": "1.5.5",
     "react-native/metro-react-native-babel-transformer/core/resolve/path-parse": "1.0.7",
-    "eact-native-gesture-handler/fbjs/ua-parser-js": "0.7.24"
+    "eact-native-gesture-handler/fbjs/ua-parser-js": "0.7.24",
+    "**/nanoid": "3.1.31"
   }
 }
